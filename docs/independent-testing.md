@@ -177,6 +177,10 @@ the exact photo area, then verifies the effect of the surrounding frame.
 The [fixed-photo framing test](image-viewport-frame-perturbation-2026-11-12.md)
 changes only the frame around matched clean and edited photos and replays both
 the original and newly selected regions.
+The [earlier-copy screenshot comparison](image-reference-embedded-screenshot-2026-11-12.md)
+aligns the submitted photo within a larger screenshot, then verifies the native
+differences inside the inset. It found more edits than the current comparison
+and fell short of the cross-editor coverage target.
 The [two-photo difference pilot](image-embedded-pair-difference-transfer-2026-11-12.md)
 replays source-pixel differences when one PNG contains two matching photo areas.
 The [separate confirmation](image-embedded-pair-difference-confirmation-2026-11-12.md)

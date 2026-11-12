@@ -1,0 +1,334 @@
+{
+  "decision": "research_only",
+  "development_strict": {
+    "code_and_source_commitments": {
+      "attempts.jsonl": "7f1447364ca18c5729c20b9aa271ecc37834a697f4bb8afae808a7a835ee4267",
+      "captures.json": "0b34e023b18a9f04d70ca89f44d2dca3936a05e0bfc0772c40cd4566e47f530c",
+      "image_reference.py": "44476cbd1e28f003af8139bd4296c5139dbfb5ea9aff9c3e475d23822f127a45",
+      "image_reference_embedded_screenshot.py": "127c7ca1cced41191e051b3b60e4ac1bcd8c39bd206a26b513acbf012d097d57",
+      "image_reference_embedded_screenshot_transfer.py": "9e9d78d8bcfa83d081537cdcc96ba8ae7165320f24bd3600f95f95f8cc09c282",
+      "layout-plan.json": "2fec86aa5de1e2883671d4556e68f8c29e0e98b4e95f9c96b3709c17ac15c5c0",
+      "qualified-private.json": "0901ace2a3abaa09584f70ae426d328b74a5cc1cba6ca877fc753fb32ee865c7",
+      "reference_compare.py": "e436052ad1a0b70ab29c180be88c72e868ed8f701031c6e1f10cecda5bb47063",
+      "reference_png_exact_resize.py": "4e99874631f2b3371f12c56297cd411d7d8fd2078d95104d6d95365cb25fd3f9"
+    },
+    "gate": {
+      "alternate_correct_edits": 4,
+      "alternate_exact_clean": 4,
+      "browser_correct_edits": 7,
+      "browser_exact_clean": 7,
+      "incompatible_acceptances": 0,
+      "incorrect_placements": 0
+    },
+    "native_audit": {
+      "exact_tile_witnesses": 447,
+      "result_sha256": "b7320e05b52f1c859d2a48da6772fcb26e3e1b0a145e1f559c789044e2c1e8fe",
+      "reviewed_matched_rectangles": 23,
+      "reviewed_pairs": 90
+    },
+    "result": {
+      "confidence_weight": 0,
+      "freeze_sha256": "f30ca89d20fb89974e618dd2e3909f337f928ad60387571cad8caa0b7b59db98",
+      "held_sha256": "6a5106636a874688ae21735822d2a9cb7d1c0888725d14994ecb6c1c6cad2890",
+      "report": {
+        "by_role": {
+          "alternate/chrome": {
+            "current_comparable": 0,
+            "current_with_regions": 0,
+            "exact_locations": 0,
+            "proofs": 0,
+            "useful": 0,
+            "views": 6,
+            "with_regions": 0
+          },
+          "alternate/clean": {
+            "current_comparable": 0,
+            "current_with_regions": 0,
+            "exact_locations": 4,
+            "proofs": 4,
+            "useful": 0,
+            "views": 6,
+            "with_regions": 0
+          },
+          "alternate/duplicated": {
+            "current_comparable": 0,
+            "current_with_regions": 0,
+            "exact_locations": 0,
+            "proofs": 0,
+            "useful": 0,
+            "views": 6,
+            "with_regions": 0
+          },
+          "alternate/edit": {
+            "current_comparable": 0,
+            "current_with_regions": 0,
+            "exact_locations": 0,
+            "proofs": 0,
+            "useful": 0,
+            "views": 6,
+            "with_regions": 0
+          },
+          "alternate/global_tone": {
+            "current_comparable": 0,
+            "current_with_regions": 0,
+            "exact_locations": 0,
+            "proofs": 0,
+            "useful": 0,
+            "views": 6,
+            "with_regions": 0
+          },
+          "alternate/jpeg": {
+            "current_comparable": 0,
+            "current_with_regions": 0,
+            "exact_locations": 0,
+            "proofs": 0,
+            "useful": 0,
+            "views": 6,
+            "with_regions": 0
+          },
+          "alternate/local_tone": {
+            "current_comparable": 0,
+            "current_with_regions": 0,
+            "exact_locations": 0,
+            "proofs": 0,
+            "useful": 0,
+            "views": 6,
+            "with_regions": 0
+          },
+          "alternate/resized": {
+            "current_comparable": 0,
+            "current_with_regions": 0,
+            "exact_locations": 0,
+            "proofs": 0,
+            "useful": 0,
+            "views": 6,
+            "with_regions": 0
+          },
+          "alternate/unrelated": {
+            "current_comparable": 0,
+            "current_with_regions": 0,
+            "exact_locations": 0,
+            "proofs": 0,
+            "useful": 0,
+            "views": 6,
+            "with_regions": 0
+          },
+          "browser/chrome": {
+            "current_comparable": 0,
+            "current_with_regions": 0,
+            "exact_locations": 0,
+            "proofs": 0,
+            "useful": 0,
+            "views": 12,
+            "with_regions": 0
+          },
+          "browser/clean": {
+            "current_comparable": 0,
+            "current_with_regions": 0,
+            "exact_locations": 12,
+            "proofs": 12,
+            "useful": 0,
+            "views": 12,
+            "with_regions": 0
+          },
+          "browser/edit": {
+            "current_comparable": 0,
+            "current_with_regions": 0,
+            "exact_locations": 7,
+            "proofs": 7,
+            "useful": 7,
+            "views": 12,
+            "with_regions": 7
+          }
+        },
+        "candidate_max_seconds": 0.068005,
+        "candidate_median_seconds": 0.03829,
+        "clean_highlights": 0,
+        "incompatible_acceptances": 0,
+        "incorrect_placements": 0,
+        "passed": false
+      },
+      "schema": "chipmunk.image-reference-embedded-screenshot-transfer/1"
+    }
+  },
+  "held_confirmation": {
+    "code_and_source_commitments": {
+      "attempts.jsonl": "006a125678341700c243754a423c480b41bd86029a70f689ff1e7a467fc7fde7",
+      "capture_image_crop_multiscale_transfer.cjs": "fab15ffe94b1be25cc06f8c8accefe5717e931dfa1f6610691e21127b2821400",
+      "captures.json": "ca11803a57dbbeb4cb5fa5d8937232e2baa2d57459c8ac020ccdf62fd68d107a",
+      "image_reference.py": "44476cbd1e28f003af8139bd4296c5139dbfb5ea9aff9c3e475d23822f127a45",
+      "image_reference_embedded_screenshot.py": "a4e36d5c311b61567347a3e96bca37a7d179f89b2f082592691ba3c3bb9573e2",
+      "image_reference_embedded_screenshot_transfer.py": "d8eaffa8fba55de374cd5d3335207f4ce99c076ece5a5b2e3a2280970c52a6be",
+      "layout-plan.json": "af0c6caec117b2f4fa210f1ccd2cfa5aa68507cdd0ea0418881afc4d4a95dd7f",
+      "plan.json": "a2176e567d71f2a80178adec7fb55e34007f6ad3114f9baf09837e233197fc34",
+      "qualified-private.json": "2fd9fdbbb156182fc0c5234c29de799daf5c0f2746cbc53c55aeba6fe0acaa00",
+      "reference_compare.py": "e436052ad1a0b70ab29c180be88c72e868ed8f701031c6e1f10cecda5bb47063",
+      "reference_png_exact_resize.py": "4e99874631f2b3371f12c56297cd411d7d8fd2078d95104d6d95365cb25fd3f9"
+    },
+    "gate": {
+      "alternate_correct_edits": 4,
+      "alternate_exact_clean": 4,
+      "browser_correct_edits": 7,
+      "browser_exact_clean": 7,
+      "incompatible_acceptances": 0,
+      "incorrect_placements": 0
+    },
+    "native_audit": {
+      "exact_tile_witnesses": 385,
+      "result_sha256": "f9bf504d5bfa3023246d1e3224f61625302af96f738ecd853d1ae8b3e14325d4",
+      "reviewed_matched_rectangles": 20,
+      "reviewed_pairs": 90
+    },
+    "result": {
+      "confidence_weight": 0,
+      "freeze_sha256": "f11549deab6fe763c880f184f4cb8aa467ab16db4acdd2ffb739d5280afcd155",
+      "held_sha256": "e866e31e655bf9bcede8e4b86c4c9495ee1bfb4b8ce3e52d7281801a148ea564",
+      "report": {
+        "by_role": {
+          "alternate/chrome": {
+            "current_comparable": 0,
+            "current_with_regions": 0,
+            "exact_locations": 0,
+            "proofs": 0,
+            "strict_proofs": 0,
+            "strict_useful": 0,
+            "useful": 0,
+            "views": 6,
+            "with_regions": 0
+          },
+          "alternate/clean": {
+            "current_comparable": 0,
+            "current_with_regions": 0,
+            "exact_locations": 3,
+            "proofs": 3,
+            "strict_proofs": 3,
+            "strict_useful": 0,
+            "useful": 0,
+            "views": 6,
+            "with_regions": 0
+          },
+          "alternate/duplicated": {
+            "current_comparable": 0,
+            "current_with_regions": 0,
+            "exact_locations": 0,
+            "proofs": 0,
+            "strict_proofs": 0,
+            "strict_useful": 0,
+            "useful": 0,
+            "views": 6,
+            "with_regions": 0
+          },
+          "alternate/edit": {
+            "current_comparable": 0,
+            "current_with_regions": 0,
+            "exact_locations": 1,
+            "proofs": 1,
+            "strict_proofs": 0,
+            "strict_useful": 0,
+            "useful": 1,
+            "views": 6,
+            "with_regions": 1
+          },
+          "alternate/global_tone": {
+            "current_comparable": 0,
+            "current_with_regions": 0,
+            "exact_locations": 0,
+            "proofs": 0,
+            "strict_proofs": 0,
+            "strict_useful": 0,
+            "useful": 0,
+            "views": 6,
+            "with_regions": 0
+          },
+          "alternate/jpeg": {
+            "current_comparable": 0,
+            "current_with_regions": 0,
+            "exact_locations": 0,
+            "proofs": 0,
+            "strict_proofs": 0,
+            "strict_useful": 0,
+            "useful": 0,
+            "views": 6,
+            "with_regions": 0
+          },
+          "alternate/local_tone": {
+            "current_comparable": 0,
+            "current_with_regions": 0,
+            "exact_locations": 1,
+            "proofs": 1,
+            "strict_proofs": 0,
+            "strict_useful": 0,
+            "useful": 1,
+            "views": 6,
+            "with_regions": 1
+          },
+          "alternate/resized": {
+            "current_comparable": 0,
+            "current_with_regions": 0,
+            "exact_locations": 0,
+            "proofs": 0,
+            "strict_proofs": 0,
+            "strict_useful": 0,
+            "useful": 0,
+            "views": 6,
+            "with_regions": 0
+          },
+          "alternate/unrelated": {
+            "current_comparable": 0,
+            "current_with_regions": 0,
+            "exact_locations": 0,
+            "proofs": 0,
+            "strict_proofs": 0,
+            "strict_useful": 0,
+            "useful": 0,
+            "views": 6,
+            "with_regions": 0
+          },
+          "browser/chrome": {
+            "current_comparable": 0,
+            "current_with_regions": 0,
+            "exact_locations": 0,
+            "proofs": 0,
+            "strict_proofs": 0,
+            "strict_useful": 0,
+            "useful": 0,
+            "views": 12,
+            "with_regions": 0
+          },
+          "browser/clean": {
+            "current_comparable": 0,
+            "current_with_regions": 0,
+            "exact_locations": 9,
+            "proofs": 9,
+            "strict_proofs": 9,
+            "strict_useful": 0,
+            "useful": 0,
+            "views": 12,
+            "with_regions": 0
+          },
+          "browser/edit": {
+            "current_comparable": 0,
+            "current_with_regions": 0,
+            "exact_locations": 6,
+            "proofs": 6,
+            "strict_proofs": 6,
+            "strict_useful": 6,
+            "useful": 6,
+            "views": 12,
+            "with_regions": 6
+          }
+        },
+        "candidate_max_seconds": 0.056264,
+        "candidate_median_seconds": 0.032547,
+        "clean_highlights": 0,
+        "incompatible_acceptances": 0,
+        "incorrect_placements": 0,
+        "passed": false
+      },
+      "schema": "chipmunk.image-reference-embedded-screenshot-transfer/1"
+    }
+  },
+  "interpretation": "Earlier copy required. Exact native difference evidence with zero AI-origin weight.",
+  "schema": "chipmunk.image-reference-embedded-screenshot-public-result/1",
+  "source_relationship": "18 development and 18 confirmation groups with disjoint credited sources and exact original pixels; earlier project exposure to the source photos."
+}

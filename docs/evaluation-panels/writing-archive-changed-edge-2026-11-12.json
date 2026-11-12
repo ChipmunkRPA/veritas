@@ -1,0 +1,109 @@
+{
+  "committed_inputs": {
+    "archive": "29c3e843f74bcaa244ee15af6f5cebd572091051614d554823bebab46b7ca24e",
+    "freeze": "206babad9304b0bd3a22af712c3f0246491a4abe054820d7757243c65ba9af20",
+    "result": "5979a11c11386332c6948507cf3366bf037bb31a99baa5fedae7be563d9ac778"
+  },
+  "counts": {
+    "after_break": {
+      "baseline": 0,
+      "changed": 12,
+      "exact": 12,
+      "incorrect": 0,
+      "matched": 12,
+      "total": 12
+    },
+    "ambiguous": {
+      "baseline": 0,
+      "changed": 0,
+      "exact": 0,
+      "incorrect": 0,
+      "matched": 0,
+      "total": 12
+    },
+    "before_break": {
+      "baseline": 0,
+      "changed": 12,
+      "exact": 12,
+      "incorrect": 0,
+      "matched": 12,
+      "total": 12
+    },
+    "inserted_words": {
+      "baseline": 0,
+      "changed": 0,
+      "exact": 0,
+      "incorrect": 0,
+      "matched": 0,
+      "total": 12
+    },
+    "original": {
+      "baseline": 12,
+      "changed": 0,
+      "exact": 0,
+      "incorrect": 0,
+      "matched": 12,
+      "total": 12
+    },
+    "other_source": {
+      "baseline": 0,
+      "changed": 0,
+      "exact": 0,
+      "incorrect": 0,
+      "matched": 0,
+      "total": 12
+    },
+    "prefixed": {
+      "baseline": 0,
+      "changed": 0,
+      "exact": 0,
+      "incorrect": 0,
+      "matched": 0,
+      "total": 12
+    },
+    "quoted": {
+      "baseline": 0,
+      "changed": 0,
+      "exact": 0,
+      "incorrect": 0,
+      "matched": 0,
+      "total": 12
+    },
+    "second_substitution": {
+      "baseline": 0,
+      "changed": 0,
+      "exact": 0,
+      "incorrect": 0,
+      "matched": 0,
+      "total": 12
+    },
+    "wrong_order": {
+      "baseline": 0,
+      "changed": 0,
+      "exact": 0,
+      "incorrect": 0,
+      "matched": 0,
+      "total": 12
+    }
+  },
+  "design": {
+    "candidate": "Recover at least three consecutive source paragraphs of equal token counts. Every token matches except exactly one substitution within eight tokens of an internal paragraph edge. Require unique alignment and independent existing fingerprint support.",
+    "qualification": "At least 12 distinct held source groups, at least 90% exact changed-word results in each direction, no incorrect source or changed token on controls, and all unchanged copies still match.",
+    "scope": "Plain-text archive version comparison. No authorship contribution.",
+    "selection": "Up to four unused official-source works per pinned volume in hash order, distinct senders within the held panel and no earlier or cross-work exact 12-word overlap. Historical sender identities may recur."
+  },
+  "independent": {
+    "changed_words": 24,
+    "decisions": 120,
+    "source_paragraphs": 216
+  },
+  "passed": true,
+  "publisher_volumes": {
+    "frus1961-63v09": 3,
+    "frus1964-68v08": 3,
+    "frus1964-68v15": 2,
+    "frus1964-68v24": 4
+  },
+  "schema": "chipmunk.writing-archive-changed-edge/1",
+  "source_groups": 12
+}

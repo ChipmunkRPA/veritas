@@ -63,3 +63,40 @@ def joined_spans(text, span, edge_index):
             return None
         found = (source, first, [(rows[a][1], rows[b - 1][2]) for a, b in run])
     return found
+
+
+def joined_spans_one_edge_change(text, span, catalog, edge_index):
+    """Recover a unique chain with exactly one substituted token at an internal edge."""
+    rows = tokens(text, [span])
+    if len(rows) < 2 * EDGE * MIN_PARAGRAPHS:
+        return None
+    words = tuple(value for value, _, _ in rows)
+    by_source, starts = edge_index
+    found = None
+    for source, first in starts.get(words[:EDGE], ()):
+        left = 0
+        edge_change = False
+        spans = []
+        for paragraph, (_, _, count) in zip(catalog[source]["paragraphs"][first:first + 24],
+                                             by_source[source][first:first + 24], strict=True):
+            right = left + count
+            if count < 2 * EDGE or right > len(words):
+                break
+            reference = paragraph["text"]
+            original = [value for value, _, _ in tokens(reference, [(0, len(reference))])]
+            changed = [i for i, (old, new) in enumerate(zip(original, words[left:right], strict=True)) if old != new]
+            if changed:
+                position = changed[0]
+                internal = (position < EDGE and left > 0) or (position >= count - EDGE and right < len(words))
+                if edge_change or len(changed) != 1 or not internal:
+                    break
+                edge_change = True
+            spans.append((rows[left][1], rows[right - 1][2]))
+            left = right
+            if right == len(words):
+                if edge_change and len(spans) >= MIN_PARAGRAPHS:
+                    if found is not None:
+                        return None
+                    found = source, first, spans
+                break
+    return found

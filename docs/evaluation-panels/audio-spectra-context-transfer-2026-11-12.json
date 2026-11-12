@@ -1,0 +1,400 @@
+{
+  "schema": "chipmunk.audio-spectra-context-transfer/1",
+  "method": {
+    "inputs": "Exact previous -5 dB matched four-second PCM. Use original confidence_cal genuine controls and disjoint confirmation roles. Apply unchanged points to a separate retained six-second AMI strong-competing-speech panel. All sources had prior project exposure.",
+    "context": "Only fixed native three-second windows. Start at 0 and 1 seconds for four-second clips, and at 0,1,2,3 seconds for six-second clips. Use archived 0.97 pre-emphasis and repeat samples to graph length 64,600. Source ranges remain only the actual three seconds.",
+    "arms": "Maximum independent model score and maximum absolute difference of two adjacent overlapping context scores. A difference names only the exclusive 1-second edge from the stronger context. Shared 2-second audio and input interaction are unresolved. The contrast is a hypothesis about location, not an attribution of the model response to those samples.",
+    "point": "Strictly exceed each new arm's maximum of the independent genuine operating-point controls. Use no model or head fitting. Fixed union flags incumbent or edge-contrast result and retains both ranges if both flag. The union counts a useful location if either retained range meets the overlap criterion.",
+    "evaluation": "Count matched genuine splice groups and known useful source spans (at least .30 IoU and .50 edit coverage). Separately report zero-, one- and two-false-group ranking comparisons and paired score ordering. A 3-second range cannot localize an .8-second edit under this definition, so also count its raw detection flags."
+  },
+  "code_sha256": "9292b603d663463a1936798f0ddab3440369cda87c4be6991bf9700643843245",
+  "parent": {
+    "inputs.json": "850955c09b68ee91df0c6c02ef7a096818ae647b7170b93aaebb5699a72320b7",
+    "inputs-freeze.json": "37dfdbe383e0698612b7403dedef2291189ffc3dd062b7dea662db4261ea88f1",
+    "inputs-verified.json": "bcfe21ac346acf75f700b00fb2718f898e4f7adcbc89bf3ab13cab7c0ae86b86",
+    "fit.json": "b37ea8a57908752af61a112d47fa1b8b763bc61cb0f57f76d27d544de83d8425",
+    "decisions.json": "92cab38d7dff1d805e1393857a58087292d32a10934ffabce83e1c39f6235372",
+    "result.json": "90949eda7056824e9a05ebd4daebfc22f8560d9889b3e1e386f688e778baf45e",
+    "meeting-replay.json": "72d001b113a14ae37a6d0597d91ed2df10e3b4429b5a1da6e938b63639953e08",
+    "meeting-replay-freeze.json": "7ffb549460c117f7b0a327d79793a9a22884ee00df5ee1f2d526cdc3b85b9b66"
+  },
+  "meeting": {
+    "freeze.json": "811184bc036e19fd56c78d03735d2e6af12d19498088bb43442e4141d8eb32a8",
+    "roster.json": "544475db2eab26777629c883e2fcc32b4f906c915167490268e21fd5892357e5",
+    "selection.json": "a6780c430f43f0a17d604b1198ad3941db823782a272a5838725b959047010f1",
+    "confirmation.json": "f9e38ba554f7b57d8491c8177ff6523826b9f2bb013c93faeac1c87d6d726027",
+    "points.json": "b2258106c4e910d0e7334c63f5b297bb674002f85a6666e2c7c1ed5dc14adff4"
+  },
+  "weights": {
+    "spectra-aasist3-int8-dynamic.onnx": "444f832d306a2be4f823119f84e698e8821db6a1aab248593d4b05b7a9a48108",
+    "official-README.md": "160d8cf926c19dff4faad87d9f170f77455ed1d2dfa4656d07ced220e29231c7",
+    "quantized-README.md": "7f550379e313fcc59beba7c754dabf941b3d0a409b1262cefb03995493279258",
+    "quantization_metadata.json": "8e23249f993a9cd30c4ba3c7da9c514343f143af4a1882d85ddc4d7216c9ed0b"
+  },
+  "runtime": {
+    "numpy": "2.2.6",
+    "onnxruntime": "1.31.1"
+  },
+  "matched_views": 66,
+  "held_ami_views": 12,
+  "fits": 0,
+  "outcomes": {
+    "matched": {
+      "fixed": {
+        "spectra_max": {
+          "synthetic": 10,
+          "genuine": 34,
+          "true_flags": 0,
+          "genuine_false_flags": 0,
+          "genuine_false_groups": 0,
+          "useful": 0,
+          "threshold_free_useful": 3,
+          "no_measurement": 0,
+          "background_only_flags": 0
+        },
+        "spectra_edge_contrast": {
+          "synthetic": 10,
+          "genuine": 34,
+          "true_flags": 0,
+          "genuine_false_flags": 1,
+          "genuine_false_groups": 1,
+          "useful": 0,
+          "threshold_free_useful": 2,
+          "no_measurement": 0,
+          "background_only_flags": 1
+        },
+        "incumbent_frames": {
+          "synthetic": 10,
+          "genuine": 34,
+          "true_flags": 0,
+          "genuine_false_flags": 0,
+          "genuine_false_groups": 0,
+          "useful": 0,
+          "threshold_free_useful": 5,
+          "no_measurement": 0,
+          "background_only_flags": 0
+        },
+        "incumbent_or_contrast": {
+          "synthetic": 10,
+          "genuine": 34,
+          "true_flags": 0,
+          "genuine_false_flags": 1,
+          "genuine_false_groups": 1,
+          "useful": 0,
+          "threshold_free_useful": 0,
+          "no_measurement": 0,
+          "background_only_flags": 1
+        }
+      },
+      "equal_false_groups": {
+        "0": {
+          "incumbent_frames": {
+            "synthetic": 10,
+            "genuine": 34,
+            "true_flags": 0,
+            "genuine_false_flags": 0,
+            "genuine_false_groups": 0,
+            "useful": 0,
+            "threshold_free_useful": 5,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "spectra_max": {
+            "synthetic": 10,
+            "genuine": 34,
+            "true_flags": 0,
+            "genuine_false_flags": 0,
+            "genuine_false_groups": 0,
+            "useful": 0,
+            "threshold_free_useful": 3,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "spectra_edge_contrast": {
+            "synthetic": 10,
+            "genuine": 34,
+            "true_flags": 0,
+            "genuine_false_flags": 0,
+            "genuine_false_groups": 0,
+            "useful": 0,
+            "threshold_free_useful": 2,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          }
+        },
+        "1": {
+          "incumbent_frames": {
+            "synthetic": 10,
+            "genuine": 34,
+            "true_flags": 4,
+            "genuine_false_flags": 1,
+            "genuine_false_groups": 1,
+            "useful": 2,
+            "threshold_free_useful": 5,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "spectra_max": {
+            "synthetic": 10,
+            "genuine": 34,
+            "true_flags": 0,
+            "genuine_false_flags": 1,
+            "genuine_false_groups": 1,
+            "useful": 0,
+            "threshold_free_useful": 3,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "spectra_edge_contrast": {
+            "synthetic": 10,
+            "genuine": 34,
+            "true_flags": 0,
+            "genuine_false_flags": 1,
+            "genuine_false_groups": 1,
+            "useful": 0,
+            "threshold_free_useful": 2,
+            "no_measurement": 0,
+            "background_only_flags": 1
+          }
+        },
+        "2": {
+          "incumbent_frames": {
+            "synthetic": 10,
+            "genuine": 34,
+            "true_flags": 4,
+            "genuine_false_flags": 2,
+            "genuine_false_groups": 2,
+            "useful": 2,
+            "threshold_free_useful": 5,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "spectra_max": {
+            "synthetic": 10,
+            "genuine": 34,
+            "true_flags": 1,
+            "genuine_false_flags": 3,
+            "genuine_false_groups": 2,
+            "useful": 1,
+            "threshold_free_useful": 3,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "spectra_edge_contrast": {
+            "synthetic": 10,
+            "genuine": 34,
+            "true_flags": 2,
+            "genuine_false_flags": 2,
+            "genuine_false_groups": 2,
+            "useful": 0,
+            "threshold_free_useful": 2,
+            "no_measurement": 0,
+            "background_only_flags": 1
+          }
+        }
+      },
+      "paired": {
+        "incumbent_frames": {
+          "comparable": 10,
+          "above_all_controls": 7
+        },
+        "spectra_max": {
+          "comparable": 10,
+          "above_all_controls": 4
+        },
+        "spectra_edge_contrast": {
+          "comparable": 10,
+          "above_all_controls": 3
+        }
+      },
+      "truths_reachable_by_exclusive_edge": 3
+    },
+    "ami": {
+      "fixed": {
+        "spectra_max": {
+          "synthetic": 6,
+          "genuine": 6,
+          "true_flags": 0,
+          "genuine_false_flags": 0,
+          "genuine_false_groups": 0,
+          "useful": 0,
+          "threshold_free_useful": 0,
+          "no_measurement": 0,
+          "background_only_flags": 0
+        },
+        "spectra_edge_contrast": {
+          "synthetic": 6,
+          "genuine": 6,
+          "true_flags": 0,
+          "genuine_false_flags": 0,
+          "genuine_false_groups": 0,
+          "useful": 0,
+          "threshold_free_useful": 5,
+          "no_measurement": 0,
+          "background_only_flags": 0
+        },
+        "incumbent_frames": {
+          "synthetic": 6,
+          "genuine": 6,
+          "true_flags": 0,
+          "genuine_false_flags": 0,
+          "genuine_false_groups": 0,
+          "useful": 0,
+          "threshold_free_useful": 1,
+          "no_measurement": 0,
+          "background_only_flags": 0
+        },
+        "incumbent_two_second": {
+          "synthetic": 6,
+          "genuine": 6,
+          "true_flags": 0,
+          "genuine_false_flags": 0,
+          "genuine_false_groups": 0,
+          "useful": 0,
+          "threshold_free_useful": 3,
+          "no_measurement": 0,
+          "background_only_flags": 0
+        },
+        "incumbent_or_contrast": {
+          "synthetic": 6,
+          "genuine": 6,
+          "true_flags": 0,
+          "genuine_false_flags": 0,
+          "genuine_false_groups": 0,
+          "useful": 0,
+          "threshold_free_useful": 0,
+          "no_measurement": 0,
+          "background_only_flags": 0
+        }
+      },
+      "equal_false_groups": {
+        "0": {
+          "incumbent_two_second": {
+            "synthetic": 6,
+            "genuine": 6,
+            "true_flags": 0,
+            "genuine_false_flags": 0,
+            "genuine_false_groups": 0,
+            "useful": 0,
+            "threshold_free_useful": 3,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "spectra_max": {
+            "synthetic": 6,
+            "genuine": 6,
+            "true_flags": 1,
+            "genuine_false_flags": 0,
+            "genuine_false_groups": 0,
+            "useful": 0,
+            "threshold_free_useful": 0,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "spectra_edge_contrast": {
+            "synthetic": 6,
+            "genuine": 6,
+            "true_flags": 0,
+            "genuine_false_flags": 0,
+            "genuine_false_groups": 0,
+            "useful": 0,
+            "threshold_free_useful": 5,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          }
+        },
+        "1": {
+          "incumbent_two_second": {
+            "synthetic": 6,
+            "genuine": 6,
+            "true_flags": 1,
+            "genuine_false_flags": 1,
+            "genuine_false_groups": 1,
+            "useful": 1,
+            "threshold_free_useful": 3,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "spectra_max": {
+            "synthetic": 6,
+            "genuine": 6,
+            "true_flags": 1,
+            "genuine_false_flags": 1,
+            "genuine_false_groups": 1,
+            "useful": 0,
+            "threshold_free_useful": 0,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "spectra_edge_contrast": {
+            "synthetic": 6,
+            "genuine": 6,
+            "true_flags": 1,
+            "genuine_false_flags": 1,
+            "genuine_false_groups": 1,
+            "useful": 1,
+            "threshold_free_useful": 5,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          }
+        },
+        "2": {
+          "incumbent_two_second": {
+            "synthetic": 6,
+            "genuine": 6,
+            "true_flags": 1,
+            "genuine_false_flags": 2,
+            "genuine_false_groups": 2,
+            "useful": 1,
+            "threshold_free_useful": 3,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "spectra_max": {
+            "synthetic": 6,
+            "genuine": 6,
+            "true_flags": 1,
+            "genuine_false_flags": 2,
+            "genuine_false_groups": 2,
+            "useful": 0,
+            "threshold_free_useful": 0,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "spectra_edge_contrast": {
+            "synthetic": 6,
+            "genuine": 6,
+            "true_flags": 4,
+            "genuine_false_flags": 2,
+            "genuine_false_groups": 2,
+            "useful": 3,
+            "threshold_free_useful": 5,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          }
+        }
+      },
+      "paired": {
+        "incumbent_two_second": {
+          "comparable": 6,
+          "above_all_controls": 2
+        },
+        "spectra_max": {
+          "comparable": 6,
+          "above_all_controls": 3
+        },
+        "spectra_edge_contrast": {
+          "comparable": 6,
+          "above_all_controls": 4
+        }
+      },
+      "truths_reachable_by_exclusive_edge": 6
+    }
+  },
+  "commitments": {
+    "freeze": "9ebcdb2ec1b0ce6ca14922aee37278ed7ad761307373e415fa6a5a508c851707",
+    "selection": "812a517883c1dcbc287d97349381b5bb67dda3aeddb4df01c6e0e6523aa5f939",
+    "confirmation": "868863667ab5617c93f3367c52dc64dc5f734e38c12f7d140c4573fedd205ab7"
+  },
+  "forwards": 180
+}

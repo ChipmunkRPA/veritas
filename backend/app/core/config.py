@@ -221,6 +221,7 @@ class Settings(BaseSettings):
     audio_reference_comparison_enabled: bool = False  # Authenticated comparison of a short earlier recording.
     video_reference_comparison_enabled: bool = False  # Authenticated development-only comparison of a short earlier clip.
     document_revision_comparison_enabled: bool = False  # Authenticated development-only earlier-draft comparison.
+    document_archive_comparison_enabled: bool = False  # Authenticated development-only public archive comparison.
     image_affine_copy_review: bool = False  # Development-only dense masks for same-image geometric copies.
 
     # --- audio (video sound track) ---

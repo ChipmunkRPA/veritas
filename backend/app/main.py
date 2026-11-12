@@ -9,7 +9,15 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
-from app.api import auth, jobs, state, v2_document_revision, v2_image_reference, v2_media_reference
+from app.api import (
+    auth,
+    jobs,
+    state,
+    v2_document_archive,
+    v2_document_revision,
+    v2_image_reference,
+    v2_media_reference,
+)
 from app.api.demo import router as demo_router
 from app.api.routes import KIND_LIMITS, public, router
 from app.api.security import refuse_nul
@@ -256,6 +264,7 @@ app.include_router(v2_evidence_router)
 app.include_router(v2_evidence_packets_router)
 app.include_router(v2_image_reference.router)
 app.include_router(v2_document_revision.router)
+app.include_router(v2_document_archive.router)
 app.include_router(v2_media_reference.router)
 app.include_router(v2_models_router)
 app.include_router(v2_refusion_router)

@@ -43,6 +43,7 @@ import { deletable, mayDelete, mayExamine } from '../../lib/api/roles'
 import RevisionDeltas from './RevisionDeltas'
 import ImageEvidenceCards from '../evidence/ImageEvidenceCards'
 import ImageReferenceComparison from '../evidence/ImageReferenceComparison'
+import DocumentArchiveComparison from '../evidence/DocumentArchiveComparison'
 import DocumentRevisionComparison from '../evidence/DocumentRevisionComparison'
 import MediaReferenceComparison from '../evidence/MediaReferenceComparison'
 import MultimediaEvidenceCards from '../evidence/MultimediaEvidenceCards'
@@ -254,7 +255,10 @@ export default function AnalysisWorkspace() {
 
   const expertInvitation = done ? <ExpertAnalysisInvitation analysisId={a.id} /> : null
   const sourceComparison = !done ? null : a.kind === 'image' ? <ImageReferenceComparison key={a.id} analysisId={a.id} />
-    : a.kind === 'document' ? <DocumentRevisionComparison key={a.id} analysisId={a.id} />
+    : a.kind === 'document' ? <>
+        <DocumentRevisionComparison key={`draft-${a.id}`} analysisId={a.id} />
+        {/\.txt$/i.test(a.filename) && <DocumentArchiveComparison key={`archive-${a.id}`} analysisId={a.id} />}
+      </>
       : (a.kind === 'video' || a.kind === 'audio') ? <MediaReferenceComparison key={a.id} analysisId={a.id} kind={a.kind} /> : null
   const body = !legacy.data ? null : !v2 ? (
     <LegacyResult a={legacy.data} token={t} engine={engine} mediaNotice={mediaNotice} afterVerdict={<>{expertInvitation}{sourceComparison}{hr}<FindingsList analysis={a} signals={signals.data ?? []} query={findings} failed={findingsFailed(a.caveats)} /></>} />

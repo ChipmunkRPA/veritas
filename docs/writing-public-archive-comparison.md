@@ -1,0 +1,13 @@
+# Public archive comparison for text analyses
+
+Set `VERITAS_DOCUMENT_ARCHIVE_COMPARISON_ENABLED=true` in the local development backend and restart it. Open a completed plain-text analysis you submitted and select **Compare with public archive** in its normal results view. The check compares the retained text against 118 selected excerpts from the U.S. Department of State's Foreign Relations of the United States archive.
+
+A match includes the official citation, pinned archive version, word coverage and the exact changed wording on both sides. The comparison only describes aligned passages. An unmatched or ambiguous result leaves the source open. Differences may reflect ordinary edits or transcription. This evidence carries zero AI-assessment weight.
+
+The action uses the retained original and the bundled local index. It requires the authenticated owner and an active completed analysis. Test and live billing modes also require the existing fulfilled payment receipt for that exact analysis. The action starts zero new jobs or checkouts and sends zero submitted text to an external service.
+
+The JSON and PDF are standalone downloads from the comparison card. Submitted offsets count code points in the app's normalized extracted text. Archive offsets are paragraph-relative code points in the normalized reference. The JSON and PDF identify the submitted file hash, extracted text hash, pinned archive hash and archive citation. Keep downloads with the intended reviewers because they contain changed excerpts from the submitted document.
+
+An isolated local test uploaded one held generated rewrite and replayed the payment boundary. An unpaid event queued zero analyses. A simulated USD 9.99 payment released one document analysis, and the worker completed it before the comparison became available. The authenticated JSON and PDF reported the same source and changes. The comparison created no additional order or job. A separate matcher replay reproduced all 64 in-scope plain-text decisions, nine quote controls, four ambiguity controls and 1,124 changed-token offsets.
+
+The `GET` and `POST` endpoints are at `/api/v2/analyses/{aid}/document-archive-comparison`. The response uses `Cache-Control: no-store`. Add `?include_pdf=true` to the POST for the standalone PDF. The bundled publisher notice and exact pack hash identify the reusable official source. [Evaluation and source scope](writing-archive-source-evidence-2026-11-12.md) · [Publisher license](https://github.com/HistoryAtState/frus/blob/216cdb7649a8e29504377d4f2858351dc46331a8/LICENSE.md)

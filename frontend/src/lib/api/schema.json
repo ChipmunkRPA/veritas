@@ -4705,6 +4705,382 @@
         "title": "DetectorRunV2",
         "type": "object"
       },
+      "DocumentArchiveAvailability": {
+        "properties": {
+          "available": {
+            "title": "Available",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "available"
+        ],
+        "title": "DocumentArchiveAvailability",
+        "type": "object"
+      },
+      "DocumentArchiveChange": {
+        "properties": {
+          "alignment": {
+            "enum": [
+              "fingerprint_anchor",
+              "bounded_pair",
+              "bounded_insert",
+              "bounded_delete"
+            ],
+            "title": "Alignment",
+            "type": "string"
+          },
+          "archive": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DocumentArchiveExcerpt"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "archive_paragraph": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Archive Paragraph"
+          },
+          "submitted": {
+            "$ref": "#/components/schemas/DocumentArchiveExcerpt"
+          },
+          "submitted_paragraph": {
+            "title": "Submitted Paragraph",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "submitted_paragraph",
+          "archive_paragraph",
+          "alignment",
+          "submitted",
+          "archive"
+        ],
+        "title": "DocumentArchiveChange",
+        "type": "object"
+      },
+      "DocumentArchiveComparison": {
+        "properties": {
+          "aligned_paragraphs": {
+            "items": {
+              "$ref": "#/components/schemas/DocumentArchiveParagraph"
+            },
+            "title": "Aligned Paragraphs",
+            "type": "array"
+          },
+          "authorship_confidence_contribution": {
+            "const": 0,
+            "title": "Authorship Confidence Contribution",
+            "type": "integer"
+          },
+          "changes": {
+            "items": {
+              "$ref": "#/components/schemas/DocumentArchiveChange"
+            },
+            "title": "Changes",
+            "type": "array"
+          },
+          "coordinate_space": {
+            "const": "extracted_text_unicode_codepoint",
+            "title": "Coordinate Space",
+            "type": "string"
+          },
+          "coverage": {
+            "$ref": "#/components/schemas/DocumentArchiveCoverage"
+          },
+          "extracted_text_sha256": {
+            "title": "Extracted Text Sha256",
+            "type": "string"
+          },
+          "interpretation": {
+            "title": "Interpretation",
+            "type": "string"
+          },
+          "library": {
+            "$ref": "#/components/schemas/DocumentArchiveLibrary"
+          },
+          "reference": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DocumentArchiveReference"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "schema": {
+            "const": "chipmunk.document-archive-comparison/1",
+            "title": "Schema",
+            "type": "string"
+          },
+          "scope": {
+            "title": "Scope",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "reference_bound",
+              "no_qualified_reference",
+              "ambiguous_reference",
+              "out_of_scope"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "submitted_sha256": {
+            "title": "Submitted Sha256",
+            "type": "string"
+          }
+        },
+        "required": [
+          "schema",
+          "status",
+          "coordinate_space",
+          "scope",
+          "interpretation",
+          "authorship_confidence_contribution",
+          "submitted_sha256",
+          "extracted_text_sha256",
+          "library",
+          "coverage",
+          "reference",
+          "aligned_paragraphs",
+          "changes"
+        ],
+        "title": "DocumentArchiveComparison",
+        "type": "object"
+      },
+      "DocumentArchiveCoverage": {
+        "properties": {
+          "body_paragraphs": {
+            "title": "Body Paragraphs",
+            "type": "integer"
+          },
+          "body_words": {
+            "title": "Body Words",
+            "type": "integer"
+          },
+          "matched_words": {
+            "title": "Matched Words",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "body_paragraphs",
+          "body_words",
+          "matched_words"
+        ],
+        "title": "DocumentArchiveCoverage",
+        "type": "object"
+      },
+      "DocumentArchiveExcerpt": {
+        "properties": {
+          "changed_tokens": {
+            "items": {
+              "maxItems": 2,
+              "minItems": 2,
+              "prefixItems": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "integer"
+                }
+              ],
+              "type": "array"
+            },
+            "title": "Changed Tokens",
+            "type": "array"
+          },
+          "end": {
+            "title": "End",
+            "type": "integer"
+          },
+          "start": {
+            "title": "Start",
+            "type": "integer"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "start",
+          "end",
+          "text",
+          "changed_tokens"
+        ],
+        "title": "DocumentArchiveExcerpt",
+        "type": "object"
+      },
+      "DocumentArchiveLibrary": {
+        "properties": {
+          "indexed_excerpts": {
+            "title": "Indexed Excerpts",
+            "type": "integer"
+          },
+          "license": {
+            "title": "License",
+            "type": "string"
+          },
+          "license_url": {
+            "title": "License Url",
+            "type": "string"
+          },
+          "publisher": {
+            "title": "Publisher",
+            "type": "string"
+          },
+          "revision": {
+            "title": "Revision",
+            "type": "string"
+          },
+          "sha256": {
+            "title": "Sha256",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "url": {
+            "title": "Url",
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "publisher",
+          "url",
+          "license",
+          "license_url",
+          "revision",
+          "sha256",
+          "indexed_excerpts"
+        ],
+        "title": "DocumentArchiveLibrary",
+        "type": "object"
+      },
+      "DocumentArchiveParagraph": {
+        "properties": {
+          "alignment": {
+            "enum": [
+              "fingerprint_anchor",
+              "bounded_pair",
+              "bounded_insert",
+              "bounded_delete"
+            ],
+            "title": "Alignment",
+            "type": "string"
+          },
+          "archive_paragraph": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Archive Paragraph"
+          },
+          "submitted_paragraph": {
+            "title": "Submitted Paragraph",
+            "type": "integer"
+          },
+          "submitted_range": {
+            "maxItems": 2,
+            "minItems": 2,
+            "prefixItems": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "title": "Submitted Range",
+            "type": "array"
+          }
+        },
+        "required": [
+          "submitted_paragraph",
+          "submitted_range",
+          "archive_paragraph",
+          "alignment"
+        ],
+        "title": "DocumentArchiveParagraph",
+        "type": "object"
+      },
+      "DocumentArchiveReference": {
+        "properties": {
+          "document": {
+            "title": "Document",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "url": {
+            "title": "Url",
+            "type": "string"
+          },
+          "version_url": {
+            "title": "Version Url",
+            "type": "string"
+          },
+          "volume": {
+            "title": "Volume",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "url",
+          "version_url",
+          "volume",
+          "document"
+        ],
+        "title": "DocumentArchiveReference",
+        "type": "object"
+      },
+      "DocumentArchiveResponse": {
+        "properties": {
+          "comparison": {
+            "$ref": "#/components/schemas/DocumentArchiveComparison"
+          },
+          "pdf": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pdf"
+          }
+        },
+        "required": [
+          "comparison",
+          "pdf"
+        ],
+        "title": "DocumentArchiveResponse",
+        "type": "object"
+      },
       "DocumentRevisionAvailability": {
         "properties": {
           "available": {
@@ -13923,6 +14299,187 @@
         "summary": "List Detector Runs",
         "tags": [
           "v2"
+        ]
+      }
+    },
+    "/api/v2/analyses/{aid}/document-archive-comparison": {
+      "get": {
+        "operationId": "document_archive_availability_api_v2_analyses__aid__document_archive_comparison_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "aid",
+            "required": true,
+            "schema": {
+              "title": "Aid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentArchiveAvailability"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              },
+              "application/problem+json": {}
+            },
+            "description": "Unauthorized"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              },
+              "application/problem+json": {}
+            },
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Document Archive Availability",
+        "tags": [
+          "evidence"
+        ]
+      },
+      "post": {
+        "operationId": "compare_document_archive_api_v2_analyses__aid__document_archive_comparison_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "aid",
+            "required": true,
+            "schema": {
+              "title": "Aid",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "include_pdf",
+            "required": false,
+            "schema": {
+              "default": false,
+              "title": "Include Pdf",
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentArchiveResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              },
+              "application/problem+json": {}
+            },
+            "description": "Unauthorized"
+          },
+          "402": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              },
+              "application/problem+json": {}
+            },
+            "description": "Payment Required"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              },
+              "application/problem+json": {}
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              },
+              "application/problem+json": {}
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              },
+              "application/problem+json": {}
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              },
+              "application/problem+json": {}
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              },
+              "application/problem+json": {}
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Compare Document Archive",
+        "tags": [
+          "evidence"
         ]
       }
     },

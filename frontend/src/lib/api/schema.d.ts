@@ -505,6 +505,24 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v2/analyses/{aid}/document-archive-comparison": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Document Archive Availability */
+        get: operations["document_archive_availability_api_v2_analyses__aid__document_archive_comparison_get"];
+        put?: never;
+        /** Compare Document Archive */
+        post: operations["compare_document_archive_api_v2_analyses__aid__document_archive_comparison_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v2/analyses/{aid}/document-revision-comparison": {
         parameters: {
             query?: never;
@@ -3260,6 +3278,141 @@ export interface components {
             started_at: string | null;
             /** Status */
             status: string;
+        };
+        /** DocumentArchiveAvailability */
+        DocumentArchiveAvailability: {
+            /** Available */
+            available: boolean;
+        };
+        /** DocumentArchiveChange */
+        DocumentArchiveChange: {
+            /**
+             * Alignment
+             * @enum {string}
+             */
+            alignment: "fingerprint_anchor" | "bounded_pair" | "bounded_insert" | "bounded_delete";
+            archive: components["schemas"]["DocumentArchiveExcerpt"] | null;
+            /** Archive Paragraph */
+            archive_paragraph: number | null;
+            submitted: components["schemas"]["DocumentArchiveExcerpt"];
+            /** Submitted Paragraph */
+            submitted_paragraph: number;
+        };
+        /** DocumentArchiveComparison */
+        DocumentArchiveComparison: {
+            /** Aligned Paragraphs */
+            aligned_paragraphs: components["schemas"]["DocumentArchiveParagraph"][];
+            /**
+             * Authorship Confidence Contribution
+             * @constant
+             */
+            authorship_confidence_contribution: 0;
+            /** Changes */
+            changes: components["schemas"]["DocumentArchiveChange"][];
+            /**
+             * Coordinate Space
+             * @constant
+             */
+            coordinate_space: "extracted_text_unicode_codepoint";
+            coverage: components["schemas"]["DocumentArchiveCoverage"];
+            /** Extracted Text Sha256 */
+            extracted_text_sha256: string;
+            /** Interpretation */
+            interpretation: string;
+            library: components["schemas"]["DocumentArchiveLibrary"];
+            reference: components["schemas"]["DocumentArchiveReference"] | null;
+            /**
+             * Schema
+             * @constant
+             */
+            schema: "chipmunk.document-archive-comparison/1";
+            /** Scope */
+            scope: string;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "reference_bound" | "no_qualified_reference" | "ambiguous_reference" | "out_of_scope";
+            /** Submitted Sha256 */
+            submitted_sha256: string;
+        };
+        /** DocumentArchiveCoverage */
+        DocumentArchiveCoverage: {
+            /** Body Paragraphs */
+            body_paragraphs: number;
+            /** Body Words */
+            body_words: number;
+            /** Matched Words */
+            matched_words: number;
+        };
+        /** DocumentArchiveExcerpt */
+        DocumentArchiveExcerpt: {
+            /** Changed Tokens */
+            changed_tokens: [
+                number,
+                number
+            ][];
+            /** End */
+            end: number;
+            /** Start */
+            start: number;
+            /** Text */
+            text: string;
+        };
+        /** DocumentArchiveLibrary */
+        DocumentArchiveLibrary: {
+            /** Indexed Excerpts */
+            indexed_excerpts: number;
+            /** License */
+            license: string;
+            /** License Url */
+            license_url: string;
+            /** Publisher */
+            publisher: string;
+            /** Revision */
+            revision: string;
+            /** Sha256 */
+            sha256: string;
+            /** Title */
+            title: string;
+            /** Url */
+            url: string;
+        };
+        /** DocumentArchiveParagraph */
+        DocumentArchiveParagraph: {
+            /**
+             * Alignment
+             * @enum {string}
+             */
+            alignment: "fingerprint_anchor" | "bounded_pair" | "bounded_insert" | "bounded_delete";
+            /** Archive Paragraph */
+            archive_paragraph: number | null;
+            /** Submitted Paragraph */
+            submitted_paragraph: number;
+            /** Submitted Range */
+            submitted_range: [
+                number,
+                number
+            ];
+        };
+        /** DocumentArchiveReference */
+        DocumentArchiveReference: {
+            /** Document */
+            document: string;
+            /** Id */
+            id: string;
+            /** Url */
+            url: string;
+            /** Version Url */
+            version_url: string;
+            /** Volume */
+            volume: string;
+        };
+        /** DocumentArchiveResponse */
+        DocumentArchiveResponse: {
+            comparison: components["schemas"]["DocumentArchiveComparison"];
+            /** Pdf */
+            pdf: string | null;
         };
         /** DocumentRevisionAvailability */
         DocumentRevisionAvailability: {
@@ -7058,6 +7211,151 @@ export interface operations {
             };
             /** @description Unprocessable Entity */
             422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Problem"];
+                    "application/problem+json": unknown;
+                };
+            };
+        };
+    };
+    document_archive_availability_api_v2_analyses__aid__document_archive_comparison_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                aid: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DocumentArchiveAvailability"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Problem"];
+                    "application/problem+json": unknown;
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Problem"];
+                    "application/problem+json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    compare_document_archive_api_v2_analyses__aid__document_archive_comparison_post: {
+        parameters: {
+            query?: {
+                include_pdf?: boolean;
+            };
+            header?: never;
+            path: {
+                aid: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DocumentArchiveResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Problem"];
+                    "application/problem+json": unknown;
+                };
+            };
+            /** @description Payment Required */
+            402: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Problem"];
+                    "application/problem+json": unknown;
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Problem"];
+                    "application/problem+json": unknown;
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Problem"];
+                    "application/problem+json": unknown;
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Problem"];
+                    "application/problem+json": unknown;
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Problem"];
+                    "application/problem+json": unknown;
+                };
+            };
+            /** @description Service Unavailable */
+            503: {
                 headers: {
                     [name: string]: unknown;
                 };

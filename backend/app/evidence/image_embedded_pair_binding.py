@@ -15,7 +15,8 @@ BASE_VERSIONS = frozenset({"image-evidence-12", "image-evidence-13", "image-evid
 SIZES = frozenset({(768, 640), (768, 768), (1088, 688), (944, 944)})
 NOTE = "Matching areas are aligned on the source pixel grid. The highlighted pixels differ between those areas. Either area may have come first. The comparison carries zero weight in AI authorship confidence."
 STATUS_TEXT = {
-    "local_difference": "A localized pixel difference was measured between two matching areas in the submitted image.",
+    "local_difference": ("A localized pixel difference was measured between the two displayed areas. "
+                         "The image may contain other matching areas, including resized copies."),
     "matching_without_difference": "The pixels matched throughout the two compared areas.",
     "no_supported_pair": "The check found no qualifying two-area comparison.",
     "unassessed_ambiguous_match": "Additional matching detail made the two-area comparison ambiguous.",

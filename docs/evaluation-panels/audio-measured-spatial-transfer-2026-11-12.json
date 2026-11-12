@@ -1,0 +1,443 @@
+{
+  "schema": "chipmunk.audio-measured-spatial-transfer/1",
+  "method": {
+    "scope": "Engineered stereo with measured stationary room response and authenticated front and one lateral source paths. Both real AMI background talkers are in one off-axis playback feed. A third physical path is not inferred. Ordinary mono, unknown stereo geometry, moving source or recorder, and differently placed competing voices are out of scope.",
+    "sources": "Use fresh exact matched host, same-reader, other-reader and three synthesis families, disjoint speaker, transcript, utterance and background intervals across roles. Each role has two clone, three expressive and one stock inserts. Exclude exact sources and identities from the earlier replication, retain broader historical exclusions, and acknowledge exposed source banks. Surrey plus two distinct AMI sessions determine points. BBC plus two different AMI sessions are held. Include two room-only negative views per role.",
+    "rendering": "Six-second 16 kHz sample clock. Resample the original 48 kHz measured responses to 16 kHz with fixed polyphase coefficients, then use exact causal convolution from sample zero. Match all stems and scale background to -5 dB mono SNR relative to the untouched foreground. Inserts are 0.80 or 0.96 s, have 20 ms fades, and contain at least half their authored time under separately annotated competing words.",
+    "candidate": "Generalized sidelobe cancellation on input with at least two seconds of zero padding on either side and measured transfer coefficients. Normalize the target-blocking direction by front-channel energy. Fit no mixture coefficients. In the blocked channel apply the measured lateral path with ridge .08 relative to its mean channel power. Cap subtraction coefficient magnitude at 1.5. Raised cosine crossfades 100\u2013200 and 6000\u20136800 Hz. Keep mean ear response outside those bands. Return the original sample count without translation, gain normalization, sample deletion, or speaker-window re-alignment.",
+    "acoustic_preflight": "Each room needs at least +4 dB median reconstruction SNR improvement across edited cases and +3 dB inside exact authored ranges, at least 35 dB median isolated target preservation, and zero clipping. Report opposite lateral path and opposite rig as mismatched diagnostics. Known stems are used only to verify ground truth, never to construct the candidate PCM.",
+    "scoring": "Use the identical pinned native voice classifier and speech gate on two exact 2-second slices starting at 1 and 3 seconds. Each arm must pass its own speech gate. Compare highest admitted response, plus same-time scoring limited to the intersection of both admission decisions. Keep earlier original research point and compare both arms at separate maximum-genuine selection points and descriptive equal-false-group budgets 0, 1, and 2. No threshold or window fitting on held outcomes.",
+    "localization": "Useful requires at least .30 temporal IoU and .50 coverage of the authored range. Retain source clock and measured direct-path peak plus observed change energy spread. Report unassessed cases, matched-pair rank, and original-window geometry separately from production up-to-four-second windows."
+  },
+  "acoustic": {
+    "selection": {
+      "gain_db": {
+        "native_snr_db": {
+          "spatial": 7.278380220808532,
+          "wrong_side": -4.270325074954227,
+          "wrong_rig": -1.4851310340304855
+        },
+        "range_snr_db": {
+          "spatial": 8.67044506157433,
+          "wrong_side": -4.667789846225406,
+          "wrong_rig": -1.5953975251489902
+        }
+      },
+      "target_preservation_db": 43.28453546540878,
+      "pass": true
+    },
+    "held": {
+      "gain_db": {
+        "native_snr_db": {
+          "spatial": 5.9654726740902575,
+          "wrong_side": -4.018678773411723,
+          "wrong_rig": -1.666693084041951
+        },
+        "range_snr_db": {
+          "spatial": 9.808057083533853,
+          "wrong_side": -4.608321564080418,
+          "wrong_rig": -2.1665648626487775
+        }
+      },
+      "target_preservation_db": 48.04043340471361,
+      "pass": true
+    }
+  },
+  "roles": {
+    "selection": {
+      "edited": 6,
+      "genuine_views": 20,
+      "fixed_matched_selection": {
+        "original": {
+          "ai_flags": 0,
+          "useful_ranges": 0,
+          "false_groups": 0,
+          "unassessed": 0,
+          "background_false_flags": 0
+        },
+        "spatial": {
+          "ai_flags": 1,
+          "useful_ranges": 1,
+          "false_groups": 0,
+          "unassessed": 0,
+          "background_false_flags": 0
+        },
+        "original_shared": {
+          "ai_flags": 0,
+          "useful_ranges": 0,
+          "false_groups": 0,
+          "unassessed": 0,
+          "background_false_flags": 0
+        },
+        "spatial_shared": {
+          "ai_flags": 1,
+          "useful_ranges": 1,
+          "false_groups": 0,
+          "unassessed": 0,
+          "background_false_flags": 0
+        }
+      },
+      "equal_false_groups": {
+        "0": {
+          "original": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "spatial": {
+            "ai_flags": 1,
+            "useful_ranges": 1,
+            "false_groups": 0,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "original_shared": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "spatial_shared": {
+            "ai_flags": 1,
+            "useful_ranges": 1,
+            "false_groups": 0,
+            "unassessed": 0,
+            "background_false_flags": 0
+          }
+        },
+        "1": {
+          "original": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "spatial": {
+            "ai_flags": 1,
+            "useful_ranges": 1,
+            "false_groups": 1,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "original_shared": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "spatial_shared": {
+            "ai_flags": 1,
+            "useful_ranges": 1,
+            "false_groups": 1,
+            "unassessed": 0,
+            "background_false_flags": 0
+          }
+        },
+        "2": {
+          "original": {
+            "ai_flags": 3,
+            "useful_ranges": 1,
+            "false_groups": 2,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "spatial": {
+            "ai_flags": 2,
+            "useful_ranges": 2,
+            "false_groups": 2,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "original_shared": {
+            "ai_flags": 3,
+            "useful_ranges": 1,
+            "false_groups": 2,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "spatial_shared": {
+            "ai_flags": 2,
+            "useful_ranges": 2,
+            "false_groups": 2,
+            "unassessed": 0,
+            "background_false_flags": 0
+          }
+        }
+      },
+      "useful_without_threshold": {
+        "original": 2,
+        "spatial": 5,
+        "original_shared": 2,
+        "spatial_shared": 5
+      },
+      "ranking": {
+        "original": {
+          "ordinary_other_voice_comparable": 6,
+          "ordinary_other_voice_synthetic_higher": 2,
+          "ordinary_same_host_comparable": 6,
+          "ordinary_same_host_synthetic_higher": 1
+        },
+        "spatial": {
+          "ordinary_other_voice_comparable": 6,
+          "ordinary_other_voice_synthetic_higher": 4,
+          "ordinary_same_host_comparable": 6,
+          "ordinary_same_host_synthetic_higher": 4
+        },
+        "original_shared": {
+          "ordinary_other_voice_comparable": 6,
+          "ordinary_other_voice_synthetic_higher": 2,
+          "ordinary_same_host_comparable": 6,
+          "ordinary_same_host_synthetic_higher": 1
+        },
+        "spatial_shared": {
+          "ordinary_other_voice_comparable": 6,
+          "ordinary_other_voice_synthetic_higher": 4,
+          "ordinary_same_host_comparable": 6,
+          "ordinary_same_host_synthetic_higher": 4
+        }
+      }
+    },
+    "held": {
+      "edited": 6,
+      "genuine_views": 20,
+      "fixed_matched_selection": {
+        "original": {
+          "ai_flags": 1,
+          "useful_ranges": 0,
+          "false_groups": 2,
+          "unassessed": 0,
+          "background_false_flags": 0
+        },
+        "spatial": {
+          "ai_flags": 1,
+          "useful_ranges": 1,
+          "false_groups": 2,
+          "unassessed": 1,
+          "background_false_flags": 0
+        },
+        "original_shared": {
+          "ai_flags": 1,
+          "useful_ranges": 0,
+          "false_groups": 2,
+          "unassessed": 1,
+          "background_false_flags": 0
+        },
+        "spatial_shared": {
+          "ai_flags": 1,
+          "useful_ranges": 1,
+          "false_groups": 2,
+          "unassessed": 1,
+          "background_false_flags": 0
+        }
+      },
+      "equal_false_groups": {
+        "0": {
+          "original": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "spatial": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 0,
+            "unassessed": 1,
+            "background_false_flags": 0
+          },
+          "original_shared": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 0,
+            "unassessed": 1,
+            "background_false_flags": 0
+          },
+          "spatial_shared": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 0,
+            "unassessed": 1,
+            "background_false_flags": 0
+          }
+        },
+        "1": {
+          "original": {
+            "ai_flags": 1,
+            "useful_ranges": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "spatial": {
+            "ai_flags": 1,
+            "useful_ranges": 1,
+            "false_groups": 1,
+            "unassessed": 1,
+            "background_false_flags": 0
+          },
+          "original_shared": {
+            "ai_flags": 1,
+            "useful_ranges": 0,
+            "false_groups": 1,
+            "unassessed": 1,
+            "background_false_flags": 0
+          },
+          "spatial_shared": {
+            "ai_flags": 1,
+            "useful_ranges": 1,
+            "false_groups": 1,
+            "unassessed": 1,
+            "background_false_flags": 0
+          }
+        },
+        "2": {
+          "original": {
+            "ai_flags": 1,
+            "useful_ranges": 0,
+            "false_groups": 2,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "spatial": {
+            "ai_flags": 2,
+            "useful_ranges": 2,
+            "false_groups": 2,
+            "unassessed": 1,
+            "background_false_flags": 0
+          },
+          "original_shared": {
+            "ai_flags": 1,
+            "useful_ranges": 0,
+            "false_groups": 2,
+            "unassessed": 1,
+            "background_false_flags": 0
+          },
+          "spatial_shared": {
+            "ai_flags": 2,
+            "useful_ranges": 2,
+            "false_groups": 2,
+            "unassessed": 1,
+            "background_false_flags": 0
+          }
+        }
+      },
+      "useful_without_threshold": {
+        "original": 3,
+        "spatial": 5,
+        "original_shared": 3,
+        "spatial_shared": 5
+      },
+      "ranking": {
+        "original": {
+          "ordinary_other_voice_comparable": 6,
+          "ordinary_other_voice_synthetic_higher": 3,
+          "ordinary_same_host_comparable": 6,
+          "ordinary_same_host_synthetic_higher": 3
+        },
+        "spatial": {
+          "ordinary_other_voice_comparable": 6,
+          "ordinary_other_voice_synthetic_higher": 2,
+          "ordinary_same_host_comparable": 6,
+          "ordinary_same_host_synthetic_higher": 3
+        },
+        "original_shared": {
+          "ordinary_other_voice_comparable": 6,
+          "ordinary_other_voice_synthetic_higher": 3,
+          "ordinary_same_host_comparable": 6,
+          "ordinary_same_host_synthetic_higher": 3
+        },
+        "spatial_shared": {
+          "ordinary_other_voice_comparable": 6,
+          "ordinary_other_voice_synthetic_higher": 2,
+          "ordinary_same_host_comparable": 6,
+          "ordinary_same_host_synthetic_higher": 3
+        }
+      }
+    }
+  },
+  "earlier_original_fixed": {
+    "ai_flags": 0,
+    "useful_ranges": 0,
+    "false_groups": 0,
+    "unassessed": 0,
+    "background_false_flags": 0
+  },
+  "family_held_edited": {
+    "clone": 2,
+    "expressive": 3,
+    "stock": 1
+  },
+  "calls": {
+    "selection": {
+      "original": 51,
+      "spatial": 47
+    },
+    "held": {
+      "original": 52,
+      "spatial": 48
+    }
+  },
+  "commitments": {
+    "freeze": "876cfd020eae07222f77c55096de999ae35597e8feb12d8507246007ff8c8053",
+    "roster": "28a3ecbaa264cff9de2f37a510734255fda833a4b057726127d6de0922f41f8a",
+    "points": "77c0f8546994622a1d9ae16e8d554def99c7b3fa444cce121b1f92084d04f917",
+    "selection": "6c113e222039edeb3650981ebd195c70f3a7c8a19f53a6d584edc4564b3ddf6e",
+    "held": "9b05ad9d7708cb850a06302c3ce7066d6abf95468b02d67601dd703d13756b81"
+  },
+  "family_fixed": {
+    "clone": {
+      "original": {
+        "ai_flags": 0,
+        "useful_ranges": 0,
+        "false_groups": 1,
+        "unassessed": 0,
+        "background_false_flags": 0
+      },
+      "spatial": {
+        "ai_flags": 1,
+        "useful_ranges": 1,
+        "false_groups": 0,
+        "unassessed": 0,
+        "background_false_flags": 0
+      }
+    },
+    "expressive": {
+      "original": {
+        "ai_flags": 1,
+        "useful_ranges": 0,
+        "false_groups": 1,
+        "unassessed": 0,
+        "background_false_flags": 0
+      },
+      "spatial": {
+        "ai_flags": 0,
+        "useful_ranges": 0,
+        "false_groups": 2,
+        "unassessed": 0,
+        "background_false_flags": 0
+      }
+    },
+    "stock": {
+      "original": {
+        "ai_flags": 0,
+        "useful_ranges": 0,
+        "false_groups": 0,
+        "unassessed": 0,
+        "background_false_flags": 0
+      },
+      "spatial": {
+        "ai_flags": 0,
+        "useful_ranges": 0,
+        "false_groups": 0,
+        "unassessed": 0,
+        "background_false_flags": 0
+      }
+    }
+  }
+}

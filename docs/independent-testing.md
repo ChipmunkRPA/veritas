@@ -142,6 +142,9 @@ fresh and previously tested source groups separately.
 The [larger replication](audio-remote-neighbor-replication-2026-11-12.md) keeps
 the same cutoffs on 12 new edits from three generator families and compares
 localization within the same admitted time coverage.
+The [measured-room stereo comparison](audio-measured-spatial-transfer-2026-11-12.md)
+reconstructs the exact PCM, verifies foreground preservation, and measures
+short-edit localization under calibrated, wrong-side, and wrong-room conditions.
 The [controlled room-speech attenuation study](audio-room-reference-transfer-2026-11-12.md)
 reconstructs each changed waveform independently and checks whether improved
 foreground reconstruction recovers short synthetic inserts.

@@ -85,6 +85,7 @@ describe('image evidence cards', () => {
     show({ ...evidence, version: 'image-evidence-15', embedded_pair_difference: exactPair, packets: [] })
     const card = within(screen.getByRole('region', { name: 'Pixel differences between matching areas' }))
     expect(card.getByText(/437 differing pixels/)).toBeTruthy()
+    expect(card.getByText(/other matching areas, including resized copies/)).toBeTruthy()
     expect(card.getByText(/zero weight in AI authorship confidence/)).toBeTruthy()
     expect(card.getByAltText('Area A with differing pixels highlighted in orange').getAttribute('src'))
       .toContain(`${'3'.repeat(64)}.png?token=signed%20token`)

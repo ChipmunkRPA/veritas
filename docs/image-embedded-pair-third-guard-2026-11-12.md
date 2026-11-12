@@ -37,7 +37,7 @@ The ordinary view toggles both crops between original pixels and highlighted dif
 
 Two actual local checkout and worker runs used simulated payment. The supported example showed **2,503** differing pixels and reproduced all five source assets. The three-view control withheld the comparison. Both results agreed across API, PDF, JSON and signed source verification. Chrome loaded the four plates in the ordinary view and verified both source links. [Local app receipt](evaluation-panels/image-embedded-pair-app-2026-11-12.json)
 
-A broader held screenshot panel found that some resized third views still produce an ambiguous report, including at the currently supported 768 × 768 size. [Screenshot-size transfer and limitations](image-embedded-pair-canvas-transfer-2026-11-12.md)
+A broader held screenshot panel found that some resized third views still produce an ambiguous report, including at the currently supported 768 × 768 size. The standard view and PDF now describe the two displayed areas and explain that other matching areas, including resized copies, may be present. A simulated checkout verified the updated PDF and its original pixel evidence. [Screenshot-size transfer and limitations](image-embedded-pair-canvas-transfer-2026-11-12.md)
 
 ## Reproduce
 

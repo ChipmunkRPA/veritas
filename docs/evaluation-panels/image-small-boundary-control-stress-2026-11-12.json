@@ -1,0 +1,6139 @@
+{
+  "audit": {
+    "freeze_sha256": "c7f2c4891d20d541cb2a019f97375e3bb3a21bd416516951c85cea7320fec01e",
+    "native_crops": 79,
+    "native_deliveries": 120,
+    "rows_sha256": "2da4cbd070a5ad9156a789f0dbe2fcb93c67c6f533f3516e89d50083c4216ae9"
+  },
+  "freeze": {
+    "code_sha256": {
+      "image_boundary_extent_transfer.py": "b64ba2e175b6bdf7f1be3dabd04ce3e350a2eaa96ad10fa7288a495d3e6410f5",
+      "image_small_boundary_control_stress.py": "749347b86ccf90da8e42fa9068cf9ef7a567f0968f62130a3a1679c08d7bdfea",
+      "image_small_boundary_fallback_transfer.py": "906af2692d49ca567e60b0ff3312bfe8db0f57db95c3d388198a06e73e4c6e4c",
+      "sharp_boundary.py": "04c120cd027e50bd107fd15778f66fe38c43d64439e090835dfad99727e41cbc"
+    },
+    "fixed_point": 0.8292734622955322,
+    "graphic_roles": [
+      "authored_graphic",
+      "resized_graphic"
+    ],
+    "graphics_groups": 12,
+    "method": {
+      "maximum_added_control_groups": 2,
+      "maximum_added_control_views": 3,
+      "maximum_added_graphic_groups": 1,
+      "maximum_added_untouched_photo_groups": 1,
+      "maximum_axis_fraction": 0.18,
+      "maximum_wrong_added_paste_views": 2,
+      "minimum_additional_groups": 6,
+      "minimum_additional_per_paste_type": 2,
+      "minimum_additional_useful": 8,
+      "minimum_side": 56,
+      "point": 1.2805722063718288,
+      "useful_iou": 0.3,
+      "useful_recall": 0.5
+    },
+    "photo_roles": [
+      "original",
+      "global_tone",
+      "feathered_blur",
+      "resize_roundtrip",
+      "self_paste",
+      "other_paste"
+    ],
+    "prior_panel_sha256": "e59ef4dc75c4e4e89734c08cad1a93831e8b2cedc75e90c63080d6d1630da6fc",
+    "roster": {
+      "eligible_components": 44,
+      "excluded_recorded_sources": 43,
+      "identified_other_panel_manifests": {
+        "external/image-translation-patch-transfer-2026-11-11/integration/freeze.json": "5098b279a3095faa53b9ebba8ca90703873b7f06bab4eaea5cb7db41d1e70a81",
+        "external/image-translation-patch-transfer-2026-11-11/panel/freeze.json": "1f6bccd1a77bb1bde511846b7fb7476dc7cdb764feb3326cb7a86613b34f5d23",
+        "local/image-copy-tone-2026-11-11/stress/comparison.json": "8b1ee97e04ef0aaf3c91e48c249e2175599bfc77142ec4414a86a1c070636607",
+        "local/image-copy-tone-2026-11-11/stress/screen.json": "1a45336fa771e7b9f4a67853074afc56ea45aa203147a3fb8fd3f633f87fc2d5",
+        "local/image-copy-transfer-v298/private-freeze.json": "3e31ef323002875d6f3ef4261e4867e5926fb4a3bce4656a60ff2f8c7957d8a9",
+        "local/image-flux-photo-expansion-v285/private-inputs.json": "061e9ec699e43b9a37d61118e958e501d56c33cc33bef20d6fd5ac15d95ad8c7",
+        "local/image-flux-photo-preparation-v276/private-inputs.json": "9d2a4d0b5c3a25458eb76b259f3aef0a44b67cbc106dc6942ff516d6dc48dea2",
+        "local/image-small-boundary-fallback-transfer-2026-11-12/freeze.json": "5bee9b401be2575eff0a813df956bac11c3796d1a65a0634ced948882c5d5d51"
+      },
+      "scope": "Distinct attributed cache components. All qualified cache groups may have prior exposure to a separate geometric-copy proposal screen. Its scores did not select these photos. Previously identified downstream photo roles and separately selected copy-screen rows were excluded. The present small boundary interventions and authored graphics are new. Camera authenticity and aliases are unknown.",
+      "source_graph_sha256": "01488762b8bb6083910996c30a6fee98ad4bff5b7efb96b7af61d780ed35feea",
+      "source_plan_sha256": "bba4cc565bfd6540d6054fe75931bb693e280472ac5591c0da698901c8834fc2",
+      "source_receipt_sha256": "f56c9290f190f3a8a29654b5781d1a233474b963429541cca93f706b6e18c537",
+      "sources": [
+        {
+          "author": "Jim Legans, Jr",
+          "author_profile": "https://www.flickr.com/photos/9575673@N08/",
+          "encoded_sha256": "125fd2424f02d1185b09fb312348e5753d2a0a3bb323859e20eaf6a0457b44f4",
+          "license_url": "https://creativecommons.org/licenses/by/2.0/",
+          "rgb_sha256": "a4c3001b7879005e8f59cd482952d605c807bccab40a5d0d0e0fe987c510e018",
+          "role": "target",
+          "size": [
+            680,
+            1024
+          ],
+          "slot": 0,
+          "source_component": [
+            "fresh-jpeg/123099"
+          ],
+          "source_url": "https://www.flickr.com/photos/9575673@N08/3537711474/",
+          "title": "Blue sign means \"bike route\""
+        },
+        {
+          "author": "I Should Be Folding Laundry",
+          "author_profile": "https://www.flickr.com/photos/laundry/",
+          "encoded_sha256": "0b30ab2f042505980059f721f0fe40346500c47f8c71a1879d260123cd18dd04",
+          "license_url": "https://creativecommons.org/licenses/by/2.0/",
+          "rgb_sha256": "8199f1943d756916197ae71d1d7b175b1ec1b43816843ee640e578e7ccc0e30c",
+          "role": "target",
+          "size": [
+            657,
+            1024
+          ],
+          "slot": 1,
+          "source_component": [
+            "fresh-jpeg/519894"
+          ],
+          "source_url": "https://www.flickr.com/photos/laundry/3609846756/",
+          "title": "bathroom after paint"
+        },
+        {
+          "author": "|| UggBoy\u2665UggGirl || PHOTO || WORLD || TRAVEL ||",
+          "author_profile": "https://www.flickr.com/photos/uggboy/",
+          "encoded_sha256": "d97212894b76f951db3fd865592282c5576fbece67a738721ea27ab7916b6752",
+          "license_url": "https://creativecommons.org/licenses/by/2.0/",
+          "rgb_sha256": "3addd9588947290f6d5387f4d7274e77f6311dc10aa44fb83b3556c9fa1a30a7",
+          "role": "target",
+          "size": [
+            1024,
+            683
+          ],
+          "slot": 2,
+          "source_component": [
+            "fresh-jpeg/519316"
+          ],
+          "source_url": "https://www.flickr.com/photos/uggboy/6777695537/",
+          "title": "\" Landmark Hospitality In The Heart Of The Capital City : ENJOY! \""
+        },
+        {
+          "author": "GWP Photography",
+          "author_profile": "https://www.flickr.com/photos/gwp57/",
+          "encoded_sha256": "06b155498145e9efdd5e8f089cd6cc04d466622b08913b70535111d027f7eeef",
+          "license_url": "https://creativecommons.org/licenses/by/2.0/",
+          "rgb_sha256": "f511e875094b471060aa57065b455fce73d061ecb918da2275de4e7a5197dbcf",
+          "role": "target",
+          "size": [
+            1024,
+            683
+          ],
+          "slot": 3,
+          "source_component": [
+            "fresh-jpeg/532773"
+          ],
+          "source_url": "https://www.flickr.com/photos/gwp57/8360568744/",
+          "title": "Merrick Guernsey Dairy Truck"
+        },
+        {
+          "author": "Thank You (25 Millions ) views",
+          "author_profile": "https://www.flickr.com/photos/prayitnophotography/",
+          "encoded_sha256": "c7af8c218d952ceb26729e1aadee09702d585c9eb6c991993202a1e3ed5257ca",
+          "license_url": "https://creativecommons.org/licenses/by/2.0/",
+          "rgb_sha256": "962e0d5fa1d19b81c6dcc8129ff3ee0bf6a7e63b8ca71ae61bccbd388525ccbe",
+          "role": "target",
+          "size": [
+            1024,
+            683
+          ],
+          "slot": 4,
+          "source_component": [
+            "fresh-jpeg/285910"
+          ],
+          "source_url": "https://www.flickr.com/photos/prayitnophotography/6971795978/",
+          "title": "Formerly named Hilton Suites Anaheim / Orange ~ California"
+        },
+        {
+          "author": "semarr",
+          "author_profile": "https://www.flickr.com/photos/semarr/",
+          "encoded_sha256": "9e2dbbdb119a13084d73293b4e27e4dbe19fda5da63f34b19ce36d238610e471",
+          "license_url": "https://creativecommons.org/licenses/by/2.0/",
+          "rgb_sha256": "0a6ba5b8230ed3157885fd72373eb5bdb8887bd9683f1ddd72acaab145273340",
+          "role": "target",
+          "size": [
+            768,
+            1024
+          ],
+          "slot": 5,
+          "source_component": [
+            "fresh-jpeg/379936"
+          ],
+          "source_url": "https://www.flickr.com/photos/semarr/500779295/",
+          "title": "Arctic Roadrunner street sign"
+        },
+        {
+          "author": "davidwilson1949",
+          "author_profile": "https://www.flickr.com/photos/davidwilson1949/",
+          "encoded_sha256": "ae2cec7947615df74547c06c0deb9aca82fdffbfebe79f99ac89b73058f0f3c0",
+          "license_url": "https://creativecommons.org/licenses/by/2.0/",
+          "rgb_sha256": "5c6162b0bab3e49e55e22ae1884c63b8d9489cce9832c181c9b0b16d4d78a6e2",
+          "role": "target",
+          "size": [
+            1024,
+            768
+          ],
+          "slot": 6,
+          "source_component": [
+            "fresh-jpeg/531329"
+          ],
+          "source_url": "https://www.flickr.com/photos/davidwilson1949/9249492119/",
+          "title": "20130403 31 Pace bus, Hegewisch"
+        },
+        {
+          "author": "DavidMartynHunt",
+          "author_profile": "https://www.flickr.com/photos/davidchief/",
+          "encoded_sha256": "93c71cb8d28c2cecb1ae8a0b80619027a8e12f648933b65bbbe96337371bfbcb",
+          "license_url": "https://creativecommons.org/licenses/by/2.0/",
+          "rgb_sha256": "fbe4b88b552a408bd8902a042c32d062391b016b81158045e4a1d7eda9197923",
+          "role": "target",
+          "size": [
+            1024,
+            688
+          ],
+          "slot": 7,
+          "source_component": [
+            "fresh-jpeg/358642"
+          ],
+          "source_url": "https://www.flickr.com/photos/davidchief/2363670604/",
+          "title": "Bear Shop"
+        },
+        {
+          "author": "Abhishek_Kumar",
+          "author_profile": "https://www.flickr.com/photos/abhishek_kr7/",
+          "encoded_sha256": "b85f0921d749e003662ee1aeada353c13a45e77641dd47d791c9a59dd91cfb3b",
+          "license_url": "https://creativecommons.org/licenses/by/2.0/",
+          "rgb_sha256": "b67e6631e577e50e458ea0f1466badbc583c2a95a543b8e882c76c0b218428ce",
+          "role": "target",
+          "size": [
+            1024,
+            768
+          ],
+          "slot": 8,
+          "source_component": [
+            "fresh-jpeg/152320"
+          ],
+          "source_url": "https://www.flickr.com/photos/abhishek_kr7/4632832982/",
+          "title": "The living room"
+        },
+        {
+          "author": "couragextoxlive",
+          "author_profile": "https://www.flickr.com/photos/couragextoxlive/",
+          "encoded_sha256": "27fa30d420ebe87b6091f473e530845a8ab8595bd898e5e019a501eb5861057c",
+          "license_url": "https://creativecommons.org/licenses/by/2.0/",
+          "rgb_sha256": "0e1a4484163244e75ee8d00a6294437a87b6d3b31318a7257a94d5fc4d2f699f",
+          "role": "target",
+          "size": [
+            1023,
+            685
+          ],
+          "slot": 9,
+          "source_component": [
+            "fresh-jpeg/24497"
+          ],
+          "source_url": "https://www.flickr.com/photos/couragextoxlive/4096842985/",
+          "title": "009"
+        },
+        {
+          "author": "bark",
+          "author_profile": "https://www.flickr.com/photos/barkbud/",
+          "encoded_sha256": "6499561fe8d6278a09ca2886de4edc077ecf12ca3f488391d330c39897deba51",
+          "license_url": "https://creativecommons.org/licenses/by/2.0/",
+          "rgb_sha256": "c1d74a2582ffd5be6603b79d541a5e66baa1abc3caebd30c6a18827f1f0b8437",
+          "role": "target",
+          "size": [
+            1024,
+            680
+          ],
+          "slot": 10,
+          "source_component": [
+            "fresh-jpeg/384328"
+          ],
+          "source_url": "https://www.flickr.com/photos/barkbud/4171183856/",
+          "title": "40+39 Tie"
+        },
+        {
+          "author": "Scott McLeod",
+          "author_profile": "https://www.flickr.com/photos/mcleod/",
+          "encoded_sha256": "5d6f08298c87b4a893cff32d29d04bcb2a5b74c882b22cb80454cd27ff2fe1eb",
+          "license_url": "https://creativecommons.org/licenses/by/2.0/",
+          "rgb_sha256": "38f752a04976bd78cdbbde1536f99772747add252786ec3ff8aa094be557cd0a",
+          "role": "target",
+          "size": [
+            1023,
+            683
+          ],
+          "slot": 11,
+          "source_component": [
+            "fresh-jpeg/73333"
+          ],
+          "source_url": "https://www.flickr.com/photos/mcleod/6577342839/",
+          "title": "Isabel surfing 3"
+        },
+        {
+          "author": "Emery_Way",
+          "author_profile": "https://www.flickr.com/photos/emeryway/",
+          "encoded_sha256": "a2fba8993c23e15f1bd4ad9700cbb0a32d1abd42080f97a14d9133fe8c6d70e8",
+          "license_url": "https://creativecommons.org/licenses/by/2.0/",
+          "rgb_sha256": "87a996907cd73007efa9de42dac34a9149a08fcfdffadf689cb7aae7a33c200f",
+          "role": "target",
+          "size": [
+            1024,
+            819
+          ],
+          "slot": 12,
+          "source_component": [
+            "fresh-jpeg/225398"
+          ],
+          "source_url": "https://www.flickr.com/photos/emeryway/3279198023/",
+          "title": "Trixie in Stride"
+        },
+        {
+          "author": "jgrebedw",
+          "author_profile": "https://www.flickr.com/photos/26050788@N03/",
+          "encoded_sha256": "9df63b2fb1c2ec437c75f22f0c99712285410fe90974a33056dd2ce15a8a561f",
+          "license_url": "https://creativecommons.org/licenses/by/2.0/",
+          "rgb_sha256": "82ca01d131e00fd7493a83310fc0a9e652bbecfcaa384064ff0afb29097c15b9",
+          "role": "target",
+          "size": [
+            1024,
+            768
+          ],
+          "slot": 13,
+          "source_component": [
+            "fresh-jpeg/129977"
+          ],
+          "source_url": "https://www.flickr.com/photos/26050788@N03/2919618395/",
+          "title": "October 4, 2008"
+        },
+        {
+          "author": "oskay",
+          "author_profile": "https://www.flickr.com/photos/oskay/",
+          "encoded_sha256": "4f252952442ccacb3ef1ce3541e2c566ef761eaeaf1be47a50ea45db380b06ee",
+          "license_url": "https://creativecommons.org/licenses/by/2.0/",
+          "rgb_sha256": "b7cbaa3aac0bdada78a8a6cbf3bf4705cafff96a946a17153a43e2be458f8d9d",
+          "role": "target",
+          "size": [
+            1024,
+            768
+          ],
+          "slot": 14,
+          "source_component": [
+            "fresh-jpeg/405543"
+          ],
+          "source_url": "https://www.flickr.com/photos/oskay/714282882/",
+          "title": "Catsup"
+        },
+        {
+          "author": "1st Cavalry Division Artillery",
+          "author_profile": "https://www.flickr.com/photos/41stfiresbrigade/",
+          "encoded_sha256": "897acbb3aba41bfd10fea2ce515fbfbdd7df05b44e8219281a18f9800f6dd11a",
+          "license_url": "https://creativecommons.org/licenses/by/2.0/",
+          "rgb_sha256": "738d33df0726258dcd8acdf5cacb679de7a5a44b329f0ad1d0f1bf95159a6ffc",
+          "role": "target",
+          "size": [
+            1023,
+            685
+          ],
+          "slot": 15,
+          "source_component": [
+            "fresh-jpeg/35110"
+          ],
+          "source_url": "https://www.flickr.com/photos/41stfiresbrigade/9459947796/",
+          "title": "130807-A-JE145-004"
+        },
+        {
+          "author": "DrabikPany",
+          "author_profile": "https://www.flickr.com/photos/drabikpany/",
+          "encoded_sha256": "629d3d4d57ddc46ae519861c0a03253280d6a431a7faed3d75be13fc2e239c7b",
+          "license_url": "https://creativecommons.org/licenses/by/2.0/",
+          "rgb_sha256": "ea9dc36f29fa80eaf23df6e80d01fc622436d40b963d3383a4539a7125c55c99",
+          "role": "donor",
+          "size": [
+            1024,
+            768
+          ],
+          "slot": 16,
+          "source_component": [
+            "fresh-jpeg/476032"
+          ],
+          "source_url": "https://www.flickr.com/photos/drabikpany/6861375383/",
+          "title": "Emmanuel Chedal "
+        },
+        {
+          "author": "SodanieChea",
+          "author_profile": "https://www.flickr.com/photos/sodaniechea/",
+          "encoded_sha256": "eeda5644708d4fa390b4ff407d35019a44433988b25d1b4827e6b96442e8ef56",
+          "license_url": "https://creativecommons.org/licenses/by/2.0/",
+          "rgb_sha256": "e3e4bc03f8ffdf3e780d6d765268c99d024db564c7394419fe84f867af705b06",
+          "role": "donor",
+          "size": [
+            683,
+            1024
+          ],
+          "slot": 17,
+          "source_component": [
+            "fresh-jpeg/561475"
+          ],
+          "source_url": "https://www.flickr.com/photos/sodaniechea/6947969366/",
+          "title": "The Wind"
+        },
+        {
+          "author": "danperry.com",
+          "author_profile": "https://www.flickr.com/photos/golf_pictures/",
+          "encoded_sha256": "ff79afb6d0b16306ef65843e82bdabd8857189a99c804d58b9eae1afe3e5b6ae",
+          "license_url": "https://creativecommons.org/licenses/by/2.0/",
+          "rgb_sha256": "a097cd9ce73d000a00f1e3930f0829cf0aff676675406814aec543357637b715",
+          "role": "donor",
+          "size": [
+            768,
+            1024
+          ],
+          "slot": 18,
+          "source_component": [
+            "fresh-jpeg/210389"
+          ],
+          "source_url": "https://www.flickr.com/photos/golf_pictures/2616366588/",
+          "title": "Cirque Du Soleil Chicago"
+        },
+        {
+          "author": "Jiri Brozovsky",
+          "author_profile": "https://www.flickr.com/photos/7958754@N03/",
+          "encoded_sha256": "681713e840d5811585d5c8f0048763a511e0e205a11cd104f1f54a63463c5c90",
+          "license_url": "https://creativecommons.org/licenses/by/2.0/",
+          "rgb_sha256": "16938cdac458de69188420fe9dc67950091c91fb354c0f9e980c7c46a792ea16",
+          "role": "donor",
+          "size": [
+            1024,
+            768
+          ],
+          "slot": 19,
+          "source_component": [
+            "fresh-jpeg/206584"
+          ],
+          "source_url": "https://www.flickr.com/photos/7958754@N03/4140656106/",
+          "title": "Desktop chaos (11/2009)"
+        },
+        {
+          "author": "roland",
+          "author_profile": "https://www.flickr.com/photos/roland/",
+          "encoded_sha256": "2b794447d3534e45ab25a8a661a0cf34822beec49d5cc257a45670791d0fb21b",
+          "license_url": "https://creativecommons.org/licenses/by/2.0/",
+          "rgb_sha256": "f8c97d6e2cd7ba8e315d4db8ba29a43220409e615246e31ac43919d54b198fb6",
+          "role": "donor",
+          "size": [
+            1024,
+            768
+          ],
+          "slot": 20,
+          "source_component": [
+            "fresh-jpeg/330562"
+          ],
+          "source_url": "https://www.flickr.com/photos/roland/8180603586/",
+          "title": "Remember the good 'ole days when coffee and doughnuts weren't so delicious? Neither do I #iGrewUpOnTimHortons"
+        },
+        {
+          "author": "idovermani",
+          "author_profile": "https://www.flickr.com/photos/idovermani/",
+          "encoded_sha256": "b2ed8dd77dc10fa635edc46908b54bf4296952fd8d015806a85220762a59e729",
+          "license_url": "https://creativecommons.org/licenses/by/2.0/",
+          "rgb_sha256": "fda7c24e72ac559c2e52e5273dc72a48d2de93ab58001c252180658edb4ef85a",
+          "role": "donor",
+          "size": [
+            1023,
+            659
+          ],
+          "slot": 21,
+          "source_component": [
+            "fresh-jpeg/144200"
+          ],
+          "source_url": "https://www.flickr.com/photos/idovermani/3661716924/",
+          "title": "06-24-09"
+        },
+        {
+          "author": "xchoi",
+          "author_profile": "https://www.flickr.com/photos/alexchoi/",
+          "encoded_sha256": "b43728b2049107906c772cb3f85d26808ee82af539be7d88ff1090a0abb99745",
+          "license_url": "https://creativecommons.org/licenses/by/2.0/",
+          "rgb_sha256": "107694ae09568a2a29b01eefd83533d4335a3bd3a41a04969c62565e64005766",
+          "role": "donor",
+          "size": [
+            1024,
+            768
+          ],
+          "slot": 22,
+          "source_component": [
+            "fresh-jpeg/558142"
+          ],
+          "source_url": "https://www.flickr.com/photos/alexchoi/341358261/",
+          "title": "2006.12.19 Lisa visits from Arkansas"
+        },
+        {
+          "author": "fantasy prof",
+          "author_profile": "https://www.flickr.com/photos/davecooper/",
+          "encoded_sha256": "5c4b3487ef9f1d2b7d7b8d3276acc257a1fc26f7f60836dfa045e3c1cdedbbaa",
+          "license_url": "https://creativecommons.org/licenses/by/2.0/",
+          "rgb_sha256": "239c79b60d1df230de8aef4ea289d26502d4e9aed19a8d4bcc3cbe815707d9e3",
+          "role": "donor",
+          "size": [
+            1024,
+            714
+          ],
+          "slot": 23,
+          "source_component": [
+            "fresh-jpeg/322730"
+          ],
+          "source_url": "https://www.flickr.com/photos/davecooper/319731719/",
+          "title": "Sam the Aggressor"
+        },
+        {
+          "author": "Rob Enslin",
+          "author_profile": "https://www.flickr.com/photos/doos/",
+          "encoded_sha256": "d5738870b1c5c14b86a169398e58fe105b0abf4b1e26e8446d670e1e55f81b52",
+          "license_url": "https://creativecommons.org/licenses/by/2.0/",
+          "rgb_sha256": "96957e0703d085507b616b3f4c4c9adf3cb9763841f9ea7cadc43550424c8d47",
+          "role": "donor",
+          "size": [
+            1024,
+            768
+          ],
+          "slot": 24,
+          "source_component": [
+            "fresh-jpeg/570403"
+          ],
+          "source_url": "https://www.flickr.com/photos/doos/3808105672/",
+          "title": "Zebra at Amber Valley (Howick, SA)"
+        },
+        {
+          "author": "bradleygee",
+          "author_profile": "https://www.flickr.com/photos/icanchangethisright/",
+          "encoded_sha256": "547fd092e30556f81680af015e33e45f0cd35b6ae6a34decaaaee7f4aeb07efc",
+          "license_url": "https://creativecommons.org/licenses/by/2.0/",
+          "rgb_sha256": "64665a9c5d9ede939c689f6ab740c47c817157ee29d961c4b45f76410cc241f1",
+          "role": "donor",
+          "size": [
+            1024,
+            666
+          ],
+          "slot": 25,
+          "source_component": [
+            "fresh-jpeg/271043"
+          ],
+          "source_url": "https://www.flickr.com/photos/icanchangethisright/37415309/",
+          "title": "this is my father"
+        },
+        {
+          "author": "girolame",
+          "author_profile": "https://www.flickr.com/photos/girolame/",
+          "encoded_sha256": "a86908598e93b5cb1f3f540ac6a5f78e3e62c354795f9c4330b5525a2fcf237b",
+          "license_url": "https://creativecommons.org/licenses/by/2.0/",
+          "rgb_sha256": "2d01c033ae1f75e31433bd4d3da3b7ffbc50dc931924038f79140cbcf94b78a4",
+          "role": "donor",
+          "size": [
+            768,
+            1024
+          ],
+          "slot": 26,
+          "source_component": [
+            "fresh-jpeg/145009"
+          ],
+          "source_url": "https://www.flickr.com/photos/girolame/3053235887/",
+          "title": "Girafes"
+        },
+        {
+          "author": "Eljay",
+          "author_profile": "https://www.flickr.com/photos/eljay/",
+          "encoded_sha256": "2187d35f9d8f7874e66a7d7a3b51ace6393a6416b5e8fed3bc5165eaa329fe07",
+          "license_url": "https://creativecommons.org/licenses/by/2.0/",
+          "rgb_sha256": "12536dcc16546328c777e5f44ea6cd849ab27d47d132e10f444bc8f56c68b5a1",
+          "role": "donor",
+          "size": [
+            1024,
+            768
+          ],
+          "slot": 27,
+          "source_component": [
+            "fresh-jpeg/579773"
+          ],
+          "source_url": "https://www.flickr.com/photos/eljay/2912151523/",
+          "title": "snoopy + carrot"
+        },
+        {
+          "author": "jeremySO",
+          "author_profile": "https://www.flickr.com/photos/jeremyoak30g/",
+          "encoded_sha256": "ebfecc550d9cdfc3248ac230c0fe6267f5f37ce396b8ae402ec48bcf79c496ee",
+          "license_url": "https://creativecommons.org/licenses/by/2.0/",
+          "rgb_sha256": "fa464b1227093040f27f0575d1c89b7e5deee2f1df2720d634f2852ab93fbb5a",
+          "role": "donor",
+          "size": [
+            1024,
+            683
+          ],
+          "slot": 28,
+          "source_component": [
+            "fresh-jpeg/454171"
+          ],
+          "source_url": "https://www.flickr.com/photos/jeremyoak30g/9177831178/",
+          "title": "Lunch in Bruges"
+        },
+        {
+          "author": "Radder Photos",
+          "author_profile": "https://www.flickr.com/photos/radder86/",
+          "encoded_sha256": "dde2e89c46f25a0ccff660c07cd1bd76afb51fb1e610168228535601a49d4362",
+          "license_url": "https://creativecommons.org/licenses/by/2.0/",
+          "rgb_sha256": "32f32eec5f5043dba1d47f05d2b0a521cf05637fdba979232081124089c386cc",
+          "role": "donor",
+          "size": [
+            1024,
+            681
+          ],
+          "slot": 29,
+          "source_component": [
+            "fresh-jpeg/430522"
+          ],
+          "source_url": "https://www.flickr.com/photos/radder86/450195305/",
+          "title": "kites"
+        },
+        {
+          "author": "whatleydude",
+          "author_profile": "https://www.flickr.com/photos/whatleydude/",
+          "encoded_sha256": "396dce6c3c97e3707a50c4acb2b1205460a518b84679997f52b3aae258fb06d0",
+          "license_url": "https://creativecommons.org/licenses/by/2.0/",
+          "rgb_sha256": "dabdc3feeae754b8f42012aa9b32a4d23bd585f6bcc0b472a2be82275fb3bb5f",
+          "role": "donor",
+          "size": [
+            1024,
+            577
+          ],
+          "slot": 30,
+          "source_component": [
+            "fresh-jpeg/5619"
+          ],
+          "source_url": "https://www.flickr.com/photos/whatleydude/8318287306/",
+          "title": "Sausage platter"
+        },
+        {
+          "author": "THX0477",
+          "author_profile": "https://www.flickr.com/photos/59195512@N00/",
+          "encoded_sha256": "5638149412e2c9fce0547179c653a22cc210f62aeb546d0154793f388c09c1b3",
+          "license_url": "https://creativecommons.org/licenses/by/2.0/",
+          "rgb_sha256": "fea6974cc308a32e7ac8b3342fc4a90bb2823c046c80ff4c42e24bfd03557e74",
+          "role": "donor",
+          "size": [
+            768,
+            1024
+          ],
+          "slot": 31,
+          "source_component": [
+            "fresh-jpeg/195081"
+          ],
+          "source_url": "https://www.flickr.com/photos/59195512@N00/124417805/",
+          "title": "Baby giraffe"
+        }
+      ],
+      "title_preselected_rectilinear_targets": 8
+    },
+    "runtime": {
+      "numpy": "2.2.6",
+      "opencv": "5.0.0",
+      "pillow": "12.3.0"
+    },
+    "schema": "chipmunk.image-small-boundary-control-stress/1"
+  },
+  "rows": [
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          456,
+          382,
+          486,
+          418
+        ],
+        "score": 1.5362982895526476,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          325,
+          125,
+          442,
+          216
+        ],
+        "score": 0.7407501935958862,
+        "selected": null
+      },
+      "input_sha256": "fedc2c67b96f3cb3a3fb506e011c7ca51141fd779a855d96adc24894a44c249f",
+      "role": "original",
+      "size": [
+        704,
+        544
+      ],
+      "slot": 0,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "96b6bef914f8edceba8eab862ee1fe3b339cf8faad3b739dee4ee38bb444c1a8"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          456,
+          382,
+          486,
+          418
+        ],
+        "score": 1.573875289397061,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          325,
+          125,
+          442,
+          216
+        ],
+        "score": 0.7578522562980652,
+        "selected": null
+      },
+      "input_sha256": "611a6aff2c53999b874f5c2f8e9b0833942e29cf0455e1303918b6ba395196e3",
+      "role": "global_tone",
+      "size": [
+        704,
+        544
+      ],
+      "slot": 0,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "96b6bef914f8edceba8eab862ee1fe3b339cf8faad3b739dee4ee38bb444c1a8"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          456,
+          382,
+          486,
+          418
+        ],
+        "score": 1.536241366926328,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          325,
+          127,
+          442,
+          218
+        ],
+        "score": 0.6479915380477905,
+        "selected": null
+      },
+      "input_sha256": "5a886e7ed01f65ea35373a3c779cc216c07f3680d1575c5d1ae6da37a7f260ac",
+      "role": "feathered_blur",
+      "size": [
+        704,
+        544
+      ],
+      "slot": 0,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "96b6bef914f8edceba8eab862ee1fe3b339cf8faad3b739dee4ee38bb444c1a8"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          456,
+          382,
+          486,
+          418
+        ],
+        "score": 1.2212922864628246,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          325,
+          125,
+          442,
+          216
+        ],
+        "score": 0.6021336317062378,
+        "selected": null
+      },
+      "input_sha256": "b07619be95dd0bb2df22f06d7dcdfcf63f0cbaa586627181d89e007d5ae39df7",
+      "role": "resize_roundtrip",
+      "size": [
+        704,
+        544
+      ],
+      "slot": 0,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "96b6bef914f8edceba8eab862ee1fe3b339cf8faad3b739dee4ee38bb444c1a8"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          82,
+          80,
+          146,
+          157
+        ],
+        "score": 1.917728516804559,
+        "selected": {
+          "area": 4928,
+          "box": [
+            82,
+            80,
+            146,
+            157
+          ],
+          "crop": [
+            58,
+            56,
+            170,
+            181
+          ],
+          "crop_rgb_sha256": "d366b7149b94232e6c8e73694f4d6b16cd700bd2b2ea48bf38a4d22b9d22ae86",
+          "overlap": 4928
+        }
+      },
+      "fixed": {
+        "proposal": [
+          82,
+          80,
+          258,
+          171
+        ],
+        "score": 0.7537690997123718,
+        "selected": null
+      },
+      "input_sha256": "a1a3cadb42c1027798840b9a6e4dda13daf994713e1fc6720d5bc6d227c56da1",
+      "role": "self_paste",
+      "size": [
+        704,
+        544
+      ],
+      "slot": 0,
+      "target": [
+        82,
+        80,
+        146,
+        157
+      ],
+      "target_pixels": 4928,
+      "truth_sha256": "f431a4d4ca5bf14ff6cc18de350dc6b1b1371d7f858aa25d0c8e95ca219ac359"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          456,
+          382,
+          486,
+          418
+        ],
+        "score": 1.5362982895526476,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          325,
+          125,
+          442,
+          216
+        ],
+        "score": 0.7407501935958862,
+        "selected": null
+      },
+      "input_sha256": "6257710b6391ab0477c64ce282e2624b81cd4dfbe10e1e92b491be86827cf6c3",
+      "role": "other_paste",
+      "size": [
+        704,
+        544
+      ],
+      "slot": 0,
+      "target": [
+        99,
+        99,
+        175,
+        163
+      ],
+      "target_pixels": 4864,
+      "truth_sha256": "8458667ae41ec38df80c5a6d40ef89a8191bf8bc732d07146ee0566fde83579e"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          484,
+          236,
+          515,
+          267
+        ],
+        "score": 1.6422972691289337,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          372,
+          47,
+          532,
+          148
+        ],
+        "score": 0.5121302008628845,
+        "selected": null
+      },
+      "input_sha256": "1fecada417e0ba60ec5d42c353d16ee61ca3c700b8aa2ad485d7ee3da3bf4482",
+      "role": "original",
+      "size": [
+        640,
+        608
+      ],
+      "slot": 1,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "d012f7a30b198d8ac0a7a2e6143111e0b5081254fbe3328d4587eef4d4e54509"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          484,
+          236,
+          515,
+          267
+        ],
+        "score": 1.6871647047586338,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          236,
+          47,
+          343,
+          250
+        ],
+        "score": 0.5691370964050293,
+        "selected": null
+      },
+      "input_sha256": "b21601783948b1c7690b9df5c359bdf2ee31e780bef2df1691fb1f97faa961d4",
+      "role": "global_tone",
+      "size": [
+        640,
+        608
+      ],
+      "slot": 1,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "d012f7a30b198d8ac0a7a2e6143111e0b5081254fbe3328d4587eef4d4e54509"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          484,
+          236,
+          515,
+          267
+        ],
+        "score": 1.6305671133106479,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          372,
+          47,
+          532,
+          148
+        ],
+        "score": 0.5123375058174133,
+        "selected": null
+      },
+      "input_sha256": "0d752b1d69ea7224e172cf9b2b831410f8bf8dbbbfe408dadd6935e0d66b59af",
+      "role": "feathered_blur",
+      "size": [
+        640,
+        608
+      ],
+      "slot": 1,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "d012f7a30b198d8ac0a7a2e6143111e0b5081254fbe3328d4587eef4d4e54509"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          484,
+          236,
+          525,
+          267
+        ],
+        "score": 1.3941425912813272,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          236,
+          47,
+          343,
+          250
+        ],
+        "score": 0.4690321087837219,
+        "selected": null
+      },
+      "input_sha256": "5b64857c85dcdfcd3362037100effa241685c0aaef0bcdb2ae4147450803c4b9",
+      "role": "resize_roundtrip",
+      "size": [
+        640,
+        608
+      ],
+      "slot": 1,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "d012f7a30b198d8ac0a7a2e6143111e0b5081254fbe3328d4587eef4d4e54509"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          196,
+          158,
+          272,
+          222
+        ],
+        "score": 2.3769717116717235,
+        "selected": {
+          "area": 4864,
+          "box": [
+            196,
+            158,
+            272,
+            222
+          ],
+          "crop": [
+            172,
+            134,
+            296,
+            246
+          ],
+          "crop_rgb_sha256": "0bf42c887204cf7c18e3074bc4a91f5a74e4b98ec5867dc0e4503a20a124932d",
+          "overlap": 4864
+        }
+      },
+      "fixed": {
+        "proposal": [
+          372,
+          47,
+          532,
+          148
+        ],
+        "score": 0.5121302008628845,
+        "selected": null
+      },
+      "input_sha256": "b0fe8dddf73682247f5086357eb84709f19ae50e8bd24e9db51d10fdaac72391",
+      "role": "self_paste",
+      "size": [
+        640,
+        608
+      ],
+      "slot": 1,
+      "target": [
+        196,
+        158,
+        272,
+        222
+      ],
+      "target_pixels": 4864,
+      "truth_sha256": "da5443785b2a802fbfa340354acbf9337f3eb158a8ce3f8c335289881ae1721a"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          213,
+          177,
+          283,
+          263
+        ],
+        "score": 2.4548675803382607,
+        "selected": {
+          "area": 6020,
+          "box": [
+            213,
+            177,
+            283,
+            263
+          ],
+          "crop": [
+            189,
+            153,
+            307,
+            287
+          ],
+          "crop_rgb_sha256": "0984a5a4501689eb5673f3210a6ccd68d0cc3857aeaa890ab92a77dd815b19f9",
+          "overlap": 6013
+        }
+      },
+      "fixed": {
+        "proposal": [
+          236,
+          25,
+          343,
+          177
+        ],
+        "score": 0.7052138447761536,
+        "selected": null
+      },
+      "input_sha256": "2ad3c45c7e2d226ad59796a37313494e918ee36ae5fb83fe6cc09c53230a73f2",
+      "role": "other_paste",
+      "size": [
+        640,
+        608
+      ],
+      "slot": 1,
+      "target": [
+        213,
+        177,
+        283,
+        263
+      ],
+      "target_pixels": 6013,
+      "truth_sha256": "2b6a21bad6d915b2188c911fe94d64b9cabe83a31828a3d02fbc2dde163d9560"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          414,
+          88,
+          484,
+          161
+        ],
+        "score": 1.0288862560967085,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          348,
+          211,
+          604,
+          296
+        ],
+        "score": 0.6045892238616943,
+        "selected": null
+      },
+      "input_sha256": "c26133790bb5b931c23e3cf44a6c887dfd5004450b67dec1698907a733fad116",
+      "role": "original",
+      "size": [
+        768,
+        512
+      ],
+      "slot": 2,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "a6619f482fee91a315f76cdcd8705d39b6ce11077c435ccc696142e130c27762"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          440,
+          108,
+          483,
+          140
+        ],
+        "score": 0.9870441163674388,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          348,
+          211,
+          540,
+          296
+        ],
+        "score": 0.6343051791191101,
+        "selected": null
+      },
+      "input_sha256": "36a606a8107bcfd23c2f903ffc42160a44cdd0835438fc1c33177cf5619e9f7e",
+      "role": "global_tone",
+      "size": [
+        768,
+        512
+      ],
+      "slot": 2,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "a6619f482fee91a315f76cdcd8705d39b6ce11077c435ccc696142e130c27762"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          440,
+          108,
+          483,
+          140
+        ],
+        "score": 0.8877937726064645,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          370,
+          125,
+          626,
+          210
+        ],
+        "score": 0.5365689396858215,
+        "selected": null
+      },
+      "input_sha256": "19eda4df4c4deab8974cde2129441b6142f6d5099513ebcbb589c5f56ed7d096",
+      "role": "feathered_blur",
+      "size": [
+        768,
+        512
+      ],
+      "slot": 2,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "a6619f482fee91a315f76cdcd8705d39b6ce11077c435ccc696142e130c27762"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          440,
+          87,
+          484,
+          140
+        ],
+        "score": 0.9539372878545476,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          370,
+          125,
+          626,
+          210
+        ],
+        "score": 0.5343618988990784,
+        "selected": null
+      },
+      "input_sha256": "3e9ff226e3410f646b0f3ce49ce851ec08303e22bfec8bc5cd1c01b56719d8c3",
+      "role": "resize_roundtrip",
+      "size": [
+        768,
+        512
+      ],
+      "slot": 2,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "a6619f482fee91a315f76cdcd8705d39b6ce11077c435ccc696142e130c27762"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          380,
+          211,
+          540,
+          314
+        ],
+        "score": 1.1017200222689214,
+        "selected": {
+          "area": 10880,
+          "box": [
+            380,
+            211,
+            508,
+            296
+          ],
+          "crop": [
+            356,
+            187,
+            532,
+            320
+          ],
+          "crop_rgb_sha256": "21003f4bd2d7bca171742e868d36edb123cd6c78898a6cf5528289c8e17ddbba",
+          "overlap": 0
+        }
+      },
+      "fixed": {
+        "proposal": [
+          380,
+          211,
+          508,
+          296
+        ],
+        "score": 0.8398544192314148,
+        "selected": {
+          "area": 10880,
+          "box": [
+            380,
+            211,
+            508,
+            296
+          ],
+          "crop": [
+            356,
+            187,
+            532,
+            320
+          ],
+          "crop_rgb_sha256": "21003f4bd2d7bca171742e868d36edb123cd6c78898a6cf5528289c8e17ddbba",
+          "overlap": 0
+        }
+      },
+      "input_sha256": "cf1eebe6a6204b0ed0dd363831ee14f7c0f2f6e4f8b12f7af2510294ebd0dbcc",
+      "role": "self_paste",
+      "size": [
+        768,
+        512
+      ],
+      "slot": 2,
+      "target": [
+        310,
+        236,
+        380,
+        322
+      ],
+      "target_pixels": 6020,
+      "truth_sha256": "4aeeff2a9f375cba8dcdc288b3d036c6e5a8462087f0b19ee045d596a1ad0fe9"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          327,
+          255,
+          412,
+          326
+        ],
+        "score": 1.9368410926836461,
+        "selected": {
+          "area": 6035,
+          "box": [
+            327,
+            255,
+            412,
+            326
+          ],
+          "crop": [
+            303,
+            231,
+            436,
+            350
+          ],
+          "crop_rgb_sha256": "44664cd69b49fd496712aad0df6f371b252fcb5d45758d85e5acd6e31fed3664",
+          "overlap": 6035
+        }
+      },
+      "fixed": {
+        "proposal": [
+          412,
+          186,
+          540,
+          314
+        ],
+        "score": 0.799480140209198,
+        "selected": null
+      },
+      "input_sha256": "a475cfaf0ad37845bc761b41b1fae44361aebd99016548a4b6e8e2bff1aba97c",
+      "role": "other_paste",
+      "size": [
+        768,
+        512
+      ],
+      "slot": 2,
+      "target": [
+        327,
+        255,
+        412,
+        326
+      ],
+      "target_pixels": 6035,
+      "truth_sha256": "fa98a9e819681c19acc957fb74ed65043e4959f1ad63ae0285e8c59c5bb7fc24"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          57,
+          183,
+          84,
+          241
+        ],
+        "score": 0.8802355702675951,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          334,
+          230,
+          419,
+          347
+        ],
+        "score": 0.7109002470970154,
+        "selected": null
+      },
+      "input_sha256": "16c3562ec39c3c0451110a918507b446e4057d9cfc7ffecd18d37ba4860f57d7",
+      "role": "original",
+      "size": [
+        512,
+        704
+      ],
+      "slot": 3,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "3ad7728877e078e1a672f7bc8bf7db6b30683a663524ce49441ced91ce35756c"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          56,
+          183,
+          84,
+          241
+        ],
+        "score": 0.9479426532518271,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          334,
+          230,
+          419,
+          347
+        ],
+        "score": 0.7592779994010925,
+        "selected": null
+      },
+      "input_sha256": "ac11197998897717f0f236f1e886291c96cda7bbfe0360d124035ed553a2a856",
+      "role": "global_tone",
+      "size": [
+        512,
+        704
+      ],
+      "slot": 3,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "3ad7728877e078e1a672f7bc8bf7db6b30683a663524ce49441ced91ce35756c"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          99,
+          276,
+          140,
+          321
+        ],
+        "score": 0.8845808331094351,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          334,
+          230,
+          419,
+          347
+        ],
+        "score": 0.7058771252632141,
+        "selected": null
+      },
+      "input_sha256": "d706b4e625381bd795938131e5abb30536d510398bafd78ca85eb9dc76c13e5c",
+      "role": "feathered_blur",
+      "size": [
+        512,
+        704
+      ],
+      "slot": 3,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "3ad7728877e078e1a672f7bc8bf7db6b30683a663524ce49441ced91ce35756c"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          162,
+          279,
+          196,
+          324
+        ],
+        "score": 0.7400212533236445,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          333,
+          230,
+          418,
+          347
+        ],
+        "score": 0.6956192255020142,
+        "selected": null
+      },
+      "input_sha256": "0580e1ef3503ce554c115a2bcee0abc30ab419532671ebcaff0739d966134927",
+      "role": "resize_roundtrip",
+      "size": [
+        512,
+        704
+      ],
+      "slot": 3,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "3ad7728877e078e1a672f7bc8bf7db6b30683a663524ce49441ced91ce35756c"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          161,
+          314,
+          246,
+          385
+        ],
+        "score": 1.1887664656809198,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          334,
+          230,
+          419,
+          347
+        ],
+        "score": 0.7109002470970154,
+        "selected": null
+      },
+      "input_sha256": "4c57e3de565c8a00bc5681aed01a6a1abdae544efeef0dc8a26f44d960e06d51",
+      "role": "self_paste",
+      "size": [
+        512,
+        704
+      ],
+      "slot": 3,
+      "target": [
+        161,
+        314,
+        246,
+        385
+      ],
+      "target_pixels": 6035,
+      "truth_sha256": "3c1d50d1ab590b7701f7b6a272779dc286cced999e77361e75973fc8ebcd4e5d"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          157,
+          333,
+          221,
+          410
+        ],
+        "score": 2.40843360675355,
+        "selected": {
+          "area": 4928,
+          "box": [
+            157,
+            333,
+            221,
+            410
+          ],
+          "crop": [
+            133,
+            309,
+            245,
+            434
+          ],
+          "crop_rgb_sha256": "aae2bc0cbe80997159a8fff9fdf86b2e84ca47f2cebfb82b70fbd71c8f3c1dba",
+          "overlap": 4928
+        }
+      },
+      "fixed": {
+        "proposal": [
+          334,
+          230,
+          419,
+          347
+        ],
+        "score": 0.7109002470970154,
+        "selected": null
+      },
+      "input_sha256": "5a5996f638f1b79b3366c350d3b1c3f13993626961a8018c23bd436ad7a5c8d4",
+      "role": "other_paste",
+      "size": [
+        512,
+        704
+      ],
+      "slot": 3,
+      "target": [
+        157,
+        333,
+        221,
+        410
+      ],
+      "target_pixels": 4928,
+      "truth_sha256": "429dc7a613329684d0f9affc93880e678f992033db6ce3b1165f98dfdf87fb77"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          311,
+          168,
+          364,
+          203
+        ],
+        "score": 1.1338673408950746,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          529,
+          47,
+          646,
+          138
+        ],
+        "score": 0.7693421244621277,
+        "selected": null
+      },
+      "input_sha256": "902bc553831c6fba46a10cd303282e0bd811be7650e5e7a40ddce40907393c07",
+      "role": "original",
+      "size": [
+        704,
+        544
+      ],
+      "slot": 4,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "96b6bef914f8edceba8eab862ee1fe3b339cf8faad3b739dee4ee38bb444c1a8"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          311,
+          168,
+          364,
+          203
+        ],
+        "score": 1.183984746629299,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          529,
+          47,
+          646,
+          138
+        ],
+        "score": 0.8009881973266602,
+        "selected": null
+      },
+      "input_sha256": "5e0dceaba8dc681eaa4245b4744b798b1d8d68370adf8d30d3998f84ec68923d",
+      "role": "global_tone",
+      "size": [
+        704,
+        544
+      ],
+      "slot": 4,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "96b6bef914f8edceba8eab862ee1fe3b339cf8faad3b739dee4ee38bb444c1a8"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          599,
+          145,
+          643,
+          211
+        ],
+        "score": 1.2945634303448004,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          529,
+          47,
+          646,
+          138
+        ],
+        "score": 0.7693421840667725,
+        "selected": null
+      },
+      "input_sha256": "f5520ad11a8763524b7e18ec4875ccfda7819febab96f4d357f42719392e4595",
+      "role": "feathered_blur",
+      "size": [
+        704,
+        544
+      ],
+      "slot": 4,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "96b6bef914f8edceba8eab862ee1fe3b339cf8faad3b739dee4ee38bb444c1a8"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          303,
+          168,
+          363,
+          203
+        ],
+        "score": 0.9750936038561346,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          529,
+          47,
+          646,
+          138
+        ],
+        "score": 0.7647541761398315,
+        "selected": null
+      },
+      "input_sha256": "5805308b8226092f50308d17bffed0565ab135da229469867a142cd2b6a69177",
+      "role": "resize_roundtrip",
+      "size": [
+        704,
+        544
+      ],
+      "slot": 4,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "96b6bef914f8edceba8eab862ee1fe3b339cf8faad3b739dee4ee38bb444c1a8"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          603,
+          44,
+          643,
+          211
+        ],
+        "score": 1.2556451390737131,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          268,
+          228,
+          385,
+          319
+        ],
+        "score": 0.7009170651435852,
+        "selected": null
+      },
+      "input_sha256": "c870dca2e660ad89832f9261e801ca22c67585601e401e7312be4675e236234b",
+      "role": "self_paste",
+      "size": [
+        704,
+        544
+      ],
+      "slot": 4,
+      "target": [
+        538,
+        85,
+        602,
+        162
+      ],
+      "target_pixels": 4928,
+      "truth_sha256": "a9e46399f9bcc1c55188429d9d6be2bc381355af410dbce3000406600fcc7d38"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          91,
+          91,
+          167,
+          155
+        ],
+        "score": 2.571888433853947,
+        "selected": {
+          "area": 4864,
+          "box": [
+            91,
+            91,
+            167,
+            155
+          ],
+          "crop": [
+            67,
+            67,
+            191,
+            179
+          ],
+          "crop_rgb_sha256": "39f0709c2da69bec0f2976019664e016495f0b7500ba1f41757e085339e9bdf1",
+          "overlap": 4864
+        }
+      },
+      "fixed": {
+        "proposal": [
+          529,
+          47,
+          646,
+          138
+        ],
+        "score": 0.7693421244621277,
+        "selected": null
+      },
+      "input_sha256": "481315134043c8f24aabda26147ef1a71d2caecd94093a291ddd69ec6dca780b",
+      "role": "other_paste",
+      "size": [
+        704,
+        544
+      ],
+      "slot": 4,
+      "target": [
+        91,
+        91,
+        167,
+        155
+      ],
+      "target_pixels": 4864,
+      "truth_sha256": "42f3b0203388b6c4b2028b2df6d149c680e0d446d433f2278f714236f2124471"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          271,
+          469,
+          320,
+          513
+        ],
+        "score": 1.7365273353160422,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          390,
+          279,
+          497,
+          380
+        ],
+        "score": 0.7777040600776672,
+        "selected": null
+      },
+      "input_sha256": "524b19ac1f7139d7591f8770aacbe96ac7f1805cf9093ed70fc0ba022e1c5482",
+      "role": "original",
+      "size": [
+        640,
+        608
+      ],
+      "slot": 5,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "d012f7a30b198d8ac0a7a2e6143111e0b5081254fbe3328d4587eef4d4e54509"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          271,
+          469,
+          320,
+          513
+        ],
+        "score": 1.8979457745050177,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          390,
+          279,
+          497,
+          380
+        ],
+        "score": 0.7973454594612122,
+        "selected": null
+      },
+      "input_sha256": "fd5eab76939671e6b9eeca55713fec4e22f3e4b6438422be7515fcb01f8b4170",
+      "role": "global_tone",
+      "size": [
+        640,
+        608
+      ],
+      "slot": 5,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "d012f7a30b198d8ac0a7a2e6143111e0b5081254fbe3328d4587eef4d4e54509"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          271,
+          469,
+          320,
+          513
+        ],
+        "score": 1.741621252686685,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          424,
+          384,
+          531,
+          536
+        ],
+        "score": 0.7401431202888489,
+        "selected": null
+      },
+      "input_sha256": "af8f6a4b2011e6ee57365d1d8af3c43fdc9a37bd2f2ed68199c7a675cf6dcde7",
+      "role": "feathered_blur",
+      "size": [
+        640,
+        608
+      ],
+      "slot": 5,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "d012f7a30b198d8ac0a7a2e6143111e0b5081254fbe3328d4587eef4d4e54509"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          271,
+          469,
+          320,
+          513
+        ],
+        "score": 1.3701989364224796,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          425,
+          424,
+          532,
+          525
+        ],
+        "score": 0.6858787536621094,
+        "selected": null
+      },
+      "input_sha256": "556cf1ae7e3d0054d732939d4a9d871756c8f948172a85dd9c596f1d0255f1d1",
+      "role": "resize_roundtrip",
+      "size": [
+        640,
+        608
+      ],
+      "slot": 5,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "d012f7a30b198d8ac0a7a2e6143111e0b5081254fbe3328d4587eef4d4e54509"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          271,
+          469,
+          320,
+          513
+        ],
+        "score": 1.7365278332865068,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          390,
+          279,
+          497,
+          380
+        ],
+        "score": 0.7777040600776672,
+        "selected": null
+      },
+      "input_sha256": "23f3ccb2320f446e4a7590d8d4eecc954c08ec74b2cab3c90744e1b5463730b2",
+      "role": "self_paste",
+      "size": [
+        640,
+        608
+      ],
+      "slot": 5,
+      "target": [
+        252,
+        86,
+        328,
+        150
+      ],
+      "target_pixels": 4864,
+      "truth_sha256": "d78e55aded8b006baff70caac69dd3c985ad511f37436d10ed9542dc4fc37614"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          263,
+          127,
+          333,
+          213
+        ],
+        "score": 2.0432979755171097,
+        "selected": {
+          "area": 6020,
+          "box": [
+            263,
+            127,
+            333,
+            213
+          ],
+          "crop": [
+            239,
+            103,
+            357,
+            237
+          ],
+          "crop_rgb_sha256": "f042501e2e0ed71748febb765eaea247cdf81b18a0934c24187af7fd5e298087",
+          "overlap": 6020
+        }
+      },
+      "fixed": {
+        "proposal": [
+          390,
+          279,
+          497,
+          380
+        ],
+        "score": 0.7777040600776672,
+        "selected": null
+      },
+      "input_sha256": "7c32faaa324d1041ffc9044e5129a19a514a1fe77bb00eb775e4421da00afba8",
+      "role": "other_paste",
+      "size": [
+        640,
+        608
+      ],
+      "slot": 5,
+      "target": [
+        263,
+        127,
+        333,
+        213
+      ],
+      "target_pixels": 6020,
+      "truth_sha256": "8a8e46a1e7c46af82eeb5357ce1c29e50f068caf28617ee6f11e4e560e929f2a"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          65,
+          26,
+          97,
+          54
+        ],
+        "score": 1.8858421093074424,
+        "selected": {
+          "area": 10880,
+          "box": [
+            557,
+            196,
+            685,
+            281
+          ],
+          "crop": [
+            533,
+            172,
+            709,
+            305
+          ],
+          "crop_rgb_sha256": "75ca75c622c3875fdbdde18fcdcd9f5821e22b8c18aeb5ddb6eb8b4a43e6e940",
+          "overlap": 0
+        }
+      },
+      "fixed": {
+        "proposal": [
+          557,
+          196,
+          685,
+          281
+        ],
+        "score": 1.1170204877853394,
+        "selected": {
+          "area": 10880,
+          "box": [
+            557,
+            196,
+            685,
+            281
+          ],
+          "crop": [
+            533,
+            172,
+            709,
+            305
+          ],
+          "crop_rgb_sha256": "75ca75c622c3875fdbdde18fcdcd9f5821e22b8c18aeb5ddb6eb8b4a43e6e940",
+          "overlap": 0
+        }
+      },
+      "input_sha256": "08667cb2bb81733ce363eb00efa03721cc105aaa139297e0b73db37dfeed386c",
+      "role": "original",
+      "size": [
+        768,
+        512
+      ],
+      "slot": 6,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "a6619f482fee91a315f76cdcd8705d39b6ce11077c435ccc696142e130c27762"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          65,
+          26,
+          97,
+          54
+        ],
+        "score": 2.0005650807206483,
+        "selected": {
+          "area": 10880,
+          "box": [
+            557,
+            196,
+            685,
+            281
+          ],
+          "crop": [
+            533,
+            172,
+            709,
+            305
+          ],
+          "crop_rgb_sha256": "1a0234dc9290a95767b8066ae5176a5f5b6c32225d2f39dc4fde148bf78ba7b6",
+          "overlap": 0
+        }
+      },
+      "fixed": {
+        "proposal": [
+          557,
+          196,
+          685,
+          281
+        ],
+        "score": 1.1506482362747192,
+        "selected": {
+          "area": 10880,
+          "box": [
+            557,
+            196,
+            685,
+            281
+          ],
+          "crop": [
+            533,
+            172,
+            709,
+            305
+          ],
+          "crop_rgb_sha256": "1a0234dc9290a95767b8066ae5176a5f5b6c32225d2f39dc4fde148bf78ba7b6",
+          "overlap": 0
+        }
+      },
+      "input_sha256": "4d09e0742a2e4e3b4000ddd89e86fa4cf035d4d783b56e88c526bd0b70523889",
+      "role": "global_tone",
+      "size": [
+        768,
+        512
+      ],
+      "slot": 6,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "a6619f482fee91a315f76cdcd8705d39b6ce11077c435ccc696142e130c27762"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          65,
+          26,
+          97,
+          54
+        ],
+        "score": 1.8858421093074424,
+        "selected": {
+          "area": 10880,
+          "box": [
+            557,
+            196,
+            685,
+            281
+          ],
+          "crop": [
+            533,
+            172,
+            709,
+            305
+          ],
+          "crop_rgb_sha256": "70e25175402fe9556ffce84a25dcdb59f1650b7e6b17d5ea377fb994474405a1",
+          "overlap": 0
+        }
+      },
+      "fixed": {
+        "proposal": [
+          557,
+          196,
+          685,
+          281
+        ],
+        "score": 1.0545817613601685,
+        "selected": {
+          "area": 10880,
+          "box": [
+            557,
+            196,
+            685,
+            281
+          ],
+          "crop": [
+            533,
+            172,
+            709,
+            305
+          ],
+          "crop_rgb_sha256": "70e25175402fe9556ffce84a25dcdb59f1650b7e6b17d5ea377fb994474405a1",
+          "overlap": 0
+        }
+      },
+      "input_sha256": "68c813c1263f808625930fc5be64771b513d48e079f26c536ed63c69e5ac7fc4",
+      "role": "feathered_blur",
+      "size": [
+        768,
+        512
+      ],
+      "slot": 6,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "a6619f482fee91a315f76cdcd8705d39b6ce11077c435ccc696142e130c27762"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          65,
+          26,
+          97,
+          54
+        ],
+        "score": 1.5971820404519566,
+        "selected": {
+          "area": 10880,
+          "box": [
+            557,
+            196,
+            685,
+            281
+          ],
+          "crop": [
+            533,
+            172,
+            709,
+            305
+          ],
+          "crop_rgb_sha256": "ff49885427ad2331df9a756c2f1d60415a97ba54ac2004f4d6cdb7850e1a6618",
+          "overlap": 0
+        }
+      },
+      "fixed": {
+        "proposal": [
+          557,
+          196,
+          685,
+          281
+        ],
+        "score": 0.9423205852508545,
+        "selected": {
+          "area": 10880,
+          "box": [
+            557,
+            196,
+            685,
+            281
+          ],
+          "crop": [
+            533,
+            172,
+            709,
+            305
+          ],
+          "crop_rgb_sha256": "ff49885427ad2331df9a756c2f1d60415a97ba54ac2004f4d6cdb7850e1a6618",
+          "overlap": 0
+        }
+      },
+      "input_sha256": "ea2c2ed943a8b34202971be4d4d118d1102c0c2a29dd31a9a222aa63c3733e22",
+      "role": "resize_roundtrip",
+      "size": [
+        768,
+        512
+      ],
+      "slot": 6,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "a6619f482fee91a315f76cdcd8705d39b6ce11077c435ccc696142e130c27762"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          232,
+          282,
+          302,
+          368
+        ],
+        "score": 2.7819940106599192,
+        "selected": {
+          "area": 10880,
+          "box": [
+            557,
+            196,
+            685,
+            281
+          ],
+          "crop": [
+            533,
+            172,
+            709,
+            305
+          ],
+          "crop_rgb_sha256": "75ca75c622c3875fdbdde18fcdcd9f5821e22b8c18aeb5ddb6eb8b4a43e6e940",
+          "overlap": 0
+        }
+      },
+      "fixed": {
+        "proposal": [
+          557,
+          196,
+          685,
+          281
+        ],
+        "score": 1.1170204877853394,
+        "selected": {
+          "area": 10880,
+          "box": [
+            557,
+            196,
+            685,
+            281
+          ],
+          "crop": [
+            533,
+            172,
+            709,
+            305
+          ],
+          "crop_rgb_sha256": "75ca75c622c3875fdbdde18fcdcd9f5821e22b8c18aeb5ddb6eb8b4a43e6e940",
+          "overlap": 0
+        }
+      },
+      "input_sha256": "c730228435970ec5b86aa036c7cbbd036fd0d2c3303be4f4c10e74379fe4c1e7",
+      "role": "self_paste",
+      "size": [
+        768,
+        512
+      ],
+      "slot": 6,
+      "target": [
+        232,
+        282,
+        302,
+        368
+      ],
+      "target_pixels": 6020,
+      "truth_sha256": "ca481bc70a9bc44bd708e4c33a6ade88ece07c50507b27ca734db7fde71c3ec9"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          264,
+          286,
+          349,
+          357
+        ],
+        "score": 2.0801978907932863,
+        "selected": {
+          "area": 10880,
+          "box": [
+            557,
+            196,
+            685,
+            281
+          ],
+          "crop": [
+            533,
+            172,
+            709,
+            305
+          ],
+          "crop_rgb_sha256": "75ca75c622c3875fdbdde18fcdcd9f5821e22b8c18aeb5ddb6eb8b4a43e6e940",
+          "overlap": 0
+        }
+      },
+      "fixed": {
+        "proposal": [
+          557,
+          196,
+          685,
+          281
+        ],
+        "score": 1.1170204877853394,
+        "selected": {
+          "area": 10880,
+          "box": [
+            557,
+            196,
+            685,
+            281
+          ],
+          "crop": [
+            533,
+            172,
+            709,
+            305
+          ],
+          "crop_rgb_sha256": "75ca75c622c3875fdbdde18fcdcd9f5821e22b8c18aeb5ddb6eb8b4a43e6e940",
+          "overlap": 0
+        }
+      },
+      "input_sha256": "eaa981e93ce079c6c0defaa60821ecaf615f5bb734f320afcc73430762fafb27",
+      "role": "other_paste",
+      "size": [
+        768,
+        512
+      ],
+      "slot": 6,
+      "target": [
+        264,
+        286,
+        349,
+        357
+      ],
+      "target_pixels": 6035,
+      "truth_sha256": "69e5e2a7a10bac9fe30033f6826ce84e9ee9b6f4ecfc31e24b148a1491701f94"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          266,
+          425,
+          302,
+          498
+        ],
+        "score": 2.5950870099453875,
+        "selected": {
+          "area": 14960,
+          "box": [
+            302,
+            322,
+            387,
+            498
+          ],
+          "crop": [
+            278,
+            298,
+            411,
+            522
+          ],
+          "crop_rgb_sha256": "6c0214840c5fd06d6c61a3a31a9f9fbeecb21e0df049bc529386be9d2b9346ed",
+          "overlap": 0
+        }
+      },
+      "fixed": {
+        "proposal": [
+          302,
+          322,
+          387,
+          498
+        ],
+        "score": 1.969217300415039,
+        "selected": {
+          "area": 14960,
+          "box": [
+            302,
+            322,
+            387,
+            498
+          ],
+          "crop": [
+            278,
+            298,
+            411,
+            522
+          ],
+          "crop_rgb_sha256": "6c0214840c5fd06d6c61a3a31a9f9fbeecb21e0df049bc529386be9d2b9346ed",
+          "overlap": 0
+        }
+      },
+      "input_sha256": "9a70182886746003eccb0fbc31b9f461ab7b37faada81a6548c21735c325ee96",
+      "role": "original",
+      "size": [
+        512,
+        704
+      ],
+      "slot": 7,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "3ad7728877e078e1a672f7bc8bf7db6b30683a663524ce49441ced91ce35756c"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          266,
+          425,
+          303,
+          498
+        ],
+        "score": 2.7145011442774387,
+        "selected": {
+          "area": 14960,
+          "box": [
+            302,
+            322,
+            387,
+            498
+          ],
+          "crop": [
+            278,
+            298,
+            411,
+            522
+          ],
+          "crop_rgb_sha256": "6a29529d9d237dfd6f14e0a342b2cdbd0c17d810f448ffde36565a3a76f92806",
+          "overlap": 0
+        }
+      },
+      "fixed": {
+        "proposal": [
+          302,
+          322,
+          387,
+          498
+        ],
+        "score": 2.050839900970459,
+        "selected": {
+          "area": 14960,
+          "box": [
+            302,
+            322,
+            387,
+            498
+          ],
+          "crop": [
+            278,
+            298,
+            411,
+            522
+          ],
+          "crop_rgb_sha256": "6a29529d9d237dfd6f14e0a342b2cdbd0c17d810f448ffde36565a3a76f92806",
+          "overlap": 0
+        }
+      },
+      "input_sha256": "8fdecc2b4c782d82837eebb00fa690826659175c57512afa883bc6403f0e896f",
+      "role": "global_tone",
+      "size": [
+        512,
+        704
+      ],
+      "slot": 7,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "3ad7728877e078e1a672f7bc8bf7db6b30683a663524ce49441ced91ce35756c"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          265,
+          425,
+          302,
+          498
+        ],
+        "score": 2.2650327199455655,
+        "selected": {
+          "area": 14960,
+          "box": [
+            302,
+            322,
+            387,
+            498
+          ],
+          "crop": [
+            278,
+            298,
+            411,
+            522
+          ],
+          "crop_rgb_sha256": "f7319fcd136ec66930e08ba1b0a5b5ac17c056e804c36ac2689a0230f2dd8655",
+          "overlap": 0
+        }
+      },
+      "fixed": {
+        "proposal": [
+          302,
+          322,
+          387,
+          498
+        ],
+        "score": 1.9370472431182861,
+        "selected": {
+          "area": 14960,
+          "box": [
+            302,
+            322,
+            387,
+            498
+          ],
+          "crop": [
+            278,
+            298,
+            411,
+            522
+          ],
+          "crop_rgb_sha256": "f7319fcd136ec66930e08ba1b0a5b5ac17c056e804c36ac2689a0230f2dd8655",
+          "overlap": 0
+        }
+      },
+      "input_sha256": "3bec6c26958303fbad10a9f63e17d88aebc4366fb26f04b216da7aae7ba55a17",
+      "role": "feathered_blur",
+      "size": [
+        512,
+        704
+      ],
+      "slot": 7,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "3ad7728877e078e1a672f7bc8bf7db6b30683a663524ce49441ced91ce35756c"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          266,
+          425,
+          316,
+          499
+        ],
+        "score": 2.125560773233412,
+        "selected": {
+          "area": 14960,
+          "box": [
+            302,
+            322,
+            387,
+            498
+          ],
+          "crop": [
+            278,
+            298,
+            411,
+            522
+          ],
+          "crop_rgb_sha256": "dc1f342686a7f93a7396affb7f14acebc38960b3d72ad043a725f318591f3759",
+          "overlap": 0
+        }
+      },
+      "fixed": {
+        "proposal": [
+          302,
+          322,
+          387,
+          498
+        ],
+        "score": 1.5350651741027832,
+        "selected": {
+          "area": 14960,
+          "box": [
+            302,
+            322,
+            387,
+            498
+          ],
+          "crop": [
+            278,
+            298,
+            411,
+            522
+          ],
+          "crop_rgb_sha256": "dc1f342686a7f93a7396affb7f14acebc38960b3d72ad043a725f318591f3759",
+          "overlap": 0
+        }
+      },
+      "input_sha256": "ba2ffa199399e0af4ac2a41522b2297f7623476458ebbadfa6c9d8cd67117e67",
+      "role": "resize_roundtrip",
+      "size": [
+        512,
+        704
+      ],
+      "slot": 7,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "3ad7728877e078e1a672f7bc8bf7db6b30683a663524ce49441ced91ce35756c"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          266,
+          425,
+          302,
+          498
+        ],
+        "score": 2.5950870099453875,
+        "selected": {
+          "area": 14960,
+          "box": [
+            302,
+            322,
+            387,
+            498
+          ],
+          "crop": [
+            278,
+            298,
+            411,
+            522
+          ],
+          "crop_rgb_sha256": "6c0214840c5fd06d6c61a3a31a9f9fbeecb21e0df049bc529386be9d2b9346ed",
+          "overlap": 0
+        }
+      },
+      "fixed": {
+        "proposal": [
+          302,
+          322,
+          387,
+          498
+        ],
+        "score": 1.969217300415039,
+        "selected": {
+          "area": 14960,
+          "box": [
+            302,
+            322,
+            387,
+            498
+          ],
+          "crop": [
+            278,
+            298,
+            411,
+            522
+          ],
+          "crop_rgb_sha256": "6c0214840c5fd06d6c61a3a31a9f9fbeecb21e0df049bc529386be9d2b9346ed",
+          "overlap": 0
+        }
+      },
+      "input_sha256": "14a569d180af775847d18dacee92c474f5bdb6ed2c7af1f0e12ecdc2f024883c",
+      "role": "self_paste",
+      "size": [
+        512,
+        704
+      ],
+      "slot": 7,
+      "target": [
+        91,
+        153,
+        176,
+        224
+      ],
+      "target_pixels": 6035,
+      "truth_sha256": "6c1c874604c04d320a2db50e5c089dbb264dae382be8c10bcf18dcbe694994e3"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          266,
+          425,
+          302,
+          498
+        ],
+        "score": 2.5950870099453875,
+        "selected": {
+          "area": 14960,
+          "box": [
+            302,
+            322,
+            387,
+            498
+          ],
+          "crop": [
+            278,
+            298,
+            411,
+            522
+          ],
+          "crop_rgb_sha256": "6c0214840c5fd06d6c61a3a31a9f9fbeecb21e0df049bc529386be9d2b9346ed",
+          "overlap": 0
+        }
+      },
+      "fixed": {
+        "proposal": [
+          302,
+          322,
+          387,
+          498
+        ],
+        "score": 1.9692171812057495,
+        "selected": {
+          "area": 14960,
+          "box": [
+            302,
+            322,
+            387,
+            498
+          ],
+          "crop": [
+            278,
+            298,
+            411,
+            522
+          ],
+          "crop_rgb_sha256": "6c0214840c5fd06d6c61a3a31a9f9fbeecb21e0df049bc529386be9d2b9346ed",
+          "overlap": 0
+        }
+      },
+      "input_sha256": "0911592198948c05c220847fe80b8043d9bf19d5b84e3a6e686419c8fd674409",
+      "role": "other_paste",
+      "size": [
+        512,
+        704
+      ],
+      "slot": 7,
+      "target": [
+        329,
+        178,
+        393,
+        255
+      ],
+      "target_pixels": 4928,
+      "truth_sha256": "9d5970bcc25ed1e656db754b1885be5a58365ecca96a6f0fd3edbb82701c63d0"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          38,
+          363,
+          137,
+          393
+        ],
+        "score": 0.656609903427954,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          294,
+          272,
+          411,
+          363
+        ],
+        "score": 0.41737326979637146,
+        "selected": null
+      },
+      "input_sha256": "01e11043da59f70934706e29370cbc43929663d9c57d8f9749d1e63dd31b56c3",
+      "role": "original",
+      "size": [
+        704,
+        544
+      ],
+      "slot": 8,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "96b6bef914f8edceba8eab862ee1fe3b339cf8faad3b739dee4ee38bb444c1a8"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          38,
+          363,
+          137,
+          393
+        ],
+        "score": 0.7136021946856623,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          483,
+          77,
+          600,
+          168
+        ],
+        "score": 0.4308890998363495,
+        "selected": null
+      },
+      "input_sha256": "bb5ace4d035d0b2c0582e3c310951cb3c64863e73debf018ebfe0134e064d87a",
+      "role": "global_tone",
+      "size": [
+        704,
+        544
+      ],
+      "slot": 8,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "96b6bef914f8edceba8eab862ee1fe3b339cf8faad3b739dee4ee38bb444c1a8"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          38,
+          363,
+          137,
+          393
+        ],
+        "score": 0.656609903427954,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          483,
+          77,
+          600,
+          168
+        ],
+        "score": 0.41574978828430176,
+        "selected": null
+      },
+      "input_sha256": "96d382351b80ad3683160fd6b0573a27bc9d7f7f5fd64e41c19b270266ede53a",
+      "role": "feathered_blur",
+      "size": [
+        704,
+        544
+      ],
+      "slot": 8,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "96b6bef914f8edceba8eab862ee1fe3b339cf8faad3b739dee4ee38bb444c1a8"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          486,
+          80,
+          531,
+          110
+        ],
+        "score": 0.667243461438033,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          294,
+          272,
+          411,
+          363
+        ],
+        "score": 0.4161108136177063,
+        "selected": null
+      },
+      "input_sha256": "47d5d042d1cdb45e30d9ce7bf29d263cadc3689ffcf2b546179a39d5fca54436",
+      "role": "resize_roundtrip",
+      "size": [
+        704,
+        544
+      ],
+      "slot": 8,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "96b6bef914f8edceba8eab862ee1fe3b339cf8faad3b739dee4ee38bb444c1a8"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          518,
+          90,
+          582,
+          167
+        ],
+        "score": 2.266031345253,
+        "selected": {
+          "area": 4928,
+          "box": [
+            518,
+            90,
+            582,
+            167
+          ],
+          "crop": [
+            494,
+            66,
+            606,
+            191
+          ],
+          "crop_rgb_sha256": "cd9626ec5b245b04b5e6e244cbc1a548806c4ffab5b053b19920e5d6062e1c02",
+          "overlap": 4910
+        }
+      },
+      "fixed": {
+        "proposal": [
+          465,
+          76,
+          582,
+          167
+        ],
+        "score": 0.6816095113754272,
+        "selected": null
+      },
+      "input_sha256": "c8e76a752b7eff0baf37a878434caf2cdde839442d84f105165240759e89fb05",
+      "role": "self_paste",
+      "size": [
+        704,
+        544
+      ],
+      "slot": 8,
+      "target": [
+        518,
+        90,
+        582,
+        167
+      ],
+      "target_pixels": 4910,
+      "truth_sha256": "0bb57deea5145b39f160c3c22e499575579afb636637216e660094b815e786b2"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          83,
+          83,
+          159,
+          147
+        ],
+        "score": 2.25088364578792,
+        "selected": {
+          "area": 4864,
+          "box": [
+            83,
+            83,
+            159,
+            147
+          ],
+          "crop": [
+            59,
+            59,
+            183,
+            171
+          ],
+          "crop_rgb_sha256": "1e2d788e4bf4d953d6b515cc536c289bee216aab67e8c89780d652d80ebd5176",
+          "overlap": 4864
+        }
+      },
+      "fixed": {
+        "proposal": [
+          83,
+          56,
+          200,
+          147
+        ],
+        "score": 0.5981181263923645,
+        "selected": null
+      },
+      "input_sha256": "8ddc047dbcffcdf7e3c856bc0f6e20d9c7f1d1c47066407937216f2a935ba1fa",
+      "role": "other_paste",
+      "size": [
+        704,
+        544
+      ],
+      "slot": 8,
+      "target": [
+        83,
+        83,
+        159,
+        147
+      ],
+      "target_pixels": 4864,
+      "truth_sha256": "68b765ec6aefe44163bc3baed5151adc4e244b372406425b9f906df80b4d946f"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          428,
+          368,
+          459,
+          456
+        ],
+        "score": 0.4622029204397472,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          348,
+          243,
+          561,
+          344
+        ],
+        "score": 0.5451276898384094,
+        "selected": null
+      },
+      "input_sha256": "4c3f1de15ea8ec2e194a7f4ba2958255129a24132cd9b815dfe768dc88422db5",
+      "role": "original",
+      "size": [
+        640,
+        608
+      ],
+      "slot": 9,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "d012f7a30b198d8ac0a7a2e6143111e0b5081254fbe3328d4587eef4d4e54509"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          428,
+          368,
+          459,
+          456
+        ],
+        "score": 0.5012164273401457,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          348,
+          243,
+          561,
+          344
+        ],
+        "score": 0.5602741837501526,
+        "selected": null
+      },
+      "input_sha256": "a95192a6aa5d2bf5aa811c080e9831d0e04bbb48e4e2719b9ca485560676d8bd",
+      "role": "global_tone",
+      "size": [
+        640,
+        608
+      ],
+      "slot": 9,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "d012f7a30b198d8ac0a7a2e6143111e0b5081254fbe3328d4587eef4d4e54509"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          561,
+          268,
+          619,
+          339
+        ],
+        "score": 0.4551563265377032,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          454,
+          310,
+          561,
+          462
+        ],
+        "score": 0.4717462360858917,
+        "selected": null
+      },
+      "input_sha256": "63319b9898f36cac004b4ad88fb574794aa304369518f993be4877efc63fde82",
+      "role": "feathered_blur",
+      "size": [
+        640,
+        608
+      ],
+      "slot": 9,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "d012f7a30b198d8ac0a7a2e6143111e0b5081254fbe3328d4587eef4d4e54509"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          295,
+          225,
+          398,
+          262
+        ],
+        "score": 0.4697303262629113,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          347,
+          243,
+          560,
+          344
+        ],
+        "score": 0.437764972448349,
+        "selected": null
+      },
+      "input_sha256": "473ac54ab813ad45f285b07e49aefc5b27f71201359b60b266f333f562b85664",
+      "role": "resize_roundtrip",
+      "size": [
+        640,
+        608
+      ],
+      "slot": 9,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "d012f7a30b198d8ac0a7a2e6143111e0b5081254fbe3328d4587eef4d4e54509"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          308,
+          398,
+          384,
+          462
+        ],
+        "score": 2.739351924664428,
+        "selected": {
+          "area": 4864,
+          "box": [
+            308,
+            398,
+            384,
+            462
+          ],
+          "crop": [
+            284,
+            374,
+            408,
+            486
+          ],
+          "crop_rgb_sha256": "f1565893daaf8d0fa6bb7d2094cf10b7e77e5da5d3126263df8d16b478979210",
+          "overlap": 4864
+        }
+      },
+      "fixed": {
+        "proposal": [
+          308,
+          361,
+          468,
+          462
+        ],
+        "score": 0.6885443329811096,
+        "selected": null
+      },
+      "input_sha256": "5a9f3a5ef9f33f9053b3500d1bcaf46d9f06780d145a13488718095d723a091c",
+      "role": "self_paste",
+      "size": [
+        640,
+        608
+      ],
+      "slot": 9,
+      "target": [
+        308,
+        398,
+        384,
+        462
+      ],
+      "target_pixels": 4864,
+      "truth_sha256": "62aa9b7d9ac6ca6502243ee8c51b1d8577d8e246447d7ac6433217418541c79f"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          313,
+          439,
+          383,
+          525
+        ],
+        "score": 2.3821884491564815,
+        "selected": {
+          "area": 6020,
+          "box": [
+            313,
+            439,
+            383,
+            525
+          ],
+          "crop": [
+            289,
+            415,
+            407,
+            549
+          ],
+          "crop_rgb_sha256": "95ad10c2f7111a55ecea7cf8773454fa7005fee0d3d166b464c52b16d05f96c8",
+          "overlap": 6020
+        }
+      },
+      "fixed": {
+        "proposal": [
+          313,
+          439,
+          420,
+          540
+        ],
+        "score": 0.789706289768219,
+        "selected": null
+      },
+      "input_sha256": "51631e1f5224abe1f313f91da2559206894d3087e3beb6bd523d286720c73605",
+      "role": "other_paste",
+      "size": [
+        640,
+        608
+      ],
+      "slot": 9,
+      "target": [
+        313,
+        439,
+        383,
+        525
+      ],
+      "target_pixels": 6020,
+      "truth_sha256": "fd7eb95e867ae4c30bae63fc314ad1535573f872f09c8bf66d9ec182735d0386"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          581,
+          255,
+          610,
+          297
+        ],
+        "score": 1.1772687020621955,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          581,
+          257,
+          709,
+          342
+        ],
+        "score": 0.77436763048172,
+        "selected": null
+      },
+      "input_sha256": "bbb2e57f430c276ffbbeb3b2a139dd86badd28c6900895da5e716c2ee7606e0e",
+      "role": "original",
+      "size": [
+        768,
+        512
+      ],
+      "slot": 10,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "a6619f482fee91a315f76cdcd8705d39b6ce11077c435ccc696142e130c27762"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          581,
+          255,
+          610,
+          297
+        ],
+        "score": 1.2078942948532716,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          581,
+          257,
+          709,
+          342
+        ],
+        "score": 0.798612117767334,
+        "selected": null
+      },
+      "input_sha256": "a1ae15778c47c5c67b89fd6802eacc07243822c4a753518eb9e9cf84a72dedf3",
+      "role": "global_tone",
+      "size": [
+        768,
+        512
+      ],
+      "slot": 10,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "a6619f482fee91a315f76cdcd8705d39b6ce11077c435ccc696142e130c27762"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          581,
+          255,
+          610,
+          297
+        ],
+        "score": 1.1618065749889457,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          581,
+          257,
+          709,
+          342
+        ],
+        "score": 0.7706720232963562,
+        "selected": null
+      },
+      "input_sha256": "48f77cff47487930ed53fe90f3627b04962acd94313057aef4b67d44f0873c8c",
+      "role": "feathered_blur",
+      "size": [
+        768,
+        512
+      ],
+      "slot": 10,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "a6619f482fee91a315f76cdcd8705d39b6ce11077c435ccc696142e130c27762"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          611,
+          257,
+          716,
+          302
+        ],
+        "score": 0.9697308509091176,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          581,
+          257,
+          709,
+          342
+        ],
+        "score": 0.6094005703926086,
+        "selected": null
+      },
+      "input_sha256": "5f64f0c8a5e18e1fb744fe9365433e29f18f4ce038a3aac700daf259678391f8",
+      "role": "resize_roundtrip",
+      "size": [
+        768,
+        512
+      ],
+      "slot": 10,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "a6619f482fee91a315f76cdcd8705d39b6ce11077c435ccc696142e130c27762"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          154,
+          328,
+          224,
+          414
+        ],
+        "score": 1.921719772401893,
+        "selected": {
+          "area": 6020,
+          "box": [
+            154,
+            328,
+            224,
+            414
+          ],
+          "crop": [
+            130,
+            304,
+            248,
+            438
+          ],
+          "crop_rgb_sha256": "f7d5dfb3de1241356278fca002237c27a4992ae701e8864198bf4a4a5e8f5b71",
+          "overlap": 6020
+        }
+      },
+      "fixed": {
+        "proposal": [
+          581,
+          257,
+          709,
+          342
+        ],
+        "score": 0.7743675112724304,
+        "selected": null
+      },
+      "input_sha256": "85d2d8ed6fe5b4925e0c46001e1d3ed989a9a81449a44b722130c660639bd6ce",
+      "role": "self_paste",
+      "size": [
+        768,
+        512
+      ],
+      "slot": 10,
+      "target": [
+        154,
+        328,
+        224,
+        414
+      ],
+      "target_pixels": 6020,
+      "truth_sha256": "dc7a4b3f334e71413161d43fc0e42dce7b4aa1a3344ef53fa60fadeb82662482"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          201,
+          317,
+          286,
+          388
+        ],
+        "score": 2.4330945355753406,
+        "selected": {
+          "area": 6035,
+          "box": [
+            201,
+            317,
+            286,
+            388
+          ],
+          "crop": [
+            177,
+            293,
+            310,
+            412
+          ],
+          "crop_rgb_sha256": "9221da19cfae19988570f8777586750d00bf39569c2a496218ddfd6c3d9dc7e5",
+          "overlap": 6035
+        }
+      },
+      "fixed": {
+        "proposal": [
+          581,
+          257,
+          709,
+          342
+        ],
+        "score": 0.77436763048172,
+        "selected": null
+      },
+      "input_sha256": "54b949b0276bd6988aed5fd7281c48d8966f58fce2c55ed292cef5373a9fd9cc",
+      "role": "other_paste",
+      "size": [
+        768,
+        512
+      ],
+      "slot": 10,
+      "target": [
+        201,
+        317,
+        286,
+        388
+      ],
+      "target_pixels": 6035,
+      "truth_sha256": "7a1fb96600bbe8ef13e74fa78139cc72f1645aec2ef70685aba1ff986aa08f7a"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          352,
+          332,
+          407,
+          444
+        ],
+        "score": 0.5934267297901025,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          322,
+          332,
+          407,
+          508
+        ],
+        "score": 0.41252994537353516,
+        "selected": null
+      },
+      "input_sha256": "a2431ac8dba5bb3e45337fe80488039c13cd103c02bac69df3065401057c9af1",
+      "role": "original",
+      "size": [
+        512,
+        704
+      ],
+      "slot": 11,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "3ad7728877e078e1a672f7bc8bf7db6b30683a663524ce49441ced91ce35756c"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          352,
+          332,
+          407,
+          444
+        ],
+        "score": 0.6137720470449208,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          322,
+          332,
+          407,
+          508
+        ],
+        "score": 0.43015792965888977,
+        "selected": null
+      },
+      "input_sha256": "4bde6191099c28b3fdb3cd368ae87564f03220670176fab7e039ff6b135d3c30",
+      "role": "global_tone",
+      "size": [
+        512,
+        704
+      ],
+      "slot": 11,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "3ad7728877e078e1a672f7bc8bf7db6b30683a663524ce49441ced91ce35756c"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          352,
+          332,
+          407,
+          444
+        ],
+        "score": 0.5349726157347087,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          352,
+          250,
+          437,
+          426
+        ],
+        "score": 0.39176252484321594,
+        "selected": null
+      },
+      "input_sha256": "396e55d07e460647be527b5c424c67dadfeefaf8a39b1eeb684e426e2e0b899a",
+      "role": "feathered_blur",
+      "size": [
+        512,
+        704
+      ],
+      "slot": 11,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "3ad7728877e078e1a672f7bc8bf7db6b30683a663524ce49441ced91ce35756c"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          394,
+          262,
+          437,
+          296
+        ],
+        "score": 0.6074686157009276,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          352,
+          250,
+          437,
+          426
+        ],
+        "score": 0.3979610502719879,
+        "selected": null
+      },
+      "input_sha256": "0b9e6c6c3945670e4ae67348383e8ff2b15436970495e5a97cc3e3a42d93d6a2",
+      "role": "resize_roundtrip",
+      "size": [
+        512,
+        704
+      ],
+      "slot": 11,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "3ad7728877e078e1a672f7bc8bf7db6b30683a663524ce49441ced91ce35756c"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          284,
+          465,
+          369,
+          536
+        ],
+        "score": 2.64719367669896,
+        "selected": {
+          "area": 9945,
+          "box": [
+            284,
+            419,
+            369,
+            536
+          ],
+          "crop": [
+            260,
+            395,
+            393,
+            560
+          ],
+          "crop_rgb_sha256": "93176e28bca60d4399c6c355667abbfbe3747ef63df443559c587620d004a09e",
+          "overlap": 6035
+        }
+      },
+      "fixed": {
+        "proposal": [
+          284,
+          419,
+          369,
+          536
+        ],
+        "score": 1.2382715940475464,
+        "selected": {
+          "area": 9945,
+          "box": [
+            284,
+            419,
+            369,
+            536
+          ],
+          "crop": [
+            260,
+            395,
+            393,
+            560
+          ],
+          "crop_rgb_sha256": "93176e28bca60d4399c6c355667abbfbe3747ef63df443559c587620d004a09e",
+          "overlap": 6035
+        }
+      },
+      "input_sha256": "13efaf5d441ce3bfe6fc68b6d3829ad0cca443b857f9e97facfe02f50bbfea64",
+      "role": "self_paste",
+      "size": [
+        512,
+        704
+      ],
+      "slot": 11,
+      "target": [
+        284,
+        465,
+        369,
+        536
+      ],
+      "target_pixels": 6035,
+      "truth_sha256": "ff948fd0c4ea4459456b464405c940b169c03f0faafec29b1d0e8e8394ae3d8c"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          217,
+          490,
+          281,
+          567
+        ],
+        "score": 2.0778984647871614,
+        "selected": {
+          "area": 4928,
+          "box": [
+            217,
+            490,
+            281,
+            567
+          ],
+          "crop": [
+            193,
+            466,
+            305,
+            591
+          ],
+          "crop_rgb_sha256": "a0a0b0393d97cf0d1e13132497c1a4afe84cdc566885e9c849dc6c286e49c3ab",
+          "overlap": 4928
+        }
+      },
+      "fixed": {
+        "proposal": [
+          217,
+          450,
+          302,
+          567
+        ],
+        "score": 0.5674780607223511,
+        "selected": null
+      },
+      "input_sha256": "13043f1277942eba125b96797807c67104b35fe8d0837283a94a8bafb09edcdd",
+      "role": "other_paste",
+      "size": [
+        512,
+        704
+      ],
+      "slot": 11,
+      "target": [
+        217,
+        490,
+        281,
+        567
+      ],
+      "target_pixels": 4928,
+      "truth_sha256": "35de2a52895215334f8d9f3db0fb37eb3677c01e7541e0963b6f4656c5c5d5ec"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          191,
+          143,
+          228,
+          222
+        ],
+        "score": 0.39684040841447094,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          158,
+          419,
+          275,
+          510
+        ],
+        "score": 0.4098877012729645,
+        "selected": null
+      },
+      "input_sha256": "165632f31989ac656a6484765dcc0fa5a871155295880ea9a77bb0d208448719",
+      "role": "original",
+      "size": [
+        704,
+        544
+      ],
+      "slot": 12,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "96b6bef914f8edceba8eab862ee1fe3b339cf8faad3b739dee4ee38bb444c1a8"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          99,
+          131,
+          207,
+          204
+        ],
+        "score": 0.43274498886684876,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          3,
+          364,
+          120,
+          455
+        ],
+        "score": 0.4244424104690552,
+        "selected": null
+      },
+      "input_sha256": "f967201b80700b793910eda16444d0ec045bbe95026bddef2d04112497531a4b",
+      "role": "global_tone",
+      "size": [
+        704,
+        544
+      ],
+      "slot": 12,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "96b6bef914f8edceba8eab862ee1fe3b339cf8faad3b739dee4ee38bb444c1a8"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          147,
+          465,
+          268,
+          490
+        ],
+        "score": 0.45890715766841356,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          158,
+          419,
+          275,
+          510
+        ],
+        "score": 0.409794420003891,
+        "selected": null
+      },
+      "input_sha256": "211ee86e944d5565c361f307fc896a8b1a15c33f4213193fc549f9ee9b6eda19",
+      "role": "feathered_blur",
+      "size": [
+        704,
+        544
+      ],
+      "slot": 12,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "96b6bef914f8edceba8eab862ee1fe3b339cf8faad3b739dee4ee38bb444c1a8"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          544,
+          348,
+          585,
+          395
+        ],
+        "score": 0.5031720196427992,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          407,
+          394,
+          583,
+          485
+        ],
+        "score": 0.39882296323776245,
+        "selected": null
+      },
+      "input_sha256": "fb9469cac31896217e8f7ab6ba6fd595637713113f1a28025e84e10649489f43",
+      "role": "resize_roundtrip",
+      "size": [
+        704,
+        544
+      ],
+      "slot": 12,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "96b6bef914f8edceba8eab862ee1fe3b339cf8faad3b739dee4ee38bb444c1a8"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          498,
+          95,
+          562,
+          172
+        ],
+        "score": 0.9123853864279825,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          445,
+          81,
+          562,
+          172
+        ],
+        "score": 0.46154075860977173,
+        "selected": null
+      },
+      "input_sha256": "dc0b57cf98e8d9b746e45259710ec35574b410c9def6f3b413e602e13c42d47a",
+      "role": "self_paste",
+      "size": [
+        704,
+        544
+      ],
+      "slot": 12,
+      "target": [
+        498,
+        95,
+        562,
+        172
+      ],
+      "target_pixels": 4928,
+      "truth_sha256": "c96f85b27bdaef9911cd69eda83b73ede884d025a43841650a23a4ba366939e2"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          539,
+          395,
+          613,
+          459
+        ],
+        "score": 1.4989218552792452,
+        "selected": {
+          "area": 4736,
+          "box": [
+            539,
+            395,
+            613,
+            459
+          ],
+          "crop": [
+            515,
+            371,
+            637,
+            483
+          ],
+          "crop_rgb_sha256": "00aafa0428cacf8be5876e8118c7b3c70280c00082bdecfc30933f9737c039dd",
+          "overlap": 4736
+        }
+      },
+      "fixed": {
+        "proposal": [
+          496,
+          395,
+          613,
+          486
+        ],
+        "score": 0.603436291217804,
+        "selected": null
+      },
+      "input_sha256": "46ea1eace4525e5b6a4317fdaebf1f2874ea61fb0874bfd0ea82b19803a4c1fd",
+      "role": "other_paste",
+      "size": [
+        704,
+        544
+      ],
+      "slot": 12,
+      "target": [
+        539,
+        395,
+        615,
+        459
+      ],
+      "target_pixels": 4864,
+      "truth_sha256": "a49b2af6b697634c5803253839d793d3262f70f33f3214cbb4de4d47889183eb"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          203,
+          369,
+          411,
+          415
+        ],
+        "score": 0.7800236410191869,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          202,
+          328,
+          362,
+          429
+        ],
+        "score": 0.5467904210090637,
+        "selected": null
+      },
+      "input_sha256": "591ddc67b4d4aa271c0e7836c1c30861bd45726116776a4987d4edd50b86f64a",
+      "role": "original",
+      "size": [
+        640,
+        608
+      ],
+      "slot": 13,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "d012f7a30b198d8ac0a7a2e6143111e0b5081254fbe3328d4587eef4d4e54509"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          203,
+          369,
+          411,
+          415
+        ],
+        "score": 0.8157248518197354,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          304,
+          328,
+          411,
+          429
+        ],
+        "score": 0.5854490995407104,
+        "selected": null
+      },
+      "input_sha256": "1a7a3ac97aa1ba1bc03889024e231f7df47388592b26e2ac3743d6655c2b805a",
+      "role": "global_tone",
+      "size": [
+        640,
+        608
+      ],
+      "slot": 13,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "d012f7a30b198d8ac0a7a2e6143111e0b5081254fbe3328d4587eef4d4e54509"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          300,
+          77,
+          330,
+          138
+        ],
+        "score": 0.6665213311114093,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          410,
+          374,
+          517,
+          475
+        ],
+        "score": 0.4967028498649597,
+        "selected": null
+      },
+      "input_sha256": "923bc0c5a9b794a2da292911863eb7c175b32ebdc65fca568f15203236d7ce54",
+      "role": "feathered_blur",
+      "size": [
+        640,
+        608
+      ],
+      "slot": 13,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "d012f7a30b198d8ac0a7a2e6143111e0b5081254fbe3328d4587eef4d4e54509"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          353,
+          392,
+          394,
+          440
+        ],
+        "score": 0.759261694838072,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          266,
+          328,
+          373,
+          429
+        ],
+        "score": 0.5094422698020935,
+        "selected": null
+      },
+      "input_sha256": "fed454b8c87bfdead206b3e3a852bd6b03d5e50384d546b7f1d792f3f2575ef2",
+      "role": "resize_roundtrip",
+      "size": [
+        640,
+        608
+      ],
+      "slot": 13,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "d012f7a30b198d8ac0a7a2e6143111e0b5081254fbe3328d4587eef4d4e54509"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          364,
+          326,
+          440,
+          390
+        ],
+        "score": 1.9085945414014058,
+        "selected": {
+          "area": 4864,
+          "box": [
+            364,
+            326,
+            440,
+            390
+          ],
+          "crop": [
+            340,
+            302,
+            464,
+            414
+          ],
+          "crop_rgb_sha256": "6ea7564bc531bc732301298495f5fcb773f8b1999094f4a1f0a16dd0e60fc963",
+          "overlap": 4864
+        }
+      },
+      "fixed": {
+        "proposal": [
+          204,
+          328,
+          364,
+          429
+        ],
+        "score": 0.676404595375061,
+        "selected": null
+      },
+      "input_sha256": "7e0f73b7b0da92cbcecea5ae5e43f60716a9e8a4715f1db95a755ab42332b935",
+      "role": "self_paste",
+      "size": [
+        640,
+        608
+      ],
+      "slot": 13,
+      "target": [
+        364,
+        326,
+        440,
+        390
+      ],
+      "target_pixels": 4864,
+      "truth_sha256": "b53b705dc04f772a3e92bd34c670a34bb660140de914d35e13eb0857e1372f80"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          363,
+          389,
+          433,
+          475
+        ],
+        "score": 2.2688281613799473,
+        "selected": {
+          "area": 10807,
+          "box": [
+            363,
+            374,
+            470,
+            475
+          ],
+          "crop": [
+            339,
+            350,
+            494,
+            499
+          ],
+          "crop_rgb_sha256": "94835b4214ab9ceda971d0a749a8b5e6cfd22d50eb4fbbaf1f926b3e063f8506",
+          "overlap": 6020
+        }
+      },
+      "fixed": {
+        "proposal": [
+          363,
+          374,
+          470,
+          475
+        ],
+        "score": 0.9320942759513855,
+        "selected": {
+          "area": 10807,
+          "box": [
+            363,
+            374,
+            470,
+            475
+          ],
+          "crop": [
+            339,
+            350,
+            494,
+            499
+          ],
+          "crop_rgb_sha256": "94835b4214ab9ceda971d0a749a8b5e6cfd22d50eb4fbbaf1f926b3e063f8506",
+          "overlap": 6020
+        }
+      },
+      "input_sha256": "1d19787e33c24ba29d9a3fc84a855af3496bb31e1a019e79ecc82062725996d6",
+      "role": "other_paste",
+      "size": [
+        640,
+        608
+      ],
+      "slot": 13,
+      "target": [
+        363,
+        389,
+        433,
+        475
+      ],
+      "target_pixels": 6020,
+      "truth_sha256": "2054dbbfbad49caa75166431a88e8fa6fdd3161c5fde12f683575c7204c7142b"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          443,
+          216,
+          470,
+          245
+        ],
+        "score": 0.5815356027555193,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          74,
+          303,
+          202,
+          388
+        ],
+        "score": 0.47453826665878296,
+        "selected": null
+      },
+      "input_sha256": "6a50899da14a10989a85f64afe50c088fd90cb33e99e692e70d09d66dc866640",
+      "role": "original",
+      "size": [
+        768,
+        512
+      ],
+      "slot": 14,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "a6619f482fee91a315f76cdcd8705d39b6ce11077c435ccc696142e130c27762"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          443,
+          216,
+          470,
+          245
+        ],
+        "score": 0.6139898806296378,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          74,
+          303,
+          202,
+          388
+        ],
+        "score": 0.4944537580013275,
+        "selected": null
+      },
+      "input_sha256": "91e2bee7dfbc303bc0992d7e7112363b1945ac69e5044d0b8dcfc69f0046d34e",
+      "role": "global_tone",
+      "size": [
+        768,
+        512
+      ],
+      "slot": 14,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "a6619f482fee91a315f76cdcd8705d39b6ce11077c435ccc696142e130c27762"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          110,
+          288,
+          137,
+          388
+        ],
+        "score": 0.5497157215049294,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          74,
+          303,
+          202,
+          388
+        ],
+        "score": 0.4732613265514374,
+        "selected": null
+      },
+      "input_sha256": "febcea100fc9dd369dd476002053a960cd951fc70a5f839a74a31aa929dbbbe2",
+      "role": "feathered_blur",
+      "size": [
+        768,
+        512
+      ],
+      "slot": 14,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "a6619f482fee91a315f76cdcd8705d39b6ce11077c435ccc696142e130c27762"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          313,
+          187,
+          483,
+          229
+        ],
+        "score": 0.5363385101916964,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          74,
+          303,
+          202,
+          388
+        ],
+        "score": 0.43256568908691406,
+        "selected": null
+      },
+      "input_sha256": "a4152cf4f7f12d3ce9659962ffcf930f1e59950b703c2b51b1e7ed5ad084d1e4",
+      "role": "resize_roundtrip",
+      "size": [
+        768,
+        512
+      ],
+      "slot": 14,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "a6619f482fee91a315f76cdcd8705d39b6ce11077c435ccc696142e130c27762"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          610,
+          108,
+          680,
+          194
+        ],
+        "score": 2.2015735006567843,
+        "selected": {
+          "area": 6020,
+          "box": [
+            610,
+            108,
+            680,
+            194
+          ],
+          "crop": [
+            586,
+            84,
+            704,
+            218
+          ],
+          "crop_rgb_sha256": "c908d4a271bef8308dcffb2e0263059fa39cd4efca4275ea19529a527d61d4a5",
+          "overlap": 6020
+        }
+      },
+      "fixed": {
+        "proposal": [
+          552,
+          109,
+          680,
+          194
+        ],
+        "score": 0.6386452913284302,
+        "selected": null
+      },
+      "input_sha256": "6173f9f242045d1470c183c8e0086ba32f558432fd82bb3c6d75a8154e28ef98",
+      "role": "self_paste",
+      "size": [
+        768,
+        512
+      ],
+      "slot": 14,
+      "target": [
+        610,
+        108,
+        680,
+        194
+      ],
+      "target_pixels": 6020,
+      "truth_sha256": "da38cedb7371f11312079e8f28a50bd12efbbbfea35ff405e00bc70e180ba1e0"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          138,
+          348,
+          223,
+          419
+        ],
+        "score": 2.4330512170531557,
+        "selected": {
+          "area": 10880,
+          "box": [
+            95,
+            348,
+            223,
+            433
+          ],
+          "crop": [
+            71,
+            324,
+            247,
+            457
+          ],
+          "crop_rgb_sha256": "dba2d325731dd15ccc9844e141f2df0a3b3d2ea6378c23a431dfafe0c0cc7c8f",
+          "overlap": 6035
+        }
+      },
+      "fixed": {
+        "proposal": [
+          95,
+          348,
+          223,
+          433
+        ],
+        "score": 0.8624656796455383,
+        "selected": {
+          "area": 10880,
+          "box": [
+            95,
+            348,
+            223,
+            433
+          ],
+          "crop": [
+            71,
+            324,
+            247,
+            457
+          ],
+          "crop_rgb_sha256": "dba2d325731dd15ccc9844e141f2df0a3b3d2ea6378c23a431dfafe0c0cc7c8f",
+          "overlap": 6035
+        }
+      },
+      "input_sha256": "2cf8cc62db232b7073034dd92f2028edcc0cd2c57372f8accee867b71552c4a0",
+      "role": "other_paste",
+      "size": [
+        768,
+        512
+      ],
+      "slot": 14,
+      "target": [
+        138,
+        348,
+        223,
+        419
+      ],
+      "target_pixels": 6035,
+      "truth_sha256": "807c341ecd5fae54126e703bbfca3f1ca87edcfc57b3d8c65020e17f745820c0"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          14,
+          120,
+          69,
+          151
+        ],
+        "score": 0.8603317349265225,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          365,
+          328,
+          450,
+          563
+        ],
+        "score": 0.5279691219329834,
+        "selected": null
+      },
+      "input_sha256": "bf20fc4aa3f91a0a54718a60cef1d7abbd64f95015904e6b4cb7015ba954dd3b",
+      "role": "original",
+      "size": [
+        512,
+        704
+      ],
+      "slot": 15,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "3ad7728877e078e1a672f7bc8bf7db6b30683a663524ce49441ced91ce35756c"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          14,
+          120,
+          69,
+          151
+        ],
+        "score": 0.8574388594272663,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          365,
+          328,
+          450,
+          563
+        ],
+        "score": 0.5497427582740784,
+        "selected": null
+      },
+      "input_sha256": "abdb8e0ab7b3a8cb65b4f7854bcb470266699ba4465aeaf13b61aec1f63a5e78",
+      "role": "global_tone",
+      "size": [
+        512,
+        704
+      ],
+      "slot": 15,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "3ad7728877e078e1a672f7bc8bf7db6b30683a663524ce49441ced91ce35756c"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          14,
+          120,
+          69,
+          151
+        ],
+        "score": 0.8603317349265225,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          389,
+          328,
+          474,
+          563
+        ],
+        "score": 0.5227005481719971,
+        "selected": null
+      },
+      "input_sha256": "4baa9848df3bb7f857ba167ef37788558ee739b32b19daa7d54e60b4db5237f2",
+      "role": "feathered_blur",
+      "size": [
+        512,
+        704
+      ],
+      "slot": 15,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "3ad7728877e078e1a672f7bc8bf7db6b30683a663524ce49441ced91ce35756c"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          29,
+          217,
+          58,
+          245
+        ],
+        "score": 0.6386027923795741,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          389,
+          316,
+          474,
+          433
+        ],
+        "score": 0.4340249001979828,
+        "selected": null
+      },
+      "input_sha256": "265e277655254d507b2daee76f94e4c265afaff7a3db6c18ec45d52c82c0dc3a",
+      "role": "resize_roundtrip",
+      "size": [
+        512,
+        704
+      ],
+      "slot": 15,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "3ad7728877e078e1a672f7bc8bf7db6b30683a663524ce49441ced91ce35756c"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          14,
+          120,
+          69,
+          151
+        ],
+        "score": 0.8603317349265225,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          214,
+          258,
+          299,
+          375
+        ],
+        "score": 0.6194988489151001,
+        "selected": null
+      },
+      "input_sha256": "3f6a10b71b914d9599373990e2537557762d748ef0c9baa7ecf563f64cb4ea51",
+      "role": "self_paste",
+      "size": [
+        512,
+        704
+      ],
+      "slot": 15,
+      "target": [
+        214,
+        304,
+        299,
+        375
+      ],
+      "target_pixels": 6035,
+      "truth_sha256": "0c28b7ed5b51fa5a88025e0a7cc850b518ce50516ea7337d9c5fde6421914f4a"
+    },
+    {
+      "cohort": "photo",
+      "combined": {
+        "proposal": [
+          105,
+          365,
+          169,
+          412
+        ],
+        "score": 1.3790148466722916,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          84,
+          266,
+          169,
+          383
+        ],
+        "score": 0.5863078236579895,
+        "selected": null
+      },
+      "input_sha256": "ac22a9d227c936ede2bf761f424ac825ac796f4e267de8cd5ee7e492128eacd3",
+      "role": "other_paste",
+      "size": [
+        512,
+        704
+      ],
+      "slot": 15,
+      "target": [
+        105,
+        335,
+        169,
+        412
+      ],
+      "target_pixels": 4928,
+      "truth_sha256": "9df80b2ad061cad3f3e92150f1e7d824abf6cffa2e2477e225a51184458078a5"
+    },
+    {
+      "cohort": "graphic",
+      "combined": {
+        "proposal": [
+          341,
+          74,
+          416,
+          153
+        ],
+        "score": 3.0,
+        "selected": {
+          "area": 31856,
+          "box": [
+            238,
+            76,
+            414,
+            257
+          ],
+          "crop": [
+            214,
+            52,
+            438,
+            281
+          ],
+          "crop_rgb_sha256": "19475f740f55111790b7df240c95993f00dc2cb3993076c8763c8022728bb8ee",
+          "overlap": 0
+        }
+      },
+      "fixed": {
+        "proposal": [
+          238,
+          76,
+          414,
+          257
+        ],
+        "score": 1.7460545301437378,
+        "selected": {
+          "area": 31856,
+          "box": [
+            238,
+            76,
+            414,
+            257
+          ],
+          "crop": [
+            214,
+            52,
+            438,
+            281
+          ],
+          "crop_rgb_sha256": "19475f740f55111790b7df240c95993f00dc2cb3993076c8763c8022728bb8ee",
+          "overlap": 0
+        }
+      },
+      "input_sha256": "7c4b8e627d351ef72e153e13623d0377804d5649536ec8a25cc36e975740ea93",
+      "role": "authored_graphic",
+      "size": [
+        704,
+        544
+      ],
+      "slot": 0,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "96b6bef914f8edceba8eab862ee1fe3b339cf8faad3b739dee4ee38bb444c1a8"
+    },
+    {
+      "cohort": "graphic",
+      "combined": {
+        "proposal": [
+          163,
+          81,
+          231,
+          105
+        ],
+        "score": 2.303087107092813,
+        "selected": {
+          "area": 23936,
+          "box": [
+            163,
+            74,
+            339,
+            210
+          ],
+          "crop": [
+            139,
+            50,
+            363,
+            234
+          ],
+          "crop_rgb_sha256": "d5b58ca9fa67e3d3293b92b6dbcd79d85667733ea271a01009103fecf298cb80",
+          "overlap": 0
+        }
+      },
+      "fixed": {
+        "proposal": [
+          163,
+          74,
+          339,
+          210
+        ],
+        "score": 0.8971167206764221,
+        "selected": {
+          "area": 23936,
+          "box": [
+            163,
+            74,
+            339,
+            210
+          ],
+          "crop": [
+            139,
+            50,
+            363,
+            234
+          ],
+          "crop_rgb_sha256": "d5b58ca9fa67e3d3293b92b6dbcd79d85667733ea271a01009103fecf298cb80",
+          "overlap": 0
+        }
+      },
+      "input_sha256": "463c7ccba7539aca26263e07b71837a7d11e7d84212c2fdf7946fb00b5944739",
+      "role": "resized_graphic",
+      "size": [
+        704,
+        544
+      ],
+      "slot": 0,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "96b6bef914f8edceba8eab862ee1fe3b339cf8faad3b739dee4ee38bb444c1a8"
+    },
+    {
+      "cohort": "graphic",
+      "combined": {
+        "proposal": [
+          320,
+          74,
+          395,
+          153
+        ],
+        "score": 3.0,
+        "selected": {
+          "area": 5925,
+          "box": [
+            320,
+            74,
+            395,
+            153
+          ],
+          "crop": [
+            296,
+            50,
+            419,
+            177
+          ],
+          "crop_rgb_sha256": "a58365edc0b5060715ca72d1c4c849e046b2c6303f6bcd8290f30fd366de7743",
+          "overlap": 0
+        }
+      },
+      "fixed": {
+        "proposal": [
+          165,
+          211,
+          325,
+          363
+        ],
+        "score": 0.7800585627555847,
+        "selected": null
+      },
+      "input_sha256": "18e07cc9576e8448006eb9a3cc94d2feb97fad167499a7a2c02102e69af788bd",
+      "role": "authored_graphic",
+      "size": [
+        640,
+        608
+      ],
+      "slot": 1,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "d012f7a30b198d8ac0a7a2e6143111e0b5081254fbe3328d4587eef4d4e54509"
+    },
+    {
+      "cohort": "graphic",
+      "combined": {
+        "proposal": [
+          477,
+          423,
+          550,
+          469
+        ],
+        "score": 1.954156785326253,
+        "selected": {
+          "area": 16264,
+          "box": [
+            133,
+            317,
+            240,
+            469
+          ],
+          "crop": [
+            109,
+            293,
+            264,
+            493
+          ],
+          "crop_rgb_sha256": "ecfab2f7490cb86c95d49fbe1d5224ac49a0eea609608fafd4396841845b08ae",
+          "overlap": 0
+        }
+      },
+      "fixed": {
+        "proposal": [
+          133,
+          317,
+          240,
+          469
+        ],
+        "score": 0.9043434262275696,
+        "selected": {
+          "area": 16264,
+          "box": [
+            133,
+            317,
+            240,
+            469
+          ],
+          "crop": [
+            109,
+            293,
+            264,
+            493
+          ],
+          "crop_rgb_sha256": "ecfab2f7490cb86c95d49fbe1d5224ac49a0eea609608fafd4396841845b08ae",
+          "overlap": 0
+        }
+      },
+      "input_sha256": "afa2effc8e0c82ce93843d794d7804b0773d09ded769545c1fcf6549de32f818",
+      "role": "resized_graphic",
+      "size": [
+        640,
+        608
+      ],
+      "slot": 1,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "d012f7a30b198d8ac0a7a2e6143111e0b5081254fbe3328d4587eef4d4e54509"
+    },
+    {
+      "cohort": "graphic",
+      "combined": {
+        "proposal": [
+          363,
+          74,
+          438,
+          153
+        ],
+        "score": 3.0,
+        "selected": {
+          "area": 5925,
+          "box": [
+            363,
+            74,
+            438,
+            153
+          ],
+          "crop": [
+            339,
+            50,
+            462,
+            177
+          ],
+          "crop_rgb_sha256": "3e2366561e8d843327a46566460339edd050f384ce0e1e151d8b9affa8f01d15",
+          "overlap": 0
+        }
+      },
+      "fixed": {
+        "proposal": [
+          376,
+          365,
+          632,
+          450
+        ],
+        "score": 0.4066929817199707,
+        "selected": null
+      },
+      "input_sha256": "e57e425c8b6de21002e0d74c3abbfec7463eb02bfca2a779e510dc3df36cfa10",
+      "role": "authored_graphic",
+      "size": [
+        768,
+        512
+      ],
+      "slot": 2,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "a6619f482fee91a315f76cdcd8705d39b6ce11077c435ccc696142e130c27762"
+    },
+    {
+      "cohort": "graphic",
+      "combined": {
+        "proposal": [
+          367,
+          293,
+          431,
+          317
+        ],
+        "score": 2.243161953501132,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          175,
+          338,
+          431,
+          423
+        ],
+        "score": 0.4183160662651062,
+        "selected": null
+      },
+      "input_sha256": "5cb6e50204129fb5a483aff23021ce037e31c9e7307d5317191710519a677042",
+      "role": "resized_graphic",
+      "size": [
+        768,
+        512
+      ],
+      "slot": 2,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "a6619f482fee91a315f76cdcd8705d39b6ce11077c435ccc696142e130c27762"
+    },
+    {
+      "cohort": "graphic",
+      "combined": {
+        "proposal": [
+          277,
+          74,
+          352,
+          153
+        ],
+        "score": 3.0,
+        "selected": {
+          "area": 40185,
+          "box": [
+            181,
+            157,
+            352,
+            392
+          ],
+          "crop": [
+            153,
+            129,
+            380,
+            420
+          ],
+          "crop_rgb_sha256": "a4d62106bf2157aec2bd3827f49f2c82ce8361b2971fcca8e76894931e6c8cd8",
+          "overlap": 0
+        }
+      },
+      "fixed": {
+        "proposal": [
+          181,
+          157,
+          352,
+          392
+        ],
+        "score": 1.057192087173462,
+        "selected": {
+          "area": 40185,
+          "box": [
+            181,
+            157,
+            352,
+            392
+          ],
+          "crop": [
+            153,
+            129,
+            380,
+            420
+          ],
+          "crop_rgb_sha256": "a4d62106bf2157aec2bd3827f49f2c82ce8361b2971fcca8e76894931e6c8cd8",
+          "overlap": 0
+        }
+      },
+      "input_sha256": "94ba17c20e434bb48492dcbc4753c1680ae24d94c67ca718f36d46dc7b32c22e",
+      "role": "authored_graphic",
+      "size": [
+        512,
+        704
+      ],
+      "slot": 3,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "3ad7728877e078e1a672f7bc8bf7db6b30683a663524ce49441ced91ce35756c"
+    },
+    {
+      "cohort": "graphic",
+      "combined": {
+        "proposal": [
+          163,
+          81,
+          231,
+          105
+        ],
+        "score": 2.1421302499781874,
+        "selected": {
+          "area": 22528,
+          "box": [
+            277,
+            187,
+            405,
+            363
+          ],
+          "crop": [
+            253,
+            163,
+            429,
+            387
+          ],
+          "crop_rgb_sha256": "a851ada38aff102247ea5dcd197cc796891bf9bcbd3a0758e723e115fd69494c",
+          "overlap": 0
+        }
+      },
+      "fixed": {
+        "proposal": [
+          277,
+          187,
+          405,
+          363
+        ],
+        "score": 0.8419600129127502,
+        "selected": {
+          "area": 22528,
+          "box": [
+            277,
+            187,
+            405,
+            363
+          ],
+          "crop": [
+            253,
+            163,
+            429,
+            387
+          ],
+          "crop_rgb_sha256": "a851ada38aff102247ea5dcd197cc796891bf9bcbd3a0758e723e115fd69494c",
+          "overlap": 0
+        }
+      },
+      "input_sha256": "98ad5de3a8b88bd610e57e9ef37947464a84d9c5b3927c5c9984280959223657",
+      "role": "resized_graphic",
+      "size": [
+        512,
+        704
+      ],
+      "slot": 3,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "3ad7728877e078e1a672f7bc8bf7db6b30683a663524ce49441ced91ce35756c"
+    },
+    {
+      "cohort": "graphic",
+      "combined": {
+        "proposal": [
+          150,
+          402,
+          218,
+          467
+        ],
+        "score": 3.0,
+        "selected": {
+          "area": 4420,
+          "box": [
+            150,
+            402,
+            218,
+            467
+          ],
+          "crop": [
+            126,
+            378,
+            242,
+            491
+          ],
+          "crop_rgb_sha256": "95a3437fbfcaa5e553f528f7bcb097ef11fa20831c2b0fd5e09ff7c3d85fccc4",
+          "overlap": 0
+        }
+      },
+      "fixed": {
+        "proposal": [
+          3,
+          3,
+          120,
+          94
+        ],
+        "score": 0.0,
+        "selected": null
+      },
+      "input_sha256": "502b0a1f31438eae91ddda86cbf0bca04b6c5feca9812de9b59e6191824ec402",
+      "role": "authored_graphic",
+      "size": [
+        704,
+        544
+      ],
+      "slot": 4,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "96b6bef914f8edceba8eab862ee1fe3b339cf8faad3b739dee4ee38bb444c1a8"
+    },
+    {
+      "cohort": "graphic",
+      "combined": {
+        "proposal": [
+          158,
+          272,
+          217,
+          337
+        ],
+        "score": 2.514281224629264,
+        "selected": {
+          "area": 3835,
+          "box": [
+            158,
+            272,
+            217,
+            337
+          ],
+          "crop": [
+            134,
+            248,
+            241,
+            361
+          ],
+          "crop_rgb_sha256": "30d704f8eb88db12e4fa386ad2a50f44ad17a11a978a5c04561c13bf2feb0068",
+          "overlap": 0
+        }
+      },
+      "fixed": {
+        "proposal": [
+          299,
+          402,
+          416,
+          538
+        ],
+        "score": 0.04711331054568291,
+        "selected": null
+      },
+      "input_sha256": "5483cf0cfdcdaf9811dbcb69654b1af63855e469977345f40a3725b4396ce988",
+      "role": "resized_graphic",
+      "size": [
+        704,
+        544
+      ],
+      "slot": 4,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "96b6bef914f8edceba8eab862ee1fe3b339cf8faad3b739dee4ee38bb444c1a8"
+    },
+    {
+      "cohort": "graphic",
+      "combined": {
+        "proposal": [
+          89,
+          18,
+          150,
+          77
+        ],
+        "score": 3.0,
+        "selected": {
+          "area": 43239,
+          "box": [
+            420,
+            205,
+            633,
+            408
+          ],
+          "crop": [
+            394,
+            179,
+            640,
+            434
+          ],
+          "crop_rgb_sha256": "22d5684a0d54ef8ae5c3e5473bc25602f7ba2b0d70b27e1358e86b55c447776d",
+          "overlap": 0
+        }
+      },
+      "fixed": {
+        "proposal": [
+          420,
+          205,
+          633,
+          408
+        ],
+        "score": 2.506784200668335,
+        "selected": {
+          "area": 43239,
+          "box": [
+            420,
+            205,
+            633,
+            408
+          ],
+          "crop": [
+            394,
+            179,
+            640,
+            434
+          ],
+          "crop_rgb_sha256": "22d5684a0d54ef8ae5c3e5473bc25602f7ba2b0d70b27e1358e86b55c447776d",
+          "overlap": 0
+        }
+      },
+      "input_sha256": "4ec2908467f775bba90a2572191f753debfe193094202961cf322f316fa44c72",
+      "role": "authored_graphic",
+      "size": [
+        640,
+        608
+      ],
+      "slot": 5,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "d012f7a30b198d8ac0a7a2e6143111e0b5081254fbe3328d4587eef4d4e54509"
+    },
+    {
+      "cohort": "graphic",
+      "combined": {
+        "proposal": [
+          22,
+          77,
+          81,
+          141
+        ],
+        "score": 2.4770068289401745,
+        "selected": {
+          "area": 43239,
+          "box": [
+            285,
+            141,
+            498,
+            344
+          ],
+          "crop": [
+            259,
+            115,
+            524,
+            370
+          ],
+          "crop_rgb_sha256": "349fa6d6d00bac74649bbae6270c1ed6b109e4ba3e82136ca4db74657705032e",
+          "overlap": 0
+        }
+      },
+      "fixed": {
+        "proposal": [
+          285,
+          141,
+          498,
+          344
+        ],
+        "score": 1.603239893913269,
+        "selected": {
+          "area": 43239,
+          "box": [
+            285,
+            141,
+            498,
+            344
+          ],
+          "crop": [
+            259,
+            115,
+            524,
+            370
+          ],
+          "crop_rgb_sha256": "349fa6d6d00bac74649bbae6270c1ed6b109e4ba3e82136ca4db74657705032e",
+          "overlap": 0
+        }
+      },
+      "input_sha256": "40d4c56121faa002e024ef569fa76d643d408d4a90dd1cc3e5295649e9bd0e31",
+      "role": "resized_graphic",
+      "size": [
+        640,
+        608
+      ],
+      "slot": 5,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "d012f7a30b198d8ac0a7a2e6143111e0b5081254fbe3328d4587eef4d4e54509"
+    },
+    {
+      "cohort": "graphic",
+      "combined": {
+        "proposal": [
+          89,
+          18,
+          150,
+          77
+        ],
+        "score": 3.0,
+        "selected": {
+          "area": 3599,
+          "box": [
+            89,
+            18,
+            150,
+            77
+          ],
+          "crop": [
+            65,
+            0,
+            174,
+            101
+          ],
+          "crop_rgb_sha256": "eae5f659e601533f22773baab1d490468886cf940df1c4fed9d0a30ca6331fab",
+          "overlap": 0
+        }
+      },
+      "fixed": {
+        "proposal": [
+          3,
+          3,
+          131,
+          88
+        ],
+        "score": 0.0,
+        "selected": null
+      },
+      "input_sha256": "fa57bfdb776cf16b7675364d3418ad66c82625b70409502234418bd21539c477",
+      "role": "authored_graphic",
+      "size": [
+        768,
+        512
+      ],
+      "slot": 6,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "a6619f482fee91a315f76cdcd8705d39b6ce11077c435ccc696142e130c27762"
+    },
+    {
+      "cohort": "graphic",
+      "combined": {
+        "proposal": [
+          22,
+          402,
+          81,
+          467
+        ],
+        "score": 2.4676414315830937,
+        "selected": {
+          "area": 16384,
+          "box": [
+            158,
+            345,
+            286,
+            473
+          ],
+          "crop": [
+            134,
+            321,
+            310,
+            497
+          ],
+          "crop_rgb_sha256": "f2af1d568e9e927a004ce53a6b3fabf4d02cfa526187141fe151c0e3db744e08",
+          "overlap": 0
+        }
+      },
+      "fixed": {
+        "proposal": [
+          158,
+          345,
+          286,
+          473
+        ],
+        "score": 1.6954396963119507,
+        "selected": {
+          "area": 16384,
+          "box": [
+            158,
+            345,
+            286,
+            473
+          ],
+          "crop": [
+            134,
+            321,
+            310,
+            497
+          ],
+          "crop_rgb_sha256": "f2af1d568e9e927a004ce53a6b3fabf4d02cfa526187141fe151c0e3db744e08",
+          "overlap": 0
+        }
+      },
+      "input_sha256": "53ac806c79aa3e6c1146eac089a473acff1142d5e3312bbf7cf1f28c86f11e95",
+      "role": "resized_graphic",
+      "size": [
+        768,
+        512
+      ],
+      "slot": 6,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "a6619f482fee91a315f76cdcd8705d39b6ce11077c435ccc696142e130c27762"
+    },
+    {
+      "cohort": "graphic",
+      "combined": {
+        "proposal": [
+          218,
+          83,
+          286,
+          142
+        ],
+        "score": 3.0,
+        "selected": {
+          "area": 4012,
+          "box": [
+            218,
+            83,
+            286,
+            142
+          ],
+          "crop": [
+            194,
+            59,
+            310,
+            166
+          ],
+          "crop_rgb_sha256": "3fedc523483dd3889f0eaf135152956f3ebcadf585fc20b927a52a57ce3761ce",
+          "overlap": 0
+        }
+      },
+      "fixed": {
+        "proposal": [
+          3,
+          3,
+          88,
+          120
+        ],
+        "score": 0.0,
+        "selected": null
+      },
+      "input_sha256": "78416075425ad230d87c560dff451186cd3e26d20e55bc4c153f5f969369ab1a",
+      "role": "authored_graphic",
+      "size": [
+        512,
+        704
+      ],
+      "slot": 7,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "3ad7728877e078e1a672f7bc8bf7db6b30683a663524ce49441ced91ce35756c"
+    },
+    {
+      "cohort": "graphic",
+      "combined": {
+        "proposal": [
+          22,
+          467,
+          81,
+          532
+        ],
+        "score": 2.427968621155306,
+        "selected": {
+          "area": 3835,
+          "box": [
+            22,
+            467,
+            81,
+            532
+          ],
+          "crop": [
+            0,
+            443,
+            105,
+            556
+          ],
+          "crop_rgb_sha256": "d13f3e6f25f92b2f50cfb9bf705828c57200382554a717124b9793a101811604",
+          "overlap": 0
+        }
+      },
+      "fixed": {
+        "proposal": [
+          293,
+          281,
+          421,
+          398
+        ],
+        "score": 0.4327632486820221,
+        "selected": null
+      },
+      "input_sha256": "4018db8a15561298f9b9def95c0a1990f1dcd78affbe4811ff83ab1273ac3894",
+      "role": "resized_graphic",
+      "size": [
+        512,
+        704
+      ],
+      "slot": 7,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "3ad7728877e078e1a672f7bc8bf7db6b30683a663524ce49441ced91ce35756c"
+    },
+    {
+      "cohort": "graphic",
+      "combined": {
+        "proposal": [
+          542,
+          346,
+          605,
+          481
+        ],
+        "score": 3.0,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          3,
+          3,
+          120,
+          94
+        ],
+        "score": 0.0,
+        "selected": null
+      },
+      "input_sha256": "0616795de14f3313250f78ba465ec2925fcc45bba83908f9b930705a684217e5",
+      "role": "authored_graphic",
+      "size": [
+        704,
+        544
+      ],
+      "slot": 8,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "96b6bef914f8edceba8eab862ee1fe3b339cf8faad3b739dee4ee38bb444c1a8"
+    },
+    {
+      "cohort": "graphic",
+      "combined": {
+        "proposal": [
+          542,
+          346,
+          605,
+          481
+        ],
+        "score": 2.7058384115754626,
+        "selected": {
+          "area": 10647,
+          "box": [
+            426,
+            390,
+            543,
+            481
+          ],
+          "crop": [
+            402,
+            366,
+            567,
+            505
+          ],
+          "crop_rgb_sha256": "2591976fe8db723d6f8521cf80c8670e4467674e1513b7b14935d3c202151616",
+          "overlap": 0
+        }
+      },
+      "fixed": {
+        "proposal": [
+          426,
+          390,
+          543,
+          481
+        ],
+        "score": 1.7394815683364868,
+        "selected": {
+          "area": 10647,
+          "box": [
+            426,
+            390,
+            543,
+            481
+          ],
+          "crop": [
+            402,
+            366,
+            567,
+            505
+          ],
+          "crop_rgb_sha256": "2591976fe8db723d6f8521cf80c8670e4467674e1513b7b14935d3c202151616",
+          "overlap": 0
+        }
+      },
+      "input_sha256": "6d5406814cd8c9be579529640fdc8d5c29c6a6b6de34eab8fb659709189fee24",
+      "role": "resized_graphic",
+      "size": [
+        704,
+        544
+      ],
+      "slot": 8,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "96b6bef914f8edceba8eab862ee1fe3b339cf8faad3b739dee4ee38bb444c1a8"
+    },
+    {
+      "cohort": "graphic",
+      "combined": {
+        "proposal": [
+          490,
+          443,
+          553,
+          545
+        ],
+        "score": 3.0,
+        "selected": {
+          "area": 6426,
+          "box": [
+            490,
+            443,
+            553,
+            545
+          ],
+          "crop": [
+            466,
+            419,
+            577,
+            569
+          ],
+          "crop_rgb_sha256": "195f73a974c2eda5ee43cc735ba82eb68b006448f3e0b34120518cd90d4b3f61",
+          "overlap": 0
+        }
+      },
+      "fixed": {
+        "proposal": [
+          24,
+          49,
+          184,
+          201
+        ],
+        "score": 0.5021145939826965,
+        "selected": null
+      },
+      "input_sha256": "d7273363e7eb8971c145ce37de2a05a62e857a0e1ea22e3c024ca287dbc9df43",
+      "role": "authored_graphic",
+      "size": [
+        640,
+        608
+      ],
+      "slot": 9,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "d012f7a30b198d8ac0a7a2e6143111e0b5081254fbe3328d4587eef4d4e54509"
+    },
+    {
+      "cohort": "graphic",
+      "combined": {
+        "proposal": [
+          490,
+          443,
+          553,
+          545
+        ],
+        "score": 2.7138368137868802,
+        "selected": {
+          "area": 16160,
+          "box": [
+            452,
+            444,
+            612,
+            545
+          ],
+          "crop": [
+            428,
+            420,
+            636,
+            569
+          ],
+          "crop_rgb_sha256": "1453f400628c3a5c8191c9c5dc5e880db822f7fe4c0a15491eb2bde09b77315e",
+          "overlap": 0
+        }
+      },
+      "fixed": {
+        "proposal": [
+          452,
+          444,
+          612,
+          545
+        ],
+        "score": 1.1065797805786133,
+        "selected": {
+          "area": 16160,
+          "box": [
+            452,
+            444,
+            612,
+            545
+          ],
+          "crop": [
+            428,
+            420,
+            636,
+            569
+          ],
+          "crop_rgb_sha256": "1453f400628c3a5c8191c9c5dc5e880db822f7fe4c0a15491eb2bde09b77315e",
+          "overlap": 0
+        }
+      },
+      "input_sha256": "f78843c36fe563d193c8782b47791f77c444d2359345504922d61d930286bf0b",
+      "role": "resized_graphic",
+      "size": [
+        640,
+        608
+      ],
+      "slot": 9,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "d012f7a30b198d8ac0a7a2e6143111e0b5081254fbe3328d4587eef4d4e54509"
+    },
+    {
+      "cohort": "graphic",
+      "combined": {
+        "proposal": [
+          338,
+          306,
+          401,
+          449
+        ],
+        "score": 3.0,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          3,
+          3,
+          131,
+          88
+        ],
+        "score": 0.0,
+        "selected": null
+      },
+      "input_sha256": "89661cf2392f40b33f3783dc4def8057f33d4428ccf4c7f595f1eaade25ed311",
+      "role": "authored_graphic",
+      "size": [
+        768,
+        512
+      ],
+      "slot": 10,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "a6619f482fee91a315f76cdcd8705d39b6ce11077c435ccc696142e130c27762"
+    },
+    {
+      "cohort": "graphic",
+      "combined": {
+        "proposal": [
+          210,
+          349,
+          273,
+          449
+        ],
+        "score": 2.862471372638494,
+        "selected": null
+      },
+      "fixed": {
+        "proposal": [
+          273,
+          264,
+          529,
+          349
+        ],
+        "score": 0.16766181588172913,
+        "selected": null
+      },
+      "input_sha256": "90a589862a556b4c4845faa26dcafeb5b40d36cf98997502a28334722dd310a7",
+      "role": "resized_graphic",
+      "size": [
+        768,
+        512
+      ],
+      "slot": 10,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "a6619f482fee91a315f76cdcd8705d39b6ce11077c435ccc696142e130c27762"
+    },
+    {
+      "cohort": "graphic",
+      "combined": {
+        "proposal": [
+          386,
+          573,
+          449,
+          641
+        ],
+        "score": 3.0,
+        "selected": {
+          "area": 4284,
+          "box": [
+            386,
+            573,
+            449,
+            641
+          ],
+          "crop": [
+            362,
+            549,
+            473,
+            665
+          ],
+          "crop_rgb_sha256": "e4f8493bb267cbeada15ef408a134132946188dd785d2589bba643a8d197b61c",
+          "overlap": 0
+        }
+      },
+      "fixed": {
+        "proposal": [
+          3,
+          3,
+          88,
+          120
+        ],
+        "score": 0.0,
+        "selected": null
+      },
+      "input_sha256": "b86792bd3a19380a6d2324107cab53ee8d93359f13da976f9991b2115501fb2d",
+      "role": "authored_graphic",
+      "size": [
+        512,
+        704
+      ],
+      "slot": 11,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "3ad7728877e078e1a672f7bc8bf7db6b30683a663524ce49441ced91ce35756c"
+    },
+    {
+      "cohort": "graphic",
+      "combined": {
+        "proposal": [
+          386,
+          573,
+          449,
+          641
+        ],
+        "score": 2.6580281042494422,
+        "selected": {
+          "area": 4284,
+          "box": [
+            386,
+            573,
+            449,
+            641
+          ],
+          "crop": [
+            362,
+            549,
+            473,
+            665
+          ],
+          "crop_rgb_sha256": "499ebfac9d8d8bb38e73ae8c39cbb16af212eec2088f2fbe14b334aa4b760ec9",
+          "overlap": 0
+        }
+      },
+      "fixed": {
+        "proposal": [
+          64,
+          58,
+          235,
+          234
+        ],
+        "score": 0.4746274948120117,
+        "selected": null
+      },
+      "input_sha256": "cf069109a6cac3a18179c9393e2e63452b4169e00cb62680538b8d477146351e",
+      "role": "resized_graphic",
+      "size": [
+        512,
+        704
+      ],
+      "slot": 11,
+      "target": null,
+      "target_pixels": 0,
+      "truth_sha256": "3ad7728877e078e1a672f7bc8bf7db6b30683a663524ce49441ced91ce35756c"
+    }
+  ],
+  "schema": "chipmunk.image-small-boundary-control-stress/1",
+  "summary": {
+    "added_control_groups": 7,
+    "added_control_views": 10,
+    "added_graphic_groups": 7,
+    "added_untouched_photo_groups": 0,
+    "added_useful": 17,
+    "added_useful_groups": 13,
+    "added_wrong_paste_views": 0,
+    "by_role": {
+      "authored_graphic": {
+        "added_flags": 7,
+        "added_useful": 0,
+        "added_wrong_pastes": 0,
+        "combined_flags": 10,
+        "combined_useful": 0,
+        "fixed_flags": 3,
+        "fixed_useful": 0,
+        "views": 12
+      },
+      "feathered_blur": {
+        "added_flags": 0,
+        "added_useful": 0,
+        "added_wrong_pastes": 0,
+        "combined_flags": 2,
+        "combined_useful": 0,
+        "fixed_flags": 2,
+        "fixed_useful": 0,
+        "views": 16
+      },
+      "global_tone": {
+        "added_flags": 0,
+        "added_useful": 0,
+        "added_wrong_pastes": 0,
+        "combined_flags": 2,
+        "combined_useful": 0,
+        "fixed_flags": 2,
+        "fixed_useful": 0,
+        "views": 16
+      },
+      "original": {
+        "added_flags": 0,
+        "added_useful": 0,
+        "added_wrong_pastes": 0,
+        "combined_flags": 2,
+        "combined_useful": 0,
+        "fixed_flags": 2,
+        "fixed_useful": 0,
+        "views": 16
+      },
+      "other_paste": {
+        "added_flags": 10,
+        "added_useful": 10,
+        "added_wrong_pastes": 0,
+        "combined_flags": 14,
+        "combined_useful": 12,
+        "fixed_flags": 4,
+        "fixed_useful": 2,
+        "views": 16
+      },
+      "resize_roundtrip": {
+        "added_flags": 0,
+        "added_useful": 0,
+        "added_wrong_pastes": 0,
+        "combined_flags": 2,
+        "combined_useful": 0,
+        "fixed_flags": 2,
+        "fixed_useful": 0,
+        "views": 16
+      },
+      "resized_graphic": {
+        "added_flags": 3,
+        "added_useful": 0,
+        "added_wrong_pastes": 0,
+        "combined_flags": 10,
+        "combined_useful": 0,
+        "fixed_flags": 7,
+        "fixed_useful": 0,
+        "views": 12
+      },
+      "self_paste": {
+        "added_flags": 7,
+        "added_useful": 7,
+        "added_wrong_pastes": 0,
+        "combined_flags": 11,
+        "combined_useful": 8,
+        "fixed_flags": 4,
+        "fixed_useful": 1,
+        "views": 16
+      }
+    },
+    "criteria": {
+      "additional_per_paste_type": true,
+      "additional_useful": true,
+      "additional_useful_groups": true,
+      "all_incumbent_crops_preserved": true,
+      "control_groups": false,
+      "control_views": false,
+      "graphic_groups": false,
+      "untouched_photo_groups": true,
+      "wrong_paste_locations": true
+    },
+    "qualifies": false
+  }
+}

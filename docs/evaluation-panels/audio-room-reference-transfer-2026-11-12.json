@@ -1,0 +1,250 @@
+{
+  "assets": {
+    "pellav2_detector.pt": "d21aedfb52e2f87706c2753715a29665482b0f4a034800c31579df5d458559ac",
+    "silero_vad.jit": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720",
+    "w2v-bert-config.json": "f5572bd5998b68182e9c328a43127ed21fed687f6910497136b91a4e3b0e3675"
+  },
+  "audit": {
+    "decision_cells": 10,
+    "new_forwards": 144,
+    "pairs": 24,
+    "result_sha256": "2da28032a3b4a21a16bf9178cefc07f680829f0f85f769e03c436db2c0285510",
+    "reviewer_sha256": "f608a7ae32283afe88ac0891bfc0d90b1fb44f100f0ee249d833a7eb737624e9",
+    "score_windows": 240,
+    "waveform_reconstruction": "Independent NumPy FFT and overlap-add replay; no model inference."
+  },
+  "commitments": {
+    "audit": "5cc54b4fac3722c0d3cb0e90a655ded1f0e08ef0d4069f4eba53e4d18c8271f9",
+    "freeze": "6a4edc734e7a87d7ab309d2ccf743d8a809ed84017a2aa2db6976faa9d20443f",
+    "points": "13af8e058ca617a716699a860972ad1db6c385624c7f15472b79f3fb5767ccbb",
+    "result": "2da28032a3b4a21a16bf9178cefc07f680829f0f85f769e03c436db2c0285510"
+  },
+  "followup": {
+    "aligned_reference": false,
+    "stationary_reference": false
+  },
+  "ledgers_sha256": {
+    "confirmation": "190612655e041787df919fc6f4d22e59225b897b86276b57dd1fb15e27477a7a",
+    "selection": "c88c7c533a6a2adf44e7c6797230107beb20ee44a34df91507ef70aa2920d435"
+  },
+  "method": {
+    "advance": "For either spectral reference to justify a real separate-channel trial, require at least two useful held locations from two generator families, at most one genuine false flag and at least four correctly ordered matched pairs.",
+    "aligned_reference": "Use the exact within-window competing component's time-frequency power. This is a stronger aligned background-only research reference.",
+    "components": "The known competing component is the exact signed sample difference between each quantized mixture and its gain-matched dry source. This has at most one LSB of rounding ambiguity.",
+    "decision": "Select the higher raw log-odds response among the two previously admitted windows. A useful location requires at least 0.30 IoU and 0.50 recall of the known insert.",
+    "masks": "Apply sqrt(clip(1 - background_power / max(mixture_power, 1e-12), 0.04, 1)) on the original complex spectrum with zero-padded 512-point Hann analysis and 128-sample hops. Recover the exact-length integer PCM by overlap-add and round to signed 16 bits.",
+    "parent": "Reuse all 48 exact six-second tracks and the previously admitted 1\u20133 and 3\u20135 second windows. Keep host, room and generator assignments fixed.",
+    "points": "Keep the previous maximum-genuine point for observed and dry. For each new view, strictly exceed the maximum across its six processed and six dry genuine selection controls.",
+    "residual_20db": "Subtract 90% of the known competing waveform amplitude. Leave a controlled 20 dB quieter competing component without time-frequency filtering.",
+    "stationary_reference": "Estimate mean competing-component power from the parts strictly outside each scored two-second window, using unpadded 512-point periodic Hann frames at 128-sample hops. No within-window samples enter this estimate."
+  },
+  "panels": {
+    "confirmation": {
+      "counts": {
+        "aligned_reference": {
+          "matched_ai_above": 2,
+          "matched_ai_below": 1,
+          "matched_tie": 3,
+          "ordinary_inconclusive": 6,
+          "partial_ai_inconclusive": 6,
+          "useful_before_point": 2
+        },
+        "dry_reference": {
+          "matched_ai_above": 4,
+          "matched_ai_below": 2,
+          "ordinary_flag": 1,
+          "ordinary_inconclusive": 5,
+          "partial_ai_flag": 4,
+          "partial_ai_inconclusive": 2,
+          "useful_before_point": 5,
+          "useful_clone": 1,
+          "useful_flag": 3,
+          "useful_stock": 2
+        },
+        "observed": {
+          "matched_ai_above": 2,
+          "matched_ai_below": 3,
+          "matched_tie": 1,
+          "ordinary_inconclusive": 6,
+          "partial_ai_inconclusive": 6,
+          "useful_before_point": 3
+        },
+        "residual_20db": {
+          "matched_ai_above": 2,
+          "matched_ai_below": 2,
+          "matched_tie": 2,
+          "ordinary_inconclusive": 6,
+          "partial_ai_inconclusive": 6,
+          "useful_before_point": 2
+        },
+        "stationary_reference": {
+          "matched_ai_above": 2,
+          "matched_ai_below": 4,
+          "ordinary_inconclusive": 6,
+          "partial_ai_inconclusive": 6,
+          "useful_before_point": 3
+        }
+      },
+      "median_reconstruction_snr_db": {
+        "aligned_reference": 5.096380422651576,
+        "observed": -5.155471091922937,
+        "residual_20db": 14.844410777186702,
+        "stationary_reference": -3.64361888547562
+      },
+      "rooms": {
+        "1": {
+          "aligned_reference": {
+            "ordinary_inconclusive": 3,
+            "partial_ai_inconclusive": 3,
+            "useful_before_point": 1
+          },
+          "dry_reference": {
+            "ordinary_flag": 1,
+            "ordinary_inconclusive": 2,
+            "partial_ai_flag": 2,
+            "partial_ai_inconclusive": 1,
+            "useful_before_point": 2,
+            "useful_flag": 1,
+            "useful_stock": 1
+          },
+          "observed": {
+            "ordinary_inconclusive": 3,
+            "partial_ai_inconclusive": 3,
+            "useful_before_point": 1
+          },
+          "residual_20db": {
+            "ordinary_inconclusive": 3,
+            "partial_ai_inconclusive": 3,
+            "useful_before_point": 1
+          },
+          "stationary_reference": {
+            "ordinary_inconclusive": 3,
+            "partial_ai_inconclusive": 3,
+            "useful_before_point": 1
+          }
+        },
+        "2": {
+          "aligned_reference": {
+            "ordinary_inconclusive": 3,
+            "partial_ai_inconclusive": 3,
+            "useful_before_point": 1
+          },
+          "dry_reference": {
+            "ordinary_inconclusive": 3,
+            "partial_ai_flag": 2,
+            "partial_ai_inconclusive": 1,
+            "useful_before_point": 3,
+            "useful_clone": 1,
+            "useful_flag": 2,
+            "useful_stock": 1
+          },
+          "observed": {
+            "ordinary_inconclusive": 3,
+            "partial_ai_inconclusive": 3,
+            "useful_before_point": 2
+          },
+          "residual_20db": {
+            "ordinary_inconclusive": 3,
+            "partial_ai_inconclusive": 3,
+            "useful_before_point": 1
+          },
+          "stationary_reference": {
+            "ordinary_inconclusive": 3,
+            "partial_ai_inconclusive": 3,
+            "useful_before_point": 2
+          }
+        }
+      }
+    },
+    "selection": {
+      "counts": {
+        "aligned_reference": {
+          "matched_ai_above": 1,
+          "matched_ai_below": 5,
+          "ordinary_inconclusive": 6,
+          "partial_ai_inconclusive": 6,
+          "useful_before_point": 1
+        },
+        "dry_reference": {
+          "matched_ai_above": 5,
+          "matched_ai_below": 1,
+          "ordinary_inconclusive": 6,
+          "partial_ai_flag": 3,
+          "partial_ai_inconclusive": 3,
+          "useful_before_point": 2
+        },
+        "observed": {
+          "matched_ai_above": 2,
+          "matched_ai_below": 3,
+          "matched_tie": 1,
+          "ordinary_inconclusive": 6,
+          "partial_ai_inconclusive": 6,
+          "useful_before_point": 1
+        },
+        "residual_20db": {
+          "matched_ai_above": 2,
+          "matched_ai_below": 4,
+          "ordinary_inconclusive": 6,
+          "partial_ai_inconclusive": 6,
+          "useful_before_point": 2
+        },
+        "stationary_reference": {
+          "matched_ai_above": 5,
+          "matched_ai_below": 1,
+          "ordinary_inconclusive": 6,
+          "partial_ai_inconclusive": 6,
+          "useful_before_point": 1
+        }
+      },
+      "median_reconstruction_snr_db": {
+        "aligned_reference": 3.772329350728141,
+        "observed": -5.670710725758713,
+        "residual_20db": 14.326406393582161,
+        "stationary_reference": -3.546621449396714
+      },
+      "rooms": {
+        "0": {
+          "aligned_reference": {
+            "ordinary_inconclusive": 6,
+            "partial_ai_inconclusive": 6,
+            "useful_before_point": 1
+          },
+          "dry_reference": {
+            "ordinary_inconclusive": 6,
+            "partial_ai_flag": 3,
+            "partial_ai_inconclusive": 3,
+            "useful_before_point": 2
+          },
+          "observed": {
+            "ordinary_inconclusive": 6,
+            "partial_ai_inconclusive": 6,
+            "useful_before_point": 1
+          },
+          "residual_20db": {
+            "ordinary_inconclusive": 6,
+            "partial_ai_inconclusive": 6,
+            "useful_before_point": 2
+          },
+          "stationary_reference": {
+            "ordinary_inconclusive": 6,
+            "partial_ai_inconclusive": 6,
+            "useful_before_point": 1
+          }
+        }
+      }
+    }
+  },
+  "parent_public_sha256": "845288ccfa9126652b10d5fd8c73e954f88c26d0a48a6eb6a7361d450bcdc22d",
+  "points_sha256": "13af8e058ca617a716699a860972ad1db6c385624c7f15472b79f3fb5767ccbb",
+  "runtime": {
+    "confirmation": {
+      "rss_bytes": 2902294528,
+      "seconds": 40.031074208000064
+    },
+    "selection": {
+      "rss_bytes": 2892890112,
+      "seconds": 40.17740133299958
+    }
+  },
+  "schema": "chipmunk.audio-room-reference-transfer/1"
+}

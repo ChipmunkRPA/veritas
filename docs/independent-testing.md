@@ -63,6 +63,9 @@ target-speech leakage separately for centered and displaced recordings.
 The [short edits in longer voice recordings](audio-overlap-window-transfer-2026-11-12.md)
 replays four window rules on exact six-second waveforms, with known edit times
 and matched loud competing speech.
+The [controlled room-speech attenuation study](audio-room-reference-transfer-2026-11-12.md)
+reconstructs each changed waveform independently and checks whether improved
+foreground reconstruction recovers short synthetic inserts.
 
 The [video tracking evidence fixture](video-face-tracking-context.md) exercises
 the same recorded values in a saved packet and report without downloading
@@ -178,6 +181,9 @@ with separate counts for lost edit locations and added ordinary flags.
 The [flexible single-image boundary comparison](image-boundary-extent-transfer-2026-11-12.md)
 has a standalone public count verifier and native source replays. It records
 small- and large-region tradeoffs and the separate follow-up on generated edits.
+The [photo and graphics stress test](image-small-boundary-control-stress-2026-11-12.md)
+replays 120 exact views and separates correct paste locations from ordinary
+photo and graphics flags. Its public verifier needs no media or weights.
 The [image flip comparison](image-regional-flip-transfer-2026-11-11.md) tests
 whether the sensitive detector reproduces a region under a reversible transform.
 It separately reports useful regions, processing controls and untouched photos.
@@ -200,6 +206,9 @@ unrelated paragraphs and quoted text.
 The [public-archive writing comparison](writing-archive-source-evidence-2026-11-12.md)
 replays exact archive matching and source offsets, including a publisher
 correction, missing-source controls, and quoted text that must be ignored.
+The [joined paragraph study](writing-archive-joined-layout-2026-11-12.md)
+replays source identification and exact changed-word coordinates when an
+archival text copy loses its paragraph breaks.
 
 The [offline video interval verifier](video-native-interval-replay-2026-11-11.md)
 checks the source clock and exact before, during and after pixels with Python

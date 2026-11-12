@@ -1040,16 +1040,16 @@ public scalar receipts from local experiments. The commands need only the
 standard library, with no media, model downloads, accounts, or running app.
 
 ```sh
-python3 -B -IS backend/scripts/review_image_matched_detail_transfer.py docs/evaluation-panels/image-matched-detail-transfer-2026-11-12.json
-python3 -B -IS backend/scripts/review_video_lossy_sequence_transfer.py docs/evaluation-panels/video-lossy-sequence-transfer-2026-11-12.json
-python3 -B -IS backend/scripts/review_audio_communication_serving_grid.py
-python3 -B -IS backend/scripts/review_writing_adaptive_word_transfer.py docs/evaluation-panels/writing-adaptive-word-transfer-2026-11-12.json
+python3 -B -IS backend/scripts/review_image_thumbnail_mirror_transfer.py docs/evaluation-panels/image-thumbnail-mirror-2026-11-12.json
+python3 -B -IS backend/scripts/review_grid_articulatory_timing.py docs/evaluation-panels/grid-articulatory-timing-2026-11-12.json
+python3 -B -IS backend/scripts/review_audio_short_codec_transfer.py
+python3 -B -IS backend/scripts/review_writing_multiblock_independent_transfer.py docs/evaluation-panels/writing-multiblock-independent-2026-11-12.json
 ```
 
-The checks recalculate [image region overlap and decisions](image-matched-detail-transfer-2026-11-12.md),
-[video copy ranges and false flags](video-lossy-sequence-transfer-2026-11-12.md),
-[audio timing and false-alarm groups](audio-communication-serving-grid-2026-11-12.md),
-and [writing span overlap and decisions](writing-adaptive-word-transfer-2026-11-12.md).
+The checks recalculate [mirrored-image region overlap](image-thumbnail-mirror-2026-11-12.md),
+[signed video timing errors](grid-articulatory-timing-2026-11-12.md),
+[audio codec points and false alarms](audio-short-codec-transfer-2026-11-12.md),
+and [writing span overlap and fit arithmetic](writing-multiblock-independent-2026-11-12.md).
 Each linked method explains the extra inputs required to replay source media.
 For an independent result, use the issue form below and include the commit,
 command, output, and the claim you verified or challenged.

@@ -225,6 +225,7 @@ class Settings(BaseSettings):
     document_archive_comparison_enabled: bool = False  # Authenticated development-only public archive comparison.
     image_affine_copy_review: bool = False  # Development-only dense masks for same-image geometric copies.
     image_jpeg_block_copy_review: bool = False  # Development-only exact JPEG brightness-block fallback.
+    image_jpeg_offgrid_copy_review: bool = False  # Development-only texture and perimeter matching for selected JPEGs.
     image_embedded_pair_review: bool = False  # Development-only exact differences between two matching PNG areas.
     image_whole_review_python: Path | None = None  # Optional local Python environment for the supplementary image check.
 

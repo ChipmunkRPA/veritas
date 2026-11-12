@@ -250,6 +250,17 @@ describe('image evidence cards', () => {
     expect(screen.queryByText(explanation)).toBeNull()
   })
 
+  it('shows the between-block JPEG measurement beside the two source crops', () => {
+    show({ ...copyOnly, version: 'image-evidence-18', copy_translation: { ...translated,
+      basis: 'jpeg_offgrid_texture', jpeg_block_review: 'no_pair', jpeg_offgrid_review: { status: 'supported_pair',
+        measurement: { interior_mean: 1.24537, interior_p90: 1.99181, perimeter_means: [14.24, 40.29, 41.18, 24.47] } } } })
+    const translation = within(screen.getByRole('region', { name: 'Copy similarity without mirroring' }))
+    expect(translation.getByText(/Mean RGB difference inside 1.25 of 255 levels/)).toBeTruthy()
+    expect(translation.getByText(/14.24, 40.29, 41.18, 24.47/)).toBeTruthy()
+    expect(translation.getByRole('link', { name: 'Area A in the original image' })).toBeTruthy()
+    expect(translation.getByRole('link', { name: 'Area B in the original image' })).toBeTruthy()
+  })
+
   it('pairs each geometric comparison mask with the native source crop and exact area link', () => {
     show({ ...copyOnly, version: 'image-evidence-13', copy_affine: geometric })
     const check = within(screen.getByRole('region', { name: 'Geometric copy comparison' }))

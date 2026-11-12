@@ -18,7 +18,13 @@ from test_image_packets import packet_fixture as packet_fixture
 from app.core.canonical import canonical_hash, canonical_json
 from app.core.config import settings
 from app.detectors.image import copy_move, copy_similarity
-from app.evidence import image_jpeg_copy_blocks_source, image_packets_v5, image_packets_v7, service
+from app.evidence import (
+    image_jpeg_copy_blocks_source,
+    image_jpeg_offgrid_source,
+    image_packets_v5,
+    image_packets_v7,
+    service,
+)
 from app.evidence.image_copy_similarity_binding import V7, V8, V9, V10, V11, VERSION, supported_size
 from app.evidence.image_embedded_pair_binding import base_document
 from app.reports import engine, image_evidence, snapshot, verify_image_source
@@ -407,6 +413,64 @@ def test_jpeg_copy_evidence_proves_equal_encoded_blocks_and_rejects_altered_coor
             image_jpeg_copy_blocks_source.verify(original, [wrong_pair])
         db.commit()
     monkeypatch.setattr(settings, "image_jpeg_block_copy_review", False)
+    reply = f.client.get(f"/api/v2/analyses/{aid}/evidence-packets", headers=f.viewer)
+    assert reply.status_code == 200 and reply.json() == evidence
+    for role, asset in pair["artifacts"].items():
+        response = f.client.get(asset["url"], headers=f.viewer)
+        assert response.status_code == 200
+        with Image.open(io.BytesIO(response.content)) as plate:
+            assert plate.tobytes() == rgb.crop(image_packets_v7.box_bounds(pair["regions"][role], *rgb.size)).tobytes()
+
+
+def test_offgrid_jpeg_evidence_replays_native_color_measurements(evidence_http, monkeypatch):
+    f = evidence_http
+    aid = "image-unprepared"
+    monkeypatch.setattr(settings, "environment", "dev")
+    monkeypatch.setattr(settings, "image_jpeg_offgrid_copy_review", True)
+    monkeypatch.setattr(settings, "image_affine_copy_review", True)
+    monkeypatch.setattr(settings, "image_embedded_pair_review", True)
+    rng = np.random.default_rng(4)
+    pixels = cv2.resize(rng.integers(0, 256, (110, 110, 3), dtype=np.uint8), (640, 640), interpolation=cv2.INTER_CUBIC)
+    pixels[123:171, 137:177] = pixels[442:490, 434:474]
+    raw = io.BytesIO()
+    Image.fromarray(pixels).save(raw, "JPEG", quality=90, subsampling=2)
+    original = raw.getvalue()
+    with Image.open(io.BytesIO(original)) as source:
+        rgb = source.convert("RGB")
+    raw.seek(0)
+    raw.truncate()
+    Image.fromarray(pixels).save(raw, "JPEG", quality=82, subsampling=2)
+    assert not image_jpeg_offgrid_source.supported(raw.getvalue())
+    with Session(f.engine) as db:
+        analysis = db.get(Analysis, aid)
+        stored = f.store.put_bytes(original)
+        analysis.sha256, analysis.size_bytes = stored.sha256, stored.size_bytes
+        result = copy.deepcopy(specimen("image", "standard").result)
+        result.update(exhibits=[], signals=[], findings=[])
+        result["input"]["sha256"] = stored.sha256
+        analysis.result_hash = canonical_hash(result)
+        f.store.put_bytes(canonical_json(result))
+        evidence = service.persist_packet_set(db, analysis, f.store, result=result)
+        base = base_document(evidence)
+        assert base["version"] == "image-evidence-19"
+        check = base["copy_translation"]
+        assert check["basis"] == "jpeg_offgrid_texture" and check["jpeg_block_review"] == "no_pair"
+        assert check["authorship_confidence_contribution"] == 0 and check["jpeg_offgrid_review"]["status"] == "supported_pair"
+        pair, = check["pairs"]
+        measurement = check["jpeg_offgrid_review"]["measurement"]
+        image_jpeg_offgrid_source.verify(original, np.asarray(rgb), pair, measurement)
+        with pytest.raises(ValueError, match="differs from the original crop"):
+            image_jpeg_offgrid_source.verify(original, np.asarray(rgb), pair,
+                                            {**measurement, "interior_mean": measurement["interior_mean"] + .01})
+        wrong = copy.deepcopy(base)
+        for role in ("area_a", "area_b"):
+            wrong["copy_translation"]["pairs"][0]["regions"][role]["w"] = 31
+            wrong["copy_translation"]["pairs"][0]["artifacts"][role]["width"] = 31
+        wrong["sha256"] = image_packets_v5.packet_hash(wrong)
+        with pytest.raises(image_packets_v7.PacketIntegrityError, match="outside its measured geometry"):
+            image_packets_v7.validate_packet_set(wrong, **image_packets_v5._binding(analysis))
+        db.commit()
+    monkeypatch.setattr(settings, "image_jpeg_offgrid_copy_review", False)
     reply = f.client.get(f"/api/v2/analyses/{aid}/evidence-packets", headers=f.viewer)
     assert reply.status_code == 200 and reply.json() == evidence
     for role, asset in pair["artifacts"].items():

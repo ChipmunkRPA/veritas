@@ -11,7 +11,13 @@ from zipfile import ZipFile
 from PIL import Image, ImageOps
 
 from app.evidence import image_embedded_pair_binding as embedded_pair
-from app.evidence.image_copy_similarity_binding import JPEG_BLOCK_BASIS, ROLES, box_bounds, copy_records
+from app.evidence.image_copy_similarity_binding import (
+    JPEG_BLOCK_BASIS,
+    OFFGRID_BASIS,
+    ROLES,
+    box_bounds,
+    copy_records,
+)
 
 MAX_SOURCE_BYTES = 60 * 1024 * 1024
 MAX_SOURCE_PIXELS = 80_000_000
@@ -148,6 +154,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         orientation = int(raw.getexif().get(274, 1) or 1)
         with ImageOps.exif_transpose(raw) as oriented:
             source = oriented.convert('RGB')
+    translation = evidence.get('copy_translation') or {}
+    offgrid = translation.get('basis') == OFFGRID_BASIS
     with source:
         if (declared.get('coordinate_space') != 'exif-oriented-original'
                 or source.size != (declared.get('width'), declared.get('height'))
@@ -161,6 +169,12 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         masks = _verify_geometric_masks(archive, evidence, source)
         repeated = _verify_flip_masks(archive, repeat_checks, source.size)
         quality = _verify_source_quality(archive, quality_checks, source, data)
+        if offgrid:
+            import numpy as np
+
+            from app.evidence.image_jpeg_offgrid_source import verify
+
+            verify(data, np.asarray(source), translation['pairs'][0], translation['jpeg_offgrid_review']['measurement'])
     if pair is not None:
         from app.evidence import image_embedded_pair_pixels as embedded_pixels
 
@@ -170,7 +184,6 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         with original_png:
             embedded_pixels.verify(original_png, pair, lambda digest: archive.read(f'assets/{digest}.png'))
     matched_blocks = 0
-    translation = evidence.get('copy_translation') or {}
     if translation.get('basis') == JPEG_BLOCK_BASIS:
         from app.evidence.image_jpeg_copy_blocks_source import verify
 
@@ -184,6 +197,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         detail += f' Recomputed {masks} geometric copy masks from the source image.'
     if matched_blocks:
         detail += f' Reproduced {matched_blocks} matching encoded JPEG brightness blocks per paired area in total.'
+    if offgrid:
+        detail += ' Recomputed the recorded color differences inside and around the two selected JPEG crops.'
     if repeated:
         detail += f' Recomputed repeat-pass overlap for {repeated} source regions from their recorded masks.'
     if quality:

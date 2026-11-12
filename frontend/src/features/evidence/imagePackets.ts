@@ -109,7 +109,7 @@ export interface ImageEvidenceSet {
   schema: 'chipmunk.image-evidence/1'
   status: 'ready' | 'not_generated' | 'not_applicable'
   id: string | null
-  version: 'image-evidence-1' | 'image-evidence-2' | 'image-evidence-3' | 'image-evidence-4' | 'image-evidence-5' | 'image-evidence-6' | 'image-evidence-7' | 'image-evidence-8' | 'image-evidence-9' | 'image-evidence-10' | 'image-evidence-11' | 'image-evidence-12' | 'image-evidence-13' | 'image-evidence-14' | 'image-evidence-15' | 'image-evidence-16' | 'image-evidence-17'
+  version: 'image-evidence-1' | 'image-evidence-2' | 'image-evidence-3' | 'image-evidence-4' | 'image-evidence-5' | 'image-evidence-6' | 'image-evidence-7' | 'image-evidence-8' | 'image-evidence-9' | 'image-evidence-10' | 'image-evidence-11' | 'image-evidence-12' | 'image-evidence-13' | 'image-evidence-14' | 'image-evidence-15' | 'image-evidence-16' | 'image-evidence-17' | 'image-evidence-18' | 'image-evidence-19'
   sha256: string | null
   analysis_id: string
   revision: number
@@ -123,15 +123,19 @@ export interface ImageEvidenceSet {
   comparison?: ImageRegionalComparison
   copy_similarity?: ImageCopyEvidence<'same-image-reflection-similarity/1', 'horizontal_reflection'>
   copy_translation?: ImageCopyEvidence<'same-image-copy-similarity/1', 'same_orientation'> & {
-    basis?: 'native_patch_alignment' | 'geometric_features' | 'jpeg_brightness_blocks' | null
+    basis?: 'native_patch_alignment' | 'geometric_features' | 'jpeg_brightness_blocks' | 'jpeg_offgrid_texture' | null
     jpeg_block_review?: 'supported_pair' | 'no_pair' | 'unsupported_profile' | 'unavailable' | 'unassessed_match_budget' | null
+    jpeg_offgrid_review?: {
+      status: 'supported_pair' | 'no_pair' | 'unsupported_profile' | 'unavailable' | 'unassessed_match_budget'
+      measurement: { interior_mean: number; interior_p90: number; perimeter_means: (number | null)[] } | null
+    } | null
   }
   copy_affine?: Omit<ImageCopyEvidence<'same-image-affine-support/1' | 'same-image-affine-support/2', never>, 'pairs' | 'coordinate_space'> & {
     proposal_search?: { basis: 'source' | 'reduced'; width: number; height: number } | null
     pairs: { id: string; regions: Record<'area_a' | 'area_b', Box>; selected_pixels: Record<'area_a' | 'area_b', number>
       artifacts: Record<'area_a' | 'area_b' | 'mask_a' | 'mask_b', EvidenceImage> }[]
   }
-  prior_embedded_pair_evidence?: { id: string; version: 'image-evidence-12' | 'image-evidence-13' | 'image-evidence-14'; sha256: string }
+  prior_embedded_pair_evidence?: { id: string; version: 'image-evidence-12' | 'image-evidence-13' | 'image-evidence-14' | 'image-evidence-16' | 'image-evidence-17' | 'image-evidence-18' | 'image-evidence-19'; sha256: string }
   embedded_pair_difference?: ImageEmbeddedPairDifference
 }
 

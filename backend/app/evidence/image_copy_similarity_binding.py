@@ -15,10 +15,13 @@ V13 = "image-evidence-13"
 V14 = "image-evidence-14"
 JPEG_BLOCK_VERSION = "image-evidence-16"
 JPEG_BLOCK_AFFINE_VERSION = "image-evidence-17"
-JPEG_BLOCK_VERSIONS = frozenset({JPEG_BLOCK_VERSION, JPEG_BLOCK_AFFINE_VERSION})
+JPEG_OFFGRID_VERSION = "image-evidence-18"
+JPEG_OFFGRID_AFFINE_VERSION = "image-evidence-19"
+JPEG_OFFGRID_VERSIONS = frozenset({JPEG_OFFGRID_VERSION, JPEG_OFFGRID_AFFINE_VERSION})
+JPEG_BLOCK_VERSIONS = JPEG_OFFGRID_VERSIONS | {JPEG_BLOCK_VERSION, JPEG_BLOCK_AFFINE_VERSION}
 VERSION = V12
-AFFINE_VERSIONS = frozenset({V13, V14, JPEG_BLOCK_AFFINE_VERSION})
-CREDENTIAL_VERSIONS = AFFINE_VERSIONS | {V12, JPEG_BLOCK_VERSION}
+AFFINE_VERSIONS = frozenset({V13, V14, JPEG_BLOCK_AFFINE_VERSION, JPEG_OFFGRID_AFFINE_VERSION})
+CREDENTIAL_VERSIONS = AFFINE_VERSIONS | {V12, JPEG_BLOCK_VERSION, JPEG_OFFGRID_VERSION}
 TRANSLATION_VERSIONS = CREDENTIAL_VERSIONS | {V10, V11}
 BASIS_VERSIONS = CREDENTIAL_VERSIONS | {V11}
 REFLECTION_VERSIONS = frozenset({V7, V8, V9}) | TRANSLATION_VERSIONS
@@ -33,6 +36,16 @@ JPEG_BLOCK_STATUS_TEXT = {
     "unsupported_profile": "The brightness-block check requires an upright JPEG within its tested size and encoding scope.",
     "unavailable": "The JPEG brightness-block check could not read the encoded blocks.",
     "unassessed_match_budget": "The brightness-block check found too many competing offsets.",
+}
+OFFGRID_MIN_SIDE = 32
+OFFGRID_MAX_SIDE = 118
+OFFGRID_BASIS = "jpeg_offgrid_texture"
+OFFGRID_STATUS_TEXT = {
+    "supported_pair": "The aligned crops have closely matching color values inside and more different surroundings on at least three sides.",
+    "no_pair": "The between-block JPEG check found no qualifying repeated area at least 32 pixels wide and tall.",
+    "unsupported_profile": "The between-block check covers upright color JPEGs with the tested standard compression tables.",
+    "unavailable": "The between-block JPEG check could not complete.",
+    "unassessed_match_budget": "Too many competing offsets prevented a distinct between-block comparison.",
 }
 SKIPPED_CREDENTIALS_TEXT = "Trusted Content Credentials cover this image and declare AI involvement. The two copy checks were skipped."
 TRANSLATION_NOTE = (
@@ -176,9 +189,38 @@ def copy_records(document: dict) -> Iterator[dict]:
         yield document["copy_affine"]
 
 
+def _validate_offgrid(record: dict | None, jpeg_status: str | None) -> bool:
+    if record is None:
+        if jpeg_status == "no_pair":
+            raise ValueError("Completed JPEG block comparison lacks its between-block coverage")
+        return False
+    if not isinstance(record, dict) or set(record) != {"status", "measurement"} or jpeg_status != "no_pair":
+        raise ValueError("Between-block JPEG coverage does not follow the completed block comparison")
+    status, measurement = record["status"], record["measurement"]
+    if status not in OFFGRID_STATUS_TEXT or (status == "supported_pair") != (measurement is not None):
+        raise ValueError("Between-block JPEG comparison has an invalid status")
+    if measurement is None:
+        return False
+    if not isinstance(measurement, dict) or set(measurement) != {"interior_mean", "interior_p90", "perimeter_means"}:
+        raise ValueError("Between-block JPEG comparison has an invalid measurement")
+    mean, p90, perimeter = (measurement[k] for k in ("interior_mean", "interior_p90", "perimeter_means"))
+    if not (_rgb_level(mean, 3.2) and _rgb_level(p90, 6) and isinstance(perimeter, list) and len(perimeter) == 4
+            and all(value is None or _rgb_level(value, 255) for value in perimeter)):
+        raise ValueError("Between-block JPEG differences are outside the measured limits")
+    # Recorded levels are rounded to five decimal places.
+    if sum(value is not None and value + 0.00005 >= max(7, 2.5 * mean) for value in perimeter) < 3:
+        raise ValueError("Between-block JPEG comparison lacks surrounding contrast")
+    return True
+
+
+def _rgb_level(value: object, ceiling: float) -> bool:
+    return isinstance(value, (float, int)) and not isinstance(value, bool) and 0 <= value <= ceiling
+
+
 def _validate_check(document: dict, record: dict, size: tuple[int, int], supported: bool, *, reflected: bool) -> None:
     has_basis = not reflected and document["version"] in BASIS_VERSIONS
     has_jpeg_review = not reflected and document["version"] in JPEG_BLOCK_VERSIONS
+    has_offgrid_review = not reflected and document["version"] in JPEG_OFFGRID_VERSIONS
     fields = {
         "schema",
         "source_sha256",
@@ -192,6 +234,8 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
         fields.add("basis")
     if has_jpeg_review:
         fields.add("jpeg_block_review")
+    if has_offgrid_review:
+        fields.add("jpeg_offgrid_review")
     if not isinstance(record, dict) or set(record) != fields:
         raise ValueError("Copy similarity has an invalid record")
     status, pairs = record["status"], record["pairs"]
@@ -211,18 +255,27 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
         or bool(pairs) != (status == "supported_pair")
     ):
         raise ValueError("Copy similarity has an inconsistent source, result or coverage")
+    offgrid_pair = False
+    if has_offgrid_review:
+        offgrid_pair = _validate_offgrid(record["jpeg_offgrid_review"], record["jpeg_block_review"])
+        if record["jpeg_offgrid_review"] is not None and (not supported or document["source"]["exif_orientation"] != 1):
+            raise ValueError("Between-block JPEG coverage is outside its native source geometry")
+    if offgrid_pair and len(pairs) != 1:
+        raise ValueError("Between-block JPEG evidence must contain one measured pair")
     if has_basis:
         basis = record["basis"]
         expected = ("native_patch_alignment", "geometric_features") if pairs else (None,)
         if has_jpeg_review and record["jpeg_block_review"] == "supported_pair":
             expected = (JPEG_BLOCK_BASIS,)
+        if offgrid_pair:
+            expected = (OFFGRID_BASIS,)
         if basis not in expected:
             raise ValueError("Copy similarity has an invalid matching basis")
     jpeg_pair = has_jpeg_review and record["jpeg_block_review"] == "supported_pair"
     if has_jpeg_review:
         jpeg_status = record["jpeg_block_review"]
         if (jpeg_status is not None and (jpeg_status not in JPEG_BLOCK_STATUS_TEXT
-                or (status != "no_pair" and not (status == "supported_pair" and jpeg_pair))
+                or (status != "no_pair" and not (status == "supported_pair" and (jpeg_pair or offgrid_pair)))
                 or (jpeg_status != "unsupported_profile" and document["source"]["exif_orientation"] != 1))
                 or jpeg_pair and not pairs):
             raise ValueError("JPEG block coverage differs from the completed copy check")
@@ -254,8 +307,11 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
         ax, ay, aw, ah = boxes[0]
         bx, by, bw, bh = boxes[1]
         overlaps = ax < bx + bw and bx < ax + aw and ay < by + bh and by < ay + ah
-        equal_size = reflected or record.get("basis") in {"native_patch_alignment", JPEG_BLOCK_BASIS}
+        equal_size = reflected or offgrid_pair or record.get("basis") in {"native_patch_alignment", JPEG_BLOCK_BASIS}
         if overlaps or (equal_size and (aw, ah) != (bw, bh)):
             raise ValueError("The paired areas must be separate and aligned areas must share a native size")
         if jpeg_pair and (any(value % 8 for box in boxes for value in box) or not 24 <= min(aw, ah) <= max(aw, ah) <= 128):
             raise ValueError("JPEG copy areas do not follow the supported encoded block grid")
+        if offgrid_pair and (not ((bx - ax) % 8 or (by - ay) % 8)
+                             or not OFFGRID_MIN_SIDE <= min(aw, ah) <= max(aw, ah) <= OFFGRID_MAX_SIDE):
+            raise ValueError("Between-block JPEG pair is outside its measured geometry")

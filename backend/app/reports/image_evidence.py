@@ -108,6 +108,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
     from app.evidence import image_copy_affine_binding as affine
     from app.evidence.image_copy_similarity_binding import (
         JPEG_BLOCK_STATUS_TEXT,
+        OFFGRID_STATUS_TEXT,
         SKIPPED_CREDENTIALS,
         status_text,
     )
@@ -142,7 +143,14 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                                     if field == "copy_similarity" or status == SKIPPED_CREDENTIALS
                                     else TRANSLATION_STATUS[status])
         if field == "copy_translation":
-            if (jpeg_review := check.get("jpeg_block_review")) is not None:
+            if review := check.get("jpeg_offgrid_review"):
+                check["basis_text"] = OFFGRID_STATUS_TEXT[review["status"]]
+                if measured := review["measurement"]:
+                    perimeter = ", ".join("unavailable" if value is None else f"{value:.2f}"
+                                          for value in measured["perimeter_means"])
+                    check["basis_text"] += (f" Mean RGB difference inside {measured['interior_mean']:.2f} of 255 levels. "
+                                             f"Surrounding differences (left, right, top, bottom) {perimeter}.")
+            elif (jpeg_review := check.get("jpeg_block_review")) is not None:
                 check["basis_text"] = JPEG_BLOCK_STATUS_TEXT[jpeg_review]
             elif check["pairs"] and (basis := check.get("basis")) in TRANSLATION_BASIS_TEXT:
                 check["basis_text"] = TRANSLATION_BASIS_TEXT[basis]

@@ -24,7 +24,11 @@ from app.evidence.image_copy_similarity_binding import (
     JPEG_BLOCK_BASIS,
     JPEG_BLOCK_VERSION,
     JPEG_BLOCK_VERSIONS,
+    JPEG_OFFGRID_AFFINE_VERSION,
+    JPEG_OFFGRID_VERSION,
+    JPEG_OFFGRID_VERSIONS,
     NOTE,
+    OFFGRID_BASIS,
     PAIR_LIMIT,
     REFLECTION_VERSIONS,
     ROLES,
@@ -52,7 +56,8 @@ from app.storage.db import Analysis, Artefact
 from app.storage.objects import ObjectStore
 
 CREATOR = "image-evidence-packets/10"
-_CREATORS = {JPEG_BLOCK_AFFINE_VERSION: "image-evidence-packets/15", JPEG_BLOCK_VERSION: "image-evidence-packets/14",
+_CREATORS = {JPEG_OFFGRID_AFFINE_VERSION: "image-evidence-packets/17", JPEG_OFFGRID_VERSION: "image-evidence-packets/16",
+             JPEG_BLOCK_AFFINE_VERSION: "image-evidence-packets/15", JPEG_BLOCK_VERSION: "image-evidence-packets/14",
              affine.LARGE_VERSION: "image-evidence-packets/12", affine.VERSION: "image-evidence-packets/11",
              VERSION: CREATOR, V11: "image-evidence-packets/9",
              V10: "image-evidence-packets/8", V9: "image-evidence-packets/7",
@@ -65,6 +70,8 @@ PacketIntegrityError = prior.PacketIntegrityError
 def _active_version() -> str:
     if settings.environment != "dev":
         return VERSION
+    if settings.image_jpeg_offgrid_copy_review:
+        return JPEG_OFFGRID_AFFINE_VERSION if settings.image_affine_copy_review else JPEG_OFFGRID_VERSION
     if settings.image_jpeg_block_copy_review:
         return JPEG_BLOCK_AFFINE_VERSION if settings.image_affine_copy_review else JPEG_BLOCK_VERSION
     return affine.LARGE_VERSION if settings.image_affine_copy_review else VERSION
@@ -145,6 +152,14 @@ def validate_assets(document: dict, store: ObjectStore) -> None:
 
         try:
             verify(legacy._verified(store, document["source"]["sha256"]), translation["pairs"])
+        except (OSError, ValueError) as error:
+            raise PacketIntegrityError(str(error)) from error
+    if translation.get("basis") == OFFGRID_BASIS:
+        from app.evidence.image_jpeg_offgrid_source import verify
+
+        try:
+            verify(legacy._verified(store, document["source"]["sha256"]), np.asarray(source), translation["pairs"][0],
+                   translation["jpeg_offgrid_review"]["measurement"])
         except (OSError, ValueError) as error:
             raise PacketIntegrityError(str(error)) from error
 
@@ -278,7 +293,7 @@ def build_packet_set(
     size = document["source"]["width"], document["source"]["height"]
     status, boxes = "unsupported_geometry", []
     translation_status, translations, basis, source = "unsupported_geometry", [], None, None
-    jpeg_status = None
+    jpeg_status = offgrid_review = None
     skipped = result_skip(result) is not None
     if skipped:
         status = translation_status = SKIPPED_CREDENTIALS
@@ -299,12 +314,23 @@ def build_packet_set(
                     jpeg_status, extra = "unavailable", []
                 if extra:
                     translation_status, translations, basis = "supported_pair", extra, JPEG_BLOCK_BASIS
+                elif version in JPEG_OFFGRID_VERSIONS and jpeg_status == "no_pair":
+                    from app.evidence.image_jpeg_offgrid_source import review
+
+                    try:
+                        offgrid_review, extra = review(data, rgb)
+                    except (cv2.error, OSError, ValueError, SystemError):
+                        offgrid_review, extra = {"status": "unavailable", "measurement": None}, []
+                    if extra:
+                        translation_status, translations, basis = "supported_pair", extra, OFFGRID_BASIS
     document["copy_similarity"] = _copy_record(db, analysis, store, document, source, status, boxes, reflected=True)
     document["copy_translation"] = _copy_record(db, analysis, store, document, source, translation_status,
                                                 translations, reflected=False)
     document["copy_translation"]["basis"] = basis
     if version in JPEG_BLOCK_VERSIONS:
         document["copy_translation"]["jpeg_block_review"] = jpeg_status
+    if version in JPEG_OFFGRID_VERSIONS:
+        document["copy_translation"]["jpeg_offgrid_review"] = offgrid_review
     if version in AFFINE_VERSIONS:
         document[affine.KEY] = _affine_record(db, analysis, store, document, source, skip=skipped)
     document = json.loads(canonical_json(document))

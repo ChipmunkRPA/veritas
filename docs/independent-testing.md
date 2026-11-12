@@ -25,6 +25,9 @@ local export.
 The [large-image copy comparison](image-affine-native-scale-2026-11-11.md#reproduce)
 provides a licensed roster, exact source commitments, and a separate reader
 for the PNG and JPEG localization and ordinary-control results.
+The [between-block JPEG copy comparison](image-offgrid-copy-transfer-2026-11-12.md)
+provides a source-separated confirmation and tests whether the signed
+evidence can reproduce both crop positions and their color measurements.
 
 The [earlier-image orientation comparison](image-reference-orientation-transfer-2026-11-12.md)
 reconstructs right-angle rotations and reflections. Its Pillow-only reader

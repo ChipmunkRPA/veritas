@@ -76,6 +76,7 @@ const copyBasisText = {
   native_patch_alignment: 'The match aligns patches on the original pixel grid.',
   geometric_features: 'The match uses corresponding features in both areas.',
   jpeg_brightness_blocks: 'The complete encoded brightness blocks matched exactly in both areas.',
+  jpeg_offgrid_texture: 'The aligned crops have closely matching color values inside and more different surroundings on at least three sides.',
 }
 
 const jpegCoverageText = {
@@ -84,6 +85,14 @@ const jpegCoverageText = {
   unsupported_profile: 'The brightness-block check requires an upright JPEG within its tested size and encoding scope.',
   unavailable: 'The JPEG brightness-block check could not read the encoded blocks.',
   unassessed_match_budget: 'The brightness-block check found too many competing offsets.',
+}
+
+const offgridCoverageText = {
+  supported_pair: copyBasisText.jpeg_offgrid_texture,
+  no_pair: 'The between-block JPEG check found no qualifying repeated area at least 32 pixels wide and tall.',
+  unsupported_profile: 'The between-block check covers upright color JPEGs with the tested standard compression tables.',
+  unavailable: 'The between-block JPEG check could not complete.',
+  unassessed_match_budget: 'Too many competing offsets prevented a distinct between-block comparison.',
 }
 
 function CopySimilarity({ set, field, token, mediaReady }: {
@@ -96,12 +105,14 @@ function CopySimilarity({ set, field, token, mediaReady }: {
   const heading = geometric ? 'Geometric copy comparison' : reflected ? 'Same-image copy similarity' : 'Copy similarity without mirroring'
   const sectionId = `image-${field.replace('_', '-')}`
   const baseVersion = set.prior_embedded_pair_evidence?.version ?? set.version
-  const wide = (geometric && ['image-evidence-14', 'image-evidence-17'].includes(baseVersion)) || (reflected &&
+  const wide = (geometric && ['image-evidence-14', 'image-evidence-17', 'image-evidence-19'].includes(baseVersion)) || (reflected &&
     ['image-evidence-9', 'image-evidence-10', 'image-evidence-11', 'image-evidence-12', 'image-evidence-13',
-      'image-evidence-14', 'image-evidence-16', 'image-evidence-17'].includes(baseVersion))
+      'image-evidence-14', 'image-evidence-16', 'image-evidence-17', 'image-evidence-18', 'image-evidence-19'].includes(baseVersion))
   const basis = field === 'copy_translation' && set.copy_translation?.basis
   const jpegReview = field === 'copy_translation' && set.copy_translation?.jpeg_block_review
-  const basisText = jpegReview ? jpegCoverageText[jpegReview] : basis && check.pairs.length > 0 && copyBasisText[basis]
+  const offgrid = field === 'copy_translation' ? set.copy_translation?.jpeg_offgrid_review : undefined
+  const basisText = offgrid ? offgridCoverageText[offgrid.status] : jpegReview ? jpegCoverageText[jpegReview]
+    : basis && check.pairs.length > 0 && copyBasisText[basis]
   const proposalSearch = geometric ? set.copy_affine?.proposal_search : undefined
   const statusText = {
     supported_pair: geometric ? 'Matching detail was found after geometric alignment.'
@@ -119,6 +130,10 @@ function CopySimilarity({ set, field, token, mediaReady }: {
     <p className="mt-2 mb-0 text-small text-text-muted">{check.interpretation}</p>
     {!reflected && <p className="mt-2 mb-0 text-caption text-text-muted">This check carries zero weight in AI authorship confidence.</p>}
     {basisText && <p className="mt-2 mb-0 text-caption text-text-muted">{basisText}</p>}
+    {offgrid?.measurement && <p className="mt-2 mb-0 text-caption text-text-muted">
+      Mean RGB difference inside {offgrid.measurement.interior_mean.toFixed(2)} of 255 levels.
+      Surrounding differences (left, right, top, bottom) {offgrid.measurement.perimeter_means.map(value => value?.toFixed(2) ?? 'unavailable').join(', ')}.
+    </p>}
     {proposalSearch?.basis === 'reduced' && <p className="mt-2 mb-0 text-caption text-text-muted">The candidate search used a {proposalSearch.width} × {proposalSearch.height} pixel working image. The check measured any matching masks on the original pixel grid.</p>}
     {check.pairs.length > 0 && <p className="mt-2 mb-0 text-caption text-text-muted">Coordinates use native pixels in the oriented original.</p>}
     {check.pairs.map(pair => <article key={pair.id} className="mt-4 border-t border-border pt-4">

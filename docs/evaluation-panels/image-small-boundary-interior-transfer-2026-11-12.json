@@ -1,0 +1,4956 @@
+{
+  "audit": {
+    "candidate_sha256": "7daf9ffaedf48eb3f042554c25e66cf63a5a98835cbeebf6b8b7958e4e918359",
+    "independent_interiors": 23,
+    "native_capture_bindings": 18,
+    "native_crops": 37,
+    "native_deliveries": 65
+  },
+  "candidate": {
+    "rows": [
+      {
+        "admitted": null,
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            477,
+            266,
+            517,
+            322
+          ],
+          "score": 0.7408665478771753,
+          "selected": null
+        },
+        "fixed": {
+          "proposal": [
+            180,
+            105,
+            356,
+            196
+          ],
+          "score": 0.5821777582168579,
+          "selected": null
+        },
+        "input_sha256": "67ad89b6ab64b39a31dd7a4ba111b130798950ac04aed846f917855a2ab27ac7",
+        "interior_flat_share": null,
+        "role": "original",
+        "size": [
+          704,
+          544
+        ],
+        "slot": 0,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "96b6bef914f8edceba8eab862ee1fe3b339cf8faad3b739dee4ee38bb444c1a8"
+      },
+      {
+        "admitted": null,
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            477,
+            266,
+            517,
+            322
+          ],
+          "score": 0.7582310736042179,
+          "selected": null
+        },
+        "fixed": {
+          "proposal": [
+            180,
+            105,
+            356,
+            196
+          ],
+          "score": 0.5971570611000061,
+          "selected": null
+        },
+        "input_sha256": "346e56914d0ab42eeb4b48157dfb3452079d6aeba55ce7cf72cd34fb36baab7e",
+        "interior_flat_share": null,
+        "role": "global_tone",
+        "size": [
+          704,
+          544
+        ],
+        "slot": 0,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "96b6bef914f8edceba8eab862ee1fe3b339cf8faad3b739dee4ee38bb444c1a8"
+      },
+      {
+        "admitted": null,
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            202,
+            425,
+            232,
+            512
+          ],
+          "score": 0.7853522454917846,
+          "selected": null
+        },
+        "fixed": {
+          "proposal": [
+            184,
+            421,
+            301,
+            512
+          ],
+          "score": 0.5251308679580688,
+          "selected": null
+        },
+        "input_sha256": "4dde7dd410a86af8c828b6bdbc37e8c05df1640f71f50deb527d8c3f92b25047",
+        "interior_flat_share": null,
+        "role": "feathered_blur",
+        "size": [
+          704,
+          544
+        ],
+        "slot": 0,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "96b6bef914f8edceba8eab862ee1fe3b339cf8faad3b739dee4ee38bb444c1a8"
+      },
+      {
+        "admitted": null,
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            422,
+            246,
+            456,
+            277
+          ],
+          "score": 0.7499222097976349,
+          "selected": null
+        },
+        "fixed": {
+          "proposal": [
+            183,
+            421,
+            300,
+            512
+          ],
+          "score": 0.5184117555618286,
+          "selected": null
+        },
+        "input_sha256": "237eee0e0c6df50c21dd4956ea73687e4a8bb2a2308ef7ffe88197a2010e19eb",
+        "interior_flat_share": null,
+        "role": "resize_roundtrip",
+        "size": [
+          704,
+          544
+        ],
+        "slot": 0,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "96b6bef914f8edceba8eab862ee1fe3b339cf8faad3b739dee4ee38bb444c1a8"
+      },
+      {
+        "admitted": {
+          "area": 5184,
+          "box": [
+            99,
+            99,
+            180,
+            163
+          ],
+          "crop": [
+            75,
+            75,
+            204,
+            187
+          ],
+          "crop_rgb_sha256": "ed21f599d7c9e73aacab974593681aa122b90a6f6fe0c6c951d1dedb3567a497",
+          "overlap": 4864
+        },
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            99,
+            99,
+            180,
+            163
+          ],
+          "score": 1.5381742068694926,
+          "selected": {
+            "area": 5184,
+            "box": [
+              99,
+              99,
+              180,
+              163
+            ],
+            "crop": [
+              75,
+              75,
+              204,
+              187
+            ],
+            "crop_rgb_sha256": "ed21f599d7c9e73aacab974593681aa122b90a6f6fe0c6c951d1dedb3567a497",
+            "overlap": 4864
+          }
+        },
+        "fixed": {
+          "proposal": [
+            99,
+            72,
+            216,
+            163
+          ],
+          "score": 0.7175931334495544,
+          "selected": null
+        },
+        "input_sha256": "2209b3c64f05da197ce3bf92273afc8ae4f833b12e26d0a74264da833f99b95d",
+        "interior_flat_share": 0.09523809523809523,
+        "role": "low_texture_paste",
+        "size": [
+          704,
+          544
+        ],
+        "slot": 0,
+        "target": [
+          99,
+          99,
+          175,
+          163
+        ],
+        "target_pixels": 4864,
+        "truth_sha256": "8458667ae41ec38df80c5a6d40ef89a8191bf8bc732d07146ee0566fde83579e"
+      },
+      {
+        "admitted": null,
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            477,
+            266,
+            517,
+            322
+          ],
+          "score": 0.7408665478771753,
+          "selected": null
+        },
+        "fixed": {
+          "proposal": [
+            180,
+            105,
+            356,
+            196
+          ],
+          "score": 0.5821778774261475,
+          "selected": null
+        },
+        "input_sha256": "cab4ea9bb012427ab88d233ea1a5bd6abc10ce2a83e6ddebaacb2d008fbd1d71",
+        "interior_flat_share": null,
+        "role": "normal_texture_paste",
+        "size": [
+          704,
+          544
+        ],
+        "slot": 0,
+        "target": [
+          99,
+          99,
+          175,
+          163
+        ],
+        "target_pixels": 4864,
+        "truth_sha256": "8458667ae41ec38df80c5a6d40ef89a8191bf8bc732d07146ee0566fde83579e"
+      },
+      {
+        "admitted": null,
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            397,
+            372,
+            532,
+            413
+          ],
+          "score": 0.5265269083749231,
+          "selected": null
+        },
+        "fixed": {
+          "proposal": [
+            423,
+            342,
+            530,
+            545
+          ],
+          "score": 0.43979567289352417,
+          "selected": null
+        },
+        "input_sha256": "dad58fc83fa8a85504465e8654e7da87a63a669920f3ea0056fda4582009e6ea",
+        "interior_flat_share": null,
+        "role": "original",
+        "size": [
+          640,
+          608
+        ],
+        "slot": 1,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "d012f7a30b198d8ac0a7a2e6143111e0b5081254fbe3328d4587eef4d4e54509"
+      },
+      {
+        "admitted": null,
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            397,
+            372,
+            532,
+            413
+          ],
+          "score": 0.6288067271746782,
+          "selected": null
+        },
+        "fixed": {
+          "proposal": [
+            371,
+            356,
+            531,
+            457
+          ],
+          "score": 0.4613519608974457,
+          "selected": null
+        },
+        "input_sha256": "c97e51b0a7b85809470061decfddc7b8a1b1e847ba38ef4915e8ca4657aa884b",
+        "interior_flat_share": null,
+        "role": "global_tone",
+        "size": [
+          640,
+          608
+        ],
+        "slot": 1,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "d012f7a30b198d8ac0a7a2e6143111e0b5081254fbe3328d4587eef4d4e54509"
+      },
+      {
+        "admitted": null,
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            397,
+            372,
+            532,
+            408
+          ],
+          "score": 0.6146978890575623,
+          "selected": null
+        },
+        "fixed": {
+          "proposal": [
+            423,
+            342,
+            530,
+            545
+          ],
+          "score": 0.43070581555366516,
+          "selected": null
+        },
+        "input_sha256": "db1d5d0b14e4ec0addf47ff6beb0370e9ce8ef2f86277ca99811be0a01aa45d3",
+        "interior_flat_share": null,
+        "role": "feathered_blur",
+        "size": [
+          640,
+          608
+        ],
+        "slot": 1,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "d012f7a30b198d8ac0a7a2e6143111e0b5081254fbe3328d4587eef4d4e54509"
+      },
+      {
+        "admitted": null,
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            432,
+            343,
+            530,
+            372
+          ],
+          "score": 0.6557089295631413,
+          "selected": null
+        },
+        "fixed": {
+          "proposal": [
+            391,
+            372,
+            551,
+            575
+          ],
+          "score": 0.399608314037323,
+          "selected": null
+        },
+        "input_sha256": "ed917e4a1ceb04522c3bdb7dc9f80306f0fd92ff557046d8c12bfffa14614167",
+        "interior_flat_share": null,
+        "role": "resize_roundtrip",
+        "size": [
+          640,
+          608
+        ],
+        "slot": 1,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "d012f7a30b198d8ac0a7a2e6143111e0b5081254fbe3328d4587eef4d4e54509"
+      },
+      {
+        "admitted": {
+          "area": 6020,
+          "box": [
+            213,
+            177,
+            283,
+            263
+          ],
+          "crop": [
+            189,
+            153,
+            307,
+            287
+          ],
+          "crop_rgb_sha256": "ca4861fb84c7144ecb7d2f4ef722cdce78399eb0dc5d01ad8f28e3e5859e1d02",
+          "overlap": 6020
+        },
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            213,
+            177,
+            283,
+            263
+          ],
+          "score": 1.8378276883703524,
+          "selected": {
+            "area": 6020,
+            "box": [
+              213,
+              177,
+              283,
+              263
+            ],
+            "crop": [
+              189,
+              153,
+              307,
+              287
+            ],
+            "crop_rgb_sha256": "ca4861fb84c7144ecb7d2f4ef722cdce78399eb0dc5d01ad8f28e3e5859e1d02",
+            "overlap": 6020
+          }
+        },
+        "fixed": {
+          "proposal": [
+            213,
+            177,
+            426,
+            278
+          ],
+          "score": 0.512142539024353,
+          "selected": null
+        },
+        "input_sha256": "1ab64be8e26985cf8f8544b146489f7cb0bbc1afc06756e32a719b2dee80d068",
+        "interior_flat_share": 0.0,
+        "role": "low_texture_paste",
+        "size": [
+          640,
+          608
+        ],
+        "slot": 1,
+        "target": [
+          213,
+          177,
+          283,
+          263
+        ],
+        "target_pixels": 6020,
+        "truth_sha256": "042264eae0fffb814afcd0f13cac06e34ab4489e349b928fde5b8e5e69a3aa0b"
+      },
+      {
+        "admitted": {
+          "area": 6020,
+          "box": [
+            213,
+            177,
+            283,
+            263
+          ],
+          "crop": [
+            189,
+            153,
+            307,
+            287
+          ],
+          "crop_rgb_sha256": "e6e73fc7c2bfdc6715187af54a25592579e7567fd861e199b8c25ee40752a3a0",
+          "overlap": 6020
+        },
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            213,
+            177,
+            283,
+            263
+          ],
+          "score": 1.8686888065523677,
+          "selected": {
+            "area": 6020,
+            "box": [
+              213,
+              177,
+              283,
+              263
+            ],
+            "crop": [
+              189,
+              153,
+              307,
+              287
+            ],
+            "crop_rgb_sha256": "e6e73fc7c2bfdc6715187af54a25592579e7567fd861e199b8c25ee40752a3a0",
+            "overlap": 6020
+          }
+        },
+        "fixed": {
+          "proposal": [
+            213,
+            162,
+            426,
+            263
+          ],
+          "score": 0.48718371987342834,
+          "selected": null
+        },
+        "input_sha256": "3c23b3a5d2bc960b4f83bb48e819c7db9171fb33a9e21ea87609563b1b3ee830",
+        "interior_flat_share": 0.0,
+        "role": "normal_texture_paste",
+        "size": [
+          640,
+          608
+        ],
+        "slot": 1,
+        "target": [
+          213,
+          177,
+          283,
+          263
+        ],
+        "target_pixels": 6020,
+        "truth_sha256": "042264eae0fffb814afcd0f13cac06e34ab4489e349b928fde5b8e5e69a3aa0b"
+      },
+      {
+        "admitted": null,
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            369,
+            328,
+            436,
+            360
+          ],
+          "score": 0.7363108399034864,
+          "selected": null
+        },
+        "fixed": {
+          "proposal": [
+            317,
+            360,
+            445,
+            445
+          ],
+          "score": 0.6411457061767578,
+          "selected": null
+        },
+        "input_sha256": "a7269f32a36153fc1bb29f81fcb5afc00b4cd346b8e0cb7cdaf55f3a3e9baff1",
+        "interior_flat_share": null,
+        "role": "original",
+        "size": [
+          768,
+          512
+        ],
+        "slot": 2,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "a6619f482fee91a315f76cdcd8705d39b6ce11077c435ccc696142e130c27762"
+      },
+      {
+        "admitted": null,
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            369,
+            328,
+            436,
+            360
+          ],
+          "score": 0.76286494688376,
+          "selected": null
+        },
+        "fixed": {
+          "proposal": [
+            317,
+            360,
+            445,
+            445
+          ],
+          "score": 0.6576516628265381,
+          "selected": null
+        },
+        "input_sha256": "13a66b3a9e4595d365f4be73b172358ef2f03b66167c484cbe98bbb4f8c260b8",
+        "interior_flat_share": null,
+        "role": "global_tone",
+        "size": [
+          768,
+          512
+        ],
+        "slot": 2,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "a6619f482fee91a315f76cdcd8705d39b6ce11077c435ccc696142e130c27762"
+      },
+      {
+        "admitted": null,
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            348,
+            360,
+            428,
+            401
+          ],
+          "score": 0.6065738657982802,
+          "selected": null
+        },
+        "fixed": {
+          "proposal": [
+            317,
+            360,
+            445,
+            445
+          ],
+          "score": 0.6096338629722595,
+          "selected": null
+        },
+        "input_sha256": "56c5cb2bc42d56defec9caa96866318fd3aeef0980987ed454a656e6ed012a98",
+        "interior_flat_share": null,
+        "role": "feathered_blur",
+        "size": [
+          768,
+          512
+        ],
+        "slot": 2,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "a6619f482fee91a315f76cdcd8705d39b6ce11077c435ccc696142e130c27762"
+      },
+      {
+        "admitted": null,
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            353,
+            360,
+            428,
+            402
+          ],
+          "score": 0.6693488630359553,
+          "selected": null
+        },
+        "fixed": {
+          "proposal": [
+            317,
+            360,
+            445,
+            445
+          ],
+          "score": 0.5574367642402649,
+          "selected": null
+        },
+        "input_sha256": "7798c8d7a407b3296089e6ebe770eec365db3cc735ed9148853de5affdf67d0d",
+        "interior_flat_share": null,
+        "role": "resize_roundtrip",
+        "size": [
+          768,
+          512
+        ],
+        "slot": 2,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "a6619f482fee91a315f76cdcd8705d39b6ce11077c435ccc696142e130c27762"
+      },
+      {
+        "admitted": null,
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            327,
+            255,
+            412,
+            326
+          ],
+          "score": 2.3924962917389783,
+          "selected": {
+            "area": 6035,
+            "box": [
+              327,
+              255,
+              412,
+              326
+            ],
+            "crop": [
+              303,
+              231,
+              436,
+              350
+            ],
+            "crop_rgb_sha256": "840a62aedcb29f2277367a905d942428cdf05d67074b0aaaac10ee83d4aca00d",
+            "overlap": 6035
+          }
+        },
+        "fixed": {
+          "proposal": [
+            315,
+            326,
+            443,
+            454
+          ],
+          "score": 0.7786770462989807,
+          "selected": null
+        },
+        "input_sha256": "0df59d94f94757a418cf022c3449a318d322530514d94b9af8bc605cdb595836",
+        "interior_flat_share": 0.42857142857142855,
+        "role": "low_texture_paste",
+        "size": [
+          768,
+          512
+        ],
+        "slot": 2,
+        "target": [
+          327,
+          255,
+          412,
+          326
+        ],
+        "target_pixels": 6035,
+        "truth_sha256": "fa98a9e819681c19acc957fb74ed65043e4959f1ad63ae0285e8c59c5bb7fc24"
+      },
+      {
+        "admitted": {
+          "area": 6035,
+          "box": [
+            327,
+            255,
+            412,
+            326
+          ],
+          "crop": [
+            303,
+            231,
+            436,
+            350
+          ],
+          "crop_rgb_sha256": "bd2d54438288d9eb6097c0eae0bd4f6e59d16894841ec8e91ffdd1ac973adae5",
+          "overlap": 6035
+        },
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            327,
+            255,
+            412,
+            326
+          ],
+          "score": 2.075464575014324,
+          "selected": {
+            "area": 6035,
+            "box": [
+              327,
+              255,
+              412,
+              326
+            ],
+            "crop": [
+              303,
+              231,
+              436,
+              350
+            ],
+            "crop_rgb_sha256": "bd2d54438288d9eb6097c0eae0bd4f6e59d16894841ec8e91ffdd1ac973adae5",
+            "overlap": 6035
+          }
+        },
+        "fixed": {
+          "proposal": [
+            315,
+            326,
+            443,
+            454
+          ],
+          "score": 0.8021657466888428,
+          "selected": null
+        },
+        "input_sha256": "6f6e8015be5cb6ee083f0cb74120326aa4d9b14cabfdd4ec7dfc06a7f9571c39",
+        "interior_flat_share": 0.0,
+        "role": "normal_texture_paste",
+        "size": [
+          768,
+          512
+        ],
+        "slot": 2,
+        "target": [
+          327,
+          255,
+          412,
+          326
+        ],
+        "target_pixels": 6035,
+        "truth_sha256": "fa98a9e819681c19acc957fb74ed65043e4959f1ad63ae0285e8c59c5bb7fc24"
+      },
+      {
+        "admitted": null,
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            160,
+            369,
+            263,
+            432
+          ],
+          "score": 0.6360279641278396,
+          "selected": null
+        },
+        "fixed": {
+          "proposal": [
+            178,
+            315,
+            263,
+            432
+          ],
+          "score": 0.6173748970031738,
+          "selected": null
+        },
+        "input_sha256": "befff8c93bedb8d72aad56c9b2a20acbb44d87ae1448584858d6ed20fc155ab5",
+        "interior_flat_share": null,
+        "role": "original",
+        "size": [
+          512,
+          704
+        ],
+        "slot": 3,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "3ad7728877e078e1a672f7bc8bf7db6b30683a663524ce49441ced91ce35756c"
+      },
+      {
+        "admitted": null,
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            160,
+            369,
+            263,
+            432
+          ],
+          "score": 0.6774256554108948,
+          "selected": null
+        },
+        "fixed": {
+          "proposal": [
+            178,
+            315,
+            263,
+            432
+          ],
+          "score": 0.684479832649231,
+          "selected": null
+        },
+        "input_sha256": "54c881fe535ae886042cabf0256f3f03be5145d1a3fa5b63449c7e0b03dfa612",
+        "interior_flat_share": null,
+        "role": "global_tone",
+        "size": [
+          512,
+          704
+        ],
+        "slot": 3,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "3ad7728877e078e1a672f7bc8bf7db6b30683a663524ce49441ced91ce35756c"
+      },
+      {
+        "admitted": null,
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            91,
+            524,
+            132,
+            564
+          ],
+          "score": 0.5866947433975411,
+          "selected": null
+        },
+        "fixed": {
+          "proposal": [
+            178,
+            315,
+            263,
+            432
+          ],
+          "score": 0.5914053320884705,
+          "selected": null
+        },
+        "input_sha256": "44355b9e1ea4626a5e65f2488f05d45a3c8bd5a24d8de4dc0880aff586f8c1e6",
+        "interior_flat_share": null,
+        "role": "feathered_blur",
+        "size": [
+          512,
+          704
+        ],
+        "slot": 3,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "3ad7728877e078e1a672f7bc8bf7db6b30683a663524ce49441ced91ce35756c"
+      },
+      {
+        "admitted": null,
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            190,
+            340,
+            263,
+            432
+          ],
+          "score": 0.6028384716028474,
+          "selected": null
+        },
+        "fixed": {
+          "proposal": [
+            178,
+            315,
+            263,
+            432
+          ],
+          "score": 0.5929074883460999,
+          "selected": null
+        },
+        "input_sha256": "7b13a4ec1e3b7eada1821beeba0f8a04cfdb57d2acd69f35bf44f0d33da20799",
+        "interior_flat_share": null,
+        "role": "resize_roundtrip",
+        "size": [
+          512,
+          704
+        ],
+        "slot": 3,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "3ad7728877e078e1a672f7bc8bf7db6b30683a663524ce49441ced91ce35756c"
+      },
+      {
+        "admitted": {
+          "area": 4928,
+          "box": [
+            157,
+            333,
+            221,
+            410
+          ],
+          "crop": [
+            133,
+            309,
+            245,
+            434
+          ],
+          "crop_rgb_sha256": "5b34374c601d1127308b5c118d3d09372b4bb3f64564745dca278a7773c65f76",
+          "overlap": 4928
+        },
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            157,
+            333,
+            221,
+            410
+          ],
+          "score": 2.241467120867037,
+          "selected": {
+            "area": 4928,
+            "box": [
+              157,
+              333,
+              221,
+              410
+            ],
+            "crop": [
+              133,
+              309,
+              245,
+              434
+            ],
+            "crop_rgb_sha256": "5b34374c601d1127308b5c118d3d09372b4bb3f64564745dca278a7773c65f76",
+            "overlap": 4928
+          }
+        },
+        "fixed": {
+          "proposal": [
+            93,
+            293,
+            221,
+            410
+          ],
+          "score": 0.6976335644721985,
+          "selected": null
+        },
+        "input_sha256": "89975c6dff3fddc228fb87f96eac3c8515637276008cafae4dfae330fd205c19",
+        "interior_flat_share": 0.0,
+        "role": "low_texture_paste",
+        "size": [
+          512,
+          704
+        ],
+        "slot": 3,
+        "target": [
+          157,
+          333,
+          221,
+          410
+        ],
+        "target_pixels": 4928,
+        "truth_sha256": "429dc7a613329684d0f9affc93880e678f992033db6ce3b1165f98dfdf87fb77"
+      },
+      {
+        "admitted": {
+          "area": 4928,
+          "box": [
+            157,
+            333,
+            221,
+            410
+          ],
+          "crop": [
+            133,
+            309,
+            245,
+            434
+          ],
+          "crop_rgb_sha256": "b47a4ec2e821b55a24be7ddf1a0c839a55a5b79398d6be3d174d64160b3cfe79",
+          "overlap": 4928
+        },
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            157,
+            333,
+            221,
+            410
+          ],
+          "score": 1.8581810328371586,
+          "selected": {
+            "area": 4928,
+            "box": [
+              157,
+              333,
+              221,
+              410
+            ],
+            "crop": [
+              133,
+              309,
+              245,
+              434
+            ],
+            "crop_rgb_sha256": "b47a4ec2e821b55a24be7ddf1a0c839a55a5b79398d6be3d174d64160b3cfe79",
+            "overlap": 4928
+          }
+        },
+        "fixed": {
+          "proposal": [
+            93,
+            293,
+            221,
+            410
+          ],
+          "score": 0.6978044509887695,
+          "selected": null
+        },
+        "input_sha256": "f2d70ae4cc21523f2ba8f01e64e10c4cd844b6f2d9910c745087781ceeb2f5f0",
+        "interior_flat_share": 0.0,
+        "role": "normal_texture_paste",
+        "size": [
+          512,
+          704
+        ],
+        "slot": 3,
+        "target": [
+          157,
+          333,
+          221,
+          410
+        ],
+        "target_pixels": 4928,
+        "truth_sha256": "429dc7a613329684d0f9affc93880e678f992033db6ce3b1165f98dfdf87fb77"
+      },
+      {
+        "admitted": null,
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            197,
+            108,
+            311,
+            146
+          ],
+          "score": 0.8054994206614624,
+          "selected": null
+        },
+        "fixed": {
+          "proposal": [
+            39,
+            54,
+            156,
+            235
+          ],
+          "score": 0.6747044324874878,
+          "selected": null
+        },
+        "input_sha256": "f51e19182b0d8789d867fff0cb8e6e60c0f97e67a167eedeb6c3c1e2aacf43e5",
+        "interior_flat_share": null,
+        "role": "original",
+        "size": [
+          704,
+          544
+        ],
+        "slot": 4,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "96b6bef914f8edceba8eab862ee1fe3b339cf8faad3b739dee4ee38bb444c1a8"
+      },
+      {
+        "admitted": null,
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            196,
+            81,
+            311,
+            146
+          ],
+          "score": 1.2513083680461865,
+          "selected": null
+        },
+        "fixed": {
+          "proposal": [
+            39,
+            54,
+            156,
+            235
+          ],
+          "score": 0.6960623264312744,
+          "selected": null
+        },
+        "input_sha256": "2413e58cb317224209e27999928562e6e767a13fb36c1217716d2ccefd127a44",
+        "interior_flat_share": null,
+        "role": "global_tone",
+        "size": [
+          704,
+          544
+        ],
+        "slot": 4,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "96b6bef914f8edceba8eab862ee1fe3b339cf8faad3b739dee4ee38bb444c1a8"
+      },
+      {
+        "admitted": null,
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            197,
+            108,
+            311,
+            146
+          ],
+          "score": 0.7716570530294625,
+          "selected": null
+        },
+        "fixed": {
+          "proposal": [
+            39,
+            54,
+            156,
+            235
+          ],
+          "score": 0.6747573614120483,
+          "selected": null
+        },
+        "input_sha256": "482b802240f2d824843bb45ac3f797193c608ddb26c7dc5dfcca5f3f7f630d44",
+        "interior_flat_share": null,
+        "role": "feathered_blur",
+        "size": [
+          704,
+          544
+        ],
+        "slot": 4,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "96b6bef914f8edceba8eab862ee1fe3b339cf8faad3b739dee4ee38bb444c1a8"
+      },
+      {
+        "admitted": null,
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            196,
+            81,
+            311,
+            146
+          ],
+          "score": 0.943250280267963,
+          "selected": null
+        },
+        "fixed": {
+          "proposal": [
+            195,
+            55,
+            312,
+            146
+          ],
+          "score": 0.6636266112327576,
+          "selected": null
+        },
+        "input_sha256": "9e0b229eb0209b29726640a29848bd6c10d00bd6b27d8d4e750427cf98fbcb91",
+        "interior_flat_share": null,
+        "role": "resize_roundtrip",
+        "size": [
+          704,
+          544
+        ],
+        "slot": 4,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "96b6bef914f8edceba8eab862ee1fe3b339cf8faad3b739dee4ee38bb444c1a8"
+      },
+      {
+        "admitted": {
+          "area": 21177,
+          "box": [
+            50,
+            54,
+            167,
+            235
+          ],
+          "crop": [
+            26,
+            30,
+            191,
+            259
+          ],
+          "crop_rgb_sha256": "e3e2e5b15007ff85b6ff510331c8bb60cf0809f8ac98c9da7b2ff49f76fd5b09",
+          "overlap": 4864
+        },
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            91,
+            91,
+            167,
+            155
+          ],
+          "score": 2.5823273962262316,
+          "selected": {
+            "area": 21177,
+            "box": [
+              50,
+              54,
+              167,
+              235
+            ],
+            "crop": [
+              26,
+              30,
+              191,
+              259
+            ],
+            "crop_rgb_sha256": "e3e2e5b15007ff85b6ff510331c8bb60cf0809f8ac98c9da7b2ff49f76fd5b09",
+            "overlap": 4864
+          }
+        },
+        "fixed": {
+          "proposal": [
+            50,
+            54,
+            167,
+            235
+          ],
+          "score": 0.9268313050270081,
+          "selected": {
+            "area": 21177,
+            "box": [
+              50,
+              54,
+              167,
+              235
+            ],
+            "crop": [
+              26,
+              30,
+              191,
+              259
+            ],
+            "crop_rgb_sha256": "e3e2e5b15007ff85b6ff510331c8bb60cf0809f8ac98c9da7b2ff49f76fd5b09",
+            "overlap": 4864
+          }
+        },
+        "input_sha256": "33ccb3f9ae97a3a197fd956bfd76fb9b865486dcd8a3177091878ca3aac469da",
+        "interior_flat_share": null,
+        "role": "low_texture_paste",
+        "size": [
+          704,
+          544
+        ],
+        "slot": 4,
+        "target": [
+          91,
+          91,
+          167,
+          155
+        ],
+        "target_pixels": 4864,
+        "truth_sha256": "42f3b0203388b6c4b2028b2df6d149c680e0d446d433f2278f714236f2124471"
+      },
+      {
+        "admitted": {
+          "area": 21177,
+          "box": [
+            50,
+            54,
+            167,
+            235
+          ],
+          "crop": [
+            26,
+            30,
+            191,
+            259
+          ],
+          "crop_rgb_sha256": "74dcea1f319ed7d1b7d8a56987f255972ef6cc1a8be12463cfb25f15c745d6e2",
+          "overlap": 4864
+        },
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            91,
+            91,
+            167,
+            155
+          ],
+          "score": 2.2213971078367765,
+          "selected": {
+            "area": 21177,
+            "box": [
+              50,
+              54,
+              167,
+              235
+            ],
+            "crop": [
+              26,
+              30,
+              191,
+              259
+            ],
+            "crop_rgb_sha256": "74dcea1f319ed7d1b7d8a56987f255972ef6cc1a8be12463cfb25f15c745d6e2",
+            "overlap": 4864
+          }
+        },
+        "fixed": {
+          "proposal": [
+            50,
+            54,
+            167,
+            235
+          ],
+          "score": 0.8696720600128174,
+          "selected": {
+            "area": 21177,
+            "box": [
+              50,
+              54,
+              167,
+              235
+            ],
+            "crop": [
+              26,
+              30,
+              191,
+              259
+            ],
+            "crop_rgb_sha256": "74dcea1f319ed7d1b7d8a56987f255972ef6cc1a8be12463cfb25f15c745d6e2",
+            "overlap": 4864
+          }
+        },
+        "input_sha256": "0ac25488847b014d2efdfc182e756a7eaa10b0ca48bd34300c436b18d30f80bc",
+        "interior_flat_share": null,
+        "role": "normal_texture_paste",
+        "size": [
+          704,
+          544
+        ],
+        "slot": 4,
+        "target": [
+          91,
+          91,
+          167,
+          155
+        ],
+        "target_pixels": 4864,
+        "truth_sha256": "42f3b0203388b6c4b2028b2df6d149c680e0d446d433f2278f714236f2124471"
+      },
+      {
+        "admitted": null,
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            453,
+            130,
+            485,
+            221
+          ],
+          "score": 0.8619979124424495,
+          "selected": null
+        },
+        "fixed": {
+          "proposal": [
+            377,
+            120,
+            484,
+            221
+          ],
+          "score": 0.5981040000915527,
+          "selected": null
+        },
+        "input_sha256": "c3a9191b93164a4efa3239141b85d76e94926df7864eaff7eb8e5205c10bcee4",
+        "interior_flat_share": null,
+        "role": "original",
+        "size": [
+          640,
+          608
+        ],
+        "slot": 5,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "d012f7a30b198d8ac0a7a2e6143111e0b5081254fbe3328d4587eef4d4e54509"
+      },
+      {
+        "admitted": null,
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            166,
+            293,
+            211,
+            335
+          ],
+          "score": 0.8199064368497745,
+          "selected": null
+        },
+        "fixed": {
+          "proposal": [
+            7,
+            120,
+            114,
+            221
+          ],
+          "score": 0.6473141312599182,
+          "selected": null
+        },
+        "input_sha256": "ab3faf2e2b6dd5a401f82a5553d9029763a54a9f761cce20bfac1e11f203fb4d",
+        "interior_flat_share": null,
+        "role": "global_tone",
+        "size": [
+          640,
+          608
+        ],
+        "slot": 5,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "d012f7a30b198d8ac0a7a2e6143111e0b5081254fbe3328d4587eef4d4e54509"
+      },
+      {
+        "admitted": null,
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            453,
+            130,
+            485,
+            221
+          ],
+          "score": 0.8601298938616702,
+          "selected": null
+        },
+        "fixed": {
+          "proposal": [
+            342,
+            3,
+            449,
+            155
+          ],
+          "score": 0.5856189727783203,
+          "selected": null
+        },
+        "input_sha256": "8b51e7f0c20ac7778cc58b816bef9c3ef5bf5b00e3a2775884d5e3a8ee027730",
+        "interior_flat_share": null,
+        "role": "feathered_blur",
+        "size": [
+          640,
+          608
+        ],
+        "slot": 5,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "d012f7a30b198d8ac0a7a2e6143111e0b5081254fbe3328d4587eef4d4e54509"
+      },
+      {
+        "admitted": null,
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            437,
+            221,
+            484,
+            264
+          ],
+          "score": 0.6787966097177904,
+          "selected": null
+        },
+        "fixed": {
+          "proposal": [
+            210,
+            302,
+            370,
+            403
+          ],
+          "score": 0.5495468378067017,
+          "selected": null
+        },
+        "input_sha256": "8099361b1c01ec4fdffe71433217229651e1e0f4ecb6d82f079632b93dc89972",
+        "interior_flat_share": null,
+        "role": "resize_roundtrip",
+        "size": [
+          640,
+          608
+        ],
+        "slot": 5,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "d012f7a30b198d8ac0a7a2e6143111e0b5081254fbe3328d4587eef4d4e54509"
+      },
+      {
+        "admitted": {
+          "area": 6020,
+          "box": [
+            263,
+            127,
+            333,
+            213
+          ],
+          "crop": [
+            239,
+            103,
+            357,
+            237
+          ],
+          "crop_rgb_sha256": "d7771f6c3002b294a4345e6d100ad2fddb48b243c366cf30b79c385d36cabb9f",
+          "overlap": 6020
+        },
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            263,
+            127,
+            333,
+            213
+          ],
+          "score": 2.110383476873994,
+          "selected": {
+            "area": 6020,
+            "box": [
+              263,
+              127,
+              333,
+              213
+            ],
+            "crop": [
+              239,
+              103,
+              357,
+              237
+            ],
+            "crop_rgb_sha256": "d7771f6c3002b294a4345e6d100ad2fddb48b243c366cf30b79c385d36cabb9f",
+            "overlap": 6020
+          }
+        },
+        "fixed": {
+          "proposal": [
+            226,
+            112,
+            333,
+            213
+          ],
+          "score": 0.7867695689201355,
+          "selected": null
+        },
+        "input_sha256": "e46441cbc5b4616778c9c96507009086d3793d8d3079e11b0a7d903a1c61ba1f",
+        "interior_flat_share": 0.015873015873015872,
+        "role": "low_texture_paste",
+        "size": [
+          640,
+          608
+        ],
+        "slot": 5,
+        "target": [
+          263,
+          127,
+          333,
+          213
+        ],
+        "target_pixels": 6020,
+        "truth_sha256": "8a8e46a1e7c46af82eeb5357ce1c29e50f068caf28617ee6f11e4e560e929f2a"
+      },
+      {
+        "admitted": null,
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            453,
+            130,
+            485,
+            221
+          ],
+          "score": 0.8619975442652864,
+          "selected": null
+        },
+        "fixed": {
+          "proposal": [
+            283,
+            112,
+            390,
+            213
+          ],
+          "score": 0.6104202270507812,
+          "selected": null
+        },
+        "input_sha256": "8e0b07e5cd6a16bfe6d864fef0c73679877f644ed39eba641ab6bb720a536e83",
+        "interior_flat_share": null,
+        "role": "normal_texture_paste",
+        "size": [
+          640,
+          608
+        ],
+        "slot": 5,
+        "target": [
+          263,
+          127,
+          333,
+          213
+        ],
+        "target_pixels": 6020,
+        "truth_sha256": "8a8e46a1e7c46af82eeb5357ce1c29e50f068caf28617ee6f11e4e560e929f2a"
+      },
+      {
+        "admitted": null,
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            596,
+            423,
+            671,
+            452
+          ],
+          "score": 0.5316924920611467,
+          "selected": null
+        },
+        "fixed": {
+          "proposal": [
+            571,
+            360,
+            763,
+            488
+          ],
+          "score": 0.5064069032669067,
+          "selected": null
+        },
+        "input_sha256": "39a25dec22c286fa52eefbfe3aeb56a9324440fb3ea6e573bd6fba8c4ba2c606",
+        "interior_flat_share": null,
+        "role": "original",
+        "size": [
+          768,
+          512
+        ],
+        "slot": 6,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "a6619f482fee91a315f76cdcd8705d39b6ce11077c435ccc696142e130c27762"
+      },
+      {
+        "admitted": null,
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            561,
+            414,
+            632,
+            444
+          ],
+          "score": 0.5154354953315771,
+          "selected": null
+        },
+        "fixed": {
+          "proposal": [
+            571,
+            360,
+            763,
+            488
+          ],
+          "score": 0.5269688963890076,
+          "selected": null
+        },
+        "input_sha256": "df5e47a70b94857b4b516b287ef6e64f06dbf591bac2eb5790492e620cea170b",
+        "interior_flat_share": null,
+        "role": "global_tone",
+        "size": [
+          768,
+          512
+        ],
+        "slot": 6,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "a6619f482fee91a315f76cdcd8705d39b6ce11077c435ccc696142e130c27762"
+      },
+      {
+        "admitted": null,
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            596,
+            423,
+            671,
+            452
+          ],
+          "score": 0.5316924920611467,
+          "selected": null
+        },
+        "fixed": {
+          "proposal": [
+            571,
+            360,
+            763,
+            488
+          ],
+          "score": 0.5064069032669067,
+          "selected": null
+        },
+        "input_sha256": "da1dae1b36d7bd707e09a72d7c5100627e2d00012c1641c7f0c6940a1466a9ce",
+        "interior_flat_share": null,
+        "role": "feathered_blur",
+        "size": [
+          768,
+          512
+        ],
+        "slot": 6,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "a6619f482fee91a315f76cdcd8705d39b6ce11077c435ccc696142e130c27762"
+      },
+      {
+        "admitted": null,
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            571,
+            451,
+            706,
+            490
+          ],
+          "score": 0.5365120353965951,
+          "selected": null
+        },
+        "fixed": {
+          "proposal": [
+            492,
+            421,
+            620,
+            506
+          ],
+          "score": 0.4239605963230133,
+          "selected": null
+        },
+        "input_sha256": "6120e15ae3d8bbe7f23fde7387c3ae30d59c83db2421de30462554f14c35f6de",
+        "interior_flat_share": null,
+        "role": "resize_roundtrip",
+        "size": [
+          768,
+          512
+        ],
+        "slot": 6,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "a6619f482fee91a315f76cdcd8705d39b6ce11077c435ccc696142e130c27762"
+      },
+      {
+        "admitted": {
+          "area": 6035,
+          "box": [
+            264,
+            286,
+            349,
+            357
+          ],
+          "crop": [
+            240,
+            262,
+            373,
+            381
+          ],
+          "crop_rgb_sha256": "8def0a7f9607ac71abd9a04469a6b7bf23c40b84abfe0789b16633a3a4cfdef2",
+          "overlap": 6035
+        },
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            264,
+            286,
+            349,
+            357
+          ],
+          "score": 2.8504456102563314,
+          "selected": {
+            "area": 6035,
+            "box": [
+              264,
+              286,
+              349,
+              357
+            ],
+            "crop": [
+              240,
+              262,
+              373,
+              381
+            ],
+            "crop_rgb_sha256": "8def0a7f9607ac71abd9a04469a6b7bf23c40b84abfe0789b16633a3a4cfdef2",
+            "overlap": 6035
+          }
+        },
+        "fixed": {
+          "proposal": [
+            157,
+            272,
+            349,
+            357
+          ],
+          "score": 0.7290617227554321,
+          "selected": null
+        },
+        "input_sha256": "c662c568ccac55b1144a449f9505df7d6e67849622c62540259086b8daa49774",
+        "interior_flat_share": 0.3333333333333333,
+        "role": "low_texture_paste",
+        "size": [
+          768,
+          512
+        ],
+        "slot": 6,
+        "target": [
+          264,
+          286,
+          349,
+          357
+        ],
+        "target_pixels": 6035,
+        "truth_sha256": "69e5e2a7a10bac9fe30033f6826ce84e9ee9b6f4ecfc31e24b148a1491701f94"
+      },
+      {
+        "admitted": {
+          "area": 6035,
+          "box": [
+            264,
+            286,
+            349,
+            357
+          ],
+          "crop": [
+            240,
+            262,
+            373,
+            381
+          ],
+          "crop_rgb_sha256": "ffeb77fb8c9e73f33017f53362947dea7a23566679461d8fcb5d68e439586e61",
+          "overlap": 6035
+        },
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            264,
+            286,
+            349,
+            357
+          ],
+          "score": 2.518501567372482,
+          "selected": {
+            "area": 6035,
+            "box": [
+              264,
+              286,
+              349,
+              357
+            ],
+            "crop": [
+              240,
+              262,
+              373,
+              381
+            ],
+            "crop_rgb_sha256": "ffeb77fb8c9e73f33017f53362947dea7a23566679461d8fcb5d68e439586e61",
+            "overlap": 6035
+          }
+        },
+        "fixed": {
+          "proposal": [
+            157,
+            272,
+            349,
+            357
+          ],
+          "score": 0.7072432637214661,
+          "selected": null
+        },
+        "input_sha256": "06187c3394948564efac02fe6f129f00badf93fd32f262fe850a0e4255dc1445",
+        "interior_flat_share": 0.0,
+        "role": "normal_texture_paste",
+        "size": [
+          768,
+          512
+        ],
+        "slot": 6,
+        "target": [
+          264,
+          286,
+          349,
+          357
+        ],
+        "target_pixels": 6035,
+        "truth_sha256": "69e5e2a7a10bac9fe30033f6826ce84e9ee9b6f4ecfc31e24b148a1491701f94"
+      },
+      {
+        "admitted": {
+          "area": 9945,
+          "box": [
+            117,
+            543,
+            202,
+            660
+          ],
+          "crop": [
+            93,
+            519,
+            226,
+            684
+          ],
+          "crop_rgb_sha256": "d3c951964df54c01ed12aaff32027bbf130153b7b350b996b9228e68209e992c",
+          "overlap": 0
+        },
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            116,
+            543,
+            202,
+            603
+          ],
+          "score": 1.2386388182686972,
+          "selected": {
+            "area": 9945,
+            "box": [
+              117,
+              543,
+              202,
+              660
+            ],
+            "crop": [
+              93,
+              519,
+              226,
+              684
+            ],
+            "crop_rgb_sha256": "d3c951964df54c01ed12aaff32027bbf130153b7b350b996b9228e68209e992c",
+            "overlap": 0
+          }
+        },
+        "fixed": {
+          "proposal": [
+            117,
+            543,
+            202,
+            660
+          ],
+          "score": 0.8675882816314697,
+          "selected": {
+            "area": 9945,
+            "box": [
+              117,
+              543,
+              202,
+              660
+            ],
+            "crop": [
+              93,
+              519,
+              226,
+              684
+            ],
+            "crop_rgb_sha256": "d3c951964df54c01ed12aaff32027bbf130153b7b350b996b9228e68209e992c",
+            "overlap": 0
+          }
+        },
+        "input_sha256": "8657341c0ddc27e102c313c621e0bf134cfc3141937f384db57b13736b1e52ce",
+        "interior_flat_share": null,
+        "role": "original",
+        "size": [
+          512,
+          704
+        ],
+        "slot": 7,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "3ad7728877e078e1a672f7bc8bf7db6b30683a663524ce49441ced91ce35756c"
+      },
+      {
+        "admitted": {
+          "area": 9945,
+          "box": [
+            117,
+            543,
+            202,
+            660
+          ],
+          "crop": [
+            93,
+            519,
+            226,
+            684
+          ],
+          "crop_rgb_sha256": "f4d294af6bce35abfb439f89e4ade260ea3044e3c725b23bd3147400c1d09640",
+          "overlap": 0
+        },
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            116,
+            543,
+            202,
+            603
+          ],
+          "score": 1.2871036403787255,
+          "selected": {
+            "area": 9945,
+            "box": [
+              117,
+              543,
+              202,
+              660
+            ],
+            "crop": [
+              93,
+              519,
+              226,
+              684
+            ],
+            "crop_rgb_sha256": "f4d294af6bce35abfb439f89e4ade260ea3044e3c725b23bd3147400c1d09640",
+            "overlap": 0
+          }
+        },
+        "fixed": {
+          "proposal": [
+            117,
+            543,
+            202,
+            660
+          ],
+          "score": 0.9381794929504395,
+          "selected": {
+            "area": 9945,
+            "box": [
+              117,
+              543,
+              202,
+              660
+            ],
+            "crop": [
+              93,
+              519,
+              226,
+              684
+            ],
+            "crop_rgb_sha256": "f4d294af6bce35abfb439f89e4ade260ea3044e3c725b23bd3147400c1d09640",
+            "overlap": 0
+          }
+        },
+        "input_sha256": "ae8ad6e45243d4909a28bef47c81481461d0bfb8a6112751e43cfca442ad2dba",
+        "interior_flat_share": null,
+        "role": "global_tone",
+        "size": [
+          512,
+          704
+        ],
+        "slot": 7,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "3ad7728877e078e1a672f7bc8bf7db6b30683a663524ce49441ced91ce35756c"
+      },
+      {
+        "admitted": {
+          "area": 9945,
+          "box": [
+            117,
+            543,
+            202,
+            660
+          ],
+          "crop": [
+            93,
+            519,
+            226,
+            684
+          ],
+          "crop_rgb_sha256": "4d9e04bd41b5594c1e227f0276c532efca62f1212eaa067a8b7b0f126577e403",
+          "overlap": 0
+        },
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            70,
+            543,
+            202,
+            591
+          ],
+          "score": 1.2743810018177577,
+          "selected": {
+            "area": 9945,
+            "box": [
+              117,
+              543,
+              202,
+              660
+            ],
+            "crop": [
+              93,
+              519,
+              226,
+              684
+            ],
+            "crop_rgb_sha256": "4d9e04bd41b5594c1e227f0276c532efca62f1212eaa067a8b7b0f126577e403",
+            "overlap": 0
+          }
+        },
+        "fixed": {
+          "proposal": [
+            117,
+            543,
+            202,
+            660
+          ],
+          "score": 0.8675882816314697,
+          "selected": {
+            "area": 9945,
+            "box": [
+              117,
+              543,
+              202,
+              660
+            ],
+            "crop": [
+              93,
+              519,
+              226,
+              684
+            ],
+            "crop_rgb_sha256": "4d9e04bd41b5594c1e227f0276c532efca62f1212eaa067a8b7b0f126577e403",
+            "overlap": 0
+          }
+        },
+        "input_sha256": "17126c7a5d4d2b306a3fc4f7113660edd87791a734e777dec5d2d7d28513adab",
+        "interior_flat_share": null,
+        "role": "feathered_blur",
+        "size": [
+          512,
+          704
+        ],
+        "slot": 7,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "3ad7728877e078e1a672f7bc8bf7db6b30683a663524ce49441ced91ce35756c"
+      },
+      {
+        "admitted": null,
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            38,
+            542,
+            70,
+            591
+          ],
+          "score": 1.8830225126657614,
+          "selected": null
+        },
+        "fixed": {
+          "proposal": [
+            117,
+            543,
+            202,
+            660
+          ],
+          "score": 0.7956650853157043,
+          "selected": null
+        },
+        "input_sha256": "086732df263b35f5d34223f70ea638be257f7ecc388cec3f6c8d86c057ba6d79",
+        "interior_flat_share": null,
+        "role": "resize_roundtrip",
+        "size": [
+          512,
+          704
+        ],
+        "slot": 7,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "3ad7728877e078e1a672f7bc8bf7db6b30683a663524ce49441ced91ce35756c"
+      },
+      {
+        "admitted": {
+          "area": 9945,
+          "box": [
+            117,
+            543,
+            202,
+            660
+          ],
+          "crop": [
+            93,
+            519,
+            226,
+            684
+          ],
+          "crop_rgb_sha256": "d3c951964df54c01ed12aaff32027bbf130153b7b350b996b9228e68209e992c",
+          "overlap": 0
+        },
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            329,
+            178,
+            393,
+            255
+          ],
+          "score": 2.9931553158684188,
+          "selected": {
+            "area": 9945,
+            "box": [
+              117,
+              543,
+              202,
+              660
+            ],
+            "crop": [
+              93,
+              519,
+              226,
+              684
+            ],
+            "crop_rgb_sha256": "d3c951964df54c01ed12aaff32027bbf130153b7b350b996b9228e68209e992c",
+            "overlap": 0
+          }
+        },
+        "fixed": {
+          "proposal": [
+            117,
+            543,
+            202,
+            660
+          ],
+          "score": 0.8675882816314697,
+          "selected": {
+            "area": 9945,
+            "box": [
+              117,
+              543,
+              202,
+              660
+            ],
+            "crop": [
+              93,
+              519,
+              226,
+              684
+            ],
+            "crop_rgb_sha256": "d3c951964df54c01ed12aaff32027bbf130153b7b350b996b9228e68209e992c",
+            "overlap": 0
+          }
+        },
+        "input_sha256": "64bff9f28fcc4744d3771371ec323388233c2d07d4d596a677584ab79f7e37dc",
+        "interior_flat_share": null,
+        "role": "low_texture_paste",
+        "size": [
+          512,
+          704
+        ],
+        "slot": 7,
+        "target": [
+          329,
+          178,
+          393,
+          255
+        ],
+        "target_pixels": 4928,
+        "truth_sha256": "9d5970bcc25ed1e656db754b1885be5a58365ecca96a6f0fd3edbb82701c63d0"
+      },
+      {
+        "admitted": {
+          "area": 9945,
+          "box": [
+            117,
+            543,
+            202,
+            660
+          ],
+          "crop": [
+            93,
+            519,
+            226,
+            684
+          ],
+          "crop_rgb_sha256": "d3c951964df54c01ed12aaff32027bbf130153b7b350b996b9228e68209e992c",
+          "overlap": 0
+        },
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            329,
+            178,
+            393,
+            255
+          ],
+          "score": 2.4161350410780327,
+          "selected": {
+            "area": 9945,
+            "box": [
+              117,
+              543,
+              202,
+              660
+            ],
+            "crop": [
+              93,
+              519,
+              226,
+              684
+            ],
+            "crop_rgb_sha256": "d3c951964df54c01ed12aaff32027bbf130153b7b350b996b9228e68209e992c",
+            "overlap": 0
+          }
+        },
+        "fixed": {
+          "proposal": [
+            117,
+            543,
+            202,
+            660
+          ],
+          "score": 0.8675882816314697,
+          "selected": {
+            "area": 9945,
+            "box": [
+              117,
+              543,
+              202,
+              660
+            ],
+            "crop": [
+              93,
+              519,
+              226,
+              684
+            ],
+            "crop_rgb_sha256": "d3c951964df54c01ed12aaff32027bbf130153b7b350b996b9228e68209e992c",
+            "overlap": 0
+          }
+        },
+        "input_sha256": "17926e62ccd0d1abe9a9571873a5c16dd3c17ccb46be3dbac087e365da7d0a4f",
+        "interior_flat_share": null,
+        "role": "normal_texture_paste",
+        "size": [
+          512,
+          704
+        ],
+        "slot": 7,
+        "target": [
+          329,
+          178,
+          393,
+          255
+        ],
+        "target_pixels": 4928,
+        "truth_sha256": "9d5970bcc25ed1e656db754b1885be5a58365ecca96a6f0fd3edbb82701c63d0"
+      },
+      {
+        "admitted": null,
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            466,
+            252,
+            523,
+            292
+          ],
+          "score": 1.2313481079780089,
+          "selected": null
+        },
+        "fixed": {
+          "proposal": [
+            372,
+            224,
+            489,
+            315
+          ],
+          "score": 0.7529680132865906,
+          "selected": null
+        },
+        "input_sha256": "db54581eb9e9d1f2229cb85e753720ccde8fdd3a5780c08c94769c92486199fb",
+        "interior_flat_share": null,
+        "role": "original",
+        "size": [
+          704,
+          544
+        ],
+        "slot": 8,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "96b6bef914f8edceba8eab862ee1fe3b339cf8faad3b739dee4ee38bb444c1a8"
+      },
+      {
+        "admitted": null,
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            374,
+            220,
+            411,
+            281
+          ],
+          "score": 1.2731566144938105,
+          "selected": null
+        },
+        "fixed": {
+          "proposal": [
+            372,
+            224,
+            489,
+            315
+          ],
+          "score": 0.7746831774711609,
+          "selected": null
+        },
+        "input_sha256": "3d6d2358a836ad5411e509f6043b1cfe39da838b37a8b737c283bedb2da3752d",
+        "interior_flat_share": null,
+        "role": "global_tone",
+        "size": [
+          704,
+          544
+        ],
+        "slot": 8,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "96b6bef914f8edceba8eab862ee1fe3b339cf8faad3b739dee4ee38bb444c1a8"
+      },
+      {
+        "admitted": null,
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            467,
+            252,
+            523,
+            291
+          ],
+          "score": 0.9241968580524529,
+          "selected": null
+        },
+        "fixed": {
+          "proposal": [
+            372,
+            224,
+            489,
+            315
+          ],
+          "score": 0.5471030473709106,
+          "selected": null
+        },
+        "input_sha256": "17945faa947e631f5f2b78c9ab4e797e7915eeaf00dc7bf5bb47b14f9d6caf4c",
+        "interior_flat_share": null,
+        "role": "feathered_blur",
+        "size": [
+          704,
+          544
+        ],
+        "slot": 8,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "96b6bef914f8edceba8eab862ee1fe3b339cf8faad3b739dee4ee38bb444c1a8"
+      },
+      {
+        "admitted": null,
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            467,
+            252,
+            523,
+            291
+          ],
+          "score": 0.8646502096897667,
+          "selected": null
+        },
+        "fixed": {
+          "proposal": [
+            372,
+            224,
+            489,
+            315
+          ],
+          "score": 0.5663726329803467,
+          "selected": null
+        },
+        "input_sha256": "b346673c5eb31dd972b6676242f876e8f269f415b717b33790b64f66a1e805b4",
+        "interior_flat_share": null,
+        "role": "resize_roundtrip",
+        "size": [
+          704,
+          544
+        ],
+        "slot": 8,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "96b6bef914f8edceba8eab862ee1fe3b339cf8faad3b739dee4ee38bb444c1a8"
+      },
+      {
+        "admitted": {
+          "area": 4864,
+          "box": [
+            83,
+            83,
+            159,
+            147
+          ],
+          "crop": [
+            59,
+            59,
+            183,
+            171
+          ],
+          "crop_rgb_sha256": "5798022c7a084789e09de8c4e4d8543212330d59554cb230cd5137c62f9c8c04",
+          "overlap": 4864
+        },
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            83,
+            83,
+            159,
+            147
+          ],
+          "score": 2.534215986310777,
+          "selected": {
+            "area": 4864,
+            "box": [
+              83,
+              83,
+              159,
+              147
+            ],
+            "crop": [
+              59,
+              59,
+              183,
+              171
+            ],
+            "crop_rgb_sha256": "5798022c7a084789e09de8c4e4d8543212330d59554cb230cd5137c62f9c8c04",
+            "overlap": 4864
+          }
+        },
+        "fixed": {
+          "proposal": [
+            372,
+            224,
+            489,
+            315
+          ],
+          "score": 0.7529680132865906,
+          "selected": null
+        },
+        "input_sha256": "56f6a1098dae60402776659a7331f9dba07ff539206f11f2bc0121fa25265b7a",
+        "interior_flat_share": 0.0,
+        "role": "low_texture_paste",
+        "size": [
+          704,
+          544
+        ],
+        "slot": 8,
+        "target": [
+          83,
+          83,
+          159,
+          147
+        ],
+        "target_pixels": 4864,
+        "truth_sha256": "68b765ec6aefe44163bc3baed5151adc4e244b372406425b9f906df80b4d946f"
+      },
+      {
+        "admitted": {
+          "area": 4864,
+          "box": [
+            83,
+            83,
+            159,
+            147
+          ],
+          "crop": [
+            59,
+            59,
+            183,
+            171
+          ],
+          "crop_rgb_sha256": "649b881ea37f7c1993f6efae3a9ae1819ebb5c1c22301b35fbc5f0493d4136c3",
+          "overlap": 4864
+        },
+        "cohort": "photo",
+        "combined": {
+          "proposal": [
+            83,
+            83,
+            159,
+            147
+          ],
+          "score": 2.014783822727698,
+          "selected": {
+            "area": 4864,
+            "box": [
+              83,
+              83,
+              159,
+              147
+            ],
+            "crop": [
+              59,
+              59,
+              183,
+              171
+            ],
+            "crop_rgb_sha256": "649b881ea37f7c1993f6efae3a9ae1819ebb5c1c22301b35fbc5f0493d4136c3",
+            "overlap": 4864
+          }
+        },
+        "fixed": {
+          "proposal": [
+            372,
+            224,
+            489,
+            315
+          ],
+          "score": 0.7529680132865906,
+          "selected": null
+        },
+        "input_sha256": "15ca485da775e3e1c7822d298bd18fda387754468cef6b491bb215316510130c",
+        "interior_flat_share": 0.0,
+        "role": "normal_texture_paste",
+        "size": [
+          704,
+          544
+        ],
+        "slot": 8,
+        "target": [
+          83,
+          83,
+          159,
+          147
+        ],
+        "target_pixels": 4864,
+        "truth_sha256": "68b765ec6aefe44163bc3baed5151adc4e244b372406425b9f906df80b4d946f"
+      },
+      {
+        "admitted": null,
+        "cohort": "screenshot",
+        "combined": {
+          "proposal": [
+            145,
+            155,
+            213,
+            231
+          ],
+          "score": 2.51686478583737,
+          "selected": {
+            "area": 5168,
+            "box": [
+              145,
+              155,
+              213,
+              231
+            ],
+            "crop": [
+              121,
+              131,
+              237,
+              255
+            ],
+            "crop_rgb_sha256": "99342c696abc9141ac471fd34fc6506ea9df971e0224ee3a7a94fd551975cbec",
+            "overlap": 0
+          }
+        },
+        "fixed": {
+          "proposal": [
+            110,
+            155,
+            286,
+            246
+          ],
+          "score": 0.7866417169570923,
+          "selected": null
+        },
+        "input_sha256": "d8937c3454f60af8abb5d295e8c4c75dbe5f5af2ada5e33acee9492bdb035810",
+        "interior_flat_share": 0.4642857142857143,
+        "role": "viewport_0",
+        "size": [
+          704,
+          544
+        ],
+        "slot": 0,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "96b6bef914f8edceba8eab862ee1fe3b339cf8faad3b739dee4ee38bb444c1a8",
+        "type": "flat",
+        "view": 0
+      },
+      {
+        "admitted": null,
+        "cohort": "screenshot",
+        "combined": {
+          "proposal": [
+            145,
+            155,
+            213,
+            231
+          ],
+          "score": 2.635192170961642,
+          "selected": {
+            "area": 5168,
+            "box": [
+              145,
+              155,
+              213,
+              231
+            ],
+            "crop": [
+              121,
+              131,
+              237,
+              255
+            ],
+            "crop_rgb_sha256": "0eabe53a42f47b81d4b78e07553420f47d3fba0b0b5a18fe99ac71e434a6b80e",
+            "overlap": 0
+          }
+        },
+        "fixed": {
+          "proposal": [
+            120,
+            42,
+            312,
+            213
+          ],
+          "score": 0.8269365429878235,
+          "selected": null
+        },
+        "input_sha256": "f5218c74a9f2c083f9bc5cec43c32582bb6dca583536bd56ba83065324e54a7a",
+        "interior_flat_share": 0.4642857142857143,
+        "role": "viewport_1",
+        "size": [
+          768,
+          512
+        ],
+        "slot": 0,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "a6619f482fee91a315f76cdcd8705d39b6ce11077c435ccc696142e130c27762",
+        "type": "flat",
+        "view": 1
+      },
+      {
+        "admitted": {
+          "area": 5214,
+          "box": [
+            168,
+            182,
+            247,
+            248
+          ],
+          "crop": [
+            144,
+            158,
+            271,
+            272
+          ],
+          "crop_rgb_sha256": "de4d3af4b54e441c7421cb0faaf297627be5b99c173b188cb8f579494b7fe60e",
+          "overlap": 0
+        },
+        "cohort": "screenshot",
+        "combined": {
+          "proposal": [
+            168,
+            182,
+            247,
+            248
+          ],
+          "score": 2.3455158602222954,
+          "selected": {
+            "area": 5214,
+            "box": [
+              168,
+              182,
+              247,
+              248
+            ],
+            "crop": [
+              144,
+              158,
+              271,
+              272
+            ],
+            "crop_rgb_sha256": "de4d3af4b54e441c7421cb0faaf297627be5b99c173b188cb8f579494b7fe60e",
+            "overlap": 0
+          }
+        },
+        "fixed": {
+          "proposal": [
+            169,
+            42,
+            286,
+            223
+          ],
+          "score": 0.5014597773551941,
+          "selected": null
+        },
+        "input_sha256": "c3536b12a4f219fb5bdb552a77db7be49ed412d0e13ee694002be14b6d254e12",
+        "interior_flat_share": 0.0,
+        "role": "viewport_0",
+        "size": [
+          704,
+          544
+        ],
+        "slot": 1,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "96b6bef914f8edceba8eab862ee1fe3b339cf8faad3b739dee4ee38bb444c1a8",
+        "type": "translucent",
+        "view": 0
+      },
+      {
+        "admitted": {
+          "area": 5214,
+          "box": [
+            168,
+            182,
+            247,
+            248
+          ],
+          "crop": [
+            144,
+            158,
+            271,
+            272
+          ],
+          "crop_rgb_sha256": "ee6aa5c0445020e7a4ae4cc177c7f89708efd367ed6f8b9b3c27a0cc9ad9acd8",
+          "overlap": 0
+        },
+        "cohort": "screenshot",
+        "combined": {
+          "proposal": [
+            168,
+            182,
+            247,
+            248
+          ],
+          "score": 1.9741725666194627,
+          "selected": {
+            "area": 5214,
+            "box": [
+              168,
+              182,
+              247,
+              248
+            ],
+            "crop": [
+              144,
+              158,
+              271,
+              272
+            ],
+            "crop_rgb_sha256": "ee6aa5c0445020e7a4ae4cc177c7f89708efd367ed6f8b9b3c27a0cc9ad9acd8",
+            "overlap": 0
+          }
+        },
+        "fixed": {
+          "proposal": [
+            168,
+            197,
+            424,
+            325
+          ],
+          "score": 0.5639351010322571,
+          "selected": null
+        },
+        "input_sha256": "e65a03c29d1a93062faa747ec80a59d4fe1dda462201d3dbad24c319f59ddf78",
+        "interior_flat_share": 0.0,
+        "role": "viewport_1",
+        "size": [
+          768,
+          512
+        ],
+        "slot": 1,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "a6619f482fee91a315f76cdcd8705d39b6ce11077c435ccc696142e130c27762",
+        "type": "translucent",
+        "view": 1
+      },
+      {
+        "admitted": {
+          "area": 7308,
+          "box": [
+            191,
+            209,
+            275,
+            296
+          ],
+          "crop": [
+            167,
+            185,
+            299,
+            320
+          ],
+          "crop_rgb_sha256": "20c5349861d5b74e5a0cb8abd2dbfdbeaf3d0d0fac69966603a4cdc7bb861e53",
+          "overlap": 0
+        },
+        "cohort": "screenshot",
+        "combined": {
+          "proposal": [
+            191,
+            209,
+            275,
+            296
+          ],
+          "score": 1.9044542030218357,
+          "selected": {
+            "area": 7308,
+            "box": [
+              191,
+              209,
+              275,
+              296
+            ],
+            "crop": [
+              167,
+              185,
+              299,
+              320
+            ],
+            "crop_rgb_sha256": "20c5349861d5b74e5a0cb8abd2dbfdbeaf3d0d0fac69966603a4cdc7bb861e53",
+            "overlap": 0
+          }
+        },
+        "fixed": {
+          "proposal": [
+            158,
+            209,
+            275,
+            345
+          ],
+          "score": 0.8010799884796143,
+          "selected": null
+        },
+        "input_sha256": "7aa815f967ad799c9846fc03d715bdabcf608e4a77157c167d09e38485ce310e",
+        "interior_flat_share": 0.0,
+        "role": "viewport_0",
+        "size": [
+          704,
+          544
+        ],
+        "slot": 2,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "96b6bef914f8edceba8eab862ee1fe3b339cf8faad3b739dee4ee38bb444c1a8",
+        "type": "patterned",
+        "view": 0
+      },
+      {
+        "admitted": {
+          "area": 7308,
+          "box": [
+            191,
+            209,
+            275,
+            296
+          ],
+          "crop": [
+            167,
+            185,
+            299,
+            320
+          ],
+          "crop_rgb_sha256": "366751d0c3b70f74089165521f97025de6e472ed6bb74adbbd35fb8016c7d75a",
+          "overlap": 0
+        },
+        "cohort": "screenshot",
+        "combined": {
+          "proposal": [
+            191,
+            209,
+            275,
+            296
+          ],
+          "score": 2.094105056972644,
+          "selected": {
+            "area": 7308,
+            "box": [
+              191,
+              209,
+              275,
+              296
+            ],
+            "crop": [
+              167,
+              185,
+              299,
+              320
+            ],
+            "crop_rgb_sha256": "366751d0c3b70f74089165521f97025de6e472ed6bb74adbbd35fb8016c7d75a",
+            "overlap": 0
+          }
+        },
+        "fixed": {
+          "proposal": [
+            191,
+            210,
+            319,
+            295
+          ],
+          "score": 0.7925512790679932,
+          "selected": null
+        },
+        "input_sha256": "80b370868a4a8bbd25bcaeaffdaac58d6b1f0addee0baa74ebce51369f021b43",
+        "interior_flat_share": 0.0,
+        "role": "viewport_1",
+        "size": [
+          768,
+          512
+        ],
+        "slot": 2,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "a6619f482fee91a315f76cdcd8705d39b6ce11077c435ccc696142e130c27762",
+        "type": "patterned",
+        "view": 1
+      },
+      {
+        "admitted": null,
+        "cohort": "screenshot",
+        "combined": {
+          "proposal": [
+            214,
+            236,
+            305,
+            307
+          ],
+          "score": 2.9964780506299165,
+          "selected": {
+            "area": 6461,
+            "box": [
+              214,
+              236,
+              305,
+              307
+            ],
+            "crop": [
+              190,
+              212,
+              329,
+              331
+            ],
+            "crop_rgb_sha256": "92c504761d9a151ed35f68bef0da26a5b919c76244db0e967bba27a20404eacb",
+            "overlap": 0
+          }
+        },
+        "fixed": {
+          "proposal": [
+            214,
+            126,
+            331,
+            307
+          ],
+          "score": 0.6669232249259949,
+          "selected": null
+        },
+        "input_sha256": "9340258b75578fefd504f99c1d5e05abba417019ce7080e9baf95f673b71a8f3",
+        "interior_flat_share": 0.5714285714285714,
+        "role": "viewport_0",
+        "size": [
+          704,
+          544
+        ],
+        "slot": 3,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "96b6bef914f8edceba8eab862ee1fe3b339cf8faad3b739dee4ee38bb444c1a8",
+        "type": "flat",
+        "view": 0
+      },
+      {
+        "admitted": null,
+        "cohort": "screenshot",
+        "combined": {
+          "proposal": [
+            214,
+            236,
+            305,
+            307
+          ],
+          "score": 2.9916882082488048,
+          "selected": {
+            "area": 6461,
+            "box": [
+              214,
+              236,
+              305,
+              307
+            ],
+            "crop": [
+              190,
+              212,
+              329,
+              331
+            ],
+            "crop_rgb_sha256": "183f14e2c286f5a953c2d312ff2754a38551469a03be08dd555ba3434ed483c5",
+            "overlap": 0
+          }
+        },
+        "fixed": {
+          "proposal": [
+            214,
+            222,
+            342,
+            307
+          ],
+          "score": 0.7045146822929382,
+          "selected": null
+        },
+        "input_sha256": "697df0efe1c2c844bf795c723fb38742e807ea1e0a3e86e1c5023223000ff33a",
+        "interior_flat_share": 0.5714285714285714,
+        "role": "viewport_1",
+        "size": [
+          768,
+          512
+        ],
+        "slot": 3,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "a6619f482fee91a315f76cdcd8705d39b6ce11077c435ccc696142e130c27762",
+        "type": "flat",
+        "view": 1
+      },
+      {
+        "admitted": {
+          "area": 5214,
+          "box": [
+            168,
+            155,
+            247,
+            221
+          ],
+          "crop": [
+            144,
+            131,
+            271,
+            245
+          ],
+          "crop_rgb_sha256": "39d7475a32ae3b4089f0c1f1787e5d4c7c0f0972acf6ba4b46624f6e6a579126",
+          "overlap": 0
+        },
+        "cohort": "screenshot",
+        "combined": {
+          "proposal": [
+            168,
+            155,
+            247,
+            221
+          ],
+          "score": 2.3155848652593565,
+          "selected": {
+            "area": 5214,
+            "box": [
+              168,
+              155,
+              247,
+              221
+            ],
+            "crop": [
+              144,
+              131,
+              271,
+              245
+            ],
+            "crop_rgb_sha256": "39d7475a32ae3b4089f0c1f1787e5d4c7c0f0972acf6ba4b46624f6e6a579126",
+            "overlap": 0
+          }
+        },
+        "fixed": {
+          "proposal": [
+            192,
+            42,
+            309,
+            178
+          ],
+          "score": 0.7801058292388916,
+          "selected": null
+        },
+        "input_sha256": "c93c32bdd652312809b20ffe3182ccbd896f37605384babe4655e7a9cf586423",
+        "interior_flat_share": 0.0,
+        "role": "viewport_0",
+        "size": [
+          704,
+          544
+        ],
+        "slot": 5,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "96b6bef914f8edceba8eab862ee1fe3b339cf8faad3b739dee4ee38bb444c1a8",
+        "type": "patterned",
+        "view": 0
+      },
+      {
+        "admitted": {
+          "area": 5168,
+          "box": [
+            145,
+            236,
+            213,
+            312
+          ],
+          "crop": [
+            121,
+            212,
+            237,
+            336
+          ],
+          "crop_rgb_sha256": "07dd583cdf9c8fcabcd0e980c9553d6743c99e5119db262ea46163d781ea347d",
+          "overlap": 0
+        },
+        "cohort": "screenshot",
+        "combined": {
+          "proposal": [
+            145,
+            236,
+            213,
+            312
+          ],
+          "score": 2.7891650448580783,
+          "selected": {
+            "area": 5168,
+            "box": [
+              145,
+              236,
+              213,
+              312
+            ],
+            "crop": [
+              121,
+              212,
+              237,
+              336
+            ],
+            "crop_rgb_sha256": "07dd583cdf9c8fcabcd0e980c9553d6743c99e5119db262ea46163d781ea347d",
+            "overlap": 0
+          }
+        },
+        "fixed": {
+          "proposal": [
+            145,
+            236,
+            262,
+            327
+          ],
+          "score": 0.7094723582267761,
+          "selected": null
+        },
+        "input_sha256": "1439c9bfbdafb26af8a504d02f19271bf96a2cc85ec153a95ee1fe4b8311d835",
+        "interior_flat_share": 0.0,
+        "role": "viewport_0",
+        "size": [
+          704,
+          544
+        ],
+        "slot": 8,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "96b6bef914f8edceba8eab862ee1fe3b339cf8faad3b739dee4ee38bb444c1a8",
+        "type": "patterned",
+        "view": 0
+      },
+      {
+        "admitted": {
+          "area": 5168,
+          "box": [
+            145,
+            236,
+            213,
+            312
+          ],
+          "crop": [
+            121,
+            212,
+            237,
+            336
+          ],
+          "crop_rgb_sha256": "9ab11a3f6b672cb1a57617a4fe895c9b7d5e8e6cde49f40b53d41a0dfe2bf81b",
+          "overlap": 0
+        },
+        "cohort": "screenshot",
+        "combined": {
+          "proposal": [
+            145,
+            236,
+            213,
+            312
+          ],
+          "score": 2.756145558725063,
+          "selected": {
+            "area": 5168,
+            "box": [
+              145,
+              236,
+              213,
+              312
+            ],
+            "crop": [
+              121,
+              212,
+              237,
+              336
+            ],
+            "crop_rgb_sha256": "9ab11a3f6b672cb1a57617a4fe895c9b7d5e8e6cde49f40b53d41a0dfe2bf81b",
+            "overlap": 0
+          }
+        },
+        "fixed": {
+          "proposal": [
+            145,
+            236,
+            273,
+            407
+          ],
+          "score": 0.6476414203643799,
+          "selected": null
+        },
+        "input_sha256": "4a109a143b82a6d98f352de568e87793d798a708653c83d5a9defa0e6170d432",
+        "interior_flat_share": 0.0,
+        "role": "viewport_1",
+        "size": [
+          768,
+          512
+        ],
+        "slot": 8,
+        "target": null,
+        "target_pixels": 0,
+        "truth_sha256": "a6619f482fee91a315f76cdcd8705d39b6ce11077c435ccc696142e130c27762",
+        "type": "patterned",
+        "view": 1
+      }
+    ],
+    "seal_sha256": "664415ba6524441571527b2436105e6a4e0860224918c77129cc9f9739625974"
+  },
+  "freeze": {
+    "capture_plan": {
+      "schema": "chipmunk.image-small-boundary-interior-captures/1",
+      "screens": [
+        {
+          "slot": 0,
+          "type": "flat"
+        },
+        {
+          "slot": 1,
+          "type": "translucent"
+        },
+        {
+          "slot": 2,
+          "type": "patterned"
+        },
+        {
+          "slot": 3,
+          "type": "flat"
+        },
+        {
+          "slot": 4,
+          "type": "translucent"
+        },
+        {
+          "slot": 5,
+          "type": "patterned"
+        },
+        {
+          "slot": 6,
+          "type": "flat"
+        },
+        {
+          "slot": 7,
+          "type": "translucent"
+        },
+        {
+          "slot": 8,
+          "type": "patterned"
+        }
+      ],
+      "viewports": [
+        {
+          "height": 544,
+          "width": 704
+        },
+        {
+          "height": 512,
+          "width": 768
+        }
+      ]
+    },
+    "capture_rgb_sha256": {
+      "0-0.png": "f51e35ecd0b2fd0d88ba49a5191c489e7f9b04516413d2d37d3d518e797f8c2f",
+      "0-1.png": "8c7e9e41d140fd6f1a04ac6523fc70b2dddbcddc2574088f028b10c3489c84d2",
+      "1-0.png": "23cdd2394c69b2ac3c5b1e602dd76b749cdc153d81672feb7293b398a517a4ba",
+      "1-1.png": "3257c76294f45b46590d6aefc7d6cb9f38b5c84f05dc3274e673f4070d1f17dc",
+      "2-0.png": "bc52071cab7d6b0efecbd307e831d38fdd7ad71079bcd0ac33744ab51788422d",
+      "2-1.png": "e7b8bfbb2d0cd66b7666c71d72777cf905ad11d793543d88833b5dc5d26bb6fb",
+      "3-0.png": "c24e826a8dcb6d95c5488b928c32b8f88ac1aa62d97496074fd6088e1920b621",
+      "3-1.png": "d20da21cafcfb19a506bacc34ba584ab3349b1638cf45a5344ce513a8b041449",
+      "4-0.png": "9094612b37c0934a7b7595a0889805823587079dc69f56335f6bdbf2d4fa7194",
+      "4-1.png": "8136d073cf551ff80f70ceadc364033ad2fe7efbcc8c9cf235a1e935b48600e5",
+      "5-0.png": "ed3cd6325529478fee8cac7ef024c49a212ee78445e54b48436f31c074cf99f4",
+      "5-1.png": "f668e3f2950bddfc7fee048cc80543e7f6e2862433426d7f119a9f7f46dcfa7f",
+      "6-0.png": "9b45d8fb52d8caa1015ee10c3001e006efba9fb3feb854f7e640b4ff31605940",
+      "6-1.png": "7ba813721a932f48fb68e92a4ffab87b3329e64b95e48accefd340095ab2a9d5",
+      "7-0.png": "c04c84ac45f25526d71b805bb48d2e1d45a773f806ce58369475ca6eea81fc91",
+      "7-1.png": "af92c5714ebecff97682f5b01fb1a565641a1052d92b4483737c67d56da10a86",
+      "8-0.png": "5b1581a272804c7ec038f024dd688151be74c02643ef06f036a95406c3571235",
+      "8-1.png": "1a495ca2bc840810ac534c2da0b603392da0523477a729ff05c773e06bf807e5"
+    },
+    "captures": {
+      "browser": "153.0.8010.12",
+      "rows": [
+        {
+          "filename": "0-0.png",
+          "html_sha256": "c24ba614e8be12bd189cc7e9bb913fb60132d2cd50630281bf8357f7dc24d6a1",
+          "photo_jpeg_sha256": "38499f01b9f896bafd0a0054c82d7e260067311458db31cdf24a3b02d138a6dd",
+          "sha256": "348be7d49dea9f7e64394d1d708e8025e362a23de030d46d331725ffa5106367",
+          "size": [
+            704,
+            544
+          ],
+          "slot": 0,
+          "type": "flat",
+          "view": 0
+        },
+        {
+          "filename": "0-1.png",
+          "html_sha256": "c24ba614e8be12bd189cc7e9bb913fb60132d2cd50630281bf8357f7dc24d6a1",
+          "photo_jpeg_sha256": "38499f01b9f896bafd0a0054c82d7e260067311458db31cdf24a3b02d138a6dd",
+          "sha256": "66020eebcf47350d7859455733b0db9d6b1e1cb9ab20186fb7fc1e9a475559ef",
+          "size": [
+            768,
+            512
+          ],
+          "slot": 0,
+          "type": "flat",
+          "view": 1
+        },
+        {
+          "filename": "1-0.png",
+          "html_sha256": "c3e43fb107fcbeb170caee368e579193c2f91ef47a9b47762ba5a4ef1b5ce0dd",
+          "photo_jpeg_sha256": "23ca3629361851bfb6b5ee2a6c379c1a31167b370ef9482b787a0d2fe6aa6226",
+          "sha256": "59f033caa5193398a03e5798bdef0260685f0e90d2ecbda36d908aa67c1aa245",
+          "size": [
+            704,
+            544
+          ],
+          "slot": 1,
+          "type": "translucent",
+          "view": 0
+        },
+        {
+          "filename": "1-1.png",
+          "html_sha256": "c3e43fb107fcbeb170caee368e579193c2f91ef47a9b47762ba5a4ef1b5ce0dd",
+          "photo_jpeg_sha256": "23ca3629361851bfb6b5ee2a6c379c1a31167b370ef9482b787a0d2fe6aa6226",
+          "sha256": "243f95a748b53f8606aa1abefa1a1ba6717fec2ddf220b64981a488439a4a43a",
+          "size": [
+            768,
+            512
+          ],
+          "slot": 1,
+          "type": "translucent",
+          "view": 1
+        },
+        {
+          "filename": "2-0.png",
+          "html_sha256": "3fda614e3d766a05c72f34c60af85f4b9bab35a6037e1327780acbdf01fa67f9",
+          "photo_jpeg_sha256": "4a7d31113f350db80c416ad986504a453e0ee233153fd5d06a6206531a952e28",
+          "sha256": "22de4de19d9ff6a6f880f88df25965ad6c5246d6784043791b913a90f6156a57",
+          "size": [
+            704,
+            544
+          ],
+          "slot": 2,
+          "type": "patterned",
+          "view": 0
+        },
+        {
+          "filename": "2-1.png",
+          "html_sha256": "3fda614e3d766a05c72f34c60af85f4b9bab35a6037e1327780acbdf01fa67f9",
+          "photo_jpeg_sha256": "4a7d31113f350db80c416ad986504a453e0ee233153fd5d06a6206531a952e28",
+          "sha256": "37a97009075a72f60196ed3ed5dee9f08c4fc5ebf7e47eb4f1651f3fbd85e9a0",
+          "size": [
+            768,
+            512
+          ],
+          "slot": 2,
+          "type": "patterned",
+          "view": 1
+        },
+        {
+          "filename": "3-0.png",
+          "html_sha256": "ae2139c3a125b9482a35da5503f445bd1983e36ab5f7208fa557657fb18c116e",
+          "photo_jpeg_sha256": "986709c3d56ddf1706543486aa9b2fc2dcb0a9025f1fe61cb4cff6aef3ca130b",
+          "sha256": "5e6625df5e60395abff4a6f748c05ab8979f2b28e160d12db28e9c76cec83c5f",
+          "size": [
+            704,
+            544
+          ],
+          "slot": 3,
+          "type": "flat",
+          "view": 0
+        },
+        {
+          "filename": "3-1.png",
+          "html_sha256": "ae2139c3a125b9482a35da5503f445bd1983e36ab5f7208fa557657fb18c116e",
+          "photo_jpeg_sha256": "986709c3d56ddf1706543486aa9b2fc2dcb0a9025f1fe61cb4cff6aef3ca130b",
+          "sha256": "009b6491e3b71f27a73f95884b7d561e88ad0fda18c0df7238bcf8960908cee5",
+          "size": [
+            768,
+            512
+          ],
+          "slot": 3,
+          "type": "flat",
+          "view": 1
+        },
+        {
+          "filename": "4-0.png",
+          "html_sha256": "b952e6dc31e3ba54d53a06f53bfb58563e3c49acc7ce9b6cd0a3ce6a9229d225",
+          "photo_jpeg_sha256": "9aab247492ffa67176ea402877df413135fc9ce05fbb93e5f3b22fb00605948f",
+          "sha256": "407828e6d0eb72d99799da6d053eab792900f7e2daefde2f17d86925b8c0d2e2",
+          "size": [
+            704,
+            544
+          ],
+          "slot": 4,
+          "type": "translucent",
+          "view": 0
+        },
+        {
+          "filename": "4-1.png",
+          "html_sha256": "b952e6dc31e3ba54d53a06f53bfb58563e3c49acc7ce9b6cd0a3ce6a9229d225",
+          "photo_jpeg_sha256": "9aab247492ffa67176ea402877df413135fc9ce05fbb93e5f3b22fb00605948f",
+          "sha256": "e958397ba44681c6a783df5e2601e097c41577a199292c963ff709ecd6af7748",
+          "size": [
+            768,
+            512
+          ],
+          "slot": 4,
+          "type": "translucent",
+          "view": 1
+        },
+        {
+          "filename": "5-0.png",
+          "html_sha256": "1158897852c39c9a98fe8aa659900a3ee721f29cd9914951ff951e04a3b78d65",
+          "photo_jpeg_sha256": "f3de93e8acf965d0789f2d78436d3e9bb56b0bf31c1fc21b994bc2301c2baa4e",
+          "sha256": "b56a65193f36e9d245100c4fda38004168ce2d8352378347c7b310f70fe887a3",
+          "size": [
+            704,
+            544
+          ],
+          "slot": 5,
+          "type": "patterned",
+          "view": 0
+        },
+        {
+          "filename": "5-1.png",
+          "html_sha256": "1158897852c39c9a98fe8aa659900a3ee721f29cd9914951ff951e04a3b78d65",
+          "photo_jpeg_sha256": "f3de93e8acf965d0789f2d78436d3e9bb56b0bf31c1fc21b994bc2301c2baa4e",
+          "sha256": "d15d952142194ad2239ab753b03e8186e54dee7731f9f57948246979bcb15e5d",
+          "size": [
+            768,
+            512
+          ],
+          "slot": 5,
+          "type": "patterned",
+          "view": 1
+        },
+        {
+          "filename": "6-0.png",
+          "html_sha256": "9f64b76159148f4d60f440a24d95456686be279da2fd62f9d223db8669128889",
+          "photo_jpeg_sha256": "32ae00004ea9f94e1c84a8ab7c02571713cd1365445c233cdd5d83e009d10b4d",
+          "sha256": "09fbcb82f5e677c97924116eb61ac11a992a8ee1296f9310576830bfcebb67ce",
+          "size": [
+            704,
+            544
+          ],
+          "slot": 6,
+          "type": "flat",
+          "view": 0
+        },
+        {
+          "filename": "6-1.png",
+          "html_sha256": "9f64b76159148f4d60f440a24d95456686be279da2fd62f9d223db8669128889",
+          "photo_jpeg_sha256": "32ae00004ea9f94e1c84a8ab7c02571713cd1365445c233cdd5d83e009d10b4d",
+          "sha256": "164b713517fee5324a9d472fda19b7a18389c9d004d508f0ce034a35684a5ab9",
+          "size": [
+            768,
+            512
+          ],
+          "slot": 6,
+          "type": "flat",
+          "view": 1
+        },
+        {
+          "filename": "7-0.png",
+          "html_sha256": "bc1f6b6f6cbe767d541626bb4ebc558bc67933da6b4828c34118683d8348c745",
+          "photo_jpeg_sha256": "79d83f95522945d76a08d2d56a4a0bc2d5b3fcff456fcb9614755f14d697d8b4",
+          "sha256": "09bd915779b02dc5be37080f78a51b6e2751e20d873a44af16ff6d6429610d34",
+          "size": [
+            704,
+            544
+          ],
+          "slot": 7,
+          "type": "translucent",
+          "view": 0
+        },
+        {
+          "filename": "7-1.png",
+          "html_sha256": "bc1f6b6f6cbe767d541626bb4ebc558bc67933da6b4828c34118683d8348c745",
+          "photo_jpeg_sha256": "79d83f95522945d76a08d2d56a4a0bc2d5b3fcff456fcb9614755f14d697d8b4",
+          "sha256": "09cca1cc4caf6201b00a018eb160c6d2326c7773e6c9525277376b65feb88418",
+          "size": [
+            768,
+            512
+          ],
+          "slot": 7,
+          "type": "translucent",
+          "view": 1
+        },
+        {
+          "filename": "8-0.png",
+          "html_sha256": "d4a1acac8f26d26fc683dd3235dfa6064168936f524ba8f4ff8b0d0dd9bcd34a",
+          "photo_jpeg_sha256": "6bf0600c1aad740443c7708c7e8ffefb800a3cf8c6eea87be9b8cea04a9b9090",
+          "sha256": "3bd8d7b4c8b5870d234356863a34669222898be23e5026eb6ca482beca22f2c1",
+          "size": [
+            704,
+            544
+          ],
+          "slot": 8,
+          "type": "patterned",
+          "view": 0
+        },
+        {
+          "filename": "8-1.png",
+          "html_sha256": "d4a1acac8f26d26fc683dd3235dfa6064168936f524ba8f4ff8b0d0dd9bcd34a",
+          "photo_jpeg_sha256": "6bf0600c1aad740443c7708c7e8ffefb800a3cf8c6eea87be9b8cea04a9b9090",
+          "sha256": "d41e645e6e3a2c9d8aca5b2889c64c394e76712c3a8860fc89d57510f0daedf1",
+          "size": [
+            768,
+            512
+          ],
+          "slot": 8,
+          "type": "patterned",
+          "view": 1
+        }
+      ]
+    },
+    "code_sha256": {
+      "capture_image_small_boundary_interiors.cjs": "6fb336955308a0924c838c563524ae060abe1462857aea47f7a47926ef6d6cbb",
+      "image_boundary_extent_transfer.py": "b64ba2e175b6bdf7f1be3dabd04ce3e350a2eaa96ad10fa7288a495d3e6410f5",
+      "image_small_boundary_control_stress.py": "749347b86ccf90da8e42fa9068cf9ef7a567f0968f62130a3a1679c08d7bdfea",
+      "image_small_boundary_interior_transfer.py": "58d67580bae5c90f96cf511b745437e23c13cae72c255de832a5916529ab1899",
+      "sharp_boundary.py": "04c120cd027e50bd107fd15778f66fe38c43d64439e090835dfad99727e41cbc"
+    },
+    "fallback_point": 1.2805722063718288,
+    "fixed_point": 0.8292734622955322,
+    "locations": [
+      {
+        "slot": 0,
+        "source_patches": {
+          "low_texture_paste": {
+            "box": [
+              20,
+              356,
+              96,
+              420
+            ],
+            "colors": 4,
+            "known_patch_interior_flat_share": 0.07142857142857142,
+            "source_gradient": 2.022353104984684
+          },
+          "normal_texture_paste": {
+            "box": [
+              68,
+              260,
+              144,
+              324
+            ],
+            "colors": null,
+            "known_patch_interior_flat_share": 0.0,
+            "source_gradient": 9.546298036758564
+          }
+        },
+        "target": [
+          99,
+          99,
+          175,
+          163
+        ]
+      },
+      {
+        "slot": 1,
+        "source_patches": {
+          "low_texture_paste": {
+            "box": [
+              20,
+              68,
+              90,
+              154
+            ],
+            "colors": null,
+            "known_patch_interior_flat_share": 0.0,
+            "source_gradient": 3.002593354159999
+          },
+          "normal_texture_paste": {
+            "box": [
+              116,
+              404,
+              186,
+              490
+            ],
+            "colors": null,
+            "known_patch_interior_flat_share": 0.0,
+            "source_gradient": 7.591659996657915
+          }
+        },
+        "target": [
+          213,
+          177,
+          283,
+          263
+        ]
+      },
+      {
+        "slot": 2,
+        "source_patches": {
+          "low_texture_paste": {
+            "box": [
+              188,
+              20,
+              273,
+              91
+            ],
+            "colors": 4,
+            "known_patch_interior_flat_share": 0.42857142857142855,
+            "source_gradient": 0.1821640299312213
+          },
+          "normal_texture_paste": {
+            "box": [
+              20,
+              260,
+              105,
+              331
+            ],
+            "colors": null,
+            "known_patch_interior_flat_share": 0.0,
+            "source_gradient": 4.131969398087874
+          }
+        },
+        "target": [
+          327,
+          255,
+          412,
+          326
+        ]
+      },
+      {
+        "slot": 3,
+        "source_patches": {
+          "low_texture_paste": {
+            "box": [
+              44,
+              284,
+              108,
+              361
+            ],
+            "colors": null,
+            "known_patch_interior_flat_share": 0.0,
+            "source_gradient": 0.9956611419986654
+          },
+          "normal_texture_paste": {
+            "box": [
+              260,
+              284,
+              324,
+              361
+            ],
+            "colors": null,
+            "known_patch_interior_flat_share": 0.0,
+            "source_gradient": 10.531306353116738
+          }
+        },
+        "target": [
+          157,
+          333,
+          221,
+          410
+        ]
+      },
+      {
+        "slot": 4,
+        "source_patches": {
+          "low_texture_paste": {
+            "box": [
+              284,
+              404,
+              360,
+              468
+            ],
+            "colors": 4,
+            "known_patch_interior_flat_share": 0.017857142857142856,
+            "source_gradient": 0.714119761208577
+          },
+          "normal_texture_paste": {
+            "box": [
+              548,
+              140,
+              624,
+              204
+            ],
+            "colors": null,
+            "known_patch_interior_flat_share": 0.0,
+            "source_gradient": 13.87631465817321
+          }
+        },
+        "target": [
+          91,
+          91,
+          167,
+          155
+        ]
+      },
+      {
+        "slot": 5,
+        "source_patches": {
+          "low_texture_paste": {
+            "box": [
+              332,
+              44,
+              402,
+              130
+            ],
+            "colors": null,
+            "known_patch_interior_flat_share": 0.015873015873015872,
+            "source_gradient": 0.2361010990172948
+          },
+          "normal_texture_paste": {
+            "box": [
+              68,
+              284,
+              138,
+              370
+            ],
+            "colors": null,
+            "known_patch_interior_flat_share": 0.0,
+            "source_gradient": 10.976864557754347
+          }
+        },
+        "target": [
+          263,
+          127,
+          333,
+          213
+        ]
+      },
+      {
+        "slot": 6,
+        "source_patches": {
+          "low_texture_paste": {
+            "box": [
+              308,
+              212,
+              393,
+              283
+            ],
+            "colors": 4,
+            "known_patch_interior_flat_share": 0.3333333333333333,
+            "source_gradient": 0.1140668192159493
+          },
+          "normal_texture_paste": {
+            "box": [
+              188,
+              212,
+              273,
+              283
+            ],
+            "colors": null,
+            "known_patch_interior_flat_share": 0.0,
+            "source_gradient": 1.662223537302245
+          }
+        },
+        "target": [
+          264,
+          286,
+          349,
+          357
+        ]
+      },
+      {
+        "slot": 7,
+        "source_patches": {
+          "low_texture_paste": {
+            "box": [
+              380,
+              452,
+              444,
+              529
+            ],
+            "colors": null,
+            "known_patch_interior_flat_share": 0.0,
+            "source_gradient": 1.5027751119885755
+          },
+          "normal_texture_paste": {
+            "box": [
+              188,
+              164,
+              252,
+              241
+            ],
+            "colors": null,
+            "known_patch_interior_flat_share": 0.0,
+            "source_gradient": 5.652672827338006
+          }
+        },
+        "target": [
+          329,
+          178,
+          393,
+          255
+        ]
+      },
+      {
+        "slot": 8,
+        "source_patches": {
+          "low_texture_paste": {
+            "box": [
+              596,
+              404,
+              672,
+              468
+            ],
+            "colors": 4,
+            "known_patch_interior_flat_share": 0.0,
+            "source_gradient": 1.5017878898635477
+          },
+          "normal_texture_paste": {
+            "box": [
+              68,
+              404,
+              144,
+              468
+            ],
+            "colors": null,
+            "known_patch_interior_flat_share": 0.0,
+            "source_gradient": 6.511744030214425
+          }
+        },
+        "target": [
+          83,
+          83,
+          159,
+          147
+        ]
+      }
+    ],
+    "maximum_axis_fraction": 0.18,
+    "minimum_side": 56,
+    "policy": {
+      "inset_pixels": 4,
+      "interior_floor": 0.35,
+      "maximum_extra_photo_control_groups": 0,
+      "maximum_extra_screen_groups": 0,
+      "maximum_lost_low_texture_locations": 0,
+      "minimum_broad_low_texture_locations": 3,
+      "minimum_broad_screen_types_flagged": 2,
+      "minimum_gated_normal_locations_added": 3,
+      "minimum_negative_screen_groups": 6
+    },
+    "roster": {
+      "cache_metadata_sha256": "bba4cc565bfd6540d6054fe75931bb693e280472ac5591c0da698901c8834fc2",
+      "graph_sha256": "01488762b8bb6083910996c30a6fee98ad4bff5b7efb96b7af61d780ed35feea",
+      "photos": [
+        {
+          "author": "Digital Sextant",
+          "author_profile": "https://www.flickr.com/photos/digitalsextant/",
+          "encoded_sha256": "f3cb4d28d09a94ab2a2ee0eb60531c94be78ecf6840119eb956ae0a9b8b6bd8d",
+          "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+          "rgb_sha256": "fef60c1b8af888a74fef5daa6ebd5b9ebc6003fb7acd0e28e010a60276aa3711",
+          "role": "target",
+          "size": [
+            1024,
+            768
+          ],
+          "slot": 0,
+          "source_component": [
+            "fresh-jpeg/130681"
+          ],
+          "source_image_url": "https://live.staticflickr.com/3107/2833683946_1d9a135ab6_b.jpg",
+          "source_url": "https://www.flickr.com/photos/digitalsextant/2833683946/",
+          "title": "2 Giraffes"
+        },
+        {
+          "author": "liebeslakritze",
+          "author_profile": "https://www.flickr.com/photos/8069051@N06/",
+          "encoded_sha256": "078e2dfd529a4f2b8673adfdbe62c8841a96ae464d6582b6f0468be483339844",
+          "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+          "rgb_sha256": "ed536a433c07a1d3cc566dcdd1bdd57ace9372b0da215865118ecc8216fa7f35",
+          "role": "target",
+          "size": [
+            1024,
+            683
+          ],
+          "slot": 1,
+          "source_component": [
+            "fresh-jpeg/431393"
+          ],
+          "source_image_url": "https://live.staticflickr.com/8419/8710147224_ff637cc4fc_b.jpg",
+          "source_url": "https://www.flickr.com/photos/8069051@N06/8710147224/",
+          "title": ""
+        },
+        {
+          "author": "St. George's School",
+          "author_profile": "https://www.flickr.com/photos/stgeorgesschool/",
+          "encoded_sha256": "2a2866c564bd1f9112f6bb9aed17e9965806029250a76b53bb503888f00b2b25",
+          "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+          "rgb_sha256": "ff372d2f1e3b994b6212a8bc8c0e22ab58e4730c30dcb52a489d548534a8a55a",
+          "role": "target",
+          "size": [
+            1024,
+            680
+          ],
+          "slot": 2,
+          "source_component": [
+            "fresh-jpeg/306670"
+          ],
+          "source_image_url": "https://live.staticflickr.com/1181/5104535487_d9b5c40b9c_b.jpg",
+          "source_url": "https://www.flickr.com/photos/stgeorgesschool/5104535487/",
+          "title": "AHP_0325.jpg"
+        },
+        {
+          "author": "Martin Cathrae",
+          "author_profile": "https://www.flickr.com/photos/suckamc/",
+          "encoded_sha256": "53721a8767a9289e4df3b979dbc7d181675ce0e226ea3059d620ae087d6b1fe1",
+          "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+          "rgb_sha256": "46721fea22b57551f92111e6781f81294bae1d3e9d5e71e2c53791a5627cd1a7",
+          "role": "target",
+          "size": [
+            1024,
+            683
+          ],
+          "slot": 3,
+          "source_component": [
+            "fresh-jpeg/27704",
+            "fresh-jpeg/376921"
+          ],
+          "source_image_url": "https://live.staticflickr.com/6067/6068733163_fd5006922a_b.jpg",
+          "source_url": "https://www.flickr.com/photos/suckamc/6068733163/",
+          "title": "Huckstables"
+        },
+        {
+          "author": "bon..c'est t'elle encore..",
+          "author_profile": "https://www.flickr.com/photos/ashleybilodeau/",
+          "encoded_sha256": "40009d7edff03c69ef10f4006628b0be277d76aaff80b3340eb865050a7b57ba",
+          "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+          "rgb_sha256": "8634325bf4b34aa4e0eb66ba19fdf0d96619182baa28a4d27f3bf8bc9411215f",
+          "role": "target",
+          "size": [
+            765,
+            1024
+          ],
+          "slot": 4,
+          "source_component": [
+            "fresh-jpeg/99874"
+          ],
+          "source_image_url": "https://live.staticflickr.com/5223/5675208710_587c8dee0e_b.jpg",
+          "source_url": "https://www.flickr.com/photos/ashleybilodeau/5675208710/",
+          "title": "photo(4)"
+        },
+        {
+          "author": "hugh llewelyn",
+          "author_profile": "https://www.flickr.com/photos/camperdown/",
+          "encoded_sha256": "3320c51952ad464da83e8e899b299d35d106bb09a2ab064c2a26724c79eef6a2",
+          "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+          "rgb_sha256": "a4f66d8182deaa62c529ef8a24c71c35f9cdf9327eca4f2d8db846a64af01612",
+          "role": "target",
+          "size": [
+            797,
+            601
+          ],
+          "slot": 5,
+          "source_component": [
+            "fresh-jpeg/251803"
+          ],
+          "source_image_url": "https://live.staticflickr.com/8339/8288084387_327a48ded9_b.jpg",
+          "source_url": "https://www.flickr.com/photos/camperdown/8288084387/",
+          "title": "D105"
+        },
+        {
+          "author": "kirinqueen",
+          "author_profile": "https://www.flickr.com/photos/kirinqueen/",
+          "encoded_sha256": "7e2ab116222b054c644ac5bbc6c57a0684b9698e7ad0b95ab792730ca20e6a6d",
+          "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+          "rgb_sha256": "286284c708b6ef65b174f388beef2d2abbe87de9a8d5ccb6c621749a31983a8f",
+          "role": "target",
+          "size": [
+            612,
+            612
+          ],
+          "slot": 6,
+          "source_component": [
+            "fresh-jpeg/253233"
+          ],
+          "source_image_url": "https://live.staticflickr.com/7264/6879212776_97acdc8dca_b.jpg",
+          "source_url": "https://www.flickr.com/photos/kirinqueen/6879212776/",
+          "title": "CSA haul"
+        },
+        {
+          "author": "cdsessums",
+          "author_profile": "https://www.flickr.com/photos/csessums/",
+          "encoded_sha256": "04aab0176f3da21fd5140dba1eaf05dd8ba59ae58dc1a1f6f695f3d0a8152e51",
+          "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+          "rgb_sha256": "8a3c77b08a351f79c1854eb5bc3a1eb61051c41c6789dca85687b8bcb8bd9582",
+          "role": "target",
+          "size": [
+            1024,
+            768
+          ],
+          "slot": 7,
+          "source_component": [
+            "fresh-jpeg/345658"
+          ],
+          "source_image_url": "https://live.staticflickr.com/5124/5378999490_1c4edc73d6_b.jpg",
+          "source_url": "https://www.flickr.com/photos/csessums/5378999490/",
+          "title": "Stop All Way Sign Blue Sky Trees"
+        },
+        {
+          "author": "Scarlet Sappho",
+          "author_profile": "https://www.flickr.com/photos/skinnylawyer/",
+          "encoded_sha256": "00ec797a1e05ea1f67f8afdea67b66db07a172475889172b36ae16ff726dc6d0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+          "rgb_sha256": "d9b9929befade8078036afa97cee04265cf706bdc7a75e884b1ac6d8e8944eac",
+          "role": "target",
+          "size": [
+            1024,
+            680
+          ],
+          "slot": 8,
+          "source_component": [
+            "fresh-jpeg/311941"
+          ],
+          "source_image_url": "https://live.staticflickr.com/8455/7889959736_7b0666c2be_b.jpg",
+          "source_url": "https://www.flickr.com/photos/skinnylawyer/7889959736/",
+          "title": "VIA Rail train, Jasper Heritage Railway Station"
+        },
+        {
+          "author": "TheJRB",
+          "author_profile": "https://www.flickr.com/photos/joshtechfission/",
+          "encoded_sha256": "2110475008b2d6fac61709babeadc625d2c1c8853232d7e54b6b124f2f4abe16",
+          "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+          "rgb_sha256": "3f8dc27983ac961a09e5b086bb8dc91a972c88b5320518474a172e58820f26ac",
+          "role": "donor",
+          "size": [
+            1024,
+            680
+          ],
+          "slot": 9,
+          "source_component": [
+            "fresh-jpeg/94996"
+          ],
+          "source_image_url": "https://live.staticflickr.com/5473/9530761207_b494226d20_b.jpg",
+          "source_url": "https://www.flickr.com/photos/joshtechfission/9530761207/",
+          "title": "158836+158819 Depart Smethwick Galton Bridge"
+        },
+        {
+          "author": "Navin75",
+          "author_profile": "https://www.flickr.com/photos/navin75/",
+          "encoded_sha256": "44a0dd24e38300933a98958fb678447eac2a65131c18ad46b9c22fba387ba061",
+          "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+          "rgb_sha256": "9c36616818f36e38a16aa0835418edf5621d131d170b1fde8269e31ec710d662",
+          "role": "donor",
+          "size": [
+            1024,
+            768
+          ],
+          "slot": 10,
+          "source_component": [
+            "fresh-jpeg/394245"
+          ],
+          "source_image_url": "https://live.staticflickr.com/7283/9325784848_4231beaa3a_b.jpg",
+          "source_url": "https://www.flickr.com/photos/navin75/9325784848/",
+          "title": "Nick Markakis"
+        },
+        {
+          "author": "BANAMINE",
+          "author_profile": "https://www.flickr.com/photos/banamine/",
+          "encoded_sha256": "2bcf42fb0a948d8793346ac51dba83b8f9532052a8382d86cfb7aa332bc5999d",
+          "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+          "rgb_sha256": "ed889e62026859f5a82b9997fd1f61cc53585b5efab326bdf5a944ad2399ad5e",
+          "role": "donor",
+          "size": [
+            700,
+            525
+          ],
+          "slot": 11,
+          "source_component": [
+            "fresh-jpeg/314526"
+          ],
+          "source_image_url": "https://live.staticflickr.com/4083/5069308545_12450516c8_b.jpg",
+          "source_url": "https://www.flickr.com/photos/banamine/5069308545/",
+          "title": "From Francesca Romana"
+        },
+        {
+          "author": "j.reed",
+          "author_profile": "https://www.flickr.com/photos/jreed/",
+          "encoded_sha256": "b902a2e1136437e3399dccb0cfe3d52c44e2aeff3af88e1815097ab7206ca650",
+          "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+          "rgb_sha256": "6421ba39a49f2ef37451395427ef0b116334a2af8a582ff0d843ca072005610e",
+          "role": "donor",
+          "size": [
+            1024,
+            683
+          ],
+          "slot": 12,
+          "source_component": [
+            "fresh-jpeg/57086"
+          ],
+          "source_image_url": "https://live.staticflickr.com/4083/4972558235_4cde4a723a_b.jpg",
+          "source_url": "https://www.flickr.com/photos/jreed/4972558235/",
+          "title": "Riversharks game"
+        },
+        {
+          "author": "ceonyc",
+          "author_profile": "https://www.flickr.com/photos/ceonyc/",
+          "encoded_sha256": "29248538f1fe6702ec7a4d643908bc7e39d9a50b43d711a887d3675ddb156bd9",
+          "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+          "rgb_sha256": "517e8f30a3ce696911aaeb94343ff4b2287b6441818262a5b3119bee8a143c1d",
+          "role": "donor",
+          "size": [
+            612,
+            612
+          ],
+          "slot": 13,
+          "source_component": [
+            "fresh-jpeg/213731"
+          ],
+          "source_image_url": "https://live.staticflickr.com/7135/7422227012_0328bab484_b.jpg",
+          "source_url": "https://www.flickr.com/photos/ceonyc/7422227012/",
+          "title": "This FedEx truck is from the future"
+        },
+        {
+          "author": "jinglejammer",
+          "author_profile": "https://www.flickr.com/photos/jinglejammer/",
+          "encoded_sha256": "145aadcb240c339cba9d0253aefb29d44cd34b9bea965146c838b0233c07e754",
+          "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+          "rgb_sha256": "bde354a7a603a9e8e893c33e8a1de53bc49c8c07b95c5cd396b4cca212e27e74",
+          "role": "donor",
+          "size": [
+            683,
+            1024
+          ],
+          "slot": 14,
+          "source_component": [
+            "fresh-jpeg/532387"
+          ],
+          "source_image_url": "https://live.staticflickr.com/2412/2344927532_9df916da6e_b.jpg",
+          "source_url": "https://www.flickr.com/photos/jinglejammer/2344927532/",
+          "title": "Day at the Zilker Kite Festival"
+        },
+        {
+          "author": "matt.davis",
+          "author_profile": "https://www.flickr.com/photos/matt-davis/",
+          "encoded_sha256": "a5c79bd71bf7a930f134c5a2443fd11ad7b0252cabc4fa4b7e91df5a59769386",
+          "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+          "rgb_sha256": "a972fe3cfb435eab1df56b6a96b6a088752d4fa7ad0ea6fcce712214f5e0f94b",
+          "role": "donor",
+          "size": [
+            679,
+            1024
+          ],
+          "slot": 15,
+          "source_component": [
+            "fresh-jpeg/374184"
+          ],
+          "source_image_url": "https://live.staticflickr.com/1070/1300336842_4a56197177_b.jpg",
+          "source_url": "https://www.flickr.com/photos/matt-davis/1300336842/",
+          "title": "High Power Flush"
+        },
+        {
+          "author": "Vironevaeh",
+          "author_profile": "https://www.flickr.com/photos/vironevaeh/",
+          "encoded_sha256": "486dddf186a34ef33d94ac554ea57182c6e83fa4860827e093e9bcc6636f3e90",
+          "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+          "rgb_sha256": "0e6253f59b56c0e314c92da515d0a424b71324155c3352379561291fe46186b3",
+          "role": "donor",
+          "size": [
+            1024,
+            683
+          ],
+          "slot": 16,
+          "source_component": [
+            "fresh-jpeg/115043"
+          ],
+          "source_image_url": "https://live.staticflickr.com/6153/6183734374_4eba6c91ea_b.jpg",
+          "source_url": "https://www.flickr.com/photos/vironevaeh/6183734374/",
+          "title": "Eastern Surfing competition 2011 in Nag's Head, NC"
+        },
+        {
+          "author": "Imagenf11",
+          "author_profile": "https://www.flickr.com/photos/david-racing/",
+          "encoded_sha256": "46d9ad4824218154d1cea5715edef7f03db7c7223c1a3a3ca1abfa4a33c41c26",
+          "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+          "rgb_sha256": "157b2e7e486e0c80b5e456c31b8dbec342c09ba6d05373d95b0e162c924a4732",
+          "role": "donor",
+          "size": [
+            1024,
+            680
+          ],
+          "slot": 17,
+          "source_component": [
+            "fresh-jpeg/569678"
+          ],
+          "source_image_url": "https://live.staticflickr.com/7194/6910867644_770fa98111_b.jpg",
+          "source_url": "https://www.flickr.com/photos/david-racing/6910867644/",
+          "title": "_DGH7147"
+        },
+        {
+          "author": "paulshannon",
+          "author_profile": "https://www.flickr.com/photos/paul_shannon/",
+          "encoded_sha256": "fe77e6bcffb12d97f899fafd9a5c9094fa5cfe77e50e3c1ddc082839fdd2ce7c",
+          "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+          "rgb_sha256": "c0f2b0d52104972845938af79bc3f608fa9bcf238666c31096eb08f729f713bd",
+          "role": "composite",
+          "size": [
+            768,
+            1024
+          ],
+          "slot": 18,
+          "source_component": [
+            "fresh-jpeg/385707"
+          ],
+          "source_image_url": "https://live.staticflickr.com/1067/615431589_a0326c6b72_b.jpg",
+          "source_url": "https://www.flickr.com/photos/paul_shannon/615431589/",
+          "title": "07-06-23"
+        },
+        {
+          "author": "mattymatt",
+          "author_profile": "https://www.flickr.com/photos/mattymatt/",
+          "encoded_sha256": "cdb7bd310a9c1e76294157daea741a6ee02b827af1758596e50319a50858a95d",
+          "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+          "rgb_sha256": "f1f65b9fae15b4611274e81850080a5a9c8da9dfff676a9e324e3330a42cf5d0",
+          "role": "composite",
+          "size": [
+            1024,
+            684
+          ],
+          "slot": 19,
+          "source_component": [
+            "fresh-jpeg/283279"
+          ],
+          "source_image_url": "https://live.staticflickr.com/2143/2500956600_d5c8f5d3de_b.jpg",
+          "source_url": "https://www.flickr.com/photos/mattymatt/2500956600/",
+          "title": "Kites 10"
+        },
+        {
+          "author": "Aero Icarus",
+          "author_profile": "https://www.flickr.com/photos/aero_icarus/",
+          "encoded_sha256": "ff05cd74bd8e102d3d283992b2951a6c484c9fb6e3f20602387f1205b31115d8",
+          "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+          "rgb_sha256": "e0373951f5f3d7c3f1dc191872ad3a115c6adb7d671fff216a209320c54852f8",
+          "role": "composite",
+          "size": [
+            1024,
+            686
+          ],
+          "slot": 20,
+          "source_component": [
+            "fresh-jpeg/65262"
+          ],
+          "source_image_url": "https://live.staticflickr.com/7144/6697893401_e9af2bcbd4_b.jpg",
+          "source_url": "https://www.flickr.com/photos/aero_icarus/6697893401/",
+          "title": "Atlas Air Boeing 747-200F; N523MC@MIA;17.10.2011/626lc"
+        },
+        {
+          "author": "randomduck",
+          "author_profile": "https://www.flickr.com/photos/rudiriet/",
+          "encoded_sha256": "59e13af18f8b5ad7034ed5b3940e473fbdfd6d215beaa532f58bd7ba20cc36ef",
+          "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+          "rgb_sha256": "a74976ef55be417c28b416de946c80a20f3d4ee6b3a4fdf0c07c8e379ddbeef9",
+          "role": "composite",
+          "size": [
+            1024,
+            768
+          ],
+          "slot": 21,
+          "source_component": [
+            "fresh-jpeg/359595"
+          ],
+          "source_image_url": "https://live.staticflickr.com/116/316888190_ff921b1661_b.jpg",
+          "source_url": "https://www.flickr.com/photos/rudiriet/316888190/",
+          "title": "\"Stop,\" said the light to the snow"
+        },
+        {
+          "author": "davef3138",
+          "author_profile": "https://www.flickr.com/photos/davef3138/",
+          "encoded_sha256": "f962ddb648a41fd7dd2c2ce8cb9ea60a96d58d21383211d09907b8be4d63816e",
+          "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+          "rgb_sha256": "dc02f8a710ffe5c88b6cadbdb64de5990753593f110f97d447cccf43c3ee7c8d",
+          "role": "composite",
+          "size": [
+            1024,
+            683
+          ],
+          "slot": 22,
+          "source_component": [
+            "fresh-jpeg/381842"
+          ],
+          "source_image_url": "https://live.staticflickr.com/3274/2557023989_c19aba43a1_b.jpg",
+          "source_url": "https://www.flickr.com/photos/davef3138/2557023989/",
+          "title": "Brad Street"
+        },
+        {
+          "author": "Karen Gadbois",
+          "author_profile": "https://www.flickr.com/photos/karenapricot/",
+          "encoded_sha256": "d092b9c2dda0ecd5283f63b73f398b7116fc5ae6403028cd245818ec27a1f021",
+          "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+          "rgb_sha256": "3b1ac7ddd7175159c76a2d73e03a70a6097dc531fd4ae322758d715f6c52076d",
+          "role": "composite",
+          "size": [
+            1024,
+            768
+          ],
+          "slot": 23,
+          "source_component": [
+            "fresh-jpeg/162046"
+          ],
+          "source_image_url": "https://live.staticflickr.com/1202/905740509_a9cb71bf1c_b.jpg",
+          "source_url": "https://www.flickr.com/photos/karenapricot/905740509/",
+          "title": "DIY Taco Truck"
+        },
+        {
+          "author": "kohlmann.sascha",
+          "author_profile": "https://www.flickr.com/photos/skohlmann/",
+          "encoded_sha256": "b6bbaaf1a93e15c29b220a82a8b900b5e7d35615efef9b6462ad35ddfb50669c",
+          "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+          "rgb_sha256": "4dec29959243c5952e51d504d29cdad54a0f4b0b20f05b5a6f78c3bc8f931221",
+          "role": "composite",
+          "size": [
+            1024,
+            768
+          ],
+          "slot": 24,
+          "source_component": [
+            "fresh-jpeg/362282"
+          ],
+          "source_image_url": "https://live.staticflickr.com/3678/8850808427_a9cc5e0232_b.jpg",
+          "source_url": "https://www.flickr.com/photos/skohlmann/8850808427/",
+          "title": "Grillwalker im Rollstuhl"
+        },
+        {
+          "author": "Kelly Sue",
+          "author_profile": "https://www.flickr.com/photos/kellysue/",
+          "encoded_sha256": "e8d097690ddba9aa3166ca64fdcb7140965d218ebe6e13ba52b14e26fd33324d",
+          "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+          "rgb_sha256": "5d149f41e4acc1e6203945e4a355c629e0fd20ca59a0e9e8735c201c4030e03c",
+          "role": "composite",
+          "size": [
+            768,
+            1024
+          ],
+          "slot": 25,
+          "source_component": [
+            "fresh-jpeg/195317"
+          ],
+          "source_image_url": "https://live.staticflickr.com/3026/2573087663_f2f383de3d_b.jpg",
+          "source_url": "https://www.flickr.com/photos/kellysue/2573087663/",
+          "title": "Refrigerator"
+        },
+        {
+          "author": "Brett L.",
+          "author_profile": "https://www.flickr.com/photos/brettlider/",
+          "encoded_sha256": "a1081c086f9b6685873482b4b269ce2654e47b6eff8790132467aae1d0926207",
+          "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+          "rgb_sha256": "ae61c180464b8d7769f13faec31df0078fe935717a0241c6c106283e87bbddff",
+          "role": "composite",
+          "size": [
+            1024,
+            768
+          ],
+          "slot": 26,
+          "source_component": [
+            "fresh-jpeg/405108"
+          ],
+          "source_image_url": "https://live.staticflickr.com/91/239116674_b3f1846acd_b.jpg",
+          "source_url": "https://www.flickr.com/photos/brettlider/239116674/",
+          "title": "Tuning"
+        }
+      ],
+      "preceding_stratum_roster_sha256": "8330baeaea91173b48cc46bd87ca571d5a35020b68b3ba625ad28ff77b26f0b8",
+      "prior_private_probe_roster_sha256": "9712163a837d32e84e756a5a0280e097a066452a3e426c516a237fbb209a83c5",
+      "prior_study_sha256": "8060ecbfc92f4d577c94359e1f0307d0675e65af39616751fedcbcc022be54db",
+      "scope": "Known prior comparison roles excluded. Broad earlier geometric-copy proposal exposure to this cache is possible and played no role in selection.",
+      "unlinked_eligible_groups": 27
+    },
+    "schema": "chipmunk.image-small-boundary-interior-transfer/1"
+  },
+  "incumbent": {
+    "all_screens": [
+      {
+        "filename": "0-0.png",
+        "proposal": [
+          110,
+          155,
+          286,
+          246
+        ],
+        "score": 0.7866417169570923,
+        "slot": 0,
+        "type": "flat",
+        "view": 0
+      },
+      {
+        "filename": "0-1.png",
+        "proposal": [
+          120,
+          42,
+          312,
+          213
+        ],
+        "score": 0.8269365429878235,
+        "slot": 0,
+        "type": "flat",
+        "view": 1
+      },
+      {
+        "filename": "1-0.png",
+        "proposal": [
+          169,
+          42,
+          286,
+          223
+        ],
+        "score": 0.5014597773551941,
+        "slot": 1,
+        "type": "translucent",
+        "view": 0
+      },
+      {
+        "filename": "1-1.png",
+        "proposal": [
+          168,
+          197,
+          424,
+          325
+        ],
+        "score": 0.5639351010322571,
+        "slot": 1,
+        "type": "translucent",
+        "view": 1
+      },
+      {
+        "filename": "2-0.png",
+        "proposal": [
+          158,
+          209,
+          275,
+          345
+        ],
+        "score": 0.8010799884796143,
+        "slot": 2,
+        "type": "patterned",
+        "view": 0
+      },
+      {
+        "filename": "2-1.png",
+        "proposal": [
+          191,
+          210,
+          319,
+          295
+        ],
+        "score": 0.7925512790679932,
+        "slot": 2,
+        "type": "patterned",
+        "view": 1
+      },
+      {
+        "filename": "3-0.png",
+        "proposal": [
+          214,
+          126,
+          331,
+          307
+        ],
+        "score": 0.6669232249259949,
+        "slot": 3,
+        "type": "flat",
+        "view": 0
+      },
+      {
+        "filename": "3-1.png",
+        "proposal": [
+          214,
+          222,
+          342,
+          307
+        ],
+        "score": 0.7045146822929382,
+        "slot": 3,
+        "type": "flat",
+        "view": 1
+      },
+      {
+        "filename": "4-0.png",
+        "proposal": [
+          146,
+          203,
+          263,
+          339
+        ],
+        "score": 0.8868123888969421,
+        "slot": 4,
+        "type": "translucent",
+        "view": 0
+      },
+      {
+        "filename": "4-1.png",
+        "proposal": [
+          379,
+          224,
+          507,
+          309
+        ],
+        "score": 1.1249213218688965,
+        "slot": 4,
+        "type": "translucent",
+        "view": 1
+      },
+      {
+        "filename": "5-0.png",
+        "proposal": [
+          192,
+          42,
+          309,
+          178
+        ],
+        "score": 0.7801058292388916,
+        "slot": 5,
+        "type": "patterned",
+        "view": 0
+      },
+      {
+        "filename": "5-1.png",
+        "proposal": [
+          166,
+          42,
+          358,
+          170
+        ],
+        "score": 0.888852059841156,
+        "slot": 5,
+        "type": "patterned",
+        "view": 1
+      },
+      {
+        "filename": "6-0.png",
+        "proposal": [
+          440,
+          42,
+          616,
+          223
+        ],
+        "score": 1.035652756690979,
+        "slot": 6,
+        "type": "flat",
+        "view": 0
+      },
+      {
+        "filename": "6-1.png",
+        "proposal": [
+          480,
+          42,
+          608,
+          127
+        ],
+        "score": 1.0810811519622803,
+        "slot": 6,
+        "type": "flat",
+        "view": 1
+      },
+      {
+        "filename": "7-0.png",
+        "proposal": [
+          214,
+          209,
+          331,
+          300
+        ],
+        "score": 1.094094157218933,
+        "slot": 7,
+        "type": "translucent",
+        "view": 0
+      },
+      {
+        "filename": "7-1.png",
+        "proposal": [
+          176,
+          209,
+          304,
+          337
+        ],
+        "score": 0.9667670726776123,
+        "slot": 7,
+        "type": "translucent",
+        "view": 1
+      },
+      {
+        "filename": "8-0.png",
+        "proposal": [
+          145,
+          236,
+          262,
+          327
+        ],
+        "score": 0.7094723582267761,
+        "slot": 8,
+        "type": "patterned",
+        "view": 0
+      },
+      {
+        "filename": "8-1.png",
+        "proposal": [
+          145,
+          236,
+          273,
+          407
+        ],
+        "score": 0.6476414203643799,
+        "slot": 8,
+        "type": "patterned",
+        "view": 1
+      }
+    ],
+    "eligible": [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        2,
+        0
+      ],
+      [
+        2,
+        1
+      ],
+      [
+        3,
+        0
+      ],
+      [
+        3,
+        1
+      ],
+      [
+        5,
+        0
+      ],
+      [
+        8,
+        0
+      ],
+      [
+        8,
+        1
+      ]
+    ],
+    "freeze_sha256": "601c5331e136c6ff9a3ffadcce6352f3282bf3e45133f89ee25854f78832b3a7"
+  },
+  "schema": "chipmunk.image-small-boundary-interior-transfer/1",
+  "summary": {
+    "criteria": {
+      "challenged_low_texture": true,
+      "challenged_screens": true,
+      "no_new_photo_control_groups": true,
+      "no_new_screen_groups": false,
+      "normal_texture_utility": true,
+      "preserved_low_texture_utility": false,
+      "sealed_screenshot_stratum": true
+    },
+    "incumbent_negative_screenshot_groups": 6,
+    "new_photo_control_groups": 0,
+    "new_screen_groups": 4,
+    "photo_roles": {
+      "feathered_blur": {
+        "broad_added_useful": 0,
+        "broad_flags": 1,
+        "broad_useful": 0,
+        "fixed_added_useful": 0,
+        "fixed_flags": 1,
+        "fixed_useful": 0,
+        "gated_added_useful": 0,
+        "gated_flags": 1,
+        "gated_useful": 0,
+        "lost_useful": 0,
+        "views": 9
+      },
+      "global_tone": {
+        "broad_added_useful": 0,
+        "broad_flags": 1,
+        "broad_useful": 0,
+        "fixed_added_useful": 0,
+        "fixed_flags": 1,
+        "fixed_useful": 0,
+        "gated_added_useful": 0,
+        "gated_flags": 1,
+        "gated_useful": 0,
+        "lost_useful": 0,
+        "views": 9
+      },
+      "low_texture_paste": {
+        "broad_added_useful": 7,
+        "broad_flags": 9,
+        "broad_useful": 7,
+        "fixed_added_useful": 0,
+        "fixed_flags": 2,
+        "fixed_useful": 0,
+        "gated_added_useful": 6,
+        "gated_flags": 8,
+        "gated_useful": 6,
+        "lost_useful": 1,
+        "views": 9
+      },
+      "normal_texture_paste": {
+        "broad_added_useful": 5,
+        "broad_flags": 7,
+        "broad_useful": 5,
+        "fixed_added_useful": 0,
+        "fixed_flags": 2,
+        "fixed_useful": 0,
+        "gated_added_useful": 5,
+        "gated_flags": 7,
+        "gated_useful": 5,
+        "lost_useful": 0,
+        "views": 9
+      },
+      "original": {
+        "broad_added_useful": 0,
+        "broad_flags": 1,
+        "broad_useful": 0,
+        "fixed_added_useful": 0,
+        "fixed_flags": 1,
+        "fixed_useful": 0,
+        "gated_added_useful": 0,
+        "gated_flags": 1,
+        "gated_useful": 0,
+        "lost_useful": 0,
+        "views": 9
+      },
+      "resize_roundtrip": {
+        "broad_added_useful": 0,
+        "broad_flags": 0,
+        "broad_useful": 0,
+        "fixed_added_useful": 0,
+        "fixed_flags": 0,
+        "fixed_useful": 0,
+        "gated_added_useful": 0,
+        "gated_flags": 0,
+        "gated_useful": 0,
+        "lost_useful": 0,
+        "views": 9
+      }
+    },
+    "qualifies": false,
+    "screens_by_type": {
+      "flat": {
+        "broad_added_flags": 4,
+        "captured_views": 6,
+        "eligible_views": 4,
+        "gated_added_flags": 0,
+        "incumbent_flags": 2
+      },
+      "patterned": {
+        "broad_added_flags": 5,
+        "captured_views": 6,
+        "eligible_views": 5,
+        "gated_added_flags": 5,
+        "incumbent_flags": 1
+      },
+      "translucent": {
+        "broad_added_flags": 2,
+        "captured_views": 6,
+        "eligible_views": 2,
+        "gated_added_flags": 2,
+        "incumbent_flags": 4
+      }
+    }
+  }
+}

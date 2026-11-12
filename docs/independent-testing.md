@@ -190,6 +190,9 @@ photo and graphics flags. Its public verifier needs no media or weights.
 The [photo-admission screenshot test](image-small-boundary-screenshot-admission-2026-11-12.md)
 seals the screenshots that reach the fallback before candidate scoring. Its
 public reader reproduces the added paste locations and screenshot flags.
+The [interior flatness comparison](image-small-boundary-interior-transfer-2026-11-12.md)
+adds separate low-texture pastes and flat, translucent, and patterned
+interface panels, with another standard-library result replay.
 The [image flip comparison](image-regional-flip-transfer-2026-11-11.md) tests
 whether the sensitive detector reproduces a region under a reversible transform.
 It separately reports useful regions, processing controls and untouched photos.

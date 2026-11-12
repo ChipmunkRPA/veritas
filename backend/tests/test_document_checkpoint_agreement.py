@@ -26,6 +26,35 @@ def source():
     return text, window, evidence, {"detectors": [primary]}
 
 
+@pytest.mark.parametrize(("method", "anchor", "meta"), [
+    ("python-docx", {"kind": "docx", "body_path": [0], "run_mapping_complete": True}, {}),
+    ("pymupdf", {"kind": "pdf", "extraction": "text_layer", "fragments": [{"start": 0, "end": 3}]}, {}),
+    ("email", {"kind": "email", "quote_role": "body", "mime_part": "1"},
+     {"email": {"body_content_type": "text/plain", "body_part": "1"}}),
+])
+def test_second_check_requires_mapped_native_source(method, anchor, meta):
+    decoded = {"meta": {"method": method, **meta}, "paragraphs": [[0, 3]],
+               "source_map": [{"start": 0, "end": 3, **anchor}]}
+    assert agreement._supported_source(decoded)
+    decoded["source_map"][0]["end"] = 2
+    assert not agreement._supported_source(decoded)
+
+
+@pytest.mark.parametrize(("method", "anchor", "meta"), [
+    ("python-docx", {"kind": "docx", "body_path": [0, "row", 0, "cell", 0, 0], "run_mapping_complete": True}, {}),
+    ("pymupdf", {"kind": "pdf", "extraction": "ocr", "fragments": [{"start": 0, "end": 3}]}, {}),
+    ("pymupdf", {"kind": "pdf", "extraction": "text_layer", "fragments": [{"start": 0, "end": 3}]}, {"unmapped_pages": [2]}),
+    ("email", {"kind": "email", "quote_role": "quoted", "mime_part": "1"},
+     {"email": {"body_content_type": "text/plain", "body_part": "1"}}),
+    ("email", {"kind": "markup", "quote_role": "unknown", "mime_part": "1"},
+     {"email": {"body_content_type": "text/html", "body_part": "1"}}),
+])
+def test_second_check_excludes_unsupported_source_geometry(method, anchor, meta):
+    decoded = {"meta": {"method": method, **meta}, "paragraphs": [[0, 3]],
+               "source_map": [{"start": 0, "end": 3, **anchor}]}
+    assert not agreement._supported_source(decoded)
+
+
 def test_review_timeout_preserves_a_parent_budget_and_primary_response(monkeypatch):
     text, window, evidence, detected = source()
     monkeypatch.setattr(agreement, "candidates", lambda *_: [window])

@@ -33,13 +33,42 @@ def enabled() -> bool:
             and settings.text_window_sentences == 3 and settings.text_checkpoint_agreement_review)
 
 
+def _supported_source(decoded: dict) -> bool:
+    meta = decoded["meta"]
+    method = meta.get("method")
+    if method == "plain":
+        return True
+    sources = decoded.get("source_map") or ()
+    paragraphs = decoded["paragraphs"]
+    if not sources or len(sources) != len(paragraphs) or any(
+        (source.get("start"), source.get("end")) != (start, end)
+        for source, (start, end) in zip(sources, paragraphs, strict=True)
+    ):
+        return False
+    if method == "python-docx":
+        return all(source.get("kind") == "docx" and len(source.get("body_path", ())) == 1
+                   and source.get("run_mapping_complete") for source in sources)
+    if method == "pymupdf":
+        return (not meta.get("unmapped_pages") and not meta.get("partially_checked_pages")
+                and all(source.get("kind") == "pdf" and source.get("extraction") == "text_layer"
+                        and source.get("fragments") for source in sources))
+    if method == "email":
+        mail = meta.get("email") or {}
+        return mail.get("body_content_type") == "text/plain" and all(
+            source.get("kind") == "email" and source.get("quote_role") == "body"
+            and source.get("mime_part") == mail.get("body_part") for source in sources
+        )
+    return False
+
+
 def candidates(decoded: dict, primary: dict) -> list[dict] | None:
     from app.detectors.text.extract import _ocr_language
 
     text = decoded["text"]
-    if (decoded["meta"].get("method") != "plain" or len(decoded["paragraphs"]) not in {1, 4}
+    if (len(decoded["paragraphs"]) not in {1, 4}
             or not 68 <= len(text.split(None, 420)) <= 420
-            or len(decoded["paragraphs"]) == 1 and len(decoded["sentences"]) != 4):
+            or len(decoded["paragraphs"]) == 1 and len(decoded["sentences"]) != 4
+            or not _supported_source(decoded)):
         return None
     language = _ocr_language(text)
     if language.get("code") != "en" or language.get("status") != "supported":

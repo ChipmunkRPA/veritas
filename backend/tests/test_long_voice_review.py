@@ -8,8 +8,13 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 
 from app.core.canonical import canonical_json
+from app.core.config import settings
+from app.detectors.audio import long_voice_review
 from app.detectors.audio.decode import read_wav
 from app.engine import runs
+from app.engine.boundary import Deadline
+from app.engine.detector import Profile
+from app.engine.stages import audio
 from app.evidence import audio_long_review, audio_packets
 from app.evidence import audio_long_review_binding as binding
 from app.storage.artefacts import register_artefact
@@ -114,3 +119,14 @@ def test_auxiliary_run_only_copies_the_detect_stage_pin(tmp_path):
         db.flush()
         assert runs.statuses(db, "input", store=store) == ["ok"]
         assert {row.id for row in runs.current(db, "input", store, include_auxiliary=True)} == {"primary", "attempt-a"}
+
+
+def test_optional_review_respects_the_serving_model_and_provenance_gate(monkeypatch):
+    monkeypatch.setattr(settings, "audio_detector_mode", "candidate")
+    ctx = SimpleNamespace(profile=Profile.FULL, deadline=Deadline(5), state={},
+                          outputs={"decode": {"long_voice_review_source_supported": True}})
+    primary = [{"detector_id": long_voice_review.PellaVoiceDetector.spec.id, "status": "not_applicable"}]
+    assert audio._long_voice_review(ctx, None, [])["reason"] == binding.SKIPPED_UNAVAILABLE
+    assert audio._long_voice_review(ctx, None, primary)["reason"] == binding.SKIPPED_BUDGET
+    monkeypatch.setattr(audio.provenance_gate, "stop", lambda _: True)
+    assert audio._long_voice_review(ctx, None, primary) is None

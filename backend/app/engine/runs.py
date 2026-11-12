@@ -39,17 +39,17 @@ def referenced(db: Session, analysis_id: str, store: ObjectStore | None = None) 
     """Run ids that the stored stage outputs of an analysis reference. A stage output that cannot be read references none."""
     store = store or default_store()
     out: set[str] = set()
-    rows = db.execute(select(Artefact.sha256).join(AnalysisStage, AnalysisStage.output_artefact_id == Artefact.id)
-                      .where(AnalysisStage.analysis_id == analysis_id, AnalysisStage.status == "done")).scalars()
-    for sha256 in rows:
+    rows = db.execute(select(AnalysisStage.stage, Artefact.sha256)
+                      .join(AnalysisStage, AnalysisStage.output_artefact_id == Artefact.id)
+                      .where(AnalysisStage.analysis_id == analysis_id, AnalysisStage.status == "done"))
+    for stage, sha256 in rows:
         try:
             output = json.loads(store.read_bytes(sha256))
         except (OSError, LookupError, ValueError):
             continue
         if isinstance(output, dict):
             out.update(str(e["run_id"]) for e in output.get("detectors") or [] if isinstance(e, dict) and e.get("run_id"))
-            review = output.get("long_voice_review")
-            if isinstance(review, dict) and review.get("run_id"):
+            if stage == "detect" and isinstance(review := output.get("long_voice_review"), dict) and review.get("run_id"):
                 out.add(str(review["run_id"]))
     return out
 

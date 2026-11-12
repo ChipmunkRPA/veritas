@@ -42,6 +42,7 @@ from app.detectors.common.fusion import fuse_probability, prob_to_signal_fields
 from app.detectors.video import segments as temporal_segments
 from app.detectors.video.audio import SR, VOICE_WINDOW_S, limit_voice_signal
 from app.detectors.video.decode import _input
+from app.engine import provenance_gate
 from app.engine.boundary import run_detector
 from app.engine.detector import Modality, Profile, RunContext, StageOutputs
 from app.engine.fusion import abstain
@@ -174,17 +175,20 @@ def detect(ctx: StageContext) -> dict[str, Any]:
                                                      audio=gated),
                                 max_units=AUDIO_MAX_UNIT_SCORES)
     short = _short_voice_review(ctx, gated, output["detectors"])
-    long = _long_voice_review(ctx, track)
+    long = _long_voice_review(ctx, track, output["detectors"])
     return {**output, "voice_clock_policy": VOICE_CLOCK_POLICY, "short_voice_review": short,
             **({"long_voice_review": long} if long is not None else {})}
 
 
-def _long_voice_review(ctx: StageContext, track) -> dict | None:
+def _long_voice_review(ctx: StageContext, track, entries: list[dict]) -> dict | None:
     from app.core.config import settings
 
     if (settings.audio_detector_mode != "candidate" or Profile(ctx.profile) is not Profile.FULL
-            or not ctx.outputs["decode"].get("long_voice_review_source_supported")):
+            or not ctx.outputs["decode"].get("long_voice_review_source_supported") or provenance_gate.stop(ctx)):
         return None
+    if not any(entry.get("detector_id") == long_voice_review.PellaVoiceDetector.spec.id
+               and entry.get("status") in {"ok", "not_applicable"} for entry in entries):
+        return long_voice_review.skipped(audio_long_review_binding.SKIPPED_UNAVAILABLE)
     remaining = ctx.deadline.remaining()
     if remaining is not None and remaining < long_voice_review.BUDGET_S + long_voice_review.PIPELINE_RESERVE_S:
         return long_voice_review.skipped(audio_long_review_binding.SKIPPED_BUDGET)

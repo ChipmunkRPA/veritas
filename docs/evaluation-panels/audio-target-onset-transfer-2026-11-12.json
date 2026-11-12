@@ -1,0 +1,283 @@
+{
+  "advance": {
+    "gains_across_both_rooms_and_two_families": true,
+    "median_snr_gain_at_least_2db_in_each_room": false,
+    "more_ai_flags": true,
+    "no_additional_clean_or_native_false_flags": true,
+    "no_additional_noisy_false_flags": false
+  },
+  "ancestry": {
+    "assets": {
+      "pellav2_detector.pt": "d21aedfb52e2f87706c2753715a29665482b0f4a034800c31579df5d458559ac",
+      "silero_vad.jit": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720",
+      "w2v-bert-config.json": "f5572bd5998b68182e9c328a43127ed21fed687f6910497136b91a4e3b0e3675"
+    },
+    "calibration_sha256": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf",
+    "source_freeze_sha256": "6b76ec6648f24c674969f6281a64403540e2eaf6b8b83737982c8b4f91eb7262",
+    "source_public_sha256": "bfcd18c0ce5d4eb7fe6cbf4ec0cb39d590e0c0ac94248d57c0ccc1ee0c077af3"
+  },
+  "commitments": {
+    "confirmation": "a26224abb3e9fc2727c1fb4880828317e42774b6a0a42c712aaf302dee648114",
+    "freeze": "fcac10e44c000e00ba07d978a2d6bd8a62a6cf7b626fddc5f9512a4d15460485",
+    "points": "bcba81d6bf8ca1758083f460f1d000290d39f8b44f0791d5c21ac05c5181d63e",
+    "roster": "238c8325fa49f93199ed8675d555a8ab0082bfd8fbc19641282a385cf83c113b",
+    "selection": "cb0dad2ab336eecd923b4532799ccb8bad91f866a91be704d73f3619e9d4e737"
+  },
+  "confirmation": {
+    "center/ES2007c/genuine": {
+      "mono_flags": 0,
+      "mono_unassessed": 0,
+      "onset_steered_flags": 1,
+      "onset_steered_unassessed": 0,
+      "planned": 7,
+      "serving_ai": 1,
+      "serving_inconclusive": 6,
+      "steered_input": 6
+    },
+    "center/ES2007c/synthetic": {
+      "mono_flags": 0,
+      "mono_unassessed": 0,
+      "onset_steered_flags": 1,
+      "onset_steered_unassessed": 0,
+      "planned": 9,
+      "serving_ai": 2,
+      "serving_inconclusive": 7,
+      "steered_input": 5
+    },
+    "center/IS1004c/genuine": {
+      "mono_flags": 1,
+      "mono_unassessed": 0,
+      "onset_steered_flags": 2,
+      "onset_steered_unassessed": 0,
+      "planned": 7,
+      "serving_ai": 3,
+      "serving_inconclusive": 4,
+      "steered_input": 6
+    },
+    "center/IS1004c/synthetic": {
+      "mono_flags": 0,
+      "mono_unassessed": 0,
+      "onset_steered_flags": 3,
+      "onset_steered_unassessed": 0,
+      "planned": 9,
+      "serving_ai": 6,
+      "serving_inconclusive": 3,
+      "steered_input": 5
+    },
+    "clean/none/genuine": {
+      "mono_flags": 0,
+      "mono_unassessed": 0,
+      "onset_steered_flags": 0,
+      "onset_steered_unassessed": 0,
+      "planned": 7,
+      "serving_original": 7,
+      "steered_input": 0
+    },
+    "clean/none/synthetic": {
+      "mono_flags": 9,
+      "mono_unassessed": 0,
+      "onset_steered_flags": 9,
+      "onset_steered_unassessed": 0,
+      "planned": 9,
+      "serving_ai": 9,
+      "steered_input": 0
+    },
+    "native/ES2007c/genuine": {
+      "mono_flags": 0,
+      "mono_unassessed": 1,
+      "onset_steered_flags": 0,
+      "onset_steered_unassessed": 1,
+      "planned": 1,
+      "serving_unassessed": 1,
+      "steered_input": 0
+    },
+    "native/IS1004c/genuine": {
+      "mono_flags": 0,
+      "mono_unassessed": 0,
+      "onset_steered_flags": 0,
+      "onset_steered_unassessed": 0,
+      "planned": 1,
+      "serving_original": 1,
+      "steered_input": 0
+    }
+  },
+  "confirmation_acoustics": {
+    "ES2007c": {
+      "accepted_onset": 11,
+      "mono_snr_db": -5.000007019590143,
+      "snr_gain_db": 0.5526777208100668,
+      "steered_snr_db": -4.447344133038994,
+      "target_error_db": -47.39248531177917
+    },
+    "IS1004c": {
+      "accepted_onset": 11,
+      "mono_snr_db": -5.0000032322326735,
+      "snr_gain_db": 4.10921295885631,
+      "steered_snr_db": -0.8907707249171362,
+      "target_error_db": -44.676099800434685
+    }
+  },
+  "confirmation_equal_false_alarm": {
+    "0": {
+      "mono": {
+        "ai_flags": 0,
+        "false_alarms": 0
+      },
+      "onset_steered": {
+        "ai_flags": 0,
+        "false_alarms": 0
+      }
+    },
+    "1": {
+      "mono": {
+        "ai_flags": 2,
+        "false_alarms": 1
+      },
+      "onset_steered": {
+        "ai_flags": 1,
+        "false_alarms": 1
+      }
+    },
+    "2": {
+      "mono": {
+        "ai_flags": 2,
+        "false_alarms": 2
+      },
+      "onset_steered": {
+        "ai_flags": 1,
+        "false_alarms": 2
+      }
+    },
+    "4": {
+      "mono": {
+        "ai_flags": 10,
+        "false_alarms": 4
+      },
+      "onset_steered": {
+        "ai_flags": 6,
+        "false_alarms": 4
+      }
+    }
+  },
+  "confirmation_gain_families": [
+    "clone",
+    "expressive"
+  ],
+  "confirmation_gain_groups": 4,
+  "confirmation_noisy_flags": {
+    "genuine": {
+      "mono": 1,
+      "onset_steered": 3
+    },
+    "synthetic": {
+      "mono": 0,
+      "onset_steered": 4
+    }
+  },
+  "method": {
+    "advance": "To justify fresh acquisition, require improved held noisy AI flags at the frozen points with no additional genuine false flags, gains across both rooms and at least two families, no additional clean/native false flags, and median noisy acoustic SNR improvement >= 2 dB in each held room. No app or confidence change.",
+    "construction": "First 0.5 s of the foreground is an isolated target onset. Use its disjoint last 2.5 s as the query with the original measured stereophonic room background. Set query mono target-to-background RMS to -5 dB. Deterministically displace foreground by 1\u20137 samples and 1.5\u20134.5 dB in one channel using a group hash. Share gains between each mixed view and its component audit.",
+    "point": "For each arm use strict excess of the greater of its highest admitted clean/native genuine score and third-highest admitted noisy genuine score on selection. Never consult confirmation scores before the point ledger. Equal-false-alarm curves at 0/1/2/4 counts on held noisy cases are retrospective diagnostics.",
+    "representation": "Cross-fit a distortionless two-channel frequency-domain beamformer with the onset steering vector. A periodic Hann 512-point transform uses 128-sample hops. Estimate covariance outside each of five held half-second blocks. Diagonal loading is .05 times the mean channel power per frequency. Apply from 150 to 6500 Hz. Outside the band use equally weighted, steered channels, normalized at the reference microphone.",
+    "score": "Classify each mono view and its candidate view with the same pinned voice model and serving Full speech admission on the exact 2.5 s query clock. The candidate uses mono fallback without a qualified onset or admitted steered view. The unchanged mono also gets its current serving direction and stability logic.",
+    "sources": "All centered simultaneous mixtures and their exact clean foregrounds from the verified archived/transfer stereo panel. Include untouched native simultaneous cuts and one clean control per foreground. Prior project sources, newly synthesized geometry.",
+    "target": "Estimate signed integer delay and gain from the time-aligned onset channels only. Require onset RMS at least -45 dBFS on both channels, correlation at least .95, delay at most 8 samples and gain ratio .4\u20132.5. The onset and supplied target timing are required. The clean and native controls lack a supplied onset and keep the mono view."
+  },
+  "run_resources": {
+    "confirmation": {
+      "activity_frames": 5688,
+      "forwards": 80,
+      "rss_bytes": 2964553728,
+      "seconds": 46.63566645800165
+    },
+    "selection": {
+      "activity_frames": 6399,
+      "forwards": 89,
+      "rss_bytes": 2964717568,
+      "seconds": 51.48628179099978
+    }
+  },
+  "schema": "chipmunk.audio-target-onset-transfer/1",
+  "scope": "controlled, previously exposed full-voice clips",
+  "selection": {
+    "center/ES2010d/genuine": {
+      "mono_flags": 0,
+      "mono_unassessed": 0,
+      "onset_steered_flags": 0,
+      "onset_steered_unassessed": 0,
+      "planned": 8,
+      "serving_ai": 2,
+      "serving_inconclusive": 6,
+      "steered_input": 5
+    },
+    "center/ES2010d/synthetic": {
+      "mono_flags": 3,
+      "mono_unassessed": 0,
+      "onset_steered_flags": 2,
+      "onset_steered_unassessed": 0,
+      "planned": 9,
+      "serving_ai": 5,
+      "serving_inconclusive": 4,
+      "steered_input": 6
+    },
+    "center/IS1007a/genuine": {
+      "mono_flags": 2,
+      "mono_unassessed": 0,
+      "onset_steered_flags": 2,
+      "onset_steered_unassessed": 0,
+      "planned": 8,
+      "serving_ai": 6,
+      "serving_inconclusive": 2,
+      "steered_input": 5
+    },
+    "center/IS1007a/synthetic": {
+      "mono_flags": 1,
+      "mono_unassessed": 0,
+      "onset_steered_flags": 2,
+      "onset_steered_unassessed": 0,
+      "planned": 9,
+      "serving_ai": 7,
+      "serving_inconclusive": 2,
+      "steered_input": 6
+    },
+    "clean/none/genuine": {
+      "mono_flags": 0,
+      "mono_unassessed": 0,
+      "onset_steered_flags": 0,
+      "onset_steered_unassessed": 0,
+      "planned": 8,
+      "serving_inconclusive": 1,
+      "serving_original": 7,
+      "steered_input": 0
+    },
+    "clean/none/synthetic": {
+      "mono_flags": 9,
+      "mono_unassessed": 0,
+      "onset_steered_flags": 9,
+      "onset_steered_unassessed": 0,
+      "planned": 9,
+      "serving_ai": 9,
+      "steered_input": 0
+    },
+    "native/ES2010d/genuine": {
+      "mono_flags": 0,
+      "mono_unassessed": 1,
+      "onset_steered_flags": 0,
+      "onset_steered_unassessed": 1,
+      "planned": 4,
+      "serving_inconclusive": 3,
+      "serving_unassessed": 1,
+      "steered_input": 0
+    },
+    "native/IS1007a/genuine": {
+      "mono_flags": 0,
+      "mono_unassessed": 0,
+      "onset_steered_flags": 0,
+      "onset_steered_unassessed": 0,
+      "planned": 4,
+      "serving_inconclusive": 2,
+      "serving_original": 2,
+      "steered_input": 0
+    }
+  }
+}

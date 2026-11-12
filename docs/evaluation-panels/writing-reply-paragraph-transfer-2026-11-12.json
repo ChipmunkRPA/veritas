@@ -1,0 +1,64 @@
+{
+  "affected_original_groups": {
+    "2": 1,
+    "3": 1,
+    "5": 1
+  },
+  "excluded_controls": 24,
+  "freeze_sha256": "8b620528f301717999116241e90f270240e7aa9f732e206d7a9cbe0e32c6cf3c",
+  "native_body_source_ranges_checked": 1093,
+  "passed": false,
+  "result": {
+    "2": {
+      "admitted": 100,
+      "baseline_human_flag": 13,
+      "baseline_useful": 14,
+      "eligible": 583,
+      "files": 100,
+      "generated": 44,
+      "human_flag": 11,
+      "same_inputs": 542,
+      "sentences_changed": 4,
+      "useful": 13
+    },
+    "3": {
+      "admitted": 100,
+      "baseline_human_flag": 13,
+      "baseline_useful": 14,
+      "eligible": 583,
+      "files": 100,
+      "generated": 44,
+      "human_flag": 11,
+      "same_inputs": 542,
+      "sentences_changed": 4,
+      "useful": 13
+    },
+    "5": {
+      "admitted": 55,
+      "baseline_human_flag": 10,
+      "baseline_useful": 12,
+      "eligible": 448,
+      "files": 55,
+      "generated": 24,
+      "human_flag": 8,
+      "same_inputs": 407,
+      "sentences_changed": 4,
+      "source_unavailable": 45,
+      "useful": 11
+    },
+    "6": {
+      "admitted": 53,
+      "baseline_human_flag": 10,
+      "baseline_useful": 12,
+      "eligible": 440,
+      "files": 53,
+      "generated": 24,
+      "human_flag": 10,
+      "same_inputs": 440,
+      "source_unavailable": 47,
+      "useful": 12
+    }
+  },
+  "schema": "chipmunk.writing-reply-paragraph-transfer/1",
+  "serving_change": false
+}

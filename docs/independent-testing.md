@@ -448,6 +448,10 @@ counts with a standard-library reviewer.
 The [fresh call-processing replication](audio-communication-replication-2026-11-12.md)
 uses separate foreground groups and meeting participants and verifies the
 retained locations and all false-alarm group counts.
+The [Full analysis call-processing test](audio-communication-serving-grid-2026-11-12.md)
+replays the comparison on the four-second windows the app serves. The pairing
+lost the confirmation cohort's only overlapping original flag and left the
+same ordinary false-alarm groups.
 The [two-microphone noise trial](audio-natural-stereo-coherence-2026-11-11.md)
 compares score directions after a fixed filter with two recorded meeting
 backgrounds, six genuine readers and three synthetic generator families.

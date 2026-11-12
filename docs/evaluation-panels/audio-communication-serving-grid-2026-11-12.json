@@ -1,0 +1,3571 @@
+{
+  "commitments": {
+    "confirmation_anonymous_rows": "1a921f383ef963e5fd37db5bac5f87cce9cd8143feef6cb350ff4c539ee90474",
+    "confirmation_scores": "28fe879bc3f61db2dff8f70a084f3b53f102621388a9937ed4e5175d8e57d57d",
+    "discovery_anonymous_rows": "5ba6d18e34eb49a3c0c5999eb59707769bce81d340a400c92e4b139e1442a6f1",
+    "discovery_scores": "7d660aa09bbc25fc158c62236e694358045687e7f8cd86e34862be629c3a51d8",
+    "freeze": "ccb8ee6937b682f404170c062f03f5fe8e3b753624839585c892c07882054079",
+    "prior_receipts": {
+      "confirmation": "369125b2b13bd1582a1136ccaf82000d04c246fe7b7fabca657c54e3e7c66a63",
+      "discovery": "d141c684b6784c816299a063f939d71c078f8c518598a09e8d2ee04e140b201f"
+    },
+    "reviewer": "ec47af24084961a943106b424b8e0399b3c86e9861f9eaff0370e32533bb7b87",
+    "runner": "a9dcf5ee14fd8833c6cd0977056855a26b1b87ab7f1356fe1c7f40826d792d6e"
+  },
+  "customer_confidence_changed": false,
+  "fixed_short_window_logit": 6.400866488004889,
+  "grid_samples": [
+    [
+      0,
+      64000
+    ],
+    [
+      32000,
+      96000
+    ]
+  ],
+  "panels": {
+    "confirmation": {
+      "anonymous_rows": [
+        {
+          "arm": "untouched",
+          "coverage": "early",
+          "family": "clone",
+          "group": 1,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                3.690427084428298,
+                -5.941200307320634
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -4.955890642311462,
+                -6.741672511656991
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_same_host",
+          "coverage": "early",
+          "family": "clone",
+          "group": 1,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                4.463418529990832,
+                -5.8169178249784075
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -3.227983973236318,
+                -6.741672511656991
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_other_voice",
+          "coverage": "early",
+          "family": "clone",
+          "group": 1,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                4.330635333753027,
+                -5.871437994514423
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -3.154255588296699,
+                -6.741672511656991
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "synthetic",
+          "coverage": "early",
+          "family": "clone",
+          "group": 1,
+          "truth": [
+            2560,
+            12800
+          ],
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                4.207125665670196,
+                -5.856933616529675
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -2.942045201691424,
+                -6.741672511656991
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "untouched",
+          "coverage": "interior",
+          "family": "expressive",
+          "group": 2,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                6.781994202442843,
+                5.850998476776557
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                5.609844202221534,
+                -3.527506840204964
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_same_host",
+          "coverage": "interior",
+          "family": "expressive",
+          "group": 2,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                6.986400261178567,
+                6.778208388921238
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                6.137721319698076,
+                4.088069744827048
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_other_voice",
+          "coverage": "interior",
+          "family": "expressive",
+          "group": 2,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                7.154536501117193,
+                6.729151391284831
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                6.730952101251016,
+                3.7968488816531134
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "synthetic",
+          "coverage": "interior",
+          "family": "expressive",
+          "group": 2,
+          "truth": [
+            26880,
+            39680
+          ],
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                6.929639803353658,
+                6.689852100370372
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                5.2086211287120765,
+                -3.305552015826605
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "untouched",
+          "coverage": "interior",
+          "family": "stock",
+          "group": 3,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                3.234728903754136,
+                5.536282003697265
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -3.4557436192502573,
+                5.20257945201888
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_same_host",
+          "coverage": "interior",
+          "family": "stock",
+          "group": 3,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                5.3378355432428135,
+                6.606752670909386
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -4.485593386152223,
+                4.6762561085311845
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_other_voice",
+          "coverage": "interior",
+          "family": "stock",
+          "group": 3,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                5.522460253627574,
+                6.752765615937722
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -3.099664960194222,
+                5.99425856455987
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "synthetic",
+          "coverage": "interior",
+          "family": "stock",
+          "group": 3,
+          "truth": [
+            32000,
+            47360
+          ],
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                4.000265040034023,
+                5.347030097887042
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -1.4326889470017588,
+                5.2035985117239845
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "background_only",
+          "coverage": "room",
+          "family": null,
+          "group": 4,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                null,
+                -4.3186235545876945
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -0.19523686544037566,
+                -5.818618721698797
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "untouched",
+          "coverage": "late",
+          "family": "expressive",
+          "group": 5,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                3.277366873140511,
+                3.786936465058245
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -6.547408082167051,
+                -4.754577669044775
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_same_host",
+          "coverage": "late",
+          "family": "expressive",
+          "group": 5,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                3.277366873140511,
+                4.438479124170625
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -6.547408082167051,
+                -4.63426168149623
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_other_voice",
+          "coverage": "late",
+          "family": "expressive",
+          "group": 5,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                3.277366873140511,
+                4.7325391219474495
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -6.547408082167051,
+                -4.4569492932743335
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "synthetic",
+          "coverage": "late",
+          "family": "expressive",
+          "group": 5,
+          "truth": [
+            83200,
+            93440
+          ],
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                3.277366873140511,
+                4.29062996376982
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -6.547408082167051,
+                -4.467568397798798
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "untouched",
+          "coverage": "interior",
+          "family": "stock",
+          "group": 6,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                2.889091458493071,
+                -3.130991221453498
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -5.533486393428235,
+                -4.857612133336167
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_same_host",
+          "coverage": "interior",
+          "family": "stock",
+          "group": 6,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                3.0259000252505444,
+                -5.149059301766387
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -5.6888314081928035,
+                -5.414800622375974
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_other_voice",
+          "coverage": "interior",
+          "family": "stock",
+          "group": 6,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -4.0089188183619795,
+                -5.65939810071219
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -3.866944732822499,
+                -5.427607525797538
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "synthetic",
+          "coverage": "interior",
+          "family": "stock",
+          "group": 6,
+          "truth": [
+            26880,
+            39680
+          ],
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -5.318877152613118,
+                -4.519168807421493
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -6.473218404909017,
+                -5.466681419597182
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "untouched",
+          "coverage": "interior",
+          "family": "clone",
+          "group": 7,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -6.734077503813898,
+                -6.111212764165901
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -6.380475962593607,
+                -6.333037440264057
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_same_host",
+          "coverage": "interior",
+          "family": "clone",
+          "group": 7,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -6.239061310411564,
+                -6.548771819486079
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -6.574535868993244,
+                -6.713006038795249
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_other_voice",
+          "coverage": "interior",
+          "family": "clone",
+          "group": 7,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -6.551599550765367,
+                -6.142159521375727
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -6.65802856244396,
+                -6.457514744640705
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "synthetic",
+          "coverage": "interior",
+          "family": "clone",
+          "group": 7,
+          "truth": [
+            21760,
+            37120
+          ],
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -6.777813932295943,
+                -6.289072067131643
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -6.653549214058719,
+                -6.540734269774566
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "background_only",
+          "coverage": "room",
+          "family": null,
+          "group": 8,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -6.880496991352633,
+                -6.922786215497883
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -6.93687822601485,
+                -7.041595439883838
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "untouched",
+          "coverage": "early",
+          "family": "stock",
+          "group": 9,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -4.623105085213539,
+                -3.6054096299487255
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -5.729256122905289,
+                -5.383414246306847
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_same_host",
+          "coverage": "early",
+          "family": "stock",
+          "group": 9,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -5.077020592061161,
+                -4.400279085092497
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -5.962027504211439,
+                -5.383414246306847
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_other_voice",
+          "coverage": "early",
+          "family": "stock",
+          "group": 9,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -3.7993628676365474,
+                -4.43098589430536
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -5.6246466281540375,
+                -5.383414246306847
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "synthetic",
+          "coverage": "early",
+          "family": "stock",
+          "group": 9,
+          "truth": [
+            3840,
+            14080
+          ],
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                1.9498472764315975,
+                -4.122220970550146
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -3.4700441334061454,
+                -5.383414246306847
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "untouched",
+          "coverage": "interior",
+          "family": "clone",
+          "group": 10,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                4.938349642835516,
+                4.612052192368014
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                4.675988849949899,
+                -4.026809230344676
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_same_host",
+          "coverage": "interior",
+          "family": "clone",
+          "group": 10,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                4.811500049214831,
+                6.241151017297599
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                4.892065446063948,
+                5.160354949794748
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_other_voice",
+          "coverage": "interior",
+          "family": "clone",
+          "group": 10,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                4.719185023152628,
+                4.395281708942796
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                4.74552631652307,
+                -4.931445608552925
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "synthetic",
+          "coverage": "interior",
+          "family": "clone",
+          "group": 10,
+          "truth": [
+            60160,
+            72960
+          ],
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                5.920458460373304,
+                6.5871737008319835
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                6.145707517685816,
+                5.398469065189394
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "untouched",
+          "coverage": "interior",
+          "family": "expressive",
+          "group": 11,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -1.4707262728929589,
+                -5.056219050832856
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -5.579356186236581,
+                -5.410752291464989
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_same_host",
+          "coverage": "interior",
+          "family": "expressive",
+          "group": 11,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -3.6881437049558783,
+                3.1478031267510933
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -4.701587637879609,
+                -3.0934681571678455
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_other_voice",
+          "coverage": "interior",
+          "family": "expressive",
+          "group": 11,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -2.434201004986783,
+                2.8730340613023775
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -4.770388546180038,
+                3.8420948390792837
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "synthetic",
+          "coverage": "interior",
+          "family": "expressive",
+          "group": 11,
+          "truth": [
+            29440,
+            44800
+          ],
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                3.677316565142909,
+                -4.3064156086642145
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -4.610946630677734,
+                -4.878580071739839
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "background_only",
+          "coverage": "room",
+          "family": null,
+          "group": 12,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": null,
+              "probability_ai": null,
+              "scope_supported": null,
+              "scores": [
+                null,
+                null
+              ],
+              "status": "not_applicable"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                null,
+                -6.86412193574568
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "untouched",
+          "coverage": "late",
+          "family": "clone",
+          "group": 13,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                7.085172035891023,
+                7.173355555754395
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                7.102648262482903,
+                6.933186550541432
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_same_host",
+          "coverage": "late",
+          "family": "clone",
+          "group": 13,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                7.085172035891023,
+                7.099605801006585
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                7.102648262482903,
+                7.010063003210675
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_other_voice",
+          "coverage": "late",
+          "family": "clone",
+          "group": 13,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                7.085172035891023,
+                6.9651159041458985
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                7.102648262482903,
+                6.665311260832025
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "synthetic",
+          "coverage": "late",
+          "family": "clone",
+          "group": 13,
+          "truth": [
+            81920,
+            92160
+          ],
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                7.085172035891023,
+                7.088027898111438
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                7.102648262482903,
+                6.984980051295385
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "untouched",
+          "coverage": "interior",
+          "family": "expressive",
+          "group": 14,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -1.5661825794212278,
+                -5.694734632678473
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                3.8953487806093783,
+                -5.949961652909494
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_same_host",
+          "coverage": "interior",
+          "family": "expressive",
+          "group": 14,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                3.3763882135295122,
+                5.29738750626244
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                3.9230106010315167,
+                4.699953678777086
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_other_voice",
+          "coverage": "interior",
+          "family": "expressive",
+          "group": 14,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                2.070930338950565,
+                -4.359967265962144
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                3.387981850315032,
+                -4.096866613751579
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "synthetic",
+          "coverage": "interior",
+          "family": "expressive",
+          "group": 14,
+          "truth": [
+            61440,
+            74240
+          ],
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                3.5734718576446958,
+                6.252272778507727
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                3.601957599508973,
+                6.467513443112707
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "untouched",
+          "coverage": "interior",
+          "family": "stock",
+          "group": 15,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                4.0370265936599825,
+                -4.457196261537104
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                1.179688570355668,
+                -5.636672502740488
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_same_host",
+          "coverage": "interior",
+          "family": "stock",
+          "group": 15,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -3.3660642865057575,
+                -5.787656285393001
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -4.606889230699258,
+                -6.1624060210866975
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_other_voice",
+          "coverage": "interior",
+          "family": "stock",
+          "group": 15,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -3.388457552963673,
+                -5.299399350945825
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -4.126866311146976,
+                -6.099588426652204
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "synthetic",
+          "coverage": "interior",
+          "family": "stock",
+          "group": 15,
+          "truth": [
+            48640,
+            64000
+          ],
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -2.9386033316772755,
+                -4.925919522181209
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -4.0229191494161975,
+                -5.782933207165338
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "background_only",
+          "coverage": "room",
+          "family": null,
+          "group": 16,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -6.259901037960049,
+                -6.142911887917071
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -6.151872631365834,
+                -6.372149963452164
+              ],
+              "status": "ok"
+            }
+          }
+        }
+      ],
+      "serving_grid": {
+        "best_attainable_grid_iou_by_edit_length_samples": {
+          "10240": 0.16,
+          "12800": 0.2,
+          "15360": 0.24
+        },
+        "comparison": {
+          "new_false_groups_from_pairing": 0,
+          "original_false_groups_removed_by_pairing": 0,
+          "original_half_covered_flags_retained": 0,
+          "original_half_covered_flags_retained_at_exact_location": 0
+        },
+        "edits_geometrically_eligible_for_useful_localization": 0,
+        "frozen_point": {
+          "all": {
+            "both": {
+              "admitted_any_overlap": 12,
+              "admitted_fully_covered": 12,
+              "admitted_half_covered": 12,
+              "admitted_useful_localization": 0,
+              "admitted_windows": 101,
+              "ai_flags": 1,
+              "assessed_files": 51,
+              "background_only_false_files": 0,
+              "false_genuine_groups": 2,
+              "flagged_any_overlap": 0,
+              "flagged_files": 5,
+              "flagged_fully_covered": 0,
+              "flagged_half_covered": 0,
+              "flagged_useful_localization": 0,
+              "genuine_false_files": 4
+            },
+            "communication": {
+              "admitted_any_overlap": 12,
+              "admitted_fully_covered": 12,
+              "admitted_half_covered": 12,
+              "admitted_useful_localization": 0,
+              "admitted_windows": 101,
+              "ai_flags": 3,
+              "assessed_files": 51,
+              "background_only_false_files": 0,
+              "false_genuine_groups": 3,
+              "flagged_any_overlap": 3,
+              "flagged_files": 11,
+              "flagged_fully_covered": 3,
+              "flagged_half_covered": 3,
+              "flagged_useful_localization": 0,
+              "genuine_false_files": 8
+            },
+            "original": {
+              "admitted_any_overlap": 12,
+              "admitted_fully_covered": 12,
+              "admitted_half_covered": 12,
+              "admitted_useful_localization": 0,
+              "admitted_windows": 103,
+              "ai_flags": 2,
+              "assessed_files": 52,
+              "background_only_false_files": 0,
+              "false_genuine_groups": 2,
+              "flagged_any_overlap": 1,
+              "flagged_files": 6,
+              "flagged_fully_covered": 1,
+              "flagged_half_covered": 1,
+              "flagged_useful_localization": 0,
+              "genuine_false_files": 4
+            }
+          },
+          "edge": {
+            "both": {
+              "admitted_any_overlap": 4,
+              "admitted_fully_covered": 4,
+              "admitted_half_covered": 4,
+              "admitted_useful_localization": 0,
+              "admitted_windows": 8,
+              "ai_flags": 1,
+              "assessed_files": 4,
+              "background_only_false_files": 0,
+              "false_genuine_groups": 0,
+              "flagged_any_overlap": 0,
+              "flagged_files": 1,
+              "flagged_fully_covered": 0,
+              "flagged_half_covered": 0,
+              "flagged_useful_localization": 0,
+              "genuine_false_files": 0
+            },
+            "communication": {
+              "admitted_any_overlap": 4,
+              "admitted_fully_covered": 4,
+              "admitted_half_covered": 4,
+              "admitted_useful_localization": 0,
+              "admitted_windows": 8,
+              "ai_flags": 1,
+              "assessed_files": 4,
+              "background_only_false_files": 0,
+              "false_genuine_groups": 0,
+              "flagged_any_overlap": 1,
+              "flagged_files": 1,
+              "flagged_fully_covered": 1,
+              "flagged_half_covered": 1,
+              "flagged_useful_localization": 0,
+              "genuine_false_files": 0
+            },
+            "original": {
+              "admitted_any_overlap": 4,
+              "admitted_fully_covered": 4,
+              "admitted_half_covered": 4,
+              "admitted_useful_localization": 0,
+              "admitted_windows": 8,
+              "ai_flags": 1,
+              "assessed_files": 4,
+              "background_only_false_files": 0,
+              "false_genuine_groups": 0,
+              "flagged_any_overlap": 0,
+              "flagged_files": 1,
+              "flagged_fully_covered": 0,
+              "flagged_half_covered": 0,
+              "flagged_useful_localization": 0,
+              "genuine_false_files": 0
+            }
+          },
+          "interior": {
+            "both": {
+              "admitted_any_overlap": 8,
+              "admitted_fully_covered": 8,
+              "admitted_half_covered": 8,
+              "admitted_useful_localization": 0,
+              "admitted_windows": 16,
+              "ai_flags": 0,
+              "assessed_files": 8,
+              "background_only_false_files": 0,
+              "false_genuine_groups": 0,
+              "flagged_any_overlap": 0,
+              "flagged_files": 0,
+              "flagged_fully_covered": 0,
+              "flagged_half_covered": 0,
+              "flagged_useful_localization": 0,
+              "genuine_false_files": 0
+            },
+            "communication": {
+              "admitted_any_overlap": 8,
+              "admitted_fully_covered": 8,
+              "admitted_half_covered": 8,
+              "admitted_useful_localization": 0,
+              "admitted_windows": 16,
+              "ai_flags": 2,
+              "assessed_files": 8,
+              "background_only_false_files": 0,
+              "false_genuine_groups": 0,
+              "flagged_any_overlap": 2,
+              "flagged_files": 2,
+              "flagged_fully_covered": 2,
+              "flagged_half_covered": 2,
+              "flagged_useful_localization": 0,
+              "genuine_false_files": 0
+            },
+            "original": {
+              "admitted_any_overlap": 8,
+              "admitted_fully_covered": 8,
+              "admitted_half_covered": 8,
+              "admitted_useful_localization": 0,
+              "admitted_windows": 16,
+              "ai_flags": 1,
+              "assessed_files": 8,
+              "background_only_false_files": 0,
+              "false_genuine_groups": 0,
+              "flagged_any_overlap": 1,
+              "flagged_files": 1,
+              "flagged_fully_covered": 1,
+              "flagged_half_covered": 1,
+              "flagged_useful_localization": 0,
+              "genuine_false_files": 0
+            }
+          }
+        },
+        "genuine_control_groups": 16,
+        "genuine_recordings": 40,
+        "known_edge_edits": 4,
+        "known_edits": 12,
+        "known_interior_edits": 8,
+        "native_production_scope": {
+          "communication": {
+            "assessment_status": {
+              "not_applicable": 1,
+              "ok": 51
+            },
+            "calibrated_whole_recording_confidence": 0,
+            "detector_scope_supported": 0
+          },
+          "original": {
+            "assessment_status": {
+              "ok": 52
+            },
+            "calibrated_whole_recording_confidence": 0,
+            "detector_scope_supported": 0
+          }
+        },
+        "planned_windows_per_arm": 104
+      },
+      "short_window_fixed": {
+        "both": {
+          "ai_flags": 3,
+          "background_false_flags": 0,
+          "false_groups": 2,
+          "unassessed": 1,
+          "useful_ranges": 2
+        },
+        "communication": {
+          "ai_flags": 3,
+          "background_false_flags": 0,
+          "false_groups": 5,
+          "unassessed": 1,
+          "useful_ranges": 2
+        },
+        "original": {
+          "ai_flags": 3,
+          "background_false_flags": 0,
+          "false_groups": 3,
+          "unassessed": 0,
+          "useful_ranges": 2
+        }
+      }
+    },
+    "discovery": {
+      "anonymous_rows": [
+        {
+          "arm": "untouched",
+          "coverage": "early",
+          "family": "clone",
+          "group": 1,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -3.976902304418098,
+                3.1366960097533525
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -3.868676360109864,
+                -4.905861321168993
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_same_host",
+          "coverage": "early",
+          "family": "clone",
+          "group": 1,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -2.572247492910591,
+                -4.58640483036035
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                4.090199249945696,
+                -4.905861321168993
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_other_voice",
+          "coverage": "early",
+          "family": "clone",
+          "group": 1,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                2.942712163383832,
+                -1.1773577091286018
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                2.2923824961849872,
+                -4.905861321168993
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "synthetic",
+          "coverage": "early",
+          "family": "clone",
+          "group": 1,
+          "truth": [
+            5120,
+            15360
+          ],
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                4.785832677007136,
+                -0.6122796977457367
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                5.032944458149938,
+                -4.905861321168993
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "untouched",
+          "coverage": "interior",
+          "family": "expressive",
+          "group": 2,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                4.7508647664887285,
+                5.731934387353886
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                4.700220626163845,
+                6.27248104080612
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_same_host",
+          "coverage": "interior",
+          "family": "expressive",
+          "group": 2,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                5.154740284103624,
+                5.886822427117942
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                4.815932654745473,
+                6.2558828657054475
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_other_voice",
+          "coverage": "interior",
+          "family": "expressive",
+          "group": 2,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                4.927106786323682,
+                5.504488585203319
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                4.975065358730699,
+                5.984835873133509
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "synthetic",
+          "coverage": "interior",
+          "family": "expressive",
+          "group": 2,
+          "truth": [
+            55040,
+            67840
+          ],
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                4.595879700855913,
+                5.436637203725275
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                4.694768781032954,
+                5.794580094090391
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "untouched",
+          "coverage": "interior",
+          "family": "stock",
+          "group": 3,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -5.655353092963128,
+                -6.874558906387987
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -5.660885755102755,
+                -6.9106135294470015
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_same_host",
+          "coverage": "interior",
+          "family": "stock",
+          "group": 3,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -3.583809861670963,
+                -6.64117664528176
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -5.498215268400654,
+                -6.9000801586063
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_other_voice",
+          "coverage": "interior",
+          "family": "stock",
+          "group": 3,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -5.5045862093386715,
+                -6.790893536235243
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -5.363841951158709,
+                -6.899013551749404
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "synthetic",
+          "coverage": "interior",
+          "family": "stock",
+          "group": 3,
+          "truth": [
+            20480,
+            35840
+          ],
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -2.8676316367563612,
+                -6.5514378305696725
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -4.717637065734742,
+                -6.913885574192933
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "untouched",
+          "coverage": "late",
+          "family": "expressive",
+          "group": 4,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                4.471783188140948,
+                -2.8776529374863413
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                4.937624332677573,
+                -4.823991273507825
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_same_host",
+          "coverage": "late",
+          "family": "expressive",
+          "group": 4,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                4.471783188140948,
+                -3.623830768314177
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                4.937624332677573,
+                -4.873206562763787
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_other_voice",
+          "coverage": "late",
+          "family": "expressive",
+          "group": 4,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                4.471783188140948,
+                -2.772840470858043
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                4.937624332677573,
+                -4.761282874605498
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "synthetic",
+          "coverage": "late",
+          "family": "expressive",
+          "group": 4,
+          "truth": [
+            80640,
+            90880
+          ],
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                4.471783188140948,
+                -2.1632027431666847
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                4.937624332677573,
+                -3.4965848805349857
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "untouched",
+          "coverage": "interior",
+          "family": "stock",
+          "group": 5,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -6.069151388753886,
+                -5.4600133727435605
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -6.789663328848899,
+                -6.313997324425154
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_same_host",
+          "coverage": "interior",
+          "family": "stock",
+          "group": 5,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -4.1153125248684175,
+                -4.433945642280295
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -6.441364290488901,
+                -5.485656774240776
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_other_voice",
+          "coverage": "interior",
+          "family": "stock",
+          "group": 5,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -5.867185099453745,
+                -4.156848994637704
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -6.497453656646782,
+                -5.636982909754055
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "synthetic",
+          "coverage": "interior",
+          "family": "stock",
+          "group": 5,
+          "truth": [
+            29440,
+            42240
+          ],
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -5.333773633330084,
+                -4.431180519557044
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -6.390242627059061,
+                -4.782992382868757
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "untouched",
+          "coverage": "interior",
+          "family": "clone",
+          "group": 6,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                6.81639868288844,
+                6.647602912649053
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                6.351283335783238,
+                6.866135499893916
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_same_host",
+          "coverage": "interior",
+          "family": "clone",
+          "group": 6,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                5.731823325417334,
+                7.068065580780201
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                5.782244791224778,
+                6.647787211749185
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_other_voice",
+          "coverage": "interior",
+          "family": "clone",
+          "group": 6,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                5.719644150881511,
+                6.022178848236505
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                5.555953417566023,
+                5.350257302847106
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "synthetic",
+          "coverage": "interior",
+          "family": "clone",
+          "group": 6,
+          "truth": [
+            26880,
+            42240
+          ],
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                6.820988856023276,
+                7.109783485444469
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                6.343326245126301,
+                6.8516309832794775
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "untouched",
+          "coverage": "early",
+          "family": "stock",
+          "group": 7,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                4.694310798276089,
+                3.8727500329071276
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -4.5062665757558165,
+                -4.8228254163893185
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_same_host",
+          "coverage": "early",
+          "family": "stock",
+          "group": 7,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                4.733717967745894,
+                4.246303382982299
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                1.547680860693921,
+                -4.8228254163893185
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_other_voice",
+          "coverage": "early",
+          "family": "stock",
+          "group": 7,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                2.1526974518882156,
+                3.5306233796843127
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -4.972877536918511,
+                -4.8228254163893185
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "synthetic",
+          "coverage": "early",
+          "family": "stock",
+          "group": 7,
+          "truth": [
+            5120,
+            15360
+          ],
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                4.428302733392362,
+                -0.9575455452282049
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -4.045521235378186,
+                -4.8228254163893185
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "untouched",
+          "coverage": "interior",
+          "family": "clone",
+          "group": 8,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -2.874364812088727,
+                -4.957591974099495
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -4.6976289831257,
+                -3.6219872942755718
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_same_host",
+          "coverage": "interior",
+          "family": "clone",
+          "group": 8,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                1.476597251563866,
+                -2.6814810630714994
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -5.092585522196739,
+                -3.6219872942755718
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_other_voice",
+          "coverage": "interior",
+          "family": "clone",
+          "group": 8,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -3.3181771959188042,
+                -3.457526699216232
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -5.215359718555402,
+                -3.6219872942755718
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "synthetic",
+          "coverage": "interior",
+          "family": "clone",
+          "group": 8,
+          "truth": [
+            17920,
+            30720
+          ],
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                2.5710343318713247,
+                -1.077206178545734
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -4.519905616693465,
+                -3.6219872942755718
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "untouched",
+          "coverage": "interior",
+          "family": "expressive",
+          "group": 9,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -5.1902890065053775,
+                -3.428655176680767
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -6.223113135296575,
+                -6.3652419723333065
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_same_host",
+          "coverage": "interior",
+          "family": "expressive",
+          "group": 9,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -5.379646246232733,
+                -5.929607379025295
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -6.141704523983975,
+                -6.3237343027186235
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_other_voice",
+          "coverage": "interior",
+          "family": "expressive",
+          "group": 9,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -5.243333817648583,
+                1.048053642403014
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -6.3587641476402625,
+                -6.525128401618633
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "synthetic",
+          "coverage": "interior",
+          "family": "expressive",
+          "group": 9,
+          "truth": [
+            28160,
+            43520
+          ],
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -3.2839412572669735,
+                -3.5145625916963446
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -5.947068741699034,
+                -6.16934967478052
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "untouched",
+          "coverage": "late",
+          "family": "clone",
+          "group": 10,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -4.6641349546890565,
+                5.379567232962628
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -3.429442887160622,
+                5.3984956578230685
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_same_host",
+          "coverage": "late",
+          "family": "clone",
+          "group": 10,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -4.6641349546890565,
+                6.018603013489603
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -3.429442887160622,
+                4.3027846533437835
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_other_voice",
+          "coverage": "late",
+          "family": "clone",
+          "group": 10,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -4.6641349546890565,
+                5.940141372414957
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -3.429442887160622,
+                3.9490123663535996
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "synthetic",
+          "coverage": "late",
+          "family": "clone",
+          "group": 10,
+          "truth": [
+            83200,
+            93440
+          ],
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -4.6641349546890565,
+                5.868528286814651
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -3.429442887160622,
+                5.351868434115191
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "untouched",
+          "coverage": "interior",
+          "family": "expressive",
+          "group": 11,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                6.785953023551204,
+                -5.877120967112972
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                6.18758060066832,
+                -6.332487188378876
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_same_host",
+          "coverage": "interior",
+          "family": "expressive",
+          "group": 11,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                7.062195450259904,
+                -4.546893124132551
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                6.864189391473502,
+                -5.2577080817344255
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_other_voice",
+          "coverage": "interior",
+          "family": "expressive",
+          "group": 11,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                6.830564481007618,
+                0.5473823091906442
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                6.754506775733016,
+                -5.222169873299096
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "synthetic",
+          "coverage": "interior",
+          "family": "expressive",
+          "group": 11,
+          "truth": [
+            48640,
+            61440
+          ],
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                6.706960152815591,
+                -5.561277337769178
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                6.515171476399361,
+                -5.702603293087544
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "untouched",
+          "coverage": "interior",
+          "family": "stock",
+          "group": 12,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                5.815159317885557,
+                0.7963180905920131
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                4.494061927094472,
+                -4.930600141712304
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_same_host",
+          "coverage": "interior",
+          "family": "stock",
+          "group": 12,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                6.628573237403935,
+                1.0731186671702178
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                5.9718048760542715,
+                -4.930600141712304
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "ordinary_other_voice",
+          "coverage": "interior",
+          "family": "stock",
+          "group": 12,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                5.3938393484866065,
+                -3.25085116998001
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                5.182099720645673,
+                -4.930600141712304
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "synthetic",
+          "coverage": "interior",
+          "family": "stock",
+          "group": 12,
+          "truth": [
+            16640,
+            32000
+          ],
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                6.792958755209854,
+                -3.5952661063446283
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                6.683815565953152,
+                -4.930600141712304
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "background_only",
+          "coverage": "room",
+          "family": null,
+          "group": 13,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                null,
+                -7.0745362801647005
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                null,
+                -7.014097226219165
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "background_only",
+          "coverage": "room",
+          "family": null,
+          "group": 14,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -5.132772428392097,
+                -6.291096260512854
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -5.055047065362892,
+                -6.36800857511473
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "background_only",
+          "coverage": "room",
+          "family": null,
+          "group": 15,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -5.41199012075234,
+                -4.630957609394622
+              ],
+              "status": "ok"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                -6.502269813737794,
+                -5.532320519077953
+              ],
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "arm": "background_only",
+          "coverage": "room",
+          "family": null,
+          "group": 16,
+          "truth": null,
+          "views": {
+            "communication": {
+              "decision": null,
+              "probability_ai": null,
+              "scope_supported": null,
+              "scores": [
+                null,
+                null
+              ],
+              "status": "not_applicable"
+            },
+            "original": {
+              "decision": "inconclusive",
+              "probability_ai": null,
+              "scope_supported": false,
+              "scores": [
+                null,
+                -6.779887256717982
+              ],
+              "status": "ok"
+            }
+          }
+        }
+      ],
+      "serving_grid": {
+        "best_attainable_grid_iou_by_edit_length_samples": {
+          "10240": 0.16,
+          "12800": 0.2,
+          "15360": 0.24
+        },
+        "comparison": {
+          "new_false_groups_from_pairing": 0,
+          "original_false_groups_removed_by_pairing": 0,
+          "original_half_covered_flags_retained": 3,
+          "original_half_covered_flags_retained_at_exact_location": 3
+        },
+        "edits_geometrically_eligible_for_useful_localization": 0,
+        "frozen_point": {
+          "all": {
+            "both": {
+              "admitted_any_overlap": 12,
+              "admitted_fully_covered": 12,
+              "admitted_half_covered": 12,
+              "admitted_useful_localization": 0,
+              "admitted_windows": 101,
+              "ai_flags": 3,
+              "assessed_files": 51,
+              "background_only_false_files": 0,
+              "false_genuine_groups": 2,
+              "flagged_any_overlap": 3,
+              "flagged_files": 7,
+              "flagged_fully_covered": 2,
+              "flagged_half_covered": 3,
+              "flagged_useful_localization": 0,
+              "genuine_false_files": 4
+            },
+            "communication": {
+              "admitted_any_overlap": 12,
+              "admitted_fully_covered": 12,
+              "admitted_half_covered": 12,
+              "admitted_useful_localization": 0,
+              "admitted_windows": 101,
+              "ai_flags": 3,
+              "assessed_files": 51,
+              "background_only_false_files": 0,
+              "false_genuine_groups": 3,
+              "flagged_any_overlap": 3,
+              "flagged_files": 9,
+              "flagged_fully_covered": 2,
+              "flagged_half_covered": 3,
+              "flagged_useful_localization": 0,
+              "genuine_false_files": 6
+            },
+            "original": {
+              "admitted_any_overlap": 12,
+              "admitted_fully_covered": 12,
+              "admitted_half_covered": 12,
+              "admitted_useful_localization": 0,
+              "admitted_windows": 102,
+              "ai_flags": 3,
+              "assessed_files": 52,
+              "background_only_false_files": 0,
+              "false_genuine_groups": 2,
+              "flagged_any_overlap": 3,
+              "flagged_files": 7,
+              "flagged_fully_covered": 2,
+              "flagged_half_covered": 3,
+              "flagged_useful_localization": 0,
+              "genuine_false_files": 4
+            }
+          },
+          "edge": {
+            "both": {
+              "admitted_any_overlap": 4,
+              "admitted_fully_covered": 4,
+              "admitted_half_covered": 4,
+              "admitted_useful_localization": 0,
+              "admitted_windows": 8,
+              "ai_flags": 0,
+              "assessed_files": 4,
+              "background_only_false_files": 0,
+              "false_genuine_groups": 0,
+              "flagged_any_overlap": 0,
+              "flagged_files": 0,
+              "flagged_fully_covered": 0,
+              "flagged_half_covered": 0,
+              "flagged_useful_localization": 0,
+              "genuine_false_files": 0
+            },
+            "communication": {
+              "admitted_any_overlap": 4,
+              "admitted_fully_covered": 4,
+              "admitted_half_covered": 4,
+              "admitted_useful_localization": 0,
+              "admitted_windows": 8,
+              "ai_flags": 0,
+              "assessed_files": 4,
+              "background_only_false_files": 0,
+              "false_genuine_groups": 0,
+              "flagged_any_overlap": 0,
+              "flagged_files": 0,
+              "flagged_fully_covered": 0,
+              "flagged_half_covered": 0,
+              "flagged_useful_localization": 0,
+              "genuine_false_files": 0
+            },
+            "original": {
+              "admitted_any_overlap": 4,
+              "admitted_fully_covered": 4,
+              "admitted_half_covered": 4,
+              "admitted_useful_localization": 0,
+              "admitted_windows": 8,
+              "ai_flags": 0,
+              "assessed_files": 4,
+              "background_only_false_files": 0,
+              "false_genuine_groups": 0,
+              "flagged_any_overlap": 0,
+              "flagged_files": 0,
+              "flagged_fully_covered": 0,
+              "flagged_half_covered": 0,
+              "flagged_useful_localization": 0,
+              "genuine_false_files": 0
+            }
+          },
+          "interior": {
+            "both": {
+              "admitted_any_overlap": 8,
+              "admitted_fully_covered": 8,
+              "admitted_half_covered": 8,
+              "admitted_useful_localization": 0,
+              "admitted_windows": 16,
+              "ai_flags": 3,
+              "assessed_files": 8,
+              "background_only_false_files": 0,
+              "false_genuine_groups": 0,
+              "flagged_any_overlap": 3,
+              "flagged_files": 3,
+              "flagged_fully_covered": 2,
+              "flagged_half_covered": 3,
+              "flagged_useful_localization": 0,
+              "genuine_false_files": 0
+            },
+            "communication": {
+              "admitted_any_overlap": 8,
+              "admitted_fully_covered": 8,
+              "admitted_half_covered": 8,
+              "admitted_useful_localization": 0,
+              "admitted_windows": 16,
+              "ai_flags": 3,
+              "assessed_files": 8,
+              "background_only_false_files": 0,
+              "false_genuine_groups": 0,
+              "flagged_any_overlap": 3,
+              "flagged_files": 3,
+              "flagged_fully_covered": 2,
+              "flagged_half_covered": 3,
+              "flagged_useful_localization": 0,
+              "genuine_false_files": 0
+            },
+            "original": {
+              "admitted_any_overlap": 8,
+              "admitted_fully_covered": 8,
+              "admitted_half_covered": 8,
+              "admitted_useful_localization": 0,
+              "admitted_windows": 16,
+              "ai_flags": 3,
+              "assessed_files": 8,
+              "background_only_false_files": 0,
+              "false_genuine_groups": 0,
+              "flagged_any_overlap": 3,
+              "flagged_files": 3,
+              "flagged_fully_covered": 2,
+              "flagged_half_covered": 3,
+              "flagged_useful_localization": 0,
+              "genuine_false_files": 0
+            }
+          }
+        },
+        "genuine_control_groups": 16,
+        "genuine_recordings": 40,
+        "known_edge_edits": 4,
+        "known_edits": 12,
+        "known_interior_edits": 8,
+        "native_production_scope": {
+          "communication": {
+            "assessment_status": {
+              "not_applicable": 1,
+              "ok": 51
+            },
+            "calibrated_whole_recording_confidence": 0,
+            "detector_scope_supported": 0
+          },
+          "original": {
+            "assessment_status": {
+              "ok": 52
+            },
+            "calibrated_whole_recording_confidence": 0,
+            "detector_scope_supported": 0
+          }
+        },
+        "planned_windows_per_arm": 104
+      },
+      "short_window_fixed": {
+        "both": {
+          "ai_flags": 2,
+          "background_false_flags": 0,
+          "false_groups": 2,
+          "unassessed": 0,
+          "useful_ranges": 1
+        },
+        "communication": {
+          "ai_flags": 5,
+          "background_false_flags": 0,
+          "false_groups": 6,
+          "unassessed": 0,
+          "useful_ranges": 2
+        },
+        "original": {
+          "ai_flags": 3,
+          "background_false_flags": 0,
+          "false_groups": 3,
+          "unassessed": 0,
+          "useful_ranges": 1
+        }
+      }
+    }
+  },
+  "sample_rate_hz": 16000,
+  "samples_per_recording": 96000,
+  "schema": "chipmunk.audio-communication-serving-grid/1",
+  "serving_admitted": false
+}

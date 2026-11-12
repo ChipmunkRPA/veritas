@@ -43,6 +43,14 @@ background truth. The reviewed paper did not establish a deployable commercial
 checkpoint for this application; no code/weights were imported. A new supervised
 component method and source-disjoint evaluation are still development work.
 
+The [Interspeech residual fingerprint study](https://www.isca-archive.org/interspeech_2026/pizarro26_interspeech.html)
+measures the difference between original and filtered speech. We used the
+idea in a separate [MP3 residual experiment](audio-mp3-residual-transfer-2026-11-12.md)
+with one ordinary reference per carrier and separate group-level point
+selection. It found four additional short edits but flagged 21 additional
+ordinary groups, including room-only audio. That response cannot distinguish
+synthetic speech from changes in the recording background.
+
 ## Image: environment invariance needs interventions
 
 August's [EISL](https://arxiv.org/html/2608.17700v1) separates a low-rank feature

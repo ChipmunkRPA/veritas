@@ -146,6 +146,10 @@ edits in two rooms with competing speech.
 The [short native-response transfer](audio-short-native-response-transfer-2026-11-12.md)
 runs short windows on held room recordings and compares the locations at
 fixed and matched false-alarm counts.
+The [MP3 residual study](audio-mp3-residual-transfer-2026-11-12.md)
+checks whether a compact background-sensitive feature adds useful edit
+locations. Its standard-library reviewer verifies the group operating point,
+extra useful locations, and the ordinary flags that prevented release.
 The [speech-context comparison](audio-remote-neighbor-transfer-2026-11-12.md)
 compares recurring acoustic contexts on the original mixtures and verifies
 fresh and previously tested source groups separately.

@@ -1,0 +1,1960 @@
+{
+  "held": {
+    "confirmation": [
+      {
+        "condition": "untouched",
+        "family": "clone",
+        "group": "group-00",
+        "id": "case-00",
+        "residual": [
+          18.61254920645595,
+          35.79323861213663,
+          27.298036881990484,
+          12.658638437300413,
+          47.76687003841714
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_same_host",
+        "family": "clone",
+        "group": "group-00",
+        "id": "case-01",
+        "residual": [
+          16.35052702393839,
+          36.74544165566127,
+          27.298036881990484,
+          12.658638437300413,
+          47.76687003841714
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_other_voice",
+        "family": "clone",
+        "group": "group-00",
+        "id": "case-02",
+        "residual": [
+          13.756204580183587,
+          35.246359715629225,
+          27.298036881990484,
+          12.658638437300413,
+          47.76687003841714
+        ],
+        "truth": null
+      },
+      {
+        "condition": "synthetic",
+        "family": "clone",
+        "group": "group-00",
+        "id": "case-03",
+        "residual": [
+          20.09310070606835,
+          36.81106745922549,
+          27.298036881990484,
+          12.658638437300413,
+          47.76687003841714
+        ],
+        "truth": [
+          2560,
+          12800
+        ]
+      },
+      {
+        "condition": "untouched",
+        "family": "expressive",
+        "group": "group-01",
+        "id": "case-04",
+        "residual": [
+          9.609532526184664,
+          15.334292634248389,
+          24.708917863342247,
+          46.44887780800997,
+          26.20432566789936
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_same_host",
+        "family": "expressive",
+        "group": "group-01",
+        "id": "case-05",
+        "residual": [
+          11.410362021014079,
+          25.59106783610961,
+          33.93044787437066,
+          45.54343158546803,
+          26.20432566789936
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_other_voice",
+        "family": "expressive",
+        "group": "group-01",
+        "id": "case-06",
+        "residual": [
+          9.078302350806027,
+          22.615880191649378,
+          34.510268789627425,
+          44.68423633436285,
+          26.20432566789936
+        ],
+        "truth": null
+      },
+      {
+        "condition": "synthetic",
+        "family": "expressive",
+        "group": "group-01",
+        "id": "case-07",
+        "residual": [
+          10.642113668754089,
+          21.319709862479442,
+          31.933188094594204,
+          45.58226761335493,
+          26.20432566789936
+        ],
+        "truth": [
+          26880,
+          39680
+        ]
+      },
+      {
+        "condition": "untouched",
+        "family": "stock",
+        "group": "group-02",
+        "id": "case-08",
+        "residual": [
+          25.790188133353915,
+          22.67938065398176,
+          55.46058866916823,
+          60.876615693737584,
+          68.59692060738266
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_same_host",
+        "family": "stock",
+        "group": "group-02",
+        "id": "case-09",
+        "residual": [
+          25.721057461371856,
+          24.134096176845517,
+          61.45806509853718,
+          60.680736205764504,
+          68.59692060738266
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_other_voice",
+        "family": "stock",
+        "group": "group-02",
+        "id": "case-10",
+        "residual": [
+          25.654100303143828,
+          20.231738872987886,
+          51.23833956593565,
+          60.77541247109615,
+          68.59692060738266
+        ],
+        "truth": null
+      },
+      {
+        "condition": "synthetic",
+        "family": "stock",
+        "group": "group-02",
+        "id": "case-11",
+        "residual": [
+          25.701552649603524,
+          22.40383311580104,
+          53.6819563938745,
+          61.1374239822796,
+          68.59692060738266
+        ],
+        "truth": [
+          32000,
+          47360
+        ]
+      },
+      {
+        "condition": "background_only",
+        "family": null,
+        "group": "group-03",
+        "id": "case-12",
+        "residual": [
+          24.60635200548409,
+          17.14173224670754,
+          15.361657583737175,
+          9.799592159293285,
+          null
+        ],
+        "truth": null
+      },
+      {
+        "condition": "untouched",
+        "family": "expressive",
+        "group": "group-04",
+        "id": "case-13",
+        "residual": [
+          35.22025885843698,
+          42.89404771960852,
+          38.480514690858385,
+          42.97784439977711,
+          21.349645931500035
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_same_host",
+        "family": "expressive",
+        "group": "group-04",
+        "id": "case-14",
+        "residual": [
+          35.22025885843698,
+          42.89404771960852,
+          38.480514690858385,
+          42.97784439977711,
+          23.492899687988242
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_other_voice",
+        "family": "expressive",
+        "group": "group-04",
+        "id": "case-15",
+        "residual": [
+          35.22025885843698,
+          42.89404771960852,
+          38.480514690858385,
+          42.97784439977711,
+          24.868614752115114
+        ],
+        "truth": null
+      },
+      {
+        "condition": "synthetic",
+        "family": "expressive",
+        "group": "group-04",
+        "id": "case-16",
+        "residual": [
+          35.22025885843698,
+          42.89404771960852,
+          38.480514690858385,
+          42.97784439977711,
+          29.50646912185956
+        ],
+        "truth": [
+          83200,
+          93440
+        ]
+      },
+      {
+        "condition": "untouched",
+        "family": "stock",
+        "group": "group-05",
+        "id": "case-17",
+        "residual": [
+          19.73470680920264,
+          50.433822674738536,
+          34.43115551675465,
+          3.1895787410460787,
+          3.9382502278914338
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_same_host",
+        "family": "stock",
+        "group": "group-05",
+        "id": "case-18",
+        "residual": [
+          21.39689972368843,
+          47.81001280737232,
+          30.68828564623601,
+          3.1895787410460787,
+          3.9382502278914338
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_other_voice",
+        "family": "stock",
+        "group": "group-05",
+        "id": "case-19",
+        "residual": [
+          18.847594655888898,
+          41.966066623522835,
+          27.522752400193838,
+          3.1895787410460787,
+          3.9382502278914338
+        ],
+        "truth": null
+      },
+      {
+        "condition": "synthetic",
+        "family": "stock",
+        "group": "group-05",
+        "id": "case-20",
+        "residual": [
+          22.903895142073974,
+          51.048986163603246,
+          30.890363527125437,
+          3.1895787410460787,
+          3.9382502278914338
+        ],
+        "truth": [
+          26880,
+          39680
+        ]
+      },
+      {
+        "condition": "untouched",
+        "family": "clone",
+        "group": "group-06",
+        "id": "case-21",
+        "residual": [
+          16.33365192420102,
+          10.354063406359497,
+          24.823518274121287,
+          42.629687813272845,
+          48.929463204261225
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_same_host",
+        "family": "clone",
+        "group": "group-06",
+        "id": "case-22",
+        "residual": [
+          7.6269235262886435,
+          39.27569544864919,
+          28.73559977035724,
+          42.629687813272845,
+          48.929463204261225
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_other_voice",
+        "family": "clone",
+        "group": "group-06",
+        "id": "case-23",
+        "residual": [
+          18.733353824363952,
+          14.528247122056571,
+          25.911227691257512,
+          42.629687813272845,
+          48.929463204261225
+        ],
+        "truth": null
+      },
+      {
+        "condition": "synthetic",
+        "family": "clone",
+        "group": "group-06",
+        "id": "case-24",
+        "residual": [
+          11.631591185357134,
+          12.832500087477861,
+          27.459611359927145,
+          42.629687813272845,
+          48.929463204261225
+        ],
+        "truth": [
+          21760,
+          37120
+        ]
+      },
+      {
+        "condition": "background_only",
+        "family": null,
+        "group": "group-07",
+        "id": "case-25",
+        "residual": [
+          40.44401199702469,
+          35.90441182962191,
+          25.28000032563594,
+          37.252019054613605,
+          26.98153207108342
+        ],
+        "truth": null
+      },
+      {
+        "condition": "untouched",
+        "family": "stock",
+        "group": "group-08",
+        "id": "case-26",
+        "residual": [
+          15.840619013983845,
+          10.425516301174627,
+          5.887986993664895,
+          8.253642634585365,
+          25.823931972277272
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_same_host",
+        "family": "stock",
+        "group": "group-08",
+        "id": "case-27",
+        "residual": [
+          13.485202792781593,
+          10.361853634727094,
+          5.887986993664895,
+          8.253642634585365,
+          25.823931972277272
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_other_voice",
+        "family": "stock",
+        "group": "group-08",
+        "id": "case-28",
+        "residual": [
+          16.88198797990565,
+          10.390480732192959,
+          5.887986993664895,
+          8.253642634585365,
+          25.823931972277272
+        ],
+        "truth": null
+      },
+      {
+        "condition": "synthetic",
+        "family": "stock",
+        "group": "group-08",
+        "id": "case-29",
+        "residual": [
+          15.798501837241599,
+          10.560142180960648,
+          5.887986993664895,
+          8.253642634585365,
+          25.823931972277272
+        ],
+        "truth": [
+          3840,
+          14080
+        ]
+      },
+      {
+        "condition": "untouched",
+        "family": "clone",
+        "group": "group-09",
+        "id": "case-30",
+        "residual": [
+          17.99439127264953,
+          11.845013325494637,
+          15.210346421419517,
+          23.51317816784641,
+          12.854000472416647
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_same_host",
+        "family": "clone",
+        "group": "group-09",
+        "id": "case-31",
+        "residual": [
+          17.99439127264953,
+          11.845013325494637,
+          14.66344497130175,
+          22.899710950247652,
+          14.60890143014134
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_other_voice",
+        "family": "clone",
+        "group": "group-09",
+        "id": "case-32",
+        "residual": [
+          17.99439127264953,
+          11.845013325494637,
+          13.246310891179785,
+          26.29222676995124,
+          16.616434912848092
+        ],
+        "truth": null
+      },
+      {
+        "condition": "synthetic",
+        "family": "clone",
+        "group": "group-09",
+        "id": "case-33",
+        "residual": [
+          17.99439127264953,
+          11.845013325494637,
+          12.373802925823314,
+          9.251326606988396,
+          17.976818863947784
+        ],
+        "truth": [
+          60160,
+          72960
+        ]
+      },
+      {
+        "condition": "untouched",
+        "family": "expressive",
+        "group": "group-10",
+        "id": "case-34",
+        "residual": [
+          17.97028498127596,
+          12.965133915201733,
+          7.6777095635947425,
+          9.411445353434909,
+          15.973610847548683
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_same_host",
+        "family": "expressive",
+        "group": "group-10",
+        "id": "case-35",
+        "residual": [
+          17.620813473096305,
+          5.507570902656271,
+          11.366916940961644,
+          9.842949904550915,
+          15.973610847548683
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_other_voice",
+        "family": "expressive",
+        "group": "group-10",
+        "id": "case-36",
+        "residual": [
+          18.786824785421985,
+          7.9562187633463415,
+          9.727173706312861,
+          9.52319909337444,
+          15.973610847548683
+        ],
+        "truth": null
+      },
+      {
+        "condition": "synthetic",
+        "family": "expressive",
+        "group": "group-10",
+        "id": "case-37",
+        "residual": [
+          18.10231159459854,
+          10.826725059496141,
+          19.719957878031742,
+          10.685038702848873,
+          15.973610847548683
+        ],
+        "truth": [
+          29440,
+          44800
+        ]
+      },
+      {
+        "condition": "background_only",
+        "family": null,
+        "group": "group-11",
+        "id": "case-38",
+        "residual": [
+          null,
+          null,
+          null,
+          16.494969157965137,
+          18.133304961322025
+        ],
+        "truth": null
+      },
+      {
+        "condition": "untouched",
+        "family": "clone",
+        "group": "group-12",
+        "id": "case-39",
+        "residual": [
+          25.839369405165932,
+          14.606171347017579,
+          20.441868439599638,
+          17.607504344115743,
+          14.732471600074028
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_same_host",
+        "family": "clone",
+        "group": "group-12",
+        "id": "case-40",
+        "residual": [
+          25.839369405165932,
+          14.606171347017579,
+          20.441868439599638,
+          17.607504344115743,
+          11.36080658878872
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_other_voice",
+        "family": "clone",
+        "group": "group-12",
+        "id": "case-41",
+        "residual": [
+          25.839369405165932,
+          14.606171347017579,
+          20.441868439599638,
+          17.607504344115743,
+          6.989101306345128
+        ],
+        "truth": null
+      },
+      {
+        "condition": "synthetic",
+        "family": "clone",
+        "group": "group-12",
+        "id": "case-42",
+        "residual": [
+          25.839369405165932,
+          14.606171347017579,
+          20.441868439599638,
+          17.607504344115743,
+          12.746021573525729
+        ],
+        "truth": [
+          81920,
+          92160
+        ]
+      },
+      {
+        "condition": "untouched",
+        "family": "expressive",
+        "group": "group-13",
+        "id": "case-43",
+        "residual": [
+          17.109598140350013,
+          16.491406131697374,
+          11.2363109265458,
+          8.935892607681755,
+          15.416476724820601
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_same_host",
+        "family": "expressive",
+        "group": "group-13",
+        "id": "case-44",
+        "residual": [
+          17.109598140350013,
+          16.491406131697374,
+          10.15580362790137,
+          6.859916552295639,
+          11.401758968209965
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_other_voice",
+        "family": "expressive",
+        "group": "group-13",
+        "id": "case-45",
+        "residual": [
+          17.109598140350013,
+          16.491406131697374,
+          11.538142657767324,
+          7.555681552680692,
+          13.679158448989476
+        ],
+        "truth": null
+      },
+      {
+        "condition": "synthetic",
+        "family": "expressive",
+        "group": "group-13",
+        "id": "case-46",
+        "residual": [
+          17.109598140350013,
+          16.491406131697374,
+          12.438663153179302,
+          8.384100274500549,
+          4.321234184657557
+        ],
+        "truth": [
+          61440,
+          74240
+        ]
+      },
+      {
+        "condition": "untouched",
+        "family": "stock",
+        "group": "group-14",
+        "id": "case-47",
+        "residual": [
+          20.927447591313424,
+          11.998358710997941,
+          4.851627815018492,
+          16.775080072765306,
+          36.37909550805878
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_same_host",
+        "family": "stock",
+        "group": "group-14",
+        "id": "case-48",
+        "residual": [
+          20.927447591313424,
+          11.998358710997941,
+          9.352440891392343,
+          19.896606371342997,
+          34.610903122275495
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_other_voice",
+        "family": "stock",
+        "group": "group-14",
+        "id": "case-49",
+        "residual": [
+          20.927447591313424,
+          11.998358710997941,
+          5.780703194049869,
+          14.56443156402023,
+          35.65451960892709
+        ],
+        "truth": null
+      },
+      {
+        "condition": "synthetic",
+        "family": "stock",
+        "group": "group-14",
+        "id": "case-50",
+        "residual": [
+          20.927447591313424,
+          11.998358710997941,
+          4.928234712476105,
+          13.522969422909256,
+          35.3134040250373
+        ],
+        "truth": [
+          48640,
+          64000
+        ]
+      },
+      {
+        "condition": "background_only",
+        "family": null,
+        "group": "group-15",
+        "id": "case-51",
+        "residual": [
+          null,
+          18.58403034493032,
+          18.85245240397372,
+          65.6285022632161,
+          41.15904222740441
+        ],
+        "truth": null
+      }
+    ],
+    "transfer": [
+      {
+        "condition": "untouched",
+        "family": "clone",
+        "group": "held-group-00",
+        "id": "held-00",
+        "residual": [
+          28.30990310414615,
+          50.58639663615753,
+          46.74768193384729,
+          14.993270517070815,
+          41.941220785312595
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_same_host",
+        "family": "clone",
+        "group": "held-group-00",
+        "id": "held-01",
+        "residual": [
+          28.20248809358039,
+          49.57041617672477,
+          46.74768193384729,
+          14.993270517070815,
+          41.941220785312595
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_other_voice",
+        "family": "clone",
+        "group": "held-group-00",
+        "id": "held-02",
+        "residual": [
+          24.97857314228557,
+          49.443687269320556,
+          46.74768193384729,
+          14.993270517070815,
+          41.941220785312595
+        ],
+        "truth": null
+      },
+      {
+        "condition": "synthetic",
+        "family": "clone",
+        "group": "held-group-00",
+        "id": "held-03",
+        "residual": [
+          30.124780998462676,
+          49.61341759458874,
+          46.74768193384729,
+          14.993270517070815,
+          41.941220785312595
+        ],
+        "truth": [
+          2560,
+          12800
+        ]
+      },
+      {
+        "condition": "untouched",
+        "family": "expressive",
+        "group": "held-group-01",
+        "id": "held-04",
+        "residual": [
+          15.812680790844105,
+          30.58373073188571,
+          27.800279498862633,
+          43.43637659217071,
+          36.1365261796787
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_same_host",
+        "family": "expressive",
+        "group": "held-group-01",
+        "id": "held-05",
+        "residual": [
+          15.812680790844105,
+          30.58373073188571,
+          24.594856291641836,
+          35.25610970251703,
+          33.525228096065895
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_other_voice",
+        "family": "expressive",
+        "group": "held-group-01",
+        "id": "held-06",
+        "residual": [
+          15.812680790844105,
+          30.58373073188571,
+          42.20611621850309,
+          55.45377443726123,
+          33.04718431168027
+        ],
+        "truth": null
+      },
+      {
+        "condition": "synthetic",
+        "family": "expressive",
+        "group": "held-group-01",
+        "id": "held-07",
+        "residual": [
+          15.812680790844105,
+          30.58373073188571,
+          28.3124021275844,
+          42.98915298136983,
+          36.543259673343684
+        ],
+        "truth": [
+          52480,
+          65280
+        ]
+      },
+      {
+        "condition": "untouched",
+        "family": "stock",
+        "group": "held-group-02",
+        "id": "held-08",
+        "residual": [
+          41.009861726055355,
+          44.05286239389956,
+          65.52724226585727,
+          55.97484038015127,
+          42.720616969747184
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_same_host",
+        "family": "stock",
+        "group": "held-group-02",
+        "id": "held-09",
+        "residual": [
+          41.009861726055355,
+          44.05286239389956,
+          53.918055092774466,
+          50.23053249048591,
+          47.20649533159533
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_other_voice",
+        "family": "stock",
+        "group": "held-group-02",
+        "id": "held-10",
+        "residual": [
+          41.009861726055355,
+          44.05286239389956,
+          38.45526847595323,
+          33.445530234533365,
+          44.94295457244977
+        ],
+        "truth": null
+      },
+      {
+        "condition": "synthetic",
+        "family": "stock",
+        "group": "held-group-02",
+        "id": "held-11",
+        "residual": [
+          41.009861726055355,
+          44.05286239389956,
+          45.55565685804195,
+          34.56980444807213,
+          40.61029637998439
+        ],
+        "truth": [
+          49920,
+          65280
+        ]
+      },
+      {
+        "condition": "untouched",
+        "family": "expressive",
+        "group": "held-group-03",
+        "id": "held-12",
+        "residual": [
+          18.6332469973814,
+          14.886815420570676,
+          26.66992094732143,
+          24.778613697863136,
+          24.940010399138558
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_same_host",
+        "family": "expressive",
+        "group": "held-group-03",
+        "id": "held-13",
+        "residual": [
+          18.6332469973814,
+          14.886815420570676,
+          26.66992094732143,
+          24.778613697863136,
+          21.716178224722906
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_other_voice",
+        "family": "expressive",
+        "group": "held-group-03",
+        "id": "held-14",
+        "residual": [
+          18.6332469973814,
+          14.886815420570676,
+          26.66992094732143,
+          24.778613697863136,
+          23.714098540508445
+        ],
+        "truth": null
+      },
+      {
+        "condition": "synthetic",
+        "family": "expressive",
+        "group": "held-group-03",
+        "id": "held-15",
+        "residual": [
+          18.6332469973814,
+          14.886815420570676,
+          26.66992094732143,
+          24.778613697863136,
+          18.014459506553663
+        ],
+        "truth": [
+          80640,
+          90880
+        ]
+      },
+      {
+        "condition": "untouched",
+        "family": "stock",
+        "group": "held-group-04",
+        "id": "held-16",
+        "residual": [
+          16.349849988856512,
+          17.316632123481284,
+          5.579195247589306,
+          5.100804368266486,
+          11.922989562705158
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_same_host",
+        "family": "stock",
+        "group": "held-group-04",
+        "id": "held-17",
+        "residual": [
+          24.698245547123214,
+          26.936805992957204,
+          7.625518394070275,
+          5.260355630718716,
+          11.922989562705158
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_other_voice",
+        "family": "stock",
+        "group": "held-group-04",
+        "id": "held-18",
+        "residual": [
+          17.039855121431987,
+          27.536541828657672,
+          7.822551851514933,
+          5.260355630718716,
+          11.922989562705158
+        ],
+        "truth": null
+      },
+      {
+        "condition": "synthetic",
+        "family": "stock",
+        "group": "held-group-04",
+        "id": "held-19",
+        "residual": [
+          21.723838936553648,
+          19.64981078422469,
+          5.648496348169143,
+          5.260355630718716,
+          11.922989562705158
+        ],
+        "truth": [
+          24320,
+          37120
+        ]
+      },
+      {
+        "condition": "untouched",
+        "family": "clone",
+        "group": "held-group-05",
+        "id": "held-20",
+        "residual": [
+          38.01679566605609,
+          79.6374264209898,
+          56.97948803386369,
+          80.12429855321868,
+          74.69810974832293
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_same_host",
+        "family": "clone",
+        "group": "held-group-05",
+        "id": "held-21",
+        "residual": [
+          37.11811601819147,
+          94.39911648497544,
+          68.77765210434839,
+          80.46196358294023,
+          74.69810974832293
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_other_voice",
+        "family": "clone",
+        "group": "held-group-05",
+        "id": "held-22",
+        "residual": [
+          38.20824487719142,
+          80.96159820542783,
+          56.055946961977526,
+          79.9635469764275,
+          74.69810974832293
+        ],
+        "truth": null
+      },
+      {
+        "condition": "synthetic",
+        "family": "clone",
+        "group": "held-group-05",
+        "id": "held-23",
+        "residual": [
+          38.47212767424272,
+          83.45575943426687,
+          58.117599887924854,
+          81.21018142265254,
+          74.69810974832293
+        ],
+        "truth": [
+          29440,
+          44800
+        ]
+      },
+      {
+        "condition": "background_only",
+        "family": null,
+        "group": "held-group-06",
+        "id": "held-24",
+        "residual": [
+          17.37629820594919,
+          34.34578983363173,
+          46.134089714406535,
+          22.36438766986889,
+          null
+        ],
+        "truth": null
+      },
+      {
+        "condition": "untouched",
+        "family": "stock",
+        "group": "held-group-07",
+        "id": "held-25",
+        "residual": [
+          25.33280759404404,
+          27.479560156106743,
+          29.27310653114623,
+          36.335430974866476,
+          29.427834696554207
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_same_host",
+        "family": "stock",
+        "group": "held-group-07",
+        "id": "held-26",
+        "residual": [
+          29.0694722312421,
+          27.762210805165353,
+          29.27310653114623,
+          36.335430974866476,
+          29.427834696554207
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_other_voice",
+        "family": "stock",
+        "group": "held-group-07",
+        "id": "held-27",
+        "residual": [
+          20.25516823141766,
+          24.84850365319723,
+          27.991145945872546,
+          36.335430974866476,
+          29.427834696554207
+        ],
+        "truth": null
+      },
+      {
+        "condition": "synthetic",
+        "family": "stock",
+        "group": "held-group-07",
+        "id": "held-28",
+        "residual": [
+          25.917731642490445,
+          24.926714131905506,
+          27.991145945872546,
+          36.335430974866476,
+          29.427834696554207
+        ],
+        "truth": [
+          5120,
+          15360
+        ]
+      },
+      {
+        "condition": "untouched",
+        "family": "clone",
+        "group": "held-group-08",
+        "id": "held-29",
+        "residual": [
+          20.099864707944235,
+          16.47594964671804,
+          22.597497139279064,
+          28.2197824600789,
+          43.10008601195566
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_same_host",
+        "family": "clone",
+        "group": "held-group-08",
+        "id": "held-30",
+        "residual": [
+          18.788055883483356,
+          15.231684066948207,
+          22.600414936869107,
+          28.2197824600789,
+          43.10008601195566
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_other_voice",
+        "family": "clone",
+        "group": "held-group-08",
+        "id": "held-31",
+        "residual": [
+          18.73942316646517,
+          15.421318404784177,
+          22.15652277497594,
+          28.2197824600789,
+          43.10008601195566
+        ],
+        "truth": null
+      },
+      {
+        "condition": "synthetic",
+        "family": "clone",
+        "group": "held-group-08",
+        "id": "held-32",
+        "residual": [
+          19.87438644763657,
+          14.72906570821954,
+          22.573097649344042,
+          28.2197824600789,
+          43.10008601195566
+        ],
+        "truth": [
+          23040,
+          35840
+        ]
+      },
+      {
+        "condition": "untouched",
+        "family": "expressive",
+        "group": "held-group-09",
+        "id": "held-33",
+        "residual": [
+          21.016478118601224,
+          22.8478574517084,
+          33.33208932554481,
+          27.850332526020193,
+          25.617609440861372
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_same_host",
+        "family": "expressive",
+        "group": "held-group-09",
+        "id": "held-34",
+        "residual": [
+          21.016478118601224,
+          22.8478574517084,
+          23.781832436238673,
+          23.938265570283566,
+          24.85141882560511
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_other_voice",
+        "family": "expressive",
+        "group": "held-group-09",
+        "id": "held-35",
+        "residual": [
+          21.016478118601224,
+          22.8478574517084,
+          32.00244206170975,
+          35.6811326280204,
+          29.087033311408124
+        ],
+        "truth": null
+      },
+      {
+        "condition": "synthetic",
+        "family": "expressive",
+        "group": "held-group-09",
+        "id": "held-36",
+        "residual": [
+          21.016478118601224,
+          22.8478574517084,
+          35.6725067309398,
+          30.183639890953845,
+          25.343368615125627
+        ],
+        "truth": [
+          55040,
+          70400
+        ]
+      },
+      {
+        "condition": "untouched",
+        "family": "clone",
+        "group": "held-group-10",
+        "id": "held-37",
+        "residual": [
+          56.55045712803424,
+          82.38833780021125,
+          76.83831429534196,
+          42.74010293949139,
+          29.72364959648831
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_same_host",
+        "family": "clone",
+        "group": "held-group-10",
+        "id": "held-38",
+        "residual": [
+          56.55045712803424,
+          82.38833780021125,
+          76.83831429534196,
+          42.74668296338944,
+          30.629510217712024
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_other_voice",
+        "family": "clone",
+        "group": "held-group-10",
+        "id": "held-39",
+        "residual": [
+          56.55045712803424,
+          82.38833780021125,
+          76.83831429534196,
+          42.751156636230476,
+          28.15882984901289
+        ],
+        "truth": null
+      },
+      {
+        "condition": "synthetic",
+        "family": "clone",
+        "group": "held-group-10",
+        "id": "held-40",
+        "residual": [
+          56.55045712803424,
+          82.38833780021125,
+          76.83831429534196,
+          42.747573096713694,
+          30.50939094211747
+        ],
+        "truth": [
+          80640,
+          90880
+        ]
+      },
+      {
+        "condition": "untouched",
+        "family": "expressive",
+        "group": "held-group-11",
+        "id": "held-41",
+        "residual": [
+          13.495541573630474,
+          39.63063319187408,
+          26.53959869137969,
+          7.364500860328645,
+          15.285734042086263
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_same_host",
+        "family": "expressive",
+        "group": "held-group-11",
+        "id": "held-42",
+        "residual": [
+          6.272014835357364,
+          36.28533384613575,
+          28.725341629139994,
+          7.364500860328645,
+          15.285734042086263
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_other_voice",
+        "family": "expressive",
+        "group": "held-group-11",
+        "id": "held-43",
+        "residual": [
+          6.870620521248922,
+          29.552688455979215,
+          23.593127564525037,
+          7.364500860328645,
+          15.285734042086263
+        ],
+        "truth": null
+      },
+      {
+        "condition": "synthetic",
+        "family": "expressive",
+        "group": "held-group-11",
+        "id": "held-44",
+        "residual": [
+          14.113815686419592,
+          38.999734303241006,
+          24.373930114987616,
+          7.364500860328645,
+          15.285734042086263
+        ],
+        "truth": [
+          26880,
+          39680
+        ]
+      },
+      {
+        "condition": "untouched",
+        "family": "stock",
+        "group": "held-group-12",
+        "id": "held-45",
+        "residual": [
+          49.32521738053731,
+          35.84021983228309,
+          33.80437309057246,
+          26.29004190667667,
+          14.058306351568397
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_same_host",
+        "family": "stock",
+        "group": "held-group-12",
+        "id": "held-46",
+        "residual": [
+          49.32521738053731,
+          35.84021983228309,
+          33.25118973851317,
+          26.480219110211266,
+          17.16720632233202
+        ],
+        "truth": null
+      },
+      {
+        "condition": "ordinary_other_voice",
+        "family": "stock",
+        "group": "held-group-12",
+        "id": "held-47",
+        "residual": [
+          49.32521738053731,
+          35.84021983228309,
+          33.45216854952169,
+          37.55274015004533,
+          12.035284850263286
+        ],
+        "truth": null
+      },
+      {
+        "condition": "synthetic",
+        "family": "stock",
+        "group": "held-group-12",
+        "id": "held-48",
+        "residual": [
+          49.32521738053731,
+          35.84021983228309,
+          31.865646952746634,
+          34.75627082673263,
+          11.500083168212496
+        ],
+        "truth": [
+          62720,
+          78080
+        ]
+      },
+      {
+        "condition": "background_only",
+        "family": null,
+        "group": "held-group-13",
+        "id": "held-49",
+        "residual": [
+          19.064136604686006,
+          29.582458800970862,
+          34.98854723019022,
+          33.96418818279998,
+          23.367670534802304
+        ],
+        "truth": null
+      }
+    ]
+  },
+  "held_sha256": "f2ab73bb152cb9ada35ede3cfc3ac27f282c2463c55e934eb68a217e30a157f1",
+  "lock": {
+    "carrier_inputs_sha256": {
+      "confirmation": "bd49aba872ef967fcbf195e29f63588c94b7a7b827cc33c00344d6887a3be74e",
+      "transfer": "25a9281e134b743c271ce844498680f64a1681cee146ba56e5e4d81336bf7818"
+    },
+    "codec_receipt_sha256": "c1cfb2c5e7f3deabf605fdec2f3099d13e4de6a9ab097f3f3c2f72b66a192362",
+    "comparison": {
+      "max_added_ordinary_groups_total": 2,
+      "min_added_useful_per_panel": 1,
+      "min_added_useful_total": 2
+    },
+    "confirmation_receipt_sha256": "b5071aa6ef538169964ffe71acdb3c83285d90be8b320284f4f2e4f4e8385aa7",
+    "cutoff": 29.876255310152487,
+    "fit_groups": [
+      "calibration-group-00",
+      "calibration-group-10",
+      "calibration-group-13",
+      "calibration-group-08",
+      "calibration-group-09",
+      "calibration-group-02",
+      "calibration-group-14",
+      "calibration-group-06"
+    ],
+    "fit_sha256": "944e550f098542089caaf92f0a5f516f9f4151b7ef3f06776140c064562186f2",
+    "point_groups": [
+      "calibration-group-03",
+      "calibration-group-11",
+      "calibration-group-12",
+      "calibration-group-01",
+      "calibration-group-15",
+      "calibration-group-04",
+      "calibration-group-05",
+      "calibration-group-07"
+    ],
+    "point_rows_sha256": "0e5e88f0faa7ecc50a279abd6e570a2a2d1fb87e276591b3d02ee1715f99ead1",
+    "runner_sha256": "3852afed343fe443b4c12484708a073108da9ee3a7180f71c1d634f728372a8b",
+    "schema": "chipmunk.audio-mp3-residual-transfer/1"
+  },
+  "selection": [
+    {
+      "condition": "untouched",
+      "family": "expressive",
+      "group": "calibration-group-01",
+      "id": "calibration-03",
+      "residual": [
+        11.496264255690495,
+        16.4670578781494,
+        13.42796136131227,
+        14.446865265277129,
+        12.00631824895633
+      ],
+      "truth": null
+    },
+    {
+      "condition": "ordinary_same_host",
+      "family": "expressive",
+      "group": "calibration-group-01",
+      "id": "calibration-04",
+      "residual": [
+        11.496264255690495,
+        16.4670578781494,
+        10.525348593411335,
+        13.420812145071118,
+        11.825633996669211
+      ],
+      "truth": null
+    },
+    {
+      "condition": "ordinary_other_voice",
+      "family": "expressive",
+      "group": "calibration-group-01",
+      "id": "calibration-05",
+      "residual": [
+        11.496264255690495,
+        16.4670578781494,
+        11.817557312809285,
+        14.778960982618559,
+        13.146899889530136
+      ],
+      "truth": null
+    },
+    {
+      "condition": "untouched",
+      "family": "expressive",
+      "group": "calibration-group-03",
+      "id": "calibration-09",
+      "residual": [
+        15.229225460535877,
+        13.679224269258116,
+        19.70500074446945,
+        9.53694215129757,
+        14.66747514230547
+      ],
+      "truth": null
+    },
+    {
+      "condition": "ordinary_same_host",
+      "family": "expressive",
+      "group": "calibration-group-03",
+      "id": "calibration-10",
+      "residual": [
+        15.229225460535877,
+        13.679224269258116,
+        19.70500074446945,
+        9.523657063046766,
+        14.786202660649792
+      ],
+      "truth": null
+    },
+    {
+      "condition": "ordinary_other_voice",
+      "family": "expressive",
+      "group": "calibration-group-03",
+      "id": "calibration-11",
+      "residual": [
+        15.229225460535877,
+        13.679224269258116,
+        19.70500074446945,
+        9.522436415290676,
+        14.302650903028779
+      ],
+      "truth": null
+    },
+    {
+      "condition": "untouched",
+      "family": "stock",
+      "group": "calibration-group-04",
+      "id": "calibration-12",
+      "residual": [
+        4.203116223735454,
+        14.370679621297874,
+        10.934945756202712,
+        9.656295918851402,
+        14.874350730881055
+      ],
+      "truth": null
+    },
+    {
+      "condition": "ordinary_same_host",
+      "family": "stock",
+      "group": "calibration-group-04",
+      "id": "calibration-13",
+      "residual": [
+        3.771861192500131,
+        11.839588821517593,
+        8.519168024609051,
+        9.798268821973384,
+        14.874350730881055
+      ],
+      "truth": null
+    },
+    {
+      "condition": "ordinary_other_voice",
+      "family": "stock",
+      "group": "calibration-group-04",
+      "id": "calibration-14",
+      "residual": [
+        4.698503844570762,
+        13.411748593115904,
+        10.90347183469466,
+        9.852047706644301,
+        14.874350730881055
+      ],
+      "truth": null
+    },
+    {
+      "condition": "untouched",
+      "family": "clone",
+      "group": "calibration-group-05",
+      "id": "calibration-15",
+      "residual": [
+        28.361241528357418,
+        20.707851681303083,
+        22.015035845062258,
+        8.113298593282838,
+        10.366065867594244
+      ],
+      "truth": null
+    },
+    {
+      "condition": "ordinary_same_host",
+      "family": "clone",
+      "group": "calibration-group-05",
+      "id": "calibration-16",
+      "residual": [
+        23.642769789048145,
+        15.400730182750378,
+        15.126863111143098,
+        8.089680420773785,
+        10.366065867594244
+      ],
+      "truth": null
+    },
+    {
+      "condition": "ordinary_other_voice",
+      "family": "clone",
+      "group": "calibration-group-05",
+      "id": "calibration-17",
+      "residual": [
+        26.898400302139052,
+        12.486702933041638,
+        15.721312767072297,
+        7.9844756995947375,
+        10.366065867594244
+      ],
+      "truth": null
+    },
+    {
+      "condition": "untouched",
+      "family": "clone",
+      "group": "calibration-group-07",
+      "id": "calibration-21",
+      "residual": [
+        14.378282977164867,
+        8.453125738942557,
+        29.58716236983174,
+        17.441881938816636,
+        8.219737577091724
+      ],
+      "truth": null
+    },
+    {
+      "condition": "ordinary_same_host",
+      "family": "clone",
+      "group": "calibration-group-07",
+      "id": "calibration-22",
+      "residual": [
+        11.837733660204133,
+        10.890823828341682,
+        29.322265046570358,
+        17.441881938816636,
+        8.219737577091724
+      ],
+      "truth": null
+    },
+    {
+      "condition": "ordinary_other_voice",
+      "family": "clone",
+      "group": "calibration-group-07",
+      "id": "calibration-23",
+      "residual": [
+        12.53624330897309,
+        12.327647270549784,
+        29.876255310152487,
+        17.441881938816636,
+        8.219737577091724
+      ],
+      "truth": null
+    },
+    {
+      "condition": "untouched",
+      "family": "stock",
+      "group": "calibration-group-11",
+      "id": "calibration-33",
+      "residual": [
+        24.63297221995631,
+        22.466392102261654,
+        18.393266466753996,
+        8.628193185835821,
+        13.498436793623727
+      ],
+      "truth": null
+    },
+    {
+      "condition": "ordinary_same_host",
+      "family": "stock",
+      "group": "calibration-group-11",
+      "id": "calibration-34",
+      "residual": [
+        17.37058990323269,
+        12.726692370961063,
+        17.19896830032257,
+        8.628193185835821,
+        13.498436793623727
+      ],
+      "truth": null
+    },
+    {
+      "condition": "ordinary_other_voice",
+      "family": "stock",
+      "group": "calibration-group-11",
+      "id": "calibration-35",
+      "residual": [
+        12.59459124723113,
+        11.157366407132773,
+        18.458642556266682,
+        8.628193185835821,
+        13.498436793623727
+      ],
+      "truth": null
+    },
+    {
+      "condition": "background_only",
+      "family": null,
+      "group": "calibration-group-12",
+      "id": "calibration-36",
+      "residual": [
+        null,
+        null,
+        32.87990050515163,
+        52.54310240632174,
+        20.08561448809312
+      ],
+      "truth": null
+    },
+    {
+      "condition": "background_only",
+      "family": null,
+      "group": "calibration-group-15",
+      "id": "calibration-39",
+      "residual": [
+        null,
+        22.091374722807714,
+        29.415045021194583,
+        null,
+        null
+      ],
+      "truth": null
+    }
+  ],
+  "summary": {
+    "panels": {
+      "confirmation": {
+        "added_ordinary_groups": [
+          "group-00",
+          "group-01",
+          "group-02",
+          "group-04",
+          "group-05",
+          "group-06",
+          "group-07",
+          "group-14",
+          "group-15"
+        ],
+        "added_useful_groups": [
+          "group-05"
+        ],
+        "primary": {
+          "assessed": 52,
+          "false_files": 3,
+          "false_groups": [
+            "group-12"
+          ],
+          "flagged_edits": 2,
+          "flags_covering_half": 1,
+          "missed_edits": 10,
+          "room_false_files": 0,
+          "useful": 1,
+          "useful_groups": [
+            "group-04"
+          ],
+          "wrong_location": 1
+        },
+        "residual": {
+          "assessed": 52,
+          "false_files": 23,
+          "false_groups": [
+            "group-00",
+            "group-01",
+            "group-02",
+            "group-04",
+            "group-05",
+            "group-06",
+            "group-07",
+            "group-14",
+            "group-15"
+          ],
+          "flagged_edits": 7,
+          "flags_covering_half": 1,
+          "missed_edits": 5,
+          "room_false_files": 2,
+          "useful": 1,
+          "useful_groups": [
+            "group-05"
+          ],
+          "wrong_location": 6
+        }
+      },
+      "transfer": {
+        "added_ordinary_groups": [
+          "held-group-00",
+          "held-group-01",
+          "held-group-02",
+          "held-group-05",
+          "held-group-06",
+          "held-group-07",
+          "held-group-08",
+          "held-group-09",
+          "held-group-10",
+          "held-group-11",
+          "held-group-12",
+          "held-group-13"
+        ],
+        "added_useful_groups": [
+          "held-group-01",
+          "held-group-05",
+          "held-group-11"
+        ],
+        "primary": {
+          "assessed": 50,
+          "false_files": 2,
+          "false_groups": [
+            "held-group-04"
+          ],
+          "flagged_edits": 3,
+          "flags_covering_half": 2,
+          "missed_edits": 9,
+          "room_false_files": 0,
+          "useful": 2,
+          "useful_groups": [
+            "held-group-02",
+            "held-group-10"
+          ],
+          "wrong_location": 1
+        },
+        "residual": {
+          "assessed": 50,
+          "false_files": 30,
+          "false_groups": [
+            "held-group-00",
+            "held-group-01",
+            "held-group-02",
+            "held-group-05",
+            "held-group-06",
+            "held-group-07",
+            "held-group-08",
+            "held-group-09",
+            "held-group-10",
+            "held-group-11",
+            "held-group-12",
+            "held-group-13"
+          ],
+          "flagged_edits": 10,
+          "flags_covering_half": 5,
+          "missed_edits": 2,
+          "room_false_files": 2,
+          "useful": 4,
+          "useful_groups": [
+            "held-group-01",
+            "held-group-02",
+            "held-group-05",
+            "held-group-11"
+          ],
+          "wrong_location": 6
+        }
+      }
+    },
+    "screen_passed": false,
+    "total_new_ordinary": 21,
+    "total_new_useful": 4
+  }
+}

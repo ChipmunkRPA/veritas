@@ -153,6 +153,9 @@ extra useful locations, and the ordinary flags that prevented release.
 The [vocal-event source roster](audio-vocal-event-sources-2026-11-12.md)
 reproduces a small set of publisher-labeled generated events and individually
 licensed recorded controls, with exact byte ranges, file hashes, and decoding.
+The [paired vocal-event mixtures](audio-vocal-event-mixtures-2026-11-12.md)
+replay changes in the voice decision when a known event is added to the same
+speech. The ledger reports the WAV and MP3 renderings separately.
 The [speech-context comparison](audio-remote-neighbor-transfer-2026-11-12.md)
 compares recurring acoustic contexts on the original mixtures and verifies
 fresh and previously tested source groups separately.
@@ -378,6 +381,9 @@ and ordinary revised passages.
 The [held eLife confirmation](writing-elife-exact-sentence-confirmation-2026-11-12.md)
 replays the same frozen sentence point on a separate publisher and two new
 generation families, with exact source bindings and matched ordinary revisions.
+The [adjacent-context writing study](writing-shared-sentence-transfer-2026-11-12.md)
+measures whether overlapping context windows locate entire rewrites, with
+ordinary editorial controls and the geometry of measured source sentences.
 The [public-archive writing comparison](writing-archive-source-evidence-2026-11-12.md)
 replays exact archive matching and source offsets, including a publisher
 correction, missing-source controls, and quoted text that must be ignored.
@@ -1087,6 +1093,33 @@ a compatible local renderer and recognizer. Replay checks the exact OCR input
 and the source pixels behind the crop. The replay does not score authorship.
 
 ## Choose a review to reproduce
+
+### Save a four-modality replay receipt
+
+From the repository root with Python 3.11 or later:
+
+```sh
+review_dir=$(mktemp -d)
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/review.json"
+```
+
+The command runs one published ledger reader each for image, video, audio,
+and writing. Use `--modality video` to replay a single ledger. The receipt
+records the checkout revision when Git is available, exact input hashes,
+the Python environment, and each result. It contains no media, credentials,
+local absolute paths, or raw diagnostic output. The command saves rejected,
+missing, and timed-out checks and exits unsuccessfully if any selected check
+fails. Share the JSON in the [independent evaluation form](https://github.com/ChipmunkRPA/veritas/issues/new?template=independent-evaluation.yml)
+if you want to record a reproduction or discrepancy.
+For detailed diagnostics, run the recorded ledger reader directly with its
+listed arguments.
+
+The selected ledgers cover [JPEG preview regions](image-thumbnail-extent-transfer-2026-11-12.md),
+[later video repeats](video-motion-late-transfer-2026-11-12.md),
+[matched audio overlays](audio-vocal-event-mixtures-2026-11-12.md), and
+[the eLife sentence comparison](writing-elife-exact-sentence-confirmation-2026-11-12.md).
+For source labels, decoder output, or predictive performance, follow the
+native instructions for the claim you are reviewing.
 
 ### Replay four measured panels from a clean checkout
 

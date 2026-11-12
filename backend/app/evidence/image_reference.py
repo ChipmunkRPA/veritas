@@ -15,6 +15,7 @@ from app.detectors.image import reference_alignment, reference_compare, referenc
 
 MAX_INPUT_BYTES = 60 * 1024 * 1024
 RESIZE_SCHEMA = "chipmunk.image-reference-comparison/3"
+DIFFERENCE_MARK = (255, 173, 46, 144)
 
 
 def _bytes(path: Path) -> bytes:
@@ -45,6 +46,10 @@ def _write_evidence(directory, comparison, reference, submitted, mask):
                                               ("submitted", submitted, region)):
                     x, y, w, h = (bounds[key] for key in ("x", "y", "w", "h"))
                     region[f"{label}_crop"] = _png(staged / f"{label}-{i:02d}.png", pixels[y:y+h, x:x+w])
+                x, y, w, h = (region[key] for key in ("x", "y", "w", "h"))
+                overlay = np.zeros((h, w, 4), dtype=np.uint8)
+                overlay[mask[y:y+h, x:x+w]] = DIFFERENCE_MARK
+                region["submitted_overlay"] = _png(staged / f"submitted-overlay-{i:02d}.png", overlay)
         (staged / "comparison.json").write_text(json.dumps(comparison, indent=2, allow_nan=False) + "\n")
         if directory.exists() or directory.is_symlink():
             raise FileExistsError(f"Evidence directory already exists: {directory}")

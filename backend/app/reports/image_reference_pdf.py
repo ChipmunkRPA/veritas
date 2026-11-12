@@ -40,9 +40,11 @@ def _area(region):
     return f"x {region['x']}, y {region['y']}, {region['w']} x {region['h']} px"
 
 
-def _image(page, bounds, asset, assets):
+def _image(page, bounds, asset, assets, overlay=None):
     page.draw_rect(bounds, color=RULE, fill=(0.96, 0.97, 0.96))
     page.insert_image(bounds, stream=assets[asset["file"]], keep_proportion=True)
+    if overlay:
+        page.insert_image(bounds, stream=assets[overlay["file"]], keep_proportion=True)
 
 
 def _summary(document, comparison, assets):
@@ -87,14 +89,24 @@ def render(comparison: dict, assets: dict[str, bytes]) -> bytes:
         _summary(document, comparison, assets)
         for index, region in enumerate(comparison["regions"], 1):
             page = _page(document, f"Difference region {index}", "Coordinates use each image's oriented native pixels.")
+            overlay = region.get("submitted_overlay")
             for x, right, label, bounds, asset, hash_y in (
-                (MARGIN, 296, "Earlier copy", region.get("reference_region", region), region["reference_crop"], 537),
-                (316, RIGHT, "Submitted image", region, region["submitted_crop"], 582),
+                (MARGIN, 296, "Earlier copy", region.get("reference_region", region), region["reference_crop"], 585),
+                (316, RIGHT, "Submitted image", region, region["submitted_crop"], 625),
             ):
                 _text(page, x, 153, label, font="hebo")
                 _text(page, x, 170, _area(bounds), size=10, color=MUTED)
-                _image(page, pymupdf.Rect(x, 186, right, 496), asset, assets)
+                _image(page, pymupdf.Rect(x, 186, right, 353 if overlay else 496), asset, assets)
                 _text(page, MARGIN, hash_y, f"{label} crop SHA-256", size=10, font="hebo")
                 _text(page, MARGIN, hash_y + 16, asset["sha256"], size=9, font="cour", color=MUTED)
-            _text(page, MARGIN, 632, f"Retained difference pixels: {region['selected_pixels']}", size=10, color=MUTED)
+            if overlay:
+                _text(page, 316, 379, "Submitted image with highlighted differences", size=10, font="hebo")
+                _text(page, 316, 395, "Amber marks the selected pixels in this crop.", size=10, color=MUTED)
+                _image(page, pymupdf.Rect(316, 407, RIGHT, 558), region["submitted_crop"], assets, overlay=overlay)
+                _text(page, MARGIN, 379, f"Retained difference pixels: {region['selected_pixels']}", size=10)
+                _text(page, MARGIN, 395, f"/regions/{index - 1}/submitted_overlay", size=9, font="cour", color=MUTED)
+                _text(page, MARGIN, 665, "Difference overlay SHA-256", size=10, font="hebo")
+                _text(page, MARGIN, 681, overlay["sha256"], size=9, font="cour", color=MUTED)
+            else:
+                _text(page, MARGIN, 670, f"Retained difference pixels: {region['selected_pixels']}", size=10, color=MUTED)
         return document.tobytes(deflate=True, garbage=4)

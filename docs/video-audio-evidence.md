@@ -14,6 +14,8 @@ The video decode stage freezes the already-decoded 16 kHz mono PCM as signed 16-
 
 Voice windows reuse the standalone audio content builder: exact sample intervals, complete recorded responses, selected and padded context WAVs, waveform and score plots, source-clock ranges, and checks linked to the corresponding public signal IDs. The default selection retains up to six windows reaching the uncalibrated 0.5 inspection boundary. Remaining windows and sample coverage remain in JSON. PCM waveform appearance alone is not evidence of synthesis. A whole-window response does not identify words, a speaker, or the location of a splice.
 
+When a source contains multiple audio tracks, the evidence view and PDF identify the first track used by the audio checks and mark the remaining tracks as unassessed. The ordered source stream indices appear under `/audio/source/audio_stream_indices` in video evidence and `/source/audio_stream_indices` in standalone audio evidence. The original-source verifier can replay this list from the container.
+
 ## Served correlation measurement
 
 The served mouth/audio correlation check freezes the actual inputs while they still exist in the run:

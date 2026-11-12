@@ -1,0 +1,310 @@
+{
+  "additional": {
+    "delivery_control_measured": 12,
+    "grid_control_measured": 56,
+    "grid_false": 8,
+    "grid_positive_measured": 32,
+    "hard_cut_false": 3,
+    "identical_audio_only_pairs": 8,
+    "native_control_measured": 40,
+    "native_correct": 1,
+    "native_false": 16,
+    "native_positive_measured": 20,
+    "reencode_false": 2
+  },
+  "aggregate": {
+    "grid": {
+      "direct": {
+        "correct_range": 1,
+        "measured_no_range": 87
+      },
+      "jaw_coupling": {
+        "correct_range": 1,
+        "false_range": 8,
+        "measured_no_range": 74,
+        "misplaced_range": 5
+      }
+    },
+    "hard_cut": {
+      "direct": {
+        "measured_no_range": 4
+      },
+      "jaw_coupling": {
+        "false_range": 3,
+        "measured_no_range": 1
+      }
+    },
+    "native": {
+      "direct": {
+        "correct_range": 1,
+        "false_range": 8,
+        "measured_no_range": 49,
+        "misplaced_range": 2
+      },
+      "jaw_coupling": {
+        "correct_range": 2,
+        "false_range": 16,
+        "measured_no_range": 39,
+        "misplaced_range": 3
+      }
+    },
+    "reencode": {
+      "direct": {
+        "measured_no_range": 8
+      },
+      "jaw_coupling": {
+        "false_range": 2,
+        "measured_no_range": 6
+      }
+    }
+  },
+  "candidate_assessed_coverage": {
+    "grid_neural": "1",
+    "grid_ordinary": "1",
+    "native_neural": "1",
+    "native_ordinary": "1"
+  },
+  "cases": 160,
+  "condition_breakdown": {
+    "delivery/hard_cut": {
+      "direct": {
+        "measured_no_range": 4
+      },
+      "jaw_coupling": {
+        "false_range": 3,
+        "measured_no_range": 1
+      }
+    },
+    "delivery/reencode": {
+      "direct": {
+        "measured_no_range": 8
+      },
+      "jaw_coupling": {
+        "false_range": 2,
+        "measured_no_range": 6
+      }
+    },
+    "grid/audio_delay_320ms": {
+      "direct": {
+        "measured_no_range": 8
+      },
+      "jaw_coupling": {
+        "false_range": 1,
+        "measured_no_range": 7
+      }
+    },
+    "grid/brightness_liveportrait": {
+      "direct": {
+        "measured_no_range": 8
+      },
+      "jaw_coupling": {
+        "false_range": 1,
+        "measured_no_range": 7
+      }
+    },
+    "grid/brightness_musetalk": {
+      "direct": {
+        "measured_no_range": 8
+      },
+      "jaw_coupling": {
+        "false_range": 1,
+        "measured_no_range": 7
+      }
+    },
+    "grid/genuine_frame_retime": {
+      "direct": {
+        "measured_no_range": 8
+      },
+      "jaw_coupling": {
+        "false_range": 2,
+        "measured_no_range": 6
+      }
+    },
+    "grid/liveportrait_earlier_320ms": {
+      "direct": {
+        "correct_range": 1,
+        "measured_no_range": 7
+      },
+      "jaw_coupling": {
+        "correct_range": 1,
+        "measured_no_range": 5,
+        "misplaced_range": 2
+      }
+    },
+    "grid/liveportrait_source_time": {
+      "direct": {
+        "measured_no_range": 8
+      },
+      "jaw_coupling": {
+        "measured_no_range": 7,
+        "misplaced_range": 1
+      }
+    },
+    "grid/musetalk_earlier_320ms": {
+      "direct": {
+        "measured_no_range": 8
+      },
+      "jaw_coupling": {
+        "measured_no_range": 7,
+        "misplaced_range": 1
+      }
+    },
+    "grid/musetalk_source_time": {
+      "direct": {
+        "measured_no_range": 8
+      },
+      "jaw_coupling": {
+        "measured_no_range": 7,
+        "misplaced_range": 1
+      }
+    },
+    "grid/original": {
+      "direct": {
+        "measured_no_range": 8
+      },
+      "jaw_coupling": {
+        "false_range": 1,
+        "measured_no_range": 7
+      }
+    },
+    "grid/resample_liveportrait": {
+      "direct": {
+        "measured_no_range": 8
+      },
+      "jaw_coupling": {
+        "false_range": 1,
+        "measured_no_range": 7
+      }
+    },
+    "grid/resample_musetalk": {
+      "direct": {
+        "measured_no_range": 8
+      },
+      "jaw_coupling": {
+        "false_range": 1,
+        "measured_no_range": 7
+      }
+    },
+    "native/ai_aligned": {
+      "direct": {
+        "correct_range": 1,
+        "measured_no_range": 9
+      },
+      "jaw_coupling": {
+        "correct_range": 1,
+        "measured_no_range": 8,
+        "misplaced_range": 1
+      }
+    },
+    "native/ai_earlier_320ms": {
+      "direct": {
+        "measured_no_range": 8,
+        "misplaced_range": 2
+      },
+      "jaw_coupling": {
+        "correct_range": 1,
+        "measured_no_range": 7,
+        "misplaced_range": 2
+      }
+    },
+    "native/blur2": {
+      "direct": {
+        "false_range": 2,
+        "measured_no_range": 8
+      },
+      "jaw_coupling": {
+        "false_range": 3,
+        "measured_no_range": 7
+      }
+    },
+    "native/blur4": {
+      "direct": {
+        "false_range": 4,
+        "measured_no_range": 6
+      },
+      "jaw_coupling": {
+        "false_range": 5,
+        "measured_no_range": 5
+      }
+    },
+    "native/original": {
+      "direct": {
+        "false_range": 1,
+        "measured_no_range": 9
+      },
+      "jaw_coupling": {
+        "false_range": 4,
+        "measured_no_range": 6
+      }
+    },
+    "native/resample": {
+      "direct": {
+        "false_range": 1,
+        "measured_no_range": 9
+      },
+      "jaw_coupling": {
+        "false_range": 4,
+        "measured_no_range": 6
+      }
+    }
+  },
+  "exact_crop_and_anchor_replays": 156,
+  "example": {
+    "anchor_source_seconds": [
+      1.04,
+      1.36,
+      1.68
+    ],
+    "ground_truth_s": [
+      1.08,
+      1.88
+    ],
+    "iou": 0.7,
+    "range_s": [
+      1.12,
+      1.68
+    ],
+    "status": "correct_range"
+  },
+  "freeze_sha256": "dbdc051a18270e7657b8ff13d279804112e75d0820d56417dc8f53a98b4085c5",
+  "gate": "GRID: at least six new correct redraw ranges across three components, including two motion-compatible original-time cases; at most three added ordinary flags and zero added cut flags. Native confirmation: at least four new correct ranges across three source groups, at most two added ordinary flags. Measure at least 80% of positives and controls separately.",
+  "groups_with_additions": {
+    "native": 1
+  },
+  "motion_compatible_original_time_subset": {
+    "direct/measured_no_range": 7,
+    "jaw_coupling/measured_no_range": 6,
+    "jaw_coupling/misplaced_range": 1
+  },
+  "pilot_advances": false,
+  "runtime": {
+    "calibration_sha256": "6b8daad8e2dbb1ebcc7f9debd28b90214fd6d2896835a02a1becaf4cd0871715",
+    "controls_sha256": "677b5325ec5aa4e57ebcfb3578dc59e6c75557f88e811724462c35cdfc565292",
+    "elapsed_s": 81.49305983299928,
+    "journal_sha256": "a5bb1671539f84387f378675170dc06acc0a09c995246e60b17c717f4bfed81c",
+    "peak_rss_bytes": 137822208
+  },
+  "sampled_native_pictures": 5498,
+  "sampled_shot_guard_on_hard_cut_controls": {
+    "controls_with_detected_boundary": 1,
+    "false_ranges_on_missed_cuts": 3
+  },
+  "schema": "chipmunk.video-mouth-jaw-transfer/1",
+  "study_scope": {
+    "exact_worker_sha256": "81c37a105f67d1d8844d98e17c357ec99aa53dfa5ddc94f8cf837b3db924666b",
+    "genuine_fit_clips": 8,
+    "genuine_fit_motion_pairs": 288,
+    "grid_held_connected_components": 4,
+    "grid_held_source_clips": 8,
+    "inference_uses_audio": false,
+    "native_confirmation_connected_contexts": 3,
+    "native_confirmation_source_groups": 10,
+    "retained_worker_replay_verified": true,
+    "runtime_versions": {
+      "numpy": "2.2.6",
+      "opencv": "5.0.0"
+    },
+    "serving_change": false,
+    "source_time_motion_qualified_grid_edits": 7
+  }
+}

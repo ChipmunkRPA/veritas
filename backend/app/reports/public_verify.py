@@ -204,8 +204,9 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
     if evidence['version'] in NESTED_VERSIONS:
         parts.extend(evidence[key] for key in ('audio', 'av'))
     if analysis['kind'] == 'audio':
-        from app.evidence.audio_binding import validate_unscored_voice_coverage
+        from app.evidence.audio_binding import validate_audio_stream_scope, validate_unscored_voice_coverage
 
+        validate_audio_stream_scope(evidence["source"])
         validate_unscored_voice_coverage(evidence['coverage'], evidence['source'], evidence.get('stereo_context'))
         acoustic = evidence.get('acoustic_context')
         if evidence['version'] in {'audio-evidence-2', 'audio-evidence-3'}:

@@ -99,6 +99,28 @@ def _upload(reference):
     return {"reference": ("earlier.png", reference, "image/png")}
 
 
+def _asset_bytes(payload, asset):
+    return base64.b64decode(payload["pngs"][asset["file"]], validate=True)
+
+
+def _assert_pdf_assets(pdf, page, assets, payload):
+    exhibits = list(dict.fromkeys((item[0], item[1]) for item in page.get_images()))
+    for (xref, alpha_xref), asset in zip(exhibits, assets, strict=True):
+        with Image.open(io.BytesIO(_asset_bytes(payload, asset))) as png:
+            pixmap = pymupdf.Pixmap(pdf, xref)
+            if png.mode == "RGBA":
+                assert alpha_xref
+                assert pymupdf.Pixmap(pdf, alpha_xref).samples == png.getchannel("A").tobytes()
+                pixels = np.asarray(png)
+                rgba = np.frombuffer(pixmap.samples, dtype=np.uint8).reshape(png.height, png.width, 3)
+                selected = pixels[:, :, 3] > 0
+                np.testing.assert_allclose(rgba[selected], pixels[:, :, :3][selected], atol=1)
+                assert page.get_image_rects(xref)[0] in page.get_image_rects(exhibits[1][0])
+            else:
+                assert pixmap.samples == png.tobytes()
+        assert asset["sha256"] in page.get_text()
+
+
 def test_gate_requires_opt_in_completed_image_and_retained_original(reference_http, monkeypatch):
     f = reference_http
     response = f.client.get(_url(), headers=f.viewer)
@@ -154,7 +176,8 @@ def test_comparison_binds_hashes_and_native_crops_without_persistence(reference_
     assert comparison["coordinate_space"] == "exif-oriented-submitted"
     assert comparison["alignment"]["reference_minus_submitted"] == {"x": 16, "y": 11}
     region, = comparison["regions"]
-    assert set(payload["pngs"]) == {comparison["mask"]["file"], region["reference_crop"]["file"], region["submitted_crop"]["file"]}
+    assert set(payload["pngs"]) == {comparison["mask"]["file"], region["reference_crop"]["file"],
+                                    region["submitted_crop"]["file"], region["submitted_overlay"]["file"]}
     for label, pixels, bounds in (("reference", f.reference_pixels, region["reference_region"]),
                                    ("submitted", f.submitted_pixels, region)):
         info = region[f"{label}_crop"]
@@ -164,6 +187,11 @@ def test_comparison_binds_hashes_and_native_crops_without_persistence(reference_
         with Image.open(io.BytesIO(data)) as crop:
             assert crop.size == (w, h)
             np.testing.assert_array_equal(np.asarray(crop), pixels[y:y+h, x:x+w])
+    x, y, w, h = (region[key] for key in ("x", "y", "w", "h"))
+    with Image.open(io.BytesIO(_asset_bytes(payload, comparison["mask"]))) as mask, \
+            Image.open(io.BytesIO(_asset_bytes(payload, region["submitted_overlay"]))) as overlay:
+        np.testing.assert_array_equal(np.asarray(overlay.getchannel("A")) == 144, np.asarray(mask)[y:y+h, x:x+w] == 255)
+        assert hashlib.sha256(_asset_bytes(payload, region["submitted_overlay"])).hexdigest() == region["submitted_overlay"]["sha256"]
     assert snapshot() == before
 
 
@@ -205,15 +233,9 @@ def test_optional_pdf_uses_the_same_manifest_and_pngs(reference_http, monkeypatc
         assert comparison["reference"]["sha256"] in pdf[0].get_text()
         assert comparison["submitted"]["sha256"] in pdf[0].get_text()
         assert comparison["mask"]["sha256"] in pdf[0].get_text()
-        for index, asset_names in enumerate(((comparison["mask"],), (region["reference_crop"], region["submitted_crop"]))):
-            exhibits = pdf[index].get_images()
-            assert len(exhibits) == len(asset_names)
-            for exhibit, asset in zip(exhibits, asset_names, strict=True):
-                source = base64.b64decode(payload["pngs"][asset["file"]], validate=True)
-                with Image.open(io.BytesIO(source)) as png:
-                    assert pymupdf.Pixmap(pdf, exhibit[0]).samples == png.tobytes()
-                if index == 1:
-                    assert asset["sha256"] in pdf[index].get_text()
+        assert "/regions/0/submitted_overlay" in pdf[1].get_text()
+        _assert_pdf_assets(pdf, pdf[0], (comparison["mask"],), payload)
+        _assert_pdf_assets(pdf, pdf[1], (region["reference_crop"], region["submitted_crop"], region["submitted_overlay"]), payload)
 
     from app.reports import image_reference_pdf
 
@@ -266,11 +288,8 @@ def test_resized_route_pdf_and_export_bind_both_native_grids(reference_http, tmp
                               "crops_verified": 2, "mask_pixels_counted": region["selected_pixels"]}
     with pymupdf.open(stream=base64.b64decode(payload["pdf"], validate=True), filetype="pdf") as pdf:
         assert len(pdf) == 2 and "Same framing at different pixel dimensions" in pdf[0].get_text()
-        for page, assets in ((pdf[0], [comparison["mask"]]), (pdf[1], [region["reference_crop"], region["submitted_crop"]])):
-            for exhibit, asset in zip(page.get_images(), assets, strict=True):
-                with Image.open(io.BytesIO(base64.b64decode(payload["pngs"][asset["file"]]))) as png:
-                    assert pymupdf.Pixmap(pdf, exhibit[0]).samples == png.tobytes()
-                assert asset["sha256"] in page.get_text()
+        _assert_pdf_assets(pdf, pdf[0], (comparison["mask"],), payload)
+        _assert_pdf_assets(pdf, pdf[1], (region["reference_crop"], region["submitted_crop"], region["submitted_overlay"]), payload)
 
     mask = comparison["mask"]
     with Image.open(io.BytesIO(base64.b64decode(payload["pngs"][mask["file"]]))) as image:

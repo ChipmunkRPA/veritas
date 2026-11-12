@@ -28,6 +28,7 @@ from app.evidence.audio_binding import (
     attach_stereo_attenuation_overlaps,
     source_clock_context,
     unscored_voice_intervals,
+    validate_audio_stream_scope,
     validate_unscored_voice_coverage,
 )
 from app.storage.artefacts import register_artefact
@@ -112,6 +113,7 @@ def validate_content(document: dict[str, Any]) -> None:
     for window in document["coverage"]["windows"]:
         _interval(window, samples)
     try:
+        validate_audio_stream_scope(source)
         validate_unscored_voice_coverage(document["coverage"], source, document.get("stereo_context"))
     except (KeyError, TypeError, ValueError) as error:
         raise PacketIntegrityError(str(error)) from error
@@ -304,6 +306,8 @@ def build_content(db: Session, analysis: Analysis, store: ObjectStore, result: d
                         "The mono input mixes source channels. Compression, noise, speakers and unfamiliar synthesis methods can affect responses.",
                         "Waveforms and exported audio are context for inspection; they are not independent evidence of synthesis.",
                         "Unscored audio and audio beyond the decoded duration have not received a voice-check result."]}
+    if "audio_stream_indices" in mapping:
+        document["source"]["audio_stream_indices"] = mapping["audio_stream_indices"]
     document["coverage"]["unscored_intervals"] = unscored_voice_intervals(document["coverage"], document["source"])
     clock = source_clock_context(document["coverage"], document["source"], guarded=record.get("voice_clock_policy") == VOICE_CLOCK_POLICY)
     if analysis.kind == "audio" or clock["total_discontinuities"]:
@@ -403,6 +407,8 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
     store.verify(analysis.sha256)
     store.verify(document["source"]["wav_sha256"])
     mapping = json.loads(_verified(store, document["source"]["mapping_sha256"]))
+    if document["source"].get("audio_stream_indices") != mapping.get("audio_stream_indices"):
+        raise PacketIntegrityError("Audio track coverage differs from the frozen audio input mapping")
     if document.get("stereo_context") != mapping.get("stereo_context"):
         raise PacketIntegrityError("Stereo context differs from the frozen audio input mapping")
     listening_digest = mapping.get("stereo_listening_pcm_sha256")

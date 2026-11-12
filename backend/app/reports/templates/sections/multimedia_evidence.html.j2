@@ -41,6 +41,14 @@
 <p class="caption">Ranges use extracted Unicode characters. JSON pointer <span class="mono">/coverage/writing_second_check</span>.</p>
 {% else %}<p class="caption">The first check supplied no AI-like contexts for this review.</p>{% endif %}
 {% endif %}
+{% if evidence.get('audio_tracks') %}
+<div class="multimedia-acoustic-summary">
+<h3>Audio track coverage</h3>
+{% set count = evidence.audio_tracks | length %}
+<p>The file contains {{ count }} audio tracks. Audio checks used the first track (source stream index {{ evidence.audio_tracks[0] }}). {% if count == 2 %}The second track was unassessed.{% else %}The other {{ count - 1 }} tracks were unassessed.{% endif %}</p>
+<p class="caption">The track list is recorded at JSON pointer <span class="mono">{{ evidence.audio_tracks_pointer }}</span>.</p>
+</div>
+{% endif %}
 {% if evidence.get('audio_source_clock') %}
 {% set clock = evidence.audio_source_clock %}
 {% set rate = evidence.audio_source_clock_rate %}

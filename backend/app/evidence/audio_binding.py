@@ -169,6 +169,17 @@ def _timeline_ranges(source: dict, start: int, end: int) -> list[dict]:
     return output
 
 
+def validate_audio_stream_scope(source: dict) -> None:
+    if "audio_stream_indices" not in source:
+        return
+    indices = source["audio_stream_indices"]
+    selected = source.get("source_stream_index")
+    if (not isinstance(indices, list) or len(indices) < 2
+            or any(type(index) is not int or index < 0 for index in indices)
+            or indices != sorted(set(indices)) or type(selected) is not int or indices[0] != selected):
+        raise ValueError("Audio track coverage differs from the selected source stream")
+
+
 def validate_unscored_voice_coverage(coverage: dict, source: dict, stereo: dict | None = None) -> None:
     if not {"unscored_intervals", "stereo_attenuation_overlaps", "source_clock_context"}.intersection(coverage):
         return
@@ -222,10 +233,12 @@ def _validate(channel, source_sha256):
             'A video voice channel cannot claim independent authority')
     source = channel['source']
     require(source['sha256'] == source_sha256, 'Video voice source differs from its parent')
+    validate_audio_stream_scope(source)
     require(channel['status'] in {'ready', 'not_assessed', 'absent', 'unavailable'}, 'Invalid video voice availability')
     if channel['coverage'] is None:
         require(channel['status'] in {'absent', 'unavailable'} and not channel['packets'] and not channel.get('overview')
                 and not channel.get('acoustic_context')
+                and "audio_stream_indices" not in source
                 and not {'stereo_context', 'stereo_context_sha256', 'stereo_listening', 'repetition_context', 'similarity_context'}.intersection(channel)
                 and bool(channel['reason']), 'Unavailable video voice contains unexplained assets')
         return

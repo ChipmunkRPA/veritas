@@ -233,7 +233,8 @@ it('shows soundtrack level loss in the voice lane with the original video clock'
       source_end_pts: 134400, time_base: '1/16000' }],
   }]
   audio.packets = []
-  audio.source = { ...audio.source, source_channels: 2, source_stream_index: 1, pcm_sha256: 'e'.repeat(64) }
+  audio.source = { ...audio.source, source_channels: 2, source_stream_index: 1, audio_stream_indices: [1, 2],
+    pcm_sha256: 'e'.repeat(64) }
   audio.stereo_context = {
     schema: 'chipmunk.stereo-channel-context/2', status: 'measured', evidence_type: 'context', affects_overall_confidence: false,
     source_sha256: set.source.sha256, source_channel_count: 2, source_stream_index: 1,
@@ -259,6 +260,9 @@ it('shows soundtrack level loss in the voice lane with the original video clock'
     <MultimediaEvidenceContent set={set} token="secure" mediaReady />
   </MemoryRouter>)
   expect(screen.getByRole('tab', { name: /Voice intervals.*1 mono level drop/ }).getAttribute('aria-selected')).toBe('true')
+  expect(screen.getByRole('region', { name: 'Audio track coverage' }).textContent).toContain(
+    'The file contains 2 audio tracks. Audio checks used the first track (source stream index 1). The second track was unassessed.',
+  )
   const section = within(screen.getByRole('region', { name: 'Stereo channel comparison' }))
   expect(section.getByText(/Strong level drop in the analyzed mono mix/).parentElement?.textContent).toContain(
     'Decoded audio 2.000 s–3.000 s.',

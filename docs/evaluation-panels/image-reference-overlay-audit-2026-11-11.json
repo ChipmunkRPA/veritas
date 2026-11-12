@@ -1,0 +1,27 @@
+{
+  "checked_journal_sha256": {
+    "earlier": "cd096a73b307cfdee3a7ff923d0e3211e411465b6ad5528a95abfc809e493cac",
+    "later": "7ea5c26d072242de283f550b97cd160ceb9ad350d0a28da60e9187f0e5505582"
+  },
+  "comparison_receipt_sha256": "35e1146d76361302ebe3be48fba391b4b93acb91606360c47b9600c874913198",
+  "counts": {
+    "earlier": {
+      "comparable_without_overlay": 53,
+      "exact_crops_verified": 86,
+      "overlays_verified": 43,
+      "resize_delivery_unresolved_without_overlay": 1,
+      "same_framing_unresolved_without_overlay": 106,
+      "views": 192,
+      "views_with_overlays": 32
+    },
+    "later": {
+      "comparable_without_overlay": 65,
+      "exact_crops_verified": 84,
+      "overlays_verified": 42,
+      "same_framing_unresolved_without_overlay": 85,
+      "views": 192,
+      "views_with_overlays": 42
+    }
+  },
+  "schema": "chipmunk.image-reference-overlay-audit/1"
+}

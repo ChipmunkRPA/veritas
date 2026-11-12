@@ -123,13 +123,15 @@ def decode_audio(path: Path, *, source_sha256: str, max_seconds: float = 600.0,
         if hashlib.file_digest(stream, "sha256").hexdigest() != source_sha256:
             raise ValueError("The audio decoder input differs from the recorded original")
     try:
-        probe = subprocess.run(["ffprobe", "-v", "error", "-protocol_whitelist", "file", "-select_streams", "a:0",
-                                "-show_streams", "-show_format", "-of", "json", _input(path)],
+        entries = "stream=index,channels,channel_layout,sample_rate,codec_name,time_base,start_pts,duration:format=start_time,duration"
+        probe = subprocess.run(["ffprobe", "-v", "error", "-protocol_whitelist", "file", "-select_streams", "a",
+                                "-show_entries", entries, "-of", "json", _input(path)],
                                capture_output=True, text=True, timeout=60, check=True, stdin=subprocess.DEVNULL)
         info = json.loads(probe.stdout)
-        stream = (info.get("streams") or [None])[0]
-        if not stream:
+        streams = info.get("streams") or []
+        if not streams:
             raise AudioStreamUnavailable("The file has no audio stream")
+        stream = streams[0]
         maximum = math.floor(max_seconds * SAMPLE_RATE)
         filters = f"aformat=sample_fmts=s16:channel_layouts=mono,aresample={SAMPLE_RATE},atrim=end_sample={maximum},ashowinfo,asetpts=N/SR/TB"
         layout = stream.get("channel_layout")
@@ -191,6 +193,8 @@ def decode_audio(path: Path, *, source_sha256: str, max_seconds: float = 600.0,
             "source_timing_precision_s": 1 / SAMPLE_RATE,
             "limit_samples": maximum,
         }
+        if len(streams) > 1:
+            mapping["audio_stream_indices"] = [int(track["index"]) for track in streams]
         verified_stereo = None
         if inspect_stereo:
             mapping["stereo_context"] = stereo.build(mapping, pcm, layout, stereo_pcm, stereo_clock)

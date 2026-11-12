@@ -41,7 +41,7 @@ from app.evidence.image_packets import PacketIntegrityError
 from app.reports import engine, multimedia_evidence, package, signing, snapshot, verify, verify_video_source
 from app.reports.specimens import specimen
 from app.storage.artefacts import register_artefact
-from app.storage.db import AnalysisStage, ReportRow
+from app.storage.db import AnalysisStage, Artefact, ReportRow
 from app.storage.objects import ObjectIntegrityError
 
 
@@ -634,12 +634,15 @@ def test_real_video_soundtrack_cue_preserves_production_voice_and_av(av_source, 
         stereo_wav.writeframes(np.column_stack((left, right)).astype('<i2').tobytes())
     path = tmp_path / 'stereo-offset.mkv'
     subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-copyts', '-i', str(source), '-itsoffset', '5.4',
-                    '-i', str(stereo_path), '-map', '0:v:0', '-map', '1:a:0', '-c', 'copy',
+                    '-i', str(stereo_path), '-itsoffset', '5.4', '-f', 'lavfi',
+                    '-i', 'sine=frequency=711:sample_rate=16000:duration=3',
+                    '-map', '0:v:0', '-map', '1:a:0', '-map', '2:a:0', '-c', 'copy',
                     '-avoid_negative_ts', 'disabled', str(path)], check=True, timeout=30)
     sha = hashlib.sha256(path.read_bytes()).hexdigest()
     table = probe_frames(path)
     reference = decode_audio(path, source_sha256=sha, max_seconds=120)
     assert table.seconds(0) == 5 and reference.mapping['timeline'][0]['source_pts'] == 86400
+    assert reference.mapping['audio_stream_indices'] == [1, 2]
 
     fixture = av_fixture.__wrapped__(tmp_path, (path, table, reference, face))
     try:
@@ -684,6 +687,7 @@ def test_real_video_soundtrack_cue_preserves_production_voice_and_av(av_source, 
         _freeze_parent(f)
         f.db.commit()
         stereo = f.document['audio']['stereo_context']
+        assert f.document['audio']['source']['audio_stream_indices'] == [1, 2]
         assert canonical_hash(stereo) == stereo_sha
         assert json.loads(f.store.read_bytes(stereo_sha)) == stereo
         assert stereo['source_stream_index'] == 1 and stereo['affects_overall_confidence'] is False
@@ -717,6 +721,8 @@ def test_real_video_soundtrack_cue_preserves_production_voice_and_av(av_source, 
         monkeypatch.setattr(multimedia_evidence, 'default_store', lambda: f.store)
         rendered = engine.render_pdf(f.frozen)
         text = engine.pdf_text(rendered.pdf)
+        assert 'Audio track coverage' in text and 'The second track was unassessed.' in ' '.join(text.split())
+        assert '/audio/source/audio_stream_indices' in text
         assert 'Stereo soundtrack comparison' in text and 'Mono is digitally silent' in text
         assert '[118400, 134400)' in text and '/audio/stereo_context' in text
         assert '/audio/stereo_listening/windows/0' in text
@@ -727,6 +733,22 @@ def test_real_video_soundtrack_cue_preserves_production_voice_and_av(av_source, 
         assert f'Video playback 2.400–{.4 + len(reference.pcm) / SAMPLE_RATE:.3f} s' in ' '.join(text.split())
         assert 'All 31 lag candidates' in text
         _check_public_zip(f, tmp_path, monkeypatch, rendered.pdf, source_audio=path, source_video=path)
+
+        forged_tracks = copy.deepcopy(f.document)
+        forged_tracks['audio']['source']['audio_stream_indices'] = [1, 3]
+        forged_tracks['sha256'] = service.packet_hash(forged_tracks)
+        with pytest.raises(ObjectIntegrityError, match='Audio track coverage differs'):
+            multimedia_evidence.verify_assets(forged_tracks, f.store, result=f.result)
+        frozen_row = f.db.get(Artefact, f.document['id'])
+        original_hash = frozen_row.sha256
+        try:
+            frozen_row.sha256 = f.store.put_bytes(canonical_json(forged_tracks)).sha256
+            f.db.flush()
+            with pytest.raises(PacketIntegrityError, match='Audio track coverage differs'):
+                video_packets.load_packet_set(f.db, f.analysis, f.store, set_id=f.document['id'])
+        finally:
+            frozen_row.sha256 = original_hash
+            f.db.flush()
 
         forged = copy.deepcopy(f.document['audio'])
         forged['stereo_context']['windows'][2]['source_timestamp_ranges'][0]['source_start_pts'] += 1

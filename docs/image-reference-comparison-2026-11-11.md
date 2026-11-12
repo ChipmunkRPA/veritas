@@ -6,11 +6,15 @@ If you have an independently obtained earlier copy, you can compare it with the 
 
 Set `VERITAS_IMAGE_REFERENCE_COMPARISON_ENABLED=true` in `backend/.env` and restart the local API. Open a completed image analysis in the normal view, select **Compare with an earlier copy**, then choose a single-frame PNG or JPEG. Each image may have up to 4 million pixels. The submitted source must still be available and match its recorded SHA-256.
 
-The app shows both exact crops, their native positions and the submitted-image difference mask. Verified integer crops and translations include both overlap areas. Downloads include a separate comparison PDF and JSON with the original file commitments and PNG assets. The earlier copy is staged temporarily for the request. The comparison carries zero AI confidence weight and requires a completed analysis.
+The app shows both exact crops, their native positions and the submitted-image difference mask. Select **Highlight difference pixels** on a submitted crop to mark the exact selected pixels in amber. The separate comparison PDF shows the clean crops and the highlighted crop. The JSON download includes the same transparent overlay PNG, its SHA-256 and the crop's native coordinates. Verified integer crops and translations include both overlap areas. The earlier copy is staged temporarily for the request. The comparison carries zero AI confidence weight and requires a completed analysis.
+
+The app can also compare same-framing copies at different pixel dimensions when alignment is supported. It measures differences on the submitted image's pixel grid and keeps the displayed earlier crop in its own native coordinates. [Resized-image evaluation](image-reference-resize-transfer-2026-11-11.md)
 
 A local browser test used a cropped JPEG with a known edit and an earlier PNG. Simulated Stripe payment released the original analysis, and the supplemental comparison used its retained source. The browser loaded both crops and the mask and downloaded both exports. A separate HTTP test reopened the PDF and matched its embedded pixels and recorded hashes to the JSON. An identical pair returned no selected region. An unalignable pair returned an unassessed result.
 
-The [offline reviewer](independent-testing.md#verify-an-earlier-copy-image-comparison) checks the downloaded JSON against both original images using Pillow. It checks native coordinates, pixel-exact crops, mask totals and the recorded SHA-256 values.
+The [offline reviewer](independent-testing.md#verify-an-earlier-copy-image-comparison) checks the downloaded JSON against both original images using Pillow. It checks native coordinates, pixel-exact crops, mask totals and the recorded SHA-256 values. When the overlay is present, it verifies every marked and transparent pixel against the mask at the submitted crop's coordinates.
+
+A production-path replay regenerated all 384 held resized PNG and JPEG75 comparisons. Both selection journals matched the earlier frozen hashes. The replay verified 85 overlays and 170 exact native crops across 74 comparisons with selected regions. The other 310 comparisons contained no overlay. [Frozen replay receipt](evaluation-panels/image-reference-overlay-audit-2026-11-11.json) · [Replay runner](../backend/scripts/review_image_reference_overlays.py)
 
 ## Command-line comparison
 

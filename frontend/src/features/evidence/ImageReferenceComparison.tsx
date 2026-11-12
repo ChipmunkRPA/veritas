@@ -29,19 +29,33 @@ function NativeArea({ area }: { area: NativeImageArea }) {
   return <span className="font-mono">x {area.x}, y {area.y} · {area.w} × {area.h} px</span>
 }
 
-function ComparisonPicture({ result, artifact, label }: {
-  result: ImageReferenceResult; artifact?: ReferencePng; label: string
+function ComparisonPicture({ result, artifact, label, overlay }: {
+  result: ImageReferenceResult; artifact?: ReferencePng; label: string; overlay?: ReferencePng
 }) {
   const [failed, setFailed] = useState(false)
+  const [showOverlay, setShowOverlay] = useState(false)
+  const [overlayFailed, setOverlayFailed] = useState(false)
   const src = referencePngSrc(result.pngs, artifact)
+  const overlaySrc = overlay && overlay.width === artifact?.width && overlay.height === artifact.height
+    ? referencePngSrc(result.pngs, overlay) : null
   return <figure className="m-0 min-w-0">
     <figcaption className="mb-2 text-small font-medium text-text">{label}</figcaption>
     <div className="flex min-h-24 items-center justify-center overflow-hidden rounded-md border border-border bg-surface-2">
       {src && artifact && !failed
-        ? <img className="block h-auto max-h-80 w-full object-contain" src={src} alt={label}
-            width={artifact.width} height={artifact.height} loading="lazy" onError={() => setFailed(true)} />
+        ? <div className="relative w-full">
+            <img className="block h-auto max-h-80 w-full object-contain" src={src} alt={label}
+              width={artifact.width} height={artifact.height} loading="lazy" onError={() => setFailed(true)} />
+            {showOverlay && overlaySrc && !overlayFailed &&
+              <img className="pointer-events-none absolute inset-0 h-full w-full object-contain" src={overlaySrc}
+                alt="" onError={() => setOverlayFailed(true)} />}
+          </div>
         : <p className="m-4 text-small text-text-muted">This evidence image is unavailable.</p>}
     </div>
+    {src && !failed && overlaySrc && !overlayFailed && <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+      <Button variant="text" aria-pressed={showOverlay} onClick={() => setShowOverlay(value => !value)}>Highlight difference pixels</Button>
+      {showOverlay && <p className="m-0 text-caption text-text-muted">Amber marks the selected pixels in this crop.</p>}
+    </div>}
+    {overlayFailed && <p role="status" className="mt-2 mb-0 text-caption text-text-muted">The difference overlay could not be loaded.</p>}
   </figure>
 }
 
@@ -104,7 +118,8 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
               <p className="mt-2 mb-0 text-caption text-text-muted"><NativeArea area={region.reference_region ?? region} /></p>
             </div>
             <div className="min-w-0">
-              <ComparisonPicture result={result} artifact={region.submitted_crop} label={`Submitted image crop for region ${index + 1}`} />
+              <ComparisonPicture result={result} artifact={region.submitted_crop} overlay={region.submitted_overlay}
+                label={`Submitted image crop for region ${index + 1}`} />
               <p className="mt-2 mb-0 text-caption text-text-muted"><NativeArea area={region} /></p>
             </div>
           </div>

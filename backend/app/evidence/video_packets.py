@@ -842,8 +842,14 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
     if document["version"] in NESTED_VERSIONS:
         for key in ("audio", "av"):
             if document[key]["coverage"] is not None:
-                for name in ("wav_sha256", "mapping_sha256"):
-                    store.verify(document[key]["source"][name])
+                source = document[key]["source"]
+                store.verify(source["wav_sha256"])
+                if key == "audio":
+                    mapping = json.loads(_verified(store, source["mapping_sha256"]))
+                    if source.get("audio_stream_indices") != mapping.get("audio_stream_indices"):
+                        raise PacketIntegrityError("Audio track coverage differs from the frozen audio input mapping")
+                else:
+                    store.verify(source["mapping_sha256"])
         if stereo_sha := document["audio"].get("stereo_context_sha256"):
             store.verify(stereo_sha)
     return document

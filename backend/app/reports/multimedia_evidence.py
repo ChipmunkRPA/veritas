@@ -286,6 +286,8 @@ def _verify_audio(document: dict, store: ObjectStore, assets: dict[str, bytes], 
             or mapping.get("source_sha256") != source["sha256"] or len(pcm) != source["samples"]
             or any(mapping.get(key) != source.get(key) for key in ("pcm_sha256", "samples", "sample_rate", "channels", "timeline_time_base", "timeline"))):
         raise ObjectIntegrityError("Frozen audio no longer matches its analysed samples or source clock")
+    if source.get("audio_stream_indices") != mapping.get("audio_stream_indices"):
+        raise ObjectIntegrityError("Audio track coverage differs from the frozen audio input mapping")
     source_ranges(mapping, 0, len(pcm))
     stereo_context = document.get("stereo_context")
     if stereo_sha := document.get("stereo_context_sha256"):
@@ -786,6 +788,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                                   f"frame {anchor['frame_index']}, PTS {anchor['pts']} at {anchor['time_base']} - {image['label']}")
         packets.append(row)
     stereo_source = (document.get("audio") or {}) if kind == "video" else document
+    audio_tracks = (stereo_source.get("source") or {}).get("audio_stream_indices") if kind in {"audio", "video"} else None
     stereo_context = copy.deepcopy(stereo_source.get("stereo_context"))
     video_origin_s = document["source"].get("timeline_origin_s") if kind == "video" else None
     voice_coverage = (stereo_source.get("coverage") or {}) if kind in {"audio", "video"} else {}
@@ -827,6 +830,8 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "voice_gaps": voice_gaps,
             "voice_gap_count": len(gaps),
             "voice_gap_pointer": "/audio/coverage/unscored_intervals" if kind == "video" else "/coverage/unscored_intervals",
+            "audio_tracks": audio_tracks,
+            "audio_tracks_pointer": ("/audio" if kind == "video" else "") + "/source/audio_stream_indices",
             "audio_source_clock": voice_coverage.get("source_clock_context"),
             "audio_source_clock_rate": rate,
             "audio_source_clock_pointer": ("/audio" if kind == "video" else "") + "/coverage/source_clock_context",

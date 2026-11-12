@@ -193,15 +193,19 @@ def test_listening_selects_at_most_three_windows_and_preserves_chronological_ord
 
 
 def test_actual_audio_stage_packet_api_export_and_report_use_same_windows(tmp_path, monkeypatch):
-    path = tmp_path / "source.wav"
-    sha = _source(path, seconds=2, mode="first_left_then_balanced", rate=SAMPLE_RATE)
+    first, second, path = (tmp_path / name for name in ("source.wav", "alternate.wav", "multitrack.mka"))
+    _source(first, seconds=2, mode="first_left_then_balanced", rate=SAMPLE_RATE)
+    _source(second, seconds=2, channels=1, rate=SAMPLE_RATE)
+    subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-i", str(first), "-i", str(second),
+                    "-map", "0:a", "-map", "1:a", "-c:a", "copy", str(path)], check=True, timeout=30)
+    sha = hashlib.sha256(path.read_bytes()).hexdigest()
     store = ObjectStore(tmp_path / "objects")
     stored = store.put_file(path)
     database = create_engine("sqlite://")
     Base.metadata.create_all(database)
     snapshot = specimen("audio", "standard")
     with Session(database) as db:
-        analysis = Analysis(id=snapshot.analysis.id, kind="audio", filename=path.name, content_type="audio/wav",
+        analysis = Analysis(id=snapshot.analysis.id, kind="audio", filename=path.name, content_type="audio/x-matroska",
                             size_bytes=stored.size_bytes, sha256=sha, status="done", revision=snapshot.analysis.revision)
         db.add(analysis)
         db.commit()
@@ -215,6 +219,7 @@ def test_actual_audio_stage_packet_api_export_and_report_use_same_windows(tmp_pa
         packet = audio_packets.build_packet_set(db, analysis, store, result)
         db.commit()
         mapping = json.loads(store.read_bytes(evidence_input["mapping_sha256"]))
+        assert packet["source"]["audio_stream_indices"] == mapping["audio_stream_indices"] == [0, 1]
         assert packet["stereo_context"] == mapping["stereo_context"]
         assert "model" not in json.dumps(packet["stereo_context"]).lower()
         listening = packet["stereo_listening"]
@@ -257,6 +262,8 @@ def test_actual_audio_stage_packet_api_export_and_report_use_same_windows(tmp_pa
         assert multimedia_evidence.view(snapshot)["stereo_context"] == packet["stereo_context"]
         rendered = engine.render_pdf(snapshot)
         words = engine.pdf_text(rendered.pdf)
+        assert "Audio track coverage" in words and "The second track was unassessed." in " ".join(words.split())
+        assert "/source/audio_stream_indices" in words
         gap = packet["stereo_context"]["windows"][0]["level_gap_db"]
         assert "Stereo channel comparison" in words and "Left louder" in words and str(gap) in words
         assert "/stereo_context" in words and "[16000, 32000)" in words

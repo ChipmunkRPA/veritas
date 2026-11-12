@@ -21,6 +21,7 @@ interface DifferenceRegion extends NativeImageArea {
   reference_region?: NativeImageArea
   reference_crop?: ReferencePng
   submitted_crop?: ReferencePng
+  submitted_overlay?: ReferencePng
 }
 
 export interface ImageReferenceRecord {
@@ -97,7 +98,7 @@ export function referencePngSrc(pngs: ImageReferenceResult['pngs'], artifact?: R
 
 export function imageReferenceExport(result: ImageReferenceResult): ImageReferenceResult {
   const { comparison, pngs } = result
-  const artifacts = [comparison.mask, ...comparison.regions.flatMap(region => [region.reference_crop, region.submitted_crop])]
+  const artifacts = [comparison.mask, ...comparison.regions.flatMap(region => [region.reference_crop, region.submitted_crop, region.submitted_overlay])]
   const attached: ImageReferenceResult['pngs'] = {}
   for (const artifact of artifacts) {
     const base64 = pngData(pngs, artifact)

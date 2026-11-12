@@ -85,6 +85,7 @@ def test_source_identity_and_first_stream_selection(tmp_path):
                     "-c:a", "pcm_s16le", str(dual)], check=True, capture_output=True)
     decoded = decode_audio(dual, source_sha256=hashlib.sha256(dual.read_bytes()).hexdigest())
     assert decoded.mapping["source_stream_index"] == 0
+    assert decoded.mapping["audio_stream_indices"] == [0, 1]
     assert decoded.mapping["source_channels"] == 1
     assert not np.any(decoded.pcm)  # Automatic best-stream selection would choose the stereo tone.
 

@@ -62,6 +62,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         raise ValueError("Decoded audio differs from the committed mono PCM or WAV. Check the local FFmpeg version.")
     if any(decoded.mapping[key] != source[key] for key in SOURCE_FIELDS):
         raise ValueError("Decoded audio stream or source timeline differs from its commitment")
+    if "audio_stream_indices" in source and source["audio_stream_indices"] != decoded.mapping.get("audio_stream_indices"):
+        raise ValueError("Audio track coverage differs from the original container")
     if audio["coverage"]["decode_limit_reached"] != (len(decoded.pcm) >= decoded.mapping["limit_samples"]):
         raise ValueError("Decoded audio duration disagrees with the recorded coverage limit")
 

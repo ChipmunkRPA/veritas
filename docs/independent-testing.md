@@ -617,7 +617,9 @@ python -I scripts/review_image_reference_export.py \
 The reviewer checks both file SHA-256 commitments and native dimensions after
 orientation. It checks the overlap against the recorded integer offset,
 compares both decoded crops with the corresponding source pixels, and checks
-the embedded PNG hashes and binary mask bounds and pixel totals. For the third
+the embedded PNG hashes and binary mask bounds and pixel totals. Where the export
+includes an amber difference overlay, the reviewer checks every pixel against the
+full mask sliced at the submitted crop's coordinates. For the third
 schema, the reviewer reruns the resize comparison using the two source files
 and checks the recomputed framing, regions, and entire mask. It independently
 maps the submitted region back to the exact earlier-copy crop using rational

@@ -28,6 +28,7 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
   set: AudioEvidenceSet; token: string; mediaReady: boolean; videoOriginS?: number | null
 }) {
   const rate = set.source.sample_rate
+  const tracks = set.source.audio_stream_indices
   const clock = set.coverage?.source_clock_context
   const stereo = set.stereo_context
   const stereoOverlaps = set.coverage?.stereo_attenuation_overlaps?.flatMap((overlap) => {
@@ -66,6 +67,11 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
     setSelection(packet.id)
   }, [hash, set.packets])
   return <div ref={root} data-testid="audio-evidence-content">
+    {tracks && tracks.length > 1 && <section aria-label="Audio track coverage" className="mt-4 rounded-md border border-border p-4 text-small text-text-muted">
+      <h3 className="m-0 font-medium">Audio track coverage</h3>
+      <p className="mt-2 mb-0">The file contains {tracks.length} audio tracks. Audio checks used the first track (source stream index {tracks[0]}).{' '}
+        {tracks.length === 2 ? 'The second track was unassessed.' : `The other ${tracks.length - 1} tracks were unassessed.`}</p>
+    </section>}
     <AudioSoundEvents set={set} token={token} mediaReady={mediaReady} pauseAudio={pauseAudio} />
     <AudioBackgroundContext set={set} token={token} mediaReady={mediaReady} pauseAudio={pauseAudio} />
     <AudioStereoContext set={set} token={token} mediaReady={mediaReady} videoOriginS={videoOriginS} pauseAudio={pauseAudio} />

@@ -164,7 +164,8 @@ def _resize_replay(comparison, ref, sub, carrier):
     measured_fields = {"status", "regions", "additional_regions", "supported_resize_kernels", "framing_check",
                        "submitted_over_reference_xy"}
     measured = {field: value for field, value in comparison.items() if field in measured_fields}
-    measured["regions"] = [{key: value for key, value in region.items() if key not in {"reference_crop", "submitted_crop"}}
+    measured["regions"] = [{key: value for key, value in region.items()
+                            if key not in {"reference_crop", "submitted_crop", "submitted_overlay"}}
                            for region in measured["regions"]]
     _require(json.dumps(measured, sort_keys=True) == json.dumps(expected, sort_keys=True),
              "Resize comparison differs from recomputed status, framing or regions")
@@ -238,6 +239,12 @@ def review(export, earlier, submitted):
             with mask.crop(box) as local_mask:
                 _require(type(count) is int and 0 < count <= local_mask.histogram()[255], "Region pixel count differs from the mask")
                 _require(local_mask.getbbox() == (0, 0, width, height), "Region does not bound its mask pixels")
+                if "submitted_overlay" in region:
+                    overlay = _image(stack, assets, region["submitted_overlay"], f"submitted-overlay-{index:02d}.png",
+                                     "RGBA", (width, height))
+                    with Image.new("RGBA", (width, height)) as expected:
+                        expected.paste((255, 173, 46, 144), (0, 0, width, height), local_mask)
+                        _require(overlay.tobytes() == expected.tobytes(), "Difference overlay pixels differ from the native mask")
             retained += count
             drawn.rectangle((box[0], box[1], box[2] - 1, box[3] - 1), fill=255)
             for field, original, original_box in (("reference", ref, earlier_box), ("submitted", sub, box)):

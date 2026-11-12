@@ -23,6 +23,7 @@ const comparison: ImageReferenceResult = {
       reference_region: { x: 134, y: 76, w: 90, h: 70 },
       reference_crop: artifact('reference-01.png'),
       submitted_crop: artifact('submitted-01.png'),
+      submitted_overlay: artifact('submitted-overlay-01.png'),
     }],
     mask: artifact('difference-mask.png', 356, 230),
     alignment: {
@@ -30,7 +31,7 @@ const comparison: ImageReferenceResult = {
       reference_overlap: { x: 16, y: 11, w: 356, h: 230 },
     },
   },
-  pngs: { 'reference-01.png': png, 'submitted-01.png': png, 'difference-mask.png': png },
+  pngs: { 'reference-01.png': png, 'submitted-01.png': png, 'submitted-overlay-01.png': png, 'difference-mask.png': png },
   pdf,
 }
 
@@ -104,6 +105,15 @@ describe('earlier-copy comparison', () => {
     expect(screen.getByText('x 118, y 65 · 90 × 70 px')).toBeTruthy()
     expect(screen.getByText('x 16, y 11 · 356 × 230 px')).toBeTruthy()
     expect(screen.getByText(/Pixels outside the overlap were unassessed/)).toBeTruthy()
+    const toggle = screen.getByRole('button', { name: 'Highlight difference pixels' })
+    expect(toggle.getAttribute('aria-pressed')).toBe('false')
+    fireEvent.click(toggle)
+    expect(toggle.getAttribute('aria-pressed')).toBe('true')
+    const submitted = screen.getByRole('img', { name: 'Submitted image crop for region 1' })
+    expect(submitted.nextElementSibling?.getAttribute('src')).toBe(`data:image/png;base64,${png}`)
+    expect(screen.getByText('Amber marks the selected pixels in this crop.')).toBeTruthy()
+    fireEvent.click(toggle)
+    expect(submitted.nextElementSibling).toBeNull()
     fireEvent.click(screen.getByRole('button', { name: 'Download comparison PDF' }))
     fireEvent.click(screen.getByRole('button', { name: 'Download comparison JSON' }))
     const [pdfCall, jsonCall] = vi.mocked(saveBlob).mock.calls
@@ -232,6 +242,6 @@ describe('earlier-copy comparison', () => {
     expect(referencePngSrc({ '../unexpected.png': png }, artifact('../unexpected.png'))).toBeNull()
     expect(referencePngSrc({ 'unused.png': png }, source)).toBeNull()
     const exported = imageReferenceExport({ ...comparison, pngs: { ...wrong, 'unused.png': png } })
-    expect(Object.keys(exported.pngs).sort()).toEqual(['difference-mask.png', 'submitted-01.png'])
+    expect(Object.keys(exported.pngs).sort()).toEqual(['difference-mask.png', 'submitted-01.png', 'submitted-overlay-01.png'])
   })
 })

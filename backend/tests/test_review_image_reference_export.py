@@ -57,6 +57,7 @@ def test_refuses_wrong_source_and_shifted_bounds(saved_comparison):
 @pytest.mark.parametrize(("field", "reason"), [
     ("reference_crop", "Evidence crop pixels differ"),
     ("mask", "Mask pixels fall outside"),
+    ("submitted_overlay", "Difference overlay pixels differ"),
 ])
 def test_rehashed_altered_png_still_fails(saved_comparison, field, reason):
     path, reference, submitted, document = saved_comparison
@@ -66,6 +67,8 @@ def test_rehashed_altered_png_still_fails(saved_comparison, field, reason):
     with Image.open(io.BytesIO(base64.b64decode(document["pngs"][filename]))) as image:
         if field == "mask":
             image.putpixel((0, 0), 255)
+        elif field == "submitted_overlay":
+            image.putpixel((0, 0), (255, 173, 46, 255))
         else:
             image.putpixel((0, 0), (0, 0, 0))
         buffer = io.BytesIO()

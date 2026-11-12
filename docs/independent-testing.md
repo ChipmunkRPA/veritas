@@ -13,6 +13,10 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [four-modality receipt example](#four-modality-receipt-example) runs with
+the Python standard library and fictional inputs. It shows how to reproduce a
+comparison and detect a changed operating point.
+
 The [standalone measurement reviewer](#recompute-selected-image-and-video-measurements)
 replays a PNG seam or video frame schedule directly from a supplied original
 and its signed evidence record. Start there to check those measurements on a
@@ -696,6 +700,13 @@ Outputs refuse overwrite. Keep the original manifests, frozen decisions, and
 receipts. Store private evaluation media outside Git. The summary deliberately
 omits individual source identifiers and media; review it before public sharing.
 
+For a new evaluation, add `--print-digest` to the `freeze` command to obtain the
+canonical digest. Put it in the confirmation receipt as `freeze_sha256`.
+`summarize` and `compare` check a digest when present. To require it, pass
+`--require-freeze-commitment`. The digest binds the exact threshold and other
+frozen fields. A dated, separately retained record establishes when the freeze
+was made. Historical receipts can still run without the new flag.
+
 The manifest has `schema: "chipmunk.independent-evaluation/1"` and a `cases` array.
 Each case records:
 
@@ -750,6 +761,40 @@ unassessed inputs; it must not be described as a genuine-content verdict.
 Paired comparisons resample declared source groups and report each media type and
 condition separately. A small bootstrap interval describes this panel, not future
 customers or unknown generators. Report all original/edit counts alongside rates.
+
+### Four-modality receipt example
+
+From the repository root, run with Python 3.11 or later. The example contains
+32 authored input records and no media, app dependencies, model weights, or
+accounts. It demonstrates counts and localization for images, video, audio, and
+writing. The values are fictional and measure receipt arithmetic.
+
+```sh
+scratch=$(mktemp -d)
+example="$scratch/four-media"
+review=backend/scripts/independent_review.py
+python3 -IS "$review" demo "$example"
+python3 -IS "$review" compare "$example/manifest.json" \
+  "$example/baseline-confirmation.json" "$example/baseline-freeze.json" \
+  "$example/candidate-confirmation.json" "$example/candidate-freeze.json" \
+  "$scratch/replayed.json" --require-freeze-commitment
+cmp "$example/comparison.json" "$scratch/replayed.json"
+```
+
+Each method retains 24 confirmation cases and four unavailable outcomes.
+The comparison records false flags, recovered edits and source overlap.
+Changing a frozen operating point while using the original confirmation receipt
+causes verification to stop before writing an output. Try the same review
+commands on your own receipts after replacing the fictional source roster.
+
+The local clean-source test used Python 3.11.9 with site packages disabled.
+The example comparison reproduced byte for byte and a changed video point was
+rejected. A separate clean-source run of the published mouth review reproduced
+100 recorded trees, 492 point windows, 2,321 development windows and 88 case
+outcomes. The audio identity reviewer also reproduced 5,328 planned inputs
+from public source metadata. Those two checks used public files from commit
+`b0aa41f`. [Mouth review instructions](mouth-public-portable-review-v12.md) ·
+[Audio metadata commands](#model-free-checks)
 
 ## Review an audio supplement by acoustic condition
 

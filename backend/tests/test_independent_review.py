@@ -135,6 +135,20 @@ def test_model_free_receipt_keeps_its_declared_kind_after_freeze():
         review.summarize(manifest, confirmation, lock)
 
 
+def test_confirmation_binds_the_exact_operating_points_when_supplied():
+    manifest, receipt = fixture()
+    lock = review.freeze(manifest, receipt("development"), thresholds=dict.fromkeys(review.MEDIA, .5))
+    confirmation = receipt("confirmation")
+    with pytest.raises(ValueError, match="exact freeze"):
+        review.summarize(manifest, confirmation, lock, require_freeze_commitment=True)
+    confirmation["freeze_sha256"] = review.digest(lock)
+    assert review.summarize(manifest, confirmation, lock, require_freeze_commitment=True)["lock_sha256"] == review.digest(lock)
+    modified = deepcopy(lock)
+    modified["thresholds"]["image"] = .9
+    with pytest.raises(ValueError, match="exact freeze"):
+        review.compare(manifest, confirmation, lock, confirmation, modified)
+
+
 def test_localization_includes_misses_and_control_regions_at_all_four_scales():
     manifest, receipt = fixture()
     for case in manifest["cases"]:

@@ -261,10 +261,13 @@ def _paired_regions(strata: dict, prior: dict, *, iterations: int, seed: int) ->
     return differences
 
 
-def summarize(manifest: dict, confirmation: dict, lock: dict) -> dict:
+def summarize(manifest: dict, confirmation: dict, lock: dict, *, require_freeze_commitment: bool = False) -> dict:
     rows = audit_receipt(manifest, confirmation, "confirmation")
     if lock.get("manifest_sha256") != digest(manifest) or lock.get("schema") != SCHEMA:
         raise ValueError("Frozen plan differs from the source manifest")
+    lock_digest = digest(lock)
+    if (require_freeze_commitment or "freeze_sha256" in confirmation) and confirmation.get("freeze_sha256") != lock_digest:
+        raise ValueError("Confirmation receipt does not commit to this exact freeze")
     for key in ("system", "implementation_sha256", "weight_sha256", "score_kind", "calibration_sha256", "response_units"):
         if confirmation.get(key) != lock.get(key):
             raise ValueError(f"Confirmation changed frozen system field: {key}")
@@ -300,7 +303,7 @@ def summarize(manifest: dict, confirmation: dict, lock: dict) -> dict:
         if planned := [row for row in cases if "localization_truth" in row]:
             summary["localization"] = _region_summary(planned)
         summaries.append(summary)
-    return {"schema": SCHEMA, "manifest_sha256": digest(manifest), "lock_sha256": digest(lock),
+    return {"schema": SCHEMA, "manifest_sha256": digest(manifest), "lock_sha256": lock_digest,
             "receipt_sha256": digest(confirmation), "system": confirmation["system"], "strata": summaries,
             "limits": "Aggregate declared-source results; AUC/Brier cover scored cases only. No proof of authorship, "
                       "external review, unseen training sources, dataset rights, or production accuracy. "
@@ -308,12 +311,13 @@ def summarize(manifest: dict, confirmation: dict, lock: dict) -> dict:
 
 
 def compare(manifest: dict, baseline: dict, baseline_lock: dict, candidate: dict,
-            candidate_lock: dict, *, iterations: int = 2000, seed: int = 20261105) -> dict:
+            candidate_lock: dict, *, iterations: int = 2000, seed: int = 20261105,
+            require_freeze_commitment: bool = False) -> dict:
     """Matched all-source alert differences, with source-group bootstrap intervals."""
     if type(iterations) is not int or iterations < 100:
         raise ValueError("Use at least 100 bootstrap replicates")
-    old = summarize(manifest, baseline, baseline_lock)
-    new = summarize(manifest, candidate, candidate_lock)
+    old = summarize(manifest, baseline, baseline_lock, require_freeze_commitment=require_freeze_commitment)
+    new = summarize(manifest, candidate, candidate_lock, require_freeze_commitment=require_freeze_commitment)
     prior = {r["id"]: r for r in audit_receipt(manifest, baseline, "confirmation")}
     latter = audit_receipt(manifest, candidate, "confirmation")
     strata = defaultdict(list)

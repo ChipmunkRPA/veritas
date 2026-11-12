@@ -1,0 +1,2222 @@
+{
+  "articles": {
+    "gained_groups_by_generator": {},
+    "ordinary_groups_flagged": {
+      "current": 5,
+      "current_plus_shared": 5,
+      "shared": 0
+    },
+    "outcomes": {
+      "generated/current": {
+        "cases": 14,
+        "edit_characters": 106,
+        "flagged": 5,
+        "flagged_but_insufficient": 5,
+        "flagged_with_no_edit_overlap": 4,
+        "human_characters": 2161,
+        "useful": 0,
+        "useful_union": 0
+      },
+      "generated/current_plus_shared": {
+        "cases": 14,
+        "edit_characters": 106,
+        "flagged": 5,
+        "flagged_but_insufficient": 5,
+        "flagged_with_no_edit_overlap": 4,
+        "human_characters": 2161,
+        "useful": 0,
+        "useful_union": 0
+      },
+      "generated/shared": {
+        "cases": 14,
+        "edit_characters": 0,
+        "flagged": 0,
+        "flagged_but_insufficient": 0,
+        "flagged_with_no_edit_overlap": 0,
+        "human_characters": 0,
+        "useful": 0,
+        "useful_union": 0
+      },
+      "ordinary/current": {
+        "cases": 17,
+        "edit_characters": 0,
+        "flagged": 7,
+        "flagged_but_insufficient": 0,
+        "flagged_with_no_edit_overlap": 0,
+        "human_characters": 4684,
+        "useful": 0,
+        "useful_union": 0
+      },
+      "ordinary/current_plus_shared": {
+        "cases": 17,
+        "edit_characters": 0,
+        "flagged": 7,
+        "flagged_but_insufficient": 0,
+        "flagged_with_no_edit_overlap": 0,
+        "human_characters": 4684,
+        "useful": 0,
+        "useful_union": 0
+      },
+      "ordinary/shared": {
+        "cases": 17,
+        "edit_characters": 0,
+        "flagged": 0,
+        "flagged_but_insufficient": 0,
+        "flagged_with_no_edit_overlap": 0,
+        "human_characters": 0,
+        "useful": 0,
+        "useful_union": 0
+      }
+    },
+    "rows": [
+      {
+        "group": "5ff217a06323be60",
+        "kind": "human",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 4
+      },
+      {
+        "group": "5ff217a06323be60",
+        "kind": "splice",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 4
+      },
+      {
+        "group": "5ff217a06323be60",
+        "kind": "qwen",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": true,
+        "possible_pairs": 4
+      },
+      {
+        "group": "5ff217a06323be60",
+        "kind": "smol2",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": true,
+        "possible_pairs": 4
+      },
+      {
+        "group": "13b1cbbc69703d46",
+        "kind": "human",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 4
+      },
+      {
+        "group": "13b1cbbc69703d46",
+        "kind": "splice",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 4
+      },
+      {
+        "group": "13b1cbbc69703d46",
+        "kind": "qwen",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 4
+      },
+      {
+        "group": "13b1cbbc69703d46",
+        "kind": "smol2",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 4
+      },
+      {
+        "group": "f6c19d9dc6300eb6",
+        "kind": "human",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": true,
+            "human_characters": 222,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": true,
+            "human_characters": 222,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 3
+      },
+      {
+        "group": "f6c19d9dc6300eb6",
+        "kind": "splice",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": true,
+            "human_characters": 222,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": true,
+            "human_characters": 222,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 3
+      },
+      {
+        "group": "f6c19d9dc6300eb6",
+        "kind": "qwen",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": true,
+            "human_characters": 222,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": true,
+            "human_characters": 222,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": true,
+        "possible_pairs": 3
+      },
+      {
+        "group": "908870ddd02a7faf",
+        "kind": "human",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": true,
+            "human_characters": 1090,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": true,
+            "human_characters": 1090,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 1
+      },
+      {
+        "group": "908870ddd02a7faf",
+        "kind": "splice",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": true,
+            "human_characters": 1561,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": true,
+            "human_characters": 1561,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 1
+      },
+      {
+        "group": "005adffdb453eff4",
+        "kind": "human",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": true,
+            "human_characters": 467,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": true,
+            "human_characters": 467,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 9
+      },
+      {
+        "group": "005adffdb453eff4",
+        "kind": "qwen",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": true,
+            "human_characters": 467,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": true,
+            "human_characters": 467,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": true,
+        "possible_pairs": 9
+      },
+      {
+        "group": "e35c9c09cceb8c23",
+        "kind": "human",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": true,
+            "human_characters": 593,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": true,
+            "human_characters": 593,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 7
+      },
+      {
+        "group": "e35c9c09cceb8c23",
+        "kind": "qwen",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": true,
+            "human_characters": 593,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": true,
+            "human_characters": 593,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 7
+      },
+      {
+        "group": "e35c9c09cceb8c23",
+        "kind": "smol2",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": true,
+            "human_characters": 593,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": true,
+            "human_characters": 593,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 7
+      },
+      {
+        "group": "b27a32b76317dec9",
+        "kind": "human",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 0
+      },
+      {
+        "group": "b27a32b76317dec9",
+        "kind": "splice",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 0
+      },
+      {
+        "group": "b27a32b76317dec9",
+        "kind": "smol2",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 0
+      },
+      {
+        "group": "d598f79fb006b364",
+        "kind": "human",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 3
+      },
+      {
+        "group": "d598f79fb006b364",
+        "kind": "splice",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 3
+      },
+      {
+        "group": "d598f79fb006b364",
+        "kind": "qwen",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": true,
+        "possible_pairs": 3
+      },
+      {
+        "group": "d598f79fb006b364",
+        "kind": "smol2",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": true,
+        "possible_pairs": 3
+      },
+      {
+        "group": "3e0e9194f863c031",
+        "kind": "human",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 2
+      },
+      {
+        "group": "3e0e9194f863c031",
+        "kind": "qwen",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 2
+      },
+      {
+        "group": "3e0e9194f863c031",
+        "kind": "smol2",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 2
+      },
+      {
+        "group": "12e4728d22589487",
+        "kind": "human",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": true,
+            "human_characters": 529,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": true,
+            "human_characters": 529,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 0
+      },
+      {
+        "group": "12e4728d22589487",
+        "kind": "splice",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 0
+      },
+      {
+        "group": "12e4728d22589487",
+        "kind": "qwen",
+        "outcomes": {
+          "current": {
+            "edit_characters": 106,
+            "flagged": true,
+            "human_characters": 286,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 106,
+            "flagged": true,
+            "human_characters": 286,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 0
+      }
+    ]
+  },
+  "freeze_sha256": "787aaf8eb0dcf61942c703e194ed33cd2c9242c689bd31c5e51428d02df2f64c",
+  "method": {
+    "advance": "In the notice panel, add useful locations in at least two distinct works across both generator families, with at most one additional ordinary source group. Keep every useful current location. The article packet measures specificity only.",
+    "baseline": "First six source-ordered positive native contexts. Compare both individual cards and their union.",
+    "comparison": "Six Federal Register groups with whole-paragraph known edits. Separately replay ten Kubernetes groups to measure ordinary flags and single-sentence spill. The two packets are disjoint and were previously measured for other rules. No fitting or inference.",
+    "labels": "A shared range records the intersection of two contexts. Neither response directly measures the shared range alone.",
+    "paragraph": "For notices also require the retained whole-paragraph response at the same fixed point.",
+    "point": 0.5,
+    "shared": "Two adjacent complete three-sentence windows with distinct outside sentences and two shared middle sentences. All four sentences must be in one interior paragraph. Rank by the smaller raw response, abstain on a tie, and propose only the shared pair.",
+    "useful": "At least 0.30 non-whitespace character intersection over union and 0.50 recall."
+  },
+  "notices": {
+    "gained_groups_by_generator": {},
+    "ordinary_groups_flagged": {
+      "current": 2,
+      "current_plus_confirmed": 2,
+      "current_plus_shared": 2,
+      "paragraph_confirmed": 0,
+      "shared": 1
+    },
+    "outcomes": {
+      "generated/current": {
+        "cases": 8,
+        "edit_characters": 2342,
+        "flagged": 6,
+        "flagged_but_insufficient": 1,
+        "flagged_with_no_edit_overlap": 0,
+        "human_characters": 530,
+        "useful": 5,
+        "useful_union": 5
+      },
+      "generated/current_plus_confirmed": {
+        "cases": 8,
+        "edit_characters": 2342,
+        "flagged": 6,
+        "flagged_but_insufficient": 1,
+        "flagged_with_no_edit_overlap": 0,
+        "human_characters": 530,
+        "useful": 5,
+        "useful_union": 5
+      },
+      "generated/current_plus_shared": {
+        "cases": 8,
+        "edit_characters": 2342,
+        "flagged": 6,
+        "flagged_but_insufficient": 1,
+        "flagged_with_no_edit_overlap": 0,
+        "human_characters": 530,
+        "useful": 5,
+        "useful_union": 5
+      },
+      "generated/paragraph_confirmed": {
+        "cases": 8,
+        "edit_characters": 780,
+        "flagged": 4,
+        "flagged_but_insufficient": 4,
+        "flagged_with_no_edit_overlap": 0,
+        "human_characters": 0,
+        "useful": 0,
+        "useful_union": 0
+      },
+      "generated/shared": {
+        "cases": 8,
+        "edit_characters": 780,
+        "flagged": 4,
+        "flagged_but_insufficient": 4,
+        "flagged_with_no_edit_overlap": 0,
+        "human_characters": 0,
+        "useful": 0,
+        "useful_union": 0
+      },
+      "ordinary/current": {
+        "cases": 18,
+        "edit_characters": 0,
+        "flagged": 5,
+        "flagged_but_insufficient": 0,
+        "flagged_with_no_edit_overlap": 0,
+        "human_characters": 1162,
+        "useful": 0,
+        "useful_union": 0
+      },
+      "ordinary/current_plus_confirmed": {
+        "cases": 18,
+        "edit_characters": 0,
+        "flagged": 5,
+        "flagged_but_insufficient": 0,
+        "flagged_with_no_edit_overlap": 0,
+        "human_characters": 1162,
+        "useful": 0,
+        "useful_union": 0
+      },
+      "ordinary/current_plus_shared": {
+        "cases": 18,
+        "edit_characters": 0,
+        "flagged": 5,
+        "flagged_but_insufficient": 0,
+        "flagged_with_no_edit_overlap": 0,
+        "human_characters": 1162,
+        "useful": 0,
+        "useful_union": 0
+      },
+      "ordinary/paragraph_confirmed": {
+        "cases": 18,
+        "edit_characters": 0,
+        "flagged": 0,
+        "flagged_but_insufficient": 0,
+        "flagged_with_no_edit_overlap": 0,
+        "human_characters": 0,
+        "useful": 0,
+        "useful_union": 0
+      },
+      "ordinary/shared": {
+        "cases": 18,
+        "edit_characters": 0,
+        "flagged": 1,
+        "flagged_but_insufficient": 0,
+        "flagged_with_no_edit_overlap": 0,
+        "human_characters": 150,
+        "useful": 0,
+        "useful_union": 0
+      }
+    },
+    "rows": [
+      {
+        "group": "15649dcffc051aa6",
+        "kind": "original",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": true,
+            "human_characters": 496,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_confirmed": {
+            "edit_characters": 0,
+            "flagged": true,
+            "human_characters": 496,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": true,
+            "human_characters": 496,
+            "useful": false,
+            "useful_union": false
+          },
+          "paragraph_confirmed": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 1
+      },
+      {
+        "group": "15649dcffc051aa6",
+        "kind": "human_paragraph_replacement",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": true,
+            "human_characters": 408,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_confirmed": {
+            "edit_characters": 0,
+            "flagged": true,
+            "human_characters": 408,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": true,
+            "human_characters": 408,
+            "useful": false,
+            "useful_union": false
+          },
+          "paragraph_confirmed": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": true,
+            "human_characters": 150,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 3
+      },
+      {
+        "group": "15649dcffc051aa6",
+        "kind": "human_two_sentence_replacement",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_confirmed": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "paragraph_confirmed": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 1
+      },
+      {
+        "group": "57d0f22c6d3ba1aa",
+        "kind": "original",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_confirmed": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "paragraph_confirmed": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 1
+      },
+      {
+        "group": "57d0f22c6d3ba1aa",
+        "kind": "human_paragraph_replacement",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_confirmed": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "paragraph_confirmed": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 0
+      },
+      {
+        "group": "57d0f22c6d3ba1aa",
+        "kind": "human_two_sentence_replacement",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_confirmed": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "paragraph_confirmed": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 1
+      },
+      {
+        "group": "8075397d14386174",
+        "kind": "original",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_confirmed": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "paragraph_confirmed": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 3
+      },
+      {
+        "group": "8075397d14386174",
+        "kind": "human_paragraph_replacement",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_confirmed": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "paragraph_confirmed": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 1
+      },
+      {
+        "group": "8075397d14386174",
+        "kind": "human_two_sentence_replacement",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_confirmed": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "paragraph_confirmed": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 3
+      },
+      {
+        "group": "e6a90fd9c20e838e",
+        "kind": "original",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_confirmed": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "paragraph_confirmed": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 8
+      },
+      {
+        "group": "e6a90fd9c20e838e",
+        "kind": "human_paragraph_replacement",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_confirmed": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "paragraph_confirmed": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 6
+      },
+      {
+        "group": "e6a90fd9c20e838e",
+        "kind": "human_two_sentence_replacement",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_confirmed": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "paragraph_confirmed": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 8
+      },
+      {
+        "group": "c1acbfd18e6c8e39",
+        "kind": "original",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": true,
+            "human_characters": 86,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_confirmed": {
+            "edit_characters": 0,
+            "flagged": true,
+            "human_characters": 86,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": true,
+            "human_characters": 86,
+            "useful": false,
+            "useful_union": false
+          },
+          "paragraph_confirmed": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 14
+      },
+      {
+        "group": "c1acbfd18e6c8e39",
+        "kind": "human_paragraph_replacement",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": true,
+            "human_characters": 86,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_confirmed": {
+            "edit_characters": 0,
+            "flagged": true,
+            "human_characters": 86,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": true,
+            "human_characters": 86,
+            "useful": false,
+            "useful_union": false
+          },
+          "paragraph_confirmed": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 15
+      },
+      {
+        "group": "c1acbfd18e6c8e39",
+        "kind": "human_two_sentence_replacement",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": true,
+            "human_characters": 86,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_confirmed": {
+            "edit_characters": 0,
+            "flagged": true,
+            "human_characters": 86,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": true,
+            "human_characters": 86,
+            "useful": false,
+            "useful_union": false
+          },
+          "paragraph_confirmed": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 14
+      },
+      {
+        "group": "ee31c353c72c4c6f",
+        "kind": "original",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_confirmed": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "paragraph_confirmed": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 2
+      },
+      {
+        "group": "ee31c353c72c4c6f",
+        "kind": "human_paragraph_replacement",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_confirmed": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "paragraph_confirmed": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 1
+      },
+      {
+        "group": "ee31c353c72c4c6f",
+        "kind": "human_two_sentence_replacement",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_confirmed": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "paragraph_confirmed": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 2
+      },
+      {
+        "group": "15649dcffc051aa6",
+        "kind": "qwen",
+        "outcomes": {
+          "current": {
+            "edit_characters": 424,
+            "flagged": true,
+            "human_characters": 193,
+            "useful": true,
+            "useful_union": true
+          },
+          "current_plus_confirmed": {
+            "edit_characters": 424,
+            "flagged": true,
+            "human_characters": 193,
+            "useful": true,
+            "useful_union": true
+          },
+          "current_plus_shared": {
+            "edit_characters": 424,
+            "flagged": true,
+            "human_characters": 193,
+            "useful": true,
+            "useful_union": true
+          },
+          "paragraph_confirmed": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": true,
+        "possible_pairs": 1
+      },
+      {
+        "group": "57d0f22c6d3ba1aa",
+        "kind": "qwen",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_confirmed": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "paragraph_confirmed": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 1
+      },
+      {
+        "group": "e6a90fd9c20e838e",
+        "kind": "qwen",
+        "outcomes": {
+          "current": {
+            "edit_characters": 216,
+            "flagged": true,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_confirmed": {
+            "edit_characters": 216,
+            "flagged": true,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 216,
+            "flagged": true,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "paragraph_confirmed": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 9
+      },
+      {
+        "group": "c1acbfd18e6c8e39",
+        "kind": "qwen",
+        "outcomes": {
+          "current": {
+            "edit_characters": 391,
+            "flagged": true,
+            "human_characters": 86,
+            "useful": true,
+            "useful_union": true
+          },
+          "current_plus_confirmed": {
+            "edit_characters": 391,
+            "flagged": true,
+            "human_characters": 86,
+            "useful": true,
+            "useful_union": true
+          },
+          "current_plus_shared": {
+            "edit_characters": 391,
+            "flagged": true,
+            "human_characters": 86,
+            "useful": true,
+            "useful_union": true
+          },
+          "paragraph_confirmed": {
+            "edit_characters": 166,
+            "flagged": true,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 166,
+            "flagged": true,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 15
+      },
+      {
+        "group": "57d0f22c6d3ba1aa",
+        "kind": "smol2",
+        "outcomes": {
+          "current": {
+            "edit_characters": 421,
+            "flagged": true,
+            "human_characters": 251,
+            "useful": true,
+            "useful_union": true
+          },
+          "current_plus_confirmed": {
+            "edit_characters": 421,
+            "flagged": true,
+            "human_characters": 251,
+            "useful": true,
+            "useful_union": true
+          },
+          "current_plus_shared": {
+            "edit_characters": 421,
+            "flagged": true,
+            "human_characters": 251,
+            "useful": true,
+            "useful_union": true
+          },
+          "paragraph_confirmed": {
+            "edit_characters": 181,
+            "flagged": true,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 181,
+            "flagged": true,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 2
+      },
+      {
+        "group": "8075397d14386174",
+        "kind": "smol2",
+        "outcomes": {
+          "current": {
+            "edit_characters": 433,
+            "flagged": true,
+            "human_characters": 0,
+            "useful": true,
+            "useful_union": true
+          },
+          "current_plus_confirmed": {
+            "edit_characters": 433,
+            "flagged": true,
+            "human_characters": 0,
+            "useful": true,
+            "useful_union": true
+          },
+          "current_plus_shared": {
+            "edit_characters": 433,
+            "flagged": true,
+            "human_characters": 0,
+            "useful": true,
+            "useful_union": true
+          },
+          "paragraph_confirmed": {
+            "edit_characters": 227,
+            "flagged": true,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 227,
+            "flagged": true,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 4
+      },
+      {
+        "group": "e6a90fd9c20e838e",
+        "kind": "smol2",
+        "outcomes": {
+          "current": {
+            "edit_characters": 457,
+            "flagged": true,
+            "human_characters": 0,
+            "useful": true,
+            "useful_union": true
+          },
+          "current_plus_confirmed": {
+            "edit_characters": 457,
+            "flagged": true,
+            "human_characters": 0,
+            "useful": true,
+            "useful_union": true
+          },
+          "current_plus_shared": {
+            "edit_characters": 457,
+            "flagged": true,
+            "human_characters": 0,
+            "useful": true,
+            "useful_union": true
+          },
+          "paragraph_confirmed": {
+            "edit_characters": 206,
+            "flagged": true,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 206,
+            "flagged": true,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": false,
+        "possible_pairs": 7
+      },
+      {
+        "group": "ee31c353c72c4c6f",
+        "kind": "smol2",
+        "outcomes": {
+          "current": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_confirmed": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "current_plus_shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "paragraph_confirmed": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          },
+          "shared": {
+            "edit_characters": 0,
+            "flagged": false,
+            "human_characters": 0,
+            "useful": false,
+            "useful_union": false
+          }
+        },
+        "pair_can_localize": true,
+        "possible_pairs": 2
+      }
+    ]
+  },
+  "runner_sha256": "cf3e376d565ef7fa9eefe588e4c10bf643476a79d0c63e3d4634d491cd158906",
+  "schema": "chipmunk.writing-shared-sentence-transfer/1",
+  "source_receipts_sha256": {
+    "writing-multiblock-independent-2026-11-12.json": "18e456bcf4aa66b24ee1a528ad1bc0dd9068efa5bb0c19a18b78dd5431fe9326",
+    "writing-practical-notice-transfer-2026-11-11.json": "cf8a7a2b023f3b3e130ff1e03177987371319455742c960570c6362e6b6d0eae"
+  }
+}

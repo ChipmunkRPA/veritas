@@ -1357,13 +1357,18 @@ def exhibit_rows(snapshot: ReportSnapshot, images: dict[str, str], signals: dict
     profile = result.get("condition_profile") or {}
     recorded = _source_size(profile)
     findings = result.get("findings") or []
+    records = list(result.get("exhibits") or [])
+    if kind == "image" and snapshot.report.redacted:
+        from app.evidence.image_thumbnail_evidence import is_preview_exhibit
+
+        records = [item for item in records if not is_preview_exhibit(item)]
     out, crop_start, crops = [], {}, 0
-    for e in result.get("exhibits") or []:  # crops are numbered in stored order, as the viewer's catalogue numbers them
+    for e in records:  # crops are numbered in stored order, as the viewer's catalogue numbers them
         if e["kind"] == "regions" and regions_lens(e) == "crops":
             crop_start[str(e["id"])], crops = crops, crops + len(e.get("regions") or [])
     stills: list[dict[str, Any]] = []
     sheet_at: int | None = None
-    for e in print_order(list(result.get("exhibits") or [])):
+    for e in print_order(records):
         eid = str(e["id"])
         if e["kind"] == "image" and e.get("role") == "still":  # L-4: sampled video frames go on one contact sheet
             if sheet_at is None:

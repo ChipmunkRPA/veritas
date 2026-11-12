@@ -181,6 +181,10 @@ The [earlier-copy screenshot comparison](image-reference-embedded-screenshot-202
 aligns the submitted photo within a larger screenshot, then verifies the native
 differences inside the inset. It found more edits than the current comparison
 and fell short of the cross-editor coverage target.
+The [embedded JPEG preview comparison](image-thumbnail-localization-2026-11-12.md)
+uses a retained preview within a single upload to locate localized differences.
+It replays the measured regions and distinguishes ordinary edits, processing
+controls, and incompatible previews.
 The [two-photo difference pilot](image-embedded-pair-difference-transfer-2026-11-12.md)
 replays source-pixel differences when one PNG contains two matching photo areas.
 The [separate confirmation](image-embedded-pair-difference-confirmation-2026-11-12.md)

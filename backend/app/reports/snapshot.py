@@ -309,7 +309,17 @@ def exhibit_images(db: Session, analysis: Analysis, result: dict[str, Any], stor
     wanted: dict[str, str] = {}
     scalar_exhibits: dict[str, dict[str, Any]] = {}
     mask_exhibits: dict[str, dict[str, Any]] = {}
-    records = finding_heatmaps(result).values() if finding_thumbnails_only else result.get("exhibits") or []
+    records = result.get("exhibits") or []
+    preview_hashes = {}
+    if getattr(analysis, "kind", None) == "image":
+        from app.evidence.image_thumbnail_evidence import from_result
+
+        preview = from_result(result)
+        if preview and preview["source_sha256"] == analysis.sha256:
+            preview_hashes = {asset["exhibit_id"]: asset["sha256"]
+                              for region in preview["regions"] for asset in region["crops"].values()}
+    if finding_thumbnails_only:
+        records = [*finding_heatmaps(result).values(), *(e for e in records if e.get("id") in preview_hashes)]
     for exhibit in records:
         kind, eid = exhibit.get("kind"), str(exhibit.get("id"))
         if kind == "heatmap":
@@ -330,6 +340,9 @@ def exhibit_images(db: Session, analysis: Analysis, result: dict[str, Any], stor
     for key, artefact_id in sorted(wanted.items()):
         row = db.get(Artefact, artefact_id)
         if row is None or row.analysis_id != analysis.id:
+            continue
+        if key in preview_hashes and (row.sha256 != preview_hashes[key] or row.media_type != "image/png"
+                                      or row.role != "exhibit_payload"):
             continue
         if key in scalar_exhibits:
             exhibit = scalar_exhibits[key]

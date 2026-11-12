@@ -1,0 +1,567 @@
+{
+  "authorship_confidence_contribution": 0,
+  "decision": "evidence_only",
+  "genuine_credits": [
+    {
+      "author": "Darko Nikolovski",
+      "camera_model": "Canon EOS 450D",
+      "license": "https://creativecommons.org/licenses/by-sa/3.0",
+      "page": "https://commons.wikimedia.org/wiki/File:$kopsko_Kal%E2%82%AC_(103).JPG",
+      "sha256": "8c91879766d65243c3ffaf3bde3b4783edd0ff9e0672e33903f40ad391be4df0",
+      "source_sha1": "184a8395bbbe8e27dca71e4f7bd60539e44958ef",
+      "title": "File:$kopsko Kal\u20ac (103).JPG",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/fb/%24kopsko_Kal%E2%82%AC_%28103%29.JPG"
+    },
+    {
+      "author": "Phil Sangwell from United Kingdom",
+      "camera_model": "Canon EOS 450D\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+      "license": "https://creativecommons.org/licenses/by/2.0",
+      "page": "https://commons.wikimedia.org/wiki/File:%22The_Greyhound%22_Danesmoor_(3936917102).jpg",
+      "sha256": "17f3e86456ceef1cc95591910a06da81c7303b4f2b7e5984f0fe3a5c373565d9",
+      "source_sha1": "26631c4d1e958ae234759b3172bde749be510419",
+      "title": "File:\"The Greyhound\" Danesmoor (3936917102).jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/c6/%22The_Greyhound%22_Danesmoor_%283936917102%29.jpg"
+    },
+    {
+      "author": "Paul Hamilton",
+      "camera_model": "DMC-FZ200",
+      "license": "https://creativecommons.org/licenses/by-sa/2.0",
+      "page": "https://commons.wikimedia.org/wiki/File:(A)_view_of_Himalayan_foothills,_Uttarakhand_India_November_2013.jpg",
+      "sha256": "e7b9762a59cb97528a3d0ec2d49f0d129084c2fa40111ff2100e22b944316126",
+      "source_sha1": "41972767c1f2c94c602a23c03d8d0d32bf2a3ca0",
+      "title": "File:(A) view of Himalayan foothills, Uttarakhand India November 2013.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/3e/%28A%29_view_of_Himalayan_foothills%2C_Uttarakhand_India_November_2013.jpg"
+    },
+    {
+      "author": "Bernard Gagnon",
+      "category": "architecture",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "original_sha1": "e58c8cbe72f0dd2a5acc946ce29a35365cf7bb74",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/b/b1/Simtokha_Dzong%2C_Bhutan_07.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "page": "https://commons.wikimedia.org/wiki/File:Simtokha_Dzong,_Bhutan_07.jpg",
+      "pageid": 71645134,
+      "sha256": "c6833ff067327baba56f57ec1003865e63f02ec678f94349b00f435b0cbc7dc6",
+      "slot": 0,
+      "source_dimensions": [
+        4196,
+        2797
+      ],
+      "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/Simtokha_Dzong%2C_Bhutan_07.jpg/1920px-Simtokha_Dzong%2C_Bhutan_07.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "title": "File:Simtokha Dzong, Bhutan 07.jpg"
+    },
+    {
+      "author": "Alexander Novikov",
+      "category": "abandoned",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "original_sha1": "51dd39ed7f74e4192711d0e9b8ad57decb9d6a4a",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/3/35/Cinema_Rodina_-_001.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "page": "https://commons.wikimedia.org/wiki/File:Cinema_Rodina_-_001.jpg",
+      "pageid": 109754168,
+      "sha256": "2be1638a4a5aefe37470ce19970d9883cb1c76e1751fc127c884d5cbaf2771d8",
+      "slot": 1,
+      "source_dimensions": [
+        4920,
+        3280
+      ],
+      "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/35/Cinema_Rodina_-_001.jpg/1920px-Cinema_Rodina_-_001.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "title": "File:Cinema Rodina - 001.jpg"
+    }
+  ],
+  "held": {
+    "audit": {
+      "cases": 177,
+      "mapped_regions": 55,
+      "mask_and_area_checks": 354
+    },
+    "code": [
+      {
+        "file": "exiftool.py",
+        "sha256": "c77fba998caef3f151bcb1c8c734afcaeb297a8f34d578f92ef9ed65c452c394"
+      },
+      {
+        "file": "image_thumbnail_authentic_intake.py",
+        "sha256": "655cef37118833236a6480fead9701c830ab40dda4f7a7c2bac806946eb18325"
+      },
+      {
+        "file": "image_thumbnail_localization.py",
+        "sha256": "9c5f677731fd8d214f09d7a0d0a1b9d776d0d89b421683a0e2521e558740474e"
+      },
+      {
+        "file": "image_thumbnail_localization_transfer.py",
+        "sha256": "c88d06fcd311c45dbb6508b11acaf86fcedd4cf89b86a056601646071f1f6d44"
+      },
+      {
+        "file": "metadata_rules.py",
+        "sha256": "be4def2faae19163743b9e1b2979edb38b9ad4c3bb37998e5fa9dd72666a419d"
+      }
+    ],
+    "confirmation_gate": {
+      "kandinsky": 3,
+      "lama": 12,
+      "maximum_clean_control_groups": 1,
+      "maximum_unchanged_highlights": 0,
+      "minimum_color_adds": 6,
+      "minimum_useful_alternate": 3,
+      "minimum_useful_lama": 6,
+      "minimum_useful_local_color": 12,
+      "sdxl": 3
+    },
+    "pilot_gate": {
+      "generated_groups": 12,
+      "maximum_authentic_highlights": 0,
+      "maximum_clean_highlights": 0,
+      "maximum_incompatible_comparisons": 0,
+      "minimum_aligned_authentic_originals": 4,
+      "minimum_authentic_groups": 5,
+      "minimum_color_adds": 3,
+      "minimum_useful_generated": 6,
+      "minimum_useful_local_color": 8
+    },
+    "result": {
+      "freeze_sha256": "f655b3b35942b0e6a659174f905bf5adb9301331576ede5e70f40e6cdadac04b",
+      "held_sha256": "fa25e5dd26c81d4e58e7f2e8079f093d2ef4c2b070f3c80ab4fc2772df6c1295",
+      "schema": "chipmunk.image-thumbnail-localization-transfer/1",
+      "summary": {
+        "clean_groups": 0,
+        "clean_highlights": 0,
+        "genuine_highlights": 0,
+        "incompatible_comparisons": 0,
+        "max_seconds": 0.068871,
+        "median_seconds": 0.006779,
+        "passed": true,
+        "roles": {
+          "authentic/jpeg75": {
+            "color_added": 0,
+            "comparable": 5,
+            "global_anomalies": 0,
+            "localized": 0,
+            "luma_useful": 0,
+            "useful": 0,
+            "views": 5
+          },
+          "authentic/untouched": {
+            "color_added": 0,
+            "comparable": 5,
+            "global_anomalies": 0,
+            "localized": 0,
+            "luma_useful": 0,
+            "useful": 0,
+            "views": 5
+          },
+          "authentic/white_balance": {
+            "color_added": 0,
+            "comparable": 5,
+            "global_anomalies": 0,
+            "localized": 0,
+            "luma_useful": 0,
+            "useful": 0,
+            "views": 5
+          },
+          "kandinsky/foreign": {
+            "color_added": 0,
+            "comparable": 0,
+            "global_anomalies": 3,
+            "localized": 0,
+            "luma_useful": 0,
+            "useful": 0,
+            "views": 3
+          },
+          "kandinsky/generated": {
+            "color_added": 0,
+            "comparable": 3,
+            "global_anomalies": 0,
+            "localized": 3,
+            "luma_useful": 3,
+            "useful": 3,
+            "views": 3
+          },
+          "kandinsky/global_tone": {
+            "color_added": 0,
+            "comparable": 3,
+            "global_anomalies": 0,
+            "localized": 0,
+            "luma_useful": 0,
+            "useful": 0,
+            "views": 3
+          },
+          "kandinsky/jpeg75": {
+            "color_added": 0,
+            "comparable": 3,
+            "global_anomalies": 0,
+            "localized": 0,
+            "luma_useful": 0,
+            "useful": 0,
+            "views": 3
+          },
+          "kandinsky/local_chroma": {
+            "color_added": 2,
+            "comparable": 3,
+            "global_anomalies": 0,
+            "localized": 3,
+            "luma_useful": 0,
+            "useful": 2,
+            "views": 3
+          },
+          "kandinsky/missing": {
+            "color_added": 0,
+            "comparable": 0,
+            "global_anomalies": 0,
+            "localized": 0,
+            "luma_useful": 0,
+            "useful": 0,
+            "views": 3
+          },
+          "kandinsky/resampled": {
+            "color_added": 0,
+            "comparable": 3,
+            "global_anomalies": 0,
+            "localized": 0,
+            "luma_useful": 0,
+            "useful": 0,
+            "views": 3
+          },
+          "kandinsky/unchanged": {
+            "color_added": 0,
+            "comparable": 3,
+            "global_anomalies": 0,
+            "localized": 0,
+            "luma_useful": 0,
+            "useful": 0,
+            "views": 3
+          },
+          "kandinsky/zoomed": {
+            "color_added": 0,
+            "comparable": 0,
+            "global_anomalies": 3,
+            "localized": 0,
+            "luma_useful": 0,
+            "useful": 0,
+            "views": 3
+          },
+          "lama/foreign": {
+            "color_added": 0,
+            "comparable": 0,
+            "global_anomalies": 12,
+            "localized": 0,
+            "luma_useful": 0,
+            "useful": 0,
+            "views": 12
+          },
+          "lama/generated": {
+            "color_added": 0,
+            "comparable": 12,
+            "global_anomalies": 0,
+            "localized": 11,
+            "luma_useful": 10,
+            "useful": 10,
+            "views": 12
+          },
+          "lama/global_tone": {
+            "color_added": 0,
+            "comparable": 12,
+            "global_anomalies": 0,
+            "localized": 0,
+            "luma_useful": 0,
+            "useful": 0,
+            "views": 12
+          },
+          "lama/jpeg75": {
+            "color_added": 0,
+            "comparable": 12,
+            "global_anomalies": 0,
+            "localized": 0,
+            "luma_useful": 0,
+            "useful": 0,
+            "views": 12
+          },
+          "lama/local_chroma": {
+            "color_added": 10,
+            "comparable": 12,
+            "global_anomalies": 0,
+            "localized": 12,
+            "luma_useful": 0,
+            "useful": 10,
+            "views": 12
+          },
+          "lama/missing": {
+            "color_added": 0,
+            "comparable": 0,
+            "global_anomalies": 0,
+            "localized": 0,
+            "luma_useful": 0,
+            "useful": 0,
+            "views": 12
+          },
+          "lama/resampled": {
+            "color_added": 0,
+            "comparable": 12,
+            "global_anomalies": 0,
+            "localized": 0,
+            "luma_useful": 0,
+            "useful": 0,
+            "views": 12
+          },
+          "lama/unchanged": {
+            "color_added": 0,
+            "comparable": 12,
+            "global_anomalies": 0,
+            "localized": 0,
+            "luma_useful": 0,
+            "useful": 0,
+            "views": 12
+          },
+          "lama/zoomed": {
+            "color_added": 0,
+            "comparable": 0,
+            "global_anomalies": 12,
+            "localized": 0,
+            "luma_useful": 0,
+            "useful": 0,
+            "views": 12
+          },
+          "sdxl/foreign": {
+            "color_added": 0,
+            "comparable": 0,
+            "global_anomalies": 2,
+            "localized": 0,
+            "luma_useful": 0,
+            "useful": 0,
+            "views": 3
+          },
+          "sdxl/generated": {
+            "color_added": 0,
+            "comparable": 3,
+            "global_anomalies": 1,
+            "localized": 3,
+            "luma_useful": 3,
+            "useful": 3,
+            "views": 3
+          },
+          "sdxl/global_tone": {
+            "color_added": 0,
+            "comparable": 3,
+            "global_anomalies": 1,
+            "localized": 0,
+            "luma_useful": 0,
+            "useful": 0,
+            "views": 3
+          },
+          "sdxl/jpeg75": {
+            "color_added": 0,
+            "comparable": 3,
+            "global_anomalies": 1,
+            "localized": 0,
+            "luma_useful": 0,
+            "useful": 0,
+            "views": 3
+          },
+          "sdxl/local_chroma": {
+            "color_added": 0,
+            "comparable": 3,
+            "global_anomalies": 1,
+            "localized": 3,
+            "luma_useful": 0,
+            "useful": 0,
+            "views": 3
+          },
+          "sdxl/missing": {
+            "color_added": 0,
+            "comparable": 0,
+            "global_anomalies": 0,
+            "localized": 0,
+            "luma_useful": 0,
+            "useful": 0,
+            "views": 3
+          },
+          "sdxl/resampled": {
+            "color_added": 0,
+            "comparable": 3,
+            "global_anomalies": 1,
+            "localized": 0,
+            "luma_useful": 0,
+            "useful": 0,
+            "views": 3
+          },
+          "sdxl/unchanged": {
+            "color_added": 0,
+            "comparable": 3,
+            "global_anomalies": 1,
+            "localized": 0,
+            "luma_useful": 0,
+            "useful": 0,
+            "views": 3
+          },
+          "sdxl/zoomed": {
+            "color_added": 0,
+            "comparable": 0,
+            "global_anomalies": 3,
+            "localized": 0,
+            "luma_useful": 0,
+            "useful": 0,
+            "views": 3
+          }
+        }
+      }
+    }
+  },
+  "original_confirmation_freeze_sha256": "f30e6e8b1788d8ed99b2e6f543f2c51118ea6925ebeaf7b8abcd1ffec5982022",
+  "pilot": {
+    "audit": {
+      "cases": 118,
+      "mapped_regions": 47,
+      "mask_and_area_checks": 236
+    },
+    "code": [
+      {
+        "file": "exiftool.py",
+        "sha256": "c77fba998caef3f151bcb1c8c734afcaeb297a8f34d578f92ef9ed65c452c394"
+      },
+      {
+        "file": "image_thumbnail_authentic_intake.py",
+        "sha256": "655cef37118833236a6480fead9701c830ab40dda4f7a7c2bac806946eb18325"
+      },
+      {
+        "file": "image_thumbnail_localization.py",
+        "sha256": "2b9b81c2a4cf4f212efb201bdb4758e04cba8e2015224a68725a2d1b02ddbbbb"
+      },
+      {
+        "file": "image_thumbnail_localization_transfer.py",
+        "sha256": "be26a9e3b55af4f131a0e11253423d01836a687fa695089fa672068fe2e9745e"
+      },
+      {
+        "file": "metadata_rules.py",
+        "sha256": "be4def2faae19163743b9e1b2979edb38b9ad4c3bb37998e5fa9dd72666a419d"
+      }
+    ],
+    "confirmation_gate": null,
+    "pilot_gate": {
+      "generated_groups": 12,
+      "maximum_authentic_highlights": 0,
+      "maximum_clean_highlights": 0,
+      "maximum_incompatible_comparisons": 0,
+      "minimum_aligned_authentic_originals": 4,
+      "minimum_authentic_groups": 5,
+      "minimum_color_adds": 3,
+      "minimum_useful_generated": 6,
+      "minimum_useful_local_color": 8
+    },
+    "result": {
+      "freeze_sha256": "15a1b95464fba36acdcbcbf53d861691adb5f0cc6ad724cf30384695d9f84daf",
+      "held_sha256": "e2b3d25278025e0469cedcd0730cfca44555ac6549bf35463d77bc1ac89febac",
+      "schema": "chipmunk.image-thumbnail-localization-transfer/1",
+      "summary": {
+        "clean_highlights": 7,
+        "genuine_highlights": 0,
+        "incompatible_comparisons": 0,
+        "max_seconds": 0.086833,
+        "median_seconds": 0.007497,
+        "passed": false,
+        "roles": {
+          "authentic/jpeg75": {
+            "color_added": 0,
+            "comparable": 5,
+            "global_anomalies": 0,
+            "localized": 0,
+            "luma_useful": 0,
+            "useful": 0,
+            "views": 5
+          },
+          "authentic/untouched": {
+            "color_added": 0,
+            "comparable": 5,
+            "global_anomalies": 0,
+            "localized": 0,
+            "luma_useful": 0,
+            "useful": 0,
+            "views": 5
+          },
+          "generated/foreign": {
+            "color_added": 0,
+            "comparable": 0,
+            "global_anomalies": 12,
+            "localized": 0,
+            "luma_useful": 0,
+            "useful": 0,
+            "views": 12
+          },
+          "generated/generated": {
+            "color_added": 0,
+            "comparable": 12,
+            "global_anomalies": 0,
+            "localized": 11,
+            "luma_useful": 8,
+            "useful": 8,
+            "views": 12
+          },
+          "generated/global_tone": {
+            "color_added": 0,
+            "comparable": 12,
+            "global_anomalies": 0,
+            "localized": 1,
+            "luma_useful": 0,
+            "useful": 0,
+            "views": 12
+          },
+          "generated/jpeg75": {
+            "color_added": 0,
+            "comparable": 12,
+            "global_anomalies": 0,
+            "localized": 2,
+            "luma_useful": 0,
+            "useful": 0,
+            "views": 12
+          },
+          "generated/local_chroma": {
+            "color_added": 11,
+            "comparable": 12,
+            "global_anomalies": 0,
+            "localized": 12,
+            "luma_useful": 0,
+            "useful": 11,
+            "views": 12
+          },
+          "generated/missing": {
+            "color_added": 0,
+            "comparable": 0,
+            "global_anomalies": 0,
+            "localized": 0,
+            "luma_useful": 0,
+            "useful": 0,
+            "views": 12
+          },
+          "generated/resampled": {
+            "color_added": 0,
+            "comparable": 12,
+            "global_anomalies": 0,
+            "localized": 2,
+            "luma_useful": 0,
+            "useful": 0,
+            "views": 12
+          },
+          "generated/unchanged": {
+            "color_added": 0,
+            "comparable": 12,
+            "global_anomalies": 0,
+            "localized": 2,
+            "luma_useful": 0,
+            "useful": 0,
+            "views": 12
+          },
+          "generated/zoomed": {
+            "color_added": 0,
+            "comparable": 0,
+            "global_anomalies": 12,
+            "localized": 0,
+            "luma_useful": 0,
+            "useful": 0,
+            "views": 12
+          }
+        }
+      }
+    }
+  },
+  "relocation_replay": "All 177 input and truth commitments, output masks, geometry, and outcomes agree exactly. The sole changed code hash is the study runner import.",
+  "schema": "chipmunk.image-thumbnail-localization-public-result/1"
+}

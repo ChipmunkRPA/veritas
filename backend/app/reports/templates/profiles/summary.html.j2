@@ -122,5 +122,25 @@
 {% endif %}
 {% if v.closing %}<p class="closing">{{ v.closing }}</p>{% endif %}
 {% include "sections/image_evidence.html.j2" %}
+{% if v.get('thumbnail_evidence') %}
+<section class="chapter-cont image-evidence" aria-labelledby="thumbnail-evidence-heading">
+<h2 class="chapter-title" id="thumbnail-evidence-heading">Embedded preview differences</h2>
+<p>{{ v.thumbnail_evidence.interpretation }}</p>
+{% for region in v.thumbnail_evidence.regions %}
+<article class="image-evidence-packet">
+<h3>Region {{ region.region }}</h3>
+<div class="evidence-plates evidence-plates-pair">
+{% for key, label in [('embedded_preview', 'Embedded preview crop'), ('main_image', 'Main image crop')] %}
+{% set box = region[key] %}{% set crop = region.crops[key] %}
+<figure>
+{% if crop.uri %}<img src="{{ crop.uri }}" alt="{{ label }}">{% endif %}
+<figcaption>{{ label }} · x {{ box.x }}, y {{ box.y }}, {{ box.w }} × {{ box.h }} px{% if crop.display_reduced %} · preview shown at {{ crop.display_width }} × {{ crop.display_height }} px{% endif %}</figcaption>
+</figure>
+{% endfor %}
+</div>
+</article>
+{% endfor %}
+</section>
+{% endif %}
 {% include "sections/multimedia_evidence.html.j2" %}
 {% endblock %}

@@ -29,6 +29,7 @@ import { deviceWords } from '../../lib/recordWords'
 import CoveragePanel from './CoveragePanel'
 import FindingsList from './FindingsList'
 import KeyFindings from './KeyFindings'
+import ThumbnailRegionEvidence from './ThumbnailRegionEvidence'
 import ProgressRail from './ProgressRail'
 import CancelAnalysis from './CancelAnalysis'
 import CustodianHashNotice from '../cases/CustodianHashNotice'
@@ -266,6 +267,7 @@ export default function AnalysisWorkspace() {
     <div className="mt-12 space-y-12" data-testid="v2-result">
       {!evidenceFirst && <KeyFindings analysis={a} query={findings} signals={signals.data ?? []} exhibits={exhibits.data ?? []} token={t} plain={view === 'plain'} />}
       {a.kind === 'image' && <ImageEvidenceCards analysisId={a.id} token={t} mediaReady={tokenReady} />}
+      {a.kind === 'image' && <ThumbnailRegionEvidence exhibits={exhibits.data ?? []} token={t} mediaReady={tokenReady} />}
       {sourceComparison}
       {(a.kind === 'video' || a.kind === 'audio' || a.kind === 'document') && <MultimediaEvidenceCards analysisId={a.id} kind={a.kind} token={t} mediaReady={tokenReady} />}
       {evidenceFirst && <KeyFindings analysis={a} query={findings} signals={signals.data ?? []} exhibits={exhibits.data ?? []} token={t} plain />}

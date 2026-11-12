@@ -4,6 +4,8 @@ On the held upright panel, Chipmunk Verify located **16 of 18 known local edits*
 
 The JPEG’s own thumbnail provides a second view of the same scene. The method aligns it to two independently resized views of the main image and estimates ordinary global color changes before measuring localized brightness and color residuals. Only regions corroborated at both resize settings remain. The main crop uses native JPEG coordinates projected from the thumbnail grid. The thumbnail crop covers the original pixels used by both subpixel registrations. Crop previews over 384 pixels on the longest side are reduced for display, with their actual display dimensions recorded separately from the native bounds. The original JPEG and thumbnail may have been edited or saved at different points. The comparison measures their differences at thumbnail resolution. [Research on thumbnail formation](https://erickee.com/papers/spie10.pdf)
 
+New reports also show the measured cells for each region on the aligned preview grid, alongside the original crops. [Footprint and compact-region evaluation](image-thumbnail-extent-transfer-2026-11-12.md)
+
 | Held outcome | Useful locations or acceptance |
 | --- | ---: |
 | Feathered LaMa edits | 10/12 |

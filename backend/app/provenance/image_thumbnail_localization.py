@@ -21,6 +21,9 @@ MIN_BACKGROUND = .86
 MAX_SELECTED_FRACTION = .25
 PILOT_COMPONENT_FRACTION = .0012
 CONFIRMATION_COMPONENT_FRACTION = .004
+EXTENT_FRACTION = .75
+EXTENT_MAX_AXIS_SHARE = .32
+EXTENT_MAX_GROWTH = 4
 KERNELS = (Image.Resampling.LANCZOS, Image.Resampling.BOX)
 TRANSFORMS = {2: Image.Transpose.FLIP_LEFT_RIGHT, 3: Image.Transpose.ROTATE_180,
               4: Image.Transpose.FLIP_TOP_BOTTOM, 5: Image.Transpose.TRANSPOSE,
@@ -106,6 +109,28 @@ def _mask(selected, minimum_component_fraction):
     return regions, mask
 
 
+def _extend(mask, nearby, minimum_component_fraction):
+    """Join weaker agreed residuals to an already corroborated compact core."""
+    if not mask.any():
+        return None
+    nearby[:3], nearby[-3:], nearby[:, :3], nearby[:, -3:] = False, False, False, False
+    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))
+    closed = cv2.morphologyEx(nearby.astype(np.uint8), cv2.MORPH_CLOSE, kernel)
+    count, labels, stats, _ = cv2.connectedComponentsWithStats(closed, connectivity=8)
+    cores = np.bincount(labels[mask], minlength=count)
+    height, width = mask.shape
+    extend = [label for label, (_, _, w, h, area) in enumerate(stats[1:], 1)
+              if w <= width * EXTENT_MAX_AXIS_SHARE and h <= height * EXTENT_MAX_AXIS_SHARE
+              and area * 2 >= w * h and cores[label] < area <= cores[label] * EXTENT_MAX_GROWTH]
+    if not extend:
+        return None
+    expanded = mask | np.isin(labels, extend)
+    if expanded.mean() > MAX_SELECTED_FRACTION:
+        return None
+    regions, selected, _ = _regions(expanded, max(12, round(expanded.size * minimum_component_fraction)))
+    return (regions, selected) if np.all(selected[mask]) else None
+
+
 def _mapped(regions, trim, thumbnail_size, native_size):
     left, top = trim[:2]
     tw, th = thumbnail_size
@@ -120,9 +145,9 @@ def _mapped(regions, trim, thumbnail_size, native_size):
                "selected_thumbnail_pixels": region["selected_pixels"]}
 
 
-def _projected(main, before, trim, native_size, minimum_component_fraction):
+def _projected(main, before, trim, native_size, minimum_component_fraction, *, extend=False):
     h, w = before.shape[:2]
-    supported, controls, support = [], [], []
+    supported, controls, nearby, support = [], [], [], []
     for kernel in KERNELS:
         after = np.asarray(main.resize((w, h), kernel))
         alignment = _align(before, after)
@@ -137,8 +162,13 @@ def _projected(main, before, trim, native_size, minimum_component_fraction):
         color, chroma_point = _over(chroma, detail, 10.)
         supported.append(bright | color)
         controls.append(bright)
+        if extend:
+            nearby.append((luma >= EXTENT_FRACTION * (luma_point + .25 * detail))
+                          | (chroma >= EXTENT_FRACTION * (chroma_point + .25 * detail)))
         support.append({"shift_and_response": shift, "background": background, "points": [luma_point, chroma_point]})
     regions, mask = _mask(supported[0] & supported[1], minimum_component_fraction)
+    if extend and (added := _extend(mask, nearby[0] & nearby[1], minimum_component_fraction)) is not None:
+        regions, mask = added
     luma_regions, luma_mask = _mask(controls[0] & controls[1], minimum_component_fraction)
     return {"status": "comparable", "native_size": native_size, "trim": trim, "thumbnail_size": (w, h),
             "regions": list(_mapped(regions, trim, (w, h), native_size)),
@@ -146,7 +176,7 @@ def _projected(main, before, trim, native_size, minimum_component_fraction):
             "confidence_weight": 0}, (mask, luma_mask)
 
 
-def measure(data: bytes, *, minimum_component_fraction: float = PILOT_COMPONENT_FRACTION):
+def measure(data: bytes, *, minimum_component_fraction: float = PILOT_COMPONENT_FRACTION, extend=False):
     """Measure a compact difference only after both thumbnail renderings agree."""
     with Image.open(io.BytesIO(data)) as original:
         raw = original.size
@@ -167,7 +197,7 @@ def measure(data: bytes, *, minimum_component_fraction: float = PILOT_COMPONENT_
             h, w = before.shape[:2]
             original.draft("RGB", (w * 3, h * 3))
             main = original.convert("RGB")
-            return _projected(main, before, trim, native_size, minimum_component_fraction)
+            return _projected(main, before, trim, native_size, minimum_component_fraction, extend=extend)
 
         with Image.open(io.BytesIO(blob)) as preview:
             preview_size = preview.size
@@ -181,7 +211,7 @@ def measure(data: bytes, *, minimum_component_fraction: float = PILOT_COMPONENT_
 
     matches = []
     for operation, (before, trim) in proofs:
-        result, masks = _projected(main, before, trim, native_size, minimum_component_fraction)
+        result, masks = _projected(main, before, trim, native_size, minimum_component_fraction, extend=extend)
         if masks is not None:
             matches.append(({**result, "main_orientation": orientation, "preview_orientation": operation,
                              "preview_raw_size": preview_size}, masks))

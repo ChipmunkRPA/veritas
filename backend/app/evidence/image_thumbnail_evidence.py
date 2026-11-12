@@ -7,6 +7,7 @@ import math
 import struct
 
 import cv2
+import numpy as np
 from PIL import Image, ImageOps
 
 from app.engine.exhibits import ExhibitBudgetExceeded
@@ -18,10 +19,13 @@ CREATOR = "render"
 TABLE = "Embedded preview difference locations"
 MAIN = "Main image crop for preview difference"
 PREVIEW = "Embedded preview crop for difference"
+FOOTPRINT = "Measured preview difference footprint"
 REGIONS = "Main image preview differences"
 LEGACY_COLUMNS = ["Region", "Main image x, y, width, height", "Embedded preview x, y, width, height", "Marked preview pixels",
                   "Main crop display width, height", "Preview crop display width, height"]
 COLUMNS = [*LEGACY_COLUMNS, "Main and preview orientation"]
+FOOTPRINT_COLUMNS = [*COLUMNS, "Aligned preview grid x, y, width, height"]
+FOOTPRINT_NOTE = "White cells mark measured differences on the aligned preview grid."
 INTERPRETATION = ("The file’s embedded preview and main image differ in these areas. The comparison uses the preview’s "
                   "lower resolution to locate native crops. Main coordinates follow the displayed orientation. Preview "
                   "coordinates refer to the stored preview pixels. Ordinary editing and image processing can also produce these "
@@ -79,12 +83,26 @@ def _caption(box, display_size):
     return f"x {x}, y {y}, {w} × {h} pixels." + shown
 
 
+def _footprint(region, trim, labels, stats):
+    x, y, w, h = (region["embedded_thumbnail"][key] for key in BOX_KEYS)
+    x, y = x - trim[0], y - trim[1]
+    shape = np.array((x, y, w, h, region["selected_thumbnail_pixels"]))
+    matches = np.flatnonzero(np.all(stats[1:] == shape, axis=1)) + 1
+    if len(matches) != 1:
+        return None
+    mask = (labels[y:y + h, x:x + w] == matches[0]).astype(np.uint8) * 255
+    with io.BytesIO() as output:
+        Image.fromarray(mask).convert("RGB").save(output, format="PNG")
+        return dict(zip(BOX_KEYS, (x, y, w, h), strict=True)), output.getvalue()
+
+
 def add_exhibits(data, writer):
     """Keep local evidence separate from metadata anomalies and score inputs."""
     try:
-        measurement, _ = localization.measure(data, minimum_component_fraction=localization.CONFIRMATION_COMPONENT_FRACTION)
+        measurement, masks = localization.measure(data, minimum_component_fraction=localization.CONFIRMATION_COMPONENT_FRACTION)
         if not measurement.get("regions"):
             return []
+        _, labels, stats, _ = cv2.connectedComponentsWithStats(masks[0].astype(np.uint8), connectivity=8)
         with Image.open(io.BytesIO(data)) as source:
             embedded = localization._pillow_thumbnail(source, source.getexif())
             if embedded is None:
@@ -95,14 +113,15 @@ def add_exhibits(data, writer):
                 for region in measurement["regions"][:MAX_REGIONS]:
                     native = region["submitted"]
                     thumbnail = _stored_preview_bounds(region, measurement)
-                    prepared.append((native, thumbnail, region["selected_thumbnail_pixels"], _crop(main, native), _crop(preview, thumbnail)))
+                    footprint = _footprint(region, measurement["trim"], labels, stats)
+                    prepared.append((native, thumbnail, region["selected_thumbnail_pixels"], _crop(main, native), _crop(preview, thumbnail), footprint))
     except (OSError, ValueError, TypeError, SyntaxError, KeyError, IndexError, OverflowError, struct.error,
             Image.DecompressionBombError, cv2.error):
         # An unreadable preview must not change the existing metadata finding or score.
         return []
 
     exhibit_ids, rows, regions = [], [], []
-    for n, (main, thumb, marked, main_crop, thumb_crop) in enumerate(prepared, 1):
+    for n, (main, thumb, marked, main_crop, thumb_crop, footprint) in enumerate(prepared, 1):
         try:
             main_id = writer.image(main_crop[0], role="comparison", media_type="image/png", title=f"{MAIN} {n}",
                                    caption=_caption(main, main_crop[1]), media_ref="original")
@@ -111,12 +130,22 @@ def add_exhibits(data, writer):
         except ExhibitBudgetExceeded:
             break
         exhibit_ids.extend((main_id, thumb_id))
+        footprint_location = ""
+        if footprint is not None:
+            box, pixels = footprint
+            try:
+                exhibit_ids.append(writer.image(pixels, role="comparison", media_type="image/png", title=f"{FOOTPRINT} {n}",
+                                                caption=f"{marked} marked cells. {FOOTPRINT_NOTE} {_caption(box, (box['w'], box['h']))}",
+                                                media_ref="original"))
+                footprint_location = _coordinates(box)
+            except ExhibitBudgetExceeded:
+                pass
         rows.append([str(n), _coordinates(main), _coordinates(thumb), str(marked),
                      ", ".join(map(str, main_crop[1])), ", ".join(map(str, thumb_crop[1])),
-                     f"{measurement.get('main_orientation', 1)}, {measurement.get('preview_orientation', 0)}"])
+                     f"{measurement.get('main_orientation', 1)}, {measurement.get('preview_orientation', 0)}", footprint_location])
         regions.append({"region": {"kind": "bbox", "bbox": main}, "label": f"Preview difference {n}"})
     if rows:
-        exhibit_ids.append(writer.table(COLUMNS, rows, title=TABLE, caption=INTERPRETATION))
+        exhibit_ids.append(writer.table(FOOTPRINT_COLUMNS, rows, title=TABLE, caption=INTERPRETATION))
         width, height = measurement["native_size"]
         exhibit_ids.append(writer.regions(regions, title=REGIONS, caption=INTERPRETATION,
                                           media_ref="original", coordinate_space={"width": width, "height": height, "scale_to_original": 1.0}))
@@ -125,22 +154,24 @@ def add_exhibits(data, writer):
 
 def is_preview_exhibit(item):
     title = str(item.get("title", ""))
-    return item.get("created_by") == CREATOR and (title in {TABLE, REGIONS} or title.startswith((f"{MAIN} ", f"{PREVIEW} ")))
+    return item.get("created_by") == CREATOR and (title in {TABLE, REGIONS} or title.startswith((f"{MAIN} ", f"{PREVIEW} ", f"{FOOTPRINT} ")))
 
 
 def from_result(result):
     """Project the same immutable coordinate and crop exhibits into a JSON export."""
     exhibits = [item for item in result.get("exhibits") or [] if item.get("created_by") == CREATOR]
     table = next((item for item in exhibits if item.get("title") == TABLE and item.get("kind") == "table"
-                  and item.get("columns") in (COLUMNS, LEGACY_COLUMNS)), None)
+                  and item.get("columns") in (FOOTPRINT_COLUMNS, COLUMNS, LEGACY_COLUMNS)), None)
     if not table:
         return None
     crops = {item["title"]: item for item in exhibits if item.get("kind") == "image" and item.get("role") == "comparison"}
     rows, orientations = [], set()
     try:
-        for region, main, thumb, marked, main_size, thumb_size, *orientation in table["rows"]:
-            main_tag, preview_alignment = map(int, orientation[0].split(",")) if orientation else (1, 0)
-            if (len(orientation) > 1 or main_tag not in (1, *localization.TRANSFORMS)
+        for region, main, thumb, marked, main_size, thumb_size, *extra in table["rows"]:
+            if len(extra) != len(table["columns"]) - len(LEGACY_COLUMNS):
+                return None
+            main_tag, preview_alignment = map(int, extra[0].split(",")) if extra else (1, 0)
+            if (main_tag not in (1, *localization.TRANSFORMS)
                     or (preview_alignment != 0 and (main_tag == 1 or preview_alignment != main_tag))):
                 return None
             orientations.add((main_tag, preview_alignment))
@@ -153,7 +184,17 @@ def from_result(result):
                 assets[key] = {"exhibit_id": exhibit["id"], "sha256": exhibit["sha256"],
                                "url": f"/api/v2/exhibits/{exhibit['id']}/payload", "display_width": width, "display_height": height,
                                "display_reduced": (width, height) != (boxes[key]["w"], boxes[key]["h"])}
-            rows.append({"region": int(region), **boxes, "marked_preview_pixels": int(marked), "crops": assets})
+            row = {"region": int(region), **boxes, "marked_preview_pixels": int(marked), "crops": assets}
+            if len(extra) == 2 and extra[1]:
+                x, y, width, height = map(int, extra[1].split(","))
+                footprint = crops[f"{FOOTPRINT} {region}"]
+                if min(x, y) < 0 or min(width, height) <= 0 or not 0 < int(marked) <= width * height:
+                    return None
+                row["footprint_grid"] = {"coordinate_space": "aligned-preview-grid", "x": x, "y": y, "w": width, "h": height}
+                assets["measured_footprint"] = {"exhibit_id": footprint["id"], "sha256": footprint["sha256"],
+                                                "url": f"/api/v2/exhibits/{footprint['id']}/payload",
+                                                "display_width": width, "display_height": height, "display_reduced": False}
+            rows.append(row)
     except (KeyError, AttributeError, TypeError, ValueError):
         return None
     if len(orientations) != 1:

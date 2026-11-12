@@ -1,0 +1,30 @@
+{% if v.get('thumbnail_evidence') %}
+<section class="chapter-cont image-evidence" aria-labelledby="thumbnail-evidence-heading">
+{% for region in v.thumbnail_evidence.regions %}
+{% if loop.first %}<div class="thumbnail-evidence-first">
+<h2 class="chapter-title" id="thumbnail-evidence-heading">Embedded preview differences</h2>
+<p>{{ v.thumbnail_evidence.interpretation }}</p>
+{% endif %}
+<article class="image-evidence-packet">
+<h3>Region {{ region.region }}</h3>
+<div class="evidence-plates evidence-plates-pair{% if region.footprint_grid %} evidence-plates-copy{% endif %}">
+{% for key, label in [('embedded_preview', 'Embedded preview crop'), ('main_image', 'Main image crop')] %}
+{% set box = region[key] %}{% set crop = region.crops[key] %}
+<figure>
+{% if crop.uri %}<img src="{{ crop.uri }}" alt="{{ label }}">{% endif %}
+<figcaption>{{ label }} · x {{ box.x }}, y {{ box.y }}, {{ box.w }} × {{ box.h }} px{% if crop.display_reduced %} · preview shown at {{ crop.display_width }} × {{ crop.display_height }} px{% endif %}</figcaption>
+</figure>
+{% endfor %}
+{% if region.footprint_grid %}
+{% set crop = region.crops.measured_footprint %}{% set box = region.footprint_grid %}
+<figure>
+{% if crop.uri %}<img class="measured-footprint" src="{{ crop.uri }}" alt="Measured difference footprint">{% endif %}
+<figcaption>Measured difference footprint · {{ region.marked_preview_pixels }} marked cells. White cells mark measured differences on the aligned preview grid at x {{ box.x }}, y {{ box.y }}, {{ box.w }} × {{ box.h }} px.<br>SHA-256 <span class="mono">{{ crop.sha256 | short_hash }}</span></figcaption>
+</figure>
+{% endif %}
+</div>
+</article>
+{% if loop.first %}</div>{% endif %}
+{% endfor %}
+</section>
+{% endif %}

@@ -46,6 +46,7 @@ def _run(store, source, monkeypatch):
     source_sha = store.put_bytes(source).sha256
     original_exhibits = [item.model_dump(mode="json") for item in writer.exhibits]
     events = []
+    monkeypatch.setattr(image_stage.settings, "image_whole_review_python", None)
     monkeypatch.setattr(image_stage, "_legacy_artifacts", lambda _: events.append("legacy") or {})
     monkeypatch.setattr(image_stage.common, "index_artefacts", lambda *_args, **_kw: events.append("preview"))
     context = SimpleNamespace(analysis_id="thumbnail-test", exhibits=writer, state={"media": media},
@@ -77,6 +78,7 @@ def test_report_and_export_keep_source_crops_with_numeric_coordinates(tmp_path, 
         baseline, _ = _run(store, altered, before)
     assert positive.aggregate == baseline.aggregate and positive.unit_scores == baseline.unit_scores
     assert any(item["title"] == "Embedded thumbnail vs main image" for item in result["exhibits"])
+    _, measured = localization.measure(altered, minimum_component_fraction=localization.CONFIRMATION_COMPONENT_FRACTION)
     for region in published["regions"]:
         for role, source in (("main_image", altered), ("embedded_preview", preview_from(altered))):
             bounds = region[role]
@@ -90,15 +92,27 @@ def test_report_and_export_keep_source_crops_with_numeric_coordinates(tmp_path, 
                 assert not crop["display_reduced"]
                 assert image.size == expected.size
                 np.testing.assert_array_equal(np.asarray(image), np.asarray(expected))
+        box, footprint = region["footprint_grid"], region["crops"]["measured_footprint"]
+        x, y, w, h = (box[key] for key in evidence.BOX_KEYS)
+        assert box["coordinate_space"] == "aligned-preview-grid"
+        with Image.open(io.BytesIO(store.read_bytes(footprint["sha256"]))) as image:
+            assert image.size == (w, h)
+            white = np.asarray(image.convert("L")) == 255
+            assert white.sum() == region["marked_preview_pixels"]
+            np.testing.assert_array_equal(white, measured[0][y:y + h, x:x + w])
 
     if orientation == 1:
         import copy
 
         old = copy.deepcopy(result)
         table = next(item for item in old["exhibits"] if item["title"] == evidence.TABLE)
-        table["columns"] = table["columns"][:-1]
-        table["rows"] = [row[:-1] for row in table["rows"]]
-        assert evidence.from_result(old) == published
+        table["columns"] = table["columns"][:-2]
+        table["rows"] = [row[:-2] for row in table["rows"]]
+        compatible = copy.deepcopy(published)
+        for region in compatible["regions"]:
+            region.pop("footprint_grid")
+            region["crops"].pop("measured_footprint")
+        assert evidence.from_result(old) == compatible
 
     # A resumed run starts with a fresh writer and cached provenance exhibits.
     # Render must keep its exhibit IDs without reusing the metadata namespace.
@@ -116,16 +130,12 @@ def test_report_and_export_keep_source_crops_with_numeric_coordinates(tmp_path, 
     pdf = engine.render_pdf(snapshot)
     text = " ".join(engine.pdf_text(pdf.pdf).split())
     assert "Ordinary editing and image processing" in text
+    assert "White cells mark measured differences on the aligned preview grid" in text
     first = published["regions"][0]
-    if profile == "standard":
-        assert evidence.TABLE in text
-        assert evidence._coordinates(first["main_image"]) in text
-        assert evidence._coordinates(first["embedded_preview"]) in text
-    else:
-        assert "Embedded preview differences" in text
-        for role in ("main_image", "embedded_preview"):
-            box = first[role]
-            assert f"x {box['x']}, y {box['y']}, {box['w']} × {box['h']} px" in text
+    assert "Embedded preview differences" in text
+    for role in ("main_image", "embedded_preview", "footprint_grid"):
+        box = first[role]
+        assert f"x {box['x']}, y {box['y']}, {box['w']} × {box['h']} px" in text
 
 
 @pytest.mark.parametrize("error", [OSError("malformed embedded JPEG"), Image.DecompressionBombError("preview too large")])

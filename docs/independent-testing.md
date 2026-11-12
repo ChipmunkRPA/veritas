@@ -205,6 +205,9 @@ generated and ordinary source groups in two delivery formats. Its reviewer
 replays the outcome counts and records unavailable Full results separately.
 The [whole-image view replay](#verify-the-inspected-views-from-a-jpeg)
 checks the actual exported crop pixels and their bounds against the submitted JPEG.
+The [embedded-preview footprint study](image-thumbnail-extent-transfer-2026-11-12.md)
+compares the crop extents on 222 deliveries and verifies the exact marked
+cells and both source crops from the current evidence.
 The [Ultra HDR gain-map pilot](image-gainmap-localization-2026-11-12.md)
 tests two ways to locate local changes in JPEGs that retain a gain map but
 have no embedded thumbnail. Its source replay records a camera-original false

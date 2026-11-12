@@ -206,6 +206,28 @@ def _timing_page(document, timing, assets):
     _text(page, MARGIN, 721, "Waveforms share one scale. The JSON includes both playable speech excerpts.", size=9, color=MUTED)
 
 
+def _soundtrack_timing_page(document, timing, assets):
+    page = _page(document, "Local soundtrack timing")
+    page.insert_textbox((MARGIN, 124, RIGHT, 165), timing["summary"], fontsize=12, fontname="hebo", color=INK)
+    page.insert_textbox((MARGIN, 169, RIGHT, 217), timing["scope"], fontsize=10, fontname="helv", color=MUTED)
+    if timing["status"] != "local_shift":
+        return
+    span = timing["range"]
+    picture = span["picture"]
+    _text(page, MARGIN, 235, f"Analyzed clip picture {picture['frame_index']} at {picture['time_s']:.3f} s", font="hebo")
+    _text(page, MARGIN, 252, f"PTS {picture['pts']} at {picture['time_base']} s per tick", size=9, color=MUTED)
+    page.insert_image(pymupdf.Rect(MARGIN, 263, MARGIN + 260, 428), stream=assets[picture["asset"]["file"]])
+    maximum = max(.01, *(abs(level) for side in LABELS for field in ("low", "high")
+                        for level in span[side]["waveform"][field]))
+    for y, (side, label) in zip((503, 635), LABELS.items(), strict=True):
+        row = span[side]
+        first, end = row["samples"]
+        _text(page, MARGIN, y - 61, f"{label}  {row['start_s']:.3f} to {row['end_s']:.3f} s", font="hebo")
+        _draw_waveform(page, row["waveform"], y, maximum, (end - first) / timing["sample_rate"])
+        _text(page, MARGIN, y + 51, f"Decoded samples [{first}, {end}) at 16 kHz.", size=9, color=MUTED)
+    _text(page, MARGIN, 720, "Waveforms share one scale. The JSON includes both playable excerpts.", size=9, color=MUTED)
+
+
 def _sound_page(document, span, *, level_adjusted=False):
     difference = span.get("difference")
     if level_adjusted:
@@ -284,4 +306,6 @@ def render(record, assets):
         _remaining_ranges(document, remaining)
         if "timing" in record:
             _timing_page(document, record["timing"], assets)
+        if "soundtrack_alignment" in record:
+            _soundtrack_timing_page(document, record["soundtrack_alignment"], assets)
         return document.tobytes(deflate=True, garbage=4)

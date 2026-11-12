@@ -10,7 +10,13 @@ from functools import partial
 from pathlib import Path
 
 from app.core.canonical import canonical_json
-from app.evidence.video_reference import SCHEMA, SCHEMA_WITH_SHORT_TIMING, SCHEMA_WITH_TIMING, compare
+from app.evidence.video_reference import (
+    SCHEMA,
+    SCHEMA_WITH_SHORT_TIMING,
+    SCHEMA_WITH_SOUNDTRACK,
+    SCHEMA_WITH_TIMING,
+    compare,
+)
 
 
 def replay(compare, earlier: Path, submitted: Path, output: Path, *, verify: bool = False) -> dict:
@@ -37,24 +43,25 @@ def replay(compare, earlier: Path, submitted: Path, output: Path, *, verify: boo
 
 def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False,
         event_seconds: Fraction | None = None, timing_model: Path | None = None) -> dict:
-    compare_source = compare
+    options = {}
     short_fallback = not verify
     if verify:
         exported = json.loads((output if output.is_file() else output / "comparison.json").read_bytes())
         record = exported.get("comparison", exported) if isinstance(exported, dict) else None
         event_seconds = None
-        if isinstance(record, dict) and record.get("schema") == SCHEMA:
-            compare_source = partial(compare, include_local=False)
-        elif isinstance(record, dict) and record.get("schema") in (SCHEMA_WITH_TIMING, SCHEMA_WITH_SHORT_TIMING):
-            event_seconds = Fraction(record["timing"]["requested_earlier_time_s"])
-            short_fallback = record["schema"] == SCHEMA_WITH_SHORT_TIMING
+        if isinstance(record, dict):
+            schema = record.get("schema")
+            options.update(include_local=schema != SCHEMA, include_soundtrack=schema == SCHEMA_WITH_SOUNDTRACK)
+            if schema in (SCHEMA_WITH_TIMING, SCHEMA_WITH_SHORT_TIMING) or (schema == SCHEMA_WITH_SOUNDTRACK and "timing" in record):
+                event_seconds = Fraction(record["timing"]["requested_earlier_time_s"])
+                short_fallback = (schema == SCHEMA_WITH_SHORT_TIMING or
+                                  (schema == SCHEMA_WITH_SOUNDTRACK and record["timing"].get("waveform_basis") == "short_marked_excerpt"))
     if event_seconds is not None:
         from app.core.config import settings
 
-        compare_source = partial(compare, timing_event_s=event_seconds,
-                                 timing_model=timing_model or settings.video_reference_timing_model_path,
-                                 timing_short_fallback=short_fallback)
-    return replay(compare_source, earlier, submitted, output, verify=verify)
+        options.update(timing_event_s=event_seconds, timing_model=timing_model or settings.video_reference_timing_model_path,
+                       timing_short_fallback=short_fallback)
+    return replay(partial(compare, **options), earlier, submitted, output, verify=verify)
 
 
 def main(*, description=__doc__, runner=run, marked_timing=False):

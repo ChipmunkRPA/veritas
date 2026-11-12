@@ -1,0 +1,3862 @@
+{
+  "freeze_sha256": "2dda91fd1bf341229802fc55b651674e7564bb09a0cfb2ec4a18ea40ce9840a8",
+  "gate": {
+    "max_added_control_alerts": 1,
+    "max_added_global_or_picture_alerts": 0,
+    "max_sample_error": 16,
+    "min_each_sign": 7,
+    "min_groups": 8,
+    "min_interval_iou": "3/5",
+    "min_total": 16
+  },
+  "method_sha256": "2aee86b24c8507b07e625cfcf73d9909fba943b74b644bc5a7bbcdf8244c09bc",
+  "native_verification": {
+    "decoded_samples": 7201809,
+    "deliveries": 198,
+    "excerpt_samples": 837120,
+    "excerpts": 88,
+    "images": 44,
+    "pictures": 13104
+  },
+  "results": {
+    "aac": {
+      "admitted": true,
+      "assessed": {
+        "gain": 11,
+        "global_shift": 11,
+        "local_early": 11,
+        "local_late": 11,
+        "noise_mix": 11,
+        "original": 11,
+        "picture_change": 0,
+        "short_offset": 11,
+        "unrelated_insert": 11
+      },
+      "false_flags": {},
+      "groups": 11,
+      "useful": {
+        "local_early": 11,
+        "local_late": 11
+      }
+    },
+    "pcm": {
+      "admitted": true,
+      "assessed": {
+        "gain": 11,
+        "global_shift": 11,
+        "local_early": 11,
+        "local_late": 11,
+        "noise_mix": 11,
+        "original": 11,
+        "picture_change": 0,
+        "short_offset": 11,
+        "unrelated_insert": 11
+      },
+      "false_flags": {},
+      "groups": 11,
+      "useful": {
+        "local_early": 11,
+        "local_late": 11
+      }
+    }
+  },
+  "rows": [
+    {
+      "cases": [
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "0a652dc44d31a773f2222d633e0210950fb92c21eaf0f95613347289e31bed59",
+            "soundtrack-shift-picture-031.png": "85916a0e4ee367db567789fedd1dc31aa1ad922530f59a187209541f7b87d9be",
+            "soundtrack-shift-submitted.wav": "50919fcfc779566a1dc3a605075b4006dc7b69c768ea12d532f10908ff78d468"
+          },
+          "authored": [
+            11520,
+            21760
+          ],
+          "delivery": "pcm",
+          "earlier_sha256": "cf04a5f27f0b659f285515d5d764bb361eff36a4151e606c086c7d558e4a36e2",
+          "found": [
+            [
+              12160,
+              21760
+            ],
+            3200
+          ],
+          "native_picture_rgb_sha256": "26f51c99d8f581c09b3880a0b7284d2c58f87d42602a6391ce6984cdfb8e4fed",
+          "offset": 3200,
+          "pcm_sha256": "0369caa1bef9a501cf3bfb908c772135989945242ff810d5baeef7e13692140a",
+          "pictures": 62,
+          "relative_picture_pts_sha256": "05f4b12f7eabd9ff14552b8a5468e28cdf99199581de40d1c48e989865e50fc1",
+          "role": "local_late",
+          "state": "local_shift",
+          "submitted_sha256": "043b25b6db94574b6ab676a502b55bcc25d4998df069d4c80be87de042738303",
+          "windows": 29
+        },
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "9d5aa3f293a339fce9d23b7d7b945e18143d71e81f2b73416e5df6c5153d906f",
+            "soundtrack-shift-picture-031.png": "85916a0e4ee367db567789fedd1dc31aa1ad922530f59a187209541f7b87d9be",
+            "soundtrack-shift-submitted.wav": "7282273efb7753c24d611605db86576b256299e87a9c7f95073855f613517921"
+          },
+          "authored": [
+            11520,
+            21760
+          ],
+          "delivery": "pcm",
+          "earlier_sha256": "cf04a5f27f0b659f285515d5d764bb361eff36a4151e606c086c7d558e4a36e2",
+          "found": [
+            [
+              12160,
+              21760
+            ],
+            -3200
+          ],
+          "native_picture_rgb_sha256": "26f51c99d8f581c09b3880a0b7284d2c58f87d42602a6391ce6984cdfb8e4fed",
+          "offset": -3200,
+          "pcm_sha256": "0f3ed5ab6b8b87216ba8615905c153615e036be9d0520b622ae9c421bf3841f3",
+          "pictures": 62,
+          "relative_picture_pts_sha256": "05f4b12f7eabd9ff14552b8a5468e28cdf99199581de40d1c48e989865e50fc1",
+          "role": "local_early",
+          "state": "local_shift",
+          "submitted_sha256": "3465a19b51ef5bdc10e2c4edfcb9b7c1a9753030ea245d5bc5ad8f4ae0047132",
+          "windows": 29
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "cf04a5f27f0b659f285515d5d764bb361eff36a4151e606c086c7d558e4a36e2",
+          "found": null,
+          "native_picture_rgb_sha256": "26f51c99d8f581c09b3880a0b7284d2c58f87d42602a6391ce6984cdfb8e4fed",
+          "offset": null,
+          "pcm_sha256": "5a7a2b86b9cce9a5d852e69f7744d0865c03177830ae5725366db21726a8fcbc",
+          "pictures": 62,
+          "relative_picture_pts_sha256": "05f4b12f7eabd9ff14552b8a5468e28cdf99199581de40d1c48e989865e50fc1",
+          "role": "original",
+          "state": "no_local_shift",
+          "submitted_sha256": "24ac8647058be6a6aa4643301ace335354616398abf00a6d1eeb668b4869f576",
+          "windows": 34
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "cf04a5f27f0b659f285515d5d764bb361eff36a4151e606c086c7d558e4a36e2",
+          "found": null,
+          "native_picture_rgb_sha256": "26f51c99d8f581c09b3880a0b7284d2c58f87d42602a6391ce6984cdfb8e4fed",
+          "offset": null,
+          "pcm_sha256": "d2f752d694c9e1d3c6fd5cb8fd2d8220717187b50fa3b7bb327aeab065908039",
+          "pictures": 62,
+          "relative_picture_pts_sha256": "05f4b12f7eabd9ff14552b8a5468e28cdf99199581de40d1c48e989865e50fc1",
+          "role": "gain",
+          "state": "no_local_shift",
+          "submitted_sha256": "ae7de42217bbef47e1d8737d6a8616c5d3785e3108260dc6bf4b81990f5923de",
+          "windows": 32
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "cf04a5f27f0b659f285515d5d764bb361eff36a4151e606c086c7d558e4a36e2",
+          "found": null,
+          "native_picture_rgb_sha256": "26f51c99d8f581c09b3880a0b7284d2c58f87d42602a6391ce6984cdfb8e4fed",
+          "offset": null,
+          "pcm_sha256": "51458798b1c00ae91908a95a25dfb86fe670380029201ae4879541daca91ccb3",
+          "pictures": 62,
+          "relative_picture_pts_sha256": "05f4b12f7eabd9ff14552b8a5468e28cdf99199581de40d1c48e989865e50fc1",
+          "role": "noise_mix",
+          "state": "no_local_shift",
+          "submitted_sha256": "45c577cbb8aa45f9d09aabf5447ce4b9ec69d8594a2a999a4a145d2403376734",
+          "windows": 34
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "cf04a5f27f0b659f285515d5d764bb361eff36a4151e606c086c7d558e4a36e2",
+          "found": null,
+          "native_picture_rgb_sha256": "26f51c99d8f581c09b3880a0b7284d2c58f87d42602a6391ce6984cdfb8e4fed",
+          "offset": null,
+          "pcm_sha256": "15dd071db6ad98aa92153a7c98ab6038c04bbc9aeb1abde7e16f5e25aec92b95",
+          "pictures": 62,
+          "relative_picture_pts_sha256": "05f4b12f7eabd9ff14552b8a5468e28cdf99199581de40d1c48e989865e50fc1",
+          "role": "unrelated_insert",
+          "state": "no_local_shift",
+          "submitted_sha256": "f2f0293e33d69bcea344f52bfe28a50eeb40fbaf3c36b3cc285a89fc1440e70e",
+          "windows": 15
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "cf04a5f27f0b659f285515d5d764bb361eff36a4151e606c086c7d558e4a36e2",
+          "found": null,
+          "native_picture_rgb_sha256": "26f51c99d8f581c09b3880a0b7284d2c58f87d42602a6391ce6984cdfb8e4fed",
+          "offset": null,
+          "pcm_sha256": "97715fbff1b800ecaf3bf586e9d8d781ff2b77f7629794accdc98b5e37d519fb",
+          "pictures": 62,
+          "relative_picture_pts_sha256": "05f4b12f7eabd9ff14552b8a5468e28cdf99199581de40d1c48e989865e50fc1",
+          "role": "global_shift",
+          "state": "no_local_shift",
+          "submitted_sha256": "85de8a76bb15953f2669cd9ba0f8882ca3b12b55981e07fe535df0303a129b5f",
+          "windows": 34
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "cf04a5f27f0b659f285515d5d764bb361eff36a4151e606c086c7d558e4a36e2",
+          "found": null,
+          "native_picture_rgb_sha256": "26f51c99d8f581c09b3880a0b7284d2c58f87d42602a6391ce6984cdfb8e4fed",
+          "offset": null,
+          "pcm_sha256": "8972c88ddf34a468363d085e018a7a8dc403631b3a19acaceae0049e2e848820",
+          "pictures": 62,
+          "relative_picture_pts_sha256": "05f4b12f7eabd9ff14552b8a5468e28cdf99199581de40d1c48e989865e50fc1",
+          "role": "short_offset",
+          "state": "no_local_shift",
+          "submitted_sha256": "e1c9d27b544018c6bb71e413870fb88dc84ff1df48c29497c18b747d7597cf21",
+          "windows": 29
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "cf04a5f27f0b659f285515d5d764bb361eff36a4151e606c086c7d558e4a36e2",
+          "found": null,
+          "native_picture_rgb_sha256": "d466288c1b3efb5c8cc9f7e0e3d09d36d2b65c23e0dc7dfcdf07610ed66b4b8a",
+          "offset": null,
+          "pcm_sha256": "0369caa1bef9a501cf3bfb908c772135989945242ff810d5baeef7e13692140a",
+          "pictures": 62,
+          "relative_picture_pts_sha256": "05f4b12f7eabd9ff14552b8a5468e28cdf99199581de40d1c48e989865e50fc1",
+          "role": "picture_change",
+          "state": "unassessed",
+          "submitted_sha256": "ceec17b02a0dcd8346cb1d458b9a83acb9e1739e3b50bba286090206d489d58b",
+          "windows": 0
+        },
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "4ef154eb5bb44aa2ca47e3d52b5cdf0e28b2507c84b4fc8e0d3ef1d176fbb199",
+            "soundtrack-shift-picture-031.png": "85916a0e4ee367db567789fedd1dc31aa1ad922530f59a187209541f7b87d9be",
+            "soundtrack-shift-submitted.wav": "6e8922379278d979d0e1955df1f63d0f47a3562711ce7b33f31e95a1045eaff9"
+          },
+          "authored": [
+            11520,
+            21760
+          ],
+          "delivery": "aac",
+          "earlier_sha256": "9619091f02c32ae626165c45d94bf844471f97a557559bd94546307c3de5672c",
+          "found": [
+            [
+              12160,
+              21760
+            ],
+            3200
+          ],
+          "native_picture_rgb_sha256": "26f51c99d8f581c09b3880a0b7284d2c58f87d42602a6391ce6984cdfb8e4fed",
+          "offset": 3200,
+          "pcm_sha256": "0077336bd3df2deee41d69492136f877f08a72231c86088d249d02ed93620b43",
+          "pictures": 62,
+          "relative_picture_pts_sha256": "05f4b12f7eabd9ff14552b8a5468e28cdf99199581de40d1c48e989865e50fc1",
+          "role": "local_late",
+          "state": "local_shift",
+          "submitted_sha256": "1e3fe36195c5a233e6a0306e7105c111c7593369274fe0931abc30d8041f5f0a",
+          "windows": 29
+        },
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "6a779c98cd9732065d7b801a0b54d01e04e80fcd67ffa5f6cc5a8a0e920adc16",
+            "soundtrack-shift-picture-031.png": "85916a0e4ee367db567789fedd1dc31aa1ad922530f59a187209541f7b87d9be",
+            "soundtrack-shift-submitted.wav": "553a898fff752fe76dc8d33e4987b18a8631ffd8f3d61db62130c759e674cc53"
+          },
+          "authored": [
+            11520,
+            21760
+          ],
+          "delivery": "aac",
+          "earlier_sha256": "9619091f02c32ae626165c45d94bf844471f97a557559bd94546307c3de5672c",
+          "found": [
+            [
+              12160,
+              21760
+            ],
+            -3200
+          ],
+          "native_picture_rgb_sha256": "26f51c99d8f581c09b3880a0b7284d2c58f87d42602a6391ce6984cdfb8e4fed",
+          "offset": -3200,
+          "pcm_sha256": "be98dd10e7294a7ad4d813284e843816f3795143563165dbb68534aacabccef0",
+          "pictures": 62,
+          "relative_picture_pts_sha256": "05f4b12f7eabd9ff14552b8a5468e28cdf99199581de40d1c48e989865e50fc1",
+          "role": "local_early",
+          "state": "local_shift",
+          "submitted_sha256": "671c2b2d0027c21ca82f3e5ae3b7bbdcb687c4fe4a34b13069c29746255a859b",
+          "windows": 29
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "9619091f02c32ae626165c45d94bf844471f97a557559bd94546307c3de5672c",
+          "found": null,
+          "native_picture_rgb_sha256": "26f51c99d8f581c09b3880a0b7284d2c58f87d42602a6391ce6984cdfb8e4fed",
+          "offset": null,
+          "pcm_sha256": "28e8e1f9ffd203174b76c2bd887c398b0d29b8fe6a95745ba73ddb94182fb488",
+          "pictures": 62,
+          "relative_picture_pts_sha256": "05f4b12f7eabd9ff14552b8a5468e28cdf99199581de40d1c48e989865e50fc1",
+          "role": "original",
+          "state": "no_local_shift",
+          "submitted_sha256": "9619091f02c32ae626165c45d94bf844471f97a557559bd94546307c3de5672c",
+          "windows": 34
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "9619091f02c32ae626165c45d94bf844471f97a557559bd94546307c3de5672c",
+          "found": null,
+          "native_picture_rgb_sha256": "26f51c99d8f581c09b3880a0b7284d2c58f87d42602a6391ce6984cdfb8e4fed",
+          "offset": null,
+          "pcm_sha256": "d37e1f32904e88cc7548d8c77d152d93edf4425bb24af409cff334e213aa49b1",
+          "pictures": 62,
+          "relative_picture_pts_sha256": "05f4b12f7eabd9ff14552b8a5468e28cdf99199581de40d1c48e989865e50fc1",
+          "role": "gain",
+          "state": "no_local_shift",
+          "submitted_sha256": "6af99104e73aef9fba10ce5c9656e13d74da46121a044cfea5121816253e7760",
+          "windows": 32
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "9619091f02c32ae626165c45d94bf844471f97a557559bd94546307c3de5672c",
+          "found": null,
+          "native_picture_rgb_sha256": "26f51c99d8f581c09b3880a0b7284d2c58f87d42602a6391ce6984cdfb8e4fed",
+          "offset": null,
+          "pcm_sha256": "71b54d5b45d0802123855b0a4434605892219023cbeae9bff21674aa2b326f04",
+          "pictures": 62,
+          "relative_picture_pts_sha256": "05f4b12f7eabd9ff14552b8a5468e28cdf99199581de40d1c48e989865e50fc1",
+          "role": "noise_mix",
+          "state": "no_local_shift",
+          "submitted_sha256": "530beb7633a48460b4579cd6d3b04a6a11b563b58b9fff24ff21f6a59f115f72",
+          "windows": 34
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "9619091f02c32ae626165c45d94bf844471f97a557559bd94546307c3de5672c",
+          "found": null,
+          "native_picture_rgb_sha256": "26f51c99d8f581c09b3880a0b7284d2c58f87d42602a6391ce6984cdfb8e4fed",
+          "offset": null,
+          "pcm_sha256": "05289d96c12f1e52685638351d122cd1639cb72599fc07faab779fb2e68a24f2",
+          "pictures": 62,
+          "relative_picture_pts_sha256": "05f4b12f7eabd9ff14552b8a5468e28cdf99199581de40d1c48e989865e50fc1",
+          "role": "unrelated_insert",
+          "state": "no_local_shift",
+          "submitted_sha256": "5871cdfaae74d86c98c18c9d613f180b4a4dda3f18c38d71cb395fd29a86730f",
+          "windows": 15
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "9619091f02c32ae626165c45d94bf844471f97a557559bd94546307c3de5672c",
+          "found": null,
+          "native_picture_rgb_sha256": "26f51c99d8f581c09b3880a0b7284d2c58f87d42602a6391ce6984cdfb8e4fed",
+          "offset": null,
+          "pcm_sha256": "bdb49d989deff55b650113bb7652d95fc497bad50518170f2e77f47e0ecbbc9f",
+          "pictures": 62,
+          "relative_picture_pts_sha256": "05f4b12f7eabd9ff14552b8a5468e28cdf99199581de40d1c48e989865e50fc1",
+          "role": "global_shift",
+          "state": "no_local_shift",
+          "submitted_sha256": "fb955e77cb88f3722c02159a09aebbe07d43bb9bc5311644ca1321e57bfb5537",
+          "windows": 34
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "9619091f02c32ae626165c45d94bf844471f97a557559bd94546307c3de5672c",
+          "found": null,
+          "native_picture_rgb_sha256": "26f51c99d8f581c09b3880a0b7284d2c58f87d42602a6391ce6984cdfb8e4fed",
+          "offset": null,
+          "pcm_sha256": "5a59b7667b2b4542ac96b13ba40241094363f7d98dd0fac5b08bdf9dba791edd",
+          "pictures": 62,
+          "relative_picture_pts_sha256": "05f4b12f7eabd9ff14552b8a5468e28cdf99199581de40d1c48e989865e50fc1",
+          "role": "short_offset",
+          "state": "no_local_shift",
+          "submitted_sha256": "d2cf2991e254d7533cb498587cfa9569cef8a54096217eb4c3e3995ce4412ff1",
+          "windows": 29
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "9619091f02c32ae626165c45d94bf844471f97a557559bd94546307c3de5672c",
+          "found": null,
+          "native_picture_rgb_sha256": "d466288c1b3efb5c8cc9f7e0e3d09d36d2b65c23e0dc7dfcdf07610ed66b4b8a",
+          "offset": null,
+          "pcm_sha256": "0077336bd3df2deee41d69492136f877f08a72231c86088d249d02ed93620b43",
+          "pictures": 62,
+          "relative_picture_pts_sha256": "05f4b12f7eabd9ff14552b8a5468e28cdf99199581de40d1c48e989865e50fc1",
+          "role": "picture_change",
+          "state": "unassessed",
+          "submitted_sha256": "f3a48eb7e57c897b9553a733cabe7f498a6224126366c373d097743719e715d5",
+          "windows": 0
+        }
+      ],
+      "ordinal": 5
+    },
+    {
+      "cases": [
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "4c66ef5f25fb7b344a448dbc38ec73d50af4df0d93420a1aec64dcd4e0eb2e34",
+            "soundtrack-shift-picture-034.png": "60faf53a38e548a132a6d8f6221d7209456fd86e19415596c45ff17ee72e4b5e",
+            "soundtrack-shift-submitted.wav": "c12198869b61adad4237219df18d22eff70e88be43f01e582dbb0e6d58eea4a8"
+          },
+          "authored": [
+            13440,
+            23680
+          ],
+          "delivery": "pcm",
+          "earlier_sha256": "0d4d882572a3a109b914df56d536787906cca9181ecadd244a8faced98e6c0c4",
+          "found": [
+            [
+              13440,
+              23040
+            ],
+            3840
+          ],
+          "native_picture_rgb_sha256": "f168c99d71b0df926755319dc22ae0910b7ee3e097e063c8862c8e798d3e22bb",
+          "offset": 3840,
+          "pcm_sha256": "a10df0d7fdf5715af271363762bdc3f77b1776869041810077ebbd28190f4719",
+          "pictures": 70,
+          "relative_picture_pts_sha256": "ddacf456adf912245ad9d6d9ee5fe9b01679f88e61e74d2b2b550ae29f671e40",
+          "role": "local_late",
+          "state": "local_shift",
+          "submitted_sha256": "1bcb63dab07bebc0e2f6c4ba799d2db091a11cf32cf411c69496c4a1aae1825f",
+          "windows": 39
+        },
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "e6d7e81872b683e4576ab09c6894b0d1cd88676a9141b0cbb0295e6c14109a71",
+            "soundtrack-shift-picture-034.png": "60faf53a38e548a132a6d8f6221d7209456fd86e19415596c45ff17ee72e4b5e",
+            "soundtrack-shift-submitted.wav": "8c88bddc7a597e4019e36fde6e784f8a17187ab528ae00bdde81002e2f48e70b"
+          },
+          "authored": [
+            13440,
+            23680
+          ],
+          "delivery": "pcm",
+          "earlier_sha256": "0d4d882572a3a109b914df56d536787906cca9181ecadd244a8faced98e6c0c4",
+          "found": [
+            [
+              13440,
+              23680
+            ],
+            -3840
+          ],
+          "native_picture_rgb_sha256": "f168c99d71b0df926755319dc22ae0910b7ee3e097e063c8862c8e798d3e22bb",
+          "offset": -3840,
+          "pcm_sha256": "8cf3db7522899dff528436b50dddf10e86301c1c810cae6cae6d93f3e86def17",
+          "pictures": 70,
+          "relative_picture_pts_sha256": "ddacf456adf912245ad9d6d9ee5fe9b01679f88e61e74d2b2b550ae29f671e40",
+          "role": "local_early",
+          "state": "local_shift",
+          "submitted_sha256": "860c87e5f104d68e68d5e9320d27db65419420ef2ddb6a2077929f71a50fbe09",
+          "windows": 36
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "0d4d882572a3a109b914df56d536787906cca9181ecadd244a8faced98e6c0c4",
+          "found": null,
+          "native_picture_rgb_sha256": "f168c99d71b0df926755319dc22ae0910b7ee3e097e063c8862c8e798d3e22bb",
+          "offset": null,
+          "pcm_sha256": "4c37b0960219c6af102c52f1d673977b7afed2eb86e37a1f8787253336524f49",
+          "pictures": 70,
+          "relative_picture_pts_sha256": "ddacf456adf912245ad9d6d9ee5fe9b01679f88e61e74d2b2b550ae29f671e40",
+          "role": "original",
+          "state": "no_local_shift",
+          "submitted_sha256": "a6129e651e82d505f5fa0c0727266f297f66501134e24a757fcda5686aa54f11",
+          "windows": 41
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "0d4d882572a3a109b914df56d536787906cca9181ecadd244a8faced98e6c0c4",
+          "found": null,
+          "native_picture_rgb_sha256": "f168c99d71b0df926755319dc22ae0910b7ee3e097e063c8862c8e798d3e22bb",
+          "offset": null,
+          "pcm_sha256": "7c425ac96d300dca02bc7a2cb42d5288add350ac5b0f6bad4de059d271ee127c",
+          "pictures": 70,
+          "relative_picture_pts_sha256": "ddacf456adf912245ad9d6d9ee5fe9b01679f88e61e74d2b2b550ae29f671e40",
+          "role": "gain",
+          "state": "no_local_shift",
+          "submitted_sha256": "2470f0a18691838945a5b6b57fbb5cadf75646fc6d690850a39dfd4f3977f812",
+          "windows": 34
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "0d4d882572a3a109b914df56d536787906cca9181ecadd244a8faced98e6c0c4",
+          "found": null,
+          "native_picture_rgb_sha256": "f168c99d71b0df926755319dc22ae0910b7ee3e097e063c8862c8e798d3e22bb",
+          "offset": null,
+          "pcm_sha256": "d11c65ce4900f49248660d00c308fd5ad6afb344f1aa2bfe71b94e388ddd8996",
+          "pictures": 70,
+          "relative_picture_pts_sha256": "ddacf456adf912245ad9d6d9ee5fe9b01679f88e61e74d2b2b550ae29f671e40",
+          "role": "noise_mix",
+          "state": "no_local_shift",
+          "submitted_sha256": "99094a39dfe688da0c1e5932020261fe0d8ab549a7eed90fcb44a1ffc319354a",
+          "windows": 38
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "0d4d882572a3a109b914df56d536787906cca9181ecadd244a8faced98e6c0c4",
+          "found": null,
+          "native_picture_rgb_sha256": "f168c99d71b0df926755319dc22ae0910b7ee3e097e063c8862c8e798d3e22bb",
+          "offset": null,
+          "pcm_sha256": "a718844b333ed151ad0f07dc33979318c845c311012ed6258ddd7db07cd5ce35",
+          "pictures": 70,
+          "relative_picture_pts_sha256": "ddacf456adf912245ad9d6d9ee5fe9b01679f88e61e74d2b2b550ae29f671e40",
+          "role": "unrelated_insert",
+          "state": "no_local_shift",
+          "submitted_sha256": "9e8bdd59db74df85e73bfd22154ad6efd8cc15ddae2ea781630c2735bc992e43",
+          "windows": 24
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "0d4d882572a3a109b914df56d536787906cca9181ecadd244a8faced98e6c0c4",
+          "found": null,
+          "native_picture_rgb_sha256": "f168c99d71b0df926755319dc22ae0910b7ee3e097e063c8862c8e798d3e22bb",
+          "offset": null,
+          "pcm_sha256": "624c8236d5159bd3b530c0d2ca9fc0e63565831f020e9cd1c84008d5cdc65fe8",
+          "pictures": 70,
+          "relative_picture_pts_sha256": "ddacf456adf912245ad9d6d9ee5fe9b01679f88e61e74d2b2b550ae29f671e40",
+          "role": "global_shift",
+          "state": "no_local_shift",
+          "submitted_sha256": "32014cc0ca6e24cecd74bca4119ebea4c03a5e5065165a7cd7e1b55e0d541f9b",
+          "windows": 41
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "0d4d882572a3a109b914df56d536787906cca9181ecadd244a8faced98e6c0c4",
+          "found": null,
+          "native_picture_rgb_sha256": "f168c99d71b0df926755319dc22ae0910b7ee3e097e063c8862c8e798d3e22bb",
+          "offset": null,
+          "pcm_sha256": "fccfa03e5689a02bce3b18c8e07ac24c22135b1363d392fac0564f84343ea07c",
+          "pictures": 70,
+          "relative_picture_pts_sha256": "ddacf456adf912245ad9d6d9ee5fe9b01679f88e61e74d2b2b550ae29f671e40",
+          "role": "short_offset",
+          "state": "no_local_shift",
+          "submitted_sha256": "c2e6d1be4f85f0fcd03a7e26fae590eefdce1426d88136cd8915c6034f7d7ae6",
+          "windows": 38
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "0d4d882572a3a109b914df56d536787906cca9181ecadd244a8faced98e6c0c4",
+          "found": null,
+          "native_picture_rgb_sha256": "00f9d59310a01970432218de63f133cc2ca65b57215523c026665844b00b73cf",
+          "offset": null,
+          "pcm_sha256": "a10df0d7fdf5715af271363762bdc3f77b1776869041810077ebbd28190f4719",
+          "pictures": 70,
+          "relative_picture_pts_sha256": "ddacf456adf912245ad9d6d9ee5fe9b01679f88e61e74d2b2b550ae29f671e40",
+          "role": "picture_change",
+          "state": "unassessed",
+          "submitted_sha256": "938f99ec87f5b0f96439a2a47b69b0ab9270362fda8c24ccabe750cee783cdcf",
+          "windows": 0
+        },
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "3ac480bbf00be5101385cdfe99c5681abe24ae8647a475f9eb4ba69b43dd08f4",
+            "soundtrack-shift-picture-034.png": "60faf53a38e548a132a6d8f6221d7209456fd86e19415596c45ff17ee72e4b5e",
+            "soundtrack-shift-submitted.wav": "553395971bdf93891fa9a3629883691b68cce9560784d2d5c42d51746989a851"
+          },
+          "authored": [
+            13440,
+            23680
+          ],
+          "delivery": "aac",
+          "earlier_sha256": "873893ef309f1a1367f68c7f226985950be693c17be0bdee4ac71e791c5fe35a",
+          "found": [
+            [
+              13440,
+              23040
+            ],
+            3840
+          ],
+          "native_picture_rgb_sha256": "f168c99d71b0df926755319dc22ae0910b7ee3e097e063c8862c8e798d3e22bb",
+          "offset": 3840,
+          "pcm_sha256": "9204a4b45e73d387fd4f25bbfa7e5c298f7e45c9279ee1475958078bbb6737e8",
+          "pictures": 70,
+          "relative_picture_pts_sha256": "ddacf456adf912245ad9d6d9ee5fe9b01679f88e61e74d2b2b550ae29f671e40",
+          "role": "local_late",
+          "state": "local_shift",
+          "submitted_sha256": "50db9185e855626bca5567bb527d0d27f5a8bc4dfba6d90c9e74c6e76529dd04",
+          "windows": 39
+        },
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "50067bb7dad448211f3a498a29394a445a07bd47d4879d1f57a8bcc38b602ad6",
+            "soundtrack-shift-picture-034.png": "60faf53a38e548a132a6d8f6221d7209456fd86e19415596c45ff17ee72e4b5e",
+            "soundtrack-shift-submitted.wav": "6bb4b6b3ce775076dfc3b936689f5ab92fa825f94c20e946f6334d8265f1cdd5"
+          },
+          "authored": [
+            13440,
+            23680
+          ],
+          "delivery": "aac",
+          "earlier_sha256": "873893ef309f1a1367f68c7f226985950be693c17be0bdee4ac71e791c5fe35a",
+          "found": [
+            [
+              13440,
+              23680
+            ],
+            -3840
+          ],
+          "native_picture_rgb_sha256": "f168c99d71b0df926755319dc22ae0910b7ee3e097e063c8862c8e798d3e22bb",
+          "offset": -3840,
+          "pcm_sha256": "8f716f1e7e031758d50f2411f4070fe3c7109ed13051cd90fdc9856794184f46",
+          "pictures": 70,
+          "relative_picture_pts_sha256": "ddacf456adf912245ad9d6d9ee5fe9b01679f88e61e74d2b2b550ae29f671e40",
+          "role": "local_early",
+          "state": "local_shift",
+          "submitted_sha256": "2ad6d3d685e4ab8d45299f522ac177e1a798f0c6d10fb9a61421d4f2d35edcff",
+          "windows": 36
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "873893ef309f1a1367f68c7f226985950be693c17be0bdee4ac71e791c5fe35a",
+          "found": null,
+          "native_picture_rgb_sha256": "f168c99d71b0df926755319dc22ae0910b7ee3e097e063c8862c8e798d3e22bb",
+          "offset": null,
+          "pcm_sha256": "a9ceb80e7b4982abad16f54550c7cf0cb76d36b170223469aad8953432ad2515",
+          "pictures": 70,
+          "relative_picture_pts_sha256": "ddacf456adf912245ad9d6d9ee5fe9b01679f88e61e74d2b2b550ae29f671e40",
+          "role": "original",
+          "state": "no_local_shift",
+          "submitted_sha256": "873893ef309f1a1367f68c7f226985950be693c17be0bdee4ac71e791c5fe35a",
+          "windows": 41
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "873893ef309f1a1367f68c7f226985950be693c17be0bdee4ac71e791c5fe35a",
+          "found": null,
+          "native_picture_rgb_sha256": "f168c99d71b0df926755319dc22ae0910b7ee3e097e063c8862c8e798d3e22bb",
+          "offset": null,
+          "pcm_sha256": "7102528e314f186e899d1dbd8b8df33d08a85b70f48df3a9652947f1b66b1da4",
+          "pictures": 70,
+          "relative_picture_pts_sha256": "ddacf456adf912245ad9d6d9ee5fe9b01679f88e61e74d2b2b550ae29f671e40",
+          "role": "gain",
+          "state": "no_local_shift",
+          "submitted_sha256": "465019bb011e166d5cca38c62881b1a0b2477860b9c099ffb10cdb205d7f9fa4",
+          "windows": 34
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "873893ef309f1a1367f68c7f226985950be693c17be0bdee4ac71e791c5fe35a",
+          "found": null,
+          "native_picture_rgb_sha256": "f168c99d71b0df926755319dc22ae0910b7ee3e097e063c8862c8e798d3e22bb",
+          "offset": null,
+          "pcm_sha256": "1f386d654c410527229634f621e632d1bceee2cbdd517bd548f88c93f9205a3e",
+          "pictures": 70,
+          "relative_picture_pts_sha256": "ddacf456adf912245ad9d6d9ee5fe9b01679f88e61e74d2b2b550ae29f671e40",
+          "role": "noise_mix",
+          "state": "no_local_shift",
+          "submitted_sha256": "b01b2dc7e9d06fdb1396ae428db1480b56da3ee90f9543b701624494d7b3569d",
+          "windows": 37
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "873893ef309f1a1367f68c7f226985950be693c17be0bdee4ac71e791c5fe35a",
+          "found": null,
+          "native_picture_rgb_sha256": "f168c99d71b0df926755319dc22ae0910b7ee3e097e063c8862c8e798d3e22bb",
+          "offset": null,
+          "pcm_sha256": "2ddc5b738b4403617a020d683dacf13b3dc0ce63d357ae00397e48604e2d3305",
+          "pictures": 70,
+          "relative_picture_pts_sha256": "ddacf456adf912245ad9d6d9ee5fe9b01679f88e61e74d2b2b550ae29f671e40",
+          "role": "unrelated_insert",
+          "state": "no_local_shift",
+          "submitted_sha256": "61f5d668f086987824ab118034a49bfdd7f5018fe46b9b6860e4c626d5dc7221",
+          "windows": 24
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "873893ef309f1a1367f68c7f226985950be693c17be0bdee4ac71e791c5fe35a",
+          "found": null,
+          "native_picture_rgb_sha256": "f168c99d71b0df926755319dc22ae0910b7ee3e097e063c8862c8e798d3e22bb",
+          "offset": null,
+          "pcm_sha256": "f84d6437282d70191c722820c1d82c2d8bd3f49114ee6e74307a0a9cd6bd1dae",
+          "pictures": 70,
+          "relative_picture_pts_sha256": "ddacf456adf912245ad9d6d9ee5fe9b01679f88e61e74d2b2b550ae29f671e40",
+          "role": "global_shift",
+          "state": "no_local_shift",
+          "submitted_sha256": "59a2d018a9499f71910e1fb676d3498c1565654c5806e72cf34c0cee28bb0036",
+          "windows": 41
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "873893ef309f1a1367f68c7f226985950be693c17be0bdee4ac71e791c5fe35a",
+          "found": null,
+          "native_picture_rgb_sha256": "f168c99d71b0df926755319dc22ae0910b7ee3e097e063c8862c8e798d3e22bb",
+          "offset": null,
+          "pcm_sha256": "17b3795e5a02b30844ca0f119e03cdebe6dd6f268f5cab99351582ec44da5d5e",
+          "pictures": 70,
+          "relative_picture_pts_sha256": "ddacf456adf912245ad9d6d9ee5fe9b01679f88e61e74d2b2b550ae29f671e40",
+          "role": "short_offset",
+          "state": "no_local_shift",
+          "submitted_sha256": "48ffeef27047a1cd2d02dafb0e0c5d286ed617805c388214764e82a5029a0bb1",
+          "windows": 38
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "873893ef309f1a1367f68c7f226985950be693c17be0bdee4ac71e791c5fe35a",
+          "found": null,
+          "native_picture_rgb_sha256": "00f9d59310a01970432218de63f133cc2ca65b57215523c026665844b00b73cf",
+          "offset": null,
+          "pcm_sha256": "9204a4b45e73d387fd4f25bbfa7e5c298f7e45c9279ee1475958078bbb6737e8",
+          "pictures": 70,
+          "relative_picture_pts_sha256": "ddacf456adf912245ad9d6d9ee5fe9b01679f88e61e74d2b2b550ae29f671e40",
+          "role": "picture_change",
+          "state": "unassessed",
+          "submitted_sha256": "fd9de3b9141ecac711a95617924a96b3a6d38a1c50bdb5b0a57784eb8cbf2a07",
+          "windows": 0
+        }
+      ],
+      "ordinal": 6
+    },
+    {
+      "cases": [
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "6c66743e79b0c38cf80fa4f968fd930151aa830c80faf92221006b68fc5f9868",
+            "soundtrack-shift-picture-042.png": "dc1f08e58a9be5f2343bd4a138d2496584518ab57a4ddba034e16e39a1d53351",
+            "soundtrack-shift-submitted.wav": "1833309806c4672deb007f5b2c3e9d183e9b055b407598da1878792c6eee43d8"
+          },
+          "authored": [
+            17280,
+            27520
+          ],
+          "delivery": "pcm",
+          "earlier_sha256": "0af81f2add039e6bac76d5c3cf8637e694ed6704964656d1289c47e482d85b2c",
+          "found": [
+            [
+              17920,
+              27520
+            ],
+            4480
+          ],
+          "native_picture_rgb_sha256": "5fc7d18980899f68ed560bc08baa6f5a24ab8df48a82f63859c46242812a2ea6",
+          "offset": 4480,
+          "pcm_sha256": "ea441d71b4f91e5fa6e68bb4d6c1428d9a2f124b18206f77b4594292e91b24ba",
+          "pictures": 83,
+          "relative_picture_pts_sha256": "1aafd298b80411495944bcb24b6894c1909005397935e7c9ef73afec79ef9ccb",
+          "role": "local_late",
+          "state": "local_shift",
+          "submitted_sha256": "deafaa8c0afbdd52cea974a9cf31db711b7ccb347b5207661eddadb3efb2a9dd",
+          "windows": 46
+        },
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "07a5776b65b64e3b86edcbdaa19a530ec35d227c79d9c09e3bcc0b238a2d3b63",
+            "soundtrack-shift-picture-042.png": "dc1f08e58a9be5f2343bd4a138d2496584518ab57a4ddba034e16e39a1d53351",
+            "soundtrack-shift-submitted.wav": "62235a00d2721eacb4d21962aa2967a2c0dd55195b1056c7349105bccbd69239"
+          },
+          "authored": [
+            17280,
+            27520
+          ],
+          "delivery": "pcm",
+          "earlier_sha256": "0af81f2add039e6bac76d5c3cf8637e694ed6704964656d1289c47e482d85b2c",
+          "found": [
+            [
+              17920,
+              27520
+            ],
+            -4480
+          ],
+          "native_picture_rgb_sha256": "5fc7d18980899f68ed560bc08baa6f5a24ab8df48a82f63859c46242812a2ea6",
+          "offset": -4480,
+          "pcm_sha256": "8b9264ee8521230979e63dc3a8ea1c5eb8e6440dcdeb708043e25d9c8d6d8dd1",
+          "pictures": 83,
+          "relative_picture_pts_sha256": "1aafd298b80411495944bcb24b6894c1909005397935e7c9ef73afec79ef9ccb",
+          "role": "local_early",
+          "state": "local_shift",
+          "submitted_sha256": "00e4dbb143059108095e5272deafcf2e1b73f4ebb479c3cd6aa5df70f4cd2aa1",
+          "windows": 45
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "0af81f2add039e6bac76d5c3cf8637e694ed6704964656d1289c47e482d85b2c",
+          "found": null,
+          "native_picture_rgb_sha256": "5fc7d18980899f68ed560bc08baa6f5a24ab8df48a82f63859c46242812a2ea6",
+          "offset": null,
+          "pcm_sha256": "09684bdacc41b1dd8c2f40bd1ea3ddafd7637aefcd1947cfd8cf62a9d1fa05d0",
+          "pictures": 83,
+          "relative_picture_pts_sha256": "1aafd298b80411495944bcb24b6894c1909005397935e7c9ef73afec79ef9ccb",
+          "role": "original",
+          "state": "no_local_shift",
+          "submitted_sha256": "a69dc2a84ebd57912340fbdffe3a2fc6760de728509d8b67f2546f4544d164f6",
+          "windows": 50
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "0af81f2add039e6bac76d5c3cf8637e694ed6704964656d1289c47e482d85b2c",
+          "found": null,
+          "native_picture_rgb_sha256": "5fc7d18980899f68ed560bc08baa6f5a24ab8df48a82f63859c46242812a2ea6",
+          "offset": null,
+          "pcm_sha256": "a9a363e546e781776c9cc525f2d8fd4fbeaf1346023347447fea9cc1189683c8",
+          "pictures": 83,
+          "relative_picture_pts_sha256": "1aafd298b80411495944bcb24b6894c1909005397935e7c9ef73afec79ef9ccb",
+          "role": "gain",
+          "state": "no_local_shift",
+          "submitted_sha256": "a027297b7953f71858ca9e4b88692fac55ca33f51b569c9d35b8fe1f52832b9a",
+          "windows": 50
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "0af81f2add039e6bac76d5c3cf8637e694ed6704964656d1289c47e482d85b2c",
+          "found": null,
+          "native_picture_rgb_sha256": "5fc7d18980899f68ed560bc08baa6f5a24ab8df48a82f63859c46242812a2ea6",
+          "offset": null,
+          "pcm_sha256": "d11a78336e2b544342969fdf7b0b5533da359c52d077a1f180bd45504baecc9c",
+          "pictures": 83,
+          "relative_picture_pts_sha256": "1aafd298b80411495944bcb24b6894c1909005397935e7c9ef73afec79ef9ccb",
+          "role": "noise_mix",
+          "state": "no_local_shift",
+          "submitted_sha256": "6d81ed61e96d84cac87b321b4c09283667788cd20bdcd4a1cdad564b91bba24a",
+          "windows": 49
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "0af81f2add039e6bac76d5c3cf8637e694ed6704964656d1289c47e482d85b2c",
+          "found": null,
+          "native_picture_rgb_sha256": "5fc7d18980899f68ed560bc08baa6f5a24ab8df48a82f63859c46242812a2ea6",
+          "offset": null,
+          "pcm_sha256": "592dcdbe4e97dad178bca9b4615d4be8eeabb005109dfb80821a23f2ee88a7a3",
+          "pictures": 83,
+          "relative_picture_pts_sha256": "1aafd298b80411495944bcb24b6894c1909005397935e7c9ef73afec79ef9ccb",
+          "role": "unrelated_insert",
+          "state": "no_local_shift",
+          "submitted_sha256": "e835877168c851019ec30132dee0cae3df5778e28277722f8c01f55fe0a4571a",
+          "windows": 35
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "0af81f2add039e6bac76d5c3cf8637e694ed6704964656d1289c47e482d85b2c",
+          "found": null,
+          "native_picture_rgb_sha256": "5fc7d18980899f68ed560bc08baa6f5a24ab8df48a82f63859c46242812a2ea6",
+          "offset": null,
+          "pcm_sha256": "6beebcedcf58465dfa602bf9ec8e53757f6f684369c492d55fc6eb1f586a1887",
+          "pictures": 83,
+          "relative_picture_pts_sha256": "1aafd298b80411495944bcb24b6894c1909005397935e7c9ef73afec79ef9ccb",
+          "role": "global_shift",
+          "state": "no_local_shift",
+          "submitted_sha256": "ad277f0b6ee6ce528e51d74dfa388ffa72affdf53f4057ee017adaef22de8966",
+          "windows": 50
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "0af81f2add039e6bac76d5c3cf8637e694ed6704964656d1289c47e482d85b2c",
+          "found": null,
+          "native_picture_rgb_sha256": "5fc7d18980899f68ed560bc08baa6f5a24ab8df48a82f63859c46242812a2ea6",
+          "offset": null,
+          "pcm_sha256": "e58f28c107520146d4e6937fe24a9ca85d216d5fca47ee797235207f29da09e1",
+          "pictures": 83,
+          "relative_picture_pts_sha256": "1aafd298b80411495944bcb24b6894c1909005397935e7c9ef73afec79ef9ccb",
+          "role": "short_offset",
+          "state": "no_local_shift",
+          "submitted_sha256": "09a0f2e83d1868ae0c633ea37baa204ea50a3dc79d1c51fd9e7dac710da7f25e",
+          "windows": 46
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "0af81f2add039e6bac76d5c3cf8637e694ed6704964656d1289c47e482d85b2c",
+          "found": null,
+          "native_picture_rgb_sha256": "5faf5bb294ed6e04b099786961d151277c0d09a3cf6cff9e5a3eb579d1889817",
+          "offset": null,
+          "pcm_sha256": "ea441d71b4f91e5fa6e68bb4d6c1428d9a2f124b18206f77b4594292e91b24ba",
+          "pictures": 83,
+          "relative_picture_pts_sha256": "1aafd298b80411495944bcb24b6894c1909005397935e7c9ef73afec79ef9ccb",
+          "role": "picture_change",
+          "state": "unassessed",
+          "submitted_sha256": "0dbad0ab689edc3259efd136967359cc7e482e2bf45152b38b5cef9081dbfc0a",
+          "windows": 0
+        },
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "66f9b52dad274a2716a38b093456501c03daa653c78a1476c362bcdd9ae1cc73",
+            "soundtrack-shift-picture-042.png": "dc1f08e58a9be5f2343bd4a138d2496584518ab57a4ddba034e16e39a1d53351",
+            "soundtrack-shift-submitted.wav": "776c51048be04f14a7a63618a61c49096076d3b10b4a17d9e16cce964bed63ec"
+          },
+          "authored": [
+            17280,
+            27520
+          ],
+          "delivery": "aac",
+          "earlier_sha256": "370458ef9fac493acedd075a6f37483a54657ff11411a1930aee21d9298670f3",
+          "found": [
+            [
+              17920,
+              27520
+            ],
+            4480
+          ],
+          "native_picture_rgb_sha256": "5fc7d18980899f68ed560bc08baa6f5a24ab8df48a82f63859c46242812a2ea6",
+          "offset": 4480,
+          "pcm_sha256": "1ea7070bffbbb491435608bdc05ca8368d6013867c9889cdf3da54d2b1754b61",
+          "pictures": 83,
+          "relative_picture_pts_sha256": "1aafd298b80411495944bcb24b6894c1909005397935e7c9ef73afec79ef9ccb",
+          "role": "local_late",
+          "state": "local_shift",
+          "submitted_sha256": "fb7263cd1da3a5ffc90b641fa285ba4397807677a3bcc2ab66e55c9595da72c2",
+          "windows": 45
+        },
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "caf607b09142e25f7c4ed6f98c23008373c1f81e122ca67c0081a51419a58fc1",
+            "soundtrack-shift-picture-042.png": "dc1f08e58a9be5f2343bd4a138d2496584518ab57a4ddba034e16e39a1d53351",
+            "soundtrack-shift-submitted.wav": "dadee50e64e4d639a759c5e9b91e1b5f06db3e241c1c138c01f388c815fcf4f6"
+          },
+          "authored": [
+            17280,
+            27520
+          ],
+          "delivery": "aac",
+          "earlier_sha256": "370458ef9fac493acedd075a6f37483a54657ff11411a1930aee21d9298670f3",
+          "found": [
+            [
+              17920,
+              27520
+            ],
+            -4480
+          ],
+          "native_picture_rgb_sha256": "5fc7d18980899f68ed560bc08baa6f5a24ab8df48a82f63859c46242812a2ea6",
+          "offset": -4480,
+          "pcm_sha256": "66c9086bc96814482b42ce28b85d8ffb626659708ffb0eee42f2d13a4fd9e4b7",
+          "pictures": 83,
+          "relative_picture_pts_sha256": "1aafd298b80411495944bcb24b6894c1909005397935e7c9ef73afec79ef9ccb",
+          "role": "local_early",
+          "state": "local_shift",
+          "submitted_sha256": "fa7e2c75000ed889fcdfb978543bb1f6abe6f62e7ffa619fcaa3d48f04b4153d",
+          "windows": 44
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "370458ef9fac493acedd075a6f37483a54657ff11411a1930aee21d9298670f3",
+          "found": null,
+          "native_picture_rgb_sha256": "5fc7d18980899f68ed560bc08baa6f5a24ab8df48a82f63859c46242812a2ea6",
+          "offset": null,
+          "pcm_sha256": "4a418597cf48fed12402d59fb35dc2d22a356005f1f8c48c53e8d9056e9289e2",
+          "pictures": 83,
+          "relative_picture_pts_sha256": "1aafd298b80411495944bcb24b6894c1909005397935e7c9ef73afec79ef9ccb",
+          "role": "original",
+          "state": "no_local_shift",
+          "submitted_sha256": "370458ef9fac493acedd075a6f37483a54657ff11411a1930aee21d9298670f3",
+          "windows": 49
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "370458ef9fac493acedd075a6f37483a54657ff11411a1930aee21d9298670f3",
+          "found": null,
+          "native_picture_rgb_sha256": "5fc7d18980899f68ed560bc08baa6f5a24ab8df48a82f63859c46242812a2ea6",
+          "offset": null,
+          "pcm_sha256": "0454c884e638c4d5d9ea82630e4694377248a1cf1b4c1bba71679f8e64eb8950",
+          "pictures": 83,
+          "relative_picture_pts_sha256": "1aafd298b80411495944bcb24b6894c1909005397935e7c9ef73afec79ef9ccb",
+          "role": "gain",
+          "state": "no_local_shift",
+          "submitted_sha256": "ff0ff33c01fa7f34d6729b2015ee8b5fd1d2652dabc78d07abbcf290c722f2fe",
+          "windows": 49
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "370458ef9fac493acedd075a6f37483a54657ff11411a1930aee21d9298670f3",
+          "found": null,
+          "native_picture_rgb_sha256": "5fc7d18980899f68ed560bc08baa6f5a24ab8df48a82f63859c46242812a2ea6",
+          "offset": null,
+          "pcm_sha256": "74e69291e0508a20ee61d0ca8391439f9575fcc56d58a9f1f28e6d77073ef964",
+          "pictures": 83,
+          "relative_picture_pts_sha256": "1aafd298b80411495944bcb24b6894c1909005397935e7c9ef73afec79ef9ccb",
+          "role": "noise_mix",
+          "state": "no_local_shift",
+          "submitted_sha256": "3291f71e1265528980ee17484ae4917819d4ba2df36d3260157b1b68ef66274e",
+          "windows": 48
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "370458ef9fac493acedd075a6f37483a54657ff11411a1930aee21d9298670f3",
+          "found": null,
+          "native_picture_rgb_sha256": "5fc7d18980899f68ed560bc08baa6f5a24ab8df48a82f63859c46242812a2ea6",
+          "offset": null,
+          "pcm_sha256": "c45ea3dbdd94e75041b0a0f510a7545bf17a8bf465839dc533a01b18587fc85e",
+          "pictures": 83,
+          "relative_picture_pts_sha256": "1aafd298b80411495944bcb24b6894c1909005397935e7c9ef73afec79ef9ccb",
+          "role": "unrelated_insert",
+          "state": "no_local_shift",
+          "submitted_sha256": "9a6e9ce185df9732ef79395907d5084b802c99d9eab32bcf9365964f5847b52b",
+          "windows": 34
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "370458ef9fac493acedd075a6f37483a54657ff11411a1930aee21d9298670f3",
+          "found": null,
+          "native_picture_rgb_sha256": "5fc7d18980899f68ed560bc08baa6f5a24ab8df48a82f63859c46242812a2ea6",
+          "offset": null,
+          "pcm_sha256": "4dbea3a5994f034c2954d2c57dea502063233e7ef1d656c6a77ed55d729858b7",
+          "pictures": 83,
+          "relative_picture_pts_sha256": "1aafd298b80411495944bcb24b6894c1909005397935e7c9ef73afec79ef9ccb",
+          "role": "global_shift",
+          "state": "no_local_shift",
+          "submitted_sha256": "8ab36b4259546d33048348da53ae9715686ae18522652c85daf706794ba5c2c3",
+          "windows": 49
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "370458ef9fac493acedd075a6f37483a54657ff11411a1930aee21d9298670f3",
+          "found": null,
+          "native_picture_rgb_sha256": "5fc7d18980899f68ed560bc08baa6f5a24ab8df48a82f63859c46242812a2ea6",
+          "offset": null,
+          "pcm_sha256": "a358d058c64e581e2591ede22eff323627075fe96531a0f6f2dec7335f18300d",
+          "pictures": 83,
+          "relative_picture_pts_sha256": "1aafd298b80411495944bcb24b6894c1909005397935e7c9ef73afec79ef9ccb",
+          "role": "short_offset",
+          "state": "no_local_shift",
+          "submitted_sha256": "47197a9dc40b4b19bea05af95e25819658beb7c07b12dfdec4930c0e8a67321c",
+          "windows": 45
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "370458ef9fac493acedd075a6f37483a54657ff11411a1930aee21d9298670f3",
+          "found": null,
+          "native_picture_rgb_sha256": "5faf5bb294ed6e04b099786961d151277c0d09a3cf6cff9e5a3eb579d1889817",
+          "offset": null,
+          "pcm_sha256": "1ea7070bffbbb491435608bdc05ca8368d6013867c9889cdf3da54d2b1754b61",
+          "pictures": 83,
+          "relative_picture_pts_sha256": "1aafd298b80411495944bcb24b6894c1909005397935e7c9ef73afec79ef9ccb",
+          "role": "picture_change",
+          "state": "unassessed",
+          "submitted_sha256": "173bad92f088a8989555f5d1cdfe2347c2c19d97083b0db101e634dad17c7431",
+          "windows": 0
+        }
+      ],
+      "ordinal": 7
+    },
+    {
+      "cases": [
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "a0db5e5e9698985bea920290c1ea43ca49a4107b335b0296b178f4ae0aa7a1da",
+            "soundtrack-shift-picture-028.png": "bbe3a70be2d41113685cdf1ef00081139a169a05e5380b916a74343792bb5d0e",
+            "soundtrack-shift-submitted.wav": "4b00f9beb37580013cf2b4c2efca520c4e2aa221c908bcd05ad106d6b15d1b22"
+          },
+          "authored": [
+            9600,
+            19840
+          ],
+          "delivery": "pcm",
+          "earlier_sha256": "c61aa99530a5a33125cc6e69c35553fde00ae350e1a6ea53cdb5d780c370d8d5",
+          "found": [
+            [
+              10880,
+              19840
+            ],
+            2560
+          ],
+          "native_picture_rgb_sha256": "98a341242a508bbf8bfad56a12a3cd6a06937d174526412d72a0492084e63e26",
+          "offset": 2560,
+          "pcm_sha256": "0af2d50d1307e98d2b49a00c35bd2295e7134ec005f00e89e8054f246a50517d",
+          "pictures": 55,
+          "relative_picture_pts_sha256": "9464c22b9d46e561546d8a97527c2e983d2eff4061dcc13fbbff2dbabdb9a2d9",
+          "role": "local_late",
+          "state": "local_shift",
+          "submitted_sha256": "50dfe9bbb4adea1454bba610045784716822dbeaf9924e37e7c4808e997f15a1",
+          "windows": 34
+        },
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "ee3de29d5e13c932e3b4bb97f0e371e433387ad62ea80f07c165153a0c4acfb6",
+            "soundtrack-shift-picture-028.png": "bbe3a70be2d41113685cdf1ef00081139a169a05e5380b916a74343792bb5d0e",
+            "soundtrack-shift-submitted.wav": "b382cb7a573bf82492298dae3d5abfc592588935530628c9acf89aa12b3608ea"
+          },
+          "authored": [
+            9600,
+            19840
+          ],
+          "delivery": "pcm",
+          "earlier_sha256": "c61aa99530a5a33125cc6e69c35553fde00ae350e1a6ea53cdb5d780c370d8d5",
+          "found": [
+            [
+              10240,
+              19840
+            ],
+            -2560
+          ],
+          "native_picture_rgb_sha256": "98a341242a508bbf8bfad56a12a3cd6a06937d174526412d72a0492084e63e26",
+          "offset": -2560,
+          "pcm_sha256": "689f0659316829e6214cc3101715ccc2003dfcc08fbe21f6e78d3af435737a86",
+          "pictures": 55,
+          "relative_picture_pts_sha256": "9464c22b9d46e561546d8a97527c2e983d2eff4061dcc13fbbff2dbabdb9a2d9",
+          "role": "local_early",
+          "state": "local_shift",
+          "submitted_sha256": "1f1bb2fe1201c6952fc7c4b24ccb798764c7e93c22abae256bf30bb993ca10d4",
+          "windows": 32
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "c61aa99530a5a33125cc6e69c35553fde00ae350e1a6ea53cdb5d780c370d8d5",
+          "found": null,
+          "native_picture_rgb_sha256": "98a341242a508bbf8bfad56a12a3cd6a06937d174526412d72a0492084e63e26",
+          "offset": null,
+          "pcm_sha256": "147b4add1d1ef5e0bac999f1d18780c5fdcd2ff08b420a0e0d566b0f86edceac",
+          "pictures": 55,
+          "relative_picture_pts_sha256": "9464c22b9d46e561546d8a97527c2e983d2eff4061dcc13fbbff2dbabdb9a2d9",
+          "role": "original",
+          "state": "no_local_shift",
+          "submitted_sha256": "db69907a2d73823488d424b4150cdd16e9f127a2c2cf525ecd91aa0b6a2a957c",
+          "windows": 37
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "c61aa99530a5a33125cc6e69c35553fde00ae350e1a6ea53cdb5d780c370d8d5",
+          "found": null,
+          "native_picture_rgb_sha256": "98a341242a508bbf8bfad56a12a3cd6a06937d174526412d72a0492084e63e26",
+          "offset": null,
+          "pcm_sha256": "964002af96effdc6ea39088a502dc9a2da0bf149f7b54ff99393d8c3ae4433fb",
+          "pictures": 55,
+          "relative_picture_pts_sha256": "9464c22b9d46e561546d8a97527c2e983d2eff4061dcc13fbbff2dbabdb9a2d9",
+          "role": "gain",
+          "state": "no_local_shift",
+          "submitted_sha256": "99751210c12f4ac9c162f58df5b633ed470c047bd74ce7eec7f742242d0a77e7",
+          "windows": 36
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "c61aa99530a5a33125cc6e69c35553fde00ae350e1a6ea53cdb5d780c370d8d5",
+          "found": null,
+          "native_picture_rgb_sha256": "98a341242a508bbf8bfad56a12a3cd6a06937d174526412d72a0492084e63e26",
+          "offset": null,
+          "pcm_sha256": "c03ad2b0e5c77121c6309a7382f329df07c724aad18a7a4684258d9207104ed2",
+          "pictures": 55,
+          "relative_picture_pts_sha256": "9464c22b9d46e561546d8a97527c2e983d2eff4061dcc13fbbff2dbabdb9a2d9",
+          "role": "noise_mix",
+          "state": "no_local_shift",
+          "submitted_sha256": "2f312a69a0e160b4885c75ba10f165c69be4b0d42d049d31fec969a24313af6f",
+          "windows": 36
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "c61aa99530a5a33125cc6e69c35553fde00ae350e1a6ea53cdb5d780c370d8d5",
+          "found": null,
+          "native_picture_rgb_sha256": "98a341242a508bbf8bfad56a12a3cd6a06937d174526412d72a0492084e63e26",
+          "offset": null,
+          "pcm_sha256": "62ee3f4435a3e343ad3434fd4ec57e465505e117a272a544ed4af48288a60f28",
+          "pictures": 55,
+          "relative_picture_pts_sha256": "9464c22b9d46e561546d8a97527c2e983d2eff4061dcc13fbbff2dbabdb9a2d9",
+          "role": "unrelated_insert",
+          "state": "no_local_shift",
+          "submitted_sha256": "c653627ed11a4c0c3a1261d431924c65a6892e9d5830727328e2f090cbb0da73",
+          "windows": 20
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "c61aa99530a5a33125cc6e69c35553fde00ae350e1a6ea53cdb5d780c370d8d5",
+          "found": null,
+          "native_picture_rgb_sha256": "98a341242a508bbf8bfad56a12a3cd6a06937d174526412d72a0492084e63e26",
+          "offset": null,
+          "pcm_sha256": "9d0642dd9063fc1c33a9e4c9cbbd0732fb41c1537500afe24e77146955c605f5",
+          "pictures": 55,
+          "relative_picture_pts_sha256": "9464c22b9d46e561546d8a97527c2e983d2eff4061dcc13fbbff2dbabdb9a2d9",
+          "role": "global_shift",
+          "state": "no_local_shift",
+          "submitted_sha256": "0f007efe1e1dc45a4dd87a6f9554b68174d4dc63e751a6f1ec3a89cad93c1d59",
+          "windows": 37
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "c61aa99530a5a33125cc6e69c35553fde00ae350e1a6ea53cdb5d780c370d8d5",
+          "found": null,
+          "native_picture_rgb_sha256": "98a341242a508bbf8bfad56a12a3cd6a06937d174526412d72a0492084e63e26",
+          "offset": null,
+          "pcm_sha256": "11a3ec3b69dacbd156bcec9a7fa58af843ae7c29287d3dd2f6dc0fa3f2d0458e",
+          "pictures": 55,
+          "relative_picture_pts_sha256": "9464c22b9d46e561546d8a97527c2e983d2eff4061dcc13fbbff2dbabdb9a2d9",
+          "role": "short_offset",
+          "state": "no_local_shift",
+          "submitted_sha256": "aeb776889e617c1bac3a4fe3962a9368b3a8337a01c3f64520f1c24615a88b50",
+          "windows": 31
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "c61aa99530a5a33125cc6e69c35553fde00ae350e1a6ea53cdb5d780c370d8d5",
+          "found": null,
+          "native_picture_rgb_sha256": "41a2f0eec65b2c7dacd97c83487c99725fee41d7cc7e4d0534e491121ea8f1fe",
+          "offset": null,
+          "pcm_sha256": "0af2d50d1307e98d2b49a00c35bd2295e7134ec005f00e89e8054f246a50517d",
+          "pictures": 55,
+          "relative_picture_pts_sha256": "9464c22b9d46e561546d8a97527c2e983d2eff4061dcc13fbbff2dbabdb9a2d9",
+          "role": "picture_change",
+          "state": "unassessed",
+          "submitted_sha256": "fa39ea9db0d111e796b180a0cf510ee9be4a0cb76e8d787b4cbbff2e7cfcc7cf",
+          "windows": 0
+        },
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "0eb5fd1db6e6421520817ae17e987368ed7bc40e47c96b590b1f06a941f0620e",
+            "soundtrack-shift-picture-028.png": "bbe3a70be2d41113685cdf1ef00081139a169a05e5380b916a74343792bb5d0e",
+            "soundtrack-shift-submitted.wav": "4e1b68ba31f17e4b2540265503dfb97b0dba08831ed145f01cac7f27bc8c680c"
+          },
+          "authored": [
+            9600,
+            19840
+          ],
+          "delivery": "aac",
+          "earlier_sha256": "0106a43e69b55631285ec9ddeae99fac681576f7d5f91098757c3e7d45fa4e77",
+          "found": [
+            [
+              10880,
+              19840
+            ],
+            2560
+          ],
+          "native_picture_rgb_sha256": "98a341242a508bbf8bfad56a12a3cd6a06937d174526412d72a0492084e63e26",
+          "offset": 2560,
+          "pcm_sha256": "33dd98e509cd74eef5b1b2865448a2e5272e7fd9c021227b6c710bf9b7de4dab",
+          "pictures": 55,
+          "relative_picture_pts_sha256": "9464c22b9d46e561546d8a97527c2e983d2eff4061dcc13fbbff2dbabdb9a2d9",
+          "role": "local_late",
+          "state": "local_shift",
+          "submitted_sha256": "f373b0209ecdc17ff9bb04bf45014015a7042edbed18f9a527c13ee2cca31bac",
+          "windows": 34
+        },
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "cb499b2b5437b582a6ddafed72b4d5db0fa81ff55b9caa9ee2f3874c8b78c7f4",
+            "soundtrack-shift-picture-028.png": "bbe3a70be2d41113685cdf1ef00081139a169a05e5380b916a74343792bb5d0e",
+            "soundtrack-shift-submitted.wav": "5236ddc02546c8b13b94a529b89a6c6720693bd3659c5adc154f39b73e01018e"
+          },
+          "authored": [
+            9600,
+            19840
+          ],
+          "delivery": "aac",
+          "earlier_sha256": "0106a43e69b55631285ec9ddeae99fac681576f7d5f91098757c3e7d45fa4e77",
+          "found": [
+            [
+              10240,
+              19840
+            ],
+            -2560
+          ],
+          "native_picture_rgb_sha256": "98a341242a508bbf8bfad56a12a3cd6a06937d174526412d72a0492084e63e26",
+          "offset": -2560,
+          "pcm_sha256": "ffadfeef9c76e5ec8eeebc91d1abc98baabcaf75f1fe877684ecbc1e97c63a13",
+          "pictures": 55,
+          "relative_picture_pts_sha256": "9464c22b9d46e561546d8a97527c2e983d2eff4061dcc13fbbff2dbabdb9a2d9",
+          "role": "local_early",
+          "state": "local_shift",
+          "submitted_sha256": "8804660ba76e0fc6f796479239e125ed3140dfced2dcd35611398d02362d8d43",
+          "windows": 32
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "0106a43e69b55631285ec9ddeae99fac681576f7d5f91098757c3e7d45fa4e77",
+          "found": null,
+          "native_picture_rgb_sha256": "98a341242a508bbf8bfad56a12a3cd6a06937d174526412d72a0492084e63e26",
+          "offset": null,
+          "pcm_sha256": "1e419a0f24266ce9ec26ab4dc65366c02ce4b5a7fbe804b668f1f6b576395dbb",
+          "pictures": 55,
+          "relative_picture_pts_sha256": "9464c22b9d46e561546d8a97527c2e983d2eff4061dcc13fbbff2dbabdb9a2d9",
+          "role": "original",
+          "state": "no_local_shift",
+          "submitted_sha256": "0106a43e69b55631285ec9ddeae99fac681576f7d5f91098757c3e7d45fa4e77",
+          "windows": 37
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "0106a43e69b55631285ec9ddeae99fac681576f7d5f91098757c3e7d45fa4e77",
+          "found": null,
+          "native_picture_rgb_sha256": "98a341242a508bbf8bfad56a12a3cd6a06937d174526412d72a0492084e63e26",
+          "offset": null,
+          "pcm_sha256": "d748faa8005ebcc08ad2c360db8a469b424587a898ab1cc94699cfa326c41034",
+          "pictures": 55,
+          "relative_picture_pts_sha256": "9464c22b9d46e561546d8a97527c2e983d2eff4061dcc13fbbff2dbabdb9a2d9",
+          "role": "gain",
+          "state": "no_local_shift",
+          "submitted_sha256": "7636123da4ac22709948098ca15858a830bd58b4c8ec7e74ad00f3763c828fba",
+          "windows": 36
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "0106a43e69b55631285ec9ddeae99fac681576f7d5f91098757c3e7d45fa4e77",
+          "found": null,
+          "native_picture_rgb_sha256": "98a341242a508bbf8bfad56a12a3cd6a06937d174526412d72a0492084e63e26",
+          "offset": null,
+          "pcm_sha256": "e1a13c2e535dbb5bfc4b4f590166c2aae354f5364c436330637a82b1794a6271",
+          "pictures": 55,
+          "relative_picture_pts_sha256": "9464c22b9d46e561546d8a97527c2e983d2eff4061dcc13fbbff2dbabdb9a2d9",
+          "role": "noise_mix",
+          "state": "no_local_shift",
+          "submitted_sha256": "b53cc228fa9bcb89954fde6f135982d01d0f884161f96f963c9f89dd850021ff",
+          "windows": 35
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "0106a43e69b55631285ec9ddeae99fac681576f7d5f91098757c3e7d45fa4e77",
+          "found": null,
+          "native_picture_rgb_sha256": "98a341242a508bbf8bfad56a12a3cd6a06937d174526412d72a0492084e63e26",
+          "offset": null,
+          "pcm_sha256": "4a9d68a1ef95dfcd3892ddb908ce17404510a1c3de6b4f0dda8ec171179b89f0",
+          "pictures": 55,
+          "relative_picture_pts_sha256": "9464c22b9d46e561546d8a97527c2e983d2eff4061dcc13fbbff2dbabdb9a2d9",
+          "role": "unrelated_insert",
+          "state": "no_local_shift",
+          "submitted_sha256": "c022e4ffd7c6e1ad86fc4bf0c275aae8e3ea7053cc181f2f275859b82e010c16",
+          "windows": 20
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "0106a43e69b55631285ec9ddeae99fac681576f7d5f91098757c3e7d45fa4e77",
+          "found": null,
+          "native_picture_rgb_sha256": "98a341242a508bbf8bfad56a12a3cd6a06937d174526412d72a0492084e63e26",
+          "offset": null,
+          "pcm_sha256": "0b406d75ea9466ff7d516ac1ad0347f7cdec83d267dbab69cce59bbbb8260219",
+          "pictures": 55,
+          "relative_picture_pts_sha256": "9464c22b9d46e561546d8a97527c2e983d2eff4061dcc13fbbff2dbabdb9a2d9",
+          "role": "global_shift",
+          "state": "no_local_shift",
+          "submitted_sha256": "5fb58ac321e0b11455aab572e32b2853648e2af74dc3bae2868144ef6070b5ba",
+          "windows": 37
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "0106a43e69b55631285ec9ddeae99fac681576f7d5f91098757c3e7d45fa4e77",
+          "found": null,
+          "native_picture_rgb_sha256": "98a341242a508bbf8bfad56a12a3cd6a06937d174526412d72a0492084e63e26",
+          "offset": null,
+          "pcm_sha256": "23d6790aec400b80c8e98d3fab0fe05af80b1117c4c3f47a5dffcff5ce43195b",
+          "pictures": 55,
+          "relative_picture_pts_sha256": "9464c22b9d46e561546d8a97527c2e983d2eff4061dcc13fbbff2dbabdb9a2d9",
+          "role": "short_offset",
+          "state": "no_local_shift",
+          "submitted_sha256": "b6fb88cc7d4fb784b9c00e6e41e077a96644119ab2c62be4065a752f81d0a7ee",
+          "windows": 31
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "0106a43e69b55631285ec9ddeae99fac681576f7d5f91098757c3e7d45fa4e77",
+          "found": null,
+          "native_picture_rgb_sha256": "41a2f0eec65b2c7dacd97c83487c99725fee41d7cc7e4d0534e491121ea8f1fe",
+          "offset": null,
+          "pcm_sha256": "33dd98e509cd74eef5b1b2865448a2e5272e7fd9c021227b6c710bf9b7de4dab",
+          "pictures": 55,
+          "relative_picture_pts_sha256": "9464c22b9d46e561546d8a97527c2e983d2eff4061dcc13fbbff2dbabdb9a2d9",
+          "role": "picture_change",
+          "state": "unassessed",
+          "submitted_sha256": "2b830ca15e15886dfdcff19078a265efd5d70e799309f54c170401c5fb920ea4",
+          "windows": 0
+        }
+      ],
+      "ordinal": 8
+    },
+    {
+      "cases": [
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "92599b08b5c7354f6e6d49ec763b574916247d10f1cdccd619cb6a4ecdc16a76",
+            "soundtrack-shift-picture-034.png": "a4b081e36c5eadf0be019a37ba0ba7dbfd183a064b5234366e7a34817ed2c587",
+            "soundtrack-shift-submitted.wav": "68d9fba5a438449763c7e8983f1ec35d258222425694f188f81fb2e29e03de7f"
+          },
+          "authored": [
+            12800,
+            23040
+          ],
+          "delivery": "pcm",
+          "earlier_sha256": "b4fcd025d79629aa4a32e44425e059190ec97bf114dd7ea331e7492719701a08",
+          "found": [
+            [
+              14080,
+              23040
+            ],
+            3200
+          ],
+          "native_picture_rgb_sha256": "e25175f8de0265c2f1f68910be9f556359992364bb2cab9d42a2aa1b28f0d3f7",
+          "offset": 3200,
+          "pcm_sha256": "427c81a3107a9184038a4ad846519a8490c65bc4849604ff3ce01869fbc53705",
+          "pictures": 66,
+          "relative_picture_pts_sha256": "fd71039ac85df1a89fef87d2d9a1404582df1121168fce5ede8bd2e20e1e48a6",
+          "role": "local_late",
+          "state": "local_shift",
+          "submitted_sha256": "2e6ad086d95984be2d22eaf36bd223d9be88e867b38c0d9e590db109d1262550",
+          "windows": 33
+        },
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "790e01adf2645f64300d978a71c6a49c31adcbc18b6521360529f15efbb532ca",
+            "soundtrack-shift-picture-033.png": "1ec66053f5e73b221a17f343cc8f545c0b0362d745be8332ebb114012b3ed2b9",
+            "soundtrack-shift-submitted.wav": "790e01adf2645f64300d978a71c6a49c31adcbc18b6521360529f15efbb532ca"
+          },
+          "authored": [
+            12800,
+            23040
+          ],
+          "delivery": "pcm",
+          "earlier_sha256": "b4fcd025d79629aa4a32e44425e059190ec97bf114dd7ea331e7492719701a08",
+          "found": [
+            [
+              13440,
+              22400
+            ],
+            -3200
+          ],
+          "native_picture_rgb_sha256": "e25175f8de0265c2f1f68910be9f556359992364bb2cab9d42a2aa1b28f0d3f7",
+          "offset": -3200,
+          "pcm_sha256": "20f98a2d174054bf218beb681cb59514a0fc3f1ee133a4f7e552a4ad5db83269",
+          "pictures": 66,
+          "relative_picture_pts_sha256": "fd71039ac85df1a89fef87d2d9a1404582df1121168fce5ede8bd2e20e1e48a6",
+          "role": "local_early",
+          "state": "local_shift",
+          "submitted_sha256": "c94e926beb591f37208c20abce582805b442ec9dfa7f4463ea210cbfc9041a1f",
+          "windows": 33
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "b4fcd025d79629aa4a32e44425e059190ec97bf114dd7ea331e7492719701a08",
+          "found": null,
+          "native_picture_rgb_sha256": "e25175f8de0265c2f1f68910be9f556359992364bb2cab9d42a2aa1b28f0d3f7",
+          "offset": null,
+          "pcm_sha256": "120ee27186a4245dfec937beeaf2405a444dcd9d8af810a8bcc15f978cc5de74",
+          "pictures": 66,
+          "relative_picture_pts_sha256": "fd71039ac85df1a89fef87d2d9a1404582df1121168fce5ede8bd2e20e1e48a6",
+          "role": "original",
+          "state": "no_local_shift",
+          "submitted_sha256": "8ea8bf0d4182861d751652ccb8d9b8e137343d32f1c3af7db76bff03525aa37f",
+          "windows": 37
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "b4fcd025d79629aa4a32e44425e059190ec97bf114dd7ea331e7492719701a08",
+          "found": null,
+          "native_picture_rgb_sha256": "e25175f8de0265c2f1f68910be9f556359992364bb2cab9d42a2aa1b28f0d3f7",
+          "offset": null,
+          "pcm_sha256": "319695c34994f39a89d90d2c13c743d3c919bdad6233a87707a1e2dc54df9689",
+          "pictures": 66,
+          "relative_picture_pts_sha256": "fd71039ac85df1a89fef87d2d9a1404582df1121168fce5ede8bd2e20e1e48a6",
+          "role": "gain",
+          "state": "no_local_shift",
+          "submitted_sha256": "52fa6a01ecea05c3946e0cb59506b04891ece493f75dc2ca04e230260d6c5e29",
+          "windows": 37
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "b4fcd025d79629aa4a32e44425e059190ec97bf114dd7ea331e7492719701a08",
+          "found": null,
+          "native_picture_rgb_sha256": "e25175f8de0265c2f1f68910be9f556359992364bb2cab9d42a2aa1b28f0d3f7",
+          "offset": null,
+          "pcm_sha256": "b358b9c0e57a812b94fa08a3893cdb0cc40b8d43d6ec5e376b9d0312ad69133f",
+          "pictures": 66,
+          "relative_picture_pts_sha256": "fd71039ac85df1a89fef87d2d9a1404582df1121168fce5ede8bd2e20e1e48a6",
+          "role": "noise_mix",
+          "state": "no_local_shift",
+          "submitted_sha256": "3886eaeae041125f09b033d40227357c63d1c31aacfe90a0749cf0348d806c82",
+          "windows": 37
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "b4fcd025d79629aa4a32e44425e059190ec97bf114dd7ea331e7492719701a08",
+          "found": null,
+          "native_picture_rgb_sha256": "e25175f8de0265c2f1f68910be9f556359992364bb2cab9d42a2aa1b28f0d3f7",
+          "offset": null,
+          "pcm_sha256": "ceb2d6864874af47a476e0cc4b8b4b6db1c8e894a6b921afcf95bb2e9d2a075f",
+          "pictures": 66,
+          "relative_picture_pts_sha256": "fd71039ac85df1a89fef87d2d9a1404582df1121168fce5ede8bd2e20e1e48a6",
+          "role": "unrelated_insert",
+          "state": "no_local_shift",
+          "submitted_sha256": "0dce565522fae49ce87b28a577485bfa9bf111e75d85db77ec00c0cad71a8503",
+          "windows": 21
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "b4fcd025d79629aa4a32e44425e059190ec97bf114dd7ea331e7492719701a08",
+          "found": null,
+          "native_picture_rgb_sha256": "e25175f8de0265c2f1f68910be9f556359992364bb2cab9d42a2aa1b28f0d3f7",
+          "offset": null,
+          "pcm_sha256": "69323c1680e7f824cc9e4199e0f4d99ebc15bedcd62846ff4f04524bc0a9be10",
+          "pictures": 66,
+          "relative_picture_pts_sha256": "fd71039ac85df1a89fef87d2d9a1404582df1121168fce5ede8bd2e20e1e48a6",
+          "role": "global_shift",
+          "state": "no_local_shift",
+          "submitted_sha256": "dc4f1f11b372e850d910a9e5cd581401e7f0ac981e92f39669c9782f15f02326",
+          "windows": 37
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "b4fcd025d79629aa4a32e44425e059190ec97bf114dd7ea331e7492719701a08",
+          "found": null,
+          "native_picture_rgb_sha256": "e25175f8de0265c2f1f68910be9f556359992364bb2cab9d42a2aa1b28f0d3f7",
+          "offset": null,
+          "pcm_sha256": "5a03251a05806e04c76b36e8c0f04e0ad5b0d81be009fb24735293af7cc655d6",
+          "pictures": 66,
+          "relative_picture_pts_sha256": "fd71039ac85df1a89fef87d2d9a1404582df1121168fce5ede8bd2e20e1e48a6",
+          "role": "short_offset",
+          "state": "no_local_shift",
+          "submitted_sha256": "fd2a838e211cea5eb2ede7a39b132f0a9c0c929773dce19b31145ae0bcd032ab",
+          "windows": 33
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "b4fcd025d79629aa4a32e44425e059190ec97bf114dd7ea331e7492719701a08",
+          "found": null,
+          "native_picture_rgb_sha256": "1aea9925ef7ae871f77769192f76eb4f0c66c9c2e94fbb71f221153ea5efe675",
+          "offset": null,
+          "pcm_sha256": "427c81a3107a9184038a4ad846519a8490c65bc4849604ff3ce01869fbc53705",
+          "pictures": 66,
+          "relative_picture_pts_sha256": "fd71039ac85df1a89fef87d2d9a1404582df1121168fce5ede8bd2e20e1e48a6",
+          "role": "picture_change",
+          "state": "unassessed",
+          "submitted_sha256": "1c8062f2432a3f2bbf5937bb7287d6d6de2490423eaeb539d5a143d5e44f84f2",
+          "windows": 0
+        },
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "4eb394fe82ad15dbcf2dd391e62f2b1850e440c9ad91f549405ddc2255f94d8b",
+            "soundtrack-shift-picture-034.png": "a4b081e36c5eadf0be019a37ba0ba7dbfd183a064b5234366e7a34817ed2c587",
+            "soundtrack-shift-submitted.wav": "ab52e2da155b692ad17c88ef56fdba50667f9935a751950a3aecd4c7d38bf623"
+          },
+          "authored": [
+            12800,
+            23040
+          ],
+          "delivery": "aac",
+          "earlier_sha256": "bc3a432c7932d46f3f7349587de83374787d6a16b59a3f1a83b5d554afe2a3db",
+          "found": [
+            [
+              14080,
+              23040
+            ],
+            3200
+          ],
+          "native_picture_rgb_sha256": "e25175f8de0265c2f1f68910be9f556359992364bb2cab9d42a2aa1b28f0d3f7",
+          "offset": 3200,
+          "pcm_sha256": "f1ebfaccc3dc6e77e8181c4b8ca76af734504457b19bb54f37981d8159099c92",
+          "pictures": 66,
+          "relative_picture_pts_sha256": "fd71039ac85df1a89fef87d2d9a1404582df1121168fce5ede8bd2e20e1e48a6",
+          "role": "local_late",
+          "state": "local_shift",
+          "submitted_sha256": "60e955d95923cf795c4cb4516d4b5f410f439d14ea577241d23933b324c431d8",
+          "windows": 33
+        },
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "5374d9b1f72d071b27636359f77aa77e26842421664a25ce0ef79b03a955855a",
+            "soundtrack-shift-picture-033.png": "1ec66053f5e73b221a17f343cc8f545c0b0362d745be8332ebb114012b3ed2b9",
+            "soundtrack-shift-submitted.wav": "b3d36a18a06087b3a315171af70e2e66abe3b2bf7f082127d8505957ed33db93"
+          },
+          "authored": [
+            12800,
+            23040
+          ],
+          "delivery": "aac",
+          "earlier_sha256": "bc3a432c7932d46f3f7349587de83374787d6a16b59a3f1a83b5d554afe2a3db",
+          "found": [
+            [
+              13440,
+              22400
+            ],
+            -3200
+          ],
+          "native_picture_rgb_sha256": "e25175f8de0265c2f1f68910be9f556359992364bb2cab9d42a2aa1b28f0d3f7",
+          "offset": -3200,
+          "pcm_sha256": "56d55865242ee82d08246367754fe49003d8a8917bc097080d599104158cd8f5",
+          "pictures": 66,
+          "relative_picture_pts_sha256": "fd71039ac85df1a89fef87d2d9a1404582df1121168fce5ede8bd2e20e1e48a6",
+          "role": "local_early",
+          "state": "local_shift",
+          "submitted_sha256": "315233b6516e9334af2a23de5052e515511db94dff578fcc581f2d6ab1807a00",
+          "windows": 33
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "bc3a432c7932d46f3f7349587de83374787d6a16b59a3f1a83b5d554afe2a3db",
+          "found": null,
+          "native_picture_rgb_sha256": "e25175f8de0265c2f1f68910be9f556359992364bb2cab9d42a2aa1b28f0d3f7",
+          "offset": null,
+          "pcm_sha256": "27bf346f57ec824424af6964d1f73d9e22afc9bc1e7816770b60e06af45fd13a",
+          "pictures": 66,
+          "relative_picture_pts_sha256": "fd71039ac85df1a89fef87d2d9a1404582df1121168fce5ede8bd2e20e1e48a6",
+          "role": "original",
+          "state": "no_local_shift",
+          "submitted_sha256": "bc3a432c7932d46f3f7349587de83374787d6a16b59a3f1a83b5d554afe2a3db",
+          "windows": 37
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "bc3a432c7932d46f3f7349587de83374787d6a16b59a3f1a83b5d554afe2a3db",
+          "found": null,
+          "native_picture_rgb_sha256": "e25175f8de0265c2f1f68910be9f556359992364bb2cab9d42a2aa1b28f0d3f7",
+          "offset": null,
+          "pcm_sha256": "ce571ede137aa0869789232256b80c378ce058a1486f14225fc10564d4de7687",
+          "pictures": 66,
+          "relative_picture_pts_sha256": "fd71039ac85df1a89fef87d2d9a1404582df1121168fce5ede8bd2e20e1e48a6",
+          "role": "gain",
+          "state": "no_local_shift",
+          "submitted_sha256": "501abefd1cbe3dce59254305138186045352f52aadb1adeb12c1026173258c17",
+          "windows": 37
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "bc3a432c7932d46f3f7349587de83374787d6a16b59a3f1a83b5d554afe2a3db",
+          "found": null,
+          "native_picture_rgb_sha256": "e25175f8de0265c2f1f68910be9f556359992364bb2cab9d42a2aa1b28f0d3f7",
+          "offset": null,
+          "pcm_sha256": "d32f449ed758887c72c949a487fe34b8efecf23217764b107930bad9da9432a7",
+          "pictures": 66,
+          "relative_picture_pts_sha256": "fd71039ac85df1a89fef87d2d9a1404582df1121168fce5ede8bd2e20e1e48a6",
+          "role": "noise_mix",
+          "state": "no_local_shift",
+          "submitted_sha256": "2e9a2e10184952e10e99d94ab2395db3d26c97223fa1037a343d77156b7acef7",
+          "windows": 37
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "bc3a432c7932d46f3f7349587de83374787d6a16b59a3f1a83b5d554afe2a3db",
+          "found": null,
+          "native_picture_rgb_sha256": "e25175f8de0265c2f1f68910be9f556359992364bb2cab9d42a2aa1b28f0d3f7",
+          "offset": null,
+          "pcm_sha256": "92c41817b9a36669f1824f1c4a08d39a46b3f5664c7bab0b39dbb6e4891df0fb",
+          "pictures": 66,
+          "relative_picture_pts_sha256": "fd71039ac85df1a89fef87d2d9a1404582df1121168fce5ede8bd2e20e1e48a6",
+          "role": "unrelated_insert",
+          "state": "no_local_shift",
+          "submitted_sha256": "9d6d11d4d0cb8cc4650451e9bf426c87d47b259c34b129057e7dbbd10c209eb0",
+          "windows": 21
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "bc3a432c7932d46f3f7349587de83374787d6a16b59a3f1a83b5d554afe2a3db",
+          "found": null,
+          "native_picture_rgb_sha256": "e25175f8de0265c2f1f68910be9f556359992364bb2cab9d42a2aa1b28f0d3f7",
+          "offset": null,
+          "pcm_sha256": "32602e53e90b7415553ef679583d4564050254c1016ffa1c2afbd83f4af8fe3b",
+          "pictures": 66,
+          "relative_picture_pts_sha256": "fd71039ac85df1a89fef87d2d9a1404582df1121168fce5ede8bd2e20e1e48a6",
+          "role": "global_shift",
+          "state": "no_local_shift",
+          "submitted_sha256": "45cb23cadeb29aab498442db2e2fb273bc678917d71ca5ed685f2869319d22de",
+          "windows": 37
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "bc3a432c7932d46f3f7349587de83374787d6a16b59a3f1a83b5d554afe2a3db",
+          "found": null,
+          "native_picture_rgb_sha256": "e25175f8de0265c2f1f68910be9f556359992364bb2cab9d42a2aa1b28f0d3f7",
+          "offset": null,
+          "pcm_sha256": "4edc67dbf00b62067bb72853df43f45fef30957e2179149e776bcdbe2354f19c",
+          "pictures": 66,
+          "relative_picture_pts_sha256": "fd71039ac85df1a89fef87d2d9a1404582df1121168fce5ede8bd2e20e1e48a6",
+          "role": "short_offset",
+          "state": "no_local_shift",
+          "submitted_sha256": "102e3c15679a6a27aad4a4ab843b83664c8edef0109f1a2c38c314a946514543",
+          "windows": 33
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "bc3a432c7932d46f3f7349587de83374787d6a16b59a3f1a83b5d554afe2a3db",
+          "found": null,
+          "native_picture_rgb_sha256": "1aea9925ef7ae871f77769192f76eb4f0c66c9c2e94fbb71f221153ea5efe675",
+          "offset": null,
+          "pcm_sha256": "f1ebfaccc3dc6e77e8181c4b8ca76af734504457b19bb54f37981d8159099c92",
+          "pictures": 66,
+          "relative_picture_pts_sha256": "fd71039ac85df1a89fef87d2d9a1404582df1121168fce5ede8bd2e20e1e48a6",
+          "role": "picture_change",
+          "state": "unassessed",
+          "submitted_sha256": "393de5a98148eb23a7e638682e3b9dea08d084d153b4844d36029a8a65d8afd3",
+          "windows": 0
+        }
+      ],
+      "ordinal": 9
+    },
+    {
+      "cases": [
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "686ee79bd92b8546bead4b8c9145ad438243b564e6dfe254f071d13f9f5fe459",
+            "soundtrack-shift-picture-026.png": "c96f21fc82d94837e516ae890030594978e897a8b41f925f519b989d8b5e89e9",
+            "soundtrack-shift-submitted.wav": "686ee79bd92b8546bead4b8c9145ad438243b564e6dfe254f071d13f9f5fe459"
+          },
+          "authored": [
+            8960,
+            19200
+          ],
+          "delivery": "pcm",
+          "earlier_sha256": "372a246586f1672d9d2df02d6fa32d8048bcc6cfa16d117a5a867de538c946ab",
+          "found": [
+            [
+              9600,
+              18560
+            ],
+            3840
+          ],
+          "native_picture_rgb_sha256": "7e09cb157245be2f214e3f6bc2f2a3cf29ed925c8cfeaf84fb9c2fd8bc554b18",
+          "offset": 3840,
+          "pcm_sha256": "dcda3bbbdfbf763a8dd6693a37a7f33ac1c998be40d0657e84357994a6967aa9",
+          "pictures": 53,
+          "relative_picture_pts_sha256": "6f78cf4776400a84b3dcc8484238469f27548188e802a7bf23288d79dbc3eb0c",
+          "role": "local_late",
+          "state": "local_shift",
+          "submitted_sha256": "7b8b2c47ed8a34131aa620f1a076e4a0586f1d00c6972cff08488ea7fd90d110",
+          "windows": 33
+        },
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "95215c92600466528a1207e41b416f8091e99e74eab5b8f5622714e2bf12d612",
+            "soundtrack-shift-picture-025.png": "dfa1651a6ab97eb7df59d4f4e5a9fa8fdaa465b7ef374e718519a360f29a31d0",
+            "soundtrack-shift-submitted.wav": "95215c92600466528a1207e41b416f8091e99e74eab5b8f5622714e2bf12d612"
+          },
+          "authored": [
+            8960,
+            19200
+          ],
+          "delivery": "pcm",
+          "earlier_sha256": "372a246586f1672d9d2df02d6fa32d8048bcc6cfa16d117a5a867de538c946ab",
+          "found": [
+            [
+              9600,
+              17920
+            ],
+            -3840
+          ],
+          "native_picture_rgb_sha256": "7e09cb157245be2f214e3f6bc2f2a3cf29ed925c8cfeaf84fb9c2fd8bc554b18",
+          "offset": -3840,
+          "pcm_sha256": "2c7d71eba9b5d02592a8e8bfc0111c996c30ebff36c09b4f64c87717b7c07526",
+          "pictures": 53,
+          "relative_picture_pts_sha256": "6f78cf4776400a84b3dcc8484238469f27548188e802a7bf23288d79dbc3eb0c",
+          "role": "local_early",
+          "state": "local_shift",
+          "submitted_sha256": "41e3e475031fb3d6c9abcc92b7e888c20dd384d2e5fd83d6df315eb9dc007db0",
+          "windows": 34
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "372a246586f1672d9d2df02d6fa32d8048bcc6cfa16d117a5a867de538c946ab",
+          "found": null,
+          "native_picture_rgb_sha256": "7e09cb157245be2f214e3f6bc2f2a3cf29ed925c8cfeaf84fb9c2fd8bc554b18",
+          "offset": null,
+          "pcm_sha256": "d94d55975a7e55373101d2519cb875634af82bf04b31b818762b15fb93f761ae",
+          "pictures": 53,
+          "relative_picture_pts_sha256": "6f78cf4776400a84b3dcc8484238469f27548188e802a7bf23288d79dbc3eb0c",
+          "role": "original",
+          "state": "no_local_shift",
+          "submitted_sha256": "0c754272f3cd460890a3d2bdc461c95fa97effd7a0866fa777395c11866e3f64",
+          "windows": 37
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "372a246586f1672d9d2df02d6fa32d8048bcc6cfa16d117a5a867de538c946ab",
+          "found": null,
+          "native_picture_rgb_sha256": "7e09cb157245be2f214e3f6bc2f2a3cf29ed925c8cfeaf84fb9c2fd8bc554b18",
+          "offset": null,
+          "pcm_sha256": "9d16e26a09c231f91a6ba016e82807ac05d043a61324bffffada09f8afa2c9a8",
+          "pictures": 53,
+          "relative_picture_pts_sha256": "6f78cf4776400a84b3dcc8484238469f27548188e802a7bf23288d79dbc3eb0c",
+          "role": "gain",
+          "state": "no_local_shift",
+          "submitted_sha256": "543badc91839a9cada659426ef7686fb9f33b6a0a445858c2c95d7970e2c7c07",
+          "windows": 37
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "372a246586f1672d9d2df02d6fa32d8048bcc6cfa16d117a5a867de538c946ab",
+          "found": null,
+          "native_picture_rgb_sha256": "7e09cb157245be2f214e3f6bc2f2a3cf29ed925c8cfeaf84fb9c2fd8bc554b18",
+          "offset": null,
+          "pcm_sha256": "c6f55bfc92a12afdc83e926167c749588dbdf196764c843cd0bc83261bbdd663",
+          "pictures": 53,
+          "relative_picture_pts_sha256": "6f78cf4776400a84b3dcc8484238469f27548188e802a7bf23288d79dbc3eb0c",
+          "role": "noise_mix",
+          "state": "no_local_shift",
+          "submitted_sha256": "6e87ec2cfdb90333375c7a92c25803cfdb90808e2518d89da11302230b72be3d",
+          "windows": 37
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "372a246586f1672d9d2df02d6fa32d8048bcc6cfa16d117a5a867de538c946ab",
+          "found": null,
+          "native_picture_rgb_sha256": "7e09cb157245be2f214e3f6bc2f2a3cf29ed925c8cfeaf84fb9c2fd8bc554b18",
+          "offset": null,
+          "pcm_sha256": "0315a9c075169312bbf31b08dc20641e7863157947af1f85d4572fb5a147ae2f",
+          "pictures": 53,
+          "relative_picture_pts_sha256": "6f78cf4776400a84b3dcc8484238469f27548188e802a7bf23288d79dbc3eb0c",
+          "role": "unrelated_insert",
+          "state": "no_local_shift",
+          "submitted_sha256": "d8b3a730f1573df1d1b44470fc92aa82c3cc9ee2e7e468c8141776a097ca713b",
+          "windows": 20
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "372a246586f1672d9d2df02d6fa32d8048bcc6cfa16d117a5a867de538c946ab",
+          "found": null,
+          "native_picture_rgb_sha256": "7e09cb157245be2f214e3f6bc2f2a3cf29ed925c8cfeaf84fb9c2fd8bc554b18",
+          "offset": null,
+          "pcm_sha256": "25330c5b0975f208f8e847a3d3c52ba00e1f727d486d2005634a88aa23064216",
+          "pictures": 53,
+          "relative_picture_pts_sha256": "6f78cf4776400a84b3dcc8484238469f27548188e802a7bf23288d79dbc3eb0c",
+          "role": "global_shift",
+          "state": "no_local_shift",
+          "submitted_sha256": "59b245f9a238e47d81bc8a5bfc2a3a6a5873f005765609fcfb1b467c145118cd",
+          "windows": 33
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "372a246586f1672d9d2df02d6fa32d8048bcc6cfa16d117a5a867de538c946ab",
+          "found": null,
+          "native_picture_rgb_sha256": "7e09cb157245be2f214e3f6bc2f2a3cf29ed925c8cfeaf84fb9c2fd8bc554b18",
+          "offset": null,
+          "pcm_sha256": "c4bcc37cb30fc0d17433417434d586d53c4cae305a1b59fbdee73fb0648fa602",
+          "pictures": 53,
+          "relative_picture_pts_sha256": "6f78cf4776400a84b3dcc8484238469f27548188e802a7bf23288d79dbc3eb0c",
+          "role": "short_offset",
+          "state": "no_local_shift",
+          "submitted_sha256": "84067672fe11759db9a7be91242bfa89d0a6539781eac33cad6e0a9bb8a95784",
+          "windows": 33
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "372a246586f1672d9d2df02d6fa32d8048bcc6cfa16d117a5a867de538c946ab",
+          "found": null,
+          "native_picture_rgb_sha256": "0918cddd9941f3bf547e7aa08d1ef10a8bb94728e87f706ac362c93856ab6468",
+          "offset": null,
+          "pcm_sha256": "dcda3bbbdfbf763a8dd6693a37a7f33ac1c998be40d0657e84357994a6967aa9",
+          "pictures": 53,
+          "relative_picture_pts_sha256": "6f78cf4776400a84b3dcc8484238469f27548188e802a7bf23288d79dbc3eb0c",
+          "role": "picture_change",
+          "state": "unassessed",
+          "submitted_sha256": "757fe2024a196c1e0be47586df0e319a2335131fdf4c15add13cb39462b5b0fd",
+          "windows": 0
+        },
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "e54f749ce06c89d5800b8f6955aeb75b7b5658e95a82119f0afd164f50d8504f",
+            "soundtrack-shift-picture-026.png": "c96f21fc82d94837e516ae890030594978e897a8b41f925f519b989d8b5e89e9",
+            "soundtrack-shift-submitted.wav": "c8cad9c9ec3fdf29aeb1f2a11d6c69a7a30bfe089a7ee05ae0c6127ac2d8a44b"
+          },
+          "authored": [
+            8960,
+            19200
+          ],
+          "delivery": "aac",
+          "earlier_sha256": "841e7d6bd6a97853df8ccec54b8be0409bacb362d5840a770cbc74e6b3c2b538",
+          "found": [
+            [
+              9600,
+              18560
+            ],
+            3840
+          ],
+          "native_picture_rgb_sha256": "7e09cb157245be2f214e3f6bc2f2a3cf29ed925c8cfeaf84fb9c2fd8bc554b18",
+          "offset": 3840,
+          "pcm_sha256": "aecb73500819118ea74577d5334914e7382702a9cb2f5ad4651db877d703a976",
+          "pictures": 53,
+          "relative_picture_pts_sha256": "6f78cf4776400a84b3dcc8484238469f27548188e802a7bf23288d79dbc3eb0c",
+          "role": "local_late",
+          "state": "local_shift",
+          "submitted_sha256": "1438e36de59b9b83e00210431e18d273ec7c06c24eb6fd8097340f090876f0c4",
+          "windows": 32
+        },
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "cba1f133a2b6e45b1b8a4d2b39a76dc45d108bde8067397c3589129b5aa47b63",
+            "soundtrack-shift-picture-025.png": "dfa1651a6ab97eb7df59d4f4e5a9fa8fdaa465b7ef374e718519a360f29a31d0",
+            "soundtrack-shift-submitted.wav": "09ddf1aa976732f49a169b784844b8d9dceacacabedd8d8207dd8bfa10c53035"
+          },
+          "authored": [
+            8960,
+            19200
+          ],
+          "delivery": "aac",
+          "earlier_sha256": "841e7d6bd6a97853df8ccec54b8be0409bacb362d5840a770cbc74e6b3c2b538",
+          "found": [
+            [
+              9600,
+              17920
+            ],
+            -3840
+          ],
+          "native_picture_rgb_sha256": "7e09cb157245be2f214e3f6bc2f2a3cf29ed925c8cfeaf84fb9c2fd8bc554b18",
+          "offset": -3840,
+          "pcm_sha256": "435404085d89068eb7dcfb138fea3666417d78a576931ce8219cad9c8d1e7bc9",
+          "pictures": 53,
+          "relative_picture_pts_sha256": "6f78cf4776400a84b3dcc8484238469f27548188e802a7bf23288d79dbc3eb0c",
+          "role": "local_early",
+          "state": "local_shift",
+          "submitted_sha256": "8b436caaa29f75f09691295242682e38f637a236b86c5164a62191fc73e90957",
+          "windows": 33
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "841e7d6bd6a97853df8ccec54b8be0409bacb362d5840a770cbc74e6b3c2b538",
+          "found": null,
+          "native_picture_rgb_sha256": "7e09cb157245be2f214e3f6bc2f2a3cf29ed925c8cfeaf84fb9c2fd8bc554b18",
+          "offset": null,
+          "pcm_sha256": "b81694ddbd92de7784fc9de78517dfb36bc81916a746f289ba2a108884c9f7cb",
+          "pictures": 53,
+          "relative_picture_pts_sha256": "6f78cf4776400a84b3dcc8484238469f27548188e802a7bf23288d79dbc3eb0c",
+          "role": "original",
+          "state": "no_local_shift",
+          "submitted_sha256": "841e7d6bd6a97853df8ccec54b8be0409bacb362d5840a770cbc74e6b3c2b538",
+          "windows": 36
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "841e7d6bd6a97853df8ccec54b8be0409bacb362d5840a770cbc74e6b3c2b538",
+          "found": null,
+          "native_picture_rgb_sha256": "7e09cb157245be2f214e3f6bc2f2a3cf29ed925c8cfeaf84fb9c2fd8bc554b18",
+          "offset": null,
+          "pcm_sha256": "39c713af8d4dbb8e0065b96ce5c16120d21efd084439bdf809c9cd8d337666a2",
+          "pictures": 53,
+          "relative_picture_pts_sha256": "6f78cf4776400a84b3dcc8484238469f27548188e802a7bf23288d79dbc3eb0c",
+          "role": "gain",
+          "state": "no_local_shift",
+          "submitted_sha256": "c8f65ca63cf8c9612bd882ef1ca92ac2540ade19ec44c41855320340ee39762b",
+          "windows": 36
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "841e7d6bd6a97853df8ccec54b8be0409bacb362d5840a770cbc74e6b3c2b538",
+          "found": null,
+          "native_picture_rgb_sha256": "7e09cb157245be2f214e3f6bc2f2a3cf29ed925c8cfeaf84fb9c2fd8bc554b18",
+          "offset": null,
+          "pcm_sha256": "3b90c5c03ee2bc407b23a87e5271e7097c0d73f2345670eae050d3cad9777dbf",
+          "pictures": 53,
+          "relative_picture_pts_sha256": "6f78cf4776400a84b3dcc8484238469f27548188e802a7bf23288d79dbc3eb0c",
+          "role": "noise_mix",
+          "state": "no_local_shift",
+          "submitted_sha256": "401a7b3faa187f5553d4b5a94fdcd3c083c5db91e2f586f24cc97b16dcd2264c",
+          "windows": 36
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "841e7d6bd6a97853df8ccec54b8be0409bacb362d5840a770cbc74e6b3c2b538",
+          "found": null,
+          "native_picture_rgb_sha256": "7e09cb157245be2f214e3f6bc2f2a3cf29ed925c8cfeaf84fb9c2fd8bc554b18",
+          "offset": null,
+          "pcm_sha256": "ea84691d21300e432c344e7fb1e62a2b4c5ed2674393d3ec8edc82dbc0def575",
+          "pictures": 53,
+          "relative_picture_pts_sha256": "6f78cf4776400a84b3dcc8484238469f27548188e802a7bf23288d79dbc3eb0c",
+          "role": "unrelated_insert",
+          "state": "no_local_shift",
+          "submitted_sha256": "7b7ef141f5673bb4d3ef8d136b444e88a20b24d03c3e85ea125a78a57468679b",
+          "windows": 19
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "841e7d6bd6a97853df8ccec54b8be0409bacb362d5840a770cbc74e6b3c2b538",
+          "found": null,
+          "native_picture_rgb_sha256": "7e09cb157245be2f214e3f6bc2f2a3cf29ed925c8cfeaf84fb9c2fd8bc554b18",
+          "offset": null,
+          "pcm_sha256": "8b75e9aea267102c675ec6139cfaf1e8c2684d352579eb8e0ac51ff2a876d060",
+          "pictures": 53,
+          "relative_picture_pts_sha256": "6f78cf4776400a84b3dcc8484238469f27548188e802a7bf23288d79dbc3eb0c",
+          "role": "global_shift",
+          "state": "no_local_shift",
+          "submitted_sha256": "15af6583896ce6f89acd162b8910824ddf13bbbeff65ddd59bdc1592e2c61350",
+          "windows": 32
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "841e7d6bd6a97853df8ccec54b8be0409bacb362d5840a770cbc74e6b3c2b538",
+          "found": null,
+          "native_picture_rgb_sha256": "7e09cb157245be2f214e3f6bc2f2a3cf29ed925c8cfeaf84fb9c2fd8bc554b18",
+          "offset": null,
+          "pcm_sha256": "f243cd0e2d5f32595e8bc29e8ed837804b5c79481d9b98c1d1626c5bc67b14b5",
+          "pictures": 53,
+          "relative_picture_pts_sha256": "6f78cf4776400a84b3dcc8484238469f27548188e802a7bf23288d79dbc3eb0c",
+          "role": "short_offset",
+          "state": "no_local_shift",
+          "submitted_sha256": "2e71693ce93b7c3beb8f4181ef887e439bdb890b7079b6bc545b372236b7487b",
+          "windows": 32
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "841e7d6bd6a97853df8ccec54b8be0409bacb362d5840a770cbc74e6b3c2b538",
+          "found": null,
+          "native_picture_rgb_sha256": "0918cddd9941f3bf547e7aa08d1ef10a8bb94728e87f706ac362c93856ab6468",
+          "offset": null,
+          "pcm_sha256": "aecb73500819118ea74577d5334914e7382702a9cb2f5ad4651db877d703a976",
+          "pictures": 53,
+          "relative_picture_pts_sha256": "6f78cf4776400a84b3dcc8484238469f27548188e802a7bf23288d79dbc3eb0c",
+          "role": "picture_change",
+          "state": "unassessed",
+          "submitted_sha256": "5c222d491b4dcf4598e959077ffecc8875dbfee980ead0b668c527e26424a1a0",
+          "windows": 0
+        }
+      ],
+      "ordinal": 10
+    },
+    {
+      "cases": [
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "95ac52a02e91fbefbfda3427beb5651f299ed199f731984ca24ce9c30819c0fa",
+            "soundtrack-shift-picture-042.png": "5384858bec400cd229635219a7ac2a052116cf19e6e7e18944a144bc3231560f",
+            "soundtrack-shift-submitted.wav": "52ecd43b45c113f271bf74d236b98797cf123acbee60c38b1d7df60c800ab5db"
+          },
+          "authored": [
+            17280,
+            27520
+          ],
+          "delivery": "pcm",
+          "earlier_sha256": "e62c53cd11ca31087f794a6b5a6a962e831e28dae09df53e1a942d0370163f69",
+          "found": [
+            [
+              17920,
+              27520
+            ],
+            4480
+          ],
+          "native_picture_rgb_sha256": "5e3eef28d5c31f2d48901b3049d12b5021aae6149ed5ad04862a9ee1fb4e66f3",
+          "offset": 4480,
+          "pcm_sha256": "07f12d9da742aa4984d3235d77ff1947abfeadacd5fd4a38096633a0c10b8151",
+          "pictures": 84,
+          "relative_picture_pts_sha256": "39f881eb578acac6042260ae9e39b6ebdeccf6f561f1f8986baa9bea4286615e",
+          "role": "local_late",
+          "state": "local_shift",
+          "submitted_sha256": "6441acb3c3b8ef203d8ae380cd34d0aacd0c780f6c974880becb52c3fc3d70bd",
+          "windows": 54
+        },
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "63fa075d3bbe17e85330de5552d6909c9243fc34631432651ea3620d4baad1a4",
+            "soundtrack-shift-picture-042.png": "5384858bec400cd229635219a7ac2a052116cf19e6e7e18944a144bc3231560f",
+            "soundtrack-shift-submitted.wav": "1bcd70920e0a609ace1d6c019d01c85b43444ce1d55d53164bdfca44ef7cca18"
+          },
+          "authored": [
+            17280,
+            27520
+          ],
+          "delivery": "pcm",
+          "earlier_sha256": "e62c53cd11ca31087f794a6b5a6a962e831e28dae09df53e1a942d0370163f69",
+          "found": [
+            [
+              17920,
+              27520
+            ],
+            -4480
+          ],
+          "native_picture_rgb_sha256": "5e3eef28d5c31f2d48901b3049d12b5021aae6149ed5ad04862a9ee1fb4e66f3",
+          "offset": -4480,
+          "pcm_sha256": "fd0f904586f24765efbe03e0017406cb06a8b0b14dd55057821ffd09f2d62e16",
+          "pictures": 84,
+          "relative_picture_pts_sha256": "39f881eb578acac6042260ae9e39b6ebdeccf6f561f1f8986baa9bea4286615e",
+          "role": "local_early",
+          "state": "local_shift",
+          "submitted_sha256": "12c3e34e5df51fc8f565bd8495f58980a81c87d1ef0c9b22cb6855a9a15d8756",
+          "windows": 52
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "e62c53cd11ca31087f794a6b5a6a962e831e28dae09df53e1a942d0370163f69",
+          "found": null,
+          "native_picture_rgb_sha256": "5e3eef28d5c31f2d48901b3049d12b5021aae6149ed5ad04862a9ee1fb4e66f3",
+          "offset": null,
+          "pcm_sha256": "edbb02660100402e16e202e4599bc7471aed24cc6520a837439d1856a5de7801",
+          "pictures": 84,
+          "relative_picture_pts_sha256": "39f881eb578acac6042260ae9e39b6ebdeccf6f561f1f8986baa9bea4286615e",
+          "role": "original",
+          "state": "no_local_shift",
+          "submitted_sha256": "9b53a9244fcf70d57fbd6dd93b3b6a2e578a4db0ed9b200b8c7c637fd2926ad1",
+          "windows": 56
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "e62c53cd11ca31087f794a6b5a6a962e831e28dae09df53e1a942d0370163f69",
+          "found": null,
+          "native_picture_rgb_sha256": "5e3eef28d5c31f2d48901b3049d12b5021aae6149ed5ad04862a9ee1fb4e66f3",
+          "offset": null,
+          "pcm_sha256": "b6a8b48de85623ec32f506aa6b77e3b2c571a35b784c0b201523a187fb543d2b",
+          "pictures": 84,
+          "relative_picture_pts_sha256": "39f881eb578acac6042260ae9e39b6ebdeccf6f561f1f8986baa9bea4286615e",
+          "role": "gain",
+          "state": "no_local_shift",
+          "submitted_sha256": "7d96c8e243e9a8f7dfdd3834d5842a11fee31f3919779628b26f5685fc4147fc",
+          "windows": 56
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "e62c53cd11ca31087f794a6b5a6a962e831e28dae09df53e1a942d0370163f69",
+          "found": null,
+          "native_picture_rgb_sha256": "5e3eef28d5c31f2d48901b3049d12b5021aae6149ed5ad04862a9ee1fb4e66f3",
+          "offset": null,
+          "pcm_sha256": "ca3ad171e37e1290ffaffb5957a4792fbf63dc20f2988f1213fac97caba642dc",
+          "pictures": 84,
+          "relative_picture_pts_sha256": "39f881eb578acac6042260ae9e39b6ebdeccf6f561f1f8986baa9bea4286615e",
+          "role": "noise_mix",
+          "state": "no_local_shift",
+          "submitted_sha256": "96e0c68ba667066fa438734cee7f2233c20394d0d60443bf56c47b0364a2db6e",
+          "windows": 54
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "e62c53cd11ca31087f794a6b5a6a962e831e28dae09df53e1a942d0370163f69",
+          "found": null,
+          "native_picture_rgb_sha256": "5e3eef28d5c31f2d48901b3049d12b5021aae6149ed5ad04862a9ee1fb4e66f3",
+          "offset": null,
+          "pcm_sha256": "843af2e36b64508612994ed4c9c22a963ad8c1133ccdfc42967a47fc1e954031",
+          "pictures": 84,
+          "relative_picture_pts_sha256": "39f881eb578acac6042260ae9e39b6ebdeccf6f561f1f8986baa9bea4286615e",
+          "role": "unrelated_insert",
+          "state": "no_local_shift",
+          "submitted_sha256": "cb588a133b9806e754e32a618673eaf9a836dda10de1a7adcc45dd641fe6be74",
+          "windows": 39
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "e62c53cd11ca31087f794a6b5a6a962e831e28dae09df53e1a942d0370163f69",
+          "found": null,
+          "native_picture_rgb_sha256": "5e3eef28d5c31f2d48901b3049d12b5021aae6149ed5ad04862a9ee1fb4e66f3",
+          "offset": null,
+          "pcm_sha256": "4d039b3d5d25ce6dc8c4bc19ffe011922788da1fcfb147e6421d04bec942aea7",
+          "pictures": 84,
+          "relative_picture_pts_sha256": "39f881eb578acac6042260ae9e39b6ebdeccf6f561f1f8986baa9bea4286615e",
+          "role": "global_shift",
+          "state": "no_local_shift",
+          "submitted_sha256": "c27a17ab33b8ffbe0f05cc4ec160807d60fdadb070bba124de2b9cff5bcc95f4",
+          "windows": 56
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "e62c53cd11ca31087f794a6b5a6a962e831e28dae09df53e1a942d0370163f69",
+          "found": null,
+          "native_picture_rgb_sha256": "5e3eef28d5c31f2d48901b3049d12b5021aae6149ed5ad04862a9ee1fb4e66f3",
+          "offset": null,
+          "pcm_sha256": "7be91f9af0755503f726b59660ce83ccf3b6586ca3825f4e7a0d84b22cf5c2ba",
+          "pictures": 84,
+          "relative_picture_pts_sha256": "39f881eb578acac6042260ae9e39b6ebdeccf6f561f1f8986baa9bea4286615e",
+          "role": "short_offset",
+          "state": "no_local_shift",
+          "submitted_sha256": "3ec64cf2178b848960aa9005846f485a52bca81cf6da61e407a88038333af3e3",
+          "windows": 52
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "e62c53cd11ca31087f794a6b5a6a962e831e28dae09df53e1a942d0370163f69",
+          "found": null,
+          "native_picture_rgb_sha256": "4c8c7145be66a6d449296b0cd15d1bf9fc16c4546f4cb2c7fe5616542085bb6d",
+          "offset": null,
+          "pcm_sha256": "07f12d9da742aa4984d3235d77ff1947abfeadacd5fd4a38096633a0c10b8151",
+          "pictures": 84,
+          "relative_picture_pts_sha256": "39f881eb578acac6042260ae9e39b6ebdeccf6f561f1f8986baa9bea4286615e",
+          "role": "picture_change",
+          "state": "unassessed",
+          "submitted_sha256": "1f3f954730a3a544bf1e5484c19add9685eaca9a9c8dc66620d05b1a1a695425",
+          "windows": 0
+        },
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "9f60d1fae2bce80c6ac58d8a58eb65dc56634998d94ed6e7e9660399d2bfc535",
+            "soundtrack-shift-picture-042.png": "5384858bec400cd229635219a7ac2a052116cf19e6e7e18944a144bc3231560f",
+            "soundtrack-shift-submitted.wav": "94e5dab6994b9b473dac71261c7990f8175b183940b907c24897af2ce051d993"
+          },
+          "authored": [
+            17280,
+            27520
+          ],
+          "delivery": "aac",
+          "earlier_sha256": "069801a2466d31598d6d8871cb8dd9c257bc68de6dc8b2136832e4640755e32b",
+          "found": [
+            [
+              17920,
+              27520
+            ],
+            4480
+          ],
+          "native_picture_rgb_sha256": "5e3eef28d5c31f2d48901b3049d12b5021aae6149ed5ad04862a9ee1fb4e66f3",
+          "offset": 4480,
+          "pcm_sha256": "31888eade17c6989ae663d4070fa1606e05882d95034d368b214ba78657fd047",
+          "pictures": 84,
+          "relative_picture_pts_sha256": "39f881eb578acac6042260ae9e39b6ebdeccf6f561f1f8986baa9bea4286615e",
+          "role": "local_late",
+          "state": "local_shift",
+          "submitted_sha256": "ba431b7d81a713ac8ed54758d12be1e0163bce596e5304d93cf42bd05ee8113b",
+          "windows": 54
+        },
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "f0b6a3dd85295bdb6fe7de0af717feb417df02f2260473e6573230b47f438ea1",
+            "soundtrack-shift-picture-042.png": "5384858bec400cd229635219a7ac2a052116cf19e6e7e18944a144bc3231560f",
+            "soundtrack-shift-submitted.wav": "dc222b7a7861c25c090dacfde2b2c619d252447e0ee37c69ee1a00cb09c77865"
+          },
+          "authored": [
+            17280,
+            27520
+          ],
+          "delivery": "aac",
+          "earlier_sha256": "069801a2466d31598d6d8871cb8dd9c257bc68de6dc8b2136832e4640755e32b",
+          "found": [
+            [
+              17920,
+              27520
+            ],
+            -4480
+          ],
+          "native_picture_rgb_sha256": "5e3eef28d5c31f2d48901b3049d12b5021aae6149ed5ad04862a9ee1fb4e66f3",
+          "offset": -4480,
+          "pcm_sha256": "2139d5175f3fb967593baff2339fe1cda8f844c2462c6ea8ad066e2b76f977ab",
+          "pictures": 84,
+          "relative_picture_pts_sha256": "39f881eb578acac6042260ae9e39b6ebdeccf6f561f1f8986baa9bea4286615e",
+          "role": "local_early",
+          "state": "local_shift",
+          "submitted_sha256": "b63c43496731e1686d31b40e99463391560e35a34a5e3ee02b510de2203c206b",
+          "windows": 52
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "069801a2466d31598d6d8871cb8dd9c257bc68de6dc8b2136832e4640755e32b",
+          "found": null,
+          "native_picture_rgb_sha256": "5e3eef28d5c31f2d48901b3049d12b5021aae6149ed5ad04862a9ee1fb4e66f3",
+          "offset": null,
+          "pcm_sha256": "52ace9035652fd291999750e53b4f51e6f79e9e29fea1257fb7bd0e7727a842b",
+          "pictures": 84,
+          "relative_picture_pts_sha256": "39f881eb578acac6042260ae9e39b6ebdeccf6f561f1f8986baa9bea4286615e",
+          "role": "original",
+          "state": "no_local_shift",
+          "submitted_sha256": "069801a2466d31598d6d8871cb8dd9c257bc68de6dc8b2136832e4640755e32b",
+          "windows": 56
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "069801a2466d31598d6d8871cb8dd9c257bc68de6dc8b2136832e4640755e32b",
+          "found": null,
+          "native_picture_rgb_sha256": "5e3eef28d5c31f2d48901b3049d12b5021aae6149ed5ad04862a9ee1fb4e66f3",
+          "offset": null,
+          "pcm_sha256": "16eb5a8d1ce45d39f454519ca20be1411507eb1ffe31885e099e1897a9176f48",
+          "pictures": 84,
+          "relative_picture_pts_sha256": "39f881eb578acac6042260ae9e39b6ebdeccf6f561f1f8986baa9bea4286615e",
+          "role": "gain",
+          "state": "no_local_shift",
+          "submitted_sha256": "479e174b79ceeaa26a0072f7f12c77bdf727e383887c7d9be4632f6eab827d45",
+          "windows": 56
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "069801a2466d31598d6d8871cb8dd9c257bc68de6dc8b2136832e4640755e32b",
+          "found": null,
+          "native_picture_rgb_sha256": "5e3eef28d5c31f2d48901b3049d12b5021aae6149ed5ad04862a9ee1fb4e66f3",
+          "offset": null,
+          "pcm_sha256": "205bcb8bd9253a9f9cc52cfa95d885987985231a45eca19e8676c83fb6b90171",
+          "pictures": 84,
+          "relative_picture_pts_sha256": "39f881eb578acac6042260ae9e39b6ebdeccf6f561f1f8986baa9bea4286615e",
+          "role": "noise_mix",
+          "state": "no_local_shift",
+          "submitted_sha256": "dc96db7ad3e4d7809cfe0f0bf0d356e60e48eac30e2e28ee2e4b20fd0ce336e4",
+          "windows": 54
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "069801a2466d31598d6d8871cb8dd9c257bc68de6dc8b2136832e4640755e32b",
+          "found": null,
+          "native_picture_rgb_sha256": "5e3eef28d5c31f2d48901b3049d12b5021aae6149ed5ad04862a9ee1fb4e66f3",
+          "offset": null,
+          "pcm_sha256": "203a0f6e818d1a0a9b8e1557cedeabe95fbc3e352f1187c4f6da8deb9d3aa8e1",
+          "pictures": 84,
+          "relative_picture_pts_sha256": "39f881eb578acac6042260ae9e39b6ebdeccf6f561f1f8986baa9bea4286615e",
+          "role": "unrelated_insert",
+          "state": "no_local_shift",
+          "submitted_sha256": "3ec8829c16028206dfa5c092bd168f081cc864afad71c05e9fd3de8675f3f395",
+          "windows": 39
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "069801a2466d31598d6d8871cb8dd9c257bc68de6dc8b2136832e4640755e32b",
+          "found": null,
+          "native_picture_rgb_sha256": "5e3eef28d5c31f2d48901b3049d12b5021aae6149ed5ad04862a9ee1fb4e66f3",
+          "offset": null,
+          "pcm_sha256": "55255508fd4337871c2a3fae5107ecec0485316be342f0ebeeca521f41e3d795",
+          "pictures": 84,
+          "relative_picture_pts_sha256": "39f881eb578acac6042260ae9e39b6ebdeccf6f561f1f8986baa9bea4286615e",
+          "role": "global_shift",
+          "state": "no_local_shift",
+          "submitted_sha256": "7936ea9d1c9215f4cd7a8edd59fe77be378e84a9a95b5eb2a9500c6f7c1927c5",
+          "windows": 56
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "069801a2466d31598d6d8871cb8dd9c257bc68de6dc8b2136832e4640755e32b",
+          "found": null,
+          "native_picture_rgb_sha256": "5e3eef28d5c31f2d48901b3049d12b5021aae6149ed5ad04862a9ee1fb4e66f3",
+          "offset": null,
+          "pcm_sha256": "782125f15622b26d4e0f99b152f804675ff80dce8e12d55594fc9332689c1810",
+          "pictures": 84,
+          "relative_picture_pts_sha256": "39f881eb578acac6042260ae9e39b6ebdeccf6f561f1f8986baa9bea4286615e",
+          "role": "short_offset",
+          "state": "no_local_shift",
+          "submitted_sha256": "5347c831f807ac6b6ea85617058f32c68da445d6b5a8adadfab7587010a360a6",
+          "windows": 52
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "069801a2466d31598d6d8871cb8dd9c257bc68de6dc8b2136832e4640755e32b",
+          "found": null,
+          "native_picture_rgb_sha256": "4c8c7145be66a6d449296b0cd15d1bf9fc16c4546f4cb2c7fe5616542085bb6d",
+          "offset": null,
+          "pcm_sha256": "31888eade17c6989ae663d4070fa1606e05882d95034d368b214ba78657fd047",
+          "pictures": 84,
+          "relative_picture_pts_sha256": "39f881eb578acac6042260ae9e39b6ebdeccf6f561f1f8986baa9bea4286615e",
+          "role": "picture_change",
+          "state": "unassessed",
+          "submitted_sha256": "23a1a81cb01cd148daf092fed183d2d510e30cece01fe4269b795f0a2d577bcc",
+          "windows": 0
+        }
+      ],
+      "ordinal": 11
+    },
+    {
+      "cases": [
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "aabf8bc7c839fbe2e44a0bc9d35c6d75e3dca25ac40e3705c6a3cf9584de097e",
+            "soundtrack-shift-picture-035.png": "4faf27958b02ed835d2c10df2d73606ef789ac97b37312c6e139524ed432184d",
+            "soundtrack-shift-submitted.wav": "d55255c3673289e7d83e9ad3b1dd69bf1ff3c87300f516c3f7450c39bd095cbe"
+          },
+          "authored": [
+            14080,
+            24320
+          ],
+          "delivery": "pcm",
+          "earlier_sha256": "a91551811df604e16f5df184cf34179691a70e50c07a17ee8dd42acf3e4d1804",
+          "found": [
+            [
+              14080,
+              24320
+            ],
+            2560
+          ],
+          "native_picture_rgb_sha256": "7ba65d49a41abf15d1d5a90538c27cd4e7b1c9ccc0a32e5a4c146c729e141680",
+          "offset": 2560,
+          "pcm_sha256": "fc087ee94a6ea74045f35b83e180b588e03aefb5769044a51a5bef2d49ecd218",
+          "pictures": 71,
+          "relative_picture_pts_sha256": "6755e432391afb72ca35623badefbf54c4f9a4889e73eaa3631715f29dd86d86",
+          "role": "local_late",
+          "state": "local_shift",
+          "submitted_sha256": "1439bad1113413e630e6fbb6b06dc5bd2e9ec21fea817d52ff5a4422db7b8ebf",
+          "windows": 40
+        },
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "ff4202a861ed5f1183ad8c017f7abec03316749efbf53fca6cdd9e528ea92a5c",
+            "soundtrack-shift-picture-036.png": "ad275efcc21955ea402c8e34997015ce04901a1afcb1951bd77aa31c26c09cc6",
+            "soundtrack-shift-submitted.wav": "ec450b89f0c996373005dc5fa39f35a10c8b876abcb3bc887df0bc70bcf81218"
+          },
+          "authored": [
+            14080,
+            24320
+          ],
+          "delivery": "pcm",
+          "earlier_sha256": "a91551811df604e16f5df184cf34179691a70e50c07a17ee8dd42acf3e4d1804",
+          "found": [
+            [
+              14720,
+              24320
+            ],
+            -2560
+          ],
+          "native_picture_rgb_sha256": "7ba65d49a41abf15d1d5a90538c27cd4e7b1c9ccc0a32e5a4c146c729e141680",
+          "offset": -2560,
+          "pcm_sha256": "380321faf253960d8128f0cebe5d08e09a52bc5340f78def89752367bf053281",
+          "pictures": 71,
+          "relative_picture_pts_sha256": "6755e432391afb72ca35623badefbf54c4f9a4889e73eaa3631715f29dd86d86",
+          "role": "local_early",
+          "state": "local_shift",
+          "submitted_sha256": "178e91e4a5d43855de5cd1e57f1af59a3d7676675ca1004109b8775e43d2ae3f",
+          "windows": 37
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "a91551811df604e16f5df184cf34179691a70e50c07a17ee8dd42acf3e4d1804",
+          "found": null,
+          "native_picture_rgb_sha256": "7ba65d49a41abf15d1d5a90538c27cd4e7b1c9ccc0a32e5a4c146c729e141680",
+          "offset": null,
+          "pcm_sha256": "568378901006be413623179c85135a94a2d03d44f12fb79fc4dfa025371a95ee",
+          "pictures": 71,
+          "relative_picture_pts_sha256": "6755e432391afb72ca35623badefbf54c4f9a4889e73eaa3631715f29dd86d86",
+          "role": "original",
+          "state": "no_local_shift",
+          "submitted_sha256": "6f4f898bab16ff3880994d8f816ddd141b83524134978d498cdda2cb32f688e3",
+          "windows": 41
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "a91551811df604e16f5df184cf34179691a70e50c07a17ee8dd42acf3e4d1804",
+          "found": null,
+          "native_picture_rgb_sha256": "7ba65d49a41abf15d1d5a90538c27cd4e7b1c9ccc0a32e5a4c146c729e141680",
+          "offset": null,
+          "pcm_sha256": "cedf2a9aca9153938bfdbe7862da8ee1c244130541144a440f52e42363007c46",
+          "pictures": 71,
+          "relative_picture_pts_sha256": "6755e432391afb72ca35623badefbf54c4f9a4889e73eaa3631715f29dd86d86",
+          "role": "gain",
+          "state": "no_local_shift",
+          "submitted_sha256": "718454de3b53bc03a6fc323386a8efc3dd3d9e458aa614e62ee89bab3681fcf1",
+          "windows": 41
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "a91551811df604e16f5df184cf34179691a70e50c07a17ee8dd42acf3e4d1804",
+          "found": null,
+          "native_picture_rgb_sha256": "7ba65d49a41abf15d1d5a90538c27cd4e7b1c9ccc0a32e5a4c146c729e141680",
+          "offset": null,
+          "pcm_sha256": "d183897b68faec6ffb06e51709167242eb5b546822a27cd65a865b8384e74e6e",
+          "pictures": 71,
+          "relative_picture_pts_sha256": "6755e432391afb72ca35623badefbf54c4f9a4889e73eaa3631715f29dd86d86",
+          "role": "noise_mix",
+          "state": "no_local_shift",
+          "submitted_sha256": "7a29693399b072304783944b4bddcbfdc1a364bff9b3b46f6f366b02637bb07f",
+          "windows": 37
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "a91551811df604e16f5df184cf34179691a70e50c07a17ee8dd42acf3e4d1804",
+          "found": null,
+          "native_picture_rgb_sha256": "7ba65d49a41abf15d1d5a90538c27cd4e7b1c9ccc0a32e5a4c146c729e141680",
+          "offset": null,
+          "pcm_sha256": "bff7e79ba8383f1d53368ddb42536907a7380cb213de196b549039b96f57335a",
+          "pictures": 71,
+          "relative_picture_pts_sha256": "6755e432391afb72ca35623badefbf54c4f9a4889e73eaa3631715f29dd86d86",
+          "role": "unrelated_insert",
+          "state": "no_local_shift",
+          "submitted_sha256": "edb2c1392eeb21029e8c37ab3b40c4979c1f8ecfaaf1e624e1645434693f914c",
+          "windows": 23
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "a91551811df604e16f5df184cf34179691a70e50c07a17ee8dd42acf3e4d1804",
+          "found": null,
+          "native_picture_rgb_sha256": "7ba65d49a41abf15d1d5a90538c27cd4e7b1c9ccc0a32e5a4c146c729e141680",
+          "offset": null,
+          "pcm_sha256": "8ba8a1859c9eb031e79d503f68fba8fb9209c4e3204088432e7c87d3023357af",
+          "pictures": 71,
+          "relative_picture_pts_sha256": "6755e432391afb72ca35623badefbf54c4f9a4889e73eaa3631715f29dd86d86",
+          "role": "global_shift",
+          "state": "no_local_shift",
+          "submitted_sha256": "7b201fbe731e4b1584637701b48b84c234fcf41c66362d9b29e5960010a779ad",
+          "windows": 41
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "a91551811df604e16f5df184cf34179691a70e50c07a17ee8dd42acf3e4d1804",
+          "found": null,
+          "native_picture_rgb_sha256": "7ba65d49a41abf15d1d5a90538c27cd4e7b1c9ccc0a32e5a4c146c729e141680",
+          "offset": null,
+          "pcm_sha256": "49f292b3d178f49de7c8c8df3adc6380b5c247c0a5e4d654d522c811c4be8af1",
+          "pictures": 71,
+          "relative_picture_pts_sha256": "6755e432391afb72ca35623badefbf54c4f9a4889e73eaa3631715f29dd86d86",
+          "role": "short_offset",
+          "state": "no_local_shift",
+          "submitted_sha256": "a063f93a9a2ef53948daa0000a1b23736d7717ee62acd1267fa43b1f41a5441b",
+          "windows": 36
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "a91551811df604e16f5df184cf34179691a70e50c07a17ee8dd42acf3e4d1804",
+          "found": null,
+          "native_picture_rgb_sha256": "d5cb904f6f4381143f953311eb2a46294332b84e50674ca0590a73d0afe4bf7f",
+          "offset": null,
+          "pcm_sha256": "fc087ee94a6ea74045f35b83e180b588e03aefb5769044a51a5bef2d49ecd218",
+          "pictures": 71,
+          "relative_picture_pts_sha256": "6755e432391afb72ca35623badefbf54c4f9a4889e73eaa3631715f29dd86d86",
+          "role": "picture_change",
+          "state": "unassessed",
+          "submitted_sha256": "191b7041ccedfb06291f39474b7c2f873f436cd8e77c3bcff605b1ac51309b0a",
+          "windows": 0
+        },
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "a917094fe295a9572ff161d1c5e3257addeab5fe73488173998ff66e76fc761e",
+            "soundtrack-shift-picture-035.png": "4faf27958b02ed835d2c10df2d73606ef789ac97b37312c6e139524ed432184d",
+            "soundtrack-shift-submitted.wav": "10621629ecbb976e0138810ffc05c347e16e90f1fd2b9423e578a44cd916bdfb"
+          },
+          "authored": [
+            14080,
+            24320
+          ],
+          "delivery": "aac",
+          "earlier_sha256": "e2be6611e464c0aa307af67725ee74401e623208e0598c7a5fc49721cd127f82",
+          "found": [
+            [
+              14080,
+              24320
+            ],
+            2560
+          ],
+          "native_picture_rgb_sha256": "7ba65d49a41abf15d1d5a90538c27cd4e7b1c9ccc0a32e5a4c146c729e141680",
+          "offset": 2560,
+          "pcm_sha256": "f9e3a725007667b1b6489e8e44a0a58cecd7f4615118d182efd8e310b9e6d18c",
+          "pictures": 71,
+          "relative_picture_pts_sha256": "6755e432391afb72ca35623badefbf54c4f9a4889e73eaa3631715f29dd86d86",
+          "role": "local_late",
+          "state": "local_shift",
+          "submitted_sha256": "01d07ef89cf2e4fb009e258060603ed08aa33185b48b930100d06e6edbf7fcaf",
+          "windows": 40
+        },
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "bf85224a407b01d356e40e631485dad47a326bccf95cbf64c01437870e3c197e",
+            "soundtrack-shift-picture-036.png": "ad275efcc21955ea402c8e34997015ce04901a1afcb1951bd77aa31c26c09cc6",
+            "soundtrack-shift-submitted.wav": "24113307de43cd4f7471ecfff92e1c3c8220b171c0ace5af8dc953b8477a2dad"
+          },
+          "authored": [
+            14080,
+            24320
+          ],
+          "delivery": "aac",
+          "earlier_sha256": "e2be6611e464c0aa307af67725ee74401e623208e0598c7a5fc49721cd127f82",
+          "found": [
+            [
+              14720,
+              24320
+            ],
+            -2560
+          ],
+          "native_picture_rgb_sha256": "7ba65d49a41abf15d1d5a90538c27cd4e7b1c9ccc0a32e5a4c146c729e141680",
+          "offset": -2560,
+          "pcm_sha256": "9891943c564a12349423012da1eaa379966905ac0c1b4116c7ce91c66db375b8",
+          "pictures": 71,
+          "relative_picture_pts_sha256": "6755e432391afb72ca35623badefbf54c4f9a4889e73eaa3631715f29dd86d86",
+          "role": "local_early",
+          "state": "local_shift",
+          "submitted_sha256": "352551ddde7b56bd33568da474c8527689efb16ba84167a985e5a8fe455ebeda",
+          "windows": 37
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "e2be6611e464c0aa307af67725ee74401e623208e0598c7a5fc49721cd127f82",
+          "found": null,
+          "native_picture_rgb_sha256": "7ba65d49a41abf15d1d5a90538c27cd4e7b1c9ccc0a32e5a4c146c729e141680",
+          "offset": null,
+          "pcm_sha256": "b792a9a4f71192d3653b09acc1bb1447c5fbc317ca62b6de94ce145ee9542885",
+          "pictures": 71,
+          "relative_picture_pts_sha256": "6755e432391afb72ca35623badefbf54c4f9a4889e73eaa3631715f29dd86d86",
+          "role": "original",
+          "state": "no_local_shift",
+          "submitted_sha256": "e2be6611e464c0aa307af67725ee74401e623208e0598c7a5fc49721cd127f82",
+          "windows": 41
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "e2be6611e464c0aa307af67725ee74401e623208e0598c7a5fc49721cd127f82",
+          "found": null,
+          "native_picture_rgb_sha256": "7ba65d49a41abf15d1d5a90538c27cd4e7b1c9ccc0a32e5a4c146c729e141680",
+          "offset": null,
+          "pcm_sha256": "70034bd9f67759053e0792d0f30f46c8e285a4cae2f422cc2c3f86cf94e16bfa",
+          "pictures": 71,
+          "relative_picture_pts_sha256": "6755e432391afb72ca35623badefbf54c4f9a4889e73eaa3631715f29dd86d86",
+          "role": "gain",
+          "state": "no_local_shift",
+          "submitted_sha256": "6e6cad0fbdfa0117cf3b66a7babb44702673eefc301b812837fc6760f48ade3f",
+          "windows": 40
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "e2be6611e464c0aa307af67725ee74401e623208e0598c7a5fc49721cd127f82",
+          "found": null,
+          "native_picture_rgb_sha256": "7ba65d49a41abf15d1d5a90538c27cd4e7b1c9ccc0a32e5a4c146c729e141680",
+          "offset": null,
+          "pcm_sha256": "ed1b522cc1ea2ba01c66bcac10ded021e44a2deed1998204d2f11cd3a4346923",
+          "pictures": 71,
+          "relative_picture_pts_sha256": "6755e432391afb72ca35623badefbf54c4f9a4889e73eaa3631715f29dd86d86",
+          "role": "noise_mix",
+          "state": "no_local_shift",
+          "submitted_sha256": "837ca0e4591af28934c40a7b2442f1f82175c72693244034ed513673b7834d38",
+          "windows": 37
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "e2be6611e464c0aa307af67725ee74401e623208e0598c7a5fc49721cd127f82",
+          "found": null,
+          "native_picture_rgb_sha256": "7ba65d49a41abf15d1d5a90538c27cd4e7b1c9ccc0a32e5a4c146c729e141680",
+          "offset": null,
+          "pcm_sha256": "6c13d1b4e2a4be2a33bde2dbfa025e013e024d6f93510e7e385fa30281826cc5",
+          "pictures": 71,
+          "relative_picture_pts_sha256": "6755e432391afb72ca35623badefbf54c4f9a4889e73eaa3631715f29dd86d86",
+          "role": "unrelated_insert",
+          "state": "no_local_shift",
+          "submitted_sha256": "4afc0ff4d958d4684bb33a0f299c73e8a0a68b515c5a1460375b4ed22d4c30c2",
+          "windows": 23
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "e2be6611e464c0aa307af67725ee74401e623208e0598c7a5fc49721cd127f82",
+          "found": null,
+          "native_picture_rgb_sha256": "7ba65d49a41abf15d1d5a90538c27cd4e7b1c9ccc0a32e5a4c146c729e141680",
+          "offset": null,
+          "pcm_sha256": "63f18702a4ed946b1f1569e9d26313a8b81788318719bf4ea59c5b26c8f8db3c",
+          "pictures": 71,
+          "relative_picture_pts_sha256": "6755e432391afb72ca35623badefbf54c4f9a4889e73eaa3631715f29dd86d86",
+          "role": "global_shift",
+          "state": "no_local_shift",
+          "submitted_sha256": "67a59cc4d7fb5a299dd286746605706336d6c1736f8ec674ab5bdd6d08704c9a",
+          "windows": 41
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "e2be6611e464c0aa307af67725ee74401e623208e0598c7a5fc49721cd127f82",
+          "found": null,
+          "native_picture_rgb_sha256": "7ba65d49a41abf15d1d5a90538c27cd4e7b1c9ccc0a32e5a4c146c729e141680",
+          "offset": null,
+          "pcm_sha256": "fa64daecbd893cdfa5a338748d0a5bfe54883cc90b3c5e6cf2897e1609f3e666",
+          "pictures": 71,
+          "relative_picture_pts_sha256": "6755e432391afb72ca35623badefbf54c4f9a4889e73eaa3631715f29dd86d86",
+          "role": "short_offset",
+          "state": "no_local_shift",
+          "submitted_sha256": "00ab45e33717f8561737db9565a0de93a8f6ed7324e0f7b9083f1e1a6f89ffbe",
+          "windows": 36
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "e2be6611e464c0aa307af67725ee74401e623208e0598c7a5fc49721cd127f82",
+          "found": null,
+          "native_picture_rgb_sha256": "d5cb904f6f4381143f953311eb2a46294332b84e50674ca0590a73d0afe4bf7f",
+          "offset": null,
+          "pcm_sha256": "f9e3a725007667b1b6489e8e44a0a58cecd7f4615118d182efd8e310b9e6d18c",
+          "pictures": 71,
+          "relative_picture_pts_sha256": "6755e432391afb72ca35623badefbf54c4f9a4889e73eaa3631715f29dd86d86",
+          "role": "picture_change",
+          "state": "unassessed",
+          "submitted_sha256": "88b9883d4b88ee4473c53f63e410798d9676e50ed3f4a3298fe29a62392116b1",
+          "windows": 0
+        }
+      ],
+      "ordinal": 12
+    },
+    {
+      "cases": [
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "f922a43916dd08f93e96c49c3e4f8eb7188ebeab9af3aafb3d2b08ea4d46000c",
+            "soundtrack-shift-picture-028.png": "8ca22af76f27d765cb620ccd9e8be6ca6e88fd021a9ea03446c72a7e1dd6f00d",
+            "soundtrack-shift-submitted.wav": "9d7882bf751b8e6058c9c67607bcfa5d373f2a37585c8af1cd832888571fa389"
+          },
+          "authored": [
+            10240,
+            20480
+          ],
+          "delivery": "pcm",
+          "earlier_sha256": "ac74ee5d8b92a86812c369c4862dd4f030f39b8f7cd6a0a8c9e647ddda926c32",
+          "found": [
+            [
+              10240,
+              20480
+            ],
+            3200
+          ],
+          "native_picture_rgb_sha256": "35505e50a373683d0c959f4631d0a0e59c35110958218e3a5d7116d356d089c9",
+          "offset": 3200,
+          "pcm_sha256": "8c9875d4df1137b968d416888a963cb264e3342bdc57e9b6696100fe0b7f3b2a",
+          "pictures": 57,
+          "relative_picture_pts_sha256": "2360c381f72a9e4f3ff2a19e0051d5bf1f7ae09d449c2dd702de9c566410c0dc",
+          "role": "local_late",
+          "state": "local_shift",
+          "submitted_sha256": "eafa0f23bd579ad0b6f7d559637eeb5f6f147a252e6c653d24fc2f111a133e32",
+          "windows": 28
+        },
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "42f694d2081ac0576e73d031dfc79a4930c2ddcbba7dd402f621202da1f2e9dc",
+            "soundtrack-shift-picture-028.png": "8ca22af76f27d765cb620ccd9e8be6ca6e88fd021a9ea03446c72a7e1dd6f00d",
+            "soundtrack-shift-submitted.wav": "4a4963a57644430d789992716569646585b5101b81c7248bea24f6124f239a0b"
+          },
+          "authored": [
+            10240,
+            20480
+          ],
+          "delivery": "pcm",
+          "earlier_sha256": "ac74ee5d8b92a86812c369c4862dd4f030f39b8f7cd6a0a8c9e647ddda926c32",
+          "found": [
+            [
+              10240,
+              20480
+            ],
+            -3200
+          ],
+          "native_picture_rgb_sha256": "35505e50a373683d0c959f4631d0a0e59c35110958218e3a5d7116d356d089c9",
+          "offset": -3200,
+          "pcm_sha256": "bcc25e27877313fa72439b43b6e2f185db0e2ae25d5ea3a64fed65b52e63d87b",
+          "pictures": 57,
+          "relative_picture_pts_sha256": "2360c381f72a9e4f3ff2a19e0051d5bf1f7ae09d449c2dd702de9c566410c0dc",
+          "role": "local_early",
+          "state": "local_shift",
+          "submitted_sha256": "736f5473ed0756d36bf4c12b01afcc95a127d2daa6f19cec7b6b6fdcc3539a72",
+          "windows": 28
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "ac74ee5d8b92a86812c369c4862dd4f030f39b8f7cd6a0a8c9e647ddda926c32",
+          "found": null,
+          "native_picture_rgb_sha256": "35505e50a373683d0c959f4631d0a0e59c35110958218e3a5d7116d356d089c9",
+          "offset": null,
+          "pcm_sha256": "7cafb3a427c11b3ae270305ff4275f2e492db04e1b55f1cc597887391ad948b7",
+          "pictures": 57,
+          "relative_picture_pts_sha256": "2360c381f72a9e4f3ff2a19e0051d5bf1f7ae09d449c2dd702de9c566410c0dc",
+          "role": "original",
+          "state": "no_local_shift",
+          "submitted_sha256": "70a3a3d5261d969faaa29e0fb848ebf4470afeb16aaf966dfcbec0d483812d74",
+          "windows": 34
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "ac74ee5d8b92a86812c369c4862dd4f030f39b8f7cd6a0a8c9e647ddda926c32",
+          "found": null,
+          "native_picture_rgb_sha256": "35505e50a373683d0c959f4631d0a0e59c35110958218e3a5d7116d356d089c9",
+          "offset": null,
+          "pcm_sha256": "c471a65c9d839f6ffe0153e16f7eeac8473d11da410d2ede14a707338b2198a8",
+          "pictures": 57,
+          "relative_picture_pts_sha256": "2360c381f72a9e4f3ff2a19e0051d5bf1f7ae09d449c2dd702de9c566410c0dc",
+          "role": "gain",
+          "state": "no_local_shift",
+          "submitted_sha256": "4a1b61fce6ae4b4afa203971d391670976cea624c108c8321a3c31473d2ccf5a",
+          "windows": 34
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "ac74ee5d8b92a86812c369c4862dd4f030f39b8f7cd6a0a8c9e647ddda926c32",
+          "found": null,
+          "native_picture_rgb_sha256": "35505e50a373683d0c959f4631d0a0e59c35110958218e3a5d7116d356d089c9",
+          "offset": null,
+          "pcm_sha256": "48344d10b72c7799428aa6fd6e050c8ae3ffedbcfa64657b720c2b250c7ff95d",
+          "pictures": 57,
+          "relative_picture_pts_sha256": "2360c381f72a9e4f3ff2a19e0051d5bf1f7ae09d449c2dd702de9c566410c0dc",
+          "role": "noise_mix",
+          "state": "no_local_shift",
+          "submitted_sha256": "8b32dc34fbbfb4fb1623c48e06deb672a2863f971f5b8e9e7e6c7eaf236f3f7f",
+          "windows": 33
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "ac74ee5d8b92a86812c369c4862dd4f030f39b8f7cd6a0a8c9e647ddda926c32",
+          "found": null,
+          "native_picture_rgb_sha256": "35505e50a373683d0c959f4631d0a0e59c35110958218e3a5d7116d356d089c9",
+          "offset": null,
+          "pcm_sha256": "47acdb01e493dd17479a08823b6bd91678fc709d5326891ef7186072d984c6f5",
+          "pictures": 57,
+          "relative_picture_pts_sha256": "2360c381f72a9e4f3ff2a19e0051d5bf1f7ae09d449c2dd702de9c566410c0dc",
+          "role": "unrelated_insert",
+          "state": "no_local_shift",
+          "submitted_sha256": "b8e19d1bb3b1d9a93c18cba3fed2c352d76fbe8a8b6de19f75869e4e4760b2e2",
+          "windows": 15
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "ac74ee5d8b92a86812c369c4862dd4f030f39b8f7cd6a0a8c9e647ddda926c32",
+          "found": null,
+          "native_picture_rgb_sha256": "35505e50a373683d0c959f4631d0a0e59c35110958218e3a5d7116d356d089c9",
+          "offset": null,
+          "pcm_sha256": "50f75afbb336d0637f5b10b1d83c08376576d8caca9358a8486b6d5090b8d236",
+          "pictures": 57,
+          "relative_picture_pts_sha256": "2360c381f72a9e4f3ff2a19e0051d5bf1f7ae09d449c2dd702de9c566410c0dc",
+          "role": "global_shift",
+          "state": "no_local_shift",
+          "submitted_sha256": "221eb044b66c072dbab457900ac3ef965fa628ceae78421e296df2d61718efec",
+          "windows": 34
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "ac74ee5d8b92a86812c369c4862dd4f030f39b8f7cd6a0a8c9e647ddda926c32",
+          "found": null,
+          "native_picture_rgb_sha256": "35505e50a373683d0c959f4631d0a0e59c35110958218e3a5d7116d356d089c9",
+          "offset": null,
+          "pcm_sha256": "12d624d82e67f282754b445f982d2a5355e86c6ae467e7e511947e855aaa9aab",
+          "pictures": 57,
+          "relative_picture_pts_sha256": "2360c381f72a9e4f3ff2a19e0051d5bf1f7ae09d449c2dd702de9c566410c0dc",
+          "role": "short_offset",
+          "state": "no_local_shift",
+          "submitted_sha256": "95630744346ad23530dc3302681632f3e9c2c8309eb0d288080b6b793e203dca",
+          "windows": 30
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "ac74ee5d8b92a86812c369c4862dd4f030f39b8f7cd6a0a8c9e647ddda926c32",
+          "found": null,
+          "native_picture_rgb_sha256": "3e6b834bc4e4a438328cd3bddecbb0dd45752bf84cba6e27b5a1c0f168742d75",
+          "offset": null,
+          "pcm_sha256": "8c9875d4df1137b968d416888a963cb264e3342bdc57e9b6696100fe0b7f3b2a",
+          "pictures": 57,
+          "relative_picture_pts_sha256": "2360c381f72a9e4f3ff2a19e0051d5bf1f7ae09d449c2dd702de9c566410c0dc",
+          "role": "picture_change",
+          "state": "unassessed",
+          "submitted_sha256": "a9785f0723def6490f854cbdaf5e81a9e00258621f27c5c6258a2c4d57778057",
+          "windows": 0
+        },
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "72e31dc20b1c2a1960cf95dd183df1f940c7b0b007d2c74fb491c1e7c126efce",
+            "soundtrack-shift-picture-028.png": "8ca22af76f27d765cb620ccd9e8be6ca6e88fd021a9ea03446c72a7e1dd6f00d",
+            "soundtrack-shift-submitted.wav": "9f9dee73519ce615178902d7c56c88c1657aa60fc32f88442ee89a3d1c5434e4"
+          },
+          "authored": [
+            10240,
+            20480
+          ],
+          "delivery": "aac",
+          "earlier_sha256": "272cb7b3320b8625a66fbccbc6098ddf67c67c0eecfdd2b009cdeeed4578c07d",
+          "found": [
+            [
+              10240,
+              20480
+            ],
+            3200
+          ],
+          "native_picture_rgb_sha256": "35505e50a373683d0c959f4631d0a0e59c35110958218e3a5d7116d356d089c9",
+          "offset": 3200,
+          "pcm_sha256": "d0a8456d8a26a22b5cb6200c57c0dd4a87362e8f4dbf1fd69ef73fcd235122da",
+          "pictures": 57,
+          "relative_picture_pts_sha256": "2360c381f72a9e4f3ff2a19e0051d5bf1f7ae09d449c2dd702de9c566410c0dc",
+          "role": "local_late",
+          "state": "local_shift",
+          "submitted_sha256": "163e51219e796b2d49be97f32d93100bd36726ef392b227b9119a291b069866c",
+          "windows": 28
+        },
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "86c51eb1e5c505a394a27ae7f7e3cf61960ad6751e32e1614675ed9715d6281f",
+            "soundtrack-shift-picture-028.png": "8ca22af76f27d765cb620ccd9e8be6ca6e88fd021a9ea03446c72a7e1dd6f00d",
+            "soundtrack-shift-submitted.wav": "2749d2703873026bed1b5bb9f9d7a8daa636ebb5804feada1f05bc565c1b81ba"
+          },
+          "authored": [
+            10240,
+            20480
+          ],
+          "delivery": "aac",
+          "earlier_sha256": "272cb7b3320b8625a66fbccbc6098ddf67c67c0eecfdd2b009cdeeed4578c07d",
+          "found": [
+            [
+              10240,
+              20480
+            ],
+            -3200
+          ],
+          "native_picture_rgb_sha256": "35505e50a373683d0c959f4631d0a0e59c35110958218e3a5d7116d356d089c9",
+          "offset": -3200,
+          "pcm_sha256": "3bc038f5805f5a8e0c6bd19ff3d132376d8fa1bd9f43c0286a2627a71102842a",
+          "pictures": 57,
+          "relative_picture_pts_sha256": "2360c381f72a9e4f3ff2a19e0051d5bf1f7ae09d449c2dd702de9c566410c0dc",
+          "role": "local_early",
+          "state": "local_shift",
+          "submitted_sha256": "cc02d101f623bf9c15e6e2095bed103c482d121f0fa565074ddf6a5972df24c3",
+          "windows": 28
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "272cb7b3320b8625a66fbccbc6098ddf67c67c0eecfdd2b009cdeeed4578c07d",
+          "found": null,
+          "native_picture_rgb_sha256": "35505e50a373683d0c959f4631d0a0e59c35110958218e3a5d7116d356d089c9",
+          "offset": null,
+          "pcm_sha256": "ebb531afffb39ccf745df4b9406424f3837394ea71a038d4f02715d966aabbe9",
+          "pictures": 57,
+          "relative_picture_pts_sha256": "2360c381f72a9e4f3ff2a19e0051d5bf1f7ae09d449c2dd702de9c566410c0dc",
+          "role": "original",
+          "state": "no_local_shift",
+          "submitted_sha256": "272cb7b3320b8625a66fbccbc6098ddf67c67c0eecfdd2b009cdeeed4578c07d",
+          "windows": 34
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "272cb7b3320b8625a66fbccbc6098ddf67c67c0eecfdd2b009cdeeed4578c07d",
+          "found": null,
+          "native_picture_rgb_sha256": "35505e50a373683d0c959f4631d0a0e59c35110958218e3a5d7116d356d089c9",
+          "offset": null,
+          "pcm_sha256": "87b167582050a29ad3155e835462941d9d0a3e5663b7943d330ecbe0bc2176a8",
+          "pictures": 57,
+          "relative_picture_pts_sha256": "2360c381f72a9e4f3ff2a19e0051d5bf1f7ae09d449c2dd702de9c566410c0dc",
+          "role": "gain",
+          "state": "no_local_shift",
+          "submitted_sha256": "0c84bf929ebdcc49a61a424705eeb43ab004f1e318307aa7bcdb56abfbd78248",
+          "windows": 34
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "272cb7b3320b8625a66fbccbc6098ddf67c67c0eecfdd2b009cdeeed4578c07d",
+          "found": null,
+          "native_picture_rgb_sha256": "35505e50a373683d0c959f4631d0a0e59c35110958218e3a5d7116d356d089c9",
+          "offset": null,
+          "pcm_sha256": "9d15f04e2fc1a9b7d0b60dd7b402791ea1228deb41200b04bef87bf263f193d9",
+          "pictures": 57,
+          "relative_picture_pts_sha256": "2360c381f72a9e4f3ff2a19e0051d5bf1f7ae09d449c2dd702de9c566410c0dc",
+          "role": "noise_mix",
+          "state": "no_local_shift",
+          "submitted_sha256": "7fe7b6032dcf2a1d79f4727ca76297aa916e19f121ba6a4c6cb1ad2f62d464f7",
+          "windows": 33
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "272cb7b3320b8625a66fbccbc6098ddf67c67c0eecfdd2b009cdeeed4578c07d",
+          "found": null,
+          "native_picture_rgb_sha256": "35505e50a373683d0c959f4631d0a0e59c35110958218e3a5d7116d356d089c9",
+          "offset": null,
+          "pcm_sha256": "6f8e0d5a209a8d702053ac14b93da28b7d75f6cd4809ed2fd917d89e931059a7",
+          "pictures": 57,
+          "relative_picture_pts_sha256": "2360c381f72a9e4f3ff2a19e0051d5bf1f7ae09d449c2dd702de9c566410c0dc",
+          "role": "unrelated_insert",
+          "state": "no_local_shift",
+          "submitted_sha256": "732e2ec2b40aff5457a5939c66f8c0f2edce86edfb878121570eb1abb4750bae",
+          "windows": 15
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "272cb7b3320b8625a66fbccbc6098ddf67c67c0eecfdd2b009cdeeed4578c07d",
+          "found": null,
+          "native_picture_rgb_sha256": "35505e50a373683d0c959f4631d0a0e59c35110958218e3a5d7116d356d089c9",
+          "offset": null,
+          "pcm_sha256": "9824b6c4de218414d3ef816750d7fd67d43e802bc608e8002cc579f7713d3289",
+          "pictures": 57,
+          "relative_picture_pts_sha256": "2360c381f72a9e4f3ff2a19e0051d5bf1f7ae09d449c2dd702de9c566410c0dc",
+          "role": "global_shift",
+          "state": "no_local_shift",
+          "submitted_sha256": "388a62a601db290f056b97124e0e9d3fab905129560618a460c27f1d2ec796d1",
+          "windows": 34
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "272cb7b3320b8625a66fbccbc6098ddf67c67c0eecfdd2b009cdeeed4578c07d",
+          "found": null,
+          "native_picture_rgb_sha256": "35505e50a373683d0c959f4631d0a0e59c35110958218e3a5d7116d356d089c9",
+          "offset": null,
+          "pcm_sha256": "14c864f8fbfecfdd4851b30937d3ae568d6f2aefe0c7f243d57d90e7850d724b",
+          "pictures": 57,
+          "relative_picture_pts_sha256": "2360c381f72a9e4f3ff2a19e0051d5bf1f7ae09d449c2dd702de9c566410c0dc",
+          "role": "short_offset",
+          "state": "no_local_shift",
+          "submitted_sha256": "ad8262faaf4b0c2bd170163565d752d674510c0a10bdc1cbc591f03c0a5cdd2b",
+          "windows": 30
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "272cb7b3320b8625a66fbccbc6098ddf67c67c0eecfdd2b009cdeeed4578c07d",
+          "found": null,
+          "native_picture_rgb_sha256": "3e6b834bc4e4a438328cd3bddecbb0dd45752bf84cba6e27b5a1c0f168742d75",
+          "offset": null,
+          "pcm_sha256": "d0a8456d8a26a22b5cb6200c57c0dd4a87362e8f4dbf1fd69ef73fcd235122da",
+          "pictures": 57,
+          "relative_picture_pts_sha256": "2360c381f72a9e4f3ff2a19e0051d5bf1f7ae09d449c2dd702de9c566410c0dc",
+          "role": "picture_change",
+          "state": "unassessed",
+          "submitted_sha256": "21c3f74ce4df18e3282a5a4b3751c05bed094990d3aea6ff1d1297d02dbb86bf",
+          "windows": 0
+        }
+      ],
+      "ordinal": 13
+    },
+    {
+      "cases": [
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "2aeed92ddd88619891c5b5ba229ac1f6cc7572c30d39089092bd91bb10436295",
+            "soundtrack-shift-picture-030.png": "b07210f3f0d5e6e37de25f65cf2e9ddebe9db0c41bf3e053ff4dfab5745f7100",
+            "soundtrack-shift-submitted.wav": "b2b7ea306c3a0a59858625b0e133f00b56b624d128818ab12682d08917c97eb8"
+          },
+          "authored": [
+            10880,
+            21120
+          ],
+          "delivery": "pcm",
+          "earlier_sha256": "a5061c11a680e132fb6619826b3740591445e5becd1756fec5bef0ed689c2ca8",
+          "found": [
+            [
+              11520,
+              21120
+            ],
+            3840
+          ],
+          "native_picture_rgb_sha256": "a0c6d42b4306bfcb3da0d352a0b6a34127e1be8e82ad2060b51aa6944f1e2202",
+          "offset": 3840,
+          "pcm_sha256": "0c0b61f41270234b519370fbe1325a86efe034052868b6434b82e8702868605b",
+          "pictures": 61,
+          "relative_picture_pts_sha256": "64e9a17b1b9f755c833eedd837d14db9abf77db73b4468f6c3c83bea884933c0",
+          "role": "local_late",
+          "state": "local_shift",
+          "submitted_sha256": "aea7dde529fa35f2f03367bdfea3023f4189e0042180942bfb45a015e8de8da2",
+          "windows": 28
+        },
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "b5e0b93a270dba45278d1bad5f66cd8287d0b0fc5f4ada58928ee5d06a397e25",
+            "soundtrack-shift-picture-029.png": "17b5ea21c9ddc04afe9061b0e1cde9e5f90f73cd34f8d07824f1b2b6a02ef467",
+            "soundtrack-shift-submitted.wav": "fe3af73c8c6cfdc4890f385fb6cf33cffeffc259fce93265526ab82b7809cb57"
+          },
+          "authored": [
+            10880,
+            21120
+          ],
+          "delivery": "pcm",
+          "earlier_sha256": "a5061c11a680e132fb6619826b3740591445e5becd1756fec5bef0ed689c2ca8",
+          "found": [
+            [
+              10880,
+              20480
+            ],
+            -3840
+          ],
+          "native_picture_rgb_sha256": "a0c6d42b4306bfcb3da0d352a0b6a34127e1be8e82ad2060b51aa6944f1e2202",
+          "offset": -3840,
+          "pcm_sha256": "4cb4cc0670edc5d5c3fe66b57393a947b02a69afa23c5653ec35be85df645dff",
+          "pictures": 61,
+          "relative_picture_pts_sha256": "64e9a17b1b9f755c833eedd837d14db9abf77db73b4468f6c3c83bea884933c0",
+          "role": "local_early",
+          "state": "local_shift",
+          "submitted_sha256": "17d456352f8ca8569e558f3b2d897b8aeec62aa7f88aefabd1c6eef0414c1587",
+          "windows": 28
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "a5061c11a680e132fb6619826b3740591445e5becd1756fec5bef0ed689c2ca8",
+          "found": null,
+          "native_picture_rgb_sha256": "a0c6d42b4306bfcb3da0d352a0b6a34127e1be8e82ad2060b51aa6944f1e2202",
+          "offset": null,
+          "pcm_sha256": "baf9d8eb66936514f1c8d1163aaef55501ac752923086a422a4ec6d2e5994496",
+          "pictures": 61,
+          "relative_picture_pts_sha256": "64e9a17b1b9f755c833eedd837d14db9abf77db73b4468f6c3c83bea884933c0",
+          "role": "original",
+          "state": "no_local_shift",
+          "submitted_sha256": "220e22b6879a145ee942eb6565ee4cad9e6e86316bf025d41c06299134242c7c",
+          "windows": 33
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "a5061c11a680e132fb6619826b3740591445e5becd1756fec5bef0ed689c2ca8",
+          "found": null,
+          "native_picture_rgb_sha256": "a0c6d42b4306bfcb3da0d352a0b6a34127e1be8e82ad2060b51aa6944f1e2202",
+          "offset": null,
+          "pcm_sha256": "a4fae6a6257c84c3cf0b7ec46fd0fd2ef6ee74dc8273c8242687c649cf3e69e1",
+          "pictures": 61,
+          "relative_picture_pts_sha256": "64e9a17b1b9f755c833eedd837d14db9abf77db73b4468f6c3c83bea884933c0",
+          "role": "gain",
+          "state": "no_local_shift",
+          "submitted_sha256": "e5dcb51b7d163bdfc0ad4525b38577a94c5fe2f830e7f6066bbce99bf2aabc20",
+          "windows": 32
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "a5061c11a680e132fb6619826b3740591445e5becd1756fec5bef0ed689c2ca8",
+          "found": null,
+          "native_picture_rgb_sha256": "a0c6d42b4306bfcb3da0d352a0b6a34127e1be8e82ad2060b51aa6944f1e2202",
+          "offset": null,
+          "pcm_sha256": "40cd9fccb57b0493ec8514fb399e461e8fa0f184f1bf6cf966ff3b79dc536db7",
+          "pictures": 61,
+          "relative_picture_pts_sha256": "64e9a17b1b9f755c833eedd837d14db9abf77db73b4468f6c3c83bea884933c0",
+          "role": "noise_mix",
+          "state": "no_local_shift",
+          "submitted_sha256": "7c9241cec504a1257a61881f98486505c78b2dd4037135f08a76415d50c1a135",
+          "windows": 31
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "a5061c11a680e132fb6619826b3740591445e5becd1756fec5bef0ed689c2ca8",
+          "found": null,
+          "native_picture_rgb_sha256": "a0c6d42b4306bfcb3da0d352a0b6a34127e1be8e82ad2060b51aa6944f1e2202",
+          "offset": null,
+          "pcm_sha256": "d9182433474e84e6ac410610ca9de53aec2a3f7df4499431d65091bca50ee7a6",
+          "pictures": 61,
+          "relative_picture_pts_sha256": "64e9a17b1b9f755c833eedd837d14db9abf77db73b4468f6c3c83bea884933c0",
+          "role": "unrelated_insert",
+          "state": "no_local_shift",
+          "submitted_sha256": "d24600e014fb30f6edfbb0445d9c38ce4a1484cc59b40ee3733c4953234d5376",
+          "windows": 15
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "a5061c11a680e132fb6619826b3740591445e5becd1756fec5bef0ed689c2ca8",
+          "found": null,
+          "native_picture_rgb_sha256": "a0c6d42b4306bfcb3da0d352a0b6a34127e1be8e82ad2060b51aa6944f1e2202",
+          "offset": null,
+          "pcm_sha256": "8daa8ba17bae7b1c210ce8780034374f77802edf2fcec89d042985163766d40a",
+          "pictures": 61,
+          "relative_picture_pts_sha256": "64e9a17b1b9f755c833eedd837d14db9abf77db73b4468f6c3c83bea884933c0",
+          "role": "global_shift",
+          "state": "no_local_shift",
+          "submitted_sha256": "5e9eceaa2e0c2cc75a8f221c2a88ac1fad9a04596b47cdfbdf2a7a460324dbe0",
+          "windows": 32
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "a5061c11a680e132fb6619826b3740591445e5becd1756fec5bef0ed689c2ca8",
+          "found": null,
+          "native_picture_rgb_sha256": "a0c6d42b4306bfcb3da0d352a0b6a34127e1be8e82ad2060b51aa6944f1e2202",
+          "offset": null,
+          "pcm_sha256": "dbbcfc35a31f06ad13ce612f6641afe6ae342a6eccc37380511584cc8241eebf",
+          "pictures": 61,
+          "relative_picture_pts_sha256": "64e9a17b1b9f755c833eedd837d14db9abf77db73b4468f6c3c83bea884933c0",
+          "role": "short_offset",
+          "state": "no_local_shift",
+          "submitted_sha256": "64bbad0dd76a83ecac001fc3f6538ad5a2ec38048ae5562cad043c5850ff3d44",
+          "windows": 30
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "a5061c11a680e132fb6619826b3740591445e5becd1756fec5bef0ed689c2ca8",
+          "found": null,
+          "native_picture_rgb_sha256": "0d2a5196e6e0e5958294ba9f8c0465a85b5bd69547ed15cf1cad9d6f08f00932",
+          "offset": null,
+          "pcm_sha256": "0c0b61f41270234b519370fbe1325a86efe034052868b6434b82e8702868605b",
+          "pictures": 61,
+          "relative_picture_pts_sha256": "64e9a17b1b9f755c833eedd837d14db9abf77db73b4468f6c3c83bea884933c0",
+          "role": "picture_change",
+          "state": "unassessed",
+          "submitted_sha256": "4f94901da87b32c6503056dc85b27e3de5f22b333caa150dae646404ee90c649",
+          "windows": 0
+        },
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "bc8968cf938779f13d4a51e31eaaeed8ee218ae2ded2ab72f04db828216cd379",
+            "soundtrack-shift-picture-030.png": "b07210f3f0d5e6e37de25f65cf2e9ddebe9db0c41bf3e053ff4dfab5745f7100",
+            "soundtrack-shift-submitted.wav": "ce44948a72ded6b8ae5973bc3d8fc988fcd371585edd65d27af7fd6795b3ef7f"
+          },
+          "authored": [
+            10880,
+            21120
+          ],
+          "delivery": "aac",
+          "earlier_sha256": "3fcaaeb23ae99191f3f04b3aec9b985ec1de2e6ed8f4e2da21fffa597dd186ea",
+          "found": [
+            [
+              11520,
+              21120
+            ],
+            3840
+          ],
+          "native_picture_rgb_sha256": "a0c6d42b4306bfcb3da0d352a0b6a34127e1be8e82ad2060b51aa6944f1e2202",
+          "offset": 3840,
+          "pcm_sha256": "7e9dce566952fab11c642d9756a8a82bb86698f9df9b55f506223c7514c4762c",
+          "pictures": 61,
+          "relative_picture_pts_sha256": "64e9a17b1b9f755c833eedd837d14db9abf77db73b4468f6c3c83bea884933c0",
+          "role": "local_late",
+          "state": "local_shift",
+          "submitted_sha256": "6d56e8fcabd0bb25528d112a3b8eee2fc9b2633a10880794ae61024d97cb5518",
+          "windows": 27
+        },
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "e2e472c6ac536353c70d28b9b3da548a865b0f51457416aae72379b706d86c3d",
+            "soundtrack-shift-picture-029.png": "17b5ea21c9ddc04afe9061b0e1cde9e5f90f73cd34f8d07824f1b2b6a02ef467",
+            "soundtrack-shift-submitted.wav": "7cd0d455d56da73db5aaf74586afe2477912c9e998af1d51ea2f8b4ba1455326"
+          },
+          "authored": [
+            10880,
+            21120
+          ],
+          "delivery": "aac",
+          "earlier_sha256": "3fcaaeb23ae99191f3f04b3aec9b985ec1de2e6ed8f4e2da21fffa597dd186ea",
+          "found": [
+            [
+              10880,
+              20480
+            ],
+            -3840
+          ],
+          "native_picture_rgb_sha256": "a0c6d42b4306bfcb3da0d352a0b6a34127e1be8e82ad2060b51aa6944f1e2202",
+          "offset": -3840,
+          "pcm_sha256": "58b70c3b3c494945d687bc7676e8fa2993c9072fb3ad506b4490fa6ec861d472",
+          "pictures": 61,
+          "relative_picture_pts_sha256": "64e9a17b1b9f755c833eedd837d14db9abf77db73b4468f6c3c83bea884933c0",
+          "role": "local_early",
+          "state": "local_shift",
+          "submitted_sha256": "fe265be61819473a9e0a499affec9eaa14767b375d4111483db8769624b962d0",
+          "windows": 27
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "3fcaaeb23ae99191f3f04b3aec9b985ec1de2e6ed8f4e2da21fffa597dd186ea",
+          "found": null,
+          "native_picture_rgb_sha256": "a0c6d42b4306bfcb3da0d352a0b6a34127e1be8e82ad2060b51aa6944f1e2202",
+          "offset": null,
+          "pcm_sha256": "c9e25c8d7cf0ef7c18df1b4d5f7bda314b8d18de782d5dd1a922774f3ac71899",
+          "pictures": 61,
+          "relative_picture_pts_sha256": "64e9a17b1b9f755c833eedd837d14db9abf77db73b4468f6c3c83bea884933c0",
+          "role": "original",
+          "state": "no_local_shift",
+          "submitted_sha256": "3fcaaeb23ae99191f3f04b3aec9b985ec1de2e6ed8f4e2da21fffa597dd186ea",
+          "windows": 32
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "3fcaaeb23ae99191f3f04b3aec9b985ec1de2e6ed8f4e2da21fffa597dd186ea",
+          "found": null,
+          "native_picture_rgb_sha256": "a0c6d42b4306bfcb3da0d352a0b6a34127e1be8e82ad2060b51aa6944f1e2202",
+          "offset": null,
+          "pcm_sha256": "0024ebb858ce0ae36ed41b6ef4af20d20d25fc28544d13a71e01f03c760dd6b8",
+          "pictures": 61,
+          "relative_picture_pts_sha256": "64e9a17b1b9f755c833eedd837d14db9abf77db73b4468f6c3c83bea884933c0",
+          "role": "gain",
+          "state": "no_local_shift",
+          "submitted_sha256": "5641bafefba1bfb12d637e4e6a3639fdbbb0eb85dc99b7edf89c4575132f4307",
+          "windows": 31
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "3fcaaeb23ae99191f3f04b3aec9b985ec1de2e6ed8f4e2da21fffa597dd186ea",
+          "found": null,
+          "native_picture_rgb_sha256": "a0c6d42b4306bfcb3da0d352a0b6a34127e1be8e82ad2060b51aa6944f1e2202",
+          "offset": null,
+          "pcm_sha256": "5cbdbe942362567f1c9e5785294ab0aad1b17d98bccceb15866b869b46c4eece",
+          "pictures": 61,
+          "relative_picture_pts_sha256": "64e9a17b1b9f755c833eedd837d14db9abf77db73b4468f6c3c83bea884933c0",
+          "role": "noise_mix",
+          "state": "no_local_shift",
+          "submitted_sha256": "534574f2b10f61a2ca9d4b9af92bec2da3d4331ee5a269c9a6ce2a1074d5c015",
+          "windows": 30
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "3fcaaeb23ae99191f3f04b3aec9b985ec1de2e6ed8f4e2da21fffa597dd186ea",
+          "found": null,
+          "native_picture_rgb_sha256": "a0c6d42b4306bfcb3da0d352a0b6a34127e1be8e82ad2060b51aa6944f1e2202",
+          "offset": null,
+          "pcm_sha256": "436d75fd42278d44a86a81632f86111d706384fc66e1844c10d8b3b1547e900d",
+          "pictures": 61,
+          "relative_picture_pts_sha256": "64e9a17b1b9f755c833eedd837d14db9abf77db73b4468f6c3c83bea884933c0",
+          "role": "unrelated_insert",
+          "state": "no_local_shift",
+          "submitted_sha256": "e5d05e602f1d8c3c8a1d806c2b0b126c3b2d0ea849281df45a0220a9528f5a88",
+          "windows": 14
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "3fcaaeb23ae99191f3f04b3aec9b985ec1de2e6ed8f4e2da21fffa597dd186ea",
+          "found": null,
+          "native_picture_rgb_sha256": "a0c6d42b4306bfcb3da0d352a0b6a34127e1be8e82ad2060b51aa6944f1e2202",
+          "offset": null,
+          "pcm_sha256": "49ae399bb5b3b174c577834403d62d323ac834d11ae36b678b07c1aca7bbf179",
+          "pictures": 61,
+          "relative_picture_pts_sha256": "64e9a17b1b9f755c833eedd837d14db9abf77db73b4468f6c3c83bea884933c0",
+          "role": "global_shift",
+          "state": "no_local_shift",
+          "submitted_sha256": "bf9ba25b77b8dde54675b8ae9ee91ee3f56d471b2032c983cc36f21b53aacc58",
+          "windows": 32
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "3fcaaeb23ae99191f3f04b3aec9b985ec1de2e6ed8f4e2da21fffa597dd186ea",
+          "found": null,
+          "native_picture_rgb_sha256": "a0c6d42b4306bfcb3da0d352a0b6a34127e1be8e82ad2060b51aa6944f1e2202",
+          "offset": null,
+          "pcm_sha256": "a05dadcb28c88ed65e724ab3d8f6dddfe79e9b3a1ef4ef10674705af1c860348",
+          "pictures": 61,
+          "relative_picture_pts_sha256": "64e9a17b1b9f755c833eedd837d14db9abf77db73b4468f6c3c83bea884933c0",
+          "role": "short_offset",
+          "state": "no_local_shift",
+          "submitted_sha256": "18f3f37dc0acc1b64777db4c3a0b1d3c2aeed8fc463ce62a1b234b30c54e5363",
+          "windows": 29
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "3fcaaeb23ae99191f3f04b3aec9b985ec1de2e6ed8f4e2da21fffa597dd186ea",
+          "found": null,
+          "native_picture_rgb_sha256": "0d2a5196e6e0e5958294ba9f8c0465a85b5bd69547ed15cf1cad9d6f08f00932",
+          "offset": null,
+          "pcm_sha256": "7e9dce566952fab11c642d9756a8a82bb86698f9df9b55f506223c7514c4762c",
+          "pictures": 61,
+          "relative_picture_pts_sha256": "64e9a17b1b9f755c833eedd837d14db9abf77db73b4468f6c3c83bea884933c0",
+          "role": "picture_change",
+          "state": "unassessed",
+          "submitted_sha256": "da0b97b4b0b546e393a5778fb6ccd05073a4fb5a17fb5cc58a6117ac8c21dcb4",
+          "windows": 0
+        }
+      ],
+      "ordinal": 14
+    },
+    {
+      "cases": [
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "925c6372b3404ef173f4b19bbac792211c0c19b1d3b9d924b55b999100608563",
+            "soundtrack-shift-picture-034.png": "e540f7312b5ea8ac7ba6892351d0a9253c00c26bde99d2cd3cc821ce90fc2e0b",
+            "soundtrack-shift-submitted.wav": "471b597afac35b5ae59cd5ff2e21fe5f0ceb404e6f5101fe55d074bc4bfd69ea"
+          },
+          "authored": [
+            12800,
+            23040
+          ],
+          "delivery": "pcm",
+          "earlier_sha256": "e79e05d0b081500dfff11be31dff4ef5e939bdb776e69a67adf9a9a9193bc2eb",
+          "found": [
+            [
+              13440,
+              23040
+            ],
+            4480
+          ],
+          "native_picture_rgb_sha256": "4d568e59deae77df502f9889c375585c2f37818efd4705f6ddc3f3c0f17418d6",
+          "offset": 4480,
+          "pcm_sha256": "d7f80a316ca92b2d7bc461fdc45d3e6895938f817629ebdda1497107ad6a848a",
+          "pictures": 66,
+          "relative_picture_pts_sha256": "fd71039ac85df1a89fef87d2d9a1404582df1121168fce5ede8bd2e20e1e48a6",
+          "role": "local_late",
+          "state": "local_shift",
+          "submitted_sha256": "6385ade6d42452d442c2411e9da4831e1b2a38e55e280c66c29f760ef5000c24",
+          "windows": 34
+        },
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "e031d38a55a44f2dbf6a6b9baec0d4193a9594df549e509e9aaaef4e627cc17e",
+            "soundtrack-shift-picture-033.png": "203ad9a6ebdcfc22900d2a7b4b7df96debdae2928b30506b970a7afe71d20290",
+            "soundtrack-shift-submitted.wav": "e031d38a55a44f2dbf6a6b9baec0d4193a9594df549e509e9aaaef4e627cc17e"
+          },
+          "authored": [
+            12800,
+            23040
+          ],
+          "delivery": "pcm",
+          "earlier_sha256": "e79e05d0b081500dfff11be31dff4ef5e939bdb776e69a67adf9a9a9193bc2eb",
+          "found": [
+            [
+              13440,
+              22400
+            ],
+            -4480
+          ],
+          "native_picture_rgb_sha256": "4d568e59deae77df502f9889c375585c2f37818efd4705f6ddc3f3c0f17418d6",
+          "offset": -4480,
+          "pcm_sha256": "6473a5668cb094edb2e21d4bb1a4f309f296d6eca444b8f01363f0fb42876477",
+          "pictures": 66,
+          "relative_picture_pts_sha256": "fd71039ac85df1a89fef87d2d9a1404582df1121168fce5ede8bd2e20e1e48a6",
+          "role": "local_early",
+          "state": "local_shift",
+          "submitted_sha256": "cdf16c23b7210fffc3647503731042e35c2dbc3814519b9a83c1e2a781e7f49e",
+          "windows": 34
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "e79e05d0b081500dfff11be31dff4ef5e939bdb776e69a67adf9a9a9193bc2eb",
+          "found": null,
+          "native_picture_rgb_sha256": "4d568e59deae77df502f9889c375585c2f37818efd4705f6ddc3f3c0f17418d6",
+          "offset": null,
+          "pcm_sha256": "ad6fba9c6dd859ab98342d3df11986c7bb5dbed15076e2c2100586d5841130ef",
+          "pictures": 66,
+          "relative_picture_pts_sha256": "fd71039ac85df1a89fef87d2d9a1404582df1121168fce5ede8bd2e20e1e48a6",
+          "role": "original",
+          "state": "no_local_shift",
+          "submitted_sha256": "c9c09cd57a636e3c554b95b3927d7bf6a4676bb3c95d99cfaf857e41ee851354",
+          "windows": 37
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "e79e05d0b081500dfff11be31dff4ef5e939bdb776e69a67adf9a9a9193bc2eb",
+          "found": null,
+          "native_picture_rgb_sha256": "4d568e59deae77df502f9889c375585c2f37818efd4705f6ddc3f3c0f17418d6",
+          "offset": null,
+          "pcm_sha256": "376b1cef10d3a9435e408f590163be9ce3225b6065ca9fd257a3a45ce0bb1022",
+          "pictures": 66,
+          "relative_picture_pts_sha256": "fd71039ac85df1a89fef87d2d9a1404582df1121168fce5ede8bd2e20e1e48a6",
+          "role": "gain",
+          "state": "no_local_shift",
+          "submitted_sha256": "1b05551f17943bb2f116f9c54bd7dccf421395526e895957af008df77a341f58",
+          "windows": 37
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "e79e05d0b081500dfff11be31dff4ef5e939bdb776e69a67adf9a9a9193bc2eb",
+          "found": null,
+          "native_picture_rgb_sha256": "4d568e59deae77df502f9889c375585c2f37818efd4705f6ddc3f3c0f17418d6",
+          "offset": null,
+          "pcm_sha256": "ae5ef062b9f1842b5502f68bec157cd7d531583125f4e5a355f6a82cbd613341",
+          "pictures": 66,
+          "relative_picture_pts_sha256": "fd71039ac85df1a89fef87d2d9a1404582df1121168fce5ede8bd2e20e1e48a6",
+          "role": "noise_mix",
+          "state": "no_local_shift",
+          "submitted_sha256": "9010d974b3cea6b14ca94a0984c4075223d4dd065daad80f6d8dfed9ee1f6d5e",
+          "windows": 33
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "e79e05d0b081500dfff11be31dff4ef5e939bdb776e69a67adf9a9a9193bc2eb",
+          "found": null,
+          "native_picture_rgb_sha256": "4d568e59deae77df502f9889c375585c2f37818efd4705f6ddc3f3c0f17418d6",
+          "offset": null,
+          "pcm_sha256": "feda3459f750df69c6901853464179d2ecf3b57debe980cec87ca5825e374339",
+          "pictures": 66,
+          "relative_picture_pts_sha256": "fd71039ac85df1a89fef87d2d9a1404582df1121168fce5ede8bd2e20e1e48a6",
+          "role": "unrelated_insert",
+          "state": "no_local_shift",
+          "submitted_sha256": "f6d657870019594ea3f0fae0b9e94839b73c0258f3ea31f834418ba799559571",
+          "windows": 21
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "e79e05d0b081500dfff11be31dff4ef5e939bdb776e69a67adf9a9a9193bc2eb",
+          "found": null,
+          "native_picture_rgb_sha256": "4d568e59deae77df502f9889c375585c2f37818efd4705f6ddc3f3c0f17418d6",
+          "offset": null,
+          "pcm_sha256": "dd9ffe82a46113a72a99fa8ec1483d3343200813a5cf18ad1c173d0d407125ae",
+          "pictures": 66,
+          "relative_picture_pts_sha256": "fd71039ac85df1a89fef87d2d9a1404582df1121168fce5ede8bd2e20e1e48a6",
+          "role": "global_shift",
+          "state": "no_local_shift",
+          "submitted_sha256": "902a500af12ea6080f3af6bfd72defa16e6e48dfdb918a2c6e70aaa3389cc53a",
+          "windows": 37
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "e79e05d0b081500dfff11be31dff4ef5e939bdb776e69a67adf9a9a9193bc2eb",
+          "found": null,
+          "native_picture_rgb_sha256": "4d568e59deae77df502f9889c375585c2f37818efd4705f6ddc3f3c0f17418d6",
+          "offset": null,
+          "pcm_sha256": "aaacf43d0a1234cd7b1de3d117344b355210eebad300d82fe2992ab6dfd37a12",
+          "pictures": 66,
+          "relative_picture_pts_sha256": "fd71039ac85df1a89fef87d2d9a1404582df1121168fce5ede8bd2e20e1e48a6",
+          "role": "short_offset",
+          "state": "no_local_shift",
+          "submitted_sha256": "eba830c649de0cccaae7e3f2a73cead65c7238035f0d9b2fd7b1b63fa0c23ade",
+          "windows": 34
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "pcm",
+          "earlier_sha256": "e79e05d0b081500dfff11be31dff4ef5e939bdb776e69a67adf9a9a9193bc2eb",
+          "found": null,
+          "native_picture_rgb_sha256": "052c80d9ef166f5e09d2a2d83c88e195c9f4f1d5e37cdd2ba2308d198a57780a",
+          "offset": null,
+          "pcm_sha256": "d7f80a316ca92b2d7bc461fdc45d3e6895938f817629ebdda1497107ad6a848a",
+          "pictures": 66,
+          "relative_picture_pts_sha256": "fd71039ac85df1a89fef87d2d9a1404582df1121168fce5ede8bd2e20e1e48a6",
+          "role": "picture_change",
+          "state": "unassessed",
+          "submitted_sha256": "1d2ebeb2f6d16963093c22037e0f8b152ca2d161830fa994aa944a3a5cd33093",
+          "windows": 0
+        },
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "2da0c1954bb5d00a5aafd20be596b6363bf1c79763bef22c295dc573ae69f26f",
+            "soundtrack-shift-picture-034.png": "e540f7312b5ea8ac7ba6892351d0a9253c00c26bde99d2cd3cc821ce90fc2e0b",
+            "soundtrack-shift-submitted.wav": "267dc4e5f1698a2b5b119888269ca1a1e575c40a074e1a3db544abca0d52f5b8"
+          },
+          "authored": [
+            12800,
+            23040
+          ],
+          "delivery": "aac",
+          "earlier_sha256": "70ceb88d6edc636a18d9d8feb2f2a5ddc477a3c8607a9097f12dd22fcaed3936",
+          "found": [
+            [
+              13440,
+              23040
+            ],
+            4480
+          ],
+          "native_picture_rgb_sha256": "4d568e59deae77df502f9889c375585c2f37818efd4705f6ddc3f3c0f17418d6",
+          "offset": 4480,
+          "pcm_sha256": "01855545fe9634dff747616ef1125869979426f3ac36b069b3e7ad3c1669d4e8",
+          "pictures": 66,
+          "relative_picture_pts_sha256": "fd71039ac85df1a89fef87d2d9a1404582df1121168fce5ede8bd2e20e1e48a6",
+          "role": "local_late",
+          "state": "local_shift",
+          "submitted_sha256": "46e27f6a5ab3e2084020ffe4672622f0c28fbb001201aac5c243a55e02beec4a",
+          "windows": 33
+        },
+        {
+          "assets": {
+            "soundtrack-shift-earlier.wav": "fc12d75066ae6655ee403950da13dfa12233af1dbdf6e097d34acc4cda3891f1",
+            "soundtrack-shift-picture-033.png": "203ad9a6ebdcfc22900d2a7b4b7df96debdae2928b30506b970a7afe71d20290",
+            "soundtrack-shift-submitted.wav": "00cadfb4f16f7bca1bf40f7dfb22d09ec6e65efb28bb6e9ac854ce3f7080c133"
+          },
+          "authored": [
+            12800,
+            23040
+          ],
+          "delivery": "aac",
+          "earlier_sha256": "70ceb88d6edc636a18d9d8feb2f2a5ddc477a3c8607a9097f12dd22fcaed3936",
+          "found": [
+            [
+              13440,
+              22400
+            ],
+            -4480
+          ],
+          "native_picture_rgb_sha256": "4d568e59deae77df502f9889c375585c2f37818efd4705f6ddc3f3c0f17418d6",
+          "offset": -4480,
+          "pcm_sha256": "ef29f0778c641ec44c50abd34ee1198e7abb68d1a4317225fdb5a722abe4e37c",
+          "pictures": 66,
+          "relative_picture_pts_sha256": "fd71039ac85df1a89fef87d2d9a1404582df1121168fce5ede8bd2e20e1e48a6",
+          "role": "local_early",
+          "state": "local_shift",
+          "submitted_sha256": "dd695b73904d1d670304c58f71f1e39cde7914d8661deb30319869f3d7e3e010",
+          "windows": 34
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "70ceb88d6edc636a18d9d8feb2f2a5ddc477a3c8607a9097f12dd22fcaed3936",
+          "found": null,
+          "native_picture_rgb_sha256": "4d568e59deae77df502f9889c375585c2f37818efd4705f6ddc3f3c0f17418d6",
+          "offset": null,
+          "pcm_sha256": "9b8f59de32a80b54ae33ae5d9618c8f97585b2b87060f9a197e435b82b50f0c0",
+          "pictures": 66,
+          "relative_picture_pts_sha256": "fd71039ac85df1a89fef87d2d9a1404582df1121168fce5ede8bd2e20e1e48a6",
+          "role": "original",
+          "state": "no_local_shift",
+          "submitted_sha256": "70ceb88d6edc636a18d9d8feb2f2a5ddc477a3c8607a9097f12dd22fcaed3936",
+          "windows": 37
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "70ceb88d6edc636a18d9d8feb2f2a5ddc477a3c8607a9097f12dd22fcaed3936",
+          "found": null,
+          "native_picture_rgb_sha256": "4d568e59deae77df502f9889c375585c2f37818efd4705f6ddc3f3c0f17418d6",
+          "offset": null,
+          "pcm_sha256": "b0969d4d65790ce7f41ef2cbb2396a6fb148f367106a3b5a0ea8c65ecc639694",
+          "pictures": 66,
+          "relative_picture_pts_sha256": "fd71039ac85df1a89fef87d2d9a1404582df1121168fce5ede8bd2e20e1e48a6",
+          "role": "gain",
+          "state": "no_local_shift",
+          "submitted_sha256": "3b73902ea43c58741151f2a6d701ef6a88c47ba4350eef2d24a6035072991160",
+          "windows": 37
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "70ceb88d6edc636a18d9d8feb2f2a5ddc477a3c8607a9097f12dd22fcaed3936",
+          "found": null,
+          "native_picture_rgb_sha256": "4d568e59deae77df502f9889c375585c2f37818efd4705f6ddc3f3c0f17418d6",
+          "offset": null,
+          "pcm_sha256": "c8ee2067470cb15940570d40573070a9dde1a53f9584baeb9c2f01b36f41aec9",
+          "pictures": 66,
+          "relative_picture_pts_sha256": "fd71039ac85df1a89fef87d2d9a1404582df1121168fce5ede8bd2e20e1e48a6",
+          "role": "noise_mix",
+          "state": "no_local_shift",
+          "submitted_sha256": "33061a765b35d95acffc9e007f763ebf421edd7957ee4a0d5ff0d75cf9b990a9",
+          "windows": 33
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "70ceb88d6edc636a18d9d8feb2f2a5ddc477a3c8607a9097f12dd22fcaed3936",
+          "found": null,
+          "native_picture_rgb_sha256": "4d568e59deae77df502f9889c375585c2f37818efd4705f6ddc3f3c0f17418d6",
+          "offset": null,
+          "pcm_sha256": "67f2a01fb5696f601236b77cd6d17a718d2d58e98cf1a0c8f1b0afac9b56f93f",
+          "pictures": 66,
+          "relative_picture_pts_sha256": "fd71039ac85df1a89fef87d2d9a1404582df1121168fce5ede8bd2e20e1e48a6",
+          "role": "unrelated_insert",
+          "state": "no_local_shift",
+          "submitted_sha256": "0a87196a4f8690ef45c010311ef35d123ae3f2316e42d4f23fb283a6542615a1",
+          "windows": 21
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "70ceb88d6edc636a18d9d8feb2f2a5ddc477a3c8607a9097f12dd22fcaed3936",
+          "found": null,
+          "native_picture_rgb_sha256": "4d568e59deae77df502f9889c375585c2f37818efd4705f6ddc3f3c0f17418d6",
+          "offset": null,
+          "pcm_sha256": "4e1dcbbecb0e3ddaebb3c72150a738f3b32cbd6d14feca7f1c4c4c0833975321",
+          "pictures": 66,
+          "relative_picture_pts_sha256": "fd71039ac85df1a89fef87d2d9a1404582df1121168fce5ede8bd2e20e1e48a6",
+          "role": "global_shift",
+          "state": "no_local_shift",
+          "submitted_sha256": "30576eaf96f26e72f3236ba56c72ab997fecbc2311c999999d0a9af9abe8d8e4",
+          "windows": 37
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "70ceb88d6edc636a18d9d8feb2f2a5ddc477a3c8607a9097f12dd22fcaed3936",
+          "found": null,
+          "native_picture_rgb_sha256": "4d568e59deae77df502f9889c375585c2f37818efd4705f6ddc3f3c0f17418d6",
+          "offset": null,
+          "pcm_sha256": "0adc0e1519972004102954b81719e664b0cf7af5150e5903b3f45a59cbe560cf",
+          "pictures": 66,
+          "relative_picture_pts_sha256": "fd71039ac85df1a89fef87d2d9a1404582df1121168fce5ede8bd2e20e1e48a6",
+          "role": "short_offset",
+          "state": "no_local_shift",
+          "submitted_sha256": "a37fc18512ec5d549e7f2d57f093310bf279cd94c5b30c3127b54bbcad4f456b",
+          "windows": 33
+        },
+        {
+          "assets": {},
+          "authored": null,
+          "delivery": "aac",
+          "earlier_sha256": "70ceb88d6edc636a18d9d8feb2f2a5ddc477a3c8607a9097f12dd22fcaed3936",
+          "found": null,
+          "native_picture_rgb_sha256": "052c80d9ef166f5e09d2a2d83c88e195c9f4f1d5e37cdd2ba2308d198a57780a",
+          "offset": null,
+          "pcm_sha256": "01855545fe9634dff747616ef1125869979426f3ac36b069b3e7ad3c1669d4e8",
+          "pictures": 66,
+          "relative_picture_pts_sha256": "fd71039ac85df1a89fef87d2d9a1404582df1121168fce5ede8bd2e20e1e48a6",
+          "role": "picture_change",
+          "state": "unassessed",
+          "submitted_sha256": "304186ec233468edb89a4dd5d0c9fee93705068a82a865d2a7c790208b8a2370",
+          "windows": 0
+        }
+      ],
+      "ordinal": 15
+    }
+  ],
+  "schema": "chipmunk.video-paired-soundtrack-panel/1",
+  "source_receipt_sha256": "1d2cb7f65ab2a87a287f2b09c1809b06bf60bf85b9dadb93bb924968a858c2b8"
+}

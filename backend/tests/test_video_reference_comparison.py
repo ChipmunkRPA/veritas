@@ -128,6 +128,33 @@ def test_offline_replay_checks_exact_bytes(tmp_path, aligned_pair):
         video_reference.compare(earlier, Path(__file__))
 
 
+def test_picture_identical_soundtrack_shift_has_signed_exact_evidence(tmp_path):
+    rng = np.random.default_rng(231)
+    frames = rng.integers(0, 256, (75, 48, 64, 3), dtype=np.uint8)
+    pcm = rng.integers(-6000, 6000, 48000, dtype=np.int16).astype(np.float32) / 32768
+    modified = pcm.copy()
+    modified[16000:26240] = pcm[12800:23040]
+    earlier = encode(tmp_path, "timing-original", frames, pcm)
+    later = encode(tmp_path, "timing-local-later", frames, modified)
+    record, assets = video_reference.compare(earlier, later)
+    assert record["schema"] == video_reference.SCHEMA_WITH_SOUNDTRACK
+    timing = record["soundtrack_alignment"]
+    assert timing["status"] == "local_shift" and timing["offset_ms"] == 200
+    assert not timing["affects_overall_confidence"] and timing["picture_pair_sha256"] == record["picture"]["frame_pairs_sha256"]
+    span = timing["range"]
+    assert span["submitted"]["samples"] == [16000, 26240]
+    assert span["earlier"]["samples"] == [12800, 23040]
+    np.testing.assert_array_equal(read_wav(assets[span["submitted"]["audio"]["file"]]), pcm[12800:23040])
+    np.testing.assert_array_equal(read_wav(assets[span["earlier"]["audio"]["file"]]), pcm[12800:23040])
+    with Image.open(io.BytesIO(assets[span["picture"]["asset"]["file"]])) as picture:
+        np.testing.assert_array_equal(np.asarray(picture), frames[span["picture"]["frame_index"]])
+    target = tmp_path / "timing-review"
+    assert run(earlier, later, target) == run(earlier, later, target, verify=True) == record
+    global_shift = encode(tmp_path, "timing-global", frames, np.r_[np.zeros(3200, dtype=np.float32), pcm[:-3200]])
+    global_record, _ = video_reference.compare(earlier, global_shift)
+    assert global_record["soundtrack_alignment"]["status"] == "no_local_shift"
+
+
 @pytest.mark.parametrize("lossless", [True, False], ids=["earlier-ffv1", "earlier-h264"])
 def test_bounded_lossy_pair_keeps_exact_results_and_replays_local_native_crops(tmp_path, reference_http, monkeypatch, lossless):
     yy, xx = np.indices((288, 360))

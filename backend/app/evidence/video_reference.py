@@ -23,6 +23,7 @@ SCHEMA = "chipmunk.video-reference-comparison/1"
 SCHEMA_WITH_LOCAL = "chipmunk.video-reference-comparison/2"
 SCHEMA_WITH_TIMING = "chipmunk.video-reference-comparison/3"
 SCHEMA_WITH_SHORT_TIMING = "chipmunk.video-reference-comparison/4"
+SCHEMA_WITH_SOUNDTRACK = "chipmunk.video-reference-comparison/5"
 MAX_BYTES = 48 * 1024 * 1024
 MAX_FRAMES = 360
 MAX_PIXELS = 1280 * 720
@@ -196,7 +197,7 @@ def _picture(paths, tables, assets, *, include_local):
 
 def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
             timing_event_s: Fraction | None = None, timing_model: Path | None = None,
-            timing_short_fallback: bool = False) -> tuple[dict, dict[str, bytes]]:
+            timing_short_fallback: bool = False, include_soundtrack: bool = True) -> tuple[dict, dict[str, bytes]]:
     """Report actual decoded differences at equal relative native picture timestamps."""
     paths = earlier, submitted
     sources = tuple(_identity(path) for path in paths)
@@ -225,6 +226,19 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
         )
         if record["timing"].get("waveform_basis") == video_reference_timing.SHORT_WAVEFORM_BASIS:
             record["schema"] = SCHEMA_WITH_SHORT_TIMING
+    if (include_soundtrack and tracks is not None and not record["picture"]["changed_frames"]
+            and record["audio"]["status"] == "measured"):
+        from app.evidence import video_reference_soundtrack
+
+        timing_assets = {}
+        try:
+            alignment = video_reference_soundtrack.assess(submitted, tables[1], record["picture"], record["audio"], tracks, timing_assets)
+        except DecodeError:
+            alignment = {"status": "unassessed", "scope": video_reference_soundtrack.SCOPE, "affects_overall_confidence": False,
+                         "summary": "The check could not retrieve the verified picture for the matched soundtrack excerpt."}
+        else:
+            assets.update(timing_assets)
+        record.update(schema=SCHEMA_WITH_SOUNDTRACK, soundtrack_alignment=alignment)
     if sources != tuple(_identity(path) for path in paths):
         raise ValueError("One of the clips changed while the comparison was running.")
     return record, assets

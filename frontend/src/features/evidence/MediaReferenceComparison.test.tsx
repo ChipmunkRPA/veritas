@@ -49,6 +49,7 @@ it('shows matching source times and waveform previews and exports their JSON and
   expect(screen.queryByLabelText('Earlier mouth closure (seconds)')).toBeNull()
   fireEvent.click(screen.getByRole('button', { name: 'Compare videos' }))
   expect(await screen.findByText('V01 · 0.480–0.800 s')).toBeTruthy()
+  expect(screen.getByText('Local soundtrack timing was skipped because the decoded pictures differ.')).toBeTruthy()
   expect(screen.getByText('A01 · 0.240–0.420 s')).toBeTruthy()
   expect(screen.getByAltText('Earlier clip at 0.480 seconds').getAttribute('src')).toBe('data:image/png;base64,iVBORw0KGgo=')
   expect(screen.getByRole('img', { name: 'Analyzed clip waveform' })).toBeTruthy()
@@ -60,6 +61,32 @@ it('shows matching source times and waveform previews and exports their JSON and
   expect(vi.mocked(saveBlob).mock.calls.map(([blob]) => blob.type)).toEqual(['application/json', 'application/pdf'])
   page.unmount()
   expect(revokeObjectURL).toHaveBeenCalledTimes(2)
+})
+
+it('renders the signed local soundtrack shift and exact native picture from the current video export', async () => {
+  const picture = { file: 'native.png', media_type: 'image/png', sha256: 'a'.repeat(64) }
+  const audio = { file: 'matched.wav', media_type: 'audio/wav', sha256: 'b'.repeat(64) }
+  const waveform = { low: [-0.4], high: [0.2] }
+  const summary = 'Matching soundtrack audio moved 200.0 ms later relative to the same pictures.'
+  const comparison = {
+    schema: 'chipmunk.video-reference-comparison/5', status: 'measured', interpretation: 'Decoded source differences.',
+    submitted: { width: 64, height: 48 },
+    soundtrack_alignment: { summary, scope: 'The pictures matched.', range: {
+      earlier: { start_s: .56, end_s: 1.16, audio, waveform }, submitted: { start_s: .76, end_s: 1.36, audio, waveform },
+      picture: { frame_index: 31, time_s: 1.034, asset: picture },
+    } },
+  }
+  const fetch = vi.fn().mockResolvedValueOnce(Response.json({ available: true }))
+    .mockResolvedValueOnce(Response.json({ comparison, assets: { 'native.png': 'iVBORw0KGgo=', 'matched.wav': 'UklGRg==' } }))
+  vi.stubGlobal('fetch', fetch)
+  show()
+  fireEvent.change(await screen.findByLabelText('Earlier video'), { target: { files: [new File(['movie'], 'earlier.mp4')] } })
+  fireEvent.click(screen.getByRole('button', { name: 'Compare videos' }))
+  expect(await screen.findByText(summary)).toBeTruthy()
+  expect(screen.getByText('Earlier clip · 0.560–1.160 s')).toBeTruthy()
+  expect(screen.getByText('Analyzed clip · 0.760–1.360 s')).toBeTruthy()
+  expect(screen.getByAltText('Analyzed clip picture 31 at 1.034 seconds').getAttribute('src')).toBe('data:image/png;base64,iVBORw0KGgo=')
+  expect(screen.getAllByRole('img', { name: /matched soundtrack waveform/ })).toHaveLength(2)
 })
 
 it('shows and exports the standalone audio difference waveform on the recording timeline', async () => {

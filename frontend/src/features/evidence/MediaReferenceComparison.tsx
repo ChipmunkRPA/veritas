@@ -36,6 +36,12 @@ type TimingComparison = {
   offset_ms?: number
   event_range_s?: number[]
 } & Partial<Record<Side, TimingSide>>
+type SoundtrackSide = { start_s: number; end_s: number; audio: Asset; waveform: Waveform }
+type SoundtrackTiming = {
+  summary: string
+  scope: string
+  range?: Record<Side, SoundtrackSide> & { picture: { frame_index: number; time_s: number; asset: Asset } }
+}
 type AudioRange = Extent & {
   changed_samples: number
   start_sample?: number
@@ -55,15 +61,17 @@ type Comparison = {
   audio?: { status: string; changed_samples?: number; submitted?: { samples: number }; ranges?: AudioRange[] }
 } & ({
   schema: 'chipmunk.video-reference-comparison/1' | 'chipmunk.video-reference-comparison/2' | 'chipmunk.video-reference-comparison/3'
-    | 'chipmunk.video-reference-comparison/4'
+    | 'chipmunk.video-reference-comparison/4' | 'chipmunk.video-reference-comparison/5'
   submitted: PictureDimensions
   picture?: { matching_frames: number; changed_frames: number; ranges: PictureRange[]; local_comparison?: LocalComparison }
   timing?: TimingComparison
+  soundtrack_alignment?: SoundtrackTiming
   level_adjusted?: never
 } | {
   schema: 'chipmunk.audio-reference-comparison/1' | 'chipmunk.audio-reference-comparison/2'
   picture?: never
   timing?: never
+  soundtrack_alignment?: never
   level_adjusted?: LevelAdjustedAudio
 })
 type Result = { comparison: Comparison; assets: Record<string, string>; pdf?: string | null }
@@ -248,6 +256,32 @@ function TimingEvidence({ timing, assets }: { timing: TimingComparison; assets: 
   </section>
 }
 
+function SoundtrackTimingEvidence({ timing, assets }: { timing: SoundtrackTiming; assets: Result['assets'] }) {
+  const span = timing.range
+  const image = span && assetBody(assets, span.picture.asset, 'image/png')
+  const maximum = span ? Math.max(.01, ...sides.flatMap(side => [...span[side].waveform.low, ...span[side].waveform.high].map(Math.abs))) : 1
+  return <section className="space-y-2" aria-label="Local soundtrack timing">
+    <h3 className="m-0 text-small font-medium">Local soundtrack timing</h3>
+    <p className="m-0 text-small">{timing.summary}</p>
+    {span && <>
+      {image && <figure className="m-0 max-w-80 space-y-1">
+        <img src={'data:image/png;base64,' + image} className="h-auto w-full rounded border border-border"
+          alt={`Analyzed clip picture ${span.picture.frame_index} at ${sourceSeconds.format(span.picture.time_s)} seconds`} />
+        <figcaption className="text-caption text-text-muted">Picture at {sourceSeconds.format(span.picture.time_s)} s in the analyzed clip.</figcaption>
+      </figure>}
+      <div className="grid gap-4 sm:grid-cols-2">{sides.map(side => {
+        const row = span[side]
+        return <div className="min-w-0 space-y-2" key={side}>
+          <p className="m-0 text-small font-medium">{names[side]} · {sourceSeconds.format(row.start_s)}–{sourceSeconds.format(row.end_s)} s</p>
+          <ClipWaveform wave={row.waveform} maximum={maximum} name={`${names[side]} matched soundtrack`} />
+          <Playback body={assetBody(assets, row.audio, 'audio/wav')} name={`Play ${names[side].toLowerCase()} matched soundtrack`} />
+        </div>
+      })}</div>
+    </>}
+    <p className="m-0 text-caption text-text-muted">{timing.scope}</p>
+  </section>
+}
+
 function ResultView({ result }: { result: Result }) {
   const { comparison, assets, pdf } = result
   const { picture, audio } = comparison
@@ -267,6 +301,11 @@ function ResultView({ result }: { result: Result }) {
     <p className="m-0 text-small text-text-muted">{comparison.interpretation}</p>
     {comparison.status !== 'measured' && <p className="m-0 text-small">{notes[comparison.status] ?? 'The files could not be compared.'}</p>}
     {comparison.timing && <TimingEvidence timing={comparison.timing} assets={assets} />}
+    {comparison.soundtrack_alignment && <SoundtrackTimingEvidence timing={comparison.soundtrack_alignment} assets={assets} />}
+    {picture && !comparison.soundtrack_alignment && (picture.changed_frames > 0 || audio?.status !== 'measured') &&
+      <p className="m-0 text-caption text-text-muted">{picture.changed_frames > 0
+        ? 'Local soundtrack timing was skipped because the decoded pictures differ.'
+        : 'Local soundtrack timing requires two continuous soundtracks with matching start times and sample counts.'}</p>}
     {comparison.level_adjusted && <LevelAdjustedEvidence result={comparison.level_adjusted} assets={assets} />}
     {!isAudio && picture && <>
       <h3 className="m-0 text-small font-medium">Pictures</h3>
@@ -322,7 +361,7 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable }: { analysisId:
     try {
       const response = await request<Result>(route(analysisId, kind), { method: 'POST', headers: authHeaders('POST'), body, signal: controller.signal })
       const schema = response?.comparison?.schema
-      const accepted = kind === 'audio' ? [1, 2] : [1, 2, 3, 4]
+      const accepted = kind === 'audio' ? [1, 2] : [1, 2, 3, 4, 5]
       if (!accepted.some(version => schema === `chipmunk.${kind}-reference-comparison/${version}`)) {
         throw new Error('The comparison response is incomplete.')
       }
@@ -344,6 +383,9 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable }: { analysisId:
       : 'Choose an earlier copy with matching picture dimensions and timing. Each clip can have up to 12 seconds of picture timestamps, 360 frames, and 48 MiB.'}</p>
     {kind === 'audio' && <p className="mt-2 mb-0 text-caption text-text-muted">
       For matching lossless 16 kHz mono recordings, the comparison can also account for a constant volume change.
+    </p>}
+    {kind === 'video' && <p className="mt-2 mb-0 text-caption text-text-muted">
+      Local soundtrack timing is checked when both files have identical decoded pictures and matching soundtrack clocks.
     </p>}
     <form onSubmit={event => void submit(event)} className="mt-4 flex flex-wrap items-end gap-3">
       <div className="min-w-0">

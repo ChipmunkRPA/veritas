@@ -12,6 +12,8 @@ The earlier H.264 study recovered 24/32 neural redraw locations in the tested 25
 
 The first soundtrack is compared on the same 16 kHz decoded mono sample clock when both tracks have the same relative start, sample count, and continuous timing. Adjacent 20 ms bins with differences form a range. Counts include only samples that differ. The three longest ranges include waveforms and exact playable samples for the first two seconds or less. The two waveforms share a scale. JSON contains the exact source clocks, SHA-256 commitments, waveforms, and media. The separate PDF includes source identities, all ranges, picture previews, and selected waveforms. These measurements carry zero AI-confidence weight.
 
+When every decoded picture matches, **Local soundtrack timing** checks whether the same sound moved earlier or later inside an otherwise aligned soundtrack. A measured shift shows the same sound at its time in each clip, both waveforms, and the native picture displayed at the midpoint of the measured interval. JSON includes playable excerpts and exact picture and sample positions. The supplemental PDF includes the picture and waveforms. The check runs without a marked mouth time and carries zero AI-confidence weight. [Held PCM and AAC results and replay](video-paired-soundtrack-transfer-2026-11-12.md)
+
 ## Mark a mouth closure
 
 On a local development instance with the optional timing dependency installed, enter the time in seconds when a speaker's lips visibly close just before reopening in the earlier clip. The check looks for the same mouth motion and a matching speech excerpt in the analyzed clip. It reports how much earlier or later the picture event moved relative to the speech. The report includes the two native mouth crops, each source picture timestamp, and waveform excerpts on a shared scale. The JSON adds the playable excerpts, source sample indices, and checksums. An unsupported or ambiguous match stays unassessed. Ordinary editing can move mouth and speech timing. This finding carries zero AI-confidence weight and uses the same comparison without another checkout.
@@ -37,6 +39,8 @@ python -m scripts.compare_video_references earlier.mov analyzed.mov downloaded-c
 ```
 
 The replay uses the same measurement implementation as the app. Record your FFmpeg and Pillow versions if two runs produce different decoded bytes. Keep source files, previews, and sound clips in your local workspace. For version 3 timing evidence, install the pinned runtime and pass `--timing-model /path/to/face_landmarker.task` or set `VERITAS_VIDEO_REFERENCE_TIMING_MODEL_PATH`. The verifier reads the marked time from the export. To author a marked comparison offline, add `--event-seconds 0.720` and use the same local task.
+
+Version 5 includes the automatic soundtrack timing comparison. It requires no additional weights. A version 5 export that also includes marked mouth evidence needs the same pinned timing runtime for replay.
 
 To verify a downloaded version 2 JSON with a measured local range using only Python 3.11 or later, FFmpeg, and FFprobe, run from the repository root.
 

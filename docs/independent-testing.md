@@ -39,6 +39,9 @@ before/during/after previews, and exact soundtrack excerpts. On supported
 pairs it also replays the short local picture range and its native crops.
 An additional Python and FFmpeg command independently checks the exported local
 interval and all six native crops without installing the app or model weights.
+The [paired soundtrack timing study](video-paired-soundtrack-transfer-2026-11-12.md)
+replays measured shifts between identical-picture copies and verifies the
+exact earlier and submitted audio excerpts and their corresponding picture.
 
 The [brief face-change study](video-face-return-fine-scene-2026-11-12.md)
 measures whether additional background support recovers an interval around a

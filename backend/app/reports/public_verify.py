@@ -105,7 +105,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                              and check.get('face_boundary_measurement_sha256') == measurement
                              for check in result.get('checks', [])),
                          'Refined face timing differs from its corresponding public check')
-            if packet.get('face_return') is not None or packet.get('semantics') == 'face-short-return/1':
+            if packet.get('face_return') is not None or packet.get('semantics') in face_return_binding.METHOD_VERSIONS:
                 face_return_binding.validate_packet(packet, evidence['source'])
                 measurement = canonical_hash(packet['face_return'])
                 _require(any(check['id'] == packet['signal_refs'][0]['id'] and check.get('status') == 'ok'

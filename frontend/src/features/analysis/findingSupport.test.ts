@@ -116,6 +116,22 @@ describe('findingSupport', () => {
     expect(result.packets[0].href).toContain('#media-evidence-A01')
   })
 
+  it('links a recorded audio finding to its scored coverage when no inspection windows were selected', () => {
+    const set = audio([])
+    set.coverage = { decoded_samples: 96000, scored_samples: 96000, unscored_samples: 0, decode_limit_reached: false,
+      selection_threshold: .5, windows: [
+        { start_sample: 0, end_sample: 64000, score: .004, signal_refs: commonPacket.signal_refs },
+        { start_sample: 32000, end_sample: 96000, score: .015, signal_refs: commonPacket.signal_refs },
+      ] }
+    const voice = finding({ family: 'A1_voice' })
+    expect(findingSupport({ analysisId, finding: voice, signals: [signal()], evidence: set }).voiceCoverage).toMatchObject({
+      href: '/analyses/analysis-1/media-evidence?view=plain#media-evidence-voice-coverage', scope: 'audio_coverage',
+    })
+    expect(findingSupport({ analysisId, finding: voice, signals: [signal({ status: 'skipped' })], evidence: set }).voiceCoverage).toBeUndefined()
+    expect(findingSupport({ analysisId, finding: voice, signals: [signal()], evidence: { ...set, packets: [audioPacket()] } }).voiceCoverage).toBeUndefined()
+    expect(findingSupport({ analysisId, finding: voice, signals: [signal()], evidence: audio([]) }).voiceCoverage).toBeUndefined()
+  })
+
   it('uses actual video source timestamps, preserving sampled-window scope', () => {
     const first = findingSupport({ analysisId, finding: finding(), signals: [signal()], evidence: video() }).packets[0]
     expect(first.label).toBe('V01 · Frame 17 · 2.300 s (source clock)')

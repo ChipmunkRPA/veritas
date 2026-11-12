@@ -24,12 +24,15 @@ function SourceTimestamps({ ranges, videoOriginS }: {
   })}</>
 }
 
-export default function AudioEvidenceContent({ set, token, mediaReady, videoOriginS }: {
-  set: AudioEvidenceSet; token: string; mediaReady: boolean; videoOriginS?: number | null
+export default function AudioEvidenceContent({ set, token, mediaReady, videoOriginS, standalone = true }: {
+  set: AudioEvidenceSet; token: string; mediaReady: boolean; videoOriginS?: number | null; standalone?: boolean
 }) {
   const rate = set.source.sample_rate
   const tracks = set.source.audio_stream_indices
   const clock = set.coverage?.source_clock_context
+  const intervals = standalone && set.packets.length === 0 ? [...new Map(set.coverage?.windows?.map((window) =>
+    [`${window.start_sample}:${window.end_sample}`, window] as const)).values()]
+    .sort((a, b) => a.start_sample - b.start_sample || a.end_sample - b.end_sample) : []
   const stereo = set.stereo_context
   const stereoOverlaps = set.coverage?.stereo_attenuation_overlaps?.flatMap((overlap) => {
     const measurement = stereo?.windows[overlap.stereo_window_index]?.downmix
@@ -77,10 +80,16 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
     <AudioStereoContext set={set} token={token} mediaReady={mediaReady} videoOriginS={videoOriginS} pauseAudio={pauseAudio} />
     <AudioRepetitionContext set={set} token={token} mediaReady={mediaReady} videoOriginS={videoOriginS} />
     {set.packets.length > 0 && <AudioInspectionTimeline set={set} token={token} mediaReady={mediaReady} selectedId={selectedId} onSelect={select} />}
-    {set.coverage && rate ? <div className="mt-4 rounded-md border border-border p-4 text-small text-text-muted">
+    {set.coverage && rate ? <div id={standalone ? 'media-evidence-voice-coverage' : undefined} className="scroll-mt-14 mt-4 rounded-md border border-border p-4 text-small text-text-muted">
       <p className="m-0">Voice checks cover {seconds(set.coverage.scored_samples / rate)} of the {seconds(set.coverage.decoded_samples / rate)} decoded input.
         {' '}{seconds(set.coverage.unscored_samples / rate)} of that input has no window score. Overlapping windows are counted once in this coverage.</p>
       <p className="mt-2 mb-0">{set.coverage.windows.length} scored windows. Responses apply to complete windows, normally four seconds; they do not identify individual words or exact voice-replacement boundaries.</p>
+      {intervals.length > 0 && <details className="mt-3" open={hash === '#media-evidence-voice-coverage' || undefined}>
+        <summary className="cursor-pointer font-medium">Scored voice intervals</summary>
+        <ul className="mt-2 mb-0 pl-4 list-disc">{intervals.map((window) => <li key={`${window.start_sample}:${window.end_sample}`}>
+          {seconds(window.start_sample / rate)}–{seconds(window.end_sample / rate)} · samples [{window.start_sample}, {window.end_sample})
+        </li>)}</ul>
+      </details>}
       {clock && <section aria-label="Audio source clock breaks" className="mt-3">
         <h3 className="m-0 font-medium">Audio source clock breaks</h3>
         {clock.recording_voice_estimate_withheld && <p className="mt-2 mb-0">The source audio timestamps contain a gap or overlap. Voice checks use only continuous intervals, so a recording-wide voice estimate is unavailable.</p>}

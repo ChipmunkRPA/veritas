@@ -1,0 +1,68 @@
+{
+  "schema": "chipmunk.six-picture-face-app-integration/1",
+  "study_commit": "39d8ac6f5e87b15983954b6b17378062cfb1df6f",
+  "scope": {
+    "width": 640,
+    "height": 360,
+    "encoding": [
+      "h264",
+      "yuv420p"
+    ],
+    "pictures": 120,
+    "exact_fps": 25,
+    "profiles": [
+      "full",
+      "deep"
+    ],
+    "app_smoke_profile": "full",
+    "simulated_payment_usd": 9.99,
+    "worker_checks": "isolated face detection, tracking and appearance review"
+  },
+  "paired_app_runs": 6,
+  "source_roles": [
+    "known_swap",
+    "genuine_original",
+    "ordinary_whole_picture_cut"
+  ],
+  "all_decisions_and_incumbents_identical": true,
+  "all_unpaid_orders_queued_zero_analyses_or_jobs": true,
+  "all_paid_orders_idempotent": true,
+  "new_ranges": [
+    true,
+    false,
+    false
+  ],
+  "positive": {
+    "range_s": [
+      2.16,
+      2.4
+    ],
+    "known_range_s": [
+      2.16,
+      2.4
+    ],
+    "anchor_source_s": [
+      "52/25",
+      "56/25",
+      "12/5"
+    ],
+    "native_originals_and_crops_verified": 6,
+    "api_and_json_match": true,
+    "pdf_same_pixels": true,
+    "signed_original_video_verified": true,
+    "evidence_version": "video-evidence-13",
+    "affects_overall_confidence": false,
+    "models_hidden_in_public_exports": true
+  },
+  "historical_v12": {
+    "original_source_signature_replay_verified": true,
+    "archive_unchanged": true,
+    "archive_sha256": "54043dc77c78d31ec18ac045eef2a1d485d93bb70307d9422fbf6ca8e94f9c71"
+  },
+  "tamper_rejections": [
+    "version_downgrade",
+    "wrong_codec",
+    "wrong_grid",
+    "off_rate_native_clock"
+  ]
+}

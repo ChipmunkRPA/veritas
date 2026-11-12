@@ -43,6 +43,19 @@ const show = (set: AudioEvidenceSet, entry = '/analysis', ready = true) => rende
 afterEach(() => { cleanup(); vi.restoreAllMocks() })
 
 describe('audio interval inspection', () => {
+  it('lists the exact checked intervals from an overview-only coverage link and keeps it scoped to standalone audio', () => {
+    const set = fixture()
+    set.packets = []
+    const { rerender } = show(set, '/analysis#media-evidence-voice-coverage')
+    expect(screen.getByText('Scored voice intervals').closest('details')?.open).toBe(true)
+    expect(screen.getByText('2.000 s–6.000 s · samples [2000, 6000)')).toBeTruthy()
+    expect(screen.getByText('4.000 s–8.000 s · samples [4000, 8000)')).toBeTruthy()
+    expect(screen.queryByRole('region', { name: 'Audio interval navigator' })).toBeNull()
+    rerender(<MemoryRouter><AudioEvidenceContent set={set} token="" mediaReady={false} standalone={false} /></MemoryRouter>)
+    expect(screen.queryByText('Scored voice intervals')).toBeNull()
+    expect(document.getElementById('media-evidence-voice-coverage')).toBeNull()
+  })
+
   it('shows source-derived waveform and chronological saved intervals without turning gaps into negative findings', () => {
     const set = fixture(), original = structuredClone(set)
     show(set)

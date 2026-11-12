@@ -27,7 +27,7 @@ export default function SectionRoute({ section }: { section: Section }) {
       if (!/^#(?:signal-|finding-|image-evidence-|media-evidence-)/.test(hash)) window.scrollTo({ top: 0 })
       return
     }
-    const target = () => (/^#(?:finding-F[1-9]\d*|image-evidence-[A-Z]\d+|media-evidence-(?:[A-Z]\d+|AV\d+|voice|timing|visual|all|background|stereo))$/.test(hash) ? document.getElementById(hash.slice(1)) : null)
+    const target = () => (/^#(?:finding-F[1-9]\d*|image-evidence-[A-Z]\d+|media-evidence-(?:[A-Z]\d+|AV\d+|voice|voice-coverage|timing|visual|all|background|stereo))$/.test(hash) ? document.getElementById(hash.slice(1)) : null)
       ?? document.getElementById(`section-${section}`)
     target()?.scrollIntoView({ block: 'start', behavior: prefersReducedMotion() ? 'auto' : 'smooth' })
     if (typeof ResizeObserver === 'undefined') return

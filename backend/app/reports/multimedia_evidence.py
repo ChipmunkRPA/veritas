@@ -505,9 +505,17 @@ def _coverage(kind: str, document: dict) -> str:
                 "unscored frames and gaps have no negative finding.")
     if kind == "audio":
         rate = source["sample_rate"]
-        return (f"{coverage.get('scored_samples', 0)} uniquely scored samples of {source['samples']} decoded samples at {rate} Hz; "
-                f"{coverage.get('unscored_samples', 0)} unscored samples. "
-                + ("The decoding limit was reached; later audio was not checked." if coverage.get("decode_limit_reached") else ""))
+        summary = (f"{coverage.get('scored_samples', 0)} uniquely scored samples of {source['samples']} decoded samples at {rate} Hz; "
+                   f"{coverage.get('unscored_samples', 0)} unscored samples.")
+        if not document.get("packets") and coverage.get("windows"):
+            intervals = sorted({(row["start_sample"], row["end_sample"]) for row in coverage["windows"]})
+            times = ", ".join(f"{start / rate:.3f}–{end / rate:.3f} s" for start, end in intervals[:8])
+            summary += f" The scored voice intervals in decoded audio were {times}."
+            if len(intervals) > 8:
+                summary += f" {len(intervals) - 8} more intervals are recorded in the JSON export."
+        if coverage.get("decode_limit_reached"):
+            summary += " The decoding limit was reached; later audio was not checked."
+        return summary
     summary = f"{coverage.get('scored_windows', 0)} scored contexts; {coverage.get('candidate_spans', 0)} candidate passages."
     if not coverage.get("email"):
         summary += f" {len(coverage.get('unmapped_pages') or [])} source pages have no mapped text."

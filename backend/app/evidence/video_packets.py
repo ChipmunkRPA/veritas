@@ -44,7 +44,6 @@ from app.evidence.video_packet_versions import (
     LIGHTING_CONTEXT_VERSIONS,
     NESTED_VERSIONS,
     PICTURE_HOLD_VERSIONS,
-    SHORT_FACE_VERSION,
     VERSIONS,
 )
 from app.storage.artefacts import get_artefact, register_artefact
@@ -484,7 +483,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     chosen += return_candidates
     scored_frames |= window_frames
     set_id = current_set_id(analysis)
-    version = SHORT_FACE_VERSION if return_candidates else VERSION
+    version = face_return_binding.METHOD_VERSIONS[return_candidates[0]["face_return"]["method"]] if return_candidates else VERSION
     document = {"schema": SCHEMA, "version": version, "id": set_id, "status": "ready", "analysis_id": analysis.id,
                 "revision": analysis.revision, "original_result_hash": analysis.result_hash, "source": source, "packets": [],
                 "coverage": {"kind": "point_and_window_samples" if window_frames else "point_samples", "frame_count": len(table), "decoded_frame_indices": sorted(anchors),
@@ -684,7 +683,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
             start, end = face_return["start_stream_s"], face_return["end_stream_s"]
             origin = source["timeline_origin_s"]
             packet.update(title="Brief face-change range to review", evidence_type="anomaly", claim_scope="sampled_window",
-                          semantics=face_return_binding.METHOD, face_return=face_return, affects_overall_confidence=False,
+                          semantics=face_return["method"], face_return=face_return, affects_overall_confidence=False,
                           observation=face_return_binding.observation(face_return),
                           interpretation="The appearance within the selected time range differs from the views immediately before and after it. The surrounding scene remained similar at both sampled boundaries. Compare the three original crops for possible changes in expression, angle, lighting, or the face itself.",
                           measurements=[{"label": "Face appearance separation", "value": face_return["response"], "unit": "uncalibrated feature distance"},

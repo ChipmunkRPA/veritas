@@ -32,6 +32,12 @@ One exact range is **2.160–2.400 s**, with the source pictures at **2.080**, *
 
 The independent replay matched all 4,800 native decoded pictures from the 40 held files and all 96 selected face crops. It reopened 576 qualified original or swap-source pictures and independently recreated the 16 swap and four whole-picture cut MP4 files byte for byte. This verified all 96 swapped native picture inputs at their authored intervals before encoding. Per-source media and evidence images stay local.
 
+## Local app
+
+With `VERITAS_VIDEO_FACE_REVIEW_MODE=appearance` and `VERITAS_VIDEO_FACE_SHORT_RETURN_REVIEW=true`, a qualified 12.5 Hz pass can follow the existing 8 Hz check when it measures no distinct range. The fallback accepts upright 640 × 360 H.264 4:2:0 with exactly 120 pictures on an exact 25 fps clock. It uses the same 12-second local inspection budget as the earlier pass. The app shows the half-open interval and original pictures and crops for before, during, and after. The face appearance observation carries zero weight in the overall confidence. New evidence uses version 13. The offline verifier continues to read version 12 and checks the actual H.264 encoding when replaying a version 13 source.
+
+The local Full-profile worker analyzed one held six-picture swap, its genuine original and one whole-picture cut with the option off and on. The isolated run used the real face detection, tracking and appearance paths and simulated Stripe transport. Checkout and each unpaid event created zero analyses or jobs. Each paid event queued one analysis despite repeat delivery. The confidence decision and incumbent range agreed in all three pairs. Only the known swap gained a range, at **2.160–2.400 s**, with exact original pictures and face crops at **2.080**, **2.240**, and **2.400 s**. The six images matched source pixels in the authenticated API, JSON export and PDF. The signed package replayed against the actual video. An archived version 12 package also replayed against its original video with identical bytes. The verifier rejected an altered version, codec, sample grid and source clock. [App and export replay receipt](evaluation-panels/video-face-six-picture-app-integration-2026-11-12.json)
+
 ## Reproduce
 
 Use the retained local archive and a fresh private output directory. The preparation verifies input picture hashes before composing each delivery. The reviewer opens the actual encoded input, checks the selected source crops, and independently reconstructs the known interventions.

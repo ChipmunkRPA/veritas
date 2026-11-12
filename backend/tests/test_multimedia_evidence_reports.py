@@ -129,6 +129,31 @@ def test_summary_pdf_shows_exact_unscored_voice_times(audio_fixture, monkeypatch
     assert "/coverage/unscored_intervals" in text
 
 
+def test_voice_finding_links_to_scored_intervals_without_a_selected_packet(audio_fixture, monkeypatch):
+    db, store, analysis, result, _, entry = audio_fixture
+    entry["unit_scores"][1]["raw"] = 0.4
+    original = specimen("audio", "standard")
+    original.result["input"]["sha256"] = analysis.sha256
+    original.result["manifest"]["sampling"] = result["manifest"]["sampling"]
+    signal_id = result["signals"][0]["id"]
+    original.result["signals"][0].update(id=signal_id, detector_id=entry["detector_id"])
+    original.result["findings"][0]["evidence_ids"] = [signal_id]
+    _replace_entry(store, analysis, original.result, entry)
+    document = audio_packets.build_packet_set(db, analysis, store, original.result)
+    assert document["packets"] == []
+    snapshot = original.model_copy(update={
+        "evidence": document,
+        "analysis": original.analysis.model_copy(update={"id": analysis.id, "revision": analysis.revision}),
+        "media": original.media.model_copy(update={"sha256": analysis.sha256}),
+    })
+    monkeypatch.setattr(multimedia_evidence, "default_store", lambda: store)
+    html = engine.render_html(snapshot, embed_fonts=False)
+    assert 'href="#multimedia-evidence-voice-coverage">Recorded voice window coverage</a>' in html
+    assert 'id="multimedia-evidence-voice-coverage"' in html
+    assert "The scored voice intervals in decoded audio were 0.000–4.000 s, 2.000–6.000 s, 4.000–8.000 s." in html
+    assert html.count('href="#multimedia-evidence-voice-coverage"') == 1
+
+
 @pytest.mark.parametrize("profile,redacted", [("summary", False), ("standard", False), ("forensic", False),
                                                ("newsroom", False), ("standard", True)])
 def test_every_profile_renders_frozen_observations_and_withholds_source(evidence_case, monkeypatch, profile, redacted):

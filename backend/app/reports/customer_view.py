@@ -11,6 +11,7 @@ import re
 from collections.abc import Callable
 from typing import Any
 
+from app.api.public_projection import alias_signal
 from app.engine.customer_assessment import EMAIL_REFERENCE_SLICE, customer_assessment, text_reference_rate
 from app.engine.finding_assessment import finding_assessment
 from app.engine.service_policy import standard_service_policy
@@ -142,7 +143,7 @@ def _links(finding: dict, packets: list[dict], image_packets: list[dict]) -> lis
 
 
 def _finding(finding: dict, row: dict, snapshot: ReportSnapshot, packets: list[dict], image_packets: list[dict],
-             ledger: dict[str, dict], redact: Callable[[str], str]) -> dict:
+             ledger: dict[str, dict], redact: Callable[[str], str], voice_coverage_refs: set[str]) -> dict:
     result = snapshot.result
     signals = _signals(finding, result)
     links = _links(finding, packets, image_packets)
@@ -190,7 +191,13 @@ def _finding(finding: dict, row: dict, snapshot: ReportSnapshot, packets: list[d
         inference = assessment["interpretation"]
     if not observations:
         observations = list(row.get("sentences") or [row.get("reason") or "No scored observation was recorded."])
-    if family not in SOURCE_FAMILIES | CONTEXT_FAMILIES and not links:
+    voice_coverage = family == "A1_voice" and not links and any(
+        alias_signal(s["id"]) in voice_coverage_refs for s in signals if s.get("id") and s.get("status", "ok") == "ok")
+    if voice_coverage:
+        links.append({"id": "voice-coverage", "href": "#multimedia-evidence-voice-coverage",
+                      "label": "Recorded voice window coverage", "direct": True})
+        scope = "Review the recorded voice-check intervals."
+    elif family not in SOURCE_FAMILIES | CONTEXT_FAMILIES and not links:
         scope = "No specific source region or interval is linked to this finding. The check record and any referenced figures provide its recorded basis."
     elif links:
         scope = "The source links below identify the saved inputs and observations. Selected samples do not cover every pixel, frame, word or sound."
@@ -303,7 +310,11 @@ def customer_view(snapshot: ReportSnapshot, out: dict, redact: Callable[[str], s
     for limitation in out.get("limitations") or []:
         limitation["acknowledged"] = False
     stored = {str(f.get("id")): f for f in snapshot.result.get("findings") or []}
-    out["findings"] = [_finding(stored[str(row["id"])], row, snapshot, packets, image_packets, ledger, redact)
+    voice_coverage_refs = set()
+    if snapshot.analysis.kind == "audio" and has_multimedia_evidence and not packets:
+        coverage = (snapshot.evidence or {}).get("coverage") or {}
+        voice_coverage_refs = {ref["id"] for window in coverage.get("windows", []) for ref in window.get("signal_refs", []) if ref.get("id")}
+    out["findings"] = [_finding(stored[str(row["id"])], row, snapshot, packets, image_packets, ledger, redact, voice_coverage_refs)
                        if str(row.get("id")) in stored else row for row in out.get("findings") or []]
     by_id = {str(f["id"]): f for f in out["findings"]}
     for row in (out.get("provenance") or {}).get("findings") or []:

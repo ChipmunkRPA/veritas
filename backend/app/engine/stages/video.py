@@ -367,7 +367,9 @@ def detect(ctx: StageContext) -> dict[str, Any]:
     # not prevent this independent, much smaller inspection check from running.
     faces = outputs.faces or []
     centers = tuple(sorted(f.frame_index for f in sampled if f.index < len(faces) and faces[f.index]))
-    inputs = (SequenceInputs(store.table, store, centers, tuple(common.stage_exhibit_list(ctx, ("tracks",))))
+    probe = outputs.probe or {}
+    encoding = probe.get("codec"), probe.get("pix_fmt")
+    inputs = (SequenceInputs(store.table, store, centers, tuple(common.stage_exhibit_list(ctx, ("tracks",))), encoding)
               if store is not None else None)
     review = common.run_detectors(ctx, (Modality.VIDEO,), include={SEQUENCE_FAMILY, WHOLE_FACE_FAMILY},
                                   outputs=dataclasses.replace(outputs, face_review=inputs),

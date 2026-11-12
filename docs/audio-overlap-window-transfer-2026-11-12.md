@@ -32,6 +32,10 @@ In both held rooms, every experimental arm missed all three synthetic edits. Wit
 
 The initial launch stopped at an incorrect benchmark assertion that expected the incumbent's file-level calibration to accept six seconds. No calibration or held results were produced by that attempt. The completed freeze preserves the actual out-of-scope direction and compares the current window length under the same experimental calibration rule as the short arms. The two CPU scoring stages made 96 production-length and 240 short-window forwards, plus 9,024 speech-activity frames. They took 216.7 seconds and peaked at 2.97 GB process RSS. The independent readout rebuilt 48 tracks, checked every scored window hash and activity span rule, and reproduced the four points, 24 result cells, and all advancement checks without re-running inference. The measured model scores, recordings and exact source intervals stay local.
 
+## Local app
+
+A standalone voice finding now links to recorded window coverage when it has saved scores and no selected review clip. The evidence view shows exact decoded times and sample offsets. The PDF links to the same coverage and the JSON export retains the full window list. A six-second paid-flow test verified the two saved intervals at 0.000–4.000 and 2.000–6.000 seconds. Its whole-file assessment remained inconclusive. A second recording kept its existing selected-clip links.
+
 ## Reproduce locally
 
 Use the retained v169c and v172 source files, the three AMI microphone recordings, the pinned manual annotation ZIP and the existing local audio checkpoint. Use a fresh run directory.

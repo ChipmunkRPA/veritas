@@ -74,6 +74,47 @@ def test_scope_and_exclusive_overlap_are_exact():
     assert not face_return.distinct(replace(candidate, end=23), table, None)
 
 
+def test_dense_fallback_requires_measured_h264_profile_and_exact_native_ticks():
+    original = table_for(25)
+    table = replace(original, width=640, height=360, coded_width=640, coded_height=360,
+                    pts=original.pts[:120], pict_types=original.pict_types[:120])
+    encoding = ("h264", "yuv420p")
+    times, scheduled = face_return.dense_schedule(table, encoding)
+    assert times == tuple(Fraction(i, 25) for i in range(120))
+    assert scheduled == tuple(range(0, 120, 2))
+    assert face_return.dense_schedule(table, ("hevc", "yuv420p")) is None
+    assert face_return.dense_schedule(table, ("h264", "yuv444p")) is None
+    assert face_return.dense_schedule(replace(table, rotation=90), encoding) is None
+    assert face_return.dense_schedule(replace(table, pts=(*table.pts[:-1], table.pts[-1] + 1)), encoding) is None
+    assert face_return.dense_schedule(replace(table, pts=original.pts), encoding) is None
+
+
+@pytest.mark.parametrize("first_status", ["localized", "unassessed", "no_distinct_range"])
+def test_dense_fallback_respects_legacy_result_and_budget(monkeypatch, first_status):
+    from app.evidence.face_return_binding import DENSE_METHOD
+
+    original = table_for(25)
+    table = replace(original, width=640, height=360, coded_width=640, coded_height=360,
+                    pts=original.pts[:120], pict_types=original.pict_types[:120])
+    inputs = SequenceInputs(table, None, (), (), ("h264", "yuv420p"))
+    methods = []
+
+    def run_pass(details, inputs, yunet, recognizer, deadline, incumbent, planned, coverage, method, stop):
+        methods.append((method, stop))
+        coverage["status"] = first_status if method == face_return.METHOD else "localized"
+        if coverage["status"] == "localized":
+            details["face_return"] = {"method": method}
+
+    monkeypatch.setattr(face_appearance.settings, "face_min_size", 48)
+    monkeypatch.setattr(face_appearance, "_return_pass", run_pass)
+    details = {}
+    face_appearance._inspect_return(details, inputs, None, None, None, None)
+    expected = [face_return.METHOD, DENSE_METHOD] if first_status == "no_distinct_range" else [face_return.METHOD]
+    assert [method for method, _ in methods] == expected and len({stop for _, stop in methods}) == 1
+    if first_status != "unassessed":
+        assert details["face_return"]["method"] == expected[-1]
+
+
 def test_optional_review_is_applicable_without_coarse_inputs(monkeypatch):
     monkeypatch.setattr(face_appearance.settings, "face_min_size", 48)
     ctx = SimpleNamespace(outputs=SimpleNamespace(face_review=SequenceInputs(table_for(25), None, (), ())))

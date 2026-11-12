@@ -14,10 +14,10 @@ export interface FindingSupportLink {
   /** Recorded wording, not a new interpretation. Anonymize before displaying it. */
   summary: string
   association: 'finding' | 'shared_check' | 'check'
-  scope: 'image_region' | 'video_frames' | 'audio_interval' | 'av_interval' | 'text_passage' | 'check'
+  scope: 'image_region' | 'video_frames' | 'audio_interval' | 'audio_coverage' | 'av_interval' | 'text_passage' | 'check'
   scopeNote: string
 }
-export interface FindingSupportResult { packets: FindingSupportLink[]; checks: FindingSupportLink[] }
+export interface FindingSupportResult { packets: FindingSupportLink[]; checks: FindingSupportLink[]; voiceCoverage?: FindingSupportLink }
 
 const finite = (value: unknown): value is number => typeof value === 'number' && Number.isFinite(value)
 const count = (value: unknown): value is number => finite(value) && value >= 0
@@ -170,5 +170,16 @@ export function findingSupport({ analysisId, finding, signals, evidence }: {
       summary: packet.observation, association: direct ? 'finding' : 'shared_check', scope, scopeNote: note })
   }
   result.packets.sort((a, b) => Number(a.association === 'shared_check') - Number(b.association === 'shared_check'))
+  if (finding.family === 'A1_voice' && evidence.schema === 'chipmunk.audio-evidence/1' && !evidence.packets.length) {
+    const { coverage, source } = evidence
+    const checkedIds = new Set(linked.filter((signal) => signal.status === 'ok').map((signal) => signal.id))
+    if (coverage && finite(source.sample_rate) && source.sample_rate > 0
+      && coverage.windows?.some((window) => interval(window) && window.end_sample <= coverage.decoded_samples
+        && window.signal_refs?.some((ref) => checkedIds.has(ref.id)))) {
+      result.voiceCoverage = { id: 'voice-coverage', label: 'Recorded voice window coverage',
+        href: `${base}/media-evidence?view=plain#media-evidence-voice-coverage`, summary: '',
+        association: 'finding', scope: 'audio_coverage', scopeNote: 'Review the exact intervals that received a voice response.' }
+    }
+  }
   return result
 }

@@ -36,6 +36,7 @@ class SequenceInputs:
     store: Any
     centers: tuple[int, ...]
     exhibits: tuple[dict, ...]
+    encoding: tuple[str | None, str | None] = (None, None)
 
 
 def record(window: dict, table: FrameTable, inputs: dict[int, dict]) -> dict:

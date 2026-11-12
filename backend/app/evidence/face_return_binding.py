@@ -7,9 +7,14 @@ import re
 from fractions import Fraction
 
 from app.evidence.face_interval_binding import face_context_box, validate_face_input
-from app.evidence.video_packet_versions import SHORT_FACE_VERSION
+from app.evidence.video_packet_versions import DENSE_SHORT_FACE_VERSION, SHORT_FACE_VERSION
 
 METHOD = "face-short-return/1"
+DENSE_METHOD = "face-short-return/2"
+DENSE_ENCODING = ("h264", "yuv420p")
+DENSE_DIMENSIONS = (640, 360)
+DENSE_FRAME_COUNT = 120
+METHOD_VERSIONS = {METHOD: SHORT_FACE_VERSION, DENSE_METHOD: DENSE_SHORT_FACE_VERSION}
 POINT = 0.10
 SCENE_POINT = 0.55
 ROLES = ("before", "during", "after")
@@ -56,9 +61,10 @@ def validate_distinct(record, incumbent):
 
 
 def validate_set(document):
-    count = sum("face_return" in packet or packet.get("semantics") == METHOD for packet in document["packets"])
-    _require(count == int(document["version"] == SHORT_FACE_VERSION),
-             "The evidence version disagrees with its supplemental face range")
+    selected = [packet.get("semantics") for packet in document["packets"]
+                if "face_return" in packet or packet.get("semantics") in METHOD_VERSIONS]
+    expected = [method for method, version in METHOD_VERSIONS.items() if version == document["version"]]
+    _require(selected == expected, "The evidence version disagrees with its supplemental face range")
 
 
 def _native_inputs(items, source, table_pts, interpolated):
@@ -76,7 +82,8 @@ def _native_inputs(items, source, table_pts, interpolated):
 
 
 def validate_record(record, source, *, table_pts=None, interpolated=(), rotation=0, truncated=False):
-    _require(record["method"] == METHOD and record["time_base"] == source["time_base"],
+    method = record["method"]
+    _require(method in METHOD_VERSIONS and record["time_base"] == source["time_base"],
              "Short face-change method or source clock differs")
     dimensions = (source["width"], source["height"])
     allowed_steps = PROFILE_STEPS.get(dimensions)
@@ -103,6 +110,11 @@ def validate_record(record, source, *, table_pts=None, interpolated=(), rotation
              and all(type(i) is int and 0 <= i < source["frame_count"] for i in scheduled)
              and scheduled == sorted(set(scheduled)) and scheduled[0] == 0
              and not set(scheduled).intersection(interpolated), "Short face-change evidence has an invalid sample grid")
+    if method == DENSE_METHOD:
+        _require(dimensions == DENSE_DIMENSIONS and source["frame_count"] == DENSE_FRAME_COUNT
+                 and tuple(record.get("source_encoding", ())) == DENSE_ENCODING
+                 and scheduled == list(range(0, DENSE_FRAME_COUNT, 2)),
+                 "Dense short face-change evidence requires its measured H.264 delivery and native sample grid")
     entry = scheduled.index(record["start_frame_index"])
     exit_ = scheduled.index(record["end_frame_index"])
     core_size = exit_ - entry
@@ -117,9 +129,10 @@ def validate_record(record, source, *, table_pts=None, interpolated=(), rotation
         _require(step in allowed_steps and 2 <= times[-1] + step <= 8
                  and all(t == i * step for i, t in enumerate(times)),
                  "Short face-change evidence requires a bounded native frame clock")
-        targets = (Fraction(i, 8) for i in range(int(times[-1] * 8) + 1))
-        exact_schedule = list(dict.fromkeys(min(range(len(times)), key=lambda i: (abs(times[i] - target), i)) for target in targets))
-        _require(scheduled == exact_schedule, "Short face-change evidence differs from the source sample grid")
+        if method == METHOD:
+            targets = (Fraction(i, 8) for i in range(int(times[-1] * 8) + 1))
+            exact_schedule = list(dict.fromkeys(min(range(len(times)), key=lambda i: (abs(times[i] - target), i)) for target in targets))
+            _require(scheduled == exact_schedule, "Short face-change evidence differs from the source sample grid")
     for item in faces.values():
         validate_face_input(item, source, appearance=True)
     _require(faces[before[-1]]["pts"] < a <= faces[during[0]]["pts"] <= faces[during[-1]]["pts"] < b <= faces[after[0]]["pts"]
@@ -145,9 +158,11 @@ def validate_record(record, source, *, table_pts=None, interpolated=(), rotation
 
 def validate_packet(packet, source, *, table_pts=None, interpolated=(), rotation=0, truncated=False):
     record = packet.get("face_return")
-    if record is None and packet.get("semantics") != METHOD:
+    semantics = packet.get("semantics")
+    if record is None and semantics not in METHOD_VERSIONS:
         return
-    _require(isinstance(record, dict) and packet.get("semantics") == METHOD and packet.get("affects_overall_confidence") is False
+    _require(isinstance(record, dict) and semantics in METHOD_VERSIONS and record.get("method") == semantics
+             and packet.get("affects_overall_confidence") is False
              and packet.get("claim_scope") == "sampled_window" and len(packet["signal_refs"]) == 1,
              "Supplemental face evidence must remain a confidence-neutral sampled window")
     validate_record(record, source, table_pts=table_pts, interpolated=interpolated, rotation=rotation, truncated=truncated)

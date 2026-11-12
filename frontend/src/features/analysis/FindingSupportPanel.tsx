@@ -73,12 +73,13 @@ export default function FindingSupportPanel({ finding, data, cards = [] }: {
           <ul className="mt-2 mb-0 p-0 list-none space-y-3">{support.packets.slice(2).map(packet)}</ul>
         </details>}
       </>}
+      {support.voiceCoverage && <ul className="mt-2 mb-0 p-0 list-none">{packet(support.voiceCoverage)}</ul>}
       {data.pending && <p role="status" className="mt-1 mb-0 text-caption text-text-muted">Loading linked source evidence…</p>}
       {data.failed && <p role="status" className="mt-1 mb-0 text-caption text-text-muted">
         Source evidence could not be loaded. Recorded check links remain available below.
         {data.retry && <button type="button" className="ml-2 min-h-8 text-accent underline underline-offset-[3px]" onClick={data.retry}>Retry evidence</button>}
       </p>}
-      {!data.pending && !data.failed && support.packets.length === 0 && <p className="mt-1 mb-0 text-caption text-text-muted">
+      {!data.pending && !data.failed && support.packets.length === 0 && !support.voiceCoverage && <p className="mt-1 mb-0 text-caption text-text-muted">
         {support.checks.length > 0 ? 'See the recorded checks below for the basis of this finding. No specific source region or interval is linked here.'
           : 'No linked source location or recorded check is available for this saved finding.'}
       </p>}

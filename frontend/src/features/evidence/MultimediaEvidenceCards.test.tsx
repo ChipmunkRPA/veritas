@@ -137,8 +137,8 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.getByText(/Selected frame 4 · source 11\.760 s · player 1\.760 s/)).toBeTruthy()
   })
 
-  it('shows the distinct brief face-change interval with three source crops and playback navigation', () => {
-    const set = { ...structuredClone(video), version: 'video-evidence-12' }
+  it.each(['video-evidence-12', 'video-evidence-13'])('shows the distinct brief face-change interval in %s', (version) => {
+    const set = { ...structuredClone(video), version }
     const item = set.packets[0]
     item.title = 'Brief face-change range to review'
     item.claim_scope = 'sampled_window'

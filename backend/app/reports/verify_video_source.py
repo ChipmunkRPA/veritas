@@ -15,10 +15,13 @@ from PIL import Image
 
 from app.core.canonical import canonical_hash
 from app.detectors.video.decode import DecodedFrame, FrameTable, decode_frames, probe_frames
+from app.detectors.video.frames import probe as probe_container
 from app.detectors.video.lipsync import source_mouth_patch
 from app.evidence.face_boundary_binding import validate_packet as validate_face_boundary
+from app.evidence.face_return_binding import DENSE_ENCODING
 from app.evidence.face_return_binding import validate_packet as validate_face_return
 from app.evidence.source_geometry import pixel_bounds
+from app.evidence.video_packet_versions import DENSE_SHORT_FACE_VERSION
 from app.reports.public_verify import SCHEMA
 from app.reports.verify_image_source import _matches
 
@@ -94,6 +97,10 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
 
     evidence = json.loads(archive.read("evidence.json"))
     source = evidence["source"]
+    if evidence["version"] == DENSE_SHORT_FACE_VERSION:
+        delivery = probe_container(original)
+        if (delivery.get("codec"), delivery.get("pix_fmt")) != DENSE_ENCODING:
+            raise ValueError("The original video encoding differs from the dense short face-change scope")
     table = probe_frames(original)
     if table.width * table.height > MAX_FRAME_PIXELS:
         raise ValueError("The original video exceeds the native verification limit of 16 megapixels per frame")

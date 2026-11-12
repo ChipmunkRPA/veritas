@@ -12,7 +12,12 @@ import numpy as np
 
 from app.detectors.image.faces import Face, iou
 from app.detectors.video.decode import FrameTable
-from app.evidence.face_return_binding import PROFILE_STEPS
+from app.evidence.face_return_binding import (
+    DENSE_DIMENSIONS,
+    DENSE_ENCODING,
+    DENSE_FRAME_COUNT,
+    PROFILE_STEPS,
+)
 
 METHOD = "face-short-return/1"
 POINT = .10
@@ -67,6 +72,14 @@ def schedule(table: FrameTable) -> tuple[tuple[Fraction, ...], tuple[int, ...]] 
     targets = (Fraction(i, CADENCE) for i in range(int(times[-1] * CADENCE) + 1))
     indices = tuple(dict.fromkeys(min(range(len(times)), key=lambda i: (abs(times[i] - target), i)) for target in targets))
     return times, indices
+
+
+def dense_schedule(table: FrameTable, encoding: tuple[str | None, str | None]):
+    """Use every second native picture for the measured 4.8-second H.264 delivery."""
+    if encoding != DENSE_ENCODING or (table.width, table.height) != DENSE_DIMENSIONS or len(table) != DENSE_FRAME_COUNT:
+        return None
+    planned = schedule(table)
+    return None if planned is None else (planned[0], tuple(range(0, DENSE_FRAME_COUNT, 2)))
 
 
 def scene(rgb: np.ndarray, face: Face | None) -> tuple[np.ndarray, np.ndarray]:

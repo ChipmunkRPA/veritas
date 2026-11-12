@@ -13,7 +13,7 @@
 <p>{{ evidence.note }}</p>
 {% if evidence.available %}
 <p class="caption">Evidence set {{ evidence.version }} - SHA-256 <span class="mono evidence-hash">{{ evidence.sha256 }}</span></p>
-<p class="caption">{{ evidence.coverage_note }}</p>
+<p class="caption"{% if evidence.kind == 'audio' %} id="multimedia-evidence-voice-coverage"{% endif %}>{{ evidence.coverage_note }}</p>
 {% for note in evidence.coverage_details %}<p class="caption">{{ note }}</p>{% endfor %}
 {% if evidence.get('passage_coverage') %}
 {% set writing = evidence.passage_coverage %}

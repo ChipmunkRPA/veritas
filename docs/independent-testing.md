@@ -494,6 +494,9 @@ The [prospective grouped replication](audio-edge-window-grouped-2026-11-12.md)
 sets both grids to the same ordinary-group allowance before testing new speech
 and room combinations. Its replay verifies missed and recovered intervals and
 the exact source sample positions.
+The [short speech codec comparison](audio-short-codec-transfer-2026-11-12.md)
+replays the lossless match and recalculates separate MP3 and Opus points,
+held interval matches, and ordinary-group errors using public window responses.
 The [two-microphone noise trial](audio-natural-stereo-coherence-2026-11-11.md)
 compares score directions after a fixed filter with two recorded meeting
 backgrounds, six genuine readers and three synthetic generator families.

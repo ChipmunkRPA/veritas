@@ -188,6 +188,10 @@ controls, and incompatible previews.
 The [EXIF orientation transfer](image-thumbnail-orientation-2026-11-12.md)
 replays rotated main images and both preview-storage conventions. It checks
 display-oriented main crops and original stored preview pixels separately.
+The [Ultra HDR gain-map pilot](image-gainmap-localization-2026-11-12.md)
+tests two ways to locate local changes in JPEGs that retain a gain map but
+have no embedded thumbnail. Its source replay records a camera-original false
+flag and the limited device coverage.
 The [two-photo difference pilot](image-embedded-pair-difference-transfer-2026-11-12.md)
 replays source-pixel differences when one PNG contains two matching photo areas.
 The [separate confirmation](image-embedded-pair-difference-confirmation-2026-11-12.md)

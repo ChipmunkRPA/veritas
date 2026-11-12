@@ -133,6 +133,9 @@ fixed and matched false-alarm counts.
 The [speech-context comparison](audio-remote-neighbor-transfer-2026-11-12.md)
 compares recurring acoustic contexts on the original mixtures and verifies
 fresh and previously tested source groups separately.
+The [larger replication](audio-remote-neighbor-replication-2026-11-12.md) keeps
+the same cutoffs on 12 new edits from three generator families and compares
+localization within the same admitted time coverage.
 The [controlled room-speech attenuation study](audio-room-reference-transfer-2026-11-12.md)
 reconstructs each changed waveform independently and checks whether improved
 foreground reconstruction recovers short synthetic inserts.

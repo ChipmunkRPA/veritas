@@ -1,0 +1,666 @@
+{
+  "schema": "chipmunk.audio-remote-neighbor-replication/1",
+  "method": {
+    "cohort": "Twelve new paired host and synthetic source groups, four from each of the PLN clone, ElevenLabs v4 expressive, and Kokoro stock families. Every host has a different ordinary reader, an ordinary same-reader cut, and an unedited delivery. Add four genuine room-only controls. Never reuse recorded earlier input bytes, PCM, scripts, or recent trial speaker roles. Older source banks and all room sessions have prior project exposure.",
+    "geometry": "Six-second original unaltered mono inputs. Four rooms each contain one 0.64-second edge edit, one 0.80-second interior edit, and one 0.96-second interior edit. Alternate before 1 second and after 5 seconds for edge; every interior truth interval is wholly inside [1,3) or [3,5) seconds. Exact room captures exclude the bound prior intervals. Require two simultaneous annotated background voices for at least half the edit, at least 1.2 s overall, and at least 80% annotated speech overall. Mix at -5 dB using equal gain and 20 ms fades.",
+    "comparators": "Reuse the byte-pinned WavLM remote-context implementation and both earlier fixed points. Use the original two-second incumbent windows, speech admission, and score. Measure the cue once on the complete original clip. For shared time coverage, rank only 0.8-second candidate ranges contained in the union of the actual admitted incumbent windows. The cue still sees its complete original recording when computing its features. Report fixed, equal-false-group, full-span, matched-time, interior and edge results and unavailable cases.",
+    "rule": "Useful localization needs .30 temporal IoU and at least .50 edit coverage. Count a genuine group once if any of its three matched controls or its isolated room clip flags. Both former points remain unchanged. Retrospective false-group budgets 0/1/2 compare ranking. No customer confidence calibration."
+  },
+  "results": {
+    "all": {
+      "counts": {
+        "untouched": 12,
+        "ordinary_same_host": 12,
+        "ordinary_other_voice": 12,
+        "synthetic": 12,
+        "background_only": 4
+      },
+      "fixed": {
+        "current": {
+          "ai_flags": 3,
+          "useful_ranges": 1,
+          "false_groups": 3,
+          "unassessed": 0,
+          "background_false_flags": 0
+        },
+        "neighbor": {
+          "ai_flags": 2,
+          "useful_ranges": 0,
+          "false_groups": 2,
+          "unassessed": 1,
+          "background_false_flags": 0
+        },
+        "same_time": {
+          "ai_flags": 2,
+          "useful_ranges": 0,
+          "false_groups": 2,
+          "unassessed": 1,
+          "background_false_flags": 0
+        }
+      },
+      "equal_false_groups": {
+        "0": {
+          "current": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "neighbor": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 0,
+            "unassessed": 1,
+            "background_false_flags": 0
+          },
+          "same_time": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 0,
+            "unassessed": 1,
+            "background_false_flags": 0
+          }
+        },
+        "1": {
+          "current": {
+            "ai_flags": 1,
+            "useful_ranges": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "neighbor": {
+            "ai_flags": 1,
+            "useful_ranges": 0,
+            "false_groups": 1,
+            "unassessed": 1,
+            "background_false_flags": 0
+          },
+          "same_time": {
+            "ai_flags": 1,
+            "useful_ranges": 0,
+            "false_groups": 1,
+            "unassessed": 1,
+            "background_false_flags": 0
+          }
+        },
+        "2": {
+          "current": {
+            "ai_flags": 2,
+            "useful_ranges": 1,
+            "false_groups": 2,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "neighbor": {
+            "ai_flags": 2,
+            "useful_ranges": 0,
+            "false_groups": 2,
+            "unassessed": 1,
+            "background_false_flags": 0
+          },
+          "same_time": {
+            "ai_flags": 2,
+            "useful_ranges": 0,
+            "false_groups": 2,
+            "unassessed": 1,
+            "background_false_flags": 0
+          }
+        }
+      },
+      "locations_before_cutoff": {
+        "current": 5,
+        "neighbor": 3,
+        "same_time": 3
+      }
+    },
+    "interior": {
+      "counts": {
+        "untouched": 8,
+        "ordinary_same_host": 8,
+        "ordinary_other_voice": 8,
+        "synthetic": 8,
+        "background_only": 4
+      },
+      "fixed": {
+        "current": {
+          "ai_flags": 2,
+          "useful_ranges": 1,
+          "false_groups": 2,
+          "unassessed": 0,
+          "background_false_flags": 0
+        },
+        "neighbor": {
+          "ai_flags": 1,
+          "useful_ranges": 0,
+          "false_groups": 1,
+          "unassessed": 1,
+          "background_false_flags": 0
+        },
+        "same_time": {
+          "ai_flags": 1,
+          "useful_ranges": 0,
+          "false_groups": 1,
+          "unassessed": 1,
+          "background_false_flags": 0
+        }
+      },
+      "equal_false_groups": {
+        "0": {
+          "current": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "neighbor": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 0,
+            "unassessed": 1,
+            "background_false_flags": 0
+          },
+          "same_time": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 0,
+            "unassessed": 1,
+            "background_false_flags": 0
+          }
+        },
+        "1": {
+          "current": {
+            "ai_flags": 1,
+            "useful_ranges": 1,
+            "false_groups": 1,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "neighbor": {
+            "ai_flags": 1,
+            "useful_ranges": 0,
+            "false_groups": 1,
+            "unassessed": 1,
+            "background_false_flags": 0
+          },
+          "same_time": {
+            "ai_flags": 1,
+            "useful_ranges": 0,
+            "false_groups": 1,
+            "unassessed": 1,
+            "background_false_flags": 0
+          }
+        },
+        "2": {
+          "current": {
+            "ai_flags": 2,
+            "useful_ranges": 1,
+            "false_groups": 2,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "neighbor": {
+            "ai_flags": 1,
+            "useful_ranges": 0,
+            "false_groups": 2,
+            "unassessed": 1,
+            "background_false_flags": 0
+          },
+          "same_time": {
+            "ai_flags": 1,
+            "useful_ranges": 0,
+            "false_groups": 2,
+            "unassessed": 1,
+            "background_false_flags": 0
+          }
+        }
+      },
+      "locations_before_cutoff": {
+        "current": 5,
+        "neighbor": 3,
+        "same_time": 3
+      }
+    },
+    "edge": {
+      "counts": {
+        "untouched": 4,
+        "ordinary_same_host": 4,
+        "ordinary_other_voice": 4,
+        "synthetic": 4,
+        "background_only": 4
+      },
+      "fixed": {
+        "current": {
+          "ai_flags": 1,
+          "useful_ranges": 0,
+          "false_groups": 1,
+          "unassessed": 0,
+          "background_false_flags": 0
+        },
+        "neighbor": {
+          "ai_flags": 1,
+          "useful_ranges": 0,
+          "false_groups": 1,
+          "unassessed": 1,
+          "background_false_flags": 0
+        },
+        "same_time": {
+          "ai_flags": 1,
+          "useful_ranges": 0,
+          "false_groups": 1,
+          "unassessed": 1,
+          "background_false_flags": 0
+        }
+      },
+      "equal_false_groups": {
+        "0": {
+          "current": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "neighbor": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 0,
+            "unassessed": 1,
+            "background_false_flags": 0
+          },
+          "same_time": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 0,
+            "unassessed": 1,
+            "background_false_flags": 0
+          }
+        },
+        "1": {
+          "current": {
+            "ai_flags": 1,
+            "useful_ranges": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "neighbor": {
+            "ai_flags": 1,
+            "useful_ranges": 0,
+            "false_groups": 1,
+            "unassessed": 1,
+            "background_false_flags": 0
+          },
+          "same_time": {
+            "ai_flags": 1,
+            "useful_ranges": 0,
+            "false_groups": 1,
+            "unassessed": 1,
+            "background_false_flags": 0
+          }
+        },
+        "2": {
+          "current": {
+            "ai_flags": 2,
+            "useful_ranges": 0,
+            "false_groups": 2,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "neighbor": {
+            "ai_flags": 1,
+            "useful_ranges": 0,
+            "false_groups": 2,
+            "unassessed": 1,
+            "background_false_flags": 1
+          },
+          "same_time": {
+            "ai_flags": 1,
+            "useful_ranges": 0,
+            "false_groups": 2,
+            "unassessed": 1,
+            "background_false_flags": 1
+          }
+        }
+      },
+      "locations_before_cutoff": {
+        "current": 0,
+        "neighbor": 0,
+        "same_time": 0
+      }
+    },
+    "clone": {
+      "counts": {
+        "untouched": 4,
+        "ordinary_same_host": 4,
+        "ordinary_other_voice": 4,
+        "synthetic": 4
+      },
+      "fixed": {
+        "current": {
+          "ai_flags": 1,
+          "useful_ranges": 1,
+          "false_groups": 1,
+          "unassessed": 0,
+          "background_false_flags": 0
+        },
+        "neighbor": {
+          "ai_flags": 2,
+          "useful_ranges": 0,
+          "false_groups": 2,
+          "unassessed": 0,
+          "background_false_flags": 0
+        },
+        "same_time": {
+          "ai_flags": 2,
+          "useful_ranges": 0,
+          "false_groups": 2,
+          "unassessed": 0,
+          "background_false_flags": 0
+        }
+      },
+      "equal_false_groups": {
+        "0": {
+          "current": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "neighbor": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "same_time": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "background_false_flags": 0
+          }
+        },
+        "1": {
+          "current": {
+            "ai_flags": 1,
+            "useful_ranges": 1,
+            "false_groups": 1,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "neighbor": {
+            "ai_flags": 1,
+            "useful_ranges": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "same_time": {
+            "ai_flags": 1,
+            "useful_ranges": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "background_false_flags": 0
+          }
+        },
+        "2": {
+          "current": {
+            "ai_flags": 2,
+            "useful_ranges": 1,
+            "false_groups": 2,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "neighbor": {
+            "ai_flags": 2,
+            "useful_ranges": 0,
+            "false_groups": 2,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "same_time": {
+            "ai_flags": 2,
+            "useful_ranges": 0,
+            "false_groups": 2,
+            "unassessed": 0,
+            "background_false_flags": 0
+          }
+        }
+      },
+      "locations_before_cutoff": {
+        "current": 2,
+        "neighbor": 1,
+        "same_time": 1
+      }
+    },
+    "expressive": {
+      "counts": {
+        "untouched": 4,
+        "ordinary_same_host": 4,
+        "ordinary_other_voice": 4,
+        "synthetic": 4
+      },
+      "fixed": {
+        "current": {
+          "ai_flags": 2,
+          "useful_ranges": 0,
+          "false_groups": 2,
+          "unassessed": 0,
+          "background_false_flags": 0
+        },
+        "neighbor": {
+          "ai_flags": 0,
+          "useful_ranges": 0,
+          "false_groups": 0,
+          "unassessed": 0,
+          "background_false_flags": 0
+        },
+        "same_time": {
+          "ai_flags": 0,
+          "useful_ranges": 0,
+          "false_groups": 0,
+          "unassessed": 0,
+          "background_false_flags": 0
+        }
+      },
+      "equal_false_groups": {
+        "0": {
+          "current": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "neighbor": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "same_time": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "background_false_flags": 0
+          }
+        },
+        "1": {
+          "current": {
+            "ai_flags": 1,
+            "useful_ranges": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "neighbor": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "same_time": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "background_false_flags": 0
+          }
+        },
+        "2": {
+          "current": {
+            "ai_flags": 2,
+            "useful_ranges": 0,
+            "false_groups": 2,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "neighbor": {
+            "ai_flags": 1,
+            "useful_ranges": 0,
+            "false_groups": 2,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "same_time": {
+            "ai_flags": 1,
+            "useful_ranges": 0,
+            "false_groups": 2,
+            "unassessed": 0,
+            "background_false_flags": 0
+          }
+        }
+      },
+      "locations_before_cutoff": {
+        "current": 0,
+        "neighbor": 1,
+        "same_time": 1
+      }
+    },
+    "stock": {
+      "counts": {
+        "untouched": 4,
+        "ordinary_same_host": 4,
+        "ordinary_other_voice": 4,
+        "synthetic": 4
+      },
+      "fixed": {
+        "current": {
+          "ai_flags": 0,
+          "useful_ranges": 0,
+          "false_groups": 0,
+          "unassessed": 0,
+          "background_false_flags": 0
+        },
+        "neighbor": {
+          "ai_flags": 0,
+          "useful_ranges": 0,
+          "false_groups": 0,
+          "unassessed": 0,
+          "background_false_flags": 0
+        },
+        "same_time": {
+          "ai_flags": 0,
+          "useful_ranges": 0,
+          "false_groups": 0,
+          "unassessed": 0,
+          "background_false_flags": 0
+        }
+      },
+      "equal_false_groups": {
+        "0": {
+          "current": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "neighbor": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "same_time": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "background_false_flags": 0
+          }
+        },
+        "1": {
+          "current": {
+            "ai_flags": 2,
+            "useful_ranges": 1,
+            "false_groups": 1,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "neighbor": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "same_time": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "background_false_flags": 0
+          }
+        },
+        "2": {
+          "current": {
+            "ai_flags": 3,
+            "useful_ranges": 2,
+            "false_groups": 2,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "neighbor": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 2,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "same_time": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 2,
+            "unassessed": 0,
+            "background_false_flags": 0
+          }
+        }
+      },
+      "locations_before_cutoff": {
+        "current": 3,
+        "neighbor": 1,
+        "same_time": 1
+      }
+    }
+  },
+  "new_model_calls": {
+    "neighbor": 52,
+    "current": 102
+  },
+  "commitments": {
+    "freeze": "eee9606871765541279af149a26876e0d7cf17dfab890f9ebde1a400afa2cfe3",
+    "roster": "72cddb5d4dd8621d8d179d474b79a3f48262a887100dcc6a87658dfee05d605f",
+    "neighbor": "f30d519b253056cdbd76cc34f6d265b17173d31227174adb94c9f3eee9d991b1",
+    "current": "e3dc4ea541a4417a1ffe5eb50fec179362dd67a71255db20c5e252c9f582e59f"
+  }
+}

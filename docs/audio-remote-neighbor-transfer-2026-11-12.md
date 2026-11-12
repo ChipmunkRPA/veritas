@@ -2,6 +2,8 @@
 
 The new cue located two of four fresh edits at its frozen point, with zero false genuine groups. The current native comparison located none at the same realized false-group count. The cue located no edits in either earlier panel and falsely flagged six genuine groups on the earlier expressive panel. The result supports replication on more fresh sources before product use. [Aggregate results](evaluation-panels/audio-remote-neighbor-transfer-2026-11-12.json)
 
+The later 12-edit replication found zero useful locations with the same cue and cutoff. [Larger replication](audio-remote-neighbor-replication-2026-11-12.md)
+
 ## Frozen cue
 
 Measure one original six-second mono waveform. A separate locally pinned speech encoder supplies an early and a late representation. For each admitted speech frame, choose four late-layer neighbors at least 0.80 seconds away, one per distinct 0.20-second bucket, with a minimum cosine similarity of 0.20. Compare the query's early-layer distance to those neighbors with the early-layer differences among the neighbors themselves. The same-frame late-layer search matches acoustically similar contexts. It does not establish which phones or speakers they contain. The model sees the full original waveform. No earlier recording, separated signal, exact edit interval, or stem enters scoring. [Pinned weight card](https://huggingface.co/microsoft/wavlm-base-plus/blob/4c66d4806a428f2e922ccfa1a962776e232d487b/README.md) · [Model-card-linked terms](https://github.com/microsoft/UniSpeech/blob/main/LICENSE)

@@ -1,0 +1,82 @@
+{
+  "actual_forwards": 35,
+  "all_pass": true,
+  "decision_sha256": "6654931278d3ccc4e00c3bb0b5d2dbd7add35fbda8f84867d9a15cb04dd02c6b",
+  "distinct_requests": 33,
+  "duration_s": 27.775,
+  "excluded_controls": 24,
+  "freeze_sha256": "90d66b08a6d8e95deaa017009139c3e4953992c724d8eae3d5ec9f11aa015de4",
+  "independent_cases": 308,
+  "independent_fresh_hashes": 9,
+  "independent_native_ranges": 1093,
+  "initial_measurements": {
+    "initial_max_raw_deltas": {
+      "primary": 1.1920928955078125e-07,
+      "second": 0.016348659992218018
+    },
+    "initial_parity_inputs": 24,
+    "initial_point_crossings": {
+      "primary": 0,
+      "second": 0
+    }
+  },
+  "layout_outcomes": {
+    "2": {
+      "added_human_flags": 0,
+      "candidate_contexts": 79,
+      "corroborated_contexts": 48,
+      "files": 100,
+      "generated": 44,
+      "new_human_flags": 13,
+      "new_useful": 14,
+      "old_human_flags": 13,
+      "old_useful": 14,
+      "segmentation_changed": 4
+    },
+    "3": {
+      "added_human_flags": 0,
+      "candidate_contexts": 79,
+      "corroborated_contexts": 48,
+      "files": 100,
+      "generated": 44,
+      "new_human_flags": 13,
+      "new_useful": 14,
+      "old_human_flags": 13,
+      "old_useful": 14,
+      "segmentation_changed": 4
+    },
+    "5": {
+      "added_human_flags": 0,
+      "candidate_contexts": 73,
+      "corroborated_contexts": 42,
+      "files": 55,
+      "generated": 24,
+      "new_human_flags": 10,
+      "new_useful": 12,
+      "old_human_flags": 10,
+      "old_useful": 12,
+      "segmentation_changed": 4
+    },
+    "6": {
+      "added_human_flags": 0,
+      "candidate_contexts": 73,
+      "corroborated_contexts": 42,
+      "files": 53,
+      "generated": 24,
+      "new_human_flags": 10,
+      "new_useful": 12,
+      "old_human_flags": 10,
+      "old_useful": 12,
+      "segmentation_changed": 0
+    }
+  },
+  "layouts_pass": {
+    "2": true,
+    "3": true,
+    "5": true,
+    "6": true
+  },
+  "new_human_groups": {},
+  "schema": "chipmunk.writing-reply-native-batches/1",
+  "second_context_inputs": 75
+}

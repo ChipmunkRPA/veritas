@@ -1,0 +1,89 @@
+{
+  "added_correct_by_duration": {
+    "3/8": 10
+  },
+  "added_flags_by_cohort": {
+    "camera": 3,
+    "rtfs": 1,
+    "swap": 10
+  },
+  "advancement": "At least six added correct 0.375-second localizations across at least three sources, no more than two added ordinary flags, zero added cut flags, and no incumbent flag or endpoint changed.",
+  "by_swap_duration": {
+    "1/2": {
+      "additive_localized": 10,
+      "additive_unassessed": 2,
+      "current_localized": 10,
+      "current_unassessed": 2
+    },
+    "3/4": {
+      "additive_localized": 10,
+      "additive_unassessed": 2,
+      "current_localized": 10,
+      "current_unassessed": 2
+    },
+    "3/8": {
+      "additive_localized": 10,
+      "additive_unassessed": 2,
+      "current_measured_no_flag": 10,
+      "current_unassessed": 2
+    }
+  },
+  "freeze_sha256": "7b73bbda8efbd49465ca2387c3021244643db515740c6ca3397f4aec9c96d127",
+  "groups_with_short_gain": 5,
+  "incumbent_flags_preserved": 28,
+  "pilot_advances": false,
+  "rule": "Keep every incumbent flag and its endpoints. Otherwise use only the top guarded rank interval when its margin is strictly positive and its half-open duration is strictly below 0.50 seconds. Never rerank or infer originality.",
+  "runtime": {
+    "elapsed_s": 437.37423204095103,
+    "journal_sha256": "83d78781932388eab7f5e713f859a73ad502acde546cc8688fb1b2eaca76918e",
+    "peak_rss_bytes": 341884928,
+    "verified_frames": 2475
+  },
+  "schema": "chipmunk.video-short-return-replication/1",
+  "totals": {
+    "camera": {
+      "additive": {
+        "false_flag": 3,
+        "measured_no_flag": 3
+      },
+      "current": {
+        "measured_no_flag": 3,
+        "unassessed": 3
+      }
+    },
+    "cut": {
+      "additive": {
+        "false_flag": 8,
+        "measured_no_flag": 2,
+        "unassessed": 2
+      },
+      "current": {
+        "false_flag": 8,
+        "measured_no_flag": 2,
+        "unassessed": 2
+      }
+    },
+    "rtfs": {
+      "additive": {
+        "false_flag": 1,
+        "measured_no_flag": 49,
+        "unassessed": 10
+      },
+      "current": {
+        "measured_no_flag": 50,
+        "unassessed": 10
+      }
+    },
+    "swap": {
+      "additive": {
+        "localized": 30,
+        "unassessed": 6
+      },
+      "current": {
+        "localized": 20,
+        "measured_no_flag": 10,
+        "unassessed": 6
+      }
+    }
+  }
+}

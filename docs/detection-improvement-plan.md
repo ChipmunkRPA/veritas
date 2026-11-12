@@ -113,8 +113,11 @@ integration remains unfinished.
   found 10/12 swaps at 0.375 seconds versus 0/12 for the current appearance
   check, but added 42/66 ordinary false flags at its original frozen point.
   Requiring a positive rank margin after scoring preserved those 10 short hits
-  and removed the false flags. Test the fixed positive-margin cue on different
-  source groups before relying on that result.
+  and removed the false flags. A [second panel](video-short-return-replication-2026-11-11.md)
+  reproduced 10/12 short localizations versus 0/12. It also added four false
+  flags across 66 ordinary views from two source groups, above the frozen limit.
+  The observed true margins exceeded the false margins. A higher margin needs
+  its own source-separated evaluation before it enters the app.
 - The [writing token-curvature test](writing-token-curvature-2026-11-11.md)
   scored 3/5 generated edits above both paired human controls versus 5/5 with
   the current context response. Both ranked two exact locations first, in

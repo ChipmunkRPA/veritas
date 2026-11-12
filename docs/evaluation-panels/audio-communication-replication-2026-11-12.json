@@ -1,0 +1,1575 @@
+{
+  "anonymous_windows": [
+    {
+      "arm": "untouched",
+      "coverage": "early",
+      "family": "clone",
+      "group": 1,
+      "scores": {
+        "communication": [
+          3.961033587966018,
+          -5.911854736451888
+        ],
+        "original": [
+          -4.931626375962386,
+          -6.551610916309941
+        ]
+      },
+      "truth": null
+    },
+    {
+      "arm": "ordinary_same_host",
+      "coverage": "early",
+      "family": "clone",
+      "group": 1,
+      "scores": {
+        "communication": [
+          -2.348251334175245,
+          -6.039019574630234
+        ],
+        "original": [
+          -4.931626375962386,
+          -6.551610916309941
+        ]
+      },
+      "truth": null
+    },
+    {
+      "arm": "ordinary_other_voice",
+      "coverage": "early",
+      "family": "clone",
+      "group": 1,
+      "scores": {
+        "communication": [
+          -2.692519686111047,
+          -5.6378073540497216
+        ],
+        "original": [
+          -4.931626375962386,
+          -6.551610916309941
+        ]
+      },
+      "truth": null
+    },
+    {
+      "arm": "synthetic",
+      "coverage": "early",
+      "family": "clone",
+      "group": 1,
+      "scores": {
+        "communication": [
+          -3.876803902899999,
+          -5.877189635856792
+        ],
+        "original": [
+          -4.931626375962386,
+          -6.551610916309941
+        ]
+      },
+      "truth": [
+        2560,
+        12800
+      ]
+    },
+    {
+      "arm": "untouched",
+      "coverage": "interior",
+      "family": "expressive",
+      "group": 2,
+      "scores": {
+        "communication": [
+          4.559673662971422,
+          6.797977708148722
+        ],
+        "original": [
+          -4.263652316244187,
+          5.357036296972573
+        ]
+      },
+      "truth": null
+    },
+    {
+      "arm": "ordinary_same_host",
+      "coverage": "interior",
+      "family": "expressive",
+      "group": 2,
+      "scores": {
+        "communication": [
+          5.88978495489719,
+          6.318730726750426
+        ],
+        "original": [
+          -4.151496839827106,
+          5.357036296972573
+        ]
+      },
+      "truth": null
+    },
+    {
+      "arm": "ordinary_other_voice",
+      "coverage": "interior",
+      "family": "expressive",
+      "group": 2,
+      "scores": {
+        "communication": [
+          6.957555363394381,
+          6.231945643493041
+        ],
+        "original": [
+          3.2852695283495708,
+          5.357036296972573
+        ]
+      },
+      "truth": null
+    },
+    {
+      "arm": "synthetic",
+      "coverage": "interior",
+      "family": "expressive",
+      "group": 2,
+      "scores": {
+        "communication": [
+          -0.38996072011041405,
+          6.266602593724773
+        ],
+        "original": [
+          -4.737278943486778,
+          5.357036296972573
+        ]
+      },
+      "truth": [
+        26880,
+        39680
+      ]
+    },
+    {
+      "arm": "untouched",
+      "coverage": "interior",
+      "family": "stock",
+      "group": 3,
+      "scores": {
+        "communication": [
+          -4.882191600594199,
+          3.760629641126311
+        ],
+        "original": [
+          -4.746182382484239,
+          -4.292854838015194
+        ]
+      },
+      "truth": null
+    },
+    {
+      "arm": "ordinary_same_host",
+      "coverage": "interior",
+      "family": "stock",
+      "group": 3,
+      "scores": {
+        "communication": [
+          3.928253680985112,
+          3.905316343516769
+        ],
+        "original": [
+          -5.014021856099215,
+          -4.292854838015194
+        ]
+      },
+      "truth": null
+    },
+    {
+      "arm": "ordinary_other_voice",
+      "coverage": "interior",
+      "family": "stock",
+      "group": 3,
+      "scores": {
+        "communication": [
+          4.6154061209054245,
+          2.0745685601650568
+        ],
+        "original": [
+          -4.238925952586345,
+          -4.292854838015194
+        ]
+      },
+      "truth": null
+    },
+    {
+      "arm": "synthetic",
+      "coverage": "interior",
+      "family": "stock",
+      "group": 3,
+      "scores": {
+        "communication": [
+          -2.5516350042315707,
+          -3.3821211543505667
+        ],
+        "original": [
+          -3.8695895798766977,
+          -4.292854838015194
+        ]
+      },
+      "truth": [
+        32000,
+        47360
+      ]
+    },
+    {
+      "arm": "background_only",
+      "coverage": "room",
+      "family": null,
+      "group": 4,
+      "scores": {
+        "communication": [
+          -4.336378100346008,
+          -4.322203668095554
+        ],
+        "original": [
+          -4.0505848710380095,
+          -5.461383835750254
+        ]
+      },
+      "truth": null
+    },
+    {
+      "arm": "untouched",
+      "coverage": "late",
+      "family": "expressive",
+      "group": 5,
+      "scores": {
+        "communication": [
+          4.982828133334752,
+          5.676055238981934
+        ],
+        "original": [
+          -3.201664427488783,
+          -2.214693066787385
+        ]
+      },
+      "truth": null
+    },
+    {
+      "arm": "ordinary_same_host",
+      "coverage": "late",
+      "family": "expressive",
+      "group": 5,
+      "scores": {
+        "communication": [
+          4.982828133334752,
+          5.676055238981934
+        ],
+        "original": [
+          -3.201664427488783,
+          -2.214693066787385
+        ]
+      },
+      "truth": null
+    },
+    {
+      "arm": "ordinary_other_voice",
+      "coverage": "late",
+      "family": "expressive",
+      "group": 5,
+      "scores": {
+        "communication": [
+          4.982828133334752,
+          5.676055238981934
+        ],
+        "original": [
+          -3.201664427488783,
+          -2.214693066787385
+        ]
+      },
+      "truth": null
+    },
+    {
+      "arm": "synthetic",
+      "coverage": "late",
+      "family": "expressive",
+      "group": 5,
+      "scores": {
+        "communication": [
+          4.982828133334752,
+          5.676055238981934
+        ],
+        "original": [
+          -3.201664427488783,
+          -2.214693066787385
+        ]
+      },
+      "truth": [
+        83200,
+        93440
+      ]
+    },
+    {
+      "arm": "untouched",
+      "coverage": "interior",
+      "family": "stock",
+      "group": 6,
+      "scores": {
+        "communication": [
+          6.690909835969532,
+          -5.737954150606054
+        ],
+        "original": [
+          5.81747434162266,
+          -6.331212053538735
+        ]
+      },
+      "truth": null
+    },
+    {
+      "arm": "ordinary_same_host",
+      "coverage": "interior",
+      "family": "stock",
+      "group": 6,
+      "scores": {
+        "communication": [
+          5.743739542006735,
+          -6.002829047990106
+        ],
+        "original": [
+          2.7994233617979827,
+          -6.331212053538735
+        ]
+      },
+      "truth": null
+    },
+    {
+      "arm": "ordinary_other_voice",
+      "coverage": "interior",
+      "family": "stock",
+      "group": 6,
+      "scores": {
+        "communication": [
+          5.462002612489855,
+          -6.12009143423892
+        ],
+        "original": [
+          4.735139913433145,
+          -6.331212053538735
+        ]
+      },
+      "truth": null
+    },
+    {
+      "arm": "synthetic",
+      "coverage": "interior",
+      "family": "stock",
+      "group": 6,
+      "scores": {
+        "communication": [
+          3.6569881650910228,
+          -5.1743354400820145
+        ],
+        "original": [
+          -4.432014405392328,
+          -6.331212053538735
+        ]
+      },
+      "truth": [
+        26880,
+        39680
+      ]
+    },
+    {
+      "arm": "untouched",
+      "coverage": "interior",
+      "family": "clone",
+      "group": 7,
+      "scores": {
+        "communication": [
+          -6.408084853147397,
+          -6.742075934247475
+        ],
+        "original": [
+          -5.001071894913817,
+          -6.510274444563722
+        ]
+      },
+      "truth": null
+    },
+    {
+      "arm": "ordinary_same_host",
+      "coverage": "interior",
+      "family": "clone",
+      "group": 7,
+      "scores": {
+        "communication": [
+          -1.9536201190313567,
+          -6.522634515179439
+        ],
+        "original": [
+          -5.449853946892296,
+          -6.510274444563722
+        ]
+      },
+      "truth": null
+    },
+    {
+      "arm": "ordinary_other_voice",
+      "coverage": "interior",
+      "family": "clone",
+      "group": 7,
+      "scores": {
+        "communication": [
+          -6.030214300735025,
+          -6.296169288114413
+        ],
+        "original": [
+          -5.692153967526859,
+          -6.510274444563722
+        ]
+      },
+      "truth": null
+    },
+    {
+      "arm": "synthetic",
+      "coverage": "interior",
+      "family": "clone",
+      "group": 7,
+      "scores": {
+        "communication": [
+          -6.3127184514072985,
+          -6.539729615729187
+        ],
+        "original": [
+          -6.231047149086981,
+          -6.510274444563722
+        ]
+      },
+      "truth": [
+        21760,
+        37120
+      ]
+    },
+    {
+      "arm": "background_only",
+      "coverage": "room",
+      "family": null,
+      "group": 8,
+      "scores": {
+        "communication": [
+          -6.044561365053498,
+          -6.65033866077424
+        ],
+        "original": [
+          -6.750656135163787,
+          -6.595155728794163
+        ]
+      },
+      "truth": null
+    },
+    {
+      "arm": "untouched",
+      "coverage": "early",
+      "family": "stock",
+      "group": 9,
+      "scores": {
+        "communication": [
+          -6.440117809865358,
+          4.996834717655156
+        ],
+        "original": [
+          -6.515183382730196,
+          -2.638226088418116
+        ]
+      },
+      "truth": null
+    },
+    {
+      "arm": "ordinary_same_host",
+      "coverage": "early",
+      "family": "stock",
+      "group": 9,
+      "scores": {
+        "communication": [
+          -6.061860111715302,
+          2.8225612043304538
+        ],
+        "original": [
+          -6.515183382730196,
+          -2.638226088418116
+        ]
+      },
+      "truth": null
+    },
+    {
+      "arm": "ordinary_other_voice",
+      "coverage": "early",
+      "family": "stock",
+      "group": 9,
+      "scores": {
+        "communication": [
+          -6.458676309831313,
+          4.334277698531966
+        ],
+        "original": [
+          -6.515183382730196,
+          -2.638226088418116
+        ]
+      },
+      "truth": null
+    },
+    {
+      "arm": "synthetic",
+      "coverage": "early",
+      "family": "stock",
+      "group": 9,
+      "scores": {
+        "communication": [
+          -6.228571449884464,
+          5.105931202120554
+        ],
+        "original": [
+          -6.515183382730196,
+          -2.638226088418116
+        ]
+      },
+      "truth": [
+        3840,
+        14080
+      ]
+    },
+    {
+      "arm": "untouched",
+      "coverage": "interior",
+      "family": "clone",
+      "group": 10,
+      "scores": {
+        "communication": [
+          4.236439359374134,
+          4.984583862453778
+        ],
+        "original": [
+          4.468884487069492,
+          3.8238780484593775
+        ]
+      },
+      "truth": null
+    },
+    {
+      "arm": "ordinary_same_host",
+      "coverage": "interior",
+      "family": "clone",
+      "group": 10,
+      "scores": {
+        "communication": [
+          4.236439359374134,
+          6.9521718580639265
+        ],
+        "original": [
+          4.468884487069492,
+          6.706080686996023
+        ]
+      },
+      "truth": null
+    },
+    {
+      "arm": "ordinary_other_voice",
+      "coverage": "interior",
+      "family": "clone",
+      "group": 10,
+      "scores": {
+        "communication": [
+          4.236439359374134,
+          4.432556290019698
+        ],
+        "original": [
+          4.468884487069492,
+          1.3976644244459444
+        ]
+      },
+      "truth": null
+    },
+    {
+      "arm": "synthetic",
+      "coverage": "interior",
+      "family": "clone",
+      "group": 10,
+      "scores": {
+        "communication": [
+          4.236439359374134,
+          7.058856470259249
+        ],
+        "original": [
+          4.468884487069492,
+          6.816725856097005
+        ]
+      },
+      "truth": [
+        60160,
+        72960
+      ]
+    },
+    {
+      "arm": "untouched",
+      "coverage": "interior",
+      "family": "expressive",
+      "group": 11,
+      "scores": {
+        "communication": [
+          4.084098311092385,
+          -3.7716698689487744
+        ],
+        "original": [
+          -5.700920084743272,
+          -3.7192678141391493
+        ]
+      },
+      "truth": null
+    },
+    {
+      "arm": "ordinary_same_host",
+      "coverage": "interior",
+      "family": "expressive",
+      "group": 11,
+      "scores": {
+        "communication": [
+          4.104516621271004,
+          -2.9099604599893816
+        ],
+        "original": [
+          4.594573078879185,
+          -3.7192678141391493
+        ]
+      },
+      "truth": null
+    },
+    {
+      "arm": "ordinary_other_voice",
+      "coverage": "interior",
+      "family": "expressive",
+      "group": 11,
+      "scores": {
+        "communication": [
+          3.052130015235711,
+          -4.189418772758463
+        ],
+        "original": [
+          -3.1799307300584423,
+          -3.7192678141391493
+        ]
+      },
+      "truth": null
+    },
+    {
+      "arm": "synthetic",
+      "coverage": "interior",
+      "family": "expressive",
+      "group": 11,
+      "scores": {
+        "communication": [
+          4.724728525056623,
+          -3.347029217268229
+        ],
+        "original": [
+          3.5714172528454484,
+          -3.7192678141391493
+        ]
+      },
+      "truth": [
+        29440,
+        44800
+      ]
+    },
+    {
+      "arm": "background_only",
+      "coverage": "room",
+      "family": null,
+      "group": 12,
+      "scores": {
+        "communication": [
+          null,
+          null
+        ],
+        "original": [
+          null,
+          -6.98025613793141
+        ]
+      },
+      "truth": null
+    },
+    {
+      "arm": "untouched",
+      "coverage": "late",
+      "family": "clone",
+      "group": 13,
+      "scores": {
+        "communication": [
+          7.049662436933017,
+          7.200262839381814
+        ],
+        "original": [
+          7.15606581179755,
+          6.935517107483055
+        ]
+      },
+      "truth": null
+    },
+    {
+      "arm": "ordinary_same_host",
+      "coverage": "late",
+      "family": "clone",
+      "group": 13,
+      "scores": {
+        "communication": [
+          7.049662436933017,
+          7.200262839381814
+        ],
+        "original": [
+          7.15606581179755,
+          6.935517107483055
+        ]
+      },
+      "truth": null
+    },
+    {
+      "arm": "ordinary_other_voice",
+      "coverage": "late",
+      "family": "clone",
+      "group": 13,
+      "scores": {
+        "communication": [
+          7.049662436933017,
+          7.200262839381814
+        ],
+        "original": [
+          7.15606581179755,
+          6.935517107483055
+        ]
+      },
+      "truth": null
+    },
+    {
+      "arm": "synthetic",
+      "coverage": "late",
+      "family": "clone",
+      "group": 13,
+      "scores": {
+        "communication": [
+          7.049662436933017,
+          7.200262839381814
+        ],
+        "original": [
+          7.15606581179755,
+          6.935517107483055
+        ]
+      },
+      "truth": [
+        81920,
+        92160
+      ]
+    },
+    {
+      "arm": "untouched",
+      "coverage": "interior",
+      "family": "expressive",
+      "group": 14,
+      "scores": {
+        "communication": [
+          4.625280305069957,
+          -5.665697036798028
+        ],
+        "original": [
+          6.653980891010183,
+          -6.28347917266131
+        ]
+      },
+      "truth": null
+    },
+    {
+      "arm": "ordinary_same_host",
+      "coverage": "interior",
+      "family": "expressive",
+      "group": 14,
+      "scores": {
+        "communication": [
+          4.625280305069957,
+          6.462712751286894
+        ],
+        "original": [
+          6.653980891010183,
+          6.022623634132901
+        ]
+      },
+      "truth": null
+    },
+    {
+      "arm": "ordinary_other_voice",
+      "coverage": "interior",
+      "family": "expressive",
+      "group": 14,
+      "scores": {
+        "communication": [
+          4.625280305069957,
+          4.694191358375876
+        ],
+        "original": [
+          6.653980891010183,
+          -2.5895567108727633
+        ]
+      },
+      "truth": null
+    },
+    {
+      "arm": "synthetic",
+      "coverage": "interior",
+      "family": "expressive",
+      "group": 14,
+      "scores": {
+        "communication": [
+          4.625280305069957,
+          6.946755028614261
+        ],
+        "original": [
+          6.653980891010183,
+          6.992621209851193
+        ]
+      },
+      "truth": [
+        61440,
+        74240
+      ]
+    },
+    {
+      "arm": "untouched",
+      "coverage": "interior",
+      "family": "stock",
+      "group": 15,
+      "scores": {
+        "communication": [
+          5.007210771684222,
+          -4.3918858206101525
+        ],
+        "original": [
+          4.090924797639799,
+          -4.641148622879306
+        ]
+      },
+      "truth": null
+    },
+    {
+      "arm": "ordinary_same_host",
+      "coverage": "interior",
+      "family": "stock",
+      "group": 15,
+      "scores": {
+        "communication": [
+          5.007210771684222,
+          -5.318787108196636
+        ],
+        "original": [
+          4.090924797639799,
+          -5.498508875594071
+        ]
+      },
+      "truth": null
+    },
+    {
+      "arm": "ordinary_other_voice",
+      "coverage": "interior",
+      "family": "stock",
+      "group": 15,
+      "scores": {
+        "communication": [
+          5.007210771684222,
+          -3.8164622471173626
+        ],
+        "original": [
+          4.090924797639799,
+          -4.710299492730742
+        ]
+      },
+      "truth": null
+    },
+    {
+      "arm": "synthetic",
+      "coverage": "interior",
+      "family": "stock",
+      "group": 15,
+      "scores": {
+        "communication": [
+          5.007210771684222,
+          -3.3876578805565103
+        ],
+        "original": [
+          4.090924797639799,
+          -3.745641453663865
+        ]
+      },
+      "truth": [
+        48640,
+        64000
+      ]
+    },
+    {
+      "arm": "background_only",
+      "coverage": "room",
+      "family": null,
+      "group": 16,
+      "scores": {
+        "communication": [
+          3.816535630620257,
+          -6.224077232584528
+        ],
+        "original": [
+          -3.58408260524431,
+          -6.5045743142584485
+        ]
+      },
+      "truth": null
+    }
+  ],
+  "commitments": {
+    "freeze": "1f1b876cf72b8f3418aec48c232a6ad4d409324cbadc5b4db31619f9473a3c64",
+    "roster": "71f525e74ef2ae3cbf720905298d8d15ec4b838bb27119e9cc403073aa8c2adb",
+    "scores": "d04b8b1408f0765664129acde7ff821b69047c4e5e0bf060cb7827d03d350b2e"
+  },
+  "exact_useful_original_locations_retained": 2,
+  "fixed_point": 6.400866488004889,
+  "independent_native_replay": {
+    "comparison_cells_verified": 72,
+    "disjoint_foreground_voices": 36,
+    "disjoint_meeting_participants": 16,
+    "false_groups_removed": 1,
+    "native_model_window_bindings": 208,
+    "new_false_groups": 0,
+    "overlapping_competing_words_ms": [
+      440,
+      960
+    ],
+    "paired_files_verified": 52,
+    "source_components_verified": 156,
+    "untouched_mixture_snr_db": [
+      -5.0,
+      -5.0
+    ],
+    "useful_original_locations_retained": 2
+  },
+  "new_classifier_windows": {
+    "communication": 102,
+    "original": 103
+  },
+  "new_false_groups": 0,
+  "original_false_groups_removed": 1,
+  "passes_advancement": true,
+  "schema": "chipmunk.audio-communication-replication/1",
+  "tables": {
+    "all": {
+      "equal_false_groups": {
+        "0": {
+          "both": {
+            "ai_flags": 0,
+            "background_false_flags": 0,
+            "false_groups": 0,
+            "unassessed": 1,
+            "useful_ranges": 0
+          },
+          "communication": {
+            "ai_flags": 0,
+            "background_false_flags": 0,
+            "false_groups": 0,
+            "unassessed": 1,
+            "useful_ranges": 0
+          },
+          "original": {
+            "ai_flags": 0,
+            "background_false_flags": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "useful_ranges": 0
+          }
+        },
+        "1": {
+          "both": {
+            "ai_flags": 3,
+            "background_false_flags": 0,
+            "false_groups": 1,
+            "unassessed": 1,
+            "useful_ranges": 2
+          },
+          "communication": {
+            "ai_flags": 2,
+            "background_false_flags": 0,
+            "false_groups": 1,
+            "unassessed": 1,
+            "useful_ranges": 1
+          },
+          "original": {
+            "ai_flags": 3,
+            "background_false_flags": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "useful_ranges": 2
+          }
+        },
+        "2": {
+          "both": {
+            "ai_flags": 3,
+            "background_false_flags": 0,
+            "false_groups": 2,
+            "unassessed": 1,
+            "useful_ranges": 2
+          },
+          "communication": {
+            "ai_flags": 2,
+            "background_false_flags": 0,
+            "false_groups": 2,
+            "unassessed": 1,
+            "useful_ranges": 1
+          },
+          "original": {
+            "ai_flags": 3,
+            "background_false_flags": 0,
+            "false_groups": 2,
+            "unassessed": 0,
+            "useful_ranges": 2
+          }
+        }
+      },
+      "fixed": {
+        "both": {
+          "ai_flags": 3,
+          "background_false_flags": 0,
+          "false_groups": 2,
+          "unassessed": 1,
+          "useful_ranges": 2
+        },
+        "communication": {
+          "ai_flags": 3,
+          "background_false_flags": 0,
+          "false_groups": 5,
+          "unassessed": 1,
+          "useful_ranges": 2
+        },
+        "original": {
+          "ai_flags": 3,
+          "background_false_flags": 0,
+          "false_groups": 3,
+          "unassessed": 0,
+          "useful_ranges": 2
+        }
+      },
+      "inputs": {
+        "background_only": 4,
+        "ordinary_other_voice": 12,
+        "ordinary_same_host": 12,
+        "synthetic": 12,
+        "untouched": 12
+      }
+    },
+    "clone": {
+      "equal_false_groups": {
+        "0": {
+          "both": {
+            "ai_flags": 0,
+            "background_false_flags": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "useful_ranges": 0
+          },
+          "communication": {
+            "ai_flags": 0,
+            "background_false_flags": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "useful_ranges": 0
+          },
+          "original": {
+            "ai_flags": 0,
+            "background_false_flags": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "useful_ranges": 0
+          }
+        },
+        "1": {
+          "both": {
+            "ai_flags": 2,
+            "background_false_flags": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "useful_ranges": 1
+          },
+          "communication": {
+            "ai_flags": 2,
+            "background_false_flags": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "useful_ranges": 1
+          },
+          "original": {
+            "ai_flags": 2,
+            "background_false_flags": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "useful_ranges": 1
+          }
+        },
+        "2": {
+          "both": {
+            "ai_flags": 2,
+            "background_false_flags": 0,
+            "false_groups": 2,
+            "unassessed": 0,
+            "useful_ranges": 1
+          },
+          "communication": {
+            "ai_flags": 2,
+            "background_false_flags": 0,
+            "false_groups": 2,
+            "unassessed": 0,
+            "useful_ranges": 1
+          },
+          "original": {
+            "ai_flags": 2,
+            "background_false_flags": 0,
+            "false_groups": 2,
+            "unassessed": 0,
+            "useful_ranges": 1
+          }
+        }
+      },
+      "fixed": {
+        "both": {
+          "ai_flags": 2,
+          "background_false_flags": 0,
+          "false_groups": 2,
+          "unassessed": 0,
+          "useful_ranges": 1
+        },
+        "communication": {
+          "ai_flags": 2,
+          "background_false_flags": 0,
+          "false_groups": 2,
+          "unassessed": 0,
+          "useful_ranges": 1
+        },
+        "original": {
+          "ai_flags": 2,
+          "background_false_flags": 0,
+          "false_groups": 2,
+          "unassessed": 0,
+          "useful_ranges": 1
+        }
+      },
+      "inputs": {
+        "ordinary_other_voice": 4,
+        "ordinary_same_host": 4,
+        "synthetic": 4,
+        "untouched": 4
+      }
+    },
+    "edge": {
+      "equal_false_groups": {
+        "0": {
+          "both": {
+            "ai_flags": 0,
+            "background_false_flags": 0,
+            "false_groups": 0,
+            "unassessed": 1,
+            "useful_ranges": 0
+          },
+          "communication": {
+            "ai_flags": 0,
+            "background_false_flags": 0,
+            "false_groups": 0,
+            "unassessed": 1,
+            "useful_ranges": 0
+          },
+          "original": {
+            "ai_flags": 0,
+            "background_false_flags": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "useful_ranges": 0
+          }
+        },
+        "1": {
+          "both": {
+            "ai_flags": 1,
+            "background_false_flags": 0,
+            "false_groups": 1,
+            "unassessed": 1,
+            "useful_ranges": 0
+          },
+          "communication": {
+            "ai_flags": 1,
+            "background_false_flags": 0,
+            "false_groups": 1,
+            "unassessed": 1,
+            "useful_ranges": 0
+          },
+          "original": {
+            "ai_flags": 1,
+            "background_false_flags": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "useful_ranges": 0
+          }
+        },
+        "2": {
+          "both": {
+            "ai_flags": 2,
+            "background_false_flags": 0,
+            "false_groups": 2,
+            "unassessed": 1,
+            "useful_ranges": 0
+          },
+          "communication": {
+            "ai_flags": 3,
+            "background_false_flags": 0,
+            "false_groups": 2,
+            "unassessed": 1,
+            "useful_ranges": 0
+          },
+          "original": {
+            "ai_flags": 2,
+            "background_false_flags": 0,
+            "false_groups": 2,
+            "unassessed": 0,
+            "useful_ranges": 0
+          }
+        }
+      },
+      "fixed": {
+        "both": {
+          "ai_flags": 1,
+          "background_false_flags": 0,
+          "false_groups": 1,
+          "unassessed": 1,
+          "useful_ranges": 0
+        },
+        "communication": {
+          "ai_flags": 1,
+          "background_false_flags": 0,
+          "false_groups": 1,
+          "unassessed": 1,
+          "useful_ranges": 0
+        },
+        "original": {
+          "ai_flags": 1,
+          "background_false_flags": 0,
+          "false_groups": 1,
+          "unassessed": 0,
+          "useful_ranges": 0
+        }
+      },
+      "inputs": {
+        "background_only": 4,
+        "ordinary_other_voice": 4,
+        "ordinary_same_host": 4,
+        "synthetic": 4,
+        "untouched": 4
+      }
+    },
+    "expressive": {
+      "equal_false_groups": {
+        "0": {
+          "both": {
+            "ai_flags": 1,
+            "background_false_flags": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "useful_ranges": 1
+          },
+          "communication": {
+            "ai_flags": 0,
+            "background_false_flags": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "useful_ranges": 0
+          },
+          "original": {
+            "ai_flags": 1,
+            "background_false_flags": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "useful_ranges": 1
+          }
+        },
+        "1": {
+          "both": {
+            "ai_flags": 1,
+            "background_false_flags": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "useful_ranges": 1
+          },
+          "communication": {
+            "ai_flags": 1,
+            "background_false_flags": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "useful_ranges": 1
+          },
+          "original": {
+            "ai_flags": 1,
+            "background_false_flags": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "useful_ranges": 1
+          }
+        },
+        "2": {
+          "both": {
+            "ai_flags": 2,
+            "background_false_flags": 0,
+            "false_groups": 2,
+            "unassessed": 0,
+            "useful_ranges": 1
+          },
+          "communication": {
+            "ai_flags": 2,
+            "background_false_flags": 0,
+            "false_groups": 2,
+            "unassessed": 0,
+            "useful_ranges": 1
+          },
+          "original": {
+            "ai_flags": 2,
+            "background_false_flags": 0,
+            "false_groups": 2,
+            "unassessed": 0,
+            "useful_ranges": 1
+          }
+        }
+      },
+      "fixed": {
+        "both": {
+          "ai_flags": 1,
+          "background_false_flags": 0,
+          "false_groups": 0,
+          "unassessed": 0,
+          "useful_ranges": 1
+        },
+        "communication": {
+          "ai_flags": 1,
+          "background_false_flags": 0,
+          "false_groups": 2,
+          "unassessed": 0,
+          "useful_ranges": 1
+        },
+        "original": {
+          "ai_flags": 1,
+          "background_false_flags": 0,
+          "false_groups": 1,
+          "unassessed": 0,
+          "useful_ranges": 1
+        }
+      },
+      "inputs": {
+        "ordinary_other_voice": 4,
+        "ordinary_same_host": 4,
+        "synthetic": 4,
+        "untouched": 4
+      }
+    },
+    "interior": {
+      "equal_false_groups": {
+        "0": {
+          "both": {
+            "ai_flags": 2,
+            "background_false_flags": 0,
+            "false_groups": 0,
+            "unassessed": 1,
+            "useful_ranges": 2
+          },
+          "communication": {
+            "ai_flags": 1,
+            "background_false_flags": 0,
+            "false_groups": 0,
+            "unassessed": 1,
+            "useful_ranges": 1
+          },
+          "original": {
+            "ai_flags": 2,
+            "background_false_flags": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "useful_ranges": 2
+          }
+        },
+        "1": {
+          "both": {
+            "ai_flags": 2,
+            "background_false_flags": 0,
+            "false_groups": 1,
+            "unassessed": 1,
+            "useful_ranges": 2
+          },
+          "communication": {
+            "ai_flags": 1,
+            "background_false_flags": 0,
+            "false_groups": 1,
+            "unassessed": 1,
+            "useful_ranges": 1
+          },
+          "original": {
+            "ai_flags": 2,
+            "background_false_flags": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "useful_ranges": 2
+          }
+        },
+        "2": {
+          "both": {
+            "ai_flags": 2,
+            "background_false_flags": 0,
+            "false_groups": 2,
+            "unassessed": 1,
+            "useful_ranges": 2
+          },
+          "communication": {
+            "ai_flags": 2,
+            "background_false_flags": 0,
+            "false_groups": 2,
+            "unassessed": 1,
+            "useful_ranges": 2
+          },
+          "original": {
+            "ai_flags": 2,
+            "background_false_flags": 0,
+            "false_groups": 2,
+            "unassessed": 0,
+            "useful_ranges": 2
+          }
+        }
+      },
+      "fixed": {
+        "both": {
+          "ai_flags": 2,
+          "background_false_flags": 0,
+          "false_groups": 1,
+          "unassessed": 1,
+          "useful_ranges": 2
+        },
+        "communication": {
+          "ai_flags": 2,
+          "background_false_flags": 0,
+          "false_groups": 4,
+          "unassessed": 1,
+          "useful_ranges": 2
+        },
+        "original": {
+          "ai_flags": 2,
+          "background_false_flags": 0,
+          "false_groups": 2,
+          "unassessed": 0,
+          "useful_ranges": 2
+        }
+      },
+      "inputs": {
+        "background_only": 4,
+        "ordinary_other_voice": 8,
+        "ordinary_same_host": 8,
+        "synthetic": 8,
+        "untouched": 8
+      }
+    },
+    "stock": {
+      "equal_false_groups": {
+        "0": {
+          "both": {
+            "ai_flags": 0,
+            "background_false_flags": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "useful_ranges": 0
+          },
+          "communication": {
+            "ai_flags": 0,
+            "background_false_flags": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "useful_ranges": 0
+          },
+          "original": {
+            "ai_flags": 0,
+            "background_false_flags": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "useful_ranges": 0
+          }
+        },
+        "1": {
+          "both": {
+            "ai_flags": 0,
+            "background_false_flags": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "useful_ranges": 0
+          },
+          "communication": {
+            "ai_flags": 1,
+            "background_false_flags": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "useful_ranges": 0
+          },
+          "original": {
+            "ai_flags": 0,
+            "background_false_flags": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "useful_ranges": 0
+          }
+        },
+        "2": {
+          "both": {
+            "ai_flags": 1,
+            "background_false_flags": 0,
+            "false_groups": 2,
+            "unassessed": 0,
+            "useful_ranges": 0
+          },
+          "communication": {
+            "ai_flags": 2,
+            "background_false_flags": 0,
+            "false_groups": 2,
+            "unassessed": 0,
+            "useful_ranges": 0
+          },
+          "original": {
+            "ai_flags": 1,
+            "background_false_flags": 0,
+            "false_groups": 2,
+            "unassessed": 0,
+            "useful_ranges": 0
+          }
+        }
+      },
+      "fixed": {
+        "both": {
+          "ai_flags": 0,
+          "background_false_flags": 0,
+          "false_groups": 0,
+          "unassessed": 0,
+          "useful_ranges": 0
+        },
+        "communication": {
+          "ai_flags": 0,
+          "background_false_flags": 0,
+          "false_groups": 1,
+          "unassessed": 0,
+          "useful_ranges": 0
+        },
+        "original": {
+          "ai_flags": 0,
+          "background_false_flags": 0,
+          "false_groups": 0,
+          "unassessed": 0,
+          "useful_ranges": 0
+        }
+      },
+      "inputs": {
+        "ordinary_other_voice": 4,
+        "ordinary_same_host": 4,
+        "synthetic": 4,
+        "untouched": 4
+      }
+    }
+  }
+}

@@ -115,6 +115,24 @@ integration remains unfinished.
   [paired-video soundtrack replay](video-paired-soundtrack-transfer-2026-11-12.md#replay)
   can now start from the pinned public recordings. The local replay
   regenerated and verified all 198 held deliveries.
+- The [JPEG copy check](image-jpeg-copy-blocks-transfer-2026-11-12.md)
+  located 15 of 18 small on-grid copies at JPEG75, up from three, and 17
+  of 18 at JPEG90, up from two. It added no flags on ordinary controls
+  and supplied no additional off-grid locations. Full local analysis and
+  signed source replay verified both original crop locations.
+- The [720p video extension](video-mouth-hd-hold-2026-11-12.md) localized
+  12 of 14 known mouth-region holds and flagged none of 53 ordinary
+  controls. It covers up to four seconds at the start of qualifying
+  H.264 MP4. The original two-second scope remains available.
+- The [RADAR speech comparison](audio-radar-transfer-2026-11-12.md)
+  corroborated 10 of 16 synthetic longer recordings on the initial split
+  and 18 of 20 on the separate confirmation split, with zero corroborations
+  on 36 genuine recordings. Short-file AI flags fell from 11 to three
+  with added traffic and to zero with added café sound. Source acquisition
+  and native replay use bounded public archive downloads.
+- The [writing revision-class comparison](writing-assisted-class-transfer-2026-11-12.md)
+  found no new useful locations on 32 rewrites and added genuine flags
+  that the incumbent did not produce. It stays experimental.
 
 ## Progress on 11 November
 

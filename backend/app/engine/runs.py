@@ -25,6 +25,7 @@ from sqlalchemy.orm import Session
 
 from app.core import times
 from app.engine.detector import SERVER_REASONS, of_the_server
+from app.evidence.audio_long_review_binding import DETECTOR_ID as LONG_VOICE_REVIEW_ID
 from app.storage.db import AnalysisStage, Artefact, DetectorRun
 from app.storage.objects import ObjectStore, default_store
 
@@ -47,6 +48,9 @@ def referenced(db: Session, analysis_id: str, store: ObjectStore | None = None) 
             continue
         if isinstance(output, dict):
             out.update(str(e["run_id"]) for e in output.get("detectors") or [] if isinstance(e, dict) and e.get("run_id"))
+            review = output.get("long_voice_review")
+            if isinstance(review, dict) and review.get("run_id"):
+                out.add(str(review["run_id"]))
     return out
 
 
@@ -61,13 +65,17 @@ def select_current(rows: Sequence[DetectorRun], referenced_ids: set[str]) -> lis
     return [run for run in ordered if chosen[run.detector_id] is run]
 
 
-def current(db: Session, analysis_id: str, store: ObjectStore | None = None) -> list[DetectorRun]:
-    """The runs that count for an analysis, in start order. The stage outputs are read only when a detector has more than one
-    row, which only an interrupted attempt leaves."""
-    rows = list(db.scalars(select(DetectorRun).where(DetectorRun.analysis_id == analysis_id)))
-    if len({r.detector_id for r in rows}) == len(rows):
+def current(db: Session, analysis_id: str, store: ObjectStore | None = None, *, include_auxiliary: bool = False) -> list[DetectorRun]:
+    """Return public scoring runs in start order, optionally including a pinned supplemental receipt for re-fusion."""
+    query = select(DetectorRun).where(DetectorRun.analysis_id == analysis_id)
+    if not include_auxiliary:
+        query = query.where(DetectorRun.detector_id != LONG_VOICE_REVIEW_ID)
+    rows = list(db.scalars(query))
+    has_auxiliary = any(run.detector_id == LONG_VOICE_REVIEW_ID for run in rows)
+    if not has_auxiliary and len({r.detector_id for r in rows}) == len(rows):
         return sorted(rows, key=_started)
-    return select_current(rows, referenced(db, analysis_id, store))
+    pins = referenced(db, analysis_id, store)
+    return select_current([run for run in rows if run.detector_id != LONG_VOICE_REVIEW_ID or run.id in pins], pins)
 
 
 def statuses(db: Session, analysis_id: str, result: Mapping[str, Any] | None = None, store: ObjectStore | None = None) -> list[str]:

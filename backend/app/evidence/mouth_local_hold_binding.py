@@ -11,10 +11,19 @@ from app.core.canonical import canonical_hash
 from app.evidence.source_geometry import pixel_bounds
 
 SCHEMA = "chipmunk.video-mouth-local-hold/1"
+HD_SCHEMA = "chipmunk.video-mouth-local-hold/2"
 PACKET_ID = "VPH02"
 FRAME_COUNT = 50
 STEP = Fraction(1, 25)
 PROFILE = {(360, 288), (480, 360)}
+HD_COUNT = 120
+HD_STEP = Fraction(1, 30)
+HD_PROFILE = {(1280, 720)}
+HD_WINDOW = 60
+HD_STARTS = (0, 30, 60)
+HD_FLANK = 5
+HD_SPAN = (8, 24)
+SCOPES = {SCHEMA: (FRAME_COUNT, STEP, PROFILE), HD_SCHEMA: (HD_COUNT, HD_STEP, HD_PROFILE)}
 ENCODING = ("h264", "yuv420p")
 CONTEXT = ("A mouth region remained nearly unchanged while other face areas changed in brightness. Ordinary editing and compression "
            "can create this pattern. This observation carries zero weight in the AI estimate.")
@@ -23,10 +32,14 @@ ROLES = ("before", "during", "after")
 SHA = re.compile(r"[0-9a-f]{64}")
 
 
-def eligible(table, encoding):
-    return (tuple(encoding or ()) == ENCODING and (table.width, table.height) in PROFILE and len(table) == FRAME_COUNT
-            and not (table.rotation or table.truncated or table.interpolated)
-            and all((b - a) * table.tb == STEP for a, b in pairwise(table.pts)))
+def eligible(table, encoding, *, schema=SCHEMA):
+    if schema not in SCOPES:
+        return False
+    count, step, dimensions = SCOPES[schema]
+    return (tuple(encoding or ()) == ENCODING and (table.width, table.height) in dimensions and len(table) >= count
+            and (schema == HD_SCHEMA or len(table) == count) and not (table.rotation or table.truncated)
+            and all(i >= count for i in table.interpolated)
+            and all((b - a) * table.tb == step for a, b in pairwise(table.pts[:count])))
 
 
 def region(box):
@@ -62,7 +75,7 @@ def _playback(value, stream_time, origin):
 
 def validate(cover, document):
     packets = [packet for packet in document["packets"] if packet.get("id") == PACKET_ID
-               or packet.get("semantics") == SCHEMA or "mouth_local_hold" in packet]
+               or packet.get("semantics") in SCOPES or "mouth_local_hold" in packet]
     review = cover.get("mouth_local_hold")
     if review is None:
         _require(not packets, "Mouth hold has no recorded source inspection")
@@ -70,30 +83,43 @@ def validate(cover, document):
     source = document["source"]
     tb = Fraction(source["time_base"])
     origin = source["timeline_origin_s"]
-    status, pts = review["status"], review["pts"]
-    _require(review["schema"] == SCHEMA and "sequence_review" in cover
-             and review["frames_scanned"] == cover["frames_scanned"] == source["frame_count"] == FRAME_COUNT
-             and tuple(review["encoding"]) == ENCODING and (source["width"], source["height"]) in PROFILE
-             and len(pts) == FRAME_COUNT and all(type(tick) is int for tick in pts)
-             and all((b - a) * tb == STEP for a, b in pairwise(pts)) and len(review["frame_hashes"]) == FRAME_COUNT
+    status, pts, schema = review["status"], review["pts"], review["schema"]
+    _require(schema in SCOPES, "Mouth hold uses an unsupported source profile")
+    count, step, dimensions = SCOPES[schema]
+    hd = schema == HD_SCHEMA
+    _require("sequence_review" in cover and review["frames_scanned"] == count <= cover["frames_scanned"] <= source["frame_count"]
+             and (hd or source["frame_count"] == count) and tuple(review["encoding"]) == ENCODING
+             and (source["width"], source["height"]) in dimensions and len(pts) == count and all(type(tick) is int for tick in pts)
+             and all((b - a) * tb == step for a, b in pairwise(pts)) and len(review["frame_hashes"]) == count
              and all(SHA.fullmatch(item) for item in review["frame_hashes"]) and canonical_hash(review["frame_hashes"]) == review["input_sha256"]
              and status in STATUSES and review["affects_overall_confidence"] is False,
              "Mouth hold has an unsupported source or clock")
+    if hd:
+        assessed = review["assessed_window_starts"]
+        _require(review["carrier"] == "mp4" and assessed == sorted(set(assessed)) and all(type(i) is int and i in HD_STARTS for i in assessed)
+                 and bool(assessed) == (status in {"matched", "no_match"}), "HD mouth hold has inconsistent measured windows")
+    else:
+        _require("assessed_window_starts" not in review, "Historical mouth hold includes undeclared windows")
     match = review["match"]
     if status != "matched":
         _require(match is None and not packets and review["packet_id"] is None, "Mouth hold evidence differs from its status")
         return
     _require(len(packets) == 1 and review["packet_id"] == PACKET_ID, "Mouth hold omits its recorded evidence")
     packet, = packets
-    _require(packet["id"] == PACKET_ID and packet["semantics"] == SCHEMA and packet["claim_scope"] == "sampled_window"
+    _require(packet["id"] == PACKET_ID and packet["semantics"] == schema and packet["claim_scope"] == "sampled_window"
              and packet["evidence_type"] == "anomaly" and packet["mouth_local_hold"] == match and packet["affects_overall_confidence"] is False
              and not (packet["signal_refs"] or packet["finding_ids"] or packet["exhibit_refs"])
              and packet["interpretation"] == CONTEXT, "Mouth hold evidence misstates the recorded observation")
     start, end = match["frames"]
     index = [start - 1, (start + end) // 2, end]
     bounds = region(match["box"])
-    _require(all(type(i) is int for i in (start, end, *match["box"])) and 4 <= start < end <= FRAME_COUNT - 4
-             and 7 <= end - start <= 20 and match["anchors"] == index and len(match["context_boxes"]) in range(2, 6)
+    offset = match["window_start"] if hd else 0
+    _require((type(offset) is int and offset in assessed) if hd else "window_start" not in match,
+             "Mouth hold differs from its measured review window")
+    window, flank = (HD_WINDOW, HD_FLANK) if hd else (count, 4)
+    minimum, maximum = HD_SPAN if hd else (7, 20)
+    _require(all(type(i) is int for i in (start, end, *match["box"])) and offset + flank <= start < end <= offset + window - flank
+             and minimum <= end - start <= maximum and match["anchors"] == index and len(match["context_boxes"]) in range(2, 6)
              and match["total_edges"] == end - start - 1 and 2 * match["total_edges"] <= 3 * match["moving_context_edges"] <= 3 * match["total_edges"],
              "Mouth hold range or motion support is invalid")
     _require(0 <= match["maximum_patch_mean_difference"] <= .42 and .94 <= match["minimum_patch_near_equal_fraction"] <= 1
@@ -129,4 +155,6 @@ def validate(cover, document):
 
 def validate_clock(review, table_pts, interpolated):
     if review is not None:
-        _require(review["pts"] == list(table_pts) and not interpolated, "Mouth hold differs from the committed native clock")
+        count = review["frames_scanned"]
+        _require(review["pts"] == list(table_pts[:count]) and all(i >= count for i in interpolated),
+                 "Mouth hold differs from the committed native clock")

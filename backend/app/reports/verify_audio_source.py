@@ -32,6 +32,9 @@ def _clips(audio: dict, alignment: dict) -> Iterator[tuple[str, dict, list[dict]
         yield f"{window['id']} sound clip", window, window["source_timestamp_ranges"], window["artifacts"]["selected_clip"]
     if (review := audio.get("short_voice_review")) and review["status"] == "flagged":
         yield "Short speech-window clip", review["interval"], review["source_timestamp_ranges"], review["artifacts"]["selected_clip"]
+    for window in (audio.get("long_voice_review") or {}).get("windows", []):
+        if clip := window["artifacts"].get("selected_clip"):
+            yield "Long speech-window clip", window, window["source_timestamp_ranges"], clip
     for name in ("repetition_context", "similarity_context"):
         for pair in (audio.get(name) or {}).get("pairs", []):
             for side in ("first", "second"):
@@ -124,6 +127,12 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         if hashlib.sha256(waveform).hexdigest() != review["artifacts"]["waveform"]["sha256"]:
             raise ValueError("Short speech-window waveform differs from the recorded samples")
         replay_detail += " Recomputed the marked short speech-window waveform."
+    if (review := audio.get("long_voice_review")) is not None:
+        from app.evidence.audio_long_review import verify_source
+        from app.evidence.audio_packets import _chart
+
+        verify_source(review, pcm=decoded.pcm, mapping=decoded.mapping, waveform=_chart)
+        replay_detail += f" Verified {len(review['windows'])} long speech-window input ranges and their marked waveforms."
     interval_label = "interval" if intervals == 1 else "intervals"
     asset_label = "asset" if len(covered) == 1 else "assets"
     return (f"Original SHA-256, {len(decoded.pcm):,} decoded mono samples and source timeline matched. "

@@ -539,7 +539,7 @@ def _mouth_hold_packet(db: Session, store: ObjectStore, analysis: Analysis, set_
     start, end = match["frames"]
     first, last = table.seconds(start), table.seconds(end)
     return {"id": packet_id, "title": "Mouth-region picture hold", "evidence_type": "anomaly", "claim_scope": "sampled_window",
-            "semantics": mouth_local_hold_binding.SCHEMA, "mouth_local_hold": match, "affects_overall_confidence": False,
+            "semantics": review["schema"], "mouth_local_hold": match, "affects_overall_confidence": False,
             "finding_ids": [], "signal_refs": [], "exhibit_refs": [], "frames": frames, "artifacts": assets,
             "window": {"frame_indices": list(range(start - 1, end + 1)), "time_base": table.time_base,
                        "start_pts": table.pts[start], "end_pts": table.pts[end], "start_stream_s": first, "end_stream_s": last,

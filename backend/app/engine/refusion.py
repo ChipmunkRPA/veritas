@@ -194,7 +194,7 @@ def create_revision(db: Session, store: ObjectStore, analysis_id: str, *, fuser_
     db.flush()
 
     mapping: dict[str, str] = {}
-    for run in runs.current(db, source.id, store):  # not the rows of an interrupted attempt of the source (N-8)
+    for run in runs.current(db, source.id, store, include_auxiliary=True):  # copy pinned receipts as well as scoring runs
         mapping[run.id] = _uuid(new_id, run.id, "run")
         raw_id = None
         raw = db.get(Artefact, run.raw_output_artefact_id) if run.raw_output_artefact_id else None

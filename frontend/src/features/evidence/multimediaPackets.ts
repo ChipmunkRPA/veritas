@@ -61,7 +61,7 @@ export interface VideoEvidenceSet extends SetBase {
     reason: string | null; packet_id: string | null; scan_scope?: 'extended-native-prefix/1' | 'native-sequence-prefix/1'; continuity_breaks?: number;
     sequence_review?: { status: 'matched' | 'no_match' | 'unavailable' }
     mouth_local_hold?: { status: 'matched' | 'no_match' | 'no_stable_face' | 'unavailable'; frames_scanned: number;
-      packet_id: 'VPH02' | null; affects_overall_confidence: false }
+      packet_id: 'VPH02' | null; affects_overall_confidence: false; assessed_window_starts?: number[] }
     motion_sequence_review?: { status: 'matched' | 'no_match' | 'unavailable'; frames_scanned: number; parameters: { frame_rate: 20 | 25 }
       reason: 'source_clock' | 'exact_sequence' | null } }
   coverage?: { frame_count: number; scored_frame_count: number; window_frame_indices: number[]; window_check_count: number;
@@ -162,6 +162,16 @@ export interface ShortVoiceReview {
   source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges']
   artifacts: Partial<Record<'selected_clip' | 'waveform', EvidenceAsset>>
 }
+export interface LongVoiceReview {
+  schema: 'chipmunk.long-voice-review/1'; title: 'Long speech-window review'
+  status: 'corroborated' | 'no_corroboration' | 'skipped'
+  reason: string; limitation: string; affects_overall_confidence: false
+  windows: (SampleInterval & {
+    pcm_sha256: string; direction: 'ai' | 'original' | 'inconclusive' | 'unassessed'
+    source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges']
+    artifacts: Partial<Record<'selected_clip' | 'waveform', EvidenceAsset>>
+  })[]
+}
 export interface AudioEvidenceSet extends SetBase {
   schema: 'chipmunk.audio-evidence/1'; packets: AudioEvidencePacket[]; omitted_windows: number
   source: { sha256: string; pcm_sha256?: string; samples?: number; sample_rate?: number; source_channels?: number; source_sample_rate?: number;
@@ -181,6 +191,7 @@ export interface AudioEvidenceSet extends SetBase {
   repetition_context?: AudioRepetitionContext
   similarity_context?: AudioSimilarityContext
   short_voice_review?: ShortVoiceReview
+  long_voice_review?: LongVoiceReview
 }
 export type VideoChannelStatus = 'ready' | 'absent' | 'unavailable' | 'not_assessed' | 'not_applicable'
 export interface VideoAudioChannel {

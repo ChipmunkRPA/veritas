@@ -108,6 +108,12 @@ def asset_refs(document: dict[str, Any] | None) -> dict[str, dict[str, Any]]:
             if part.get("schema") != "chipmunk.audio-evidence/1" or not isinstance(review, dict):
                 raise ObjectIntegrityError("The evidence has an invalid short speech-window review")
             groups.append(review.get("artifacts") or {})
+        if "long_voice_review" in part:
+            review = part["long_voice_review"]
+            if (part is not document or part.get("schema") != "chipmunk.audio-evidence/1"
+                    or not isinstance(review, dict) or not isinstance(review.get("windows"), list)):
+                raise ObjectIntegrityError("The evidence has an invalid long speech-window review")
+            groups.extend(window["artifacts"] for window in review["windows"])
         if listening := part.get("stereo_listening"):
             groups.extend(window["artifacts"] for window in listening["windows"])
         for key in ("repetition_context", "similarity_context"):

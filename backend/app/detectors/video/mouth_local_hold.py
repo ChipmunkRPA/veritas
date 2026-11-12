@@ -18,6 +18,9 @@ from app.evidence import mouth_local_hold_binding as binding
 
 STEP, PROFILE, FRAME_COUNT = binding.STEP, binding.PROFILE, binding.FRAME_COUNT
 ANCHORS = (4, 12, 20, 28, 36, 44)
+HD_COUNT, HD_WINDOW, HD_STARTS = binding.HD_COUNT, binding.HD_WINDOW, binding.HD_STARTS
+HD_ANCHORS = (6, 14, 22, 30, 38, 46, 54)
+HD_FLANK, HD_SPAN = binding.HD_FLANK, binding.HD_SPAN
 FACE_MINIMUM = 56
 MIN_SPAN = 7
 MAX_SPAN = 20
@@ -42,13 +45,15 @@ def source_geometry(rgb, detector):
     return Geometry((x0 + x1) / 2, (y0 + y1) / 2, float(np.hypot(x1 - x0, y1 - y0))), 1
 
 
-def stable_geometry(frames, detector):
-    sampled = [source_geometry(frames[i], detector) for i in ANCHORS]
+def stable_geometry(frames, detector, *, hd=False):
+    anchors = HD_ANCHORS if hd else ANCHORS
+    sampled = [source_geometry(frames[i], detector) for i in anchors]
     values = np.asarray([geometry for geometry, count in sampled if count == 1])
-    if len(values) < 4 or any(count > 1 for _, count in sampled):
+    if len(values) < (5 if hd else 4) or any(count > 1 for _, count in sampled):
         return None
     mouth = Geometry(*np.median(values, axis=0))
-    if not 18 <= mouth.width <= 96 or np.max(np.abs(values[:, :2] - [mouth.x, mouth.y])) > .70 * mouth.width:
+    low, high = (24, 192) if hd else (18, 96)
+    if not low <= mouth.width <= high or np.max(np.abs(values[:, :2] - [mouth.x, mouth.y])) > .70 * mouth.width:
         return None
     return mouth
 
@@ -100,15 +105,17 @@ def transitions(frames, rectangles, regions):
     return texture, np.array(core), np.array(quiet), np.array(context), np.array(whole)
 
 
-def _candidates(texture, rectangles, core, quiet, context, whole):
+def _candidates(texture, rectangles, core, quiet, context, whole, *, hd=False):
     steady = (core <= CORE_MAX_MAE) & (quiet >= CORE_MIN_FRACTION)
+    minimum, maximum = HD_SPAN if hd else (MIN_SPAN, MAX_SPAN)
+    flank = HD_FLANK if hd else FLANK
     for i, rect in enumerate(rectangles):
         x, y, w, h = (int(value) for value in rect)
         edges = np.flatnonzero(np.diff(np.r_[False, steady[:, i], False]))
         for start, stop in zip(edges[::2], edges[1::2], strict=True):
             end = stop + 1
             length = end - start
-            if not MIN_SPAN <= length <= MAX_SPAN or start < FLANK or end + FLANK > len(texture):
+            if not minimum <= length <= maximum or start < flank or end + flank > len(texture):
                 continue
             if whole[start - 1:stop + 1].max() > WHOLE_MAX:
                 continue
@@ -116,7 +123,7 @@ def _candidates(texture, rectangles, core, quiet, context, whole):
             active = int(np.count_nonzero(moving >= CONTEXT_MAE))
             if Fraction(active, len(moving)) < CONTEXT_MIN_FRACTION:
                 continue
-            before, after = core[start - FLANK:start, i], core[stop:stop + FLANK, i]
+            before, after = core[start - flank:start, i], core[stop:stop + flank, i]
             if min(before.max(), after.max()) < FLANK_PEAK:
                 continue
             middle = (start + end) // 2
@@ -138,8 +145,12 @@ def _mouth_at_anchor(rect, frame, detector):
             and abs(y + h / 2 - mouth.y) <= .33 * mouth.width)
 
 
-def inspect(frames, detector):
-    mouth = stable_geometry(frames, detector)
+def _rank(row):
+    return -row["total_edges"], -row["box"][2] * row["box"][3], row["frames"][0], row["box"]
+
+
+def inspect(frames, detector, *, hd=False):
+    mouth = stable_geometry(frames, detector, hd=hd)
     if mouth is None:
         return "no_stable_face", None
     rectangles = boxes(mouth, frames[0].shape[:2])
@@ -147,12 +158,26 @@ def inspect(frames, detector):
     if rectangles.size == 0 or len(regions) < 2:
         return "no_stable_face", None
     texture, core, quiet, context, whole = transitions(frames, rectangles, regions)
-    candidates = sorted(_candidates(texture, rectangles, core, quiet, context, whole),
-                        key=lambda row: (-row["total_edges"], -row["box"][2] * row["box"][3], row["frames"][0], row["box"]))
+    candidates = sorted(_candidates(texture, rectangles, core, quiet, context, whole, hd=hd), key=_rank)
     for row in candidates[:8]:
         if all(_mouth_at_anchor(row["box"], frames[index], detector) for index in row["anchors"]):
             return "matched", row | {"context_boxes": regions.tolist()}
     return "no_match", None
+
+
+def inspect_hd(frames, detector):
+    if len(frames) != HD_COUNT:
+        raise ValueError("HD mouth hold requires a complete 120-picture prefix")
+    assessed, matches = [], []
+    for start in HD_STARTS:
+        status, match = inspect(frames[start:start + HD_WINDOW], detector, hd=True)
+        if status != "no_stable_face":
+            assessed.append(start)
+        if match is not None:
+            matches.append(match | {"window_start": start, "frames": [i + start for i in match["frames"]],
+                                    "anchors": [i + start for i in match["anchors"]]})
+    best = min(matches, key=_rank, default=None)
+    return ("matched" if best else "no_match" if assessed else "no_stable_face"), best, assessed
 
 
 def native(path):
@@ -167,15 +192,24 @@ def native(path):
     return table, [frame.rgb for frame in delivered]
 
 
-def record(frames, pts, hashes, *, detector_path=None):
+def record(frames, pts, hashes, *, detector_path=None, schema=binding.SCHEMA):
     status, match = "unavailable", None
+    assessed = []
+    hd = schema == binding.HD_SCHEMA
     if detector_path is not None:
         with suppress(cv2.error):  # This auxiliary measurement cannot fail the analysis.
-            status, match = inspect(frames, load_yunet(detector_path))
-    return {"schema": binding.SCHEMA, "status": status, "frames_scanned": FRAME_COUNT,
+            detector = load_yunet(detector_path)
+            if hd:
+                status, match, assessed = inspect_hd(frames, detector)
+            else:
+                status, match = inspect(frames, detector)
+    result = {"schema": schema, "status": status, "frames_scanned": len(frames),
             "encoding": list(binding.ENCODING), "pts": list(pts), "frame_hashes": hashes,
             "input_sha256": canonical_hash(hashes), "packet_id": binding.PACKET_ID if match else None,
             "affects_overall_confidence": False, "match": match}
+    if hd:
+        result.update(assessed_window_starts=assessed, carrier="mp4")
+    return result
 
 
 def local_detector_path():
@@ -191,13 +225,18 @@ def local_detector_path():
     return None
 
 
-def verify_measurements(frames, match):
+def verify_measurements(frames, match, *, hd=False):
     """Recompute the recorded pixel measurements without the face detector."""
     if match is None:
         return
+    if hd:
+        start = match["window_start"]
+        frames = frames[start:start + HD_WINDOW]
+        match = {key: value for key, value in match.items() if key != "window_start"} | {
+            key: [i - start for i in match[key]] for key in ("frames", "anchors")}
     rectangles = np.asarray([match["box"]])
     regions = np.asarray(match["context_boxes"])
     texture, core, quiet, context, whole = transitions(frames, rectangles, regions)
     expected = canonical_hash({key: value for key, value in match.items() if key != "context_boxes"})
-    if not any(canonical_hash(candidate) == expected for candidate in _candidates(texture, rectangles, core, quiet, context, whole)):
+    if not any(canonical_hash(candidate) == expected for candidate in _candidates(texture, rectangles, core, quiet, context, whole, hd=hd)):
         raise ValueError("The native pictures do not reproduce the held mouth-region measurements")

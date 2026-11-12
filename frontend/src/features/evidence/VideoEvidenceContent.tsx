@@ -114,6 +114,10 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
           : <>Coverage includes only the first {mouthHold.frames_scanned} source frames. </>)}
         This observation carries no weight in overall AI confidence.
       </p>
+      {!!mouthHold.assessed_window_starts?.length && <p className="mt-2 mb-0 text-caption text-text-muted">
+        Mouth geometry was measured in {mouthHold.assessed_window_starts.length} of 3 overlapping windows.
+        {' '}Source frames {mouthHold.assessed_window_starts.map(start => `${start}–${start + 59}`).join(', ')}.
+      </p>}
     </section>}
     {hold?.sequence_review && <section aria-labelledby="video-picture-sequence-heading" className="mt-4 rounded-md border border-border p-4">
       <h3 id="video-picture-sequence-heading" className="m-0 text-body font-medium">Repeated moving sequences</h3>

@@ -1,9 +1,9 @@
 // @vitest-environment jsdom
 import { cleanup, fireEvent, render, screen, within } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
-import { afterEach, describe, expect, it } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 import { MultimediaEvidenceContent } from './MultimediaEvidenceCards'
-import { evidenceAssetUrl, type AudioEvidenceSet, type DocumentEvidenceSet, type EvidenceAsset, type MultimediaEvidenceSet, type VideoEvidenceSet } from './multimediaPackets'
+import { evidenceAssetUrl, type AudioEvidenceSet, type DocumentEvidenceSet, type EvidenceAsset, type LongVoiceReview, type MultimediaEvidenceSet, type VideoEvidenceSet } from './multimediaPackets'
 
 const asset = (hash: string, media_type: 'image/png' | 'audio/wav' = 'image/png'): EvidenceAsset => ({ sha256: hash.repeat(64), media_type,
   width: 300, height: 200, url: 'https://unrelated.invalid/collect-token', samples: 64000, sample_rate: 16000 })
@@ -123,6 +123,65 @@ describe('ordinary multimedia evidence', () => {
     expect(review.getByLabelText('Flagged two-second speech window').getAttribute('src')).toContain(`${'f'.repeat(64)}.wav`)
     expect(review.getByAltText('Waveform with the flagged two-second speech window marked')).toBeTruthy()
     expect(screen.queryByTestId('multimedia-evidence-empty')).toBeNull()
+  })
+
+  it('shows source ranges and plays only corroborating long speech windows', () => {
+    const windows: LongVoiceReview['windows'] = [0, 56000, 112000].map((start_sample, index) => {
+      const end_sample = start_sample + 48000
+      const range = { start_sample, end_sample }
+      return {
+        ...range, pcm_sha256: 'b'.repeat(64), direction: index === 1 ? 'inconclusive' : 'ai',
+        source_timestamp_ranges: [{ ...range, source_start_pts: start_sample, source_end_pts: end_sample, time_base: '1/16000' }],
+        artifacts: { selected_clip: asset(index === 2 ? 'e' : 'f', 'audio/wav'), waveform: asset('2') },
+      }
+    })
+    const set = { ...structuredClone(audio), packets: [] }
+    set.long_voice_review = {
+      schema: 'chipmunk.long-voice-review/1', title: 'Long speech-window review', status: 'corroborated',
+      reason: 'At least two separate windows leaned AI-generated, and none leaned original.',
+      limitation: 'The review carries no weight in the overall assessment.', affects_overall_confidence: false, windows,
+    }
+    show(set)
+    const review = within(screen.getByRole('region', { name: 'Long speech-window review' }))
+    expect(review.getByRole('status').textContent).toContain('At least two separate windows')
+    expect(review.getAllByText('Leans AI-generated in this window')).toHaveLength(2)
+    expect(review.getByText('Inconclusive window')).toBeTruthy()
+    expect(review.getByText(/7\.000 s–10\.000 s · samples \[112000, 160000\)/)).toBeTruthy()
+    expect(review.getByText(/Original audio 7\.000 s–10\.000 s\. Source PTS \[112000, 160000\) at 1\/16000/)).toBeTruthy()
+    expect(review.getAllByRole('img')).toHaveLength(2)
+    expect(review.getByText(/carries no weight in the overall assessment/)).toBeTruthy()
+    const first = review.getByLabelText('Corroborating speech window at 0.000 s–3.000 s')
+    const last = review.getByLabelText('Corroborating speech window at 7.000 s–10.000 s')
+    expect(first.getAttribute('src')).toContain(`${'f'.repeat(64)}.wav`)
+    expect(last.getAttribute('src')).toContain(`${'e'.repeat(64)}.wav`)
+    const pause = vi.fn()
+    Object.defineProperties(first, { paused: { value: false }, pause: { value: pause } })
+    fireEvent.play(last)
+    expect(pause).toHaveBeenCalledOnce()
+    expect(screen.queryByTestId('multimedia-evidence-empty')).toBeNull()
+  })
+
+  it.each(['no_corroboration', 'skipped'] as const)('keeps a %s long speech review visible without offering clips', (status) => {
+    const set = { ...structuredClone(audio), packets: [] }
+    const skipped = status === 'skipped'
+    const reason = skipped ? 'The optional long-window review could not complete.'
+      : 'The sampled windows did not produce corroborating AI-like responses.'
+    set.long_voice_review = {
+      schema: 'chipmunk.long-voice-review/1', title: 'Long speech-window review', status, reason,
+      limitation: 'The review carries no weight in the overall assessment.', affects_overall_confidence: false,
+      windows: skipped ? [] : [{
+        start_sample: 0, end_sample: 48000, pcm_sha256: 'a'.repeat(64), direction: 'original',
+        source_timestamp_ranges: [{ start_sample: 0, end_sample: 48000, source_start_pts: 0, source_end_pts: 48000, time_base: '1/16000' }],
+        artifacts: {},
+      }],
+    }
+    show(set)
+    const review = within(screen.getByRole('region', { name: 'Long speech-window review' }))
+    expect(review.getByRole('status').textContent).toBe(reason)
+    expect(Boolean(review.queryByText('Leans original in this window'))).toBe(!skipped)
+    expect(review.queryByLabelText(/Corroborating speech window/)).toBeNull()
+    expect(review.queryByRole('img')).toBeNull()
+    expect(screen.getByTestId('multimedia-evidence-empty')).toBeTruthy()
   })
 
   it('shows the whole-clip face review as six positions and three source examples', () => {
@@ -284,6 +343,19 @@ describe('ordinary multimedia evidence', () => {
     expect(coverage.getByText(/first 50 source frames/)).toBeTruthy()
     expect(coverage.queryByRole('link')).toBeNull()
     expect(screen.queryByRole('article')).toBeNull()
+  })
+
+  it('shows which mouth-region windows were measured within a longer HD video', () => {
+    const set = { ...structuredClone(video), packets: [] }
+    set.picture_hold = { status: 'no_match', frames_scanned: 240, frame_limit: 240, last_frame_index: 239,
+      last_stream_time_s: 7.967, last_pts: 239000, time_base: '1/30000', reason: null, packet_id: null,
+      mouth_local_hold: { status: 'no_match', frames_scanned: 120, packet_id: null, affects_overall_confidence: false,
+        assessed_window_starts: [0, 60] } }
+    show(set)
+    const section = within(screen.getByRole('region', { name: 'Mouth-region picture hold' }))
+    expect(section.getByText(/first 120 source frames/)).toBeTruthy()
+    expect(section.getByText(/2 of 3 overlapping windows.*Source frames 0–59, 60–119/)).toBeTruthy()
+    expect(section.queryByRole('link')).toBeNull()
   })
 
   it('shows two original time ranges and one identical recording in the video voice lane', () => {

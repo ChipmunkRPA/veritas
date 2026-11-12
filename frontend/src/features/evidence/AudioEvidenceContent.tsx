@@ -10,13 +10,22 @@ import { EvidenceAudio, EvidenceLimits, EvidenceMeasurements, EvidencePicture, E
 import { measurementValue } from './imagePackets'
 import { rationalSeconds, seconds, type AudioEvidencePacket, type AudioEvidenceSet } from './multimediaPackets'
 
-function SourceTimestamps({ ranges, videoOriginS }: {
-  ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges']; videoOriginS?: number | null
+const longVoiceLabels = {
+  ai: 'Leans AI-generated in this window',
+  original: 'Leans original in this window',
+  inconclusive: 'Inconclusive window',
+  unassessed: 'No usable speech response',
+}
+const longVoiceSampleRate = 16_000
+
+function SourceTimestamps({ ranges, videoOriginS, showSeconds = false }: {
+  ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges']; videoOriginS?: number | null; showSeconds?: boolean
 }) {
   return <>{ranges.map((range) => {
     const start = rationalSeconds(range.source_start_pts, range.time_base)
     const end = rationalSeconds(range.source_end_pts, range.time_base)
     return <p key={range.start_sample} className="m-0 text-caption">
+      {showSeconds && start != null && end != null && <>Original audio {seconds(start)}–{seconds(end)}. </>}
       Source PTS [{range.source_start_pts}, {range.source_end_pts}) at {range.time_base}.
       {videoOriginS != null && start != null && end != null && start >= videoOriginS
         && ` Video playback ${seconds(start - videoOriginS)}–${seconds(end - videoOriginS)}.`}
@@ -31,6 +40,7 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
   const tracks = set.source.audio_stream_indices
   const clock = set.coverage?.source_clock_context
   const shortReview = standalone ? set.short_voice_review : undefined
+  const longReview = standalone ? set.long_voice_review : undefined
   const intervals = standalone && set.packets.length === 0 ? [...new Map(set.coverage?.windows?.map((window) =>
     [`${window.start_sample}:${window.end_sample}`, window] as const)).values()]
     .sort((a, b) => a.start_sample - b.start_sample || a.end_sample - b.end_sample) : []
@@ -70,7 +80,10 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
     root.current?.querySelectorAll('audio').forEach((audio) => { if (!audio.paused) audio.pause() })
     setSelection(packet.id)
   }, [hash, set.packets])
-  return <div ref={root} data-testid="audio-evidence-content">
+  return <div ref={root} data-testid="audio-evidence-content"
+    onPlayCapture={longReview?.status === 'corroborated' ? (event) => {
+      if (event.target instanceof HTMLAudioElement) pauseAudio(event.target)
+    } : undefined}>
     {tracks && tracks.length > 1 && <section aria-label="Audio track coverage" className="mt-4 rounded-md border border-border p-4 text-small text-text-muted">
       <h3 className="m-0 font-medium">Audio track coverage</h3>
       <p className="mt-2 mb-0">The file contains {tracks.length} audio tracks. Audio checks used the first track (source stream index {tracks[0]}).{' '}
@@ -106,9 +119,36 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
       </details>}
       <p className="mt-3 mb-0 text-caption text-text-muted">{shortReview.limitation}</p>
     </section>}
+    {longReview && <section id="media-evidence-long-voice-review" aria-label={longReview.title}
+      className="mt-5 rounded-md border border-border p-4 scroll-mt-20">
+      <h3 className="m-0 text-body font-medium">{longReview.title}</h3>
+      <p className="mt-2 mb-0 text-small" role="status">{longReview.reason}</p>
+      {longReview.windows.length > 0 && <ol className="mt-4 mb-0 space-y-3 list-none p-0">
+        {longReview.windows.map((window) => {
+          const span = `${seconds(window.start_sample / longVoiceSampleRate)}–${seconds(window.end_sample / longVoiceSampleRate)}`
+          const showMedia = longReview.status === 'corroborated' && window.direction === 'ai'
+          return <li key={window.start_sample} className="rounded-md border border-border p-3">
+            <p className="m-0 text-small font-medium">{longVoiceLabels[window.direction]}</p>
+            <p className="mt-2 mb-0 font-mono text-caption text-text-muted">
+              Analyzed input {span} · samples [{window.start_sample}, {window.end_sample})
+            </p>
+            <SourceTimestamps ranges={window.source_timestamp_ranges} showSeconds />
+            {showMedia && window.artifacts.waveform && <div className="mt-3">
+              <EvidencePicture set={set} artifact={window.artifacts.waveform} token={token} ready={mediaReady} chart
+                alt={`Waveform for the corroborating speech window at ${span}`} />
+            </div>}
+            {showMedia && window.artifacts.selected_clip && <div className="mt-3">
+              <EvidenceAudio set={set} artifact={window.artifacts.selected_clip} token={token} ready={mediaReady}
+                alt={`Corroborating speech window at ${span}`} />
+            </div>}
+          </li>
+        })}
+      </ol>}
+      <p className="mt-3 mb-0 text-caption text-text-muted">{longReview.limitation}</p>
+    </section>}
     {set.packets.length > 0 && <AudioInspectionTimeline set={set} token={token} mediaReady={mediaReady} selectedId={selectedId} onSelect={select} />}
     {set.coverage && rate ? <div id={standalone ? 'media-evidence-voice-coverage' : undefined} className="scroll-mt-14 mt-4 rounded-md border border-border p-4 text-small text-text-muted">
-      <p className="m-0">{shortReview ? 'Primary voice checks' : 'Voice checks'} cover {seconds(set.coverage.scored_samples / rate)} of the {seconds(set.coverage.decoded_samples / rate)} decoded input.
+      <p className="m-0">{shortReview || longReview ? 'Primary voice checks' : 'Voice checks'} cover {seconds(set.coverage.scored_samples / rate)} of the {seconds(set.coverage.decoded_samples / rate)} decoded input.
         {' '}{seconds(set.coverage.unscored_samples / rate)} of that input has no window score. Overlapping windows are counted once in this coverage.</p>
       <p className="mt-2 mb-0">{set.coverage.windows.length} scored windows. Responses apply to complete windows, normally four seconds; they do not identify individual words or exact voice-replacement boundaries.</p>
       {intervals.length > 0 && <details className="mt-3" open={hash === '#media-evidence-voice-coverage' || undefined}>

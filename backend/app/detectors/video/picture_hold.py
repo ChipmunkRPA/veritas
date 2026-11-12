@@ -30,7 +30,15 @@ def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Calla
     best = None
     observed = []
     descriptors = []
-    mouth_profile = mouth_review and sequence_review and mouth_local_hold_binding.eligible(table, motion_encoding)
+    mouth_profile = (next((schema for schema in mouth_local_hold_binding.SCOPES
+                           if mouth_local_hold_binding.eligible(table, motion_encoding, schema=schema)), None)
+                     if mouth_review and sequence_review else None)
+    if mouth_profile == mouth_local_hold_binding.HD_SCHEMA:
+        from app.detectors.video.face_return import source_carrier
+
+        if source_carrier(path) != "mp4":
+            mouth_profile = None
+    mouth_count = mouth_local_hold_binding.SCOPES[mouth_profile][0] if mouth_profile else 0
     mouth_frames = []
     motion_profile = picture_motion.profile(table, motion_encoding) if sequence_review else None
     extended_profile = (picture_motion.profile(table, motion_encoding, schema=picture_sequence.MOTION_EXTENDED_SCHEMA)
@@ -62,7 +70,7 @@ def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Calla
                         best = equal_start, point, frame.index, digest
                 if sequence_review:
                     observed.append((point, digest))
-                if mouth_profile:
+                if frame.index < mouth_count:
                     mouth_frames.append(frame.rgb)
                 if frame.index < motion_limit:
                     descriptors.append(picture_motion.descriptor(frame.rgb))
@@ -93,13 +101,17 @@ def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Calla
                         and (extended_pair is None or extended_pair["second"]["end_frame_index"] >= opening_limit)):
                     motion = extended_motion
             cover["motion_sequence_review"] = motion
-        if mouth_profile and len(mouth_frames) == len(table) and all(point is not None for point, _ in observed):
+        mouth_prefix = observed[:mouth_count]
+        if (mouth_profile and cover["frames_scanned"] >= mouth_count and len(mouth_frames) == mouth_count
+                and all(point is not None for point, _ in mouth_prefix)):
             from app.detectors.video import mouth_local_hold
 
+            reserve = 3.0 if mouth_profile == mouth_local_hold_binding.HD_SCHEMA else 1.0
             detector_path = (mouth_local_hold.local_detector_path()
-                             if remaining_s is None or remaining_s - (time.monotonic() - started) > 1.0 else None)
-            cover["mouth_local_hold"] = mouth_local_hold.record(mouth_frames, table.pts, [digest for _, digest in observed],
-                                                               detector_path=detector_path)
+                             if remaining_s is None or remaining_s - (time.monotonic() - started) > reserve else None)
+            cover["mouth_local_hold"] = mouth_local_hold.record(mouth_frames, table.pts[:mouth_count],
+                                                               [digest for _, digest in mouth_prefix],
+                                                               detector_path=detector_path, schema=mouth_profile)
     return result
 
 

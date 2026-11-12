@@ -29,9 +29,12 @@
 {% set mouth = hold.mouth_local_hold %}
 <h3>Mouth-region picture hold</h3>
 {% if mouth.status == 'matched' %}<p><a href="#multimedia-evidence-{{ mouth.packet_id }}">Inspect the measured mouth region</a> with original pictures from before, during and after the range.</p>
-{% elif mouth.status == 'no_match' %}<p>No qualifying mouth-region hold was found in the {{ mouth.frames_scanned }} verified pictures.</p>
+{% elif mouth.status == 'no_match' %}<p>{% if mouth.get('assessed_window_starts') %}No qualifying mouth-region hold was found in the assessed windows.{% else %}No qualifying mouth-region hold was found in the {{ mouth.frames_scanned }} verified pictures.{% endif %}</p>
 {% elif mouth.status == 'no_stable_face' %}<p>The check could not establish one consistently visible mouth across the {{ mouth.frames_scanned }} verified pictures.</p>
 {% else %}<p>The mouth-region check was unavailable for this analysis.</p>{% endif %}
+{% if mouth.get('assessed_window_starts') %}
+<p class="caption">The review covers only the first {{ mouth.frames_scanned }} source pictures. Mouth geometry was measured in {{ mouth.assessed_window_starts | length }} of 3 overlapping windows. Source frames {% for start in mouth.assessed_window_starts %}{{ start }}–{{ start + 59 }}{{ '.' if loop.last else ', ' }}{% endfor %}</p>
+{% endif %}
 <p class="caption">Ordinary editing and compression can create this pattern. It carries no AI confidence weight. JSON pointer <span class="mono">/picture_hold/mouth_local_hold</span>.</p>
 {% endif %}
 {% endif %}

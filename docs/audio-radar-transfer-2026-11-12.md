@@ -110,6 +110,26 @@ whole-file probability, the boundary of a partially synthetic section,
 or performance after the matched loud backgrounds in the short panel.
 [Confirmation score and source ledger](evaluation-panels/audio-radar-long-confirmation-2026-11-12.json)
 
+## Local evidence
+
+The Full audio worker runs the supplemental check on continuous native
+mono 16 kHz 16-bit FLAC lasting 6–14 seconds. It reports the assessed
+three-second ranges on the original sample clock and supplies a playable
+clip and marked waveform for each corroborating AI-leaning window. The
+overall audio conclusion is separate. A result with no corroboration shows
+the window readings without publishing clips as corroborating evidence.
+
+Three isolated Full analyses used simulated prepaid checkout. The two
+synthetic files showed respectively two and three corroborating windows
+with exact audio and waveform evidence. The genuine file showed its
+three local window readings without a corroborating flag or clip. All
+three whole-file conclusions stayed inconclusive. The API, JSON, Standard
+PDF and signed source replay agreed on the original sample positions.
+Chrome played all five three-second excerpts, decoded their waveform
+images and confirmed that changing the active excerpt pauses the previous
+one. The signed packages also verified with model and network imports
+disabled.
+
 ## Reproduce the source selection
 
 Download only the first 32 MiB of the public archive. The runner requires

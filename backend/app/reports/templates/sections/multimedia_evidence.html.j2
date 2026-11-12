@@ -27,6 +27,18 @@ Samples [{{ review.interval.start_sample }}, {{ review.interval.end_sample }}) a
 {% endif %}
 <p class="caption">{{ review.limitation }} JSON pointer <span class="mono">/short_voice_review</span>.</p>
 {% endif %}
+{% if evidence.get('long_voice_review') %}
+{% set review = evidence.long_voice_review %}
+<h3 id="multimedia-long-voice-review">{{ review.title }}</h3>
+<p class="caption">{% if review.status == 'skipped' %}Skipped. {% endif %}{{ review.reason }}</p>
+{% for window in review.windows %}
+<p class="caption"><strong>{{ window.label }}</strong>. {{ '%.3f' | format(window.start_sample / 16000) }}–{{ '%.3f' | format(window.end_sample / 16000) }} s.
+Samples [{{ window.start_sample }}, {{ window.end_sample }}) at 16000 Hz.
+{% for range in window.source_timestamp_ranges %}Source PTS [{{ range.source_start_pts }}, {{ range.source_end_pts }}) at {{ range.time_base }}.{% endfor %}</p>
+{% if window.get('waveform') %}{{ plates([window.waveform]) }}{% endif %}
+{% endfor %}
+<p class="caption">{{ review.limitation }} JSON pointer <span class="mono">/long_voice_review</span>.</p>
+{% endif %}
 {% if evidence.get('passage_coverage') %}
 {% set writing = evidence.passage_coverage %}
 <h3>Recorded passage coverage</h3>

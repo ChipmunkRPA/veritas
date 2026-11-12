@@ -26,6 +26,7 @@ from app.reports.specimens import specimen
 from app.storage.artefacts import register_artefact
 from app.storage.db import Analysis, AnalysisStage, Base
 from app.storage.objects import ObjectStore
+from scripts.video_face_720p30_transfer import authored as encode_hd_hold
 from scripts.video_lossy_sequence_transfer import deliver, read_source
 from scripts.video_motion_late_transfer import encode as late_authored
 from scripts.video_motion_sequence_360p_transfer import authored
@@ -63,31 +64,41 @@ def _motion_raster(count):
     return b"".join(frames)
 
 
-def _mouth_source(path, monkeypatch):
-    texture = np.indices((68, 80)).sum(axis=0) % 5 * 28 + 26
-    frames = []
-    for i in range(50):
-        rgb = np.full((288, 360, 3), 72 + (i % 4) * 4, dtype=np.uint8)
-        core = texture + (70 if 16 <= i < 26 else (i % 6) * 7)
-        rgb[125:193, 140:220] = core[..., None]
-        frames.append(rgb)
-    encode_mouth_hold(path, frames, 0)
+def _mouth_source(path, monkeypatch, *, hd):
+    width, height, count = (1280, 720, 240) if hd else (360, 288, 50)
+    start, end = (99, 111) if hd else (16, 26)
+    cx, cy, span = (640, 400, 64) if hd else (180, 159, 44)
+    rx, ry = (58, 42) if hd else (40, 34)
+    texture = np.indices((ry * 2, rx * 2)).sum(axis=0) % 5 * 28 + 26
+
+    def pictures():
+        for i in range(count):
+            rgb = np.full((height, width, 3), 72 + (i % 4) * 4, dtype=np.uint8)
+            core = texture + (70 if start <= i < end else (i % 6) * 7)
+            rgb[cy-ry:cy+ry, cx-rx:cx+rx] = core[..., None]
+            yield rgb
+
+    if hd:
+        encode_hd_hold(path, pictures=pictures(), crf=0)
+    else:
+        encode_mouth_hold(path, list(pictures()), 0)
     monkeypatch.setattr(mouth_local_hold, "local_detector_path", lambda: path)
     monkeypatch.setattr(mouth_local_hold, "load_yunet", lambda _: None)
-    monkeypatch.setattr(mouth_local_hold, "source_geometry", lambda *_: (mouth_local_hold.Geometry(180, 159, 44), 1))
+    monkeypatch.setattr(mouth_local_hold, "source_geometry", lambda *_: (mouth_local_hold.Geometry(cx, cy, span), 1))
 
 
 @pytest.mark.parametrize("case", ["opening_hold", "later_hold", "moving_sequence", "lossy_sequence", "lossy_sequence_360p",
-                                   "lossy_sequence_360p_late", "mouth_hold"])
+                                   "lossy_sequence_360p_late", "mouth_hold", "mouth_hold_hd"])
 def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monkeypatch, case, request):
-    mouth = case == "mouth_hold"
+    mouth = case in {"mouth_hold", "mouth_hold_hd"}
+    hd = case == "mouth_hold_hd"
     high_res = case.startswith("lossy_sequence_360p")
     extension = case == "lossy_sequence_360p_late"
     lossy = case.startswith("lossy_sequence")
     repeated, late = mouth or lossy or case == "moving_sequence", case != "opening_hold"
     path = tmp_path / ("mouth-hold.mp4" if mouth else "exact-hold.mkv")
     if mouth:
-        _mouth_source(path, monkeypatch)
+        _mouth_source(path, monkeypatch, hd=hd)
     elif lossy:
         if extension:
             indices = late_authored(_motion_raster(450), path, 0, "late_cross", "h264")
@@ -112,15 +123,20 @@ def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monk
     if mouth:
         review = scan["coverage"]["mouth_local_hold"]
         assert review["status"] == "matched" and review["affects_overall_confidence"] is False
+        assert review["frames_scanned"] == (120 if hd else 50)
+        if hd:
+            assert review["schema"] == mouth_local_hold_binding.HD_SCHEMA and review["assessed_window_starts"] == [0, 30, 60]
         match = review["match"]
-        assert match["frames"] == [16, 26]
-        indices = [15, 21, 26]
+        assert match["frames"] == ([99, 111] if hd else [16, 26])
+        indices = [98, 105, 111] if hd else [15, 21, 26]
         assert match["anchors"] == indices
-        frames = [frame.rgb for frame in decode_frames(path, table, None)]
-        mouth_local_hold.verify_measurements(frames, json.loads(canonical_json(match)))
+        prefix = [frame.rgb for frame in decode_frames(path, table, range(review["frames_scanned"]))]
+        mouth_local_hold.verify_measurements(prefix, json.loads(canonical_json(match)), hd=hd)
         altered_match = {**match, "minimum_flank_peak": match["minimum_flank_peak"] + .1}
         with pytest.raises(ValueError, match="do not reproduce the held mouth-region measurements"):
-            mouth_local_hold.verify_measurements(frames, altered_match)
+            mouth_local_hold.verify_measurements(prefix, altered_match, hd=hd)
+        frames = {i: prefix[i] for i in indices}
+        del prefix
     elif lossy:
         coverage = scan["coverage"]
         assert coverage["sequence_review"]["status"] == "no_match"
@@ -230,7 +246,9 @@ def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monk
             text = " ".join(" ".join(page.get_text() for page in rendered_pdf).split())
             if mouth:
                 assert "Mouth-region picture hold" in text and "VPH02" in text
-                assert "0.640 to 1.040 s" in text and "Exact measured mouth-region crop" in text
+                assert ("3.300 to 3.700 s" if hd else "0.640 to 1.040 s") in text and "Exact measured mouth-region crop" in text
+                if hd:
+                    assert "Mouth geometry was measured in 3 of 3 overlapping windows" in text
             elif lossy:
                 assert "Similar repeated moving sequences" in text and "VPR02" in text
                 if extension:

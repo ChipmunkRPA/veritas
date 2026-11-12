@@ -204,10 +204,13 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     sequence = hold.get("sequence_review")
     motion = hold.get("motion_sequence_review")
     local_mouth = hold.get("mouth_local_hold")
+    mouth_limit = 0
     if local_mouth is not None:
         delivery = delivery if delivery is not None else probe_container(original)
-        if not mouth_local_hold_binding.eligible(table, (delivery.get("codec"), delivery.get("pix_fmt"))):
+        if (not mouth_local_hold_binding.eligible(table, (delivery.get("codec"), delivery.get("pix_fmt")), schema=local_mouth["schema"])
+                or (local_mouth["schema"] == mouth_local_hold_binding.HD_SCHEMA and face_return.source_carrier(original) != "mp4")):
             raise ValueError("The original video differs from the mouth-region review profile")
+        mouth_limit = local_mouth["frames_scanned"]
     motion_encoding = None
     motion_profile = None
     motion_limit = 0
@@ -271,7 +274,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                 hold_observations.append((frame.pts if frame.pts_verified else None, rgb_sha))
             if index < motion_limit:
                 motion_descriptors.append(picture_motion.descriptor(frame.rgb))
-            if local_mouth is not None:
+            if index < mouth_limit:
                 _frame_anchor(frame, local_mouth["pts"][index], local_mouth["frame_hashes"][index], "Mouth-region input", rgb_sha)
                 mouth_pictures.append(frame.rgb)
             if index in pictures:
@@ -317,9 +320,9 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     if local_mouth is not None:
         from app.detectors.video.mouth_local_hold import verify_measurements
 
-        if len(mouth_pictures) != mouth_local_hold_binding.FRAME_COUNT:
+        if len(mouth_pictures) != mouth_limit:
             raise ValueError("The source is missing a verified mouth-region input")
-        verify_measurements(mouth_pictures, local_mouth["match"])
+        verify_measurements(mouth_pictures, local_mouth["match"], hd=local_mouth["schema"] == mouth_local_hold_binding.HD_SCHEMA)
     fine_edges = sum(_verify_scene_support(record, background_frames) for record in fine_records)
     for record in guarded_records:
         _verify_guarded_scene(record, background_frames)

@@ -34,7 +34,7 @@ import numpy as np
 
 from app.core.canonical import canonical_json
 from app.core.evidence import Signal
-from app.detectors.audio import short_voice_review, waveform
+from app.detectors.audio import long_voice_review, short_voice_review, waveform
 from app.detectors.audio.coverage import content_rows, coverage_seconds, scored_voice_spans
 from app.detectors.audio.decode import decode_audio
 from app.detectors.common.fusion import fuse as legacy_fuse
@@ -48,6 +48,7 @@ from app.engine.fusion import abstain
 from app.engine.runner import StageContext
 from app.engine.stages import common
 from app.engine.stages import video as vid
+from app.evidence import audio_long_review_binding
 from app.evidence.audio_binding import VOICE_CLOCK_LIMIT, VOICE_CLOCK_POLICY, source_clock_breaks
 from app.evidence.audio_short_review_binding import SCOPE_REASON, supported_source
 from app.schemas.evidence import AnalysisResultV2, Decision
@@ -57,8 +58,9 @@ from app.storage.db import DetectorRun
 
 # a22: preserve analysed PCM, source sample mapping and window-input hashes.
 # a31 records source-clock breaks in standalone audio evidence.
+# a34 records optional disjoint long speech-window evidence.
 # Split voice windows at material source-clock gaps and overlaps.
-PIPELINE_VERSION = "aud-2.0-a33"  # a21 (N-19q, finding 11; synthesis tpl-2.19): the heading of a check whose part in the estimate and stand-alone reading give two grades names its reading ("Weak support against AI generation in this estimate"); the finding of a check that entered the estimate stores its stand-alone words. a20 (N-19n, what the third part of N-19m left; supervisor check 29): under a configured prior the reason of a result that D-77 took names the other answer's part of the scale where its published estimate prints outside 35 to 64. a19: the v1 summary of an inconclusive result outside what was validated says so also where the cap changed no code (N-19n). a18: a decisive code needs the estimate as published in its answer’s part of the scale (D-77), which changes results under a configured prior (`VERITAS_PRIOR_AI`); the reason’s number is the printed whole points (N-19m, third part). a17: the checks that could not run on this server are one caveat with their names, in place of one caveat for each and of their ids in the caveat of a reduced profile; a caveat names a check as the page does, a step of the run and a provenance record in words, never a detector id, a stage name or the value of a kind (browser QA leads 3 and 4, design re-review D2-06); each check that scored and is not counted in the estimate carries the fusion's record of why (`outside_estimate`: not in the model, its gate closed, a weight of zero; browser QA Q2-12); a result of the fallback on an instance that holds a fusion model says that none was used for the analysis, not that none is loaded (N-19k; browser QA Q2-14); a16: the rule of D-76 (a decisive result needs a check whose published row is at least ln 2 toward its answer; it changes no recording of the packaged model, whose one row is beyond ln 2 in every decisive result) and each row of a check says whether the decision counts it (`counted`); a15: a check counts for a strong result, for "k of n detectors" and for "no check" when its published row is not zero; where every check ran or was not applicable and none that scored counts, the result is not assessable in words of its own, and a provenance record over such a result decides alone (N-19f, D-64 as clarified, code review R4-05, 2026-10-04); a14: a strong code needs two checks that scored, so the one-detector audio model never gives the strongest headline of either side, and a fallback result without a check of the sound is not assessable (N-18, D-64, 2026-10-03); a13: a not-assessable result has no caveat or reason that speaks of an estimate or a probability, and the voice lane series is a "window score" (N-17, D-68); a12: a recording that is not assessable under a loaded fusion model is that model's result, not the fallback's (N-17, QA P1-4, 2026-10-03); a11: with one voice detector the voice signal is that detector's, so its contribution, ledger row and finding agree (N-17, QA P1-4, 2026-10-03); a10: a finding that entered the estimate is worded by its contribution (N-17, D-63, 2026-10-03); a9: contributions are measured from each check's neutral point (N-17); a8: L-7: waveform envelope and spectrogram exhibits
+PIPELINE_VERSION = "aud-2.0-a34"  # a21 (N-19q, finding 11; synthesis tpl-2.19): the heading of a check whose part in the estimate and stand-alone reading give two grades names its reading ("Weak support against AI generation in this estimate"); the finding of a check that entered the estimate stores its stand-alone words. a20 (N-19n, what the third part of N-19m left; supervisor check 29): under a configured prior the reason of a result that D-77 took names the other answer's part of the scale where its published estimate prints outside 35 to 64. a19: the v1 summary of an inconclusive result outside what was validated says so also where the cap changed no code (N-19n). a18: a decisive code needs the estimate as published in its answer’s part of the scale (D-77), which changes results under a configured prior (`VERITAS_PRIOR_AI`); the reason’s number is the printed whole points (N-19m, third part). a17: the checks that could not run on this server are one caveat with their names, in place of one caveat for each and of their ids in the caveat of a reduced profile; a caveat names a check as the page does, a step of the run and a provenance record in words, never a detector id, a stage name or the value of a kind (browser QA leads 3 and 4, design re-review D2-06); each check that scored and is not counted in the estimate carries the fusion's record of why (`outside_estimate`: not in the model, its gate closed, a weight of zero; browser QA Q2-12); a result of the fallback on an instance that holds a fusion model says that none was used for the analysis, not that none is loaded (N-19k; browser QA Q2-14); a16: the rule of D-76 (a decisive result needs a check whose published row is at least ln 2 toward its answer; it changes no recording of the packaged model, whose one row is beyond ln 2 in every decisive result) and each row of a check says whether the decision counts it (`counted`); a15: a check counts for a strong result, for "k of n detectors" and for "no check" when its published row is not zero; where every check ran or was not applicable and none that scored counts, the result is not assessable in words of its own, and a provenance record over such a result decides alone (N-19f, D-64 as clarified, code review R4-05, 2026-10-04); a14: a strong code needs two checks that scored, so the one-detector audio model never gives the strongest headline of either side, and a fallback result without a check of the sound is not assessable (N-18, D-64, 2026-10-03); a13: a not-assessable result has no caveat or reason that speaks of an estimate or a probability, and the voice lane series is a "window score" (N-17, D-68); a12: a recording that is not assessable under a loaded fusion model is that model's result, not the fallback's (N-17, QA P1-4, 2026-10-03); a11: with one voice detector the voice signal is that detector's, so its contribution, ledger row and finding agree (N-17, QA P1-4, 2026-10-03); a10: a finding that entered the estimate is worded by its contribution (N-17, D-63, 2026-10-03); a9: contributions are measured from each check's neutral point (N-17); a8: L-7: waveform envelope and spectrogram exhibits
 FUSER_ID = "legacy.audio"
 H2 = "H2_localised_manipulation"
 ENTRY_STAGES = ("provenance", "detect")
@@ -154,6 +156,7 @@ def decode(ctx: StageContext) -> dict[str, Any]:
     return {"sample_rate": SR, "samples": int(len(pcm)), "seconds": round(len(pcm) / SR, 3),
             "short_voice_review_source_supported": supported_source(decoded.mapping),
             "short_voice_review_source_codec": decoded.mapping.get("source_codec"),
+            "long_voice_review_source_supported": audio_long_review_binding.supported_source(decoded.mapping),
             "sha256": hashlib.sha256(pcm.tobytes()).hexdigest(), "evidence_input": binding, "artefacts": objects,
             "source_clock_break_count": len(clock_breaks)}
 
@@ -170,8 +173,33 @@ def detect(ctx: StageContext) -> dict[str, Any]:
                                 outputs=StageOutputs(probe={**facts, "duration_s": facts.get("duration_s") or content["duration_s"]},
                                                      audio=gated),
                                 max_units=AUDIO_MAX_UNIT_SCORES)
-    return {**output, "voice_clock_policy": VOICE_CLOCK_POLICY,
-            "short_voice_review": _short_voice_review(ctx, gated, output["detectors"])}
+    short = _short_voice_review(ctx, gated, output["detectors"])
+    long = _long_voice_review(ctx, track)
+    return {**output, "voice_clock_policy": VOICE_CLOCK_POLICY, "short_voice_review": short,
+            **({"long_voice_review": long} if long is not None else {})}
+
+
+def _long_voice_review(ctx: StageContext, track) -> dict | None:
+    from app.core.config import settings
+
+    if (settings.audio_detector_mode != "candidate" or Profile(ctx.profile) is not Profile.FULL
+            or not ctx.outputs["decode"].get("long_voice_review_source_supported")):
+        return None
+    remaining = ctx.deadline.remaining()
+    if remaining is not None and remaining < long_voice_review.BUDGET_S + long_voice_review.PIPELINE_RESERVE_S:
+        return long_voice_review.skipped(audio_long_review_binding.SKIPPED_BUDGET)
+    detector = long_voice_review.LongVoiceReview()
+    run_ctx = RunContext(analysis_id=ctx.analysis_id, media=common.media(ctx), profile=ctx.profile, device="cpu",
+                         dtype=None, lease=None, outputs=StageOutputs(audio=track), deadline=ctx.deadline,
+                         exhibits=ctx.exhibits.bind(detector.spec.id), log=ctx.log.bind(detector_id=detector.spec.id))
+    store = ctx.state["run_store"]
+    review = run_detector(detector, run_ctx, store=store, models=ctx.state.get("models"), timeout_s=long_voice_review.BUDGET_S)
+    ctx.check("long voice review")
+    if review.status == "ok" and (run_id := store.run_id(ctx.analysis_id, detector.spec.id)):
+        return {"run_id": run_id}
+    reason = (audio_long_review_binding.SKIPPED_TIMEOUT if review.status == "timeout"
+              else audio_long_review_binding.SKIPPED_UNAVAILABLE)
+    return long_voice_review.skipped(reason)
 
 
 def _short_voice_review(ctx: StageContext, track, entries: list[dict]) -> dict:
@@ -406,13 +434,26 @@ def render(ctx: StageContext) -> dict[str, Any]:
     return common.index_artefacts(ctx, EXHIBIT_STAGES)
 
 
+def _published_review(db, ctx, review, fallback):
+    if review and (run_id := review.get("run_id")):
+        run = db.get(DetectorRun, run_id)
+        if run is not None and run.analysis_id == ctx.analysis_id and run.raw_output_artefact_id:
+            try:
+                raw = get_artefact(db, run.raw_output_artefact_id, analysis_id=ctx.analysis_id)
+                return {"raw_output_sha256": raw.sha256}
+            except ArtefactNotFound:
+                pass
+        return fallback
+    return review
+
+
 def publish(ctx: StageContext) -> dict[str, Any]:
     result: AnalysisResultV2 = common.build_result(ctx, kind="audio", pipeline_version=PIPELINE_VERSION, entry_stages=ENTRY_STAGES,
                                                    exhibit_stages=EXHIBIT_STAGES)
     binding = (ctx.outputs.get("decode") or {}).get("evidence_input")
     if binding is not None:
         records, sound_records = [], []
-        review = (ctx.outputs.get("detect") or {}).get("short_voice_review")
+        detect_output = ctx.outputs.get("detect") or {}
         with ctx.sessions() as db:
             for entry in common.entries(ctx, ("detect",)):
                 if entry.get("status") != "ok" or entry.get("family") not in {"voice", "acoustic-context"} or not entry.get("run_id"):
@@ -422,19 +463,16 @@ def publish(ctx: StageContext) -> dict[str, Any]:
                     raise ValueError("A scored audio check has no stored input record")
                 raw = get_artefact(db, run.raw_output_artefact_id, analysis_id=ctx.analysis_id)
                 (records if entry["family"] == "voice" else sound_records).append({"detector_id": entry["detector_id"], "raw_output_sha256": raw.sha256})
-            if review and (review_run_id := review.get("run_id")):
-                run = db.get(DetectorRun, review_run_id)
-                review = short_voice_review.skipped("The optional short-window response could not be saved.")
-                if run is not None and run.analysis_id == ctx.analysis_id and run.raw_output_artefact_id:
-                    try:
-                        raw = get_artefact(db, run.raw_output_artefact_id, analysis_id=ctx.analysis_id)
-                        review = {"raw_output_sha256": raw.sha256}
-                    except ArtefactNotFound:
-                        pass
+            short = _published_review(db, ctx, detect_output.get("short_voice_review"),
+                                      short_voice_review.skipped("The optional short-window response could not be saved."))
+            long = _published_review(db, ctx, detect_output.get("long_voice_review"),
+                                     long_voice_review.skipped(audio_long_review_binding.SKIPPED_RECEIPT))
         evidence = {"input": binding, "checks": records, "sound_checks": sound_records}
-        if review is not None:
-            evidence["short_voice_review"] = review
-        if (ctx.outputs.get("detect") or {}).get("voice_clock_policy") == VOICE_CLOCK_POLICY:
+        if short is not None:
+            evidence["short_voice_review"] = short
+        if long is not None:
+            evidence["long_voice_review"] = long
+        if detect_output.get("voice_clock_policy") == VOICE_CLOCK_POLICY:
             evidence["voice_clock_policy"] = VOICE_CLOCK_POLICY
         result.manifest.sampling["audio_evidence"] = evidence
     return common.publish(ctx, result, dict(ctx.outputs["fuse"]["v1"]), pipeline_version=PIPELINE_VERSION, run_stages=ENTRY_STAGES)

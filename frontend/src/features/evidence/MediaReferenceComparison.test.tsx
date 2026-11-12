@@ -116,7 +116,7 @@ it('accepts the scoped video comparison and shows native crops linked to the rev
   expect(screen.getByText('Ordinary edits may produce this evidence.')).toBeTruthy()
 })
 
-it('sends a user-marked closure only when entered and renders exact timing evidence for both clips', async () => {
+it.each([3, 4])('renders exact timing evidence from marked comparison format %i', async (version) => {
   const crop = { file: 'mouth.png', media_type: 'image/png', sha256: 'd'.repeat(64) }
   const speech = { file: 'speech.wav', media_type: 'audio/wav', sha256: 'e'.repeat(64) }
   const evidence = (frame_index: number, picture_time_s: number, pcm_start_s: number, pcm_end_s: number) => ({
@@ -126,10 +126,13 @@ it('sends a user-marked closure only when entered and renders exact timing evide
     schema: 'chipmunk.video-reference-comparison/1', status: 'measured', interpretation: 'Decoded source differences.',
     submitted: { width: 360, height: 288 }, picture: { matching_frames: 57, changed_frames: 18, ranges: [] },
   }
-  const marked = { ...comparison, schema: 'chipmunk.video-reference-comparison/3', timing: {
+  const speechStart = version === 4 ? .72 : .7600625
+  const speechEnd = version === 4 ? .78 : .9200625
+  const marked = { ...comparison, schema: `chipmunk.video-reference-comparison/${version}`, timing: {
     status: 'timing_difference', summary: 'The picture event moved 320 ms later relative to speech.',
-    scope: 'The measured timing difference can come from ordinary editing.', offset_ms: 320, event_range_s: [.72, 1.04],
-    earlier: evidence(18, .72, .7600625, .9200625), submitted: evidence(26, 1.04, .7600625, .9200625),
+    scope: version === 4 ? 'The timing check used a shorter speech excerpt beginning at the marked frame.'
+      : 'The measured timing difference can come from ordinary editing.', offset_ms: 320, event_range_s: [.72, 1.04],
+    earlier: evidence(18, .72, speechStart, speechEnd), submitted: evidence(26, 1.04, speechStart, speechEnd),
   } }
   const fetch = vi.fn().mockResolvedValueOnce(Response.json({ available: true, timing_available: true }))
     .mockResolvedValueOnce(Response.json({ comparison, assets: {} }))
@@ -155,7 +158,7 @@ it('sends a user-marked closure only when entered and renders exact timing evide
   expect(screen.getByAltText('Earlier clip mouth crop at 0.720 seconds').getAttribute('src')).toBe('data:image/png;base64,iVBORw0KGgo=')
   expect(screen.getByAltText('Analyzed clip mouth crop at 1.040 seconds')).toBeTruthy()
   expect(screen.getByText('Frame 26 at 1.040 s')).toBeTruthy()
-  expect(screen.getAllByText('Speech 0.7600625–0.9200625 s')).toHaveLength(2)
+  expect(screen.getAllByText(version === 4 ? 'Speech 0.720–0.780 s' : 'Speech 0.7600625–0.9200625 s')).toHaveLength(2)
   expect(screen.getByRole('img', { name: 'Earlier clip timing speech waveform' })).toBeTruthy()
   expect(screen.getByLabelText('Play analyzed clip timing speech').getAttribute('src')).toBe('blob:timing-speech')
   expect(screen.getByText(marked.timing.scope)).toBeTruthy()

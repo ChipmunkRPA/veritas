@@ -21,9 +21,15 @@ Every useful shift reproduced the exact signed offset. Independent readback re-d
 
 The result applies to matching native GRID clips with a marked visual event and exact copied audio. More general timing changes, re-encoded speech and unmarked single-upload analysis require separate evaluation. This comparison carries zero weight in authorship confidence.
 
+## Local app
+
+In the development app, choose **Compare with an earlier video** and mark the earlier mouth closure. The app keeps a supported result from the existing comparison. If the marked picture is supported and the regular waveform match is unavailable, it tries a 60 ms speech excerpt beginning at the mark. The same native crop, sample ranges and timing difference appear in the ordinary view, PDF and JSON. Exports that use the shorter excerpt carry their own version and replay against the two supplied originals. Previous marked exports still use their original comparison when replayed.
+
+The implementation reproduced all 24 held outcomes and all 92 assets from the selected comparisons. One isolated simulated checkout produced the expected **−240 ms** result. The comparison added no checkout or job. Chrome loaded both crops and both playable excerpts, then downloaded the matching JSON and PDF. The local verifier accepted the new and earlier exports and rejected a changed audio asset. [Local app verification](evaluation-panels/grid-marked-release-fallback-app-2026-11-12.json)
+
 ## Reproduce
 
-Use the previously verified release qualification as `panel` and a new local directory as `run`. Use the production comparator revision pinned by the held-study commit. Keep source clips, speaker metadata and per-clip evidence local.
+Use the previously verified release qualification as `panel` and a new local directory as `run`. Use the exact held-study revision before the serving change. Keep source clips, speaker metadata and per-clip evidence local. [Held-study revision](https://github.com/ChipmunkRPA/veritas/tree/a0983d76f49e19aa96d81be558e9070e4e92a6c4)
 
 ```sh
 export PYTHONPATH=backend PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1

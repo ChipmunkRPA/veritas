@@ -22,6 +22,7 @@ from app.storage.files import VIDEO_MIMES, sniff
 SCHEMA = "chipmunk.video-reference-comparison/1"
 SCHEMA_WITH_LOCAL = "chipmunk.video-reference-comparison/2"
 SCHEMA_WITH_TIMING = "chipmunk.video-reference-comparison/3"
+SCHEMA_WITH_SHORT_TIMING = "chipmunk.video-reference-comparison/4"
 MAX_BYTES = 48 * 1024 * 1024
 MAX_FRAMES = 360
 MAX_PIXELS = 1280 * 720
@@ -194,7 +195,8 @@ def _picture(paths, tables, assets, *, include_local):
 
 
 def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
-            timing_event_s: Fraction | None = None, timing_model: Path | None = None) -> tuple[dict, dict[str, bytes]]:
+            timing_event_s: Fraction | None = None, timing_model: Path | None = None,
+            timing_short_fallback: bool = False) -> tuple[dict, dict[str, bytes]]:
     """Report actual decoded differences at equal relative native picture timestamps."""
     paths = earlier, submitted
     sources = tuple(_identity(path) for path in paths)
@@ -219,7 +221,10 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
         record["timing"] = video_reference_timing.assess(
             paths, tables if status == "measured" else None, tracks,
             record.get("picture", {}).get("matching_frames", 0), timing_event_s, timing_model, assets, _image,
+            short_fallback=timing_short_fallback,
         )
+        if record["timing"].get("waveform_basis") == video_reference_timing.SHORT_WAVEFORM_BASIS:
+            record["schema"] = SCHEMA_WITH_SHORT_TIMING
     if sources != tuple(_identity(path) for path in paths):
         raise ValueError("One of the clips changed while the comparison was running.")
     return record, assets

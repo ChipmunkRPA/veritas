@@ -159,11 +159,13 @@ def _draw_waveform(page, wave, y, maximum, duration):
 def _timing_page(document, timing, assets):
     page = _page(document, "Marked mouth and speech timing")
     page.insert_textbox((MARGIN, 124, RIGHT, 167), timing["summary"], fontsize=12, fontname="hebo", color=INK)
-    page.insert_textbox((MARGIN, 176, RIGHT, 213), timing["scope"], fontsize=10, fontname="helv", color=MUTED)
+    short_excerpt = timing.get("waveform_basis") == "short_marked_excerpt"
+    scope_bottom, interval_y = (226, 236) if short_excerpt else (213, 221)
+    page.insert_textbox((MARGIN, 176, RIGHT, scope_bottom), timing["scope"], fontsize=10, fontname="helv", color=MUTED)
     if timing["status"] == "unassessed":
         return
     low, high = timing["event_range_s"]
-    _text(page, MARGIN, 221, f"Compared interval in analyzed clip  {low:.3f} to {high:.3f} s", color=MUTED)
+    _text(page, MARGIN, interval_y, f"Compared interval in analyzed clip  {low:.3f} to {high:.3f} s", color=MUTED)
     for x, (side, label) in zip((MARGIN, 316), LABELS.items(), strict=True):
         row = timing[side]
         _text(page, x, 253, label, font="hebo")

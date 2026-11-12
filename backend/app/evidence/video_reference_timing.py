@@ -30,6 +30,13 @@ SPEC = {
     "review_offset_minimum_seconds": "3/25",
     "signed_convention": "Positive when the picture event moved later than its matching speech.",
 }
+SHORT_AUDIO_SPEC = SPEC | {
+    "audio_offsets_samples": [0, 960],
+    "audio_search_samples": 6400,
+    "minimum_audio_correlation": 0.94,
+    "minimum_audio_margin": 0.08,
+}
+SHORT_WAVEFORM_BASIS = "short_marked_excerpt"
 
 
 def aperture(series):
@@ -87,15 +94,15 @@ def visual_shift(original, submitted, anchor):
     }
 
 
-def audio_shift(original, submitted, anchor):
-    rate = SPEC["sample_rate"]
-    anchor_pcm = anchor * (rate // SPEC["video_rate"])
-    start, stop = [anchor_pcm + offset for offset in SPEC["audio_offsets_samples"]]
+def audio_shift(original, submitted, anchor, *, spec=SPEC):
+    rate = spec["sample_rate"]
+    anchor_pcm = anchor * (rate // spec["video_rate"])
+    start, stop = [anchor_pcm + offset for offset in spec["audio_offsets_samples"]]
     if not 0 <= start < stop <= len(original):
         return None
     wanted = original[start:stop].astype(np.float64)
     wanted -= wanted.mean()
-    radius = SPEC["audio_search_samples"]
+    radius = spec["audio_search_samples"]
     low, high = max(0, start - radius), min(len(submitted) - len(wanted), start + radius)
     if low > high or np.linalg.norm(wanted) < 1:
         return None
@@ -111,9 +118,9 @@ def audio_shift(original, submitted, anchor):
     )
     selected = int(scores.argmax())
     best = float(scores[selected])
-    alternative = np.abs(np.arange(len(scores)) - selected) >= SPEC["audio_alternative_exclusion_samples"]
+    alternative = np.abs(np.arange(len(scores)) - selected) >= spec["audio_alternative_exclusion_samples"]
     next_best = float(scores[alternative].max()) if alternative.any() else 0.0
-    if best < SPEC["minimum_audio_correlation"] or best - next_best < SPEC["minimum_audio_margin"]:
+    if best < spec["minimum_audio_correlation"] or best - next_best < spec["minimum_audio_margin"]:
         return None
     target = selected + low
     return {
@@ -127,9 +134,14 @@ def audio_shift(original, submitted, anchor):
     }
 
 
-def compare(source_motion, submitted_motion, source_pcm, submitted_pcm, source_event):
+def compare(source_motion, submitted_motion, source_pcm, submitted_pcm, source_event, *, short_fallback=False):
     video = visual_shift(source_motion, submitted_motion, source_event)
     sound = audio_shift(source_pcm, submitted_pcm, source_event)
+    basis = {}
+    if video is not None and sound is None and short_fallback:
+        sound = audio_shift(source_pcm, submitted_pcm, source_event, spec=SHORT_AUDIO_SPEC)
+        if sound is not None:
+            basis["waveform_basis"] = SHORT_WAVEFORM_BASIS
     if video is None or sound is None:
         return {"status": "unassessed", "visual": video, "sound": sound}
     v_rate, a_rate = SPEC["video_rate"], SPEC["sample_rate"]
@@ -148,6 +160,7 @@ def compare(source_motion, submitted_motion, source_pcm, submitted_pcm, source_e
         "sound": sound,
         "picture_minus_audio_shift_s": str(difference),
         "event_time_range_s": [str(min(v, counterpart)), str(max(v, counterpart))],
+        **basis,
     }
 
 
@@ -262,7 +275,7 @@ def _assets(side, frame_index, table, pixels, sound, sample_range, assets, save_
     }
 
 
-def assess(paths, tables, tracks, matching_pictures, earlier_time, model, assets, save_image):
+def assess(paths, tables, tracks, matching_pictures, earlier_time, model, assets, save_image, *, short_fallback=False):
     def unavailable(reason):
         return {
             "status": "unassessed",
@@ -313,7 +326,7 @@ def assess(paths, tables, tracks, matching_pictures, earlier_time, model, assets
     except (AttributeError, OSError, ImportError, RuntimeError, ValueError):
         return unavailable("runtime")
     first, last = (np.rint(values * 32768).astype("<i2") for _, values, _ in tracks)
-    result = compare(original, submitted, first, last, anchor)
+    result = compare(original, submitted, first, last, anchor, short_fallback=short_fallback)
     if result["status"] == "unassessed":
         return unavailable("support")
     delta = Fraction(result["picture_minus_audio_shift_s"])
@@ -328,10 +341,16 @@ def assess(paths, tables, tracks, matching_pictures, earlier_time, model, assets
             "The marked mouth event and its matching speech stayed close to their earlier relative timing."
         )
     visual, sound = result["visual"], result["sound"]
+    basis = {}
+    scope = SCOPE
+    if result.get("waveform_basis") == SHORT_WAVEFORM_BASIS:
+        basis["waveform_basis"] = SHORT_WAVEFORM_BASIS
+        scope += " The timing check used a shorter speech excerpt beginning at the marked frame."
     return {
         "status": result["status"],
         "summary": summary,
-        "scope": SCOPE,
+        "scope": scope,
+        **basis,
         "requested_earlier_time_s": str(earlier_time),
         "affects_overall_confidence": False,
         "offset_ms": float(delta * 1000),

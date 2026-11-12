@@ -10,7 +10,7 @@ from functools import partial
 from pathlib import Path
 
 from app.core.canonical import canonical_json
-from app.evidence.video_reference import SCHEMA, SCHEMA_WITH_TIMING, compare
+from app.evidence.video_reference import SCHEMA, SCHEMA_WITH_SHORT_TIMING, SCHEMA_WITH_TIMING, compare
 
 
 def replay(compare, earlier: Path, submitted: Path, output: Path, *, verify: bool = False) -> dict:
@@ -38,19 +38,22 @@ def replay(compare, earlier: Path, submitted: Path, output: Path, *, verify: boo
 def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False,
         event_seconds: Fraction | None = None, timing_model: Path | None = None) -> dict:
     compare_source = compare
+    short_fallback = not verify
     if verify:
         exported = json.loads((output if output.is_file() else output / "comparison.json").read_bytes())
         record = exported.get("comparison", exported) if isinstance(exported, dict) else None
         event_seconds = None
         if isinstance(record, dict) and record.get("schema") == SCHEMA:
             compare_source = partial(compare, include_local=False)
-        elif isinstance(record, dict) and record.get("schema") == SCHEMA_WITH_TIMING:
+        elif isinstance(record, dict) and record.get("schema") in (SCHEMA_WITH_TIMING, SCHEMA_WITH_SHORT_TIMING):
             event_seconds = Fraction(record["timing"]["requested_earlier_time_s"])
+            short_fallback = record["schema"] == SCHEMA_WITH_SHORT_TIMING
     if event_seconds is not None:
         from app.core.config import settings
 
         compare_source = partial(compare, timing_event_s=event_seconds,
-                                 timing_model=timing_model or settings.video_reference_timing_model_path)
+                                 timing_model=timing_model or settings.video_reference_timing_model_path,
+                                 timing_short_fallback=short_fallback)
     return replay(compare_source, earlier, submitted, output, verify=verify)
 
 

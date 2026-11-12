@@ -49,6 +49,7 @@ type Comparison = {
   audio?: { status: string; changed_samples?: number; submitted?: { samples: number }; ranges?: AudioRange[] }
 } & ({
   schema: 'chipmunk.video-reference-comparison/1' | 'chipmunk.video-reference-comparison/2' | 'chipmunk.video-reference-comparison/3'
+    | 'chipmunk.video-reference-comparison/4'
   submitted: PictureDimensions
   picture?: { matching_frames: number; changed_frames: number; ranges: PictureRange[]; local_comparison?: LocalComparison }
   timing?: TimingComparison
@@ -290,8 +291,9 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable }: { analysisId:
     try {
       const response = await request<Result>(route(analysisId, kind), { method: 'POST', headers: authHeaders('POST'), body, signal: controller.signal })
       const schema = response?.comparison?.schema
+      const videoExtensions = ['chipmunk.video-reference-comparison/2', 'chipmunk.video-reference-comparison/3', 'chipmunk.video-reference-comparison/4']
       if (schema !== 'chipmunk.' + kind + '-reference-comparison/1' &&
-        !(kind === 'video' && (schema === 'chipmunk.video-reference-comparison/2' || schema === 'chipmunk.video-reference-comparison/3'))) {
+        !(kind === 'video' && videoExtensions.some(value => value === schema))) {
         throw new Error('The comparison response is incomplete.')
       }
       if (!controller.signal.aborted) setResult(response)

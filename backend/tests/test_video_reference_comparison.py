@@ -322,3 +322,28 @@ def test_marked_timing_capability_requires_exact_optional_task_bytes(monkeypatch
     assert not video_reference_timing.available(model)
     monkeypatch.setattr(video_reference_timing, "MODEL_SHA256", hashlib.sha256(model.read_bytes()).hexdigest())
     assert video_reference_timing.available(model)
+
+
+def test_short_marked_timing_recovers_a_shift_only_when_existing_match_lacks_support(monkeypatch):
+    anchor = 28
+    start = anchor * 640
+    moved = start + 3840
+    generator = np.random.default_rng(1356)
+    earlier = generator.integers(-2000, 2000, 47648, dtype=np.int16)
+    submitted = earlier.copy()
+    submitted[start:start + 7000] = generator.integers(-2000, 2000, 7000, dtype=np.int16)
+    submitted[moved:moved + 960] = earlier[start:start + 960]
+    visual = {"source_frame": anchor, "submitted_frame": anchor, "offset_pictures": 0}
+    monkeypatch.setattr(video_reference_timing, "visual_shift", lambda *_: visual)
+
+    assert video_reference_timing.compare(None, None, earlier, submitted, anchor)["status"] == "unassessed"
+    result = video_reference_timing.compare(None, None, earlier, submitted, anchor, short_fallback=True)
+    assert result["status"] == "timing_difference"
+    assert result["picture_minus_audio_shift_s"] == "-6/25"
+    assert result["waveform_basis"] == video_reference_timing.SHORT_WAVEFORM_BASIS
+    assert result["sound"]["source_samples"] == [start, start + 960]
+    assert result["sound"]["submitted_samples"] == [moved, moved + 960]
+
+    previous = video_reference_timing.compare(None, None, earlier, earlier, anchor)
+    assert previous["status"] == "no_large_timing_difference"
+    assert video_reference_timing.compare(None, None, earlier, earlier, anchor, short_fallback=True) == previous

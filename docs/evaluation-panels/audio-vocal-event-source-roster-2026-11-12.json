@@ -1,0 +1,386 @@
+{
+  "schema": "chipmunk.audio-vocal-event-sources/1",
+  "date": "2026-11-12",
+  "scope": "Metadata-qualified, decoder-verified source preparation for a future strong-background non-speech vocal-event probe. No detector scores or auditory adjudication.",
+  "dataset": {
+    "publisher": "LAION",
+    "id": "laion/more-synthetic-vocalbursts-raw",
+    "revision": "e2c0c2a7b322d8b89cd01c9982062f87eaa7d742",
+    "publisher_declared_dataset_license": "CC-BY-4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "generator": "OpenMOSS-Team/MOSS-SoundEffect-v2.0",
+    "generator_card_revision": "e35df4d82fbe87fcd5d14e5d100e349c0c3c076d",
+    "publisher_declared_generator_license": "Apache-2.0",
+    "shards": [
+      {
+        "path": "moss/shard-0000.tar",
+        "bytes": 721039360,
+        "lfs_sha256": "015980e1e2e05858aae4ac35640b30af7db37da5548a948726847db6156d5ec6"
+      },
+      {
+        "path": "moss/shard-0001.tar",
+        "bytes": 404377600,
+        "lfs_sha256": "61fc100b60c89458e5a6cae61c4f6d15f8f5d839bb26cc0a6af2dca4981c2557"
+      }
+    ],
+    "source_documents": {
+      "dataset_card": {
+        "url": "https://huggingface.co/datasets/laion/more-synthetic-vocalbursts-raw/blob/e2c0c2a7b322d8b89cd01c9982062f87eaa7d742/README.md",
+        "bytes": 5865,
+        "sha256": "ead16ee8e2c827158ef8a2f3431b6f23a32a7ef20535d5b0c10447332b22f570"
+      },
+      "shard_index": {
+        "url": "https://huggingface.co/api/datasets/laion/more-synthetic-vocalbursts-raw/tree/e2c0c2a7b322d8b89cd01c9982062f87eaa7d742/moss?expand=true",
+        "bytes": 1903,
+        "sha256": "b9a8ed75967f4ec2b893e589355a539d3e3f596e8c725e57670ac40010d06a1c"
+      },
+      "safety_taxonomy": {
+        "url": "https://github.com/LAION-AI/Voice-Acting-Pipeline/blob/9ed7cd95b3e48d09d53749f2ef9eb85229b138ca/data/vocal_bursts_taxonomy_sfw.json",
+        "bytes": 17492,
+        "sha256": "3eb4aae3014fb09743abaccc0b58c084219dfb43fe89fac665c91aabd7913808"
+      },
+      "generator_card": {
+        "url": "https://huggingface.co/OpenMOSS-Team/MOSS-SoundEffect-v2.0/blob/e35df4d82fbe87fcd5d14e5d100e349c0c3c076d/README.md",
+        "bytes": 3825,
+        "sha256": "eff33e61f5472a0ba33ca42241d546b00b66ec7f37e28b0e0d4ba64718866449"
+      }
+    }
+  },
+  "synthetic": [
+    {
+      "key": "0323",
+      "publisher_id": 421,
+      "shard": 0,
+      "family": "laughter",
+      "event": "Snort-Laugh",
+      "prompt_age_group": "young_woman",
+      "publisher_duration_s": 11.0,
+      "members": {
+        "json": {
+          "offset": 454969856,
+          "bytes": 350,
+          "sha256": "4c81d48c52bcf511570519897274df2e2fd5cf62ec3ac0080c7fb668adc54f77"
+        },
+        "wav": {
+          "offset": 454970880,
+          "bytes": 2112080,
+          "sha256": "84589ab99478451aaabb15a16e4c0d3d718254befee775e7e24b601a3c5b59fa"
+        }
+      },
+      "audio": {
+        "codec_name": "pcm_f32le",
+        "sample_rate": "48000",
+        "channels": 1,
+        "duration": "11.000000"
+      }
+    },
+    {
+      "key": "0376",
+      "publisher_id": 729,
+      "shard": 0,
+      "family": "breath",
+      "event": "Investigative Sniff",
+      "prompt_age_group": "mature_woman",
+      "publisher_duration_s": 9.5,
+      "members": {
+        "json": {
+          "offset": 534079488,
+          "bytes": 367,
+          "sha256": "c444b78827cdf4c65095b3e3f1546c15cc85c8fbe0504914835d2f7dcb497762"
+        },
+        "wav": {
+          "offset": 534080512,
+          "bytes": 1824080,
+          "sha256": "21e4c19efda4e8df7d7ff25e913d16a5ce56d47e5995c1d523d3885c03bbef2c"
+        }
+      },
+      "audio": {
+        "codec_name": "pcm_f32le",
+        "sample_rate": "48000",
+        "channels": 1,
+        "duration": "9.500000"
+      }
+    },
+    {
+      "key": "0715",
+      "publisher_id": 1441,
+      "shard": 1,
+      "family": "laughter",
+      "event": "Giggle",
+      "prompt_age_group": "young_man",
+      "publisher_duration_s": 8.1,
+      "members": {
+        "json": {
+          "offset": 301273600,
+          "bytes": 350,
+          "sha256": "fc553b1fcb76bcbcee752fe6ffd1075ec26ec37bc0d7742e9ea16e743ed02373"
+        },
+        "wav": {
+          "offset": 301274624,
+          "bytes": 1555280,
+          "sha256": "76a5819fd0f60eed17b759783e5725930b73b6117e4d33ebc12f68f8c1935b9c"
+        }
+      },
+      "audio": {
+        "codec_name": "pcm_f32le",
+        "sample_rate": "48000",
+        "channels": 1,
+        "duration": "8.100000"
+      }
+    }
+  ],
+  "ordinary": [
+    {
+      "item_id": "529818",
+      "contributor": "dastudiospr",
+      "title": "Laughing (male)",
+      "family": "laughter",
+      "item_rights": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "item_url": "https://freesound.org/people/dastudiospr/sounds/529818/",
+      "preview_url": "https://cdn.freesound.org/previews/529/529818_10761583-hq.mp3",
+      "publisher_recording_description": "documented human male laughter",
+      "preview": {
+        "bytes": 86727,
+        "sha256": "d29dbb5fc344c2f9a8741a02bc7e14088f4a964b90d4fb0b99005ed5073711a4"
+      },
+      "audio": {
+        "codec_name": "mp3",
+        "sample_rate": "44100",
+        "channels": 1,
+        "duration": "3.657143",
+        "side_data_list": [
+          {}
+        ]
+      }
+    },
+    {
+      "item_id": "823548",
+      "contributor": "beautifuldaymonster1968",
+      "title": "Man chuckling soft laughter",
+      "family": "laughter",
+      "item_rights": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "item_url": "https://freesound.org/people/beautifuldaymonster1968/sounds/823548/",
+      "preview_url": "https://cdn.freesound.org/previews/823/823548_340588-hq.mp3",
+      "publisher_recording_description": "self-performed chuckle with documented EQ",
+      "preview": {
+        "bytes": 165928,
+        "sha256": "5c2274331e59d04dae8b7ea1ca4d8249ddb2784aaa1dfaa245d5689e2404a018"
+      },
+      "audio": {
+        "codec_name": "mp3",
+        "sample_rate": "44100",
+        "channels": 2,
+        "duration": "6.974694",
+        "side_data_list": [
+          {}
+        ]
+      }
+    },
+    {
+      "item_id": "516473",
+      "contributor": "padpad",
+      "title": "Sniffing",
+      "family": "breath",
+      "item_rights": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "item_url": "https://freesound.org/people/padpad/sounds/516473/",
+      "preview_url": "https://cdn.freesound.org/previews/516/516473_7345129-hq.mp3",
+      "publisher_recording_description": "three recorded nasal sniff variants",
+      "preview": {
+        "bytes": 145673,
+        "sha256": "54a48b67ad6bbe6185d0d87e8a99a75c4aba62d06882157f15d414e48459fca2"
+      },
+      "audio": {
+        "codec_name": "mp3",
+        "sample_rate": "44100",
+        "channels": 2,
+        "duration": "6.217143",
+        "side_data_list": [
+          {}
+        ]
+      }
+    },
+    {
+      "item_id": "569568",
+      "contributor": "ValentinPetiteau",
+      "title": "Sigh - man - voice - breath in nose - breath out mouth.wav",
+      "family": "breath",
+      "item_rights": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "item_url": "https://freesound.org/people/ValentinPetiteau/sounds/569568/",
+      "preview_url": "https://cdn.freesound.org/previews/569/569568_10443988-hq.mp3",
+      "publisher_recording_description": "recorded nasal inhale and oral exhale",
+      "preview": {
+        "bytes": 175943,
+        "sha256": "f3cb4f4bb9cd2637abf42a78b3a0b1e66174f7738a893e609bf1a89a8985fa8d"
+      },
+      "audio": {
+        "codec_name": "mp3",
+        "sample_rate": "44100",
+        "channels": 1,
+        "duration": "7.732245",
+        "side_data_list": [
+          {}
+        ]
+      }
+    },
+    {
+      "item_id": "466874",
+      "contributor": "jmbland94",
+      "title": "Adult Male Coughing",
+      "family": "cough_sentinel",
+      "item_rights": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "item_url": "https://freesound.org/people/jmbland94/sounds/466874/",
+      "preview_url": "https://cdn.freesound.org/previews/466/466874_5088268-hq.mp3",
+      "publisher_recording_description": "documented adult self-recording",
+      "preview": {
+        "bytes": 79672,
+        "sha256": "b65f65485a006a47045f5fa48b1cf541b27decf924e18fc76bcff425255bede9"
+      },
+      "audio": {
+        "codec_name": "mp3",
+        "sample_rate": "44100",
+        "channels": 1,
+        "duration": "3.970612",
+        "side_data_list": [
+          {}
+        ]
+      }
+    },
+    {
+      "item_id": "393733",
+      "contributor": "jackthemurray",
+      "title": "Natural Male Cough",
+      "family": "cough_sentinel",
+      "item_rights": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "item_url": "https://freesound.org/people/jackthemurray/sounds/393733/",
+      "preview_url": "https://cdn.freesound.org/previews/393/393733_5618682-hq.mp3",
+      "publisher_recording_description": "documented incidental human cough during Foley",
+      "preview": {
+        "bytes": 82651,
+        "sha256": "7f1a0a0f5d320c0720ae11f0184ea791c7b2a9cc62aa0391d7dbfe97fff733ea"
+      },
+      "audio": {
+        "codec_name": "mp3",
+        "sample_rate": "44100",
+        "channels": 2,
+        "duration": "3.474286",
+        "side_data_list": [
+          {}
+        ]
+      }
+    }
+  ],
+  "scout": {
+    "method": "Read a bounded two-MiB anchor per interval, then walk checksum-valid tar JSON and WAV headers with small byte ranges. Exclude minors, older prompt categories outside the frozen adult labels, and events outside the benign laughter/breath allowlist.",
+    "header_walk_windows_in_decimal_mb": [
+      {
+        "shard": 0,
+        "start_mb": 435,
+        "end_mb": 460,
+        "key_span": [
+          "0308",
+          "0326"
+        ]
+      },
+      {
+        "shard": 0,
+        "start_mb": 460,
+        "end_mb": 485,
+        "key_span": [
+          "0327",
+          "0343"
+        ]
+      },
+      {
+        "shard": 0,
+        "start_mb": 485,
+        "end_mb": 510,
+        "key_span": [
+          "0344",
+          "0359"
+        ]
+      },
+      {
+        "shard": 0,
+        "start_mb": 510,
+        "end_mb": 532,
+        "key_span": [
+          "0360",
+          "0374"
+        ]
+      },
+      {
+        "shard": 0,
+        "start_mb": 532,
+        "end_mb": 547,
+        "key_span": [
+          "0375",
+          "0384"
+        ]
+      },
+      {
+        "shard": 1,
+        "start_mb": 275,
+        "end_mb": 300,
+        "key_span": [
+          "0697",
+          "0714"
+        ]
+      },
+      {
+        "shard": 1,
+        "start_mb": 300,
+        "end_mb": 325,
+        "key_span": [
+          "0715",
+          "0729"
+        ]
+      },
+      {
+        "shard": 1,
+        "start_mb": 325,
+        "end_mb": 350,
+        "key_span": [
+          "0730",
+          "0747"
+        ]
+      },
+      {
+        "shard": 1,
+        "start_mb": 350,
+        "end_mb": 375,
+        "key_span": [
+          "0748",
+          "0763"
+        ]
+      },
+      {
+        "shard": 1,
+        "start_mb": 375,
+        "end_mb": 393,
+        "key_span": [
+          "0764",
+          "0775"
+        ]
+      }
+    ],
+    "sidecars_walked": 156,
+    "sidecars_with_eligible_adult_prompt_age_labels": 139,
+    "limits": [
+      "Raw moss/ includes mixed prompts. Only selected synthetic member payloads are in the roster. No download from nsfw/, moss-reuse/, sa3/, or dramabox/.",
+      "The available cough taxonomy key describes respiratory illness. The roster contains no matched synthetic cough. Two ordinary cough controls are explicitly out-of-family sentinels.",
+      "Adult prompt labels describe generation requests. Listener adjudication of the actual outputs is pending."
+    ]
+  },
+  "limits": [
+    "Content qualification is limited to publisher metadata and full audio decoding. Verify the audible event, absence of speech, and absence of extraneous layers before using these donors.",
+    "All synthetic examples come from one generator family. The publisher card does not pin the exact generator checkpoint used for these bytes.",
+    "Freesound controls are high-quality official MP3 previews. A codec-matched experiment must process both classes symmetrically and account for previous source encoding.",
+    "These isolated recordings are foreground vocal-event donors. There is no ambient-environment, overlay, or strong-background performance result."
+  ]
+}

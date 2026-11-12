@@ -51,6 +51,29 @@ selection. It found four additional short edits but flagged 21 additional
 ordinary groups, including room-only audio. That response cannot distinguish
 synthetic speech from changes in the recording background.
 
+The revised [AT-ADD benchmark](https://arxiv.org/abs/2608.23437) evaluates
+speech robustness and separates speech, sound, singing, and music in its
+all-type results. Its [official baseline code](https://github.com/xieyuankun/AT-ADD-Baseline)
+is MIT-licensed. Its [Track 2 data agreement](https://huggingface.co/datasets/xieyuankun/AT-ADD-Track2/blob/main/LICENSE)
+limits use to noncommercial academic research and education. We excluded
+those recordings from commercial product evaluation. The publisher terms
+also exclude the [MMAudio checkpoints](https://huggingface.co/hkchengrex/MMAudio),
+[AudioX](https://github.com/ZeyueT/AudioX/blob/main/LICENSE), and
+[Omni2Sound](https://github.com/omni2sound/Omni2Sound/blob/main/LICENSE)
+from this work.
+
+The [MOSS SoundEffect v2 model card](https://huggingface.co/OpenMOSS-Team/MOSS-SoundEffect-v2.0)
+declares Apache 2.0 for the model. The [LAION release](https://huggingface.co/datasets/laion/more-synthetic-vocalbursts-raw/blob/e2c0c2a7b322d8b89cd01c9982062f87eaa7d742/README.md)
+declares CC BY 4.0 and identifies unenhanced outputs by generator. Its raw
+MOSS subset can support a first matched study of short non-speech vocal
+events such as laughter and sighs. The [first source roster](audio-vocal-event-sources-2026-11-12.md)
+binds three raw outputs and six individually licensed controls. To test a mixture, keep the speech
+recording fixed while changing the event source and level, then reverse
+the comparison with the event fixed. Include the isolated recordings
+and score speech and background separately. The source scope here covers
+vocal events, with environmental ambience and music requiring their own
+reference panels.
+
 ## Image: environment invariance needs interventions
 
 August's [EISL](https://arxiv.org/html/2608.17700v1) separates a low-rank feature

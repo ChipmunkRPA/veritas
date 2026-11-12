@@ -150,6 +150,9 @@ The [MP3 residual study](audio-mp3-residual-transfer-2026-11-12.md)
 checks whether a compact background-sensitive feature adds useful edit
 locations. Its standard-library reviewer verifies the group operating point,
 extra useful locations, and the ordinary flags that prevented release.
+The [vocal-event source roster](audio-vocal-event-sources-2026-11-12.md)
+reproduces a small set of publisher-labeled generated events and individually
+licensed recorded controls, with exact byte ranges, file hashes, and decoding.
 The [speech-context comparison](audio-remote-neighbor-transfer-2026-11-12.md)
 compares recurring acoustic contexts on the original mixtures and verifies
 fresh and previously tested source groups separately.

@@ -1,0 +1,72 @@
+{
+  "schema": "chipmunk.grid-marked-release-holdout/1",
+  "policy": {
+    "source": "Distinct pilot actor roles outside the prior marked timing panel. First two unused exact /p/ utterances in hash order. These speaker identities have project exposure.",
+    "mark": "First of the two selected originals with an eligible muted closure bracket and enough room for both authored shifts. No acoustic event supplied.",
+    "spans": "Even and odd actor groups alternate between 600 ms and 760 ms local edit ranges on the native clock.",
+    "fallback": "Keep every assessed production disposition. Invoke the fixed short template only after an unassessed support outcome.",
+    "useful": "Signed result within 80 ms and the entire displayed audio template within the exact shifted sample range.",
+    "advance": "Preserve all useful production results. Add at least two different actor groups with no new control alerts."
+  },
+  "source_actors": 6,
+  "marked_actors": 6,
+  "new_actor_groups_localized": 2,
+  "control_alerts_added": 0,
+  "by_role": {
+    "original": {
+      "views": 6,
+      "current_alerts": 0,
+      "current_useful": 0,
+      "current_exact": 0,
+      "short_alerts": 0,
+      "short_useful": 0,
+      "short_exact": 0,
+      "fallback_alerts": 0,
+      "fallback_useful": 0,
+      "fallback_exact": 0
+    },
+    "gain": {
+      "views": 6,
+      "current_alerts": 0,
+      "current_useful": 0,
+      "current_exact": 0,
+      "short_alerts": 0,
+      "short_useful": 0,
+      "short_exact": 0,
+      "fallback_alerts": 0,
+      "fallback_useful": 0,
+      "fallback_exact": 0
+    },
+    "audio_early": {
+      "views": 6,
+      "current_alerts": 6,
+      "current_useful": 6,
+      "current_exact": 6,
+      "short_alerts": 5,
+      "short_useful": 5,
+      "short_exact": 5,
+      "fallback_alerts": 6,
+      "fallback_useful": 6,
+      "fallback_exact": 6
+    },
+    "audio_late": {
+      "views": 6,
+      "current_alerts": 3,
+      "current_useful": 3,
+      "current_exact": 3,
+      "short_alerts": 5,
+      "short_useful": 5,
+      "short_exact": 5,
+      "fallback_alerts": 5,
+      "fallback_useful": 5,
+      "fallback_exact": 5
+    }
+  },
+  "audit": {
+    "native_readback_pairs": 24,
+    "replayed_dispositions": 72,
+    "image_crop_and_pcm_records": 82
+  },
+  "freeze_sha256": "518a2f15404ad839685e927d71c8e1804824c5d7333ee5a09d7be5d9e8c1137d",
+  "readout_sha256": "a541a5b5d6bdf6dd958692a09e3e0c99717c8c449700911ca4059ae784a4032f"
+}

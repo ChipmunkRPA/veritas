@@ -74,6 +74,9 @@ and compares both blind checks with a supplied-reference waveform.
 The [marked earlier-copy transfer](grid-marked-release-transfer-2026-11-12.md)
 compares two waveform templates selected using just a marked source frame
 and verifies the reported native assets against both copies.
+The [independent marked timing holdout](grid-marked-release-holdout-2026-11-12.md)
+tests the shorter excerpt as a fallback on six separate speaker groups and
+replays every picture, crop, and sound excerpt used to measure the offset.
 
 The [earlier-audio comparison](audio-reference-comparison-2026-11-11.md#replay-without-the-app)
 replays changed sample ranges, difference waveforms, and playable excerpts

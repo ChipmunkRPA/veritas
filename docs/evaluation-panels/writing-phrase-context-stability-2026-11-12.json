@@ -1,0 +1,2763 @@
+{
+  "schema": "chipmunk.writing-phrase-context-stability/1-audit",
+  "method": {
+    "sources": "Eleven earlier bylined works set review points on untouched and ordinary same-work phrase substitutions. A fresh dated archive, author exclusion, historical text inventories, and exact 12-token exclusion fix held works.",
+    "fixture": "Change exactly one internal eight-word phrase in the central sentence of five source sentences. Match each untouched excerpt with a same-work phrase substitution and two attempts from pinned Apache-2.0 generators. Keep all other source characters exact. Accept one response per generator only with original sentence boundaries.",
+    "current": "First six complete native three-sentence context windows at raw response at least 0.50.",
+    "one_context": "Use the smaller of the mean token margins over the central four words and all eight in the native context.",
+    "stable": "Use the smaller of that persistence value in two contexts: previous+focus and focus+next.",
+    "local_contrast": "Subtract the larger mean of the four preceding or following words from each paired-context persistence value. Keep the smaller contrast.",
+    "selection": "One uniquely strongest eligible candidate per experimental arm. Points equal the second-largest earlier human source group maximum and must be strictly exceeded.",
+    "qualification": "Useful means at least 0.30 nonwhitespace character IoU and 0.50 recall. Report best possible overlap for every arm independently of scores, and false source groups including same-work substitutions.",
+    "advance": "At least two additional held work groups across both generators with at most one extra human group when combined with the current arm. At least six admitted edits per generator."
+  },
+  "archive_commit": "e20b8746f2444ae9fe58f49fd0f0acbfbabbb938",
+  "archive_license_sha256": "617cdaceecf894d9ace4481855d3a7326ba11c32e2a4b254811c69c70650a526",
+  "intake_paths": 36,
+  "source_qualification": {
+    "previous_work_or_no_fresh_byline": 15,
+    "no_matching_phrase_pair": 9
+  },
+  "prior_corpus": [
+    {
+      "packet": "previous-agreement",
+      "source_sha256": "8db9676dfde8ed023cbe79d92f82d2bea2544b18537c56baed1dbd6e29b0234b",
+      "text_entries": 100,
+      "matched_sources": 0
+    },
+    {
+      "packet": "llmtrace",
+      "source_sha256": "6d4431a85a70916ba7af5c19f062eed6c277183d7b4bb5c6cea42f520e717f48",
+      "text_entries": 38429,
+      "matched_sources": 0
+    },
+    {
+      "packet": "elife-v301",
+      "source_sha256": "46f681020eb07a197875d64bf4ece4efec619b7d1de4c81825d470d9add04f8a",
+      "text_entries": 25,
+      "matched_sources": 0
+    },
+    {
+      "packet": "elife-v286",
+      "source_sha256": "a8676385711bf3d66165a6c3a8add0d8aee7881288302388ca88739e8e30389b",
+      "text_entries": 26,
+      "matched_sources": 0
+    },
+    {
+      "packet": "elife-v272",
+      "source_sha256": "063c960dafe75757b3b6483ab88802c9c6cd78fa6e0a347014ac148c283d758f",
+      "text_entries": 5,
+      "matched_sources": 0
+    },
+    {
+      "packet": "opai-v257",
+      "source_sha256": "4e43edf33c695a8a4f757d079089dab85a632c648762554bac9f5cc573bb923b",
+      "text_entries": 60,
+      "matched_sources": 0
+    },
+    {
+      "packet": "f1000-previous",
+      "source_sha256": "f8e0f135cd4aef110b78523dd104f47f44fe24aa4a2cb316c78f5e1a99d4deb5",
+      "text_entries": 18,
+      "matched_sources": 0
+    },
+    {
+      "packet": "publisher-abstract-pilot",
+      "source_sha256": "da3edb1f530f62dae1d0911282dca11419153e1126a3a1a2aa84d9d0a31b6c9a",
+      "text_entries": 4,
+      "matched_sources": 0
+    },
+    {
+      "packet": "wellcome-gates",
+      "source_sha256": "e8633d587e1943f1f9dd7c7dc1d93f7809590fcb82a7956ddaa6621e2499ea69",
+      "text_entries": 42,
+      "matched_sources": 0
+    },
+    {
+      "packet": "pep",
+      "source_sha256": "e1c793216ed6ec9b83279646a09a54e063abf093db478d4a7f58590b45875506",
+      "text_entries": 10,
+      "matched_sources": 0
+    },
+    {
+      "packet": "used_archive",
+      "source_sha256": "cad88dc7f901078c2ac494b0af8a852bff56e9842f0e744c9c97e829e7b16650",
+      "text_entries": 72,
+      "matched_sources": 0
+    },
+    {
+      "packet": "used_archive_bodies",
+      "source_sha256": "cae88ab63302e43def54f65f5d84cbf204e5d9e9f9a0013c7d63316034099a4f",
+      "text_entries": 60,
+      "matched_sources": 0
+    }
+  ],
+  "source_witnesses": [
+    {
+      "group": "kubernetes-e1a8fe859faf9700",
+      "phase": "calibration",
+      "side": "before",
+      "commit": "422a2b0aea8604b4a007d013bf018ed38a9ba99f",
+      "path": "content/en/blog/_posts/2019-12-09-csi-volume-migration-beta.md",
+      "raw_span": [
+        3539,
+        3785
+      ],
+      "raw_sha256": "f45159293d175a6e30bd936060ced749312e8ec86266905c9f401308b68e1db7"
+    },
+    {
+      "group": "kubernetes-e1a8fe859faf9700",
+      "phase": "calibration",
+      "side": "after",
+      "commit": "f61ffe8a447108c91d8e8eebbe5a7148f35ec1d7",
+      "path": "content/en/blog/_posts/2019-12-09-csi-volume-migration-beta.md",
+      "raw_span": [
+        3539,
+        3753
+      ],
+      "raw_sha256": "2f6dd6902fbbafa0a07dcae129c91edbfe5dceb489589074b0fff4eef6983740"
+    },
+    {
+      "group": "blog-062b86202af2a108",
+      "phase": "calibration",
+      "side": "before",
+      "commit": "0ef096e4cb577c30739f19e19a017217e5ca4807",
+      "path": "content/en/blog/_posts/2019-12-09-volume-snapshot-beta.md",
+      "raw_span": [
+        8592,
+        8789
+      ],
+      "raw_sha256": "6e2f208e4eb3b6990b6eeeb08a46d2a424ecdbea22304038f01b6785d2f409fd"
+    },
+    {
+      "group": "blog-062b86202af2a108",
+      "phase": "calibration",
+      "side": "after",
+      "commit": "0ef096e4cb577c30739f19e19a017217e5ca4807",
+      "path": "content/en/blog/_posts/2019-12-09-volume-snapshot-beta.md",
+      "raw_span": [
+        21830,
+        22079
+      ],
+      "raw_sha256": "f829998a0452c802fb6e0798787effe12f630a6cf6c7405a1a8a73cc109fb710"
+    },
+    {
+      "group": "blog-07f64291ad7bacbf",
+      "phase": "calibration",
+      "side": "before",
+      "commit": "0ef096e4cb577c30739f19e19a017217e5ca4807",
+      "path": "content/en/blog/_posts/2019-04-26-latest-on-localization.md",
+      "raw_span": [
+        463,
+        554
+      ],
+      "raw_sha256": "fca6f53bf7caa6725f717c713de0293fb9f4232109a495a724bd69bed5c393c6"
+    },
+    {
+      "group": "blog-07f64291ad7bacbf",
+      "phase": "calibration",
+      "side": "after",
+      "commit": "0ef096e4cb577c30739f19e19a017217e5ca4807",
+      "path": "content/en/blog/_posts/2019-04-26-latest-on-localization.md",
+      "raw_span": [
+        2224,
+        2349
+      ],
+      "raw_sha256": "864433185bd7a658b9614635bf3410e3e253bc03eb9abace9d6d7b16b5f0bb68"
+    },
+    {
+      "group": "blog-4e84fe6264df3f07",
+      "phase": "calibration",
+      "side": "before",
+      "commit": "0ef096e4cb577c30739f19e19a017217e5ca4807",
+      "path": "content/en/blog/_posts/2018-05-30-say-hello-to-discuss-kubernetes.md",
+      "raw_span": [
+        547,
+        702
+      ],
+      "raw_sha256": "a2fc3c345ac3837ef809be45dc767ec26c0e66fc3ffac2bfc00096988ace5a74"
+    },
+    {
+      "group": "blog-4e84fe6264df3f07",
+      "phase": "calibration",
+      "side": "after",
+      "commit": "0ef096e4cb577c30739f19e19a017217e5ca4807",
+      "path": "content/en/blog/_posts/2018-05-30-say-hello-to-discuss-kubernetes.md",
+      "raw_span": [
+        2430,
+        2658
+      ],
+      "raw_sha256": "c36d2a66f22ebc5a7369131c059d2ff3fcaa6464b46e5fdc62cd944367183a76"
+    },
+    {
+      "group": "blog-501302cbc3905297",
+      "phase": "calibration",
+      "side": "before",
+      "commit": "0ef096e4cb577c30739f19e19a017217e5ca4807",
+      "path": "content/en/blog/_posts/2019-04-24-Hardware-Accelerated-SSLTLS-Termination-in-Ingress-Controllers-using-Kubernetes-Device-Plugins-and-RuntimeClass.md",
+      "raw_span": [
+        403,
+        534
+      ],
+      "raw_sha256": "322a3c28322af584369e9d2f9e3a01e0598e6377e83a4b81d024af2fe4ea4711"
+    },
+    {
+      "group": "blog-501302cbc3905297",
+      "phase": "calibration",
+      "side": "after",
+      "commit": "0ef096e4cb577c30739f19e19a017217e5ca4807",
+      "path": "content/en/blog/_posts/2019-04-24-Hardware-Accelerated-SSLTLS-Termination-in-Ingress-Controllers-using-Kubernetes-Device-Plugins-and-RuntimeClass.md",
+      "raw_span": [
+        3641,
+        3754
+      ],
+      "raw_sha256": "8d446d9f8d559367edeb7bd95b11109637e215c307f7774fbecbbd22791d6ae7"
+    },
+    {
+      "group": "blog-511f685ac6c46668",
+      "phase": "calibration",
+      "side": "before",
+      "commit": "0ef096e4cb577c30739f19e19a017217e5ca4807",
+      "path": "content/en/blog/_posts/2019-12-02-gardener-project-update.md",
+      "raw_span": [
+        13227,
+        13397
+      ],
+      "raw_sha256": "9034a35c0d2ba1257ec37fee60b6ea7ddef7bc65f6a4815e1f0d241e5fa0fd74"
+    },
+    {
+      "group": "blog-511f685ac6c46668",
+      "phase": "calibration",
+      "side": "after",
+      "commit": "0ef096e4cb577c30739f19e19a017217e5ca4807",
+      "path": "content/en/blog/_posts/2019-12-02-gardener-project-update.md",
+      "raw_span": [
+        20771,
+        20918
+      ],
+      "raw_sha256": "5081878874a4fd6527d5e20c7b9bf7bfcfdbd9a1a928ab91a78b94c33562a999"
+    },
+    {
+      "group": "blog-6b65b01af7536341",
+      "phase": "calibration",
+      "side": "before",
+      "commit": "0ef096e4cb577c30739f19e19a017217e5ca4807",
+      "path": "content/en/blog/_posts/2018-12-05-new-contributor-shanghai.md",
+      "raw_span": [
+        784,
+        924
+      ],
+      "raw_sha256": "4ef4351750c88e910ccf1d8cbea884ba976e7853bdc1730564e89a452f1430fd"
+    },
+    {
+      "group": "blog-6b65b01af7536341",
+      "phase": "calibration",
+      "side": "after",
+      "commit": "0ef096e4cb577c30739f19e19a017217e5ca4807",
+      "path": "content/en/blog/_posts/2018-12-05-new-contributor-shanghai.md",
+      "raw_span": [
+        2916,
+        3077
+      ],
+      "raw_sha256": "f192fbed5b56bb644be95b99e7c344adce83afe775a2fdaeb1babefd27cd562a"
+    },
+    {
+      "group": "blog-90be1152316ad39b",
+      "phase": "calibration",
+      "side": "before",
+      "commit": "0ef096e4cb577c30739f19e19a017217e5ca4807",
+      "path": "content/en/blog/_posts/2018-07-12-resizing-persistent-volumes-using-kubernetes.md",
+      "raw_span": [
+        514,
+        656
+      ],
+      "raw_sha256": "d258724ab09eecf19230b55bd77eb04e724f523e72afe3acbff3810970b62241"
+    },
+    {
+      "group": "blog-90be1152316ad39b",
+      "phase": "calibration",
+      "side": "after",
+      "commit": "0ef096e4cb577c30739f19e19a017217e5ca4807",
+      "path": "content/en/blog/_posts/2018-07-12-resizing-persistent-volumes-using-kubernetes.md",
+      "raw_span": [
+        1226,
+        1404
+      ],
+      "raw_sha256": "f93c3e2951278db4e958bb625563421ec9b729f293f176c9d7c72de8a7aabc2a"
+    },
+    {
+      "group": "blog-ae7dd71913d8e49e",
+      "phase": "calibration",
+      "side": "before",
+      "commit": "0ef096e4cb577c30739f19e19a017217e5ca4807",
+      "path": "content/en/blog/_posts/2018-07-18-11-ways-not-to-get-hacked.md",
+      "raw_span": [
+        19997,
+        20266
+      ],
+      "raw_sha256": "fb6c27eec438a7acf06a0409d477269facccd7a29d2949d295d4bc9d8794992f"
+    },
+    {
+      "group": "blog-ae7dd71913d8e49e",
+      "phase": "calibration",
+      "side": "after",
+      "commit": "0ef096e4cb577c30739f19e19a017217e5ca4807",
+      "path": "content/en/blog/_posts/2018-07-18-11-ways-not-to-get-hacked.md",
+      "raw_span": [
+        23969,
+        24175
+      ],
+      "raw_sha256": "b65356e8ef62c0e57f6b6e703498e64bf8012d69cb5cbcc9e0e5d8662b8caf37"
+    },
+    {
+      "group": "blog-bd5ae606c3843072",
+      "phase": "calibration",
+      "side": "before",
+      "commit": "0ef096e4cb577c30739f19e19a017217e5ca4807",
+      "path": "content/en/blog/_posts/2019-03-28-PID-Limiting.md",
+      "raw_span": [
+        1220,
+        1435
+      ],
+      "raw_sha256": "6866e06d4abb7c12a0aafe722c9006e374e388f13de9d26c7d8f687475ad17c5"
+    },
+    {
+      "group": "blog-bd5ae606c3843072",
+      "phase": "calibration",
+      "side": "after",
+      "commit": "0ef096e4cb577c30739f19e19a017217e5ca4807",
+      "path": "content/en/blog/_posts/2019-03-28-PID-Limiting.md",
+      "raw_span": [
+        2266,
+        2451
+      ],
+      "raw_sha256": "48c8c61a017bfea0c67beb033960b432e3004941544f51f6b66a8ced9b6ca4f4"
+    },
+    {
+      "group": "blog-c3aef5e6490ff545",
+      "phase": "calibration",
+      "side": "before",
+      "commit": "0ef096e4cb577c30739f19e19a017217e5ca4807",
+      "path": "content/en/blog/_posts/2018-10-26-tips-for-first-kubecon-presentation-part-2.md",
+      "raw_span": [
+        1377,
+        1556
+      ],
+      "raw_sha256": "275886a82641c59ffe9c228ac88b37779d9b9bcdd0d57d4dc6b6e9dab1d634f5"
+    },
+    {
+      "group": "blog-c3aef5e6490ff545",
+      "phase": "calibration",
+      "side": "after",
+      "commit": "0ef096e4cb577c30739f19e19a017217e5ca4807",
+      "path": "content/en/blog/_posts/2018-10-26-tips-for-first-kubecon-presentation-part-2.md",
+      "raw_span": [
+        3607,
+        3756
+      ],
+      "raw_sha256": "20fff743c8b61bdad57ede32cb159479b5fb2d2ee34f0798b0867f50a8c906cb"
+    },
+    {
+      "group": "blog-082de0351d7dd37e",
+      "phase": "holdout",
+      "side": "before",
+      "commit": "e20b8746f2444ae9fe58f49fd0f0acbfbabbb938",
+      "path": "content/en/blog/_posts/2020-08-21-Moving-Forward-From-Beta/index.md",
+      "raw_span": [
+        1516,
+        1646
+      ],
+      "raw_sha256": "5ecbb46141ba4322b6174acd5cc70c9313e17c43a6d50f69d9115e1a79681707"
+    },
+    {
+      "group": "blog-082de0351d7dd37e",
+      "phase": "holdout",
+      "side": "after",
+      "commit": "e20b8746f2444ae9fe58f49fd0f0acbfbabbb938",
+      "path": "content/en/blog/_posts/2020-08-21-Moving-Forward-From-Beta/index.md",
+      "raw_span": [
+        4308,
+        4428
+      ],
+      "raw_sha256": "fc7d4214d9abc0232522b00aca8a813965025b347d279b7ffe90c42b64a74b3a"
+    },
+    {
+      "group": "blog-0bc6b3011c6d197b",
+      "phase": "holdout",
+      "side": "before",
+      "commit": "e20b8746f2444ae9fe58f49fd0f0acbfbabbb938",
+      "path": "content/en/blog/_posts/2020-06-29-working-with-terraform-and-kubernetes.md",
+      "raw_span": [
+        643,
+        771
+      ],
+      "raw_sha256": "0db8ecb11a719f51b49c4f08079dad1926038cc4490947f43c99576770dc539c"
+    },
+    {
+      "group": "blog-0bc6b3011c6d197b",
+      "phase": "holdout",
+      "side": "after",
+      "commit": "e20b8746f2444ae9fe58f49fd0f0acbfbabbb938",
+      "path": "content/en/blog/_posts/2020-06-29-working-with-terraform-and-kubernetes.md",
+      "raw_span": [
+        2895,
+        3019
+      ],
+      "raw_sha256": "70e1744c48145446e98d19ffaf3ee47438e63d3a8ed79ffeb95d152c6bf179ba"
+    },
+    {
+      "group": "blog-172926f25c81a42a",
+      "phase": "holdout",
+      "side": "before",
+      "commit": "e20b8746f2444ae9fe58f49fd0f0acbfbabbb938",
+      "path": "content/en/blog/_posts/2020-03-30-topology-manager-beta.md",
+      "raw_span": [
+        1821,
+        1954
+      ],
+      "raw_sha256": "b466e0c74679bb5d3333aa1caed69a716a0eeac1d4828fb2cdfa9b5a02f79b35"
+    },
+    {
+      "group": "blog-172926f25c81a42a",
+      "phase": "holdout",
+      "side": "after",
+      "commit": "e20b8746f2444ae9fe58f49fd0f0acbfbabbb938",
+      "path": "content/en/blog/_posts/2020-03-30-topology-manager-beta.md",
+      "raw_span": [
+        2487,
+        2599
+      ],
+      "raw_sha256": "a026107e8b394d871270b82faf7d2e0e42b68d4657acc99bc0de6efe986192f0"
+    },
+    {
+      "group": "blog-46ea06ecb65d5b84",
+      "phase": "holdout",
+      "side": "before",
+      "commit": "e20b8746f2444ae9fe58f49fd0f0acbfbabbb938",
+      "path": "content/en/blog/_posts/2020-02-28-bring-your-ideas-to-world-with-kubectl-plugins.md",
+      "raw_span": [
+        1501,
+        1618
+      ],
+      "raw_sha256": "7d5a5da73e4c7a226b13205eeb5e073665779901b2a97a8287d1483f5b60044b"
+    },
+    {
+      "group": "blog-46ea06ecb65d5b84",
+      "phase": "holdout",
+      "side": "after",
+      "commit": "e20b8746f2444ae9fe58f49fd0f0acbfbabbb938",
+      "path": "content/en/blog/_posts/2020-02-28-bring-your-ideas-to-world-with-kubectl-plugins.md",
+      "raw_span": [
+        3842,
+        4024
+      ],
+      "raw_sha256": "dd68b51ff89d12923730d3c78c240b3b41d50ecc4d02486d5c953f7b486b9b50"
+    },
+    {
+      "group": "blog-4ee4960a3be44dc6",
+      "phase": "holdout",
+      "side": "before",
+      "commit": "e20b8746f2444ae9fe58f49fd0f0acbfbabbb938",
+      "path": "content/en/blog/_posts/2020-05-28-my-exciting-journey-into-kubernetes-history.md",
+      "raw_span": [
+        2188,
+        2288
+      ],
+      "raw_sha256": "6101eadbe892411fb39746f428e7c2d91ad372a1cdc0e223ce5721590befbbcf"
+    },
+    {
+      "group": "blog-4ee4960a3be44dc6",
+      "phase": "holdout",
+      "side": "after",
+      "commit": "e20b8746f2444ae9fe58f49fd0f0acbfbabbb938",
+      "path": "content/en/blog/_posts/2020-05-28-my-exciting-journey-into-kubernetes-history.md",
+      "raw_span": [
+        17757,
+        17877
+      ],
+      "raw_sha256": "f50f71e19cb5836c5b5e35f08f7cc9c5e0a149f612ea30b0088d38cfbb2b5ba6"
+    },
+    {
+      "group": "blog-89cda19780f56037",
+      "phase": "holdout",
+      "side": "before",
+      "commit": "e20b8746f2444ae9fe58f49fd0f0acbfbabbb938",
+      "path": "content/en/blog/_posts/2020-06-05-Supporting-the-Evolving-Ingress-Specification-in-Kubernetes-1.18.md",
+      "raw_span": [
+        3085,
+        3270
+      ],
+      "raw_sha256": "29d0005253cf9f01ec5b3e81ec8b8a43a78dd1804a84ddad0794152035be5a85"
+    },
+    {
+      "group": "blog-89cda19780f56037",
+      "phase": "holdout",
+      "side": "after",
+      "commit": "e20b8746f2444ae9fe58f49fd0f0acbfbabbb938",
+      "path": "content/en/blog/_posts/2020-06-05-Supporting-the-Evolving-Ingress-Specification-in-Kubernetes-1.18.md",
+      "raw_span": [
+        4970,
+        5071
+      ],
+      "raw_sha256": "e7547a83d6e753459dcc4f5e40bb8c6dbd7a4b91e37446047c4e0bcc5f478a2b"
+    },
+    {
+      "group": "blog-9eef898e1cf4aa12",
+      "phase": "holdout",
+      "side": "before",
+      "commit": "e20b8746f2444ae9fe58f49fd0f0acbfbabbb938",
+      "path": "content/en/blog/_posts/2020-03-19-kubernetes-the-hard-way.md",
+      "raw_span": [
+        1363,
+        1481
+      ],
+      "raw_sha256": "cdde4cc90f1b4d3cd793535c807b2df3b687b25f9a0190bd796e311670abed79"
+    },
+    {
+      "group": "blog-9eef898e1cf4aa12",
+      "phase": "holdout",
+      "side": "after",
+      "commit": "e20b8746f2444ae9fe58f49fd0f0acbfbabbb938",
+      "path": "content/en/blog/_posts/2020-03-19-kubernetes-the-hard-way.md",
+      "raw_span": [
+        2090,
+        2252
+      ],
+      "raw_sha256": "768aa0854b74d60e487681216d54ad1c2569f6e1c833d2a45c8d18a6b7893fca"
+    },
+    {
+      "group": "blog-a16ea9ac4971e003",
+      "phase": "holdout",
+      "side": "before",
+      "commit": "e20b8746f2444ae9fe58f49fd0f0acbfbabbb938",
+      "path": "content/en/blog/_posts/2020-01-15-Kubernetes-on-MIPS.md",
+      "raw_span": [
+        2508,
+        2691
+      ],
+      "raw_sha256": "b7ced139a586066e51816aea2999853c805e9bd86af2608d2673ea722a12ffe7"
+    },
+    {
+      "group": "blog-a16ea9ac4971e003",
+      "phase": "holdout",
+      "side": "after",
+      "commit": "e20b8746f2444ae9fe58f49fd0f0acbfbabbb938",
+      "path": "content/en/blog/_posts/2020-01-15-Kubernetes-on-MIPS.md",
+      "raw_span": [
+        8237,
+        8361
+      ],
+      "raw_sha256": "2df121c9069ee1e3852bd37061da95982ad8b69770f11a8dcd7a1300d8e91e2b"
+    },
+    {
+      "group": "blog-ad3edd045924e961",
+      "phase": "holdout",
+      "side": "before",
+      "commit": "e20b8746f2444ae9fe58f49fd0f0acbfbabbb938",
+      "path": "content/en/blog/_posts/2020-05-05-introducing-podtopologyspread.md",
+      "raw_span": [
+        392,
+        571
+      ],
+      "raw_sha256": "913628e961919d3fe08dc517a1a31e4a6a2788b059c5a6eb4c9712e6f0740a30"
+    },
+    {
+      "group": "blog-ad3edd045924e961",
+      "phase": "holdout",
+      "side": "after",
+      "commit": "e20b8746f2444ae9fe58f49fd0f0acbfbabbb938",
+      "path": "content/en/blog/_posts/2020-05-05-introducing-podtopologyspread.md",
+      "raw_span": [
+        8046,
+        8177
+      ],
+      "raw_sha256": "fb0d15eae6c30953fe769b35c265737fe4a091a6cd37301fbad4fbae7cc323b2"
+    },
+    {
+      "group": "blog-b5d60f96124c25b2",
+      "phase": "holdout",
+      "side": "before",
+      "commit": "e20b8746f2444ae9fe58f49fd0f0acbfbabbb938",
+      "path": "content/en/blog/_posts/2020-04-21-Cluster-API-v1alpha3-Delivers-New-Features-and-an-Improved-User-Experience.md",
+      "raw_span": [
+        16532,
+        16686
+      ],
+      "raw_sha256": "0b304258f68e4f515e4b9f1777aae37612013a1645a73eaa0e7550027a85e8fd"
+    },
+    {
+      "group": "blog-b5d60f96124c25b2",
+      "phase": "holdout",
+      "side": "after",
+      "commit": "e20b8746f2444ae9fe58f49fd0f0acbfbabbb938",
+      "path": "content/en/blog/_posts/2020-04-21-Cluster-API-v1alpha3-Delivers-New-Features-and-an-Improved-User-Experience.md",
+      "raw_span": [
+        19126,
+        19242
+      ],
+      "raw_sha256": "5dbc429d9a7fc5f2d4dfce32e0c3843f2c730887b246feee15847f953537ee0c"
+    },
+    {
+      "group": "blog-c5a17b3b32580b9e",
+      "phase": "holdout",
+      "side": "before",
+      "commit": "e20b8746f2444ae9fe58f49fd0f0acbfbabbb938",
+      "path": "content/en/blog/_posts/2020-08-03-kubernetes-1-18-release-interview.md",
+      "raw_span": [
+        10178,
+        10262
+      ],
+      "raw_sha256": "5038cfd463f9604cef951723f48cb2cee92f266eb439b835253342bed961ca55"
+    },
+    {
+      "group": "blog-c5a17b3b32580b9e",
+      "phase": "holdout",
+      "side": "after",
+      "commit": "e20b8746f2444ae9fe58f49fd0f0acbfbabbb938",
+      "path": "content/en/blog/_posts/2020-08-03-kubernetes-1-18-release-interview.md",
+      "raw_span": [
+        27653,
+        27748
+      ],
+      "raw_sha256": "2f2caca6f1b1c2fc8d6e6d286834e614d3ebd1eb37181bc4444f7ff1844929aa"
+    },
+    {
+      "group": "blog-d017ff740b8c093d",
+      "phase": "holdout",
+      "side": "before",
+      "commit": "e20b8746f2444ae9fe58f49fd0f0acbfbabbb938",
+      "path": "content/en/blog/_posts/2020-07-27-kubernetes-1-17-release-interview.md",
+      "raw_span": [
+        3672,
+        3787
+      ],
+      "raw_sha256": "9fd1695c7c282be8f2220987818ca6a15fdcce9fe0348f344824a341e3d9e4db"
+    },
+    {
+      "group": "blog-d017ff740b8c093d",
+      "phase": "holdout",
+      "side": "after",
+      "commit": "e20b8746f2444ae9fe58f49fd0f0acbfbabbb938",
+      "path": "content/en/blog/_posts/2020-07-27-kubernetes-1-17-release-interview.md",
+      "raw_span": [
+        23104,
+        23198
+      ],
+      "raw_sha256": "bf7b31c78f385e6855ddf7f84fc196dc9bc38a4572bea3ccb023ffc765bc4374"
+    }
+  ],
+  "operating_points": {
+    "one_context": 2.6531191979135786,
+    "stable": -2.107538104057312,
+    "local_contrast": 0.6729957461357117
+  },
+  "checkpoint_revision": "f1795c86806e6838d4afa33d0b1427f8430c9615",
+  "checkpoint_assets": [
+    {
+      "file": "NOTICE",
+      "sha256": "4fe6835a2928bcfd7467888a9422d805dfa2fe6364437c1af01cf1945c3edd57"
+    },
+    {
+      "file": "config.json",
+      "sha256": "deac399da91c0cc96f5570fa5eae7cb716e32f6feb00860ce3e42c84f86c01a3"
+    },
+    {
+      "file": "model.safetensors",
+      "sha256": "4a1561fadf44ec72934edd6158ff8c76e9388ade1384dbeeea6eb15f93251087"
+    },
+    {
+      "file": "serving_head.json",
+      "sha256": "098ce573e07d8d99221d9eac41f7acae7b324071490a06023f837efe43df4cab"
+    },
+    {
+      "file": "tokenizer.json",
+      "sha256": "2c070ff353c36f85e20919da787a30e1e8e52b626d0e026e044f373378f6d0bf"
+    },
+    {
+      "file": "tokenizer_config.json",
+      "sha256": "d8089020d294f20cb21eca751b5f7f68a0b62ea2716a78576cbd587605382432"
+    }
+  ],
+  "generators": {
+    "qwen": {
+      "repo": "Qwen/Qwen2.5-1.5B-Instruct",
+      "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+      "weights_sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee",
+      "license": "Apache-2.0",
+      "local_config_files": [
+        {
+          "file": "config.json",
+          "sha256": "98d2ff8cc47488d08a2b0b3acf4eb99ef210779b42bd48605f6b8e36acdbf670"
+        },
+        {
+          "file": "generation_config.json",
+          "sha256": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6"
+        },
+        {
+          "file": "merges.txt",
+          "sha256": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3"
+        },
+        {
+          "file": "tokenizer.json",
+          "sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539"
+        },
+        {
+          "file": "tokenizer_config.json",
+          "sha256": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583"
+        },
+        {
+          "file": "vocab.json",
+          "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+        }
+      ]
+    },
+    "smol2": {
+      "repo": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "revision": "31b70e2e869a7173562077fd711b654946d38674",
+      "weights_sha256": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8",
+      "license": "Apache-2.0",
+      "local_config_files": [
+        {
+          "file": "config.json",
+          "sha256": "994f50b16abb4ae00880baefe03c10260b5bd608d2bf586f7056ca05a534feea"
+        },
+        {
+          "file": "generation_config.json",
+          "sha256": "87b916edaaab66b3899b9d0dd0752727dff6666686da0504d89ae0a6e055a013"
+        },
+        {
+          "file": "merges.txt",
+          "sha256": "0b54e8aa4e53d5383e2e4bc635a56b43f9647f7b13832d5d9ecd8f82dac4f510"
+        },
+        {
+          "file": "tokenizer.json",
+          "sha256": "9ca9acddb6525a194ec8ac7a87f24fbba7232a9a15ffa1af0c1224fcd888e47c"
+        },
+        {
+          "file": "tokenizer_config.json",
+          "sha256": "4ec77d44f62efeb38d7e044a1db318f6a939438425312dfa333b8382dbad98df"
+        },
+        {
+          "file": "vocab.json",
+          "sha256": "82b84012e3add4d01d12ba14442026e49b8cbbaead1f79ecf3d919784f82dc79"
+        },
+        {
+          "file": "special_tokens_map.json",
+          "sha256": "2b7379f3ae813529281a5c602bc5a11c1d4e0a99107aaa597fe936c1e813ca52"
+        }
+      ]
+    }
+  },
+  "reviewer_sha256": "73f32cb2a67dc0a10fd74f9afd489a4af5f877040d3ea1e2ab8a3074a7559ee5",
+  "source_sentence_ranges_verified": 230,
+  "calibration_works": 11,
+  "held_works": 12,
+  "calibration_exact_inputs": 132,
+  "held_exact_inputs": 219,
+  "native_cpu_forwards": 61,
+  "held_candidate_positions_verified": 357,
+  "held_dispositions_verified": 195,
+  "admission": {
+    "calibration": {
+      "original": 11,
+      "ordinary": 11
+    },
+    "qwen": {
+      "no_valid_eight_word_fragment": 5
+    },
+    "holdout": {
+      "original": 12,
+      "ordinary": 12,
+      "smol2": 8,
+      "qwen": 7
+    },
+    "smol2": {
+      "no_valid_eight_word_fragment": 4
+    }
+  },
+  "result": {
+    "counts": {
+      "original": {
+        "current_useful": 0,
+        "current_flag": 3,
+        "current_possible": 0,
+        "one_context_useful": 0,
+        "one_context_flag": 0,
+        "one_context_possible": 0,
+        "stable_useful": 0,
+        "stable_flag": 0,
+        "stable_possible": 0,
+        "local_contrast_useful": 0,
+        "local_contrast_flag": 0,
+        "local_contrast_possible": 0,
+        "current_plus_local_contrast_useful": 0,
+        "current_plus_local_contrast_flag": 3,
+        "current_plus_local_contrast_possible": 0,
+        "cases": 12
+      },
+      "ordinary": {
+        "current_useful": 0,
+        "current_flag": 3,
+        "current_possible": 0,
+        "one_context_useful": 0,
+        "one_context_flag": 1,
+        "one_context_possible": 0,
+        "stable_useful": 0,
+        "stable_flag": 1,
+        "stable_possible": 0,
+        "local_contrast_useful": 0,
+        "local_contrast_flag": 0,
+        "local_contrast_possible": 0,
+        "current_plus_local_contrast_useful": 0,
+        "current_plus_local_contrast_flag": 3,
+        "current_plus_local_contrast_possible": 0,
+        "cases": 12
+      },
+      "smol2": {
+        "current_useful": 0,
+        "current_flag": 1,
+        "current_possible": 0,
+        "one_context_useful": 0,
+        "one_context_flag": 0,
+        "one_context_possible": 8,
+        "stable_useful": 0,
+        "stable_flag": 0,
+        "stable_possible": 8,
+        "local_contrast_useful": 0,
+        "local_contrast_flag": 0,
+        "local_contrast_possible": 8,
+        "current_plus_local_contrast_useful": 0,
+        "current_plus_local_contrast_flag": 1,
+        "current_plus_local_contrast_possible": 8,
+        "cases": 8
+      },
+      "qwen": {
+        "current_useful": 0,
+        "current_flag": 2,
+        "current_possible": 0,
+        "one_context_useful": 0,
+        "one_context_flag": 0,
+        "one_context_possible": 7,
+        "stable_useful": 1,
+        "stable_flag": 1,
+        "stable_possible": 7,
+        "local_contrast_useful": 1,
+        "local_contrast_flag": 1,
+        "local_contrast_possible": 7,
+        "current_plus_local_contrast_useful": 1,
+        "current_plus_local_contrast_flag": 3,
+        "current_plus_local_contrast_possible": 7,
+        "cases": 7
+      }
+    },
+    "false_groups": {
+      "current": 5,
+      "one_context": 1,
+      "stable": 1,
+      "local_contrast": 0,
+      "current_plus_local_contrast": 5
+    },
+    "added_useful_groups": [
+      [
+        "blog-b5d60f96124c25b2",
+        "qwen"
+      ]
+    ],
+    "new_false_groups": 0,
+    "advance": false,
+    "cases": [
+      {
+        "group": "blog-082de0351d7dd37e",
+        "kind": "original",
+        "fixture_sha256": "1e773e099893da6317b6624ab2eac956f7ee201238e7f4d0f566dbeea602cdb0",
+        "target": [
+          253,
+          310
+        ],
+        "candidate_count": 11,
+        "outcomes": {
+          "current": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "one_context": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "stable": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "current_plus_local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          }
+        }
+      },
+      {
+        "group": "blog-082de0351d7dd37e",
+        "kind": "ordinary",
+        "fixture_sha256": "ac13e12064b86ae86e1a4a43c6a45a9642170f9fb58a02945f78dd017f74b02f",
+        "target": [
+          253,
+          308
+        ],
+        "candidate_count": 11,
+        "outcomes": {
+          "current": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "one_context": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "stable": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "current_plus_local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          }
+        }
+      },
+      {
+        "group": "blog-082de0351d7dd37e",
+        "kind": "smol2",
+        "fixture_sha256": "7a6730c26cbb3025b299006eaaccdf5f7f21ae2a642e765183c649493e61586e",
+        "target": [
+          253,
+          305
+        ],
+        "candidate_count": 11,
+        "outcomes": {
+          "current": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "one_context": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          },
+          "stable": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          },
+          "local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          },
+          "current_plus_local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          }
+        }
+      },
+      {
+        "group": "blog-0bc6b3011c6d197b",
+        "kind": "original",
+        "fixture_sha256": "39c73d73af7b9cc541d35282df17536dac0ff3b19fe898a3c40cc7d73ca658d3",
+        "target": [
+          354,
+          410
+        ],
+        "candidate_count": 7,
+        "outcomes": {
+          "current": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "one_context": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "stable": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "current_plus_local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          }
+        }
+      },
+      {
+        "group": "blog-0bc6b3011c6d197b",
+        "kind": "ordinary",
+        "fixture_sha256": "e3ec0f3e0134c95ece47c42b4b8447b19043f82c47efb25ef01cf0411e919782",
+        "target": [
+          354,
+          410
+        ],
+        "candidate_count": 7,
+        "outcomes": {
+          "current": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "one_context": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "stable": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "current_plus_local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          }
+        }
+      },
+      {
+        "group": "blog-0bc6b3011c6d197b",
+        "kind": "qwen",
+        "fixture_sha256": "11704b2355444048aaa39ac0e71f8ba4a914d14bfc185f70df3c3e7c0922e1f7",
+        "target": [
+          354,
+          406
+        ],
+        "candidate_count": 7,
+        "outcomes": {
+          "current": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "one_context": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          },
+          "stable": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          },
+          "local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          },
+          "current_plus_local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          }
+        }
+      },
+      {
+        "group": "blog-0bc6b3011c6d197b",
+        "kind": "smol2",
+        "fixture_sha256": "89c4d9d41a1b12f9e69351f8aaf6c4cbf8852364407a7b0b6c2ac71567492a94",
+        "target": [
+          354,
+          400
+        ],
+        "candidate_count": 7,
+        "outcomes": {
+          "current": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "one_context": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          },
+          "stable": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          },
+          "local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          },
+          "current_plus_local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          }
+        }
+      },
+      {
+        "group": "blog-172926f25c81a42a",
+        "kind": "original",
+        "fixture_sha256": "4fb906303856cf4a8f93d738423f99eddd61198d08c74c3ad521c8efc5204515",
+        "target": [
+          352,
+          401
+        ],
+        "candidate_count": 15,
+        "outcomes": {
+          "current": {
+            "spans": [
+              [
+                [
+                  0,
+                  103
+                ],
+                [
+                  104,
+                  289
+                ]
+              ],
+              [
+                [
+                  0,
+                  103
+                ],
+                [
+                  104,
+                  289
+                ],
+                [
+                  290,
+                  423
+                ]
+              ]
+            ],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "one_context": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "stable": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "current_plus_local_contrast": {
+            "spans": [
+              [
+                [
+                  0,
+                  103
+                ],
+                [
+                  104,
+                  289
+                ]
+              ],
+              [
+                [
+                  0,
+                  103
+                ],
+                [
+                  104,
+                  289
+                ],
+                [
+                  290,
+                  423
+                ]
+              ]
+            ],
+            "useful": false,
+            "geometry_allows_useful": false
+          }
+        }
+      },
+      {
+        "group": "blog-172926f25c81a42a",
+        "kind": "ordinary",
+        "fixture_sha256": "9be9edc4e4e9b875b1bf86acb11a643b108f49c5e90ed23d88a276da8410c57b",
+        "target": [
+          352,
+          384
+        ],
+        "candidate_count": 15,
+        "outcomes": {
+          "current": {
+            "spans": [
+              [
+                [
+                  0,
+                  103
+                ],
+                [
+                  104,
+                  289
+                ]
+              ]
+            ],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "one_context": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "stable": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "current_plus_local_contrast": {
+            "spans": [
+              [
+                [
+                  0,
+                  103
+                ],
+                [
+                  104,
+                  289
+                ]
+              ]
+            ],
+            "useful": false,
+            "geometry_allows_useful": false
+          }
+        }
+      },
+      {
+        "group": "blog-172926f25c81a42a",
+        "kind": "qwen",
+        "fixture_sha256": "f320cfdc17548fd04d40e1a581d59e3ec283bd08b6c7bfd3d0a1dc28d3a06b0f",
+        "target": [
+          352,
+          410
+        ],
+        "candidate_count": 15,
+        "outcomes": {
+          "current": {
+            "spans": [
+              [
+                [
+                  0,
+                  103
+                ],
+                [
+                  104,
+                  289
+                ]
+              ]
+            ],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "one_context": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          },
+          "stable": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          },
+          "local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          },
+          "current_plus_local_contrast": {
+            "spans": [
+              [
+                [
+                  0,
+                  103
+                ],
+                [
+                  104,
+                  289
+                ]
+              ]
+            ],
+            "useful": false,
+            "geometry_allows_useful": true
+          }
+        }
+      },
+      {
+        "group": "blog-46ea06ecb65d5b84",
+        "kind": "original",
+        "fixture_sha256": "b95b3532f192e723a939d79b91333ceed1b8beb8dd2f3f13122c6320c8385890",
+        "target": [
+          184,
+          225
+        ],
+        "candidate_count": 8,
+        "outcomes": {
+          "current": {
+            "spans": [
+              [
+                [
+                  55,
+                  140
+                ],
+                [
+                  141,
+                  256
+                ],
+                [
+                  257,
+                  373
+                ]
+              ]
+            ],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "one_context": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "stable": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "current_plus_local_contrast": {
+            "spans": [
+              [
+                [
+                  55,
+                  140
+                ],
+                [
+                  141,
+                  256
+                ],
+                [
+                  257,
+                  373
+                ]
+              ]
+            ],
+            "useful": false,
+            "geometry_allows_useful": false
+          }
+        }
+      },
+      {
+        "group": "blog-46ea06ecb65d5b84",
+        "kind": "ordinary",
+        "fixture_sha256": "fe8ebbed27a367967ae3e498cd254a71e88952dce3fee107af84089a0e6fe3e0",
+        "target": [
+          184,
+          223
+        ],
+        "candidate_count": 8,
+        "outcomes": {
+          "current": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "one_context": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "stable": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "current_plus_local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          }
+        }
+      },
+      {
+        "group": "blog-46ea06ecb65d5b84",
+        "kind": "smol2",
+        "fixture_sha256": "5ef6e8f66105cbf3a26596dd5f4fc033c4011c6b53ba307d36385410e4cf0c2f",
+        "target": [
+          184,
+          229
+        ],
+        "candidate_count": 8,
+        "outcomes": {
+          "current": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "one_context": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          },
+          "stable": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          },
+          "local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          },
+          "current_plus_local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          }
+        }
+      },
+      {
+        "group": "blog-4ee4960a3be44dc6",
+        "kind": "original",
+        "fixture_sha256": "4ea96e40515f33fa98b2730747beaa71f4eb17b00c84add46136e7de622e6ea2",
+        "target": [
+          397,
+          432
+        ],
+        "candidate_count": 6,
+        "outcomes": {
+          "current": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "one_context": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "stable": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "current_plus_local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          }
+        }
+      },
+      {
+        "group": "blog-4ee4960a3be44dc6",
+        "kind": "ordinary",
+        "fixture_sha256": "80f6534c9850908efcdd68996ac5de3a8e5e14b07ab60f2133684b4c0f2cae8e",
+        "target": [
+          397,
+          442
+        ],
+        "candidate_count": 6,
+        "outcomes": {
+          "current": {
+            "spans": [
+              [
+                [
+                  0,
+                  195
+                ],
+                [
+                  196,
+                  361
+                ],
+                [
+                  362,
+                  472
+                ]
+              ],
+              [
+                [
+                  196,
+                  361
+                ],
+                [
+                  362,
+                  472
+                ],
+                [
+                  473,
+                  629
+                ]
+              ],
+              [
+                [
+                  362,
+                  472
+                ],
+                [
+                  473,
+                  629
+                ],
+                [
+                  630,
+                  678
+                ]
+              ]
+            ],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "one_context": {
+            "spans": [
+              [
+                [
+                  393,
+                  437
+                ]
+              ]
+            ],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "stable": {
+            "spans": [
+              [
+                [
+                  393,
+                  437
+                ]
+              ]
+            ],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "current_plus_local_contrast": {
+            "spans": [
+              [
+                [
+                  0,
+                  195
+                ],
+                [
+                  196,
+                  361
+                ],
+                [
+                  362,
+                  472
+                ]
+              ],
+              [
+                [
+                  196,
+                  361
+                ],
+                [
+                  362,
+                  472
+                ],
+                [
+                  473,
+                  629
+                ]
+              ],
+              [
+                [
+                  362,
+                  472
+                ],
+                [
+                  473,
+                  629
+                ],
+                [
+                  630,
+                  678
+                ]
+              ]
+            ],
+            "useful": false,
+            "geometry_allows_useful": false
+          }
+        }
+      },
+      {
+        "group": "blog-89cda19780f56037",
+        "kind": "original",
+        "fixture_sha256": "d11639fa718f7b19ab50ca52e7dd141ed5df85fc796c498a0e3ed355272d3f44",
+        "target": [
+          266,
+          311
+        ],
+        "candidate_count": 18,
+        "outcomes": {
+          "current": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "one_context": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "stable": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "current_plus_local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          }
+        }
+      },
+      {
+        "group": "blog-89cda19780f56037",
+        "kind": "ordinary",
+        "fixture_sha256": "3928a91186f89f125e7389dfce2d2c10610f8d8eb8111a6d057bcc3d58485b8a",
+        "target": [
+          266,
+          300
+        ],
+        "candidate_count": 18,
+        "outcomes": {
+          "current": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "one_context": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "stable": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "current_plus_local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          }
+        }
+      },
+      {
+        "group": "blog-89cda19780f56037",
+        "kind": "qwen",
+        "fixture_sha256": "701e7d43e2b907f903b315f35ae045bd64a0ce6a8c080d94d69777c08592cefb",
+        "target": [
+          266,
+          316
+        ],
+        "candidate_count": 18,
+        "outcomes": {
+          "current": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "one_context": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          },
+          "stable": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          },
+          "local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          },
+          "current_plus_local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          }
+        }
+      },
+      {
+        "group": "blog-89cda19780f56037",
+        "kind": "smol2",
+        "fixture_sha256": "e1551fbdfdf06283960d0632793e01fc37bbecaf0e9e6b2c7e769d8576f32c8e",
+        "target": [
+          266,
+          317
+        ],
+        "candidate_count": 18,
+        "outcomes": {
+          "current": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "one_context": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          },
+          "stable": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          },
+          "local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          },
+          "current_plus_local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          }
+        }
+      },
+      {
+        "group": "blog-9eef898e1cf4aa12",
+        "kind": "original",
+        "fixture_sha256": "f7d6cf6ae542db2e63fa68482727626c23cbacda3fa727957721ae49242bd426",
+        "target": [
+          365,
+          417
+        ],
+        "candidate_count": 15,
+        "outcomes": {
+          "current": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "one_context": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "stable": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "current_plus_local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          }
+        }
+      },
+      {
+        "group": "blog-9eef898e1cf4aa12",
+        "kind": "ordinary",
+        "fixture_sha256": "6e2df7a4561cc52177783ac89d23ffddd43b5ac6ba0b0c627d8fd7160bbecb80",
+        "target": [
+          365,
+          402
+        ],
+        "candidate_count": 15,
+        "outcomes": {
+          "current": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "one_context": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "stable": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "current_plus_local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          }
+        }
+      },
+      {
+        "group": "blog-9eef898e1cf4aa12",
+        "kind": "qwen",
+        "fixture_sha256": "a8d120b647bfdaa0a68cb11bbdcc4a89d5a67c5c70d1d722ae331fb5d70aa704",
+        "target": [
+          365,
+          425
+        ],
+        "candidate_count": 15,
+        "outcomes": {
+          "current": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "one_context": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          },
+          "stable": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          },
+          "local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          },
+          "current_plus_local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          }
+        }
+      },
+      {
+        "group": "blog-9eef898e1cf4aa12",
+        "kind": "smol2",
+        "fixture_sha256": "561d8a23edbedf53764c7819ced00da29a736c44cedee2afd9887c8cf32c3b4e",
+        "target": [
+          365,
+          424
+        ],
+        "candidate_count": 15,
+        "outcomes": {
+          "current": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "one_context": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          },
+          "stable": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          },
+          "local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          },
+          "current_plus_local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          }
+        }
+      },
+      {
+        "group": "blog-a16ea9ac4971e003",
+        "kind": "original",
+        "fixture_sha256": "d0663d945a24a5e28d0b2bf773a73d6bd6daa6f5b16b98227489d922f1cab57d",
+        "target": [
+          427,
+          477
+        ],
+        "candidate_count": 6,
+        "outcomes": {
+          "current": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "one_context": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "stable": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "current_plus_local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          }
+        }
+      },
+      {
+        "group": "blog-a16ea9ac4971e003",
+        "kind": "ordinary",
+        "fixture_sha256": "d889084d7f55405ab187703bfcd2b1f0e02b5cc79dfe4782e7367c24fedc7e87",
+        "target": [
+          427,
+          475
+        ],
+        "candidate_count": 6,
+        "outcomes": {
+          "current": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "one_context": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "stable": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "current_plus_local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          }
+        }
+      },
+      {
+        "group": "blog-ad3edd045924e961",
+        "kind": "original",
+        "fixture_sha256": "a06340f644aeb3fe0e97f20664739b81c2edff0dbc4bf51e285f51054ff70ec8",
+        "target": [
+          259,
+          307
+        ],
+        "candidate_count": 8,
+        "outcomes": {
+          "current": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "one_context": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "stable": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "current_plus_local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          }
+        }
+      },
+      {
+        "group": "blog-ad3edd045924e961",
+        "kind": "ordinary",
+        "fixture_sha256": "963c5c285c189bacd32c87e07db8fb78e4a418d526995904a4d8ccc1ebf825e2",
+        "target": [
+          259,
+          309
+        ],
+        "candidate_count": 8,
+        "outcomes": {
+          "current": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "one_context": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "stable": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "current_plus_local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          }
+        }
+      },
+      {
+        "group": "blog-ad3edd045924e961",
+        "kind": "smol2",
+        "fixture_sha256": "aa36f74c7e2a62fc6ef66fc7a41de3d931ac09f08d15554352e03125e60dc149",
+        "target": [
+          259,
+          303
+        ],
+        "candidate_count": 8,
+        "outcomes": {
+          "current": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "one_context": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          },
+          "stable": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          },
+          "local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          },
+          "current_plus_local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          }
+        }
+      },
+      {
+        "group": "blog-b5d60f96124c25b2",
+        "kind": "original",
+        "fixture_sha256": "2d8ccec5ca6d403587584068d864c4731f4f004ad2d93c852d945087e46aefb7",
+        "target": [
+          196,
+          252
+        ],
+        "candidate_count": 4,
+        "outcomes": {
+          "current": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "one_context": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "stable": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "current_plus_local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          }
+        }
+      },
+      {
+        "group": "blog-b5d60f96124c25b2",
+        "kind": "ordinary",
+        "fixture_sha256": "b7b8e16ad80b75f247a80d27fb5b4dc9187dc229898276550199ea5d25c20560",
+        "target": [
+          196,
+          233
+        ],
+        "candidate_count": 4,
+        "outcomes": {
+          "current": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "one_context": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "stable": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "current_plus_local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          }
+        }
+      },
+      {
+        "group": "blog-b5d60f96124c25b2",
+        "kind": "qwen",
+        "fixture_sha256": "7f186fd9f4dc04ac218951ad46f111e0d30532e2d7b25bcc916afc92ec61f570",
+        "target": [
+          196,
+          257
+        ],
+        "candidate_count": 4,
+        "outcomes": {
+          "current": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "one_context": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          },
+          "stable": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          },
+          "local_contrast": {
+            "spans": [
+              [
+                [
+                  185,
+                  231
+                ]
+              ]
+            ],
+            "useful": true,
+            "geometry_allows_useful": true
+          },
+          "current_plus_local_contrast": {
+            "spans": [
+              [
+                [
+                  185,
+                  231
+                ]
+              ]
+            ],
+            "useful": true,
+            "geometry_allows_useful": true
+          }
+        }
+      },
+      {
+        "group": "blog-b5d60f96124c25b2",
+        "kind": "smol2",
+        "fixture_sha256": "ceecc28bc967bc293852447f1f0ca5bfb682522c748cbb388f2e59bb2dbe5972",
+        "target": [
+          196,
+          258
+        ],
+        "candidate_count": 4,
+        "outcomes": {
+          "current": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "one_context": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          },
+          "stable": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          },
+          "local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          },
+          "current_plus_local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          }
+        }
+      },
+      {
+        "group": "blog-c5a17b3b32580b9e",
+        "kind": "original",
+        "fixture_sha256": "344c0a7f4c749a177fe121f3bd6371e983a0300de93f56791e817850ccae196d",
+        "target": [
+          184,
+          234
+        ],
+        "candidate_count": 1,
+        "outcomes": {
+          "current": {
+            "spans": [
+              [
+                [
+                  166,
+                  250
+                ],
+                [
+                  251,
+                  309
+                ],
+                [
+                  310,
+                  468
+                ]
+              ]
+            ],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "one_context": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "stable": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "current_plus_local_contrast": {
+            "spans": [
+              [
+                [
+                  166,
+                  250
+                ],
+                [
+                  251,
+                  309
+                ],
+                [
+                  310,
+                  468
+                ]
+              ]
+            ],
+            "useful": false,
+            "geometry_allows_useful": false
+          }
+        }
+      },
+      {
+        "group": "blog-c5a17b3b32580b9e",
+        "kind": "ordinary",
+        "fixture_sha256": "ad4f7aa58dfc416f760356b37404a37a89520485c63905029da6f6c89276018a",
+        "target": [
+          184,
+          228
+        ],
+        "candidate_count": 1,
+        "outcomes": {
+          "current": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "one_context": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "stable": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "current_plus_local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          }
+        }
+      },
+      {
+        "group": "blog-c5a17b3b32580b9e",
+        "kind": "qwen",
+        "fixture_sha256": "85012af813e303a7e917fb666735f960808284ff3eb3a4bca1993f83e730def9",
+        "target": [
+          184,
+          231
+        ],
+        "candidate_count": 1,
+        "outcomes": {
+          "current": {
+            "spans": [
+              [
+                [
+                  166,
+                  247
+                ],
+                [
+                  248,
+                  306
+                ],
+                [
+                  307,
+                  465
+                ]
+              ]
+            ],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "one_context": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          },
+          "stable": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          },
+          "local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          },
+          "current_plus_local_contrast": {
+            "spans": [
+              [
+                [
+                  166,
+                  247
+                ],
+                [
+                  248,
+                  306
+                ],
+                [
+                  307,
+                  465
+                ]
+              ]
+            ],
+            "useful": false,
+            "geometry_allows_useful": true
+          }
+        }
+      },
+      {
+        "group": "blog-c5a17b3b32580b9e",
+        "kind": "smol2",
+        "fixture_sha256": "2c60cedb61e3e83e6bce013fadcd3290f07971bc85171c54c697a540a0f0cea0",
+        "target": [
+          184,
+          229
+        ],
+        "candidate_count": 1,
+        "outcomes": {
+          "current": {
+            "spans": [
+              [
+                [
+                  166,
+                  245
+                ],
+                [
+                  246,
+                  304
+                ],
+                [
+                  305,
+                  463
+                ]
+              ]
+            ],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "one_context": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          },
+          "stable": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          },
+          "local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          },
+          "current_plus_local_contrast": {
+            "spans": [
+              [
+                [
+                  166,
+                  245
+                ],
+                [
+                  246,
+                  304
+                ],
+                [
+                  305,
+                  463
+                ]
+              ]
+            ],
+            "useful": false,
+            "geometry_allows_useful": true
+          }
+        }
+      },
+      {
+        "group": "blog-d017ff740b8c093d",
+        "kind": "original",
+        "fixture_sha256": "1d29c056c2f3df5c5c480a1d3eadfd6a41482766347fafbb195daef0cbc6cd05",
+        "target": [
+          200,
+          257
+        ],
+        "candidate_count": 9,
+        "outcomes": {
+          "current": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "one_context": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "stable": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "current_plus_local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          }
+        }
+      },
+      {
+        "group": "blog-d017ff740b8c093d",
+        "kind": "ordinary",
+        "fixture_sha256": "a2b902f75db17931ffac671de39ec9f7c07f788b7981c37dfd1b7ee5ab7c334d",
+        "target": [
+          200,
+          239
+        ],
+        "candidate_count": 9,
+        "outcomes": {
+          "current": {
+            "spans": [
+              [
+                [
+                  0,
+                  33
+                ],
+                [
+                  34,
+                  177
+                ],
+                [
+                  178,
+                  275
+                ]
+              ]
+            ],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "one_context": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "stable": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "current_plus_local_contrast": {
+            "spans": [
+              [
+                [
+                  0,
+                  33
+                ],
+                [
+                  34,
+                  177
+                ],
+                [
+                  178,
+                  275
+                ]
+              ]
+            ],
+            "useful": false,
+            "geometry_allows_useful": false
+          }
+        }
+      },
+      {
+        "group": "blog-d017ff740b8c093d",
+        "kind": "qwen",
+        "fixture_sha256": "637d5ae8cd51406252514de4d54cd2a76093497337e4528649910dc06e9010c1",
+        "target": [
+          200,
+          253
+        ],
+        "candidate_count": 9,
+        "outcomes": {
+          "current": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": false
+          },
+          "one_context": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          },
+          "stable": {
+            "spans": [
+              [
+                [
+                  214,
+                  266
+                ]
+              ]
+            ],
+            "useful": true,
+            "geometry_allows_useful": true
+          },
+          "local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          },
+          "current_plus_local_contrast": {
+            "spans": [],
+            "useful": false,
+            "geometry_allows_useful": true
+          }
+        }
+      }
+    ]
+  },
+  "retrospective_at_matched_false_group_budgets": {
+    "current": {
+      "0": {
+        "false_groups": 0,
+        "useful_locations": 0
+      },
+      "1": {
+        "false_groups": 1,
+        "useful_locations": 0
+      },
+      "2": {
+        "false_groups": 2,
+        "useful_locations": 0
+      },
+      "5": {
+        "false_groups": 5,
+        "useful_locations": 0
+      }
+    },
+    "one_context": {
+      "0": {
+        "false_groups": 0,
+        "useful_locations": 0
+      },
+      "1": {
+        "false_groups": 1,
+        "useful_locations": 0
+      },
+      "2": {
+        "false_groups": 2,
+        "useful_locations": 0
+      },
+      "5": {
+        "false_groups": 5,
+        "useful_locations": 3
+      }
+    },
+    "stable": {
+      "0": {
+        "false_groups": 0,
+        "useful_locations": 0
+      },
+      "1": {
+        "false_groups": 1,
+        "useful_locations": 1
+      },
+      "2": {
+        "false_groups": 2,
+        "useful_locations": 1
+      },
+      "5": {
+        "false_groups": 5,
+        "useful_locations": 2
+      }
+    },
+    "local_contrast": {
+      "0": {
+        "false_groups": 0,
+        "useful_locations": 1
+      },
+      "1": {
+        "false_groups": 1,
+        "useful_locations": 1
+      },
+      "2": {
+        "false_groups": 2,
+        "useful_locations": 1
+      },
+      "5": {
+        "false_groups": 5,
+        "useful_locations": 3
+      }
+    }
+  },
+  "commitments": {
+    "freeze.json": "3cb80cab98de78a9209ff50794b678029218bd374bf576c318ffa47e20f1ca32",
+    "sources.json": "803f610f6b0289bf3d2e1fa43782322ab207c100069a8e367b8dc6233954b374",
+    "fixtures.json": "27f88dc936cb6418c97f2af0074646e07c0d39a3588cd94e207844f2b6287324",
+    "generate-qwen.json": "06c443a579e431807a20d74e26793401067860cf0fefaf2b47aee4d697f5ddb3",
+    "generate-smol2.json": "d69d1d8a395e82fec7d7210a1da13066cc29666d6ff68bd9575d9b1361c1cda2",
+    "calibration-responses.json": "a88af950ec4033d66bc10c32c90b8f888e732cb8db8dbf5bda3897c2b9e7be96",
+    "holdout-responses.json": "b7432ee25cb061959d484011fd5108d257af28a880ac408d6b1d2fc64c2e1eec",
+    "result.json": "dc8bc2ac404bc8b85fffc9bfd64aa91289d9d29f1fa43f074fe294a86ed62de4"
+  }
+}

@@ -56,6 +56,9 @@ ordinary mouth changes with unchanged soundtracks.
 The [fresh neural mouth fixtures](grid-reserve-neural-mouth-2026-11-12.md)
 replay two original-time and two shifted redraws against their source
 closures, native pictures, and unchanged soundtracks.
+The [detector readout on those fixtures](grid-reserve-neural-mouth-readout-2026-11-12.md)
+repeats current and experimental timing checks on those exact clips and
+verifies source crops where an inspection range appears.
 
 The [earlier-audio comparison](audio-reference-comparison-2026-11-11.md#replay-without-the-app)
 replays changed sample ranges, difference waveforms, and playable excerpts

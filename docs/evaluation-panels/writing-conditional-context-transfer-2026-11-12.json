@@ -1,0 +1,330 @@
+{
+  "binding_counts": {
+    "articles": 55,
+    "comparable_foci": 699,
+    "eligible_foci": 699,
+    "exact_prompts": 1030,
+    "target_tokens": 27102
+  },
+  "design": {
+    "advance": "A proposed addition must recover at least three held edits in different works, across both generators, at no more than one additional false human group versus the native incumbent. Retain existing useful locations.",
+    "empty": "Same prompt scaffold with no context. Exact target tokens must be identical in every arm and have complete native source coverage.",
+    "far": "Same-article sentence separated by at least three sentence positions, closest in word count to the actual preceding sentence. Resolve ties by source order.",
+    "features": [
+      "empty mean log probability",
+      "near minus empty",
+      "near minus far",
+      "existing primary context log odds"
+    ],
+    "fit": "Fixed StandardScaler and L2 logistic regression C=1, balanced labels. Train on eligible generated focus sentences and eligible original human sentences. No held labels or scores enter fitting or cutoffs.",
+    "near": "Preceding sentence in native order; require a following sentence and 12\u201365 focus words. Require 8\u201380 words in both context sentences.",
+    "point": "Require a strict score above the third-highest original article maximum in selection; report held equal false-group counts separately.",
+    "scope": "Read the exact interior sentences of the retained plain-text article cases. Use twelve older works for fitting and the ten source-disjoint previously evaluated articles only for held readout."
+  },
+  "equal_false_groups": {
+    "0": {
+      "absolute": {
+        "assessed": 24,
+        "edits": 14,
+        "false_groups": 0,
+        "genuine_groups": 10,
+        "qwen_useful": 0,
+        "smol2_useful": 0,
+        "useful": 0,
+        "wrong_only": 0
+      },
+      "combined": {
+        "assessed": 24,
+        "edits": 14,
+        "false_groups": 0,
+        "genuine_groups": 10,
+        "qwen_useful": 0,
+        "smol2_useful": 0,
+        "useful": 0,
+        "wrong_only": 0
+      },
+      "conditional": {
+        "assessed": 24,
+        "edits": 14,
+        "false_groups": 0,
+        "genuine_groups": 10,
+        "qwen_useful": 0,
+        "smol2_useful": 0,
+        "useful": 0,
+        "wrong_only": 0
+      },
+      "primary_rank": {
+        "assessed": 24,
+        "edits": 14,
+        "false_groups": 0,
+        "genuine_groups": 10,
+        "qwen_useful": 0,
+        "smol2_useful": 0,
+        "useful": 0,
+        "wrong_only": 0
+      }
+    },
+    "1": {
+      "absolute": {
+        "assessed": 24,
+        "edits": 14,
+        "false_groups": 1,
+        "genuine_groups": 10,
+        "qwen_useful": 0,
+        "smol2_useful": 0,
+        "useful": 0,
+        "wrong_only": 1
+      },
+      "combined": {
+        "assessed": 24,
+        "edits": 14,
+        "false_groups": 1,
+        "genuine_groups": 10,
+        "qwen_useful": 0,
+        "smol2_useful": 0,
+        "useful": 0,
+        "wrong_only": 2
+      },
+      "conditional": {
+        "assessed": 24,
+        "edits": 14,
+        "false_groups": 1,
+        "genuine_groups": 10,
+        "qwen_useful": 0,
+        "smol2_useful": 0,
+        "useful": 0,
+        "wrong_only": 1
+      },
+      "primary_rank": {
+        "assessed": 24,
+        "edits": 14,
+        "false_groups": 1,
+        "genuine_groups": 10,
+        "qwen_useful": 0,
+        "smol2_useful": 0,
+        "useful": 0,
+        "wrong_only": 2
+      }
+    },
+    "2": {
+      "absolute": {
+        "assessed": 24,
+        "edits": 14,
+        "false_groups": 2,
+        "genuine_groups": 10,
+        "qwen_useful": 0,
+        "smol2_useful": 0,
+        "useful": 0,
+        "wrong_only": 3
+      },
+      "combined": {
+        "assessed": 24,
+        "edits": 14,
+        "false_groups": 2,
+        "genuine_groups": 10,
+        "qwen_useful": 1,
+        "smol2_useful": 0,
+        "useful": 1,
+        "wrong_only": 2
+      },
+      "conditional": {
+        "assessed": 24,
+        "edits": 14,
+        "false_groups": 2,
+        "genuine_groups": 10,
+        "qwen_useful": 0,
+        "smol2_useful": 0,
+        "useful": 0,
+        "wrong_only": 3
+      },
+      "primary_rank": {
+        "assessed": 24,
+        "edits": 14,
+        "false_groups": 2,
+        "genuine_groups": 10,
+        "qwen_useful": 0,
+        "smol2_useful": 0,
+        "useful": 0,
+        "wrong_only": 3
+      }
+    },
+    "3": {
+      "absolute": {
+        "assessed": 24,
+        "edits": 14,
+        "false_groups": 3,
+        "genuine_groups": 10,
+        "qwen_useful": 0,
+        "smol2_useful": 0,
+        "useful": 0,
+        "wrong_only": 4
+      },
+      "combined": {
+        "assessed": 24,
+        "edits": 14,
+        "false_groups": 3,
+        "genuine_groups": 10,
+        "qwen_useful": 1,
+        "smol2_useful": 0,
+        "useful": 1,
+        "wrong_only": 2
+      },
+      "conditional": {
+        "assessed": 24,
+        "edits": 14,
+        "false_groups": 3,
+        "genuine_groups": 10,
+        "qwen_useful": 0,
+        "smol2_useful": 0,
+        "useful": 0,
+        "wrong_only": 6
+      },
+      "primary_rank": {
+        "assessed": 24,
+        "edits": 14,
+        "false_groups": 3,
+        "genuine_groups": 10,
+        "qwen_useful": 0,
+        "smol2_useful": 0,
+        "useful": 0,
+        "wrong_only": 3
+      }
+    }
+  },
+  "fixed": {
+    "absolute": {
+      "assessed": 24,
+      "edits": 14,
+      "false_groups": 0,
+      "genuine_groups": 10,
+      "qwen_useful": 0,
+      "smol2_useful": 0,
+      "useful": 0,
+      "wrong_only": 0
+    },
+    "combined": {
+      "assessed": 24,
+      "edits": 14,
+      "false_groups": 1,
+      "genuine_groups": 10,
+      "qwen_useful": 0,
+      "smol2_useful": 0,
+      "useful": 0,
+      "wrong_only": 2
+    },
+    "conditional": {
+      "assessed": 24,
+      "edits": 14,
+      "false_groups": 0,
+      "genuine_groups": 10,
+      "qwen_useful": 0,
+      "smol2_useful": 0,
+      "useful": 0,
+      "wrong_only": 0
+    },
+    "primary_rank": {
+      "assessed": 24,
+      "edits": 14,
+      "false_groups": 2,
+      "genuine_groups": 10,
+      "qwen_useful": 0,
+      "smol2_useful": 0,
+      "useful": 0,
+      "wrong_only": 3
+    }
+  },
+  "fixed_union": {
+    "absolute": {
+      "assessed": 24,
+      "edits": 14,
+      "false_groups": 5,
+      "genuine_groups": 10,
+      "qwen_useful": 0,
+      "smol2_useful": 0,
+      "useful": 0,
+      "wrong_only": 5
+    },
+    "combined": {
+      "assessed": 24,
+      "edits": 14,
+      "false_groups": 5,
+      "genuine_groups": 10,
+      "qwen_useful": 0,
+      "smol2_useful": 0,
+      "useful": 0,
+      "wrong_only": 5
+    },
+    "conditional": {
+      "assessed": 24,
+      "edits": 14,
+      "false_groups": 5,
+      "genuine_groups": 10,
+      "qwen_useful": 0,
+      "smol2_useful": 0,
+      "useful": 0,
+      "wrong_only": 5
+    },
+    "primary_rank": {
+      "assessed": 24,
+      "edits": 14,
+      "false_groups": 5,
+      "genuine_groups": 10,
+      "qwen_useful": 0,
+      "smol2_useful": 0,
+      "useful": 0,
+      "wrong_only": 5
+    }
+  },
+  "forwards": 1030,
+  "freeze_sha256": "9f3250d6c4f417bb43d36adcdda09c28486f1c2dc0661e9e6623c3960795cba1",
+  "held_cutoffs": {
+    "absolute": 0.39163491545706286,
+    "combined": 1.087420021800305,
+    "conditional": 0.552598726741699,
+    "primary_rank": 0.9362977044730719
+  },
+  "independent": {
+    "articles": 55,
+    "context_hash_bindings": 2097,
+    "separate_fit_outcome_counts_verified": 72
+  },
+  "new_locations": {
+    "absolute": {
+      "qwen": 0,
+      "smol2": 0,
+      "works": 0
+    },
+    "combined": {
+      "qwen": 0,
+      "smol2": 0,
+      "works": 0
+    },
+    "conditional": {
+      "qwen": 0,
+      "smol2": 0,
+      "works": 0
+    },
+    "primary_rank": {
+      "qwen": 0,
+      "smol2": 0,
+      "works": 0
+    }
+  },
+  "prior": {
+    "assessed": 24,
+    "edits": 14,
+    "false_groups": 5,
+    "genuine_groups": 10,
+    "qwen_useful": 0,
+    "smol2_useful": 0,
+    "useful": 0,
+    "wrong_only": 5
+  },
+  "schema": "chipmunk.writing-conditional-context-transfer/1",
+  "seconds": 62.451,
+  "stage": "research",
+  "training_eligible": {
+    "0": 148,
+    "1": 17
+  }
+}

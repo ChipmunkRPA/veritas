@@ -1,0 +1,87 @@
+{
+  "deliveries": {
+    "audio_early": {
+      "blind_alerted": 0,
+      "blind_assessed": 3,
+      "blind_localized": 0,
+      "current_alerted": 0,
+      "current_assessed": 10,
+      "current_localized": 0,
+      "reference_alerted": 13,
+      "reference_assessed": 13,
+      "reference_localized": 13,
+      "views": 13
+    },
+    "audio_late": {
+      "blind_alerted": 0,
+      "blind_assessed": 3,
+      "blind_localized": 0,
+      "current_alerted": 0,
+      "current_assessed": 13,
+      "current_localized": 0,
+      "reference_alerted": 13,
+      "reference_assessed": 13,
+      "reference_localized": 13,
+      "views": 13
+    },
+    "gain": {
+      "blind_alerted": 1,
+      "blind_assessed": 3,
+      "blind_localized": 0,
+      "current_alerted": 0,
+      "current_assessed": 11,
+      "current_localized": 0,
+      "reference_alerted": 0,
+      "reference_assessed": 13,
+      "reference_localized": 0,
+      "views": 13
+    },
+    "original": {
+      "blind_alerted": 0,
+      "blind_assessed": 3,
+      "blind_localized": 0,
+      "current_alerted": 0,
+      "current_assessed": 18,
+      "current_localized": 0,
+      "reference_alerted": 0,
+      "reference_assessed": 13,
+      "reference_localized": 0,
+      "views": 19
+    }
+  },
+  "independent_audit": {
+    "exact_copied_edit_views": 26,
+    "freeze_sha256": "f47bad1fff02a5c55c5d8fe706c4c95d787dddcbae645d59ca7592afeab42774",
+    "labels_sha256": "5c345c4a51dc8d806e09734e7469bfed1e43e5bc71890d68c5ccee224c51bd4b",
+    "localization_dispositions_replayed": 174,
+    "original_pictures": 2550,
+    "original_samples": 1620032,
+    "readout_sha256": "839693258487c50cf921e42f948b35df57981f82186655f534e26d310180b7e8",
+    "replayed_oracle_slice_pairs": 52,
+    "scored_view_pictures": 4350,
+    "scored_view_samples": 2763584,
+    "scored_views": 58,
+    "source_audio_brackets": 17,
+    "source_native_mouth_crops": 52,
+    "source_views": 34,
+    "verified": true
+  },
+  "reference_use": "Known source waveform and a chosen mouth event were supplied. Timing comparison only.",
+  "schema": "chipmunk.grid-fresh-release-public/1",
+  "separate_observations": {
+    "development": {
+      "supported": 2,
+      "unsupported": 2
+    },
+    "held": {
+      "lexical_negative": 6,
+      "supported": 13,
+      "unsupported": 11
+    }
+  },
+  "source": "GRID corpus, 10.5281/zenodo.3625687, archived native clips and word alignments",
+  "source_group_count": {
+    "development": 2,
+    "held": 6
+  }
+}

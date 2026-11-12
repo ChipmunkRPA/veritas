@@ -68,6 +68,9 @@ transients can support the same visible speech event.
 The [phoneme qualification](video-phone-release-qualification-2026-11-12.md)
 compares blind and supplied-transcript decoding, and replays acoustic timing
 against the original PCM and publisher word intervals.
+The [fresh release timing study](grid-fresh-release-qualification-2026-11-12.md)
+seals independent waveform and picture observations before moving the audio
+and compares both blind checks with a supplied-reference waveform.
 
 The [earlier-audio comparison](audio-reference-comparison-2026-11-11.md#replay-without-the-app)
 replays changed sample ranges, difference waveforms, and playable excerpts
@@ -90,6 +93,9 @@ keeping trailing quoted replies out of the second check.
 The [scanned PDF study](writing-ocr-scan-transfer-2026-11-12.md) measures
 which exact classifier inputs survive recognition and checks whether a
 signed report can be replayed against the original scan.
+The [conditional writing study](writing-conditional-context-transfer-2026-11-12.md)
+compares the same target tokens after three contexts and independently
+recalculates held location counts from the saved measurements.
 The [archive boundary comparison](writing-archive-changed-edge-2026-11-12.md)
 reconstructs exact submitted and reference coordinates after a word changes
 next to a lost paragraph break and checks open-set and ambiguous controls.

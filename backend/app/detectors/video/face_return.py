@@ -6,6 +6,7 @@ from __future__ import annotations
 import math
 from dataclasses import dataclass
 from fractions import Fraction
+from pathlib import Path
 
 import cv2
 import numpy as np
@@ -17,8 +18,11 @@ from app.evidence.face_return_binding import (
     DENSE_DIMENSIONS,
     DENSE_ENCODING,
     DENSE_FRAME_PROFILES,
+    GUARDED_CODEC_CARRIERS,
+    GUARDED_CODEC_FRAME_COUNT,
     PROFILE_STEPS,
 )
+from app.provenance.c2pa import unsupported_container
 
 METHOD = "face-short-return/1"
 POINT = .10
@@ -83,6 +87,33 @@ def dense_schedule(table: FrameTable, encoding: tuple[str | None, str | None]):
     return None if planned is None else (planned[0], tuple(range(0, len(table), 2)))
 
 
+def source_carrier(path: Path) -> str | None:
+    """Identify the two qualified carriers from a bounded native file header."""
+    try:
+        with path.open("rb") as stream:
+            head = stream.read(4096)
+    except OSError:
+        return None
+    if head.startswith(b"\x1aE\xdf\xa3"):
+        return "webm" if unsupported_container(head) == "webm" else None
+    size = int.from_bytes(head[:4], "big")
+    if head[4:8] == b"ftyp" and 16 <= size <= len(head) and size % 4 == 0:
+        brands = {head[i:i + 4] for i in range(16, size, 4)}
+        if head[8:12] in {b"isom", b"mp41", b"mp42"} and brands & {b"mp41", b"mp42"}:
+            return "mp4"
+    return None
+
+
+def guarded_dense_schedule(table: FrameTable, encoding: tuple[str | None, str | None], path: Path):
+    carrier = GUARDED_CODEC_CARRIERS.get(encoding)
+    if carrier is None or (table.width, table.height) != DENSE_DIMENSIONS or len(table) != GUARDED_CODEC_FRAME_COUNT:
+        return None
+    planned = schedule(table)
+    if planned is None or source_carrier(path) != carrier:
+        return None
+    return (planned[0], tuple(range(0, len(table), 2))), carrier
+
+
 def scene(rgb: np.ndarray, face: Face | None) -> tuple[np.ndarray, np.ndarray]:
     gray = cv2.cvtColor(cv2.resize(rgb, (96, 64), interpolation=cv2.INTER_AREA), cv2.COLOR_RGB2GRAY)
     tiles = gray.reshape(4, 16, 8, 12).transpose(0, 2, 1, 3).reshape(32, 192).astype(np.float32)
@@ -100,13 +131,23 @@ def scene(rgb: np.ndarray, face: Face | None) -> tuple[np.ndarray, np.ndarray]:
     return tiles / np.maximum(norms[:, None], 1e-6), mask
 
 
-def scene_correlation(a: Sample, b: Sample) -> float | None:
+def _scene_correlations(a: Sample, b: Sample) -> np.ndarray | None:
     first, valid_a = a.scene
     second, valid_b = b.scene
     valid = valid_a & valid_b
     if np.count_nonzero(valid) < MINIMUM_TILE_COUNT:
         return None
-    return float(np.median(np.sum(first[valid] * second[valid], axis=1)))
+    return np.sum(first[valid] * second[valid], axis=1)
+
+
+def scene_correlation(a: Sample, b: Sample) -> float | None:
+    values = _scene_correlations(a, b)
+    return None if values is None else float(np.median(values))
+
+
+def scene_lower_quartile(a: Sample, b: Sample) -> float | None:
+    values = _scene_correlations(a, b)
+    return None if values is None else float(np.quantile(values, .25))
 
 
 def distribution_margin(distances: np.ndarray, before: list[int], core: list[int], after: list[int]) -> float:

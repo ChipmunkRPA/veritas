@@ -22,6 +22,8 @@ from app.evidence.face_return_binding import (
     DENSE_FRAME_PROFILES,
     FINE_SCENE_FRAME_COUNT,
     FINE_SCENE_METHOD,
+    GUARDED_CODEC_METHOD,
+    GUARDED_SCENE_QUARTILE_POINT,
     observation,
 )
 
@@ -143,6 +145,17 @@ def _inspect_return(details, inputs, yunet, recognizer, deadline, incumbent):
         return
     dense = face_return.dense_schedule(table, inputs.encoding)
     if dense is None:
+        path = getattr(inputs.store, "path", None)
+        if coverage["status"] == "no_distinct_range" and path is not None:
+            guarded = face_return.guarded_dense_schedule(table, inputs.encoding, path)
+            if guarded is not None:
+                planned, carrier = guarded
+                dense_coverage = {"measured_face_frames": 0}
+                coverage["dense_fallback"] = dense_coverage
+                _return_pass(details, inputs, yunet, recognizer, deadline, incumbent, planned, dense_coverage,
+                             GUARDED_CODEC_METHOD, stop, source_carrier=carrier)
+                if dense_coverage["status"] == "localized":
+                    coverage["status"] = "localized"
         return
     dense_coverage = {}
     if coverage["status"] == "no_distinct_range":
@@ -165,7 +178,8 @@ def _inspect_return(details, inputs, yunet, recognizer, deadline, incumbent):
         coverage.update(status="localized", reason=None)
 
 
-def _return_pass(details, inputs, yunet, recognizer, deadline, incumbent, planned, coverage, record_method, stop):
+def _return_pass(details, inputs, yunet, recognizer, deadline, incumbent, planned, coverage, record_method, stop, *,
+                 source_carrier=None):
     table = inputs.table
     times, scheduled = planned
     coverage.update(status="unassessed", reason="time_budget", scheduled_frames=len(scheduled))
@@ -174,6 +188,7 @@ def _return_pass(details, inputs, yunet, recognizer, deadline, incumbent, planne
         return
     features, face_inputs, scene_inputs = {}, {}, {}
     fine = record_method == FINE_SCENE_METHOD
+    guarded = record_method == GUARDED_CODEC_METHOD
     fine_frames, fine_edges = {}, {}
     try:
         with closing(inputs.store.iter_many(scheduled, timeout_s=budget)) as frames:
@@ -200,9 +215,10 @@ def _return_pass(details, inputs, yunet, recognizer, deadline, incumbent, planne
                 scene_inputs[index] = {"frame_index": index, "pts": table.pts[index], "decoded_rgb_sha256":
                     face_inputs[index]["decoded_rgb_sha256"] if observed is not None else hashlib.sha256(rgb.tobytes()).hexdigest()}
                 features[index] = face_return.Sample(face, vector, face_return.scene(rgb, face))
-                if fine:
+                if fine or guarded:
                     box = face.box() if face is not None else None
                     scene_inputs[index]["face_box"] = list(box) if box is not None else None
+                if fine:
                     fine_frames[index] = face_return_fine_scene.frame(rgb, box)
     except (DecodeError, cv2.error, ValueError):
         coverage["reason"] = "native_measurement_unavailable"
@@ -233,6 +249,12 @@ def _return_pass(details, inputs, yunet, recognizer, deadline, incumbent, planne
     coverage.update(status="no_distinct_range", reason=None)
     if not face_return.distinct(candidate, table, incumbent):
         return
+    if guarded:
+        quartiles = [face_return.scene_lower_quartile(features[a], features[b])
+                     for a, b in (candidate.scene_frames[:2], candidate.scene_frames[2:])]
+        if any(value is None or value < GUARDED_SCENE_QUARTILE_POINT for value in quartiles):
+            coverage["reason"] = "surrounding_scene_changed"
+            return
     if fine:
         selected = [fine_edges.get(pair) for pair in (candidate.scene_frames[:2], candidate.scene_frames[2:])]
         if not any(selected):
@@ -255,6 +277,9 @@ def _return_pass(details, inputs, yunet, recognizer, deadline, incumbent, planne
         details["face_return"]["source_encoding"] = list(inputs.encoding)
     if fine:
         details["face_return"]["fine_scene_edges"] = selected
+    if guarded:
+        details["face_return"].update(source_carrier=source_carrier, scene_lower_quartiles=quartiles,
+                                      scene_lower_quartiles_hex=[value.hex() for value in quartiles])
 
 
 def _with_return(result, inputs, yunet, recognizer, deadline):
@@ -330,8 +355,8 @@ class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
 
     def activation_plan(self, ctx):
         return_inputs = (" Up to 64 additional native inputs for the distinct return check, with up to 75 fallback inputs "
-                         "on tested H.264 profiles and up to 60 further inputs on the tested 120-frame profile when "
-                         "finer background detail is needed, within the same budget."
+                         "on tested H.264 profiles or 60 on guarded VP9 and HEVC profiles. The tested 120-frame "
+                         "H.264 profile can use up to 60 further inputs for finer background detail, within the same budget."
                          if settings.video_face_short_return_review else "")
         return (*super().activation_plan(ctx), ActivationUse(self.APPEARANCE, 1, '112 px aligned face',
             'One native aligned face at a time; 128 float32 appearance values per retained frame',

@@ -1,0 +1,1880 @@
+{
+  "checks": {
+    "hevc": {
+      "coverage": true,
+      "cut": true,
+      "dense_swap_loss": true,
+      "exposed_cut_correction": true,
+      "ordinary": true,
+      "source_groups": true,
+      "swap_gain": true
+    },
+    "vp9": {
+      "coverage": true,
+      "cut": true,
+      "dense_swap_loss": true,
+      "exposed_cut_correction": true,
+      "ordinary": true,
+      "source_groups": true,
+      "swap_gain": true
+    }
+  },
+  "expected": {
+    "exposed": {
+      "hevc": {
+        "added_held_groups": 4,
+        "counts": {
+          "cut": {
+            "baseline_flags": 1,
+            "baseline_located": 0,
+            "cases": 4,
+            "dense_flags": 2,
+            "fallback_measured": 4,
+            "guarded_dense_flags": 0,
+            "guarded_located": 0,
+            "unfiltered_located": 0
+          },
+          "ordinary": {
+            "baseline_flags": 2,
+            "baseline_located": 0,
+            "cases": 20,
+            "dense_flags": 0,
+            "fallback_measured": 20,
+            "guarded_dense_flags": 0,
+            "guarded_located": 0,
+            "unfiltered_located": 0
+          },
+          "swap": {
+            "baseline_flags": 0,
+            "baseline_located": 0,
+            "cases": 8,
+            "dense_flags": 8,
+            "fallback_measured": 8,
+            "guarded_dense_flags": 8,
+            "guarded_located": 8,
+            "unfiltered_located": 8
+          }
+        }
+      },
+      "vp9": {
+        "added_held_groups": 4,
+        "counts": {
+          "cut": {
+            "baseline_flags": 1,
+            "baseline_located": 0,
+            "cases": 4,
+            "dense_flags": 2,
+            "fallback_measured": 4,
+            "guarded_dense_flags": 0,
+            "guarded_located": 0,
+            "unfiltered_located": 0
+          },
+          "ordinary": {
+            "baseline_flags": 0,
+            "baseline_located": 0,
+            "cases": 20,
+            "dense_flags": 0,
+            "fallback_measured": 20,
+            "guarded_dense_flags": 0,
+            "guarded_located": 0,
+            "unfiltered_located": 0
+          },
+          "swap": {
+            "baseline_flags": 0,
+            "baseline_located": 0,
+            "cases": 8,
+            "dense_flags": 8,
+            "fallback_measured": 8,
+            "guarded_dense_flags": 8,
+            "guarded_located": 8,
+            "unfiltered_located": 8
+          }
+        }
+      }
+    },
+    "held": {
+      "hevc": {
+        "added_held_groups": 5,
+        "counts": {
+          "cut": {
+            "baseline_flags": 2,
+            "baseline_located": 0,
+            "cases": 12,
+            "dense_flags": 0,
+            "fallback_measured": 12,
+            "guarded_dense_flags": 0,
+            "guarded_located": 0,
+            "unfiltered_located": 0
+          },
+          "ordinary": {
+            "baseline_flags": 3,
+            "baseline_located": 0,
+            "cases": 18,
+            "dense_flags": 0,
+            "fallback_measured": 17,
+            "guarded_dense_flags": 0,
+            "guarded_located": 0,
+            "unfiltered_located": 0
+          },
+          "swap": {
+            "baseline_flags": 0,
+            "baseline_located": 0,
+            "cases": 12,
+            "dense_flags": 10,
+            "fallback_measured": 12,
+            "guarded_dense_flags": 10,
+            "guarded_located": 10,
+            "unfiltered_located": 10
+          }
+        }
+      },
+      "vp9": {
+        "added_held_groups": 5,
+        "counts": {
+          "cut": {
+            "baseline_flags": 1,
+            "baseline_located": 0,
+            "cases": 12,
+            "dense_flags": 0,
+            "fallback_measured": 12,
+            "guarded_dense_flags": 0,
+            "guarded_located": 0,
+            "unfiltered_located": 0
+          },
+          "ordinary": {
+            "baseline_flags": 0,
+            "baseline_located": 0,
+            "cases": 18,
+            "dense_flags": 0,
+            "fallback_measured": 18,
+            "guarded_dense_flags": 0,
+            "guarded_located": 0,
+            "unfiltered_located": 0
+          },
+          "swap": {
+            "baseline_flags": 0,
+            "baseline_located": 0,
+            "cases": 12,
+            "dense_flags": 10,
+            "fallback_measured": 12,
+            "guarded_dense_flags": 10,
+            "guarded_located": 10,
+            "unfiltered_located": 10
+          }
+        }
+      }
+    }
+  },
+  "exposed": {
+    "hevc": [
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 2,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [
+          [
+            25,
+            44
+          ]
+        ],
+        "dense": null,
+        "group": 2,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 2,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 2,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 2,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": [
+          54,
+          60
+        ],
+        "group": 2,
+        "guard_min_quartile": 0.9852030873298645,
+        "kind": "swap",
+        "measured": true,
+        "truth": [
+          54,
+          60
+        ]
+      },
+      {
+        "baseline": [],
+        "dense": [
+          68,
+          74
+        ],
+        "group": 2,
+        "guard_min_quartile": 0.9820712804794312,
+        "kind": "swap",
+        "measured": true,
+        "truth": [
+          67,
+          73
+        ]
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 3,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 3,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 3,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 3,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 3,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": [
+          68,
+          74
+        ],
+        "group": 3,
+        "guard_min_quartile": 0.9839539527893066,
+        "kind": "swap",
+        "measured": true,
+        "truth": [
+          67,
+          73
+        ]
+      },
+      {
+        "baseline": [],
+        "dense": [
+          54,
+          60
+        ],
+        "group": 3,
+        "guard_min_quartile": 0.9917483925819397,
+        "kind": "swap",
+        "measured": true,
+        "truth": [
+          54,
+          60
+        ]
+      },
+      {
+        "baseline": [],
+        "dense": [
+          54,
+          60
+        ],
+        "group": 2,
+        "guard_min_quartile": 0.2899065315723419,
+        "kind": "cut",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": [
+          68,
+          74
+        ],
+        "group": 3,
+        "guard_min_quartile": 0.2764073610305786,
+        "kind": "cut",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 4,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 4,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 4,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 4,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 4,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": [
+          54,
+          60
+        ],
+        "group": 4,
+        "guard_min_quartile": 0.913020133972168,
+        "kind": "swap",
+        "measured": true,
+        "truth": [
+          54,
+          60
+        ]
+      },
+      {
+        "baseline": [],
+        "dense": [
+          68,
+          74
+        ],
+        "group": 4,
+        "guard_min_quartile": 0.9739739894866943,
+        "kind": "swap",
+        "measured": true,
+        "truth": [
+          67,
+          73
+        ]
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 5,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [
+          [
+            25,
+            50
+          ]
+        ],
+        "dense": null,
+        "group": 5,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 5,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 5,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 5,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": [
+          68,
+          74
+        ],
+        "group": 5,
+        "guard_min_quartile": 0.9936200380325317,
+        "kind": "swap",
+        "measured": true,
+        "truth": [
+          67,
+          73
+        ]
+      },
+      {
+        "baseline": [],
+        "dense": [
+          54,
+          60
+        ],
+        "group": 5,
+        "guard_min_quartile": 0.9881861209869385,
+        "kind": "swap",
+        "measured": true,
+        "truth": [
+          54,
+          60
+        ]
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 4,
+        "guard_min_quartile": null,
+        "kind": "cut",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [
+          [
+            62,
+            75
+          ]
+        ],
+        "dense": null,
+        "group": 5,
+        "guard_min_quartile": null,
+        "kind": "cut",
+        "measured": true,
+        "truth": null
+      }
+    ],
+    "vp9": [
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 2,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 2,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 2,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 2,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 2,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": [
+          54,
+          60
+        ],
+        "group": 2,
+        "guard_min_quartile": 0.9876280426979065,
+        "kind": "swap",
+        "measured": true,
+        "truth": [
+          54,
+          60
+        ]
+      },
+      {
+        "baseline": [],
+        "dense": [
+          68,
+          74
+        ],
+        "group": 2,
+        "guard_min_quartile": 0.9876511096954346,
+        "kind": "swap",
+        "measured": true,
+        "truth": [
+          67,
+          73
+        ]
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 3,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 3,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 3,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 3,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 3,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": [
+          68,
+          74
+        ],
+        "group": 3,
+        "guard_min_quartile": 0.9823040962219238,
+        "kind": "swap",
+        "measured": true,
+        "truth": [
+          67,
+          73
+        ]
+      },
+      {
+        "baseline": [],
+        "dense": [
+          54,
+          60
+        ],
+        "group": 3,
+        "guard_min_quartile": 0.984602153301239,
+        "kind": "swap",
+        "measured": true,
+        "truth": [
+          54,
+          60
+        ]
+      },
+      {
+        "baseline": [],
+        "dense": [
+          54,
+          60
+        ],
+        "group": 2,
+        "guard_min_quartile": 0.2909461557865143,
+        "kind": "cut",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": [
+          68,
+          74
+        ],
+        "group": 3,
+        "guard_min_quartile": 0.2649923861026764,
+        "kind": "cut",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 4,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 4,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 4,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 4,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 4,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": [
+          54,
+          60
+        ],
+        "group": 4,
+        "guard_min_quartile": 0.91415935754776,
+        "kind": "swap",
+        "measured": true,
+        "truth": [
+          54,
+          60
+        ]
+      },
+      {
+        "baseline": [],
+        "dense": [
+          68,
+          74
+        ],
+        "group": 4,
+        "guard_min_quartile": 0.974486231803894,
+        "kind": "swap",
+        "measured": true,
+        "truth": [
+          67,
+          73
+        ]
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 5,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 5,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 5,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 5,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 5,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": [
+          68,
+          74
+        ],
+        "group": 5,
+        "guard_min_quartile": 0.9931017160415649,
+        "kind": "swap",
+        "measured": true,
+        "truth": [
+          67,
+          73
+        ]
+      },
+      {
+        "baseline": [],
+        "dense": [
+          54,
+          60
+        ],
+        "group": 5,
+        "guard_min_quartile": 0.9859212040901184,
+        "kind": "swap",
+        "measured": true,
+        "truth": [
+          54,
+          60
+        ]
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 4,
+        "guard_min_quartile": null,
+        "kind": "cut",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [
+          [
+            62,
+            75
+          ]
+        ],
+        "dense": null,
+        "group": 5,
+        "guard_min_quartile": null,
+        "kind": "cut",
+        "measured": true,
+        "truth": null
+      }
+    ]
+  },
+  "held": {
+    "hevc": [
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 0,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [
+          [
+            25,
+            44
+          ]
+        ],
+        "dense": null,
+        "group": 0,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 0,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": [
+          54,
+          60
+        ],
+        "group": 0,
+        "guard_min_quartile": 0.9955736994743347,
+        "kind": "swap",
+        "measured": true,
+        "truth": [
+          54,
+          60
+        ]
+      },
+      {
+        "baseline": [],
+        "dense": [
+          68,
+          74
+        ],
+        "group": 0,
+        "guard_min_quartile": 0.9926738739013672,
+        "kind": "swap",
+        "measured": true,
+        "truth": [
+          67,
+          73
+        ]
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 0,
+        "guard_min_quartile": null,
+        "kind": "cut",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 0,
+        "guard_min_quartile": null,
+        "kind": "cut",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 1,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 1,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 1,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": [
+          54,
+          60
+        ],
+        "group": 1,
+        "guard_min_quartile": 0.9859873652458191,
+        "kind": "swap",
+        "measured": true,
+        "truth": [
+          54,
+          60
+        ]
+      },
+      {
+        "baseline": [],
+        "dense": [
+          68,
+          74
+        ],
+        "group": 1,
+        "guard_min_quartile": 0.9950011372566223,
+        "kind": "swap",
+        "measured": true,
+        "truth": [
+          67,
+          73
+        ]
+      },
+      {
+        "baseline": [
+          [
+            62,
+            87
+          ]
+        ],
+        "dense": null,
+        "group": 1,
+        "guard_min_quartile": null,
+        "kind": "cut",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 1,
+        "guard_min_quartile": null,
+        "kind": "cut",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 2,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 2,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": false,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 2,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 2,
+        "guard_min_quartile": null,
+        "kind": "swap",
+        "measured": true,
+        "truth": [
+          54,
+          60
+        ]
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 2,
+        "guard_min_quartile": null,
+        "kind": "swap",
+        "measured": true,
+        "truth": [
+          67,
+          73
+        ]
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 2,
+        "guard_min_quartile": null,
+        "kind": "cut",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 2,
+        "guard_min_quartile": null,
+        "kind": "cut",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 3,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [
+          [
+            50,
+            100
+          ]
+        ],
+        "dense": null,
+        "group": 3,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 3,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": [
+          54,
+          60
+        ],
+        "group": 3,
+        "guard_min_quartile": 0.9917063117027283,
+        "kind": "swap",
+        "measured": true,
+        "truth": [
+          54,
+          60
+        ]
+      },
+      {
+        "baseline": [],
+        "dense": [
+          68,
+          74
+        ],
+        "group": 3,
+        "guard_min_quartile": 0.9776958227157593,
+        "kind": "swap",
+        "measured": true,
+        "truth": [
+          67,
+          73
+        ]
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 3,
+        "guard_min_quartile": null,
+        "kind": "cut",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 3,
+        "guard_min_quartile": null,
+        "kind": "cut",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 4,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 4,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 4,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": [
+          54,
+          60
+        ],
+        "group": 4,
+        "guard_min_quartile": 0.9987246990203857,
+        "kind": "swap",
+        "measured": true,
+        "truth": [
+          54,
+          60
+        ]
+      },
+      {
+        "baseline": [],
+        "dense": [
+          68,
+          74
+        ],
+        "group": 4,
+        "guard_min_quartile": 0.9994603991508484,
+        "kind": "swap",
+        "measured": true,
+        "truth": [
+          67,
+          73
+        ]
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 4,
+        "guard_min_quartile": null,
+        "kind": "cut",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [
+          [
+            62,
+            75
+          ]
+        ],
+        "dense": null,
+        "group": 4,
+        "guard_min_quartile": null,
+        "kind": "cut",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 5,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [
+          [
+            50,
+            69
+          ]
+        ],
+        "dense": null,
+        "group": 5,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 5,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": [
+          54,
+          60
+        ],
+        "group": 5,
+        "guard_min_quartile": 0.9998628497123718,
+        "kind": "swap",
+        "measured": true,
+        "truth": [
+          54,
+          60
+        ]
+      },
+      {
+        "baseline": [],
+        "dense": [
+          68,
+          74
+        ],
+        "group": 5,
+        "guard_min_quartile": 0.9998340010643005,
+        "kind": "swap",
+        "measured": true,
+        "truth": [
+          67,
+          73
+        ]
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 5,
+        "guard_min_quartile": null,
+        "kind": "cut",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 5,
+        "guard_min_quartile": null,
+        "kind": "cut",
+        "measured": true,
+        "truth": null
+      }
+    ],
+    "vp9": [
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 0,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 0,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 0,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": [
+          54,
+          60
+        ],
+        "group": 0,
+        "guard_min_quartile": 0.9959500432014465,
+        "kind": "swap",
+        "measured": true,
+        "truth": [
+          54,
+          60
+        ]
+      },
+      {
+        "baseline": [],
+        "dense": [
+          68,
+          74
+        ],
+        "group": 0,
+        "guard_min_quartile": 0.9951444864273071,
+        "kind": "swap",
+        "measured": true,
+        "truth": [
+          67,
+          73
+        ]
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 0,
+        "guard_min_quartile": null,
+        "kind": "cut",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 0,
+        "guard_min_quartile": null,
+        "kind": "cut",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 1,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 1,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 1,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": [
+          54,
+          60
+        ],
+        "group": 1,
+        "guard_min_quartile": 0.9822795391082764,
+        "kind": "swap",
+        "measured": true,
+        "truth": [
+          54,
+          60
+        ]
+      },
+      {
+        "baseline": [],
+        "dense": [
+          68,
+          74
+        ],
+        "group": 1,
+        "guard_min_quartile": 0.9926081895828247,
+        "kind": "swap",
+        "measured": true,
+        "truth": [
+          67,
+          73
+        ]
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 1,
+        "guard_min_quartile": null,
+        "kind": "cut",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 1,
+        "guard_min_quartile": null,
+        "kind": "cut",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 2,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 2,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 2,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 2,
+        "guard_min_quartile": null,
+        "kind": "swap",
+        "measured": true,
+        "truth": [
+          54,
+          60
+        ]
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 2,
+        "guard_min_quartile": null,
+        "kind": "swap",
+        "measured": true,
+        "truth": [
+          67,
+          73
+        ]
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 2,
+        "guard_min_quartile": null,
+        "kind": "cut",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 2,
+        "guard_min_quartile": null,
+        "kind": "cut",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 3,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 3,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 3,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": [
+          54,
+          60
+        ],
+        "group": 3,
+        "guard_min_quartile": 0.9903227090835571,
+        "kind": "swap",
+        "measured": true,
+        "truth": [
+          54,
+          60
+        ]
+      },
+      {
+        "baseline": [],
+        "dense": [
+          68,
+          74
+        ],
+        "group": 3,
+        "guard_min_quartile": 0.9833793044090271,
+        "kind": "swap",
+        "measured": true,
+        "truth": [
+          67,
+          73
+        ]
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 3,
+        "guard_min_quartile": null,
+        "kind": "cut",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 3,
+        "guard_min_quartile": null,
+        "kind": "cut",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 4,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 4,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 4,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": [
+          54,
+          60
+        ],
+        "group": 4,
+        "guard_min_quartile": 0.9986231327056885,
+        "kind": "swap",
+        "measured": true,
+        "truth": [
+          54,
+          60
+        ]
+      },
+      {
+        "baseline": [],
+        "dense": [
+          68,
+          74
+        ],
+        "group": 4,
+        "guard_min_quartile": 0.9990520477294922,
+        "kind": "swap",
+        "measured": true,
+        "truth": [
+          67,
+          73
+        ]
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 4,
+        "guard_min_quartile": null,
+        "kind": "cut",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [
+          [
+            62,
+            75
+          ]
+        ],
+        "dense": null,
+        "group": 4,
+        "guard_min_quartile": null,
+        "kind": "cut",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 5,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 5,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 5,
+        "guard_min_quartile": null,
+        "kind": "ordinary",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": [
+          54,
+          60
+        ],
+        "group": 5,
+        "guard_min_quartile": 0.9998235702514648,
+        "kind": "swap",
+        "measured": true,
+        "truth": [
+          54,
+          60
+        ]
+      },
+      {
+        "baseline": [],
+        "dense": [
+          68,
+          74
+        ],
+        "group": 5,
+        "guard_min_quartile": 0.9997994899749756,
+        "kind": "swap",
+        "measured": true,
+        "truth": [
+          67,
+          73
+        ]
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 5,
+        "guard_min_quartile": null,
+        "kind": "cut",
+        "measured": true,
+        "truth": null
+      },
+      {
+        "baseline": [],
+        "dense": null,
+        "group": 5,
+        "guard_min_quartile": null,
+        "kind": "cut",
+        "measured": true,
+        "truth": null
+      }
+    ]
+  },
+  "local_verification": {
+    "authoring": {
+      "archive_picture_records": 792,
+      "authored_intervals": 60,
+      "byte_identical_reconstructions": 84,
+      "status": "verified"
+    },
+    "replay": {
+      "exposed": {
+        "exact_native_crops": 0,
+        "native_delivered_pictures": 0,
+        "native_edge_pictures": 80,
+        "reviewed_decisions": 192
+      },
+      "held": {
+        "exact_native_crops": 60,
+        "native_delivered_pictures": 10080,
+        "native_edge_pictures": 80,
+        "reviewed_decisions": 252
+      },
+      "status": "verified"
+    },
+    "runtime": {
+      "rows": [
+        {
+          "codec": "vp9",
+          "elapsed_seconds": 3.081,
+          "guarded_range": [
+            2.16,
+            2.4
+          ],
+          "role": "held_swap",
+          "unfiltered_range_found": true
+        },
+        {
+          "codec": "vp9",
+          "elapsed_seconds": 3.605,
+          "guarded_range": null,
+          "role": "held_original",
+          "unfiltered_range_found": false
+        },
+        {
+          "codec": "vp9",
+          "elapsed_seconds": 4.802,
+          "guarded_range": null,
+          "role": "exposed_genuine_cut",
+          "unfiltered_range_found": true
+        },
+        {
+          "codec": "hevc",
+          "elapsed_seconds": 4.153,
+          "guarded_range": [
+            2.16,
+            2.4
+          ],
+          "role": "held_swap",
+          "unfiltered_range_found": true
+        },
+        {
+          "codec": "hevc",
+          "elapsed_seconds": 2.99,
+          "guarded_range": null,
+          "role": "held_original",
+          "unfiltered_range_found": false
+        },
+        {
+          "codec": "hevc",
+          "elapsed_seconds": 3.061,
+          "guarded_range": null,
+          "role": "exposed_genuine_cut",
+          "unfiltered_range_found": true
+        }
+      ],
+      "status": "verified"
+    }
+  },
+  "runtime_seconds": 271.393,
+  "schema": "chipmunk.video-face-codec-background-ledger/1"
+}

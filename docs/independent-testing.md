@@ -224,6 +224,9 @@ reports newly measured false highlights and source-localization results from two
 The [paragraph context transfer](writing-paragraph-context-transfer-2026-11-11.md)
 compares isolated and neighboring paragraph responses on 11 new source articles,
 with separate counts for originals, ordinary edits, and two generators.
+The [eight-word insert comparison](writing-phrase-context-stability-2026-11-12.md)
+replays exact phrase locations across two source contexts and compares their
+responses with unchanged articles and ordinary substitutions.
 The [fiction transfer](writing-fiction-paragraph-transfer-2026-11-11.md) applies
 the same frozen rule to a new genre and counts ordinary human replacements.
 The [practical DOCX comparison](writing-practical-notice-transfer-2026-11-11.md)
@@ -371,6 +374,9 @@ source crops at two additional clip lengths.
 The [six-picture codec comparison](video-face-six-codec-transfer-2026-11-12.md)
 audits VP9 and HEVC deliveries and replays the same false cut ranges against
 matched H.264 inputs and native background pixels.
+The [background comparison on VP9 and HEVC](video-face-codec-background-transfer-2026-11-12.md)
+rebuilds held swaps and ordinary cuts, then replays their source crops,
+timing, and background measurements.
 The [timing and codec follow-up](video-timing-coverage-and-codec-holds-2026-11-11.md)
 records when a single timing window leaves change unassessed and compares
 exact and approximate picture holds on the same lossy and lossless deliveries.
@@ -431,6 +437,9 @@ room deliveries under the same fixed correction.
 The [temporal corroboration trial](audio-temporal-corroboration-2026-11-11.md)
 uses three native windows per track and holds the speech gate fixed when
 comparing the outcomes under two additional background recordings.
+The [simulated call-processing comparison](audio-communication-transfer-2026-11-12.md)
+verifies the exact original and processed windows and reconstructs the decision
+counts with a standard-library reviewer.
 The [two-microphone noise trial](audio-natural-stereo-coherence-2026-11-11.md)
 compares score directions after a fixed filter with two recorded meeting
 backgrounds, six genuine readers and three synthetic generator families.

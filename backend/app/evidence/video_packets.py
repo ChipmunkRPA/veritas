@@ -717,10 +717,14 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
             indices = candidate["window"]["frame_indices"]
             start, end = face_return["start_stream_s"], face_return["end_stream_s"]
             origin = source["timeline_origin_s"]
+            scene_note = ("Background patterns outside the face were similar across both ends of the selected range. "
+                          if face_return["method"] == face_return_binding.GUARDED_CODEC_METHOD else
+                          "The surrounding scene remained similar at both sampled boundaries. ")
             packet.update(title="Brief face-change range to review", evidence_type="anomaly", claim_scope="sampled_window",
                           semantics=face_return["method"], face_return=face_return, affects_overall_confidence=False,
                           observation=face_return_binding.observation(face_return),
-                          interpretation="The appearance within the selected time range differs from the views immediately before and after it. The surrounding scene remained similar at both sampled boundaries. Compare the three original crops for possible changes in expression, angle, lighting, or the face itself.",
+                          interpretation=("The appearance within the selected time range differs from the views immediately before and after it. "
+                                          + scene_note + "Compare the three original crops for possible changes in expression, angle, lighting, or the face itself."),
                           measurements=[{"label": "Face appearance separation", "value": face_return["response"], "unit": "uncalibrated feature distance"},
                                         {"label": "Measured face samples", "value": len(face_return["frame_inputs"]), "unit": "frames"}],
                           window={"frame_indices": indices, "time_base": table.time_base,

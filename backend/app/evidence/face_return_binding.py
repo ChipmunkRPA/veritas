@@ -11,6 +11,7 @@ from app.evidence.video_packet_versions import (
     DENSE_DURATION_FACE_VERSION,
     DENSE_SHORT_FACE_VERSION,
     FINE_SCENE_FACE_VERSION,
+    GUARDED_CODEC_FACE_VERSION,
     SHORT_FACE_VERSION,
 )
 
@@ -18,7 +19,10 @@ METHOD = "face-short-return/1"
 DENSE_METHOD = "face-short-return/2"
 DENSE_DURATION_METHOD = "face-short-return/3"
 FINE_SCENE_METHOD = "face-short-return/4"
+GUARDED_CODEC_METHOD = "face-short-return/5"
 FINE_SCENE_FRAME_COUNT = 120
+GUARDED_CODEC_FRAME_COUNT = 120
+GUARDED_SCENE_QUARTILE_POINT = .60
 COARSE_TILE_MIN = 8
 FINE_TILE_MIN = 16
 FINE_QUADRANT_MIN = 3
@@ -27,10 +31,12 @@ FINE_MEDIAN_MIN = .90
 FINE_LUMA_MAX = 8.0
 FINE_CHROMA_MAX = 6.0
 DENSE_ENCODING = ("h264", "yuv420p")
+GUARDED_CODEC_CARRIERS = {("vp9", "yuv420p"): "webm", ("hevc", "yuv420p"): "mp4"}
 DENSE_DIMENSIONS = (640, 360)
 DENSE_FRAME_PROFILES = {80: DENSE_DURATION_METHOD, 120: DENSE_METHOD, 150: DENSE_DURATION_METHOD}
 METHOD_VERSIONS = {METHOD: SHORT_FACE_VERSION, DENSE_METHOD: DENSE_SHORT_FACE_VERSION,
-                   DENSE_DURATION_METHOD: DENSE_DURATION_FACE_VERSION, FINE_SCENE_METHOD: FINE_SCENE_FACE_VERSION}
+                   DENSE_DURATION_METHOD: DENSE_DURATION_FACE_VERSION, FINE_SCENE_METHOD: FINE_SCENE_FACE_VERSION,
+                   GUARDED_CODEC_METHOD: GUARDED_CODEC_FACE_VERSION}
 POINT = 0.10
 SCENE_POINT = 0.55
 ROLES = ("before", "during", "after")
@@ -97,10 +103,7 @@ def _native_inputs(items, source, table_pts, interpolated):
     return by_index
 
 
-def _validate_fine_scene(record, faces, scene):
-    edges = record["fine_scene_edges"]
-    _require(isinstance(edges, list) and len(edges) == 2 and any(edge is not None for edge in edges),
-             "Fine scene support must supplement at least one sampled boundary")
+def _validate_scene_boxes(faces, scene):
     for item in scene.values():
         box = item["face_box"]
         if box is not None:
@@ -113,6 +116,12 @@ def _validate_fine_scene(record, faces, scene):
             bbox = observed["bbox"]
             _require(box == [bbox[key] for key in ("x", "y", "w", "h")],
                      "Fine scene exclusion disagrees with the measured face box")
+
+
+def _validate_fine_scene(record):
+    edges = record["fine_scene_edges"]
+    _require(isinstance(edges, list) and len(edges) == 2 and any(edge is not None for edge in edges),
+             "Fine scene support must supplement at least one sampled boundary")
     for edge, correlation in zip(edges, record["scene_correlations_hex"], strict=True):
         if edge is None:
             continue
@@ -129,6 +138,15 @@ def _validate_fine_scene(record, faces, scene):
                  and 0 <= float.fromhex(edge["luma_p90_hex"]) <= FINE_LUMA_MAX
                  and 0 <= float.fromhex(edge["chroma_p90_hex"]) <= FINE_CHROMA_MAX,
                  "Fine scene support does not meet the measured background requirements")
+
+
+def _validate_guarded_scene(record):
+    values = record["scene_lower_quartiles"]
+    exact = record["scene_lower_quartiles_hex"]
+    _require(isinstance(values, list) and isinstance(exact, list) and len(values) == len(exact) == 2,
+             "Guarded face evidence needs two background quartiles")
+    for value, hex_value, correlation in zip(values, exact, record["scene_correlations_hex"], strict=True):
+        _exact(value, hex_value, GUARDED_SCENE_QUARTILE_POINT, min(1.00001, float.fromhex(correlation) + 1e-6))
 
 
 def validate_record(record, source, *, table_pts=None, interpolated=(), rotation=0, truncated=False):
@@ -163,12 +181,18 @@ def validate_record(record, source, *, table_pts=None, interpolated=(), rotation
              and scheduled == sorted(set(scheduled)) and scheduled[0] == 0
              and not set(scheduled).intersection(interpolated), "Short face-change evidence has an invalid sample grid")
     if method != METHOD:
-        matches_profile = (frame_count == FINE_SCENE_FRAME_COUNT if method == FINE_SCENE_METHOD
-                           else DENSE_FRAME_PROFILES.get(frame_count) == method)
-        _require(dimensions == DENSE_DIMENSIONS and matches_profile
-                 and tuple(record.get("source_encoding", ())) == DENSE_ENCODING
-                 and scheduled == list(range(0, frame_count, 2)),
-                 "Dense short face-change evidence requires its measured H.264 delivery and native sample grid")
+        _require(dimensions == DENSE_DIMENSIONS and scheduled == list(range(0, frame_count, 2)),
+                 "Dense short face-change evidence requires its measured native sample grid")
+        encoding = tuple(record.get("source_encoding", ()))
+        if method == GUARDED_CODEC_METHOD:
+            carrier = GUARDED_CODEC_CARRIERS.get(encoding)
+            _require(frame_count == GUARDED_CODEC_FRAME_COUNT and carrier is not None and record.get("source_carrier") == carrier,
+                     "Guarded short face-change evidence requires its measured VP9/WebM or HEVC/MP4 profile")
+        else:
+            matches_profile = (frame_count == FINE_SCENE_FRAME_COUNT if method == FINE_SCENE_METHOD
+                               else DENSE_FRAME_PROFILES.get(frame_count) == method)
+            _require(matches_profile and encoding == DENSE_ENCODING,
+                     "Dense short face-change evidence requires its measured H.264 delivery")
     entry = scheduled.index(record["start_frame_index"])
     exit_ = scheduled.index(record["end_frame_index"])
     core_size = exit_ - entry
@@ -208,11 +232,20 @@ def validate_record(record, source, *, table_pts=None, interpolated=(), rotation
     for i in faces.keys() & scene.keys():
         _require(all(faces[i][key] == scene[i][key] for key in ("pts", "decoded_rgb_sha256")),
                  "Short face and scene measurements disagree on a source picture")
-    if method == FINE_SCENE_METHOD:
-        _validate_fine_scene(record, faces, scene)
+    if method in {FINE_SCENE_METHOD, GUARDED_CODEC_METHOD}:
+        _validate_scene_boxes(faces, scene)
     else:
-        _require("fine_scene_edges" not in record and all("face_box" not in item for item in scene.values()),
-                 "Fine scene support requires its dedicated evidence version")
+        _require(all("face_box" not in item for item in scene.values()),
+                 "Scene exclusion boxes require their dedicated evidence version")
+    if method == FINE_SCENE_METHOD:
+        _validate_fine_scene(record)
+    else:
+        _require("fine_scene_edges" not in record, "Fine scene support requires its dedicated evidence version")
+    if method == GUARDED_CODEC_METHOD:
+        _validate_guarded_scene(record)
+    else:
+        _require(not {"source_carrier", "scene_lower_quartiles", "scene_lower_quartiles_hex"} & record.keys(),
+                 "Guarded codec support requires its dedicated evidence version")
 
 
 def validate_packet(packet, source, *, table_pts=None, interpolated=(), rotation=0, truncated=False):

@@ -169,6 +169,9 @@ checks new layouts and documents the ambiguity when a third matching area is pre
 The [third-copy holdout](image-embedded-pair-third-guard-2026-11-12.md)
 tests when to withhold the comparison while retaining the exact differences
 in valid pairs.
+The [screenshot-size transfer](image-embedded-pair-canvas-transfer-2026-11-12.md)
+replays 870 exact pixel inputs and measures ambiguous matches involving a
+third view resized by different amounts.
 The [quality-90 earlier-copy study](image-reference-jpeg90-transfer-2026-11-12.md)
 rebuilds both JPEG deliveries, checks mapped native crops, and verifies the
 paid result's API, PDF, and JSON evidence in the local app.

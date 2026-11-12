@@ -177,6 +177,12 @@ The [RADAR transfer and longer-file confirmation](audio-radar-transfer-2026-11-1
 start from bounded prefixes of two public archive splits. A model-free
 reader reopens official labels, native clocks and all matched short
 mixtures, then reproduces the decision counts from the saved responses.
+The [WAV transfer replay](audio-radar-transfer-2026-11-12.md#local-evidence)
+compares native decode and exact voice inputs in WAV and FLAC. The
+[publisher-labeled partial speech comparison](audio-partial-publisher-transfer-2026-11-12.md)
+uses a separate public archive prefix, six generator families and matched
+traffic and café scenes. Its reader checks the decision geometry without
+model weights and can also verify the local PCM inputs.
 The [enhanced-speech comparison](audio-noise-views-transfer-2026-11-12.md)
 keeps the development and held noise recordings separate. Its public
 replay recounts the fixed decisions and shows the best held gain allowed

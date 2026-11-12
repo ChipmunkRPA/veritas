@@ -1,0 +1,70 @@
+{
+  "authorship_confidence_weight": 0,
+  "isolated_app": {
+    "cases": {
+      "three_window_ordinary": {
+        "pdf_waveforms": 0,
+        "ranges": [
+          [
+            0,
+            48000
+          ],
+          [
+            69600,
+            117600
+          ],
+          [
+            139200,
+            187200
+          ]
+        ],
+        "same_review_as_flac": true,
+        "signed_source_replay": "verified",
+        "status": "no_corroboration",
+        "wav_file_sha256": "cb1e2ca211b226f229abd27d1550f42d351ff224354caa1201217285d8282268",
+        "whole_file": "inconclusive",
+        "windows": 3
+      },
+      "three_window_positive": {
+        "pdf_waveforms": 3,
+        "ranges": [
+          [
+            0,
+            48000
+          ],
+          [
+            67352,
+            115352
+          ],
+          [
+            134705,
+            182705
+          ]
+        ],
+        "same_review_as_flac": true,
+        "signed_source_replay": "verified",
+        "status": "corroborated",
+        "wav_file_sha256": "6ef9fd97d8c3894b5d151bf327703e6b773bfdc7b7145a74c27413e66e19c3f7",
+        "whole_file": "inconclusive",
+        "windows": 3
+      }
+    },
+    "paid_cases": 2,
+    "unpaid_jobs": 0
+  },
+  "paired_containers": 72,
+  "schema": "chipmunk.audio-long-wav-parity/1",
+  "source_panels": {
+    "audio-radar-long-confirmation-2026-11-12.json": {
+      "paired_containers": 40,
+      "source_receipt_sha256": "fe0f627891270f85a1655a453dd652778f62bb84d2d1f19248a3828827b06639",
+      "window_inputs": 98
+    },
+    "audio-radar-transfer-2026-11-12.json": {
+      "paired_containers": 32,
+      "source_receipt_sha256": "8a95b58b5e31b183c4e397eaf66812de684c0b4b39f4b008aba0848a4f64d48e",
+      "window_inputs": 73
+    }
+  },
+  "window_inputs": 171
+}

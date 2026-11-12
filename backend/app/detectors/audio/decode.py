@@ -198,6 +198,8 @@ def decode_audio(path: Path, *, source_sha256: str, max_seconds: float = 600.0,
             mapping["source_container"] = fmt.get("format_name")
             bits = _number(stream.get("bits_per_raw_sample"))
             mapping["source_bit_depth"] = int(bits) if bits is not None else None
+        if mapping["source_codec"] == "pcm_s16le" and fmt.get("format_name") == "wav":
+            mapping.update(source_container="wav", source_bit_depth=16)
         if mapping["source_codec"] == "mp3":
             mapping["source_container"] = fmt.get("format_name")
             bit_rate = _number(stream.get("bit_rate"))

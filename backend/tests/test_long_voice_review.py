@@ -1,3 +1,4 @@
+import shutil
 from copy import deepcopy
 from hashlib import sha256
 from types import SimpleNamespace
@@ -10,7 +11,7 @@ from sqlalchemy.orm import Session
 from app.core.canonical import canonical_json
 from app.core.config import settings
 from app.detectors.audio import long_voice_review
-from app.detectors.audio.decode import read_wav
+from app.detectors.audio.decode import decode_audio, read_wav, wav_bytes
 from app.engine import runs
 from app.engine.boundary import Deadline
 from app.engine.detector import Profile
@@ -46,6 +47,20 @@ def test_exact_disjoint_geometry(samples, starts):
 ])
 def test_declines_other_native_profiles(change):
     assert not binding.supported_source(native_source(144_000) | change)
+
+
+@pytest.mark.skipif(not shutil.which("ffmpeg") or not shutil.which("ffprobe"), reason="Native audio decoder required")
+def test_native_pcm_wav_has_the_same_long_window_scope(tmp_path):
+    pcm = np.arange(144_001, dtype=np.int32).astype("<i2").astype("<f4") / 32768
+    body = wav_bytes(pcm)
+    path = tmp_path / "source"
+    path.write_bytes(body)
+    decoded = decode_audio(path, source_sha256=sha256(body).hexdigest())
+    np.testing.assert_array_equal(decoded.pcm, pcm)
+    assert binding.supported_source(decoded.mapping)
+    assert binding.intervals(len(decoded.pcm)) == [(0, 48_000), (48_000, 96_000), (96_001, 144_001)]
+    assert not binding.supported_source(decoded.mapping | {"source_container": "matroska"})
+    assert not binding.supported_source(decoded.mapping | {"source_codec": "pcm_s24le"})
 
 
 @pytest.mark.parametrize(("directions", "status"), [

@@ -28,7 +28,7 @@ SHA = re.compile(r"[0-9a-f]{64}")
 def supported_source(source: dict) -> bool:
     samples = source.get("samples")
     return (type(samples) is int and 6 * RATE <= samples <= 14 * RATE
-            and source.get("source_codec") == source.get("source_container") == "flac"
+            and (source.get("source_codec"), source.get("source_container")) in (("flac", "flac"), ("pcm_s16le", "wav"))
             and source.get("source_bit_depth") == 16 and source.get("source_channels") == source.get("channels") == 1
             and source.get("source_sample_rate") == source.get("sample_rate") == RATE
             and len(source.get("audio_stream_indices", [0])) == 1 and source.get("timeline_time_base") == "1/16000"

@@ -21,7 +21,8 @@ SCOPE_REASON = ("This check requires Full analysis of six continuous decoded sec
 
 def source_metadata(mapping: dict) -> dict:
     metadata = {"source_codec": mapping.get("source_codec")}
-    keys = {"flac": ("source_container", "source_bit_depth"), "mp3": ("source_container", "source_bit_rate")}
+    keys = {"flac": ("source_container", "source_bit_depth"), "pcm_s16le": ("source_container", "source_bit_depth"),
+            "mp3": ("source_container", "source_bit_rate")}
     metadata.update({key: mapping[key] for key in keys.get(metadata["source_codec"], ()) if key in mapping})
     return metadata
 

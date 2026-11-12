@@ -113,7 +113,7 @@ or performance after the matched loud backgrounds in the short panel.
 ## Local evidence
 
 The Full audio worker runs the supplemental check on continuous native
-mono 16 kHz 16-bit FLAC lasting 6–14 seconds. It reports the assessed
+mono 16 kHz 16-bit FLAC or PCM WAV lasting 6–14 seconds. It reports the assessed
 three-second ranges on the original sample clock and supplies a playable
 clip and marked waveform for each corroborating AI-leaning window. The
 overall audio conclusion is separate. A result with no corroboration shows
@@ -129,6 +129,24 @@ Chrome played all five three-second excerpts, decoded their waveform
 images and confirmed that changing the active excerpt pauses the previous
 one. The signed packages also verified with model and network imports
 disabled.
+
+The WAV extension reopens the 72 pinned longer FLACs from both publisher
+splits as native 16-bit WAV copies. Both containers produced the same
+decoded PCM, sample clocks and 171 previously scored window input hashes.
+Two isolated Full analyses with simulated prepaid checkout reproduced the
+earlier FLAC results. The synthetic WAV had three corroborating ranges
+with matching playback and marked waveforms. The genuine WAV had three
+window responses and no corroborating evidence. Both whole-file results
+were inconclusive. The API, JSON, Standard PDF and original-file signed
+replay agreed. This verifies lossless container transfer and carries zero
+overall confidence weight. [WAV parity and app receipt](evaluation-panels/audio-long-wav-parity-2026-11-12.json)
+
+To repeat the PCM and window comparison, use the same scratch source
+directory described below after reconstructing both panels.
+
+```sh
+PYTHONPATH=backend backend/.venv/bin/python -B -m scripts.review_audio_long_wav_parity "$source_dir"
+```
 
 ## Reproduce the source selection
 

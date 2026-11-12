@@ -97,6 +97,22 @@ integration remains unfinished.
 
 ## Progress on 12 November
 
+- The [public JPEG replay](image-jpeg-public-replay-2026-11-12.md)
+  reproduced 27 useful locations on 48 known edits, up from 13 with the
+  translation check alone, and produced zero flags on 48 ordinary
+  deliveries. A clean checkout and public sources supply the inputs.
+- The [PDF writing coverage table](writing-pdf-page-coverage-2026-11-12.md)
+  records which pages have local responses, context-only text, missing
+  mappings and unchecked image areas. Browser, PDF, JSON and signed source
+  replay agree. The writing check missed both known rewritten passages in
+  the mixed-page verification file.
+- The [overlapping speech-window comparison](audio-partial-publisher-transfer-2026-11-12.md)
+  found five of 12 partial edits with traffic, up from two, and added two
+  genuine flags. It located none under café noise. It stays experimental.
+  The [existing long speech review](audio-radar-transfer-2026-11-12.md#local-evidence)
+  now also accepts equivalent native PCM WAV. A parity check reproduced
+  171 window inputs from both containers, and the full app repeated the
+  existing evidence on a matched positive and genuine control.
 - The [between-block JPEG copy check](image-offgrid-copy-transfer-2026-11-12.md)
   added 19 correct locations across 64 edited test deliveries and produced
   zero flags on 124 assessed ordinary deliveries in a separate confirmation.

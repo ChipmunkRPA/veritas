@@ -630,13 +630,14 @@ orientation. It checks the overlap against the recorded integer offset,
 compares both decoded crops with the corresponding source pixels, and checks
 the embedded PNG hashes and binary mask bounds and pixel totals. Where the export
 includes an amber difference overlay, the reviewer checks every pixel against the
-full mask sliced at the submitted crop's coordinates. For the two resize
+full mask sliced at the submitted crop's coordinates. For the resize
 schemas, the reviewer reruns the resize comparison using the two source files
 and checks the recomputed framing, regions, and entire mask. It independently
 maps the submitted region back to the exact earlier-copy crop using rational
-coordinates. The crop-and-resize schema also verifies the earlier area's exact
-offset and size. The reviewer reports empty comparable and unassessed results
-separately. A mismatch exits with status 1. [Resize evaluation](image-reference-resize-transfer-2026-11-11.md) · [Crop-and-resize evaluation](image-reference-crop-resize-transfer-2026-11-11.md)
+coordinates. The crop-and-resize schemas verify the earlier area's exact offset
+and size. The scoped PNG fallback also verifies the reproduced resize, pixel
+match count, and exact support tiles. The reviewer reports empty comparable
+and unassessed results separately. A mismatch exits with status 1. [Resize evaluation](image-reference-resize-transfer-2026-11-11.md) · [JPEG crop and resize](image-reference-crop-resize-transfer-2026-11-11.md) · [Exact PNG crop and resize](image-png-exact-crop-resize-2026-11-11.md)
 
 The comparison JSON is a standalone, unsigned export. This replay checks its
 geometry and source binding. The resize replay also checks the algorithm's

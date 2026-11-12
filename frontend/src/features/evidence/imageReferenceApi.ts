@@ -37,8 +37,16 @@ export interface ImageReferenceRecord {
   }
   submitted_over_reference_xy?: [[number, number], [number, number]]
   reference_crop_bounds?: NativeImageArea
+  supported_resize_kernels?: string[]
+  exact_projection?: {
+    matched_pixels: number
+    matched_tiles: [number, number][]
+    rgb_sha256: string
+  }
   additional_regions?: number
 }
+
+export const exactPngCropResizeSchema = 'chipmunk.image-reference-comparison/5'
 
 export interface ImageReferenceResult {
   comparison: ImageReferenceRecord
@@ -76,6 +84,13 @@ export async function compareWithEarlierImage(analysisId: string, file: File, si
       || !Array.isArray(comparison.regions) || comparison.regions.some(region => !region)
       || !result?.pngs || typeof result.pngs !== 'object' || Array.isArray(result.pngs)) {
     throw new Error('The server returned an incomplete image comparison.')
+  }
+  const proof = comparison.exact_projection
+  if (comparison.schema === exactPngCropResizeSchema && (!comparison.reference_crop_bounds
+      || !proof || !Number.isSafeInteger(proof.matched_pixels) || !Array.isArray(proof.matched_tiles)
+      || !Array.isArray(comparison.supported_resize_kernels)
+      || !comparison.supported_resize_kernels.every(kernel => typeof kernel === 'string'))) {
+    throw new Error('The server returned an incomplete exact resize comparison.')
   }
   return result
 }

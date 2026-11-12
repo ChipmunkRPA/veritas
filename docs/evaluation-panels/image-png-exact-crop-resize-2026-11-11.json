@@ -1,0 +1,837 @@
+{
+  "coverage_diagnosis": {
+    "earlier_untouched_abstentions": 7,
+    "exact_texture_spread": 5,
+    "proposal_tile_folds": 2
+  },
+  "initial": {
+    "audit": {
+      "checks": {
+        "exposed_regression_passed": false,
+        "fresh_ordinary_passed": true,
+        "scope_qualifies": false
+      },
+      "panels": {
+        "commons": {
+          "exact_crop_proofs": 28,
+          "inputs": 120
+        },
+        "development": {
+          "exact_crop_proofs": 13,
+          "inputs": 80
+        },
+        "earlier": {
+          "exact_crop_proofs": 20,
+          "inputs": 120
+        },
+        "later": {
+          "exact_crop_proofs": 28,
+          "inputs": 120
+        }
+      },
+      "result_sha256": "ea490765d0b886d33aec7a41ea6154c0f2ed2d7e91d5c41e595389b19e09e369"
+    },
+    "commitments": {
+      "audit.json": "8ac91223d265f8153439bf416d2be4930f0fe2f0f4767e7b8dd016b01557c8e1",
+      "freeze.json": "2849ab1217a72be7c6f9df95c3da23215a8f9dfae5af45f1259bfe7469441a4a",
+      "result.json": "ea490765d0b886d33aec7a41ea6154c0f2ed2d7e91d5c41e595389b19e09e369"
+    },
+    "freeze": {
+      "advance": "Both held panels have >=4 new feathered locations, >=6 untouched exact crops, no wrong crops, and at most 4 nuisance flags across 3 sources. Fresh panel has at least 8 exact untouched crops, at least 8 useful local-blur and 8 useful local-contrast locations, and no wrong or incompatible crops.",
+      "axis": 4,
+      "commons": [
+        {
+          "author": "Ralf Roletschek",
+          "file": "source-14.jpg",
+          "license": "CC BY 3.0",
+          "pageid": 28048765,
+          "sha256": "e99ed01cffbdd48075a4ee8b317007761e901cc9678e6fa831afe5c94876c57b",
+          "slot": 14
+        },
+        {
+          "author": "Diego Delso",
+          "file": "source-08.jpg",
+          "license": "CC BY-SA 4.0",
+          "pageid": 46312924,
+          "sha256": "70b3fede67290fda1d7f898606d6c6b60c282135f8506abefc2439093d50d739",
+          "slot": 8
+        },
+        {
+          "author": "Vyacheslav Argenberg",
+          "file": "source-05.jpg",
+          "license": "CC BY 4.0",
+          "pageid": 112280296,
+          "sha256": "673747b90b351f8b6dc2956ee96ad15c6ea5e4f270b0ab8407d954dce47b4347",
+          "slot": 5
+        },
+        {
+          "author": "Kuhnmi",
+          "file": "source-37.jpg",
+          "license": "CC BY-SA 4.0",
+          "pageid": 97105709,
+          "sha256": "ad2b39217fe6564e0d39e7db713977a702eab2adc959f2d465af380efad491d1",
+          "slot": 37
+        },
+        {
+          "author": "MB-one",
+          "file": "source-09.jpg",
+          "license": "CC BY-SA 3.0",
+          "pageid": 34912518,
+          "sha256": "abc5db188ddac368d5e657027532600d19419e15bd81a1f13506fe5d07ce7d8e",
+          "slot": 9
+        },
+        {
+          "author": "Ximonic (Simo R\u00e4s\u00e4nen)",
+          "file": "source-17.jpg",
+          "license": "CC BY 3.0",
+          "pageid": 104210763,
+          "sha256": "79cb31e377f7ceaa1a15df73ef8994072d927457642a47ef837bc4fce25038e8",
+          "slot": 17
+        },
+        {
+          "author": "Bernard Gagnon",
+          "file": "source-00.jpg",
+          "license": "CC BY-SA 4.0",
+          "pageid": 71645134,
+          "sha256": "c6833ff067327baba56f57ec1003865e63f02ec678f94349b00f435b0cbc7dc6",
+          "slot": 0
+        },
+        {
+          "author": "Grunpfnul",
+          "file": "source-29.jpg",
+          "license": "CC BY-SA 4.0",
+          "pageid": 162903573,
+          "sha256": "7743986a7a30d8017ef7213c8dcebcf23e9fbda63b3f15b9d7de067c7c309904",
+          "slot": 29
+        },
+        {
+          "author": "Hons084",
+          "file": "source-34.jpg",
+          "license": "CC BY-SA 4.0",
+          "pageid": 37366785,
+          "sha256": "db4cec05c989fe5112550cea3a1a363354d4fe37d23e835566b5f8939bdeb79b",
+          "slot": 34
+        },
+        {
+          "author": "Flocci Nivis",
+          "file": "source-25.jpg",
+          "license": "CC BY 4.0",
+          "pageid": 107790741,
+          "sha256": "7b135668a29a123dfa24040a85a9956c53dbb2e0d33fd9b3c279e483488bf4e3",
+          "slot": 25
+        },
+        {
+          "author": "Gzen92",
+          "file": "source-28.jpg",
+          "license": "CC BY-SA 4.0",
+          "pageid": 67947103,
+          "sha256": "7609dbd0c0ff20752ba9cbfc644810198645c8c3fb05e168b6f6e593bd5a15c6",
+          "slot": 28
+        },
+        {
+          "author": "Girlmath",
+          "file": "source-24.jpg",
+          "license": "CC BY-SA 4.0",
+          "pageid": 199202571,
+          "sha256": "640a25d931b8ed7fed17e1892085981c0dfdf4a1b0b8b4eb7a8667647cc25b3d",
+          "slot": 24
+        }
+      ],
+      "excluded_sha256": "d4857dcb0d6d39f8b04dc85b045302826119bb4652371cb89114a81da4f80449",
+      "exposed_freeze_sha256": "1d887436adaff2d895f4eb248d784ec894c6654221d561c329b7bd96a170feb7",
+      "exposed_journals": {
+        "development": "5eb3c791c48e24dbb3b7da3fc4c52ed3943bd32ed00ceccb53a04c3af19d1c42",
+        "earlier": "31e15627f516d95f3f8a68ad11221dad9a3e7902951e5aedd97f53885deadedb",
+        "later": "077071d7e3c9088a9df1567fc832c6610ef05a10c74d6a6c4e30209006c51c22"
+      },
+      "grid": 5,
+      "kernels": [
+        "bicubic",
+        "bilinear",
+        "lanczos",
+        "opencv_area"
+      ],
+      "maximum_mismatch_box": 0.4,
+      "minimum_global_pixel_agreement": 0.65,
+      "proposals": 8,
+      "runtime": [
+        "5.0.0",
+        "12.3.0",
+        "2.2.6"
+      ],
+      "schema": "chipmunk.image-png-exact-crop-resize/1",
+      "source_sha256": "9ae3c0c7c0a18dec4c1de102524df39372ea9d67fcf6913b9c435b3af3bbbc06",
+      "texture": [
+        20,
+        6,
+        0.12
+      ],
+      "tiles": 12
+    },
+    "result": {
+      "elapsed_s": 71.463,
+      "exposed_regression_passed": false,
+      "freeze_sha256": "2849ab1217a72be7c6f9df95c3da23215a8f9dfae5af45f1259bfe7469441a4a",
+      "fresh_ordinary_passed": true,
+      "journals": {
+        "commons": "b02f05c0503f25abb43242cb9f732e7a37a118106e59a30f9824f5d1053e6313",
+        "development": "05a278c3810a758565be74a829fc39a4cbaca7d79fbb1a42a56590305ad1ca2f",
+        "earlier": "d622b0261cad336fe532ceb5402e7cbfbda80611c80c11d466eb8e45e0a1afd4",
+        "later": "bf199cd66611dea2320a1a4d212cfc6c1e97cccc956c2c5117a3de267b5f644c"
+      },
+      "outcomes": {
+        "commons": {
+          "nuisance": 0,
+          "nuisance_groups": 0,
+          "roles": {
+            "contrast": {
+              "added": 0,
+              "exact_crop": 0,
+              "exact_kernel": 0,
+              "highlighted": 0,
+              "localized": 0,
+              "planned": 12,
+              "wrong_crop": 0
+            },
+            "different_photo": {
+              "added": 0,
+              "exact_crop": 0,
+              "exact_kernel": 0,
+              "highlighted": 0,
+              "localized": 0,
+              "planned": 12,
+              "wrong_crop": 0
+            },
+            "fractional": {
+              "added": 0,
+              "exact_crop": 0,
+              "exact_kernel": 0,
+              "highlighted": 0,
+              "localized": 0,
+              "planned": 12,
+              "wrong_crop": 0
+            },
+            "local_blur": {
+              "added": 9,
+              "exact_crop": 9,
+              "exact_kernel": 9,
+              "highlighted": 9,
+              "localized": 9,
+              "planned": 12,
+              "wrong_crop": 0
+            },
+            "local_contrast": {
+              "added": 9,
+              "exact_crop": 9,
+              "exact_kernel": 9,
+              "highlighted": 9,
+              "localized": 9,
+              "planned": 12,
+              "wrong_crop": 0
+            },
+            "nonproportional": {
+              "added": 0,
+              "exact_crop": 0,
+              "exact_kernel": 0,
+              "highlighted": 0,
+              "localized": 0,
+              "planned": 12,
+              "wrong_crop": 0
+            },
+            "prior_jpeg": {
+              "added": 0,
+              "exact_crop": 0,
+              "exact_kernel": 0,
+              "highlighted": 0,
+              "localized": 0,
+              "planned": 12,
+              "wrong_crop": 0
+            },
+            "quarter_pixel": {
+              "added": 0,
+              "exact_crop": 0,
+              "exact_kernel": 0,
+              "highlighted": 0,
+              "localized": 0,
+              "planned": 12,
+              "wrong_crop": 0
+            },
+            "rotation": {
+              "added": 0,
+              "exact_crop": 0,
+              "exact_kernel": 0,
+              "highlighted": 0,
+              "localized": 0,
+              "planned": 12,
+              "wrong_crop": 0
+            },
+            "untouched_crop": {
+              "added": 0,
+              "exact_crop": 10,
+              "exact_kernel": 10,
+              "highlighted": 0,
+              "localized": 0,
+              "planned": 12,
+              "wrong_crop": 0
+            }
+          },
+          "wrong_or_incompatible": 0
+        },
+        "development": {
+          "nuisance": 0,
+          "nuisance_groups": 0,
+          "roles": {
+            "contrast": {
+              "added": 0,
+              "exact_crop": 0,
+              "exact_kernel": 0,
+              "highlighted": 0,
+              "localized": 0,
+              "planned": 8,
+              "wrong_crop": 0
+            },
+            "different_photo": {
+              "added": 0,
+              "exact_crop": 0,
+              "exact_kernel": 0,
+              "highlighted": 0,
+              "localized": 0,
+              "planned": 8,
+              "wrong_crop": 0
+            },
+            "feathered": {
+              "added": 3,
+              "exact_crop": 3,
+              "exact_kernel": 0,
+              "highlighted": 3,
+              "localized": 3,
+              "planned": 8,
+              "wrong_crop": 0
+            },
+            "fractional": {
+              "added": 0,
+              "exact_crop": 0,
+              "exact_kernel": 0,
+              "highlighted": 0,
+              "localized": 0,
+              "planned": 8,
+              "wrong_crop": 0
+            },
+            "local_blur": {
+              "added": 0,
+              "exact_crop": 3,
+              "exact_kernel": 0,
+              "highlighted": 3,
+              "localized": 0,
+              "planned": 8,
+              "wrong_crop": 0
+            },
+            "nonproportional": {
+              "added": 0,
+              "exact_crop": 0,
+              "exact_kernel": 0,
+              "highlighted": 0,
+              "localized": 0,
+              "planned": 8,
+              "wrong_crop": 0
+            },
+            "prior_jpeg": {
+              "added": 0,
+              "exact_crop": 0,
+              "exact_kernel": 0,
+              "highlighted": 0,
+              "localized": 0,
+              "planned": 8,
+              "wrong_crop": 0
+            },
+            "rotation": {
+              "added": 0,
+              "exact_crop": 0,
+              "exact_kernel": 0,
+              "highlighted": 0,
+              "localized": 0,
+              "planned": 8,
+              "wrong_crop": 0
+            },
+            "sharp": {
+              "added": 3,
+              "exact_crop": 3,
+              "exact_kernel": 0,
+              "highlighted": 3,
+              "localized": 3,
+              "planned": 8,
+              "wrong_crop": 0
+            },
+            "untouched_crop": {
+              "added": 0,
+              "exact_crop": 4,
+              "exact_kernel": 0,
+              "highlighted": 0,
+              "localized": 0,
+              "planned": 8,
+              "wrong_crop": 0
+            }
+          },
+          "wrong_or_incompatible": 0
+        },
+        "earlier": {
+          "nuisance": 0,
+          "nuisance_groups": 0,
+          "roles": {
+            "contrast": {
+              "added": 0,
+              "exact_crop": 0,
+              "exact_kernel": 0,
+              "highlighted": 0,
+              "localized": 0,
+              "planned": 12,
+              "wrong_crop": 0
+            },
+            "different_photo": {
+              "added": 0,
+              "exact_crop": 0,
+              "exact_kernel": 0,
+              "highlighted": 0,
+              "localized": 0,
+              "planned": 12,
+              "wrong_crop": 0
+            },
+            "feathered": {
+              "added": 5,
+              "exact_crop": 5,
+              "exact_kernel": 0,
+              "highlighted": 5,
+              "localized": 5,
+              "planned": 12,
+              "wrong_crop": 0
+            },
+            "fractional": {
+              "added": 0,
+              "exact_crop": 0,
+              "exact_kernel": 0,
+              "highlighted": 0,
+              "localized": 0,
+              "planned": 12,
+              "wrong_crop": 0
+            },
+            "local_blur": {
+              "added": 0,
+              "exact_crop": 5,
+              "exact_kernel": 0,
+              "highlighted": 5,
+              "localized": 0,
+              "planned": 12,
+              "wrong_crop": 0
+            },
+            "nonproportional": {
+              "added": 0,
+              "exact_crop": 0,
+              "exact_kernel": 0,
+              "highlighted": 0,
+              "localized": 0,
+              "planned": 12,
+              "wrong_crop": 0
+            },
+            "prior_jpeg": {
+              "added": 0,
+              "exact_crop": 0,
+              "exact_kernel": 0,
+              "highlighted": 0,
+              "localized": 0,
+              "planned": 12,
+              "wrong_crop": 0
+            },
+            "rotation": {
+              "added": 0,
+              "exact_crop": 0,
+              "exact_kernel": 0,
+              "highlighted": 0,
+              "localized": 0,
+              "planned": 12,
+              "wrong_crop": 0
+            },
+            "sharp": {
+              "added": 5,
+              "exact_crop": 5,
+              "exact_kernel": 0,
+              "highlighted": 5,
+              "localized": 5,
+              "planned": 12,
+              "wrong_crop": 0
+            },
+            "untouched_crop": {
+              "added": 0,
+              "exact_crop": 5,
+              "exact_kernel": 0,
+              "highlighted": 0,
+              "localized": 0,
+              "planned": 12,
+              "wrong_crop": 0
+            }
+          },
+          "wrong_or_incompatible": 0
+        },
+        "later": {
+          "nuisance": 0,
+          "nuisance_groups": 0,
+          "roles": {
+            "contrast": {
+              "added": 0,
+              "exact_crop": 0,
+              "exact_kernel": 0,
+              "highlighted": 0,
+              "localized": 0,
+              "planned": 12,
+              "wrong_crop": 0
+            },
+            "different_photo": {
+              "added": 0,
+              "exact_crop": 0,
+              "exact_kernel": 0,
+              "highlighted": 0,
+              "localized": 0,
+              "planned": 12,
+              "wrong_crop": 0
+            },
+            "feathered": {
+              "added": 7,
+              "exact_crop": 7,
+              "exact_kernel": 0,
+              "highlighted": 7,
+              "localized": 7,
+              "planned": 12,
+              "wrong_crop": 0
+            },
+            "fractional": {
+              "added": 0,
+              "exact_crop": 0,
+              "exact_kernel": 0,
+              "highlighted": 0,
+              "localized": 0,
+              "planned": 12,
+              "wrong_crop": 0
+            },
+            "local_blur": {
+              "added": 0,
+              "exact_crop": 7,
+              "exact_kernel": 0,
+              "highlighted": 7,
+              "localized": 0,
+              "planned": 12,
+              "wrong_crop": 0
+            },
+            "nonproportional": {
+              "added": 0,
+              "exact_crop": 0,
+              "exact_kernel": 0,
+              "highlighted": 0,
+              "localized": 0,
+              "planned": 12,
+              "wrong_crop": 0
+            },
+            "prior_jpeg": {
+              "added": 0,
+              "exact_crop": 0,
+              "exact_kernel": 0,
+              "highlighted": 0,
+              "localized": 0,
+              "planned": 12,
+              "wrong_crop": 0
+            },
+            "rotation": {
+              "added": 0,
+              "exact_crop": 0,
+              "exact_kernel": 0,
+              "highlighted": 0,
+              "localized": 0,
+              "planned": 12,
+              "wrong_crop": 0
+            },
+            "sharp": {
+              "added": 6,
+              "exact_crop": 6,
+              "exact_kernel": 0,
+              "highlighted": 6,
+              "localized": 6,
+              "planned": 12,
+              "wrong_crop": 0
+            },
+            "untouched_crop": {
+              "added": 0,
+              "exact_crop": 8,
+              "exact_kernel": 0,
+              "highlighted": 0,
+              "localized": 0,
+              "planned": 12,
+              "wrong_crop": 0
+            }
+          },
+          "wrong_or_incompatible": 0
+        }
+      },
+      "schema": "chipmunk.image-png-exact-crop-resize/1",
+      "scope_qualifies": false
+    }
+  },
+  "local_application_replay": {
+    "authenticated_http_pairs": 2,
+    "confidence_weight": 0,
+    "native_crop_overlay_pdf_and_json_replayed": true,
+    "prior_fractional_control_unassessed": 1,
+    "unchanged_crops_verified": 2,
+    "useful_edit_pairs_reached_fallback": 23
+  },
+  "prospective": {
+    "audit": {
+      "inputs": 120,
+      "qualifies": true,
+      "result_sha256": "df4c29ac5bbb800475dff904d270d4f45b3bd7f4a79741fcfb55946fdb8021bb",
+      "verified_exact_projections": 36
+    },
+    "commitments": {
+      "audit.json": "fbc82dc486d0657c0a8ae9a61f386a9bb51a6a1139e13df7bb66632d0ed0ddff",
+      "freeze.json": "a0460394877fa7e9eb80890094446cafa90354da12c62b152cd732a56c489bcf",
+      "result.json": "df4c29ac5bbb800475dff904d270d4f45b3bd7f4a79741fcfb55946fdb8021bb"
+    },
+    "freeze": {
+      "calibration_sha256": "d4857dcb0d6d39f8b04dc85b045302826119bb4652371cb89114a81da4f80449",
+      "candidate_sha256": "9ae3c0c7c0a18dec4c1de102524df39372ea9d67fcf6913b9c435b3af3bbbc06",
+      "commons_metadata": {
+        "acquisition.json": "0b57802c999cb34008dc95fe3dec47aab3b1146682fe6d97b2219ee2382180dc",
+        "plan.json": "95bcdf9d9b852eb7fbae17194405250443447220568cae9697ddb6a68b48c036"
+      },
+      "exclusions_sha256": "b606b10e40f084f76bfa4f968fa433ecb6a7dc9c9878563eb19d5dd893bac820",
+      "previous": {
+        "audit.json": "8ac91223d265f8153439bf416d2be4930f0fe2f0f4767e7b8dd016b01557c8e1",
+        "freeze.json": "2849ab1217a72be7c6f9df95c3da23215a8f9dfae5af45f1259bfe7469441a4a",
+        "result.json": "ea490765d0b886d33aec7a41ea6154c0f2ed2d7e91d5c41e595389b19e09e369"
+      },
+      "previous_scope_qualifies": false,
+      "roles": [
+        "untouched_crop",
+        "local_blur",
+        "local_contrast",
+        "contrast",
+        "prior_jpeg",
+        "rotation",
+        "fractional",
+        "quarter_pixel",
+        "nonproportional",
+        "different_photo"
+      ],
+      "rule": {
+        "exact_untouched_minimum": 8,
+        "nuisance_maximum": 0,
+        "useful_local_blur_minimum": 8,
+        "useful_local_contrast_minimum": 8,
+        "wrong_or_incompatible_maximum": 0
+      },
+      "runner_sha256": "b2dfc63d3aa1e35881b930acbf771244c9be1c9a9431367a1c92df2dbc1e70d7",
+      "schema": "chipmunk.image-png-exact-crop-resize-prospective/1",
+      "sources": [
+        {
+          "author": "Tade\u00e1\u0161 Bednarz",
+          "file": "source-15.jpg",
+          "license": "CC BY-SA 4.0",
+          "pageid": 166291238,
+          "sha256": "f82bf4c4e26c41543993ec9a57e1feac1d755aad3e21b8abbee03aaa3f7282aa",
+          "slot": 15
+        },
+        {
+          "author": "Anna Stavenskaya",
+          "file": "source-27.jpg",
+          "license": "CC BY-SA 4.0",
+          "pageid": 107095980,
+          "sha256": "c97f085c580f7b6892bd9523a628ed467a172b3ce522e050e611f4a4b7ab7666",
+          "slot": 27
+        },
+        {
+          "author": "JiriMatejicek",
+          "file": "source-33.jpg",
+          "license": "CC BY-SA 3.0",
+          "pageid": 62726973,
+          "sha256": "9006d345cfada77a8087cc989d9e51541d8b1a3720e29b8a7bd1806d8b7cd9d9",
+          "slot": 33
+        },
+        {
+          "author": "Krzysztof Golik",
+          "file": "source-12.jpg",
+          "license": "CC BY-SA 4.0",
+          "pageid": 96041924,
+          "sha256": "96b4f7042affc3d915311b903bb489dce44a15c808771491499eefccb5e63716",
+          "slot": 12
+        },
+        {
+          "author": "Margus6",
+          "file": "source-22.jpg",
+          "license": "CC BY-SA 3.0",
+          "pageid": 29827973,
+          "sha256": "e236099428576bde46029eec6dafce1c1cbfb8f33770f55559a1a9f3aa7e4022",
+          "slot": 22
+        },
+        {
+          "author": "Basile Morin",
+          "file": "source-02.jpg",
+          "license": "CC BY-SA 4.0",
+          "pageid": 155519606,
+          "sha256": "dc545220b3df10c0e8a08e76cb2833e5da99ea6dc8696d8feadace8f72b678d0",
+          "slot": 2
+        },
+        {
+          "author": "\u0412\u0432\u043b\u0430\u0441\u0435\u043d\u043a\u043e",
+          "file": "source-31.jpg",
+          "license": "CC BY-SA 3.0",
+          "pageid": 66780464,
+          "sha256": "4d73f1888bc8bb8223bfc1814aaeede0be96dc59a81f5a4ad490860fb4adb337",
+          "slot": 31
+        },
+        {
+          "author": "Armenak Margarian",
+          "file": "source-16.jpg",
+          "license": "CC BY-SA 4.0",
+          "pageid": 45222469,
+          "sha256": "5a3a1a9c7b4417c1fc493ca66da7fc47632340ba6c7cd486a4276d4854f8d5a7",
+          "slot": 16
+        },
+        {
+          "author": "Dominicus Johannes Bergsma",
+          "file": "source-21.jpg",
+          "license": "CC BY-SA 4.0",
+          "pageid": 57965093,
+          "sha256": "ec6e2866a09ade7bde5887df473ab2d988fb06a30ce6eedb43d878b78123ae07",
+          "slot": 21
+        },
+        {
+          "author": "Trougnouf (Benoit Brummer)",
+          "file": "source-07.jpg",
+          "license": "CC BY 4.0",
+          "pageid": 95012543,
+          "sha256": "93e0d083b70f0f14867435120664d0e2f8876bb19305fce75842b9ed08d60491",
+          "slot": 7
+        },
+        {
+          "author": "Pudelek",
+          "file": "source-32.jpg",
+          "license": "CC BY-SA 4.0",
+          "pageid": 155958658,
+          "sha256": "538fa8e5fbda450452cad18d9439dcadc044ee98bdff844a0ace32151eb69879",
+          "slot": 32
+        },
+        {
+          "author": "Thomas Bresson",
+          "file": "source-11.jpg",
+          "license": "CC BY 3.0",
+          "pageid": 25407874,
+          "sha256": "994f2718ebb0b049c468e69892b8c589a891aa7b33ddefdf04a31cd6927a4da2",
+          "slot": 11
+        }
+      ]
+    },
+    "result": {
+      "earlier_regression_rule_qualifies": false,
+      "elapsed_s": 24.664,
+      "freeze_sha256": "a0460394877fa7e9eb80890094446cafa90354da12c62b152cd732a56c489bcf",
+      "journal_sha256": "54b52f146fc70083f85fd5e390d2ed054da738aacf731122ab74af9535ee0ab8",
+      "outcome": {
+        "nuisance": 0,
+        "nuisance_groups": 0,
+        "roles": {
+          "contrast": {
+            "added": 0,
+            "exact_crop": 0,
+            "exact_kernel": 0,
+            "highlighted": 0,
+            "localized": 0,
+            "planned": 12,
+            "wrong_crop": 0
+          },
+          "different_photo": {
+            "added": 0,
+            "exact_crop": 0,
+            "exact_kernel": 0,
+            "highlighted": 0,
+            "localized": 0,
+            "planned": 12,
+            "wrong_crop": 0
+          },
+          "fractional": {
+            "added": 0,
+            "exact_crop": 0,
+            "exact_kernel": 0,
+            "highlighted": 0,
+            "localized": 0,
+            "planned": 12,
+            "wrong_crop": 0
+          },
+          "local_blur": {
+            "added": 12,
+            "exact_crop": 12,
+            "exact_kernel": 12,
+            "highlighted": 12,
+            "localized": 12,
+            "planned": 12,
+            "wrong_crop": 0
+          },
+          "local_contrast": {
+            "added": 12,
+            "exact_crop": 12,
+            "exact_kernel": 12,
+            "highlighted": 12,
+            "localized": 12,
+            "planned": 12,
+            "wrong_crop": 0
+          },
+          "nonproportional": {
+            "added": 0,
+            "exact_crop": 0,
+            "exact_kernel": 0,
+            "highlighted": 0,
+            "localized": 0,
+            "planned": 12,
+            "wrong_crop": 0
+          },
+          "prior_jpeg": {
+            "added": 0,
+            "exact_crop": 0,
+            "exact_kernel": 0,
+            "highlighted": 0,
+            "localized": 0,
+            "planned": 12,
+            "wrong_crop": 0
+          },
+          "quarter_pixel": {
+            "added": 0,
+            "exact_crop": 0,
+            "exact_kernel": 0,
+            "highlighted": 0,
+            "localized": 0,
+            "planned": 12,
+            "wrong_crop": 0
+          },
+          "rotation": {
+            "added": 0,
+            "exact_crop": 0,
+            "exact_kernel": 0,
+            "highlighted": 0,
+            "localized": 0,
+            "planned": 12,
+            "wrong_crop": 0
+          },
+          "untouched_crop": {
+            "added": 0,
+            "exact_crop": 12,
+            "exact_kernel": 12,
+            "highlighted": 0,
+            "localized": 0,
+            "planned": 12,
+            "wrong_crop": 0
+          }
+        },
+        "wrong_or_incompatible": 0
+      },
+      "qualifies": true,
+      "schema": "chipmunk.image-png-exact-crop-resize-prospective/1"
+    }
+  },
+  "schema": "chipmunk.image-png-exact-crop-resize-public-summary/1"
+}

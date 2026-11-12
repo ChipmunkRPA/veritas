@@ -181,6 +181,28 @@ describe('earlier-copy comparison', () => {
     expect(screen.getByText(/Pixels outside the earlier area were unassessed/)).toBeTruthy()
   })
 
+  it('shows pixel-exact PNG support and downloads the exact projection proof', async () => {
+    const result = structuredClone(comparison)
+    result.comparison.schema = 'chipmunk.image-reference-comparison/5'
+    result.comparison.reference_crop_bounds = { x: 24, y: 14, w: 328, h: 227 }
+    result.comparison.supported_resize_kernels = ['opencv_area']
+    result.comparison.exact_projection = { matched_pixels: 46_816, matched_tiles: [[0, 1], [3, 4]], rgb_sha256: 'e'.repeat(64) }
+    delete result.comparison.alignment
+    vi.stubGlobal('fetch', vi.fn((_url: string, request: RequestInit) => Promise.resolve(
+      request.method === 'POST' ? json(result) : json({ available: true }),
+    )))
+    show()
+    await choose()
+    fireEvent.click(screen.getByRole('button', { name: 'Compare images' }))
+    expect(await screen.findByText(/matches 46,816 submitted pixels exactly/)).toBeTruthy()
+    expect(screen.getByText(/2 textured tiles using area resizing/)).toBeTruthy()
+    expect(screen.getByText(/White marks retained differences from the reproduced resize/)).toBeTruthy()
+    expect(screen.queryByText(/at least two tested resizes/)).toBeNull()
+    fireEvent.click(screen.getByRole('button', { name: 'Download comparison JSON' }))
+    const [[download]] = vi.mocked(saveBlob).mock.calls
+    expect(JSON.parse(await blobText(download))).toEqual({ comparison: result.comparison, pngs: result.pngs })
+  })
+
   it('lets the reviewer retry a failed upload without choosing the same file again', async () => {
     let attempted = false
     vi.stubGlobal('fetch', vi.fn((_url: string, request: RequestInit) => {

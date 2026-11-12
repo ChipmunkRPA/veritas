@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import { Button } from '../../components/ui'
 import { saveBlob } from '../../lib/api/reports'
 import {
-  compareWithEarlierImage, comparisonAvailability, comparisonPdfData, imageReferenceExport, referencePngSrc,
+  compareWithEarlierImage, comparisonAvailability, comparisonPdfData, exactPngCropResizeSchema, imageReferenceExport, referencePngSrc,
   type ImageReferenceResult, type NativeImageArea, type ReferencePng,
 } from './imageReferenceApi'
 
@@ -63,8 +63,14 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
   const { comparison } = result
   const { reference, submitted, regions, mask, alignment } = comparison
   const comparable = comparison.status === 'comparable'
-  const cropped = comparison.schema === 'chipmunk.image-reference-comparison/4' ? comparison.reference_crop_bounds : undefined
+  const exact = comparison.schema === exactPngCropResizeSchema ? comparison.exact_projection : undefined
+  const cropped = comparison.schema === 'chipmunk.image-reference-comparison/4' || exact
+    ? comparison.reference_crop_bounds : undefined
   const resized = comparable && (Boolean(cropped) || comparison.schema === 'chipmunk.image-reference-comparison/3')
+  const completeMatch = exact?.matched_pixels === submitted.width * submitted.height
+  const kernels = comparison.supported_resize_kernels?.map(kernel => kernel === 'opencv_area' ? 'area' : kernel).join(', ')
+  const maskDescription = exact ? 'White marks retained differences from the reproduced resize.'
+    : resized ? 'White marks differences flagged by at least two tested resizes.' : 'White marks the selected differences.'
   const reason = Object.prototype.hasOwnProperty.call(unassessed, comparison.status)
     ? unassessed[comparison.status] : 'The selected copies could not be compared reliably.'
   const pdf = comparisonPdfData(result)
@@ -90,13 +96,18 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
     </div>
     {!pdf && <p className="mt-2 mb-0 text-caption text-text-muted">The comparison PDF is unavailable. The JSON download includes the measurements and images.</p>}
     {comparable
-      ? regions.length === 0 && <p className="mt-2 mb-0 text-small text-text-muted">
+      ? regions.length === 0 && !completeMatch && <p className="mt-2 mb-0 text-small text-text-muted">
           No localized differences met the comparison criteria in the measured area. Small changes may still be present.
         </p>
       : <p className="mt-2 mb-0 text-small text-text-muted">{reason}</p>}
     {comparable && cropped && <p className="mt-3 mb-0 text-small text-text-muted">
       The comparison matched the submitted image to an area of the earlier copy at <NativeArea area={cropped} />.
       {' '}Differences were measured after resizing that area. Pixels outside the earlier area were unassessed.
+    </p>}
+    {comparable && exact && <p className="mt-2 mb-0 text-small text-text-muted">
+      {completeMatch ? 'The resized area matches every submitted pixel.'
+        : `The resized area matches ${exact.matched_pixels.toLocaleString('en-US')} submitted pixels exactly.`}
+      {' '}Matching pixels cover {exact.matched_tiles.length} textured tiles using {kernels} resizing.
     </p>}
     {resized && !cropped && <p className="mt-3 mb-0 text-small text-text-muted">
       The comparison found matching framing at different pixel dimensions. Differences were measured on the submitted image after resizing the earlier copy. The crops show pixels from each original file.
@@ -112,7 +123,7 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
     {comparable && regions.length > 0 && <>
       {mask && <div className="mt-4 max-w-xl">
         <ComparisonPicture result={result} artifact={mask} label="Difference mask in submitted image coordinates" />
-        <p className="mt-2 mb-0 text-caption text-text-muted">{resized ? 'White marks differences flagged by at least two tested resizes.' : 'White marks the selected differences.'} Black includes unselected and potentially unassessed pixels.</p>
+        <p className="mt-2 mb-0 text-caption text-text-muted">{maskDescription} Black includes unselected and potentially unassessed pixels.</p>
       </div>}
       <ol className="mt-4 mb-0 list-none space-y-4 p-0">
         {regions.map((region, index) => <li key={index} className="rounded-md border border-border p-3">

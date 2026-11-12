@@ -306,9 +306,9 @@ def test_resized_route_pdf_and_export_bind_both_native_grids(reference_http, tmp
 @pytest.mark.parametrize("format,quality,schema", [
     ("JPEG", 75, "chipmunk.image-reference-comparison/4"),
     ("JPEG", 90, "chipmunk.image-reference-comparison/3"),
-    ("PNG", 75, "chipmunk.image-reference-comparison/3"),
+    ("PNG", 75, "chipmunk.image-reference-comparison/5"),
 ])
-def test_crop_and_resize_fallback_is_limited_to_the_verified_jpeg_delivery(reference_http, tmp_path, format, quality, schema):
+def test_crop_and_resize_fallback_requires_supported_delivery(reference_http, tmp_path, format, quality, schema):
     f = reference_http
     edited = f.reference_pixels.copy()
     edited[68:146, 130:220] = (210, 52, 119)
@@ -328,21 +328,36 @@ def test_crop_and_resize_fallback_is_limited_to_the_verified_jpeg_delivery(refer
     payload = response.json()
     comparison = payload["comparison"]
     assert comparison["schema"] == schema
-    if format != "JPEG" or quality != 75:
+    if format == "JPEG" and quality != 75:
         assert comparison["status"] != "comparable" and payload["pngs"] == {}
         return
     assert comparison["status"] == "comparable"
     bounds = comparison["reference_crop_bounds"]
     assert [bounds[key] for key in ("x", "y", "w", "h")] == [crop[0], crop[1], crop[2] - crop[0], crop[3] - crop[1]]
     region, = comparison["regions"]
-    paths = [tmp_path / name for name in ("export.json", "earlier.png", "submitted.jpg")]
+    paths = [tmp_path / name for name in ("export.json", "earlier.png", "submitted." + format.lower())]
     export = {"comparison": comparison, "pngs": payload["pngs"]}
     paths[0].write_text(json.dumps(export))
     paths[1].write_bytes(f.reference)
     paths[2].write_bytes(submitted)
     assert review(*paths)["crops_verified"] == 2
+    if format == "PNG":
+        projection = np.asarray(Image.fromarray(f.reference_pixels).crop(crop).resize(size, Image.Resampling.BICUBIC))
+        exact = comparison["exact_projection"]
+        assert exact["rgb_sha256"] == hashlib.sha256(projection.tobytes()).hexdigest()
+        assert exact["matched_pixels"] == int(np.count_nonzero(np.all(projection == np.asarray(image), axis=2)))
+        assert comparison["supported_resize_kernels"] == ["bicubic"] and len(exact["matched_tiles"]) >= 12
+        exact["matched_pixels"] -= 1
+        paths[0].write_text(json.dumps(export))
+        with pytest.raises(ValueError, match="Resize comparison differs from recomputed"):
+            review(*paths)
+        exact["matched_pixels"] += 1
     with pymupdf.open(stream=base64.b64decode(payload["pdf"], validate=True), filetype="pdf") as pdf:
-        assert "Earlier copy area used: x 24, y 14, 328 x 227 px" in pdf[0].get_text()
+        summary = pdf[0].get_text()
+        assert "Earlier copy area used: x 24, y 14, 328 x 227 px" in summary
+        if format == "PNG":
+            assert "Exact match on" in summary and "textured tiles (bicubic)" in summary
+            assert "at least two tested resizes" not in summary
         _assert_pdf_assets(pdf, pdf[1], (region["reference_crop"], region["submitted_crop"], region["submitted_overlay"]), payload)
     bounds["x"] += 1
     paths[0].write_text(json.dumps(export))

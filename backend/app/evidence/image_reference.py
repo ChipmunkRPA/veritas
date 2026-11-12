@@ -15,12 +15,14 @@ from app.detectors.image import (
     reference_alignment,
     reference_compare,
     reference_crop_resize,
+    reference_png_exact_resize,
     reference_resize,
 )
 
 MAX_INPUT_BYTES = 60 * 1024 * 1024
 RESIZE_SCHEMA = "chipmunk.image-reference-comparison/3"
 CROP_RESIZE_SCHEMA = "chipmunk.image-reference-comparison/4"
+EXACT_PNG_CROP_RESIZE_SCHEMA = "chipmunk.image-reference-comparison/5"
 DIFFERENCE_MARK = (255, 173, 46, 144)
 CROP_RESIZE_MAX_REFERENCE_SIDE = 768
 CROP_RESIZE_MAX_SUBMITTED_SIDE = 845
@@ -108,6 +110,10 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
                     candidate, selection = reference_crop_resize.compare(reference, submitted, questioned)
                     if accepted_crop_resize(candidate, submitted.shape[1::-1]):
                         result, mask, resize_schema = candidate, selection, CROP_RESIZE_SCHEMA
+                if result["status"] != "comparable":
+                    exact, selection = reference_png_exact_resize.compare(reference, submitted, questioned)
+                    if exact is not None:
+                        result, mask, resize_schema = exact, selection, EXACT_PNG_CROP_RESIZE_SCHEMA
         else:
             result, mask = reference_compare.compare_across_deliveries(reference, submitted, questioned)
     aligned = "alignment" in result

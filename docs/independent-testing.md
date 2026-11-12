@@ -460,6 +460,10 @@ The [Full analysis call-processing test](audio-communication-serving-grid-2026-1
 replays the comparison on the four-second windows the app serves. The pairing
 lost the confirmation cohort's only overlapping original flag and left the
 same ordinary false-alarm groups.
+The [short-window voice test](audio-edge-window-transfer-2026-11-12.md)
+adds clips with an edit near either end under competing speech. It verifies
+separate ordinary operating points and exposes the localization and false-alarm
+trade-off when transferring the earlier experimental point to a denser grid.
 The [two-microphone noise trial](audio-natural-stereo-coherence-2026-11-11.md)
 compares score directions after a fixed filter with two recorded meeting
 backgrounds, six genuine readers and three synthetic generator families.

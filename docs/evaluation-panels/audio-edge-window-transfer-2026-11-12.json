@@ -1,0 +1,1759 @@
+{
+  "commitments": {
+    "freeze": "4152493adf1768da9320bacc7cdfa70c5de7ba46b01738e1c807f62249c71248",
+    "held": "cf1c6a997ed05dc1a6e133b1cd06360957671d7d97322488c8670b2fb84654c2",
+    "held_public_rows": "5325185bd6c2ddf80c040ac2403f1feaabef95fffe2a320ee0a68275ba3727d8",
+    "held_sources": "e9a84360ca1f5acca33f20aac47748c1e3719d723bbf16f9144d5588901b7f8d",
+    "points": "b95216fe2a988d5c720ec59990e4caaeb47a186c5b3a2146c92ec0f024631325",
+    "prior": "8034e7a9592bd24294dabf9145b31fb67fb321fcfd923d986361953591b19715",
+    "reviewer": "dc3dc4262215089c382f99a52b8c5e708a0f1f255909b22eb76a1ab322b1c6f4",
+    "runner_sources": {
+      "backend/scripts/audio_edge_window_sources.py": "0a001751dbb77ba772ed27d36f0baa9c957a2c12038da202b9c2194bd70fc56e",
+      "backend/scripts/audio_edge_window_transfer.py": "9b3306f017fe8291430bd279b4c972d1c41f56b68b80a1bf3273145784f5f28e"
+    },
+    "selection": "cf26d926af33f46e4ea1d634242a5b83b3ad4e717dc41813d8988ddbef3573f4",
+    "selection_public_rows": "d4a0471cf62453c33cfb42a4273e43dd0bdcb52c97bab29566ca937b6fd8a1cc"
+  },
+  "cross_grid_transfer": {
+    "held": {
+      "combined": {
+        "assessed_files": 26,
+        "background_false_files": 0,
+        "false_genuine_groups": 3,
+        "generated_assessed": 6,
+        "generated_flags": 3,
+        "genuine_false_files": 8,
+        "locations": [
+          {
+            "coverage": "early",
+            "family": "clone",
+            "group": 1,
+            "truth": [
+              2560,
+              12800
+            ],
+            "window": [
+              0,
+              32000
+            ]
+          },
+          {
+            "coverage": "interior",
+            "family": "stock",
+            "group": 3,
+            "truth": [
+              20480,
+              35840
+            ],
+            "window": [
+              0,
+              32000
+            ]
+          },
+          {
+            "coverage": "interior",
+            "family": "clone",
+            "group": 6,
+            "truth": [
+              55040,
+              67840
+            ],
+            "window": [
+              48000,
+              80000
+            ]
+          }
+        ],
+        "selected_half_covered": 3,
+        "useful_locations": 3
+      },
+      "edge": {
+        "assessed_files": 26,
+        "background_false_files": 0,
+        "false_genuine_groups": 3,
+        "generated_assessed": 6,
+        "generated_flags": 3,
+        "genuine_false_files": 6,
+        "locations": [
+          {
+            "coverage": "early",
+            "family": "clone",
+            "group": 1,
+            "truth": [
+              2560,
+              12800
+            ],
+            "window": [
+              0,
+              32000
+            ]
+          },
+          {
+            "coverage": "interior",
+            "family": "stock",
+            "group": 3,
+            "truth": [
+              20480,
+              35840
+            ],
+            "window": [
+              0,
+              32000
+            ]
+          }
+        ],
+        "selected_half_covered": 3,
+        "useful_locations": 2
+      },
+      "full": {
+        "assessed_files": 26,
+        "background_false_files": 0,
+        "false_genuine_groups": 1,
+        "generated_assessed": 6,
+        "generated_flags": 1,
+        "genuine_false_files": 3,
+        "locations": [],
+        "selected_half_covered": 0,
+        "useful_locations": 0
+      },
+      "shifted": {
+        "assessed_files": 26,
+        "background_false_files": 0,
+        "false_genuine_groups": 2,
+        "generated_assessed": 6,
+        "generated_flags": 2,
+        "genuine_false_files": 4,
+        "locations": [
+          {
+            "coverage": "interior",
+            "family": "stock",
+            "group": 3,
+            "truth": [
+              20480,
+              35840
+            ],
+            "window": [
+              16000,
+              48000
+            ]
+          },
+          {
+            "coverage": "interior",
+            "family": "clone",
+            "group": 6,
+            "truth": [
+              55040,
+              67840
+            ],
+            "window": [
+              48000,
+              80000
+            ]
+          }
+        ],
+        "selected_half_covered": 2,
+        "useful_locations": 2
+      }
+    },
+    "published_two_second_point": 6.400866488004889
+  },
+  "customer_confidence_changed": false,
+  "grids": {
+    "combined": [
+      [
+        0,
+        32000
+      ],
+      [
+        16000,
+        48000
+      ],
+      [
+        32000,
+        64000
+      ],
+      [
+        48000,
+        80000
+      ],
+      [
+        64000,
+        96000
+      ]
+    ],
+    "edge": [
+      [
+        0,
+        32000
+      ],
+      [
+        32000,
+        64000
+      ],
+      [
+        64000,
+        96000
+      ]
+    ],
+    "full": [
+      [
+        0,
+        64000
+      ],
+      [
+        32000,
+        96000
+      ]
+    ],
+    "shifted": [
+      [
+        16000,
+        48000
+      ],
+      [
+        48000,
+        80000
+      ]
+    ]
+  },
+  "held": [
+    {
+      "arm": "untouched",
+      "coverage": "early",
+      "family": "clone",
+      "group": 1,
+      "scores": [
+        3.9096197511502995,
+        -4.598108239620635,
+        6.681811438395567,
+        6.1822354917781075,
+        -5.260213879740342,
+        4.723389319976717,
+        5.829007730898588
+      ],
+      "truth": null
+    },
+    {
+      "arm": "ordinary_same_host",
+      "coverage": "early",
+      "family": "clone",
+      "group": 1,
+      "scores": [
+        4.906515850432931,
+        -4.598108239620635,
+        7.020501932313197,
+        6.1822354917781075,
+        -5.260213879740342,
+        4.723389319976717,
+        5.829007730898588
+      ],
+      "truth": null
+    },
+    {
+      "arm": "ordinary_other_voice",
+      "coverage": "early",
+      "family": "clone",
+      "group": 1,
+      "scores": [
+        4.876777159238609,
+        -4.598108239620635,
+        6.930861401938119,
+        6.1822354917781075,
+        -5.260213879740342,
+        4.723389319976717,
+        5.829007730898588
+      ],
+      "truth": null
+    },
+    {
+      "arm": "synthetic",
+      "coverage": "early",
+      "family": "clone",
+      "group": 1,
+      "scores": [
+        4.978298478548618,
+        -4.598108239620635,
+        7.121691056926255,
+        6.1822354917781075,
+        -5.260213879740342,
+        4.723389319976717,
+        5.829007730898588
+      ],
+      "truth": [
+        2560,
+        12800
+      ]
+    },
+    {
+      "arm": "untouched",
+      "coverage": "interior",
+      "family": "expressive",
+      "group": 2,
+      "scores": [
+        -3.9810080747758905,
+        -3.4198911610453235,
+        -1.576747548365615,
+        5.753677757674355,
+        -4.099254559954097,
+        -6.099973223680376,
+        5.65898661317586
+      ],
+      "truth": null
+    },
+    {
+      "arm": "ordinary_same_host",
+      "coverage": "interior",
+      "family": "expressive",
+      "group": 2,
+      "scores": [
+        -3.7918357697165463,
+        -3.095764222654507,
+        -2.957085072632984,
+        4.6489124996656335,
+        -4.613939336512767,
+        -6.099973223680376,
+        5.65898661317586
+      ],
+      "truth": null
+    },
+    {
+      "arm": "ordinary_other_voice",
+      "coverage": "interior",
+      "family": "expressive",
+      "group": 2,
+      "scores": [
+        -3.398751013690602,
+        0.21955670051373233,
+        -2.1521620645604074,
+        5.841273170131093,
+        -4.351088520090635,
+        -6.099973223680376,
+        5.65898661317586
+      ],
+      "truth": null
+    },
+    {
+      "arm": "synthetic",
+      "coverage": "interior",
+      "family": "expressive",
+      "group": 2,
+      "scores": [
+        -4.173227261251325,
+        -4.772233495459541,
+        -3.040026152286733,
+        5.456072690213592,
+        -4.810687009827779,
+        -6.099973223680376,
+        5.65898661317586
+      ],
+      "truth": [
+        29440,
+        42240
+      ]
+    },
+    {
+      "arm": "untouched",
+      "coverage": "interior",
+      "family": "stock",
+      "group": 3,
+      "scores": [
+        6.281427728782053,
+        -3.7613187571398115,
+        6.571806822751363,
+        6.5760017866073985,
+        -5.268748239226962,
+        -4.5160665702161,
+        4.605456299789158
+      ],
+      "truth": null
+    },
+    {
+      "arm": "ordinary_same_host",
+      "coverage": "interior",
+      "family": "stock",
+      "group": 3,
+      "scores": [
+        4.886037857173264,
+        -4.707797042456651,
+        6.775797139755494,
+        4.708100316296675,
+        -6.17530014099425,
+        -4.5160665702161,
+        4.605456299789158
+      ],
+      "truth": null
+    },
+    {
+      "arm": "ordinary_other_voice",
+      "coverage": "interior",
+      "family": "stock",
+      "group": 3,
+      "scores": [
+        4.46239756646104,
+        -4.556036022300625,
+        5.891388790287112,
+        4.479490724827482,
+        -5.824431415707931,
+        -4.5160665702161,
+        4.605456299789158
+      ],
+      "truth": null
+    },
+    {
+      "arm": "synthetic",
+      "coverage": "interior",
+      "family": "stock",
+      "group": 3,
+      "scores": [
+        6.0982628348445695,
+        -4.639493926355846,
+        7.130305286571029,
+        6.669540404073042,
+        -5.362098179745614,
+        -4.5160665702161,
+        4.605456299789158
+      ],
+      "truth": [
+        20480,
+        35840
+      ]
+    },
+    {
+      "arm": "background_only",
+      "coverage": "room",
+      "family": null,
+      "group": 4,
+      "scores": [
+        null,
+        -7.074046120274219,
+        null,
+        null,
+        -6.910264049712251,
+        -7.057981449654149,
+        -6.823789042402406
+      ],
+      "truth": null
+    },
+    {
+      "arm": "untouched",
+      "coverage": "late",
+      "family": "stock",
+      "group": 5,
+      "scores": [
+        6.520879987328235,
+        4.29648693176586,
+        6.22427299547376,
+        -2.9111792861572616,
+        4.7427875197901335,
+        -4.853476073853673,
+        4.034427850573946
+      ],
+      "truth": null
+    },
+    {
+      "arm": "ordinary_same_host",
+      "coverage": "late",
+      "family": "stock",
+      "group": 5,
+      "scores": [
+        6.520879987328235,
+        0.08196003586518075,
+        6.22427299547376,
+        -2.9111792861572616,
+        4.7427875197901335,
+        -4.853476073853673,
+        4.273634886479201
+      ],
+      "truth": null
+    },
+    {
+      "arm": "ordinary_other_voice",
+      "coverage": "late",
+      "family": "stock",
+      "group": 5,
+      "scores": [
+        6.520879987328235,
+        -3.591753494343977,
+        6.22427299547376,
+        -2.9111792861572616,
+        4.7427875197901335,
+        -4.853476073853673,
+        -3.2374584903706283
+      ],
+      "truth": null
+    },
+    {
+      "arm": "synthetic",
+      "coverage": "late",
+      "family": "stock",
+      "group": 5,
+      "scores": [
+        6.520879987328235,
+        4.474738287392292,
+        6.22427299547376,
+        -2.9111792861572616,
+        4.7427875197901335,
+        -4.853476073853673,
+        5.619201339644333
+      ],
+      "truth": [
+        83200,
+        93440
+      ]
+    },
+    {
+      "arm": "untouched",
+      "coverage": "interior",
+      "family": "clone",
+      "group": 6,
+      "scores": [
+        5.617431981840399,
+        4.514274937618342,
+        -1.8107194634571546,
+        4.517841114326473,
+        6.768598003188157,
+        6.812480912792762,
+        -3.7445005892423078
+      ],
+      "truth": null
+    },
+    {
+      "arm": "ordinary_same_host",
+      "coverage": "interior",
+      "family": "clone",
+      "group": 6,
+      "scores": [
+        5.807826762354763,
+        5.515149500548025,
+        -1.8107194634571546,
+        4.517841114326473,
+        5.668292481815145,
+        6.432074630208608,
+        2.998337684016283
+      ],
+      "truth": null
+    },
+    {
+      "arm": "ordinary_other_voice",
+      "coverage": "interior",
+      "family": "clone",
+      "group": 6,
+      "scores": [
+        5.444859228841183,
+        6.1484211087421805,
+        -1.8107194634571546,
+        4.517841114326473,
+        5.146801139206059,
+        7.057191144622157,
+        4.6764712700320565
+      ],
+      "truth": null
+    },
+    {
+      "arm": "synthetic",
+      "coverage": "interior",
+      "family": "clone",
+      "group": 6,
+      "scores": [
+        5.672663665173602,
+        4.972959306692122,
+        -1.8107194634571546,
+        4.517841114326473,
+        6.70686239628026,
+        7.005443535737181,
+        -5.177539387541998
+      ],
+      "truth": [
+        55040,
+        67840
+      ]
+    },
+    {
+      "arm": "untouched",
+      "coverage": "interior",
+      "family": "expressive",
+      "group": 7,
+      "scores": [
+        -5.619491986589324,
+        -5.471567187911727,
+        4.745044925261672,
+        4.035035037385561,
+        -5.7854528698276155,
+        -5.3722419579094876,
+        -3.127074204632085
+      ],
+      "truth": null
+    },
+    {
+      "arm": "ordinary_same_host",
+      "coverage": "interior",
+      "family": "expressive",
+      "group": 7,
+      "scores": [
+        -5.836796758787856,
+        -5.253393142539558,
+        4.745044925261672,
+        4.035035037385561,
+        -5.061278311252853,
+        -4.811428034498034,
+        4.026892129242584
+      ],
+      "truth": null
+    },
+    {
+      "arm": "ordinary_other_voice",
+      "coverage": "interior",
+      "family": "expressive",
+      "group": 7,
+      "scores": [
+        3.0717320687239353,
+        -3.1841401776103497,
+        4.745044925261672,
+        4.035035037385561,
+        4.246830357967892,
+        3.756902746750309,
+        -4.407612812080939
+      ],
+      "truth": null
+    },
+    {
+      "arm": "synthetic",
+      "coverage": "interior",
+      "family": "expressive",
+      "group": 7,
+      "scores": [
+        -4.637837398645291,
+        -5.211790597228732,
+        4.745044925261672,
+        4.035035037385561,
+        -4.2402905647302696,
+        -4.230717185617294,
+        -4.813551410593475
+      ],
+      "truth": [
+        61440,
+        76800
+      ]
+    },
+    {
+      "arm": "background_only",
+      "coverage": "room",
+      "family": null,
+      "group": 8,
+      "scores": [
+        null,
+        -5.705328026502851,
+        null,
+        null,
+        -5.689368256411495,
+        3.746700434068355,
+        -6.0715474998897525
+      ],
+      "truth": null
+    }
+  ],
+  "new_classifier_windows": {
+    "held": 176,
+    "selection": 116
+  },
+  "results": {
+    "combined": {
+      "equal_held_false_groups": {
+        "0": {
+          "assessed_files": 26,
+          "background_false_files": 0,
+          "false_genuine_groups": 0,
+          "generated_assessed": 6,
+          "generated_flags": 2,
+          "genuine_false_files": 0,
+          "locations": [
+            {
+              "coverage": "early",
+              "family": "clone",
+              "group": 1,
+              "truth": [
+                2560,
+                12800
+              ],
+              "window": [
+                0,
+                32000
+              ]
+            },
+            {
+              "coverage": "interior",
+              "family": "stock",
+              "group": 3,
+              "truth": [
+                20480,
+                35840
+              ],
+              "window": [
+                0,
+                32000
+              ]
+            }
+          ],
+          "selected_half_covered": 2,
+          "useful_locations": 2
+        },
+        "1": {
+          "assessed_files": 26,
+          "background_false_files": 0,
+          "false_genuine_groups": 1,
+          "generated_assessed": 6,
+          "generated_flags": 2,
+          "genuine_false_files": 1,
+          "locations": [
+            {
+              "coverage": "early",
+              "family": "clone",
+              "group": 1,
+              "truth": [
+                2560,
+                12800
+              ],
+              "window": [
+                0,
+                32000
+              ]
+            },
+            {
+              "coverage": "interior",
+              "family": "stock",
+              "group": 3,
+              "truth": [
+                20480,
+                35840
+              ],
+              "window": [
+                0,
+                32000
+              ]
+            }
+          ],
+          "selected_half_covered": 2,
+          "useful_locations": 2
+        },
+        "2": {
+          "assessed_files": 26,
+          "background_false_files": 0,
+          "false_genuine_groups": 2,
+          "generated_assessed": 6,
+          "generated_flags": 3,
+          "genuine_false_files": 4,
+          "locations": [
+            {
+              "coverage": "early",
+              "family": "clone",
+              "group": 1,
+              "truth": [
+                2560,
+                12800
+              ],
+              "window": [
+                0,
+                32000
+              ]
+            },
+            {
+              "coverage": "interior",
+              "family": "stock",
+              "group": 3,
+              "truth": [
+                20480,
+                35840
+              ],
+              "window": [
+                0,
+                32000
+              ]
+            },
+            {
+              "coverage": "interior",
+              "family": "clone",
+              "group": 6,
+              "truth": [
+                55040,
+                67840
+              ],
+              "window": [
+                48000,
+                80000
+              ]
+            }
+          ],
+          "selected_half_covered": 3,
+          "useful_locations": 3
+        }
+      },
+      "fixed": {
+        "assessed_files": 26,
+        "background_false_files": 0,
+        "false_genuine_groups": 0,
+        "generated_assessed": 6,
+        "generated_flags": 0,
+        "genuine_false_files": 0,
+        "locations": [],
+        "selected_half_covered": 0,
+        "useful_locations": 0
+      },
+      "held_geometry": {
+        "any_useful_range_admitted": 6,
+        "any_useful_range_planned": 6,
+        "best_admitted_range_useful": 3,
+        "score_exceeds_all_three_matched_controls": 2
+      },
+      "ordinary_point": 7.209421919045076,
+      "selection_assessed_files": 40
+    },
+    "edge": {
+      "equal_held_false_groups": {
+        "0": {
+          "assessed_files": 26,
+          "background_false_files": 0,
+          "false_genuine_groups": 0,
+          "generated_assessed": 6,
+          "generated_flags": 2,
+          "genuine_false_files": 0,
+          "locations": [
+            {
+              "coverage": "early",
+              "family": "clone",
+              "group": 1,
+              "truth": [
+                2560,
+                12800
+              ],
+              "window": [
+                0,
+                32000
+              ]
+            },
+            {
+              "coverage": "interior",
+              "family": "stock",
+              "group": 3,
+              "truth": [
+                20480,
+                35840
+              ],
+              "window": [
+                0,
+                32000
+              ]
+            }
+          ],
+          "selected_half_covered": 2,
+          "useful_locations": 2
+        },
+        "1": {
+          "assessed_files": 26,
+          "background_false_files": 0,
+          "false_genuine_groups": 1,
+          "generated_assessed": 6,
+          "generated_flags": 2,
+          "genuine_false_files": 2,
+          "locations": [
+            {
+              "coverage": "early",
+              "family": "clone",
+              "group": 1,
+              "truth": [
+                2560,
+                12800
+              ],
+              "window": [
+                0,
+                32000
+              ]
+            },
+            {
+              "coverage": "interior",
+              "family": "stock",
+              "group": 3,
+              "truth": [
+                20480,
+                35840
+              ],
+              "window": [
+                0,
+                32000
+              ]
+            }
+          ],
+          "selected_half_covered": 2,
+          "useful_locations": 2
+        },
+        "2": {
+          "assessed_files": 26,
+          "background_false_files": 0,
+          "false_genuine_groups": 2,
+          "generated_assessed": 6,
+          "generated_flags": 2,
+          "genuine_false_files": 3,
+          "locations": [
+            {
+              "coverage": "early",
+              "family": "clone",
+              "group": 1,
+              "truth": [
+                2560,
+                12800
+              ],
+              "window": [
+                0,
+                32000
+              ]
+            },
+            {
+              "coverage": "interior",
+              "family": "stock",
+              "group": 3,
+              "truth": [
+                20480,
+                35840
+              ],
+              "window": [
+                0,
+                32000
+              ]
+            }
+          ],
+          "selected_half_covered": 2,
+          "useful_locations": 2
+        }
+      },
+      "fixed": {
+        "assessed_files": 26,
+        "background_false_files": 0,
+        "false_genuine_groups": 0,
+        "generated_assessed": 6,
+        "generated_flags": 0,
+        "genuine_false_files": 0,
+        "locations": [],
+        "selected_half_covered": 0,
+        "useful_locations": 0
+      },
+      "held_geometry": {
+        "any_useful_range_admitted": 4,
+        "any_useful_range_planned": 4,
+        "best_admitted_range_useful": 2,
+        "score_exceeds_all_three_matched_controls": 2
+      },
+      "ordinary_point": 7.209421919045076,
+      "selection_assessed_files": 40
+    },
+    "full": {
+      "equal_held_false_groups": {
+        "0": {
+          "assessed_files": 26,
+          "background_false_files": 0,
+          "false_genuine_groups": 0,
+          "generated_assessed": 6,
+          "generated_flags": 0,
+          "genuine_false_files": 0,
+          "locations": [],
+          "selected_half_covered": 0,
+          "useful_locations": 0
+        },
+        "1": {
+          "assessed_files": 26,
+          "background_false_files": 0,
+          "false_genuine_groups": 1,
+          "generated_assessed": 6,
+          "generated_flags": 1,
+          "genuine_false_files": 3,
+          "locations": [],
+          "selected_half_covered": 0,
+          "useful_locations": 0
+        },
+        "2": {
+          "assessed_files": 26,
+          "background_false_files": 0,
+          "false_genuine_groups": 2,
+          "generated_assessed": 6,
+          "generated_flags": 1,
+          "genuine_false_files": 4,
+          "locations": [],
+          "selected_half_covered": 0,
+          "useful_locations": 0
+        }
+      },
+      "fixed": {
+        "assessed_files": 26,
+        "background_false_files": 0,
+        "false_genuine_groups": 0,
+        "generated_assessed": 6,
+        "generated_flags": 0,
+        "genuine_false_files": 0,
+        "locations": [],
+        "selected_half_covered": 0,
+        "useful_locations": 0
+      },
+      "held_geometry": {
+        "any_useful_range_admitted": 0,
+        "any_useful_range_planned": 0,
+        "best_admitted_range_useful": 0,
+        "score_exceeds_all_three_matched_controls": 1
+      },
+      "ordinary_point": 6.866135499893916,
+      "selection_assessed_files": 40
+    },
+    "shifted": {
+      "equal_held_false_groups": {
+        "0": {
+          "assessed_files": 26,
+          "background_false_files": 0,
+          "false_genuine_groups": 0,
+          "generated_assessed": 6,
+          "generated_flags": 0,
+          "genuine_false_files": 0,
+          "locations": [],
+          "selected_half_covered": 0,
+          "useful_locations": 0
+        },
+        "1": {
+          "assessed_files": 26,
+          "background_false_files": 0,
+          "false_genuine_groups": 1,
+          "generated_assessed": 6,
+          "generated_flags": 2,
+          "genuine_false_files": 2,
+          "locations": [
+            {
+              "coverage": "interior",
+              "family": "stock",
+              "group": 3,
+              "truth": [
+                20480,
+                35840
+              ],
+              "window": [
+                16000,
+                48000
+              ]
+            },
+            {
+              "coverage": "interior",
+              "family": "clone",
+              "group": 6,
+              "truth": [
+                55040,
+                67840
+              ],
+              "window": [
+                48000,
+                80000
+              ]
+            }
+          ],
+          "selected_half_covered": 2,
+          "useful_locations": 2
+        },
+        "2": {
+          "assessed_files": 26,
+          "background_false_files": 0,
+          "false_genuine_groups": 2,
+          "generated_assessed": 6,
+          "generated_flags": 2,
+          "genuine_false_files": 4,
+          "locations": [
+            {
+              "coverage": "interior",
+              "family": "stock",
+              "group": 3,
+              "truth": [
+                20480,
+                35840
+              ],
+              "window": [
+                16000,
+                48000
+              ]
+            },
+            {
+              "coverage": "interior",
+              "family": "clone",
+              "group": 6,
+              "truth": [
+                55040,
+                67840
+              ],
+              "window": [
+                48000,
+                80000
+              ]
+            }
+          ],
+          "selected_half_covered": 2,
+          "useful_locations": 2
+        }
+      },
+      "fixed": {
+        "assessed_files": 26,
+        "background_false_files": 0,
+        "false_genuine_groups": 1,
+        "generated_assessed": 6,
+        "generated_flags": 0,
+        "genuine_false_files": 1,
+        "locations": [],
+        "selected_half_covered": 0,
+        "useful_locations": 0
+      },
+      "held_geometry": {
+        "any_useful_range_admitted": 4,
+        "any_useful_range_planned": 4,
+        "best_admitted_range_useful": 3,
+        "score_exceeds_all_three_matched_controls": 1
+      },
+      "ordinary_point": 7.049524822776123,
+      "selection_assessed_files": 40
+    }
+  },
+  "sample_rate_hz": 16000,
+  "schema": "chipmunk.audio-edge-window-transfer/1",
+  "selection": [
+    {
+      "arm": "untouched",
+      "coverage": "early",
+      "family": "clone",
+      "group": 1,
+      "scores": [
+        -3.868676360109864,
+        -4.905861321168993,
+        -5.550086446424051,
+        -5.2093066998350235,
+        -3.539335235967575,
+        -3.4847812730768597,
+        -6.57374385957745
+      ],
+      "truth": null
+    },
+    {
+      "arm": "ordinary_same_host",
+      "coverage": "early",
+      "family": "clone",
+      "group": 1,
+      "scores": [
+        4.090199249945696,
+        -4.905861321168993,
+        -3.227519027787775,
+        -5.2093066998350235,
+        -3.539335235967575,
+        -3.4847812730768597,
+        -6.57374385957745
+      ],
+      "truth": null
+    },
+    {
+      "arm": "ordinary_other_voice",
+      "coverage": "early",
+      "family": "clone",
+      "group": 1,
+      "scores": [
+        2.2923824961849872,
+        -4.905861321168993,
+        -3.5814819707495205,
+        -5.2093066998350235,
+        -3.539335235967575,
+        -3.4847812730768597,
+        -6.57374385957745
+      ],
+      "truth": null
+    },
+    {
+      "arm": "untouched",
+      "coverage": "interior",
+      "family": "expressive",
+      "group": 2,
+      "scores": [
+        4.700220626163845,
+        6.27248104080612,
+        3.9904685792316874,
+        6.54987854482451,
+        6.678527616071818,
+        4.64786582261439,
+        5.5652759027767535
+      ],
+      "truth": null
+    },
+    {
+      "arm": "ordinary_same_host",
+      "coverage": "interior",
+      "family": "expressive",
+      "group": 2,
+      "scores": [
+        4.815932654745473,
+        6.2558828657054475,
+        3.9904685792316874,
+        6.54987854482451,
+        6.76062476456098,
+        3.6427904502220163,
+        5.491384646332453
+      ],
+      "truth": null
+    },
+    {
+      "arm": "ordinary_other_voice",
+      "coverage": "interior",
+      "family": "expressive",
+      "group": 2,
+      "scores": [
+        4.975065358730699,
+        5.984835873133509,
+        3.9904685792316874,
+        6.54987854482451,
+        6.822523597593649,
+        -3.1622533840374114,
+        6.0881343756887185
+      ],
+      "truth": null
+    },
+    {
+      "arm": "untouched",
+      "coverage": "interior",
+      "family": "stock",
+      "group": 3,
+      "scores": [
+        -5.660885755102755,
+        -6.9106135294470015,
+        -3.276306189071533,
+        -5.846299126037409,
+        -6.310945441867096,
+        -6.296042965433903,
+        -7.019288037896142
+      ],
+      "truth": null
+    },
+    {
+      "arm": "ordinary_same_host",
+      "coverage": "interior",
+      "family": "stock",
+      "group": 3,
+      "scores": [
+        -5.498215268400654,
+        -6.9000801586063,
+        0.9046120621188916,
+        -5.528422870202137,
+        -6.3248715273473834,
+        -6.296042965433903,
+        -7.019288037896142
+      ],
+      "truth": null
+    },
+    {
+      "arm": "ordinary_other_voice",
+      "coverage": "interior",
+      "family": "stock",
+      "group": 3,
+      "scores": [
+        -5.363841951158709,
+        -6.899013551749404,
+        -3.2471765712870204,
+        -5.464600637422205,
+        -6.054656952058861,
+        -6.296042965433903,
+        -7.019288037896142
+      ],
+      "truth": null
+    },
+    {
+      "arm": "untouched",
+      "coverage": "late",
+      "family": "expressive",
+      "group": 4,
+      "scores": [
+        4.937624332677573,
+        -4.823991273507825,
+        -3.7237093944805206,
+        7.049524822776123,
+        4.255899646007361,
+        -6.045344377109894,
+        -4.4154319820976635
+      ],
+      "truth": null
+    },
+    {
+      "arm": "ordinary_same_host",
+      "coverage": "late",
+      "family": "expressive",
+      "group": 4,
+      "scores": [
+        4.937624332677573,
+        -4.873206562763787,
+        -3.7237093944805206,
+        7.049524822776123,
+        4.255899646007361,
+        -6.045344377109894,
+        -4.303765303622072
+      ],
+      "truth": null
+    },
+    {
+      "arm": "ordinary_other_voice",
+      "coverage": "late",
+      "family": "expressive",
+      "group": 4,
+      "scores": [
+        4.937624332677573,
+        -4.761282874605498,
+        -3.7237093944805206,
+        7.049524822776123,
+        4.255899646007361,
+        -6.045344377109894,
+        -4.365989211945801
+      ],
+      "truth": null
+    },
+    {
+      "arm": "untouched",
+      "coverage": "interior",
+      "family": "stock",
+      "group": 5,
+      "scores": [
+        -6.789663328848899,
+        -6.313997324425154,
+        -6.3157549253058685,
+        -4.856130160767964,
+        -5.652244581413279,
+        -4.171591251263912,
+        -4.2127122509879635
+      ],
+      "truth": null
+    },
+    {
+      "arm": "ordinary_same_host",
+      "coverage": "interior",
+      "family": "stock",
+      "group": 5,
+      "scores": [
+        -6.441364290488901,
+        -5.485656774240776,
+        -6.668775579703102,
+        -2.400877756794253,
+        -4.050487985626111,
+        -4.171591251263912,
+        -4.2127122509879635
+      ],
+      "truth": null
+    },
+    {
+      "arm": "ordinary_other_voice",
+      "coverage": "interior",
+      "family": "stock",
+      "group": 5,
+      "scores": [
+        -6.497453656646782,
+        -5.636982909754055,
+        -6.594074774082175,
+        -5.1806668539917045,
+        -3.7872328602996648,
+        -4.171591251263912,
+        -4.2127122509879635
+      ],
+      "truth": null
+    },
+    {
+      "arm": "untouched",
+      "coverage": "interior",
+      "family": "clone",
+      "group": 6,
+      "scores": [
+        6.351283335783238,
+        6.866135499893916,
+        -5.758241137869728,
+        6.961580550626552,
+        7.209421919045076,
+        4.017408176681536,
+        6.095096668895762
+      ],
+      "truth": null
+    },
+    {
+      "arm": "ordinary_same_host",
+      "coverage": "interior",
+      "family": "clone",
+      "group": 6,
+      "scores": [
+        5.782244791224778,
+        6.647787211749185,
+        -4.885885684684172,
+        6.250906824120716,
+        7.093764166298116,
+        4.017408176681536,
+        6.095096668895762
+      ],
+      "truth": null
+    },
+    {
+      "arm": "ordinary_other_voice",
+      "coverage": "interior",
+      "family": "clone",
+      "group": 6,
+      "scores": [
+        5.555953417566023,
+        5.350257302847106,
+        -4.033231748198608,
+        4.5089488931849795,
+        5.628913555481419,
+        4.017408176681536,
+        6.095096668895762
+      ],
+      "truth": null
+    },
+    {
+      "arm": "untouched",
+      "coverage": "early",
+      "family": "stock",
+      "group": 7,
+      "scores": [
+        -4.5062665757558165,
+        -4.8228254163893185,
+        0.5728302310710875,
+        6.3717189664696425,
+        -3.447169807330361,
+        -6.780927687902047,
+        -6.183490800410799
+      ],
+      "truth": null
+    },
+    {
+      "arm": "ordinary_same_host",
+      "coverage": "early",
+      "family": "stock",
+      "group": 7,
+      "scores": [
+        1.547680860693921,
+        -4.8228254163893185,
+        4.531846701102456,
+        6.3717189664696425,
+        -3.447169807330361,
+        -6.780927687902047,
+        -6.183490800410799
+      ],
+      "truth": null
+    },
+    {
+      "arm": "ordinary_other_voice",
+      "coverage": "early",
+      "family": "stock",
+      "group": 7,
+      "scores": [
+        -4.972877536918511,
+        -4.8228254163893185,
+        -3.591668405322829,
+        6.3717189664696425,
+        -3.447169807330361,
+        -6.780927687902047,
+        -6.183490800410799
+      ],
+      "truth": null
+    },
+    {
+      "arm": "untouched",
+      "coverage": "interior",
+      "family": "clone",
+      "group": 8,
+      "scores": [
+        -4.6976289831257,
+        -3.6219872942755718,
+        -3.87662837412386,
+        5.410399475306106,
+        -5.094450003877034,
+        -1.5409455611735972,
+        -3.244658691633635
+      ],
+      "truth": null
+    },
+    {
+      "arm": "ordinary_same_host",
+      "coverage": "interior",
+      "family": "clone",
+      "group": 8,
+      "scores": [
+        -5.092585522196739,
+        -3.6219872942755718,
+        -3.5648479359232197,
+        3.9077004687771373,
+        -5.094450003877034,
+        -1.5409455611735972,
+        -3.244658691633635
+      ],
+      "truth": null
+    },
+    {
+      "arm": "ordinary_other_voice",
+      "coverage": "interior",
+      "family": "clone",
+      "group": 8,
+      "scores": [
+        -5.215359718555402,
+        -3.6219872942755718,
+        -3.8049216658261034,
+        -2.7212839066756898,
+        -5.094450003877034,
+        -1.5409455611735972,
+        -3.244658691633635
+      ],
+      "truth": null
+    },
+    {
+      "arm": "untouched",
+      "coverage": "interior",
+      "family": "expressive",
+      "group": 9,
+      "scores": [
+        -6.223113135296575,
+        -6.3652419723333065,
+        -5.261891348855831,
+        -5.5469555584697945,
+        -5.947658988127467,
+        -3.7506523150386615,
+        -5.58938024589053
+      ],
+      "truth": null
+    },
+    {
+      "arm": "ordinary_same_host",
+      "coverage": "interior",
+      "family": "expressive",
+      "group": 9,
+      "scores": [
+        -6.141704523983975,
+        -6.3237343027186235,
+        -5.433984769037221,
+        -5.449666945150211,
+        -6.347147506753565,
+        -3.7506523150386615,
+        -5.58938024589053
+      ],
+      "truth": null
+    },
+    {
+      "arm": "ordinary_other_voice",
+      "coverage": "interior",
+      "family": "expressive",
+      "group": 9,
+      "scores": [
+        -6.3587641476402625,
+        -6.525128401618633,
+        -5.1593141698278195,
+        -5.331067520516026,
+        -6.4363651098740435,
+        -3.7506523150386615,
+        -5.58938024589053
+      ],
+      "truth": null
+    },
+    {
+      "arm": "untouched",
+      "coverage": "late",
+      "family": "clone",
+      "group": 10,
+      "scores": [
+        -3.429442887160622,
+        5.3984956578230685,
+        -4.908022423804612,
+        -5.40423014007511,
+        5.111150681470206,
+        5.418531638296682,
+        6.548625554897006
+      ],
+      "truth": null
+    },
+    {
+      "arm": "ordinary_same_host",
+      "coverage": "late",
+      "family": "clone",
+      "group": 10,
+      "scores": [
+        -3.429442887160622,
+        4.3027846533437835,
+        -4.908022423804612,
+        -5.40423014007511,
+        5.111150681470206,
+        5.418531638296682,
+        5.271521574435184
+      ],
+      "truth": null
+    },
+    {
+      "arm": "ordinary_other_voice",
+      "coverage": "late",
+      "family": "clone",
+      "group": 10,
+      "scores": [
+        -3.429442887160622,
+        3.9490123663535996,
+        -4.908022423804612,
+        -5.40423014007511,
+        5.111150681470206,
+        5.418531638296682,
+        5.022183793376807
+      ],
+      "truth": null
+    },
+    {
+      "arm": "untouched",
+      "coverage": "interior",
+      "family": "expressive",
+      "group": 11,
+      "scores": [
+        6.18758060066832,
+        -6.332487188378876,
+        6.557261120103794,
+        5.252806587732131,
+        3.9866936790046394,
+        -4.631252301019516,
+        -6.717180300407678
+      ],
+      "truth": null
+    },
+    {
+      "arm": "ordinary_same_host",
+      "coverage": "interior",
+      "family": "expressive",
+      "group": 11,
+      "scores": [
+        6.864189391473502,
+        -5.2577080817344255,
+        6.557261120103794,
+        5.252806587732131,
+        6.044713438025688,
+        4.301337635849305,
+        -6.717180300407678
+      ],
+      "truth": null
+    },
+    {
+      "arm": "ordinary_other_voice",
+      "coverage": "interior",
+      "family": "expressive",
+      "group": 11,
+      "scores": [
+        6.754506775733016,
+        -5.222169873299096,
+        6.557261120103794,
+        5.252806587732131,
+        6.474777224727464,
+        1.2516284833678082,
+        -6.717180300407678
+      ],
+      "truth": null
+    },
+    {
+      "arm": "untouched",
+      "coverage": "interior",
+      "family": "stock",
+      "group": 12,
+      "scores": [
+        4.494061927094472,
+        -4.930600141712304,
+        3.55548000373961,
+        -4.957653038290189,
+        -2.807908042967612,
+        5.090589187959132,
+        -4.429047590899349
+      ],
+      "truth": null
+    },
+    {
+      "arm": "ordinary_same_host",
+      "coverage": "interior",
+      "family": "stock",
+      "group": 12,
+      "scores": [
+        5.9718048760542715,
+        -4.930600141712304,
+        6.504130474721358,
+        4.961526935284139,
+        -2.807908042967612,
+        5.090589187959132,
+        -4.429047590899349
+      ],
+      "truth": null
+    },
+    {
+      "arm": "ordinary_other_voice",
+      "coverage": "interior",
+      "family": "stock",
+      "group": 12,
+      "scores": [
+        5.182099720645673,
+        -4.930600141712304,
+        4.750977013400378,
+        -4.43034939395235,
+        -2.807908042967612,
+        5.090589187959132,
+        -4.429047590899349
+      ],
+      "truth": null
+    },
+    {
+      "arm": "background_only",
+      "coverage": "room",
+      "family": null,
+      "group": 13,
+      "scores": [
+        null,
+        -7.014097226219165,
+        null,
+        null,
+        -6.747822803282444,
+        -7.073914547292633,
+        -6.908202169344258
+      ],
+      "truth": null
+    },
+    {
+      "arm": "background_only",
+      "coverage": "room",
+      "family": null,
+      "group": 14,
+      "scores": [
+        -5.055047065362892,
+        -6.36800857511473,
+        -3.7231440999933714,
+        -3.2520055221315243,
+        4.771342979353299,
+        -5.748470320437648,
+        -7.082174829280426
+      ],
+      "truth": null
+    },
+    {
+      "arm": "background_only",
+      "coverage": "room",
+      "family": null,
+      "group": 15,
+      "scores": [
+        -6.502269813737794,
+        -5.532320519077953,
+        -5.436755124665184,
+        -4.358708345636128,
+        -3.387156268653541,
+        -6.413766913620023,
+        null
+      ],
+      "truth": null
+    },
+    {
+      "arm": "background_only",
+      "coverage": "room",
+      "family": null,
+      "group": 16,
+      "scores": [
+        null,
+        -6.779887256717982,
+        null,
+        -5.440608021304078,
+        -5.907130228451616,
+        null,
+        null
+      ],
+      "truth": null
+    }
+  ],
+  "serving_admitted": false
+}

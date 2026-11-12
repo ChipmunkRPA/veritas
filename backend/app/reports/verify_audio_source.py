@@ -65,6 +65,11 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     if audio["coverage"]["decode_limit_reached"] != (len(decoded.pcm) >= decoded.mapping["limit_samples"]):
         raise ValueError("Decoded audio duration disagrees with the recorded coverage limit")
 
+    replay_detail = ""
+    if stereo and stereo["schema"] == STEREO_CONTEXT_SCHEMA and stereo["stereo_pcm_sha256"] is not None:
+        if stereo != decoded.mapping.get("stereo_context"):
+            raise ValueError("Stereo channel and mono-downmix evidence differs from the original audio samples")
+        replay_detail = f" Recomputed stereo channel and mono-downmix evidence for {len(stereo['windows'])} windows."
     covered = set()
     intervals = 0
     for label, span, timestamps, asset in _clips(audio, alignment):
@@ -84,19 +89,16 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
 
         if decoded.stereo_pcm is None:
             raise ValueError("The original audio did not yield the aligned stereo channels")
+        plots = {entry["sha256"]: entry["file"] for entry in bundle["artifacts"] if entry["media_type"] == "image/png"}
         try:
-            covered.update(verify_payloads(listening, stereo, decoded.pcm, selected_pcm(stereo, decoded.stereo_pcm)))
+            covered.update(verify_payloads(listening, stereo, decoded.pcm, selected_pcm(stereo, decoded.stereo_pcm),
+                                           read_waveform=lambda sha: archive.read(plots[sha])))
         except ObjectIntegrityError as error:
             raise ValueError(str(error)) from error
         intervals += 3 * len(listening["windows"])
     expected = {entry["sha256"] for entry in bundle["artifacts"] if entry["media_type"] == "audio/wav"}
     if covered != expected:
         raise ValueError("The source comparison did not account for every WAV asset in the package")
-    replay_detail = ""
-    if stereo and stereo["schema"] == STEREO_CONTEXT_SCHEMA and stereo["stereo_pcm_sha256"] is not None:
-        if stereo != decoded.mapping.get("stereo_context"):
-            raise ValueError("Stereo channel and mono-downmix evidence differs from the original audio samples")
-        replay_detail = f" Recomputed stereo channel and mono-downmix evidence for {len(stereo['windows'])} windows."
     similarity = audio.get("similarity_context")
     if similarity and similarity["schema"] == "chipmunk.audio-repeat-similarity/2":
         from app.evidence.audio_similarity import verify

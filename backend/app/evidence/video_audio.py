@@ -104,7 +104,7 @@ def validate_channel(channel: dict, *, source_sha256: str) -> None:
         raise audio_packets.PacketIntegrityError('Video audio status differs from its measured coverage')
 
 
-def verify_source_content(channel: dict, *, result: dict, store, source_sha256: str) -> None:
+def verify_source_content(channel: dict, *, result: dict, store, source_sha256: str, read_waveform=None) -> None:
     """Verify measured voice content against its parent's frozen raw-run commitments."""
     from types import SimpleNamespace
 
@@ -124,7 +124,7 @@ def verify_source_content(channel: dict, *, result: dict, store, source_sha256: 
     pcm, mapping = audio_packets._input(store, SimpleNamespace(sha256=source_sha256), binding)
     if channel.get('stereo_context_sha256') != record.get('stereo_context_sha256'):
         raise audio_packets.PacketIntegrityError('Video stereo context differs from its published commitment')
-    stereo_listening.verify(store, channel, binding.get('stereo_listening_pcm_sha256'), pcm)
+    stereo_listening.verify(store, channel, binding.get('stereo_listening_pcm_sha256'), pcm, read_waveform=read_waveform)
     if channel.get('sound_events') is not None:
         from app.evidence.sound_events import verify
         verify(channel['sound_events'], store=store, record=record, binding=binding,

@@ -12,6 +12,8 @@ from app.evidence.stereo_listening_binding import CHANNELS, DIMENSIONS, SCHEMA, 
 from app.storage.artefacts import register_artefact
 from app.storage.objects import ObjectIntegrityError
 
+PLOT_BOX = (108, 32, 933, 262)
+
 
 def selected_pcm(stereo: dict, pcm: np.ndarray) -> bytes:
     return b"".join(
@@ -31,11 +33,11 @@ def freeze(db, store, analysis_id: str, decoded):
                              created_by=SCHEMA, analysis_id=analysis_id)
 
 
-def _waveform(tracks: tuple[np.ndarray, ...], start_sample: int) -> bytes:
+def _waveform(tracks: tuple[np.ndarray, ...]) -> bytes:
     im = Image.new("RGB", DIMENSIONS, "#faf9f5")
     draw = ImageDraw.Draw(im)
-    x0, x1 = 108, 932
-    draw.text((x0, 10), "Decoded stereo and analyzed mono | Same amplitude scale", fill="#203b30")
+    x0, x1 = PLOT_BOX[0], PLOT_BOX[2] - 1
+    draw.text((x0, 10), "Same amplitude scale | Time within clip", fill="#203b30")
     labels = ("Left channel", "Right channel", "Analyzed mono")
     colors = ("#176853", "#315b96", "#9b511e")
     for index, (track, label, color) in enumerate(zip(tracks, labels, colors, strict=True)):
@@ -46,7 +48,7 @@ def _waveform(tracks: tuple[np.ndarray, ...], start_sample: int) -> bytes:
         for i, chunk in enumerate(np.array_split(track, x1 - x0)):
             draw.line((x0+i, mid-float(chunk.max())*32, x0+i, mid-float(chunk.min())*32), fill=color)
     for i in range(5):
-        draw.text((x0 - 12 + i * (x1 - x0) / 4, 267), f"{start_sample/SAMPLE_RATE+i/4:.2f}s", fill="#203b30")
+        draw.text((x0 - 12 + i * (x1 - x0) / 4, 267), f"{i/4:.2f}s", fill="#203b30")
     out = io.BytesIO()
     im.save(out, "PNG")
     return out.getvalue()
@@ -63,7 +65,7 @@ def payloads(data: bytes, stereo: dict, pcm: np.ndarray, *, waveform: bool = Tru
         tracks = (pair[:, 0].astype(np.float32) / 32768, pair[:, 1].astype(np.float32) / 32768, pcm[start:end])
         files = {name: wav_bytes(track) for name, track in zip(CHANNELS, tracks, strict=True)}
         if waveform:
-            files["waveform"] = _waveform(tracks, start)
+            files["waveform"] = _waveform(tracks)
         yield index, files
 
 
@@ -86,25 +88,34 @@ def build(store, digest: str | None, stereo: dict | None, pcm: np.ndarray, asset
     return {"schema": SCHEMA, "affects_overall_confidence": False, "windows": rows}
 
 
-def verify_payloads(listening: dict, stereo: dict, pcm: np.ndarray, data: bytes, *, waveform: bool = False) -> set[str]:
+def verify_payloads(listening: dict, stereo: dict, pcm: np.ndarray, data: bytes, *, read_waveform=None) -> set[str]:
     try:
         validate(listening, stereo)
     except ValueError as error:
         raise ObjectIntegrityError(str(error)) from error
     wav_digests = set()
-    for row, (_, files) in zip(listening["windows"], payloads(data, stereo, pcm, waveform=waveform), strict=True):
+    for row, (_, files) in zip(listening["windows"], payloads(data, stereo, pcm, waveform=read_waveform is not None), strict=True):
         for name, body in files.items():
+            recorded = row["artifacts"][name]["sha256"]
+            if name == "waveform":
+                # Replay plot pixels independent of font rendering and PNG encoding.
+                try:
+                    with Image.open(io.BytesIO(body)) as expected, Image.open(io.BytesIO(read_waveform(recorded))) as displayed:
+                        if displayed.convert("RGB").crop(PLOT_BOX).tobytes() == expected.crop(PLOT_BOX).tobytes():
+                            continue
+                except (OSError, SyntaxError) as error:
+                    raise ObjectIntegrityError("Stereo listening waveform could not be decoded") from error
+                raise ObjectIntegrityError("Stereo listening waveform differs from its committed channel samples")
             digest = hashlib.sha256(body).hexdigest()
-            if digest != row["artifacts"][name]["sha256"]:
+            if digest != recorded:
                 raise ObjectIntegrityError("Stereo listening asset differs from its committed channel samples")
-            if name in CHANNELS:
-                wav_digests.add(digest)
+            wav_digests.add(digest)
     return wav_digests
 
 
-def verify(store, document: dict, digest: str | None, pcm: np.ndarray) -> None:
+def verify(store, document: dict, digest: str | None, pcm: np.ndarray, *, read_waveform=None) -> None:
     listening = document.get("stereo_listening")
     if (digest is None) != (listening is None):
         raise ObjectIntegrityError("Stereo listening availability differs from the frozen audio input")
     if digest is not None:
-        verify_payloads(listening, document["stereo_context"], pcm, _frozen_data(store, digest))
+        verify_payloads(listening, document["stereo_context"], pcm, _frozen_data(store, digest), read_waveform=read_waveform)

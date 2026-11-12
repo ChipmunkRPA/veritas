@@ -267,7 +267,8 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
         result = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
         if canonical_hash(result) != document["original_result_hash"]:
             raise ObjectIntegrityError("Video child evidence uses another frozen result")
-        video_audio.verify_source_content(document["audio"], result=result, store=store, source_sha256=source["sha256"])
+        video_audio.verify_source_content(document["audio"], result=result, store=store, source_sha256=source["sha256"],
+                                          read_waveform=assets.__getitem__)
         if document["audio"]["coverage"] is not None:
             _verify_audio(document["audio"], store, assets, result=result)
         video_av.verify_source_assets(document["av"], video_source=source, result=result, store=store,
@@ -293,7 +294,7 @@ def _verify_audio(document: dict, store: ObjectStore, assets: dict[str, bytes], 
     else:
         if stereo_context != mapping.get("stereo_context"):
             raise ObjectIntegrityError("Stereo context differs from the frozen audio input mapping")
-        stereo_listening.verify(store, document, mapping.get("stereo_listening_pcm_sha256"), pcm)
+        stereo_listening.verify(store, document, mapping.get("stereo_listening_pcm_sha256"), pcm, read_waveform=assets.__getitem__)
     if stereo_context is not None:
         from app.detectors.audio.stereo import verify_mono_levels
 

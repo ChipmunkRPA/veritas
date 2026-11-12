@@ -228,7 +228,8 @@ def test_actual_audio_stage_packet_api_export_and_report_use_same_windows(tmp_pa
         assert mapping["stereo_listening_pcm_sha256"] not in service.asset_refs(packet)
         decoded = decode_audio(path, source_sha256=sha, inspect_stereo=True)
         raw = stereo_listening.selected_pcm(packet["stereo_context"], decoded.stereo_pcm)
-        assert stereo_listening.verify_payloads(listening, packet["stereo_context"], decoded.pcm, raw, waveform=True)
+        assert stereo_listening.verify_payloads(listening, packet["stereo_context"], decoded.pcm, raw,
+                                                read_waveform=store.read_bytes)
         (overlap,) = packet["coverage"]["stereo_attenuation_overlaps"]
         assert overlap == {
             "start_sample": 16000, "end_sample": 32000, "unscored_interval_index": 0, "stereo_window_index": 1,
@@ -303,6 +304,12 @@ def test_actual_audio_stage_packet_api_export_and_report_use_same_windows(tmp_pa
         forged_listening["sha256"] = audio_packets.packet_hash(forged_listening)
         with pytest.raises(ObjectIntegrityError, match="differs from its committed channel samples"):
             multimedia_evidence.view(snapshot.model_copy(update={"evidence": forged_listening}))
+        swapped_plot = deepcopy(packet)
+        first, second = (row["artifacts"] for row in swapped_plot["stereo_listening"]["windows"])
+        first["waveform"], second["waveform"] = second["waveform"], first["waveform"]
+        swapped_plot["sha256"] = audio_packets.packet_hash(swapped_plot)
+        with pytest.raises(ObjectIntegrityError, match="waveform differs from its committed channel samples"):
+            multimedia_evidence.view(snapshot.model_copy(update={"evidence": swapped_plot}))
         wrong_source = tmp_path / "different.wav"
         _source(wrong_source, seconds=2, mode="in_phase", rate=SAMPLE_RATE)
         checked = verify.verify_package(built.path, public_key_pem=key.public_pem(), source_audio=wrong_source)

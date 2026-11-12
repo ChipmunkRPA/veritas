@@ -126,6 +126,9 @@ requires the separately obtained source inputs and retained local bindings.
 The [multi-scale image crop trial](image-crop-multiscale-transfer-2026-11-12.md)
 measures what exact crop geometry can cover and which regions the detector
 actually selects on held photos and screenshots.
+The [native tile agreement trial](image-native-tile-agreement-transfer-2026-11-12.md)
+rebuilds each image tile in two layouts and compares regional localization
+with false flags on ordinary photographs and screenshots.
 
 The [strong-background speech test](audio-noise-speech-gate-strong-noise-v269-result.md)
 documents how to reproduce a comparison between the current speech admission

@@ -13,6 +13,9 @@ SCHEMA = "chipmunk.paired-writing-review/1"
 MAX_WORDS = 420
 SCOPE = ("This experimental check compares one changed sentence and its two unchanged neighbors in the same paragraph "
          "of a short English plain-text draft. Responses are uncalibrated and carry zero authorship confidence weight.")
+WORD_SCOPE = ("This experimental check compares one changed sentence and its two unchanged neighbors in the same "
+              "top-level body paragraph of a short English Word draft. Responses are uncalibrated and carry zero "
+              "authorship confidence weight.")
 STATUS_TEXT = {
     "outside_scope": "This draft pair falls outside the exact single-sentence comparison scope.",
     "unavailable": "The local writing checks could not complete the paired comparison.",
@@ -42,7 +45,7 @@ def _source(text: str):
 def paired_input(comparison: dict, earlier: str, later: str) -> PairedInput | None:
     """Pair one interior changed sentence and verify all source ranges before scoring."""
     changes = comparison["changes"]
-    if comparison["format"] != "plain_text" or not changes:
+    if comparison["format"] not in ("plain_text", "docx") or not changes:
         return None
     old, new = _source(earlier), _source(later)
     if old is None or new is None:
@@ -87,6 +90,23 @@ def paired_input(comparison: dict, earlier: str, later: str) -> PairedInput | No
             or not contained(change, "later", after) for change in changes)
             or not all(any(change[side]["changed_tokens"] for change in changes) for side in ("earlier", "later"))):
         return None
+    if comparison["format"] == "docx":
+        # Word body paragraphs are joined with blank lines, which the source mapper always splits.
+        # Check that each linked edit also resolves to the same Word paragraph in its version.
+        for side, focus in (("earlier", before), ("later", after)):
+            anchors = set()
+            for change in changes:
+                item = change[side]
+                paragraphs = item["paragraphs"]
+                if len(paragraphs) != 1:
+                    return None
+                anchor = paragraphs[0]
+                start = item["start"] - anchor["start"]
+                if focus["context_spans"][0][0] < start:
+                    return None
+                anchors.add((anchor["body_index"], start))
+            if len(anchors) != 1:
+                return None
     return PairedInput(old_input, new_input, {"earlier": before, "later": after,
                                              "change_ids": [change["id"] for change in changes]})
 
@@ -106,9 +126,10 @@ def _direction(responses: list[dict]) -> str:
     return "joint_increase" if all(increase >= math.log(2) for increase in increases) else "no_joint_increase"
 
 
-def result(candidate: PairedInput | None, responses: list[dict] | None = None) -> dict:
+def result(candidate: PairedInput | None, responses: list[dict] | None = None, *, draft_format: str = "plain_text") -> dict:
     status = "outside_scope" if candidate is None else _direction(responses) if responses is not None else "unavailable"
-    value = {"schema": SCHEMA, "status": status, "scope": SCOPE, "summary": STATUS_TEXT[status],
+    value = {"schema": SCHEMA, "status": status, "scope": WORD_SCOPE if draft_format == "docx" else SCOPE,
+             "summary": STATUS_TEXT[status],
              "authorship_confidence_contribution": 0}
     if candidate is not None:
         value.update(candidate.geometry)
@@ -122,7 +143,7 @@ def verify(comparison: dict, earlier: str, later: str, recorded: dict) -> str:
     candidate = paired_input(comparison, earlier, later)
     if candidate is None and "responses" in recorded:
         raise ValueError("An out-of-scope draft cannot carry paired responses")
-    expected = result(candidate, recorded.get("responses"))
+    expected = result(candidate, recorded.get("responses"), draft_format=comparison["format"])
     if json.dumps(recorded, sort_keys=True, allow_nan=False) != json.dumps(expected, sort_keys=True, allow_nan=False):
         raise ValueError("The paired writing check does not replay from these source positions and saved responses")
     return expected["status"]

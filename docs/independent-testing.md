@@ -917,10 +917,21 @@ verified 24 changed-token positions and 48 decoded HTML ranges. In a local
 browser test after a simulated checkout, the highlighted words matched the PDF
 and the replayed JSON. The comparison created no second job or order.
 
-When a plain-text export includes the experimental paired check, replay also
-verifies the exact source spans, both input hashes and the arithmetic of the
-saved responses. This offline replay verifies saved values against the stated
-rule. Reproducing the responses themselves requires a separate inference run.
+The authenticated local app can also compare both writing responses for one
+changed sentence flanked by two unchanged sentences in a short English `.txt`
+or `.docx` pair. All three sentences must be in one paragraph. For Word files,
+the check uses top-level body paragraphs and links back to the exact changed
+words in both drafts. It adds zero weight to authorship confidence. Replay
+verifies the source spans, input hashes and arithmetic of the saved responses.
+Reproducing the responses requires a separate inference run.
+
+Rewrapping 53 previously tested article draft pairs in Word preserved the 34
+eligible pairs, the exact model inputs and the selected locations. The check
+reproduced five flags on 23 eligible generated edits and zero on 11 eligible
+ordinary edits. A separate local run used both installed writing checks through
+the authenticated Word route for two generated edits and two ordinary edits.
+All four decisions matched the earlier runs, and their PDFs and JSON replays
+matched the source positions. [Original article panel](writing-journal-body-transfer-2026-11-11.md)
 
 ### Replay document evidence against the original
 

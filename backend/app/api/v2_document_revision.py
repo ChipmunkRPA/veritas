@@ -186,7 +186,7 @@ def _unavailable() -> ProblemError:
 
 
 def _paired_enabled(extension: str | None) -> bool:
-    if extension != ".txt":
+    if extension not in (".txt", ".docx"):
         return False
     from app.detectors.text.adapters.agreement import enabled as writing_review_enabled
 
@@ -237,12 +237,14 @@ def _compare(aid: str, original: tuple[str, int, str], earlier: bytes, include_p
         from app.evidence import document_revision_writing as paired
 
         candidate = None
+        draft_format = comparison["format"]
         try:
             candidate = paired.paired_input(comparison, old_text, new_text)
-            comparison["paired_check"] = paired.result(candidate, paired.score(candidate) if candidate is not None else None)
+            responses = paired.score(candidate) if candidate is not None else None
+            comparison["paired_check"] = paired.result(candidate, responses, draft_format=draft_format)
         except Exception as error:
             log.warning("document_revision.paired_check_unavailable", exception=type(error).__name__)
-            comparison["paired_check"] = paired.result(candidate)
+            comparison["paired_check"] = paired.result(candidate, draft_format=draft_format)
     payload: dict = {"comparison": comparison}
     if include_pdf:
         from app.reports.document_revision_pdf import render

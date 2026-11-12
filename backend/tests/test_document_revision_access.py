@@ -181,17 +181,28 @@ def test_pdf_drafts_with_unmapped_or_locked_pages_are_refused():
             document_revision.compare(unsupported, source, ".pdf")
 
 
-def test_opt_in_paired_check_replays_exact_focus_and_preserves_unscored_comparison(reference_http, monkeypatch, tmp_path):
+@pytest.mark.parametrize("extension", [".txt", ".docx"])
+def test_opt_in_paired_check_replays_exact_focus_and_preserves_unscored_comparison(
+    reference_http, monkeypatch, tmp_path, extension,
+):
     f = _install(reference_http, monkeypatch)
     monkeypatch.setattr(settings, "text_detector_mode", "candidate")
     monkeypatch.setattr(settings, "text_window_sentences", 3)
     monkeypatch.setattr(settings, "text_checkpoint_agreement_review", True)
-    lead = "Meeting minutes.\r\n\r\nThe committee met on Monday morning to review the budget.\r\n"
+    lead = "The committee met on Monday morning to review the budget.\n"
     tail = " The final minutes will be available after the next meeting."
     old_focus = "The draft gives  the survey date and meeting location."
     new_focus = "The revision includes a detailed account of the survey and its outcomes."
-    earlier, later = (lead + focus + tail for focus in (old_focus, new_focus))
-    _saved(f, "paired-draft", ".txt", later.encode())
+    if extension == ".docx":
+        prefix = "A shared opening.\n\n"
+        earlier_file, later_file = (_word(lead + focus + tail, f"Excluded{index}")
+                                    for index, focus in enumerate((old_focus, new_focus)))
+    else:
+        prefix = "Meeting minutes.\r\n\r\n"
+        lead = lead.replace("\n", "\r\n")
+        earlier_file, later_file = ((prefix + lead + focus + tail).encode() for focus in (old_focus, new_focus))
+    earlier, later = (prefix + lead + focus + tail for focus in (old_focus, new_focus))
+    _saved(f, "paired-draft", extension, later_file)
     url = _url("paired-draft")
     assert f.client.get(url, headers=f.viewer).json()["paired_check_available"] is True
     inputs = []
@@ -201,15 +212,20 @@ def test_opt_in_paired_check_replays_exact_focus_and_preserves_unscored_comparis
         return [{"earlier": .1, "later": .4}, {"earlier": .3, "later": .6}]
 
     monkeypatch.setattr(paired, "score", measure)
-    ordinary = f.client.post(url, headers=f.viewer, files=_upload(earlier.encode(), ".txt"))
+    ordinary = f.client.post(url, headers=f.viewer, files=_upload(earlier_file, extension))
     assert ordinary.status_code == 200 and "paired_check" not in ordinary.json()["comparison"] and not inputs
-    response = f.client.post(url, headers=f.viewer, files=_upload(earlier.encode(), ".txt"),
+    response = f.client.post(url, headers=f.viewer, files=_upload(earlier_file, extension),
                              data={"include_pdf": "true", "include_paired_check": "true"})
     assert response.status_code == 200 and response.headers["cache-control"] == "no-store"
     body = response.json()
     comparison = body["comparison"]
     check = comparison["paired_check"]
     assert check["status"] == "joint_increase" and check["authorship_confidence_contribution"] == 0
+    if extension == ".docx":
+        assert "top-level body paragraph" in check["scope"]
+        assert comparison["coordinate_space"] == "docx_body_unicode_codepoint"
+        assert all(change[side]["paragraphs"][0]["paragraph"] == 3
+                   for change in comparison["changes"] for side in ("earlier", "later"))
     assert {k: v for k, v in comparison.items() if k != "paired_check"} == ordinary.json()["comparison"]
     for side, source, focus in (("earlier", earlier, old_focus), ("later", later, new_focus)):
         excerpt = check[side]
@@ -224,9 +240,9 @@ def test_opt_in_paired_check_replays_exact_focus_and_preserves_unscored_comparis
         assert "Check 1" in text and "Check 2" in text and "Linked wording changes C01" in text
         assert any(page.get_links() for page in report)
         assert "Tropa" not in text and "ModernBERT" not in text
-    source_old, source_new, exported = (tmp_path / name for name in ("earlier.txt", "later.txt", "comparison.json"))
-    source_old.write_bytes(earlier.encode())
-    source_new.write_bytes(later.encode())
+    source_old, source_new, exported = (tmp_path / name for name in (f"earlier{extension}", f"later{extension}", "comparison.json"))
+    source_old.write_bytes(earlier_file)
+    source_new.write_bytes(later_file)
     exported.write_text(json.dumps(comparison))
     assert review(exported, source_old, source_new)["paired_scope_and_saved_response_arithmetic"] == "joint_increase"
     check["later"]["input_sha256"] = "0" * 64
@@ -234,22 +250,33 @@ def test_opt_in_paired_check_replays_exact_focus_and_preserves_unscored_comparis
     with pytest.raises(ValueError, match="paired writing check does not replay"):
         review(exported, source_old, source_new)
 
-    unchanged = f.client.post(url, headers=f.viewer, files=_upload(later.encode(), ".txt"),
+    unchanged = f.client.post(url, headers=f.viewer, files=_upload(later_file, extension),
                               data={"include_paired_check": "true"})
     assert unchanged.status_code == 200 and unchanged.json()["comparison"]["paired_check"]["status"] == "outside_scope"
+    if extension == ".docx":
+        split = Document()
+        for paragraph in (prefix.strip(), lead.strip(), old_focus + tail):
+            split.add_paragraph(paragraph)
+        file = BytesIO()
+        split.save(file)
+        different_layout = f.client.post(url, headers=f.viewer, files=_upload(file.getvalue(), extension),
+                                         data={"include_paired_check": "true"})
+        assert different_layout.status_code == 200
+        assert different_layout.json()["comparison"]["paired_check"]["status"] == "outside_scope"
     assert len(inputs) == 1
 
     def unavailable(_candidate):
         raise RuntimeError("A private diagnostic")
 
     monkeypatch.setattr(paired, "score", unavailable)
-    failure = f.client.post(url, headers=f.viewer, files=_upload(earlier.encode(), ".txt"), data={"include_paired_check": "true"})
+    failure = f.client.post(url, headers=f.viewer, files=_upload(earlier_file, extension), data={"include_paired_check": "true"})
     assert failure.status_code == 200 and failure.json()["comparison"]["paired_check"]["status"] == "unavailable"
     assert "A private diagnostic" not in failure.text
 
 
 def test_word_comparison_uses_exact_body_paragraph_coordinates_in_api_pdf_and_replay(reference_http, monkeypatch, tmp_path):
     f = _install(reference_http, monkeypatch)
+    monkeypatch.setattr(settings, "text_checkpoint_agreement_review", False)
     texts = ("📎 Send the crème  brûlée on Tuesday.", "📎 Send the café  order on Thursday.")
     earlier, later = (_word(text, f"Excluded{index}") for index, text in enumerate(texts))
     _saved(f, "word-draft", ".DOCX", later)

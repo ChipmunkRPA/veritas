@@ -45,6 +45,7 @@ from app.evidence import (
     document_matched_context,
     document_packets,
     document_scope,
+    image_packets_v7,
     service,
     video_packets,
 )
@@ -114,25 +115,29 @@ def test_actual_0023_to_0024_migration_preserves_legacy_package_bytes_and_every_
     db_engine.dispose()
 
 
-@pytest.fixture(params=["video", "audio", "document", "document_agreement", "hybrid_document", "image", "image_translation", "image_affine"])
+@pytest.fixture(params=["video", "audio", "document", "document_agreement", "hybrid_document", "image", "image_translation",
+                        "image_affine", "image_affine_large"])
 def multimedia_package(request, tmp_path, monkeypatch):
     hybrid = request.param == "hybrid_document"
     agreement = request.param == "document_agreement"
     translated = request.param == "image_translation"
-    geometric = request.param == "image_affine"
+    large_affine = request.param == "image_affine_large"
+    geometric = large_affine or request.param == "image_affine"
     kind = "document" if hybrid or agreement else "image" if translated or geometric else request.param
     if kind == "image":
         fixture = request.getfixturevalue("packet_fixture")
         if geometric:
             monkeypatch.setattr(settings, "environment", "dev")
             monkeypatch.setattr(settings, "image_affine_copy_review", True)
-            db, store, analysis, result, _ = affine_result(fixture)
+            if not large_affine:
+                monkeypatch.setattr(image_packets_v7, "_active_version", lambda: "image-evidence-13")
+            db, store, analysis, result, _ = affine_result(fixture, large=large_affine)
         else:
             db, store, analysis, result, _ = reflected_result(fixture, large=not translated,
                                                               reflected=not translated, translated=translated)
         document = service.persist_packet_set(db, analysis, store, result=result)
-        assert document["version"] == ("image-evidence-13" if geometric else "image-evidence-12")
-        assert document["source"]["width"] == (768 if translated or geometric else 1408)
+        assert document["version"] == ("image-evidence-14" if large_affine else "image-evidence-13" if geometric else "image-evidence-12")
+        assert document["source"]["width"] == (1536 if large_affine else 768 if translated or geometric else 1408)
         assert document["copy_affine" if geometric else "copy_translation" if translated else "copy_similarity"]["pairs"]
     elif kind == "video":
         db, store, analysis, result, *_ = request.getfixturevalue("video_fixture")

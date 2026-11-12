@@ -19,7 +19,8 @@
 <h3>{{ title }}</h3>
 <p>{{ check.observation }}</p>
 <p class="caption">{{ check.interpretation }}</p>
-{% if check.schema in ['same-image-copy-similarity/1', 'same-image-affine-support/1'] %}<p class="caption">This check carries zero weight in AI authorship confidence.</p>{% endif %}
+{% if check.schema in ['same-image-copy-similarity/1', 'same-image-affine-support/1', 'same-image-affine-support/2'] %}<p class="caption">This check carries zero weight in AI authorship confidence.</p>{% endif %}
+{% if check.get('proposal_search') and check.proposal_search.basis == 'reduced' %}<p class="caption">The candidate search used a {{ check.proposal_search.width }} × {{ check.proposal_search.height }} pixel working image. The check measured any matching masks on the original pixel grid.</p>{% endif %}
 {% if check.get('basis_text') %}<p class="caption">{{ check.basis_text }}</p>{% endif %}
 {% for pair in check.pairs %}
 <article class="image-evidence-packet" id="image-evidence-{{ pair.id }}">

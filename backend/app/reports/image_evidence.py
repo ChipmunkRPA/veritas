@@ -125,10 +125,10 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
         if check is None:
             continue
         status = check["status"]
-        if status == SKIPPED_CREDENTIALS and document["version"] == affine.VERSION:
+        if status == SKIPPED_CREDENTIALS and document.get(affine.KEY):
             check["observation"] = "Trusted Content Credentials cover this image and declare AI involvement. The image copy checks were skipped."
         elif field == affine.KEY:
-            check["observation"] = affine.STATUS_TEXT[status]
+            check["observation"] = affine.status_text(status, document["version"])
         else:
             check["observation"] = (status_text(status, version=document["version"])
                                     if field == "copy_similarity" or status == SKIPPED_CREDENTIALS

@@ -12,9 +12,12 @@ V10 = "image-evidence-10"
 V11 = "image-evidence-11"
 V12 = "image-evidence-12"
 V13 = "image-evidence-13"
+V14 = "image-evidence-14"
 VERSION = V12
-TRANSLATION_VERSIONS = frozenset({V10, V11, V12, V13})
-BASIS_VERSIONS = frozenset({V11, V12, V13})
+AFFINE_VERSIONS = frozenset({V13, V14})
+CREDENTIAL_VERSIONS = AFFINE_VERSIONS | {V12}
+TRANSLATION_VERSIONS = CREDENTIAL_VERSIONS | {V10, V11}
+BASIS_VERSIONS = CREDENTIAL_VERSIONS | {V11}
 REFLECTION_VERSIONS = frozenset({V7, V8, V9}) | TRANSLATION_VERSIONS
 LARGE_IMAGE_VERSIONS = TRANSLATION_VERSIONS | {V9}
 SCHEMA = "same-image-reflection-similarity/1"
@@ -84,7 +87,7 @@ def result_skip(result: dict) -> dict | None:
 
 def validate_copy_scope(document: dict, scope: dict | None) -> None:
     """Bind the presented skip to the result and require both checks to agree."""
-    if document.get("version") not in {V12, V13}:
+    if document.get("version") not in CREDENTIAL_VERSIONS:
         if scope is not None:
             raise ValueError("Earlier image evidence has no recorded copy check coverage")
         return
@@ -147,7 +150,7 @@ def validate_similarity(document: dict, canonical_hash: Callable[[dict], str]) -
     _validate_check(document, document.get("copy_similarity"), size, supported_size(*size, version=version), reflected=True)
     if version in TRANSLATION_VERSIONS:
         _validate_check(document, document["copy_translation"], size, supported_size(*size, version=V8), reflected=False)
-    if version in {V12, V13}:
+    if version in CREDENTIAL_VERSIONS:
         records = tuple(copy_records(document))
         if len({record["status"] == SKIPPED_CREDENTIALS for record in records}) != 1:
             raise ValueError("The copy checks have different signed credential coverage")
@@ -158,7 +161,7 @@ def copy_records(document: dict) -> Iterator[dict]:
         yield document["copy_similarity"]
     if document.get("version") in TRANSLATION_VERSIONS:
         yield document["copy_translation"]
-    if document.get("version") == V13:
+    if document.get("version") in AFFINE_VERSIONS:
         yield document["copy_affine"]
 
 
@@ -187,7 +190,7 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
         or record["authorship_confidence_contribution"] != 0
         or record["interpretation"] != (NOTE if reflected else TRANSLATION_NOTE)
         or status not in STATUS_TEXT
-        or (skipped and document["version"] not in {V12, V13})
+        or (skipped and document["version"] not in CREDENTIAL_VERSIONS)
         or (not skipped and (status == "unsupported_geometry") == supported)
         or not isinstance(pairs, list)
         or len(pairs) > PAIR_LIMIT

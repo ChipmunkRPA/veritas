@@ -63,15 +63,18 @@ def reflected_result(packet_fixture, *, reflected=True, low_texture=False, large
     return result_from_source(packet_fixture, source)
 
 
-def affine_result(packet_fixture):
+def affine_result(packet_fixture, *, large=False):
     rng = np.random.default_rng(142)
-    scene = cv2.resize(rng.integers(0, 256, (192, 192, 3), dtype=np.uint8), (768, 768), interpolation=cv2.INTER_CUBIC)
-    matrix = cv2.getRotationMatrix2D((168, 200), 14, .83)
-    matrix[:, 2] += [408, 380]
+    scale = 2 if large else 1
+    size = 768 * scale
+    center = (168 * scale, 200 * scale)
+    scene = cv2.resize(rng.integers(0, 256, (192, 192, 3), dtype=np.uint8), (size, size), interpolation=cv2.INTER_CUBIC)
+    matrix = cv2.getRotationMatrix2D(center, 14, .83)
+    matrix[:, 2] += [408 * scale, 380 * scale]
     alpha = np.zeros(scene.shape[:2], np.uint8)
-    cv2.ellipse(alpha, (168, 200), (76, 62), 0, 0, 360, 1, thickness=-1)
-    target = cv2.warpAffine(alpha, matrix, (768, 768), flags=cv2.INTER_NEAREST).astype(bool)
-    warped = cv2.warpAffine(scene, matrix, (768, 768), flags=cv2.INTER_CUBIC)
+    cv2.ellipse(alpha, center, (76 * scale, 62 * scale), 0, 0, 360, 1, thickness=-1)
+    target = cv2.warpAffine(alpha, matrix, (size, size), flags=cv2.INTER_NEAREST).astype(bool)
+    warped = cv2.warpAffine(scene, matrix, (size, size), flags=cv2.INTER_CUBIC)
     scene[target] = warped[target]
     return result_from_source(packet_fixture, Image.fromarray(scene))
 
@@ -102,6 +105,8 @@ def test_large_geometry_gate_preserves_old_scope(width, height, old, latest):
     for version in (V7, V8):
         assert supported_size(width, height, version=version) is old
     assert supported_size(width, height) is latest
+    assert image_packets_v7.affine.supported(width, height) is old
+    assert image_packets_v7.affine.supported(width, height, version=image_packets_v7.affine.LARGE_VERSION) is latest
 
 
 @pytest.mark.parametrize("image_format", ["PNG", "JPEG"])
@@ -289,19 +294,27 @@ def test_translated_pair_is_saved_without_changing_assessment_and_serves_both_so
             assert crop.tobytes() == source.crop(image_packets_v7.box_bounds(region, *source.size)).tobytes()
 
 
-def test_affine_pair_api_and_pdf_preserve_the_two_native_crops_and_binary_masks(evidence_http, monkeypatch):
+@pytest.mark.parametrize("large", [False, True])
+def test_affine_pair_api_and_pdf_preserve_the_two_native_crops_and_binary_masks(evidence_http, monkeypatch, large):
     fixture = evidence_http
     analysis_id = "image-unprepared"
     monkeypatch.setattr(settings, "environment", "dev")
     monkeypatch.setattr(settings, "image_affine_copy_review", True)
     with Session(fixture.engine) as db:
         analysis = db.get(Analysis, analysis_id)
-        db, store, analysis, result, source = affine_result((db, fixture.store, analysis, None, None))
+        db, store, analysis, result, source = affine_result((db, fixture.store, analysis, None, None), large=large)
         document = service.persist_packet_set(db, analysis, store, result=result)
-        assert document["version"] == "image-evidence-13"
+        assert document["version"] == "image-evidence-14"
         assert document["original_result_hash"] == canonical_hash(result)
         check = document["copy_affine"]
         assert check["status"] == "supported_pair" and check["authorship_confidence_contribution"] == 0
+        assert check["proposal_search"] == ({"basis": "reduced", "width": 1024, "height": 1024} if large else
+                                            {"basis": "source", "width": 768, "height": 768})
+        changed_grid = copy.deepcopy(document)
+        changed_grid["copy_affine"]["proposal_search"]["width"] -= 1
+        with pytest.raises(image_packets_v7.PacketIntegrityError, match="different working grid"):
+            image_packets_v7.validate_packet_set(changed_grid, analysis_id=analysis.id, revision=analysis.revision,
+                                                 original_result_hash=analysis.result_hash, source_sha256=analysis.sha256)
         pair, = check["pairs"]
         report = specimen("image", "standard")
         frozen = report.model_copy(update={"result": result, "image_evidence": document,
@@ -332,6 +345,7 @@ def test_affine_pair_api_and_pdf_preserve_the_two_native_crops_and_binary_masks(
     monkeypatch.setattr(image_evidence, "default_store", lambda: store)
     rendered = engine.render_pdf(frozen).pdf
     assert "Geometric copy comparison" in engine.pdf_text(rendered)
+    assert ("1024 × 1024 pixel working image" in engine.pdf_text(rendered)) is large
     assert "Area A selected mask" in engine.pdf_text(rendered)
     assert "Area B mapped mask" in engine.pdf_text(rendered)
     with pymupdf.open(stream=rendered, filetype="pdf") as pdf:

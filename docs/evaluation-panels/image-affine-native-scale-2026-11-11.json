@@ -1,0 +1,1819 @@
+{
+  "freeze_sha256": "fd9c1fb25a5a0e2e0b1b297a61813e105e9f687b58bbbeb6171d59fd276da56f",
+  "measurements_sha256": "e6a83b043aaa27c3cc782b015bc89e50f75789baf54718937b389f1efd6fcf7a",
+  "procedure": {
+    "acquisition_sha256": "0b57802c999cb34008dc95fe3dec47aab3b1146682fe6d97b2219ee2382180dc",
+    "arms": [
+      "source",
+      "source_smoothed"
+    ],
+    "code": {
+      "copy_affine.py": "d6fc0cfcb0ecde701b13bec1fa0fbb7f411a01b06aeecb387f0bf12047ade621",
+      "copy_affine_large.py": "411d84a2ae1f9078428d0f40151d56f541c42f39373fa191147e9829851e0c47",
+      "copy_move.py": "fa9023c67415b7ff90b6c73450f71b6441743c37194a60349f05c0a13452215c",
+      "image_affine_native_scale.py": "ee0de7983117d53ee0374ba184581b90db4b49975d1a56017f86d9be4c48a097",
+      "image_copy_tone_transfer.py": "2490bf2618f5d5d797d9d7f913e35f2aa5e8a320fe68cfef5473339882d8271b"
+    },
+    "formats": [
+      "png",
+      "jpeg75"
+    ],
+    "roster_sha256": "95bcdf9d9b852eb7fbae17194405250443447220568cae9697ddb6a68b48c036",
+    "rule": "Each delivery needs useful pairs on at least six source groups, including at least two feathered groups. Allow flags from at most two ordinary source groups per delivery, at most one from unchanged evaluation photos. Among passing arms prefer the one with more useful views, then fewer ordinary flags, then source.",
+    "schema": "chipmunk.image-affine-native-scale/1",
+    "treatments": [
+      "sharp",
+      "feathered",
+      "published",
+      "global_tone",
+      "local_tone",
+      "resize"
+    ],
+    "versions": {
+      "numpy": "2.2.6",
+      "opencv": "5.0.0",
+      "pillow": "12.3.0"
+    }
+  },
+  "results": {
+    "source": {
+      "jpeg75": {
+        "ordinary_groups": 1,
+        "passes": true,
+        "treatments": {
+          "feathered": {
+            "flagged": 31,
+            "proposals": 31,
+            "unassessed": 0,
+            "useful": 23,
+            "views": 38
+          },
+          "global_tone": {
+            "flagged": 1,
+            "proposals": 1,
+            "unassessed": 0,
+            "useful": 0,
+            "views": 38
+          },
+          "local_tone": {
+            "flagged": 1,
+            "proposals": 1,
+            "unassessed": 0,
+            "useful": 0,
+            "views": 38
+          },
+          "published": {
+            "flagged": 1,
+            "proposals": 1,
+            "unassessed": 0,
+            "useful": 0,
+            "views": 38
+          },
+          "resize": {
+            "flagged": 0,
+            "proposals": 0,
+            "unassessed": 0,
+            "useful": 0,
+            "views": 38
+          },
+          "sharp": {
+            "flagged": 32,
+            "proposals": 32,
+            "unassessed": 0,
+            "useful": 30,
+            "views": 38
+          }
+        },
+        "useful_groups": 30
+      },
+      "png": {
+        "ordinary_groups": 1,
+        "passes": true,
+        "treatments": {
+          "feathered": {
+            "flagged": 33,
+            "proposals": 33,
+            "unassessed": 0,
+            "useful": 25,
+            "views": 38
+          },
+          "global_tone": {
+            "flagged": 1,
+            "proposals": 1,
+            "unassessed": 0,
+            "useful": 0,
+            "views": 38
+          },
+          "local_tone": {
+            "flagged": 1,
+            "proposals": 1,
+            "unassessed": 0,
+            "useful": 0,
+            "views": 38
+          },
+          "published": {
+            "flagged": 1,
+            "proposals": 1,
+            "unassessed": 0,
+            "useful": 0,
+            "views": 38
+          },
+          "resize": {
+            "flagged": 1,
+            "proposals": 1,
+            "unassessed": 0,
+            "useful": 0,
+            "views": 38
+          },
+          "sharp": {
+            "flagged": 34,
+            "proposals": 34,
+            "unassessed": 0,
+            "useful": 32,
+            "views": 38
+          }
+        },
+        "useful_groups": 32
+      }
+    },
+    "source_smoothed": {
+      "jpeg75": {
+        "ordinary_groups": 1,
+        "passes": true,
+        "treatments": {
+          "feathered": {
+            "flagged": 31,
+            "proposals": 31,
+            "unassessed": 0,
+            "useful": 22,
+            "views": 38
+          },
+          "global_tone": {
+            "flagged": 1,
+            "proposals": 1,
+            "unassessed": 0,
+            "useful": 0,
+            "views": 38
+          },
+          "local_tone": {
+            "flagged": 1,
+            "proposals": 1,
+            "unassessed": 0,
+            "useful": 0,
+            "views": 38
+          },
+          "published": {
+            "flagged": 1,
+            "proposals": 1,
+            "unassessed": 0,
+            "useful": 0,
+            "views": 38
+          },
+          "resize": {
+            "flagged": 0,
+            "proposals": 0,
+            "unassessed": 0,
+            "useful": 0,
+            "views": 38
+          },
+          "sharp": {
+            "flagged": 32,
+            "proposals": 32,
+            "unassessed": 0,
+            "useful": 30,
+            "views": 38
+          }
+        },
+        "useful_groups": 30
+      },
+      "png": {
+        "ordinary_groups": 1,
+        "passes": true,
+        "treatments": {
+          "feathered": {
+            "flagged": 33,
+            "proposals": 33,
+            "unassessed": 0,
+            "useful": 22,
+            "views": 38
+          },
+          "global_tone": {
+            "flagged": 1,
+            "proposals": 1,
+            "unassessed": 0,
+            "useful": 0,
+            "views": 38
+          },
+          "local_tone": {
+            "flagged": 1,
+            "proposals": 1,
+            "unassessed": 0,
+            "useful": 0,
+            "views": 38
+          },
+          "published": {
+            "flagged": 1,
+            "proposals": 1,
+            "unassessed": 0,
+            "useful": 0,
+            "views": 38
+          },
+          "resize": {
+            "flagged": 1,
+            "proposals": 1,
+            "unassessed": 0,
+            "useful": 0,
+            "views": 38
+          },
+          "sharp": {
+            "flagged": 34,
+            "proposals": 34,
+            "unassessed": 0,
+            "useful": 31,
+            "views": 38
+          }
+        },
+        "useful_groups": 31
+      }
+    }
+  },
+  "schema": "chipmunk.image-affine-native-scale/1",
+  "seconds": 226.615,
+  "selected": "source",
+  "source_intake": {
+    "attempts": [
+      {
+        "attempts": [
+          {
+            "code": null,
+            "delivery": "thumb",
+            "error": "ValueError"
+          }
+        ],
+        "delivery": "original",
+        "name": "source-00.jpg",
+        "rgb_sha256": "519f2803d1c23be586eda506484a2693485718f4e750d4d874cdea47b59d926f",
+        "sha256": "c6833ff067327baba56f57ec1003865e63f02ec678f94349b00f435b0cbc7dc6",
+        "size": [
+          1920,
+          1280
+        ],
+        "slot": 0,
+        "status": "qualified"
+      },
+      {
+        "attempts": [
+          {
+            "code": null,
+            "delivery": "thumb",
+            "error": "ValueError"
+          }
+        ],
+        "delivery": "original",
+        "name": "source-01.jpg",
+        "rgb_sha256": "2ddf711154c324867a77a6442eca18b9cf93e9bea78512ddb0d1127724d9aa79",
+        "sha256": "2be1638a4a5aefe37470ce19970d9883cb1c76e1751fc127c884d5cbaf2771d8",
+        "size": [
+          1920,
+          1280
+        ],
+        "slot": 1,
+        "status": "qualified"
+      },
+      {
+        "attempts": [
+          {
+            "code": null,
+            "delivery": "thumb",
+            "error": "ValueError"
+          },
+          {
+            "code": 429,
+            "delivery": "original",
+            "error": "HTTPError"
+          }
+        ],
+        "delivery": "thumb",
+        "name": "source-02.jpg",
+        "rgb_sha256": "acf94b6e9ff7577bb8261cf4b8677b2e411278e7e0e26c78a4de8ef472f33486",
+        "sha256": "dc545220b3df10c0e8a08e76cb2833e5da99ea6dc8696d8feadace8f72b678d0",
+        "size": [
+          1920,
+          1280
+        ],
+        "slot": 2,
+        "status": "qualified"
+      },
+      {
+        "attempts": [
+          {
+            "code": null,
+            "delivery": "thumb",
+            "error": "ValueError"
+          },
+          {
+            "code": 429,
+            "delivery": "original",
+            "error": "HTTPError"
+          }
+        ],
+        "delivery": "thumb",
+        "name": "source-03.jpg",
+        "rgb_sha256": "1484a1ff11bd44d02b2386c6e6c98024cb4711c68a0305d42b78fc9550799495",
+        "sha256": "19bb44ebdc6709a4409bd8674158f24da74660de85a6cf4ab8d8e323e7ca3c7d",
+        "size": [
+          1920,
+          1280
+        ],
+        "slot": 3,
+        "status": "qualified"
+      },
+      {
+        "attempts": [
+          {
+            "code": null,
+            "delivery": "thumb",
+            "error": "ValueError"
+          },
+          {
+            "code": 429,
+            "delivery": "original",
+            "error": "HTTPError"
+          }
+        ],
+        "delivery": "thumb",
+        "name": "source-04.jpg",
+        "rgb_sha256": "3b1cc35f3646cb8de665d12ccc3b08288b149938de0ca165d40ab588d74f7928",
+        "sha256": "2b6816275b26e22f7609d72e69f75d7be73c0b797e9dcb00eacfa9b35adde935",
+        "size": [
+          1920,
+          1280
+        ],
+        "slot": 4,
+        "status": "qualified"
+      },
+      {
+        "attempts": [
+          {
+            "code": null,
+            "delivery": "thumb",
+            "error": "ValueError"
+          },
+          {
+            "code": 429,
+            "delivery": "original",
+            "error": "HTTPError"
+          }
+        ],
+        "delivery": "thumb",
+        "name": "source-05.jpg",
+        "rgb_sha256": "4b8aaf06fcc242889b3825358c20d73ade0d1d90ced0971f1819efdf2ac34d35",
+        "sha256": "673747b90b351f8b6dc2956ee96ad15c6ea5e4f270b0ab8407d954dce47b4347",
+        "size": [
+          1920,
+          1280
+        ],
+        "slot": 5,
+        "status": "qualified"
+      },
+      {
+        "attempts": [
+          {
+            "code": null,
+            "delivery": "thumb",
+            "error": "ValueError"
+          },
+          {
+            "code": 429,
+            "delivery": "original",
+            "error": "HTTPError"
+          }
+        ],
+        "delivery": "thumb",
+        "name": "source-06.jpg",
+        "rgb_sha256": "8f93d7a03b54abb7615516d35f071c7eec8680d6420709798c06bb54f69e28d1",
+        "sha256": "344f53f67ddc72adc7711c2a16bfe06796a82d14401a02041c94cfd09ee07b79",
+        "size": [
+          1920,
+          1277
+        ],
+        "slot": 6,
+        "status": "qualified"
+      },
+      {
+        "attempts": [
+          {
+            "code": null,
+            "delivery": "thumb",
+            "error": "ValueError"
+          },
+          {
+            "code": 429,
+            "delivery": "original",
+            "error": "HTTPError"
+          }
+        ],
+        "delivery": "thumb",
+        "name": "source-07.jpg",
+        "rgb_sha256": "428d55476e1bf73d9ec3dad6d6989aed3a4e845efecb2f49de421e0a6707c68e",
+        "sha256": "93e0d083b70f0f14867435120664d0e2f8876bb19305fce75842b9ed08d60491",
+        "size": [
+          1920,
+          1067
+        ],
+        "slot": 7,
+        "status": "qualified"
+      },
+      {
+        "attempts": [
+          {
+            "code": null,
+            "delivery": "thumb",
+            "error": "ValueError"
+          },
+          {
+            "code": 429,
+            "delivery": "original",
+            "error": "HTTPError"
+          }
+        ],
+        "delivery": "thumb",
+        "name": "source-08.jpg",
+        "rgb_sha256": "32d0e3e8cb80bc5b971591d8c80c269fe847b2369a80af51d0d3853082a0af6f",
+        "sha256": "70b3fede67290fda1d7f898606d6c6b60c282135f8506abefc2439093d50d739",
+        "size": [
+          1920,
+          1320
+        ],
+        "slot": 8,
+        "status": "qualified"
+      },
+      {
+        "attempts": [
+          {
+            "code": null,
+            "delivery": "thumb",
+            "error": "ValueError"
+          },
+          {
+            "code": 429,
+            "delivery": "original",
+            "error": "HTTPError"
+          }
+        ],
+        "delivery": "thumb",
+        "name": "source-09.jpg",
+        "rgb_sha256": "9f49b4becde74f5f964df638fd0063c5e58b78a4cefd343239ca8b2a4378515b",
+        "sha256": "abc5db188ddac368d5e657027532600d19419e15bd81a1f13506fe5d07ce7d8e",
+        "size": [
+          1920,
+          1280
+        ],
+        "slot": 9,
+        "status": "qualified"
+      },
+      {
+        "attempts": [
+          {
+            "code": null,
+            "delivery": "thumb",
+            "error": "ValueError"
+          },
+          {
+            "code": 429,
+            "delivery": "original",
+            "error": "HTTPError"
+          }
+        ],
+        "delivery": "thumb",
+        "name": "source-10.jpg",
+        "rgb_sha256": "6fbff1d7de47dca68200304d4806e5dccf0a24db4450169ffc91bab6e534126d",
+        "sha256": "0c734244232ff89d7daceebf9eb659d4a853d9dcc27bd4cdd7af90855a91321f",
+        "size": [
+          1920,
+          1280
+        ],
+        "slot": 10,
+        "status": "qualified"
+      },
+      {
+        "attempts": [
+          {
+            "code": null,
+            "delivery": "thumb",
+            "error": "ValueError"
+          },
+          {
+            "code": 429,
+            "delivery": "original",
+            "error": "HTTPError"
+          }
+        ],
+        "delivery": "thumb",
+        "name": "source-11.jpg",
+        "rgb_sha256": "31eea6a8ed0cea58dc25bbfb3ff57fb0668a9e00bd8ea1f6f2a7cff550957a59",
+        "sha256": "994f2718ebb0b049c468e69892b8c589a891aa7b33ddefdf04a31cd6927a4da2",
+        "size": [
+          1920,
+          1439
+        ],
+        "slot": 11,
+        "status": "qualified"
+      },
+      {
+        "attempts": [
+          {
+            "code": null,
+            "delivery": "thumb",
+            "error": "ValueError"
+          },
+          {
+            "code": 429,
+            "delivery": "original",
+            "error": "HTTPError"
+          }
+        ],
+        "delivery": "thumb",
+        "name": "source-12.jpg",
+        "rgb_sha256": "039895263964fceb2c2ac3cb3c655c0779df46e5e8fdc035c0e4f75ee964cf7e",
+        "sha256": "96b4f7042affc3d915311b903bb489dce44a15c808771491499eefccb5e63716",
+        "size": [
+          1920,
+          1431
+        ],
+        "slot": 12,
+        "status": "qualified"
+      },
+      {
+        "attempts": [
+          {
+            "code": null,
+            "delivery": "thumb",
+            "error": "ValueError"
+          },
+          {
+            "code": 429,
+            "delivery": "original",
+            "error": "HTTPError"
+          }
+        ],
+        "delivery": "thumb",
+        "name": "source-13.jpg",
+        "rgb_sha256": "a5f470fa25bcb08fc0226466da199346c282229f588e8b087de9c82160a0242d",
+        "sha256": "ce353670743463870011db93ced993336f8f8250de61d85ee3a82ab976dc7a59",
+        "size": [
+          1920,
+          1286
+        ],
+        "slot": 13,
+        "status": "qualified"
+      },
+      {
+        "attempts": [
+          {
+            "code": null,
+            "delivery": "thumb",
+            "error": "ValueError"
+          },
+          {
+            "code": 429,
+            "delivery": "original",
+            "error": "HTTPError"
+          }
+        ],
+        "delivery": "thumb",
+        "name": "source-14.jpg",
+        "rgb_sha256": "ec532d1131d3e54675dc289bee72a6f44ed03d054c3604f50fe52263c6f30385",
+        "sha256": "e99ed01cffbdd48075a4ee8b317007761e901cc9678e6fa831afe5c94876c57b",
+        "size": [
+          1920,
+          1275
+        ],
+        "slot": 14,
+        "status": "qualified"
+      },
+      {
+        "attempts": [
+          {
+            "code": null,
+            "delivery": "thumb",
+            "error": "ValueError"
+          },
+          {
+            "code": 429,
+            "delivery": "original",
+            "error": "HTTPError"
+          }
+        ],
+        "delivery": "thumb",
+        "name": "source-15.jpg",
+        "rgb_sha256": "4758635e297e97166de29436bd376622738d27b3c4abc0a9ea76cebc83315e86",
+        "sha256": "f82bf4c4e26c41543993ec9a57e1feac1d755aad3e21b8abbee03aaa3f7282aa",
+        "size": [
+          1920,
+          1280
+        ],
+        "slot": 15,
+        "status": "qualified"
+      },
+      {
+        "attempts": [
+          {
+            "code": null,
+            "delivery": "thumb",
+            "error": "ValueError"
+          },
+          {
+            "code": 429,
+            "delivery": "original",
+            "error": "HTTPError"
+          }
+        ],
+        "delivery": "thumb",
+        "name": "source-16.jpg",
+        "rgb_sha256": "4a759917847cc7c26cd28451e35a5af2df0eab51ff3061a085bd4e9c963f2170",
+        "sha256": "5a3a1a9c7b4417c1fc493ca66da7fc47632340ba6c7cd486a4276d4854f8d5a7",
+        "size": [
+          1920,
+          1440
+        ],
+        "slot": 16,
+        "status": "qualified"
+      },
+      {
+        "attempts": [
+          {
+            "code": null,
+            "delivery": "thumb",
+            "error": "ValueError"
+          },
+          {
+            "code": 429,
+            "delivery": "original",
+            "error": "HTTPError"
+          }
+        ],
+        "delivery": "thumb",
+        "name": "source-17.jpg",
+        "rgb_sha256": "ad9da6943bfc1b807cba0cf0e9de6f97b438b7122ab9454686d84b1c5a0dd3a3",
+        "sha256": "79cb31e377f7ceaa1a15df73ef8994072d927457642a47ef837bc4fce25038e8",
+        "size": [
+          1920,
+          1282
+        ],
+        "slot": 17,
+        "status": "qualified"
+      },
+      {
+        "attempts": [
+          {
+            "code": null,
+            "delivery": "thumb",
+            "error": "ValueError"
+          },
+          {
+            "code": 429,
+            "delivery": "original",
+            "error": "HTTPError"
+          }
+        ],
+        "delivery": "thumb",
+        "name": "source-18.jpg",
+        "rgb_sha256": "47fdd4fe750a2f854de9f4e988822d0f6af728769ca6453fd5ffd2c492ad559b",
+        "sha256": "133d8e045ab867b158f07bb1e5a3355940de939d3fe41094078166d29f2f1d68",
+        "size": [
+          1920,
+          1362
+        ],
+        "slot": 18,
+        "status": "qualified"
+      },
+      {
+        "attempts": [
+          {
+            "code": null,
+            "delivery": "thumb",
+            "error": "ValueError"
+          },
+          {
+            "code": 429,
+            "delivery": "original",
+            "error": "HTTPError"
+          }
+        ],
+        "delivery": "thumb",
+        "name": "source-19.jpg",
+        "rgb_sha256": "3cb385d73817577f31e5ddf68c530ea2ca6ddff8e93a45ea1a7766d1b90108eb",
+        "sha256": "2f26e4e8aefc4f2d560a30e592521a14af361e25b47239b41cee31a32982d488",
+        "size": [
+          1920,
+          1438
+        ],
+        "slot": 19,
+        "status": "qualified"
+      },
+      {
+        "attempts": [
+          {
+            "code": null,
+            "delivery": "thumb",
+            "error": "ValueError"
+          },
+          {
+            "code": 429,
+            "delivery": "original",
+            "error": "HTTPError"
+          }
+        ],
+        "delivery": "thumb",
+        "name": "source-20.jpg",
+        "rgb_sha256": "fcdda8d9a8295e33fb12387ad4631c66e2f5357ffb909d988dce888346737419",
+        "sha256": "29a3fb89f04f60f8b6eca20a7fea8ec97c99fc28db56a34e5e7cef6fa66c2e94",
+        "size": [
+          1920,
+          1069
+        ],
+        "slot": 20,
+        "status": "qualified"
+      },
+      {
+        "attempts": [
+          {
+            "code": null,
+            "delivery": "thumb",
+            "error": "ValueError"
+          },
+          {
+            "code": 429,
+            "delivery": "original",
+            "error": "HTTPError"
+          }
+        ],
+        "delivery": "thumb",
+        "name": "source-21.jpg",
+        "rgb_sha256": "d7a484448c75b805600cdd19753670043e755e557ba00452f91c961bfca76095",
+        "sha256": "ec6e2866a09ade7bde5887df473ab2d988fb06a30ce6eedb43d878b78123ae07",
+        "size": [
+          1920,
+          1440
+        ],
+        "slot": 21,
+        "status": "qualified"
+      },
+      {
+        "attempts": [
+          {
+            "code": null,
+            "delivery": "thumb",
+            "error": "ValueError"
+          },
+          {
+            "code": 429,
+            "delivery": "original",
+            "error": "HTTPError"
+          }
+        ],
+        "delivery": "thumb",
+        "name": "source-22.jpg",
+        "rgb_sha256": "151552e53b5afdfc5b206c7457fde88aa38972b4fde2b6f604177091f5772d80",
+        "sha256": "e236099428576bde46029eec6dafce1c1cbfb8f33770f55559a1a9f3aa7e4022",
+        "size": [
+          1920,
+          1276
+        ],
+        "slot": 22,
+        "status": "qualified"
+      },
+      {
+        "attempts": [
+          {
+            "code": null,
+            "delivery": "thumb",
+            "error": "ValueError"
+          },
+          {
+            "code": 429,
+            "delivery": "original",
+            "error": "HTTPError"
+          }
+        ],
+        "delivery": "thumb",
+        "name": "source-23.jpg",
+        "rgb_sha256": "f445b88c5bf08146d88353dd2fe7ceba5a8c5683b5b14aa73bc74921734ca67f",
+        "sha256": "410da23f941c1e93d220f74991d21c375d9ac7fe081a02bebe3081eae9c7c062",
+        "size": [
+          1280,
+          1920
+        ],
+        "slot": 23,
+        "status": "qualified"
+      },
+      {
+        "attempts": [
+          {
+            "code": null,
+            "delivery": "thumb",
+            "error": "ValueError"
+          },
+          {
+            "code": 429,
+            "delivery": "original",
+            "error": "HTTPError"
+          }
+        ],
+        "delivery": "thumb",
+        "name": "source-24.jpg",
+        "rgb_sha256": "26dd4ad46f6b07dc6d756b0693eeaa54bdebbc7dfe5cf6fdce556a33a7759da0",
+        "sha256": "640a25d931b8ed7fed17e1892085981c0dfdf4a1b0b8b4eb7a8667647cc25b3d",
+        "size": [
+          1920,
+          903
+        ],
+        "slot": 24,
+        "status": "qualified"
+      },
+      {
+        "attempts": [
+          {
+            "code": null,
+            "delivery": "thumb",
+            "error": "ValueError"
+          },
+          {
+            "code": 429,
+            "delivery": "original",
+            "error": "HTTPError"
+          }
+        ],
+        "delivery": "thumb",
+        "name": "source-25.jpg",
+        "rgb_sha256": "199f6ca57516c8915523c52bcf8b2e68d0dfced90f9a5670be0ed178c25b60d3",
+        "sha256": "7b135668a29a123dfa24040a85a9956c53dbb2e0d33fd9b3c279e483488bf4e3",
+        "size": [
+          1920,
+          1283
+        ],
+        "slot": 25,
+        "status": "qualified"
+      },
+      {
+        "attempts": [
+          {
+            "code": null,
+            "delivery": "thumb",
+            "error": "ValueError"
+          },
+          {
+            "code": 429,
+            "delivery": "original",
+            "error": "HTTPError"
+          }
+        ],
+        "delivery": "thumb",
+        "name": "source-26.jpg",
+        "rgb_sha256": "c216222aa660413fba1d6dd0bb48e7058314cdd77ee578a6b54dceafe4d47cb7",
+        "sha256": "572943fca536d09bdf7bb2c04f3067ae4762a2dc1319561d1f5bcb16b5b00a2c",
+        "size": [
+          1920,
+          1282
+        ],
+        "slot": 26,
+        "status": "qualified"
+      },
+      {
+        "attempts": [
+          {
+            "code": null,
+            "delivery": "thumb",
+            "error": "ValueError"
+          },
+          {
+            "code": 429,
+            "delivery": "original",
+            "error": "HTTPError"
+          }
+        ],
+        "delivery": "thumb",
+        "name": "source-27.jpg",
+        "rgb_sha256": "4c976830314f376ff54b4b5df6bf903494602c147a0e1764ba03ebbadd74fe35",
+        "sha256": "c97f085c580f7b6892bd9523a628ed467a172b3ce522e050e611f4a4b7ab7666",
+        "size": [
+          1275,
+          1920
+        ],
+        "slot": 27,
+        "status": "qualified"
+      },
+      {
+        "attempts": [
+          {
+            "code": null,
+            "delivery": "thumb",
+            "error": "ValueError"
+          },
+          {
+            "code": 429,
+            "delivery": "original",
+            "error": "HTTPError"
+          }
+        ],
+        "delivery": "thumb",
+        "name": "source-28.jpg",
+        "rgb_sha256": "4644292ee29f0cc5a492aacbe953bad14306f8cd644f0ca19953426d183a51b3",
+        "sha256": "7609dbd0c0ff20752ba9cbfc644810198645c8c3fb05e168b6f6e593bd5a15c6",
+        "size": [
+          1920,
+          1440
+        ],
+        "slot": 28,
+        "status": "qualified"
+      },
+      {
+        "attempts": [
+          {
+            "code": null,
+            "delivery": "thumb",
+            "error": "ValueError"
+          },
+          {
+            "code": 429,
+            "delivery": "original",
+            "error": "HTTPError"
+          }
+        ],
+        "delivery": "thumb",
+        "name": "source-29.jpg",
+        "rgb_sha256": "235530da55359e105384f6aa778aeb497497585456f5c6b464fdba19b6c88f8a",
+        "sha256": "7743986a7a30d8017ef7213c8dcebcf23e9fbda63b3f15b9d7de067c7c309904",
+        "size": [
+          1920,
+          1280
+        ],
+        "slot": 29,
+        "status": "qualified"
+      },
+      {
+        "attempts": [
+          {
+            "code": null,
+            "delivery": "thumb",
+            "error": "ValueError"
+          },
+          {
+            "code": 429,
+            "delivery": "original",
+            "error": "HTTPError"
+          }
+        ],
+        "delivery": "thumb",
+        "name": "source-30.jpg",
+        "rgb_sha256": "77926aea38291c2451f200296f1f0343e3a61541a077079e04f3d86b823d4ca1",
+        "sha256": "12068f2e78a122c5bbaf273702a30c00fe2c187a8b93c15e5d9bd506ee02f467",
+        "size": [
+          1920,
+          1361
+        ],
+        "slot": 30,
+        "status": "qualified"
+      },
+      {
+        "attempts": [
+          {
+            "code": null,
+            "delivery": "thumb",
+            "error": "ValueError"
+          },
+          {
+            "code": 429,
+            "delivery": "original",
+            "error": "HTTPError"
+          }
+        ],
+        "delivery": "thumb",
+        "name": "source-31.jpg",
+        "rgb_sha256": "5257715677b51b93230e021620726463ee1bdd4435addd11c87207d3b643b581",
+        "sha256": "4d73f1888bc8bb8223bfc1814aaeede0be96dc59a81f5a4ad490860fb4adb337",
+        "size": [
+          1920,
+          1172
+        ],
+        "slot": 31,
+        "status": "qualified"
+      },
+      {
+        "attempts": [
+          {
+            "code": null,
+            "delivery": "thumb",
+            "error": "ValueError"
+          },
+          {
+            "code": 429,
+            "delivery": "original",
+            "error": "HTTPError"
+          }
+        ],
+        "delivery": "thumb",
+        "name": "source-32.jpg",
+        "rgb_sha256": "e34949dd862519cfca34ed63a291594fb0f900ec70876f08ed0a2cf968971da8",
+        "sha256": "538fa8e5fbda450452cad18d9439dcadc044ee98bdff844a0ace32151eb69879",
+        "size": [
+          1920,
+          1280
+        ],
+        "slot": 32,
+        "status": "qualified"
+      },
+      {
+        "attempts": [
+          {
+            "code": null,
+            "delivery": "thumb",
+            "error": "ValueError"
+          },
+          {
+            "code": 429,
+            "delivery": "original",
+            "error": "HTTPError"
+          }
+        ],
+        "delivery": "thumb",
+        "name": "source-33.jpg",
+        "rgb_sha256": "f19fe3ee0671906911d4155926048db7a7a724b0affdb6c8b395a31d5c8cd1db",
+        "sha256": "9006d345cfada77a8087cc989d9e51541d8b1a3720e29b8a7bd1806d8b7cd9d9",
+        "size": [
+          1440,
+          1920
+        ],
+        "slot": 33,
+        "status": "qualified"
+      },
+      {
+        "attempts": [
+          {
+            "code": null,
+            "delivery": "thumb",
+            "error": "ValueError"
+          },
+          {
+            "code": 429,
+            "delivery": "original",
+            "error": "HTTPError"
+          }
+        ],
+        "delivery": "thumb",
+        "name": "source-34.jpg",
+        "rgb_sha256": "c639724db626d6ac97db5a82f931cafd2895898867dda8a10585f3c3cbb8058b",
+        "sha256": "db4cec05c989fe5112550cea3a1a363354d4fe37d23e835566b5f8939bdeb79b",
+        "size": [
+          1920,
+          1204
+        ],
+        "slot": 34,
+        "status": "qualified"
+      },
+      {
+        "attempts": [
+          {
+            "code": null,
+            "delivery": "thumb",
+            "error": "ValueError"
+          },
+          {
+            "code": 429,
+            "delivery": "original",
+            "error": "HTTPError"
+          }
+        ],
+        "delivery": "thumb",
+        "name": "source-35.jpg",
+        "rgb_sha256": "422f07b6b263e5137d6c8ee416b5c291adf50fafa5b9795cd545b9faad1f8a54",
+        "sha256": "41c81a095e0fa756e6ea3175c9198e404802ad69ce155a833ee58c7b303c7c25",
+        "size": [
+          1920,
+          1289
+        ],
+        "slot": 35,
+        "status": "qualified"
+      },
+      {
+        "attempts": [
+          {
+            "code": null,
+            "delivery": "thumb",
+            "error": "ValueError"
+          },
+          {
+            "code": 429,
+            "delivery": "original",
+            "error": "HTTPError"
+          }
+        ],
+        "delivery": "thumb",
+        "name": "source-36.jpg",
+        "rgb_sha256": "a186ae56ae79b2d0d42c0ae7d380316c151a2363a6d2166de09e2f201e060433",
+        "sha256": "3c17c7ad804183fade56a9e85a3569a717bbaea6ef5a912e7c6eaae44d9984f4",
+        "size": [
+          1920,
+          1080
+        ],
+        "slot": 36,
+        "status": "qualified"
+      },
+      {
+        "attempts": [
+          {
+            "code": null,
+            "delivery": "thumb",
+            "error": "ValueError"
+          },
+          {
+            "code": 429,
+            "delivery": "original",
+            "error": "HTTPError"
+          }
+        ],
+        "delivery": "thumb",
+        "name": "source-37.jpg",
+        "rgb_sha256": "9fbe2bab4b24b24a2e6060036cccaa5e8b119506b64004e5948ac29c44e8a3ac",
+        "sha256": "ad2b39217fe6564e0d39e7db713977a702eab2adc959f2d465af380efad491d1",
+        "size": [
+          1920,
+          1280
+        ],
+        "slot": 37,
+        "status": "qualified"
+      }
+    ],
+    "roster_sha256": "95bcdf9d9b852eb7fbae17194405250443447220568cae9697ddb6a68b48c036"
+  },
+  "source_license_counts": {
+    "CC BY 3.0": 3,
+    "CC BY 4.0": 5,
+    "CC BY-SA 3.0": 5,
+    "CC BY-SA 4.0": 25
+  },
+  "source_roster": {
+    "metadata_sha256": {
+      "abandoned": "5e56b851dca61b4e1a68e3293088e1e742097070b9ed0fea1502054287cc5b43",
+      "architecture": "f5cc9b88b3a3949a86faca775c1808eb9341da84ddcf5f414b2e8340d8d76f13",
+      "building-exteriors": "27c02020c7017def53c62ae7a3493805ebee58cbb97dd14bb5987ae77bfa589c",
+      "cityscapes": "87aaf7a0e8bbcb2fbdd68159beed2e19512f2cd7623e5b498997a58504a7763e",
+      "forests": "d6baeccade7cb5f7430a1f37c141868c85b1ef278777fdbf8b84ce5089878e74",
+      "lakes": "21ec00f810deb38348545eb43291f09d394965fc6bc0a660d636830aea55bed9"
+    },
+    "schema": "chipmunk.image-affine-native-scale/1",
+    "selection": "Up to seven distinct credited authors per Commons category in salted source order",
+    "sources": [
+      {
+        "author": "Bernard Gagnon",
+        "category": "architecture",
+        "licence": "CC BY-SA 4.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "original_sha1": "e58c8cbe72f0dd2a5acc946ce29a35365cf7bb74",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/b/b1/Simtokha_Dzong%2C_Bhutan_07.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page": "https://commons.wikimedia.org/wiki/File:Simtokha_Dzong,_Bhutan_07.jpg",
+        "pageid": 71645134,
+        "slot": 0,
+        "source_dimensions": [
+          4196,
+          2797
+        ],
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/Simtokha_Dzong%2C_Bhutan_07.jpg/1920px-Simtokha_Dzong%2C_Bhutan_07.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "title": "File:Simtokha Dzong, Bhutan 07.jpg"
+      },
+      {
+        "author": "Alexander Novikov",
+        "category": "abandoned",
+        "licence": "CC BY-SA 4.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "original_sha1": "51dd39ed7f74e4192711d0e9b8ad57decb9d6a4a",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/3/35/Cinema_Rodina_-_001.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page": "https://commons.wikimedia.org/wiki/File:Cinema_Rodina_-_001.jpg",
+        "pageid": 109754168,
+        "slot": 1,
+        "source_dimensions": [
+          4920,
+          3280
+        ],
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/35/Cinema_Rodina_-_001.jpg/1920px-Cinema_Rodina_-_001.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "title": "File:Cinema Rodina - 001.jpg"
+      },
+      {
+        "author": "Basile Morin",
+        "category": "cityscapes",
+        "licence": "CC BY-SA 4.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "original_sha1": "69e7fda8f3c8e6a5d897a40db4e3a3ad19462437",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/4/41/Bukchon-ro_11-gil_street_with_hanok_houses_at_blue_hour_in_Bukchon_Hanok_Village_Seoul.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page": "https://commons.wikimedia.org/wiki/File:Bukchon-ro_11-gil_street_with_hanok_houses_at_blue_hour_in_Bukchon_Hanok_Village_Seoul.jpg",
+        "pageid": 155519606,
+        "slot": 2,
+        "source_dimensions": [
+          6404,
+          4269
+        ],
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/41/Bukchon-ro_11-gil_street_with_hanok_houses_at_blue_hour_in_Bukchon_Hanok_Village_Seoul.jpg/1920px-Bukchon-ro_11-gil_street_with_hanok_houses_at_blue_hour_in_Bukchon_Hanok_Village_Seoul.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "title": "File:Bukchon-ro 11-gil street with hanok houses at blue hour in Bukchon Hanok Village Seoul.jpg"
+      },
+      {
+        "author": "Adrian Tync",
+        "category": "building-exteriors",
+        "licence": "CC BY-SA 4.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "original_sha1": "1395e1b1999ad8a07693f875ec78438b03d23c0f",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/9/95/Krakow_Palac_Sztuki_2025.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page": "https://commons.wikimedia.org/wiki/File:Krakow_Palac_Sztuki_2025.jpg",
+        "pageid": 174827093,
+        "slot": 3,
+        "source_dimensions": [
+          4278,
+          2852
+        ],
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/Krakow_Palac_Sztuki_2025.jpg/1920px-Krakow_Palac_Sztuki_2025.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "title": "File:Krakow Palac Sztuki 2025.jpg"
+      },
+      {
+        "author": "Agnes Monkelbaan",
+        "category": "lakes",
+        "licence": "CC BY-SA 4.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "original_sha1": "43d15d693109540f676f1ae33e4dc5b4fe7b54d2",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Delleboersterheide%2C_natuurgebied_van_het_It_Fryske_Gea._25-12-2019._%28actm.%29_30.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page": "https://commons.wikimedia.org/wiki/File:Delleboersterheide,_natuurgebied_van_het_It_Fryske_Gea._25-12-2019._(actm.)_30.jpg",
+        "pageid": 85862319,
+        "slot": 4,
+        "source_dimensions": [
+          5184,
+          3456
+        ],
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/Delleboersterheide%2C_natuurgebied_van_het_It_Fryske_Gea._25-12-2019._%28actm.%29_30.jpg/1920px-Delleboersterheide%2C_natuurgebied_van_het_It_Fryske_Gea._25-12-2019._%28actm.%29_30.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "title": "File:Delleboersterheide, natuurgebied van het It Fryske Gea. 25-12-2019. (actm.) 30.jpg"
+      },
+      {
+        "author": "Vyacheslav Argenberg",
+        "category": "forests",
+        "licence": "CC BY 4.0",
+        "licence_url": "https://creativecommons.org/licenses/by/4.0",
+        "original_sha1": "ebf22555337b40984ea7bbe8191357aea5d96923",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/1/1c/Mae_Hong_Son%2C_Forested_hills_2%2C_Thailand.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page": "https://commons.wikimedia.org/wiki/File:Mae_Hong_Son,_Forested_hills_2,_Thailand.jpg",
+        "pageid": 112280296,
+        "slot": 5,
+        "source_dimensions": [
+          4032,
+          2688
+        ],
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1c/Mae_Hong_Son%2C_Forested_hills_2%2C_Thailand.jpg/1920px-Mae_Hong_Son%2C_Forested_hills_2%2C_Thailand.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "title": "File:Mae Hong Son, Forested hills 2, Thailand.jpg"
+      },
+      {
+        "author": "Moheen Reeyad",
+        "category": "architecture",
+        "licence": "CC BY-SA 4.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "original_sha1": "6080195c7e7caab6bcc3af4516f32c52e26eb7a8",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/1/10/Chittagong_University_Railway_station_%2804%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page": "https://commons.wikimedia.org/wiki/File:Chittagong_University_Railway_station_(04).jpg",
+        "pageid": 40775390,
+        "slot": 6,
+        "source_dimensions": [
+          6016,
+          4000
+        ],
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/10/Chittagong_University_Railway_station_%2804%29.jpg/1920px-Chittagong_University_Railway_station_%2804%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "title": "File:Chittagong University Railway station (04).jpg"
+      },
+      {
+        "author": "Trougnouf (Benoit Brummer)",
+        "category": "abandoned",
+        "licence": "CC BY 4.0",
+        "licence_url": "https://creativecommons.org/licenses/by/4.0",
+        "original_sha1": "cee7031c33965424b56d95bcea41fd4038d1ff86",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/6/65/Aulne_Abbey_during_the_morning_civil_twilight_%28DSC_0089%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page": "https://commons.wikimedia.org/wiki/File:Aulne_Abbey_during_the_morning_civil_twilight_(DSC_0089).jpg",
+        "pageid": 95012543,
+        "slot": 7,
+        "source_dimensions": [
+          5240,
+          2913
+        ],
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/65/Aulne_Abbey_during_the_morning_civil_twilight_%28DSC_0089%29.jpg/1920px-Aulne_Abbey_during_the_morning_civil_twilight_%28DSC_0089%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "title": "File:Aulne Abbey during the morning civil twilight (DSC 0089).jpg"
+      },
+      {
+        "author": "Diego Delso",
+        "category": "cityscapes",
+        "licence": "CC BY-SA 4.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "original_sha1": "dbed73745689c32ae3e323fe6b32c6fdb56a45ef",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/1/1b/Ariza%2C_Zaragoza%2C_Espa%C3%B1a%2C_2015-12-29%2C_DD_104.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page": "https://commons.wikimedia.org/wiki/File:Ariza,_Zaragoza,_Espa%C3%B1a,_2015-12-29,_DD_104.JPG",
+        "pageid": 46312924,
+        "slot": 8,
+        "source_dimensions": [
+          6034,
+          4148
+        ],
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1b/Ariza%2C_Zaragoza%2C_Espa%C3%B1a%2C_2015-12-29%2C_DD_104.JPG/1920px-Ariza%2C_Zaragoza%2C_Espa%C3%B1a%2C_2015-12-29%2C_DD_104.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "title": "File:Ariza, Zaragoza, Espa\u00f1a, 2015-12-29, DD 104.JPG"
+      },
+      {
+        "author": "MB-one",
+        "category": "building-exteriors",
+        "licence": "CC BY-SA 3.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/3.0",
+        "original_sha1": "cc099e9626b802314f8e3a417352cb33a201af25",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/6/66/Vietnam_Residence_Ottawa.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page": "https://commons.wikimedia.org/wiki/File:Vietnam_Residence_Ottawa.jpg",
+        "pageid": 34912518,
+        "slot": 9,
+        "source_dimensions": [
+          5184,
+          3456
+        ],
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/66/Vietnam_Residence_Ottawa.jpg/1920px-Vietnam_Residence_Ottawa.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "title": "File:Vietnam Residence Ottawa.jpg"
+      },
+      {
+        "author": "CEphoto, Uwe Aranas",
+        "category": "lakes",
+        "licence": "CC BY-SA 3.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/3.0",
+        "original_sha1": "10b94023d9bc30c9aad8b5eaf7f765d9f69d1870",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/c/c1/Babagon_Sabah_Babagon-Dam-02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page": "https://commons.wikimedia.org/wiki/File:Babagon_Sabah_Babagon-Dam-02.jpg",
+        "pageid": 48256459,
+        "slot": 10,
+        "source_dimensions": [
+          5760,
+          3840
+        ],
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c1/Babagon_Sabah_Babagon-Dam-02.jpg/1920px-Babagon_Sabah_Babagon-Dam-02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "title": "File:Babagon Sabah Babagon-Dam-02.jpg"
+      },
+      {
+        "author": "Thomas Bresson",
+        "category": "forests",
+        "licence": "CC BY 3.0",
+        "licence_url": "https://creativecommons.org/licenses/by/3.0",
+        "original_sha1": "e3961ddcc8668c9bc7821a6014b2fc593ceb3410",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/21/2013-04-01_15-02-43-bois.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page": "https://commons.wikimedia.org/wiki/File:2013-04-01_15-02-43-bois.jpg",
+        "pageid": 25407874,
+        "slot": 11,
+        "source_dimensions": [
+          3647,
+          2733
+        ],
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/21/2013-04-01_15-02-43-bois.jpg/1920px-2013-04-01_15-02-43-bois.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "title": "File:2013-04-01 15-02-43-bois.jpg"
+      },
+      {
+        "author": "Krzysztof Golik",
+        "category": "architecture",
+        "licence": "CC BY-SA 4.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "original_sha1": "2e5aa8569261d2ad17df83f8260a83e5911cb3cd",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Galleria_Borghese_in_Rome_05.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page": "https://commons.wikimedia.org/wiki/File:Galleria_Borghese_in_Rome_05.jpg",
+        "pageid": 96041924,
+        "slot": 12,
+        "source_dimensions": [
+          5032,
+          3751
+        ],
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ea/Galleria_Borghese_in_Rome_05.jpg/1920px-Galleria_Borghese_in_Rome_05.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "title": "File:Galleria Borghese in Rome 05.jpg"
+      },
+      {
+        "author": "Dietmar Rabich",
+        "category": "abandoned",
+        "licence": "CC BY-SA 4.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "original_sha1": "e86740f4608704a9772b7b20995ad5b6efd78a2d",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/9/98/D%C3%BClmen%2C_Abbrucharbeiten_ehem._KiK-Geb%C3%A4ude_--_2016_--_1413.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page": "https://commons.wikimedia.org/wiki/File:D%C3%BClmen,_Abbrucharbeiten_ehem._KiK-Geb%C3%A4ude_--_2016_--_1413.jpg",
+        "pageid": 47628261,
+        "slot": 13,
+        "source_dimensions": [
+          5420,
+          3631
+        ],
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/98/D%C3%BClmen%2C_Abbrucharbeiten_ehem._KiK-Geb%C3%A4ude_--_2016_--_1413.jpg/1920px-D%C3%BClmen%2C_Abbrucharbeiten_ehem._KiK-Geb%C3%A4ude_--_2016_--_1413.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "title": "File:D\u00fclmen, Abbrucharbeiten ehem. KiK-Geb\u00e4ude -- 2016 -- 1413.jpg"
+      },
+      {
+        "author": "Ralf Roletschek",
+        "category": "cityscapes",
+        "licence": "CC BY 3.0",
+        "licence_url": "https://creativecommons.org/licenses/by/3.0",
+        "original_sha1": "10e0017bfedd5028d5deade911c7dc24bdc9d706",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/20/13-08-06-abu-dhabi-by-RalfR-077.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page": "https://commons.wikimedia.org/wiki/File:13-08-06-abu-dhabi-by-RalfR-077.jpg",
+        "pageid": 28048765,
+        "slot": 14,
+        "source_dimensions": [
+          4288,
+          2848
+        ],
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/20/13-08-06-abu-dhabi-by-RalfR-077.jpg/1920px-13-08-06-abu-dhabi-by-RalfR-077.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "title": "File:13-08-06-abu-dhabi-by-RalfR-077.jpg"
+      },
+      {
+        "author": "Tade\u00e1\u0161 Bednarz",
+        "category": "building-exteriors",
+        "licence": "CC BY-SA 4.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "original_sha1": "bf8fca9e22a7761960aee3825de64046540a8426",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/8/8e/B%C3%BDval%C3%A1_hasi%C4%8Dsk%C3%A1_zbrojnice%2C_Kobe%C5%99ice_2025_%285%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page": "https://commons.wikimedia.org/wiki/File:B%C3%BDval%C3%A1_hasi%C4%8Dsk%C3%A1_zbrojnice,_Kobe%C5%99ice_2025_(5).jpg",
+        "pageid": 166291238,
+        "slot": 15,
+        "source_dimensions": [
+          5472,
+          3648
+        ],
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8e/B%C3%BDval%C3%A1_hasi%C4%8Dsk%C3%A1_zbrojnice%2C_Kobe%C5%99ice_2025_%285%29.jpg/1920px-B%C3%BDval%C3%A1_hasi%C4%8Dsk%C3%A1_zbrojnice%2C_Kobe%C5%99ice_2025_%285%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "title": "File:B\u00fdval\u00e1 hasi\u010dsk\u00e1 zbrojnice, Kobe\u0159ice 2025 (5).jpg"
+      },
+      {
+        "author": "Armenak Margarian",
+        "category": "lakes",
+        "licence": "CC BY-SA 4.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "original_sha1": "b815deaa04cad42e65fd4cc6f0a22719a9ee5eff",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Akhmaz_lake.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page": "https://commons.wikimedia.org/wiki/File:Akhmaz_lake.JPG",
+        "pageid": 45222469,
+        "slot": 16,
+        "source_dimensions": [
+          4288,
+          3216
+        ],
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a7/Akhmaz_lake.JPG/1920px-Akhmaz_lake.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "title": "File:Akhmaz lake.JPG"
+      },
+      {
+        "author": "Ximonic (Simo R\u00e4s\u00e4nen)",
+        "category": "forests",
+        "licence": "CC BY 3.0",
+        "licence_url": "https://creativecommons.org/licenses/by/3.0",
+        "original_sha1": "2cd3869b2a663ae1f6b437de4c85a57654320d6b",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Swamp_forest_of_Palokallio_conservation_reserve_in_Kuninkaanm%C3%A4ki%2C_Vantaa%2C_Finland%2C_2021_April.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page": "https://commons.wikimedia.org/wiki/File:Swamp_forest_of_Palokallio_conservation_reserve_in_Kuninkaanm%C3%A4ki,_Vantaa,_Finland,_2021_April.jpg",
+        "pageid": 104210763,
+        "slot": 17,
+        "source_dimensions": [
+          4500,
+          3005
+        ],
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/Swamp_forest_of_Palokallio_conservation_reserve_in_Kuninkaanm%C3%A4ki%2C_Vantaa%2C_Finland%2C_2021_April.jpg/1920px-Swamp_forest_of_Palokallio_conservation_reserve_in_Kuninkaanm%C3%A4ki%2C_Vantaa%2C_Finland%2C_2021_April.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "title": "File:Swamp forest of Palokallio conservation reserve in Kuninkaanm\u00e4ki, Vantaa, Finland, 2021 April.jpg"
+      },
+      {
+        "author": "Rhododendrites",
+        "category": "architecture",
+        "licence": "CC BY-SA 4.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "original_sha1": "528d5bc906a5d0d62f24ee9eea02e39ef10fa6a2",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/e/e3/Cornell_Tech_buildings_%2842013%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page": "https://commons.wikimedia.org/wiki/File:Cornell_Tech_buildings_(42013).jpg",
+        "pageid": 64544179,
+        "slot": 18,
+        "source_dimensions": [
+          3067,
+          2176
+        ],
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e3/Cornell_Tech_buildings_%2842013%29.jpg/1920px-Cornell_Tech_buildings_%2842013%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "title": "File:Cornell Tech buildings (42013).jpg"
+      },
+      {
+        "author": "Trougnouf",
+        "category": "abandoned",
+        "licence": "CC BY 4.0",
+        "licence_url": "https://creativecommons.org/licenses/by/4.0",
+        "original_sha1": "559e4de690a96a1e50dcc3c9d6a2afc2142a6f5f",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/a/aa/Barbed_wires_by_the_water_treatment_plant_of_an_abandoned_steel_factory_in_Oupeye%2C_Belgium_%28DSCF3303%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page": "https://commons.wikimedia.org/wiki/File:Barbed_wires_by_the_water_treatment_plant_of_an_abandoned_steel_factory_in_Oupeye,_Belgium_(DSCF3303).jpg",
+        "pageid": 66077151,
+        "slot": 19,
+        "source_dimensions": [
+          4377,
+          3279
+        ],
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/aa/Barbed_wires_by_the_water_treatment_plant_of_an_abandoned_steel_factory_in_Oupeye%2C_Belgium_%28DSCF3303%29.jpg/1920px-Barbed_wires_by_the_water_treatment_plant_of_an_abandoned_steel_factory_in_Oupeye%2C_Belgium_%28DSCF3303%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "title": "File:Barbed wires by the water treatment plant of an abandoned steel factory in Oupeye, Belgium (DSCF3303).jpg"
+      },
+      {
+        "author": "ThibautRe",
+        "category": "cityscapes",
+        "licence": "CC BY-SA 4.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "original_sha1": "37a1333d13067b691f70832687e710e3598d88ff",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/b/be/Cornimont_depuis_la_croix_de_mission.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page": "https://commons.wikimedia.org/wiki/File:Cornimont_depuis_la_croix_de_mission.jpg",
+        "pageid": 139261512,
+        "slot": 20,
+        "source_dimensions": [
+          7980,
+          4443
+        ],
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Cornimont_depuis_la_croix_de_mission.jpg/1920px-Cornimont_depuis_la_croix_de_mission.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "title": "File:Cornimont depuis la croix de mission.jpg"
+      },
+      {
+        "author": "Dominicus Johannes Bergsma",
+        "category": "lakes",
+        "licence": "CC BY-SA 4.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "original_sha1": "55496785e53cf9998b18322eccc865c75c89ee83",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/f6/De_Loenermark_07.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page": "https://commons.wikimedia.org/wiki/File:De_Loenermark_07.jpg",
+        "pageid": 57965093,
+        "slot": 21,
+        "source_dimensions": [
+          4608,
+          3456
+        ],
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f6/De_Loenermark_07.jpg/1920px-De_Loenermark_07.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "title": "File:De Loenermark 07.jpg"
+      },
+      {
+        "author": "Margus6",
+        "category": "forests",
+        "licence": "CC BY-SA 3.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/3.0",
+        "original_sha1": "e88f9c9080155330cb009236f677b858e3d0aa76",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/a/a1/Tahkuna_looduskaitseala.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page": "https://commons.wikimedia.org/wiki/File:Tahkuna_looduskaitseala.jpg",
+        "pageid": 29827973,
+        "slot": 22,
+        "source_dimensions": [
+          4912,
+          3264
+        ],
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a1/Tahkuna_looduskaitseala.jpg/1920px-Tahkuna_looduskaitseala.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "title": "File:Tahkuna looduskaitseala.jpg"
+      },
+      {
+        "author": "JoachimKohler-HB",
+        "category": "architecture",
+        "licence": "CC BY-SA 4.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "original_sha1": "bf3f8d260850e2f7eb96cd5ccb0023241910d58e",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/7/78/Herisau_AR_-_Supraporte_des_Hauses_zur_Ilge_%282014%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page": "https://commons.wikimedia.org/wiki/File:Herisau_AR_-_Supraporte_des_Hauses_zur_Ilge_(2014).jpg",
+        "pageid": 143469078,
+        "slot": 23,
+        "source_dimensions": [
+          3600,
+          5400
+        ],
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/78/Herisau_AR_-_Supraporte_des_Hauses_zur_Ilge_%282014%29.jpg/1920px-Herisau_AR_-_Supraporte_des_Hauses_zur_Ilge_%282014%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "title": "File:Herisau AR - Supraporte des Hauses zur Ilge (2014).jpg"
+      },
+      {
+        "author": "Girlmath",
+        "category": "abandoned",
+        "licence": "CC BY-SA 4.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "original_sha1": "ab385639fb85656cd0752eebbdf08cee1a2c0b34",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Abandon_garage.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page": "https://commons.wikimedia.org/wiki/File:Abandon_garage.jpg",
+        "pageid": 199202571,
+        "slot": 24,
+        "source_dimensions": [
+          3827,
+          1800
+        ],
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f5/Abandon_garage.jpg/1920px-Abandon_garage.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "title": "File:Abandon garage.jpg"
+      },
+      {
+        "author": "Flocci Nivis",
+        "category": "cityscapes",
+        "licence": "CC BY 4.0",
+        "licence_url": "https://creativecommons.org/licenses/by/4.0",
+        "original_sha1": "fb78a226e020174df7f4a8545082c6545b00aed4",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/1/15/20201231_Fr%C3%B6ttmaninger_Berg_06.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page": "https://commons.wikimedia.org/wiki/File:20201231_Fr%C3%B6ttmaninger_Berg_06.jpg",
+        "pageid": 107790741,
+        "slot": 25,
+        "source_dimensions": [
+          6031,
+          4031
+        ],
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/15/20201231_Fr%C3%B6ttmaninger_Berg_06.jpg/1920px-20201231_Fr%C3%B6ttmaninger_Berg_06.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "title": "File:20201231 Fr\u00f6ttmaninger Berg 06.jpg"
+      },
+      {
+        "author": "Jakub Ha\u0142un",
+        "category": "lakes",
+        "licence": "CC BY 4.0",
+        "licence_url": "https://creativecommons.org/licenses/by/4.0",
+        "original_sha1": "610fc65712948810cea5090131d43319ea8a56d9",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/b/b7/Bled_Island_in_Lake_Bled%2C_Slovenia%2C_20240504_0901_8297.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page": "https://commons.wikimedia.org/wiki/File:Bled_Island_in_Lake_Bled,_Slovenia,_20240504_0901_8297.jpg",
+        "pageid": 148625678,
+        "slot": 26,
+        "source_dimensions": [
+          4688,
+          3129
+        ],
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b7/Bled_Island_in_Lake_Bled%2C_Slovenia%2C_20240504_0901_8297.jpg/1920px-Bled_Island_in_Lake_Bled%2C_Slovenia%2C_20240504_0901_8297.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "title": "File:Bled Island in Lake Bled, Slovenia, 20240504 0901 8297.jpg"
+      },
+      {
+        "author": "Anna Stavenskaya",
+        "category": "forests",
+        "licence": "CC BY-SA 4.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "original_sha1": "7feea72b95e7d39d10cf856890653faf7391fff2",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/3/33/Children_in_forest.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page": "https://commons.wikimedia.org/wiki/File:Children_in_forest.jpg",
+        "pageid": 107095980,
+        "slot": 27,
+        "source_dimensions": [
+          2617,
+          3940
+        ],
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/Children_in_forest.jpg/1920px-Children_in_forest.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "title": "File:Children in forest.jpg"
+      },
+      {
+        "author": "Gzen92",
+        "category": "architecture",
+        "licence": "CC BY-SA 4.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "original_sha1": "1ed9e5a977b5fd39cf2914003b697774a543a5e4",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Mus%C3%A9e_d%27histoire_naturelle_et_d%27ethnographie_-_embl%C3%A8me_de_la_ville_%28Colmar%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page": "https://commons.wikimedia.org/wiki/File:Mus%C3%A9e_d%27histoire_naturelle_et_d%27ethnographie_-_embl%C3%A8me_de_la_ville_(Colmar).jpg",
+        "pageid": 67947103,
+        "slot": 28,
+        "source_dimensions": [
+          4288,
+          3216
+        ],
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f5/Mus%C3%A9e_d%27histoire_naturelle_et_d%27ethnographie_-_embl%C3%A8me_de_la_ville_%28Colmar%29.jpg/1920px-Mus%C3%A9e_d%27histoire_naturelle_et_d%27ethnographie_-_embl%C3%A8me_de_la_ville_%28Colmar%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "title": "File:Mus\u00e9e d'histoire naturelle et d'ethnographie - embl\u00e8me de la ville (Colmar).jpg"
+      },
+      {
+        "author": "Grunpfnul",
+        "category": "abandoned",
+        "licence": "CC BY-SA 4.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "original_sha1": "737d4b73a34e798c02e253fc10cd5bb94d90f66f",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/fb/BE_SERAI_Tanks.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page": "https://commons.wikimedia.org/wiki/File:BE_SERAI_Tanks.jpg",
+        "pageid": 162903573,
+        "slot": 29,
+        "source_dimensions": [
+          6240,
+          4160
+        ],
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fb/BE_SERAI_Tanks.jpg/1920px-BE_SERAI_Tanks.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "title": "File:BE SERAI Tanks.jpg"
+      },
+      {
+        "author": "Marcin Konsek",
+        "category": "cityscapes",
+        "licence": "CC BY-SA 4.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "original_sha1": "a6fd5f134006b3eff0588d672ef6e56751d009ed",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/21/2016_Rangun%2C_Ulica_Anawratha_%2802%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page": "https://commons.wikimedia.org/wiki/File:2016_Rangun,_Ulica_Anawratha_(02).jpg",
+        "pageid": 67776541,
+        "slot": 30,
+        "source_dimensions": [
+          4474,
+          3171
+        ],
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/21/2016_Rangun%2C_Ulica_Anawratha_%2802%29.jpg/1920px-2016_Rangun%2C_Ulica_Anawratha_%2802%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "title": "File:2016 Rangun, Ulica Anawratha (02).jpg"
+      },
+      {
+        "author": "\u0412\u0432\u043b\u0430\u0441\u0435\u043d\u043a\u043e",
+        "category": "lakes",
+        "licence": "CC BY-SA 3.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/3.0",
+        "original_sha1": "c2f9ed4da93a810190d7bf6ad2d8d8bbdd4626a1",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/c/c7/Berth_in_Peschiera_del_Garda._Lake_Garda%2C_Italy.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page": "https://commons.wikimedia.org/wiki/File:Berth_in_Peschiera_del_Garda._Lake_Garda,_Italy.jpg",
+        "pageid": 66780464,
+        "slot": 31,
+        "source_dimensions": [
+          5647,
+          3448
+        ],
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c7/Berth_in_Peschiera_del_Garda._Lake_Garda%2C_Italy.jpg/1920px-Berth_in_Peschiera_del_Garda._Lake_Garda%2C_Italy.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "title": "File:Berth in Peschiera del Garda. Lake Garda, Italy.jpg"
+      },
+      {
+        "author": "Pudelek",
+        "category": "forests",
+        "licence": "CC BY-SA 4.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "original_sha1": "acdb833ea0529441f715f7eb8ac5736d2b18bdbb",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Hiking_trail_to_Biskupsk%C3%A1_kupa%2C_Czechia.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page": "https://commons.wikimedia.org/wiki/File:Hiking_trail_to_Biskupsk%C3%A1_kupa,_Czechia.jpg",
+        "pageid": 155958658,
+        "slot": 32,
+        "source_dimensions": [
+          3056,
+          2037
+        ],
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3d/Hiking_trail_to_Biskupsk%C3%A1_kupa%2C_Czechia.jpg/1920px-Hiking_trail_to_Biskupsk%C3%A1_kupa%2C_Czechia.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "title": "File:Hiking trail to Biskupsk\u00e1 kupa, Czechia.jpg"
+      },
+      {
+        "author": "JiriMatejicek",
+        "category": "architecture",
+        "licence": "CC BY-SA 3.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/3.0",
+        "original_sha1": "5346b6a62037f1c1cde754b837286382339801f0",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/b/bf/Praha_Mala_Strana_Malostranske_namesti_4_hrozen.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page": "https://commons.wikimedia.org/wiki/File:Praha_Mala_Strana_Malostranske_namesti_4_hrozen.jpg",
+        "pageid": 62726973,
+        "slot": 33,
+        "source_dimensions": [
+          2448,
+          3264
+        ],
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bf/Praha_Mala_Strana_Malostranske_namesti_4_hrozen.jpg/1920px-Praha_Mala_Strana_Malostranske_namesti_4_hrozen.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "title": "File:Praha Mala Strana Malostranske namesti 4 hrozen.jpg"
+      },
+      {
+        "author": "Hons084",
+        "category": "abandoned",
+        "licence": "CC BY-SA 4.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "original_sha1": "771f4a4e88588f336fc287ef03c3532c548741e4",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/0/07/2014_Nowy_Aton%2C_Opuszczony_budynek.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page": "https://commons.wikimedia.org/wiki/File:2014_Nowy_Aton,_Opuszczony_budynek.jpg",
+        "pageid": 37366785,
+        "slot": 34,
+        "source_dimensions": [
+          4266,
+          2675
+        ],
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/07/2014_Nowy_Aton%2C_Opuszczony_budynek.jpg/1920px-2014_Nowy_Aton%2C_Opuszczony_budynek.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "title": "File:2014 Nowy Aton, Opuszczony budynek.jpg"
+      },
+      {
+        "author": "Steffen Schmitz ( more photos )",
+        "category": "cityscapes",
+        "licence": "CC BY-SA 4.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "original_sha1": "c038be227c2e0465f882aadafe8b59b017e4196d",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Bogot%C3%A1%2C_Monserrate%2C_2023-06_CN-02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page": "https://commons.wikimedia.org/wiki/File:Bogot%C3%A1,_Monserrate,_2023-06_CN-02.jpg",
+        "pageid": 143553511,
+        "slot": 35,
+        "source_dimensions": [
+          4042,
+          2713
+        ],
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5b/Bogot%C3%A1%2C_Monserrate%2C_2023-06_CN-02.jpg/1920px-Bogot%C3%A1%2C_Monserrate%2C_2023-06_CN-02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "title": "File:Bogot\u00e1, Monserrate, 2023-06 CN-02.jpg"
+      },
+      {
+        "author": "Calle Eklund",
+        "category": "lakes",
+        "licence": "CC BY-SA 4.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "original_sha1": "71438ea771c1dc600d25694d7460b275bd5e3fb6",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/5/51/Hessesj%C3%B6n_2019-07-30.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page": "https://commons.wikimedia.org/wiki/File:Hessesj%C3%B6n_2019-07-30.jpg",
+        "pageid": 81029971,
+        "slot": 36,
+        "source_dimensions": [
+          5031,
+          2830
+        ],
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/51/Hessesj%C3%B6n_2019-07-30.jpg/1920px-Hessesj%C3%B6n_2019-07-30.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "title": "File:Hessesj\u00f6n 2019-07-30.jpg"
+      },
+      {
+        "author": "Kuhnmi",
+        "category": "forests",
+        "licence": "CC BY-SA 4.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "original_sha1": "a478717c25dffe529a913d44e1c28ea724cbbe56",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/8/8c/Baumsilhouetten_am_Uetliberg_mit_Novembernebel_und_Sonnenstrahlen.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page": "https://commons.wikimedia.org/wiki/File:Baumsilhouetten_am_Uetliberg_mit_Novembernebel_und_Sonnenstrahlen.jpg",
+        "pageid": 97105709,
+        "slot": 37,
+        "source_dimensions": [
+          7411,
+          4941
+        ],
+        "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Baumsilhouetten_am_Uetliberg_mit_Novembernebel_und_Sonnenstrahlen.jpg/1920px-Baumsilhouetten_am_Uetliberg_mit_Novembernebel_und_Sonnenstrahlen.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "title": "File:Baumsilhouetten am Uetliberg mit Novembernebel und Sonnenstrahlen.jpg"
+      }
+    ]
+  },
+  "sources": 38,
+  "views": 456,
+  "working_long_side_pixels": 1920
+}

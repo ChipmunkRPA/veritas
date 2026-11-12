@@ -1,0 +1,396 @@
+{
+  "advance": {
+    "rescue": false,
+    "suppression": false
+  },
+  "affected_groups": {
+    "retrospective/rescue/genuine": 1,
+    "retrospective/rescue/synthetic": 1,
+    "retrospective/suppression/genuine": 1,
+    "transfer/rescue/genuine": 1,
+    "transfer/rescue/synthetic": 1,
+    "transfer/suppression/genuine": 1
+  },
+  "aggregate_sha256": "1fe92a9bf6bfae41777abd909126a4cb28c276f552090d89c2fa1b4ae2f7182c",
+  "audit_code_sha256": "019d367ed514f3558a60ae8787c5efba7beb71709529b3127bd4e8879b57f2bb",
+  "cells": {
+    "retrospective/-/clean/-/genuine": {
+      "conditioned_inconclusive": 1,
+      "conditioned_unassessed": 7,
+      "incumbent_inconclusive": 1,
+      "incumbent_original": 7,
+      "planned": 8,
+      "rescued": 0,
+      "suppressed": 0
+    },
+    "retrospective/-/clean/-/synthetic": {
+      "conditioned_ai": 9,
+      "incumbent_ai": 9,
+      "planned": 9,
+      "rescued": 0,
+      "suppressed": 0
+    },
+    "retrospective/ES2010d/mixed/sequential/genuine": {
+      "conditioned_ai": 1,
+      "conditioned_inconclusive": 7,
+      "incumbent_ai": 2,
+      "incumbent_inconclusive": 6,
+      "planned": 8,
+      "rescued": 0,
+      "suppressed": 1
+    },
+    "retrospective/ES2010d/mixed/sequential/synthetic": {
+      "conditioned_ai": 4,
+      "conditioned_inconclusive": 5,
+      "incumbent_ai": 4,
+      "incumbent_inconclusive": 5,
+      "planned": 9,
+      "rescued": 0,
+      "suppressed": 0
+    },
+    "retrospective/ES2010d/mixed/simultaneous/genuine": {
+      "conditioned_ai": 3,
+      "conditioned_inconclusive": 5,
+      "incumbent_ai": 3,
+      "incumbent_inconclusive": 5,
+      "planned": 8,
+      "rescued": 0,
+      "suppressed": 0
+    },
+    "retrospective/ES2010d/mixed/simultaneous/synthetic": {
+      "conditioned_ai": 7,
+      "conditioned_inconclusive": 2,
+      "incumbent_ai": 7,
+      "incumbent_inconclusive": 2,
+      "planned": 9,
+      "rescued": 0,
+      "suppressed": 0
+    },
+    "retrospective/ES2010d/native/sequential/genuine": {
+      "conditioned_unassessed": 4,
+      "incumbent_original": 2,
+      "incumbent_unassessed": 2,
+      "planned": 4,
+      "rescued": 0,
+      "suppressed": 0
+    },
+    "retrospective/ES2010d/native/simultaneous/genuine": {
+      "conditioned_inconclusive": 1,
+      "conditioned_original": 1,
+      "conditioned_unassessed": 2,
+      "incumbent_inconclusive": 2,
+      "incumbent_unassessed": 2,
+      "planned": 4,
+      "rescued": 0,
+      "suppressed": 0
+    },
+    "retrospective/IS1007a/mixed/sequential/genuine": {
+      "conditioned_ai": 6,
+      "conditioned_inconclusive": 2,
+      "incumbent_ai": 5,
+      "incumbent_inconclusive": 3,
+      "planned": 8,
+      "rescued": 1,
+      "suppressed": 0
+    },
+    "retrospective/IS1007a/mixed/sequential/synthetic": {
+      "conditioned_ai": 8,
+      "conditioned_inconclusive": 1,
+      "incumbent_ai": 8,
+      "incumbent_inconclusive": 1,
+      "planned": 9,
+      "rescued": 0,
+      "suppressed": 0
+    },
+    "retrospective/IS1007a/mixed/simultaneous/genuine": {
+      "conditioned_ai": 6,
+      "conditioned_inconclusive": 2,
+      "incumbent_ai": 6,
+      "incumbent_inconclusive": 2,
+      "planned": 8,
+      "rescued": 0,
+      "suppressed": 0
+    },
+    "retrospective/IS1007a/mixed/simultaneous/synthetic": {
+      "conditioned_ai": 7,
+      "conditioned_inconclusive": 2,
+      "incumbent_ai": 6,
+      "incumbent_inconclusive": 3,
+      "planned": 9,
+      "rescued": 1,
+      "suppressed": 0
+    },
+    "retrospective/IS1007a/native/sequential/genuine": {
+      "conditioned_unassessed": 4,
+      "incumbent_original": 4,
+      "planned": 4,
+      "rescued": 0,
+      "suppressed": 0
+    },
+    "retrospective/IS1007a/native/simultaneous/genuine": {
+      "conditioned_inconclusive": 2,
+      "conditioned_original": 1,
+      "conditioned_unassessed": 1,
+      "incumbent_inconclusive": 3,
+      "incumbent_original": 1,
+      "planned": 4,
+      "rescued": 0,
+      "suppressed": 0
+    },
+    "transfer/-/clean/-/genuine": {
+      "conditioned_unassessed": 7,
+      "incumbent_original": 7,
+      "planned": 7,
+      "rescued": 0,
+      "suppressed": 0
+    },
+    "transfer/-/clean/-/synthetic": {
+      "conditioned_ai": 8,
+      "conditioned_inconclusive": 1,
+      "incumbent_ai": 9,
+      "planned": 9,
+      "rescued": 0,
+      "suppressed": 1
+    },
+    "transfer/ES2007c/mixed/sequential/genuine": {
+      "conditioned_ai": 1,
+      "conditioned_inconclusive": 5,
+      "conditioned_original": 1,
+      "incumbent_ai": 1,
+      "incumbent_inconclusive": 6,
+      "planned": 7,
+      "rescued": 1,
+      "suppressed": 1
+    },
+    "transfer/ES2007c/mixed/sequential/synthetic": {
+      "conditioned_ai": 3,
+      "conditioned_inconclusive": 6,
+      "incumbent_ai": 3,
+      "incumbent_inconclusive": 6,
+      "planned": 9,
+      "rescued": 0,
+      "suppressed": 0
+    },
+    "transfer/ES2007c/mixed/simultaneous/genuine": {
+      "conditioned_ai": 2,
+      "conditioned_inconclusive": 4,
+      "conditioned_unassessed": 1,
+      "incumbent_ai": 2,
+      "incumbent_inconclusive": 4,
+      "incumbent_original": 1,
+      "planned": 7,
+      "rescued": 0,
+      "suppressed": 0
+    },
+    "transfer/ES2007c/mixed/simultaneous/synthetic": {
+      "conditioned_ai": 3,
+      "conditioned_inconclusive": 6,
+      "incumbent_ai": 3,
+      "incumbent_inconclusive": 6,
+      "planned": 9,
+      "rescued": 0,
+      "suppressed": 0
+    },
+    "transfer/ES2007c/native/sequential/genuine": {
+      "conditioned_inconclusive": 1,
+      "incumbent_inconclusive": 1,
+      "planned": 1,
+      "rescued": 0,
+      "suppressed": 0
+    },
+    "transfer/ES2007c/native/simultaneous/genuine": {
+      "conditioned_unassessed": 1,
+      "incumbent_unassessed": 1,
+      "planned": 1,
+      "rescued": 0,
+      "suppressed": 0
+    },
+    "transfer/IS1004c/mixed/sequential/genuine": {
+      "conditioned_inconclusive": 4,
+      "conditioned_unassessed": 3,
+      "incumbent_inconclusive": 4,
+      "incumbent_original": 3,
+      "planned": 7,
+      "rescued": 0,
+      "suppressed": 0
+    },
+    "transfer/IS1004c/mixed/sequential/synthetic": {
+      "conditioned_ai": 2,
+      "conditioned_inconclusive": 7,
+      "incumbent_ai": 1,
+      "incumbent_inconclusive": 8,
+      "planned": 9,
+      "rescued": 1,
+      "suppressed": 0
+    },
+    "transfer/IS1004c/mixed/simultaneous/genuine": {
+      "conditioned_ai": 3,
+      "conditioned_inconclusive": 4,
+      "incumbent_ai": 3,
+      "incumbent_inconclusive": 4,
+      "planned": 7,
+      "rescued": 0,
+      "suppressed": 0
+    },
+    "transfer/IS1004c/mixed/simultaneous/synthetic": {
+      "conditioned_ai": 9,
+      "incumbent_ai": 9,
+      "planned": 9,
+      "rescued": 0,
+      "suppressed": 0
+    },
+    "transfer/IS1004c/native/sequential/genuine": {
+      "conditioned_unassessed": 1,
+      "incumbent_original": 1,
+      "planned": 1,
+      "rescued": 0,
+      "suppressed": 0
+    },
+    "transfer/IS1004c/native/simultaneous/genuine": {
+      "conditioned_unassessed": 1,
+      "incumbent_original": 1,
+      "planned": 1,
+      "rescued": 0,
+      "suppressed": 0
+    }
+  },
+  "classifier_forwards": 249,
+  "effects": {
+    "retrospective/rescue": {
+      "mixed_genuine": 1,
+      "mixed_synthetic": 1
+    },
+    "retrospective/suppression": {
+      "mixed_genuine": 1
+    },
+    "transfer/rescue": {
+      "mixed_genuine": 1,
+      "mixed_synthetic": 1
+    },
+    "transfer/suppression": {
+      "clean_synthetic": 1,
+      "mixed_genuine": 1
+    }
+  },
+  "elapsed_seconds": 177.1773640830006,
+  "freeze": {
+    "annotations_sha256": "b56e5babb2496b8795deeeda7e71178d7fbc9963f94276cf2a3f4b56ebbc9f9d",
+    "archive": {
+      "aggregate_sha256": "b2498395d65efc976df030f1be65c73fbbe6bf8dd1879ca1f83e4960cbb5388a",
+      "freeze_sha256": "addd9410880196079cd4346439e1380df1f84da9d2336d0826ba6b6d6cf3a4cc",
+      "gate_sha256": "97e1e405c6a04773f880d3b09c00c294a390867429c16345841b3d38fee5f8dd",
+      "roster_sha256": "cebf19fa35640ba9e6bb54e5038644bcbc29fad8d4f9bfd9bd30e7cf9a337601",
+      "scores_sha256": "aa21a2833d553ee786176f7b0a5542c577615ec09da2e665a87d3485efac341f"
+    },
+    "calibration_sha256": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf",
+    "code_sha256": "6aa092057847c07d4cd17daa4990f3ce73716610ca3a8cb59a1b12b9d791768a",
+    "earlier_room_cut_freeze_sha256": "613227e2eade19294fb62ded843018c11ef18e6f979695cc20ef0606ddaefc17",
+    "incumbent_assets": {
+      "pellav2_detector.pt": "d21aedfb52e2f87706c2753715a29665482b0f4a034800c31579df5d458559ac",
+      "silero_vad.jit": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720",
+      "w2v-bert-config.json": "f5572bd5998b68182e9c328a43127ed21fed687f6910497136b91a4e3b0e3675"
+    },
+    "method": {
+      "active_frequencies_hz": [
+        150,
+        6500
+      ],
+      "delay": 6,
+      "diagonal_loading": 0.001,
+      "fft": 512,
+      "full_profile_window_samples": 48000,
+      "hop": 128,
+      "iterations": 3,
+      "relative_variance_floor": 0.01,
+      "rescue": "An inconclusive result becomes AI only if an admitted conditioned view leans AI.",
+      "subtract_fraction": 0.8,
+      "suppression": "An AI result becomes inconclusive only if an admitted conditioned view loses AI and its raw log odds decrease by more than ln(2).",
+      "taps": 10,
+      "target_foreground_snr_db": -5,
+      "transfer": "Each fixed rule must gain in both transfer rooms on at least three foreground groups, change no clean or native cases, and preserve the transfer's other class. Suppression allows at most two lost synthetic flags and requires at least three total genuine false flags on this panel. Rescue allows at most one added false flag and requires gains in at least two synthetic voice families. No apparent success with fewer than six assessed genuine mixtures per room and mode.",
+      "variance_smoothing_frames": 9
+    },
+    "planned": {
+      "retrospective": {
+        "clean": 17,
+        "mixed": 68,
+        "native": 16
+      },
+      "transfer": {
+        "clean": 16,
+        "mixed": 64,
+        "native": 4
+      }
+    },
+    "rooms": {
+      "ES2007c": {
+        "sha256": "895904c48583d74c311e42cf0bf49554e998cd5ab87b67268c97de09b856e619",
+        "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2007c/audio/ES2007c.Array1-01.wav"
+      },
+      "IS1004c": {
+        "sha256": "d9c81453ea85a228bf4b82e9757a19edfc760203d1a3af1c353473b3030613b6",
+        "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/IS1004c/audio/IS1004c.Array1-01.wav"
+      }
+    },
+    "roster_sha256": "753431debdcb8f271004b8a04509e364293c3c2722190a6e5e52d52ae3beca49",
+    "schema": "chipmunk.audio-mono-dereverb/1",
+    "transfer_source_manifest_sha256": "4e97d28cfbe5a293ffffe10c419f9dd08a9e85a74e2b0431d2d4e402dbe693a8"
+  },
+  "freeze_sha256": "b68a1e9597db66d74909ba8a5237cf6a00090c6d83e3b67d828538ba1eabce46",
+  "independent_arithmetic": {
+    "acoustic_replays": 132,
+    "classifier": 249,
+    "condition_cells": 28,
+    "derived_activity": 14382,
+    "exact_conditioned_waveforms": 153,
+    "incumbent_activity": 7896,
+    "policy_advances": {
+      "rescue": false,
+      "suppression": false
+    },
+    "verified_native_intervals": 4,
+    "verified_transfer_mixtures": 64,
+    "verified_views": 185
+  },
+  "median_snr_gain_db": {
+    "retrospective/ES2010d/mixed/sequential/genuine": 0.1834577299027172,
+    "retrospective/ES2010d/mixed/sequential/synthetic": 0.1829548864512074,
+    "retrospective/ES2010d/mixed/simultaneous/genuine": 0.13479790851377044,
+    "retrospective/ES2010d/mixed/simultaneous/synthetic": 0.14185970907488774,
+    "retrospective/IS1007a/mixed/sequential/genuine": 0.08157716622056055,
+    "retrospective/IS1007a/mixed/sequential/synthetic": 0.10682865654331243,
+    "retrospective/IS1007a/mixed/simultaneous/genuine": 0.09161021878288882,
+    "retrospective/IS1007a/mixed/simultaneous/synthetic": 0.0985287254838965,
+    "transfer/ES2007c/mixed/sequential/genuine": 0.3966552325798239,
+    "transfer/ES2007c/mixed/sequential/synthetic": 0.4107265744830242,
+    "transfer/ES2007c/mixed/simultaneous/genuine": 0.32054772343629495,
+    "transfer/ES2007c/mixed/simultaneous/synthetic": 0.33372079296010093,
+    "transfer/IS1004c/mixed/sequential/genuine": 0.09900959202350082,
+    "transfer/IS1004c/mixed/sequential/synthetic": 0.09346254708335335,
+    "transfer/IS1004c/mixed/simultaneous/genuine": 0.07044992445674508,
+    "transfer/IS1004c/mixed/simultaneous/synthetic": 0.06637814108170784
+  },
+  "median_voice_level_change_db": {
+    "retrospective/ES2010d/mixed/sequential/genuine": 0.0038823352298205513,
+    "retrospective/ES2010d/mixed/sequential/synthetic": 0.008157820035345468,
+    "retrospective/ES2010d/mixed/simultaneous/genuine": -0.013618729024206949,
+    "retrospective/ES2010d/mixed/simultaneous/synthetic": 0.01199875297538719,
+    "retrospective/IS1007a/mixed/sequential/genuine": -0.023631526242834572,
+    "retrospective/IS1007a/mixed/sequential/synthetic": 0.011757673732977418,
+    "retrospective/IS1007a/mixed/simultaneous/genuine": -0.003072055274419609,
+    "retrospective/IS1007a/mixed/simultaneous/synthetic": 0.015648022414882154,
+    "transfer/ES2007c/mixed/sequential/genuine": 0.03261257752929645,
+    "transfer/ES2007c/mixed/sequential/synthetic": 0.013404035199105222,
+    "transfer/ES2007c/mixed/simultaneous/genuine": -0.006733017055431073,
+    "transfer/ES2007c/mixed/simultaneous/synthetic": 0.013103605354283999,
+    "transfer/IS1004c/mixed/sequential/genuine": -0.010707734631913183,
+    "transfer/IS1004c/mixed/sequential/synthetic": -0.004156242437261742,
+    "transfer/IS1004c/mixed/simultaneous/genuine": 0.001489360132474509,
+    "transfer/IS1004c/mixed/simultaneous/synthetic": 0.003325786643982486
+  },
+  "peak_rss_bytes_darwin": 3000090624,
+  "schema": "chipmunk.audio-mono-dereverb-transfer-aggregate/1",
+  "scores_sha256": "94a1f3bf3d71dc7df94ca6a6e12df269ef5792a7b8e4c873a9bf4caf1be60cfc",
+  "speech_activity_forwards": 22278,
+  "transfer_genuine_coverage_met": true
+}

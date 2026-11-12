@@ -22,6 +22,10 @@ replays a PNG seam or video frame schedule directly from a supplied original
 and its signed evidence record. Start there to check those measurements on a
 local export.
 
+The [large-image copy comparison](image-affine-native-scale-2026-11-11.md#reproduce)
+provides a licensed roster, exact source commitments, and a separate reader
+for the PNG and JPEG localization and ordinary-control results.
+
 The [earlier-video comparison](video-reference-comparison-2026-11-11.md#replay-without-the-app)
 re-decodes two supplied clips and checks the JSON, native picture timestamps,
 before/during/after previews, and exact soundtrack excerpts. It can run without
@@ -38,6 +42,10 @@ the agreement and false-flag counts on the retained publisher panels.
 The [audio supplement example](#review-an-audio-supplement-by-acoustic-condition)
 uses authored scores to show how an acoustic routing error can add a genuine
 false flag.
+
+The [mono speech-interference study](audio-mono-dereverb-transfer-2026-11-11.md)
+reconstructs matched noisy inputs and checks which true and false voice flags
+change when reducing predictable late sound.
 
 The [video tracking evidence fixture](video-face-tracking-context.md) exercises
 the same recorded values in a saved packet and report without downloading

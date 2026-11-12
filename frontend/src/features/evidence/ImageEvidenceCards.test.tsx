@@ -232,6 +232,16 @@ describe('image evidence cards', () => {
     expect(within(section).queryByText(/^The match/)).toBeNull()
   })
 
+  it('shows the working size separately from native evidence on a large image', () => {
+    show({ ...copyOnly, version: 'image-evidence-14', source: { ...copyOnly.source, width: 1920, height: 1280 },
+      copy_affine: { ...geometric, schema: 'same-image-affine-support/2',
+        proposal_search: { basis: 'reduced', width: 1024, height: 683 } } })
+    const section = within(screen.getByRole('region', { name: 'Geometric copy comparison' }))
+    expect(section.getByText(/1024 × 683 pixel working image/)).toBeTruthy()
+    expect(section.getByText(/Coordinates use native pixels/)).toBeTruthy()
+    expect(section.getByRole('link', { name: 'Area A in the original image' })).toBeTruthy()
+  })
+
   it('keeps the other reflected crop and native coordinates available when a crop fails', () => {
     const { rerender } = show(copyOnly)
     fireEvent.error(screen.getByRole('img', { name: /Area A cropped/ }))

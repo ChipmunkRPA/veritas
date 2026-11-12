@@ -1,0 +1,302 @@
+{
+  "by_condition": {
+    "audio_delay_320ms": {
+      "chroma_rim": {
+        "measured_no_range": 7,
+        "ordinary_range": 1
+      },
+      "direct": {
+        "measured_no_range": 8
+      },
+      "joint_rim": {
+        "measured_no_range": 8
+      },
+      "texture_rim": {
+        "measured_no_range": 8
+      }
+    },
+    "brightness_liveportrait": {
+      "chroma_rim": {
+        "measured_no_range": 8
+      },
+      "direct": {
+        "measured_no_range": 8
+      },
+      "joint_rim": {
+        "measured_no_range": 8
+      },
+      "texture_rim": {
+        "measured_no_range": 8
+      }
+    },
+    "brightness_musetalk": {
+      "chroma_rim": {
+        "measured_no_range": 8
+      },
+      "direct": {
+        "measured_no_range": 8
+      },
+      "joint_rim": {
+        "measured_no_range": 8
+      },
+      "texture_rim": {
+        "measured_no_range": 8
+      }
+    },
+    "genuine_frame_retime": {
+      "chroma_rim": {
+        "measured_no_range": 7,
+        "ordinary_range": 1
+      },
+      "direct": {
+        "measured_no_range": 8
+      },
+      "joint_rim": {
+        "measured_no_range": 8
+      },
+      "texture_rim": {
+        "measured_no_range": 8
+      }
+    },
+    "liveportrait_earlier_320ms": {
+      "chroma_rim": {
+        "measured_no_range": 7,
+        "wrong_range": 1
+      },
+      "direct": {
+        "correct_range": 1,
+        "measured_no_range": 7
+      },
+      "joint_rim": {
+        "measured_no_range": 8
+      },
+      "texture_rim": {
+        "measured_no_range": 8
+      }
+    },
+    "liveportrait_source_time": {
+      "chroma_rim": {
+        "measured_no_range": 7,
+        "wrong_range": 1
+      },
+      "direct": {
+        "measured_no_range": 8
+      },
+      "joint_rim": {
+        "measured_no_range": 8
+      },
+      "texture_rim": {
+        "measured_no_range": 8
+      }
+    },
+    "musetalk_earlier_320ms": {
+      "chroma_rim": {
+        "correct_range": 1,
+        "measured_no_range": 7
+      },
+      "direct": {
+        "measured_no_range": 8
+      },
+      "joint_rim": {
+        "measured_no_range": 8
+      },
+      "texture_rim": {
+        "measured_no_range": 8
+      }
+    },
+    "musetalk_source_time": {
+      "chroma_rim": {
+        "measured_no_range": 7,
+        "wrong_range": 1
+      },
+      "direct": {
+        "measured_no_range": 8
+      },
+      "joint_rim": {
+        "measured_no_range": 8
+      },
+      "texture_rim": {
+        "measured_no_range": 8
+      }
+    },
+    "original": {
+      "chroma_rim": {
+        "measured_no_range": 7,
+        "ordinary_range": 1
+      },
+      "direct": {
+        "measured_no_range": 8
+      },
+      "joint_rim": {
+        "measured_no_range": 8
+      },
+      "texture_rim": {
+        "measured_no_range": 8
+      }
+    },
+    "resample_liveportrait": {
+      "chroma_rim": {
+        "measured_no_range": 7,
+        "ordinary_range": 1
+      },
+      "direct": {
+        "measured_no_range": 8
+      },
+      "joint_rim": {
+        "measured_no_range": 8
+      },
+      "texture_rim": {
+        "measured_no_range": 8
+      }
+    },
+    "resample_musetalk": {
+      "chroma_rim": {
+        "measured_no_range": 7,
+        "ordinary_range": 1
+      },
+      "direct": {
+        "measured_no_range": 8
+      },
+      "joint_rim": {
+        "measured_no_range": 8
+      },
+      "texture_rim": {
+        "measured_no_range": 8
+      }
+    }
+  },
+  "calibration_sha256": "5622d20edfc39bcb568b2577ae4a54bfc23c036e78b64b0054dc0ad92ca5a600",
+  "components_with_added_ranges": {
+    "chroma_rim": 1,
+    "direct": 0,
+    "joint_rim": 0,
+    "texture_rim": 0
+  },
+  "components_with_correct_ranges": {
+    "chroma_rim": 1,
+    "direct": 1,
+    "joint_rim": 0,
+    "texture_rim": 0
+  },
+  "development_clips": 8,
+  "development_components": 4,
+  "development_views": 88,
+  "expression_source_time_compatible_subset": {
+    "chroma_rim": {
+      "measured_no_range": 7
+    },
+    "direct": {
+      "measured_no_range": 7
+    },
+    "joint_rim": {
+      "measured_no_range": 7
+    },
+    "texture_rim": {
+      "measured_no_range": 7
+    }
+  },
+  "freeze_sha256": "d0f21b8992372c3531c8cb8d54cd1292120b1e516707f6f07d4f57d4ae07e45c",
+  "held_clips": 8,
+  "held_components": 4,
+  "held_control_views": 56,
+  "held_cpu_wall_s": 58.34,
+  "held_neural_views": 32,
+  "held_runner_peak_rss_bytes": 117063680,
+  "held_sha256": "2268b47c2d6a021dcb66cce6c5aa0b92c2deb5070628ce0b8058c405e440fb83",
+  "native_inputs_byte_verified": 6688,
+  "paired_transitions": {
+    "chroma_rim": {
+      "correct_range -> measured_no_range": 1,
+      "measured_no_range -> correct_range": 1,
+      "measured_no_range -> measured_no_range": 78,
+      "measured_no_range -> ordinary_range": 5,
+      "measured_no_range -> wrong_range": 3
+    },
+    "joint_rim": {
+      "correct_range -> measured_no_range": 1,
+      "measured_no_range -> measured_no_range": 87
+    },
+    "texture_rim": {
+      "correct_range -> measured_no_range": 1,
+      "measured_no_range -> measured_no_range": 87
+    }
+  },
+  "pilot_advances": false,
+  "prior_freeze_sha256": "39210bd800a3080a2d53d0a86382e0ea4adc30b8e7678dd841c18ff37ec84c67",
+  "protocol": {
+    "advancement": "Joint arm adds at least two useful ranges across two components, including a source-time-compatible expression redraw, and at most two additional ordinary ranges.",
+    "localization": "Half-open native interval IoU at least 1/2.",
+    "radii": [
+      [
+        17,
+        10
+      ],
+      [
+        23,
+        14
+      ],
+      [
+        29,
+        19
+      ]
+    ],
+    "ranges": "Maximum central median above both neighboring flank medians, on one fixed ellipse.",
+    "sectors": 8,
+    "source": "Same frozen GRID groups as prior direct and motion-reconstruction comparison.",
+    "time": "Every second native frame. Strictly above third-largest ordinary development score.",
+    "widths": [
+      5,
+      7,
+      9,
+      11
+    ]
+  },
+  "schema": "chipmunk.video-mouth-rim-result/1",
+  "serving_disposition": "Experimental. No check or confidence policy changed.",
+  "totals": {
+    "chroma_rim": {
+      "correct_range": 1,
+      "measured_no_range": 79,
+      "ordinary_range": 5,
+      "wrong_range": 3
+    },
+    "direct": {
+      "correct_range": 1,
+      "measured_no_range": 87
+    },
+    "joint_rim": {
+      "measured_no_range": 88
+    },
+    "texture_rim": {
+      "measured_no_range": 88
+    }
+  },
+  "verification": {
+    "aggregate_sha256": "9aa3ce6b95c774b078da397a635c9072883b3c3b7f9c958a7267a78d709e8650",
+    "counts": {
+      "direct_responses_matched": 176,
+      "held_files_verified": 88,
+      "native_frames_redecoded": 30,
+      "native_mask_proofs_replayed": 2
+    },
+    "example": {
+      "arm": "chroma_rim",
+      "authored": [
+        "27/25",
+        "47/25"
+      ],
+      "condition": "musetalk_earlier_320ms",
+      "mask_overlap": {
+        "inside_inspection_crop": 2796,
+        "true_changed_pixels": 2796
+      },
+      "native_pictures_and_crops": 3,
+      "outcome": "correct_range",
+      "selected": [
+        "28/25",
+        "46/25"
+      ]
+    },
+    "status": "verified"
+  }
+}

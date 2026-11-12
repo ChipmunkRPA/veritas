@@ -13,10 +13,12 @@ from sqlalchemy.orm import Session
 
 from app.core.canonical import canonical_hash, canonical_json
 from app.core.config import settings
-from app.detectors.image import copy_affine, copy_move, copy_similarity
+from app.detectors.image import copy_affine, copy_affine_large, copy_move, copy_similarity
 from app.evidence import image_copy_affine_binding as affine
 from app.evidence import image_packets_v5 as prior
 from app.evidence.image_copy_similarity_binding import (
+    AFFINE_VERSIONS,
+    CREDENTIAL_VERSIONS,
     NOTE,
     PAIR_LIMIT,
     REFLECTION_VERSIONS,
@@ -45,7 +47,8 @@ from app.storage.db import Analysis, Artefact
 from app.storage.objects import ObjectStore
 
 CREATOR = "image-evidence-packets/10"
-_CREATORS = {affine.VERSION: "image-evidence-packets/11", VERSION: CREATOR, V11: "image-evidence-packets/9",
+_CREATORS = {affine.LARGE_VERSION: "image-evidence-packets/12", affine.VERSION: "image-evidence-packets/11",
+             VERSION: CREATOR, V11: "image-evidence-packets/9",
              V10: "image-evidence-packets/8", V9: "image-evidence-packets/7",
              V8: "image-evidence-packets/6", V7: "image-evidence-packets/5"}
 MAX_COPY_CANDIDATES = 1024  # Each pair adds two orientations to the neighbor graph.
@@ -54,7 +57,7 @@ PacketIntegrityError = prior.PacketIntegrityError
 
 
 def _active_version() -> str:
-    return affine.VERSION if settings.environment == "dev" and settings.image_affine_copy_review else VERSION
+    return affine.LARGE_VERSION if settings.environment == "dev" and settings.image_affine_copy_review else VERSION
 
 
 def current_set_id(analysis: Analysis) -> str:
@@ -76,7 +79,7 @@ def validate_packet_set(document: dict[str, Any], **binding: Any) -> None:
 
 
 def validate_packet_source_mapping(document: dict, result: dict) -> None:
-    if document.get("version") in {VERSION, affine.VERSION}:
+    if document.get("version") in CREDENTIAL_VERSIONS:
         try:
             validate_copy_scope(document, result_skip(result))
         except ValueError as exc:
@@ -182,22 +185,36 @@ def _copy_record(db: Session, analysis: Analysis, store: ObjectStore, document: 
 
 def _affine_record(db: Session, analysis: Analysis, store: ObjectStore, document: dict,
                    source: Image.Image | None, *, skip: bool) -> dict:
-    record = {"schema": affine.SCHEMA, "source_sha256": analysis.sha256, "status": "unsupported_geometry",
+    version = document["version"]
+    expanded = version == affine.LARGE_VERSION
+    record = {"schema": affine.LARGE_SCHEMA if expanded else affine.SCHEMA,
+              "source_sha256": analysis.sha256, "status": "unsupported_geometry",
               "pairs": [], "authorship_confidence_contribution": 0, "interpretation": affine.NOTE}
+    if expanded:
+        record["proposal_search"] = None
     if skip:
         return {**record, "status": SKIPPED_CREDENTIALS}
-    if source is None or not affine.supported(*source.size):
+    if source is None or not affine.supported(*source.size, version=version):
         return record
     rgb = np.asarray(source)
+    search = affine.search_geometry(*source.size)
+    if expanded:
+        record["proposal_search"] = search
+    reduced = search["basis"] == "reduced"
     try:
-        proposals = copy_affine.candidates(rgb)
+        if reduced:
+            proposals = copy_affine_large.candidates(rgb)
+        else:
+            proposals = [(np.array(item.affine.matrix, np.float64),
+                          box_bounds(prior._coordinates(_crop_box(item.box_a, *source.size)), *source.size))
+                         for item in copy_affine.candidates(rgb)]
     except copy_move.CandidateBudgetExceeded:
         return {**record, "status": "unassessed_match_budget"}
     gray = copy_affine.luma(rgb) if proposals else None
-    for proposal in proposals:
-        seed = prior._coordinates(_crop_box(proposal.box_a, *source.size))
-        matrix = np.array(proposal.affine.matrix, np.float64)
-        masks = copy_affine.dense_pair(gray, matrix, box_bounds(seed, *source.size))
+    for matrix, bounds in proposals:
+        x0, y0, x1, y1 = bounds
+        seed = prior._coordinates((x0, y0, x1 - x0, y1 - y0))
+        masks = copy_affine.dense_pair(gray, matrix, bounds)
         if masks is None:
             continue
         regions, counts, artifacts = {}, {}, {}
@@ -213,7 +230,7 @@ def _affine_record(db: Session, analysis: Analysis, store: ObjectStore, document
                 mask_png = output.getvalue()
             for name, content in ((role, legacy._png(crop)), ("mask_" + role[-1], mask_png)):
                 art = register_artefact(db, store, content, media_type="image/png", role="preview",
-                                        created_by=_CREATORS[affine.VERSION], analysis_id=analysis.id)
+                                        created_by=_CREATORS[version], analysis_id=analysis.id)
                 artifacts[name] = {"sha256": art.sha256, "media_type": "image/png", "width": crop.width,
                                    "height": crop.height, "url": url(document, art.sha256)}
         record["pairs"].append({"id": f"G{len(record['pairs']) + 1:02d}", "seed": seed, "matrix": matrix.tolist(),
@@ -256,7 +273,7 @@ def build_packet_set(
     document["copy_translation"] = _copy_record(db, analysis, store, document, source, translation_status,
                                                 translations, reflected=False)
     document["copy_translation"]["basis"] = basis
-    if version == affine.VERSION:
+    if version in AFFINE_VERSIONS:
         document[affine.KEY] = _affine_record(db, analysis, store, document, source, skip=skipped)
     document = json.loads(canonical_json(document))
     document["sha256"] = prior.packet_hash(document)

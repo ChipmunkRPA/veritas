@@ -86,8 +86,10 @@ function CopySimilarity({ set, field, token, mediaReady }: {
   const geometric = field === 'copy_affine'
   const heading = geometric ? 'Geometric copy comparison' : reflected ? 'Same-image copy similarity' : 'Copy similarity without mirroring'
   const sectionId = `image-${field.replace('_', '-')}`
-  const wide = reflected && ['image-evidence-9', 'image-evidence-10', 'image-evidence-11', 'image-evidence-12', 'image-evidence-13'].includes(set.version)
+  const wide = (geometric && set.version === 'image-evidence-14') || (reflected &&
+    ['image-evidence-9', 'image-evidence-10', 'image-evidence-11', 'image-evidence-12', 'image-evidence-13', 'image-evidence-14'].includes(set.version))
   const basis = field === 'copy_translation' && set.copy_translation?.basis
+  const proposalSearch = geometric ? set.copy_affine?.proposal_search : undefined
   const statusText = {
     supported_pair: geometric ? 'Matching detail was found after geometric alignment.'
       : reflected ? 'Similar areas were found after horizontal reflection.' : 'Similar image detail was found without mirroring.',
@@ -104,6 +106,7 @@ function CopySimilarity({ set, field, token, mediaReady }: {
     <p className="mt-2 mb-0 text-small text-text-muted">{check.interpretation}</p>
     {!reflected && <p className="mt-2 mb-0 text-caption text-text-muted">This check carries zero weight in AI authorship confidence.</p>}
     {check.pairs.length > 0 && basis && <p className="mt-2 mb-0 text-caption text-text-muted">{copyBasisText[basis]}</p>}
+    {proposalSearch?.basis === 'reduced' && <p className="mt-2 mb-0 text-caption text-text-muted">The candidate search used a {proposalSearch.width} × {proposalSearch.height} pixel working image. The check measured any matching masks on the original pixel grid.</p>}
     {check.pairs.length > 0 && <p className="mt-2 mb-0 text-caption text-text-muted">Coordinates use native pixels in the oriented original.</p>}
     {check.pairs.map(pair => <article key={pair.id} className="mt-4 border-t border-border pt-4">
       <h4 className="m-0 text-small font-medium text-text">{pair.id} · {geometric ? 'Matched source areas' : reflected ? 'Reflected pair' : 'Non-mirrored pair'}</h4>

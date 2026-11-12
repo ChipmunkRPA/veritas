@@ -7,7 +7,10 @@ import re
 
 KEY = "copy_affine"
 VERSION = "image-evidence-13"
+LARGE_VERSION = "image-evidence-14"
+AFFINE_VERSIONS = frozenset({VERSION, LARGE_VERSION})
 SCHEMA = "same-image-affine-support/1"
+LARGE_SCHEMA = "same-image-affine-support/2"
 ROLES = ("area_a", "area_b")
 STATUS_TEXT = {
     "supported_pair": "Matching detail was found after geometric alignment.",
@@ -20,31 +23,59 @@ NOTE = (
     "Repeated objects and image editing can both cause a match. "
     "The evidence does not establish which area came first or whether AI was involved."
 )
+LARGE_COVERAGE_TEXT = (
+    "This check covers images with a long side of 513–1,024 px and a short side of at least 384 px, "
+    "or a long side of 1,025–2,048 px and a short side of at least 768 px."
+)
 _SHA = re.compile(r"[a-f0-9]{64}")
 
 
-def supported(width: int, height: int) -> bool:
+def supported(width: int, height: int, *, version: str = VERSION) -> bool:
     short, long = sorted((width, height))
-    return short >= 384 and 513 <= long <= 1024
+    if long <= 1024:
+        return short >= 384 and long >= 513
+    return version == LARGE_VERSION and short >= 768 and long <= 2048
+
+
+def search_geometry(width: int, height: int) -> dict:
+    long = max(width, height)
+    if long <= 1024:
+        return {"basis": "source", "width": width, "height": height}
+    scale = 1024 / long
+    return {"basis": "reduced", "width": round(width * scale), "height": round(height * scale)}
+
+
+def status_text(status: str, version: str) -> str:
+    return LARGE_COVERAGE_TEXT if status == "unsupported_geometry" and version == LARGE_VERSION else STATUS_TEXT[status]
 
 
 def validate(document, *, box_bounds, url, credential_status):
-    if document.get("version") != VERSION:
+    version = document.get("version")
+    if version not in AFFINE_VERSIONS:
         if KEY in document:
             raise ValueError("Geometric copy support requires its own evidence version")
         return
     source, record = document["source"], document.get(KEY)
-    if not isinstance(record, dict) or set(record) != {"schema", "source_sha256", "status", "pairs",
-                                                       "authorship_confidence_contribution", "interpretation"}:
+    large = version == LARGE_VERSION
+    fields = {"schema", "source_sha256", "status", "pairs", "authorship_confidence_contribution", "interpretation"}
+    if large:
+        fields.add("proposal_search")
+    if not isinstance(record, dict) or set(record) != fields:
         raise ValueError("Malformed geometric copy evidence")
     width, height = source["width"], source["height"]
     status, pairs = record["status"], record["pairs"]
-    if (record["schema"] != SCHEMA or record["source_sha256"] != source["sha256"] or record["interpretation"] != NOTE
+    if (record["schema"] != (LARGE_SCHEMA if large else SCHEMA)
+            or record["source_sha256"] != source["sha256"] or record["interpretation"] != NOTE
             or type(record["authorship_confidence_contribution"]) is not int or record["authorship_confidence_contribution"] != 0
             or status not in {*STATUS_TEXT, credential_status} or not isinstance(pairs, list) or len(pairs) > 3
             or bool(pairs) != (status == "supported_pair")
-            or (status != credential_status and (status == "unsupported_geometry") == supported(width, height))):
+            or (status != credential_status and (status == "unsupported_geometry") == supported(width, height, version=version))):
         raise ValueError("Geometric copy evidence has invalid scope or confidence")
+    if large:
+        search = None if status in {credential_status, "unsupported_geometry"} else search_geometry(width, height)
+        recorded = record["proposal_search"]
+        if recorded != search or (search and any(type(recorded[key]) is not int for key in ("width", "height"))):
+            raise ValueError("Geometric copy search uses a different working grid")
     for i, pair in enumerate(pairs, 1):
         if (set(pair) != {"id", "seed", "matrix", "regions", "selected_pixels", "artifacts"} or pair["id"] != f"G{i:02d}"
                 or set(pair["regions"]) != set(ROLES) or set(pair["selected_pixels"]) != set(ROLES)

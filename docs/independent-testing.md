@@ -71,6 +71,9 @@ against the original PCM and publisher word intervals.
 The [fresh release timing study](grid-fresh-release-qualification-2026-11-12.md)
 seals independent waveform and picture observations before moving the audio
 and compares both blind checks with a supplied-reference waveform.
+The [marked earlier-copy transfer](grid-marked-release-transfer-2026-11-12.md)
+compares two waveform templates selected using just a marked source frame
+and verifies the reported native assets against both copies.
 
 The [earlier-audio comparison](audio-reference-comparison-2026-11-11.md#replay-without-the-app)
 replays changed sample ranges, difference waveforms, and playable excerpts
@@ -181,6 +184,9 @@ in valid pairs.
 The [screenshot-size transfer](image-embedded-pair-canvas-transfer-2026-11-12.md)
 replays 870 exact pixel inputs and measures ambiguous matches involving a
 third view resized by different amounts.
+The [dense third-view comparison](image-embedded-pair-dense-third-2026-11-12.md)
+tests a separate patch verification rule with additional source photos
+and records the original whole-area verification failures.
 The [quality-90 earlier-copy study](image-reference-jpeg90-transfer-2026-11-12.md)
 rebuilds both JPEG deliveries, checks mapped native crops, and verifies the
 paid result's API, PDF, and JSON evidence in the local app.

@@ -1,0 +1,4493 @@
+{
+  "audit": {
+    "base_exact_masks": 70,
+    "failed_original_footprint_requirement": 6,
+    "native_patch_witnesses": 497,
+    "source_projections": 7,
+    "witness_centers_inside_authored_third": 482
+  },
+  "freeze_sha256": "ff0818f6cc30d5af7cc2a64567c469e4b02ecec7896955b287500d6f0d4f9655",
+  "outcomes": {
+    "1024x768": {
+      "max_seconds": 0.14182612500007963,
+      "old_third_reports": 5,
+      "passed": false,
+      "remaining_third_reports": 2,
+      "roles": {
+        "duplicate_pair": {
+          "current_reports": 0,
+          "exact_valid_masks": 0,
+          "extra_withholds": 0
+        },
+        "third_062": {
+          "current_reports": 1,
+          "exact_valid_masks": 0,
+          "extra_withholds": 1
+        },
+        "third_071": {
+          "current_reports": 1,
+          "exact_valid_masks": 0,
+          "extra_withholds": 1
+        },
+        "third_087": {
+          "current_reports": 1,
+          "exact_valid_masks": 0,
+          "extra_withholds": 0
+        },
+        "third_113": {
+          "current_reports": 1,
+          "exact_valid_masks": 0,
+          "extra_withholds": 1
+        },
+        "third_121": {
+          "current_reports": 1,
+          "exact_valid_masks": 0,
+          "extra_withholds": 0
+        },
+        "unrelated_third": {
+          "current_reports": 11,
+          "exact_valid_masks": 11,
+          "extra_withholds": 0
+        },
+        "valid_pair": {
+          "current_reports": 11,
+          "exact_valid_masks": 11,
+          "extra_withholds": 0
+        }
+      }
+    },
+    "1280x720": {
+      "max_seconds": 0.16467416699742898,
+      "old_third_reports": 6,
+      "passed": false,
+      "remaining_third_reports": 3,
+      "roles": {
+        "duplicate_pair": {
+          "current_reports": 0,
+          "exact_valid_masks": 0,
+          "extra_withholds": 0
+        },
+        "third_062": {
+          "current_reports": 2,
+          "exact_valid_masks": 0,
+          "extra_withholds": 2
+        },
+        "third_071": {
+          "current_reports": 1,
+          "exact_valid_masks": 0,
+          "extra_withholds": 0
+        },
+        "third_087": {
+          "current_reports": 1,
+          "exact_valid_masks": 0,
+          "extra_withholds": 0
+        },
+        "third_113": {
+          "current_reports": 1,
+          "exact_valid_masks": 0,
+          "extra_withholds": 0
+        },
+        "third_121": {
+          "current_reports": 1,
+          "exact_valid_masks": 0,
+          "extra_withholds": 1
+        },
+        "unrelated_third": {
+          "current_reports": 12,
+          "exact_valid_masks": 12,
+          "extra_withholds": 0
+        },
+        "valid_pair": {
+          "current_reports": 12,
+          "exact_valid_masks": 12,
+          "extra_withholds": 0
+        }
+      }
+    },
+    "768x768": {
+      "max_seconds": 0.11784137500217184,
+      "old_third_reports": 5,
+      "passed": false,
+      "remaining_third_reports": 4,
+      "roles": {
+        "duplicate_pair": {
+          "current_reports": 0,
+          "exact_valid_masks": 0,
+          "extra_withholds": 0
+        },
+        "third_062": {
+          "current_reports": 1,
+          "exact_valid_masks": 0,
+          "extra_withholds": 1
+        },
+        "third_071": {
+          "current_reports": 1,
+          "exact_valid_masks": 0,
+          "extra_withholds": 0
+        },
+        "third_087": {
+          "current_reports": 1,
+          "exact_valid_masks": 0,
+          "extra_withholds": 0
+        },
+        "third_113": {
+          "current_reports": 1,
+          "exact_valid_masks": 0,
+          "extra_withholds": 0
+        },
+        "third_121": {
+          "current_reports": 1,
+          "exact_valid_masks": 0,
+          "extra_withholds": 0
+        },
+        "unrelated_third": {
+          "current_reports": 12,
+          "exact_valid_masks": 12,
+          "extra_withholds": 0
+        },
+        "valid_pair": {
+          "current_reports": 12,
+          "exact_valid_masks": 12,
+          "extra_withholds": 0
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_062",
+      "seconds": 2.500019036233425e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 0,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_071",
+      "seconds": 4.169996827840805e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 0,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_087",
+      "seconds": 4.159956006333232e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 0,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_113",
+      "seconds": 2.090018824674189e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 0,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_121",
+      "seconds": 3.7500285543501377e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 0,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "valid_pair",
+      "seconds": 0.11066320799727691,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 0,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "unrelated_third",
+      "seconds": 0.11784137500217184,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 0,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "matching_without_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "duplicate_pair",
+      "seconds": 5.830006557516754e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 0,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_062",
+      "seconds": 3.749955794773996e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 1,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_071",
+      "seconds": 2.910019247792661e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 1,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_087",
+      "seconds": 3.7500285543501377e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 1,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_113",
+      "seconds": 2.500019036233425e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 1,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_121",
+      "seconds": 2.9199873097240925e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 1,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "valid_pair",
+      "seconds": 0.10326158400130225,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 1,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "unrelated_third",
+      "seconds": 0.10992041599820368,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 1,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "matching_without_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "duplicate_pair",
+      "seconds": 2.910019247792661e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 1,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_062",
+      "seconds": 2.500019036233425e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 2,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_071",
+      "seconds": 2.910019247792661e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 2,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_087",
+      "seconds": 1.66997779160738e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 2,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_113",
+      "seconds": 2.4999462766572833e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 2,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_121",
+      "seconds": 2.9199873097240925e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 2,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "valid_pair",
+      "seconds": 0.10113416699459776,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 2,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "unrelated_third",
+      "seconds": 0.10596966699813493,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 2,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "matching_without_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "duplicate_pair",
+      "seconds": 3.749955794773996e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 2,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": true,
+      "native_witness_count": 62,
+      "role": "third_062",
+      "seconds": 0.0862003329966683,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 3,
+      "whole_projection_in_authored_third": 0.8566715542521994,
+      "witness_centers_inside_authored_third": 48
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_071",
+      "seconds": 0.08177737500227522,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 3,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_087",
+      "seconds": 0.08158745899709174,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 3,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_113",
+      "seconds": 0.08143508400098654,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 3,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_121",
+      "seconds": 0.08197645899781492,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 3,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "valid_pair",
+      "seconds": 0.08021441699384013,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 3,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "unrelated_third",
+      "seconds": 0.08616341699962504,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 3,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "matching_without_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "duplicate_pair",
+      "seconds": 5.00003807246685e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 3,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_062",
+      "seconds": 2.500019036233425e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 4,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_071",
+      "seconds": 2.500019036233425e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 4,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_087",
+      "seconds": 3.3299875212833285e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 4,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_113",
+      "seconds": 2.500019036233425e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 4,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_121",
+      "seconds": 3.3299875212833285e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 4,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "valid_pair",
+      "seconds": 0.09481099999538856,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 4,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "unrelated_third",
+      "seconds": 0.10819441600324353,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 4,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "matching_without_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "duplicate_pair",
+      "seconds": 5.420006345957518e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 4,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_062",
+      "seconds": 2.9199873097240925e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 5,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_071",
+      "seconds": 2.4999462766572833e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 5,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_087",
+      "seconds": 2.4999462766572833e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 5,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_113",
+      "seconds": 2.500019036233425e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 5,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_121",
+      "seconds": 2.4999462766572833e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 5,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "valid_pair",
+      "seconds": 0.09868191599525744,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 5,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "unrelated_third",
+      "seconds": 0.10192854100023396,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 5,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "matching_without_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "duplicate_pair",
+      "seconds": 4.999965312890708e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 5,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_062",
+      "seconds": 2.9199873097240925e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 6,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_071",
+      "seconds": 2.9199873097240925e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 6,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_087",
+      "seconds": 2.9199873097240925e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 6,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_113",
+      "seconds": 4.5899651013314724e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 6,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_121",
+      "seconds": 3.7500285543501377e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 6,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "valid_pair",
+      "seconds": 0.10008966699388111,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 6,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "unrelated_third",
+      "seconds": 0.10932725000020582,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 6,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "matching_without_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "duplicate_pair",
+      "seconds": 2.9199873097240925e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 6,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_062",
+      "seconds": 2.9199873097240925e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 7,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_071",
+      "seconds": 2.910019247792661e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 7,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_087",
+      "seconds": 2.910019247792661e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 7,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_113",
+      "seconds": 2.9099464882165194e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 7,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_121",
+      "seconds": 5.00003807246685e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 7,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "valid_pair",
+      "seconds": 0.09176333299546968,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 7,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "unrelated_third",
+      "seconds": 0.11049637500400422,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 7,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "matching_without_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "duplicate_pair",
+      "seconds": 4.160028765909374e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 7,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_062",
+      "seconds": 3.33995558321476e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 8,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_071",
+      "seconds": 2.0800507627427578e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 8,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_087",
+      "seconds": 4.159956006333232e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 8,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_113",
+      "seconds": 2.500019036233425e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 8,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_121",
+      "seconds": 1.2500095181167126e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 8,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "valid_pair",
+      "seconds": 0.08654412499890896,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 8,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "unrelated_third",
+      "seconds": 0.09848445800162153,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 8,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "matching_without_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "duplicate_pair",
+      "seconds": 5.420006345957518e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 8,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_062",
+      "seconds": 5.00003807246685e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 9,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_071",
+      "seconds": 3.3400283427909017e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 9,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_087",
+      "seconds": 2.079978003166616e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 9,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_113",
+      "seconds": 2.500019036233425e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 9,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_121",
+      "seconds": 4.159956006333232e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 9,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "valid_pair",
+      "seconds": 0.1049692500018864,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 9,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "unrelated_third",
+      "seconds": 0.11350345800019568,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 9,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "matching_without_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "duplicate_pair",
+      "seconds": 4.999965312890708e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 9,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_062",
+      "seconds": 2.4999462766572833e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 10,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_071",
+      "seconds": 2.910019247792661e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 10,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_087",
+      "seconds": 2.500019036233425e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 10,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_113",
+      "seconds": 2.090018824674189e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 10,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_121",
+      "seconds": 2.9200600693002343e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 10,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "valid_pair",
+      "seconds": 0.08619058399926871,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 10,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "unrelated_third",
+      "seconds": 0.0871400000032736,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 10,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "matching_without_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "duplicate_pair",
+      "seconds": 3.7500285543501377e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 10,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_062",
+      "seconds": 2.9099464882165194e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 11,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_071",
+      "seconds": 2.090018824674189e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 11,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_087",
+      "seconds": 2.500019036233425e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 11,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_113",
+      "seconds": 2.500019036233425e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 11,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_121",
+      "seconds": 4.159956006333232e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 11,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "valid_pair",
+      "seconds": 0.090579167001124,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 11,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "unrelated_third",
+      "seconds": 0.09776037499977974,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 11,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "matching_without_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "duplicate_pair",
+      "seconds": 3.3299875212833285e-07,
+      "size": [
+        768,
+        768
+      ],
+      "slot": 11,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_062",
+      "seconds": 2.9200600693002343e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 0,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_071",
+      "seconds": 4.169996827840805e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 0,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_087",
+      "seconds": 2.090018824674189e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 0,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_113",
+      "seconds": 2.9099464882165194e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 0,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_121",
+      "seconds": 2.500019036233425e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 0,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "valid_pair",
+      "seconds": 0.1347632920005708,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 0,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "unrelated_third",
+      "seconds": 0.14182612500007963,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 0,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "matching_without_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "duplicate_pair",
+      "seconds": 4.579997039400041e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 0,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_062",
+      "seconds": 4.160028765909374e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 1,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_071",
+      "seconds": 2.910019247792661e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 1,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_087",
+      "seconds": 2.500019036233425e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 1,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_113",
+      "seconds": 2.9199873097240925e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 1,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_121",
+      "seconds": 2.9199873097240925e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 1,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "valid_pair",
+      "seconds": 0.12947429199994076,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 1,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "unrelated_third",
+      "seconds": 0.1369154999993043,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 1,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "matching_without_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "duplicate_pair",
+      "seconds": 3.749955794773996e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 1,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_062",
+      "seconds": 2.4999462766572833e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 2,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_071",
+      "seconds": 3.3400283427909017e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 2,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_087",
+      "seconds": 2.500019036233425e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 2,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_113",
+      "seconds": 3.3299875212833285e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 2,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_121",
+      "seconds": 3.3299875212833285e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 2,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "valid_pair",
+      "seconds": 0.12790687500091735,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 2,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "unrelated_third",
+      "seconds": 0.13178420800250024,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 2,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "matching_without_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "duplicate_pair",
+      "seconds": 3.7500285543501377e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 2,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": true,
+      "native_witness_count": 68,
+      "role": "third_062",
+      "seconds": 0.1129130420013098,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 3,
+      "whole_projection_in_authored_third": 0.8901726764855257,
+      "witness_centers_inside_authored_third": 68
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": true,
+      "native_witness_count": 72,
+      "role": "third_071",
+      "seconds": 0.11398712499794783,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 3,
+      "whole_projection_in_authored_third": 0.8938640132669984,
+      "witness_centers_inside_authored_third": 72
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_087",
+      "seconds": 0.10963037500187056,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 3,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": true,
+      "native_witness_count": 74,
+      "role": "third_113",
+      "seconds": 0.11446650000289083,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 3,
+      "whole_projection_in_authored_third": 0.8884811650708102,
+      "witness_centers_inside_authored_third": 74
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_121",
+      "seconds": 0.11018479199992726,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 3,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "valid_pair",
+      "seconds": 0.10702441600005841,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 3,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "unrelated_third",
+      "seconds": 0.11269645799620776,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 3,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "matching_without_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "duplicate_pair",
+      "seconds": 4.999965312890708e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 3,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_062",
+      "seconds": 2.9199873097240925e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 4,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_071",
+      "seconds": 2.500019036233425e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 4,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_087",
+      "seconds": 2.0800507627427578e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 4,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_113",
+      "seconds": 2.500019036233425e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 4,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_121",
+      "seconds": 2.910019247792661e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 4,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "valid_pair",
+      "seconds": 0.120641166002315,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 4,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "unrelated_third",
+      "seconds": 0.13492937500268454,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 4,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "matching_without_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "duplicate_pair",
+      "seconds": 1.66997779160738e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 4,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_062",
+      "seconds": 2.500019036233425e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 5,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_071",
+      "seconds": 2.079978003166616e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 5,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_087",
+      "seconds": 2.500019036233425e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 5,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_113",
+      "seconds": 2.910019247792661e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 5,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_121",
+      "seconds": 2.4999462766572833e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 5,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "valid_pair",
+      "seconds": 0.12586274999921443,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 5,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "unrelated_third",
+      "seconds": 0.12847083300584927,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 5,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "matching_without_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "duplicate_pair",
+      "seconds": 5.00003807246685e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 5,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_062",
+      "seconds": 3.7500285543501377e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 6,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_071",
+      "seconds": 2.500019036233425e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 6,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_087",
+      "seconds": 2.4999462766572833e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 6,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_113",
+      "seconds": 2.9200600693002343e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 6,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_121",
+      "seconds": 2.500019036233425e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 6,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "valid_pair",
+      "seconds": 0.12667174999660347,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 6,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "unrelated_third",
+      "seconds": 0.13396458399802214,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 6,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "matching_without_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "duplicate_pair",
+      "seconds": 3.3299875212833285e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 6,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_062",
+      "seconds": 3.3400283427909017e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 7,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_071",
+      "seconds": 4.169996827840805e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 7,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_087",
+      "seconds": 2.910019247792661e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 7,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_113",
+      "seconds": 3.3299875212833285e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 7,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_121",
+      "seconds": 2.079978003166616e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 7,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "valid_pair",
+      "seconds": 0.1180387080021319,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 7,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "unrelated_third",
+      "seconds": 0.13606966700172052,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 7,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "matching_without_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "duplicate_pair",
+      "seconds": 5.420006345957518e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 7,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_062",
+      "seconds": 2.9199873097240925e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 8,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_071",
+      "seconds": 2.079978003166616e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 8,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_087",
+      "seconds": 2.9199873097240925e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 8,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_113",
+      "seconds": 3.33995558321476e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 8,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_121",
+      "seconds": 4.169996827840805e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 8,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "valid_pair",
+      "seconds": 0.11604662500030827,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 8,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "unrelated_third",
+      "seconds": 0.12547949999861885,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 8,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "matching_without_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "duplicate_pair",
+      "seconds": 2.090018824674189e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 8,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_062",
+      "seconds": 2.9199873097240925e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 9,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_071",
+      "seconds": 2.500019036233425e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 9,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_087",
+      "seconds": 3.3299875212833285e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 9,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_113",
+      "seconds": 2.910019247792661e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 9,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_121",
+      "seconds": 3.3299875212833285e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 9,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "valid_pair",
+      "seconds": 0.12711250000575092,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 9,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "unrelated_third",
+      "seconds": 0.13482208300411003,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 9,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "matching_without_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "duplicate_pair",
+      "seconds": 8.33999365568161e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 9,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "no_supported_pair",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_062",
+      "seconds": 4.160028765909374e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 10,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "no_supported_pair",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_071",
+      "seconds": 4.579997039400041e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 10,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "no_supported_pair",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_087",
+      "seconds": 4.169996827840805e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 10,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "no_supported_pair",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_113",
+      "seconds": 3.7500285543501377e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 10,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "no_supported_pair",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_121",
+      "seconds": 2.9199873097240925e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 10,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "no_supported_pair",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "valid_pair",
+      "seconds": 2.0800507627427578e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 10,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "no_supported_pair",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "unrelated_third",
+      "seconds": 4.999965312890708e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 10,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "no_supported_pair",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "duplicate_pair",
+      "seconds": 4.169996827840805e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 10,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_062",
+      "seconds": 2.9199873097240925e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 11,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_071",
+      "seconds": 2.9199873097240925e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 11,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_087",
+      "seconds": 2.4999462766572833e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 11,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_113",
+      "seconds": 2.9200600693002343e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 11,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_121",
+      "seconds": 3.3300602808594704e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 11,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "valid_pair",
+      "seconds": 0.11802437499864027,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 11,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "unrelated_third",
+      "seconds": 0.12654112499876646,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 11,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "matching_without_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "duplicate_pair",
+      "seconds": 7.500057108700275e-07,
+      "size": [
+        1024,
+        768
+      ],
+      "slot": 11,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_062",
+      "seconds": 2.079978003166616e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 0,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_071",
+      "seconds": 4.160028765909374e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 0,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_087",
+      "seconds": 2.9099464882165194e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 0,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_113",
+      "seconds": 2.090018824674189e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 0,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_121",
+      "seconds": 3.3299875212833285e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 0,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "valid_pair",
+      "seconds": 0.15691091700136894,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 0,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "unrelated_third",
+      "seconds": 0.16101374999561813,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 0,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "matching_without_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "duplicate_pair",
+      "seconds": 4.999965312890708e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 0,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_062",
+      "seconds": 3.3299875212833285e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 1,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_071",
+      "seconds": 2.9199873097240925e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 1,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_087",
+      "seconds": 3.7500285543501377e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 1,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_113",
+      "seconds": 2.500019036233425e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 1,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_121",
+      "seconds": 2.9199873097240925e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 1,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "valid_pair",
+      "seconds": 0.14907258300081594,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 1,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "unrelated_third",
+      "seconds": 0.1550006250035949,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 1,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "matching_without_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "duplicate_pair",
+      "seconds": 2.9199873097240925e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 1,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_062",
+      "seconds": 2.500019036233425e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 2,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_071",
+      "seconds": 4.590037860907614e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 2,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_087",
+      "seconds": 2.090018824674189e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 2,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_113",
+      "seconds": 3.3400283427909017e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 2,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_121",
+      "seconds": 2.9200600693002343e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 2,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "valid_pair",
+      "seconds": 0.14838695799699053,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 2,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "unrelated_third",
+      "seconds": 0.15102075000322657,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 2,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "matching_without_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "duplicate_pair",
+      "seconds": 5.00003807246685e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 2,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": true,
+      "native_witness_count": 64,
+      "role": "third_062",
+      "seconds": 0.13365699999849312,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 3,
+      "whole_projection_in_authored_third": 0.8901726764855257,
+      "witness_centers_inside_authored_third": 64
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_071",
+      "seconds": 0.1278815420009778,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 3,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_087",
+      "seconds": 0.12896433399873786,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 3,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_113",
+      "seconds": 0.1276737919979496,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 3,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": true,
+      "native_witness_count": 71,
+      "role": "third_121",
+      "seconds": 0.13281820800330024,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 3,
+      "whole_projection_in_authored_third": 0.895224171539961,
+      "witness_centers_inside_authored_third": 71
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "valid_pair",
+      "seconds": 0.12587654199887766,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 3,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "unrelated_third",
+      "seconds": 0.12521149999520276,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 3,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "matching_without_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "duplicate_pair",
+      "seconds": 4.999965312890708e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 3,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_062",
+      "seconds": 2.9199873097240925e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 4,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_071",
+      "seconds": 2.9199873097240925e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 4,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_087",
+      "seconds": 3.7500285543501377e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 4,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_113",
+      "seconds": 2.500019036233425e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 4,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_121",
+      "seconds": 2.9199873097240925e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 4,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "valid_pair",
+      "seconds": 0.14166587500221794,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 4,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "unrelated_third",
+      "seconds": 0.1538215000036871,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 4,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "matching_without_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "duplicate_pair",
+      "seconds": 4.579997039400041e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 4,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_062",
+      "seconds": 2.9199873097240925e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 5,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_071",
+      "seconds": 3.3299875212833285e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 5,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_087",
+      "seconds": 3.3300602808594704e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 5,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_113",
+      "seconds": 3.749955794773996e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 5,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_121",
+      "seconds": 2.9200600693002343e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 5,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "valid_pair",
+      "seconds": 0.14366958300524857,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 5,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "unrelated_third",
+      "seconds": 0.14744429200072773,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 5,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "matching_without_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "duplicate_pair",
+      "seconds": 3.7500285543501377e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 5,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_062",
+      "seconds": 3.33995558321476e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 6,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_071",
+      "seconds": 2.500019036233425e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 6,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_087",
+      "seconds": 2.500019036233425e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 6,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_113",
+      "seconds": 2.9199873097240925e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 6,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_121",
+      "seconds": 2.9200600693002343e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 6,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "valid_pair",
+      "seconds": 0.1484760839957744,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 6,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "unrelated_third",
+      "seconds": 0.15549191600439372,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 6,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "matching_without_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "duplicate_pair",
+      "seconds": 3.3299875212833285e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 6,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_062",
+      "seconds": 3.3400283427909017e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 7,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_071",
+      "seconds": 3.3299875212833285e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 7,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_087",
+      "seconds": 2.500019036233425e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 7,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_113",
+      "seconds": 2.090018824674189e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 7,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_121",
+      "seconds": 2.500019036233425e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 7,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "valid_pair",
+      "seconds": 0.12567379100073595,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 7,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "unrelated_third",
+      "seconds": 0.14257691700186115,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 7,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "matching_without_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "duplicate_pair",
+      "seconds": 3.7500285543501377e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 7,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_062",
+      "seconds": 2.079978003166616e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 8,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_071",
+      "seconds": 3.3299875212833285e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 8,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_087",
+      "seconds": 3.7500285543501377e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 8,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_113",
+      "seconds": 5.830006557516754e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 8,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_121",
+      "seconds": 2.500019036233425e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 8,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "valid_pair",
+      "seconds": 0.11693720799667062,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 8,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "unrelated_third",
+      "seconds": 0.12600566699984483,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 8,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "matching_without_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "duplicate_pair",
+      "seconds": 3.33995558321476e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 8,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_062",
+      "seconds": 2.500019036233425e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 9,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_071",
+      "seconds": 2.500019036233425e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 9,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_087",
+      "seconds": 2.500019036233425e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 9,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_113",
+      "seconds": 2.9099464882165194e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 9,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_121",
+      "seconds": 1.66997779160738e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 9,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "valid_pair",
+      "seconds": 0.13181158299994422,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 9,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "unrelated_third",
+      "seconds": 0.1369096249982249,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 9,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "matching_without_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "duplicate_pair",
+      "seconds": 3.3400283427909017e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 9,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": true,
+      "native_witness_count": 86,
+      "role": "third_062",
+      "seconds": 0.12070391700399341,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 10,
+      "whole_projection_in_authored_third": 0.9031241436009866,
+      "witness_centers_inside_authored_third": 85
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_071",
+      "seconds": 2.500019036233425e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 10,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_087",
+      "seconds": 3.7500285543501377e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 10,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_113",
+      "seconds": 2.500019036233425e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 10,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_121",
+      "seconds": 2.9199873097240925e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 10,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "valid_pair",
+      "seconds": 0.11191054200025974,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 10,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "unrelated_third",
+      "seconds": 0.11372400000254856,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 10,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "matching_without_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "duplicate_pair",
+      "seconds": 1.66997779160738e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 10,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_062",
+      "seconds": 2.9200600693002343e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 11,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_071",
+      "seconds": 2.4999462766572833e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 11,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_087",
+      "seconds": 8.299684850499034e-08,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 11,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_113",
+      "seconds": 2.9200600693002343e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 11,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "unassessed_ambiguous_match",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "third_121",
+      "seconds": 2.500019036233425e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 11,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "valid_pair",
+      "seconds": 0.11765712500346126,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 11,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "local_difference",
+      "exact_valid_mask": true,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "unrelated_third",
+      "seconds": 0.16467416699742898,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 11,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    },
+    {
+      "current": "matching_without_difference",
+      "exact_valid_mask": false,
+      "extra_withheld": false,
+      "native_witness_count": 0,
+      "role": "duplicate_pair",
+      "seconds": 3.749955794773996e-07,
+      "size": [
+        1280,
+        720
+      ],
+      "slot": 11,
+      "whole_projection_in_authored_third": null,
+      "witness_centers_inside_authored_third": 0
+    }
+  ],
+  "rule": {
+    "grid_stride": 19,
+    "maximum_candidate_seconds": 1.5,
+    "maximum_new_withholds": 0,
+    "minimum_cells": 6,
+    "minimum_correlation": 0.97,
+    "minimum_exact_masks_per_valid_role": 10,
+    "minimum_missed_cases_per_size": 3,
+    "minimum_patches": 16,
+    "minimum_rescued_fraction": 0.8,
+    "minimum_sd": 8,
+    "minimum_source_fraction": 0.55,
+    "patch": 16
+  },
+  "schema": "chipmunk.image-embedded-pair-dense-third/1"
+}

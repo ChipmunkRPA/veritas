@@ -1,0 +1,440 @@
+{
+  "independent_audit": {
+    "advances": {
+      "jpeg75": false,
+      "png": false
+    },
+    "useful_top_regions_before_cutoff": {
+      "earlier": {
+        "jpeg75": {
+          "best_phase": 0,
+          "fixed_phase": 0,
+          "phase_agreement": 0
+        },
+        "png": {
+          "best_phase": 0,
+          "fixed_phase": 0,
+          "phase_agreement": 0
+        }
+      },
+      "later": {
+        "jpeg75": {
+          "best_phase": 0,
+          "fixed_phase": 0,
+          "phase_agreement": 0
+        },
+        "png": {
+          "best_phase": 0,
+          "fixed_phase": 0,
+          "phase_agreement": 0
+        }
+      }
+    },
+    "verified_encoded_views": 384,
+    "verified_measurements": 1536
+  },
+  "points": {
+    "development_forwards": 384,
+    "freeze_sha256": "ac381d31294046c3c4693097b135ba9487e440534365a9e3d8cb35ab83a3f23f",
+    "points": {
+      "jpeg75": {
+        "best_phase": {
+          "control_maxima": [
+            0.632651132103559,
+            0.47042271609090336,
+            0.3551150341699649,
+            0.612469564874967,
+            0.48352970424880337,
+            0.473522255437796,
+            0.3493471675448947,
+            0.5189408853650093
+          ],
+          "point": 0.612469564874967
+        },
+        "fixed_phase": {
+          "control_maxima": [
+            0.6567743319969674,
+            0.445364629938489,
+            0.39749244685414475,
+            0.5596197608444426,
+            0.5102544041780324,
+            0.47278956483732837,
+            0.37798518334386566,
+            0.517810659110546
+          ],
+          "point": 0.5596197608444426
+        },
+        "phase_agreement": {
+          "control_maxima": [
+            0.6545918363332748,
+            0.4697357183549462,
+            0.3297617763280869,
+            0.545909787217776,
+            0.4684428846734203,
+            0.4580420043194693,
+            0.3537157343145001,
+            0.517810659110546
+          ],
+          "point": 0.545909787217776
+        }
+      },
+      "png": {
+        "best_phase": {
+          "control_maxima": [
+            0.7089326667542359,
+            0.42351796130339303,
+            0.39698175787925716,
+            0.41731887757778163,
+            0.4049809313656991,
+            0.5440191942491108,
+            0.4925741061829685,
+            0.5478481277823448
+          ],
+          "point": 0.5478481277823448
+        },
+        "fixed_phase": {
+          "control_maxima": [
+            0.7615621558257513,
+            0.4082556872242993,
+            0.42390279471874237,
+            0.47296952009201054,
+            0.439245598343597,
+            0.5834563245313078,
+            0.531280113342113,
+            0.5644999220967293
+          ],
+          "point": 0.5834563245313078
+        },
+        "phase_agreement": {
+          "control_maxima": [
+            0.6416808901892768,
+            0.41708218884634785,
+            0.40368252694606777,
+            0.4368941962718964,
+            0.3887615290894193,
+            0.5445309938697875,
+            0.4958514387446238,
+            0.5644999220967293
+          ],
+          "point": 0.5644999220967293
+        }
+      }
+    }
+  },
+  "protocol": {
+    "code_sha256": {
+      "image_background_patch_score.py": "cb854082628636833e2fd005e954d0bdb7c78362e58ee98632f1ba4153224d5a",
+      "image_bg_real_insertion_score.py": "b8a91de6e686b5037ea65297aac52961ea995d701ca8aacf362b8715f94e303d",
+      "image_edge_spread_transfer.py": "f9d434f1dbd2d04b4292e512e562cae52f7dd049690b45f97ef424b2d971c08c",
+      "image_reconstruction_phase_transfer.py": "9bf30202c6d431af63e38b15f019fb515d48e0f73295f55942f53d82c8f305ab",
+      "image_residual_color_transfer.py": "682fc80861ae3c80b7d80d5efb3edd3cb15635bbdf797c60b894ce4b23f8ece2",
+      "jpeg_dq.py": "3b176132b5c63ac062f2f53aa9d7dc2c766d4c92c1818825d23d40751bbd9f0e",
+      "sharp_boundary.py": "04c120cd027e50bd107fd15778f66fe38c43d64439e090835dfad99727e41cbc"
+    },
+    "input_intakes": [
+      {
+        "attempts.jsonl": "59d8591da24d8886cca3ea071eefa5488aa3ac555ff5b21e0542dc267c47fb90",
+        "plan.json": "0d5cd6aadef8162c436c674e00ad835d91d3c7b5807daf0561cb8c58adf47aef",
+        "result.json": "6a8b09a8a4a8585f44faffd5ce18bba7c42a311934ce20bb3a70842aaef4d0b8"
+      },
+      {
+        "attempts.jsonl": "3b8291b96634bca1920bddfd9239a53d69e143ea8efc74e565fd7406e749f9ce",
+        "plan.json": "2fc63a2d9f666ce2e593cb7c6b503120661b74a33dbf88f297e34d96ae3c3d7b",
+        "result.json": "fb0aafa7d109ca3e7fda3256fbd9fdf0e3b2afca265081092552b54cc8388731"
+      },
+      {
+        "attempts.jsonl": "006a125678341700c243754a423c480b41bd86029a70f689ff1e7a467fc7fde7",
+        "plan.json": "a2176e567d71f2a80178adec7fb55e34007f6ad3114f9baf09837e233197fc34",
+        "result.json": "3d849ad48453c79002aa78d2d9cc8c7aeecc9f1979008060244c0bd01e065e86"
+      }
+    ],
+    "method": {
+      "advance": {
+        "maximum_extra_ordinary_groups_per_panel": 3,
+        "maximum_extra_ordinary_per_panel": 4,
+        "minimum_extra_feathered_per_panel": 2
+      },
+      "arms": [
+        "fixed_phase",
+        "best_phase",
+        "phase_agreement"
+      ],
+      "baseline": "local PNG sharp-boundary or native JPEG quantization",
+      "cell": 16,
+      "confidence_contribution": 0,
+      "floor": 0.003,
+      "formats": [
+        "png",
+        "jpeg75"
+      ],
+      "geometry": "Useful requires native changed-pixel IoU at least .30 and recall at least .50.",
+      "held_roles": [
+        "edited",
+        "feathered_edit",
+        "original",
+        "local_processing",
+        "global_processing",
+        "blur",
+        "feathered_processing",
+        "local_contrast"
+      ],
+      "minimum_valid_tile_share": 0.5,
+      "padding": 32,
+      "phases_yx": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "point_rule": "Strictly exceed the second-highest of eight source-level control maxima or zero, whichever is greater.",
+      "primary": "phase_agreement"
+    },
+    "model": {
+      "config_sha256": "a05597dded90ac5699cd2e0ac0b45df740430fb5d1ea993cfe8cf80a5ca739da",
+      "license": "MIT",
+      "notice_sha256": "261497cf8e9ed613ed1fa5ddf48af32cdf50545b2ccd9edd7eacc91fb9255d6e",
+      "revision": "9565f9356505d7c3537d0e15c558520ed95142ee",
+      "weights_sha256": "db169d69145ec4ff064e49d99c95fa05d3eb04ee453de35824a6d0f325513549"
+    },
+    "runtime": {
+      "device": "mps",
+      "diffusers": "0.42.1",
+      "huggingface-hub": "1.32.0",
+      "importlib-metadata": "8.7.0",
+      "numpy": "2.2.6",
+      "opencv": "5.0.0",
+      "pillow": "12.3.0",
+      "precision": "float32",
+      "safetensors": "0.8.0",
+      "torch": "2.13.0",
+      "torch_threads": 1,
+      "wheel_sha256": {
+        "diffusers-0.42.1-py3-none-any.whl": "9154faa704ce00e0b77f568e0d64786064368528aab5fc14eeea92f87d788014",
+        "huggingface_hub-1.32.0-py3-none-any.whl": "b0c7c80561969d9cdacdd55fce67ba9584cca0b9d4ea80957a3a5c1445fac5c8",
+        "importlib_metadata-8.7.0-py3-none-any.whl": "e5dd1551894c77868a30651cef00984d50e1002d06942a7101d34870c5f02afd",
+        "zipp-3.23.0-py3-none-any.whl": "071652d6115ed432f5ce1d34c336c0adfd6a884660d1e9712a256d3d3bd4b14e"
+      },
+      "zipp": "3.23.0"
+    },
+    "schema": "chipmunk.image-reconstruction-phase-transfer/1"
+  },
+  "result": {
+    "advances": {
+      "jpeg75": false,
+      "png": false
+    },
+    "confirmed_views": 384,
+    "elapsed_s": 338.04,
+    "freeze_sha256": "ac381d31294046c3c4693097b135ba9487e440534365a9e3d8cb35ab83a3f23f",
+    "journals_sha256": {
+      "earlier": "6040bfd6456714c6afc5c2998958897dbd1097a4fed52652a5366404b9259a30",
+      "later": "f68eddaf024391d9563767f778f97d7a9c6c93a90ec783a3d177cf8d06ccdecf"
+    },
+    "model_round_trips": 1920,
+    "points_sha256": "81095c4e050b8cdb979d2fcd0bb4e62ae8037d33e8fa29d4a0ac00ceb1b1f1dc",
+    "results": {
+      "earlier": {
+        "jpeg75": {
+          "best_phase": {
+            "extra_feathered": 0,
+            "extra_ordinary_flags": 1,
+            "extra_ordinary_groups": 1,
+            "feathered": 0,
+            "ordinary_flags": 1,
+            "ordinary_groups": 1,
+            "sharp": 0,
+            "unassessed_ordinary": 0,
+            "unassessed_positive": 0
+          },
+          "fixed_phase": {
+            "extra_feathered": 0,
+            "extra_ordinary_flags": 11,
+            "extra_ordinary_groups": 3,
+            "feathered": 0,
+            "ordinary_flags": 11,
+            "ordinary_groups": 3,
+            "sharp": 0,
+            "unassessed_ordinary": 0,
+            "unassessed_positive": 0
+          },
+          "format_reference": {
+            "extra_feathered": 0,
+            "extra_ordinary_flags": 0,
+            "extra_ordinary_groups": 0,
+            "feathered": 0,
+            "ordinary_flags": 0,
+            "ordinary_groups": 0,
+            "sharp": 0,
+            "unassessed_ordinary": 0,
+            "unassessed_positive": 0
+          },
+          "phase_agreement": {
+            "extra_feathered": 0,
+            "extra_ordinary_flags": 5,
+            "extra_ordinary_groups": 1,
+            "feathered": 0,
+            "ordinary_flags": 5,
+            "ordinary_groups": 1,
+            "sharp": 0,
+            "unassessed_ordinary": 0,
+            "unassessed_positive": 0
+          }
+        },
+        "png": {
+          "best_phase": {
+            "extra_feathered": 0,
+            "extra_ordinary_flags": 0,
+            "extra_ordinary_groups": 0,
+            "feathered": 0,
+            "ordinary_flags": 11,
+            "ordinary_groups": 3,
+            "sharp": 0,
+            "unassessed_ordinary": 0,
+            "unassessed_positive": 0
+          },
+          "fixed_phase": {
+            "extra_feathered": 0,
+            "extra_ordinary_flags": 0,
+            "extra_ordinary_groups": 0,
+            "feathered": 0,
+            "ordinary_flags": 6,
+            "ordinary_groups": 2,
+            "sharp": 0,
+            "unassessed_ordinary": 0,
+            "unassessed_positive": 0
+          },
+          "format_reference": {
+            "extra_feathered": 0,
+            "extra_ordinary_flags": 0,
+            "extra_ordinary_groups": 0,
+            "feathered": 0,
+            "ordinary_flags": 13,
+            "ordinary_groups": 3,
+            "sharp": 5,
+            "unassessed_ordinary": 0,
+            "unassessed_positive": 0
+          },
+          "phase_agreement": {
+            "extra_feathered": 0,
+            "extra_ordinary_flags": 1,
+            "extra_ordinary_groups": 1,
+            "feathered": 0,
+            "ordinary_flags": 11,
+            "ordinary_groups": 3,
+            "sharp": 0,
+            "unassessed_ordinary": 0,
+            "unassessed_positive": 0
+          }
+        }
+      },
+      "later": {
+        "jpeg75": {
+          "best_phase": {
+            "extra_feathered": 0,
+            "extra_ordinary_flags": 16,
+            "extra_ordinary_groups": 3,
+            "feathered": 0,
+            "ordinary_flags": 16,
+            "ordinary_groups": 3,
+            "sharp": 0,
+            "unassessed_ordinary": 0,
+            "unassessed_positive": 0
+          },
+          "fixed_phase": {
+            "extra_feathered": 0,
+            "extra_ordinary_flags": 19,
+            "extra_ordinary_groups": 4,
+            "feathered": 0,
+            "ordinary_flags": 19,
+            "ordinary_groups": 4,
+            "sharp": 0,
+            "unassessed_ordinary": 0,
+            "unassessed_positive": 0
+          },
+          "format_reference": {
+            "extra_feathered": 0,
+            "extra_ordinary_flags": 0,
+            "extra_ordinary_groups": 0,
+            "feathered": 0,
+            "ordinary_flags": 0,
+            "ordinary_groups": 0,
+            "sharp": 0,
+            "unassessed_ordinary": 0,
+            "unassessed_positive": 0
+          },
+          "phase_agreement": {
+            "extra_feathered": 0,
+            "extra_ordinary_flags": 18,
+            "extra_ordinary_groups": 3,
+            "feathered": 0,
+            "ordinary_flags": 18,
+            "ordinary_groups": 3,
+            "sharp": 0,
+            "unassessed_ordinary": 0,
+            "unassessed_positive": 0
+          }
+        },
+        "png": {
+          "best_phase": {
+            "extra_feathered": 0,
+            "extra_ordinary_flags": 31,
+            "extra_ordinary_groups": 8,
+            "feathered": 0,
+            "ordinary_flags": 32,
+            "ordinary_groups": 8,
+            "sharp": 0,
+            "unassessed_ordinary": 0,
+            "unassessed_positive": 0
+          },
+          "fixed_phase": {
+            "extra_feathered": 0,
+            "extra_ordinary_flags": 30,
+            "extra_ordinary_groups": 7,
+            "feathered": 0,
+            "ordinary_flags": 31,
+            "ordinary_groups": 7,
+            "sharp": 0,
+            "unassessed_ordinary": 0,
+            "unassessed_positive": 0
+          },
+          "format_reference": {
+            "extra_feathered": 0,
+            "extra_ordinary_flags": 0,
+            "extra_ordinary_groups": 0,
+            "feathered": 0,
+            "ordinary_flags": 1,
+            "ordinary_groups": 1,
+            "sharp": 7,
+            "unassessed_ordinary": 0,
+            "unassessed_positive": 0
+          },
+          "phase_agreement": {
+            "extra_feathered": 0,
+            "extra_ordinary_flags": 30,
+            "extra_ordinary_groups": 7,
+            "feathered": 0,
+            "ordinary_flags": 31,
+            "ordinary_groups": 7,
+            "sharp": 0,
+            "unassessed_ordinary": 0,
+            "unassessed_positive": 0
+          }
+        }
+      }
+    },
+    "schema": "chipmunk.image-reconstruction-phase-transfer/1"
+  },
+  "schema": "chipmunk.image-reconstruction-phase-transfer-review/1"
+}

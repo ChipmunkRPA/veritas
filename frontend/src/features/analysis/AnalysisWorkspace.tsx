@@ -43,6 +43,7 @@ import { deletable, mayDelete, mayExamine } from '../../lib/api/roles'
 import RevisionDeltas from './RevisionDeltas'
 import ImageEvidenceCards from '../evidence/ImageEvidenceCards'
 import ImageReferenceComparison from '../evidence/ImageReferenceComparison'
+import DocumentRevisionComparison from '../evidence/DocumentRevisionComparison'
 import MultimediaEvidenceCards from '../evidence/MultimediaEvidenceCards'
 import ExpertAnalysisInvitation from './ExpertAnalysisInvitation'
 import AutomatedResultStatus from './AutomatedResultStatus'
@@ -251,14 +252,15 @@ export default function AnalysisWorkspace() {
         </section>
 
   const expertInvitation = done ? <ExpertAnalysisInvitation analysisId={a.id} /> : null
-  const imageComparison = done && a.kind === 'image' ? <ImageReferenceComparison key={a.id} analysisId={a.id} /> : null
+  const sourceComparison = !done ? null : a.kind === 'image' ? <ImageReferenceComparison key={a.id} analysisId={a.id} />
+    : a.kind === 'document' ? <DocumentRevisionComparison key={a.id} analysisId={a.id} /> : null
   const body = !legacy.data ? null : !v2 ? (
-    <LegacyResult a={legacy.data} token={t} engine={engine} mediaNotice={mediaNotice} afterVerdict={<>{expertInvitation}{imageComparison}{hr}<FindingsList analysis={a} signals={signals.data ?? []} query={findings} failed={findingsFailed(a.caveats)} /></>} />
+    <LegacyResult a={legacy.data} token={t} engine={engine} mediaNotice={mediaNotice} afterVerdict={<>{expertInvitation}{sourceComparison}{hr}<FindingsList analysis={a} signals={signals.data ?? []} query={findings} failed={findingsFailed(a.caveats)} /></>} />
   ) : (
     <div className="mt-12 space-y-12" data-testid="v2-result">
       {!evidenceFirst && <KeyFindings analysis={a} query={findings} signals={signals.data ?? []} exhibits={exhibits.data ?? []} token={t} plain={view === 'plain'} />}
       {a.kind === 'image' && <ImageEvidenceCards analysisId={a.id} token={t} mediaReady={tokenReady} />}
-      {imageComparison}
+      {sourceComparison}
       {(a.kind === 'video' || a.kind === 'audio' || a.kind === 'document') && <MultimediaEvidenceCards analysisId={a.id} kind={a.kind} token={t} mediaReady={tokenReady} />}
       {evidenceFirst && <KeyFindings analysis={a} query={findings} signals={signals.data ?? []} exhibits={exhibits.data ?? []} token={t} plain />}
       {findings.isFetched

@@ -581,6 +581,21 @@ alignment panel. It checked 106 source crops and counted 1,036,494 retained
 mask pixels across 99 comparable views. The other 81 views retained their
 reported unassessed reasons. [Source and transforms](image-reference-comparison-2026-11-11.md#integer-crops-and-translations)
 
+### Verify an earlier-draft comparison
+
+Download the standalone comparison JSON and keep the original earlier and
+later files. From the backend directory, replay both source hashes, the
+decoded text positions, and the exact changed-token ranges locally.
+
+```sh
+.venv/bin/python -m scripts.review_document_revision_export \
+  chipmunk-verify-draft-comparison.json earlier.eml later.eml
+```
+
+Use two `.eml` files or two `.txt` files. The output gives the verified range
+counts by role. The comparison locates differences and leaves revision order
+and authorship to other evidence. This replay uses no model or remote service.
+
 ### Replay document evidence against the original
 
 ```sh

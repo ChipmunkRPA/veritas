@@ -1,0 +1,61 @@
+"""Replay a draft-comparison JSON using the two original source files."""
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from collections import Counter
+from pathlib import Path
+
+from app.evidence.document_revision import MAX_BYTES, compare
+
+MAX_EXPORT = 2 * 1024 * 1024
+
+
+def _read(path: Path, limit: int) -> bytes:
+    with path.open("rb") as stream:
+        data = stream.read(limit + 1)
+    if not 0 < len(data) <= limit:
+        raise ValueError("An input is empty or exceeds the verification limit")
+    return data
+
+
+def _unique(fields):
+    result = {}
+    for name, value in fields:
+        if name in result:
+            raise ValueError("The exported JSON contains a duplicate field")
+        result[name] = value
+    return result
+
+
+def review(export: Path, earlier: Path, later: Path) -> dict:
+    extension = later.suffix.lower()
+    if extension not in {".eml", ".txt"} or earlier.suffix.lower() != extension:
+        raise ValueError("Use the two original files with matching .eml or .txt extensions")
+    received = json.loads(_read(export, MAX_EXPORT), object_pairs_hook=_unique)
+    expected = compare(_read(earlier, MAX_BYTES), _read(later, MAX_BYTES), extension)
+    if json.dumps(received, sort_keys=True, allow_nan=False) != json.dumps(expected, sort_keys=True, allow_nan=False):
+        raise ValueError("The comparison does not replay from these source bytes and decoded positions")
+    roles = Counter(row["role"] for row in expected["changes"])
+    return {"source_hashes_verified": 2, "coordinate_space": expected["coordinate_space"], "changes_by_role": dict(roles),
+            "changed_token_ranges_verified": sum(len(row[side]["changed_tokens"]) for row in expected["changes"]
+                                                for side in ("earlier", "later") if row[side] is not None)}
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    for field in ("export", "earlier", "later"):
+        parser.add_argument(field, type=Path)
+    args = parser.parse_args()
+    try:
+        result = review(args.export, args.earlier, args.later)
+    except (OSError, ValueError, TypeError, KeyError, LookupError) as error:
+        print(f"Draft comparison did not verify. {error}", file=sys.stderr)
+        raise SystemExit(1) from None
+    print(json.dumps(result, indent=2, sort_keys=True))
+
+
+if __name__ == "__main__":
+    main()

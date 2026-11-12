@@ -216,6 +216,7 @@ class Settings(BaseSettings):
     image_region_mode: Literal["legacy", "candidate"] = "legacy"
     image_sharp_boundary_enabled: bool = False
     image_reference_comparison_enabled: bool = False  # Development-only comparison of an uploaded earlier copy.
+    document_revision_comparison_enabled: bool = False  # Authenticated development-only earlier-draft comparison.
     image_affine_copy_review: bool = False  # Development-only dense masks for same-image geometric copies.
 
     # --- audio (video sound track) ---

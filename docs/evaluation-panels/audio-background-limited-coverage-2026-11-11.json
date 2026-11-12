@@ -1,0 +1,1546 @@
+{
+  "runs": {
+    "full_band": {
+      "completed_aggregate_sha256": "f81dd204beaefcc9bffdeead5895ca11fc34004dc2f1d6bc34dbdc0cd92d2115",
+      "receipt": {
+        "activity_forwards": 9776,
+        "advance": false,
+        "cells": [
+          {
+            "assessed": 0,
+            "condition": "isolated",
+            "family": "background",
+            "flagged": 0,
+            "planned": 8,
+            "tape": "gransee",
+            "truth": "absent"
+          },
+          {
+            "assessed": 0,
+            "condition": "isolated",
+            "family": "background",
+            "flagged": 0,
+            "planned": 8,
+            "tape": "lyngby",
+            "truth": "absent"
+          },
+          {
+            "assessed": 0,
+            "condition": "isolated",
+            "family": "background",
+            "flagged": 0,
+            "planned": 8,
+            "tape": "sunday",
+            "truth": "absent"
+          },
+          {
+            "assessed": 0,
+            "condition": "-6",
+            "family": "genuine",
+            "flagged": 0,
+            "planned": 1,
+            "tape": "gransee",
+            "truth": "absent"
+          },
+          {
+            "assessed": 0,
+            "condition": "-6",
+            "family": "genuine",
+            "flagged": 0,
+            "planned": 28,
+            "tape": "gransee",
+            "truth": "audible"
+          },
+          {
+            "assessed": 0,
+            "condition": "-6",
+            "family": "genuine",
+            "flagged": 0,
+            "planned": 3,
+            "tape": "gransee",
+            "truth": "transition"
+          },
+          {
+            "assessed": 1,
+            "condition": "-6",
+            "family": "genuine",
+            "flagged": 1,
+            "planned": 1,
+            "tape": "lyngby",
+            "truth": "absent"
+          },
+          {
+            "assessed": 7,
+            "condition": "-6",
+            "family": "genuine",
+            "flagged": 5,
+            "planned": 20,
+            "tape": "lyngby",
+            "truth": "masked"
+          },
+          {
+            "assessed": 4,
+            "condition": "-6",
+            "family": "genuine",
+            "flagged": 2,
+            "planned": 11,
+            "tape": "lyngby",
+            "truth": "transition"
+          },
+          {
+            "assessed": 0,
+            "condition": "-6",
+            "family": "genuine",
+            "flagged": 0,
+            "planned": 1,
+            "tape": "sunday",
+            "truth": "absent"
+          },
+          {
+            "assessed": 4,
+            "condition": "-6",
+            "family": "genuine",
+            "flagged": 0,
+            "planned": 26,
+            "tape": "sunday",
+            "truth": "audible"
+          },
+          {
+            "assessed": 0,
+            "condition": "-6",
+            "family": "genuine",
+            "flagged": 0,
+            "planned": 1,
+            "tape": "sunday",
+            "truth": "masked"
+          },
+          {
+            "assessed": 0,
+            "condition": "-6",
+            "family": "genuine",
+            "flagged": 0,
+            "planned": 4,
+            "tape": "sunday",
+            "truth": "transition"
+          },
+          {
+            "assessed": 0,
+            "condition": "6",
+            "family": "genuine",
+            "flagged": 0,
+            "planned": 1,
+            "tape": "gransee",
+            "truth": "absent"
+          },
+          {
+            "assessed": 0,
+            "condition": "6",
+            "family": "genuine",
+            "flagged": 0,
+            "planned": 31,
+            "tape": "gransee",
+            "truth": "audible"
+          },
+          {
+            "assessed": 0,
+            "condition": "6",
+            "family": "genuine",
+            "flagged": 0,
+            "planned": 1,
+            "tape": "lyngby",
+            "truth": "absent"
+          },
+          {
+            "assessed": 0,
+            "condition": "6",
+            "family": "genuine",
+            "flagged": 0,
+            "planned": 24,
+            "tape": "lyngby",
+            "truth": "audible"
+          },
+          {
+            "assessed": 0,
+            "condition": "6",
+            "family": "genuine",
+            "flagged": 0,
+            "planned": 7,
+            "tape": "lyngby",
+            "truth": "transition"
+          },
+          {
+            "assessed": 0,
+            "condition": "6",
+            "family": "genuine",
+            "flagged": 0,
+            "planned": 1,
+            "tape": "sunday",
+            "truth": "absent"
+          },
+          {
+            "assessed": 0,
+            "condition": "6",
+            "family": "genuine",
+            "flagged": 0,
+            "planned": 31,
+            "tape": "sunday",
+            "truth": "audible"
+          },
+          {
+            "assessed": 0,
+            "condition": "clean",
+            "family": "genuine",
+            "flagged": 0,
+            "planned": 1,
+            "tape": "clean",
+            "truth": "absent"
+          },
+          {
+            "assessed": 0,
+            "condition": "clean",
+            "family": "genuine",
+            "flagged": 0,
+            "planned": 31,
+            "tape": "clean",
+            "truth": "audible"
+          },
+          {
+            "assessed": 0,
+            "condition": "-6",
+            "family": "synthetic",
+            "flagged": 0,
+            "planned": 1,
+            "tape": "gransee",
+            "truth": "absent"
+          },
+          {
+            "assessed": 0,
+            "condition": "-6",
+            "family": "synthetic",
+            "flagged": 0,
+            "planned": 23,
+            "tape": "gransee",
+            "truth": "audible"
+          },
+          {
+            "assessed": 1,
+            "condition": "-6",
+            "family": "synthetic",
+            "flagged": 1,
+            "planned": 1,
+            "tape": "lyngby",
+            "truth": "absent"
+          },
+          {
+            "assessed": 11,
+            "condition": "-6",
+            "family": "synthetic",
+            "flagged": 7,
+            "planned": 17,
+            "tape": "lyngby",
+            "truth": "masked"
+          },
+          {
+            "assessed": 0,
+            "condition": "-6",
+            "family": "synthetic",
+            "flagged": 0,
+            "planned": 6,
+            "tape": "lyngby",
+            "truth": "transition"
+          },
+          {
+            "assessed": 0,
+            "condition": "-6",
+            "family": "synthetic",
+            "flagged": 0,
+            "planned": 1,
+            "tape": "sunday",
+            "truth": "absent"
+          },
+          {
+            "assessed": 0,
+            "condition": "-6",
+            "family": "synthetic",
+            "flagged": 0,
+            "planned": 21,
+            "tape": "sunday",
+            "truth": "audible"
+          },
+          {
+            "assessed": 0,
+            "condition": "-6",
+            "family": "synthetic",
+            "flagged": 0,
+            "planned": 2,
+            "tape": "sunday",
+            "truth": "transition"
+          },
+          {
+            "assessed": 0,
+            "condition": "6",
+            "family": "synthetic",
+            "flagged": 0,
+            "planned": 1,
+            "tape": "gransee",
+            "truth": "absent"
+          },
+          {
+            "assessed": 0,
+            "condition": "6",
+            "family": "synthetic",
+            "flagged": 0,
+            "planned": 23,
+            "tape": "gransee",
+            "truth": "audible"
+          },
+          {
+            "assessed": 1,
+            "condition": "6",
+            "family": "synthetic",
+            "flagged": 1,
+            "planned": 1,
+            "tape": "lyngby",
+            "truth": "absent"
+          },
+          {
+            "assessed": 2,
+            "condition": "6",
+            "family": "synthetic",
+            "flagged": 0,
+            "planned": 22,
+            "tape": "lyngby",
+            "truth": "audible"
+          },
+          {
+            "assessed": 1,
+            "condition": "6",
+            "family": "synthetic",
+            "flagged": 0,
+            "planned": 1,
+            "tape": "lyngby",
+            "truth": "transition"
+          },
+          {
+            "assessed": 0,
+            "condition": "6",
+            "family": "synthetic",
+            "flagged": 0,
+            "planned": 1,
+            "tape": "sunday",
+            "truth": "absent"
+          },
+          {
+            "assessed": 0,
+            "condition": "6",
+            "family": "synthetic",
+            "flagged": 0,
+            "planned": 23,
+            "tape": "sunday",
+            "truth": "audible"
+          },
+          {
+            "assessed": 0,
+            "condition": "clean",
+            "family": "synthetic",
+            "flagged": 0,
+            "planned": 1,
+            "tape": "clean",
+            "truth": "absent"
+          },
+          {
+            "assessed": 0,
+            "condition": "clean",
+            "family": "synthetic",
+            "flagged": 0,
+            "planned": 23,
+            "tape": "clean",
+            "truth": "audible"
+          }
+        ],
+        "checks": {
+          "absent_false_rate": false,
+          "audible_false_rate": true,
+          "genuine_hit_groups": false,
+          "masked_recall": false,
+          "synthetic_hit_groups": false
+        },
+        "classifier_forwards": 107,
+        "current_results": [
+          {
+            "condition": "isolated",
+            "current": {
+              "unassessed": 6
+            },
+            "family": "background",
+            "overlap_any_coverage_warning": {}
+          },
+          {
+            "condition": "-6",
+            "current": {
+              "ai": 1,
+              "inconclusive": 11,
+              "original": 6,
+              "unassessed": 6
+            },
+            "family": "genuine",
+            "overlap_any_coverage_warning": {
+              "unassessed": 3
+            }
+          },
+          {
+            "condition": "6",
+            "current": {
+              "ai": 1,
+              "inconclusive": 13,
+              "original": 10
+            },
+            "family": "genuine",
+            "overlap_any_coverage_warning": {}
+          },
+          {
+            "condition": "clean",
+            "current": {
+              "inconclusive": 4,
+              "original": 4
+            },
+            "family": "genuine",
+            "overlap_any_coverage_warning": {}
+          },
+          {
+            "condition": "-6",
+            "current": {
+              "ai": 2,
+              "inconclusive": 9,
+              "original": 2,
+              "unassessed": 5
+            },
+            "family": "synthetic",
+            "overlap_any_coverage_warning": {
+              "unassessed": 3
+            }
+          },
+          {
+            "condition": "6",
+            "current": {
+              "ai": 6,
+              "inconclusive": 9,
+              "unassessed": 3
+            },
+            "family": "synthetic",
+            "overlap_any_coverage_warning": {
+              "unassessed": 1
+            }
+          },
+          {
+            "condition": "clean",
+            "current": {
+              "ai": 5,
+              "unassessed": 1
+            },
+            "family": "synthetic",
+            "overlap_any_coverage_warning": {}
+          }
+        ],
+        "freeze": {
+          "assets": {
+            "pellav2_detector.pt": "d21aedfb52e2f87706c2753715a29665482b0f4a034800c31579df5d458559ac",
+            "silero_vad.jit": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720",
+            "w2v-bert-config.json": "f5572bd5998b68182e9c328a43127ed21fed687f6910497136b91a4e3b0e3675"
+          },
+          "background_commitments": {
+            "gransee": {
+              "license": "CC BY-SA 4.0",
+              "original_sha256": "ee1f09a970c646f682dd296a5a9c8c043b449eaf747f341630695fc9e49c496c",
+              "pcm_sha256": "8458cd74abb2bb662a04281493c6defb4cc09bc52ce87e92226a09c0e1b6b8af",
+              "publisher_metadata_sha256": "c4365abd0d8974d149f4440df7d39e7e717744134a58b43f50bea4ba6aec151d"
+            },
+            "lyngby": {
+              "license": "CC BY-SA 4.0",
+              "original_sha256": "d26771200af34aeb9eb975631563b078b43e645a88171276a709df933665c86a",
+              "pcm_sha256": "8cd18c8a3a33226e334a99424ea33f54caf244a237d7b84fc4c085a712b37145",
+              "publisher_metadata_sha256": "d26d5d70dbdf6870b2be06bb0c5b856881de2e5b47b88ea0dc91d09c57063398"
+            },
+            "sunday": {
+              "license": "Public domain",
+              "original_sha256": "50e5eb59b296580340898f16e737f826a9fd7fef6fc45b07bb3e0318a9e58495",
+              "pcm_sha256": "bea2e4186c489c9768ea213c9a6fd5b06bf23cdcb600ab8f794f75be7088f316",
+              "publisher_metadata_sha256": "e18f1c45b7498ebaac431df935eac2eb1ab9b95238d2552929d867a3ac2e66a5"
+            }
+          },
+          "bands_hz": [
+            250,
+            500,
+            1000,
+            2000,
+            4000
+          ],
+          "code_sha256": {
+            "backend/app/detectors/audio/calibration.py": "00294b0c36cb37a06d516a30ea6171e409c6df0f88486660faf758070ab10ba5",
+            "backend/app/detectors/audio/calibrations/local-speech-v3.json": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf",
+            "backend/app/detectors/audio/upgraded.py": "017c396315bdb41f6e419589c6d81081b2a8089e2157c3ce14a8c0accd6f9836",
+            "backend/app/detectors/video/adapters/audio.py": "6f111f7ca382dc203b04a77125220e773b1873bbec281c35d8bb397d3cdf0aa6",
+            "backend/scripts/audio_background_limited_coverage.py": "0616c173e9c116f90484e0b913f0048bcc2cb9ea339e8d517365ea8062ea5123",
+            "backend/scripts/audio_gtcrn_traffic.py": "e23291125f3c783e63804ea494dd3b71a238b042ee20b11bfe6cc5bc31b4db90",
+            "backend/scripts/audio_strong_traffic_view.py": "7ef4da2dbc2b99f24143e8e9b8961b594db1dbcb21cf9bae881617635900d838",
+            "backend/scripts/run_audio_specialists_v15.py": "ab685e87d8212e290f0b08d4b46f9e343f6778e26eff05f42891929e07e96e5c"
+          },
+          "fft": 512,
+          "focus": [
+            [
+              5600,
+              14800
+            ],
+            [
+              14800,
+              24000
+            ],
+            [
+              24000,
+              33200
+            ],
+            [
+              33200,
+              42400
+            ]
+          ],
+          "foreground_counts": {
+            "clone": 2,
+            "expressive": 2,
+            "genuine": 8,
+            "stock": 2
+          },
+          "hop": 256,
+          "levels_db": [
+            -6,
+            6
+          ],
+          "ref": [
+            [
+              0,
+              5600
+            ],
+            [
+              42400,
+              48000
+            ]
+          ],
+          "roster_sha256": "f8491b8cf5dd541dcb86e4c880b387c798cedbc77ecb00a11ced4928bced2849",
+          "rule": {
+            "ground_truth_audible_snr_db": 3,
+            "ground_truth_masking_snr_db": -3,
+            "maximum_band_shape_difference_db": 4,
+            "maximum_false_absent_rate": 0.05,
+            "maximum_false_audible_rate": 0.1,
+            "maximum_flank_band_difference_db": 5,
+            "maximum_mixed_power_excess_db": 2.5,
+            "maximum_reference_speech_samples": 1280,
+            "minimum_agreeing_bands": 3,
+            "minimum_genuine_groups_with_hits": 4,
+            "minimum_masked_recall_per_scene": 0.4,
+            "minimum_reference_dbfs": -54,
+            "minimum_scenes_with_recall": 2,
+            "minimum_synthetic_groups_with_hits": 4,
+            "required_center_speech_samples": 3584
+          },
+          "sample_rate": 16000,
+          "samples": 48000,
+          "schema": "chipmunk.audio-background-limited-freeze/1",
+          "source_commitments": {
+            "librispeech": "39fde525e59672dc6d1551919b1478f724438a95aa55f874b576be21967e6c23",
+            "prior_rosters": [
+              "e34661c6dc138dbdf55b624a8a65be876180c9acbd85384b91e0422a1bc0288f",
+              "4dfe7075fd3b39a3a60bcc73ec364014fdc4367a11b360cbfddaf4667b98747c",
+              "adbb8cc2e2e95b1b316168a132d5ab1f5a5645b33ed15223833ac28a777631cf"
+            ],
+            "qualified_synthetic": {
+              "development": "4e97d28cfbe5a293ffffe10c419f9dd08a9e85a74e2b0431d2d4e402dbe693a8",
+              "holdout": "409d0dd8614dbc70ed27986bfdb4c0597e61cf04f29297ea874cec39ad8e8843"
+            }
+          },
+          "views": 104
+        },
+        "freeze_sha256": "c4852ab9278aad4f216d3bd3a64a79499145e045e3b4542e247dc995fbf792cb",
+        "hit_group_counts": {
+          "genuine": 3,
+          "synthetic": 3
+        },
+        "interval_summary": [
+          {
+            "assessed": 3,
+            "flagged": 3,
+            "planned": 38,
+            "tape": "all",
+            "truth": "absent"
+          },
+          {
+            "assessed": 6,
+            "flagged": 0,
+            "planned": 306,
+            "tape": "all",
+            "truth": "audible"
+          },
+          {
+            "assessed": 18,
+            "flagged": 12,
+            "planned": 38,
+            "tape": "all",
+            "truth": "masked"
+          },
+          {
+            "assessed": 5,
+            "flagged": 2,
+            "planned": 34,
+            "tape": "all",
+            "truth": "transition"
+          },
+          {
+            "assessed": 0,
+            "flagged": 0,
+            "planned": 2,
+            "tape": "clean",
+            "truth": "absent"
+          },
+          {
+            "assessed": 0,
+            "flagged": 0,
+            "planned": 54,
+            "tape": "clean",
+            "truth": "audible"
+          },
+          {
+            "assessed": 0,
+            "flagged": 0,
+            "planned": 12,
+            "tape": "gransee",
+            "truth": "absent"
+          },
+          {
+            "assessed": 0,
+            "flagged": 0,
+            "planned": 105,
+            "tape": "gransee",
+            "truth": "audible"
+          },
+          {
+            "tape": "gransee",
+            "truth": "masked"
+          },
+          {
+            "assessed": 0,
+            "flagged": 0,
+            "planned": 3,
+            "tape": "gransee",
+            "truth": "transition"
+          },
+          {
+            "assessed": 3,
+            "flagged": 3,
+            "planned": 12,
+            "tape": "lyngby",
+            "truth": "absent"
+          },
+          {
+            "assessed": 2,
+            "flagged": 0,
+            "planned": 46,
+            "tape": "lyngby",
+            "truth": "audible"
+          },
+          {
+            "assessed": 18,
+            "flagged": 12,
+            "planned": 37,
+            "tape": "lyngby",
+            "truth": "masked"
+          },
+          {
+            "assessed": 5,
+            "flagged": 2,
+            "planned": 25,
+            "tape": "lyngby",
+            "truth": "transition"
+          },
+          {
+            "assessed": 0,
+            "flagged": 0,
+            "planned": 12,
+            "tape": "sunday",
+            "truth": "absent"
+          },
+          {
+            "assessed": 4,
+            "flagged": 0,
+            "planned": 101,
+            "tape": "sunday",
+            "truth": "audible"
+          },
+          {
+            "assessed": 0,
+            "flagged": 0,
+            "planned": 1,
+            "tape": "sunday",
+            "truth": "masked"
+          },
+          {
+            "assessed": 0,
+            "flagged": 0,
+            "planned": 6,
+            "tape": "sunday",
+            "truth": "transition"
+          }
+        ],
+        "matched_mixtures_reconstructed": 84,
+        "measurements_sha256": "ea127f15730b0fdb134d84678faf3951cf4410eae031f5eae84967a6e3e56320",
+        "private_evidence_sha256": "094a0cf8296929e1b9b8e5f1f503c24829313b5789c465702f1aadcb78c7ee6e",
+        "scene_passes": 0,
+        "schema": "chipmunk.audio-background-limited-evaluation/1",
+        "scopes": [
+          {
+            "condition": "isolated",
+            "family": "background",
+            "unassessed_no_speech_anchor": 6
+          },
+          {
+            "assessed": 4,
+            "condition": "-6",
+            "family": "genuine",
+            "unassessed_no_speech_anchor": 2,
+            "unassessed_reference_speech": 18
+          },
+          {
+            "condition": "6",
+            "family": "genuine",
+            "unassessed_reference_quiet": 1,
+            "unassessed_reference_speech": 23
+          },
+          {
+            "condition": "clean",
+            "family": "genuine",
+            "unassessed_reference_quiet": 5,
+            "unassessed_reference_speech": 3
+          },
+          {
+            "assessed": 3,
+            "condition": "-6",
+            "family": "synthetic",
+            "unassessed_reference_changed": 1,
+            "unassessed_reference_quiet": 1,
+            "unassessed_reference_speech": 13
+          },
+          {
+            "assessed": 1,
+            "condition": "6",
+            "family": "synthetic",
+            "unassessed_reference_quiet": 2,
+            "unassessed_reference_speech": 15
+          },
+          {
+            "condition": "clean",
+            "family": "synthetic",
+            "unassessed_reference_quiet": 3,
+            "unassessed_reference_speech": 3
+          }
+        ]
+      }
+    },
+    "speech_band": {
+      "completed_aggregate_sha256": "db7ea794daf697d9f9689a09e507aee7fac85fe754c0fe18d921151d19dd8844",
+      "receipt": {
+        "activity_forwards": 9776,
+        "advance": false,
+        "cells": [
+          {
+            "assessed": 0,
+            "condition": "isolated",
+            "family": "background",
+            "flagged": 0,
+            "planned": 8,
+            "tape": "gransee",
+            "truth": "absent"
+          },
+          {
+            "assessed": 0,
+            "condition": "isolated",
+            "family": "background",
+            "flagged": 0,
+            "planned": 8,
+            "tape": "lyngby",
+            "truth": "absent"
+          },
+          {
+            "assessed": 0,
+            "condition": "isolated",
+            "family": "background",
+            "flagged": 0,
+            "planned": 8,
+            "tape": "sunday",
+            "truth": "absent"
+          },
+          {
+            "assessed": 0,
+            "condition": "-6",
+            "family": "genuine",
+            "flagged": 0,
+            "planned": 1,
+            "tape": "gransee",
+            "truth": "absent"
+          },
+          {
+            "assessed": 0,
+            "condition": "-6",
+            "family": "genuine",
+            "flagged": 0,
+            "planned": 26,
+            "tape": "gransee",
+            "truth": "masked"
+          },
+          {
+            "assessed": 0,
+            "condition": "-6",
+            "family": "genuine",
+            "flagged": 0,
+            "planned": 5,
+            "tape": "gransee",
+            "truth": "transition"
+          },
+          {
+            "assessed": 0,
+            "condition": "-6",
+            "family": "genuine",
+            "flagged": 0,
+            "planned": 1,
+            "tape": "lyngby",
+            "truth": "absent"
+          },
+          {
+            "assessed": 6,
+            "condition": "-6",
+            "family": "genuine",
+            "flagged": 4,
+            "planned": 25,
+            "tape": "lyngby",
+            "truth": "masked"
+          },
+          {
+            "assessed": 2,
+            "condition": "-6",
+            "family": "genuine",
+            "flagged": 2,
+            "planned": 6,
+            "tape": "lyngby",
+            "truth": "transition"
+          },
+          {
+            "assessed": 0,
+            "condition": "-6",
+            "family": "genuine",
+            "flagged": 0,
+            "planned": 1,
+            "tape": "sunday",
+            "truth": "absent"
+          },
+          {
+            "assessed": 0,
+            "condition": "-6",
+            "family": "genuine",
+            "flagged": 0,
+            "planned": 21,
+            "tape": "sunday",
+            "truth": "masked"
+          },
+          {
+            "assessed": 0,
+            "condition": "-6",
+            "family": "genuine",
+            "flagged": 0,
+            "planned": 10,
+            "tape": "sunday",
+            "truth": "transition"
+          },
+          {
+            "assessed": 0,
+            "condition": "6",
+            "family": "genuine",
+            "flagged": 0,
+            "planned": 1,
+            "tape": "gransee",
+            "truth": "absent"
+          },
+          {
+            "assessed": 0,
+            "condition": "6",
+            "family": "genuine",
+            "flagged": 0,
+            "planned": 20,
+            "tape": "gransee",
+            "truth": "audible"
+          },
+          {
+            "assessed": 0,
+            "condition": "6",
+            "family": "genuine",
+            "flagged": 0,
+            "planned": 1,
+            "tape": "gransee",
+            "truth": "masked"
+          },
+          {
+            "assessed": 0,
+            "condition": "6",
+            "family": "genuine",
+            "flagged": 0,
+            "planned": 10,
+            "tape": "gransee",
+            "truth": "transition"
+          },
+          {
+            "assessed": 0,
+            "condition": "6",
+            "family": "genuine",
+            "flagged": 0,
+            "planned": 1,
+            "tape": "lyngby",
+            "truth": "absent"
+          },
+          {
+            "assessed": 0,
+            "condition": "6",
+            "family": "genuine",
+            "flagged": 0,
+            "planned": 22,
+            "tape": "lyngby",
+            "truth": "audible"
+          },
+          {
+            "assessed": 0,
+            "condition": "6",
+            "family": "genuine",
+            "flagged": 0,
+            "planned": 2,
+            "tape": "lyngby",
+            "truth": "masked"
+          },
+          {
+            "assessed": 0,
+            "condition": "6",
+            "family": "genuine",
+            "flagged": 0,
+            "planned": 7,
+            "tape": "lyngby",
+            "truth": "transition"
+          },
+          {
+            "assessed": 0,
+            "condition": "6",
+            "family": "genuine",
+            "flagged": 0,
+            "planned": 1,
+            "tape": "sunday",
+            "truth": "absent"
+          },
+          {
+            "assessed": 3,
+            "condition": "6",
+            "family": "genuine",
+            "flagged": 0,
+            "planned": 20,
+            "tape": "sunday",
+            "truth": "audible"
+          },
+          {
+            "assessed": 0,
+            "condition": "6",
+            "family": "genuine",
+            "flagged": 0,
+            "planned": 1,
+            "tape": "sunday",
+            "truth": "masked"
+          },
+          {
+            "assessed": 1,
+            "condition": "6",
+            "family": "genuine",
+            "flagged": 0,
+            "planned": 10,
+            "tape": "sunday",
+            "truth": "transition"
+          },
+          {
+            "assessed": 0,
+            "condition": "clean",
+            "family": "genuine",
+            "flagged": 0,
+            "planned": 1,
+            "tape": "clean",
+            "truth": "absent"
+          },
+          {
+            "assessed": 0,
+            "condition": "clean",
+            "family": "genuine",
+            "flagged": 0,
+            "planned": 31,
+            "tape": "clean",
+            "truth": "audible"
+          },
+          {
+            "assessed": 0,
+            "condition": "-6",
+            "family": "synthetic",
+            "flagged": 0,
+            "planned": 1,
+            "tape": "gransee",
+            "truth": "absent"
+          },
+          {
+            "assessed": 0,
+            "condition": "-6",
+            "family": "synthetic",
+            "flagged": 0,
+            "planned": 22,
+            "tape": "gransee",
+            "truth": "masked"
+          },
+          {
+            "assessed": 0,
+            "condition": "-6",
+            "family": "synthetic",
+            "flagged": 0,
+            "planned": 1,
+            "tape": "gransee",
+            "truth": "transition"
+          },
+          {
+            "assessed": 1,
+            "condition": "-6",
+            "family": "synthetic",
+            "flagged": 1,
+            "planned": 1,
+            "tape": "lyngby",
+            "truth": "absent"
+          },
+          {
+            "assessed": 7,
+            "condition": "-6",
+            "family": "synthetic",
+            "flagged": 4,
+            "planned": 23,
+            "tape": "lyngby",
+            "truth": "masked"
+          },
+          {
+            "assessed": 0,
+            "condition": "-6",
+            "family": "synthetic",
+            "flagged": 0,
+            "planned": 1,
+            "tape": "sunday",
+            "truth": "absent"
+          },
+          {
+            "assessed": 0,
+            "condition": "-6",
+            "family": "synthetic",
+            "flagged": 0,
+            "planned": 23,
+            "tape": "sunday",
+            "truth": "masked"
+          },
+          {
+            "assessed": 0,
+            "condition": "6",
+            "family": "synthetic",
+            "flagged": 0,
+            "planned": 1,
+            "tape": "gransee",
+            "truth": "absent"
+          },
+          {
+            "assessed": 0,
+            "condition": "6",
+            "family": "synthetic",
+            "flagged": 0,
+            "planned": 21,
+            "tape": "gransee",
+            "truth": "audible"
+          },
+          {
+            "assessed": 0,
+            "condition": "6",
+            "family": "synthetic",
+            "flagged": 0,
+            "planned": 2,
+            "tape": "gransee",
+            "truth": "transition"
+          },
+          {
+            "assessed": 1,
+            "condition": "6",
+            "family": "synthetic",
+            "flagged": 1,
+            "planned": 1,
+            "tape": "lyngby",
+            "truth": "absent"
+          },
+          {
+            "assessed": 3,
+            "condition": "6",
+            "family": "synthetic",
+            "flagged": 0,
+            "planned": 22,
+            "tape": "lyngby",
+            "truth": "audible"
+          },
+          {
+            "assessed": 0,
+            "condition": "6",
+            "family": "synthetic",
+            "flagged": 0,
+            "planned": 1,
+            "tape": "lyngby",
+            "truth": "transition"
+          },
+          {
+            "assessed": 0,
+            "condition": "6",
+            "family": "synthetic",
+            "flagged": 0,
+            "planned": 1,
+            "tape": "sunday",
+            "truth": "absent"
+          },
+          {
+            "assessed": 4,
+            "condition": "6",
+            "family": "synthetic",
+            "flagged": 0,
+            "planned": 21,
+            "tape": "sunday",
+            "truth": "audible"
+          },
+          {
+            "assessed": 0,
+            "condition": "6",
+            "family": "synthetic",
+            "flagged": 0,
+            "planned": 2,
+            "tape": "sunday",
+            "truth": "transition"
+          },
+          {
+            "assessed": 0,
+            "condition": "clean",
+            "family": "synthetic",
+            "flagged": 0,
+            "planned": 1,
+            "tape": "clean",
+            "truth": "absent"
+          },
+          {
+            "assessed": 0,
+            "condition": "clean",
+            "family": "synthetic",
+            "flagged": 0,
+            "planned": 23,
+            "tape": "clean",
+            "truth": "audible"
+          }
+        ],
+        "checks": {
+          "absent_false_rate": false,
+          "audible_false_rate": true,
+          "genuine_hit_groups": false,
+          "masked_recall": false,
+          "synthetic_hit_groups": false
+        },
+        "classifier_forwards": 57,
+        "current_results": [
+          {
+            "condition": "isolated",
+            "current": {
+              "unassessed": 6
+            },
+            "family": "background",
+            "overlap_any_coverage_warning": {}
+          },
+          {
+            "condition": "-6",
+            "current": {
+              "inconclusive": 1,
+              "unassessed": 23
+            },
+            "family": "genuine",
+            "overlap_any_coverage_warning": {
+              "unassessed": 2
+            }
+          },
+          {
+            "condition": "6",
+            "current": {
+              "ai": 1,
+              "inconclusive": 15,
+              "original": 4,
+              "unassessed": 4
+            },
+            "family": "genuine",
+            "overlap_any_coverage_warning": {}
+          },
+          {
+            "condition": "clean",
+            "current": {
+              "inconclusive": 4,
+              "original": 4
+            },
+            "family": "genuine",
+            "overlap_any_coverage_warning": {}
+          },
+          {
+            "condition": "-6",
+            "current": {
+              "inconclusive": 1,
+              "unassessed": 17
+            },
+            "family": "synthetic",
+            "overlap_any_coverage_warning": {
+              "unassessed": 2
+            }
+          },
+          {
+            "condition": "6",
+            "current": {
+              "ai": 2,
+              "inconclusive": 9,
+              "original": 1,
+              "unassessed": 6
+            },
+            "family": "synthetic",
+            "overlap_any_coverage_warning": {
+              "unassessed": 1
+            }
+          },
+          {
+            "condition": "clean",
+            "current": {
+              "ai": 5,
+              "unassessed": 1
+            },
+            "family": "synthetic",
+            "overlap_any_coverage_warning": {}
+          }
+        ],
+        "freeze": {
+          "assets": {
+            "pellav2_detector.pt": "d21aedfb52e2f87706c2753715a29665482b0f4a034800c31579df5d458559ac",
+            "silero_vad.jit": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720",
+            "w2v-bert-config.json": "f5572bd5998b68182e9c328a43127ed21fed687f6910497136b91a4e3b0e3675"
+          },
+          "background_commitments": {
+            "gransee": {
+              "license": "CC BY-SA 4.0",
+              "original_sha256": "ee1f09a970c646f682dd296a5a9c8c043b449eaf747f341630695fc9e49c496c",
+              "pcm_sha256": "8458cd74abb2bb662a04281493c6defb4cc09bc52ce87e92226a09c0e1b6b8af",
+              "publisher_metadata_sha256": "c4365abd0d8974d149f4440df7d39e7e717744134a58b43f50bea4ba6aec151d"
+            },
+            "lyngby": {
+              "license": "CC BY-SA 4.0",
+              "original_sha256": "d26771200af34aeb9eb975631563b078b43e645a88171276a709df933665c86a",
+              "pcm_sha256": "8cd18c8a3a33226e334a99424ea33f54caf244a237d7b84fc4c085a712b37145",
+              "publisher_metadata_sha256": "d26d5d70dbdf6870b2be06bb0c5b856881de2e5b47b88ea0dc91d09c57063398"
+            },
+            "sunday": {
+              "license": "Public domain",
+              "original_sha256": "50e5eb59b296580340898f16e737f826a9fd7fef6fc45b07bb3e0318a9e58495",
+              "pcm_sha256": "bea2e4186c489c9768ea213c9a6fd5b06bf23cdcb600ab8f794f75be7088f316",
+              "publisher_metadata_sha256": "e18f1c45b7498ebaac431df935eac2eb1ab9b95238d2552929d867a3ac2e66a5"
+            }
+          },
+          "bands_hz": [
+            250,
+            500,
+            1000,
+            2000,
+            4000
+          ],
+          "code_sha256": {
+            "backend/app/detectors/audio/calibration.py": "00294b0c36cb37a06d516a30ea6171e409c6df0f88486660faf758070ab10ba5",
+            "backend/app/detectors/audio/calibrations/local-speech-v3.json": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf",
+            "backend/app/detectors/audio/upgraded.py": "017c396315bdb41f6e419589c6d81081b2a8089e2157c3ce14a8c0accd6f9836",
+            "backend/app/detectors/video/adapters/audio.py": "6f111f7ca382dc203b04a77125220e773b1873bbec281c35d8bb397d3cdf0aa6",
+            "backend/scripts/audio_background_limited_coverage.py": "e7a88d01bf0a3e8df6cc38006a34cc5565b2d823d4a6a2e2630cd087c6abb0aa",
+            "backend/scripts/audio_gtcrn_traffic.py": "e23291125f3c783e63804ea494dd3b71a238b042ee20b11bfe6cc5bc31b4db90",
+            "backend/scripts/audio_strong_traffic_view.py": "7ef4da2dbc2b99f24143e8e9b8961b594db1dbcb21cf9bae881617635900d838",
+            "backend/scripts/run_audio_specialists_v15.py": "ab685e87d8212e290f0b08d4b46f9e343f6778e26eff05f42891929e07e96e5c"
+          },
+          "fft": 512,
+          "focus": [
+            [
+              5600,
+              14800
+            ],
+            [
+              14800,
+              24000
+            ],
+            [
+              24000,
+              33200
+            ],
+            [
+              33200,
+              42400
+            ]
+          ],
+          "foreground_counts": {
+            "clone": 2,
+            "expressive": 2,
+            "genuine": 8,
+            "stock": 2
+          },
+          "hop": 256,
+          "levels_db": [
+            -6,
+            6
+          ],
+          "mix_band": "speech_band",
+          "ref": [
+            [
+              0,
+              5600
+            ],
+            [
+              42400,
+              48000
+            ]
+          ],
+          "roster_sha256": "82673166c1cc3cfa2f2f63654cb7d9419a7f11054f60fba1b597c43a5c6e5a1e",
+          "rule": {
+            "ground_truth_audible_snr_db": 3,
+            "ground_truth_masking_snr_db": -3,
+            "maximum_band_shape_difference_db": 4,
+            "maximum_false_absent_rate": 0.05,
+            "maximum_false_audible_rate": 0.1,
+            "maximum_flank_band_difference_db": 5,
+            "maximum_mixed_power_excess_db": 2.5,
+            "maximum_reference_speech_samples": 1280,
+            "minimum_agreeing_bands": 3,
+            "minimum_genuine_groups_with_hits": 4,
+            "minimum_masked_recall_per_scene": 0.4,
+            "minimum_reference_dbfs": -54,
+            "minimum_scenes_with_recall": 2,
+            "minimum_synthetic_groups_with_hits": 4,
+            "required_center_speech_samples": 3584
+          },
+          "sample_rate": 16000,
+          "samples": 48000,
+          "schema": "chipmunk.audio-background-limited-freeze/1",
+          "source_commitments": {
+            "librispeech": "39fde525e59672dc6d1551919b1478f724438a95aa55f874b576be21967e6c23",
+            "prior_rosters": [
+              "e34661c6dc138dbdf55b624a8a65be876180c9acbd85384b91e0422a1bc0288f",
+              "4dfe7075fd3b39a3a60bcc73ec364014fdc4367a11b360cbfddaf4667b98747c",
+              "adbb8cc2e2e95b1b316168a132d5ab1f5a5645b33ed15223833ac28a777631cf"
+            ],
+            "qualified_synthetic": {
+              "development": "4e97d28cfbe5a293ffffe10c419f9dd08a9e85a74e2b0431d2d4e402dbe693a8",
+              "holdout": "409d0dd8614dbc70ed27986bfdb4c0597e61cf04f29297ea874cec39ad8e8843"
+            }
+          },
+          "views": 104
+        },
+        "freeze_sha256": "50db3d24ab1a12c55de8554ed9e3a71ee2052734d4be93e5fa2830bbbc451529",
+        "hit_group_counts": {
+          "genuine": 2,
+          "synthetic": 2
+        },
+        "interval_summary": [
+          {
+            "assessed": 2,
+            "flagged": 2,
+            "planned": 38,
+            "tape": "all",
+            "truth": "absent"
+          },
+          {
+            "assessed": 10,
+            "flagged": 0,
+            "planned": 180,
+            "tape": "all",
+            "truth": "audible"
+          },
+          {
+            "assessed": 13,
+            "flagged": 8,
+            "planned": 144,
+            "tape": "all",
+            "truth": "masked"
+          },
+          {
+            "assessed": 3,
+            "flagged": 2,
+            "planned": 54,
+            "tape": "all",
+            "truth": "transition"
+          },
+          {
+            "assessed": 0,
+            "flagged": 0,
+            "planned": 2,
+            "tape": "clean",
+            "truth": "absent"
+          },
+          {
+            "assessed": 0,
+            "flagged": 0,
+            "planned": 54,
+            "tape": "clean",
+            "truth": "audible"
+          },
+          {
+            "assessed": 0,
+            "flagged": 0,
+            "planned": 12,
+            "tape": "gransee",
+            "truth": "absent"
+          },
+          {
+            "assessed": 0,
+            "flagged": 0,
+            "planned": 41,
+            "tape": "gransee",
+            "truth": "audible"
+          },
+          {
+            "assessed": 0,
+            "flagged": 0,
+            "planned": 49,
+            "tape": "gransee",
+            "truth": "masked"
+          },
+          {
+            "assessed": 0,
+            "flagged": 0,
+            "planned": 18,
+            "tape": "gransee",
+            "truth": "transition"
+          },
+          {
+            "assessed": 2,
+            "flagged": 2,
+            "planned": 12,
+            "tape": "lyngby",
+            "truth": "absent"
+          },
+          {
+            "assessed": 3,
+            "flagged": 0,
+            "planned": 44,
+            "tape": "lyngby",
+            "truth": "audible"
+          },
+          {
+            "assessed": 13,
+            "flagged": 8,
+            "planned": 50,
+            "tape": "lyngby",
+            "truth": "masked"
+          },
+          {
+            "assessed": 2,
+            "flagged": 2,
+            "planned": 14,
+            "tape": "lyngby",
+            "truth": "transition"
+          },
+          {
+            "assessed": 0,
+            "flagged": 0,
+            "planned": 12,
+            "tape": "sunday",
+            "truth": "absent"
+          },
+          {
+            "assessed": 7,
+            "flagged": 0,
+            "planned": 41,
+            "tape": "sunday",
+            "truth": "audible"
+          },
+          {
+            "assessed": 0,
+            "flagged": 0,
+            "planned": 45,
+            "tape": "sunday",
+            "truth": "masked"
+          },
+          {
+            "assessed": 1,
+            "flagged": 0,
+            "planned": 22,
+            "tape": "sunday",
+            "truth": "transition"
+          }
+        ],
+        "matched_mixtures_reconstructed": 84,
+        "measurements_sha256": "886bc7e39e6888aede8bb9b9ec1c7bbf1c4c01c02d535492c4ce7ed7a095af8e",
+        "private_evidence_sha256": "e0aa78716637c36f10e1e1ec03b03d1a6663508cd6fa3dd39ff2bd30c1260377",
+        "scene_passes": 0,
+        "schema": "chipmunk.audio-background-limited-evaluation/1",
+        "scopes": [
+          {
+            "condition": "isolated",
+            "family": "background",
+            "unassessed_no_speech_anchor": 6
+          },
+          {
+            "assessed": 2,
+            "condition": "-6",
+            "family": "genuine",
+            "unassessed_no_speech_anchor": 20,
+            "unassessed_reference_changed": 1,
+            "unassessed_reference_speech": 1
+          },
+          {
+            "assessed": 1,
+            "condition": "6",
+            "family": "genuine",
+            "unassessed_no_speech_anchor": 1,
+            "unassessed_reference_speech": 22
+          },
+          {
+            "condition": "clean",
+            "family": "genuine",
+            "unassessed_reference_quiet": 5,
+            "unassessed_reference_speech": 3
+          },
+          {
+            "assessed": 2,
+            "condition": "-6",
+            "family": "synthetic",
+            "unassessed_no_speech_anchor": 13,
+            "unassessed_reference_changed": 1,
+            "unassessed_reference_quiet": 1,
+            "unassessed_reference_speech": 1
+          },
+          {
+            "assessed": 2,
+            "condition": "6",
+            "family": "synthetic",
+            "unassessed_reference_changed": 1,
+            "unassessed_reference_quiet": 1,
+            "unassessed_reference_speech": 14
+          },
+          {
+            "condition": "clean",
+            "family": "synthetic",
+            "unassessed_reference_quiet": 3,
+            "unassessed_reference_speech": 3
+          }
+        ]
+      }
+    }
+  },
+  "schema": "chipmunk.audio-background-limited-comparison/1",
+  "shared_foreground_groups": 14,
+  "shared_recorded_scenes": 3
+}

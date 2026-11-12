@@ -9,7 +9,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
-from app.api import auth, jobs, state, v2_image_reference
+from app.api import auth, jobs, state, v2_document_revision, v2_image_reference
 from app.api.demo import router as demo_router
 from app.api.routes import KIND_LIMITS, public, router
 from app.api.security import refuse_nul
@@ -106,6 +106,8 @@ def body_limit(path: str) -> int:
         return settings.batch_max_bytes + 16 * 1024 * 1024
     if v2_image_reference.is_comparison_path(path) and v2_image_reference.enabled():
         return v2_image_reference.upload_limit() + 1024 * 1024
+    if v2_document_revision.is_comparison_path(path) and v2_document_revision.enabled():
+        return v2_document_revision.upload_limit() + 32 * 1024
     return settings.max_json_bytes
 
 
@@ -122,6 +124,8 @@ def upload_limiter(scope):
         field_caps = {"archive": settings.batch_max_bytes}
     elif v2_image_reference.is_comparison_path(path) and v2_image_reference.enabled():
         declared, field_caps = "image", {"reference": v2_image_reference.upload_limit()}
+    elif v2_document_revision.is_comparison_path(path) and v2_document_revision.enabled():
+        declared, field_caps = "document", {"earlier": v2_document_revision.upload_limit()}
     elif not ((path.startswith("/api/v2/cases/") and path.endswith("/items")) or path == "/api/v2/billing/checkout"):
         return None
     content_type = next((v for k, v in scope["headers"] if k == b"content-type"), b"")
@@ -147,6 +151,9 @@ class BodyLimitMiddleware:
         limit = body_limit(scope["path"])
         declared = next((v for k, v in scope["headers"] if k == b"content-length"), None)
         if declared is not None and declared.isdigit() and int(declared) > limit:
+            if v2_document_revision.is_comparison_path(scope["path"]):
+                response = problem(413, "Request body exceeds the limit", "The earlier draft upload is larger than allowed.", scope["path"])
+                return await response(scope, receive, send)
             if v2_image_reference.is_comparison_path(scope["path"]):
                 response = problem(413, "Request body exceeds the limit", "The image upload is larger than allowed.", scope["path"])
                 return await response(scope, receive, send)
@@ -244,6 +251,7 @@ app.include_router(v2_rerun_router)
 app.include_router(v2_evidence_router)
 app.include_router(v2_evidence_packets_router)
 app.include_router(v2_image_reference.router)
+app.include_router(v2_document_revision.router)
 app.include_router(v2_models_router)
 app.include_router(v2_refusion_router)
 app.include_router(v2_reports_router)

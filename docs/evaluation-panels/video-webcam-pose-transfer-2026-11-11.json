@@ -1,0 +1,87 @@
+{
+  "archived_single_swap_falsification": {
+    "correct_ranges_contextualized": 0,
+    "correctly_localized_swap_views": 4,
+    "genuine_delivery_views": 2,
+    "native_iou_each_swap": "61/72",
+    "source_interventions": 1,
+    "swap_delivery_views": 4
+  },
+  "freeze_sha256": "0e06508b9760f87c508e6b9e97d922474cf0e608db277ff0c40e13823151d789",
+  "historical_development_replay": {
+    "candidate_context_recordings": 1,
+    "candidate_context_views": 3,
+    "candidate_reasons": {
+      "landmark_inversion": 3
+    },
+    "legacy_eye_width_marked_views": 6,
+    "recordings": 2,
+    "views": 6
+  },
+  "independent_arithmetic_audit": {
+    "camera_context_flags": 0,
+    "camera_context_groups": 0,
+    "camera_journal_sha256": "1554e555781b0d196dee2bbc9178bad45921ade4f458447881e40d5132bfed7b",
+    "camera_statuses": {
+      "incumbent_measured_no_flag": 14,
+      "incumbent_unassessed": 1,
+      "measured": 3
+    },
+    "correct_swap_contextualized": 0,
+    "exact_time_checks": 27,
+    "freeze_sha256": "0e06508b9760f87c508e6b9e97d922474cf0e608db277ff0c40e13823151d789",
+    "geometry_measured": 15,
+    "geometry_selected": 15,
+    "native_incumbent_correct_groups": 6,
+    "native_incumbent_correct_intervals": 12,
+    "native_journal_sha256": "e6bf7e46b5d6777838db1b6c08fa2e378f91a2ebfab8993d6866067ba9472c0e",
+    "native_statuses": {
+      "incumbent_measured_no_flag": 6,
+      "measured": 12
+    },
+    "pilot_advances": false,
+    "reviewed_decisions": 36
+  },
+  "native_pose_condition": {
+    "native_original_flags": 0,
+    "native_swap_iou_max": "23/25",
+    "native_swap_iou_min": "23/25"
+  },
+  "original_prospective_freeze_sha256": "e93b9324c908ddc4addce293cd7b632f646ddb18ae1133851d3c6c8e0a2e3084",
+  "primary": {
+    "camera_context_flags": 0,
+    "camera_context_groups": 0,
+    "camera_context_types": {},
+    "camera_groups": 6,
+    "camera_incumbent_flags": 3,
+    "camera_old_eye_width_rule": 0,
+    "camera_statuses": {
+      "incumbent_measured_no_flag": 14,
+      "incumbent_unassessed": 1,
+      "measured": 3
+    },
+    "camera_views": 18,
+    "correct_swap_contextualized": 0,
+    "geometry_measured": 15,
+    "geometry_selected": 15,
+    "native_incumbent_correct_groups": 6,
+    "native_incumbent_correct_intervals": 12,
+    "native_known_swaps": 12,
+    "native_source_groups": 6,
+    "native_statuses": {
+      "incumbent_measured_no_flag": 6,
+      "measured": 12
+    },
+    "pilot_advances": false
+  },
+  "resources": {
+    "camera_replay_elapsed_s": 67.109,
+    "camera_selected_native_pictures": 108,
+    "cumulative_native_worker_elapsed_s": 273.829,
+    "native_app_selected_pictures": 432,
+    "startup_attempts_stopped_before_detector_inference": 3
+  },
+  "schema": "chipmunk.video-webcam-pose-transfer-result/1",
+  "scope": "The case deliveries share recordings. The archived camera held cohort contained only one flagged source. The paired positives used rights-reviewed archived sources with incomplete portrait attribution and prior project exposure.",
+  "serving_change_adopted": false
+}

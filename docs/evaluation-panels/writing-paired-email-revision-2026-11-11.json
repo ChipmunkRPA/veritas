@@ -1,0 +1,319 @@
+{
+  "cases": 61,
+  "counts": {
+    "ai_body_plain": {
+      "body_diff_found": 7,
+      "body_diff_useful": 6,
+      "cases": 7,
+      "current_body_highlight": 0,
+      "current_highlight": 0,
+      "current_useful_body": 0,
+      "matched_body_context": 6,
+      "paired_highlight": 2,
+      "paired_useful_body": 2,
+      "quote_diff_found": 0,
+      "quote_diff_useful": 0
+    },
+    "ai_body_with_quote": {
+      "body_diff_found": 7,
+      "body_diff_useful": 6,
+      "cases": 7,
+      "current_body_highlight": 1,
+      "current_highlight": 1,
+      "current_useful_body": 0,
+      "matched_body_context": 6,
+      "paired_highlight": 2,
+      "paired_useful_body": 2,
+      "quote_diff_found": 0,
+      "quote_diff_useful": 0
+    },
+    "ai_quote_only": {
+      "body_diff_found": 0,
+      "body_diff_useful": 0,
+      "cases": 7,
+      "current_body_highlight": 0,
+      "current_highlight": 0,
+      "current_useful_body": 0,
+      "matched_body_context": 0,
+      "paired_highlight": 0,
+      "paired_useful_body": 0,
+      "quote_diff_found": 7,
+      "quote_diff_useful": 6
+    },
+    "genuine_forum_revision": {
+      "body_diff_found": 10,
+      "body_diff_useful": 0,
+      "cases": 10,
+      "current_body_highlight": 0,
+      "current_highlight": 0,
+      "current_useful_body": 0,
+      "matched_body_context": 6,
+      "paired_highlight": 0,
+      "paired_useful_body": 0,
+      "quote_diff_found": 0,
+      "quote_diff_useful": 0
+    },
+    "human_quote_added": {
+      "body_diff_found": 0,
+      "body_diff_useful": 0,
+      "cases": 8,
+      "current_body_highlight": 1,
+      "current_highlight": 1,
+      "current_useful_body": 0,
+      "matched_body_context": 0,
+      "paired_highlight": 0,
+      "paired_useful_body": 0,
+      "quote_diff_found": 8,
+      "quote_diff_useful": 8
+    },
+    "unchanged_mime": {
+      "body_diff_found": 0,
+      "body_diff_useful": 0,
+      "cases": 8,
+      "current_body_highlight": 1,
+      "current_highlight": 1,
+      "current_useful_body": 0,
+      "matched_body_context": 0,
+      "paired_highlight": 0,
+      "paired_useful_body": 0,
+      "quote_diff_found": 0,
+      "quote_diff_useful": 0
+    },
+    "workplace_human_splice": {
+      "body_diff_found": 14,
+      "body_diff_useful": 0,
+      "cases": 14,
+      "current_body_highlight": 1,
+      "current_highlight": 1,
+      "current_useful_body": 0,
+      "matched_body_context": 14,
+      "paired_highlight": 0,
+      "paired_useful_body": 0,
+      "quote_diff_found": 0,
+      "quote_diff_useful": 0
+    }
+  },
+  "decision": {
+    "confidence_changed": false,
+    "exact_comparison_local_opt_in": true,
+    "statistical_rule_served": false
+  },
+  "distinct_inputs": {
+    "current": 173,
+    "second": 50
+  },
+  "freeze": {
+    "case_sha256": "5f093f8eb5bbe810caf8ec9e5a2fff6d230da46602eae5a830a892b90ba96862",
+    "code_sha256": "3e28f7df04d10db6368be787dae7a3cee167be3f93b6643c926fbba157a63d54",
+    "method": {
+      "advance": "At least two additional correctly located AI edits from distinct groups, no loss of current useful locations and at most one additional false-alarm group over the current check. This is source-exposed development only.",
+      "baseline": "First six serving three-sentence context inputs with raw AI-like response at least .5 on the later body, including retained quotes.",
+      "direction": "Flag experimental corroboration only if both classifiers independently at least double their model-specific AI-like odds on the later matched context. This is a paired response direction and adds zero confidence weight.",
+      "geometry": "Exact Unicode tokens within each mapped role. No case folding. Merge adjacent edit opcodes separated by at most two unchanged tokens in both versions. Report original offsets and changed tokens separately.",
+      "outcomes": "Useful localization means non-whitespace character IoU at least .30 and recall at least .50. Geometry-only true edits remain separate from authorship false alarms.",
+      "scope": "Each file has plain-text body plus at most one separately marked quote, and no body paragraph after the quote. Classifier comparisons require a changed focus in each version and identical outer sentences."
+    },
+    "schema": "chipmunk.writing-paired-email-revision/1",
+    "shared_comparison_sha256": "75cb9d5f75f5641b15e4cfb39a1adeea39fbf60faf7c001ed22a50de76382adb",
+    "source_sha256": "65c5f7074cecbec918dd7a6366e542f22170e063daed4958ba996c27a3346287",
+    "weights": {
+      "current": [
+        {
+          "file": "NOTICE",
+          "sha256": "4fe6835a2928bcfd7467888a9422d805dfa2fe6364437c1af01cf1945c3edd57"
+        },
+        {
+          "file": "config.json",
+          "sha256": "deac399da91c0cc96f5570fa5eae7cb716e32f6feb00860ce3e42c84f86c01a3"
+        },
+        {
+          "file": "model.safetensors",
+          "sha256": "4a1561fadf44ec72934edd6158ff8c76e9388ade1384dbeeea6eb15f93251087"
+        },
+        {
+          "file": "serving_head.json",
+          "sha256": "098ce573e07d8d99221d9eac41f7acae7b324071490a06023f837efe43df4cab"
+        },
+        {
+          "file": "tokenizer.json",
+          "sha256": "2c070ff353c36f85e20919da787a30e1e8e52b626d0e026e044f373378f6d0bf"
+        },
+        {
+          "file": "tokenizer_config.json",
+          "sha256": "d8089020d294f20cb21eca751b5f7f68a0b62ea2716a78576cbd587605382432"
+        }
+      ],
+      "second": [
+        {
+          "file": "LICENSE",
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+        },
+        {
+          "file": "config.json",
+          "sha256": "dc4511bb21dfa4991688aba8548086c8fa6947d94018ac1a8d09ae9843749703"
+        },
+        {
+          "file": "detector-config.json",
+          "sha256": "e72a616a5cbb0bbbe7b75d3d5e40af3c5cafdb0f0a8299ce04c5921e046619c7"
+        },
+        {
+          "file": "model.safetensors",
+          "sha256": "e7f7a617ad4af3abd8bcb939d564d2a2ea36fdb24b893177ae10c12ebe869361"
+        },
+        {
+          "file": "tokenizer.json",
+          "sha256": "6c8aaa9a542084f2457eab775d4eeb51f92a70c0fd9de28d5edb0ddec3c08d30"
+        }
+      ]
+    }
+  },
+  "freeze_sha256": "15867a4931a6d7f6ed83a6d1bf25b05df540f8c7de251fd94cf397c524d5c8a4",
+  "groups": {
+    "ai_body_plain": {
+      "body_diff_found": 5,
+      "body_diff_useful": 5,
+      "current_body_highlight": 0,
+      "current_highlight": 0,
+      "current_useful_body": 0,
+      "matched_body_context": 4,
+      "paired_highlight": 2,
+      "paired_useful_body": 2,
+      "quote_diff_found": 0,
+      "quote_diff_useful": 0
+    },
+    "ai_body_with_quote": {
+      "body_diff_found": 5,
+      "body_diff_useful": 5,
+      "current_body_highlight": 1,
+      "current_highlight": 1,
+      "current_useful_body": 0,
+      "matched_body_context": 4,
+      "paired_highlight": 2,
+      "paired_useful_body": 2,
+      "quote_diff_found": 0,
+      "quote_diff_useful": 0
+    },
+    "ai_quote_only": {
+      "body_diff_found": 0,
+      "body_diff_useful": 0,
+      "current_body_highlight": 0,
+      "current_highlight": 0,
+      "current_useful_body": 0,
+      "matched_body_context": 0,
+      "paired_highlight": 0,
+      "paired_useful_body": 0,
+      "quote_diff_found": 5,
+      "quote_diff_useful": 5
+    },
+    "genuine_forum_revision": {
+      "body_diff_found": 10,
+      "body_diff_useful": 0,
+      "current_body_highlight": 0,
+      "current_highlight": 0,
+      "current_useful_body": 0,
+      "matched_body_context": 6,
+      "paired_highlight": 0,
+      "paired_useful_body": 0,
+      "quote_diff_found": 0,
+      "quote_diff_useful": 0
+    },
+    "human_quote_added": {
+      "body_diff_found": 0,
+      "body_diff_useful": 0,
+      "current_body_highlight": 1,
+      "current_highlight": 1,
+      "current_useful_body": 0,
+      "matched_body_context": 0,
+      "paired_highlight": 0,
+      "paired_useful_body": 0,
+      "quote_diff_found": 8,
+      "quote_diff_useful": 8
+    },
+    "unchanged_mime": {
+      "body_diff_found": 0,
+      "body_diff_useful": 0,
+      "current_body_highlight": 1,
+      "current_highlight": 1,
+      "current_useful_body": 0,
+      "matched_body_context": 0,
+      "paired_highlight": 0,
+      "paired_useful_body": 0,
+      "quote_diff_found": 0,
+      "quote_diff_useful": 0
+    },
+    "workplace_human_splice": {
+      "body_diff_found": 14,
+      "body_diff_useful": 0,
+      "current_body_highlight": 1,
+      "current_highlight": 1,
+      "current_useful_body": 0,
+      "matched_body_context": 14,
+      "paired_highlight": 0,
+      "paired_useful_body": 0,
+      "quote_diff_found": 0,
+      "quote_diff_useful": 0
+    }
+  },
+  "method": {
+    "advance": "At least two additional correctly located AI edits from distinct groups, no loss of current useful locations and at most one additional false-alarm group over the current check. This is source-exposed development only.",
+    "baseline": "First six serving three-sentence context inputs with raw AI-like response at least .5 on the later body, including retained quotes.",
+    "direction": "Flag experimental corroboration only if both classifiers independently at least double their model-specific AI-like odds on the later matched context. This is a paired response direction and adds zero confidence weight.",
+    "geometry": "Exact Unicode tokens within each mapped role. No case folding. Merge adjacent edit opcodes separated by at most two unchanged tokens in both versions. Report original offsets and changed tokens separately.",
+    "outcomes": "Useful localization means non-whitespace character IoU at least .30 and recall at least .50. Geometry-only true edits remain separate from authorship false alarms.",
+    "scope": "Each file has plain-text body plus at most one separately marked quote, and no body paragraph after the quote. Classifier comparisons require a changed focus in each version and identical outer sentences."
+  },
+  "native_forwards": {
+    "current": 44,
+    "second": 13
+  },
+  "response_sha256": "39bb4708170a2fef2388ee55c24194c607dd55891faa207e823982800318960f",
+  "schema": "chipmunk.writing-paired-email-revision/1",
+  "seconds": 47.64,
+  "sources": {
+    "prior_receipt_sha256": [
+      "159955a9de09c2055a9b026bfbccf3cf50765885196e3ac41d6258bb353b1189",
+      "9bba0cda044b8bd97b6386f768de0d0e05d23dc9944ce0c379e6293fb1096d71",
+      "a009332eca312b775a7b5615388d3f4aeb87fa3a5f8f58bcf587cfaa424bf5cd",
+      "b8491dd965316384a4acdd7f64a9210553c4fd93f98e04475fe7cb19182c6ef3",
+      "c6e3b2fdd0280012726eba6fd720683363577960fd77c9ec8eb62f0800ad580a",
+      "fbad8d0024d657d3a03f9146e2409a82553b4bb24a99af6e0d3c3f9e60d3e27d"
+    ],
+    "records": {
+      "ai_body_plain": 7,
+      "ai_body_with_quote": 7,
+      "ai_quote_only": 7,
+      "genuine_forum_revision": 10,
+      "human_quote_added": 8,
+      "unchanged_mime": 8,
+      "workplace_human_splice": 14
+    },
+    "rights": {
+      "federal": "https://www.copyright.gov/title17/92chap1.html",
+      "forum": "https://cooking.stackexchange.com/help/licensing"
+    },
+    "scope": "Prospective paired-MIME fixtures built from previously evaluated archives. Earlier drafts are supplied exactly for this test, with no authorship or sender authentication inferred."
+  },
+  "verification": {
+    "changed_token_offsets_checked": 1046,
+    "current_context_references_checked": 229,
+    "local_prepaid_serving": {
+      "comparison_did_not_queue_analysis": true,
+      "earlier_source_transient": true,
+      "exact_unicode_offsets": true,
+      "glyphs": {
+        "emoji_in_json": true,
+        "emoji_in_pdf": true
+      },
+      "paid_before_analysis": true,
+      "pdf_verified": true,
+      "source_roles": [
+        "body",
+        "quoted"
+      ]
+    },
+    "local_prepaid_serving_receipt_sha256": "8e8c70d953f1bd88236b2e6758c2833888fc5c6fad76157a2d0f350e522f8a03",
+    "outcome_and_source_group_counts_checked": 147,
+    "paired_input_references_checked": 74,
+    "source_files_checked": 122
+  }
+}

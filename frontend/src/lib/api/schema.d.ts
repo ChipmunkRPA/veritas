@@ -487,6 +487,24 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v2/analyses/{aid}/document-revision-comparison": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Availability */
+        get: operations["availability_api_v2_analyses__aid__document_revision_comparison_get"];
+        put?: never;
+        /** Comparison */
+        post: operations["comparison_api_v2_analyses__aid__document_revision_comparison_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v2/analyses/{aid}/events": {
         parameters: {
             query?: never;
@@ -3206,6 +3224,84 @@ export interface components {
             started_at: string | null;
             /** Status */
             status: string;
+        };
+        /** DocumentRevisionAvailability */
+        DocumentRevisionAvailability: {
+            /** Available */
+            available: boolean;
+            /** Extension */
+            extension?: (".eml" | ".txt") | null;
+        };
+        /** DocumentRevisionResponse */
+        DocumentRevisionResponse: {
+            comparison: components["schemas"]["DraftComparison"];
+            /** Pdf */
+            pdf?: string | null;
+        };
+        /** DraftChange */
+        DraftChange: {
+            earlier: components["schemas"]["DraftExcerpt"] | null;
+            /** Id */
+            id: string;
+            later: components["schemas"]["DraftExcerpt"] | null;
+            /**
+             * Role
+             * @enum {string}
+             */
+            role: "body" | "quoted" | "signature";
+        };
+        /** DraftComparison */
+        DraftComparison: {
+            /** Changes */
+            changes: components["schemas"]["DraftChange"][];
+            /**
+             * Coordinate Space
+             * @constant
+             */
+            coordinate_space: "decoded_source_unicode_codepoint";
+            earlier: components["schemas"]["DraftSource"];
+            /**
+             * Format
+             * @enum {string}
+             */
+            format: "email" | "plain_text";
+            /** Interpretation */
+            interpretation: string;
+            later: components["schemas"]["DraftSource"];
+            /**
+             * Schema
+             * @constant
+             */
+            schema: "chipmunk.document-revision-comparison/1";
+            /** Scope */
+            scope: string;
+        };
+        /** DraftExcerpt */
+        DraftExcerpt: {
+            /** Changed Tokens */
+            changed_tokens: [
+                number,
+                number
+            ][];
+            /** End */
+            end: number;
+            /** Start */
+            start: number;
+            /** Text */
+            text: string;
+        };
+        /** DraftSource */
+        DraftSource: {
+            /** Bytes */
+            bytes: number;
+            /** Decoded Characters */
+            decoded_characters: number;
+            /** Decoded Text Sha256 */
+            decoded_text_sha256: string;
+            /** Mime Part */
+            mime_part: string | null;
+            /** Sha256 */
+            sha256: string;
         };
         /** ErrorRate */
         ErrorRate: {
@@ -6683,6 +6779,174 @@ export interface operations {
             };
             /** @description Unprocessable Entity */
             422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Problem"];
+                    "application/problem+json": unknown;
+                };
+            };
+        };
+    };
+    availability_api_v2_analyses__aid__document_revision_comparison_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                aid: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DocumentRevisionAvailability"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Problem"];
+                    "application/problem+json": unknown;
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Problem"];
+                    "application/problem+json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    comparison_api_v2_analyses__aid__document_revision_comparison_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                aid: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "multipart/form-data": {
+                    /**
+                     * Format: binary
+                     * @description Earlier .eml or .txt with the same extension.
+                     */
+                    earlier: string;
+                    /**
+                     * @default false
+                     * @enum {string}
+                     */
+                    include_pdf?: "true" | "false";
+                };
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DocumentRevisionResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Problem"];
+                    "application/problem+json": unknown;
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Problem"];
+                    "application/problem+json": unknown;
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Problem"];
+                    "application/problem+json": unknown;
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Problem"];
+                    "application/problem+json": unknown;
+                };
+            };
+            /** @description Request Entity Too Large */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Problem"];
+                    "application/problem+json": unknown;
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Problem"];
+                    "application/problem+json": unknown;
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Problem"];
+                    "application/problem+json": unknown;
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
                 headers: {
                     [name: string]: unknown;
                 };

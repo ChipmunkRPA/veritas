@@ -4705,6 +4705,238 @@
         "title": "DetectorRunV2",
         "type": "object"
       },
+      "DocumentRevisionAvailability": {
+        "properties": {
+          "available": {
+            "title": "Available",
+            "type": "boolean"
+          },
+          "extension": {
+            "anyOf": [
+              {
+                "enum": [
+                  ".eml",
+                  ".txt"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Extension"
+          }
+        },
+        "required": [
+          "available"
+        ],
+        "title": "DocumentRevisionAvailability",
+        "type": "object"
+      },
+      "DocumentRevisionResponse": {
+        "properties": {
+          "comparison": {
+            "$ref": "#/components/schemas/DraftComparison"
+          },
+          "pdf": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pdf"
+          }
+        },
+        "required": [
+          "comparison"
+        ],
+        "title": "DocumentRevisionResponse",
+        "type": "object"
+      },
+      "DraftChange": {
+        "properties": {
+          "earlier": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DraftExcerpt"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "later": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DraftExcerpt"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "role": {
+            "enum": [
+              "body",
+              "quoted",
+              "signature"
+            ],
+            "title": "Role",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "role",
+          "earlier",
+          "later"
+        ],
+        "title": "DraftChange",
+        "type": "object"
+      },
+      "DraftComparison": {
+        "properties": {
+          "changes": {
+            "items": {
+              "$ref": "#/components/schemas/DraftChange"
+            },
+            "title": "Changes",
+            "type": "array"
+          },
+          "coordinate_space": {
+            "const": "decoded_source_unicode_codepoint",
+            "title": "Coordinate Space",
+            "type": "string"
+          },
+          "earlier": {
+            "$ref": "#/components/schemas/DraftSource"
+          },
+          "format": {
+            "enum": [
+              "email",
+              "plain_text"
+            ],
+            "title": "Format",
+            "type": "string"
+          },
+          "interpretation": {
+            "title": "Interpretation",
+            "type": "string"
+          },
+          "later": {
+            "$ref": "#/components/schemas/DraftSource"
+          },
+          "schema": {
+            "const": "chipmunk.document-revision-comparison/1",
+            "title": "Schema",
+            "type": "string"
+          },
+          "scope": {
+            "title": "Scope",
+            "type": "string"
+          }
+        },
+        "required": [
+          "schema",
+          "format",
+          "coordinate_space",
+          "earlier",
+          "later",
+          "changes",
+          "scope",
+          "interpretation"
+        ],
+        "title": "DraftComparison",
+        "type": "object"
+      },
+      "DraftExcerpt": {
+        "properties": {
+          "changed_tokens": {
+            "items": {
+              "maxItems": 2,
+              "minItems": 2,
+              "prefixItems": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "integer"
+                }
+              ],
+              "type": "array"
+            },
+            "title": "Changed Tokens",
+            "type": "array"
+          },
+          "end": {
+            "title": "End",
+            "type": "integer"
+          },
+          "start": {
+            "title": "Start",
+            "type": "integer"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "start",
+          "end",
+          "text",
+          "changed_tokens"
+        ],
+        "title": "DraftExcerpt",
+        "type": "object"
+      },
+      "DraftSource": {
+        "properties": {
+          "bytes": {
+            "title": "Bytes",
+            "type": "integer"
+          },
+          "decoded_characters": {
+            "title": "Decoded Characters",
+            "type": "integer"
+          },
+          "decoded_text_sha256": {
+            "title": "Decoded Text Sha256",
+            "type": "string"
+          },
+          "mime_part": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mime Part"
+          },
+          "sha256": {
+            "title": "Sha256",
+            "type": "string"
+          }
+        },
+        "required": [
+          "sha256",
+          "bytes",
+          "decoded_text_sha256",
+          "decoded_characters",
+          "mime_part"
+        ],
+        "title": "DraftSource",
+        "type": "object"
+      },
       "ErrorRate": {
         "additionalProperties": false,
         "properties": {
@@ -13225,6 +13457,216 @@
         "summary": "List Detector Runs",
         "tags": [
           "v2"
+        ]
+      }
+    },
+    "/api/v2/analyses/{aid}/document-revision-comparison": {
+      "get": {
+        "operationId": "availability_api_v2_analyses__aid__document_revision_comparison_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "aid",
+            "required": true,
+            "schema": {
+              "title": "Aid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentRevisionAvailability"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              },
+              "application/problem+json": {}
+            },
+            "description": "Unauthorized"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              },
+              "application/problem+json": {}
+            },
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Availability",
+        "tags": [
+          "evidence"
+        ]
+      },
+      "post": {
+        "operationId": "comparison_api_v2_analyses__aid__document_revision_comparison_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "aid",
+            "required": true,
+            "schema": {
+              "title": "Aid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "properties": {
+                  "earlier": {
+                    "description": "Earlier .eml or .txt with the same extension.",
+                    "format": "binary",
+                    "type": "string"
+                  },
+                  "include_pdf": {
+                    "default": "false",
+                    "enum": [
+                      "true",
+                      "false"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "earlier"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentRevisionResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              },
+              "application/problem+json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              },
+              "application/problem+json": {}
+            },
+            "description": "Unauthorized"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              },
+              "application/problem+json": {}
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              },
+              "application/problem+json": {}
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              },
+              "application/problem+json": {}
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              },
+              "application/problem+json": {}
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              },
+              "application/problem+json": {}
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              },
+              "application/problem+json": {}
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "Comparison",
+        "tags": [
+          "evidence"
         ]
       }
     },

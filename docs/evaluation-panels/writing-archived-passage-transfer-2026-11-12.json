@@ -1,0 +1,3860 @@
+{
+  "schema": "chipmunk.writing-archived-passage-transfer-public/1",
+  "customer_facing_changes": false,
+  "prior_cutoff_sha256": "a7d4ab9eb612b8d80cca92965dec671b47ace4ce742cc0aa9ac4f54db78360ee",
+  "historical_intake": {
+    "schema": "chipmunk.writing-archive-author-intake/1",
+    "history": [
+      {
+        "packet": "previous-agreement",
+        "source_sha256": "8db9676dfde8ed023cbe79d92f82d2bea2544b18537c56baed1dbd6e29b0234b",
+        "text_entries": 100,
+        "matched_sources": 0
+      },
+      {
+        "packet": "llmtrace",
+        "source_sha256": "6d4431a85a70916ba7af5c19f062eed6c277183d7b4bb5c6cea42f520e717f48",
+        "text_entries": 38429,
+        "matched_sources": 0
+      },
+      {
+        "packet": "elife-v301",
+        "source_sha256": "46f681020eb07a197875d64bf4ece4efec619b7d1de4c81825d470d9add04f8a",
+        "text_entries": 25,
+        "matched_sources": 0
+      },
+      {
+        "packet": "elife-v286",
+        "source_sha256": "a8676385711bf3d66165a6c3a8add0d8aee7881288302388ca88739e8e30389b",
+        "text_entries": 26,
+        "matched_sources": 0
+      },
+      {
+        "packet": "elife-v272",
+        "source_sha256": "063c960dafe75757b3b6483ab88802c9c6cd78fa6e0a347014ac148c283d758f",
+        "text_entries": 5,
+        "matched_sources": 0
+      },
+      {
+        "packet": "opai-v257",
+        "source_sha256": "4e43edf33c695a8a4f757d079089dab85a632c648762554bac9f5cc573bb923b",
+        "text_entries": 60,
+        "matched_sources": 0
+      },
+      {
+        "packet": "f1000-previous",
+        "source_sha256": "f8e0f135cd4aef110b78523dd104f47f44fe24aa4a2cb316c78f5e1a99d4deb5",
+        "text_entries": 18,
+        "matched_sources": 0
+      },
+      {
+        "packet": "publisher-abstract-pilot",
+        "source_sha256": "da3edb1f530f62dae1d0911282dca11419153e1126a3a1a2aa84d9d0a31b6c9a",
+        "text_entries": 4,
+        "matched_sources": 0
+      },
+      {
+        "packet": "wellcome-gates",
+        "source_sha256": "e8633d587e1943f1f9dd7c7dc1d93f7809590fcb82a7956ddaa6621e2499ea69",
+        "text_entries": 42,
+        "matched_sources": 0
+      },
+      {
+        "packet": "pep",
+        "source_sha256": "e1c793216ed6ec9b83279646a09a54e063abf093db478d4a7f58590b45875506",
+        "text_entries": 10,
+        "matched_sources": 0
+      }
+    ],
+    "counts": {
+      "kubernetes/blog": {
+        "no_complete_native_excerpt": 138,
+        "no_matched_center_replacement": 9,
+        "no_bounded_changed_lines": 16,
+        "same_recorded_contributor": 1,
+        "admitted": 1
+      },
+      "kubernetes/docs": {
+        "no_complete_native_excerpt": 510,
+        "no_matched_center_replacement": 9,
+        "no_bounded_changed_lines": 130,
+        "recorded_same_author_unverified": 1
+      },
+      "postgres/docs": {
+        "no_complete_native_excerpt": 168,
+        "no_matched_center_replacement": 9,
+        "no_bounded_changed_lines": 116,
+        "unsupported_source_blob": 82,
+        "recorded_same_author_unverified": 2
+      }
+    },
+    "qualified_groups": 1,
+    "strata": {
+      "kubernetes/blog/same_recorded_contributor": 1
+    },
+    "source_freeze_sha256": "b56b256a4152efbc74bd30f151f0a31292b8b4baf96afe4bb58e386c244fc24a",
+    "originals_sha256": "4f5a7e69dfea38472feaf5cdc05b1f08daa41d29eaa3285abb42441f2bd26fa8",
+    "notice_sha256": "1c81690de802cb6a705454b762d397e66a710a57755049829b29994a80b58dcb"
+  },
+  "historical_roster_sizes": {
+    "kubernetes": 814,
+    "postgres": 377
+  },
+  "historical_archive_anchors": {
+    "kubernetes": "e20b8746f2444ae9fe58f49fd0f0acbfbabbb938",
+    "postgres": "3f302f0ed06f69c5ebd33d4df95895323a3cbef6"
+  },
+  "prospective_intake": {
+    "schema": "chipmunk.writing-archive-prospective-intake/1",
+    "history": [
+      {
+        "packet": "previous-agreement",
+        "source_sha256": "8db9676dfde8ed023cbe79d92f82d2bea2544b18537c56baed1dbd6e29b0234b",
+        "text_entries": 100,
+        "matched_sources": 0
+      },
+      {
+        "packet": "llmtrace",
+        "source_sha256": "6d4431a85a70916ba7af5c19f062eed6c277183d7b4bb5c6cea42f520e717f48",
+        "text_entries": 38429,
+        "matched_sources": 0
+      },
+      {
+        "packet": "elife-v301",
+        "source_sha256": "46f681020eb07a197875d64bf4ece4efec619b7d1de4c81825d470d9add04f8a",
+        "text_entries": 25,
+        "matched_sources": 0
+      },
+      {
+        "packet": "elife-v286",
+        "source_sha256": "a8676385711bf3d66165a6c3a8add0d8aee7881288302388ca88739e8e30389b",
+        "text_entries": 26,
+        "matched_sources": 0
+      },
+      {
+        "packet": "elife-v272",
+        "source_sha256": "063c960dafe75757b3b6483ab88802c9c6cd78fa6e0a347014ac148c283d758f",
+        "text_entries": 5,
+        "matched_sources": 0
+      },
+      {
+        "packet": "opai-v257",
+        "source_sha256": "4e43edf33c695a8a4f757d079089dab85a632c648762554bac9f5cc573bb923b",
+        "text_entries": 60,
+        "matched_sources": 0
+      },
+      {
+        "packet": "f1000-previous",
+        "source_sha256": "f8e0f135cd4aef110b78523dd104f47f44fe24aa4a2cb316c78f5e1a99d4deb5",
+        "text_entries": 18,
+        "matched_sources": 0
+      },
+      {
+        "packet": "publisher-abstract-pilot",
+        "source_sha256": "da3edb1f530f62dae1d0911282dca11419153e1126a3a1a2aa84d9d0a31b6c9a",
+        "text_entries": 4,
+        "matched_sources": 0
+      },
+      {
+        "packet": "wellcome-gates",
+        "source_sha256": "e8633d587e1943f1f9dd7c7dc1d93f7809590fcb82a7956ddaa6621e2499ea69",
+        "text_entries": 42,
+        "matched_sources": 0
+      },
+      {
+        "packet": "pep",
+        "source_sha256": "e1c793216ed6ec9b83279646a09a54e063abf093db478d4a7f58590b45875506",
+        "text_entries": 10,
+        "matched_sources": 0
+      }
+    ],
+    "counts": {
+      "no_supported_named_byline": 228,
+      "no_disjoint_matching_passages": 25,
+      "historic_control_already_used": 1,
+      "admitted_matching_group": 35,
+      "writer_overlap": 10,
+      "over_cap": 10
+    },
+    "qualified_groups": 36,
+    "archived_edit_groups": 1,
+    "matched_passage_groups": 35,
+    "source_freeze_sha256": "f718fdd9653614e235e12b7e57d6c8341eafeff8e791d7ea638e611a98b53944",
+    "originals_sha256": "cad88dc7f901078c2ac494b0af8a852bff56e9842f0e744c9c97e829e7b16650",
+    "notice_sha256": "53d5ee9af504865ee554e3b9cd33bc5c7cc8bb0a65f1be4329b49d4f07b37644"
+  },
+  "prospective_paths_considered": 309,
+  "source_roles": {
+    "before": "genuine generation-base passage",
+    "after": "second matching genuine passage or later version in the historic revision stratum"
+  },
+  "local_generation": {
+    "qwen": {
+      "repo": "Qwen/Qwen2.5-1.5B-Instruct",
+      "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+      "weights_sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee",
+      "license": "Apache-2.0"
+    },
+    "smol2": {
+      "repo": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "revision": "31b70e2e869a7173562077fd711b654946d38674",
+      "weights_sha256": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8",
+      "license": "Apache-2.0"
+    }
+  },
+  "archive_notices_retained": true,
+  "aggregate": {
+    "overall": {
+      "before": {
+        "files": 36,
+        "ranked_exact_center_first": 14,
+        "current": {
+          "no_flag": 31,
+          "wrong_only": 3,
+          "useful": 2,
+          "flag": 5
+        },
+        "matched_context": {
+          "no_flag": 31,
+          "wrong_only": 3,
+          "useful": 2,
+          "flag": 5
+        },
+        "supplement": {
+          "no_flag": 30,
+          "wrong_only": 3,
+          "useful": 3,
+          "flag": 6
+        }
+      },
+      "after": {
+        "files": 36,
+        "ranked_exact_center_first": 13,
+        "current": {
+          "no_flag": 35,
+          "useful": 1,
+          "flag": 1
+        },
+        "matched_context": {
+          "no_flag": 34,
+          "wrong_only": 1,
+          "useful": 1,
+          "flag": 2
+        },
+        "supplement": {
+          "no_flag": 34,
+          "useful": 2,
+          "flag": 2
+        }
+      },
+      "qwen": {
+        "files": 27,
+        "ranked_exact_center_first": 9,
+        "current": {
+          "no_flag": 24,
+          "wrong_only": 1,
+          "useful": 2,
+          "flag": 3
+        },
+        "matched_context": {
+          "no_flag": 23,
+          "useful": 2,
+          "wrong_only": 2,
+          "flag": 4
+        },
+        "supplement": {
+          "no_flag": 23,
+          "useful": 4,
+          "flag": 4
+        }
+      },
+      "smol2": {
+        "files": 26,
+        "ranked_exact_center_first": 12,
+        "current": {
+          "no_flag": 19,
+          "useful": 6,
+          "wrong_only": 1,
+          "flag": 7
+        },
+        "matched_context": {
+          "no_flag": 19,
+          "useful": 3,
+          "wrong_only": 4,
+          "flag": 7
+        },
+        "supplement": {
+          "no_flag": 19,
+          "useful": 6,
+          "wrong_only": 1,
+          "flag": 7
+        }
+      }
+    },
+    "admission": {
+      "qwen": {
+        "attempted": 36,
+        "failed_admission": 9,
+        "admitted": 27
+      },
+      "smol2": {
+        "attempted": 36,
+        "admitted": 26,
+        "failed_admission": 10
+      }
+    },
+    "decision": {
+      "matched_context": {
+        "new_useful_groups": 2,
+        "lost_useful_groups": 4,
+        "new_later_false_flag_groups": 1,
+        "new_useful_by_generator": {
+          "qwen": 2,
+          "smol2": 0
+        },
+        "advance": false
+      },
+      "supplement": {
+        "new_useful_groups": 2,
+        "lost_useful_groups": 0,
+        "new_later_false_flag_groups": 1,
+        "new_useful_by_generator": {
+          "qwen": 2,
+          "smol2": 0
+        },
+        "advance": false
+      }
+    },
+    "strata": {
+      "kubernetes/blog/same_bylined_work_matched_passages": {
+        "before": {
+          "files": 35,
+          "ranked_exact_center_first": 14,
+          "current": {
+            "wrong_only": 3,
+            "no_flag": 30,
+            "useful": 2,
+            "flag": 5
+          },
+          "matched_context": {
+            "wrong_only": 3,
+            "no_flag": 30,
+            "useful": 2,
+            "flag": 5
+          },
+          "supplement": {
+            "wrong_only": 3,
+            "no_flag": 29,
+            "useful": 3,
+            "flag": 6
+          }
+        },
+        "after": {
+          "files": 35,
+          "ranked_exact_center_first": 13,
+          "current": {
+            "no_flag": 34,
+            "useful": 1,
+            "flag": 1
+          },
+          "matched_context": {
+            "no_flag": 33,
+            "wrong_only": 1,
+            "useful": 1,
+            "flag": 2
+          },
+          "supplement": {
+            "no_flag": 33,
+            "useful": 2,
+            "flag": 2
+          }
+        },
+        "qwen": {
+          "files": 27,
+          "ranked_exact_center_first": 9,
+          "current": {
+            "no_flag": 24,
+            "wrong_only": 1,
+            "useful": 2,
+            "flag": 3
+          },
+          "matched_context": {
+            "no_flag": 23,
+            "useful": 2,
+            "wrong_only": 2,
+            "flag": 4
+          },
+          "supplement": {
+            "no_flag": 23,
+            "useful": 4,
+            "flag": 4
+          }
+        },
+        "smol2": {
+          "files": 25,
+          "ranked_exact_center_first": 12,
+          "current": {
+            "no_flag": 18,
+            "useful": 6,
+            "wrong_only": 1,
+            "flag": 7
+          },
+          "matched_context": {
+            "no_flag": 18,
+            "useful": 3,
+            "wrong_only": 4,
+            "flag": 7
+          },
+          "supplement": {
+            "no_flag": 18,
+            "useful": 6,
+            "wrong_only": 1,
+            "flag": 7
+          }
+        }
+      },
+      "kubernetes/blog/same_recorded_contributor": {
+        "before": {
+          "files": 1,
+          "ranked_exact_center_first": 0,
+          "current": {
+            "no_flag": 1,
+            "flag": 0
+          },
+          "matched_context": {
+            "no_flag": 1,
+            "flag": 0
+          },
+          "supplement": {
+            "no_flag": 1,
+            "flag": 0
+          }
+        },
+        "after": {
+          "files": 1,
+          "ranked_exact_center_first": 0,
+          "current": {
+            "no_flag": 1,
+            "flag": 0
+          },
+          "matched_context": {
+            "no_flag": 1,
+            "flag": 0
+          },
+          "supplement": {
+            "no_flag": 1,
+            "flag": 0
+          }
+        },
+        "qwen": {
+          "files": 0,
+          "ranked_exact_center_first": 0,
+          "current": {
+            "flag": 0
+          },
+          "matched_context": {
+            "flag": 0
+          },
+          "supplement": {
+            "flag": 0
+          }
+        },
+        "smol2": {
+          "files": 1,
+          "ranked_exact_center_first": 0,
+          "current": {
+            "no_flag": 1,
+            "flag": 0
+          },
+          "matched_context": {
+            "no_flag": 1,
+            "flag": 0
+          },
+          "supplement": {
+            "no_flag": 1,
+            "flag": 0
+          }
+        }
+      }
+    }
+  },
+  "audit": {
+    "source_groups": 36,
+    "archive_span_checks": 360,
+    "held_fixtures": 125,
+    "exact_context_span_bindings": 625,
+    "distinct_native_inputs": 518,
+    "score_forwards": 130,
+    "prior_fit_input_overlap": 0,
+    "grouped_results": {
+      "groups_with_admitted_generation": 34,
+      "current": {
+        "any_useful_generated_groups": 7,
+        "any_false_flag_genuine_groups": 6,
+        "new_false_flag_groups_at_either_real_passage": 0,
+        "new_false_flag_groups_relative_to_any_incumbent_real_flag": 0,
+        "new_useful_groups": 0,
+        "lost_useful_groups": 0,
+        "useful_gain_groups_by_generator": {
+          "qwen": 0,
+          "smol2": 0
+        }
+      },
+      "matched_context": {
+        "any_useful_generated_groups": 5,
+        "any_false_flag_genuine_groups": 7,
+        "new_false_flag_groups_at_either_real_passage": 2,
+        "new_false_flag_groups_relative_to_any_incumbent_real_flag": 2,
+        "new_useful_groups": 2,
+        "lost_useful_groups": 4,
+        "useful_gain_groups_by_generator": {
+          "qwen": 2,
+          "smol2": 0
+        }
+      },
+      "supplement": {
+        "any_useful_generated_groups": 9,
+        "any_false_flag_genuine_groups": 8,
+        "new_false_flag_groups_at_either_real_passage": 2,
+        "new_false_flag_groups_relative_to_any_incumbent_real_flag": 2,
+        "new_useful_groups": 2,
+        "lost_useful_groups": 0,
+        "useful_gain_groups_by_generator": {
+          "qwen": 2,
+          "smol2": 0
+        }
+      }
+    },
+    "commitments": {
+      "source-freeze.json": "f718fdd9653614e235e12b7e57d6c8341eafeff8e791d7ea638e611a98b53944",
+      "source-receipt.json": "db80869af3a2854dbb16d21de6a77499fd96785f55c69552a19030eca15cb8c8",
+      "originals.json": "cad88dc7f901078c2ac494b0af8a852bff56e9842f0e744c9c97e829e7b16650",
+      "freeze.json": "2a11afbddec323785b43f614a1ec477b7759e13ab9670197b6c6aea75a123644",
+      "input-lock.json": "18fb5962fb6ce9bf116a521e008c6b31570c566a4846d8497b6d9a772035ef41",
+      "responses.json": "57ba12a362125a9cf201ac3541c346c43c236c00174f3aa9322b441efd37efcf",
+      "outcomes.json": "a3fee91f6e6b2c9c7c71f06db2f3069e5ebbf82974056a544f072061091281de",
+      "aggregate.json": "fdcf4ac3f3bec8a6d3b53a8426ec0350c59b553997580883556b28f99fcce205"
+    },
+    "verified": true
+  },
+  "audit_sha256": "efb3c5ed60963a99d9cfc9db706aa2bc8152e15e17556bffe187403330d458ee",
+  "tampered_outcome_rejected": true,
+  "sources": [
+    {
+      "group": "kubernetes-e1a8fe859faf9700",
+      "archive": "kubernetes",
+      "path": "content/en/blog/_posts/2019-12-09-csi-volume-migration-beta.md",
+      "license": "CC-BY-4.0",
+      "authorship_stratum": "same_recorded_contributor",
+      "versions": [
+        "422a2b0aea8604b4a007d013bf018ed38a9ba99f",
+        "f61ffe8a447108c91d8e8eebbe5a7148f35ec1d7"
+      ],
+      "raw_blob_sha256": [
+        "b26ba9420f52fe558a6edde027a08e3201c1d9ed7c9d0ab13e7ddf60fc87aff8",
+        "3161d6bd26f53945118f30f9974156a40e82689f57d822e2b67b8236f36dc81c"
+      ],
+      "license_notice_sha256": [
+        "617cdaceecf894d9ace4481855d3a7326ba11c32e2a4b254811c69c70650a526",
+        "617cdaceecf894d9ace4481855d3a7326ba11c32e2a4b254811c69c70650a526"
+      ]
+    },
+    {
+      "group": "blog-04a69d44522bb6af",
+      "archive": "kubernetes",
+      "path": "content/en/blog/_posts/2019-04-16-pod-priority-and-preemption-in-kubernetes.md",
+      "license": "CC-BY-4.0",
+      "authorship_stratum": "same_bylined_work_matched_passages",
+      "versions": [
+        "0ef096e4cb577c30739f19e19a017217e5ca4807"
+      ],
+      "raw_blob_sha256": "7a93923c46d7a97d2a5a755be66ce83a4767204e1aa6fea12609c1df239521c3",
+      "license_notice_sha256": "617cdaceecf894d9ace4481855d3a7326ba11c32e2a4b254811c69c70650a526"
+    },
+    {
+      "group": "blog-0575679df6664607",
+      "archive": "kubernetes",
+      "path": "content/en/blog/_posts/2018-06-28-Airflow-Kubernetes-Operator.md",
+      "license": "CC-BY-4.0",
+      "authorship_stratum": "same_bylined_work_matched_passages",
+      "versions": [
+        "0ef096e4cb577c30739f19e19a017217e5ca4807"
+      ],
+      "raw_blob_sha256": "1642a332304996d94eab54b40ac74df0f0f0af12a4984f92f54a5db654a80d61",
+      "license_notice_sha256": "617cdaceecf894d9ace4481855d3a7326ba11c32e2a4b254811c69c70650a526"
+    },
+    {
+      "group": "blog-0578a0bf6775698d",
+      "archive": "kubernetes",
+      "path": "content/en/blog/_posts/2019-03-28-running-kubernetes-locally-on-linux-with-minikube.md",
+      "license": "CC-BY-4.0",
+      "authorship_stratum": "same_bylined_work_matched_passages",
+      "versions": [
+        "0ef096e4cb577c30739f19e19a017217e5ca4807"
+      ],
+      "raw_blob_sha256": "1f8aea371dac3b4e86e89e3d79066d61bd584582ce2982be50a81d89f37ba4b2",
+      "license_notice_sha256": "617cdaceecf894d9ace4481855d3a7326ba11c32e2a4b254811c69c70650a526"
+    },
+    {
+      "group": "blog-062b86202af2a108",
+      "archive": "kubernetes",
+      "path": "content/en/blog/_posts/2019-12-09-volume-snapshot-beta.md",
+      "license": "CC-BY-4.0",
+      "authorship_stratum": "same_bylined_work_matched_passages",
+      "versions": [
+        "0ef096e4cb577c30739f19e19a017217e5ca4807"
+      ],
+      "raw_blob_sha256": "9317a339d8ee29dc613164dff12eeb3315929da91f5f932963db20b518775c9b",
+      "license_notice_sha256": "617cdaceecf894d9ace4481855d3a7326ba11c32e2a4b254811c69c70650a526"
+    },
+    {
+      "group": "blog-07f64291ad7bacbf",
+      "archive": "kubernetes",
+      "path": "content/en/blog/_posts/2019-04-26-latest-on-localization.md",
+      "license": "CC-BY-4.0",
+      "authorship_stratum": "same_bylined_work_matched_passages",
+      "versions": [
+        "0ef096e4cb577c30739f19e19a017217e5ca4807"
+      ],
+      "raw_blob_sha256": "0a65eb6c53ae6d8e19f2cfe5d6bf07bb24e6ba3dd3a69902a91a57cb353065be",
+      "license_notice_sha256": "617cdaceecf894d9ace4481855d3a7326ba11c32e2a4b254811c69c70650a526"
+    },
+    {
+      "group": "blog-08419d3e08b1594e",
+      "archive": "kubernetes",
+      "path": "content/en/blog/_posts/2019-02-06-poseidon-firmament-scheduler-announcement.md",
+      "license": "CC-BY-4.0",
+      "authorship_stratum": "same_bylined_work_matched_passages",
+      "versions": [
+        "0ef096e4cb577c30739f19e19a017217e5ca4807"
+      ],
+      "raw_blob_sha256": "7383e0cbe2e686a0cc2e0e74bd3287c2caffc181dfaa3c931f580a9ef8f92699",
+      "license_notice_sha256": "617cdaceecf894d9ace4481855d3a7326ba11c32e2a4b254811c69c70650a526"
+    },
+    {
+      "group": "blog-12323f6f96fc7125",
+      "archive": "kubernetes",
+      "path": "content/en/blog/_posts/2019-06-21-volume-cloning-alpha.md",
+      "license": "CC-BY-4.0",
+      "authorship_stratum": "same_bylined_work_matched_passages",
+      "versions": [
+        "0ef096e4cb577c30739f19e19a017217e5ca4807"
+      ],
+      "raw_blob_sha256": "100b6d06949cc817869a44391c16d02a82c9a9f7e56cfdd3a627196791f957fd",
+      "license_notice_sha256": "617cdaceecf894d9ace4481855d3a7326ba11c32e2a4b254811c69c70650a526"
+    },
+    {
+      "group": "blog-1c353ae23a890b86",
+      "archive": "kubernetes",
+      "path": "content/en/blog/_posts/2019-03-29-kube-proxy-subtleties-debugging-an-intermittent-connection-resets.md",
+      "license": "CC-BY-4.0",
+      "authorship_stratum": "same_bylined_work_matched_passages",
+      "versions": [
+        "0ef096e4cb577c30739f19e19a017217e5ca4807"
+      ],
+      "raw_blob_sha256": "2f49df6144db0adbe6852ddec85c71ffb2a6be737cac4f1250c6f22c380aef92",
+      "license_notice_sha256": "617cdaceecf894d9ace4481855d3a7326ba11c32e2a4b254811c69c70650a526"
+    },
+    {
+      "group": "blog-22b7f1074d0f57d1",
+      "archive": "kubernetes",
+      "path": "content/en/blog/_posts/2019-02-12-building-a-kubernetes-edge-control-plane-for-envoy-v2.md",
+      "license": "CC-BY-4.0",
+      "authorship_stratum": "same_bylined_work_matched_passages",
+      "versions": [
+        "0ef096e4cb577c30739f19e19a017217e5ca4807"
+      ],
+      "raw_blob_sha256": "fb82b4e38dac30c79a194d662f7e1a31a3e15174295232d98768011f7da93894",
+      "license_notice_sha256": "617cdaceecf894d9ace4481855d3a7326ba11c32e2a4b254811c69c70650a526"
+    },
+    {
+      "group": "blog-26fed517b34cbba4",
+      "archive": "kubernetes",
+      "path": "content/en/blog/_posts/2018-07-19-kubernetes-win-2018-oscon-most-impact-award.md",
+      "license": "CC-BY-4.0",
+      "authorship_stratum": "same_bylined_work_matched_passages",
+      "versions": [
+        "0ef096e4cb577c30739f19e19a017217e5ca4807"
+      ],
+      "raw_blob_sha256": "14d4580ec371cf3fd1fd0e01e73e8577bfc50fc54b809eeabaac3ae79aea8dd9",
+      "license_notice_sha256": "617cdaceecf894d9ace4481855d3a7326ba11c32e2a4b254811c69c70650a526"
+    },
+    {
+      "group": "blog-289bbac352d06ffa",
+      "archive": "kubernetes",
+      "path": "content/en/blog/_posts/2018-12-11-current-status-and-future-roadmap.md",
+      "license": "CC-BY-4.0",
+      "authorship_stratum": "same_bylined_work_matched_passages",
+      "versions": [
+        "0ef096e4cb577c30739f19e19a017217e5ca4807"
+      ],
+      "raw_blob_sha256": "f9defc0e0b25ed81949b9049f6b7a991ee5daffa4610144e74e6864380ecb65c",
+      "license_notice_sha256": "617cdaceecf894d9ace4481855d3a7326ba11c32e2a4b254811c69c70650a526"
+    },
+    {
+      "group": "blog-2ef42ff27c384743",
+      "archive": "kubernetes",
+      "path": "content/en/blog/_posts/2019-05-14-expanding-our-contributor-workshops.md",
+      "license": "CC-BY-4.0",
+      "authorship_stratum": "same_bylined_work_matched_passages",
+      "versions": [
+        "0ef096e4cb577c30739f19e19a017217e5ca4807"
+      ],
+      "raw_blob_sha256": "1a54c62aa626e97f9fd47d3fb05c5a157e0de04a0ae391404ca6d7e27ec91515",
+      "license_notice_sha256": "617cdaceecf894d9ace4481855d3a7326ba11c32e2a4b254811c69c70650a526"
+    },
+    {
+      "group": "blog-32cb9f1c53754254",
+      "archive": "kubernetes",
+      "path": "content/en/blog/_posts/2018-07-10-coredns-ga.md",
+      "license": "CC-BY-4.0",
+      "authorship_stratum": "same_bylined_work_matched_passages",
+      "versions": [
+        "0ef096e4cb577c30739f19e19a017217e5ca4807"
+      ],
+      "raw_blob_sha256": "0e474b6604aa4c031e201590ba9521f0bb1cc614528ce1066f569365b76bbdf0",
+      "license_notice_sha256": "617cdaceecf894d9ace4481855d3a7326ba11c32e2a4b254811c69c70650a526"
+    },
+    {
+      "group": "blog-343cfeb9ce95ae6c",
+      "archive": "kubernetes",
+      "path": "content/en/blog/_posts/2019-02-28-automate-operations-on-your-cluster-with-operatorhub.md",
+      "license": "CC-BY-4.0",
+      "authorship_stratum": "same_bylined_work_matched_passages",
+      "versions": [
+        "0ef096e4cb577c30739f19e19a017217e5ca4807"
+      ],
+      "raw_blob_sha256": "7e2287186451e0409f6c4fe759f343763768fe4e86fb68002ac32a903c919b06",
+      "license_notice_sha256": "617cdaceecf894d9ace4481855d3a7326ba11c32e2a4b254811c69c70650a526"
+    },
+    {
+      "group": "blog-35a4cc3251f64ea3",
+      "archive": "kubernetes",
+      "path": "content/en/blog/_posts/2018-10-08-support-for-azure-vmss.md",
+      "license": "CC-BY-4.0",
+      "authorship_stratum": "same_bylined_work_matched_passages",
+      "versions": [
+        "0ef096e4cb577c30739f19e19a017217e5ca4807"
+      ],
+      "raw_blob_sha256": "08f3ca5e995acb32f332dfe5234e012c505df2f4bb6d9338ba3c2758b17faf76",
+      "license_notice_sha256": "617cdaceecf894d9ace4481855d3a7326ba11c32e2a4b254811c69c70650a526"
+    },
+    {
+      "group": "blog-403c4f16ac7094f0",
+      "archive": "kubernetes",
+      "path": "content/en/blog/_posts/2019-03-21-a-guide-to-kubernetes-admission-controllers.md",
+      "license": "CC-BY-4.0",
+      "authorship_stratum": "same_bylined_work_matched_passages",
+      "versions": [
+        "0ef096e4cb577c30739f19e19a017217e5ca4807"
+      ],
+      "raw_blob_sha256": "4c87883124e0ca906bc5b6d39d391660936aeecb34ae91d842bc270848cf0041",
+      "license_notice_sha256": "617cdaceecf894d9ace4481855d3a7326ba11c32e2a4b254811c69c70650a526"
+    },
+    {
+      "group": "blog-4192bcfb33fd5e73",
+      "archive": "kubernetes",
+      "path": "content/en/blog/_posts/2019-01-15-container-storage-interface-ga.md",
+      "license": "CC-BY-4.0",
+      "authorship_stratum": "same_bylined_work_matched_passages",
+      "versions": [
+        "0ef096e4cb577c30739f19e19a017217e5ca4807"
+      ],
+      "raw_blob_sha256": "ac150e0be797682f45322813aa2acbaa6071447654c43b8d8e8d0bd728eb3223",
+      "license_notice_sha256": "617cdaceecf894d9ace4481855d3a7326ba11c32e2a4b254811c69c70650a526"
+    },
+    {
+      "group": "blog-45d7537f260951ab",
+      "archive": "kubernetes",
+      "path": "content/en/blog/_posts/2018-10-10-runtimeclass.md",
+      "license": "CC-BY-4.0",
+      "authorship_stratum": "same_bylined_work_matched_passages",
+      "versions": [
+        "0ef096e4cb577c30739f19e19a017217e5ca4807"
+      ],
+      "raw_blob_sha256": "19bff499c0aff89f3cf042343aa49f12db7002e25459986c94b730bd6c7c8f50",
+      "license_notice_sha256": "617cdaceecf894d9ace4481855d3a7326ba11c32e2a4b254811c69c70650a526"
+    },
+    {
+      "group": "blog-4e84fe6264df3f07",
+      "archive": "kubernetes",
+      "path": "content/en/blog/_posts/2018-05-30-say-hello-to-discuss-kubernetes.md",
+      "license": "CC-BY-4.0",
+      "authorship_stratum": "same_bylined_work_matched_passages",
+      "versions": [
+        "0ef096e4cb577c30739f19e19a017217e5ca4807"
+      ],
+      "raw_blob_sha256": "edfe742bfb6135e12ca11e316c34ce8e9c4e40ee6b4ac96fd31a8d7420f10424",
+      "license_notice_sha256": "617cdaceecf894d9ace4481855d3a7326ba11c32e2a4b254811c69c70650a526"
+    },
+    {
+      "group": "blog-501302cbc3905297",
+      "archive": "kubernetes",
+      "path": "content/en/blog/_posts/2019-04-24-Hardware-Accelerated-SSLTLS-Termination-in-Ingress-Controllers-using-Kubernetes-Device-Plugins-and-RuntimeClass.md",
+      "license": "CC-BY-4.0",
+      "authorship_stratum": "same_bylined_work_matched_passages",
+      "versions": [
+        "0ef096e4cb577c30739f19e19a017217e5ca4807"
+      ],
+      "raw_blob_sha256": "cfbba2803a60c9950645ad7b865bfbbf4cb0b94f30bbd36f2db81ae5a22f5113",
+      "license_notice_sha256": "617cdaceecf894d9ace4481855d3a7326ba11c32e2a4b254811c69c70650a526"
+    },
+    {
+      "group": "blog-511f685ac6c46668",
+      "archive": "kubernetes",
+      "path": "content/en/blog/_posts/2019-12-02-gardener-project-update.md",
+      "license": "CC-BY-4.0",
+      "authorship_stratum": "same_bylined_work_matched_passages",
+      "versions": [
+        "0ef096e4cb577c30739f19e19a017217e5ca4807"
+      ],
+      "raw_blob_sha256": "12117152e24ff9434ea068025eb5b18a6a1d21df09999dc572dbca358d72b588",
+      "license_notice_sha256": "617cdaceecf894d9ace4481855d3a7326ba11c32e2a4b254811c69c70650a526"
+    },
+    {
+      "group": "blog-5a9b9892bf9ab76b",
+      "archive": "kubernetes",
+      "path": "content/en/blog/_posts/2018-07-24-cpu-manager.md",
+      "license": "CC-BY-4.0",
+      "authorship_stratum": "same_bylined_work_matched_passages",
+      "versions": [
+        "0ef096e4cb577c30739f19e19a017217e5ca4807"
+      ],
+      "raw_blob_sha256": "b064aedd5973bd7b4064fff8d98b7cd71fe769ebd78a40fd7d31ebbf90b078f7",
+      "license_notice_sha256": "617cdaceecf894d9ace4481855d3a7326ba11c32e2a4b254811c69c70650a526"
+    },
+    {
+      "group": "blog-5df93bb0a9e9bb06",
+      "archive": "kubernetes",
+      "path": "content/en/blog/_posts/2018-09-18-2018-linkerd-2-0.md",
+      "license": "CC-BY-4.0",
+      "authorship_stratum": "same_bylined_work_matched_passages",
+      "versions": [
+        "0ef096e4cb577c30739f19e19a017217e5ca4807"
+      ],
+      "raw_blob_sha256": "f570240bcd92839d50f396063d0bbd818cc8fe5bed8bd82ac86125eb45d97c26",
+      "license_notice_sha256": "617cdaceecf894d9ace4481855d3a7326ba11c32e2a4b254811c69c70650a526"
+    },
+    {
+      "group": "blog-6b65b01af7536341",
+      "archive": "kubernetes",
+      "path": "content/en/blog/_posts/2018-12-05-new-contributor-shanghai.md",
+      "license": "CC-BY-4.0",
+      "authorship_stratum": "same_bylined_work_matched_passages",
+      "versions": [
+        "0ef096e4cb577c30739f19e19a017217e5ca4807"
+      ],
+      "raw_blob_sha256": "1e3feca72eeb20f9e5fa16bea114290d58483d4f7d02ba74b22cea648862f986",
+      "license_notice_sha256": "617cdaceecf894d9ace4481855d3a7326ba11c32e2a4b254811c69c70650a526"
+    },
+    {
+      "group": "blog-7988c024801f182f",
+      "archive": "kubernetes",
+      "path": "content/en/blog/_posts/2019-03-19-kubeedge-k8s-based-edge-intro.md",
+      "license": "CC-BY-4.0",
+      "authorship_stratum": "same_bylined_work_matched_passages",
+      "versions": [
+        "0ef096e4cb577c30739f19e19a017217e5ca4807"
+      ],
+      "raw_blob_sha256": "b9e46e9d79de011e3b83edd09422d77b39e77d79f6a773dd5903b80ff169f662",
+      "license_notice_sha256": "617cdaceecf894d9ace4481855d3a7326ba11c32e2a4b254811c69c70650a526"
+    },
+    {
+      "group": "blog-90be1152316ad39b",
+      "archive": "kubernetes",
+      "path": "content/en/blog/_posts/2018-07-12-resizing-persistent-volumes-using-kubernetes.md",
+      "license": "CC-BY-4.0",
+      "authorship_stratum": "same_bylined_work_matched_passages",
+      "versions": [
+        "0ef096e4cb577c30739f19e19a017217e5ca4807"
+      ],
+      "raw_blob_sha256": "b5336b1e69f168fbcdd49580040e2aecf071bccf3c62da9edf62308626211ab6",
+      "license_notice_sha256": "617cdaceecf894d9ace4481855d3a7326ba11c32e2a4b254811c69c70650a526"
+    },
+    {
+      "group": "blog-98a84cb5f76e3de4",
+      "archive": "kubernetes",
+      "path": "content/en/blog/_posts/2019-06-20-Future-of-CRDs-Structural-Schemas.md",
+      "license": "CC-BY-4.0",
+      "authorship_stratum": "same_bylined_work_matched_passages",
+      "versions": [
+        "0ef096e4cb577c30739f19e19a017217e5ca4807"
+      ],
+      "raw_blob_sha256": "9d909b6337f37488268af259d797fd332db201114613f4cc49289c3fa46b9e3a",
+      "license_notice_sha256": "617cdaceecf894d9ace4481855d3a7326ba11c32e2a4b254811c69c70650a526"
+    },
+    {
+      "group": "blog-a64d789ef2e9ded3",
+      "archive": "kubernetes",
+      "path": "content/en/blog/_posts/2018-11-07-grpc-load-balancing-with-linkerd.md",
+      "license": "CC-BY-4.0",
+      "authorship_stratum": "same_bylined_work_matched_passages",
+      "versions": [
+        "0ef096e4cb577c30739f19e19a017217e5ca4807"
+      ],
+      "raw_blob_sha256": "116bdb718d771cde7fd1703025c27890062c7cb9547bea650e0e94110208e0bf",
+      "license_notice_sha256": "617cdaceecf894d9ace4481855d3a7326ba11c32e2a4b254811c69c70650a526"
+    },
+    {
+      "group": "blog-ae7dd71913d8e49e",
+      "archive": "kubernetes",
+      "path": "content/en/blog/_posts/2018-07-18-11-ways-not-to-get-hacked.md",
+      "license": "CC-BY-4.0",
+      "authorship_stratum": "same_bylined_work_matched_passages",
+      "versions": [
+        "0ef096e4cb577c30739f19e19a017217e5ca4807"
+      ],
+      "raw_blob_sha256": "e0a77648fc0580c71a99ba5dd40b525c64cdc9d2b59618b9c004f63f00f314f7",
+      "license_notice_sha256": "617cdaceecf894d9ace4481855d3a7326ba11c32e2a4b254811c69c70650a526"
+    },
+    {
+      "group": "blog-b1ad3b4682187491",
+      "archive": "kubernetes",
+      "path": "content/en/blog/_posts/2018-10-02-network-bootable-farm-with-ltsp.md",
+      "license": "CC-BY-4.0",
+      "authorship_stratum": "same_bylined_work_matched_passages",
+      "versions": [
+        "0ef096e4cb577c30739f19e19a017217e5ca4807"
+      ],
+      "raw_blob_sha256": "5eeacd41a6a98ab75deb344452fd8b5abaa12770e91a0dc6457a94018e9950e5",
+      "license_notice_sha256": "617cdaceecf894d9ace4481855d3a7326ba11c32e2a4b254811c69c70650a526"
+    },
+    {
+      "group": "blog-b8bc067475431d75",
+      "archive": "kubernetes",
+      "path": "content/en/blog/_posts/2018-07-20-history-kubernetes-community.md",
+      "license": "CC-BY-4.0",
+      "authorship_stratum": "same_bylined_work_matched_passages",
+      "versions": [
+        "0ef096e4cb577c30739f19e19a017217e5ca4807"
+      ],
+      "raw_blob_sha256": "ce223ae8d621d13cb181cb9ff4419c379cff884b9169a57e4b9536195ac61b8d",
+      "license_notice_sha256": "617cdaceecf894d9ace4481855d3a7326ba11c32e2a4b254811c69c70650a526"
+    },
+    {
+      "group": "blog-bb5ccc7edfb3cc4d",
+      "archive": "kubernetes",
+      "path": "content/en/blog/_posts/2018-05-24-kubernetes-containerd-integration-goes-ga.md",
+      "license": "CC-BY-4.0",
+      "authorship_stratum": "same_bylined_work_matched_passages",
+      "versions": [
+        "0ef096e4cb577c30739f19e19a017217e5ca4807"
+      ],
+      "raw_blob_sha256": "8b6886150ddf4fbfa17a0fa17d4e02ee2eedf730b5a3c9ef9fb09198d5aab29d",
+      "license_notice_sha256": "617cdaceecf894d9ace4481855d3a7326ba11c32e2a4b254811c69c70650a526"
+    },
+    {
+      "group": "blog-bd5ae606c3843072",
+      "archive": "kubernetes",
+      "path": "content/en/blog/_posts/2019-03-28-PID-Limiting.md",
+      "license": "CC-BY-4.0",
+      "authorship_stratum": "same_bylined_work_matched_passages",
+      "versions": [
+        "0ef096e4cb577c30739f19e19a017217e5ca4807"
+      ],
+      "raw_blob_sha256": "33d0cf91aee300c6e4162161d0a46d61aae71b8b5539e86dd36c502b33b00b82",
+      "license_notice_sha256": "617cdaceecf894d9ace4481855d3a7326ba11c32e2a4b254811c69c70650a526"
+    },
+    {
+      "group": "blog-be5578cd4e55abe6",
+      "archive": "kubernetes",
+      "path": "content/en/blog/_posts/2019-04-01-kubernetes-v1-14-delivers-production-level-support-for-nodes-and-windows-containers.md",
+      "license": "CC-BY-4.0",
+      "authorship_stratum": "same_bylined_work_matched_passages",
+      "versions": [
+        "0ef096e4cb577c30739f19e19a017217e5ca4807"
+      ],
+      "raw_blob_sha256": "df730e8d2a8066dd0c97713daf3714d106a30770a4b67d69762b105d247e4487",
+      "license_notice_sha256": "617cdaceecf894d9ace4481855d3a7326ba11c32e2a4b254811c69c70650a526"
+    },
+    {
+      "group": "blog-c3aef5e6490ff545",
+      "archive": "kubernetes",
+      "path": "content/en/blog/_posts/2018-10-26-tips-for-first-kubecon-presentation-part-2.md",
+      "license": "CC-BY-4.0",
+      "authorship_stratum": "same_bylined_work_matched_passages",
+      "versions": [
+        "0ef096e4cb577c30739f19e19a017217e5ca4807"
+      ],
+      "raw_blob_sha256": "b732a76ef38e664994b46b9f7fea5385abe86f89057a1261222621e37d48871b",
+      "license_notice_sha256": "617cdaceecf894d9ace4481855d3a7326ba11c32e2a4b254811c69c70650a526"
+    }
+  ],
+  "outcomes": [
+    {
+      "group": "kubernetes-e1a8fe859faf9700",
+      "role": "before",
+      "focus": [
+        316,
+        552
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "kubernetes-e1a8fe859faf9700",
+      "role": "after",
+      "focus": [
+        316,
+        526
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "kubernetes-e1a8fe859faf9700",
+      "role": "smol2",
+      "focus": [
+        316,
+        555
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-04a69d44522bb6af",
+      "role": "before",
+      "focus": [
+        113,
+        189
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": true,
+          "useful": false
+        },
+        "supplement": {
+          "flag": true,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-04a69d44522bb6af",
+      "role": "after",
+      "focus": [
+        264,
+        342
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-0575679df6664607",
+      "role": "before",
+      "focus": [
+        235,
+        354
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-0575679df6664607",
+      "role": "after",
+      "focus": [
+        197,
+        317
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-0575679df6664607",
+      "role": "qwen",
+      "focus": [
+        235,
+        351
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-0578a0bf6775698d",
+      "role": "before",
+      "focus": [
+        320,
+        450
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-0578a0bf6775698d",
+      "role": "after",
+      "focus": [
+        218,
+        336
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-0578a0bf6775698d",
+      "role": "qwen",
+      "focus": [
+        320,
+        416
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": true,
+          "useful": true
+        },
+        "supplement": {
+          "flag": true,
+          "useful": true
+        }
+      }
+    },
+    {
+      "group": "blog-0578a0bf6775698d",
+      "role": "smol2",
+      "focus": [
+        320,
+        409
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-062b86202af2a108",
+      "role": "before",
+      "focus": [
+        226,
+        423
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-062b86202af2a108",
+      "role": "after",
+      "focus": [
+        230,
+        469
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-062b86202af2a108",
+      "role": "qwen",
+      "focus": [
+        226,
+        436
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-062b86202af2a108",
+      "role": "smol2",
+      "focus": [
+        226,
+        355
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-07f64291ad7bacbf",
+      "role": "before",
+      "focus": [
+        258,
+        349
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-07f64291ad7bacbf",
+      "role": "after",
+      "focus": [
+        112,
+        237
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-07f64291ad7bacbf",
+      "role": "smol2",
+      "focus": [
+        258,
+        337
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-08419d3e08b1594e",
+      "role": "before",
+      "focus": [
+        391,
+        522
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-08419d3e08b1594e",
+      "role": "after",
+      "focus": [
+        268,
+        372
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-08419d3e08b1594e",
+      "role": "qwen",
+      "focus": [
+        391,
+        541
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-08419d3e08b1594e",
+      "role": "smol2",
+      "focus": [
+        391,
+        505
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-12323f6f96fc7125",
+      "role": "before",
+      "focus": [
+        191,
+        339
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-12323f6f96fc7125",
+      "role": "after",
+      "focus": [
+        151,
+        219
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-12323f6f96fc7125",
+      "role": "qwen",
+      "focus": [
+        191,
+        346
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-12323f6f96fc7125",
+      "role": "smol2",
+      "focus": [
+        191,
+        382
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": true
+        },
+        "matched_context": {
+          "flag": true,
+          "useful": true
+        },
+        "supplement": {
+          "flag": true,
+          "useful": true
+        }
+      }
+    },
+    {
+      "group": "blog-1c353ae23a890b86",
+      "role": "before",
+      "focus": [
+        184,
+        252
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-1c353ae23a890b86",
+      "role": "after",
+      "focus": [
+        175,
+        301
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-1c353ae23a890b86",
+      "role": "qwen",
+      "focus": [
+        184,
+        258
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-1c353ae23a890b86",
+      "role": "smol2",
+      "focus": [
+        184,
+        282
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-22b7f1074d0f57d1",
+      "role": "before",
+      "focus": [
+        351,
+        456
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-22b7f1074d0f57d1",
+      "role": "after",
+      "focus": [
+        388,
+        469
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-22b7f1074d0f57d1",
+      "role": "qwen",
+      "focus": [
+        351,
+        444
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-22b7f1074d0f57d1",
+      "role": "smol2",
+      "focus": [
+        351,
+        491
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-26fed517b34cbba4",
+      "role": "before",
+      "focus": [
+        256,
+        406
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-26fed517b34cbba4",
+      "role": "after",
+      "focus": [
+        265,
+        437
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": true
+        },
+        "matched_context": {
+          "flag": true,
+          "useful": false
+        },
+        "supplement": {
+          "flag": true,
+          "useful": true
+        }
+      }
+    },
+    {
+      "group": "blog-26fed517b34cbba4",
+      "role": "qwen",
+      "focus": [
+        256,
+        347
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-26fed517b34cbba4",
+      "role": "smol2",
+      "focus": [
+        256,
+        388
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": true
+        },
+        "matched_context": {
+          "flag": true,
+          "useful": true
+        },
+        "supplement": {
+          "flag": true,
+          "useful": true
+        }
+      }
+    },
+    {
+      "group": "blog-289bbac352d06ffa",
+      "role": "before",
+      "focus": [
+        294,
+        376
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-289bbac352d06ffa",
+      "role": "after",
+      "focus": [
+        208,
+        308
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-289bbac352d06ffa",
+      "role": "qwen",
+      "focus": [
+        294,
+        402
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-2ef42ff27c384743",
+      "role": "before",
+      "focus": [
+        211,
+        316
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-2ef42ff27c384743",
+      "role": "after",
+      "focus": [
+        166,
+        343
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-2ef42ff27c384743",
+      "role": "qwen",
+      "focus": [
+        211,
+        292
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-2ef42ff27c384743",
+      "role": "smol2",
+      "focus": [
+        211,
+        313
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-32cb9f1c53754254",
+      "role": "before",
+      "focus": [
+        202,
+        306
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-32cb9f1c53754254",
+      "role": "after",
+      "focus": [
+        243,
+        323
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-32cb9f1c53754254",
+      "role": "qwen",
+      "focus": [
+        202,
+        297
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-32cb9f1c53754254",
+      "role": "smol2",
+      "focus": [
+        202,
+        328
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-343cfeb9ce95ae6c",
+      "role": "before",
+      "focus": [
+        221,
+        385
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-343cfeb9ce95ae6c",
+      "role": "after",
+      "focus": [
+        361,
+        512
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-343cfeb9ce95ae6c",
+      "role": "qwen",
+      "focus": [
+        221,
+        323
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-343cfeb9ce95ae6c",
+      "role": "smol2",
+      "focus": [
+        221,
+        338
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-35a4cc3251f64ea3",
+      "role": "before",
+      "focus": [
+        197,
+        283
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-35a4cc3251f64ea3",
+      "role": "after",
+      "focus": [
+        208,
+        323
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-35a4cc3251f64ea3",
+      "role": "qwen",
+      "focus": [
+        197,
+        294
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-35a4cc3251f64ea3",
+      "role": "smol2",
+      "focus": [
+        197,
+        264
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-403c4f16ac7094f0",
+      "role": "before",
+      "focus": [
+        258,
+        375
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-403c4f16ac7094f0",
+      "role": "after",
+      "focus": [
+        479,
+        595
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-403c4f16ac7094f0",
+      "role": "qwen",
+      "focus": [
+        258,
+        385
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-4192bcfb33fd5e73",
+      "role": "before",
+      "focus": [
+        397,
+        504
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": true,
+          "useful": false
+        },
+        "supplement": {
+          "flag": true,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-4192bcfb33fd5e73",
+      "role": "after",
+      "focus": [
+        233,
+        472
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-4192bcfb33fd5e73",
+      "role": "qwen",
+      "focus": [
+        397,
+        482
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-45d7537f260951ab",
+      "role": "before",
+      "focus": [
+        219,
+        323
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": true,
+          "useful": true
+        },
+        "supplement": {
+          "flag": true,
+          "useful": true
+        }
+      }
+    },
+    {
+      "group": "blog-45d7537f260951ab",
+      "role": "after",
+      "focus": [
+        182,
+        284
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-45d7537f260951ab",
+      "role": "qwen",
+      "focus": [
+        219,
+        331
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": true,
+          "useful": true
+        },
+        "supplement": {
+          "flag": true,
+          "useful": true
+        }
+      }
+    },
+    {
+      "group": "blog-4e84fe6264df3f07",
+      "role": "before",
+      "focus": [
+        315,
+        470
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-4e84fe6264df3f07",
+      "role": "after",
+      "focus": [
+        302,
+        481
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-4e84fe6264df3f07",
+      "role": "smol2",
+      "focus": [
+        315,
+        464
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": true
+        },
+        "matched_context": {
+          "flag": true,
+          "useful": true
+        },
+        "supplement": {
+          "flag": true,
+          "useful": true
+        }
+      }
+    },
+    {
+      "group": "blog-501302cbc3905297",
+      "role": "before",
+      "focus": [
+        194,
+        325
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-501302cbc3905297",
+      "role": "after",
+      "focus": [
+        279,
+        392
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-501302cbc3905297",
+      "role": "qwen",
+      "focus": [
+        194,
+        301
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-501302cbc3905297",
+      "role": "smol2",
+      "focus": [
+        194,
+        287
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-511f685ac6c46668",
+      "role": "before",
+      "focus": [
+        246,
+        414
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": true
+        },
+        "matched_context": {
+          "flag": true,
+          "useful": true
+        },
+        "supplement": {
+          "flag": true,
+          "useful": true
+        }
+      }
+    },
+    {
+      "group": "blog-511f685ac6c46668",
+      "role": "after",
+      "focus": [
+        213,
+        360
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-511f685ac6c46668",
+      "role": "smol2",
+      "focus": [
+        246,
+        363
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": true
+        },
+        "matched_context": {
+          "flag": true,
+          "useful": false
+        },
+        "supplement": {
+          "flag": true,
+          "useful": true
+        }
+      }
+    },
+    {
+      "group": "blog-5a9b9892bf9ab76b",
+      "role": "before",
+      "focus": [
+        284,
+        377
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-5a9b9892bf9ab76b",
+      "role": "after",
+      "focus": [
+        209,
+        302
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": true,
+          "useful": true
+        },
+        "supplement": {
+          "flag": true,
+          "useful": true
+        }
+      }
+    },
+    {
+      "group": "blog-5a9b9892bf9ab76b",
+      "role": "qwen",
+      "focus": [
+        284,
+        368
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-5a9b9892bf9ab76b",
+      "role": "smol2",
+      "focus": [
+        284,
+        358
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-5df93bb0a9e9bb06",
+      "role": "before",
+      "focus": [
+        96,
+        246
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-5df93bb0a9e9bb06",
+      "role": "after",
+      "focus": [
+        116,
+        220
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-5df93bb0a9e9bb06",
+      "role": "qwen",
+      "focus": [
+        96,
+        255
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-5df93bb0a9e9bb06",
+      "role": "smol2",
+      "focus": [
+        96,
+        260
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-6b65b01af7536341",
+      "role": "before",
+      "focus": [
+        331,
+        471
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-6b65b01af7536341",
+      "role": "after",
+      "focus": [
+        260,
+        421
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-6b65b01af7536341",
+      "role": "smol2",
+      "focus": [
+        331,
+        506
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-7988c024801f182f",
+      "role": "before",
+      "focus": [
+        223,
+        313
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-7988c024801f182f",
+      "role": "after",
+      "focus": [
+        228,
+        338
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-7988c024801f182f",
+      "role": "smol2",
+      "focus": [
+        223,
+        317
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": true,
+          "useful": false
+        },
+        "supplement": {
+          "flag": true,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-90be1152316ad39b",
+      "role": "before",
+      "focus": [
+        200,
+        342
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-90be1152316ad39b",
+      "role": "after",
+      "focus": [
+        205,
+        383
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-90be1152316ad39b",
+      "role": "qwen",
+      "focus": [
+        200,
+        337
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-90be1152316ad39b",
+      "role": "smol2",
+      "focus": [
+        200,
+        301
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-98a84cb5f76e3de4",
+      "role": "before",
+      "focus": [
+        206,
+        346
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-98a84cb5f76e3de4",
+      "role": "after",
+      "focus": [
+        207,
+        380
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-98a84cb5f76e3de4",
+      "role": "smol2",
+      "focus": [
+        206,
+        324
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-a64d789ef2e9ded3",
+      "role": "before",
+      "focus": [
+        327,
+        383
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-a64d789ef2e9ded3",
+      "role": "after",
+      "focus": [
+        157,
+        295
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-a64d789ef2e9ded3",
+      "role": "qwen",
+      "focus": [
+        327,
+        388
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-a64d789ef2e9ded3",
+      "role": "smol2",
+      "focus": [
+        327,
+        387
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-ae7dd71913d8e49e",
+      "role": "before",
+      "focus": [
+        185,
+        363
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-ae7dd71913d8e49e",
+      "role": "after",
+      "focus": [
+        258,
+        460
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-ae7dd71913d8e49e",
+      "role": "qwen",
+      "focus": [
+        185,
+        326
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-ae7dd71913d8e49e",
+      "role": "smol2",
+      "focus": [
+        185,
+        362
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-b1ad3b4682187491",
+      "role": "before",
+      "focus": [
+        199,
+        281
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-b1ad3b4682187491",
+      "role": "after",
+      "focus": [
+        322,
+        400
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-b1ad3b4682187491",
+      "role": "qwen",
+      "focus": [
+        199,
+        282
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-b8bc067475431d75",
+      "role": "before",
+      "focus": [
+        236,
+        346
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-b8bc067475431d75",
+      "role": "after",
+      "focus": [
+        255,
+        403
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-b8bc067475431d75",
+      "role": "qwen",
+      "focus": [
+        236,
+        357
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-bb5ccc7edfb3cc4d",
+      "role": "before",
+      "focus": [
+        258,
+        349
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-bb5ccc7edfb3cc4d",
+      "role": "after",
+      "focus": [
+        277,
+        376
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-bd5ae606c3843072",
+      "role": "before",
+      "focus": [
+        158,
+        373
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": true
+        },
+        "matched_context": {
+          "flag": true,
+          "useful": false
+        },
+        "supplement": {
+          "flag": true,
+          "useful": true
+        }
+      }
+    },
+    {
+      "group": "blog-bd5ae606c3843072",
+      "role": "after",
+      "focus": [
+        142,
+        327
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-bd5ae606c3843072",
+      "role": "qwen",
+      "focus": [
+        158,
+        324
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": true
+        },
+        "matched_context": {
+          "flag": true,
+          "useful": false
+        },
+        "supplement": {
+          "flag": true,
+          "useful": true
+        }
+      }
+    },
+    {
+      "group": "blog-bd5ae606c3843072",
+      "role": "smol2",
+      "focus": [
+        158,
+        322
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": true
+        },
+        "matched_context": {
+          "flag": true,
+          "useful": false
+        },
+        "supplement": {
+          "flag": true,
+          "useful": true
+        }
+      }
+    },
+    {
+      "group": "blog-be5578cd4e55abe6",
+      "role": "before",
+      "focus": [
+        264,
+        420
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-be5578cd4e55abe6",
+      "role": "after",
+      "focus": [
+        430,
+        627
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-be5578cd4e55abe6",
+      "role": "qwen",
+      "focus": [
+        264,
+        395
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-be5578cd4e55abe6",
+      "role": "smol2",
+      "focus": [
+        264,
+        413
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": true
+        },
+        "matched_context": {
+          "flag": true,
+          "useful": false
+        },
+        "supplement": {
+          "flag": true,
+          "useful": true
+        }
+      }
+    },
+    {
+      "group": "blog-c3aef5e6490ff545",
+      "role": "before",
+      "focus": [
+        216,
+        395
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": true,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-c3aef5e6490ff545",
+      "role": "after",
+      "focus": [
+        126,
+        242
+      ],
+      "ranked_exact_center_first": true,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        },
+        "supplement": {
+          "flag": false,
+          "useful": false
+        }
+      }
+    },
+    {
+      "group": "blog-c3aef5e6490ff545",
+      "role": "qwen",
+      "focus": [
+        216,
+        393
+      ],
+      "ranked_exact_center_first": false,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": true
+        },
+        "matched_context": {
+          "flag": true,
+          "useful": false
+        },
+        "supplement": {
+          "flag": true,
+          "useful": true
+        }
+      }
+    }
+  ]
+}

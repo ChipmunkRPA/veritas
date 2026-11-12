@@ -178,6 +178,9 @@ localization on 32 separately generated one-sentence edits.
 The [archived PEP writing pilot](writing-pep-editorial-intake-2026-11-11.md)
 replays five dated work histories and compares exact sentence locations on
 generated rewrites and ordinary editorial revisions.
+The [archived technical prose transfer](writing-archived-passage-transfer-2026-11-12.md)
+replays 125 held passages, including one historical revision, and compares a
+fixed sentence ranker and its combination with the current check.
 
 The [offline video interval verifier](video-native-interval-replay-2026-11-11.md)
 checks the source clock and exact before, during and after pixels with Python

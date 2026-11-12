@@ -59,6 +59,8 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
     setSelected(frame)
     player.current?.scrollIntoView?.({ block: 'center', behavior: 'auto' })
   }
+  const hold = set.picture_hold
+  const laterFrames = hold && set.coverage ? set.coverage.frame_count - hold.frames_scanned : 0
   const renderFrames = (packet: VideoEvidencePacket, frames: VideoEvidenceFrame[], refined: boolean) =>
     <div className="mt-5 space-y-5">{frames.map((frame) => {
       const crop = frame.artifact_refs.crop && packet.artifacts[frame.artifact_refs.crop]
@@ -80,12 +82,14 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
     })}</div>
 
   return <div id="media-evidence-visual" data-testid="video-evidence-content" className="scroll-mt-20">
-    {set.picture_hold && <section aria-labelledby="video-picture-hold-heading" className="mt-4 rounded-md border border-border p-4">
+    {hold && <section aria-labelledby="video-picture-hold-heading" className="mt-4 rounded-md border border-border p-4">
       <h3 id="video-picture-hold-heading" className="m-0 text-body font-medium">Identical consecutive frames</h3>
-      {set.picture_hold.status === 'unavailable' ? <p className="mt-2 mb-0 text-small text-text-muted">This check could not verify a sequence in the opening frames.</p>
-        : <p className="mt-2 mb-0 text-small">Checked {set.picture_hold.frames_scanned} consecutive opening frames{set.picture_hold.last_stream_time_s != null
-          && ` through ${seconds(set.picture_hold.last_stream_time_s)} on the source clock`}. {set.picture_hold.status === 'no_match'
-          ? 'No qualifying hold was found in that range.' : <a className="underline" href={`#media-evidence-${set.picture_hold.packet_id}`}>Inspect the recorded hold</a>}</p>}
+      {hold.status === 'unavailable' ? <p className="mt-2 mb-0 text-small text-text-muted">{hold.reason ?? 'This check could not verify a sequence of frames.'}</p>
+        : <p className="mt-2 mb-0 text-small">Checked {hold.frames_scanned} frames from the start{hold.last_stream_time_s != null
+          && ` through ${seconds(hold.last_stream_time_s)} on the source clock`}. {hold.status === 'no_match'
+          ? 'No qualifying hold was found in that range.' : <a className="underline" href={`#media-evidence-${hold.packet_id}`}>Inspect the recorded hold</a>}</p>}
+      {!!hold.continuity_breaks && <p className="mt-2 mb-0 text-caption text-text-muted">The scan found {hold.continuity_breaks} gaps or unverifiable transitions in the frame sequence.</p>}
+      {hold.status !== 'unavailable' && laterFrames > 0 && <p className="mt-2 mb-0 text-caption text-text-muted">{laterFrames} later {laterFrames === 1 ? 'frame was' : 'frames were'} outside this check.</p>}
       <p className="mt-2 mb-0 text-caption text-text-muted">Still cards, capture interruptions, and ordinary editing can repeat a frame. This check carries no AI confidence weight.</p>
     </section>}
     {set.coverage ? <div className="mt-4 rounded-md border border-border p-4 text-small text-text-muted">

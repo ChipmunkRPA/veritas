@@ -543,6 +543,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
             for frame in source_frames:
                 if frame.index in exact_indices and (not frame.pts_verified or frame.pts != anchors[frame.index]["pts"]):
                     raise PacketIntegrityError("Face evidence image lacks a verified decoded timestamp")
+                if frame.index in endpoints and not frame.pts_verified:
+                    raise PacketIntegrityError("Picture hold endpoint lacks a verified decoded timestamp")
                 decoded[frame.index] = frame.rgb
     for i in wanted:
         if i not in decoded or hashlib.sha256(decoded[i].tobytes()).hexdigest() != anchors[i]["decoded_rgb_sha256"]:

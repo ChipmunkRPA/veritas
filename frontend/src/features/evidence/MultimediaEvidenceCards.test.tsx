@@ -202,6 +202,20 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.getByText(/PTS 12520 at 1\/1000/)).toBeTruthy()
   })
 
+  it('reports the actual scanned prefix, clock breaks and uncovered tail for the extended hold check', () => {
+    const set = structuredClone(video)
+    set.version = 'video-evidence-10'
+    set.coverage!.frame_count = 900
+    set.picture_hold = { status: 'no_match', frames_scanned: 751, frame_limit: 751, last_frame_index: 750,
+      last_stream_time_s: 30, last_pts: 30000, time_base: '1/1000', reason: null, packet_id: null,
+      scan_scope: 'extended-native-prefix/1', continuity_breaks: 2 }
+    show(set)
+    expect(screen.getByText(/Checked 751 frames from the start through 30\.000 s on the source clock/)).toBeTruthy()
+    expect(screen.getByText(/found 2 gaps or unverifiable transitions/)).toBeTruthy()
+    expect(screen.getByText('149 later frames were outside this check.')).toBeTruthy()
+    expect(screen.queryByRole('link', { name: 'Inspect the recorded hold' })).toBeNull()
+  })
+
   it('shows two original time ranges and one identical recording in the video voice lane', () => {
     const set = { ...structuredClone(video), version: 'video-evidence-10' }
     const sample = (start_sample: number) => ({ start_sample, end_sample: start_sample + 4000,

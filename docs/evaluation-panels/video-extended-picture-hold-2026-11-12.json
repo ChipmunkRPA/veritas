@@ -1,0 +1,650 @@
+{
+  "schema": "chipmunk.extended-picture-hold-local-study/1",
+  "cases": 30,
+  "webcam_source_groups": 6,
+  "source_slots": [
+    1,
+    2,
+    4,
+    7,
+    8,
+    11
+  ],
+  "scopes_completed": 30,
+  "legacy_frames_scanned": 3488,
+  "extended_frames_scanned": 8029,
+  "independently_hash_verified_frames": 8235,
+  "max_rgb_work_mib": 1530.6,
+  "max_inspection_seconds": 2.334,
+  "inspection_scope": {
+    "max_frames": 900,
+    "max_source_seconds": 30,
+    "max_rgb_work_mib": 1536,
+    "max_rgb_frame_mib": 32,
+    "decode_watchdog_seconds": 8
+  },
+  "simulated_paid_app_check": {
+    "source_frames": 640,
+    "checked_frames": 601,
+    "uncovered_frames": 39,
+    "endpoint_frames": [
+      347,
+      363
+    ],
+    "elapsed_seconds": [
+      17.35,
+      18.15
+    ],
+    "chrome_exact_endpoints_and_seek": true,
+    "pdf_and_json_agreed": true,
+    "signed_original_replay_verified": true
+  },
+  "outcomes": [
+    {
+      "authored": [
+        170,
+        194
+      ],
+      "case": "late_variable_clock",
+      "checked_frames": 250,
+      "clock_breaks": 0,
+      "found_interval": [
+        170,
+        194
+      ],
+      "old_frames": 120,
+      "old_interval": null,
+      "resolution": [
+        480,
+        270
+      ],
+      "rgb_work_mib": 92.7,
+      "scope": "extended-native-prefix/1",
+      "seconds": 0.222,
+      "source_frames": 250,
+      "time_base": "1/1000"
+    },
+    {
+      "authored": [
+        155,
+        183
+      ],
+      "case": "late_vp9",
+      "checked_frames": 250,
+      "clock_breaks": 0,
+      "found_interval": [
+        155,
+        183
+      ],
+      "old_frames": 120,
+      "old_interval": null,
+      "resolution": [
+        480,
+        270
+      ],
+      "rgb_work_mib": 92.7,
+      "scope": "extended-native-prefix/1",
+      "seconds": 0.175,
+      "source_frames": 250,
+      "time_base": "1/1000"
+    },
+    {
+      "authored": [
+        170,
+        189
+      ],
+      "case": "holds_cross_clock_break",
+      "checked_frames": 250,
+      "clock_breaks": 1,
+      "found_interval": null,
+      "old_frames": 120,
+      "old_interval": null,
+      "resolution": [
+        480,
+        270
+      ],
+      "rgb_work_mib": 92.7,
+      "scope": "extended-native-prefix/1",
+      "seconds": 0.124,
+      "source_frames": 250,
+      "time_base": "1/1000"
+    },
+    {
+      "authored": [
+        580,
+        619
+      ],
+      "case": "hold_truncated_by_budget",
+      "checked_frames": 601,
+      "clock_breaks": 0,
+      "found_interval": [
+        580,
+        600
+      ],
+      "old_frames": 120,
+      "old_interval": null,
+      "resolution": [
+        480,
+        270
+      ],
+      "rgb_work_mib": 222.8,
+      "scope": "extended-native-prefix/1",
+      "seconds": 0.256,
+      "source_frames": 680,
+      "time_base": "1/1000"
+    },
+    {
+      "authored": [
+        622,
+        651
+      ],
+      "case": "hold_beyond_budget",
+      "checked_frames": 601,
+      "clock_breaks": 0,
+      "found_interval": null,
+      "old_frames": 120,
+      "old_interval": null,
+      "resolution": [
+        480,
+        270
+      ],
+      "rgb_work_mib": 222.8,
+      "scope": "extended-native-prefix/1",
+      "seconds": 0.252,
+      "source_frames": 680,
+      "time_base": "1/1000"
+    },
+    {
+      "authored": [
+        170,
+        194
+      ],
+      "case": "late_lossy_delivery",
+      "checked_frames": 250,
+      "clock_breaks": 0,
+      "found_interval": [
+        174,
+        191
+      ],
+      "old_frames": 120,
+      "old_interval": null,
+      "resolution": [
+        480,
+        270
+      ],
+      "rgb_work_mib": 92.7,
+      "scope": "extended-native-prefix/1",
+      "seconds": 0.111,
+      "source_frames": 250,
+      "time_base": "1/1000"
+    },
+    {
+      "authored": null,
+      "case": "webcam_1_unchanged",
+      "checked_frames": 240,
+      "clock_breaks": 0,
+      "found_interval": null,
+      "old_frames": 120,
+      "old_interval": null,
+      "resolution": [
+        480,
+        270
+      ],
+      "rgb_work_mib": 89.0,
+      "scope": "extended-native-prefix/1",
+      "seconds": 0.219,
+      "source_frames": 240,
+      "time_base": "1/1000"
+    },
+    {
+      "authored": null,
+      "case": "webcam_1_ordinary_cut",
+      "checked_frames": 240,
+      "clock_breaks": 0,
+      "found_interval": null,
+      "old_frames": 120,
+      "old_interval": null,
+      "resolution": [
+        480,
+        270
+      ],
+      "rgb_work_mib": 89.0,
+      "scope": "extended-native-prefix/1",
+      "seconds": 0.222,
+      "source_frames": 240,
+      "time_base": "1/1000"
+    },
+    {
+      "authored": [
+        158,
+        179
+      ],
+      "case": "webcam_1_late",
+      "checked_frames": 240,
+      "clock_breaks": 0,
+      "found_interval": [
+        158,
+        179
+      ],
+      "old_frames": 120,
+      "old_interval": null,
+      "resolution": [
+        480,
+        270
+      ],
+      "rgb_work_mib": 89.0,
+      "scope": "extended-native-prefix/1",
+      "seconds": 0.31,
+      "source_frames": 240,
+      "time_base": "1/1000"
+    },
+    {
+      "authored": null,
+      "case": "webcam_2_unchanged",
+      "checked_frames": 240,
+      "clock_breaks": 0,
+      "found_interval": null,
+      "old_frames": 120,
+      "old_interval": null,
+      "resolution": [
+        480,
+        270
+      ],
+      "rgb_work_mib": 89.0,
+      "scope": "extended-native-prefix/1",
+      "seconds": 0.226,
+      "source_frames": 240,
+      "time_base": "1/1000"
+    },
+    {
+      "authored": null,
+      "case": "webcam_2_ordinary_cut",
+      "checked_frames": 240,
+      "clock_breaks": 0,
+      "found_interval": null,
+      "old_frames": 120,
+      "old_interval": null,
+      "resolution": [
+        480,
+        270
+      ],
+      "rgb_work_mib": 89.0,
+      "scope": "extended-native-prefix/1",
+      "seconds": 0.25,
+      "source_frames": 240,
+      "time_base": "1/1000"
+    },
+    {
+      "authored": [
+        158,
+        179
+      ],
+      "case": "webcam_2_late",
+      "checked_frames": 240,
+      "clock_breaks": 0,
+      "found_interval": [
+        158,
+        179
+      ],
+      "old_frames": 120,
+      "old_interval": null,
+      "resolution": [
+        480,
+        270
+      ],
+      "rgb_work_mib": 89.0,
+      "scope": "extended-native-prefix/1",
+      "seconds": 0.211,
+      "source_frames": 240,
+      "time_base": "1/1000"
+    },
+    {
+      "authored": null,
+      "case": "webcam_3_unchanged",
+      "checked_frames": 240,
+      "clock_breaks": 0,
+      "found_interval": null,
+      "old_frames": 120,
+      "old_interval": null,
+      "resolution": [
+        480,
+        270
+      ],
+      "rgb_work_mib": 89.0,
+      "scope": "extended-native-prefix/1",
+      "seconds": 0.173,
+      "source_frames": 240,
+      "time_base": "1/1000"
+    },
+    {
+      "authored": null,
+      "case": "webcam_3_ordinary_cut",
+      "checked_frames": 240,
+      "clock_breaks": 0,
+      "found_interval": null,
+      "old_frames": 120,
+      "old_interval": null,
+      "resolution": [
+        480,
+        270
+      ],
+      "rgb_work_mib": 89.0,
+      "scope": "extended-native-prefix/1",
+      "seconds": 0.182,
+      "source_frames": 240,
+      "time_base": "1/1000"
+    },
+    {
+      "authored": [
+        158,
+        179
+      ],
+      "case": "webcam_3_late",
+      "checked_frames": 240,
+      "clock_breaks": 0,
+      "found_interval": [
+        157,
+        179
+      ],
+      "old_frames": 120,
+      "old_interval": null,
+      "resolution": [
+        480,
+        270
+      ],
+      "rgb_work_mib": 89.0,
+      "scope": "extended-native-prefix/1",
+      "seconds": 0.171,
+      "source_frames": 240,
+      "time_base": "1/1000"
+    },
+    {
+      "authored": null,
+      "case": "webcam_4_unchanged",
+      "checked_frames": 240,
+      "clock_breaks": 0,
+      "found_interval": null,
+      "old_frames": 120,
+      "old_interval": null,
+      "resolution": [
+        480,
+        270
+      ],
+      "rgb_work_mib": 89.0,
+      "scope": "extended-native-prefix/1",
+      "seconds": 0.175,
+      "source_frames": 240,
+      "time_base": "1/1000"
+    },
+    {
+      "authored": null,
+      "case": "webcam_4_ordinary_cut",
+      "checked_frames": 240,
+      "clock_breaks": 0,
+      "found_interval": null,
+      "old_frames": 120,
+      "old_interval": null,
+      "resolution": [
+        480,
+        270
+      ],
+      "rgb_work_mib": 89.0,
+      "scope": "extended-native-prefix/1",
+      "seconds": 0.175,
+      "source_frames": 240,
+      "time_base": "1/1000"
+    },
+    {
+      "authored": [
+        158,
+        179
+      ],
+      "case": "webcam_4_late",
+      "checked_frames": 240,
+      "clock_breaks": 0,
+      "found_interval": [
+        157,
+        179
+      ],
+      "old_frames": 120,
+      "old_interval": null,
+      "resolution": [
+        480,
+        270
+      ],
+      "rgb_work_mib": 89.0,
+      "scope": "extended-native-prefix/1",
+      "seconds": 0.167,
+      "source_frames": 240,
+      "time_base": "1/1000"
+    },
+    {
+      "authored": null,
+      "case": "webcam_5_unchanged",
+      "checked_frames": 240,
+      "clock_breaks": 0,
+      "found_interval": null,
+      "old_frames": 120,
+      "old_interval": null,
+      "resolution": [
+        480,
+        270
+      ],
+      "rgb_work_mib": 89.0,
+      "scope": "extended-native-prefix/1",
+      "seconds": 0.285,
+      "source_frames": 240,
+      "time_base": "1/1000"
+    },
+    {
+      "authored": null,
+      "case": "webcam_5_ordinary_cut",
+      "checked_frames": 240,
+      "clock_breaks": 0,
+      "found_interval": null,
+      "old_frames": 120,
+      "old_interval": null,
+      "resolution": [
+        480,
+        270
+      ],
+      "rgb_work_mib": 89.0,
+      "scope": "extended-native-prefix/1",
+      "seconds": 0.238,
+      "source_frames": 240,
+      "time_base": "1/1000"
+    },
+    {
+      "authored": [
+        158,
+        179
+      ],
+      "case": "webcam_5_late",
+      "checked_frames": 240,
+      "clock_breaks": 0,
+      "found_interval": [
+        158,
+        179
+      ],
+      "old_frames": 120,
+      "old_interval": null,
+      "resolution": [
+        480,
+        270
+      ],
+      "rgb_work_mib": 89.0,
+      "scope": "extended-native-prefix/1",
+      "seconds": 0.194,
+      "source_frames": 240,
+      "time_base": "1/1000"
+    },
+    {
+      "authored": null,
+      "case": "webcam_6_unchanged",
+      "checked_frames": 240,
+      "clock_breaks": 0,
+      "found_interval": null,
+      "old_frames": 120,
+      "old_interval": null,
+      "resolution": [
+        480,
+        270
+      ],
+      "rgb_work_mib": 89.0,
+      "scope": "extended-native-prefix/1",
+      "seconds": 0.206,
+      "source_frames": 240,
+      "time_base": "1/1000"
+    },
+    {
+      "authored": null,
+      "case": "webcam_6_ordinary_cut",
+      "checked_frames": 240,
+      "clock_breaks": 0,
+      "found_interval": null,
+      "old_frames": 120,
+      "old_interval": null,
+      "resolution": [
+        480,
+        270
+      ],
+      "rgb_work_mib": 89.0,
+      "scope": "extended-native-prefix/1",
+      "seconds": 0.2,
+      "source_frames": 240,
+      "time_base": "1/1000"
+    },
+    {
+      "authored": [
+        158,
+        179
+      ],
+      "case": "webcam_6_late",
+      "checked_frames": 240,
+      "clock_breaks": 0,
+      "found_interval": [
+        158,
+        179
+      ],
+      "old_frames": 120,
+      "old_interval": null,
+      "resolution": [
+        480,
+        270
+      ],
+      "rgb_work_mib": 89.0,
+      "scope": "extended-native-prefix/1",
+      "seconds": 0.191,
+      "source_frames": 240,
+      "time_base": "1/1000"
+    },
+    {
+      "authored": null,
+      "case": "webcam_1_native_control",
+      "checked_frames": 306,
+      "clock_breaks": 0,
+      "found_interval": null,
+      "old_frames": 120,
+      "old_interval": null,
+      "resolution": [
+        1280,
+        720
+      ],
+      "rgb_work_mib": 806.8,
+      "scope": "extended-native-prefix/1",
+      "seconds": 1.489,
+      "source_frames": 306,
+      "time_base": "1/1000"
+    },
+    {
+      "authored": null,
+      "case": "webcam_2_native_control",
+      "checked_frames": 258,
+      "clock_breaks": 0,
+      "found_interval": null,
+      "old_frames": 64,
+      "old_interval": null,
+      "resolution": [
+        1920,
+        1080
+      ],
+      "rgb_work_mib": 1530.6,
+      "scope": "extended-native-prefix/1",
+      "seconds": 2.334,
+      "source_frames": 306,
+      "time_base": "1/1000"
+    },
+    {
+      "authored": null,
+      "case": "webcam_3_native_control",
+      "checked_frames": 171,
+      "clock_breaks": 0,
+      "found_interval": null,
+      "old_frames": 120,
+      "old_interval": null,
+      "resolution": [
+        1280,
+        720
+      ],
+      "rgb_work_mib": 450.9,
+      "scope": "extended-native-prefix/1",
+      "seconds": 0.607,
+      "source_frames": 171,
+      "time_base": "1/1000"
+    },
+    {
+      "authored": null,
+      "case": "webcam_4_native_control",
+      "checked_frames": 172,
+      "clock_breaks": 0,
+      "found_interval": null,
+      "old_frames": 64,
+      "old_interval": null,
+      "resolution": [
+        1920,
+        1080
+      ],
+      "rgb_work_mib": 1020.4,
+      "scope": "extended-native-prefix/1",
+      "seconds": 1.181,
+      "source_frames": 172,
+      "time_base": "1/1000"
+    },
+    {
+      "authored": null,
+      "case": "webcam_5_native_control",
+      "checked_frames": 293,
+      "clock_breaks": 0,
+      "found_interval": null,
+      "old_frames": 120,
+      "old_interval": null,
+      "resolution": [
+        1280,
+        720
+      ],
+      "rgb_work_mib": 772.6,
+      "scope": "extended-native-prefix/1",
+      "seconds": 0.903,
+      "source_frames": 293,
+      "time_base": "1/1000"
+    },
+    {
+      "authored": null,
+      "case": "webcam_6_native_control",
+      "checked_frames": 307,
+      "clock_breaks": 0,
+      "found_interval": null,
+      "old_frames": 120,
+      "old_interval": null,
+      "resolution": [
+        1280,
+        720
+      ],
+      "rgb_work_mib": 809.5,
+      "scope": "extended-native-prefix/1",
+      "seconds": 0.936,
+      "source_frames": 307,
+      "time_base": "1/1000"
+    }
+  ]
+}

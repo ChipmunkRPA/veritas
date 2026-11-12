@@ -7,6 +7,7 @@ import json
 import math
 from collections import defaultdict
 from contextlib import closing
+from itertools import groupby, pairwise
 from pathlib import Path
 from zipfile import ZipFile
 
@@ -20,6 +21,7 @@ from app.detectors.video import face_return, face_return_fine_scene
 from app.detectors.video.decode import DecodedFrame, FrameTable, decode_frames, probe_frames
 from app.detectors.video.frames import probe as probe_container
 from app.detectors.video.lipsync import source_mouth_patch
+from app.evidence import picture_hold_binding
 from app.evidence.face_boundary_binding import validate_packet as validate_face_boundary
 from app.evidence.face_return_binding import DENSE_ENCODING, FINE_SCENE_METHOD
 from app.evidence.face_return_binding import validate_packet as validate_face_return
@@ -122,6 +124,39 @@ def _verify_scene_support(record, frames) -> int:
     return count
 
 
+def _verify_picture_hold(evidence, table, observations) -> None:
+    """Recompute the scoped longest equal-picture run from the supplied source."""
+    coverage = evidence["picture_hold"]
+    ticks = [point for point, _ in observations]
+    broken = [i for i, (first, second) in enumerate(pairwise(ticks), 1)
+              if first is None or second is None or not 0 < (second - first) * table.tb <= picture_hold_binding.MAX_STEP]
+    if len(broken) != coverage["continuity_breaks"] or ticks[-1] != coverage["last_pts"]:
+        raise ValueError("The original video differs from the recorded repeated-picture coverage")
+    duration = picture_hold_binding.MIN_SPAN
+    eligible = False
+    holds = []
+    for start, stop in pairwise([0, *broken, len(ticks)]):
+        if ticks[start] is None or (ticks[stop - 1] - ticks[start]) * table.tb < duration:
+            continue
+        eligible = True
+        index = start
+        for digest, run in groupby(observations[start:stop], key=lambda row: row[1]):
+            count = sum(1 for _ in run)
+            end = index + count - 1
+            span = ticks[end] - ticks[index]
+            if span * table.tb >= duration:
+                holds.append((span, index, end, digest))
+            index = end + 1
+    if not holds:
+        if coverage["status"] != ("no_match" if eligible else "unavailable"):
+            raise ValueError("The original video does not reproduce the recorded repeated-picture outcome")
+        return
+    _, start, end, digest = max(holds, key=lambda row: row[0])
+    match = next((packet.get("picture_hold") for packet in evidence["packets"] if packet["id"] == picture_hold_binding.PACKET_ID), None)
+    if match is None or (match["start_frame_index"], match["end_frame_index"], match["decoded_rgb_sha256"]) != (start, end, digest):
+        raise ValueError("The longest repeated picture differs from the original video")
+
+
 def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     if bundle.get("schema") != SCHEMA or bundle.get("analysis", {}).get("kind") != "video":
         raise ValueError("Original-video verification requires a public video evidence package")
@@ -144,6 +179,12 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             or canonical_hash(table.to_json()) != source["frame_table_sha256"]):
         raise ValueError("The decoded frame table differs from its commitment. Check the local FFmpeg version.")
 
+    picture_hold_binding.validate(evidence)
+    hold = evidence.get("picture_hold") or {}
+    hold_frames = 0
+    if hold.get("scan_scope") == picture_hold_binding.EXTENDED_SCOPE:
+        picture_hold_binding.validate_source_clock(evidence, table.pts, table.interpolated)
+        hold_frames = hold["frames_scanned"]
     pictures, mouths, faces, scenes = defaultdict(list), defaultdict(list), defaultdict(list), defaultdict(list)
     fine_records, fine_indices, fine_frames = [], set(), {}
     interpolated = set(table.interpolated)
@@ -168,7 +209,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         if record.get("method") == FINE_SCENE_METHOD:
             fine_records.append(record)
             fine_indices.update(row["frame_index"] for row in record["scene_frame_inputs"])
-    indices = set(pictures) | set(mouths) | set(faces) | set(scenes)
+    indices = set(pictures) | set(mouths) | set(faces) | set(scenes) | set(range(hold_frames))
+    hold_observations = []
     found = set()
     images = patches = alignments = 0
     with closing(decode_frames(original, table, sorted(indices))) as stream:
@@ -176,6 +218,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             index = frame.index
             found.add(index)
             rgb_sha = hashlib.sha256(frame.rgb).hexdigest()
+            if index < hold_frames:
+                hold_observations.append((frame.pts if frame.pts_verified else None, rgb_sha))
             if index in pictures:
                 with Image.fromarray(frame.rgb) as image:
                     for packet, item in pictures[index]:
@@ -200,7 +244,10 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         raise ValueError("The decoder did not return every referenced native frame")
     if _sha(original) != digest:
         raise ValueError("The supplied original changed during decoding")
+    if hold_frames:
+        _verify_picture_hold(evidence, table, hold_observations)
     fine_edges = sum(_verify_scene_support(record, fine_frames) for record in fine_records)
     return (f"Original SHA-256 and the source frame clock matched. Verified native frames ({len(found)}), "
             f"original images or crops ({images}), mouth patches ({patches}), and aligned face inputs ({alignments})."
-            + (f" Recomputed fine background boundaries ({fine_edges})." if fine_edges else ""))
+            + (f" Recomputed fine background boundaries ({fine_edges})." if fine_edges else "")
+            + (f" Replayed every frame in the repeated-picture inspection ({hold_frames})." if hold_frames else ""))

@@ -26,30 +26,34 @@ from app.storage.db import Analysis, AnalysisStage, Base
 from app.storage.objects import ObjectStore
 
 
-def _source(path, *, held=False):
+def _source(path, *, held=False, late=False):
     y, x = np.mgrid[:48, :80]
     frames = [np.stack(((x + 13*i) % 256, (y * 5 + i) % 256, (x + y + i) % 256), axis=-1).astype(np.uint8)
-              for i in range(40)]
+              for i in range(190 if late else 40)]
     if held:
-        frames[10:26] = [frames[10]] * 16
+        start = 145 if late else 10
+        frames[start:start + 16] = [frames[start]] * 16
     subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-f", "rawvideo", "-pixel_format", "rgb24", "-video_size", "80x48",
                     "-framerate", "20", "-i", "pipe:0", "-c:v", "libx264rgb", "-crf", "0", "-output_ts_offset", "5", str(path)],
                    input=b"".join(frame.tobytes() for frame in frames), check=True, timeout=30)
     return frames
 
 
-def test_encoded_picture_hold_is_reported_exported_and_verified(tmp_path, monkeypatch):
+@pytest.mark.parametrize("late", [False, True])
+def test_encoded_picture_hold_is_reported_exported_and_verified(tmp_path, monkeypatch, late):
     path = tmp_path / "exact-hold.mkv"
-    frames = _source(path, held=True)
+    frames = _source(path, held=True, late=late)
     table = probe_frames(path)
     store = ObjectStore(tmp_path / "objects")
     original = store.put_file(path)
     scan = picture_hold.inspect(store.path_for(original.sha256), table, origin=5.)
     match = scan["match"]
-    assert scan["coverage"]["frames_scanned"] == 40
-    assert (match["start_frame_index"], match["end_frame_index"], match["frame_count"]) == (10, 25, 16)
-    assert (match["start_playback_s"], match["end_playback_s"], match["span_s"]) == (.5, 1.25, .75)
-    assert match["decoded_rgb_sha256"] == hashlib.sha256(frames[10]).hexdigest()
+    start, end = (145, 160) if late else (10, 25)
+    assert scan["coverage"]["frames_scanned"] == len(frames)
+    assert scan["coverage"].get("scan_scope") == (binding.EXTENDED_SCOPE if late else None)
+    assert (match["start_frame_index"], match["end_frame_index"], match["frame_count"]) == (start, end, 16)
+    assert (match["start_playback_s"], match["end_playback_s"], match["span_s"]) == (start / 20, end / 20, .75)
+    assert match["decoded_rgb_sha256"] == hashlib.sha256(frames[start]).hexdigest()
 
     database = create_engine("sqlite://")
     Base.metadata.create_all(database)
@@ -83,10 +87,10 @@ def test_encoded_picture_hold_is_reported_exported_and_verified(tmp_path, monkey
         [packet] = document["packets"]
         assert packet["id"] == binding.PACKET_ID
         assert packet["picture_hold"] == match
-        assert [f["anchor"]["frame_index"] for f in packet["frames"]] == [10, 25]
+        assert [f["anchor"]["frame_index"] for f in packet["frames"]] == [start, end]
         asset = service.asset_refs(document)[packet["artifacts"]["held_picture"]["sha256"]]
         with Image.open(io.BytesIO(store.read_bytes(asset["sha256"]))) as saved:
-            np.testing.assert_array_equal(np.asarray(saved), frames[10])
+            np.testing.assert_array_equal(np.asarray(saved), frames[start])
         changed = copy.deepcopy(document)
         changed["picture_hold"]["last_pts"] += 1
         changed["picture_hold"]["last_stream_time_s"] += .001
@@ -107,7 +111,37 @@ def test_encoded_picture_hold_is_reported_exported_and_verified(tmp_path, monkey
             assert "Repeated picture across consecutive frames" in text and "VPH01" in text
             assert "16 consecutive decoded frames" in text and "0.750 seconds apart" in text
         _check_public_zip(SimpleNamespace(db=db, store=store, analysis=analysis, frozen=frozen, document=document),
-                          tmp_path, monkeypatch, pdf.pdf)
+                          tmp_path, monkeypatch, pdf.pdf, source_video=path if late else None)
+
+
+def test_completed_opening_is_preserved_when_extended_decoder_stops(monkeypatch, tmp_path):
+    pts = tuple(range(0, 15000, 50))
+    table = FrameTable("1/1000", pts, (0,), "I" * len(pts), 8, 8, 8, 8)
+    arrays = [np.full((8, 8, 3), i % 256, dtype=np.uint8) for i in range(len(pts))]
+    arrays[20:40] = [arrays[20]] * 20
+    arrays[150:179] = [arrays[150]] * 29
+
+    def decode(path, table, wanted, **kwargs):
+        for i in wanted:
+            if i == 190:
+                return
+            yield DecodedFrame(i, pts[i], arrays[i])
+
+    monkeypatch.setattr(picture_hold, "decode_frames", decode)
+    record = picture_hold.inspect(tmp_path / "unused.mkv", table, origin=None)
+    assert record["coverage"] == binding.coverage("matched", binding.MATCH, table.time_base, limit=120, scanned=120,
+                                                   last_pts=pts[119])
+    assert record["match"]["start_frame_index"] == 20
+    assert record["match"]["end_frame_index"] == 39
+
+
+def test_extended_budget_is_bounded_by_duration_geometry_and_frame_count():
+    pts = tuple(range(5000, 65000, 40))
+    table = FrameTable("1/1000", pts, (0,), "I" * len(pts), 640, 360, 640, 360)
+    assert binding.extended_frame_limit(pts, table.tb, 640, 360) == 751
+    assert binding.extended_frame_limit(pts, table.tb, 1920, 1080) == binding.EXTENDED_MAX_RGB_BYTES // (1920 * 1080 * 3)
+    assert binding.extended_frame_limit(pts, table.tb, 7680, 4320) == 0
+    assert binding.extended_frame_limit(tuple(range(0, 2000)), table.tb, 640, 360) == binding.EXTENDED_MAX_FRAMES
 
 
 def test_moving_encoded_clip_returns_checked_no_match(tmp_path):

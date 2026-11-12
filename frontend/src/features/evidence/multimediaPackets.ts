@@ -55,7 +55,7 @@ export interface VideoEvidenceSet extends SetBase {
   source: { sha256: string; time_base?: string; width?: number; height?: number; timeline_origin_s?: number | null }
   picture_hold?: { status: 'matched' | 'no_match' | 'unavailable'; frames_scanned: number; frame_limit: number;
     last_frame_index: number | null; last_stream_time_s: number | null; last_pts: number | null; time_base: string;
-    reason: string | null; packet_id: string | null }
+    reason: string | null; packet_id: string | null; scan_scope?: 'extended-native-prefix/1'; continuity_breaks?: number }
   coverage?: { frame_count: number; scored_frame_count: number; window_frame_indices: number[]; window_check_count: number;
     decoded_frame_indices: number[]; table_truncated: boolean; unmapped_observations: number;
     face_detail_repeat?: { status: 'withheld' | 'retained' | 'unassessed'; observation: string;

@@ -2,8 +2,11 @@
 {% set hold = evidence.picture_hold %}
 <h3>Identical consecutive frames</h3>
 {% if hold.status == 'unavailable' %}<p>{{ hold.reason }}</p>{% else %}
-<p>Checked {{ hold.frames_scanned }} consecutive opening frames{% if hold.last_stream_time_s is not none %} through {{ '%.3f' | format(hold.last_stream_time_s) }} s on the source clock{% endif %}. {% if hold.status == 'matched' %}<a href="#multimedia-evidence-{{ hold.packet_id }}">Inspect the recorded hold</a>.{% else %}No qualifying hold was found in that range.{% endif %}</p>
+<p>Checked {{ hold.frames_scanned }} frames from the start{% if hold.last_stream_time_s is not none %} through {{ '%.3f' | format(hold.last_stream_time_s) }} s on the source clock{% endif %}. {% if hold.status == 'matched' %}<a href="#multimedia-evidence-{{ hold.packet_id }}">Inspect the recorded hold</a>.{% else %}No qualifying hold was found in that range.{% endif %}</p>
+{% set later_frames = evidence.get('picture_frame_count', 0) - hold.frames_scanned %}
+{% if later_frames > 0 %}<p class="caption">{{ later_frames }} later {{ 'frame was' if later_frames == 1 else 'frames were' }} outside this check.</p>{% endif %}
 {% endif %}
+{% if hold.get('continuity_breaks') %}<p class="caption">The scan found {{ hold.continuity_breaks }} gaps or unverifiable transitions in the frame sequence.</p>{% endif %}
 <p class="caption">Still cards, capture interruptions, and ordinary editing can repeat a frame. This check carries no AI confidence weight. JSON pointer <span class="mono">/picture_hold</span>.</p>
 {% endif %}
 {% for context, similar in [(evidence.get('repetition_context'), false), (evidence.get('similarity_context'), true)] if context %}

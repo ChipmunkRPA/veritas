@@ -374,6 +374,9 @@ matched H.264 inputs and native background pixels.
 The [timing and codec follow-up](video-timing-coverage-and-codec-holds-2026-11-11.md)
 records when a single timing window leaves change unassessed and compares
 exact and approximate picture holds on the same lossy and lossless deliveries.
+The [extended repeated-picture check](video-extended-picture-hold-2026-11-12.md)
+includes test clips that FFmpeg generates locally and a replay of every
+inspected frame when the original video accompanies the signed export.
 The [longer timing replay](video-longer-timing-transfer-2026-11-11.md)
 tests native windows with actual timing-change opportunity and separately reports
 measured windows, redraw overlaps, ordinary controls, and unassessed inputs.

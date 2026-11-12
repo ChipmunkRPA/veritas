@@ -14,6 +14,10 @@ PACKET_ID = "VPH01"
 MAX_FRAMES = 120
 MAX_RGB_BYTES = 384 * 1024**2
 MAX_FRAME_BYTES = 32 * 1024**2
+EXTENDED_SCOPE = "extended-native-prefix/1"
+EXTENDED_MAX_FRAMES = 900
+EXTENDED_MAX_RGB_BYTES = 1536 * 1024**2
+EXTENDED_MAX_SECONDS = 30
 MIN_SPAN = Fraction(1, 2)
 MAX_STEP = Fraction(1, 8)
 
@@ -22,6 +26,8 @@ PROVENANCE = "Trusted signed Content Credentials established AI involvement befo
 INCOMPLETE = "The opening frames could not all be decoded within the repeated-picture check's limits."
 TOO_SHORT = "The opening frames did not provide half a second of consecutive, verifiable picture timestamps."
 NO_MATCH = "No exact picture hold met the rule in the checked opening frames."
+EXTENDED_TOO_SHORT = "The inspected frames did not provide half a second of consecutive, verifiable picture timestamps."
+EXTENDED_NO_MATCH = "No exact picture hold met the rule in the inspected frame sequence."
 MATCH = "Consecutive source frames carry the same decoded picture."
 CONTEXT = "Still cards, a camera hold, screen recording, or editing can produce identical frames. This check carries no weight in the AI estimate."
 
@@ -31,12 +37,28 @@ def frame_limit(count: int, width: int, height: int) -> int:
     return min(count, MAX_FRAMES, MAX_RGB_BYTES // size) if 0 < size <= MAX_FRAME_BYTES else 0
 
 
+def _extended_frame_cap(count: int, width: int, height: int) -> int:
+    size = width * height * 3
+    return min(count, EXTENDED_MAX_FRAMES, EXTENDED_MAX_RGB_BYTES // size) if 0 < size <= MAX_FRAME_BYTES else 0
+
+
+def extended_frame_limit(pts: Sequence[int], tb: Fraction, width: int, height: int) -> int:
+    cap = _extended_frame_cap(len(pts), width, height)
+    if not cap:
+        return 0
+    cutoff = pts[0] + int(EXTENDED_MAX_SECONDS / tb)
+    return next((i for i in range(cap) if pts[i] > cutoff), cap)
+
+
 def coverage(status: str, reason: str, time_base: str, *, limit: int = 0, scanned: int = 0,
-             last_pts: int | None = None) -> dict:
-    return {"status": status, "reason": reason, "frame_limit": limit, "frames_scanned": scanned,
-            "last_frame_index": scanned - 1 if scanned else None, "last_pts": last_pts, "time_base": time_base,
-            "last_stream_time_s": None if last_pts is None else float(last_pts * Fraction(time_base)),
-            "packet_id": PACKET_ID if status == "matched" else None}
+             last_pts: int | None = None, continuity_breaks: int | None = None) -> dict:
+    result = {"status": status, "reason": reason, "frame_limit": limit, "frames_scanned": scanned,
+              "last_frame_index": scanned - 1 if scanned else None, "last_pts": last_pts, "time_base": time_base,
+              "last_stream_time_s": None if last_pts is None else float(last_pts * Fraction(time_base)),
+              "packet_id": PACKET_ID if status == "matched" else None}
+    if continuity_breaks is not None:
+        result.update(scan_scope=EXTENDED_SCOPE, continuity_breaks=continuity_breaks)
+    return result
 
 
 def observation(match: dict) -> str:
@@ -135,18 +157,29 @@ def validate(document: dict) -> None:
         _require(cover == coverage("unavailable", HISTORICAL, source["time_base"]) and not packets,
                  "Picture hold check claims coverage without a recorded inspection")
         return
-    _require(_digest(commitment) and limit == frame_limit(source["frame_count"], source["width"], source["height"]),
-             "Picture hold check differs from its recorded native budget")
+    native_limit = frame_limit(source["frame_count"], source["width"], source["height"])
+    _require(_digest(commitment), "Picture hold check omits its recorded commitment")
+    expanded = "scan_scope" in cover
+    if expanded:
+        breaks = cover.get("continuity_breaks")
+        _require(cover["scan_scope"] == EXTENDED_SCOPE and native_limit < limit <= _extended_frame_cap(
+            source["frame_count"], source["width"], source["height"]) and scanned == limit
+            and _integer(breaks) and 0 <= breaks < scanned,
+            "Picture hold check differs from its extended native budget")
+    else:
+        _require(limit == native_limit and "continuity_breaks" not in cover,
+                 "Picture hold check differs from its recorded native budget")
     if status == "matched":
         _require(scanned == limit and cover["reason"] == MATCH and cover["packet_id"] == PACKET_ID and len(packets) == 1
                  and packets[0].get("id") == PACKET_ID, "Picture hold check omits its recorded match")
         _match(packets[0], cover, source, tb)
     else:
+        no_match, too_short = (EXTENDED_NO_MATCH, EXTENDED_TOO_SHORT) if expanded else (NO_MATCH, TOO_SHORT)
         _require(not packets and cover["packet_id"] is None and
-                 ((status == "no_match" and cover["reason"] == NO_MATCH and scanned == limit and scanned >= 3)
-                  or (status == "unavailable" and cover["reason"] == TOO_SHORT and scanned == limit)
-                  or (status == "unavailable" and cover["reason"] == INCOMPLETE and scanned < limit)
-                  or (status == "unavailable" and cover["reason"] == PROVENANCE and scanned == 0)),
+                 ((status == "no_match" and cover["reason"] == no_match and scanned == limit and scanned >= 3)
+                  or (status == "unavailable" and cover["reason"] == too_short and scanned == limit)
+                  or (not expanded and status == "unavailable" and cover["reason"] == INCOMPLETE and scanned < limit)
+                  or (not expanded and status == "unavailable" and cover["reason"] == PROVENANCE and scanned == 0)),
                  "Picture hold coverage has an invalid outcome")
     match = packets[0]["picture_hold"] if packets else None
     _require(canonical_hash({"coverage": cover, "match": match}) == commitment,
@@ -164,7 +197,21 @@ def validate_record(document: dict, record: dict | None, *, table_pts: Sequence[
         _require(record is None, "Picture hold inspection is missing its published commitment")
         return
     _require(isinstance(record, dict) and canonical_hash(record) == commitment, "Picture hold differs from the recorded native inspection")
+    validate_source_clock(document, table_pts, interpolated)
+
+
+def validate_source_clock(document: dict, table_pts: Sequence[int], interpolated: Sequence[int]) -> None:
+    """Check that covered source indices, clocks and declared gaps match the original frame table."""
     cover = document["picture_hold"]
+    if cover.get("scan_scope") == EXTENDED_SCOPE:
+        source = document["source"]
+        tb = Fraction(source["time_base"])
+        expected = extended_frame_limit(table_pts, tb, source["width"], source["height"])
+        _require(expected == cover["frame_limit"], "Picture hold extension differs from its source-clock budget")
+        inferred = set(interpolated)
+        minimum_breaks = sum(i in inferred or i - 1 in inferred or not 0 < (right - left) * tb <= MAX_STEP
+                             for i, (left, right) in enumerate(zip(table_pts[:expected - 1], table_pts[1:expected]), 1))
+        _require(cover["continuity_breaks"] >= minimum_breaks, "Picture hold extension omits source-clock breaks")
     match = next((p["picture_hold"] for p in document["packets"] if p["id"] == PACKET_ID), None)
     last = cover["last_frame_index"]
     if cover["last_pts"] is not None:

@@ -26,6 +26,7 @@ from app.evidence.face_return_binding import (
     GUARDED_CODEC_METHOD,
     GUARDED_METHODS,
     GUARDED_SCENE_QUARTILE_POINT,
+    SECOND_HD_METHOD,
     SECOND_METHOD,
     SECOND_PRIOR_METHODS,
     observation,
@@ -158,9 +159,13 @@ def _inspect_return(details, inputs, yunet, recognizer, deadline, incumbent):
             dense_coverage = {"measured_face_frames": 0}
             coverage["dense_fallback"] = dense_coverage
             dense_plan = planned[0], tuple(range(0, len(table), 2))
+            context = [] if settings.video_face_second_return_review else None
+            additional = {} if context is None else {"context": context}
             _return_pass(details, inputs, yunet, recognizer, deadline, incumbent, dense_plan, dense_coverage,
-                         GUARDED_720P30_METHOD, stop, source_carrier="mp4")
+                         GUARDED_720P30_METHOD, stop, source_carrier="mp4", **additional)
             coverage.update(dense_coverage)
+            if context and (primary := details.get("face_return")) is not None:
+                _record_second_return(details, inputs, incumbent, primary, dense_plan, stop, context[0], SECOND_HD_METHOD)
         return
     dense = face_return.dense_schedule(table, inputs.encoding)
     path = getattr(inputs.store, "path", None)
@@ -222,7 +227,13 @@ def _inspect_second_return(details, inputs, yunet, recognizer, deadline, incumbe
                      DENSE_FRAME_PROFILES[len(inputs.table)], stop, context=context)
     if not context or time.monotonic() >= stop:
         return
-    features, faces, scenes = context[0]
+    _record_second_return(details, inputs, incumbent, primary, planned, stop, context[0], SECOND_METHOD)
+
+
+def _record_second_return(details, inputs, incumbent, primary, planned, stop, context, method):
+    if time.monotonic() >= stop:
+        return
+    features, faces, scenes = context
     earlier = [item for item in (primary, incumbent, details.get("face_boundary")) if item]
     times, scheduled = planned
     chosen, quartiles = face_return.second(times, scheduled, features, inputs.table, earlier)
@@ -232,7 +243,7 @@ def _inspect_second_return(details, inputs, yunet, recognizer, deadline, incumbe
     for index in chosen.scene_frames:
         face = features[index].face
         boundary_scenes[index] = {**scenes[index], "face_box": list(face.box()) if face is not None else None}
-    record = _return_record(inputs.table, scheduled, chosen, SECOND_METHOD, faces, boundary_scenes)
+    record = _return_record(inputs.table, scheduled, chosen, method, faces, boundary_scenes)
     details["face_return_secondary"] = {**record, "source_encoding": list(inputs.encoding), "source_carrier": "mp4",
         "scene_lower_quartiles": quartiles, "scene_lower_quartiles_hex": [value.hex() for value in quartiles]}
 

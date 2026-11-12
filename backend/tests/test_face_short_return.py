@@ -118,6 +118,61 @@ def test_second_range_evidence_rejects_missing_or_overlapping_primary():
                                          "face_return": {**second, "start_pts": 59, "end_pts": 65}}]})
 
 
+def test_hd_second_requires_guarded_primary_and_exact_native_gap():
+    primary = {"method": GUARDED_720P30_METHOD, "time_base": "1/30000", "start_pts": 64000, "end_pts": 70000}
+    second = {"method": face_return_binding.SECOND_HD_METHOD, "time_base": "1/30000", "start_pts": 88000, "end_pts": 96000}
+    packets = [{"face_return": record, "semantics": record["method"], "signal_refs": [{"id": "check-a"}]}
+               for record in (primary, second)]
+    document = {"version": face_return_binding.SECOND_HD_FACE_VERSION, "packets": packets}
+    face_return_binding.validate_set(document)
+    for version in (face_return_binding.SECOND_SHORT_FACE_VERSION, face_return_binding.GUARDED_720P30_FACE_VERSION):
+        with pytest.raises(ValueError, match="evidence version"):
+            face_return_binding.validate_set({**document, "version": version})
+    with pytest.raises(ValueError, match="requires an earlier qualified brief face range"):
+        face_return_binding.validate_second(second, {**primary, "method": DENSE_METHOD})
+    with pytest.raises(ValueError, match="overlaps or is too close"):
+        face_return_binding.validate_second({**second, "start_pts": 72000}, primary)
+    face_return_binding.validate_second({**second, "start_pts": 73000}, primary)
+
+
+def test_guarded_hd_second_range_reuses_the_incumbent_pass(monkeypatch):
+    original = table_for(30)
+    table = replace(original, width=1280, height=720, coded_width=1280, coded_height=720,
+                    pts=original.pts[:120], pict_types=original.pict_types[:120])
+    inputs = SequenceInputs(table, None, (), (), ("h264", "yuv420p"))
+    monkeypatch.setattr(face_return, "guarded_720p30_schedule", lambda *_: face_return.schedule(original))
+    monkeypatch.setattr(face_appearance.settings, "face_min_size", 48)
+    monkeypatch.setattr(face_appearance.settings, "video_face_second_return_review", True)
+    measured = object()
+    primary = {"method": GUARDED_720P30_METHOD}
+    passes = []
+
+    def run_pass(details, inputs, yunet, recognizer, deadline, incumbent, planned, coverage, method, stop, **options):
+        passes.append((method, stop))
+        if method == face_return.METHOD:
+            coverage.update(status="no_distinct_range", reason=None)
+        else:
+            assert options["source_carrier"] == "mp4"
+            options["context"].append(measured)
+            details["face_return"] = primary
+            coverage.update(status="localized", reason=None)
+
+    def record(details, inputs, incumbent, first, planned, stop, context, method):
+        assert first is primary and context is measured
+        assert passes[-1] == (GUARDED_720P30_METHOD, stop)
+        assert planned[1] == tuple(range(0, 120, 2))
+        assert method == face_return_binding.SECOND_HD_METHOD
+        details["face_return_secondary"] = {"method": method}
+
+    monkeypatch.setattr(face_appearance, "_return_pass", run_pass)
+    monkeypatch.setattr(face_appearance, "_record_second_return", record)
+    details = {}
+    face_appearance._inspect_return(details, inputs, None, None, None, None)
+    assert [method for method, _ in passes] == [face_return.METHOD, GUARDED_720P30_METHOD]
+    assert len({stop for _, stop in passes}) == 1
+    assert details["face_return_secondary"]["method"] == face_return_binding.SECOND_HD_METHOD
+
+
 @pytest.mark.parametrize("frame_count", [80, 120, 150])
 def test_dense_fallback_requires_measured_h264_profile_and_exact_native_ticks(frame_count):
     original = table_for(25)

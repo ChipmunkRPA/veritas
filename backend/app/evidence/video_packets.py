@@ -363,7 +363,7 @@ def _return_observations(result: dict, table: FrameTable, source: dict, anchors:
             raise PacketIntegrityError("Supplemental face evidence needs one confidence-neutral source check")
         incumbent = face_detail_repeat.original_range(details)
         if second is not None:
-            if second.get("method") != face_return_binding.SECOND_METHOD:
+            if second.get("method") not in face_return_binding.SECOND_METHODS:
                 raise PacketIntegrityError("The second face range has an unexpected review method")
             face_return_binding.validate_second(second, primary, incumbent, details.get("face_boundary"))
         for record in (primary, second):

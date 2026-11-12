@@ -13,6 +13,7 @@ from app.evidence.video_packet_versions import (
     FINE_SCENE_FACE_VERSION,
     GUARDED_720P30_FACE_VERSION,
     GUARDED_CODEC_FACE_VERSION,
+    SECOND_HD_FACE_VERSION,
     SECOND_SHORT_FACE_VERSION,
     SHORT_FACE_VERSION,
 )
@@ -24,9 +25,13 @@ FINE_SCENE_METHOD = "face-short-return/4"
 GUARDED_CODEC_METHOD = "face-short-return/5"
 GUARDED_720P30_METHOD = "face-short-return/6"
 SECOND_METHOD = "face-short-return/7"
+SECOND_HD_METHOD = "face-short-return/8"
 SECOND_PRIOR_METHODS = frozenset({METHOD, DENSE_METHOD, FINE_SCENE_METHOD})
+SECOND_METHODS = frozenset({SECOND_METHOD, SECOND_HD_METHOD})
 SECOND_MIN_GAP = 2
-GUARDED_METHODS = frozenset({GUARDED_CODEC_METHOD, GUARDED_720P30_METHOD, SECOND_METHOD})
+GUARDED_METHODS = frozenset({GUARDED_CODEC_METHOD, GUARDED_720P30_METHOD}) | SECOND_METHODS
+SECOND_BY_VERSION = {SECOND_SHORT_FACE_VERSION: SECOND_METHOD, SECOND_HD_FACE_VERSION: SECOND_HD_METHOD}
+PRIMARY_BY_SECOND = {SECOND_METHOD: SECOND_PRIOR_METHODS, SECOND_HD_METHOD: frozenset({GUARDED_720P30_METHOD})}
 GUARDED_720P30_DIMENSIONS = (1280, 720)
 GUARDED_720P30_STEP = Fraction(1, 30)
 FINE_SCENE_FRAME_COUNT = 120
@@ -46,7 +51,7 @@ DENSE_FRAME_PROFILES = {80: DENSE_DURATION_METHOD, 120: DENSE_METHOD, 150: DENSE
 METHOD_VERSIONS = {METHOD: SHORT_FACE_VERSION, DENSE_METHOD: DENSE_SHORT_FACE_VERSION,
                    DENSE_DURATION_METHOD: DENSE_DURATION_FACE_VERSION, FINE_SCENE_METHOD: FINE_SCENE_FACE_VERSION,
                    GUARDED_CODEC_METHOD: GUARDED_CODEC_FACE_VERSION, GUARDED_720P30_METHOD: GUARDED_720P30_FACE_VERSION,
-                   SECOND_METHOD: SECOND_SHORT_FACE_VERSION}
+                   SECOND_METHOD: SECOND_SHORT_FACE_VERSION, SECOND_HD_METHOD: SECOND_HD_FACE_VERSION}
 POINT = 0.10
 SCENE_POINT = 0.55
 ROLES = ("before", "during", "after")
@@ -98,7 +103,7 @@ def separated(left, right, before, after, base):
 
 
 def validate_second(record, primary, *incumbents):
-    _require(isinstance(primary, dict) and primary.get("method") in SECOND_PRIOR_METHODS,
+    _require(isinstance(primary, dict) and primary.get("method") in PRIMARY_BY_SECOND.get(record.get("method"), ()),
              "A second face range requires an earlier qualified brief face range")
     left, right = record["start_pts"], record["end_pts"]
     base = Fraction(record["time_base"])
@@ -113,8 +118,8 @@ def validate_set(document):
     packets = [packet for packet in document["packets"]
                if "face_return" in packet or packet.get("semantics") in METHOD_VERSIONS]
     selected = [packet.get("semantics") for packet in packets]
-    if document["version"] == SECOND_SHORT_FACE_VERSION:
-        _require(len(packets) == 2 and selected[0] in SECOND_PRIOR_METHODS and selected[1] == SECOND_METHOD
+    if second := SECOND_BY_VERSION.get(document["version"]):
+        _require(len(packets) == 2 and selected[0] in PRIMARY_BY_SECOND[second] and selected[1] == second
                  and packets[0].get("signal_refs") == packets[1].get("signal_refs"),
                  "The evidence version requires two qualified ranges from the same review")
         prior = [packet.get(key) for packet in document["packets"] for key in ("face_sequence", "face_boundary")
@@ -190,7 +195,7 @@ def validate_record(record, source, *, table_pts=None, interpolated=(), rotation
     _require(method in METHOD_VERSIONS and record["time_base"] == source["time_base"],
              "Short face-change method or source clock differs")
     dimensions = (source["width"], source["height"])
-    hd = method == GUARDED_720P30_METHOD
+    hd = method in (GUARDED_720P30_METHOD, SECOND_HD_METHOD)
     allowed_steps = (GUARDED_720P30_STEP,) if hd else PROFILE_STEPS.get(dimensions)
     _require(allowed_steps is not None and not (rotation or truncated or interpolated),
              "Short face-change evidence requires a supported upright source and complete native timestamps")

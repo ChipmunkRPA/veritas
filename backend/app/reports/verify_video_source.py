@@ -30,6 +30,7 @@ from app.evidence.video_packet_versions import (
     DENSE_FACE_VERSIONS,
     GUARDED_720P30_FACE_VERSION,
     GUARDED_CODEC_FACE_VERSION,
+    SECOND_HD_FACE_VERSION,
     SECOND_SHORT_FACE_VERSION,
 )
 from app.reports.public_verify import SCHEMA
@@ -185,7 +186,9 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     source = evidence["source"]
     encoding = None
     delivery = None
-    guarded_codec = evidence["version"] in {GUARDED_CODEC_FACE_VERSION, GUARDED_720P30_FACE_VERSION, SECOND_SHORT_FACE_VERSION}
+    guarded_codec = evidence["version"] in {
+        GUARDED_CODEC_FACE_VERSION, GUARDED_720P30_FACE_VERSION, SECOND_SHORT_FACE_VERSION, SECOND_HD_FACE_VERSION,
+    }
     if evidence["version"] in DENSE_FACE_VERSIONS:
         delivery = probe_container(original)
         encoding = delivery.get("codec"), delivery.get("pix_fmt")
@@ -255,8 +258,10 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             guarded_records.append(record)
             background_indices.update(row["frame_index"] for row in record["scene_frame_inputs"])
     if guarded_codec:
-        if (len(guarded_records) != 1 or encoding != tuple(guarded_records[0]["source_encoding"])
-                or face_return.source_carrier(original) != guarded_records[0]["source_carrier"]):
+        expected = 2 if evidence["version"] == SECOND_HD_FACE_VERSION else 1
+        carrier = face_return.source_carrier(original)
+        if (len(guarded_records) != expected or any(encoding != tuple(record["source_encoding"])
+                or carrier != record["source_carrier"] for record in guarded_records)):
             raise ValueError("The original video's codec or carrier differs from its guarded face-review scope")
     elif guarded_records:
         raise ValueError("Guarded face evidence requires its dedicated version")
@@ -330,7 +335,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     return (f"Original SHA-256 and the source frame clock matched. Verified native frames ({len(found)}), "
             f"original images or crops ({images}), mouth patches ({patches}), and aligned face inputs ({alignments})."
             + (f" Recomputed fine background boundaries ({fine_edges})." if fine_edges else "")
-            + (" Recomputed both guarded background boundaries and verified the source carrier." if guarded_codec else "")
+            + (" Recomputed 4 guarded background boundaries and verified the source carrier." if len(guarded_records) == 2 else
+               " Recomputed both guarded background boundaries and verified the source carrier." if guarded_codec else "")
             + (f" Replayed every frame in the repeated-picture inspection ({hold_frames})." if hold_frames else "")
             + (" Recomputed the held mouth-region pixel measurements." if local_mouth and local_mouth["match"] else "")
             + (" Recomputed the exact moving-sequence comparison." if sequence is not None else "")

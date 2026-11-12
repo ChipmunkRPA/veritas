@@ -1,0 +1,261 @@
+{
+  "admitted_to_scoped_serving": true,
+  "aggregate": {
+    "advance": true,
+    "cut_background_correlations": [
+      0.19769912958145142,
+      0.4734959006309509,
+      0.4734959006309509,
+      0.4760584831237793,
+      0.5027486085891724,
+      0.5177395343780518,
+      0.5193546414375305,
+      0.5193546414375305
+    ],
+    "freeze_sha256": "6eddf92858137633e64373f372d3764a42d1fca94d3679e689c92e66ec8cdb2a",
+    "gains": {
+      "added_source_groups": 3,
+      "added_under_tandem": 3,
+      "added_useful": 5,
+      "additional_cut": 0,
+      "additional_ordinary": 0,
+      "additional_wrong_dual": 0,
+      "additional_wrong_mixed": 0,
+      "new_complete_dual_files": 5
+    },
+    "gate": {
+      "added_source_groups": true,
+      "added_under_tandem": true,
+      "added_useful": true,
+      "additional_cut": true,
+      "additional_ordinary": true,
+      "additional_wrong_dual": true,
+      "additional_wrong_mixed": true,
+      "new_complete_dual_files": true
+    },
+    "media_bytes": 23247808,
+    "not_assessed_reasons": {
+      "no_qualified_primary_range": 32,
+      "sparse_range_outside_profile": 6
+    },
+    "protocol": {
+      "compression": {
+        "primary_crf": 23,
+        "tandem_crf": 35
+      },
+      "eligibility": "Use only the already measured 15 Hz grid after the actual Full 720p30 brief review publishes a first range. Retain prior ranges, measured source frame and background rules, 80 ms separation and the existing time budget.",
+      "gate": {
+        "added_source_groups": 3,
+        "added_under_tandem": 1,
+        "added_useful": 4,
+        "additional_cut": 0,
+        "additional_ordinary": 1,
+        "additional_wrong_dual": 1,
+        "additional_wrong_mixed": 1,
+        "new_complete_dual_files": 2
+      },
+      "maximum_media_bytes": 268435456,
+      "native_clock": "Only exact original 30 fps sources. No duplicate, interpolated or retimed source pictures.",
+      "placements": [
+        [
+          [
+            62,
+            68
+          ],
+          [
+            90,
+            98
+          ]
+        ],
+        [
+          [
+            67,
+            75
+          ],
+          [
+            94,
+            100
+          ]
+        ],
+        [
+          [
+            64,
+            70
+          ],
+          [
+            88,
+            96
+          ]
+        ],
+        [
+          [
+            65,
+            73
+          ],
+          [
+            91,
+            97
+          ]
+        ]
+      ],
+      "schema": "chipmunk.video-face-two-returns-hd/1",
+      "scope": [
+        1280,
+        720,
+        30,
+        120,
+        "h264",
+        "yuv420p",
+        "mp4"
+      ],
+      "source_cut_match": "Choose the other held original with the highest centered luminance border correlation on picture 60. Use a 96 by 64 area downsample and exclude rows 8\u201353 and columns 24\u201371 in the center. No inference."
+    },
+    "runtime": {
+      "elapsed_s": 445.4287970410078,
+      "held_sha256": "a7c11b5d34f14acecd5b26d70e8a73967c801db000741488d4fd5fd7c1a57706",
+      "peak_rss_bytes": 5258379264
+    },
+    "strata": {
+      "cross_recording_cuts": {
+        "files": 8,
+        "files_flagged_after": 0,
+        "files_flagged_before": 0,
+        "full_dual_after": 0,
+        "full_dual_before": 0,
+        "second_assessed": 0,
+        "true_ranges": 0,
+        "useful_after": 0,
+        "useful_before": 0,
+        "wrong_additions": 0
+      },
+      "light_then_swap": {
+        "files": 8,
+        "files_flagged_after": 6,
+        "files_flagged_before": 6,
+        "full_dual_after": 0,
+        "full_dual_before": 0,
+        "second_assessed": 6,
+        "true_ranges": 8,
+        "useful_after": 6,
+        "useful_before": 6,
+        "wrong_additions": 0
+      },
+      "original": {
+        "files": 8,
+        "files_flagged_after": 0,
+        "files_flagged_before": 0,
+        "full_dual_after": 0,
+        "full_dual_before": 0,
+        "second_assessed": 0,
+        "true_ranges": 0,
+        "useful_after": 0,
+        "useful_before": 0,
+        "wrong_additions": 0
+      },
+      "same_source_cuts": {
+        "files": 8,
+        "files_flagged_after": 0,
+        "files_flagged_before": 0,
+        "full_dual_after": 0,
+        "full_dual_before": 0,
+        "second_assessed": 0,
+        "true_ranges": 0,
+        "useful_after": 0,
+        "useful_before": 0,
+        "wrong_additions": 0
+      },
+      "swap_then_jump": {
+        "files": 8,
+        "files_flagged_after": 8,
+        "files_flagged_before": 8,
+        "full_dual_after": 0,
+        "full_dual_before": 0,
+        "second_assessed": 8,
+        "true_ranges": 8,
+        "useful_after": 8,
+        "useful_before": 8,
+        "wrong_additions": 0
+      },
+      "tandem_original": {
+        "files": 8,
+        "files_flagged_after": 0,
+        "files_flagged_before": 0,
+        "full_dual_after": 0,
+        "full_dual_before": 0,
+        "second_assessed": 0,
+        "true_ranges": 0,
+        "useful_after": 0,
+        "useful_before": 0,
+        "wrong_additions": 0
+      },
+      "tandem_two_swaps": {
+        "files": 8,
+        "files_flagged_after": 6,
+        "files_flagged_before": 6,
+        "full_dual_after": 3,
+        "full_dual_before": 0,
+        "second_assessed": 6,
+        "true_ranges": 16,
+        "useful_after": 9,
+        "useful_before": 6,
+        "wrong_additions": 0
+      },
+      "two_swaps": {
+        "files": 8,
+        "files_flagged_after": 6,
+        "files_flagged_before": 6,
+        "full_dual_after": 2,
+        "full_dual_before": 0,
+        "second_assessed": 6,
+        "true_ranges": 16,
+        "useful_after": 8,
+        "useful_before": 6,
+        "wrong_additions": 0
+      }
+    }
+  },
+  "ai_confidence_weight": 0,
+  "frozen_app_revision": "92e8a1d",
+  "independent_audit": {
+    "aggregate_sha256": "4f912ac5b4822cd59bb8491817917784c5c75093cece9f5893b2a0172200889a",
+    "byte_exact_reconstructions": 24,
+    "examples": {
+      "tandem_two_swaps": {
+        "anchor_s": [
+          "43/15",
+          "46/15",
+          "16/5"
+        ],
+        "authored_s": [
+          "44/15",
+          "16/5"
+        ],
+        "observed_s": [
+          "44/15",
+          "16/5"
+        ]
+      },
+      "two_swaps": {
+        "anchor_s": [
+          "43/15",
+          "46/15",
+          "16/5"
+        ],
+        "authored_s": [
+          "44/15",
+          "16/5"
+        ],
+        "observed_s": [
+          "44/15",
+          "16/5"
+        ]
+      }
+    },
+    "independently_counted_decisions": 64,
+    "reopened_exact_native_pictures": 7680,
+    "replayed_source_crops": 15,
+    "status": "verified"
+  },
+  "schema": "chipmunk.video-face-two-returns-hd-public-receipt/1",
+  "source_groups": 8
+}

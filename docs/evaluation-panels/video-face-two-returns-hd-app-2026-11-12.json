@@ -1,0 +1,147 @@
+{
+  "delivery_profile": {
+    "codec": "h264",
+    "frames_per_second": 30,
+    "height": 720,
+    "pictures": 120,
+    "pixel_format": "yuv420p",
+    "width": 1280
+  },
+  "profile": "full",
+  "results": {
+    "cross_recording_cuts": {
+      "evidence_version": "video-evidence-11",
+      "offline_package_verified": true,
+      "original_and_crop_assets_verified": 0,
+      "range_frames_exclusive": [],
+      "report_sha256": "248f14e0b7088199a20f88f9990495f2c2aa91f6886ab7d14af608c372df9e9b",
+      "report_version": "veritas-report-2.0.r102",
+      "signed_measurement_commitments_verified": 0,
+      "signed_source_replay": "Original SHA-256 and the source frame clock matched. Verified native frames (120), original images or crops (0), mouth patches (0), and aligned face inputs (0). Replayed every frame in the repeated-picture inspection (120). Recomputed the exact moving-sequence comparison.",
+      "source_anchor_frames": [],
+      "source_time_base": "1/30000"
+    },
+    "swap_then_jump": {
+      "evidence_version": "video-evidence-17",
+      "offline_package_verified": true,
+      "original_and_crop_assets_verified": 6,
+      "range_frames_exclusive": [
+        [
+          62,
+          68
+        ]
+      ],
+      "report_sha256": "af790795488c46ea2908fbfec76e4312fd01470c2dc3c04bc6649bddbee6e735",
+      "report_version": "veritas-report-2.0.r102",
+      "signed_measurement_commitments_verified": 1,
+      "signed_source_replay": "Original SHA-256 and the source frame clock matched. Verified native frames (120), original images or crops (6), mouth patches (0), and aligned face inputs (11). Recomputed both guarded background boundaries and verified the source carrier. Replayed every frame in the repeated-picture inspection (120). Recomputed the exact moving-sequence comparison.",
+      "source_anchor_frames": [
+        {
+          "anchors": {
+            "after": 68,
+            "before": 60,
+            "during": 64
+          },
+          "range_frames_exclusive": [
+            62,
+            68
+          ]
+        }
+      ],
+      "source_time_base": "1/30000"
+    },
+    "tandem_two_swaps": {
+      "evidence_version": "video-evidence-19",
+      "offline_package_verified": true,
+      "original_and_crop_assets_verified": 12,
+      "range_frames_exclusive": [
+        [
+          64,
+          70
+        ],
+        [
+          88,
+          96
+        ]
+      ],
+      "report_sha256": "e4ef3389c3e7b7ddef3d06117c12320fe901d9b15e146ddc0bf143c58bcf1b64",
+      "report_version": "veritas-report-2.0.r102",
+      "signed_measurement_commitments_verified": 2,
+      "signed_source_replay": "Original SHA-256 and the source frame clock matched. Verified native frames (120), original images or crops (12), mouth patches (0), and aligned face inputs (23). Recomputed 4 guarded background boundaries and verified the source carrier. Replayed every frame in the repeated-picture inspection (120). Recomputed the exact moving-sequence comparison.",
+      "source_anchor_frames": [
+        {
+          "anchors": {
+            "after": 70,
+            "before": 62,
+            "during": 66
+          },
+          "range_frames_exclusive": [
+            64,
+            70
+          ]
+        },
+        {
+          "anchors": {
+            "after": 96,
+            "before": 86,
+            "during": 92
+          },
+          "range_frames_exclusive": [
+            88,
+            96
+          ]
+        }
+      ],
+      "source_time_base": "1/30000"
+    },
+    "two_swaps": {
+      "evidence_version": "video-evidence-19",
+      "offline_package_verified": true,
+      "original_and_crop_assets_verified": 12,
+      "range_frames_exclusive": [
+        [
+          64,
+          70
+        ],
+        [
+          88,
+          96
+        ]
+      ],
+      "report_sha256": "dab21a1c485311845fb7ed0be1ade93a8fd738cf75f4b2ae1259814f328ee0dc",
+      "report_version": "veritas-report-2.0.r102",
+      "signed_measurement_commitments_verified": 2,
+      "signed_source_replay": "Original SHA-256 and the source frame clock matched. Verified native frames (120), original images or crops (12), mouth patches (0), and aligned face inputs (23). Recomputed 4 guarded background boundaries and verified the source carrier. Replayed every frame in the repeated-picture inspection (120). Recomputed the exact moving-sequence comparison.",
+      "source_anchor_frames": [
+        {
+          "anchors": {
+            "after": 70,
+            "before": 62,
+            "during": 66
+          },
+          "range_frames_exclusive": [
+            64,
+            70
+          ]
+        },
+        {
+          "anchors": {
+            "after": 96,
+            "before": 86,
+            "during": 92
+          },
+          "range_frames_exclusive": [
+            88,
+            96
+          ]
+        }
+      ],
+      "source_time_base": "1/30000"
+    }
+  },
+  "schema": "chipmunk.video-second-face-return-hd-app-replay/1",
+  "simulated_paid_analyses": 5,
+  "verified_original_and_crop_assets": 30,
+  "whole_decision_and_prior_range_equal_with_feature_disabled_and_enabled": true,
+  "worker_scope": "Normal CPU face detection, tracking and appearance paths"
+}

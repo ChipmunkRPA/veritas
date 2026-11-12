@@ -223,7 +223,7 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
                     raise ObjectIntegrityError("Short face-change inputs differ from their analyzed frames")
             frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
             commitment = canonical_hash(face_return)
-            secondary = face_return["method"] == face_return_binding.SECOND_METHOD
+            secondary = face_return["method"] in face_return_binding.SECOND_METHODS
             key = "face_return_secondary" if secondary else "face_return"
             signal = next((s for s in frozen.get("signals", []) if s.get("effective_weight") == 0.0
                            and alias_signal(s["id"]) == packet["signal_refs"][0]["id"]

@@ -109,7 +109,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
             if packet.get('face_return') is not None or packet.get('semantics') in face_return_binding.METHOD_VERSIONS:
                 face_return_binding.validate_packet(packet, evidence['source'])
                 measurement = canonical_hash(packet['face_return'])
-                commitment = ('second_short_face_change_measurement_sha256' if packet['semantics'] == face_return_binding.SECOND_METHOD
+                commitment = ('second_short_face_change_measurement_sha256' if packet['semantics'] in face_return_binding.SECOND_METHODS
                               else 'short_face_change_measurement_sha256')
                 _require(any(check['id'] == packet['signal_refs'][0]['id'] and check.get('status') == 'ok'
                              and check.get(commitment) == measurement

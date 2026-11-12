@@ -291,6 +291,42 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.getByText(/Selected frame 38 · source 13\.120 s · player 3\.120 s/)).toBeTruthy()
   })
 
+  it('keeps v19 native 30 fps ranges and playback anchors separate without implementation names', () => {
+    const set = { ...structuredClone(video), version: 'video-evidence-19' }
+    set.source = { ...set.source, time_base: '1/15360', timeline_origin_s: 0, width: 1280, height: 720 }
+    const item = set.packets[0]
+    set.packets = [
+      { id: 'VFR01', start: 64, end: 70, anchors: [62, 66, 70], method: 'face-short-return/6' },
+      { id: 'VFR02', start: 88, end: 96, anchors: [86, 92, 96], method: 'face-short-return/8' },
+    ].map(({ id, start, end, anchors, method }) => {
+      const frame_indices = Array.from({ length: end - start + 3 }, (_, i) => start - 2 + i)
+      const time = { start_stream_s: start / 30, end_stream_s: end / 30 }
+      return {
+        ...item, id, title: 'Brief face-change range to review', claim_scope: 'sampled_window',
+        face_return: { ...time, method, frame_inputs: frame_indices.map((frame_index) => ({ frame_index })) },
+        window: { ...time, frame_indices, start_pts: start * 512, end_pts: end * 512, time_base: '1/15360',
+          start_playback_s: start / 30, end_playback_s: end / 30 },
+        frames: (['before', 'during', 'after'] as const).map((interval_role, index) => {
+          const frame_index = anchors[index]
+          return { ...item.frames[0], id: `${id}.${index + 1}`, interval_role, score: null, is_peak: false,
+            anchor: { frame_index, pts: frame_index * 512, time_base: '1/15360',
+              stream_time_s: frame_index / 30, playback_time_s: frame_index / 30 } }
+        }),
+      }
+    })
+    const { container } = show(set)
+    expect(screen.getByText(/These counts cover visual checks only/)).toBeTruthy()
+    const [early, late] = screen.getAllByRole('article').map((article) => within(article))
+    expect(early.getByText('2.133 s–2.333 s')).toBeTruthy()
+    expect(late.getByText('2.933 s–3.200 s')).toBeTruthy()
+    expect(early.getAllByAltText(/VFR01\.\d: source face crop for context/)).toHaveLength(3)
+    expect(late.getAllByAltText(/VFR02\.\d: source face crop for context/)).toHaveLength(3)
+    expect(late.getByText(/exclusive end.*no weight/)).toBeTruthy()
+    fireEvent.click(late.getByRole('button', { name: 'Go to frame 92 in playback' }))
+    expect(screen.getByText(/Selected frame 92 · source 3\.067 s · player 3\.067 s/)).toBeTruthy()
+    expect(container.textContent).not.toMatch(/face-short-return|check\.private|GenD|SFace/i)
+  })
+
   it('shows one exact picture per hold endpoint and locates it on the source clock', () => {
     const set = structuredClone(video)
     set.version = 'video-evidence-10'

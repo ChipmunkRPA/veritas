@@ -60,6 +60,9 @@ It compares four voice policies and records when the second opinion cannot act.
 The [stereo removed-speech comparison](audio-removed-source-transfer-2026-11-12.md)
 rebuilds the sound taken out by interference suppression. The replay measures
 target-speech leakage separately for centered and displaced recordings.
+The [short edits in longer voice recordings](audio-overlap-window-transfer-2026-11-12.md)
+replays four window rules on exact six-second waveforms, with known edit times
+and matched loud competing speech.
 
 The [video tracking evidence fixture](video-face-tracking-context.md) exercises
 the same recorded values in a saved packet and report without downloading
@@ -172,6 +175,9 @@ responses changes useful localizations.
 The [paired PNG and JPEG crop comparison](image-crop-delivery-consistency-2026-11-12.md)
 checks whether converting the same PNG to JPEG corroborates the native crop,
 with separate counts for lost edit locations and added ordinary flags.
+The [flexible single-image boundary comparison](image-boundary-extent-transfer-2026-11-12.md)
+has a standalone public count verifier and native source replays. It records
+small- and large-region tradeoffs and the separate follow-up on generated edits.
 The [image flip comparison](image-regional-flip-transfer-2026-11-11.md) tests
 whether the sensitive detector reproduces a region under a reversible transform.
 It separately reports useful regions, processing controls and untouched photos.

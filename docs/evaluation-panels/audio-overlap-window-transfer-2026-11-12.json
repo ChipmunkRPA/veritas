@@ -1,0 +1,451 @@
+{
+  "advances": false,
+  "assets": {
+    "pellav2_detector.pt": "d21aedfb52e2f87706c2753715a29665482b0f4a034800c31579df5d458559ac",
+    "silero_vad.jit": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720",
+    "w2v-bert-config.json": "f5572bd5998b68182e9c328a43127ed21fed687f6910497136b91a4e3b0e3675"
+  },
+  "audit": {
+    "criteria": {
+      "clean_false_limits": false,
+      "noisy_false_limits": true,
+      "noisy_two_families": false,
+      "noisy_useful_locations": false
+    },
+    "decision_cells": 24,
+    "full_windows": 96,
+    "held_subgroups": {
+      "clean": {
+        "current": {
+          "ordinary_inconclusive": 6,
+          "partial_ai_inconclusive": 6
+        },
+        "long_window": {
+          "ordinary_inconclusive": 6,
+          "partial_ai_ai": 2,
+          "partial_ai_inconclusive": 4
+        },
+        "overlap": {
+          "ordinary_ai": 1,
+          "ordinary_inconclusive": 5,
+          "partial_ai_ai": 3,
+          "partial_ai_inconclusive": 3,
+          "useful_clone": 1,
+          "useful_stock": 2
+        },
+        "screening": {
+          "ordinary_ai": 1,
+          "ordinary_inconclusive": 5,
+          "partial_ai_ai": 3,
+          "partial_ai_inconclusive": 3,
+          "useful_clone": 1,
+          "useful_stock": 2
+        },
+        "short_even": {
+          "ordinary_ai": 2,
+          "ordinary_inconclusive": 4,
+          "partial_ai_ai": 3,
+          "partial_ai_inconclusive": 3,
+          "useful_clone": 1,
+          "useful_stock": 2
+        },
+        "short_odd": {
+          "ordinary_ai": 1,
+          "ordinary_inconclusive": 5,
+          "partial_ai_ai": 4,
+          "partial_ai_inconclusive": 2,
+          "useful_clone": 1,
+          "useful_stock": 2
+        }
+      },
+      "room_1": {
+        "current": {
+          "ordinary_inconclusive": 3,
+          "partial_ai_inconclusive": 3
+        },
+        "long_window": {
+          "ordinary_inconclusive": 3,
+          "partial_ai_inconclusive": 3
+        },
+        "overlap": {
+          "ordinary_inconclusive": 3,
+          "partial_ai_inconclusive": 3
+        },
+        "screening": {
+          "ordinary_inconclusive": 3,
+          "partial_ai_inconclusive": 3
+        },
+        "short_even": {
+          "ordinary_inconclusive": 3,
+          "partial_ai_inconclusive": 3
+        },
+        "short_odd": {
+          "ordinary_inconclusive": 3,
+          "partial_ai_inconclusive": 3
+        }
+      },
+      "room_2": {
+        "current": {
+          "ordinary_inconclusive": 3,
+          "partial_ai_inconclusive": 3
+        },
+        "long_window": {
+          "ordinary_inconclusive": 3,
+          "partial_ai_inconclusive": 3
+        },
+        "overlap": {
+          "ordinary_inconclusive": 3,
+          "partial_ai_inconclusive": 3
+        },
+        "screening": {
+          "ordinary_inconclusive": 3,
+          "partial_ai_inconclusive": 3
+        },
+        "short_even": {
+          "ordinary_inconclusive": 3,
+          "partial_ai_inconclusive": 3
+        },
+        "short_odd": {
+          "ordinary_inconclusive": 3,
+          "partial_ai_inconclusive": 3
+        }
+      }
+    },
+    "matched_pair_ranks": {
+      "confirmation": {
+        "clean": {
+          "long_window": {
+            "above": 4,
+            "below": 2
+          },
+          "overlap": {
+            "above": 4,
+            "below": 2
+          },
+          "short_even": {
+            "above": 4,
+            "below": 2
+          },
+          "short_odd": {
+            "above": 4,
+            "below": 2
+          }
+        },
+        "room": {
+          "long_window": {
+            "above": 2,
+            "below": 4
+          },
+          "overlap": {
+            "above": 2,
+            "below": 4
+          },
+          "short_even": {
+            "above": 2,
+            "below": 3,
+            "tie": 1
+          },
+          "short_odd": {
+            "above": 2,
+            "below": 3,
+            "tie": 1
+          }
+        }
+      },
+      "selection": {
+        "clean": {
+          "long_window": {
+            "above": 4,
+            "below": 2
+          },
+          "overlap": {
+            "above": 4,
+            "below": 2
+          },
+          "short_even": {
+            "above": 4,
+            "below": 2
+          },
+          "short_odd": {
+            "above": 5,
+            "below": 1
+          }
+        },
+        "room": {
+          "long_window": {
+            "above": 2,
+            "below": 4
+          },
+          "overlap": {
+            "above": 2,
+            "below": 2,
+            "tie": 2
+          },
+          "short_even": {
+            "above": 2,
+            "tie": 4
+          },
+          "short_odd": {
+            "above": 2,
+            "below": 3,
+            "tie": 1
+          }
+        }
+      }
+    },
+    "result_sha256": "b0d857346edd7ba24dcc8391693665c8718423142511f2918f02862ce7a3170b",
+    "short_forwards": 240,
+    "short_windows": 240,
+    "threshold_free_useful_locations": {
+      "confirmation": {
+        "clean/overlap": 5,
+        "clean/short_even": 4,
+        "clean/short_odd": 5,
+        "room/overlap": 1,
+        "room/short_even": 3,
+        "room/short_odd": 3
+      },
+      "selection": {
+        "clean/overlap": 6,
+        "clean/short_even": 6,
+        "clean/short_odd": 2,
+        "room/overlap": 1,
+        "room/short_even": 2,
+        "room/short_odd": 1
+      }
+    },
+    "tracks": 48
+  },
+  "commitments": {
+    "audit": "615f41df1929de433fa5fadb11da2b3c2505e5c0a6506f8996bb482ee7f23a95",
+    "freeze": "811184bc036e19fd56c78d03735d2e6af12d19498088bb43442e4141d8eb32a8",
+    "points": "b2258106c4e910d0e7334c63f5b297bb674002f85a6666e2c7c1ed5dc14adff4",
+    "result": "b0d857346edd7ba24dcc8391693665c8718423142511f2918f02862ce7a3170b"
+  },
+  "criteria": {
+    "clean_false_limits": false,
+    "noisy_false_limits": true,
+    "noisy_two_families": false,
+    "noisy_useful_locations": false
+  },
+  "method": {
+    "advance": "At least two usefully localized noisy synthetic edits from two families, no more than one extra noisy false flag and no extra clean false flags. A useful location reaches 0.30 IoU and 0.50 recall on the sample clock. Advance to wider research only.",
+    "assembly": "Place the intact 3 s edited center at a fixed salted offset between 0.75 and 2.25 s. Split the other 3 s host utterance around it.",
+    "background": "Use separate six-second recorded AMI scenes at -5 dB, one selection room and two held rooms; match gain across both edit kinds and deliveries.",
+    "incumbent": "Production Full profile 4 s windows, 2 s hop, speech admission and file-mean calibration. Six seconds is outside the current whole-file calibration scope.",
+    "long_window": "Use the strongest admitted four-second incumbent raw score under the same experimental calibration rule as the short arms.",
+    "operating_points": "For each experimental arm strictly exceed the maximum assessed genuine track score across clean and mixed selection controls.",
+    "overlap": "Use the highest lower raw log-odds score among adjacent short windows, with half of the one-second intersection voiced.",
+    "screening": "When overlap evidence is assessable, use it to retain, withhold or add an AI flag only on incumbent AI or inconclusive results. Preserve original and unassessed.",
+    "short_even": "Admitted 2 s windows beginning at 0, 2 and 4 seconds.",
+    "short_odd": "Admitted 2 s windows beginning at 1 and 3 seconds.",
+    "sources": "Use matched clean 20 ms faded 0.8-second genuine and AI inserts, plus a second exact utterance of the genuine host."
+  },
+  "results": {
+    "confirmation": {
+      "clean": {
+        "current": {
+          "ordinary_inconclusive": 6,
+          "partial_ai_inconclusive": 6
+        },
+        "long_window": {
+          "ordinary_inconclusive": 6,
+          "partial_ai_ai": 2,
+          "partial_ai_inconclusive": 4
+        },
+        "overlap": {
+          "ordinary_ai": 1,
+          "ordinary_inconclusive": 5,
+          "partial_ai_ai": 3,
+          "partial_ai_inconclusive": 3,
+          "useful_clone": 1,
+          "useful_location": 3,
+          "useful_stock": 2
+        },
+        "screening": {
+          "ordinary_ai": 1,
+          "ordinary_inconclusive": 5,
+          "partial_ai_ai": 3,
+          "partial_ai_inconclusive": 3,
+          "useful_clone": 1,
+          "useful_location": 3,
+          "useful_stock": 2
+        },
+        "short_even": {
+          "ordinary_ai": 2,
+          "ordinary_inconclusive": 4,
+          "partial_ai_ai": 3,
+          "partial_ai_inconclusive": 3,
+          "useful_clone": 1,
+          "useful_location": 3,
+          "useful_stock": 2
+        },
+        "short_odd": {
+          "ordinary_ai": 1,
+          "ordinary_inconclusive": 5,
+          "partial_ai_ai": 4,
+          "partial_ai_inconclusive": 2,
+          "useful_clone": 1,
+          "useful_location": 3,
+          "useful_stock": 2
+        }
+      },
+      "room": {
+        "current": {
+          "ordinary_inconclusive": 6,
+          "partial_ai_inconclusive": 6
+        },
+        "long_window": {
+          "ordinary_inconclusive": 6,
+          "partial_ai_inconclusive": 6
+        },
+        "overlap": {
+          "ordinary_inconclusive": 6,
+          "partial_ai_inconclusive": 6
+        },
+        "screening": {
+          "ordinary_inconclusive": 6,
+          "partial_ai_inconclusive": 6
+        },
+        "short_even": {
+          "ordinary_inconclusive": 6,
+          "partial_ai_inconclusive": 6
+        },
+        "short_odd": {
+          "ordinary_inconclusive": 6,
+          "partial_ai_inconclusive": 6
+        }
+      }
+    },
+    "selection": {
+      "clean": {
+        "current": {
+          "ordinary_inconclusive": 6,
+          "partial_ai_inconclusive": 6
+        },
+        "long_window": {
+          "ordinary_inconclusive": 6,
+          "partial_ai_ai": 1,
+          "partial_ai_inconclusive": 5
+        },
+        "overlap": {
+          "ordinary_inconclusive": 6,
+          "partial_ai_ai": 2,
+          "partial_ai_inconclusive": 4,
+          "useful_clone": 1,
+          "useful_location": 2,
+          "useful_stock": 1
+        },
+        "screening": {
+          "ordinary_inconclusive": 6,
+          "partial_ai_ai": 2,
+          "partial_ai_inconclusive": 4,
+          "useful_clone": 1,
+          "useful_location": 2,
+          "useful_stock": 1
+        },
+        "short_even": {
+          "ordinary_inconclusive": 6,
+          "partial_ai_ai": 3,
+          "partial_ai_inconclusive": 3,
+          "useful_clone": 1,
+          "useful_location": 3,
+          "useful_stock": 2
+        },
+        "short_odd": {
+          "ordinary_inconclusive": 6,
+          "partial_ai_ai": 3,
+          "partial_ai_inconclusive": 3
+        }
+      },
+      "room": {
+        "current": {
+          "ordinary_inconclusive": 6,
+          "partial_ai_inconclusive": 6
+        },
+        "long_window": {
+          "ordinary_inconclusive": 6,
+          "partial_ai_inconclusive": 6
+        },
+        "overlap": {
+          "ordinary_inconclusive": 6,
+          "partial_ai_inconclusive": 6
+        },
+        "screening": {
+          "ordinary_inconclusive": 6,
+          "partial_ai_inconclusive": 6
+        },
+        "short_even": {
+          "ordinary_inconclusive": 6,
+          "partial_ai_inconclusive": 6
+        },
+        "short_odd": {
+          "ordinary_inconclusive": 6,
+          "partial_ai_inconclusive": 6
+        }
+      }
+    }
+  },
+  "rooms": [
+    {
+      "overlap_ms": 1030,
+      "room_index": 0,
+      "speech_ms": 6000
+    },
+    {
+      "overlap_ms": 3220,
+      "room_index": 1,
+      "speech_ms": 6000
+    },
+    {
+      "overlap_ms": 2120,
+      "room_index": 2,
+      "speech_ms": 5520
+    }
+  ],
+  "runtime": {
+    "confirmation": {
+      "classifier_forwards": 168,
+      "elapsed_s": 113.03067912500046,
+      "freeze_sha256": "811184bc036e19fd56c78d03735d2e6af12d19498088bb43442e4141d8eb32a8",
+      "gate_forwards": 4512,
+      "rss_bytes": 2972876800
+    },
+    "selection": {
+      "classifier_forwards": 168,
+      "elapsed_s": 103.7122442919972,
+      "freeze_sha256": "811184bc036e19fd56c78d03735d2e6af12d19498088bb43442e4141d8eb32a8",
+      "gate_forwards": 4512,
+      "rss_bytes": 2971844608
+    }
+  },
+  "schema": "chipmunk.audio-overlap-window-public/1",
+  "selection_support": {
+    "long_window": {
+      "genuine_assessed": 12,
+      "genuine_groups": 6
+    },
+    "overlap": {
+      "genuine_assessed": 12,
+      "genuine_groups": 6
+    },
+    "short_even": {
+      "genuine_assessed": 12,
+      "genuine_groups": 6
+    },
+    "short_odd": {
+      "genuine_assessed": 12,
+      "genuine_groups": 6
+    }
+  },
+  "source_commitments": {
+    "confirmation": {
+      "v169_source": "409d0dd8614dbc70ed27986bfdb4c0597e61cf04f29297ea874cec39ad8e8843",
+      "v172_journal": "274358619884ac07758db38ea6162e1bc801842e80bed5eceea8781a7f4388a8"
+    },
+    "selection": {
+      "v169_source": "4e97d28cfbe5a293ffffe10c419f9dd08a9e85a74e2b0431d2d4e402dbe693a8",
+      "v172_journal": "9bd8a1f2d7129cd2c04dcd3dae894c79b48b8f1ace9f4a008a1987ed6493db73"
+    }
+  }
+}

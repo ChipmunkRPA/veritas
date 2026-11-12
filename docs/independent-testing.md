@@ -88,6 +88,9 @@ checks native waveform bindings, the exact shared and exclusive window samples,
 and held performance at fixed and equal false-alarm counts.
 The [enrolled-speaker extraction study](audio-enrolled-target-transfer-2026-11-12.md)
 checks how much of each known insert remains after suppressing competing speech.
+The [matching-speaker source qualification](audio-same-speaker-clone-sources-2026-11-12.md)
+verifies exact foreground, enrollment, and clone audio from the same declared
+source speaker in separately assigned selection and held groups.
 The [controlled room-speech attenuation study](audio-room-reference-transfer-2026-11-12.md)
 reconstructs each changed waveform independently and checks whether improved
 foreground reconstruction recovers short synthetic inserts.
@@ -102,6 +105,9 @@ and [passage context replay](text-context-shift-v266-result.md) give reviewers
 two recent examples of what a failed localization candidate looks like, with
 frozen methods, exact aggregate results, and limitations. Full-media replay
 requires the separately obtained source inputs and retained local bindings.
+The [multi-scale image crop trial](image-crop-multiscale-transfer-2026-11-12.md)
+measures what exact crop geometry can cover and which regions the detector
+actually selects on held photos and screenshots.
 
 The [strong-background speech test](audio-noise-speech-gate-strong-noise-v269-result.md)
 documents how to reproduce a comparison between the current speech admission

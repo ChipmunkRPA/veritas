@@ -1,0 +1,1328 @@
+{
+  "baseline_commit": null,
+  "cases": [
+    {
+      "crop_logits": [
+        8.654855728149414,
+        8.413057327270508,
+        8.656638145446777
+      ],
+      "flag": true,
+      "id": "flux-schnell-02_text_sign",
+      "mean_logit": 8.574851036071777,
+      "sha256": "badc6cbd45f649653ad13122dc378914fc50bd39c2763c696256d680042de53c"
+    },
+    {
+      "crop_logits": [
+        -0.10900964587926865,
+        1.310142993927002,
+        3.0083253383636475
+      ],
+      "flag": true,
+      "id": "flux-schnell-04_composition",
+      "mean_logit": 1.4031529426574707,
+      "sha256": "9f965f77e123a86c750610467fc99f30c0bed1b5de7b458276c56e644d85aaa7"
+    },
+    {
+      "crop_logits": [
+        10.108148574829102,
+        10.174516677856445,
+        10.136037826538086
+      ],
+      "flag": true,
+      "id": "flux-schnell-01_portrait",
+      "mean_logit": 10.139567375183105,
+      "sha256": "00eddf8de5c53b46c484243a45d47f703e8b38b3de491d0ffd55a5edd213256b"
+    },
+    {
+      "crop_logits": [
+        9.22667121887207,
+        9.305055618286133,
+        9.360462188720703
+      ],
+      "flag": true,
+      "id": "flux-schnell-05_landscape",
+      "mean_logit": 9.297396659851074,
+      "sha256": "14f8dd140fc9a7db25e6cf2a3f6b1f92d136b43f913ee74fddfb64f86f83cafb"
+    },
+    {
+      "crop_logits": [
+        9.619945526123047,
+        9.80280590057373,
+        9.487092018127441
+      ],
+      "flag": true,
+      "id": "flux-schnell-07_product",
+      "mean_logit": 9.636614799499512,
+      "sha256": "88e82475830a4136e63205bb91e998ea2d1ede652e444f8076b5d7702e08ee70"
+    },
+    {
+      "crop_logits": [
+        9.920783996582031,
+        9.911246299743652,
+        9.870681762695312
+      ],
+      "flag": true,
+      "id": "sdxl-10_infographic",
+      "mean_logit": 9.900904655456543,
+      "sha256": "1a91a70e77385aa67f267138ca9ac933e2e72cc8af1a1bc05cbd1f173ef60d48"
+    },
+    {
+      "crop_logits": [
+        8.10477066040039,
+        8.941676139831543,
+        8.509607315063477
+      ],
+      "flag": true,
+      "id": "sdxl-09_food",
+      "mean_logit": 8.518685340881348,
+      "sha256": "4dc14debebca8a2fc7f7509f13282ece21b19f4325ae2912014c8a918e5586f6"
+    },
+    {
+      "crop_logits": [
+        10.128372192382812,
+        10.102629661560059,
+        10.141057014465332
+      ],
+      "flag": true,
+      "id": "sdxl-08_anime",
+      "mean_logit": 10.124019622802734,
+      "sha256": "4d1d547b49fa0e4f9be041bc7533f8484b75eb0522bc65d4414706f845302678"
+    },
+    {
+      "crop_logits": [
+        9.995511054992676,
+        9.47394847869873,
+        9.969381332397461
+      ],
+      "flag": true,
+      "id": "sdxl-03_hands",
+      "mean_logit": 9.812947273254395,
+      "sha256": "a1cecf20533a65c3a5a1f3a9feff88a9e77c3aafcb29a94fdc500558008636cd"
+    },
+    {
+      "crop_logits": [
+        9.73403549194336,
+        9.287599563598633,
+        9.31830883026123
+      ],
+      "flag": true,
+      "id": "sdxl-06_illustration",
+      "mean_logit": 9.446647644042969,
+      "sha256": "110c0888b0a58bd3c7cb51cb4db14f790fd9be76e5b941d53627d836a9da39f1"
+    },
+    {
+      "crop_logits": [
+        -3.0555198192596436,
+        -5.5848870277404785,
+        2.4293017387390137
+      ],
+      "flag": true,
+      "id": "gemini-s069_base",
+      "mean_logit": -2.0703682899475098,
+      "sha256": "e81e06759f607633edf37513efe87987f27be3c231c5b40563757cbdfa2c4a8a"
+    },
+    {
+      "crop_logits": [
+        -2.768263339996338,
+        4.872971534729004,
+        7.113258361816406
+      ],
+      "flag": true,
+      "id": "gemini-s056_base",
+      "mean_logit": 3.072655439376831,
+      "sha256": "08021a64b8e8dfc81806c638a3d8df848ff71c578f380bd50f965b281a304000"
+    },
+    {
+      "crop_logits": [
+        -1.9489505290985107,
+        -5.005128383636475,
+        7.145689010620117
+      ],
+      "flag": true,
+      "id": "gemini-s027_base",
+      "mean_logit": 0.06387010961771011,
+      "sha256": "a36672095173bf4777c8837657794eec35c2976febff9d84f06e60144cf2c19b"
+    },
+    {
+      "crop_logits": [
+        7.717471599578857,
+        8.879608154296875,
+        7.8789567947387695
+      ],
+      "flag": true,
+      "id": "gemini-s035_base",
+      "mean_logit": 8.158679008483887,
+      "sha256": "c7761b3a0bb07900b3c080115fc6c05742bb82fd1e10e4d39f297311f5b17cd7"
+    },
+    {
+      "crop_logits": [
+        7.02254056930542,
+        4.895086288452148,
+        8.441123008728027
+      ],
+      "flag": true,
+      "id": "gemini-s029_base",
+      "mean_logit": 6.78624963760376,
+      "sha256": "40ee46e1e76b73a8f7ecdc56fd61e998bb6ff333474674ad32df5a1e8b3f241f"
+    },
+    {
+      "crop_logits": [
+        2.6559054851531982,
+        2.3599700927734375,
+        5.321161270141602
+      ],
+      "flag": true,
+      "id": "gemini-s007_base",
+      "mean_logit": 3.445678949356079,
+      "sha256": "1e46969793d07aa9e6909f9c1c7ffcb0ee87c47f0995be9d2bdca7832fd8e0d0"
+    },
+    {
+      "crop_logits": [
+        -8.946148872375488,
+        -8.898992538452148,
+        -8.772353172302246
+      ],
+      "flag": false,
+      "id": "raw-00",
+      "mean_logit": -8.872498512268066,
+      "sha256": "583657339c36085709a2a1b567a7e606be464714ce8e4dfd6e1f7f71bb6086ec"
+    },
+    {
+      "crop_logits": [
+        -8.427968978881836,
+        -8.671236038208008,
+        -8.681620597839355
+      ],
+      "flag": false,
+      "id": "raw-01",
+      "mean_logit": -8.593608856201172,
+      "sha256": "132e3952337939011261a8e15497c40258207a2107d559e00b8f42395376298c"
+    },
+    {
+      "crop_logits": [
+        -7.753757953643799,
+        -8.481435775756836,
+        -7.687659740447998
+      ],
+      "flag": false,
+      "id": "raw-02",
+      "mean_logit": -7.974284648895264,
+      "sha256": "392fecdd0f83a18d06eca80d80767d1d68d62a4e55fa06ddef1a880104320afc"
+    },
+    {
+      "crop_logits": [
+        -9.203670501708984,
+        -9.054803848266602,
+        -8.093324661254883
+      ],
+      "flag": false,
+      "id": "raw-03",
+      "mean_logit": -8.78393268585205,
+      "sha256": "fac6819115f5c4a667913627c01d187addf2732b176b27b93331b854ebc129f2"
+    },
+    {
+      "crop_logits": [
+        -9.165746688842773,
+        -9.130518913269043,
+        -9.14908218383789
+      ],
+      "flag": false,
+      "id": "export-00",
+      "mean_logit": -9.148448944091797,
+      "sha256": "be0e7b4897577ec38f55e8a0eb045fa82c3f7aef51b0d9a400411d3a2f8de60d"
+    },
+    {
+      "crop_logits": [
+        -9.429752349853516,
+        -9.143758773803711,
+        -9.098406791687012
+      ],
+      "flag": false,
+      "id": "export-01",
+      "mean_logit": -9.22397232055664,
+      "sha256": "eb79d067d30328e3d3b950b48451a1ef35db24a19f66c8b8f060fdd85e2e3553"
+    },
+    {
+      "crop_logits": [
+        -9.796642303466797,
+        -9.725186347961426,
+        -9.635984420776367
+      ],
+      "flag": false,
+      "id": "export-02",
+      "mean_logit": -9.719270706176758,
+      "sha256": "088b5437918dc555a74cf26f194da38b5da0cc1abdc12adcc7553ddc6cbe847b"
+    },
+    {
+      "crop_logits": [
+        -8.231255531311035,
+        -8.799921989440918,
+        -9.018989562988281
+      ],
+      "flag": false,
+      "id": "export-03",
+      "mean_logit": -8.683388710021973,
+      "sha256": "b8ff124421111e9f8afcf1afb3756bd6a04b763ce17423c40bb206b39b6e8004"
+    },
+    {
+      "crop_logits": [
+        -9.83353328704834,
+        -9.958712577819824,
+        -9.687257766723633
+      ],
+      "flag": false,
+      "id": "export-04",
+      "mean_logit": -9.82650089263916,
+      "sha256": "5c824f7699a8c18e6cccb3ad5481c10265051e93d7a1b340f4aa96155e61caf6"
+    },
+    {
+      "crop_logits": [
+        -8.679255485534668,
+        -8.441720962524414,
+        -9.430696487426758
+      ],
+      "flag": false,
+      "id": "export-05",
+      "mean_logit": -8.850557327270508,
+      "sha256": "2380f5b62d65b96b2d8fc13194ab6f8f89df3fe2e921aab0084c8ca4b52a5474"
+    },
+    {
+      "crop_logits": [
+        -9.13364028930664,
+        -9.335208892822266,
+        -8.813135147094727
+      ],
+      "flag": false,
+      "id": "export-06",
+      "mean_logit": -9.093995094299316,
+      "sha256": "7a54660c5b819e4d4a227848b5feb5458ba58aa03d81479b6f24972cd60653f5"
+    },
+    {
+      "crop_logits": [
+        -8.139741897583008,
+        -8.209942817687988,
+        -8.647604942321777
+      ],
+      "flag": false,
+      "id": "export-07",
+      "mean_logit": -8.332430839538574,
+      "sha256": "c801c4461a4434d714655bb45c6bc9c13f61954f761bad60f6e3ffe4d0b177a4"
+    },
+    {
+      "crop_logits": [
+        0.9119093418121338,
+        -6.403592109680176,
+        1.5116075277328491
+      ],
+      "flag": true,
+      "id": "browser-reading-light",
+      "mean_logit": -1.326691746711731,
+      "sha256": "023e2dcf6093363e21b3268cd633a56cec2f944933436d0303fb5b9858f19172"
+    },
+    {
+      "crop_logits": [
+        3.6807548999786377,
+        -1.2997499704360962,
+        2.0375161170959473
+      ],
+      "flag": true,
+      "id": "browser-reading-dark",
+      "mean_logit": 1.4728403091430664,
+      "sha256": "047f05440e280236dbf21a3d8b487ec323819d7359af2f940b6e19db2e8cda19"
+    },
+    {
+      "crop_logits": [
+        -0.767350435256958,
+        -4.804375648498535,
+        -5.155612945556641
+      ],
+      "flag": true,
+      "id": "browser-dashboard-light",
+      "mean_logit": -3.575779676437378,
+      "sha256": "5734232a200e28770e18ec848e9049e8ce64e34486f8db7e3aa57f95f8cf5eee"
+    },
+    {
+      "crop_logits": [
+        -1.4694890975952148,
+        -4.9181036949157715,
+        -3.7328948974609375
+      ],
+      "flag": true,
+      "id": "browser-dashboard-dark",
+      "mean_logit": -3.3734958171844482,
+      "sha256": "17b0a8adecad0d2c0a6607edf819b185853af9ca9907c685aa3c45aee71d8c59"
+    },
+    {
+      "crop_logits": [
+        4.653294563293457,
+        1.0174815654754639,
+        0.04389098286628723
+      ],
+      "flag": true,
+      "id": "browser-form-light",
+      "mean_logit": 1.9048891067504883,
+      "sha256": "bb555444b748a06e34b32963b9540f96abb96feb1efcddbd911ce13e8d621be4"
+    },
+    {
+      "crop_logits": [
+        5.554168701171875,
+        1.7712143659591675,
+        -2.068669319152832
+      ],
+      "flag": true,
+      "id": "browser-form-dark",
+      "mean_logit": 1.7522379159927368,
+      "sha256": "0e99a814d7ad55cf629c43f5d96524555e38cf348587a231c882af96a58c5872"
+    },
+    {
+      "crop_logits": [
+        -4.955495357513428,
+        -8.221153259277344,
+        -6.312878608703613
+      ],
+      "flag": false,
+      "id": "browser-pattern-light",
+      "mean_logit": -6.496509552001953,
+      "sha256": "f36a55a9e6692d036849fac2cc967e5edc888c94876254dfe4af3682ebfce69a"
+    },
+    {
+      "crop_logits": [
+        -5.042459487915039,
+        -7.497200965881348,
+        -5.663295745849609
+      ],
+      "flag": false,
+      "id": "browser-pattern-dark",
+      "mean_logit": -6.067652225494385,
+      "sha256": "40aa6d44d6137e5a6266a6b1063d06f6472cbfd25573a41bafb4bcf6ee09eac4"
+    }
+  ],
+  "freeze": {
+    "criteria": {
+      "maximum_control_groups_flagged": 1,
+      "maximum_new_control_groups": 1,
+      "maximum_raw_camera_flags": 0,
+      "minimum_generated_flags": 12,
+      "minimum_new_generated": 3,
+      "minimum_new_generator_families": 2,
+      "minimum_per_generator": 3,
+      "minimum_total": 36
+    },
+    "experiment_sha256": "bcbad1a0f9f3a5c6c97d63c55693936194f8353e7835bb1fce96928525e2d69e",
+    "items": [
+      {
+        "bytes": 1369574,
+        "dhash64": "f0b08cb230f8db7d",
+        "family": "flux-schnell",
+        "format": "png",
+        "group": "02_text_sign",
+        "id": "flux-schnell-02_text_sign",
+        "label": "synthetic",
+        "license": "https://www.apache.org/licenses/LICENSE-2.0",
+        "license_source": "https://huggingface.co/datasets/MrAlexGov/t4-imagegen-llm-judges/resolve/9136726108ac95b1aabdf200c0969f6b3b39c1d1/README.md",
+        "origin": "publisher-native-png",
+        "path": "objects/flux-schnell-02_text_sign.png",
+        "rgb_sha256": "f96891c5ffed14ac03cde3c5adbceeba8b2cea4779f89653a4aebaf2f8e8b21d",
+        "sha256": "badc6cbd45f649653ad13122dc378914fc50bd39c2763c696256d680042de53c",
+        "size": [
+          1024,
+          1024
+        ],
+        "source_url": "https://huggingface.co/datasets/MrAlexGov/t4-imagegen-llm-judges/resolve/9136726108ac95b1aabdf200c0969f6b3b39c1d1/images/flux-schnell/02_text_sign.png"
+      },
+      {
+        "bytes": 843350,
+        "dhash64": "10cbcfefedcfffff",
+        "family": "flux-schnell",
+        "format": "png",
+        "group": "04_composition",
+        "id": "flux-schnell-04_composition",
+        "label": "synthetic",
+        "license": "https://www.apache.org/licenses/LICENSE-2.0",
+        "license_source": "https://huggingface.co/datasets/MrAlexGov/t4-imagegen-llm-judges/resolve/9136726108ac95b1aabdf200c0969f6b3b39c1d1/README.md",
+        "origin": "publisher-native-png",
+        "path": "objects/flux-schnell-04_composition.png",
+        "rgb_sha256": "d52e2e01c5b1c7335a618b46bdf5f9b7d5b7c35ad0323144bf0a65487ce06890",
+        "sha256": "9f965f77e123a86c750610467fc99f30c0bed1b5de7b458276c56e644d85aaa7",
+        "size": [
+          1024,
+          1024
+        ],
+        "source_url": "https://huggingface.co/datasets/MrAlexGov/t4-imagegen-llm-judges/resolve/9136726108ac95b1aabdf200c0969f6b3b39c1d1/images/flux-schnell/04_composition.png"
+      },
+      {
+        "bytes": 1868191,
+        "dhash64": "7c6ceef6b6e7453f",
+        "family": "flux-schnell",
+        "format": "png",
+        "group": "01_portrait",
+        "id": "flux-schnell-01_portrait",
+        "label": "synthetic",
+        "license": "https://www.apache.org/licenses/LICENSE-2.0",
+        "license_source": "https://huggingface.co/datasets/MrAlexGov/t4-imagegen-llm-judges/resolve/9136726108ac95b1aabdf200c0969f6b3b39c1d1/README.md",
+        "origin": "publisher-native-png",
+        "path": "objects/flux-schnell-01_portrait.png",
+        "rgb_sha256": "af4063755453d78d5baed87e0ab9dac14e4c9e6206681a08e0534d593796b86e",
+        "sha256": "00eddf8de5c53b46c484243a45d47f703e8b38b3de491d0ffd55a5edd213256b",
+        "size": [
+          1024,
+          1024
+        ],
+        "source_url": "https://huggingface.co/datasets/MrAlexGov/t4-imagegen-llm-judges/resolve/9136726108ac95b1aabdf200c0969f6b3b39c1d1/images/flux-schnell/01_portrait.png"
+      },
+      {
+        "bytes": 1561705,
+        "dhash64": "61f9f8f072f9fffc",
+        "family": "flux-schnell",
+        "format": "png",
+        "group": "05_landscape",
+        "id": "flux-schnell-05_landscape",
+        "label": "synthetic",
+        "license": "https://www.apache.org/licenses/LICENSE-2.0",
+        "license_source": "https://huggingface.co/datasets/MrAlexGov/t4-imagegen-llm-judges/resolve/9136726108ac95b1aabdf200c0969f6b3b39c1d1/README.md",
+        "origin": "publisher-native-png",
+        "path": "objects/flux-schnell-05_landscape.png",
+        "rgb_sha256": "8c30a64aafc9a1fd6ed28c0e050289b3d173f01d7f243b014611ed689d5b5323",
+        "sha256": "14f8dd140fc9a7db25e6cf2a3f6b1f92d136b43f913ee74fddfb64f86f83cafb",
+        "size": [
+          1024,
+          1024
+        ],
+        "source_url": "https://huggingface.co/datasets/MrAlexGov/t4-imagegen-llm-judges/resolve/9136726108ac95b1aabdf200c0969f6b3b39c1d1/images/flux-schnell/05_landscape.png"
+      },
+      {
+        "bytes": 1036679,
+        "dhash64": "80388f8762af9f5f",
+        "family": "flux-schnell",
+        "format": "png",
+        "group": "07_product",
+        "id": "flux-schnell-07_product",
+        "label": "synthetic",
+        "license": "https://www.apache.org/licenses/LICENSE-2.0",
+        "license_source": "https://huggingface.co/datasets/MrAlexGov/t4-imagegen-llm-judges/resolve/9136726108ac95b1aabdf200c0969f6b3b39c1d1/README.md",
+        "origin": "publisher-native-png",
+        "path": "objects/flux-schnell-07_product.png",
+        "rgb_sha256": "4befb4fab858c1586615fc493809c8aba1e714dd1c89bea6e8747f7653ac7a16",
+        "sha256": "88e82475830a4136e63205bb91e998ea2d1ede652e444f8076b5d7702e08ee70",
+        "size": [
+          1024,
+          1024
+        ],
+        "source_url": "https://huggingface.co/datasets/MrAlexGov/t4-imagegen-llm-judges/resolve/9136726108ac95b1aabdf200c0969f6b3b39c1d1/images/flux-schnell/07_product.png"
+      },
+      {
+        "bytes": 782012,
+        "dhash64": "9286cecc8c6d55d4",
+        "family": "sdxl",
+        "format": "png",
+        "group": "10_infographic",
+        "id": "sdxl-10_infographic",
+        "label": "synthetic",
+        "license": "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/blob/462165984030d82259a11f4367a4eed129e94a7b/LICENSE.md",
+        "license_source": "https://huggingface.co/datasets/MrAlexGov/t4-imagegen-llm-judges/resolve/9136726108ac95b1aabdf200c0969f6b3b39c1d1/README.md",
+        "origin": "publisher-native-png",
+        "path": "objects/sdxl-10_infographic.png",
+        "rgb_sha256": "26b8b724f15a5d64f6cdf0ad69fef0cb4b17e629dcf07308992fe113979d597f",
+        "sha256": "1a91a70e77385aa67f267138ca9ac933e2e72cc8af1a1bc05cbd1f173ef60d48",
+        "size": [
+          1024,
+          1024
+        ],
+        "source_url": "https://huggingface.co/datasets/MrAlexGov/t4-imagegen-llm-judges/resolve/9136726108ac95b1aabdf200c0969f6b3b39c1d1/images/sdxl/10_infographic.png"
+      },
+      {
+        "bytes": 1415497,
+        "dhash64": "fac6a38bcdf3f7ff",
+        "family": "sdxl",
+        "format": "png",
+        "group": "09_food",
+        "id": "sdxl-09_food",
+        "label": "synthetic",
+        "license": "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/blob/462165984030d82259a11f4367a4eed129e94a7b/LICENSE.md",
+        "license_source": "https://huggingface.co/datasets/MrAlexGov/t4-imagegen-llm-judges/resolve/9136726108ac95b1aabdf200c0969f6b3b39c1d1/README.md",
+        "origin": "publisher-native-png",
+        "path": "objects/sdxl-09_food.png",
+        "rgb_sha256": "251306c70cab6318c18811916388ff4f899a92de7a50880de4e675ae19b88d6a",
+        "sha256": "4dc14debebca8a2fc7f7509f13282ece21b19f4325ae2912014c8a918e5586f6",
+        "size": [
+          1024,
+          1024
+        ],
+        "source_url": "https://huggingface.co/datasets/MrAlexGov/t4-imagegen-llm-judges/resolve/9136726108ac95b1aabdf200c0969f6b3b39c1d1/images/sdxl/09_food.png"
+      },
+      {
+        "bytes": 1465897,
+        "dhash64": "929656991464f236",
+        "family": "sdxl",
+        "format": "png",
+        "group": "08_anime",
+        "id": "sdxl-08_anime",
+        "label": "synthetic",
+        "license": "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/blob/462165984030d82259a11f4367a4eed129e94a7b/LICENSE.md",
+        "license_source": "https://huggingface.co/datasets/MrAlexGov/t4-imagegen-llm-judges/resolve/9136726108ac95b1aabdf200c0969f6b3b39c1d1/README.md",
+        "origin": "publisher-native-png",
+        "path": "objects/sdxl-08_anime.png",
+        "rgb_sha256": "c737255cb8e0a928dd5290819e87eba9aa48d06fa54d59d68df33e02ebe60559",
+        "sha256": "4d1d547b49fa0e4f9be041bc7533f8484b75eb0522bc65d4414706f845302678",
+        "size": [
+          1024,
+          1024
+        ],
+        "source_url": "https://huggingface.co/datasets/MrAlexGov/t4-imagegen-llm-judges/resolve/9136726108ac95b1aabdf200c0969f6b3b39c1d1/images/sdxl/08_anime.png"
+      },
+      {
+        "bytes": 1523292,
+        "dhash64": "52f2d78bcce2711c",
+        "family": "sdxl",
+        "format": "png",
+        "group": "03_hands",
+        "id": "sdxl-03_hands",
+        "label": "synthetic",
+        "license": "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/blob/462165984030d82259a11f4367a4eed129e94a7b/LICENSE.md",
+        "license_source": "https://huggingface.co/datasets/MrAlexGov/t4-imagegen-llm-judges/resolve/9136726108ac95b1aabdf200c0969f6b3b39c1d1/README.md",
+        "origin": "publisher-native-png",
+        "path": "objects/sdxl-03_hands.png",
+        "rgb_sha256": "d8ea5cd505fa2506bab454d21ea3295746e11eb7fff9df59376decee919a13ad",
+        "sha256": "a1cecf20533a65c3a5a1f3a9feff88a9e77c3aafcb29a94fdc500558008636cd",
+        "size": [
+          1024,
+          1024
+        ],
+        "source_url": "https://huggingface.co/datasets/MrAlexGov/t4-imagegen-llm-judges/resolve/9136726108ac95b1aabdf200c0969f6b3b39c1d1/images/sdxl/03_hands.png"
+      },
+      {
+        "bytes": 978462,
+        "dhash64": "70b2728de9e163fa",
+        "family": "sdxl",
+        "format": "png",
+        "group": "06_illustration",
+        "id": "sdxl-06_illustration",
+        "label": "synthetic",
+        "license": "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/blob/462165984030d82259a11f4367a4eed129e94a7b/LICENSE.md",
+        "license_source": "https://huggingface.co/datasets/MrAlexGov/t4-imagegen-llm-judges/resolve/9136726108ac95b1aabdf200c0969f6b3b39c1d1/README.md",
+        "origin": "publisher-native-png",
+        "path": "objects/sdxl-06_illustration.png",
+        "rgb_sha256": "085015f87db1a4c46e2794650c31922fa36dba734f689467dfceb6d6fb3b196e",
+        "sha256": "110c0888b0a58bd3c7cb51cb4db14f790fd9be76e5b941d53627d836a9da39f1",
+        "size": [
+          1024,
+          1024
+        ],
+        "source_url": "https://huggingface.co/datasets/MrAlexGov/t4-imagegen-llm-judges/resolve/9136726108ac95b1aabdf200c0969f6b3b39c1d1/images/sdxl/06_illustration.png"
+      },
+      {
+        "bytes": 1553333,
+        "dhash64": "34b42ab9f1adace8",
+        "family": "gemini",
+        "format": "png",
+        "group": "s069_base",
+        "id": "gemini-s069_base",
+        "label": "synthetic",
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "license_source": "https://huggingface.co/datasets/CompoSET/CompoSET/resolve/d428bf4f23f50ababb205185f179737cd9638db2/README.md",
+        "origin": "publisher-native-png",
+        "path": "objects/gemini-s069_base.png",
+        "rgb_sha256": "ca957b432bcc21075c07c7fe478e591c221b403fff30778d288b264669cde7b7",
+        "sha256": "e81e06759f607633edf37513efe87987f27be3c231c5b40563757cbdfa2c4a8a",
+        "size": [
+          1408,
+          768
+        ],
+        "source_url": "https://huggingface.co/datasets/CompoSET/CompoSET/resolve/d428bf4f23f50ababb205185f179737cd9638db2/images/s069_base.png"
+      },
+      {
+        "bytes": 2003182,
+        "dhash64": "cbab320909cdddd9",
+        "family": "gemini",
+        "format": "png",
+        "group": "s056_base",
+        "id": "gemini-s056_base",
+        "label": "synthetic",
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "license_source": "https://huggingface.co/datasets/CompoSET/CompoSET/resolve/d428bf4f23f50ababb205185f179737cd9638db2/README.md",
+        "origin": "publisher-native-png",
+        "path": "objects/gemini-s056_base.png",
+        "rgb_sha256": "6abf7e6c764097840b9ee644d9510f7b2fbc3a7d5541cf7feb0089179d1463b0",
+        "sha256": "08021a64b8e8dfc81806c638a3d8df848ff71c578f380bd50f965b281a304000",
+        "size": [
+          1408,
+          768
+        ],
+        "source_url": "https://huggingface.co/datasets/CompoSET/CompoSET/resolve/d428bf4f23f50ababb205185f179737cd9638db2/images/s056_base.png"
+      },
+      {
+        "bytes": 1861410,
+        "dhash64": "76641a1e273737df",
+        "family": "gemini",
+        "format": "png",
+        "group": "s027_base",
+        "id": "gemini-s027_base",
+        "label": "synthetic",
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "license_source": "https://huggingface.co/datasets/CompoSET/CompoSET/resolve/d428bf4f23f50ababb205185f179737cd9638db2/README.md",
+        "origin": "publisher-native-png",
+        "path": "objects/gemini-s027_base.png",
+        "rgb_sha256": "e381b67484dac28cee8d0eba3e1e2450107d8418dfb6017831ebd796800eb660",
+        "sha256": "a36672095173bf4777c8837657794eec35c2976febff9d84f06e60144cf2c19b",
+        "size": [
+          1408,
+          768
+        ],
+        "source_url": "https://huggingface.co/datasets/CompoSET/CompoSET/resolve/d428bf4f23f50ababb205185f179737cd9638db2/images/s027_base.png"
+      },
+      {
+        "bytes": 1921923,
+        "dhash64": "697c5d4a4d4e5a56",
+        "family": "gemini",
+        "format": "png",
+        "group": "s035_base",
+        "id": "gemini-s035_base",
+        "label": "synthetic",
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "license_source": "https://huggingface.co/datasets/CompoSET/CompoSET/resolve/d428bf4f23f50ababb205185f179737cd9638db2/README.md",
+        "origin": "publisher-native-png",
+        "path": "objects/gemini-s035_base.png",
+        "rgb_sha256": "8cb850b46a7745f203dd8f826c719f2b74c9ec0220415a19d3b68a1dc8399c85",
+        "sha256": "c7761b3a0bb07900b3c080115fc6c05742bb82fd1e10e4d39f297311f5b17cd7",
+        "size": [
+          1408,
+          768
+        ],
+        "source_url": "https://huggingface.co/datasets/CompoSET/CompoSET/resolve/d428bf4f23f50ababb205185f179737cd9638db2/images/s035_base.png"
+      },
+      {
+        "bytes": 1940353,
+        "dhash64": "70316359517058db",
+        "family": "gemini",
+        "format": "png",
+        "group": "s029_base",
+        "id": "gemini-s029_base",
+        "label": "synthetic",
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "license_source": "https://huggingface.co/datasets/CompoSET/CompoSET/resolve/d428bf4f23f50ababb205185f179737cd9638db2/README.md",
+        "origin": "publisher-native-png",
+        "path": "objects/gemini-s029_base.png",
+        "rgb_sha256": "9ddae0b083b51b7043ed68738b7dea2a121e72df1d2d7f1495d8ccb94dc163ad",
+        "sha256": "40ee46e1e76b73a8f7ecdc56fd61e998bb6ff333474674ad32df5a1e8b3f241f",
+        "size": [
+          1408,
+          768
+        ],
+        "source_url": "https://huggingface.co/datasets/CompoSET/CompoSET/resolve/d428bf4f23f50ababb205185f179737cd9638db2/images/s029_base.png"
+      },
+      {
+        "bytes": 2139790,
+        "dhash64": "c0881b4990327551",
+        "family": "gemini",
+        "format": "png",
+        "group": "s007_base",
+        "id": "gemini-s007_base",
+        "label": "synthetic",
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "license_source": "https://huggingface.co/datasets/CompoSET/CompoSET/resolve/d428bf4f23f50ababb205185f179737cd9638db2/README.md",
+        "origin": "publisher-native-png",
+        "path": "objects/gemini-s007_base.png",
+        "rgb_sha256": "f391095a4287fdecdeb60ef0689a5d0c3829712a7883a1a8bff02b0093782997",
+        "sha256": "1e46969793d07aa9e6909f9c1c7ffcb0ee87c47f0995be9d2bdca7832fd8e0d0",
+        "size": [
+          1408,
+          768
+        ],
+        "source_url": "https://huggingface.co/datasets/CompoSET/CompoSET/resolve/d428bf4f23f50ababb205185f179737cd9638db2/images/s007_base.png"
+      },
+      {
+        "bytes": 2138457,
+        "dhash64": "ab4f0e5f1fa63176",
+        "family": "raw-camera",
+        "format": "png",
+        "group": "raw-damaged_root",
+        "id": "raw-00",
+        "label": "ordinary",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "license_source": "https://doi.org/10.14428/DVN/DEQCIM",
+        "native_crop": [
+          2436,
+          1436,
+          1152,
+          1152
+        ],
+        "origin": "linear-demosaiced-native-camera-crop",
+        "path": "objects/raw-00.png",
+        "publisher_file": "Bayer_damaged_root_GT_ISO50_sha1=02cc8ebbc30072a6e9ebb9b71191b05f645989ee.arw",
+        "publisher_sha1": "02cc8ebbc30072a6e9ebb9b71191b05f645989ee",
+        "rgb_sha256": "57835434b8af6fbc16b13e196f25be3e640ebe6fee078d039dc26404976f6733",
+        "sha256": "583657339c36085709a2a1b567a7e606be464714ce8e4dfd6e1f7f71bb6086ec",
+        "size": [
+          1152,
+          1152
+        ],
+        "source_url": "https://doi.org/10.14428/DVN/DEQCIM"
+      },
+      {
+        "bytes": 1744449,
+        "dhash64": "09591d193929d2a0",
+        "family": "raw-camera",
+        "format": "png",
+        "group": "raw-steamdeck1603",
+        "id": "raw-01",
+        "label": "ordinary",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "license_source": "https://doi.org/10.14428/DVN/DEQCIM",
+        "native_crop": [
+          2308,
+          1628,
+          1408,
+          768
+        ],
+        "origin": "linear-demosaiced-native-camera-crop",
+        "path": "objects/raw-01.png",
+        "publisher_file": "Bayer_steamdeck1603_GT_ISO50_sha1=97c32af4b4470715d058c4f53e1e6ce87481ea58.arw",
+        "publisher_sha1": "97c32af4b4470715d058c4f53e1e6ce87481ea58",
+        "rgb_sha256": "43ce0175cf5bd5cf615ceee72271f3b16318fa10a5aa7e42a4de970b991beadf",
+        "sha256": "132e3952337939011261a8e15497c40258207a2107d559e00b8f42395376298c",
+        "size": [
+          1408,
+          768
+        ],
+        "source_url": "https://doi.org/10.14428/DVN/DEQCIM"
+      },
+      {
+        "bytes": 1758997,
+        "dhash64": "1636f676363e59db",
+        "family": "raw-camera",
+        "format": "png",
+        "group": "raw-D60-2",
+        "id": "raw-02",
+        "label": "ordinary",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "license_source": "https://doi.org/10.14428/DVN/DEQCIM",
+        "native_crop": [
+          968,
+          452,
+          1152,
+          1152
+        ],
+        "origin": "linear-demosaiced-native-camera-crop",
+        "path": "objects/raw-02.png",
+        "publisher_file": "Bayer_D60-2_GT_ISO100_sha1=29f5b93638b1cf60d4afbd83fb2c1caca5c1ac38.crw",
+        "publisher_sha1": "29f5b93638b1cf60d4afbd83fb2c1caca5c1ac38",
+        "rgb_sha256": "a8cf2606effb6b55ce958fbcb993187e0404cc9ffeb1a50267e686fa68245128",
+        "sha256": "392fecdd0f83a18d06eca80d80767d1d68d62a4e55fa06ddef1a880104320afc",
+        "size": [
+          1152,
+          1152
+        ],
+        "source_url": "https://doi.org/10.14428/DVN/DEQCIM"
+      },
+      {
+        "bytes": 1369809,
+        "dhash64": "991839b9282c1928",
+        "family": "raw-camera",
+        "format": "png",
+        "group": "raw-D60-3",
+        "id": "raw-03",
+        "label": "ordinary",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "license_source": "https://doi.org/10.14428/DVN/DEQCIM",
+        "native_crop": [
+          840,
+          644,
+          1408,
+          768
+        ],
+        "origin": "linear-demosaiced-native-camera-crop",
+        "path": "objects/raw-03.png",
+        "publisher_file": "Bayer_D60-3_GT_ISO100_sha1=166a79c86423cb67eee21012b663baeb13a5fb24.crw",
+        "publisher_sha1": "166a79c86423cb67eee21012b663baeb13a5fb24",
+        "rgb_sha256": "185ba0d45a81c84897dfdf16131b0260a112ead0430579cee1dc31aa890f5ec2",
+        "sha256": "fac6819115f5c4a667913627c01d187addf2732b176b27b93331b854ebc129f2",
+        "size": [
+          1408,
+          768
+        ],
+        "source_url": "https://doi.org/10.14428/DVN/DEQCIM"
+      },
+      {
+        "author": "JiriMatejicek",
+        "bytes": 4955960,
+        "dhash64": "c88e17e83a33178e",
+        "family": "camera-jpeg-export",
+        "format": "png",
+        "group": "jirimatejicek",
+        "id": "export-00",
+        "label": "ordinary",
+        "license": "https://creativecommons.org/licenses/by-sa/3.0",
+        "license_source": "https://commons.wikimedia.org/wiki/File:Praha_Mala_Strana_Malostranske_namesti_4_hrozen.jpg",
+        "native_crop": [
+          0,
+          0,
+          1920,
+          2560
+        ],
+        "origin": "lossless-png-export-of-publisher-jpeg",
+        "path": "objects/export-00.png",
+        "publisher_sha256": "9006d345cfada77a8087cc989d9e51541d8b1a3720e29b8a7bd1806d8b7cd9d9",
+        "rgb_sha256": "60aca4c6a97f88d2207fea6542f6ff864450d27b3602d62147678c12d725a0b0",
+        "sha256": "be0e7b4897577ec38f55e8a0eb045fa82c3f7aef51b0d9a400411d3a2f8de60d",
+        "size": [
+          1920,
+          2560
+        ],
+        "source_url": "https://commons.wikimedia.org/wiki/File:Praha_Mala_Strana_Malostranske_namesti_4_hrozen.jpg"
+      },
+      {
+        "author": "Thomas Bresson",
+        "bytes": 2646914,
+        "dhash64": "b0c48c0c0d2d2db9",
+        "family": "camera-jpeg-export",
+        "format": "png",
+        "group": "thomas bresson",
+        "id": "export-01",
+        "label": "ordinary",
+        "license": "https://creativecommons.org/licenses/by/3.0",
+        "license_source": "https://commons.wikimedia.org/wiki/File:2013-04-01_15-02-43-bois.jpg",
+        "native_crop": [
+          256,
+          335,
+          1408,
+          768
+        ],
+        "origin": "lossless-png-export-of-publisher-jpeg",
+        "path": "objects/export-01.png",
+        "publisher_sha256": "994f2718ebb0b049c468e69892b8c589a891aa7b33ddefdf04a31cd6927a4da2",
+        "rgb_sha256": "7afab59a0aa7a217ea51892e26f73b89b5bb8f7a1fd015a7f3376551ada625d5",
+        "sha256": "eb79d067d30328e3d3b950b48451a1ef35db24a19f66c8b8f060fdd85e2e3553",
+        "size": [
+          1408,
+          768
+        ],
+        "source_url": "https://commons.wikimedia.org/wiki/File:2013-04-01_15-02-43-bois.jpg"
+      },
+      {
+        "author": "Tade\u00e1\u0161 Bednarz",
+        "bytes": 3351946,
+        "dhash64": "378fc91b1b9b1016",
+        "family": "camera-jpeg-export",
+        "format": "png",
+        "group": "tade\u00e1\u0161 bednarz",
+        "id": "export-02",
+        "label": "ordinary",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0",
+        "license_source": "https://commons.wikimedia.org/wiki/File:B%C3%BDval%C3%A1_hasi%C4%8Dsk%C3%A1_zbrojnice,_Kobe%C5%99ice_2025_(5).jpg",
+        "native_crop": [
+          0,
+          0,
+          1920,
+          1280
+        ],
+        "origin": "lossless-png-export-of-publisher-jpeg",
+        "path": "objects/export-02.png",
+        "publisher_sha256": "f82bf4c4e26c41543993ec9a57e1feac1d755aad3e21b8abbee03aaa3f7282aa",
+        "rgb_sha256": "b0ffeac101073f813540cbb817f47fa9fb84dd56777a8cad851ba6308555c69d",
+        "sha256": "088b5437918dc555a74cf26f194da38b5da0cc1abdc12adcc7553ddc6cbe847b",
+        "size": [
+          1920,
+          1280
+        ],
+        "source_url": "https://commons.wikimedia.org/wiki/File:B%C3%BDval%C3%A1_hasi%C4%8Dsk%C3%A1_zbrojnice,_Kobe%C5%99ice_2025_(5).jpg"
+      },
+      {
+        "author": "Dietmar Rabich",
+        "bytes": 1639320,
+        "dhash64": "f7891e6729084b0e",
+        "family": "camera-jpeg-export",
+        "format": "png",
+        "group": "dietmar rabich",
+        "id": "export-03",
+        "label": "ordinary",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0",
+        "license_source": "https://commons.wikimedia.org/wiki/File:D%C3%BClmen,_Abbrucharbeiten_ehem._KiK-Geb%C3%A4ude_--_2016_--_1413.jpg",
+        "native_crop": [
+          256,
+          259,
+          1408,
+          768
+        ],
+        "origin": "lossless-png-export-of-publisher-jpeg",
+        "path": "objects/export-03.png",
+        "publisher_sha256": "ce353670743463870011db93ced993336f8f8250de61d85ee3a82ab976dc7a59",
+        "rgb_sha256": "d77b6f6d94d05fb6c646eaf2d06e6d5082f98bd268af73fd55554fc084b1b152",
+        "sha256": "b8ff124421111e9f8afcf1afb3756bd6a04b763ce17423c40bb206b39b6e8004",
+        "size": [
+          1408,
+          768
+        ],
+        "source_url": "https://commons.wikimedia.org/wiki/File:D%C3%BClmen,_Abbrucharbeiten_ehem._KiK-Geb%C3%A4ude_--_2016_--_1413.jpg"
+      },
+      {
+        "author": "MB-one",
+        "bytes": 3704244,
+        "dhash64": "c70726b466e6b6b2",
+        "family": "camera-jpeg-export",
+        "format": "png",
+        "group": "mb-one",
+        "id": "export-04",
+        "label": "ordinary",
+        "license": "https://creativecommons.org/licenses/by-sa/3.0",
+        "license_source": "https://commons.wikimedia.org/wiki/File:Vietnam_Residence_Ottawa.jpg",
+        "native_crop": [
+          0,
+          0,
+          1920,
+          1280
+        ],
+        "origin": "lossless-png-export-of-publisher-jpeg",
+        "path": "objects/export-04.png",
+        "publisher_sha256": "abc5db188ddac368d5e657027532600d19419e15bd81a1f13506fe5d07ce7d8e",
+        "rgb_sha256": "b50e352775641c2908c08f380728d20f3529f59f88f1777a0252695688a338cf",
+        "sha256": "5c824f7699a8c18e6cccb3ad5481c10265051e93d7a1b340f4aa96155e61caf6",
+        "size": [
+          1920,
+          1280
+        ],
+        "source_url": "https://commons.wikimedia.org/wiki/File:Vietnam_Residence_Ottawa.jpg"
+      },
+      {
+        "author": "Basile Morin",
+        "bytes": 1775713,
+        "dhash64": "d98b92b292b331e8",
+        "family": "camera-jpeg-export",
+        "format": "png",
+        "group": "basile morin",
+        "id": "export-05",
+        "label": "ordinary",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0",
+        "license_source": "https://commons.wikimedia.org/wiki/File:Bukchon-ro_11-gil_street_with_hanok_houses_at_blue_hour_in_Bukchon_Hanok_Village_Seoul.jpg",
+        "native_crop": [
+          256,
+          256,
+          1408,
+          768
+        ],
+        "origin": "lossless-png-export-of-publisher-jpeg",
+        "path": "objects/export-05.png",
+        "publisher_sha256": "dc545220b3df10c0e8a08e76cb2833e5da99ea6dc8696d8feadace8f72b678d0",
+        "rgb_sha256": "1f5bedda7787f2afea409857ef538823c59076145963307650adacda47cdf31c",
+        "sha256": "2380f5b62d65b96b2d8fc13194ab6f8f89df3fe2e921aab0084c8ca4b52a5474",
+        "size": [
+          1408,
+          768
+        ],
+        "source_url": "https://commons.wikimedia.org/wiki/File:Bukchon-ro_11-gil_street_with_hanok_houses_at_blue_hour_in_Bukchon_Hanok_Village_Seoul.jpg"
+      },
+      {
+        "author": "Flocci Nivis",
+        "bytes": 2974091,
+        "dhash64": "3976b8b0faedffff",
+        "family": "camera-jpeg-export",
+        "format": "png",
+        "group": "flocci nivis",
+        "id": "export-06",
+        "label": "ordinary",
+        "license": "https://creativecommons.org/licenses/by/4.0",
+        "license_source": "https://commons.wikimedia.org/wiki/File:20201231_Fr%C3%B6ttmaninger_Berg_06.jpg",
+        "native_crop": [
+          0,
+          0,
+          1920,
+          1283
+        ],
+        "origin": "lossless-png-export-of-publisher-jpeg",
+        "path": "objects/export-06.png",
+        "publisher_sha256": "7b135668a29a123dfa24040a85a9956c53dbb2e0d33fd9b3c279e483488bf4e3",
+        "rgb_sha256": "74f9257d2721110ce5e7964278e276b41a965ed7ab2c66b042a080ea2f925eab",
+        "sha256": "7a54660c5b819e4d4a227848b5feb5458ba58aa03d81479b6f24972cd60653f5",
+        "size": [
+          1920,
+          1283
+        ],
+        "source_url": "https://commons.wikimedia.org/wiki/File:20201231_Fr%C3%B6ttmaninger_Berg_06.jpg"
+      },
+      {
+        "author": "Bernard Gagnon",
+        "bytes": 1861178,
+        "dhash64": "696c6f8b8f072118",
+        "family": "camera-jpeg-export",
+        "format": "png",
+        "group": "bernard gagnon",
+        "id": "export-07",
+        "label": "ordinary",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0",
+        "license_source": "https://commons.wikimedia.org/wiki/File:Simtokha_Dzong,_Bhutan_07.jpg",
+        "native_crop": [
+          1394,
+          1014,
+          1408,
+          768
+        ],
+        "origin": "lossless-png-export-of-publisher-jpeg",
+        "path": "objects/export-07.png",
+        "publisher_sha256": "c6833ff067327baba56f57ec1003865e63f02ec678f94349b00f435b0cbc7dc6",
+        "rgb_sha256": "b2b291fb4cf0e11792492145771fe094e4229312ecd8f3d8fd6e50ad67d1e9d8",
+        "sha256": "c801c4461a4434d714655bb45c6bc9c13f61954f761bad60f6e3ffe4d0b177a4",
+        "size": [
+          1408,
+          768
+        ],
+        "source_url": "https://commons.wikimedia.org/wiki/File:Simtokha_Dzong,_Bhutan_07.jpg"
+      },
+      {
+        "browser_version": "157.0.8103.51",
+        "bytes": 57508,
+        "dhash64": "000004c083c32579",
+        "family": "browser",
+        "format": "png",
+        "group": "browser-reading",
+        "id": "browser-reading-light",
+        "label": "ordinary",
+        "license": "project-authored",
+        "origin": "native-browser-screenshot",
+        "path": "objects/browser-reading-light.png",
+        "rgb_sha256": "9e4f8f84993378153cbd97586cfe2b912eb5bee58aacf5702916fb168512a187",
+        "sha256": "023e2dcf6093363e21b3268cd633a56cec2f944933436d0303fb5b9858f19172",
+        "size": [
+          1360,
+          1080
+        ]
+      },
+      {
+        "browser_version": "157.0.8103.51",
+        "bytes": 57198,
+        "dhash64": "000801ccdcdc1a86",
+        "family": "browser",
+        "format": "png",
+        "group": "browser-reading",
+        "id": "browser-reading-dark",
+        "label": "ordinary",
+        "license": "project-authored",
+        "origin": "native-browser-screenshot",
+        "path": "objects/browser-reading-dark.png",
+        "rgb_sha256": "c9e6875cb7537a1f79b6ac71dda2470ef71e44d8d446de23b213c873a115f0f4",
+        "sha256": "047f05440e280236dbf21a3d8b487ec323819d7359af2f940b6e19db2e8cda19",
+        "size": [
+          1360,
+          1080
+        ]
+      },
+      {
+        "browser_version": "157.0.8103.51",
+        "bytes": 35599,
+        "dhash64": "000a30cbcbd82579",
+        "family": "browser",
+        "format": "png",
+        "group": "browser-dashboard",
+        "id": "browser-dashboard-light",
+        "label": "ordinary",
+        "license": "project-authored",
+        "origin": "native-browser-screenshot",
+        "path": "objects/browser-dashboard-light.png",
+        "rgb_sha256": "a64b96139c45256e8764260bbe8a271c69662dee7892e875a9754c3f3dade1ee",
+        "sha256": "5734232a200e28770e18ec848e9049e8ce64e34486f8db7e3aa57f95f8cf5eee",
+        "size": [
+          1360,
+          1080
+        ]
+      },
+      {
+        "browser_version": "157.0.8103.51",
+        "bytes": 35409,
+        "dhash64": "00114eb4b4a65a86",
+        "family": "browser",
+        "format": "png",
+        "group": "browser-dashboard",
+        "id": "browser-dashboard-dark",
+        "label": "ordinary",
+        "license": "project-authored",
+        "origin": "native-browser-screenshot",
+        "path": "objects/browser-dashboard-dark.png",
+        "rgb_sha256": "200fb5f369cc3ed5f5dfb41541babef2e4e9341c65f5af028798ec9af345a9b5",
+        "sha256": "17b0a8adecad0d2c0a6607edf819b185853af9ca9907c685aa3c45aee71d8c59",
+        "size": [
+          1360,
+          1080
+        ]
+      },
+      {
+        "browser_version": "157.0.8103.51",
+        "bytes": 43646,
+        "dhash64": "0184c0c080c11369",
+        "family": "browser",
+        "format": "png",
+        "group": "browser-form",
+        "id": "browser-form-light",
+        "label": "ordinary",
+        "license": "project-authored",
+        "origin": "native-browser-screenshot",
+        "path": "objects/browser-form-light.png",
+        "rgb_sha256": "0f1d4265b95007623dbfd7f8cf83e19596251fd3d568cdbd1a883d4c4c1b8a65",
+        "sha256": "bb555444b748a06e34b32963b9540f96abb96feb1efcddbd911ce13e8d621be4",
+        "size": [
+          1360,
+          1080
+        ]
+      },
+      {
+        "browser_version": "157.0.8103.51",
+        "bytes": 43467,
+        "dhash64": "0689d6c4d6cc2c96",
+        "family": "browser",
+        "format": "png",
+        "group": "browser-form",
+        "id": "browser-form-dark",
+        "label": "ordinary",
+        "license": "project-authored",
+        "origin": "native-browser-screenshot",
+        "path": "objects/browser-form-dark.png",
+        "rgb_sha256": "3314d6b5eabe29382fbd3f085f2906489d5d629d10246c11744c343a657f7572",
+        "sha256": "0e99a814d7ad55cf629c43f5d96524555e38cf348587a231c882af96a58c5872",
+        "size": [
+          1360,
+          1080
+        ]
+      },
+      {
+        "browser_version": "157.0.8103.51",
+        "bytes": 47283,
+        "dhash64": "0000088182c34379",
+        "family": "browser",
+        "format": "png",
+        "group": "browser-pattern",
+        "id": "browser-pattern-light",
+        "label": "ordinary",
+        "license": "project-authored",
+        "origin": "native-browser-screenshot",
+        "path": "objects/browser-pattern-light.png",
+        "rgb_sha256": "e2d775422e8eabb492eca8a4a30c882eb80cbbc19df6c2f2e16ca9b49e4811a8",
+        "sha256": "f36a55a9e6692d036849fac2cc967e5edc888c94876254dfe4af3682ebfce69a",
+        "size": [
+          1360,
+          1080
+        ]
+      },
+      {
+        "browser_version": "157.0.8103.51",
+        "bytes": 47260,
+        "dhash64": "000001ccdcdc3486",
+        "family": "browser",
+        "format": "png",
+        "group": "browser-pattern",
+        "id": "browser-pattern-dark",
+        "label": "ordinary",
+        "license": "project-authored",
+        "origin": "native-browser-screenshot",
+        "path": "objects/browser-pattern-dark.png",
+        "rgb_sha256": "583e1afc3f07a7b05a4f489ba4f0b4d6858f80139feb3fbd2cb9bdecae0a8e04",
+        "sha256": "40aa6d44d6137e5a6266a6b1063d06f6472cbfd25573a41bafb4bcf6ee09eac4",
+        "size": [
+          1360,
+          1080
+        ]
+      }
+    ],
+    "jpeg_panel_sha256": "a98bebe846ebd2e8d8ca269b61f3573535fc440e93b9e20f372fc86b7fb4b8e8",
+    "old_panel_sha256": "cb0220479eeac876bbfdc41413a2abcd48fa7264de99cb2156beb7148672c193",
+    "operating_point": {
+      "raw_mean_logit": -5.4320597648620605
+    },
+    "operating_point_sha256": "c97b5e02b26a2c8763c9f1c8cb543f5ab63780b65f0f554e0450a42ca470d4bc",
+    "schema": "chipmunk.image-whole-png-transfer/1",
+    "screenshot_script_sha256": "3d0f18c545442d22eca3f8594db81614987ddadca15f5925ccf131801e8602f6",
+    "sources": {
+      "CompoSET": {
+        "readme_sha256": "ab4d1035699f5aa1c291752931f22a8f09271c962c2d5fc3a8c41dc8d55db0d9",
+        "repository": "CompoSET/CompoSET",
+        "revision": "d428bf4f23f50ababb205185f179737cd9638db2"
+      },
+      "T4": {
+        "generation_sha256": "a2cefc295ea19d8e688aa04799bc9ac0063e21d19a553c1676a0fa3abfff8bc0",
+        "readme_sha256": "5b511d4fa261519101c6864e1d8e0353420682288ac63f1f3c16389e9e8e82e2",
+        "repository": "MrAlexGov/t4-imagegen-llm-judges",
+        "revision": "9136726108ac95b1aabdf200c0969f6b3b39c1d1"
+      }
+    },
+    "weight_receipt_sha256": "f8ef4c285ed4d344bce32e03fcdbd5127d68c7566fa53ca086780569723ff17b"
+  },
+  "freeze_sha256": "ad3fbcde18e10efa7dbacc41ba3b681af8fd68dfb59dc46d0c541169c2373e2c",
+  "native_crops_verified": 108,
+  "summary": {
+    "added_control_groups": [],
+    "added_generator_families": [],
+    "baseline_complete": false,
+    "by_family": {
+      "browser": {
+        "added": 0,
+        "baseline_ai": 0,
+        "baseline_inconclusive": 0,
+        "baseline_original": 0,
+        "baseline_record": 0,
+        "baseline_unavailable": 0,
+        "flags": 6,
+        "misses": 2,
+        "total": 8
+      },
+      "camera-jpeg-export": {
+        "added": 0,
+        "baseline_ai": 0,
+        "baseline_inconclusive": 0,
+        "baseline_original": 0,
+        "baseline_record": 0,
+        "baseline_unavailable": 0,
+        "flags": 0,
+        "misses": 8,
+        "total": 8
+      },
+      "flux-schnell": {
+        "added": 0,
+        "baseline_ai": 0,
+        "baseline_inconclusive": 0,
+        "baseline_original": 0,
+        "baseline_record": 0,
+        "baseline_unavailable": 0,
+        "flags": 5,
+        "misses": 0,
+        "total": 5
+      },
+      "gemini": {
+        "added": 0,
+        "baseline_ai": 0,
+        "baseline_inconclusive": 0,
+        "baseline_original": 0,
+        "baseline_record": 0,
+        "baseline_unavailable": 0,
+        "flags": 6,
+        "misses": 0,
+        "total": 6
+      },
+      "raw-camera": {
+        "added": 0,
+        "baseline_ai": 0,
+        "baseline_inconclusive": 0,
+        "baseline_original": 0,
+        "baseline_record": 0,
+        "baseline_unavailable": 0,
+        "flags": 0,
+        "misses": 4,
+        "total": 4
+      },
+      "sdxl": {
+        "added": 0,
+        "baseline_ai": 0,
+        "baseline_inconclusive": 0,
+        "baseline_original": 0,
+        "baseline_record": 0,
+        "baseline_unavailable": 0,
+        "flags": 5,
+        "misses": 0,
+        "total": 5
+      }
+    },
+    "candidate_gate_passed": false,
+    "control_groups_flagged": [
+      "browser-dashboard",
+      "browser-form",
+      "browser-reading"
+    ],
+    "full_admission_passed": false
+  }
+}

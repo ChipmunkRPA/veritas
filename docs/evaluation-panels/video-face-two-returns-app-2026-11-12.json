@@ -1,0 +1,76 @@
+{
+  "profile": "full",
+  "results": {
+    "dual_picture_cuts": {
+      "evidence_version": "video-evidence-11",
+      "native_anchor_frames": {},
+      "offline_package_verified": true,
+      "original_and_crop_assets_verified": 0,
+      "ranges": {},
+      "report_sha256": "30843376276ab29ceca9e113c848499c78e2e0556bfc4e0f0a198664a9b1f324",
+      "report_version": "veritas-report-2.0.r102",
+      "signed_measurement_commitments_verified": 0,
+      "signed_source_replay": "Original SHA-256 and the source frame clock matched. Verified native frames (120), original images or crops (0), mouth patches (0), and aligned face inputs (0). Replayed every frame in the repeated-picture inspection (120). Recomputed the exact moving-sequence comparison.",
+      "source_time_base": "1/25000"
+    },
+    "dual_swap": {
+      "evidence_version": "video-evidence-18",
+      "native_anchor_frames": {
+        "face-short-return/2": {
+          "after": 84,
+          "before": 76,
+          "during": 80
+        },
+        "face-short-return/7": {
+          "after": 58,
+          "before": 50,
+          "during": 54
+        }
+      },
+      "offline_package_verified": true,
+      "original_and_crop_assets_verified": 12,
+      "ranges": {
+        "face-short-return/2": [
+          78,
+          84
+        ],
+        "face-short-return/7": [
+          52,
+          58
+        ]
+      },
+      "report_sha256": "9dfbe347e8efc6274ac59a85c1bd4c750794453884b4312986193dd8332a1b88",
+      "report_version": "veritas-report-2.0.r102",
+      "signed_measurement_commitments_verified": 2,
+      "signed_source_replay": "Original SHA-256 and the source frame clock matched. Verified native frames (120), original images or crops (12), mouth patches (0), and aligned face inputs (22). Recomputed both guarded background boundaries and verified the source carrier. Replayed every frame in the repeated-picture inspection (120). Recomputed the exact moving-sequence comparison.",
+      "source_time_base": "1/25000"
+    },
+    "single_early": {
+      "evidence_version": "video-evidence-13",
+      "native_anchor_frames": {
+        "face-short-return/2": {
+          "after": 58,
+          "before": 50,
+          "during": 54
+        }
+      },
+      "offline_package_verified": true,
+      "original_and_crop_assets_verified": 6,
+      "ranges": {
+        "face-short-return/2": [
+          52,
+          58
+        ]
+      },
+      "report_sha256": "663df7e9ab376dd2c7eddd49e73acae1bce99f3343cdc61b2bb9327d21b25b64",
+      "report_version": "veritas-report-2.0.r102",
+      "signed_measurement_commitments_verified": 1,
+      "signed_source_replay": "Original SHA-256 and the source frame clock matched. Verified native frames (120), original images or crops (6), mouth patches (0), and aligned face inputs (11). Replayed every frame in the repeated-picture inspection (120). Recomputed the exact moving-sequence comparison.",
+      "source_time_base": "1/25000"
+    }
+  },
+  "schema": "chipmunk.video-second-face-return-app-replay/1",
+  "simulated_paid_analyses": 4,
+  "whole_decision_and_prior_range_equal_with_feature_disabled_and_enabled": true,
+  "worker_scope": "The normal face detection, tracking and appearance worker paths on CPU"
+}

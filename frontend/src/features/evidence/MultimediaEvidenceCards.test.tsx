@@ -260,6 +260,37 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.getByText(/Selected frame 9 · source 12\.160 s · player 2\.160 s/)).toBeTruthy()
   })
 
+  it('keeps the two brief face-change ranges and their crop anchors separate', () => {
+    const set = { ...structuredClone(video), version: 'video-evidence-18' }
+    const first = set.packets[0]
+    set.packets = [12, 13].map((start, packetIndex) => {
+      const id = `VF0${packetIndex + 1}`
+      const index = 10 + packetIndex * 25
+      return {
+        ...first, id, title: 'Brief face-change range to review', claim_scope: 'sampled_window',
+        face_return: { start_stream_s: start, end_stream_s: start + .28,
+          frame_inputs: Array.from({ length: 8 }, (_, i) => ({ frame_index: index - 1 + i })) },
+        frames: (['before', 'during', 'after'] as const).map((interval_role, i) => {
+          const time = start - .04 + i * .16
+          return { ...first.frames[0], id: `${id}.${i + 1}`, interval_role, score: null, is_peak: false,
+            anchor: { frame_index: index - 1 + 4 * i, pts: Math.round(time * 1000), time_base: '1/1000',
+              stream_time_s: time, playback_time_s: time - 10 } }
+        }),
+      }
+    })
+    show(set)
+    expect(screen.getByText(/These counts cover visual checks only/)).toBeTruthy()
+    const [early, late] = screen.getAllByRole('article').map((article) => within(article))
+    expect(early.getByText('12.000 s–12.280 s')).toBeTruthy()
+    expect(late.getByText('13.000 s–13.280 s')).toBeTruthy()
+    expect(early.getAllByAltText(/VF01\.\d: source face crop for context/)).toHaveLength(3)
+    expect(late.getAllByAltText(/VF02\.\d: source face crop for context/)).toHaveLength(3)
+    expect(early.getByText(/exclusive end.*no weight/)).toBeTruthy()
+    expect(late.getByText(/exclusive end.*no weight/)).toBeTruthy()
+    fireEvent.click(late.getByRole('button', { name: 'Go to frame 38 in playback' }))
+    expect(screen.getByText(/Selected frame 38 · source 13\.120 s · player 3\.120 s/)).toBeTruthy()
+  })
+
   it('shows one exact picture per hold endpoint and locates it on the source clock', () => {
     const set = structuredClone(video)
     set.version = 'video-evidence-10'

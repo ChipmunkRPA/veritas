@@ -356,33 +356,46 @@ def _return_observations(result: dict, table: FrameTable, source: dict, anchors:
     candidates, scored = [], set()
     for signal in result.get("signals", []):
         details = signal.get("details") or {}
-        if (record := details.get("face_return")) is None:
+        primary, second = details.get("face_return"), details.get("face_return_secondary")
+        if primary is None and second is None:
             continue
         if signal.get("status", "ok") != "ok" or signal.get("effective_weight") != 0.0 or candidates:
             raise PacketIntegrityError("Supplemental face evidence needs one confidence-neutral source check")
-        record = json.loads(canonical_json(record))
-        face_return_binding.validate_record(record, source, table_pts=table.pts, interpolated=table.interpolated,
-                                            rotation=table.rotation, truncated=table.truncated)
-        face_return_binding.validate_distinct(record, face_detail_repeat.original_range(details))
-        for item in (*record["frame_inputs"], *record["scene_frame_inputs"]):
-            i = item["frame_index"]
-            if i not in anchors or any(item[key] != anchors[i][key] for key in ("pts", "decoded_rgb_sha256")):
-                raise PacketIntegrityError("Short face-change evidence differs from committed native frames")
-            scored.add(i)
-        faces = {item["frame_index"]: item for item in record["frame_inputs"]}
-        indices = sorted(faces.keys() | {item["frame_index"] for item in record["scene_frame_inputs"]})
-        rows = []
-        for role in face_return_binding.ROLES:
-            i = record["anchors"][role]
-            rows.append({"frame_index": i, "score": None, "interval_role": role,
-                         "box": face_interval_binding.face_context_box(faces[i]["bbox"], source)})
-        candidates.append({"face_return": record, "window": {"frame_indices": indices},
-                           "signals": [signal], "track_id": None, "series_name": "short_face_appearance",
-                           "exhibit": {"id": next(iter(signal.get("exhibit_ids", [])), "")},
-                           "rows": rows,
-                           "peak": {"frame_index": record["anchors"]["during"], "score": record["response"]},
-                           "threshold": None, "scored_frame_count": len(indices)})
+        incumbent = face_detail_repeat.original_range(details)
+        if second is not None:
+            if second.get("method") != face_return_binding.SECOND_METHOD:
+                raise PacketIntegrityError("The second face range has an unexpected review method")
+            face_return_binding.validate_second(second, primary, incumbent, details.get("face_boundary"))
+        for record in (primary, second):
+            if record is None:
+                continue
+            record = json.loads(canonical_json(record))
+            face_return_binding.validate_record(record, source, table_pts=table.pts, interpolated=table.interpolated,
+                                                rotation=table.rotation, truncated=table.truncated)
+            face_return_binding.validate_distinct(record, incumbent)
+            candidate = _return_candidate(signal, record, source, anchors)
+            scored.update(candidate["window"]["frame_indices"])
+            candidates.append(candidate)
     return candidates, scored
+
+
+def _return_candidate(signal, record, source, anchors):
+    for item in (*record["frame_inputs"], *record["scene_frame_inputs"]):
+        i = item["frame_index"]
+        if i not in anchors or any(item[key] != anchors[i][key] for key in ("pts", "decoded_rgb_sha256")):
+            raise PacketIntegrityError("Short face-change evidence differs from committed native frames")
+    faces = {item["frame_index"]: item for item in record["frame_inputs"]}
+    indices = sorted(faces.keys() | {item["frame_index"] for item in record["scene_frame_inputs"]})
+    rows = []
+    for role in face_return_binding.ROLES:
+        i = record["anchors"][role]
+        rows.append({"frame_index": i, "score": None, "interval_role": role,
+                     "box": face_interval_binding.face_context_box(faces[i]["bbox"], source)})
+    return {"face_return": record, "window": {"frame_indices": indices},
+            "signals": [signal], "track_id": None, "series_name": "short_face_appearance",
+            "exhibit": {"id": next(iter(signal.get("exhibit_ids", [])), "")}, "rows": rows,
+            "peak": {"frame_index": record["anchors"]["during"], "score": record["response"]},
+            "threshold": None, "scored_frame_count": len(indices)}
 
 
 def face_detail_coverage(result, table, anchors):
@@ -603,7 +616,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     chosen += return_candidates
     scored_frames |= window_frames
     set_id = current_set_id(analysis)
-    version = face_return_binding.METHOD_VERSIONS[return_candidates[0]["face_return"]["method"]] if return_candidates else VERSION
+    version = face_return_binding.METHOD_VERSIONS[return_candidates[-1]["face_return"]["method"]] if return_candidates else VERSION
     document = {"schema": SCHEMA, "version": version, "id": set_id, "status": "ready", "analysis_id": analysis.id,
                 "revision": analysis.revision, "original_result_hash": analysis.result_hash, "source": source, "packets": [],
                 "coverage": {"kind": "point_and_window_samples" if window_frames else "point_samples", "frame_count": len(table), "decoded_frame_indices": sorted(anchors),

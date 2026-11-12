@@ -13,6 +13,7 @@ from app.evidence.video_packet_versions import (
     FINE_SCENE_FACE_VERSION,
     GUARDED_720P30_FACE_VERSION,
     GUARDED_CODEC_FACE_VERSION,
+    SECOND_SHORT_FACE_VERSION,
     SHORT_FACE_VERSION,
 )
 
@@ -22,7 +23,10 @@ DENSE_DURATION_METHOD = "face-short-return/3"
 FINE_SCENE_METHOD = "face-short-return/4"
 GUARDED_CODEC_METHOD = "face-short-return/5"
 GUARDED_720P30_METHOD = "face-short-return/6"
-GUARDED_METHODS = frozenset({GUARDED_CODEC_METHOD, GUARDED_720P30_METHOD})
+SECOND_METHOD = "face-short-return/7"
+SECOND_PRIOR_METHODS = frozenset({METHOD, DENSE_METHOD, FINE_SCENE_METHOD})
+SECOND_MIN_GAP = 2
+GUARDED_METHODS = frozenset({GUARDED_CODEC_METHOD, GUARDED_720P30_METHOD, SECOND_METHOD})
 GUARDED_720P30_DIMENSIONS = (1280, 720)
 GUARDED_720P30_STEP = Fraction(1, 30)
 FINE_SCENE_FRAME_COUNT = 120
@@ -41,7 +45,8 @@ DENSE_DIMENSIONS = (640, 360)
 DENSE_FRAME_PROFILES = {80: DENSE_DURATION_METHOD, 120: DENSE_METHOD, 150: DENSE_DURATION_METHOD}
 METHOD_VERSIONS = {METHOD: SHORT_FACE_VERSION, DENSE_METHOD: DENSE_SHORT_FACE_VERSION,
                    DENSE_DURATION_METHOD: DENSE_DURATION_FACE_VERSION, FINE_SCENE_METHOD: FINE_SCENE_FACE_VERSION,
-                   GUARDED_CODEC_METHOD: GUARDED_CODEC_FACE_VERSION, GUARDED_720P30_METHOD: GUARDED_720P30_FACE_VERSION}
+                   GUARDED_CODEC_METHOD: GUARDED_CODEC_FACE_VERSION, GUARDED_720P30_METHOD: GUARDED_720P30_FACE_VERSION,
+                   SECOND_METHOD: SECOND_SHORT_FACE_VERSION}
 POINT = 0.10
 SCENE_POINT = 0.55
 ROLES = ("before", "during", "after")
@@ -87,9 +92,35 @@ def validate_distinct(record, incumbent):
              "Supplemental face range duplicates the incumbent range")
 
 
+def separated(left, right, before, after, base):
+    gap = Fraction(SECOND_MIN_GAP, 25)
+    return (before - right) * base >= gap or (left - after) * base >= gap
+
+
+def validate_second(record, primary, *incumbents):
+    _require(isinstance(primary, dict) and primary.get("method") in SECOND_PRIOR_METHODS,
+             "A second face range requires an earlier qualified brief face range")
+    left, right = record["start_pts"], record["end_pts"]
+    base = Fraction(record["time_base"])
+    for other in (primary, *incumbents):
+        if other is not None:
+            _require(record["time_base"] == other["time_base"]
+                     and separated(left, right, other["start_pts"], other["end_pts"], base),
+                     "The second face range overlaps or is too close to an earlier range")
+
+
 def validate_set(document):
-    selected = [packet.get("semantics") for packet in document["packets"]
-                if "face_return" in packet or packet.get("semantics") in METHOD_VERSIONS]
+    packets = [packet for packet in document["packets"]
+               if "face_return" in packet or packet.get("semantics") in METHOD_VERSIONS]
+    selected = [packet.get("semantics") for packet in packets]
+    if document["version"] == SECOND_SHORT_FACE_VERSION:
+        _require(len(packets) == 2 and selected[0] in SECOND_PRIOR_METHODS and selected[1] == SECOND_METHOD
+                 and packets[0].get("signal_refs") == packets[1].get("signal_refs"),
+                 "The evidence version requires two qualified ranges from the same review")
+        prior = [packet.get(key) for packet in document["packets"] for key in ("face_sequence", "face_boundary")
+                 if packet.get(key)]
+        validate_second(packets[1]["face_return"], packets[0]["face_return"], *prior)
+        return
     expected = [method for method, version in METHOD_VERSIONS.items() if version == document["version"]]
     _require(selected == expected, "The evidence version disagrees with its supplemental face range")
 
@@ -198,6 +229,9 @@ def validate_record(record, source, *, table_pts=None, interpolated=(), rotation
             carrier = GUARDED_CODEC_CARRIERS.get(encoding)
             _require(frame_count == GUARDED_CODEC_FRAME_COUNT and carrier is not None and record.get("source_carrier") == carrier,
                      "Guarded short face-change evidence requires its measured VP9/WebM or HEVC/MP4 profile")
+        elif method == SECOND_METHOD:
+            _require(frame_count == GUARDED_CODEC_FRAME_COUNT and encoding == DENSE_ENCODING and record.get("source_carrier") == "mp4",
+                     "A second face range requires 120 H.264 pictures in MP4")
         else:
             matches_profile = (frame_count == FINE_SCENE_FRAME_COUNT if method == FINE_SCENE_METHOD
                                else DENSE_FRAME_PROFILES.get(frame_count) == method)

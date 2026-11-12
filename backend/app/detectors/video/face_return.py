@@ -22,7 +22,9 @@ from app.evidence.face_return_binding import (
     GUARDED_720P30_STEP,
     GUARDED_CODEC_CARRIERS,
     GUARDED_CODEC_FRAME_COUNT,
+    GUARDED_SCENE_QUARTILE_POINT,
     PROFILE_STEPS,
+    separated,
 )
 from app.provenance.c2pa import unsupported_container
 
@@ -179,9 +181,14 @@ def distribution_margin(distances: np.ndarray, before: list[int], core: list[int
 def highest(times: tuple[Fraction, ...], indices: tuple[int, ...], features: dict[int, Sample], *,
             compare_scenes=None) -> Range | None:
     """Keep the top guarded interval across all core sizes before applying the duration bound."""
+    return max(candidates(times, indices, features, compare_scenes=compare_scenes),
+               key=lambda candidate: candidate.response, default=None)
+
+
+def candidates(times, indices, features, *, compare_scenes=None):
     visible = {i: features[i] for i in indices if features[i].vector is not None and features[i].face is not None}
     if len(visible) < 9:
-        return None
+        return
     order = {i: k for k, i in enumerate(visible)}
     vectors = np.asarray([sample.vector for sample in visible.values()])
     distances = 1. - np.clip(vectors @ vectors.T, -1., 1.)
@@ -189,7 +196,6 @@ def highest(times: tuple[Fraction, ...], indices: tuple[int, ...], features: dic
         def compare_scenes(a, b):
             return scene_correlation(features[a], features[b])
     adjacent = {(a, b): compare_scenes(a, b) for a, b in zip(indices, indices[1:])}
-    best = None
     for size in CORE_SIZES:
         needed = max(3, math.ceil(size * .66))
         for start in range(FLANK_SIZE, len(indices) - size - FLANK_SIZE + 1):
@@ -208,9 +214,26 @@ def highest(times: tuple[Fraction, ...], indices: tuple[int, ...], features: dic
                 continue
             left, middle, right = ([order[i] for i in group] for group in (before, core, after))
             response = distribution_margin(distances, left, middle, right)
-            if best is None or response > best.response:
-                best = Range(indices[start], indices[stop], response, (entry, exit_), (before, core, after), scene_frames)
-    return best
+            yield Range(indices[start], indices[stop], response, (entry, exit_), (before, core, after), scene_frames)
+
+
+def scene_quartiles(candidate, features):
+    return [scene_lower_quartile(features[a], features[b])
+            for a, b in (candidate.scene_frames[:2], candidate.scene_frames[2:])]
+
+
+def second(times, indices, features, table, earlier):
+    best, quartiles = None, None
+    for candidate in candidates(times, indices, features):
+        if (best is not None and candidate.response <= best.response) or not distinct(candidate, table, None):
+            continue
+        a, b = table.pts[candidate.start], table.pts[candidate.end]
+        if any(not separated(a, b, item["start_pts"], item["end_pts"], table.tb) for item in earlier):
+            continue
+        context = scene_quartiles(candidate, features)
+        if all(value is not None and value >= GUARDED_SCENE_QUARTILE_POINT for value in context):
+            best, quartiles = candidate, context
+    return best, quartiles
 
 
 def distinct(candidate: Range, table: FrameTable, incumbent: dict | None) -> bool:

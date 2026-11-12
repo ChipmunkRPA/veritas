@@ -30,6 +30,7 @@ from app.evidence.video_packet_versions import (
     DENSE_FACE_VERSIONS,
     GUARDED_720P30_FACE_VERSION,
     GUARDED_CODEC_FACE_VERSION,
+    SECOND_SHORT_FACE_VERSION,
 )
 from app.reports.public_verify import SCHEMA
 from app.reports.verify_image_source import _matches
@@ -184,7 +185,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     source = evidence["source"]
     encoding = None
     delivery = None
-    guarded_codec = evidence["version"] in {GUARDED_CODEC_FACE_VERSION, GUARDED_720P30_FACE_VERSION}
+    guarded_codec = evidence["version"] in {GUARDED_CODEC_FACE_VERSION, GUARDED_720P30_FACE_VERSION, SECOND_SHORT_FACE_VERSION}
     if evidence["version"] in DENSE_FACE_VERSIONS:
         delivery = probe_container(original)
         encoding = delivery.get("codec"), delivery.get("pix_fmt")

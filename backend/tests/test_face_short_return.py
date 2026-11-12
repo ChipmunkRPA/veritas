@@ -12,6 +12,7 @@ from app.detectors.video.adapters import face_appearance
 from app.detectors.video.adapters.face_sequence import SequenceInputs
 from app.detectors.video.decode import FrameTable
 from app.engine.detector import DetectorResult, UnitScore
+from app.evidence import face_return_binding
 from app.evidence.face_return_binding import DENSE_METHOD, FINE_SCENE_METHOD, GUARDED_720P30_METHOD
 from scripts import video_face_return_fine_scene as frozen_fine
 from scripts import video_face_return_transfer as trial
@@ -74,6 +75,47 @@ def test_scope_and_exclusive_overlap_are_exact():
     assert face_return.distinct(candidate, table, {"start_pts": table.pts[10], "end_pts": table.pts[29]})
     assert not face_return.distinct(replace(candidate, response=.1), table, None)
     assert not face_return.distinct(replace(candidate, end=23), table, None)
+
+
+def test_second_dense_range_reuses_first_without_publishing_a_cut():
+    base = table_for(25)
+    table = replace(base, pts=base.pts[:120], pict_types=base.pict_types[:120],
+                    width=640, height=360, coded_width=640, coded_height=360)
+    times, indices = face_return.dense_schedule(table, ("h264", "yuv420p"))
+    face = Face(245, 108, 110, 110, .99)
+    rng = np.random.default_rng(120)
+    image = rng.integers(0, 256, (360, 640, 3), dtype=np.uint8)
+    background = face_return.scene(image, face)
+    cut = face_return.scene(image[:, ::-1], face)
+    vectors = np.eye(3, 128, dtype=np.float32)
+    primary = {"method": DENSE_METHOD, "time_base": table.time_base,
+               "start_pts": table.pts[52], "end_pts": table.pts[58]}
+    for alternate_scene in (background, cut):
+        features = {}
+        for i in indices:
+            kind = 1 if 52 <= i < 58 else 2 if 78 <= i < 84 else 0
+            features[i] = face_return.Sample(face, vectors[kind], alternate_scene if kind == 2 else background)
+        chosen, quartiles = face_return.second(times, indices, features, table, (primary,))
+        if alternate_scene is cut:
+            assert chosen is None and quartiles is None
+        else:
+            assert (chosen.start, chosen.end) == (78, 84)
+            assert chosen.anchors() == {"before": 76, "during": 80, "after": 84}
+            assert min(quartiles) > .98
+
+
+def test_second_range_evidence_rejects_missing_or_overlapping_primary():
+    primary = {"method": DENSE_METHOD, "time_base": "1/25", "start_pts": 52, "end_pts": 58}
+    second = {"method": face_return_binding.SECOND_METHOD, "time_base": "1/25", "start_pts": 78, "end_pts": 84}
+    packets = [{"face_return": record, "semantics": record["method"], "signal_refs": [{"id": "check-a"}]}
+               for record in (primary, second)]
+    document = {"version": face_return_binding.SECOND_SHORT_FACE_VERSION, "packets": packets}
+    face_return_binding.validate_set(document)
+    with pytest.raises(ValueError, match="requires two qualified ranges"):
+        face_return_binding.validate_set({**document, "packets": packets[1:]})
+    with pytest.raises(ValueError, match="overlaps or is too close"):
+        face_return_binding.validate_set({**document, "packets": [packets[0], {**packets[1],
+                                         "face_return": {**second, "start_pts": 59, "end_pts": 65}}]})
 
 
 @pytest.mark.parametrize("frame_count", [80, 120, 150])

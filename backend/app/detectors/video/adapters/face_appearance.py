@@ -26,6 +26,8 @@ from app.evidence.face_return_binding import (
     GUARDED_CODEC_METHOD,
     GUARDED_METHODS,
     GUARDED_SCENE_QUARTILE_POINT,
+    SECOND_METHOD,
+    SECOND_PRIOR_METHODS,
     observation,
 )
 
@@ -160,10 +162,20 @@ def _inspect_return(details, inputs, yunet, recognizer, deadline, incumbent):
                          GUARDED_720P30_METHOD, stop, source_carrier="mp4")
             coverage.update(dense_coverage)
         return
+    dense = face_return.dense_schedule(table, inputs.encoding)
+    path = getattr(inputs.store, "path", None)
+    context = ([] if settings.video_face_second_return_review and dense is not None and len(table) == 120
+               and path is not None and face_return.source_carrier(path) == "mp4" else None)
+    _inspect_standard_return(details, inputs, yunet, recognizer, deadline, incumbent, planned, dense, coverage, stop, context)
+    if context is not None:
+        _inspect_second_return(details, inputs, yunet, recognizer, deadline, incumbent, dense, stop, context)
+
+
+def _inspect_standard_return(details, inputs, yunet, recognizer, deadline, incumbent, planned, dense, coverage, stop, context):
+    table = inputs.table
     _return_pass(details, inputs, yunet, recognizer, deadline, incumbent, planned, coverage, face_return.METHOD, stop)
     if time.monotonic() >= stop:
         return
-    dense = face_return.dense_schedule(table, inputs.encoding)
     if dense is None:
         path = getattr(inputs.store, "path", None)
         if coverage["status"] == "no_distinct_range" and path is not None:
@@ -181,8 +193,9 @@ def _inspect_return(details, inputs, yunet, recognizer, deadline, incumbent):
     if coverage["status"] == "no_distinct_range":
         dense_coverage["measured_face_frames"] = 0
         coverage["dense_fallback"] = dense_coverage
+        additional = {} if context is None else {"context": context}
         _return_pass(details, inputs, yunet, recognizer, deadline, incumbent, dense, dense_coverage,
-                     DENSE_FRAME_PROFILES[len(table)], stop)
+                     DENSE_FRAME_PROFILES[len(table)], stop, **additional)
         if dense_coverage["status"] == "localized":
             coverage["status"] = "localized"
             return
@@ -198,8 +211,34 @@ def _inspect_return(details, inputs, yunet, recognizer, deadline, incumbent):
         coverage.update(status="localized", reason=None)
 
 
+def _inspect_second_return(details, inputs, yunet, recognizer, deadline, incumbent, planned, stop, context):
+    primary = details.get("face_return")
+    if not primary or primary["method"] not in SECOND_PRIOR_METHODS or time.monotonic() >= stop:
+        return
+    if not context:
+        if primary["method"] != face_return.METHOD:
+            return
+        _return_pass({}, inputs, yunet, recognizer, deadline, incumbent, planned, {"measured_face_frames": 0},
+                     DENSE_FRAME_PROFILES[len(inputs.table)], stop, context=context)
+    if not context or time.monotonic() >= stop:
+        return
+    features, faces, scenes = context[0]
+    earlier = [item for item in (primary, incumbent, details.get("face_boundary")) if item]
+    times, scheduled = planned
+    chosen, quartiles = face_return.second(times, scheduled, features, inputs.table, earlier)
+    if chosen is None or time.monotonic() >= stop:
+        return
+    boundary_scenes = {}
+    for index in chosen.scene_frames:
+        face = features[index].face
+        boundary_scenes[index] = {**scenes[index], "face_box": list(face.box()) if face is not None else None}
+    record = _return_record(inputs.table, scheduled, chosen, SECOND_METHOD, faces, boundary_scenes)
+    details["face_return_secondary"] = {**record, "source_encoding": list(inputs.encoding), "source_carrier": "mp4",
+        "scene_lower_quartiles": quartiles, "scene_lower_quartiles_hex": [value.hex() for value in quartiles]}
+
+
 def _return_pass(details, inputs, yunet, recognizer, deadline, incumbent, planned, coverage, record_method, stop, *,
-                 source_carrier=None):
+                 source_carrier=None, context=None):
     table = inputs.table
     times, scheduled = planned
     coverage.update(status="unassessed", reason="time_budget", scheduled_frames=len(scheduled))
@@ -259,6 +298,8 @@ def _return_pass(details, inputs, yunet, recognizer, deadline, incumbent, planne
             fine_edges[left, right] = support
         return value
 
+    if context is not None:
+        context.append((features, face_inputs, scene_inputs))
     candidate = (face_return.highest(times, scheduled, features, compare_scenes=compare_scenes)
                  if fine else face_return.highest(times, scheduled, features))
     if time.monotonic() >= stop:
@@ -270,8 +311,7 @@ def _return_pass(details, inputs, yunet, recognizer, deadline, incumbent, planne
     if not face_return.distinct(candidate, table, incumbent):
         return
     if guarded:
-        quartiles = [face_return.scene_lower_quartile(features[a], features[b])
-                     for a, b in (candidate.scene_frames[:2], candidate.scene_frames[2:])]
+        quartiles = face_return.scene_quartiles(candidate, features)
         if any(value is None or value < GUARDED_SCENE_QUARTILE_POINT for value in quartiles):
             coverage["reason"] = "surrounding_scene_changed"
             return
@@ -280,8 +320,20 @@ def _return_pass(details, inputs, yunet, recognizer, deadline, incumbent, planne
         if not any(selected):
             return
     coverage["status"] = "localized"
+    record = _return_record(table, scheduled, candidate, record_method, face_inputs, scene_inputs)
+    if record_method != face_return.METHOD:
+        record["source_encoding"] = list(inputs.encoding)
+    if fine:
+        record["fine_scene_edges"] = selected
+    if guarded:
+        record.update(source_carrier=source_carrier, scene_lower_quartiles=quartiles,
+                      scene_lower_quartiles_hex=[value.hex() for value in quartiles])
+    details["face_return"] = record
+
+
+def _return_record(table, scheduled, candidate, record_method, face_inputs, scene_inputs):
     start, end = candidate.start, candidate.end
-    details["face_return"] = {
+    return {
         "method": record_method, "time_base": table.time_base, "start_pts": table.pts[start], "end_pts": table.pts[end],
         "start_frame_index": start, "end_frame_index": end,
         "start_stream_s": table.seconds(start), "end_stream_s": table.seconds(end),
@@ -293,13 +345,6 @@ def _return_pass(details, inputs, yunet, recognizer, deadline, incumbent, planne
         "frame_inputs": [face_inputs[index] for group in candidate.support for index in group],
         "scene_frame_inputs": [scene_inputs[index] for index in candidate.scene_frames],
     }
-    if record_method != face_return.METHOD:
-        details["face_return"]["source_encoding"] = list(inputs.encoding)
-    if fine:
-        details["face_return"]["fine_scene_edges"] = selected
-    if guarded:
-        details["face_return"].update(source_carrier=source_carrier, scene_lower_quartiles=quartiles,
-                                      scene_lower_quartiles_hex=[value.hex() for value in quartiles])
 
 
 def _with_return(result, inputs, yunet, recognizer, deadline):

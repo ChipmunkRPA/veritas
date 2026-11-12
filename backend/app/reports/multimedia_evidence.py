@@ -223,12 +223,19 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
                     raise ObjectIntegrityError("Short face-change inputs differ from their analyzed frames")
             frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
             commitment = canonical_hash(face_return)
+            secondary = face_return["method"] == face_return_binding.SECOND_METHOD
+            key = "face_return_secondary" if secondary else "face_return"
             signal = next((s for s in frozen.get("signals", []) if s.get("effective_weight") == 0.0
                            and alias_signal(s["id"]) == packet["signal_refs"][0]["id"]
-                           and canonical_hash((s.get("details") or {}).get("face_return")) == commitment), None)
+                           and canonical_hash((s.get("details") or {}).get(key)) == commitment), None)
             if signal is None:
                 raise ObjectIntegrityError("Short face-change evidence differs from the frozen review check")
-            face_return_binding.validate_distinct(face_return, face_detail_repeat.original_range(signal["details"]))
+            details = signal["details"]
+            incumbent = face_detail_repeat.original_range(details)
+            if secondary:
+                face_return_binding.validate_second(face_return, details.get("face_return"), incumbent, details.get("face_boundary"))
+            else:
+                face_return_binding.validate_distinct(face_return, incumbent)
         clip = packet.get("clip") or {}
         if clip.get("status") == "ready":
             start, end = clip["start_frame_index"], clip["end_frame_index_exclusive"]
@@ -593,17 +600,26 @@ def _document_coverage_details(coverage: dict) -> list[str]:
 
 
 def _passage_coverage_view(coverage: dict) -> dict | None:
-    from app.evidence.document_passage_coverage import KEY, LABELS, STATES
+    from app.evidence.document_passage_coverage import KEY, LABELS, PDF_EXTRACTION_LABELS, STATES
 
     record = coverage.get(KEY)
     if record is None:
         return None
     rows = record["ranges"][:12]
+    pdf_pages = None
+    if pdf := record.get(document_scope.PDF_PAGE_COVERAGE_KEY):
+        page_rows = [{"start": row["page"], "end": row["page"], "counts": row["counts"],
+                      "label": PDF_EXTRACTION_LABELS[row["extraction"]], "partial": row["unchecked_image_areas"]}
+                     for row in pdf["mapped_pages"]]
+        page_rows.extend({"start": a, "end": b, "label": "No mapped text", "counts": None}
+                         for a, b in pdf["unmapped_page_ranges"])
+        page_rows.sort(key=lambda row: row["start"])
+        pdf_pages = {"page_count": pdf["page_count"], "rows": page_rows[:20], "additional_rows": max(0, len(page_rows) - 20)}
     return {"mapped_characters": record["mapped_characters"],
             "counts": [(LABELS[state], record["counts"][state]) for state in reversed(STATES)],
             "ranges": [{**row, "label": LABELS[row["state"]]} for row in rows],
             "additional_ranges": len(record["ranges"]) - len(rows),
-            "omitted_ranges": record["omitted_ranges"]}
+            "omitted_ranges": record["omitted_ranges"], "pdf_pages": pdf_pages}
 
 
 def _writing_agreement_view(coverage: dict) -> dict | None:

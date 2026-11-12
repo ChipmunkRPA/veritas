@@ -910,6 +910,7 @@ def synthesise(ctx: StageContext) -> dict[str, Any]:
         whole = details.get("whole_face_review")
         sequence = details.get("face_sequence")
         short_change = details.get("face_return")
+        second_change = details.get("face_return_secondary")
         short_coverage = (details.get("face_return_check") or {}).get("status")
         detail_status = (details.get("face_detail_repeat") or {}).get("status")
         for finding in out["findings"]:
@@ -944,6 +945,9 @@ def synthesise(ctx: StageContext) -> dict[str, Any]:
             else:
                 title = "No additional face-change range"
                 first = "The sampled face sequences supplied no additional change range to review. The result covers the measured windows."
+            if second_change:
+                title = "Brief face-change ranges to review"
+                first += " " + face_return_binding.observation(second_change)
             second = "Motion, expression, lighting and compression may cause similar changes. This inspection cue has no calibrated AI probability and does not change overall confidence."
             finding.update(title=title,
                            statement=first+" "+second, probability=None, direction="neutral", strength="none",
@@ -977,7 +981,9 @@ def _native_render_anchors(ctx: StageContext, frame_store: FrameStore) -> list[d
                 inputs.extend(record["frame_inputs"])
             if measurement := details["face_detail_repeat"].get("measurement"):
                 refined_indices.update(item["frame_index"] for item in measurement["frame_inputs"])
-        if face_return := details.get("face_return"):
+        for key in ("face_return", "face_return_secondary"):
+            if (face_return := details.get(key)) is None:
+                continue
             supplemental = [*face_return["frame_inputs"], *face_return["scene_frame_inputs"]]
             refined_indices.update(item["frame_index"] for item in supplemental)
             inputs.extend(supplemental)

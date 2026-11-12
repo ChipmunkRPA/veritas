@@ -54,6 +54,10 @@ The [brief face-change study](video-face-return-fine-scene-2026-11-12.md)
 measures whether additional background support recovers an interval around a
 face change. Its reader checks the exact boundaries and original face crops
 and reports separate outcomes for authentic scene cuts.
+The [two-range face-change study](video-face-two-returns-2026-11-12.md)
+checks two separate edits in the same file alongside single edits, ordinary
+processing and genuine picture cuts. Its replay verifies native pictures and
+the authored edit locations separately from the signed app output.
 The [compression repeat study](video-face-compression-stability-2026-11-12.md)
 rebuilds single and tandem encodes, checks exact face crops, and reproduces
 both appearance measurements at the original time interval.

@@ -1,0 +1,175 @@
+{
+  "added": {
+    "added_source_groups": 8,
+    "added_useful_ranges": 8,
+    "additional_cut_flags": 0,
+    "additional_ordinary_flags": 0,
+    "additional_wrong_dual": 0,
+    "additional_wrong_single": 0
+  },
+  "advances": true,
+  "freeze_sha256": "df5083c63b651bf2d06294fbf8c72eb176996fc99cc64471cc50c539a3428a15",
+  "gates": {
+    "added_source_groups": true,
+    "added_useful_ranges": true,
+    "additional_cut_flags": true,
+    "additional_ordinary_flags": true,
+    "additional_wrong_dual": true,
+    "additional_wrong_single": true
+  },
+  "independent_readback": {
+    "aggregate_sha256": "bc47793fd64193208848fb250bddb6c4c3da2d204e87f81895097406d52bc740",
+    "decision_rows": 64,
+    "dual_swap_both_localized": {
+      "after": 8,
+      "before": 0
+    },
+    "exact_encoded_authoring_replays": 16,
+    "exact_native_pictures": 7680,
+    "exact_source_crops": 24,
+    "examples": {
+      "dual_swap": {
+        "anchors_s": [
+          "2",
+          "54/25",
+          "58/25"
+        ],
+        "observed_s": [
+          "52/25",
+          "58/25"
+        ],
+        "truth_s": [
+          "52/25",
+          "58/25"
+        ]
+      }
+    },
+    "receipt_sha256": "664a1130d3d86ab91e1ea160a235e5cf61a0c9eadb1c4f6a27e600eceab84b5d",
+    "status": "verified",
+    "video_files": 64
+  },
+  "measurement_source_revision": "e4a6a5bea774901a2e3b390ba99ecec85c7da817",
+  "runtime": {
+    "elapsed_s": 321.8548558340117,
+    "held_sha256": "3fe40b7cbe905acdb38b0328f2811875c2220dea043bedaa9fbcbb8e2eb3157b",
+    "peak_rss_bytes": 2544353280
+  },
+  "schema": "chipmunk.video-face-two-returns/1",
+  "spec": {
+    "fit": "No fitting. Freeze eight confirmation sources by metadata order and verified changed source pixels.",
+    "gate": {
+      "added_source_groups": 3,
+      "added_useful_ranges": 4,
+      "additional_cut_flags": 0,
+      "additional_ordinary_flags": 1,
+      "additional_wrong_dual": 1,
+      "additional_wrong_single": 1
+    },
+    "minimum_scene_lower_quartile": 0.6,
+    "minimum_separation_frames": 2,
+    "native_intervals": [
+      [
+        52,
+        58
+      ],
+      [
+        78,
+        84
+      ]
+    ],
+    "profile": [
+      640,
+      360,
+      25,
+      120,
+      "h264",
+      "yuv420p"
+    ],
+    "ranking": "Retain the actual Full face ranges. If there is at least one existing range and the native pass has measurable same-shot context, rank new disjoint candidates on the existing 12.5 Hz grid. Reuse measured pictures, or measure that grid within the existing budget if the sparse pass selected the first range.",
+    "schema": "chipmunk.video-face-two-returns/1",
+    "scope": "A second interval of observed local face change only, zero AI confidence weight.",
+    "truth": "Half or greater temporal intersection over union on distinct authored intervals."
+  },
+  "strata": {
+    "dual_picture_cuts": {
+      "added_wrong": 0,
+      "after_files_flagged": 0,
+      "after_useful": 0,
+      "before_files_flagged": 0,
+      "before_useful": 0,
+      "files": 8,
+      "second_measured": 0,
+      "truth_ranges": 0
+    },
+    "dual_swap": {
+      "added_wrong": 0,
+      "after_files_flagged": 8,
+      "after_useful": 16,
+      "before_files_flagged": 8,
+      "before_useful": 8,
+      "files": 8,
+      "second_measured": 8,
+      "truth_ranges": 16
+    },
+    "light_then_swap": {
+      "added_wrong": 0,
+      "after_files_flagged": 8,
+      "after_useful": 8,
+      "before_files_flagged": 8,
+      "before_useful": 8,
+      "files": 8,
+      "second_measured": 8,
+      "truth_ranges": 8
+    },
+    "original": {
+      "added_wrong": 0,
+      "after_files_flagged": 0,
+      "after_useful": 0,
+      "before_files_flagged": 0,
+      "before_useful": 0,
+      "files": 8,
+      "second_measured": 0,
+      "truth_ranges": 0
+    },
+    "recompressed": {
+      "added_wrong": 0,
+      "after_files_flagged": 1,
+      "after_useful": 0,
+      "before_files_flagged": 1,
+      "before_useful": 0,
+      "files": 8,
+      "second_measured": 1,
+      "truth_ranges": 0
+    },
+    "single_early": {
+      "added_wrong": 0,
+      "after_files_flagged": 8,
+      "after_useful": 8,
+      "before_files_flagged": 8,
+      "before_useful": 8,
+      "files": 8,
+      "second_measured": 8,
+      "truth_ranges": 8
+    },
+    "single_late": {
+      "added_wrong": 0,
+      "after_files_flagged": 8,
+      "after_useful": 8,
+      "before_files_flagged": 8,
+      "before_useful": 8,
+      "files": 8,
+      "second_measured": 8,
+      "truth_ranges": 8
+    },
+    "swap_then_jump": {
+      "added_wrong": 0,
+      "after_files_flagged": 8,
+      "after_useful": 8,
+      "before_files_flagged": 8,
+      "before_useful": 8,
+      "files": 8,
+      "second_measured": 8,
+      "truth_ranges": 8
+    }
+  }
+}

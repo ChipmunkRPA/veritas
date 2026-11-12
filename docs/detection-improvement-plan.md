@@ -97,6 +97,12 @@ integration remains unfinished.
 
 ## Progress on 12 November
 
+- The [second brief face-change range](video-face-two-returns-2026-11-12.md)
+  localized 16 of 16 authored swaps across eight two-edit videos, up from
+  eight. It added no locations on 32 single-swap and mixed controls and
+  no flags on 24 ordinary or genuine-cut deliveries. The prior method had
+  one flag on a recompressed original. The narrowly scoped local path
+  preserved both ranges and their source frames in the app and exports.
 - The [public JPEG replay](image-jpeg-public-replay-2026-11-12.md)
   reproduced 27 useful locations on 48 known edits, up from 13 with the
   translation check alone, and produced zero flags on 48 ordinary

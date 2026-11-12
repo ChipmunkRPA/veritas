@@ -1,0 +1,3729 @@
+{
+  "advance": false,
+  "fit": {
+    "forwards": 60,
+    "max_current_response_difference": 2.9802322387695312e-08,
+    "metrics": {
+      "assisted_relative": {
+        "added_false_groups": 1,
+        "exact_focus": 0,
+        "false_groups": 2,
+        "gained_groups": 1,
+        "gains_by_generator": {
+          "qwen": 1
+        },
+        "generated": 26,
+        "groups_with_new_ordinary_flags": 1,
+        "hit_groups": 2,
+        "incorrect_only": 0,
+        "lost_groups": 1,
+        "ordinary": 32,
+        "ordinary_flags": 2,
+        "useful": 3
+      },
+      "assisted_top": {
+        "added_false_groups": 0,
+        "exact_focus": 0,
+        "false_groups": 2,
+        "gained_groups": 1,
+        "gains_by_generator": {
+          "qwen": 1
+        },
+        "generated": 26,
+        "groups_with_new_ordinary_flags": 0,
+        "hit_groups": 2,
+        "incorrect_only": 0,
+        "lost_groups": 1,
+        "ordinary": 32,
+        "ordinary_flags": 2,
+        "useful": 3
+      },
+      "current": {
+        "added_false_groups": 0,
+        "exact_focus": 1,
+        "false_groups": 2,
+        "gained_groups": 0,
+        "gains_by_generator": {},
+        "generated": 26,
+        "groups_with_new_ordinary_flags": 0,
+        "hit_groups": 2,
+        "incorrect_only": 0,
+        "lost_groups": 0,
+        "ordinary": 32,
+        "ordinary_flags": 2,
+        "useful": 3
+      },
+      "total_top": {
+        "added_false_groups": 0,
+        "exact_focus": 0,
+        "false_groups": 2,
+        "gained_groups": 0,
+        "gains_by_generator": {},
+        "generated": 26,
+        "groups_with_new_ordinary_flags": 0,
+        "hit_groups": 2,
+        "incorrect_only": 0,
+        "lost_groups": 0,
+        "ordinary": 32,
+        "ordinary_flags": 2,
+        "useful": 3
+      }
+    },
+    "rows": [
+      {
+        "group": "7cbd7254c8e220dc",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "before"
+      },
+      {
+        "group": "7cbd7254c8e220dc",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "after"
+      },
+      {
+        "group": "7cbd7254c8e220dc",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "smol2"
+      },
+      {
+        "group": "628b4b583855e161",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": true,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": true,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": true,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "before"
+      },
+      {
+        "group": "628b4b583855e161",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "after"
+      },
+      {
+        "group": "31e6d09754267b1c",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "before"
+      },
+      {
+        "group": "31e6d09754267b1c",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "after"
+      },
+      {
+        "group": "31e6d09754267b1c",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "qwen"
+      },
+      {
+        "group": "31e6d09754267b1c",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "smol2"
+      },
+      {
+        "group": "6b9de50976f59390",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "before"
+      },
+      {
+        "group": "6b9de50976f59390",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "after"
+      },
+      {
+        "group": "6b9de50976f59390",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "qwen"
+      },
+      {
+        "group": "6b9de50976f59390",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": true,
+            "flag": true,
+            "useful": true
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": true,
+            "useful": true
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "smol2"
+      },
+      {
+        "group": "1288c777e47e379f",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "before"
+      },
+      {
+        "group": "1288c777e47e379f",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "after"
+      },
+      {
+        "group": "1288c777e47e379f",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "qwen"
+      },
+      {
+        "group": "1288c777e47e379f",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "smol2"
+      },
+      {
+        "group": "759045ceecfc3d9c",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "before"
+      },
+      {
+        "group": "759045ceecfc3d9c",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "after"
+      },
+      {
+        "group": "759045ceecfc3d9c",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "qwen"
+      },
+      {
+        "group": "759045ceecfc3d9c",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "smol2"
+      },
+      {
+        "group": "7430f48192b79f03",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "before"
+      },
+      {
+        "group": "7430f48192b79f03",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "after"
+      },
+      {
+        "group": "7430f48192b79f03",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "qwen"
+      },
+      {
+        "group": "7430f48192b79f03",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "smol2"
+      },
+      {
+        "group": "2dac1db8cb88dcd4",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "before"
+      },
+      {
+        "group": "2dac1db8cb88dcd4",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "after"
+      },
+      {
+        "group": "2dac1db8cb88dcd4",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "qwen"
+      },
+      {
+        "group": "2dac1db8cb88dcd4",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "smol2"
+      },
+      {
+        "group": "172de77a02b369f8",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "before"
+      },
+      {
+        "group": "172de77a02b369f8",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": true,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "after"
+      },
+      {
+        "group": "172de77a02b369f8",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "qwen"
+      },
+      {
+        "group": "172de77a02b369f8",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "smol2"
+      },
+      {
+        "group": "1629c1792f9c34f8",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "before"
+      },
+      {
+        "group": "1629c1792f9c34f8",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "after"
+      },
+      {
+        "group": "1629c1792f9c34f8",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "qwen"
+      },
+      {
+        "group": "1629c1792f9c34f8",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "smol2"
+      },
+      {
+        "group": "833a51d0d46990e1",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "before"
+      },
+      {
+        "group": "833a51d0d46990e1",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "after"
+      },
+      {
+        "group": "833a51d0d46990e1",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": true,
+            "useful": true
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": true,
+            "useful": true
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "qwen"
+      },
+      {
+        "group": "833a51d0d46990e1",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "smol2"
+      },
+      {
+        "group": "422c0efa24aec344",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "before"
+      },
+      {
+        "group": "422c0efa24aec344",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "after"
+      },
+      {
+        "group": "422c0efa24aec344",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "qwen"
+      },
+      {
+        "group": "422c0efa24aec344",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "smol2"
+      },
+      {
+        "group": "10a21fdb4a5e1b53",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "before"
+      },
+      {
+        "group": "10a21fdb4a5e1b53",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "after"
+      },
+      {
+        "group": "10a21fdb4a5e1b53",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "qwen"
+      },
+      {
+        "group": "10a21fdb4a5e1b53",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "smol2"
+      },
+      {
+        "group": "16030776a3e90261",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "before"
+      },
+      {
+        "group": "16030776a3e90261",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "after"
+      },
+      {
+        "group": "16030776a3e90261",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "qwen"
+      },
+      {
+        "group": "1f18e9b8ef77693f",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "before"
+      },
+      {
+        "group": "1f18e9b8ef77693f",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "after"
+      },
+      {
+        "group": "3d0618ef10094091",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": true,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": true,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": true,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": true,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "before"
+      },
+      {
+        "group": "3d0618ef10094091",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "after"
+      },
+      {
+        "group": "3d0618ef10094091",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": true,
+            "useful": true
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": true,
+            "useful": true
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": true,
+            "useful": true
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": true,
+            "useful": true
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "qwen"
+      },
+      {
+        "group": "3d0618ef10094091",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": true,
+            "useful": true
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": true,
+            "useful": true
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": true,
+            "useful": true
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": true,
+            "useful": true
+          }
+        },
+        "publisher": "kubernetes",
+        "role": "smol2"
+      }
+    ]
+  },
+  "freeze_sha256": "27432dea97800b811f713a7b2b2da17af2574735643003e69bd109a1cdb283a3",
+  "held": {
+    "forwards": 66,
+    "max_current_response_difference": 2.9802322387695312e-08,
+    "metrics": {
+      "assisted_relative": {
+        "added_false_groups": 1,
+        "exact_focus": 0,
+        "false_groups": 1,
+        "gained_groups": 0,
+        "gains_by_generator": {},
+        "generated": 32,
+        "groups_with_new_ordinary_flags": 1,
+        "hit_groups": 1,
+        "incorrect_only": 0,
+        "lost_groups": 2,
+        "ordinary": 42,
+        "ordinary_flags": 2,
+        "useful": 1
+      },
+      "assisted_top": {
+        "added_false_groups": 2,
+        "exact_focus": 0,
+        "false_groups": 2,
+        "gained_groups": 0,
+        "gains_by_generator": {},
+        "generated": 32,
+        "groups_with_new_ordinary_flags": 2,
+        "hit_groups": 1,
+        "incorrect_only": 1,
+        "lost_groups": 2,
+        "ordinary": 42,
+        "ordinary_flags": 3,
+        "useful": 1
+      },
+      "current": {
+        "added_false_groups": 0,
+        "exact_focus": 3,
+        "false_groups": 0,
+        "gained_groups": 0,
+        "gains_by_generator": {},
+        "generated": 32,
+        "groups_with_new_ordinary_flags": 0,
+        "hit_groups": 3,
+        "incorrect_only": 0,
+        "lost_groups": 0,
+        "ordinary": 42,
+        "ordinary_flags": 0,
+        "useful": 4
+      },
+      "total_top": {
+        "added_false_groups": 0,
+        "exact_focus": 1,
+        "false_groups": 0,
+        "gained_groups": 0,
+        "gains_by_generator": {},
+        "generated": 32,
+        "groups_with_new_ordinary_flags": 0,
+        "hit_groups": 3,
+        "incorrect_only": 0,
+        "lost_groups": 0,
+        "ordinary": 42,
+        "ordinary_flags": 0,
+        "useful": 4
+      }
+    },
+    "rows": [
+      {
+        "group": "d9d978e9b5f47064",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "wellcome",
+        "role": "before"
+      },
+      {
+        "group": "d9d978e9b5f47064",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "wellcome",
+        "role": "edited"
+      },
+      {
+        "group": "d9d978e9b5f47064",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "wellcome",
+        "role": "qwen"
+      },
+      {
+        "group": "d9d978e9b5f47064",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "wellcome",
+        "role": "smol2"
+      },
+      {
+        "group": "5190a0d15dc2f0f5",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "wellcome",
+        "role": "before"
+      },
+      {
+        "group": "5190a0d15dc2f0f5",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "wellcome",
+        "role": "edited"
+      },
+      {
+        "group": "5190a0d15dc2f0f5",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "wellcome",
+        "role": "qwen"
+      },
+      {
+        "group": "5190a0d15dc2f0f5",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "wellcome",
+        "role": "smol2"
+      },
+      {
+        "group": "cca7e9e04baafd10",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "wellcome",
+        "role": "before"
+      },
+      {
+        "group": "cca7e9e04baafd10",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "wellcome",
+        "role": "edited"
+      },
+      {
+        "group": "209252fa8e2f476f",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "wellcome",
+        "role": "before"
+      },
+      {
+        "group": "209252fa8e2f476f",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "wellcome",
+        "role": "edited"
+      },
+      {
+        "group": "209252fa8e2f476f",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "wellcome",
+        "role": "qwen"
+      },
+      {
+        "group": "209252fa8e2f476f",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "wellcome",
+        "role": "smol2"
+      },
+      {
+        "group": "d34c066bc86da1f3",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "wellcome",
+        "role": "before"
+      },
+      {
+        "group": "d34c066bc86da1f3",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "wellcome",
+        "role": "edited"
+      },
+      {
+        "group": "d34c066bc86da1f3",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "wellcome",
+        "role": "qwen"
+      },
+      {
+        "group": "d34c066bc86da1f3",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "wellcome",
+        "role": "smol2"
+      },
+      {
+        "group": "1ab41ff6a4614ba8",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "wellcome",
+        "role": "before"
+      },
+      {
+        "group": "1ab41ff6a4614ba8",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "wellcome",
+        "role": "edited"
+      },
+      {
+        "group": "1ab41ff6a4614ba8",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "wellcome",
+        "role": "qwen"
+      },
+      {
+        "group": "1ab41ff6a4614ba8",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "wellcome",
+        "role": "smol2"
+      },
+      {
+        "group": "252c00b0892e5513",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "wellcome",
+        "role": "before"
+      },
+      {
+        "group": "252c00b0892e5513",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "wellcome",
+        "role": "edited"
+      },
+      {
+        "group": "252c00b0892e5513",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": true,
+            "flag": true,
+            "useful": true
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": true,
+            "useful": true
+          }
+        },
+        "publisher": "wellcome",
+        "role": "qwen"
+      },
+      {
+        "group": "252c00b0892e5513",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": true,
+            "flag": true,
+            "useful": true
+          },
+          "total_top": {
+            "exact_focus": true,
+            "flag": true,
+            "useful": true
+          }
+        },
+        "publisher": "wellcome",
+        "role": "smol2"
+      },
+      {
+        "group": "26b55c24d9546d67",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "wellcome",
+        "role": "before"
+      },
+      {
+        "group": "26b55c24d9546d67",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "wellcome",
+        "role": "edited"
+      },
+      {
+        "group": "26b55c24d9546d67",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "wellcome",
+        "role": "qwen"
+      },
+      {
+        "group": "26b55c24d9546d67",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "wellcome",
+        "role": "smol2"
+      },
+      {
+        "group": "5d458eaf5712ffac",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "wellcome",
+        "role": "before"
+      },
+      {
+        "group": "5d458eaf5712ffac",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "wellcome",
+        "role": "edited"
+      },
+      {
+        "group": "5d458eaf5712ffac",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "wellcome",
+        "role": "qwen"
+      },
+      {
+        "group": "5d458eaf5712ffac",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "wellcome",
+        "role": "smol2"
+      },
+      {
+        "group": "abf80962d0e4efd3",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "wellcome",
+        "role": "before"
+      },
+      {
+        "group": "abf80962d0e4efd3",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "wellcome",
+        "role": "edited"
+      },
+      {
+        "group": "abf80962d0e4efd3",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": true,
+            "flag": true,
+            "useful": true
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": true,
+            "useful": true
+          }
+        },
+        "publisher": "wellcome",
+        "role": "smol2"
+      },
+      {
+        "group": "a697f97e46e9e6d9",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "gates",
+        "role": "before"
+      },
+      {
+        "group": "a697f97e46e9e6d9",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "gates",
+        "role": "edited"
+      },
+      {
+        "group": "ca48edb3717e0d21",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": true,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": true,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "gates",
+        "role": "before"
+      },
+      {
+        "group": "ca48edb3717e0d21",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": true,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": true,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "gates",
+        "role": "edited"
+      },
+      {
+        "group": "ca48edb3717e0d21",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": true,
+            "useful": true
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": true,
+            "useful": true
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": true,
+            "useful": true
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": true,
+            "useful": true
+          }
+        },
+        "publisher": "gates",
+        "role": "qwen"
+      },
+      {
+        "group": "6419077f86b3fc48",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "gates",
+        "role": "before"
+      },
+      {
+        "group": "6419077f86b3fc48",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "gates",
+        "role": "edited"
+      },
+      {
+        "group": "84341c3a3107dc8e",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "gates",
+        "role": "before"
+      },
+      {
+        "group": "84341c3a3107dc8e",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "gates",
+        "role": "edited"
+      },
+      {
+        "group": "84341c3a3107dc8e",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "gates",
+        "role": "qwen"
+      },
+      {
+        "group": "84341c3a3107dc8e",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "gates",
+        "role": "smol2"
+      },
+      {
+        "group": "051f29f73b2dee01",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "gates",
+        "role": "before"
+      },
+      {
+        "group": "051f29f73b2dee01",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "gates",
+        "role": "edited"
+      },
+      {
+        "group": "051f29f73b2dee01",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "gates",
+        "role": "qwen"
+      },
+      {
+        "group": "051f29f73b2dee01",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "gates",
+        "role": "smol2"
+      },
+      {
+        "group": "eee87ae8f81d12b9",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "gates",
+        "role": "before"
+      },
+      {
+        "group": "eee87ae8f81d12b9",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "gates",
+        "role": "edited"
+      },
+      {
+        "group": "eee87ae8f81d12b9",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "gates",
+        "role": "qwen"
+      },
+      {
+        "group": "7756bf88729cfdd5",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "gates",
+        "role": "before"
+      },
+      {
+        "group": "7756bf88729cfdd5",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "gates",
+        "role": "edited"
+      },
+      {
+        "group": "7756bf88729cfdd5",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "gates",
+        "role": "qwen"
+      },
+      {
+        "group": "7756bf88729cfdd5",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "gates",
+        "role": "smol2"
+      },
+      {
+        "group": "a81ca59e8c283dcb",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "gates",
+        "role": "before"
+      },
+      {
+        "group": "a81ca59e8c283dcb",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "gates",
+        "role": "edited"
+      },
+      {
+        "group": "a81ca59e8c283dcb",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "gates",
+        "role": "smol2"
+      },
+      {
+        "group": "60ead8e84585b13e",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": true,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "gates",
+        "role": "before"
+      },
+      {
+        "group": "60ead8e84585b13e",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "gates",
+        "role": "edited"
+      },
+      {
+        "group": "60ead8e84585b13e",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "gates",
+        "role": "qwen"
+      },
+      {
+        "group": "60ead8e84585b13e",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "gates",
+        "role": "smol2"
+      },
+      {
+        "group": "984d8935999ff4e6",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "gates",
+        "role": "before"
+      },
+      {
+        "group": "984d8935999ff4e6",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "gates",
+        "role": "edited"
+      },
+      {
+        "group": "984d8935999ff4e6",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": true,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "gates",
+        "role": "qwen"
+      },
+      {
+        "group": "984d8935999ff4e6",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "gates",
+        "role": "smol2"
+      },
+      {
+        "group": "9ee6f5ecd6b20134",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "gates",
+        "role": "before"
+      },
+      {
+        "group": "9ee6f5ecd6b20134",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "gates",
+        "role": "edited"
+      },
+      {
+        "group": "9ee6f5ecd6b20134",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "gates",
+        "role": "qwen"
+      },
+      {
+        "group": "9ee6f5ecd6b20134",
+        "measures": {
+          "assisted_relative": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "assisted_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "current": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          },
+          "total_top": {
+            "exact_focus": false,
+            "flag": false,
+            "useful": false
+          }
+        },
+        "publisher": "gates",
+        "role": "smol2"
+      }
+    ]
+  },
+  "method": {
+    "advance": "The assisted-only measured-context arm must add at least three useful works across both generators versus the current measured context, lose at most one existing useful work, and add at most one ordinary flagged work. No confidence or serving changes.",
+    "alternates": "Choose the unique highest context per view. Require strictly above its selection-only ordinary-group order statistic matching the incumbent number of ordinary groups flagged. Tied boundary values abstain.",
+    "current": "First six native contexts whose current raw response is at least 0.50, in source order.",
+    "held": "All Wellcome and Gates held groups, measured as single files. Both actual ordinary body versions and admitted local rewrites.",
+    "outcome": "Useful measured context requires 0.30 non-whitespace IoU and 0.50 recall. Report exact winning focus and incorrect locations separately.",
+    "responses": "Current 1-human, assisted=edited+humanized, and assisted log odds minus the median assisted log odds of the exact native contexts in that same file.",
+    "selection": "First 16 technical blog groups by SHA-256 of the retained group ID. Only ordinary before/after views set the points."
+  },
+  "points": {
+    "fit_sha256": "fee872151b9c3d097c7713d7836208ddb49318c40d84529cf999eeef94598335",
+    "limits": {
+      "assisted_relative": 2.447242086416005,
+      "assisted_top": 0.07217463201959617,
+      "total_top": 0.46069449186325073
+    },
+    "ordinary_flags_allowed": 2,
+    "ordinary_group_count": 16,
+    "source_freeze_sha256": "27432dea97800b811f713a7b2b2da17af2574735643003e69bd109a1cdb283a3"
+  },
+  "schema": "chipmunk.writing-assisted-class-transfer/1"
+}

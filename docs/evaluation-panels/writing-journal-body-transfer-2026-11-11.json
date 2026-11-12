@@ -1,0 +1,404 @@
+{
+  "cases": 74,
+  "commitments": {
+    "catalog-freeze-initial.json": "70e35d7b453ae185f0d2de96a1d096549e46b253ac761ad588e82ddb36dab0e4",
+    "catalog-freeze.json": "33a3993f1a1934511044cdc95582af44c0c3dc1a3ec7341b1d9295d236e82265",
+    "originals.json": "e8633d587e1943f1f9dd7c7dc1d93f7809590fcb82a7956ddaa6621e2499ea69",
+    "scored/aggregate.json": "a472bc98f234b0b42c3e296b7c7b45bdde671b5d37046a24891c91e0a52b6157",
+    "scored/app-smoke.json": "de9f8ee0952dda4bab255c25d09c203da0d362b7ec25ceb418fd9c6a3d6eb96d",
+    "scored/cases.json": "d1ecc968f505c37eca2de5371394d86f437143fd4f3b15caecb10ca37b60cbd8",
+    "scored/current.json": "1cd679ea6eb10d6904fa5b91b5b967f50703f93402af024c8fde951dcd64a140",
+    "scored/freeze.json": "8403e01162f5e340774c25a6d04be7c6f524de38c32c85ddb4b29b7a64ce8849",
+    "scored/frozen-generation-controller.py": "f8412f55ea3b1ee2193055a57a4b2850f0b3a939c2b44462b871780b69a67a6c",
+    "scored/generated-qwen.json": "178c55afd29f4d49543e2a3649d638bfc6a6710fe279e7291dbab8b45d4ae8fc",
+    "scored/generated-smol2.json": "378e43bbcd495bbe4f15a309c3c10c47a61f2cd949b51b6a7862843fd39b85e1",
+    "scored/private-outcomes.json": "7d3c781e61691d3a0048e399041c8539559f9ad2cdc9d8e34e99304d1bd62374",
+    "scored/scoring-freeze.json": "e3bf56554730ddbe5d5e99221a8b19f43e4064d2e08938f5a41d6db87124b1b4",
+    "scored/second.json": "39f74a4d2b4902b849cb76c1bfd8bcaeb36c245d5ccca55bd912045eeb7541f9",
+    "source-plan.json": "69b4608675f690c40a8b101d355ce68e9b330b99b2f48a6ed2b40bc2a1b138b0",
+    "source-receipt.json": "7de0fb31d23e64a90df7e6aef8def07fb9ce9db301b34ca98c5eade0365ee4b8"
+  },
+  "counts_by_cohort": {
+    "gates/before": {
+      "agreement_exact_focus": 0,
+      "agreement_flag": 0,
+      "agreement_no_flag": 11,
+      "agreement_useful": 0,
+      "agreement_wrong_only": 0,
+      "cases": 11,
+      "combined_exact_focus": 0,
+      "combined_flag": 0,
+      "combined_no_flag": 11,
+      "combined_useful": 0,
+      "combined_wrong_only": 0,
+      "current_exact_focus": 0,
+      "current_flag": 0,
+      "current_no_flag": 11,
+      "current_useful": 0,
+      "current_wrong_only": 0,
+      "draft_hunks": 0,
+      "hunks_within_focus": 0,
+      "paired_eligible": 0,
+      "paired_exact_focus": 0,
+      "paired_flag": 0,
+      "paired_no_flag": 11,
+      "paired_useful": 0,
+      "paired_wrong_only": 0,
+      "unchanged_agreement": 0
+    },
+    "gates/edited": {
+      "agreement_exact_focus": 0,
+      "agreement_flag": 0,
+      "agreement_no_flag": 11,
+      "agreement_useful": 0,
+      "agreement_wrong_only": 0,
+      "cases": 11,
+      "combined_exact_focus": 0,
+      "combined_flag": 0,
+      "combined_no_flag": 11,
+      "combined_useful": 0,
+      "combined_wrong_only": 0,
+      "current_exact_focus": 0,
+      "current_flag": 0,
+      "current_no_flag": 11,
+      "current_useful": 0,
+      "current_wrong_only": 0,
+      "draft_hunks": 20,
+      "hunks_within_focus": 11,
+      "paired_eligible": 11,
+      "paired_exact_focus": 0,
+      "paired_flag": 0,
+      "paired_no_flag": 11,
+      "paired_useful": 0,
+      "paired_wrong_only": 0,
+      "unchanged_agreement": 0
+    },
+    "gates/qwen": {
+      "agreement_exact_focus": 0,
+      "agreement_flag": 1,
+      "agreement_no_flag": 7,
+      "agreement_useful": 1,
+      "agreement_wrong_only": 0,
+      "cases": 8,
+      "combined_exact_focus": 0,
+      "combined_flag": 1,
+      "combined_no_flag": 7,
+      "combined_useful": 1,
+      "combined_wrong_only": 0,
+      "current_exact_focus": 0,
+      "current_flag": 1,
+      "current_no_flag": 7,
+      "current_useful": 1,
+      "current_wrong_only": 0,
+      "draft_hunks": 18,
+      "hunks_within_focus": 8,
+      "paired_eligible": 8,
+      "paired_exact_focus": 0,
+      "paired_flag": 0,
+      "paired_no_flag": 8,
+      "paired_useful": 0,
+      "paired_wrong_only": 0,
+      "unchanged_agreement": 0
+    },
+    "gates/smol2": {
+      "agreement_exact_focus": 0,
+      "agreement_flag": 0,
+      "agreement_no_flag": 7,
+      "agreement_useful": 0,
+      "agreement_wrong_only": 0,
+      "cases": 7,
+      "combined_exact_focus": 3,
+      "combined_flag": 3,
+      "combined_no_flag": 4,
+      "combined_useful": 3,
+      "combined_wrong_only": 0,
+      "current_exact_focus": 0,
+      "current_flag": 0,
+      "current_no_flag": 7,
+      "current_useful": 0,
+      "current_wrong_only": 0,
+      "draft_hunks": 18,
+      "hunks_within_focus": 7,
+      "paired_eligible": 7,
+      "paired_exact_focus": 3,
+      "paired_flag": 3,
+      "paired_no_flag": 4,
+      "paired_useful": 3,
+      "paired_wrong_only": 0,
+      "unchanged_agreement": 0
+    },
+    "wellcome/before": {
+      "agreement_exact_focus": 0,
+      "agreement_flag": 0,
+      "agreement_no_flag": 10,
+      "agreement_useful": 0,
+      "agreement_wrong_only": 0,
+      "cases": 10,
+      "combined_exact_focus": 0,
+      "combined_flag": 0,
+      "combined_no_flag": 10,
+      "combined_useful": 0,
+      "combined_wrong_only": 0,
+      "current_exact_focus": 0,
+      "current_flag": 0,
+      "current_no_flag": 10,
+      "current_useful": 0,
+      "current_wrong_only": 0,
+      "draft_hunks": 0,
+      "hunks_within_focus": 0,
+      "paired_eligible": 0,
+      "paired_exact_focus": 0,
+      "paired_flag": 0,
+      "paired_no_flag": 10,
+      "paired_useful": 0,
+      "paired_wrong_only": 0,
+      "unchanged_agreement": 0
+    },
+    "wellcome/edited": {
+      "agreement_exact_focus": 0,
+      "agreement_flag": 0,
+      "agreement_no_flag": 10,
+      "agreement_useful": 0,
+      "agreement_wrong_only": 0,
+      "cases": 10,
+      "combined_exact_focus": 0,
+      "combined_flag": 0,
+      "combined_no_flag": 10,
+      "combined_useful": 0,
+      "combined_wrong_only": 0,
+      "current_exact_focus": 0,
+      "current_flag": 0,
+      "current_no_flag": 10,
+      "current_useful": 0,
+      "current_wrong_only": 0,
+      "draft_hunks": 12,
+      "hunks_within_focus": 10,
+      "paired_eligible": 10,
+      "paired_exact_focus": 0,
+      "paired_flag": 0,
+      "paired_no_flag": 10,
+      "paired_useful": 0,
+      "paired_wrong_only": 0,
+      "unchanged_agreement": 0
+    },
+    "wellcome/qwen": {
+      "agreement_exact_focus": 1,
+      "agreement_flag": 1,
+      "agreement_no_flag": 7,
+      "agreement_useful": 1,
+      "agreement_wrong_only": 0,
+      "cases": 8,
+      "combined_exact_focus": 1,
+      "combined_flag": 1,
+      "combined_no_flag": 7,
+      "combined_useful": 1,
+      "combined_wrong_only": 0,
+      "current_exact_focus": 1,
+      "current_flag": 1,
+      "current_no_flag": 7,
+      "current_useful": 1,
+      "current_wrong_only": 0,
+      "draft_hunks": 17,
+      "hunks_within_focus": 8,
+      "paired_eligible": 8,
+      "paired_exact_focus": 1,
+      "paired_flag": 1,
+      "paired_no_flag": 7,
+      "paired_useful": 1,
+      "paired_wrong_only": 0,
+      "unchanged_agreement": 0
+    },
+    "wellcome/smol2": {
+      "agreement_exact_focus": 1,
+      "agreement_flag": 2,
+      "agreement_no_flag": 7,
+      "agreement_useful": 2,
+      "agreement_wrong_only": 0,
+      "cases": 9,
+      "combined_exact_focus": 2,
+      "combined_flag": 2,
+      "combined_no_flag": 7,
+      "combined_useful": 2,
+      "combined_wrong_only": 0,
+      "current_exact_focus": 2,
+      "current_flag": 2,
+      "current_no_flag": 7,
+      "current_useful": 2,
+      "current_wrong_only": 0,
+      "draft_hunks": 21,
+      "hunks_within_focus": 9,
+      "paired_eligible": 9,
+      "paired_exact_focus": 2,
+      "paired_flag": 2,
+      "paired_no_flag": 7,
+      "paired_useful": 2,
+      "paired_wrong_only": 0,
+      "unchanged_agreement": 0
+    }
+  },
+  "current_app_local_smoke": {
+    "gates/generated/joint_increase": 1,
+    "gates/ordinary/no_joint_increase": 1,
+    "matched_study_direction": 4,
+    "replay_and_pdf_verified": 4,
+    "wellcome/generated/joint_increase": 1,
+    "wellcome/ordinary/no_joint_increase": 1
+  },
+  "distinct_exact_inputs_per_checkpoint": 264,
+  "generator_admission": {
+    "qwen": {
+      "admitted": 16,
+      "attempted": 21
+    },
+    "smol2": {
+      "admitted": 16,
+      "attempted": 21
+    }
+  },
+  "history_overlap_screen": [
+    {
+      "matched_sources": 0,
+      "packet": "previous-agreement",
+      "source_sha256": "8db9676dfde8ed023cbe79d92f82d2bea2544b18537c56baed1dbd6e29b0234b",
+      "text_entries": 100
+    },
+    {
+      "matched_sources": 0,
+      "packet": "llmtrace",
+      "source_sha256": "6d4431a85a70916ba7af5c19f062eed6c277183d7b4bb5c6cea42f520e717f48",
+      "text_entries": 38429
+    },
+    {
+      "matched_sources": 0,
+      "packet": "elife-v301",
+      "source_sha256": "46f681020eb07a197875d64bf4ece4efec619b7d1de4c81825d470d9add04f8a",
+      "text_entries": 25
+    },
+    {
+      "matched_sources": 0,
+      "packet": "elife-v286",
+      "source_sha256": "a8676385711bf3d66165a6c3a8add0d8aee7881288302388ca88739e8e30389b",
+      "text_entries": 26
+    },
+    {
+      "matched_sources": 0,
+      "packet": "elife-v272",
+      "source_sha256": "063c960dafe75757b3b6483ab88802c9c6cd78fa6e0a347014ac148c283d758f",
+      "text_entries": 5
+    },
+    {
+      "matched_sources": 0,
+      "packet": "opai-v257",
+      "source_sha256": "4e43edf33c695a8a4f757d079089dab85a632c648762554bac9f5cc573bb923b",
+      "text_entries": 60
+    },
+    {
+      "matched_sources": 0,
+      "packet": "f1000-previous",
+      "source_sha256": "f8e0f135cd4aef110b78523dd104f47f44fe24aa4a2cb316c78f5e1a99d4deb5",
+      "text_entries": 18
+    },
+    {
+      "matched_sources": 0,
+      "packet": "publisher-abstract-pilot",
+      "source_sha256": "da3edb1f530f62dae1d0911282dca11419153e1126a3a1a2aa84d9d0a31b6c9a",
+      "text_entries": 4
+    }
+  ],
+  "independent_scored_replay": "verified_without_model_inference",
+  "layout_release": {
+    "additional_false_flags": 0,
+    "additional_useful_work_groups": 1,
+    "advances": false,
+    "minimum_useful_work_groups": 2
+  },
+  "layout_scope": {
+    "gates/edited": {
+      "added_layout_only": 3,
+      "added_layout_only_flag": 0,
+      "current_scope": 6,
+      "current_scope_flag": 0,
+      "pairs": 11,
+      "unassessed": 2
+    },
+    "gates/qwen": {
+      "added_layout_only": 2,
+      "added_layout_only_flag": 0,
+      "current_scope": 6,
+      "current_scope_flag": 0,
+      "pairs": 8
+    },
+    "gates/smol2": {
+      "added_layout_only": 1,
+      "added_layout_only_flag": 1,
+      "current_scope": 6,
+      "current_scope_flag": 2,
+      "pairs": 7
+    },
+    "wellcome/edited": {
+      "added_layout_only": 3,
+      "added_layout_only_flag": 0,
+      "current_scope": 5,
+      "current_scope_flag": 0,
+      "pairs": 10,
+      "unassessed": 2
+    },
+    "wellcome/qwen": {
+      "added_layout_only": 3,
+      "added_layout_only_flag": 0,
+      "current_scope": 5,
+      "current_scope_flag": 1,
+      "pairs": 8
+    },
+    "wellcome/smol2": {
+      "added_layout_only": 3,
+      "added_layout_only_flag": 0,
+      "current_scope": 6,
+      "current_scope_flag": 2,
+      "pairs": 9
+    }
+  },
+  "native_cpu_forwards": {
+    "current": 66,
+    "second": 66
+  },
+  "prior_replication_decisions": {
+    "qwen": {
+      "added_false_groups": 0,
+      "added_useful_groups": 0,
+      "admitted_groups": 16,
+      "lost_useful_groups": 1,
+      "replicated": false
+    },
+    "smol2": {
+      "added_false_groups": 0,
+      "added_useful_groups": 3,
+      "admitted_groups": 16,
+      "lost_useful_groups": 0,
+      "replicated": true
+    }
+  },
+  "reused_responses": {
+    "current": 0,
+    "second": 0
+  },
+  "schema": "chipmunk.writing-journal-body-transfer-public/1",
+  "source_dispositions": {
+    "gates": {
+      "author_or_date_mismatch": 2,
+      "no_exact_body_edit": 25,
+      "omitted_xml": 1,
+      "selected": 11,
+      "unsupported_metadata": 1
+    },
+    "wellcome": {
+      "author_or_date_mismatch": 2,
+      "no_exact_body_edit": 26,
+      "omitted_xml": 1,
+      "selected": 10,
+      "unsupported_metadata": 1
+    }
+  },
+  "source_groups": 21,
+  "source_replay": "verified"
+}

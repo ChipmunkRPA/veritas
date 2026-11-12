@@ -159,6 +159,9 @@ The [stereo speech coverage comparison](audio-channel-speech-gap-transfer-2026-1
 checks exact channel samples and annotated speech in intervals left unscored
 by the mono voice check. The [blind writing probe](writing-blind-rewrite-probe-2026-11-11.md)
 checks source-character positions and human false highlights on new rewrites.
+The [dated journal body comparison](writing-journal-body-transfer-2026-11-11.md)
+replays exact earlier and later text from 21 distinct work groups and checks
+localization on 32 separately generated one-sentence edits.
 
 The [offline video interval verifier](video-native-interval-replay-2026-11-11.md)
 checks the source clock and exact before, during and after pixels with Python

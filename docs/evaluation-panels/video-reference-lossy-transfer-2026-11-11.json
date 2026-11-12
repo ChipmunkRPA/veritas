@@ -1,0 +1,183 @@
+{
+  "advances_both": true,
+  "anonymized_native_examples": {
+    "cremad": {
+      "authored_s": [
+        "667/1000",
+        "267/200"
+      ],
+      "reported_s": [
+        "733/1000",
+        "617/500"
+      ],
+      "sample_s": [
+        "7/10",
+        "1201/1000",
+        "617/500"
+      ],
+      "tile_xywh": [
+        234,
+        180,
+        36,
+        25
+      ]
+    },
+    "grid": {
+      "authored_s": [
+        "27/25",
+        "47/25"
+      ],
+      "reported_s": [
+        "27/25",
+        "47/25"
+      ],
+      "sample_s": [
+        "26/25",
+        "9/5",
+        "47/25"
+      ],
+      "tile_xywh": [
+        140,
+        200,
+        29,
+        20
+      ]
+    }
+  },
+  "freeze_sha256": "96ba3173dd845817207e3d7ed94f1badeeda7c1af7f55a0ea8b974397d3c8149",
+  "held_sha256": "f272c644a38e7cb5ff23d301c14daa5ca05acf0faf8b2c0df9fb0b982a8959c3",
+  "independent_audit": {
+    "aggregate_sha256": "338910d41f147c412c095c55c023c53f612f93e95beb6aeff59b658bcb786e9c",
+    "data_redistributed": false,
+    "held_deliveries_verified": 184,
+    "native_picture_pairs_for_independent_tile_response": 61,
+    "original_and_authored_or_delivery_pictures_reopened": 186,
+    "paired_native_crops_written": 12,
+    "scope": "Offline decisions, exact held file identities, clocks, native changed-pixel counts and example crops."
+  },
+  "panels": {
+    "cremad": {
+      "added_correct_source_groups": 10,
+      "advances": true,
+      "counts": {
+        "different_source": {},
+        "neural": {
+          "assessed": 20,
+          "exact_correct": 0,
+          "flag": 20,
+          "joint_correct": 20,
+          "spatial_correct": 20,
+          "time_correct": 20,
+          "views": 20,
+          "visible_source_time": 0,
+          "visible_source_time_joint": 0
+        },
+        "neutral": {
+          "assessed": 30,
+          "exact_correct": 0,
+          "flag": 1,
+          "joint_correct": 0,
+          "spatial_correct": 0,
+          "time_correct": 0,
+          "views": 30,
+          "visible_source_time": 0,
+          "visible_source_time_joint": 0
+        },
+        "ordinary_local": {
+          "assessed": 30,
+          "exact_correct": 0,
+          "flag": 20,
+          "joint_correct": 20,
+          "spatial_correct": 20,
+          "time_correct": 20,
+          "views": 30,
+          "visible_source_time": 0,
+          "visible_source_time_joint": 0
+        }
+      }
+    },
+    "grid": {
+      "added_correct_source_groups": 4,
+      "advances": true,
+      "counts": {
+        "different_source": {
+          "assessed": 0,
+          "exact_correct": 0,
+          "flag": 0,
+          "joint_correct": 0,
+          "spatial_correct": 0,
+          "time_correct": 0,
+          "views": 8,
+          "visible_source_time": 0,
+          "visible_source_time_joint": 0
+        },
+        "neural": {
+          "assessed": 32,
+          "exact_correct": 0,
+          "flag": 24,
+          "joint_correct": 24,
+          "spatial_correct": 24,
+          "time_correct": 24,
+          "views": 32,
+          "visible_source_time": 7,
+          "visible_source_time_joint": 0
+        },
+        "neutral": {
+          "assessed": 24,
+          "exact_correct": 0,
+          "flag": 0,
+          "joint_correct": 0,
+          "spatial_correct": 0,
+          "time_correct": 0,
+          "views": 24,
+          "visible_source_time": 0,
+          "visible_source_time_joint": 0
+        },
+        "ordinary_local": {
+          "assessed": 40,
+          "exact_correct": 0,
+          "flag": 24,
+          "joint_correct": 16,
+          "spatial_correct": 16,
+          "time_correct": 24,
+          "views": 40,
+          "visible_source_time": 0,
+          "visible_source_time_joint": 0
+        }
+      }
+    }
+  },
+  "point": 2.328647418186583,
+  "source_code_and_runtime": {
+    "decode": "f97bcb272ed93ca929e663a1f0529b00b028a2c34a8bca2b00637d4cdb63aae9",
+    "picture_compare": "75873e71fa81791be4f1f6337de2dd0f6566eaf2cb1a688cdab0873a6695d3af",
+    "runner": "a666c0247b279830a0de5e261e6f766d84d5bb3c940ef2d38e1a55499d803bc0",
+    "source_plan": "dbdc051a18270e7657b8ff13d279804112e75d0820d56417dc8f53a98b4085c5",
+    "versions": [
+      "5.0.0",
+      "2.2.6",
+      "ffmpeg version 7.0.2 Copyright (c) 2000-2024 the FFmpeg developers"
+    ]
+  },
+  "spec": {
+    "admission": "At least 90% of picture pairs have luma support; the 25th and 65th percentiles of per-frame background residual are at most 2.5 and 3.0.",
+    "baseline": "Current exact picture ranges (same byte-difference semantics).",
+    "calibration": "Larger of 0.8 and maximum neutral/different-source development score plus 0.15. Strict exceedance.",
+    "clock": "Exact equal native relative PTS; at most 100 pictures, 640x480 pixels, continuous ~25 or 30 fps.",
+    "comparison": "Whole-frame robust luma adjustment, tile error above the frame's 65th percentile; compare core to both flanks.",
+    "delivery": "H.264 libx264 veryfast, CRF 28 common deliveries; originals also CRF 33 and ordinary global tone at CRF 28.",
+    "flank_ms": 240,
+    "gate": "Both banks assess at least 80% of neural and neutral views, add useful locations on at least 3 source groups, add at most one neutral flag each and no different-source flags.",
+    "min_edit_pixels_covered": "1/12",
+    "min_temporal_iou": "1/2",
+    "min_tile_changed_fraction": "1/8",
+    "schema": "chipmunk.video-reference-lossy-transfer/1",
+    "tile": "Native luma, Gaussian sigma 1.2, tile width 10% of short side and height 7%, half-overlap.",
+    "windows_ms": [
+      480,
+      640,
+      800,
+      960
+    ]
+  }
+}

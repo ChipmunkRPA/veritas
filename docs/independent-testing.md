@@ -29,8 +29,8 @@ for the PNG and JPEG localization and ordinary-control results.
 The [earlier-video comparison](video-reference-comparison-2026-11-11.md#replay-without-the-app)
 re-decodes two supplied clips and checks the JSON, native picture timestamps,
 before/during/after previews, and exact soundtrack excerpts. On supported
-lossless-to-H.264 pairs it also replays the short local picture range and its
-native crops. It can run without the app or detector weights.
+pairs it also replays the short local picture range and its native crops.
+It can run without the app or detector weights.
 
 The [earlier-audio comparison](audio-reference-comparison-2026-11-11.md#replay-without-the-app)
 replays changed sample ranges, difference waveforms, and playable excerpts
@@ -168,6 +168,9 @@ checks source-character positions and human false highlights on new rewrites.
 The [dated journal body comparison](writing-journal-body-transfer-2026-11-11.md)
 replays exact earlier and later text from 21 distinct work groups and checks
 localization on 32 separately generated one-sentence edits.
+The [archived PEP writing pilot](writing-pep-editorial-intake-2026-11-11.md)
+replays five dated work histories and compares exact sentence locations on
+generated rewrites and ordinary editorial revisions.
 
 The [offline video interval verifier](video-native-interval-replay-2026-11-11.md)
 checks the source clock and exact before, during and after pixels with Python
@@ -181,7 +184,9 @@ The [single-file mouth texture trial](video-mouth-native-texture-transfer-2026-1
 counts separately localized and missed redraws, ordinary retouching flags,
 and source-compatible visible motion. The [paired H.264 transfer](video-reference-h264-earlier-transfer-2026-11-11.md)
 verifies two independently encoded video copies, including tandem re-encodes
-and unrelated clips with the same picture clock.
+and unrelated clips with the same picture clock. The [second held H.264 group](video-reference-h264-grid-reserve-2026-11-11.md)
+checks native crops and clocks on separate 360 × 288, 25 fps sources with
+ordinary brightness changes, blur, and multiple encoding controls.
 The [scene-referenced face motion comparison](video-webcam-motion-transfer-2026-11-11.md)
 checks whether genuine head movement can explain flagged ranges and tracks
 which clips lack enough stable background for that measurement.

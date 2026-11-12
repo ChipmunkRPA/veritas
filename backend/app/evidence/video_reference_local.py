@@ -1,4 +1,4 @@
-"""Bounded earlier-copy picture evidence for qualified lossless-to-H.264 pairs.
+"""Bounded earlier-copy picture evidence for qualified H.264 deliveries.
 
 The measurements are frozen from the tested paired comparison. They locate
 relative visual change for inspection and carry no authorship confidence.
@@ -23,6 +23,9 @@ WIDTH_MS = (480, 640, 800, 960)
 SCOPE = ("Compares a lossless FFV1 earlier copy with H.264 video at 360 x 288 and 25 fps, or 480 x 360 near 30 fps. "
          "Both files need upright pictures, identical relative timestamps and at most 100 pictures. This check measures "
          "short changes relative to both neighboring ranges. Ordinary edits may produce this evidence.")
+H264_SCOPE = ("Compares two color 4:2:0 H.264 videos at 360 x 288 and exactly 25 fps. Both files need upright pictures, "
+              "identical relative timestamps and at most 100 pictures. This check measures short changes relative to "
+              "both neighboring ranges. Ordinary edits may produce this evidence.")
 STATUS = {
     "local_difference": "A local picture difference persisted across the indicated range.",
     "no_local_range": "This check found no supported local picture difference.",
@@ -47,13 +50,14 @@ def _carrier(path):
     return [(row.get("codec_name"), row.get("pix_fmt")) for row in json.loads(result.stdout).get("streams", [])]
 
 
-def eligible(paths, tables, clock):
+def eligible(paths, tables, clock) -> tuple[float, str] | None:
     dt = cadence(clock)
     if not dt or len(tables[0]) > MAX_FRAMES or any(
         table.rotation or (table.width, table.height) not in SHAPES for table in tables
     ):
         return None
-    if (tables[0].width, tables[0].height) == (360, 288):
+    is_360_by_288 = (tables[0].width, tables[0].height) == (360, 288)
+    if is_360_by_288:
         if any(abs(float(b - a) - .04) > 1e-6 for a, b in pairwise(clock)):
             return None
     elif abs(float(clock[-1]) / (len(clock) - 1) - 1 / 30) > .001:
@@ -62,7 +66,13 @@ def eligible(paths, tables, clock):
         source, submitted = (_carrier(path) for path in paths)
     except (DecodeError, OSError, ValueError, subprocess.SubprocessError):
         return None
-    return dt if source == [("ffv1", "bgr0")] and submitted == [("h264", "yuv420p")] else None
+    if submitted != [("h264", "yuv420p")]:
+        return None
+    if source == [("ffv1", "bgr0")]:
+        return dt, SCOPE
+    if source == submitted and is_360_by_288 and all((b - a) * 25 == 1 for a, b in pairwise(clock)):
+        return dt, H264_SCOPE
+    return None
 
 
 def rectangles(height, width):

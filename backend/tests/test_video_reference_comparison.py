@@ -21,7 +21,7 @@ from app.core.canonical import canonical_json
 from app.core.config import settings
 from app.detectors.audio.decode import read_wav, wav_bytes
 from app.detectors.video import decode
-from app.evidence import video_reference
+from app.evidence import video_reference, video_reference_local
 from app.storage.db import Analysis, Artefact, BillingOrderRow, Job, utcnow
 from scripts.compare_video_references import run
 
@@ -42,9 +42,10 @@ def encode(folder, name, frames, samples=None, *, rate=25, origin=0):
     return path
 
 
-def encode_lossy_comparison(path, pictures, *, lossless):
+def encode_lossy_comparison(path, pictures, *, lossless, crf=28):
     height, width = pictures.shape[1:3]
-    output = ["-c:v", "ffv1", "-pix_fmt", "bgr0"] if lossless else ["-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "28"]
+    output = (["-c:v", "ffv1", "-pix_fmt", "bgr0"] if lossless
+              else ["-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", str(crf)])
     subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-filter_threads", "1", "-threads", "1", "-f", "rawvideo",
                     "-pixel_format", "rgb24", "-video_size", f"{width}x{height}", "-framerate", "25", "-i", "pipe:0",
                     *output, "-threads", "1", str(path)], input=pictures.tobytes(), capture_output=True, check=True, timeout=20)
@@ -125,22 +126,25 @@ def test_offline_replay_checks_exact_bytes(tmp_path, aligned_pair):
         video_reference.compare(earlier, Path(__file__))
 
 
-def test_bounded_lossy_pair_keeps_exact_results_and_replays_local_native_crops(tmp_path, reference_http, monkeypatch):
+@pytest.mark.parametrize("lossless", [True, False], ids=["earlier-ffv1", "earlier-h264"])
+def test_bounded_lossy_pair_keeps_exact_results_and_replays_local_native_crops(tmp_path, reference_http, monkeypatch, lossless):
     yy, xx = np.indices((288, 360))
     shade = 42 + xx * .27 + yy * .21 + 18 * np.cos(xx / 13) * np.sin(yy / 15)
     base = np.uint8(np.stack((shade, shade + 7, shade - 5), axis=-1))
     earlier_frames = np.stack([np.roll(base, i % 4, axis=1) for i in range(68)])
     later_frames = earlier_frames.copy()
     later_frames[24:44, 176:220, 110:174] = (224, 223, 219)
-    earlier = encode_lossy_comparison(tmp_path / "earlier.mkv", earlier_frames, lossless=True)
-    later = encode_lossy_comparison(tmp_path / "submitted.mkv", later_frames, lossless=False)
-    neutral = encode_lossy_comparison(tmp_path / "reencoded.mkv", earlier_frames, lossless=False)
-    wrong = encode_lossy_comparison(tmp_path / "different.mkv", 255 - earlier_frames, lossless=True)
+    extension, mime = ("mkv", "video/x-matroska") if lossless else ("mp4", "video/mp4")
+    earlier = encode_lossy_comparison(tmp_path / f"earlier.{extension}", earlier_frames, lossless=lossless, crf=23)
+    later = encode_lossy_comparison(tmp_path / f"submitted.{extension}", later_frames, lossless=False)
+    neutral = encode_lossy_comparison(tmp_path / f"reencoded.{extension}", earlier_frames, lossless=False)
+    wrong = encode_lossy_comparison(tmp_path / f"different.{extension}", 255 - earlier_frames, lossless=lossless, crf=23)
 
     record, assets = video_reference.compare(earlier, later)
     local = record["picture"]["local_comparison"]
     assert record["schema"] == video_reference.SCHEMA_WITH_LOCAL
     assert record["affects_overall_confidence"] is False and local["status"] == "local_difference"
+    assert local["scope"] == (video_reference_local.SCOPE if lossless else video_reference_local.H264_SCOPE)
     span = local["range"]
     assert record["picture"]["matching_frames"] == 0
     assert max(span["start_s"], .96) < min(span["end_s"], 1.76)
@@ -174,12 +178,12 @@ def test_bounded_lossy_pair_keeps_exact_results_and_replays_local_native_crops(t
     monkeypatch.setattr(v2_media_reference, "default_store", lambda: f.store)
     with sessions() as db:
         analysis = db.get(Analysis, "other-kind")
-        analysis.filename, analysis.content_type = "submitted.mkv", "video/x-matroska"
+        analysis.filename, analysis.content_type = later.name, mime
         analysis.sha256, analysis.size_bytes = stored.sha256, stored.size_bytes
         db.commit()
     response = f.client.post("/api/v2/analyses/other-kind/video-reference-comparison", headers=f.viewer,
                              data={"include_pdf": "true"},
-                             files={"earlier": ("earlier.mkv", earlier.read_bytes(), "video/x-matroska")})
+                             files={"earlier": (earlier.name, earlier.read_bytes(), mime)})
     assert response.status_code == 200 and response.headers["Cache-Control"] == "no-store"
     package = response.json()
     assert package["comparison"] == record
@@ -211,6 +215,18 @@ def test_bounded_lossy_pair_keeps_exact_results_and_replays_local_native_crops(t
     assert run(earlier, later, historical, verify=True) == v1
     assert video_reference.compare(earlier, neutral)[0]["picture"]["local_comparison"]["status"] == "no_local_range"
     assert video_reference.compare(wrong, later)[0]["picture"]["local_comparison"]["status"] == "insufficient_shared_picture_content"
+
+
+@pytest.mark.parametrize(("width", "height", "step"), [(360, 288, 400001), (480, 360, 333333)])
+def test_earlier_h264_requires_exact_grid_dimensions_and_cadence(monkeypatch, width, height, step):
+    table = decode.FrameTable("1/10000000", (0, step, 2 * step), (0,), "IPP", width, height, width, height)
+    clock = video_reference._elapsed(table)
+    paths = Path("earlier"), Path("submitted")
+    monkeypatch.setattr(video_reference_local, "_carrier", lambda _: [("h264", "yuv420p")])
+    assert video_reference_local.eligible(paths, (table, table), clock) is None
+    monkeypatch.setattr(video_reference_local, "_carrier", lambda path: [("ffv1", "bgr0")] if path == paths[0]
+                        else [("h264", "yuv420p")])
+    assert video_reference_local.eligible(paths, (table, table), clock)[1] == video_reference_local.SCOPE
 
 
 def test_authenticated_video_comparison_exports_exact_evidence_without_new_analysis(reference_http, aligned_pair, monkeypatch, tmp_path):

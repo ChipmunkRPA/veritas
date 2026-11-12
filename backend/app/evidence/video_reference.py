@@ -109,8 +109,8 @@ def _clock_range(tables, start, end):
 
 def _picture(paths, tables, assets, *, include_local):
     clock = _elapsed(tables[1])
-    dt = video_reference_local.eligible(paths, tables, clock) if include_local else None
-    rects = video_reference_local.rectangles(tables[0].height, tables[0].width) if dt else None
+    local_check = video_reference_local.eligible(paths, tables, clock) if include_local else None
+    rects = video_reference_local.rectangles(tables[0].height, tables[0].width) if local_check else None
     measurements = []
     signals, background_errors = [], []
     for first, second in _frame_pairs(paths, tables):
@@ -149,9 +149,10 @@ def _picture(paths, tables, assets, *, include_local):
                        "preview_indices": examples})
 
     local = choice = None
-    if dt and rects is not None:
+    if local_check is not None and rects is not None:
+        dt, scope = local_check
         status, choice = video_reference_local.assess(signals, background_errors, dt, rects)
-        local = {"status": status, "summary": video_reference_local.STATUS[status], "scope": video_reference_local.SCOPE}
+        local = {"status": status, "summary": video_reference_local.STATUS[status], "scope": scope}
         if choice:
             needed.update(choice["samples"].values())
 

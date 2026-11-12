@@ -45,7 +45,7 @@ Use the retained native archive, including the pinned exposure ledgers and indep
 ```sh
 export PYTHONPATH=backend PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1
 for phase in freeze prepare development held report; do
-  backend/.venv/bin/python -B -m scripts.video_face_scene_continuity_transfer "$run" || exit 1
+  backend/.venv/bin/python -B -m scripts.video_face_scene_continuity_transfer "$phase" "$run" || exit 1
 done
 backend/.venv/bin/python -B -m scripts.review_video_face_scene_continuity "$run"
 ```

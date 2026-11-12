@@ -87,6 +87,12 @@
 {% else %}<p class="caption">Region coverage counts are unavailable. Missing counts do not establish that no regions were measured.</p>{% endif %}
 {% if check.map_grid %}<p class="caption">Measured grid {{ check.map_grid | join(' × ') }}. Displaying a larger image does not add detection detail.</p>{% endif %}
 {% if check.excluded_percent is not none %}<p class="caption">{{ check.excluded_percent }}% of the measured grid was excluded as less reliable. Those areas were not cleared.</p>{% endif %}
+{% if check.quality_reasons %}
+<p class="caption">Image quality conditions by share of original pixels. The areas can overlap.</p>
+<dl class="evidence-measurements">
+{% for reason in check.quality_reasons %}<div><dt>{{ reason.label }}</dt><dd>{{ reason.percent }}%</dd></div>{% endfor %}
+</dl>
+{% endif %}
 {% if check.get('coverage_map') %}
 <figure class="inspection-coverage-map">
 <img src="{{ check.coverage_map }}" alt="{{ check.label }} reliability mask on the measured image grid">

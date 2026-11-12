@@ -15,6 +15,20 @@
 <p class="caption">Evidence set {{ evidence.version }} - SHA-256 <span class="mono evidence-hash">{{ evidence.sha256 }}</span></p>
 <p class="caption">{{ evidence.coverage_note }}</p>
 {% for note in evidence.coverage_details %}<p class="caption">{{ note }}</p>{% endfor %}
+{% if evidence.get('passage_coverage') %}
+{% set writing = evidence.passage_coverage %}
+<h3>Recorded passage coverage</h3>
+<p class="caption">Counts describe the {{ writing.mapped_characters }} extracted characters excluding whitespace. A local response applies to its input window. Context-only text was read as part of another response.</p>
+<p class="caption">{% for label, amount in writing.counts %}{{ label }}: {{ amount }}. {% endfor %}</p>
+{% if writing.ranges %}
+<table class="multimedia-locator"><thead><tr><th>Source</th><th>Extracted character range</th><th>Local coverage</th></tr></thead><tbody>
+{% for row in writing.ranges %}
+<tr><td>{% if row.get('page') %}Page {{ row.page }}{% elif row.get('paragraph') %}Paragraph {{ row.paragraph }}{% else %}Source block {{ row.source_block }}{% endif %}{% if row.get('mime_part') %} · Email part {{ row.mime_part }}{% endif %}{% if row.get('quote_role') %} · {{ row.quote_role }}{% endif %}</td><td>[{{ row.start }}, {{ row.end }})</td><td>{{ row.label }}</td></tr>
+{% endfor %}
+</tbody></table>
+{% endif %}
+<p class="caption">Ranges use extracted Unicode characters and exclude the end position. {% if writing.additional_ranges %}{{ writing.additional_ranges }} more retained ranges appear in the JSON report. {% endif %}{% if writing.omitted_ranges %}The counts include {{ writing.omitted_ranges }} additional ranges beyond the retained list. {% endif %}JSON pointer <span class="mono">/coverage/local_passage_coverage</span>.</p>
+{% endif %}
 {% if evidence.get('audio_source_clock') %}
 {% set clock = evidence.audio_source_clock %}
 {% set rate = evidence.audio_source_clock_rate %}

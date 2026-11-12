@@ -28,9 +28,11 @@ from app.detectors.image import sharp_boundary
 from app.engine.media import MAX_PIXELS, MAX_SIDE, refuse_truncated_images
 from app.evidence import image_flip_mask
 from app.evidence.image_eligibility import (
+    SOURCE_QUALITY,
     validate_flip_consistency,
     validate_gate,
     validate_inspection_coverage,
+    validate_source_quality,
 )
 from app.evidence.source_geometry import pixel_bounds
 from app.storage.artefacts import get_artefact, register_artefact
@@ -281,6 +283,12 @@ def _localisation_component(signals: list[dict], values: np.ndarray, reliable: n
                        **({"candidate_eligibility": gate} if gate is not None else {})}
 
 
+def _source_quality(rule: dict) -> dict | None:
+    if rule.get("source_quality_schema") == SOURCE_QUALITY:
+        return {"schema": SOURCE_QUALITY, "native_pixel_shares": rule.get("conditions")}
+    return None
+
+
 def _inspection_record(signals: list[dict], heat: dict, values: np.ndarray, reliable: np.ndarray,
                        scalar_sha: str, source_sha: str) -> dict:
     rule = _mask_rule(signals, values)
@@ -304,6 +312,7 @@ def _inspection_record(signals: list[dict], heat: dict, values: np.ndarray, reli
             eligible = validate_flip_consistency(repeat, eligible, values.shape[1], values.shape[0])
         except ValueError as exc:
             raise PacketIntegrityError(str(exc)) from exc
+    quality = _source_quality(rule)
     return {"signal_refs": [_public_signal(s) for s in signals], "exhibit_ref": heat["id"],
             "scalar_map_sha256": scalar_sha, "map_grid": list(values.shape[::-1]),
             "selection_rule": {k: rule[k] for k in ("threshold", "comparison", "scalar_encoding",
@@ -312,6 +321,7 @@ def _inspection_record(signals: list[dict], heat: dict, values: np.ndarray, reli
             "excluded_area_fraction": float(1 - reliable.mean()),
             "raw_components": raw, "eligible_components": eligible, "selected_components": 0,
             "omitted_components": eligible,
+            **({"source_quality": quality} if quality is not None else {}),
             **({"flip_consistency": repeat} if repeat is not None else {}),
             **({"candidate_eligibility": gate} if gate is not None else {})}
 
@@ -402,6 +412,8 @@ def validate_packet_source_mapping(document: dict[str, Any], result: dict[str, A
             raise PacketIntegrityError("Image inspection eligibility differs from the frozen check")
         if any(r.get("resolution_policy", {}).get("flip_consistency") != check.get("flip_consistency") for r in rules):
             raise PacketIntegrityError("Image repeat-pass evidence differs from the frozen check")
+        if any(_source_quality(rule) != check.get("source_quality") for rule in rules):
+            raise PacketIntegrityError("Image source quality differs from the frozen check")
     for packet in document.get("packets", []):
         for ref in packet.get("exhibit_refs", []):
             heat = maps.get(ref)
@@ -461,6 +473,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
             try:
                 inspection = _inspection_record(signals, heat, values, reliable, scalar_sha, analysis.sha256)
                 inspection["reliability_mask_sha256"] = mask_sha
+                validate_source_quality(inspection)
                 repeat = inspection.get("flip_consistency") or {}
                 if proof_sha := repeat.get("aligned_mask_png_sha256"):
                     proof = db.scalar(select(Artefact.id).where(

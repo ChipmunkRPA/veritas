@@ -271,6 +271,7 @@ def test_actual_audio_stage_packet_api_export_and_report_use_same_windows(tmp_pa
         assert verified.ok, verified.as_dict()
         checked = verify.verify_package(built.path, public_key_pem=key.public_pem(), source_audio=path)
         assert checked.ok and "32,000 decoded mono samples" in checked.checks[-1].detail, checked.as_dict()
+        assert "Recomputed stereo channel and mono-downmix evidence for 2 windows" in checked.checks[-1].detail
         wrong_source = tmp_path / "different.wav"
         _source(wrong_source, seconds=2, mode="in_phase", rate=SAMPLE_RATE)
         checked = verify.verify_package(built.path, public_key_pem=key.public_pem(), source_audio=wrong_source)
@@ -282,6 +283,13 @@ def test_actual_audio_stage_packet_api_export_and_report_use_same_windows(tmp_pa
         forged["sha256"] = audio_packets.packet_hash(forged)
         with pytest.raises(ObjectIntegrityError, match="differs from the frozen audio input mapping"):
             multimedia_evidence.view(snapshot.model_copy(update={"evidence": forged}))
+        stereo.validate(forged["stereo_context"], packet["source"])
+        forged_path = tmp_path / "changed-stereo-evidence.zip"
+        with zipfile.ZipFile(built.path) as export, zipfile.ZipFile(forged_path, "w") as modified:
+            bundle = json.loads(export.read("bundle.json"))
+            modified.writestr("evidence.json", canonical_json(forged))
+        with zipfile.ZipFile(forged_path) as export, pytest.raises(ValueError, match="Stereo channel and mono-downmix"):
+            verify_audio_source.check(export, bundle, path)
 
 
 def test_source_audio_verifier_preserves_gap_inside_one_playback_interval(tmp_path):

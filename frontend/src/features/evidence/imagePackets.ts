@@ -42,6 +42,10 @@ export interface ImageInspectionCheck {
     withheld_components: number
   }
   map_grid?: [number, number]
+  source_quality?: {
+    schema: 'image-source-quality/1'
+    native_pixel_shares: Record<'clipped' | 'flat' | 'compressed' | 'upscaled' | 'unreliable', number>
+  }
   excluded_area_fraction?: number
   reliability_mask_sha256?: string | null
   raw_components: number

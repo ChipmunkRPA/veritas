@@ -1,0 +1,200 @@
+{
+  "cached_batches": 711,
+  "counts": {
+    "earlier/jpeg75": {
+      "overlap_centered": {
+        "added_feathered_groups": 0,
+        "feathered": 0,
+        "lost_baseline_locations": 0,
+        "ordinary_flags": 12,
+        "sharp": 0,
+        "untouched_flags": 2
+      },
+      "overlap_detrended": {
+        "added_feathered_groups": 0,
+        "feathered": 0,
+        "lost_baseline_locations": 0,
+        "ordinary_flags": 23,
+        "sharp": 0,
+        "untouched_flags": 3
+      },
+      "strongest_relative_crop": {
+        "added_feathered_groups": 0,
+        "feathered": 0,
+        "lost_baseline_locations": 0,
+        "ordinary_flags": 2,
+        "sharp": 0,
+        "untouched_flags": 0
+      }
+    },
+    "earlier/png": {
+      "overlap_centered": {
+        "added_feathered_groups": 0,
+        "feathered": 0,
+        "lost_baseline_locations": 2,
+        "ordinary_flags": 4,
+        "sharp": 0,
+        "untouched_flags": 0
+      },
+      "overlap_detrended": {
+        "added_feathered_groups": 0,
+        "feathered": 0,
+        "lost_baseline_locations": 1,
+        "ordinary_flags": 6,
+        "sharp": 1,
+        "untouched_flags": 0
+      },
+      "strongest_relative_crop": {
+        "added_feathered_groups": 0,
+        "feathered": 1,
+        "lost_baseline_locations": 0,
+        "ordinary_flags": 13,
+        "sharp": 1,
+        "untouched_flags": 2
+      }
+    },
+    "later/jpeg75": {
+      "overlap_centered": {
+        "added_feathered_groups": 0,
+        "feathered": 0,
+        "lost_baseline_locations": 1,
+        "ordinary_flags": 9,
+        "sharp": 0,
+        "untouched_flags": 1
+      },
+      "overlap_detrended": {
+        "added_feathered_groups": 0,
+        "feathered": 0,
+        "lost_baseline_locations": 1,
+        "ordinary_flags": 24,
+        "sharp": 0,
+        "untouched_flags": 4
+      },
+      "strongest_relative_crop": {
+        "added_feathered_groups": 0,
+        "feathered": 0,
+        "lost_baseline_locations": 0,
+        "ordinary_flags": 10,
+        "sharp": 1,
+        "untouched_flags": 2
+      }
+    },
+    "later/png": {
+      "overlap_centered": {
+        "added_feathered_groups": 0,
+        "feathered": 0,
+        "lost_baseline_locations": 3,
+        "ordinary_flags": 1,
+        "sharp": 0,
+        "untouched_flags": 0
+      },
+      "overlap_detrended": {
+        "added_feathered_groups": 0,
+        "feathered": 0,
+        "lost_baseline_locations": 3,
+        "ordinary_flags": 4,
+        "sharp": 0,
+        "untouched_flags": 0
+      },
+      "strongest_relative_crop": {
+        "added_feathered_groups": 0,
+        "feathered": 1,
+        "lost_baseline_locations": 0,
+        "ordinary_flags": 10,
+        "sharp": 2,
+        "untouched_flags": 0
+      }
+    }
+  },
+  "development_sha256": "e2b6bbe314cbca1c77177505ae9878f0141504ab8cd66d5c7a7f6d415ba8d48d",
+  "development_views": 32,
+  "elapsed_s": 369.932,
+  "freeze": {
+    "arms": [
+      "strongest_relative_crop",
+      "overlap_centered",
+      "overlap_detrended"
+    ],
+    "code_sha256": {
+      "commfor.py": "91e329f031c846f82b9c15e0754215ba4c2e438e53bdc28934a75430713347f4",
+      "image_background_patch_score.py": "cb854082628636833e2fd005e954d0bdb7c78362e58ee98632f1ba4153224d5a",
+      "image_bg_real_insertion_score.py": "b8a91de6e686b5037ea65297aac52961ea995d701ca8aacf362b8715f94e303d",
+      "image_crop_context_transfer.py": "128bab907b6e7699a704316a0ed78cd83eeea42ef740569302801952a26d201e",
+      "image_crop_overlap_transfer.py": "5c85bce59fdeaa0f315872b8843438c6ab732256a3fbab0eaa8c47299fce6532",
+      "image_edge_spread_transfer.py": "f9d434f1dbd2d04b4292e512e562cae52f7dd049690b45f97ef424b2d971c08c"
+    },
+    "confidence_contribution": 0,
+    "formats": [
+      "png",
+      "jpeg75"
+    ],
+    "grid": 24,
+    "groups": {
+      "development": 8,
+      "earlier": 12,
+      "later": 12
+    },
+    "inputs": {
+      "development": {
+        "attempts.jsonl": "59d8591da24d8886cca3ea071eefa5488aa3ac555ff5b21e0542dc267c47fb90",
+        "plan.json": "0d5cd6aadef8162c436c674e00ad835d91d3c7b5807daf0561cb8c58adf47aef",
+        "result.json": "6a8b09a8a4a8585f44faffd5ce18bba7c42a311934ce20bb3a70842aaef4d0b8"
+      },
+      "earlier": {
+        "attempts.jsonl": "3b8291b96634bca1920bddfd9239a53d69e143ea8efc74e565fd7406e749f9ce",
+        "plan.json": "2fc63a2d9f666ce2e593cb7c6b503120661b74a33dbf88f297e34d96ae3c3d7b",
+        "result.json": "fb0aafa7d109ca3e7fda3256fbd9fdf0e3b2afca265081092552b54cc8388731"
+      },
+      "later": {
+        "attempts.jsonl": "006a125678341700c243754a423c480b41bd86029a70f689ff1e7a467fc7fde7",
+        "plan.json": "a2176e567d71f2a80178adec7fb55e34007f6ad3114f9baf09837e233197fc34",
+        "result.json": "3d849ad48453c79002aa78d2d9cc8c7aeecc9f1979008060244c0bd01e065e86"
+      }
+    },
+    "rule": {
+      "advance": "Detrended arm adds at least two useful feathered locations on distinct photos in each panel, loses at most one useful location per panel and adds at most two control flags and one untouched flag per panel.",
+      "fit": "Strictly above the second-highest of eight control-group maxima per format and arm.",
+      "response": "One nonnegative occupancy coefficient after removing a constant or an affine crop-position trend. Rank by residual dot product with the unit-norm projected template.",
+      "useful": "Native changed-pixel IoU at least .30 and recall at least .50."
+    },
+    "schema": "chipmunk.image-crop-overlap-transfer/1",
+    "sizes": [
+      4,
+      6,
+      8
+    ],
+    "step": 2,
+    "weight_sha256": "b89f36275f3bf5e2b040eee36597a8f19db051bff9a473a9cf7b2466284fb387"
+  },
+  "freeze_sha256": "37185d0dddf895f5b01aa73244740579b5ba93b14d832f1ce33717fbf37b71a2",
+  "held_sha256": "3a1a0323c8d60ea66bbe2630bf54d4be53f86c1eff7a0d63b534ba42fefb8d91",
+  "held_views": 384,
+  "independent_audit": {
+    "advancement": {
+      "jpeg75": false,
+      "png": false
+    },
+    "crop_inputs": 10400,
+    "native_region_measurements": 1152,
+    "source_views": 416,
+    "verified_unique_model_batches": 1369
+  },
+  "model_batches": 1369,
+  "peak_rss_bytes_mac": 665485312,
+  "points": {
+    "jpeg75": {
+      "overlap_centered": 14.202643407354877,
+      "overlap_detrended": 8.44180170175998,
+      "strongest_relative_crop": 10.8087158203125
+    },
+    "png": {
+      "overlap_centered": 21.72651387643007,
+      "overlap_detrended": 15.74558416019954,
+      "strongest_relative_crop": 12.893316149711609
+    }
+  },
+  "points_sha256": "34bf6118a67ff489c1505ef19f7016a36f78c09c34a79b0480618a92d31ff906",
+  "reviewer_sha256": "920523b1b38cb61954199f8b1ba4fb524e4bc12a18137baf6dec436f2277d405",
+  "schema": "chipmunk.image-crop-overlap-transfer/1",
+  "scope": "Source-separated held PNG and JPEG75 localization on retained local composites. No calibrated confidence or serving admission."
+}

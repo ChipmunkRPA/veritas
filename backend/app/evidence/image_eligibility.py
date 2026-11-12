@@ -12,6 +12,13 @@ _SHA = re.compile(r"[a-f0-9]{64}")
 RESPONSE_GATE = "image-candidate-eligibility/1"
 AREA_GATE = "image-candidate-eligibility/2"
 FLIP_CONSISTENCY = "image-flip-consistency/1"
+SOURCE_QUALITY = "image-source-quality/1"
+QUALITY_LABELS = {
+    "clipped": "Clipped highlights or very dark pixels",
+    "flat": "Low local contrast",
+    "compressed": "Low-detail JPEG blocks",
+    "upscaled": "Smooth patterns consistent with resizing",
+}
 
 
 def area_counts(gate: dict) -> tuple[int, int, int]:
@@ -96,6 +103,23 @@ def validate_flip_consistency(review: dict, raw_eligible: int, width: int, heigh
     return supported
 
 
+def validate_source_quality(check: dict) -> None:
+    quality = check.get("source_quality")
+    if quality is None:
+        return
+    if (not isinstance(quality, dict) or set(quality) != {"schema", "native_pixel_shares"}
+            or quality["schema"] != SOURCE_QUALITY or not _SHA.fullmatch(str(check.get("reliability_mask_sha256", "")))):
+        raise ValueError("Image source quality needs a recorded mask and supported measurement")
+    shares = quality["native_pixel_shares"]
+    if (not isinstance(shares, dict) or set(shares) != {*QUALITY_LABELS, "unreliable"}
+            or any(type(value) not in (int, float) or not math.isfinite(value) or not 0 <= value <= 1
+                   or round(value, 4) != value for value in shares.values())):
+        raise ValueError("Image source quality has invalid native pixel shares")
+    measured = [shares[name] for name in QUALITY_LABELS]
+    if not max(measured) <= shares["unreliable"] <= sum(measured) + .0003:
+        raise ValueError("Image source quality shares contradict their union")
+
+
 def validate_inspection_coverage(document: dict) -> None:
     """Check exact counts/bindings without importing inference or image libraries."""
     if document.get("version") != "image-evidence-3":
@@ -150,6 +174,17 @@ def validate_inspection_coverage(document: dict) -> None:
         reliability = check.get("reliability_mask_sha256")
         if reliability is not None and not any(a.get("sha256") == reliability for a in overview.values()):
             raise ValueError("The recorded image quality exclusions are not included")
+        validate_source_quality(check)
+        if check.get("source_quality") is not None:
+            grid = check.get("map_grid")
+            exclusion = check.get("excluded_area_fraction")
+            if (not isinstance(grid, list) or len(grid) != 2
+                    or any(type(value) is not int or not 0 < value <= document["source"][axis]
+                           for value, axis in zip(grid, ("width", "height"), strict=True))
+                    or type(exclusion) not in (int, float) or not 0 <= exclusion <= 1
+                    or not any(a.get("sha256") == reliability and [a.get("width"), a.get("height")] == grid
+                               and a.get("media_type") == "image/png" for a in overview.values())):
+                raise ValueError("Image source quality differs from its recorded mask grid")
         if repeat and (repeat_png := repeat.get("aligned_mask_png_sha256")):
             if reliability is None:
                 raise ValueError("The aligned repeat-pass mask requires the original quality exclusions")

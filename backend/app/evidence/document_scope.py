@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from collections import Counter
+
 VERSION = "document-evidence-5"
 MATCHED_VERSION = "document-evidence-6"
 PARAGRAPH_PRIORITY_VERSION = "document-evidence-7"
@@ -9,6 +11,11 @@ REPEAT_VERSIONS = frozenset({VERSION, MATCHED_VERSION, PARAGRAPH_PRIORITY_VERSIO
 SCOPE_VERSIONS = frozenset({"document-evidence-4", *REPEAT_VERSIONS})
 CONTEXT_VERSIONS = frozenset({"document-evidence-3", *SCOPE_VERSIONS})
 VERSIONS = frozenset({"document-evidence-1", "document-evidence-2", *CONTEXT_VERSIONS})
+
+PASSAGE_COVERAGE_KEY = "local_passage_coverage"
+PASSAGE_COVERAGE_SCHEMA = "document-local-passage-coverage/1"
+PASSAGE_COVERAGE_MAX_RANGES = 256
+PASSAGE_COVERAGE_STATES = ("no_local_record", "context_only", "response_range")
 
 
 def check_range(span: dict, size: int) -> tuple[int, int]:
@@ -69,3 +76,30 @@ def validate(packet: dict, size: int) -> None:
         not low <= span["start"] < span["end"] <= high for span in scope["spans"]
     ):
         raise ValueError("Document inspection scope differs from the recorded supporting inputs")
+
+
+def validate_passage_coverage(document: dict) -> None:
+    record = (document.get("coverage") or {}).get(PASSAGE_COVERAGE_KEY)
+    if record is None:
+        return
+    size = document["source"]["chars"]
+    ranges, counts, omitted = (record[key] for key in ("ranges", "counts", "omitted_ranges"))
+    if (record["schema"] != PASSAGE_COVERAGE_SCHEMA or record["count_unit"] != "non_whitespace_unicode_codepoint"
+            or not isinstance(ranges, list) or len(ranges) > PASSAGE_COVERAGE_MAX_RANGES or type(omitted) is not int
+            or omitted < 0 or omitted and len(ranges) != PASSAGE_COVERAGE_MAX_RANGES or not isinstance(counts, dict) or set(counts) != set(PASSAGE_COVERAGE_STATES)
+            or any(type(value) is not int or value < 0 for value in counts.values())
+            or type(record["mapped_characters"]) is not int
+            or not 0 <= record["mapped_characters"] == sum(counts.values()) <= size):
+        raise ValueError("Invalid document passage coverage summary")
+    displayed = Counter()
+    previous_end, previous_block = 0, 0
+    for row in ranges:
+        start, end = check_range(row, size)
+        amount, block, state = (row[key] for key in ("characters", "source_block", "state"))
+        if (start < previous_end or type(block) is not int or block < max(1, previous_block)
+                or type(amount) is not int or not 0 < amount <= end - start or state not in PASSAGE_COVERAGE_STATES):
+            raise ValueError("Invalid document passage coverage range")
+        previous_end, previous_block = end, block
+        displayed[state] += amount
+    if any(displayed[key] > value or not omitted and displayed[key] != value for key, value in counts.items()):
+        raise ValueError("Document passage coverage counts differ from the saved ranges")

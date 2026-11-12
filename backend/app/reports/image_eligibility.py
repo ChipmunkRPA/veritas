@@ -4,7 +4,7 @@ from __future__ import annotations
 import math
 import re
 
-from app.evidence.image_eligibility import AREA_GATE, area_counts, validate_gate
+from app.evidence.image_eligibility import AREA_GATE, QUALITY_LABELS, area_counts, validate_gate
 
 
 def _response(gate: dict, key: str) -> float | None:
@@ -76,6 +76,7 @@ def inspection_check_view(check: dict) -> dict:
     if valid:
         suppressed = raw - eligible if not has_flip else raw if eligibility["status"] == "withheld" else 0
     eligible_label = "Eligible after image gate" if eligibility["status"] in {"eligible", "withheld"} else "Available for region selection"
+    shares = (check.get("source_quality") or {}).get("native_pixel_shares") or {}
     return {"label": "Check " + ", ".join(labels) if labels else "Recorded image check",
             "eligibility": eligibility,
             "eligible_count_label": "Supported by the flip check" if has_flip else eligible_label,
@@ -83,4 +84,6 @@ def inspection_check_view(check: dict) -> dict:
                        "suppressed": suppressed} if valid else None,
             "has_flip": has_flip, "flip": flip_view,
             "map_grid": check.get("map_grid"),
+            "quality_reasons": [{"label": label, "percent": round(shares[key] * 100, 2)} for key, label in QUALITY_LABELS.items()
+                                if shares.get(key, 0) > 0],
             "excluded_percent": round(exclusion * 100, 3) if type(exclusion) in (int, float) and math.isfinite(exclusion) and 0 <= exclusion <= 1 else None}

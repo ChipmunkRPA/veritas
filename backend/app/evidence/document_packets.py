@@ -24,6 +24,7 @@ from app.detectors.text.extract import SOURCE_MAP_VERSION, text_hash
 from app.evidence import (
     document_matched_context,
     document_paragraph_priority,
+    document_passage_coverage,
     document_repeat,
     document_scope,
 )
@@ -312,6 +313,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
         document_repeat.validate(document)
         document_matched_context.validate(document)
         document_paragraph_priority.validate(document)
+        document_passage_coverage.validate(document)
     except (ValueError, KeyError, TypeError, AttributeError) as error:
         raise DocumentPacketIntegrityError("Document review evidence has invalid source commitments or positions") from error
     ids = set()
@@ -471,6 +473,10 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         )
     if partially_checked := decoded["meta"].get("partially_checked_pages"):
         document["coverage"]["partially_checked_pages"] = partially_checked
+    try:
+        document["coverage"][document_passage_coverage.KEY] = document_passage_coverage.build(result, text, mapping)
+    except (ValueError, KeyError, TypeError) as error:
+        raise DocumentPacketIntegrityError("Local passage coverage differs from the frozen inputs") from error
     document["repeated_passages"] = document_repeat.build(document["source"], text, mapping)
     quoted_roles = {"quoted", "signature"}
     quoted_ranges = [_range(source, len(text)) for source in mapping if source.get("quote_role") in quoted_roles]
@@ -542,10 +548,10 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     warning = decoded["meta"].get("coverage_warning")
     if warning:
         document["limitations"].append(warning)
-    if not document["packets"]:
-        document["limitations"].append("No recorded context reached the selection boundary. This does not establish human authorship.")
     if not scored:
         document["limitations"].append("No successful learned check recorded exact scored contexts for this analysis.")
+    elif not document["packets"]:
+        document["limitations"].append("No recorded context reached the selection boundary. This does not establish human authorship.")
     if any(c["status"] == "context_not_recorded" for c in check_coverage):
         document["limitations"].append("Some successful document-level or heuristic checks do not provide exact local input proof. See check coverage; their aggregate scores are not treated as local authorship evidence.")
     if any(c.get("omitted_windows") for c in check_coverage):
@@ -598,6 +604,7 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
             document_repeat.verify_source(document, decoded["text"], decoded["source_map"])
             document_matched_context.verify_source(document, decoded["text"], decoded["source_map"], result=result)
             document_paragraph_priority.verify_source(document, decoded["text"], decoded["source_map"], result=result)
+            document_passage_coverage.verify_source(document, decoded["text"], decoded["source_map"], result=result)
         except (ValueError, KeyError, TypeError, AttributeError) as error:
             raise DocumentPacketIntegrityError("Document review evidence differs from the frozen text or source mapping") from error
     store.verify(analysis.sha256)

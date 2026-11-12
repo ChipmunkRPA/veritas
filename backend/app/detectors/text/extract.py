@@ -699,7 +699,7 @@ def extract_eml(path: Path) -> Document:
                    for part_id, part in indexed if part.get_content_disposition() == "attachment" or part.get_filename()]
     document.meta = {"method": "email", "email": {"body_part": mime_part, "body_content_type": body.get_content_type(),
                      "quote_detection": "heuristic", "headers_authenticated": False, "attachments": attachments},
-                     "coverage_warning": "Only the selected email body was checked. Quoted text and signatures are labelled heuristically. Attachments were not analysed and sender authenticity was not verified."}
+                     "coverage_warning": "The extracted email text comes from one selected message part. Quote and signature labels are inferred from that text. Attachments and sender authenticity are outside the analysis scope."}
     return document
 
 

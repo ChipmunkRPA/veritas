@@ -523,6 +523,10 @@ def _check_public_zip(f, tmp_path, monkeypatch, pdf_bytes, *, source_audio=None,
         audio_check = checks['original audio samples']
         assert audio_check['ok']
         assert 'source timeline matched' in audio_check['detail'] and 'Verified 0 published' not in audio_check['detail']
+        part = f.document.get('audio', f.document)
+        stereo = part.get('stereo_context')
+        if stereo and stereo['schema'] == 'chipmunk.stereo-channel-context/2' and stereo['stereo_pcm_sha256'] is not None:
+            assert f"Recomputed stereo channel and mono-downmix evidence for {len(stereo['windows'])} windows" in audio_check['detail']
     if source_video is not None:
         video_check = checks['original video frames']
         assert video_check['ok'] and 'source frame clock matched' in video_check['detail']

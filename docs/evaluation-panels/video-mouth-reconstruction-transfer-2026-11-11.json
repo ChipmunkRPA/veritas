@@ -1,0 +1,177 @@
+{
+  "schema": "chipmunk.video-mouth-reconstruction-result/1",
+  "freeze_sha256": "39210bd800a3080a2d53d0a86382e0ea4adc30b8e7678dd841c18ff37ec84c67",
+  "held_sha256": "6be6c0e0b5d438e4ecdf76c649e58e8db002f95602a8597cd5f5b27893649b12",
+  "calibration_sha256": "db2e8b268316ff03df486caac6bf5480e0cdd29c3b8c34c123b68c7e5032c42b",
+  "held_clips": 8,
+  "held_components": 4,
+  "totals": {
+    "direct": {
+      "measured_no_range": 87,
+      "correct_range": 1
+    },
+    "motion_reconstruction": {
+      "measured_no_range": 81,
+      "ordinary_range": 4,
+      "wrong_range": 3
+    }
+  },
+  "by_condition": {
+    "original": {
+      "direct": {
+        "measured_no_range": 8
+      },
+      "motion_reconstruction": {
+        "measured_no_range": 8
+      }
+    },
+    "musetalk_source_time": {
+      "direct": {
+        "measured_no_range": 8
+      },
+      "motion_reconstruction": {
+        "measured_no_range": 7,
+        "wrong_range": 1
+      }
+    },
+    "musetalk_earlier_320ms": {
+      "direct": {
+        "measured_no_range": 8
+      },
+      "motion_reconstruction": {
+        "measured_no_range": 7,
+        "wrong_range": 1
+      }
+    },
+    "liveportrait_source_time": {
+      "direct": {
+        "measured_no_range": 8
+      },
+      "motion_reconstruction": {
+        "measured_no_range": 7,
+        "wrong_range": 1
+      }
+    },
+    "liveportrait_earlier_320ms": {
+      "direct": {
+        "measured_no_range": 7,
+        "correct_range": 1
+      },
+      "motion_reconstruction": {
+        "measured_no_range": 8
+      }
+    },
+    "resample_musetalk": {
+      "direct": {
+        "measured_no_range": 8
+      },
+      "motion_reconstruction": {
+        "measured_no_range": 7,
+        "ordinary_range": 1
+      }
+    },
+    "resample_liveportrait": {
+      "direct": {
+        "measured_no_range": 8
+      },
+      "motion_reconstruction": {
+        "measured_no_range": 6,
+        "ordinary_range": 2
+      }
+    },
+    "brightness_musetalk": {
+      "direct": {
+        "measured_no_range": 8
+      },
+      "motion_reconstruction": {
+        "measured_no_range": 7,
+        "ordinary_range": 1
+      }
+    },
+    "brightness_liveportrait": {
+      "direct": {
+        "measured_no_range": 8
+      },
+      "motion_reconstruction": {
+        "measured_no_range": 8
+      }
+    },
+    "genuine_frame_retime": {
+      "direct": {
+        "measured_no_range": 8
+      },
+      "motion_reconstruction": {
+        "measured_no_range": 8
+      }
+    },
+    "audio_delay_320ms": {
+      "direct": {
+        "measured_no_range": 8
+      },
+      "motion_reconstruction": {
+        "measured_no_range": 8
+      }
+    }
+  },
+  "expression_source_time_compatible_subset": {
+    "direct": {
+      "measured_no_range": 7
+    },
+    "motion_reconstruction": {
+      "measured_no_range": 6,
+      "wrong_range": 1
+    }
+  },
+  "components_with_correct_ranges": {
+    "direct": 1,
+    "motion_reconstruction": 0
+  },
+  "pilot_advances": false,
+  "operating_points": {
+    "direct": 0.42381424677636104,
+    "motion_reconstruction": 0.4054651081081644
+  },
+  "panel": {
+    "development_components": 4,
+    "held_components": 4,
+    "development_views": 88,
+    "held_views": 88,
+    "verified_neural_redraws": 32,
+    "matched_ordinary_controls": 56,
+    "source_time_compatible_expression_redraws": 7,
+    "sampled_native_pictures_both_splits": 6688,
+    "held_native_picture_samples": 3344,
+    "known_half_open_native_frames": [
+      27,
+      47
+    ],
+    "known_output_time_s": [
+      1.08,
+      1.88
+    ],
+    "min_temporal_iou": 0.5,
+    "scope": "Pre-frozen held components for this cue, with prior project exposure. Local renderer edits, exact picture change truth, no phoneme-level synchronization or independent listener assessment."
+  },
+  "independent_audit": {
+    "status": "verified",
+    "held_files_byte_checked": 88,
+    "native_frames_redecoded": 489,
+    "native_mask_proofs_replayed": 8,
+    "audio_only_picture_pairs_identical": 8,
+    "aggregate_sha256": "5eb009ec7eef0aa31663b104b58edeeb960d5c347c19b329285b0f3a0a1c6e5b",
+    "example": {
+      "case": "liveportrait_source_time",
+      "known_edit_s": [
+        "27/25",
+        "47/25"
+      ],
+      "selected_range_s": [
+        "2/5",
+        "32/25"
+      ],
+      "outcome": "wrong_range",
+      "native_pictures_and_crops": 3,
+      "mask_overlap": null
+    }
+  }
+}

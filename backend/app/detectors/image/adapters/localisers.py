@@ -32,7 +32,7 @@ from app.engine.detector import (
     RunContext,
     UnitScore,
 )
-from app.evidence.image_eligibility import AREA_GATE, area_gate, validate_gate
+from app.evidence.image_eligibility import AREA_GATE, SOURCE_QUALITY, area_gate, validate_gate
 
 PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
 
@@ -194,6 +194,7 @@ class LocaliserDetector(Detector):
                 "grid": [grid_w, grid_h], "coordinate_space": "exif-oriented-original",
                 "resolution_policy": out.resolution_policy, "conditions": out.conditions,
                 "reliability_source": out.reliability_source,
+                **({"source_quality_schema": SOURCE_QUALITY} if out.reliability_source == "conditions" else {}),
                 "capability": "ai_inpainting" if self.MODEL.startswith(("radar.", "fused.")) else "local_editing",
                 "validation_status": "limited_local_evaluation" if candidate_gate else "local_evaluation_pending",
                 **({"candidate_eligibility": candidate_gate} if candidate_gate is not None else {}),

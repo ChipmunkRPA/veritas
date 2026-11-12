@@ -94,6 +94,30 @@ def _verify_flip_masks(archive, checks, size):
     return regions
 
 
+def _verify_source_quality(archive, checks, source, data):
+    if not checks:
+        return 0
+    import numpy as np
+
+    from app.detectors.image import jpeg_bitstream, localiser
+    from app.evidence.image_flip_mask import png_grid
+
+    structure = jpeg_bitstream.read(data)
+    unusable, shares = localiser.conditions_mask(np.asarray(source), structure.quality_luma if structure else None)
+    for check in checks:
+        grid = tuple(check["map_grid"])
+        if len(grid) != 2 or any(type(value) is not int or not 0 < value <= limit
+                                 for value, limit in zip(grid, source.size, strict=True)):
+            raise ValueError("The image quality mask grid exceeds the supplied image")
+        recorded = archive.read(f"assets/{check['reliability_mask_sha256']}.png")
+        expected = localiser.reliable_grid(unusable, grid)
+        if (shares != check["source_quality"]["native_pixel_shares"]
+                or not np.array_equal(png_grid(recorded, grid), expected.astype(np.uint8) * 255)
+                or round(1 - float(expected.mean()), 6) != round(check["excluded_area_fraction"], 6)):
+            raise ValueError("The image quality mask or condition shares differ from the supplied source")
+    return len(checks)
+
+
 def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     """Bind source bytes and EXIF coordinates, then compare every unannotated crop."""
     from app.reports.public_verify import SCHEMA
@@ -111,7 +135,9 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     crops = list(_crops(evidence))
     repeat_checks = [check for check in (evidence.get("coverage") or {}).get("inspection_checks", [])
                      if (check.get("flip_consistency") or {}).get("aligned_mask_png_sha256")]
-    if not crops and not repeat_checks:
+    quality_checks = [check for check in (evidence.get("coverage") or {}).get("inspection_checks", [])
+                      if check.get("source_quality") is not None]
+    if not crops and not repeat_checks and not quality_checks:
         return 'Original SHA-256 matched. No unannotated crops were recorded.'
     declared = evidence['source']
     with Image.open(io.BytesIO(data)) as raw:
@@ -132,10 +158,13 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                     raise ValueError(f'{label} differs from pixels at its recorded source coordinates')
         masks = _verify_geometric_masks(archive, evidence, source)
         repeated = _verify_flip_masks(archive, repeat_checks, source.size)
+        quality = _verify_source_quality(archive, quality_checks, source, data)
     detail = (f'Original SHA-256 and {len(crops)} unannotated crops matched at their recorded EXIF-oriented coordinates.'
               if crops else 'Original SHA-256 matched. No unannotated crops were recorded.')
     if masks:
         detail += f' Recomputed {masks} geometric copy masks from the source image.'
     if repeated:
         detail += f' Recomputed repeat-pass overlap for {repeated} source regions from their recorded masks.'
+    if quality:
+        detail += f' Recomputed source quality masks for {quality} image {"check" if quality == 1 else "checks"}.'
     return detail

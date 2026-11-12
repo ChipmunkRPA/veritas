@@ -220,6 +220,26 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.queryByTestId('multimedia-evidence-empty')).toBeNull()
   })
 
+  it('shows local and missing coverage in a short email without a selected passage', () => {
+    const set = { ...structuredClone(document), version: 'document-evidence-5', packets: [] }
+    set.coverage!.local_passage_coverage = {
+      schema: 'document-local-passage-coverage/1', count_unit: 'non_whitespace_unicode_codepoint', mapped_characters: 23,
+      counts: { response_range: 7, context_only: 8, no_local_record: 8 }, omitted_ranges: 0,
+      ranges: [
+        { start: 0, end: 8, source_block: 1, mime_part: '1.1', quote_role: 'body', state: 'response_range', characters: 7 },
+        { start: 9, end: 18, source_block: 1, mime_part: '1.1', quote_role: 'body', state: 'context_only', characters: 8 },
+        { start: 20, end: 30, source_block: 2, mime_part: '1.1', quote_role: 'quoted', state: 'no_local_record', characters: 8 },
+      ],
+    }
+    show(set)
+    expect(screen.getByTestId('multimedia-evidence-empty')).toBeTruthy()
+    const coverage = within(screen.getByRole('region', { name: 'Recorded passage coverage' }))
+    fireEvent.click(coverage.getByText('Source ranges (3)'))
+    expect(coverage.getByRole('row', { name: /\[0, 8\) Local response recorded/ })).toBeTruthy()
+    expect(coverage.getByRole('row', { name: /\[9, 18\) Read as context only/ })).toBeTruthy()
+    expect(coverage.getByRole('row', { name: /quoted \[20, 30\) No exact local record/ })).toBeTruthy()
+  })
+
   it.each(['video-evidence-7', 'video-evidence-8', 'video-evidence-9'])('shows before/during/after review evidence in %s', (version) => {
     const set = structuredClone(video)
     set.version = version

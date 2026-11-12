@@ -4,6 +4,7 @@ import { Button } from '../../components/ui'
 import { EvidenceLimits, EvidencePicture, EvidenceReferences, evidenceCard, evidenceGrid } from './EvidenceMedia'
 import DocumentInspectionMap, { passageLocation, RecordedPassage, windowSupportsInspection } from './DocumentInspectionMap'
 import DocumentContextComparison from './DocumentContextComparison'
+import DocumentPassageCoverage from './DocumentPassageCoverage'
 import DocumentRepeatedPassages from './DocumentRepeatedPassages'
 import { type DocumentEvidencePacket, type DocumentEvidenceSet, type DocumentEvidenceWindow } from './multimediaPackets'
 
@@ -108,6 +109,7 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
   return <div data-testid="document-evidence-content">
     <DocumentRepeatedPassages result={set.repeated_passages} />
     <DocumentInspectionMap packets={set.packets} selectedId={selectedId} onSelect={selectPassage} />
+    <DocumentPassageCoverage coverage={set.coverage?.local_passage_coverage} />
     <div className="mt-4 rounded-md border border-border p-4 text-small text-text-muted">
       <p className="m-0">{set.coverage?.scored_windows != null ? `${set.coverage.scored_windows} scored context window(s) were recorded.` : 'Exact scored-context coverage is unavailable.'}
         {' '}The marked ranges show the text behind the recorded measurements. The responses do not determine the origin of individual words.</p>

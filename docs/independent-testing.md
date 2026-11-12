@@ -446,6 +446,15 @@ also recomputes the overlap of every inspected component with that mask, even
 when the check withheld all crops. It uses the recorded response and quality
 masks without running a detector. [Regional repeat pass](image-regional-flip-transfer-2026-11-11.md)
 
+New image coverage records can include how much of the original contains
+clipped or very dark pixels, low contrast, low-detail JPEG blocks, and patterns
+consistent with resizing. Those categories can overlap. The recorded
+reliability mask shows where the check applied exclusions on its measurement
+grid. With the original supplied, the same command independently recomputes
+those native shares and the exact grid mask, including analyses with no
+selected regions. This check uses the submitted pixels and JPEG structure
+without running detector weights.
+
 The ordinary archive
 verification remains available with only the ZIP and a key. The pixel check
 provides source evidence for a separate review of the detector’s interpretation.
@@ -477,6 +486,10 @@ all published WAV intervals. This includes voice and lip-sync windows,
 background sound, acoustic events, and both sides of repeated-audio evidence
 when present. Timeline gaps stay visible in the comparison. The output counts
 each playback interval separately, even when two intervals share one WAV asset.
+For current measured stereo context, it also recomputes both physical channel
+levels, their correlation and the mono level drop in each bounded source
+window. It replays the bounded waveform similarity result when the signed
+package contains that measurement.
 The ordinary verifier also checks a reported audio clock discontinuity against
 the soundtrack timeline committed in a signed video export.
 The same file decoded with a different FFmpeg build can produce different samples.
@@ -622,6 +635,22 @@ locates differences and leaves revision order and authorship to other evidence.
 This replay uses no model or remote service.
 
 ### Replay document evidence against the original
+
+New document evidence records distinguish source ranges with a local response,
+text read only as context, and text with no exact local record. The analysis
+view, PDF and JSON use the same extracted Unicode positions. Counts include
+every mapped character excluding whitespace. The analysis view and JSON retain
+up to 256 ranges, and the PDF shows up to 12. Source replay verifies the
+retained positions and character counts against the supplied original. The
+server also replays the map against the frozen local responses.
+
+An isolated local app run used a short multipart email containing a controlled
+rewrite, a genuine quotation and a signature. With the current classifier
+available, all 307 mapped characters had local responses. A second run of the
+identical file with the classifier skipped showed all 307 characters as having
+no exact local record. The evidence API, ordinary JSON export and rendered PDF
+agreed on the three exact source ranges in both runs. Both runs used simulated
+payment and a separate local database.
 
 ```sh
 python -m app.cli verify evidence.zip --public-key instance-key.pem --source-document original.pdf

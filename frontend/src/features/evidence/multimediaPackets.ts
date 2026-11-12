@@ -234,6 +234,16 @@ export interface DocumentEvidenceWindow {
     spans: { start: number; end: number }[]; text: string; input_sha256: string; token_ids_sha256: string;
     anchor_token_count: number; context_limit: number; stride: number }[]
 }
+export type DocumentCoverageState = 'response_range' | 'context_only' | 'no_local_record'
+export interface DocumentPassageCoverage {
+  schema: 'document-local-passage-coverage/1'
+  count_unit: 'non_whitespace_unicode_codepoint'
+  mapped_characters: number
+  counts: Record<DocumentCoverageState, number>
+  ranges: { start: number; end: number; state: DocumentCoverageState; characters: number;
+    source_block: number; page?: number; paragraph?: number; mime_part?: string; quote_role?: string }[]
+  omitted_ranges: number
+}
 export interface DocumentEvidenceSet extends SetBase {
   schema: 'chipmunk.document-evidence/1'; packets: DocumentEvidencePacket[]; omitted_windows: number
   source: { sha256: string; chars?: number; method?: string; offset_unit: 'unicode_codepoint' }
@@ -243,6 +253,7 @@ export interface DocumentEvidenceSet extends SetBase {
       occurrences: { start: number; end: number; anchor: { kind: 'text' | 'email' | 'docx' | 'pdf'; source_start?: number;
         source_end?: number; mime_part?: string; paragraph_index?: number; page?: number; block?: number; bbox?: number[] } }[] }[] }
   coverage?: { scored_windows?: number; candidate_spans?: number; unmapped_pages?: number[];
+    local_passage_coverage?: DocumentPassageCoverage;
     matched_context_review?: DocumentMatchedContextReview & { eligible_sentences: number; selected_sentences: number };
     isolated_paragraph_priority?: { schema: 'document-isolated-paragraph-priority/1'; packet_id: string;
       signal_ref: EvidenceRef; authorship_confidence_contribution: 0 };

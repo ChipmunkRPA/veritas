@@ -30,7 +30,7 @@ def test_old_reports_are_preserved_but_not_served(monkeypatch, template):
     assert row.artefact_id == 'old'
 
 
-@pytest.mark.parametrize('template', [v2_reports.engine.TEMPLATE_SET, 'veritas-report-2.0.r87'])
+@pytest.mark.parametrize('template', [v2_reports.engine.TEMPLATE_SET, 'veritas-report-2.0.r87', 'veritas-report-2.0.r88'])
 def test_public_safe_reports_remain_downloadable(monkeypatch, template):
     row = SimpleNamespace(status='done', artefact_id='new', template_set=template,
                           analysis_id='analysis', display_id='report')

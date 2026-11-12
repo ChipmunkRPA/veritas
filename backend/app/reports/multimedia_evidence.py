@@ -344,7 +344,7 @@ def _verify_audio(document: dict, store: ObjectStore, assets: dict[str, bytes], 
 
 def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes], *, result: dict | None = None) -> None:
     from app.detectors.text.extract import text_hash
-    from app.evidence import document_matched_context, document_paragraph_priority
+    from app.evidence import document_matched_context, document_paragraph_priority, document_passage_coverage
     from app.evidence.document_packets import (
         _inspection_anchors,
         _pdf_plates,
@@ -374,6 +374,9 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
         if document["version"] == document_scope.PARAGRAPH_PRIORITY_VERSION:
             frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
             document_paragraph_priority.verify_source(document, text, mapping, result=frozen)
+        if document_passage_coverage.KEY in coverage:
+            frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
+            document_passage_coverage.verify_source(document, text, mapping, result=frozen)
     except (ValueError, KeyError, TypeError) as error:
         raise ObjectIntegrityError("Document review evidence differs from the recorded source extraction") from error
     for packet in document["packets"]:
@@ -526,6 +529,20 @@ def _document_coverage_details(coverage: dict) -> list[str]:
                 note += f" {count} {phrase} outside the analysis."
             notes.append(note)
     return notes
+
+
+def _passage_coverage_view(coverage: dict) -> dict | None:
+    from app.evidence.document_passage_coverage import KEY, LABELS, STATES
+
+    record = coverage.get(KEY)
+    if record is None:
+        return None
+    rows = record["ranges"][:12]
+    return {"mapped_characters": record["mapped_characters"],
+            "counts": [(LABELS[state], record["counts"][state]) for state in reversed(STATES)],
+            "ranges": [{**row, "label": LABELS[row["state"]]} for row in rows],
+            "additional_ranges": len(record["ranges"]) - len(rows),
+            "omitted_ranges": record["omitted_ranges"]}
 
 
 def _voice_interval_view(interval: dict, rate: int, video_origin_s: float | None) -> dict:
@@ -788,6 +805,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "stereo_context_video_origin_s": video_origin_s,
             "version": document["version"], "sha256": document["sha256"], "source_sha256": document["source"]["sha256"],
             "withheld": withheld, "packets": packets, "acoustic_contexts": acoustic_contexts, "coverage_note": _coverage(kind, document),
+            "passage_coverage": _passage_coverage_view(document.get("coverage") or {}) if kind == "document" else None,
             "coverage_details": ([f"{'Voice evidence' if key == 'audio' else 'Audio/video synchronization evidence'}: {channel['reason']}"
                                   for key, channel in (document.get("coverage", {}).get("channels") or {}).items()]
                                  if kind == "video" else

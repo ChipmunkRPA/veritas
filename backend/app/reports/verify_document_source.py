@@ -15,6 +15,7 @@ from app.evidence import (
     document_context,
     document_matched_context,
     document_paragraph_priority,
+    document_passage_coverage,
     document_repeat,
     document_scope,
 )
@@ -95,6 +96,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     document_repeat.verify_source(evidence, text, mapping)
     document_matched_context.verify_source(evidence, text, mapping)
     document_paragraph_priority.verify_source(evidence, text, mapping)
+    document_passage_coverage.verify_source(evidence, text, mapping)
 
     pdf_bytes = original.read_bytes() if extension == ".pdf" else None
     packet_count = window_count = images = 0

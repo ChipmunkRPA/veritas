@@ -18,6 +18,7 @@ from sqlalchemy.orm import Session
 from app.core.canonical import canonical_hash, canonical_json
 from app.detectors.text.extract import extract, text_hash
 from app.detectors.text.segment import segment
+from app.evidence import document_passage_coverage
 from app.evidence.document_packets import (
     DocumentPacketIntegrityError,
     build_packet_set,
@@ -125,6 +126,62 @@ def test_frozen_contexts_are_bound_to_source_and_input_with_no_model_names(packe
     assert evidence["sha256"] == packet_hash(evidence)
     assert evidence["coverage"]["scored_windows"] == 3
     assert evidence["coverage"]["candidate_spans"] == 1
+
+
+def test_short_email_maps_opposing_context_only_and_unassessed_quote_without_cards(packet_factory):
+    body = "Please send the agenda. The date changed.\n\n> This was in the old message."
+    db, store, analysis, result, decoded, _ = packet_factory(".eml", scores=(.2,), text=body)
+    evidence = build_packet_set(db, analysis, store, result)
+    record = evidence["coverage"][document_passage_coverage.KEY]
+    assert evidence["packets"] == []
+    assert record["counts"] == {
+        state: sum(not char.isspace() for char in sentence["text"])
+        for state, sentence in zip(("response_range", "context_only", "no_local_record"), decoded["sentences"], strict=True)
+    }
+    for row, sentence in zip(record["ranges"], decoded["sentences"], strict=True):
+        assert (row["start"], row["end"]) == (sentence["start"], sentence["end"])
+    assert [row["quote_role"] for row in record["ranges"]] == ["body", "body", "quoted"]
+    document_passage_coverage.verify_source(evidence, decoded["text"], decoded["source_map"], result=result)
+
+    forged = deepcopy(evidence)
+    changed = forged["coverage"][document_passage_coverage.KEY]
+    first, second = changed["ranges"][:2]
+    first["state"], second["state"] = second["state"], first["state"]
+    for row in (first, second):
+        changed["counts"][row["state"]] = row["characters"]
+    forged["sha256"] = packet_hash(forged)
+    with pytest.raises(ValueError, match="differs from the frozen responses"):
+        document_passage_coverage.verify_source(forged, decoded["text"], decoded["source_map"], result=result)
+
+
+def test_partial_classifier_has_no_exact_coverage_and_ratio_keeps_only_committed_token_positions():
+    text = "A B C D E"
+    mapping = [{"start": 0, "end": len(text), "kind": "text"}]
+    a, b = {"start": 0, "end": 1}, {"start": 2, "end": 3}
+    classify = {"version": "scored-context/1", "offset_unit": "unicode_codepoint",
+                "extracted_text_sha256": text_hash(text),
+                "windows": [{"focus": a, "spans": [a, b], "token_coverage": {"tokens": 2, "covered_tokens": 1}}]}
+    ratio = {"version": "scored-context/2", "offset_unit": "unicode_codepoint", "extracted_text_sha256": text_hash(text),
+             "windows": [{"score_kind": "perplexity_ratio", "context_ids": ["context"], "scored_token_indices": [2]}],
+             "contexts": [{"id": "context", "source_token_range": [1, 3], "token_offsets": [[4, 5], [8, 9]]}]}
+    result = {"signals": [{"status": "ok", "details": {"text_evidence": item}} for item in (classify, ratio)]}
+    record = document_passage_coverage.build(result, text, mapping)
+    assert [(row["state"], row["start"], row["end"]) for row in record["ranges"]] == [
+        ("no_local_record", 0, 3), ("context_only", 4, 5), ("no_local_record", 6, 7), ("response_range", 8, 9),
+    ]
+    assert record["counts"] == {"response_range": 1, "context_only": 1, "no_local_record": 3}
+
+
+def test_coverage_counts_every_source_block_even_when_the_export_range_list_is_bounded():
+    blocks = document_passage_coverage.MAX_RANGES + 12
+    text = "\n\n".join("A" for _ in range(blocks))
+    mapping = [{"start": 3 * i, "end": 3 * i + 1, "kind": "text"} for i in range(blocks)]
+    record = document_passage_coverage.build({}, text, mapping)
+    assert record["counts"] == {"response_range": 0, "context_only": 0, "no_local_record": blocks}
+    assert len(record["ranges"]) == document_passage_coverage.MAX_RANGES and record["omitted_ranges"] == 12
+    document_passage_coverage.verify_source(
+        {"source": {"chars": len(text)}, "coverage": {document_passage_coverage.KEY: record}}, text, mapping, result={},
+    )
 
 
 def test_other_check_disagreement_is_retained_for_selected_context(packet_factory):

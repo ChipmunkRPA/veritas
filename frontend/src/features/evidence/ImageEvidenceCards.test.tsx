@@ -342,12 +342,18 @@ describe('image evidence cards', () => {
   })
 
   it('shows suppressed regions and measurement limits even with no localisation packets', () => {
-    show({ ...evidence, version: 'image-evidence-3', packets: [], coverage: { inspection_checks: [check()] } })
+    show({ ...evidence, version: 'image-evidence-3', packets: [], coverage: { inspection_checks: [check({
+      source_quality: { schema: 'image-source-quality/1',
+        native_pixel_shares: { clipped: .083, flat: .061, compressed: 0, upscaled: 0, unreliable: .127 } },
+    })] } })
     const coverage = screen.getByTestId('image-inspection-checks')
     expect(screen.getByText('Regions withheld by the image gate')).toBeTruthy()
     expect(coverage.textContent).toContain('Whole-image response 0.2')
     expect(coverage.textContent).toContain('12 measured regions were withheld')
     expect(coverage.textContent).toContain('12.5% of the measured grid was excluded')
+    expect(coverage.textContent).toContain('Clipped highlights or very dark pixels')
+    expect(coverage.textContent).toContain('Low local contrast')
+    expect(coverage.textContent).not.toContain('Low-detail JPEG blocks')
     expect(coverage.textContent).toContain('not a region or pixel probability')
     expect(coverage.textContent).toContain('Skipped, failed or unavailable checks')
     expect(coverage.textContent).not.toContain('loc.private')

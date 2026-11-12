@@ -9,6 +9,7 @@ from pathlib import Path
 from zipfile import ZipFile
 
 from app.detectors.audio.decode import decode_audio, source_ranges, wav_bytes
+from app.evidence.stereo_binding import SCHEMA as STEREO_CONTEXT_SCHEMA
 from app.reports.public_verify import SCHEMA
 
 SOURCE_FIELDS = ("samples", "sample_rate", "channels", "source_stream_index", "source_sample_rate", "source_channels",
@@ -37,7 +38,7 @@ def _clips(audio: dict, alignment: dict) -> Iterator[tuple[str, dict, list[dict]
 
 
 def check(archive: ZipFile, bundle: dict, original: Path) -> str:
-    """Re-decode the original, verify playback intervals and replay waveform fallback."""
+    """Re-decode the original and replay playback, stereo and waveform evidence."""
     kind = bundle.get("analysis", {}).get("kind")
     if bundle.get("schema") != SCHEMA or kind not in {"audio", "video"}:
         raise ValueError("Original-audio verification requires a public audio or video evidence package")
@@ -50,8 +51,9 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     source_sha256 = bundle["source_commitment"]["sha256"]
     if source["sha256"] != source_sha256:
         raise ValueError("The audio input is bound to a different source")
+    stereo = audio.get("stereo_context")
     decoded = decode_audio(original, source_sha256=source_sha256, max_seconds=600.0 if kind == "audio" else 120.0,
-                           inspect_stereo=audio.get("stereo_context") is not None)
+                           inspect_stereo=stereo is not None)
     with original.open("rb") as stream:
         if hashlib.file_digest(stream, "sha256").hexdigest() != source_sha256:
             raise ValueError("The supplied original changed during decoding")
@@ -80,6 +82,10 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     if covered != expected:
         raise ValueError("The source comparison did not account for every WAV asset in the package")
     replay_detail = ""
+    if stereo and stereo["schema"] == STEREO_CONTEXT_SCHEMA and stereo["stereo_pcm_sha256"] is not None:
+        if stereo != decoded.mapping.get("stereo_context"):
+            raise ValueError("Stereo channel and mono-downmix evidence differs from the original audio samples")
+        replay_detail = f" Recomputed stereo channel and mono-downmix evidence for {len(stereo['windows'])} windows."
     similarity = audio.get("similarity_context")
     if similarity and similarity["schema"] == "chipmunk.audio-repeat-similarity/2":
         from app.evidence.audio_similarity import verify
@@ -87,7 +93,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         paths = {entry["sha256"]: entry["file"] for entry in bundle["artifacts"] if entry["media_type"] == "audio/wav"}
         verify(similarity, pcm=decoded.pcm, mapping=decoded.mapping, source=source,
                read_asset=lambda sha: archive.read(paths[sha]), repetition=audio.get("repetition_context"))
-        replay_detail = " Recomputed the bounded waveform similarity result."
+        replay_detail += " Recomputed the bounded waveform similarity result."
     interval_label = "interval" if intervals == 1 else "intervals"
     asset_label = "asset" if len(covered) == 1 else "assets"
     return (f"Original SHA-256, {len(decoded.pcm):,} decoded mono samples and source timeline matched. "

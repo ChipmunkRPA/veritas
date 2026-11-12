@@ -46,6 +46,8 @@ def test_email_coverage_is_source_bound_in_pdf_and_json(packet_factory, monkeypa
     monkeypatch.setattr(multimedia_evidence, "default_store", lambda: store)
     exported = public_package._evidence(snapshot)
     assert exported["coverage"]["email"] == evidence["coverage"]["email"]
+    coverage = evidence["coverage"]["local_passage_coverage"]
+    assert exported["coverage"]["local_passage_coverage"] == coverage
     packet = exported["packets"][0]
     assert {anchor["quote_role"] for anchor in packet["anchors"]} == {"body", "quoted"}
     scope = "The highlight includes message text and material marked as an email quote or signature."
@@ -57,6 +59,10 @@ def test_email_coverage_is_source_bound_in_pdf_and_json(packet_factory, monkeypa
     assert scope in text
     assert "private-attachment-name.txt" not in text
     assert "source pages have no mapped text" not in text
+    assert "Recorded passage coverage" in text
+    assert f"Local response recorded: {coverage['counts']['response_range']}." in text
+    for span in coverage["ranges"]:
+        assert f"[{span['start']}, {span['end']})" in text
 
 
 @pytest.mark.parametrize("evidence_case", ["document"], indirect=True)

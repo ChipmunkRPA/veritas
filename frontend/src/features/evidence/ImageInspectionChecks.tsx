@@ -2,6 +2,13 @@ import type { ReactNode } from 'react'
 import { eligibilityView, inspectionCheckLabel, inspectionCounts } from './imageEligibility'
 import { measurementValue, type CandidateEligibility, type ImageInspectionCheck } from './imagePackets'
 
+const qualityLabels = {
+  clipped: 'Clipped highlights or very dark pixels',
+  flat: 'Low local contrast',
+  compressed: 'Low-detail JPEG blocks',
+  upscaled: 'Smooth patterns consistent with resizing',
+} as const
+
 export function CandidateEligibilityNote({ gate }: { gate: CandidateEligibility }) {
   const view = eligibilityView(gate)
   return <div className="mt-3 rounded-md border border-border bg-surface-2 p-3 text-small" data-testid="image-candidate-eligibility">
@@ -25,6 +32,13 @@ export default function ImageInspectionChecks({ checks, coverageMap }: {
     <div className="mt-4 space-y-5">{checks.map((check, index) => {
       const counts = inspectionCounts(check)
       const exclusion = check.excluded_area_fraction
+      const shares = check.source_quality?.schema === 'image-source-quality/1'
+        ? check.source_quality.native_pixel_shares : undefined
+      const qualityRows = (Object.keys(qualityLabels) as (keyof typeof qualityLabels)[])
+        .flatMap(key => {
+          const share = shares?.[key]
+          return typeof share === 'number' && share > 0 && share <= 1 ? [[qualityLabels[key], share * 100] as const] : []
+        })
       const eligibility = eligibilityView(check.candidate_eligibility)
       const knownGate = eligibility.status === 'eligible' || eligibility.status === 'withheld'
       const flip = check.flip_consistency
@@ -59,6 +73,14 @@ export default function ImageInspectionChecks({ checks, coverageMap }: {
         </> : <p className="mt-3 mb-0 text-small text-text-muted">Region coverage counts are unavailable. Missing counts do not establish that no regions were measured.</p>}
         {check.map_grid && <p className="mt-3 mb-0 text-caption text-text-muted">Measured grid {check.map_grid.join(' × ')}. Displaying a larger image does not add detection detail.</p>}
         {typeof exclusion === 'number' && Number.isFinite(exclusion) && exclusion >= 0 && exclusion <= 1 && <p className="mt-2 mb-0 text-caption text-text-muted">{measurementValue(exclusion * 100)}% of the measured grid was excluded as less reliable. Those areas were not cleared.</p>}
+        {qualityRows.length > 0 && <>
+          <p className="mt-3 mb-0 text-caption text-text-muted">Image quality conditions by share of original pixels. The areas can overlap.</p>
+          <dl className="mt-2 mb-0 grid grid-cols-2 gap-2 text-small max-[399px]:grid-cols-1">
+            {qualityRows.map(([label, percent]) => <div key={label}>
+              <dt className="text-text-muted">{label}</dt><dd className="m-0 mt-1 font-mono num text-text">{measurementValue(percent)}%</dd>
+            </div>)}
+          </dl>
+        </>}
         {coverageMap(check)}
       </article>
     })}</div>

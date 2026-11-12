@@ -21,6 +21,7 @@ from app.storage.files import VIDEO_MIMES, sniff
 
 SCHEMA = "chipmunk.video-reference-comparison/1"
 SCHEMA_WITH_LOCAL = "chipmunk.video-reference-comparison/2"
+SCHEMA_WITH_TIMING = "chipmunk.video-reference-comparison/3"
 MAX_BYTES = 48 * 1024 * 1024
 MAX_FRAMES = 360
 MAX_PIXELS = 1280 * 720
@@ -192,7 +193,8 @@ def _picture(paths, tables, assets, *, include_local):
     return picture
 
 
-def compare(earlier: Path, submitted: Path, *, include_local: bool = True) -> tuple[dict, dict[str, bytes]]:
+def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
+            timing_event_s: Fraction | None = None, timing_model: Path | None = None) -> tuple[dict, dict[str, bytes]]:
     """Report actual decoded differences at equal relative native picture timestamps."""
     paths = earlier, submitted
     sources = tuple(_identity(path) for path in paths)
@@ -202,6 +204,7 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True) -> tu
     record = {"schema": SCHEMA, "status": status,
               "earlier": {**sources[0], **_reference(tables[0])}, "submitted": {**sources[1], **_reference(tables[1])},
               "interpretation": INTERPRETATION, "affects_overall_confidence": False}
+    tracks = None
     if status == "measured":
         record["picture"] = _picture(paths, tables, assets, include_local=include_local)
         if "local_comparison" in record["picture"]:
@@ -209,6 +212,14 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True) -> tu
         tracks = [read_track(path, source, max_seconds=MAX_SECONDS, video=True, origin=table.pts[0] * table.tb)
                   for path, source, table in zip(paths, sources, tables, strict=True)]
         record["audio"] = compare_tracks(*tracks, assets)
+    if timing_event_s is not None:
+        from app.evidence import video_reference_timing
+
+        record["schema"] = SCHEMA_WITH_TIMING
+        record["timing"] = video_reference_timing.assess(
+            paths, tables if status == "measured" else None, tracks,
+            record.get("picture", {}).get("matching_frames", 0), timing_event_s, timing_model, assets, _image,
+        )
     if sources != tuple(_identity(path) for path in paths):
         raise ValueError("One of the clips changed while the comparison was running.")
     return record, assets

@@ -22,7 +22,7 @@ from app.core.canonical import canonical_json
 from app.core.config import settings
 from app.detectors.audio.decode import read_wav, wav_bytes
 from app.detectors.video import decode
-from app.evidence import video_reference, video_reference_local
+from app.evidence import video_reference, video_reference_local, video_reference_timing
 from app.storage.db import Analysis, Artefact, BillingOrderRow, Job, utcnow
 from scripts.compare_video_references import run
 from scripts.verify_native_video_interval import verify_comparison
@@ -292,9 +292,33 @@ def test_authenticated_video_comparison_exports_exact_evidence_without_new_analy
     exported = tmp_path / "comparison.json"
     exported.write_text(json.dumps({key: payload[key] for key in ("comparison", "assets")}))
     assert run(earlier, later, exported, verify=True) == record
+    malformed = f.client.post(url, headers=f.viewer, files=files, data={"timing_event_s": "0.2400"})
+    assert malformed.status_code == 422
+    optional = f.client.post(url, headers=f.viewer, files=files, data={"timing_event_s": "0.240", "include_pdf": "true"})
+    assert optional.status_code == 200
+    timing = optional.json()["comparison"]["timing"]
+    assert timing["status"] == "unassessed" and timing["reason"] == "profile"
+    assert timing["requested_earlier_time_s"] == "6/25" and timing["affects_overall_confidence"] is False
+    assert optional.json()["comparison"]["schema"] == video_reference.SCHEMA_WITH_TIMING
+    assert optional.json()["assets"] == payload["assets"]
+    with pymupdf.open(stream=base64.b64decode(optional.json()["pdf"]), filetype="pdf") as document:
+        assert len(document) == 4
+        timing_text = " ".join(document[-1].get_text().split())
+        assert "Marked mouth and speech timing" in timing_text
+        assert "continuous sound" in timing_text
     assert state() == before
     with sessions() as db:
         db.get(Analysis, "other-kind").withdrawn_at = utcnow()
         db.commit()
     assert f.client.get(url, headers=f.viewer).json() == {"available": False}
     assert f.client.post(url, headers=f.viewer, files=files).status_code == 404
+
+
+def test_marked_timing_capability_requires_exact_optional_task_bytes(monkeypatch, tmp_path):
+    model = tmp_path / "local.task"
+    model.write_bytes(b"different task")
+    monkeypatch.setattr(video_reference_timing.importlib.util, "find_spec", lambda _: object())
+    monkeypatch.setattr(video_reference_timing.importlib.metadata, "version", lambda _: video_reference_timing.RUNTIME_VERSION)
+    assert not video_reference_timing.available(model)
+    monkeypatch.setattr(video_reference_timing, "MODEL_SHA256", hashlib.sha256(model.read_bytes()).hexdigest())
+    assert video_reference_timing.available(model)

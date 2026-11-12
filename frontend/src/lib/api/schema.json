@@ -12386,6 +12386,30 @@
         "title": "ValidationRef",
         "type": "object"
       },
+      "VideoReferenceAvailability": {
+        "properties": {
+          "available": {
+            "title": "Available",
+            "type": "boolean"
+          },
+          "timing_available": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Timing Available"
+          }
+        },
+        "required": [
+          "available"
+        ],
+        "title": "VideoReferenceAvailability",
+        "type": "object"
+      },
       "WebhookCreate": {
         "additionalProperties": false,
         "properties": {
@@ -16941,7 +16965,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/MediaReferenceAvailability"
+                  "$ref": "#/components/schemas/VideoReferenceAvailability"
                 }
               }
             },
@@ -17014,6 +17038,10 @@
                       "true",
                       "false"
                     ],
+                    "type": "string"
+                  },
+                  "timing_event_s": {
+                    "description": "Optional marked mouth closure time in the earlier clip, in seconds.",
                     "type": "string"
                   }
                 },

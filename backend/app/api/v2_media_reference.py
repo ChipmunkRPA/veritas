@@ -4,8 +4,10 @@ from __future__ import annotations
 
 import base64
 import hashlib
+import re
 import shutil
 import threading
+from fractions import Fraction
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import BinaryIO
@@ -37,6 +39,10 @@ router = APIRouter(prefix="/api/v2", tags=["evidence"], dependencies=[Depends(ra
 
 class MediaReferenceAvailability(BaseModel):
     available: bool
+
+
+class VideoReferenceAvailability(MediaReferenceAvailability):
+    timing_available: bool | None = None
 
 
 class MediaReferenceResponse(BaseModel):
@@ -82,7 +88,7 @@ def _unavailable(kind: str) -> ProblemError:
     return ProblemError(404, f"{kind.title()} comparison unavailable", f"A retained, completed, active {kind} analysis is required.")
 
 
-@router.get(VIDEO_ROUTE, response_model=MediaReferenceAvailability, responses=problem_responses(401, 404))
+@router.get(VIDEO_ROUTE, response_model=VideoReferenceAvailability, responses=problem_responses(401, 404))
 @router.get(AUDIO_ROUTE, response_model=MediaReferenceAvailability, responses=problem_responses(401, 404))
 def availability(aid: str, request: Request):
     kind = kind_for_path(request.url.path)
@@ -96,7 +102,13 @@ def availability(aid: str, request: Request):
             available = source.is_file() and source.stat().st_size == size and bool(shutil.which("ffmpeg") and shutil.which("ffprobe"))
         except (OSError, ObjectStoreError):
             pass
-    return JSONResponse({"available": available}, headers=NO_STORE)
+    result = {"available": available}
+    if available and kind == "video" and settings.video_reference_timing_model_path is not None:
+        from app.evidence.video_reference_timing import available as timing_available
+
+        if timing_available(settings.video_reference_timing_model_path):
+            result["timing_available"] = True
+    return JSONResponse(result, headers=NO_STORE)
 
 
 def _stage(source: BinaryIO, path: Path, limit: int) -> tuple[str, int]:
@@ -120,7 +132,8 @@ def _base64(data: bytes) -> str:
     return base64.b64encode(data).decode("ascii")
 
 
-def _compare(aid: str, kind: str, original: tuple[str, int, str], earlier: UploadFile, include_pdf: bool) -> JSONResponse:
+def _compare(aid: str, kind: str, original: tuple[str, int, str], earlier: UploadFile, include_pdf: bool,
+             timing_event_s: Fraction | None = None) -> JSONResponse:
     expected = original[:2]
 
     try:
@@ -143,8 +156,11 @@ def _compare(aid: str, kind: str, original: tuple[str, int, str], earlier: Uploa
                     record, assets = audio_reference.compare(
                         reference, submitted, filenames=(earlier.filename or "", original[2])
                     )
-                else:
+                elif timing_event_s is None:
                     record, assets = video_reference.compare(reference, submitted)
+                else:
+                    record, assets = video_reference.compare(reference, submitted, timing_event_s=timing_event_s,
+                                                              timing_model=settings.video_reference_timing_model_path)
             except ValueError as error:
                 raise ProblemError(422, f"Could not compare {kind} files", str(error)) from None
             if (record["submitted"]["sha256"], record["submitted"]["bytes"]) != expected:
@@ -168,16 +184,20 @@ def _compare(aid: str, kind: str, original: tuple[str, int, str], earlier: Uploa
 
 
 _UPLOAD_RESPONSES = problem_responses(401, 404, 409, 413, 422, 429, 500)
-_UPLOAD_BODY = {"requestBody": {"required": True, "content": {"multipart/form-data": {"schema": {
-    "type": "object", "required": ["earlier"], "properties": {
+def _upload_body(kind):
+    properties = {
         "earlier": {"type": "string", "format": "binary", "description": "Earlier copy with the same timing."},
         "include_pdf": {"type": "string", "enum": ["true", "false"], "default": "false"},
-    },
-}}}}}
+    }
+    if kind == "video":
+        properties["timing_event_s"] = {"type": "string", "description": "Optional marked mouth closure time in the earlier clip, in seconds."}
+    return {"requestBody": {"required": True, "content": {"multipart/form-data": {"schema": {
+        "type": "object", "required": ["earlier"], "properties": properties,
+    }}}}}
 
 
-@router.post(VIDEO_ROUTE, response_model=MediaReferenceResponse, responses=_UPLOAD_RESPONSES, openapi_extra=_UPLOAD_BODY)
-@router.post(AUDIO_ROUTE, response_model=MediaReferenceResponse, responses=_UPLOAD_RESPONSES, openapi_extra=_UPLOAD_BODY)
+@router.post(VIDEO_ROUTE, response_model=MediaReferenceResponse, responses=_UPLOAD_RESPONSES, openapi_extra=_upload_body("video"))
+@router.post(AUDIO_ROUTE, response_model=MediaReferenceResponse, responses=_UPLOAD_RESPONSES, openapi_extra=_upload_body("audio"))
 async def comparison(aid: str, request: Request):
     kind = kind_for_path(request.url.path)
     assert kind is not None
@@ -189,11 +209,17 @@ async def comparison(aid: str, request: Request):
     if not _slot.acquire(blocking=False):
         raise ProblemError(429, "Source comparison busy", "Try again after the active source comparison finishes.")
     try:
-        async with request.form(max_files=1, max_fields=1, max_part_size=1024) as form:
+        async with request.form(max_files=1, max_fields=2 if kind == "video" else 1, max_part_size=1024) as form:
             earlier = form.get("earlier")
             include_pdf = form.get("include_pdf", "false")
             if not isinstance(earlier, UploadFile) or include_pdf not in ("true", "false"):
                 raise ProblemError(422, f"Earlier {kind} required", "Upload a single earlier copy to compare.")
-            return await run_in_threadpool(_compare, aid, kind, original, earlier, include_pdf == "true")
+            timing = form.getlist("timing_event_s")
+            event = None
+            if timing and (kind != "video" or len(timing) != 1 or not isinstance(timing[0], str)
+                           or re.fullmatch(r"[0-9]{1,2}(?:\.[0-9]{1,3})?", timing[0]) is None
+                           or (event := Fraction(timing[0])) > video_reference.MAX_SECONDS):
+                raise ProblemError(422, "Invalid marked time", "Enter a time in seconds from the first picture in the earlier clip.")
+            return await run_in_threadpool(_compare, aid, kind, original, earlier, include_pdf == "true", event)
     finally:
         _slot.release()

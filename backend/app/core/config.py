@@ -220,6 +220,7 @@ class Settings(BaseSettings):
     image_reference_comparison_enabled: bool = False  # Development-only comparison of an uploaded earlier copy.
     audio_reference_comparison_enabled: bool = False  # Authenticated comparison of a short earlier recording.
     video_reference_comparison_enabled: bool = False  # Authenticated development-only comparison of a short earlier clip.
+    video_reference_timing_model_path: Path | None = None  # Optional pinned local landmark task for a marked earlier closure.
     document_revision_comparison_enabled: bool = False  # Authenticated development-only earlier-draft comparison.
     document_archive_comparison_enabled: bool = False  # Authenticated development-only public archive comparison.
     image_affine_copy_review: bool = False  # Development-only dense masks for same-image geometric copies.

@@ -46,6 +46,7 @@ it('shows matching source times and waveform previews and exports their JSON and
   vi.stubGlobal('fetch', fetch)
   const page = show()
   fireEvent.change(await screen.findByLabelText('Earlier video'), { target: { files: [new File(['movie'], 'earlier.mov')] } })
+  expect(screen.queryByLabelText('Earlier mouth closure (seconds)')).toBeNull()
   fireEvent.click(screen.getByRole('button', { name: 'Compare videos' }))
   expect(await screen.findByText('V01 · 0.480–0.800 s')).toBeTruthy()
   expect(screen.getByText('A01 · 0.240–0.420 s')).toBeTruthy()
@@ -113,4 +114,51 @@ it('accepts the scoped video comparison and shows native crops linked to the rev
   expect(screen.getByAltText('Analyzed clip comparison crop at 1.360 seconds')).toBeTruthy()
   expect(screen.getByAltText('Earlier clip comparison crop at 1.880 seconds')).toBeTruthy()
   expect(screen.getByText('Ordinary edits may produce this evidence.')).toBeTruthy()
+})
+
+it('sends a user-marked closure only when entered and renders exact timing evidence for both clips', async () => {
+  const crop = { file: 'mouth.png', media_type: 'image/png', sha256: 'd'.repeat(64) }
+  const speech = { file: 'speech.wav', media_type: 'audio/wav', sha256: 'e'.repeat(64) }
+  const evidence = (frame_index: number, picture_time_s: number, pcm_start_s: number, pcm_end_s: number) => ({
+    frame_index, picture_time_s, pcm_start_s, pcm_end_s, crop, speech, waveform: { low: [-.4], high: [.2] },
+  })
+  const comparison = {
+    schema: 'chipmunk.video-reference-comparison/1', status: 'measured', interpretation: 'Decoded source differences.',
+    submitted: { width: 360, height: 288 }, picture: { matching_frames: 57, changed_frames: 18, ranges: [] },
+  }
+  const marked = { ...comparison, schema: 'chipmunk.video-reference-comparison/3', timing: {
+    status: 'timing_difference', summary: 'The picture event moved 320 ms later relative to speech.',
+    scope: 'The measured timing difference can come from ordinary editing.', offset_ms: 320, event_range_s: [.72, 1.04],
+    earlier: evidence(18, .72, .7600625, .9200625), submitted: evidence(26, 1.04, .7600625, .9200625),
+  } }
+  const fetch = vi.fn().mockResolvedValueOnce(Response.json({ available: true, timing_available: true }))
+    .mockResolvedValueOnce(Response.json({ comparison, assets: {} }))
+    .mockResolvedValueOnce(Response.json({ comparison: marked, assets: { 'mouth.png': 'iVBORw0KGgo=', 'speech.wav': 'UklGRg==' } }))
+  const createObjectURL = vi.fn().mockReturnValue('blob:timing-speech')
+  const revokeObjectURL = vi.fn()
+  const url = new URL('https://example.com/')
+  vi.stubGlobal('URL', Object.assign(function URL() { return url }, { createObjectURL, revokeObjectURL }))
+  vi.stubGlobal('fetch', fetch)
+  const page = show()
+  fireEvent.change(await screen.findByLabelText('Earlier video'), { target: { files: [new File(['movie'], 'earlier.mpg')] } })
+  const marker = screen.getByRole('spinbutton', { name: 'Earlier mouth closure (seconds)' })
+  expect(marker.getAttribute('step')).toBe('0.001')
+  fireEvent.click(screen.getByRole('button', { name: 'Compare videos' }))
+  expect(await screen.findByText('57 exact matches and 18 changed decoded pictures.')).toBeTruthy()
+  expect((fetch.mock.calls[1][1].body as FormData).has('timing_event_s')).toBe(false)
+  expect(screen.queryByRole('region', { name: 'Mouth and speech timing' })).toBeNull()
+  fireEvent.change(marker, { target: { value: '0.720' } })
+  fireEvent.click(screen.getByRole('button', { name: 'Compare videos' }))
+  expect(await screen.findByText(marked.timing.summary)).toBeTruthy()
+  expect((fetch.mock.calls[2][1].body as FormData).get('timing_event_s')).toBe('0.720')
+  expect(screen.getByText('Compared event times 0.720–1.040 s.')).toBeTruthy()
+  expect(screen.getByAltText('Earlier clip mouth crop at 0.720 seconds').getAttribute('src')).toBe('data:image/png;base64,iVBORw0KGgo=')
+  expect(screen.getByAltText('Analyzed clip mouth crop at 1.040 seconds')).toBeTruthy()
+  expect(screen.getByText('Frame 26 at 1.040 s')).toBeTruthy()
+  expect(screen.getAllByText('Speech 0.7600625–0.9200625 s')).toHaveLength(2)
+  expect(screen.getByRole('img', { name: 'Earlier clip timing speech waveform' })).toBeTruthy()
+  expect(screen.getByLabelText('Play analyzed clip timing speech').getAttribute('src')).toBe('blob:timing-speech')
+  expect(screen.getByText(marked.timing.scope)).toBeTruthy()
+  page.unmount()
+  expect(revokeObjectURL).toHaveBeenCalledTimes(2)
 })

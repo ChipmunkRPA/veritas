@@ -20,6 +20,22 @@ type LocalPictureRange = Extent & { tile: Tile; previews: PicturePreviews }
 type LocalComparison = { scope: string; summary: string; range?: LocalPictureRange }
 type Waveform = { low: number[]; high: number[] }
 type PictureDimensions = { width: number; height: number }
+type TimingSide = {
+  frame_index: number
+  picture_time_s: number
+  pcm_start_s: number
+  pcm_end_s: number
+  crop: Asset
+  speech: Asset
+  waveform: Waveform
+}
+type TimingComparison = {
+  status: 'timing_difference' | 'no_large_timing_difference' | 'unassessed'
+  summary: string
+  scope: string
+  offset_ms?: number
+  event_range_s?: number[]
+} & Partial<Record<Side, TimingSide>>
 type AudioRange = Extent & {
   changed_samples: number
   start_sample?: number
@@ -32,14 +48,18 @@ type Comparison = {
   interpretation: string
   audio?: { status: string; changed_samples?: number; submitted?: { samples: number }; ranges?: AudioRange[] }
 } & ({
-  schema: 'chipmunk.video-reference-comparison/1' | 'chipmunk.video-reference-comparison/2'
+  schema: 'chipmunk.video-reference-comparison/1' | 'chipmunk.video-reference-comparison/2' | 'chipmunk.video-reference-comparison/3'
   submitted: PictureDimensions
   picture?: { matching_frames: number; changed_frames: number; ranges: PictureRange[]; local_comparison?: LocalComparison }
+  timing?: TimingComparison
 } | {
   schema: 'chipmunk.audio-reference-comparison/1'
   picture?: never
+  timing?: never
 })
 type Result = { comparison: Comparison; assets: Record<string, string>; pdf?: string | null }
+type Availability = { available: boolean; timing_available?: boolean }
+const sourceSeconds = new Intl.NumberFormat('en-US', { minimumFractionDigits: 3, maximumFractionDigits: 7, useGrouping: false })
 
 const unassessed: Record<string, string> = {
   comparison_limit: 'At least one clip exceeds the picture comparison limits.',
@@ -163,6 +183,40 @@ function SoundEvidence({ span, assets }: { span: AudioRange; assets: Result['ass
   </details>
 }
 
+function TimingEvidence({ timing, assets }: { timing: TimingComparison; assets: Result['assets'] }) {
+  const matched = sides.flatMap(side => {
+    const evidence = timing[side]
+    return evidence ? [{ side, evidence }] : []
+  })
+  const peak = Math.max(.01, ...matched.flatMap(({ evidence }) => [...evidence.waveform.low, ...evidence.waveform.high].map(Math.abs)))
+  const range = timing.event_range_s
+  return <section className="space-y-2" aria-label="Mouth and speech timing">
+    <h3 className="m-0 text-small font-medium">Mouth and speech timing</h3>
+    <p className="m-0 text-small">{timing.summary}</p>
+    {timing.status === 'timing_difference' && range?.length === 2 && <p className="m-0 text-small">
+      Compared event times {sourceSeconds.format(range[0])}–{sourceSeconds.format(range[1])} s.
+    </p>}
+    {matched.length > 0 && <div className="grid gap-3 sm:grid-cols-2">
+      {matched.map(({ side, evidence }) => {
+        const crop = assetBody(assets, evidence.crop, 'image/png')
+        const time = sourceSeconds.format(evidence.picture_time_s)
+        return <div key={side} className="min-w-0 rounded-md border border-border p-3">
+          <h4 className="m-0 text-small font-medium">{names[side]}</h4>
+          {crop && <img className="mt-2 block h-auto max-h-40 max-w-full rounded border border-border" loading="lazy"
+            src={'data:image/png;base64,' + crop} alt={`${names[side]} mouth crop at ${time} seconds`} />}
+          <p className="mt-1 mb-2 text-caption text-text-muted">Frame {evidence.frame_index} at {time} s</p>
+          <p className="mt-0 mb-1 text-caption text-text-muted">
+            Speech {sourceSeconds.format(evidence.pcm_start_s)}–{sourceSeconds.format(evidence.pcm_end_s)} s
+          </p>
+          <ClipWaveform wave={evidence.waveform} maximum={peak} name={`${names[side]} timing speech`} />
+          <Playback body={assetBody(assets, evidence.speech, 'audio/wav')} name={`Play ${names[side].toLowerCase()} timing speech`} />
+        </div>
+      })}
+    </div>}
+    <p className="m-0 text-caption text-text-muted">{timing.scope}</p>
+  </section>
+}
+
 function ResultView({ result }: { result: Result }) {
   const { comparison, assets, pdf } = result
   const { picture, audio } = comparison
@@ -181,6 +235,7 @@ function ResultView({ result }: { result: Result }) {
     </div>
     <p className="m-0 text-small text-text-muted">{comparison.interpretation}</p>
     {comparison.status !== 'measured' && <p className="m-0 text-small">{notes[comparison.status] ?? 'The files could not be compared.'}</p>}
+    {comparison.timing && <TimingEvidence timing={comparison.timing} assets={assets} />}
     {!isAudio && picture && <>
       <h3 className="m-0 text-small font-medium">Pictures</h3>
       <p className="m-0 text-small">{picture.matching_frames} exact matches and {picture.changed_frames} changed decoded pictures.</p>
@@ -208,10 +263,12 @@ function ResultView({ result }: { result: Result }) {
   </div>
 }
 
-function MediaReferenceForm({ analysisId, kind }: { analysisId: string; kind: Kind }) {
+function MediaReferenceForm({ analysisId, kind, timingAvailable }: { analysisId: string; kind: Kind; timingAvailable: boolean }) {
   const heading = useId()
   const input = useId()
+  const timingInput = useId()
   const [file, setFile] = useState<File | null>(null)
+  const [timingEvent, setTimingEvent] = useState('')
   const [pending, setPending] = useState(false)
   const [error, setError] = useState('')
   const [result, setResult] = useState<Result | null>(null)
@@ -229,11 +286,14 @@ function MediaReferenceForm({ analysisId, kind }: { analysisId: string; kind: Ki
     const body = new FormData()
     body.append('earlier', file)
     body.append('include_pdf', 'true')
+    if (timingAvailable && timingEvent) body.append('timing_event_s', timingEvent)
     try {
       const response = await request<Result>(route(analysisId, kind), { method: 'POST', headers: authHeaders('POST'), body, signal: controller.signal })
       const schema = response?.comparison?.schema
       if (schema !== 'chipmunk.' + kind + '-reference-comparison/1' &&
-        !(kind === 'video' && schema === 'chipmunk.video-reference-comparison/2')) throw new Error('The comparison response is incomplete.')
+        !(kind === 'video' && (schema === 'chipmunk.video-reference-comparison/2' || schema === 'chipmunk.video-reference-comparison/3'))) {
+        throw new Error('The comparison response is incomplete.')
+      }
       if (!controller.signal.aborted) setResult(response)
     } catch (error) {
       if (!controller.signal.aborted) setError(error instanceof Error ? error.message : 'Could not compare the files.')
@@ -253,9 +313,18 @@ function MediaReferenceForm({ analysisId, kind }: { analysisId: string; kind: Ki
     <form onSubmit={event => void submit(event)} className="mt-4 flex flex-wrap items-end gap-3">
       <div className="min-w-0">
         <label htmlFor={input} className="mb-1 block text-small font-medium">Earlier {kind}</label>
-        <input id={input} type="file" accept={kind === 'audio' ? 'audio/*,.wav,.mp3,.m4a,.flac,.ogg,.opus' : 'video/*,.mov,.mkv,.mp4,.webm'} className="block max-w-full text-small" disabled={pending}
-          onChange={event => { setFile(event.currentTarget.files?.[0] ?? null); setResult(null); setError('') }} />
+        <input id={input} type="file" accept={kind === 'audio' ? 'audio/*,.wav,.mp3,.m4a,.flac,.ogg,.opus' : 'video/*,.mov,.mkv,.mp4,.webm' + (timingAvailable ? ',.mpg,.mpeg' : '')} className="block max-w-full text-small" disabled={pending}
+          onChange={event => { setFile(event.currentTarget.files?.[0] ?? null); setTimingEvent(''); setResult(null); setError('') }} />
       </div>
+      {timingAvailable && <div className="min-w-0 basis-full">
+        <label htmlFor={timingInput} className="mb-1 block text-small font-medium">Earlier mouth closure (seconds)</label>
+        <input id={timingInput} type="number" min="0" step="0.001" aria-describedby={timingInput + '-hint'}
+          value={timingEvent} disabled={pending || !file} className="w-32 rounded border border-border bg-surface px-2 py-1 text-small"
+          onChange={event => { setTimingEvent(event.currentTarget.value); setResult(null); setError('') }} />
+        <p id={timingInput + '-hint'} className="mt-1 mb-0 text-caption text-text-muted">
+          Optional. Mark a moment in the earlier clip when the lips close just before reopening. This check supports matching 360 × 288 clips with 75 pictures at 25 fps and continuous audio.
+        </p>
+      </div>}
       <Button type="submit" variant="primary" disabled={!file || pending}>{pending ? 'Comparing…' : kind === 'audio' ? 'Compare recordings' : 'Compare videos'}</Button>
     </form>
     {pending && <p role="status" className="mt-3 mb-0 text-small text-text-muted">{kind === 'audio' ? 'Comparing decoded audio…' : 'Comparing pictures and soundtracks…'}</p>}
@@ -266,8 +335,9 @@ function MediaReferenceForm({ analysisId, kind }: { analysisId: string; kind: Ki
 
 export default function MediaReferenceComparison({ analysisId, kind }: { analysisId: string; kind: Kind }) {
   const availability = useQuery({ queryKey: ['analysis', analysisId, kind + '-reference-comparison'],
-    queryFn: ({ signal }) => request<{ available: boolean }>(route(analysisId, kind), { headers: authHeaders(), signal }),
+    queryFn: ({ signal }) => request<Availability>(route(analysisId, kind), { headers: authHeaders(), signal }),
     refetchOnMount: 'always', refetchOnWindowFocus: false, retry: false })
   return availability.isFetchedAfterMount && availability.data?.available && !availability.isError
-    ? <MediaReferenceForm key={kind + analysisId} analysisId={analysisId} kind={kind} /> : null
+    ? <MediaReferenceForm key={kind + analysisId} analysisId={analysisId} kind={kind}
+      timingAvailable={kind === 'video' && availability.data.timing_available === true} /> : null
 }

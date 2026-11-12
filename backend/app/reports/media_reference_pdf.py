@@ -156,6 +156,31 @@ def _draw_waveform(page, wave, y, maximum, duration):
     shape.commit()
 
 
+def _timing_page(document, timing, assets):
+    page = _page(document, "Marked mouth and speech timing")
+    page.insert_textbox((MARGIN, 124, RIGHT, 167), timing["summary"], fontsize=12, fontname="hebo", color=INK)
+    page.insert_textbox((MARGIN, 176, RIGHT, 213), timing["scope"], fontsize=10, fontname="helv", color=MUTED)
+    if timing["status"] == "unassessed":
+        return
+    low, high = timing["event_range_s"]
+    _text(page, MARGIN, 221, f"Compared interval in analyzed clip  {low:.3f} to {high:.3f} s", color=MUTED)
+    for x, (side, label) in zip((MARGIN, 316), LABELS.items(), strict=True):
+        row = timing[side]
+        _text(page, x, 253, label, font="hebo")
+        _text(page, x, 272, f"Native picture {row['frame_index']} at {row['picture_time_s']:.3f} s", color=MUTED)
+        _text(page, x, 290, f"PTS {row['picture_pts']} at {row['picture_time_base']} s per tick", size=9, color=MUTED)
+        page.insert_image(pymupdf.Rect(x, 304, x + 232, 416), stream=assets[row["crop"]["file"]])
+    maximum = max(.01, *(abs(level) for side in LABELS for field in ("low", "high")
+                        for level in timing[side]["waveform"][field]))
+    for y, (side, label) in zip((505, 638), LABELS.items(), strict=True):
+        row = timing[side]
+        start, stop = row["pcm_samples"]
+        _text(page, MARGIN, y - 64, f"{label} speech  {row['pcm_start_s']:.3f} to {row['pcm_end_s']:.3f} s", font="hebo")
+        _draw_waveform(page, row["waveform"], y, maximum, (stop - start) / AUDIO_RATE)
+        _text(page, MARGIN, y + 53, f"Decoded samples [{start}, {stop}) at 16 kHz.", size=9, color=MUTED)
+    _text(page, MARGIN, 721, "Waveforms share one scale. The JSON includes both playable speech excerpts.", size=9, color=MUTED)
+
+
 def _sound_page(document, span):
     difference = span.get("difference")
     title = "Audio differences" if difference is not None else "Soundtrack differences"
@@ -208,4 +233,6 @@ def render(record, assets):
             page = _page(document, "Additional measured ranges")
             for i, (label, value) in enumerate(remaining[start:start + 30]):
                 _text(page, MARGIN, 137 + i * 18, f"{label}  {value}")
+        if "timing" in record:
+            _timing_page(document, record["timing"], assets)
         return document.tobytes(deflate=True, garbage=4)

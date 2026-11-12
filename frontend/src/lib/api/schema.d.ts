@@ -5899,6 +5899,13 @@ export interface components {
             dossier_version: string;
             slice_metrics?: components["schemas"]["SliceMetrics"] | null;
         };
+        /** VideoReferenceAvailability */
+        VideoReferenceAvailability: {
+            /** Available */
+            available: boolean;
+            /** Timing Available */
+            timing_available?: boolean | null;
+        };
         /** WebhookCreate */
         WebhookCreate: {
             /**
@@ -9017,7 +9024,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["MediaReferenceAvailability"];
+                    "application/json": components["schemas"]["VideoReferenceAvailability"];
                 };
             };
             /** @description Unauthorized */
@@ -9073,6 +9080,8 @@ export interface operations {
                      * @enum {string}
                      */
                     include_pdf?: "true" | "false";
+                    /** @description Optional marked mouth closure time in the earlier clip, in seconds. */
+                    timing_event_s?: string;
                 };
             };
         };

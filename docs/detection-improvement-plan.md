@@ -99,11 +99,12 @@ integration remains unfinished.
 
 - The [between-block JPEG copy check](image-offgrid-copy-transfer-2026-11-12.md)
   added 19 correct locations across 64 edited test deliveries and produced
-  zero flags on 140 ordinary deliveries in a separate confirmation. The
+  zero flags on 124 assessed ordinary deliveries in a separate confirmation.
+  The other 16 ordinary deliveries were outside the encoding profile. The
   development app displays the two native crops, coordinates and measured
   color differences for the supported JPEG profiles. The full local flow
-  reproduced the same evidence in the PDF, JSON and signed package. The
-  copy evidence carries zero weight in the AI confidence score.
+  reproduced the same evidence in the PDF, JSON and signed package. The copy
+  evidence carries zero weight in the AI confidence score.
 - The [fixed-position video detail check](video-mouth-fixed-residual-2026-11-12.md)
   located four of 52 neural redraws, compared with two using the direct
   comparison. It missed all nine redraws with verified source-time mouth

@@ -5,6 +5,8 @@
       "medium": 9,
       "small": 9
     },
+    "current_runner_freeze_sha256": "1f04429f4beb30334516c6317483c6b86969194e372729fd164693909b44fb1d",
+    "current_runner_input_commitments_reproduced": 240,
     "earlier_research_source_exposures": 2,
     "freeze_sha256": "3d1b3961e9432d0b587df5bbcf410c4e89af2f0cdec17553ddce87602e1c692d",
     "inputs_sha256": "10f3aec114df1156dbe43b1128d9133a672c5da689824e3ccd8ed343687a9f2a",
@@ -352,8 +354,11 @@
       "crop_or_measurement_changes": 0,
       "ordinary_no_pair_reclassified_as_unsupported": 5
     },
+    "exact_replay_passed": true,
     "freeze_sha256": "c551f38b01d026a078b30847334709455ff856c19b4d76b9eead30d2f7a4fda9",
     "ordinary": {
+      "candidate_assessed_no_pair": 124,
+      "candidate_unsupported_profile": 16,
       "combined_flagged": 0,
       "current_flagged": 0,
       "views": 140

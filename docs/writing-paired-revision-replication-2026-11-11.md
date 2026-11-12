@@ -31,6 +31,8 @@ Both generators attempted both source groups. The pilot admitted one Qwen rewrit
 
 The paired response transferred to Qwen on the exposed F1000Research sources and one new PeerJ work. The SmolLM2 lane added no useful locations on the exposed groups. Larger publisher samples and more varied natural revisions are still needed to calibrate a confidence contribution.
 
+A subsequent body-text intake yielded no qualifying pairs within its file size and exact revision geometry limits. [Copernicus source intake](writing-copernicus-body-intake-2026-11-11.md)
+
 The authenticated local draft comparator offers an optional experimental paired check when both writing checks are enabled. It requires two short English plain-text drafts with exactly one changed sentence and an unchanged sentence on each side in the same paragraph. The standalone comparison PDF and JSON report the changed sentence, its source positions, and the two anonymous before-and-after responses. The check carries zero authorship confidence weight. The standard analysis uses its existing assessment.
 
 A local endpoint replay used the installed checkpoints on the 20 edited pairs from the earlier F1000Research transfer panel. Four of the six eligible generated pairs showed a joint increase. Both eligible ordinary revisions showed no joint increase. Five generated and seven ordinary pairs were outside the narrower app scope. All eight eligible pairs reproduced the earlier study's paired decision and exact model-input hashes. The 32 saved response comparisons differed by up to 0.0181 in absolute value. All 20 comparison PDFs and offline source replays passed. These are integration checks on reused sources.

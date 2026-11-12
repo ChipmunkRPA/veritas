@@ -1,0 +1,528 @@
+{
+  "classifier_forwards": 0,
+  "commitments": {
+    "originals.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "source-plan.json": "9937b6a8793792c2f5930ca3043ee8b3876296b44277fc1320c40628e99cae37",
+    "source-receipt.json": "2784127bd6d7217b6465d8695748acc994712c4f7e97529e0e726af5ae14a7a8"
+  },
+  "dispositions": {
+    "download_omitted": 17,
+    "no_exact_body_edit": 3
+  },
+  "generator_attempts": 0,
+  "history": [
+    {
+      "matched_sources": 0,
+      "packet": "previous-agreement",
+      "source_sha256": "8db9676dfde8ed023cbe79d92f82d2bea2544b18537c56baed1dbd6e29b0234b",
+      "text_entries": 100
+    },
+    {
+      "matched_sources": 0,
+      "packet": "llmtrace",
+      "source_sha256": "6d4431a85a70916ba7af5c19f062eed6c277183d7b4bb5c6cea42f520e717f48",
+      "text_entries": 38429
+    },
+    {
+      "matched_sources": 0,
+      "packet": "elife-v301",
+      "source_sha256": "d690f9466193dafb94a054c02fb27bade0bc6d04819cafa9cc8b846acb97b16f",
+      "text_entries": 12
+    },
+    {
+      "matched_sources": 0,
+      "packet": "elife-v286",
+      "source_sha256": "a8676385711bf3d66165a6c3a8add0d8aee7881288302388ca88739e8e30389b",
+      "text_entries": 26
+    },
+    {
+      "matched_sources": 0,
+      "packet": "elife-v272",
+      "source_sha256": "063c960dafe75757b3b6483ab88802c9c6cd78fa6e0a347014ac148c283d758f",
+      "text_entries": 5
+    },
+    {
+      "matched_sources": 0,
+      "packet": "opai-v257",
+      "source_sha256": "4e43edf33c695a8a4f757d079089dab85a632c648762554bac9f5cc573bb923b",
+      "text_entries": 60
+    },
+    {
+      "matched_sources": 0,
+      "packet": "f1000-body",
+      "source_sha256": "f8e0f135cd4aef110b78523dd104f47f44fe24aa4a2cb316c78f5e1a99d4deb5",
+      "text_entries": 18
+    },
+    {
+      "matched_sources": 0,
+      "packet": "publisher-abstract-pilot",
+      "source_sha256": "da3edb1f530f62dae1d0911282dca11419153e1126a3a1a2aa84d9d0a31b6c9a",
+      "text_entries": 4
+    }
+  ],
+  "pairs": [
+    {
+      "after_date": "2018-06-04",
+      "after_doi": "10.5194/acp-18-7799-2018",
+      "after_license": [
+        "https://creativecommons.org/licenses/by/4.0"
+      ],
+      "assets": {
+        "after": {
+          "bytes": 278092,
+          "sha256": "761870bde431ccbb5019300dd277ba041b41b91ab7c0c661fc67dc7b2ace8cd6"
+        },
+        "asset_receipt_sha256": "36a723968f69b765cb64b292866072e3ec86a1edcc2d07df0fd7f1c19d254bae",
+        "before": {
+          "omitted": "size_limit"
+        }
+      },
+      "before_date": "2018-01-11",
+      "before_doi": "10.5194/acp-2018-2",
+      "before_license": [
+        "https://creativecommons.org/licenses/by/4.0"
+      ]
+    },
+    {
+      "after_date": "2018-11-07",
+      "after_doi": "10.5194/soil-4-259-2018",
+      "after_license": [
+        "https://creativecommons.org/licenses/by/4.0"
+      ],
+      "assets": {
+        "after": {
+          "bytes": 57736,
+          "sha256": "d3d3a3684b365354388139b4ecc005cab528dcbab8dae876501da61fd51980cb"
+        },
+        "asset_receipt_sha256": "3a0b1473c2f61c8899b7ba272eeaf10daa0679a7ac6445cb400a9a6fa28a0cfd",
+        "before": {
+          "bytes": 1756623,
+          "sha256": "8cf7b8d8d7c5cb8021d78fa8220e00acba9b72754152751711a38daaf9f82a4a"
+        }
+      },
+      "before_date": "2018-01-17",
+      "before_doi": "10.5194/soil-2017-37",
+      "before_license": [
+        "https://creativecommons.org/licenses/by/4.0"
+      ]
+    },
+    {
+      "after_date": "2018-09-25",
+      "after_doi": "10.5194/acp-18-13547-2018",
+      "after_license": [
+        "https://creativecommons.org/licenses/by/4.0"
+      ],
+      "assets": {
+        "after": {
+          "bytes": 252508,
+          "sha256": "5833be3abeb61137d075b2f685e6aea04a845467a24e0414cf51fb77f66f336b"
+        },
+        "asset_receipt_sha256": "aca3cdd0e8e41e94d61eda209753385c2ac904aadda29f0e6d8e6c0af22d1952",
+        "before": {
+          "omitted": "size_limit"
+        }
+      },
+      "before_date": "2018-01-19",
+      "before_doi": "10.5194/acp-2017-1175",
+      "before_license": [
+        "https://creativecommons.org/licenses/by/4.0"
+      ]
+    },
+    {
+      "after_date": "2018-06-01",
+      "after_doi": "10.5194/acp-18-7657-2018",
+      "after_license": [
+        "https://creativecommons.org/licenses/by/4.0"
+      ],
+      "assets": {
+        "after": {
+          "bytes": 97350,
+          "sha256": "8a801841fd42720e9b8da8c1627bd34b78e6e728f0b7ce19e3a4ce8978e1f433"
+        },
+        "asset_receipt_sha256": "2b3012f614589690e550eae9f036ea190d5e3dc0d60e68a149ffe6d53dbf9ef0",
+        "before": {
+          "omitted": "size_limit"
+        }
+      },
+      "before_date": "2018-01-12",
+      "before_doi": "10.5194/acp-2017-1134",
+      "before_license": [
+        "https://creativecommons.org/licenses/by/4.0"
+      ]
+    },
+    {
+      "after_date": "2018-06-08",
+      "after_doi": "10.5194/nhess-18-1583-2018",
+      "after_license": [
+        "https://creativecommons.org/licenses/by/4.0"
+      ],
+      "assets": {
+        "after": {
+          "bytes": 121213,
+          "sha256": "66510c4a05b34da9baf4fb94aa25ccc8dc7c1a9a73f44ec1dc7c77e4c1f0e87a"
+        },
+        "asset_receipt_sha256": "f7075e61a10dcf6e9d807ffc80f5f65085332fbf66da100216cd54b4c4615c99",
+        "before": {
+          "omitted": "size_limit"
+        }
+      },
+      "before_date": "2018-01-08",
+      "before_doi": "10.5194/nhess-2017-409",
+      "before_license": [
+        "https://creativecommons.org/licenses/by/4.0"
+      ]
+    },
+    {
+      "after_date": "2018-04-27",
+      "after_doi": "10.5194/gmd-11-1653-2018",
+      "after_license": [
+        "https://creativecommons.org/licenses/by/4.0"
+      ],
+      "assets": {
+        "after": {
+          "bytes": 177459,
+          "sha256": "076e0d121586dfd087381c1220ed525a926c11fb2468ff855a015c29ba7ebdd1"
+        },
+        "asset_receipt_sha256": "9440d093ed8ce092b264dc6077fc98d3de0fbd0d43590b1e50d5affcc96357ce",
+        "before": {
+          "omitted": "size_limit"
+        }
+      },
+      "before_date": "2018-01-12",
+      "before_doi": "10.5194/gmd-2017-302",
+      "before_license": [
+        "https://creativecommons.org/licenses/by/4.0"
+      ]
+    },
+    {
+      "after_date": "2018-07-25",
+      "after_doi": "10.5194/bg-15-4533-2018",
+      "after_license": [
+        "https://creativecommons.org/licenses/by/4.0"
+      ],
+      "assets": {
+        "after": {
+          "bytes": 298191,
+          "sha256": "7a284a74e06037af96308c2fe985e49a6f6801c9e9fffbe8cdb4fca19e632f0a"
+        },
+        "asset_receipt_sha256": "ea7de4e323a238c949de5dbde03ef0082c686c526a8e66154ad6c6b39a5d9493",
+        "before": {
+          "omitted": "size_limit"
+        }
+      },
+      "before_date": "2018-01-11",
+      "before_doi": "10.5194/bg-2017-540",
+      "before_license": [
+        "https://creativecommons.org/licenses/by/4.0"
+      ]
+    },
+    {
+      "after_date": "2018-08-13",
+      "after_doi": "10.5194/amt-11-4725-2018",
+      "after_license": [
+        "https://creativecommons.org/licenses/by/4.0"
+      ],
+      "assets": {
+        "after": {
+          "bytes": 149281,
+          "sha256": "86616bbb0966a36de5bbceb35a3571b6b1a33b161fc9a07c949665c10e9e1f7d"
+        },
+        "asset_receipt_sha256": "a122d9555767b7e6732ac269225a36280a2bd7793128c659800fa02a0d2cd95e",
+        "before": {
+          "omitted": "size_limit"
+        }
+      },
+      "before_date": "2018-01-09",
+      "before_doi": "10.5194/amt-2017-387",
+      "before_license": [
+        "https://creativecommons.org/licenses/by/4.0"
+      ]
+    },
+    {
+      "after_date": "2018-06-13",
+      "after_doi": "10.5194/essd-10-1031-2018",
+      "after_license": [
+        "https://creativecommons.org/licenses/by/4.0"
+      ],
+      "assets": {
+        "after": {
+          "bytes": 439373,
+          "sha256": "b698025f8e6eae761f4d9770adb5159d70cded754c4d38045dd8448837990e6f"
+        },
+        "asset_receipt_sha256": "51ded13ad0819df4ffacd39c0009dabb77eb8675d14bbb7c31166ef15774036b",
+        "before": {
+          "omitted": "size_limit"
+        }
+      },
+      "before_date": "2018-01-03",
+      "before_doi": "10.5194/essd-2017-122",
+      "before_license": [
+        "https://creativecommons.org/licenses/by/4.0"
+      ]
+    },
+    {
+      "after_date": "2018-04-27",
+      "after_doi": "10.5194/amt-11-2485-2018",
+      "after_license": [
+        "https://creativecommons.org/licenses/by/4.0"
+      ],
+      "assets": {
+        "after": {
+          "bytes": 138139,
+          "sha256": "8355c1fa4cbe00b6e15bc3a1e3f9ae7b87de6c662942463a82c3984f4693a424"
+        },
+        "asset_receipt_sha256": "2658302629e44944a9c1dbfba0de5bd7f3f9cad54a37632a6c261e4245c38a34",
+        "before": {
+          "omitted": "size_limit"
+        }
+      },
+      "before_date": "2018-01-18",
+      "before_doi": "10.5194/amt-2017-448",
+      "before_license": [
+        "https://creativecommons.org/licenses/by/4.0"
+      ]
+    },
+    {
+      "after_date": "2018-08-17",
+      "after_doi": "10.5194/esurf-6-669-2018",
+      "after_license": [
+        "https://creativecommons.org/licenses/by/4.0"
+      ],
+      "assets": {
+        "after": {
+          "bytes": 145676,
+          "sha256": "fbead5c61540c8061ed5a8accbea79aaea631355d2f732fe1141087cb19367ac"
+        },
+        "asset_receipt_sha256": "d609194b5578344b07bc2125541649054d020a323783b11192eaf897dee9cb20",
+        "before": {
+          "omitted": "size_limit"
+        }
+      },
+      "before_date": "2018-01-08",
+      "before_doi": "10.5194/esurf-2017-75",
+      "before_license": [
+        "https://creativecommons.org/licenses/by/4.0"
+      ]
+    },
+    {
+      "after_date": "2018-08-16",
+      "after_doi": "10.5194/tc-12-2667-2018",
+      "after_license": [
+        "https://creativecommons.org/licenses/by/4.0"
+      ],
+      "assets": {
+        "after": {
+          "bytes": 182484,
+          "sha256": "2ea8912ce81ab6cf1369d4c916885a2acec873ac56df3cc979eda04ea9ca2af0"
+        },
+        "asset_receipt_sha256": "b80c7f53c0b12b262ded638251caaca455a165f84006af60b1a7edc02cf0cb5e",
+        "before": {
+          "omitted": "size_limit"
+        }
+      },
+      "before_date": "2018-01-04",
+      "before_doi": "10.5194/tc-2017-271",
+      "before_license": [
+        "https://creativecommons.org/licenses/by/4.0"
+      ]
+    },
+    {
+      "after_date": "2018-07-19",
+      "after_doi": "10.5194/hess-22-3863-2018",
+      "after_license": [
+        "https://creativecommons.org/licenses/by/4.0"
+      ],
+      "assets": {
+        "after": {
+          "bytes": 190657,
+          "sha256": "b2051eef80278e571628cbde799fc930d6c436bed26ac85e5371138212b4a1aa"
+        },
+        "asset_receipt_sha256": "afafbe4cacbde8bb01987d82a3f98017ad1d88ca61af69f117da714c5743ddab",
+        "before": {
+          "omitted": "size_limit"
+        }
+      },
+      "before_date": "2018-01-08",
+      "before_doi": "10.5194/hess-2017-731",
+      "before_license": [
+        "https://creativecommons.org/licenses/by/4.0"
+      ]
+    },
+    {
+      "after_date": "2018-03-20",
+      "after_doi": "10.5194/wes-3-121-2018",
+      "after_license": [
+        "https://creativecommons.org/licenses/by/4.0"
+      ],
+      "assets": {
+        "after": {
+          "bytes": 198536,
+          "sha256": "494d6c19f0647ab45b6536c2e72b859a96b0201f78d03870bab1d04cc39c6526"
+        },
+        "asset_receipt_sha256": "9d50620e1c75d4e7acd702cde5b4a1db8e55938b7bfd9a270abc58ca211510b5",
+        "before": {
+          "omitted": "size_limit"
+        }
+      },
+      "before_date": "2018-01-02",
+      "before_doi": "10.5194/wes-2017-57",
+      "before_license": [
+        "https://creativecommons.org/licenses/by/4.0"
+      ]
+    },
+    {
+      "after_date": "2018-07-05",
+      "after_doi": "10.5194/acp-18-9393-2018",
+      "after_license": [
+        "https://creativecommons.org/licenses/by/4.0"
+      ],
+      "assets": {
+        "after": {
+          "bytes": 152239,
+          "sha256": "ff291e7ef7cf08c94090192f2f7b97c89a511dd7392b6f05a6c7f6ba204f85cb"
+        },
+        "asset_receipt_sha256": "25a4af6731ccf33b5d9dcbcac404a941986a9751ea908fb9be0aa71ad1fb41a4",
+        "before": {
+          "bytes": 1009043,
+          "sha256": "bf607244e74ce70c1e8f74b931f52d69a589b8d63dfcc251d3dd151a2c0ad89d"
+        }
+      },
+      "before_date": "2018-01-04",
+      "before_doi": "10.5194/acp-2017-1223",
+      "before_license": [
+        "https://creativecommons.org/licenses/by/4.0"
+      ]
+    },
+    {
+      "after_date": "2018-07-05",
+      "after_doi": "10.5194/bg-15-3975-2018",
+      "after_license": [
+        "https://creativecommons.org/licenses/by/4.0"
+      ],
+      "assets": {
+        "after": {
+          "bytes": 349399,
+          "sha256": "c6c63ecc80fd38e728e8c81418fd6d04c8aa80b09e919928e4f56e6426db6cd0"
+        },
+        "asset_receipt_sha256": "47c069a2e4b4be95dfd32e03996e5c7eceed83cf9f3a4d8d72a0ae3416ecfbbf",
+        "before": {
+          "omitted": "size_limit"
+        }
+      },
+      "before_date": "2018-01-16",
+      "before_doi": "10.5194/bg-2018-25",
+      "before_license": [
+        "https://creativecommons.org/licenses/by/4.0"
+      ]
+    },
+    {
+      "after_date": "2018-09-20",
+      "after_doi": "10.5194/nhess-18-2525-2018",
+      "after_license": [
+        "https://creativecommons.org/licenses/by/4.0"
+      ],
+      "assets": {
+        "after": {
+          "bytes": 118663,
+          "sha256": "17c9dd91a32f04ccfb1d3edd1fca5661be94cb20f0f3c987ddb62e18b84298f1"
+        },
+        "asset_receipt_sha256": "ce4d8f2225024a953f170f12f4ed107aa9b9b9a799d2e25bbe273b172649cf94",
+        "before": {
+          "bytes": 842870,
+          "sha256": "5c625b0b3e7f6c3ebfb7631e8478955dbff821d84fe12cdcddbd3fa28a42aa5c"
+        }
+      },
+      "before_date": "2018-01-04",
+      "before_doi": "10.5194/nhess-2017-402",
+      "before_license": [
+        "https://creativecommons.org/licenses/by/4.0"
+      ]
+    },
+    {
+      "after_date": "2018-06-13",
+      "after_doi": "10.5194/cp-14-789-2018",
+      "after_license": [
+        "https://creativecommons.org/licenses/by/4.0"
+      ],
+      "assets": {
+        "after": {
+          "bytes": 216080,
+          "sha256": "e44a2c93eae88422ef0ec479203b820fe57393a63ee981dabf4fe4dbdce139e2"
+        },
+        "asset_receipt_sha256": "1fda692879d00cec8bb717d604c945fc30219477d05704a5b3e98f830248ca83",
+        "before": {
+          "omitted": "size_limit"
+        }
+      },
+      "before_date": "2018-01-09",
+      "before_doi": "10.5194/cp-2017-161",
+      "before_license": [
+        "https://creativecommons.org/licenses/by/4.0"
+      ]
+    },
+    {
+      "after_date": "2018-05-23",
+      "after_doi": "10.5194/essd-10-919-2018",
+      "after_license": [
+        "https://creativecommons.org/licenses/by/4.0"
+      ],
+      "assets": {
+        "after": {
+          "bytes": 185212,
+          "sha256": "b01fb0bc45440c8fdd4d4ae237cebe5a7f936db601d244ae111eb7a2fdff2109"
+        },
+        "asset_receipt_sha256": "68e27d25f1066187675cb6512d564bfd76b6fdcf75d4723228b072c99d9902fe",
+        "before": {
+          "omitted": "size_limit"
+        }
+      },
+      "before_date": "2018-01-10",
+      "before_doi": "10.5194/essd-2017-101",
+      "before_license": [
+        "https://creativecommons.org/licenses/by/4.0"
+      ]
+    },
+    {
+      "after_date": "2018-08-21",
+      "after_doi": "10.5194/se-9-1035-2018",
+      "after_license": [
+        "https://creativecommons.org/licenses/by/4.0"
+      ],
+      "assets": {
+        "after": {
+          "bytes": 156869,
+          "sha256": "f07adb38b50495c6280db56c8985f820dfab1bcecd7c896159b4af6b6c288f2b"
+        },
+        "asset_receipt_sha256": "c970be922cbd71f54f3f0093f31ff950858eab6c567ed0636d3256947a63bdc3",
+        "before": {
+          "omitted": "size_limit"
+        }
+      },
+      "before_date": "2018-01-04",
+      "before_doi": "10.5194/se-2017-128",
+      "before_license": [
+        "https://creativecommons.org/licenses/by/4.0"
+      ]
+    }
+  ],
+  "schema": "chipmunk.writing-copernicus-body-intake-public-summary/1",
+  "selected": 0,
+  "serving_change": false,
+  "source_code_sha256": "c23c9f4f306ff5e3af2c9ab44cbea6b7453dfd47f0274846a93367f0f83b8692",
+  "source_plan": {
+    "extraction": "Read horizontal single-column discussion manuscript text after an exact Introduction heading. Omit running headers, line-number gutters, separate headings, captions and unsupported content. Match final publisher JATS body prose, keeping source names and dates private.",
+    "geometry": "Use one five-sentence source-ordered body excerpt per work with two exact common sentences on each side and a changed center of 12\u201340 words. Require a material lexical edit after removing citation and hyphenation artifacts. Keep source PDF page and line bounding boxes and final body offsets.",
+    "max_bytes": {
+      "after": 600000,
+      "before": 2000000
+    },
+    "pool_size": 20,
+    "previous_public_sha256": "ee45589adf1557c5c851fd613c1374817ec4090e477509db3677f43cc93cfbb5",
+    "previous_source_sha256": "0118f67b9700034e73c42d51e9fb233958d5aaa7d9808e81052d48aab6c316c2",
+    "publisher": "copernicus",
+    "pymupdf": "1.28.2",
+    "schema": "chipmunk.writing-copernicus-body-holdout/1",
+    "source": "Use only existing DOI-linked Copernicus roster metadata, excluding the two scored abstract works and the source-only PDF scout. Require both per-version commercial CC BY terms and matching original author names. Freeze the first 20 eligible works in existing committed order before accessing bodies."
+  },
+  "source_replay_verified": true
+}

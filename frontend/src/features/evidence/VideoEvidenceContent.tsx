@@ -60,6 +60,9 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
     player.current?.scrollIntoView?.({ block: 'center', behavior: 'auto' })
   }
   const hold = set.picture_hold
+  const motion = hold?.motion_sequence_review
+  const motionRate = motion?.parameters.frame_rate ?? 20
+  const motionLimit = motionRate * 9
   const laterFrames = hold && set.coverage ? set.coverage.frame_count - hold.frames_scanned : 0
   const renderFrames = (packet: VideoEvidencePacket, frames: VideoEvidenceFrame[], refined: boolean) =>
     <div className="mt-5 space-y-5">{frames.map((frame) => {
@@ -101,14 +104,14 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
         : hold.sequence_review.status === 'no_match' ? 'No exact moving sequence repeated within the checked frames.'
         : 'The checked footage did not contain two usable ranges of at least half a second.'}</p>
     </section>}
-    {hold?.motion_sequence_review && <section aria-labelledby="video-motion-sequence-heading" className="mt-4 rounded-md border border-border p-4">
+    {motion && <section aria-labelledby="video-motion-sequence-heading" className="mt-4 rounded-md border border-border p-4">
       <h3 id="video-motion-sequence-heading" className="m-0 text-body font-medium">Similar repeated moving sequences</h3>
-      <p className="mt-2 mb-0 text-small">{hold.motion_sequence_review.status === 'matched'
+      <p className="mt-2 mb-0 text-small">{motion.status === 'matched'
         ? <a className="underline" href="#media-evidence-VPR02">Inspect both ranges with similar pictures and motion</a>
-        : hold.motion_sequence_review.status === 'no_match' ? 'No qualifying repeat was found in the first 180 frames.'
-        : hold.motion_sequence_review.reason === 'exact_sequence' ? 'The exact check already found a moving sequence.'
-        : 'This check needs verified 50 ms spacing throughout the first 180 frames.'}</p>
-      <p className="mt-2 mb-0 text-caption text-text-muted">This check covers the first 180 native 320 × 180 frames in supported 20 fps video. A repeat may come from ordinary editing and carries no AI confidence weight.</p>
+        : motion.status === 'no_match' ? `No qualifying repeat was found in the first ${motionLimit} frames.`
+        : motion.reason === 'exact_sequence' ? 'The exact check already found a moving sequence.'
+        : `This check needs verified ${1000 / motionRate} ms spacing throughout the first ${motionLimit} frames.`}</p>
+      <p className="mt-2 mb-0 text-caption text-text-muted">Coverage is limited to the first {motionLimit} native {set.source.width} × {set.source.height} frames in supported {motionRate} fps video. A repeat may come from ordinary editing and carries no AI confidence weight.</p>
     </section>}
     {set.coverage ? <div className="mt-4 rounded-md border border-border p-4 text-small text-text-muted">
       <p className="m-0">{set.coverage.scored_frame_count} frame(s) were inputs to recorded {hasNestedVideoEvidence(set.version) ? 'visual frame or window' : 'frame or window'} checks in a table of {set.coverage.frame_count} frames.

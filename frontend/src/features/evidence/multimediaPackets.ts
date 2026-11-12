@@ -59,7 +59,7 @@ export interface VideoEvidenceSet extends SetBase {
     last_frame_index: number | null; last_stream_time_s: number | null; last_pts: number | null; time_base: string;
     reason: string | null; packet_id: string | null; scan_scope?: 'extended-native-prefix/1' | 'native-sequence-prefix/1'; continuity_breaks?: number;
     sequence_review?: { status: 'matched' | 'no_match' | 'unavailable' }
-    motion_sequence_review?: { status: 'matched' | 'no_match' | 'unavailable'; frames_scanned: number
+    motion_sequence_review?: { status: 'matched' | 'no_match' | 'unavailable'; frames_scanned: number; parameters: { frame_rate: 20 | 25 }
       reason: 'source_clock' | 'exact_sequence' | null } }
   coverage?: { frame_count: number; scored_frame_count: number; window_frame_indices: number[]; window_check_count: number;
     decoded_frame_indices: number[]; table_truncated: boolean; unmapped_observations: number;

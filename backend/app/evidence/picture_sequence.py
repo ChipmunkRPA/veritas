@@ -18,10 +18,10 @@ MAX_STEP = Fraction(1, 8)
 CONTEXT = "Loops, transitions and ordinary editing can repeat a moving sequence. This check carries zero weight in the AI estimate."
 MOTION_SCHEMA = "chipmunk.video-motion-sequence/1"
 MOTION_PACKET_ID = "VPR02"
-MOTION_LIMIT = 180
+MOTION_PROFILES = {(320, 180): (20, 180), (640, 360): (25, 225)}
 MOTION_ENCODINGS = {("h264", "yuv420p"), ("vp9", "yuv420p")}
 MOTION_PARAMETERS = {
-    "luma_grid": [40, 30], "frame_rate": 20, "maximum_picture_rms": 1.6, "minimum_motion_rms": .4,
+    "luma_grid": [40, 30], "maximum_picture_rms": 1.6, "minimum_motion_rms": .4,
     "minimum_motion_cosine": .65, "minimum_motion_rms_ratio": .55, "minimum_supporting_edges": 8,
     "maximum_support_edge_step": 3, "minimum_support_fraction": .5, "minimum_span_seconds": .5,
 }
@@ -140,31 +140,36 @@ def validate(cover, document):
     _require(all(p.get("id") in {PACKET_ID, MOTION_PACKET_ID} for p in packets), "Unexpected repeated sequence packet")
     exact = cover.get("sequence_review")
     motion = cover.get("motion_sequence_review")
+    motion_rate = None
     if exact is not None:
         _require(cover.get("scan_scope") == SCAN_SCOPE and cover["frames_scanned"] == cover["frame_limit"],
                  "Repeated sequence lacks completed coverage")
     if motion is not None:
         source = document["source"]
-        _require(exact is not None and cover["frames_scanned"] >= MOTION_LIMIT and (source["width"], source["height"]) == (320, 180)
-                 and motion["schema"] == MOTION_SCHEMA and motion["parameters"] == MOTION_PARAMETERS
+        profile = MOTION_PROFILES.get((source["width"], source["height"]))
+        _require(profile is not None, "Motion sequence has unsupported source dimensions")
+        motion_rate, limit = profile
+        _require(exact is not None and cover["frames_scanned"] >= limit
+                 and motion["schema"] == MOTION_SCHEMA and motion["parameters"] == (MOTION_PARAMETERS | {"frame_rate": motion_rate})
                  and tuple(motion["encoding"]) in MOTION_ENCODINGS, "Motion sequence has unsupported source scope or parameters")
         if motion["status"] == "unavailable":
             _require(motion["frames_scanned"] == 0 and (motion["reason"] == "source_clock"
                      or (motion["reason"] == "exact_sequence" and exact["status"] == "matched")),
                      "Motion sequence has an invalid skipped outcome")
         else:
-            _require(motion["frames_scanned"] == MOTION_LIMIT and motion["reason"] is None and exact["status"] != "matched",
+            _require(motion["frames_scanned"] == limit and motion["reason"] is None and exact["status"] != "matched",
                      "Motion sequence has invalid measured coverage")
     _validate_pair(exact, document["source"], cover["frames_scanned"] if exact is not None else 0,
                    [p for p in packets if p["id"] == PACKET_ID])
     _validate_pair(motion, document["source"], motion["frames_scanned"] if motion is not None else 0,
-                   [p for p in packets if p["id"] == MOTION_PACKET_ID], motion=True)
+                   [p for p in packets if p["id"] == MOTION_PACKET_ID], motion_rate=motion_rate)
 
 
-def _validate_pair(record, source, scanned, packets, *, motion=False):
+def _validate_pair(record, source, scanned, packets, *, motion_rate=None):
     if record is None:
         _require(not packets, "Repeated sequence lacks a recorded scan")
         return
+    motion = motion_rate is not None
     schema = MOTION_SCHEMA if motion else SCHEMA
     _require(record["schema"] == schema, "Repeated sequence lacks completed coverage")
     if record["status"] != "matched":
@@ -202,7 +207,7 @@ def _validate_pair(record, source, scanned, packets, *, motion=False):
         intervals.append(steps)
     _require(intervals[0] == intervals[1], "Repeated sequence changes the native frame spacing")
     if motion:
-        _require(all(step * tb == Fraction(1, 20) for step in intervals[0]), "Motion sequence uses unsupported frame spacing")
+        _require(all(step * tb == Fraction(1, motion_rate) for step in intervals[0]), "Motion sequence uses unsupported frame spacing")
     for span in spans if motion else (pair,):
         digests = span["endpoint_rgb_sha256"]
         _require(len(digests) == 2 and all(_SHA.fullmatch(d) for d in [*digests, span["rgb_sequence_sha256"]]),

@@ -179,6 +179,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     evidence = json.loads(archive.read("evidence.json"))
     source = evidence["source"]
     encoding = None
+    delivery = None
     guarded_codec = evidence["version"] == GUARDED_CODEC_FACE_VERSION
     if evidence["version"] in DENSE_FACE_VERSIONS:
         delivery = probe_container(original)
@@ -199,11 +200,15 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     sequence = hold.get("sequence_review")
     motion = hold.get("motion_sequence_review")
     motion_encoding = None
+    motion_profile = None
+    motion_limit = 0
     if motion is not None:
-        delivery = probe_container(original)
+        delivery = delivery if delivery is not None else probe_container(original)
         motion_encoding = delivery.get("codec"), delivery.get("pix_fmt")
-        if not picture_motion.eligible(table, motion_encoding) or motion["encoding"] != list(motion_encoding):
+        motion_profile = picture_motion.profile(table, motion_encoding)
+        if motion_profile is None or motion["encoding"] != list(motion_encoding):
             raise ValueError("The original video differs from its motion comparison source profile")
+        motion_limit = motion_profile[1]
     extended = "continuity_breaks" in hold
     hold_frames = 0
     if extended or sequence is not None:
@@ -254,7 +259,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             rgb_sha = hashlib.sha256(frame.rgb).hexdigest()
             if index < hold_frames:
                 hold_observations.append((frame.pts if frame.pts_verified else None, rgb_sha))
-            if motion is not None and index < picture_sequence.MOTION_LIMIT:
+            if index < motion_limit:
                 motion_descriptors.append(picture_motion.descriptor(frame.rgb))
             if index in pictures:
                 with Image.fromarray(frame.rgb) as image:
@@ -285,8 +290,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     if sequence is not None and canonical_hash(picture_sequence.scan(hold_observations, table.tb)) != canonical_hash(sequence):
         raise ValueError("The original video does not reproduce its repeated moving-picture sequences")
     if motion is not None and canonical_hash(picture_motion.scan(
-            hold_observations[:picture_sequence.MOTION_LIMIT], motion_descriptors, table.tb, motion_encoding,
-            sequence["pair"])) != canonical_hash(motion):
+            hold_observations[:motion_limit], motion_descriptors, table.tb, motion_encoding,
+            sequence["pair"], source_profile=motion_profile)) != canonical_hash(motion):
         raise ValueError("The original video does not reproduce its similar moving-picture sequences")
     fine_edges = sum(_verify_scene_support(record, background_frames) for record in fine_records)
     for record in guarded_records:

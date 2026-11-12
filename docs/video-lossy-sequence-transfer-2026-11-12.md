@@ -2,7 +2,7 @@
 
 Chipmunk Verify can show two time ranges where the same sequence appears to repeat despite lossy compression. The ranges, four original endpoint pictures, and supporting transitions appear in the video evidence view, PDF, and JSON. A signed evidence ZIP can replay the comparison against the supplied original. Loops, recurring footage, and ordinary edits can produce a match. This evidence carries zero weight in the AI estimate.
 
-The existing exact sequence check runs first. The similar-sequence comparison runs as a fallback on the first 180 native frames of an unrotated 320 × 180 H.264 or VP9 video in 8-bit 4:2:0 format. It requires verified 50 ms spacing throughout the checked prefix. A qualifying exact result takes precedence, including one elsewhere in the wider exact scan. Other raster sizes, codecs, shorter inputs, later ranges, and changes to playback speed or framing fall outside this validation.
+The existing exact sequence check runs first. The original similar-sequence profile covers the first 180 native frames of an unrotated 320 × 180 H.264 or VP9 video in 8-bit 4:2:0 format. It requires verified 50 ms spacing throughout the checked prefix. A qualifying exact result takes precedence, including one elsewhere in the wider exact scan. A follow-up trial qualified 640 × 360 at 25 fps. Other delivery profiles, shorter inputs, later ranges, and changes to playback speed or framing fall outside these tests. [360p transfer results](video-motion-sequence-360p-transfer-2026-11-12.md)
 
 ## What the comparison measures
 

@@ -855,6 +855,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "repeated_passages": repeated_passages,
             "picture_hold": copy.deepcopy(document.get("picture_hold")),
             "picture_frame_count": document["source"].get("frame_count", 0) if kind == "video" else 0,
+            "picture_dimensions": (document["source"]["width"], document["source"]["height"]) if kind == "video" else None,
             "voice_gaps": voice_gaps,
             "voice_gap_count": len(gaps),
             "voice_gap_pointer": "/audio/coverage/unscored_intervals" if kind == "video" else "/coverage/unscored_intervals",

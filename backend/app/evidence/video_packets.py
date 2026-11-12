@@ -469,6 +469,7 @@ def _picture_sequence_packet(db: Session, store: ObjectStore, analysis: Analysis
                              source: dict, pair: dict, decoded: dict) -> dict:
     motion = "supporting_edge_offsets" in pair
     packet_id = picture_sequence.MOTION_PACKET_ID if motion else picture_sequence.PACKET_ID
+    motion_limit = picture_sequence.MOTION_PROFILES[(source["width"], source["height"])][1] if motion else None
     frames, images, labels, assets = [], [], [], {}
     for number, (occurrence, role, index, pts, digest) in enumerate(picture_sequence.endpoints(pair), 1):
         if index not in decoded or hashlib.sha256(decoded[index]).hexdigest() != digest:
@@ -499,7 +500,7 @@ def _picture_sequence_packet(db: Session, store: ObjectStore, analysis: Analysis
             "picture_sequence": pair, "affects_overall_confidence": False, "finding_ids": [], "signal_refs": [],
             "exhibit_refs": [], "frames": frames, "observation": picture_sequence.observation(pair),
             "interpretation": picture_sequence.CONTEXT,
-            "limitations": [("The comparison checks whole-picture appearance and motion in the first 180 frames. It can miss edits "
+            "limitations": [(f"The comparison checks whole-picture appearance and motion in the first {motion_limit} frames. It can miss edits "
                              "that change speed, framing or the motion pattern." if motion else
                              "The comparison requires exact decoded pixels and matching frame spacing within the scanned range.")],
             "measurements": [{"label": "Matching pictures in each range", "value": pair["frame_count"], "unit": "frames"},

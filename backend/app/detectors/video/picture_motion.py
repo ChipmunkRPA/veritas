@@ -10,13 +10,18 @@ from app.core.canonical import canonical_hash
 from app.evidence import picture_sequence as binding
 
 
-def eligible(table, encoding):
-    return (tuple(encoding or ()) in binding.MOTION_ENCODINGS and len(table) >= binding.MOTION_LIMIT
-            and (table.width, table.height, table.coded_width, table.coded_height, table.rotation) == (320, 180, 320, 180, 0))
+def profile(table, encoding):
+    dimensions = table.width, table.height
+    if (tuple(encoding or ()) not in binding.MOTION_ENCODINGS or table.rotation
+            or dimensions != (table.coded_width, table.coded_height)):
+        return None
+    supported = binding.MOTION_PROFILES.get(dimensions)
+    return supported if supported is not None and len(table) >= supported[1] else None
 
 
 def descriptor(rgb):
-    means = rgb.reshape(30, 6, 40, 8, 3).mean(axis=(1, 3), dtype=np.float64)
+    height, width = rgb.shape[:2]
+    means = rgb.reshape(30, height // 30, 40, width // 40, 3).mean(axis=(1, 3), dtype=np.float64)
     return (means @ np.array([77., 150., 29.]) / 256).reshape(-1)
 
 
@@ -26,7 +31,7 @@ def _segments(indices, step):
             yield span
 
 
-def _pair(values):
+def _pair(values, frame_rate):
     params = binding.MOTION_PARAMETERS
     values = np.stack(values)
     norm = (values * values).mean(axis=1)
@@ -54,22 +59,24 @@ def _pair(values):
                     if b - a + 1 < minimum or 2 * (b - a + 1) < end - start:
                         continue
                     rank = (end - start, -start, -start - lag)
-                    if (end - start) * Fraction(1, 20) >= binding.MIN_SPAN and (best is None or rank > best):
+                    if end - start >= frame_rate * binding.MIN_SPAN and (best is None or rank > best):
                         best, result = rank, (start, end, lag, [int(i) - start for i in chain[a:b + 1]])
     return result
 
 
-def scan(observations, values, tb, encoding, exact_pair):
+def scan(observations, values, tb, encoding, exact_pair, *, source_profile):
+    frame_rate, limit = source_profile
     result = {"schema": binding.MOTION_SCHEMA, "status": "unavailable", "reason": "source_clock", "frames_scanned": 0,
-              "encoding": list(encoding), "parameters": binding.MOTION_PARAMETERS, "pair": None}
-    if len(observations) != binding.MOTION_LIMIT:
+              "encoding": list(encoding), "parameters": binding.MOTION_PARAMETERS | {"frame_rate": frame_rate}, "pair": None}
+    if len(observations) != limit:
         return result
     ticks, hashes = zip(*observations, strict=True)
-    if any(tick is None for tick in ticks) or any((b - a) * tb != Fraction(1, 20) for a, b in pairwise(ticks)):
+    step = Fraction(1, frame_rate)
+    if any(tick is None for tick in ticks) or any((b - a) * tb != step for a, b in pairwise(ticks)):
         return result
     if exact_pair is not None:
         return result | {"reason": "exact_sequence"}
-    match = _pair(values)
+    match = _pair(values, frame_rate)
     if match is None:
         return result | {"status": "no_match", "reason": None, "frames_scanned": len(ticks)}
     start, end, lag, supports = match

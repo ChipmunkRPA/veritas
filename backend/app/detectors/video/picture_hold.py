@@ -29,7 +29,8 @@ def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Calla
     best = None
     observed = []
     descriptors = []
-    motion = sequence_review and picture_motion.eligible(table, motion_encoding)
+    motion_profile = picture_motion.profile(table, motion_encoding) if sequence_review else None
+    motion_limit = motion_profile[1] if motion_profile is not None else 0
     timeout = DECODE_TIMEOUT_S if remaining_s is None else min(DECODE_TIMEOUT_S, remaining_s - 1.0)
     if timeout < 0.5 and limit:
         return {"coverage": binding.coverage("unavailable", binding.INCOMPLETE, table.time_base, limit=opening_limit), "match": None}
@@ -55,7 +56,7 @@ def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Calla
                         best = equal_start, point, frame.index, digest
                 if sequence_review:
                     observed.append((point, digest))
-                if motion and frame.index < picture_sequence.MOTION_LIMIT:
+                if frame.index < motion_limit:
                     descriptors.append(picture_motion.descriptor(frame.rgb))
                 if scanned == opening_limit and limit > opening_limit:
                     opening = _result(table, origin, opening_limit, scanned, last_pts, longest, best)
@@ -69,9 +70,10 @@ def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Calla
     if sequence_review and 0 < cover["frames_scanned"] == cover["frame_limit"]:
         cover["scan_scope"] = picture_sequence.SCAN_SCOPE
         cover["sequence_review"] = picture_sequence.scan(observed[:cover["frames_scanned"]], tb)
-        if motion and cover["frames_scanned"] >= picture_sequence.MOTION_LIMIT:
+        if motion_profile is not None and cover["frames_scanned"] >= motion_limit:
             cover["motion_sequence_review"] = picture_motion.scan(
-                observed[:picture_sequence.MOTION_LIMIT], descriptors, tb, motion_encoding, cover["sequence_review"]["pair"])
+                observed[:motion_limit], descriptors, tb, motion_encoding, cover["sequence_review"]["pair"],
+                source_profile=motion_profile)
     return result
 
 

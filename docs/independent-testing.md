@@ -396,6 +396,10 @@ The [similar moving-picture comparison](video-lossy-sequence-transfer-2026-11-12
 checks for repeated picture content and motion after re-encoding. Its held
 results include controls for ordinary cuts, holds, reversals and changed
 frame spacing. The signed export can replay both locations from the upload.
+The [360p transfer](video-motion-sequence-360p-transfer-2026-11-12.md) applies
+the fixed method to H.264 and VP9 at 25 fps, with eight published controls
+covering real repeated activity and editing. It verifies the new 225-frame
+prefix and replays the exact earlier 180-frame package format.
 The [longer timing replay](video-longer-timing-transfer-2026-11-11.md)
 tests native windows with actual timing-change opportunity and separately reports
 measured windows, redraw overlaps, ordinary controls, and unassessed inputs.

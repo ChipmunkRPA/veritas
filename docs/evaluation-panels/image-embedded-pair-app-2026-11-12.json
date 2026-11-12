@@ -1,0 +1,35 @@
+{
+  "browser": {
+    "exact_pixels": 2503,
+    "page_errors": 0,
+    "plain_view": true,
+    "rendered_images": 4,
+    "source_links": 2
+  },
+  "cases": [
+    {
+      "native_asset_checks": 5,
+      "pdf_api_json_agree": true,
+      "pdf_native_asset_roles": [
+        "area_a",
+        "area_b",
+        "overlay_a",
+        "overlay_b"
+      ],
+      "pixels": 2503,
+      "source_verifier": true,
+      "status": "local_difference",
+      "unpaid_enqueued_zero": true
+    },
+    {
+      "native_asset_checks": 0,
+      "pdf_api_json_agree": true,
+      "pdf_native_asset_roles": [],
+      "pixels": null,
+      "source_verifier": true,
+      "status": "unassessed_ambiguous_match",
+      "unpaid_enqueued_zero": true
+    }
+  ],
+  "simulated_paid_cases": 2
+}

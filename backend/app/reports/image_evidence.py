@@ -9,6 +9,7 @@ from typing import TYPE_CHECKING, Any
 from PIL import Image
 
 from app.core.canonical import canonical_hash
+from app.evidence import image_embedded_pair_binding as embedded_pair
 from app.reports.image_eligibility import eligibility_view, inspection_check_view
 from app.storage.objects import ObjectIntegrityError, ObjectStore, default_store
 
@@ -63,7 +64,7 @@ def capture(db: Session, analysis: Analysis, *, store: ObjectStore | None = None
     """Read-only capture at report request; never create evidence or alter a stored result."""
     if analysis.kind != "image":
         return None
-    from app.evidence.image_packets_v7 import load_packet_set
+    from app.evidence.image_packets_v8 import load_packet_set
 
     store = store or default_store()
     document = load_packet_set(db, analysis, store)
@@ -74,6 +75,8 @@ def capture(db: Session, analysis: Analysis, *, store: ObjectStore | None = None
     for packet in document["packets"]:
         for role, _ in roles(packet):
             _asset_bytes(packet["artifacts"][role], store)
+    for asset in embedded_pair.artifacts(document).values():
+        _asset_bytes(asset, store)
     return copy.deepcopy(document)
 
 
@@ -82,7 +85,7 @@ def verified_set(snapshot: ReportSnapshot) -> dict[str, Any] | None:
     document = snapshot.image_evidence
     if document is None:
         return None
-    from app.evidence.image_packets_v7 import validate_packet_set, validate_packet_source_mapping
+    from app.evidence.image_packets_v8 import validate_packet_set, validate_packet_source_mapping
 
     if snapshot.analysis.kind != "image":
         raise ValueError("image evidence is attached to a non-image report")
@@ -104,7 +107,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
     store.verify(document["source"]["sha256"])
     from app.evidence import image_copy_affine_binding as affine
     from app.evidence.image_copy_similarity_binding import SKIPPED_CREDENTIALS, status_text
-    from app.evidence.image_packets_v7 import validate_assets
+    from app.evidence.image_packets_v8 import validate_assets
 
     validate_assets(document, store)
     withheld = snapshot.report.profile == "newsroom" or snapshot.report.redacted
@@ -121,6 +124,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                         if packet.get("localisation", {}).get("candidate_eligibility") else None})
     comparison = copy.deepcopy(document.get("comparison"))
     copy_checks = {field: copy.deepcopy(document.get(field)) for field in COPY_CHECKS}
+    base_version = embedded_pair.base_document(document)["version"]
     for field, check in copy_checks.items():
         if check is None:
             continue
@@ -128,9 +132,9 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
         if status == SKIPPED_CREDENTIALS and document.get(affine.KEY):
             check["observation"] = "Trusted Content Credentials cover this image and declare AI involvement. The image copy checks were skipped."
         elif field == affine.KEY:
-            check["observation"] = affine.status_text(status, document["version"])
+            check["observation"] = affine.status_text(status, base_version)
         else:
-            check["observation"] = (status_text(status, version=document["version"])
+            check["observation"] = (status_text(status, version=base_version)
                                     if field == "copy_similarity" or status == SKIPPED_CREDENTIALS
                                     else TRANSLATION_STATUS[status])
         if field == "copy_translation" and check["pairs"] and (basis := check.get("basis")) in TRANSLATION_BASIS_TEXT:
@@ -148,6 +152,16 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                     title = "Area A selected mask" if role == "area_a" else "Area B mapped mask"
                     pair["images"].append({"role": role, "label": title, "sha256": mask["sha256"],
                         "uri": None if withheld else "data:image/png;base64," + base64.b64encode(data).decode("ascii")})
+    exact = copy.deepcopy(document.get(embedded_pair.KEY))
+    if exact is not None:
+        exact["observation"] = embedded_pair.STATUS_TEXT[exact["status"]]
+        if pair := exact["pair"]:
+            pair["images"] = []
+            for role, label in embedded_pair.ASSETS.items():
+                asset = pair["artifacts"][role]
+                data = _asset_bytes(asset, store)
+                pair["images"].append({"role": role, "label": label, "sha256": asset["sha256"],
+                    "uri": None if withheld else "data:image/png;base64," + base64.b64encode(data).decode("ascii")})
     if comparison is not None:
         comparison["images"] = []
         for role, label in (("wider_overlay", "Wider view: selected by either check"),
@@ -176,7 +190,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "source_sha256": document["source"]["sha256"], "source": document["source"], "packets": packets,
             "limitations": document["limitations"], "omitted_regions": document["omitted_regions"], "withheld": withheld,
             "inspection_checks": inspection_checks,
-            "comparison": comparison, **copy_checks,
+            "comparison": comparison, **copy_checks, embedded_pair.KEY: exact,
             "note": "Each plate is derived from the recorded original and the same evidence set used by the JSON export. "
                     "Inspection regions alone do not establish editing or AI generation."}
 
@@ -197,4 +211,8 @@ def manifest(snapshot: ReportSnapshot) -> dict[str, Any] | None:
                           for check in copy_checks.values() for pair in check["pairs"]
                           for role, asset in pair["artifacts"].items()],
               **copy_checks}
+    if embedded_pair.KEY in document:
+        result[embedded_pair.KEY] = copy.deepcopy(document[embedded_pair.KEY])
+        result["artifacts"].extend({"packet_id": "D01", "role": role, "sha256": asset["sha256"]}
+                                   for role, asset in embedded_pair.artifacts(document).items())
     return result

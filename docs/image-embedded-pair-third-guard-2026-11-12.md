@@ -29,6 +29,14 @@ A separate position check matched all 12 partial third translations to the autho
 
 The 18-second CPU run covered 96 native views. Readback verified 4,555 exact third-copy tiles, 2,693 geometric verification patches and 75 exact original comparison masks, including the 32 later withheld. The frozen seal is `e7a269527e82777422b3e4450daea75fc8edfecf167fa1b2d1085d2ad8c339e6`. The earlier failed pilot and confirmation stay unchanged.
 
+## Local app
+
+Set `VERITAS_IMAGE_EMBEDDED_PAIR_REVIEW=true` in a development instance to show **Pixel differences between matching areas** on new image analyses. It covers single-frame, upright RGB PNGs at four tested canvas sizes: 768 × 640, 768 × 768, 1,088 × 688, and 944 × 944. The guarded production implementation reproduced all 96 held outcomes and 43 exact masks. Replaying the two earlier canvas sizes preserved 44 valid pairs and withheld all 12 ambiguous three-view comparisons.
+
+The ordinary view toggles both crops between original pixels and highlighted differences. The two links open the measured coordinates on the submitted image. The PDF includes the four plates and their checksums. The JSON and signed package also retain the exact binary mask, source coordinates and full witness record. The signed source check verifies the original PNG, witness tiles, compared crops and mask. This comparison carries zero weight in the AI authorship score.
+
+Two actual local checkout and worker runs used simulated payment. The supported example showed **2,503** differing pixels and reproduced all five source assets. The three-view control withheld the comparison. Both results agreed across API, PDF, JSON and signed source verification. Chrome loaded the four plates in the ordinary view and verified both source links. [Local app receipt](evaluation-panels/image-embedded-pair-app-2026-11-12.json)
+
 ## Reproduce
 
 ```sh

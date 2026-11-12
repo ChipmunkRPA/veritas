@@ -10,6 +10,7 @@ from zipfile import ZipFile
 
 from PIL import Image, ImageOps
 
+from app.evidence import image_embedded_pair_binding as embedded_pair
 from app.evidence.image_copy_similarity_binding import ROLES, box_bounds, copy_records
 
 MAX_SOURCE_BYTES = 60 * 1024 * 1024
@@ -22,7 +23,7 @@ def _crops(evidence):
         yield f"{packet['id']} source crop", packet['crop_region'], packet['artifacts']['crop']
         if 'copy_donor' in packet['artifacts']:
             yield f"{packet['id']} matching crop", packet['copy_corroboration']['donor']['box'], packet['artifacts']['copy_donor']
-    for record in copy_records(evidence):
+    for record in copy_records(embedded_pair.base_document(evidence)):
         for pair in record['pairs']:
             for role in ROLES:
                 yield f"{pair['id']} {role.replace('_', ' ')}", pair['regions'][role], pair['artifacts'][role]
@@ -133,11 +134,12 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
 
     evidence = json.loads(archive.read('evidence.json'))
     crops = list(_crops(evidence))
+    pair = (evidence.get(embedded_pair.KEY) or {}).get('pair')
     repeat_checks = [check for check in (evidence.get("coverage") or {}).get("inspection_checks", [])
                      if (check.get("flip_consistency") or {}).get("aligned_mask_png_sha256")]
     quality_checks = [check for check in (evidence.get("coverage") or {}).get("inspection_checks", [])
                       if check.get("source_quality") is not None]
-    if not crops and not repeat_checks and not quality_checks:
+    if not crops and not repeat_checks and not quality_checks and pair is None:
         return 'Original SHA-256 matched. No unannotated crops were recorded.'
     declared = evidence['source']
     with Image.open(io.BytesIO(data)) as raw:
@@ -159,8 +161,19 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         masks = _verify_geometric_masks(archive, evidence, source)
         repeated = _verify_flip_masks(archive, repeat_checks, source.size)
         quality = _verify_source_quality(archive, quality_checks, source, data)
-    detail = (f'Original SHA-256 and {len(crops)} unannotated crops matched at their recorded EXIF-oriented coordinates.'
-              if crops else 'Original SHA-256 matched. No unannotated crops were recorded.')
+    if pair is not None:
+        from app.evidence import image_embedded_pair_pixels as embedded_pixels
+
+        original_png = embedded_pixels.source_image(data)
+        if original_png is None:
+            raise ValueError('Exact two-area evidence requires a PNG within the tested source scope')
+        with original_png:
+            embedded_pixels.verify(original_png, pair, lambda digest: archive.read(f'assets/{digest}.png'))
+    crop_count = len(crops) + (2 if pair is not None else 0)
+    detail = (f'Original SHA-256 and {crop_count} unannotated crops matched at their recorded EXIF-oriented coordinates.'
+              if crop_count else 'Original SHA-256 matched. No unannotated crops were recorded.')
+    if pair is not None:
+        detail += f' Recomputed {pair["different_pixels"]} differing pixels in the exact aligned comparison.'
     if masks:
         detail += f' Recomputed {masks} geometric copy masks from the source image.'
     if repeated:

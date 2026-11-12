@@ -30,6 +30,7 @@ from test_audio_evidence import audio_fixture as audio_fixture
 from test_document_hybrid_pdf_coverage import hybrid_pdf
 from test_document_packets import packet_factory as packet_factory
 from test_image_copy_similarity import affine_result, reflected_result
+from test_image_embedded_pair import embedded_pair_result
 from test_image_evidence_access import evidence_http as evidence_http
 from test_image_packets import packet_fixture as packet_fixture
 from test_public_evidence_package import rewrite
@@ -116,7 +117,7 @@ def test_actual_0023_to_0024_migration_preserves_legacy_package_bytes_and_every_
 
 
 @pytest.fixture(params=["video", "audio", "document", "document_agreement", "hybrid_document", "scanned_document",
-                        "image", "image_translation", "image_affine", "image_affine_large"])
+                        "image", "image_translation", "image_affine", "image_affine_large", "image_embedded_pair"])
 def multimedia_package(request, tmp_path, monkeypatch):
     hybrid = request.param == "hybrid_document"
     scanned = request.param == "scanned_document"
@@ -124,10 +125,13 @@ def multimedia_package(request, tmp_path, monkeypatch):
     translated = request.param == "image_translation"
     large_affine = request.param == "image_affine_large"
     geometric = large_affine or request.param == "image_affine"
-    kind = "document" if hybrid or scanned or agreement else "image" if translated or geometric else request.param
+    embedded = request.param == "image_embedded_pair"
+    kind = "document" if hybrid or scanned or agreement else "image" if translated or geometric or embedded else request.param
     if kind == "image":
         fixture = request.getfixturevalue("packet_fixture")
-        if geometric:
+        if embedded:
+            db, store, analysis, result, _ = embedded_pair_result(fixture, monkeypatch)
+        elif geometric:
             monkeypatch.setattr(settings, "environment", "dev")
             monkeypatch.setattr(settings, "image_affine_copy_review", True)
             if not large_affine:
@@ -138,9 +142,13 @@ def multimedia_package(request, tmp_path, monkeypatch):
             db, store, analysis, result, _ = reflected_result(fixture, large=not translated,
                                                               reflected=not translated, translated=translated)
         document = service.persist_packet_set(db, analysis, store, result=result)
-        assert document["version"] == ("image-evidence-14" if large_affine else "image-evidence-13" if geometric else "image-evidence-12")
-        assert document["source"]["width"] == (1536 if large_affine else 768 if translated or geometric else 1408)
-        assert document["copy_affine" if geometric else "copy_translation" if translated else "copy_similarity"]["pairs"]
+        if embedded:
+            assert document["version"] == "image-evidence-15"
+            assert document["embedded_pair_difference"]["pair"]["different_pixels"] == 437
+        else:
+            assert document["version"] == ("image-evidence-14" if large_affine else "image-evidence-13" if geometric else "image-evidence-12")
+            assert document["source"]["width"] == (1536 if large_affine else 768 if translated or geometric else 1408)
+            assert document["copy_affine" if geometric else "copy_translation" if translated else "copy_similarity"]["pairs"]
     elif kind == "video":
         db, store, analysis, result, *_ = request.getfixturevalue("video_fixture")
         document = video_packets.build_packet_set(db, analysis, store, result)
@@ -283,6 +291,7 @@ def test_multimedia_zip_matches_frozen_set_and_verifies_without_application_runt
 
     trusted_key = tmp_path / "trusted-public.pem"
     trusted_key.write_bytes(f.key.public_pem())
+    embedded = frozen.get("version") == "image-evidence-15"
     if writing_agreement:
         original = tmp_path / "submitted.txt"
         original.write_bytes(f.store.read_bytes(f.analysis.sha256))
@@ -298,7 +307,9 @@ def test_multimedia_zip_matches_frozen_set_and_verifies_without_application_runt
         checks = {item["name"]: item for item in json.loads(check.stdout)["checks"]}
         assert checks["original image crops"]["ok"]
         geometric = frozen.get("copy_affine")
-        if geometric:
+        if embedded:
+            assert "Recomputed 437 differing pixels in the exact aligned comparison" in checks["original image crops"]["detail"]
+        elif geometric:
             assert f"Recomputed {2 * len(geometric['pairs'])} geometric copy masks" in checks["original image crops"]["detail"]
         else:
             assert "2 unannotated crops matched" in checks["original image crops"]["detail"]
@@ -307,9 +318,14 @@ def test_multimedia_zip_matches_frozen_set_and_verifies_without_application_runt
             with zipfile.ZipFile(built.path) as archive:
                 files = {name: archive.read(name) for name in archive.namelist() if name not in verify.UNLISTED}
             packet_set = json.loads(files["evidence.json"])
-            pair = next(record["pairs"][0] for field in (("copy_affine",) if geometric else ("copy_similarity", "copy_translation"))
-                        if (record := packet_set[field])["pairs"])
-            pair["regions"]["area_a"]["x"] += 1
+            if embedded:
+                pair = packet_set["embedded_pair_difference"]["pair"]
+                for region in pair["difference_regions"].values():
+                    region["x"] += 1
+            else:
+                pair = next(record["pairs"][0] for field in (("copy_affine",) if geometric else ("copy_similarity", "copy_translation"))
+                            if (record := packet_set[field])["pairs"])
+                pair["regions"]["area_a"]["x"] += 1
             packet_set.pop("sha256")
             packet_set["sha256"] = canonical_hash(packet_set)
             files["evidence.json"] = canonical_json(packet_set)
@@ -322,7 +338,8 @@ def test_multimedia_zip_matches_frozen_set_and_verifies_without_application_runt
                                                     "manifest.sha256.sig": f.key.sign(manifest).encode()}))
             assert verify.verify_package(altered, public_key_pem=f.key.public_pem()).ok
             result = verify.verify_package(altered, public_key_pem=f.key.public_pem(), source_image=original)
-            assert not result.ok and "differs from pixels" in result.checks[-1].detail
+            detail = "difference bounds differ from the original pixels" if embedded else "differs from pixels"
+            assert not result.ok and detail in result.checks[-1].detail
             original.write_bytes(b"other source bytes")
             result = verify.verify_package(built.path, public_key_pem=f.key.public_pem(), source_image=original)
             assert not result.ok and "differs from the committed original" in result.checks[-1].detail
@@ -360,6 +377,8 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
     def find_spec(self, fullname, path=None, target=None):
         # This bounded MP4 metadata reader is deliberately pure stdlib. The
         # package initializer is empty; all model/runtime evidence modules stay blocked.
+        if fullname == 'app.evidence.image_embedded_pair_binding' and sys.argv[3] == 'True':
+            return None
         if fullname in ('app.evidence', 'app.evidence.mp4', 'app.evidence.image_eligibility', 'app.evidence.image_copy_similarity_binding',
                         'app.evidence.image_copy_affine_binding',
                         'app.evidence.document_context', 'app.evidence.document_scope', 'app.evidence.document_repeat',
@@ -382,7 +401,7 @@ from app.reports.verify import verify_package
 result = verify_package(Path(sys.argv[1]), public_key_pem=Path(sys.argv[2]).read_bytes())
 print(json.dumps(result.as_dict()))
 sys.exit(0 if result.ok else 1)
-""", str(built.path), str(trusted_key)], cwd=Path(__file__).resolve().parents[1],
+""", str(built.path), str(trusted_key), str(embedded)], cwd=Path(__file__).resolve().parents[1],
         capture_output=True, text=True, timeout=20)
     assert offline.returncode == 0, offline.stdout + offline.stderr
     assert json.loads(offline.stdout)["result"] == "verified"

@@ -7,6 +7,7 @@ from typing import Any
 
 from sqlalchemy.orm import Session
 
+from app.evidence import image_embedded_pair_binding as embedded_pair
 from app.evidence.image_copy_similarity_binding import copy_records
 from app.evidence.video_packet_versions import NESTED_VERSIONS
 from app.storage.db import Analysis
@@ -19,7 +20,7 @@ ASSET_TYPES = {"png": "image/png", "wav": "audio/wav", "mp4": "video/mp4"}
 def module_for_kind(kind: str) -> ModuleType | None:
     if kind not in KINDS:
         return None
-    name = "app.evidence.image_packets_v7" if kind == "image" else f"app.evidence.{kind}_packets"
+    name = "app.evidence.image_packets_v8" if kind == "image" else f"app.evidence.{kind}_packets"
     try:
         return import_module(name)
     except ModuleNotFoundError as exc:
@@ -89,7 +90,8 @@ def asset_refs(document: dict[str, Any] | None) -> dict[str, dict[str, Any]]:
     groups = [group for part in parts for group in
               [part.get("overview") or {}, *(packet.get("artifacts") or {} for packet in part.get("packets", []))]]
     for part in parts:
-        groups.extend(pair["artifacts"] for record in copy_records(part) for pair in record["pairs"])
+        groups.extend(pair["artifacts"] for record in copy_records(embedded_pair.base_document(part)) for pair in record["pairs"])
+        groups.append(embedded_pair.artifacts(part))
         context = part.get("acoustic_context")
         if context is not None:
             if not isinstance(context, dict):

@@ -3,7 +3,8 @@
 {% set similarity = v.image_evidence.get('copy_similarity') %}
 {% set translation = v.image_evidence.get('copy_translation') %}
 {% set affine = v.image_evidence.get('copy_affine') %}
-{% set evidence_detail = v.image_evidence.packets or v.image_evidence.get('inspection_checks') or (similarity and similarity.pairs) or (translation and translation.pairs) or (affine and affine.pairs) %}
+{% set exact_pair = v.image_evidence.get('embedded_pair_difference') %}
+{% set evidence_detail = v.image_evidence.packets or v.image_evidence.get('inspection_checks') or (similarity and similarity.pairs) or (translation and translation.pairs) or (affine and affine.pairs) or (exact_pair and exact_pair.pair) %}
 <section class="{% if evidence_detail %}chapter{% else %}chapter-cont{% endif %} image-evidence{% if s.report.profile in ['summary', 'newsroom'] and evidence_detail %} evidence-appendix{% endif %}" aria-labelledby="image-evidence-heading">
 <h2 class="chapter-title" id="image-evidence-heading">{% if v.get('number', {}).get('source-evidence') %}<span class="n">{{ v.number['source-evidence'] }}</span>{% endif %}Image evidence</h2>
 <p>{{ v.image_evidence.note }}</p>
@@ -40,6 +41,30 @@
 {% endfor %}
 </div>
 {% endfor %}
+{% endif %}
+{% if exact_pair and exact_pair.status != 'skipped_trusted_ai_credentials' %}
+<div class="image-regional-comparison">
+<h3>Pixel differences between matching areas</h3>
+<p>{{ exact_pair.observation }}</p>
+{% if exact_pair.pair %}
+{% set pair = exact_pair.pair %}
+<p class="caption">{{ exact_pair.interpretation }}</p>
+<article class="image-evidence-packet" id="image-evidence-{{ pair.id }}">
+<h4>{{ pair.id }} · {{ pair.different_pixels }} differing pixels in each area</h4>
+<div class="evidence-plates evidence-plates-four evidence-plates-pair">
+{% for image in pair.images if image.role != 'difference_mask' %}
+{% set region = pair.regions.area_a if image.role in ['area_a', 'overlay_a'] else pair.regions.area_b %}
+<figure>{% if image.uri %}<img src="{{ image.uri }}" alt="{{ image.label }}">{% endif %}
+<figcaption>{{ image.label }} · x {{ region.x }}, y {{ region.y }}, {{ region.w }} × {{ region.h }} px</figcaption></figure>
+{% endfor %}
+</div>
+{% for label, region in [('Area A', pair.difference_regions.area_a), ('Area B', pair.difference_regions.area_b)] %}
+<p class="caption">{{ label }} difference bounds x {{ region.x }}, y {{ region.y }}, {{ region.w }} × {{ region.h }} px.</p>
+{% endfor %}
+{% for image in pair.images %}<p class="caption evidence-asset-hashes">{{ image.label }} SHA-256 <span class="mono">{{ image.sha256 }}</span></p>{% endfor %}
+</article>
+{% endif %}
+</div>
 {% endif %}
 {% if v.image_evidence.get('comparison') %}
 {% set comparison = v.image_evidence.comparison %}
@@ -135,7 +160,7 @@
 <p class="caption evidence-asset-hashes">{% for image in packet.images %}{{ image.label }} SHA-256 <span class="mono">{{ image.sha256 }}</span>{% if not loop.last %}<br>{% endif %}{% endfor %}</p>
 </article>
 {% else %}
-<p>{% if v.image_evidence.get('inspection_checks') %}No local editing candidates are shown. The coverage above explains what was measured and withheld.{% elif translation and translation.pairs %}No other local editing regions were recorded.{% else %}No separate local editing regions were recorded.{% endif %} An overall classification does not identify altered pixels. This does not establish that the image is unaltered.</p>
+<p>{% if v.image_evidence.get('inspection_checks') %}No local editing candidates are shown. The coverage above explains what was measured and withheld.{% elif (translation and translation.pairs) or (exact_pair and exact_pair.pair) %}No other local editing regions were recorded.{% else %}No separate local editing regions were recorded.{% endif %} An overall classification does not identify altered pixels. This does not establish that the image is unaltered.</p>
 {% endfor %}
 {% if v.image_evidence.omitted_regions %}<p class="caption">{{ v.image_evidence.omitted_regions }} additional candidate regions were omitted from this bounded evidence set.</p>{% endif %}
 {% for note in v.image_evidence.limitations %}<p class="caption">{{ note }}</p>{% endfor %}

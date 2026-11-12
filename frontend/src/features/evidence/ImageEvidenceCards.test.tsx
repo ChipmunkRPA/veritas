@@ -72,6 +72,36 @@ const check = (overrides: Partial<ImageInspectionCheck> = {}): ImageInspectionCh
 })
 
 describe('image evidence cards', () => {
+  const exactPair: NonNullable<ImageEvidenceSet['embedded_pair_difference']> = {
+    schema: 'same-image-exact-difference/1', status: 'local_difference', source_sha256: sourceHash,
+    authorship_confidence_contribution: 0, interpretation: 'The comparison carries zero weight in AI authorship confidence.',
+    pair: { id: 'D01', regions: { area_a: { x: 19, y: 38, w: 206, h: 206 }, area_b: { x: 459, y: 46, w: 206, h: 206 } },
+      difference_regions: { area_a: { x: 113, y: 112, w: 23, h: 19 }, area_b: { x: 553, y: 120, w: 23, h: 19 } },
+      matching_pixels: 41999, different_pixels: 437, witnesses: [],
+      artifacts: { area_a: artifact('1'), area_b: artifact('2'), overlay_a: artifact('3'), overlay_b: artifact('4'), difference_mask: artifact('5') },
+    },
+  }
+  it('shows exact paired differences, toggles the source crops and links to the measured bounds', () => {
+    show({ ...evidence, version: 'image-evidence-15', embedded_pair_difference: exactPair, packets: [] })
+    const card = within(screen.getByRole('region', { name: 'Pixel differences between matching areas' }))
+    expect(card.getByText(/437 differing pixels/)).toBeTruthy()
+    expect(card.getByText(/zero weight in AI authorship confidence/)).toBeTruthy()
+    expect(card.getByAltText('Area A with differing pixels highlighted in orange').getAttribute('src'))
+      .toContain(`${'3'.repeat(64)}.png?token=signed%20token`)
+    const source = card.getByRole('link', { name: 'Inspect differences in Area B' }).getAttribute('href') ?? ''
+    expect(new URL(source, 'http://localhost').searchParams.get('focus')).toBe('553,120,23,19')
+    fireEvent.click(card.getByRole('button', { name: 'Show original crops' }))
+    expect(card.getByAltText('Area A original crop').getAttribute('src')).toContain(`${'1'.repeat(64)}.png`)
+    expect(card.getByAltText('Area B original crop').getAttribute('src')).toContain(`${'2'.repeat(64)}.png`)
+  })
+  it('shows ambiguity without implying that the submitted image is original', () => {
+    show({ ...evidence, version: 'image-evidence-15', packets: [],
+      embedded_pair_difference: { ...exactPair, status: 'unassessed_ambiguous_match', pair: null } })
+    const card = within(screen.getByRole('region', { name: 'Pixel differences between matching areas' }))
+    expect(card.getByText(/made the two-area comparison ambiguous/)).toBeTruthy()
+    expect(card.queryByRole('img')).toBeNull()
+    expect(card.queryByRole('button')).toBeNull()
+  })
   const comparison: NonNullable<ImageEvidenceSet['comparison']> = {
     schema: 'retained-regional-comparison/1', status: 'ready', source_sha256: sourceHash,
     map_grid: [16, 12], selection: 'retained_component_masks_no_refilter', authorship_confidence_contribution: 0,

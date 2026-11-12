@@ -224,6 +224,7 @@ class Settings(BaseSettings):
     document_revision_comparison_enabled: bool = False  # Authenticated development-only earlier-draft comparison.
     document_archive_comparison_enabled: bool = False  # Authenticated development-only public archive comparison.
     image_affine_copy_review: bool = False  # Development-only dense masks for same-image geometric copies.
+    image_embedded_pair_review: bool = False  # Development-only exact differences between two matching PNG areas.
 
     # --- audio (video sound track) ---
     audio_enabled: bool = True  # score the sound track of a video with audio_classifiers

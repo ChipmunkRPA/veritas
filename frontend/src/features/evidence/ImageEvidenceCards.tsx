@@ -86,8 +86,9 @@ function CopySimilarity({ set, field, token, mediaReady }: {
   const geometric = field === 'copy_affine'
   const heading = geometric ? 'Geometric copy comparison' : reflected ? 'Same-image copy similarity' : 'Copy similarity without mirroring'
   const sectionId = `image-${field.replace('_', '-')}`
-  const wide = (geometric && set.version === 'image-evidence-14') || (reflected &&
-    ['image-evidence-9', 'image-evidence-10', 'image-evidence-11', 'image-evidence-12', 'image-evidence-13', 'image-evidence-14'].includes(set.version))
+  const baseVersion = set.prior_embedded_pair_evidence?.version ?? set.version
+  const wide = (geometric && baseVersion === 'image-evidence-14') || (reflected &&
+    ['image-evidence-9', 'image-evidence-10', 'image-evidence-11', 'image-evidence-12', 'image-evidence-13', 'image-evidence-14'].includes(baseVersion))
   const basis = field === 'copy_translation' && set.copy_translation?.basis
   const proposalSearch = geometric ? set.copy_affine?.proposal_search : undefined
   const statusText = {
@@ -134,6 +135,58 @@ function CopySimilarity({ set, field, token, mediaReady }: {
         })}
       </div>
     </article>)}
+  </section>
+}
+
+const pairDifferenceObservations = {
+  local_difference: 'A localized pixel difference was measured between two matching areas in the submitted image.',
+  matching_without_difference: 'The pixels matched throughout the two compared areas.',
+  no_supported_pair: 'The check found no qualifying two-area comparison.',
+  unassessed_ambiguous_match: 'Additional matching detail made the two-area comparison ambiguous.',
+  outside_scope: 'The exact two-area comparison covers selected native sizes of upright RGB PNGs.',
+  unassessed_runtime: 'The exact two-area comparison could not be completed for this file.',
+}
+
+function EmbeddedPairDifference({ set, token, mediaReady }: { set: ImageEvidenceSet; token: string; mediaReady: boolean }) {
+  const [showCrops, setShowCrops] = useState(false)
+  const check = set.embedded_pair_difference
+  if (!check || check.status === 'skipped_trusted_ai_credentials') return null
+  const { pair } = check
+  return <section className="mt-5 rounded-md border border-border p-4" data-testid="image-embedded-pair-difference"
+    aria-labelledby="image-embedded-pair-heading">
+    <div className="flex flex-wrap items-baseline justify-between gap-3">
+      <h3 id="image-embedded-pair-heading" className="m-0 text-body font-medium text-text">Pixel differences between matching areas</h3>
+      {pair && <button type="button" aria-pressed={showCrops} onClick={() => setShowCrops(value => !value)}
+        className="min-h-8 rounded-sm border border-border px-2.5 text-small text-text-muted hover:text-text">
+        {showCrops ? 'Show highlighted differences' : 'Show original crops'}
+      </button>}
+    </div>
+    <p className="mt-2 mb-0 text-small text-text">{pairDifferenceObservations[check.status]}</p>
+    {pair && <>
+      <p className="mt-2 mb-0 text-small text-text-muted">{check.interpretation}</p>
+      <p className="mt-2 mb-0 text-small text-text-muted">
+        {measurementValue(pair.different_pixels)} differing pixels and {measurementValue(pair.matching_pixels)} matching pixels in the aligned areas.
+      </p>
+      <div className="mt-4 grid grid-cols-2 gap-4 max-[639px]:grid-cols-1">
+        {([['area_a', 'overlay_a', 'Area A'], ['area_b', 'overlay_b', 'Area B']] as const).map(([role, overlay, label]) => {
+          const region = pair.difference_regions[role]
+          const artifact = pair.artifacts[showCrops ? role : overlay]
+          return <figure key={role} className="m-0 min-w-0">
+            <EvidencePicture key={`${artifact.sha256}:${token}`} set={set} artifact={artifact} token={token} ready={mediaReady}
+              alt={`${label} ${showCrops ? 'original crop' : 'with differing pixels highlighted in orange'}`} />
+            <figcaption className="mt-2 text-small text-text-muted">
+              <Link to={evidenceSourceUrl(set.analysis_id, { region })} className="underline underline-offset-[3px]">
+                Inspect differences in {label}
+              </Link>
+              <span className="block font-mono text-caption">x {region.x}, y {region.y}, {region.w} × {region.h} px</span>
+            </figcaption>
+          </figure>
+        })}
+      </div>
+      <p aria-live="polite" className="mt-2 mb-0 text-caption text-text-muted">
+        {showCrops ? 'Both crops show pixels from the submitted image.' : 'Orange highlights differing pixels in each source crop.'}
+      </p>
+    </>}
   </section>
 }
 
@@ -249,7 +302,7 @@ export function ImageEvidenceContent({ set, token, mediaReady }: { set: ImageEvi
   }, [hash, key, set.id, set.packets, set.status, showAll])
   const localised = set.packets.some((p) => p.evidence_type === 'localisation')
   const copySkipped = set.copy_similarity?.status === 'skipped_trusted_ai_credentials'
-  const hasCopyPair = set.copy_similarity?.pairs.length || set.copy_translation?.pairs.length || set.copy_affine?.pairs.length
+  const hasCopyPair = set.copy_similarity?.pairs.length || set.copy_translation?.pairs.length || set.copy_affine?.pairs.length || set.embedded_pair_difference?.pair
   const shown = showAll ? set.packets : set.packets.slice(0, 3)
   return (
     <div ref={root} data-testid="image-evidence-content" data-evidence-set={set.id ?? ''} data-evidence-hash={set.sha256 ?? ''}>
@@ -257,6 +310,7 @@ export function ImageEvidenceContent({ set, token, mediaReady }: { set: ImageEvi
       <CopySimilarity set={set} field="copy_similarity" token={token} mediaReady={mediaReady} />
       <CopySimilarity set={set} field="copy_translation" token={token} mediaReady={mediaReady} />
       <CopySimilarity set={set} field="copy_affine" token={token} mediaReady={mediaReady} />
+      <EmbeddedPairDifference set={set} token={token} mediaReady={mediaReady} />
       <RegionalComparison set={set} token={token} mediaReady={mediaReady} />
       {set.status === 'not_generated' ? <p role="status" className="mt-3 mb-0 text-small text-text-muted">
         Region evidence has not been prepared for this result. The analysis record is still available; re-run the image analysis to create crops and supporting observations.

@@ -42,8 +42,9 @@ from app.evidence.video_packet_versions import VERSIONS as VIDEO_VERSIONS
 SCHEMA = 'chipmunk.public-evidence/1'
 _SHA = re.compile(r'[a-f0-9]{64}')
 TYPES = {'image/png': 'png', 'audio/wav': 'wav', 'video/mp4': 'mp4'}
+IMAGE_PAIR_VERSION = 'image-evidence-15'
 VERSIONS = {'image': {'image-evidence-1', 'image-evidence-2', 'image-evidence-3', 'image-evidence-4', 'image-evidence-5',
-                      'image-evidence-6'} | REFLECTION_VERSIONS, 'video': VIDEO_VERSIONS,
+                      'image-evidence-6', IMAGE_PAIR_VERSION} | REFLECTION_VERSIONS, 'video': VIDEO_VERSIONS,
             'audio': {'audio-evidence-1', 'audio-evidence-2', 'audio-evidence-3'}, 'document': document_scope.VERSIONS}
 
 
@@ -150,16 +151,29 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
     if analysis['kind'] == 'image':
         from app.evidence.image_eligibility import validate_inspection_coverage
 
-        if evidence['version'] in AFFINE_VERSIONS or 'copy_affine' in evidence:
+        scope = (result.get('decision') or {}).get('image_copy_coverage')
+        image_base = evidence
+        if evidence['version'] == IMAGE_PAIR_VERSION:
+            from app.evidence import image_embedded_pair_binding
+
+            image_embedded_pair_binding.validate(
+                evidence, lambda part: canonical_hash({k: v for k, v in part.items() if k != 'sha256'}),
+            )
+            image_embedded_pair_binding.validate_scope(evidence, scope is not None)
+            image_base = image_embedded_pair_binding.base_document(evidence)
+        else:
+            _require(not {'embedded_pair_difference', 'prior_embedded_pair_evidence'}.intersection(evidence),
+                     'Historical image evidence contains a newer comparison')
+        if image_base['version'] in AFFINE_VERSIONS or 'copy_affine' in image_base:
             from app.evidence.image_copy_affine_binding import validate as validate_affine
 
-            validate_affine(evidence, box_bounds=box_bounds, url=copy_asset_url, credential_status=SKIPPED_CREDENTIALS)
-        validate_similarity(evidence, canonical_hash)
-        validate_copy_scope(evidence, (result.get('decision') or {}).get('image_copy_coverage'))
-        validate_inspection_coverage({**evidence, 'version': 'image-evidence-3'}
-                                     if evidence['version'] in {'image-evidence-4', 'image-evidence-5', 'image-evidence-6'} | REFLECTION_VERSIONS else evidence)
-        if evidence['version'] in {'image-evidence-5', 'image-evidence-6'} | REFLECTION_VERSIONS:
-            for packet in evidence['packets']:
+            validate_affine(image_base, box_bounds=box_bounds, url=copy_asset_url, credential_status=SKIPPED_CREDENTIALS)
+        validate_similarity(image_base, canonical_hash)
+        validate_copy_scope(image_base, scope)
+        validate_inspection_coverage({**image_base, 'version': 'image-evidence-3'}
+                                     if image_base['version'] in {'image-evidence-4', 'image-evidence-5', 'image-evidence-6'} | REFLECTION_VERSIONS else image_base)
+        if image_base['version'] in {'image-evidence-5', 'image-evidence-6'} | REFLECTION_VERSIONS:
+            for packet in image_base['packets']:
                 cue = packet.get('copy_corroboration')
                 assets = packet['artifacts']
                 if packet.get('evidence_type') == 'localisation':
@@ -168,7 +182,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                              and cue.get('highlight_asset_sha256') == assets.get('mask', {}).get('sha256')
                              and (cue.get('status') == 'copy_consistent') == ('copy_donor' in assets),
                              'Copy evidence differs from its committed highlight or matching patch')
-                    if evidence['version'] in {'image-evidence-6'} | REFLECTION_VERSIONS:
+                    if image_base['version'] in {'image-evidence-6'} | REFLECTION_VERSIONS:
                         _require('search_strategy' in cue and cue['search_strategy'] in {None, 'native_dense', 'native_anchor_shortlist'}
                                  and (cue['search_strategy'] is None) == (cue.get('status') == 'unsupported_geometry')
                                  and (cue.get('status') != 'unassessed_candidate_budget' or cue['search_strategy'] == 'native_anchor_shortlist'),
@@ -221,7 +235,13 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
               [part.get('overview') or {}, *(p.get('artifacts') or {} for p in part.get('packets', []))]]
     repeat_pcm = {}
     for part in parts:
-        groups.extend(pair['artifacts'] for record in copy_records(part) for pair in record['pairs'])
+        copy_base = part
+        if part.get('version') == IMAGE_PAIR_VERSION:
+            from app.evidence import image_embedded_pair_binding
+
+            copy_base = image_embedded_pair_binding.base_document(part)
+            groups.append(image_embedded_pair_binding.artifacts(part))
+        groups.extend(pair['artifacts'] for record in copy_records(copy_base) for pair in record['pairs'])
         acoustic = part.get('acoustic_context')
         if acoustic:
             groups.extend([acoustic.get('overview') or {}, *(event.get('artifacts') or {} for event in acoustic.get('events', []))])

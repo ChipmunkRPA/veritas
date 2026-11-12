@@ -12,7 +12,7 @@ from app.detectors.video.adapters import face_appearance
 from app.detectors.video.adapters.face_sequence import SequenceInputs
 from app.detectors.video.decode import FrameTable
 from app.engine.detector import DetectorResult, UnitScore
-from app.evidence.face_return_binding import DENSE_METHOD, FINE_SCENE_METHOD
+from app.evidence.face_return_binding import DENSE_METHOD, FINE_SCENE_METHOD, GUARDED_720P30_METHOD
 from scripts import video_face_return_fine_scene as frozen_fine
 from scripts import video_face_return_transfer as trial
 
@@ -90,6 +90,69 @@ def test_dense_fallback_requires_measured_h264_profile_and_exact_native_ticks(fr
     assert face_return.dense_schedule(replace(table, rotation=90), encoding) is None
     assert face_return.dense_schedule(replace(table, pts=(*table.pts[:-1], table.pts[-1] + 1)), encoding) is None
     assert face_return.dense_schedule(replace(table, pts=table.pts[:-1]), encoding) is None
+
+
+def test_guarded_720p30_scope_checks_mp4_h264_and_native_clock(tmp_path):
+    source = tmp_path / "source.mp4"
+    source.write_bytes(b"\x00\x00\x00\x18ftypisom\x00\x00\x02\x00isommp41")
+    original = table_for(30)
+    table = replace(original, width=1280, height=720, coded_width=1280, coded_height=720,
+                    pts=original.pts[:120], pict_types=original.pict_types[:120])
+    encoding = ("h264", "yuv420p")
+    times, grid = face_return.guarded_720p30_schedule(table, encoding, source)
+    assert times == tuple(Fraction(i, 30) for i in range(120))
+    assert len(grid) == 32
+    assert face_return.schedule(table) is None
+    assert face_return.guarded_720p30_schedule(table, ("hevc", "yuv420p"), source) is None
+    assert face_return.guarded_720p30_schedule(table, ("h264", "yuv444p"), source) is None
+    assert face_return.guarded_720p30_schedule(replace(table, pts=table.pts[:-1]), encoding, source) is None
+    assert face_return.guarded_720p30_schedule(replace(table, time_base="1001/3000000"), encoding, source) is None
+    assert face_return.guarded_720p30_schedule(replace(table, rotation=90), encoding, source) is None
+    assert face_return.guarded_720p30_schedule(replace(table, interpolated=(1,)), encoding, source) is None
+    assert face_return.guarded_720p30_schedule(table, encoding, tmp_path / "unreadable") is None
+
+
+@pytest.mark.parametrize(("sparse_status", "dense_status", "reason"), [
+    ("localized", None, "sparse_range_outside_profile"),
+    ("unassessed", None, "multiple_faces"),
+    ("no_distinct_range", "unassessed", "time_budget"),
+    ("no_distinct_range", "unassessed", "multiple_faces"),
+    ("no_distinct_range", "localized", None),
+])
+def test_guarded_720p30_only_reports_a_measured_dense_range(monkeypatch, sparse_status, dense_status, reason):
+    original = table_for(30)
+    table = replace(original, width=1280, height=720, coded_width=1280, coded_height=720,
+                    pts=original.pts[:120], pict_types=original.pict_types[:120])
+    inputs = SequenceInputs(table, None, (), (), ("h264", "yuv420p"))
+    monkeypatch.setattr(face_return, "guarded_720p30_schedule", lambda *_: face_return.schedule(original))
+    monkeypatch.setattr(face_appearance.settings, "face_min_size", 48)
+    called = []
+    prior = {"start_pts": 1000, "end_pts": 2000}
+
+    def run_pass(details, inputs, yunet, recognizer, deadline, incumbent, planned, coverage, method, stop, **kwargs):
+        assert incumbent is prior
+        called.append((method, stop))
+        if method == GUARDED_720P30_METHOD:
+            assert planned[1] == tuple(range(0, 120, 2))
+            assert kwargs == {"source_carrier": "mp4"}
+        status = sparse_status if method == face_return.METHOD else dense_status
+        coverage.update(status=status, reason=reason if status == "unassessed" else None)
+        if status == "localized":
+            details["face_return"] = {"method": method}
+
+    monkeypatch.setattr(face_appearance, "_return_pass", run_pass)
+    details = {"face_sequence": prior}
+    face_appearance._inspect_return(details, inputs, None, None, None, prior)
+    assert [method for method, _ in called] == ([face_return.METHOD, GUARDED_720P30_METHOD]
+                                               if dense_status else [face_return.METHOD])
+    assert len({deadline for _, deadline in called}) == 1
+    assert details["face_sequence"] is prior
+    assert details["face_return_check"]["status"] == (dense_status or "unassessed")
+    assert details["face_return_check"]["reason"] == reason
+    if dense_status == "localized":
+        assert details["face_return"]["method"] == GUARDED_720P30_METHOD
+    else:
+        assert "face_return" not in details
 
 
 @pytest.mark.parametrize("first_status", ["localized", "unassessed", "no_distinct_range"])

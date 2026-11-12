@@ -18,6 +18,8 @@ from app.evidence.face_return_binding import (
     DENSE_DIMENSIONS,
     DENSE_ENCODING,
     DENSE_FRAME_PROFILES,
+    GUARDED_720P30_DIMENSIONS,
+    GUARDED_720P30_STEP,
     GUARDED_CODEC_CARRIERS,
     GUARDED_CODEC_FRAME_COUNT,
     PROFILE_STEPS,
@@ -62,7 +64,10 @@ class Range:
 
 def schedule(table: FrameTable) -> tuple[tuple[Fraction, ...], tuple[int, ...]] | None:
     """Use a bounded scan on exact upright 1080p25/30, 720p25, and 360p25 clocks."""
-    allowed_steps = PROFILE_STEPS.get((table.width, table.height))
+    return _schedule(table, PROFILE_STEPS.get((table.width, table.height)))
+
+
+def _schedule(table, allowed_steps):
     if table.rotation or table.interpolated or table.truncated or allowed_steps is None:
         return None
     if not 50 <= len(table) <= 240:
@@ -112,6 +117,15 @@ def guarded_dense_schedule(table: FrameTable, encoding: tuple[str | None, str | 
     if planned is None or source_carrier(path) != carrier:
         return None
     return (planned[0], tuple(range(0, len(table), 2))), carrier
+
+
+def guarded_720p30_schedule(table: FrameTable, encoding: tuple[str | None, str | None], path: Path | None):
+    if (encoding != DENSE_ENCODING or len(table) != GUARDED_CODEC_FRAME_COUNT or path is None
+            or (table.width, table.height) != GUARDED_720P30_DIMENSIONS
+            or (table.coded_width, table.coded_height) != GUARDED_720P30_DIMENSIONS):
+        return None
+    planned = _schedule(table, (GUARDED_720P30_STEP,))
+    return planned if planned is not None and source_carrier(path) == "mp4" else None
 
 
 def scene(rgb: np.ndarray, face: Face | None) -> tuple[np.ndarray, np.ndarray]:

@@ -96,11 +96,36 @@ def test_structural_guard_rejects_wrong_carrier_below_cutoff_and_legacy_version(
         binding.validate_set({"version": "video-evidence-15", "packets": packets})
 
 
-def test_native_background_replay_rejects_plausible_altered_quartile(table):
+def table_720p30():
+    return FrameTable("1/30000", tuple(range(0, 120000, 1000)), (0,), "I" + "P" * 119, 1280, 720, 1280, 720)
+
+
+def test_guarded_720p30_packet_requires_dedicated_scope_and_exact_clock():
+    table = table_720p30()
+    valid = {**record(table), "method": binding.GUARDED_720P30_METHOD, "source_encoding": ["h264", "yuv420p"], "source_carrier": "mp4"}
+    source = {"width": 1280, "height": 720, "frame_count": 120, "time_base": table.time_base}
+    binding.validate_record(valid, source)
+    binding.validate_record(valid, source, table_pts=table.pts)
+    with pytest.raises(ValueError, match="720p30 face evidence requires"):
+        binding.validate_record({**valid, "source_encoding": ["hevc", "yuv420p"]}, source)
+    with pytest.raises(ValueError, match="720p30 face evidence requires"):
+        binding.validate_record({**valid, "source_carrier": "webm"}, source)
+    with pytest.raises(ValueError, match="bounded native frame clock"):
+        binding.validate_record(valid, source, table_pts=(*table.pts[:-1], table.pts[-1] + 1))
+    packets = [{"face_return": valid, "semantics": binding.GUARDED_720P30_METHOD}]
+    binding.validate_set({"version": "video-evidence-17", "packets": packets})
+    with pytest.raises(ValueError, match="evidence version disagrees"):
+        binding.validate_set({"version": "video-evidence-16", "packets": packets})
+
+
+@pytest.mark.parametrize("hd", [False, True])
+def test_native_background_replay_rejects_plausible_altered_quartile(table, hd):
+    if hd:
+        table = table_720p30()
     stored = record(table)
     rng = np.random.default_rng(190)
     texture = rng.integers(40, 215, size=(64, 96, 3), dtype=np.uint8)
-    rgb = cv2.resize(texture, (640, 360), interpolation=cv2.INTER_NEAREST)
+    rgb = cv2.resize(texture, (table.width, table.height), interpolation=cv2.INTER_NEAREST)
     changed = rgb.copy()
     changed[90:270, 170:450] = (240, 20, 10)
     frames = {52: rgb, 54: changed, 58: changed, 60: rgb}

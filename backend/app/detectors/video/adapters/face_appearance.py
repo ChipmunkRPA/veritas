@@ -22,7 +22,9 @@ from app.evidence.face_return_binding import (
     DENSE_FRAME_PROFILES,
     FINE_SCENE_FRAME_COUNT,
     FINE_SCENE_METHOD,
+    GUARDED_720P30_METHOD,
     GUARDED_CODEC_METHOD,
+    GUARDED_METHODS,
     GUARDED_SCENE_QUARTILE_POINT,
     observation,
 )
@@ -135,11 +137,29 @@ def _inspect_return(details, inputs, yunet, recognizer, deadline, incumbent):
     details["face_return_check"] = coverage
     table = inputs.table
     planned = face_return.schedule(table)
+    hd = planned is None
+    if hd:
+        planned = face_return.guarded_720p30_schedule(table, inputs.encoding, getattr(inputs.store, "path", None))
     if planned is None or settings.face_min_size != 48:
         return
     remaining = deadline.remaining() if deadline is not None else None
     budget = RETURN_BUDGET_S if remaining is None else min(RETURN_BUDGET_S, remaining - COARSE_RESULT_RESERVE_S)
     stop = time.monotonic() + budget
+    if hd:
+        # Use the sparse pass for context only. Every published 720p30 range
+        # comes from the tested dense pass and its stronger background guard.
+        _return_pass({}, inputs, yunet, recognizer, deadline, incumbent, planned, coverage, face_return.METHOD, stop)
+        if coverage["status"] == "localized":
+            coverage.update(status="unassessed", reason="sparse_range_outside_profile")
+        elif coverage["status"] == "no_distinct_range":
+            coverage["sparse_context"] = coverage.copy()
+            dense_coverage = {"measured_face_frames": 0}
+            coverage["dense_fallback"] = dense_coverage
+            dense_plan = planned[0], tuple(range(0, len(table), 2))
+            _return_pass(details, inputs, yunet, recognizer, deadline, incumbent, dense_plan, dense_coverage,
+                         GUARDED_720P30_METHOD, stop, source_carrier="mp4")
+            coverage.update(dense_coverage)
+        return
     _return_pass(details, inputs, yunet, recognizer, deadline, incumbent, planned, coverage, face_return.METHOD, stop)
     if time.monotonic() >= stop:
         return
@@ -188,7 +208,7 @@ def _return_pass(details, inputs, yunet, recognizer, deadline, incumbent, planne
         return
     features, face_inputs, scene_inputs = {}, {}, {}
     fine = record_method == FINE_SCENE_METHOD
-    guarded = record_method == GUARDED_CODEC_METHOD
+    guarded = record_method in GUARDED_METHODS
     fine_frames, fine_edges = {}, {}
     try:
         with closing(inputs.store.iter_many(scheduled, timeout_s=budget)) as frames:
@@ -349,13 +369,14 @@ class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
         incumbent = super().applicable(ctx)
         inputs = ctx.outputs.face_review
         if (not incumbent.ok and settings.video_face_short_return_review and settings.face_min_size == 48
-                and isinstance(inputs, SequenceInputs) and face_return.schedule(inputs.table) is not None):
+                and isinstance(inputs, SequenceInputs) and (face_return.schedule(inputs.table) is not None
+                     or face_return.guarded_720p30_schedule(inputs.table, inputs.encoding, getattr(inputs.store, "path", None)) is not None)):
             return Applicability(True)
         return incumbent
 
     def activation_plan(self, ctx):
         return_inputs = (" Up to 64 additional native inputs for the distinct return check, with up to 75 fallback inputs "
-                         "on tested H.264 profiles or 60 on guarded VP9 and HEVC profiles. The tested 120-frame "
+                         "on tested H.264 profiles or 60 on guarded 720p30 H.264, VP9 and HEVC profiles. The tested 120-frame "
                          "H.264 profile can use up to 60 further inputs for finer background detail, within the same budget."
                          if settings.video_face_short_return_review else "")
         return (*super().activation_plan(ctx), ActivationUse(self.APPEARANCE, 1, '112 px aligned face',

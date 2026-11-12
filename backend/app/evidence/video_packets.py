@@ -769,7 +769,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
             start, end = face_return["start_stream_s"], face_return["end_stream_s"]
             origin = source["timeline_origin_s"]
             scene_note = ("Background patterns outside the face were similar across both ends of the selected range. "
-                          if face_return["method"] == face_return_binding.GUARDED_CODEC_METHOD else
+                          if face_return["method"] in face_return_binding.GUARDED_METHODS else
                           "The surrounding scene remained similar at both sampled boundaries. ")
             packet.update(title="Brief face-change range to review", evidence_type="anomaly", claim_scope="sampled_window",
                           semantics=face_return["method"], face_return=face_return, affects_overall_confidence=False,

@@ -161,7 +161,7 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.getByText(/Selected frame 4 · source 11\.760 s · player 1\.760 s/)).toBeTruthy()
   })
 
-  it.each(['video-evidence-12', 'video-evidence-13', 'video-evidence-14', 'video-evidence-15', 'video-evidence-16'])('shows the distinct brief face-change interval in %s', (version) => {
+  it.each(['video-evidence-12', 'video-evidence-13', 'video-evidence-14', 'video-evidence-15', 'video-evidence-16', 'video-evidence-17'])('shows the distinct brief face-change interval in %s', (version) => {
     const set = { ...structuredClone(video), version }
     const item = set.packets[0]
     item.title = 'Brief face-change range to review'

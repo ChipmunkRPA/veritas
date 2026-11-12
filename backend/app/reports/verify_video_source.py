@@ -23,10 +23,14 @@ from app.detectors.video.frames import probe as probe_container
 from app.detectors.video.lipsync import source_mouth_patch
 from app.evidence import picture_hold_binding, picture_sequence
 from app.evidence.face_boundary_binding import validate_packet as validate_face_boundary
-from app.evidence.face_return_binding import DENSE_ENCODING, FINE_SCENE_METHOD, GUARDED_CODEC_METHOD
+from app.evidence.face_return_binding import DENSE_ENCODING, FINE_SCENE_METHOD, GUARDED_METHODS
 from app.evidence.face_return_binding import validate_packet as validate_face_return
 from app.evidence.source_geometry import pixel_bounds
-from app.evidence.video_packet_versions import DENSE_FACE_VERSIONS, GUARDED_CODEC_FACE_VERSION
+from app.evidence.video_packet_versions import (
+    DENSE_FACE_VERSIONS,
+    GUARDED_720P30_FACE_VERSION,
+    GUARDED_CODEC_FACE_VERSION,
+)
 from app.reports.public_verify import SCHEMA
 from app.reports.verify_image_source import _matches
 
@@ -180,7 +184,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     source = evidence["source"]
     encoding = None
     delivery = None
-    guarded_codec = evidence["version"] == GUARDED_CODEC_FACE_VERSION
+    guarded_codec = evidence["version"] in {GUARDED_CODEC_FACE_VERSION, GUARDED_720P30_FACE_VERSION}
     if evidence["version"] in DENSE_FACE_VERSIONS:
         delivery = probe_container(original)
         encoding = delivery.get("codec"), delivery.get("pix_fmt")
@@ -238,7 +242,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         if record.get("method") == FINE_SCENE_METHOD:
             fine_records.append(record)
             background_indices.update(row["frame_index"] for row in record["scene_frame_inputs"])
-        elif record.get("method") == GUARDED_CODEC_METHOD:
+        elif record.get("method") in GUARDED_METHODS:
             guarded_records.append(record)
             background_indices.update(row["frame_index"] for row in record["scene_frame_inputs"])
     if guarded_codec:

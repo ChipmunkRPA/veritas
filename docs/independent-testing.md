@@ -394,6 +394,10 @@ matched H.264 inputs and native background pixels.
 The [background comparison on VP9 and HEVC](video-face-codec-background-transfer-2026-11-12.md)
 rebuilds held swaps and ordinary cuts, then replays their source crops,
 timing, and background measurements.
+The [720p30 face-change study](video-face-720p30-transfer-2026-11-12.md)
+compares the Full analysis with two sampling rates on short H.264 clips.
+It replays the exact source evidence and records the multiple-face
+abstentions and the remaining missed longer inserts.
 The [timing and codec follow-up](video-timing-coverage-and-codec-holds-2026-11-11.md)
 records when a single timing window leaves change unassessed and compares
 exact and approximate picture holds on the same lossy and lossless deliveries.

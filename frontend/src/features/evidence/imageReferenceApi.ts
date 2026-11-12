@@ -61,6 +61,13 @@ export interface ImageReferenceRecord {
   }
   exact_oriented_crop?: OrientedCropProof
   exact_oriented_resize?: OrientedCropProof & { kernels: string[] }
+  embedded_native_photo?: {
+    submitted_bounds: NativeImageArea
+    reference_bounds: NativeImageArea
+    exact_pixels: number
+    witness_cells: [number, number, number][]
+    native_difference_sha256: string
+  }
   additional_regions?: number
 }
 
@@ -68,6 +75,7 @@ export const exactPngCropResizeSchema = 'chipmunk.image-reference-comparison/5'
 export const exactPngOrientationSchema = 'chipmunk.image-reference-comparison/6'
 export const exactOrientedCropSchema = 'chipmunk.image-reference-comparison/7'
 export const exactOrientedResizeSchema = 'chipmunk.image-reference-comparison/8'
+export const embeddedPhotoSchema = 'chipmunk.image-reference-comparison/9'
 export const orientationLabels = {
   rotate_90_clockwise: '90-degree clockwise rotation',
   rotate_180: '180-degree rotation',
@@ -161,6 +169,27 @@ export async function compareWithEarlierImage(analysisId: string, file: File, si
         || !Array.isArray(proof.matched_tiles) || !Array.isArray(proof.kernels) || proof.kernels.length < 1
         || !proof.kernels.every(kernel => exactResizeKernels.has(kernel))) {
       throw new Error('The server returned an incomplete oriented resize comparison.')
+    }
+  }
+  if (comparison.schema === embeddedPhotoSchema) {
+    const proof = comparison.embedded_native_photo
+    const earlier = proof?.reference_bounds
+    const photo = proof?.submitted_bounds
+    if (comparison.status !== 'comparable' || !proof || !earlier || !photo
+        || !validAreaWithin(earlier, comparison.reference.width, comparison.reference.height)
+        || !validAreaWithin(photo, comparison.submitted.width, comparison.submitted.height)
+        || earlier.w !== photo.w || earlier.h !== photo.h
+        || !Number.isSafeInteger(proof.exact_pixels) || proof.exact_pixels < 1 || proof.exact_pixels > photo.w * photo.h
+        || !Array.isArray(proof.witness_cells) || proof.witness_cells.length < 12
+        || typeof proof.native_difference_sha256 !== 'string' || !/^[0-9a-f]{64}$/.test(proof.native_difference_sha256)
+        || comparison.regions.some(region => {
+          const original = region.reference_region
+          return !validArea(region) || !validArea(original) || original.w !== region.w || original.h !== region.h
+            || original.x !== earlier.x + region.x - photo.x || original.y !== earlier.y + region.y - photo.y
+            || region.x < photo.x || region.y < photo.y || region.x + region.w > photo.x + photo.w
+            || region.y + region.h > photo.y + photo.h
+        })) {
+      throw new Error('The server returned an incomplete screenshot comparison.')
     }
   }
   return result

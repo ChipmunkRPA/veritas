@@ -1,0 +1,138 @@
+{
+  "confidence_weight": 0,
+  "disclosures": [
+    "The photos are source-disjoint for this method and have appeared in other image studies.",
+    "All 18 clean and edited placements use real Chromium screenshot bytes.",
+    "Local tone changes are genuine visual differences and supply zero AI-origin weight.",
+    "Six incompatible controls per source group share source photos. Per-input receipts and photos stay local."
+  ],
+  "freeze_sha256": "478d242183eaa5781f7db4d188bc6964eb1c2f3ecfdca09c15d09dd3fd310f37",
+  "gate": {
+    "maximum_clean_highlights": 0,
+    "maximum_incompatible_matches": 0,
+    "maximum_wrong_locations": 0,
+    "minimum_lama_clean_matches": 10,
+    "minimum_lama_edit_locations": 9,
+    "minimum_other_clean_matches": 5,
+    "minimum_other_edit_locations": 5
+  },
+  "held_sha256": "46cf565509b0a7536657eab56fc5f5f41cdcbc322d632a14e77f17da07689aae",
+  "report": {
+    "by_arm": {
+      "boundary_witness": {
+        "LaMa": {
+          "clean_highlights": 0,
+          "clean_matches": 12,
+          "edit_pairs_comparable": 12,
+          "edits_located": 12,
+          "incompatible_acceptances": 0,
+          "local_tone_locations": 12,
+          "wrong_locations": 0
+        },
+        "kandinsky": {
+          "clean_highlights": 0,
+          "clean_matches": 3,
+          "edit_pairs_comparable": 3,
+          "edits_located": 3,
+          "incompatible_acceptances": 0,
+          "local_tone_locations": 3,
+          "wrong_locations": 0
+        },
+        "sdxl": {
+          "clean_highlights": 0,
+          "clean_matches": 3,
+          "edit_pairs_comparable": 2,
+          "edits_located": 2,
+          "incompatible_acceptances": 0,
+          "local_tone_locations": 3,
+          "wrong_locations": 0
+        }
+      },
+      "previous_inset": {
+        "LaMa": {
+          "clean_highlights": 0,
+          "clean_matches": 11,
+          "edit_pairs_comparable": 8,
+          "edits_located": 8,
+          "incompatible_acceptances": 0,
+          "local_tone_locations": 11,
+          "wrong_locations": 0
+        },
+        "kandinsky": {
+          "clean_highlights": 0,
+          "clean_matches": 3,
+          "edit_pairs_comparable": 3,
+          "edits_located": 3,
+          "incompatible_acceptances": 0,
+          "local_tone_locations": 3,
+          "wrong_locations": 0
+        },
+        "sdxl": {
+          "clean_highlights": 0,
+          "clean_matches": 1,
+          "edit_pairs_comparable": 0,
+          "edits_located": 0,
+          "incompatible_acceptances": 0,
+          "local_tone_locations": 1,
+          "wrong_locations": 0
+        }
+      },
+      "serving": {
+        "LaMa": {
+          "clean_highlights": 0,
+          "clean_matches": 0,
+          "edit_pairs_comparable": 0,
+          "edits_located": 0,
+          "incompatible_acceptances": 0,
+          "local_tone_locations": 0,
+          "wrong_locations": 0
+        },
+        "kandinsky": {
+          "clean_highlights": 0,
+          "clean_matches": 0,
+          "edit_pairs_comparable": 0,
+          "edits_located": 0,
+          "incompatible_acceptances": 0,
+          "local_tone_locations": 0,
+          "wrong_locations": 0
+        },
+        "sdxl": {
+          "clean_highlights": 0,
+          "clean_matches": 0,
+          "edit_pairs_comparable": 0,
+          "edits_located": 0,
+          "incompatible_acceptances": 0,
+          "local_tone_locations": 0,
+          "wrong_locations": 0
+        }
+      }
+    },
+    "maximum_seconds": 0.048033,
+    "median_seconds": 0.030281000000000002,
+    "passed": true,
+    "views": 162
+  },
+  "reproduced_held_views": 162,
+  "schema": "chipmunk.image-reference-screenshot-holdout/1",
+  "scope": "local optional earlier-copy comparison for one native-scale photo in an upright RGB PNG",
+  "serving_replay": {
+    "backend_targeted_tests_passed": 38,
+    "clean_screenshots": 3,
+    "difference_pixels": 51425,
+    "duplicate_placement_controls": 3,
+    "edited_screenshots": 3,
+    "frontend_targeted_tests_passed": 14,
+    "frontend_typecheck": "passed",
+    "native_crops": 6,
+    "pdf_artifact_hashes": 12
+  },
+  "source_counts": {
+    "LaMa": 12,
+    "kandinsky": 3,
+    "sdxl": 3
+  },
+  "useful": {
+    "iou": 0.3,
+    "recall": 0.5
+  }
+}

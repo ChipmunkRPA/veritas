@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
-"""Verify an earlier-copy comparison, including a rotated and resized crop."""
+"""Verify an earlier-copy comparison, including rotated crops and screenshot insets."""
 
 from __future__ import annotations
 
@@ -7,16 +7,18 @@ import argparse
 import io
 import json
 import sys
+from collections import Counter
 from contextlib import ExitStack
 from pathlib import Path
 
-from PIL import Image
+from PIL import Image, ImageChops
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import review_image_reference_oriented_crop_export as previous  # noqa: E402
 
 existing = previous.existing
 SCHEMA = "chipmunk.image-reference-comparison/8"
+SCREENSHOT_SCHEMA = "chipmunk.image-reference-comparison/9"
 KERNELS = {"bicubic": Image.Resampling.BICUBIC, "bilinear": Image.Resampling.BILINEAR,
            "lanczos": Image.Resampling.LANCZOS, "opencv_area": None}
 
@@ -73,11 +75,69 @@ def _projection(comparison, ref, sub, carrier):
     return box, oriented_size, inverse, difference
 
 
+def _anchor_cells(ref, before, after, sub):
+    original, screenshot = ref.load(), sub.load()
+    samples = ((0, 0), (12, 5), (2, 12))
+    anchors = {(x, y): tuple(original[x + ox, y + oy] for ox, oy in samples)
+               for y in range(0, ref.height - 12, 12) for x in range(0, ref.width - 12, 12)}
+    unique = Counter(anchors.values())
+    dx, dy = after[0] - before[0], after[1] - before[1]
+    width, height = before[2] - before[0], before[3] - before[1]
+    cells = Counter()
+    for (x, y), colors in anchors.items():
+        if (unique[colors] != 1 or not before[0] <= x < before[2] - 12 or not before[1] <= y < before[3] - 12
+                or tuple(screenshot[x + dx + ox, y + dy + oy] for ox, oy in samples) != colors):
+            continue
+        cells[(y - before[1]) * 5 // height, (x - before[0]) * 5 // width] += 1
+    return [[row, col, count] for (row, col), count in sorted(cells.items()) if count >= 3]
+
+
+def _screenshot_assets(stack, comparison, assets, ref, sub, carrier):
+    require = existing._require
+    require(comparison["status"] == "comparable" and comparison["coordinate_space"] == "exif-oriented-submitted"
+            and "alignment" not in comparison and carrier.format == "PNG" and carrier.mode == "RGB"
+            and carrier.getexif().get(274, 1) == 1 and ref.size != sub.size
+            and min(*ref.size, *sub.size) >= 160 and max(ref.size) <= 1024 and max(sub.size) <= 1280,
+            "Unsupported screenshot inset scope")
+    proof = comparison["embedded_native_photo"]
+    before = existing._bounds(proof["reference_bounds"], ref.size)
+    after = existing._bounds(proof["submitted_bounds"], sub.size)
+    width, height = after[2] - after[0], after[3] - after[1]
+    area = width * height
+    require((before[2] - before[0], before[3] - before[1]) == (width, height) and min(width, height) >= 160
+            and .16 <= area / (sub.width * sub.height) <= .73
+            and min(after[0], after[1], sub.width - after[2], sub.height - after[3]) >= 8,
+            "Reported photo placement exceeds the supported bounds")
+    with ref.crop(before) as earlier, sub.crop(after) as later, ImageChops.difference(earlier, later) as rgb:
+        red, green, blue = rgb.split()
+        with red, green, blue, ImageChops.lighter(red, green) as rg, ImageChops.lighter(rg, blue) as strongest:
+            difference = strongest.point([0] + [1] * 255)
+        with difference:
+            exact = difference.histogram()[0]
+            rectangle = difference.getbbox()
+            require(exact >= .75 * area and (rectangle is None
+                    or (rectangle[2] - rectangle[0]) * (rectangle[3] - rectangle[1]) <= .40 * area)
+                    and proof["exact_pixels"] == exact and proof["native_difference_sha256"] == existing._hash(difference.tobytes()),
+                    "Native inset pixel differences do not match the originals")
+            with Image.new("L", sub.size) as full:
+                full.paste(difference, after[:2])
+                native = full.tobytes()
+    cells = _anchor_cells(ref, before, after, sub)
+    quadrants = {(row > 2, col > 2) for row, col, _ in cells if row != 2 and col != 2}
+    require(proof["witness_cells"] == cells and len(cells) >= 12 and len(quadrants) == 4
+            and min(len({cell[i] for cell in cells}) for i in (0, 1)) >= 4, "Inset matches differ from the originals")
+    dx, dy = before[0] - after[0], before[1] - after[1]
+    return previous._assets(stack, comparison, assets, ref, sub, (before, ref.size, None, native),
+                            map_submitted_box=lambda box: existing._translation(box, dx, dy),
+                            minimum=max(48, round(area * .0004)))
+
+
 def review(export: Path, earlier: Path, submitted: Path) -> dict:
     document = json.loads(existing._read(export, existing.MAX_JSON_BYTES), object_pairs_hook=existing._record)
     existing._require(type(document) is dict and set(document) == {"comparison", "pngs"}, "Expected a comparison JSON export")
     comparison, assets = document["comparison"], document["pngs"]
-    if comparison["schema"] != SCHEMA:
+    schema = comparison["schema"]
+    if schema not in {SCHEMA, SCREENSHOT_SCHEMA}:
         return previous.review(export, earlier, submitted)
     existing._require(type(assets) is dict, "Expected PNG assets indexed by filename")
     with ExitStack() as stack:
@@ -85,19 +145,25 @@ def review(export: Path, earlier: Path, submitted: Path) -> dict:
         submitted_bytes = existing._read(submitted, existing.MAX_SOURCE_BYTES)
         sub = existing._source(stack, submitted_bytes, comparison["submitted"])
         carrier = stack.enter_context(Image.open(io.BytesIO(submitted_bytes), formats=["PNG", "JPEG"]))
-        projection = _projection(comparison, ref, sub, carrier)
-        retained = previous._assets(stack, comparison, assets, ref, sub, projection,
-                                    map_submitted_box=lambda box: existing._resize_bounds(
-                                        box, ref, sub, comparison["exact_oriented_resize"]["projected_crop"],
-                                    ))
+        if schema == SCREENSHOT_SCHEMA:
+            proof_field = "embedded_native_photo"
+            retained = _screenshot_assets(stack, comparison, assets, ref, sub, carrier)
+        else:
+            proof_field = "exact_oriented_resize"
+            projection = _projection(comparison, ref, sub, carrier)
+            retained = previous._assets(stack, comparison, assets, ref, sub, projection,
+                                        map_submitted_box=lambda box: existing._resize_bounds(
+                                            box, ref, sub, comparison[proof_field]["projected_crop"],
+                                        ))
     # Revisit the same bounded proposal search and preceding comparison paths.
     # The bytewise projection and evidence assets above have their own checks.
     from app.evidence.image_reference import inspect
 
-    result = inspect(earlier, submitted, allow_proportional_resize=True, allow_oriented_crop=True, allow_oriented_resize=True)
-    existing._require(result.get("schema") == SCHEMA and all(result[key] == comparison[key]
-                      for key in ("reference", "submitted", "exact_oriented_resize")),
-                      "Oriented resize comparison differs from the unique supported search result")
+    result = inspect(earlier, submitted, allow_proportional_resize=True, allow_oriented_crop=True,
+                     allow_oriented_resize=True, allow_embedded_photo=schema == SCREENSHOT_SCHEMA)
+    existing._require(result.get("schema") == schema and all(result[key] == comparison[key]
+                      for key in ("reference", "submitted", proof_field)),
+                      "Comparison differs from the unique supported search result")
     return {"reported_status": "comparable", "source_hashes_verified": 2,
             "crops_verified": 2 * len(comparison["regions"]), "mask_pixels_counted": retained}
 

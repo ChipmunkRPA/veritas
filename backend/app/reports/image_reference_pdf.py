@@ -8,6 +8,7 @@ from app.detectors.image import (
     reference_png_orientation,
     reference_png_oriented_crop,
     reference_png_oriented_resize,
+    reference_png_screenshot,
 )
 from app.evidence.image_reference import CROP_RESIZE_SCHEMA, EXACT_PNG_CROP_RESIZE_SCHEMA, RESIZE_SCHEMA
 
@@ -98,6 +99,16 @@ def _summary(document, comparison, assets):
         _text(page, MARGIN, 334, f"Exact match on {proof['matched_pixels']:,} pixels and {len(proof['matched_tiles'])} textured tiles.",
               size=10, color=MUTED)
         _text(page, MARGIN, 350, "Pixels outside this earlier area were unassessed.", size=10, color=MUTED)
+    if schema == reference_png_screenshot.SCHEMA:
+        proof = comparison["embedded_native_photo"]
+        count = proof["exact_pixels"]
+        _text(page, MARGIN, 294, "Earlier photo matched at native scale within the screenshot.", size=10, font="hebo")
+        _text(page, MARGIN, 310, f"Earlier copy area: {_area(proof['reference_bounds'])}", size=10)
+        _text(page, MARGIN, 326, f"Screenshot photo area: {_area(proof['submitted_bounds'])}", size=10)
+        _text(page, MARGIN, 342, f"{count:,} exact matching pixels. Areas outside these bounds were unassessed.",
+              size=10, color=MUTED)
+        _text(page, MARGIN, 357, "Local edits or interface overlays can produce differences. AI origin remains unassessed.",
+              size=10, color=MUTED)
     if schema in (RESIZE_SCHEMA, CROP_RESIZE_SCHEMA, EXACT_PNG_CROP_RESIZE_SCHEMA) and comparison["status"] == "comparable":
         crop = comparison.get("reference_crop_bounds")
         if crop:
@@ -117,9 +128,10 @@ def _summary(document, comparison, assets):
         elif regions:
             _text(page, MARGIN, 350, "Retained pixels were flagged by at least two tested resizes.", size=10, color=MUTED)
     if mask := comparison.get("mask"):
-        _text(page, MARGIN, 366, "Difference mask in submitted image coordinates", font="hebo")
-        _text(page, MARGIN, 382, "White marks retained difference pixels.", size=10, color=MUTED)
-        _image(page, pymupdf.Rect(MARGIN, 397, RIGHT, 693), mask, assets)
+        mask_top = 381 if schema == reference_png_screenshot.SCHEMA else 366
+        _text(page, MARGIN, mask_top, "Difference mask in submitted image coordinates", font="hebo")
+        _text(page, MARGIN, mask_top + 16, "White marks retained difference pixels.", size=10, color=MUTED)
+        _image(page, pymupdf.Rect(MARGIN, mask_top + 31, RIGHT, 693), mask, assets)
         _text(page, MARGIN, 711, f"Mask SHA-256 {mask['sha256']}", size=9, font="cour", color=MUTED)
 
 

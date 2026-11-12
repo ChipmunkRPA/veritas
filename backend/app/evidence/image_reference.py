@@ -20,6 +20,7 @@ from app.detectors.image import (
     reference_png_orientation,
     reference_png_oriented_crop,
     reference_png_oriented_resize,
+    reference_png_screenshot,
     reference_resize,
 )
 
@@ -108,7 +109,8 @@ def _write_evidence(directory, comparison, reference, submitted, mask):
 
 def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | None = None,
             allow_integer_alignment: bool = False, allow_proportional_resize: bool = False,
-            allow_oriented_crop: bool = False, allow_oriented_resize: bool = False) -> dict:
+            allow_oriented_crop: bool = False, allow_oriented_resize: bool = False,
+            allow_embedded_photo: bool = False) -> dict:
     """Use an earlier reference supplied by the reviewer. This measures pixel differences."""
     before, after = _bytes(reference_path), _bytes(submitted_path)
     with Image.open(io.BytesIO(before)) as original, Image.open(io.BytesIO(after)) as questioned:
@@ -118,7 +120,7 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
             reference = np.array(oriented_before.convert("RGB"))
             submitted = np.array(oriented_after.convert("RGB"))
         schema = None
-        if (allow_integer_alignment or allow_proportional_resize or allow_oriented_crop or allow_oriented_resize
+        if (allow_integer_alignment or allow_proportional_resize or allow_oriented_crop or allow_oriented_resize or allow_embedded_photo
                 ) and not np.array_equal(reference, submitted):
             result, mask = (reference_png_orientation.compare(reference, submitted, questioned)
                             if allow_proportional_resize else (None, None))
@@ -146,6 +148,10 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
                 oriented_resize, selection = reference_png_oriented_resize.compare(reference, submitted, questioned)
                 if oriented_resize is not None:
                     result, mask, schema = oriented_resize, selection, reference_png_oriented_resize.SCHEMA
+            if allow_embedded_photo and result["status"] != "comparable":
+                embedded_photo, selection = reference_png_screenshot.compare(reference, submitted, questioned)
+                if embedded_photo is not None:
+                    result, mask, schema = embedded_photo, selection, reference_png_screenshot.SCHEMA
         else:
             result, mask = reference_compare.compare_across_deliveries(reference, submitted, questioned)
     aligned = "alignment" in result

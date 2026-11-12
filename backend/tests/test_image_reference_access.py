@@ -264,6 +264,52 @@ def test_rotated_resized_crop_keeps_both_native_grids(reference_http, tmp_path):
         review_oriented_resize(export, original, analyzed)
 
 
+def test_screenshot_photo_comparison_keeps_both_native_areas_and_exports(reference_http, tmp_path):
+    f = reference_http
+    earlier = f.reference_pixels
+    photo = earlier[21:251, 19:372].copy()
+    photo[68:141, :57] ^= 63
+    submitted = np.full((440, 600, 3), 245, dtype=np.uint8)
+    submitted[95:325, 105:458] = photo
+    content = _png(submitted)
+    stored = f.store.put_bytes(content)
+    with Session(f.engine) as db:
+        analysis = db.get(Analysis, "image-a")
+        analysis.sha256, analysis.size_bytes = stored.sha256, stored.size_bytes
+        db.commit()
+
+    reply = f.client.post(_url(), files=_upload(f.reference), headers=f.viewer, data={"include_pdf": "true"})
+    assert reply.status_code == 200 and reply.headers["Cache-Control"] == "no-store"
+    payload = reply.json()
+    comparison = payload["comparison"]
+    assert comparison["schema"] == "chipmunk.image-reference-comparison/9"
+    proof = comparison["embedded_native_photo"]
+    assert proof["reference_bounds"] == {"x": 19, "y": 21, "w": 353, "h": 230}
+    assert proof["submitted_bounds"] == {"x": 105, "y": 95, "w": 353, "h": 230}
+    assert proof["exact_pixels"] == 353 * 230 - 57 * 73
+    [region] = comparison["regions"]
+    assert region["reference_region"] == {"x": 19, "y": 89, "w": 57, "h": 73}
+    assert (region["x"], region["y"], region["w"], region["h"]) == (105, 163, 57, 73)
+    with pymupdf.open(stream=base64.b64decode(payload.pop("pdf")), filetype="pdf") as pdf:
+        summary = pdf[0].get_text()
+        assert "Screenshot photo area: x 105, y 95, 353 x 230 px" in summary
+        assert "AI origin remains unassessed" in summary
+        _assert_pdf_assets(pdf, pdf[0], [comparison["mask"]], payload)
+        _assert_pdf_assets(pdf, pdf[1], [region[key] for key in ("reference_crop", "submitted_crop", "submitted_overlay")], payload)
+
+    export, original, analyzed = (tmp_path / name for name in ("screenshot.json", "earlier.png", "submitted.png"))
+    export.write_text(json.dumps(payload))
+    original.write_bytes(f.reference)
+    analyzed.write_bytes(content)
+    receipt = review_oriented_resize(export, original, analyzed)
+    assert receipt["source_hashes_verified"] == 2 and receipt["crops_verified"] == 2
+    assert receipt["mask_pixels_counted"] == 57 * 73
+    proof["native_difference_sha256"] = "0" * 64
+    export.write_text(json.dumps(payload))
+    with pytest.raises(ValueError, match="Native inset pixel differences do not match"):
+        review_oriented_resize(export, original, analyzed)
+
+
 def test_gate_requires_opt_in_completed_image_and_retained_original(reference_http, monkeypatch):
     f = reference_http
     response = f.client.get(_url(), headers=f.viewer)

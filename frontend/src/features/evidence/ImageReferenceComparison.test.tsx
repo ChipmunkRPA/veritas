@@ -215,6 +215,33 @@ describe('earlier-copy comparison', () => {
     expect(JSON.parse(await blobText(download))).toEqual({ comparison: result.comparison, pngs: result.pngs })
   })
 
+  it('shows exactly which photo area in a screenshot was compared and exports the native proof', async () => {
+    const result = structuredClone(comparison)
+    result.comparison.schema = 'chipmunk.image-reference-comparison/9'
+    result.comparison.submitted.width = 600
+    result.comparison.submitted.height = 440
+    result.comparison.embedded_native_photo = {
+      reference_bounds: { x: 96, y: 31, w: 250, h: 195 },
+      submitted_bounds: { x: 80, y: 20, w: 250, h: 195 },
+      exact_pixels: 42_450, native_difference_sha256: hash,
+      witness_cells: Array.from({ length: 12 }, (_, index) => [Math.floor(index / 4), index % 4, 3]),
+    }
+    delete result.comparison.alignment
+    vi.stubGlobal('fetch', vi.fn((_url: string, request: RequestInit) => Promise.resolve(
+      request.method === 'POST' ? json(result) : json({ available: true }),
+    )))
+    show()
+    await choose()
+    fireEvent.click(screen.getByRole('button', { name: 'Compare images' }))
+    expect(await screen.findByText(/earlier photo matched at native scale/)).toBeTruthy()
+    expect(screen.getByText('x 96, y 31 · 250 × 195 px')).toBeTruthy()
+    expect(screen.getByText('x 80, y 20 · 250 × 195 px')).toBeTruthy()
+    expect(screen.getByText(/AI origin remains unassessed/)).toBeTruthy()
+    fireEvent.click(screen.getByRole('button', { name: 'Download comparison JSON' }))
+    const [[download]] = vi.mocked(saveBlob).mock.calls
+    expect(JSON.parse(await blobText(download))).toEqual({ comparison: result.comparison, pngs: result.pngs })
+  })
+
   it('explains resize comparison and preserves both native coordinates in the JSON download', async () => {
     const result = structuredClone(comparison)
     result.comparison.schema = 'chipmunk.image-reference-comparison/3'

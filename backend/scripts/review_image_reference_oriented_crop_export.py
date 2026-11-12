@@ -21,9 +21,9 @@ MAX_REFERENCE_SIDE = 1024
 MAX_REVIEW_OFFSETS = 128
 
 
-def _components(difference: bytes, width: int, height: int) -> list[tuple[tuple[int, int, int, int], list[int]]]:
+def _components(difference: bytes, width: int, height: int, minimum=None) -> list[tuple[tuple[int, int, int, int], list[int]]]:
     remaining = bytearray(difference)
-    minimum = max(48, round(width * height * .0004))
+    minimum = max(48, round(width * height * .0004)) if minimum is None else minimum
     components = []
     for start, selected in enumerate(remaining):
         if not selected:
@@ -73,10 +73,10 @@ def _projection(comparison, ref, sub, carrier):
     return crop, projected_size, inverse, difference
 
 
-def _assets(stack, comparison, assets, ref, sub, projection, *, map_submitted_box=None):
+def _assets(stack, comparison, assets, ref, sub, projection, *, map_submitted_box=None, minimum=None):
     require = existing._require
     crop, projected_size, inverse, difference = projection
-    components = _components(difference, *sub.size)
+    components = _components(difference, *sub.size, minimum)
     regions = comparison["regions"]
     kept = min(len(components), existing.MAX_REGIONS)
     require(type(regions) is list and len(regions) == kept
@@ -93,8 +93,8 @@ def _assets(stack, comparison, assets, ref, sub, projection, *, map_submitted_bo
         box = existing._bounds(region, sub.size)
         earlier_box = existing._bounds(region["reference_region"], ref.size)
         shifted = (map_submitted_box(box) if map_submitted_box else tuple(value + crop[i % 2] for i, value in enumerate(box)))
-        require(earlier_box == existing._orientation_bounds(shifted, projected_size, inverse)
-                and region["selected_pixels"] == area, "Retained region coordinates or count differ")
+        expected_box = shifted if inverse is None else existing._orientation_bounds(shifted, projected_size, inverse)
+        require(earlier_box == expected_box and region["selected_pixels"] == area, "Retained region coordinates or count differ")
         component = next((item for item in components if item[0] == box and len(item[1]) == area
                           and all(mask_pixels[pixel] == 255 for pixel in item[1])), None)
         require(component is not None, "The retained difference mask does not contain the exact component")

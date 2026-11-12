@@ -4,7 +4,7 @@ import { Button } from '../../components/ui'
 import { saveBlob } from '../../lib/api/reports'
 import {
   compareWithEarlierImage, comparisonAvailability, comparisonPdfData, exactOrientedCropSchema, exactOrientedResizeSchema,
-  exactPngCropResizeSchema, exactPngOrientationSchema,
+  exactPngCropResizeSchema, exactPngOrientationSchema, embeddedPhotoSchema,
   imageReferenceExport, orientationLabels, referencePngSrc,
   type ImageReferenceResult, type NativeImageArea, type ReferencePng,
 } from './imageReferenceApi'
@@ -69,10 +69,12 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
   const orientedResize = comparison.schema === exactOrientedResizeSchema ? comparison.exact_oriented_resize : undefined
   const orientedCrop = comparison.schema === exactOrientedCropSchema ? comparison.exact_oriented_crop : orientedResize
   const orientation = comparison.schema === exactPngOrientationSchema ? comparison.exact_orientation : orientedCrop
+  const embeddedPhoto = comparison.schema === embeddedPhotoSchema ? comparison.embedded_native_photo : undefined
   const cropped = comparison.schema === 'chipmunk.image-reference-comparison/4' || exact
     ? comparison.reference_crop_bounds : undefined
   const resized = comparable && (Boolean(cropped) || comparison.schema === 'chipmunk.image-reference-comparison/3')
   const completeMatch = (exact ?? orientation)?.matched_pixels === submitted.width * submitted.height
+    || (embeddedPhoto && embeddedPhoto.exact_pixels === embeddedPhoto.submitted_bounds.w * embeddedPhoto.submitted_bounds.h)
   const kernels = (orientedResize?.kernels ?? comparison.supported_resize_kernels)?.map(kernel => kernel === 'opencv_area' ? 'area' : kernel).join(', ')
   const maskDescription = (exact || orientedResize) ? 'White marks retained differences from the reproduced resize.'
     : resized ? 'White marks differences flagged by at least two tested resizes.' : 'White marks the selected differences.'
@@ -129,7 +131,21 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
     {resized && !cropped && <p className="mt-3 mb-0 text-small text-text-muted">
       The comparison found matching framing at different pixel dimensions. Differences were measured on the submitted image after resizing the earlier copy. The crops show pixels from each original file.
     </p>}
-    {(alignment || (comparable && regions.length > 0)) && <p className="mt-3 mb-0 text-caption text-text-muted">
+    {embeddedPhoto && <>
+      <p className="mt-3 mb-0 text-small text-text-muted">
+        The earlier photo matched at native scale inside the screenshot.
+        {' '}{completeMatch ? 'Every pixel inside the photo matches the earlier copy.'
+          : `${embeddedPhoto.exact_pixels.toLocaleString('en-US')} pixels inside the photo match the earlier copy exactly.`}
+      </p>
+      <dl className="mt-3 mb-0 grid grid-cols-1 gap-2 text-small text-text-muted sm:grid-cols-2">
+        <div><dt className="font-medium text-text">Screenshot photo area</dt><dd className="m-0"><NativeArea area={embeddedPhoto.submitted_bounds} /></dd></div>
+        <div><dt className="font-medium text-text">Earlier copy area</dt><dd className="m-0"><NativeArea area={embeddedPhoto.reference_bounds} /></dd></div>
+      </dl>
+      <p className="mt-2 mb-0 text-caption text-text-muted">
+        Pixels outside those areas were unassessed. Local edits or interface overlays can produce differences. AI origin remains unassessed.
+      </p>
+    </>}
+    {(alignment || embeddedPhoto || (comparable && regions.length > 0)) && <p className="mt-3 mb-0 text-caption text-text-muted">
       Coordinates use each image’s own pixels, measured from the top left after correcting its stored orientation.
     </p>}
     {alignment && <dl className="mt-3 mb-0 grid grid-cols-1 gap-2 text-small text-text-muted sm:grid-cols-2">

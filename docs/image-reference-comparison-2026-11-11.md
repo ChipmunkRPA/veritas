@@ -20,11 +20,13 @@ The earlier-copy feature also supports a cropped and resized single-frame RGB PN
 
 The PNG fallback also covers a right-angle rotation or reflection followed by cropping and proportional resizing. It requires one exact crop and resize reproduction among the searched orientations. The plain view and PDF show the matched earlier area and the exact submitted-image differences. Both displayed crops stay in their original native grids. [Combined transformation evaluation](image-reference-oriented-resize-transfer-2026-11-12.md)
 
+The tool can locate a native-scale photo inside a PNG screenshot when an earlier copy is available. The matched area in each file and the exact differences inside the photo appear in the normal view and the separate comparison PDF and JSON. Areas outside the matched photo are unassessed. [Screenshot evidence and evaluation](image-reference-screenshot-holdout-2026-11-12.md)
+
 A local browser test used a cropped JPEG with a known edit and an earlier PNG. Simulated Stripe payment released the original analysis, and the supplemental comparison used its retained source. The browser loaded both crops and the mask and downloaded both exports. A separate HTTP test reopened the PDF and matched its embedded pixels and recorded hashes to the JSON. An identical pair returned no selected region. An unalignable pair returned an unassessed result.
 
 The [offline reviewer](independent-testing.md#verify-an-earlier-copy-image-comparison) checks the downloaded JSON against both original images using Pillow. It checks native coordinates, pixel-exact crops, mask totals and the recorded SHA-256 values. When the overlay is present, it verifies every marked and transparent pixel against the mask at the submitted crop's coordinates.
 
-For a rotated and cropped comparison, including a resized submission, use the latest reviewer. It also opens earlier comparison formats. [Offline reviewer](../backend/scripts/review_image_reference_oriented_resize_export.py)
+Use the latest reviewer for a native screenshot photo or a rotated, cropped or resized copy. It also opens earlier comparison formats. [Offline reviewer](../backend/scripts/review_image_reference_oriented_resize_export.py)
 
 ```sh
 backend/.venv/bin/python -I backend/scripts/review_image_reference_oriented_resize_export.py comparison.json earlier.png submitted.png

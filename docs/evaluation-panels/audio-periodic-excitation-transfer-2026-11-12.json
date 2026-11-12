@@ -1,0 +1,774 @@
+{
+  "schema": "chipmunk.audio-periodic-excitation-transfer/1",
+  "method": {
+    "source": "Reuse exact prior four-second matched splices with real competing speech and separate no-refit six-second AMI mixtures. Underlying clips had prior project exposure; each original source role remains unchanged.",
+    "frame": "Unpadded 64 ms frame at 20 ms hops on a zero-phase fourth-order Butterworth 80\u20134000 Hz band-pass. Remove the frame mean. At >= -50 dBFS use the best local normalized autocorrelation peak among 40\u2013222 sample lags, with a .035 log2(lag/40) octave penalty. Require unpenalized correlation >= .55.",
+    "excitation": "Apply 12th-order autocorrelation linear prediction fitted on the Hann-windowed frame after .95 pre-emphasis and .001 relative diagonal loading. Apply the fitted polynomial to the unwindowed pre-emphasis frame. Discard first 12 samples for residual features. Measure residual cycle correlation at selected lag, log crest factor and phase curvature at harmonics 2\u20136 using neighboring complex coefficients from a Hann-windowed 8192-point FFT and linear interpolation of complex bins.",
+    "cell": "Eight features per 200 ms cell: median speech cycle correlation, residual cycle correlation, phase curvature concentration, and log crest; median absolute adjacent log2 period change, phase curvature change, residual periodicity change; and supported-frame fraction. Require >=3 admitted frames and >=2 adjacent admitted pairs. Append the difference from median supported flank cells at offsets \u00b12 and \u00b13 (zero difference when no flank qualifies).",
+    "fit": "Use only matched splice triples from eight original fitting hosts in three conditions. Fit a balanced L2 ridge with target equal to exact AI overlap fraction, standardized with .03 scale floor. Fitting mass is split equally across positive-overlap and ordinary exposure. Use 16 features and penalty .10, with an unpenalized intercept.",
+    "point": "Use strict excess of maximum admitted genuine track response in the original independent confidence_cal role. A track response is the highest mean over three successive 200 ms cells, with at least two qualified cells. Report no measurement separately.",
+    "location": "Use the original half-open 0.6 s sample-clock span; useful requires IoU >= .30 and edit recall >= .50. Evaluate strongest-range and matched-control rankings before applying points. Sweep equal held genuine source-group false counts 0, 1 and 2 as retrospective diagnostics.",
+    "room_baseline": "Retain fixed six-second 0.6 s incumbent frame flags from the earlier room replay. For score-ranked comparisons, use the earlier measured strongest admitted 2 s window at 1 or 3 seconds and its existing point. These baselines have different temporal widths; report them separately.",
+    "advance": "On strong noise need at least two net new useful locations across two generator families, at most one additional genuine false source group, no new isolated-background flag and no reduction in dry useful locations. Also need a useful held AMI noisy location and no extra AMI noisy genuine false flags versus prior 0.6 s incumbent. Advance to new-source research only.",
+    "limits": "A periodic component is not a speaker identifier. Overlapping voices, music and preprocessing may dominate the same measurements. No new weights, authenticity confidence or app decision."
+  },
+  "script_sha256": "4168fe75015846d35e0ddeefd8aa640ce02615e4b197b6b163811e4fcb6de1d8",
+  "parent": {
+    "inputs.json": "850955c09b68ee91df0c6c02ef7a096818ae647b7170b93aaebb5699a72320b7",
+    "inputs-freeze.json": "37dfdbe383e0698612b7403dedef2291189ffc3dd062b7dea662db4261ea88f1",
+    "inputs-verified.json": "bcfe21ac346acf75f700b00fb2718f898e4f7adcbc89bf3ab13cab7c0ae86b86",
+    "fit.json": "b37ea8a57908752af61a112d47fa1b8b763bc61cb0f57f76d27d544de83d8425",
+    "decisions.json": "92cab38d7dff1d805e1393857a58087292d32a10934ffabce83e1c39f6235372",
+    "result.json": "90949eda7056824e9a05ebd4daebfc22f8560d9889b3e1e386f688e778baf45e",
+    "meeting-replay.json": "72d001b113a14ae37a6d0597d91ed2df10e3b4429b5a1da6e938b63639953e08",
+    "meeting-replay-freeze.json": "7ffb549460c117f7b0a327d79793a9a22884ee00df5ee1f2d526cdc3b85b9b66"
+  },
+  "meeting": {
+    "freeze.json": "811184bc036e19fd56c78d03735d2e6af12d19498088bb43442e4141d8eb32a8",
+    "roster.json": "544475db2eab26777629c883e2fcc32b4f906c915167490268e21fd5892357e5",
+    "selection.json": "a6780c430f43f0a17d604b1198ad3941db823782a272a5838725b959047010f1",
+    "confirmation.json": "f9e38ba554f7b57d8491c8177ff6523826b9f2bb013c93faeac1c87d6d726027",
+    "points.json": "b2258106c4e910d0e7334c63f5b297bb674002f85a6666e2c7c1ed5dc14adff4"
+  },
+  "runtime": {
+    "numpy": "2.2.6",
+    "scipy": "1.18.1"
+  },
+  "four_second_roles": {
+    "fusion_fit": 84,
+    "confidence_cal": 64,
+    "selection": 64,
+    "confirmation": 104
+  },
+  "four_second_ancestry_groups": {
+    "fusion_fit": 22,
+    "confidence_cal": 19,
+    "selection": 19,
+    "confirmation": 25
+  },
+  "meeting_views": 48,
+  "new_neural_forwards": 0,
+  "cells": {
+    "matched/confirmation/dry": {
+      "incumbent_frames": {
+        "synthetic": 10,
+        "genuine": 20,
+        "true_flags": 2,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 2,
+        "threshold_free_useful": 8,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "periodic_excitation": {
+        "synthetic": 10,
+        "genuine": 20,
+        "true_flags": 1,
+        "genuine_false_flags": 2,
+        "genuine_false_groups": 1,
+        "useful": 0,
+        "threshold_free_useful": 1,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "equal_false_groups": {
+        "0": {
+          "incumbent_frames": {
+            "synthetic": 10,
+            "genuine": 20,
+            "true_flags": 2,
+            "genuine_false_flags": 0,
+            "genuine_false_groups": 0,
+            "useful": 2,
+            "threshold_free_useful": 8,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "periodic_excitation": {
+            "synthetic": 10,
+            "genuine": 20,
+            "true_flags": 0,
+            "genuine_false_flags": 0,
+            "genuine_false_groups": 0,
+            "useful": 0,
+            "threshold_free_useful": 1,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          }
+        },
+        "1": {
+          "incumbent_frames": {
+            "synthetic": 10,
+            "genuine": 20,
+            "true_flags": 2,
+            "genuine_false_flags": 1,
+            "genuine_false_groups": 1,
+            "useful": 2,
+            "threshold_free_useful": 8,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "periodic_excitation": {
+            "synthetic": 10,
+            "genuine": 20,
+            "true_flags": 1,
+            "genuine_false_flags": 2,
+            "genuine_false_groups": 1,
+            "useful": 0,
+            "threshold_free_useful": 1,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          }
+        },
+        "2": {
+          "incumbent_frames": {
+            "synthetic": 10,
+            "genuine": 20,
+            "true_flags": 2,
+            "genuine_false_flags": 3,
+            "genuine_false_groups": 2,
+            "useful": 2,
+            "threshold_free_useful": 8,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "periodic_excitation": {
+            "synthetic": 10,
+            "genuine": 20,
+            "true_flags": 2,
+            "genuine_false_flags": 4,
+            "genuine_false_groups": 2,
+            "useful": 0,
+            "threshold_free_useful": 1,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          }
+        }
+      },
+      "matched_ranking": {
+        "incumbent_frames": {
+          "comparable": 10,
+          "above_all_controls": 9
+        },
+        "periodic_excitation": {
+          "comparable": 10,
+          "above_all_controls": 1
+        }
+      }
+    },
+    "matched/confirmation/speech_minus5db": {
+      "incumbent_frames": {
+        "synthetic": 10,
+        "genuine": 34,
+        "true_flags": 0,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 0,
+        "threshold_free_useful": 5,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "periodic_excitation": {
+        "synthetic": 10,
+        "genuine": 34,
+        "true_flags": 0,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 0,
+        "threshold_free_useful": 1,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "equal_false_groups": {
+        "0": {
+          "incumbent_frames": {
+            "synthetic": 10,
+            "genuine": 34,
+            "true_flags": 0,
+            "genuine_false_flags": 0,
+            "genuine_false_groups": 0,
+            "useful": 0,
+            "threshold_free_useful": 5,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "periodic_excitation": {
+            "synthetic": 10,
+            "genuine": 34,
+            "true_flags": 0,
+            "genuine_false_flags": 0,
+            "genuine_false_groups": 0,
+            "useful": 0,
+            "threshold_free_useful": 1,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          }
+        },
+        "1": {
+          "incumbent_frames": {
+            "synthetic": 10,
+            "genuine": 34,
+            "true_flags": 4,
+            "genuine_false_flags": 1,
+            "genuine_false_groups": 1,
+            "useful": 2,
+            "threshold_free_useful": 5,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "periodic_excitation": {
+            "synthetic": 10,
+            "genuine": 34,
+            "true_flags": 1,
+            "genuine_false_flags": 3,
+            "genuine_false_groups": 1,
+            "useful": 0,
+            "threshold_free_useful": 1,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          }
+        },
+        "2": {
+          "incumbent_frames": {
+            "synthetic": 10,
+            "genuine": 34,
+            "true_flags": 4,
+            "genuine_false_flags": 2,
+            "genuine_false_groups": 2,
+            "useful": 2,
+            "threshold_free_useful": 5,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "periodic_excitation": {
+            "synthetic": 10,
+            "genuine": 34,
+            "true_flags": 2,
+            "genuine_false_flags": 6,
+            "genuine_false_groups": 2,
+            "useful": 0,
+            "threshold_free_useful": 1,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          }
+        }
+      },
+      "matched_ranking": {
+        "incumbent_frames": {
+          "comparable": 10,
+          "above_all_controls": 7
+        },
+        "periodic_excitation": {
+          "comparable": 10,
+          "above_all_controls": 2
+        }
+      }
+    },
+    "matched/confirmation/speech_plus15db": {
+      "incumbent_frames": {
+        "synthetic": 10,
+        "genuine": 20,
+        "true_flags": 1,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 1,
+        "threshold_free_useful": 9,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "periodic_excitation": {
+        "synthetic": 10,
+        "genuine": 20,
+        "true_flags": 1,
+        "genuine_false_flags": 3,
+        "genuine_false_groups": 2,
+        "useful": 0,
+        "threshold_free_useful": 0,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "equal_false_groups": {
+        "0": {
+          "incumbent_frames": {
+            "synthetic": 10,
+            "genuine": 20,
+            "true_flags": 2,
+            "genuine_false_flags": 0,
+            "genuine_false_groups": 0,
+            "useful": 2,
+            "threshold_free_useful": 9,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "periodic_excitation": {
+            "synthetic": 10,
+            "genuine": 20,
+            "true_flags": 0,
+            "genuine_false_flags": 0,
+            "genuine_false_groups": 0,
+            "useful": 0,
+            "threshold_free_useful": 0,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          }
+        },
+        "1": {
+          "incumbent_frames": {
+            "synthetic": 10,
+            "genuine": 20,
+            "true_flags": 3,
+            "genuine_false_flags": 1,
+            "genuine_false_groups": 1,
+            "useful": 3,
+            "threshold_free_useful": 9,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "periodic_excitation": {
+            "synthetic": 10,
+            "genuine": 20,
+            "true_flags": 0,
+            "genuine_false_flags": 1,
+            "genuine_false_groups": 1,
+            "useful": 0,
+            "threshold_free_useful": 0,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          }
+        },
+        "2": {
+          "incumbent_frames": {
+            "synthetic": 10,
+            "genuine": 20,
+            "true_flags": 3,
+            "genuine_false_flags": 2,
+            "genuine_false_groups": 2,
+            "useful": 3,
+            "threshold_free_useful": 9,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "periodic_excitation": {
+            "synthetic": 10,
+            "genuine": 20,
+            "true_flags": 1,
+            "genuine_false_flags": 3,
+            "genuine_false_groups": 2,
+            "useful": 0,
+            "threshold_free_useful": 0,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          }
+        }
+      },
+      "matched_ranking": {
+        "incumbent_frames": {
+          "comparable": 10,
+          "above_all_controls": 6
+        },
+        "periodic_excitation": {
+          "comparable": 10,
+          "above_all_controls": 0
+        }
+      }
+    },
+    "matched/selection/dry": {
+      "incumbent_frames": {
+        "synthetic": 6,
+        "genuine": 12,
+        "true_flags": 1,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 1,
+        "threshold_free_useful": 6,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "periodic_excitation": {
+        "synthetic": 6,
+        "genuine": 12,
+        "true_flags": 0,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 0,
+        "threshold_free_useful": 2,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      }
+    },
+    "matched/selection/speech_minus5db": {
+      "incumbent_frames": {
+        "synthetic": 6,
+        "genuine": 22,
+        "true_flags": 0,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 0,
+        "threshold_free_useful": 3,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "periodic_excitation": {
+        "synthetic": 6,
+        "genuine": 22,
+        "true_flags": 0,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 0,
+        "threshold_free_useful": 0,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      }
+    },
+    "matched/selection/speech_plus15db": {
+      "incumbent_frames": {
+        "synthetic": 6,
+        "genuine": 12,
+        "true_flags": 2,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 2,
+        "threshold_free_useful": 6,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "periodic_excitation": {
+        "synthetic": 6,
+        "genuine": 12,
+        "true_flags": 0,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 0,
+        "threshold_free_useful": 1,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      }
+    },
+    "meeting/confirmation/clean": {
+      "incumbent_frames": {
+        "synthetic": 6,
+        "genuine": 6,
+        "true_flags": 2,
+        "genuine_false_flags": 1,
+        "genuine_false_groups": 1,
+        "useful": 2,
+        "threshold_free_useful": 5,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "incumbent_two_second": {
+        "synthetic": 6,
+        "genuine": 6,
+        "true_flags": 4,
+        "genuine_false_flags": 1,
+        "genuine_false_groups": 1,
+        "useful": 3,
+        "threshold_free_useful": 5,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "periodic_excitation": {
+        "synthetic": 6,
+        "genuine": 6,
+        "true_flags": 0,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 0,
+        "threshold_free_useful": 0,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "equal_false_groups": {
+        "0": {
+          "incumbent_two_second": {
+            "synthetic": 6,
+            "genuine": 6,
+            "true_flags": 3,
+            "genuine_false_flags": 0,
+            "genuine_false_groups": 0,
+            "useful": 2,
+            "threshold_free_useful": 5,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "periodic_excitation": {
+            "synthetic": 6,
+            "genuine": 6,
+            "true_flags": 0,
+            "genuine_false_flags": 0,
+            "genuine_false_groups": 0,
+            "useful": 0,
+            "threshold_free_useful": 0,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          }
+        },
+        "1": {
+          "incumbent_two_second": {
+            "synthetic": 6,
+            "genuine": 6,
+            "true_flags": 4,
+            "genuine_false_flags": 1,
+            "genuine_false_groups": 1,
+            "useful": 3,
+            "threshold_free_useful": 5,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "periodic_excitation": {
+            "synthetic": 6,
+            "genuine": 6,
+            "true_flags": 1,
+            "genuine_false_flags": 1,
+            "genuine_false_groups": 1,
+            "useful": 0,
+            "threshold_free_useful": 0,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          }
+        },
+        "2": {
+          "incumbent_two_second": {
+            "synthetic": 6,
+            "genuine": 6,
+            "true_flags": 4,
+            "genuine_false_flags": 2,
+            "genuine_false_groups": 2,
+            "useful": 3,
+            "threshold_free_useful": 5,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "periodic_excitation": {
+            "synthetic": 6,
+            "genuine": 6,
+            "true_flags": 3,
+            "genuine_false_flags": 2,
+            "genuine_false_groups": 2,
+            "useful": 0,
+            "threshold_free_useful": 0,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          }
+        }
+      },
+      "matched_ranking": {
+        "incumbent_two_second": {
+          "comparable": 6,
+          "above_all_controls": 4
+        },
+        "periodic_excitation": {
+          "comparable": 6,
+          "above_all_controls": 2
+        }
+      }
+    },
+    "meeting/confirmation/room": {
+      "incumbent_frames": {
+        "synthetic": 6,
+        "genuine": 6,
+        "true_flags": 0,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 0,
+        "threshold_free_useful": 1,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "incumbent_two_second": {
+        "synthetic": 6,
+        "genuine": 6,
+        "true_flags": 0,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 0,
+        "threshold_free_useful": 3,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "periodic_excitation": {
+        "synthetic": 6,
+        "genuine": 6,
+        "true_flags": 0,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 0,
+        "threshold_free_useful": 0,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "equal_false_groups": {
+        "0": {
+          "incumbent_two_second": {
+            "synthetic": 6,
+            "genuine": 6,
+            "true_flags": 0,
+            "genuine_false_flags": 0,
+            "genuine_false_groups": 0,
+            "useful": 0,
+            "threshold_free_useful": 3,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "periodic_excitation": {
+            "synthetic": 6,
+            "genuine": 6,
+            "true_flags": 0,
+            "genuine_false_flags": 0,
+            "genuine_false_groups": 0,
+            "useful": 0,
+            "threshold_free_useful": 0,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          }
+        },
+        "1": {
+          "incumbent_two_second": {
+            "synthetic": 6,
+            "genuine": 6,
+            "true_flags": 1,
+            "genuine_false_flags": 1,
+            "genuine_false_groups": 1,
+            "useful": 1,
+            "threshold_free_useful": 3,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "periodic_excitation": {
+            "synthetic": 6,
+            "genuine": 6,
+            "true_flags": 0,
+            "genuine_false_flags": 1,
+            "genuine_false_groups": 1,
+            "useful": 0,
+            "threshold_free_useful": 0,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          }
+        },
+        "2": {
+          "incumbent_two_second": {
+            "synthetic": 6,
+            "genuine": 6,
+            "true_flags": 1,
+            "genuine_false_flags": 2,
+            "genuine_false_groups": 2,
+            "useful": 1,
+            "threshold_free_useful": 3,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "periodic_excitation": {
+            "synthetic": 6,
+            "genuine": 6,
+            "true_flags": 2,
+            "genuine_false_flags": 2,
+            "genuine_false_groups": 2,
+            "useful": 0,
+            "threshold_free_useful": 0,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          }
+        }
+      },
+      "matched_ranking": {
+        "incumbent_two_second": {
+          "comparable": 6,
+          "above_all_controls": 2
+        },
+        "periodic_excitation": {
+          "comparable": 6,
+          "above_all_controls": 0
+        }
+      }
+    },
+    "meeting/selection/clean": {
+      "incumbent_frames": {
+        "synthetic": 6,
+        "genuine": 6,
+        "true_flags": 1,
+        "genuine_false_flags": 2,
+        "genuine_false_groups": 2,
+        "useful": 1,
+        "threshold_free_useful": 6,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "incumbent_two_second": {
+        "synthetic": 6,
+        "genuine": 6,
+        "true_flags": 3,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 0,
+        "threshold_free_useful": 2,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "periodic_excitation": {
+        "synthetic": 6,
+        "genuine": 6,
+        "true_flags": 0,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 0,
+        "threshold_free_useful": 1,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      }
+    },
+    "meeting/selection/room": {
+      "incumbent_frames": {
+        "synthetic": 6,
+        "genuine": 6,
+        "true_flags": 0,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 0,
+        "threshold_free_useful": 0,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "incumbent_two_second": {
+        "synthetic": 6,
+        "genuine": 6,
+        "true_flags": 0,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 0,
+        "threshold_free_useful": 1,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "periodic_excitation": {
+        "synthetic": 6,
+        "genuine": 6,
+        "true_flags": 1,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 1,
+        "threshold_free_useful": 4,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      }
+    }
+  },
+  "gate": {
+    "noisy_useful_net": 0,
+    "noisy_added_families": [],
+    "noisy_extra_false_groups": 0,
+    "new_background_false": 0,
+    "dry_useful_net": -2,
+    "ami_noisy_useful": 0,
+    "ami_noisy_extra_false": 0,
+    "qualifies": false
+  },
+  "commitments": {
+    "freeze": "c206071ecc02cadea3e13cc12e89f21165eb65e95409490692fd3b32b37a99bb",
+    "fit": "74d26f6bd89f7a6764f32d0a1f5ef8fb636ab486a93958e7df778e8c9b9f2109",
+    "observations": "79018ff829316c81408ee5237958e0d3257143f2506865481781646c95b94e93"
+  },
+  "observation_views": 216,
+  "seconds": 5.334
+}

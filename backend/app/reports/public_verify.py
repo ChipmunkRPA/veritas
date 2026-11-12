@@ -19,9 +19,15 @@ from app.evidence.face_interval_binding import validate_packet as validate_face_
 from app.evidence.face_lighting_context import validate as validate_face_lighting
 from app.evidence.image_copy_similarity_binding import (
     REFLECTION_VERSIONS,
+    SKIPPED_CREDENTIALS,
+    V13,
+    box_bounds,
     copy_records,
     validate_copy_scope,
     validate_similarity,
+)
+from app.evidence.image_copy_similarity_binding import (
+    url as copy_asset_url,
 )
 from app.evidence.mp4 import inspect_mp4, validate_clip_binding
 from app.evidence.video_packet_versions import (
@@ -144,6 +150,10 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
     if analysis['kind'] == 'image':
         from app.evidence.image_eligibility import validate_inspection_coverage
 
+        if evidence['version'] == V13 or 'copy_affine' in evidence:
+            from app.evidence.image_copy_affine_binding import validate as validate_affine
+
+            validate_affine(evidence, box_bounds=box_bounds, url=copy_asset_url, credential_status=SKIPPED_CREDENTIALS)
         validate_similarity(evidence, canonical_hash)
         validate_copy_scope(evidence, (result.get('decision') or {}).get('image_copy_coverage'))
         validate_inspection_coverage({**evidence, 'version': 'image-evidence-3'}

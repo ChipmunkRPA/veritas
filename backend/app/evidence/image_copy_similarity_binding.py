@@ -11,9 +11,10 @@ V9 = "image-evidence-9"
 V10 = "image-evidence-10"
 V11 = "image-evidence-11"
 V12 = "image-evidence-12"
+V13 = "image-evidence-13"
 VERSION = V12
-TRANSLATION_VERSIONS = frozenset({V10, V11, V12})
-BASIS_VERSIONS = frozenset({V11, V12})
+TRANSLATION_VERSIONS = frozenset({V10, V11, V12, V13})
+BASIS_VERSIONS = frozenset({V11, V12, V13})
 REFLECTION_VERSIONS = frozenset({V7, V8, V9}) | TRANSLATION_VERSIONS
 LARGE_IMAGE_VERSIONS = TRANSLATION_VERSIONS | {V9}
 SCHEMA = "same-image-reflection-similarity/1"
@@ -83,7 +84,7 @@ def result_skip(result: dict) -> dict | None:
 
 def validate_copy_scope(document: dict, scope: dict | None) -> None:
     """Bind the presented skip to the result and require both checks to agree."""
-    if document.get("version") != V12:
+    if document.get("version") not in {V12, V13}:
         if scope is not None:
             raise ValueError("Earlier image evidence has no recorded copy check coverage")
         return
@@ -114,6 +115,7 @@ def prior_evidence(document: dict) -> dict:
     base = dict(document)
     base.pop("copy_similarity", None)
     base.pop("copy_translation", None)
+    base.pop("copy_affine", None)
     lineage = base.pop("prior_image_evidence")
     base.update(lineage)
     return base
@@ -145,10 +147,10 @@ def validate_similarity(document: dict, canonical_hash: Callable[[dict], str]) -
     _validate_check(document, document.get("copy_similarity"), size, supported_size(*size, version=version), reflected=True)
     if version in TRANSLATION_VERSIONS:
         _validate_check(document, document["copy_translation"], size, supported_size(*size, version=V8), reflected=False)
-    if version == V12:
+    if version in {V12, V13}:
         records = tuple(copy_records(document))
-        if (records[0]["status"] == SKIPPED_CREDENTIALS) != (records[1]["status"] == SKIPPED_CREDENTIALS):
-            raise ValueError("The two copy checks have different signed credential coverage")
+        if len({record["status"] == SKIPPED_CREDENTIALS for record in records}) != 1:
+            raise ValueError("The copy checks have different signed credential coverage")
 
 
 def copy_records(document: dict) -> Iterator[dict]:
@@ -156,6 +158,8 @@ def copy_records(document: dict) -> Iterator[dict]:
         yield document["copy_similarity"]
     if document.get("version") in TRANSLATION_VERSIONS:
         yield document["copy_translation"]
+    if document.get("version") == V13:
+        yield document["copy_affine"]
 
 
 def _validate_check(document: dict, record: dict, size: tuple[int, int], supported: bool, *, reflected: bool) -> None:
@@ -183,7 +187,7 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
         or record["authorship_confidence_contribution"] != 0
         or record["interpretation"] != (NOTE if reflected else TRANSLATION_NOTE)
         or status not in STATUS_TEXT
-        or (skipped and document["version"] != V12)
+        or (skipped and document["version"] not in {V12, V13})
         or (not skipped and (status == "unsupported_geometry") == supported)
         or not isinstance(pairs, list)
         or len(pairs) > PAIR_LIMIT

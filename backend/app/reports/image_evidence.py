@@ -20,7 +20,7 @@ if TYPE_CHECKING:
 
 
 ROLES = (("context", "Position in the original"), ("crop", "Original crop"), ("overlay", "Diagnostic overlay"))
-COPY_CHECKS = ("copy_similarity", "copy_translation")
+COPY_CHECKS = ("copy_similarity", "copy_translation", "copy_affine")
 TRANSLATION_STATUS = {
     "supported_pair": "Similar image detail was found without mirroring.",
     "no_pair": "This check found no qualifying non-mirrored pair.",
@@ -102,6 +102,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                         "An overall classification does not locate edited pixels."}
     store = store or default_store()
     store.verify(document["source"]["sha256"])
+    from app.evidence import image_copy_affine_binding as affine
     from app.evidence.image_copy_similarity_binding import SKIPPED_CREDENTIALS, status_text
     from app.evidence.image_packets_v7 import validate_assets
 
@@ -124,9 +125,14 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
         if check is None:
             continue
         status = check["status"]
-        check["observation"] = (status_text(status, version=document["version"])
-                                if field == "copy_similarity" or status == SKIPPED_CREDENTIALS
-                                else TRANSLATION_STATUS[status])
+        if status == SKIPPED_CREDENTIALS and document["version"] == affine.VERSION:
+            check["observation"] = "Trusted Content Credentials cover this image and declare AI involvement. The image copy checks were skipped."
+        elif field == affine.KEY:
+            check["observation"] = affine.STATUS_TEXT[status]
+        else:
+            check["observation"] = (status_text(status, version=document["version"])
+                                    if field == "copy_similarity" or status == SKIPPED_CREDENTIALS
+                                    else TRANSLATION_STATUS[status])
         if field == "copy_translation" and check["pairs"] and (basis := check.get("basis")) in TRANSLATION_BASIS_TEXT:
             check["basis_text"] = TRANSLATION_BASIS_TEXT[basis]
         for pair in check["pairs"]:
@@ -136,6 +142,12 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                 data = _asset_bytes(asset, store)
                 pair["images"].append({"role": role, "label": label, "sha256": asset["sha256"],
                     "uri": None if withheld else "data:image/png;base64," + base64.b64encode(data).decode("ascii")})
+                if field == affine.KEY:
+                    mask = pair["artifacts"]["mask_" + role[-1]]
+                    data = _asset_bytes(mask, store)
+                    title = "Area A selected mask" if role == "area_a" else "Area B mapped mask"
+                    pair["images"].append({"role": role, "label": title, "sha256": mask["sha256"],
+                        "uri": None if withheld else "data:image/png;base64," + base64.b64encode(data).decode("ascii")})
     if comparison is not None:
         comparison["images"] = []
         for role, label in (("wider_overlay", "Wider view: selected by either check"),

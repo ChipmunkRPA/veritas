@@ -80,7 +80,7 @@ export interface ImageEvidenceSet {
   schema: 'chipmunk.image-evidence/1'
   status: 'ready' | 'not_generated' | 'not_applicable'
   id: string | null
-  version: 'image-evidence-1' | 'image-evidence-2' | 'image-evidence-3' | 'image-evidence-4' | 'image-evidence-5' | 'image-evidence-6' | 'image-evidence-7' | 'image-evidence-8' | 'image-evidence-9' | 'image-evidence-10' | 'image-evidence-11' | 'image-evidence-12'
+  version: 'image-evidence-1' | 'image-evidence-2' | 'image-evidence-3' | 'image-evidence-4' | 'image-evidence-5' | 'image-evidence-6' | 'image-evidence-7' | 'image-evidence-8' | 'image-evidence-9' | 'image-evidence-10' | 'image-evidence-11' | 'image-evidence-12' | 'image-evidence-13'
   sha256: string | null
   analysis_id: string
   revision: number
@@ -95,6 +95,10 @@ export interface ImageEvidenceSet {
   copy_similarity?: ImageCopyEvidence<'same-image-reflection-similarity/1', 'horizontal_reflection'>
   copy_translation?: ImageCopyEvidence<'same-image-copy-similarity/1', 'same_orientation'> & {
     basis?: 'native_patch_alignment' | 'geometric_features' | null
+  }
+  copy_affine?: Omit<ImageCopyEvidence<'same-image-affine-support/1', never>, 'pairs' | 'coordinate_space'> & {
+    pairs: { id: string; regions: Record<'area_a' | 'area_b', Box>; selected_pixels: Record<'area_a' | 'area_b', number>
+      artifacts: Record<'area_a' | 'area_b' | 'mask_a' | 'mask_b', EvidenceImage> }[]
   }
 }
 

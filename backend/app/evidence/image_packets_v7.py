@@ -12,7 +12,9 @@ from PIL import Image
 from sqlalchemy.orm import Session
 
 from app.core.canonical import canonical_hash, canonical_json
-from app.detectors.image import copy_move, copy_similarity
+from app.core.config import settings
+from app.detectors.image import copy_affine, copy_move, copy_similarity
+from app.evidence import image_copy_affine_binding as affine
 from app.evidence import image_packets_v5 as prior
 from app.evidence.image_copy_similarity_binding import (
     NOTE,
@@ -43,19 +45,25 @@ from app.storage.db import Analysis, Artefact
 from app.storage.objects import ObjectStore
 
 CREATOR = "image-evidence-packets/10"
-_CREATORS = {VERSION: CREATOR, V11: "image-evidence-packets/9", V10: "image-evidence-packets/8", V9: "image-evidence-packets/7",
+_CREATORS = {affine.VERSION: "image-evidence-packets/11", VERSION: CREATOR, V11: "image-evidence-packets/9",
+             V10: "image-evidence-packets/8", V9: "image-evidence-packets/7",
              V8: "image-evidence-packets/6", V7: "image-evidence-packets/5"}
 MAX_COPY_CANDIDATES = 1024  # Each pair adds two orientations to the neighbor graph.
 legacy = prior.legacy
 PacketIntegrityError = prior.PacketIntegrityError
 
 
+def _active_version() -> str:
+    return affine.VERSION if settings.environment == "dev" and settings.image_affine_copy_review else VERSION
+
+
 def current_set_id(analysis: Analysis) -> str:
-    return prior.current_set_id(analysis, VERSION)
+    return prior.current_set_id(analysis, _active_version())
 
 
 def validate_packet_set(document: dict[str, Any], **binding: Any) -> None:
     try:
+        affine.validate(document, box_bounds=box_bounds, url=url, credential_status=SKIPPED_CREDENTIALS)
         validate_similarity(document, canonical_hash)
     except (KeyError, TypeError, ValueError) as exc:
         raise PacketIntegrityError(str(exc)) from exc
@@ -68,7 +76,7 @@ def validate_packet_set(document: dict[str, Any], **binding: Any) -> None:
 
 
 def validate_packet_source_mapping(document: dict, result: dict) -> None:
-    if document.get("version") == VERSION:
+    if document.get("version") in {VERSION, affine.VERSION}:
         try:
             validate_copy_scope(document, result_skip(result))
         except ValueError as exc:
@@ -108,6 +116,16 @@ def validate_assets(document: dict, store: ObjectStore) -> None:
                     or crop.tobytes() != expected.tobytes()
                 ):
                     raise PacketIntegrityError("Copy similarity crop pixels differ from the submitted image")
+    for pair in (document.get(affine.KEY) or {}).get("pairs", []):
+        for role in ROLES:
+            asset = pair["artifacts"]["mask_" + role[-1]]
+            with Image.open(io.BytesIO(legacy._verified(store, asset["sha256"]))) as mask:
+                pixels = np.asarray(mask)
+                if (mask.format != "PNG" or mask.mode != "L" or mask.size != (asset["width"], asset["height"])
+                        or not np.all((pixels == 0) | (pixels == 255))
+                        or not all(edge.any() for edge in (pixels[0], pixels[-1], pixels[:, 0], pixels[:, -1]))
+                        or int(np.count_nonzero(pixels)) != pair["selected_pixels"][role]):
+                    raise PacketIntegrityError("Geometric copy mask differs from its recorded geometry")
 
 
 def _crop_box(box: copy_move.Box, width: int, height: int) -> tuple[int, int, int, int]:
@@ -162,6 +180,48 @@ def _copy_record(db: Session, analysis: Analysis, store: ObjectStore, document: 
             "authorship_confidence_contribution": 0, "pairs": pairs, "interpretation": NOTE if reflected else TRANSLATION_NOTE}
 
 
+def _affine_record(db: Session, analysis: Analysis, store: ObjectStore, document: dict,
+                   source: Image.Image | None, *, skip: bool) -> dict:
+    record = {"schema": affine.SCHEMA, "source_sha256": analysis.sha256, "status": "unsupported_geometry",
+              "pairs": [], "authorship_confidence_contribution": 0, "interpretation": affine.NOTE}
+    if skip:
+        return {**record, "status": SKIPPED_CREDENTIALS}
+    if source is None or not affine.supported(*source.size):
+        return record
+    rgb = np.asarray(source)
+    try:
+        proposals = copy_affine.candidates(rgb)
+    except copy_move.CandidateBudgetExceeded:
+        return {**record, "status": "unassessed_match_budget"}
+    gray = copy_affine.luma(rgb) if proposals else None
+    for proposal in proposals:
+        seed = prior._coordinates(_crop_box(proposal.box_a, *source.size))
+        matrix = np.array(proposal.affine.matrix, np.float64)
+        masks = copy_affine.dense_pair(gray, matrix, box_bounds(seed, *source.size))
+        if masks is None:
+            continue
+        regions, counts, artifacts = {}, {}, {}
+        for role, mask in zip(ROLES, masks, strict=True):
+            ys, xs = np.nonzero(mask)
+            x0, y0, x1, y1 = int(xs.min()), int(ys.min()), int(xs.max()) + 1, int(ys.max()) + 1
+            region = prior._coordinates((x0, y0, x1 - x0, y1 - y0))
+            regions[role], counts[role] = region, int(len(xs))
+            crop = source.crop((x0, y0, x1, y1))
+            selection = Image.fromarray(mask[y0:y1, x0:x1].astype(np.uint8) * 255)
+            with io.BytesIO() as output:
+                selection.save(output, format="PNG")
+                mask_png = output.getvalue()
+            for name, content in ((role, legacy._png(crop)), ("mask_" + role[-1], mask_png)):
+                art = register_artefact(db, store, content, media_type="image/png", role="preview",
+                                        created_by=_CREATORS[affine.VERSION], analysis_id=analysis.id)
+                artifacts[name] = {"sha256": art.sha256, "media_type": "image/png", "width": crop.width,
+                                   "height": crop.height, "url": url(document, art.sha256)}
+        record["pairs"].append({"id": f"G{len(record['pairs']) + 1:02d}", "seed": seed, "matrix": matrix.tolist(),
+                                "regions": regions, "selected_pixels": counts, "artifacts": artifacts})
+    record["status"] = "supported_pair" if record["pairs"] else "no_pair"
+    return record
+
+
 def build_packet_set(
     db: Session, analysis: Analysis, store: ObjectStore, result: dict[str, Any]
 ) -> dict[str, Any]:
@@ -173,16 +233,18 @@ def build_packet_set(
     base = prior.load_packet_set(db, analysis, store, set_id=prior.current_set_id(analysis))
     if base is None:
         base = prior.build_packet_set(db, analysis, store, result)
+    version = _active_version()
     document = {
         **base,
         "id": current_set_id(analysis),
-        "version": VERSION,
+        "version": version,
         "prior_image_evidence": {key: base[key] for key in ("id", "version", "sha256")},
     }
     size = document["source"]["width"], document["source"]["height"]
     status, boxes = "unsupported_geometry", []
     translation_status, translations, basis, source = "unsupported_geometry", [], None, None
-    if result_skip(result):
+    skipped = result_skip(result) is not None
+    if skipped:
         status = translation_status = SKIPPED_CREDENTIALS
     elif copy_similarity.supported_size(*size):
         source = _source(document, store)
@@ -194,6 +256,8 @@ def build_packet_set(
     document["copy_translation"] = _copy_record(db, analysis, store, document, source, translation_status,
                                                 translations, reflected=False)
     document["copy_translation"]["basis"] = basis
+    if version == affine.VERSION:
+        document[affine.KEY] = _affine_record(db, analysis, store, document, source, skip=skipped)
     document = json.loads(canonical_json(document))
     document["sha256"] = prior.packet_hash(document)
     validate_packet_set(document, **prior._binding(analysis))
@@ -205,7 +269,7 @@ def build_packet_set(
         canonical_json(document),
         media_type="application/json",
         role="exhibit_payload",
-        created_by=CREATOR,
+        created_by=_CREATORS[version],
         analysis_id=analysis.id,
         artefact_id=document["id"],
     )
@@ -254,4 +318,4 @@ def persist_packet_set(
 
 
 def unavailable_packet_set(analysis: Analysis) -> dict[str, Any]:
-    return {**prior.unavailable_packet_set(analysis), "version": VERSION}
+    return {**prior.unavailable_packet_set(analysis), "version": _active_version()}

@@ -16,10 +16,11 @@ from test_image_packets import _bytes
 from test_image_packets import packet_fixture as packet_fixture
 
 from app.core.canonical import canonical_hash, canonical_json
+from app.core.config import settings
 from app.detectors.image import copy_move, copy_similarity
 from app.evidence import image_packets_v5, image_packets_v7, service
 from app.evidence.image_copy_similarity_binding import V7, V8, V9, V10, V11, VERSION, supported_size
-from app.reports import engine, image_evidence, snapshot
+from app.reports import engine, image_evidence, snapshot, verify_image_source
 from app.reports.specimens import specimen
 from app.storage.artefacts import register_artefact
 from app.storage.db import Analysis
@@ -53,13 +54,30 @@ def large_source(*, reflected: bool) -> Image.Image:
 
 
 def reflected_result(packet_fixture, *, reflected=True, low_texture=False, large=False, translated=False):
-    db, store, analysis, _, _ = packet_fixture
     make_source = low_texture_source if low_texture else authored_source
     if large:
         make_source = large_source
     source = make_source(reflected=reflected)
     if translated:
         source.paste(source.crop((527, 301, 655, 429)), (31, 61))
+    return result_from_source(packet_fixture, source)
+
+
+def affine_result(packet_fixture):
+    rng = np.random.default_rng(142)
+    scene = cv2.resize(rng.integers(0, 256, (192, 192, 3), dtype=np.uint8), (768, 768), interpolation=cv2.INTER_CUBIC)
+    matrix = cv2.getRotationMatrix2D((168, 200), 14, .83)
+    matrix[:, 2] += [408, 380]
+    alpha = np.zeros(scene.shape[:2], np.uint8)
+    cv2.ellipse(alpha, (168, 200), (76, 62), 0, 0, 360, 1, thickness=-1)
+    target = cv2.warpAffine(alpha, matrix, (768, 768), flags=cv2.INTER_NEAREST).astype(bool)
+    warped = cv2.warpAffine(scene, matrix, (768, 768), flags=cv2.INTER_CUBIC)
+    scene[target] = warped[target]
+    return result_from_source(packet_fixture, Image.fromarray(scene))
+
+
+def result_from_source(packet_fixture, source):
+    db, store, analysis, _, _ = packet_fixture
     obj = store.put_bytes(_bytes(source, format="PNG"))
     analysis.sha256, analysis.size_bytes = obj.sha256, obj.size_bytes
     result = copy.deepcopy(specimen("image", "standard").result)
@@ -269,6 +287,62 @@ def test_translated_pair_is_saved_without_changing_assessment_and_serves_both_so
         assert plate.status_code == 200
         with Image.open(io.BytesIO(plate.content)) as crop:
             assert crop.tobytes() == source.crop(image_packets_v7.box_bounds(region, *source.size)).tobytes()
+
+
+def test_affine_pair_api_and_pdf_preserve_the_two_native_crops_and_binary_masks(evidence_http, monkeypatch):
+    fixture = evidence_http
+    analysis_id = "image-unprepared"
+    monkeypatch.setattr(settings, "environment", "dev")
+    monkeypatch.setattr(settings, "image_affine_copy_review", True)
+    with Session(fixture.engine) as db:
+        analysis = db.get(Analysis, analysis_id)
+        db, store, analysis, result, source = affine_result((db, fixture.store, analysis, None, None))
+        document = service.persist_packet_set(db, analysis, store, result=result)
+        assert document["version"] == "image-evidence-13"
+        assert document["original_result_hash"] == canonical_hash(result)
+        check = document["copy_affine"]
+        assert check["status"] == "supported_pair" and check["authorship_confidence_contribution"] == 0
+        pair, = check["pairs"]
+        report = specimen("image", "standard")
+        frozen = report.model_copy(update={"result": result, "image_evidence": document,
+            "analysis": report.analysis.model_copy(update={"id": analysis.id, "revision": analysis.revision}),
+            "media": report.media.model_copy(update={"sha256": analysis.sha256})})
+        db.commit()
+    response = fixture.client.get(f"/api/v2/analyses/{analysis_id}/evidence-packets", headers=fixture.viewer)
+    assert response.status_code == 200 and response.json() == document
+    oversized = copy.deepcopy(document)
+    oversized["copy_affine"]["pairs"][0]["regions"]["area_a"] = {"x": 0, "y": 0, "w": source.width, "h": source.height}
+    with pytest.raises(ValueError, match="exact source bounds"):
+        verify_image_source._verify_geometric_masks(None, oversized, source)
+    expected_rgb = set()
+    for role, asset in pair["artifacts"].items():
+        assert fixture.client.get(asset["url"], headers=fixture.outsider).status_code == 404
+        response = fixture.client.get(asset["url"], headers=fixture.viewer)
+        assert response.status_code == 200 and response.content == store.read_bytes(asset["sha256"])
+        with Image.open(io.BytesIO(response.content)) as plate:
+            area = "area_" + role[-1]
+            bounds = image_packets_v7.box_bounds(pair["regions"][area], *source.size)
+            if role.startswith("mask_"):
+                values = plate.histogram()
+                assert plate.mode == "L" and values[255] == pair["selected_pixels"][area]
+                assert values[0] + values[255] == plate.width * plate.height
+            else:
+                assert plate.tobytes() == source.crop(bounds).tobytes()
+            expected_rgb.add(plate.convert("RGB").tobytes())
+    monkeypatch.setattr(image_evidence, "default_store", lambda: store)
+    rendered = engine.render_pdf(frozen).pdf
+    assert "Geometric copy comparison" in engine.pdf_text(rendered)
+    assert "Area A selected mask" in engine.pdf_text(rendered)
+    assert "Area B mapped mask" in engine.pdf_text(rendered)
+    with pymupdf.open(stream=rendered, filetype="pdf") as pdf:
+        images = {pymupdf.Pixmap(pdf, row[0]).samples for page in pdf for row in page.get_images()}
+        # PDF can store a binary mask in DeviceGray while retaining all native values.
+        for page in pdf:
+            for row in page.get_images():
+                pixmap = pymupdf.Pixmap(pdf, row[0])
+                if pixmap.n == 1:
+                    images.add(pymupdf.Pixmap(pymupdf.csRGB, pixmap).samples)
+        assert expected_rgb <= images
 
 
 @pytest.mark.parametrize("large", [False, True])

@@ -1,0 +1,307 @@
+{
+  "independent_overlap_audit": {
+    "advances": {
+      "jpeg75": true,
+      "png": true
+    },
+    "jointly_useful_diagnostics": {
+      "jpeg75": {
+        "feathered_affine": {
+          "median_worse_side_incumbent_dense": null,
+          "views": 0
+        },
+        "sharp_affine": {
+          "median_worse_side_incumbent_dense": {
+            "iou": [
+              0.6100106779900544,
+              0.7504147927290572
+            ],
+            "precision": [
+              0.9807711151013159,
+              0.9997189958786062
+            ],
+            "recall": [
+              0.6133354529384085,
+              0.7504147927290572
+            ]
+          },
+          "views": 4
+        }
+      },
+      "png": {
+        "feathered_affine": {
+          "median_worse_side_incumbent_dense": {
+            "iou": [
+              0.5556198841144546,
+              0.556427053133635
+            ],
+            "precision": [
+              0.9955350045468709,
+              1.0
+            ],
+            "recall": [
+              0.5562197739979712,
+              0.556427053133635
+            ]
+          },
+          "views": 2
+        },
+        "sharp_affine": {
+          "median_worse_side_incumbent_dense": {
+            "iou": [
+              0.5532309768854395,
+              0.7453437182526245
+            ],
+            "precision": [
+              0.9887109077040427,
+              1.0
+            ],
+            "recall": [
+              0.5551981036234338,
+              0.7453437182526245
+            ]
+          },
+          "views": 5
+        }
+      }
+    },
+    "verified_pair_sides": 136,
+    "verified_views": 336
+  },
+  "isolated_prepaid_smoke": {
+    "copy": {
+      "checkout_verified": true,
+      "exact_pdf_plates": 4,
+      "new_useful_pair": true,
+      "signed_source_replay": true,
+      "status": "supported_pair"
+    },
+    "original": {
+      "checkout_verified": true,
+      "status": "no_pair"
+    }
+  },
+  "production_parity": {
+    "matched_pairs": 34,
+    "runtime_s": 34.809,
+    "source_and_mask_parity_views": 336
+  },
+  "protocol": {
+    "code_sha256": {
+      "copy_move.py": "fa9023c67415b7ff90b6c73450f71b6441743c37194a60349f05c0a13452215c",
+      "image_affine_copy_transfer.py": "5201e2c849c4975b1ed7c4dcf902df0b2185587e81a579af6403494748db8864",
+      "image_background_patch_score.py": "cb854082628636833e2fd005e954d0bdb7c78362e58ee98632f1ba4153224d5a",
+      "image_bg_real_insertion_score.py": "b8a91de6e686b5037ea65297aac52961ea995d701ca8aacf362b8715f94e303d"
+    },
+    "controls": [
+      "original",
+      "contrast",
+      "blur",
+      "whole_resize",
+      "local_tone"
+    ],
+    "formats": [
+      "png",
+      "jpeg75"
+    ],
+    "localization": {
+      "minimum_iou_each_area": 0.3,
+      "minimum_recall_each_area": 0.5
+    },
+    "numpy": "2.2.6",
+    "opencv": "5.0.0",
+    "positive": [
+      "sharp_affine",
+      "feathered_affine"
+    ],
+    "primary": "The dense-only pair must add at least three useful feathered localizations in at least three source groups per delivery, lose at most two useful baseline pairs across both positive roles, and add zero control flags.",
+    "schema": "chipmunk.image-affine-copy-transfer/1",
+    "source_commitments": [
+      {
+        "attempts.jsonl": "3b8291b96634bca1920bddfd9239a53d69e143ea8efc74e565fd7406e749f9ce",
+        "plan.json": "2fc63a2d9f666ce2e593cb7c6b503120661b74a33dbf88f297e34d96ae3c3d7b",
+        "result.json": "fb0aafa7d109ca3e7fda3256fbd9fdf0e3b2afca265081092552b54cc8388731"
+      },
+      {
+        "attempts.jsonl": "006a125678341700c243754a423c480b41bd86029a70f689ff1e7a467fc7fde7",
+        "plan.json": "a2176e567d71f2a80178adec7fb55e34007f6ad3114f9baf09837e233197fc34",
+        "result.json": "3d849ad48453c79002aa78d2d9cc8c7aeecc9f1979008060244c0bd01e065e86"
+      }
+    ]
+  },
+  "result": {
+    "advances": {
+      "jpeg75": true,
+      "png": true
+    },
+    "elapsed_s": 34.79399283300154,
+    "freeze_sha256": "4b3eef733cdf84bd1de688032445dcb676c34293abbd93e5233a6d06704e51fb",
+    "journal_sha256": {
+      "earlier": "3579e75aa4bc8c5d37bd2c597fbb84d78b0cda0142dc682c85edcaab9c303ead",
+      "later": "d31e8805acf6b09433c7093e7a9882b74baec8c19b2f35e26726078ed940a047"
+    },
+    "results": {
+      "jpeg75": {
+        "blur": {
+          "added_flag": 0,
+          "added_useful": 0,
+          "assessed": 24,
+          "dense_flagged": 0,
+          "dense_useful": 0,
+          "incumbent_flagged": 0,
+          "incumbent_useful": 0,
+          "lost_useful": 0,
+          "views": 24
+        },
+        "contrast": {
+          "added_flag": 0,
+          "added_useful": 0,
+          "assessed": 24,
+          "dense_flagged": 0,
+          "dense_useful": 0,
+          "incumbent_flagged": 0,
+          "incumbent_useful": 0,
+          "lost_useful": 0,
+          "views": 24
+        },
+        "feathered_affine": {
+          "added_flag": 0,
+          "added_useful": 5,
+          "assessed": 24,
+          "dense_flagged": 7,
+          "dense_useful": 5,
+          "incumbent_flagged": 7,
+          "incumbent_useful": 0,
+          "lost_useful": 0,
+          "views": 24
+        },
+        "local_tone": {
+          "added_flag": 0,
+          "added_useful": 0,
+          "assessed": 24,
+          "dense_flagged": 0,
+          "dense_useful": 0,
+          "incumbent_flagged": 0,
+          "incumbent_useful": 0,
+          "lost_useful": 0,
+          "views": 24
+        },
+        "original": {
+          "added_flag": 0,
+          "added_useful": 0,
+          "assessed": 24,
+          "dense_flagged": 0,
+          "dense_useful": 0,
+          "incumbent_flagged": 0,
+          "incumbent_useful": 0,
+          "lost_useful": 0,
+          "views": 24
+        },
+        "sharp_affine": {
+          "added_flag": 0,
+          "added_useful": 4,
+          "assessed": 24,
+          "dense_flagged": 8,
+          "dense_useful": 8,
+          "incumbent_flagged": 8,
+          "incumbent_useful": 4,
+          "lost_useful": 0,
+          "views": 24
+        },
+        "whole_resize": {
+          "added_flag": 0,
+          "added_useful": 0,
+          "assessed": 24,
+          "dense_flagged": 0,
+          "dense_useful": 0,
+          "incumbent_flagged": 0,
+          "incumbent_useful": 0,
+          "lost_useful": 0,
+          "views": 24
+        }
+      },
+      "png": {
+        "blur": {
+          "added_flag": 0,
+          "added_useful": 0,
+          "assessed": 24,
+          "dense_flagged": 0,
+          "dense_useful": 0,
+          "incumbent_flagged": 0,
+          "incumbent_useful": 0,
+          "lost_useful": 0,
+          "views": 24
+        },
+        "contrast": {
+          "added_flag": 0,
+          "added_useful": 0,
+          "assessed": 24,
+          "dense_flagged": 0,
+          "dense_useful": 0,
+          "incumbent_flagged": 0,
+          "incumbent_useful": 0,
+          "lost_useful": 0,
+          "views": 24
+        },
+        "feathered_affine": {
+          "added_flag": 0,
+          "added_useful": 3,
+          "assessed": 24,
+          "dense_flagged": 9,
+          "dense_useful": 5,
+          "incumbent_flagged": 9,
+          "incumbent_useful": 2,
+          "lost_useful": 0,
+          "views": 24
+        },
+        "local_tone": {
+          "added_flag": 0,
+          "added_useful": 0,
+          "assessed": 24,
+          "dense_flagged": 0,
+          "dense_useful": 0,
+          "incumbent_flagged": 0,
+          "incumbent_useful": 0,
+          "lost_useful": 0,
+          "views": 24
+        },
+        "original": {
+          "added_flag": 0,
+          "added_useful": 0,
+          "assessed": 24,
+          "dense_flagged": 0,
+          "dense_useful": 0,
+          "incumbent_flagged": 0,
+          "incumbent_useful": 0,
+          "lost_useful": 0,
+          "views": 24
+        },
+        "sharp_affine": {
+          "added_flag": 0,
+          "added_useful": 5,
+          "assessed": 24,
+          "dense_flagged": 10,
+          "dense_useful": 10,
+          "incumbent_flagged": 10,
+          "incumbent_useful": 5,
+          "lost_useful": 0,
+          "views": 24
+        },
+        "whole_resize": {
+          "added_flag": 0,
+          "added_useful": 0,
+          "assessed": 24,
+          "dense_flagged": 0,
+          "dense_useful": 0,
+          "incumbent_flagged": 0,
+          "incumbent_useful": 0,
+          "lost_useful": 0,
+          "views": 24
+        }
+      }
+    },
+    "schema": "chipmunk.image-affine-copy-transfer/1",
+    "views": 336
+  },
+  "schema": "chipmunk.image-affine-copy-transfer-review/1"
+}

@@ -414,10 +414,16 @@ separately, run the verifier against the evidence ZIP and your original image.
 python -m app.cli verify evidence.zip --public-key instance-key.pem --source-image original.png
 ```
 
-This optional Pillow check runs locally. It compares the original SHA-256 and
+This optional check runs locally. It compares the original SHA-256 and
 then checks every unannotated inspection crop and both sides of a same-image
 match at their recorded EXIF-oriented coordinates. If the export contains no
-unannotated crops, it reports the source hash check alone. The ordinary archive
+unannotated crops, it reports the source hash check alone. Pillow is enough for
+the crop comparison. For a geometric copy match in `image-evidence-13`, the
+project Python environment also recomputes both masks with the recorded
+alignment and starting box. This replay does not rerun sparse proposal
+generation. [Geometric copy evaluation](image-affine-copy-transfer-2026-11-11.md)
+
+The ordinary archive
 verification remains available with only the ZIP and a key. The pixel check
 provides source evidence for a separate review of the detector’s interpretation.
 For a source-free setup check, run the project's authored fixture tests. They

@@ -29,7 +29,7 @@ from test_audio_evidence import _replace_entry
 from test_audio_evidence import audio_fixture as audio_fixture
 from test_document_hybrid_pdf_coverage import hybrid_pdf
 from test_document_packets import packet_factory as packet_factory
-from test_image_copy_similarity import reflected_result
+from test_image_copy_similarity import affine_result, reflected_result
 from test_image_evidence_access import evidence_http as evidence_http
 from test_image_packets import packet_fixture as packet_fixture
 from test_public_evidence_package import rewrite
@@ -107,18 +107,25 @@ def test_actual_0023_to_0024_migration_preserves_legacy_package_bytes_and_every_
     db_engine.dispose()
 
 
-@pytest.fixture(params=["video", "audio", "document", "hybrid_document", "image", "image_translation"])
+@pytest.fixture(params=["video", "audio", "document", "hybrid_document", "image", "image_translation", "image_affine"])
 def multimedia_package(request, tmp_path, monkeypatch):
     hybrid = request.param == "hybrid_document"
     translated = request.param == "image_translation"
-    kind = "document" if hybrid else "image" if translated else request.param
+    geometric = request.param == "image_affine"
+    kind = "document" if hybrid else "image" if translated or geometric else request.param
     if kind == "image":
-        db, store, analysis, result, _ = reflected_result(request.getfixturevalue("packet_fixture"), large=not translated,
-                                                          reflected=not translated, translated=translated)
+        fixture = request.getfixturevalue("packet_fixture")
+        if geometric:
+            monkeypatch.setattr(settings, "environment", "dev")
+            monkeypatch.setattr(settings, "image_affine_copy_review", True)
+            db, store, analysis, result, _ = affine_result(fixture)
+        else:
+            db, store, analysis, result, _ = reflected_result(fixture, large=not translated,
+                                                              reflected=not translated, translated=translated)
         document = service.persist_packet_set(db, analysis, store, result=result)
-        assert document["version"] == "image-evidence-12"
-        assert document["source"]["width"] == (768 if translated else 1408)
-        assert document["copy_translation" if translated else "copy_similarity"]["pairs"]
+        assert document["version"] == ("image-evidence-13" if geometric else "image-evidence-12")
+        assert document["source"]["width"] == (768 if translated or geometric else 1408)
+        assert document["copy_affine" if geometric else "copy_translation" if translated else "copy_similarity"]["pairs"]
     elif kind == "video":
         db, store, analysis, result, *_ = request.getfixturevalue("video_fixture")
         document = video_packets.build_packet_set(db, analysis, store, result)
@@ -239,13 +246,17 @@ def test_multimedia_zip_matches_frozen_set_and_verifies_without_application_runt
         assert check.returncode == 0, check.stdout + check.stderr
         checks = {item["name"]: item for item in json.loads(check.stdout)["checks"]}
         assert checks["original image crops"]["ok"]
-        assert "2 unannotated crops matched" in checks["original image crops"]["detail"]
+        geometric = frozen.get("copy_affine")
+        if geometric:
+            assert f"Recomputed {2 * len(geometric['pairs'])} geometric copy masks" in checks["original image crops"]["detail"]
+        else:
+            assert "2 unannotated crops matched" in checks["original image crops"]["detail"]
         if not include_original:
             # A new valid signature and fresh commitments can bind a wrong crop location.
             with zipfile.ZipFile(built.path) as archive:
                 files = {name: archive.read(name) for name in archive.namelist() if name not in verify.UNLISTED}
             packet_set = json.loads(files["evidence.json"])
-            pair = next(record["pairs"][0] for field in ("copy_similarity", "copy_translation")
+            pair = next(record["pairs"][0] for field in (("copy_affine",) if geometric else ("copy_similarity", "copy_translation"))
                         if (record := packet_set[field])["pairs"])
             pair["regions"]["area_a"]["x"] += 1
             packet_set.pop("sha256")
@@ -299,6 +310,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
         # This bounded MP4 metadata reader is deliberately pure stdlib. The
         # package initializer is empty; all model/runtime evidence modules stay blocked.
         if fullname in ('app.evidence', 'app.evidence.mp4', 'app.evidence.image_eligibility', 'app.evidence.image_copy_similarity_binding',
+                        'app.evidence.image_copy_affine_binding',
                         'app.evidence.document_context', 'app.evidence.document_scope', 'app.evidence.document_repeat',
                         'app.evidence.document_matched_context', 'app.evidence.document_paragraph_priority',
                         'app.evidence.audio_binding', 'app.evidence.av_binding', 'app.evidence.audio_background_binding',
@@ -358,7 +370,7 @@ def test_native_source_verifier_checks_exif_oriented_original_and_donor_crops(tm
 
 
 @pytest.mark.parametrize('name', ['face_interval_binding.py', 'sound_event_binding.py', 'document_scope.py',
-                                 'image_copy_similarity_binding.py', 'stereo_binding.py'])
+                                 'image_copy_similarity_binding.py', 'image_copy_affine_binding.py', 'stereo_binding.py'])
 def test_new_offline_binding_helpers_remain_standard_library_only(name):
     import ast
 

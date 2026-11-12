@@ -78,18 +78,21 @@ const copyBasisText = {
 }
 
 function CopySimilarity({ set, field, token, mediaReady }: {
-  set: ImageEvidenceSet; field: 'copy_similarity' | 'copy_translation'; token: string; mediaReady: boolean
+  set: ImageEvidenceSet; field: 'copy_similarity' | 'copy_translation' | 'copy_affine'; token: string; mediaReady: boolean
 }) {
   const check = set[field]
   if (!check || check.status === 'skipped_trusted_ai_credentials') return null
   const reflected = field === 'copy_similarity'
-  const heading = reflected ? 'Same-image copy similarity' : 'Copy similarity without mirroring'
-  const sectionId = reflected ? 'image-copy-similarity' : 'image-copy-translation'
-  const wide = reflected && ['image-evidence-9', 'image-evidence-10', 'image-evidence-11', 'image-evidence-12'].includes(set.version)
-  const basis = !reflected && set.copy_translation?.basis
+  const geometric = field === 'copy_affine'
+  const heading = geometric ? 'Geometric copy comparison' : reflected ? 'Same-image copy similarity' : 'Copy similarity without mirroring'
+  const sectionId = `image-${field.replace('_', '-')}`
+  const wide = reflected && ['image-evidence-9', 'image-evidence-10', 'image-evidence-11', 'image-evidence-12', 'image-evidence-13'].includes(set.version)
+  const basis = field === 'copy_translation' && set.copy_translation?.basis
   const statusText = {
-    supported_pair: reflected ? 'Similar areas were found after horizontal reflection.' : 'Similar image detail was found without mirroring.',
-    no_pair: reflected ? 'This check found no qualifying reflected pair.' : 'This check found no qualifying non-mirrored pair.',
+    supported_pair: geometric ? 'Matching detail was found after geometric alignment.'
+      : reflected ? 'Similar areas were found after horizontal reflection.' : 'Similar image detail was found without mirroring.',
+    no_pair: geometric ? 'None of the distinct candidates examined had enough shared detail after alignment.'
+      : reflected ? 'This check found no qualifying reflected pair.' : 'This check found no qualifying non-mirrored pair.',
     unsupported_geometry: wide
       ? 'This check covers images with a long side of 513–1,024 px and a short side of at least 384 px, or a long side of 1,025–2,048 px and a short side of at least 768 px.'
       : 'This check requires native dimensions of 384 px or more on both sides and a long side of 513–1,024 px.',
@@ -103,12 +106,13 @@ function CopySimilarity({ set, field, token, mediaReady }: {
     {check.pairs.length > 0 && basis && <p className="mt-2 mb-0 text-caption text-text-muted">{copyBasisText[basis]}</p>}
     {check.pairs.length > 0 && <p className="mt-2 mb-0 text-caption text-text-muted">Coordinates use native pixels in the oriented original.</p>}
     {check.pairs.map(pair => <article key={pair.id} className="mt-4 border-t border-border pt-4">
-      <h4 className="m-0 text-small font-medium text-text">{pair.id} · {reflected ? 'Reflected pair' : 'Non-mirrored pair'}</h4>
+      <h4 className="m-0 text-small font-medium text-text">{pair.id} · {geometric ? 'Matched source areas' : reflected ? 'Reflected pair' : 'Non-mirrored pair'}</h4>
       <div className="mt-3 grid grid-cols-2 gap-4 max-[639px]:grid-cols-1">
         {(['area_a', 'area_b'] as const).map((role, index) => {
           const region = pair.regions[role]
           const label = index === 0 ? 'Area A' : 'Area B'
           const coordinatesId = `${sectionId}-${pair.id}-${role}-coordinates`
+          const mask = 'selected_pixels' in pair ? pair.artifacts[index === 0 ? 'mask_a' : 'mask_b'] : undefined
           return <figure key={role} className="m-0 min-w-0">
             <EvidencePicture key={`${pair.artifacts[role].sha256}:${token}`} set={set} artifact={pair.artifacts[role]} token={token} ready={mediaReady}
               alt={`${pair.id}: ${label} cropped from the submitted image`} />
@@ -117,6 +121,12 @@ function CopySimilarity({ set, field, token, mediaReady }: {
                 className="underline underline-offset-[3px]">{label} in the original image</Link>
               <span id={coordinatesId} className="block font-mono text-caption">x {region.x}, y {region.y}, {region.w} × {region.h} px</span>
             </figcaption>
+            {mask && 'selected_pixels' in pair && <div className="mt-3">
+              <EvidencePicture set={set} artifact={mask} token={token} ready={mediaReady} alt={`${pair.id}: ${label} ${index === 0 ? 'selected' : 'mapped'} mask`} />
+              <p className="mt-2 mb-0 text-caption text-text-muted">{index === 0
+                ? `White marks ${pair.selected_pixels[role]} pixels selected from neighborhoods that matched after alignment.`
+                : `White shows the same selection mapped to ${pair.selected_pixels[role]} pixels in Area B.`}</p>
+            </div>}
           </figure>
         })}
       </div>
@@ -236,13 +246,14 @@ export function ImageEvidenceContent({ set, token, mediaReady }: { set: ImageEvi
   }, [hash, key, set.id, set.packets, set.status, showAll])
   const localised = set.packets.some((p) => p.evidence_type === 'localisation')
   const copySkipped = set.copy_similarity?.status === 'skipped_trusted_ai_credentials'
-  const hasCopyPair = set.copy_similarity?.pairs.length || set.copy_translation?.pairs.length
+  const hasCopyPair = set.copy_similarity?.pairs.length || set.copy_translation?.pairs.length || set.copy_affine?.pairs.length
   const shown = showAll ? set.packets : set.packets.slice(0, 3)
   return (
     <div ref={root} data-testid="image-evidence-content" data-evidence-set={set.id ?? ''} data-evidence-hash={set.sha256 ?? ''}>
-      {copySkipped && <p className="mt-3 mb-0 text-small">Trusted Content Credentials cover this image and declare AI involvement. The two copy checks were skipped.</p>}
+      {copySkipped && <p className="mt-3 mb-0 text-small">Trusted Content Credentials cover this image and declare AI involvement. {set.copy_affine ? 'The image copy checks were skipped.' : 'The two copy checks were skipped.'}</p>}
       <CopySimilarity set={set} field="copy_similarity" token={token} mediaReady={mediaReady} />
       <CopySimilarity set={set} field="copy_translation" token={token} mediaReady={mediaReady} />
+      <CopySimilarity set={set} field="copy_affine" token={token} mediaReady={mediaReady} />
       <RegionalComparison set={set} token={token} mediaReady={mediaReady} />
       {set.status === 'not_generated' ? <p role="status" className="mt-3 mb-0 text-small text-text-muted">
         Region evidence has not been prepared for this result. The analysis record is still available; re-run the image analysis to create crops and supporting observations.

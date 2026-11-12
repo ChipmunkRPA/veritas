@@ -164,13 +164,17 @@ def verify_package(path: Path, *, public_key_pem: bytes | None = None, expect_ke
 
 
 def _image_source(archive: zipfile.ZipFile, bundle: dict, original: Path) -> Check:
-    from PIL import Image
-
-    from app.reports import verify_image_source
-
     name = "original image crops"
     try:
+        from PIL import Image
+
+        from app.reports import verify_image_source
+    except ImportError:
+        return Check(name, False, "Install Pillow for local image comparison.")
+    try:
         return Check(name, True, verify_image_source.check(archive, bundle, original))
+    except ImportError:
+        return Check(name, False, "Install the project dependencies to reproduce the geometric masks from the original image.")
     except (ValueError, TypeError, KeyError, OSError, Image.DecompressionBombError) as error:
         return Check(name, False, str(error))
 

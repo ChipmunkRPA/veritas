@@ -1,0 +1,160 @@
+{
+  "advancement": "Preserve every useful swap localization and suppress at least four and at least half of incumbent two-cut false ranges, across at least two source pairs. Preserve all single-cut flags and require at least six measured incumbent two-cut flags.",
+  "by_duration": {
+    "rtfs@1/2": {
+      "current_measured_no_flag": 18
+    },
+    "rtfs@3/4": {
+      "current_measured_no_flag": 18
+    },
+    "rtfs@3/8": {
+      "current_measured_no_flag": 18
+    },
+    "swap@1/2": {
+      "current_localized": 6,
+      "current_measured_no_flag": 4,
+      "current_wrong_interval": 2
+    },
+    "swap@3/4": {
+      "current_localized": 8,
+      "current_measured_no_flag": 4
+    },
+    "swap@3/8": {
+      "current_localized": 6,
+      "current_measured_no_flag": 4,
+      "current_wrong_interval": 2
+    },
+    "two_cut@1/2": {
+      "current_false_flag": 4,
+      "current_measured_no_flag": 2,
+      "suppressed_false_flag": 1
+    },
+    "two_cut@3/4": {
+      "current_false_flag": 4,
+      "current_measured_no_flag": 2,
+      "suppressed_false_flag": 4
+    },
+    "two_cut@3/8": {
+      "current_false_flag": 4,
+      "current_measured_no_flag": 2,
+      "suppressed_false_flag": 1
+    }
+  },
+  "freeze_sha256": "51f382ad84ee34404862ff7ae12f99435405895d9f8202be602ccab722ef6a79",
+  "independent_audit": {
+    "aggregate_sha256": "595e6de64978815606b871ec52dae73e3312319fee631606d2f21ad03775beb4",
+    "authored_cut_diagnostics": {
+      "all_qualification_checks": 6,
+      "authored_flank_and_middle_scene_return": 12,
+      "both_authored_edges_meet_app_cut_points": 12,
+      "endpoints_within_quarter_second": 9,
+      "incumbent_paired_cut_flags": 12,
+      "overlap_at_least_half": 6
+    },
+    "distinct_replayed_source_pictures": 48,
+    "ordinary_condition_flags": {
+      "chroma_conversion_only": {
+        "current_flags": 0,
+        "suppressed_flags": 0,
+        "views": 1
+      },
+      "ordinary_blur": {
+        "current_flags": 0,
+        "suppressed_flags": 0,
+        "views": 18
+      },
+      "ordinary_light": {
+        "current_flags": 0,
+        "suppressed_flags": 0,
+        "views": 18
+      },
+      "ordinary_time_step": {
+        "current_flags": 0,
+        "suppressed_flags": 0,
+        "views": 18
+      },
+      "original": {
+        "current_flags": 0,
+        "suppressed_flags": 0,
+        "views": 6
+      },
+      "recompression_only": {
+        "current_flags": 0,
+        "suppressed_flags": 0,
+        "views": 1
+      },
+      "single_cut": {
+        "current_flags": 0,
+        "suppressed_flags": 0,
+        "views": 6
+      },
+      "two_cut": {
+        "current_flags": 12,
+        "suppressed_flags": 6,
+        "views": 18
+      },
+      "unchanged": {
+        "current_flags": 0,
+        "suppressed_flags": 0,
+        "views": 1
+      }
+    },
+    "reviewed_rows": 123,
+    "selected_transitions_replayed": 6
+  },
+  "local_application_transfer": {
+    "both_exact_authored_cuts_detected_by_existing_shot_stage": 5,
+    "clips_completed": 6,
+    "cut_context_records": 0,
+    "incumbent_appearance_measured": 6,
+    "incumbent_face_change_flags": 0,
+    "interpretation": "The source cuts start separate application tracks, so a single research track overestimates the false flags available to remove in these six cases.",
+    "native_pictures_verified": 900,
+    "one_exact_authored_cut_detected_by_existing_shot_stage": 1,
+    "paid_gate": "Local Stripe test checkout and signed webhook simulator",
+    "scope": "The six research-qualified paired cuts, verified lossless native reconstruction, isolated local Full-profile with the actual shot, tracking, native face and incumbent appearance paths",
+    "serving_change_adopted": false
+  },
+  "pilot_advances": true,
+  "rule": "Suppress an incumbent range only when both ends are within 0.25 s of an exact paired cut, overlap is at least 0.50, and the pre/post and first/last middle pictures are similar by the unchanged app shot metrics. Never suppress on one cut or unavailable context.",
+  "runtime": {
+    "elapsed_s": 421.11047908395994,
+    "journal_sha256": "aa2ba640984aa72972f156a4b6236d635ebdbc946c3d9fe548311d50f714834c",
+    "peak_rss_bytes": 354779136,
+    "verified_frames": 2388
+  },
+  "schema": "chipmunk.video-incumbent-cut-guard-transfer/1",
+  "suppressed_source_groups": {
+    "two_cut": 3
+  },
+  "totals": {
+    "camera": {
+      "current_measured_no_flag": 3,
+      "retained_measured_no_flag": 3
+    },
+    "rtfs": {
+      "current_measured_no_flag": 60,
+      "retained_measured_no_flag": 60
+    },
+    "single_cut": {
+      "current_measured_no_flag": 6,
+      "retained_measured_no_flag": 6
+    },
+    "swap": {
+      "current_localized": 20,
+      "current_measured_no_flag": 12,
+      "current_wrong_interval": 4,
+      "retained_localized": 20,
+      "retained_measured_no_flag": 12,
+      "retained_wrong_interval": 4
+    },
+    "two_cut": {
+      "current_false_flag": 12,
+      "current_measured_no_flag": 6,
+      "retained_false_flag": 6,
+      "retained_measured_no_flag": 6,
+      "suppressed_false_flag": 6,
+      "suppressed_with_exact_genuine_cut_boundaries": 6
+    }
+  }
+}

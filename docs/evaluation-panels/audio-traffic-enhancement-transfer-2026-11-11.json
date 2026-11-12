@@ -1,0 +1,1013 @@
+{
+  "acoustic": {
+    "clipped_samples": 0,
+    "median_clean_si_sdr_db": 22.68374875726931,
+    "median_noisy_si_sdr_gains_db": {
+      "-10:archived_1": 10.33537015641232,
+      "-10:archived_6": 7.766388308828494,
+      "-10:archived_7": 9.589751649490513,
+      "-10:new_sunday": 12.895182454669193,
+      "-5:archived_1": 10.36847776945969,
+      "-5:archived_6": 6.713337142011215,
+      "-5:archived_7": 9.004803153603408,
+      "-5:new_sunday": 12.626135271858457
+    }
+  },
+  "conditional": {
+    "advance": false,
+    "checks": {
+      "clean_additions": true,
+      "clean_fidelity": true,
+      "false_additions": false,
+      "gained_tapes": true,
+      "gained_voice_groups": true,
+      "isolated_additions": true,
+      "newly_assessed": true,
+      "newly_assessed_tapes": true,
+      "noisy_fidelity": true,
+      "true_additions": true
+    },
+    "enhanced_newly_assessed_synthetic": 22,
+    "enhanced_newly_assessed_tapes": 4,
+    "gained_groups": 9,
+    "gained_tapes": 4,
+    "new_clean_ai": 0,
+    "new_false_ai": 39,
+    "new_isolated_ai": 0,
+    "new_true_ai": 44
+  },
+  "counts": [
+    {
+      "combined": {
+        "ai": 4,
+        "inconclusive": 1,
+        "unassessed": 7
+      },
+      "condition": "-10",
+      "current": {
+        "inconclusive": 5,
+        "unassessed": 7
+      },
+      "enhanced": {
+        "ai": 4,
+        "inconclusive": 4,
+        "unassessed": 4
+      },
+      "family": "clone",
+      "tape": "all"
+    },
+    {
+      "combined": {
+        "ai": 7,
+        "unassessed": 5
+      },
+      "condition": "-10",
+      "current": {
+        "inconclusive": 3,
+        "unassessed": 9
+      },
+      "enhanced": {
+        "ai": 7,
+        "inconclusive": 1,
+        "unassessed": 4
+      },
+      "family": "expressive",
+      "tape": "all"
+    },
+    {
+      "combined": {
+        "ai": 16,
+        "inconclusive": 3,
+        "original": 1,
+        "unassessed": 20
+      },
+      "condition": "-10",
+      "current": {
+        "ai": 1,
+        "inconclusive": 11,
+        "original": 1,
+        "unassessed": 27
+      },
+      "enhanced": {
+        "ai": 17,
+        "inconclusive": 10,
+        "original": 1,
+        "unassessed": 12
+      },
+      "family": "genuine",
+      "tape": "all"
+    },
+    {
+      "combined": {
+        "ai": 9,
+        "unassessed": 3
+      },
+      "condition": "-10",
+      "current": {
+        "inconclusive": 4,
+        "unassessed": 8
+      },
+      "enhanced": {
+        "ai": 9,
+        "unassessed": 3
+      },
+      "family": "stock",
+      "tape": "all"
+    },
+    {
+      "combined": {
+        "ai": 2,
+        "unassessed": 1
+      },
+      "condition": "-10",
+      "current": {
+        "inconclusive": 2,
+        "unassessed": 1
+      },
+      "enhanced": {
+        "ai": 2,
+        "inconclusive": 1
+      },
+      "family": "clone",
+      "tape": "archived_1"
+    },
+    {
+      "combined": {
+        "ai": 2,
+        "unassessed": 1
+      },
+      "condition": "-10",
+      "current": {
+        "inconclusive": 1,
+        "unassessed": 2
+      },
+      "enhanced": {
+        "ai": 2,
+        "inconclusive": 1
+      },
+      "family": "expressive",
+      "tape": "archived_1"
+    },
+    {
+      "combined": {
+        "ai": 6,
+        "unassessed": 4
+      },
+      "condition": "-10",
+      "current": {
+        "inconclusive": 3,
+        "unassessed": 7
+      },
+      "enhanced": {
+        "ai": 6,
+        "inconclusive": 2,
+        "original": 1,
+        "unassessed": 1
+      },
+      "family": "genuine",
+      "tape": "archived_1"
+    },
+    {
+      "combined": {
+        "ai": 3
+      },
+      "condition": "-10",
+      "current": {
+        "inconclusive": 1,
+        "unassessed": 2
+      },
+      "enhanced": {
+        "ai": 3
+      },
+      "family": "stock",
+      "tape": "archived_1"
+    },
+    {
+      "combined": {
+        "ai": 1,
+        "unassessed": 2
+      },
+      "condition": "-10",
+      "current": {
+        "inconclusive": 1,
+        "unassessed": 2
+      },
+      "enhanced": {
+        "ai": 1,
+        "inconclusive": 1,
+        "unassessed": 1
+      },
+      "family": "clone",
+      "tape": "archived_6"
+    },
+    {
+      "combined": {
+        "ai": 2,
+        "unassessed": 1
+      },
+      "condition": "-10",
+      "current": {
+        "inconclusive": 1,
+        "unassessed": 2
+      },
+      "enhanced": {
+        "ai": 2,
+        "unassessed": 1
+      },
+      "family": "expressive",
+      "tape": "archived_6"
+    },
+    {
+      "combined": {
+        "ai": 3,
+        "inconclusive": 1,
+        "unassessed": 6
+      },
+      "condition": "-10",
+      "current": {
+        "ai": 1,
+        "inconclusive": 3,
+        "unassessed": 6
+      },
+      "enhanced": {
+        "ai": 3,
+        "inconclusive": 2,
+        "unassessed": 5
+      },
+      "family": "genuine",
+      "tape": "archived_6"
+    },
+    {
+      "combined": {
+        "ai": 1,
+        "unassessed": 2
+      },
+      "condition": "-10",
+      "current": {
+        "unassessed": 3
+      },
+      "enhanced": {
+        "ai": 1,
+        "unassessed": 2
+      },
+      "family": "stock",
+      "tape": "archived_6"
+    },
+    {
+      "combined": {
+        "unassessed": 3
+      },
+      "condition": "-10",
+      "current": {
+        "unassessed": 3
+      },
+      "enhanced": {
+        "unassessed": 3
+      },
+      "family": "clone",
+      "tape": "archived_7"
+    },
+    {
+      "combined": {
+        "ai": 1,
+        "unassessed": 2
+      },
+      "condition": "-10",
+      "current": {
+        "unassessed": 3
+      },
+      "enhanced": {
+        "ai": 1,
+        "unassessed": 2
+      },
+      "family": "expressive",
+      "tape": "archived_7"
+    },
+    {
+      "combined": {
+        "ai": 2,
+        "unassessed": 8
+      },
+      "condition": "-10",
+      "current": {
+        "unassessed": 10
+      },
+      "enhanced": {
+        "ai": 2,
+        "inconclusive": 2,
+        "unassessed": 6
+      },
+      "family": "genuine",
+      "tape": "archived_7"
+    },
+    {
+      "combined": {
+        "ai": 2,
+        "unassessed": 1
+      },
+      "condition": "-10",
+      "current": {
+        "unassessed": 3
+      },
+      "enhanced": {
+        "ai": 2,
+        "unassessed": 1
+      },
+      "family": "stock",
+      "tape": "archived_7"
+    },
+    {
+      "combined": {
+        "ai": 1,
+        "inconclusive": 1,
+        "unassessed": 1
+      },
+      "condition": "-10",
+      "current": {
+        "inconclusive": 2,
+        "unassessed": 1
+      },
+      "enhanced": {
+        "ai": 1,
+        "inconclusive": 2
+      },
+      "family": "clone",
+      "tape": "new_sunday"
+    },
+    {
+      "combined": {
+        "ai": 2,
+        "unassessed": 1
+      },
+      "condition": "-10",
+      "current": {
+        "inconclusive": 1,
+        "unassessed": 2
+      },
+      "enhanced": {
+        "ai": 2,
+        "unassessed": 1
+      },
+      "family": "expressive",
+      "tape": "new_sunday"
+    },
+    {
+      "combined": {
+        "ai": 5,
+        "inconclusive": 2,
+        "original": 1,
+        "unassessed": 2
+      },
+      "condition": "-10",
+      "current": {
+        "inconclusive": 5,
+        "original": 1,
+        "unassessed": 4
+      },
+      "enhanced": {
+        "ai": 6,
+        "inconclusive": 4
+      },
+      "family": "genuine",
+      "tape": "new_sunday"
+    },
+    {
+      "combined": {
+        "ai": 3
+      },
+      "condition": "-10",
+      "current": {
+        "inconclusive": 3
+      },
+      "enhanced": {
+        "ai": 3
+      },
+      "family": "stock",
+      "tape": "new_sunday"
+    },
+    {
+      "combined": {
+        "ai": 8,
+        "inconclusive": 4
+      },
+      "condition": "-5",
+      "current": {
+        "ai": 2,
+        "inconclusive": 9,
+        "unassessed": 1
+      },
+      "enhanced": {
+        "ai": 7,
+        "inconclusive": 5
+      },
+      "family": "clone",
+      "tape": "all"
+    },
+    {
+      "combined": {
+        "ai": 10,
+        "unassessed": 2
+      },
+      "condition": "-5",
+      "current": {
+        "ai": 1,
+        "inconclusive": 4,
+        "unassessed": 7
+      },
+      "enhanced": {
+        "ai": 10,
+        "inconclusive": 1,
+        "unassessed": 1
+      },
+      "family": "expressive",
+      "tape": "all"
+    },
+    {
+      "combined": {
+        "ai": 25,
+        "inconclusive": 6,
+        "original": 4,
+        "unassessed": 5
+      },
+      "condition": "-5",
+      "current": {
+        "ai": 1,
+        "inconclusive": 24,
+        "original": 4,
+        "unassessed": 11
+      },
+      "enhanced": {
+        "ai": 27,
+        "inconclusive": 10,
+        "original": 1,
+        "unassessed": 2
+      },
+      "family": "genuine",
+      "tape": "all"
+    },
+    {
+      "combined": {
+        "ai": 11,
+        "unassessed": 1
+      },
+      "condition": "-5",
+      "current": {
+        "ai": 2,
+        "inconclusive": 7,
+        "unassessed": 3
+      },
+      "enhanced": {
+        "ai": 11,
+        "unassessed": 1
+      },
+      "family": "stock",
+      "tape": "all"
+    },
+    {
+      "combined": {
+        "ai": 3
+      },
+      "condition": "-5",
+      "current": {
+        "inconclusive": 3
+      },
+      "enhanced": {
+        "ai": 3
+      },
+      "family": "clone",
+      "tape": "archived_1"
+    },
+    {
+      "combined": {
+        "ai": 3
+      },
+      "condition": "-5",
+      "current": {
+        "inconclusive": 2,
+        "unassessed": 1
+      },
+      "enhanced": {
+        "ai": 3
+      },
+      "family": "expressive",
+      "tape": "archived_1"
+    },
+    {
+      "combined": {
+        "ai": 7,
+        "inconclusive": 1,
+        "original": 1,
+        "unassessed": 1
+      },
+      "condition": "-5",
+      "current": {
+        "inconclusive": 8,
+        "original": 1,
+        "unassessed": 1
+      },
+      "enhanced": {
+        "ai": 7,
+        "inconclusive": 2,
+        "unassessed": 1
+      },
+      "family": "genuine",
+      "tape": "archived_1"
+    },
+    {
+      "combined": {
+        "ai": 3
+      },
+      "condition": "-5",
+      "current": {
+        "ai": 1,
+        "inconclusive": 2
+      },
+      "enhanced": {
+        "ai": 3
+      },
+      "family": "stock",
+      "tape": "archived_1"
+    },
+    {
+      "combined": {
+        "ai": 2,
+        "inconclusive": 1
+      },
+      "condition": "-5",
+      "current": {
+        "ai": 1,
+        "inconclusive": 2
+      },
+      "enhanced": {
+        "ai": 1,
+        "inconclusive": 2
+      },
+      "family": "clone",
+      "tape": "archived_6"
+    },
+    {
+      "combined": {
+        "ai": 3
+      },
+      "condition": "-5",
+      "current": {
+        "ai": 1,
+        "inconclusive": 1,
+        "unassessed": 1
+      },
+      "enhanced": {
+        "ai": 3
+      },
+      "family": "expressive",
+      "tape": "archived_6"
+    },
+    {
+      "combined": {
+        "ai": 7,
+        "inconclusive": 2,
+        "unassessed": 1
+      },
+      "condition": "-5",
+      "current": {
+        "inconclusive": 6,
+        "unassessed": 4
+      },
+      "enhanced": {
+        "ai": 7,
+        "inconclusive": 3
+      },
+      "family": "genuine",
+      "tape": "archived_6"
+    },
+    {
+      "combined": {
+        "ai": 2,
+        "unassessed": 1
+      },
+      "condition": "-5",
+      "current": {
+        "inconclusive": 1,
+        "unassessed": 2
+      },
+      "enhanced": {
+        "ai": 2,
+        "unassessed": 1
+      },
+      "family": "stock",
+      "tape": "archived_6"
+    },
+    {
+      "combined": {
+        "ai": 1,
+        "inconclusive": 2
+      },
+      "condition": "-5",
+      "current": {
+        "inconclusive": 2,
+        "unassessed": 1
+      },
+      "enhanced": {
+        "ai": 1,
+        "inconclusive": 2
+      },
+      "family": "clone",
+      "tape": "archived_7"
+    },
+    {
+      "combined": {
+        "ai": 1,
+        "unassessed": 2
+      },
+      "condition": "-5",
+      "current": {
+        "unassessed": 3
+      },
+      "enhanced": {
+        "ai": 1,
+        "inconclusive": 1,
+        "unassessed": 1
+      },
+      "family": "expressive",
+      "tape": "archived_7"
+    },
+    {
+      "combined": {
+        "ai": 6,
+        "inconclusive": 1,
+        "unassessed": 3
+      },
+      "condition": "-5",
+      "current": {
+        "inconclusive": 4,
+        "unassessed": 6
+      },
+      "enhanced": {
+        "ai": 6,
+        "inconclusive": 3,
+        "unassessed": 1
+      },
+      "family": "genuine",
+      "tape": "archived_7"
+    },
+    {
+      "combined": {
+        "ai": 3
+      },
+      "condition": "-5",
+      "current": {
+        "inconclusive": 2,
+        "unassessed": 1
+      },
+      "enhanced": {
+        "ai": 3
+      },
+      "family": "stock",
+      "tape": "archived_7"
+    },
+    {
+      "combined": {
+        "ai": 2,
+        "inconclusive": 1
+      },
+      "condition": "-5",
+      "current": {
+        "ai": 1,
+        "inconclusive": 2
+      },
+      "enhanced": {
+        "ai": 2,
+        "inconclusive": 1
+      },
+      "family": "clone",
+      "tape": "new_sunday"
+    },
+    {
+      "combined": {
+        "ai": 3
+      },
+      "condition": "-5",
+      "current": {
+        "inconclusive": 1,
+        "unassessed": 2
+      },
+      "enhanced": {
+        "ai": 3
+      },
+      "family": "expressive",
+      "tape": "new_sunday"
+    },
+    {
+      "combined": {
+        "ai": 5,
+        "inconclusive": 2,
+        "original": 3
+      },
+      "condition": "-5",
+      "current": {
+        "ai": 1,
+        "inconclusive": 6,
+        "original": 3
+      },
+      "enhanced": {
+        "ai": 7,
+        "inconclusive": 2,
+        "original": 1
+      },
+      "family": "genuine",
+      "tape": "new_sunday"
+    },
+    {
+      "combined": {
+        "ai": 3
+      },
+      "condition": "-5",
+      "current": {
+        "ai": 1,
+        "inconclusive": 2
+      },
+      "enhanced": {
+        "ai": 3
+      },
+      "family": "stock",
+      "tape": "new_sunday"
+    },
+    {
+      "combined": {
+        "ai": 3
+      },
+      "condition": "clean",
+      "current": {
+        "ai": 3
+      },
+      "enhanced": {
+        "ai": 3
+      },
+      "family": "clone",
+      "tape": null
+    },
+    {
+      "combined": {
+        "ai": 2,
+        "inconclusive": 1
+      },
+      "condition": "clean",
+      "current": {
+        "ai": 2,
+        "inconclusive": 1
+      },
+      "enhanced": {
+        "ai": 3
+      },
+      "family": "expressive",
+      "tape": null
+    },
+    {
+      "combined": {
+        "original": 10
+      },
+      "condition": "clean",
+      "current": {
+        "original": 10
+      },
+      "enhanced": {
+        "inconclusive": 4,
+        "original": 6
+      },
+      "family": "genuine",
+      "tape": null
+    },
+    {
+      "combined": {
+        "ai": 3
+      },
+      "condition": "clean",
+      "current": {
+        "ai": 3
+      },
+      "enhanced": {
+        "ai": 3
+      },
+      "family": "stock",
+      "tape": null
+    },
+    {
+      "combined": {
+        "ai": 3
+      },
+      "condition": "clean",
+      "current": {
+        "ai": 3
+      },
+      "enhanced": {
+        "ai": 3
+      },
+      "family": "clone",
+      "tape": "all"
+    },
+    {
+      "combined": {
+        "ai": 2,
+        "inconclusive": 1
+      },
+      "condition": "clean",
+      "current": {
+        "ai": 2,
+        "inconclusive": 1
+      },
+      "enhanced": {
+        "ai": 3
+      },
+      "family": "expressive",
+      "tape": "all"
+    },
+    {
+      "combined": {
+        "original": 10
+      },
+      "condition": "clean",
+      "current": {
+        "original": 10
+      },
+      "enhanced": {
+        "inconclusive": 4,
+        "original": 6
+      },
+      "family": "genuine",
+      "tape": "all"
+    },
+    {
+      "combined": {
+        "ai": 3
+      },
+      "condition": "clean",
+      "current": {
+        "ai": 3
+      },
+      "enhanced": {
+        "ai": 3
+      },
+      "family": "stock",
+      "tape": "all"
+    },
+    {
+      "combined": {
+        "unassessed": 8
+      },
+      "condition": "isolated",
+      "current": {
+        "unassessed": 8
+      },
+      "enhanced": {
+        "unassessed": 8
+      },
+      "family": "background",
+      "tape": "all"
+    },
+    {
+      "combined": {
+        "unassessed": 2
+      },
+      "condition": "isolated",
+      "current": {
+        "unassessed": 2
+      },
+      "enhanced": {
+        "unassessed": 2
+      },
+      "family": "background",
+      "tape": "archived_1"
+    },
+    {
+      "combined": {
+        "unassessed": 2
+      },
+      "condition": "isolated",
+      "current": {
+        "unassessed": 2
+      },
+      "enhanced": {
+        "unassessed": 2
+      },
+      "family": "background",
+      "tape": "archived_6"
+    },
+    {
+      "combined": {
+        "unassessed": 2
+      },
+      "condition": "isolated",
+      "current": {
+        "unassessed": 2
+      },
+      "enhanced": {
+        "unassessed": 2
+      },
+      "family": "background",
+      "tape": "archived_7"
+    },
+    {
+      "combined": {
+        "unassessed": 2
+      },
+      "condition": "isolated",
+      "current": {
+        "unassessed": 2
+      },
+      "enhanced": {
+        "unassessed": 2
+      },
+      "family": "background",
+      "tape": "new_sunday"
+    }
+  ],
+  "enhancement_sha256": "4e7678da9651b3c0abb1264b2cadc216625222cf9669fc05af77e4202020230c",
+  "freeze": {
+    "code_sha256": {
+      "backend/app/detectors/audio/calibration.py": "00294b0c36cb37a06d516a30ea6171e409c6df0f88486660faf758070ab10ba5",
+      "backend/app/detectors/audio/calibrations/local-speech-v3.json": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf",
+      "backend/app/detectors/audio/upgraded.py": "017c396315bdb41f6e419589c6d81081b2a8089e2157c3ce14a8c0accd6f9836",
+      "backend/app/detectors/video/adapters/audio.py": "6f111f7ca382dc203b04a77125220e773b1873bbec281c35d8bb397d3cdf0aa6",
+      "backend/scripts/audio_gtcrn_traffic.py": "e23291125f3c783e63804ea494dd3b71a238b042ee20b11bfe6cc5bc31b4db90",
+      "backend/scripts/audio_strong_traffic_view.py": "7ef4da2dbc2b99f24143e8e9b8961b594db1dbcb21cf9bae881617635900d838",
+      "backend/scripts/run_audio_specialists_v15.py": "ab685e87d8212e290f0b08d4b46f9e343f6778e26eff05f42891929e07e96e5c"
+    },
+    "conditions": [
+      "clean",
+      "-5",
+      "-10",
+      "isolated"
+    ],
+    "current_assets": {
+      "pellav2_detector.pt": "d21aedfb52e2f87706c2753715a29665482b0f4a034800c31579df5d458559ac",
+      "silero_vad.jit": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720",
+      "w2v-bert-config.json": "f5572bd5998b68182e9c328a43127ed21fed687f6910497136b91a4e3b0e3675"
+    },
+    "enhancement": {
+      "fft": 512,
+      "hop": 256,
+      "license": "MIT",
+      "license_sha256": "c467165e5860b4a7494ef4a6e2788e4115d95b5b8989bb5f86287089adddf794",
+      "model_sha256": "b4718df6228e7bdf1a8a435cf98f838636eb2fd331acabf86ba87c5192ebcb87",
+      "padding": "reflect",
+      "post_gain": "none",
+      "recurrent_cache": "reset per input",
+      "revision": "502ebfab64da7c4a9af78dcb9c6ceef1ebb01c73",
+      "runtime": "onnxruntime 1.23.2 CPU single-thread",
+      "samples": 48000,
+      "window": "square root periodic Hann"
+    },
+    "foreground_groups": 19,
+    "planned": 179,
+    "roster_sha256": "adbb8cc2e2e95b1b316168a132d5ab1f5a5645b33ed15223833ac28a777631cf",
+    "rule": {
+      "maximum_clean_additions": 0,
+      "maximum_false_additions": 1,
+      "maximum_isolated_additions": 0,
+      "minimum_clean_median_si_sdr_db": 12,
+      "minimum_gained_voice_groups": 3,
+      "minimum_median_noisy_si_sdr_gain_db": 3,
+      "minimum_newly_assessed_synthetic": 3,
+      "minimum_suppression_db": 6,
+      "minimum_tapes_per_level_with_si_sdr_gain": 3,
+      "minimum_tapes_with_gain": 2,
+      "minimum_tapes_with_new_assessment": 2,
+      "minimum_true_additions": 6
+    },
+    "schema": "chipmunk.audio-traffic-enhancement-freeze/1",
+    "scope": "Preserve directional current results. On original inconclusive/unassessed inputs, enhanced AI can add a flag only if the enhanced view meets the current gate and observed suppression point.",
+    "sources": {
+      "alania": "eef1ffacc9de432d59b1336df16b3ffe8876664f87b20e56ef2c4836893ce155",
+      "background": "3d5a702131268cf65217a163404ddc6095eefb6b199d1ed5ea97487df0a98149",
+      "genuine": "c35803a686fd470f15c411a9849d37b0e9eea426eda9037481d9c637150bf4b4",
+      "known_speaker_catalogue": "526a660d812c3afec959fb45946101d643181816e4b7c4248e93559280adbf83",
+      "librispeech_archive": "39fde525e59672dc6d1551919b1478f724438a95aa55f874b576be21967e6c23",
+      "new_traffic_full_pcm": "bea2e4186c489c9768ea213c9a6fd5b06bf23cdcb600ab8f794f75be7088f316",
+      "new_traffic_media": "50e5eb59b296580340898f16e737f826a9fd7fef6fc45b07bb3e0318a9e58495",
+      "new_traffic_publisher_record": "e18f1c45b7498ebaac431df935eac2eb1ab9b95238d2552929d867a3ac2e66a5",
+      "okur_followup": "33a41facabc915464c7d16ea435a9463b02e56c02fb30ed163bc2792a6f9abe8",
+      "okur_pilot": "37e697d698ff4be034aa8631505c081e83185aa2a39e1ed32f8cf9ae1e11b6f8",
+      "previous_panel": "5fb45d9333ec42aee1221905f48d2e613f6c67a3dca277ad0959a80d35c270d2",
+      "prior_traffic_roster": "e34661c6dc138dbdf55b624a8a65be876180c9acbd85384b91e0422a1bc0288f",
+      "prior_two_background_roster": "4dfe7075fd3b39a3a60bcc73ec364014fdc4367a11b360cbfddaf4667b98747c",
+      "screen": "ba7b38b7cdbb285c59d02c54ee72355c5db9dc108e5b35869296b3d84f895956",
+      "synthetic_manifests": {
+        "development": "4e97d28cfbe5a293ffffe10c419f9dd08a9e85a74e2b0431d2d4e402dbe693a8",
+        "holdout": "409d0dd8614dbc70ed27986bfdb4c0597e61cf04f29297ea874cec39ad8e8843"
+      }
+    },
+    "traffic_tapes": [
+      "archived_1",
+      "archived_6",
+      "archived_7",
+      "new_sunday"
+    ]
+  },
+  "freeze_sha256": "189b9b37e4a5aed25df0b6fe3d7ee159d9e3a39afbd0cc66a6dfeba12e2b7e89",
+  "resource_counts": {
+    "onnx_forwards": 33840,
+    "speech_gate_forwards": 33652,
+    "voice_forwards": 266
+  },
+  "schema": "chipmunk.audio-traffic-enhancement-evaluation/1",
+  "score_sha256": "5a37df33d66e1f041a24fa16cc69ac71079f0a1775f89acfb1b7ee7971b39456"
+}

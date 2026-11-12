@@ -52,6 +52,13 @@ const translated: NonNullable<ImageEvidenceSet['copy_translation']> = {
   }],
 }
 
+const geometric: NonNullable<ImageEvidenceSet['copy_affine']> = {
+  schema: 'same-image-affine-support/1', status: 'supported_pair', source_sha256: sourceHash,
+  authorship_confidence_contribution: 0, interpretation: 'The masks show where image detail matched after alignment.',
+  pairs: [{ id: 'G01', regions: translated.pairs[0].regions, selected_pixels: { area_a: 4251, area_b: 4102 },
+    artifacts: { ...translated.pairs[0].artifacts, mask_a: artifact('7'), mask_b: artifact('8') } }],
+}
+
 const gate = (score: number, eligible = score >= .5): CandidateEligibility => ({
   schema: 'image-candidate-eligibility/1', status: 'evaluated', scope: 'whole_image', comparison: 'greater_or_equal',
   score, score_hex: '0x1.0000000000000p-1', score_exact_decimal: String(score),
@@ -197,6 +204,22 @@ describe('image evidence cards', () => {
     const reflection = within(screen.getByRole('region', { name: 'Same-image copy similarity' }))
     expect(translation.getByText(explanation)).toBeTruthy()
     expect(reflection.queryByText(explanation)).toBeNull()
+  })
+
+  it('pairs each geometric comparison mask with the native source crop and exact area link', () => {
+    show({ ...copyOnly, version: 'image-evidence-13', copy_affine: geometric })
+    const check = within(screen.getByRole('region', { name: 'Geometric copy comparison' }))
+    expect(check.getByText('Matching detail was found after geometric alignment.')).toBeTruthy()
+    expect(check.getByText('This check carries zero weight in AI authorship confidence.')).toBeTruthy()
+    expect(check.getByText(/4251 pixels selected from neighborhoods/)).toBeTruthy()
+    expect(check.getByText(/same selection mapped to 4102 pixels/)).toBeTruthy()
+    for (const [role, label] of [['area_a', 'Area A'], ['area_b', 'Area B']] as const) {
+      expect(check.getByRole('img', { name: `G01: ${label} cropped from the submitted image` })).toBeTruthy()
+      const mask = check.getByRole('img', { name: `G01: ${label} ${role === 'area_a' ? 'selected' : 'mapped'} mask` })
+      expect(mask.getAttribute('src')).toContain(`/${geometric.pairs[0].artifacts[role === 'area_a' ? 'mask_a' : 'mask_b'].sha256}.png`)
+      const link = check.getByRole('link', { name: `${label} in the original image` })
+      expect(parseViewerState(new URL(link.getAttribute('href')!, 'http://localhost').searchParams)).toMatchObject({ focus: geometric.pairs[0].regions[role] })
+    }
   })
 
   it('keeps the non-mirrored search coverage bounded when the wider reflected search applies', () => {

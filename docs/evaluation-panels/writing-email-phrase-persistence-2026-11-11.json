@@ -1,0 +1,471 @@
+{
+  "admission": {
+    "admitted_unique_edits": 7,
+    "by_generator": {
+      "qwen": 5,
+      "smol2": 2
+    },
+    "edited_source_groups": 5,
+    "first_attempts": 16,
+    "generation_inputs": {
+      "qwen": {
+        "max_tokens": 72,
+        "seed": 740197,
+        "temperature": 0.55,
+        "top_p": 0.9
+      },
+      "smol2": {
+        "max_tokens": 72,
+        "seed": 741202,
+        "temperature": 0.5,
+        "top_p": 0.9
+      }
+    },
+    "generator_assets": {
+      "qwen": {
+        "license": "Apache-2.0",
+        "local_config_files": [
+          {
+            "file": "config.json",
+            "sha256": "98d2ff8cc47488d08a2b0b3acf4eb99ef210779b42bd48605f6b8e36acdbf670"
+          },
+          {
+            "file": "generation_config.json",
+            "sha256": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6"
+          },
+          {
+            "file": "merges.txt",
+            "sha256": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3"
+          },
+          {
+            "file": "tokenizer.json",
+            "sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539"
+          },
+          {
+            "file": "tokenizer_config.json",
+            "sha256": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583"
+          },
+          {
+            "file": "vocab.json",
+            "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+          }
+        ],
+        "repo": "Qwen/Qwen2.5-1.5B-Instruct",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+        "weights_sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee"
+      },
+      "smol2": {
+        "license": "Apache-2.0",
+        "local_config_files": [
+          {
+            "file": "config.json",
+            "sha256": "994f50b16abb4ae00880baefe03c10260b5bd608d2bf586f7056ca05a534feea"
+          },
+          {
+            "file": "generation_config.json",
+            "sha256": "87b916edaaab66b3899b9d0dd0752727dff6666686da0504d89ae0a6e055a013"
+          },
+          {
+            "file": "merges.txt",
+            "sha256": "0b54e8aa4e53d5383e2e4bc635a56b43f9647f7b13832d5d9ecd8f82dac4f510"
+          },
+          {
+            "file": "special_tokens_map.json",
+            "sha256": "2b7379f3ae813529281a5c602bc5a11c1d4e0a99107aaa597fe936c1e813ca52"
+          },
+          {
+            "file": "tokenizer.json",
+            "sha256": "9ca9acddb6525a194ec8ac7a87f24fbba7232a9a15ffa1af0c1224fcd888e47c"
+          },
+          {
+            "file": "tokenizer_config.json",
+            "sha256": "4ec77d44f62efeb38d7e044a1db318f6a939438425312dfa333b8382dbad98df"
+          },
+          {
+            "file": "vocab.json",
+            "sha256": "82b84012e3add4d01d12ba14442026e49b8cbbaead1f79ecf3d919784f82dc79"
+          }
+        ],
+        "repo": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+        "revision": "31b70e2e869a7173562077fd711b654946d38674",
+        "weights_sha256": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8"
+      }
+    },
+    "initial_freeze_sha256": "6fa5cdb597fa8f36690693414c14be7732d1334b46fbc7abf368f4e03b00cb10",
+    "retry_attempts": 16,
+    "retry_freeze_sha256": "349287e9a9ce90a15c87951e1dc76c23db0e887dfb48e4af7b8ee58373d55f28",
+    "retry_inputs": {
+      "qwen": {
+        "max_tokens": 72,
+        "seed": 740488,
+        "temperature": 0.55,
+        "top_p": 0.9
+      },
+      "smol2": {
+        "max_tokens": 72,
+        "seed": 741600,
+        "temperature": 0.5,
+        "top_p": 0.9
+      }
+    },
+    "selected_dispositions": {
+      "qwen_initial_admitted": 2,
+      "qwen_initial_rejected": 6,
+      "qwen_retry_admitted": 3,
+      "qwen_retry_rejected": 3,
+      "smol2_initial_rejected": 8,
+      "smol2_retry_admitted": 2,
+      "smol2_retry_rejected": 6
+    }
+  },
+  "calibration": {
+    "freeze_sha256": "90db4acf148cb0c2ff92a6878f54238eb2f5de9edf02bbfd5d7434b9c37cde23",
+    "max_logit_reduction_error": 8.106231689453125e-06,
+    "native_forwards": 29,
+    "points": {
+      "phrase_persistence": 1.1620229482650757,
+      "raw_token": 1.9164507389068604
+    },
+    "responses_sha256": "aa8af50332400328c91959305813a6f111dd8ee3e3865b5da80dde1c9d547dfa",
+    "scored_cases": 28,
+    "scored_groups": 14,
+    "seconds": 9.232
+  },
+  "commitments": {
+    "calibration.json": "b517bb1515446d218955a14c89e7a972aca3f9ea68e7aac1a77f229d8931ffd4",
+    "final-preparation.json": "3d39784f8ba50e1f01f7a7eb9ef7c9b341f6e3b6c47961c973905274b8602705",
+    "freeze-calibration.json": "90db4acf148cb0c2ff92a6878f54238eb2f5de9edf02bbfd5d7434b9c37cde23",
+    "freeze-holdout.json": "b80fee557c98c4b86b60c987aeab7ed7c74957cdf31d2c23c2ea6ada7ff75d03",
+    "generation-freeze.json": "6fa5cdb597fa8f36690693414c14be7732d1334b46fbc7abf368f4e03b00cb10",
+    "generation-retry-freeze.json": "349287e9a9ce90a15c87951e1dc76c23db0e887dfb48e4af7b8ee58373d55f28",
+    "holdout.json": "71671ceaca10623a7ccdaaa9d3545601509529ea3c0c709a20ef9a3e992796c6",
+    "private-holdout.jsonl": "159955a9de09c2055a9b026bfbccf3cf50765885196e3ac41d6258bb353b1189",
+    "source.json": "1e48667426654a6420e783cca79c376e3a5f9c4402984232825af72d27571bd7"
+  },
+  "decision": {
+    "advance": false,
+    "confidence_change": false,
+    "serving_change": false
+  },
+  "holdout": {
+    "calibration_sha256": "b517bb1515446d218955a14c89e7a972aca3f9ea68e7aac1a77f229d8931ffd4",
+    "counts": {
+      "baseline": {
+        "false_body_source_groups": 1,
+        "gained_source_groups": 0,
+        "generated_plain_assessed": 7,
+        "generated_plain_cases": 7,
+        "generated_plain_flagged_body": 0,
+        "generated_plain_flagged_quote": 0,
+        "generated_plain_useful_body": 0,
+        "generated_quote_only_assessed": 7,
+        "generated_quote_only_cases": 7,
+        "generated_quote_only_flagged_body": 0,
+        "generated_quote_only_flagged_quote": 0,
+        "generated_quote_only_useful_body": 0,
+        "generated_quoted_assessed": 7,
+        "generated_quoted_cases": 7,
+        "generated_quoted_flagged_body": 1,
+        "generated_quoted_flagged_quote": 1,
+        "generated_quoted_useful_body": 0,
+        "human_plain_assessed": 8,
+        "human_plain_cases": 8,
+        "human_plain_flagged_body": 0,
+        "human_plain_flagged_quote": 0,
+        "human_plain_useful_body": 0,
+        "human_quoted_assessed": 8,
+        "human_quoted_cases": 8,
+        "human_quoted_flagged_body": 1,
+        "human_quoted_flagged_quote": 1,
+        "human_quoted_useful_body": 0
+      },
+      "phrase_persistence": {
+        "false_body_source_groups": 0,
+        "gained_source_groups": 0,
+        "generated_plain_assessed": 7,
+        "generated_plain_cases": 7,
+        "generated_plain_flagged_body": 0,
+        "generated_plain_flagged_quote": 0,
+        "generated_plain_useful_body": 0,
+        "generated_quote_only_assessed": 7,
+        "generated_quote_only_cases": 7,
+        "generated_quote_only_flagged_body": 0,
+        "generated_quote_only_flagged_quote": 0,
+        "generated_quote_only_useful_body": 0,
+        "generated_quoted_assessed": 7,
+        "generated_quoted_cases": 7,
+        "generated_quoted_flagged_body": 0,
+        "generated_quoted_flagged_quote": 0,
+        "generated_quoted_useful_body": 0,
+        "human_plain_assessed": 8,
+        "human_plain_cases": 8,
+        "human_plain_flagged_body": 0,
+        "human_plain_flagged_quote": 0,
+        "human_plain_useful_body": 0,
+        "human_quoted_assessed": 8,
+        "human_quoted_cases": 8,
+        "human_quoted_flagged_body": 0,
+        "human_quoted_flagged_quote": 0,
+        "human_quoted_useful_body": 0,
+        "lost_body_location": 0,
+        "new_body_location": 0
+      },
+      "raw_token": {
+        "false_body_source_groups": 0,
+        "gained_source_groups": 0,
+        "generated_plain_assessed": 7,
+        "generated_plain_cases": 7,
+        "generated_plain_flagged_body": 0,
+        "generated_plain_flagged_quote": 0,
+        "generated_plain_useful_body": 0,
+        "generated_quote_only_assessed": 7,
+        "generated_quote_only_cases": 7,
+        "generated_quote_only_flagged_body": 0,
+        "generated_quote_only_flagged_quote": 0,
+        "generated_quote_only_useful_body": 0,
+        "generated_quoted_assessed": 7,
+        "generated_quoted_cases": 7,
+        "generated_quoted_flagged_body": 0,
+        "generated_quoted_flagged_quote": 0,
+        "generated_quoted_useful_body": 0,
+        "human_plain_assessed": 8,
+        "human_plain_cases": 8,
+        "human_plain_flagged_body": 0,
+        "human_plain_flagged_quote": 0,
+        "human_plain_useful_body": 0,
+        "human_quoted_assessed": 8,
+        "human_quoted_cases": 8,
+        "human_quoted_flagged_body": 0,
+        "human_quoted_flagged_quote": 0,
+        "human_quoted_useful_body": 0,
+        "lost_body_location": 0,
+        "new_body_location": 0
+      }
+    },
+    "freeze_sha256": "b80fee557c98c4b86b60c987aeab7ed7c74957cdf31d2c23c2ea6ada7ff75d03",
+    "max_logit_reduction_error": 9.5367431640625e-06,
+    "native_forwards": 40,
+    "responses_sha256": "dea948dce45ed682fc08c58113ed3462a0e429a17b6d2e569aae8a7ce2028f90",
+    "scored_cases": 37,
+    "scored_groups": 8,
+    "seconds": 11.138
+  },
+  "method": {
+    "advance": "At least two newly localized body edit cases from distinct groups, no lost current useful localization, and at most one extra flagged human source group over current. Phrase persistence must find more useful locations or flag fewer human groups than unsmoothed token review.",
+    "baseline": "First six positive native three-sentence contexts in source order.",
+    "candidate_inputs": "Score complete three-sentence windows truncated at the current MIME body-role boundary. Use body roles only and keep the same sentence coordinates.",
+    "controls": "Within each eight-word candidate span, the unsmoothed arm scores the center-left word. The persistence arm takes the smaller of the mean margin across the four center words and the mean across all eight.",
+    "overlap": "Useful localization needs non-whitespace source-character intersection over union of at least 0.30 with the admitted generated phrase.",
+    "review": "Each candidate arm keeps at most its single strongest qualifying eight-word span. Separate review points are strictly above the second-largest human calibration source-group maximum. No probability claim.",
+    "token_score": "Combined AI-vs-human logit margin at the contextual token positions. Average available margins by exact whole-word source range."
+  },
+  "posthoc_ranking_diagnostic": {
+    "changes_to_thresholds": false,
+    "phrase_persistence": {
+      "higher_maximum_than_paired_original": 7,
+      "strongest_phrase_has_useful_overlap": 4
+    },
+    "raw_token": {
+      "higher_maximum_than_paired_original": 6,
+      "strongest_phrase_has_useful_overlap": 4
+    },
+    "unique_edits": 7
+  },
+  "replay": {
+    "candidate_phrase_ranges": 850,
+    "exact_mime_fixtures": 37,
+    "incumbent_contexts": 135,
+    "primary_counts_and_transitions": 85,
+    "quote_pairs_with_identical_candidate_measurements": 15,
+    "source_positions": 8
+  },
+  "schema": "chipmunk.writing-email-phrase-persistence/1",
+  "sources": {
+    "archives": 4,
+    "known_project_texts_screened": 45357,
+    "rights": "https://www.copyright.gov/title17/92chap1.html",
+    "source_groups": 8,
+    "source_roster": [
+      {
+        "archive": "doj-opa-2018",
+        "author": "Mark Pettit",
+        "body_sha256": "d0836ab55e449ae6200ed68a37abc62258b9c6c7fcde44892f7a77d3d89903b7",
+        "body_words": 58,
+        "date": "2018-09-24",
+        "edit_span": [
+          20,
+          92
+        ],
+        "group": "access-logistics",
+        "native_nonblank_line_spans": [
+          [
+            14,
+            18
+          ]
+        ],
+        "original_pdf_sha256": "b0f251bfcfea1f242afa4612ec9dc31d4201203b35f19c9f6434c7617841c707",
+        "page": 55,
+        "quote_source_sha256": "323a72b6cc6772c7dcf522ea3d29bc9be95c7047983f9560fa457d27e65db602",
+        "url": "https://www.justice.gov/oip/foia-library/general_topics/communications_pao_and_news_media_interim_1/download"
+      },
+      {
+        "archive": "doj-miller",
+        "author": "Paul Winfree",
+        "body_sha256": "075c26d883e63ccf7ab91d44908b66d3d1badd9fb305a8a3861ba09c643560c3",
+        "body_words": 42,
+        "date": "2017-04-17",
+        "edit_span": [
+          33,
+          98
+        ],
+        "group": "budget-coordination",
+        "native_nonblank_line_spans": [
+          [
+            10,
+            13
+          ]
+        ],
+        "original_pdf_sha256": "a8a2e0979105c9e636b74ae284b9b9971c603f7e451c6fb763946f154c4628fa",
+        "page": 57,
+        "quote_source_sha256": "cd8ac7897aeab70becc2764464ad914b16205e7fd2d5d44a3eae561bce3ffb8c",
+        "url": "https://www.justice.gov/oip/foia-library/foia-processed/general_topics/communications_stephen_miller_11_13_20/dl"
+      },
+      {
+        "archive": "doj-opa-2017",
+        "author": "Jeremy Edwards",
+        "body_sha256": "4ccecb15edf34948e685084782bd3d47d636f4f71d7d1ba91cf47be913a02da6",
+        "body_words": 16,
+        "date": "2018-06-15",
+        "edit_span": [
+          20,
+          69
+        ],
+        "group": "event-staffing",
+        "native_nonblank_line_spans": [
+          [
+            14,
+            15
+          ]
+        ],
+        "original_pdf_sha256": "2b64a7ab6b85ce2d98b210986d6992c3dd6b85db36c0773d2d1a02501349757d",
+        "page": 130,
+        "quote_source_sha256": "e930e31de4d0e8ad1fcba63b2d44a57ca890c429dc8784fabbc3194a8d1d1401",
+        "url": "https://www.justice.gov/oip/foia-library/foia-processed/general_topics/communications_pao_news_orgs_06_17_20_part_1/download"
+      },
+      {
+        "archive": "doj-opa-2018",
+        "author": "Kelly Laco",
+        "body_sha256": "1a2ecece40cf80f5dbb6d49ed14ba7aeea4c303f992210f63fda354cd20e8a8c",
+        "body_words": 66,
+        "date": "2019-01-07",
+        "edit_span": [
+          55,
+          127
+        ],
+        "group": "media-followup",
+        "native_nonblank_line_spans": [
+          [
+            10,
+            13
+          ],
+          [
+            18,
+            20
+          ]
+        ],
+        "original_pdf_sha256": "b0f251bfcfea1f242afa4612ec9dc31d4201203b35f19c9f6434c7617841c707",
+        "page": 195,
+        "quote_source_sha256": "8ca8c303ed1dbdb000ce82d93d39606daca2c53acedb05de7e279fb67fb06ac0",
+        "url": "https://www.justice.gov/oip/foia-library/general_topics/communications_pao_and_news_media_interim_1/download"
+      },
+      {
+        "archive": "doj-miller",
+        "author": "Katherine Ferrato",
+        "body_sha256": "dfc921be2b63c55efab3a61a278278a07839213ae1603e32ce8a09be5ef7de20",
+        "body_words": 43,
+        "date": "2017-10-23",
+        "edit_span": [
+          99,
+          177
+        ],
+        "group": "records-notice",
+        "native_nonblank_line_spans": [
+          [
+            21,
+            24
+          ]
+        ],
+        "original_pdf_sha256": "a8a2e0979105c9e636b74ae284b9b9971c603f7e451c6fb763946f154c4628fa",
+        "page": 108,
+        "quote_source_sha256": "ae84e609e6c775a7cfbe4fa11a54bc0ef5aab89734e2a8a55b5c4762ed4a3baf",
+        "url": "https://www.justice.gov/oip/foia-library/foia-processed/general_topics/communications_stephen_miller_11_13_20/dl"
+      },
+      {
+        "archive": "doj-opa-2018",
+        "author": "Kerri Kupec",
+        "body_sha256": "21b24acb9d598d4ba147defe085103bcc70b8e2eb54b423cfe379bf05839211e",
+        "body_words": 23,
+        "date": "2019-01-18",
+        "edit_span": [
+          24,
+          86
+        ],
+        "group": "report-transmittal",
+        "native_nonblank_line_spans": [
+          [
+            11,
+            13
+          ]
+        ],
+        "original_pdf_sha256": "b0f251bfcfea1f242afa4612ec9dc31d4201203b35f19c9f6434c7617841c707",
+        "page": 142,
+        "quote_source_sha256": "21b24acb9d598d4ba147defe085103bcc70b8e2eb54b423cfe379bf05839211e",
+        "url": "https://www.justice.gov/oip/foia-library/general_topics/communications_pao_and_news_media_interim_1/download"
+      },
+      {
+        "archive": "doj-rosenstein",
+        "author": "Rod Rosenstein",
+        "body_sha256": "1c83cdee010725f4150471fc514a7529b89d332b51fc85eb6f964c74267df73c",
+        "body_words": 23,
+        "date": "2017-05-04",
+        "edit_span": [
+          32,
+          87
+        ],
+        "group": "schedule-discussion",
+        "native_nonblank_line_spans": [
+          [
+            14,
+            19
+          ]
+        ],
+        "original_pdf_sha256": "cbdbf8d3f35c5efd87fcb08481dcb19c34d237c117a19a9fd16109a4cacdd490",
+        "page": 13,
+        "quote_source_sha256": "2b9d4ffe7a817a7326a0e772f24e7975db080357005bc7309ed873d6f966199e",
+        "url": "https://www.justice.gov/oip/foia-library/foia-processed/general_topics/emails_dag_rosenstein_03_31_22/dl"
+      },
+      {
+        "archive": "doj-opa-2018",
+        "author": "Sarah Isgur Flores",
+        "body_sha256": "9a89750a581ea782f567f3be0dcf833bfdcbe0d9114b0ff91fac74626d9520e6",
+        "body_words": 106,
+        "date": "2018-10-02",
+        "edit_span": [
+          508,
+          580
+        ],
+        "group": "speaker-arrangements",
+        "native_nonblank_line_spans": [
+          [
+            13,
+            19
+          ]
+        ],
+        "original_pdf_sha256": "b0f251bfcfea1f242afa4612ec9dc31d4201203b35f19c9f6434c7617841c707",
+        "page": 11,
+        "quote_source_sha256": "595ce6c40237574be25dae55811882b5a47938c8981a119ebce012565fc81b8d",
+        "url": "https://www.justice.gov/oip/foia-library/general_topics/communications_pao_and_news_media_interim_1/download"
+      }
+    ]
+  }
+}

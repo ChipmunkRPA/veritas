@@ -2,7 +2,8 @@
 {% if v.get('image_evidence') and v.image_evidence.available %}
 {% set similarity = v.image_evidence.get('copy_similarity') %}
 {% set translation = v.image_evidence.get('copy_translation') %}
-{% set evidence_detail = v.image_evidence.packets or v.image_evidence.get('inspection_checks') or (similarity and similarity.pairs) or (translation and translation.pairs) %}
+{% set affine = v.image_evidence.get('copy_affine') %}
+{% set evidence_detail = v.image_evidence.packets or v.image_evidence.get('inspection_checks') or (similarity and similarity.pairs) or (translation and translation.pairs) or (affine and affine.pairs) %}
 <section class="{% if evidence_detail %}chapter{% else %}chapter-cont{% endif %} image-evidence{% if s.report.profile in ['summary', 'newsroom'] and evidence_detail %} evidence-appendix{% endif %}" aria-labelledby="image-evidence-heading">
 <h2 class="chapter-title" id="image-evidence-heading">{% if v.get('number', {}).get('source-evidence') %}<span class="n">{{ v.number['source-evidence'] }}</span>{% endif %}Image evidence</h2>
 <p>{{ v.image_evidence.note }}</p>
@@ -13,21 +14,22 @@
 {% if similarity and similarity.status == 'skipped_trusted_ai_credentials' %}
 <p>{{ similarity.observation }}</p>
 {% else %}
-{% for check, title, label in [(similarity, 'Same-image copy similarity', 'Reflected pair'), (translation, 'Copy similarity without mirroring', 'Non-mirrored pair')] if check %}
+{% for check, title, label in [(similarity, 'Same-image copy similarity', 'Reflected pair'), (translation, 'Copy similarity without mirroring', 'Non-mirrored pair'), (affine, 'Geometric copy comparison', 'Matched source areas')] if check %}
 <div class="image-regional-comparison">
 <h3>{{ title }}</h3>
 <p>{{ check.observation }}</p>
 <p class="caption">{{ check.interpretation }}</p>
-{% if check.schema == 'same-image-copy-similarity/1' %}<p class="caption">This check carries zero weight in AI authorship confidence.</p>{% endif %}
+{% if check.schema in ['same-image-copy-similarity/1', 'same-image-affine-support/1'] %}<p class="caption">This check carries zero weight in AI authorship confidence.</p>{% endif %}
 {% if check.get('basis_text') %}<p class="caption">{{ check.basis_text }}</p>{% endif %}
 {% for pair in check.pairs %}
 <article class="image-evidence-packet" id="image-evidence-{{ pair.id }}">
 <h4>{{ pair.id }} · {{ label }}</h4>
-<div class="evidence-plates evidence-plates-pair">
+{% if pair.get('selected_pixels') %}<p class="caption">White shows the selected comparison area. Area A contains {{ pair.selected_pixels.area_a }} selected pixels. Its projection onto Area B covers {{ pair.selected_pixels.area_b }} pixels.</p>{% endif %}
+<div class="evidence-plates {% if pair.get('selected_pixels') %}evidence-plates-four{% else %}evidence-plates-pair{% endif %}">
 {% for image in pair.images %}
 {% set region = pair.regions[image.role] %}
 <figure>
-{% if image.uri %}<img src="{{ image.uri }}" alt="{{ image.label }} cropped from the submitted image">{% endif %}
+{% if image.uri %}<img src="{{ image.uri }}" alt="{{ image.label }}">{% endif %}
 <figcaption>{{ image.label }} · x {{ region.x }}, y {{ region.y }}, {{ region.w }} × {{ region.h }} px</figcaption>
 </figure>
 {% endfor %}

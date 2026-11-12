@@ -1,0 +1,526 @@
+{
+  "audit": {
+    "aggregate_sha256": "3d8d89aed1284b340f117c3cf474d4915d038a782ce923b2b32a728f38a64952",
+    "cases": 29,
+    "distinct_inputs_per_checkpoint": 105,
+    "groups": 9,
+    "outcome_fields": 136,
+    "status": "verified_without_model_inference"
+  },
+  "commitments": {
+    "aggregate.json": "3d8d89aed1284b340f117c3cf474d4915d038a782ce923b2b32a728f38a64952",
+    "audit.json": "fd61323ef4cd80c11193d72f32e03fdd3559b8abce569b7beaf554fa9be2169e",
+    "cases.json": "a4d13673e633917803002a911f34630bca1354bf8e48afd8c045d5af1f9cd231",
+    "catalog-freeze.json": "e588362f42f5234991311deaa39e9dc1c906fd9f18b2596bafae808d1b0c185a",
+    "current.json": "f063e9a233f9bc87709d4a837e25c87d52f201bde6bd2b8a39345fe860224d6c",
+    "generated-granite.json": "831cb17f1ea68a9f940c7560038630f0d82bee1c325f80d327e7cba3526bd89c",
+    "generated-olmo.json": "56586e071315ec711f8c34fabe5dab7a042b5de65597ebed40967132eb33fde5",
+    "generation-freeze.json": "31de20ec54fc6141a6489026e5945d009270710ea30974b4185cd389d702eb36",
+    "private-outcomes.json": "ee9062442ce9b41cc9ce1c15321b5e7249d487cff15510e65fc8036c3dda0221",
+    "publisher/catalog.json": "351bebdfb8fad0a9eaa8d2e944bff48013d7c0c5015e83068ef8d3dae9064a56",
+    "scoring-freeze.json": "1562d7f8ed4dd0cd4c6ca1dd7ac36889e66a726e29f027761e0fb2145a473035",
+    "second.json": "0d0e71bbd0217cad760a5f0f028b3e3c44843eebd010601133ec6cb21c283c70",
+    "source-plan.json": "e763df60aea2cfd11d7d3550ae0b3837fa748933d14eecd76be2704aa450ea11",
+    "source-receipt.json": "4ce51a3401ec1a0494932e7835065293af676004111fc0834aef5062b679909e"
+  },
+  "exact_comparison_geometry": {
+    "app_entry": "app.evidence.document_revision.compare",
+    "generated_pairs": 11,
+    "hunks_inside_exact_edited_focus": 37,
+    "later_human_deletion_only": 1,
+    "later_human_pairs": 9,
+    "pairs_with_all_hunks_inside_exact_edited_focus": 20
+  },
+  "results": {
+    "admission": {
+      "granite": {
+        "admitted": 9,
+        "attempted": 9
+      },
+      "olmo": {
+        "admitted": 2,
+        "attempted": 9
+      }
+    },
+    "case_sha256": "a4d13673e633917803002a911f34630bca1354bf8e48afd8c045d5af1f9cd231",
+    "classifier_forwards": {
+      "current": 27,
+      "second": 27
+    },
+    "counts": {
+      "before": {
+        "agreement_at_focus": 0,
+        "agreement_flag": 1,
+        "agreement_focus": 0,
+        "agreement_no_flag": 8,
+        "agreement_useful": 0,
+        "agreement_wrong_only": 0,
+        "both_agreement_types": 0,
+        "cases": 9,
+        "changed_agreement_file": 0,
+        "changed_agreement_flag": 0,
+        "changed_agreement_focus": 0,
+        "changed_agreement_no_flag": 9,
+        "changed_agreement_useful": 0,
+        "changed_agreement_wrong_only": 0,
+        "combined_flag": 0,
+        "combined_focus": 0,
+        "combined_no_flag": 9,
+        "combined_useful": 0,
+        "combined_wrong_only": 0,
+        "current_flag": 3,
+        "current_focus": 0,
+        "current_no_flag": 6,
+        "current_useful": 0,
+        "current_wrong_only": 0,
+        "diff_located_focus": 0,
+        "paired_flag": 0,
+        "paired_focus": 0,
+        "paired_no_flag": 9,
+        "paired_useful": 0,
+        "paired_wrong_only": 0,
+        "reference_comparable_focus": 0,
+        "unchanged_agreement_file": 1,
+        "windows_with_changed_agreement": 0,
+        "windows_with_unchanged_agreement": 1
+      },
+      "edited": {
+        "agreement_at_focus": 0,
+        "agreement_flag": 0,
+        "agreement_focus": 0,
+        "agreement_no_flag": 9,
+        "agreement_useful": 0,
+        "agreement_wrong_only": 0,
+        "both_agreement_types": 0,
+        "cases": 9,
+        "changed_agreement_file": 0,
+        "changed_agreement_flag": 0,
+        "changed_agreement_focus": 0,
+        "changed_agreement_no_flag": 9,
+        "changed_agreement_useful": 0,
+        "changed_agreement_wrong_only": 0,
+        "combined_flag": 0,
+        "combined_focus": 0,
+        "combined_no_flag": 9,
+        "combined_useful": 0,
+        "combined_wrong_only": 0,
+        "current_flag": 2,
+        "current_focus": 0,
+        "current_no_flag": 7,
+        "current_useful": 0,
+        "current_wrong_only": 0,
+        "diff_located_focus": 8,
+        "paired_flag": 0,
+        "paired_focus": 0,
+        "paired_no_flag": 9,
+        "paired_useful": 0,
+        "paired_wrong_only": 0,
+        "reference_comparable_focus": 9,
+        "unchanged_agreement_file": 0,
+        "windows_with_changed_agreement": 0,
+        "windows_with_unchanged_agreement": 0
+      },
+      "granite": {
+        "agreement_at_focus": 0,
+        "agreement_flag": 1,
+        "agreement_focus": 0,
+        "agreement_no_flag": 8,
+        "agreement_useful": 1,
+        "agreement_wrong_only": 0,
+        "both_agreement_types": 0,
+        "cases": 9,
+        "changed_agreement_file": 1,
+        "changed_agreement_flag": 1,
+        "changed_agreement_focus": 0,
+        "changed_agreement_no_flag": 8,
+        "changed_agreement_useful": 1,
+        "changed_agreement_wrong_only": 0,
+        "combined_flag": 4,
+        "combined_focus": 4,
+        "combined_no_flag": 5,
+        "combined_useful": 4,
+        "combined_wrong_only": 0,
+        "current_flag": 2,
+        "current_focus": 0,
+        "current_no_flag": 7,
+        "current_useful": 1,
+        "current_wrong_only": 1,
+        "diff_located_focus": 9,
+        "paired_flag": 4,
+        "paired_focus": 4,
+        "paired_no_flag": 5,
+        "paired_useful": 4,
+        "paired_wrong_only": 0,
+        "reference_comparable_focus": 9,
+        "unchanged_agreement_file": 0,
+        "windows_with_changed_agreement": 1,
+        "windows_with_unchanged_agreement": 0
+      },
+      "olmo": {
+        "agreement_at_focus": 0,
+        "agreement_flag": 0,
+        "agreement_focus": 0,
+        "agreement_no_flag": 2,
+        "agreement_useful": 0,
+        "agreement_wrong_only": 0,
+        "both_agreement_types": 0,
+        "cases": 2,
+        "changed_agreement_file": 0,
+        "changed_agreement_flag": 0,
+        "changed_agreement_focus": 0,
+        "changed_agreement_no_flag": 2,
+        "changed_agreement_useful": 0,
+        "changed_agreement_wrong_only": 0,
+        "combined_flag": 0,
+        "combined_focus": 0,
+        "combined_no_flag": 2,
+        "combined_useful": 0,
+        "combined_wrong_only": 0,
+        "current_flag": 0,
+        "current_focus": 0,
+        "current_no_flag": 2,
+        "current_useful": 0,
+        "current_wrong_only": 0,
+        "diff_located_focus": 2,
+        "paired_flag": 0,
+        "paired_focus": 0,
+        "paired_no_flag": 2,
+        "paired_useful": 0,
+        "paired_wrong_only": 0,
+        "reference_comparable_focus": 2,
+        "unchanged_agreement_file": 0,
+        "windows_with_changed_agreement": 0,
+        "windows_with_unchanged_agreement": 0
+      }
+    },
+    "distinct_inputs": 105,
+    "follow_up": {
+      "changed_agreement": {
+        "added_false_groups": 0,
+        "added_useful_families": 0,
+        "added_useful_groups": 0,
+        "follow_up": false,
+        "lost_current_useful": 0
+      },
+      "combined": {
+        "added_false_groups": 0,
+        "added_useful_families": 1,
+        "added_useful_groups": 3,
+        "follow_up": false,
+        "lost_current_useful": 0
+      },
+      "paired": {
+        "added_false_groups": 0,
+        "added_useful_families": 1,
+        "added_useful_groups": 3,
+        "follow_up": false,
+        "lost_current_useful": 0
+      }
+    },
+    "freeze_sha256": "1562d7f8ed4dd0cd4c6ca1dd7ac36889e66a726e29f027761e0fb2145a473035",
+    "group_counts": {
+      "before/agreement_flag": 1,
+      "before/agreement_no_flag": 8,
+      "before/changed_agreement_no_flag": 9,
+      "before/combined_no_flag": 9,
+      "before/current_flag": 3,
+      "before/current_no_flag": 6,
+      "before/paired_no_flag": 9,
+      "before/unchanged_agreement_file": 1,
+      "before/windows_with_unchanged_agreement": 1,
+      "edited/agreement_no_flag": 9,
+      "edited/changed_agreement_no_flag": 9,
+      "edited/combined_no_flag": 9,
+      "edited/current_flag": 2,
+      "edited/current_no_flag": 7,
+      "edited/diff_located_focus": 8,
+      "edited/paired_no_flag": 9,
+      "edited/reference_comparable_focus": 9,
+      "granite/agreement_flag": 1,
+      "granite/agreement_no_flag": 8,
+      "granite/agreement_useful": 1,
+      "granite/changed_agreement_file": 1,
+      "granite/changed_agreement_flag": 1,
+      "granite/changed_agreement_no_flag": 8,
+      "granite/changed_agreement_useful": 1,
+      "granite/combined_flag": 4,
+      "granite/combined_focus": 4,
+      "granite/combined_no_flag": 5,
+      "granite/combined_useful": 4,
+      "granite/current_flag": 2,
+      "granite/current_no_flag": 7,
+      "granite/current_useful": 1,
+      "granite/current_wrong_only": 1,
+      "granite/diff_located_focus": 9,
+      "granite/paired_flag": 4,
+      "granite/paired_focus": 4,
+      "granite/paired_no_flag": 5,
+      "granite/paired_useful": 4,
+      "granite/reference_comparable_focus": 9,
+      "granite/windows_with_changed_agreement": 1,
+      "olmo/agreement_no_flag": 2,
+      "olmo/changed_agreement_no_flag": 2,
+      "olmo/combined_no_flag": 2,
+      "olmo/current_no_flag": 2,
+      "olmo/diff_located_focus": 2,
+      "olmo/paired_no_flag": 2,
+      "olmo/reference_comparable_focus": 2
+    },
+    "method": {
+      "advance": "For a statistical follow-up, preserve all useful current locations, recover at least two additional groups across both generation families and add at most one false-flag group to same-window agreement on the later dated human revisions. Before-versus-self is only a scope control. A single publisher remains development evidence. No serving confidence change.",
+      "agreement": "Retain a current positive if the second checkpoint is positive on the same native input.",
+      "changed_agreement": "Retain agreement only when the exact model input differs between earlier and later.",
+      "combined": "Compare changed-agreement selection with or without an additional paired-direction focus.",
+      "controls": "Before and after versions of the exact source excerpt are dated ordinary-writing controls. Use one generated replacement of the before center from each independently pinned model. Require a valid single output and preserve all flanking sentences.",
+      "current": "First six positive later native windows in source order. Raw comparison point remains .5.",
+      "geometry": "Compare the actual app draft comparator's exact changed-token ranges as source evidence. An ordinary author revision is a genuine difference and never an AI attribution.",
+      "outcomes": "Useful generated localization requires .30 non-whitespace character IoU and at least .50 recall. Count exact focus, wrong-only and missed separately. For genuine controls report group-level flags and distinguish exact unchanged native inputs from changed inputs and changed focus.",
+      "paired_direction": "Earlier and later complete native context must have the same exact flanking sentences. Only mark the changed focus if both independent later AI-like odds are at least twice the earlier odds. This is the same directional rule used for paired email research."
+    },
+    "outcomes_sha256": "ee9062442ce9b41cc9ce1c15321b5e7249d487cff15510e65fc8036c3dda0221",
+    "schema": "chipmunk.writing-reference-revision-transfer/1",
+    "score_sha256": {
+      "current": "f063e9a233f9bc87709d4a837e25c87d52f201bde6bd2b8a39345fe860224d6c",
+      "second": "0d0e71bbd0217cad760a5f0f028b3e3c44843eebd010601133ec6cb21c283c70"
+    },
+    "source_receipt_sha256": "4ce51a3401ec1a0494932e7835065293af676004111fc0834aef5062b679909e"
+  },
+  "schema": "chipmunk.writing-reference-revision-public-summary/1",
+  "serving_change": false,
+  "source": {
+    "catalog_url": "https://api.crossref.org/journals/2046-1402/works",
+    "cutoff": "2017-06-30",
+    "dispositions": {
+      "author_or_date_mismatch": 1,
+      "no_qualified_exact_edit": 53,
+      "selected": 9,
+      "unsupported_publisher_metadata": 7
+    },
+    "held_pairs": 70,
+    "history": [
+      {
+        "matched_sources": 0,
+        "packet": "previous-agreement",
+        "source_sha256": "8db9676dfde8ed023cbe79d92f82d2bea2544b18537c56baed1dbd6e29b0234b",
+        "text_entries": 100
+      },
+      {
+        "matched_sources": 0,
+        "packet": "llmtrace",
+        "source_sha256": "6d4431a85a70916ba7af5c19f062eed6c277183d7b4bb5c6cea42f520e717f48",
+        "text_entries": 38429
+      },
+      {
+        "matched_sources": 0,
+        "packet": "elife-v301",
+        "source_sha256": "d690f9466193dafb94a054c02fb27bade0bc6d04819cafa9cc8b846acb97b16f",
+        "text_entries": 12
+      },
+      {
+        "matched_sources": 0,
+        "packet": "elife-v286",
+        "source_sha256": "a8676385711bf3d66165a6c3a8add0d8aee7881288302388ca88739e8e30389b",
+        "text_entries": 26
+      },
+      {
+        "matched_sources": 0,
+        "packet": "elife-v272",
+        "source_sha256": "063c960dafe75757b3b6483ab88802c9c6cd78fa6e0a347014ac148c283d758f",
+        "text_entries": 5
+      },
+      {
+        "matched_sources": 0,
+        "packet": "opai-v257",
+        "source_sha256": "4e43edf33c695a8a4f757d079089dab85a632c648762554bac9f5cc573bb923b",
+        "text_entries": 60
+      }
+    ],
+    "published_revisions": [
+      {
+        "after_date": [
+          2017,
+          6,
+          12
+        ],
+        "before_date": [
+          2017,
+          2,
+          9
+        ],
+        "doi_after": "10.12688/f1000research.10427.2",
+        "doi_before": "10.12688/f1000research.10427.1",
+        "group": "10427",
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "xml_sha256": {
+          "after": "63fac993805f1b8e99e76a59e3d814f3de6925b1d6c63d3ab7685c74652eb72e",
+          "before": "6e71920168a3175827533b64230feaa24c72b98d669bb1953261727209e61d96"
+        }
+      },
+      {
+        "after_date": [
+          2017,
+          3,
+          17
+        ],
+        "before_date": [
+          2016,
+          5,
+          19
+        ],
+        "doi_after": "10.12688/f1000research.8729.2",
+        "doi_before": "10.12688/f1000research.8729.1",
+        "group": "8729",
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "xml_sha256": {
+          "after": "7642ce380ee7fde7ed7953f3f7d471b3bf80cf8f12d94dfc06755434eb19f7f0",
+          "before": "63bc0fcfdd0913fa18a31aded12fbaf2e401ecaea6f47f4e225a188c6c2e6f1d"
+        }
+      },
+      {
+        "after_date": [
+          2017,
+          4,
+          4
+        ],
+        "before_date": [
+          2017,
+          1,
+          10
+        ],
+        "doi_after": "10.12688/f1000research.10569.2",
+        "doi_before": "10.12688/f1000research.10569.1",
+        "group": "10569",
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "xml_sha256": {
+          "after": "45647e9aade5204b5729be7be7457300daa947553a5ead0669e1390c76fa462f",
+          "before": "1144476ec52cfe00d0fd469b193991a9a10609f846170362a82ff0ca761e358d"
+        }
+      },
+      {
+        "after_date": [
+          2017,
+          6,
+          22
+        ],
+        "before_date": [
+          2017,
+          5,
+          12
+        ],
+        "doi_after": "10.12688/f1000research.11432.2",
+        "doi_before": "10.12688/f1000research.11432.1",
+        "group": "11432",
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "xml_sha256": {
+          "after": "2de6ef4574061c84a5627fb300b8f16603fcba8c6cc8f3cdaae4da4b7ab567f4",
+          "before": "0e9b19c5d18654469d054ad1301f2cf4052e206bc2545407839fa0a3a6b2efee"
+        }
+      },
+      {
+        "after_date": [
+          2017,
+          6,
+          19
+        ],
+        "before_date": [
+          2017,
+          3,
+          28
+        ],
+        "doi_after": "10.12688/f1000research.11241.2",
+        "doi_before": "10.12688/f1000research.11241.1",
+        "group": "11241",
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "xml_sha256": {
+          "after": "85fdce10b8db4c6f533bb567e54ca42378445ba956d4d800953cd301a2283612",
+          "before": "ff46f3d6558ab0a2b0b76bd3c73cb2f4b049d0a0addc29f414313009a362398b"
+        }
+      },
+      {
+        "after_date": [
+          2017,
+          6,
+          15
+        ],
+        "before_date": [
+          2016,
+          10,
+          17
+        ],
+        "doi_after": "10.12688/f1000research.9203.2",
+        "doi_before": "10.12688/f1000research.9203.1",
+        "group": "9203",
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "xml_sha256": {
+          "after": "ab2c2833a6e753c1f9840e98e26633e223931a64d04bb849babf6c497fddd6fb",
+          "before": "10d642abfd4002612d8b3645c1663a7e9373c9caabe758738212f19588c3f611"
+        }
+      },
+      {
+        "after_date": [
+          2017,
+          5,
+          4
+        ],
+        "before_date": [
+          2016,
+          10,
+          13
+        ],
+        "doi_after": "10.12688/f1000research.9544.2",
+        "doi_before": "10.12688/f1000research.9544.1",
+        "group": "9544",
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "xml_sha256": {
+          "after": "be0ecba7206e6c929de7480617f8edb45c1601eccbd0c2db05f0e06139d0f4ea",
+          "before": "b8d41e35459281de866d006204f075a7fb090818860a17571af0fe055f68876d"
+        }
+      },
+      {
+        "after_date": [
+          2017,
+          2,
+          9
+        ],
+        "before_date": [
+          2017,
+          1,
+          13
+        ],
+        "doi_after": "10.12688/f1000research.10568.2",
+        "doi_before": "10.12688/f1000research.10568.1",
+        "group": "10568",
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "xml_sha256": {
+          "after": "edb347af483fcf6e8947c387f386a35b18a5d004fbd05d2d0518343b3a52ff29",
+          "before": "0827e5d81d66de257f6c22b832bf83a3c160acdd33bc451f42568f1047420440"
+        }
+      },
+      {
+        "after_date": [
+          2017,
+          2,
+          17
+        ],
+        "before_date": [
+          2016,
+          8,
+          10
+        ],
+        "doi_after": "10.12688/f1000research.9277.2",
+        "doi_before": "10.12688/f1000research.9277.1",
+        "group": "9277",
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "xml_sha256": {
+          "after": "f7f141e3af4e5b13103a72976decef9a2657a52eca6e160e31b73c1fa89c18c5",
+          "before": "2f3ac4f7ce0471c7a07aa6dbcd3e3ee1f8201c674068beed516ccdfdd6c01d13"
+        }
+      }
+    ],
+    "publisher": "F1000Research",
+    "strict_scout_model_inferences": 0,
+    "strict_scout_pairs": 28,
+    "strict_scout_qualified": 0,
+    "term": "CC BY 4.0"
+  }
+}

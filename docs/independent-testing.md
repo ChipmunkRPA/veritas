@@ -53,6 +53,9 @@ source-compatible redraws and flags on ordinary video.
 The [native word-clock qualification](grid-reserve-word-clocks-2026-11-12.md)
 aligns publisher word intervals with original embedded speech and replays four
 ordinary mouth changes with unchanged soundtracks.
+The [fresh neural mouth fixtures](grid-reserve-neural-mouth-2026-11-12.md)
+replay two original-time and two shifted redraws against their source
+closures, native pictures, and unchanged soundtracks.
 
 The [earlier-audio comparison](audio-reference-comparison-2026-11-11.md#replay-without-the-app)
 replays changed sample ranges, difference waveforms, and playable excerpts
@@ -100,6 +103,9 @@ source speaker in separately assigned selection and held groups.
 The [matching-speaker enrollment test](audio-same-speaker-enrollment-transfer-2026-11-12.md)
 replays 42 mixtures and measures preservation of the known clone interval
 when two or more genuine background speakers are talking.
+The [original-audio boundary study](audio-original-pcm-boundary-transfer-2026-11-12.md)
+replays exact ranges and compares useful locations at fixed and matched
+false-group counts without separating the soundtrack.
 The [controlled room-speech attenuation study](audio-room-reference-transfer-2026-11-12.md)
 reconstructs each changed waveform independently and checks whether improved
 foreground reconstruction recovers short synthetic inserts.

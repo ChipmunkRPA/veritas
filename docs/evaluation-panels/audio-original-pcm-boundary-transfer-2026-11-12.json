@@ -1,0 +1,584 @@
+{
+  "schema": "chipmunk.audio-original-pcm-boundary-transfer/1",
+  "method": {
+    "roles": "Use exact same-speaker clone mixtures. Set points from 12 genuine controls from six selection voices, confirm on eight other clone hosts and their two ordinary counterparts, and diagnose the six point-role clone inserts only after freezing points. Previously scored held expressive and stock trios and two isolated meeting cuts form a separate exposed transfer panel, with existing exact current model scores reused by input hash.",
+    "current": "Use the already approved current voice checkpoint and original mono PCM. Score native 2 s spans starting at seconds 1, 3 and 5 when present. Apply ordinary speech activity admission. Take the maximum eligible raw log-odds and preserve the exact native range. Do not apply out-of-scope customer confidence calibration.",
+    "boundary": "Twenty-four fixed mel-frequency bands from 80 to 7200 Hz. Mean Hann-windowed power from 25 ms frames with 10 ms hops across 160 ms left and right contexts around each boundary, omitting the nearest 20 ms on each side. Compare normalized band distributions with Jensen-Shannon divergence. At fixed 80 ms steps, use the lower of both endpoint divergences of an 800 ms candidate. No model or waveform replacement.",
+    "fusion": "For a boundary range, pair its score with the highest admitted current log-odds from a native 2 s window covering the entire candidate. Standardize both against the median and interquartile range of respective candidates from genuine point inputs with a minimum scale of 1e-6. Score the mean of standardized values and retain the candidate range. Compare each arm alone and together.",
+    "points": "Fixed points strictly exceed each arm's highest genuine point-control response. Report matched retrospective false-group budgets 0, 1 and 2 separately. A useful range needs 0.30 temporal intersection over union and 0.50 edit coverage. Flagging an ordinary control counts as a false source group, including ordinary splices. No room/generator transfer or serving claim follows from a descriptive threshold sweep."
+  },
+  "panels": {
+    "clone_hold": {
+      "edits": 8,
+      "genuine_views": 16,
+      "fixed": {
+        "current": {
+          "ai_flags": 4,
+          "useful_ranges": 1,
+          "false_groups": 5,
+          "unassessed": 0,
+          "background_false_flags": 0
+        },
+        "boundary": {
+          "ai_flags": 1,
+          "useful_ranges": 1,
+          "false_groups": 0,
+          "unassessed": 0,
+          "background_false_flags": 0
+        },
+        "combined": {
+          "ai_flags": 1,
+          "useful_ranges": 1,
+          "false_groups": 0,
+          "unassessed": 0,
+          "background_false_flags": 0
+        }
+      },
+      "useful_ranges_before_points": {
+        "current": 4,
+        "boundary": 2,
+        "combined": 2
+      },
+      "equal_false_groups": {
+        "0": {
+          "current": {
+            "ai_flags": 1,
+            "useful_ranges": 1,
+            "false_groups": 0,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "boundary": {
+            "ai_flags": 1,
+            "useful_ranges": 1,
+            "false_groups": 0,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "combined": {
+            "ai_flags": 1,
+            "useful_ranges": 1,
+            "false_groups": 0,
+            "unassessed": 0,
+            "background_false_flags": 0
+          }
+        },
+        "1": {
+          "current": {
+            "ai_flags": 1,
+            "useful_ranges": 1,
+            "false_groups": 1,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "boundary": {
+            "ai_flags": 2,
+            "useful_ranges": 1,
+            "false_groups": 1,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "combined": {
+            "ai_flags": 2,
+            "useful_ranges": 1,
+            "false_groups": 1,
+            "unassessed": 0,
+            "background_false_flags": 0
+          }
+        },
+        "2": {
+          "current": {
+            "ai_flags": 2,
+            "useful_ranges": 1,
+            "false_groups": 2,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "boundary": {
+            "ai_flags": 3,
+            "useful_ranges": 1,
+            "false_groups": 2,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "combined": {
+            "ai_flags": 2,
+            "useful_ranges": 1,
+            "false_groups": 2,
+            "unassessed": 0,
+            "background_false_flags": 0
+          }
+        }
+      }
+    },
+    "exposed_transfer": {
+      "edits": 6,
+      "genuine_views": 14,
+      "fixed": {
+        "current": {
+          "ai_flags": 1,
+          "useful_ranges": 1,
+          "false_groups": 1,
+          "unassessed": 1,
+          "background_false_flags": 0
+        },
+        "boundary": {
+          "ai_flags": 2,
+          "useful_ranges": 2,
+          "false_groups": 0,
+          "unassessed": 0,
+          "background_false_flags": 0
+        },
+        "combined": {
+          "ai_flags": 2,
+          "useful_ranges": 1,
+          "false_groups": 0,
+          "unassessed": 1,
+          "background_false_flags": 0
+        }
+      },
+      "useful_ranges_before_points": {
+        "current": 2,
+        "boundary": 3,
+        "combined": 1
+      },
+      "equal_false_groups": {
+        "0": {
+          "current": {
+            "ai_flags": 1,
+            "useful_ranges": 1,
+            "false_groups": 0,
+            "unassessed": 1,
+            "background_false_flags": 0
+          },
+          "boundary": {
+            "ai_flags": 2,
+            "useful_ranges": 2,
+            "false_groups": 0,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "combined": {
+            "ai_flags": 2,
+            "useful_ranges": 1,
+            "false_groups": 0,
+            "unassessed": 1,
+            "background_false_flags": 0
+          }
+        },
+        "1": {
+          "current": {
+            "ai_flags": 2,
+            "useful_ranges": 2,
+            "false_groups": 1,
+            "unassessed": 1,
+            "background_false_flags": 0
+          },
+          "boundary": {
+            "ai_flags": 3,
+            "useful_ranges": 2,
+            "false_groups": 1,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "combined": {
+            "ai_flags": 3,
+            "useful_ranges": 1,
+            "false_groups": 1,
+            "unassessed": 1,
+            "background_false_flags": 0
+          }
+        },
+        "2": {
+          "current": {
+            "ai_flags": 3,
+            "useful_ranges": 2,
+            "false_groups": 2,
+            "unassessed": 1,
+            "background_false_flags": 0
+          },
+          "boundary": {
+            "ai_flags": 4,
+            "useful_ranges": 2,
+            "false_groups": 2,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "combined": {
+            "ai_flags": 3,
+            "useful_ranges": 1,
+            "false_groups": 2,
+            "unassessed": 1,
+            "background_false_flags": 0
+          }
+        }
+      }
+    },
+    "point_positive": {
+      "edits": 6,
+      "genuine_views": 0,
+      "fixed": {
+        "current": {
+          "ai_flags": 0,
+          "useful_ranges": 0,
+          "false_groups": 0,
+          "unassessed": 0,
+          "background_false_flags": 0
+        },
+        "boundary": {
+          "ai_flags": 0,
+          "useful_ranges": 0,
+          "false_groups": 0,
+          "unassessed": 0,
+          "background_false_flags": 0
+        },
+        "combined": {
+          "ai_flags": 1,
+          "useful_ranges": 0,
+          "false_groups": 0,
+          "unassessed": 0,
+          "background_false_flags": 0
+        }
+      },
+      "useful_ranges_before_points": {
+        "current": 2,
+        "boundary": 0,
+        "combined": 1
+      },
+      "equal_false_groups": {
+        "0": {
+          "current": null,
+          "boundary": null,
+          "combined": null
+        },
+        "1": {
+          "current": null,
+          "boundary": null,
+          "combined": null
+        },
+        "2": {
+          "current": null,
+          "boundary": null,
+          "combined": null
+        }
+      }
+    },
+    "all_held": {
+      "edits": 14,
+      "genuine_views": 30,
+      "fixed": {
+        "current": {
+          "ai_flags": 5,
+          "useful_ranges": 2,
+          "false_groups": 6,
+          "unassessed": 1,
+          "background_false_flags": 0
+        },
+        "boundary": {
+          "ai_flags": 3,
+          "useful_ranges": 3,
+          "false_groups": 0,
+          "unassessed": 0,
+          "background_false_flags": 0
+        },
+        "combined": {
+          "ai_flags": 3,
+          "useful_ranges": 2,
+          "false_groups": 0,
+          "unassessed": 1,
+          "background_false_flags": 0
+        }
+      },
+      "useful_ranges_before_points": {
+        "current": 6,
+        "boundary": 5,
+        "combined": 3
+      },
+      "equal_false_groups": {
+        "0": {
+          "current": {
+            "ai_flags": 2,
+            "useful_ranges": 2,
+            "false_groups": 0,
+            "unassessed": 1,
+            "background_false_flags": 0
+          },
+          "boundary": {
+            "ai_flags": 3,
+            "useful_ranges": 3,
+            "false_groups": 0,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "combined": {
+            "ai_flags": 3,
+            "useful_ranges": 2,
+            "false_groups": 0,
+            "unassessed": 1,
+            "background_false_flags": 0
+          }
+        },
+        "1": {
+          "current": {
+            "ai_flags": 2,
+            "useful_ranges": 2,
+            "false_groups": 1,
+            "unassessed": 1,
+            "background_false_flags": 0
+          },
+          "boundary": {
+            "ai_flags": 4,
+            "useful_ranges": 3,
+            "false_groups": 1,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "combined": {
+            "ai_flags": 4,
+            "useful_ranges": 2,
+            "false_groups": 1,
+            "unassessed": 1,
+            "background_false_flags": 0
+          }
+        },
+        "2": {
+          "current": {
+            "ai_flags": 3,
+            "useful_ranges": 2,
+            "false_groups": 2,
+            "unassessed": 1,
+            "background_false_flags": 0
+          },
+          "boundary": {
+            "ai_flags": 5,
+            "useful_ranges": 3,
+            "false_groups": 2,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "combined": {
+            "ai_flags": 4,
+            "useful_ranges": 2,
+            "false_groups": 2,
+            "unassessed": 1,
+            "background_false_flags": 0
+          }
+        }
+      }
+    },
+    "expressive": {
+      "edits": 3,
+      "genuine_views": 6,
+      "fixed": {
+        "current": {
+          "ai_flags": 1,
+          "useful_ranges": 1,
+          "false_groups": 1,
+          "unassessed": 0,
+          "background_false_flags": 0
+        },
+        "boundary": {
+          "ai_flags": 2,
+          "useful_ranges": 2,
+          "false_groups": 0,
+          "unassessed": 0,
+          "background_false_flags": 0
+        },
+        "combined": {
+          "ai_flags": 1,
+          "useful_ranges": 1,
+          "false_groups": 0,
+          "unassessed": 0,
+          "background_false_flags": 0
+        }
+      },
+      "useful_ranges_before_points": {
+        "current": 1,
+        "boundary": 2,
+        "combined": 1
+      },
+      "equal_false_groups": {
+        "0": {
+          "current": {
+            "ai_flags": 1,
+            "useful_ranges": 1,
+            "false_groups": 0,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "boundary": {
+            "ai_flags": 2,
+            "useful_ranges": 2,
+            "false_groups": 0,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "combined": {
+            "ai_flags": 1,
+            "useful_ranges": 1,
+            "false_groups": 0,
+            "unassessed": 0,
+            "background_false_flags": 0
+          }
+        },
+        "1": {
+          "current": {
+            "ai_flags": 1,
+            "useful_ranges": 1,
+            "false_groups": 1,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "boundary": {
+            "ai_flags": 3,
+            "useful_ranges": 2,
+            "false_groups": 1,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "combined": {
+            "ai_flags": 2,
+            "useful_ranges": 1,
+            "false_groups": 1,
+            "unassessed": 0,
+            "background_false_flags": 0
+          }
+        },
+        "2": {
+          "current": {
+            "ai_flags": 2,
+            "useful_ranges": 1,
+            "false_groups": 2,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "boundary": {
+            "ai_flags": 3,
+            "useful_ranges": 2,
+            "false_groups": 2,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "combined": {
+            "ai_flags": 2,
+            "useful_ranges": 1,
+            "false_groups": 2,
+            "unassessed": 0,
+            "background_false_flags": 0
+          }
+        }
+      }
+    },
+    "stock": {
+      "edits": 3,
+      "genuine_views": 6,
+      "fixed": {
+        "current": {
+          "ai_flags": 0,
+          "useful_ranges": 0,
+          "false_groups": 0,
+          "unassessed": 0,
+          "background_false_flags": 0
+        },
+        "boundary": {
+          "ai_flags": 0,
+          "useful_ranges": 0,
+          "false_groups": 0,
+          "unassessed": 0,
+          "background_false_flags": 0
+        },
+        "combined": {
+          "ai_flags": 1,
+          "useful_ranges": 0,
+          "false_groups": 0,
+          "unassessed": 0,
+          "background_false_flags": 0
+        }
+      },
+      "useful_ranges_before_points": {
+        "current": 1,
+        "boundary": 1,
+        "combined": 0
+      },
+      "equal_false_groups": {
+        "0": {
+          "current": {
+            "ai_flags": 1,
+            "useful_ranges": 1,
+            "false_groups": 0,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "boundary": {
+            "ai_flags": 1,
+            "useful_ranges": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "combined": {
+            "ai_flags": 1,
+            "useful_ranges": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "background_false_flags": 0
+          }
+        },
+        "1": {
+          "current": {
+            "ai_flags": 2,
+            "useful_ranges": 1,
+            "false_groups": 1,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "boundary": {
+            "ai_flags": 1,
+            "useful_ranges": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "combined": {
+            "ai_flags": 1,
+            "useful_ranges": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "background_false_flags": 0
+          }
+        },
+        "2": {
+          "current": {
+            "ai_flags": 2,
+            "useful_ranges": 1,
+            "false_groups": 2,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "boundary": {
+            "ai_flags": 2,
+            "useful_ranges": 0,
+            "false_groups": 2,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "combined": {
+            "ai_flags": 2,
+            "useful_ranges": 0,
+            "false_groups": 2,
+            "unassessed": 0,
+            "background_false_flags": 0
+          }
+        }
+      }
+    }
+  },
+  "commitments": {
+    "point": "4082a5802761ee892d5ff43e1834d2db0099dd5927de8b1698cc436c7e577d2e",
+    "held": "d9b1c15cec85a74d9b69e3bad10f16cfd77c4457c85e6d1e30cc4bf0902d4ec1",
+    "alternate": "cd0dcc7142edfcca6c50088cced882f06f531d3dd284ae02d8678b2987239d44",
+    "freeze": "88b4c6d900fd9f1d6feba180920a458a138d3720191eb66b71152c7719d194de",
+    "roster": "239552c9b1ca93fb1a3a898509324f348165c3c9869e5b088fa0189a8b4b8b83",
+    "points": "16003a22bed589eaa4f8ff3428ab9189d1b58467e64903f3a7122871471fee64"
+  }
+}

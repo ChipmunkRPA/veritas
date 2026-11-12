@@ -1,0 +1,501 @@
+{
+  "advances": {
+    "jpeg75": true,
+    "png": true
+  },
+  "elapsed_s": 109.757,
+  "freeze_sha256": "da02bd2f68caeb17659ab7dcbb9352f4eb149a1f361b860d1edaae31093f5416",
+  "frozen_aggregate_sha256": "8f9df7adff7e1267a60c6cf17f9a79263dc0e31b606d67fc74f8de7aaaf59440",
+  "frozen_protocol": {
+    "advance": "Per panel and format: at least six useful feathered locations, at least eight assessed resized originals, at most four ordinary highlights (no more than one on resized originals), and zero comparable hard controls.",
+    "candidate_kernels": [
+      "BICUBIC",
+      "BILINEAR",
+      "LANCZOS"
+    ],
+    "code_sha256": {
+      "image_background_patch_score.py": "cb854082628636833e2fd005e954d0bdb7c78362e58ee98632f1ba4153224d5a",
+      "image_background_patch_transfer.py": "da6ba064bc850d7bbc59b605c29305251d317cfc186ccb3d652cf713080f9dfe",
+      "image_boundary_blend_transfer.py": "fc65a5e3f064d74a5cd6fa528d9115aee92cc8eb9e04cb6dee13398e03388aa0",
+      "image_flux_detector_comparison_v280.py": "2a423629be60a7ed31478d37dca5c3ce3b4a84031b95d178deddd12388f1327d",
+      "image_reference_resize_transfer.py": "f9379f29f7c0f9d07b49e00fce83abc4a1697e2579dac645fed1493bd9d851f8",
+      "reference_alignment.py": "5c2504e09d2f6392dbb4e3948016ceb7b8c592947732a29fe2d8f7d401507428",
+      "reference_compare.py": "e436052ad1a0b70ab29c180be88c72e868ed8f701031c6e1f10cecda5bb47063"
+    },
+    "formats": [
+      "png",
+      "jpeg75"
+    ],
+    "intake_commitments": [
+      {
+        "attempts.jsonl": "3b8291b96634bca1920bddfd9239a53d69e143ea8efc74e565fd7406e749f9ce",
+        "plan.json": "2fc63a2d9f666ce2e593cb7c6b503120661b74a33dbf88f297e34d96ae3c3d7b",
+        "result.json": "fb0aafa7d109ca3e7fda3256fbd9fdf0e3b2afca265081092552b54cc8388731"
+      },
+      {
+        "attempts.jsonl": "006a125678341700c243754a423c480b41bd86029a70f689ff1e7a467fc7fde7",
+        "plan.json": "a2176e567d71f2a80178adec7fb55e34007f6ad3114f9baf09837e233197fc34",
+        "result.json": "3d849ad48453c79002aa78d2d9cc8c7aeecc9f1979008060244c0bd01e065e86"
+      }
+    ],
+    "numpy": "2.2.6",
+    "opencv": "5.0.0",
+    "pillow": "12.3.0",
+    "roles": [
+      "sharp",
+      "feathered",
+      "resized_original",
+      "earlier_jpeg",
+      "global_contrast",
+      "cropped_and_resized",
+      "rotated_and_resized",
+      "unrelated"
+    ],
+    "scales": [
+      0.67,
+      0.82,
+      1.17
+    ],
+    "schema": "chipmunk.image-reference-resize-transfer/1",
+    "thresholds": {
+      "aspect_drift": 0.008,
+      "iou": 0.3,
+      "maximum_scale": 1.5,
+      "minimum_scale": 0.5,
+      "minimum_vote": 2,
+      "recall": 0.5
+    }
+  },
+  "independent_local_audit": {
+    "advances": {
+      "jpeg75": true,
+      "png": true
+    },
+    "by_scale": {
+      "jpeg75 / 0.67 / cropped_and_resized / comparable": 0,
+      "jpeg75 / 0.67 / cropped_and_resized / useful": 0,
+      "jpeg75 / 0.67 / earlier_jpeg / comparable": 8,
+      "jpeg75 / 0.67 / earlier_jpeg / useful": 0,
+      "jpeg75 / 0.67 / feathered / comparable": 8,
+      "jpeg75 / 0.67 / feathered / useful": 7,
+      "jpeg75 / 0.67 / global_contrast / comparable": 8,
+      "jpeg75 / 0.67 / global_contrast / useful": 0,
+      "jpeg75 / 0.67 / resized_original / comparable": 8,
+      "jpeg75 / 0.67 / resized_original / useful": 0,
+      "jpeg75 / 0.67 / rotated_and_resized / comparable": 0,
+      "jpeg75 / 0.67 / rotated_and_resized / useful": 0,
+      "jpeg75 / 0.67 / sharp / comparable": 7,
+      "jpeg75 / 0.67 / sharp / useful": 6,
+      "jpeg75 / 0.67 / unrelated / comparable": 0,
+      "jpeg75 / 0.67 / unrelated / useful": 0,
+      "jpeg75 / 0.82 / cropped_and_resized / comparable": 0,
+      "jpeg75 / 0.82 / cropped_and_resized / useful": 0,
+      "jpeg75 / 0.82 / earlier_jpeg / comparable": 7,
+      "jpeg75 / 0.82 / earlier_jpeg / useful": 0,
+      "jpeg75 / 0.82 / feathered / comparable": 7,
+      "jpeg75 / 0.82 / feathered / useful": 7,
+      "jpeg75 / 0.82 / global_contrast / comparable": 7,
+      "jpeg75 / 0.82 / global_contrast / useful": 0,
+      "jpeg75 / 0.82 / resized_original / comparable": 7,
+      "jpeg75 / 0.82 / resized_original / useful": 0,
+      "jpeg75 / 0.82 / rotated_and_resized / comparable": 0,
+      "jpeg75 / 0.82 / rotated_and_resized / useful": 0,
+      "jpeg75 / 0.82 / sharp / comparable": 7,
+      "jpeg75 / 0.82 / sharp / useful": 7,
+      "jpeg75 / 0.82 / unrelated / comparable": 0,
+      "jpeg75 / 0.82 / unrelated / useful": 0,
+      "jpeg75 / 1.17 / cropped_and_resized / comparable": 0,
+      "jpeg75 / 1.17 / cropped_and_resized / useful": 0,
+      "jpeg75 / 1.17 / earlier_jpeg / comparable": 5,
+      "jpeg75 / 1.17 / earlier_jpeg / useful": 0,
+      "jpeg75 / 1.17 / feathered / comparable": 3,
+      "jpeg75 / 1.17 / feathered / useful": 3,
+      "jpeg75 / 1.17 / global_contrast / comparable": 5,
+      "jpeg75 / 1.17 / global_contrast / useful": 0,
+      "jpeg75 / 1.17 / resized_original / comparable": 5,
+      "jpeg75 / 1.17 / resized_original / useful": 0,
+      "jpeg75 / 1.17 / rotated_and_resized / comparable": 0,
+      "jpeg75 / 1.17 / rotated_and_resized / useful": 0,
+      "jpeg75 / 1.17 / sharp / comparable": 3,
+      "jpeg75 / 1.17 / sharp / useful": 3,
+      "jpeg75 / 1.17 / unrelated / comparable": 0,
+      "jpeg75 / 1.17 / unrelated / useful": 0,
+      "png / 0.67 / cropped_and_resized / comparable": 0,
+      "png / 0.67 / cropped_and_resized / useful": 0,
+      "png / 0.67 / earlier_jpeg / comparable": 8,
+      "png / 0.67 / earlier_jpeg / useful": 0,
+      "png / 0.67 / feathered / comparable": 8,
+      "png / 0.67 / feathered / useful": 7,
+      "png / 0.67 / global_contrast / comparable": 8,
+      "png / 0.67 / global_contrast / useful": 0,
+      "png / 0.67 / resized_original / comparable": 8,
+      "png / 0.67 / resized_original / useful": 0,
+      "png / 0.67 / rotated_and_resized / comparable": 0,
+      "png / 0.67 / rotated_and_resized / useful": 0,
+      "png / 0.67 / sharp / comparable": 8,
+      "png / 0.67 / sharp / useful": 7,
+      "png / 0.67 / unrelated / comparable": 0,
+      "png / 0.67 / unrelated / useful": 0,
+      "png / 0.82 / cropped_and_resized / comparable": 0,
+      "png / 0.82 / cropped_and_resized / useful": 0,
+      "png / 0.82 / earlier_jpeg / comparable": 7,
+      "png / 0.82 / earlier_jpeg / useful": 0,
+      "png / 0.82 / feathered / comparable": 7,
+      "png / 0.82 / feathered / useful": 7,
+      "png / 0.82 / global_contrast / comparable": 7,
+      "png / 0.82 / global_contrast / useful": 0,
+      "png / 0.82 / resized_original / comparable": 7,
+      "png / 0.82 / resized_original / useful": 0,
+      "png / 0.82 / rotated_and_resized / comparable": 0,
+      "png / 0.82 / rotated_and_resized / useful": 0,
+      "png / 0.82 / sharp / comparable": 7,
+      "png / 0.82 / sharp / useful": 7,
+      "png / 0.82 / unrelated / comparable": 0,
+      "png / 0.82 / unrelated / useful": 0,
+      "png / 1.17 / cropped_and_resized / comparable": 0,
+      "png / 1.17 / cropped_and_resized / useful": 0,
+      "png / 1.17 / earlier_jpeg / comparable": 5,
+      "png / 1.17 / earlier_jpeg / useful": 0,
+      "png / 1.17 / feathered / comparable": 3,
+      "png / 1.17 / feathered / useful": 3,
+      "png / 1.17 / global_contrast / comparable": 5,
+      "png / 1.17 / global_contrast / useful": 0,
+      "png / 1.17 / resized_original / comparable": 6,
+      "png / 1.17 / resized_original / useful": 0,
+      "png / 1.17 / rotated_and_resized / comparable": 0,
+      "png / 1.17 / rotated_and_resized / useful": 0,
+      "png / 1.17 / sharp / comparable": 3,
+      "png / 1.17 / sharp / useful": 3,
+      "png / 1.17 / unrelated / comparable": 0,
+      "png / 1.17 / unrelated / useful": 0
+    },
+    "counts": {
+      "encoded_hashes": 384,
+      "overlap_measurements": 768,
+      "qualified_assets": 96,
+      "truth_hashes": 384
+    },
+    "crop_projections": 85,
+    "exact_repeat_rows": 384,
+    "photo_groups": 24,
+    "photographer_groups": 24,
+    "receipt_sha256": "deca11f1c3faf9da200d4fc61edd3d97bb7f3e811723132de9e1306e5fa96146",
+    "replay_aggregate_sha256": "906aaedcbdb4a971567a58826ac1223e2e62c8c1488686adce17aba120ca39c3",
+    "status_counts": {
+      "jpeg75 / comparable": 95,
+      "jpeg75 / resize_delivery_unresolved": 1,
+      "jpeg75 / same_framing_unresolved": 96,
+      "png / comparable": 97,
+      "png / same_framing_unresolved": 95
+    }
+  },
+  "journal_sha256": {
+    "earlier": "cd096a73b307cfdee3a7ff923d0e3211e411465b6ad5528a95abfc809e493cac",
+    "later": "7ea5c26d072242de283f550b97cd160ceb9ad350d0a28da60e9187f0e5505582"
+  },
+  "published_scope": "Aggregate same-framing resize comparison. Source photos and photographers are distinct between panels and have earlier project exposure. Whole-artifact commitments only.",
+  "results": {
+    "earlier": {
+      "jpeg75": {
+        "cropped_and_resized": {
+          "candidate_selected": 0,
+          "candidate_useful": 0,
+          "comparable": 0,
+          "incumbent_comparable": 0,
+          "incumbent_selected": 0,
+          "incumbent_useful": 0,
+          "views": 12
+        },
+        "earlier_jpeg": {
+          "candidate_selected": 1,
+          "candidate_useful": 0,
+          "comparable": 9,
+          "incumbent_comparable": 0,
+          "incumbent_selected": 0,
+          "incumbent_useful": 0,
+          "views": 12
+        },
+        "feathered": {
+          "candidate_selected": 7,
+          "candidate_useful": 7,
+          "comparable": 8,
+          "incumbent_comparable": 0,
+          "incumbent_selected": 0,
+          "incumbent_useful": 0,
+          "views": 12
+        },
+        "global_contrast": {
+          "candidate_selected": 1,
+          "candidate_useful": 0,
+          "comparable": 9,
+          "incumbent_comparable": 0,
+          "incumbent_selected": 0,
+          "incumbent_useful": 0,
+          "views": 12
+        },
+        "resized_original": {
+          "candidate_selected": 0,
+          "candidate_useful": 0,
+          "comparable": 9,
+          "incumbent_comparable": 0,
+          "incumbent_selected": 0,
+          "incumbent_useful": 0,
+          "views": 12
+        },
+        "rotated_and_resized": {
+          "candidate_selected": 0,
+          "candidate_useful": 0,
+          "comparable": 0,
+          "incumbent_comparable": 0,
+          "incumbent_selected": 0,
+          "incumbent_useful": 0,
+          "views": 12
+        },
+        "sharp": {
+          "candidate_selected": 6,
+          "candidate_useful": 6,
+          "comparable": 7,
+          "incumbent_comparable": 0,
+          "incumbent_selected": 0,
+          "incumbent_useful": 0,
+          "views": 12
+        },
+        "unrelated": {
+          "candidate_selected": 0,
+          "candidate_useful": 0,
+          "comparable": 0,
+          "incumbent_comparable": 0,
+          "incumbent_selected": 0,
+          "incumbent_useful": 0,
+          "views": 12
+        }
+      },
+      "png": {
+        "cropped_and_resized": {
+          "candidate_selected": 0,
+          "candidate_useful": 0,
+          "comparable": 0,
+          "incumbent_comparable": 0,
+          "incumbent_selected": 0,
+          "incumbent_useful": 0,
+          "views": 12
+        },
+        "earlier_jpeg": {
+          "candidate_selected": 1,
+          "candidate_useful": 0,
+          "comparable": 9,
+          "incumbent_comparable": 0,
+          "incumbent_selected": 0,
+          "incumbent_useful": 0,
+          "views": 12
+        },
+        "feathered": {
+          "candidate_selected": 7,
+          "candidate_useful": 7,
+          "comparable": 8,
+          "incumbent_comparable": 0,
+          "incumbent_selected": 0,
+          "incumbent_useful": 0,
+          "views": 12
+        },
+        "global_contrast": {
+          "candidate_selected": 1,
+          "candidate_useful": 0,
+          "comparable": 9,
+          "incumbent_comparable": 0,
+          "incumbent_selected": 0,
+          "incumbent_useful": 0,
+          "views": 12
+        },
+        "resized_original": {
+          "candidate_selected": 0,
+          "candidate_useful": 0,
+          "comparable": 9,
+          "incumbent_comparable": 0,
+          "incumbent_selected": 0,
+          "incumbent_useful": 0,
+          "views": 12
+        },
+        "rotated_and_resized": {
+          "candidate_selected": 0,
+          "candidate_useful": 0,
+          "comparable": 0,
+          "incumbent_comparable": 0,
+          "incumbent_selected": 0,
+          "incumbent_useful": 0,
+          "views": 12
+        },
+        "sharp": {
+          "candidate_selected": 8,
+          "candidate_useful": 7,
+          "comparable": 8,
+          "incumbent_comparable": 0,
+          "incumbent_selected": 0,
+          "incumbent_useful": 0,
+          "views": 12
+        },
+        "unrelated": {
+          "candidate_selected": 0,
+          "candidate_useful": 0,
+          "comparable": 0,
+          "incumbent_comparable": 0,
+          "incumbent_selected": 0,
+          "incumbent_useful": 0,
+          "views": 12
+        }
+      }
+    },
+    "later": {
+      "jpeg75": {
+        "cropped_and_resized": {
+          "candidate_selected": 0,
+          "candidate_useful": 0,
+          "comparable": 0,
+          "incumbent_comparable": 0,
+          "incumbent_selected": 0,
+          "incumbent_useful": 0,
+          "views": 12
+        },
+        "earlier_jpeg": {
+          "candidate_selected": 1,
+          "candidate_useful": 0,
+          "comparable": 11,
+          "incumbent_comparable": 0,
+          "incumbent_selected": 0,
+          "incumbent_useful": 0,
+          "views": 12
+        },
+        "feathered": {
+          "candidate_selected": 10,
+          "candidate_useful": 10,
+          "comparable": 10,
+          "incumbent_comparable": 0,
+          "incumbent_selected": 0,
+          "incumbent_useful": 0,
+          "views": 12
+        },
+        "global_contrast": {
+          "candidate_selected": 1,
+          "candidate_useful": 0,
+          "comparable": 11,
+          "incumbent_comparable": 0,
+          "incumbent_selected": 0,
+          "incumbent_useful": 0,
+          "views": 12
+        },
+        "resized_original": {
+          "candidate_selected": 0,
+          "candidate_useful": 0,
+          "comparable": 11,
+          "incumbent_comparable": 0,
+          "incumbent_selected": 0,
+          "incumbent_useful": 0,
+          "views": 12
+        },
+        "rotated_and_resized": {
+          "candidate_selected": 0,
+          "candidate_useful": 0,
+          "comparable": 0,
+          "incumbent_comparable": 0,
+          "incumbent_selected": 0,
+          "incumbent_useful": 0,
+          "views": 12
+        },
+        "sharp": {
+          "candidate_selected": 10,
+          "candidate_useful": 10,
+          "comparable": 10,
+          "incumbent_comparable": 0,
+          "incumbent_selected": 0,
+          "incumbent_useful": 0,
+          "views": 12
+        },
+        "unrelated": {
+          "candidate_selected": 0,
+          "candidate_useful": 0,
+          "comparable": 0,
+          "incumbent_comparable": 0,
+          "incumbent_selected": 0,
+          "incumbent_useful": 0,
+          "views": 12
+        }
+      },
+      "png": {
+        "cropped_and_resized": {
+          "candidate_selected": 0,
+          "candidate_useful": 0,
+          "comparable": 0,
+          "incumbent_comparable": 0,
+          "incumbent_selected": 0,
+          "incumbent_useful": 0,
+          "views": 12
+        },
+        "earlier_jpeg": {
+          "candidate_selected": 0,
+          "candidate_useful": 0,
+          "comparable": 11,
+          "incumbent_comparable": 0,
+          "incumbent_selected": 0,
+          "incumbent_useful": 0,
+          "views": 12
+        },
+        "feathered": {
+          "candidate_selected": 10,
+          "candidate_useful": 10,
+          "comparable": 10,
+          "incumbent_comparable": 0,
+          "incumbent_selected": 0,
+          "incumbent_useful": 0,
+          "views": 12
+        },
+        "global_contrast": {
+          "candidate_selected": 0,
+          "candidate_useful": 0,
+          "comparable": 11,
+          "incumbent_comparable": 0,
+          "incumbent_selected": 0,
+          "incumbent_useful": 0,
+          "views": 12
+        },
+        "resized_original": {
+          "candidate_selected": 0,
+          "candidate_useful": 0,
+          "comparable": 12,
+          "incumbent_comparable": 0,
+          "incumbent_selected": 0,
+          "incumbent_useful": 0,
+          "views": 12
+        },
+        "rotated_and_resized": {
+          "candidate_selected": 0,
+          "candidate_useful": 0,
+          "comparable": 0,
+          "incumbent_comparable": 0,
+          "incumbent_selected": 0,
+          "incumbent_useful": 0,
+          "views": 12
+        },
+        "sharp": {
+          "candidate_selected": 10,
+          "candidate_useful": 10,
+          "comparable": 10,
+          "incumbent_comparable": 0,
+          "incumbent_selected": 0,
+          "incumbent_useful": 0,
+          "views": 12
+        },
+        "unrelated": {
+          "candidate_selected": 0,
+          "candidate_useful": 0,
+          "comparable": 0,
+          "incumbent_comparable": 0,
+          "incumbent_selected": 0,
+          "incumbent_useful": 0,
+          "views": 12
+        }
+      }
+    }
+  },
+  "schema": "chipmunk.image-reference-resize-transfer/1",
+  "views": 384
+}

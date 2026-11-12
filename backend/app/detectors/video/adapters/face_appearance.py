@@ -11,15 +11,16 @@ from app.core.config import settings
 from app.detectors.image.adapters.common import revisions
 from app.detectors.image.faces import detect_faces
 from app.detectors.video import face_appearance as method
-from app.detectors.video import face_boundary
+from app.detectors.video import face_boundary, face_return
 from app.detectors.video.adapters.common import CPU_ONLY, FULL_DEEP, video_spec
 from app.detectors.video.adapters.face_sequence import FAMILY, FaceSequenceReviewDetector, SequenceInputs
 from app.detectors.video.decode import DecodeError
-from app.engine.detector import ActivationUse, DetectorResult, InputUnit, UnitScore
+from app.engine.detector import ActivationUse, Applicability, DetectorResult, InputUnit, UnitScore
 from app.evidence.face_intervals import bind_tracks
 
 DETECTOR = "vid.review.face_appearance"
 BOUNDARY_BUDGET_S = 8.0
+RETURN_BUDGET_S = 12.0
 COARSE_RESULT_RESERVE_S = 1.0
 
 
@@ -119,24 +120,130 @@ def _refine(coarse, inputs, yunet, recognizer, deadline):
     }
 
 
+def _inspect_return(details, inputs, yunet, recognizer, deadline, incumbent):
+    coverage = {"status": "not_applicable", "reason": "native_scope", "scheduled_frames": 0, "measured_face_frames": 0}
+    details["face_return_check"] = coverage
+    table = inputs.table
+    planned = face_return.schedule(table)
+    if planned is None or settings.face_min_size != 48:
+        return
+    times, scheduled = planned
+    coverage.update(status="unassessed", reason="time_budget", scheduled_frames=len(scheduled))
+    remaining = deadline.remaining() if deadline is not None else None
+    budget = RETURN_BUDGET_S if remaining is None else min(RETURN_BUDGET_S, remaining - COARSE_RESULT_RESERVE_S)
+    if budget <= 0:
+        return
+    stop = time.monotonic() + budget
+    features, face_inputs, scene_inputs = {}, {}, {}
+    try:
+        with closing(inputs.store.iter_many(scheduled, timeout_s=budget)) as frames:
+            for index, rgb in frames:
+                if time.monotonic() >= stop:
+                    return
+                if deadline is not None:
+                    deadline.check("short face return")
+                if not inputs.store.native_pts_verified(index):
+                    coverage["reason"] = "native_timestamp_unverified"
+                    return
+                bgr = cv2.cvtColor(rgb, cv2.COLOR_RGB2BGR)
+                faces = detect_faces(bgr, detector=yunet, min_size=48)
+                if len(faces) > 1:
+                    coverage["reason"] = "multiple_faces"
+                    return
+                face = faces[0] if faces else None
+                observed = _measure(rgb, bgr, index, table, face, recognizer) if face is not None else None
+                vector = None
+                if observed is not None:
+                    vector, face_inputs[index] = observed
+                    vector = method.unit(vector)
+                    coverage["measured_face_frames"] += 1
+                scene_inputs[index] = {"frame_index": index, "pts": table.pts[index], "decoded_rgb_sha256":
+                    face_inputs[index]["decoded_rgb_sha256"] if observed is not None else hashlib.sha256(rgb.tobytes()).hexdigest()}
+                features[index] = face_return.Sample(face, vector, face_return.scene(rgb, face))
+    except (DecodeError, cv2.error, ValueError):
+        coverage["reason"] = "native_measurement_unavailable"
+        return
+    if features.keys() != set(scheduled):
+        coverage["reason"] = "incomplete_native_decode"
+        return
+    if time.monotonic() >= stop:
+        return
+    candidate = face_return.highest(times, scheduled, features)
+    if time.monotonic() >= stop:
+        return
+    if candidate is None:
+        coverage["reason"] = "insufficient_same_shot_context"
+        return
+    coverage.update(status="no_distinct_range", reason=None)
+    if not face_return.distinct(candidate, table, incumbent):
+        return
+    coverage["status"] = "localized"
+    start, end = candidate.start, candidate.end
+    details["face_return"] = {
+        "method": face_return.METHOD, "time_base": table.time_base, "start_pts": table.pts[start], "end_pts": table.pts[end],
+        "start_frame_index": start, "end_frame_index": end,
+        "start_stream_s": table.seconds(start), "end_stream_s": table.seconds(end),
+        "response": candidate.response, "response_hex": candidate.response.hex(),
+        "scene_correlations": list(candidate.scene_correlations),
+        "scene_correlations_hex": [value.hex() for value in candidate.scene_correlations],
+        "anchors": candidate.anchors(), "scheduled_frame_indices": list(scheduled),
+        "support_indices": {role: list(group) for role, group in zip(face_return.ROLES, candidate.support, strict=True)},
+        "frame_inputs": [face_inputs[index] for group in candidate.support for index in group],
+        "scene_frame_inputs": [scene_inputs[index] for index in candidate.scene_frames],
+    }
+
+
+def _with_return(result, inputs, yunet, recognizer, deadline):
+    if not settings.video_face_short_return_review or result.status not in {'ok', 'not_applicable'}:
+        return result
+    incumbent = result.details.get('face_sequence')
+    _inspect_return(result.details, inputs, yunet, recognizer, deadline, incumbent)
+    selected = result.details.get('face_return')
+    if selected is None:
+        return result
+    observed = (f"A brief face appearance change merits review from {selected['start_stream_s']:.3f} "
+                f"to {selected['end_stream_s']:.3f} s.")
+    if result.status == 'ok':
+        result.observed = f"{result.observed} {observed}" if incumbent is not None else observed
+        return result
+    return DetectorResult(status='ok', aggregate=UnitScore('global', selected['response'], 'score'),
+        observed=observed, reference='Sampled face appearances were compared with the surrounding time groups.',
+        reasoning='Motion, expression, lighting and compression can also change appearance. This range carries zero weight in overall AI confidence.',
+        details={**result.details, 'review_only': True}, model_revisions=result.model_revisions)
+
+
 class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
     APPEARANCE = 'opencv.sface.2021dec'
     spec = video_spec(DETECTOR, 'Face appearance transition review', InputUnit.FRAME_BATCH, (), ('series',),
         family=FAMILY, model_ids=(FaceSequenceReviewDetector.YUNET, FaceSequenceReviewDetector.DINO, APPEARANCE),
         needs=('frames', 'faces'), profiles=FULL_DEEP, devices=CPU_ONLY, timeout_s=120., version='0.1.2')
 
+    def applicable(self, ctx):
+        incumbent = super().applicable(ctx)
+        inputs = ctx.outputs.face_review
+        if (not incumbent.ok and settings.video_face_short_return_review and settings.face_min_size == 48
+                and isinstance(inputs, SequenceInputs) and face_return.schedule(inputs.table) is not None):
+            return Applicability(True)
+        return incumbent
+
     def activation_plan(self, ctx):
+        return_inputs = " Up to 64 additional native inputs for the distinct return check." if settings.video_face_short_return_review else ""
         return (*super().activation_plan(ctx), ActivationUse(self.APPEARANCE, 1, '112 px aligned face',
             'One native aligned face at a time; 128 float32 appearance values per retained frame',
-            (f'At most 192 coarse face inputs and {face_boundary.MAX_FRAMES} optional timing inputs.',
+            (f'At most 192 coarse face inputs and {face_boundary.MAX_FRAMES} optional timing inputs.{return_inputs}',
              'Face vectors stay in working memory.')))
 
     def run(self, ctx):
         inputs: SequenceInputs = ctx.outputs.face_review
         table = inputs.table
+        yunet, recognizer = ctx.lease.get(self.YUNET).obj, ctx.lease.get(self.APPEARANCE).obj
+        if settings.video_face_short_return_review and not (incumbent := super().applicable(ctx)).ok:
+            result = DetectorResult.not_applicable(incumbent.reason or 'insufficient coarse face context')
+            result.details['appearance_check_status'] = 'not_applicable'
+            result.model_revisions = revisions(ctx, self.YUNET, self.DINO, self.APPEARANCE)
+            return _with_return(result, inputs, yunet, recognizer, ctx.deadline)
         centers = {i for i in inputs.centers if 0 < i < len(table) - 1}
         scheduled = {i + k for i in centers for k in (-1, 0, 1)}
-        yunet, recognizer = ctx.lease.get(self.YUNET).obj, ctx.lease.get(self.APPEARANCE).obj
         check = ctx.deadline.check if ctx.deadline is not None else lambda *_: None
         features, bindings, decoded = {}, {}, set()
         unverified = 0
@@ -162,7 +269,7 @@ class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
             fallback.details.update(appearance_check_status='not_applicable',
                 appearance_check_reason='insufficient source-bound tracked context; the previous review check was retained')
             fallback.model_revisions = revisions(ctx, self.YUNET, self.DINO, self.APPEARANCE)
-            return fallback
+            return _with_return(fallback, inputs, yunet, recognizer, ctx.deadline)
         highest = windows[0]
         selected = record(highest, table, bindings) if highest['response'] > method.REVIEW_POINT else None
         details = {'face_sequence_binding_version': method.METHOD, 'face_sequence': selected,
@@ -176,7 +283,7 @@ class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
             ((w['start_s'] + w['end_s']) / 2, w['response']) for w in windows]}], x_unit='s',
             title='Face appearance transition measurements', media_ref='frame', source_signal_ids=[sid],
             caption='Overlapping sampled time windows; no individual-frame AI probability.')
-        return DetectorResult(status='ok', aggregate=UnitScore('global', highest['response'], 'score'),
+        result = DetectorResult(status='ok', aggregate=UnitScore('global', highest['response'], 'score'),
             observed=(f"A bounded face appearance change merits review from {highest['start_s']:.3f} to {highest['end_s']:.3f} s."
                 if selected else 'The sampled face appearances supplied no additional range to review.'),
             reference='The middle time group differs from both neighboring groups, while the two neighbors resemble one another.',
@@ -185,3 +292,4 @@ class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
                      'unverified_timestamp_frames': float(unverified)},
             details=details,
             exhibit_ids=[exhibit], model_revisions=revisions(ctx, self.YUNET, self.DINO, self.APPEARANCE))
+        return _with_return(result, inputs, yunet, recognizer, ctx.deadline)

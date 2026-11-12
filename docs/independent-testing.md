@@ -538,8 +538,16 @@ python -m pytest tests/test_evidence_measurement_review.py
 ### Verify an earlier-copy image comparison
 
 Download the comparison JSON in the local app and obtain both original files
-from the reviewer who supplied them. From the backend directory, run the
-standalone reviewer with Python and Pillow installed.
+from the reviewer who supplied them. From the backend directory, use the
+project's local Python environment to replay the comparison.
+
+```sh
+.venv/bin/python -m scripts.review_image_reference_export \
+  chipmunk-verify-image-comparison.json earlier.png submitted.jpg
+```
+
+The first two comparison schemas also support the standalone Python and Pillow
+reviewer.
 
 ```sh
 python -I scripts/review_image_reference_export.py \
@@ -549,14 +557,17 @@ python -I scripts/review_image_reference_export.py \
 The reviewer checks both file SHA-256 commitments and native dimensions after
 orientation. It checks the overlap against the recorded integer offset,
 compares both decoded crops with the corresponding source pixels, and checks
-the embedded PNG hashes and binary mask bounds and pixel totals. The tool uses
-no application code, network or database. It reports empty comparable and
-unassessed results separately. A mismatch exits with status 1.
+the embedded PNG hashes and binary mask bounds and pixel totals. For the third
+schema, the reviewer reruns the resize comparison using the two source files
+and checks the recomputed framing, regions, and entire mask. It independently
+maps the submitted region back to the exact earlier-copy crop using rational
+coordinates. The reviewer reports empty comparable and unassessed results
+separately. A mismatch exits with status 1. [Resize evaluation](image-reference-resize-transfer-2026-11-11.md)
 
 The comparison JSON is a standalone, unsigned export. This replay checks its
-geometry and source binding. Recomputing which pixels the algorithm would
-select and establishing when or how either source was created are separate
-tasks. On the isolated browser fixture, the reviewer matched both crops and
+geometry and source binding. The resize replay also checks the algorithm's
+selected pixels. Establishing when or how either source was created requires
+separate evidence. On the isolated browser fixture, the reviewer matched both crops and
 counted 7,693 pixels within the reported mask bounds. Authored tests reject
 shifted coordinates, missing alignment support and rehashed altered crops.
 The reviewer also accepted all 180 genuine exports from the earlier integer

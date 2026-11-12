@@ -123,6 +123,13 @@ class _SequenceClassifier(Detector):
                     if any(span["start"] <= focus["start"] < focus["end"] <= span["end"] for span in paragraphs):
                         window["score_exact_hex"] = window["score"].hex()
                 evidence["isolated_paragraph_review"] = paragraph_review
+                if (settings.environment == "dev" and settings.text_paragraph_evidence_priority
+                        and settings.text_detector_mode == "candidate"):
+                    from app.evidence import document_matched_context, document_paragraph_priority
+
+                    if (document_matched_context.matches(self.spec.id, self.spec.version, model_revisions)
+                            and document_paragraph_priority.eligible(doc.text, doc.source_map, doc.meta.get("method"))):
+                        evidence[document_paragraph_priority.KEY] = document_paragraph_priority.SCHEMA
         return DetectorResult(
             status="ok", unit_scores=units, aggregate=aggregate,
             observed=f"{self.SCORE_KIND} {p_doc:.3f} (word-weighted mean over {len(chunks)} chunk(s)); {len(sents)} sentence "

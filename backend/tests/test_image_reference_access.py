@@ -4,6 +4,7 @@ from __future__ import annotations
 import base64
 import hashlib
 import io
+import json
 from contextlib import contextmanager
 from types import SimpleNamespace
 
@@ -21,6 +22,7 @@ from app.core.config import settings
 from app.main import app
 from app.storage.db import Analysis, Artefact, Base, CaseMemberRow, CaseRow
 from app.storage.objects import ObjectStore
+from scripts.review_image_reference_export import review
 
 
 def _png(pixels):
@@ -222,3 +224,61 @@ def test_optional_pdf_uses_the_same_manifest_and_pngs(reference_http, monkeypatc
     fallback = f.client.post(_url(), headers=f.viewer, files=_upload(f.reference), data={"include_pdf": "true"})
     assert fallback.status_code == 200
     assert fallback.json() == {**payload, "pdf": None}
+
+
+@pytest.mark.parametrize("format,scale", [("PNG", .82), ("JPEG", 1.17)])
+def test_resized_route_pdf_and_export_bind_both_native_grids(reference_http, tmp_path, format, scale):
+    f = reference_http
+    edited = f.reference_pixels.copy()
+    edited[70:142, 142:222] = (210, 52, 119)
+    size = tuple(round(side * scale) for side in (384, 256))
+    data = io.BytesIO()
+    image = Image.fromarray(edited).resize(size, Image.Resampling.BICUBIC)
+    if format == "JPEG":
+        exif = Image.Exif()
+        exif[274] = 6
+        image.transpose(Image.Transpose.ROTATE_90).save(data, format, quality=75, subsampling=2, exif=exif)
+    else:
+        image.save(data, format)
+    submitted_bytes = data.getvalue()
+    source = f.store.put_bytes(submitted_bytes)
+    with Session(f.engine) as db:
+        analysis = db.get(Analysis, "image-a")
+        analysis.sha256, analysis.size_bytes = source.sha256, source.size_bytes
+        db.commit()
+    response = f.client.post(_url(), headers=f.viewer, files=_upload(f.reference), data={"include_pdf": "true"})
+    assert response.status_code == 200, response.text
+    payload = response.json()
+    comparison = payload["comparison"]
+    assert comparison["schema"] == "chipmunk.image-reference-comparison/3" and comparison["status"] == "comparable"
+    assert comparison["submitted_over_reference_xy"] == [[size[0], 384], [size[1], 256]]
+    assert comparison["framing_check"]["reference_minus_submitted"] == {"x": 0, "y": 0}
+    assert comparison["mask"]["width"] == size[0] and comparison["mask"]["height"] == size[1]
+    assert len(comparison["supported_resize_kernels"]) >= 2
+    region, = comparison["regions"]
+    assert region["reference_crop"]["width"] != region["submitted_crop"]["width"]
+    paths = [tmp_path / filename for filename in ("export.json", "earlier.png", "submitted")]
+    export = {"comparison": comparison, "pngs": payload["pngs"]}
+    paths[0].write_text(json.dumps(export))
+    paths[1].write_bytes(f.reference)
+    paths[2].write_bytes(submitted_bytes)
+    assert review(*paths) == {"reported_status": "comparable", "source_hashes_verified": 2,
+                              "crops_verified": 2, "mask_pixels_counted": region["selected_pixels"]}
+    with pymupdf.open(stream=base64.b64decode(payload["pdf"], validate=True), filetype="pdf") as pdf:
+        assert len(pdf) == 2 and "Same framing at different pixel dimensions" in pdf[0].get_text()
+        for page, assets in ((pdf[0], [comparison["mask"]]), (pdf[1], [region["reference_crop"], region["submitted_crop"]])):
+            for exhibit, asset in zip(page.get_images(), assets, strict=True):
+                with Image.open(io.BytesIO(base64.b64decode(payload["pngs"][asset["file"]]))) as png:
+                    assert pymupdf.Pixmap(pdf, exhibit[0]).samples == png.tobytes()
+                assert asset["sha256"] in page.get_text()
+
+    mask = comparison["mask"]
+    with Image.open(io.BytesIO(base64.b64decode(payload["pngs"][mask["file"]]))) as image:
+        image.putpixel((0, 0), 255)
+        changed = io.BytesIO()
+        image.save(changed, format="PNG")
+    mask["sha256"] = hashlib.sha256(changed.getvalue()).hexdigest()
+    payload["pngs"][mask["file"]] = base64.b64encode(changed.getvalue()).decode("ascii")
+    paths[0].write_text(json.dumps(export))
+    with pytest.raises(ValueError, match="mask pixels differ from the recomputed resize comparison"):
+        review(*paths)

@@ -121,6 +121,8 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
         ? 'Two checks compared faces at six sampled positions across the clip. The three frames shown below are examples of those inputs.'
         : packet.face_sequence
         ? <>Measured face-change range <strong>{seconds(packet.face_sequence.start_stream_s)}–{seconds(packet.face_sequence.end_stream_s)}</strong>. Three consecutive crops support each of {packet.face_sequence.centers.during.length} centers in this range. The response belongs to the sequence.</>
+        : packet.face_return
+        ? <>Brief face-change range <strong>{seconds(packet.face_return.start_stream_s)}–{seconds(packet.face_return.end_stream_s)}</strong> on the source clock, with an exclusive end. {packet.face_return.frame_inputs.length} sampled face views support this observation. It carries no weight in overall AI confidence.</>
         : packet.face_interval
         ? <>Flagged source range <strong>{seconds(packet.face_interval.start_stream_s)}–{seconds(packet.face_interval.end_stream_s)}</strong> across {packet.face_interval.samples.during.length} scored samples.</>
         : packet.claim_scope === 'sampled_window'

@@ -116,6 +116,26 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.getByText(/Selected frame 4 · source 11\.760 s · player 1\.760 s/)).toBeTruthy()
   })
 
+  it('shows the distinct brief face-change interval with three source crops and playback navigation', () => {
+    const set = { ...structuredClone(video), version: 'video-evidence-12' }
+    const item = set.packets[0]
+    item.title = 'Brief face-change range to review'
+    item.claim_scope = 'sampled_window'
+    item.face_return = { start_stream_s: 12, end_stream_s: 12.36,
+      frame_inputs: [5, 6, 7, 8, 9, 10, 11, 12, 13].map((frame_index) => ({ frame_index })) }
+    item.frames = (['before', 'during', 'after'] as const).map((role, i) => ({
+      ...item.frames[0], id: `V01.${i + 1}`, interval_role: role, score: null, is_peak: false,
+      anchor: { frame_index: 5 + 4 * i, pts: 11960 + 200 * i, time_base: '1/1000',
+        stream_time_s: 11.96 + .2 * i, playback_time_s: 1.96 + .2 * i },
+    }))
+    show(set)
+    expect(screen.getByText('12.000 s–12.360 s')).toBeTruthy()
+    expect(screen.getByText(/exclusive end.*9 sampled face views.*no weight/)).toBeTruthy()
+    expect(screen.getAllByAltText(/V01\.\d: source face crop for context/)).toHaveLength(3)
+    fireEvent.click(screen.getByRole('button', { name: 'Go to frame 9 in playback' }))
+    expect(screen.getByText(/Selected frame 9 · source 12\.160 s · player 2\.160 s/)).toBeTruthy()
+  })
+
   it('shows one exact picture per hold endpoint and locates it on the source clock', () => {
     const set = structuredClone(video)
     set.version = 'video-evidence-10'

@@ -116,6 +116,24 @@ describe('ordinary document passage inspection', () => {
     expect(screen.getByText(/Pages without mapped text: 3/)).toBeTruthy()
   })
 
+  it('opens the prioritized passage first while preserving the other saved passage and disagreement', () => {
+    const second = { ...packet, id: 'T02' }
+    const set = evidence([second, packet])
+    show({ ...set, version: 'document-evidence-7', coverage: { ...set.coverage,
+      isolated_paragraph_priority: { schema: 'document-isolated-paragraph-priority/1', packet_id: 'T02',
+        signal_ref: packet.supporting_windows[0].signal_ref, authorship_confidence_contribution: 0 } } })
+    const overview = screen.getByRole('region', { name: 'Passages to inspect' })
+    expect(within(overview).getAllByRole('button').map((button) => button.textContent)).toEqual([
+      expect.stringContaining('T02'), expect.stringContaining('T01'),
+    ])
+    const first = screen.getByRole('article', { name: 'T02: source passage and reasons' })
+    expect(first.getAttribute('data-selected')).toBe('true')
+    expect(within(first).getByText(/same check read the whole paragraph/)).toBeTruthy()
+    expect(within(first).getByText(/Disagreement is retained/)).toBeTruthy()
+    fireEvent.click(within(overview).getByRole('button', { name: 'Inspect passage T01: Page 2' }))
+    expect(screen.getByRole('article', { name: 'T01: source passage and reasons' }).getAttribute('data-selected')).toBe('true')
+  })
+
   it('shows partially checked pages and their frozen image bounds separately from unmapped pages', () => {
     const set = evidence()
     show({ ...set, coverage: { ...set.coverage, partially_checked_pages: [

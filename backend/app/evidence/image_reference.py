@@ -11,9 +11,10 @@ from pathlib import Path
 import numpy as np
 from PIL import Image, ImageOps
 
-from app.detectors.image import reference_alignment, reference_compare
+from app.detectors.image import reference_alignment, reference_compare, reference_resize
 
 MAX_INPUT_BYTES = 60 * 1024 * 1024
+RESIZE_SCHEMA = "chipmunk.image-reference-comparison/3"
 
 
 def _bytes(path: Path) -> bytes:
@@ -51,7 +52,7 @@ def _write_evidence(directory, comparison, reference, submitted, mask):
 
 
 def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | None = None,
-            allow_integer_alignment: bool = False) -> dict:
+            allow_integer_alignment: bool = False, allow_proportional_resize: bool = False) -> dict:
     """Use an earlier reference supplied by the reviewer. This measures pixel differences."""
     before, after = _bytes(reference_path), _bytes(submitted_path)
     with Image.open(io.BytesIO(before)) as original, Image.open(io.BytesIO(after)) as questioned:
@@ -60,13 +61,18 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
         with ImageOps.exif_transpose(original) as oriented_before, ImageOps.exif_transpose(questioned) as oriented_after:
             reference = np.array(oriented_before.convert("RGB"))
             submitted = np.array(oriented_after.convert("RGB"))
-        if allow_integer_alignment and not np.array_equal(reference, submitted):
+        resized = False
+        if (allow_integer_alignment or allow_proportional_resize) and not np.array_equal(reference, submitted):
             result, mask = reference_alignment.compare(reference, submitted, questioned)
+            if (allow_proportional_resize and reference.shape != submitted.shape
+                    and result["status"] == "integer_alignment_unresolved"):
+                result, mask = reference_resize.compare(reference, submitted, questioned)
+                resized = True
         else:
             result, mask = reference_compare.compare_across_deliveries(reference, submitted, questioned)
     aligned = "alignment" in result
-    output = {"schema": f"chipmunk.image-reference-comparison/{2 if aligned else 1}",
-              "coordinate_space": "exif-oriented-submitted" if aligned else "exif-oriented-original",
+    output = {"schema": RESIZE_SCHEMA if resized else f"chipmunk.image-reference-comparison/{2 if aligned else 1}",
+              "coordinate_space": "exif-oriented-submitted" if aligned or resized else "exif-oriented-original",
               "reference": {"sha256": hashlib.sha256(before).hexdigest(), "width": reference.shape[1], "height": reference.shape[0]},
               "submitted": {"sha256": hashlib.sha256(after).hexdigest(), "width": submitted.shape[1], "height": submitted.shape[0]},
               **result, "interpretation": "Regions show differences that survived the comparison settings. Ordinary processing can produce differences. The earlier file's authenticity and the cause of changes require separate evidence."}

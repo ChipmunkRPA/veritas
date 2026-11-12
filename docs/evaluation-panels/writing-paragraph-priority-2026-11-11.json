@@ -1,0 +1,67 @@
+{
+  "authorship_confidence_contribution": 0,
+  "panels": [
+    {
+      "generated": {
+        "assessed": 16,
+        "eligible_first": 13,
+        "files_with_retained_passages": 14,
+        "first_changed": 13,
+        "first_useful_after": 11,
+        "first_useful_before": 3,
+        "gained": 8,
+        "lost": 0,
+        "retained_passages": 74
+      },
+      "human": {
+        "assessed": 27,
+        "eligible_first": 10,
+        "files_with_retained_passages": 24,
+        "first_changed": 8,
+        "retained_passages": 84
+      },
+      "source_groups_gained": 5,
+      "source_groups_lost": 0,
+      "source_receipt": "writing-speech-paragraph-transfer-2026-11-11.json",
+      "source_receipt_sha256": "e5987ca31670f7ee08ae99d1169210c47427992a35d115cf3dba4040ece8cd09",
+      "unavailable": 2
+    },
+    {
+      "generated": {
+        "assessed": 11,
+        "eligible_first": 11,
+        "files_with_retained_passages": 11,
+        "first_changed": 11,
+        "first_useful_after": 10,
+        "first_useful_before": 3,
+        "gained": 7,
+        "lost": 0,
+        "retained_passages": 57
+      },
+      "human": {
+        "assessed": 24,
+        "eligible_first": 7,
+        "files_with_retained_passages": 15,
+        "first_changed": 7,
+        "retained_passages": 72
+      },
+      "source_groups_gained": 4,
+      "source_groups_lost": 0,
+      "source_receipt": "writing-paragraph-replication-2026-11-11.json",
+      "source_receipt_sha256": "511b6fecc232571e30c02622de92b730826a003ae723c20975041eb235d35a0a",
+      "unavailable": 5
+    }
+  ],
+  "schema": "chipmunk.writing-paragraph-priority-replay/1",
+  "source_scope": {
+    "language": "en",
+    "method": "plain",
+    "paragraphs": 4,
+    "word_range": [
+      145,
+      470
+    ]
+  },
+  "study": "Retrospective replay of first-card order with one pinned check and at most six existing passages",
+  "useful_first_minimum_nonwhitespace_character_iou": 0.3
+}

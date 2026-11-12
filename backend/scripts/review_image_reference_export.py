@@ -10,6 +10,8 @@ import json
 import stat
 import sys
 from contextlib import ExitStack
+from fractions import Fraction
+from math import ceil, floor
 from pathlib import Path
 
 from PIL import Image, ImageChops, ImageDraw, ImageOps
@@ -19,6 +21,7 @@ MAX_PNG_BYTES = 32 * 1024 ** 2
 MAX_JSON_BYTES = 4 * ((MAX_PNG_BYTES + 2) // 3) + 1024 ** 2
 MAX_PIXELS = 4_000_000
 MAX_REGIONS = 5
+RESIZE_SCHEMA = "chipmunk.image-reference-comparison/3"
 
 
 def _require(condition, reason):
@@ -140,6 +143,41 @@ def _geometry(comparison, reference, submitted):
     return dx, dy, overlap
 
 
+def _resize_replay(comparison, ref, sub, carrier):
+    """Recompute v3 directly from the two sources, separate from evidence generation."""
+    try:
+        import numpy as np
+        from cv2 import error as OpenCVError
+
+        from app.detectors.image import reference_alignment, reference_resize
+    except ImportError as error:
+        raise ValueError("Use the backend Python environment and run this reviewer as a module for resize exports") from error
+    _require(comparison["coordinate_space"] == "exif-oriented-submitted" and ref.size != sub.size
+             and "alignment" not in comparison, "Resize comparison has unexpected source dimensions or coordinates")
+    earlier, submitted = np.asarray(ref), np.asarray(sub)
+    try:
+        aligned, _ = reference_alignment.compare(earlier, submitted, carrier)
+        _require(aligned["status"] == "integer_alignment_unresolved", "Resize comparison must follow the integer alignment check")
+        expected, mask = reference_resize.compare(earlier, submitted, carrier)
+    except OpenCVError as error:
+        raise ValueError("The image comparison could not be recomputed") from error
+    measured_fields = {"status", "regions", "additional_regions", "supported_resize_kernels", "framing_check",
+                       "submitted_over_reference_xy"}
+    measured = {field: value for field, value in comparison.items() if field in measured_fields}
+    measured["regions"] = [{key: value for key, value in region.items() if key not in {"reference_crop", "submitted_crop"}}
+                           for region in measured["regions"]]
+    _require(json.dumps(measured, sort_keys=True) == json.dumps(expected, sort_keys=True),
+             "Resize comparison differs from recomputed status, framing or regions")
+    return mask
+
+
+def _resize_bounds(box, reference, submitted):
+    left, top, right, bottom = box
+    x_scale = Fraction(reference.width, submitted.width)
+    y_scale = Fraction(reference.height, submitted.height)
+    return floor(left * x_scale), floor(top * y_scale), ceil(right * x_scale), ceil(bottom * y_scale)
+
+
 def _image(stack, blobs, asset, filename, mode, dimensions):
     _require(asset["file"] == filename and filename in blobs, "A named evidence PNG is missing or inconsistent")
     source = blobs.pop(filename)
@@ -153,7 +191,7 @@ def _image(stack, blobs, asset, filename, mode, dimensions):
 
 
 def review(export, earlier, submitted):
-    """Check exact source and crop bytes and the reported mask geometry, without rerunning scoring."""
+    """Check exact source and crop bytes, reported mask geometry and v3 scoring."""
     document = json.loads(_read(export, MAX_JSON_BYTES), object_pairs_hook=_record)
     _require(type(document) is dict and set(document) == {"comparison", "pngs"}, "Expected the browser comparison JSON")
     comparison, assets = document["comparison"], document["pngs"]
@@ -162,19 +200,30 @@ def review(export, earlier, submitted):
     _require(type(regions) is list and len(regions) <= MAX_REGIONS, "Invalid difference region count")
     status = comparison["status"]
     _require(status in {"comparable", "integer_alignment_unresolved", "different_dimensions", "unsupported_dimensions",
-                        "unaligned", "insufficient_common_background", "uncertain_delivery", "partial_jpeg_delivery_unassessed"},
+                        "unaligned", "insufficient_common_background", "uncertain_delivery", "partial_jpeg_delivery_unassessed",
+                        "unsupported_resize_geometry", "same_framing_unresolved", "resize_delivery_unresolved"},
              "Unknown comparison status")
     _require(not regions or status == "comparable", "An unassessed comparison contains difference regions")
     with ExitStack() as stack:
         ref = _source(stack, _read(earlier, MAX_SOURCE_BYTES), comparison["reference"])
-        sub = _source(stack, _read(submitted, MAX_SOURCE_BYTES), comparison["submitted"])
-        dx, dy, overlap = _geometry(comparison, ref, sub)
+        submitted_bytes = _read(submitted, MAX_SOURCE_BYTES)
+        sub = _source(stack, submitted_bytes, comparison["submitted"])
+        resized = comparison["schema"] == RESIZE_SCHEMA
+        if resized:
+            carrier = stack.enter_context(Image.open(io.BytesIO(submitted_bytes), formats=["PNG", "JPEG"]))
+            expected_mask = _resize_replay(comparison, ref, sub, carrier)
+            overlap = (0, 0, sub.width, sub.height)
+        else:
+            dx, dy, overlap = _geometry(comparison, ref, sub)
         if not regions:
             _require(not assets and "mask" not in comparison, "An empty comparison contains unbound image evidence")
             return {"reported_status": status, "source_hashes_verified": 2, "crops_verified": 0, "mask_pixels_counted": 0}
         mask = _image(stack, assets, comparison["mask"], "difference-mask.png", "L", sub.size)
         mask_counts = mask.histogram()
         _require(mask_counts[0] + mask_counts[255] == sub.width * sub.height, "Difference mask is not binary")
+        if resized:
+            _require(expected_mask is not None and mask.tobytes() == (expected_mask.astype("uint8") * 255).tobytes(),
+                     "Difference mask pixels differ from the recomputed resize comparison")
         covered = stack.enter_context(Image.new("L", sub.size))
         drawn = ImageDraw.Draw(covered)
         retained = 0
@@ -182,7 +231,8 @@ def review(export, earlier, submitted):
             box = _bounds(region, sub.size)
             _require(_contains(overlap, box), "Region extends outside the recorded overlap")
             earlier_box = _bounds(region.get("reference_region", region), ref.size)
-            _require(earlier_box == _translation(box, dx, dy), "Region coordinates conflict with the source offsets")
+            expected_box = _resize_bounds(box, ref, sub) if resized else _translation(box, dx, dy)
+            _require(earlier_box == expected_box, "Region coordinates conflict with the source mapping")
             width, height = box[2] - box[0], box[3] - box[1]
             count = region["selected_pixels"]
             with mask.crop(box) as local_mask:
@@ -191,7 +241,8 @@ def review(export, earlier, submitted):
             retained += count
             drawn.rectangle((box[0], box[1], box[2] - 1, box[3] - 1), fill=255)
             for field, original, original_box in (("reference", ref, earlier_box), ("submitted", sub, box)):
-                png = _image(stack, assets, region[f"{field}_crop"], f"{field}-{index:02d}.png", "RGB", (width, height))
+                x, y, right, bottom = original_box
+                png = _image(stack, assets, region[f"{field}_crop"], f"{field}-{index:02d}.png", "RGB", (right - x, bottom - y))
                 with original.crop(original_box) as expected, ImageChops.difference(png, expected) as difference:
                     _require(not difference.getbbox(), "Evidence crop pixels differ from the original source")
         with ImageChops.subtract(mask, covered) as outside:

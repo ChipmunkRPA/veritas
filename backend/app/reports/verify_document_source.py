@@ -11,7 +11,13 @@ from PIL import Image
 
 from app.core.canonical import canonical_hash
 from app.detectors.text.extract import extract, text_hash
-from app.evidence import document_context, document_matched_context, document_repeat, document_scope
+from app.evidence import (
+    document_context,
+    document_matched_context,
+    document_paragraph_priority,
+    document_repeat,
+    document_scope,
+)
 from app.evidence.document_packets import (
     _inspection_anchors,
     _pdf_plates,
@@ -88,6 +94,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         raise ValueError("Recorded document coverage differs from the re-extracted original")
     document_repeat.verify_source(evidence, text, mapping)
     document_matched_context.verify_source(evidence, text, mapping)
+    document_paragraph_priority.verify_source(evidence, text, mapping)
 
     pdf_bytes = original.read_bytes() if extension == ".pdf" else None
     packet_count = window_count = images = 0

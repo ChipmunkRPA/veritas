@@ -11,6 +11,7 @@ import wave
 import zipfile
 from dataclasses import asdict, replace
 from datetime import UTC, datetime
+from fractions import Fraction
 from types import SimpleNamespace
 
 import cv2
@@ -34,7 +35,7 @@ from app.detectors.video.face_appearance import METHOD, cpp_alignment
 from app.detectors.video.frame_store import FrameStore
 from app.engine.stages import video
 from app.engine.synthesis.engine import SynthesisInput, synthesise
-from app.evidence import face_boundary_binding, service, video_audio, video_packets
+from app.evidence import face_boundary_binding, face_return_binding, service, video_audio, video_packets
 from app.evidence.audio_binding import validate_audio_channel
 from app.evidence.image_packets import PacketIntegrityError
 from app.reports import engine, multimedia_evidence, package, signing, snapshot, verify, verify_video_source
@@ -113,13 +114,13 @@ def nested_case(av_fixture, monkeypatch, request):
     return f
 
 
-def _prepare_parent(f):
+def _prepare_parent(f, *, has_audio=True):
     anchors = list(f.anchors.values())
     sampling = f.result['manifest']['sampling']
     sampling.update(frame_anchor_version=video_packets.ANCHOR_VERSION,
                     frame_anchor_sha256=canonical_hash(anchors), frame_table_sha256=canonical_hash(f.table.to_json()),
                     timeline_origin_s=5.)
-    for stage, content in [('probe', {'frame_table': f.table.to_json(), 'info': {'has_audio': True}}),
+    for stage, content in [('probe', {'frame_table': f.table.to_json(), 'info': {'has_audio': has_audio}}),
                            ('render', {'frame_anchor_version': video_packets.ANCHOR_VERSION, 'frame_anchors': anchors})]:
         art = register_artefact(f.db, f.store, canonical_json(content), media_type='application/json', role='stage_output',
                                created_by='av-fixture', analysis_id=f.analysis.id)
@@ -347,6 +348,89 @@ def _report_scaffold(f):
     return f.frozen.model_copy(update={'result':result,'evidence':evidence})
 
 
+def test_short_face_change_keeps_exact_source_frames_in_pdf_json_and_offline_verifier(
+    av_fixture, av_source, tmp_path, monkeypatch,
+):
+    f = av_fixture
+    path = tmp_path / 'native-face-clock.mkv'
+    subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-threads', '1', '-filter_threads', '1', '-copyts',
+                    '-i', str(av_source[0]), '-vf', 'scale=1920:1080:flags=neighbor', '-an', '-c:v', 'ffv1',
+                    '-threads', '1', str(path)], check=True, timeout=60)
+    obj = f.store.put_file(path)
+    f.analysis.sha256, f.analysis.size_bytes = obj.sha256, obj.size_bytes
+    f.table = probe_frames(path)
+    f.result.update(input={'sha256': obj.sha256}, signals=[],
+                    manifest={'sampling': {'video_audio_evidence': {'source_audio_present': False}}})
+    frame_store = FrameStore(f.store.path_for(obj.sha256), f.table)
+    clock = [(pts - f.table.pts[0]) * f.table.tb for pts in f.table.pts]
+    scheduled = [min(range(len(clock)), key=lambda i: (abs(clock[i] - Fraction(tick, 8)), i))
+                 for tick in range(32)]
+    entry, stop = 13, 16
+    start, end = scheduled[entry], scheduled[stop]
+    before, during, after = scheduled[entry-4:entry], scheduled[entry:stop], scheduled[stop:stop+4]
+    indices = before + during + after
+    pixels = frame_store.get_many(set(indices))
+    f.anchors = {item['frame_index']: item for item in frame_store.native_anchors()}
+    faces = []
+    for index in indices:
+        landmarks = [[x * 20, y * 16.875] for x, y in f.by_frame[index]['landmarks']]
+        matrix = cpp_alignment(landmarks)
+        aligned = cv2.warpAffine(pixels[index], matrix, (112, 112), flags=cv2.INTER_LINEAR)
+        faces.append({**{key: f.anchors[index][key] for key in ('frame_index', 'pts', 'decoded_rgb_sha256')},
+                      'bbox': {'x': 240, 'y': 135, 'w': 1440, 'h': 878}, 'landmarks': landmarks, 'aligned_size': 112,
+                      'alignment_side': 112, 'alignment_matrix': matrix.tolist(),
+                      'alignment_matrix_hex': [[float(value).hex() for value in row] for row in matrix],
+                      'aligned_rgb_sha256': hashlib.sha256(aligned.tobytes()).hexdigest()})
+    scene_indices = (before[-1], start, during[-1], end)
+    anchors = {'before': before[-1], 'during': during[1], 'after': after[0]}
+    review = {'method': face_return_binding.METHOD, 'time_base': f.table.time_base, 'start_frame_index': start,
+              'end_frame_index': end, 'start_pts': f.table.pts[start], 'end_pts': f.table.pts[end],
+              'start_stream_s': f.table.seconds(start), 'end_stream_s': f.table.seconds(end),
+              'response': .15, 'response_hex': .15.hex(), 'scene_correlations': [.88, .91],
+              'scene_correlations_hex': [.88.hex(), .91.hex()], 'anchors': anchors,
+              'scheduled_frame_indices': scheduled, 'support_indices': {'before': before, 'during': during, 'after': after},
+              'frame_inputs': faces,
+              'scene_frame_inputs': [{key: f.anchors[i][key] for key in ('frame_index', 'pts', 'decoded_rgb_sha256')}
+                                     for i in scene_indices]}
+    f.result['signals'].append({'id': DETECTOR + ':global', 'detector_id': DETECTOR, 'status': 'ok', 'display_id': 'S03',
+                               'details': {'face_return': review}, 'effective_weight': 0.})
+    _prepare_parent(f, has_audio=False)
+    _freeze_parent(f)
+    f.result = _report_scaffold(f).result
+    f.analysis.result_hash = f.store.put_bytes(canonical_json(f.result)).sha256
+    _freeze_parent(f)
+
+    [packet] = [row for row in f.document['packets'] if row.get('face_return')]
+    assert f.document['version'] == 'video-evidence-12'
+    with pytest.raises(ValueError, match='evidence version disagrees'):
+        face_return_binding.validate_set({**f.document, 'version': 'video-evidence-11'})
+    assert packet['face_return'] == json.loads(canonical_json(review))
+    assert packet['affects_overall_confidence'] is False
+    assert [(row['interval_role'], row['anchor']['frame_index']) for row in packet['frames']] == list(anchors.items())
+    assert service.load_packet_set(f.db, f.analysis, f.store) == f.document
+    for key, delta in [('end_pts', 1), ('start_playback_s', .2)]:
+        altered = copy.deepcopy(packet)
+        altered['window'][key] += delta
+        with pytest.raises(ValueError, match='displayed time range'):
+            face_return_binding.validate_packet(altered, f.document['source'])
+    altered = copy.deepcopy(packet)
+    altered['frames'][0]['interval_role'] = 'after'
+    with pytest.raises(ValueError, match='native sample'):
+        face_return_binding.validate_packet(altered, f.document['source'])
+    for source_change, table_change in [({'width': 1280}, {}), ({}, {'rotation': 180}), ({}, {'truncated': True}),
+                                        ({}, {'interpolated': [0]})]:
+        with pytest.raises(ValueError, match='complete native timestamps'):
+            face_return_binding.validate_packet(packet, {**f.document['source'], **source_change}, **table_change)
+
+    monkeypatch.setattr(multimedia_evidence, 'default_store', lambda: f.store)
+    pdf = engine.render_pdf(f.frozen).pdf
+    report = ' '.join(engine.pdf_text(pdf).split())
+    assert 'Brief face-change range to review' in report
+    assert '6.640-7.000 s on the source clock' in report and 'with an exclusive end' in report
+    assert 'before, during, and after' in report and DETECTOR not in report
+    _check_public_zip(f, tmp_path, monkeypatch, pdf, source_video=path)
+
+
 @pytest.mark.parametrize('profile', ['standard','forensic','summary','newsroom'])
 def test_full_report_profiles_include_nested_evidence_without_internal_sampling(nested_case,monkeypatch,profile):
     f=nested_case
@@ -460,7 +544,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
                         'app.evidence.audio_background_binding','app.evidence.audio_repetition_binding','app.evidence.audio_exact_repetition',
                         'app.evidence.audio_similarity_binding',
                         'app.evidence.av_binding','app.evidence.face_interval_binding','app.evidence.face_boundary_binding','app.evidence.face_boundary_clock','app.evidence.face_alignment_context',
-                        'app.evidence.face_lighting_context','app.evidence.video_packet_versions','app.evidence.picture_hold_binding',
+                        'app.evidence.face_lighting_context','app.evidence.face_return_binding','app.evidence.video_packet_versions','app.evidence.picture_hold_binding',
                         'app.evidence.image_eligibility','app.evidence.image_copy_similarity_binding','app.evidence.document_scope'):
             return None
         if fullname.startswith(('app.storage','app.core.config','app.detectors','app.evidence','app.api')):

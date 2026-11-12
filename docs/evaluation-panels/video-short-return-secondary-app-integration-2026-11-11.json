@@ -1,0 +1,68 @@
+{
+  "baseline_and_enabled_analyses": 16,
+  "cases": {
+    "absent": {
+      "appearance_review_s": 4.272,
+      "incumbent_iou": null,
+      "incumbent_s": null,
+      "pdf_embedded_exact_png_pixels": 6,
+      "pdf_pages": 17,
+      "public_evidence_api_and_json_equal": true,
+      "secondary_half_open_s": [
+        "3",
+        "84/25"
+      ],
+      "secondary_iou": 0.6363636363636364,
+      "signed_original_replay_verified": true,
+      "truth_half_open_s": [
+        "73/25",
+        "82/25"
+      ],
+      "verified_exact_native_endpoint_pairs": 1,
+      "verified_source_crop_and_frame_pngs": 6
+    },
+    "wrong": {
+      "appearance_review_s": 5.668,
+      "incumbent_iou": 0.4666666666666667,
+      "incumbent_s": [
+        "71/25",
+        "84/25"
+      ],
+      "pdf_embedded_exact_png_pixels": 6,
+      "pdf_pages": 21,
+      "public_evidence_api_and_json_equal": true,
+      "secondary_half_open_s": [
+        "69/25",
+        "78/25"
+      ],
+      "secondary_iou": 1.0,
+      "signed_original_replay_verified": true,
+      "truth_half_open_s": [
+        "69/25",
+        "78/25"
+      ],
+      "verified_exact_native_endpoint_pairs": 1,
+      "verified_source_crop_and_frame_pngs": 6
+    }
+  },
+  "confidence_and_incumbent_parity": true,
+  "detector_scope": "actual local app face detection, tracking, and appearance review on pinned CPU weights; unrelated detector lanes omitted",
+  "distinct_swap_inputs": 2,
+  "duplicate_paid_events_idempotent": true,
+  "duplicate_swap_inputs": 2,
+  "duplicate_swaps_with_supplemental_range": 0,
+  "fixture_scope": "serving fixture selection used the actual app sample schedule and is separate from the frozen research accuracy panel",
+  "matched_original_inputs": 4,
+  "matched_originals_with_supplemental_range": 0,
+  "private_duplicate_receipt_sha256": "a78bedc209ed360fe4ddade9395fbeced51308cf1ee7f59e155d5c092b2ad876",
+  "private_serving_receipt_sha256": "7db3e1490003522f31e4cfad8857ed5d0ebe179a1a770ea41129f26bcad159cf",
+  "retained_frame_scope": {
+    "measured_per_test_clip": 48,
+    "scheduled_per_test_clip": 48
+  },
+  "schema": "chipmunk.video-short-return-app-integration/1",
+  "settings_scope": "opt-in appearance review; native upright 1080p at exact 25 or 30 Hz and 2\u20138 seconds, single detected face at each measured position",
+  "simulated_stripe_transport_only": true,
+  "tested_profile": "full",
+  "unpaid_events_queued_no_analysis": true
+}

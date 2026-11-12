@@ -89,6 +89,30 @@ def test_reports_measured_empty_and_unassessed_separately(tmp_path):
         assert result == {"reported_status": status, "source_hashes_verified": 2, "crops_verified": 0, "mask_pixels_counted": 0}
 
 
+@pytest.mark.parametrize("variant,status", [("resize", "comparable"), ("aspect", "unsupported_resize_geometry"),
+                                              ("rotated", "same_framing_unresolved")])
+def test_resize_reviewer_recomputes_empty_comparison_status(tmp_path, variant, status):
+    source = Image.fromarray(_scene())
+    original, submitted = tmp_path / "original.png", tmp_path / "submitted.png"
+    source.save(original)
+    if variant == "rotated":
+        source = source.rotate(2, Image.Resampling.BICUBIC)
+    source.resize((315, 248 if variant == "aspect" else 210), Image.Resampling.BICUBIC).save(submitted)
+    comparison = inspect(original, submitted, allow_proportional_resize=True)
+    assert comparison["schema"] == "chipmunk.image-reference-comparison/3"
+    assert comparison["status"] == status and not comparison["regions"]
+    path = tmp_path / "export.json"
+    _write(path, {"comparison": comparison, "pngs": {}})
+    assert review(path, original, submitted)["reported_status"] == status
+    if variant == "resize":
+        comparison["submitted_over_reference_xy"][0][0] += 1
+    else:
+        comparison["status"] = "comparable"
+    _write(path, {"comparison": comparison, "pngs": {}})
+    with pytest.raises(ValueError, match="differs from recomputed status, framing or regions"):
+        review(path, original, submitted)
+
+
 def test_refuses_duplicate_json_fields(saved_comparison):
     path, reference, submitted, _ = saved_comparison
     path.write_text(path.read_text().replace('{"comparison":', '{"pngs": {}, "comparison":', 1))

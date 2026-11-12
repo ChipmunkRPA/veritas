@@ -1,0 +1,96 @@
+{
+  "additional_false_source_groups_by_cohort": {},
+  "advance": "At least 18 additional correct shortest ranges across four source groups, including at least four in two groups where the incumbent is absent and four in two groups where it is wrong. At most two new ordinary review ranges, including on incumbent-flagged files, and no new source-cut review range. Preserve incumbent endpoints.",
+  "freeze_sha256": "fb477a8811040a1702314f45ecc4444c17bbabac98c6cf2b92dd891635c79536",
+  "incumbent_flags_preserved": 64,
+  "independent_audit": {
+    "aggregate_sha256": "a6cf1a5d27094eac53136726cc870189f441c5275d3df68d4f4cc15d2a9b1130",
+    "incumbent_flags_preserved": 64,
+    "maximum_added_correct_endpoint_error_ms": 40.0,
+    "median_added_correct_endpoint_error_ms": 0.0,
+    "median_added_correct_iou": 1.0,
+    "native_window_endpoints_verified": 608,
+    "rows": 180,
+    "secondary_picture_anchors_verified": 87
+  },
+  "pilot_advances": true,
+  "rule": "Preserve the incumbent interval. Separately display the highest guarded interval only for a margin >0.10, a native duration in (0,0.50s), and IoU <0.50 against any incumbent interval. Never rerank.",
+  "runtime": {
+    "elapsed_s": 344.70243808301166,
+    "journal_sha256": "25b9724c22d62dc1b8393b38f43e2789b98011b229fa9b11de9c98cca5077638",
+    "peak_rss_bytes": 361283584,
+    "verified_frames": 2895
+  },
+  "schema": "chipmunk.video-short-return-secondary-transfer/1",
+  "shortest_gain_source_groups_by_current_status": {
+    "absent": 4,
+    "wrong": 5
+  },
+  "shortest_gains_by_current_status": {
+    "absent": 13,
+    "wrong": 16
+  },
+  "swaps_by_center_and_duration": {
+    "35/12@3/8": {
+      "added_correct": 10,
+      "at_least_one_correct": 10,
+      "current_unassessed": 2,
+      "current_wrong_interval": 10
+    },
+    "3@1/2": {
+      "at_least_one_correct": 10,
+      "current_localized": 10,
+      "current_unassessed": 2
+    },
+    "3@3/4": {
+      "at_least_one_correct": 10,
+      "current_localized": 10,
+      "current_unassessed": 2
+    },
+    "3@3/8": {
+      "added_correct": 10,
+      "at_least_one_correct": 10,
+      "current_measured_no_flag": 7,
+      "current_unassessed": 2,
+      "current_wrong_interval": 3
+    },
+    "73/24@3/8": {
+      "added_correct": 9,
+      "at_least_one_correct": 10,
+      "current_localized": 1,
+      "current_measured_no_flag": 6,
+      "current_unassessed": 2,
+      "current_wrong_interval": 3
+    }
+  },
+  "totals": {
+    "camera": {
+      "at_least_one_correct": 0,
+      "current_false_flag": 3,
+      "current_measured_no_flag": 9
+    },
+    "cut": {
+      "at_least_one_correct": 0,
+      "current_false_flag": 8,
+      "current_measured_no_flag": 2,
+      "current_unassessed": 2
+    },
+    "rtfs": {
+      "at_least_one_correct": 0,
+      "current_false_flag": 16,
+      "current_measured_no_flag": 64,
+      "current_unassessed": 16
+    },
+    "swap": {
+      "at_least_one_correct": 50,
+      "current_localized": 21,
+      "current_measured_no_flag": 13,
+      "current_unassessed": 10,
+      "current_wrong_interval": 16,
+      "secondary_localized": 29,
+      "secondary_localized_with_current_measured_no_flag": 13,
+      "secondary_localized_with_current_wrong_interval": 16,
+      "suppressed_duplicate": 1
+    }
+  }
+}

@@ -20,6 +20,9 @@ const unassessed: Record<string, string> = {
   insufficient_common_background: 'Too little matching background was available for a reliable comparison.',
   partial_jpeg_delivery_unassessed: 'The submitted JPEG extends outside the aligned area, so its compression could not be compared reliably.',
   uncertain_delivery: 'The available compression comparisons did not provide enough support.',
+  unsupported_resize_geometry: 'The copies are outside the supported size and proportion limits for a resize comparison.',
+  same_framing_unresolved: 'The copies could not be reliably matched to the same framing after resizing.',
+  resize_delivery_unresolved: 'Too few resize comparisons agreed on the image delivery.',
 }
 
 function NativeArea({ area }: { area: NativeImageArea }) {
@@ -46,6 +49,7 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
   const { comparison } = result
   const { reference, submitted, regions, mask, alignment } = comparison
   const comparable = comparison.status === 'comparable'
+  const resized = comparable && comparison.schema === 'chipmunk.image-reference-comparison/3'
   const reason = Object.prototype.hasOwnProperty.call(unassessed, comparison.status)
     ? unassessed[comparison.status] : 'The selected copies could not be compared reliably.'
   const pdf = comparisonPdfData(result)
@@ -75,6 +79,9 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
           No localized differences met the comparison criteria in the measured area. Small changes may still be present.
         </p>
       : <p className="mt-2 mb-0 text-small text-text-muted">{reason}</p>}
+    {resized && <p className="mt-3 mb-0 text-small text-text-muted">
+      The comparison found matching framing at different pixel dimensions. Differences were measured on the submitted image after resizing the earlier copy. The crops show pixels from each original file.
+    </p>}
     {(alignment || (comparable && regions.length > 0)) && <p className="mt-3 mb-0 text-caption text-text-muted">
       Coordinates use each image’s own pixels, measured from the top left after correcting its stored orientation.
     </p>}
@@ -86,7 +93,7 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
     {comparable && regions.length > 0 && <>
       {mask && <div className="mt-4 max-w-xl">
         <ComparisonPicture result={result} artifact={mask} label="Difference mask in submitted image coordinates" />
-        <p className="mt-2 mb-0 text-caption text-text-muted">White marks the selected differences. Black includes unselected and potentially unassessed pixels.</p>
+        <p className="mt-2 mb-0 text-caption text-text-muted">{resized ? 'White marks differences flagged by at least two tested resizes.' : 'White marks the selected differences.'} Black includes unselected and potentially unassessed pixels.</p>
       </div>}
       <ol className="mt-4 mb-0 list-none space-y-4 p-0">
         {regions.map((region, index) => <li key={index} className="rounded-md border border-border p-3">

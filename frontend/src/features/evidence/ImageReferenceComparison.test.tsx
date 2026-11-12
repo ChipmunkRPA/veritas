@@ -136,6 +136,26 @@ describe('earlier-copy comparison', () => {
     expect(screen.getByText('The copies could not be aligned reliably.')).toBeTruthy()
   })
 
+  it('explains resize comparison and preserves both native coordinates in the JSON download', async () => {
+    const result = structuredClone(comparison)
+    result.comparison.schema = 'chipmunk.image-reference-comparison/3'
+    result.comparison.submitted_over_reference_xy = [[315, 384], [210, 256]]
+    delete result.comparison.alignment
+    result.comparison.regions[0].reference_region = { x: 143, y: 79, w: 111, h: 86 }
+    vi.stubGlobal('fetch', vi.fn((_url: string, request: RequestInit) => Promise.resolve(
+      request.method === 'POST' ? json(result) : json({ available: true }),
+    )))
+    show()
+    await choose()
+    fireEvent.click(screen.getByRole('button', { name: 'Compare images' }))
+    expect(await screen.findByText(/matching framing at different pixel dimensions/)).toBeTruthy()
+    expect(screen.getByText('x 143, y 79 · 111 × 86 px')).toBeTruthy()
+    expect(screen.getByText('x 118, y 65 · 90 × 70 px')).toBeTruthy()
+    fireEvent.click(screen.getByRole('button', { name: 'Download comparison JSON' }))
+    const [[download]] = vi.mocked(saveBlob).mock.calls
+    expect(JSON.parse(await blobText(download))).toEqual({ comparison: result.comparison, pngs: result.pngs })
+  })
+
   it('lets the reviewer retry a failed upload without choosing the same file again', async () => {
     let attempted = false
     vi.stubGlobal('fetch', vi.fn((_url: string, request: RequestInit) => {

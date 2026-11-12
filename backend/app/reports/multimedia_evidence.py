@@ -137,6 +137,7 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
     from app.evidence import (
         face_boundary_binding,
         face_lighting_context,
+        face_return_binding,
         picture_hold_binding,
         whole_face_binding,
     )
@@ -166,6 +167,8 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
         validate_face_interval(packet, source, table_pts=table.pts, interpolated=table.interpolated)
         face_boundary_binding.validate_packet(packet, source, document["version"], table_pts=table.pts,
                                              interpolated=table.interpolated)
+        face_return_binding.validate_packet(packet, source, table_pts=table.pts, interpolated=table.interpolated,
+                                            rotation=table.rotation, truncated=table.truncated)
         if whole := packet.get("whole_face_review"):
             from app.api.public_projection import alias_signal
 
@@ -197,6 +200,21 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
                        and signal.get("effective_weight") == 0.0 and alias_signal(signal["id"]) == packet["signal_refs"][0]["id"]
                        for signal in frozen.get("signals", [])):
                 raise ObjectIntegrityError("Refined face timing differs from the frozen review check")
+        if face_return := packet.get("face_return"):
+            from app.api.public_projection import alias_signal
+
+            for item in (*face_return["frame_inputs"], *face_return["scene_frame_inputs"]):
+                committed = by_index.get(item["frame_index"])
+                if committed is None or any(item[key] != committed[key] for key in ("pts", "decoded_rgb_sha256")):
+                    raise ObjectIntegrityError("Short face-change inputs differ from their analyzed frames")
+            frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
+            commitment = canonical_hash(face_return)
+            signal = next((s for s in frozen.get("signals", []) if s.get("effective_weight") == 0.0
+                           and alias_signal(s["id"]) == packet["signal_refs"][0]["id"]
+                           and canonical_hash((s.get("details") or {}).get("face_return")) == commitment), None)
+            if signal is None:
+                raise ObjectIntegrityError("Short face-change evidence differs from the frozen review check")
+            face_return_binding.validate_distinct(face_return, signal["details"].get("face_sequence"))
         clip = packet.get("clip") or {}
         if clip.get("status") == "ready":
             start, end = clip["start_frame_index"], clip["end_frame_index_exclusive"]
@@ -222,7 +240,7 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
                     raise ObjectIntegrityError("Displayed video pixels differ from the analysed frame")
                 if not refined and packet.get("face_lighting"):
                     brightness_inputs[anchor["frame_index"]] = np.asarray(rgb)
-                if sequence := packet.get("face_boundary" if refined else "face_sequence"):
+                if sequence := packet.get("face_boundary" if refined else "face_sequence") or packet.get("face_return"):
                     import cv2
 
                     item = next(row for row in sequence["frame_inputs"] if row["frame_index"] == anchor["frame_index"])
@@ -325,7 +343,7 @@ def _verify_audio(document: dict, store: ObjectStore, assets: dict[str, bytes], 
 
 def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes], *, result: dict | None = None) -> None:
     from app.detectors.text.extract import text_hash
-    from app.evidence import document_matched_context
+    from app.evidence import document_matched_context, document_paragraph_priority
     from app.evidence.document_packets import (
         _inspection_anchors,
         _pdf_plates,
@@ -352,6 +370,9 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
         if document["version"] == document_scope.MATCHED_VERSION:
             frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
             document_matched_context.verify_source(document, text, mapping, result=frozen)
+        if document["version"] == document_scope.PARAGRAPH_PRIORITY_VERSION:
+            frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
+            document_paragraph_priority.verify_source(document, text, mapping, result=frozen)
     except (ValueError, KeyError, TypeError) as error:
         raise ObjectIntegrityError("Document review evidence differs from the recorded source extraction") from error
     for packet in document["packets"]:
@@ -582,6 +603,8 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             row["face_interval"] = copy.deepcopy(packet.get("face_interval"))
             row["face_sequence"] = copy.deepcopy(packet.get("face_sequence"))
             row["face_boundary"] = copy.deepcopy(packet.get("face_boundary"))
+            if packet.get("face_return"):
+                row["face_return"] = copy.deepcopy(packet["face_return"])
             row["whole_face_review"] = copy.deepcopy(packet.get("whole_face_review"))
             row["clip"] = copy.deepcopy(packet.get("clip"))
             coarse_count = len(packet["frames"])
@@ -618,12 +641,17 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                             "start_s": packet["start_s"], "end_s": packet["end_s"], "sample_rate": part["source"]["sample_rate"],
                             "source_ranges": copy.deepcopy(packet["source_timestamp_ranges"])}
         else:
+            from app.evidence import document_paragraph_priority
+
             row["images"] = [plate(role, asset, f"Page {asset.get('page', '?')} - {asset.get('role', role)}")
                              for role, asset in sorted(packet["artifacts"].items())]
             focus, context = packet["focus"], packet["context"]
             matched_review = bool(packet.get("matched_context_review"))
             if matched_review:
                 row["matched_context_review"] = True
+            priority = part.get("coverage", {}).get(document_paragraph_priority.KEY)
+            if priority and priority["packet_id"] == packet["id"]:
+                row["paragraph_priority_note"] = document_paragraph_priority.NOTE
             if packet.get("context_comparison") is not None:
                 row["context_comparison"] = copy.deepcopy(packet["context_comparison"])
                 if withheld:
@@ -689,7 +717,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             row["locator"] = (f"PCM {interval['start_sample'] / rate:.3f}-{interval['end_sample'] / rate:.3f} s; "
                               f"samples [{interval['start_sample']}, {interval['end_sample']})")
         elif packet_kind == "video":
-            interval = row["picture_hold"] or row["face_sequence"] or row["face_interval"] or (row["window"] if row["whole_face_review"] else None)
+            interval = row["picture_hold"] or row["face_sequence"] or row["face_interval"] or row.get("face_return") or (row["window"] if row["whole_face_review"] else None)
             label = "Identical frames" if row["picture_hold"] else "Sampled face positions" if row["whole_face_review"] else "Face review range"
             row["locator"] = (f"{label} {interval['start_stream_s']:.3f}-{interval['end_stream_s']:.3f} s" if interval else
                               "; ".join(f"frame {f['anchor']['frame_index']} at {f['anchor']['stream_time_s']:.6f} s" for f in packet["frames"]))

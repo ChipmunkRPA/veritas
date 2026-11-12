@@ -34,6 +34,7 @@ export interface ImageReferenceRecord {
     submitted_overlap: NativeImageArea
     reference_overlap: NativeImageArea
   }
+  submitted_over_reference_xy?: [[number, number], [number, number]]
   additional_regions?: number
 }
 

@@ -6,7 +6,7 @@ from fractions import Fraction
 
 from app.evidence.face_boundary_clock import COARSE_LIMIT, MAX_FRAMES, SCHEDULE_MARGIN, native_schedule
 from app.evidence.face_interval_binding import APPEARANCE_METHOD, face_context_box, validate_face_input
-from app.evidence.video_packet_versions import BOUNDARY_VERSION
+from app.evidence.video_packet_versions import BOUNDARY_VERSIONS
 
 METHOD = "face-appearance-boundary/1"
 ROLES = ("before", "during", "after")
@@ -102,7 +102,7 @@ def validate_packet(packet: dict, source: dict, version: str, *, table_pts=None,
     if not {"face_boundary", "face_boundary_frames"}.intersection(packet):
         return
     record, frames = packet.get("face_boundary"), packet.get("face_boundary_frames")
-    if (version != BOUNDARY_VERSION or not isinstance(record, dict) or not isinstance(frames, list)
+    if (version not in BOUNDARY_VERSIONS or not isinstance(record, dict) or not isinstance(frames, list)
             or len(frames) != len(ROLES) or packet.get("affects_overall_confidence") is not False
             or packet.get("semantics") != APPEARANCE_METHOD or len(packet["signal_refs"]) != 1):
         raise ValueError("Refined boundaries need a corresponding confidence-neutral face check")

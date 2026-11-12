@@ -1,0 +1,533 @@
+{
+  "advanced": false,
+  "assessed": 59,
+  "calls": {
+    "encoder": 76,
+    "speech_gate": 12408,
+    "voice": 109
+  },
+  "checks": {
+    "maximum_new_clean_flags": true,
+    "maximum_new_false_flags": false,
+    "minimum_correct_additions": false,
+    "minimum_gained_source_groups": true,
+    "minimum_genuine_assessed_minus5_per_traffic": true,
+    "minimum_traffic_recording_groups_with_gain": false
+  },
+  "commitments": {
+    "alania": "eef1ffacc9de432d59b1336df16b3ffe8876664f87b20e56ef2c4836893ce155",
+    "background": "3d5a702131268cf65217a163404ddc6095eefb6b199d1ed5ea97487df0a98149",
+    "baseline_sha256": "bbd485f5e6aad6374fe3de08ebb134ac6803882f0ee1cdc7846576c758c6d0eb",
+    "candidate_sha256": "bd2812f0a44ca7f4c6001f76c553b8bf4f4f4362f471606b2f1a6954503cbbf5",
+    "freeze_sha256": "da96e2af5391693f7c9944849456cb23dfa36db910872cb54684cbb8839c6c0d",
+    "genuine": "c35803a686fd470f15c411a9849d37b0e9eea426eda9037481d9c637150bf4b4",
+    "librispeech_archive_sha256": "39fde525e59672dc6d1551919b1478f724438a95aa55f874b576be21967e6c23",
+    "okur_followup": "33a41facabc915464c7d16ea435a9463b02e56c02fb30ed163bc2792a6f9abe8",
+    "okur_pilot": "37e697d698ff4be034aa8631505c081e83185aa2a39e1ed32f8cf9ae1e11b6f8",
+    "old_catalogue_sha256": "526a660d812c3afec959fb45946101d643181816e4b7c4248e93559280adbf83",
+    "previous_panel": "5fb45d9333ec42aee1221905f48d2e613f6c67a3dca277ad0959a80d35c270d2",
+    "previous_transfer_roster_sha256": "4dfe7075fd3b39a3a60bcc73ec364014fdc4367a11b360cbfddaf4667b98747c",
+    "screen": "ba7b38b7cdbb285c59d02c54ee72355c5db9dc108e5b35869296b3d84f895956",
+    "short_edit_holdout_sha256": "409d0dd8614dbc70ed27986bfdb4c0597e61cf04f29297ea874cec39ad8e8843"
+  },
+  "correct_additions": 5,
+  "counts": {
+    "all": {
+      "corroborated": {
+        "background:unassessed": 6,
+        "clone:ai": 9,
+        "clone:inconclusive": 4,
+        "clone:unassessed": 8,
+        "expressive:inconclusive": 1,
+        "expressive:unassessed": 20,
+        "genuine:ai": 7,
+        "genuine:inconclusive": 21,
+        "genuine:original": 12,
+        "genuine:unassessed": 30,
+        "stock:ai": 3,
+        "stock:inconclusive": 2,
+        "stock:unassessed": 9
+      },
+      "incumbent": {
+        "background:unassessed": 6,
+        "clone:ai": 5,
+        "clone:inconclusive": 8,
+        "clone:unassessed": 8,
+        "expressive:inconclusive": 1,
+        "expressive:unassessed": 20,
+        "genuine:ai": 2,
+        "genuine:inconclusive": 26,
+        "genuine:original": 12,
+        "genuine:unassessed": 30,
+        "stock:ai": 2,
+        "stock:inconclusive": 3,
+        "stock:unassessed": 9
+      },
+      "ordinary_rescue": {
+        "background:unassessed": 6,
+        "clone:ai": 9,
+        "clone:inconclusive": 4,
+        "clone:unassessed": 8,
+        "expressive:inconclusive": 1,
+        "expressive:unassessed": 20,
+        "genuine:ai": 6,
+        "genuine:inconclusive": 22,
+        "genuine:original": 12,
+        "genuine:unassessed": 30,
+        "stock:ai": 2,
+        "stock:inconclusive": 3,
+        "stock:unassessed": 9
+      },
+      "reduced_rescue": {
+        "background:unassessed": 6,
+        "clone:ai": 10,
+        "clone:inconclusive": 3,
+        "clone:unassessed": 8,
+        "expressive:inconclusive": 1,
+        "expressive:unassessed": 20,
+        "genuine:ai": 8,
+        "genuine:inconclusive": 20,
+        "genuine:original": 12,
+        "genuine:unassessed": 30,
+        "stock:ai": 3,
+        "stock:inconclusive": 2,
+        "stock:unassessed": 9
+      }
+    },
+    "clean": {
+      "corroborated": {
+        "clone:ai": 3,
+        "expressive:inconclusive": 1,
+        "expressive:unassessed": 2,
+        "genuine:original": 10,
+        "stock:ai": 2
+      },
+      "incumbent": {
+        "clone:ai": 3,
+        "expressive:inconclusive": 1,
+        "expressive:unassessed": 2,
+        "genuine:original": 10,
+        "stock:ai": 2
+      },
+      "ordinary_rescue": {
+        "clone:ai": 3,
+        "expressive:inconclusive": 1,
+        "expressive:unassessed": 2,
+        "genuine:original": 10,
+        "stock:ai": 2
+      },
+      "reduced_rescue": {
+        "clone:ai": 3,
+        "expressive:inconclusive": 1,
+        "expressive:unassessed": 2,
+        "genuine:original": 10,
+        "stock:ai": 2
+      }
+    },
+    "isolated": {
+      "corroborated": {
+        "background:unassessed": 6
+      },
+      "incumbent": {
+        "background:unassessed": 6
+      },
+      "ordinary_rescue": {
+        "background:unassessed": 6
+      },
+      "reduced_rescue": {
+        "background:unassessed": 6
+      }
+    },
+    "isolated/recording_1": {
+      "corroborated": {
+        "background:unassessed": 2
+      },
+      "incumbent": {
+        "background:unassessed": 2
+      },
+      "ordinary_rescue": {
+        "background:unassessed": 2
+      },
+      "reduced_rescue": {
+        "background:unassessed": 2
+      }
+    },
+    "isolated/recording_2": {
+      "corroborated": {
+        "background:unassessed": 2
+      },
+      "incumbent": {
+        "background:unassessed": 2
+      },
+      "ordinary_rescue": {
+        "background:unassessed": 2
+      },
+      "reduced_rescue": {
+        "background:unassessed": 2
+      }
+    },
+    "isolated/recording_3": {
+      "corroborated": {
+        "background:unassessed": 2
+      },
+      "incumbent": {
+        "background:unassessed": 2
+      },
+      "ordinary_rescue": {
+        "background:unassessed": 2
+      },
+      "reduced_rescue": {
+        "background:unassessed": 2
+      }
+    },
+    "traffic_10": {
+      "corroborated": {
+        "clone:ai": 2,
+        "clone:inconclusive": 1,
+        "clone:unassessed": 6,
+        "expressive:unassessed": 9,
+        "genuine:ai": 4,
+        "genuine:inconclusive": 4,
+        "genuine:original": 1,
+        "genuine:unassessed": 21,
+        "stock:unassessed": 6
+      },
+      "incumbent": {
+        "clone:ai": 1,
+        "clone:inconclusive": 2,
+        "clone:unassessed": 6,
+        "expressive:unassessed": 9,
+        "genuine:ai": 1,
+        "genuine:inconclusive": 7,
+        "genuine:original": 1,
+        "genuine:unassessed": 21,
+        "stock:unassessed": 6
+      },
+      "ordinary_rescue": {
+        "clone:ai": 2,
+        "clone:inconclusive": 1,
+        "clone:unassessed": 6,
+        "expressive:unassessed": 9,
+        "genuine:ai": 2,
+        "genuine:inconclusive": 6,
+        "genuine:original": 1,
+        "genuine:unassessed": 21,
+        "stock:unassessed": 6
+      },
+      "reduced_rescue": {
+        "clone:ai": 2,
+        "clone:inconclusive": 1,
+        "clone:unassessed": 6,
+        "expressive:unassessed": 9,
+        "genuine:ai": 4,
+        "genuine:inconclusive": 4,
+        "genuine:original": 1,
+        "genuine:unassessed": 21,
+        "stock:unassessed": 6
+      }
+    },
+    "traffic_10/recording_1": {
+      "corroborated": {
+        "clone:ai": 1,
+        "clone:inconclusive": 1,
+        "clone:unassessed": 1,
+        "expressive:unassessed": 3,
+        "genuine:ai": 2,
+        "genuine:inconclusive": 1,
+        "genuine:original": 1,
+        "genuine:unassessed": 6,
+        "stock:unassessed": 2
+      },
+      "incumbent": {
+        "clone:inconclusive": 2,
+        "clone:unassessed": 1,
+        "expressive:unassessed": 3,
+        "genuine:inconclusive": 3,
+        "genuine:original": 1,
+        "genuine:unassessed": 6,
+        "stock:unassessed": 2
+      },
+      "ordinary_rescue": {
+        "clone:ai": 1,
+        "clone:inconclusive": 1,
+        "clone:unassessed": 1,
+        "expressive:unassessed": 3,
+        "genuine:inconclusive": 3,
+        "genuine:original": 1,
+        "genuine:unassessed": 6,
+        "stock:unassessed": 2
+      },
+      "reduced_rescue": {
+        "clone:ai": 1,
+        "clone:inconclusive": 1,
+        "clone:unassessed": 1,
+        "expressive:unassessed": 3,
+        "genuine:ai": 2,
+        "genuine:inconclusive": 1,
+        "genuine:original": 1,
+        "genuine:unassessed": 6,
+        "stock:unassessed": 2
+      }
+    },
+    "traffic_10/recording_2": {
+      "corroborated": {
+        "clone:ai": 1,
+        "clone:unassessed": 2,
+        "expressive:unassessed": 3,
+        "genuine:ai": 2,
+        "genuine:inconclusive": 3,
+        "genuine:unassessed": 5,
+        "stock:unassessed": 2
+      },
+      "incumbent": {
+        "clone:ai": 1,
+        "clone:unassessed": 2,
+        "expressive:unassessed": 3,
+        "genuine:ai": 1,
+        "genuine:inconclusive": 4,
+        "genuine:unassessed": 5,
+        "stock:unassessed": 2
+      },
+      "ordinary_rescue": {
+        "clone:ai": 1,
+        "clone:unassessed": 2,
+        "expressive:unassessed": 3,
+        "genuine:ai": 2,
+        "genuine:inconclusive": 3,
+        "genuine:unassessed": 5,
+        "stock:unassessed": 2
+      },
+      "reduced_rescue": {
+        "clone:ai": 1,
+        "clone:unassessed": 2,
+        "expressive:unassessed": 3,
+        "genuine:ai": 2,
+        "genuine:inconclusive": 3,
+        "genuine:unassessed": 5,
+        "stock:unassessed": 2
+      }
+    },
+    "traffic_10/recording_3": {
+      "corroborated": {
+        "clone:unassessed": 3,
+        "expressive:unassessed": 3,
+        "genuine:unassessed": 10,
+        "stock:unassessed": 2
+      },
+      "incumbent": {
+        "clone:unassessed": 3,
+        "expressive:unassessed": 3,
+        "genuine:unassessed": 10,
+        "stock:unassessed": 2
+      },
+      "ordinary_rescue": {
+        "clone:unassessed": 3,
+        "expressive:unassessed": 3,
+        "genuine:unassessed": 10,
+        "stock:unassessed": 2
+      },
+      "reduced_rescue": {
+        "clone:unassessed": 3,
+        "expressive:unassessed": 3,
+        "genuine:unassessed": 10,
+        "stock:unassessed": 2
+      }
+    },
+    "traffic_5": {
+      "corroborated": {
+        "clone:ai": 4,
+        "clone:inconclusive": 3,
+        "clone:unassessed": 2,
+        "expressive:unassessed": 9,
+        "genuine:ai": 3,
+        "genuine:inconclusive": 17,
+        "genuine:original": 1,
+        "genuine:unassessed": 9,
+        "stock:ai": 1,
+        "stock:inconclusive": 2,
+        "stock:unassessed": 3
+      },
+      "incumbent": {
+        "clone:ai": 1,
+        "clone:inconclusive": 6,
+        "clone:unassessed": 2,
+        "expressive:unassessed": 9,
+        "genuine:ai": 1,
+        "genuine:inconclusive": 19,
+        "genuine:original": 1,
+        "genuine:unassessed": 9,
+        "stock:inconclusive": 3,
+        "stock:unassessed": 3
+      },
+      "ordinary_rescue": {
+        "clone:ai": 4,
+        "clone:inconclusive": 3,
+        "clone:unassessed": 2,
+        "expressive:unassessed": 9,
+        "genuine:ai": 4,
+        "genuine:inconclusive": 16,
+        "genuine:original": 1,
+        "genuine:unassessed": 9,
+        "stock:inconclusive": 3,
+        "stock:unassessed": 3
+      },
+      "reduced_rescue": {
+        "clone:ai": 5,
+        "clone:inconclusive": 2,
+        "clone:unassessed": 2,
+        "expressive:unassessed": 9,
+        "genuine:ai": 4,
+        "genuine:inconclusive": 16,
+        "genuine:original": 1,
+        "genuine:unassessed": 9,
+        "stock:ai": 1,
+        "stock:inconclusive": 2,
+        "stock:unassessed": 3
+      }
+    },
+    "traffic_5/recording_1": {
+      "corroborated": {
+        "clone:ai": 3,
+        "expressive:unassessed": 3,
+        "genuine:ai": 1,
+        "genuine:inconclusive": 6,
+        "genuine:original": 1,
+        "genuine:unassessed": 2,
+        "stock:ai": 1,
+        "stock:unassessed": 1
+      },
+      "incumbent": {
+        "clone:inconclusive": 3,
+        "expressive:unassessed": 3,
+        "genuine:inconclusive": 7,
+        "genuine:original": 1,
+        "genuine:unassessed": 2,
+        "stock:inconclusive": 1,
+        "stock:unassessed": 1
+      },
+      "ordinary_rescue": {
+        "clone:ai": 3,
+        "expressive:unassessed": 3,
+        "genuine:ai": 1,
+        "genuine:inconclusive": 6,
+        "genuine:original": 1,
+        "genuine:unassessed": 2,
+        "stock:inconclusive": 1,
+        "stock:unassessed": 1
+      },
+      "reduced_rescue": {
+        "clone:ai": 3,
+        "expressive:unassessed": 3,
+        "genuine:ai": 2,
+        "genuine:inconclusive": 5,
+        "genuine:original": 1,
+        "genuine:unassessed": 2,
+        "stock:ai": 1,
+        "stock:unassessed": 1
+      }
+    },
+    "traffic_5/recording_2": {
+      "corroborated": {
+        "clone:ai": 1,
+        "clone:inconclusive": 2,
+        "expressive:unassessed": 3,
+        "genuine:ai": 2,
+        "genuine:inconclusive": 5,
+        "genuine:unassessed": 3,
+        "stock:inconclusive": 1,
+        "stock:unassessed": 1
+      },
+      "incumbent": {
+        "clone:ai": 1,
+        "clone:inconclusive": 2,
+        "expressive:unassessed": 3,
+        "genuine:ai": 1,
+        "genuine:inconclusive": 6,
+        "genuine:unassessed": 3,
+        "stock:inconclusive": 1,
+        "stock:unassessed": 1
+      },
+      "ordinary_rescue": {
+        "clone:ai": 1,
+        "clone:inconclusive": 2,
+        "expressive:unassessed": 3,
+        "genuine:ai": 3,
+        "genuine:inconclusive": 4,
+        "genuine:unassessed": 3,
+        "stock:inconclusive": 1,
+        "stock:unassessed": 1
+      },
+      "reduced_rescue": {
+        "clone:ai": 2,
+        "clone:inconclusive": 1,
+        "expressive:unassessed": 3,
+        "genuine:ai": 2,
+        "genuine:inconclusive": 5,
+        "genuine:unassessed": 3,
+        "stock:inconclusive": 1,
+        "stock:unassessed": 1
+      }
+    },
+    "traffic_5/recording_3": {
+      "corroborated": {
+        "clone:inconclusive": 1,
+        "clone:unassessed": 2,
+        "expressive:unassessed": 3,
+        "genuine:inconclusive": 6,
+        "genuine:unassessed": 4,
+        "stock:inconclusive": 1,
+        "stock:unassessed": 1
+      },
+      "incumbent": {
+        "clone:inconclusive": 1,
+        "clone:unassessed": 2,
+        "expressive:unassessed": 3,
+        "genuine:inconclusive": 6,
+        "genuine:unassessed": 4,
+        "stock:inconclusive": 1,
+        "stock:unassessed": 1
+      },
+      "ordinary_rescue": {
+        "clone:inconclusive": 1,
+        "clone:unassessed": 2,
+        "expressive:unassessed": 3,
+        "genuine:inconclusive": 6,
+        "genuine:unassessed": 4,
+        "stock:inconclusive": 1,
+        "stock:unassessed": 1
+      },
+      "reduced_rescue": {
+        "clone:inconclusive": 1,
+        "clone:unassessed": 2,
+        "expressive:unassessed": 3,
+        "genuine:inconclusive": 6,
+        "genuine:unassessed": 4,
+        "stock:inconclusive": 1,
+        "stock:unassessed": 1
+      }
+    }
+  },
+  "frozen_rule": {
+    "maximum_new_clean_flags": 0,
+    "maximum_new_false_flags": 1,
+    "minimum_correct_additions": 6,
+    "minimum_gained_source_groups": 3,
+    "minimum_genuine_assessed_minus5_per_traffic": 5,
+    "minimum_traffic_recording_groups_with_gain": 2,
+    "raw_margin": 0.05
+  },
+  "gained_source_groups": 4,
+  "gained_traffic_groups": 1,
+  "genuine_source_groups": 10,
+  "incumbent_inconclusive": 38,
+  "maximum_measured_noise_target_error_db": 0.0002883,
+  "minimum_genuine_assessed_minus5": 6,
+  "new_clean_flags": 0,
+  "new_false_flags": 5,
+  "new_false_source_groups": 4,
+  "new_false_traffic_groups": 2,
+  "schema": "chipmunk.audio-strong-traffic-view-transfer/1",
+  "synthetic_source_groups": 8,
+  "traffic_source_groups": 3,
+  "views": 132
+}

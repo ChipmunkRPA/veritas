@@ -29,6 +29,7 @@ from app.evidence import (
     face_interval_binding,
     face_intervals,
     face_lighting_context,
+    face_return_binding,
     picture_hold_binding,
     whole_face_binding,
 )
@@ -43,6 +44,7 @@ from app.evidence.video_packet_versions import (
     LIGHTING_CONTEXT_VERSIONS,
     NESTED_VERSIONS,
     PICTURE_HOLD_VERSIONS,
+    SHORT_FACE_VERSION,
     VERSIONS,
 )
 from app.storage.artefacts import get_artefact, register_artefact
@@ -348,6 +350,39 @@ def _sequence_observations(result: dict, table: FrameTable, source: dict, anchor
     return candidates, scored
 
 
+def _return_observations(result: dict, table: FrameTable, source: dict, anchors: dict) -> tuple[list[dict], set[int]]:
+    candidates, scored = [], set()
+    for signal in result.get("signals", []):
+        details = signal.get("details") or {}
+        if (record := details.get("face_return")) is None:
+            continue
+        if signal.get("status", "ok") != "ok" or signal.get("effective_weight") != 0.0 or candidates:
+            raise PacketIntegrityError("Supplemental face evidence needs one confidence-neutral source check")
+        record = json.loads(canonical_json(record))
+        face_return_binding.validate_record(record, source, table_pts=table.pts, interpolated=table.interpolated,
+                                            rotation=table.rotation, truncated=table.truncated)
+        face_return_binding.validate_distinct(record, details.get("face_sequence"))
+        for item in (*record["frame_inputs"], *record["scene_frame_inputs"]):
+            i = item["frame_index"]
+            if i not in anchors or any(item[key] != anchors[i][key] for key in ("pts", "decoded_rgb_sha256")):
+                raise PacketIntegrityError("Short face-change evidence differs from committed native frames")
+            scored.add(i)
+        faces = {item["frame_index"]: item for item in record["frame_inputs"]}
+        indices = sorted(faces.keys() | {item["frame_index"] for item in record["scene_frame_inputs"]})
+        rows = []
+        for role in face_return_binding.ROLES:
+            i = record["anchors"][role]
+            rows.append({"frame_index": i, "score": None, "interval_role": role,
+                         "box": face_interval_binding.face_context_box(faces[i]["bbox"], source)})
+        candidates.append({"face_return": record, "window": {"frame_indices": indices},
+                           "signals": [signal], "track_id": None, "series_name": "short_face_appearance",
+                           "exhibit": {"id": next(iter(signal.get("exhibit_ids", [])), "")},
+                           "rows": rows,
+                           "peak": {"frame_index": record["anchors"]["during"], "score": record["response"]},
+                           "threshold": None, "scored_frame_count": len(indices)})
+    return candidates, scored
+
+
 def _contact(images: list[Image.Image], labels: list[str]) -> Image.Image:
     panel_w, panel_h = 320, 220
     sheet = Image.new("RGB", (panel_w * len(images), panel_h), (247, 247, 242))
@@ -434,26 +469,30 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     candidates, scored_frames, omitted = _observations(db, store, analysis, result, table, anchors)
     window_candidates, window_frames = _window_observations(result, table, anchors)
     sequence_candidates, sequence_frames = _sequence_observations(result, table, source, anchors)
+    return_candidates, return_frames = _return_observations(result, table, source, anchors)
     whole_candidates = _whole_face_candidate(result, table, source, anchors)
     window_frames.update(row["frame_index"] for candidate in whole_candidates for row in candidate["whole_face_review"]["samples"]
                          if any(value is not None for value in row["responses_hex"]))
-    window_frames |= sequence_frames
+    window_frames |= sequence_frames | return_frames
     sequence_checks = sum(1 for signal in result.get("signals", []) if signal.get("status", "ok") == "ok"
                           and (signal.get("details") or {}).get("face_sequence_binding_version") in face_interval_binding.SEQUENCE_METHODS
                           and ((signal.get("details") or {}).get("face_sequence_windows") or (signal.get("details") or {}).get("face_sequence")))
     face_candidates = [item for item in candidates if "face_interval" in item]
     existing = window_candidates + [item for item in candidates if "face_interval" not in item]
     chosen = whole_candidates + sequence_candidates[:1] + face_candidates[:2-len(sequence_candidates[:1])] + existing[:MAX_PACKETS]
+    omitted_candidates = len(existing) + len(face_candidates) + len(sequence_candidates) + len(whole_candidates) - len(chosen)
+    chosen += return_candidates
     scored_frames |= window_frames
     set_id = current_set_id(analysis)
-    document = {"schema": SCHEMA, "version": VERSION, "id": set_id, "status": "ready", "analysis_id": analysis.id,
+    version = SHORT_FACE_VERSION if return_candidates else VERSION
+    document = {"schema": SCHEMA, "version": version, "id": set_id, "status": "ready", "analysis_id": analysis.id,
                 "revision": analysis.revision, "original_result_hash": analysis.result_hash, "source": source, "packets": [],
                 "coverage": {"kind": "point_and_window_samples" if window_frames else "point_samples", "frame_count": len(table), "decoded_frame_indices": sorted(anchors),
                              "scored_frame_indices": sorted(scored_frames), "scored_frame_count": len(scored_frames),
-                             "window_frame_indices": sorted(window_frames), "window_check_count": len(window_candidates) + sequence_checks + len(whole_candidates),
+                             "window_frame_indices": sorted(window_frames), "window_check_count": len(window_candidates) + sequence_checks + len(whole_candidates) + len(return_candidates),
                              "table_truncated": table.truncated, "interpolated_frame_indices": list(table.interpolated),
                              "unmapped_observations": omitted, "channels": _channel_coverage(db, store, analysis, result)},
-                "source_records": records, "omitted_candidates": len(existing) + len(face_candidates) + len(sequence_candidates) + len(whole_candidates) - len(chosen),
+                "source_records": records, "omitted_candidates": omitted_candidates,
                 "limitations": ["These are sampled frame observations. Unscored frames and gaps are not negative findings.",
                                 "Frame and face classification scores do not locate edited pixels or prove AI editing.",
                                 "The contact sheet shows neighbouring scored samples, not necessarily consecutive video frames."]}
@@ -462,6 +501,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
             "unavailable", picture_hold_binding.HISTORICAL, source["time_base"]))
     match = hold["match"] if hold is not None else None
     boundary_indices = {i for candidate in chosen for i in candidate.get("face_boundary", {}).get("anchors", {}).values()}
+    exact_indices = boundary_indices | {i for candidate in return_candidates for i in candidate["face_return"]["anchors"].values()}
     wanted = {row["frame_index"] for candidate in chosen for row in candidate["rows"]} | boundary_indices
     endpoints = {match["start_frame_index"], match["end_frame_index"]} if match is not None else set()
     selected = sorted(wanted | endpoints)
@@ -469,8 +509,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     if selected:
         with closing(decode_frames(store.path_for(analysis.sha256), table, selected)) as source_frames:
             for frame in source_frames:
-                if frame.index in boundary_indices and (not frame.pts_verified or frame.pts != anchors[frame.index]["pts"]):
-                    raise PacketIntegrityError("Refined face evidence image lacks a verified decoded timestamp")
+                if frame.index in exact_indices and (not frame.pts_verified or frame.pts != anchors[frame.index]["pts"]):
+                    raise PacketIntegrityError("Face evidence image lacks a verified decoded timestamp")
                 decoded[frame.index] = frame.rgb
     for i in wanted:
         if i not in decoded or hashlib.sha256(decoded[i].tobytes()).hexdigest() != anchors[i]["decoded_rgb_sha256"]:
@@ -513,7 +553,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
             if sequence := candidate.get("face_sequence"):
                 measured = next(row for row in sequence["frame_inputs"] if row["frame_index"] == i)
                 region = face_interval_binding.face_context_box(measured["bbox"], source)
-            if candidate.get("whole_face_review"):
+            if candidate.get("whole_face_review") or candidate.get("face_return"):
                 region = row["box"]
             role = row.get("interval_role")
             frame, context = write_frame(i, region, f"{packet_id}.{pos}", f"frame_{pos}", score=row["score"],
@@ -547,7 +587,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                                    "derivation": {"version": VERSION, "selection": "highest_recorded_point_and_adjacent_samples",
                                                   "decoder": "ffmpeg-rgb24-display-v1", "frame_pts_unit": "stream_ticks",
                                                   "source_pixels": "exact_native_rgb", "contact_sheet": "sampled_sequence"}}
-        if "window" in candidate and "whole_face_review" not in candidate:
+        if "window" in candidate and not (candidate.get("whole_face_review") or candidate.get("face_return")):
             window = candidate["window"]
             indices = window["frame_indices"]
             origin = source["timeline_origin_s"]
@@ -639,6 +679,24 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                           limitations=["The range runs from the first to the last flagged sample. Exact edit boundaries and pixels remain undetermined.",
                                        "A face track joins nearby detections. It does not establish anyone's identity."],
                           derivation={**packet["derivation"], "selection": "sustained_face_response_with_flanking_context"})
+        if face_return := candidate.get("face_return"):
+            indices = candidate["window"]["frame_indices"]
+            start, end = face_return["start_stream_s"], face_return["end_stream_s"]
+            origin = source["timeline_origin_s"]
+            packet.update(title="Brief face-change range to review", evidence_type="anomaly", claim_scope="sampled_window",
+                          semantics=face_return_binding.METHOD, face_return=face_return, affects_overall_confidence=False,
+                          observation=face_return_binding.observation(face_return),
+                          interpretation="The appearance within the selected time range differs from the views immediately before and after it. The surrounding scene remained similar at both sampled boundaries. Compare the three original crops for possible changes in expression, angle, lighting, or the face itself.",
+                          measurements=[{"label": "Face appearance separation", "value": face_return["response"], "unit": "uncalibrated feature distance"},
+                                        {"label": "Measured face samples", "value": len(face_return["frame_inputs"]), "unit": "frames"}],
+                          window={"frame_indices": indices, "time_base": table.time_base,
+                                  "start_pts": face_return["start_pts"], "end_pts": face_return["end_pts"],
+                                  "start_stream_s": start, "end_stream_s": end,
+                                  "start_playback_s": None if origin is None else start - origin,
+                                  "end_playback_s": None if origin is None else end - origin},
+                          limitations=["This observation covers sampled frames and carries zero weight in the overall assessment.",
+                                       "The source crops locate the inspected area. The cause of the change remains undetermined."],
+                          derivation={**packet["derivation"], "selection": "distinct_short_face_change_with_surrounding_scene_check"})
         try:
             bounds = select_range(table, candidate["peak"]["frame_index"])
             if bounds not in clip_cache:
@@ -692,6 +750,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
     source = document["source"]
     try:
         picture_hold_binding.validate(document)
+        face_return_binding.validate_set(document)
     except (KeyError, TypeError, ValueError) as error:
         raise PacketIntegrityError(str(error)) from error
     table_base = FrameTable(time_base=source["time_base"], pts=(), key_frames=(), pict_types="", width=source["width"],
@@ -711,6 +770,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
             validate_clip_binding(packet, source)
             face_interval_binding.validate_packet(packet, source)
             face_boundary_binding.validate_packet(packet, source, document["version"])
+            face_return_binding.validate_packet(packet, source)
             whole_face_binding.validate_packet(packet, source)
             if document["version"] in ALIGNMENT_CONTEXT_VERSIONS:
                 face_alignment_context.validate(packet)

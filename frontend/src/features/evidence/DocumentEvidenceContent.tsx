@@ -147,6 +147,9 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
         aria-label={`${packet.id}: source passage and reasons`} data-selected={selectedId === packet.id ? 'true' : undefined}
         className={`${evidenceCard} focus-visible:outline-2 focus-visible:outline-accent`}>
         <h3 className="m-0 text-body font-medium"><span className="font-mono text-accent mr-3">{packet.id}</span>{packet.title}</h3>
+        {set.coverage?.isolated_paragraph_priority?.packet_id === packet.id && <p className="mt-2 mb-0 text-small text-text-muted">
+          This passage appears first because the AI-like response persisted when the same check read the whole paragraph. This ordering carries zero weight in the overall assessment.
+        </p>}
         <p className="mt-2 mb-0 text-caption font-mono text-accent">{passageLocation(packet)}</p>
         <p className="mt-2 mb-0 text-body">{packet.observation}</p>
         <RecordedPassage packet={packet} />

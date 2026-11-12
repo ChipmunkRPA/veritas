@@ -84,9 +84,11 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
              and evidence.get('source', {}).get('sha256') == source['sha256'] == binding.get('source_sha256'),
              'The evidence source/result/revision binding differs')
     if analysis['kind'] == 'video':
+        from app.evidence import face_return_binding
         from app.evidence.picture_hold_binding import validate as validate_picture_hold
 
         validate_picture_hold(evidence)
+        face_return_binding.validate_set(evidence)
         for packet in evidence.get('packets', []):
             validate_clip_binding(packet, evidence['source'])
             validate_face_interval(packet, evidence['source'])
@@ -97,6 +99,13 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                              and check.get('face_boundary_measurement_sha256') == measurement
                              for check in result.get('checks', [])),
                          'Refined face timing differs from its corresponding public check')
+            if packet.get('face_return') is not None or packet.get('semantics') == 'face-short-return/1':
+                face_return_binding.validate_packet(packet, evidence['source'])
+                measurement = canonical_hash(packet['face_return'])
+                _require(any(check['id'] == packet['signal_refs'][0]['id'] and check.get('status') == 'ok'
+                             and check.get('short_face_change_measurement_sha256') == measurement
+                             for check in result.get('checks', [])),
+                         'Short face-change evidence differs from its corresponding public check')
             if packet.get('whole_face_review') is not None or packet.get('semantics') == 'paired-whole-face-samples/1':
                 from app.evidence.whole_face_binding import validate_packet as validate_whole_face
 
@@ -158,10 +167,12 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                     _require(cue is None and 'copy_donor' not in assets, 'Copy evidence is missing its component mask')
     if analysis['kind'] == 'document':
         from app.evidence.document_matched_context import validate as validate_matched_context
+        from app.evidence.document_paragraph_priority import validate as validate_paragraph_priority
         from app.evidence.document_repeat import validate as validate_repeated_passages
 
         validate_repeated_passages(evidence)
         validate_matched_context(evidence, published_checks={check['id'] for check in result.get('checks', [])})
+        validate_paragraph_priority(evidence)
     if analysis['kind'] == 'document' and evidence['version'] in document_scope.CONTEXT_VERSIONS:
         from app.evidence.document_context import validate as validate_context_comparison
 

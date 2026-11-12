@@ -59,7 +59,7 @@ def _geometry(sentences) -> list[tuple[dict, list[dict]]]:
     return [(spans[i], spans[i - 1:i + 2]) for i in (1, 2) if sentences[i].n_words >= MIN_FOCUS_WORDS]
 
 
-def _one_complete_window(coverage: dict) -> bool:
+def one_complete_window(coverage: dict) -> bool:
     count = coverage.get("tokens")
     return (
         type(count) is int and 0 < count <= 512
@@ -76,7 +76,7 @@ def capture(doc, sentences, windows: list[dict]) -> dict | None:
     contexts = []
     for focus, spans in geometry:
         window = next((entry for entry in windows if entry["focus"] == focus), None)
-        if window is None or window["spans"] != spans or not _one_complete_window(window["token_coverage"]):
+        if window is None or window["spans"] != spans or not one_complete_window(window["token_coverage"]):
             return None
         raw = window["score"]
         contexts.append({"focus": focus, "spans": spans, "input_sha256": window["input_sha256"],
@@ -135,7 +135,7 @@ def _validate_context(row: dict, size: int) -> None:
             or any(set(span) != {"start", "end"} for span in row["spans"])
             or not isinstance(row["input_sha256"], str) or not re.fullmatch(r"[a-f0-9]{64}", row["input_sha256"])
             or raw.hex() != row["score_exact_hex"] or row["selected"] is not selected(raw)
-            or not _one_complete_window(row["token_coverage"])):
+            or not one_complete_window(row["token_coverage"])):
         raise ValueError("Matched writing review has invalid bounds, coverage or decision")
 
 

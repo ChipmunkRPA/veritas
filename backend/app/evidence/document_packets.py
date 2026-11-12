@@ -21,7 +21,12 @@ from sqlalchemy.orm import Session
 from app.api.public_projection import alias_signal
 from app.core.canonical import canonical_hash, canonical_json
 from app.detectors.text.extract import SOURCE_MAP_VERSION, text_hash
-from app.evidence import document_matched_context, document_repeat, document_scope
+from app.evidence import (
+    document_matched_context,
+    document_paragraph_priority,
+    document_repeat,
+    document_scope,
+)
 from app.storage.artefacts import get_artefact, register_artefact
 from app.storage.db import Analysis, AnalysisStage, Artefact
 from app.storage.objects import ObjectIntegrityError, ObjectStore
@@ -306,6 +311,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
     try:
         document_repeat.validate(document)
         document_matched_context.validate(document)
+        document_paragraph_priority.validate(document)
     except (ValueError, KeyError, TypeError, AttributeError) as error:
         raise DocumentPacketIntegrityError("Document review evidence has invalid source commitments or positions") from error
     ids = set()
@@ -551,6 +557,10 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
 
     for packet in document["packets"]:
         packet["context_comparison"] = compare_contexts(result, text, packet["focus"])
+    try:
+        document_paragraph_priority.apply(document, result, text, mapping)
+    except (ValueError, KeyError, TypeError, AttributeError) as error:
+        raise DocumentPacketIntegrityError("Paragraph review order has invalid source commitments or positions") from error
     document = json.loads(canonical_json(document))
     for packet in document["packets"]:
         for window in packet["supporting_windows"]:
@@ -587,6 +597,7 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
         try:
             document_repeat.verify_source(document, decoded["text"], decoded["source_map"])
             document_matched_context.verify_source(document, decoded["text"], decoded["source_map"], result=result)
+            document_paragraph_priority.verify_source(document, decoded["text"], decoded["source_map"], result=result)
         except (ValueError, KeyError, TypeError, AttributeError) as error:
             raise DocumentPacketIntegrityError("Document review evidence differs from the frozen text or source mapping") from error
     store.verify(analysis.sha256)

@@ -85,7 +85,7 @@ from app.engine.fusion.runtime import DECLARED_AI_VERBAL
 from app.engine.profiles import SAMPLING
 from app.engine.runner import StageContext
 from app.engine.stages import common
-from app.evidence import picture_hold_binding
+from app.evidence import face_return_binding, picture_hold_binding
 from app.evidence.audio_binding import (
     VOICE_CLOCK_LIMIT,
     VOICE_CLOCK_POLICY,
@@ -907,6 +907,8 @@ def synthesise(ctx: StageContext) -> dict[str, Any]:
         details = signal.get("details") or {}
         whole = details.get("whole_face_review")
         sequence = details.get("face_sequence")
+        short_change = details.get("face_return")
+        short_coverage = (details.get("face_return_check") or {}).get("status")
         for finding in out["findings"]:
             if signal["id"] not in finding["evidence_ids"]:
                 continue
@@ -918,12 +920,24 @@ def synthesise(ctx: StageContext) -> dict[str, Any]:
                                review_priority="medium" if whole["flagged"] else "info", standalone_strength=None, standalone_direction=None,
                                sentences=[{"text": text, "evidence_ids": finding["evidence_ids"]} for text in (first, second)])
                 continue
-            first = (sequence_observation(sequence) if sequence else
-                     "The sampled face sequences supplied no additional change range to review. The result covers the measured windows.")
+            if sequence:
+                title, first = "Possible face-change range", sequence_observation(sequence)
+                if short_change:
+                    first += " " + face_return_binding.observation(short_change)
+                elif short_coverage in {"not_applicable", "unassessed"}:
+                    first += " The separate brief face-change check could not assess this clip."
+            elif short_change:
+                title, first = "Brief face-change range to review", face_return_binding.observation(short_change)
+            elif short_coverage in {"not_applicable", "unassessed"}:
+                title = "Brief face changes unassessed"
+                first = "The brief face-change check could not assess this clip. The other face samples supplied no additional range to review."
+            else:
+                title = "No additional face-change range"
+                first = "The sampled face sequences supplied no additional change range to review. The result covers the measured windows."
             second = "Motion, expression, lighting and compression may cause similar changes. This inspection cue has no calibrated AI probability and does not change overall confidence."
-            finding.update(title="Possible face-change range" if sequence else "No additional face-change range",
+            finding.update(title=title,
                            statement=first+" "+second, probability=None, direction="neutral", strength="none",
-                           review_priority="medium" if sequence else "info", standalone_strength=None, standalone_direction=None,
+                           review_priority="medium" if sequence or short_change else "info", standalone_strength=None, standalone_direction=None,
                            sentences=[{"text": text, "evidence_ids": finding["evidence_ids"]} for text in (first, second)])
     return out
 
@@ -943,14 +957,19 @@ def _native_render_anchors(ctx: StageContext, frame_store: FrameStore) -> list[d
     refined_indices = set()
     for entry in (ctx.outputs.get("detect") or {}).get("detectors", []):
         details = entry.get("details") or {}
-        if not (boundary := details.get("face_boundary")):
-            continue
-        refined_indices.update(item["frame_index"] for item in boundary["frame_inputs"])
-        for record in (boundary, details["face_sequence"], *details.get("face_sequence_windows", [])):
-            for item in record["frame_inputs"]:
-                identity = item["pts"], item["decoded_rgb_sha256"]
-                if expected.setdefault(item["frame_index"], identity) != identity:
-                    raise DecodeError("Stored face inputs disagree on the decoded source frame")
+        inputs = []
+        if boundary := details.get("face_boundary"):
+            refined_indices.update(item["frame_index"] for item in boundary["frame_inputs"])
+            for record in (boundary, details["face_sequence"], *details.get("face_sequence_windows", [])):
+                inputs.extend(record["frame_inputs"])
+        if face_return := details.get("face_return"):
+            supplemental = [*face_return["frame_inputs"], *face_return["scene_frame_inputs"]]
+            refined_indices.update(item["frame_index"] for item in supplemental)
+            inputs.extend(supplemental)
+        for item in inputs:
+            identity = item["pts"], item["decoded_rgb_sha256"]
+            if expected.setdefault(item["frame_index"], identity) != identity:
+                raise DecodeError("Stored face inputs disagree on the decoded source frame")
     anchors = frame_store.native_anchors()
     if not expected:
         return anchors
@@ -963,7 +982,7 @@ def _native_render_anchors(ctx: StageContext, frame_store: FrameStore) -> list[d
     if any(committed.get(index) != identity for index, identity in expected.items()):
         raise DecodeError("Stored face evidence differs from the re-decoded source frames")
     if any(not frame_store.native_pts_verified(index) for index in refined_indices):
-        raise DecodeError("Refined face evidence lacks a verified decoded timestamp")
+        raise DecodeError("Native face evidence lacks a verified decoded timestamp")
     return anchors
 
 

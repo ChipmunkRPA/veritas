@@ -17,6 +17,7 @@ from app.core.canonical import canonical_hash
 from app.detectors.video.decode import DecodedFrame, FrameTable, decode_frames, probe_frames
 from app.detectors.video.lipsync import source_mouth_patch
 from app.evidence.face_boundary_binding import validate_packet as validate_face_boundary
+from app.evidence.face_return_binding import validate_packet as validate_face_return
 from app.evidence.source_geometry import pixel_bounds
 from app.reports.public_verify import SCHEMA
 from app.reports.verify_image_source import _matches
@@ -102,22 +103,26 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             or canonical_hash(table.to_json()) != source["frame_table_sha256"]):
         raise ValueError("The decoded frame table differs from its commitment. Check the local FFmpeg version.")
 
-    pictures, mouths, faces = defaultdict(list), defaultdict(list), defaultdict(list)
+    pictures, mouths, faces, scenes = defaultdict(list), defaultdict(list), defaultdict(list), defaultdict(list)
     interpolated = set(table.interpolated)
     packets = [*evidence["packets"], *(evidence.get("av") or {}).get("packets", [])]
     for packet in packets:
         _verify_clip_clock(packet, table, interpolated)
         validate_face_boundary(packet, source, evidence["version"], table_pts=table.pts, interpolated=interpolated)
+        validate_face_return(packet, source, table_pts=table.pts, interpolated=interpolated,
+                             rotation=table.rotation, truncated=table.truncated)
         for item in (*packet["frames"], *packet.get("face_boundary_frames", ())):
             pictures[item["anchor"]["frame_index"]].append((packet, item))
         if packet.get("semantics") == "mouth_audio_correlation":
             for row in packet["window"]["frame_inputs"]:
                 mouths[row["frame_index"]].append((packet, row))
-        for key in ("face_sequence", "face_boundary"):
+        for key in ("face_sequence", "face_boundary", "face_return"):
             for row in (packet.get(key) or {}).get("frame_inputs", []):
                 if row not in faces[row["frame_index"]]:
                     faces[row["frame_index"]].append(row)
-    indices = set(pictures) | set(mouths) | set(faces)
+        for row in (packet.get("face_return") or {}).get("scene_frame_inputs", []):
+            scenes[row["frame_index"]].append(row)
+    indices = set(pictures) | set(mouths) | set(faces) | set(scenes)
     found = set()
     images = patches = alignments = 0
     with closing(decode_frames(original, table, sorted(indices))) as stream:
@@ -141,6 +146,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                 _frame_anchor(frame, row["pts"], row["decoded_rgb_sha256"], "Aligned face", rgb_sha)
                 _verify_aligned_face(frame.rgb, row)
                 alignments += 1
+            for row in scenes[index]:
+                _frame_anchor(frame, row["pts"], row["decoded_rgb_sha256"], "Scene boundary", rgb_sha)
     if found != indices:
         raise ValueError("The decoder did not return every referenced native frame")
     if _sha(original) != digest:

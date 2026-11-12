@@ -4,7 +4,8 @@ from __future__ import annotations
 
 VERSION = "document-evidence-5"
 MATCHED_VERSION = "document-evidence-6"
-REPEAT_VERSIONS = frozenset({VERSION, MATCHED_VERSION})
+PARAGRAPH_PRIORITY_VERSION = "document-evidence-7"
+REPEAT_VERSIONS = frozenset({VERSION, MATCHED_VERSION, PARAGRAPH_PRIORITY_VERSION})
 SCOPE_VERSIONS = frozenset({"document-evidence-4", *REPEAT_VERSIONS})
 CONTEXT_VERSIONS = frozenset({"document-evidence-3", *SCOPE_VERSIONS})
 VERSIONS = frozenset({"document-evidence-1", "document-evidence-2", *CONTEXT_VERSIONS})

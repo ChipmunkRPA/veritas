@@ -1,0 +1,9259 @@
+{
+  "code": {
+    "capture_image_viewport_routing.cjs": "4c6b2259f4441a839dcc41b8dc65b4b9b8d08e959543abf432be6ec809490225",
+    "image_crop_layout_transfer.py": "d3c1c77879ebaecba43963cbc95ad23b478a93b65a3a70712159b9c4bb744d14",
+    "image_source_groups_v22.py": "11e2935a1a76bf233b95ba49b7763027d925a29377d847f4c5d1480f52a946fc",
+    "image_viewport_routing_transfer.py": "52f88cb4b9af6d1c102a55e8bf3d02d4db43054ffec6e4ef84f4492deca4fb97",
+    "sharp_boundary.py": "04c120cd027e50bd107fd15778f66fe38c43d64439e090835dfad99727e41cbc"
+  },
+  "elapsed_s": 19.080953083001077,
+  "freeze_sha256": "9832d5fdaf188c6fd7c3b606d839acfd8bcff406d46a5c1f9e1a14468727fb50",
+  "native_audit": {
+    "crop_replays": 186,
+    "cross_role_photo_pairs": 96,
+    "ocr_replays": 26,
+    "oracle_pairs": 36,
+    "views": 124
+  },
+  "parameters": {
+    "active_neighbor_change": 0.5,
+    "aligned_ocr_rows": 3,
+    "block": 8,
+    "component_close": 5,
+    "component_open": 3,
+    "confidence_weight": 0,
+    "edge_minimum_step": 0.35,
+    "edge_outer_limit": 0.25,
+    "edge_search": 52,
+    "edge_strip": 12,
+    "maximum_lost_useful": 1,
+    "maximum_misrouted_standalone_groups": 1,
+    "maximum_routed_ambiguous": 2,
+    "min_component_fill": 0.4,
+    "min_component_side": 360,
+    "minimum_added_sharp_ui_locations": 2,
+    "minimum_correct_photo_routes": 8,
+    "minimum_removed_ordinary_screenshot_flags": 6,
+    "minimum_viewport_iou": 0.95,
+    "no_new_ordinary_screenshot_flags": true,
+    "ocr_baseline_span": 28,
+    "ocr_word_confidence": 65,
+    "ocr_words_per_line": 2,
+    "perpendicular_trim": 28,
+    "second_component_maximum": 0.4
+  },
+  "point": 0.8292734622955322,
+  "result": {
+    "by_role": {
+      "direct/feather": {
+        "correct_viewports": 0,
+        "exact_viewport_flags": 0,
+        "exact_viewport_useful": 0,
+        "routed": 0,
+        "routed_flags": 1,
+        "routed_useful": 0,
+        "views": 12,
+        "whole_flags": 1,
+        "whole_useful": 0
+      },
+      "direct/photo": {
+        "correct_viewports": 0,
+        "exact_viewport_flags": 0,
+        "exact_viewport_useful": 0,
+        "routed": 0,
+        "routed_flags": 1,
+        "routed_useful": 0,
+        "views": 12,
+        "whole_flags": 1,
+        "whole_useful": 0
+      },
+      "direct/sharp": {
+        "correct_viewports": 0,
+        "exact_viewport_flags": 0,
+        "exact_viewport_useful": 0,
+        "routed": 0,
+        "routed_flags": 7,
+        "routed_useful": 1,
+        "views": 12,
+        "whole_flags": 7,
+        "whole_useful": 1
+      },
+      "direct/tone": {
+        "correct_viewports": 0,
+        "exact_viewport_flags": 0,
+        "exact_viewport_useful": 0,
+        "routed": 0,
+        "routed_flags": 1,
+        "routed_useful": 0,
+        "views": 12,
+        "whole_flags": 1,
+        "whole_useful": 0
+      },
+      "screen/ambiguous": {
+        "correct_viewports": 0,
+        "exact_viewport_flags": 0,
+        "exact_viewport_useful": 0,
+        "routed": 5,
+        "routed_flags": 12,
+        "routed_useful": 0,
+        "views": 12,
+        "whole_flags": 12,
+        "whole_useful": 0
+      },
+      "screen/feather": {
+        "correct_viewports": 7,
+        "exact_viewport_flags": 1,
+        "exact_viewport_useful": 0,
+        "routed": 7,
+        "routed_flags": 6,
+        "routed_useful": 0,
+        "views": 12,
+        "whole_flags": 9,
+        "whole_useful": 0
+      },
+      "screen/photo": {
+        "correct_viewports": 7,
+        "exact_viewport_flags": 1,
+        "exact_viewport_useful": 0,
+        "routed": 7,
+        "routed_flags": 6,
+        "routed_useful": 0,
+        "views": 12,
+        "whole_flags": 10,
+        "whole_useful": 0
+      },
+      "screen/sharp": {
+        "correct_viewports": 7,
+        "exact_viewport_flags": 7,
+        "exact_viewport_useful": 1,
+        "routed": 7,
+        "routed_flags": 9,
+        "routed_useful": 3,
+        "views": 12,
+        "whole_flags": 12,
+        "whole_useful": 9
+      },
+      "screen/template": {
+        "correct_viewports": 0,
+        "exact_viewport_flags": 0,
+        "exact_viewport_useful": 0,
+        "routed": 0,
+        "routed_flags": 6,
+        "routed_useful": 0,
+        "views": 12,
+        "whole_flags": 6,
+        "whole_useful": 0
+      },
+      "standalone/photo": {
+        "correct_viewports": 0,
+        "exact_viewport_flags": 0,
+        "exact_viewport_useful": 0,
+        "routed": 0,
+        "routed_flags": 3,
+        "routed_useful": 0,
+        "views": 8,
+        "whole_flags": 3,
+        "whole_useful": 0
+      },
+      "standalone/tone": {
+        "correct_viewports": 0,
+        "exact_viewport_flags": 0,
+        "exact_viewport_useful": 0,
+        "routed": 0,
+        "routed_flags": 3,
+        "routed_useful": 0,
+        "views": 8,
+        "whole_flags": 3,
+        "whole_useful": 0
+      }
+    },
+    "changes": {
+      "added_ordinary_screen_flags": 0,
+      "added_sharp_screen": 0,
+      "lost_useful": 6,
+      "misrouted_standalone_groups": 0,
+      "removed_ordinary_screen_flags": 4
+    },
+    "passed": false
+  },
+  "result_sha256": "47c328030351769904ac33088fda48ac8d0baca5de970db28e19e090633c91be",
+  "rows": [
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "layout-0",
+      "key": [
+        "screen",
+        0,
+        "template"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 16384,
+        "box": [
+          158,
+          98,
+          286,
+          226
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 1.0630453824996948,
+        "sides": {
+          "bottom": 0.8339118361473083,
+          "left": 2.079440116882324,
+          "right": 0.3541557490825653,
+          "top": 2.079440116882324
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 16384,
+        "box": [
+          158,
+          98,
+          286,
+          226
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 1.0630453824996948,
+        "sides": {
+          "bottom": 0.8339118361473083,
+          "left": 2.079440116882324,
+          "right": 0.3541557490825653,
+          "top": 2.079440116882324
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": {
+        "area": 17152,
+        "box": [
+          259,
+          288,
+          393,
+          416
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.7998093366622925,
+        "sides": {
+          "bottom": 1.5356032848358154,
+          "left": 0.7494727969169617,
+          "right": 0.21564748883247375,
+          "top": 1.6487946510314941
+        },
+        "useful": false
+      },
+      "family": "layout-0",
+      "key": [
+        "screen",
+        0,
+        "photo"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 49152,
+        "box": [
+          158,
+          418,
+          414,
+          610
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 1.0771921873092651,
+        "sides": {
+          "bottom": 2.8050405979156494,
+          "left": 2.7402327060699463,
+          "right": 0.2589506506919861,
+          "top": 0.6764397025108337
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 0,
+      "viewport": [
+        158,
+        98,
+        694,
+        610
+      ],
+      "whole": {
+        "area": 49152,
+        "box": [
+          158,
+          418,
+          414,
+          610
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 1.0771921873092651,
+        "sides": {
+          "bottom": 2.8050405979156494,
+          "left": 2.7402327060699463,
+          "right": 0.2589506506919861,
+          "top": 0.6764397025108337
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": {
+        "area": 17152,
+        "box": [
+          259,
+          288,
+          393,
+          416
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.7998093366622925,
+        "sides": {
+          "bottom": 1.5356032848358154,
+          "left": 0.7494727969169617,
+          "right": 0.21564748883247375,
+          "top": 1.6487946510314941
+        },
+        "useful": false
+      },
+      "family": "layout-0",
+      "key": [
+        "screen",
+        0,
+        "sharp"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 49152,
+        "box": [
+          158,
+          418,
+          414,
+          610
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 1.0771921873092651,
+        "sides": {
+          "bottom": 2.8050405979156494,
+          "left": 2.7402327060699463,
+          "right": 0.2589506506919861,
+          "top": 0.6764397025108337
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 24576,
+      "viewport": [
+        158,
+        98,
+        694,
+        610
+      ],
+      "whole": {
+        "area": 49152,
+        "box": [
+          158,
+          418,
+          414,
+          610
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 1.0771921873092651,
+        "sides": {
+          "bottom": 2.8050405979156494,
+          "left": 2.7402327060699463,
+          "right": 0.2589506506919861,
+          "top": 0.6764397025108337
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": {
+        "area": 17152,
+        "box": [
+          259,
+          288,
+          393,
+          416
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.7998093366622925,
+        "sides": {
+          "bottom": 1.5356032848358154,
+          "left": 0.7494727969169617,
+          "right": 0.21564748883247375,
+          "top": 1.6487946510314941
+        },
+        "useful": false
+      },
+      "family": "layout-0",
+      "key": [
+        "screen",
+        0,
+        "feather"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 49152,
+        "box": [
+          158,
+          418,
+          414,
+          610
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 1.0771921873092651,
+        "sides": {
+          "bottom": 2.8050405979156494,
+          "left": 2.7402327060699463,
+          "right": 0.2589506506919861,
+          "top": 0.6764397025108337
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 22285,
+      "viewport": [
+        158,
+        98,
+        694,
+        610
+      ],
+      "whole": {
+        "area": 49152,
+        "box": [
+          158,
+          418,
+          414,
+          610
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 1.0771921873092651,
+        "sides": {
+          "bottom": 2.8050405979156494,
+          "left": 2.7402327060699463,
+          "right": 0.2589506506919861,
+          "top": 0.6764397025108337
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "layout-0",
+      "key": [
+        "screen",
+        0,
+        "ambiguous"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 32768,
+        "box": [
+          187,
+          160,
+          315,
+          416
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 1.2025675773620605,
+        "sides": {
+          "bottom": 1.2933999300003052,
+          "left": 0.323952317237854,
+          "right": 2.335073471069336,
+          "top": 2.137585401535034
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 32768,
+        "box": [
+          187,
+          160,
+          315,
+          416
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 1.2025675773620605,
+        "sides": {
+          "bottom": 1.2933999300003052,
+          "left": 0.323952317237854,
+          "right": 2.335073471069336,
+          "top": 2.137585401535034
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "sdxl",
+      "key": [
+        "direct",
+        0,
+        "photo"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 17152,
+        "box": [
+          101,
+          190,
+          235,
+          318
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.7998093366622925,
+        "sides": {
+          "bottom": 1.5356032848358154,
+          "left": 0.7494727969169617,
+          "right": 0.21564748883247375,
+          "top": 1.6487946510314941
+        },
+        "useful": false
+      },
+      "shape": [
+        512,
+        536
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 17152,
+        "box": [
+          101,
+          190,
+          235,
+          318
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.7998093366622925,
+        "sides": {
+          "bottom": 1.5356032848358154,
+          "left": 0.7494727969169617,
+          "right": 0.21564748883247375,
+          "top": 1.6487946510314941
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "sdxl",
+      "key": [
+        "direct",
+        0,
+        "sharp"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 17152,
+        "box": [
+          101,
+          190,
+          235,
+          318
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.7998093366622925,
+        "sides": {
+          "bottom": 1.5356032848358154,
+          "left": 0.7494727969169617,
+          "right": 0.21564748883247375,
+          "top": 1.6487946510314941
+        },
+        "useful": false
+      },
+      "shape": [
+        512,
+        536
+      ],
+      "target": 24576,
+      "viewport": null,
+      "whole": {
+        "area": 17152,
+        "box": [
+          101,
+          190,
+          235,
+          318
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.7998093366622925,
+        "sides": {
+          "bottom": 1.5356032848358154,
+          "left": 0.7494727969169617,
+          "right": 0.21564748883247375,
+          "top": 1.6487946510314941
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "sdxl",
+      "key": [
+        "direct",
+        0,
+        "feather"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 17152,
+        "box": [
+          101,
+          190,
+          235,
+          318
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.7998093366622925,
+        "sides": {
+          "bottom": 1.5356032848358154,
+          "left": 0.7494727969169617,
+          "right": 0.21564748883247375,
+          "top": 1.6487946510314941
+        },
+        "useful": false
+      },
+      "shape": [
+        512,
+        536
+      ],
+      "target": 22285,
+      "viewport": null,
+      "whole": {
+        "area": 17152,
+        "box": [
+          101,
+          190,
+          235,
+          318
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.7998093366622925,
+        "sides": {
+          "bottom": 1.5356032848358154,
+          "left": 0.7494727969169617,
+          "right": 0.21564748883247375,
+          "top": 1.6487946510314941
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "sdxl",
+      "key": [
+        "direct",
+        0,
+        "tone"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 17152,
+        "box": [
+          101,
+          190,
+          235,
+          318
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.7767972350120544,
+        "sides": {
+          "bottom": 1.5216739177703857,
+          "left": 0.7279046773910522,
+          "right": 0.2039746344089508,
+          "top": 1.6116043329238892
+        },
+        "useful": false
+      },
+      "shape": [
+        512,
+        536
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 17152,
+        "box": [
+          101,
+          190,
+          235,
+          318
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.7767972350120544,
+        "sides": {
+          "bottom": 1.5216739177703857,
+          "left": 0.7279046773910522,
+          "right": 0.2039746344089508,
+          "top": 1.6116043329238892
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "layout-1",
+      "key": [
+        "screen",
+        1,
+        "template"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 24576,
+        "box": [
+          481,
+          124,
+          673,
+          252
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.528170645236969,
+        "sides": {
+          "bottom": 1.03125,
+          "left": 0.7530398964881897,
+          "right": 0.2245715856552124,
+          "top": 0.44623151421546936
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 24576,
+        "box": [
+          481,
+          124,
+          673,
+          252
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.528170645236969,
+        "sides": {
+          "bottom": 1.03125,
+          "left": 0.7530398964881897,
+          "right": 0.2245715856552124,
+          "top": 0.44623151421546936
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": {
+        "area": 8099,
+        "box": [
+          354,
+          178,
+          445,
+          267
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5716934204101562,
+        "sides": {
+          "bottom": 0.36092445254325867,
+          "left": 1.0905154943466187,
+          "right": 0.221392422914505,
+          "top": 1.225862979888916
+        },
+        "useful": false
+      },
+      "family": "layout-1",
+      "key": [
+        "screen",
+        1,
+        "photo"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 65536,
+        "box": [
+          313,
+          108,
+          569,
+          364
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.8931751847267151,
+        "sides": {
+          "bottom": 0.24880442023277283,
+          "left": 0.31004977226257324,
+          "right": 2.7853713035583496,
+          "top": 2.9619247913360596
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 0,
+      "viewport": [
+        25,
+        108,
+        569,
+        644
+      ],
+      "whole": {
+        "area": 65536,
+        "box": [
+          313,
+          108,
+          569,
+          364
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.8931751847267151,
+        "sides": {
+          "bottom": 0.24880442023277283,
+          "left": 0.31004977226257324,
+          "right": 2.7853713035583496,
+          "top": 2.9619247913360596
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": {
+        "area": 8099,
+        "box": [
+          126,
+          304,
+          217,
+          393
+        ],
+        "flag": true,
+        "overlap": 8099,
+        "score": 0.9373033046722412,
+        "sides": {
+          "bottom": 0.2816629409790039,
+          "left": 0.3316672742366791,
+          "right": 2.9614272117614746,
+          "top": 2.789890766143799
+        },
+        "useful": false
+      },
+      "family": "layout-1",
+      "key": [
+        "screen",
+        1,
+        "sharp"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 49152,
+        "box": [
+          25,
+          388,
+          217,
+          644
+        ],
+        "flag": true,
+        "overlap": 11520,
+        "score": 1.6773394346237183,
+        "sides": {
+          "bottom": 2.687218427658081,
+          "left": 2.8925118446350098,
+          "right": 0.7933989763259888,
+          "top": 1.283553957939148
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 27648,
+      "viewport": [
+        25,
+        108,
+        569,
+        644
+      ],
+      "whole": {
+        "area": 49152,
+        "box": [
+          25,
+          388,
+          217,
+          644
+        ],
+        "flag": true,
+        "overlap": 11520,
+        "score": 1.6773394346237183,
+        "sides": {
+          "bottom": 2.687218427658081,
+          "left": 2.8925118446350098,
+          "right": 0.7933989763259888,
+          "top": 1.283553957939148
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": {
+        "area": 8099,
+        "box": [
+          354,
+          178,
+          445,
+          267
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5716934204101562,
+        "sides": {
+          "bottom": 0.36092445254325867,
+          "left": 1.0905154943466187,
+          "right": 0.221392422914505,
+          "top": 1.225862979888916
+        },
+        "useful": false
+      },
+      "family": "layout-1",
+      "key": [
+        "screen",
+        1,
+        "feather"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 49152,
+        "box": [
+          25,
+          388,
+          217,
+          644
+        ],
+        "flag": true,
+        "overlap": 11198,
+        "score": 1.1646897792816162,
+        "sides": {
+          "bottom": 2.687218427658081,
+          "left": 2.9871203899383545,
+          "right": 0.18440547585487366,
+          "top": 1.243115782737732
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 26968,
+      "viewport": [
+        25,
+        108,
+        569,
+        644
+      ],
+      "whole": {
+        "area": 49152,
+        "box": [
+          25,
+          388,
+          217,
+          644
+        ],
+        "flag": true,
+        "overlap": 11198,
+        "score": 1.1646897792816162,
+        "sides": {
+          "bottom": 2.687218427658081,
+          "left": 2.9871203899383545,
+          "right": 0.18440547585487366,
+          "top": 1.243115782737732
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "layout-1",
+      "key": [
+        "screen",
+        1,
+        "ambiguous"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 24576,
+        "box": [
+          25,
+          44,
+          217,
+          172
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.9828174114227295,
+        "sides": {
+          "bottom": 2.7742998600006104,
+          "left": 1.453125,
+          "right": 0.09279357641935349,
+          "top": 2.4941182136535645
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 24576,
+        "box": [
+          25,
+          44,
+          217,
+          172
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.9828174114227295,
+        "sides": {
+          "bottom": 2.7742998600006104,
+          "left": 1.453125,
+          "right": 0.09279357641935349,
+          "top": 2.4941182136535645
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "sdxl",
+      "key": [
+        "direct",
+        1,
+        "photo"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 8099,
+        "box": [
+          329,
+          70,
+          420,
+          159
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5716934204101562,
+        "sides": {
+          "bottom": 0.36092445254325867,
+          "left": 1.0905154943466187,
+          "right": 0.221392422914505,
+          "top": 1.225862979888916
+        },
+        "useful": false
+      },
+      "shape": [
+        536,
+        544
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 8099,
+        "box": [
+          329,
+          70,
+          420,
+          159
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5716934204101562,
+        "sides": {
+          "bottom": 0.36092445254325867,
+          "left": 1.0905154943466187,
+          "right": 0.221392422914505,
+          "top": 1.225862979888916
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "sdxl",
+      "key": [
+        "direct",
+        1,
+        "sharp"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 8099,
+        "box": [
+          101,
+          196,
+          192,
+          285
+        ],
+        "flag": true,
+        "overlap": 8099,
+        "score": 0.9373033046722412,
+        "sides": {
+          "bottom": 0.2816629409790039,
+          "left": 0.3316672742366791,
+          "right": 2.9614272117614746,
+          "top": 2.789890766143799
+        },
+        "useful": false
+      },
+      "shape": [
+        536,
+        544
+      ],
+      "target": 27648,
+      "viewport": null,
+      "whole": {
+        "area": 8099,
+        "box": [
+          101,
+          196,
+          192,
+          285
+        ],
+        "flag": true,
+        "overlap": 8099,
+        "score": 0.9373033046722412,
+        "sides": {
+          "bottom": 0.2816629409790039,
+          "left": 0.3316672742366791,
+          "right": 2.9614272117614746,
+          "top": 2.789890766143799
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "sdxl",
+      "key": [
+        "direct",
+        1,
+        "feather"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 8099,
+        "box": [
+          329,
+          70,
+          420,
+          159
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5716934204101562,
+        "sides": {
+          "bottom": 0.36092445254325867,
+          "left": 1.0905154943466187,
+          "right": 0.221392422914505,
+          "top": 1.225862979888916
+        },
+        "useful": false
+      },
+      "shape": [
+        536,
+        544
+      ],
+      "target": 26968,
+      "viewport": null,
+      "whole": {
+        "area": 8099,
+        "box": [
+          329,
+          70,
+          420,
+          159
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5716934204101562,
+        "sides": {
+          "bottom": 0.36092445254325867,
+          "left": 1.0905154943466187,
+          "right": 0.221392422914505,
+          "top": 1.225862979888916
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "sdxl",
+      "key": [
+        "direct",
+        1,
+        "tone"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 12104,
+        "box": [
+          330,
+          71,
+          466,
+          160
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5477422475814819,
+        "sides": {
+          "bottom": 0.3914884030818939,
+          "left": 0.9077662825584412,
+          "right": 0.3455573618412018,
+          "top": 0.7329795360565186
+        },
+        "useful": false
+      },
+      "shape": [
+        536,
+        544
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 12104,
+        "box": [
+          330,
+          71,
+          466,
+          160
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5477422475814819,
+        "sides": {
+          "bottom": 0.3914884030818939,
+          "left": 0.9077662825584412,
+          "right": 0.3455573618412018,
+          "top": 0.7329795360565186
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "layout-2",
+      "key": [
+        "screen",
+        2,
+        "template"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 24576,
+        "box": [
+          124,
+          44,
+          252,
+          236
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 1.1674641370773315,
+        "sides": {
+          "bottom": 1.3135067224502563,
+          "left": 2.070312738418579,
+          "right": 0.2938764989376068,
+          "top": 2.3245620727539062
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 24576,
+        "box": [
+          124,
+          44,
+          252,
+          236
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 1.1674641370773315,
+        "sides": {
+          "bottom": 1.3135067224502563,
+          "left": 2.070312738418579,
+          "right": 0.2938764989376068,
+          "top": 2.3245620727539062
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": {
+        "area": 8096,
+        "box": [
+          351,
+          444,
+          443,
+          532
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5471274256706238,
+        "sides": {
+          "bottom": 1.043153166770935,
+          "left": 0.6717777252197266,
+          "right": 0.805844247341156,
+          "top": 0.15868254005908966
+        },
+        "useful": false
+      },
+      "family": "layout-2",
+      "key": [
+        "screen",
+        2,
+        "photo"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 32768,
+        "box": [
+          124,
+          337,
+          252,
+          593
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.8559898138046265,
+        "sides": {
+          "bottom": 2.8644227981567383,
+          "left": 2.651616096496582,
+          "right": 0.30325213074684143,
+          "top": 0.23308950662612915
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 0,
+      "viewport": [
+        124,
+        65,
+        676,
+        593
+      ],
+      "whole": {
+        "area": 32768,
+        "box": [
+          124,
+          337,
+          252,
+          593
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.8559898138046265,
+        "sides": {
+          "bottom": 2.8644227981567383,
+          "left": 2.651616096496582,
+          "right": 0.30325213074684143,
+          "top": 0.23308950662612915
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": {
+        "area": 12144,
+        "box": [
+          361,
+          131,
+          453,
+          263
+        ],
+        "flag": false,
+        "overlap": 12079,
+        "score": 0.6770498156547546,
+        "sides": {
+          "bottom": 1.7570708990097046,
+          "left": 0.1833961457014084,
+          "right": 0.4681263566017151,
+          "top": 1.3929638862609863
+        },
+        "useful": true
+      },
+      "family": "layout-2",
+      "key": [
+        "screen",
+        2,
+        "sharp"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 32768,
+        "box": [
+          124,
+          337,
+          252,
+          593
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.8559898138046265,
+        "sides": {
+          "bottom": 2.8644227981567383,
+          "left": 2.651616096496582,
+          "right": 0.30325213074684143,
+          "top": 0.23308950662612915
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 23818,
+      "viewport": [
+        124,
+        65,
+        676,
+        593
+      ],
+      "whole": {
+        "area": 32768,
+        "box": [
+          124,
+          337,
+          252,
+          593
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.8559898138046265,
+        "sides": {
+          "bottom": 2.8644227981567383,
+          "left": 2.651616096496582,
+          "right": 0.30325213074684143,
+          "top": 0.23308950662612915
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": {
+        "area": 8096,
+        "box": [
+          351,
+          444,
+          443,
+          532
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5471274256706238,
+        "sides": {
+          "bottom": 1.043153166770935,
+          "left": 0.6717777848243713,
+          "right": 0.805844247341156,
+          "top": 0.15868254005908966
+        },
+        "useful": false
+      },
+      "family": "layout-2",
+      "key": [
+        "screen",
+        2,
+        "feather"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 32768,
+        "box": [
+          124,
+          337,
+          252,
+          593
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.8559898138046265,
+        "sides": {
+          "bottom": 2.8644227981567383,
+          "left": 2.651616096496582,
+          "right": 0.30325213074684143,
+          "top": 0.23308950662612915
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 21270,
+      "viewport": [
+        124,
+        65,
+        676,
+        593
+      ],
+      "whole": {
+        "area": 32768,
+        "box": [
+          124,
+          337,
+          252,
+          593
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.8559898138046265,
+        "sides": {
+          "bottom": 2.8644227981567383,
+          "left": 2.651616096496582,
+          "right": 0.30325213074684143,
+          "top": 0.23308950662612915
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "layout-2",
+      "key": [
+        "screen",
+        2,
+        "ambiguous"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 16384,
+        "box": [
+          153,
+          129,
+          281,
+          257
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.9552498459815979,
+        "sides": {
+          "bottom": 0.32938507199287415,
+          "left": 0.333173543214798,
+          "right": 2.833035469055176,
+          "top": 2.6781907081604004
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 16384,
+        "box": [
+          153,
+          129,
+          281,
+          257
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.9552498459815979,
+        "sides": {
+          "bottom": 0.32938507199287415,
+          "left": 0.333173543214798,
+          "right": 2.833035469055176,
+          "top": 2.6781907081604004
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "sdxl",
+      "key": [
+        "direct",
+        2,
+        "photo"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 8096,
+        "box": [
+          227,
+          379,
+          319,
+          467
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5471274256706238,
+        "sides": {
+          "bottom": 1.043153166770935,
+          "left": 0.6717777252197266,
+          "right": 0.805844247341156,
+          "top": 0.15868254005908966
+        },
+        "useful": false
+      },
+      "shape": [
+        528,
+        552
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 8096,
+        "box": [
+          227,
+          379,
+          319,
+          467
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5471274256706238,
+        "sides": {
+          "bottom": 1.043153166770935,
+          "left": 0.6717777252197266,
+          "right": 0.805844247341156,
+          "top": 0.15868254005908966
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "sdxl",
+      "key": [
+        "direct",
+        2,
+        "sharp"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 12144,
+        "box": [
+          237,
+          66,
+          329,
+          198
+        ],
+        "flag": false,
+        "overlap": 12079,
+        "score": 0.6770498156547546,
+        "sides": {
+          "bottom": 1.7570708990097046,
+          "left": 0.1833961457014084,
+          "right": 0.4681263566017151,
+          "top": 1.3929638862609863
+        },
+        "useful": true
+      },
+      "shape": [
+        528,
+        552
+      ],
+      "target": 23818,
+      "viewport": null,
+      "whole": {
+        "area": 12144,
+        "box": [
+          237,
+          66,
+          329,
+          198
+        ],
+        "flag": false,
+        "overlap": 12079,
+        "score": 0.6770498156547546,
+        "sides": {
+          "bottom": 1.7570708990097046,
+          "left": 0.1833961457014084,
+          "right": 0.4681263566017151,
+          "top": 1.3929638862609863
+        },
+        "useful": true
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "sdxl",
+      "key": [
+        "direct",
+        2,
+        "feather"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 8096,
+        "box": [
+          227,
+          379,
+          319,
+          467
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5471274256706238,
+        "sides": {
+          "bottom": 1.043153166770935,
+          "left": 0.6717777848243713,
+          "right": 0.805844247341156,
+          "top": 0.15868254005908966
+        },
+        "useful": false
+      },
+      "shape": [
+        528,
+        552
+      ],
+      "target": 21270,
+      "viewport": null,
+      "whole": {
+        "area": 8096,
+        "box": [
+          227,
+          379,
+          319,
+          467
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5471274256706238,
+        "sides": {
+          "bottom": 1.043153166770935,
+          "left": 0.6717777848243713,
+          "right": 0.805844247341156,
+          "top": 0.15868254005908966
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "sdxl",
+      "key": [
+        "direct",
+        2,
+        "tone"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 8096,
+        "box": [
+          227,
+          379,
+          319,
+          467
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5331135392189026,
+        "sides": {
+          "bottom": 1.0137794017791748,
+          "left": 0.6649554967880249,
+          "right": 0.7776615619659424,
+          "top": 0.15408210456371307
+        },
+        "useful": false
+      },
+      "shape": [
+        528,
+        552
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 8096,
+        "box": [
+          227,
+          379,
+          319,
+          467
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5331135392189026,
+        "sides": {
+          "bottom": 1.0137794017791748,
+          "left": 0.6649554967880249,
+          "right": 0.7776615619659424,
+          "top": 0.15408210456371307
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "layout-3",
+      "key": [
+        "screen",
+        3,
+        "template"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 16384,
+        "box": [
+          101,
+          135,
+          229,
+          263
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.8037219047546387,
+        "sides": {
+          "bottom": 0.572152316570282,
+          "left": 1.7917624711990356,
+          "right": 0.2271699160337448,
+          "top": 1.7917622327804565
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 16384,
+        "box": [
+          101,
+          135,
+          229,
+          263
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.8037219047546387,
+        "sides": {
+          "bottom": 0.572152316570282,
+          "left": 1.7917624711990356,
+          "right": 0.2271699160337448,
+          "top": 1.7917622327804565
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [
+        [
+          21,
+          26
+        ],
+        [
+          22,
+          68
+        ],
+        [
+          22,
+          87
+        ],
+        [
+          22,
+          108
+        ]
+      ],
+      "exact_viewport": {
+        "area": 23584,
+        "box": [
+          288,
+          371,
+          422,
+          547
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5931327939033508,
+        "sides": {
+          "bottom": 0.29396623373031616,
+          "left": 1.4682646989822388,
+          "right": 0.26138076186180115,
+          "top": 1.0970650911331177
+        },
+        "useful": false
+      },
+      "family": "layout-3",
+      "key": [
+        "screen",
+        3,
+        "photo"
+      ],
+      "locator": {
+        "box": [
+          101,
+          135,
+          637,
+          663
+        ],
+        "edges": [
+          0.4867303609341826,
+          0.5431454418928323,
+          0.9019815994338286,
+          0.9448503827418233
+        ],
+        "rough": [
+          104,
+          136,
+          640,
+          664
+        ]
+      },
+      "route": [
+        101,
+        135,
+        637,
+        663
+      ],
+      "route_iou": 1.0,
+      "routed": {
+        "area": 23584,
+        "box": [
+          288,
+          371,
+          422,
+          547
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5931327939033508,
+        "sides": {
+          "bottom": 0.29396623373031616,
+          "left": 1.4682646989822388,
+          "right": 0.26138076186180115,
+          "top": 1.0970650911331177
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 0,
+      "viewport": [
+        101,
+        135,
+        637,
+        663
+      ],
+      "whole": {
+        "area": 24576,
+        "box": [
+          509,
+          135,
+          637,
+          327
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.9387558698654175,
+        "sides": {
+          "bottom": 0.8499437570571899,
+          "left": 0.1134660467505455,
+          "right": 2.9688327312469482,
+          "top": 2.712493896484375
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [
+        [
+          21,
+          26
+        ],
+        [
+          22,
+          68
+        ],
+        [
+          22,
+          87
+        ],
+        [
+          22,
+          108
+        ]
+      ],
+      "exact_viewport": {
+        "area": 23584,
+        "box": [
+          288,
+          371,
+          422,
+          547
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5931327939033508,
+        "sides": {
+          "bottom": 0.29396623373031616,
+          "left": 1.4682646989822388,
+          "right": 0.26138076186180115,
+          "top": 1.0970650911331177
+        },
+        "useful": false
+      },
+      "family": "layout-3",
+      "key": [
+        "screen",
+        3,
+        "sharp"
+      ],
+      "locator": {
+        "box": [
+          101,
+          135,
+          637,
+          663
+        ],
+        "edges": [
+          0.5767869780608633,
+          0.5311412665274878,
+          0.9019815994338286,
+          0.9448503827418233
+        ],
+        "rough": [
+          104,
+          136,
+          640,
+          664
+        ]
+      },
+      "route": [
+        101,
+        135,
+        637,
+        663
+      ],
+      "route_iou": 1.0,
+      "routed": {
+        "area": 23584,
+        "box": [
+          288,
+          371,
+          422,
+          547
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5931327939033508,
+        "sides": {
+          "bottom": 0.29396623373031616,
+          "left": 1.4682646989822388,
+          "right": 0.26138076186180115,
+          "top": 1.0970650911331177
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 26112,
+      "viewport": [
+        101,
+        135,
+        637,
+        663
+      ],
+      "whole": {
+        "area": 36864,
+        "box": [
+          101,
+          135,
+          293,
+          327
+        ],
+        "flag": true,
+        "overlap": 26112,
+        "score": 1.165847659111023,
+        "sides": {
+          "bottom": 0.3769876956939697,
+          "left": 1.164529800415039,
+          "right": 1.7328633069992065,
+          "top": 2.4284274578094482
+        },
+        "useful": true
+      }
+    },
+    {
+      "aligned_exterior": [
+        [
+          21,
+          26
+        ],
+        [
+          22,
+          68
+        ],
+        [
+          22,
+          87
+        ],
+        [
+          22,
+          108
+        ]
+      ],
+      "exact_viewport": {
+        "area": 23584,
+        "box": [
+          288,
+          371,
+          422,
+          547
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5931328535079956,
+        "sides": {
+          "bottom": 0.29396623373031616,
+          "left": 1.4682648181915283,
+          "right": 0.26138076186180115,
+          "top": 1.0970650911331177
+        },
+        "useful": false
+      },
+      "family": "layout-3",
+      "key": [
+        "screen",
+        3,
+        "feather"
+      ],
+      "locator": {
+        "box": [
+          101,
+          135,
+          637,
+          663
+        ],
+        "edges": [
+          0.551309271054494,
+          0.5615866388308977,
+          0.9019815994338286,
+          0.9448503827418233
+        ],
+        "rough": [
+          104,
+          136,
+          640,
+          664
+        ]
+      },
+      "route": [
+        101,
+        135,
+        637,
+        663
+      ],
+      "route_iou": 1.0,
+      "routed": {
+        "area": 23584,
+        "box": [
+          288,
+          371,
+          422,
+          547
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5931328535079956,
+        "sides": {
+          "bottom": 0.29396623373031616,
+          "left": 1.4682648181915283,
+          "right": 0.26138076186180115,
+          "top": 1.0970650911331177
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 24994,
+      "viewport": [
+        101,
+        135,
+        637,
+        663
+      ],
+      "whole": {
+        "area": 24576,
+        "box": [
+          509,
+          135,
+          637,
+          327
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.9387558698654175,
+        "sides": {
+          "bottom": 0.8499437570571899,
+          "left": 0.1134660467505455,
+          "right": 2.9688327312469482,
+          "top": 2.712493896484375
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [
+        [
+          21,
+          26
+        ],
+        [
+          22,
+          68
+        ],
+        [
+          22,
+          87
+        ],
+        [
+          22,
+          108
+        ]
+      ],
+      "exact_viewport": null,
+      "family": "layout-3",
+      "key": [
+        "screen",
+        3,
+        "ambiguous"
+      ],
+      "locator": {
+        "box": [
+          62,
+          135,
+          637,
+          663
+        ],
+        "edges": [
+          0.3740268931351734,
+          0.5316313423249839,
+          0.9019815994338286,
+          0.894669235709698
+        ],
+        "rough": [
+          64,
+          136,
+          640,
+          664
+        ]
+      },
+      "route": [
+        62,
+        135,
+        637,
+        663
+      ],
+      "route_iou": 0.0,
+      "routed": {
+        "area": 19008,
+        "box": [
+          114,
+          197,
+          258,
+          329
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 1.10121750831604,
+        "sides": {
+          "bottom": 0.5072950720787048,
+          "left": 0.38540375232696533,
+          "right": 2.750587224960327,
+          "top": 2.734578847885132
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 24576,
+        "box": [
+          79,
+          199,
+          271,
+          327
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 1.0414369106292725,
+        "sides": {
+          "bottom": 0.5655379891395569,
+          "left": 0.49447503685951233,
+          "right": 1.5932703018188477,
+          "top": 2.6401968002319336
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "kandinsky",
+      "key": [
+        "direct",
+        3,
+        "photo"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 23584,
+        "box": [
+          187,
+          236,
+          321,
+          412
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5931327939033508,
+        "sides": {
+          "bottom": 0.29396623373031616,
+          "left": 1.4682646989822388,
+          "right": 0.26138076186180115,
+          "top": 1.0970650911331177
+        },
+        "useful": false
+      },
+      "shape": [
+        528,
+        536
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 23584,
+        "box": [
+          187,
+          236,
+          321,
+          412
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5931327939033508,
+        "sides": {
+          "bottom": 0.29396623373031616,
+          "left": 1.4682646989822388,
+          "right": 0.26138076186180115,
+          "top": 1.0970650911331177
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "kandinsky",
+      "key": [
+        "direct",
+        3,
+        "sharp"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 23584,
+        "box": [
+          187,
+          236,
+          321,
+          412
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5931327939033508,
+        "sides": {
+          "bottom": 0.29396623373031616,
+          "left": 1.4682646989822388,
+          "right": 0.26138076186180115,
+          "top": 1.0970650911331177
+        },
+        "useful": false
+      },
+      "shape": [
+        528,
+        536
+      ],
+      "target": 26112,
+      "viewport": null,
+      "whole": {
+        "area": 23584,
+        "box": [
+          187,
+          236,
+          321,
+          412
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5931327939033508,
+        "sides": {
+          "bottom": 0.29396623373031616,
+          "left": 1.4682646989822388,
+          "right": 0.26138076186180115,
+          "top": 1.0970650911331177
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "kandinsky",
+      "key": [
+        "direct",
+        3,
+        "feather"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 23584,
+        "box": [
+          187,
+          236,
+          321,
+          412
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5931328535079956,
+        "sides": {
+          "bottom": 0.29396623373031616,
+          "left": 1.4682648181915283,
+          "right": 0.26138076186180115,
+          "top": 1.0970650911331177
+        },
+        "useful": false
+      },
+      "shape": [
+        528,
+        536
+      ],
+      "target": 24994,
+      "viewport": null,
+      "whole": {
+        "area": 23584,
+        "box": [
+          187,
+          236,
+          321,
+          412
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5931328535079956,
+        "sides": {
+          "bottom": 0.29396623373031616,
+          "left": 1.4682648181915283,
+          "right": 0.26138076186180115,
+          "top": 1.0970650911331177
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "kandinsky",
+      "key": [
+        "direct",
+        3,
+        "tone"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 23584,
+        "box": [
+          187,
+          236,
+          321,
+          412
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5808510780334473,
+        "sides": {
+          "bottom": 0.28918468952178955,
+          "left": 1.4248021841049194,
+          "right": 0.2558712065219879,
+          "top": 1.0797120332717896
+        },
+        "useful": false
+      },
+      "shape": [
+        528,
+        536
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 23584,
+        "box": [
+          187,
+          236,
+          321,
+          412
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5808510780334473,
+        "sides": {
+          "bottom": 0.28918468952178955,
+          "left": 1.4248021841049194,
+          "right": 0.2558712065219879,
+          "top": 1.0797120332717896
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "layout-0",
+      "key": [
+        "screen",
+        4,
+        "template"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 16384,
+        "box": [
+          163,
+          101,
+          291,
+          229
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 1.0630453824996948,
+        "sides": {
+          "bottom": 0.8339118361473083,
+          "left": 2.079440116882324,
+          "right": 0.3541557490825653,
+          "top": 2.079440116882324
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 16384,
+        "box": [
+          163,
+          101,
+          291,
+          229
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 1.0630453824996948,
+        "sides": {
+          "bottom": 0.8339118361473083,
+          "left": 2.079440116882324,
+          "right": 0.3541557490825653,
+          "top": 2.079440116882324
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [
+        [
+          21,
+          26
+        ],
+        [
+          13,
+          125
+        ],
+        [
+          13,
+          144
+        ],
+        [
+          13,
+          165
+        ],
+        [
+          13,
+          185
+        ],
+        [
+          13,
+          201
+        ]
+      ],
+      "exact_viewport": {
+        "area": 11560,
+        "box": [
+          450,
+          312,
+          586,
+          397
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.7754229307174683,
+        "sides": {
+          "bottom": 0.762873113155365,
+          "left": 0.7510433197021484,
+          "right": 1.580583095550537,
+          "top": 0.39922699332237244
+        },
+        "useful": false
+      },
+      "family": "layout-0",
+      "key": [
+        "screen",
+        4,
+        "photo"
+      ],
+      "locator": {
+        "box": [
+          163,
+          101,
+          707,
+          613
+        ],
+        "edges": [
+          0.9461538461538462,
+          0.9924709103353866,
+          0.9851648351648352,
+          0.9912731006160164
+        ],
+        "rough": [
+          160,
+          104,
+          704,
+          616
+        ]
+      },
+      "route": [
+        163,
+        101,
+        707,
+        613
+      ],
+      "route_iou": 1.0,
+      "routed": {
+        "area": 11560,
+        "box": [
+          450,
+          312,
+          586,
+          397
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.7754229307174683,
+        "sides": {
+          "bottom": 0.762873113155365,
+          "left": 0.7510433197021484,
+          "right": 1.580583095550537,
+          "top": 0.39922699332237244
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 0,
+      "viewport": [
+        163,
+        101,
+        707,
+        613
+      ],
+      "whole": {
+        "area": 65536,
+        "box": [
+          163,
+          357,
+          419,
+          613
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.8365437388420105,
+        "sides": {
+          "bottom": 2.5372378826141357,
+          "left": 3.0,
+          "right": 0.23246167600154877,
+          "top": 0.2767711579799652
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [
+        [
+          20,
+          26
+        ],
+        [
+          13,
+          125
+        ],
+        [
+          13,
+          144
+        ],
+        [
+          13,
+          165
+        ],
+        [
+          13,
+          185
+        ],
+        [
+          13,
+          201
+        ]
+      ],
+      "exact_viewport": {
+        "area": 11648,
+        "box": [
+          440,
+          357,
+          531,
+          485
+        ],
+        "flag": true,
+        "overlap": 11648,
+        "score": 1.5095511674880981,
+        "sides": {
+          "bottom": 2.763629198074341,
+          "left": 0.24823905527591705,
+          "right": 2.7820844650268555,
+          "top": 2.7206404209136963
+        },
+        "useful": false
+      },
+      "family": "layout-0",
+      "key": [
+        "screen",
+        4,
+        "sharp"
+      ],
+      "locator": {
+        "box": [
+          163,
+          101,
+          707,
+          613
+        ],
+        "edges": [
+          0.9461538461538462,
+          0.9924709103353866,
+          0.9851648351648352,
+          0.9912731006160164
+        ],
+        "rough": [
+          160,
+          104,
+          704,
+          616
+        ]
+      },
+      "route": [
+        163,
+        101,
+        707,
+        613
+      ],
+      "route_iou": 1.0,
+      "routed": {
+        "area": 11648,
+        "box": [
+          440,
+          357,
+          531,
+          485
+        ],
+        "flag": true,
+        "overlap": 11648,
+        "score": 1.5095511674880981,
+        "sides": {
+          "bottom": 2.763629198074341,
+          "left": 0.24823905527591705,
+          "right": 2.7820844650268555,
+          "top": 2.7206404209136963
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 24576,
+      "viewport": [
+        163,
+        101,
+        707,
+        613
+      ],
+      "whole": {
+        "area": 24576,
+        "box": [
+          339,
+          357,
+          531,
+          485
+        ],
+        "flag": true,
+        "overlap": 24576,
+        "score": 2.767902135848999,
+        "sides": {
+          "bottom": 2.726757764816284,
+          "left": 2.750718116760254,
+          "right": 2.7820844650268555,
+          "top": 2.812807083129883
+        },
+        "useful": true
+      }
+    },
+    {
+      "aligned_exterior": [
+        [
+          20,
+          26
+        ],
+        [
+          13,
+          125
+        ],
+        [
+          13,
+          144
+        ],
+        [
+          13,
+          165
+        ],
+        [
+          13,
+          185
+        ],
+        [
+          13,
+          201
+        ]
+      ],
+      "exact_viewport": {
+        "area": 15561,
+        "box": [
+          494,
+          208,
+          585,
+          379
+        ],
+        "flag": false,
+        "overlap": 756,
+        "score": 0.7316619157791138,
+        "sides": {
+          "bottom": 0.3748043179512024,
+          "left": 0.8992584347724915,
+          "right": 0.8522293567657471,
+          "top": 0.9976913928985596
+        },
+        "useful": false
+      },
+      "family": "layout-0",
+      "key": [
+        "screen",
+        4,
+        "feather"
+      ],
+      "locator": {
+        "box": [
+          163,
+          101,
+          707,
+          613
+        ],
+        "edges": [
+          0.9461538461538462,
+          0.9924709103353866,
+          0.9851648351648352,
+          0.9912731006160164
+        ],
+        "rough": [
+          160,
+          104,
+          704,
+          616
+        ]
+      },
+      "route": [
+        163,
+        101,
+        707,
+        613
+      ],
+      "route_iou": 1.0,
+      "routed": {
+        "area": 15561,
+        "box": [
+          494,
+          208,
+          585,
+          379
+        ],
+        "flag": false,
+        "overlap": 756,
+        "score": 0.7316619157791138,
+        "sides": {
+          "bottom": 0.3748043179512024,
+          "left": 0.8992584347724915,
+          "right": 0.8522293567657471,
+          "top": 0.9976913928985596
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 23940,
+      "viewport": [
+        163,
+        101,
+        707,
+        613
+      ],
+      "whole": {
+        "area": 32768,
+        "box": [
+          579,
+          357,
+          707,
+          613
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.8126420378684998,
+        "sides": {
+          "bottom": 2.5090904235839844,
+          "left": 0.298829585313797,
+          "right": 2.921989679336548,
+          "top": 0.19905751943588257
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "layout-0",
+      "key": [
+        "screen",
+        4,
+        "ambiguous"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 16384,
+        "box": [
+          122,
+          165,
+          250,
+          293
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 1.0638093948364258,
+        "sides": {
+          "bottom": 0.6454583406448364,
+          "left": 2.8191022872924805,
+          "right": 0.26254433393478394,
+          "top": 2.6808571815490723
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 16384,
+        "box": [
+          122,
+          165,
+          250,
+          293
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 1.0638093948364258,
+        "sides": {
+          "bottom": 0.6454583406448364,
+          "left": 2.8191022872924805,
+          "right": 0.26254433393478394,
+          "top": 2.6808571815490723
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "kandinsky",
+      "key": [
+        "direct",
+        4,
+        "photo"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 11560,
+        "box": [
+          287,
+          211,
+          423,
+          296
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.7754229307174683,
+        "sides": {
+          "bottom": 0.762873113155365,
+          "left": 0.7510433197021484,
+          "right": 1.580583095550537,
+          "top": 0.39922699332237244
+        },
+        "useful": false
+      },
+      "shape": [
+        512,
+        544
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 11560,
+        "box": [
+          287,
+          211,
+          423,
+          296
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.7754229307174683,
+        "sides": {
+          "bottom": 0.762873113155365,
+          "left": 0.7510433197021484,
+          "right": 1.580583095550537,
+          "top": 0.39922699332237244
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "kandinsky",
+      "key": [
+        "direct",
+        4,
+        "sharp"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 11648,
+        "box": [
+          277,
+          256,
+          368,
+          384
+        ],
+        "flag": true,
+        "overlap": 11648,
+        "score": 1.5095511674880981,
+        "sides": {
+          "bottom": 2.763629198074341,
+          "left": 0.24823905527591705,
+          "right": 2.7820844650268555,
+          "top": 2.7206404209136963
+        },
+        "useful": false
+      },
+      "shape": [
+        512,
+        544
+      ],
+      "target": 24576,
+      "viewport": null,
+      "whole": {
+        "area": 11648,
+        "box": [
+          277,
+          256,
+          368,
+          384
+        ],
+        "flag": true,
+        "overlap": 11648,
+        "score": 1.5095511674880981,
+        "sides": {
+          "bottom": 2.763629198074341,
+          "left": 0.24823905527591705,
+          "right": 2.7820844650268555,
+          "top": 2.7206404209136963
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "kandinsky",
+      "key": [
+        "direct",
+        4,
+        "feather"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 15561,
+        "box": [
+          331,
+          107,
+          422,
+          278
+        ],
+        "flag": false,
+        "overlap": 756,
+        "score": 0.7316619157791138,
+        "sides": {
+          "bottom": 0.3748043179512024,
+          "left": 0.8992584347724915,
+          "right": 0.8522293567657471,
+          "top": 0.9976913928985596
+        },
+        "useful": false
+      },
+      "shape": [
+        512,
+        544
+      ],
+      "target": 23940,
+      "viewport": null,
+      "whole": {
+        "area": 15561,
+        "box": [
+          331,
+          107,
+          422,
+          278
+        ],
+        "flag": false,
+        "overlap": 756,
+        "score": 0.7316619157791138,
+        "sides": {
+          "bottom": 0.3748043179512024,
+          "left": 0.8992584347724915,
+          "right": 0.8522293567657471,
+          "top": 0.9976913928985596
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "kandinsky",
+      "key": [
+        "direct",
+        4,
+        "tone"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 11560,
+        "box": [
+          287,
+          211,
+          423,
+          296
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.7605449557304382,
+        "sides": {
+          "bottom": 0.7566206455230713,
+          "left": 0.7308831810951233,
+          "right": 1.5525076389312744,
+          "top": 0.3897082805633545
+        },
+        "useful": false
+      },
+      "shape": [
+        512,
+        544
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 11560,
+        "box": [
+          287,
+          211,
+          423,
+          296
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.7605449557304382,
+        "sides": {
+          "bottom": 0.7566206455230713,
+          "left": 0.7308831810951233,
+          "right": 1.5525076389312744,
+          "top": 0.3897082805633545
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "layout-1",
+      "key": [
+        "screen",
+        5,
+        "template"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 16384,
+        "box": [
+          492,
+          111,
+          620,
+          239
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5306270718574524,
+        "sides": {
+          "bottom": 0.45030027627944946,
+          "left": 0.472025066614151,
+          "right": 0.2126850187778473,
+          "top": 1.753692626953125
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 16384,
+        "box": [
+          492,
+          111,
+          620,
+          239
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5306270718574524,
+        "sides": {
+          "bottom": 0.45030027627944946,
+          "left": 0.472025066614151,
+          "right": 0.2126850187778473,
+          "top": 1.753692626953125
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": {
+        "area": 15640,
+        "box": [
+          94,
+          324,
+          278,
+          409
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.7884566783905029,
+        "sides": {
+          "bottom": 0.3223605751991272,
+          "left": 1.1734037399291992,
+          "right": 1.22964608669281,
+          "top": 0.8308867812156677
+        },
+        "useful": false
+      },
+      "family": "layout-1",
+      "key": [
+        "screen",
+        5,
+        "photo"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 49152,
+        "box": [
+          326,
+          44,
+          582,
+          236
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 1.17731773853302,
+        "sides": {
+          "bottom": 1.0122523307800293,
+          "left": 0.47795167565345764,
+          "right": 1.5921388864517212,
+          "top": 2.494140625
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 0,
+      "viewport": [
+        30,
+        111,
+        582,
+        623
+      ],
+      "whole": {
+        "area": 49152,
+        "box": [
+          326,
+          44,
+          582,
+          236
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 1.17731773853302,
+        "sides": {
+          "bottom": 1.0122523307800293,
+          "left": 0.47795167565345764,
+          "right": 1.5921388864517212,
+          "top": 2.494140625
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": {
+        "area": 15732,
+        "box": [
+          186,
+          324,
+          278,
+          495
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.957098662853241,
+        "sides": {
+          "bottom": 2.074439525604248,
+          "left": 0.4203122556209564,
+          "right": 0.6920372843742371,
+          "top": 1.3906714916229248
+        },
+        "useful": false
+      },
+      "family": "layout-1",
+      "key": [
+        "screen",
+        5,
+        "sharp"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 24576,
+        "box": [
+          126,
+          495,
+          318,
+          623
+        ],
+        "flag": true,
+        "overlap": 24576,
+        "score": 2.400118827819824,
+        "sides": {
+          "bottom": 2.999610185623169,
+          "left": 2.1421914100646973,
+          "right": 2.4561474323272705,
+          "top": 2.1025843620300293
+        },
+        "useful": true
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 24576,
+      "viewport": [
+        30,
+        111,
+        582,
+        623
+      ],
+      "whole": {
+        "area": 24576,
+        "box": [
+          126,
+          495,
+          318,
+          623
+        ],
+        "flag": true,
+        "overlap": 24576,
+        "score": 2.400118827819824,
+        "sides": {
+          "bottom": 2.999610185623169,
+          "left": 2.1421914100646973,
+          "right": 2.4561474323272705,
+          "top": 2.1025843620300293
+        },
+        "useful": true
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": {
+        "area": 15640,
+        "box": [
+          94,
+          324,
+          278,
+          409
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.7884566783905029,
+        "sides": {
+          "bottom": 0.3223605751991272,
+          "left": 1.1734037399291992,
+          "right": 1.22964608669281,
+          "top": 0.8308867812156677
+        },
+        "useful": false
+      },
+      "family": "layout-1",
+      "key": [
+        "screen",
+        5,
+        "feather"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 49152,
+        "box": [
+          326,
+          44,
+          582,
+          236
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 1.17731773853302,
+        "sides": {
+          "bottom": 1.0122523307800293,
+          "left": 0.47795167565345764,
+          "right": 1.5921388864517212,
+          "top": 2.494140625
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 23870,
+      "viewport": [
+        30,
+        111,
+        582,
+        623
+      ],
+      "whole": {
+        "area": 49152,
+        "box": [
+          326,
+          44,
+          582,
+          236
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 1.17731773853302,
+        "sides": {
+          "bottom": 1.0122523307800293,
+          "left": 0.47795167565345764,
+          "right": 1.5921388864517212,
+          "top": 2.494140625
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "layout-1",
+      "key": [
+        "screen",
+        5,
+        "ambiguous"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 49152,
+        "box": [
+          326,
+          44,
+          582,
+          236
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 1.1773176193237305,
+        "sides": {
+          "bottom": 1.0122522115707397,
+          "left": 0.47795167565345764,
+          "right": 1.5921388864517212,
+          "top": 2.494140625
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 49152,
+        "box": [
+          326,
+          44,
+          582,
+          236
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 1.1773176193237305,
+        "sides": {
+          "bottom": 1.0122522115707397,
+          "left": 0.47795167565345764,
+          "right": 1.5921388864517212,
+          "top": 2.494140625
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "kandinsky",
+      "key": [
+        "direct",
+        5,
+        "photo"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 15640,
+        "box": [
+          64,
+          213,
+          248,
+          298
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.7884566783905029,
+        "sides": {
+          "bottom": 0.3223605751991272,
+          "left": 1.1734037399291992,
+          "right": 1.22964608669281,
+          "top": 0.8308867812156677
+        },
+        "useful": false
+      },
+      "shape": [
+        512,
+        552
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 15640,
+        "box": [
+          64,
+          213,
+          248,
+          298
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.7884566783905029,
+        "sides": {
+          "bottom": 0.3223605751991272,
+          "left": 1.1734037399291992,
+          "right": 1.22964608669281,
+          "top": 0.8308867812156677
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "kandinsky",
+      "key": [
+        "direct",
+        5,
+        "sharp"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 15732,
+        "box": [
+          156,
+          213,
+          248,
+          384
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.957098662853241,
+        "sides": {
+          "bottom": 2.074439525604248,
+          "left": 0.4203122556209564,
+          "right": 0.6920372843742371,
+          "top": 1.3906714916229248
+        },
+        "useful": false
+      },
+      "shape": [
+        512,
+        552
+      ],
+      "target": 24576,
+      "viewport": null,
+      "whole": {
+        "area": 15732,
+        "box": [
+          156,
+          213,
+          248,
+          384
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.957098662853241,
+        "sides": {
+          "bottom": 2.074439525604248,
+          "left": 0.4203122556209564,
+          "right": 0.6920372843742371,
+          "top": 1.3906714916229248
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "kandinsky",
+      "key": [
+        "direct",
+        5,
+        "feather"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 15640,
+        "box": [
+          64,
+          213,
+          248,
+          298
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.7884566783905029,
+        "sides": {
+          "bottom": 0.3223605751991272,
+          "left": 1.1734037399291992,
+          "right": 1.22964608669281,
+          "top": 0.8308867812156677
+        },
+        "useful": false
+      },
+      "shape": [
+        512,
+        552
+      ],
+      "target": 23870,
+      "viewport": null,
+      "whole": {
+        "area": 15640,
+        "box": [
+          64,
+          213,
+          248,
+          298
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.7884566783905029,
+        "sides": {
+          "bottom": 0.3223605751991272,
+          "left": 1.1734037399291992,
+          "right": 1.22964608669281,
+          "top": 0.8308867812156677
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "kandinsky",
+      "key": [
+        "direct",
+        5,
+        "tone"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 11776,
+        "box": [
+          417,
+          7,
+          509,
+          135
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.7672091722488403,
+        "sides": {
+          "bottom": 1.8015252351760864,
+          "left": 0.8460103869438171,
+          "right": 0.527954638004303,
+          "top": 0.43056872487068176
+        },
+        "useful": false
+      },
+      "shape": [
+        512,
+        552
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 11776,
+        "box": [
+          417,
+          7,
+          509,
+          135
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.7672091722488403,
+        "sides": {
+          "bottom": 1.8015252351760864,
+          "left": 0.8460103869438171,
+          "right": 0.527954638004303,
+          "top": 0.43056872487068176
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "layout-2",
+      "key": [
+        "screen",
+        6,
+        "template"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 16384,
+        "box": [
+          129,
+          44,
+          257,
+          172
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 1.255882978439331,
+        "sides": {
+          "bottom": 2.484375,
+          "left": 1.8887099027633667,
+          "right": 0.22807247936725616,
+          "top": 2.3245632648468018
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 16384,
+        "box": [
+          129,
+          44,
+          257,
+          172
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 1.255882978439331,
+        "sides": {
+          "bottom": 2.484375,
+          "left": 1.8887099027633667,
+          "right": 0.22807247936725616,
+          "top": 2.3245632648468018
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [
+        [
+          23,
+          607
+        ],
+        [
+          23,
+          626
+        ],
+        [
+          23,
+          647
+        ],
+        [
+          23,
+          666
+        ],
+        [
+          23,
+          683
+        ]
+      ],
+      "exact_viewport": {
+        "area": 7565,
+        "box": [
+          522,
+          141,
+          611,
+          226
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5734585523605347,
+        "sides": {
+          "bottom": 0.3345054090023041,
+          "left": 0.6132898330688477,
+          "right": 0.43991345167160034,
+          "top": 1.1983176469802856
+        },
+        "useful": false
+      },
+      "family": "layout-2",
+      "key": [
+        "screen",
+        6,
+        "photo"
+      ],
+      "locator": {
+        "box": [
+          129,
+          68,
+          665,
+          580
+        ],
+        "edges": [
+          0.9971202303815695,
+          0.970946416144746,
+          0.9938804895608352,
+          0.9855601948503826
+        ],
+        "rough": [
+          128,
+          64,
+          664,
+          584
+        ]
+      },
+      "route": [
+        129,
+        68,
+        665,
+        580
+      ],
+      "route_iou": 1.0,
+      "routed": {
+        "area": 7565,
+        "box": [
+          522,
+          141,
+          611,
+          226
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5734585523605347,
+        "sides": {
+          "bottom": 0.3345054090023041,
+          "left": 0.6132898330688477,
+          "right": 0.43991345167160034,
+          "top": 1.1983176469802856
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 0,
+      "viewport": [
+        129,
+        68,
+        665,
+        580
+      ],
+      "whole": {
+        "area": 16384,
+        "box": [
+          129,
+          68,
+          257,
+          196
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.9256070852279663,
+        "sides": {
+          "bottom": 0.589194655418396,
+          "left": 2.8990321159362793,
+          "right": 0.14708060026168823,
+          "top": 2.9217259883880615
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [
+        [
+          23,
+          607
+        ],
+        [
+          23,
+          626
+        ],
+        [
+          23,
+          647
+        ],
+        [
+          23,
+          666
+        ],
+        [
+          23,
+          683
+        ]
+      ],
+      "exact_viewport": {
+        "area": 7565,
+        "box": [
+          522,
+          141,
+          611,
+          226
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5734584927558899,
+        "sides": {
+          "bottom": 0.3345054090023041,
+          "left": 0.6132898330688477,
+          "right": 0.43991345167160034,
+          "top": 1.1983174085617065
+        },
+        "useful": false
+      },
+      "family": "layout-2",
+      "key": [
+        "screen",
+        6,
+        "sharp"
+      ],
+      "locator": {
+        "box": [
+          129,
+          68,
+          665,
+          580
+        ],
+        "edges": [
+          0.9971202303815695,
+          0.9479819067501739,
+          0.9938804895608352,
+          0.9855601948503826
+        ],
+        "rough": [
+          128,
+          64,
+          664,
+          584
+        ]
+      },
+      "route": [
+        129,
+        68,
+        665,
+        580
+      ],
+      "route_iou": 1.0,
+      "routed": {
+        "area": 7565,
+        "box": [
+          522,
+          141,
+          611,
+          226
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5734584927558899,
+        "sides": {
+          "bottom": 0.3345054090023041,
+          "left": 0.6132898330688477,
+          "right": 0.43991345167160034,
+          "top": 1.1983174085617065
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 24576,
+      "viewport": [
+        129,
+        68,
+        665,
+        580
+      ],
+      "whole": {
+        "area": 24576,
+        "box": [
+          301,
+          68,
+          493,
+          196
+        ],
+        "flag": true,
+        "overlap": 24576,
+        "score": 2.1033904552459717,
+        "sides": {
+          "bottom": 2.1099066734313965,
+          "left": 1.6230485439300537,
+          "right": 1.906358003616333,
+          "top": 2.9983367919921875
+        },
+        "useful": true
+      }
+    },
+    {
+      "aligned_exterior": [
+        [
+          23,
+          607
+        ],
+        [
+          23,
+          626
+        ],
+        [
+          23,
+          647
+        ],
+        [
+          23,
+          666
+        ],
+        [
+          23,
+          683
+        ]
+      ],
+      "exact_viewport": {
+        "area": 7565,
+        "box": [
+          522,
+          141,
+          611,
+          226
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5734585523605347,
+        "sides": {
+          "bottom": 0.3345054090023041,
+          "left": 0.6132898330688477,
+          "right": 0.43991345167160034,
+          "top": 1.198317527770996
+        },
+        "useful": false
+      },
+      "family": "layout-2",
+      "key": [
+        "screen",
+        6,
+        "feather"
+      ],
+      "locator": {
+        "box": [
+          129,
+          68,
+          665,
+          580
+        ],
+        "edges": [
+          0.9971202303815695,
+          0.9612038970076547,
+          0.9938804895608352,
+          0.9855601948503826
+        ],
+        "rough": [
+          128,
+          64,
+          664,
+          584
+        ]
+      },
+      "route": [
+        129,
+        68,
+        665,
+        580
+      ],
+      "route_iou": 1.0,
+      "routed": {
+        "area": 7565,
+        "box": [
+          522,
+          141,
+          611,
+          226
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5734585523605347,
+        "sides": {
+          "bottom": 0.3345054090023041,
+          "left": 0.6132898330688477,
+          "right": 0.43991345167160034,
+          "top": 1.198317527770996
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 23792,
+      "viewport": [
+        129,
+        68,
+        665,
+        580
+      ],
+      "whole": {
+        "area": 16384,
+        "box": [
+          129,
+          68,
+          257,
+          196
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.9256070852279663,
+        "sides": {
+          "bottom": 0.589194655418396,
+          "left": 2.8990321159362793,
+          "right": 0.14708060026168823,
+          "top": 2.9217259883880615
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [
+        [
+          23,
+          607
+        ],
+        [
+          23,
+          626
+        ],
+        [
+          23,
+          647
+        ],
+        [
+          23,
+          666
+        ],
+        [
+          23,
+          683
+        ]
+      ],
+      "exact_viewport": null,
+      "family": "layout-2",
+      "key": [
+        "screen",
+        6,
+        "ambiguous"
+      ],
+      "locator": {
+        "box": [
+          90,
+          68,
+          665,
+          580
+        ],
+        "edges": [
+          0.45896328293736505,
+          0.947655748233783,
+          0.9938804895608352,
+          0.9621066152858059
+        ],
+        "rough": [
+          88,
+          64,
+          664,
+          584
+        ]
+      },
+      "route": [
+        90,
+        68,
+        665,
+        580
+      ],
+      "route_iou": 0.0,
+      "routed": {
+        "area": 16416,
+        "box": [
+          129,
+          356,
+          225,
+          527
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 1.049523949623108,
+        "sides": {
+          "bottom": 1.223530650138855,
+          "left": 2.119976758956909,
+          "right": 0.21570129692554474,
+          "top": 2.1685564517974854
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 16384,
+        "box": [
+          88,
+          228,
+          216,
+          356
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 1.011582612991333,
+        "sides": {
+          "bottom": 2.3709192276000977,
+          "left": 2.789473056793213,
+          "right": 0.17728711664676666,
+          "top": 0.8930777311325073
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "sdxl",
+      "key": [
+        "direct",
+        6,
+        "photo"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 7565,
+        "box": [
+          393,
+          73,
+          482,
+          158
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5734585523605347,
+        "sides": {
+          "bottom": 0.3345054090023041,
+          "left": 0.6132898330688477,
+          "right": 0.43991345167160034,
+          "top": 1.1983176469802856
+        },
+        "useful": false
+      },
+      "shape": [
+        512,
+        536
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 7565,
+        "box": [
+          393,
+          73,
+          482,
+          158
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5734585523605347,
+        "sides": {
+          "bottom": 0.3345054090023041,
+          "left": 0.6132898330688477,
+          "right": 0.43991345167160034,
+          "top": 1.1983176469802856
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "sdxl",
+      "key": [
+        "direct",
+        6,
+        "sharp"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 7565,
+        "box": [
+          393,
+          73,
+          482,
+          158
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5734584927558899,
+        "sides": {
+          "bottom": 0.3345054090023041,
+          "left": 0.6132898330688477,
+          "right": 0.43991345167160034,
+          "top": 1.1983174085617065
+        },
+        "useful": false
+      },
+      "shape": [
+        512,
+        536
+      ],
+      "target": 24576,
+      "viewport": null,
+      "whole": {
+        "area": 7565,
+        "box": [
+          393,
+          73,
+          482,
+          158
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5734584927558899,
+        "sides": {
+          "bottom": 0.3345054090023041,
+          "left": 0.6132898330688477,
+          "right": 0.43991345167160034,
+          "top": 1.1983174085617065
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "sdxl",
+      "key": [
+        "direct",
+        6,
+        "feather"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 7565,
+        "box": [
+          393,
+          73,
+          482,
+          158
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5734585523605347,
+        "sides": {
+          "bottom": 0.3345054090023041,
+          "left": 0.6132898330688477,
+          "right": 0.43991345167160034,
+          "top": 1.198317527770996
+        },
+        "useful": false
+      },
+      "shape": [
+        512,
+        536
+      ],
+      "target": 23792,
+      "viewport": null,
+      "whole": {
+        "area": 7565,
+        "box": [
+          393,
+          73,
+          482,
+          158
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5734585523605347,
+        "sides": {
+          "bottom": 0.3345054090023041,
+          "left": 0.6132898330688477,
+          "right": 0.43991345167160034,
+          "top": 1.198317527770996
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "sdxl",
+      "key": [
+        "direct",
+        6,
+        "tone"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 7565,
+        "box": [
+          393,
+          73,
+          482,
+          158
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5558368563652039,
+        "sides": {
+          "bottom": 0.3206256628036499,
+          "left": 0.5966184735298157,
+          "right": 0.4255827069282532,
+          "top": 1.1724931001663208
+        },
+        "useful": false
+      },
+      "shape": [
+        512,
+        536
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 7565,
+        "box": [
+          393,
+          73,
+          482,
+          158
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5558368563652039,
+        "sides": {
+          "bottom": 0.3206256628036499,
+          "left": 0.5966184735298157,
+          "right": 0.4255827069282532,
+          "top": 1.1724931001663208
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "layout-3",
+      "key": [
+        "screen",
+        7,
+        "template"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 16384,
+        "box": [
+          106,
+          138,
+          234,
+          266
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.8037219047546387,
+        "sides": {
+          "bottom": 0.572152316570282,
+          "left": 1.7917624711990356,
+          "right": 0.2271699160337448,
+          "top": 1.7917622327804565
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 16384,
+        "box": [
+          106,
+          138,
+          234,
+          266
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.8037219047546387,
+        "sides": {
+          "bottom": 0.572152316570282,
+          "left": 1.7917624711990356,
+          "right": 0.2271699160337448,
+          "top": 1.7917622327804565
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [
+        [
+          21,
+          26
+        ],
+        [
+          22,
+          68
+        ],
+        [
+          22,
+          87
+        ],
+        [
+          22,
+          108
+        ]
+      ],
+      "exact_viewport": {
+        "area": 7565,
+        "box": [
+          503,
+          540,
+          588,
+          629
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.9156349301338196,
+        "sides": {
+          "bottom": 1.6489417552947998,
+          "left": 0.35766810178756714,
+          "right": 1.1237810850143433,
+          "top": 1.0605281591415405
+        },
+        "useful": false
+      },
+      "family": "layout-3",
+      "key": [
+        "screen",
+        7,
+        "photo"
+      ],
+      "locator": {
+        "box": [
+          106,
+          138,
+          618,
+          674
+        ],
+        "edges": [
+          0.9725121781489213,
+          0.7595238095238094,
+          0.9551148225469728,
+          0.9087912087912088
+        ],
+        "rough": [
+          104,
+          136,
+          616,
+          672
+        ]
+      },
+      "route": [
+        106,
+        138,
+        618,
+        674
+      ],
+      "route_iou": 1.0,
+      "routed": {
+        "area": 7565,
+        "box": [
+          503,
+          540,
+          588,
+          629
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.9156349301338196,
+        "sides": {
+          "bottom": 1.6489417552947998,
+          "left": 0.35766810178756714,
+          "right": 1.1237810850143433,
+          "top": 1.0605281591415405
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 0,
+      "viewport": [
+        106,
+        138,
+        618,
+        674
+      ],
+      "whole": {
+        "area": 32768,
+        "box": [
+          490,
+          418,
+          618,
+          674
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 1.0835977792739868,
+        "sides": {
+          "bottom": 3.0,
+          "left": 0.3307231664657593,
+          "right": 2.5674684047698975,
+          "top": 0.5412293672561646
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [
+        [
+          21,
+          26
+        ],
+        [
+          22,
+          68
+        ],
+        [
+          22,
+          87
+        ],
+        [
+          22,
+          108
+        ]
+      ],
+      "exact_viewport": {
+        "area": 7565,
+        "box": [
+          503,
+          540,
+          588,
+          629
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.9156349301338196,
+        "sides": {
+          "bottom": 1.6489417552947998,
+          "left": 0.35766810178756714,
+          "right": 1.1237810850143433,
+          "top": 1.0605281591415405
+        },
+        "useful": false
+      },
+      "family": "layout-3",
+      "key": [
+        "screen",
+        7,
+        "sharp"
+      ],
+      "locator": {
+        "box": [
+          106,
+          138,
+          618,
+          674
+        ],
+        "edges": [
+          0.9725121781489213,
+          0.7124542124542125,
+          0.9551148225469728,
+          0.9087912087912088
+        ],
+        "rough": [
+          104,
+          136,
+          616,
+          672
+        ]
+      },
+      "route": [
+        106,
+        138,
+        618,
+        674
+      ],
+      "route_iou": 1.0,
+      "routed": {
+        "area": 7565,
+        "box": [
+          503,
+          540,
+          588,
+          629
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.9156349301338196,
+        "sides": {
+          "bottom": 1.6489417552947998,
+          "left": 0.35766810178756714,
+          "right": 1.1237810850143433,
+          "top": 1.0605281591415405
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 20596,
+      "viewport": [
+        106,
+        138,
+        618,
+        674
+      ],
+      "whole": {
+        "area": 49152,
+        "box": [
+          362,
+          138,
+          618,
+          330
+        ],
+        "flag": true,
+        "overlap": 20596,
+        "score": 1.5978060960769653,
+        "sides": {
+          "bottom": 1.104945182800293,
+          "left": 0.8735144734382629,
+          "right": 3.0,
+          "top": 2.250941276550293
+        },
+        "useful": true
+      }
+    },
+    {
+      "aligned_exterior": [
+        [
+          21,
+          26
+        ],
+        [
+          22,
+          68
+        ],
+        [
+          22,
+          87
+        ],
+        [
+          22,
+          108
+        ]
+      ],
+      "exact_viewport": {
+        "area": 7565,
+        "box": [
+          503,
+          540,
+          588,
+          629
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.9156349301338196,
+        "sides": {
+          "bottom": 1.6489417552947998,
+          "left": 0.35766810178756714,
+          "right": 1.1237810850143433,
+          "top": 1.0605281591415405
+        },
+        "useful": false
+      },
+      "family": "layout-3",
+      "key": [
+        "screen",
+        7,
+        "feather"
+      ],
+      "locator": {
+        "box": [
+          106,
+          138,
+          618,
+          674
+        ],
+        "edges": [
+          0.9725121781489213,
+          0.7512820512820512,
+          0.9551148225469728,
+          0.9087912087912088
+        ],
+        "rough": [
+          104,
+          136,
+          616,
+          672
+        ]
+      },
+      "route": [
+        106,
+        138,
+        618,
+        674
+      ],
+      "route_iou": 1.0,
+      "routed": {
+        "area": 7565,
+        "box": [
+          503,
+          540,
+          588,
+          629
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.9156349301338196,
+        "sides": {
+          "bottom": 1.6489417552947998,
+          "left": 0.35766810178756714,
+          "right": 1.1237810850143433,
+          "top": 1.0605281591415405
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 19810,
+      "viewport": [
+        106,
+        138,
+        618,
+        674
+      ],
+      "whole": {
+        "area": 32768,
+        "box": [
+          490,
+          418,
+          618,
+          674
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 1.0835976600646973,
+        "sides": {
+          "bottom": 3.0,
+          "left": 0.3307231366634369,
+          "right": 2.5674684047698975,
+          "top": 0.5412293672561646
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [
+        [
+          21,
+          26
+        ],
+        [
+          22,
+          68
+        ],
+        [
+          22,
+          87
+        ],
+        [
+          22,
+          108
+        ]
+      ],
+      "exact_viewport": null,
+      "family": "layout-3",
+      "key": [
+        "screen",
+        7,
+        "ambiguous"
+      ],
+      "locator": {
+        "box": [
+          67,
+          138,
+          618,
+          674
+        ],
+        "edges": [
+          0.3667362560890744,
+          0.7520202020202019,
+          0.9551148225469728,
+          0.8893939393939393
+        ],
+        "rough": [
+          64,
+          136,
+          616,
+          672
+        ]
+      },
+      "route": [
+        67,
+        138,
+        618,
+        674
+      ],
+      "route_iou": 0.0,
+      "routed": {
+        "area": 8188,
+        "box": [
+          106,
+          499,
+          198,
+          588
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 1.3055304288864136,
+        "sides": {
+          "bottom": 0.7310769557952881,
+          "left": 2.8415286540985107,
+          "right": 0.9487746953964233,
+          "top": 1.4739059209823608
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 32768,
+        "box": [
+          490,
+          418,
+          618,
+          674
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 1.0835976600646973,
+        "sides": {
+          "bottom": 3.0,
+          "left": 0.3307231664657593,
+          "right": 2.5674684047698975,
+          "top": 0.541229248046875
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "sdxl",
+      "key": [
+        "direct",
+        7,
+        "photo"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 7565,
+        "box": [
+          397,
+          402,
+          482,
+          491
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.9156349301338196,
+        "sides": {
+          "bottom": 1.6489417552947998,
+          "left": 0.35766810178756714,
+          "right": 1.1237810850143433,
+          "top": 1.0605281591415405
+        },
+        "useful": false
+      },
+      "shape": [
+        536,
+        512
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 7565,
+        "box": [
+          397,
+          402,
+          482,
+          491
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.9156349301338196,
+        "sides": {
+          "bottom": 1.6489417552947998,
+          "left": 0.35766810178756714,
+          "right": 1.1237810850143433,
+          "top": 1.0605281591415405
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "sdxl",
+      "key": [
+        "direct",
+        7,
+        "sharp"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 7565,
+        "box": [
+          397,
+          402,
+          482,
+          491
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.9156349301338196,
+        "sides": {
+          "bottom": 1.6489417552947998,
+          "left": 0.35766810178756714,
+          "right": 1.1237810850143433,
+          "top": 1.0605281591415405
+        },
+        "useful": false
+      },
+      "shape": [
+        536,
+        512
+      ],
+      "target": 20596,
+      "viewport": null,
+      "whole": {
+        "area": 7565,
+        "box": [
+          397,
+          402,
+          482,
+          491
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.9156349301338196,
+        "sides": {
+          "bottom": 1.6489417552947998,
+          "left": 0.35766810178756714,
+          "right": 1.1237810850143433,
+          "top": 1.0605281591415405
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "sdxl",
+      "key": [
+        "direct",
+        7,
+        "feather"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 7565,
+        "box": [
+          397,
+          402,
+          482,
+          491
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.9156349301338196,
+        "sides": {
+          "bottom": 1.6489417552947998,
+          "left": 0.35766810178756714,
+          "right": 1.1237810850143433,
+          "top": 1.0605281591415405
+        },
+        "useful": false
+      },
+      "shape": [
+        536,
+        512
+      ],
+      "target": 19810,
+      "viewport": null,
+      "whole": {
+        "area": 7565,
+        "box": [
+          397,
+          402,
+          482,
+          491
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.9156349301338196,
+        "sides": {
+          "bottom": 1.6489417552947998,
+          "left": 0.35766810178756714,
+          "right": 1.1237810850143433,
+          "top": 1.0605281591415405
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "sdxl",
+      "key": [
+        "direct",
+        7,
+        "tone"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 7565,
+        "box": [
+          397,
+          402,
+          482,
+          491
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.8947264552116394,
+        "sides": {
+          "bottom": 1.615897297859192,
+          "left": 0.3501897156238556,
+          "right": 1.092221736907959,
+          "top": 1.036891222000122
+        },
+        "useful": false
+      },
+      "shape": [
+        536,
+        512
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 7565,
+        "box": [
+          397,
+          402,
+          482,
+          491
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.8947264552116394,
+        "sides": {
+          "bottom": 1.615897297859192,
+          "left": 0.3501897156238556,
+          "right": 1.092221736907959,
+          "top": 1.036891222000122
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "layout-0",
+      "key": [
+        "screen",
+        8,
+        "template"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 16384,
+        "box": [
+          168,
+          104,
+          296,
+          232
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 1.0630453824996948,
+        "sides": {
+          "bottom": 0.8339118361473083,
+          "left": 2.079440116882324,
+          "right": 0.3541557490825653,
+          "top": 2.079440116882324
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 16384,
+        "box": [
+          168,
+          104,
+          296,
+          232
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 1.0630453824996948,
+        "sides": {
+          "bottom": 0.8339118361473083,
+          "left": 2.079440116882324,
+          "right": 0.3541557490825653,
+          "top": 2.079440116882324
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [
+        [
+          20,
+          26
+        ],
+        [
+          13,
+          128
+        ],
+        [
+          13,
+          147
+        ],
+        [
+          13,
+          168
+        ],
+        [
+          13,
+          188
+        ],
+        [
+          13,
+          204
+        ]
+      ],
+      "exact_viewport": {
+        "area": 11730,
+        "box": [
+          178,
+          265,
+          316,
+          350
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.3821941912174225,
+        "sides": {
+          "bottom": 0.5461599230766296,
+          "left": 0.17609412968158722,
+          "right": 0.7205526828765869,
+          "top": 0.30789726972579956
+        },
+        "useful": false
+      },
+      "family": "layout-0",
+      "key": [
+        "screen",
+        8,
+        "photo"
+      ],
+      "locator": {
+        "box": [
+          168,
+          104,
+          720,
+          616
+        ],
+        "edges": [
+          0.9754578754578755,
+          0.6973063973063973,
+          0.7708791208791211,
+          0.9915824915824917
+        ],
+        "rough": [
+          168,
+          104,
+          720,
+          616
+        ]
+      },
+      "route": [
+        168,
+        104,
+        720,
+        616
+      ],
+      "route_iou": 1.0,
+      "routed": {
+        "area": 11730,
+        "box": [
+          178,
+          265,
+          316,
+          350
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.3821941912174225,
+        "sides": {
+          "bottom": 0.5461599230766296,
+          "left": 0.17609412968158722,
+          "right": 0.7205526828765869,
+          "top": 0.30789726972579956
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 0,
+      "viewport": [
+        168,
+        104,
+        720,
+        616
+      ],
+      "whole": {
+        "area": 24576,
+        "box": [
+          168,
+          424,
+          296,
+          616
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.8267586827278137,
+        "sides": {
+          "bottom": 3.0,
+          "left": 2.9578988552093506,
+          "right": 0.19859622418880463,
+          "top": 0.26511815190315247
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [
+        [
+          20,
+          26
+        ],
+        [
+          13,
+          128
+        ],
+        [
+          13,
+          147
+        ],
+        [
+          13,
+          168
+        ],
+        [
+          13,
+          188
+        ],
+        [
+          13,
+          204
+        ]
+      ],
+      "exact_viewport": {
+        "area": 11730,
+        "box": [
+          390,
+          146,
+          528,
+          231
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.3925663232803345,
+        "sides": {
+          "bottom": 0.80717933177948,
+          "left": 0.13784506916999817,
+          "right": 1.8435420989990234,
+          "top": 0.11578115075826645
+        },
+        "useful": false
+      },
+      "family": "layout-0",
+      "key": [
+        "screen",
+        8,
+        "sharp"
+      ],
+      "locator": {
+        "box": [
+          168,
+          104,
+          720,
+          616
+        ],
+        "edges": [
+          0.9754578754578755,
+          0.614983164983165,
+          0.81996336996337,
+          0.9915824915824917
+        ],
+        "rough": [
+          168,
+          104,
+          720,
+          616
+        ]
+      },
+      "route": [
+        168,
+        104,
+        720,
+        616
+      ],
+      "route_iou": 1.0,
+      "routed": {
+        "area": 11730,
+        "box": [
+          390,
+          146,
+          528,
+          231
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.3925663232803345,
+        "sides": {
+          "bottom": 0.80717933177948,
+          "left": 0.13784506916999817,
+          "right": 1.8435420989990234,
+          "top": 0.11578115075826645
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 24576,
+      "viewport": [
+        168,
+        104,
+        720,
+        616
+      ],
+      "whole": {
+        "area": 24576,
+        "box": [
+          528,
+          104,
+          720,
+          232
+        ],
+        "flag": true,
+        "overlap": 24576,
+        "score": 2.4108736515045166,
+        "sides": {
+          "bottom": 2.037344217300415,
+          "left": 1.8437631130218506,
+          "right": 2.9978294372558594,
+          "top": 3.0
+        },
+        "useful": true
+      }
+    },
+    {
+      "aligned_exterior": [
+        [
+          20,
+          26
+        ],
+        [
+          13,
+          128
+        ],
+        [
+          13,
+          147
+        ],
+        [
+          13,
+          168
+        ],
+        [
+          13,
+          188
+        ],
+        [
+          13,
+          204
+        ]
+      ],
+      "exact_viewport": {
+        "area": 11730,
+        "box": [
+          178,
+          265,
+          316,
+          350
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.3821941912174225,
+        "sides": {
+          "bottom": 0.5461599230766296,
+          "left": 0.17609412968158722,
+          "right": 0.7205526828765869,
+          "top": 0.30789726972579956
+        },
+        "useful": false
+      },
+      "family": "layout-0",
+      "key": [
+        "screen",
+        8,
+        "feather"
+      ],
+      "locator": {
+        "box": [
+          168,
+          104,
+          720,
+          616
+        ],
+        "edges": [
+          0.9754578754578755,
+          0.6831649831649832,
+          0.8021978021978023,
+          0.9915824915824917
+        ],
+        "rough": [
+          168,
+          104,
+          720,
+          616
+        ]
+      },
+      "route": [
+        168,
+        104,
+        720,
+        616
+      ],
+      "route_iou": 1.0,
+      "routed": {
+        "area": 11730,
+        "box": [
+          178,
+          265,
+          316,
+          350
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.3821941912174225,
+        "sides": {
+          "bottom": 0.5461599230766296,
+          "left": 0.17609412968158722,
+          "right": 0.7205526828765869,
+          "top": 0.30789726972579956
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 23756,
+      "viewport": [
+        168,
+        104,
+        720,
+        616
+      ],
+      "whole": {
+        "area": 24576,
+        "box": [
+          168,
+          424,
+          296,
+          616
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.8267586827278137,
+        "sides": {
+          "bottom": 3.0,
+          "left": 2.9578988552093506,
+          "right": 0.19859622418880463,
+          "top": 0.26511815190315247
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "layout-0",
+      "key": [
+        "screen",
+        8,
+        "ambiguous"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 16384,
+        "box": [
+          127,
+          168,
+          255,
+          296
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.9508020281791687,
+        "sides": {
+          "bottom": 0.6473470330238342,
+          "left": 2.8186004161834717,
+          "right": 0.18337905406951904,
+          "top": 2.442530632019043
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 16384,
+        "box": [
+          127,
+          168,
+          255,
+          296
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.9508020281791687,
+        "sides": {
+          "bottom": 0.6473470330238342,
+          "left": 2.8186004161834717,
+          "right": 0.18337905406951904,
+          "top": 2.442530632019043
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "sdxl",
+      "key": [
+        "direct",
+        8,
+        "photo"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 11730,
+        "box": [
+          10,
+          161,
+          148,
+          246
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.3821941912174225,
+        "sides": {
+          "bottom": 0.5461599230766296,
+          "left": 0.17609412968158722,
+          "right": 0.7205526828765869,
+          "top": 0.30789726972579956
+        },
+        "useful": false
+      },
+      "shape": [
+        512,
+        552
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 11730,
+        "box": [
+          10,
+          161,
+          148,
+          246
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.3821941912174225,
+        "sides": {
+          "bottom": 0.5461599230766296,
+          "left": 0.17609412968158722,
+          "right": 0.7205526828765869,
+          "top": 0.30789726972579956
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "sdxl",
+      "key": [
+        "direct",
+        8,
+        "sharp"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 11730,
+        "box": [
+          222,
+          42,
+          360,
+          127
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.3925663232803345,
+        "sides": {
+          "bottom": 0.80717933177948,
+          "left": 0.13784506916999817,
+          "right": 1.8435420989990234,
+          "top": 0.11578115075826645
+        },
+        "useful": false
+      },
+      "shape": [
+        512,
+        552
+      ],
+      "target": 24576,
+      "viewport": null,
+      "whole": {
+        "area": 11730,
+        "box": [
+          222,
+          42,
+          360,
+          127
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.3925663232803345,
+        "sides": {
+          "bottom": 0.80717933177948,
+          "left": 0.13784506916999817,
+          "right": 1.8435420989990234,
+          "top": 0.11578115075826645
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "sdxl",
+      "key": [
+        "direct",
+        8,
+        "feather"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 11730,
+        "box": [
+          10,
+          161,
+          148,
+          246
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.3821941912174225,
+        "sides": {
+          "bottom": 0.5461599230766296,
+          "left": 0.17609412968158722,
+          "right": 0.7205526828765869,
+          "top": 0.30789726972579956
+        },
+        "useful": false
+      },
+      "shape": [
+        512,
+        552
+      ],
+      "target": 23756,
+      "viewport": null,
+      "whole": {
+        "area": 11730,
+        "box": [
+          10,
+          161,
+          148,
+          246
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.3821941912174225,
+        "sides": {
+          "bottom": 0.5461599230766296,
+          "left": 0.17609412968158722,
+          "right": 0.7205526828765869,
+          "top": 0.30789726972579956
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "sdxl",
+      "key": [
+        "direct",
+        8,
+        "tone"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 11730,
+        "box": [
+          10,
+          161,
+          148,
+          246
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.369728147983551,
+        "sides": {
+          "bottom": 0.5297679901123047,
+          "left": 0.16832174360752106,
+          "right": 0.7041370272636414,
+          "top": 0.2976096272468567
+        },
+        "useful": false
+      },
+      "shape": [
+        512,
+        552
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 11730,
+        "box": [
+          10,
+          161,
+          148,
+          246
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.369728147983551,
+        "sides": {
+          "bottom": 0.5297679901123047,
+          "left": 0.16832174360752106,
+          "right": 0.7041370272636414,
+          "top": 0.2976096272468567
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "layout-1",
+      "key": [
+        "screen",
+        9,
+        "template"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 32768,
+        "box": [
+          479,
+          44,
+          607,
+          300
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5726384520530701,
+        "sides": {
+          "bottom": 1.640625,
+          "left": 0.2578125,
+          "right": 0.10192666947841644,
+          "top": 2.494140625
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 32768,
+        "box": [
+          479,
+          44,
+          607,
+          300
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5726384520530701,
+        "sides": {
+          "bottom": 1.640625,
+          "left": 0.2578125,
+          "right": 0.10192666947841644,
+          "top": 2.494140625
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": {
+        "area": 11390,
+        "box": [
+          310,
+          234,
+          444,
+          319
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.6289817690849304,
+        "sides": {
+          "bottom": 0.24782508611679077,
+          "left": 1.903490662574768,
+          "right": 0.7205714583396912,
+          "top": 0.4604465067386627
+        },
+        "useful": false
+      },
+      "family": "layout-1",
+      "key": [
+        "screen",
+        9,
+        "photo"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 24576,
+        "box": [
+          35,
+          434,
+          163,
+          626
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.9530896544456482,
+        "sides": {
+          "bottom": 2.5180814266204834,
+          "left": 2.8267745971679688,
+          "right": 0.38585397601127625,
+          "top": 0.3004353642463684
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 0,
+      "viewport": [
+        35,
+        114,
+        571,
+        626
+      ],
+      "whole": {
+        "area": 24576,
+        "box": [
+          35,
+          434,
+          163,
+          626
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.9530896544456482,
+        "sides": {
+          "bottom": 2.5180814266204834,
+          "left": 2.8267745971679688,
+          "right": 0.38585397601127625,
+          "top": 0.3004353642463684
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": {
+        "area": 11392,
+        "box": [
+          379,
+          178,
+          468,
+          306
+        ],
+        "flag": true,
+        "overlap": 11392,
+        "score": 1.8016988039016724,
+        "sides": {
+          "bottom": 2.1754343509674072,
+          "left": 2.0568478107452393,
+          "right": 0.841477632522583,
+          "top": 2.798581838607788
+        },
+        "useful": false
+      },
+      "family": "layout-1",
+      "key": [
+        "screen",
+        9,
+        "sharp"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 24576,
+        "box": [
+          379,
+          178,
+          571,
+          306
+        ],
+        "flag": true,
+        "overlap": 24576,
+        "score": 2.506502151489258,
+        "sides": {
+          "bottom": 2.458723306655884,
+          "left": 2.0568478107452393,
+          "right": 2.9470784664154053,
+          "top": 2.6483097076416016
+        },
+        "useful": true
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 24576,
+      "viewport": [
+        35,
+        114,
+        571,
+        626
+      ],
+      "whole": {
+        "area": 24576,
+        "box": [
+          379,
+          178,
+          571,
+          306
+        ],
+        "flag": true,
+        "overlap": 24576,
+        "score": 2.506502151489258,
+        "sides": {
+          "bottom": 2.458723306655884,
+          "left": 2.0568478107452393,
+          "right": 2.9470784664154053,
+          "top": 2.6483097076416016
+        },
+        "useful": true
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": {
+        "area": 11390,
+        "box": [
+          309,
+          212,
+          443,
+          297
+        ],
+        "flag": false,
+        "overlap": 5354,
+        "score": 0.7312389612197876,
+        "sides": {
+          "bottom": 0.3885253369808197,
+          "left": 1.758831262588501,
+          "right": 0.8657780289649963,
+          "top": 0.48326703906059265
+        },
+        "useful": false
+      },
+      "family": "layout-1",
+      "key": [
+        "screen",
+        9,
+        "feather"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 24576,
+        "box": [
+          35,
+          434,
+          163,
+          626
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.9530896544456482,
+        "sides": {
+          "bottom": 2.5180814266204834,
+          "left": 2.8267745971679688,
+          "right": 0.38585397601127625,
+          "top": 0.3004353642463684
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 23939,
+      "viewport": [
+        35,
+        114,
+        571,
+        626
+      ],
+      "whole": {
+        "area": 24576,
+        "box": [
+          35,
+          434,
+          163,
+          626
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.9530896544456482,
+        "sides": {
+          "bottom": 2.5180814266204834,
+          "left": 2.8267745971679688,
+          "right": 0.38585397601127625,
+          "top": 0.3004353642463684
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "layout-1",
+      "key": [
+        "screen",
+        9,
+        "ambiguous"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 24576,
+        "box": [
+          35,
+          434,
+          163,
+          626
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.9530895352363586,
+        "sides": {
+          "bottom": 2.5180814266204834,
+          "left": 2.826777696609497,
+          "right": 0.38585343956947327,
+          "top": 0.3004353642463684
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 24576,
+        "box": [
+          35,
+          434,
+          163,
+          626
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.9530895352363586,
+        "sides": {
+          "bottom": 2.5180814266204834,
+          "left": 2.826777696609497,
+          "right": 0.38585343956947327,
+          "top": 0.3004353642463684
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "kandinsky",
+      "key": [
+        "direct",
+        9,
+        "photo"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 11390,
+        "box": [
+          275,
+          120,
+          409,
+          205
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.6289817690849304,
+        "sides": {
+          "bottom": 0.24782508611679077,
+          "left": 1.903490662574768,
+          "right": 0.7205714583396912,
+          "top": 0.4604465067386627
+        },
+        "useful": false
+      },
+      "shape": [
+        512,
+        536
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 11390,
+        "box": [
+          275,
+          120,
+          409,
+          205
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.6289817690849304,
+        "sides": {
+          "bottom": 0.24782508611679077,
+          "left": 1.903490662574768,
+          "right": 0.7205714583396912,
+          "top": 0.4604465067386627
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "kandinsky",
+      "key": [
+        "direct",
+        9,
+        "sharp"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 11392,
+        "box": [
+          344,
+          64,
+          433,
+          192
+        ],
+        "flag": true,
+        "overlap": 11392,
+        "score": 1.8016988039016724,
+        "sides": {
+          "bottom": 2.1754343509674072,
+          "left": 2.0568478107452393,
+          "right": 0.841477632522583,
+          "top": 2.798581838607788
+        },
+        "useful": false
+      },
+      "shape": [
+        512,
+        536
+      ],
+      "target": 24576,
+      "viewport": null,
+      "whole": {
+        "area": 11392,
+        "box": [
+          344,
+          64,
+          433,
+          192
+        ],
+        "flag": true,
+        "overlap": 11392,
+        "score": 1.8016988039016724,
+        "sides": {
+          "bottom": 2.1754343509674072,
+          "left": 2.0568478107452393,
+          "right": 0.841477632522583,
+          "top": 2.798581838607788
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "kandinsky",
+      "key": [
+        "direct",
+        9,
+        "feather"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 11390,
+        "box": [
+          274,
+          98,
+          408,
+          183
+        ],
+        "flag": false,
+        "overlap": 5354,
+        "score": 0.7312389612197876,
+        "sides": {
+          "bottom": 0.3885253369808197,
+          "left": 1.758831262588501,
+          "right": 0.8657780289649963,
+          "top": 0.48326703906059265
+        },
+        "useful": false
+      },
+      "shape": [
+        512,
+        536
+      ],
+      "target": 23939,
+      "viewport": null,
+      "whole": {
+        "area": 11390,
+        "box": [
+          274,
+          98,
+          408,
+          183
+        ],
+        "flag": false,
+        "overlap": 5354,
+        "score": 0.7312389612197876,
+        "sides": {
+          "bottom": 0.3885253369808197,
+          "left": 1.758831262588501,
+          "right": 0.8657780289649963,
+          "top": 0.48326703906059265
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "kandinsky",
+      "key": [
+        "direct",
+        9,
+        "tone"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 11390,
+        "box": [
+          275,
+          120,
+          409,
+          205
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.6098452210426331,
+        "sides": {
+          "bottom": 0.24388554692268372,
+          "left": 1.8329460620880127,
+          "right": 0.7001634240150452,
+          "top": 0.44191962480545044
+        },
+        "useful": false
+      },
+      "shape": [
+        512,
+        536
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 11390,
+        "box": [
+          275,
+          120,
+          409,
+          205
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.6098452210426331,
+        "sides": {
+          "bottom": 0.24388554692268372,
+          "left": 1.8329460620880127,
+          "right": 0.7001634240150452,
+          "top": 0.44191962480545044
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "layout-2",
+      "key": [
+        "screen",
+        10,
+        "template"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 16384,
+        "box": [
+          134,
+          71,
+          262,
+          199
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.9949969053268433,
+        "sides": {
+          "bottom": 0.5995755195617676,
+          "left": 2.3245644569396973,
+          "right": 0.30252397060394287,
+          "top": 2.3245644569396973
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 16384,
+        "box": [
+          134,
+          71,
+          262,
+          199
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.9949969053268433,
+        "sides": {
+          "bottom": 0.5995755195617676,
+          "left": 2.3245644569396973,
+          "right": 0.30252397060394287,
+          "top": 2.3245644569396973
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [
+        [
+          21,
+          26
+        ],
+        [
+          23,
+          610
+        ],
+        [
+          23,
+          629
+        ],
+        [
+          23,
+          651
+        ],
+        [
+          23,
+          670
+        ],
+        [
+          23,
+          686
+        ]
+      ],
+      "exact_viewport": {
+        "area": 7735,
+        "box": [
+          386,
+          424,
+          477,
+          509
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.47006353735923767,
+        "sides": {
+          "bottom": 0.7384387254714966,
+          "left": 0.5323588848114014,
+          "right": 0.33785849809646606,
+          "top": 0.3675973415374756
+        },
+        "useful": false
+      },
+      "family": "layout-2",
+      "key": [
+        "screen",
+        10,
+        "photo"
+      ],
+      "locator": {
+        "box": [
+          134,
+          71,
+          678,
+          583
+        ],
+        "edges": [
+          0.9866300366300367,
+          0.9389117043121149,
+          0.982967032967033,
+          0.9272758384668035
+        ],
+        "rough": [
+          136,
+          72,
+          680,
+          584
+        ]
+      },
+      "route": [
+        134,
+        71,
+        678,
+        583
+      ],
+      "route_iou": 1.0,
+      "routed": {
+        "area": 7735,
+        "box": [
+          386,
+          424,
+          477,
+          509
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.47006353735923767,
+        "sides": {
+          "bottom": 0.7384387254714966,
+          "left": 0.5323588848114014,
+          "right": 0.33785849809646606,
+          "top": 0.3675973415374756
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 0,
+      "viewport": [
+        134,
+        71,
+        678,
+        583
+      ],
+      "whole": {
+        "area": 32768,
+        "box": [
+          134,
+          71,
+          262,
+          327
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.7315757870674133,
+        "sides": {
+          "bottom": 0.21608060598373413,
+          "left": 2.9536962509155273,
+          "right": 0.1677340418100357,
+          "top": 2.6756818294525146
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [
+        [
+          21,
+          26
+        ],
+        [
+          23,
+          610
+        ],
+        [
+          23,
+          629
+        ],
+        [
+          23,
+          651
+        ],
+        [
+          23,
+          670
+        ],
+        [
+          23,
+          686
+        ]
+      ],
+      "exact_viewport": {
+        "area": 17408,
+        "box": [
+          179,
+          263,
+          315,
+          391
+        ],
+        "flag": true,
+        "overlap": 17408,
+        "score": 1.2633181810379028,
+        "sides": {
+          "bottom": 1.46621835231781,
+          "left": 0.2625790536403656,
+          "right": 2.6427626609802246,
+          "top": 2.5034217834472656
+        },
+        "useful": true
+      },
+      "family": "layout-2",
+      "key": [
+        "screen",
+        10,
+        "sharp"
+      ],
+      "locator": {
+        "box": [
+          134,
+          71,
+          678,
+          583
+        ],
+        "edges": [
+          0.9617216117216117,
+          0.9389117043121149,
+          0.982967032967033,
+          0.9272758384668035
+        ],
+        "rough": [
+          136,
+          72,
+          680,
+          584
+        ]
+      },
+      "route": [
+        134,
+        71,
+        678,
+        583
+      ],
+      "route_iou": 1.0,
+      "routed": {
+        "area": 17408,
+        "box": [
+          179,
+          263,
+          315,
+          391
+        ],
+        "flag": true,
+        "overlap": 17408,
+        "score": 1.2633181810379028,
+        "sides": {
+          "bottom": 1.46621835231781,
+          "left": 0.2625790536403656,
+          "right": 2.6427626609802246,
+          "top": 2.5034217834472656
+        },
+        "useful": true
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 24576,
+      "viewport": [
+        134,
+        71,
+        678,
+        583
+      ],
+      "whole": {
+        "area": 24576,
+        "box": [
+          134,
+          263,
+          326,
+          391
+        ],
+        "flag": true,
+        "overlap": 24576,
+        "score": 1.9139994382858276,
+        "sides": {
+          "bottom": 1.5391026735305786,
+          "left": 1.2772541046142578,
+          "right": 2.645327091217041,
+          "top": 2.580732583999634
+        },
+        "useful": true
+      }
+    },
+    {
+      "aligned_exterior": [
+        [
+          21,
+          26
+        ],
+        [
+          23,
+          610
+        ],
+        [
+          23,
+          629
+        ],
+        [
+          23,
+          651
+        ],
+        [
+          23,
+          670
+        ],
+        [
+          23,
+          686
+        ]
+      ],
+      "exact_viewport": {
+        "area": 7735,
+        "box": [
+          256,
+          345,
+          347,
+          430
+        ],
+        "flag": false,
+        "overlap": 3105,
+        "score": 0.5730440020561218,
+        "sides": {
+          "bottom": 0.19199351966381073,
+          "left": 1.0599523782730103,
+          "right": 0.4293346703052521,
+          "top": 1.2341928482055664
+        },
+        "useful": false
+      },
+      "family": "layout-2",
+      "key": [
+        "screen",
+        10,
+        "feather"
+      ],
+      "locator": {
+        "box": [
+          134,
+          71,
+          678,
+          583
+        ],
+        "edges": [
+          0.984981684981685,
+          0.9389117043121149,
+          0.982967032967033,
+          0.9272758384668035
+        ],
+        "rough": [
+          136,
+          72,
+          680,
+          584
+        ]
+      },
+      "route": [
+        134,
+        71,
+        678,
+        583
+      ],
+      "route_iou": 1.0,
+      "routed": {
+        "area": 7735,
+        "box": [
+          256,
+          345,
+          347,
+          430
+        ],
+        "flag": false,
+        "overlap": 3105,
+        "score": 0.5730440020561218,
+        "sides": {
+          "bottom": 0.19199351966381073,
+          "left": 1.0599523782730103,
+          "right": 0.4293346703052521,
+          "top": 1.2341928482055664
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 23908,
+      "viewport": [
+        134,
+        71,
+        678,
+        583
+      ],
+      "whole": {
+        "area": 65536,
+        "box": [
+          422,
+          327,
+          678,
+          583
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.7236959934234619,
+        "sides": {
+          "bottom": 2.0251407623291016,
+          "left": 0.2166503667831421,
+          "right": 2.32857084274292,
+          "top": 0.26848530769348145
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [
+        [
+          23,
+          610
+        ],
+        [
+          23,
+          629
+        ],
+        [
+          23,
+          651
+        ],
+        [
+          23,
+          670
+        ],
+        [
+          23,
+          686
+        ]
+      ],
+      "exact_viewport": null,
+      "family": "layout-2",
+      "key": [
+        "screen",
+        10,
+        "ambiguous"
+      ],
+      "locator": {
+        "box": [
+          95,
+          71,
+          678,
+          583
+        ],
+        "edges": [
+          0.47051282051282056,
+          0.9255218216318785,
+          0.982967032967033,
+          0.9078115117014547
+        ],
+        "rough": [
+          96,
+          72,
+          680,
+          584
+        ]
+      },
+      "route": [
+        95,
+        71,
+        678,
+        583
+      ],
+      "route_iou": 0.0,
+      "routed": {
+        "area": 18688,
+        "box": [
+          145,
+          135,
+          291,
+          263
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 1.0515024662017822,
+        "sides": {
+          "bottom": 0.3663240969181061,
+          "left": 0.43649861216545105,
+          "right": 2.782001495361328,
+          "top": 2.7481181621551514
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 16384,
+        "box": [
+          93,
+          135,
+          221,
+          263
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.9664958119392395,
+        "sides": {
+          "bottom": 0.6470435857772827,
+          "left": 2.7844786643981934,
+          "right": 0.17788361012935638,
+          "top": 2.7226171493530273
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "kandinsky",
+      "key": [
+        "direct",
+        10,
+        "photo"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 7735,
+        "box": [
+          252,
+          353,
+          343,
+          438
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.47006353735923767,
+        "sides": {
+          "bottom": 0.7384387254714966,
+          "left": 0.5323588848114014,
+          "right": 0.33785849809646606,
+          "top": 0.3675973415374756
+        },
+        "useful": false
+      },
+      "shape": [
+        512,
+        544
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 7735,
+        "box": [
+          252,
+          353,
+          343,
+          438
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.47006353735923767,
+        "sides": {
+          "bottom": 0.7384387254714966,
+          "left": 0.5323588848114014,
+          "right": 0.33785849809646606,
+          "top": 0.3675973415374756
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "kandinsky",
+      "key": [
+        "direct",
+        10,
+        "sharp"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 17408,
+        "box": [
+          45,
+          192,
+          181,
+          320
+        ],
+        "flag": true,
+        "overlap": 17408,
+        "score": 1.2633181810379028,
+        "sides": {
+          "bottom": 1.46621835231781,
+          "left": 0.2625790536403656,
+          "right": 2.6427626609802246,
+          "top": 2.5034217834472656
+        },
+        "useful": true
+      },
+      "shape": [
+        512,
+        544
+      ],
+      "target": 24576,
+      "viewport": null,
+      "whole": {
+        "area": 17408,
+        "box": [
+          45,
+          192,
+          181,
+          320
+        ],
+        "flag": true,
+        "overlap": 17408,
+        "score": 1.2633181810379028,
+        "sides": {
+          "bottom": 1.46621835231781,
+          "left": 0.2625790536403656,
+          "right": 2.6427626609802246,
+          "top": 2.5034217834472656
+        },
+        "useful": true
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "kandinsky",
+      "key": [
+        "direct",
+        10,
+        "feather"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 7735,
+        "box": [
+          122,
+          274,
+          213,
+          359
+        ],
+        "flag": false,
+        "overlap": 3105,
+        "score": 0.5730440020561218,
+        "sides": {
+          "bottom": 0.19199351966381073,
+          "left": 1.0599523782730103,
+          "right": 0.4293346703052521,
+          "top": 1.2341928482055664
+        },
+        "useful": false
+      },
+      "shape": [
+        512,
+        544
+      ],
+      "target": 23908,
+      "viewport": null,
+      "whole": {
+        "area": 7735,
+        "box": [
+          122,
+          274,
+          213,
+          359
+        ],
+        "flag": false,
+        "overlap": 3105,
+        "score": 0.5730440020561218,
+        "sides": {
+          "bottom": 0.19199351966381073,
+          "left": 1.0599523782730103,
+          "right": 0.4293346703052521,
+          "top": 1.2341928482055664
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "kandinsky",
+      "key": [
+        "direct",
+        10,
+        "tone"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 7735,
+        "box": [
+          252,
+          353,
+          343,
+          438
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.456521600484848,
+        "sides": {
+          "bottom": 0.7156330347061157,
+          "left": 0.5210967063903809,
+          "right": 0.3276878297328949,
+          "top": 0.3554481565952301
+        },
+        "useful": false
+      },
+      "shape": [
+        512,
+        544
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 7735,
+        "box": [
+          252,
+          353,
+          343,
+          438
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.456521600484848,
+        "sides": {
+          "bottom": 0.7156330347061157,
+          "left": 0.5210967063903809,
+          "right": 0.3276878297328949,
+          "top": 0.3554481565952301
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "layout-3",
+      "key": [
+        "screen",
+        11,
+        "template"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 16384,
+        "box": [
+          111,
+          141,
+          239,
+          269
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.8037219643592834,
+        "sides": {
+          "bottom": 0.572152316570282,
+          "left": 1.7917625904083252,
+          "right": 0.2271699160337448,
+          "top": 1.7917622327804565
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 16384,
+        "box": [
+          111,
+          141,
+          239,
+          269
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.8037219643592834,
+        "sides": {
+          "bottom": 0.572152316570282,
+          "left": 1.7917625904083252,
+          "right": 0.2271699160337448,
+          "top": 1.7917622327804565
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [
+        [
+          21,
+          26
+        ],
+        [
+          22,
+          68
+        ],
+        [
+          22,
+          87
+        ],
+        [
+          22,
+          108
+        ]
+      ],
+      "exact_viewport": {
+        "area": 8372,
+        "box": [
+          167,
+          144,
+          259,
+          235
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.6646091938018799,
+        "sides": {
+          "bottom": 0.5612394213676453,
+          "left": 0.7381466627120972,
+          "right": 0.48220962285995483,
+          "top": 0.9766493439674377
+        },
+        "useful": false
+      },
+      "family": "layout-3",
+      "key": [
+        "screen",
+        11,
+        "photo"
+      ],
+      "locator": {
+        "box": [
+          111,
+          141,
+          663,
+          685
+        ],
+        "edges": [
+          0.9799794661190967,
+          0.8377104377104377,
+          0.7905544147843943,
+          0.8267676767676768
+        ],
+        "rough": [
+          112,
+          144,
+          664,
+          688
+        ]
+      },
+      "route": [
+        111,
+        141,
+        663,
+        685
+      ],
+      "route_iou": 1.0,
+      "routed": {
+        "area": 8372,
+        "box": [
+          167,
+          144,
+          259,
+          235
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.6646091938018799,
+        "sides": {
+          "bottom": 0.5612394213676453,
+          "left": 0.7381466627120972,
+          "right": 0.48220962285995483,
+          "top": 0.9766493439674377
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 0,
+      "viewport": [
+        111,
+        141,
+        663,
+        685
+      ],
+      "whole": {
+        "area": 36864,
+        "box": [
+          111,
+          493,
+          303,
+          685
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.8835651874542236,
+        "sides": {
+          "bottom": 2.7407262325286865,
+          "left": 2.786581039428711,
+          "right": 0.33282145857810974,
+          "top": 0.23977601528167725
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [
+        [
+          21,
+          26
+        ],
+        [
+          22,
+          68
+        ],
+        [
+          22,
+          87
+        ],
+        [
+          22,
+          108
+        ]
+      ],
+      "exact_viewport": {
+        "area": 8372,
+        "box": [
+          545,
+          469,
+          637,
+          560
+        ],
+        "flag": true,
+        "overlap": 8372,
+        "score": 0.8871655464172363,
+        "sides": {
+          "bottom": 0.7276256680488586,
+          "left": 2.013258695602417,
+          "right": 0.19745002686977386,
+          "top": 2.141676664352417
+        },
+        "useful": false
+      },
+      "family": "layout-3",
+      "key": [
+        "screen",
+        11,
+        "sharp"
+      ],
+      "locator": {
+        "box": [
+          111,
+          141,
+          663,
+          685
+        ],
+        "edges": [
+          0.9799794661190967,
+          0.8377104377104377,
+          0.8555783709787818,
+          0.8267676767676768
+        ],
+        "rough": [
+          112,
+          144,
+          664,
+          688
+        ]
+      },
+      "route": [
+        111,
+        141,
+        663,
+        685
+      ],
+      "route_iou": 1.0,
+      "routed": {
+        "area": 8372,
+        "box": [
+          545,
+          469,
+          637,
+          560
+        ],
+        "flag": true,
+        "overlap": 8372,
+        "score": 0.8871655464172363,
+        "sides": {
+          "bottom": 0.7276256680488586,
+          "left": 2.013258695602417,
+          "right": 0.19745002686977386,
+          "top": 2.141676664352417
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 27648,
+      "viewport": [
+        111,
+        141,
+        663,
+        685
+      ],
+      "whole": {
+        "area": 24576,
+        "box": [
+          471,
+          485,
+          663,
+          613
+        ],
+        "flag": true,
+        "overlap": 24576,
+        "score": 1.3554273843765259,
+        "sides": {
+          "bottom": 2.2083206176757812,
+          "left": 2.8270082473754883,
+          "right": 2.919239044189453,
+          "top": 0.18520216643810272
+        },
+        "useful": true
+      }
+    },
+    {
+      "aligned_exterior": [
+        [
+          21,
+          26
+        ],
+        [
+          22,
+          68
+        ],
+        [
+          22,
+          87
+        ],
+        [
+          22,
+          108
+        ]
+      ],
+      "exact_viewport": {
+        "area": 8372,
+        "box": [
+          167,
+          144,
+          259,
+          235
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.6646091938018799,
+        "sides": {
+          "bottom": 0.5612394213676453,
+          "left": 0.7381466627120972,
+          "right": 0.48220962285995483,
+          "top": 0.9766493439674377
+        },
+        "useful": false
+      },
+      "family": "layout-3",
+      "key": [
+        "screen",
+        11,
+        "feather"
+      ],
+      "locator": {
+        "box": [
+          111,
+          141,
+          663,
+          685
+        ],
+        "edges": [
+          0.9799794661190967,
+          0.8377104377104377,
+          0.8353867214236824,
+          0.8267676767676768
+        ],
+        "rough": [
+          112,
+          144,
+          664,
+          688
+        ]
+      },
+      "route": [
+        111,
+        141,
+        663,
+        685
+      ],
+      "route_iou": 1.0,
+      "routed": {
+        "area": 8372,
+        "box": [
+          167,
+          144,
+          259,
+          235
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.6646091938018799,
+        "sides": {
+          "bottom": 0.5612394213676453,
+          "left": 0.7381466627120972,
+          "right": 0.48220962285995483,
+          "top": 0.9766493439674377
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 26882,
+      "viewport": [
+        111,
+        141,
+        663,
+        685
+      ],
+      "whole": {
+        "area": 36864,
+        "box": [
+          111,
+          493,
+          303,
+          685
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.8835651874542236,
+        "sides": {
+          "bottom": 2.7407262325286865,
+          "left": 2.786581039428711,
+          "right": 0.33282145857810974,
+          "top": 0.23977601528167725
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [
+        [
+          21,
+          26
+        ],
+        [
+          22,
+          68
+        ],
+        [
+          22,
+          87
+        ],
+        [
+          22,
+          108
+        ]
+      ],
+      "exact_viewport": null,
+      "family": "layout-3",
+      "key": [
+        "screen",
+        11,
+        "ambiguous"
+      ],
+      "locator": {
+        "box": [
+          72,
+          141,
+          663,
+          685
+        ],
+        "edges": [
+          0.3586584531143053,
+          0.8216510903426792,
+          0.7905544147843943,
+          0.8118380062305296
+        ],
+        "rough": [
+          72,
+          144,
+          664,
+          688
+        ]
+      },
+      "route": [
+        72,
+        141,
+        663,
+        685
+      ],
+      "route_iou": 0.0,
+      "routed": {
+        "area": 13468,
+        "box": [
+          122,
+          205,
+          270,
+          296
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 1.1570408344268799,
+        "sides": {
+          "bottom": 0.6791563034057617,
+          "left": 0.5523021817207336,
+          "right": 1.857071876525879,
+          "top": 2.5728797912597656
+        },
+        "useful": false
+      },
+      "shape": [
+        768,
+        768
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 49152,
+        "box": [
+          111,
+          429,
+          303,
+          685
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 1.4037795066833496,
+        "sides": {
+          "bottom": 2.7407262325286865,
+          "left": 2.823511838912964,
+          "right": 0.2835456430912018,
+          "top": 1.7697720527648926
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "kandinsky",
+      "key": [
+        "direct",
+        11,
+        "photo"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 8372,
+        "box": [
+          56,
+          3,
+          148,
+          94
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.6646091938018799,
+        "sides": {
+          "bottom": 0.5612394213676453,
+          "left": 0.7381466627120972,
+          "right": 0.48220962285995483,
+          "top": 0.9766493439674377
+        },
+        "useful": false
+      },
+      "shape": [
+        544,
+        552
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 8372,
+        "box": [
+          56,
+          3,
+          148,
+          94
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.6646091938018799,
+        "sides": {
+          "bottom": 0.5612394213676453,
+          "left": 0.7381466627120972,
+          "right": 0.48220962285995483,
+          "top": 0.9766493439674377
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "kandinsky",
+      "key": [
+        "direct",
+        11,
+        "sharp"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 8372,
+        "box": [
+          434,
+          328,
+          526,
+          419
+        ],
+        "flag": true,
+        "overlap": 8372,
+        "score": 0.8871655464172363,
+        "sides": {
+          "bottom": 0.7276256680488586,
+          "left": 2.013258695602417,
+          "right": 0.19745002686977386,
+          "top": 2.141676664352417
+        },
+        "useful": false
+      },
+      "shape": [
+        544,
+        552
+      ],
+      "target": 27648,
+      "viewport": null,
+      "whole": {
+        "area": 8372,
+        "box": [
+          434,
+          328,
+          526,
+          419
+        ],
+        "flag": true,
+        "overlap": 8372,
+        "score": 0.8871655464172363,
+        "sides": {
+          "bottom": 0.7276256680488586,
+          "left": 2.013258695602417,
+          "right": 0.19745002686977386,
+          "top": 2.141676664352417
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "kandinsky",
+      "key": [
+        "direct",
+        11,
+        "feather"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 8372,
+        "box": [
+          56,
+          3,
+          148,
+          94
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.6646091938018799,
+        "sides": {
+          "bottom": 0.5612394213676453,
+          "left": 0.7381466627120972,
+          "right": 0.48220962285995483,
+          "top": 0.9766493439674377
+        },
+        "useful": false
+      },
+      "shape": [
+        544,
+        552
+      ],
+      "target": 26882,
+      "viewport": null,
+      "whole": {
+        "area": 8372,
+        "box": [
+          56,
+          3,
+          148,
+          94
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.6646091938018799,
+        "sides": {
+          "bottom": 0.5612394213676453,
+          "left": 0.7381466627120972,
+          "right": 0.48220962285995483,
+          "top": 0.9766493439674377
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "kandinsky",
+      "key": [
+        "direct",
+        11,
+        "tone"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 8372,
+        "box": [
+          56,
+          3,
+          148,
+          94
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.6480540633201599,
+        "sides": {
+          "bottom": 0.546970009803772,
+          "left": 0.7246339321136475,
+          "right": 0.4680735468864441,
+          "top": 0.9507114291191101
+        },
+        "useful": false
+      },
+      "shape": [
+        544,
+        552
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 8372,
+        "box": [
+          56,
+          3,
+          148,
+          94
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.6480540633201599,
+        "sides": {
+          "bottom": 0.546970009803772,
+          "left": 0.7246339321136475,
+          "right": 0.4680735468864441,
+          "top": 0.9507114291191101
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "credited-photo",
+      "key": [
+        "standalone",
+        0,
+        "photo"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 21760,
+        "box": [
+          274,
+          263,
+          402,
+          433
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.7861171960830688,
+        "sides": {
+          "bottom": 0.3072793483734131,
+          "left": 2.0883121490478516,
+          "right": 0.3424219787120819,
+          "top": 1.738036036491394
+        },
+        "useful": false
+      },
+      "shape": [
+        680,
+        768
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 21760,
+        "box": [
+          274,
+          263,
+          402,
+          433
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.7861171960830688,
+        "sides": {
+          "bottom": 0.3072793483734131,
+          "left": 2.0883121490478516,
+          "right": 0.3424219787120819,
+          "top": 1.738036036491394
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "credited-photo",
+      "key": [
+        "standalone",
+        0,
+        "tone"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 21760,
+        "box": [
+          274,
+          263,
+          402,
+          433
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.7661782503128052,
+        "sides": {
+          "bottom": 0.29910287261009216,
+          "left": 2.0584723949432373,
+          "right": 0.32715892791748047,
+          "top": 1.710782766342163
+        },
+        "useful": false
+      },
+      "shape": [
+        680,
+        768
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 21760,
+        "box": [
+          274,
+          263,
+          402,
+          433
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.7661782503128052,
+        "sides": {
+          "bottom": 0.29910287261009216,
+          "left": 2.0584723949432373,
+          "right": 0.32715892791748047,
+          "top": 1.710782766342163
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "credited-photo",
+      "key": [
+        "standalone",
+        1,
+        "photo"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 14464,
+        "box": [
+          430,
+          260,
+          558,
+          373
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.940641462802887,
+        "sides": {
+          "bottom": 0.3055541515350342,
+          "left": 0.626981258392334,
+          "right": 2.3210155963897705,
+          "top": 1.7606604099273682
+        },
+        "useful": false
+      },
+      "shape": [
+        680,
+        768
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 14464,
+        "box": [
+          430,
+          260,
+          558,
+          373
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.940641462802887,
+        "sides": {
+          "bottom": 0.3055541515350342,
+          "left": 0.626981258392334,
+          "right": 2.3210155963897705,
+          "top": 1.7606604099273682
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "credited-photo",
+      "key": [
+        "standalone",
+        1,
+        "tone"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 14464,
+        "box": [
+          430,
+          260,
+          558,
+          373
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.9247680306434631,
+        "sides": {
+          "bottom": 0.3013954758644104,
+          "left": 0.6163517236709595,
+          "right": 2.2856595516204834,
+          "top": 1.7224805355072021
+        },
+        "useful": false
+      },
+      "shape": [
+        680,
+        768
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 14464,
+        "box": [
+          430,
+          260,
+          558,
+          373
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.9247680306434631,
+        "sides": {
+          "bottom": 0.3013954758644104,
+          "left": 0.6163517236709595,
+          "right": 2.2856595516204834,
+          "top": 1.7224805355072021
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "credited-photo",
+      "key": [
+        "standalone",
+        2,
+        "photo"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 14464,
+        "box": [
+          113,
+          262,
+          241,
+          375
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 1.299485683441162,
+        "sides": {
+          "bottom": 0.8009263277053833,
+          "left": 1.2104085683822632,
+          "right": 1.7370918989181519,
+          "top": 1.6933183670043945
+        },
+        "useful": false
+      },
+      "shape": [
+        680,
+        768
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 14464,
+        "box": [
+          113,
+          262,
+          241,
+          375
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 1.299485683441162,
+        "sides": {
+          "bottom": 0.8009263277053833,
+          "left": 1.2104085683822632,
+          "right": 1.7370918989181519,
+          "top": 1.6933183670043945
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "credited-photo",
+      "key": [
+        "standalone",
+        2,
+        "tone"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 14464,
+        "box": [
+          113,
+          262,
+          241,
+          375
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 1.2733819484710693,
+        "sides": {
+          "bottom": 0.7728670835494995,
+          "left": 1.1885325908660889,
+          "right": 1.7119497060775757,
+          "top": 1.671967625617981
+        },
+        "useful": false
+      },
+      "shape": [
+        680,
+        768
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 14464,
+        "box": [
+          113,
+          262,
+          241,
+          375
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 1.2733819484710693,
+        "sides": {
+          "bottom": 0.7728670835494995,
+          "left": 1.1885325908660889,
+          "right": 1.7119497060775757,
+          "top": 1.671967625617981
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "credited-photo",
+      "key": [
+        "standalone",
+        3,
+        "photo"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 28928,
+        "box": [
+          84,
+          324,
+          340,
+          437
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5587700605392456,
+        "sides": {
+          "bottom": 0.3564468026161194,
+          "left": 0.4022311866283417,
+          "right": 0.6193734407424927,
+          "top": 1.0977652072906494
+        },
+        "useful": false
+      },
+      "shape": [
+        680,
+        768
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 28928,
+        "box": [
+          84,
+          324,
+          340,
+          437
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5587700605392456,
+        "sides": {
+          "bottom": 0.3564468026161194,
+          "left": 0.4022311866283417,
+          "right": 0.6193734407424927,
+          "top": 1.0977652072906494
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "credited-photo",
+      "key": [
+        "standalone",
+        3,
+        "tone"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 28928,
+        "box": [
+          84,
+          324,
+          340,
+          437
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5425745844841003,
+        "sides": {
+          "bottom": 0.3469734191894531,
+          "left": 0.3911217451095581,
+          "right": 0.6028479337692261,
+          "top": 1.0593072175979614
+        },
+        "useful": false
+      },
+      "shape": [
+        680,
+        768
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 28928,
+        "box": [
+          84,
+          324,
+          340,
+          437
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5425745844841003,
+        "sides": {
+          "bottom": 0.3469734191894531,
+          "left": 0.3911217451095581,
+          "right": 0.6028479337692261,
+          "top": 1.0593072175979614
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "credited-photo",
+      "key": [
+        "standalone",
+        4,
+        "photo"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 14464,
+        "box": [
+          72,
+          344,
+          200,
+          457
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5013682842254639,
+        "sides": {
+          "bottom": 0.4353811740875244,
+          "left": 0.6310980916023254,
+          "right": 0.8480644822120667,
+          "top": 0.2711640000343323
+        },
+        "useful": false
+      },
+      "shape": [
+        680,
+        768
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 14464,
+        "box": [
+          72,
+          344,
+          200,
+          457
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5013682842254639,
+        "sides": {
+          "bottom": 0.4353811740875244,
+          "left": 0.6310980916023254,
+          "right": 0.8480644822120667,
+          "top": 0.2711640000343323
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "credited-photo",
+      "key": [
+        "standalone",
+        4,
+        "tone"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 14464,
+        "box": [
+          72,
+          344,
+          200,
+          457
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.4881018400192261,
+        "sides": {
+          "bottom": 0.4294002652168274,
+          "left": 0.6120021939277649,
+          "right": 0.8299271464347839,
+          "top": 0.26024749875068665
+        },
+        "useful": false
+      },
+      "shape": [
+        680,
+        768
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 14464,
+        "box": [
+          72,
+          344,
+          200,
+          457
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.4881018400192261,
+        "sides": {
+          "bottom": 0.4294002652168274,
+          "left": 0.6120021939277649,
+          "right": 0.8299271464347839,
+          "top": 0.26024749875068665
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "credited-photo",
+      "key": [
+        "standalone",
+        5,
+        "photo"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 21760,
+        "box": [
+          265,
+          295,
+          393,
+          465
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5821813941001892,
+        "sides": {
+          "bottom": 0.42440152168273926,
+          "left": 0.4504149556159973,
+          "right": 0.31958627700805664,
+          "top": 1.880422592163086
+        },
+        "useful": false
+      },
+      "shape": [
+        680,
+        768
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 21760,
+        "box": [
+          265,
+          295,
+          393,
+          465
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5821813941001892,
+        "sides": {
+          "bottom": 0.42440152168273926,
+          "left": 0.4504149556159973,
+          "right": 0.31958627700805664,
+          "top": 1.880422592163086
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "credited-photo",
+      "key": [
+        "standalone",
+        5,
+        "tone"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 21760,
+        "box": [
+          265,
+          295,
+          393,
+          465
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5726905465126038,
+        "sides": {
+          "bottom": 0.41928380727767944,
+          "left": 0.44409066438674927,
+          "right": 0.31164291501045227,
+          "top": 1.8537153005599976
+        },
+        "useful": false
+      },
+      "shape": [
+        680,
+        768
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 21760,
+        "box": [
+          265,
+          295,
+          393,
+          465
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.5726905465126038,
+        "sides": {
+          "bottom": 0.41928380727767944,
+          "left": 0.44409066438674927,
+          "right": 0.31164291501045227,
+          "top": 1.8537153005599976
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "credited-photo",
+      "key": [
+        "standalone",
+        6,
+        "photo"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 21760,
+        "box": [
+          447,
+          3,
+          575,
+          173
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.9605721235275269,
+        "sides": {
+          "bottom": 0.6844647526741028,
+          "left": 0.8560730814933777,
+          "right": 1.712847352027893,
+          "top": 0.8482801914215088
+        },
+        "useful": false
+      },
+      "shape": [
+        680,
+        768
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 21760,
+        "box": [
+          447,
+          3,
+          575,
+          173
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.9605721235275269,
+        "sides": {
+          "bottom": 0.6844647526741028,
+          "left": 0.8560730814933777,
+          "right": 1.712847352027893,
+          "top": 0.8482801914215088
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "credited-photo",
+      "key": [
+        "standalone",
+        6,
+        "tone"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 21760,
+        "box": [
+          447,
+          3,
+          575,
+          173
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.9367497563362122,
+        "sides": {
+          "bottom": 0.6748223304748535,
+          "left": 0.8349350690841675,
+          "right": 1.672417163848877,
+          "top": 0.8171609044075012
+        },
+        "useful": false
+      },
+      "shape": [
+        680,
+        768
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 21760,
+        "box": [
+          447,
+          3,
+          575,
+          173
+        ],
+        "flag": true,
+        "overlap": 0,
+        "score": 0.9367497563362122,
+        "sides": {
+          "bottom": 0.6748223304748535,
+          "left": 0.8349350690841675,
+          "right": 1.672417163848877,
+          "top": 0.8171609044075012
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "credited-photo",
+      "key": [
+        "standalone",
+        7,
+        "photo"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 43520,
+        "box": [
+          446,
+          348,
+          702,
+          518
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.7594403028488159,
+        "sides": {
+          "bottom": 1.4460060596466064,
+          "left": 0.4421251118183136,
+          "right": 0.7822929620742798,
+          "top": 0.6651043891906738
+        },
+        "useful": false
+      },
+      "shape": [
+        680,
+        768
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 43520,
+        "box": [
+          446,
+          348,
+          702,
+          518
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.7594403028488159,
+        "sides": {
+          "bottom": 1.4460060596466064,
+          "left": 0.4421251118183136,
+          "right": 0.7822929620742798,
+          "top": 0.6651043891906738
+        },
+        "useful": false
+      }
+    },
+    {
+      "aligned_exterior": [],
+      "exact_viewport": null,
+      "family": "credited-photo",
+      "key": [
+        "standalone",
+        7,
+        "tone"
+      ],
+      "locator": null,
+      "route": null,
+      "route_iou": 0.0,
+      "routed": {
+        "area": 43520,
+        "box": [
+          446,
+          348,
+          702,
+          518
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.7439903616905212,
+        "sides": {
+          "bottom": 1.420453667640686,
+          "left": 0.4323992431163788,
+          "right": 0.7697689533233643,
+          "top": 0.648032546043396
+        },
+        "useful": false
+      },
+      "shape": [
+        680,
+        768
+      ],
+      "target": 0,
+      "viewport": null,
+      "whole": {
+        "area": 43520,
+        "box": [
+          446,
+          348,
+          702,
+          518
+        ],
+        "flag": false,
+        "overlap": 0,
+        "score": 0.7439903616905212,
+        "sides": {
+          "bottom": 1.420453667640686,
+          "left": 0.4323992431163788,
+          "right": 0.7697689533233643,
+          "top": 0.648032546043396
+        },
+        "useful": false
+      }
+    }
+  ],
+  "scale_diagnostic": {
+    "feather_crop_dimension_ceiling": 12,
+    "feather_full_dimension_ceiling": 12,
+    "feather_full_sizes_within_crop_ceiling": 12,
+    "full_sharp_box_has_viewport_side": 8,
+    "full_sharp_box_leaves_viewport": 0,
+    "full_sharp_exact_crop_same_edges": 1,
+    "full_sharp_exact_crop_same_edges_but_size_excluded": 1,
+    "full_sharp_fixed_box_clean_flags": 0,
+    "full_sharp_fixed_box_is_clean_winner": 0,
+    "full_sharp_useful": 9,
+    "sharp_crop_dimension_ceiling": 12,
+    "sharp_full_dimension_ceiling": 12,
+    "sharp_full_sizes_within_crop_ceiling": 12
+  },
+  "schema": "chipmunk.image-viewport-routing-transfer/1",
+  "source_sha256": {
+    "captures": "1302111389e01e6ea3ab067244f4ab1a49665ce8f46a8c0bffca91e6ce6a97da",
+    "commons": "0b57802c999cb34008dc95fe3dec47aab3b1146682fe6d97b2219ee2382180dc",
+    "earlier": "fb0aafa7d109ca3e7fda3256fbd9fdf0e3b2afca265081092552b54cc8388731",
+    "later": "3d849ad48453c79002aa78d2d9cc8c7aeecc9f1979008060244c0bd01e065e86",
+    "layout": "3ae554aac9e60f745f64dc78998f4918e1be51dae1e294d81ca9576f47ae93d6"
+  }
+}

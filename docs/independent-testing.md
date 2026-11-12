@@ -135,6 +135,9 @@ actually selects on held photos and screenshots.
 The [native tile agreement trial](image-native-tile-agreement-transfer-2026-11-12.md)
 rebuilds each image tile in two layouts and compares regional localization
 with false flags on ordinary photographs and screenshots.
+The [screenshot viewport comparison](image-viewport-routing-transfer-2026-11-12.md)
+tests the same image check on the whole screenshot, a proposed photo crop, and
+the exact photo area, then verifies the effect of the surrounding frame.
 The [quality-90 earlier-copy study](image-reference-jpeg90-transfer-2026-11-12.md)
 rebuilds both JPEG deliveries, checks mapped native crops, and verifies the
 paid result's API, PDF, and JSON evidence in the local app.

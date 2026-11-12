@@ -1,0 +1,132 @@
+{
+  "added_flags_by_cohort": {
+    "swap": 18
+  },
+  "advance": "Recover at least six shortest intervals across at least three sources at each of three edit placements, with at most two additional ordinary false flags, zero additional source-cut flags, and every incumbent flag and endpoint preserved.",
+  "freeze_sha256": "3ca93af1c6c166a65d6f1f1a5b4f1f564160c4d25fe7a5bc7c9f2896b8dce2fc",
+  "gain_group_counts_by_center_and_duration": {
+    "35/12@3/8": 1,
+    "3@3/8": 6,
+    "73/24@3/8": 4
+  },
+  "incumbent_flags_preserved": 57,
+  "independent_audit": {
+    "aggregate_sha256": "a4f5c6279e59d11c05c25a10e86ad2fb5bdd5ad72c7f271d6c8fe4da769680ca",
+    "groups_with_additional_false_flags": 0,
+    "incumbent_flags_preserved": 57,
+    "maximum_added_correct_endpoint_error_ms": 33.333333333333336,
+    "median_added_correct_endpoint_error_ms": 33.333333333333336,
+    "median_added_correct_iou": 0.8333333333333334,
+    "minimum_added_correct_iou": 0.8333333333333334,
+    "native_windows_verified": 720,
+    "new_frame_anchors_verified": 54,
+    "posthoc_rank_regardless_of_incumbent": {
+      "camera_false_views": 0,
+      "camera_false_views_after_dedup": 0,
+      "camera_false_views_with_incumbent_flag": 0,
+      "camera_false_views_with_no_incumbent_flag": 0,
+      "correct_shortest": 36,
+      "correct_shortest_distinct": 32,
+      "correct_shortest_duplicate": 4,
+      "correct_shortest_with_incumbent_localized": 4,
+      "correct_shortest_with_incumbent_measured_no_flag": 18,
+      "correct_shortest_with_incumbent_wrong_interval": 14,
+      "cut_false_views": 0,
+      "cut_false_views_after_dedup": 0,
+      "cut_false_views_with_incumbent_flag": 0,
+      "cut_false_views_with_no_incumbent_flag": 0,
+      "distinct_correct_shortest_with_incumbent_measured_no_flag": 18,
+      "distinct_correct_shortest_with_incumbent_wrong_interval": 14,
+      "duplicate_interval_min_iou": 0.5,
+      "false_source_groups": 0,
+      "false_source_groups_after_dedup": 0,
+      "rtfs_false_views": 0,
+      "rtfs_false_views_after_dedup": 0,
+      "rtfs_false_views_with_incumbent_flag": 0,
+      "rtfs_false_views_with_no_incumbent_flag": 0
+    },
+    "rows": 180
+  },
+  "pilot_advances": false,
+  "point": 0.1,
+  "private_crop_examples_verified": 3,
+  "rule": "Preserve every incumbent interval. Otherwise retain only the highest guarded rank interval, with raw margin >0.10 and half-open duration <0.50 seconds. Never rerank.",
+  "runtime": {
+    "elapsed_s": 440.9735114170471,
+    "journal_sha256": "8e9aabf8bac21c012bf74279e66ddb3aaff37a324cb6ca6ed48223e45905e888",
+    "peak_rss_bytes": 337952768,
+    "verified_frames": 2895
+  },
+  "schema": "chipmunk.video-short-return-margin-transfer/1",
+  "swap_outcomes_by_center_and_duration": {
+    "35/12@3/8": {
+      "added_correct": 1,
+      "additive_localized": 5,
+      "additive_wrong_interval": 7,
+      "current_localized": 4,
+      "current_measured_no_flag": 1,
+      "current_wrong_interval": 7
+    },
+    "3@1/2": {
+      "additive_localized": 12,
+      "current_localized": 12
+    },
+    "3@3/4": {
+      "additive_localized": 12,
+      "current_localized": 12
+    },
+    "3@3/8": {
+      "added_correct": 11,
+      "additive_localized": 11,
+      "additive_wrong_interval": 1,
+      "current_measured_no_flag": 11,
+      "current_wrong_interval": 1
+    },
+    "73/24@3/8": {
+      "added_correct": 6,
+      "additive_localized": 6,
+      "additive_wrong_interval": 6,
+      "current_measured_no_flag": 6,
+      "current_wrong_interval": 6
+    }
+  },
+  "totals": {
+    "camera": {
+      "additive": {
+        "false_flag": 3,
+        "measured_no_flag": 9
+      },
+      "current": {
+        "false_flag": 3,
+        "measured_no_flag": 9
+      }
+    },
+    "cut": {
+      "additive": {
+        "false_flag": 12
+      },
+      "current": {
+        "false_flag": 12
+      }
+    },
+    "rtfs": {
+      "additive": {
+        "measured_no_flag": 96
+      },
+      "current": {
+        "measured_no_flag": 96
+      }
+    },
+    "swap": {
+      "additive": {
+        "localized": 46,
+        "wrong_interval": 14
+      },
+      "current": {
+        "localized": 28,
+        "measured_no_flag": 18,
+        "wrong_interval": 14
+      }
+    }
+  }
+}

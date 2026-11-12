@@ -1,0 +1,78 @@
+{
+  "advance": "Recover at least six shortest intervals across at least three sources at each of three edit placements, with at most two additional ordinary false flags, zero additional source-cut flags, and every incumbent flag and endpoint preserved.",
+  "bindings": {
+    "backend/app/detectors/image/faces.py": "ce23ffdbcfc4b6ef58715313fc0f8565d1c7ce63c6921afd4f744fddb8a8eaea",
+    "backend/app/detectors/video/decode.py": "b65658633320817f574e1dc739fb630179af4cbf95bca0a39e9c8360e2e4fc57",
+    "backend/app/detectors/video/face_appearance.py": "cb2fa8e97735cc87c61563cf5c483e7e856b06513888ee16c5059103345febea",
+    "backend/scripts/video_face_return_transfer.py": "1166c3c93f44375b00723699de4abca70259adf66ee215bb876970f467737884",
+    "backend/scripts/video_face_short_boundary_confirmation.py": "154a0867ea03726ce0c93b661cb351b06fcc4f6936808146571735d35c8e1274",
+    "backend/scripts/video_face_texture_return.py": "516e3d0320ce01b20b2e3371c99f3c9ee6605b5fd174fb995a092f5c2a07731f",
+    "backend/scripts/video_selected_face_boundary.py": "0201492a5361ccd5d30041e3234f3745a7a0dc2f17033d5ecd385ae4b9631424",
+    "backend/scripts/video_selected_landmark_reliability.py": "1204c81e947e34705c89c6ec994334a3e51080cbc9b06d3f3e8ee5a8fbaaeae5",
+    "backend/scripts/video_short_return_margin_transfer.py": "efcbadb80e19ee059d53023bf7f1386914a1942de10a580af54896bbe011d6bb",
+    "backend/scripts/video_short_return_replication.py": "02154d5bbd0e08e038c88a152ffb322ed851f85a9d06062471c5c80079f39a6d",
+    "ffmpeg": "8c20086bc3d7e50d423dbfdb984cc51751b78f853d1284defa9c3827efff095a",
+    "ffprobe": "bacff9680e806d850f9ae48604bede8b5eece14fe47ff8571232af2ee1a373ae",
+    "models/weights/face_detection_yunet_2023mar.onnx": "8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4",
+    "models/weights/face_recognition_sface_2021dec.onnx": "0ba9fbfa01b5270c96627c4ef784da859931e02f04419c829e83484087c34e79",
+    "numpy": "2.2.6",
+    "opencv": "5.0.0",
+    "worker_sha256": "a330c68fd87e6280719b2c601c71cf4b7d0aef00193781f177a0834b9395f7c2"
+  },
+  "cut_durations": [
+    "1/2",
+    "3/4"
+  ],
+  "freeze_sha256": "3ca93af1c6c166a65d6f1f1a5b4f1f564160c4d25fe7a5bc7c9f2896b8dce2fc",
+  "incumbent_point": 0.11243900750879454,
+  "maximum_length_exclusive_s": "1/2",
+  "phases": [
+    [
+      "3",
+      "3/8"
+    ],
+    [
+      "3",
+      "1/2"
+    ],
+    [
+      "3",
+      "3/4"
+    ],
+    [
+      "35/12",
+      "3/8"
+    ],
+    [
+      "73/24",
+      "3/8"
+    ]
+  ],
+  "point": 0.1,
+  "prior_roster_sha256": [
+    "565d0d25dde09be902f57e8a576d1c5758edbbafccf0821330d1fe7012fda25c",
+    "71f782f89c6ab940ae68ab1b9ce48d3da7462ccfdae1a466c4046ac25deb553e",
+    "4d530431870631c86dff27eb1a7117d645e09bd48c361d208edb79ecc5175bbd",
+    "18ef0d33646e69bc2e154d2b38b4018a73fe5cc58aa6afc605806497d6224e8d",
+    "256428a093d6883a03e4b55bb895e1f91f1b59e52816e379b53f1288ea1729fc",
+    "915dfc4ec886520ad11c34553097c3ec3fe85c3ab5fe8969a180d5846803977d"
+  ],
+  "private_source_commitment_sha256": "0e1f159eb150f2f41ee1dc96dd0e7d3a34ffbf4c01ccc419872d40ceec6d57b8",
+  "replication_freeze_sha256": "7b73bbda8efbd49465ca2387c3021244643db515740c6ca3397f4aec9c96d127",
+  "replication_result_sha256": "73c4f3c16e1025345ccf5187821a7810a571d930e1ad1fdf62cef62a22a435a4",
+  "rule": "Preserve every incumbent interval. Otherwise retain only the highest guarded rank interval, with raw margin >0.10 and half-open duration <0.50 seconds. Never rerank.",
+  "schema": "chipmunk.video-short-return-margin-transfer-freeze/1",
+  "selection": "Six distinct known RTFS source and donor groups at native 1080p and 30 Hz, smallest archived bytes first across prior project roles. Four distinct VCD2 recording hashes, one v290 and three v206, smallest archived bytes first after excluding the prior localization and coverage rosters.",
+  "source_group_counts": {
+    "camera_vcd2": 4,
+    "genuine_cut_pairs": 3,
+    "paired_rtfs": 6
+  },
+  "texture_external_freeze_sha256": "1d3533dd82aec55f6638a2b55ed6495f5a87d3601bc7eea3de9bc8a64619e1e9",
+  "view_counts": {
+    "ordinary_camera": 12,
+    "ordinary_cuts": 12,
+    "ordinary_rtfs": 96,
+    "swaps": 60
+  }
+}

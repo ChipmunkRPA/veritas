@@ -97,6 +97,27 @@ integration remains unfinished.
 
 ## Progress on 11 November
 
+- The [residual color comparison](image-residual-color-transfer-2026-11-11.md)
+  assessed 384 PNG and JPEG75 deliveries. It found zero useful edit regions.
+  Even before applying the cutoff, the best two-band region reached useful
+  overlap on two of 96 edits. An [offline reviewer](independent-testing.md#verify-an-earlier-copy-image-comparison)
+  now checks both source files, native crop pixels and mask geometry for the
+  local earlier-copy comparison export.
+- The [waveform fallback transfer](audio-waveform-fallback-transfer-2026-11-11.md)
+  increased repeat localization from 629/720 to 634/720 with no ordinary
+  flags. All five gains came from two source groups. Both methods localized
+  79/144 under the strongest traffic noise. Keep the fallback experimental.
+- The [transcribed speech transfer](writing-speech-paragraph-transfer-2026-11-11.md)
+  reduced human flags from 24/27 to 12/27 and retained all 12 useful rewrite
+  locations. Four of six oral-history speakers still had a false highlight.
+  This supports studying passage ordering while keeping authorship confidence
+  outside the isolated-paragraph rule.
+- The [video margin transfer](video-short-return-margin-transfer-2026-11-11.md)
+  localized 46/60 swaps versus 28/60 for the incumbent, with zero added flags
+  on 120 controls. It missed the advancement criterion for earlier edit
+  placements. A retrospective second-range policy located all 36 shortest
+  swaps and would add 32 distinct correct ranges after deduplication. Freeze
+  and test that policy on different source groups before app integration.
 - The [stream-presence transfer](audio-stream-presence-transfer-2026-11-11.md)
   separated lab and natural results. The stability cue found 37/52 controlled
   three-voice cases with zero flags on 26 two-voice controls. It found zero of

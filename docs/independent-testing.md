@@ -72,6 +72,9 @@ includes exact quote and template variants across six separate publishers.
 The [article context holdout](writing-article-context-transfer-2026-11-11.md)
 compares a paragraph-only read with the usual surrounding input and a fixed
 paragraph-omission experiment on six source-disjoint web features.
+The [transcribed speech transfer](writing-speech-paragraph-transfer-2026-11-11.md)
+checks whether an isolated paragraph preserves known rewrite locations while
+reducing false highlights on oral histories and prepared public addresses.
 
 The [image edit construction check](image-flux-reference-edit-v271-result.md)
 uses public, authored RGB fixtures to verify exactly which pixels change when a
@@ -112,6 +115,9 @@ publisher point and two points fitted on disjoint controls.
 The [fine-detail comparison](image-wavelet-region-transfer-2026-11-11.md)
 adds 12 independently qualified photo groups and compares two sealed regional
 checks on exact sharp and feathered edits after PNG and JPEG delivery.
+The [residual color comparison](image-residual-color-transfer-2026-11-11.md)
+reports exact regional overlap and control flags for three spatial-band arms
+on two panels of sharp and feathered image edits.
 The [semantic context comparison](image-semantic-context-transfer-2026-11-11.md)
 compares a forensic patch response with its response relative to distant,
 semantically similar patches on two licensed panels.
@@ -120,6 +126,10 @@ The [offline video interval verifier](video-native-interval-replay-2026-11-11.md
 checks the source clock and exact before, during and after pixels with Python
 and FFmpeg. Its local receipt distinguishes native source verification from
 retrospective scoring.
+The [short face-return transfer](video-short-return-margin-transfer-2026-11-11.md)
+checks a fixed margin at three placement phases, then counts distinct secondary
+ranges in a separate retrospective analysis. Its reviewer checks native anchors
+and control outcomes independently of the scorer.
 The [lip-sync coverage comparison](video-lipsync-mouth-coverage-2026-11-11.md)
 checks held mouth frames on real moving footage, matched to original and
 recompressed controls, with a separate authored false-collapse regression.
@@ -162,6 +172,9 @@ reports speech-window admission on the same foregrounds and strong background no
 The [stereo suppression test](audio-stereo-reference-suppression-2026-11-11.md)
 adds 36 matched noise-only controls and measures whether channel-difference
 filtering recovers synthetic or genuine speech windows.
+The [waveform fallback transfer](audio-waveform-fallback-transfer-2026-11-11.md)
+tests repeat localization across three held meeting groups and twelve separate
+speakers, with a standalone reviewer that checks source clocks and paired spans.
 The [second voice representation](audio-wavlm-strong-traffic-2026-11-11.md)
 keeps the admission decisions fixed and compares clean and −10 dB traffic
 responses from two voice representations, with retained misses and exclusions.
@@ -521,6 +534,35 @@ source ticks, and displayed frame references.
 ```sh
 python -m pytest tests/test_evidence_measurement_review.py
 ```
+
+### Verify an earlier-copy image comparison
+
+Download the comparison JSON in the local app and obtain both original files
+from the reviewer who supplied them. From the backend directory, run the
+standalone reviewer with Python and Pillow installed.
+
+```sh
+python -I scripts/review_image_reference_export.py \
+  chipmunk-verify-image-comparison.json earlier.png submitted.jpg
+```
+
+The reviewer checks both file SHA-256 commitments and native dimensions after
+orientation. It checks the overlap against the recorded integer offset,
+compares both decoded crops with the corresponding source pixels, and checks
+the embedded PNG hashes and binary mask bounds and pixel totals. The tool uses
+no application code, network or database. It reports empty comparable and
+unassessed results separately. A mismatch exits with status 1.
+
+The comparison JSON is a standalone, unsigned export. This replay checks its
+geometry and source binding. Recomputing which pixels the algorithm would
+select and establishing when or how either source was created are separate
+tasks. On the isolated browser fixture, the reviewer matched both crops and
+counted 7,693 pixels within the reported mask bounds. Authored tests reject
+shifted coordinates, missing alignment support and rehashed altered crops.
+The reviewer also accepted all 180 genuine exports from the earlier integer
+alignment panel. It checked 106 source crops and counted 1,036,494 retained
+mask pixels across 99 comparable views. The other 81 views retained their
+reported unassessed reasons. [Source and transforms](image-reference-comparison-2026-11-11.md#integer-crops-and-translations)
 
 ### Replay document evidence against the original
 

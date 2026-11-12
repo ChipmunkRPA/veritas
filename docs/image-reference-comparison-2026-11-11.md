@@ -10,6 +10,8 @@ The app shows both exact crops, their native positions and the submitted-image d
 
 A local browser test used a cropped JPEG with a known edit and an earlier PNG. Simulated Stripe payment released the original analysis, and the supplemental comparison used its retained source. The browser loaded both crops and the mask and downloaded both exports. A separate HTTP test reopened the PDF and matched its embedded pixels and recorded hashes to the JSON. An identical pair returned no selected region. An unalignable pair returned an unassessed result.
 
+The [offline reviewer](independent-testing.md#verify-an-earlier-copy-image-comparison) checks the downloaded JSON against both original images using Pillow. It checks native coordinates, pixel-exact crops, mask totals and the recorded SHA-256 values.
+
 ## Command-line comparison
 
 The offline command preserves the original source coordinates and writes a full-size difference mask, both original crops, and JSON with the source and artifact hashes.

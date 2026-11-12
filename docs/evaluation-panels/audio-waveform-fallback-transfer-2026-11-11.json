@@ -1,0 +1,390 @@
+{
+  "added_pair_lag_error_max_samples": 0,
+  "added_pair_minimum_side_iou_median": 0.380952,
+  "advanced": false,
+  "advancement": {
+    "maximum_added_control_flags": true,
+    "maximum_added_wrong_only_copy_views": true,
+    "maximum_groups_with_added_control_flags": true,
+    "minimum_added_correct_views": false,
+    "minimum_ami_meetings_with_gain": false,
+    "minimum_groups_with_gain": false,
+    "minimum_voxpopuli_speakers_with_gain": false
+  },
+  "decoder_padding_samples": {
+    "aac_64k": [
+      128
+    ],
+    "mp3_64k": [
+      0
+    ],
+    "opus_48k": [
+      0
+    ],
+    "pcm": [
+      0
+    ]
+  },
+  "freeze_sha256": "b66705d5108f79f785604685866b7dbaa1c8bf6896fcbcf29fe7223fa7e15576",
+  "method": {
+    "controls": "No authored copy. The native recordings may contain ordinary recurrent sounds or speech.",
+    "edit": "Copy the largest-energy 650 ms from six early ranges to 1.75 s, with 20 ms raised-cosine boundary blends.",
+    "noise": "New channel-one DEMAND excerpts at 100 + 5 * source ordinal seconds. Fixed original-based gain and shared anti-clipping attenuation for each matched pair; whole-clip nominal SNR.",
+    "policy": {
+      "maximum_added_control_flags": 3,
+      "maximum_added_wrong_only_copy_views": 3,
+      "maximum_groups_with_added_control_flags": 2,
+      "minimum_added_correct_views": 24,
+      "minimum_ami_meetings_with_gain": 2,
+      "minimum_groups_with_gain": 6,
+      "minimum_voxpopuli_speakers_with_gain": 2
+    },
+    "route": "Keep all exact and two-band pairs. Run frozen waveform cue only when both lists are empty.",
+    "scope": "Short continuous mono acoustic-similarity evidence only, with zero AI confidence weight.",
+    "selection": "Four annotated two-voice and four three-voice windows from each of three distinct AMI meetings; one frozen stem per VoxPopuli speaker and distinct parliamentary session date in quota order.",
+    "support": "Both half-open ranges must overlap their blend-excluded authored span by at least 2400 samples; exact lag for exact pairs, at most 32 samples of lag error for approximate pairs."
+  },
+  "method_availability": {
+    "exact": {
+      "measured": 1440
+    },
+    "two_band": {
+      "measured": 1440
+    },
+    "waveform": {
+      "measured": 803,
+      "skipped_existing_pair": 637
+    }
+  },
+  "native_clean_control_pcm_exact": 36,
+  "observations_sha256": "268875940e62175c0bbda2fc9edc3f275a327c41ab6e3703694476875ffeb763",
+  "observed_gate_values": {
+    "maximum_added_control_flags": 0,
+    "maximum_added_wrong_only_copy_views": 0,
+    "maximum_groups_with_added_control_flags": 0,
+    "minimum_added_correct_views": 5,
+    "minimum_ami_meetings_with_gain": 1,
+    "minimum_groups_with_gain": 2,
+    "minimum_voxpopuli_speakers_with_gain": 1
+  },
+  "schema": "chipmunk.audio-waveform-fallback-transfer/1",
+  "source_groups": {
+    "ami": 3,
+    "voxpopuli": 12
+  },
+  "source_windows": 36,
+  "view_counts": {
+    "codec:aac_64k/control": {
+      "added_control_flags": 0,
+      "added_correct": 0,
+      "added_wrong_only_copy": 0,
+      "baseline_correct": 0,
+      "baseline_measured": 180,
+      "baseline_pairs": 0,
+      "extended_correct": 0,
+      "extended_measured": 180,
+      "extended_pairs": 0,
+      "views": 180,
+      "waveform_attempts": 180
+    },
+    "codec:aac_64k/copy": {
+      "added_control_flags": 0,
+      "added_correct": 1,
+      "added_wrong_only_copy": 0,
+      "baseline_correct": 158,
+      "baseline_measured": 180,
+      "baseline_pairs": 160,
+      "extended_correct": 159,
+      "extended_measured": 180,
+      "extended_pairs": 161,
+      "views": 180,
+      "waveform_attempts": 20
+    },
+    "codec:mp3_64k/control": {
+      "added_control_flags": 0,
+      "added_correct": 0,
+      "added_wrong_only_copy": 0,
+      "baseline_correct": 0,
+      "baseline_measured": 180,
+      "baseline_pairs": 0,
+      "extended_correct": 0,
+      "extended_measured": 180,
+      "extended_pairs": 0,
+      "views": 180,
+      "waveform_attempts": 180
+    },
+    "codec:mp3_64k/copy": {
+      "added_control_flags": 0,
+      "added_correct": 1,
+      "added_wrong_only_copy": 0,
+      "baseline_correct": 156,
+      "baseline_measured": 180,
+      "baseline_pairs": 159,
+      "extended_correct": 157,
+      "extended_measured": 180,
+      "extended_pairs": 160,
+      "views": 180,
+      "waveform_attempts": 21
+    },
+    "codec:opus_48k/control": {
+      "added_control_flags": 0,
+      "added_correct": 0,
+      "added_wrong_only_copy": 0,
+      "baseline_correct": 0,
+      "baseline_measured": 180,
+      "baseline_pairs": 0,
+      "extended_correct": 0,
+      "extended_measured": 180,
+      "extended_pairs": 0,
+      "views": 180,
+      "waveform_attempts": 180
+    },
+    "codec:opus_48k/copy": {
+      "added_control_flags": 0,
+      "added_correct": 2,
+      "added_wrong_only_copy": 0,
+      "baseline_correct": 156,
+      "baseline_measured": 180,
+      "baseline_pairs": 157,
+      "extended_correct": 158,
+      "extended_measured": 180,
+      "extended_pairs": 159,
+      "views": 180,
+      "waveform_attempts": 23
+    },
+    "codec:pcm/control": {
+      "added_control_flags": 0,
+      "added_correct": 0,
+      "added_wrong_only_copy": 0,
+      "baseline_correct": 0,
+      "baseline_measured": 180,
+      "baseline_pairs": 0,
+      "extended_correct": 0,
+      "extended_measured": 180,
+      "extended_pairs": 0,
+      "views": 180,
+      "waveform_attempts": 180
+    },
+    "codec:pcm/copy": {
+      "added_control_flags": 0,
+      "added_correct": 1,
+      "added_wrong_only_copy": 0,
+      "baseline_correct": 159,
+      "baseline_measured": 180,
+      "baseline_pairs": 161,
+      "extended_correct": 160,
+      "extended_measured": 180,
+      "extended_pairs": 162,
+      "views": 180,
+      "waveform_attempts": 19
+    },
+    "condition:clean/control": {
+      "added_control_flags": 0,
+      "added_correct": 0,
+      "added_wrong_only_copy": 0,
+      "baseline_correct": 0,
+      "baseline_measured": 144,
+      "baseline_pairs": 0,
+      "extended_correct": 0,
+      "extended_measured": 144,
+      "extended_pairs": 0,
+      "views": 144,
+      "waveform_attempts": 144
+    },
+    "condition:clean/copy": {
+      "added_control_flags": 0,
+      "added_correct": 1,
+      "added_wrong_only_copy": 0,
+      "baseline_correct": 143,
+      "baseline_measured": 144,
+      "baseline_pairs": 143,
+      "extended_correct": 144,
+      "extended_measured": 144,
+      "extended_pairs": 144,
+      "views": 144,
+      "waveform_attempts": 1
+    },
+    "condition:kitchen_minus5/control": {
+      "added_control_flags": 0,
+      "added_correct": 0,
+      "added_wrong_only_copy": 0,
+      "baseline_correct": 0,
+      "baseline_measured": 144,
+      "baseline_pairs": 0,
+      "extended_correct": 0,
+      "extended_measured": 144,
+      "extended_pairs": 0,
+      "views": 144,
+      "waveform_attempts": 144
+    },
+    "condition:kitchen_minus5/copy": {
+      "added_control_flags": 0,
+      "added_correct": 0,
+      "added_wrong_only_copy": 0,
+      "baseline_correct": 127,
+      "baseline_measured": 144,
+      "baseline_pairs": 127,
+      "extended_correct": 127,
+      "extended_measured": 144,
+      "extended_pairs": 127,
+      "views": 144,
+      "waveform_attempts": 17
+    },
+    "condition:kitchen_plus5/control": {
+      "added_control_flags": 0,
+      "added_correct": 0,
+      "added_wrong_only_copy": 0,
+      "baseline_correct": 0,
+      "baseline_measured": 144,
+      "baseline_pairs": 0,
+      "extended_correct": 0,
+      "extended_measured": 144,
+      "extended_pairs": 0,
+      "views": 144,
+      "waveform_attempts": 144
+    },
+    "condition:kitchen_plus5/copy": {
+      "added_control_flags": 0,
+      "added_correct": 0,
+      "added_wrong_only_copy": 0,
+      "baseline_correct": 140,
+      "baseline_measured": 144,
+      "baseline_pairs": 143,
+      "extended_correct": 140,
+      "extended_measured": 144,
+      "extended_pairs": 143,
+      "views": 144,
+      "waveform_attempts": 1
+    },
+    "condition:traffic_minus5/control": {
+      "added_control_flags": 0,
+      "added_correct": 0,
+      "added_wrong_only_copy": 0,
+      "baseline_correct": 0,
+      "baseline_measured": 144,
+      "baseline_pairs": 0,
+      "extended_correct": 0,
+      "extended_measured": 144,
+      "extended_pairs": 0,
+      "views": 144,
+      "waveform_attempts": 144
+    },
+    "condition:traffic_minus5/copy": {
+      "added_control_flags": 0,
+      "added_correct": 0,
+      "added_wrong_only_copy": 0,
+      "baseline_correct": 79,
+      "baseline_measured": 144,
+      "baseline_pairs": 84,
+      "extended_correct": 79,
+      "extended_measured": 144,
+      "extended_pairs": 84,
+      "views": 144,
+      "waveform_attempts": 60
+    },
+    "condition:traffic_plus5/control": {
+      "added_control_flags": 0,
+      "added_correct": 0,
+      "added_wrong_only_copy": 0,
+      "baseline_correct": 0,
+      "baseline_measured": 144,
+      "baseline_pairs": 0,
+      "extended_correct": 0,
+      "extended_measured": 144,
+      "extended_pairs": 0,
+      "views": 144,
+      "waveform_attempts": 144
+    },
+    "condition:traffic_plus5/copy": {
+      "added_control_flags": 0,
+      "added_correct": 4,
+      "added_wrong_only_copy": 0,
+      "baseline_correct": 140,
+      "baseline_measured": 144,
+      "baseline_pairs": 140,
+      "extended_correct": 144,
+      "extended_measured": 144,
+      "extended_pairs": 144,
+      "views": 144,
+      "waveform_attempts": 4
+    },
+    "family:ami/control": {
+      "added_control_flags": 0,
+      "added_correct": 0,
+      "added_wrong_only_copy": 0,
+      "baseline_correct": 0,
+      "baseline_measured": 480,
+      "baseline_pairs": 0,
+      "extended_correct": 0,
+      "extended_measured": 480,
+      "extended_pairs": 0,
+      "views": 480,
+      "waveform_attempts": 480
+    },
+    "family:ami/copy": {
+      "added_control_flags": 0,
+      "added_correct": 1,
+      "added_wrong_only_copy": 0,
+      "baseline_correct": 427,
+      "baseline_measured": 480,
+      "baseline_pairs": 431,
+      "extended_correct": 428,
+      "extended_measured": 480,
+      "extended_pairs": 432,
+      "views": 480,
+      "waveform_attempts": 49
+    },
+    "family:voxpopuli/control": {
+      "added_control_flags": 0,
+      "added_correct": 0,
+      "added_wrong_only_copy": 0,
+      "baseline_correct": 0,
+      "baseline_measured": 240,
+      "baseline_pairs": 0,
+      "extended_correct": 0,
+      "extended_measured": 240,
+      "extended_pairs": 0,
+      "views": 240,
+      "waveform_attempts": 240
+    },
+    "family:voxpopuli/copy": {
+      "added_control_flags": 0,
+      "added_correct": 4,
+      "added_wrong_only_copy": 0,
+      "baseline_correct": 202,
+      "baseline_measured": 240,
+      "baseline_pairs": 206,
+      "extended_correct": 206,
+      "extended_measured": 240,
+      "extended_pairs": 210,
+      "views": 240,
+      "waveform_attempts": 34
+    },
+    "overall/control": {
+      "added_control_flags": 0,
+      "added_correct": 0,
+      "added_wrong_only_copy": 0,
+      "baseline_correct": 0,
+      "baseline_measured": 720,
+      "baseline_pairs": 0,
+      "extended_correct": 0,
+      "extended_measured": 720,
+      "extended_pairs": 0,
+      "views": 720,
+      "waveform_attempts": 720
+    },
+    "overall/copy": {
+      "added_control_flags": 0,
+      "added_correct": 5,
+      "added_wrong_only_copy": 0,
+      "baseline_correct": 629,
+      "baseline_measured": 720,
+      "baseline_pairs": 637,
+      "extended_correct": 634,
+      "extended_measured": 720,
+      "extended_pairs": 642,
+      "views": 720,
+      "waveform_attempts": 83
+    }
+  }
+}

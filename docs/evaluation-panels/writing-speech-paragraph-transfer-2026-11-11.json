@@ -1,0 +1,2128 @@
+{
+  "coverage": {
+    "oral_history": {
+      "human_sentence": {
+        "eligible_current_but_unassessed": 0,
+        "eligible_interior_paragraphs": 12,
+        "isolated_paragraphs_assessed": 6,
+        "isolated_paragraphs_support": 3,
+        "qualifying_current_paragraphs": 6
+      },
+      "human_whole": {
+        "eligible_current_but_unassessed": 0,
+        "eligible_interior_paragraphs": 12,
+        "isolated_paragraphs_assessed": 7,
+        "isolated_paragraphs_support": 3,
+        "qualifying_current_paragraphs": 7
+      },
+      "original": {
+        "eligible_current_but_unassessed": 0,
+        "eligible_interior_paragraphs": 12,
+        "isolated_paragraphs_assessed": 7,
+        "isolated_paragraphs_support": 4,
+        "qualifying_current_paragraphs": 7
+      },
+      "qwen": {
+        "eligible_current_but_unassessed": 0,
+        "eligible_interior_paragraphs": 12,
+        "isolated_paragraphs_assessed": 9,
+        "isolated_paragraphs_support": 6,
+        "qualifying_current_paragraphs": 9
+      },
+      "smol2": {
+        "eligible_current_but_unassessed": 0,
+        "eligible_interior_paragraphs": 10,
+        "isolated_paragraphs_assessed": 8,
+        "isolated_paragraphs_support": 6,
+        "qualifying_current_paragraphs": 8
+      }
+    },
+    "public_address": {
+      "human_sentence": {
+        "eligible_current_but_unassessed": 0,
+        "eligible_interior_paragraphs": 6,
+        "isolated_paragraphs_assessed": 3,
+        "isolated_paragraphs_support": 1,
+        "qualifying_current_paragraphs": 3
+      },
+      "human_whole": {
+        "eligible_current_but_unassessed": 0,
+        "eligible_interior_paragraphs": 6,
+        "isolated_paragraphs_assessed": 3,
+        "isolated_paragraphs_support": 1,
+        "qualifying_current_paragraphs": 3
+      },
+      "original": {
+        "eligible_current_but_unassessed": 0,
+        "eligible_interior_paragraphs": 6,
+        "isolated_paragraphs_assessed": 3,
+        "isolated_paragraphs_support": 2,
+        "qualifying_current_paragraphs": 3
+      },
+      "qwen": {
+        "eligible_current_but_unassessed": 0,
+        "eligible_interior_paragraphs": 4,
+        "isolated_paragraphs_assessed": 1,
+        "isolated_paragraphs_support": 1,
+        "qualifying_current_paragraphs": 1
+      },
+      "smol2": {
+        "eligible_current_but_unassessed": 0,
+        "eligible_interior_paragraphs": 6,
+        "isolated_paragraphs_assessed": 4,
+        "isolated_paragraphs_support": 3,
+        "qualifying_current_paragraphs": 4
+      }
+    }
+  },
+  "freeze": {
+    "analysis_code_sha256": "03b5d12654966f7e314086974979f1dbe11141f9e24392117554733f50342b3b",
+    "assets": {
+      "qwen": {
+        "license": "Apache-2.0",
+        "local_config_sha256": {
+          "config.json": "98d2ff8cc47488d08a2b0b3acf4eb99ef210779b42bd48605f6b8e36acdbf670",
+          "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+          "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+          "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+          "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+          "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+        },
+        "repo": "Qwen/Qwen2.5-1.5B-Instruct",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+        "weights_sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee"
+      },
+      "smol2": {
+        "license": "Apache-2.0",
+        "local_config_sha256": {
+          "config.json": "994f50b16abb4ae00880baefe03c10260b5bd608d2bf586f7056ca05a534feea",
+          "generation_config.json": "87b916edaaab66b3899b9d0dd0752727dff6666686da0504d89ae0a6e055a013",
+          "merges.txt": "0b54e8aa4e53d5383e2e4bc635a56b43f9647f7b13832d5d9ecd8f82dac4f510",
+          "special_tokens_map.json": "2b7379f3ae813529281a5c602bc5a11c1d4e0a99107aaa597fe936c1e813ca52",
+          "tokenizer.json": "9ca9acddb6525a194ec8ac7a87f24fbba7232a9a15ffa1af0c1224fcd888e47c",
+          "tokenizer_config.json": "4ec77d44f62efeb38d7e044a1db318f6a939438425312dfa333b8382dbad98df",
+          "vocab.json": "82b84012e3add4d01d12ba14442026e49b8cbbaead1f79ecf3d919784f82dc79"
+        },
+        "repo": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+        "revision": "31b70e2e869a7173562077fd711b654946d38674",
+        "weights_sha256": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8"
+      }
+    },
+    "code_sha256": "c8d02718d0d35d7b8e8619aa929f0e596ea1f0a2b5c155399fc95f19d1d430bb",
+    "confirmatory_prior_result_sha256": "511b6fecc232571e30c02622de92b730826a003ae723c20975041eb235d35a0a",
+    "current_scoring_code": {
+      "backend/app/detectors/text/classifier.py": "eaf534a46c0984f0179230d37807ab33f6f0308e607e3c50d8270b09edd472e1",
+      "backend/app/detectors/text/coverage.py": "2b2d29559c661ee81ccbf36d0377feecda77401514a82edcc9922f3ff7946c72",
+      "backend/app/detectors/text/extract.py": "b08a0dce5dbe30cbad80ff337ab10fc1c8f4748cbb532c3f77a6cb6825445065",
+      "backend/app/detectors/text/pipeline.py": "26cea88e1060f9d3c7cf23fa5463fc9a8ef191b141c1a2d9fe441dc26175834f",
+      "backend/app/detectors/text/segment.py": "c8c73db16af7fc2a47643fcc852d7f6d5f132f80fff8bceac7b7276d8e54e050",
+      "backend/scripts/run_writing_modernbert_v4.py": "292a280df0841a4e283b2623141d87fa53ff87d3ae62a073e8f45999dc0787d3",
+      "backend/scripts/writing_span_native_v7.py": "c7aa46f721ec27239ea9c434ee3073685dbf183ab0abc48d375ac281e1c75409"
+    },
+    "generator_runtime": {
+      "mlx": "0.32.4",
+      "mlx-lm": "0.31.3",
+      "transformers": "5.22.1"
+    },
+    "generator_settings": {
+      "qwen": {
+        "max_tokens": 384,
+        "seed": 56174,
+        "temp": 0.4,
+        "top_p": 0.9
+      },
+      "smol2": {
+        "max_tokens": 384,
+        "seed": 41873,
+        "temp": 0.72,
+        "top_p": 0.9
+      }
+    },
+    "genre_fit_sha256": "19de984048a8cad711915153c2c3e20720e7c9577c6c8f06a81cd04d1b5257e7",
+    "intake_code_sha256": "87c75c4f20cc5cdfb1c6d9afb189eb9e30628a00c8eddce6dedb8cc23a6718eb",
+    "methods": {
+      "actual_product": "Optional evidence review displays compared inputs without filtering existing findings or adding any fusion/confidence contribution. The study compares hypothetical evidence selections only.",
+      "baseline": "Previous exact 3-sentence current score >=0.5, first 6 qualifying source-ordered foci; compare .85, strict and pooled as unchanged secondary references.",
+      "eligible": "Use unchanged generator families, seeds, ordinary-control scope, complete EOS and copy/format/word gates. Explain missed, false and unassessed cases explicitly.",
+      "isolated": "Add exactly the existing optional production paragraph-only scoring helper with same checkpoint, configured CPU classifier, first two admitted interior paragraphs and complete <=512-token single-window coverage. A current plus isolated raw response >=0.5 is required on the same paragraph; rank by current, tie to earlier source. The two measurements share weights.",
+      "metric": "Non-whitespace IoU >= 0.30 to known generated paragraph; human-file and source-group flags, retained and lost useful locations, exact contextual scores and input commitments. Break out two genres and two generator families.",
+      "question": "Prospectively test the already chosen isolated-paragraph rule on independent genres: oral-history interviews and public-address transcripts. No parameter selection or fit.",
+      "scope_only": "Select the single highest-scoring eligible interior paragraph containing a current focus >=0.5, tie to earlier source. This isolates a smaller display extent from the added inference."
+    },
+    "original_comparison_sha256": "2b0d1ae13c43f66e6cf24697c6f18ce61f4325e91b85b3f5798d27e11ea43425",
+    "original_point_sha256": "1b33174f901bb917d22d40f34cdbcd65814cff63079b3f277ddc09ea324424cf",
+    "previous_generator_sha256": "7b7f5e5136d338a3da98c2923b4b8efc3fe459a6be2eb6d4ffa256add5178890",
+    "prior_comparison_code_sha256": "458540b1f998a6ab85cdb626053d13c7720234dd98d9895694f0c9c6fbcba275",
+    "projection_sha256": "0060c0d2b7559550675522d387d645f5e5b8ee002487068e57fbc4fb9f167f46",
+    "record_code_sha256": "25f40e3ba74d9cceb157a01657e5e70cb61fcf2259a4c1941b76b75a4e2db180",
+    "recovery_code_sha256": "f493956ac298c58b8d19495066f04366491f685bb6dbfc9d836a3f9d01765eb5",
+    "reference_points": {
+      "raw_review": 0.5,
+      "strict_raw_hex": "0x1.fe0b2c0000000p-1"
+    },
+    "schema": "chipmunk.paragraph-replication-freeze/1",
+    "selected_points_hex": {
+      "fiction": "0x1.ccccccccccccdp-1",
+      "pooled": "0x1.feb851eb851ecp-1",
+      "practical": "0x1.b333333333333p-1",
+      "science": "0x1.feb851eb851ecp-1"
+    },
+    "source_groups": 9,
+    "source_sha256": "762aa1b3742f228b382beafc38b34b3253495c3e368d9d8e2de18a5d2d0698cc"
+  },
+  "independent_replay": {
+    "human_flagged_source_groups": {
+      "oral_history": {
+        "isolated": 4,
+        "paragraph": 6,
+        "raw": 6
+      },
+      "public_address": {
+        "isolated": 1,
+        "paragraph": 2,
+        "raw": 2
+      }
+    },
+    "planned_views": 45,
+    "reviewer_sha256": "a74ae50f2f1245bb2bd5fa9a9f7b4c8ae35a55861b8cb93551cc2aeda8abfd1b",
+    "verified_paragraph_inputs": 51,
+    "verified_primary_rollups": 30,
+    "verified_publisher_sources": 9,
+    "verified_views": 43
+  },
+  "outcomes": {
+    "oral_history": {
+      "human_sentence": {
+        "isolated": {
+          "assessed": 6,
+          "flagged": 3,
+          "missed": 0,
+          "ordinary_edit_overlap": 2,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "paragraph": {
+          "assessed": 6,
+          "flagged": 5,
+          "missed": 0,
+          "ordinary_edit_overlap": 2,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "pooled": {
+          "assessed": 6,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "practical": {
+          "assessed": 6,
+          "flagged": 5,
+          "missed": 0,
+          "ordinary_edit_overlap": 1,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "raw": {
+          "assessed": 6,
+          "flagged": 6,
+          "missed": 0,
+          "ordinary_edit_overlap": 3,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "strict": {
+          "assessed": 6,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        }
+      },
+      "human_whole": {
+        "isolated": {
+          "assessed": 6,
+          "flagged": 2,
+          "missed": 0,
+          "ordinary_edit_overlap": 1,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "paragraph": {
+          "assessed": 6,
+          "flagged": 4,
+          "missed": 0,
+          "ordinary_edit_overlap": 2,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "pooled": {
+          "assessed": 6,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "practical": {
+          "assessed": 6,
+          "flagged": 6,
+          "missed": 0,
+          "ordinary_edit_overlap": 3,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "raw": {
+          "assessed": 6,
+          "flagged": 6,
+          "missed": 0,
+          "ordinary_edit_overlap": 4,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "strict": {
+          "assessed": 6,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        }
+      },
+      "original": {
+        "isolated": {
+          "assessed": 6,
+          "flagged": 4,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "paragraph": {
+          "assessed": 6,
+          "flagged": 5,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "pooled": {
+          "assessed": 6,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "practical": {
+          "assessed": 6,
+          "flagged": 5,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "raw": {
+          "assessed": 6,
+          "flagged": 6,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "strict": {
+          "assessed": 6,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        }
+      },
+      "qwen": {
+        "isolated": {
+          "assessed": 6,
+          "flagged": 6,
+          "missed": 1,
+          "ordinary_edit_overlap": 0,
+          "useful": 5,
+          "wrong_location": 1
+        },
+        "paragraph": {
+          "assessed": 6,
+          "flagged": 6,
+          "missed": 1,
+          "ordinary_edit_overlap": 0,
+          "useful": 5,
+          "wrong_location": 1
+        },
+        "pooled": {
+          "assessed": 6,
+          "flagged": 4,
+          "missed": 3,
+          "ordinary_edit_overlap": 0,
+          "useful": 3,
+          "wrong_location": 0
+        },
+        "practical": {
+          "assessed": 6,
+          "flagged": 6,
+          "missed": 1,
+          "ordinary_edit_overlap": 0,
+          "useful": 5,
+          "wrong_location": 0
+        },
+        "raw": {
+          "assessed": 6,
+          "flagged": 6,
+          "missed": 1,
+          "ordinary_edit_overlap": 0,
+          "useful": 5,
+          "wrong_location": 0
+        },
+        "strict": {
+          "assessed": 6,
+          "flagged": 4,
+          "missed": 2,
+          "ordinary_edit_overlap": 0,
+          "useful": 4,
+          "wrong_location": 0
+        }
+      },
+      "smol2": {
+        "isolated": {
+          "assessed": 5,
+          "flagged": 5,
+          "missed": 1,
+          "ordinary_edit_overlap": 0,
+          "preparation_unavailable": 1,
+          "useful": 4,
+          "wrong_location": 1
+        },
+        "paragraph": {
+          "assessed": 5,
+          "flagged": 5,
+          "missed": 1,
+          "ordinary_edit_overlap": 0,
+          "preparation_unavailable": 1,
+          "useful": 4,
+          "wrong_location": 1
+        },
+        "pooled": {
+          "assessed": 5,
+          "flagged": 3,
+          "missed": 2,
+          "ordinary_edit_overlap": 0,
+          "preparation_unavailable": 1,
+          "useful": 3,
+          "wrong_location": 0
+        },
+        "practical": {
+          "assessed": 5,
+          "flagged": 5,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "preparation_unavailable": 1,
+          "useful": 5,
+          "wrong_location": 0
+        },
+        "raw": {
+          "assessed": 5,
+          "flagged": 5,
+          "missed": 1,
+          "ordinary_edit_overlap": 0,
+          "preparation_unavailable": 1,
+          "useful": 4,
+          "wrong_location": 0
+        },
+        "strict": {
+          "assessed": 5,
+          "flagged": 3,
+          "missed": 2,
+          "ordinary_edit_overlap": 0,
+          "preparation_unavailable": 1,
+          "useful": 3,
+          "wrong_location": 0
+        }
+      }
+    },
+    "public_address": {
+      "human_sentence": {
+        "isolated": {
+          "assessed": 3,
+          "flagged": 1,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "paragraph": {
+          "assessed": 3,
+          "flagged": 2,
+          "missed": 0,
+          "ordinary_edit_overlap": 1,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "pooled": {
+          "assessed": 3,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "practical": {
+          "assessed": 3,
+          "flagged": 1,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "raw": {
+          "assessed": 3,
+          "flagged": 2,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "strict": {
+          "assessed": 3,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        }
+      },
+      "human_whole": {
+        "isolated": {
+          "assessed": 3,
+          "flagged": 1,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "paragraph": {
+          "assessed": 3,
+          "flagged": 2,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "pooled": {
+          "assessed": 3,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "practical": {
+          "assessed": 3,
+          "flagged": 1,
+          "missed": 0,
+          "ordinary_edit_overlap": 1,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "raw": {
+          "assessed": 3,
+          "flagged": 2,
+          "missed": 0,
+          "ordinary_edit_overlap": 1,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "strict": {
+          "assessed": 3,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        }
+      },
+      "original": {
+        "isolated": {
+          "assessed": 3,
+          "flagged": 1,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "paragraph": {
+          "assessed": 3,
+          "flagged": 2,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "pooled": {
+          "assessed": 3,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "practical": {
+          "assessed": 3,
+          "flagged": 1,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "raw": {
+          "assessed": 3,
+          "flagged": 2,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "strict": {
+          "assessed": 3,
+          "flagged": 0,
+          "missed": 0,
+          "ordinary_edit_overlap": 0,
+          "useful": 0,
+          "wrong_location": 0
+        }
+      },
+      "qwen": {
+        "isolated": {
+          "assessed": 2,
+          "flagged": 1,
+          "missed": 1,
+          "ordinary_edit_overlap": 0,
+          "preparation_unavailable": 1,
+          "useful": 1,
+          "wrong_location": 0
+        },
+        "paragraph": {
+          "assessed": 2,
+          "flagged": 1,
+          "missed": 1,
+          "ordinary_edit_overlap": 0,
+          "preparation_unavailable": 1,
+          "useful": 1,
+          "wrong_location": 0
+        },
+        "pooled": {
+          "assessed": 2,
+          "flagged": 0,
+          "missed": 2,
+          "ordinary_edit_overlap": 0,
+          "preparation_unavailable": 1,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "practical": {
+          "assessed": 2,
+          "flagged": 1,
+          "missed": 1,
+          "ordinary_edit_overlap": 0,
+          "preparation_unavailable": 1,
+          "useful": 1,
+          "wrong_location": 0
+        },
+        "raw": {
+          "assessed": 2,
+          "flagged": 1,
+          "missed": 1,
+          "ordinary_edit_overlap": 0,
+          "preparation_unavailable": 1,
+          "useful": 1,
+          "wrong_location": 0
+        },
+        "strict": {
+          "assessed": 2,
+          "flagged": 0,
+          "missed": 2,
+          "ordinary_edit_overlap": 0,
+          "preparation_unavailable": 1,
+          "useful": 0,
+          "wrong_location": 0
+        }
+      },
+      "smol2": {
+        "isolated": {
+          "assessed": 3,
+          "flagged": 2,
+          "missed": 1,
+          "ordinary_edit_overlap": 0,
+          "useful": 2,
+          "wrong_location": 0
+        },
+        "paragraph": {
+          "assessed": 3,
+          "flagged": 2,
+          "missed": 1,
+          "ordinary_edit_overlap": 0,
+          "useful": 2,
+          "wrong_location": 0
+        },
+        "pooled": {
+          "assessed": 3,
+          "flagged": 2,
+          "missed": 1,
+          "ordinary_edit_overlap": 0,
+          "useful": 2,
+          "wrong_location": 0
+        },
+        "practical": {
+          "assessed": 3,
+          "flagged": 2,
+          "missed": 1,
+          "ordinary_edit_overlap": 0,
+          "useful": 2,
+          "wrong_location": 0
+        },
+        "raw": {
+          "assessed": 3,
+          "flagged": 2,
+          "missed": 1,
+          "ordinary_edit_overlap": 0,
+          "useful": 2,
+          "wrong_location": 0
+        },
+        "strict": {
+          "assessed": 3,
+          "flagged": 2,
+          "missed": 1,
+          "ordinary_edit_overlap": 0,
+          "useful": 2,
+          "wrong_location": 0
+        }
+      }
+    }
+  },
+  "paired_transitions_relative_to_raw": {
+    "oral_history": {
+      "human_sentence": {
+        "isolated": {
+          "1->0": 3,
+          "1->1": 3
+        },
+        "paragraph": {
+          "1->0": 1,
+          "1->1": 5
+        },
+        "pooled": {
+          "1->0": 6
+        },
+        "practical": {
+          "1->0": 1,
+          "1->1": 5
+        },
+        "raw": {
+          "1->1": 6
+        },
+        "strict": {
+          "1->0": 6
+        }
+      },
+      "human_whole": {
+        "isolated": {
+          "1->0": 4,
+          "1->1": 2
+        },
+        "paragraph": {
+          "1->0": 2,
+          "1->1": 4
+        },
+        "pooled": {
+          "1->0": 6
+        },
+        "practical": {
+          "1->1": 6
+        },
+        "raw": {
+          "1->1": 6
+        },
+        "strict": {
+          "1->0": 6
+        }
+      },
+      "original": {
+        "isolated": {
+          "1->0": 2,
+          "1->1": 4
+        },
+        "paragraph": {
+          "1->0": 1,
+          "1->1": 5
+        },
+        "pooled": {
+          "1->0": 6
+        },
+        "practical": {
+          "1->0": 1,
+          "1->1": 5
+        },
+        "raw": {
+          "1->1": 6
+        },
+        "strict": {
+          "1->0": 6
+        }
+      },
+      "qwen": {
+        "isolated": {
+          "0->1": 1,
+          "1->0": 1,
+          "1->1": 4
+        },
+        "paragraph": {
+          "0->1": 1,
+          "1->0": 1,
+          "1->1": 4
+        },
+        "pooled": {
+          "0->0": 1,
+          "1->0": 2,
+          "1->1": 3
+        },
+        "practical": {
+          "0->1": 1,
+          "1->0": 1,
+          "1->1": 4
+        },
+        "raw": {
+          "0->0": 1,
+          "1->1": 5
+        },
+        "strict": {
+          "0->0": 1,
+          "1->0": 1,
+          "1->1": 4
+        }
+      },
+      "smol2": {
+        "isolated": {
+          "0->0": 1,
+          "1->1": 4
+        },
+        "paragraph": {
+          "0->0": 1,
+          "1->1": 4
+        },
+        "pooled": {
+          "0->0": 1,
+          "1->0": 1,
+          "1->1": 3
+        },
+        "practical": {
+          "0->1": 1,
+          "1->1": 4
+        },
+        "raw": {
+          "0->0": 1,
+          "1->1": 4
+        },
+        "strict": {
+          "0->0": 1,
+          "1->0": 1,
+          "1->1": 3
+        }
+      }
+    },
+    "public_address": {
+      "human_sentence": {
+        "isolated": {
+          "0->0": 1,
+          "1->0": 1,
+          "1->1": 1
+        },
+        "paragraph": {
+          "0->0": 1,
+          "1->1": 2
+        },
+        "pooled": {
+          "0->0": 1,
+          "1->0": 2
+        },
+        "practical": {
+          "0->0": 1,
+          "1->0": 1,
+          "1->1": 1
+        },
+        "raw": {
+          "0->0": 1,
+          "1->1": 2
+        },
+        "strict": {
+          "0->0": 1,
+          "1->0": 2
+        }
+      },
+      "human_whole": {
+        "isolated": {
+          "0->0": 1,
+          "1->0": 1,
+          "1->1": 1
+        },
+        "paragraph": {
+          "0->0": 1,
+          "1->1": 2
+        },
+        "pooled": {
+          "0->0": 1,
+          "1->0": 2
+        },
+        "practical": {
+          "0->0": 1,
+          "1->0": 1,
+          "1->1": 1
+        },
+        "raw": {
+          "0->0": 1,
+          "1->1": 2
+        },
+        "strict": {
+          "0->0": 1,
+          "1->0": 2
+        }
+      },
+      "original": {
+        "isolated": {
+          "0->0": 1,
+          "1->0": 1,
+          "1->1": 1
+        },
+        "paragraph": {
+          "0->0": 1,
+          "1->1": 2
+        },
+        "pooled": {
+          "0->0": 1,
+          "1->0": 2
+        },
+        "practical": {
+          "0->0": 1,
+          "1->0": 1,
+          "1->1": 1
+        },
+        "raw": {
+          "0->0": 1,
+          "1->1": 2
+        },
+        "strict": {
+          "0->0": 1,
+          "1->0": 2
+        }
+      },
+      "qwen": {
+        "isolated": {
+          "0->0": 1,
+          "1->1": 1
+        },
+        "paragraph": {
+          "0->0": 1,
+          "1->1": 1
+        },
+        "pooled": {
+          "0->0": 1,
+          "1->0": 1
+        },
+        "practical": {
+          "0->0": 1,
+          "1->1": 1
+        },
+        "raw": {
+          "0->0": 1,
+          "1->1": 1
+        },
+        "strict": {
+          "0->0": 1,
+          "1->0": 1
+        }
+      },
+      "smol2": {
+        "isolated": {
+          "0->0": 1,
+          "1->1": 2
+        },
+        "paragraph": {
+          "0->0": 1,
+          "1->1": 2
+        },
+        "pooled": {
+          "0->0": 1,
+          "1->1": 2
+        },
+        "practical": {
+          "0->0": 1,
+          "1->1": 2
+        },
+        "raw": {
+          "0->0": 1,
+          "1->1": 2
+        },
+        "strict": {
+          "0->0": 1,
+          "1->1": 2
+        }
+      }
+    }
+  },
+  "positive_groups": {
+    "oral_history": {
+      "any": 6,
+      "both_families": 5
+    },
+    "public_address": {
+      "any": 3,
+      "both_families": 2
+    }
+  },
+  "preparation": {
+    "case_sha256": "97651296834f7ee9295a8d1246ac8ed8f2ea112957071252a84807d6043ebbfe",
+    "freeze_sha256": "a82d7cf47a7d49d933dea3e301c3af78ce002e96706c42da26fc641b684af011",
+    "generators": {
+      "qwen": {
+        "dispositions": {
+          "admitted_complete_response": 8,
+          "outside_word_bound": 1
+        },
+        "receipt": {
+          "elapsed_seconds": 12.147,
+          "family": "qwen",
+          "freeze_sha256": "a82d7cf47a7d49d933dea3e301c3af78ce002e96706c42da26fc641b684af011",
+          "minimum_available_ram_bytes": 5634015232,
+          "sampled_worker_rss_bytes": 2193227776,
+          "status": "complete",
+          "worker": {
+            "responses": 9,
+            "sha256": "c0b93e75fbfbdb05c641d6ecca2d36b9df6e870bf6a7a1edae5960b089794153",
+            "weights_sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee"
+          }
+        }
+      },
+      "smol2": {
+        "dispositions": {
+          "admitted_complete_response": 7,
+          "first_eligible_complete_block": 1,
+          "outside_word_bound": 1
+        },
+        "receipt": {
+          "elapsed_seconds": 12.606,
+          "family": "smol2",
+          "freeze_sha256": "a82d7cf47a7d49d933dea3e301c3af78ce002e96706c42da26fc641b684af011",
+          "minimum_available_ram_bytes": 6765641728,
+          "sampled_worker_rss_bytes": 3440508928,
+          "status": "complete",
+          "worker": {
+            "responses": 9,
+            "sha256": "ba17ff2e9c8433b345b00b01d2a6befec1b3bf08cdb7b23bc44a9dd5a1cbd61f",
+            "weights_sha256": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8"
+          }
+        }
+      }
+    },
+    "status": "complete"
+  },
+  "readout_note": "The frozen evaluator retained the previous study’s court and speech labels in one group-summary key. The independent replay recomputes source-group counts for the actual two genres from every frozen row.",
+  "schema": "chipmunk.writing-speech-paragraph-transfer/1",
+  "scope": "Independent local transfer of evidence-only paragraph comparison with unchanged scoring.",
+  "source": {
+    "dispositions": {
+      "nara-brady": "admitted",
+      "nara-griscom": "admitted",
+      "nara-haig": "admitted",
+      "nara-hartmann": "admitted",
+      "nara-mccurry": "admitted",
+      "nara-siegel": "admitted",
+      "whitehouse-bush": "admitted",
+      "whitehouse-obama": "admitted",
+      "whitehouse-pence": "admitted"
+    },
+    "exposure_inventory": [
+      {
+        "matched_sources": 0,
+        "packet": "writing_v3_v4_exposed_contexts",
+        "source_sha256": "fb7dbfa725728926c86c6627e7871ba8fcc9e0faa50bba384b13992c624a9752",
+        "text_entries": 674
+      },
+      {
+        "matched_sources": 0,
+        "packet": "writing_v5_selected_source_answers",
+        "source_sha256": "f8cd90699e21efe9adb4cc607d5572a7e1fed6ebb9d2068a291dd69effdcb123",
+        "text_entries": 256
+      },
+      {
+        "matched_sources": 0,
+        "packet": "writing_v7_prepared_exposures",
+        "source_sha256": "0885ad4cf9d9481dcee25a4e7684e7c0a7b1ac54cb17013a1de257be24d64d46",
+        "text_entries": 992
+      },
+      {
+        "matched_sources": 0,
+        "packet": "text_layout_v93_v101",
+        "source_sha256": "c1d4868cd91b6a750777531032aef96425bab179ad2070403327a097b079b37c",
+        "text_entries": 800
+      },
+      {
+        "matched_sources": 0,
+        "packet": "gohumanize_prepared_v193_v196",
+        "source_sha256": "a42a934b97005bc69c4ef983ab0839d5804b6fc60066e42b9520c950984a51b9",
+        "text_entries": 262
+      },
+      {
+        "matched_sources": 0,
+        "packet": "manifest.json",
+        "source_sha256": "e10769c188e69889c54f1116c5a4f8f03cbb58f4194a19a3a1ea9e969a92d28c",
+        "text_entries": 680
+      },
+      {
+        "matched_sources": 0,
+        "packet": "article-confirmation-manifest.json",
+        "source_sha256": "1aa08df98620fbe9d251f978ee6f61042cd7aa9d2f98937ec0f35f16a3b48d41",
+        "text_entries": 144
+      },
+      {
+        "matched_sources": 0,
+        "packet": "email-originals-v2.json",
+        "source_sha256": "5442c89d86f7c8d3a052df7f39ed6df8fbb6f0f32dd7fb286cff240ee2745f93",
+        "text_entries": 120
+      },
+      {
+        "matched_sources": 0,
+        "packet": "email-manifest-explicit.json",
+        "source_sha256": "0d9847ca82940beadcf14660d33d981d230950dff57f58f2d770f6067acf2329",
+        "text_entries": 186
+      },
+      {
+        "matched_sources": 0,
+        "packet": "email-manifest-v2.json",
+        "source_sha256": "593b70240923772b883e72a1ff9b14d59f6e8a2e8e8993c11658d3dfced01438",
+        "text_entries": 90
+      },
+      {
+        "matched_sources": 0,
+        "packet": "email-originals.json",
+        "source_sha256": "92f89bf520197aa2e6e9703814fe0ee5169720f2defcee9be5b464d24474ef82",
+        "text_entries": 120
+      },
+      {
+        "matched_sources": 0,
+        "packet": "email-qwen-explicit.jsonl",
+        "source_sha256": "2eda831c9fa9f2db5e2b3c2cf6a80a0b8e55cddbfd0aecb31903675fb27817fe",
+        "text_entries": 55
+      },
+      {
+        "matched_sources": 0,
+        "packet": "email-smol2-explicit.jsonl",
+        "source_sha256": "3921dcdccc1aaa732408210776ee18c17c6d634a3889f6ff209104d3ad3724e7",
+        "text_entries": 38
+      },
+      {
+        "matched_sources": 0,
+        "packet": "email-qwen-mlx.jsonl",
+        "source_sha256": "ac66fda8bd896fafe1102fd6f8e2a1c9fff3c5a6cc3789ca9448a28be4e9cff3",
+        "text_entries": 32
+      },
+      {
+        "matched_sources": 0,
+        "packet": "email-smol2-mlx.jsonl",
+        "source_sha256": "86c0f4b58bbfd4166a82586ac61fc58a595170b67992661ada3812022d208d1e",
+        "text_entries": 13
+      },
+      {
+        "matched_sources": 0,
+        "packet": "gohumanize_publisher_test",
+        "source_sha256": "e8142517c08744d123aa11ad585d0d7b44fb1c384e599b72100d0f656c717f98",
+        "text_entries": 508
+      },
+      {
+        "matched_sources": 0,
+        "packet": "aitdna_span_texts_v2_v4",
+        "source_sha256": "0641d20f9326522061bee792cad5f8963faf26bf37268e491f901cb7c2ce5cfb",
+        "text_entries": 362
+      },
+      {
+        "matched_sources": 0,
+        "packet": "wikinews_archive-v205",
+        "source_sha256": "7409f1ddcff8714fb5fc0ba05a6c1c3cbd0d479ee97cc7b0762b62fc07b3f7c5",
+        "text_entries": 36
+      },
+      {
+        "matched_sources": 0,
+        "packet": "wikinews_direct-v209",
+        "source_sha256": "de8a8afd0022cd0b679c5d985017b7f9ee6f584f96d986130daa82471e649ef5",
+        "text_entries": 34
+      },
+      {
+        "matched_sources": 0,
+        "packet": "iterater_v203_publisher_train",
+        "source_sha256": "3f60e9989879b7a51b994edbe4536a5bd30556670f47b6677815bf0ed45c0acc",
+        "text_entries": 962
+      },
+      {
+        "matched_sources": 0,
+        "packet": "opai_v257_v260",
+        "source_sha256": "4e43edf33c695a8a4f757d079089dab85a632c648762554bac9f5cc573bb923b",
+        "text_entries": 60
+      },
+      {
+        "matched_sources": 0,
+        "packet": "goce_v249",
+        "source_sha256": "f1f646f8e94b332259194c04861c7b966ee86278aa117995c74ccb78236452fa",
+        "text_entries": 4
+      },
+      {
+        "matched_sources": 0,
+        "packet": "llmtrace_classification_english_archive",
+        "source_sha256": "6d4431a85a70916ba7af5c19f062eed6c277183d7b4bb5c6cea42f520e717f48",
+        "text_entries": 38429
+      },
+      {
+        "matched_sources": 0,
+        "packet": "v272_publisher_bodies",
+        "source_sha256": "e494c33e29a893abc16a1845f028bedcf9a65b5a8ce9f963323c267c006627a2",
+        "text_entries": 9
+      },
+      {
+        "matched_sources": 0,
+        "packet": "v273_constructed_rewrites",
+        "source_sha256": "b5c4dece64d08ef3523c1f8d8e9afdc68fb4b756876a55b61be0205c611fa62e",
+        "text_entries": 6
+      },
+      {
+        "matched_sources": 0,
+        "packet": "v286_licensed_publisher_bodies",
+        "source_sha256": "5dd8010b4b81fc6598528a19a0b22f5a904da960e6edba2e04cf053ed7794440",
+        "text_entries": 34
+      },
+      {
+        "matched_sources": 0,
+        "packet": "v289_v292_constructed_rewrites",
+        "source_sha256": "4682454d4b72a0c8899159973bd2e91b4f8432be4c42148a4f10719a1fc75582",
+        "text_entries": 22
+      },
+      {
+        "matched_sources": 0,
+        "packet": "previous_editorial_controls",
+        "source_sha256": "46f681020eb07a197875d64bf4ece4efec619b7d1de4c81825d470d9add04f8a",
+        "text_entries": 25
+      },
+      {
+        "matched_sources": 0,
+        "packet": "science_controls",
+        "source_sha256": "a36f5ba115854f1a36d2525c4b835785a2dbeeb1119e3faee090cfd22c3ccd17",
+        "text_entries": 21
+      },
+      {
+        "matched_sources": 0,
+        "packet": "science_qwen",
+        "source_sha256": "a26404420a2e363848d6816255ff02218b7de1b17d1c7b55a93cd75661605e60",
+        "text_entries": 5
+      },
+      {
+        "matched_sources": 0,
+        "packet": "science_prefix",
+        "source_sha256": "7fbc0a71d4d4be00b47b5b9d2440c9cc8227e8de8b5959eb6c28c24473e7b5d3",
+        "text_entries": 3
+      },
+      {
+        "matched_sources": 0,
+        "packet": "science_smol2",
+        "source_sha256": "e20c08cce48a3f7d177850ff6114bfb7139532925188bebdf1bd75ab585222cb",
+        "text_entries": 10
+      },
+      {
+        "matched_sources": 0,
+        "packet": "fiction_controls",
+        "source_sha256": "936de16d306d642b9ff1f80ccc9b8da9548fa7c5d3a8b849155400721a350e20",
+        "text_entries": 33
+      },
+      {
+        "matched_sources": 0,
+        "packet": "fiction_rewrites",
+        "source_sha256": "46a6db00d5617fb95fc03e514208df5942235b429cbe5dd4f919928507176bff",
+        "text_entries": 22
+      },
+      {
+        "matched_sources": 0,
+        "packet": "chipmunk-practical-notice-transfer-1111_controls",
+        "source_sha256": "dbd1dbe88197a44446f8f705eb58ad2ee7b20f6dc7ce3233fe76d8189e5358c8",
+        "text_entries": 18
+      },
+      {
+        "matched_sources": 0,
+        "packet": "chipmunk-practical-notice-transfer-1111_positives",
+        "source_sha256": "d1b814a28fd3fd60e666546d6063d76fd7fabd62ef828d9581ce13ac814f6ad0",
+        "text_entries": 8
+      },
+      {
+        "matched_sources": 0,
+        "packet": "chipmunk-correspondence-transfer-1111_controls",
+        "source_sha256": "36117d37aa219dafb4a6f13959dfbecf3f8d0a02c81eb70f232d249b587768ec",
+        "text_entries": 24
+      },
+      {
+        "matched_sources": 0,
+        "packet": "chipmunk-correspondence-transfer-1111_positives",
+        "source_sha256": "0caca63a72bd00864b1c069ee3776e24b83c0d0e0f3dee4489535888188a0fbc",
+        "text_entries": 16
+      },
+      {
+        "matched_sources": 0,
+        "packet": "chipmunk-modern-bulletin-transfer_controls",
+        "source_sha256": "30d76269e14096222de528a3fd2c11c47928557b983cf706ed7f80c196573e3c",
+        "text_entries": 30
+      },
+      {
+        "matched_sources": 0,
+        "packet": "chipmunk-modern-bulletin-transfer_positives",
+        "source_sha256": "f3db42f44c9dc5891d4f345ceac7a3bb7209dc1784b9aae30405778ba86c3a81",
+        "text_entries": 16
+      },
+      {
+        "matched_sources": 0,
+        "packet": "chipmunk-article-context_controls",
+        "source_sha256": "dc4059f7e05a15fe47df3887c70260e669e7b87f2f9290b68f7f2971633ffbfe",
+        "text_entries": 18
+      },
+      {
+        "matched_sources": 0,
+        "packet": "chipmunk-article-context_positives",
+        "source_sha256": "042ecaea92828aace974a844fd3fc0b29cd49850fb36d9e92ac5b88f981886f1",
+        "text_entries": 8
+      },
+      {
+        "matched_sources": 0,
+        "packet": "chipmunk-paragraph-replication_controls",
+        "source_sha256": "056a571848a6ba8e6c63b54236da10eb73f49e1062f8dd38e741c0b98b215593",
+        "text_entries": 24
+      },
+      {
+        "matched_sources": 0,
+        "packet": "chipmunk-paragraph-replication_positives",
+        "source_sha256": "3c67fe9301a5622637818880d16044a1349209dbf84188351ac8fdbd7c076188",
+        "text_entries": 11
+      },
+      {
+        "matched_sources": 0,
+        "packet": "chipmunk-writing-curvature_controls",
+        "source_sha256": "4f12138ecf694f26b236b0b904372be8ae36f2f3c625765ff7218b3c295f6bf7",
+        "text_entries": 16
+      },
+      {
+        "matched_sources": 0,
+        "packet": "chipmunk-writing-curvature_holdout",
+        "source_sha256": "c76b62a073f7b35b69c51617a62f9ed5308bb592438137d33671846d1b5536d8",
+        "text_entries": 21
+      },
+      {
+        "matched_sources": 0,
+        "packet": "chipmunk-biflank-usgs_controls",
+        "source_sha256": "2a9777faeadd3530713309f56f86def80141429572ba30088a75305ad7d29a29",
+        "text_entries": 14
+      },
+      {
+        "matched_sources": 0,
+        "packet": "chipmunk-biflank-usgs_holdout",
+        "source_sha256": "59c917bccd8e3070283feb0a29308c6104f81a4366dd475b28126ef916292b3b",
+        "text_entries": 23
+      },
+      {
+        "matched_sources": 0,
+        "packet": "chipmunk-biflank-editorial_controls",
+        "source_sha256": "47e782a4e65ee535617daf5236691090fad1dbe51ea0f1e5fe39c541ddb9c0d0",
+        "text_entries": 16
+      },
+      {
+        "matched_sources": 0,
+        "packet": "chipmunk-biflank-editorial_holdout",
+        "source_sha256": "1a464207ae76376b996c2a63b016c4f7b0d0a7542f3356b456c0fa7fb369d612",
+        "text_entries": 22
+      },
+      {
+        "matched_sources": 0,
+        "packet": "chipmunk-fiction-paragraph-transfer-1111_controls",
+        "source_sha256": "936de16d306d642b9ff1f80ccc9b8da9548fa7c5d3a8b849155400721a350e20",
+        "text_entries": 33
+      },
+      {
+        "matched_sources": 0,
+        "packet": "chipmunk-fiction-paragraph-transfer-1111_positives",
+        "source_sha256": "46a6db00d5617fb95fc03e514208df5942235b429cbe5dd4f919928507176bff",
+        "text_entries": 22
+      },
+      {
+        "matched_sources": 0,
+        "packet": "chipmunk-text-passage-expansion-1111_controls",
+        "source_sha256": "a36f5ba115854f1a36d2525c4b835785a2dbeeb1119e3faee090cfd22c3ccd17",
+        "text_entries": 21
+      }
+    ],
+    "genres": {
+      "oral_history": 6,
+      "public_address": 3
+    },
+    "intake_selection_sha256": "5f10db62b6a77881e7abf13d93579096bfbb37ddc8a0a7ddefbc8e54a11707ba",
+    "intake_sha256": "87c75c4f20cc5cdfb1c6d9afb189eb9e30628a00c8eddce6dedb8cc23a6718eb",
+    "policy": "Keep complete attributed blocks from one speaker. Remove speaker labels and stage markers. Select four eligible blocks and matched human edits using the earlier fixed intake rule. Keep authors distinct. Match normalized 12-token fragments across the retained history and held groups.",
+    "private_controls_sha256": "479f802a01e2ed7220553353d658cc7d05b93d95e2f33495f8cbc2dbec11b21e",
+    "private_originals_sha256": "75f7f58b7f879464d79521ac6173a600cd0801af42136121e1576c4eeaa13fa7",
+    "projection_sha256": "0060c0d2b7559550675522d387d645f5e5b8ee002487068e57fbc4fb9f167f46",
+    "roster_sha256": "e2623334b113f9314d85ddad7f50e2c38aeece018e0e8c6e56c9ea5659ed97ee",
+    "schema": "chipmunk.speech-transcript-intake/1",
+    "source_groups": 9,
+    "sources": [
+      {
+        "body_blocks": [
+          {
+            "bbox": [
+              126.0,
+              319.53,
+              524.751,
+              381.371
+            ],
+            "block_index": 6,
+            "pdf_page": 4,
+            "text_sha256": "4963ab70b0f0a392650f639f822baa409ba43911bc28b175dccd984ca76cec0f",
+            "words": 78
+          },
+          {
+            "bbox": [
+              126.0,
+              393.809,
+              524.883,
+              505.151
+            ],
+            "block_index": 7,
+            "pdf_page": 4,
+            "text_sha256": "e5396f6fb398fdf3c4a38f85b16ff6261004d2852ae785185e1e0c5f79147482",
+            "words": 124
+          },
+          {
+            "bbox": [
+              90.001,
+              554.67,
+              524.801,
+              628.871
+            ],
+            "block_index": 9,
+            "pdf_page": 4,
+            "text_sha256": "532181d72b27f1f4d9fb24405e4e5aff9a591bffe284ba8048ed276522971d30",
+            "words": 82
+          },
+          {
+            "bbox": [
+              90.001,
+              666.03,
+              524.866,
+              715.511
+            ],
+            "block_index": 11,
+            "pdf_page": 4,
+            "text_sha256": "76396657053b7639cc2935de615918e994148d77451cb75ffa4c3251c42a2e9d",
+            "words": 58
+          }
+        ],
+        "candidate_blocks": 62,
+        "date": "1999-12-22",
+        "genre": "oral_history",
+        "key": "nara-haig",
+        "publisher": "National Archives and Records Administration",
+        "rights_url": "https://www.archives.gov/presidential-libraries/research/transition-interviews/copy-rights.html",
+        "sentence_donor": {
+          "bbox": [
+            90.0,
+            552.562,
+            524.77,
+            641.232
+          ],
+          "block_index": 7,
+          "codepoints": [
+            174,
+            289
+          ],
+          "pdf_page": 3,
+          "text_sha256": "e48f70288c2fd61869c096465e03b663b4b6e374a6a7e917d84b95c58ae3552b"
+        },
+        "source_bytes": 728204,
+        "source_sha256": "a0cc799c40331d8cd3f054ecb5b7e6d9bf96c8797da81cfe2d76211bc9727165",
+        "speaker": "Alexander M. Haig, Jr.",
+        "target_paragraph_index": 2,
+        "target_words": 82,
+        "url": "https://www.archives.gov/files/presidential-libraries/research/transition-interviews/pdf/haig.pdf",
+        "whole_donor": {
+          "bbox": [
+            90.0,
+            267.921,
+            524.788,
+            331.871
+          ],
+          "block_index": 5,
+          "codepoints": [
+            0,
+            428
+          ],
+          "pdf_page": 18,
+          "text_sha256": "d57a80cc294df2c6bca3b1c9e8857a51dc75380bafd3cb73ee52c90e80d3c4d6"
+        }
+      },
+      {
+        "body_blocks": [
+          {
+            "bbox": [
+              89.998,
+              542.31,
+              524.753,
+              604.151
+            ],
+            "block_index": 15,
+            "pdf_page": 19,
+            "text_sha256": "d47671296a5420b5f3b42cf47d14f6f8852e03daac89efc2724af3f5ee27dc0f",
+            "words": 69
+          },
+          {
+            "bbox": [
+              90.0,
+              267.921,
+              524.824,
+              307.151
+            ],
+            "block_index": 7,
+            "pdf_page": 20,
+            "text_sha256": "b01d30b07e10517e4c50f25b087cb6bc551249488eba2b706600254ed9d283ea",
+            "words": 37
+          },
+          {
+            "bbox": [
+              90.0,
+              354.561,
+              524.827,
+              418.511
+            ],
+            "block_index": 9,
+            "pdf_page": 20,
+            "text_sha256": "c68cd3ba317ab2384a5e964076afa690ed8e6b0fe135071d59d9e375a881ea17",
+            "words": 91
+          },
+          {
+            "bbox": [
+              126.0,
+              430.89,
+              524.855,
+              492.732
+            ],
+            "block_index": 10,
+            "pdf_page": 20,
+            "text_sha256": "5a2dd9987774be12a916df8a12ba4ae5cbd6bb1d4f64e3d84a90e24587558d10",
+            "words": 78
+          }
+        ],
+        "candidate_blocks": 109,
+        "date": "1999-11-22",
+        "genre": "oral_history",
+        "key": "nara-hartmann",
+        "publisher": "National Archives and Records Administration",
+        "rights_url": "https://www.archives.gov/presidential-libraries/research/transition-interviews/copy-rights.html",
+        "sentence_donor": {
+          "bbox": [
+            90.0,
+            527.782,
+            524.768,
+            591.732
+          ],
+          "block_index": 12,
+          "codepoints": [
+            28,
+            180
+          ],
+          "pdf_page": 20,
+          "text_sha256": "1ce340275d13d096cc9012a2551ac38ff19fa310aff27a1e90bbc63ac95d95d7"
+        },
+        "source_bytes": 695162,
+        "source_sha256": "428fcdcca1f3918a487a2f9c94ba41705e6dcac222142c2ee176a47110c51c4b",
+        "speaker": "Robert T. Hartmann",
+        "target_paragraph_index": 2,
+        "target_words": 91,
+        "url": "https://www.archives.gov/files/presidential-libraries/research/transition-interviews/pdf/hartmann.pdf",
+        "whole_donor": {
+          "bbox": [
+            90.0,
+            243.201,
+            524.797,
+            319.511
+          ],
+          "block_index": 7,
+          "codepoints": [
+            0,
+            471
+          ],
+          "pdf_page": 18,
+          "text_sha256": "3c10e93c044877a540d49fde680463f3fef208401d05698a2cdb777fc3e99fcd"
+        }
+      },
+      {
+        "body_blocks": [
+          {
+            "bbox": [
+              90.0,
+              676.282,
+              524.741,
+              715.511
+            ],
+            "block_index": 10,
+            "pdf_page": 20,
+            "text_sha256": "ab9faf667ea55c2d239fdd9d8f6c037995b114f92b6092b04088415cf2162681",
+            "words": 36
+          },
+          {
+            "bbox": [
+              90.0,
+              131.779,
+              524.9,
+              245.231
+            ],
+            "block_index": 2,
+            "pdf_page": 21,
+            "text_sha256": "135d657b21d291b9f4b91309220b66a8d89fef5dec1b6be68cb2c7595b7aaef7",
+            "words": 145
+          },
+          {
+            "bbox": [
+              89.999,
+              282.39,
+              524.801,
+              356.651
+            ],
+            "block_index": 3,
+            "pdf_page": 22,
+            "text_sha256": "915687b4f97c45cdc897cadb791a5b37e3c61e79398f701101ffc178a4821de1",
+            "words": 85
+          },
+          {
+            "bbox": [
+              125.999,
+              369.03,
+              524.776,
+              393.731
+            ],
+            "block_index": 4,
+            "pdf_page": 22,
+            "text_sha256": "d3149d083be69dcb49d645e9aa547e361c00e379bab6784245f3834595059e8e",
+            "words": 21
+          }
+        ],
+        "candidate_blocks": 87,
+        "date": "2000-01-04",
+        "genre": "oral_history",
+        "key": "nara-siegel",
+        "publisher": "National Archives and Records Administration",
+        "rights_url": "https://www.archives.gov/presidential-libraries/research/transition-interviews/copy-rights.html",
+        "sentence_donor": {
+          "bbox": [
+            90.0,
+            342.201,
+            524.647,
+            369.011
+          ],
+          "block_index": 7,
+          "codepoints": [
+            0,
+            99
+          ],
+          "pdf_page": 19,
+          "text_sha256": "991e080566ccd4ce2f1faf0fd3e1d6e22502b59246a14a5e60f46814261144cf"
+        },
+        "source_bytes": 986927,
+        "source_sha256": "d9c614b5bdd3cf721e9f18ded7d4ae38c4c833afee023ecfc88227dd0f264335",
+        "speaker": "Mark Siegel",
+        "target_paragraph_index": 2,
+        "target_words": 85,
+        "url": "https://www.archives.gov/files/presidential-libraries/research/transition-interviews/pdf/siegel.pdf",
+        "whole_donor": {
+          "bbox": [
+            90.001,
+            626.782,
+            524.84,
+            703.151
+          ],
+          "block_index": 18,
+          "codepoints": [
+            0,
+            493
+          ],
+          "pdf_page": 15,
+          "text_sha256": "73332e7cb148d87712ab5fb33ac930d92609828b17f01ea7cc0389f05a43638a"
+        }
+      },
+      {
+        "body_blocks": [
+          {
+            "bbox": [
+              126.0,
+              393.809,
+              524.891,
+              480.371
+            ],
+            "block_index": 5,
+            "pdf_page": 19,
+            "text_sha256": "898d6d0481be56102429dfdb871a5832e3a00d592227b6cc1877d1bb153fe068",
+            "words": 101
+          },
+          {
+            "bbox": [
+              90.0,
+              480.39,
+              525.417,
+              542.232
+            ],
+            "block_index": 5,
+            "pdf_page": 20,
+            "text_sha256": "633a4464b43e45d234a19a3dff3615526a3d7e09eedd57263ed668ea8c79b73e",
+            "words": 79
+          },
+          {
+            "bbox": [
+              89.999,
+              579.39,
+              524.894,
+              616.511
+            ],
+            "block_index": 7,
+            "pdf_page": 20,
+            "text_sha256": "3abfbbafc0bcb31831573b9633c3a8a388b4216c5fdf7f10d7c2e3a68d88917c",
+            "words": 40
+          },
+          {
+            "bbox": [
+              126.001,
+              273.15,
+              524.894,
+              347.411
+            ],
+            "block_index": 3,
+            "pdf_page": 21,
+            "text_sha256": "58fe9d736eb22949982a21f4f5a95afcb31f6a23a1f087460cf58c472073c6e1",
+            "words": 98
+          }
+        ],
+        "candidate_blocks": 53,
+        "date": "1999-07-19",
+        "genre": "oral_history",
+        "key": "nara-griscom",
+        "publisher": "National Archives and Records Administration",
+        "rights_url": "https://www.archives.gov/presidential-libraries/research/transition-interviews/copy-rights.html",
+        "sentence_donor": {
+          "bbox": [
+            126.001,
+            245.309,
+            524.941,
+            331.871
+          ],
+          "block_index": 3,
+          "codepoints": [
+            204,
+            356
+          ],
+          "pdf_page": 18,
+          "text_sha256": "3df27ecfd821529dab98668fc576cca0452013ac8d73456093dde71f211e8bbf"
+        },
+        "source_bytes": 828057,
+        "source_sha256": "b0fd0517cbe1f6d4b3c13b08c31d90cea06716e03d831afd6a29865aeb179d96",
+        "speaker": "Thomas Griscom",
+        "target_paragraph_index": 1,
+        "target_words": 79,
+        "url": "https://www.archives.gov/files/presidential-libraries/research/transition-interviews/pdf/griscom.pdf",
+        "whole_donor": {
+          "bbox": [
+            90.001,
+            432.447,
+            525.006,
+            494.288
+          ],
+          "block_index": 5,
+          "codepoints": [
+            0,
+            420
+          ],
+          "pdf_page": 6,
+          "text_sha256": "e16f24fb4134ef550081d6a1bd0f982d4044fa56802475d7fbb017c7cb720d72"
+        }
+      },
+      {
+        "body_blocks": [
+          {
+            "bbox": [
+              126.0,
+              282.39,
+              524.718,
+              331.871
+            ],
+            "block_index": 6,
+            "pdf_page": 7,
+            "text_sha256": "c36c4d126bc01f9dce28c3c77d00fed0c0500f5eb8c506867eb18e6547a9c716",
+            "words": 53
+          },
+          {
+            "bbox": [
+              126.0,
+              430.89,
+              524.825,
+              480.371
+            ],
+            "block_index": 8,
+            "pdf_page": 14,
+            "text_sha256": "013d90121e0262241d5865268b87d08a85e4246c9f2f16f9220d591e29d783c6",
+            "words": 56
+          },
+          {
+            "bbox": [
+              126.0,
+              347.43,
+              524.789,
+              421.632
+            ],
+            "block_index": 5,
+            "pdf_page": 15,
+            "text_sha256": "da8492c5621a7f31760f30ed7e3216164d1de1ab228bbe284b37cf7fb0a4c7be",
+            "words": 86
+          },
+          {
+            "bbox": [
+              126.001,
+              434.07,
+              524.778,
+              495.911
+            ],
+            "block_index": 6,
+            "pdf_page": 15,
+            "text_sha256": "cebe0dbaf92cc4e1d318cfa23b47ae99b920a8b5303c5022c562e3bef8cfc867",
+            "words": 69
+          }
+        ],
+        "candidate_blocks": 87,
+        "date": "1999-08-17",
+        "genre": "oral_history",
+        "key": "nara-brady",
+        "publisher": "National Archives and Records Administration",
+        "rights_url": "https://www.archives.gov/presidential-libraries/research/transition-interviews/copy-rights.html",
+        "sentence_donor": {
+          "bbox": [
+            90.0,
+            183.389,
+            524.83,
+            270.011
+          ],
+          "block_index": 5,
+          "codepoints": [
+            389,
+            481
+          ],
+          "pdf_page": 7,
+          "text_sha256": "5243d54c559b3561556400888fa67fa845d1e906a84e4a3faf7201360181dd02"
+        },
+        "source_bytes": 1205504,
+        "source_sha256": "1782582a85446efbbe9c27820491a055fba3aa2157ed3a5c7924c0dad5178619",
+        "speaker": "Phillip D. Brady",
+        "target_paragraph_index": 1,
+        "target_words": 56,
+        "url": "https://www.archives.gov/files/presidential-libraries/research/transition-interviews/pdf/brady.pdf",
+        "whole_donor": {
+          "bbox": [
+            90.0,
+            96.807,
+            524.821,
+            146.229
+          ],
+          "block_index": 3,
+          "codepoints": [
+            0,
+            328
+          ],
+          "pdf_page": 7,
+          "text_sha256": "87c239ec925d9dc0ae4d907e32df980a0008d34644e843cf70155962751d0416"
+        }
+      },
+      {
+        "body_blocks": [
+          {
+            "bbox": [
+              90.0,
+              455.122,
+              524.764,
+              481.932
+            ],
+            "block_index": 13,
+            "pdf_page": 24,
+            "text_sha256": "0f57f18ddad7c6efa2cc687b47443d80ba0086f7a6853ba82f69326889701a97",
+            "words": 23
+          },
+          {
+            "bbox": [
+              90.0,
+              356.67,
+              524.899,
+              430.871
+            ],
+            "block_index": 9,
+            "pdf_page": 25,
+            "text_sha256": "182dee0c47fe82263760c3076fdc957b3b3f2868e832b5614adfb6b456f2ba81",
+            "words": 89
+          },
+          {
+            "bbox": [
+              126.0,
+              443.309,
+              524.959,
+              529.871
+            ],
+            "block_index": 10,
+            "pdf_page": 25,
+            "text_sha256": "49c7243fe80bd3bde87b2447aa895010c6111d213a6e0c983c9467e46adf269c",
+            "words": 107
+          },
+          {
+            "bbox": [
+              90.0,
+              366.922,
+              524.83,
+              468.011
+            ],
+            "block_index": 7,
+            "pdf_page": 26,
+            "text_sha256": "59139fe27a46abe1969d55ae5f3930b990f0934aacdee9ae906c27dba180ea7c",
+            "words": 131
+          }
+        ],
+        "candidate_blocks": 64,
+        "date": "2000-03-27",
+        "genre": "oral_history",
+        "key": "nara-mccurry",
+        "publisher": "National Archives and Records Administration",
+        "rights_url": "https://www.archives.gov/presidential-libraries/research/transition-interviews/copy-rights.html",
+        "sentence_donor": {
+          "bbox": [
+            89.999,
+            564.922,
+            524.829,
+            616.511
+          ],
+          "block_index": 12,
+          "codepoints": [
+            199,
+            315
+          ],
+          "pdf_page": 27,
+          "text_sha256": "e7d7084fbaf7adf7cbae3ad441ac7b337acd01becc24168701fd2cf85b1e63aa"
+        },
+        "source_bytes": 1011112,
+        "source_sha256": "9d614e750256fa138a5a02549bd8a340643c80f0f48d9efca10e15d5d2318d41",
+        "speaker": "Michael D. McCurry",
+        "target_paragraph_index": 1,
+        "target_words": 89,
+        "url": "https://www.archives.gov/files/presidential-libraries/research/transition-interviews/pdf/mccurry.pdf",
+        "whole_donor": {
+          "bbox": [
+            90.0,
+            441.201,
+            524.918,
+            517.511
+          ],
+          "block_index": 7,
+          "codepoints": [
+            0,
+            512
+          ],
+          "pdf_page": 7,
+          "text_sha256": "fae4172486e3dbeffa67910ed906eac1d2936e06a07cb715ec5ebf5f79a9093c"
+        }
+      },
+      {
+        "body_blocks": [
+          {
+            "publisher_paragraph_index": 30,
+            "text_sha256": "0d02d07502cadddd0c646e5b567e9c4b44f4f2c5b10f50b88912c68b1cc09285",
+            "words": 125
+          },
+          {
+            "publisher_paragraph_index": 31,
+            "text_sha256": "8ab212d7c8b1e3887e498c37fec180cf37bbe2d91d380ef57336f42947291914",
+            "words": 38
+          },
+          {
+            "publisher_paragraph_index": 32,
+            "text_sha256": "8957246d60fd7e1a3372b24ef3f7b82bf86dbbaab29cb05347e47a038fa1abe6",
+            "words": 63
+          },
+          {
+            "publisher_paragraph_index": 33,
+            "text_sha256": "b5db71483ed7513c058b9792c0866f4d493023e2c5dafd1e27e7d951314a7a7d",
+            "words": 85
+          }
+        ],
+        "candidate_blocks": 38,
+        "date": "2016-10-17",
+        "genre": "public_address",
+        "key": "whitehouse-obama",
+        "publisher": "White House Office of the Press Secretary",
+        "rights_url": "https://www.archives.gov/presidential-records/research/archived-white-house-websites",
+        "sentence_donor": {
+          "codepoints": [
+            85,
+            221
+          ],
+          "publisher_paragraph_index": 36,
+          "text_sha256": "30052583ecf96afd6307ceaecdf733a80f7b14fdc11c1a6ccaa84b46f2b9d803"
+        },
+        "source_bytes": 127245,
+        "source_sha256": "edae5f501f8520dab64ae2a618ff120aaba98d0f17056402f2cede3f307bff6d",
+        "speaker": "Barack Obama",
+        "target_paragraph_index": 2,
+        "target_words": 63,
+        "url": "https://obamawhitehouse.archives.gov/the-press-office/2016/10/17/remarks-president-education",
+        "whole_donor": {
+          "codepoints": [
+            0,
+            323
+          ],
+          "publisher_paragraph_index": 41,
+          "text_sha256": "7b89c0d5345a4283ffcdbf0dbc9c9c3281aaf4356beb9911d9c7b5b26cbcc3c5"
+        }
+      },
+      {
+        "body_blocks": [
+          {
+            "publisher_paragraph_index": 45,
+            "text_sha256": "dac78b691d0fca42efda6b2a45b90b52e4e9337fb2cc1b4d5119e6c470adc40c",
+            "words": 90
+          },
+          {
+            "publisher_paragraph_index": 46,
+            "text_sha256": "b3bd8ad83fe5ae66f75a8fc5971342a81852b52f86702d887b3848e49ec1698d",
+            "words": 61
+          },
+          {
+            "publisher_paragraph_index": 47,
+            "text_sha256": "609377cb40d9e332aa313d1bd8f606c719952a85561f19126981819f42e4ac71",
+            "words": 69
+          },
+          {
+            "publisher_paragraph_index": 48,
+            "text_sha256": "193487fde5c1e486e397117d9e0391dff38d699526a39a9df881a794ef8d12ab",
+            "words": 104
+          }
+        ],
+        "candidate_blocks": 49,
+        "date": "2007-01-30",
+        "genre": "public_address",
+        "key": "whitehouse-bush",
+        "publisher": "White House Office of the Press Secretary",
+        "rights_url": "https://www.archives.gov/presidential-records/research/archived-white-house-websites",
+        "sentence_donor": {
+          "codepoints": [
+            169,
+            398
+          ],
+          "publisher_paragraph_index": 33,
+          "text_sha256": "7874b5a30deee0e06d6686ec4e99975aa489006904e482da0e19d6f9ec666162"
+        },
+        "source_bytes": 44786,
+        "source_sha256": "96ed82a2400b5e2b80bf9551b457f5931d34b77caf06c05021e2860a3c4b032e",
+        "speaker": "George W. Bush",
+        "target_paragraph_index": 1,
+        "target_words": 61,
+        "url": "https://georgewbush-whitehouse.archives.gov/news/releases/2007/01/20070130-7.html",
+        "whole_donor": {
+          "codepoints": [
+            0,
+            321
+          ],
+          "publisher_paragraph_index": 31,
+          "text_sha256": "6a9b1c19ac1514930b12a4fe6d29dfc66864fdbb72af28ee230b0a746c9f5549"
+        }
+      },
+      {
+        "body_blocks": [
+          {
+            "publisher_paragraph_index": 26,
+            "text_sha256": "e3bae65f37fee5d1cf24ab331ae15b223ce59393c8e26d0300ee76e684ae5894",
+            "words": 100
+          },
+          {
+            "publisher_paragraph_index": 27,
+            "text_sha256": "f62345d17957fab86ca85778fa1b67d74cd016dec05133174a07b24c6c9e4b73",
+            "words": 62
+          },
+          {
+            "publisher_paragraph_index": 28,
+            "text_sha256": "a2dd380c70b343b610316a4d4af390dfa30b16681fa9d4f267dc53979459850a",
+            "words": 101
+          },
+          {
+            "publisher_paragraph_index": 29,
+            "text_sha256": "1592694ab24ae2014affe74b0f9c71dc9d547356babcc40e45c7fbabac78e1ae",
+            "words": 81
+          }
+        ],
+        "candidate_blocks": 77,
+        "date": "2019-07-10",
+        "genre": "public_address",
+        "key": "whitehouse-pence",
+        "publisher": "White House Office of the Press Secretary",
+        "rights_url": "https://www.archives.gov/presidential-records/research/archived-white-house-websites",
+        "sentence_donor": {
+          "codepoints": [
+            206,
+            492
+          ],
+          "publisher_paragraph_index": 30,
+          "text_sha256": "756ea2cd7d992435d03c8b1cec597b51b0766d29d4534a48bf83dfd05ef5dc03"
+        },
+        "source_bytes": 99031,
+        "source_sha256": "50e91abde7d5235e8d3c9558cd4936031e77cf899fd050696e6ef3f9c2ae812d",
+        "speaker": "Mike Pence",
+        "target_paragraph_index": 1,
+        "target_words": 62,
+        "url": "https://trumpwhitehouse.archives.gov/briefings-statements/remarks-vice-president-pence-fincantieri-marinette-marine/",
+        "whole_donor": {
+          "codepoints": [
+            0,
+            338
+          ],
+          "publisher_paragraph_index": 34,
+          "text_sha256": "44c9bda18877755387ed3fc8a05fa13c3c1a23705ff20ced45f9d89c6f0b8ade"
+        }
+      }
+    ]
+  },
+  "source_metadata_corrections": [
+    {
+      "field": "date",
+      "frozen_metadata_value": "2019-07-10",
+      "key": "whitehouse-pence",
+      "publisher_date": "2019-11-20",
+      "reason": "The official archived transcript gives the date in its Issued on field. This attribution correction did not alter source bytes, source spans, grouping or scores."
+    }
+  ],
+  "terminal": {
+    "assessed_views": 43,
+    "elapsed_s": 107.662,
+    "forwards": 274,
+    "freeze_sha256": "a82d7cf47a7d49d933dea3e301c3af78ce002e96706c42da26fc641b684af011",
+    "minimum_ram": 6680657920,
+    "original_readout_sha256": "ef07f6c19055504a3975e9ff9f88625e1861d9ee21338d42b9a241c1d0d3e135",
+    "peak_rss": 2313322496,
+    "planned_views": 45,
+    "responses_sha256": "95054176768e2a0cf60dd722018175c020f0e6087bd6627a927c7957124c84b2",
+    "status": "complete"
+  }
+}

@@ -4726,6 +4726,17 @@
               }
             ],
             "title": "Extension"
+          },
+          "paired_check_available": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Paired Check Available"
           }
         },
         "required": [
@@ -4838,6 +4849,16 @@
           "later": {
             "$ref": "#/components/schemas/DraftSource"
           },
+          "paired_check": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DraftPairedCheck"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "schema": {
             "const": "chipmunk.document-revision-comparison/1",
             "title": "Schema",
@@ -4916,6 +4937,95 @@
         "title": "DraftExcerpt",
         "type": "object"
       },
+      "DraftPairedCheck": {
+        "properties": {
+          "authorship_confidence_contribution": {
+            "const": 0,
+            "title": "Authorship Confidence Contribution",
+            "type": "integer"
+          },
+          "change_ids": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Change Ids"
+          },
+          "earlier": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DraftWritingFocus"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "later": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DraftWritingFocus"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "responses": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/DraftWritingResponse"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Responses"
+          },
+          "schema": {
+            "const": "chipmunk.paired-writing-review/1",
+            "title": "Schema",
+            "type": "string"
+          },
+          "scope": {
+            "title": "Scope",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "outside_scope",
+              "unavailable",
+              "no_joint_increase",
+              "joint_increase"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "summary": {
+            "title": "Summary",
+            "type": "string"
+          }
+        },
+        "required": [
+          "schema",
+          "status",
+          "scope",
+          "summary",
+          "authorship_confidence_contribution"
+        ],
+        "title": "DraftPairedCheck",
+        "type": "object"
+      },
       "DraftParagraph": {
         "properties": {
           "body_index": {
@@ -4982,6 +5092,70 @@
           "mime_part"
         ],
         "title": "DraftSource",
+        "type": "object"
+      },
+      "DraftWritingFocus": {
+        "properties": {
+          "context_spans": {
+            "items": {
+              "maxItems": 2,
+              "minItems": 2,
+              "prefixItems": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "integer"
+                }
+              ],
+              "type": "array"
+            },
+            "title": "Context Spans",
+            "type": "array"
+          },
+          "end": {
+            "title": "End",
+            "type": "integer"
+          },
+          "input_sha256": {
+            "title": "Input Sha256",
+            "type": "string"
+          },
+          "start": {
+            "title": "Start",
+            "type": "integer"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "start",
+          "end",
+          "text",
+          "context_spans",
+          "input_sha256"
+        ],
+        "title": "DraftWritingFocus",
+        "type": "object"
+      },
+      "DraftWritingResponse": {
+        "properties": {
+          "earlier": {
+            "title": "Earlier",
+            "type": "number"
+          },
+          "later": {
+            "title": "Later",
+            "type": "number"
+          }
+        },
+        "required": [
+          "earlier",
+          "later"
+        ],
+        "title": "DraftWritingResponse",
         "type": "object"
       },
       "ErrorRate": {
@@ -13836,6 +14010,14 @@
                   "earlier": {
                     "description": "Earlier version. Use matching .eml, .txt or .docx files.",
                     "format": "binary",
+                    "type": "string"
+                  },
+                  "include_paired_check": {
+                    "default": "false",
+                    "enum": [
+                      "true",
+                      "false"
+                    ],
                     "type": "string"
                   },
                   "include_pdf": {

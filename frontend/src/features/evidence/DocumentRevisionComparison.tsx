@@ -32,7 +32,9 @@ function Excerpt({ label, excerpt }: { label: string; excerpt: DraftExcerpt | nu
 }
 
 function DraftResult({ result }: { result: DocumentRevisionResponse }) {
+  const anchorPrefix = useId()
   const { comparison, pdf } = result
+  const paired = comparison.paired_check
   const docx = comparison.format === 'docx'
   const formatLabel = docx ? 'Word body text' : comparison.format === 'plain_text' ? 'Text' : null
   const downloadJson = () => saveBlob(new Blob([JSON.stringify(comparison, null, 2) + '\n'], { type: 'application/json' }),
@@ -53,13 +55,40 @@ function DraftResult({ result }: { result: DocumentRevisionResponse }) {
       </div>
     </div>
     <p className="mt-2 mb-0 text-small text-text-muted">{comparison.scope} {comparison.interpretation}</p>
+    {paired && <section aria-label="Experimental paired writing check" className="mt-4 rounded-md border border-border p-3">
+      <h3 className="m-0 text-small font-medium">Experimental paired writing check</h3>
+      <p className="mt-2 mb-0 text-small">{paired.summary}</p>
+      <p className="mt-1 mb-0 text-caption text-text-muted">{paired.scope}</p>
+      {paired.earlier && paired.later && paired.responses?.length === 2 && <>
+        <p className="mt-2 mb-0 text-caption text-text-muted">Linked wording changes{' '}
+          {paired.change_ids?.map((id, index) => <span key={id}>{index > 0 && ', '}
+            <a className="underline" href={`#${anchorPrefix}-${id}`}>{id}</a>
+          </span>)}
+        </p>
+        <div className="mt-3 grid gap-4 sm:grid-cols-2">
+          <div>
+            <p className="m-0 text-caption font-medium">Earlier sentence [{paired.earlier.start}, {paired.earlier.end})</p>
+            <p className="mt-1 mb-0 whitespace-pre-wrap break-words text-small">{paired.earlier.text}</p>
+          </div>
+          <div>
+            <p className="m-0 text-caption font-medium">Analyzed sentence [{paired.later.start}, {paired.later.end})</p>
+            <p className="mt-1 mb-0 whitespace-pre-wrap break-words text-small">{paired.later.text}</p>
+          </div>
+        </div>
+        <ul aria-label="Uncalibrated writing responses from earlier to analyzed" className="mt-3 mb-0 list-none p-0 text-caption">
+          {paired.responses.map((response, index) => <li key={index}>
+            Check {index + 1} · {response.earlier.toPrecision(4)} → {response.later.toPrecision(4)}
+          </li>)}
+        </ul>
+      </>}
+    </section>}
     {!!comparison.changes.length && <>
       <p className="mt-2 mb-0 text-caption text-text-muted">Highlights mark changed words and punctuation. {docx
         ? 'Word offsets count Unicode code points in the body text. Two line breaks separate included paragraphs. Paragraph ranges start within each paragraph.'
         : 'Offsets count decoded Unicode code points.'} The end of each range is excluded.</p>
       <ol className="mt-3 mb-0 list-none space-y-3 p-0">
         {comparison.changes.map(change => <li key={change.id} className="rounded-md border border-border p-3">
-          <h3 className="m-0 text-small font-medium">{change.id} · {formatLabel ?? labels[change.role]}</h3>
+          <h3 id={`${anchorPrefix}-${change.id}`} tabIndex={-1} className="m-0 text-small font-medium">{change.id} · {formatLabel ?? labels[change.role]}</h3>
           <div className="mt-3 grid gap-4 sm:grid-cols-2">
             <Excerpt label="Earlier draft" excerpt={change.earlier} />
             <Excerpt label="Analyzed version" excerpt={change.later} />
@@ -70,13 +99,16 @@ function DraftResult({ result }: { result: DocumentRevisionResponse }) {
   </div>
 }
 
-function DraftForm({ analysisId, extension }: { analysisId: string; extension: DraftExtension }) {
+function DraftForm({ analysisId, extension, pairedCheckAvailable }: {
+  analysisId: string; extension: DraftExtension; pairedCheckAvailable: boolean
+}) {
   const headingId = useId()
   const inputId = useId()
   const [file, setFile] = useState<File | null>(null)
   const [result, setResult] = useState<DocumentRevisionResponse | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [pending, setPending] = useState(false)
+  const [includePairedCheck, setIncludePairedCheck] = useState(false)
   const active = useRef<AbortController | null>(null)
   useEffect(() => () => active.current?.abort(), [])
 
@@ -89,7 +121,7 @@ function DraftForm({ analysisId, extension }: { analysisId: string; extension: D
     setError(null)
     setResult(null)
     try {
-      const comparison = await compareDraft(analysisId, file, request.signal)
+      const comparison = await compareDraft(analysisId, file, request.signal, pairedCheckAvailable && includePairedCheck)
       if (!request.signal.aborted) setResult(comparison)
     } catch (error) {
       if (!request.signal.aborted) setError(error instanceof Error ? error.message : 'Please try again.')
@@ -119,6 +151,11 @@ function DraftForm({ analysisId, extension }: { analysisId: string; extension: D
           }} />
       </div>
       <Button type="submit" variant="primary" disabled={!file || pending}>{pending ? 'Comparing…' : 'Compare drafts'}</Button>
+      {pairedCheckAvailable && <label className="flex w-full items-center gap-2 text-small text-text-muted">
+        <input type="checkbox" checked={includePairedCheck} disabled={pending}
+          onChange={event => setIncludePairedCheck(event.currentTarget.checked)} />
+        Include experimental paired writing check
+      </label>}
     </form>
     {pending && <p role="status" className="mt-3 mb-0 text-small text-text-muted">Comparing draft text…</p>}
     {error && <p role="alert" className="mt-3 mb-0 text-small text-danger">{error}</p>}
@@ -130,5 +167,5 @@ export default function DocumentRevisionComparison({ analysisId }: { analysisId:
   const availability = useQuery({ queryKey: ['analysis', analysisId, 'document-revision-comparison'],
     queryFn: ({ signal }) => draftAvailability(analysisId, signal), refetchOnMount: 'always', refetchOnWindowFocus: false, retry: false })
   return availability.isFetchedAfterMount && availability.data && !availability.isError
-    ? <DraftForm key={analysisId} analysisId={analysisId} extension={availability.data} /> : null
+    ? <DraftForm key={analysisId} analysisId={analysisId} {...availability.data} /> : null
 }

@@ -10,13 +10,15 @@ const route = '/api/v2/analyses/{aid}/document-revision-comparison'
 
 export async function draftAvailability(analysisId: string, signal: AbortSignal) {
   const result = await unwrap(apiClient.GET(route, { params: { path: { aid: analysisId } }, signal }))
-  return result.available ? result.extension ?? null : null
+  return result.available && result.extension
+    ? { extension: result.extension, pairedCheckAvailable: result.paired_check_available === true } : null
 }
 
-export async function compareDraft(analysisId: string, file: File, signal: AbortSignal): Promise<DocumentRevisionResponse> {
+export async function compareDraft(analysisId: string, file: File, signal: AbortSignal, includePairedCheck = false): Promise<DocumentRevisionResponse> {
   const body = new FormData()
   body.append('earlier', file)
   body.append('include_pdf', 'true')
+  if (includePairedCheck) body.append('include_paired_check', 'true')
   const response = await fetch(route.replace('{aid}', encodeURIComponent(analysisId)), {
     method: 'POST', headers: authHeaders('POST'), body, signal,
   })

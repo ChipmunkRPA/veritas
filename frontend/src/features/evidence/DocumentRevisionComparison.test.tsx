@@ -38,7 +38,7 @@ it('displays the exact server excerpts and Unicode ranges and downloads both rep
       { id: 'C02', role: 'quoted', earlier: null, later: { start: 35, end: 40, text: 'quote', changed_tokens: [[35, 40]] } },
     ],
   }
-  vi.mocked(draftAvailability).mockResolvedValue('.eml')
+  vi.mocked(draftAvailability).mockResolvedValue({ extension: '.eml', pairedCheckAvailable: false })
   vi.mocked(compareDraft).mockResolvedValue({ comparison, pdf: 'JVBERi0xLjQK' })
   show()
   const input = await screen.findByLabelText('Earlier draft')
@@ -46,7 +46,7 @@ it('displays the exact server excerpts and Unicode ranges and downloads both rep
   fireEvent.change(input, { target: { files: [file] } })
   fireEvent.click(screen.getByRole('button', { name: 'Compare drafts' }))
   await screen.findByText('2 changes found')
-  expect(compareDraft).toHaveBeenCalledWith('draft-analysis', file, expect.any(AbortSignal))
+  expect(compareDraft).toHaveBeenCalledWith('draft-analysis', file, expect.any(AbortSignal), false)
   for (const exact of ['[20, 29)', '[20, 33)', 'C01 · Message body', 'C02 · Quoted text']) {
     expect(screen.getByText(exact)).toBeTruthy()
   }
@@ -79,7 +79,7 @@ it('offers Word uploads and shows the server paragraph and body offsets', async 
     later: { start: 20, end: 24, text: 'café', changed_tokens: [[20, 24]],
       paragraphs: [{ paragraph: 2, body_index: 3, start: 1, end: 5 }] } }],
   }
-  vi.mocked(draftAvailability).mockResolvedValue('.docx')
+  vi.mocked(draftAvailability).mockResolvedValue({ extension: '.docx', pairedCheckAvailable: false })
   vi.mocked(compareDraft).mockResolvedValue({ comparison })
   show()
   const input = await screen.findByLabelText('Earlier draft')
@@ -88,8 +88,39 @@ it('offers Word uploads and shows the server paragraph and body offsets', async 
   fireEvent.change(input, { target: { files: [file] } })
   fireEvent.click(screen.getByRole('button', { name: 'Compare drafts' }))
   await screen.findByText('C01 · Word body text')
-  expect(compareDraft).toHaveBeenCalledWith('draft-analysis', file, expect.any(AbortSignal))
+  expect(compareDraft).toHaveBeenCalledWith('draft-analysis', file, expect.any(AbortSignal), false)
   expect(screen.getAllByText('Paragraph 2 [1, 5)')).toHaveLength(2)
   expect(screen.getAllByText('[20, 24)')).toHaveLength(2)
   expect(screen.getByText('café').tagName).toBe('MARK')
+})
+
+it('opts in to the separate paired response and shows the linked sentence locations', async () => {
+  const source = { sha256: '0'.repeat(64), bytes: 100, decoded_text_sha256: '1'.repeat(64), decoded_characters: 100, mime_part: null }
+  const comparison: DraftComparison = {
+    schema: 'chipmunk.document-revision-comparison/1', format: 'plain_text', coordinate_space: 'decoded_source_unicode_codepoint',
+    earlier: source, later: source, scope: 'Words and punctuation.', interpretation: 'Compare the wording.',
+    changes: [{ id: 'C01', role: 'body', earlier: { start: 20, end: 24, text: 'here', changed_tokens: [[20, 24]] },
+      later: { start: 20, end: 25, text: 'there', changed_tokens: [[20, 25]] } }],
+    paired_check: { schema: 'chipmunk.paired-writing-review/1', status: 'joint_increase', scope: 'Zero authorship confidence weight.',
+      summary: 'Both writing checks gave a stronger AI-like response.', authorship_confidence_contribution: 0, change_ids: ['C01'],
+      earlier: { start: 20, end: 25, text: 'Here.', context_spans: [[0, 19], [20, 25], [26, 40]], input_sha256: 'a'.repeat(64) },
+      later: { start: 20, end: 26, text: 'There.', context_spans: [[0, 19], [20, 26], [27, 41]], input_sha256: 'b'.repeat(64) },
+      responses: [{ earlier: .1, later: .4 }, { earlier: .3, later: .6 }] },
+  }
+  vi.mocked(draftAvailability).mockResolvedValue({ extension: '.txt', pairedCheckAvailable: true })
+  vi.mocked(compareDraft).mockResolvedValue({ comparison })
+  show()
+  const input = await screen.findByLabelText('Earlier draft')
+  const option = screen.getByRole('checkbox', { name: 'Include experimental paired writing check' }) as HTMLInputElement
+  expect(option.checked).toBe(false)
+  fireEvent.click(option)
+  const file = new File(['earlier'], 'earlier.txt')
+  fireEvent.change(input, { target: { files: [file] } })
+  fireEvent.click(screen.getByRole('button', { name: 'Compare drafts' }))
+  expect(await screen.findByRole('region', { name: 'Experimental paired writing check' })).toBeTruthy()
+  expect(compareDraft).toHaveBeenCalledWith('draft-analysis', file, expect.any(AbortSignal), true)
+  const change = screen.getByRole('heading', { name: 'C01 · Text' })
+  expect(screen.getByRole('link', { name: 'C01' }).getAttribute('href')).toBe(`#${change.id}`)
+  expect(screen.getByText('Analyzed sentence [20, 26)')).toBeTruthy()
+  expect(screen.getByText(/Check 2 · 0.3000 → 0.6000/)).toBeTruthy()
 })

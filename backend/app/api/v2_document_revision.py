@@ -36,6 +36,7 @@ router = APIRouter(prefix="/api/v2", tags=["evidence"], dependencies=[Depends(ra
 class DocumentRevisionAvailability(BaseModel):
     available: bool
     extension: Literal[".eml", ".txt", ".docx"] | None = None
+    paired_check_available: bool | None = None
 
 
 class DraftSource(BaseModel):
@@ -68,6 +69,31 @@ class DraftChange(BaseModel):
     later: DraftExcerpt | None
 
 
+class DraftWritingFocus(BaseModel):
+    start: int
+    end: int
+    text: str
+    context_spans: list[tuple[int, int]]
+    input_sha256: str
+
+
+class DraftWritingResponse(BaseModel):
+    earlier: float
+    later: float
+
+
+class DraftPairedCheck(BaseModel):
+    schema_name: Literal["chipmunk.paired-writing-review/1"] = Field(alias="schema")
+    status: Literal["outside_scope", "unavailable", "no_joint_increase", "joint_increase"]
+    scope: str
+    summary: str
+    authorship_confidence_contribution: Literal[0]
+    earlier: DraftWritingFocus | None = None
+    later: DraftWritingFocus | None = None
+    change_ids: list[str] | None = None
+    responses: list[DraftWritingResponse] | None = None
+
+
 class DraftComparison(BaseModel):
     schema_name: Literal["chipmunk.document-revision-comparison/1"] = Field(alias="schema")
     format: Literal["email", "plain_text", "docx"]
@@ -77,6 +103,7 @@ class DraftComparison(BaseModel):
     changes: list[DraftChange]
     scope: str
     interpretation: str
+    paired_check: DraftPairedCheck | None = None
 
 
 class DocumentRevisionResponse(BaseModel):
@@ -122,6 +149,14 @@ def _unavailable() -> ProblemError:
     return ProblemError(404, "Earlier-draft comparison unavailable", "A retained, completed, active .eml, .txt or .docx analysis is required.")
 
 
+def _paired_enabled(extension: str | None) -> bool:
+    if extension != ".txt":
+        return False
+    from app.detectors.text.adapters.agreement import enabled as writing_review_enabled
+
+    return writing_review_enabled()
+
+
 @router.get(ROUTE, response_model=DocumentRevisionAvailability, responses=problem_responses(401, 404))
 def availability(aid: str, request: Request):
     original = _original(aid) if _authenticated(request) else None
@@ -134,11 +169,15 @@ def availability(aid: str, request: Request):
                 extension = suffix
         except (OSError, ObjectStoreError):
             pass
-    return JSONResponse({"available": extension is not None, "extension": extension}, headers=NO_STORE)
+    payload = {"available": extension is not None, "extension": extension}
+    if _paired_enabled(extension):
+        payload["paired_check_available"] = True
+    return JSONResponse(payload, headers=NO_STORE)
 
 
-def _compare(aid: str, original: tuple[str, int, str], earlier: bytes, include_pdf: bool) -> JSONResponse:
-    from app.evidence.document_revision import compare
+def _compare(aid: str, original: tuple[str, int, str], earlier: bytes, include_pdf: bool,
+             include_paired_check: bool = False) -> JSONResponse:
+    from app.evidence.document_revision import compare_with_text
 
     sha256, size, extension = original
     try:
@@ -151,13 +190,23 @@ def _compare(aid: str, original: tuple[str, int, str], earlier: bytes, include_p
     if len(later) != size or hashlib.sha256(later).hexdigest() != sha256:
         raise ProblemError(409, "Original integrity check failed", "The retained document no longer matches its recorded hash and size.")
     try:
-        comparison = compare(earlier, later, extension)
+        comparison, old_text, new_text = compare_with_text(earlier, later, extension)
     except (UnicodeError, LookupError, RecursionError):
         raise ProblemError(422, "Could not compare drafts", f"Use readable {SUPPORTED_DRAFTS}.") from None
     except ValueError as error:
         raise ProblemError(422, "Could not compare drafts", str(error)) from None
     except OSError:
         raise ProblemError(500, "Earlier-draft comparison unavailable", "The local service could not stage the comparison.") from None
+    if include_paired_check and _paired_enabled(extension):
+        from app.evidence import document_revision_writing as paired
+
+        candidate = None
+        try:
+            candidate = paired.paired_input(comparison, old_text, new_text)
+            comparison["paired_check"] = paired.result(candidate, paired.score(candidate) if candidate is not None else None)
+        except Exception as error:
+            log.warning("document_revision.paired_check_unavailable", exception=type(error).__name__)
+            comparison["paired_check"] = paired.result(candidate)
     payload: dict = {"comparison": comparison}
     if include_pdf:
         from app.reports.document_revision_pdf import render
@@ -178,6 +227,7 @@ def _compare(aid: str, original: tuple[str, int, str], earlier: bytes, include_p
         "type": "object", "required": ["earlier"], "properties": {
             "earlier": {"type": "string", "format": "binary", "description": f"Earlier version. Use {SUPPORTED_DRAFTS}."},
             "include_pdf": {"type": "string", "enum": ["true", "false"], "default": "false"},
+            "include_paired_check": {"type": "string", "enum": ["true", "false"], "default": "false"},
         },
     }}}}},
 )
@@ -190,10 +240,14 @@ async def comparison(aid: str, request: Request):
     if not _slot.acquire(blocking=False):
         raise ProblemError(429, "Draft comparison busy", "Try again after the active draft comparison finishes.")
     try:
-        async with request.form(max_files=1, max_fields=1, max_part_size=1024) as form:
+        async with request.form(max_files=1, max_fields=2, max_part_size=1024) as form:
             earlier = form.get("earlier")
             include_pdf = form.get("include_pdf", "false")
-            if not isinstance(earlier, UploadFile) or include_pdf not in ("true", "false"):
+            include_paired = form.get("include_paired_check", "false")
+            if (not isinstance(earlier, UploadFile) or include_pdf not in ("true", "false")
+                    or include_paired not in ("true", "false")
+                    or set(form) - {"earlier", "include_pdf", "include_paired_check"}
+                    or any(len(form.getlist(key)) > 1 for key in form)):
                 raise ProblemError(422, "Earlier draft required", "Upload a single earlier draft to compare.")
             if Path(earlier.filename or "").suffix.lower() != original[2]:
                 raise ProblemError(422, "Draft formats differ", f"Choose an earlier {original[2]} file to match the retained document.")
@@ -201,6 +255,6 @@ async def comparison(aid: str, request: Request):
             data = await earlier.read(limit + 1)
             if len(data) > limit:
                 raise ProblemError(413, "Draft exceeds the limit", "The earlier draft is larger than the allowed upload size.")
-        return await run_in_threadpool(_compare, aid, original, data, include_pdf == "true")
+        return await run_in_threadpool(_compare, aid, original, data, include_pdf == "true", include_paired == "true")
     finally:
         _slot.release()

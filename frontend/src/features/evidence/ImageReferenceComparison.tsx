@@ -63,7 +63,8 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
   const { comparison } = result
   const { reference, submitted, regions, mask, alignment } = comparison
   const comparable = comparison.status === 'comparable'
-  const resized = comparable && comparison.schema === 'chipmunk.image-reference-comparison/3'
+  const cropped = comparison.schema === 'chipmunk.image-reference-comparison/4' ? comparison.reference_crop_bounds : undefined
+  const resized = comparable && (Boolean(cropped) || comparison.schema === 'chipmunk.image-reference-comparison/3')
   const reason = Object.prototype.hasOwnProperty.call(unassessed, comparison.status)
     ? unassessed[comparison.status] : 'The selected copies could not be compared reliably.'
   const pdf = comparisonPdfData(result)
@@ -93,7 +94,11 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
           No localized differences met the comparison criteria in the measured area. Small changes may still be present.
         </p>
       : <p className="mt-2 mb-0 text-small text-text-muted">{reason}</p>}
-    {resized && <p className="mt-3 mb-0 text-small text-text-muted">
+    {comparable && cropped && <p className="mt-3 mb-0 text-small text-text-muted">
+      The comparison matched the submitted image to an area of the earlier copy at <NativeArea area={cropped} />.
+      {' '}Differences were measured after resizing that area. Pixels outside the earlier area were unassessed.
+    </p>}
+    {resized && !cropped && <p className="mt-3 mb-0 text-small text-text-muted">
       The comparison found matching framing at different pixel dimensions. Differences were measured on the submitted image after resizing the earlier copy. The crops show pixels from each original file.
     </p>}
     {(alignment || (comparable && regions.length > 0)) && <p className="mt-3 mb-0 text-caption text-text-muted">

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pymupdf
 
-from app.evidence.image_reference import RESIZE_SCHEMA
+from app.evidence.image_reference import CROP_RESIZE_SCHEMA, RESIZE_SCHEMA
 
 PAGE_WIDTH = 612
 PAGE_HEIGHT = 792
@@ -69,10 +69,16 @@ def _summary(document, comparison, assets):
         _text(page, MARGIN, 302, f"Earlier copy overlap: {_area(alignment['reference_overlap'])}", size=10)
         _text(page, MARGIN, 318, f"Submitted image overlap: {_area(alignment['submitted_overlap'])}", size=10)
         _text(page, MARGIN, 334, "Areas outside these bounds were unassessed.", size=10, color=MUTED)
-    if comparison["schema"] == RESIZE_SCHEMA and comparison["status"] == "comparable":
-        _text(page, MARGIN, 302, "Same framing at different pixel dimensions", size=10, font="hebo")
-        _text(page, MARGIN, 318, "Differences were measured on the submitted pixel grid after resizing the earlier copy.", size=10)
-        _text(page, MARGIN, 334, "The displayed crops come directly from their respective original files.", size=10, color=MUTED)
+    if comparison["schema"] in (RESIZE_SCHEMA, CROP_RESIZE_SCHEMA) and comparison["status"] == "comparable":
+        crop = comparison.get("reference_crop_bounds")
+        if crop:
+            _text(page, MARGIN, 302, f"Earlier copy area used: {_area(crop)}", size=10, font="hebo")
+            _text(page, MARGIN, 318, "The earlier area was resized to the submitted pixel grid for comparison.", size=10)
+            _text(page, MARGIN, 334, "Pixels outside the earlier area were unassessed.", size=10, color=MUTED)
+        else:
+            _text(page, MARGIN, 302, "Same framing at different pixel dimensions", size=10, font="hebo")
+            _text(page, MARGIN, 318, "Differences were measured on the submitted pixel grid after resizing the earlier copy.", size=10)
+            _text(page, MARGIN, 334, "The displayed crops come directly from their respective original files.", size=10, color=MUTED)
         if regions:
             _text(page, MARGIN, 350, "Retained pixels were flagged by at least two tested resizes.", size=10, color=MUTED)
     if mask := comparison.get("mask"):

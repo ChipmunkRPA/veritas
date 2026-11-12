@@ -22,6 +22,7 @@ MAX_JSON_BYTES = 4 * ((MAX_PNG_BYTES + 2) // 3) + 1024 ** 2
 MAX_PIXELS = 4_000_000
 MAX_REGIONS = 5
 RESIZE_SCHEMA = "chipmunk.image-reference-comparison/3"
+CROP_RESIZE_SCHEMA = "chipmunk.image-reference-comparison/4"
 
 
 def _require(condition, reason):
@@ -144,25 +145,35 @@ def _geometry(comparison, reference, submitted):
 
 
 def _resize_replay(comparison, ref, sub, carrier):
-    """Recompute v3 directly from the two sources, separate from evidence generation."""
+    """Recompute resized comparisons directly from the two sources."""
     try:
         import numpy as np
         from cv2 import error as OpenCVError
 
-        from app.detectors.image import reference_alignment, reference_resize
+        from app.detectors.image import reference_alignment, reference_crop_resize, reference_resize
+        from app.evidence.image_reference import accepted_crop_resize, supported_crop_resize
     except ImportError as error:
         raise ValueError("Use the backend Python environment and run this reviewer as a module for resize exports") from error
-    _require(comparison["coordinate_space"] == "exif-oriented-submitted" and ref.size != sub.size
+    cropped = comparison["schema"] == CROP_RESIZE_SCHEMA
+    _require(comparison["coordinate_space"] == "exif-oriented-submitted" and (cropped or ref.size != sub.size)
              and "alignment" not in comparison, "Resize comparison has unexpected source dimensions or coordinates")
     earlier, submitted = np.asarray(ref), np.asarray(sub)
     try:
         aligned, _ = reference_alignment.compare(earlier, submitted, carrier)
         _require(aligned["status"] == "integer_alignment_unresolved", "Resize comparison must follow the integer alignment check")
-        expected, mask = reference_resize.compare(earlier, submitted, carrier)
+        if cropped:
+            _require(supported_crop_resize(carrier, ref.size), "Cropped resize uses an unsupported submitted delivery or dimensions")
+            if ref.size != sub.size:
+                same_framing, _ = reference_resize.compare(earlier, submitted, carrier)
+                _require(same_framing["status"] != "comparable", "Cropped resize must follow the same-framing check")
+            expected, mask = reference_crop_resize.compare(earlier, submitted, carrier)
+            _require(accepted_crop_resize(expected, sub.size), "Cropped resize did not establish an exact earlier area in scope")
+        else:
+            expected, mask = reference_resize.compare(earlier, submitted, carrier)
     except OpenCVError as error:
         raise ValueError("The image comparison could not be recomputed") from error
     measured_fields = {"status", "regions", "additional_regions", "supported_resize_kernels", "framing_check",
-                       "submitted_over_reference_xy"}
+                       "submitted_over_reference_xy", "reference_crop_bounds"}
     measured = {field: value for field, value in comparison.items() if field in measured_fields}
     measured["regions"] = [{key: value for key, value in region.items()
                             if key not in {"reference_crop", "submitted_crop", "submitted_overlay"}}
@@ -172,11 +183,12 @@ def _resize_replay(comparison, ref, sub, carrier):
     return mask
 
 
-def _resize_bounds(box, reference, submitted):
+def _resize_bounds(box, reference, submitted, crop=None):
     left, top, right, bottom = box
-    x_scale = Fraction(reference.width, submitted.width)
-    y_scale = Fraction(reference.height, submitted.height)
-    return floor(left * x_scale), floor(top * y_scale), ceil(right * x_scale), ceil(bottom * y_scale)
+    x, y, w, h = (crop[key] for key in ("x", "y", "w", "h")) if crop else (0, 0, reference.width, reference.height)
+    x_scale = Fraction(w, submitted.width)
+    y_scale = Fraction(h, submitted.height)
+    return x + floor(left * x_scale), y + floor(top * y_scale), x + ceil(right * x_scale), y + ceil(bottom * y_scale)
 
 
 def _image(stack, blobs, asset, filename, mode, dimensions):
@@ -209,7 +221,8 @@ def review(export, earlier, submitted):
         ref = _source(stack, _read(earlier, MAX_SOURCE_BYTES), comparison["reference"])
         submitted_bytes = _read(submitted, MAX_SOURCE_BYTES)
         sub = _source(stack, submitted_bytes, comparison["submitted"])
-        resized = comparison["schema"] == RESIZE_SCHEMA
+        resized = comparison["schema"] in (RESIZE_SCHEMA, CROP_RESIZE_SCHEMA)
+        crop = comparison.get("reference_crop_bounds") if comparison["schema"] == CROP_RESIZE_SCHEMA else None
         if resized:
             carrier = stack.enter_context(Image.open(io.BytesIO(submitted_bytes), formats=["PNG", "JPEG"]))
             expected_mask = _resize_replay(comparison, ref, sub, carrier)
@@ -232,7 +245,7 @@ def review(export, earlier, submitted):
             box = _bounds(region, sub.size)
             _require(_contains(overlap, box), "Region extends outside the recorded overlap")
             earlier_box = _bounds(region.get("reference_region", region), ref.size)
-            expected_box = _resize_bounds(box, ref, sub) if resized else _translation(box, dx, dy)
+            expected_box = _resize_bounds(box, ref, sub, crop) if resized else _translation(box, dx, dy)
             _require(earlier_box == expected_box, "Region coordinates conflict with the source mapping")
             width, height = box[2] - box[0], box[3] - box[1]
             count = region["selected_pixels"]

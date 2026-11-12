@@ -619,12 +619,13 @@ orientation. It checks the overlap against the recorded integer offset,
 compares both decoded crops with the corresponding source pixels, and checks
 the embedded PNG hashes and binary mask bounds and pixel totals. Where the export
 includes an amber difference overlay, the reviewer checks every pixel against the
-full mask sliced at the submitted crop's coordinates. For the third
-schema, the reviewer reruns the resize comparison using the two source files
+full mask sliced at the submitted crop's coordinates. For the two resize
+schemas, the reviewer reruns the resize comparison using the two source files
 and checks the recomputed framing, regions, and entire mask. It independently
 maps the submitted region back to the exact earlier-copy crop using rational
-coordinates. The reviewer reports empty comparable and unassessed results
-separately. A mismatch exits with status 1. [Resize evaluation](image-reference-resize-transfer-2026-11-11.md)
+coordinates. The crop-and-resize schema also verifies the earlier area's exact
+offset and size. The reviewer reports empty comparable and unassessed results
+separately. A mismatch exits with status 1. [Resize evaluation](image-reference-resize-transfer-2026-11-11.md) · [Crop-and-resize evaluation](image-reference-crop-resize-transfer-2026-11-11.md)
 
 The comparison JSON is a standalone, unsigned export. This replay checks its
 geometry and source binding. The resize replay also checks the algorithm's
@@ -652,7 +653,10 @@ Use matching `.eml`, `.txt` or `.docx` files. The output gives the verified rang
 counts by role. Word replay also checks the top-level body paragraph numbers,
 XML body-child positions and paragraph-local character ranges. The comparison
 locates differences and leaves revision order and authorship to other evidence.
-This replay uses no model or remote service.
+When a plain-text export includes the experimental paired check, replay also
+verifies the exact source spans, both input hashes and the arithmetic of the
+saved responses. This offline replay verifies saved values against the stated
+rule. Reproducing the responses themselves requires a separate inference run.
 
 ### Replay document evidence against the original
 

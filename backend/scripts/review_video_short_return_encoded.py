@@ -38,11 +38,11 @@ def overlap(a, b):
     return max(0, common) / (max(a[1], b[1]) - min(a[0], b[0]))
 
 
-def verify_case(path, qualified, scored, directory):
+def verify_case(path, qualified, scored, directory, *, native=NATIVE):
     require(digest(path) == scored["input_sha256"] == qualified["sha256"], "Encoded input differs")
     table = probe_frames(path, timeout_s=30)
     require((table.width, table.height) == (640, 360) and not (table.truncated or table.rotation or table.interpolated)
-            and [(p - table.pts[0]) * table.tb for p in table.pts] == NATIVE
+            and [(p - table.pts[0]) * table.tb for p in table.pts] == native
             and table.to_json() == qualified["frame_table"], "Encoded clock or picture grid differs")
     packet = scored["packet"]
     assets = {(item["role"], item["asset"]): item for item in scored["images"]}
@@ -57,7 +57,7 @@ def verify_case(path, qualified, scored, directory):
         candidate = exact_range(record, table)
         require(0 < candidate[1] - candidate[0] < Fraction(1, 2) and record["response"] > POINT
                 and exact_range(packet["window"], table) == candidate, "Supplemental range exceeds its frozen limit")
-        times = [NATIVE[record["anchors"][role]] for role in ROLES]
+        times = [native[record["anchors"][role]] for role in ROLES]
         require(times[0] < candidate[0] <= times[1] < candidate[1] <= times[2], "Picture roles disagree with range")
     else:
         require(not assets, "Frame artifacts have no committed range")
@@ -65,7 +65,7 @@ def verify_case(path, qualified, scored, directory):
 
     seen = 0
     matched_images = 0
-    for frame in decode_frames(path, table, list(range(150)), timeout_s=60):
+    for frame in decode_frames(path, table, list(range(len(native))), timeout_s=60):
         i = frame.index
         raw = hashlib.sha256(frame.rgb).hexdigest()
         require(frame.pts_verified and i == seen and raw == qualified["rgb_sha256"][i],
@@ -93,7 +93,7 @@ def verify_case(path, qualified, scored, directory):
                 require(rgb.size == (expected.shape[1], expected.shape[0])
                         and rgb.tobytes() == expected.tobytes(), "Artifact pixels differ from the actual input")
             matched_images += 1
-    require(seen == 150 and matched_images == len(assets), "Incomplete independent decode")
+    require(seen == len(native) and matched_images == len(assets), "Incomplete independent decode")
     current = exact_range(scored["incumbent"], table)
     require(candidate is None or current is None or overlap(candidate, current) < Fraction(1, 2),
             "Supplemental range duplicates the incumbent")

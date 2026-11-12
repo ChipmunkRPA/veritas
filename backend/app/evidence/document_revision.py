@@ -190,6 +190,12 @@ def _excerpt(text: str, extent: list[int] | None, changed_tokens: list[list[int]
 
 
 def compare(earlier: bytes, later: bytes, extension: str) -> dict:
+    result, _, _ = compare_with_text(earlier, later, extension)
+    return result
+
+
+def compare_with_text(earlier: bytes, later: bytes, extension: str) -> tuple[dict, str, str]:
+    """Return the comparison and the same ephemeral decoded text used for its offsets."""
     if extension not in FORMATS:
         raise ValueError(f"Choose two {SUPPORTED_DRAFTS}.")
     if any(not 0 < len(item) <= MAX_BYTES for item in (earlier, later)):
@@ -204,7 +210,8 @@ def compare(earlier: bytes, later: bytes, extension: str) -> dict:
             before = _excerpt(old_text, change["earlier"], change["earlier_changed_tokens"], old_paragraphs)
             after = _excerpt(new_text, change["later"], change["later_changed_tokens"], new_paragraphs)
             changes.append({"id": f"C{len(changes) + 1:02d}", "role": role, "earlier": before, "later": after})
-    return {"schema": SCHEMA, "format": FORMATS[extension],
+    result = {"schema": SCHEMA, "format": FORMATS[extension],
             "coordinate_space": "docx_body_unicode_codepoint" if extension == ".docx" else "decoded_source_unicode_codepoint",
             "earlier": old_source, "later": new_source, "changes": changes,
             "scope": DOCX_SCOPE if extension == ".docx" else SCOPE, "interpretation": INTERPRETATION}
+    return result, old_text, new_text

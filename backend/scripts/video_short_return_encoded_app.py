@@ -99,9 +99,9 @@ def checkout(client, stub, path):
 
 
 def read_result(aid, expected):
-    from sqlalchemy import select
     from app.storage.db import Analysis, AnalysisStage, Artefact, get_session
     from app.storage.objects import default_store
+    from sqlalchemy import select
     with get_session() as db:
         analysis = db.get(Analysis, aid)
         assert analysis.sha256 == expected and analysis.profile == "full"
@@ -132,10 +132,11 @@ def proof_files(client, packet, folder):
 
 
 def encode_report(client, aid, source, evidence, images, folder):
-    import pymupdf
-    from PIL import Image
     from zipfile import ZipFile
+
+    import pymupdf
     from app.reports.verify import verify_package
+    from PIL import Image
     from scripts.verify_multimedia_exports import scan
     report = body(client.post(f"/api/v2/analyses/{aid}/reports", json={"profile": "standard"}))
     report = wait(client, f"/api/v2/reports/{report['id']}", timeout=120)
@@ -181,14 +182,13 @@ def configure(output, root):
         MPLCONFIGDIR=str(output / "matplotlib"))
 
 
-def run(folder, replay_names):
+def run(folder, replay_names, codec_transfer=False):
     root = Path(__file__).resolve().parents[2]
     output = folder / ("serving" if replay_names else "scoring")
     configure(output, root)
 
     import cv2
     import torch
-    from fastapi.testclient import TestClient
     from app.api import auth
     from app.billing import service
     from app.core.config import settings
@@ -196,8 +196,13 @@ def run(folder, replay_names):
     from app.engine.registry import get_registry
     from app.main import app
     from app.storage.db import get_session
-    from scripts import video_short_return_encoded_transfer as study
+    from fastapi.testclient import TestClient
     from scripts.verify_multimedia_exports import scan
+
+    if codec_transfer:
+        from scripts import video_short_return_codec_transfer as study
+    else:
+        from scripts import video_short_return_encoded_transfer as study
 
     cv2.setNumThreads(2)
     torch.set_num_threads(2)
@@ -205,15 +210,18 @@ def run(folder, replay_names):
     lock = study.common.read(folder / "freeze.json")
     manifest = study.common.read(folder / "media.json")
     assert manifest["freeze_sha256"] == study.common.digest(folder / "freeze.json")
-    assert (lock["delivery_size"], lock["delivery_rate_hz"]) == ([640, 360], 25)
+    assert (lock["delivery_size"], lock["delivery_rate_hz"]) == (list(study.DIMENSIONS), study.RATE)
+    step = Fraction(1, study.RATE)
     if replay_names:
-        assert study.DIMENSIONS in face_return.PROFILE_STEPS
+        assert step in face_return.PROFILE_STEPS.get(study.DIMENSIONS, ())
         roster = [row for row in manifest["media"] if row["file"] in replay_names]
-        assert {row["file"] for row in roster} == set(replay_names) and sum(row["truth_frames"] is not None for row in roster) == 1
+        assert {row["file"] for row in roster} == set(replay_names)
+        assert sum(row["truth_frames"] is not None for row in roster) == (2 if codec_transfer else 1)
     else:
         study.frozen(folder)
-        step = (Fraction(1, 25),)
-        assert face_return.PROFILE_STEPS.setdefault(study.DIMENSIONS, step) == step
+        steps = face_return.PROFILE_STEPS.get(study.DIMENSIONS, ())
+        if step not in steps:
+            face_return.PROFILE_STEPS[study.DIMENSIONS] = (*steps, step)
         roster = manifest["media"]
     registry = get_registry()
     enabled = registry.enabled
@@ -277,8 +285,9 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("folder", type=Path)
     parser.add_argument("--replay", type=str, action="append", default=[])
+    parser.add_argument("--codec-transfer", action="store_true")
     args = parser.parse_args()
-    run(args.folder.resolve(), args.replay)
+    run(args.folder.resolve(), args.replay, args.codec_transfer)
 
 
 if __name__ == "__main__":

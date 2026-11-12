@@ -19,6 +19,7 @@ p { margin: 4pt 0; }
 .coordinates { font: 8.5pt/1.25 monospace; color: #526658; break-after: avoid; }
 .excerpt { white-space: pre-wrap; overflow-wrap: anywhere; }
 mark { color: inherit; background: #e3e9e0; text-decoration: underline; text-decoration-color: #285f50; }
+a { color: #285f50; }
 """
 LABELS = {"body": "Message body", "quoted": "Quoted text", "signature": "Signature"}
 
@@ -44,13 +45,32 @@ def _side(label, excerpt):
             f'{paragraph_ranges}<p class="excerpt">{value}</p></div>')
 
 
+def _paired(review: dict | None) -> str:
+    if review is None:
+        return ""
+    output = [f'<section><h2>Experimental paired writing check</h2><p>{escape(review["summary"])}</p>'
+              f'<p>{escape(review["scope"])}</p>']
+    if review.get("responses"):
+        links = ", ".join(f'<a href="#draft-change-{escape(value)}">{escape(value)}</a>' for value in review["change_ids"])
+        output.append(f'<p class="coordinates">Linked wording changes {links}</p>')
+        for side, label in (("earlier", "Earlier sentence"), ("later", "Analyzed sentence")):
+            row = review[side]
+            output.append(f'<div class="side"><p class="coordinates">{label} [{row["start"]}, {row["end"]})</p>'
+                          f'<p class="excerpt">{escape(row["text"])}</p></div>')
+        output.append("<p>Uncalibrated responses from the earlier and analyzed versions</p>")
+        output.extend(f'<p>Check {i} · {row["earlier"]:.4g} → {row["later"]:.4g}</p>'
+                      for i, row in enumerate(review["responses"], 1))
+    return "".join(output) + "</section>"
+
+
 def render(comparison: dict) -> bytes:
     changes = []
     docx = comparison["format"] == "docx"
     format_label = {"plain_text": "Text", "docx": "Word body text"}.get(comparison["format"])
     for change in comparison["changes"]:
         label = format_label or LABELS[change["role"]]
-        changes.append(f'<section><h2>{escape(change["id"])} · {label}</h2>'
+        anchor = escape(change["id"])
+        changes.append(f'<section><h2 id="draft-change-{anchor}">{anchor} · {label}</h2>'
                        f'{_side("Earlier draft", change["earlier"])}{_side("Analyzed version", change["later"])}</section>')
     sources = []
     for key, label in (("earlier", "Earlier draft"), ("later", "Analyzed version")):
@@ -64,7 +84,8 @@ def render(comparison: dict) -> bytes:
 <p class="brand">CHIPMUNK VERIFY</p><h1>Earlier-draft comparison</h1>
 <p>{escape(comparison['scope'])}</p><p>{escape(comparison['interpretation'])}</p>
 <p>Highlights mark changed words and punctuation. {positions} Each range includes its start and excludes its end.</p>
-<div class="sources">{''.join(sources)}</div>{''.join(changes) or '<p>No word or punctuation changes found.</p>'}
+<div class="sources">{''.join(sources)}</div>{_paired(comparison.get('paired_check'))}
+{''.join(changes) or '<p>No word or punctuation changes found.</p>'}
 </body></html>'''
 
     def no_external_resources(_url):

@@ -122,8 +122,6 @@ class WritingAgreementReview(Detector):
         return (ActivationUse(MODEL, BATCH, "token window", "At most 512 tokens per input including specials"),)
 
     def run(self, ctx: RunContext) -> DetectorResult:
-        import torch
-
         from app.detectors.text.extract import text_hash
 
         document = ctx.outputs.document
@@ -134,17 +132,7 @@ class WritingAgreementReview(Detector):
             text_hash(value) != window["input_sha256"] for value, window in zip(inputs, windows, strict=True)
         ):
             raise ValueError("Writing review input differs from the recorded context")
-        tokenizer, model, temperature = ctx.lease.get(MODEL).obj
-
-        def evaluate(encoded):
-            logits = model(encoded["input_ids"], attention_mask=encoded["attention_mask"]).logits.float()
-            if logits.shape[-1] != 2 or not torch.isfinite(logits).all():
-                raise ValueError("Invalid writing review response")
-            return (logits / temperature).softmax(dim=-1)[:, 1]
-
-        with torch.inference_mode():
-            scores, coverage = classify_complete(inputs, tokenizer, ctx.device, evaluate, max_len=512, batch=BATCH,
-                                                 check=ctx.deadline.check)
+        scores, coverage = score_inputs(inputs, ctx.lease.get(MODEL).obj, ctx.device, check=ctx.deadline.check)
         measured = {
             window["unit_ref"]: {"input_sha256": window["input_sha256"], "response_exact_hex": float(score).hex(),
                                  "tokens": proof["tokens"]}
@@ -152,3 +140,18 @@ class WritingAgreementReview(Detector):
             if document_matched_context.one_complete_window(proof)
         }
         return DetectorResult(status="ok", details={"checkpoint_responses": measured})
+
+
+def score_inputs(inputs, model_parts, device, *, check):
+    import torch
+
+    tokenizer, model, temperature = model_parts
+
+    def evaluate(encoded):
+        logits = model(encoded["input_ids"], attention_mask=encoded["attention_mask"]).logits.float()
+        if logits.shape[-1] != 2 or not torch.isfinite(logits).all():
+            raise ValueError("Invalid writing review response")
+        return (logits / temperature).softmax(dim=-1)[:, 1]
+
+    with torch.inference_mode():
+        return classify_complete(inputs, tokenizer, device, evaluate, max_len=512, batch=BATCH, check=check)

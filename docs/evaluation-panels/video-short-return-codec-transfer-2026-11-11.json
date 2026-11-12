@@ -1,0 +1,234 @@
+{
+  "all_codecs_advance": false,
+  "by_codec": {
+    "av1": {
+      "added_correct_source_groups": 0,
+      "counts": {
+        "camera": {
+          "added_ranges": 0,
+          "assessed": 5,
+          "incumbent_ranges": 0,
+          "views": 6
+        },
+        "hard_cut": {
+          "added_ranges": 0,
+          "assessed": 2,
+          "incumbent_ranges": 1,
+          "views": 2
+        },
+        "matched": {
+          "added_ranges": 0,
+          "assessed": 9,
+          "incumbent_ranges": 3,
+          "views": 9
+        },
+        "swap": {
+          "added_misplaced": 0,
+          "added_ranges": 5,
+          "assessed": 6,
+          "combined_correct": 6,
+          "incumbent_correct": 6,
+          "incumbent_ranges": 6,
+          "views": 6
+        }
+      },
+      "coverage": {
+        "ordinary": "14/15",
+        "swaps": "1"
+      },
+      "maximum_added_edge_error_ms": null,
+      "median_addition_iou": null,
+      "pilot_advances": false,
+      "retrospective_precision_on_shared_correct_cases": {
+        "improved": 2,
+        "median_iou_change": -0.01680672268907563,
+        "pairs": 5,
+        "worsened": 3
+      }
+    },
+    "hevc": {
+      "added_correct_source_groups": 0,
+      "counts": {
+        "camera": {
+          "added_ranges": 0,
+          "assessed": 5,
+          "incumbent_ranges": 0,
+          "views": 6
+        },
+        "hard_cut": {
+          "added_ranges": 0,
+          "assessed": 2,
+          "incumbent_ranges": 1,
+          "views": 2
+        },
+        "matched": {
+          "added_ranges": 0,
+          "assessed": 9,
+          "incumbent_ranges": 3,
+          "views": 9
+        },
+        "swap": {
+          "added_misplaced": 0,
+          "added_ranges": 3,
+          "assessed": 6,
+          "combined_correct": 6,
+          "incumbent_correct": 6,
+          "incumbent_ranges": 6,
+          "views": 6
+        }
+      },
+      "coverage": {
+        "ordinary": "14/15",
+        "swaps": "1"
+      },
+      "maximum_added_edge_error_ms": null,
+      "median_addition_iou": null,
+      "pilot_advances": false,
+      "retrospective_precision_on_shared_correct_cases": {
+        "improved": 0,
+        "median_iou_change": -0.01680672268907563,
+        "pairs": 3,
+        "worsened": 3
+      }
+    }
+  },
+  "camera_originals": {
+    "maximum_relative_timestamp_movement_ms": 2.3333333333333335,
+    "original_pictures_verified": 382,
+    "source_groups": 6
+  },
+  "delivered_pictures_replayed": 6884,
+  "experimental_report_proof": {
+    "all_codecs_advance": null,
+    "by_codec": {
+      "av1": {
+        "added_correct_source_groups": 0,
+        "counts": {
+          "camera": {
+            "added_ranges": 0,
+            "assessed": 1,
+            "incumbent_ranges": 0,
+            "views": 1
+          },
+          "hard_cut": {},
+          "matched": {},
+          "swap": {
+            "added_misplaced": 0,
+            "added_ranges": 1,
+            "assessed": 1,
+            "combined_correct": 1,
+            "incumbent_correct": 1,
+            "incumbent_ranges": 1,
+            "views": 1
+          }
+        },
+        "coverage": {},
+        "maximum_added_edge_error_ms": null,
+        "median_addition_iou": null,
+        "pilot_advances": null,
+        "retrospective_precision_on_shared_correct_cases": {
+          "improved": 0,
+          "median_iou_change": -0.01680672268907563,
+          "pairs": 1,
+          "worsened": 1
+        }
+      },
+      "hevc": {
+        "added_correct_source_groups": 0,
+        "counts": {
+          "camera": {
+            "added_ranges": 0,
+            "assessed": 1,
+            "incumbent_ranges": 0,
+            "views": 1
+          },
+          "hard_cut": {},
+          "matched": {},
+          "swap": {
+            "added_misplaced": 0,
+            "added_ranges": 1,
+            "assessed": 1,
+            "combined_correct": 1,
+            "incumbent_correct": 1,
+            "incumbent_ranges": 1,
+            "views": 1
+          }
+        },
+        "coverage": {},
+        "maximum_added_edge_error_ms": null,
+        "median_addition_iou": null,
+        "pilot_advances": null,
+        "retrospective_precision_on_shared_correct_cases": {
+          "improved": 0,
+          "median_iou_change": -0.01680672268907563,
+          "pairs": 1,
+          "worsened": 1
+        }
+      }
+    },
+    "camera_originals": {
+      "maximum_relative_timestamp_movement_ms": 2.3333333333333335,
+      "original_pictures_verified": 382,
+      "source_groups": 6
+    },
+    "delivered_pictures_replayed": 482,
+    "frame_and_crop_pngs_replayed": 12,
+    "freeze_sha256": "8aff87302697aef1431e9c8c7079744cf19d9009a060ea1c16d82f50fbff4251",
+    "gate": "For each codec, add at least three correct intervals across two swap source groups, assess at least 80% of swaps and ordinary controls, and add at most one false range on combined matched/camera controls and none on hard cuts.",
+    "journal_sha256": "63c9684581b80c93c904f03e798f038091dfb59d72fb7af647cfd933b46a63dd",
+    "media_sha256": "c3fbcdbef1bd912b7d32ba3f29d7fef15df234a5b26bab6e46a03235360388d7",
+    "off_on_decision_and_incumbent_parity": true,
+    "paid_stub_jobs": 8,
+    "pdf_contains_all_measured_frames_and_crops": true,
+    "retained_json_matches_evidence_api": true,
+    "schema": "chipmunk.video-short-return-codec-audit/1",
+    "signed_original_source_replay": true,
+    "swap_examples": {
+      "av1": {
+        "iou": 0.5714285714285714,
+        "range_seconds": [
+          3.1333333333333333,
+          3.5
+        ],
+        "truth_seconds": [
+          3.033333333333333,
+          3.4
+        ]
+      },
+      "hevc": {
+        "iou": 0.5714285714285714,
+        "range_seconds": [
+          3.1333333333333333,
+          3.5
+        ],
+        "truth_seconds": [
+          3.033333333333333,
+          3.4
+        ]
+      }
+    },
+    "views": 4
+  },
+  "frame_and_crop_pngs_replayed": 48,
+  "freeze_sha256": "8aff87302697aef1431e9c8c7079744cf19d9009a060ea1c16d82f50fbff4251",
+  "gate": "For each codec, add at least three correct intervals across two swap source groups, assess at least 80% of swaps and ordinary controls, and add at most one false range on combined matched/camera controls and none on hard cuts.",
+  "journal_sha256": "2d74cc2624dfa7012d96fbce27bececf2a4294d4b3e3248eea35f74dccccc673",
+  "media_sha256": "c3fbcdbef1bd912b7d32ba3f29d7fef15df234a5b26bab6e46a03235360388d7",
+  "schema": "chipmunk.video-short-return-codec-audit/1",
+  "study_scope": {
+    "delivery_rate_hz": 30,
+    "delivery_size": [
+      640,
+      360
+    ],
+    "ffmpeg": "ffmpeg version 7.0.2 Copyright (c) 2000-2024 the FFmpeg developers",
+    "frozen_worker_sha256": "e5a22649acdddc1489c66e90c28fa4cbd6ea0a0877abd89be6f477b04e96a64f",
+    "hard_cut_sources": 2,
+    "matched_swap_sources": 3,
+    "model_weights_added": false,
+    "overall_confidence_contribution": false,
+    "prior_distinct_rosters": 4,
+    "serving_scope_changed": false
+  },
+  "views": 46
+}

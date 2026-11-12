@@ -3267,6 +3267,8 @@ export interface components {
             available: boolean;
             /** Extension */
             extension?: (".eml" | ".txt" | ".docx") | null;
+            /** Paired Check Available */
+            paired_check_available?: boolean | null;
         };
         /** DocumentRevisionResponse */
         DocumentRevisionResponse: {
@@ -3304,6 +3306,7 @@ export interface components {
             /** Interpretation */
             interpretation: string;
             later: components["schemas"]["DraftSource"];
+            paired_check?: components["schemas"]["DraftPairedCheck"] | null;
             /**
              * Schema
              * @constant
@@ -3328,6 +3331,34 @@ export interface components {
             /** Text */
             text: string;
         };
+        /** DraftPairedCheck */
+        DraftPairedCheck: {
+            /**
+             * Authorship Confidence Contribution
+             * @constant
+             */
+            authorship_confidence_contribution: 0;
+            /** Change Ids */
+            change_ids?: string[] | null;
+            earlier?: components["schemas"]["DraftWritingFocus"] | null;
+            later?: components["schemas"]["DraftWritingFocus"] | null;
+            /** Responses */
+            responses?: components["schemas"]["DraftWritingResponse"][] | null;
+            /**
+             * Schema
+             * @constant
+             */
+            schema: "chipmunk.paired-writing-review/1";
+            /** Scope */
+            scope: string;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "outside_scope" | "unavailable" | "no_joint_increase" | "joint_increase";
+            /** Summary */
+            summary: string;
+        };
         /** DraftParagraph */
         DraftParagraph: {
             /** Body Index */
@@ -3351,6 +3382,29 @@ export interface components {
             mime_part: string | null;
             /** Sha256 */
             sha256: string;
+        };
+        /** DraftWritingFocus */
+        DraftWritingFocus: {
+            /** Context Spans */
+            context_spans: [
+                number,
+                number
+            ][];
+            /** End */
+            end: number;
+            /** Input Sha256 */
+            input_sha256: string;
+            /** Start */
+            start: number;
+            /** Text */
+            text: string;
+        };
+        /** DraftWritingResponse */
+        DraftWritingResponse: {
+            /** Earlier */
+            earlier: number;
+            /** Later */
+            later: number;
         };
         /** ErrorRate */
         ErrorRate: {
@@ -7082,6 +7136,11 @@ export interface operations {
                      * @description Earlier version. Use matching .eml, .txt or .docx files.
                      */
                     earlier: string;
+                    /**
+                     * @default false
+                     * @enum {string}
+                     */
+                    include_paired_check?: "true" | "false";
                     /**
                      * @default false
                      * @enum {string}

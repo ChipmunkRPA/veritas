@@ -1,0 +1,892 @@
+{
+  "advances": {
+    "jpeg75": true,
+    "png": false
+  },
+  "development": {
+    "advances": {},
+    "elapsed_s": 57.467,
+    "freeze_sha256": "1d887436adaff2d895f4eb248d784ec894c6654221d561c329b7bd96a170feb7",
+    "journal_sha256": {
+      "development": "5eb3c791c48e24dbb3b7da3fc4c52ed3943bd32ed00ceccb53a04c3af19d1c42"
+    },
+    "results": {
+      "development": {
+        "jpeg75": {
+          "by_role": {
+            "contrast": {
+              "added": 0,
+              "compatible": 6,
+              "exact_crop": 6,
+              "highlighted": 1,
+              "incumbent_compatible": 0,
+              "incumbent_highlighted": 0,
+              "incumbent_useful": 0,
+              "useful": 0,
+              "views": 8,
+              "wrong_crop": 0
+            },
+            "different_photo": {
+              "added": 0,
+              "compatible": 0,
+              "exact_crop": 0,
+              "highlighted": 0,
+              "incumbent_compatible": 0,
+              "incumbent_highlighted": 0,
+              "incumbent_useful": 0,
+              "useful": 0,
+              "views": 8,
+              "wrong_crop": 0
+            },
+            "feathered": {
+              "added": 7,
+              "compatible": 7,
+              "exact_crop": 7,
+              "highlighted": 7,
+              "incumbent_compatible": 0,
+              "incumbent_highlighted": 0,
+              "incumbent_useful": 0,
+              "useful": 7,
+              "views": 8,
+              "wrong_crop": 0
+            },
+            "fractional": {
+              "added": 0,
+              "compatible": 0,
+              "exact_crop": 0,
+              "highlighted": 0,
+              "incumbent_compatible": 0,
+              "incumbent_highlighted": 0,
+              "incumbent_useful": 0,
+              "useful": 0,
+              "views": 8,
+              "wrong_crop": 0
+            },
+            "local_blur": {
+              "added": 0,
+              "compatible": 7,
+              "exact_crop": 7,
+              "highlighted": 2,
+              "incumbent_compatible": 0,
+              "incumbent_highlighted": 0,
+              "incumbent_useful": 0,
+              "useful": 0,
+              "views": 8,
+              "wrong_crop": 0
+            },
+            "nonproportional": {
+              "added": 0,
+              "compatible": 0,
+              "exact_crop": 0,
+              "highlighted": 0,
+              "incumbent_compatible": 0,
+              "incumbent_highlighted": 0,
+              "incumbent_useful": 0,
+              "useful": 0,
+              "views": 8,
+              "wrong_crop": 0
+            },
+            "prior_jpeg": {
+              "added": 0,
+              "compatible": 7,
+              "exact_crop": 7,
+              "highlighted": 0,
+              "incumbent_compatible": 0,
+              "incumbent_highlighted": 0,
+              "incumbent_useful": 0,
+              "useful": 0,
+              "views": 8,
+              "wrong_crop": 0
+            },
+            "rotation": {
+              "added": 0,
+              "compatible": 0,
+              "exact_crop": 0,
+              "highlighted": 0,
+              "incumbent_compatible": 0,
+              "incumbent_highlighted": 0,
+              "incumbent_useful": 0,
+              "useful": 0,
+              "views": 8,
+              "wrong_crop": 0
+            },
+            "sharp": {
+              "added": 6,
+              "compatible": 6,
+              "exact_crop": 6,
+              "highlighted": 6,
+              "incumbent_compatible": 0,
+              "incumbent_highlighted": 0,
+              "incumbent_useful": 0,
+              "useful": 6,
+              "views": 8,
+              "wrong_crop": 0
+            },
+            "untouched_crop": {
+              "added": 0,
+              "compatible": 7,
+              "exact_crop": 7,
+              "highlighted": 0,
+              "incumbent_compatible": 0,
+              "incumbent_highlighted": 0,
+              "incumbent_useful": 0,
+              "useful": 0,
+              "views": 8,
+              "wrong_crop": 0
+            }
+          },
+          "nuisance_highlights": 1,
+          "nuisance_source_groups": 1,
+          "wrong_or_incompatible_crops": 0
+        },
+        "png": {
+          "by_role": {
+            "contrast": {
+              "added": 0,
+              "compatible": 7,
+              "exact_crop": 7,
+              "highlighted": 0,
+              "incumbent_compatible": 0,
+              "incumbent_highlighted": 0,
+              "incumbent_useful": 0,
+              "useful": 0,
+              "views": 8,
+              "wrong_crop": 0
+            },
+            "different_photo": {
+              "added": 0,
+              "compatible": 0,
+              "exact_crop": 0,
+              "highlighted": 0,
+              "incumbent_compatible": 0,
+              "incumbent_highlighted": 0,
+              "incumbent_useful": 0,
+              "useful": 0,
+              "views": 8,
+              "wrong_crop": 0
+            },
+            "feathered": {
+              "added": 7,
+              "compatible": 7,
+              "exact_crop": 7,
+              "highlighted": 7,
+              "incumbent_compatible": 0,
+              "incumbent_highlighted": 0,
+              "incumbent_useful": 0,
+              "useful": 7,
+              "views": 8,
+              "wrong_crop": 0
+            },
+            "fractional": {
+              "added": 0,
+              "compatible": 0,
+              "exact_crop": 0,
+              "highlighted": 0,
+              "incumbent_compatible": 0,
+              "incumbent_highlighted": 0,
+              "incumbent_useful": 0,
+              "useful": 0,
+              "views": 8,
+              "wrong_crop": 0
+            },
+            "local_blur": {
+              "added": 0,
+              "compatible": 7,
+              "exact_crop": 7,
+              "highlighted": 3,
+              "incumbent_compatible": 0,
+              "incumbent_highlighted": 0,
+              "incumbent_useful": 0,
+              "useful": 0,
+              "views": 8,
+              "wrong_crop": 0
+            },
+            "nonproportional": {
+              "added": 0,
+              "compatible": 0,
+              "exact_crop": 0,
+              "highlighted": 0,
+              "incumbent_compatible": 0,
+              "incumbent_highlighted": 0,
+              "incumbent_useful": 0,
+              "useful": 0,
+              "views": 8,
+              "wrong_crop": 0
+            },
+            "prior_jpeg": {
+              "added": 0,
+              "compatible": 7,
+              "exact_crop": 7,
+              "highlighted": 0,
+              "incumbent_compatible": 0,
+              "incumbent_highlighted": 0,
+              "incumbent_useful": 0,
+              "useful": 0,
+              "views": 8,
+              "wrong_crop": 0
+            },
+            "rotation": {
+              "added": 0,
+              "compatible": 0,
+              "exact_crop": 0,
+              "highlighted": 0,
+              "incumbent_compatible": 0,
+              "incumbent_highlighted": 0,
+              "incumbent_useful": 0,
+              "useful": 0,
+              "views": 8,
+              "wrong_crop": 0
+            },
+            "sharp": {
+              "added": 7,
+              "compatible": 7,
+              "exact_crop": 7,
+              "highlighted": 7,
+              "incumbent_compatible": 0,
+              "incumbent_highlighted": 0,
+              "incumbent_useful": 0,
+              "useful": 7,
+              "views": 8,
+              "wrong_crop": 0
+            },
+            "untouched_crop": {
+              "added": 0,
+              "compatible": 7,
+              "exact_crop": 7,
+              "highlighted": 0,
+              "incumbent_compatible": 0,
+              "incumbent_highlighted": 0,
+              "incumbent_useful": 0,
+              "useful": 0,
+              "views": 8,
+              "wrong_crop": 0
+            }
+          },
+          "nuisance_highlights": 0,
+          "nuisance_source_groups": 0,
+          "wrong_or_incompatible_crops": 0
+        }
+      }
+    },
+    "schema": "chipmunk.image-reference-crop-resize-transfer/1"
+  },
+  "elapsed_s": 180.064,
+  "freeze_sha256": "1d887436adaff2d895f4eb248d784ec894c6654221d561c329b7bd96a170feb7",
+  "frozen": {
+    "code": {
+      "backend/app/detectors/image/reference_alignment.py": "5c2504e09d2f6392dbb4e3948016ceb7b8c592947732a29fe2d8f7d401507428",
+      "backend/app/detectors/image/reference_compare.py": "e436052ad1a0b70ab29c180be88c72e868ed8f701031c6e1f10cecda5bb47063",
+      "backend/app/detectors/image/reference_crop_resize.py": "7fbfdfde83a8a585c02dfbcc5acc360ca2887630813d17141bda907b01d2ed42",
+      "backend/app/detectors/image/reference_resize.py": "8dedce8fac09863ebbededdf7ba1d421342d2bb27d4df9c95d64445329c2e985",
+      "backend/scripts/image_background_patch_score.py": "cb854082628636833e2fd005e954d0bdb7c78362e58ee98632f1ba4153224d5a",
+      "backend/scripts/image_bg_real_insertion_score.py": "b8a91de6e686b5037ea65297aac52961ea995d701ca8aacf362b8715f94e303d",
+      "backend/scripts/image_boundary_blend_transfer.py": "fc65a5e3f064d74a5cd6fa528d9115aee92cc8eb9e04cb6dee13398e03388aa0",
+      "backend/scripts/image_reference_crop_resize_transfer.py": "83be7f74aa70747e6d48d1afce3379af564e3326c0b9de6cc2e68a0fab6449c5"
+    },
+    "intakes": {
+      "development": {
+        "attempts.jsonl": "59d8591da24d8886cca3ea071eefa5488aa3ac555ff5b21e0542dc267c47fb90",
+        "plan.json": "0d5cd6aadef8162c436c674e00ad835d91d3c7b5807daf0561cb8c58adf47aef",
+        "result.json": "6a8b09a8a4a8585f44faffd5ce18bba7c42a311934ce20bb3a70842aaef4d0b8"
+      },
+      "earlier": {
+        "attempts.jsonl": "3b8291b96634bca1920bddfd9239a53d69e143ea8efc74e565fd7406e749f9ce",
+        "plan.json": "2fc63a2d9f666ce2e593cb7c6b503120661b74a33dbf88f297e34d96ae3c3d7b",
+        "result.json": "fb0aafa7d109ca3e7fda3256fbd9fdf0e3b2afca265081092552b54cc8388731"
+      },
+      "later": {
+        "attempts.jsonl": "006a125678341700c243754a423c480b41bd86029a70f689ff1e7a467fc7fde7",
+        "plan.json": "a2176e567d71f2a80178adec7fb55e34007f6ad3114f9baf09837e233197fc34",
+        "result.json": "3d849ad48453c79002aa78d2d9cc8c7aeecc9f1979008060244c0bd01e065e86"
+      }
+    },
+    "protocol": {
+      "advance": "Per held panel and delivery: at least 4 additional useful feathered locations, at least 6 exact untouched crops, at most 4 nuisance highlights across at most 3 source groups, zero wrong accepted crops, zero assessed incompatible controls.",
+      "formats": [
+        "png",
+        "jpeg75"
+      ],
+      "geometry": "Every accepted four-edge native crop must match exactly. Incompatible controls must stay unassessed.",
+      "roles": [
+        "sharp",
+        "feathered",
+        "untouched_crop",
+        "prior_jpeg",
+        "contrast",
+        "local_blur",
+        "rotation",
+        "fractional",
+        "nonproportional",
+        "different_photo"
+      ],
+      "scales": [
+        0.72,
+        0.86,
+        1.17
+      ],
+      "useful": "Native submitted IoU at least 0.30 and recall at least 0.50."
+    },
+    "runtime": {
+      "numpy": "2.2.6",
+      "opencv": "5.0.0",
+      "pillow": "12.3.0"
+    },
+    "schema": "chipmunk.image-reference-crop-resize-transfer/1"
+  },
+  "independent_readback": {
+    "aggregate_sha256": "729d0dd55c4135e53f32280943537a5850e572f68e32f09bfce6e3516b656f95",
+    "exact_crop": 198,
+    "mapped_regions": 122,
+    "status": "verified",
+    "verified_masks": 199,
+    "verified_views": 480,
+    "wrong_or_incompatible_crop": 1
+  },
+  "journal_sha256": {
+    "earlier": "31e15627f516d95f3f8a68ad11221dad9a3e7902951e5aedd97f53885deadedb",
+    "later": "077071d7e3c9088a9df1567fc832c6610ef05a10c74d6a6c4e30209006c51c22"
+  },
+  "local_paid_integration": {
+    "amount_minor": 999,
+    "authentication_required": true,
+    "comparison_schema": "chipmunk.image-reference-comparison/4",
+    "currency": "USD",
+    "earlier_area": {
+      "h": 227,
+      "w": 328,
+      "x": 24,
+      "y": 14
+    },
+    "pdf_and_offline_json_verified": true,
+    "profile": "quick",
+    "simulated_stripe": true,
+    "unpaid_analyses": 0,
+    "unpaid_jobs": 0
+  },
+  "results": {
+    "earlier": {
+      "jpeg75": {
+        "by_role": {
+          "contrast": {
+            "added": 0,
+            "compatible": 6,
+            "exact_crop": 6,
+            "highlighted": 0,
+            "incumbent_compatible": 0,
+            "incumbent_highlighted": 0,
+            "incumbent_useful": 0,
+            "useful": 0,
+            "views": 12,
+            "wrong_crop": 0
+          },
+          "different_photo": {
+            "added": 0,
+            "compatible": 0,
+            "exact_crop": 0,
+            "highlighted": 0,
+            "incumbent_compatible": 0,
+            "incumbent_highlighted": 0,
+            "incumbent_useful": 0,
+            "useful": 0,
+            "views": 12,
+            "wrong_crop": 0
+          },
+          "feathered": {
+            "added": 4,
+            "compatible": 5,
+            "exact_crop": 5,
+            "highlighted": 4,
+            "incumbent_compatible": 0,
+            "incumbent_highlighted": 0,
+            "incumbent_useful": 0,
+            "useful": 4,
+            "views": 12,
+            "wrong_crop": 0
+          },
+          "fractional": {
+            "added": 0,
+            "compatible": 0,
+            "exact_crop": 0,
+            "highlighted": 0,
+            "incumbent_compatible": 0,
+            "incumbent_highlighted": 0,
+            "incumbent_useful": 0,
+            "useful": 0,
+            "views": 12,
+            "wrong_crop": 0
+          },
+          "local_blur": {
+            "added": 0,
+            "compatible": 5,
+            "exact_crop": 5,
+            "highlighted": 3,
+            "incumbent_compatible": 0,
+            "incumbent_highlighted": 0,
+            "incumbent_useful": 0,
+            "useful": 0,
+            "views": 12,
+            "wrong_crop": 0
+          },
+          "nonproportional": {
+            "added": 0,
+            "compatible": 0,
+            "exact_crop": 0,
+            "highlighted": 0,
+            "incumbent_compatible": 0,
+            "incumbent_highlighted": 0,
+            "incumbent_useful": 0,
+            "useful": 0,
+            "views": 12,
+            "wrong_crop": 0
+          },
+          "prior_jpeg": {
+            "added": 0,
+            "compatible": 7,
+            "exact_crop": 7,
+            "highlighted": 3,
+            "incumbent_compatible": 0,
+            "incumbent_highlighted": 0,
+            "incumbent_useful": 0,
+            "useful": 0,
+            "views": 12,
+            "wrong_crop": 0
+          },
+          "rotation": {
+            "added": 0,
+            "compatible": 0,
+            "exact_crop": 0,
+            "highlighted": 0,
+            "incumbent_compatible": 0,
+            "incumbent_highlighted": 0,
+            "incumbent_useful": 0,
+            "useful": 0,
+            "views": 12,
+            "wrong_crop": 0
+          },
+          "sharp": {
+            "added": 4,
+            "compatible": 5,
+            "exact_crop": 5,
+            "highlighted": 4,
+            "incumbent_compatible": 0,
+            "incumbent_highlighted": 0,
+            "incumbent_useful": 0,
+            "useful": 4,
+            "views": 12,
+            "wrong_crop": 0
+          },
+          "untouched_crop": {
+            "added": 0,
+            "compatible": 7,
+            "exact_crop": 7,
+            "highlighted": 0,
+            "incumbent_compatible": 0,
+            "incumbent_highlighted": 0,
+            "incumbent_useful": 0,
+            "useful": 0,
+            "views": 12,
+            "wrong_crop": 0
+          }
+        },
+        "nuisance_highlights": 3,
+        "nuisance_source_groups": 3,
+        "wrong_or_incompatible_crops": 0
+      },
+      "png": {
+        "by_role": {
+          "contrast": {
+            "added": 0,
+            "compatible": 7,
+            "exact_crop": 7,
+            "highlighted": 0,
+            "incumbent_compatible": 0,
+            "incumbent_highlighted": 0,
+            "incumbent_useful": 0,
+            "useful": 0,
+            "views": 12,
+            "wrong_crop": 0
+          },
+          "different_photo": {
+            "added": 0,
+            "compatible": 0,
+            "exact_crop": 0,
+            "highlighted": 0,
+            "incumbent_compatible": 0,
+            "incumbent_highlighted": 0,
+            "incumbent_useful": 0,
+            "useful": 0,
+            "views": 12,
+            "wrong_crop": 0
+          },
+          "feathered": {
+            "added": 5,
+            "compatible": 6,
+            "exact_crop": 6,
+            "highlighted": 5,
+            "incumbent_compatible": 0,
+            "incumbent_highlighted": 0,
+            "incumbent_useful": 0,
+            "useful": 5,
+            "views": 12,
+            "wrong_crop": 0
+          },
+          "fractional": {
+            "added": 0,
+            "compatible": 1,
+            "exact_crop": 0,
+            "highlighted": 1,
+            "incumbent_compatible": 0,
+            "incumbent_highlighted": 0,
+            "incumbent_useful": 0,
+            "useful": 0,
+            "views": 12,
+            "wrong_crop": 1
+          },
+          "local_blur": {
+            "added": 0,
+            "compatible": 6,
+            "exact_crop": 6,
+            "highlighted": 3,
+            "incumbent_compatible": 0,
+            "incumbent_highlighted": 0,
+            "incumbent_useful": 0,
+            "useful": 0,
+            "views": 12,
+            "wrong_crop": 0
+          },
+          "nonproportional": {
+            "added": 0,
+            "compatible": 0,
+            "exact_crop": 0,
+            "highlighted": 0,
+            "incumbent_compatible": 0,
+            "incumbent_highlighted": 0,
+            "incumbent_useful": 0,
+            "useful": 0,
+            "views": 12,
+            "wrong_crop": 0
+          },
+          "prior_jpeg": {
+            "added": 0,
+            "compatible": 6,
+            "exact_crop": 6,
+            "highlighted": 1,
+            "incumbent_compatible": 0,
+            "incumbent_highlighted": 0,
+            "incumbent_useful": 0,
+            "useful": 0,
+            "views": 12,
+            "wrong_crop": 0
+          },
+          "rotation": {
+            "added": 0,
+            "compatible": 0,
+            "exact_crop": 0,
+            "highlighted": 0,
+            "incumbent_compatible": 0,
+            "incumbent_highlighted": 0,
+            "incumbent_useful": 0,
+            "useful": 0,
+            "views": 12,
+            "wrong_crop": 0
+          },
+          "sharp": {
+            "added": 5,
+            "compatible": 6,
+            "exact_crop": 6,
+            "highlighted": 6,
+            "incumbent_compatible": 0,
+            "incumbent_highlighted": 0,
+            "incumbent_useful": 0,
+            "useful": 5,
+            "views": 12,
+            "wrong_crop": 0
+          },
+          "untouched_crop": {
+            "added": 0,
+            "compatible": 7,
+            "exact_crop": 7,
+            "highlighted": 0,
+            "incumbent_compatible": 0,
+            "incumbent_highlighted": 0,
+            "incumbent_useful": 0,
+            "useful": 0,
+            "views": 12,
+            "wrong_crop": 0
+          }
+        },
+        "nuisance_highlights": 1,
+        "nuisance_source_groups": 1,
+        "wrong_or_incompatible_crops": 1
+      }
+    },
+    "later": {
+      "jpeg75": {
+        "by_role": {
+          "contrast": {
+            "added": 0,
+            "compatible": 10,
+            "exact_crop": 10,
+            "highlighted": 0,
+            "incumbent_compatible": 0,
+            "incumbent_highlighted": 0,
+            "incumbent_useful": 0,
+            "useful": 0,
+            "views": 12,
+            "wrong_crop": 0
+          },
+          "different_photo": {
+            "added": 0,
+            "compatible": 0,
+            "exact_crop": 0,
+            "highlighted": 0,
+            "incumbent_compatible": 0,
+            "incumbent_highlighted": 0,
+            "incumbent_useful": 0,
+            "useful": 0,
+            "views": 12,
+            "wrong_crop": 0
+          },
+          "feathered": {
+            "added": 10,
+            "compatible": 10,
+            "exact_crop": 10,
+            "highlighted": 10,
+            "incumbent_compatible": 0,
+            "incumbent_highlighted": 0,
+            "incumbent_useful": 0,
+            "useful": 10,
+            "views": 12,
+            "wrong_crop": 0
+          },
+          "fractional": {
+            "added": 0,
+            "compatible": 0,
+            "exact_crop": 0,
+            "highlighted": 0,
+            "incumbent_compatible": 0,
+            "incumbent_highlighted": 0,
+            "incumbent_useful": 0,
+            "useful": 0,
+            "views": 12,
+            "wrong_crop": 0
+          },
+          "local_blur": {
+            "added": 0,
+            "compatible": 10,
+            "exact_crop": 10,
+            "highlighted": 8,
+            "incumbent_compatible": 0,
+            "incumbent_highlighted": 0,
+            "incumbent_useful": 0,
+            "useful": 0,
+            "views": 12,
+            "wrong_crop": 0
+          },
+          "nonproportional": {
+            "added": 0,
+            "compatible": 0,
+            "exact_crop": 0,
+            "highlighted": 0,
+            "incumbent_compatible": 0,
+            "incumbent_highlighted": 0,
+            "incumbent_useful": 0,
+            "useful": 0,
+            "views": 12,
+            "wrong_crop": 0
+          },
+          "prior_jpeg": {
+            "added": 0,
+            "compatible": 11,
+            "exact_crop": 11,
+            "highlighted": 3,
+            "incumbent_compatible": 0,
+            "incumbent_highlighted": 0,
+            "incumbent_useful": 0,
+            "useful": 0,
+            "views": 12,
+            "wrong_crop": 0
+          },
+          "rotation": {
+            "added": 0,
+            "compatible": 0,
+            "exact_crop": 0,
+            "highlighted": 0,
+            "incumbent_compatible": 0,
+            "incumbent_highlighted": 0,
+            "incumbent_useful": 0,
+            "useful": 0,
+            "views": 12,
+            "wrong_crop": 0
+          },
+          "sharp": {
+            "added": 10,
+            "compatible": 10,
+            "exact_crop": 10,
+            "highlighted": 10,
+            "incumbent_compatible": 0,
+            "incumbent_highlighted": 0,
+            "incumbent_useful": 0,
+            "useful": 10,
+            "views": 12,
+            "wrong_crop": 0
+          },
+          "untouched_crop": {
+            "added": 0,
+            "compatible": 11,
+            "exact_crop": 11,
+            "highlighted": 0,
+            "incumbent_compatible": 0,
+            "incumbent_highlighted": 0,
+            "incumbent_useful": 0,
+            "useful": 0,
+            "views": 12,
+            "wrong_crop": 0
+          }
+        },
+        "nuisance_highlights": 3,
+        "nuisance_source_groups": 3,
+        "wrong_or_incompatible_crops": 0
+      },
+      "png": {
+        "by_role": {
+          "contrast": {
+            "added": 0,
+            "compatible": 11,
+            "exact_crop": 11,
+            "highlighted": 0,
+            "incumbent_compatible": 0,
+            "incumbent_highlighted": 0,
+            "incumbent_useful": 0,
+            "useful": 0,
+            "views": 12,
+            "wrong_crop": 0
+          },
+          "different_photo": {
+            "added": 0,
+            "compatible": 0,
+            "exact_crop": 0,
+            "highlighted": 0,
+            "incumbent_compatible": 0,
+            "incumbent_highlighted": 0,
+            "incumbent_useful": 0,
+            "useful": 0,
+            "views": 12,
+            "wrong_crop": 0
+          },
+          "feathered": {
+            "added": 10,
+            "compatible": 10,
+            "exact_crop": 10,
+            "highlighted": 10,
+            "incumbent_compatible": 0,
+            "incumbent_highlighted": 0,
+            "incumbent_useful": 0,
+            "useful": 10,
+            "views": 12,
+            "wrong_crop": 0
+          },
+          "fractional": {
+            "added": 0,
+            "compatible": 0,
+            "exact_crop": 0,
+            "highlighted": 0,
+            "incumbent_compatible": 0,
+            "incumbent_highlighted": 0,
+            "incumbent_useful": 0,
+            "useful": 0,
+            "views": 12,
+            "wrong_crop": 0
+          },
+          "local_blur": {
+            "added": 0,
+            "compatible": 10,
+            "exact_crop": 10,
+            "highlighted": 8,
+            "incumbent_compatible": 0,
+            "incumbent_highlighted": 0,
+            "incumbent_useful": 0,
+            "useful": 0,
+            "views": 12,
+            "wrong_crop": 0
+          },
+          "nonproportional": {
+            "added": 0,
+            "compatible": 0,
+            "exact_crop": 0,
+            "highlighted": 0,
+            "incumbent_compatible": 0,
+            "incumbent_highlighted": 0,
+            "incumbent_useful": 0,
+            "useful": 0,
+            "views": 12,
+            "wrong_crop": 0
+          },
+          "prior_jpeg": {
+            "added": 0,
+            "compatible": 11,
+            "exact_crop": 11,
+            "highlighted": 2,
+            "incumbent_compatible": 0,
+            "incumbent_highlighted": 0,
+            "incumbent_useful": 0,
+            "useful": 0,
+            "views": 12,
+            "wrong_crop": 0
+          },
+          "rotation": {
+            "added": 0,
+            "compatible": 0,
+            "exact_crop": 0,
+            "highlighted": 0,
+            "incumbent_compatible": 0,
+            "incumbent_highlighted": 0,
+            "incumbent_useful": 0,
+            "useful": 0,
+            "views": 12,
+            "wrong_crop": 0
+          },
+          "sharp": {
+            "added": 10,
+            "compatible": 10,
+            "exact_crop": 10,
+            "highlighted": 10,
+            "incumbent_compatible": 0,
+            "incumbent_highlighted": 0,
+            "incumbent_useful": 0,
+            "useful": 10,
+            "views": 12,
+            "wrong_crop": 0
+          },
+          "untouched_crop": {
+            "added": 0,
+            "compatible": 11,
+            "exact_crop": 11,
+            "highlighted": 0,
+            "incumbent_compatible": 0,
+            "incumbent_highlighted": 0,
+            "incumbent_useful": 0,
+            "useful": 0,
+            "views": 12,
+            "wrong_crop": 0
+          }
+        },
+        "nuisance_highlights": 2,
+        "nuisance_source_groups": 2,
+        "wrong_or_incompatible_crops": 0
+      }
+    }
+  },
+  "schema": "chipmunk.image-reference-crop-resize-transfer/1",
+  "serving_scope": {
+    "local_only": true,
+    "maximum_reference_side_px": 768,
+    "maximum_submitted_side_px": 845,
+    "requires_earlier_copy": true,
+    "resize_ratio": [
+      0.72,
+      1.17
+    ],
+    "submitted_format": "RGB JPEG with quality-75 tables and 4:2:0 sampling"
+  }
+}

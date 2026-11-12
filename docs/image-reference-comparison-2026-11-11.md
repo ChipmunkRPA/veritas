@@ -10,6 +10,8 @@ The app shows both exact crops, their native positions and the submitted-image d
 
 The app can also compare same-framing copies at different pixel dimensions when alignment is supported. It measures differences on the submitted image's pixel grid and keeps the displayed earlier crop in its own native coordinates. [Resized-image evaluation](image-reference-resize-transfer-2026-11-11.md)
 
+For the tested color JPEG delivery profile, the app can also compare a submitted crop that was subsequently resized. It shows the matched earlier area in its native coordinates and leaves earlier pixels outside that area unassessed. [Crop-and-resize evaluation](image-reference-crop-resize-transfer-2026-11-11.md)
+
 A local browser test used a cropped JPEG with a known edit and an earlier PNG. Simulated Stripe payment released the original analysis, and the supplemental comparison used its retained source. The browser loaded both crops and the mask and downloaded both exports. A separate HTTP test reopened the PDF and matched its embedded pixels and recorded hashes to the JSON. An identical pair returned no selected region. An unalignable pair returned an unassessed result.
 
 The [offline reviewer](independent-testing.md#verify-an-earlier-copy-image-comparison) checks the downloaded JSON against both original images using Pillow. It checks native coordinates, pixel-exact crops, mask totals and the recorded SHA-256 values. When the overlay is present, it verifies every marked and transparent pixel against the mask at the submitted crop's coordinates.

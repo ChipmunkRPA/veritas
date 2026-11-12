@@ -166,6 +166,21 @@ describe('earlier-copy comparison', () => {
     expect(JSON.parse(await blobText(download))).toEqual({ comparison: result.comparison, pngs: result.pngs })
   })
 
+  it('shows the exact earlier area used when the submitted copy is a resized crop', async () => {
+    const result = structuredClone(comparison)
+    result.comparison.schema = 'chipmunk.image-reference-comparison/4'
+    result.comparison.reference_crop_bounds = { x: 24, y: 14, w: 328, h: 227 }
+    delete result.comparison.alignment
+    vi.stubGlobal('fetch', vi.fn((_url: string, request: RequestInit) => Promise.resolve(
+      request.method === 'POST' ? json(result) : json({ available: true }),
+    )))
+    show()
+    await choose()
+    fireEvent.click(screen.getByRole('button', { name: 'Compare images' }))
+    expect(await screen.findByText('x 24, y 14 · 328 × 227 px')).toBeTruthy()
+    expect(screen.getByText(/Pixels outside the earlier area were unassessed/)).toBeTruthy()
+  })
+
   it('lets the reviewer retry a failed upload without choosing the same file again', async () => {
     let attempted = false
     vi.stubGlobal('fetch', vi.fn((_url: string, request: RequestInit) => {

@@ -20,6 +20,7 @@ from test_image_reference_access import reference_http as reference_http
 from app.api import auth, v2_document_revision
 from app.core.config import settings
 from app.evidence import document_revision
+from app.evidence import document_revision_writing as paired
 from app.reports.document_revision_pdf import _side
 from app.storage.db import Analysis, Artefact, BillingOrderRow
 from scripts.review_document_revision_export import review
@@ -81,6 +82,73 @@ def _url(aid):
 
 def _upload(data, extension=".eml"):
     return {"earlier": ("earlier" + extension, data, "application/octet-stream")}
+
+
+def test_opt_in_paired_check_replays_exact_focus_and_preserves_unscored_comparison(reference_http, monkeypatch, tmp_path):
+    f = _install(reference_http, monkeypatch)
+    monkeypatch.setattr(settings, "text_detector_mode", "candidate")
+    monkeypatch.setattr(settings, "text_window_sentences", 3)
+    monkeypatch.setattr(settings, "text_checkpoint_agreement_review", True)
+    lead = "Meeting minutes.\r\n\r\nThe committee met on Monday morning to review the budget.\r\n"
+    tail = " The final minutes will be available after the next meeting."
+    old_focus = "The draft gives  the survey date and meeting location."
+    new_focus = "The revision includes a detailed account of the survey and its outcomes."
+    earlier, later = (lead + focus + tail for focus in (old_focus, new_focus))
+    _saved(f, "paired-draft", ".txt", later.encode())
+    url = _url("paired-draft")
+    assert f.client.get(url, headers=f.viewer).json()["paired_check_available"] is True
+    inputs = []
+
+    def measure(candidate):
+        inputs.append(candidate)
+        return [{"earlier": .1, "later": .4}, {"earlier": .3, "later": .6}]
+
+    monkeypatch.setattr(paired, "score", measure)
+    ordinary = f.client.post(url, headers=f.viewer, files=_upload(earlier.encode(), ".txt"))
+    assert ordinary.status_code == 200 and "paired_check" not in ordinary.json()["comparison"] and not inputs
+    response = f.client.post(url, headers=f.viewer, files=_upload(earlier.encode(), ".txt"),
+                             data={"include_pdf": "true", "include_paired_check": "true"})
+    assert response.status_code == 200 and response.headers["cache-control"] == "no-store"
+    body = response.json()
+    comparison = body["comparison"]
+    check = comparison["paired_check"]
+    assert check["status"] == "joint_increase" and check["authorship_confidence_contribution"] == 0
+    assert {k: v for k, v in comparison.items() if k != "paired_check"} == ordinary.json()["comparison"]
+    for side, source, focus in (("earlier", earlier, old_focus), ("later", later, new_focus)):
+        excerpt = check[side]
+        assert source[excerpt["start"]:excerpt["end"]] == excerpt["text"] == focus
+        assert excerpt["context_spans"][1] == [excerpt["start"], excerpt["end"]]
+        assert len(excerpt["context_spans"]) == 3
+        assert excerpt["input_sha256"] == hashlib.sha256(getattr(inputs[0], side).encode()).hexdigest()
+    assert check["change_ids"] == [change["id"] for change in comparison["changes"]]
+    with pymupdf.open(stream=base64.b64decode(body["pdf"]), filetype="pdf") as report:
+        text = " ".join(" ".join(page.get_text().split()) for page in report)
+        assert "Experimental paired writing check" in text and "zero authorship confidence weight" in text
+        assert "Check 1" in text and "Check 2" in text and "Linked wording changes C01" in text
+        assert any(page.get_links() for page in report)
+        assert "Tropa" not in text and "ModernBERT" not in text
+    source_old, source_new, exported = (tmp_path / name for name in ("earlier.txt", "later.txt", "comparison.json"))
+    source_old.write_bytes(earlier.encode())
+    source_new.write_bytes(later.encode())
+    exported.write_text(json.dumps(comparison))
+    assert review(exported, source_old, source_new)["paired_scope_and_saved_response_arithmetic"] == "joint_increase"
+    check["later"]["input_sha256"] = "0" * 64
+    exported.write_text(json.dumps(comparison))
+    with pytest.raises(ValueError, match="paired writing check does not replay"):
+        review(exported, source_old, source_new)
+
+    unchanged = f.client.post(url, headers=f.viewer, files=_upload(later.encode(), ".txt"),
+                              data={"include_paired_check": "true"})
+    assert unchanged.status_code == 200 and unchanged.json()["comparison"]["paired_check"]["status"] == "outside_scope"
+    assert len(inputs) == 1
+
+    def unavailable(_candidate):
+        raise RuntimeError("A private diagnostic")
+
+    monkeypatch.setattr(paired, "score", unavailable)
+    failure = f.client.post(url, headers=f.viewer, files=_upload(earlier.encode(), ".txt"), data={"include_paired_check": "true"})
+    assert failure.status_code == 200 and failure.json()["comparison"]["paired_check"]["status"] == "unavailable"
+    assert "A private diagnostic" not in failure.text
 
 
 def test_word_comparison_uses_exact_body_paragraph_coordinates_in_api_pdf_and_replay(reference_http, monkeypatch, tmp_path):

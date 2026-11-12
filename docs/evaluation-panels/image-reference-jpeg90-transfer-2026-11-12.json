@@ -1,0 +1,418 @@
+{
+  "schema": "chipmunk.image-reference-jpeg90-transfer/1",
+  "design": {
+    "earlier": "One new standard RGB 4:2:0 JPEG at quality 82 or 95 per source. For masters exceeding 768 pixels use a native centered subcrop without resizing. Native decoded earlier coordinates define all bounds.",
+    "submitted": "Fixed asymmetric native crop followed by proportional resize at .74, .86 or 1.13 and a separate standard RGB 4:2:0 JPEG at quality 90. Quality 87 and 75 are separate branch controls.",
+    "candidate": "Only extend the existing crop-and-resize branch to quality 90 for earlier RGB 4:2:0 JPEG with standard 82 or 95 tables. Reuse all frozen search, registration, delivery and mask checks.",
+    "role": "24 hash-ordered, distinct credited contributors and previously unlinked source components. Separate by earlier quality and report each 12-source stratum.",
+    "useful": "Exact earlier native crop and at least .30 IoU and .50 recall on the submitted pre-encode authored edit.",
+    "advance": "Per stratum: at least six new useful feathered locations, eight exact unchanged crops with no highlighted pixels, zero wrong or incompatible accepted candidate crop, and no more than four nuisance-highlighted files across at most three sources. No change in historical quality-75 results or quality-87 branch admission."
+  },
+  "results": {
+    "82": {
+      "by_role": {
+        "unchanged": {
+          "cases": 12,
+          "old_comparable": 0,
+          "new_comparable": 8,
+          "exact": 8,
+          "wrong": 0,
+          "highlighted": 0,
+          "useful": 0
+        },
+        "feathered": {
+          "cases": 12,
+          "old_comparable": 0,
+          "new_comparable": 8,
+          "exact": 8,
+          "wrong": 0,
+          "highlighted": 8,
+          "useful": 8
+        },
+        "sharp": {
+          "cases": 12,
+          "old_comparable": 0,
+          "new_comparable": 9,
+          "exact": 9,
+          "wrong": 0,
+          "highlighted": 9,
+          "useful": 9
+        },
+        "independent_earlier_delivery": {
+          "cases": 12,
+          "old_comparable": 0,
+          "new_comparable": 8,
+          "exact": 8,
+          "wrong": 0,
+          "highlighted": 2,
+          "useful": 0
+        },
+        "prior_recompression": {
+          "cases": 12,
+          "old_comparable": 0,
+          "new_comparable": 8,
+          "exact": 8,
+          "wrong": 0,
+          "highlighted": 0,
+          "useful": 0
+        },
+        "global_contrast": {
+          "cases": 12,
+          "old_comparable": 0,
+          "new_comparable": 7,
+          "exact": 7,
+          "wrong": 0,
+          "highlighted": 0,
+          "useful": 0
+        },
+        "fractional": {
+          "cases": 12,
+          "old_comparable": 0,
+          "new_comparable": 0,
+          "exact": 0,
+          "wrong": 0,
+          "highlighted": 0,
+          "useful": 0
+        },
+        "rotation": {
+          "cases": 12,
+          "old_comparable": 0,
+          "new_comparable": 0,
+          "exact": 0,
+          "wrong": 0,
+          "highlighted": 0,
+          "useful": 0
+        },
+        "anisotropic": {
+          "cases": 12,
+          "old_comparable": 0,
+          "new_comparable": 0,
+          "exact": 0,
+          "wrong": 0,
+          "highlighted": 0,
+          "useful": 0
+        },
+        "unrelated": {
+          "cases": 12,
+          "old_comparable": 0,
+          "new_comparable": 0,
+          "exact": 0,
+          "wrong": 0,
+          "highlighted": 0,
+          "useful": 0
+        },
+        "q87_unchanged": {
+          "cases": 12,
+          "old_comparable": 0,
+          "new_comparable": 0,
+          "exact": 0,
+          "wrong": 0,
+          "highlighted": 0,
+          "useful": 0
+        },
+        "q75_regression": {
+          "cases": 12,
+          "old_comparable": 8,
+          "new_comparable": 0,
+          "exact": 0,
+          "wrong": 0,
+          "highlighted": 0,
+          "useful": 0
+        }
+      },
+      "nuisance_groups": 2,
+      "passed": true
+    },
+    "95": {
+      "by_role": {
+        "unchanged": {
+          "cases": 12,
+          "old_comparable": 0,
+          "new_comparable": 10,
+          "exact": 10,
+          "wrong": 0,
+          "highlighted": 0,
+          "useful": 0
+        },
+        "feathered": {
+          "cases": 12,
+          "old_comparable": 0,
+          "new_comparable": 10,
+          "exact": 10,
+          "wrong": 0,
+          "highlighted": 10,
+          "useful": 10
+        },
+        "sharp": {
+          "cases": 12,
+          "old_comparable": 0,
+          "new_comparable": 10,
+          "exact": 10,
+          "wrong": 0,
+          "highlighted": 10,
+          "useful": 10
+        },
+        "independent_earlier_delivery": {
+          "cases": 12,
+          "old_comparable": 0,
+          "new_comparable": 10,
+          "exact": 10,
+          "wrong": 0,
+          "highlighted": 1,
+          "useful": 0
+        },
+        "prior_recompression": {
+          "cases": 12,
+          "old_comparable": 0,
+          "new_comparable": 10,
+          "exact": 10,
+          "wrong": 0,
+          "highlighted": 0,
+          "useful": 0
+        },
+        "global_contrast": {
+          "cases": 12,
+          "old_comparable": 0,
+          "new_comparable": 10,
+          "exact": 10,
+          "wrong": 0,
+          "highlighted": 2,
+          "useful": 0
+        },
+        "fractional": {
+          "cases": 12,
+          "old_comparable": 0,
+          "new_comparable": 0,
+          "exact": 0,
+          "wrong": 0,
+          "highlighted": 0,
+          "useful": 0
+        },
+        "rotation": {
+          "cases": 12,
+          "old_comparable": 0,
+          "new_comparable": 0,
+          "exact": 0,
+          "wrong": 0,
+          "highlighted": 0,
+          "useful": 0
+        },
+        "anisotropic": {
+          "cases": 12,
+          "old_comparable": 0,
+          "new_comparable": 0,
+          "exact": 0,
+          "wrong": 0,
+          "highlighted": 0,
+          "useful": 0
+        },
+        "unrelated": {
+          "cases": 12,
+          "old_comparable": 0,
+          "new_comparable": 0,
+          "exact": 0,
+          "wrong": 0,
+          "highlighted": 0,
+          "useful": 0
+        },
+        "q87_unchanged": {
+          "cases": 12,
+          "old_comparable": 0,
+          "new_comparable": 0,
+          "exact": 0,
+          "wrong": 0,
+          "highlighted": 0,
+          "useful": 0
+        },
+        "q75_regression": {
+          "cases": 12,
+          "old_comparable": 9,
+          "new_comparable": 0,
+          "exact": 0,
+          "wrong": 0,
+          "highlighted": 0,
+          "useful": 0
+        }
+      },
+      "nuisance_groups": 2,
+      "passed": true
+    }
+  },
+  "independent": {
+    "verified_masks": 108,
+    "verified_deliveries": 288,
+    "mapped_native_regions": 49
+  },
+  "freeze_sha256": "38636df54c09f6ac936d72e8058d8db13664fc25e5bf9f0b40831939e838bf2e",
+  "outcomes_sha256": "55bfd67514eca9e1894374029123150e038077a470cd89032024f7c268bba301",
+  "credits": [
+    {
+      "index": 0,
+      "title": "giraffe",
+      "author_name": "PreVamp",
+      "photo_page": "https://www.flickr.com/photos/prevamp/9783149275/",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
+    },
+    {
+      "index": 1,
+      "title": "CAN JAM!  Not sure who invented this but two teams of two, two garbage cans, throw frisbee towards can:  teammate knocks in = 3 pts, hits can = 2 pts, you swat frisbee into can = 1 pt, sink the frisbee = instant win!  Play to 21.  Brilliant!",
+      "author_name": "dpstyles\u2122",
+      "photo_page": "https://www.flickr.com/photos/dpstyles/3813948241/",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
+    },
+    {
+      "index": 2,
+      "title": "M\u00c1V 44, Silver Arrow, K\u00e1d\u00e1r-train",
+      "author_name": "granada_turnier",
+      "photo_page": "https://www.flickr.com/photos/granada_turnier/7386636832/",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
+    },
+    {
+      "index": 3,
+      "title": "LANCE JAMES AND DOGS",
+      "author_name": "summonedbyfells",
+      "photo_page": "https://www.flickr.com/photos/summonedbyfells/6452452909/",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
+    },
+    {
+      "index": 4,
+      "title": "IMG_2122",
+      "author_name": "mjmalone",
+      "photo_page": "https://www.flickr.com/photos/mjmalone/2218880635/",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
+    },
+    {
+      "index": 5,
+      "title": "Remote Cat",
+      "author_name": "ryanrocketship",
+      "photo_page": "https://www.flickr.com/photos/ryanrocketship/3411320990/",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
+    },
+    {
+      "index": 6,
+      "title": "Smile! ... It's green ...",
+      "author_name": "borkur.net",
+      "photo_page": "https://www.flickr.com/photos/borkurdotnet/5168835597/",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
+    },
+    {
+      "index": 7,
+      "title": "Gato con cuchillos",
+      "author_name": "Pablo Iba\u00f1ez",
+      "photo_page": "https://www.flickr.com/photos/amigomac/4430461138/",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
+    },
+    {
+      "index": 8,
+      "title": "Winter 1987-88 Ski Team Switzerland.",
+      "author_name": "EaglebrookSchool",
+      "photo_page": "https://www.flickr.com/photos/eaglebrook/5531691407/",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
+    },
+    {
+      "index": 9,
+      "title": "Skateboarding Girl",
+      "author_name": "friskytuna",
+      "photo_page": "https://www.flickr.com/photos/34128229@N06/3244684873/",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
+    },
+    {
+      "index": 10,
+      "title": "Traffic lights at Apinajes and Alfonso Bovero",
+      "author_name": "markhillary",
+      "photo_page": "https://www.flickr.com/photos/markhillary/8244917004/",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
+    },
+    {
+      "index": 11,
+      "title": "Derek, Lauren, Xander surfing",
+      "author_name": "suttonls",
+      "photo_page": "https://www.flickr.com/photos/44522791@N00/4908605519/",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
+    },
+    {
+      "index": 12,
+      "title": "the train by the beach in can pastilla",
+      "author_name": "hola-amic.com",
+      "photo_page": "https://www.flickr.com/photos/mallorca-hotels/2554228064/",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
+    },
+    {
+      "index": 13,
+      "title": "Sandy River with train in background",
+      "author_name": "functoruser",
+      "photo_page": "https://www.flickr.com/photos/functoruser/2367107787/",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
+    },
+    {
+      "index": 14,
+      "title": "coffee and doughnuts (10)",
+      "author_name": "srqpix",
+      "photo_page": "https://www.flickr.com/photos/crobj/302899247/",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
+    },
+    {
+      "index": 15,
+      "title": "Carnevale di Roma 2013",
+      "author_name": "mari27454 (Marialba Italia)",
+      "photo_page": "https://www.flickr.com/photos/23008537@N05/8455922971/",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
+    },
+    {
+      "index": 16,
+      "title": "",
+      "author_name": "Hobbes vs Boyle",
+      "photo_page": "https://www.flickr.com/photos/haarald/9538952662/",
+      "license_url": "https://creativecommons.org/licenses/by-sa/2.0/"
+    },
+    {
+      "index": 17,
+      "title": "[e]MERGE ZERO1 Street Festival",
+      "author_name": "cifraser1",
+      "photo_page": "https://www.flickr.com/photos/cifraser/7989464524/",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
+    },
+    {
+      "index": 18,
+      "title": "bathroom",
+      "author_name": "empracht",
+      "photo_page": "https://www.flickr.com/photos/empracht/3679252629/",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
+    },
+    {
+      "index": 19,
+      "title": "American-Style Traffic Lights",
+      "author_name": "SteveR-",
+      "photo_page": "https://www.flickr.com/photos/git/454731187/",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
+    },
+    {
+      "index": 20,
+      "title": "Kitten 04",
+      "author_name": "Brougham Geezer",
+      "photo_page": "https://www.flickr.com/photos/39311243@N05/4756536890/",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
+    },
+    {
+      "index": 21,
+      "title": "REAL zebras FAKE tiger",
+      "author_name": "emrank",
+      "photo_page": "https://www.flickr.com/photos/emrank/3970693006/",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
+    },
+    {
+      "index": 22,
+      "title": "Sitting Cow",
+      "author_name": "Willip Von Ree",
+      "photo_page": "https://www.flickr.com/photos/hedingw/2365645767/",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
+    },
+    {
+      "index": 23,
+      "title": "Rain Gutter",
+      "author_name": "jasonippolito",
+      "photo_page": "https://www.flickr.com/photos/jasonippolito/2400707119/",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
+    }
+  ]
+}

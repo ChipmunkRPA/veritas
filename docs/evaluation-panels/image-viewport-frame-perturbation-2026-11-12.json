@@ -1,0 +1,5234 @@
+{
+  "arms": [
+    "base",
+    "dark_rim",
+    "light_rim",
+    "texture_apron"
+  ],
+  "elapsed_s": 13.317852916996344,
+  "existing_check_sha256": "04c120cd027e50bd107fd15778f66fe38c43d64439e090835dfad99727e41cbc",
+  "freeze_sha256": "f505dab1951a47498d44b9216df685b0e40bde0250ef7ddcc4c8432e326a9a12",
+  "implementation_sha256": "e29a586262c5b363aa07347f0b305da392696434c53352177669f5cfb20d6cf6",
+  "point": 0.8292734622955322,
+  "result": {
+    "discovery": {
+      "base": {
+        "base_useful": 9,
+        "changed_fixed_side_inputs": 0,
+        "clean_flags": 10,
+        "edited_flags": 12,
+        "edited_useful": 9,
+        "fixed_base_useful_clean_flags": 0,
+        "fixed_clean_flags": 2,
+        "fixed_edited_flags": 12,
+        "groups": 12,
+        "retained_fixed_edited": 9,
+        "retained_useful": 9,
+        "same_selected_region": 9
+      },
+      "dark_rim": {
+        "base_useful": 9,
+        "changed_fixed_side_inputs": 11,
+        "clean_flags": 10,
+        "edited_flags": 11,
+        "edited_useful": 9,
+        "fixed_base_useful_clean_flags": 0,
+        "fixed_clean_flags": 1,
+        "fixed_edited_flags": 11,
+        "groups": 12,
+        "retained_fixed_edited": 9,
+        "retained_useful": 9,
+        "same_selected_region": 9
+      },
+      "light_rim": {
+        "base_useful": 9,
+        "changed_fixed_side_inputs": 11,
+        "clean_flags": 10,
+        "edited_flags": 12,
+        "edited_useful": 9,
+        "fixed_base_useful_clean_flags": 0,
+        "fixed_clean_flags": 2,
+        "fixed_edited_flags": 12,
+        "groups": 12,
+        "retained_fixed_edited": 9,
+        "retained_useful": 9,
+        "same_selected_region": 9
+      },
+      "texture_apron": {
+        "base_useful": 9,
+        "changed_fixed_side_inputs": 11,
+        "clean_flags": 10,
+        "edited_flags": 11,
+        "edited_useful": 10,
+        "fixed_base_useful_clean_flags": 0,
+        "fixed_clean_flags": 0,
+        "fixed_edited_flags": 8,
+        "groups": 12,
+        "retained_fixed_edited": 8,
+        "retained_useful": 9,
+        "same_selected_region": 9
+      }
+    },
+    "transfer": {
+      "base": {
+        "base_useful": 4,
+        "changed_fixed_side_inputs": 0,
+        "clean_flags": 5,
+        "edited_flags": 6,
+        "edited_useful": 4,
+        "fixed_base_useful_clean_flags": 0,
+        "fixed_clean_flags": 1,
+        "fixed_edited_flags": 6,
+        "groups": 6,
+        "retained_fixed_edited": 4,
+        "retained_useful": 4,
+        "same_selected_region": 4
+      },
+      "dark_rim": {
+        "base_useful": 4,
+        "changed_fixed_side_inputs": 5,
+        "clean_flags": 6,
+        "edited_flags": 6,
+        "edited_useful": 4,
+        "fixed_base_useful_clean_flags": 0,
+        "fixed_clean_flags": 0,
+        "fixed_edited_flags": 6,
+        "groups": 6,
+        "retained_fixed_edited": 4,
+        "retained_useful": 4,
+        "same_selected_region": 4
+      },
+      "light_rim": {
+        "base_useful": 4,
+        "changed_fixed_side_inputs": 5,
+        "clean_flags": 5,
+        "edited_flags": 6,
+        "edited_useful": 4,
+        "fixed_base_useful_clean_flags": 0,
+        "fixed_clean_flags": 1,
+        "fixed_edited_flags": 6,
+        "groups": 6,
+        "retained_fixed_edited": 4,
+        "retained_useful": 4,
+        "same_selected_region": 4
+      },
+      "texture_apron": {
+        "base_useful": 4,
+        "changed_fixed_side_inputs": 5,
+        "clean_flags": 6,
+        "edited_flags": 6,
+        "edited_useful": 6,
+        "fixed_base_useful_clean_flags": 0,
+        "fixed_clean_flags": 0,
+        "fixed_edited_flags": 4,
+        "groups": 6,
+        "retained_fixed_edited": 4,
+        "retained_useful": 4,
+        "same_selected_region": 4
+      }
+    }
+  },
+  "rim": 16,
+  "rows": [
+    {
+      "arms": {
+        "base": {
+          "clean": {
+            "box": [
+              158,
+              418,
+              414,
+              610
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 1.0771921873092651,
+            "sides": {
+              "bottom": 2.8050405979156494,
+              "left": 2.7402327060699463,
+              "right": 0.2589506506919861,
+              "top": 0.6764397025108337
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              158,
+              418,
+              414,
+              610
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 1.0771921873092651,
+            "sides": {
+              "bottom": 2.8050405979156494,
+              "left": 2.7402327060699463,
+              "right": 0.2589506506919861,
+              "top": 0.6764397025108337
+            },
+            "useful": false
+          },
+          "fixed_clean": {
+            "flag": true,
+            "score": 1.0771921106762918,
+            "sides": {
+              "bottom": 2.805040514375372,
+              "left": 2.740232446647827,
+              "right": 0.25895062783719563,
+              "top": 0.6764397881850482
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": true,
+              "right": true,
+              "top": true
+            },
+            "score": 1.0771921106762918,
+            "sides": {
+              "bottom": 2.805040514375372,
+              "left": 2.740232446647827,
+              "right": 0.25895062783719563,
+              "top": 0.6764397881850482
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 24576
+        },
+        "dark_rim": {
+          "clean": {
+            "box": [
+              14,
+              44,
+              142,
+              172
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 1.1644171476364136,
+            "sides": {
+              "bottom": 0.8677964210510254,
+              "left": 0.482965886592865,
+              "right": 2.109375,
+              "top": 2.079439640045166
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              14,
+              44,
+              142,
+              172
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 1.1644171476364136,
+            "sides": {
+              "bottom": 0.8677964210510254,
+              "left": 0.482965886592865,
+              "right": 2.109375,
+              "top": 2.079439640045166
+            },
+            "useful": false
+          },
+          "fixed_clean": {
+            "flag": true,
+            "score": 0.9365871967167131,
+            "sides": {
+              "bottom": 2.8500246212903955,
+              "left": 1.5413389078285584,
+              "right": 0.25895062783719563,
+              "top": 0.6764397881850482
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": false,
+              "left": false,
+              "right": true,
+              "top": true
+            },
+            "score": 0.9365871967167131,
+            "sides": {
+              "bottom": 2.8500246212903955,
+              "left": 1.5413389078285584,
+              "right": 0.25895062783719563,
+              "top": 0.6764397881850482
+            }
+          },
+          "selected_iou_with_base": 0.0,
+          "target": 24576
+        },
+        "light_rim": {
+          "clean": {
+            "box": [
+              158,
+              418,
+              414,
+              610
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 1.0776185989379883,
+            "sides": {
+              "bottom": 2.807640552520752,
+              "left": 2.742033004760742,
+              "right": 0.2589506506919861,
+              "top": 0.6764397025108337
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              158,
+              418,
+              414,
+              610
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 1.0776185989379883,
+            "sides": {
+              "bottom": 2.807640552520752,
+              "left": 2.742033004760742,
+              "right": 0.2589506506919861,
+              "top": 0.6764397025108337
+            },
+            "useful": false
+          },
+          "fixed_clean": {
+            "flag": true,
+            "score": 1.0776185192860286,
+            "sides": {
+              "bottom": 2.8076405332963748,
+              "left": 2.742032313212374,
+              "right": 0.25895062783719563,
+              "top": 0.6764397881850482
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": false,
+              "left": false,
+              "right": true,
+              "top": true
+            },
+            "score": 1.0776185192860286,
+            "sides": {
+              "bottom": 2.8076405332963748,
+              "left": 2.742032313212374,
+              "right": 0.25895062783719563,
+              "top": 0.6764397881850482
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 24576
+        },
+        "texture_apron": {
+          "clean": {
+            "box": [
+              142,
+              370,
+              334,
+              626
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 1.055985689163208,
+            "sides": {
+              "bottom": 2.8760483264923096,
+              "left": 2.8998303413391113,
+              "right": 0.22335860133171082,
+              "top": 0.6675146222114563
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              142,
+              370,
+              334,
+              626
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 1.055985689163208,
+            "sides": {
+              "bottom": 2.8760483264923096,
+              "left": 2.8998303413391113,
+              "right": 0.22335860133171082,
+              "top": 0.6675146222114563
+            },
+            "useful": false
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.27693494411155917,
+            "sides": {
+              "bottom": 0.21480164972211435,
+              "left": 0.15632459460401518,
+              "right": 0.25895062783719563,
+              "top": 0.6764397881850482
+            }
+          },
+          "fixed_edited": {
+            "flag": false,
+            "pixels": {
+              "bottom": false,
+              "left": false,
+              "right": true,
+              "top": true
+            },
+            "score": 0.27693494411155917,
+            "sides": {
+              "bottom": 0.21480164972211435,
+              "left": 0.15632459460401518,
+              "right": 0.25895062783719563,
+              "top": 0.6764397881850482
+            }
+          },
+          "selected_iou_with_base": 0.5238095238095238,
+          "target": 24576
+        }
+      },
+      "family": "archived-screenshot",
+      "panel": "discovery",
+      "reference_box": [
+        158,
+        418,
+        414,
+        610
+      ],
+      "slot": 0,
+      "viewport": [
+        158,
+        98,
+        694,
+        610
+      ]
+    },
+    {
+      "arms": {
+        "base": {
+          "clean": {
+            "box": [
+              313,
+              108,
+              569,
+              364
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.8931751847267151,
+            "sides": {
+              "bottom": 0.24880442023277283,
+              "left": 0.31004977226257324,
+              "right": 2.7853713035583496,
+              "top": 2.9619247913360596
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              25,
+              388,
+              217,
+              644
+            ],
+            "flag": true,
+            "overlap": 11520,
+            "score": 1.6773394346237183,
+            "sides": {
+              "bottom": 2.687218427658081,
+              "left": 2.8925118446350098,
+              "right": 0.7933989763259888,
+              "top": 1.283553957939148
+            },
+            "useful": false
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.7721692872328193,
+            "sides": {
+              "bottom": 2.6872186517987604,
+              "left": 2.996573882322577,
+              "right": 0.2096135715969028,
+              "top": 0.2106215001508207
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": true,
+              "right": true,
+              "top": true
+            },
+            "score": 1.6773389814231912,
+            "sides": {
+              "bottom": 2.6872186517987604,
+              "left": 2.8925109558433824,
+              "right": 0.7933984568914257,
+              "top": 1.2835535469325634
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 27648
+        },
+        "dark_rim": {
+          "clean": {
+            "box": [
+              313,
+              108,
+              569,
+              364
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.8983612060546875,
+            "sides": {
+              "bottom": 0.24880442023277283,
+              "left": 0.31004977226257324,
+              "right": 2.841939687728882,
+              "top": 2.9709787368774414
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              25,
+              388,
+              217,
+              644
+            ],
+            "flag": true,
+            "overlap": 11520,
+            "score": 1.7035669088363647,
+            "sides": {
+              "bottom": 2.7891018390655518,
+              "left": 2.9652860164642334,
+              "right": 0.7933989763259888,
+              "top": 1.283553957939148
+            },
+            "useful": false
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.7795681265168738,
+            "sides": {
+              "bottom": 2.7891019738220812,
+              "left": 2.999368348359244,
+              "right": 0.2096135715969028,
+              "top": 0.2106215001508207
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": false,
+              "left": false,
+              "right": true,
+              "top": true
+            },
+            "score": 1.7035664554789867,
+            "sides": {
+              "bottom": 2.7891019738220812,
+              "left": 2.9652859780186303,
+              "right": 0.7933984568914257,
+              "top": 1.2835535469325634
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 27648
+        },
+        "light_rim": {
+          "clean": {
+            "box": [
+              313,
+              468,
+              569,
+              660
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 1.0759927034378052,
+            "sides": {
+              "bottom": 3.0,
+              "left": 0.8123815059661865,
+              "right": 2.7097911834716797,
+              "top": 0.20296457409858704
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              25,
+              388,
+              217,
+              644
+            ],
+            "flag": true,
+            "overlap": 11520,
+            "score": 1.7362498044967651,
+            "sides": {
+              "bottom": 2.976280450820923,
+              "left": 2.9982597827911377,
+              "right": 0.7933989763259888,
+              "top": 1.283553957939148
+            },
+            "useful": false
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.7922214609603496,
+            "sides": {
+              "bottom": 2.9762804044953364,
+              "left": 2.9977158740593284,
+              "right": 0.2096135715969028,
+              "top": 0.2106215001508207
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": false,
+              "left": false,
+              "right": true,
+              "top": true
+            },
+            "score": 1.7362494398239796,
+            "sides": {
+              "bottom": 2.9762804044953364,
+              "left": 2.998259972533547,
+              "right": 0.7933984568914257,
+              "top": 1.2835535469325634
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 27648
+        },
+        "texture_apron": {
+          "clean": {
+            "box": [
+              9,
+              92,
+              265,
+              284
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.8903675675392151,
+            "sides": {
+              "bottom": 0.3667649030685425,
+              "left": 2.983379364013672,
+              "right": 0.19180326163768768,
+              "top": 2.9945056438446045
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              25,
+              320,
+              217,
+              448
+            ],
+            "flag": true,
+            "overlap": 24576,
+            "score": 1.3468619585037231,
+            "sides": {
+              "bottom": 2.705190420150757,
+              "left": 2.855858564376831,
+              "right": 2.8102293014526367,
+              "top": 0.15157096087932587
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.14015290435916108,
+            "sides": {
+              "bottom": 0.08595426928056459,
+              "left": 0.10167609439352202,
+              "right": 0.2096135715969028,
+              "top": 0.2106215001508207
+            }
+          },
+          "fixed_edited": {
+            "flag": false,
+            "pixels": {
+              "bottom": false,
+              "left": false,
+              "right": true,
+              "top": true
+            },
+            "score": 0.5017366618502461,
+            "sides": {
+              "bottom": 0.08595426928056459,
+              "left": 0.7239866347579861,
+              "right": 0.7933984568914257,
+              "top": 1.2835535469325634
+            }
+          },
+          "selected_iou_with_base": 0.18518518518518517,
+          "target": 27648
+        }
+      },
+      "family": "archived-screenshot",
+      "panel": "discovery",
+      "reference_box": [
+        25,
+        388,
+        217,
+        644
+      ],
+      "slot": 1,
+      "viewport": [
+        25,
+        108,
+        569,
+        644
+      ]
+    },
+    {
+      "arms": {
+        "base": {
+          "clean": {
+            "box": [
+              124,
+              337,
+              252,
+              593
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.8559898138046265,
+            "sides": {
+              "bottom": 2.8644227981567383,
+              "left": 2.651616096496582,
+              "right": 0.30325213074684143,
+              "top": 0.23308950662612915
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              124,
+              337,
+              252,
+              593
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.8559898138046265,
+            "sides": {
+              "bottom": 2.8644227981567383,
+              "left": 2.651616096496582,
+              "right": 0.30325213074684143,
+              "top": 0.23308950662612915
+            },
+            "useful": false
+          },
+          "fixed_clean": {
+            "flag": true,
+            "score": 0.8559897424343207,
+            "sides": {
+              "bottom": 2.8644231252145396,
+              "left": 2.651614486118055,
+              "right": 0.3032522154575172,
+              "top": 0.23308949727393138
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": true,
+              "right": true,
+              "top": true
+            },
+            "score": 0.8559897424343207,
+            "sides": {
+              "bottom": 2.8644231252145396,
+              "left": 2.651614486118055,
+              "right": 0.3032522154575172,
+              "top": 0.23308949727393138
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 23818
+        },
+        "dark_rim": {
+          "clean": {
+            "box": [
+              108,
+              417,
+              364,
+              609
+            ],
+            "flag": false,
+            "overlap": 0,
+            "score": 0.8109599351882935,
+            "sides": {
+              "bottom": 3.0,
+              "left": 3.0,
+              "right": 0.33254316449165344,
+              "top": 0.14451304078102112
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              108,
+              417,
+              364,
+              609
+            ],
+            "flag": false,
+            "overlap": 0,
+            "score": 0.8109599351882935,
+            "sides": {
+              "bottom": 3.0,
+              "left": 3.0,
+              "right": 0.3325432240962982,
+              "top": 0.14451304078102112
+            },
+            "useful": false
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.6910023194818113,
+            "sides": {
+              "bottom": 2.4084604158219407,
+              "left": 1.3392196724462213,
+              "right": 0.3032522154575172,
+              "top": 0.23308949727393138
+            }
+          },
+          "fixed_edited": {
+            "flag": false,
+            "pixels": {
+              "bottom": false,
+              "left": false,
+              "right": true,
+              "top": true
+            },
+            "score": 0.6910023194818113,
+            "sides": {
+              "bottom": 2.4084604158219407,
+              "left": 1.3392196724462213,
+              "right": 0.3032522154575172,
+              "top": 0.23308949727393138
+            }
+          },
+          "selected_iou_with_base": 0.3793103448275862,
+          "target": 23818
+        },
+        "light_rim": {
+          "clean": {
+            "box": [
+              124,
+              337,
+              252,
+              593
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.8622927665710449,
+            "sides": {
+              "bottom": 2.9051506519317627,
+              "left": 2.6923019886016846,
+              "right": 0.30325213074684143,
+              "top": 0.23308950662612915
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              124,
+              337,
+              252,
+              593
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.8622927665710449,
+            "sides": {
+              "bottom": 2.9051506519317627,
+              "left": 2.6923019886016846,
+              "right": 0.30325213074684143,
+              "top": 0.23308950662612915
+            },
+            "useful": false
+          },
+          "fixed_clean": {
+            "flag": true,
+            "score": 0.862293016868022,
+            "sides": {
+              "bottom": 2.9051508523830134,
+              "left": 2.692304023703329,
+              "right": 0.3032522154575172,
+              "top": 0.23308949727393138
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": false,
+              "left": false,
+              "right": true,
+              "top": true
+            },
+            "score": 0.862293016868022,
+            "sides": {
+              "bottom": 2.9051508523830134,
+              "left": 2.692304023703329,
+              "right": 0.3032522154575172,
+              "top": 0.23308949727393138
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 23818
+        },
+        "texture_apron": {
+          "clean": {
+            "box": [
+              108,
+              417,
+              364,
+              609
+            ],
+            "flag": false,
+            "overlap": 0,
+            "score": 0.7935822010040283,
+            "sides": {
+              "bottom": 2.746232748031616,
+              "left": 2.6720125675201416,
+              "right": 0.35393473505973816,
+              "top": 0.1527104377746582
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              108,
+              417,
+              364,
+              609
+            ],
+            "flag": false,
+            "overlap": 0,
+            "score": 0.7935822606086731,
+            "sides": {
+              "bottom": 2.746232748031616,
+              "left": 2.6720125675201416,
+              "right": 0.35393476486206055,
+              "top": 0.1527104377746582
+            },
+            "useful": false
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.234267231182853,
+            "sides": {
+              "bottom": 0.13863893533508484,
+              "left": 0.3073507493980103,
+              "right": 0.3032522154575172,
+              "top": 0.23308949727393138
+            }
+          },
+          "fixed_edited": {
+            "flag": false,
+            "pixels": {
+              "bottom": false,
+              "left": false,
+              "right": true,
+              "top": true
+            },
+            "score": 0.234267231182853,
+            "sides": {
+              "bottom": 0.13863893533508484,
+              "left": 0.3073507493980103,
+              "right": 0.3032522154575172,
+              "top": 0.23308949727393138
+            }
+          },
+          "selected_iou_with_base": 0.3793103448275862,
+          "target": 23818
+        }
+      },
+      "family": "archived-screenshot",
+      "panel": "discovery",
+      "reference_box": [
+        124,
+        337,
+        252,
+        593
+      ],
+      "slot": 2,
+      "viewport": [
+        124,
+        65,
+        676,
+        593
+      ]
+    },
+    {
+      "arms": {
+        "base": {
+          "clean": {
+            "box": [
+              509,
+              135,
+              637,
+              327
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.9387558698654175,
+            "sides": {
+              "bottom": 0.8499437570571899,
+              "left": 0.1134660467505455,
+              "right": 2.9688327312469482,
+              "top": 2.712493896484375
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              101,
+              135,
+              293,
+              327
+            ],
+            "flag": true,
+            "overlap": 26112,
+            "score": 1.165847659111023,
+            "sides": {
+              "bottom": 0.3769876956939697,
+              "left": 1.164529800415039,
+              "right": 1.7328633069992065,
+              "top": 2.4284274578094482
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.6349442708680273,
+            "sides": {
+              "bottom": 0.37698767392602134,
+              "left": 2.355841587068745,
+              "right": 0.08473716313986195,
+              "top": 2.1597092106609934
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": true,
+              "right": true,
+              "top": true
+            },
+            "score": 1.1658476031537004,
+            "sides": {
+              "bottom": 0.37698767392602134,
+              "left": 1.1645307293604221,
+              "right": 1.732863264080267,
+              "top": 2.428425239672501
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 26112
+        },
+        "dark_rim": {
+          "clean": {
+            "box": [
+              443,
+              135,
+              635,
+              327
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.9584147334098816,
+            "sides": {
+              "bottom": 0.782940149307251,
+              "left": 0.12542328238487244,
+              "right": 2.882018804550171,
+              "top": 2.981332540512085
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              101,
+              135,
+              293,
+              327
+            ],
+            "flag": true,
+            "overlap": 26112,
+            "score": 1.555837631225586,
+            "sides": {
+              "bottom": 0.3769876956939697,
+              "left": 2.9917542934417725,
+              "right": 1.7328633069992065,
+              "top": 2.9980552196502686
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.7300708136728399,
+            "sides": {
+              "bottom": 0.37698767392602134,
+              "left": 3.0,
+              "right": 0.08473716313986195,
+              "top": 2.964405575981418
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": false,
+              "right": true,
+              "top": false
+            },
+            "score": 1.5558374994292956,
+            "sides": {
+              "bottom": 0.37698767392602134,
+              "left": 2.9917541352402934,
+              "right": 1.732863264080267,
+              "top": 2.998054985244016
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 26112
+        },
+        "light_rim": {
+          "clean": {
+            "box": [
+              509,
+              135,
+              637,
+              327
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.9444693922996521,
+            "sides": {
+              "bottom": 0.8499437570571899,
+              "left": 0.1134660467505455,
+              "right": 2.9692962169647217,
+              "top": 2.7787017822265625
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              101,
+              135,
+              293,
+              327
+            ],
+            "flag": true,
+            "overlap": 26112,
+            "score": 1.1532069444656372,
+            "sides": {
+              "bottom": 0.3769876956939697,
+              "left": 1.0972938537597656,
+              "right": 1.7328633069992065,
+              "top": 2.4672577381134033
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.642098757521412,
+            "sides": {
+              "bottom": 0.37698767392602134,
+              "left": 2.4529405285437025,
+              "right": 0.08473716313986195,
+              "top": 2.169298061715479
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": false,
+              "right": true,
+              "top": false
+            },
+            "score": 1.1532070244878792,
+            "sides": {
+              "bottom": 0.37698767392602134,
+              "left": 1.0972941468453283,
+              "right": 1.732863264080267,
+              "top": 2.4672582411574537
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 26112
+        },
+        "texture_apron": {
+          "clean": {
+            "box": [
+              525,
+              423,
+              653,
+              679
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.9353026747703552,
+            "sides": {
+              "bottom": 2.670207977294922,
+              "left": 0.3423590362071991,
+              "right": 2.984621286392212,
+              "top": 0.2804739773273468
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              101,
+              135,
+              293,
+              327
+            ],
+            "flag": true,
+            "overlap": 26112,
+            "score": 1.0483118295669556,
+            "sides": {
+              "bottom": 0.3769876956939697,
+              "left": 1.1372798681259155,
+              "right": 1.7328630685806274,
+              "top": 1.6255602836608887
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.10047574420254089,
+            "sides": {
+              "bottom": 0.37698767392602134,
+              "left": 0.06986720424209959,
+              "right": 0.08473716313986195,
+              "top": 0.045663636063273005
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": false,
+              "right": true,
+              "top": false
+            },
+            "score": 1.0483116318421488,
+            "sides": {
+              "bottom": 0.37698767392602134,
+              "left": 1.1372794614600448,
+              "right": 1.732863264080267,
+              "top": 1.6255598981956325
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 26112
+        }
+      },
+      "family": "archived-screenshot",
+      "panel": "discovery",
+      "reference_box": [
+        101,
+        135,
+        293,
+        327
+      ],
+      "slot": 3,
+      "viewport": [
+        101,
+        135,
+        637,
+        663
+      ]
+    },
+    {
+      "arms": {
+        "base": {
+          "clean": {
+            "box": [
+              163,
+              357,
+              419,
+              613
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.8365437388420105,
+            "sides": {
+              "bottom": 2.5372378826141357,
+              "left": 3.0,
+              "right": 0.23246167600154877,
+              "top": 0.2767711579799652
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              339,
+              357,
+              531,
+              485
+            ],
+            "flag": true,
+            "overlap": 24576,
+            "score": 2.767902135848999,
+            "sides": {
+              "bottom": 2.726757764816284,
+              "left": 2.750718116760254,
+              "right": 2.7820844650268555,
+              "top": 2.812807083129883
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.1426463692100456,
+            "sides": {
+              "bottom": 0.08957141565529463,
+              "left": 0.21041583357041477,
+              "right": 0.15091672021037278,
+              "top": 0.1455652379176642
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": true,
+              "right": true,
+              "top": true
+            },
+            "score": 2.7679020930482303,
+            "sides": {
+              "bottom": 2.7267576251952135,
+              "left": 2.7507181908484952,
+              "right": 2.7820844700652025,
+              "top": 2.812807093075204
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 24576
+        },
+        "dark_rim": {
+          "clean": {
+            "box": [
+              595,
+              85,
+              723,
+              341
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.9519768953323364,
+            "sides": {
+              "bottom": 0.1740882396697998,
+              "left": 0.5241959691047668,
+              "right": 3.0,
+              "top": 3.0
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              339,
+              357,
+              531,
+              485
+            ],
+            "flag": true,
+            "overlap": 24576,
+            "score": 2.767902135848999,
+            "sides": {
+              "bottom": 2.726757764816284,
+              "left": 2.750718116760254,
+              "right": 2.7820844650268555,
+              "top": 2.812807083129883
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.1426463692100456,
+            "sides": {
+              "bottom": 0.08957141565529463,
+              "left": 0.21041583357041477,
+              "right": 0.15091672021037278,
+              "top": 0.1455652379176642
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": true,
+              "right": true,
+              "top": true
+            },
+            "score": 2.7679020930482303,
+            "sides": {
+              "bottom": 2.7267576251952135,
+              "left": 2.7507181908484952,
+              "right": 2.7820844700652025,
+              "top": 2.812807093075204
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 24576
+        },
+        "light_rim": {
+          "clean": {
+            "box": [
+              163,
+              357,
+              419,
+              613
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.8369500041007996,
+            "sides": {
+              "bottom": 2.5421700477600098,
+              "left": 3.0,
+              "right": 0.23246167600154877,
+              "top": 0.2767711579799652
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              339,
+              357,
+              531,
+              485
+            ],
+            "flag": true,
+            "overlap": 24576,
+            "score": 2.767902135848999,
+            "sides": {
+              "bottom": 2.726757764816284,
+              "left": 2.750718116760254,
+              "right": 2.7820844650268555,
+              "top": 2.812807083129883
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.1426463692100456,
+            "sides": {
+              "bottom": 0.08957141565529463,
+              "left": 0.21041583357041477,
+              "right": 0.15091672021037278,
+              "top": 0.1455652379176642
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": true,
+              "right": true,
+              "top": true
+            },
+            "score": 2.7679020930482303,
+            "sides": {
+              "bottom": 2.7267576251952135,
+              "left": 2.7507181908484952,
+              "right": 2.7820844700652025,
+              "top": 2.812807093075204
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 24576
+        },
+        "texture_apron": {
+          "clean": {
+            "box": [
+              595,
+              233,
+              723,
+              361
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.9593267440795898,
+            "sides": {
+              "bottom": 0.4134678244590759,
+              "left": 0.791339099407196,
+              "right": 2.92071533203125,
+              "top": 0.8862833976745605
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              339,
+              357,
+              531,
+              485
+            ],
+            "flag": true,
+            "overlap": 24576,
+            "score": 2.767902135848999,
+            "sides": {
+              "bottom": 2.7267580032348633,
+              "left": 2.750718116760254,
+              "right": 2.7820844650268555,
+              "top": 2.812807083129883
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.1426463692100456,
+            "sides": {
+              "bottom": 0.08957141565529463,
+              "left": 0.21041583357041477,
+              "right": 0.15091672021037278,
+              "top": 0.1455652379176642
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": true,
+              "right": true,
+              "top": true
+            },
+            "score": 2.7679020930482303,
+            "sides": {
+              "bottom": 2.7267576251952135,
+              "left": 2.7507181908484952,
+              "right": 2.7820844700652025,
+              "top": 2.812807093075204
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 24576
+        }
+      },
+      "family": "archived-screenshot",
+      "panel": "discovery",
+      "reference_box": [
+        339,
+        357,
+        531,
+        485
+      ],
+      "slot": 4,
+      "viewport": [
+        163,
+        101,
+        707,
+        613
+      ]
+    },
+    {
+      "arms": {
+        "base": {
+          "clean": {
+            "box": [
+              326,
+              44,
+              582,
+              236
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 1.17731773853302,
+            "sides": {
+              "bottom": 1.0122523307800293,
+              "left": 0.47795167565345764,
+              "right": 1.5921388864517212,
+              "top": 2.494140625
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              126,
+              495,
+              318,
+              623
+            ],
+            "flag": true,
+            "overlap": 24576,
+            "score": 2.400118827819824,
+            "sides": {
+              "bottom": 2.999610185623169,
+              "left": 2.1421914100646973,
+              "right": 2.4561474323272705,
+              "top": 2.1025843620300293
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.44319126174514345,
+            "sides": {
+              "bottom": 2.829265310644136,
+              "left": 0.25886192119015516,
+              "right": 0.22958305029325765,
+              "top": 0.22944737279736296
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": true,
+              "right": true,
+              "top": true
+            },
+            "score": 2.400118676680455,
+            "sides": {
+              "bottom": 2.999610141994664,
+              "left": 2.1421913719034986,
+              "right": 2.4561472534473205,
+              "top": 2.1025841496415114
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 24576
+        },
+        "dark_rim": {
+          "clean": {
+            "box": [
+              326,
+              44,
+              582,
+              236
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 1.198667049407959,
+            "sides": {
+              "bottom": 1.0122523307800293,
+              "left": 0.47795167565345764,
+              "right": 1.710805058479309,
+              "top": 2.494140625
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              126,
+              495,
+              318,
+              623
+            ],
+            "flag": true,
+            "overlap": 24576,
+            "score": 2.4001967906951904,
+            "sides": {
+              "bottom": 3.0,
+              "left": 2.1421914100646973,
+              "right": 2.4561474323272705,
+              "top": 2.1025843620300293
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.44557141490597635,
+            "sides": {
+              "bottom": 2.890534815004026,
+              "left": 0.25886192119015516,
+              "right": 0.22958305029325765,
+              "top": 0.22944737279736296
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": false,
+              "left": true,
+              "right": true,
+              "top": true
+            },
+            "score": 2.400196658470927,
+            "sides": {
+              "bottom": 3.0,
+              "left": 2.1421913719034986,
+              "right": 2.4561472534473205,
+              "top": 2.1025841496415114
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 24576
+        },
+        "light_rim": {
+          "clean": {
+            "box": [
+              326,
+              95,
+              582,
+              223
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 1.315754771232605,
+            "sides": {
+              "bottom": 0.7766097784042358,
+              "left": 0.5043361783027649,
+              "right": 2.550678014755249,
+              "top": 3.0
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              126,
+              495,
+              318,
+              623
+            ],
+            "flag": true,
+            "overlap": 24576,
+            "score": 2.298323392868042,
+            "sides": {
+              "bottom": 2.5221941471099854,
+              "left": 2.1421914100646973,
+              "right": 2.4561474323272705,
+              "top": 2.1025843620300293
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.4400553565346689,
+            "sides": {
+              "bottom": 2.7500346505137663,
+              "left": 0.25886192119015516,
+              "right": 0.22958305029325765,
+              "top": 0.22944737279736296
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": false,
+              "left": true,
+              "right": true,
+              "top": true
+            },
+            "score": 2.2983234776552255,
+            "sides": {
+              "bottom": 2.522194424822194,
+              "left": 2.1421913719034986,
+              "right": 2.4561472534473205,
+              "top": 2.1025841496415114
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 24576
+        },
+        "texture_apron": {
+          "clean": {
+            "box": [
+              285,
+              44,
+              477,
+              236
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 1.0351907014846802,
+            "sides": {
+              "bottom": 1.5107146501541138,
+              "left": 0.5945720672607422,
+              "right": 0.5125940442085266,
+              "top": 2.494140625
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              126,
+              495,
+              318,
+              623
+            ],
+            "flag": true,
+            "overlap": 24576,
+            "score": 2.1107513904571533,
+            "sides": {
+              "bottom": 1.7942472696304321,
+              "left": 2.1421916484832764,
+              "right": 2.4561474323272705,
+              "top": 2.10258412361145
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.22494375348029388,
+            "sides": {
+              "bottom": 0.18776068864670314,
+              "left": 0.25886192119015516,
+              "right": 0.22958305029325765,
+              "top": 0.22944737279736296
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": false,
+              "left": true,
+              "right": true,
+              "top": true
+            },
+            "score": 2.1107514736509208,
+            "sides": {
+              "bottom": 1.7942475098724688,
+              "left": 2.1421913719034986,
+              "right": 2.4561472534473205,
+              "top": 2.1025841496415114
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 24576
+        }
+      },
+      "family": "archived-screenshot",
+      "panel": "discovery",
+      "reference_box": [
+        126,
+        495,
+        318,
+        623
+      ],
+      "slot": 5,
+      "viewport": [
+        30,
+        111,
+        582,
+        623
+      ]
+    },
+    {
+      "arms": {
+        "base": {
+          "clean": {
+            "box": [
+              129,
+              68,
+              257,
+              196
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.9256070852279663,
+            "sides": {
+              "bottom": 0.589194655418396,
+              "left": 2.8990321159362793,
+              "right": 0.14708060026168823,
+              "top": 2.9217259883880615
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              301,
+              68,
+              493,
+              196
+            ],
+            "flag": true,
+            "overlap": 24576,
+            "score": 2.1033904552459717,
+            "sides": {
+              "bottom": 2.1099066734313965,
+              "left": 1.6230485439300537,
+              "right": 1.906358003616333,
+              "top": 2.9983367919921875
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.48085593876268634,
+            "sides": {
+              "bottom": 0.753949503633307,
+              "left": 0.10973437680277262,
+              "right": 0.21795301027143027,
+              "top": 2.9649140194403487
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": true,
+              "right": true,
+              "top": true
+            },
+            "score": 2.1033905826101864,
+            "sides": {
+              "bottom": 2.1099068261172014,
+              "left": 1.623048449069461,
+              "right": 1.9063579013079859,
+              "top": 2.9983373903816752
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 24576
+        },
+        "dark_rim": {
+          "clean": {
+            "box": [
+              553,
+              468,
+              681,
+              596
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.95085209608078,
+            "sides": {
+              "bottom": 3.0,
+              "left": 0.3352600336074829,
+              "right": 3.0,
+              "top": 0.2709115743637085
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              301,
+              68,
+              493,
+              196
+            ],
+            "flag": true,
+            "overlap": 24576,
+            "score": 2.103682279586792,
+            "sides": {
+              "bottom": 2.1099066734313965,
+              "left": 1.6230485439300537,
+              "right": 1.906358003616333,
+              "top": 3.0
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.48227224845780986,
+            "sides": {
+              "bottom": 0.753949503633307,
+              "left": 0.10973437680277262,
+              "right": 0.21795301027143027,
+              "top": 3.0
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": true,
+              "right": true,
+              "top": false
+            },
+            "score": 2.1036821100467287,
+            "sides": {
+              "bottom": 2.1099068261172014,
+              "left": 1.623048449069461,
+              "right": 1.9063579013079859,
+              "top": 3.0
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 24576
+        },
+        "light_rim": {
+          "clean": {
+            "box": [
+              129,
+              68,
+              257,
+              196
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.9348114728927612,
+            "sides": {
+              "bottom": 0.589194655418396,
+              "left": 2.9507381916046143,
+              "right": 0.14708060026168823,
+              "top": 2.986422300338745
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              301,
+              68,
+              493,
+              196
+            ],
+            "flag": true,
+            "overlap": 24576,
+            "score": 2.103682279586792,
+            "sides": {
+              "bottom": 2.1099066734313965,
+              "left": 1.6230485439300537,
+              "right": 1.906358003616333,
+              "top": 3.0
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.4821226625770102,
+            "sides": {
+              "bottom": 0.753949503633307,
+              "left": 0.10973437680277262,
+              "right": 0.21795301027143027,
+              "top": 2.996279703831459
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": true,
+              "right": true,
+              "top": false
+            },
+            "score": 2.1036821100467287,
+            "sides": {
+              "bottom": 2.1099068261172014,
+              "left": 1.623048449069461,
+              "right": 1.9063579013079859,
+              "top": 3.0
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 24576
+        },
+        "texture_apron": {
+          "clean": {
+            "box": [
+              113,
+              340,
+              241,
+              596
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.9148769974708557,
+            "sides": {
+              "bottom": 3.0,
+              "left": 2.3683345317840576,
+              "right": 0.1675560623407364,
+              "top": 0.5884727239608765
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              301,
+              68,
+              493,
+              196
+            ],
+            "flag": true,
+            "overlap": 24576,
+            "score": 1.8105765581130981,
+            "sides": {
+              "bottom": 2.1099066734313965,
+              "left": 1.6230484247207642,
+              "right": 1.906358003616333,
+              "top": 1.6461461782455444
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.20566887617458998,
+            "sides": {
+              "bottom": 0.753949503633307,
+              "left": 0.10973437680277262,
+              "right": 0.21795301027143027,
+              "top": 0.09922622450603712
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": true,
+              "right": true,
+              "top": false
+            },
+            "score": 1.81057649656467,
+            "sides": {
+              "bottom": 2.1099068261172014,
+              "left": 1.623048449069461,
+              "right": 1.9063579013079859,
+              "top": 1.6461458583795363
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 24576
+        }
+      },
+      "family": "archived-screenshot",
+      "panel": "discovery",
+      "reference_box": [
+        301,
+        68,
+        493,
+        196
+      ],
+      "slot": 6,
+      "viewport": [
+        129,
+        68,
+        665,
+        580
+      ]
+    },
+    {
+      "arms": {
+        "base": {
+          "clean": {
+            "box": [
+              490,
+              418,
+              618,
+              674
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 1.0835977792739868,
+            "sides": {
+              "bottom": 3.0,
+              "left": 0.3307231664657593,
+              "right": 2.5674684047698975,
+              "top": 0.5412293672561646
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              362,
+              138,
+              618,
+              330
+            ],
+            "flag": true,
+            "overlap": 20596,
+            "score": 1.5978060960769653,
+            "sides": {
+              "bottom": 1.104945182800293,
+              "left": 0.8735144734382629,
+              "right": 3.0,
+              "top": 2.250941276550293
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.3358843132431478,
+            "sides": {
+              "bottom": 0.23615478085322542,
+              "left": 0.006725337107677387,
+              "right": 3.0,
+              "top": 2.6713256301321398
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": true,
+              "right": true,
+              "top": true
+            },
+            "score": 1.5978057924096072,
+            "sides": {
+              "bottom": 1.104945120685677,
+              "left": 0.8735144728654435,
+              "right": 3.0,
+              "top": 2.2509398858948946
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 20596
+        },
+        "dark_rim": {
+          "clean": {
+            "box": [
+              490,
+              418,
+              618,
+              674
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.9639857411384583,
+            "sides": {
+              "bottom": 2.067178726196289,
+              "left": 0.3307231664657593,
+              "right": 2.3337719440460205,
+              "top": 0.5412293672561646
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              362,
+              138,
+              490,
+              330
+            ],
+            "flag": true,
+            "overlap": 20596,
+            "score": 1.853951334953308,
+            "sides": {
+              "bottom": 2.152541160583496,
+              "left": 0.8735144734382629,
+              "right": 2.094355821609497,
+              "top": 3.000000476837158
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.34064725324078016,
+            "sides": {
+              "bottom": 0.23615478085322542,
+              "left": 0.006725337107677387,
+              "right": 2.8341127628464853,
+              "top": 2.9915181319151904
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": true,
+              "right": false,
+              "top": false
+            },
+            "score": 1.691336006986581,
+            "sides": {
+              "bottom": 1.104945120685677,
+              "left": 0.8735144728654435,
+              "right": 2.8341127628464853,
+              "top": 2.9915181319151904
+            }
+          },
+          "selected_iou_with_base": 0.5,
+          "target": 20596
+        },
+        "light_rim": {
+          "clean": {
+            "box": [
+              490,
+              418,
+              618,
+              674
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 1.0850259065628052,
+            "sides": {
+              "bottom": 3.0,
+              "left": 0.3307231664657593,
+              "right": 2.581031084060669,
+              "top": 0.5412293672561646
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              362,
+              138,
+              618,
+              330
+            ],
+            "flag": true,
+            "overlap": 20596,
+            "score": 1.5771443843841553,
+            "sides": {
+              "bottom": 1.104945182800293,
+              "left": 0.8735144734382629,
+              "right": 3.0,
+              "top": 2.1367499828338623
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.3344302916769725,
+            "sides": {
+              "bottom": 0.23615478085322542,
+              "left": 0.006725337107677387,
+              "right": 3.0,
+              "top": 2.6253691363896783
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": true,
+              "right": false,
+              "top": false
+            },
+            "score": 1.577144751499918,
+            "sides": {
+              "bottom": 1.104945120685677,
+              "left": 0.8735144728654435,
+              "right": 3.0,
+              "top": 2.1367521613103335
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 20596
+        },
+        "texture_apron": {
+          "clean": {
+            "box": [
+              442,
+              498,
+              634,
+              690
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.8632829189300537,
+            "sides": {
+              "bottom": 2.9983184337615967,
+              "left": 0.1493256837129593,
+              "right": 2.8440933227539062,
+              "top": 0.43617066740989685
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              362,
+              138,
+              490,
+              330
+            ],
+            "flag": true,
+            "overlap": 20596,
+            "score": 1.6414343118667603,
+            "sides": {
+              "bottom": 2.152541160583496,
+              "left": 0.8735144734382629,
+              "right": 2.094355821609497,
+              "top": 1.8434104919433594
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.04019838900848889,
+            "sides": {
+              "bottom": 0.23615478085322542,
+              "left": 0.006725337107677387,
+              "right": 0.04238525416293116,
+              "top": 0.03878903742688934
+            }
+          },
+          "fixed_edited": {
+            "flag": false,
+            "pixels": {
+              "bottom": true,
+              "left": true,
+              "right": false,
+              "top": false
+            },
+            "score": 0.4431575605622484,
+            "sides": {
+              "bottom": 1.104945120685677,
+              "left": 0.8735144728654435,
+              "right": 0.04238525416293116,
+              "top": 0.9427728061770105
+            }
+          },
+          "selected_iou_with_base": 0.5,
+          "target": 20596
+        }
+      },
+      "family": "archived-screenshot",
+      "panel": "discovery",
+      "reference_box": [
+        362,
+        138,
+        618,
+        330
+      ],
+      "slot": 7,
+      "viewport": [
+        106,
+        138,
+        618,
+        674
+      ]
+    },
+    {
+      "arms": {
+        "base": {
+          "clean": {
+            "box": [
+              168,
+              424,
+              296,
+              616
+            ],
+            "flag": false,
+            "overlap": 0,
+            "score": 0.8267586827278137,
+            "sides": {
+              "bottom": 3.0,
+              "left": 2.9578988552093506,
+              "right": 0.19859622418880463,
+              "top": 0.26511815190315247
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              528,
+              104,
+              720,
+              232
+            ],
+            "flag": true,
+            "overlap": 24576,
+            "score": 2.4108736515045166,
+            "sides": {
+              "bottom": 2.037344217300415,
+              "left": 1.8437631130218506,
+              "right": 2.9978294372558594,
+              "top": 3.0
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.5476839489972071,
+            "sides": {
+              "bottom": 0.04663956482176588,
+              "left": 0.21434978584279335,
+              "right": 3.0,
+              "top": 3.0
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": true,
+              "right": true,
+              "top": true
+            },
+            "score": 2.410873958989811,
+            "sides": {
+              "bottom": 2.037345413587047,
+              "left": 1.8437635194523971,
+              "right": 2.9978291991096366,
+              "top": 3.0
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 24576
+        },
+        "dark_rim": {
+          "clean": {
+            "box": [
+              152,
+              88,
+              280,
+              344
+            ],
+            "flag": false,
+            "overlap": 0,
+            "score": 0.7817432880401611,
+            "sides": {
+              "bottom": 0.22768846154212952,
+              "left": 3.0,
+              "right": 0.18225236237049103,
+              "top": 3.0
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              528,
+              104,
+              720,
+              232
+            ],
+            "flag": true,
+            "overlap": 24576,
+            "score": 2.3888378143310547,
+            "sides": {
+              "bottom": 2.037344217300415,
+              "left": 1.8437631130218506,
+              "right": 2.8897202014923096,
+              "top": 3.0
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.5476839489972071,
+            "sides": {
+              "bottom": 0.04663956482176588,
+              "left": 0.21434978584279335,
+              "right": 3.0,
+              "top": 3.0
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": true,
+              "right": false,
+              "top": false
+            },
+            "score": 2.38883814525997,
+            "sides": {
+              "bottom": 2.037345413587047,
+              "left": 1.8437635194523971,
+              "right": 2.889719993178474,
+              "top": 3.0
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 24576
+        },
+        "light_rim": {
+          "clean": {
+            "box": [
+              168,
+              424,
+              296,
+              616
+            ],
+            "flag": false,
+            "overlap": 0,
+            "score": 0.8268119096755981,
+            "sides": {
+              "bottom": 3.0,
+              "left": 2.9586613178253174,
+              "right": 0.19859622418880463,
+              "top": 0.26511815190315247
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              528,
+              104,
+              720,
+              232
+            ],
+            "flag": true,
+            "overlap": 24576,
+            "score": 2.4109177589416504,
+            "sides": {
+              "bottom": 2.037344217300415,
+              "left": 1.8437631130218506,
+              "right": 2.998048782348633,
+              "top": 3.0
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.5476839489972071,
+            "sides": {
+              "bottom": 0.04663956482176588,
+              "left": 0.21434978584279335,
+              "right": 3.0,
+              "top": 3.0
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": true,
+              "right": false,
+              "top": false
+            },
+            "score": 2.4109180757301685,
+            "sides": {
+              "bottom": 2.037345413587047,
+              "left": 1.8437635194523971,
+              "right": 2.9980486350235926,
+              "top": 3.0
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 24576
+        },
+        "texture_apron": {
+          "clean": {
+            "box": [
+              152,
+              504,
+              280,
+              632
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.831993043422699,
+            "sides": {
+              "bottom": 2.9994359016418457,
+              "left": 2.9972000122070312,
+              "right": 0.23707640171051025,
+              "top": 0.2248201072216034
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              528,
+              104,
+              720,
+              232
+            ],
+            "flag": true,
+            "overlap": 24576,
+            "score": 1.8883265256881714,
+            "sides": {
+              "bottom": 2.037344217300415,
+              "left": 1.8437631130218506,
+              "right": 2.0005416870117188,
+              "top": 1.6919645071029663
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.09395013395478356,
+            "sides": {
+              "bottom": 0.04663956482176588,
+              "left": 0.21434978584279335,
+              "right": 0.06582141076992573,
+              "top": 0.11839814134960602
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": true,
+              "right": false,
+              "top": false
+            },
+            "score": 1.88832696275396,
+            "sides": {
+              "bottom": 2.037345413587047,
+              "left": 1.8437635194523971,
+              "right": 2.0005421306069753,
+              "top": 1.6919642856666546
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 24576
+        }
+      },
+      "family": "archived-screenshot",
+      "panel": "discovery",
+      "reference_box": [
+        528,
+        104,
+        720,
+        232
+      ],
+      "slot": 8,
+      "viewport": [
+        168,
+        104,
+        720,
+        616
+      ]
+    },
+    {
+      "arms": {
+        "base": {
+          "clean": {
+            "box": [
+              35,
+              434,
+              163,
+              626
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.9530896544456482,
+            "sides": {
+              "bottom": 2.5180814266204834,
+              "left": 2.8267745971679688,
+              "right": 0.38585397601127625,
+              "top": 0.3004353642463684
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              379,
+              178,
+              571,
+              306
+            ],
+            "flag": true,
+            "overlap": 24576,
+            "score": 2.506502151489258,
+            "sides": {
+              "bottom": 2.458723306655884,
+              "left": 2.0568478107452393,
+              "right": 2.9470784664154053,
+              "top": 2.6483097076416016
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.23074148026060348,
+            "sides": {
+              "bottom": 0.1384450887018239,
+              "left": 0.26087862239165743,
+              "right": 2.112343447032421,
+              "top": 0.0371554152630584
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": true,
+              "right": true,
+              "top": true
+            },
+            "score": 2.5065021529147145,
+            "sides": {
+              "bottom": 2.4587228439175584,
+              "left": 2.056848012886672,
+              "right": 2.947078355361084,
+              "top": 2.6483102864148607
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 24576
+        },
+        "dark_rim": {
+          "clean": {
+            "box": [
+              35,
+              434,
+              163,
+              626
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.9374037981033325,
+            "sides": {
+              "bottom": 2.347792863845825,
+              "left": 2.8370895385742188,
+              "right": 0.38585397601127625,
+              "top": 0.3004353642463684
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              379,
+              178,
+              571,
+              306
+            ],
+            "flag": true,
+            "overlap": 24576,
+            "score": 2.5081772804260254,
+            "sides": {
+              "bottom": 2.458723306655884,
+              "left": 2.0568478107452393,
+              "right": 2.954965114593506,
+              "top": 2.6483097076416016
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.23111299259759382,
+            "sides": {
+              "bottom": 0.1384450887018239,
+              "left": 0.26087862239165743,
+              "right": 2.125980509235313,
+              "top": 0.0371554152630584
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": true,
+              "right": false,
+              "top": true
+            },
+            "score": 2.5081773215958196,
+            "sides": {
+              "bottom": 2.4587228439175584,
+              "left": 2.056848012886672,
+              "right": 2.9549647315632184,
+              "top": 2.6483102864148607
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 24576
+        },
+        "light_rim": {
+          "clean": {
+            "box": [
+              35,
+              434,
+              163,
+              626
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.998332679271698,
+            "sides": {
+              "bottom": 2.9756522178649902,
+              "left": 2.8796844482421875,
+              "right": 0.38585397601127625,
+              "top": 0.3004353642463684
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              379,
+              114,
+              571,
+              306
+            ],
+            "flag": true,
+            "overlap": 24576,
+            "score": 2.1585872173309326,
+            "sides": {
+              "bottom": 2.458723306655884,
+              "left": 1.4549541473388672,
+              "right": 2.0232949256896973,
+              "top": 2.9995784759521484
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.25189227866917696,
+            "sides": {
+              "bottom": 0.1384450887018239,
+              "left": 0.26087862239165743,
+              "right": 3.0,
+              "top": 0.0371554152630584
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": true,
+              "right": false,
+              "top": true
+            },
+            "score": 2.1295858495752764,
+            "sides": {
+              "bottom": 2.4587228439175584,
+              "left": 2.056848012886672,
+              "right": 1.5356772991487966,
+              "top": 2.6483102864148607
+            }
+          },
+          "selected_iou_with_base": 0.6666666666666666,
+          "target": 24576
+        },
+        "texture_apron": {
+          "clean": {
+            "box": [
+              395,
+              450,
+              587,
+              642
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.8391423225402832,
+            "sides": {
+              "bottom": 2.348889112472534,
+              "left": 0.23046226799488068,
+              "right": 2.53304386138916,
+              "top": 0.36160755157470703
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              379,
+              178,
+              571,
+              306
+            ],
+            "flag": true,
+            "overlap": 24576,
+            "score": 2.503868818283081,
+            "sides": {
+              "bottom": 2.4587230682373047,
+              "left": 2.0568480491638184,
+              "right": 2.934713840484619,
+              "top": 2.6483097076416016
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.1272760260729841,
+            "sides": {
+              "bottom": 0.1384450887018239,
+              "left": 0.26087862239165743,
+              "right": 0.19554569615040243,
+              "top": 0.0371554152630584
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": true,
+              "right": false,
+              "top": true
+            },
+            "score": 2.5038689345906335,
+            "sides": {
+              "bottom": 2.4587228439175584,
+              "left": 2.056848012886672,
+              "right": 2.934713585839589,
+              "top": 2.6483102864148607
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 24576
+        }
+      },
+      "family": "archived-screenshot",
+      "panel": "discovery",
+      "reference_box": [
+        379,
+        178,
+        571,
+        306
+      ],
+      "slot": 9,
+      "viewport": [
+        35,
+        114,
+        571,
+        626
+      ]
+    },
+    {
+      "arms": {
+        "base": {
+          "clean": {
+            "box": [
+              134,
+              71,
+              262,
+              327
+            ],
+            "flag": false,
+            "overlap": 0,
+            "score": 0.7315757870674133,
+            "sides": {
+              "bottom": 0.21608060598373413,
+              "left": 2.9536962509155273,
+              "right": 0.1677340418100357,
+              "top": 2.6756818294525146
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              134,
+              263,
+              326,
+              391
+            ],
+            "flag": true,
+            "overlap": 24576,
+            "score": 1.9139994382858276,
+            "sides": {
+              "bottom": 1.5391026735305786,
+              "left": 1.2772541046142578,
+              "right": 2.645327091217041,
+              "top": 2.580732583999634
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.35845535283004776,
+            "sides": {
+              "bottom": 0.18490027849713878,
+              "left": 2.759105834411678,
+              "right": 0.2620951198127779,
+              "top": 0.12347397257188601
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": true,
+              "right": true,
+              "top": true
+            },
+            "score": 1.913999039785839,
+            "sides": {
+              "bottom": 1.5391024826841342,
+              "left": 1.2772526758177343,
+              "right": 2.645327568719072,
+              "top": 2.5807328164057086
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 24576
+        },
+        "dark_rim": {
+          "clean": {
+            "box": [
+              566,
+              343,
+              694,
+              599
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.8972339034080505,
+            "sides": {
+              "bottom": 3.0,
+              "left": 0.22830072045326233,
+              "right": 3.0,
+              "top": 0.3154081106185913
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              134,
+              263,
+              326,
+              391
+            ],
+            "flag": true,
+            "overlap": 24576,
+            "score": 2.358219623565674,
+            "sides": {
+              "bottom": 1.5391026735305786,
+              "left": 2.943385124206543,
+              "right": 2.645327091217041,
+              "top": 2.580732583999634
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.33445635650890126,
+            "sides": {
+              "bottom": 0.18490027849713878,
+              "left": 2.0911534199838746,
+              "right": 0.2620951198127779,
+              "top": 0.12347397257188601
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": false,
+              "right": true,
+              "top": true
+            },
+            "score": 2.3582196111180447,
+            "sides": {
+              "bottom": 1.5391024826841342,
+              "left": 2.9433841413410846,
+              "right": 2.645327568719072,
+              "top": 2.5807328164057086
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 24576
+        },
+        "light_rim": {
+          "clean": {
+            "box": [
+              422,
+              327,
+              678,
+              583
+            ],
+            "flag": false,
+            "overlap": 0,
+            "score": 0.785537600517273,
+            "sides": {
+              "bottom": 2.5338544845581055,
+              "left": 0.2166503667831421,
+              "right": 2.5834884643554688,
+              "top": 0.2684851884841919
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              134,
+              263,
+              326,
+              391
+            ],
+            "flag": true,
+            "overlap": 24576,
+            "score": 1.9547978639602661,
+            "sides": {
+              "bottom": 1.5391026735305786,
+              "left": 1.389688491821289,
+              "right": 2.645327091217041,
+              "top": 2.580732583999634
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.360206236624527,
+            "sides": {
+              "bottom": 0.18490027849713878,
+              "left": 2.8134097674506964,
+              "right": 0.2620951198127779,
+              "top": 0.12347397257188601
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": false,
+              "right": true,
+              "top": true
+            },
+            "score": 1.9547979306275653,
+            "sides": {
+              "bottom": 1.5391024826841342,
+              "left": 1.3896884287170406,
+              "right": 2.645327568719072,
+              "top": 2.5807328164057086
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 24576
+        },
+        "texture_apron": {
+          "clean": {
+            "box": [
+              566,
+              343,
+              694,
+              599
+            ],
+            "flag": false,
+            "overlap": 0,
+            "score": 0.7792205214500427,
+            "sides": {
+              "bottom": 2.0267257690429688,
+              "left": 0.23041002452373505,
+              "right": 2.28029203414917,
+              "top": 0.34622204303741455
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              134,
+              263,
+              326,
+              391
+            ],
+            "flag": true,
+            "overlap": 24576,
+            "score": 2.256868600845337,
+            "sides": {
+              "bottom": 1.539102554321289,
+              "left": 2.4690794944763184,
+              "right": 2.645327091217041,
+              "top": 2.580733060836792
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.1852772518624199,
+            "sides": {
+              "bottom": 0.18490027849713878,
+              "left": 0.19693208577892757,
+              "right": 0.2620951198127779,
+              "top": 0.12347397257188601
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": false,
+              "right": true,
+              "top": true
+            },
+            "score": 2.2568682749617914,
+            "sides": {
+              "bottom": 1.5391024826841342,
+              "left": 2.4690779757537635,
+              "right": 2.645327568719072,
+              "top": 2.5807328164057086
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 24576
+        }
+      },
+      "family": "archived-screenshot",
+      "panel": "discovery",
+      "reference_box": [
+        134,
+        263,
+        326,
+        391
+      ],
+      "slot": 10,
+      "viewport": [
+        134,
+        71,
+        678,
+        583
+      ]
+    },
+    {
+      "arms": {
+        "base": {
+          "clean": {
+            "box": [
+              111,
+              493,
+              303,
+              685
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.8835651874542236,
+            "sides": {
+              "bottom": 2.7407262325286865,
+              "left": 2.786581039428711,
+              "right": 0.33282145857810974,
+              "top": 0.23977601528167725
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              471,
+              485,
+              663,
+              613
+            ],
+            "flag": true,
+            "overlap": 24576,
+            "score": 1.3554273843765259,
+            "sides": {
+              "bottom": 2.2083206176757812,
+              "left": 2.8270082473754883,
+              "right": 2.919239044189453,
+              "top": 0.18520216643810272
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.3976641755982911,
+            "sides": {
+              "bottom": 0.22122386993717166,
+              "left": 0.26016497161369284,
+              "right": 2.34700943327283,
+              "top": 0.18512719895165727
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": true,
+              "right": true,
+              "top": true
+            },
+            "score": 1.3554277008603606,
+            "sides": {
+              "bottom": 2.20832059940696,
+              "left": 2.827008225710678,
+              "right": 2.91924009853179,
+              "top": 0.18520231741681728
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 27648
+        },
+        "dark_rim": {
+          "clean": {
+            "box": [
+              111,
+              125,
+              303,
+              381
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.958548903465271,
+            "sides": {
+              "bottom": 0.37444284558296204,
+              "left": 2.2150280475616455,
+              "right": 0.33928999304771423,
+              "top": 3.0
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              471,
+              493,
+              663,
+              685
+            ],
+            "flag": true,
+            "overlap": 23040,
+            "score": 1.2691279649734497,
+            "sides": {
+              "bottom": 2.8916594982147217,
+              "left": 1.86813485622406,
+              "right": 2.316962480545044,
+              "top": 0.20727519690990448
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.42283221999610937,
+            "sides": {
+              "bottom": 0.22122386993717166,
+              "left": 0.26016497161369284,
+              "right": 3.0,
+              "top": 0.18512719895165727
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": true,
+              "right": false,
+              "top": true
+            },
+            "score": 1.226100582759777,
+            "sides": {
+              "bottom": 2.20832059940696,
+              "left": 2.827008225710678,
+              "right": 1.954649005950131,
+              "top": 0.18520231741681728
+            }
+          },
+          "selected_iou_with_base": 0.6,
+          "target": 27648
+        },
+        "light_rim": {
+          "clean": {
+            "box": [
+              111,
+              493,
+              303,
+              685
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.8878271579742432,
+            "sides": {
+              "bottom": 2.7838926315307617,
+              "left": 2.79668927192688,
+              "right": 0.33282145857810974,
+              "top": 0.23977601528167725
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              471,
+              485,
+              663,
+              613
+            ],
+            "flag": true,
+            "overlap": 24576,
+            "score": 1.3562195301055908,
+            "sides": {
+              "bottom": 2.2083206176757812,
+              "left": 2.8270082473754883,
+              "right": 2.926070213317871,
+              "top": 0.18520216643810272
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.4014071072348641,
+            "sides": {
+              "bottom": 0.22122386993717166,
+              "left": 0.26016497161369284,
+              "right": 2.4366277864265866,
+              "top": 0.18512719895165727
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": true,
+              "right": false,
+              "top": true
+            },
+            "score": 1.3562198635862968,
+            "sides": {
+              "bottom": 2.20832059940696,
+              "left": 2.827008225710678,
+              "right": 2.926070536663323,
+              "top": 0.18520231741681728
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 27648
+        },
+        "texture_apron": {
+          "clean": {
+            "box": [
+              95,
+              125,
+              223,
+              381
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.9277167320251465,
+            "sides": {
+              "bottom": 0.2867475152015686,
+              "left": 2.826805353164673,
+              "right": 0.3046104311943054,
+              "top": 3.0
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              471,
+              485,
+              663,
+              613
+            ],
+            "flag": true,
+            "overlap": 24576,
+            "score": 1.3423632383346558,
+            "sides": {
+              "bottom": 2.208320379257202,
+              "left": 2.8270084857940674,
+              "right": 2.8083090782165527,
+              "top": 0.18520216643810272
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.17560794990905318,
+            "sides": {
+              "bottom": 0.22122386993717166,
+              "left": 0.26016497161369284,
+              "right": 0.0892535816483167,
+              "top": 0.18512719895165727
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": true,
+              "right": false,
+              "top": true
+            },
+            "score": 1.3423634539390688,
+            "sides": {
+              "bottom": 2.20832059940696,
+              "left": 2.827008225710678,
+              "right": 2.808308841139528,
+              "top": 0.18520231741681728
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 27648
+        }
+      },
+      "family": "archived-screenshot",
+      "panel": "discovery",
+      "reference_box": [
+        471,
+        485,
+        663,
+        613
+      ],
+      "slot": 11,
+      "viewport": [
+        111,
+        141,
+        663,
+        685
+      ]
+    },
+    {
+      "arms": {
+        "base": {
+          "clean": {
+            "box": [
+              86,
+              500,
+              214,
+              628
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.972691535949707,
+            "sides": {
+              "bottom": 2.5569536685943604,
+              "left": 2.259202003479004,
+              "right": 0.2711105942726135,
+              "top": 0.5715789198875427
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              262,
+              436,
+              454,
+              628
+            ],
+            "flag": true,
+            "overlap": 36864,
+            "score": 1.9696331024169922,
+            "sides": {
+              "bottom": 2.8822014331817627,
+              "left": 2.1669857501983643,
+              "right": 1.4146054983139038,
+              "top": 1.7034350633621216
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.5169606109957293,
+            "sides": {
+              "bottom": 2.429861509179077,
+              "left": 0.2691936258257723,
+              "right": 0.3892058811707357,
+              "top": 0.2805460304442233
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": true,
+              "right": true,
+              "top": true
+            },
+            "score": 1.9696330419747292,
+            "sides": {
+              "bottom": 2.8822017607416863,
+              "left": 2.1669860271064256,
+              "right": 1.4146046334432516,
+              "top": 1.7034355972647912
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 36864
+        },
+        "dark_rim": {
+          "clean": {
+            "box": [
+              86,
+              500,
+              214,
+              628
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 1.0808509588241577,
+            "sides": {
+              "bottom": 2.991835594177246,
+              "left": 2.94376277923584,
+              "right": 0.2711105942726135,
+              "top": 0.5715789198875427
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              262,
+              436,
+              454,
+              628
+            ],
+            "flag": true,
+            "overlap": 36864,
+            "score": 1.9894570112228394,
+            "sides": {
+              "bottom": 3.0,
+              "left": 2.1669857501983643,
+              "right": 1.4146054983139038,
+              "top": 1.7034350633621216
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.5379391841573793,
+            "sides": {
+              "bottom": 2.8489473648920547,
+              "left": 0.2691936258257723,
+              "right": 0.3892058811707357,
+              "top": 0.2805460304442233
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": false,
+              "left": true,
+              "right": true,
+              "top": true
+            },
+            "score": 1.9894569237941093,
+            "sides": {
+              "bottom": 3.0,
+              "left": 2.1669860271064256,
+              "right": 1.4146046334432516,
+              "top": 1.7034355972647912
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 36864
+        },
+        "light_rim": {
+          "clean": {
+            "box": [
+              86,
+              500,
+              214,
+              628
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 1.0156813859939575,
+            "sides": {
+              "bottom": 2.769211530685425,
+              "left": 2.479996681213379,
+              "right": 0.2711105942726135,
+              "top": 0.5715789198875427
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              262,
+              436,
+              454,
+              628
+            ],
+            "flag": true,
+            "overlap": 36864,
+            "score": 1.9873446226119995,
+            "sides": {
+              "bottom": 2.987278699874878,
+              "left": 2.1669857501983643,
+              "right": 1.4146054983139038,
+              "top": 1.7034350633621216
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.5298627042892081,
+            "sides": {
+              "bottom": 2.681668634589242,
+              "left": 0.2691936258257723,
+              "right": 0.3892058811707357,
+              "top": 0.2805460304442233
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": false,
+              "left": true,
+              "right": true,
+              "top": true
+            },
+            "score": 1.987344473903504,
+            "sides": {
+              "bottom": 2.9872784114502706,
+              "left": 2.1669860271064256,
+              "right": 1.4146046334432516,
+              "top": 1.7034355972647912
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 36864
+        },
+        "texture_apron": {
+          "clean": {
+            "box": [
+              70,
+              516,
+              326,
+              644
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.947634220123291,
+            "sides": {
+              "bottom": 2.364386796951294,
+              "left": 2.5342464447021484,
+              "right": 0.46338313817977905,
+              "top": 0.29043930768966675
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              262,
+              436,
+              454,
+              628
+            ],
+            "flag": true,
+            "overlap": 36864,
+            "score": 1.8422688245773315,
+            "sides": {
+              "bottom": 2.2059459686279297,
+              "left": 2.1669862270355225,
+              "right": 1.4146052598953247,
+              "top": 1.7034353017807007
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.4161254448518726,
+            "sides": {
+              "bottom": 1.0201142057285797,
+              "left": 0.2691936258257723,
+              "right": 0.3892058811707357,
+              "top": 0.2805460304442233
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": false,
+              "left": true,
+              "right": true,
+              "top": true
+            },
+            "score": 1.8422683580137698,
+            "sides": {
+              "bottom": 2.2059449274101945,
+              "left": 2.1669860271064256,
+              "right": 1.4146046334432516,
+              "top": 1.7034355972647912
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 36864
+        }
+      },
+      "family": "sdxl",
+      "panel": "transfer",
+      "reference_box": [
+        262,
+        436,
+        454,
+        628
+      ],
+      "slot": 0,
+      "viewport": [
+        86,
+        100,
+        630,
+        628
+      ]
+    },
+    {
+      "arms": {
+        "base": {
+          "clean": {
+            "box": [
+              97,
+              100,
+              225,
+              292
+            ],
+            "flag": false,
+            "overlap": 0,
+            "score": 0.7376072406768799,
+            "sides": {
+              "bottom": 0.17768718302249908,
+              "left": 2.9864704608917236,
+              "right": 0.18826593458652496,
+              "top": 2.962883949279785
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              449,
+              100,
+              641,
+              228
+            ],
+            "flag": true,
+            "overlap": 24548,
+            "score": 1.1648898124694824,
+            "sides": {
+              "bottom": 1.0785881280899048,
+              "left": 0.5133830308914185,
+              "right": 1.628169298171997,
+              "top": 2.0424089431762695
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.2324158198991059,
+            "sides": {
+              "bottom": 0.030667694391887827,
+              "left": 0.03245850157745002,
+              "right": 1.4823456460615445,
+              "top": 1.977441606876111
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": true,
+              "right": true,
+              "top": true
+            },
+            "score": 1.1648893390425419,
+            "sides": {
+              "bottom": 1.078588254953105,
+              "left": 0.5133830022746806,
+              "right": 1.628169288459206,
+              "top": 2.0424054085316414
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 24548
+        },
+        "dark_rim": {
+          "clean": {
+            "box": [
+              401,
+              84,
+              657,
+              340
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.9019639492034912,
+            "sides": {
+              "bottom": 0.26336726546287537,
+              "left": 0.279223769903183,
+              "right": 3.0,
+              "top": 3.0
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              449,
+              100,
+              641,
+              228
+            ],
+            "flag": true,
+            "overlap": 24548,
+            "score": 1.4781254529953003,
+            "sides": {
+              "bottom": 1.0785881280899048,
+              "left": 0.5133830308914185,
+              "right": 3.0,
+              "top": 2.873602867126465
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.3076543257470529,
+            "sides": {
+              "bottom": 0.030667694391887827,
+              "left": 0.03245850157745002,
+              "right": 3.0,
+              "top": 3.0
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": true,
+              "right": false,
+              "top": false
+            },
+            "score": 1.4781252603893171,
+            "sides": {
+              "bottom": 1.078588254953105,
+              "left": 0.5133830022746806,
+              "right": 3.0,
+              "top": 2.873601414354635
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 24548
+        },
+        "light_rim": {
+          "clean": {
+            "box": [
+              81,
+              100,
+              337,
+              228
+            ],
+            "flag": false,
+            "overlap": 0,
+            "score": 0.7745893597602844,
+            "sides": {
+              "bottom": 0.1015339344739914,
+              "left": 1.9459097385406494,
+              "right": 0.6516710519790649,
+              "top": 2.7959134578704834
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              449,
+              100,
+              641,
+              228
+            ],
+            "flag": true,
+            "overlap": 24548,
+            "score": 1.0878726243972778,
+            "sides": {
+              "bottom": 1.0785881280899048,
+              "left": 0.5133830308914185,
+              "right": 1.6959965229034424,
+              "top": 1.491385817527771
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.20709411837913477,
+            "sides": {
+              "bottom": 0.030667694391887827,
+              "left": 0.03245850157745002,
+              "right": 1.7336987523508278,
+              "top": 1.0658297262784353
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": true,
+              "right": false,
+              "top": false
+            },
+            "score": 1.087871823046859,
+            "sides": {
+              "bottom": 1.078588254953105,
+              "left": 0.5133830022746806,
+              "right": 1.6959964561119776,
+              "top": 1.4913816674964095
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 24548
+        },
+        "texture_apron": {
+          "clean": {
+            "box": [
+              81,
+              84,
+              337,
+              212
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.9040377736091614,
+            "sides": {
+              "bottom": 0.10739961266517639,
+              "left": 2.99601674079895,
+              "right": 0.6955645680427551,
+              "top": 2.984433174133301
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              449,
+              100,
+              641,
+              228
+            ],
+            "flag": true,
+            "overlap": 24548,
+            "score": 1.0382061004638672,
+            "sides": {
+              "bottom": 1.0785881280899048,
+              "left": 0.5133830308914185,
+              "right": 1.3740688562393188,
+              "top": 1.5269631147384644
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.0295114535495524,
+            "sides": {
+              "bottom": 0.030667694391887827,
+              "left": 0.03245850157745002,
+              "right": 0.037962164861391645,
+              "top": 0.020072517159751484
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": true,
+              "right": false,
+              "top": false
+            },
+            "score": 1.0382061585941265,
+            "sides": {
+              "bottom": 1.078588254953105,
+              "left": 0.5133830022746806,
+              "right": 1.3740691735390076,
+              "top": 1.5269634237066585
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 24548
+        }
+      },
+      "family": "sdxl",
+      "panel": "transfer",
+      "reference_box": [
+        449,
+        100,
+        641,
+        228
+      ],
+      "slot": 1,
+      "viewport": [
+        97,
+        100,
+        641,
+        612
+      ]
+    },
+    {
+      "arms": {
+        "base": {
+          "clean": {
+            "box": [
+              524,
+              100,
+              652,
+              356
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.8365683555603027,
+            "sides": {
+              "bottom": 0.2623080015182495,
+              "left": 0.2092900574207306,
+              "right": 2.992788791656494,
+              "top": 2.981051445007324
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              460,
+              436,
+              652,
+              628
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 1.3965551853179932,
+            "sides": {
+              "bottom": 2.8614463806152344,
+              "left": 0.1850770264863968,
+              "right": 2.9860610961914062,
+              "top": 2.4054462909698486
+            },
+            "useful": false
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.6166358807985362,
+            "sides": {
+              "bottom": 2.8614471928535443,
+              "left": 0.1850760080964519,
+              "right": 2.9860601098524735,
+              "top": 0.09142832476952205
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": true,
+              "right": true,
+              "top": true
+            },
+            "score": 1.3965533540861639,
+            "sides": {
+              "bottom": 2.8614471928535443,
+              "left": 0.1850760080964519,
+              "right": 2.9860601098524735,
+              "top": 2.4054466194943607
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 27648
+        },
+        "dark_rim": {
+          "clean": {
+            "box": [
+              92,
+              84,
+              284,
+              212
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.8358727097511292,
+            "sides": {
+              "bottom": 0.26243463158607483,
+              "left": 3.0,
+              "right": 0.2066792994737625,
+              "top": 3.0
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              460,
+              436,
+              652,
+              628
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 1.3401875495910645,
+            "sides": {
+              "bottom": 2.992501974105835,
+              "left": 0.1850770264863968,
+              "right": 2.421473264694214,
+              "top": 2.4054462909698486
+            },
+            "useful": false
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.5917473525746667,
+            "sides": {
+              "bottom": 2.9925020670724387,
+              "left": 0.1850760080964519,
+              "right": 2.4214747758655877,
+              "top": 0.09142832476952205
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": false,
+              "left": true,
+              "right": false,
+              "top": true
+            },
+            "score": 1.340185960212973,
+            "sides": {
+              "bottom": 2.9925020670724387,
+              "left": 0.1850760080964519,
+              "right": 2.4214747758655877,
+              "top": 2.4054466194943607
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 27648
+        },
+        "light_rim": {
+          "clean": {
+            "box": [
+              524,
+              100,
+              652,
+              356
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.8374716639518738,
+            "sides": {
+              "bottom": 0.2623080015182495,
+              "left": 0.2092900574207306,
+              "right": 2.9951648712158203,
+              "top": 2.9915733337402344
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              460,
+              436,
+              652,
+              628
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 1.408972978591919,
+            "sides": {
+              "bottom": 2.9601047039031982,
+              "left": 0.1850770264863968,
+              "right": 2.990579843521118,
+              "top": 2.4054462909698486
+            },
+            "useful": false
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.6221188886573996,
+            "sides": {
+              "bottom": 2.960106054877688,
+              "left": 0.1850760080964519,
+              "right": 2.990579781416571,
+              "top": 0.09142832476952205
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": false,
+              "left": true,
+              "right": false,
+              "top": true
+            },
+            "score": 1.4089712383744744,
+            "sides": {
+              "bottom": 2.960106054877688,
+              "left": 0.1850760080964519,
+              "right": 2.990579781416571,
+              "top": 2.4054466194943607
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 27648
+        },
+        "texture_apron": {
+          "clean": {
+            "box": [
+              92,
+              84,
+              284,
+              212
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.9170929789543152,
+            "sides": {
+              "bottom": 0.3645407259464264,
+              "left": 2.9264233112335205,
+              "right": 0.22103865444660187,
+              "top": 2.9998674392700195
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              460,
+              244,
+              652,
+              436
+            ],
+            "flag": true,
+            "overlap": 27648,
+            "score": 1.0492781400680542,
+            "sides": {
+              "bottom": 2.405446767807007,
+              "left": 1.751349925994873,
+              "right": 1.1215261220932007,
+              "top": 0.25655731558799744
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.14154355939617314,
+            "sides": {
+              "bottom": 0.1445533084000107,
+              "left": 0.1850760080964519,
+              "right": 0.16409733524229217,
+              "top": 0.09142832476952205
+            }
+          },
+          "fixed_edited": {
+            "flag": false,
+            "pixels": {
+              "bottom": false,
+              "left": true,
+              "right": false,
+              "top": true
+            },
+            "score": 0.32056702955403016,
+            "sides": {
+              "bottom": 0.1445533084000107,
+              "left": 0.1850760080964519,
+              "right": 0.16409733524229217,
+              "top": 2.4054466194943607
+            }
+          },
+          "selected_iou_with_base": 0.0,
+          "target": 27648
+        }
+      },
+      "family": "sdxl",
+      "panel": "transfer",
+      "reference_box": [
+        460,
+        436,
+        652,
+        628
+      ],
+      "slot": 2,
+      "viewport": [
+        108,
+        100,
+        652,
+        628
+      ]
+    },
+    {
+      "arms": {
+        "base": {
+          "clean": {
+            "box": [
+              374,
+              113,
+              630,
+              305
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.9756420254707336,
+            "sides": {
+              "bottom": 0.2303122878074646,
+              "left": 0.49954044818878174,
+              "right": 2.8413937091827393,
+              "top": 2.7716784477233887
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              102,
+              449,
+              230,
+              641
+            ],
+            "flag": true,
+            "overlap": 24576,
+            "score": 1.3089019060134888,
+            "sides": {
+              "bottom": 2.3176326751708984,
+              "left": 0.3013963997364044,
+              "right": 1.982459545135498,
+              "top": 2.1195387840270996
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.36701219603251173,
+            "sides": {
+              "bottom": 2.8172153532527178,
+              "left": 0.20832949852250393,
+              "right": 0.1450237107631656,
+              "top": 0.21316316359898552
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": true,
+              "right": true,
+              "top": true
+            },
+            "score": 1.3089018452866685,
+            "sides": {
+              "bottom": 2.317632178757913,
+              "left": 0.301396519196965,
+              "right": 1.982458552144889,
+              "top": 2.1195392300718394
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 27648
+        },
+        "dark_rim": {
+          "clean": {
+            "box": [
+              70,
+              97,
+              198,
+              353
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.8544073700904846,
+            "sides": {
+              "bottom": 0.2637872099876404,
+              "left": 3.0,
+              "right": 0.2244727611541748,
+              "top": 3.0
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              70,
+              449,
+              198,
+              641
+            ],
+            "flag": true,
+            "overlap": 21504,
+            "score": 1.2440210580825806,
+            "sides": {
+              "bottom": 1.5081177949905396,
+              "left": 3.0,
+              "right": 0.2986847460269928,
+              "top": 1.772316813468933
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.3665117372594665,
+            "sides": {
+              "bottom": 2.801880506511176,
+              "left": 0.20832949852250393,
+              "right": 0.1450237107631656,
+              "top": 0.21316316359898552
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": false,
+              "left": true,
+              "right": true,
+              "top": true
+            },
+            "score": 1.2215641353214333,
+            "sides": {
+              "bottom": 1.758252672718076,
+              "left": 0.301396519196965,
+              "right": 1.982458552144889,
+              "top": 2.1195392300718394
+            }
+          },
+          "selected_iou_with_base": 0.6,
+          "target": 27648
+        },
+        "light_rim": {
+          "clean": {
+            "box": [
+              374,
+              113,
+              630,
+              305
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.9809247255325317,
+            "sides": {
+              "bottom": 0.2303122878074646,
+              "left": 0.49954044818878174,
+              "right": 2.8937628269195557,
+              "top": 2.780942678451538
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              102,
+              449,
+              230,
+              641
+            ],
+            "flag": true,
+            "overlap": 24576,
+            "score": 1.3189260959625244,
+            "sides": {
+              "bottom": 2.3894503116607666,
+              "left": 0.3013963997364044,
+              "right": 1.982459545135498,
+              "top": 2.1195387840270996
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.3693210229986786,
+            "sides": {
+              "bottom": 2.8887780837284915,
+              "left": 0.20832949852250393,
+              "right": 0.1450237107631656,
+              "top": 0.21316316359898552
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": false,
+              "left": true,
+              "right": true,
+              "top": true
+            },
+            "score": 1.318926093495855,
+            "sides": {
+              "bottom": 2.3894504761299693,
+              "left": 0.301396519196965,
+              "right": 1.982458552144889,
+              "top": 2.1195392300718394
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 27648
+        },
+        "texture_apron": {
+          "clean": {
+            "box": [
+              518,
+              529,
+              646,
+              657
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.881612241268158,
+            "sides": {
+              "bottom": 2.708939552307129,
+              "left": 0.2190660834312439,
+              "right": 2.7894678115844727,
+              "top": 0.3649342656135559
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              70,
+              449,
+              198,
+              641
+            ],
+            "flag": true,
+            "overlap": 21504,
+            "score": 1.2662135362625122,
+            "sides": {
+              "bottom": 1.620362639427185,
+              "left": 2.9378979206085205,
+              "right": 0.2986847162246704,
+              "top": 1.8078645467758179
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.19738468197187126,
+            "sides": {
+              "bottom": 0.23569580132327533,
+              "left": 0.20832949852250393,
+              "right": 0.1450237107631656,
+              "top": 0.21316316359898552
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": false,
+              "left": true,
+              "right": true,
+              "top": true
+            },
+            "score": 1.2266596021342078,
+            "sides": {
+              "bottom": 1.7877732855185644,
+              "left": 0.301396519196965,
+              "right": 1.982458552144889,
+              "top": 2.1195392300718394
+            }
+          },
+          "selected_iou_with_base": 0.6,
+          "target": 27648
+        }
+      },
+      "family": "kandinsky",
+      "panel": "transfer",
+      "reference_box": [
+        102,
+        449,
+        230,
+        641
+      ],
+      "slot": 3,
+      "viewport": [
+        86,
+        113,
+        630,
+        641
+      ]
+    },
+    {
+      "arms": {
+        "base": {
+          "clean": {
+            "box": [
+              449,
+              497,
+              641,
+              625
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.8894709944725037,
+            "sides": {
+              "bottom": 2.993434190750122,
+              "left": 0.38687604665756226,
+              "right": 2.9667091369628906,
+              "top": 0.18218417465686798
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              97,
+              305,
+              289,
+              433
+            ],
+            "flag": true,
+            "overlap": 24576,
+            "score": 2.4050698280334473,
+            "sides": {
+              "bottom": 2.691861867904663,
+              "left": 1.48228120803833,
+              "right": 2.795494556427002,
+              "top": 2.9996376037597656
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.0,
+            "sides": {
+              "bottom": 0.0,
+              "left": 3.0,
+              "right": 0.0,
+              "top": 0.0
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": true,
+              "right": true,
+              "top": true
+            },
+            "score": 2.4050686289614895,
+            "sides": {
+              "bottom": 2.691861404613475,
+              "left": 1.4822781382027497,
+              "right": 2.7954948130985096,
+              "top": 2.9996377075274494
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 24576
+        },
+        "dark_rim": {
+          "clean": {
+            "box": [
+              401,
+              513,
+              657,
+              641
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.8937116861343384,
+            "sides": {
+              "bottom": 3.0,
+              "left": 0.29438310861587524,
+              "right": 3.0,
+              "top": 0.24078771471977234
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              97,
+              305,
+              289,
+              433
+            ],
+            "flag": true,
+            "overlap": 24576,
+            "score": 2.8467624187469482,
+            "sides": {
+              "bottom": 2.691861867904663,
+              "left": 2.9095418453216553,
+              "right": 2.795494556427002,
+              "top": 2.9996376037597656
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.0,
+            "sides": {
+              "bottom": 0.0,
+              "left": 2.245426679154097,
+              "right": 0.0,
+              "top": 0.0
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": false,
+              "right": true,
+              "top": true
+            },
+            "score": 2.846762058643541,
+            "sides": {
+              "bottom": 2.691861404613475,
+              "left": 2.90954102388064,
+              "right": 2.7954948130985096,
+              "top": 2.9996377075274494
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 24576
+        },
+        "light_rim": {
+          "clean": {
+            "box": [
+              449,
+              497,
+              641,
+              625
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.8897478580474854,
+            "sides": {
+              "bottom": 2.994251251220703,
+              "left": 0.38687604665756226,
+              "right": 2.9695940017700195,
+              "top": 0.18218417465686798
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              97,
+              305,
+              289,
+              433
+            ],
+            "flag": true,
+            "overlap": 24576,
+            "score": 2.510087013244629,
+            "sides": {
+              "bottom": 2.691861867904663,
+              "left": 1.758631706237793,
+              "right": 2.795494556427002,
+              "top": 2.9996376037597656
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.0,
+            "sides": {
+              "bottom": 0.0,
+              "left": 3.0,
+              "right": 0.0,
+              "top": 0.0
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": false,
+              "right": true,
+              "top": true
+            },
+            "score": 2.5100866582354193,
+            "sides": {
+              "bottom": 2.691861404613475,
+              "left": 1.7586307818555413,
+              "right": 2.7954948130985096,
+              "top": 2.9996377075274494
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 24576
+        },
+        "texture_apron": {
+          "clean": {
+            "box": [
+              401,
+              513,
+              657,
+              641
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.9106498956680298,
+            "sides": {
+              "bottom": 2.9742352962493896,
+              "left": 0.3249698877334595,
+              "right": 2.9514217376708984,
+              "top": 0.24107718467712402
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              97,
+              305,
+              289,
+              433
+            ],
+            "flag": true,
+            "overlap": 24576,
+            "score": 2.8520750999450684,
+            "sides": {
+              "bottom": 2.691861867904663,
+              "left": 2.9313223361968994,
+              "right": 2.795494556427002,
+              "top": 2.9996376037597656
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.0,
+            "sides": {
+              "bottom": 0.0,
+              "left": 0.0,
+              "right": 0.0,
+              "top": 0.0
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": false,
+              "right": true,
+              "top": true
+            },
+            "score": 2.8520749555250586,
+            "sides": {
+              "bottom": 2.691861404613475,
+              "left": 2.931322147852765,
+              "right": 2.7954948130985096,
+              "top": 2.9996377075274494
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 24576
+        }
+      },
+      "family": "kandinsky",
+      "panel": "transfer",
+      "reference_box": [
+        97,
+        305,
+        289,
+        433
+      ],
+      "slot": 4,
+      "viewport": [
+        97,
+        113,
+        641,
+        625
+      ]
+    },
+    {
+      "arms": {
+        "base": {
+          "clean": {
+            "box": [
+              108,
+              113,
+              300,
+              369
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.9161075353622437,
+            "sides": {
+              "bottom": 0.2879725396633148,
+              "left": 2.9746627807617188,
+              "right": 0.2812206745147705,
+              "top": 2.923814535140991
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              108,
+              113,
+              300,
+              369
+            ],
+            "flag": true,
+            "overlap": 7680,
+            "score": 1.594852089881897,
+            "sides": {
+              "bottom": 1.1457645893096924,
+              "left": 2.9960367679595947,
+              "right": 0.6445984840393066,
+              "top": 2.923814535140991
+            },
+            "useful": false
+          },
+          "fixed_clean": {
+            "flag": true,
+            "score": 0.9161074696690232,
+            "sides": {
+              "bottom": 0.2879725247325578,
+              "left": 2.974662688604027,
+              "right": 0.28122064243850486,
+              "top": 2.9238138629543062
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": true,
+              "right": true,
+              "top": true
+            },
+            "score": 1.5948518964787362,
+            "sides": {
+              "bottom": 1.145764186010459,
+              "left": 2.996036911887391,
+              "right": 0.6445985332756659,
+              "top": 2.9238138629543062
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 29952
+        },
+        "dark_rim": {
+          "clean": {
+            "box": [
+              92,
+              97,
+              220,
+              353
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 1.0611307621002197,
+            "sides": {
+              "bottom": 0.5943713188171387,
+              "left": 3.0,
+              "right": 0.23701472580432892,
+              "top": 3.0
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              108,
+              113,
+              300,
+              369
+            ],
+            "flag": true,
+            "overlap": 7680,
+            "score": 1.4214762449264526,
+            "sides": {
+              "bottom": 1.1457645893096924,
+              "left": 2.2804617881774902,
+              "right": 0.6445984840393066,
+              "top": 2.424102306365967
+            },
+            "useful": false
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.8198245321763575,
+            "sides": {
+              "bottom": 0.2879725247325578,
+              "left": 2.301094531085755,
+              "right": 0.28122064243850486,
+              "top": 2.424102219487685
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": false,
+              "right": true,
+              "top": false
+            },
+            "score": 1.4214762921554343,
+            "sides": {
+              "bottom": 1.145764186010459,
+              "left": 2.2804628297551686,
+              "right": 0.6445985332756659,
+              "top": 2.424102219487685
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 29952
+        },
+        "light_rim": {
+          "clean": {
+            "box": [
+              108,
+              97,
+              300,
+              225
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 0.9532620310783386,
+            "sides": {
+              "bottom": 0.439807653427124,
+              "left": 2.625,
+              "right": 0.3675643801689148,
+              "top": 1.9459141492843628
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              108,
+              113,
+              300,
+              369
+            ],
+            "flag": true,
+            "overlap": 7680,
+            "score": 1.5993595123291016,
+            "sides": {
+              "bottom": 1.1457645893096924,
+              "left": 2.999221086502075,
+              "right": 0.6445984840393066,
+              "top": 2.953869104385376
+            },
+            "useful": false
+          },
+          "fixed_clean": {
+            "flag": true,
+            "score": 0.9192171587207743,
+            "sides": {
+              "bottom": 0.2879725247325578,
+              "left": 2.9845785781694043,
+              "right": 0.28122064243850486,
+              "top": 2.9538689440150265
+            }
+          },
+          "fixed_edited": {
+            "flag": true,
+            "pixels": {
+              "bottom": true,
+              "left": false,
+              "right": true,
+              "top": false
+            },
+            "score": 1.5993593911817687,
+            "sides": {
+              "bottom": 1.145764186010459,
+              "left": 2.9992210830570545,
+              "right": 0.6445985332756659,
+              "top": 2.9538689440150265
+            }
+          },
+          "selected_iou_with_base": 1.0,
+          "target": 29952
+        },
+        "texture_apron": {
+          "clean": {
+            "box": [
+              92,
+              97,
+              220,
+              353
+            ],
+            "flag": true,
+            "overlap": 0,
+            "score": 1.1513559818267822,
+            "sides": {
+              "bottom": 0.8320695757865906,
+              "left": 2.970323085784912,
+              "right": 0.23932774364948273,
+              "top": 2.9708590507507324
+            },
+            "useful": false
+          },
+          "edited": {
+            "box": [
+              108,
+              329,
+              300,
+              457
+            ],
+            "flag": true,
+            "overlap": 24576,
+            "score": 1.2365987300872803,
+            "sides": {
+              "bottom": 0.18996374309062958,
+              "left": 2.3491768836975098,
+              "right": 2.3045268058776855,
+              "top": 2.2737724781036377
+            },
+            "useful": true
+          },
+          "fixed_clean": {
+            "flag": false,
+            "score": 0.240591584708865,
+            "sides": {
+              "bottom": 0.2879725247325578,
+              "left": 0.18504930070356362,
+              "right": 0.28122064243850486,
+              "top": 0.2235815860682461
+            }
+          },
+          "fixed_edited": {
+            "flag": false,
+            "pixels": {
+              "bottom": true,
+              "left": false,
+              "right": true,
+              "top": false
+            },
+            "score": 0.5383451087679539,
+            "sides": {
+              "bottom": 1.145764186010459,
+              "left": 0.5086540390834284,
+              "right": 0.6445985332756659,
+              "top": 0.2235815860682461
+            }
+          },
+          "selected_iou_with_base": 0.11627906976744186,
+          "target": 29952
+        }
+      },
+      "family": "kandinsky",
+      "panel": "transfer",
+      "reference_box": [
+        108,
+        113,
+        300,
+        369
+      ],
+      "slot": 5,
+      "viewport": [
+        108,
+        113,
+        652,
+        641
+      ]
+    }
+  ],
+  "schema": "chipmunk.image-viewport-frame-perturbation/1",
+  "source_sha256": {
+    "earlier": "fb0aafa7d109ca3e7fda3256fbd9fdf0e3b2afca265081092552b54cc8388731",
+    "later": "3d849ad48453c79002aa78d2d9cc8c7aeecc9f1979008060244c0bd01e065e86",
+    "previous": "47c328030351769904ac33088fda48ac8d0baca5de970db28e19e090633c91be"
+  }
+}

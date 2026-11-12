@@ -163,3 +163,11 @@ regexes = [
   '''^\s*"tokenizers/tokenizers\.abi3\.so": "899b244f19f1ddd6506c45ea0f7163f38952f2a552272a687a6ef4b9ddcc7327",?\s*$''',
   '''^\s*"transformers/models/siglip/tokenization_siglip\.py": "62b8758ad104a121c40a10d645763f322a828ff5953eab495fea7147f48435d5",?\s*$''',
 ]
+
+# Exact checksum of the published independent tokenizer used by this study.
+[[rules.allowlists]]
+description = "Verified multi-paragraph evaluation tokenizer SHA-256"
+condition = "AND"
+paths = ['''(^|/)backend/scripts/writing_body_localization_transfer\.py$''']
+regexTarget = "line"
+regexes = ['''^\s*"tokenizer\.json": "6c8aaa9a542084f2457eab775d4eeb51f92a70c0fd9de28d5edb0ddec3c08d30"[,]?\s*$''']

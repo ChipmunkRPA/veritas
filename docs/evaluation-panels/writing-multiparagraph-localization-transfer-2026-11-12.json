@@ -1,0 +1,5943 @@
+{
+  "schema": "chipmunk.writing-multiparagraph-localization-transfer-public/1",
+  "recommendation": "research_only",
+  "reason": "No fresh useful location in any arm. The false-highlight-only advancement condition passed vacuously and the exposed panel lost six incumbent useful locations with the standalone candidate.",
+  "fresh_base_paragraphs_are_archived_article_prose_in_both_formats": true,
+  "email_scope": "Constructed multipart EML with genuine quoted prose. Technical writing represents the body.",
+  "format_pairing": "Each edited body and its control appear in both plain text and MIME formats. Groups represent underlying works.",
+  "freeze": {
+    "method": {
+      "scope": "Same archive site with source-disjoint fresh works and separate source-exposed diagnostic works. Use real article body paragraphs in source order around the unchanged target. Evaluate both extracted plain text and controlled multipart email containers with genuine quoted prose.",
+      "selection": "Freeze the original 36 source commitments. Replay metadata and source qualification with room for at most 10 additional byline-disjoint works, no prior outcome inputs. Select the first 12 qualified source-exposed works by a hash of the work identifier. No coverage exclusion after scoring.",
+      "fixture": "Select up to six supported real body prose blocks nearest the exact target within the same article, minimum four. Preserve each original paragraph and its order. Non-prose or unsupported markup can create gaps. Require 100\u2013600 original words and at most 48 native sentences. Construct one exact center replacement and a genuine quote tail per message.",
+      "current": "First six complete native three-sentence context windows at raw probability at least .50, in source order. This benchmark compares the incumbent window rule.",
+      "relative": "Measure exact focus and neighbor sentences in isolation. Consider only native three-sentence body contexts wholly inside a single paragraph, with focus 12\u201340 words and 6\u201365-word neighbors. Require positive isolated focus log-odds margin over both neighbors, incumbent native log odds over the fixed PEP point, and native odds at least the median of all eligible contexts in the same paragraph. Select only the uniquely largest isolated margin across body paragraphs.",
+      "confirmed": "Require an independent checkpoint to assign at least .50 to that same exact isolated sentence, with complete token coverage. Measure only unique top-ranked candidates. No retry or alternative after rejection.",
+      "current_plus_confirmed": "Retain incumbent windows and add the confirmed exact sentence. Report highlights in unrelated body and quoted paragraphs separately.",
+      "localization": "Per displayed location nonwhitespace IoU at least .30 and recall at least .50 with the known edit. Also report wrong-only results, any unrelated paragraph touched, quote flags and exact target eligibility.",
+      "advance": "Use only fresh work groups for promotion comparisons. Require either two independent added useful work groups with at least one in each generator and at most one new human flag group, or retain all current useful locations and clear at least two genuine false-flag groups. At least six eligible fresh groups and at least six admitted edits per generator are required. Formats are paired within each group."
+    },
+    "point": -0.8544108248390134,
+    "code_sha256": "fc0ea87aae017da3ac571596fcc66500ce0e7d644a815dbc74599fdc789dabce",
+    "support_sha256": {
+      "backend/scripts/writing_archive_prospective_intake.py": "a36ad6e52919f3e7adadc96e8ce5369a75b83325e6aade0f3d2eb8c98cf03168",
+      "backend/scripts/writing_archive_author_intake.py": "086c87d33fa96a94a06c05e88173c167025fdb347b5ffa531649c8dcbb1d212d",
+      "backend/scripts/writing_paired_email_revision.py": "d4fe4419c8f9bbbc038bb62c99482ade6d528c2267be064b8b9b241ea4358b64",
+      "backend/scripts/writing_paired_revision_replication.py": "3f2404f700e8907a90b0aa59dc7e21d7325e93f9ba14723699636ad9af557414",
+      "backend/app/detectors/text/extract.py": "b2b5977121fc80c1ecdc436126259e54f39f405f92415de78d8901ce041fc02e",
+      "backend/app/detectors/text/segment.py": "c8c73db16af7fc2a47643fcc852d7f6d5f132f80fff8bceac7b7276d8e54e050",
+      "backend/app/detectors/text/coverage.py": "2b2d29559c661ee81ccbf36d0377feecda77401514a82edcc9922f3ff7946c72",
+      "backend/app/detectors/text/classifier.py": "eaf534a46c0984f0179230d37807ab33f6f0308e607e3c50d8270b09edd472e1"
+    },
+    "prior_public_sha256": "9092cd90163cccf2afc9fafc44f791adb0fb04b3945a824955a65e536a58875c"
+  },
+  "source_intake": {
+    "exposed_rewrite_transfer": {
+      "considered": 36,
+      "qualified": 12,
+      "qualified_over_cap": 24
+    },
+    "fresh": {
+      "considered": 10,
+      "qualified": 10
+    }
+  },
+  "generation_admission": {
+    "exposed_rewrite_transfer/qwen": {
+      "attempted": 12,
+      "excluded_response": 2,
+      "admitted": 10
+    },
+    "exposed_rewrite_transfer/smol2": {
+      "attempted": 12,
+      "excluded_response": 3,
+      "admitted": 9
+    },
+    "fresh/qwen": {
+      "attempted": 10,
+      "excluded_response": 2,
+      "admitted": 8
+    },
+    "fresh/smol2": {
+      "attempted": 10,
+      "excluded_response": 4,
+      "admitted": 6
+    }
+  },
+  "outcomes_by_scope": {
+    "exposed_rewrite_transfer": {
+      "human": 24,
+      "mixed": 38,
+      "target_eligible": 22,
+      "body_paragraphs": 372,
+      "eligible_body_paragraphs": 174,
+      "arms": {
+        "current": {
+          "human_flagged": 10,
+          "human_flagged_groups": 5,
+          "useful": 6,
+          "wrong_only": 10,
+          "no_flag": 22,
+          "outside_target_paragraph": 16,
+          "quote_flags": 0
+        },
+        "relative": {
+          "human_flagged": 4,
+          "human_flagged_groups": 2,
+          "useful": 0,
+          "wrong_only": 6,
+          "no_flag": 32,
+          "outside_target_paragraph": 6,
+          "quote_flags": 0
+        },
+        "confirmed": {
+          "human_flagged": 2,
+          "human_flagged_groups": 1,
+          "useful": 0,
+          "wrong_only": 2,
+          "no_flag": 36,
+          "outside_target_paragraph": 2,
+          "quote_flags": 0
+        },
+        "current_plus_confirmed": {
+          "human_flagged": 10,
+          "human_flagged_groups": 5,
+          "useful": 6,
+          "wrong_only": 10,
+          "no_flag": 22,
+          "outside_target_paragraph": 16,
+          "quote_flags": 0
+        }
+      }
+    },
+    "exposed_rewrite_transfer/txt": {
+      "human": 12,
+      "mixed": 19,
+      "target_eligible": 11,
+      "body_paragraphs": 186,
+      "eligible_body_paragraphs": 87,
+      "arms": {
+        "current": {
+          "human_flagged": 5,
+          "human_flagged_groups": 5,
+          "useful": 3,
+          "wrong_only": 5,
+          "no_flag": 11,
+          "outside_target_paragraph": 8,
+          "quote_flags": 0
+        },
+        "relative": {
+          "human_flagged": 2,
+          "human_flagged_groups": 2,
+          "useful": 0,
+          "wrong_only": 3,
+          "no_flag": 16,
+          "outside_target_paragraph": 3,
+          "quote_flags": 0
+        },
+        "confirmed": {
+          "human_flagged": 1,
+          "human_flagged_groups": 1,
+          "useful": 0,
+          "wrong_only": 1,
+          "no_flag": 18,
+          "outside_target_paragraph": 1,
+          "quote_flags": 0
+        },
+        "current_plus_confirmed": {
+          "human_flagged": 5,
+          "human_flagged_groups": 5,
+          "useful": 3,
+          "wrong_only": 5,
+          "no_flag": 11,
+          "outside_target_paragraph": 8,
+          "quote_flags": 0
+        }
+      }
+    },
+    "exposed_rewrite_transfer/txt/human": {
+      "human": 12,
+      "mixed": 0,
+      "target_eligible": 0,
+      "body_paragraphs": 72,
+      "eligible_body_paragraphs": 36,
+      "arms": {
+        "current": {
+          "human_flagged": 5,
+          "human_flagged_groups": 5,
+          "useful": 0,
+          "wrong_only": 0,
+          "no_flag": 0,
+          "outside_target_paragraph": 0,
+          "quote_flags": 0
+        },
+        "relative": {
+          "human_flagged": 2,
+          "human_flagged_groups": 2,
+          "useful": 0,
+          "wrong_only": 0,
+          "no_flag": 0,
+          "outside_target_paragraph": 0,
+          "quote_flags": 0
+        },
+        "confirmed": {
+          "human_flagged": 1,
+          "human_flagged_groups": 1,
+          "useful": 0,
+          "wrong_only": 0,
+          "no_flag": 0,
+          "outside_target_paragraph": 0,
+          "quote_flags": 0
+        },
+        "current_plus_confirmed": {
+          "human_flagged": 5,
+          "human_flagged_groups": 5,
+          "useful": 0,
+          "wrong_only": 0,
+          "no_flag": 0,
+          "outside_target_paragraph": 0,
+          "quote_flags": 0
+        }
+      }
+    },
+    "exposed_rewrite_transfer/eml": {
+      "human": 12,
+      "mixed": 19,
+      "target_eligible": 11,
+      "body_paragraphs": 186,
+      "eligible_body_paragraphs": 87,
+      "arms": {
+        "current": {
+          "human_flagged": 5,
+          "human_flagged_groups": 5,
+          "useful": 3,
+          "wrong_only": 5,
+          "no_flag": 11,
+          "outside_target_paragraph": 8,
+          "quote_flags": 0
+        },
+        "relative": {
+          "human_flagged": 2,
+          "human_flagged_groups": 2,
+          "useful": 0,
+          "wrong_only": 3,
+          "no_flag": 16,
+          "outside_target_paragraph": 3,
+          "quote_flags": 0
+        },
+        "confirmed": {
+          "human_flagged": 1,
+          "human_flagged_groups": 1,
+          "useful": 0,
+          "wrong_only": 1,
+          "no_flag": 18,
+          "outside_target_paragraph": 1,
+          "quote_flags": 0
+        },
+        "current_plus_confirmed": {
+          "human_flagged": 5,
+          "human_flagged_groups": 5,
+          "useful": 3,
+          "wrong_only": 5,
+          "no_flag": 11,
+          "outside_target_paragraph": 8,
+          "quote_flags": 0
+        }
+      }
+    },
+    "exposed_rewrite_transfer/eml/human": {
+      "human": 12,
+      "mixed": 0,
+      "target_eligible": 0,
+      "body_paragraphs": 72,
+      "eligible_body_paragraphs": 36,
+      "arms": {
+        "current": {
+          "human_flagged": 5,
+          "human_flagged_groups": 5,
+          "useful": 0,
+          "wrong_only": 0,
+          "no_flag": 0,
+          "outside_target_paragraph": 0,
+          "quote_flags": 0
+        },
+        "relative": {
+          "human_flagged": 2,
+          "human_flagged_groups": 2,
+          "useful": 0,
+          "wrong_only": 0,
+          "no_flag": 0,
+          "outside_target_paragraph": 0,
+          "quote_flags": 0
+        },
+        "confirmed": {
+          "human_flagged": 1,
+          "human_flagged_groups": 1,
+          "useful": 0,
+          "wrong_only": 0,
+          "no_flag": 0,
+          "outside_target_paragraph": 0,
+          "quote_flags": 0
+        },
+        "current_plus_confirmed": {
+          "human_flagged": 5,
+          "human_flagged_groups": 5,
+          "useful": 0,
+          "wrong_only": 0,
+          "no_flag": 0,
+          "outside_target_paragraph": 0,
+          "quote_flags": 0
+        }
+      }
+    },
+    "exposed_rewrite_transfer/txt/qwen": {
+      "human": 0,
+      "mixed": 10,
+      "target_eligible": 6,
+      "body_paragraphs": 60,
+      "eligible_body_paragraphs": 27,
+      "arms": {
+        "current": {
+          "human_flagged": 0,
+          "human_flagged_groups": 0,
+          "useful": 1,
+          "wrong_only": 3,
+          "no_flag": 6,
+          "outside_target_paragraph": 4,
+          "quote_flags": 0
+        },
+        "relative": {
+          "human_flagged": 0,
+          "human_flagged_groups": 0,
+          "useful": 0,
+          "wrong_only": 2,
+          "no_flag": 8,
+          "outside_target_paragraph": 2,
+          "quote_flags": 0
+        },
+        "confirmed": {
+          "human_flagged": 0,
+          "human_flagged_groups": 0,
+          "useful": 0,
+          "wrong_only": 1,
+          "no_flag": 9,
+          "outside_target_paragraph": 1,
+          "quote_flags": 0
+        },
+        "current_plus_confirmed": {
+          "human_flagged": 0,
+          "human_flagged_groups": 0,
+          "useful": 1,
+          "wrong_only": 3,
+          "no_flag": 6,
+          "outside_target_paragraph": 4,
+          "quote_flags": 0
+        }
+      }
+    },
+    "exposed_rewrite_transfer/eml/qwen": {
+      "human": 0,
+      "mixed": 10,
+      "target_eligible": 6,
+      "body_paragraphs": 60,
+      "eligible_body_paragraphs": 27,
+      "arms": {
+        "current": {
+          "human_flagged": 0,
+          "human_flagged_groups": 0,
+          "useful": 1,
+          "wrong_only": 3,
+          "no_flag": 6,
+          "outside_target_paragraph": 4,
+          "quote_flags": 0
+        },
+        "relative": {
+          "human_flagged": 0,
+          "human_flagged_groups": 0,
+          "useful": 0,
+          "wrong_only": 2,
+          "no_flag": 8,
+          "outside_target_paragraph": 2,
+          "quote_flags": 0
+        },
+        "confirmed": {
+          "human_flagged": 0,
+          "human_flagged_groups": 0,
+          "useful": 0,
+          "wrong_only": 1,
+          "no_flag": 9,
+          "outside_target_paragraph": 1,
+          "quote_flags": 0
+        },
+        "current_plus_confirmed": {
+          "human_flagged": 0,
+          "human_flagged_groups": 0,
+          "useful": 1,
+          "wrong_only": 3,
+          "no_flag": 6,
+          "outside_target_paragraph": 4,
+          "quote_flags": 0
+        }
+      }
+    },
+    "exposed_rewrite_transfer/txt/smol2": {
+      "human": 0,
+      "mixed": 9,
+      "target_eligible": 5,
+      "body_paragraphs": 54,
+      "eligible_body_paragraphs": 24,
+      "arms": {
+        "current": {
+          "human_flagged": 0,
+          "human_flagged_groups": 0,
+          "useful": 2,
+          "wrong_only": 2,
+          "no_flag": 5,
+          "outside_target_paragraph": 4,
+          "quote_flags": 0
+        },
+        "relative": {
+          "human_flagged": 0,
+          "human_flagged_groups": 0,
+          "useful": 0,
+          "wrong_only": 1,
+          "no_flag": 8,
+          "outside_target_paragraph": 1,
+          "quote_flags": 0
+        },
+        "confirmed": {
+          "human_flagged": 0,
+          "human_flagged_groups": 0,
+          "useful": 0,
+          "wrong_only": 0,
+          "no_flag": 9,
+          "outside_target_paragraph": 0,
+          "quote_flags": 0
+        },
+        "current_plus_confirmed": {
+          "human_flagged": 0,
+          "human_flagged_groups": 0,
+          "useful": 2,
+          "wrong_only": 2,
+          "no_flag": 5,
+          "outside_target_paragraph": 4,
+          "quote_flags": 0
+        }
+      }
+    },
+    "exposed_rewrite_transfer/eml/smol2": {
+      "human": 0,
+      "mixed": 9,
+      "target_eligible": 5,
+      "body_paragraphs": 54,
+      "eligible_body_paragraphs": 24,
+      "arms": {
+        "current": {
+          "human_flagged": 0,
+          "human_flagged_groups": 0,
+          "useful": 2,
+          "wrong_only": 2,
+          "no_flag": 5,
+          "outside_target_paragraph": 4,
+          "quote_flags": 0
+        },
+        "relative": {
+          "human_flagged": 0,
+          "human_flagged_groups": 0,
+          "useful": 0,
+          "wrong_only": 1,
+          "no_flag": 8,
+          "outside_target_paragraph": 1,
+          "quote_flags": 0
+        },
+        "confirmed": {
+          "human_flagged": 0,
+          "human_flagged_groups": 0,
+          "useful": 0,
+          "wrong_only": 0,
+          "no_flag": 9,
+          "outside_target_paragraph": 0,
+          "quote_flags": 0
+        },
+        "current_plus_confirmed": {
+          "human_flagged": 0,
+          "human_flagged_groups": 0,
+          "useful": 2,
+          "wrong_only": 2,
+          "no_flag": 5,
+          "outside_target_paragraph": 4,
+          "quote_flags": 0
+        }
+      }
+    },
+    "fresh": {
+      "human": 20,
+      "mixed": 28,
+      "target_eligible": 12,
+      "body_paragraphs": 288,
+      "eligible_body_paragraphs": 154,
+      "arms": {
+        "current": {
+          "human_flagged": 11,
+          "human_flagged_groups": 6,
+          "useful": 0,
+          "wrong_only": 12,
+          "no_flag": 16,
+          "outside_target_paragraph": 10,
+          "quote_flags": 3
+        },
+        "relative": {
+          "human_flagged": 2,
+          "human_flagged_groups": 1,
+          "useful": 0,
+          "wrong_only": 4,
+          "no_flag": 24,
+          "outside_target_paragraph": 2,
+          "quote_flags": 0
+        },
+        "confirmed": {
+          "human_flagged": 2,
+          "human_flagged_groups": 1,
+          "useful": 0,
+          "wrong_only": 4,
+          "no_flag": 24,
+          "outside_target_paragraph": 2,
+          "quote_flags": 0
+        },
+        "current_plus_confirmed": {
+          "human_flagged": 11,
+          "human_flagged_groups": 6,
+          "useful": 0,
+          "wrong_only": 12,
+          "no_flag": 16,
+          "outside_target_paragraph": 10,
+          "quote_flags": 3
+        }
+      }
+    },
+    "fresh/txt": {
+      "human": 10,
+      "mixed": 14,
+      "target_eligible": 6,
+      "body_paragraphs": 144,
+      "eligible_body_paragraphs": 77,
+      "arms": {
+        "current": {
+          "human_flagged": 5,
+          "human_flagged_groups": 5,
+          "useful": 0,
+          "wrong_only": 5,
+          "no_flag": 9,
+          "outside_target_paragraph": 4,
+          "quote_flags": 0
+        },
+        "relative": {
+          "human_flagged": 1,
+          "human_flagged_groups": 1,
+          "useful": 0,
+          "wrong_only": 2,
+          "no_flag": 12,
+          "outside_target_paragraph": 1,
+          "quote_flags": 0
+        },
+        "confirmed": {
+          "human_flagged": 1,
+          "human_flagged_groups": 1,
+          "useful": 0,
+          "wrong_only": 2,
+          "no_flag": 12,
+          "outside_target_paragraph": 1,
+          "quote_flags": 0
+        },
+        "current_plus_confirmed": {
+          "human_flagged": 5,
+          "human_flagged_groups": 5,
+          "useful": 0,
+          "wrong_only": 5,
+          "no_flag": 9,
+          "outside_target_paragraph": 4,
+          "quote_flags": 0
+        }
+      }
+    },
+    "fresh/txt/human": {
+      "human": 10,
+      "mixed": 0,
+      "target_eligible": 0,
+      "body_paragraphs": 60,
+      "eligible_body_paragraphs": 32,
+      "arms": {
+        "current": {
+          "human_flagged": 5,
+          "human_flagged_groups": 5,
+          "useful": 0,
+          "wrong_only": 0,
+          "no_flag": 0,
+          "outside_target_paragraph": 0,
+          "quote_flags": 0
+        },
+        "relative": {
+          "human_flagged": 1,
+          "human_flagged_groups": 1,
+          "useful": 0,
+          "wrong_only": 0,
+          "no_flag": 0,
+          "outside_target_paragraph": 0,
+          "quote_flags": 0
+        },
+        "confirmed": {
+          "human_flagged": 1,
+          "human_flagged_groups": 1,
+          "useful": 0,
+          "wrong_only": 0,
+          "no_flag": 0,
+          "outside_target_paragraph": 0,
+          "quote_flags": 0
+        },
+        "current_plus_confirmed": {
+          "human_flagged": 5,
+          "human_flagged_groups": 5,
+          "useful": 0,
+          "wrong_only": 0,
+          "no_flag": 0,
+          "outside_target_paragraph": 0,
+          "quote_flags": 0
+        }
+      }
+    },
+    "fresh/eml": {
+      "human": 10,
+      "mixed": 14,
+      "target_eligible": 6,
+      "body_paragraphs": 144,
+      "eligible_body_paragraphs": 77,
+      "arms": {
+        "current": {
+          "human_flagged": 6,
+          "human_flagged_groups": 6,
+          "useful": 0,
+          "wrong_only": 7,
+          "no_flag": 7,
+          "outside_target_paragraph": 6,
+          "quote_flags": 3
+        },
+        "relative": {
+          "human_flagged": 1,
+          "human_flagged_groups": 1,
+          "useful": 0,
+          "wrong_only": 2,
+          "no_flag": 12,
+          "outside_target_paragraph": 1,
+          "quote_flags": 0
+        },
+        "confirmed": {
+          "human_flagged": 1,
+          "human_flagged_groups": 1,
+          "useful": 0,
+          "wrong_only": 2,
+          "no_flag": 12,
+          "outside_target_paragraph": 1,
+          "quote_flags": 0
+        },
+        "current_plus_confirmed": {
+          "human_flagged": 6,
+          "human_flagged_groups": 6,
+          "useful": 0,
+          "wrong_only": 7,
+          "no_flag": 7,
+          "outside_target_paragraph": 6,
+          "quote_flags": 3
+        }
+      }
+    },
+    "fresh/eml/human": {
+      "human": 10,
+      "mixed": 0,
+      "target_eligible": 0,
+      "body_paragraphs": 60,
+      "eligible_body_paragraphs": 32,
+      "arms": {
+        "current": {
+          "human_flagged": 6,
+          "human_flagged_groups": 6,
+          "useful": 0,
+          "wrong_only": 0,
+          "no_flag": 0,
+          "outside_target_paragraph": 0,
+          "quote_flags": 1
+        },
+        "relative": {
+          "human_flagged": 1,
+          "human_flagged_groups": 1,
+          "useful": 0,
+          "wrong_only": 0,
+          "no_flag": 0,
+          "outside_target_paragraph": 0,
+          "quote_flags": 0
+        },
+        "confirmed": {
+          "human_flagged": 1,
+          "human_flagged_groups": 1,
+          "useful": 0,
+          "wrong_only": 0,
+          "no_flag": 0,
+          "outside_target_paragraph": 0,
+          "quote_flags": 0
+        },
+        "current_plus_confirmed": {
+          "human_flagged": 6,
+          "human_flagged_groups": 6,
+          "useful": 0,
+          "wrong_only": 0,
+          "no_flag": 0,
+          "outside_target_paragraph": 0,
+          "quote_flags": 1
+        }
+      }
+    },
+    "fresh/txt/qwen": {
+      "human": 0,
+      "mixed": 8,
+      "target_eligible": 4,
+      "body_paragraphs": 48,
+      "eligible_body_paragraphs": 26,
+      "arms": {
+        "current": {
+          "human_flagged": 0,
+          "human_flagged_groups": 0,
+          "useful": 0,
+          "wrong_only": 4,
+          "no_flag": 4,
+          "outside_target_paragraph": 3,
+          "quote_flags": 0
+        },
+        "relative": {
+          "human_flagged": 0,
+          "human_flagged_groups": 0,
+          "useful": 0,
+          "wrong_only": 2,
+          "no_flag": 6,
+          "outside_target_paragraph": 1,
+          "quote_flags": 0
+        },
+        "confirmed": {
+          "human_flagged": 0,
+          "human_flagged_groups": 0,
+          "useful": 0,
+          "wrong_only": 2,
+          "no_flag": 6,
+          "outside_target_paragraph": 1,
+          "quote_flags": 0
+        },
+        "current_plus_confirmed": {
+          "human_flagged": 0,
+          "human_flagged_groups": 0,
+          "useful": 0,
+          "wrong_only": 4,
+          "no_flag": 4,
+          "outside_target_paragraph": 3,
+          "quote_flags": 0
+        }
+      }
+    },
+    "fresh/eml/qwen": {
+      "human": 0,
+      "mixed": 8,
+      "target_eligible": 4,
+      "body_paragraphs": 48,
+      "eligible_body_paragraphs": 26,
+      "arms": {
+        "current": {
+          "human_flagged": 0,
+          "human_flagged_groups": 0,
+          "useful": 0,
+          "wrong_only": 5,
+          "no_flag": 3,
+          "outside_target_paragraph": 4,
+          "quote_flags": 1
+        },
+        "relative": {
+          "human_flagged": 0,
+          "human_flagged_groups": 0,
+          "useful": 0,
+          "wrong_only": 2,
+          "no_flag": 6,
+          "outside_target_paragraph": 1,
+          "quote_flags": 0
+        },
+        "confirmed": {
+          "human_flagged": 0,
+          "human_flagged_groups": 0,
+          "useful": 0,
+          "wrong_only": 2,
+          "no_flag": 6,
+          "outside_target_paragraph": 1,
+          "quote_flags": 0
+        },
+        "current_plus_confirmed": {
+          "human_flagged": 0,
+          "human_flagged_groups": 0,
+          "useful": 0,
+          "wrong_only": 5,
+          "no_flag": 3,
+          "outside_target_paragraph": 4,
+          "quote_flags": 1
+        }
+      }
+    },
+    "fresh/txt/smol2": {
+      "human": 0,
+      "mixed": 6,
+      "target_eligible": 2,
+      "body_paragraphs": 36,
+      "eligible_body_paragraphs": 19,
+      "arms": {
+        "current": {
+          "human_flagged": 0,
+          "human_flagged_groups": 0,
+          "useful": 0,
+          "wrong_only": 1,
+          "no_flag": 5,
+          "outside_target_paragraph": 1,
+          "quote_flags": 0
+        },
+        "relative": {
+          "human_flagged": 0,
+          "human_flagged_groups": 0,
+          "useful": 0,
+          "wrong_only": 0,
+          "no_flag": 6,
+          "outside_target_paragraph": 0,
+          "quote_flags": 0
+        },
+        "confirmed": {
+          "human_flagged": 0,
+          "human_flagged_groups": 0,
+          "useful": 0,
+          "wrong_only": 0,
+          "no_flag": 6,
+          "outside_target_paragraph": 0,
+          "quote_flags": 0
+        },
+        "current_plus_confirmed": {
+          "human_flagged": 0,
+          "human_flagged_groups": 0,
+          "useful": 0,
+          "wrong_only": 1,
+          "no_flag": 5,
+          "outside_target_paragraph": 1,
+          "quote_flags": 0
+        }
+      }
+    },
+    "fresh/eml/smol2": {
+      "human": 0,
+      "mixed": 6,
+      "target_eligible": 2,
+      "body_paragraphs": 36,
+      "eligible_body_paragraphs": 19,
+      "arms": {
+        "current": {
+          "human_flagged": 0,
+          "human_flagged_groups": 0,
+          "useful": 0,
+          "wrong_only": 2,
+          "no_flag": 4,
+          "outside_target_paragraph": 2,
+          "quote_flags": 1
+        },
+        "relative": {
+          "human_flagged": 0,
+          "human_flagged_groups": 0,
+          "useful": 0,
+          "wrong_only": 0,
+          "no_flag": 6,
+          "outside_target_paragraph": 0,
+          "quote_flags": 0
+        },
+        "confirmed": {
+          "human_flagged": 0,
+          "human_flagged_groups": 0,
+          "useful": 0,
+          "wrong_only": 0,
+          "no_flag": 6,
+          "outside_target_paragraph": 0,
+          "quote_flags": 0
+        },
+        "current_plus_confirmed": {
+          "human_flagged": 0,
+          "human_flagged_groups": 0,
+          "useful": 0,
+          "wrong_only": 2,
+          "no_flag": 4,
+          "outside_target_paragraph": 2,
+          "quote_flags": 1
+        }
+      }
+    }
+  },
+  "frozen_decisions": {
+    "relative": {
+      "gained_groups": 0,
+      "gained_families": [],
+      "lost_groups": 0,
+      "new_human_flag_groups": 0,
+      "cleared_human_flag_groups": 5,
+      "adequate": true,
+      "advances": true
+    },
+    "confirmed": {
+      "gained_groups": 0,
+      "gained_families": [],
+      "lost_groups": 0,
+      "new_human_flag_groups": 0,
+      "cleared_human_flag_groups": 5,
+      "adequate": true,
+      "advances": true
+    },
+    "current_plus_confirmed": {
+      "gained_groups": 0,
+      "gained_families": [],
+      "lost_groups": 0,
+      "new_human_flag_groups": 0,
+      "cleared_human_flag_groups": 0,
+      "adequate": true,
+      "advances": false
+    }
+  },
+  "audit": {
+    "source_groups": 22,
+    "verified_source_paragraphs": 132,
+    "fixtures": 110,
+    "exact_context_span_bindings": 2255,
+    "distinct_primary_inputs": 906,
+    "distinct_independent_inputs": 4,
+    "primary_forwards": 227,
+    "independent_forwards": 1,
+    "commitments": {
+      "freeze.json": "93e29e899b34865fdacdfedfe041a9b08a0dc7b3cbc8409dc05f18185d3dcbd3",
+      "originals.json": "cae88ab63302e43def54f65f5d84cbf204e5d9e9f9a0013c7d63316034099a4f",
+      "sources.json": "373b2583bb0a38829547d9bde564c91d5f24a65286d0629c77609a3bfb762e3e",
+      "inputs.json": "a0338f1f9cab57a641de7518e163611f4027e02b2bb7a6a33cd08d594c8558d4",
+      "primary.json": "3ba69775587d8fb056e21a492d7f7b0ff90b101c08230710ef2b7b64a36f4e9d",
+      "shortlist.json": "43e6306bc07b89cda8d64db4e9c67185f518c4317bdc6216264809e16d7afe2d",
+      "independent.json": "026f694a35af048bdfc9f4c596dc99472d44eaf87813376c62940935e3cdfc9f",
+      "outcomes.json": "86a7b814cb80a9b95f9dde27c5930b3cfc5667f9f0d6965503dd366304b84d98",
+      "aggregate.json": "6483bf1a0878a88fe15185cf3ea4b77882062aed05a03cb208bee4cb41b77dd4"
+    },
+    "primary_exact_context_matches_to_previous_excerpt_responses": {
+      "fresh": 0,
+      "exposed_rewrite_transfer": 139
+    },
+    "fresh_work_level_transitions": {
+      "current": {
+        "any_useful_positive_work_groups": 0,
+        "any_flagged_genuine_work_groups": 6,
+        "new_genuine_groups_relative_to_any_incumbent_format_flag": 0,
+        "cleared_genuine_groups_across_both_formats": 0
+      },
+      "relative": {
+        "any_useful_positive_work_groups": 0,
+        "any_flagged_genuine_work_groups": 1,
+        "new_genuine_groups_relative_to_any_incumbent_format_flag": 0,
+        "cleared_genuine_groups_across_both_formats": 5
+      },
+      "confirmed": {
+        "any_useful_positive_work_groups": 0,
+        "any_flagged_genuine_work_groups": 1,
+        "new_genuine_groups_relative_to_any_incumbent_format_flag": 0,
+        "cleared_genuine_groups_across_both_formats": 5
+      },
+      "current_plus_confirmed": {
+        "any_useful_positive_work_groups": 0,
+        "any_flagged_genuine_work_groups": 6,
+        "new_genuine_groups_relative_to_any_incumbent_format_flag": 0,
+        "cleared_genuine_groups_across_both_formats": 0
+      }
+    },
+    "verified": true
+  },
+  "audit_sha256": "ae07787c58576b55a4dfbfed789e1727d4582af452b068be5c364f6788cba8b3",
+  "replay_rejected_changed_quote_flag": true,
+  "preflight_reproduced": {
+    "generator_responses": 20,
+    "fixture_hashes": 110,
+    "distinct_primary_inputs": 906
+  },
+  "source_groups": [
+    {
+      "group": "blog-ae7dd71913d8e49e",
+      "scope": "exposed_rewrite_transfer",
+      "path": "content/en/blog/_posts/2018-07-18-11-ways-not-to-get-hacked.md",
+      "commit": "0ef096e4cb577c30739f19e19a017217e5ca4807",
+      "archive_blob_sha256": "e0a77648fc0580c71a99ba5dd40b525c64cdc9d2b59618b9c004f63f00f314f7",
+      "target_raw_span": [
+        19997,
+        20266
+      ],
+      "paragraph_source_spans": [
+        [
+          18984,
+          19282
+        ],
+        [
+          19284,
+          19585
+        ],
+        [
+          19690,
+          19867
+        ],
+        [
+          19869,
+          20266
+        ],
+        [
+          20268,
+          20718
+        ],
+        [
+          20720,
+          21173
+        ]
+      ]
+    },
+    {
+      "group": "blog-1c353ae23a890b86",
+      "scope": "exposed_rewrite_transfer",
+      "path": "content/en/blog/_posts/2019-03-29-kube-proxy-subtleties-debugging-an-intermittent-connection-resets.md",
+      "commit": "0ef096e4cb577c30739f19e19a017217e5ca4807",
+      "archive_blob_sha256": "2f49df6144db0adbe6852ddec85c71ffb2a6be737cac4f1250c6f22c380aef92",
+      "target_raw_span": [
+        1745,
+        1813
+      ],
+      "paragraph_source_spans": [
+        [
+          160,
+          491
+        ],
+        [
+          1290,
+          1494
+        ],
+        [
+          1512,
+          2001
+        ],
+        [
+          2024,
+          2492
+        ],
+        [
+          2514,
+          2895
+        ],
+        [
+          2897,
+          3309
+        ]
+      ]
+    },
+    {
+      "group": "blog-b8bc067475431d75",
+      "scope": "exposed_rewrite_transfer",
+      "path": "content/en/blog/_posts/2018-07-20-history-kubernetes-community.md",
+      "commit": "0ef096e4cb577c30739f19e19a017217e5ca4807",
+      "archive_blob_sha256": "ce223ae8d621d13cb181cb9ff4419c379cff884b9169a57e4b9536195ac61b8d",
+      "target_raw_span": [
+        2858,
+        2968
+      ],
+      "paragraph_source_spans": [
+        [
+          239,
+          584
+        ],
+        [
+          586,
+          984
+        ],
+        [
+          2375,
+          2620
+        ],
+        [
+          2622,
+          3241
+        ],
+        [
+          3243,
+          3638
+        ],
+        [
+          3640,
+          4027
+        ]
+      ]
+    },
+    {
+      "group": "blog-5a9b9892bf9ab76b",
+      "scope": "exposed_rewrite_transfer",
+      "path": "content/en/blog/_posts/2018-07-24-cpu-manager.md",
+      "commit": "0ef096e4cb577c30739f19e19a017217e5ca4807",
+      "archive_blob_sha256": "b064aedd5973bd7b4064fff8d98b7cd71fe769ebd78a40fd7d31ebbf90b078f7",
+      "target_raw_span": [
+        3863,
+        4054
+      ],
+      "paragraph_source_spans": [
+        [
+          1336,
+          1504
+        ],
+        [
+          1910,
+          2636
+        ],
+        [
+          3118,
+          3516
+        ],
+        [
+          3518,
+          4189
+        ],
+        [
+          4191,
+          4622
+        ],
+        [
+          4624,
+          4859
+        ]
+      ]
+    },
+    {
+      "group": "blog-35a4cc3251f64ea3",
+      "scope": "exposed_rewrite_transfer",
+      "path": "content/en/blog/_posts/2018-10-08-support-for-azure-vmss.md",
+      "commit": "0ef096e4cb577c30739f19e19a017217e5ca4807",
+      "archive_blob_sha256": "08f3ca5e995acb32f332dfe5234e012c505df2f4bb6d9338ba3c2758b17faf76",
+      "target_raw_span": [
+        5854,
+        5940
+      ],
+      "paragraph_source_spans": [
+        [
+          4530,
+          4909
+        ],
+        [
+          4911,
+          5318
+        ],
+        [
+          5320,
+          5655
+        ],
+        [
+          5657,
+          5940
+        ],
+        [
+          5942,
+          6141
+        ],
+        [
+          10200,
+          10721
+        ]
+      ]
+    },
+    {
+      "group": "blog-bb5ccc7edfb3cc4d",
+      "scope": "exposed_rewrite_transfer",
+      "path": "content/en/blog/_posts/2018-05-24-kubernetes-containerd-integration-goes-ga.md",
+      "commit": "0ef096e4cb577c30739f19e19a017217e5ca4807",
+      "archive_blob_sha256": "8b6886150ddf4fbfa17a0fa17d4e02ee2eedf730b5a3c9ef9fb09198d5aab29d",
+      "target_raw_span": [
+        579,
+        734
+      ],
+      "paragraph_source_spans": [
+        [
+          235,
+          734
+        ],
+        [
+          736,
+          1081
+        ],
+        [
+          1083,
+          1524
+        ],
+        [
+          1968,
+          2509
+        ],
+        [
+          2511,
+          2748
+        ],
+        [
+          2930,
+          3410
+        ]
+      ]
+    },
+    {
+      "group": "blog-343cfeb9ce95ae6c",
+      "scope": "exposed_rewrite_transfer",
+      "path": "content/en/blog/_posts/2019-02-28-automate-operations-on-your-cluster-with-operatorhub.md",
+      "commit": "0ef096e4cb577c30739f19e19a017217e5ca4807",
+      "archive_blob_sha256": "7e2287186451e0409f6c4fe759f343763768fe4e86fb68002ac32a903c919b06",
+      "target_raw_span": [
+        3772,
+        3936
+      ],
+      "paragraph_source_spans": [
+        [
+          1754,
+          2116
+        ],
+        [
+          2143,
+          2485
+        ],
+        [
+          3207,
+          3467
+        ],
+        [
+          3510,
+          3936
+        ],
+        [
+          3938,
+          4112
+        ],
+        [
+          4114,
+          4691
+        ]
+      ]
+    },
+    {
+      "group": "blog-062b86202af2a108",
+      "scope": "exposed_rewrite_transfer",
+      "path": "content/en/blog/_posts/2019-12-09-volume-snapshot-beta.md",
+      "commit": "0ef096e4cb577c30739f19e19a017217e5ca4807",
+      "archive_blob_sha256": "9317a339d8ee29dc613164dff12eeb3315929da91f5f932963db20b518775c9b",
+      "target_raw_span": [
+        8592,
+        8789
+      ],
+      "paragraph_source_spans": [
+        [
+          4436,
+          4636
+        ],
+        [
+          5015,
+          5167
+        ],
+        [
+          5209,
+          5424
+        ],
+        [
+          8274,
+          8789
+        ],
+        [
+          8791,
+          8987
+        ],
+        [
+          8989,
+          9137
+        ]
+      ]
+    },
+    {
+      "group": "blog-bd5ae606c3843072",
+      "scope": "exposed_rewrite_transfer",
+      "path": "content/en/blog/_posts/2019-03-28-PID-Limiting.md",
+      "commit": "0ef096e4cb577c30739f19e19a017217e5ca4807",
+      "archive_blob_sha256": "33d0cf91aee300c6e4162161d0a46d61aae71b8b5539e86dd36c502b33b00b82",
+      "target_raw_span": [
+        1220,
+        1435
+      ],
+      "paragraph_source_spans": [
+        [
+          362,
+          852
+        ],
+        [
+          883,
+          1122
+        ],
+        [
+          1124,
+          1702
+        ],
+        [
+          1727,
+          2264
+        ],
+        [
+          2266,
+          2942
+        ],
+        [
+          2944,
+          3042
+        ]
+      ]
+    },
+    {
+      "group": "blog-90be1152316ad39b",
+      "scope": "exposed_rewrite_transfer",
+      "path": "content/en/blog/_posts/2018-07-12-resizing-persistent-volumes-using-kubernetes.md",
+      "commit": "0ef096e4cb577c30739f19e19a017217e5ca4807",
+      "archive_blob_sha256": "b5336b1e69f168fbcdd49580040e2aecf071bccf3c62da9edf62308626211ab6",
+      "target_raw_span": [
+        514,
+        656
+      ],
+      "paragraph_source_spans": [
+        [
+          312,
+          703
+        ],
+        [
+          705,
+          1112
+        ],
+        [
+          1114,
+          1720
+        ],
+        [
+          1943,
+          2172
+        ],
+        [
+          2312,
+          2610
+        ],
+        [
+          2612,
+          2804
+        ]
+      ]
+    },
+    {
+      "group": "blog-04a69d44522bb6af",
+      "scope": "exposed_rewrite_transfer",
+      "path": "content/en/blog/_posts/2019-04-16-pod-priority-and-preemption-in-kubernetes.md",
+      "commit": "0ef096e4cb577c30739f19e19a017217e5ca4807",
+      "archive_blob_sha256": "7a93923c46d7a97d2a5a755be66ce83a4767204e1aa6fea12609c1df239521c3",
+      "target_raw_span": [
+        230,
+        306
+      ],
+      "paragraph_source_spans": [
+        [
+          117,
+          741
+        ],
+        [
+          743,
+          1184
+        ],
+        [
+          1750,
+          2428
+        ],
+        [
+          2430,
+          2802
+        ],
+        [
+          2845,
+          3501
+        ],
+        [
+          3503,
+          3920
+        ]
+      ]
+    },
+    {
+      "group": "blog-12323f6f96fc7125",
+      "scope": "exposed_rewrite_transfer",
+      "path": "content/en/blog/_posts/2019-06-21-volume-cloning-alpha.md",
+      "commit": "0ef096e4cb577c30739f19e19a017217e5ca4807",
+      "archive_blob_sha256": "100b6d06949cc817869a44391c16d02a82c9a9f7e56cfdd3a627196791f957fd",
+      "target_raw_span": [
+        2616,
+        2770
+      ],
+      "paragraph_source_spans": [
+        [
+          1391,
+          1698
+        ],
+        [
+          1700,
+          2140
+        ],
+        [
+          2142,
+          2386
+        ],
+        [
+          2419,
+          2810
+        ],
+        [
+          2812,
+          3425
+        ],
+        [
+          3481,
+          3794
+        ]
+      ]
+    },
+    {
+      "group": "blog-c8ceed7faacde8ee",
+      "scope": "fresh",
+      "path": "content/en/blog/_posts/2018-07-27-kubevirt-crds-for-virtualization.md",
+      "commit": "0ef096e4cb577c30739f19e19a017217e5ca4807",
+      "archive_blob_sha256": "4fa54a2c42f086cbd74aaf933aa9e0b325123ec28e348020d6f3c7c2a8e295c3",
+      "target_raw_span": [
+        3554,
+        3694
+      ],
+      "paragraph_source_spans": [
+        [
+          2488,
+          2825
+        ],
+        [
+          2827,
+          3131
+        ],
+        [
+          3133,
+          3469
+        ],
+        [
+          3471,
+          4292
+        ],
+        [
+          4294,
+          4790
+        ],
+        [
+          4792,
+          5147
+        ]
+      ]
+    },
+    {
+      "group": "blog-ca5299dd9c9c9339",
+      "scope": "fresh",
+      "path": "content/en/blog/_posts/2018-08-02-dynamically-expand-volume-csi.md",
+      "commit": "0ef096e4cb577c30739f19e19a017217e5ca4807",
+      "archive_blob_sha256": "b89d9733b254697b98b19f37538a9d23d0b367717aae984191c154f16ad7958e",
+      "target_raw_span": [
+        952,
+        1070
+      ],
+      "paragraph_source_spans": [
+        [
+          149,
+          597
+        ],
+        [
+          616,
+          755
+        ],
+        [
+          757,
+          950
+        ],
+        [
+          952,
+          1226
+        ],
+        [
+          1228,
+          1792
+        ],
+        [
+          1955,
+          2257
+        ]
+      ]
+    },
+    {
+      "group": "blog-d7c7d60e26fa7222",
+      "scope": "fresh",
+      "path": "content/en/blog/_posts/2019-05-23-Kyma-extend-and-build-on-kubernetes-with-ease.md",
+      "commit": "0ef096e4cb577c30739f19e19a017217e5ca4807",
+      "archive_blob_sha256": "1968332a7c32ccc1073a85897a6949129c6a975a1213b9caf75821c08a141586",
+      "target_raw_span": [
+        1543,
+        1661
+      ],
+      "paragraph_source_spans": [
+        [
+          132,
+          1236
+        ],
+        [
+          1303,
+          1959
+        ],
+        [
+          1961,
+          2119
+        ],
+        [
+          2255,
+          2794
+        ],
+        [
+          3406,
+          3675
+        ],
+        [
+          4999,
+          5151
+        ]
+      ]
+    },
+    {
+      "group": "blog-d82fd4104be77e06",
+      "scope": "fresh",
+      "path": "content/en/blog/_posts/2018-05-01-developing-on-kubernetes.md",
+      "commit": "0ef096e4cb577c30739f19e19a017217e5ca4807",
+      "archive_blob_sha256": "8e6cc2f8e50c74be371fcb53a3ee8b53d988f2c0fb03812f48d958c03291a033",
+      "target_raw_span": [
+        511,
+        635
+      ],
+      "paragraph_source_spans": [
+        [
+          238,
+          509
+        ],
+        [
+          511,
+          1095
+        ],
+        [
+          1097,
+          1339
+        ],
+        [
+          1659,
+          2504
+        ],
+        [
+          3164,
+          3537
+        ],
+        [
+          3539,
+          4113
+        ]
+      ]
+    },
+    {
+      "group": "blog-dc5ba5da2357a376",
+      "scope": "fresh",
+      "path": "content/en/blog/_posts/2019-11-05-grokkin-the-docs.md",
+      "commit": "0ef096e4cb577c30739f19e19a017217e5ca4807",
+      "archive_blob_sha256": "9fb06312e19ea34d820bd7617032bf5c272d08adb64ce9ec320938e451d52e69",
+      "target_raw_span": [
+        7253,
+        7376
+      ],
+      "paragraph_source_spans": [
+        [
+          4595,
+          5060
+        ],
+        [
+          6416,
+          6781
+        ],
+        [
+          6842,
+          7186
+        ],
+        [
+          7188,
+          7767
+        ],
+        [
+          7858,
+          8645
+        ],
+        [
+          8783,
+          9129
+        ]
+      ]
+    },
+    {
+      "group": "blog-e671b2f59546fa5c",
+      "scope": "fresh",
+      "path": "content/en/blog/_posts/2018-05-29-announcing-kustomize.md",
+      "commit": "0ef096e4cb577c30739f19e19a017217e5ca4807",
+      "archive_blob_sha256": "ad494f08daa1ca6636980b5bcaeac8ff6ee405b6e54db80747dd31f3f62d2c6e",
+      "target_raw_span": [
+        3658,
+        3746
+      ],
+      "paragraph_source_spans": [
+        [
+          2820,
+          3009
+        ],
+        [
+          3011,
+          3269
+        ],
+        [
+          3271,
+          3656
+        ],
+        [
+          3658,
+          4672
+        ],
+        [
+          4723,
+          4872
+        ],
+        [
+          4874,
+          5141
+        ]
+      ]
+    },
+    {
+      "group": "blog-e6c1ae9b18eb9724",
+      "scope": "fresh",
+      "path": "content/en/blog/_posts/2019-04-04-local-persistent-volumes-ga.md",
+      "commit": "0ef096e4cb577c30739f19e19a017217e5ca4807",
+      "archive_blob_sha256": "78da509d02fd243a9715867712b3878c6d2950d42312de450fae3181c5669f6d",
+      "target_raw_span": [
+        2171,
+        2319
+      ],
+      "paragraph_source_spans": [
+        [
+          753,
+          849
+        ],
+        [
+          1574,
+          1919
+        ],
+        [
+          1921,
+          2319
+        ],
+        [
+          2321,
+          2669
+        ],
+        [
+          2671,
+          2788
+        ],
+        [
+          2814,
+          2934
+        ]
+      ]
+    },
+    {
+      "group": "blog-f009c535960d5894",
+      "scope": "fresh",
+      "path": "content/en/blog/_posts/2018-12-11-Kubernetes-Federation-Evolution.md",
+      "commit": "0ef096e4cb577c30739f19e19a017217e5ca4807",
+      "archive_blob_sha256": "99d812eafc7e0b66b32a317f31da788f103a8c313aaf6c4b3c2a79b363bf4527",
+      "target_raw_span": [
+        9599,
+        9734
+      ],
+      "paragraph_source_spans": [
+        [
+          7970,
+          8082
+        ],
+        [
+          8581,
+          9188
+        ],
+        [
+          9190,
+          9246
+        ],
+        [
+          9248,
+          9931
+        ],
+        [
+          9933,
+          10502
+        ],
+        [
+          10504,
+          11073
+        ]
+      ]
+    },
+    {
+      "group": "blog-f06c351137e115d4",
+      "scope": "fresh",
+      "path": "content/en/blog/_posts/2019-04-17-future-of-cloud-providers.md",
+      "commit": "0ef096e4cb577c30739f19e19a017217e5ca4807",
+      "archive_blob_sha256": "b819cd7d41f21a7681834990e1b2bef63a4b1ce98cdb2c89687084f1457cdf25",
+      "target_raw_span": [
+        3677,
+        3814
+      ],
+      "paragraph_source_spans": [
+        [
+          1123,
+          1842
+        ],
+        [
+          1880,
+          2318
+        ],
+        [
+          2469,
+          2786
+        ],
+        [
+          2943,
+          3675
+        ],
+        [
+          3677,
+          4106
+        ],
+        [
+          4126,
+          5451
+        ]
+      ]
+    },
+    {
+      "group": "blog-f2047cfb271537a1",
+      "scope": "fresh",
+      "path": "content/en/blog/_posts/2018-07-11-dynamic-kubelet-configuration.md",
+      "commit": "0ef096e4cb577c30739f19e19a017217e5ca4807",
+      "archive_blob_sha256": "3ed54459d0b1c7e1fa26f6f537d7b134a6a530c32656e7066940fbe791b15163",
+      "target_raw_span": [
+        599,
+        749
+      ],
+      "paragraph_source_spans": [
+        [
+          337,
+          597
+        ],
+        [
+          599,
+          1080
+        ],
+        [
+          1082,
+          1237
+        ],
+        [
+          1282,
+          1528
+        ],
+        [
+          1530,
+          1785
+        ],
+        [
+          2302,
+          2690
+        ]
+      ]
+    }
+  ],
+  "outcomes": [
+    {
+      "group": "blog-ae7dd71913d8e49e",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "human",
+      "format": "txt",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 0,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-ae7dd71913d8e49e",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "human",
+      "format": "eml",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 0,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-ae7dd71913d8e49e",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "qwen",
+      "format": "txt",
+      "truth": [
+        860,
+        1001
+      ],
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 0,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-ae7dd71913d8e49e",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "qwen",
+      "format": "eml",
+      "truth": [
+        860,
+        1001
+      ],
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 0,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-ae7dd71913d8e49e",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "smol2",
+      "format": "txt",
+      "truth": [
+        860,
+        1037
+      ],
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 0,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-ae7dd71913d8e49e",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "smol2",
+      "format": "eml",
+      "truth": [
+        860,
+        1037
+      ],
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 0,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-1c353ae23a890b86",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "human",
+      "format": "txt",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 4,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-1c353ae23a890b86",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "human",
+      "format": "eml",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 4,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-1c353ae23a890b86",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "qwen",
+      "format": "txt",
+      "truth": [
+        771,
+        845
+      ],
+      "target_eligible": true,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 4,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-1c353ae23a890b86",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "qwen",
+      "format": "eml",
+      "truth": [
+        771,
+        845
+      ],
+      "target_eligible": true,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 4,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-1c353ae23a890b86",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "smol2",
+      "format": "txt",
+      "truth": [
+        771,
+        869
+      ],
+      "target_eligible": true,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 4,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-1c353ae23a890b86",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "smol2",
+      "format": "eml",
+      "truth": [
+        771,
+        869
+      ],
+      "target_eligible": true,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 4,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-b8bc067475431d75",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "human",
+      "format": "txt",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 3,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-b8bc067475431d75",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "human",
+      "format": "eml",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 3,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-b8bc067475431d75",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "qwen",
+      "format": "txt",
+      "truth": [
+        1230,
+        1351
+      ],
+      "target_eligible": true,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 3,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-b8bc067475431d75",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "qwen",
+      "format": "eml",
+      "truth": [
+        1230,
+        1351
+      ],
+      "target_eligible": true,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 3,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-5a9b9892bf9ab76b",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "human",
+      "format": "txt",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 4,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-5a9b9892bf9ab76b",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "human",
+      "format": "eml",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 4,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-5a9b9892bf9ab76b",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "qwen",
+      "format": "txt",
+      "truth": [
+        1373,
+        1457
+      ],
+      "target_eligible": true,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 4,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-5a9b9892bf9ab76b",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "qwen",
+      "format": "eml",
+      "truth": [
+        1373,
+        1457
+      ],
+      "target_eligible": true,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 4,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-5a9b9892bf9ab76b",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "smol2",
+      "format": "txt",
+      "truth": [
+        1373,
+        1447
+      ],
+      "target_eligible": true,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 4,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-5a9b9892bf9ab76b",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "smol2",
+      "format": "eml",
+      "truth": [
+        1373,
+        1447
+      ],
+      "target_eligible": true,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 4,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-35a4cc3251f64ea3",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "human",
+      "format": "txt",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 5,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-35a4cc3251f64ea3",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "human",
+      "format": "eml",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 5,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-35a4cc3251f64ea3",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "qwen",
+      "format": "txt",
+      "truth": [
+        1324,
+        1421
+      ],
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 5,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-35a4cc3251f64ea3",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "qwen",
+      "format": "eml",
+      "truth": [
+        1324,
+        1421
+      ],
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 5,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-35a4cc3251f64ea3",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "smol2",
+      "format": "txt",
+      "truth": [
+        1324,
+        1391
+      ],
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 5,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-35a4cc3251f64ea3",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "smol2",
+      "format": "eml",
+      "truth": [
+        1324,
+        1391
+      ],
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 5,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-bb5ccc7edfb3cc4d",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "human",
+      "format": "txt",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 4,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-bb5ccc7edfb3cc4d",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "human",
+      "format": "eml",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 4,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-343cfeb9ce95ae6c",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "human",
+      "format": "txt",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 1,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-343cfeb9ce95ae6c",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "human",
+      "format": "eml",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 1,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-343cfeb9ce95ae6c",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "qwen",
+      "format": "txt",
+      "truth": [
+        1185,
+        1287
+      ],
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 1,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-343cfeb9ce95ae6c",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "qwen",
+      "format": "eml",
+      "truth": [
+        1185,
+        1287
+      ],
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 1,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-343cfeb9ce95ae6c",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "smol2",
+      "format": "txt",
+      "truth": [
+        1185,
+        1302
+      ],
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 1,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-343cfeb9ce95ae6c",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "smol2",
+      "format": "eml",
+      "truth": [
+        1185,
+        1302
+      ],
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 1,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-062b86202af2a108",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "human",
+      "format": "txt",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 1,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-062b86202af2a108",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "human",
+      "format": "eml",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 1,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-062b86202af2a108",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "qwen",
+      "format": "txt",
+      "truth": [
+        672,
+        882
+      ],
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 1,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-062b86202af2a108",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "qwen",
+      "format": "eml",
+      "truth": [
+        672,
+        882
+      ],
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 1,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-062b86202af2a108",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "smol2",
+      "format": "txt",
+      "truth": [
+        672,
+        801
+      ],
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 1,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-062b86202af2a108",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "smol2",
+      "format": "eml",
+      "truth": [
+        672,
+        801
+      ],
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 1,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-bd5ae606c3843072",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "human",
+      "format": "txt",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 5,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-bd5ae606c3843072",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "human",
+      "format": "eml",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 5,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-bd5ae606c3843072",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "qwen",
+      "format": "txt",
+      "truth": [
+        828,
+        994
+      ],
+      "target_eligible": true,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 5,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": true,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": true,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-bd5ae606c3843072",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "qwen",
+      "format": "eml",
+      "truth": [
+        828,
+        994
+      ],
+      "target_eligible": true,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 5,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": true,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": true,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-bd5ae606c3843072",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "smol2",
+      "format": "txt",
+      "truth": [
+        828,
+        992
+      ],
+      "target_eligible": true,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 5,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": true,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": true,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-bd5ae606c3843072",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "smol2",
+      "format": "eml",
+      "truth": [
+        828,
+        992
+      ],
+      "target_eligible": true,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 5,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": true,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": true,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-90be1152316ad39b",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "human",
+      "format": "txt",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 2,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-90be1152316ad39b",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "human",
+      "format": "eml",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 2,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-90be1152316ad39b",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "qwen",
+      "format": "txt",
+      "truth": [
+        200,
+        337
+      ],
+      "target_eligible": true,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 2,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-90be1152316ad39b",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "qwen",
+      "format": "eml",
+      "truth": [
+        200,
+        337
+      ],
+      "target_eligible": true,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 2,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-90be1152316ad39b",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "smol2",
+      "format": "txt",
+      "truth": [
+        200,
+        301
+      ],
+      "target_eligible": true,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 2,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-90be1152316ad39b",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "smol2",
+      "format": "eml",
+      "truth": [
+        200,
+        301
+      ],
+      "target_eligible": true,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 2,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-04a69d44522bb6af",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "human",
+      "format": "txt",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 5,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-04a69d44522bb6af",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "human",
+      "format": "eml",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 5,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-12323f6f96fc7125",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "human",
+      "format": "txt",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 2,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-12323f6f96fc7125",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "human",
+      "format": "eml",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 2,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-12323f6f96fc7125",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "qwen",
+      "format": "txt",
+      "truth": [
+        1120,
+        1275
+      ],
+      "target_eligible": true,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 2,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-12323f6f96fc7125",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "qwen",
+      "format": "eml",
+      "truth": [
+        1120,
+        1275
+      ],
+      "target_eligible": true,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 2,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-12323f6f96fc7125",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "smol2",
+      "format": "txt",
+      "truth": [
+        1120,
+        1311
+      ],
+      "target_eligible": true,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 2,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": true,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": true,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-12323f6f96fc7125",
+      "scope": "exposed_rewrite_transfer",
+      "kind": "smol2",
+      "format": "eml",
+      "truth": [
+        1120,
+        1311
+      ],
+      "target_eligible": true,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 2,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": true,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": true,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-c8ceed7faacde8ee",
+      "scope": "fresh",
+      "kind": "human",
+      "format": "txt",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 4,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-c8ceed7faacde8ee",
+      "scope": "fresh",
+      "kind": "human",
+      "format": "eml",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 4,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-c8ceed7faacde8ee",
+      "scope": "fresh",
+      "kind": "qwen",
+      "format": "txt",
+      "truth": [
+        1066,
+        1204
+      ],
+      "target_eligible": true,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 4,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-c8ceed7faacde8ee",
+      "scope": "fresh",
+      "kind": "qwen",
+      "format": "eml",
+      "truth": [
+        1066,
+        1204
+      ],
+      "target_eligible": true,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 4,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-c8ceed7faacde8ee",
+      "scope": "fresh",
+      "kind": "smol2",
+      "format": "txt",
+      "truth": [
+        1066,
+        1197
+      ],
+      "target_eligible": true,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 4,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-c8ceed7faacde8ee",
+      "scope": "fresh",
+      "kind": "smol2",
+      "format": "eml",
+      "truth": [
+        1066,
+        1197
+      ],
+      "target_eligible": true,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 4,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-ca5299dd9c9c9339",
+      "scope": "fresh",
+      "kind": "human",
+      "format": "txt",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 2,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-ca5299dd9c9c9339",
+      "scope": "fresh",
+      "kind": "human",
+      "format": "eml",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 2,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-ca5299dd9c9c9339",
+      "scope": "fresh",
+      "kind": "qwen",
+      "format": "txt",
+      "truth": [
+        784,
+        875
+      ],
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 2,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-ca5299dd9c9c9339",
+      "scope": "fresh",
+      "kind": "qwen",
+      "format": "eml",
+      "truth": [
+        784,
+        875
+      ],
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 2,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-ca5299dd9c9c9339",
+      "scope": "fresh",
+      "kind": "smol2",
+      "format": "txt",
+      "truth": [
+        784,
+        948
+      ],
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 2,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-ca5299dd9c9c9339",
+      "scope": "fresh",
+      "kind": "smol2",
+      "format": "eml",
+      "truth": [
+        784,
+        948
+      ],
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 2,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-d7c7d60e26fa7222",
+      "scope": "fresh",
+      "kind": "human",
+      "format": "txt",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 3,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-d7c7d60e26fa7222",
+      "scope": "fresh",
+      "kind": "human",
+      "format": "eml",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 3,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-d7c7d60e26fa7222",
+      "scope": "fresh",
+      "kind": "qwen",
+      "format": "txt",
+      "truth": [
+        1184,
+        1309
+      ],
+      "target_eligible": true,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 3,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-d7c7d60e26fa7222",
+      "scope": "fresh",
+      "kind": "qwen",
+      "format": "eml",
+      "truth": [
+        1184,
+        1309
+      ],
+      "target_eligible": true,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 3,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-d82fd4104be77e06",
+      "scope": "fresh",
+      "kind": "human",
+      "format": "txt",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 4,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-d82fd4104be77e06",
+      "scope": "fresh",
+      "kind": "human",
+      "format": "eml",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 4,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-dc5ba5da2357a376",
+      "scope": "fresh",
+      "kind": "human",
+      "format": "txt",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 5,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-dc5ba5da2357a376",
+      "scope": "fresh",
+      "kind": "human",
+      "format": "eml",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 5,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-dc5ba5da2357a376",
+      "scope": "fresh",
+      "kind": "qwen",
+      "format": "txt",
+      "truth": [
+        1244,
+        1346
+      ],
+      "target_eligible": true,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 5,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-dc5ba5da2357a376",
+      "scope": "fresh",
+      "kind": "qwen",
+      "format": "eml",
+      "truth": [
+        1244,
+        1346
+      ],
+      "target_eligible": true,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 5,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-e671b2f59546fa5c",
+      "scope": "fresh",
+      "kind": "human",
+      "format": "txt",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 3,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-e671b2f59546fa5c",
+      "scope": "fresh",
+      "kind": "human",
+      "format": "eml",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 3,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-e671b2f59546fa5c",
+      "scope": "fresh",
+      "kind": "qwen",
+      "format": "txt",
+      "truth": [
+        836,
+        940
+      ],
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 3,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-e671b2f59546fa5c",
+      "scope": "fresh",
+      "kind": "qwen",
+      "format": "eml",
+      "truth": [
+        836,
+        940
+      ],
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 3,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-e671b2f59546fa5c",
+      "scope": "fresh",
+      "kind": "smol2",
+      "format": "txt",
+      "truth": [
+        836,
+        918
+      ],
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 3,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-e671b2f59546fa5c",
+      "scope": "fresh",
+      "kind": "smol2",
+      "format": "eml",
+      "truth": [
+        836,
+        918
+      ],
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 3,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-e6c1ae9b18eb9724",
+      "scope": "fresh",
+      "kind": "human",
+      "format": "txt",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 2,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-e6c1ae9b18eb9724",
+      "scope": "fresh",
+      "kind": "human",
+      "format": "eml",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 2,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-e6c1ae9b18eb9724",
+      "scope": "fresh",
+      "kind": "smol2",
+      "format": "txt",
+      "truth": [
+        630,
+        847
+      ],
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 2,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-e6c1ae9b18eb9724",
+      "scope": "fresh",
+      "kind": "smol2",
+      "format": "eml",
+      "truth": [
+        630,
+        847
+      ],
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 2,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-f009c535960d5894",
+      "scope": "fresh",
+      "kind": "human",
+      "format": "txt",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 3,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-f009c535960d5894",
+      "scope": "fresh",
+      "kind": "human",
+      "format": "eml",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 3,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": true
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": true
+        }
+      }
+    },
+    {
+      "group": "blog-f009c535960d5894",
+      "scope": "fresh",
+      "kind": "qwen",
+      "format": "txt",
+      "truth": [
+        1116,
+        1228
+      ],
+      "target_eligible": true,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 3,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-f009c535960d5894",
+      "scope": "fresh",
+      "kind": "qwen",
+      "format": "eml",
+      "truth": [
+        1116,
+        1228
+      ],
+      "target_eligible": true,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 3,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": true
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": true
+        }
+      }
+    },
+    {
+      "group": "blog-f009c535960d5894",
+      "scope": "fresh",
+      "kind": "smol2",
+      "format": "txt",
+      "truth": [
+        1116,
+        1207
+      ],
+      "target_eligible": true,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 3,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-f009c535960d5894",
+      "scope": "fresh",
+      "kind": "smol2",
+      "format": "eml",
+      "truth": [
+        1116,
+        1207
+      ],
+      "target_eligible": true,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 3,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": true
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": true,
+          "quote_flag": true
+        }
+      }
+    },
+    {
+      "group": "blog-f06c351137e115d4",
+      "scope": "fresh",
+      "kind": "human",
+      "format": "txt",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 5,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-f06c351137e115d4",
+      "scope": "fresh",
+      "kind": "human",
+      "format": "eml",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 5,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-f06c351137e115d4",
+      "scope": "fresh",
+      "kind": "qwen",
+      "format": "txt",
+      "truth": [
+        2130,
+        2275
+      ],
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 5,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-f06c351137e115d4",
+      "scope": "fresh",
+      "kind": "qwen",
+      "format": "eml",
+      "truth": [
+        2130,
+        2275
+      ],
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 5,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-f06c351137e115d4",
+      "scope": "fresh",
+      "kind": "smol2",
+      "format": "txt",
+      "truth": [
+        2130,
+        2283
+      ],
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 5,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-f06c351137e115d4",
+      "scope": "fresh",
+      "kind": "smol2",
+      "format": "eml",
+      "truth": [
+        2130,
+        2283
+      ],
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 5,
+      "arms": {
+        "current": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-f2047cfb271537a1",
+      "scope": "fresh",
+      "kind": "human",
+      "format": "txt",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 1,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-f2047cfb271537a1",
+      "scope": "fresh",
+      "kind": "human",
+      "format": "eml",
+      "truth": null,
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 1,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": false,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-f2047cfb271537a1",
+      "scope": "fresh",
+      "kind": "qwen",
+      "format": "txt",
+      "truth": [
+        262,
+        384
+      ],
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 1,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    },
+    {
+      "group": "blog-f2047cfb271537a1",
+      "scope": "fresh",
+      "kind": "qwen",
+      "format": "eml",
+      "truth": [
+        262,
+        384
+      ],
+      "target_eligible": false,
+      "body_paragraphs": 6,
+      "eligible_body_paragraphs": 1,
+      "arms": {
+        "current": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "relative": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        },
+        "current_plus_confirmed": {
+          "flag": true,
+          "useful": false,
+          "outside_target_paragraph": false,
+          "quote_flag": false
+        }
+      }
+    }
+  ]
+}

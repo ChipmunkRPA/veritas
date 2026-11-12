@@ -1,0 +1,212 @@
+{
+  "schema": "chipmunk.video-mouth-pose-recurrence-result/1",
+  "serving_change": false,
+  "freeze_sha256": "d3978757ca57e006fcdc04125950cb7e6669ec333195432c0c185fe45cd1a937",
+  "sampled_held_pictures": 5498,
+  "held_source_scope": {
+    "grid": {
+      "development_source_components": 4,
+      "held_source_components": 4
+    },
+    "crema_d": {
+      "held_source_groups": 10
+    },
+    "prior_project_exposure": true,
+    "source_compatible_subset": "Prior visible motion qualification, exact original PCM preserved. No phoneme or listener validation."
+  },
+  "outcomes": {
+    "grid": {
+      "direct": {
+        "measured_no_range": 87,
+        "correct_range": 1
+      },
+      "pose_matched": {
+        "measured_no_range": 83,
+        "false_range": 2,
+        "misplaced_range": 2,
+        "correct_range": 1
+      },
+      "nearest_time": {
+        "measured_no_range": 86,
+        "correct_range": 2
+      }
+    },
+    "native": {
+      "direct": {
+        "measured_no_range": 49,
+        "false_range": 8,
+        "misplaced_range": 2,
+        "correct_range": 1
+      },
+      "pose_matched": {
+        "measured_no_range": 54,
+        "false_range": 6
+      },
+      "nearest_time": {
+        "measured_no_range": 59,
+        "false_range": 1
+      }
+    },
+    "reencode": {
+      "direct": {
+        "measured_no_range": 8
+      },
+      "pose_matched": {
+        "measured_no_range": 7,
+        "false_range": 1
+      },
+      "nearest_time": {
+        "measured_no_range": 8
+      }
+    },
+    "hard_cut": {
+      "direct": {
+        "measured_no_range": 4
+      },
+      "pose_matched": {
+        "false_range": 1,
+        "measured_no_range": 3
+      },
+      "nearest_time": {
+        "false_range": 1,
+        "measured_no_range": 3
+      }
+    }
+  },
+  "compatible": {
+    "direct": {
+      "measured_no_range": 7
+    },
+    "pose_matched": {
+      "measured_no_range": 6,
+      "misplaced_range": 1
+    },
+    "nearest_time": {
+      "measured_no_range": 7
+    }
+  },
+  "coverage": {
+    "grid": {
+      "control": 56,
+      "control_assessed": 56,
+      "positive": 32,
+      "positive_assessed": 32
+    },
+    "native": {
+      "control": 40,
+      "control_assessed": 40,
+      "positive": 20,
+      "positive_assessed": 20
+    },
+    "reencode": {
+      "control": 8,
+      "control_assessed": 8
+    },
+    "hard_cut": {
+      "control": 4,
+      "control_assessed": 4
+    }
+  },
+  "comparison": {
+    "grid_extra": 2,
+    "grid_added": 1,
+    "compatible_added": 0,
+    "native_extra": 6,
+    "reencode_extra": 1,
+    "cut_extra": 1,
+    "grid_components": 1,
+    "native_components": 0
+  },
+  "criteria": {
+    "grid_added": false,
+    "grid_components": false,
+    "compatible_added": false,
+    "grid_extra": true,
+    "native_added": false,
+    "native_components": false,
+    "native_extra": false,
+    "cut_extra": false,
+    "reencode_extra": true,
+    "coverage": true
+  },
+  "advance": false,
+  "runtime": {
+    "elapsed_s": 91.69074754199755,
+    "peak_rss_bytes": 136364032,
+    "held_sha256": "3c78542c5a5a6116b304aa0305224ea54118a99ccb23c322c5d5fcd076f4690b",
+    "calibration_sha256": "c1672250d450fb61544927bd0f846d5aa858715dfcab843dff716f325ac66c1a"
+  },
+  "points": {
+    "direct": 0.42381424677636104,
+    "pose_matched": 0.030640882912818176,
+    "nearest_time": 0.05150218246441185
+  },
+  "spec": {
+    "schema": "chipmunk.video-mouth-pose-recurrence/1",
+    "aligned_mouth_crop_wh": [
+      33,
+      19
+    ],
+    "aligned_context_crop_wh": [
+      33,
+      13
+    ],
+    "context_above_mouth_px": 16,
+    "pose_opening_cells_wh": [
+      3,
+      2
+    ],
+    "gradient_cells_wh": [
+      3,
+      2
+    ],
+    "orientation_bins": 6,
+    "pose_distance_max": 0.43,
+    "flank_samples": 12,
+    "minimum_separation_s": "4/25",
+    "coverage": 0.75,
+    "points": "Per arm, strict exceedance of the third-largest ordinary development maximum or zero, whichever is higher.",
+    "gate": {
+      "grid_added": 4,
+      "grid_components": 2,
+      "compatible_added": 2,
+      "grid_extra": 4,
+      "native_added": 2,
+      "native_components": 2,
+      "native_extra": 3,
+      "cut_extra": 0,
+      "reencode_extra": 1
+    },
+    "method": "Select mouth-opening and face-pose matches on both sides of a short interval in the same shot. Compare spatial edge orientations inside the mouth relative to the surrounding face. Both within-clip comparisons must exceed the disagreement between the two reference pictures."
+  },
+  "independent_replay": {
+    "status": "verified",
+    "source_files": 160,
+    "recomputed_decisions": 480,
+    "matched_native_crops": 90,
+    "compatible_pairs_redecoded": 7,
+    "compatible_picture_stream_frames": 1050,
+    "compatible_pcm_pairs_identical": 7,
+    "compatible_masks_rebuilt": 140,
+    "visual_scores_on_audio_only_pairs_identical": 8,
+    "aggregate_sha256": "fa3e374d08af706043369eaf68c51cd4920139b93d7df9cef249e20503f7c47d",
+    "anonymous_example": {
+      "correct": true,
+      "source_compatible": false,
+      "truth": [
+        "27/25",
+        "47/25"
+      ],
+      "selected": [
+        "28/25",
+        "46/25"
+      ],
+      "iou": "9/10",
+      "anchors_s": [
+        "14/25",
+        "44/25",
+        "54/25"
+      ]
+    }
+  }
+}

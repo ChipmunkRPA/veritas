@@ -57,6 +57,9 @@ change when reducing predictable late sound.
 The [competing-voices disagreement study](audio-disagreement-transfer-2026-11-12.md)
 reconstructs exact mixtures across calibration and two held meeting rooms.
 It compares four voice policies and records when the second opinion cannot act.
+The [stereo removed-speech comparison](audio-removed-source-transfer-2026-11-12.md)
+rebuilds the sound taken out by interference suppression. The replay measures
+target-speech leakage separately for centered and displaced recordings.
 
 The [video tracking evidence fixture](video-face-tracking-context.md) exercises
 the same recorded values in a saved packet and report without downloading
@@ -185,6 +188,9 @@ generated rewrites and ordinary editorial revisions.
 The [archived technical prose transfer](writing-archived-passage-transfer-2026-11-12.md)
 replays 125 held passages, including one historical revision, and compares a
 fixed sentence ranker and its combination with the current check.
+The [multi-paragraph writing transfer](writing-multiparagraph-localization-transfer-2026-11-12.md)
+replays native article passages and constructed email equivalents, including
+unrelated paragraphs and quoted text.
 
 The [offline video interval verifier](video-native-interval-replay-2026-11-11.md)
 checks the source clock and exact before, during and after pixels with Python
@@ -210,6 +216,9 @@ recompressed controls, with a separate authored false-collapse regression.
 The [local audiovisual timing comparison](video-lipsync-local-contrast-transfer-2026-11-12.md)
 reconstructs 160 exact soundtrack deliveries and checks signed timing estimates,
 ordinary controls, native mouth crops, and PCM slices.
+The [mouth-pose comparison](video-mouth-pose-recurrence-2026-11-12.md)
+tests short neural redraws and independently reopens the seven pairs with
+source-compatible mouth motion, including their native pictures and PCM.
 The [timing and codec follow-up](video-timing-coverage-and-codec-holds-2026-11-11.md)
 records when a single timing window leaves change unassessed and compares
 exact and approximate picture holds on the same lossy and lossless deliveries.

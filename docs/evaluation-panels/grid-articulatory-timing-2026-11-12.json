@@ -1,0 +1,8634 @@
+{
+  "advancement": {
+    "all_met": false,
+    "constant_offsets": true,
+    "control_alerts": false,
+    "coverage": true,
+    "new_locations": false
+  },
+  "freeze_sha256": "e814668b72a343d52130a1bd8a7da71533db80876260a85de99e015d99377075",
+  "method": {
+    "acoustic": "Seven 25 ms Hann windows centered at steps of 20 ms from -60 to +60 ms around each native picture. Log relative spectrum in twelve fixed bands and overall energy relative to the clip 95th percentile.",
+    "advancement": "At least three added correct locations across two held groups, at least 75% assessed coverage on edits and ordinary views, at most one added ordinary alert, and no new constant-offset alert.",
+    "bands_hz": [
+      80,
+      150,
+      260,
+      400,
+      600,
+      850,
+      1200,
+      1700,
+      2300,
+      3100,
+      4200,
+      5600,
+      7600
+    ],
+    "compare": "Measure local compatibility change relative to one shared reference lag on both 400 ms flanks. Use only exactly shared frames with strong visual states and at least two states in the proposed range. Rank by the smallest of the three signed alignment gains.",
+    "extent_ticks": [
+      14,
+      18,
+      22
+    ],
+    "fit": "Balanced L2 logistic regression (C=.05) predicts open versus closed only from original aligned speech, with point/held speakers excluded. The bounded input model sees no picture, raw speaker label or edit variants.",
+    "flank_minimum_states": 4,
+    "flank_ticks": 10,
+    "lags_ticks": [
+      -10,
+      -9,
+      -8,
+      -7,
+      -6,
+      -5,
+      -4,
+      -3,
+      -2,
+      -1,
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "local_minimum_states": 6,
+    "localization": "At least 0.40 temporal intersection over union and signed displacement error at most two native pictures.",
+    "observation": "Closed is a median three-gap aperture at most .055 and open is at least .100, normalized by eye distance. Intermediate and unavailable measurements abstain.",
+    "operating_point": "Strictly above the largest ordinary maximum among the two excluded point groups, with all controls retained.",
+    "relative_lag_ticks": [
+      4,
+      8
+    ],
+    "roles": [
+      "recorded",
+      "local_gain",
+      "local_lowpass",
+      "local_noise",
+      "constant_early",
+      "constant_late",
+      "short_early",
+      "short_late",
+      "long_early",
+      "long_late"
+    ],
+    "source": "Previously unplanned exact GRID utterances from fixed publisher archives. Groups are disjoint across fit, point and held. Speaker groups have prior project exposure.",
+    "split": {
+      "fit": [
+        [
+          10,
+          11,
+          12
+        ],
+        12
+      ],
+      "held": [
+        [
+          8,
+          9,
+          15
+        ],
+        9
+      ],
+      "point": [
+        [
+          13,
+          14
+        ],
+        7
+      ]
+    }
+  },
+  "native_replay": {
+    "case_pcm_commitments": 418,
+    "fit_files": 36,
+    "fit_pictures": 2700,
+    "native_crop_commitments": 12,
+    "native_files": 49,
+    "native_pictures": 3675
+  },
+  "open_close": {
+    "held": {
+      "auc": 0.8064516129032259,
+      "counts": [
+        279,
+        892
+      ]
+    },
+    "point": {
+      "auc": 0.6913012221423437,
+      "counts": [
+        107,
+        455
+      ]
+    }
+  },
+  "paired_processing": {
+    "constant_early": {
+      "matched_recordings": 25,
+      "median_change": 0.0
+    },
+    "constant_late": {
+      "matched_recordings": 26,
+      "median_change": 0.0
+    },
+    "local_gain": {
+      "matched_recordings": 26,
+      "median_change": 0.004090765358802498
+    },
+    "local_lowpass": {
+      "matched_recordings": 26,
+      "median_change": 0.11376814787861785
+    },
+    "local_noise": {
+      "matched_recordings": 26,
+      "median_change": -0.025764537100423916
+    },
+    "long_early": {
+      "matched_recordings": 25,
+      "median_change": 0.0017423758333671019
+    },
+    "long_late": {
+      "matched_recordings": 26,
+      "median_change": 0.002850250837225791
+    },
+    "short_early": {
+      "matched_recordings": 26,
+      "median_change": 0.005353403185579003
+    },
+    "short_late": {
+      "matched_recordings": 26,
+      "median_change": 0.005526716049833055
+    }
+  },
+  "point": {
+    "measured": 82,
+    "total": 84,
+    "value": 0.41085675748617756
+  },
+  "ranking": {
+    "held": {
+      "control_groups_at_or_above_top_useful": 3,
+      "control_roles_at_or_above_top_useful": {
+        "constant_early": 1,
+        "constant_late": 1,
+        "local_gain": 1,
+        "local_lowpass": 8,
+        "recorded": 1
+      },
+      "controls_at_or_above_top_useful": 12,
+      "correct_sign": 58,
+      "edited_with_proposal": 103,
+      "right_interval": 50,
+      "signed_error_at_most_two_ticks": 46,
+      "top_useful_response": 0.30281630645837665,
+      "useful": 23
+    },
+    "neural": {
+      "control_groups_at_or_above_top_useful": 0,
+      "control_roles_at_or_above_top_useful": {},
+      "controls_at_or_above_top_useful": 0,
+      "correct_sign": 2,
+      "edited_with_proposal": 4,
+      "right_interval": 0,
+      "signed_error_at_most_two_ticks": 0,
+      "top_useful_response": null,
+      "useful": 0
+    }
+  },
+  "rows": {
+    "held": [
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            33,
+            47
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.12528320627468295
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "01",
+        "role": "recorded"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            42,
+            56
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.1358382957556843
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "01",
+        "role": "local_gain"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            38,
+            56
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.2643346227024738
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "01",
+        "role": "local_lowpass"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            34,
+            48
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.11771798272169724
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "01",
+        "role": "local_noise"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            33,
+            47
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.12528320627468295
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "01",
+        "role": "constant_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            33,
+            47
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.12528320627468295
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "01",
+        "role": "constant_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            19,
+            41
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.13652766186752865
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": [
+          26,
+          42
+        ],
+        "known_shift": -5,
+        "recording": "01",
+        "role": "short_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            26,
+            44
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.12000873536540216
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": [
+          26,
+          42
+        ],
+        "known_shift": 5,
+        "recording": "01",
+        "role": "short_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            40,
+            54
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.15946748974898206
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": [
+          23,
+          45
+        ],
+        "known_shift": -7,
+        "recording": "01",
+        "role": "long_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            28,
+            46
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.13498199260440671
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": [
+          23,
+          45
+        ],
+        "known_shift": 7,
+        "recording": "01",
+        "role": "long_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            15,
+            37
+          ],
+          "relative_lag_ticks": -8,
+          "score": 0.1239941166608344
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "02",
+        "role": "recorded"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            15,
+            37
+          ],
+          "relative_lag_ticks": -8,
+          "score": 0.12584575162729897
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "02",
+        "role": "local_gain"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            15,
+            33
+          ],
+          "relative_lag_ticks": -8,
+          "score": 0.20400778528678365
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "02",
+        "role": "local_lowpass"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            15,
+            37
+          ],
+          "relative_lag_ticks": -8,
+          "score": 0.13432517042769032
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "02",
+        "role": "local_noise"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            10,
+            32
+          ],
+          "relative_lag_ticks": -8,
+          "score": 0.12399411666083444
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "02",
+        "role": "constant_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            47,
+            61
+          ],
+          "relative_lag_ticks": -6,
+          "score": 0.08367678116854498
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "02",
+        "role": "constant_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            15,
+            37
+          ],
+          "relative_lag_ticks": -8,
+          "score": 0.1824308616571381
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": [
+          27,
+          43
+        ],
+        "known_shift": -5,
+        "recording": "02",
+        "role": "short_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            16,
+            38
+          ],
+          "relative_lag_ticks": -7,
+          "score": 0.11718189125430285
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": [
+          27,
+          43
+        ],
+        "known_shift": 5,
+        "recording": "02",
+        "role": "short_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            15,
+            33
+          ],
+          "relative_lag_ticks": -8,
+          "score": 0.11612833670198994
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": [
+          24,
+          46
+        ],
+        "known_shift": -7,
+        "recording": "02",
+        "role": "long_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            15,
+            29
+          ],
+          "relative_lag_ticks": -8,
+          "score": 0.09078587363857593
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": [
+          24,
+          46
+        ],
+        "known_shift": 7,
+        "recording": "02",
+        "role": "long_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            35,
+            53
+          ],
+          "relative_lag_ticks": -5,
+          "score": 0.021065572603260842
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "03",
+        "role": "recorded"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            35,
+            53
+          ],
+          "relative_lag_ticks": -5,
+          "score": 0.025728873013662473
+        },
+        "current": {
+          "measured_windows": 0,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "03",
+        "role": "local_gain"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            36,
+            54
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.04901188919982774
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "03",
+        "role": "local_lowpass"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            39,
+            53
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.0146813307450434
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "03",
+        "role": "local_noise"
+      },
+      {
+        "assessed": false,
+        "candidate": null,
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "03",
+        "role": "constant_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            41,
+            55
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.03796833714301454
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "03",
+        "role": "constant_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            40,
+            54
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.019848170972715812
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": [
+          28,
+          44
+        ],
+        "known_shift": -5,
+        "recording": "03",
+        "role": "short_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            31,
+            53
+          ],
+          "relative_lag_ticks": -5,
+          "score": 0.014255955137118588
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": [
+          28,
+          44
+        ],
+        "known_shift": 5,
+        "recording": "03",
+        "role": "short_late"
+      },
+      {
+        "assessed": false,
+        "candidate": null,
+        "current": {
+          "measured_windows": 0,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": [
+          25,
+          47
+        ],
+        "known_shift": -7,
+        "recording": "03",
+        "role": "long_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            35,
+            53
+          ],
+          "relative_lag_ticks": -5,
+          "score": 0.02371318985199121
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": [
+          25,
+          47
+        ],
+        "known_shift": 7,
+        "recording": "03",
+        "role": "long_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            28,
+            50
+          ],
+          "relative_lag_ticks": -6,
+          "score": 0.08647812385240389
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "04",
+        "role": "recorded"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            28,
+            50
+          ],
+          "relative_lag_ticks": -6,
+          "score": 0.08776368058597879
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "04",
+        "role": "local_gain"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            20,
+            34
+          ],
+          "relative_lag_ticks": -8,
+          "score": 0.14993058359371136
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "04",
+        "role": "local_lowpass"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            28,
+            50
+          ],
+          "relative_lag_ticks": -6,
+          "score": 0.09369784974036229
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "04",
+        "role": "local_noise"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            16,
+            38
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.05434776857353743
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "04",
+        "role": "constant_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            27,
+            45
+          ],
+          "relative_lag_ticks": -8,
+          "score": 0.11768325909619938
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "04",
+        "role": "constant_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            29,
+            51
+          ],
+          "relative_lag_ticks": -8,
+          "score": 0.08696196209757068
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": [
+          29,
+          45
+        ],
+        "known_shift": -5,
+        "recording": "04",
+        "role": "short_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            16,
+            34
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.05434776857353743
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": [
+          29,
+          45
+        ],
+        "known_shift": 5,
+        "recording": "04",
+        "role": "short_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            24,
+            46
+          ],
+          "relative_lag_ticks": -5,
+          "score": 0.09607647505100349
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": [
+          26,
+          48
+        ],
+        "known_shift": -7,
+        "recording": "04",
+        "role": "long_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            39,
+            53
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.07748215426792385
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": [
+          26,
+          48
+        ],
+        "known_shift": 7,
+        "recording": "04",
+        "role": "long_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            20,
+            38
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.10146878612688554
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "05",
+        "role": "recorded"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            20,
+            38
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.1197354616464543
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "05",
+        "role": "local_gain"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            30,
+            48
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.2343233237649948
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "05",
+        "role": "local_lowpass"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            30,
+            52
+          ],
+          "relative_lag_ticks": -8,
+          "score": 0.08087245979344262
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "05",
+        "role": "local_noise"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            20,
+            38
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.10146878612688554
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "05",
+        "role": "constant_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            20,
+            38
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.10146878612688554
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "05",
+        "role": "constant_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            29,
+            51
+          ],
+          "relative_lag_ticks": -7,
+          "score": 0.11169175425287675
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": [
+          30,
+          46
+        ],
+        "known_shift": -5,
+        "recording": "05",
+        "role": "short_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            16,
+            38
+          ],
+          "relative_lag_ticks": -5,
+          "score": 0.11160726461586472
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": [
+          30,
+          46
+        ],
+        "known_shift": 5,
+        "recording": "05",
+        "role": "short_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            30,
+            48
+          ],
+          "relative_lag_ticks": -5,
+          "score": 0.10321116196025264
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": [
+          27,
+          49
+        ],
+        "known_shift": -7,
+        "recording": "05",
+        "role": "long_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            25,
+            47
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.0816064659075783
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": [
+          27,
+          49
+        ],
+        "known_shift": 7,
+        "recording": "05",
+        "role": "long_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            33,
+            55
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.17600732543509323
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "06",
+        "role": "recorded"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            33,
+            55
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.18033390283206238
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "06",
+        "role": "local_gain"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            24,
+            42
+          ],
+          "relative_lag_ticks": 7,
+          "score": 0.3262783799235373
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "06",
+        "role": "local_lowpass"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            32,
+            54
+          ],
+          "relative_lag_ticks": 6,
+          "score": 0.13205107735160163
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "06",
+        "role": "local_noise"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            33,
+            55
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.17600732543509323
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "06",
+        "role": "constant_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            33,
+            55
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.17600732543509323
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "06",
+        "role": "constant_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            26,
+            40
+          ],
+          "relative_lag_ticks": -6,
+          "score": 0.13390008067544584
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": [
+          26,
+          42
+        ],
+        "known_shift": -5,
+        "recording": "06",
+        "role": "short_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            23,
+            41
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.17821453392150657
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": [
+          26,
+          42
+        ],
+        "known_shift": 5,
+        "recording": "06",
+        "role": "short_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            22,
+            36
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.11831658969445027
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": [
+          23,
+          45
+        ],
+        "known_shift": -7,
+        "recording": "06",
+        "role": "long_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            14,
+            28
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.17614301189475678
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": [
+          23,
+          45
+        ],
+        "known_shift": 7,
+        "recording": "06",
+        "role": "long_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            14,
+            28
+          ],
+          "relative_lag_ticks": -7,
+          "score": 0.06843794543015003
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "07",
+        "role": "recorded"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            15,
+            29
+          ],
+          "relative_lag_ticks": -7,
+          "score": 0.0975029858952371
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "07",
+        "role": "local_gain"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            15,
+            33
+          ],
+          "relative_lag_ticks": -6,
+          "score": 0.26686515984278825
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "07",
+        "role": "local_lowpass"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            14,
+            28
+          ],
+          "relative_lag_ticks": -8,
+          "score": 0.07539863122496743
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "07",
+        "role": "local_noise"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            12,
+            30
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.07672699556257088
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "07",
+        "role": "constant_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            14,
+            28
+          ],
+          "relative_lag_ticks": -7,
+          "score": 0.06843794543015003
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "07",
+        "role": "constant_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            14,
+            36
+          ],
+          "relative_lag_ticks": -7,
+          "score": 0.10554282504386565
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": [
+          27,
+          43
+        ],
+        "known_shift": -5,
+        "recording": "07",
+        "role": "short_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            16,
+            34
+          ],
+          "relative_lag_ticks": -7,
+          "score": 0.12036888474342781
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": [
+          27,
+          43
+        ],
+        "known_shift": 5,
+        "recording": "07",
+        "role": "short_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            15,
+            33
+          ],
+          "relative_lag_ticks": -6,
+          "score": 0.0902430729103206
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": [
+          24,
+          46
+        ],
+        "known_shift": -7,
+        "recording": "07",
+        "role": "long_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            10,
+            24
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.08803600081962504
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": [
+          24,
+          46
+        ],
+        "known_shift": 7,
+        "recording": "07",
+        "role": "long_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            37,
+            51
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.19841071328796486
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "08",
+        "role": "recorded"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            20,
+            42
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.252613854452924
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "08",
+        "role": "local_gain"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            32,
+            50
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.3201674061064102
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "08",
+        "role": "local_lowpass"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            21,
+            35
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.12876302116898455
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "08",
+        "role": "local_noise"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            29,
+            51
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.18842079449531254
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "08",
+        "role": "constant_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            37,
+            51
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.19841071328796486
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "08",
+        "role": "constant_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            12,
+            26
+          ],
+          "relative_lag_ticks": 6,
+          "score": 0.1753357319754873
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": [
+          28,
+          44
+        ],
+        "known_shift": -5,
+        "recording": "08",
+        "role": "short_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            19,
+            37
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.12158657167633954
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": [
+          28,
+          44
+        ],
+        "known_shift": 5,
+        "recording": "08",
+        "role": "short_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            21,
+            35
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.1770558090182187
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": [
+          25,
+          47
+        ],
+        "known_shift": -7,
+        "recording": "08",
+        "role": "long_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            17,
+            31
+          ],
+          "relative_lag_ticks": -6,
+          "score": 0.15903237300741369
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": [
+          25,
+          47
+        ],
+        "known_shift": 7,
+        "recording": "08",
+        "role": "long_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            19,
+            33
+          ],
+          "relative_lag_ticks": -8,
+          "score": 0.14938821603040237
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "09",
+        "role": "recorded"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            19,
+            33
+          ],
+          "relative_lag_ticks": -8,
+          "score": 0.15054624171581268
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "09",
+        "role": "local_gain"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            29,
+            43
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.2551678189691927
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "09",
+        "role": "local_lowpass"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            22,
+            40
+          ],
+          "relative_lag_ticks": 7,
+          "score": 0.1228284970094136
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "09",
+        "role": "local_noise"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            23,
+            37
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.15118381594467079
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "09",
+        "role": "constant_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            19,
+            33
+          ],
+          "relative_lag_ticks": -8,
+          "score": 0.14938821603040237
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "09",
+        "role": "constant_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            15,
+            29
+          ],
+          "relative_lag_ticks": 6,
+          "score": 0.14627524728850955
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": [
+          29,
+          45
+        ],
+        "known_shift": -5,
+        "recording": "09",
+        "role": "short_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            17,
+            35
+          ],
+          "relative_lag_ticks": -7,
+          "score": 0.2104937143578503
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": [
+          29,
+          45
+        ],
+        "known_shift": 5,
+        "recording": "09",
+        "role": "short_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            17,
+            31
+          ],
+          "relative_lag_ticks": 6,
+          "score": 0.11570152104643856
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": [
+          26,
+          48
+        ],
+        "known_shift": -7,
+        "recording": "09",
+        "role": "long_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            28,
+            42
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.26009605743081515
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": [
+          26,
+          48
+        ],
+        "known_shift": 7,
+        "recording": "09",
+        "role": "long_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            10,
+            28
+          ],
+          "relative_lag_ticks": -8,
+          "score": 0.17057685062593753
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "10",
+        "role": "recorded"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            10,
+            28
+          ],
+          "relative_lag_ticks": -8,
+          "score": 0.17932476023430532
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "10",
+        "role": "local_gain"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            29,
+            47
+          ],
+          "relative_lag_ticks": 6,
+          "score": 0.3565306143270348
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "10",
+        "role": "local_lowpass"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            23,
+            45
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.13056387105094386
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "10",
+        "role": "local_noise"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            10,
+            28
+          ],
+          "relative_lag_ticks": -7,
+          "score": 0.18253445252455405
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "10",
+        "role": "constant_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            23,
+            45
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.16533303646677297
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "10",
+        "role": "constant_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            10,
+            24
+          ],
+          "relative_lag_ticks": -6,
+          "score": 0.14599342983152291
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": [
+          30,
+          46
+        ],
+        "known_shift": -5,
+        "recording": "10",
+        "role": "short_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            16,
+            34
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.20862411211096377
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": [
+          30,
+          46
+        ],
+        "known_shift": 5,
+        "recording": "10",
+        "role": "short_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            11,
+            25
+          ],
+          "relative_lag_ticks": -8,
+          "score": 0.19389199845253685
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": [
+          27,
+          49
+        ],
+        "known_shift": -7,
+        "recording": "10",
+        "role": "long_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            11,
+            25
+          ],
+          "relative_lag_ticks": -8,
+          "score": 0.2007729837331077
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": [
+          27,
+          49
+        ],
+        "known_shift": 7,
+        "recording": "10",
+        "role": "long_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            39,
+            53
+          ],
+          "relative_lag_ticks": 7,
+          "score": 0.19030933594265573
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "11",
+        "role": "recorded"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            39,
+            61
+          ],
+          "relative_lag_ticks": -6,
+          "score": 0.17529696692652533
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "11",
+        "role": "local_gain"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            32,
+            54
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.22331766998976885
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "11",
+        "role": "local_lowpass"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            34,
+            48
+          ],
+          "relative_lag_ticks": -5,
+          "score": 0.15566493035924395
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "11",
+        "role": "local_noise"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            39,
+            53
+          ],
+          "relative_lag_ticks": 7,
+          "score": 0.19030933594265573
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "11",
+        "role": "constant_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            37,
+            51
+          ],
+          "relative_lag_ticks": -7,
+          "score": 0.2224839530050109
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "11",
+        "role": "constant_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            36,
+            54
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.21574375740006352
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": [
+          26,
+          42
+        ],
+        "known_shift": -5,
+        "recording": "11",
+        "role": "short_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            29,
+            47
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.17265377892633912
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": [
+          26,
+          42
+        ],
+        "known_shift": 5,
+        "recording": "11",
+        "role": "short_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            24,
+            46
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.1632332754025398
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": [
+          23,
+          45
+        ],
+        "known_shift": -7,
+        "recording": "11",
+        "role": "long_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            33,
+            51
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.17826601520929647
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": [
+          23,
+          45
+        ],
+        "known_shift": 7,
+        "recording": "11",
+        "role": "long_late"
+      },
+      {
+        "assessed": false,
+        "candidate": null,
+        "current": {
+          "measured_windows": 0,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "12",
+        "role": "recorded"
+      },
+      {
+        "assessed": false,
+        "candidate": null,
+        "current": {
+          "measured_windows": 0,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "12",
+        "role": "local_gain"
+      },
+      {
+        "assessed": false,
+        "candidate": null,
+        "current": {
+          "measured_windows": 0,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "12",
+        "role": "local_lowpass"
+      },
+      {
+        "assessed": false,
+        "candidate": null,
+        "current": {
+          "measured_windows": 0,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "12",
+        "role": "local_noise"
+      },
+      {
+        "assessed": false,
+        "candidate": null,
+        "current": {
+          "measured_windows": 0,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "12",
+        "role": "constant_early"
+      },
+      {
+        "assessed": false,
+        "candidate": null,
+        "current": {
+          "measured_windows": 0,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "12",
+        "role": "constant_late"
+      },
+      {
+        "assessed": false,
+        "candidate": null,
+        "current": {
+          "measured_windows": 0,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": [
+          27,
+          43
+        ],
+        "known_shift": -5,
+        "recording": "12",
+        "role": "short_early"
+      },
+      {
+        "assessed": false,
+        "candidate": null,
+        "current": {
+          "measured_windows": 0,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": [
+          27,
+          43
+        ],
+        "known_shift": 5,
+        "recording": "12",
+        "role": "short_late"
+      },
+      {
+        "assessed": false,
+        "candidate": null,
+        "current": {
+          "measured_windows": 0,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": [
+          24,
+          46
+        ],
+        "known_shift": -7,
+        "recording": "12",
+        "role": "long_early"
+      },
+      {
+        "assessed": false,
+        "candidate": null,
+        "current": {
+          "measured_windows": 0,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": [
+          24,
+          46
+        ],
+        "known_shift": 7,
+        "recording": "12",
+        "role": "long_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            40,
+            58
+          ],
+          "relative_lag_ticks": 6,
+          "score": 0.31040403471830147
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "13",
+        "role": "recorded"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            40,
+            58
+          ],
+          "relative_lag_ticks": 6,
+          "score": 0.3093966153077559
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "13",
+        "role": "local_gain"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            22,
+            40
+          ],
+          "relative_lag_ticks": -6,
+          "score": 0.44685039758881756
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "13",
+        "role": "local_lowpass"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            26,
+            40
+          ],
+          "relative_lag_ticks": -7,
+          "score": 0.16169617364698696
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "13",
+        "role": "local_noise"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            26,
+            40
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.3321956446080869
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "13",
+        "role": "constant_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            26,
+            40
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.34850696219987604
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "13",
+        "role": "constant_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            12,
+            26
+          ],
+          "relative_lag_ticks": 6,
+          "score": 0.329300139294698
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": [
+          28,
+          44
+        ],
+        "known_shift": -5,
+        "recording": "13",
+        "role": "short_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            11,
+            25
+          ],
+          "relative_lag_ticks": -5,
+          "score": 0.2955720711641378
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": [
+          28,
+          44
+        ],
+        "known_shift": 5,
+        "recording": "13",
+        "role": "short_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            12,
+            26
+          ],
+          "relative_lag_ticks": -7,
+          "score": 0.36006457512205386
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": [
+          25,
+          47
+        ],
+        "known_shift": -7,
+        "recording": "13",
+        "role": "long_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            31,
+            49
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.29068643746539446
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": [
+          25,
+          47
+        ],
+        "known_shift": 7,
+        "recording": "13",
+        "role": "long_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            42,
+            64
+          ],
+          "relative_lag_ticks": -5,
+          "score": 0.1444254283203733
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "14",
+        "role": "recorded"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            42,
+            64
+          ],
+          "relative_lag_ticks": -5,
+          "score": 0.14235424089588058
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "14",
+        "role": "local_gain"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            31,
+            49
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.20205031031692497
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "14",
+        "role": "local_lowpass"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            42,
+            64
+          ],
+          "relative_lag_ticks": -5,
+          "score": 0.11422540318765534
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "14",
+        "role": "local_noise"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            42,
+            64
+          ],
+          "relative_lag_ticks": -5,
+          "score": 0.1444254283203733
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "14",
+        "role": "constant_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            42,
+            64
+          ],
+          "relative_lag_ticks": -5,
+          "score": 0.14447498782380402
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "14",
+        "role": "constant_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            43,
+            65
+          ],
+          "relative_lag_ticks": -6,
+          "score": 0.19617830905755312
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": [
+          29,
+          45
+        ],
+        "known_shift": -5,
+        "recording": "14",
+        "role": "short_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            46,
+            64
+          ],
+          "relative_lag_ticks": -6,
+          "score": 0.21533614377647478
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": [
+          29,
+          45
+        ],
+        "known_shift": 5,
+        "recording": "14",
+        "role": "short_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            42,
+            64
+          ],
+          "relative_lag_ticks": -7,
+          "score": 0.16991929695759506
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": [
+          26,
+          48
+        ],
+        "known_shift": -7,
+        "recording": "14",
+        "role": "long_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            31,
+            45
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.2066809537603696
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": [
+          26,
+          48
+        ],
+        "known_shift": 7,
+        "recording": "14",
+        "role": "long_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            43,
+            57
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.20989664087184678
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "15",
+        "role": "recorded"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            35,
+            53
+          ],
+          "relative_lag_ticks": -5,
+          "score": 0.20912903629138022
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "15",
+        "role": "local_gain"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            44,
+            58
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.2561720633788109
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "15",
+        "role": "local_lowpass"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            33,
+            47
+          ],
+          "relative_lag_ticks": -5,
+          "score": 0.14777487537920503
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "15",
+        "role": "local_noise"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            32,
+            46
+          ],
+          "relative_lag_ticks": -7,
+          "score": 0.18054864209831306
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "15",
+        "role": "constant_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            43,
+            57
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.20989664087184678
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "15",
+        "role": "constant_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            42,
+            56
+          ],
+          "relative_lag_ticks": -7,
+          "score": 0.22421803450700706
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": [
+          30,
+          46
+        ],
+        "known_shift": -5,
+        "recording": "15",
+        "role": "short_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            37,
+            55
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.22005185927908863
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": [
+          30,
+          46
+        ],
+        "known_shift": 5,
+        "recording": "15",
+        "role": "short_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            10,
+            24
+          ],
+          "relative_lag_ticks": -7,
+          "score": 0.1945137208215917
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": [
+          27,
+          49
+        ],
+        "known_shift": -7,
+        "recording": "15",
+        "role": "long_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            39,
+            53
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.24953718515415527
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": [
+          27,
+          49
+        ],
+        "known_shift": 7,
+        "recording": "15",
+        "role": "long_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            51,
+            65
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.25971716381059656
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "16",
+        "role": "recorded"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            33,
+            55
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.25662519267056094
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "16",
+        "role": "local_gain"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            37,
+            55
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.26873487755490044
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "16",
+        "role": "local_lowpass"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            47,
+            61
+          ],
+          "relative_lag_ticks": -8,
+          "score": 0.19512809517926583
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "16",
+        "role": "local_noise"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            47,
+            61
+          ],
+          "relative_lag_ticks": -8,
+          "score": 0.22022747503567247
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "16",
+        "role": "constant_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            30,
+            44
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.2715378555349413
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "16",
+        "role": "constant_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            37,
+            59
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.24560176228293507
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": [
+          26,
+          42
+        ],
+        "known_shift": -5,
+        "recording": "16",
+        "role": "short_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            13,
+            31
+          ],
+          "relative_lag_ticks": 7,
+          "score": 0.27840954341173674
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": [
+          26,
+          42
+        ],
+        "known_shift": 5,
+        "recording": "16",
+        "role": "short_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            32,
+            50
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.22985324842528043
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": [
+          23,
+          45
+        ],
+        "known_shift": -7,
+        "recording": "16",
+        "role": "long_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            42,
+            56
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.24104667366671442
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": [
+          23,
+          45
+        ],
+        "known_shift": 7,
+        "recording": "16",
+        "role": "long_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            31,
+            53
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.21612001264328207
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "17",
+        "role": "recorded"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            31,
+            53
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.2158387232560238
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "17",
+        "role": "local_gain"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            22,
+            36
+          ],
+          "relative_lag_ticks": -8,
+          "score": 0.4780567581832395
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "17",
+        "role": "local_lowpass"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            30,
+            52
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.22106519382398504
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "17",
+        "role": "local_noise"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            11,
+            29
+          ],
+          "relative_lag_ticks": 6,
+          "score": 0.2233299291120568
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "17",
+        "role": "constant_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            31,
+            53
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.21612001264328207
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "17",
+        "role": "constant_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            28,
+            46
+          ],
+          "relative_lag_ticks": -5,
+          "score": 0.30281630645837665
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": [
+          27,
+          43
+        ],
+        "known_shift": -5,
+        "recording": "17",
+        "role": "short_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            31,
+            53
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.2188781209255622
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": [
+          27,
+          43
+        ],
+        "known_shift": 5,
+        "recording": "17",
+        "role": "short_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            40,
+            54
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.2629514237525816
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": [
+          24,
+          46
+        ],
+        "known_shift": -7,
+        "recording": "17",
+        "role": "long_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            40,
+            54
+          ],
+          "relative_lag_ticks": -6,
+          "score": 0.25508128943887376
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": [
+          24,
+          46
+        ],
+        "known_shift": 7,
+        "recording": "17",
+        "role": "long_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            32,
+            46
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.13743400160092176
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "18",
+        "role": "recorded"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            32,
+            46
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.14704872265485433
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "18",
+        "role": "local_gain"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            28,
+            46
+          ],
+          "relative_lag_ticks": 6,
+          "score": 0.20534509990105923
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "18",
+        "role": "local_lowpass"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            32,
+            46
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.07022786607340362
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "18",
+        "role": "local_noise"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            32,
+            46
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.13743400160092176
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "18",
+        "role": "constant_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            32,
+            46
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.13743400160092176
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "18",
+        "role": "constant_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            30,
+            48
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.06763876163822752
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": [
+          28,
+          44
+        ],
+        "known_shift": -5,
+        "recording": "18",
+        "role": "short_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            33,
+            47
+          ],
+          "relative_lag_ticks": 7,
+          "score": 0.13795309333498632
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": [
+          28,
+          44
+        ],
+        "known_shift": 5,
+        "recording": "18",
+        "role": "short_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            17,
+            39
+          ],
+          "relative_lag_ticks": -8,
+          "score": 0.09942759871815635
+        },
+        "current": {
+          "measured_windows": 0,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": [
+          25,
+          47
+        ],
+        "known_shift": -7,
+        "recording": "18",
+        "role": "long_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            25,
+            47
+          ],
+          "relative_lag_ticks": -8,
+          "score": 0.1014553540196794
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": [
+          25,
+          47
+        ],
+        "known_shift": 7,
+        "recording": "18",
+        "role": "long_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            17,
+            31
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.1976440811502933
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "19",
+        "role": "recorded"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            17,
+            31
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.21040106714631826
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "19",
+        "role": "local_gain"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            41,
+            59
+          ],
+          "relative_lag_ticks": 6,
+          "score": 0.26379745195802495
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "19",
+        "role": "local_lowpass"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            16,
+            30
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.17713835951074033
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "19",
+        "role": "local_noise"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            11,
+            29
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.20807183418572706
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "19",
+        "role": "constant_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            34,
+            52
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.20990873241263228
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "19",
+        "role": "constant_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            45,
+            59
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.2500808059997275
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": [
+          29,
+          45
+        ],
+        "known_shift": -5,
+        "recording": "19",
+        "role": "short_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            18,
+            32
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.2059394049676793
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": [
+          29,
+          45
+        ],
+        "known_shift": 5,
+        "recording": "19",
+        "role": "short_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            41,
+            55
+          ],
+          "relative_lag_ticks": 7,
+          "score": 0.33415365212698356
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": [
+          26,
+          48
+        ],
+        "known_shift": -7,
+        "recording": "19",
+        "role": "long_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            17,
+            35
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.2554027235011297
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": [
+          26,
+          48
+        ],
+        "known_shift": 7,
+        "recording": "19",
+        "role": "long_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            16,
+            30
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.23773353273828693
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "20",
+        "role": "recorded"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            16,
+            30
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.25006156473345786
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "20",
+        "role": "local_gain"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            34,
+            48
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.5037995444480274
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "20",
+        "role": "local_lowpass"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            28,
+            46
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.17282601940549056
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "20",
+        "role": "local_noise"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            16,
+            30
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.23773353273828693
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "20",
+        "role": "constant_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            29,
+            47
+          ],
+          "relative_lag_ticks": 7,
+          "score": 0.21047723595627416
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "20",
+        "role": "constant_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            23,
+            37
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.21979261231948133
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": [
+          30,
+          46
+        ],
+        "known_shift": -5,
+        "recording": "20",
+        "role": "short_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            22,
+            44
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.2622474614647236
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": [
+          30,
+          46
+        ],
+        "known_shift": 5,
+        "recording": "20",
+        "role": "short_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            17,
+            39
+          ],
+          "relative_lag_ticks": 6,
+          "score": 0.1959527456334091
+        },
+        "current": {
+          "measured_windows": 0,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": [
+          27,
+          49
+        ],
+        "known_shift": -7,
+        "recording": "20",
+        "role": "long_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            27,
+            45
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.15718140973255715
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": [
+          27,
+          49
+        ],
+        "known_shift": 7,
+        "recording": "20",
+        "role": "long_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            25,
+            43
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.1410824951522549
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "21",
+        "role": "recorded"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            25,
+            43
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.14723826745246643
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "21",
+        "role": "local_gain"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            29,
+            51
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.2916381811632176
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "21",
+        "role": "local_lowpass"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            22,
+            36
+          ],
+          "relative_lag_ticks": -5,
+          "score": 0.12410759712162775
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "21",
+        "role": "local_noise"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            25,
+            43
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.1410824951522549
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "21",
+        "role": "constant_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            30,
+            44
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.10912345671434971
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "21",
+        "role": "constant_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            25,
+            47
+          ],
+          "relative_lag_ticks": 6,
+          "score": 0.15598116460330289
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": [
+          26,
+          42
+        ],
+        "known_shift": -5,
+        "recording": "21",
+        "role": "short_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            30,
+            48
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.2224004615231262
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": [
+          26,
+          42
+        ],
+        "known_shift": 5,
+        "recording": "21",
+        "role": "short_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            18,
+            36
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.15876622621287032
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": [
+          23,
+          45
+        ],
+        "known_shift": -7,
+        "recording": "21",
+        "role": "long_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            28,
+            46
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.2275901717352224
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": [
+          23,
+          45
+        ],
+        "known_shift": 7,
+        "recording": "21",
+        "role": "long_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            47,
+            61
+          ],
+          "relative_lag_ticks": -8,
+          "score": 0.14097628527424938
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "22",
+        "role": "recorded"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            47,
+            61
+          ],
+          "relative_lag_ticks": -8,
+          "score": 0.14097628527424938
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "22",
+        "role": "local_gain"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            47,
+            61
+          ],
+          "relative_lag_ticks": -8,
+          "score": 0.14097628527424935
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "22",
+        "role": "local_lowpass"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            43,
+            61
+          ],
+          "relative_lag_ticks": -7,
+          "score": 0.11600693009439031
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "22",
+        "role": "local_noise"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            47,
+            61
+          ],
+          "relative_lag_ticks": -8,
+          "score": 0.14097628527424938
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "22",
+        "role": "constant_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            48,
+            62
+          ],
+          "relative_lag_ticks": -8,
+          "score": 0.17601805099048604
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "22",
+        "role": "constant_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            43,
+            61
+          ],
+          "relative_lag_ticks": -8,
+          "score": 0.13919094140722615
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": [
+          27,
+          43
+        ],
+        "known_shift": -5,
+        "recording": "22",
+        "role": "short_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            43,
+            65
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.09637189061399756
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": [
+          27,
+          43
+        ],
+        "known_shift": 5,
+        "recording": "22",
+        "role": "short_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            44,
+            62
+          ],
+          "relative_lag_ticks": -8,
+          "score": 0.1327807741964762
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": [
+          24,
+          46
+        ],
+        "known_shift": -7,
+        "recording": "22",
+        "role": "long_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            46,
+            64
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.12193997980342575
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": [
+          24,
+          46
+        ],
+        "known_shift": 7,
+        "recording": "22",
+        "role": "long_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            28,
+            50
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.1390822911890881
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "23",
+        "role": "recorded"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            28,
+            50
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.14293724450972395
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "23",
+        "role": "local_gain"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            30,
+            44
+          ],
+          "relative_lag_ticks": -6,
+          "score": 0.17070572630508207
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "23",
+        "role": "local_lowpass"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            30,
+            48
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.11661271476383196
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "23",
+        "role": "local_noise"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            13,
+            31
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.12270827725543795
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "23",
+        "role": "constant_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            28,
+            50
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.1390822911890881
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "23",
+        "role": "constant_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            25,
+            47
+          ],
+          "relative_lag_ticks": 7,
+          "score": 0.09806746878370107
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": [
+          28,
+          44
+        ],
+        "known_shift": -5,
+        "recording": "23",
+        "role": "short_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            20,
+            34
+          ],
+          "relative_lag_ticks": -8,
+          "score": 0.12089393276882975
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": [
+          28,
+          44
+        ],
+        "known_shift": 5,
+        "recording": "23",
+        "role": "short_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            15,
+            29
+          ],
+          "relative_lag_ticks": 6,
+          "score": 0.18733751895345108
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": [
+          25,
+          47
+        ],
+        "known_shift": -7,
+        "recording": "23",
+        "role": "long_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            15,
+            37
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.1758153039484466
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": [
+          25,
+          47
+        ],
+        "known_shift": 7,
+        "recording": "23",
+        "role": "long_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            28,
+            46
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.15253120988679136
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "24",
+        "role": "recorded"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            28,
+            50
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.15628618291471127
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "24",
+        "role": "local_gain"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            28,
+            50
+          ],
+          "relative_lag_ticks": 7,
+          "score": 0.3068246804924875
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "24",
+        "role": "local_lowpass"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            24,
+            46
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.11559608420320105
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "24",
+        "role": "local_noise"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            17,
+            39
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.22209889683487574
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "24",
+        "role": "constant_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            28,
+            46
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.15253120988679136
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "24",
+        "role": "constant_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            22,
+            44
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.09862707683599248
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": [
+          29,
+          45
+        ],
+        "known_shift": -5,
+        "recording": "24",
+        "role": "short_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            25,
+            47
+          ],
+          "relative_lag_ticks": 7,
+          "score": 0.1979550509744573
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": [
+          29,
+          45
+        ],
+        "known_shift": 5,
+        "recording": "24",
+        "role": "short_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            27,
+            41
+          ],
+          "relative_lag_ticks": -8,
+          "score": 0.11389739875603548
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": [
+          26,
+          48
+        ],
+        "known_shift": -7,
+        "recording": "24",
+        "role": "long_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            25,
+            39
+          ],
+          "relative_lag_ticks": -8,
+          "score": 0.14054359474226605
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": [
+          26,
+          48
+        ],
+        "known_shift": 7,
+        "recording": "24",
+        "role": "long_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            27,
+            45
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.13862075178869376
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "25",
+        "role": "recorded"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            27,
+            45
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.14901795178196042
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "25",
+        "role": "local_gain"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            34,
+            52
+          ],
+          "relative_lag_ticks": 6,
+          "score": 0.4181236813484942
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "25",
+        "role": "local_lowpass"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            25,
+            47
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.06443988042357461
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "25",
+        "role": "local_noise"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            27,
+            45
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.13862075178869376
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "25",
+        "role": "constant_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            35,
+            49
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.12705951294538834
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "25",
+        "role": "constant_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            30,
+            44
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.13685917355316735
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": [
+          30,
+          46
+        ],
+        "known_shift": -5,
+        "recording": "25",
+        "role": "short_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            32,
+            46
+          ],
+          "relative_lag_ticks": 6,
+          "score": 0.12018247700564637
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": [
+          30,
+          46
+        ],
+        "known_shift": 5,
+        "recording": "25",
+        "role": "short_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            28,
+            46
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.14145475942696667
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": [
+          27,
+          49
+        ],
+        "known_shift": -7,
+        "recording": "25",
+        "role": "long_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            32,
+            46
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.14167363621441498
+        },
+        "current": {
+          "measured_windows": 0,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": [
+          27,
+          49
+        ],
+        "known_shift": 7,
+        "recording": "25",
+        "role": "long_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            23,
+            41
+          ],
+          "relative_lag_ticks": -8,
+          "score": 0.1116416263813955
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "26",
+        "role": "recorded"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            23,
+            45
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.1530093701798907
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "26",
+        "role": "local_gain"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            23,
+            37
+          ],
+          "relative_lag_ticks": -6,
+          "score": 0.26674559311405355
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "26",
+        "role": "local_lowpass"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            26,
+            40
+          ],
+          "relative_lag_ticks": -8,
+          "score": 0.12371135134826085
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "26",
+        "role": "local_noise"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            14,
+            28
+          ],
+          "relative_lag_ticks": -8,
+          "score": 0.14219651745400677
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "26",
+        "role": "constant_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            23,
+            41
+          ],
+          "relative_lag_ticks": -8,
+          "score": 0.1116416263813955
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "26",
+        "role": "constant_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            27,
+            41
+          ],
+          "relative_lag_ticks": -7,
+          "score": 0.1245309539331666
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": [
+          26,
+          42
+        ],
+        "known_shift": -5,
+        "recording": "26",
+        "role": "short_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            29,
+            51
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.17147185826185773
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": [
+          26,
+          42
+        ],
+        "known_shift": 5,
+        "recording": "26",
+        "role": "short_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            27,
+            45
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.101551524179935
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": [
+          23,
+          45
+        ],
+        "known_shift": -7,
+        "recording": "26",
+        "role": "long_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            29,
+            47
+          ],
+          "relative_lag_ticks": 6,
+          "score": 0.12972695752082194
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": [
+          23,
+          45
+        ],
+        "known_shift": 7,
+        "recording": "26",
+        "role": "long_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            22,
+            44
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.15477062653596896
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "27",
+        "role": "recorded"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            22,
+            44
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.15344781159466417
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "27",
+        "role": "local_gain"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            27,
+            49
+          ],
+          "relative_lag_ticks": 6,
+          "score": 0.23772009069080574
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "27",
+        "role": "local_lowpass"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            22,
+            44
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.16693370780956648
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "27",
+        "role": "local_noise"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            18,
+            36
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.21435134211117018
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "27",
+        "role": "constant_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            47,
+            65
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.25138727099052594
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "27",
+        "role": "constant_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            21,
+            43
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.16626059436813087
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": [
+          27,
+          43
+        ],
+        "known_shift": -5,
+        "recording": "27",
+        "role": "short_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            22,
+            40
+          ],
+          "relative_lag_ticks": -6,
+          "score": 0.21446561978211096
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": [
+          27,
+          43
+        ],
+        "known_shift": 5,
+        "recording": "27",
+        "role": "short_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            22,
+            44
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.17411617300447657
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": [
+          24,
+          46
+        ],
+        "known_shift": -7,
+        "recording": "27",
+        "role": "long_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            17,
+            39
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.1603916705355548
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "03",
+        "known_extent": [
+          24,
+          46
+        ],
+        "known_shift": 7,
+        "recording": "27",
+        "role": "long_late"
+      }
+    ],
+    "neural": [
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            17,
+            31
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.1604699496663702
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "01",
+        "role": "original"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            17,
+            31
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.1604699496663702
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": [
+          10,
+          26
+        ],
+        "known_shift": null,
+        "recording": "02",
+        "role": "source_time_neural"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            24,
+            46
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.17250097705800552
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": [
+          10,
+          26
+        ],
+        "known_shift": -8,
+        "recording": "03",
+        "role": "earlier_drive_neural"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            24,
+            46
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.17250097705800557
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "01",
+        "known_extent": [
+          10,
+          26
+        ],
+        "known_shift": -8,
+        "recording": "04",
+        "role": "earlier_pixels_ordinary"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            10,
+            32
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.19355025710020174
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "05",
+        "role": "original"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            10,
+            32
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.19355025710020174
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": [
+          17,
+          33
+        ],
+        "known_shift": null,
+        "recording": "06",
+        "role": "source_time_neural"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            28,
+            42
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.18985029013160504
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": [
+          17,
+          33
+        ],
+        "known_shift": -8,
+        "recording": "07",
+        "role": "earlier_drive_neural"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            28,
+            42
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.18985029013160504
+        },
+        "current": {
+          "measured_windows": 1,
+          "ranges": []
+        },
+        "group": "02",
+        "known_extent": [
+          17,
+          33
+        ],
+        "known_shift": -8,
+        "recording": "08",
+        "role": "earlier_pixels_ordinary"
+      }
+    ],
+    "point": [
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            38,
+            60
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.12233904663134242
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "01",
+        "role": "recorded"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            38,
+            60
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.11710515223074724
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "01",
+        "role": "local_gain"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            46,
+            60
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.3312072037933322
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "01",
+        "role": "local_lowpass"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            38,
+            60
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.12439159569232573
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "01",
+        "role": "local_noise"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            31,
+            49
+          ],
+          "relative_lag_ticks": -8,
+          "score": 0.12009831802913051
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "01",
+        "role": "constant_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            38,
+            60
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.12233904663134242
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "01",
+        "role": "constant_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            38,
+            60
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.1273476189010142
+        },
+        "group": "01",
+        "known_extent": [
+          27,
+          43
+        ],
+        "known_shift": -5,
+        "recording": "01",
+        "role": "short_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            39,
+            53
+          ],
+          "relative_lag_ticks": -8,
+          "score": 0.17344390537937804
+        },
+        "group": "01",
+        "known_extent": [
+          27,
+          43
+        ],
+        "known_shift": 5,
+        "recording": "01",
+        "role": "short_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            32,
+            46
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.16378324848999945
+        },
+        "group": "01",
+        "known_extent": [
+          24,
+          46
+        ],
+        "known_shift": -7,
+        "recording": "01",
+        "role": "long_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            41,
+            59
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.1615083981616008
+        },
+        "group": "01",
+        "known_extent": [
+          24,
+          46
+        ],
+        "known_shift": 7,
+        "recording": "01",
+        "role": "long_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            19,
+            33
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.14305508324673671
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "02",
+        "role": "recorded"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            19,
+            33
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.14236974279902156
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "02",
+        "role": "local_gain"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            18,
+            32
+          ],
+          "relative_lag_ticks": -5,
+          "score": 0.15081812114186896
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "02",
+        "role": "local_lowpass"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            18,
+            32
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.14135687936525476
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "02",
+        "role": "local_noise"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            19,
+            33
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.14305508324673671
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "02",
+        "role": "constant_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            19,
+            33
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.14305508324673671
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "02",
+        "role": "constant_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            24,
+            38
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.11519527629693996
+        },
+        "group": "01",
+        "known_extent": [
+          28,
+          44
+        ],
+        "known_shift": -5,
+        "recording": "02",
+        "role": "short_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            29,
+            43
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.1897338280169727
+        },
+        "group": "01",
+        "known_extent": [
+          28,
+          44
+        ],
+        "known_shift": 5,
+        "recording": "02",
+        "role": "short_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            12,
+            26
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.04664814189917352
+        },
+        "group": "01",
+        "known_extent": [
+          25,
+          47
+        ],
+        "known_shift": -7,
+        "recording": "02",
+        "role": "long_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            28,
+            42
+          ],
+          "relative_lag_ticks": -8,
+          "score": 0.1137290849245348
+        },
+        "group": "01",
+        "known_extent": [
+          25,
+          47
+        ],
+        "known_shift": 7,
+        "recording": "02",
+        "role": "long_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            27,
+            45
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.06554016731727005
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "03",
+        "role": "recorded"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            27,
+            45
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.06355419737251983
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "03",
+        "role": "local_gain"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            22,
+            44
+          ],
+          "relative_lag_ticks": 7,
+          "score": 0.14261070890598726
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "03",
+        "role": "local_lowpass"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            28,
+            46
+          ],
+          "relative_lag_ticks": -5,
+          "score": 0.05284979464652171
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "03",
+        "role": "local_noise"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            19,
+            37
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.06615469402567625
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "03",
+        "role": "constant_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            27,
+            45
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.06554016731727005
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "03",
+        "role": "constant_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            27,
+            41
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.06507995168543791
+        },
+        "group": "01",
+        "known_extent": [
+          29,
+          45
+        ],
+        "known_shift": -5,
+        "recording": "03",
+        "role": "short_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            25,
+            39
+          ],
+          "relative_lag_ticks": 6,
+          "score": 0.03378189422406794
+        },
+        "group": "01",
+        "known_extent": [
+          29,
+          45
+        ],
+        "known_shift": 5,
+        "recording": "03",
+        "role": "short_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            29,
+            47
+          ],
+          "relative_lag_ticks": -6,
+          "score": 0.09764962278263556
+        },
+        "group": "01",
+        "known_extent": [
+          26,
+          48
+        ],
+        "known_shift": -7,
+        "recording": "03",
+        "role": "long_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            25,
+            39
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.04041695886987144
+        },
+        "group": "01",
+        "known_extent": [
+          26,
+          48
+        ],
+        "known_shift": 7,
+        "recording": "03",
+        "role": "long_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            31,
+            53
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.03993823248042697
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "04",
+        "role": "recorded"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            31,
+            53
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.04577540467192297
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "04",
+        "role": "local_gain"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            31,
+            53
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.09099464202600531
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "04",
+        "role": "local_lowpass"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            31,
+            53
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.035839327063377
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "04",
+        "role": "local_noise"
+      },
+      {
+        "assessed": false,
+        "candidate": null,
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "04",
+        "role": "constant_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            43,
+            57
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.05412402369189595
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "04",
+        "role": "constant_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            31,
+            53
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.03821745875580114
+        },
+        "group": "01",
+        "known_extent": [
+          30,
+          46
+        ],
+        "known_shift": -5,
+        "recording": "04",
+        "role": "short_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            31,
+            53
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.051921337381463775
+        },
+        "group": "01",
+        "known_extent": [
+          30,
+          46
+        ],
+        "known_shift": 5,
+        "recording": "04",
+        "role": "short_late"
+      },
+      {
+        "assessed": false,
+        "candidate": null,
+        "group": "01",
+        "known_extent": [
+          27,
+          49
+        ],
+        "known_shift": -7,
+        "recording": "04",
+        "role": "long_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            31,
+            53
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.09227650934491571
+        },
+        "group": "01",
+        "known_extent": [
+          27,
+          49
+        ],
+        "known_shift": 7,
+        "recording": "04",
+        "role": "long_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            30,
+            52
+          ],
+          "relative_lag_ticks": -6,
+          "score": 0.08119003737444362
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "05",
+        "role": "recorded"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            30,
+            52
+          ],
+          "relative_lag_ticks": -6,
+          "score": 0.07825454613175833
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "05",
+        "role": "local_gain"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            18,
+            40
+          ],
+          "relative_lag_ticks": 6,
+          "score": 0.1062419417447964
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "05",
+        "role": "local_lowpass"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            30,
+            52
+          ],
+          "relative_lag_ticks": -6,
+          "score": 0.08764358214919893
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "05",
+        "role": "local_noise"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            19,
+            33
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.0037051805160521756
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "05",
+        "role": "constant_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            30,
+            52
+          ],
+          "relative_lag_ticks": -6,
+          "score": 0.08119003737444362
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "05",
+        "role": "constant_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            30,
+            52
+          ],
+          "relative_lag_ticks": -5,
+          "score": 0.07117214354077216
+        },
+        "group": "01",
+        "known_extent": [
+          26,
+          42
+        ],
+        "known_shift": -5,
+        "recording": "05",
+        "role": "short_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            20,
+            38
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.06994650414147371
+        },
+        "group": "01",
+        "known_extent": [
+          26,
+          42
+        ],
+        "known_shift": 5,
+        "recording": "05",
+        "role": "short_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            30,
+            52
+          ],
+          "relative_lag_ticks": -5,
+          "score": 0.07348478990883937
+        },
+        "group": "01",
+        "known_extent": [
+          23,
+          45
+        ],
+        "known_shift": -7,
+        "recording": "05",
+        "role": "long_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            18,
+            32
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.03628710853784453
+        },
+        "group": "01",
+        "known_extent": [
+          23,
+          45
+        ],
+        "known_shift": 7,
+        "recording": "05",
+        "role": "long_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            40,
+            54
+          ],
+          "relative_lag_ticks": -7,
+          "score": 0.18812926265569715
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "06",
+        "role": "recorded"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            40,
+            54
+          ],
+          "relative_lag_ticks": -7,
+          "score": 0.19052284736308822
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "06",
+        "role": "local_gain"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            21,
+            39
+          ],
+          "relative_lag_ticks": 7,
+          "score": 0.29371001134259805
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "06",
+        "role": "local_lowpass"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            19,
+            33
+          ],
+          "relative_lag_ticks": 6,
+          "score": 0.15787349050454347
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "06",
+        "role": "local_noise"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            13,
+            27
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.21261670273004077
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "06",
+        "role": "constant_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            35,
+            53
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.21475538264617433
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "06",
+        "role": "constant_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            19,
+            37
+          ],
+          "relative_lag_ticks": 6,
+          "score": 0.2423256590122286
+        },
+        "group": "01",
+        "known_extent": [
+          27,
+          43
+        ],
+        "known_shift": -5,
+        "recording": "06",
+        "role": "short_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            21,
+            35
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.22516472392308684
+        },
+        "group": "01",
+        "known_extent": [
+          27,
+          43
+        ],
+        "known_shift": 5,
+        "recording": "06",
+        "role": "short_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            29,
+            47
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.15103965399653738
+        },
+        "group": "01",
+        "known_extent": [
+          24,
+          46
+        ],
+        "known_shift": -7,
+        "recording": "06",
+        "role": "long_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            30,
+            48
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.2013232892131393
+        },
+        "group": "01",
+        "known_extent": [
+          24,
+          46
+        ],
+        "known_shift": 7,
+        "recording": "06",
+        "role": "long_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            19,
+            33
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.10224067315470331
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "07",
+        "role": "recorded"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            19,
+            33
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.10041428766257533
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "07",
+        "role": "local_gain"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            15,
+            29
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.07348684122340116
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "07",
+        "role": "local_lowpass"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            19,
+            33
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.09897006906970823
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "07",
+        "role": "local_noise"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            13,
+            27
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.1233464812972965
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "07",
+        "role": "constant_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            35,
+            49
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.04211919891490794
+        },
+        "group": "01",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "07",
+        "role": "constant_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            11,
+            25
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.06991159281458004
+        },
+        "group": "01",
+        "known_extent": [
+          28,
+          44
+        ],
+        "known_shift": -5,
+        "recording": "07",
+        "role": "short_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            11,
+            29
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.07091591730726726
+        },
+        "group": "01",
+        "known_extent": [
+          28,
+          44
+        ],
+        "known_shift": 5,
+        "recording": "07",
+        "role": "short_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            10,
+            24
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.022418806941779834
+        },
+        "group": "01",
+        "known_extent": [
+          25,
+          47
+        ],
+        "known_shift": -7,
+        "recording": "07",
+        "role": "long_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            18,
+            32
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.1869065859473249
+        },
+        "group": "01",
+        "known_extent": [
+          25,
+          47
+        ],
+        "known_shift": 7,
+        "recording": "07",
+        "role": "long_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            47,
+            65
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.20336943604060073
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "08",
+        "role": "recorded"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            47,
+            65
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.19891577327546653
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "08",
+        "role": "local_gain"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            30,
+            44
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.22485941859186623
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "08",
+        "role": "local_lowpass"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            25,
+            47
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.1927380967777628
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "08",
+        "role": "local_noise"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            28,
+            42
+          ],
+          "relative_lag_ticks": -5,
+          "score": 0.26607746789503844
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "08",
+        "role": "constant_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            47,
+            65
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.20336943604060073
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "08",
+        "role": "constant_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            46,
+            64
+          ],
+          "relative_lag_ticks": -5,
+          "score": 0.18814193595862902
+        },
+        "group": "02",
+        "known_extent": [
+          29,
+          45
+        ],
+        "known_shift": -5,
+        "recording": "08",
+        "role": "short_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            29,
+            47
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.23193492617666195
+        },
+        "group": "02",
+        "known_extent": [
+          29,
+          45
+        ],
+        "known_shift": 5,
+        "recording": "08",
+        "role": "short_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            35,
+            53
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.22954936978568102
+        },
+        "group": "02",
+        "known_extent": [
+          26,
+          48
+        ],
+        "known_shift": -7,
+        "recording": "08",
+        "role": "long_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            29,
+            43
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.2668244898698209
+        },
+        "group": "02",
+        "known_extent": [
+          26,
+          48
+        ],
+        "known_shift": 7,
+        "recording": "08",
+        "role": "long_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            20,
+            34
+          ],
+          "relative_lag_ticks": 6,
+          "score": 0.20055932852961167
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "09",
+        "role": "recorded"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            18,
+            32
+          ],
+          "relative_lag_ticks": 6,
+          "score": 0.20489148531719942
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "09",
+        "role": "local_gain"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            40,
+            62
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.22317415081378403
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "09",
+        "role": "local_lowpass"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            16,
+            34
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.20861597245478533
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "09",
+        "role": "local_noise"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            15,
+            29
+          ],
+          "relative_lag_ticks": 7,
+          "score": 0.2614137772319527
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "09",
+        "role": "constant_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            50,
+            64
+          ],
+          "relative_lag_ticks": -8,
+          "score": 0.316547249797028
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "09",
+        "role": "constant_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            16,
+            30
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.2456565897619169
+        },
+        "group": "02",
+        "known_extent": [
+          30,
+          46
+        ],
+        "known_shift": -5,
+        "recording": "09",
+        "role": "short_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            16,
+            34
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.18832428633099874
+        },
+        "group": "02",
+        "known_extent": [
+          30,
+          46
+        ],
+        "known_shift": 5,
+        "recording": "09",
+        "role": "short_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            49,
+            63
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.19286262175120072
+        },
+        "group": "02",
+        "known_extent": [
+          27,
+          49
+        ],
+        "known_shift": -7,
+        "recording": "09",
+        "role": "long_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            18,
+            36
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.133781054962144
+        },
+        "group": "02",
+        "known_extent": [
+          27,
+          49
+        ],
+        "known_shift": 7,
+        "recording": "09",
+        "role": "long_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            28,
+            42
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.4040670700659912
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "10",
+        "role": "recorded"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            28,
+            42
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.41085675748617756
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "10",
+        "role": "local_gain"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            29,
+            43
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.3069198920951053
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "10",
+        "role": "local_lowpass"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            23,
+            41
+          ],
+          "relative_lag_ticks": 6,
+          "score": 0.2833371393854432
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "10",
+        "role": "local_noise"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            19,
+            33
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.34926645204898216
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "10",
+        "role": "constant_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            28,
+            42
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.4040670700659912
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "10",
+        "role": "constant_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            20,
+            34
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.2682207064258147
+        },
+        "group": "02",
+        "known_extent": [
+          26,
+          42
+        ],
+        "known_shift": -5,
+        "recording": "10",
+        "role": "short_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            26,
+            44
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.3190916427254351
+        },
+        "group": "02",
+        "known_extent": [
+          26,
+          42
+        ],
+        "known_shift": 5,
+        "recording": "10",
+        "role": "short_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            19,
+            33
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.3259599345490746
+        },
+        "group": "02",
+        "known_extent": [
+          23,
+          45
+        ],
+        "known_shift": -7,
+        "recording": "10",
+        "role": "long_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            16,
+            38
+          ],
+          "relative_lag_ticks": 6,
+          "score": 0.2702098181728617
+        },
+        "group": "02",
+        "known_extent": [
+          23,
+          45
+        ],
+        "known_shift": 7,
+        "recording": "10",
+        "role": "long_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            27,
+            41
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.1792423709433341
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "11",
+        "role": "recorded"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            27,
+            49
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.1914061735094174
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "11",
+        "role": "local_gain"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            27,
+            49
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.32329442996915614
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "11",
+        "role": "local_lowpass"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            28,
+            42
+          ],
+          "relative_lag_ticks": 6,
+          "score": 0.094501096171413
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "11",
+        "role": "local_noise"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            20,
+            38
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.25674341072743
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "11",
+        "role": "constant_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            27,
+            41
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.1792423709433341
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "11",
+        "role": "constant_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            25,
+            47
+          ],
+          "relative_lag_ticks": 6,
+          "score": 0.17833050534048428
+        },
+        "group": "02",
+        "known_extent": [
+          27,
+          43
+        ],
+        "known_shift": -5,
+        "recording": "11",
+        "role": "short_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            29,
+            47
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.1895667160645134
+        },
+        "group": "02",
+        "known_extent": [
+          27,
+          43
+        ],
+        "known_shift": 5,
+        "recording": "11",
+        "role": "short_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            22,
+            40
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.204047792703142
+        },
+        "group": "02",
+        "known_extent": [
+          24,
+          46
+        ],
+        "known_shift": -7,
+        "recording": "11",
+        "role": "long_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            19,
+            41
+          ],
+          "relative_lag_ticks": 7,
+          "score": 0.20474789271999896
+        },
+        "group": "02",
+        "known_extent": [
+          24,
+          46
+        ],
+        "known_shift": 7,
+        "recording": "11",
+        "role": "long_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            22,
+            40
+          ],
+          "relative_lag_ticks": 7,
+          "score": 0.1858065027829404
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "12",
+        "role": "recorded"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            25,
+            47
+          ],
+          "relative_lag_ticks": 5,
+          "score": 0.1803082812946397
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "12",
+        "role": "local_gain"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            30,
+            52
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.2791715140649948
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "12",
+        "role": "local_lowpass"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            23,
+            41
+          ],
+          "relative_lag_ticks": 7,
+          "score": 0.20101523752017897
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "12",
+        "role": "local_noise"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            24,
+            46
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.19724331092105632
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "12",
+        "role": "constant_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            22,
+            40
+          ],
+          "relative_lag_ticks": 7,
+          "score": 0.1858065027829404
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "12",
+        "role": "constant_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            25,
+            39
+          ],
+          "relative_lag_ticks": 7,
+          "score": 0.1616442782944167
+        },
+        "group": "02",
+        "known_extent": [
+          28,
+          44
+        ],
+        "known_shift": -5,
+        "recording": "12",
+        "role": "short_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            30,
+            52
+          ],
+          "relative_lag_ticks": 6,
+          "score": 0.2208528559315636
+        },
+        "group": "02",
+        "known_extent": [
+          28,
+          44
+        ],
+        "known_shift": 5,
+        "recording": "12",
+        "role": "short_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            21,
+            35
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.17558820063405045
+        },
+        "group": "02",
+        "known_extent": [
+          25,
+          47
+        ],
+        "known_shift": -7,
+        "recording": "12",
+        "role": "long_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            30,
+            48
+          ],
+          "relative_lag_ticks": 7,
+          "score": 0.22913706995001532
+        },
+        "group": "02",
+        "known_extent": [
+          25,
+          47
+        ],
+        "known_shift": 7,
+        "recording": "12",
+        "role": "long_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            13,
+            31
+          ],
+          "relative_lag_ticks": 4,
+          "score": -0.012714356019801186
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "13",
+        "role": "recorded"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            13,
+            31
+          ],
+          "relative_lag_ticks": 4,
+          "score": -0.015535159647790323
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "13",
+        "role": "local_gain"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            13,
+            31
+          ],
+          "relative_lag_ticks": 4,
+          "score": -0.10316307163333947
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "13",
+        "role": "local_lowpass"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            13,
+            27
+          ],
+          "relative_lag_ticks": 4,
+          "score": -0.013593015223882596
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "13",
+        "role": "local_noise"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            10,
+            28
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.189233629617546
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "13",
+        "role": "constant_early"
+      },
+      {
+        "assessed": false,
+        "candidate": null,
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "13",
+        "role": "constant_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            13,
+            27
+          ],
+          "relative_lag_ticks": 4,
+          "score": -0.036582894678931596
+        },
+        "group": "02",
+        "known_extent": [
+          29,
+          45
+        ],
+        "known_shift": -5,
+        "recording": "13",
+        "role": "short_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            13,
+            35
+          ],
+          "relative_lag_ticks": 4,
+          "score": -0.008198959178678411
+        },
+        "group": "02",
+        "known_extent": [
+          29,
+          45
+        ],
+        "known_shift": 5,
+        "recording": "13",
+        "role": "short_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            13,
+            31
+          ],
+          "relative_lag_ticks": 4,
+          "score": -0.03404013340201279
+        },
+        "group": "02",
+        "known_extent": [
+          26,
+          48
+        ],
+        "known_shift": -7,
+        "recording": "13",
+        "role": "long_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            13,
+            35
+          ],
+          "relative_lag_ticks": 4,
+          "score": -0.006960970202651406
+        },
+        "group": "02",
+        "known_extent": [
+          26,
+          48
+        ],
+        "known_shift": 7,
+        "recording": "13",
+        "role": "long_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            18,
+            32
+          ],
+          "relative_lag_ticks": 7,
+          "score": 0.2091555920160654
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "14",
+        "role": "recorded"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            24,
+            42
+          ],
+          "relative_lag_ticks": 6,
+          "score": 0.2132939112860313
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "14",
+        "role": "local_gain"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            24,
+            42
+          ],
+          "relative_lag_ticks": 7,
+          "score": 0.27685016846594096
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "14",
+        "role": "local_lowpass"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            33,
+            51
+          ],
+          "relative_lag_ticks": 7,
+          "score": 0.13367816217177228
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "14",
+        "role": "local_noise"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            26,
+            40
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.29868177768408394
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "14",
+        "role": "constant_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            29,
+            43
+          ],
+          "relative_lag_ticks": -7,
+          "score": 0.15591020596935593
+        },
+        "group": "02",
+        "known_extent": null,
+        "known_shift": null,
+        "recording": "14",
+        "role": "constant_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            29,
+            43
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.2046676639120282
+        },
+        "group": "02",
+        "known_extent": [
+          30,
+          46
+        ],
+        "known_shift": -5,
+        "recording": "14",
+        "role": "short_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            31,
+            45
+          ],
+          "relative_lag_ticks": 8,
+          "score": 0.24670647097115336
+        },
+        "group": "02",
+        "known_extent": [
+          30,
+          46
+        ],
+        "known_shift": 5,
+        "recording": "14",
+        "role": "short_late"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            30,
+            44
+          ],
+          "relative_lag_ticks": 4,
+          "score": 0.21705510952984783
+        },
+        "group": "02",
+        "known_extent": [
+          27,
+          49
+        ],
+        "known_shift": -7,
+        "recording": "14",
+        "role": "long_early"
+      },
+      {
+        "assessed": true,
+        "candidate": {
+          "extent_ticks": [
+            26,
+            40
+          ],
+          "relative_lag_ticks": -4,
+          "score": 0.24231662856169028
+        },
+        "group": "02",
+        "known_extent": [
+          27,
+          49
+        ],
+        "known_shift": 7,
+        "recording": "14",
+        "role": "long_late"
+      }
+    ]
+  },
+  "schema": "chipmunk.grid-articulatory-timing-results/1",
+  "totals": {
+    "held": {
+      "by_condition": {
+        "controls": {
+          "added_useful": 0,
+          "candidate_alerts": 4,
+          "candidate_measured": 155,
+          "candidate_useful": 0,
+          "cases": 162,
+          "current_alerts": 0,
+          "current_measured": 155,
+          "current_useful": 0,
+          "new_control_alerts": 4
+        },
+        "signed_edits": {
+          "added_useful": 0,
+          "candidate_alerts": 0,
+          "candidate_measured": 103,
+          "candidate_useful": 0,
+          "cases": 108,
+          "current_alerts": 0,
+          "current_measured": 100,
+          "current_useful": 0,
+          "new_control_alerts": 0
+        }
+      },
+      "by_role": {
+        "constant_early": {
+          "added_useful": 0,
+          "candidate_alerts": 0,
+          "candidate_measured": 25,
+          "candidate_useful": 0,
+          "cases": 27,
+          "current_alerts": 0,
+          "current_measured": 26,
+          "current_useful": 0,
+          "new_control_alerts": 0
+        },
+        "constant_late": {
+          "added_useful": 0,
+          "candidate_alerts": 0,
+          "candidate_measured": 26,
+          "candidate_useful": 0,
+          "cases": 27,
+          "current_alerts": 0,
+          "current_measured": 26,
+          "current_useful": 0,
+          "new_control_alerts": 0
+        },
+        "local_gain": {
+          "added_useful": 0,
+          "candidate_alerts": 0,
+          "candidate_measured": 26,
+          "candidate_useful": 0,
+          "cases": 27,
+          "current_alerts": 0,
+          "current_measured": 25,
+          "current_useful": 0,
+          "new_control_alerts": 0
+        },
+        "local_lowpass": {
+          "added_useful": 0,
+          "candidate_alerts": 4,
+          "candidate_measured": 26,
+          "candidate_useful": 0,
+          "cases": 27,
+          "current_alerts": 0,
+          "current_measured": 26,
+          "current_useful": 0,
+          "new_control_alerts": 4
+        },
+        "local_noise": {
+          "added_useful": 0,
+          "candidate_alerts": 0,
+          "candidate_measured": 26,
+          "candidate_useful": 0,
+          "cases": 27,
+          "current_alerts": 0,
+          "current_measured": 26,
+          "current_useful": 0,
+          "new_control_alerts": 0
+        },
+        "long_early": {
+          "added_useful": 0,
+          "candidate_alerts": 0,
+          "candidate_measured": 25,
+          "candidate_useful": 0,
+          "cases": 27,
+          "current_alerts": 0,
+          "current_measured": 23,
+          "current_useful": 0,
+          "new_control_alerts": 0
+        },
+        "long_late": {
+          "added_useful": 0,
+          "candidate_alerts": 0,
+          "candidate_measured": 26,
+          "candidate_useful": 0,
+          "cases": 27,
+          "current_alerts": 0,
+          "current_measured": 25,
+          "current_useful": 0,
+          "new_control_alerts": 0
+        },
+        "recorded": {
+          "added_useful": 0,
+          "candidate_alerts": 0,
+          "candidate_measured": 26,
+          "candidate_useful": 0,
+          "cases": 27,
+          "current_alerts": 0,
+          "current_measured": 26,
+          "current_useful": 0,
+          "new_control_alerts": 0
+        },
+        "short_early": {
+          "added_useful": 0,
+          "candidate_alerts": 0,
+          "candidate_measured": 26,
+          "candidate_useful": 0,
+          "cases": 27,
+          "current_alerts": 0,
+          "current_measured": 26,
+          "current_useful": 0,
+          "new_control_alerts": 0
+        },
+        "short_late": {
+          "added_useful": 0,
+          "candidate_alerts": 0,
+          "candidate_measured": 26,
+          "candidate_useful": 0,
+          "cases": 27,
+          "current_alerts": 0,
+          "current_measured": 26,
+          "current_useful": 0,
+          "new_control_alerts": 0
+        }
+      },
+      "groups_with_added_useful": 0,
+      "preserved_every_current_location": true
+    },
+    "neural": {
+      "by_condition": {
+        "controls": {
+          "added_useful": 0,
+          "candidate_alerts": 0,
+          "candidate_measured": 4,
+          "candidate_useful": 0,
+          "cases": 4,
+          "current_alerts": 0,
+          "current_measured": 4,
+          "current_useful": 0,
+          "new_control_alerts": 0
+        },
+        "signed_edits": {
+          "added_useful": 0,
+          "candidate_alerts": 0,
+          "candidate_measured": 4,
+          "candidate_useful": 0,
+          "cases": 4,
+          "current_alerts": 0,
+          "current_measured": 4,
+          "current_useful": 0,
+          "new_control_alerts": 0
+        }
+      },
+      "by_role": {
+        "earlier_drive_neural": {
+          "added_useful": 0,
+          "candidate_alerts": 0,
+          "candidate_measured": 2,
+          "candidate_useful": 0,
+          "cases": 2,
+          "current_alerts": 0,
+          "current_measured": 2,
+          "current_useful": 0,
+          "new_control_alerts": 0
+        },
+        "earlier_pixels_ordinary": {
+          "added_useful": 0,
+          "candidate_alerts": 0,
+          "candidate_measured": 2,
+          "candidate_useful": 0,
+          "cases": 2,
+          "current_alerts": 0,
+          "current_measured": 2,
+          "current_useful": 0,
+          "new_control_alerts": 0
+        },
+        "original": {
+          "added_useful": 0,
+          "candidate_alerts": 0,
+          "candidate_measured": 2,
+          "candidate_useful": 0,
+          "cases": 2,
+          "current_alerts": 0,
+          "current_measured": 2,
+          "current_useful": 0,
+          "new_control_alerts": 0
+        },
+        "source_time_neural": {
+          "added_useful": 0,
+          "candidate_alerts": 0,
+          "candidate_measured": 2,
+          "candidate_useful": 0,
+          "cases": 2,
+          "current_alerts": 0,
+          "current_measured": 2,
+          "current_useful": 0,
+          "new_control_alerts": 0
+        }
+      },
+      "groups_with_added_useful": 0,
+      "preserved_every_current_location": true
+    }
+  }
+}

@@ -59,6 +59,10 @@ closures, native pictures, and unchanged soundtracks.
 The [detector readout on those fixtures](grid-reserve-neural-mouth-readout-2026-11-12.md)
 repeats current and experimental timing checks on those exact clips and
 verifies source crops where an inspection range appears.
+The [mouth-state timing study](grid-articulatory-timing-2026-11-12.md)
+compares local timing estimates on 108 authored shifts and 162 ordinary
+controls. Its reader reproduces signed displacement errors, including the
+local filtering controls that produced false alerts.
 The [marked earlier-video timing study](grid-paired-closure-timing-2026-11-12.md)
 replays independently measured mouth movement and speech changes at a marked
 event, with coherent retiming and ordinary processing controls.

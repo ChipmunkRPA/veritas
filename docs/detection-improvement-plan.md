@@ -97,6 +97,22 @@ integration remains unfinished.
 
 ## Progress on 12 November
 
+- The [fixed-position video detail check](video-mouth-fixed-residual-2026-11-12.md)
+  located four of 52 neural redraws, compared with two using the direct
+  comparison. It missed all nine redraws with verified source-time mouth
+  motion and flagged 18 of 56 ordinary GRID views and four of eight
+  H.264 re-encodes. It stays experimental. Native readback verified 171
+  frame crops and 24 aligned audio intervals.
+- The [separately calibrated speech-enhancement comparison](audio-noise-views-transfer-2026-11-12.md)
+  raised synthetic traffic-clip coverage from eight to all 16. The
+  enhanced-only rule added one correct flag. The combined rule added flags
+  on 11 synthetic and 12 genuine sources across the two noise scenes. Both
+  stay experimental. The independent replay checked all 240 prepared PCM files.
+- The [source-aligned writing comparison](writing-source-aligned-transfer-2026-11-12.md)
+  located 14 of 14 controlled rewrites, up from two. Adding it raised flags
+  on genuine works from one to three of ten. A simple edit-distance rule
+  gave identical results and flagged substantial publisher revisions.
+  The comparison stays experimental for AI authorship.
 - The [single-video mouth-region check](video-mouth-local-hold-2026-11-12.md)
   localized 26 of 28 known held-mouth edits on its two-second H.264 profile.
   None of the 81 assessed controls produced an alert, and three cuts were

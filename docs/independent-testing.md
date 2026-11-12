@@ -53,6 +53,13 @@ both appearance measurements at the original time interval.
 The [motion-aligned mouth detail study](video-mouth-temporal-detail-2026-11-12.md)
 checks native mouth crops and PCM intervals. It measures both missed
 source-compatible redraws and flags on ordinary video.
+The [fixed-position picture detail study](video-mouth-fixed-residual-2026-11-12.md)
+checks the same native coordinates across an interval and its two flanks.
+Its replay checks exact crops and PCM ranges, including a separate reserve
+of redraws that preserve source-time mouth motion.
+The [source-aligned writing study](writing-source-aligned-transfer-2026-11-12.md#replay)
+provides a standard-library reader for 204 decisions and source positions
+for reconstructing the publisher versions and matched revision controls.
 The [native word-clock qualification](grid-reserve-word-clocks-2026-11-12.md)
 aligns publisher word intervals with original embedded speech and replays four
 ordinary mouth changes with unchanged soundtracks.

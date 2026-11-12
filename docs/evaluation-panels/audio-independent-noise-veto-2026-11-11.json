@@ -1,0 +1,176 @@
+{
+  "advance": false,
+  "cells": {
+    "native/center/genuine": {
+      "current_ai": 6,
+      "current_inconclusive": 19,
+      "current_original": 3,
+      "planned": 28,
+      "remaining_ai": 4,
+      "withheld": 2
+    },
+    "native/center/synthetic": {
+      "current_ai": 18,
+      "current_inconclusive": 18,
+      "planned": 36,
+      "remaining_ai": 13,
+      "withheld": 5
+    },
+    "native/clean/genuine": {
+      "current_original": 7,
+      "planned": 7,
+      "remaining_ai": 0,
+      "withheld": 0
+    },
+    "native/clean/synthetic": {
+      "current_ai": 9,
+      "planned": 9,
+      "remaining_ai": 9,
+      "withheld": 0
+    },
+    "native/native/genuine": {
+      "current_inconclusive": 1,
+      "current_original": 2,
+      "current_unassessed": 1,
+      "planned": 4,
+      "remaining_ai": 0,
+      "withheld": 0
+    },
+    "native/offset/genuine": {
+      "current_ai": 1,
+      "current_inconclusive": 12,
+      "current_original": 1,
+      "planned": 14,
+      "remaining_ai": 1,
+      "withheld": 0
+    },
+    "native/offset/synthetic": {
+      "current_ai": 3,
+      "current_inconclusive": 15,
+      "planned": 18,
+      "remaining_ai": 1,
+      "withheld": 2
+    },
+    "opus/center/genuine": {
+      "current_ai": 3,
+      "current_inconclusive": 10,
+      "current_original": 1,
+      "planned": 14,
+      "remaining_ai": 1,
+      "withheld": 2
+    },
+    "opus/center/synthetic": {
+      "current_ai": 9,
+      "current_inconclusive": 9,
+      "planned": 18,
+      "remaining_ai": 3,
+      "withheld": 6
+    },
+    "opus/clean/genuine": {
+      "current_original": 7,
+      "planned": 7,
+      "remaining_ai": 0,
+      "withheld": 0
+    },
+    "opus/clean/synthetic": {
+      "current_ai": 9,
+      "planned": 9,
+      "remaining_ai": 9,
+      "withheld": 0
+    },
+    "restored/center/genuine": {
+      "current_ai": 6,
+      "current_inconclusive": 8,
+      "planned": 14,
+      "remaining_ai": 2,
+      "withheld": 4
+    },
+    "restored/center/synthetic": {
+      "current_ai": 14,
+      "current_inconclusive": 4,
+      "planned": 18,
+      "remaining_ai": 4,
+      "withheld": 10
+    },
+    "restored/clean/genuine": {
+      "current_inconclusive": 1,
+      "current_original": 6,
+      "planned": 7,
+      "remaining_ai": 0,
+      "withheld": 0
+    },
+    "restored/clean/synthetic": {
+      "current_ai": 9,
+      "planned": 9,
+      "remaining_ai": 8,
+      "withheld": 1
+    }
+  },
+  "center_corrected_groups": 2,
+  "center_corrected_rooms": 1,
+  "checks": {
+    "center_genuine_cleared": false,
+    "center_genuine_groups": true,
+    "center_rooms": false,
+    "center_synthetic_retained": false,
+    "clean_retained": false,
+    "delivery_synthetic_retained": false,
+    "offset_synthetic_retained": false
+  },
+  "elapsed_s": 67.665,
+  "forwards": 88,
+  "freeze_sha256": "d24bb486812deff0952ad1ccf683a61143f59b6bacee33d3448ad0abe8d57f86",
+  "held_views": 212,
+  "peak_rss_bytes": 953679872,
+  "point": -10.74107837677002,
+  "rule": {
+    "center_maximum_lost": 2,
+    "center_minimum_corrected": 3,
+    "center_minimum_groups": 2,
+    "center_required_rooms": 2,
+    "clean_maximum_lost": 0,
+    "delivery_maximum_lost_per_codec": 1,
+    "minimum_selection_clean": 6,
+    "minimum_selection_noisy": 8,
+    "offset_maximum_lost": 1,
+    "policy": "Only an incumbent AI direction can be withheld. Withhold below the frozen independent score. Return inconclusive after withholding. No AI flags are added.",
+    "selection": "Highest saved independent score preserving every clean AI flag and all but one noisy AI flag among synthetic foregrounds in the earlier two-room comparison."
+  },
+  "schema": "chipmunk.audio-independent-noise-veto/1",
+  "scores_sha256": "cb9f24e929d37c70ec8e33f2a77f23d88b4a1fd6967bb08fc307c151a9aa1b64",
+  "selection": {
+    "clean/synthetic": {
+      "current_ai": 7,
+      "withheld": 0
+    },
+    "noisy/genuine": {
+      "current_ai": 15,
+      "withheld": 0
+    },
+    "noisy/synthetic": {
+      "current_ai": 9,
+      "withheld": 0
+    }
+  },
+  "source_bindings": {
+    "delivery": {
+      "freeze": "beb34a69d4d519b0ca390f844ddfbb00733eea08d79fb1ef292b8b00caa389bb",
+      "scores": "2d702dcb7110abe3bc0c4d90c428ea286d79d7d87e9e48f113fecad9417e0e99"
+    },
+    "held": {
+      "freeze": "6b76ec6648f24c674969f6281a64403540e2eaf6b8b83737982c8b4f91eb7262",
+      "scores": "2e27fa8ffdc4d1af12a3c1256fc71ffcc34656ade78d4af721c3f312a8c0f5d6"
+    },
+    "selection": {
+      "confirm": "0d20c3d573ee48fc14a8d659a5ef99f43d3f66e2067c66d61bc938d782e515d8",
+      "freeze": "975cd2233b48da2f25d46a072264c9204f0e0076d23e9dd9298d6940dc46d664"
+    }
+  },
+  "independent_replay": {
+    "advance": false,
+    "decision_cells_reproduced": 15,
+    "held_delivery_waveforms_decoded": 96,
+    "held_input_waveforms_replayed": 212,
+    "independent_model_inputs_rebuilt": 87
+  }
+}

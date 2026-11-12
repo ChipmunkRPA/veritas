@@ -148,6 +148,10 @@ on two panels of sharp and feathered image edits.
 The [semantic context comparison](image-semantic-context-transfer-2026-11-11.md)
 compares a forensic patch response with its response relative to distant,
 semantically similar patches on two licensed panels.
+The [three-layer image comparison](image-multidepth-transfer-2026-11-11.md)
+publishes exact region counts and a standard-library replay of all 384 held
+decisions without the source media. A second verifier rebuilds native masks
+when the evaluator has the original intake.
 The [image flip comparison](image-regional-flip-transfer-2026-11-11.md) tests
 whether the sensitive detector reproduces a region under a reversible transform.
 It separately reports useful regions, processing controls and untouched photos.
@@ -218,6 +222,9 @@ responses from two voice representations, with retained misses and exclusions.
 The [two-background transfer](audio-wavlm-two-background-transfer-2026-11-11.md)
 tests the same rule with distinct background recordings and records how each
 condition changes flags and unassessed coverage.
+The [independent voice veto comparison](audio-independent-noise-veto-2026-11-11.md)
+replays 212 held audio views to quantify both removed false alerts and lost
+correct detections under strong noise, Opus, and audio restoration.
 The [temporal corroboration trial](audio-temporal-corroboration-2026-11-11.md)
 uses three native windows per track and holds the speech gate fixed when
 comparing the outcomes under two additional background recordings.

@@ -1,0 +1,76 @@
+{
+  "implementation_sha256": {
+    "backend/scripts/build_grid_word_timed_controls.py": "1b8a71f2ead38b988ab9def5144db0c8e39550d0db78f463c7ef815151c08766",
+    "backend/scripts/fetch_grid_reserve_word_wavs.py": "fee498ec0d4e34c38d42dcc22ecc185c9c9bb1128b91c15c506178a04cfb5cfe",
+    "backend/scripts/grid_reserve_word_clocks.py": "63474f2628f33b77e8f190882ba2f76f4c5c91586741baa08b98b0485ab424ba"
+  },
+  "new_neural_redraws": 0,
+  "ordinary_control_readback": {
+    "analysis_confidence_weight": 0,
+    "anonymous_ranges": [
+      {
+        "before_during_after": {
+          "after": 35,
+          "before": 28,
+          "during": 29
+        },
+        "comparison_seconds": [
+          1.16,
+          1.4
+        ]
+      },
+      {
+        "before_during_after": {
+          "after": 40,
+          "before": 34,
+          "during": 35
+        },
+        "comparison_seconds": [
+          1.4,
+          1.6
+        ]
+      }
+    ],
+    "cases": 4,
+    "changed_audio_samples": 0,
+    "changed_picture_masks": 22,
+    "comparison_images": 24,
+    "control_counts": {
+      "ordinary_mouth_brightness": 2,
+      "ordinary_mouth_retime": 2
+    },
+    "native_pictures": 300,
+    "private_control_freeze_sha256": "9031c8cf6aec1c435c8b778abdeb0419270de4c64f0f8a9c53e97adb406b170d",
+    "private_control_receipt_sha256": "bbbdb3e69f26d08656d04b815978e7c5ee8edf7be5271b8ed07afef63153dc78",
+    "qualification_reproduced_byte_for_byte": true,
+    "same_native_clock_and_changed_masks_on_repeat": true,
+    "status": "verified",
+    "unchanged_pcm_samples": 190592
+  },
+  "schema": "chipmunk.grid-reserve-word-clock-public/1",
+  "serving_changed": false,
+  "source_qualification": {
+    "canonical_pcm_samples": 762368,
+    "distinct_measured_shifts_seconds": [
+      "3/3200",
+      "1/1000",
+      "17/16000"
+    ],
+    "full_inventory_remapped_references": 8,
+    "independently_verified_phoneme_intervals": 0,
+    "literal_word_references": 8,
+    "mapped_word_intervals": 96,
+    "maximum_complete_wave_correlation": 0.9922771840200186,
+    "maximum_local_alignment_residual_samples": 3,
+    "minimum_complete_wave_correlation": 0.9293188493076707,
+    "minimum_individual_word_correlation": 0.9004782672948793,
+    "native_pictures": 1200,
+    "private_word_clocks_sha256": "fa11aa9c527e0ce4bd58fceb8a2ad528ff39b33a0cd40afd3dbdc6844e6c54ef",
+    "public_transfer_bytes": 10134708,
+    "publisher_alignments_sha256": "161bcf2548797e6cf0116541e8c76fdb34e014a1dd4d33d2909cb12e588232ee",
+    "publisher_wave_ranges_sha256": "01eac0bb6c6cc4001bfb6a980ff7951e3ea2fca6f590e765ba6ba0eaf9c1474a",
+    "reserve_sources": 16,
+    "source_groups": 8,
+    "status": "qualified"
+  }
+}

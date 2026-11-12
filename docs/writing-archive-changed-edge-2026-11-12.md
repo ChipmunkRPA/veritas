@@ -15,6 +15,10 @@ The 12 held documents came from four pinned U.S. State Department volumes. All d
 
 The separate standard-library verifier reread all 120 frozen decisions and the bundled public archive. It checked 216 exact paragraph spans and both sets of coordinates for all 24 changed words. The follow-up comparison is intentionally bounded to a single substitution in the tested layout. Source material and private case records remain local. [Frozen comparison runner](../backend/scripts/writing_archive_changed_edge.py) · [Independent verifier](../backend/scripts/review_writing_archive_changed_edge.py)
 
+## Local app
+
+The existing public archive comparison now uses this alignment if exact paragraph-edge matching supplies no candidate. The normal app function reproduced all 120 frozen decisions and their submitted and archive coordinates. Three isolated analyses exercised checkout with simulated payment, the normal document worker, and authenticated JSON and PDF. Both changed-word cases returned the expected exact spans. The two-substitution control returned no match. Each unpaid event queued zero analyses. In Chrome, the plain result highlighted the original and changed words, and the downloaded JSON matched the API. [Local app receipt](evaluation-panels/writing-archive-changed-edge-app-2026-11-12.json)
+
 ## Replay
 
 Use the study commit, the retained source directory from the [archive study](writing-archive-source-evidence-2026-11-12.md), and the [previous reflow study](writing-archive-joined-layout-2026-11-12.md). Set `run` to a new local directory.

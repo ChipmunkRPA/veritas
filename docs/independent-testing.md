@@ -69,6 +69,9 @@ positions, and records when reformatting changes sentence segmentation.
 The [exact per-email replay](writing-reply-native-batches-2026-11-12.md)
 repeats the second check in source order and follows the resulting locations
 through the local paid worker, public exports, and source-bound evidence bundle.
+The [archive boundary comparison](writing-archive-changed-edge-2026-11-12.md)
+reconstructs exact submitted and reference coordinates after a word changes
+next to a lost paragraph break and checks open-set and ambiguous controls.
 
 The [audio supplement example](#review-an-audio-supplement-by-acoustic-condition)
 uses authored scores to show how an acoustic routing error can add a genuine

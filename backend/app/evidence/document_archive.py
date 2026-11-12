@@ -180,26 +180,36 @@ def compare(doc: Document, upload_sha256: str, catalog=None, index=None):
     installed_library = catalog is None or index is None
     if installed_library:
         catalog, index = library()
+    edge_change = False
     if joined:
         edges = _library_edges() if installed_library else document_archive_layout.index_edges(catalog)
         recovered = document_archive_layout.joined_spans(doc.text, spans[0], edges)
         if recovered is None:
-            return output
+            recovered = document_archive_layout.joined_spans_one_edge_change(doc.text, spans[0], catalog, edges)
+            if recovered is None:
+                return output
+            edge_change = True
         candidate_source, first, spans = recovered
         body = [(1, span) for span in spans]
     status, coverage, total, source, pairs = _anchors(doc.text, spans, index)
-    if joined:
-        if source != candidate_source or pairs != [(i, first + i) for i in range(len(spans))]:
-            return output
-        output["layout"] = RECOVERED_BOUNDARIES
-    output["status"] = status
-    output["coverage"].update(body_words=total, matched_words=coverage)
+    if joined and (source != candidate_source or pairs != [(i, first + i) for i in range(len(spans))]):
+        return output
     if source is None:
+        output["status"] = status
+        output["coverage"].update(body_words=total, matched_words=coverage)
         return output
     row = catalog[source]
+    aligned, changes = _changes(doc.text, body, row["paragraphs"], _alignment(pairs))
+    if edge_change and (len(changes) != 1 or len(changes[0]["submitted"]["changed_tokens"]) != 1
+                        or len(changes[0]["archive"]["changed_tokens"]) != 1):
+        return output
+    output["status"] = status
+    output["coverage"].update(body_words=total, matched_words=coverage)
+    if joined:
+        output["layout"] = RECOVERED_BOUNDARIES
     volume, document = row["volume"], row["doc_id"]
     output["reference"] = {"id": source, "url": f"{ARCHIVE_LIBRARY}/{volume}/{document}",
                            "version_url": f"https://github.com/HistoryAtState/frus/blob/{ARCHIVE_COMMIT}/volumes/{volume}.xml",
                            "volume": volume, "document": document}
-    output["aligned_paragraphs"], output["changes"] = _changes(doc.text, body, row["paragraphs"], _alignment(pairs))
+    output["aligned_paragraphs"], output["changes"] = aligned, changes
     return output

@@ -1,0 +1,37 @@
+{
+  "browser": {
+    "exact_marks": 2,
+    "json_matches_api": true,
+    "page_errors": 0,
+    "pdf_downloaded": true,
+    "plain_view_verified": true
+  },
+  "cases": [
+    {
+      "access_isolated": true,
+      "exact_pdf_api_offsets": true,
+      "role": "before_break",
+      "source_bound": true,
+      "unpaid_enqueued_zero": true
+    },
+    {
+      "access_isolated": true,
+      "exact_pdf_api_offsets": true,
+      "role": "after_break",
+      "source_bound": true,
+      "unpaid_enqueued_zero": true
+    },
+    {
+      "access_isolated": true,
+      "exact_pdf_api_offsets": true,
+      "role": "second_substitution",
+      "source_bound": false,
+      "unpaid_enqueued_zero": true
+    }
+  ],
+  "normal_frozen_replay": {
+    "decisions": 120,
+    "exact_coordinate_spaces": 2
+  },
+  "simulated_paid_analyses": 3
+}

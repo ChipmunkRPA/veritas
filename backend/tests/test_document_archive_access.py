@@ -235,3 +235,27 @@ def test_archive_recovers_collapsed_boundaries_and_exact_export_positions(billin
             assert "Passage in submitted paragraph 1" in text and f"[{offset}, {offset + 2})" in text
         other = client.post(_url("collapsed-intro"), headers=billing.headers).json()["comparison"]
         assert other["reference"] is None and other["changes"] == []
+
+
+def test_archive_recovers_single_edge_change_in_a_joined_copy(billing, monkeypatch):
+    monkeypatch.setattr(settings, "billing_mode", "disabled")
+    original = _body().replace("\n\n", " ")
+    edited = original.replace("their pleas for clemency", "their requests for clemency", 1)
+    offset = edited.index("their requests for clemency") + len("their ")
+    _seed(billing, "single-edge", edited)
+    _seed(billing, "two-edges", edited.replace("Strong reaction", "Marked reaction", 1))
+    with _install(billing, monkeypatch) as client:
+        response = client.post(_url("single-edge") + "?include_pdf=true", headers=billing.headers)
+        assert response.status_code == 200
+        body = response.json()
+        report = body["comparison"]
+        assert report["status"] == "reference_bound" and report["layout"] == "recovered_archive_boundaries"
+        assert report["reference"]["id"] == SOURCE and report["authorship_confidence_contribution"] == 0
+        (change,) = report["changes"]
+        assert change["submitted"]["changed_tokens"] == [[offset, offset + 8]]
+        assert change["archive"]["text"] == "pleas" and change["archive_paragraph"] == 4
+        with pymupdf.open(stream=base64.b64decode(body["pdf"], validate=True), filetype="pdf") as pdf:
+            text = " ".join(" ".join(page.get_text().split()) for page in pdf)
+            assert f"[{offset}, {offset + 8})" in text and "requests" in text and "pleas" in text
+        rejected = client.post(_url("two-edges"), headers=billing.headers).json()["comparison"]
+        assert rejected["reference"] is None and rejected["changes"] == []

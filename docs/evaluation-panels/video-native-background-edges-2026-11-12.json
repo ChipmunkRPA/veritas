@@ -1,0 +1,3243 @@
+{
+  "aggregate": {
+    "advances": false,
+    "candidate_freeze_sha256": "be9d87acc4142a8aecd196a221ece8c32cd41885ddc5ab6378da25f032023bb2",
+    "candidate_journal_sha256": "a35ea431315e700716356b55286f5a6f8703d0e78c5ea251710d0287be8b9d87",
+    "candidate_sha256": "ab7908fbaafe35a5e879190ada426401d7b248e8d37069db733b330a5df2eca6",
+    "elapsed_s": 8.580199791002087,
+    "eligible_source_groups": 38,
+    "gate": {
+      "distinct_source_pairs": false,
+      "no_false_matched_background_cuts": true,
+      "useful_cut_removals": false,
+      "useful_swap_coarse_coverage": true,
+      "useful_swap_preservation": true
+    },
+    "held_counts": {
+      "camera_punch": {
+        "candidate_matched_background_pairs": 0,
+        "cases": 8,
+        "coarse_ranges": 0,
+        "coarse_review_measured": 8,
+        "counterfactual_coarse_ranges": 0,
+        "counterfactual_short_ranges": 0,
+        "counterfactual_useful_swap": 0,
+        "current_useful_swap": 0,
+        "cut_both_edges_exact": 0,
+        "cut_both_edges_within_one_picture": 0,
+        "displayed_coarse_ranges": 0,
+        "displayed_short_ranges": 0,
+        "false_matched_background_cut": 0,
+        "lost_useful_swap_range": 0,
+        "shot_transitions": 0,
+        "useful_cut_removal": 0,
+        "useful_swap_coarse": 0
+      },
+      "cross_cut": {
+        "candidate_matched_background_pairs": 0,
+        "cases": 16,
+        "coarse_ranges": 0,
+        "coarse_review_measured": 15,
+        "counterfactual_coarse_ranges": 0,
+        "counterfactual_short_ranges": 0,
+        "counterfactual_useful_swap": 0,
+        "current_useful_swap": 0,
+        "cut_both_edges_exact": 0,
+        "cut_both_edges_within_one_picture": 0,
+        "displayed_coarse_ranges": 0,
+        "displayed_short_ranges": 0,
+        "false_matched_background_cut": 0,
+        "lost_useful_swap_range": 0,
+        "shot_transitions": 12,
+        "useful_cut_removal": 0,
+        "useful_swap_coarse": 0
+      },
+      "light": {
+        "candidate_matched_background_pairs": 0,
+        "cases": 8,
+        "coarse_ranges": 0,
+        "coarse_review_measured": 7,
+        "counterfactual_coarse_ranges": 0,
+        "counterfactual_short_ranges": 0,
+        "counterfactual_useful_swap": 0,
+        "current_useful_swap": 0,
+        "cut_both_edges_exact": 0,
+        "cut_both_edges_within_one_picture": 0,
+        "displayed_coarse_ranges": 0,
+        "displayed_short_ranges": 0,
+        "false_matched_background_cut": 0,
+        "lost_useful_swap_range": 0,
+        "shot_transitions": 1,
+        "useful_cut_removal": 0,
+        "useful_swap_coarse": 0
+      },
+      "long_swap": {
+        "candidate_matched_background_pairs": 0,
+        "cases": 16,
+        "coarse_ranges": 15,
+        "coarse_review_measured": 15,
+        "counterfactual_coarse_ranges": 15,
+        "counterfactual_short_ranges": 0,
+        "counterfactual_useful_swap": 15,
+        "current_useful_swap": 15,
+        "cut_both_edges_exact": 0,
+        "cut_both_edges_within_one_picture": 0,
+        "displayed_coarse_ranges": 15,
+        "displayed_short_ranges": 0,
+        "false_matched_background_cut": 0,
+        "lost_useful_swap_range": 0,
+        "shot_transitions": 0,
+        "useful_cut_removal": 0,
+        "useful_swap_coarse": 15
+      },
+      "original": {
+        "candidate_matched_background_pairs": 0,
+        "cases": 8,
+        "coarse_ranges": 0,
+        "coarse_review_measured": 8,
+        "counterfactual_coarse_ranges": 0,
+        "counterfactual_short_ranges": 0,
+        "counterfactual_useful_swap": 0,
+        "current_useful_swap": 0,
+        "cut_both_edges_exact": 0,
+        "cut_both_edges_within_one_picture": 0,
+        "displayed_coarse_ranges": 0,
+        "displayed_short_ranges": 0,
+        "false_matched_background_cut": 0,
+        "lost_useful_swap_range": 0,
+        "shot_transitions": 0,
+        "useful_cut_removal": 0,
+        "useful_swap_coarse": 0
+      },
+      "short_swap": {
+        "candidate_matched_background_pairs": 0,
+        "cases": 8,
+        "coarse_ranges": 3,
+        "coarse_review_measured": 7,
+        "counterfactual_coarse_ranges": 3,
+        "counterfactual_short_ranges": 7,
+        "counterfactual_useful_swap": 8,
+        "current_useful_swap": 8,
+        "cut_both_edges_exact": 0,
+        "cut_both_edges_within_one_picture": 0,
+        "displayed_coarse_ranges": 3,
+        "displayed_short_ranges": 7,
+        "false_matched_background_cut": 0,
+        "lost_useful_swap_range": 0,
+        "shot_transitions": 0,
+        "useful_cut_removal": 0,
+        "useful_swap_coarse": 2
+      }
+    },
+    "held_source_groups": 16,
+    "held_source_pairs": 8,
+    "incumbent_seal_sha256": "5e186b5f7d4514fd1c97b0c3548ee813d953ba7e5e781c834004a425a98386a1",
+    "matching_distances": [
+      0.03843954248366014,
+      0.06397058823529411,
+      0.07009803921568626,
+      0.07969771241830065,
+      0.08590686274509805,
+      0.09060457516339869,
+      0.09142156862745095,
+      0.11000816993464052
+    ],
+    "panel_freeze_sha256": "38b83efac55c316dadeef9b814561e3122dbab85511bb27a5a5a91353b5724ca",
+    "protocol": {
+      "advancement": {
+        "accepted_cut_max_native_endpoint_error_pictures": 1,
+        "maximum_false_matches_on_swaps_or_controls": 0,
+        "maximum_lost_useful_actual_swap_ranges": 0,
+        "min_coarse_useful_swap_assessment": 1,
+        "min_distinct_source_pairs": 2,
+        "min_useful_genuine_cut_removals": 2,
+        "useful_swap_iou": "1/2"
+      },
+      "app_comparator": "Run the actual Full shot, track and face-appearance lanes with a simulated signed Stripe checkout in an isolated database. Keep normal detector selection and measured face/signed-clock evidence within those lanes; omit unrelated large checks. The paired guard can only suppress an existing selected coarse range, and does not pick another candidate. Keep existing short-pass behavior for the counterfactual.",
+      "conditions": {
+        "cross_cut": "Both directions per pair. Switch all source pictures and return at exact authored edges. Across pair/direction indices alternate the four fixed short intervals. Keep known non-AI construction.",
+        "long_swap": "One fixed 18- or 22-picture local publisher-swap insert per held source. Alternate publisher families by direction.",
+        "ordinary_control": "Each source has either a localized 8 px-per-edge camera punch-in or 1.20 RGB gain, alternating by direction. Include one original per pair. The optical punch-in is a deterministic edit, not physical new acquisition.",
+        "short_swap": "One fixed six- or eleven-picture publisher-swap insert on both sources of the first four locked pairs, with the other publisher family."
+      },
+      "cut_intervals": [
+        [
+          54,
+          60
+        ],
+        [
+          67,
+          75
+        ],
+        [
+          54,
+          64
+        ],
+        [
+          65,
+          77
+        ]
+      ],
+      "long_swap_intervals": [
+        [
+          50,
+          68
+        ],
+        [
+          56,
+          78
+        ]
+      ],
+      "matching": "Read only genuine source pictures for the prior scene study's fixed outer 8x6 grayscale descriptor at output ticks 0,60,118. Maximum-cardinality matching over pairs with a normalized distance at most .15; minimum total distance breaks ties. Keep eight closest resulting pairs, ordered by source keys on distance ties. Skip source overlap and preserve complete assessment of the locked media.",
+      "ordinary_interval": [
+        67,
+        75
+      ],
+      "output": "Exact H.264 MP4, 640x360, yuv420p, 25 fps, 120 pictures, CRF 23, silent. Select the closest authenticated native source picture by presentation time, earlier on tie, independently for each output tick. No interpolation or fractional timing correspondence between unmatched originals and swap streams.",
+      "schema": "chipmunk.video-native-background-panel/1",
+      "short_swap_intervals": [
+        [
+          54,
+          60
+        ],
+        [
+          62,
+          73
+        ]
+      ],
+      "source_role": "One prospectively locked held roster. Exclude all 49 original/source/donor groups from preceding localization and scene-continuity studies, including both tracked cut discoveries. This excludes documented links and does not imply unknown portrait identity or general project independence."
+    },
+    "serving_change": false,
+    "useful_cut_source_pairs": 0
+  },
+  "cases": [
+    {
+      "appearance_status": "ok",
+      "authored": [
+        54,
+        60
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "cross_cut",
+      "counterfactual_displayed": {},
+      "counterfactual_useful_swap": false,
+      "current_useful_swap": false,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 0,
+      "displayed": {},
+      "false_matched_background_cut": false,
+      "incumbent": {},
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [
+        54
+      ],
+      "source_pair": 0,
+      "source_sha256": "6e5a2928a02cbd0c8327438594971f91e904594d2110f4601445535ca7bfc885",
+      "track_status": "ok",
+      "tracks": 2,
+      "true_swap": false,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        50,
+        68
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "long_swap",
+      "counterfactual_displayed": {
+        "face_boundary": [
+          50,
+          69
+        ],
+        "face_sequence": [
+          52,
+          66
+        ]
+      },
+      "counterfactual_useful_swap": true,
+      "current_useful_swap": true,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 0,
+      "displayed": {
+        "face_boundary": [
+          50,
+          69
+        ],
+        "face_sequence": [
+          52,
+          66
+        ]
+      },
+      "false_matched_background_cut": false,
+      "incumbent": {
+        "boundary_refinement": [
+          50,
+          69
+        ],
+        "coarse": [
+          52,
+          66
+        ]
+      },
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [],
+      "source_pair": 0,
+      "source_sha256": "02399dc78a90828247f0fb25098889a15925362619add8625f96e851c19f232b",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": true,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": true
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        67,
+        75
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "camera_punch",
+      "counterfactual_displayed": {},
+      "counterfactual_useful_swap": false,
+      "current_useful_swap": false,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 0,
+      "displayed": {},
+      "false_matched_background_cut": false,
+      "incumbent": {},
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [],
+      "source_pair": 0,
+      "source_sha256": "e996f47a108aa1bea15577ebbea7975717a6f4827ae49613535e3e1b3222c5eb",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": false,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        54,
+        60
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "short_swap",
+      "counterfactual_displayed": {
+        "face_return": [
+          54,
+          60
+        ]
+      },
+      "counterfactual_useful_swap": true,
+      "current_useful_swap": true,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 0,
+      "displayed": {
+        "face_return": [
+          54,
+          60
+        ]
+      },
+      "false_matched_background_cut": false,
+      "incumbent": {
+        "short_range": [
+          54,
+          60
+        ]
+      },
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "localized"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "localized"
+      },
+      "shot_boundaries": [],
+      "source_pair": 0,
+      "source_sha256": "fc4dd4d3ddd4c92f04f0e01b6ec27864c4ac56be9e9fa8ae495b9b681948ca31",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": true,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "ok",
+      "authored": null,
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "original",
+      "counterfactual_displayed": {},
+      "counterfactual_useful_swap": false,
+      "current_useful_swap": false,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 0,
+      "displayed": {},
+      "false_matched_background_cut": false,
+      "incumbent": {},
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [],
+      "source_pair": 0,
+      "source_sha256": "8a650d918a483aca59eb56982338d5ae0e2dc760cff893e76d5210610c5e3b18",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": false,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        54,
+        64
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "cross_cut",
+      "counterfactual_displayed": {},
+      "counterfactual_useful_swap": false,
+      "current_useful_swap": false,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 1,
+      "displayed": {},
+      "false_matched_background_cut": false,
+      "incumbent": {},
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [
+        54
+      ],
+      "source_pair": 0,
+      "source_sha256": "33f2f79ed16df46bc258ea35894f6cc54df190b70c14187f7ac8c0b21bc7d576",
+      "track_status": "ok",
+      "tracks": 2,
+      "true_swap": false,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        56,
+        78
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "long_swap",
+      "counterfactual_displayed": {
+        "face_sequence": [
+          59,
+          72
+        ]
+      },
+      "counterfactual_useful_swap": true,
+      "current_useful_swap": true,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 1,
+      "displayed": {
+        "face_sequence": [
+          59,
+          72
+        ]
+      },
+      "false_matched_background_cut": false,
+      "incumbent": {
+        "coarse": [
+          59,
+          72
+        ]
+      },
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [],
+      "source_pair": 0,
+      "source_sha256": "6caaef9aae402ea50d0f5a14d9faaddc4ab11a6df6e3a463b331b6297fa51c42",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": true,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": true
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        67,
+        75
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "light",
+      "counterfactual_displayed": {},
+      "counterfactual_useful_swap": false,
+      "current_useful_swap": false,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 1,
+      "displayed": {},
+      "false_matched_background_cut": false,
+      "incumbent": {},
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [],
+      "source_pair": 0,
+      "source_sha256": "b74688efb8a6ab98364a82bb20eb6494e851734b7b0b5e452a5f63b2800b9c63",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": false,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        62,
+        73
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "short_swap",
+      "counterfactual_displayed": {
+        "face_boundary": [
+          62,
+          81
+        ],
+        "face_return": [
+          62,
+          74
+        ],
+        "face_sequence": [
+          66,
+          79
+        ]
+      },
+      "counterfactual_useful_swap": true,
+      "current_useful_swap": true,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 1,
+      "displayed": {
+        "face_boundary": [
+          62,
+          81
+        ],
+        "face_return": [
+          62,
+          74
+        ],
+        "face_sequence": [
+          66,
+          79
+        ]
+      },
+      "false_matched_background_cut": false,
+      "incumbent": {
+        "boundary_refinement": [
+          62,
+          81
+        ],
+        "coarse": [
+          66,
+          79
+        ],
+        "short_range": [
+          62,
+          74
+        ]
+      },
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "localized"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "localized"
+      },
+      "shot_boundaries": [],
+      "source_pair": 0,
+      "source_sha256": "5d1b3cd20658d2ae99d89909d6c4f9c28424b108f04b2455557a5fed3a98cab6",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": true,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": true
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        67,
+        75
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "cross_cut",
+      "counterfactual_displayed": {},
+      "counterfactual_useful_swap": false,
+      "current_useful_swap": false,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 0,
+      "displayed": {},
+      "false_matched_background_cut": false,
+      "incumbent": {},
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [
+        67
+      ],
+      "source_pair": 1,
+      "source_sha256": "3e6acd6e6a9545ed057cfdbc4f6fae14517d6a58b2c2b7868b137baefd39a9df",
+      "track_status": "ok",
+      "tracks": 2,
+      "true_swap": false,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        50,
+        68
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "long_swap",
+      "counterfactual_displayed": {
+        "face_boundary": [
+          50,
+          69
+        ],
+        "face_sequence": [
+          52,
+          66
+        ]
+      },
+      "counterfactual_useful_swap": true,
+      "current_useful_swap": true,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 0,
+      "displayed": {
+        "face_boundary": [
+          50,
+          69
+        ],
+        "face_sequence": [
+          52,
+          66
+        ]
+      },
+      "false_matched_background_cut": false,
+      "incumbent": {
+        "boundary_refinement": [
+          50,
+          69
+        ],
+        "coarse": [
+          52,
+          66
+        ]
+      },
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [],
+      "source_pair": 1,
+      "source_sha256": "834e29ef666800db3e493235ee4b7107070ee69a45916cd685929957cb54ca2c",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": true,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": true
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        67,
+        75
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "camera_punch",
+      "counterfactual_displayed": {},
+      "counterfactual_useful_swap": false,
+      "current_useful_swap": false,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 0,
+      "displayed": {},
+      "false_matched_background_cut": false,
+      "incumbent": {},
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [],
+      "source_pair": 1,
+      "source_sha256": "67f9578f0dfdb312b13436028dd8908ab5538e37747711bf1d55a3fa827f2f8b",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": false,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        54,
+        60
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "short_swap",
+      "counterfactual_displayed": {
+        "face_return": [
+          54,
+          60
+        ]
+      },
+      "counterfactual_useful_swap": true,
+      "current_useful_swap": true,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 0,
+      "displayed": {
+        "face_return": [
+          54,
+          60
+        ]
+      },
+      "false_matched_background_cut": false,
+      "incumbent": {
+        "short_range": [
+          54,
+          60
+        ]
+      },
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "localized"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "localized"
+      },
+      "shot_boundaries": [],
+      "source_pair": 1,
+      "source_sha256": "33b1c507d1431a2d7c5db586e9b350a154bbeceb423f477818450dc455d1ff3c",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": true,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "ok",
+      "authored": null,
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "original",
+      "counterfactual_displayed": {},
+      "counterfactual_useful_swap": false,
+      "current_useful_swap": false,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 0,
+      "displayed": {},
+      "false_matched_background_cut": false,
+      "incumbent": {},
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [],
+      "source_pair": 1,
+      "source_sha256": "a27d80d62987482e2e9e1a94a4043a861f5ddb994fc016d6809c5326fa21519f",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": false,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "not_applicable",
+      "authored": [
+        65,
+        77
+      ],
+      "candidate": null,
+      "coarse_status": "not_applicable",
+      "condition": "cross_cut",
+      "counterfactual_displayed": {},
+      "counterfactual_useful_swap": false,
+      "current_useful_swap": false,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 1,
+      "displayed": {},
+      "false_matched_background_cut": false,
+      "incumbent": {},
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [
+        65
+      ],
+      "source_pair": 1,
+      "source_sha256": "5c1cef4b2d2df0bd8ff595af81656df547b4a77ae73209bca1ad70819cffdf08",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": false,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "not_applicable",
+      "authored": [
+        56,
+        78
+      ],
+      "candidate": null,
+      "coarse_status": "not_applicable",
+      "condition": "long_swap",
+      "counterfactual_displayed": {},
+      "counterfactual_useful_swap": false,
+      "current_useful_swap": false,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 1,
+      "displayed": {},
+      "false_matched_background_cut": false,
+      "incumbent": {},
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [],
+      "source_pair": 1,
+      "source_sha256": "8840ca893b6c39b171291a7e19881872a37ca0ffb2289a735540d355dcedbd42",
+      "track_status": "ok",
+      "tracks": 0,
+      "true_swap": true,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "not_applicable",
+      "authored": [
+        67,
+        75
+      ],
+      "candidate": null,
+      "coarse_status": "not_applicable",
+      "condition": "light",
+      "counterfactual_displayed": {},
+      "counterfactual_useful_swap": false,
+      "current_useful_swap": false,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 1,
+      "displayed": {},
+      "false_matched_background_cut": false,
+      "incumbent": {},
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [],
+      "source_pair": 1,
+      "source_sha256": "2620582ec3714dd83ba1270bc8822195ec7abfd309930765ec5a38c70185281e",
+      "track_status": "ok",
+      "tracks": 0,
+      "true_swap": false,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        62,
+        73
+      ],
+      "candidate": null,
+      "coarse_status": "not_applicable",
+      "condition": "short_swap",
+      "counterfactual_displayed": {
+        "face_return": [
+          62,
+          74
+        ]
+      },
+      "counterfactual_useful_swap": true,
+      "current_useful_swap": true,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 1,
+      "displayed": {
+        "face_return": [
+          62,
+          74
+        ]
+      },
+      "false_matched_background_cut": false,
+      "incumbent": {
+        "short_range": [
+          62,
+          74
+        ]
+      },
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "localized"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "localized"
+      },
+      "shot_boundaries": [],
+      "source_pair": 1,
+      "source_sha256": "1d605b0c8a7c907b6a54f2ea47494efd59f4087454687574312ef6c365e8b0a0",
+      "track_status": "ok",
+      "tracks": 0,
+      "true_swap": true,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        54,
+        64
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "cross_cut",
+      "counterfactual_displayed": {},
+      "counterfactual_useful_swap": false,
+      "current_useful_swap": false,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 0,
+      "displayed": {},
+      "false_matched_background_cut": false,
+      "incumbent": {},
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [
+        54
+      ],
+      "source_pair": 2,
+      "source_sha256": "3c323390eb61c6b64dfdb5d383bf2eac660f9e1346e8f15337328aa5847cb504",
+      "track_status": "ok",
+      "tracks": 2,
+      "true_swap": false,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        50,
+        68
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "long_swap",
+      "counterfactual_displayed": {
+        "face_boundary": [
+          50,
+          69
+        ],
+        "face_sequence": [
+          52,
+          66
+        ]
+      },
+      "counterfactual_useful_swap": true,
+      "current_useful_swap": true,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 0,
+      "displayed": {
+        "face_boundary": [
+          50,
+          69
+        ],
+        "face_sequence": [
+          52,
+          66
+        ]
+      },
+      "false_matched_background_cut": false,
+      "incumbent": {
+        "boundary_refinement": [
+          50,
+          69
+        ],
+        "coarse": [
+          52,
+          66
+        ]
+      },
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [],
+      "source_pair": 2,
+      "source_sha256": "161125d556e2ac131e5c5faf4157eb59b4fd971fdf9f84acf51cc684bee9ba43",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": true,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": true
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        67,
+        75
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "camera_punch",
+      "counterfactual_displayed": {},
+      "counterfactual_useful_swap": false,
+      "current_useful_swap": false,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 0,
+      "displayed": {},
+      "false_matched_background_cut": false,
+      "incumbent": {},
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [],
+      "source_pair": 2,
+      "source_sha256": "12f29b3727a6469ff77a07868b3413727d022b20378fa3bf9af061b8d5c67612",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": false,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        54,
+        60
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "short_swap",
+      "counterfactual_displayed": {
+        "face_return": [
+          54,
+          60
+        ]
+      },
+      "counterfactual_useful_swap": true,
+      "current_useful_swap": true,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 0,
+      "displayed": {
+        "face_return": [
+          54,
+          60
+        ]
+      },
+      "false_matched_background_cut": false,
+      "incumbent": {
+        "short_range": [
+          54,
+          60
+        ]
+      },
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "localized"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "localized"
+      },
+      "shot_boundaries": [],
+      "source_pair": 2,
+      "source_sha256": "1ee3f80b0e8a4fb4db7c56225f5b8abfb5f7144b645b014665332d21cddd1756",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": true,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "ok",
+      "authored": null,
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "original",
+      "counterfactual_displayed": {},
+      "counterfactual_useful_swap": false,
+      "current_useful_swap": false,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 0,
+      "displayed": {},
+      "false_matched_background_cut": false,
+      "incumbent": {},
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [],
+      "source_pair": 2,
+      "source_sha256": "089df555e53e05b861528696f538bb71a8a1f1d09dcee74ef24f5a5d6b606211",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": false,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        54,
+        60
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "cross_cut",
+      "counterfactual_displayed": {},
+      "counterfactual_useful_swap": false,
+      "current_useful_swap": false,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 1,
+      "displayed": {},
+      "false_matched_background_cut": false,
+      "incumbent": {},
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [
+        54
+      ],
+      "source_pair": 2,
+      "source_sha256": "29be15b83287d97a1a45c5a073725591aa5f853602f1ea821781e93fb169312a",
+      "track_status": "ok",
+      "tracks": 3,
+      "true_swap": false,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        56,
+        78
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "long_swap",
+      "counterfactual_displayed": {
+        "face_sequence": [
+          59,
+          72
+        ]
+      },
+      "counterfactual_useful_swap": true,
+      "current_useful_swap": true,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 1,
+      "displayed": {
+        "face_sequence": [
+          59,
+          72
+        ]
+      },
+      "false_matched_background_cut": false,
+      "incumbent": {
+        "coarse": [
+          59,
+          72
+        ]
+      },
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [],
+      "source_pair": 2,
+      "source_sha256": "08e1a05b36223ac328be7ff012ffb073f4e78fd4729031c587421054972b961f",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": true,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": true
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        67,
+        75
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "light",
+      "counterfactual_displayed": {},
+      "counterfactual_useful_swap": false,
+      "current_useful_swap": false,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 1,
+      "displayed": {},
+      "false_matched_background_cut": false,
+      "incumbent": {},
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [],
+      "source_pair": 2,
+      "source_sha256": "63d2aa0282cbd369212f4c68cb08ca35d7c4f8d7fbdd849bf24e691ead0ae26a",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": false,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        62,
+        73
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "short_swap",
+      "counterfactual_displayed": {
+        "face_return": [
+          62,
+          74
+        ],
+        "face_sequence": [
+          66,
+          79
+        ]
+      },
+      "counterfactual_useful_swap": true,
+      "current_useful_swap": true,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 1,
+      "displayed": {
+        "face_return": [
+          62,
+          74
+        ],
+        "face_sequence": [
+          66,
+          79
+        ]
+      },
+      "false_matched_background_cut": false,
+      "incumbent": {
+        "coarse": [
+          66,
+          79
+        ],
+        "short_range": [
+          62,
+          74
+        ]
+      },
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "localized"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "localized"
+      },
+      "shot_boundaries": [],
+      "source_pair": 2,
+      "source_sha256": "79852f893c36af7f1a320885fe76d365efb1dec6a15e10c8370c49e0162e9146",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": true,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        65,
+        77
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "cross_cut",
+      "counterfactual_displayed": {},
+      "counterfactual_useful_swap": false,
+      "current_useful_swap": false,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 0,
+      "displayed": {},
+      "false_matched_background_cut": false,
+      "incumbent": {},
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [],
+      "source_pair": 3,
+      "source_sha256": "69b9527d185cbbc31c0999153e8e12ea31bd402ec30ae2814bd02ba76be5512b",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": false,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        50,
+        68
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "long_swap",
+      "counterfactual_displayed": {
+        "face_boundary": [
+          50,
+          69
+        ],
+        "face_sequence": [
+          52,
+          66
+        ]
+      },
+      "counterfactual_useful_swap": true,
+      "current_useful_swap": true,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 0,
+      "displayed": {
+        "face_boundary": [
+          50,
+          69
+        ],
+        "face_sequence": [
+          52,
+          66
+        ]
+      },
+      "false_matched_background_cut": false,
+      "incumbent": {
+        "boundary_refinement": [
+          50,
+          69
+        ],
+        "coarse": [
+          52,
+          66
+        ]
+      },
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [],
+      "source_pair": 3,
+      "source_sha256": "2d7aa49cdf4c9477fbda32ea86b3de6a25d4e47e564a5ecbc7a002687e0f1119",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": true,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": true
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        67,
+        75
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "camera_punch",
+      "counterfactual_displayed": {},
+      "counterfactual_useful_swap": false,
+      "current_useful_swap": false,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 0,
+      "displayed": {},
+      "false_matched_background_cut": false,
+      "incumbent": {},
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [],
+      "source_pair": 3,
+      "source_sha256": "f417493c9bfbff51ba78a6b7df110a2c73135fcef4fda06153794ce9b8b1df77",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": false,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        54,
+        60
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "short_swap",
+      "counterfactual_displayed": {
+        "face_return": [
+          54,
+          60
+        ]
+      },
+      "counterfactual_useful_swap": true,
+      "current_useful_swap": true,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 0,
+      "displayed": {
+        "face_return": [
+          54,
+          60
+        ]
+      },
+      "false_matched_background_cut": false,
+      "incumbent": {
+        "short_range": [
+          54,
+          60
+        ]
+      },
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "localized"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "localized"
+      },
+      "shot_boundaries": [],
+      "source_pair": 3,
+      "source_sha256": "f5728197e5f0ffc11f9b425bc20d02774086aeb4ddc9716e3b2f4c9f33ccf6e7",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": true,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "ok",
+      "authored": null,
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "original",
+      "counterfactual_displayed": {},
+      "counterfactual_useful_swap": false,
+      "current_useful_swap": false,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 0,
+      "displayed": {},
+      "false_matched_background_cut": false,
+      "incumbent": {},
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [],
+      "source_pair": 3,
+      "source_sha256": "1fc84245a6f62e32522718d8b4be7e368655a77cd6cd794f57f6f022fdcddbb1",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": false,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        67,
+        75
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "cross_cut",
+      "counterfactual_displayed": {},
+      "counterfactual_useful_swap": false,
+      "current_useful_swap": false,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 1,
+      "displayed": {},
+      "false_matched_background_cut": false,
+      "incumbent": {},
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [],
+      "source_pair": 3,
+      "source_sha256": "aaacad4a7209f8dca006853148867925e7e1182099b306448b4075e8d688d1d6",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": false,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        56,
+        78
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "long_swap",
+      "counterfactual_displayed": {
+        "face_sequence": [
+          59,
+          72
+        ]
+      },
+      "counterfactual_useful_swap": true,
+      "current_useful_swap": true,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 1,
+      "displayed": {
+        "face_sequence": [
+          59,
+          72
+        ]
+      },
+      "false_matched_background_cut": false,
+      "incumbent": {
+        "coarse": [
+          59,
+          72
+        ]
+      },
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [],
+      "source_pair": 3,
+      "source_sha256": "3d9c777c9b5f7ee9df98dbff8099ae403d435f62e130317bfee9e59f5075b8da",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": true,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": true
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        67,
+        75
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "light",
+      "counterfactual_displayed": {},
+      "counterfactual_useful_swap": false,
+      "current_useful_swap": false,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 1,
+      "displayed": {},
+      "false_matched_background_cut": false,
+      "incumbent": {},
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [],
+      "source_pair": 3,
+      "source_sha256": "81e885b8232ba5789bf1b21b83e87f6c7da76156500b10258cbf55442e978369",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": false,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        62,
+        73
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "short_swap",
+      "counterfactual_displayed": {
+        "face_sequence": [
+          59,
+          72
+        ]
+      },
+      "counterfactual_useful_swap": true,
+      "current_useful_swap": true,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 1,
+      "displayed": {
+        "face_sequence": [
+          59,
+          72
+        ]
+      },
+      "false_matched_background_cut": false,
+      "incumbent": {
+        "coarse": [
+          59,
+          72
+        ]
+      },
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [],
+      "source_pair": 3,
+      "source_sha256": "395175c297d5b15b0768bfbb7169b574bc470582c50510a6834c6caf42d46d48",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": true,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": true
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        54,
+        60
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "cross_cut",
+      "counterfactual_displayed": {},
+      "counterfactual_useful_swap": false,
+      "current_useful_swap": false,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 0,
+      "displayed": {},
+      "false_matched_background_cut": false,
+      "incumbent": {},
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "measured_face_frames": 39,
+        "reason": "insufficient_same_shot_context",
+        "scheduled_frames": 39,
+        "status": "unassessed"
+      },
+      "shot_boundaries": [
+        54
+      ],
+      "source_pair": 4,
+      "source_sha256": "8bd3bcd5c7005f9052b28d31009b2d065cd221cb08d2b13a4d514a60ea113c95",
+      "track_status": "ok",
+      "tracks": 2,
+      "true_swap": false,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        50,
+        68
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "long_swap",
+      "counterfactual_displayed": {
+        "face_boundary": [
+          50,
+          69
+        ],
+        "face_sequence": [
+          52,
+          66
+        ]
+      },
+      "counterfactual_useful_swap": true,
+      "current_useful_swap": true,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 0,
+      "displayed": {
+        "face_boundary": [
+          50,
+          69
+        ],
+        "face_sequence": [
+          52,
+          66
+        ]
+      },
+      "false_matched_background_cut": false,
+      "incumbent": {
+        "boundary_refinement": [
+          50,
+          69
+        ],
+        "coarse": [
+          52,
+          66
+        ]
+      },
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "measured_face_frames": 39,
+        "reason": "insufficient_same_shot_context",
+        "scheduled_frames": 39,
+        "status": "unassessed"
+      },
+      "shot_boundaries": [],
+      "source_pair": 4,
+      "source_sha256": "f0512b260c1e5129a54ac0cd90274fd76738cafa85124698dc5675031ed1aefe",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": true,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": true
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        67,
+        75
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "camera_punch",
+      "counterfactual_displayed": {},
+      "counterfactual_useful_swap": false,
+      "current_useful_swap": false,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 0,
+      "displayed": {},
+      "false_matched_background_cut": false,
+      "incumbent": {},
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "measured_face_frames": 39,
+        "reason": "insufficient_same_shot_context",
+        "scheduled_frames": 39,
+        "status": "unassessed"
+      },
+      "shot_boundaries": [],
+      "source_pair": 4,
+      "source_sha256": "01fe53b56091a05b3607b89ce6f42e50ae2dc35e2abe71d3f73a22478047fe48",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": false,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "ok",
+      "authored": null,
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "original",
+      "counterfactual_displayed": {},
+      "counterfactual_useful_swap": false,
+      "current_useful_swap": false,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 0,
+      "displayed": {},
+      "false_matched_background_cut": false,
+      "incumbent": {},
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "measured_face_frames": 39,
+        "reason": "insufficient_same_shot_context",
+        "scheduled_frames": 39,
+        "status": "unassessed"
+      },
+      "shot_boundaries": [],
+      "source_pair": 4,
+      "source_sha256": "6429f04c6ebeaebb2452b25523ac03231cf134eb3fa3d29301ba1d10e21a88a9",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": false,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        54,
+        64
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "cross_cut",
+      "counterfactual_displayed": {},
+      "counterfactual_useful_swap": false,
+      "current_useful_swap": false,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 1,
+      "displayed": {},
+      "false_matched_background_cut": false,
+      "incumbent": {},
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [
+        54
+      ],
+      "source_pair": 4,
+      "source_sha256": "3f4f1ce785e0df286a5124d5f36c0dc744f611df42573d5bc5657d1164c61320",
+      "track_status": "ok",
+      "tracks": 2,
+      "true_swap": false,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        56,
+        78
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "long_swap",
+      "counterfactual_displayed": {
+        "face_sequence": [
+          59,
+          72
+        ]
+      },
+      "counterfactual_useful_swap": true,
+      "current_useful_swap": true,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 1,
+      "displayed": {
+        "face_sequence": [
+          59,
+          72
+        ]
+      },
+      "false_matched_background_cut": false,
+      "incumbent": {
+        "coarse": [
+          59,
+          72
+        ]
+      },
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [],
+      "source_pair": 4,
+      "source_sha256": "eca21a6624ab636d2668f036f4b13cfb1751acf401c49813e6928db6ddf206b5",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": true,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": true
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        67,
+        75
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "light",
+      "counterfactual_displayed": {},
+      "counterfactual_useful_swap": false,
+      "current_useful_swap": false,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 1,
+      "displayed": {},
+      "false_matched_background_cut": false,
+      "incumbent": {},
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [
+        67
+      ],
+      "source_pair": 4,
+      "source_sha256": "baa87b73df884a79ea24cc304c88621a1334ef729ce0e618eea326757ad92c68",
+      "track_status": "ok",
+      "tracks": 2,
+      "true_swap": false,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        67,
+        75
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "cross_cut",
+      "counterfactual_displayed": {},
+      "counterfactual_useful_swap": false,
+      "current_useful_swap": false,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 0,
+      "displayed": {},
+      "false_matched_background_cut": false,
+      "incumbent": {},
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [
+        67
+      ],
+      "source_pair": 5,
+      "source_sha256": "50e5d5fd8cf517ebed587c034cc6432ca02cdf63b533bacad6d8a2ee1a465134",
+      "track_status": "ok",
+      "tracks": 3,
+      "true_swap": false,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        50,
+        68
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "long_swap",
+      "counterfactual_displayed": {
+        "face_boundary": [
+          50,
+          69
+        ],
+        "face_sequence": [
+          52,
+          66
+        ]
+      },
+      "counterfactual_useful_swap": true,
+      "current_useful_swap": true,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 0,
+      "displayed": {
+        "face_boundary": [
+          50,
+          69
+        ],
+        "face_sequence": [
+          52,
+          66
+        ]
+      },
+      "false_matched_background_cut": false,
+      "incumbent": {
+        "boundary_refinement": [
+          50,
+          69
+        ],
+        "coarse": [
+          52,
+          66
+        ]
+      },
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [],
+      "source_pair": 5,
+      "source_sha256": "99d495165b78cc4fc3faad97cc5768fc13aecbc6fd353c3e027bc76a3e3f6e5a",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": true,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": true
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        67,
+        75
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "camera_punch",
+      "counterfactual_displayed": {},
+      "counterfactual_useful_swap": false,
+      "current_useful_swap": false,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 0,
+      "displayed": {},
+      "false_matched_background_cut": false,
+      "incumbent": {},
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [],
+      "source_pair": 5,
+      "source_sha256": "67a011a7c226af098215f5a479bf7cdc325a55d0e58a23422419074b4dacd1be",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": false,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "ok",
+      "authored": null,
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "original",
+      "counterfactual_displayed": {},
+      "counterfactual_useful_swap": false,
+      "current_useful_swap": false,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 0,
+      "displayed": {},
+      "false_matched_background_cut": false,
+      "incumbent": {},
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [],
+      "source_pair": 5,
+      "source_sha256": "f9ba1fd7418033e88ba507c19e72b18fbb13b50fed88c3b58329eff0d95062e5",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": false,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        65,
+        77
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "cross_cut",
+      "counterfactual_displayed": {},
+      "counterfactual_useful_swap": false,
+      "current_useful_swap": false,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 1,
+      "displayed": {},
+      "false_matched_background_cut": false,
+      "incumbent": {},
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [
+        65
+      ],
+      "source_pair": 5,
+      "source_sha256": "7475e287bbd9e2397033db8cb1c2eb66994dd87d92f9ebeb98229cacd5ced677",
+      "track_status": "ok",
+      "tracks": 3,
+      "true_swap": false,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        56,
+        78
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "long_swap",
+      "counterfactual_displayed": {
+        "face_sequence": [
+          59,
+          72
+        ]
+      },
+      "counterfactual_useful_swap": true,
+      "current_useful_swap": true,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 1,
+      "displayed": {
+        "face_sequence": [
+          59,
+          72
+        ]
+      },
+      "false_matched_background_cut": false,
+      "incumbent": {
+        "coarse": [
+          59,
+          72
+        ]
+      },
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [],
+      "source_pair": 5,
+      "source_sha256": "6f2f979b22084c9bb88e3376cf1e758f82329c5b95975bd6933da9e06191a9df",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": true,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": true
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        67,
+        75
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "light",
+      "counterfactual_displayed": {},
+      "counterfactual_useful_swap": false,
+      "current_useful_swap": false,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 1,
+      "displayed": {},
+      "false_matched_background_cut": false,
+      "incumbent": {},
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [],
+      "source_pair": 5,
+      "source_sha256": "4a2db84b35b3c6de5260fcc3f779a10ec05c63cfb3f39dc2abfac13be5b75c21",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": false,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        54,
+        64
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "cross_cut",
+      "counterfactual_displayed": {},
+      "counterfactual_useful_swap": false,
+      "current_useful_swap": false,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 0,
+      "displayed": {},
+      "false_matched_background_cut": false,
+      "incumbent": {},
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [],
+      "source_pair": 6,
+      "source_sha256": "4067012d06578c306ee03ccfdf8b41a529568c44e2f5dace96853605c92c29b5",
+      "track_status": "ok",
+      "tracks": 3,
+      "true_swap": false,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        50,
+        68
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "long_swap",
+      "counterfactual_displayed": {
+        "face_boundary": [
+          50,
+          69
+        ],
+        "face_sequence": [
+          52,
+          66
+        ]
+      },
+      "counterfactual_useful_swap": true,
+      "current_useful_swap": true,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 0,
+      "displayed": {
+        "face_boundary": [
+          50,
+          69
+        ],
+        "face_sequence": [
+          52,
+          66
+        ]
+      },
+      "false_matched_background_cut": false,
+      "incumbent": {
+        "boundary_refinement": [
+          50,
+          69
+        ],
+        "coarse": [
+          52,
+          66
+        ]
+      },
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [],
+      "source_pair": 6,
+      "source_sha256": "7d1ca1ee270e0f51763422d0874f4c78ecba4ead43abded444f249e8921e8424",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": true,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": true
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        67,
+        75
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "camera_punch",
+      "counterfactual_displayed": {},
+      "counterfactual_useful_swap": false,
+      "current_useful_swap": false,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 0,
+      "displayed": {},
+      "false_matched_background_cut": false,
+      "incumbent": {},
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [],
+      "source_pair": 6,
+      "source_sha256": "ab2c70071a1fe50d17e018425ebb1433cd57e3c0718e3c743621780ff99ac49d",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": false,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "ok",
+      "authored": null,
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "original",
+      "counterfactual_displayed": {},
+      "counterfactual_useful_swap": false,
+      "current_useful_swap": false,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 0,
+      "displayed": {},
+      "false_matched_background_cut": false,
+      "incumbent": {},
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [],
+      "source_pair": 6,
+      "source_sha256": "b1a4c5937b007b728c8b3e8412f8df0024d9188296a33b618b1d1d5009d0c748",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": false,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        54,
+        60
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "cross_cut",
+      "counterfactual_displayed": {},
+      "counterfactual_useful_swap": false,
+      "current_useful_swap": false,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 1,
+      "displayed": {},
+      "false_matched_background_cut": false,
+      "incumbent": {},
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [],
+      "source_pair": 6,
+      "source_sha256": "e79aa4558edd5c43840f63ddc75e8e03694c29fca594f4f7f6fb2606e802e747",
+      "track_status": "ok",
+      "tracks": 2,
+      "true_swap": false,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        56,
+        78
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "long_swap",
+      "counterfactual_displayed": {
+        "face_sequence": [
+          59,
+          72
+        ]
+      },
+      "counterfactual_useful_swap": true,
+      "current_useful_swap": true,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 1,
+      "displayed": {
+        "face_sequence": [
+          59,
+          72
+        ]
+      },
+      "false_matched_background_cut": false,
+      "incumbent": {
+        "coarse": [
+          59,
+          72
+        ]
+      },
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [],
+      "source_pair": 6,
+      "source_sha256": "044491adc027ac5ca810bf654548faf0586dd0dc2923881f849801eb95a219fb",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": true,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": true
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        67,
+        75
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "light",
+      "counterfactual_displayed": {},
+      "counterfactual_useful_swap": false,
+      "current_useful_swap": false,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 1,
+      "displayed": {},
+      "false_matched_background_cut": false,
+      "incumbent": {},
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [],
+      "source_pair": 6,
+      "source_sha256": "1cb7498fc2978c1966e149b2d3a4f8edc11eafbff48017297d88d0ad89a9ffe0",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": false,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        65,
+        77
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "cross_cut",
+      "counterfactual_displayed": {},
+      "counterfactual_useful_swap": false,
+      "current_useful_swap": false,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 0,
+      "displayed": {},
+      "false_matched_background_cut": false,
+      "incumbent": {},
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [
+        65
+      ],
+      "source_pair": 7,
+      "source_sha256": "042ed3bafdcd0c014bd2dcf63d040090995be4e881bad07c8d6aa81e8ea3d676",
+      "track_status": "ok",
+      "tracks": 3,
+      "true_swap": false,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        50,
+        68
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "long_swap",
+      "counterfactual_displayed": {
+        "face_boundary": [
+          50,
+          69
+        ],
+        "face_sequence": [
+          52,
+          66
+        ]
+      },
+      "counterfactual_useful_swap": true,
+      "current_useful_swap": true,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 0,
+      "displayed": {
+        "face_boundary": [
+          50,
+          69
+        ],
+        "face_sequence": [
+          52,
+          66
+        ]
+      },
+      "false_matched_background_cut": false,
+      "incumbent": {
+        "boundary_refinement": [
+          50,
+          69
+        ],
+        "coarse": [
+          52,
+          66
+        ]
+      },
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [],
+      "source_pair": 7,
+      "source_sha256": "7eac6a3d1f60d7c5845fc32abf135459b1e1524c9bb5e794fc5695826c71bc27",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": true,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": true
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        67,
+        75
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "camera_punch",
+      "counterfactual_displayed": {},
+      "counterfactual_useful_swap": false,
+      "current_useful_swap": false,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 0,
+      "displayed": {},
+      "false_matched_background_cut": false,
+      "incumbent": {},
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [],
+      "source_pair": 7,
+      "source_sha256": "7bd406a16c1cbf96c8fb488c2fe6af59ec827dabae2b43a42a42cfa7c64b7024",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": false,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "ok",
+      "authored": null,
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "original",
+      "counterfactual_displayed": {},
+      "counterfactual_useful_swap": false,
+      "current_useful_swap": false,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 0,
+      "displayed": {},
+      "false_matched_background_cut": false,
+      "incumbent": {},
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [],
+      "source_pair": 7,
+      "source_sha256": "c1c70835cb0ccc700f187d5eb05f869be695d22b6bf581d14805ef7b35573c38",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": false,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        67,
+        75
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "cross_cut",
+      "counterfactual_displayed": {},
+      "counterfactual_useful_swap": false,
+      "current_useful_swap": false,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 1,
+      "displayed": {},
+      "false_matched_background_cut": false,
+      "incumbent": {},
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [
+        67
+      ],
+      "source_pair": 7,
+      "source_sha256": "1753fbbcbd665de78b6ea853f88db7882528e2ccdec34282a1e174ddcec88511",
+      "track_status": "ok",
+      "tracks": 3,
+      "true_swap": false,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        56,
+        78
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "long_swap",
+      "counterfactual_displayed": {
+        "face_sequence": [
+          59,
+          72
+        ]
+      },
+      "counterfactual_useful_swap": true,
+      "current_useful_swap": true,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 1,
+      "displayed": {
+        "face_sequence": [
+          59,
+          72
+        ]
+      },
+      "false_matched_background_cut": false,
+      "incumbent": {
+        "coarse": [
+          59,
+          72
+        ]
+      },
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [],
+      "source_pair": 7,
+      "source_sha256": "16169358512fb5c859217846b459472441d912ca2f51f3aa447b24d582d7e4ea",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": true,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": true
+    },
+    {
+      "appearance_status": "ok",
+      "authored": [
+        67,
+        75
+      ],
+      "candidate": null,
+      "coarse_status": "ok",
+      "condition": "light",
+      "counterfactual_displayed": {},
+      "counterfactual_useful_swap": false,
+      "current_useful_swap": false,
+      "cut_both_edges_exact": false,
+      "cut_both_edges_within_one_picture": false,
+      "direction": 1,
+      "displayed": {},
+      "false_matched_background_cut": false,
+      "incumbent": {},
+      "lost_useful_swap_range": false,
+      "short_coverage": {
+        "dense_fallback": {
+          "measured_face_frames": 60,
+          "reason": null,
+          "scheduled_frames": 60,
+          "status": "no_distinct_range"
+        },
+        "measured_face_frames": 39,
+        "reason": null,
+        "scheduled_frames": 39,
+        "status": "no_distinct_range"
+      },
+      "shot_boundaries": [],
+      "source_pair": 7,
+      "source_sha256": "81f5c4630fa00fdde6325a18e182bc3a1117cbd1d22d544af67eb0f68add1ee6",
+      "track_status": "ok",
+      "tracks": 1,
+      "true_swap": false,
+      "useful_cut_removal": false,
+      "useful_swap_coarse": false
+    }
+  ],
+  "independent_authoring": {
+    "counts": {
+      "authenticated_source_pictures": 2308,
+      "identical_mp4s": 64,
+      "verified_changed_intervals": 56
+    },
+    "freeze_sha256": "38b83efac55c316dadeef9b814561e3122dbab85511bb27a5a5a91353b5724ca",
+    "media_sha256": "7346d91a27383f41771305f6d9cb04e374697368bd1d3ce77196b548b502d155",
+    "reviewer_sha256": "7e837a73c39673afd0b14524e6f598032b6973096d5e8077581208a974ecd46f",
+    "status": "verified"
+  },
+  "independent_authoring_sha256": "82b67a61ffff1be316d5612b726b4d92423c7d970c5f46f5edab7935b73a9334",
+  "schema": "chipmunk.video-native-background-results/1"
+}

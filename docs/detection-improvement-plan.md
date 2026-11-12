@@ -97,6 +97,13 @@ integration remains unfinished.
 
 ## Progress on 12 November
 
+- The [second speech-enhancement comparison](audio-nemotron-noise-transfer-2026-11-12.md)
+  added flags on seven synthetic source groups across five generators and
+  one genuine group. With the same decision points and separate recordings,
+  it added flags on nine synthetic and one genuine RADAR files. Both trials
+  preserved existing clean flags. The earlier restaurant comparison still
+  has seven inherited genuine flags. The newer enhancer is eligible for an
+  isolated evidence integration and has no customer confidence weight.
 - The [720p30 face-change extension](video-face-two-returns-hd-2026-11-12.md)
   found five additional swap ranges, including three after tandem
   recompression, on eight separate retained source groups. It added no

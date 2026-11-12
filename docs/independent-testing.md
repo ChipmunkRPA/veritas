@@ -197,6 +197,10 @@ The [enhanced-speech comparison](audio-noise-views-transfer-2026-11-12.md)
 keeps the development and held noise recordings separate. Its public
 replay recounts the fixed decisions and shows the best held gain allowed
 by each added genuine false-alarm budget.
+The [two-enhancer replication](audio-nemotron-noise-transfer-2026-11-12.md)
+provides a model-free replay for four held sound scenes and a separate
+confirmation at identical decision points. It distinguishes additional
+flags from false alarms inherited from the original detector.
 The [speech-context comparison](audio-remote-neighbor-transfer-2026-11-12.md)
 compares recurring acoustic contexts on the original mixtures and verifies
 fresh and previously tested source groups separately.

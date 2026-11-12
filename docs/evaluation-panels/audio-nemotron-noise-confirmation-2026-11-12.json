@@ -1,0 +1,3222 @@
+{
+  "freeze": {
+    "backgrounds": {
+      "cori-street.ogg": [
+        "50e5eb59b296580340898f16e737f826a9fd7fef6fc45b07bb3e0318a9e58495",
+        [
+          8,
+          36,
+          94,
+          146
+        ]
+      ],
+      "market.ogg": [
+        "7e677dad7ce4cbebf7b4e9d3555c0af22fe51ceb2514602b5f75a50e6e12ec85",
+        [
+          4,
+          10,
+          16,
+          22
+        ]
+      ]
+    },
+    "confirmation_rule": {
+      "maximum_added_clean_or_isolated": 0,
+      "maximum_added_noisy_genuine_sources": 2,
+      "minimum_added_noisy_synthetic_sources": 4,
+      "minimum_scenes_with_gains": 2
+    },
+    "confirmation_sha256": "590055e7185bd06e585f034a37dca22a0f1d7ad2cbfe1c9dcec52d5720a7a573",
+    "decision_points": {
+      "new_enhancer": 7.422796281843017,
+      "old_enhancer": 7.3658191593180415
+    },
+    "decision_rule": {
+      "max_clean_or_isolated_flags": 0,
+      "max_noisy_genuine_groups": 2,
+      "min_families": 3,
+      "min_noisy_synthetic_groups": 4,
+      "min_scenes": 2
+    },
+    "earlier_radar_receipt_sha256": "8a95b58b5e31b183c4e397eaf66812de684c0b4b39f4b008aba0848a4f64d48e",
+    "excluded_panel_sha256": "bf253f0dc47c0e05ca79f7f89186fd71dd9c5300798fa0331c95cc33b935afe3",
+    "model": {
+      "files": {
+        "LICENSE": "a3d882953f026d3e2fdd57842d9c522c8320d4c0388af2278bcf4d438d255a2c",
+        "config.json": "e69986483774f01893d2727503addc49ef201d19e6e1a266b8d4e971e28c478d",
+        "model.safetensors": "06badaf4029b297f97f7fe48d62990b48d5482608210df577354e0d4e0ed70e1"
+      },
+      "revision": "31f82f2efad1095034492f236e8dac9239ba713b"
+    },
+    "panel_authenticity_forwards_before_freeze": 0,
+    "parent_sha256": "004eb428ec6bfbe86ab50e1173ddc4db857bafb419d832038a55bf8583eddadb",
+    "previous_selection_freeze_sha256": "775f23725f49d1b849af058e571742172ab6b6a1f067a15e2e9df4aa2d638711",
+    "prior_enhancer_license_sha256": "c467165e5860b4a7494ef4a6e2788e4115d95b5b8989bb5f86287089adddf794",
+    "prior_enhancer_sha256": "b4718df6228e7bdf1a8a435cf98f838636eb2fd331acabf86ba87c5192ebcb87",
+    "publisher_archive_sha256": "a6d76436a371643920d1fc00fcc640d98964bd16e5075bab24d46694f77cc3d7",
+    "radar_archive_sha256": "d50b195fdccb37443c7a5e57169941c1646333afda57f97e72bca18c019c837c",
+    "reviewer_sha256": "565481629910d99e2f570630cc55110413121b5f2b19dd25984ae077024d98c7",
+    "roster_sha256": "b8ae51e23ee1e9d94c51098dc129a737e1ad198a4cf99a4174d71c74f37b4727",
+    "runner_sha256": "85f346a906637c470f9bac48b9b020d9d444fc0208c1a9b3af554bf0af6f1ad6",
+    "runtime": {
+      "mlx": "0.32.4",
+      "mlx-audio": "0.6.5",
+      "mlx-metal": "0.32.4",
+      "onnxruntime": "1.31.1"
+    },
+    "schema": "chipmunk.nemotron-noise-confirmation/1",
+    "voice_assets": {
+      "class_labels_indices.csv": "cdd1049833c4b86127c2773ac0d14a2754b6a6d0d1798002ed5c66e699708429",
+      "panns-Cnn10.pth": "5240bdc47444e331bbeb54fd741d2b3f933a4526e84b0c17bf3593df94b13962",
+      "pellav2_detector.pt": "d21aedfb52e2f87706c2753715a29665482b0f4a034800c31579df5d458559ac",
+      "silero_vad.jit": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720",
+      "w2v-bert-config.json": "f5572bd5998b68182e9c328a43127ed21fed687f6910497136b91a4e3b0e3675"
+    }
+  },
+  "freeze_sha256": "ae8d3d21d4a122fc035d331b8e419b165363e6375c314ba1e12c7c7e5b95922b",
+  "held": [
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 6.9979656991508135,
+          "pcm_sha256": "4076a4d6a5020282f0146b4591dbaa0e945858631e82bcf73d0092db56fd6560",
+          "suppression_db": 5.287319819352771
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -6.771122958105209,
+          "pcm_sha256": "ec6e3f5f8dae608bdbb544dc132e1bc9e8189bdc5cd37775f16f2a28f9222edc",
+          "suppression_db": 2.9617218614051497
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL044820",
+      "id": 0,
+      "incumbent": "unassessed",
+      "label": "bonafide",
+      "origin": {
+        "background_start": null,
+        "center_start": 20285,
+        "id": "RADAR2026-EVAL044820",
+        "label": "bonafide",
+        "samples": 88571,
+        "sha256": "bd11bf4df3a40ae8f41ac7546bea7e00a0c6bb98134610d49c36503338a7eafb",
+        "source_pcm_sha256": "8420e7fb04e86d8787ab8c4fd136cbc6881d5efb410a500639216529aba258ea"
+      },
+      "pcm_sha256": "5a19108b79f96a36839ecc2bc855986b94f7bc1cdb4443a23808cadfbb126a51",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.061916776440989,
+          "pcm_sha256": "66fba3640c9342f4b3ecb831fe0603cb20a0da7c3bfca5ae5f2b6454bf7c5acf",
+          "suppression_db": 12.148775405423988
+        },
+        "old_enhancer": {
+          "admitted": false,
+          "logit": -4.631694790729242,
+          "pcm_sha256": "145b9e8beaeec9c13879ee17a5bc820aa30e42e6d353b634be3a253bd1e43f6d",
+          "suppression_db": 14.37323884131632
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL044820",
+      "id": 1,
+      "incumbent": "unassessed",
+      "label": "bonafide",
+      "origin": {
+        "background_start": 64000,
+        "center_start": 20285,
+        "id": "RADAR2026-EVAL044820",
+        "label": "bonafide",
+        "samples": 88571,
+        "sha256": "bd11bf4df3a40ae8f41ac7546bea7e00a0c6bb98134610d49c36503338a7eafb",
+        "source_pcm_sha256": "8420e7fb04e86d8787ab8c4fd136cbc6881d5efb410a500639216529aba258ea"
+      },
+      "pcm_sha256": "46c96c042823febe082988bdc5babf2b650f9fc69871d76a6f45fba2282de71c",
+      "role": "held",
+      "scene": "market.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 6.612296876345029,
+          "pcm_sha256": "bb9766e8488e7f222b2e7c5f8635cf753fd1ac213a19c809faa667ce188f76c3",
+          "suppression_db": 11.296560408550135
+        },
+        "old_enhancer": {
+          "admitted": false,
+          "logit": -6.109266324287449,
+          "pcm_sha256": "480f2c35b838a15fe35c90a59faf905ba869a732e17f74997ec8cc2e96e15850",
+          "suppression_db": 9.666891150349953
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL044820",
+      "id": 2,
+      "incumbent": "unassessed",
+      "label": "bonafide",
+      "origin": {
+        "background_start": 128000,
+        "center_start": 20285,
+        "id": "RADAR2026-EVAL044820",
+        "label": "bonafide",
+        "samples": 88571,
+        "sha256": "bd11bf4df3a40ae8f41ac7546bea7e00a0c6bb98134610d49c36503338a7eafb",
+        "source_pcm_sha256": "8420e7fb04e86d8787ab8c4fd136cbc6881d5efb410a500639216529aba258ea"
+      },
+      "pcm_sha256": "3dcea4698fa65ffcee64f2fb8275dfa80d17c212f9eb26802e362087467f206c",
+      "role": "held",
+      "scene": "cori-street.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": -6.487775765132427,
+          "pcm_sha256": "7ecb586e0e7d52b719955ab8e1a83646ea379a256f059a415fd5ab8b8530fa98",
+          "suppression_db": 2.756994810101625
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -4.990962051779378,
+          "pcm_sha256": "33a207648798e0e6c119b5d59f5ac2d132be57f1c17bd460d06600de7c6c1ffb",
+          "suppression_db": 0.30900396612100306
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL072441",
+      "id": 3,
+      "incumbent": "original",
+      "label": "bonafide",
+      "origin": {
+        "background_start": null,
+        "center_start": 49434,
+        "id": "RADAR2026-EVAL072441",
+        "label": "bonafide",
+        "samples": 146869,
+        "sha256": "9cb3e4c26dbeff08ec5ac4c3cdc0c20b28c84cd4a6c50654b97980a658515a7f",
+        "source_pcm_sha256": "ad805578f2718b9219ae97b5b2fda9cc055a74763942d90b94f78e945b47c9ef"
+      },
+      "pcm_sha256": "6d9c93b17f298cb561e177fe39280f901b4a0254df169da9e68948e1cbe85dd6",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.070170420638,
+          "pcm_sha256": "4102ee21ffc3eebbbcdd0e0f58651fe4fba82cb366e6093df4a7f2b9f1e540d4",
+          "suppression_db": 7.1522718038891275
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 1.410530712978006,
+          "pcm_sha256": "e22dee698f911547288d61abc6c5e2bd56bd302be3446edeb7b695462458aeee",
+          "suppression_db": 13.658207461817808
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL072441",
+      "id": 4,
+      "incumbent": "inconclusive",
+      "label": "bonafide",
+      "origin": {
+        "background_start": 160000,
+        "center_start": 49434,
+        "id": "RADAR2026-EVAL072441",
+        "label": "bonafide",
+        "samples": 146869,
+        "sha256": "9cb3e4c26dbeff08ec5ac4c3cdc0c20b28c84cd4a6c50654b97980a658515a7f",
+        "source_pcm_sha256": "ad805578f2718b9219ae97b5b2fda9cc055a74763942d90b94f78e945b47c9ef"
+      },
+      "pcm_sha256": "2bb9749f1de5b1d2a2d1025ec108cf235765a9b191ddddb46421d013020b33de",
+      "role": "held",
+      "scene": "market.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 5.970630708473085,
+          "pcm_sha256": "113faef208fed9eab4aa7aaaa7d3acc22485c49f3e07c5f43f4584db4844f712",
+          "suppression_db": 6.885945229010958
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -4.864833385596648,
+          "pcm_sha256": "0b26b7bc3757d67da5d6908f00e98c9de378e08091845ae8c3d72fe7a9c3356a",
+          "suppression_db": 7.619095531315667
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL072441",
+      "id": 5,
+      "incumbent": "inconclusive",
+      "label": "bonafide",
+      "origin": {
+        "background_start": 576000,
+        "center_start": 49434,
+        "id": "RADAR2026-EVAL072441",
+        "label": "bonafide",
+        "samples": 146869,
+        "sha256": "9cb3e4c26dbeff08ec5ac4c3cdc0c20b28c84cd4a6c50654b97980a658515a7f",
+        "source_pcm_sha256": "ad805578f2718b9219ae97b5b2fda9cc055a74763942d90b94f78e945b47c9ef"
+      },
+      "pcm_sha256": "7e4ed68c6e62e77054131e39064c63b14ac9f6b99826515ae39e38a9145f57de",
+      "role": "held",
+      "scene": "cori-street.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": -7.088013654384584,
+          "pcm_sha256": "7885606969e3c20bc94dccb12913c992483219b9286db1b3569cf3c05d4a8008",
+          "suppression_db": 1.5390690145693597
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -6.931840471217247,
+          "pcm_sha256": "6c31e42a71ced059901b5746ab1fd43fb5b2976ae2edbc9563b5751b25935136",
+          "suppression_db": 0.6694752850061727
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL077356",
+      "id": 6,
+      "incumbent": "original",
+      "label": "bonafide",
+      "origin": {
+        "background_start": null,
+        "center_start": 17352,
+        "id": "RADAR2026-EVAL077356",
+        "label": "bonafide",
+        "samples": 82704,
+        "sha256": "2e6678bfcb8ebecace7d4ea73f13bfda45299cfc929dba75fc0228ca6ac2f283",
+        "source_pcm_sha256": "d69d1da0a2c92676e8fcc9fe573067a90a4d3fb494704326e71871a577ae78e8"
+      },
+      "pcm_sha256": "9018fe6c2c0d4d749303c9ee45c5a15660b361adebadcb4099b92ef39c32498a",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.410684482477565,
+          "pcm_sha256": "11f1aa61e743c1f9e3ef7631d3fc327a5300543b4c4b29de247288cd40d9d10f",
+          "suppression_db": 9.74581824487136
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -6.2800001529038525,
+          "pcm_sha256": "f4348a59a59ddca84cf17149cb87e38ac46ed38c1e86b04f7ee53a65f921c16e",
+          "suppression_db": 10.85886409368285
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL077356",
+      "id": 7,
+      "incumbent": "inconclusive",
+      "label": "bonafide",
+      "origin": {
+        "background_start": 256000,
+        "center_start": 17352,
+        "id": "RADAR2026-EVAL077356",
+        "label": "bonafide",
+        "samples": 82704,
+        "sha256": "2e6678bfcb8ebecace7d4ea73f13bfda45299cfc929dba75fc0228ca6ac2f283",
+        "source_pcm_sha256": "d69d1da0a2c92676e8fcc9fe573067a90a4d3fb494704326e71871a577ae78e8"
+      },
+      "pcm_sha256": "124b1f306faa042fc00e1f57467830de8ec000d8d2ba577b212e3050073c95f9",
+      "role": "held",
+      "scene": "market.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 6.763827146305662,
+          "pcm_sha256": "7c0619149049d39b7edd24bf51f26fadb0209bb13a529abc768a8c01c10683f9",
+          "suppression_db": 8.635696181620538
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -5.195212313065077,
+          "pcm_sha256": "edca283c8385dba280fe7f80dafb64fa7fa7dd6990fa1bbed8f9d81647ee11d9",
+          "suppression_db": 8.500980820021205
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL077356",
+      "id": 8,
+      "incumbent": "inconclusive",
+      "label": "bonafide",
+      "origin": {
+        "background_start": 1504000,
+        "center_start": 17352,
+        "id": "RADAR2026-EVAL077356",
+        "label": "bonafide",
+        "samples": 82704,
+        "sha256": "2e6678bfcb8ebecace7d4ea73f13bfda45299cfc929dba75fc0228ca6ac2f283",
+        "source_pcm_sha256": "d69d1da0a2c92676e8fcc9fe573067a90a4d3fb494704326e71871a577ae78e8"
+      },
+      "pcm_sha256": "c86abb3314fd60124e135957fd45bf6239f1de8af8d505e767ddb05e2e6bd867",
+      "role": "held",
+      "scene": "cori-street.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": -4.97382685420994,
+          "pcm_sha256": "3d7ec15929766145f2b646ea58c706b1e468ca6089d02dd3d3a9f97aac280795",
+          "suppression_db": 3.803295251770771
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -7.203742075657007,
+          "pcm_sha256": "2f3351380498b73e489da2ef874b4dbbe27193aaa27471edc36cf89ef6ffc8fc",
+          "suppression_db": 1.3281840788539225
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL054820",
+      "id": 9,
+      "incumbent": "original",
+      "label": "bonafide",
+      "origin": {
+        "background_start": null,
+        "center_start": 8551,
+        "id": "RADAR2026-EVAL054820",
+        "label": "bonafide",
+        "samples": 65103,
+        "sha256": "05445881415d8482624f8275f048feacf9e9567313c6a53667dbd1fd5ba9dffc",
+        "source_pcm_sha256": "84d8a6130fa20c62cd919ebcbb378d9ec9b6fe59135b4b6971294bca451bda0b"
+      },
+      "pcm_sha256": "ba34e40b7ca7bd2a64aee8edaa7c501b7b07f0d2cc49e6a15a11dcc19ce3f16b",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.4614888016012015,
+          "pcm_sha256": "dcac89fb2ba4663902f85b4788201510687c382705e3c5ba823c9a432b9c6ad5",
+          "suppression_db": 9.572992128961845
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -6.233352112922536,
+          "pcm_sha256": "df13f31ca3e01238a4eb21c4a0fc66bd116ee4a65089d187b2aa89b5d97dfe4a",
+          "suppression_db": 14.82199649407802
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL054820",
+      "id": 10,
+      "incumbent": "original",
+      "label": "bonafide",
+      "origin": {
+        "background_start": 352000,
+        "center_start": 8551,
+        "id": "RADAR2026-EVAL054820",
+        "label": "bonafide",
+        "samples": 65103,
+        "sha256": "05445881415d8482624f8275f048feacf9e9567313c6a53667dbd1fd5ba9dffc",
+        "source_pcm_sha256": "84d8a6130fa20c62cd919ebcbb378d9ec9b6fe59135b4b6971294bca451bda0b"
+      },
+      "pcm_sha256": "e68341152315629276a394abfa6a332c9bb9c06cb5eb5efb3d2e01d8a1abb660",
+      "role": "held",
+      "scene": "market.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 6.419555380976309,
+          "pcm_sha256": "fff58591bee265ab64cc1e4381abc47de1ab19e63325f05fdc6058d85f840494",
+          "suppression_db": 9.901357085882891
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -7.1002969854032685,
+          "pcm_sha256": "7a283a58977d4754fe17e2019937eee62d5f271d2b22ba07cbb6d6c81b0ebf34",
+          "suppression_db": 11.038395220517184
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL054820",
+      "id": 11,
+      "incumbent": "original",
+      "label": "bonafide",
+      "origin": {
+        "background_start": 2336000,
+        "center_start": 8551,
+        "id": "RADAR2026-EVAL054820",
+        "label": "bonafide",
+        "samples": 65103,
+        "sha256": "05445881415d8482624f8275f048feacf9e9567313c6a53667dbd1fd5ba9dffc",
+        "source_pcm_sha256": "84d8a6130fa20c62cd919ebcbb378d9ec9b6fe59135b4b6971294bca451bda0b"
+      },
+      "pcm_sha256": "9a063a886c1280c91cdf2d3ec7893917cdb4cd3f9b86dcc3635ada3bae08fd5a",
+      "role": "held",
+      "scene": "cori-street.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": -7.008126201666905,
+          "pcm_sha256": "d10faf04ebba07afb20fd8a7dad3b5b8798eb978394211589d5c6087fe133228",
+          "suppression_db": 1.4179317230048185
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -7.208411173248394,
+          "pcm_sha256": "ccdc4f073518e177d449df5f02545e4ec2e9c3edd2cf25f964d248609605e82c",
+          "suppression_db": 0.13198277088619018
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL056958",
+      "id": 12,
+      "incumbent": "original",
+      "label": "bonafide",
+      "origin": {
+        "background_start": null,
+        "center_start": 16320,
+        "id": "RADAR2026-EVAL056958",
+        "label": "bonafide",
+        "samples": 80640,
+        "sha256": "bab84c7a4d8f0b5118620adfccbc6c87094a629a53f209b5e54b12e76addf0be",
+        "source_pcm_sha256": "afed1c210e47be5f79c686f588b189ebf370c701f3a064d6ab7cc1d7224dc1c4"
+      },
+      "pcm_sha256": "e76f822d56cedf3265c8e69729eaa3cab881eb8d3de545372781bab851054fbb",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.368086238827921,
+          "pcm_sha256": "68cb5be3494826a68232f3900797cc250a656e69f4cb0f6dbeba2eac2cf51a25",
+          "suppression_db": 9.025455726071057
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 5.955282002681467,
+          "pcm_sha256": "6d54858c4f84224a94d13917b7c55d6dea948ddd6ab540f2a25d830ac910004f",
+          "suppression_db": 13.47673685892624
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL056958",
+      "id": 13,
+      "incumbent": "inconclusive",
+      "label": "bonafide",
+      "origin": {
+        "background_start": 64000,
+        "center_start": 16320,
+        "id": "RADAR2026-EVAL056958",
+        "label": "bonafide",
+        "samples": 80640,
+        "sha256": "bab84c7a4d8f0b5118620adfccbc6c87094a629a53f209b5e54b12e76addf0be",
+        "source_pcm_sha256": "afed1c210e47be5f79c686f588b189ebf370c701f3a064d6ab7cc1d7224dc1c4"
+      },
+      "pcm_sha256": "7c4821fa19f92388abe34c3507601a97afc7ce709e6c44fb780972b7365c9799",
+      "role": "held",
+      "scene": "market.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.371876149164438,
+          "pcm_sha256": "b9e60803c21603f5c60ef6dbb8ab5a6f26050fababfb1d95488b430c5f8df3fe",
+          "suppression_db": 6.740621815372846
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -5.316118223530597,
+          "pcm_sha256": "2c19dd92a52ee27686f58d6ef3d1ee601697f6e157ac9eb9b19ac81784eab4e8",
+          "suppression_db": 9.948341201855564
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL056958",
+      "id": 14,
+      "incumbent": "original",
+      "label": "bonafide",
+      "origin": {
+        "background_start": 128000,
+        "center_start": 16320,
+        "id": "RADAR2026-EVAL056958",
+        "label": "bonafide",
+        "samples": 80640,
+        "sha256": "bab84c7a4d8f0b5118620adfccbc6c87094a629a53f209b5e54b12e76addf0be",
+        "source_pcm_sha256": "afed1c210e47be5f79c686f588b189ebf370c701f3a064d6ab7cc1d7224dc1c4"
+      },
+      "pcm_sha256": "ee91bd020e02494dbe56bb0380b2f63365f38fcb9a252e6779fcc16d15927eac",
+      "role": "held",
+      "scene": "cori-street.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": -7.225701299530491,
+          "pcm_sha256": "93a375c2964950f0a01673a373e756eab80788bb3fb154f6ec25dc275062566b",
+          "suppression_db": 0.9124611336867248
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -7.19309232241433,
+          "pcm_sha256": "33210412ad10d0a1a5cda4cb40548617d585876a947b32b2880d97c90bf8ed11",
+          "suppression_db": 0.18103997403276473
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL071797",
+      "id": 15,
+      "incumbent": "original",
+      "label": "bonafide",
+      "origin": {
+        "background_start": null,
+        "center_start": 23220,
+        "id": "RADAR2026-EVAL071797",
+        "label": "bonafide",
+        "samples": 94441,
+        "sha256": "c3d9c61f6c212449243a31d18c136a543a0463f0075362e261f484d6cfb80689",
+        "source_pcm_sha256": "da1026db568acd7ca0825e04478f2b2e7c207b86080a9ac36f27050792d4391f"
+      },
+      "pcm_sha256": "de9e2092d1ff7f00d059398e739031fe0c937df4b2cf51fdde1fabe6db0d6fc5",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.406548520248295,
+          "pcm_sha256": "05f893b16592c9c0b4259120f19a8092f37b8d21014d58a63822d88ead196e56",
+          "suppression_db": 7.244253407506824
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 5.989201417727672,
+          "pcm_sha256": "6f97d4539545a2ccd72390044272bc2455aeb51ecd893c6cf917c8addfd4666b",
+          "suppression_db": 11.151395621488911
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL071797",
+      "id": 16,
+      "incumbent": "ai",
+      "label": "bonafide",
+      "origin": {
+        "background_start": 160000,
+        "center_start": 23220,
+        "id": "RADAR2026-EVAL071797",
+        "label": "bonafide",
+        "samples": 94441,
+        "sha256": "c3d9c61f6c212449243a31d18c136a543a0463f0075362e261f484d6cfb80689",
+        "source_pcm_sha256": "da1026db568acd7ca0825e04478f2b2e7c207b86080a9ac36f27050792d4391f"
+      },
+      "pcm_sha256": "b4f81d12a29408bd5997f729d4aa7cf85f9cc632ac7b462b9d2a515c31936519",
+      "role": "held",
+      "scene": "market.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": -4.999048253307868,
+          "pcm_sha256": "e1b27f0d7818ea3174094d34a7f1ac37dcb55175cab308a88a8661f847f39126",
+          "suppression_db": 7.356950458520746
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -6.892437964561005,
+          "pcm_sha256": "4e060b2aa1af801b318bda3932187927cf2e3f811cc39cc92642fd1f74a39b01",
+          "suppression_db": 8.146182941204552
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL071797",
+      "id": 17,
+      "incumbent": "ai",
+      "label": "bonafide",
+      "origin": {
+        "background_start": 576000,
+        "center_start": 23220,
+        "id": "RADAR2026-EVAL071797",
+        "label": "bonafide",
+        "samples": 94441,
+        "sha256": "c3d9c61f6c212449243a31d18c136a543a0463f0075362e261f484d6cfb80689",
+        "source_pcm_sha256": "da1026db568acd7ca0825e04478f2b2e7c207b86080a9ac36f27050792d4391f"
+      },
+      "pcm_sha256": "d781bddbdc92e90bfb94d816a8943086b1e302d99bb81f65a7932802f521fa3f",
+      "role": "held",
+      "scene": "cori-street.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 5.679967966587435,
+          "pcm_sha256": "8024f60b6f00ba9a3b650a27e785b16e28dc7421e6e36dd7363e98cab9bf5b00",
+          "suppression_db": 1.5093490728287604
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -6.550328240796402,
+          "pcm_sha256": "93cf99ed1fb010283e199fba4ecf37d89bd5338f3f8019a1850c93ecafc89318",
+          "suppression_db": 0.346345509507031
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL024221",
+      "id": 18,
+      "incumbent": "original",
+      "label": "bonafide",
+      "origin": {
+        "background_start": null,
+        "center_start": 12176,
+        "id": "RADAR2026-EVAL024221",
+        "label": "bonafide",
+        "samples": 72352,
+        "sha256": "73e3f5c5d986706c64c1b8418917142e3a00f2258126b350bf3392ef1c919fd2",
+        "source_pcm_sha256": "2e30451daf3336a46c53b0697f2b22bf2bdf148c1ca3a1fea53fde251221d4dd"
+      },
+      "pcm_sha256": "b0c4304a06c045c7386c30c7ff773cac398e2cce1065688138768d215f954ff4",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.4338438055580935,
+          "pcm_sha256": "5c4ad130633cf2baaa8e3c908d603d172b897da9066e1e4099efcb03a833cd7d",
+          "suppression_db": 7.071319985857954
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -3.934544560536865,
+          "pcm_sha256": "b0b5f99fdc423b0933c6577a125a8a7984b80275024cdab47ec8d9aa1cfad1a1",
+          "suppression_db": 9.55538789911476
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL024221",
+      "id": 19,
+      "incumbent": "inconclusive",
+      "label": "bonafide",
+      "origin": {
+        "background_start": 256000,
+        "center_start": 12176,
+        "id": "RADAR2026-EVAL024221",
+        "label": "bonafide",
+        "samples": 72352,
+        "sha256": "73e3f5c5d986706c64c1b8418917142e3a00f2258126b350bf3392ef1c919fd2",
+        "source_pcm_sha256": "2e30451daf3336a46c53b0697f2b22bf2bdf148c1ca3a1fea53fde251221d4dd"
+      },
+      "pcm_sha256": "8b5d136cdd1e47267fc7c310760eb66beea216057eeb151f7e594c1efdf6c073",
+      "role": "held",
+      "scene": "market.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.3828527369115635,
+          "pcm_sha256": "568b63ea1622609f235f400a5ec512d7e44b2ae62c38ba9a0fee2e00bcb6aee7",
+          "suppression_db": 7.2618685461739565
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 5.049302840765188,
+          "pcm_sha256": "8dd3dcc4f96d931aa832e3de752daea8d982f9247b6ebe01dbf1469941cfdf78",
+          "suppression_db": 6.740836576440616
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL024221",
+      "id": 20,
+      "incumbent": "inconclusive",
+      "label": "bonafide",
+      "origin": {
+        "background_start": 1504000,
+        "center_start": 12176,
+        "id": "RADAR2026-EVAL024221",
+        "label": "bonafide",
+        "samples": 72352,
+        "sha256": "73e3f5c5d986706c64c1b8418917142e3a00f2258126b350bf3392ef1c919fd2",
+        "source_pcm_sha256": "2e30451daf3336a46c53b0697f2b22bf2bdf148c1ca3a1fea53fde251221d4dd"
+      },
+      "pcm_sha256": "2b732dca63878ba4db46c282694878dce783ba705156fb83cab395ebf633ca3c",
+      "role": "held",
+      "scene": "cori-street.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": -6.538591329915327,
+          "pcm_sha256": "dadb7b46d2e9714a16ea756316337446e91756e7035470c50c870a2064aab8ca",
+          "suppression_db": 0.3776125035283904
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -6.668107031836278,
+          "pcm_sha256": "f8a65f802745982220346c897a4ea9a7e4fc6ef1d9686f90c46590343f0425a5",
+          "suppression_db": 0.08117469493387705
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL065384",
+      "id": 21,
+      "incumbent": "original",
+      "label": "bonafide",
+      "origin": {
+        "background_start": null,
+        "center_start": 9781,
+        "id": "RADAR2026-EVAL065384",
+        "label": "bonafide",
+        "samples": 67562,
+        "sha256": "bb6487f1e5f50ce0050abbca784efa1078fe8939e02aba3ee4bcfc1a0415cb25",
+        "source_pcm_sha256": "66444959cc3679bb8b657f5a499446d886637d08644117c8fb2311a03b1b5d61"
+      },
+      "pcm_sha256": "1e0cfec1a83f12eb95d07fc0b4d27e638b672db2c05915364b457f3b3cf0af41",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.39288408624938,
+          "pcm_sha256": "c6fce7b3bbde453b71442baa169ebf55e1eec47442211f0d17e97db5231575c2",
+          "suppression_db": 7.023631383731787
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -5.31249566328557,
+          "pcm_sha256": "64df7c4d6add984b3743eab184a0ac99b1db3899743dd32924138f9f318deb0b",
+          "suppression_db": 10.756992379906944
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL065384",
+      "id": 22,
+      "incumbent": "inconclusive",
+      "label": "bonafide",
+      "origin": {
+        "background_start": 352000,
+        "center_start": 9781,
+        "id": "RADAR2026-EVAL065384",
+        "label": "bonafide",
+        "samples": 67562,
+        "sha256": "bb6487f1e5f50ce0050abbca784efa1078fe8939e02aba3ee4bcfc1a0415cb25",
+        "source_pcm_sha256": "66444959cc3679bb8b657f5a499446d886637d08644117c8fb2311a03b1b5d61"
+      },
+      "pcm_sha256": "283ddba28d84fe5ed0ee7ced03cc68148441270cc568c2d9c9474d50d9634c4c",
+      "role": "held",
+      "scene": "market.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.2633935604740625,
+          "pcm_sha256": "bbe20dd79a258bcddf80ee80920604f8a636ecf70b87cff00a1a00670570518a",
+          "suppression_db": 6.50759646180293
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -5.611889823324988,
+          "pcm_sha256": "bece879bcd330af4b76e7c9023c71fe00ba864e7693f13a42bfb55e07b1f97c3",
+          "suppression_db": 6.028379691070322
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL065384",
+      "id": 23,
+      "incumbent": "original",
+      "label": "bonafide",
+      "origin": {
+        "background_start": 2336000,
+        "center_start": 9781,
+        "id": "RADAR2026-EVAL065384",
+        "label": "bonafide",
+        "samples": 67562,
+        "sha256": "bb6487f1e5f50ce0050abbca784efa1078fe8939e02aba3ee4bcfc1a0415cb25",
+        "source_pcm_sha256": "66444959cc3679bb8b657f5a499446d886637d08644117c8fb2311a03b1b5d61"
+      },
+      "pcm_sha256": "74f1401de73973bb86d820f18dce760334789685a2f709e1214040ca28a62184",
+      "role": "held",
+      "scene": "cori-street.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": -1.6624098085458914,
+          "pcm_sha256": "75b4305cb269b9c112406ef4067b26b0f9eb2d1ff8b8e7d2bf1d834cefec62b9",
+          "suppression_db": 2.0127195158078153
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -5.891889581422906,
+          "pcm_sha256": "ee9df1a79cea7a6ebd8fd5334135fe189639ddb89c0112c5a49603a9697b8b57",
+          "suppression_db": 0.4604870006350236
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL099059",
+      "id": 24,
+      "incumbent": "inconclusive",
+      "label": "bonafide",
+      "origin": {
+        "background_start": null,
+        "center_start": 14570,
+        "id": "RADAR2026-EVAL099059",
+        "label": "bonafide",
+        "samples": 77141,
+        "sha256": "61715472315f66ab0b42e08a3cd5f36ac97c662de0911e5d3bb56c1d18d80c90",
+        "source_pcm_sha256": "40d6bf91fe903bdf46aa73c4bd1cbb07303c1f80fb7d144322b906ffbd1ddf6c"
+      },
+      "pcm_sha256": "3b03d801b540a3772bf79f6c2ac85d79ed5f2014f982e10a7902e9ef122240ec",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.311821094113661,
+          "pcm_sha256": "507423e87ef39dfaba8d9ca06c56d0175ae0676bb9616f2c75c2460cd54071a0",
+          "suppression_db": 8.978464987667328
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.160360346580416,
+          "pcm_sha256": "70c7142574c915168f66c4f72a09f896c97860a3d2dc89a6bce3482ede792c31",
+          "suppression_db": 11.47608582699637
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL099059",
+      "id": 25,
+      "incumbent": "ai",
+      "label": "bonafide",
+      "origin": {
+        "background_start": 64000,
+        "center_start": 14570,
+        "id": "RADAR2026-EVAL099059",
+        "label": "bonafide",
+        "samples": 77141,
+        "sha256": "61715472315f66ab0b42e08a3cd5f36ac97c662de0911e5d3bb56c1d18d80c90",
+        "source_pcm_sha256": "40d6bf91fe903bdf46aa73c4bd1cbb07303c1f80fb7d144322b906ffbd1ddf6c"
+      },
+      "pcm_sha256": "f50b1b9dc10d0c7fbfb266245c56564b653d11fd8b0223da7eef3c26b1ef2801",
+      "role": "held",
+      "scene": "market.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.0413023785126905,
+          "pcm_sha256": "8cd7eabdb75748ec2575f4e1097c1585442f912c7d6eef436f9c4f85544bfb02",
+          "suppression_db": 8.17228909792597
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -4.724531120753416,
+          "pcm_sha256": "85b5d1e0ad428946dd70b24ed78610569a7e0da7971850b0e38965b3844c1dce",
+          "suppression_db": 7.8145989268770775
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL099059",
+      "id": 26,
+      "incumbent": "inconclusive",
+      "label": "bonafide",
+      "origin": {
+        "background_start": 128000,
+        "center_start": 14570,
+        "id": "RADAR2026-EVAL099059",
+        "label": "bonafide",
+        "samples": 77141,
+        "sha256": "61715472315f66ab0b42e08a3cd5f36ac97c662de0911e5d3bb56c1d18d80c90",
+        "source_pcm_sha256": "40d6bf91fe903bdf46aa73c4bd1cbb07303c1f80fb7d144322b906ffbd1ddf6c"
+      },
+      "pcm_sha256": "4159c7b89f24c257739834e27aca3867de8befc45282116b0185f2370d73f0eb",
+      "role": "held",
+      "scene": "cori-street.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": -5.399371632701283,
+          "pcm_sha256": "08e28ce6d147e443f98707776951ef5315037b0ab4e05cfd309161d8f52a783f",
+          "suppression_db": 0.7199013933909264
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -3.8322598467055338,
+          "pcm_sha256": "a8450f457a45483a1b78c23ee24ea0dec81fec23cafff9664c6234271ffaa5e9",
+          "suppression_db": 0.3061915274380308
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL004382",
+      "id": 27,
+      "incumbent": "inconclusive",
+      "label": "bonafide",
+      "origin": {
+        "background_start": null,
+        "center_start": 19200,
+        "id": "RADAR2026-EVAL004382",
+        "label": "bonafide",
+        "samples": 86400,
+        "sha256": "fbee11b497c7d12e893277b590e0dbb65e0d5cc6f9e0fe8f91fcec00ba1668ff",
+        "source_pcm_sha256": "dd5443b262e6cc8dcaa536f838ccaf4d2023390d8ae60245e8595ae08d0c2a26"
+      },
+      "pcm_sha256": "0d9596ad1961f7a8444bfb9e07fb9f0fc54bdd3cec4b30e8899eac5dea539375",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.287707259470772,
+          "pcm_sha256": "1b9027002640e04e9a49a6d48f835f09843dfd8e7a4da1d191f6bab5ab026df4",
+          "suppression_db": 7.447404498635782
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -1.6158331212501706,
+          "pcm_sha256": "d8434c65074039d2360c84c1720c4afaccd63c3af51b49f0d5776bed115d6080",
+          "suppression_db": 12.404385341701651
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL004382",
+      "id": 28,
+      "incumbent": "inconclusive",
+      "label": "bonafide",
+      "origin": {
+        "background_start": 160000,
+        "center_start": 19200,
+        "id": "RADAR2026-EVAL004382",
+        "label": "bonafide",
+        "samples": 86400,
+        "sha256": "fbee11b497c7d12e893277b590e0dbb65e0d5cc6f9e0fe8f91fcec00ba1668ff",
+        "source_pcm_sha256": "dd5443b262e6cc8dcaa536f838ccaf4d2023390d8ae60245e8595ae08d0c2a26"
+      },
+      "pcm_sha256": "c73f160207c5e1dd47b3cb7641fd95c92539903b452d2d618cfc948805478327",
+      "role": "held",
+      "scene": "market.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 6.96600169520849,
+          "pcm_sha256": "faab30a4c1ad6a28154d7de5c474240a732a2e88e93a866c8543ba2471a87e08",
+          "suppression_db": 7.205276788687721
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -4.562038913400516,
+          "pcm_sha256": "c68996a05fea13632c11abd0d6c4b186c71a79132e28ca5148967615ba4bf209",
+          "suppression_db": 6.907785271758523
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL004382",
+      "id": 29,
+      "incumbent": "ai",
+      "label": "bonafide",
+      "origin": {
+        "background_start": 576000,
+        "center_start": 19200,
+        "id": "RADAR2026-EVAL004382",
+        "label": "bonafide",
+        "samples": 86400,
+        "sha256": "fbee11b497c7d12e893277b590e0dbb65e0d5cc6f9e0fe8f91fcec00ba1668ff",
+        "source_pcm_sha256": "dd5443b262e6cc8dcaa536f838ccaf4d2023390d8ae60245e8595ae08d0c2a26"
+      },
+      "pcm_sha256": "868e3f2f49e8c57afa872949e3e492756ef9d7a4f7376fa967e6e2f06f98116e",
+      "role": "held",
+      "scene": "cori-street.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.305849058123993,
+          "pcm_sha256": "b958906f420cb4169820ea6f88d6b7e42479e35f274ec1c3cb7eb81d4bb8b0df",
+          "suppression_db": 3.8751748700923985
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -4.203470249028069,
+          "pcm_sha256": "8970531c2f61b7a46ae9e814610a901dbd133e787083b1d9d01d875c5ee582ca",
+          "suppression_db": 2.000391711821583
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL007541",
+      "id": 30,
+      "incumbent": "inconclusive",
+      "label": "bonafide",
+      "origin": {
+        "background_start": null,
+        "center_start": 80160,
+        "id": "RADAR2026-EVAL007541",
+        "label": "bonafide",
+        "samples": 208320,
+        "sha256": "d0e41fbf46eeddeda5b799a02fb02c4d48122661a54b9709c9a2dc000fd4193a",
+        "source_pcm_sha256": "ab0f6397a3f6c866f582784d911e30dad0f6cd6045f526d191ba5a3f7f0a6656"
+      },
+      "pcm_sha256": "d74f5d2f8e99845bdf6b3ae09b2af57de0dfcbdb6e576d5ce36e34de5db56de5",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 6.970696788075346,
+          "pcm_sha256": "95cd27dad12af7280ea2dea046e20a8d1b5eb76977af42e4f8bd1742297b74f5",
+          "suppression_db": 11.043280403338077
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -6.630751592194876,
+          "pcm_sha256": "dccc31f9182a84aa411710b639d3d77d20a240d1c665c50aa87b7dcd704f02c7",
+          "suppression_db": 12.881135571292528
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL007541",
+      "id": 31,
+      "incumbent": "unassessed",
+      "label": "bonafide",
+      "origin": {
+        "background_start": 256000,
+        "center_start": 80160,
+        "id": "RADAR2026-EVAL007541",
+        "label": "bonafide",
+        "samples": 208320,
+        "sha256": "d0e41fbf46eeddeda5b799a02fb02c4d48122661a54b9709c9a2dc000fd4193a",
+        "source_pcm_sha256": "ab0f6397a3f6c866f582784d911e30dad0f6cd6045f526d191ba5a3f7f0a6656"
+      },
+      "pcm_sha256": "1ef4ff8bab7d4b986fe6732862e8babfd739f6eea73b9f4c0e74923cbf2471b4",
+      "role": "held",
+      "scene": "market.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.387855848692297,
+          "pcm_sha256": "8cce95a3153001aafcb8765b4918a39296ed5f5b23d2181acffcd45c28da4a18",
+          "suppression_db": 9.789139534861695
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -6.459070209483302,
+          "pcm_sha256": "b7a9440db3ab8e1e62abe679a6ff59eefc4b91065e767a33c4978815aa384bdc",
+          "suppression_db": 10.21112146334173
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL007541",
+      "id": 32,
+      "incumbent": "original",
+      "label": "bonafide",
+      "origin": {
+        "background_start": 1504000,
+        "center_start": 80160,
+        "id": "RADAR2026-EVAL007541",
+        "label": "bonafide",
+        "samples": 208320,
+        "sha256": "d0e41fbf46eeddeda5b799a02fb02c4d48122661a54b9709c9a2dc000fd4193a",
+        "source_pcm_sha256": "ab0f6397a3f6c866f582784d911e30dad0f6cd6045f526d191ba5a3f7f0a6656"
+      },
+      "pcm_sha256": "efae7a86d3fb62dd5db189cdee92927fa65ead7725eb2fdfb39873d5a242633b",
+      "role": "held",
+      "scene": "cori-street.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": -7.152795349600552,
+          "pcm_sha256": "1f202000f0922ee5a77c9fd9af394a82ef13e64ebd3ea91f08253e5034eb9918",
+          "suppression_db": 1.034641402049881
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -7.2569360480889635,
+          "pcm_sha256": "ead43947bab24d4560b0225cddf2a28fec1de06b6b1953994c8a7102980729f7",
+          "suppression_db": 0.1669265697596428
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL006350",
+      "id": 33,
+      "incumbent": "original",
+      "label": "bonafide",
+      "origin": {
+        "background_start": null,
+        "center_start": 24290,
+        "id": "RADAR2026-EVAL006350",
+        "label": "bonafide",
+        "samples": 96580,
+        "sha256": "cf78f99e4b6759738c4e26fe2cea1c13a2b989a7f9cf37356500d46fe4158f5f",
+        "source_pcm_sha256": "6dd0ca00892b7de4d226a6ec231705f75b7eb88234769e7aed84a86f874b45cb"
+      },
+      "pcm_sha256": "cc170921ac5a540b6f496e754d31a9601de5587601c74aa5df2addb64370df53",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 6.880678636372977,
+          "pcm_sha256": "3f0e5abe7e89fce71560012a752d0444fa3baa51d52e573fbbc026b84a3831ab",
+          "suppression_db": 8.244255649631837
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -3.608303597335975,
+          "pcm_sha256": "9df7ce7b311fff9180bdad8ad15580ed48fe00ad882db2f8e4b1734dbad1bdfd",
+          "suppression_db": 9.785152375507
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL006350",
+      "id": 34,
+      "incumbent": "inconclusive",
+      "label": "bonafide",
+      "origin": {
+        "background_start": 352000,
+        "center_start": 24290,
+        "id": "RADAR2026-EVAL006350",
+        "label": "bonafide",
+        "samples": 96580,
+        "sha256": "cf78f99e4b6759738c4e26fe2cea1c13a2b989a7f9cf37356500d46fe4158f5f",
+        "source_pcm_sha256": "6dd0ca00892b7de4d226a6ec231705f75b7eb88234769e7aed84a86f874b45cb"
+      },
+      "pcm_sha256": "84e318c9559f017b43aa7e8aa488a2863fc9af38074637c064ee6c84e0ff44dd",
+      "role": "held",
+      "scene": "market.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": -6.723285128767275,
+          "pcm_sha256": "ab8fac66ceab59a8b2a484a21ff268f36555ef796f6db8582f57ffbaf281b14d",
+          "suppression_db": 6.892038056120438
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -7.168530441817062,
+          "pcm_sha256": "23c218ab8d747be67aa5585c86f8ef7ba510af2b23fa81eb25c8e27a8b3238dc",
+          "suppression_db": 5.874040556931938
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL006350",
+      "id": 35,
+      "incumbent": "original",
+      "label": "bonafide",
+      "origin": {
+        "background_start": 2336000,
+        "center_start": 24290,
+        "id": "RADAR2026-EVAL006350",
+        "label": "bonafide",
+        "samples": 96580,
+        "sha256": "cf78f99e4b6759738c4e26fe2cea1c13a2b989a7f9cf37356500d46fe4158f5f",
+        "source_pcm_sha256": "6dd0ca00892b7de4d226a6ec231705f75b7eb88234769e7aed84a86f874b45cb"
+      },
+      "pcm_sha256": "3b4b9c1a2022b255ac4936897ddd4441993e51585bbc3274dd084329c7719754",
+      "role": "held",
+      "scene": "cori-street.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.419207044456497,
+          "pcm_sha256": "5e5b91df4c4e14a35ba4381361f0818cb078a9ac510ac5942bafafd521ada65d",
+          "suppression_db": 4.122657144475759
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 3.612334779561146,
+          "pcm_sha256": "ea9fb71b77ffe5274c4fd19fce6bcbb0bd710242205a00ee02dd23c2119f5c3b",
+          "suppression_db": 9.582989738623212
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL054123",
+      "id": 36,
+      "incumbent": "inconclusive",
+      "label": "bonafide",
+      "origin": {
+        "background_start": null,
+        "center_start": 22560,
+        "id": "RADAR2026-EVAL054123",
+        "label": "bonafide",
+        "samples": 93120,
+        "sha256": "2ef08adc52e95528774b00dc40ff9d178d0ec9209661938d4211f3d2fc17600a",
+        "source_pcm_sha256": "11fe09db6ff78bdb1ad01f864a850d4523b8808a5830799ac32818603beef7c2"
+      },
+      "pcm_sha256": "9e2f19783ebb55bfbba394c5799e8f7092d5f85c49e36cf2682960d04c9d19b8",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.316480781449518,
+          "pcm_sha256": "c47e3177cf20581c26bd50b78b276d70e4e08520664d4b2629e5a4b10af21131",
+          "suppression_db": 11.913838902829951
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -4.287798887196149,
+          "pcm_sha256": "8cca8d49c8d13b1ddd3d4e0fa6ca724a22117fdbc564181383ae1dddc1892078",
+          "suppression_db": 18.699026423757882
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL054123",
+      "id": 37,
+      "incumbent": "unassessed",
+      "label": "bonafide",
+      "origin": {
+        "background_start": 64000,
+        "center_start": 22560,
+        "id": "RADAR2026-EVAL054123",
+        "label": "bonafide",
+        "samples": 93120,
+        "sha256": "2ef08adc52e95528774b00dc40ff9d178d0ec9209661938d4211f3d2fc17600a",
+        "source_pcm_sha256": "11fe09db6ff78bdb1ad01f864a850d4523b8808a5830799ac32818603beef7c2"
+      },
+      "pcm_sha256": "190c0c89a499d0827f82bd726bfe0b73395bc4cbcf3858ef3a397fee57c40023",
+      "role": "held",
+      "scene": "market.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.350091723458449,
+          "pcm_sha256": "bd3cc93dd9316bb547413842f5c547c5766f61defec9d71c135a8ba812b11110",
+          "suppression_db": 10.485545113357098
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -4.72643379820598,
+          "pcm_sha256": "6ccbbadddaacc4497ad31cfdf5effa7447c9cc0755dd07bbadd9a21481ae6b22",
+          "suppression_db": 14.974344229541519
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL054123",
+      "id": 38,
+      "incumbent": "unassessed",
+      "label": "bonafide",
+      "origin": {
+        "background_start": 128000,
+        "center_start": 22560,
+        "id": "RADAR2026-EVAL054123",
+        "label": "bonafide",
+        "samples": 93120,
+        "sha256": "2ef08adc52e95528774b00dc40ff9d178d0ec9209661938d4211f3d2fc17600a",
+        "source_pcm_sha256": "11fe09db6ff78bdb1ad01f864a850d4523b8808a5830799ac32818603beef7c2"
+      },
+      "pcm_sha256": "8d93f14fd6d0a0b8a872c52b280808b94d47a091dd68da59274f031da467c677",
+      "role": "held",
+      "scene": "cori-street.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": -3.038969000476019,
+          "pcm_sha256": "1868dd6c6942378701b1c35f4fe6d28af00e8542dce2fde7e28ad70292520ed9",
+          "suppression_db": 1.7659835216913207
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -5.709352957775811,
+          "pcm_sha256": "03b13ae436efb36d054605c9237cdfcb74037b25980a2468495fc913347ae65e",
+          "suppression_db": 1.502529010060139
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL014382",
+      "id": 39,
+      "incumbent": "original",
+      "label": "bonafide",
+      "origin": {
+        "background_start": null,
+        "center_start": 55080,
+        "id": "RADAR2026-EVAL014382",
+        "label": "bonafide",
+        "samples": 158160,
+        "sha256": "2a68025d1f9030a089e96ea5558fd8881aae8751e4dff186124882a09c5cc10a",
+        "source_pcm_sha256": "206bd11be3ee9adfc385d54284d65cc7fa991b395630d9bb3f359b3730dc08b6"
+      },
+      "pcm_sha256": "187702c53bc74745150a2aea2ec9de158722d878375c9d771be6d9552c4f4017",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.388627781986065,
+          "pcm_sha256": "6a0cd3e4fd9486a4d36ef6fa183398f2bcbb2ec5ad8d6f929ea949d85b6a56db",
+          "suppression_db": 7.127077915484156
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 4.199705703033499,
+          "pcm_sha256": "7ceef3be700c4e51758d0fdb269e961bcd52243691f8992c79002fdd60cb6381",
+          "suppression_db": 12.865715774797568
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL014382",
+      "id": 40,
+      "incumbent": "unassessed",
+      "label": "bonafide",
+      "origin": {
+        "background_start": 160000,
+        "center_start": 55080,
+        "id": "RADAR2026-EVAL014382",
+        "label": "bonafide",
+        "samples": 158160,
+        "sha256": "2a68025d1f9030a089e96ea5558fd8881aae8751e4dff186124882a09c5cc10a",
+        "source_pcm_sha256": "206bd11be3ee9adfc385d54284d65cc7fa991b395630d9bb3f359b3730dc08b6"
+      },
+      "pcm_sha256": "23838cd864b52ba48cc9e539ab4d42b57d12e0672e202189d5fa68af22a62b36",
+      "role": "held",
+      "scene": "market.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.200102899082721,
+          "pcm_sha256": "b36ac0912d366ae0f461672bf5d1af6e9efbc31f9ea2ab96761cc1fb616f9332",
+          "suppression_db": 7.7576977529815885
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -4.858779500098434,
+          "pcm_sha256": "81f08d6c0f1007f8a6d2183e009d9367638ac87208b1df87e14e87fefec05b08",
+          "suppression_db": 9.697549318849388
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL014382",
+      "id": 41,
+      "incumbent": "inconclusive",
+      "label": "bonafide",
+      "origin": {
+        "background_start": 576000,
+        "center_start": 55080,
+        "id": "RADAR2026-EVAL014382",
+        "label": "bonafide",
+        "samples": 158160,
+        "sha256": "2a68025d1f9030a089e96ea5558fd8881aae8751e4dff186124882a09c5cc10a",
+        "source_pcm_sha256": "206bd11be3ee9adfc385d54284d65cc7fa991b395630d9bb3f359b3730dc08b6"
+      },
+      "pcm_sha256": "af8f620311dd223f0eabca6d79cd170ec2d1f906b36c0eec3d3f8637b43d015f",
+      "role": "held",
+      "scene": "cori-street.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": false,
+          "logit": 7.356054035092817,
+          "pcm_sha256": "5230d20f3e8b0d57522fe052a01960b156b86a8c8ce20ee12085451c22358fc1",
+          "suppression_db": 1.2951814288446097
+        },
+        "old_enhancer": {
+          "admitted": false,
+          "logit": 3.9309656806247735,
+          "pcm_sha256": "6e99ac0f870e1db9920fcc736677adf48c9c3e0784e6ad3cbf6bb482f42b125a",
+          "suppression_db": 8.773189888944653
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL041771",
+      "id": 42,
+      "incumbent": "unassessed",
+      "label": "spoof",
+      "origin": {
+        "background_start": null,
+        "center_start": 16251,
+        "id": "RADAR2026-EVAL041771",
+        "label": "spoof",
+        "samples": 80502,
+        "sha256": "e88d532a3ed3f12d751c76f71936088e09ad01aefb1f3a56d233ef3b871d1c80",
+        "source_pcm_sha256": "1947f7f5f6f6feafe43d303fce6f4ffd1eb58cb6af0af779670282a8d640f81a"
+      },
+      "pcm_sha256": "0430bab0464afaa1a25562ee4b2463269280fdabf565bd8336ec4f26c3482b0d",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": false,
+          "logit": 7.259652613917914,
+          "pcm_sha256": "71fcef1181a3b188bba4bc0e2b8a82e618ba73e876af517fb3e8eb3d5e09a082",
+          "suppression_db": 9.357753542615303
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.1746020342189905,
+          "pcm_sha256": "84de7597258000f4e24d668470ecdb4c9cdc436f60ca3a18cf689a3a84689112",
+          "suppression_db": 12.517922213043423
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL041771",
+      "id": 43,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start": 64000,
+        "center_start": 16251,
+        "id": "RADAR2026-EVAL041771",
+        "label": "spoof",
+        "samples": 80502,
+        "sha256": "e88d532a3ed3f12d751c76f71936088e09ad01aefb1f3a56d233ef3b871d1c80",
+        "source_pcm_sha256": "1947f7f5f6f6feafe43d303fce6f4ffd1eb58cb6af0af779670282a8d640f81a"
+      },
+      "pcm_sha256": "82a55057d85149213ab95b0ae509b344db0fb9fa28b204be57f364089fa17be0",
+      "role": "held",
+      "scene": "market.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": false,
+          "logit": 7.141253712251952,
+          "pcm_sha256": "bd93a4b4d5fc77a3b62cf200fd9ac7de9dbf5bcd59bf1b47dc7b4c02caadd69a",
+          "suppression_db": 9.83669947731988
+        },
+        "old_enhancer": {
+          "admitted": false,
+          "logit": 7.3102131642488954,
+          "pcm_sha256": "f51bb26e815303c119e7300f1e43efcd3eaa2e0767e0d7dd87db6e463949a58a",
+          "suppression_db": 7.926687231953564
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL041771",
+      "id": 44,
+      "incumbent": "unassessed",
+      "label": "spoof",
+      "origin": {
+        "background_start": 128000,
+        "center_start": 16251,
+        "id": "RADAR2026-EVAL041771",
+        "label": "spoof",
+        "samples": 80502,
+        "sha256": "e88d532a3ed3f12d751c76f71936088e09ad01aefb1f3a56d233ef3b871d1c80",
+        "source_pcm_sha256": "1947f7f5f6f6feafe43d303fce6f4ffd1eb58cb6af0af779670282a8d640f81a"
+      },
+      "pcm_sha256": "93cc1c4f8a637ab18b111b0fc63d6110747e1524522174e0db62c3e30fecadee",
+      "role": "held",
+      "scene": "cori-street.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.476024179684803,
+          "pcm_sha256": "5c1d2ca3e752ace1f4c6670e75f77bf907573a1385c11942953cb7af264708ab",
+          "suppression_db": 1.653542745061455
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.516434436020677,
+          "pcm_sha256": "090dcbfa4ccf34a7b74159dc720706fb0db436de60ebe8a8f7133713e3701e0e",
+          "suppression_db": 0.09642728361791454
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL014678",
+      "id": 45,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start": null,
+        "center_start": 18647,
+        "id": "RADAR2026-EVAL014678",
+        "label": "spoof",
+        "samples": 85294,
+        "sha256": "37e05c8652024f247fbd33f0c6180a61ddeb56a6996db77ba609519445b3a37f",
+        "source_pcm_sha256": "3e36b0c045ef93f3b5360ecb174139b607b01915593aa928037b178eefa51a82"
+      },
+      "pcm_sha256": "2fdd0b39f0395eac1c2ed0f7415ee3d1c2a25495a4583f502fbc0ce8d3782a37",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.5312395171287125,
+          "pcm_sha256": "cba0559394ab59c341bc203b7939134de918494b45702cadec328dd9696f0dc0",
+          "suppression_db": 7.790427880315546
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 4.529489655813856,
+          "pcm_sha256": "169dd13e48ff94d592e67269da5cb2edd54ab302754dc48a28eb08e13fc83d3c",
+          "suppression_db": 13.232426376644774
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL014678",
+      "id": 46,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start": 160000,
+        "center_start": 18647,
+        "id": "RADAR2026-EVAL014678",
+        "label": "spoof",
+        "samples": 85294,
+        "sha256": "37e05c8652024f247fbd33f0c6180a61ddeb56a6996db77ba609519445b3a37f",
+        "source_pcm_sha256": "3e36b0c045ef93f3b5360ecb174139b607b01915593aa928037b178eefa51a82"
+      },
+      "pcm_sha256": "f593ddb954bff40b8ccfc2c08dc22d0ebdd6368fc26db163fd1cce030612dbe6",
+      "role": "held",
+      "scene": "market.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.522153722874237,
+          "pcm_sha256": "12c2e57f0c599f618e2d407b8e60b71b7a48cc0af7b1375cc7d6f40f5232f960",
+          "suppression_db": 6.724376735769226
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 0.6091342376675148,
+          "pcm_sha256": "cea56e53a726d6ec3215b228021a5ac52c2fa6eed6f5ec5fc7295ca101a459df",
+          "suppression_db": 7.472910634579986
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL014678",
+      "id": 47,
+      "incumbent": "inconclusive",
+      "label": "spoof",
+      "origin": {
+        "background_start": 576000,
+        "center_start": 18647,
+        "id": "RADAR2026-EVAL014678",
+        "label": "spoof",
+        "samples": 85294,
+        "sha256": "37e05c8652024f247fbd33f0c6180a61ddeb56a6996db77ba609519445b3a37f",
+        "source_pcm_sha256": "3e36b0c045ef93f3b5360ecb174139b607b01915593aa928037b178eefa51a82"
+      },
+      "pcm_sha256": "15c3096f4dce24fd33ef971351a80169e64c2e55433e756a9f99d48160d775dd",
+      "role": "held",
+      "scene": "cori-street.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": -5.982637367047451,
+          "pcm_sha256": "bc59e664c8cbd2a8bea93dfa79399a670c138389e5389727cacbc2887793480a",
+          "suppression_db": 7.275360522166345
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 2.9792705388858454,
+          "pcm_sha256": "6f49a7a6061f344cf5c1ac9cf47e25842e74ca4012f314b4e97d88c06023289c",
+          "suppression_db": 3.6677519050417757
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL003152",
+      "id": 48,
+      "incumbent": "inconclusive",
+      "label": "spoof",
+      "origin": {
+        "background_start": null,
+        "center_start": 22937,
+        "id": "RADAR2026-EVAL003152",
+        "label": "spoof",
+        "samples": 93875,
+        "sha256": "4f6c68367a4b9060234cee0cc5d9ed7582d5ae16d942fb50eb765c6fe115f093",
+        "source_pcm_sha256": "3f7dc120d053a296809db3cacb8eea030333fa7449eed4c68febea827d0dd277"
+      },
+      "pcm_sha256": "3fc3d7cad1edaddb99ff4d87d2a0d66bde11bb4593c6e46d6bc73039eb4b71d3",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 5.1371359632656945,
+          "pcm_sha256": "096f94c5f6f1f26cbf18e1a183d9ff66b67c59545a203935451a05113091c272",
+          "suppression_db": 12.967611398867966
+        },
+        "old_enhancer": {
+          "admitted": false,
+          "logit": -2.0240254577195382,
+          "pcm_sha256": "250f1f718aa848b4c8206991be86ceb11af59b9297f9e5741a1b19093e11a783",
+          "suppression_db": 19.405455967571342
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL003152",
+      "id": 49,
+      "incumbent": "unassessed",
+      "label": "spoof",
+      "origin": {
+        "background_start": 256000,
+        "center_start": 22937,
+        "id": "RADAR2026-EVAL003152",
+        "label": "spoof",
+        "samples": 93875,
+        "sha256": "4f6c68367a4b9060234cee0cc5d9ed7582d5ae16d942fb50eb765c6fe115f093",
+        "source_pcm_sha256": "3f7dc120d053a296809db3cacb8eea030333fa7449eed4c68febea827d0dd277"
+      },
+      "pcm_sha256": "c1e8127513babff01e0e7fb0963fc293ad71a6829d794e7e50fe2ef6980166a6",
+      "role": "held",
+      "scene": "market.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.081471546246756,
+          "pcm_sha256": "c3f1630f3431c2688bd2553733ddfebe898b97d1acd131d41da47a3e9fb7570f",
+          "suppression_db": 11.954049461395881
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -0.6960502897106757,
+          "pcm_sha256": "44052ac604bfb612d7525925730bde67bb5f59d60df2bd5b96de832449b1fe0d",
+          "suppression_db": 14.92202909031539
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL003152",
+      "id": 50,
+      "incumbent": "unassessed",
+      "label": "spoof",
+      "origin": {
+        "background_start": 1504000,
+        "center_start": 22937,
+        "id": "RADAR2026-EVAL003152",
+        "label": "spoof",
+        "samples": 93875,
+        "sha256": "4f6c68367a4b9060234cee0cc5d9ed7582d5ae16d942fb50eb765c6fe115f093",
+        "source_pcm_sha256": "3f7dc120d053a296809db3cacb8eea030333fa7449eed4c68febea827d0dd277"
+      },
+      "pcm_sha256": "f5256f568790e690e63c541bf2196e846b40492690ec7efbdf2c4382e4269798",
+      "role": "held",
+      "scene": "cori-street.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.070170420638,
+          "pcm_sha256": "0f924942d75d4d13649dd24de3c3e8ddabbedce589d7da605efcb866a91ea7d4",
+          "suppression_db": 1.5273877478432851
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 6.974264514481293,
+          "pcm_sha256": "c05e80826e97c5f19572b31cf48854ea85bf006f725c52fbc766db89a703289c",
+          "suppression_db": 0.17151569886913007
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL007054",
+      "id": 51,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start": null,
+        "center_start": 33887,
+        "id": "RADAR2026-EVAL007054",
+        "label": "spoof",
+        "samples": 115775,
+        "sha256": "4d8a4f566c6f8ff15561c85c0c4c695b1f8c42c13fd2e81e06de6c06f500c98e",
+        "source_pcm_sha256": "84ef04525368f596564da7d30d4bbf527a67ca4946dd017f3a2ee84877987a0e"
+      },
+      "pcm_sha256": "0028d065e766c109f8cdc8b752ca7260782c749f0e02957fc5e3fe1f709bc253",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.477288984842786,
+          "pcm_sha256": "296ecf8489973111f2dfaf9c3cfb73666c4a5df8f054f52749002e4fa4d84261",
+          "suppression_db": 8.994976026601513
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -2.403529189245111,
+          "pcm_sha256": "aab1747ef076565ec465e366a2fefc42e3a5e3d184c74b0b32a0e91d6530dbc8",
+          "suppression_db": 17.874495733048164
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL007054",
+      "id": 52,
+      "incumbent": "unassessed",
+      "label": "spoof",
+      "origin": {
+        "background_start": 352000,
+        "center_start": 33887,
+        "id": "RADAR2026-EVAL007054",
+        "label": "spoof",
+        "samples": 115775,
+        "sha256": "4d8a4f566c6f8ff15561c85c0c4c695b1f8c42c13fd2e81e06de6c06f500c98e",
+        "source_pcm_sha256": "84ef04525368f596564da7d30d4bbf527a67ca4946dd017f3a2ee84877987a0e"
+      },
+      "pcm_sha256": "69b533d6a991126091e50732bd31ca61aeeef1ef5c4f96b42545a90cd8d1a918",
+      "role": "held",
+      "scene": "market.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.1898403348443995,
+          "pcm_sha256": "bc3a39e3379affd299499de0c95ca0560d33760ded2a55b0b34de6b96e946d14",
+          "suppression_db": 7.567810975134317
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.224875691750058,
+          "pcm_sha256": "68a8aaa40a04019cefb54d761dd27288a6a67df96ed7fb84387354d5cb2db3e0",
+          "suppression_db": 8.500497980745083
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL007054",
+      "id": 53,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start": 2336000,
+        "center_start": 33887,
+        "id": "RADAR2026-EVAL007054",
+        "label": "spoof",
+        "samples": 115775,
+        "sha256": "4d8a4f566c6f8ff15561c85c0c4c695b1f8c42c13fd2e81e06de6c06f500c98e",
+        "source_pcm_sha256": "84ef04525368f596564da7d30d4bbf527a67ca4946dd017f3a2ee84877987a0e"
+      },
+      "pcm_sha256": "3e8689ea31a1dd15502a090cde3ece6c53fea8ba20d94acfc67be5730acaf25e",
+      "role": "held",
+      "scene": "cori-street.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.4678416672464785,
+          "pcm_sha256": "d966455c1c4a6a12426d42a06dd3f1c225c1d082012f12e5af217a30369da5d5",
+          "suppression_db": 0.11620367788170673
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.475602932809997,
+          "pcm_sha256": "d27f36e4604b4e055d62b5b62adf5966bfd5f72357fcf70d8cf9a2ccc681ae40",
+          "suppression_db": 0.2354096448755941
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL021473",
+      "id": 54,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start": null,
+        "center_start": 21874,
+        "id": "RADAR2026-EVAL021473",
+        "label": "spoof",
+        "samples": 91748,
+        "sha256": "5da0be435862671c78febf52ee690fdcc23b919ade7eaa479d0f09c8a78e4a45",
+        "source_pcm_sha256": "25c78f9f1655cdc5a05872d572fb05efd49a2b4509c4dc963561a62cf7f4efff"
+      },
+      "pcm_sha256": "9747416dd39b9d05110bb98596910746664d8a1304c88d4823bd1684d94be08c",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.3956020947014345,
+          "pcm_sha256": "0610865d65b942f3ade2bc100b83cfa1ca5baaf85c598ddd0323c0bb271f70c3",
+          "suppression_db": 7.499040867902971
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 6.124067352866204,
+          "pcm_sha256": "dd43eb7b2e349a44725c9464f464ddf0982ce6298a8bee84c4a2abea0402b647",
+          "suppression_db": 15.707440019488896
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL021473",
+      "id": 55,
+      "incumbent": "unassessed",
+      "label": "spoof",
+      "origin": {
+        "background_start": 64000,
+        "center_start": 21874,
+        "id": "RADAR2026-EVAL021473",
+        "label": "spoof",
+        "samples": 91748,
+        "sha256": "5da0be435862671c78febf52ee690fdcc23b919ade7eaa479d0f09c8a78e4a45",
+        "source_pcm_sha256": "25c78f9f1655cdc5a05872d572fb05efd49a2b4509c4dc963561a62cf7f4efff"
+      },
+      "pcm_sha256": "308255e48eb304807d706c721ff3aae4bab8da8356372e892884660d569ad0e3",
+      "role": "held",
+      "scene": "market.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.476024179684803,
+          "pcm_sha256": "c6045149cc72a5189c698dc9d88f4683aab60f514820179027bb499db729c466",
+          "suppression_db": 6.225869811536322
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 4.9044330402282394,
+          "pcm_sha256": "d74679ee479e101037bd9dcc1ff258bfe5ad8302b7f839efb195e42cf4c06e12",
+          "suppression_db": 8.642360126934404
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL021473",
+      "id": 56,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start": 128000,
+        "center_start": 21874,
+        "id": "RADAR2026-EVAL021473",
+        "label": "spoof",
+        "samples": 91748,
+        "sha256": "5da0be435862671c78febf52ee690fdcc23b919ade7eaa479d0f09c8a78e4a45",
+        "source_pcm_sha256": "25c78f9f1655cdc5a05872d572fb05efd49a2b4509c4dc963561a62cf7f4efff"
+      },
+      "pcm_sha256": "7abbf6cb35f3e17547e9158340a8aa32eaf0032e8d9a7f048148ac5eb52d7751",
+      "role": "held",
+      "scene": "cori-street.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.473289237980191,
+          "pcm_sha256": "504f30aeaa2034299e691acf474eafc64c5abffdffc3ebd172ca8d53f041c0a4",
+          "suppression_db": 0.37206588812466224
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.487252300232067,
+          "pcm_sha256": "2903ae4c369a5a99d57a636a20de4d8a1a66a182fe61e25ecd3df4fa8879c140",
+          "suppression_db": 0.01317677837427156
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL079718",
+      "id": 57,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start": null,
+        "center_start": 19200,
+        "id": "RADAR2026-EVAL079718",
+        "label": "spoof",
+        "samples": 86400,
+        "sha256": "e293266f37226294cefea0b0dc7790be8e31fe5f30800da6c304e5c17b71b04c",
+        "source_pcm_sha256": "549cb34a48307c04d7557b7f06ee23503fa935427979a3cbb8919ec6576eca8c"
+      },
+      "pcm_sha256": "cef7a058cf105b450590bcbf94ea64268eb23512839a49bac936be9f3a7829be",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.458793228014137,
+          "pcm_sha256": "94c139c84743332290f05d66aefe9b0c241036562220399f5988574119b128a8",
+          "suppression_db": 6.783247523342992
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 5.891562331220676,
+          "pcm_sha256": "b735c26566d7574ffdef4822f57883ffc32f9c6f6f7937c798c2f34ba51f9a4b",
+          "suppression_db": 10.533569575749066
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL079718",
+      "id": 58,
+      "incumbent": "inconclusive",
+      "label": "spoof",
+      "origin": {
+        "background_start": 160000,
+        "center_start": 19200,
+        "id": "RADAR2026-EVAL079718",
+        "label": "spoof",
+        "samples": 86400,
+        "sha256": "e293266f37226294cefea0b0dc7790be8e31fe5f30800da6c304e5c17b71b04c",
+        "source_pcm_sha256": "549cb34a48307c04d7557b7f06ee23503fa935427979a3cbb8919ec6576eca8c"
+      },
+      "pcm_sha256": "6cdc87b2c41ae4fd6c422e9db1cc8b5e47cd28bc5532f5fc226047a31978f638",
+      "role": "held",
+      "scene": "market.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.505092962512684,
+          "pcm_sha256": "1351d1a01a0e22a6f46a24a9d70c029fa445f79caaeb9fbcfc070dba75aabb13",
+          "suppression_db": 6.5512092447447765
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 5.511781662297924,
+          "pcm_sha256": "70a6f1043ed9eda9533fbf047c0ba9db63a563b275d55c8735135cfc0a086e6d",
+          "suppression_db": 7.05455294809394
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL079718",
+      "id": 59,
+      "incumbent": "inconclusive",
+      "label": "spoof",
+      "origin": {
+        "background_start": 576000,
+        "center_start": 19200,
+        "id": "RADAR2026-EVAL079718",
+        "label": "spoof",
+        "samples": 86400,
+        "sha256": "e293266f37226294cefea0b0dc7790be8e31fe5f30800da6c304e5c17b71b04c",
+        "source_pcm_sha256": "549cb34a48307c04d7557b7f06ee23503fa935427979a3cbb8919ec6576eca8c"
+      },
+      "pcm_sha256": "564c21f5845bc436e4a1ecd3e671a3fa64442408a65bbc7ffa7a6ee80e885fce",
+      "role": "held",
+      "scene": "cori-street.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.537492179644142,
+          "pcm_sha256": "add4013539e2d455d9f5c8eef2652aa161ab4ddb6446409a584020e637ffce8c",
+          "suppression_db": 0.573607662618492
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.412066942062212,
+          "pcm_sha256": "ef031b1edbe69d13cc4b47f241f5e455ace19c62c6db34637f0fccc4109da834",
+          "suppression_db": 1.0296857334564977
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL039940",
+      "id": 60,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start": null,
+        "center_start": 21152,
+        "id": "RADAR2026-EVAL039940",
+        "label": "spoof",
+        "samples": 90304,
+        "sha256": "451d656e6f14dc616ec85853c311e5e6543664f70540880f5f6f8625a6dfb22b",
+        "source_pcm_sha256": "8b0e37caa1d6fd45653e0dc0df2dc20755846d553b71a83630a7a5b22596f68e"
+      },
+      "pcm_sha256": "4644fe20e639741f39dec22d71a128d166b733b7103863de18b081e194abd8d2",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.520830984344045,
+          "pcm_sha256": "4c41c9715e55a2f94e874f70dda64d74bd9577abe2447497eb09397aa22ea7ae",
+          "suppression_db": 9.362636988861805
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 2.8837264144885753,
+          "pcm_sha256": "72f20308e2dd06732d04dc6a92aa25051330fecf414b657a66366cd9c546f8dc",
+          "suppression_db": 12.61755761955108
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL039940",
+      "id": 61,
+      "incumbent": "inconclusive",
+      "label": "spoof",
+      "origin": {
+        "background_start": 256000,
+        "center_start": 21152,
+        "id": "RADAR2026-EVAL039940",
+        "label": "spoof",
+        "samples": 90304,
+        "sha256": "451d656e6f14dc616ec85853c311e5e6543664f70540880f5f6f8625a6dfb22b",
+        "source_pcm_sha256": "8b0e37caa1d6fd45653e0dc0df2dc20755846d553b71a83630a7a5b22596f68e"
+      },
+      "pcm_sha256": "ce83da7743079198c28c291589c4c2c735d23779afecb36e7882682ae5d71f95",
+      "role": "held",
+      "scene": "market.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.546945015523521,
+          "pcm_sha256": "ae3faaeabf1ea1b10f4a939d6a2b42b5accfb0c1fd546fc6dc2bb1ff1b03b2fc",
+          "suppression_db": 6.986577347315457
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.422396841679853,
+          "pcm_sha256": "c71385b5ee4922d4f9642ca9f89681f8f5cf1bfe6ceedb1fc1ac1c341d485040",
+          "suppression_db": 9.274069859542934
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL039940",
+      "id": 62,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start": 1504000,
+        "center_start": 21152,
+        "id": "RADAR2026-EVAL039940",
+        "label": "spoof",
+        "samples": 90304,
+        "sha256": "451d656e6f14dc616ec85853c311e5e6543664f70540880f5f6f8625a6dfb22b",
+        "source_pcm_sha256": "8b0e37caa1d6fd45653e0dc0df2dc20755846d553b71a83630a7a5b22596f68e"
+      },
+      "pcm_sha256": "257818927312c1e917734db84c5d381744c5dabb9ecd6e3f10b9ec198d967f50",
+      "role": "held",
+      "scene": "cori-street.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.47056174733806,
+          "pcm_sha256": "f5fb2231f0fa5b3e8494ce4a49065e2aeb969b207fcc0cda996079e00b043aea",
+          "suppression_db": 1.8209422396967163
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 6.947562581189504,
+          "pcm_sha256": "fc2b73ee62c8fd03b8fa7c64ef4342e776218d81dad62dbe4457792e83dc50da",
+          "suppression_db": 0.099883779368689
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL040530",
+      "id": 63,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start": null,
+        "center_start": 8101,
+        "id": "RADAR2026-EVAL040530",
+        "label": "spoof",
+        "samples": 64203,
+        "sha256": "f22d28f1f8371df6e186a077952f18e533953ae1f92b5cc84c7e307e195a4481",
+        "source_pcm_sha256": "8efbd8b01343083857e2502cc123b32fec2c3d8035653ef53feb78557858cec6"
+      },
+      "pcm_sha256": "f8ae9081e404edb8008efe8a596fd19e7ebad47b012b1286abed833acd36fe48",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.424996055890533,
+          "pcm_sha256": "032aae2427e7ff8208048fd20682750ba93ce8e4434723d211c6ac5e98fc1463",
+          "suppression_db": 8.931897135391054
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 4.6722480786571206,
+          "pcm_sha256": "9661f64287e36c83a368bdefc6d9c43d59057cddb44d778b2835059c0618b660",
+          "suppression_db": 15.186400278594302
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL040530",
+      "id": 64,
+      "incumbent": "unassessed",
+      "label": "spoof",
+      "origin": {
+        "background_start": 352000,
+        "center_start": 8101,
+        "id": "RADAR2026-EVAL040530",
+        "label": "spoof",
+        "samples": 64203,
+        "sha256": "f22d28f1f8371df6e186a077952f18e533953ae1f92b5cc84c7e307e195a4481",
+        "source_pcm_sha256": "8efbd8b01343083857e2502cc123b32fec2c3d8035653ef53feb78557858cec6"
+      },
+      "pcm_sha256": "5ca9e33c074a14ef0e224152fe7bb2f3dec076946b847cb63fb50bc8475940aa",
+      "role": "held",
+      "scene": "market.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.439718321107447,
+          "pcm_sha256": "0e5dd0f6c877ca3736bd0b455fd951438e1f00a8606db2735c2b9e5e420609a7",
+          "suppression_db": 7.692716884989713
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 5.38186654857765,
+          "pcm_sha256": "a1e82bd93522a987f1b7e05cfeaacaa833a44c34bc99d7d066e073b69d5b6981",
+          "suppression_db": 4.17830475404304
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL040530",
+      "id": 65,
+      "incumbent": "original",
+      "label": "spoof",
+      "origin": {
+        "background_start": 2336000,
+        "center_start": 8101,
+        "id": "RADAR2026-EVAL040530",
+        "label": "spoof",
+        "samples": 64203,
+        "sha256": "f22d28f1f8371df6e186a077952f18e533953ae1f92b5cc84c7e307e195a4481",
+        "source_pcm_sha256": "8efbd8b01343083857e2502cc123b32fec2c3d8035653ef53feb78557858cec6"
+      },
+      "pcm_sha256": "5f19f6ba6ea56e7cb210c2d74e621bdc301b9c1046dd2e487c85ebc8f728de7a",
+      "role": "held",
+      "scene": "cori-street.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.4678416672464785,
+          "pcm_sha256": "74458be4e9124299471ea79d7cc165e580c0876d3b33c684a8c078ddb18fb3ee",
+          "suppression_db": 1.2986005917571397
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.397742861090786,
+          "pcm_sha256": "9790147d78664835613dd8f72924421151589f2b099d90278c9b87f1cd956c3e",
+          "suppression_db": 0.2467615053673599
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL039413",
+      "id": 66,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start": null,
+        "center_start": 16843,
+        "id": "RADAR2026-EVAL039413",
+        "label": "spoof",
+        "samples": 81686,
+        "sha256": "ae320fef62271410e2aa31ec26547a73d8b4ccb52d06b4d1cd7eb4aee813c2e0",
+        "source_pcm_sha256": "17af5a9d9b3789bd18e1053cf88d656f4b1d1d9e1d3e1c3467f2032abd8b303b"
+      },
+      "pcm_sha256": "11e24c367c0e776d41a89edf053905009d35c0bfa00d7e0025794cf4bae44500",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.518630296601628,
+          "pcm_sha256": "4a2226786e5f4efac32587a7ab376625888850903266511b1ef1355693abe427",
+          "suppression_db": 8.132818723449871
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 6.691776086879444,
+          "pcm_sha256": "cf085a69ed0a4a4dd5f2e2a71244aa2390346f22c849da367b1834ed165fd79d",
+          "suppression_db": 14.216852367045787
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL039413",
+      "id": 67,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start": 64000,
+        "center_start": 16843,
+        "id": "RADAR2026-EVAL039413",
+        "label": "spoof",
+        "samples": 81686,
+        "sha256": "ae320fef62271410e2aa31ec26547a73d8b4ccb52d06b4d1cd7eb4aee813c2e0",
+        "source_pcm_sha256": "17af5a9d9b3789bd18e1053cf88d656f4b1d1d9e1d3e1c3467f2032abd8b303b"
+      },
+      "pcm_sha256": "0391584cd8a275c52b8ae2cd3213f1269643a0027b23e45d8f8d82036e024818",
+      "role": "held",
+      "scene": "market.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.524141113477165,
+          "pcm_sha256": "29824cb328d0d67859dacf250fb6c1f1624d500ff6031289d7897893d4d4d925",
+          "suppression_db": 7.709645158078012
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 5.556839789384371,
+          "pcm_sha256": "3bcae4e6908f8b774b6862717aa1603d59d30b794d682f98addd16ff89cfe8ba",
+          "suppression_db": 8.07876320588466
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL039413",
+      "id": 68,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start": 128000,
+        "center_start": 16843,
+        "id": "RADAR2026-EVAL039413",
+        "label": "spoof",
+        "samples": 81686,
+        "sha256": "ae320fef62271410e2aa31ec26547a73d8b4ccb52d06b4d1cd7eb4aee813c2e0",
+        "source_pcm_sha256": "17af5a9d9b3789bd18e1053cf88d656f4b1d1d9e1d3e1c3467f2032abd8b303b"
+      },
+      "pcm_sha256": "e705ad53944f87bc96aa29f60e68e882136dc132594d872b1dd150282d5ea932",
+      "role": "held",
+      "scene": "cori-street.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.26834625781233,
+          "pcm_sha256": "f880b437fe95de4a6735a3e9d11b22d1afe72db9fc7e74407f0eee5b77e05e7d",
+          "suppression_db": 0.15991196477742345
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.344903666713891,
+          "pcm_sha256": "a3dd17ee340cc4dcc740ce82f7ea6da16da1d054dab759673c831ae81ed17ea0",
+          "suppression_db": 0.34902001986328895
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL097047",
+      "id": 69,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start": null,
+        "center_start": 47286,
+        "id": "RADAR2026-EVAL097047",
+        "label": "spoof",
+        "samples": 142573,
+        "sha256": "557ddeb528c38915926d3a3744de50076b01dea64218aebf56f019593b7ceec2",
+        "source_pcm_sha256": "8726af1f6284ac870c63afe2fa58d2030e93a22bf95ef052df500b8013998674"
+      },
+      "pcm_sha256": "581fcb9dc2891627be7edc5a46166e15c9fc6f5dd828c4a19991d43e29a04a8a",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.389207122771148,
+          "pcm_sha256": "4f9ec730675bbf282f5b8cef75a7023e238307e9135808b39ea54ec4efade4aa",
+          "suppression_db": 6.4667853717716675
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -3.9412827487125117,
+          "pcm_sha256": "eb17903445185000ba90af092b4176e8f19b49c21115ae587b30d8e89e198d74",
+          "suppression_db": 12.787930780896534
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL097047",
+      "id": 70,
+      "incumbent": "unassessed",
+      "label": "spoof",
+      "origin": {
+        "background_start": 160000,
+        "center_start": 47286,
+        "id": "RADAR2026-EVAL097047",
+        "label": "spoof",
+        "samples": 142573,
+        "sha256": "557ddeb528c38915926d3a3744de50076b01dea64218aebf56f019593b7ceec2",
+        "source_pcm_sha256": "8726af1f6284ac870c63afe2fa58d2030e93a22bf95ef052df500b8013998674"
+      },
+      "pcm_sha256": "2ca99b5178a9fabc2e76cc44655e1ecc9bcc9c0daf8953fa94b00c247329f84c",
+      "role": "held",
+      "scene": "market.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.423795580016226,
+          "pcm_sha256": "1ffdd42fbbacdf50f8306f7b8bfa66f40efeafbea88bdae1383564a4f3016181",
+          "suppression_db": 6.471363023345711
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -3.806733855522725,
+          "pcm_sha256": "f1f82abc328650a6f13bdef09c49261ca6b72c44e76857a878645948f4cee99c",
+          "suppression_db": 8.979484263030207
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL097047",
+      "id": 71,
+      "incumbent": "inconclusive",
+      "label": "spoof",
+      "origin": {
+        "background_start": 576000,
+        "center_start": 47286,
+        "id": "RADAR2026-EVAL097047",
+        "label": "spoof",
+        "samples": 142573,
+        "sha256": "557ddeb528c38915926d3a3744de50076b01dea64218aebf56f019593b7ceec2",
+        "source_pcm_sha256": "8726af1f6284ac870c63afe2fa58d2030e93a22bf95ef052df500b8013998674"
+      },
+      "pcm_sha256": "1af2366a1482c5a8a40a9ea345cddba27531e251467469ee1cb3c8aa84eaf64e",
+      "role": "held",
+      "scene": "cori-street.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.511183939223567,
+          "pcm_sha256": "542e9904749560af954636020b633d0c280d003834c5798d01343dd668076824",
+          "suppression_db": 4.277286929900985
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.125988911060148,
+          "pcm_sha256": "97241ea8c9fa95223efeb4f8853b3b8d9bbc2730062a8b28c707ca5645e8d709",
+          "suppression_db": 1.7976923091831385
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL017054",
+      "id": 72,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start": null,
+        "center_start": 20779,
+        "id": "RADAR2026-EVAL017054",
+        "label": "spoof",
+        "samples": 89558,
+        "sha256": "d377c69aeb6e8d811102c4c2993f1ccc0092e088a15ab9af968ed52b49d5dcd7",
+        "source_pcm_sha256": "47829668dcb59ab4640031a0ddbc89ec88e0b9fbc983aed61d9d1260f51846fe"
+      },
+      "pcm_sha256": "421d7d4a5ab6d04770d841bfd9675666ae2f1bb4545deae93b2d4e6fc14d375a",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.409303929145376,
+          "pcm_sha256": "2059f4fd7311c2c7ad419025ccd1c524568d4a314c95c016ef81eec6921323c5",
+          "suppression_db": 8.770409559863023
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -5.465727375251766,
+          "pcm_sha256": "9463ad241743c96fde88ddd34c1ef15866cd97b0324e4dbe58411f5f9d2bf29b",
+          "suppression_db": 11.00795375554684
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL017054",
+      "id": 73,
+      "incumbent": "inconclusive",
+      "label": "spoof",
+      "origin": {
+        "background_start": 256000,
+        "center_start": 20779,
+        "id": "RADAR2026-EVAL017054",
+        "label": "spoof",
+        "samples": 89558,
+        "sha256": "d377c69aeb6e8d811102c4c2993f1ccc0092e088a15ab9af968ed52b49d5dcd7",
+        "source_pcm_sha256": "47829668dcb59ab4640031a0ddbc89ec88e0b9fbc983aed61d9d1260f51846fe"
+      },
+      "pcm_sha256": "d97389a7fe2b59331ac547163b485c08e9518ccb237cd065ad80c66e7f89fcc9",
+      "role": "held",
+      "scene": "market.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.507481428446963,
+          "pcm_sha256": "d1bb3930293bec957fc71a5fcee916f4160029b05eb6a149171207170f9bf9ae",
+          "suppression_db": 10.289071133110973
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -3.2620985765287975,
+          "pcm_sha256": "59477bd6d8e98ed4e511d15c92fbbd5eeebf732301be55350eb78d064fd5b35b",
+          "suppression_db": 9.630170900844131
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL017054",
+      "id": 74,
+      "incumbent": "inconclusive",
+      "label": "spoof",
+      "origin": {
+        "background_start": 1504000,
+        "center_start": 20779,
+        "id": "RADAR2026-EVAL017054",
+        "label": "spoof",
+        "samples": 89558,
+        "sha256": "d377c69aeb6e8d811102c4c2993f1ccc0092e088a15ab9af968ed52b49d5dcd7",
+        "source_pcm_sha256": "47829668dcb59ab4640031a0ddbc89ec88e0b9fbc983aed61d9d1260f51846fe"
+      },
+      "pcm_sha256": "190be2c28e35b67a07d197a467e71fce7828731fe48ee7d2b1a49ed0c53493f2",
+      "role": "held",
+      "scene": "cori-street.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.533468130315343,
+          "pcm_sha256": "7206c4a1edb130a58ccbd1ca7d93b23497c4dc38286aaaf2719e37cdb976e5cf",
+          "suppression_db": -0.09503529969105692
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.535478133019301,
+          "pcm_sha256": "046814d2b573f58d92d9a52ebe41ecc4c483a0ed7f7f2054169e9aa359bef71e",
+          "suppression_db": 0.06658580337368854
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL007812",
+      "id": 75,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start": null,
+        "center_start": 11007,
+        "id": "RADAR2026-EVAL007812",
+        "label": "spoof",
+        "samples": 70014,
+        "sha256": "4cb0dbf33d4f3ab73c40ef754501a3cbe398013be9d669d124bceee1b6b6ff0f",
+        "source_pcm_sha256": "65d8bfc7dea536fff8c018f48da81b0ed8e07e6d1fa350844eace7e69ec79b2b"
+      },
+      "pcm_sha256": "b2345e89172eb1ea897af27d109257bb57e8cc6145bf400a61c3ade831fadf93",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.516653805460133,
+          "pcm_sha256": "e03b2700c9fed686ab7481c9e7009e00cf0047f0d1c9ada3e1442dcbd8f3de87",
+          "suppression_db": 7.381807228965629
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 4.545152184449468,
+          "pcm_sha256": "d8358844ab5f5be63568f24df25a376aa90fac3dd8bf0d16de585c0c496fa901",
+          "suppression_db": 14.971141858043266
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL007812",
+      "id": 76,
+      "incumbent": "inconclusive",
+      "label": "spoof",
+      "origin": {
+        "background_start": 352000,
+        "center_start": 11007,
+        "id": "RADAR2026-EVAL007812",
+        "label": "spoof",
+        "samples": 70014,
+        "sha256": "4cb0dbf33d4f3ab73c40ef754501a3cbe398013be9d669d124bceee1b6b6ff0f",
+        "source_pcm_sha256": "65d8bfc7dea536fff8c018f48da81b0ed8e07e6d1fa350844eace7e69ec79b2b"
+      },
+      "pcm_sha256": "c957ac1e34d97e32fc40172d1b1879e631711d96714996b698493abc2d539ae7",
+      "role": "held",
+      "scene": "market.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.502710181512358,
+          "pcm_sha256": "1f25f481e11eafee81353cad82d0d9eac6b2b8b43fcb35e51e03bcbe6e14c1c3",
+          "suppression_db": 6.247272712775192
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.509439875314676,
+          "pcm_sha256": "0f0dcb3297f5c7aeb6116e2ba240a6eda671258500439fa10178df8ebf77635e",
+          "suppression_db": 5.354269839443568
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL007812",
+      "id": 77,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start": 2336000,
+        "center_start": 11007,
+        "id": "RADAR2026-EVAL007812",
+        "label": "spoof",
+        "samples": 70014,
+        "sha256": "4cb0dbf33d4f3ab73c40ef754501a3cbe398013be9d669d124bceee1b6b6ff0f",
+        "source_pcm_sha256": "65d8bfc7dea536fff8c018f48da81b0ed8e07e6d1fa350844eace7e69ec79b2b"
+      },
+      "pcm_sha256": "14db41b32d279643102c883df20edacac0aefd29142f60b14b56f5e4664d809a",
+      "role": "held",
+      "scene": "cori-street.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.31935909654135,
+          "pcm_sha256": "cb7237216704530c5b42c33fee84290b8830e12087e12334ac1d18875a6e0f0a",
+          "suppression_db": 0.1965250991333409
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.473499353058048,
+          "pcm_sha256": "97c31067c0f0ae13692b877ef6c93839f488557d5395d1afa911353e0117828a",
+          "suppression_db": 0.06406572442271313
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL026709",
+      "id": 78,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start": null,
+        "center_start": 14955,
+        "id": "RADAR2026-EVAL026709",
+        "label": "spoof",
+        "samples": 77911,
+        "sha256": "04b0510d9999bd18387a6790702c6c194fde4db4c769efd594e8a575a69cd524",
+        "source_pcm_sha256": "327f10975212c9685e67da8844a80285c0052fc9105cbdebc2ac8453dd9ed50d"
+      },
+      "pcm_sha256": "b387d7acea61026a824c64999bb4df1f6f9315a1acfbc9c64d2ce55e72c0718c",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.509875606521798,
+          "pcm_sha256": "0ecf3b10b5e2153f0c36936d9dd4c494c39e70eedb2cf7c33b0e88efb381e090",
+          "suppression_db": 7.806138048116731
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.320079969943416,
+          "pcm_sha256": "4b37b0ba6b15eebc2ab20343b179280dc09b2ae0aefe3283908a39805cc5cd12",
+          "suppression_db": 11.929748307427815
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL026709",
+      "id": 79,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start": 64000,
+        "center_start": 14955,
+        "id": "RADAR2026-EVAL026709",
+        "label": "spoof",
+        "samples": 77911,
+        "sha256": "04b0510d9999bd18387a6790702c6c194fde4db4c769efd594e8a575a69cd524",
+        "source_pcm_sha256": "327f10975212c9685e67da8844a80285c0052fc9105cbdebc2ac8453dd9ed50d"
+      },
+      "pcm_sha256": "1a9b08818387ac9d64a1d1ece04e82991920df8945283de6f97b16dc99291391",
+      "role": "held",
+      "scene": "market.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.274873299447751,
+          "pcm_sha256": "069979e0f572dc7efe0bda74282e5786aa16d6642814cb0798a2a1cdd6aa955d",
+          "suppression_db": 6.891023605801186
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.512493984026201,
+          "pcm_sha256": "3fb6533b28e5aa9efa2f76c6c4d7d6adfb8998aae5d9ce0a76fe59eacc64c04f",
+          "suppression_db": 7.26892959169483
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL026709",
+      "id": 80,
+      "incumbent": "inconclusive",
+      "label": "spoof",
+      "origin": {
+        "background_start": 128000,
+        "center_start": 14955,
+        "id": "RADAR2026-EVAL026709",
+        "label": "spoof",
+        "samples": 77911,
+        "sha256": "04b0510d9999bd18387a6790702c6c194fde4db4c769efd594e8a575a69cd524",
+        "source_pcm_sha256": "327f10975212c9685e67da8844a80285c0052fc9105cbdebc2ac8453dd9ed50d"
+      },
+      "pcm_sha256": "f82fe09e0805e366c65b70486e7f4620ec338394df36b5dc83bfd2549f67cdc6",
+      "role": "held",
+      "scene": "cori-street.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.535478133019301,
+          "pcm_sha256": "0418f30868d608f931700f78939da2b03dd7e05a4ebe7285e8ba5b4431b30c2b",
+          "suppression_db": 1.4754215442718106
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.13688999895193,
+          "pcm_sha256": "9ad8cc5c8ca8a83bbef6caf0d3319f16c04de38523335d9c50cc68178a9a49d6",
+          "suppression_db": 0.599438738815005
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL101718",
+      "id": 81,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start": null,
+        "center_start": 55039,
+        "id": "RADAR2026-EVAL101718",
+        "label": "spoof",
+        "samples": 158079,
+        "sha256": "f1bb7a0580e643921c041d28dd46146c61d45cb9f778bbdc319e1deb2fc88d2b",
+        "source_pcm_sha256": "118b40de5d377e4a9351de901680acd9e4853cdbcf19a367b318bf57fb580f3e"
+      },
+      "pcm_sha256": "d040b572a70a5498946c402473d588491c833586b4eaefdc23cc4f1962345d10",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.4484927527583,
+          "pcm_sha256": "5c73bf3b2350f7197ddac2acc22aa55e9955a7a329ca4eb78fdd1984f9f9db72",
+          "suppression_db": 9.699887552807938
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -1.4823449153916421,
+          "pcm_sha256": "59a4ee10daf73763d87b634c34bc7e6782f87227a73f2b3c79d4380d2ac1c498",
+          "suppression_db": 16.061631905663916
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL101718",
+      "id": 82,
+      "incumbent": "unassessed",
+      "label": "spoof",
+      "origin": {
+        "background_start": 160000,
+        "center_start": 55039,
+        "id": "RADAR2026-EVAL101718",
+        "label": "spoof",
+        "samples": 158079,
+        "sha256": "f1bb7a0580e643921c041d28dd46146c61d45cb9f778bbdc319e1deb2fc88d2b",
+        "source_pcm_sha256": "118b40de5d377e4a9351de901680acd9e4853cdbcf19a367b318bf57fb580f3e"
+      },
+      "pcm_sha256": "4754295691af91a9ec396533ccabb9b41956c347063aff69af5f4fe4e7d4ca5f",
+      "role": "held",
+      "scene": "market.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.49302107156552,
+          "pcm_sha256": "b7f38ca377647d23e4c3cc82956a3269db4b6fc890fea4f37d93c0391a5d6d3f",
+          "suppression_db": 8.218976322308183
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -4.161040336205623,
+          "pcm_sha256": "b2b86b6884eaa097cca04b4ccce5e187db65773bd8be2506c3764e97ca9a3a39",
+          "suppression_db": 8.571003717522697
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-EVAL101718",
+      "id": 83,
+      "incumbent": "inconclusive",
+      "label": "spoof",
+      "origin": {
+        "background_start": 576000,
+        "center_start": 55039,
+        "id": "RADAR2026-EVAL101718",
+        "label": "spoof",
+        "samples": 158079,
+        "sha256": "f1bb7a0580e643921c041d28dd46146c61d45cb9f778bbdc319e1deb2fc88d2b",
+        "source_pcm_sha256": "118b40de5d377e4a9351de901680acd9e4853cdbcf19a367b318bf57fb580f3e"
+      },
+      "pcm_sha256": "04fb3c75ac9f96ae7186cd81ca55e042da0e6bc126fa3e2ab2231b38807501d4",
+      "role": "held",
+      "scene": "cori-street.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.288231040542754,
+          "pcm_sha256": "3ad7820028d449ee38bfa942fa5381e213baaed9ab1f56e4ba3f6805b2ac4cba",
+          "suppression_db": 10.03244956219226
+        },
+        "old_enhancer": {
+          "admitted": false,
+          "logit": 4.422921478117817,
+          "pcm_sha256": "541a68c3f53194fe00aacecebc75481421bb47f6649376c0bea0c7022a3cc8c7",
+          "suppression_db": 19.01749545968842
+        }
+      },
+      "family": null,
+      "group": "market.ogg-0",
+      "id": 84,
+      "incumbent": "unassessed",
+      "label": "isolated",
+      "origin": {
+        "background_start": 64000
+      },
+      "pcm_sha256": "e2137e40c347fcab1bedd7810873c96b1e5dd89d452887d5043de8f8fd728f6d",
+      "role": "held",
+      "scene": "market.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": false,
+          "logit": 1.409389484669281,
+          "pcm_sha256": "fcd69adfdf09f7cbe4c2117e956447e34d3ef61f3b40903c5a6b7f33fbdcb957",
+          "suppression_db": 15.83029023805537
+        },
+        "old_enhancer": {
+          "admitted": false,
+          "logit": -4.181021686581681,
+          "pcm_sha256": "a9bd97fd0825214da0be771a14fc17fa2e3c922ff7b106c422d9a3e1219f7969",
+          "suppression_db": 21.82583164252446
+        }
+      },
+      "family": null,
+      "group": "market.ogg-1",
+      "id": 85,
+      "incumbent": "unassessed",
+      "label": "isolated",
+      "origin": {
+        "background_start": 160000
+      },
+      "pcm_sha256": "fd4c27df3c0081b0f6c5fec661dae83c49ec54f60739597d28eb8766f8f33874",
+      "role": "held",
+      "scene": "market.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": false,
+          "logit": -5.340958672172651,
+          "pcm_sha256": "104e7ce4a7d0ec1be87c1b933fab8c01e8745918610434da805452668f4c4e4b",
+          "suppression_db": 19.146686039523257
+        },
+        "old_enhancer": {
+          "admitted": false,
+          "logit": -5.93626735872274,
+          "pcm_sha256": "71b52122d7f51264687f723275cf774b1f940c48901f19e3f26d0ec4a9dd9f1f",
+          "suppression_db": 26.336741260075236
+        }
+      },
+      "family": null,
+      "group": "market.ogg-2",
+      "id": 86,
+      "incumbent": "unassessed",
+      "label": "isolated",
+      "origin": {
+        "background_start": 256000
+      },
+      "pcm_sha256": "daeefdfd0dfae98263dbe0c6f5cb53fcbdb9a1fbab2b4d7c2744391f9adddc2a",
+      "role": "held",
+      "scene": "market.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.29050392976642,
+          "pcm_sha256": "1fcbb1ef2354a3a1033b72cb95f84f083ac3eebb0c5af908d4ae86cfb09d23a8",
+          "suppression_db": 18.324541023311088
+        },
+        "old_enhancer": {
+          "admitted": false,
+          "logit": -5.572361030397154,
+          "pcm_sha256": "0672ac314630aa8595f575619080d42258199421614470dd327b9291604b4f25",
+          "suppression_db": 26.945155431308013
+        }
+      },
+      "family": null,
+      "group": "market.ogg-3",
+      "id": 87,
+      "incumbent": "unassessed",
+      "label": "isolated",
+      "origin": {
+        "background_start": 352000
+      },
+      "pcm_sha256": "9483ac9c041f13e75f14801d9c65a3bfa012d9c5e3b30a66cde8c0f92e5f0788",
+      "role": "held",
+      "scene": "market.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": false,
+          "logit": -4.7254505304092405,
+          "pcm_sha256": "73327fd6f494a3122d7540e694355542a0f2f14f39ebc34a466c00971ba1b757",
+          "suppression_db": 14.203679742367939
+        },
+        "old_enhancer": {
+          "admitted": false,
+          "logit": -2.5279474248832483,
+          "pcm_sha256": "7b1f844a6604d6175e6d872d38b9e91915ba608cb08ae16d40fcd08110e6cc61",
+          "suppression_db": 14.2874841129916
+        }
+      },
+      "family": null,
+      "group": "cori-street.ogg-0",
+      "id": 88,
+      "incumbent": "unassessed",
+      "label": "isolated",
+      "origin": {
+        "background_start": 128000
+      },
+      "pcm_sha256": "91ac3c4b3df0f886eac1e203544025dddcdfd0a5ebe1802a58af433f1d4dc753",
+      "role": "held",
+      "scene": "cori-street.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": false,
+          "logit": -2.8277728136993945,
+          "pcm_sha256": "7509497e81ac88565d00420697e469b3ed38cff3f4da19ba19f11b8d9637fcd8",
+          "suppression_db": 15.091373719124396
+        },
+        "old_enhancer": {
+          "admitted": false,
+          "logit": 5.858275962428219,
+          "pcm_sha256": "8a6d02ccd9d13d7bc47918f4c8e35b8ee314e12f53cf9fa53c27f3d117d35553",
+          "suppression_db": 24.758985344103223
+        }
+      },
+      "family": null,
+      "group": "cori-street.ogg-1",
+      "id": 89,
+      "incumbent": "unassessed",
+      "label": "isolated",
+      "origin": {
+        "background_start": 576000
+      },
+      "pcm_sha256": "0333bef24a4459da053ead7b365ac6057f636f7af150f9c9aac5a407007884b3",
+      "role": "held",
+      "scene": "cori-street.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": false,
+          "logit": -5.335726304859904,
+          "pcm_sha256": "338f533f8437c3aad0d10cfde40aab86811a3ae2b89cae04ea198a65b931a2e6",
+          "suppression_db": 11.482668552162668
+        },
+        "old_enhancer": {
+          "admitted": false,
+          "logit": -6.44511790502391,
+          "pcm_sha256": "cc7963c76530fa6e71a5894c69ed993790f77d05a22c42e11bae2efdfc9f69c9",
+          "suppression_db": 21.492453391760247
+        }
+      },
+      "family": null,
+      "group": "cori-street.ogg-2",
+      "id": 90,
+      "incumbent": "unassessed",
+      "label": "isolated",
+      "origin": {
+        "background_start": 1504000
+      },
+      "pcm_sha256": "6af3f0e3002bc23541e75e5d70065195e2e97c05e79ffda09c8053b80d80fa7f",
+      "role": "held",
+      "scene": "cori-street.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": false,
+          "logit": -5.6794615015636,
+          "pcm_sha256": "cfc87eb74099fb3f1a7a1c38d2dff9b222739568d20225bd1839895f5547a9b9",
+          "suppression_db": 19.671270874784426
+        },
+        "old_enhancer": {
+          "admitted": false,
+          "logit": -5.666213965119633,
+          "pcm_sha256": "655826c1925ba7c8c1daf41251b96e591e78feb049b4807fbce71969a69a41e1",
+          "suppression_db": 18.427468722727948
+        }
+      },
+      "family": null,
+      "group": "cori-street.ogg-3",
+      "id": 91,
+      "incumbent": "unassessed",
+      "label": "isolated",
+      "origin": {
+        "background_start": 2336000
+      },
+      "pcm_sha256": "198abc4d9acc0e9874773b5c19f0d5c4876845c4d31565d8d235e1a377960285",
+      "role": "held",
+      "scene": "cori-street.ogg"
+    }
+  ],
+  "model_free_pcm_checks": 276,
+  "repeat_max_abs": 2.2351741790771484e-08,
+  "result": {
+    "new_enhancer": {
+      "added_genuine_sources": 1,
+      "added_synthetic_sources": 9,
+      "counts": {
+        "cori-street.ogg/bonafide": {
+          "combined_ai": 2,
+          "enhanced_ai": 0,
+          "enhanced_assessed": 14,
+          "original_ai": 2,
+          "original_assessed": 12,
+          "planned": 14
+        },
+        "cori-street.ogg/isolated": {
+          "combined_ai": 0,
+          "enhanced_ai": 0,
+          "enhanced_assessed": 0,
+          "original_ai": 0,
+          "original_assessed": 0,
+          "planned": 4
+        },
+        "cori-street.ogg/spoof": {
+          "combined_ai": 10,
+          "enhanced_ai": 10,
+          "enhanced_assessed": 13,
+          "original_ai": 5,
+          "original_assessed": 12,
+          "planned": 14
+        },
+        "gain_control/bonafide": {
+          "combined_ai": 0,
+          "enhanced_ai": 0,
+          "enhanced_assessed": 14,
+          "original_ai": 0,
+          "original_assessed": 13,
+          "planned": 14
+        },
+        "gain_control/spoof": {
+          "combined_ai": 12,
+          "enhanced_ai": 9,
+          "enhanced_assessed": 13,
+          "original_ai": 12,
+          "original_assessed": 13,
+          "planned": 14
+        },
+        "market.ogg/bonafide": {
+          "combined_ai": 3,
+          "enhanced_ai": 2,
+          "enhanced_assessed": 14,
+          "original_ai": 2,
+          "original_assessed": 10,
+          "planned": 14
+        },
+        "market.ogg/isolated": {
+          "combined_ai": 0,
+          "enhanced_ai": 0,
+          "enhanced_assessed": 2,
+          "original_ai": 0,
+          "original_assessed": 0,
+          "planned": 4
+        },
+        "market.ogg/spoof": {
+          "combined_ai": 10,
+          "enhanced_ai": 9,
+          "enhanced_assessed": 13,
+          "original_ai": 4,
+          "original_assessed": 8,
+          "planned": 14
+        }
+      },
+      "new_clean_or_isolated": 0,
+      "passes": true,
+      "scenes_with_gains": [
+        "cori-street.ogg",
+        "market.ogg"
+      ]
+    },
+    "old_enhancer": {
+      "added_genuine_sources": 0,
+      "added_synthetic_sources": 1,
+      "counts": {
+        "cori-street.ogg/bonafide": {
+          "combined_ai": 2,
+          "enhanced_ai": 0,
+          "enhanced_assessed": 13,
+          "original_ai": 2,
+          "original_assessed": 12,
+          "planned": 14
+        },
+        "cori-street.ogg/isolated": {
+          "combined_ai": 0,
+          "enhanced_ai": 0,
+          "enhanced_assessed": 0,
+          "original_ai": 0,
+          "original_assessed": 0,
+          "planned": 4
+        },
+        "cori-street.ogg/spoof": {
+          "combined_ai": 6,
+          "enhanced_ai": 3,
+          "enhanced_assessed": 13,
+          "original_ai": 5,
+          "original_assessed": 12,
+          "planned": 14
+        },
+        "gain_control/bonafide": {
+          "combined_ai": 0,
+          "enhanced_ai": 0,
+          "enhanced_assessed": 14,
+          "original_ai": 0,
+          "original_assessed": 13,
+          "planned": 14
+        },
+        "gain_control/spoof": {
+          "combined_ai": 12,
+          "enhanced_ai": 7,
+          "enhanced_assessed": 13,
+          "original_ai": 12,
+          "original_assessed": 13,
+          "planned": 14
+        },
+        "market.ogg/bonafide": {
+          "combined_ai": 2,
+          "enhanced_ai": 0,
+          "enhanced_assessed": 13,
+          "original_ai": 2,
+          "original_assessed": 10,
+          "planned": 14
+        },
+        "market.ogg/isolated": {
+          "combined_ai": 0,
+          "enhanced_ai": 0,
+          "enhanced_assessed": 0,
+          "original_ai": 0,
+          "original_assessed": 0,
+          "planned": 4
+        },
+        "market.ogg/spoof": {
+          "combined_ai": 4,
+          "enhanced_ai": 0,
+          "enhanced_assessed": 13,
+          "original_ai": 4,
+          "original_assessed": 8,
+          "planned": 14
+        }
+      },
+      "new_clean_or_isolated": 0,
+      "passes": false,
+      "scenes_with_gains": [
+        "cori-street.ogg"
+      ]
+    }
+  }
+}

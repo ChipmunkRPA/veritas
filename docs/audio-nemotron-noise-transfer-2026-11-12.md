@@ -99,6 +99,44 @@ and enhanced PCM commitments. Four restaurant-only excerpts passed speech
 admission and stayed below both flag points. None of the four Vienna-only
 excerpts passed speech admission. [First held receipt](evaluation-panels/audio-nemotron-noise-transfer-2026-11-12.json)
 
+## Confirmation at the same decision points
+
+Freeze a separate 92-view panel before scoring. It uses 14 genuine and 14
+synthetic English files from the previously acquired RADAR evaluation prefix.
+The selector excludes every file and exact decoded hash used in the earlier
+RADAR analysis. Each eligible file carries one label for its entire native
+length. The selected center three-second excerpts use two different sound
+recordings at −5 dB and a shared gain control. Four excerpts from each sound
+recording also enter alone. Publisher metadata does not identify voice
+generators or speakers on this split. All 92 delivered PCM hashes are distinct
+and disjoint from the 130 prepared deliveries in the earlier comparison.
+[RADAR terms and known limits](audio-radar-transfer-2026-11-12.md) ·
+[Cebu market by Bim24, CC BY-SA 4.0](https://commons.wikimedia.org/w/index.php?title=File:Carbon_Market_at_Night_in_Cebu_City.ogg&oldid=1169036785) ·
+[Coastal street by Cori Samuel, public domain](https://commons.wikimedia.org/w/index.php?title=File:Sunday_in_the_city_street_noise1.ogg&oldid=1110023161)
+
+| Condition | Original AI flags | With earlier enhancer | With newer enhancer |
+| --- | ---: | ---: | ---: |
+| Cebu market, synthetic | 4/14 | 4/14 | 10/14 |
+| Cebu market, genuine | 2/14 | 2/14 | 3/14 |
+| Coastal street, synthetic | 5/14 | 6/14 | 10/14 |
+| Coastal street, genuine | 2/14 | 2/14 | 2/14 |
+| Gain-only, synthetic | 12/14 | 12/14 | 12/14 |
+| Gain-only, genuine | 0/14 | 0/14 | 0/14 |
+| Background-only excerpts | 0/8 | 0/8 | 0/8 |
+
+At the unchanged points the newer enhancer added 11 correct noisy
+deliveries across nine source files and one additional genuine flag. It
+passed the frozen confirmation rule. The earlier enhancer added one noisy
+synthetic file and no genuine flag. The new enhancer alone missed three
+gain-only positives that the original check caught. The additive policy
+preserved them. Both trials show additional whole-window review evidence.
+They do not establish an improved calibrated probability or exact edit
+boundaries. The restaurant false alarms inherited from the original check
+remain a separate problem. Customer use requires a bounded local integration
+and verification of the original audio, report and evidence exports.
+The model-free reader checked 276 original and enhanced PCM hashes.
+[Confirmation receipt](evaluation-panels/audio-nemotron-noise-confirmation-2026-11-12.json)
+
 ## Replay
 
 Use the public 192 MiB archive prefix and labels, the pinned restaurant and
@@ -138,4 +176,29 @@ for phase in selection point held; do
   backend/.venv/bin/python -B -m scripts.audio_nemotron_noise_transfer "$phase" "$run" || exit 1
 done
 python3 -I -S backend/scripts/review_audio_nemotron_noise_transfer.py export "$run" --out "$receipt"
+```
+
+The two saved operating points are reused for confirmation. Reconstruct the
+[RADAR evaluation prefix](audio-radar-transfer-2026-11-12.md#reproduce-the-source-selection)
+as `radar_source`. Download the second pair of recorded environments into
+`held_sources`, then start the confirmation in a new directory.
+
+```sh
+curl -fLsS --max-filesize 450000 \
+  'https://upload.wikimedia.org/wikipedia/commons/d/d1/Carbon_Market_at_Night_in_Cebu_City.ogg' \
+  -o "$held_sources/market.ogg"
+curl -fLsS --max-filesize 3500000 \
+  'https://upload.wikimedia.org/wikipedia/commons/5/5d/Sunday_in_the_city_street_noise1.ogg' \
+  -o "$held_sources/cori-street.ogg"
+backend/.venv/bin/python -B -m scripts.audio_nemotron_noise_confirmation \
+  "$confirmation" "$radar_source" "$held_sources"
+backend/.venv/bin/python -B -m scripts.audio_nemotron_noise_transfer enhance "$confirmation" \
+  --model "$new_model" --old-model "$old_model"
+backend/.venv/bin/python -B -m scripts.audio_nemotron_noise_transfer held "$confirmation"
+python3 -B backend/scripts/review_audio_nemotron_noise_confirmation.py export "$confirmation" --out "$confirmation_receipt"
+```
+
+```sh
+python3 -B -S backend/scripts/review_audio_nemotron_noise_confirmation.py review \
+  docs/evaluation-panels/audio-nemotron-noise-confirmation-2026-11-12.json
 ```

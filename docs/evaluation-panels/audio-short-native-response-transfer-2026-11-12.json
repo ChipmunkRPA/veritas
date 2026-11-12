@@ -1,0 +1,321 @@
+{
+  "schema": "chipmunk.audio-short-native-response-transfer/1",
+  "method": {
+    "input": "Compare unaltered original mono native windows of 2.00 seconds at 1 and 3 seconds with the same installed speech detector on native 1.20-second windows every 0.60 seconds. Both receive their usual inference preprocessing and half-window speech admission. Record exact source ranges and input hashes. No denoising, separation, enrollment, geometry cue, or extra inference weights.",
+    "points": "Use the 12 exact genuine earlier point-control PCM files, retaining prior exact 2.00-second responses. Fit no model. Use separate max-genuine points per arm. Cross-scale response is the mean of separate genuine-reference median/IQR-standardized short score and the strongest eligible long score overlapping at least 0.60 seconds. Retain the short range. Freeze all points before held inference.",
+    "held": "Six new source episodes spanning four roles of previously qualified LibriSpeech donors, two synthesis families, and two retained AMI rooms. Each room has .64, .80, and .96-second edits. Each episode includes distinct true same-reader and other-reader controls, matched fades/level, identical samples outside the splice, and fresh exact cuts with competing recorded words in at least half the edit. Two isolated room controls are genuine. Voice source banks and rooms have prior project exposure, and selected synthesized byte/PCM inputs and room cuts exclude recorded earlier inputs.",
+    "decision": "Report AI flags, exact useful ranges, genuine false groups, isolated-room flags, and unassessed cases. A useful location needs 0.30 IoU and 0.50 edit coverage. Equal false budgets 0, 1, and 2 are descriptive. Advance only for useful gains across both generator families or separately confirmed cohorts with comparable false alarms, including isolated room controls."
+  },
+  "results": {
+    "held": {
+      "fixed": {
+        "current": {
+          "ai_flags": 0,
+          "useful_ranges": 0,
+          "false_groups": 1,
+          "unassessed": 0,
+          "background_false_flags": 0
+        },
+        "short": {
+          "ai_flags": 0,
+          "useful_ranges": 0,
+          "false_groups": 0,
+          "unassessed": 0,
+          "background_false_flags": 0
+        },
+        "cross_scale": {
+          "ai_flags": 0,
+          "useful_ranges": 0,
+          "false_groups": 0,
+          "unassessed": 0,
+          "background_false_flags": 0
+        }
+      },
+      "equal_false_groups": {
+        "0": {
+          "current": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "short": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "cross_scale": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "background_false_flags": 0
+          }
+        },
+        "1": {
+          "current": {
+            "ai_flags": 1,
+            "useful_ranges": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "short": {
+            "ai_flags": 1,
+            "useful_ranges": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "cross_scale": {
+            "ai_flags": 1,
+            "useful_ranges": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "background_false_flags": 0
+          }
+        },
+        "2": {
+          "current": {
+            "ai_flags": 1,
+            "useful_ranges": 0,
+            "false_groups": 2,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "short": {
+            "ai_flags": 2,
+            "useful_ranges": 0,
+            "false_groups": 2,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "cross_scale": {
+            "ai_flags": 2,
+            "useful_ranges": 0,
+            "false_groups": 2,
+            "unassessed": 0,
+            "background_false_flags": 0
+          }
+        }
+      }
+    },
+    "expressive": {
+      "fixed": {
+        "current": {
+          "ai_flags": 0,
+          "useful_ranges": 0,
+          "false_groups": 0,
+          "unassessed": 0,
+          "background_false_flags": 0
+        },
+        "short": {
+          "ai_flags": 0,
+          "useful_ranges": 0,
+          "false_groups": 0,
+          "unassessed": 0,
+          "background_false_flags": 0
+        },
+        "cross_scale": {
+          "ai_flags": 0,
+          "useful_ranges": 0,
+          "false_groups": 0,
+          "unassessed": 0,
+          "background_false_flags": 0
+        }
+      },
+      "equal_false_groups": {
+        "0": {
+          "current": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "short": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "cross_scale": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "background_false_flags": 0
+          }
+        },
+        "1": {
+          "current": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "short": {
+            "ai_flags": 1,
+            "useful_ranges": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "cross_scale": {
+            "ai_flags": 1,
+            "useful_ranges": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "background_false_flags": 0
+          }
+        },
+        "2": {
+          "current": {
+            "ai_flags": 3,
+            "useful_ranges": 1,
+            "false_groups": 2,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "short": {
+            "ai_flags": 3,
+            "useful_ranges": 1,
+            "false_groups": 2,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "cross_scale": {
+            "ai_flags": 3,
+            "useful_ranges": 1,
+            "false_groups": 2,
+            "unassessed": 0,
+            "background_false_flags": 0
+          }
+        }
+      }
+    },
+    "stock": {
+      "fixed": {
+        "current": {
+          "ai_flags": 0,
+          "useful_ranges": 0,
+          "false_groups": 1,
+          "unassessed": 0,
+          "background_false_flags": 0
+        },
+        "short": {
+          "ai_flags": 0,
+          "useful_ranges": 0,
+          "false_groups": 0,
+          "unassessed": 0,
+          "background_false_flags": 0
+        },
+        "cross_scale": {
+          "ai_flags": 0,
+          "useful_ranges": 0,
+          "false_groups": 0,
+          "unassessed": 0,
+          "background_false_flags": 0
+        }
+      },
+      "equal_false_groups": {
+        "0": {
+          "current": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "short": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "cross_scale": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "background_false_flags": 0
+          }
+        },
+        "1": {
+          "current": {
+            "ai_flags": 1,
+            "useful_ranges": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "short": {
+            "ai_flags": 1,
+            "useful_ranges": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "cross_scale": {
+            "ai_flags": 2,
+            "useful_ranges": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "background_false_flags": 0
+          }
+        },
+        "2": {
+          "current": {
+            "ai_flags": 3,
+            "useful_ranges": 1,
+            "false_groups": 2,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "short": {
+            "ai_flags": 2,
+            "useful_ranges": 0,
+            "false_groups": 2,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "cross_scale": {
+            "ai_flags": 2,
+            "useful_ranges": 0,
+            "false_groups": 2,
+            "unassessed": 0,
+            "background_false_flags": 0
+          }
+        }
+      }
+    }
+  },
+  "views": {
+    "ordinary_same_host": 6,
+    "ordinary_other_voice": 6,
+    "synthetic": 6,
+    "background_only": 2
+  },
+  "new_model_calls": {
+    "point": {
+      "short": 106
+    },
+    "held": {
+      "current": 40,
+      "short": 179
+    }
+  },
+  "commitments": {
+    "freeze": "f8dfed790512a7a386a65861bf3b20df3db2f5c9eac695bc2352b430e06b7f11",
+    "roster": "d6b3d04638144fe6526cc1d883933264a0973de48d3b3032f236ab2c5fb12908",
+    "point": "8fda24321cf57b1b617eb3a28ecee8576e8a1ca5de069e07e537f25d204472c9",
+    "points": "bbd3e2043f99b4e6df686b8120ade38c837138efc5ef1dc13e4e0ecb79c2b71d",
+    "held": "a9dd0392cab7cc5faa59fa8abf935ba64c2a495cb15fde0cb42936e79c1ed896"
+  }
+}

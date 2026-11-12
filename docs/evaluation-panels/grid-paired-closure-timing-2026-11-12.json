@@ -1,0 +1,121 @@
+{
+  "discovery": {
+    "earlier_drive_neural/timing_difference": 2,
+    "earlier_pixels_ordinary/timing_difference": 2,
+    "original/no_large_timing_difference": 2,
+    "source_time_neural/no_large_timing_difference": 2
+  },
+  "freeze_sha256": "f2b3d25f9d78b6f2cdc4450cb28e14ddd07fa3b5836a3638484d01dccffc987c",
+  "gate": {
+    "controls": true,
+    "correct": true,
+    "coverage": true,
+    "groups": true
+  },
+  "held": {
+    "audio_late_ordinary": {
+      "correct": 4,
+      "current_flags": 0,
+      "flags": 4,
+      "measured": 4,
+      "prior_flags": 1,
+      "views": 4
+    },
+    "coherent_late_ordinary": {
+      "correct": 0,
+      "current_flags": 0,
+      "flags": 0,
+      "measured": 4,
+      "prior_flags": 0,
+      "views": 4
+    },
+    "light_gain_ordinary": {
+      "correct": 0,
+      "current_flags": 0,
+      "flags": 0,
+      "measured": 4,
+      "prior_flags": 1,
+      "views": 4
+    },
+    "mouth_early_ordinary": {
+      "correct": 3,
+      "current_flags": 0,
+      "flags": 3,
+      "measured": 3,
+      "prior_flags": 1,
+      "views": 4
+    },
+    "mouth_late_ordinary": {
+      "correct": 4,
+      "current_flags": 0,
+      "flags": 4,
+      "measured": 4,
+      "prior_flags": 0,
+      "views": 4
+    },
+    "original": {
+      "correct": 0,
+      "current_flags": 0,
+      "flags": 0,
+      "measured": 4,
+      "prior_flags": 1,
+      "views": 4
+    }
+  },
+  "native_readback": {
+    "anonymous_example": {
+      "aligned_speech_samples": 2560,
+      "range_s": [
+        "18/25",
+        "26/25"
+      ],
+      "role": "mouth_late_ordinary",
+      "signed_picture_minus_audio_s": "8/25",
+      "source_picture_s": "18/25",
+      "submitted_picture_s": "26/25"
+    },
+    "exact_native_pictures": 1800,
+    "frozen_held_groups": 4,
+    "readout_sha256": "f0e80e78290ec8312d7bec518aeb9d0456d1c69916a185e568bde80ecfde515f",
+    "reopened_event_pcm_slices": 46,
+    "status": "verified",
+    "verified_event_picture_anchors": 23,
+    "verified_pcm_samples": 1143552
+  },
+  "old_av_correct": 0,
+  "old_current_correct": 0,
+  "protocol": {
+    "earlier": "Same-source earlier native recording and its marked visible closure. Timing evidence only.",
+    "gate": "At least eight correct known shifts across three source groups, zero flags on original or coherent controls, at least 75 percent assessed cases, and comparable native crop and PCM replay.",
+    "held": "First four eligible source groups from the qualified reserve outside both discovery components. Choose by original word clock and visible closure. Every retained group supplies both signed visual controls, audio-only, synchronized retime, brightness/gain, and original.",
+    "match": "Known sign and lag error at most two native pictures. Report event times rather than estimating the entire edit.",
+    "schema": "chipmunk.grid-paired-closure-panel/1"
+  },
+  "replay_sha256": "c9b9c1a8c48cc65b455d6922e1175f2b45291f738f0e6d5571312514f59d516b",
+  "schema": "chipmunk.grid-paired-closure-timing-public/1",
+  "serving_changed": false,
+  "thresholds": {
+    "audio_alternative_exclusion_samples": 640,
+    "audio_offsets_samples": [
+      640,
+      3200
+    ],
+    "audio_search_samples": 7680,
+    "closure_max_gap": 0.055,
+    "maximum_visual_template_error": 0.045,
+    "minimum_audio_correlation": 0.9,
+    "minimum_audio_margin": 0.07,
+    "minimum_reopening": 0.032,
+    "minimum_visual_margin": 0.004,
+    "minimum_visual_separation_frames": 3,
+    "review_offset_minimum_seconds": "3/25",
+    "sample_rate": 16000,
+    "signed_convention": "Positive when the picture event moved later than its matching speech.",
+    "video_rate": 25,
+    "visual_offsets": [
+      -2,
+      4
+    ],
+    "visual_search_pictures": 10
+  }
+}

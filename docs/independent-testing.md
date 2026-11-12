@@ -22,6 +22,11 @@ replays a PNG seam or video frame schedule directly from a supplied original
 and its signed evidence record. Start there to check those measurements on a
 local export.
 
+The [earlier-video comparison](video-reference-comparison-2026-11-11.md#replay-without-the-app)
+re-decodes two supplied clips and checks the JSON, native picture timestamps,
+before/during/after previews, and exact soundtrack excerpts. It can run without
+the app or detector weights.
+
 The [audio supplement example](#review-an-audio-supplement-by-acoustic-condition)
 uses authored scores to show how an acoustic routing error can add a genuine
 false flag.

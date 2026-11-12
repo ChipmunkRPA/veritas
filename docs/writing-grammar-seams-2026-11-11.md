@@ -1,0 +1,33 @@
+# Paragraph evidence from changes in grammatical patterns
+
+An AI rewrite can change the order of common grammatical words even when the topic and word counts stay similar. This experiment checks whether a paragraph’s pattern differs from both neighbors in one submitted document. It uses fixed word categories, such as pronouns, conjunctions and auxiliary verbs, and retains punctuation and sentence boundaries. It replaces other words with a single category to reduce the influence of topic. Prior studies have used sequences of syntactic categories to measure style changes. Recent editing research also finds that signals from whole AI-generated text may behave differently when AI revises human prose. [Syntactic sequences and style changes](https://doi.org/10.1371/journal.pone.0267590) · [Generation and editing study](https://arxiv.org/abs/2608.27855)
+
+## Frozen comparison
+
+The candidate compares three-symbol frequency distributions with squared Hellinger distance. For each interior paragraph with enough material, it takes the smaller distance to either neighbor and subtracts the distance between the two neighbors. This checks for a local change amid similar surrounding text. A one-symbol version checks whether sequence order adds information. Each cue can mark one uniquely highest paragraph above its own operating point. The operating points use the 90th percentile of maximum scores from 61 human originals and editorial controls in 18 earlier eLife and Federal Register source groups. The new publishers supplied no fitting material.
+
+The fresh panel admitted nine Census Bureau explanatory articles and seven Copyright Office circulars. It excludes captions, marked quotations and contact text. The Census pages were first published in 2019–2020. Their official HTML contains review timestamps in 2024–2026, so the retrieved prose may include later changes. The circular PDFs report creation and last modification before November 30, 2022. The intake checked 38,910 English entries from 12 retained project packets and separately checked the 43 previous answer-order fixtures. No admitted source excerpt or donor shared a normalized 12-word fragment with those entries. Model pretraining exposure is unknown. [Census research and public-access policy](https://www2.census.gov/foia/ds_policies/ds027.pdf) · [Copyright Office circulars](https://www.copyright.gov/circs/) · [U.S. government works provision](https://www.copyright.gov/title17/92chap1.html)
+
+Each source supplied one four-block excerpt, one authentic same-document prose substitution with a length-matched donor and one rewrite attempt per generator. One unchanged excerpt and one human substitution served as controls. The replacement went into one interior position and the other three blocks kept their exact text. A Census block maps to an HTML paragraph. A circular block maps to a native PDF text block. A rewrite must end naturally, fit in one paragraph, stay within 65–135% of the original word count and meet a normalized lexical edit distance of at least 0.25. These rules check the form and extent of the rewrite. The generator may still change the source’s meaning or facts.
+
+The first two offline generators were OLMo 2 and TinyLlama. TinyLlama had no admitted rewrites, so a separate extension added Granite before the first detector outcomes were read. It kept the same sources, rewrite prompt, admission rules and operating points. All three generators are Apache-2.0 releases from different families than the answer-order study. The trial uses pinned 4-bit versions with verified weights. [OLMo 2 model card](https://huggingface.co/allenai/OLMo-2-0425-1B-Instruct) · [TinyLlama model card](https://huggingface.co/TinyLlama/TinyLlama-1.1B-Chat-v1.0) · [Granite model card](https://huggingface.co/ibm-granite/granite-3.3-2b-instruct) · [Prior answer-order test](writing-option-order-transfer-2026-11-11.md)
+
+The comparison used the existing first six positive three-sentence contexts. A useful location required at least 0.30 intersection over union in non-whitespace characters against the exact known replacement. The frozen advance rule required the combined check to recover an additional source group in each publisher and each of at least two represented generator families with at most one additional human source group flagged overall. The operating points apply to the experiment. [Runner](../backend/scripts/writing_grammar_seams.py) · [Independent replay](../backend/scripts/review_writing_grammar_seams.py)
+
+## Local results
+
+The local run assessed 25 rewrites and 32 human controls from 16 source groups. OLMo admitted 9 of 16 attempts, Granite admitted 16 of 16, and TinyLlama admitted 0 of 16. Fourteen TinyLlama responses contained a newline, and twelve failed the word-count requirement. Those conditions can overlap. OLMo and TinyLlama reproduced their initial output texts exactly in the extension.
+
+| Outcome | Current context | Single categories | Three-symbol sequences | Current plus sequences |
+| --- | ---: | ---: | ---: | ---: |
+| Useful locations in OLMo rewrites | 5/9 | 1/9 | 1/9 | 6/9 |
+| Useful locations in Granite rewrites | 7/16 | 1/16 | 0/16 | 7/16 |
+| Useful locations in Census articles | 7/14 | 1/14 | 0/14 | 7/14 |
+| Useful locations in Copyright Office circulars | 5/11 | 1/11 | 1/11 | 6/11 |
+| Untouched human files flagged | 7/16 | 3/16 | 2/16 | 8/16 |
+| Human prose substitutions flagged | 6/16 | 1/16 | 0/16 | 6/16 |
+| Human source groups flagged | 8/16 | 4/16 | 2/16 | 8/16 |
+
+The combined check added one correctly localized OLMo rewrite in a Copyright Office circular and one false flag on an untouched document from a human source group the current check had already flagged. The sequence cue had eligible input in all 57 admitted files. It added zero locations in the Census articles and zero in Granite rewrites. The finding remains experimental under the frozen transfer criteria. The comparison uses related variants within each source group and covers two kinds of formal English prose.
+
+The current classifier completed 78 CPU forwards over 312 unique context inputs. A separate local replay reconstructed 80 publisher blocks, 228 fixture ranges, 511 current context ranges and 228 paragraph scores. It refit all 36 group maxima, verified all 48 generation dispositions and reproduced 144 outcome counts. The initial TinyLlama startup stopped at a model filename convention. The first OLMo startup stopped because the converted checkpoint represented Boolean values as integers. The retained runs used identical weights and staged the filename and Boolean types expected by the installed loader. [Aggregate results and commitments](evaluation-panels/writing-grammar-seams-2026-11-11.json)

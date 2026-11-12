@@ -1,0 +1,28 @@
+{
+  "audio_edit_sample_range_at_16khz": [
+    12800,
+    22400
+  ],
+  "matched_comparison_counts": {
+    "exact_picture_and_sound": 4,
+    "lossy_all_pictures_differ": 4,
+    "remux_zero_changes": 4,
+    "trim_unassessed": 4
+  },
+  "picture_edit_frame_range": [
+    12,
+    24
+  ],
+  "retiming_replay": {
+    "changed_samples": 10236,
+    "matching_pictures": 83,
+    "source_audio_range_samples": [
+      16640,
+      26880
+    ]
+  },
+  "schema": "chipmunk.video-reference-comparison-validation/1",
+  "scope": "Exact decoded differences on lossless edits, remuxes, one lossy delivery, and clock-mismatched trims of retained video. No calibrated AI detection or alignment across mismatched inputs.",
+  "source_groups": 4,
+  "source_receipt_sha256": "434a31a8a3b8744984f42fb851b75e1de84f789556f02364385512b1b345fd8b"
+}

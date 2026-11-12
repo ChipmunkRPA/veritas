@@ -30,6 +30,10 @@ VERSION = "audio-input/1"
 _FRAME = re.compile(r"\bn:(\d+)\s+pts:(-?\d+).*?\bnb_samples:(\d+)")
 
 
+class AudioStreamUnavailable(ValueError):
+    """The container has no audio stream to decode."""
+
+
 @dataclass(frozen=True)
 class DecodedAudio:
     pcm: np.ndarray
@@ -124,7 +128,7 @@ def decode_audio(path: Path, *, source_sha256: str, max_seconds: float = 600.0,
         info = json.loads(probe.stdout)
         stream = (info.get("streams") or [None])[0]
         if not stream:
-            raise ValueError("The file has no audio stream")
+            raise AudioStreamUnavailable("The file has no audio stream")
         maximum = math.floor(max_seconds * SAMPLE_RATE)
         filters = f"aformat=sample_fmts=s16:channel_layouts=mono,aresample={SAMPLE_RATE},atrim=end_sample={maximum},ashowinfo,asetpts=N/SR/TB"
         layout = stream.get("channel_layout")

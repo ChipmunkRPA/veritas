@@ -44,6 +44,7 @@ import RevisionDeltas from './RevisionDeltas'
 import ImageEvidenceCards from '../evidence/ImageEvidenceCards'
 import ImageReferenceComparison from '../evidence/ImageReferenceComparison'
 import DocumentRevisionComparison from '../evidence/DocumentRevisionComparison'
+import VideoReferenceComparison from '../evidence/VideoReferenceComparison'
 import MultimediaEvidenceCards from '../evidence/MultimediaEvidenceCards'
 import ExpertAnalysisInvitation from './ExpertAnalysisInvitation'
 import AutomatedResultStatus from './AutomatedResultStatus'
@@ -253,7 +254,8 @@ export default function AnalysisWorkspace() {
 
   const expertInvitation = done ? <ExpertAnalysisInvitation analysisId={a.id} /> : null
   const sourceComparison = !done ? null : a.kind === 'image' ? <ImageReferenceComparison key={a.id} analysisId={a.id} />
-    : a.kind === 'document' ? <DocumentRevisionComparison key={a.id} analysisId={a.id} /> : null
+    : a.kind === 'document' ? <DocumentRevisionComparison key={a.id} analysisId={a.id} />
+      : a.kind === 'video' ? <VideoReferenceComparison key={a.id} analysisId={a.id} /> : null
   const body = !legacy.data ? null : !v2 ? (
     <LegacyResult a={legacy.data} token={t} engine={engine} mediaNotice={mediaNotice} afterVerdict={<>{expertInvitation}{sourceComparison}{hr}<FindingsList analysis={a} signals={signals.data ?? []} query={findings} failed={findingsFailed(a.caveats)} /></>} />
   ) : (

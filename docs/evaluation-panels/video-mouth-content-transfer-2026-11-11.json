@@ -1,0 +1,148 @@
+{
+  "schema": "chipmunk.video-mouth-content-transfer-result/1",
+  "freeze_sha256": "3f9d345bbed71338cd82c110e784f3165a8bf6c8b84679f4d6a18dab8335134f",
+  "held_journal_sha256": "880ca726e8e902f168cb3674e3be084e63ca6b1f641deab8a8fc87e792ce31d5",
+  "calibration_sha256": "9243f68c7aa5ee19d744c336545a8558d98be89051f75e18d340381bfd22d65f",
+  "held_groups": 12,
+  "fit_active_ticks": 264,
+  "thresholds": {
+    "audio_only": 0.9725534937991166,
+    "paired": 0.9836251493989988
+  },
+  "native_pictures_committed": 647,
+  "totals": {
+    "current": {
+      "unassessed": 60
+    },
+    "audio_only": {
+      "measured_no_range": 58,
+      "ordinary_range": 2
+    },
+    "paired": {
+      "measured_no_range": 54,
+      "wrong_range": 2,
+      "ordinary_range": 4
+    }
+  },
+  "by_condition": {
+    "genuine": {
+      "current": {
+        "unassessed": 12
+      },
+      "audio_only": {
+        "measured_no_range": 12
+      },
+      "paired": {
+        "measured_no_range": 12
+      }
+    },
+    "gain": {
+      "current": {
+        "unassessed": 12
+      },
+      "audio_only": {
+        "measured_no_range": 12
+      },
+      "paired": {
+        "measured_no_range": 12
+      }
+    },
+    "filter": {
+      "current": {
+        "unassessed": 12
+      },
+      "audio_only": {
+        "measured_no_range": 12
+      },
+      "paired": {
+        "measured_no_range": 11,
+        "ordinary_range": 1
+      }
+    },
+    "same_words": {
+      "current": {
+        "unassessed": 12
+      },
+      "audio_only": {
+        "measured_no_range": 10,
+        "ordinary_range": 2
+      },
+      "paired": {
+        "measured_no_range": 9,
+        "ordinary_range": 3
+      }
+    },
+    "different_words": {
+      "current": {
+        "unassessed": 12
+      },
+      "audio_only": {
+        "measured_no_range": 12
+      },
+      "paired": {
+        "wrong_range": 2,
+        "measured_no_range": 10
+      }
+    }
+  },
+  "median_active_edit_rms_error_db": {
+    "gain": 3.7416780900552853,
+    "filter": 0.05618393576607377,
+    "same_words": 0.6443647842089473,
+    "different_words": 0.623724687757174
+  },
+  "pilot_advances": false,
+  "source": {
+    "publisher_revision": "1658cd342dff90010aa843eaeebd53610a08b1dc",
+    "verified_recordings": 72,
+    "speaker_groups": 24,
+    "prior_delay_speakers_excluded": 15,
+    "fit_speaker_groups": 8,
+    "calibration_speaker_groups": 4,
+    "held_speaker_groups": 12,
+    "intake_freeze_sha256": "003cfea924caa6e62d97428fabef45bad64386282e6ec80ac8365a637acfb0cc",
+    "publisher_bytes_sha256": "34155a94913800377d698611ada50c611033ce8ee1e800d917336164624dc928"
+  },
+  "panel": {
+    "held_views": 60,
+    "different_words": 12,
+    "ordinary_controls": 48,
+    "authored_duration_ms": 960,
+    "edge_mix_ms": 10,
+    "minimum_interval_iou": 0.5
+  },
+  "selected_wrong_ranges": [
+    {
+      "authored_seconds": [
+        0.4,
+        1.36
+      ],
+      "estimated_seconds": [
+        0.96,
+        1.44
+      ],
+      "iou": "5/13"
+    },
+    {
+      "authored_seconds": [
+        0.48,
+        1.44
+      ],
+      "estimated_seconds": [
+        1.04,
+        1.52
+      ],
+      "iou": "5/13"
+    }
+  ],
+  "independent_audit": {
+    "status": "verified",
+    "publisher_sources_byte_checked": 72,
+    "held_pcm_inputs_rebuilt": 60,
+    "source_audio_slices": 360,
+    "native_pictures_replayed": 132,
+    "native_mouth_crops_replayed": 132,
+    "aggregate_sha256": "4c278b833a9d65207179d7fad8bd4e3f4c24de98cde0eac6aa578266fab080b2"
+  },
+  "scope": "Two scripted English utterances on native CREMA-D pictures with within-speaker soundtrack replacement. No neural mouth redraw or phoneme-label ground truth."
+}

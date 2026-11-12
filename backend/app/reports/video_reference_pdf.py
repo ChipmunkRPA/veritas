@@ -1,0 +1,138 @@
+"""Supplemental PDF for a comparison of two source videos."""
+
+from __future__ import annotations
+
+import pymupdf
+
+from app.reports.image_reference_pdf import INK, MARGIN, MUTED, PAGE_HEIGHT, PAGE_WIDTH, RIGHT, RULE, _text
+
+TITLE = "Earlier video comparison"
+LABELS = {"earlier": "Earlier clip", "submitted": "Analyzed clip"}
+PICTURE_STATUS = {
+    "comparison_limit": "At least one clip exceeds the picture comparison limits.",
+    "unverified_picture_clock": "The comparison could not verify every picture timestamp.",
+    "picture_geometry_differs": "The clips have different display dimensions.",
+    "picture_timelines_differ": "The clips have different relative picture timestamps.",
+}
+AUDIO_STATUS = {
+    "no_stream": "Neither clip has a soundtrack.",
+    "audio_unassessed": "Both soundtracks need a decodable continuous sample clock.",
+    "audio_timelines_differ": "The soundtracks have different start times or sample counts.",
+}
+
+
+def _page(document, title):
+    page = document.new_page(width=PAGE_WIDTH, height=PAGE_HEIGHT)
+    _text(page, MARGIN, 51, "CHIPMUNK VERIFY", size=10, font="hebo")
+    page.draw_line((MARGIN, 65), (RIGHT, 65), color=RULE)
+    _text(page, MARGIN, 101, title, size=24, font="hebo")
+    page.draw_line((MARGIN, 744), (RIGHT, 744), color=RULE)
+    _text(page, MARGIN, 763, "Supplemental source comparison", size=9, color=MUTED)
+    _text(page, RIGHT - 36, 763, f"Page {len(document)}", size=9, color=MUTED)
+    return page
+
+
+def _range(span):
+    if span["end_s"] is None:
+        return f"{span['start_s']:.3f} s to final picture at {span['last_s']:.3f} s"
+    return f"{span['start_s']:.3f} to {span['end_s']:.3f} s"
+
+
+def _summary(document, record):
+    page = _page(document, TITLE)
+    page.insert_textbox((MARGIN, 125, RIGHT, 184), record["interpretation"], fontsize=11, fontname="helv", color=INK)
+    for y, (side, label) in zip((203, 265), LABELS.items(), strict=True):
+        clip = record[side]
+        _text(page, MARGIN, y, label, font="hebo")
+        _text(page, MARGIN, y + 17, f"{clip['frames']} pictures, {clip['width']} x {clip['height']} px. Time base {clip['time_base']} s per tick.", color=MUTED)
+        _text(page, MARGIN, y + 33, f"SHA-256 {clip['sha256']}", size=9, font="cour", color=MUTED)
+    if record["status"] != "measured":
+        _text(page, MARGIN, 348, "Comparison unassessed", size=16, font="hebo")
+        _text(page, MARGIN, 369, PICTURE_STATUS[record["status"]])
+        return
+    picture, audio = record["picture"], record["audio"]
+    _text(page, MARGIN, 347, "Picture comparison", size=16, font="hebo")
+    _text(page, MARGIN, 371, f"{picture['matching_frames']} exact matches and {picture['changed_frames']} changed decoded pictures.")
+    if not picture["matching_frames"]:
+        _text(page, MARGIN, 390, "Every picture differs. Re-encoding can produce this pattern.", color=MUTED)
+    _text(page, MARGIN, 434, "Soundtrack comparison", size=16, font="hebo")
+    if audio["status"] == "measured":
+        count = len(audio["ranges"])
+        note = f"{audio['changed_samples']:,} decoded mono samples differ across {count} {'range' if count == 1 else 'ranges'}."
+    else:
+        note = AUDIO_STATUS[audio["status"]]
+    _text(page, MARGIN, 458, note)
+    _text(page, MARGIN, 507, "Times are relative to the first picture in each clip.", color=MUTED)
+    _text(page, MARGIN, 526, "Soundtrack ranges group 20 ms bins containing different samples.", color=MUTED)
+
+
+def _picture_page(document, span, assets, source):
+    page = _page(document, f"{span['id']}  Picture differences")
+    _text(page, MARGIN, 124, _range(span), color=MUTED)
+    row = span["strongest_frame"]
+    box = row["difference_bounds"]
+    _text(page, MARGIN, 143, f"At the strongest change, {row['changed_pixels']:,} pixels differ within "
+          f"x {box['x']}, y {box['y']}, {box['w']} x {box['h']} px.")
+    y = 178
+    for position in ("before", "during", "after"):
+        sample = span["previews"].get(position)
+        if sample is None:
+            continue
+        _text(page, MARGIN, y, f"{position.title()}  {sample['time_s']:.3f} s", font="hebo")
+        for x, side in zip((MARGIN, 316), LABELS, strict=True):
+            _text(page, x, y + 15, f"{LABELS[side]}  PTS {sample[f'{side}_pts']}", size=9, color=MUTED)
+            scale = min(250 / source["width"], 126 / source["height"])
+            width, height = source["width"] * scale, source["height"] * scale
+            left, top = x + (250 - width) / 2, y + 22 + (126 - height) / 2
+            page.insert_image(pymupdf.Rect(left, top, left + width, top + height),
+                              stream=assets[sample["assets"][side]["file"]], keep_proportion=False)
+            if position == "during":
+                page.draw_rect(pymupdf.Rect(left + box["x"] * scale, top + box["y"] * scale,
+                                           left + (box["x"] + box["w"]) * scale, top + (box["y"] + box["h"]) * scale),
+                               color=(.96, .67, .15), width=1.4)
+        y += 168
+
+
+def _sound_page(document, span):
+    page = _page(document, f"{span['id']}  Soundtrack differences")
+    _text(page, MARGIN, 126, _range(span), color=MUTED)
+    _text(page, MARGIN, 149, f"{span['changed_samples']:,} differing samples in the selected range.")
+    preview = span["preview"]
+    _text(page, MARGIN, 169, f"Waveforms cover {span['start_s']:.3f} to {preview['end_s']:.3f} s.")
+    maximum = max(.01, *(abs(level) for values in preview["waveforms"].values() for field in ("low", "high") for level in values[field]))
+    duration = (preview["end_sample"] - preview["start_sample"]) / 16000
+    for y, (side, label) in zip((282, 448), LABELS.items(), strict=True):
+        _text(page, MARGIN, y - 69, label, font="hebo")
+        page.draw_line((MARGIN, y), (RIGHT, y), color=RULE)
+        wave = preview["waveforms"][side]
+        shape = page.new_shape()
+        for tick, low, high in zip(wave["t"], wave["low"], wave["high"], strict=True):
+            x = MARGIN + min(1, tick / duration) * (RIGHT - MARGIN)
+            shape.draw_line((x, y - high / maximum * 55), (x, y - low / maximum * 55))
+        shape.finish(color=(.18, .39, .31), width=.7)
+        shape.commit()
+        pts = span["source_ranges"][side]["start_pts"]
+        _text(page, MARGIN, y + 75, f"Source samples [{pts}, {pts + preview['end_sample'] - preview['start_sample']}) at 16 kHz.",
+              size=9, color=MUTED)
+
+
+def render(record, assets):
+    with pymupdf.open() as document:
+        document.set_metadata({"title": TITLE, "author": "Chipmunk Verify"})
+        _summary(document, record)
+        remaining = []
+        for span in record.get("picture", {}).get("ranges", []):
+            if span["previews"]:
+                _picture_page(document, span, assets, record["submitted"])
+            else:
+                remaining.append((span["id"], _range(span)))
+        for span in record.get("audio", {}).get("ranges", []):
+            if span.get("preview"):
+                _sound_page(document, span)
+            else:
+                remaining.append((span["id"], _range(span)))
+        for start in range(0, len(remaining), 30):
+            page = _page(document, "Additional measured ranges")
+            for i, (label, value) in enumerate(remaining[start:start + 30]):
+                _text(page, MARGIN, 137 + i * 18, f"{label}  {value}")
+        return document.tobytes(deflate=True, garbage=4)

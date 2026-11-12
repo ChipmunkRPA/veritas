@@ -1,0 +1,1458 @@
+{
+  "calibration": {
+    "development_files": 61,
+    "development_packets": [
+      {
+        "packet": "elife-original",
+        "sha256": "d690f9466193dafb94a054c02fb27bade0bc6d04819cafa9cc8b846acb97b16f",
+        "used": 12
+      },
+      {
+        "packet": "elife-control",
+        "sha256": "46f681020eb07a197875d64bf4ece4efec619b7d1de4c81825d470d9add04f8a",
+        "used": 25
+      },
+      {
+        "packet": "notice-original",
+        "sha256": "498ba32f67342852a2f3104e644516d72ca98f666c8097f496222213950bdf57",
+        "used": 6
+      },
+      {
+        "packet": "notice-control",
+        "sha256": "dbd1dbe88197a44446f8f705eb58ad2ee7b20f6dc7ce3233fe76d8189e5358c8",
+        "used": 18
+      }
+    ],
+    "points": {
+      "1": {
+        "cutoff": 0.04959768664277875,
+        "groups": 18
+      },
+      "3": {
+        "cutoff": 0.18179880047889108,
+        "groups": 18
+      }
+    }
+  },
+  "commitments": {
+    "baseline.json": "4695353edaf8138c62c13e66ca3fa1c901e62ee86574812834f628d3600842ad",
+    "cases.json": "81b6925c6203907253dd9e2b225d1b63e64703d4c31fb332dab88ec263de4239",
+    "development-provenance.json": "a27421790578a193201948977acbd55b1ab21b374bfead443efcc0e1438b1c85",
+    "development.json": "1cce6d09200e52c66a8378d9f2ceb332a9aa14a8064611667ac2d2f861c3f4bf",
+    "generated-granite.json": "74808c3d9071f9530806ffedf9ba156f889baf528d3541f292a6f40599c309ee",
+    "generated-olmo.json": "84dcdc3e0d875709a50ecf960754647d59b590c5cf28904c56bad940ff43be30",
+    "generated-tiny.json": "e2858547f656d1db97e7d69841231a201f02a38e3200d86e77b6162f1df479ad",
+    "originals.json": "d8e3ce21f6c87b36036e6f46e59170a03e69355b471b3cb67d3358841c9caae6",
+    "points.json": "c9e727f81f4f7270b27e2d100f5e5e3b04c5df763a04f4b7a1f121be188a447a",
+    "private-readout.json": "41ccb5daad491cb6b7f77e4ccfc24e035b060f65d5447817f13694a9be4adfe3",
+    "protocol.json": "fc52f05e3f7ae5639740c9975e929971d85dcb7b265329f3a5a69ccd12a25543",
+    "result.json": "27d7a535c117a2fb7cded9167cbca29ffeabd4b82f420b1f34bf3176adc6729e",
+    "source-roster.json": "1be4e18545b59348141b960262568a3eadc06be4da8402e1f60058959de2f182",
+    "sources.json": "994614ffd8e77302dc69a8ad600a4ba0eeadd6c4c97fa7f9f9c5ffe82d25790b"
+  },
+  "data": {
+    "admitted": {
+      "census-april": {
+        "publication_or_creation": "2020-04-01",
+        "publisher": "census",
+        "publisher_review_or_pdf_revision": "2026-08-11",
+        "sha256": "122bb6d4bd4d1ddc8ad384b5662a53d1517ffdd482ed1b4672867725c5087478",
+        "source_paragraphs": [
+          {
+            "location": [
+              5
+            ],
+            "sha256": "a722f4caa9ad3d883e1d87a2fb4a848a630770a6b69a2693f672574a32fec280"
+          },
+          {
+            "location": [
+              8
+            ],
+            "sha256": "5a9d70953e0d711ff1d6420765906276a35fba65adc6dfc74d9a540849a21db0"
+          },
+          {
+            "location": [
+              12
+            ],
+            "sha256": "96ecb2fa910274c8cf89b3df90e7549cf2b72fbf9ce17e4e964cd04ccf1ef483"
+          },
+          {
+            "location": [
+              13
+            ],
+            "sha256": "f9cfb5d4783d24e85dd9643e24ac45fbc0c393dedfac642e68964689ae093578"
+          },
+          {
+            "location": [
+              16
+            ],
+            "sha256": "2b1acaf67eba60ef19d0fd984a886ddf0c2d3df4ed57888616b46458408772ac"
+          }
+        ],
+        "target": 2,
+        "title": "April 2020: History of the Census",
+        "url": "https://www.census.gov/about/history/stories/monthly/2020/april-2020.html"
+      },
+      "census-business": {
+        "publication_or_creation": "2019-10-16",
+        "publisher": "census",
+        "publisher_review_or_pdf_revision": "2024-10-03",
+        "sha256": "9cbe41ab4912f8991f3de91ccab1e1568a238b444568bdfed8284e509f27c0c2",
+        "source_paragraphs": [
+          {
+            "location": [
+              8
+            ],
+            "sha256": "9f08285454f7bfd076b0c8e8dda674339344823dd7af804d55e857e08d54ad23"
+          },
+          {
+            "location": [
+              10
+            ],
+            "sha256": "171f30f78e48d7743c8ad740d63798eadc039ddef69b4899e2aeee8ce23b0fb9"
+          },
+          {
+            "location": [
+              11
+            ],
+            "sha256": "09750e13dac242f203c7382e10a5dc5eef9f3c78bc14599c24dbf2b262083277"
+          },
+          {
+            "location": [
+              13
+            ],
+            "sha256": "4a3470bc9108e21575073bce254043e03517604e7cd59d704555fa4184f9b8a4"
+          },
+          {
+            "location": [
+              5
+            ],
+            "sha256": "29133925a4f3ea9f546bf78da9daa9c1134f0d2596c009e8040a2b1fe43b0a9b"
+          }
+        ],
+        "target": 2,
+        "title": "Yes, Data Can Make or Break a Business",
+        "url": "https://www.census.gov/library/stories/2019/10/can-census-bureau-data-drive-business-growth-job-creation.html"
+      },
+      "census-children": {
+        "publication_or_creation": "2020-06-30",
+        "publisher": "census",
+        "publisher_review_or_pdf_revision": "2024-04-15",
+        "sha256": "68017a20bacc7c0489c7b5d8f178010c4dd12b850f5090ac2be1c05b9af69ff0",
+        "source_paragraphs": [
+          {
+            "location": [
+              5
+            ],
+            "sha256": "d362d1675c874144d789f21a248511dd55dd7e9801b534abb1423964f7831c3f"
+          },
+          {
+            "location": [
+              6
+            ],
+            "sha256": "4f992029fcd80c7d5702645b953485191d124655b933da5e608686e5ab38cd8f"
+          },
+          {
+            "location": [
+              8
+            ],
+            "sha256": "c6f987fa083745181789fa25296f5200035a8d5a10c6461fba11b07cd71f149a"
+          },
+          {
+            "location": [
+              12
+            ],
+            "sha256": "9d99bc41dc27007124498a4d81d9c15e075dc37ec061dc6fc0ff434dd4f98fc4"
+          },
+          {
+            "location": [
+              17
+            ],
+            "sha256": "1330bcaa265b658eee4c6d6b82ccdd617168115526c94fd4eb66f39997a9ef03"
+          }
+        ],
+        "target": 1,
+        "title": "Adults in Households With Children Report Higher Rate of Late Housing Payments and Food Shortages Amid COVID-19",
+        "url": "https://www.census.gov/library/stories/2020/06/the-risks-children-face-during-pandemic.html"
+      },
+      "census-employed": {
+        "publication_or_creation": "2019-03-13",
+        "publisher": "census",
+        "publisher_review_or_pdf_revision": "2025-01-03",
+        "sha256": "8373e2adc7936d3ea51c5c71c06fd72c1a42b5cb7fc9f6c154ad9e2159b4ddd6",
+        "source_paragraphs": [
+          {
+            "location": [
+              4
+            ],
+            "sha256": "d7ef7187f47cbe4699a943bbead71bd3a44496c57593f0a7423c8a31199756d8"
+          },
+          {
+            "location": [
+              5
+            ],
+            "sha256": "8e52b14ecbb3eeff7cbbec2b77b84bcf6232b29d66218d4b538b1bd3cb106384"
+          },
+          {
+            "location": [
+              11
+            ],
+            "sha256": "d4b2332ce4d2934f184044e5e2aaccb4ec50f3abe1807acf2900daaab5b9061d"
+          },
+          {
+            "location": [
+              12
+            ],
+            "sha256": "2f48f987898c73715d821ebee068db8f40d1e2558e1a678d806255afe6138bd5"
+          },
+          {
+            "location": [
+              24
+            ],
+            "sha256": "e725739a7bccfc4e0c8ff3296c79e5e1408f5161645e689a89861543203c9390"
+          }
+        ],
+        "target": 2,
+        "title": "Rise in Self-Employed Challenges the Common Wisdom",
+        "url": "https://www.census.gov/library/stories/2019/03/what-is-a-business.html"
+      },
+      "census-history": {
+        "publication_or_creation": "2020-03-25",
+        "publisher": "census",
+        "publisher_review_or_pdf_revision": "2024-04-18",
+        "sha256": "76e3f8cc54d0dd8f1b867d47f20c6e55a2aaf8dfa536f86d2d6fa6d0fa34a508",
+        "source_paragraphs": [
+          {
+            "location": [
+              8
+            ],
+            "sha256": "0ad126782ec4cc75114bec39a19c2d9df6cc8b4a788c3ad89f75dbe8fe7fd48c"
+          },
+          {
+            "location": [
+              10
+            ],
+            "sha256": "df18fcc383a82efb95fa6fa1aaf752000d7d4834b745876730881f43fad8fb04"
+          },
+          {
+            "location": [
+              11
+            ],
+            "sha256": "7d324f35655a0792c6e997ff7e496a670d6b3866dd5e530c0ca4450b98a597d9"
+          },
+          {
+            "location": [
+              12
+            ],
+            "sha256": "0ad126782ec4cc75114bec39a19c2d9df6cc8b4a788c3ad89f75dbe8fe7fd48c"
+          },
+          {
+            "location": [
+              15
+            ],
+            "sha256": "ec12bdccbc9048398554ff398ef527a2da000fbcec5400997cef53fffcf6d97c"
+          }
+        ],
+        "target": 1,
+        "title": "Hundreds of Historical Census Bureau Publications Now Available on Census.gov",
+        "url": "https://www.census.gov/library/stories/2020/03/new-resource-for-discovering-americas-demographic-past-present-and-future.html"
+      },
+      "census-november": {
+        "publication_or_creation": "2020-11-01",
+        "publisher": "census",
+        "publisher_review_or_pdf_revision": "2026-07-29",
+        "sha256": "36bcc8cb12a42e51e7cf11aefb9c101d30d099a696ec699ce79ee1c29e607dd5",
+        "source_paragraphs": [
+          {
+            "location": [
+              5
+            ],
+            "sha256": "9ce03ae8c1931978e75d3745aae77e90b6dcdad9ba700b32e9a8d0766e24fb65"
+          },
+          {
+            "location": [
+              8
+            ],
+            "sha256": "b9910883977a02aab745f1236dfcbb49f05d84ec3c3029a3ee5937d98b16cad9"
+          },
+          {
+            "location": [
+              10
+            ],
+            "sha256": "8a144c3ab95c1fc94623e19dc28af1d52b2721faf2d160679025a05b98c8a39b"
+          },
+          {
+            "location": [
+              12
+            ],
+            "sha256": "1a9d1fdf32d6d46038a2a89abbd77e75c3c5b5ba36071f17adf5a3f1f000dac2"
+          },
+          {
+            "location": [
+              16
+            ],
+            "sha256": "5b67b228bc1ecf60e2ccd3011e7d9641a3027f99d00fa751004da56d4416177d"
+          }
+        ],
+        "target": 2,
+        "title": "November 2020: Election Surprises",
+        "url": "https://www.census.gov/about/history/stories/monthly/2020/november-2020.html"
+      },
+      "census-october": {
+        "publication_or_creation": "2020-10-01",
+        "publisher": "census",
+        "publisher_review_or_pdf_revision": "2026-08-05",
+        "sha256": "f50dd1569c82cf2ae9a2deea14e40c9939b7f49b4a7a9020e9cb94414863af9d",
+        "source_paragraphs": [
+          {
+            "location": [
+              5
+            ],
+            "sha256": "6cd9dfca32df93724ddc10a63c279a8f11d7737a11b60cffa090ac6ba609e625"
+          },
+          {
+            "location": [
+              8
+            ],
+            "sha256": "81a8f2fe96c38cba3632eb62b845fece194c6b77524a52b37f60e75d8358a0f8"
+          },
+          {
+            "location": [
+              10
+            ],
+            "sha256": "63f52085420d8c9b69f3ea1ab15e1733965efde5fecdbcbdbc7aa2c678658ed1"
+          },
+          {
+            "location": [
+              12
+            ],
+            "sha256": "f9ed6b6bfd32c0cf9949350e9859d4194fe82153f31889a51c42a853317a7be1"
+          },
+          {
+            "location": [
+              22
+            ],
+            "sha256": "0a743a1d083e09e26e04bc2feaeaa578e610176c63c830539d8f18e4999ba5c7"
+          }
+        ],
+        "target": 2,
+        "title": "October 2020: First Ladies",
+        "url": "https://www.census.gov/about/history/stories/monthly/2020/october-2020.html"
+      },
+      "census-september": {
+        "publication_or_creation": "2020-09-01",
+        "publisher": "census",
+        "publisher_review_or_pdf_revision": "2025-06-23",
+        "sha256": "6090839712d3cbf8dc8652362d2b80101fab7f3914ddd7aa9531b260894a96a2",
+        "source_paragraphs": [
+          {
+            "location": [
+              10
+            ],
+            "sha256": "7cdba1421c7403b76a710c12077603d14499cf3a57a2464f324a592a678f3945"
+          },
+          {
+            "location": [
+              13
+            ],
+            "sha256": "acce64df6c06949f5d38026eba9e895663dcc8fc5f3fc69f89aca9862f88125e"
+          },
+          {
+            "location": [
+              16
+            ],
+            "sha256": "3b5bf986a7eb5963c5ee358d11a84a4982f153a563591842ae2a5ef33b22de89"
+          },
+          {
+            "location": [
+              17
+            ],
+            "sha256": "2c3484d4f5720eb17bab33e89fd13f179533e4fdc0d001d69ddeea7cb1f8b554"
+          },
+          {
+            "location": [
+              20
+            ],
+            "sha256": "6f5fd6e2b28ca463efe766bc74d5c9c41906b172248f3ac12eb05a15a4014249"
+          }
+        ],
+        "target": 2,
+        "title": "March 2025: The Missouri Compromise of 1820",
+        "url": "https://www.census.gov/about/history/stories/monthly/2020/september-2020.html"
+      },
+      "census-technology": {
+        "publication_or_creation": "2020-05-19",
+        "publisher": "census",
+        "publisher_review_or_pdf_revision": "2024-04-17",
+        "sha256": "6222eb5432baad477e24dcd98dc518b5c8a7c6db21ac7888d29b42751c2a2c42",
+        "source_paragraphs": [
+          {
+            "location": [
+              5
+            ],
+            "sha256": "1ddb78a603dbe52de9f96e1a9521b4b822b50313514b281480153e181a3f16d7"
+          },
+          {
+            "location": [
+              10
+            ],
+            "sha256": "6183730c5d7fbd08adfb6343c5900d39eff5f579a0dff6b14c0d6fbb665f22e6"
+          },
+          {
+            "location": [
+              11
+            ],
+            "sha256": "c0f2b511046d3c6343577db3dfe080a07a644f8ec2c8b88cc37b0a3b4d426432"
+          },
+          {
+            "location": [
+              12
+            ],
+            "sha256": "6c4f7590bf0b1849ba85304fea8cc8163dcfb3c93294b7d1360a22f46558cf1a"
+          },
+          {
+            "location": [
+              21
+            ],
+            "sha256": "990e198bb051819adf3d1bc27266312b3f9082f05f6332f0e907373a08585eb3"
+          }
+        ],
+        "target": 1,
+        "title": "From Scribbled Answers in 1790 to Online Responses in 2020, Innovation Has Always Been Part of the Census",
+        "url": "https://www.census.gov/library/stories/2020/05/four-ways-new-technology-is-revolutionizing-the-2020-census.html"
+      },
+      "copyright-01": {
+        "publication_or_creation": "20210902",
+        "publisher": "copyright",
+        "publisher_review_or_pdf_revision": "20210902",
+        "sha256": "a37450360b4b440cb10ccfd9ce37cb92ea8193884c5700948df942aa1c62920f",
+        "source_paragraphs": [
+          {
+            "location": [
+              1,
+              10
+            ],
+            "sha256": "1e0d59086c213fa3a443fb7ead6aca4e952ba24a490a6046139340ce541cbfd5"
+          },
+          {
+            "location": [
+              2,
+              17
+            ],
+            "sha256": "85b1117944ddd32735050ff961464222f444a8d7fc84ca867704639d7f92d3a5"
+          },
+          {
+            "location": [
+              2,
+              22
+            ],
+            "sha256": "0ee8d4bbe6752b37781f98cf88964638631c04fb05f0be8ecbdf060040250ea9"
+          },
+          {
+            "location": [
+              3,
+              3
+            ],
+            "sha256": "56e0d82011549339c7a42aa59ac98b8e372d733e66dd7f7e4815c07d0a3b07d0"
+          },
+          {
+            "location": [
+              4,
+              4
+            ],
+            "sha256": "f0bebd179eb9588b06cecd246285e332e1ed2dbc26446690be097ec20e959f2b"
+          }
+        ],
+        "target": 2,
+        "title": "Circular 1 Copyright Basics",
+        "url": "https://www.copyright.gov/circs/circ01.pdf"
+      },
+      "copyright-02": {
+        "publication_or_creation": "20220506",
+        "publisher": "copyright",
+        "publisher_review_or_pdf_revision": "20220506",
+        "sha256": "aa383a75db68d12d8ad2eeb61a97e3fc0dd6a4a1e49bf99d09c1fa8d19c4d69e",
+        "source_paragraphs": [
+          {
+            "location": [
+              0,
+              11
+            ],
+            "sha256": "0f61395e537aec931e927e94530399a28181d27af66b24130bcf9e66a7faa693"
+          },
+          {
+            "location": [
+              1,
+              1
+            ],
+            "sha256": "045dc4b3a0a3994d3cd18599db37255a569e19b58e230cb550273f5f8d89351a"
+          },
+          {
+            "location": [
+              1,
+              2
+            ],
+            "sha256": "781f997d8258e431eed0dec279d52dfce580cd70e841ff275b1019ca2be18b8c"
+          },
+          {
+            "location": [
+              1,
+              3
+            ],
+            "sha256": "b097dc77c9be66ebb8767df4c7f55c72c59c0f825cdc861f4035a7ea3582643e"
+          },
+          {
+            "location": [
+              1,
+              12
+            ],
+            "sha256": "f413d10c8de228075688e46f95c548d803b0ae99d2ab76dd583b9da3d8c5b1fe"
+          }
+        ],
+        "target": 1,
+        "title": "Circular 2 Copyright Registration",
+        "url": "https://www.copyright.gov/circs/circ02.pdf"
+      },
+      "copyright-06a": {
+        "publication_or_creation": "20210312",
+        "publisher": "copyright",
+        "publisher_review_or_pdf_revision": "20210315",
+        "sha256": "190025c4e0197ae122ee18ea3a77126e26fadfa262b6423b7ba9210122e7fec3",
+        "source_paragraphs": [
+          {
+            "location": [
+              0,
+              3
+            ],
+            "sha256": "1e8a4cd7483757d47a81660b48a232ca47e6ddfdf1238aad6890d2c5d8860cd7"
+          },
+          {
+            "location": [
+              0,
+              5
+            ],
+            "sha256": "145c08a897278335781c9b85e2b3f0ac180e2ccf5be85e9cd7a301213699ec8e"
+          },
+          {
+            "location": [
+              1,
+              6
+            ],
+            "sha256": "782539ae14304b8301ce9367ac5ef5dcaecd3172ad9a4cf1780232345e8b3eb9"
+          },
+          {
+            "location": [
+              1,
+              12
+            ],
+            "sha256": "ff6465366072f96e48ca3fe4b386537b1db48cad38d6fd566a48d94ec73c5dca"
+          },
+          {
+            "location": [
+              3,
+              4
+            ],
+            "sha256": "74fe239ef5ba1f5cf79e6d8b1563a1ed576c4c461d832f3b517ad489755b7ab4"
+          }
+        ],
+        "target": 2,
+        "title": "Circular 6A Renewal of Copyright",
+        "url": "https://www.copyright.gov/circs/circ06a.pdf"
+      },
+      "copyright-08": {
+        "publication_or_creation": "20210316",
+        "publisher": "copyright",
+        "publisher_review_or_pdf_revision": "20210316",
+        "sha256": "7d07fcb6125f1f8ed053dc6282db5079fffc9a710ee8a3cb84c7943ed8970866",
+        "source_paragraphs": [
+          {
+            "location": [
+              0,
+              3
+            ],
+            "sha256": "4d8e5f1cc5188c42dfc277295b6017e53e9f46b5f39a3185749678bc156c4c70"
+          },
+          {
+            "location": [
+              0,
+              4
+            ],
+            "sha256": "aa7b4903655a593a786c094efc1c069d048cd2d0f1f0f77b8eaa392418d380ef"
+          },
+          {
+            "location": [
+              1,
+              11
+            ],
+            "sha256": "9715072c5b82523334d48fd029242b971134fb67c81bdd6a3c04ce6eff6b2152"
+          },
+          {
+            "location": [
+              1,
+              22
+            ],
+            "sha256": "d12b5ce436a14a49b6ffa5364028ce997f529bbf7cc0fe373fede24a97532460"
+          },
+          {
+            "location": [
+              2,
+              7
+            ],
+            "sha256": "ae9ea9bd89bf88310ca6bb48151a2ecb7d4218bd98217a556453fe9dda428eff"
+          }
+        ],
+        "target": 1,
+        "title": "Circular 8 Supplementary Registration",
+        "url": "https://www.copyright.gov/circs/circ08.pdf"
+      },
+      "copyright-10": {
+        "publication_or_creation": "20210316",
+        "publisher": "copyright",
+        "publisher_review_or_pdf_revision": "20210316",
+        "sha256": "965a6cdacd691c969770ebcd3c24c185287989d42e359c7c1387339e8ca177e1",
+        "source_paragraphs": [
+          {
+            "location": [
+              0,
+              9
+            ],
+            "sha256": "e2d28972f5793a721302b2777c7e164dcde1278e8590e0867626c249c4889b52"
+          },
+          {
+            "location": [
+              1,
+              2
+            ],
+            "sha256": "c5ec0730dde7c790a267ee9cdd31c1ceb9c2eb59f8242df93aa581f873ec36c0"
+          },
+          {
+            "location": [
+              1,
+              3
+            ],
+            "sha256": "362f449a8b5b517067aedf2ce7ae062c1fbe8e593c5f75b801b30ce12eed5676"
+          },
+          {
+            "location": [
+              1,
+              4
+            ],
+            "sha256": "e6134c1c1f71916ba5c8aeeec59551cb5bc5da443e010e9c64fb8f7b452c2ea7"
+          },
+          {
+            "location": [
+              6,
+              9
+            ],
+            "sha256": "5c7ed75164b2d677e1c61fcd085b5c7dbafe30ca771b279bccf844b48a437fec"
+          }
+        ],
+        "target": 1,
+        "title": "Circular 10 Special Handling",
+        "url": "https://www.copyright.gov/circs/circ10.pdf"
+      },
+      "copyright-12": {
+        "publication_or_creation": "20200312",
+        "publisher": "copyright",
+        "publisher_review_or_pdf_revision": "20200312",
+        "sha256": "65f9006acdf18cb2aa44cc68697ba4ffab78048ce177056fe5a36aecce6f14a4",
+        "source_paragraphs": [
+          {
+            "location": [
+              0,
+              6
+            ],
+            "sha256": "737b83858e080b0cee56525669223c5fda83d413035c0c91c0f0a2e22fa350bb"
+          },
+          {
+            "location": [
+              0,
+              10
+            ],
+            "sha256": "3ad8ce05b415e2fa7227b040a9eed1902ef29a55f4a3a0381ce971be89fa97e0"
+          },
+          {
+            "location": [
+              0,
+              12
+            ],
+            "sha256": "9225c4723c8a448e6499e20fdeeaca2aba966dc9ce21a266e348c3ceecad70ba"
+          },
+          {
+            "location": [
+              1,
+              19
+            ],
+            "sha256": "422858aa838dd4da3499c7c11ffe7547a9a11c953245d891229b6892b8bb42a0"
+          },
+          {
+            "location": [
+              3,
+              5
+            ],
+            "sha256": "d8ad70b08e4b76c024b8ab6375bc69953c25d8206b6ae38a504397b2a8575fdd"
+          }
+        ],
+        "target": 1,
+        "title": "Recordation of Transfers and Other Documents",
+        "url": "https://www.copyright.gov/circs/circ12.pdf"
+      },
+      "copyright-14": {
+        "publication_or_creation": "20200722",
+        "publisher": "copyright",
+        "publisher_review_or_pdf_revision": "20200722",
+        "sha256": "928aa3a506f94d5772bad430bbb01ff54aec812194aff33d3aab6b95a2ceffc1",
+        "source_paragraphs": [
+          {
+            "location": [
+              1,
+              4
+            ],
+            "sha256": "dafa633315f6c3b3bc5e222b4a1444068542e14f0b7285ab1882b1312b394e72"
+          },
+          {
+            "location": [
+              1,
+              15
+            ],
+            "sha256": "18cf53aeebe973fb8acd8af28e7a509ec3f12a6d95434184770205a150f8edee"
+          },
+          {
+            "location": [
+              1,
+              17
+            ],
+            "sha256": "5de6e86b08a1bb302558bdac310ba4e7de3ecbdf02b9a0a31d3135e35101ed03"
+          },
+          {
+            "location": [
+              1,
+              18
+            ],
+            "sha256": "6e67943a6948a1919286af1eab1c4674cf1087efeaef91d3824b4f28815318cd"
+          },
+          {
+            "location": [
+              2,
+              12
+            ],
+            "sha256": "dbc0c273af67de038f1f1a1336389d660d87841099792d785a54f0ac4788bc38"
+          }
+        ],
+        "target": 2,
+        "title": "Circular 14: Copyright in Derivative Works and Compilations",
+        "url": "https://www.copyright.gov/circs/circ14.pdf"
+      }
+    },
+    "counts": {
+      "census": 9,
+      "copyright": 7
+    },
+    "excluded": {
+      "census-august": "Source unavailable during intake",
+      "census-december": "Source unavailable during intake",
+      "census-july": "Source unavailable during intake",
+      "census-june": "Source unavailable during intake",
+      "census-may": "Source unavailable during intake",
+      "census-year": "No eligible non-overlapping four-block excerpt and length-matched donor",
+      "copyright-03": "No eligible non-overlapping four-block excerpt and length-matched donor",
+      "copyright-04": "Source is newer than the publication cutoff",
+      "copyright-05": "No eligible non-overlapping four-block excerpt and length-matched donor",
+      "copyright-07b": "Source is newer than the publication cutoff",
+      "copyright-07c": "Source is newer than the publication cutoff",
+      "copyright-07d": "Source is newer than the publication cutoff",
+      "copyright-15a": "Source is newer than the publication cutoff",
+      "copyright-16a": "No eligible non-overlapping four-block excerpt and length-matched donor"
+    },
+    "historical": [
+      {
+        "matched_sources": 0,
+        "packet": "elife_originals",
+        "source_sha256": "063c960dafe75757b3b6483ab88802c9c6cd78fa6e0a347014ac148c283d758f",
+        "text_entries": 5
+      },
+      {
+        "matched_sources": 0,
+        "packet": "elife_rewrites",
+        "source_sha256": "b5c4dece64d08ef3523c1f8d8e9afdc68fb4b756876a55b61be0205c611fa62e",
+        "text_entries": 11
+      },
+      {
+        "matched_sources": 0,
+        "packet": "elife_transfer_originals",
+        "source_sha256": "a8676385711bf3d66165a6c3a8add0d8aee7881288302388ca88739e8e30389b",
+        "text_entries": 26
+      },
+      {
+        "matched_sources": 0,
+        "packet": "elife_transfer_rewrites",
+        "source_sha256": "4682454d4b72a0c8899159973bd2e91b4f8432be4c42148a4f10719a1fc75582",
+        "text_entries": 48
+      },
+      {
+        "matched_sources": 0,
+        "packet": "elife_editorial_originals",
+        "source_sha256": "d690f9466193dafb94a054c02fb27bade0bc6d04819cafa9cc8b846acb97b16f",
+        "text_entries": 12
+      },
+      {
+        "matched_sources": 0,
+        "packet": "elife_editorial_controls",
+        "source_sha256": "46f681020eb07a197875d64bf4ece4efec619b7d1de4c81825d470d9add04f8a",
+        "text_entries": 25
+      },
+      {
+        "matched_sources": 0,
+        "packet": "opai_bench",
+        "source_sha256": "4e43edf33c695a8a4f757d079089dab85a632c648762554bac9f5cc573bb923b",
+        "text_entries": 60
+      },
+      {
+        "matched_sources": 0,
+        "packet": "gohumanize",
+        "source_sha256": "a42a934b97005bc69c4ef983ab0839d5804b6fc60066e42b9520c950984a51b9",
+        "text_entries": 262
+      },
+      {
+        "matched_sources": 0,
+        "packet": "notice_originals",
+        "source_sha256": "498ba32f67342852a2f3104e644516d72ca98f666c8097f496222213950bdf57",
+        "text_entries": 6
+      },
+      {
+        "matched_sources": 0,
+        "packet": "notice_controls",
+        "source_sha256": "dbd1dbe88197a44446f8f705eb58ad2ee7b20f6dc7ce3233fe76d8189e5358c8",
+        "text_entries": 18
+      },
+      {
+        "matched_sources": 0,
+        "packet": "notice_rewrites",
+        "source_sha256": "d1b814a28fd3fd60e666546d6063d76fd7fabd62ef828d9581ce13ac814f6ad0",
+        "text_entries": 8
+      },
+      {
+        "matched_sources": 0,
+        "packet": "llmtrace_english",
+        "source_sha256": "6d4431a85a70916ba7af5c19f062eed6c277183d7b4bb5c6cea42f520e717f48",
+        "text_entries": 38429
+      }
+    ]
+  },
+  "generation": {
+    "admitted": {
+      "granite": 16,
+      "human_splice": 16,
+      "olmo": 9,
+      "original": 16
+    },
+    "attempts": {
+      "granite": 16,
+      "olmo": 16,
+      "tiny": 16
+    },
+    "dispositions": {
+      "census-april/granite": "admitted",
+      "census-april/olmo": "declined",
+      "census-april/tiny": "declined",
+      "census-business/granite": "admitted",
+      "census-business/olmo": "declined",
+      "census-business/tiny": "declined",
+      "census-children/granite": "admitted",
+      "census-children/olmo": "admitted",
+      "census-children/tiny": "declined",
+      "census-employed/granite": "admitted",
+      "census-employed/olmo": "admitted",
+      "census-employed/tiny": "declined",
+      "census-history/granite": "admitted",
+      "census-history/olmo": "declined",
+      "census-history/tiny": "declined",
+      "census-november/granite": "admitted",
+      "census-november/olmo": "admitted",
+      "census-november/tiny": "declined",
+      "census-october/granite": "admitted",
+      "census-october/olmo": "admitted",
+      "census-october/tiny": "declined",
+      "census-september/granite": "admitted",
+      "census-september/olmo": "declined",
+      "census-september/tiny": "declined",
+      "census-technology/granite": "admitted",
+      "census-technology/olmo": "admitted",
+      "census-technology/tiny": "declined",
+      "copyright-01/granite": "admitted",
+      "copyright-01/olmo": "admitted",
+      "copyright-01/tiny": "declined",
+      "copyright-02/granite": "admitted",
+      "copyright-02/olmo": "declined",
+      "copyright-02/tiny": "declined",
+      "copyright-06a/granite": "admitted",
+      "copyright-06a/olmo": "declined",
+      "copyright-06a/tiny": "declined",
+      "copyright-08/granite": "admitted",
+      "copyright-08/olmo": "admitted",
+      "copyright-08/tiny": "declined",
+      "copyright-10/granite": "admitted",
+      "copyright-10/olmo": "admitted",
+      "copyright-10/tiny": "declined",
+      "copyright-12/granite": "admitted",
+      "copyright-12/olmo": "admitted",
+      "copyright-12/tiny": "declined",
+      "copyright-14/granite": "admitted",
+      "copyright-14/olmo": "declined",
+      "copyright-14/tiny": "declined"
+    },
+    "first_outputs_reproduced": {
+      "olmo": true,
+      "tiny": true
+    }
+  },
+  "initial_two_family_run": {
+    "protocol_sha256": "ff5af2ebf69880937ddbee0a38930237a3af7099fe245bb3d9a0a76d638a7a7c",
+    "replay": {
+      "count_values": 110,
+      "current_context_ranges": 366,
+      "development_group_maxima": 36,
+      "fixture_paragraph_ranges": 164,
+      "fixtures": 41,
+      "generation_dispositions": 32,
+      "paragraph_scores": 164,
+      "source_blocks": 80
+    },
+    "result_sha256": "3df1bf80fb6bd76c92e677d97a9ea08f4c3e3f19e2f4d78e52608b0b8f36175f",
+    "results": {
+      "additional_human_groups": 0,
+      "additional_useful_groups": {
+        "all": 1,
+        "census": 0,
+        "copyright": 1,
+        "olmo": 1,
+        "tiny": 0
+      },
+      "advance": false,
+      "counts": {
+        "all/human_splice": {
+          "current_flags": 6,
+          "current_useful": 0,
+          "files": 16,
+          "sequence_flags": 0,
+          "sequence_unassessed": 0,
+          "sequence_useful": 0,
+          "unigram_flags": 1,
+          "unigram_unassessed": 0,
+          "unigram_useful": 0,
+          "union_flags": 6,
+          "union_useful": 0
+        },
+        "all/olmo": {
+          "current_flags": 7,
+          "current_useful": 5,
+          "files": 9,
+          "sequence_flags": 1,
+          "sequence_unassessed": 0,
+          "sequence_useful": 1,
+          "unigram_flags": 2,
+          "unigram_unassessed": 0,
+          "unigram_useful": 1,
+          "union_flags": 7,
+          "union_useful": 6
+        },
+        "all/original": {
+          "current_flags": 7,
+          "current_useful": 0,
+          "files": 16,
+          "sequence_flags": 2,
+          "sequence_unassessed": 0,
+          "sequence_useful": 0,
+          "unigram_flags": 3,
+          "unigram_unassessed": 0,
+          "unigram_useful": 0,
+          "union_flags": 8,
+          "union_useful": 0
+        },
+        "census/human_splice": {
+          "current_flags": 4,
+          "current_useful": 0,
+          "files": 9,
+          "sequence_flags": 0,
+          "sequence_unassessed": 0,
+          "sequence_useful": 0,
+          "unigram_flags": 1,
+          "unigram_unassessed": 0,
+          "unigram_useful": 0,
+          "union_flags": 4,
+          "union_useful": 0
+        },
+        "census/olmo": {
+          "current_flags": 3,
+          "current_useful": 3,
+          "files": 5,
+          "sequence_flags": 0,
+          "sequence_unassessed": 0,
+          "sequence_useful": 0,
+          "unigram_flags": 1,
+          "unigram_unassessed": 0,
+          "unigram_useful": 0,
+          "union_flags": 3,
+          "union_useful": 3
+        },
+        "census/original": {
+          "current_flags": 3,
+          "current_useful": 0,
+          "files": 9,
+          "sequence_flags": 1,
+          "sequence_unassessed": 0,
+          "sequence_useful": 0,
+          "unigram_flags": 2,
+          "unigram_unassessed": 0,
+          "unigram_useful": 0,
+          "union_flags": 4,
+          "union_useful": 0
+        },
+        "copyright/human_splice": {
+          "current_flags": 2,
+          "current_useful": 0,
+          "files": 7,
+          "sequence_flags": 0,
+          "sequence_unassessed": 0,
+          "sequence_useful": 0,
+          "unigram_flags": 0,
+          "unigram_unassessed": 0,
+          "unigram_useful": 0,
+          "union_flags": 2,
+          "union_useful": 0
+        },
+        "copyright/olmo": {
+          "current_flags": 4,
+          "current_useful": 2,
+          "files": 4,
+          "sequence_flags": 1,
+          "sequence_unassessed": 0,
+          "sequence_useful": 1,
+          "unigram_flags": 1,
+          "unigram_unassessed": 0,
+          "unigram_useful": 1,
+          "union_flags": 4,
+          "union_useful": 3
+        },
+        "copyright/original": {
+          "current_flags": 4,
+          "current_useful": 0,
+          "files": 7,
+          "sequence_flags": 1,
+          "sequence_unassessed": 0,
+          "sequence_useful": 0,
+          "unigram_flags": 1,
+          "unigram_unassessed": 0,
+          "unigram_useful": 0,
+          "union_flags": 4,
+          "union_useful": 0
+        }
+      },
+      "files": 41,
+      "human_groups": {
+        "current": 8,
+        "sequence": 2,
+        "unigram": 4,
+        "union": 8
+      },
+      "native_contexts": 243,
+      "native_forwards": 61
+    }
+  },
+  "method": {
+    "advance": "Require at least two generator families with admitted edits. Adding the sequence cue must recover at least one missed edit group in each publisher and each represented generator family, with at most one newly flagged human source group total.",
+    "baseline": "Existing raw classifier score of at least .5, with first six native positive sentence contexts in source order.",
+    "candidate": "Classify closed-class words and punctuation; collapse other lexical words to one symbol. Compare normalized symbol sequence counts using squared Hellinger distance.",
+    "diagnostic": "Repeat with one-symbol distributions to isolate what the sequence signal adds.",
+    "fit": "Use the inclusive nearest-rank 90th percentile of maximum eligible original and human-edited scores per development group. Above means strictly greater.",
+    "seam": "Smaller left/target and target/right distance, minus left/right distance. Select at most one uniquely highest interior paragraph above the operating point.",
+    "truth": "Exact non-whitespace character intersection over union of at least .30 against the full known replacement."
+  },
+  "models": {
+    "current_assets": [
+      {
+        "file": "NOTICE",
+        "sha256": "4fe6835a2928bcfd7467888a9422d805dfa2fe6364437c1af01cf1945c3edd57"
+      },
+      {
+        "file": "config.json",
+        "sha256": "deac399da91c0cc96f5570fa5eae7cb716e32f6feb00860ce3e42c84f86c01a3"
+      },
+      {
+        "file": "model.safetensors",
+        "sha256": "4a1561fadf44ec72934edd6158ff8c76e9388ade1384dbeeea6eb15f93251087"
+      },
+      {
+        "file": "serving_head.json",
+        "sha256": "098ce573e07d8d99221d9eac41f7acae7b324071490a06023f837efe43df4cab"
+      },
+      {
+        "file": "tokenizer.json",
+        "sha256": "2c070ff353c36f85e20919da787a30e1e8e52b626d0e026e044f373378f6d0bf"
+      },
+      {
+        "file": "tokenizer_config.json",
+        "sha256": "d8089020d294f20cb21eca751b5f7f68a0b62ea2716a78576cbd587605382432"
+      }
+    ],
+    "generators": {
+      "granite": {
+        "files": [
+          {
+            "file": "README.md",
+            "sha256": "9e4fa0f08ae1b0675d6372ea1a226798b46e0b4e14fd09797ec287d618fe68db"
+          },
+          {
+            "file": "added_tokens.json",
+            "sha256": "bb33d55934aa82d29cc62f3d19cdbc60f315763f6ccee21bdfd8b3bde2f33d3b"
+          },
+          {
+            "file": "config.json",
+            "sha256": "ff28d67485d1a40022f0eb0c19b983c2680e90c25b690032e59e645f604f67d1"
+          },
+          {
+            "file": "merges.txt",
+            "sha256": "303127a244b0078878156c17229f36d11b7a3a3f8e47b7cfdbb304ff46be5030"
+          },
+          {
+            "file": "model.safetensors",
+            "sha256": "f37ff14b14f2db07b4fc476e57e619b038b264fcc9f0681bc13274772698ac93"
+          },
+          {
+            "file": "model.safetensors.index.json",
+            "sha256": "3fe2357794653e58654f56c0378e78e2a34bd6c9eac6b37563bc7896ccb54906"
+          },
+          {
+            "file": "special_tokens_map.json",
+            "sha256": "21ce694081bb9ae1bd4bc64549e72e0799ebb74705e6b650e3585d85b71ebdc1"
+          },
+          {
+            "file": "tokenizer.json",
+            "sha256": "91168e938f05796aa6dcca7e485e4b30ab52785320c7a6391ecef86e6c84681e"
+          },
+          {
+            "file": "tokenizer_config.json",
+            "sha256": "042af89a5a0e0a183ebd104a875b1bf4435a091b19f2b62aaa58af1c5ea97600"
+          },
+          {
+            "file": "vocab.json",
+            "sha256": "80ab859339a2525fdfbda14bc39df02dffb824aefdaf86426217bbb146d17e01"
+          }
+        ],
+        "license": "Apache-2.0",
+        "loader_aliases": {},
+        "quantized": "mlx-community/granite-3.3-2b-instruct-4bit",
+        "revision": "58246c5498495c14599525c852cfadb66c9f3084",
+        "typed_config_overrides": {},
+        "upstream": "ibm-granite/granite-3.3-2b-instruct",
+        "upstream_revision": "707f574c62054322f6b5b04b6d075f0a8f05e0f0"
+      },
+      "olmo": {
+        "files": [
+          {
+            "file": "README.md",
+            "sha256": "47770c83c8b55a3df787804cefdab1be8534b0966340078b35a397981530d33a"
+          },
+          {
+            "file": "config.json",
+            "sha256": "9b29aa9ff2372207aee4a6ef36e39d439df10518b172401f12c320334140f9cc"
+          },
+          {
+            "file": "generation_config.json",
+            "sha256": "437b97826bb4430c205083a0986fbe31f4959cffbe445e47fb7c5192fdcb8d58"
+          },
+          {
+            "file": "merges.txt",
+            "sha256": "b6fe424e334903f7fb84d3a106d9730455f4744b9fe3c21ee136d97a00e72502"
+          },
+          {
+            "file": "model.safetensors",
+            "sha256": "bd4ee5b47150d425258009e43d1e69d224d95b67bdee9d846c71780c4bed078d"
+          },
+          {
+            "file": "special_tokens_map.json",
+            "sha256": "78afb564e81264029b25f9caf24bda2521d5bdaeff5cd3fdbc01d3da2e8ce2f2"
+          },
+          {
+            "file": "tokenizer.json",
+            "sha256": "73fd5254624f39a88e3faac6a8e11300fc3c735ed37880d4f4f08db898eaecca"
+          },
+          {
+            "file": "tokenizer_config.json",
+            "sha256": "50c412c57d832057a3d5db42064c741f751e570f7c8788f037bfb0d2dd6e5f49"
+          },
+          {
+            "file": "vocab.json",
+            "sha256": "9e14712c91b37c7aab74b1306baa46ac342d620637a4b44523cdc3aec7d24195"
+          }
+        ],
+        "license": "Apache-2.0",
+        "loader_aliases": {},
+        "quantized": "ekryski/OLMo-2-0425-1B-Instruct-4bit",
+        "revision": "bb6c2410107c9b1d0f50126955378bc0aa2237cb",
+        "typed_config_overrides": {
+          "attention_bias": false,
+          "tie_word_embeddings": false,
+          "use_cache": false
+        },
+        "upstream": "allenai/OLMo-2-0425-1B-Instruct",
+        "upstream_revision": "48d788eca847d4d7548f375ad03d3c9312f6139e"
+      },
+      "tiny": {
+        "files": [
+          {
+            "file": "README.md",
+            "sha256": "e60b860e1802ed509ad287bb727012fddf79a02bab45d72cb8ef6150665a7145"
+          },
+          {
+            "file": "config.json",
+            "sha256": "cedb0e772aa0d6dcdb4bf3fcd6f2814ef3b103a12e6586ea553aeb812b3b2be2"
+          },
+          {
+            "file": "special_tokens_map.json",
+            "sha256": "82d96d7a9e6ced037f12394b7ea6a5b02e6ca87e0d11edaa8d60d9be857ce7db"
+          },
+          {
+            "file": "tokenizer.json",
+            "sha256": "bcd04f0eadf90287bd26e1a183ac487d8a141b09b06aecb7725bbdd343640f2e"
+          },
+          {
+            "file": "tokenizer_config.json",
+            "sha256": "5030b57187ef621d5e9f63cdd2e3531a9004f579326c0df62bc15ca9107582c3"
+          },
+          {
+            "file": "weights.00.safetensors",
+            "sha256": "5e84abc79956b48bb6e4a6c319bb6313aa6c0cbab34288e9f50d063854c486a6"
+          }
+        ],
+        "license": "Apache-2.0",
+        "loader_aliases": {
+          "weights.00.safetensors": "model.00.safetensors"
+        },
+        "quantized": "mlx-community/TinyLlama-1.1B-Chat-v1.0-4bit",
+        "revision": "01a708812690b4685ab18e3b0a27848f92c50746",
+        "typed_config_overrides": {},
+        "upstream": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+        "upstream_revision": "fe8a4ea1ffedaf415f4da2f062534de366a451e6"
+      }
+    },
+    "runtime": {
+      "huggingface_hub": "2.4.0",
+      "mlx": "0.32.4",
+      "mlx-lm": "0.31.3",
+      "tokenizers": "0.23.3",
+      "transformers": "5.22.1"
+    }
+  },
+  "replay": {
+    "count_values": 144,
+    "current_context_ranges": 511,
+    "development_group_maxima": 36,
+    "fixture_paragraph_ranges": 228,
+    "fixtures": 57,
+    "generation_dispositions": 48,
+    "paragraph_scores": 228,
+    "source_blocks": 80
+  },
+  "replay_script_sha256": "de36b10f4487806c6810510bfd30b00332546b26b340c724fb5bcb7f30b653c2",
+  "results": {
+    "additional_human_groups": 0,
+    "additional_useful_groups": {
+      "all": 1,
+      "census": 0,
+      "copyright": 1,
+      "granite": 0,
+      "olmo": 1,
+      "tiny": 0
+    },
+    "advance": false,
+    "assessed_generator_families": [
+      "granite",
+      "olmo"
+    ],
+    "counts": {
+      "all/granite": {
+        "current_flags": 8,
+        "current_useful": 7,
+        "files": 16,
+        "sequence_flags": 0,
+        "sequence_unassessed": 0,
+        "sequence_useful": 0,
+        "unigram_flags": 2,
+        "unigram_unassessed": 0,
+        "unigram_useful": 1,
+        "union_flags": 8,
+        "union_useful": 7
+      },
+      "all/human_splice": {
+        "current_flags": 6,
+        "current_useful": 0,
+        "files": 16,
+        "sequence_flags": 0,
+        "sequence_unassessed": 0,
+        "sequence_useful": 0,
+        "unigram_flags": 1,
+        "unigram_unassessed": 0,
+        "unigram_useful": 0,
+        "union_flags": 6,
+        "union_useful": 0
+      },
+      "all/olmo": {
+        "current_flags": 7,
+        "current_useful": 5,
+        "files": 9,
+        "sequence_flags": 1,
+        "sequence_unassessed": 0,
+        "sequence_useful": 1,
+        "unigram_flags": 2,
+        "unigram_unassessed": 0,
+        "unigram_useful": 1,
+        "union_flags": 7,
+        "union_useful": 6
+      },
+      "all/original": {
+        "current_flags": 7,
+        "current_useful": 0,
+        "files": 16,
+        "sequence_flags": 2,
+        "sequence_unassessed": 0,
+        "sequence_useful": 0,
+        "unigram_flags": 3,
+        "unigram_unassessed": 0,
+        "unigram_useful": 0,
+        "union_flags": 8,
+        "union_useful": 0
+      },
+      "census/granite": {
+        "current_flags": 4,
+        "current_useful": 4,
+        "files": 9,
+        "sequence_flags": 0,
+        "sequence_unassessed": 0,
+        "sequence_useful": 0,
+        "unigram_flags": 2,
+        "unigram_unassessed": 0,
+        "unigram_useful": 1,
+        "union_flags": 4,
+        "union_useful": 4
+      },
+      "census/human_splice": {
+        "current_flags": 4,
+        "current_useful": 0,
+        "files": 9,
+        "sequence_flags": 0,
+        "sequence_unassessed": 0,
+        "sequence_useful": 0,
+        "unigram_flags": 1,
+        "unigram_unassessed": 0,
+        "unigram_useful": 0,
+        "union_flags": 4,
+        "union_useful": 0
+      },
+      "census/olmo": {
+        "current_flags": 3,
+        "current_useful": 3,
+        "files": 5,
+        "sequence_flags": 0,
+        "sequence_unassessed": 0,
+        "sequence_useful": 0,
+        "unigram_flags": 1,
+        "unigram_unassessed": 0,
+        "unigram_useful": 0,
+        "union_flags": 3,
+        "union_useful": 3
+      },
+      "census/original": {
+        "current_flags": 3,
+        "current_useful": 0,
+        "files": 9,
+        "sequence_flags": 1,
+        "sequence_unassessed": 0,
+        "sequence_useful": 0,
+        "unigram_flags": 2,
+        "unigram_unassessed": 0,
+        "unigram_useful": 0,
+        "union_flags": 4,
+        "union_useful": 0
+      },
+      "copyright/granite": {
+        "current_flags": 4,
+        "current_useful": 3,
+        "files": 7,
+        "sequence_flags": 0,
+        "sequence_unassessed": 0,
+        "sequence_useful": 0,
+        "unigram_flags": 0,
+        "unigram_unassessed": 0,
+        "unigram_useful": 0,
+        "union_flags": 4,
+        "union_useful": 3
+      },
+      "copyright/human_splice": {
+        "current_flags": 2,
+        "current_useful": 0,
+        "files": 7,
+        "sequence_flags": 0,
+        "sequence_unassessed": 0,
+        "sequence_useful": 0,
+        "unigram_flags": 0,
+        "unigram_unassessed": 0,
+        "unigram_useful": 0,
+        "union_flags": 2,
+        "union_useful": 0
+      },
+      "copyright/olmo": {
+        "current_flags": 4,
+        "current_useful": 2,
+        "files": 4,
+        "sequence_flags": 1,
+        "sequence_unassessed": 0,
+        "sequence_useful": 1,
+        "unigram_flags": 1,
+        "unigram_unassessed": 0,
+        "unigram_useful": 1,
+        "union_flags": 4,
+        "union_useful": 3
+      },
+      "copyright/original": {
+        "current_flags": 4,
+        "current_useful": 0,
+        "files": 7,
+        "sequence_flags": 1,
+        "sequence_unassessed": 0,
+        "sequence_useful": 0,
+        "unigram_flags": 1,
+        "unigram_unassessed": 0,
+        "unigram_useful": 0,
+        "union_flags": 4,
+        "union_useful": 0
+      }
+    },
+    "files": 57,
+    "human_groups": {
+      "current": 8,
+      "sequence": 2,
+      "unigram": 4,
+      "union": 8
+    },
+    "native_contexts": 312,
+    "native_forwards": 78
+  },
+  "schema": "chipmunk.writing-grammar-seams/1",
+  "scope": "Local development evaluation of bounded English article and circular excerpts; raw texts, rewrite outputs and native response packets retained locally.",
+  "separation": {
+    "previous_option_order_fixtures": 43,
+    "prior_option_order_cases_sha256": "93deaac2e2b7db1090d385c0aad91add086596507b8f4d4b753f0a70859b994e",
+    "shared_12_word_fragments_with_previous_option_order": 0
+  },
+  "startup_stops": {
+    "config-startup-stop": {
+      "protocol.json": "9121103a74379833c4ecdfb52c28608cad93d9a8751ad8d97deb50029b7df98c",
+      "run.log": "8605bb75cd3ff9a3b2ae0c7d079e431b42691b06a99097ebc415cb9e46f77847"
+    },
+    "loader-startup-stop": {
+      "protocol.json": "4672b43539a0e11e05245d5129f40b459ef641449ee8455874315991c151f72a",
+      "run.log": "4f5d0d8b4611871d629fc3242becc17231b01394ef74b24da22f42df771a2a8a"
+    }
+  }
+}

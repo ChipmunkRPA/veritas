@@ -9,7 +9,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
-from app.api import auth, jobs, state, v2_document_revision, v2_image_reference
+from app.api import auth, jobs, state, v2_document_revision, v2_image_reference, v2_video_reference
 from app.api.demo import router as demo_router
 from app.api.routes import KIND_LIMITS, public, router
 from app.api.security import refuse_nul
@@ -108,6 +108,8 @@ def body_limit(path: str) -> int:
         return v2_image_reference.upload_limit() + 1024 * 1024
     if v2_document_revision.is_comparison_path(path) and v2_document_revision.enabled():
         return v2_document_revision.upload_limit() + 32 * 1024
+    if v2_video_reference.is_comparison_path(path) and v2_video_reference.enabled():
+        return v2_video_reference.upload_limit() + 1024 * 1024
     return settings.max_json_bytes
 
 
@@ -126,6 +128,8 @@ def upload_limiter(scope):
         declared, field_caps = "image", {"reference": v2_image_reference.upload_limit()}
     elif v2_document_revision.is_comparison_path(path) and v2_document_revision.enabled():
         declared, field_caps = "document", {"earlier": v2_document_revision.upload_limit()}
+    elif v2_video_reference.is_comparison_path(path) and v2_video_reference.enabled():
+        declared, field_caps = "video", {"earlier": v2_video_reference.upload_limit()}
     elif not ((path.startswith("/api/v2/cases/") and path.endswith("/items")) or path == "/api/v2/billing/checkout"):
         return None
     content_type = next((v for k, v in scope["headers"] if k == b"content-type"), b"")
@@ -252,6 +256,7 @@ app.include_router(v2_evidence_router)
 app.include_router(v2_evidence_packets_router)
 app.include_router(v2_image_reference.router)
 app.include_router(v2_document_revision.router)
+app.include_router(v2_video_reference.router)
 app.include_router(v2_models_router)
 app.include_router(v2_refusion_router)
 app.include_router(v2_reports_router)

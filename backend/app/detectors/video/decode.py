@@ -150,13 +150,16 @@ def _fields(line: str) -> dict[str, str]:
 
 
 def probe_frames(path: Path, *, cap: int = MAX_TABLE_FRAMES, check: Callable[[], None] | None = None,
-                 timeout_s: float = PROBE_TIMEOUT_S) -> FrameTable:
+                 timeout_s: float = PROBE_TIMEOUT_S, max_pixels: int | None = None) -> FrameTable:
     """The per-frame pts table of the first video stream (decodes every frame once, in a child process)."""
     stream = _stream_info(path)
     rotation = _rotation(stream)
     coded_w, coded_h = int(stream["width"]), int(stream["height"])
     width, height = (coded_h, coded_w) if abs(rotation) % 180 == 90 else (coded_w, coded_h)
-    argv = [_tool("ffprobe"), "-v", "error", "-protocol_whitelist", "file", "-select_streams", "v:0",
+    if max_pixels is not None and width * height > max_pixels:
+        raise DecodeError(f"Video could not be decoded for comparison above {max_pixels:,} pixels per picture.")
+    decoder_limit = ["-max_pixels", str(max_pixels)] if max_pixels is not None else []
+    argv = [_tool("ffprobe"), "-v", "error", "-protocol_whitelist", "file", *decoder_limit, "-select_streams", "v:0",
             "-show_entries", "frame=pts,best_effort_timestamp,pict_type,key_frame", "-of", "compact", _input(path)]
     pts: list[int | None] = []
     keys: list[int] = []
@@ -280,7 +283,8 @@ def _checked_pts(table: FrameTable, index: int, raw: int | None, time_bases: lis
 
 
 def decode_frames(path: Path, table: FrameTable, indices: Sequence[int] | None, *, max_side: int | None = None,
-                  check: Callable[[], None] | None = None, timeout_s: float = DECODE_TIMEOUT_S) -> Iterator[DecodedFrame]:
+                  check: Callable[[], None] | None = None, timeout_s: float = DECODE_TIMEOUT_S,
+                  max_pixels: int | None = None) -> Iterator[DecodedFrame]:
     """Decode the frames at `indices` (sorted, unique; None = every frame) in one pass, in table order.
 
     Frames the decoder does not deliver (a truncated tail) are simply not yielded; the caller compares.
@@ -296,8 +300,9 @@ def decode_frames(path: Path, table: FrameTable, indices: Sequence[int] | None, 
     if (w, h) != (table.width, table.height):
         filters.append(f"scale={w}:{h}:flags=area")
     filters.append("format=rgb24")
+    decoder_limit = ["-max_pixels", str(max_pixels)] if max_pixels is not None else []
     argv = [_tool("ffmpeg"), "-nostdin", "-hide_banner", "-loglevel", "info", "-protocol_whitelist", "file", "-copyts",
-            "-i", _input(path), "-map", "0:v:0", "-an", "-sn", "-dn", "-fps_mode", "passthrough", "-vf", ",".join(filters),
+            *decoder_limit, "-i", _input(path), "-map", "0:v:0", "-an", "-sn", "-dn", "-fps_mode", "passthrough", "-vf", ",".join(filters),
             "-f", "rawvideo", "pipe:1"]
     proc = subprocess.Popen(argv, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.DEVNULL)
     infos: queue.Queue = queue.Queue()

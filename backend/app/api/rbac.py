@@ -60,6 +60,8 @@ ROUTES: dict[tuple[str, str], str] = {
     ("POST", "/api/v2/analyses/{aid}/image-reference-comparison"): "viewer",
     ("GET", "/api/v2/analyses/{aid}/document-revision-comparison"): "viewer",
     ("POST", "/api/v2/analyses/{aid}/document-revision-comparison"): "viewer",
+    ("GET", "/api/v2/analyses/{aid}/video-reference-comparison"): "viewer",
+    ("POST", "/api/v2/analyses/{aid}/video-reference-comparison"): "viewer",
     ("GET", "/api/v2/analyses/{aid}/stills/{pts}.jpg"): "viewer",
     ("GET", "/api/v2/analyses/{aid}/frames"): "viewer",
     ("GET", "/api/v2/analyses/{aid}/progress"): "viewer",

@@ -1,0 +1,240 @@
+"""Measure picture and soundtrack differences between two clock-matched videos."""
+
+from __future__ import annotations
+
+import hashlib
+import io
+import os
+from contextlib import closing
+from fractions import Fraction
+from itertools import pairwise, zip_longest
+from pathlib import Path
+
+import numpy as np
+from PIL import Image
+
+from app.core.canonical import canonical_hash
+from app.detectors.audio.decode import SAMPLE_RATE as AUDIO_RATE
+from app.detectors.audio.decode import AudioStreamUnavailable, decode_audio, wav_bytes
+from app.detectors.audio.waveform import envelope
+from app.detectors.video.decode import DecodeError, FrameTable, decode_frames, probe_frames
+from app.storage.files import VIDEO_MIMES, sniff
+
+SCHEMA = "chipmunk.video-reference-comparison/1"
+MAX_BYTES = 48 * 1024 * 1024
+MAX_FRAMES = 360
+MAX_PIXELS = 1280 * 720
+MAX_SECONDS = 12
+MAX_PRESENTED_RANGES = 3
+AUDIO_BIN_SAMPLES = AUDIO_RATE // 50
+AUDIO_PREVIEW_SAMPLES = 2 * AUDIO_RATE
+PREVIEW_SIDE = 420
+
+INTERPRETATION = (
+    "The comparison shows changes in decoded pictures and the first soundtrack. "
+    "Encoding, color conversion, and ordinary edits can change decoded values. "
+    "Establishing edit intent or AI authorship requires other evidence."
+)
+
+
+def _identity(path: Path) -> dict:
+    with path.open("rb") as stream:
+        count = os.fstat(stream.fileno()).st_size
+        if not 0 < count <= MAX_BYTES:
+            raise ValueError("Each clip must be nonempty and at most 48 MiB.")
+        mime, _ = sniff(stream.read(8192), path.name)
+        if mime not in VIDEO_MIMES:
+            raise ValueError("Choose two readable video files.")
+        stream.seek(0)
+        return {"sha256": hashlib.file_digest(stream, "sha256").hexdigest(), "bytes": count}
+
+
+def _reference(table: FrameTable) -> dict:
+    return {"width": table.width, "height": table.height, "time_base": table.time_base,
+            "first_pts": table.pts[0], "last_pts": table.pts[-1], "frames": len(table),
+            "frame_pts_sha256": canonical_hash(list(table.pts))}
+
+
+def _elapsed(table: FrameTable) -> list[Fraction]:
+    return [(pts - table.pts[0]) * table.tb for pts in table.pts]
+
+
+def _comparison_issue(tables: tuple[FrameTable, FrameTable]) -> str | None:
+    if any(table.truncated for table in tables):
+        return "comparison_limit"
+    if any(len(table) < 2 or table.interpolated or any(a >= b for a, b in pairwise(table.pts)) for table in tables):
+        return "unverified_picture_clock"
+    earlier, later = tables
+    if (earlier.width, earlier.height) != (later.width, later.height):
+        return "picture_geometry_differs"
+    clocks = [_elapsed(table) for table in tables]
+    if any(clock[-1] > MAX_SECONDS for clock in clocks):
+        return "comparison_limit"
+    if clocks[0] != clocks[1]:
+        return "picture_timelines_differ"
+    return None
+
+
+def _runs(marked):
+    edges = np.flatnonzero(np.diff(np.r_[False, marked, False]))
+    return [(int(start), int(end)) for start, end in zip(edges[::2], edges[1::2], strict=True)]
+
+
+def _asset(assets, filename, content, media_type):
+    assets[filename] = content
+    return {"file": filename, "sha256": hashlib.sha256(content).hexdigest(), "media_type": media_type}
+
+
+def _image(assets, name, rgb):
+    with Image.fromarray(rgb) as picture, io.BytesIO() as output:
+        picture.thumbnail((PREVIEW_SIDE, PREVIEW_SIDE), Image.Resampling.LANCZOS)
+        picture.save(output, "PNG")
+        return _asset(assets, name, output.getvalue(), "image/png")
+
+
+def _bounds(mask) -> dict:
+    xs, = np.nonzero(mask.any(axis=0))
+    ys, = np.nonzero(mask.any(axis=1))
+    return {"x": int(xs[0]), "y": int(ys[0]), "w": int(xs[-1] - xs[0] + 1), "h": int(ys[-1] - ys[0] + 1)}
+
+
+def _frame_pairs(paths, tables):
+    with (closing(decode_frames(paths[0], tables[0], None, timeout_s=40, max_pixels=MAX_PIXELS)) as earlier,
+          closing(decode_frames(paths[1], tables[1], None, timeout_s=40, max_pixels=MAX_PIXELS)) as later):
+        for expected, (first, second) in enumerate(zip_longest(earlier, later)):
+            if (first is None or second is None or first.index != expected or second.index != expected or
+                    not first.pts_verified or not second.pts_verified):
+                raise DecodeError("Video could not be decoded with verified picture timestamps.")
+            yield first, second
+
+
+def _clock_range(tables, start, end):
+    return {label: {"start_pts": table.pts[start], "last_pts": table.pts[end - 1],
+                    "end_exclusive_pts": table.pts[end] if end < len(table) else None}
+            for label, table in zip(("earlier", "submitted"), tables, strict=True)}
+
+
+def _picture(paths, tables, assets):
+    measurements = []
+    for first, second in _frame_pairs(paths, tables):
+        difference = first.rgb != second.rgb
+        mask = difference[..., 0] | difference[..., 1] | difference[..., 2]
+        count = int(np.count_nonzero(mask))
+        measurements.append({"frame": first.index, "earlier_pts": first.pts, "submitted_pts": second.pts,
+                             "earlier_rgb_sha256": hashlib.sha256(first.rgb).hexdigest(),
+                             "submitted_rgb_sha256": hashlib.sha256(second.rgb).hexdigest(),
+                             "changed_pixels": count, "difference_bounds": _bounds(mask) if count else None})
+    if len(measurements) != len(tables[0]):
+        raise DecodeError("Video could not be decoded with every recorded picture.")
+
+    sizes = [row["changed_pixels"] for row in measurements]
+    ranges = _runs(np.asarray(sizes) > 0)
+    top = set(sorted(ranges, key=lambda pair: (-(pair[1] - pair[0]), pair[0]))[:MAX_PRESENTED_RANGES])
+    output, needed = [], set()
+    clock = _elapsed(tables[1])
+    for number, (start, end) in enumerate(ranges, 1):
+        strongest = max(range(start, end), key=sizes.__getitem__)
+        examples = {}
+        if (start, end) in top:
+            examples = {"during": strongest}
+            if start:
+                examples["before"] = start - 1
+            if end < len(measurements):
+                examples["after"] = end
+            needed.update(examples.values())
+        output.append({"id": f"V{number:02d}", "start_frame": start, "end_frame_exclusive": end,
+                       "start_s": float(clock[start]), "last_s": float(clock[end - 1]),
+                       "end_s": float(clock[end]) if end < len(clock) else None,
+                       "source_ranges": _clock_range(tables, start, end), "strongest_frame": measurements[strongest],
+                       "preview_indices": examples})
+
+    previews = {}
+    for side, path, table in zip(("earlier", "submitted"), paths, tables, strict=True):
+        with closing(decode_frames(path, table, sorted(needed), timeout_s=40, max_pixels=MAX_PIXELS)) as frames:
+            for frame in frames:
+                digest = hashlib.sha256(frame.rgb).hexdigest()
+                if not frame.pts_verified or digest != measurements[frame.index][f"{side}_rgb_sha256"]:
+                    raise DecodeError("Video could not be decoded with consistent picture evidence.")
+                previews.setdefault(frame.index, {})[side] = _image(assets, f"{side}-frame-{frame.index:03d}.png", frame.rgb)
+    if set(previews) != needed or any(len(pictures) != 2 for pictures in previews.values()):
+        raise DecodeError("Video could not be decoded with all requested evidence pictures.")
+
+    for item in output:
+        item["previews"] = {position: {**measurements[index], "assets": previews[index], "time_s": float(clock[index])}
+                            for position, index in item.pop("preview_indices").items()}
+    changed = sum(size > 0 for size in sizes)
+    return {"status": "measured", "matching_frames": len(sizes) - changed, "changed_frames": changed,
+            "frame_pairs_sha256": canonical_hash(measurements), "ranges": output}
+
+
+def _audio_source(path, source, table):
+    try:
+        decoded = decode_audio(path, source_sha256=source["sha256"], max_seconds=MAX_SECONDS + 1)
+    except AudioStreamUnavailable:
+        return "no_stream", None, None
+    except (ValueError, RuntimeError):
+        return "unverified_audio_clock", None, None
+    mapping = decoded.mapping
+    if len(mapping["timeline"]) != 1 or mapping["samples"] >= mapping["limit_samples"]:
+        return "unverified_audio_clock", None, None
+    pts = mapping["timeline"][0]["source_pts"]
+    relative = Fraction(pts, AUDIO_RATE) - table.pts[0] * table.tb
+    return "measured", decoded.pcm, {"pcm_sha256": mapping["pcm_sha256"], "source_pts": pts,
+                                    "relative_start": str(relative), "samples": len(decoded.pcm)}
+
+
+def _audio(paths, sources, tables, assets):
+    first, second = [_audio_source(path, source, table) for path, source, table in zip(paths, sources, tables, strict=True)]
+    if first[0] == second[0] == "no_stream":
+        return {"status": "no_stream"}
+    if first[0] != "measured" or second[0] != "measured":
+        return {"status": "audio_unassessed", "earlier": first[0], "submitted": second[0]}
+    left, right = first[2], second[2]
+    if (left["relative_start"], left["samples"]) != (right["relative_start"], right["samples"]):
+        return {"status": "audio_timelines_differ", "earlier": left, "submitted": right, "sample_rate": AUDIO_RATE}
+
+    difference = first[1] != second[1]
+    changed_per_bin = np.add.reduceat(difference, np.arange(0, len(difference), AUDIO_BIN_SAMPLES), dtype=np.int64)
+    ranges = _runs(changed_per_bin > 0)
+    top = set(sorted(ranges, key=lambda pair: (-(pair[1] - pair[0]), pair[0]))[:MAX_PRESENTED_RANGES])
+    result = []
+    origin = Fraction(right["relative_start"])
+    for number, (first_bin, after_bin) in enumerate(ranges, 1):
+        start, end = first_bin * AUDIO_BIN_SAMPLES, min(after_bin * AUDIO_BIN_SAMPLES, len(difference))
+        item = {"id": f"A{number:02d}", "start_sample": start, "end_sample": end,
+                "start_s": float(origin + Fraction(start, AUDIO_RATE)), "end_s": float(origin + Fraction(end, AUDIO_RATE)),
+                "changed_samples": int(np.sum(changed_per_bin[first_bin:after_bin])),
+                "source_ranges": {
+                    side: {"start_pts": details["source_pts"] + start, "end_exclusive_pts": details["source_pts"] + end}
+                    for side, details in (("earlier", left), ("submitted", right))
+                }}
+        if (first_bin, after_bin) in top:
+            preview_end = min(end, start + AUDIO_PREVIEW_SAMPLES)
+            excerpts = {"earlier": first[1][start:preview_end], "submitted": second[1][start:preview_end]}
+            item["preview"] = {"start_sample": start, "end_sample": preview_end,
+                               "end_s": float(origin + Fraction(preview_end, AUDIO_RATE)),
+                               "waveforms": {label: envelope(pcm) for label, pcm in excerpts.items()},
+                               "assets": {label: _asset(assets, f"{label}-audio-{number:02d}.wav", wav_bytes(pcm), "audio/wav")
+                                          for label, pcm in excerpts.items()}}
+        result.append(item)
+    return {"status": "measured", "earlier": left, "submitted": right, "sample_rate": AUDIO_RATE,
+            "bin_samples": AUDIO_BIN_SAMPLES, "changed_samples": int(np.count_nonzero(difference)),
+            "bin_counts_sha256": canonical_hash(changed_per_bin.tolist()), "ranges": result}
+
+
+def compare(earlier: Path, submitted: Path) -> tuple[dict, dict[str, bytes]]:
+    """Report actual decoded differences at equal relative native picture timestamps."""
+    paths = earlier, submitted
+    sources = tuple(_identity(path) for path in paths)
+    tables = tuple(probe_frames(path, cap=MAX_FRAMES, timeout_s=30, max_pixels=MAX_PIXELS) for path in paths)
+    status = _comparison_issue(tables) or "measured"
+    assets: dict[str, bytes] = {}
+    record = {"schema": SCHEMA, "status": status,
+              "earlier": {**sources[0], **_reference(tables[0])}, "submitted": {**sources[1], **_reference(tables[1])},
+              "interpretation": INTERPRETATION, "affects_overall_confidence": False}
+    if status == "measured":
+        record["picture"] = _picture(paths, tables, assets)
+        record["audio"] = _audio(paths, sources, tables, assets)
+    if sources != tuple(_identity(path) for path in paths):
+        raise ValueError("One of the clips changed while the comparison was running.")
+    return record, assets

@@ -6,6 +6,7 @@ import hashlib
 import io
 import json
 import tempfile
+from functools import lru_cache
 from pathlib import Path
 
 import numpy as np
@@ -33,17 +34,30 @@ CROP_RESIZE_MIN_SCALE = .72
 CROP_RESIZE_MAX_SCALE = 1.17
 
 
-def supported_crop_resize(carrier: Image.Image, reference_size: tuple[int, int]) -> bool:
-    """The held crop-and-resize release covers standard 4:2:0 JPEG quality-75 tables."""
-    if (max(reference_size) > CROP_RESIZE_MAX_REFERENCE_SIDE or max(carrier.size) > CROP_RESIZE_MAX_SUBMITTED_SIDE
-            or carrier.format != "JPEG" or carrier.mode != "RGB" or JpegImagePlugin.get_sampling(carrier) != 2
-            or not carrier.quantization):
-        return False
+@lru_cache(maxsize=4)
+def _jpeg_tables(quality: int) -> dict:
     with io.BytesIO() as buffer:
-        Image.new("RGB", (16, 16)).save(buffer, format="JPEG", quality=75, subsampling=2)
+        Image.new("RGB", (16, 16)).save(buffer, format="JPEG", quality=quality, subsampling=2)
         buffer.seek(0)
         with Image.open(buffer) as expected:
-            return carrier.quantization == expected.quantization
+            return expected.quantization
+
+
+def _color_jpeg420(image: Image.Image) -> bool:
+    return (image.format == "JPEG" and image.mode == "RGB" and JpegImagePlugin.get_sampling(image) == 2
+            and bool(image.quantization))
+
+
+def supported_crop_resize(carrier: Image.Image, reference_size: tuple[int, int], *, earlier: Image.Image | None = None) -> bool:
+    """Admit the verified quantization and orientation profiles for cropped JPEGs."""
+    if (max(reference_size) > CROP_RESIZE_MAX_REFERENCE_SIDE or max(carrier.size) > CROP_RESIZE_MAX_SUBMITTED_SIDE
+            or not _color_jpeg420(carrier)):
+        return False
+    if carrier.quantization == _jpeg_tables(75):
+        return True
+    return (carrier.quantization == _jpeg_tables(90) and earlier is not None and _color_jpeg420(earlier)
+            and carrier.getexif().get(274, 1) == earlier.getexif().get(274, 1) == 1
+            and earlier.quantization in (_jpeg_tables(82), _jpeg_tables(95)))
 
 
 def accepted_crop_resize(result: dict, submitted_size: tuple[int, int]) -> bool:
@@ -116,7 +130,7 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
                 if reference.shape != submitted.shape:
                     result, mask = reference_resize.compare(reference, submitted, questioned)
                     schema = RESIZE_SCHEMA
-                if result["status"] != "comparable" and supported_crop_resize(questioned, reference.shape[1::-1]):
+                if result["status"] != "comparable" and supported_crop_resize(questioned, reference.shape[1::-1], earlier=original):
                     candidate, selection = reference_crop_resize.compare(reference, submitted, questioned)
                     if accepted_crop_resize(candidate, submitted.shape[1::-1]):
                         result, mask, schema = candidate, selection, CROP_RESIZE_SCHEMA

@@ -135,6 +135,9 @@ actually selects on held photos and screenshots.
 The [native tile agreement trial](image-native-tile-agreement-transfer-2026-11-12.md)
 rebuilds each image tile in two layouts and compares regional localization
 with false flags on ordinary photographs and screenshots.
+The [quality-90 earlier-copy study](image-reference-jpeg90-transfer-2026-11-12.md)
+rebuilds both JPEG deliveries, checks mapped native crops, and verifies the
+paid result's API, PDF, and JSON evidence in the local app.
 
 The [strong-background speech test](audio-noise-speech-gate-strong-noise-v269-result.md)
 documents how to reproduce a comparison between the current speech admission

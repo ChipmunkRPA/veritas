@@ -156,7 +156,7 @@ def _geometry(comparison, reference, submitted):
     return dx, dy, overlap
 
 
-def _resize_replay(comparison, ref, sub, carrier):
+def _resize_replay(comparison, ref, sub, carrier, earlier):
     """Recompute resized comparisons directly from the two sources."""
     try:
         import numpy as np
@@ -175,23 +175,24 @@ def _resize_replay(comparison, ref, sub, carrier):
     cropped = schema in CROPPED_RESIZE_SCHEMAS
     _require(comparison["coordinate_space"] == "exif-oriented-submitted" and (cropped or ref.size != sub.size)
              and "alignment" not in comparison, "Resize comparison has unexpected source dimensions or coordinates")
-    earlier, submitted = np.asarray(ref), np.asarray(sub)
+    reference, submitted = np.asarray(ref), np.asarray(sub)
     try:
-        aligned, _ = reference_alignment.compare(earlier, submitted, carrier)
+        aligned, _ = reference_alignment.compare(reference, submitted, carrier)
         _require(aligned["status"] == "integer_alignment_unresolved", "Resize comparison must follow the integer alignment check")
         if cropped:
             if ref.size != sub.size:
-                same_framing, _ = reference_resize.compare(earlier, submitted, carrier)
+                same_framing, _ = reference_resize.compare(reference, submitted, carrier)
                 _require(same_framing["status"] != "comparable", "Cropped resize must follow the same-framing check")
             if schema == EXACT_PNG_CROP_RESIZE_SCHEMA:
-                expected, mask = reference_png_exact_resize.compare(earlier, submitted, carrier)
+                expected, mask = reference_png_exact_resize.compare(reference, submitted, carrier)
                 _require(expected is not None, "Cropped PNG does not reproduce the submitted pixels in scope")
             else:
-                _require(supported_crop_resize(carrier, ref.size), "Cropped resize uses an unsupported submitted delivery or dimensions")
-                expected, mask = reference_crop_resize.compare(earlier, submitted, carrier)
+                _require(supported_crop_resize(carrier, ref.size, earlier=earlier),
+                         "Cropped resize uses unsupported JPEG delivery or dimensions")
+                expected, mask = reference_crop_resize.compare(reference, submitted, carrier)
                 _require(accepted_crop_resize(expected, sub.size), "Cropped resize did not establish an exact earlier area in scope")
         else:
-            expected, mask = reference_resize.compare(earlier, submitted, carrier)
+            expected, mask = reference_resize.compare(reference, submitted, carrier)
     except OpenCVError as error:
         raise ValueError("The image comparison could not be recomputed") from error
     measured_fields = {"status", "regions", "additional_regions", "supported_resize_kernels", "framing_check",
@@ -308,15 +309,17 @@ def review(export, earlier, submitted):
              "Unknown comparison status")
     _require(not regions or status == "comparable", "An unassessed comparison contains difference regions")
     with ExitStack() as stack:
-        ref = _source(stack, _read(earlier, MAX_SOURCE_BYTES), comparison["reference"])
+        earlier_bytes = _read(earlier, MAX_SOURCE_BYTES)
         submitted_bytes = _read(submitted, MAX_SOURCE_BYTES)
+        ref = _source(stack, earlier_bytes, comparison["reference"])
         sub = _source(stack, submitted_bytes, comparison["submitted"])
         resized = comparison["schema"] == RESIZE_SCHEMA or comparison["schema"] in CROPPED_RESIZE_SCHEMAS
         oriented = comparison["schema"] == ORIENTATION_SCHEMA
         crop = comparison.get("reference_crop_bounds") if comparison["schema"] in CROPPED_RESIZE_SCHEMAS else None
         if resized:
             carrier = stack.enter_context(Image.open(io.BytesIO(submitted_bytes), formats=["PNG", "JPEG"]))
-            expected_mask = _resize_replay(comparison, ref, sub, carrier)
+            earlier_carrier = stack.enter_context(Image.open(io.BytesIO(earlier_bytes), formats=["PNG", "JPEG"]))
+            expected_mask = _resize_replay(comparison, ref, sub, carrier, earlier_carrier)
             overlap = (0, 0, sub.width, sub.height)
         elif oriented:
             carrier = stack.enter_context(Image.open(io.BytesIO(submitted_bytes), formats=["PNG", "JPEG"]))

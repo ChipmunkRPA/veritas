@@ -446,14 +446,24 @@ def test_resized_route_pdf_and_export_bind_both_native_grids(reference_http, tmp
         review(*paths)
 
 
-@pytest.mark.parametrize("format,quality,schema", [
-    ("JPEG", 75, "chipmunk.image-reference-comparison/4"),
-    ("JPEG", 90, "chipmunk.image-reference-comparison/3"),
-    ("PNG", 75, "chipmunk.image-reference-comparison/5"),
+@pytest.mark.parametrize("format,quality,earlier_quality,schema", [
+    ("JPEG", 75, None, "chipmunk.image-reference-comparison/4"),
+    ("JPEG", 90, None, "chipmunk.image-reference-comparison/3"),
+    ("JPEG", 90, 82, "chipmunk.image-reference-comparison/4"),
+    ("JPEG", 90, 95, "chipmunk.image-reference-comparison/4"),
+    ("JPEG", 90, 88, "chipmunk.image-reference-comparison/3"),
+    ("JPEG", 87, 82, "chipmunk.image-reference-comparison/3"),
+    ("PNG", 75, None, "chipmunk.image-reference-comparison/5"),
 ])
-def test_crop_and_resize_fallback_requires_supported_delivery(reference_http, tmp_path, format, quality, schema):
+def test_crop_and_resize_fallback_requires_supported_delivery(reference_http, tmp_path, format, quality, earlier_quality, schema):
     f = reference_http
-    edited = f.reference_pixels.copy()
+    reference = f.reference
+    if earlier_quality is not None:
+        data = io.BytesIO()
+        Image.fromarray(f.reference_pixels).save(data, "JPEG", quality=earlier_quality, subsampling=2)
+        reference = data.getvalue()
+    with Image.open(io.BytesIO(reference)) as reference_image:
+        edited = np.array(reference_image.convert("RGB"))
     edited[68:146, 130:220] = (210, 52, 119)
     crop = (24, 14, 352, 241)
     size = tuple(round(side * .86) for side in (crop[2] - crop[0], crop[3] - crop[1]))
@@ -466,12 +476,12 @@ def test_crop_and_resize_fallback_requires_supported_delivery(reference_http, tm
         analysis = db.get(Analysis, "image-a")
         analysis.sha256, analysis.size_bytes = source.sha256, source.size_bytes
         db.commit()
-    response = f.client.post(_url(), headers=f.viewer, files=_upload(f.reference), data={"include_pdf": "true"})
+    response = f.client.post(_url(), headers=f.viewer, files=_upload(reference), data={"include_pdf": "true"})
     assert response.status_code == 200, response.text
     payload = response.json()
     comparison = payload["comparison"]
     assert comparison["schema"] == schema
-    if format == "JPEG" and quality != 75:
+    if schema == "chipmunk.image-reference-comparison/3":
         assert comparison["status"] != "comparable" and payload["pngs"] == {}
         return
     assert comparison["status"] == "comparable"
@@ -481,7 +491,7 @@ def test_crop_and_resize_fallback_requires_supported_delivery(reference_http, tm
     paths = [tmp_path / name for name in ("export.json", "earlier.png", "submitted." + format.lower())]
     export = {"comparison": comparison, "pngs": payload["pngs"]}
     paths[0].write_text(json.dumps(export))
-    paths[1].write_bytes(f.reference)
+    paths[1].write_bytes(reference)
     paths[2].write_bytes(submitted)
     assert review(*paths)["crops_verified"] == 2
     if format == "PNG":

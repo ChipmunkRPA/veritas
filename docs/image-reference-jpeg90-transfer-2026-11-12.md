@@ -16,6 +16,10 @@ The existing keypoint, crop, registration, and JPEG-delivery checks remained fix
 
 The incompatible pairs used fractional translation, rotation, anisotropic resizing, or an unrelated image. Three nuisance highlights followed an independent earlier delivery and two followed global contrast. Clean re-encodes from the actual earlier pixels and the additional prior-recompression controls showed no highlights. The quality-87 controls remained outside the crop fallback. The quality-75 comparison served as a separate regression control. The aggregate includes the independently rebuilt delivery, coordinate and mask counts. Photographs, derived files, and private per-file records stay local.
 
+## Local app
+
+The app's earlier-copy comparison reproduced all 288 frozen decisions, including 108 accepted quality-90 masks and 49 mapped native regions. Four isolated paid-flow cases used simulated payment. The two local edits exported the same native crops, mask and overlay through the API, JSON, and PDF. The clean pair matched with no differences, and the quality-87 comparison stayed unassessed. Each unpaid event queued zero analyses. Chrome displayed the source images and both download buttons. [Local verification receipt](evaluation-panels/image-reference-jpeg90-app-2026-11-12.json)
+
 ## Replay
 
 Use the study commit and the retained v39 source cache and exposure ledgers. Set `run` to a new local directory. The source cache credits identify the work and license. The scripts regenerate only the disclosed transforms.

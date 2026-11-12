@@ -2,6 +2,8 @@
 
 The local earlier-copy comparison now supports a corroborated crop and resize for submitted color JPEGs with the tested quality-75 quantization tables and 4:2:0 chroma sampling. The fallback supports earlier images up to 768 pixels on the longest side, submitted images up to 845 pixels on the longest side, and crop resize ratios from 0.72× to 1.17× after rounding. It shows the earlier native area used, the two source crops, and the submitted-grid difference overlay. Pixels outside the earlier area are unassessed. The comparison measures differences between the supplied files and carries no AI confidence weight. [Frozen study and readback](evaluation-panels/image-reference-crop-resize-transfer-2026-11-11.json)
 
+A later trial also qualified standard 4:2:0 quality-90 submissions when the earlier upright JPEG uses the tested quality-82 or quality-95 tables. [Quality-90 follow-up](image-reference-jpeg90-transfer-2026-11-12.md)
+
 ## Frozen method
 
 Use mutual scale-invariant keypoint matches for a provisional axis-aligned transformation. Search within two native pixels of each proposed crop edge. Compare nine distributed tiles and require both tile groups to rank the same integer crop first. The existing proportional-resize comparison checks that crop and retains supported differences. If alignment passes, its recorded fractional residuals provide a final check. The reference crop for each reported region maps submitted pixel edges with rational scaling and adds the earlier crop's native offset. This uses existing OpenCV and Pillow code paths with no model weights. [Scale-invariant matching](https://www.cs.ubc.ca/~lowe/papers/ijcv04.pdf) · [Recent research on reference-based evidence](https://arxiv.org/abs/2611.10908)

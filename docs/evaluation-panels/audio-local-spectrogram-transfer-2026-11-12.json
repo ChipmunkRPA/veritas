@@ -1,0 +1,1266 @@
+{
+  "schema": "chipmunk.audio-local-spectrogram-transfer/1",
+  "method": {
+    "source": "New 4 s splice episodes only from the qualified v81/v82 fusion_fit role. Three episodes per each of 7 clone and 4 stock donor groups, with genuine same-host and other-voice controls and matched LibriSpeech backgrounds. Select hosts by fixed order. Reject unusable signal extents or component clipping before scoring. Preserve source-role separation. Expressive appears only in held comparison.",
+    "fit_conditions": "Dry and -5 dB. Never train on diagnostic or confirmation tracks, AMI audio, or any expressive generator.",
+    "features": "25 ms Hann, 10 ms hop, 512-point STFT, 40 triangular mel bands from 80 to 7600 Hz. Log powers relative to full-file geometric mean, clamped [-8,8], plus 20 ms temporal differences. Fixed frame centers [0,10,20,...] ms. Boundary padding is zero.",
+    "model": "80 to 16 pointwise convolution, depthwise temporal width 5, 16 to 24 pointwise convolution, depthwise temporal width 5, then mean pool each 200 ms. Local head uses that cell; contextual head also uses mean of cells at offsets -3,-2,+2,+3 and target-minus-context. Edge offsets clip to the nearest cell. Fit both independently.",
+    "objective": "Overlap-weighted, class-balanced logistic cell loss. Add .15 softplus ranking loss on synthetic vs each matching genuine splice within known edit, and .04 squared deviation outside the edit and two neighboring cells. Fixed 12 epochs and AdamW, learning rate .003, weight decay .01, 3 host episodes per batch, seeded fixed-order random permutations.",
+    "fusion": "Mean of incumbent and contextual cell z-scores. Centers and scales are median and robust 1.4826 times MAD across all exact genuine calibration cells, with scale floor .10. No fusion on the six-second panel because its original incumbent cell arrays were not retained.",
+    "points": "Every candidate strictly exceeds its maximum exact genuine calibration track response. Incumbent points unchanged. Compare held ranking at exact genuine source-group false counts 0,1,2. Select strongest 0.6-second mean over 3 adjacent cells. Useful means >=.30 IoU and >=.50 edit coverage.",
+    "advance": "Need two net useful strong-noise gains across two families, at most one extra noisy false group, preserve number of dry useful locations, and flag no isolated background. Need >=1 useful noisy AMI location and no extra genuine false AMI flag in the contextual arm. Successful pilot would require fresh acquisition."
+  },
+  "code_sha256": "e2da140087fab0bf398b1aa3c873d9bda46ea4e9fe39f6727d16bc5e209252bc",
+  "constructor_sha256": "a154b1b9091acfbde7e086ab073350a1b37532eb7eaad3909fd532814bc949bf",
+  "parent": {
+    "inputs.json": "850955c09b68ee91df0c6c02ef7a096818ae647b7170b93aaebb5699a72320b7",
+    "inputs-freeze.json": "37dfdbe383e0698612b7403dedef2291189ffc3dd062b7dea662db4261ea88f1",
+    "inputs-verified.json": "bcfe21ac346acf75f700b00fb2718f898e4f7adcbc89bf3ab13cab7c0ae86b86",
+    "fit.json": "b37ea8a57908752af61a112d47fa1b8b763bc61cb0f57f76d27d544de83d8425",
+    "decisions.json": "92cab38d7dff1d805e1393857a58087292d32a10934ffabce83e1c39f6235372",
+    "result.json": "90949eda7056824e9a05ebd4daebfc22f8560d9889b3e1e386f688e778baf45e",
+    "meeting-replay.json": "72d001b113a14ae37a6d0597d91ed2df10e3b4429b5a1da6e938b63639953e08",
+    "meeting-replay-freeze.json": "7ffb549460c117f7b0a327d79793a9a22884ee00df5ee1f2d526cdc3b85b9b66",
+    "confidence_cal-features.npz": "503995cb94a81da5760cc5fcd37c9eec41943a94bbd5d25ac524bac5cd0a996c",
+    "confidence_cal-features.json": "62c815177de7add330a29ff1d74c32799af73d2a9b1eee1b08af6623440e005b",
+    "selection-features.npz": "a19ef96f5c1fcac7b5cc557c178d0959f25ba2fa621bd9c7e00e6c1da173abee",
+    "selection-features.json": "add43ea71559fba58ca4df69bf3345c3f453cf578436f8a446452c4567a43336",
+    "confirmation-features.npz": "7a8055744584b8bb22fb3b953649ef0f790ee74e743629ab4d2f507198067983",
+    "confirmation-features.json": "20a7800416dd1a565da4e5d9c7fca0e3ece98dcf56e4ad7eb684e852f907d00b"
+  },
+  "meeting": {
+    "freeze.json": "811184bc036e19fd56c78d03735d2e6af12d19498088bb43442e4141d8eb32a8",
+    "roster.json": "544475db2eab26777629c883e2fcc32b4f906c915167490268e21fd5892357e5",
+    "selection.json": "a6780c430f43f0a17d604b1198ad3941db823782a272a5838725b959047010f1",
+    "confirmation.json": "f9e38ba554f7b57d8491c8177ff6523826b9f2bb013c93faeac1c87d6d726027",
+    "points.json": "b2258106c4e910d0e7334c63f5b297bb674002f85a6666e2c7c1ed5dc14adff4"
+  },
+  "runtime": {
+    "numpy": "2.2.6",
+    "torch": "2.13.0"
+  },
+  "seed": 20261112,
+  "training_views": 198,
+  "training_episodes": 33,
+  "training_generator_groups": 11,
+  "external_weights": false,
+  "new_incumbent_model_forwards": 0,
+  "cells": {
+    "matched/selection/dry": {
+      "incumbent_frames": {
+        "synthetic": 6,
+        "genuine": 12,
+        "true_flags": 1,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 1,
+        "threshold_free_useful": 6,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "spectrogram_local": {
+        "synthetic": 6,
+        "genuine": 12,
+        "true_flags": 1,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 1,
+        "threshold_free_useful": 4,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "spectrogram_context": {
+        "synthetic": 6,
+        "genuine": 12,
+        "true_flags": 0,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 0,
+        "threshold_free_useful": 4,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "context_fusion": {
+        "synthetic": 6,
+        "genuine": 12,
+        "true_flags": 2,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 2,
+        "threshold_free_useful": 4,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      }
+    },
+    "matched/selection/speech_minus5db": {
+      "incumbent_frames": {
+        "synthetic": 6,
+        "genuine": 22,
+        "true_flags": 0,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 0,
+        "threshold_free_useful": 3,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "spectrogram_local": {
+        "synthetic": 6,
+        "genuine": 22,
+        "true_flags": 0,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 0,
+        "threshold_free_useful": 3,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "spectrogram_context": {
+        "synthetic": 6,
+        "genuine": 22,
+        "true_flags": 0,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 0,
+        "threshold_free_useful": 1,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "context_fusion": {
+        "synthetic": 6,
+        "genuine": 22,
+        "true_flags": 0,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 0,
+        "threshold_free_useful": 2,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      }
+    },
+    "matched/selection/speech_plus15db": {
+      "incumbent_frames": {
+        "synthetic": 6,
+        "genuine": 12,
+        "true_flags": 2,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 2,
+        "threshold_free_useful": 6,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "spectrogram_local": {
+        "synthetic": 6,
+        "genuine": 12,
+        "true_flags": 0,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 0,
+        "threshold_free_useful": 3,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "spectrogram_context": {
+        "synthetic": 6,
+        "genuine": 12,
+        "true_flags": 0,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 0,
+        "threshold_free_useful": 4,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "context_fusion": {
+        "synthetic": 6,
+        "genuine": 12,
+        "true_flags": 0,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 0,
+        "threshold_free_useful": 4,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      }
+    },
+    "matched/confirmation/dry": {
+      "incumbent_frames": {
+        "synthetic": 10,
+        "genuine": 20,
+        "true_flags": 2,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 2,
+        "threshold_free_useful": 8,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "spectrogram_local": {
+        "synthetic": 10,
+        "genuine": 20,
+        "true_flags": 1,
+        "genuine_false_flags": 2,
+        "genuine_false_groups": 1,
+        "useful": 0,
+        "threshold_free_useful": 3,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "spectrogram_context": {
+        "synthetic": 10,
+        "genuine": 20,
+        "true_flags": 1,
+        "genuine_false_flags": 2,
+        "genuine_false_groups": 1,
+        "useful": 0,
+        "threshold_free_useful": 4,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "context_fusion": {
+        "synthetic": 10,
+        "genuine": 20,
+        "true_flags": 2,
+        "genuine_false_flags": 2,
+        "genuine_false_groups": 1,
+        "useful": 1,
+        "threshold_free_useful": 5,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "matched_ranking": {
+        "incumbent_frames": {
+          "comparable": 10,
+          "above_all_controls": 9
+        },
+        "spectrogram_local": {
+          "comparable": 10,
+          "above_all_controls": 3
+        },
+        "spectrogram_context": {
+          "comparable": 10,
+          "above_all_controls": 2
+        },
+        "context_fusion": {
+          "comparable": 10,
+          "above_all_controls": 4
+        }
+      },
+      "equal_false_groups": {
+        "0": {
+          "incumbent_frames": {
+            "synthetic": 10,
+            "genuine": 20,
+            "true_flags": 2,
+            "genuine_false_flags": 0,
+            "genuine_false_groups": 0,
+            "useful": 2,
+            "threshold_free_useful": 8,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "spectrogram_local": {
+            "synthetic": 10,
+            "genuine": 20,
+            "true_flags": 0,
+            "genuine_false_flags": 0,
+            "genuine_false_groups": 0,
+            "useful": 0,
+            "threshold_free_useful": 3,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "spectrogram_context": {
+            "synthetic": 10,
+            "genuine": 20,
+            "true_flags": 0,
+            "genuine_false_flags": 0,
+            "genuine_false_groups": 0,
+            "useful": 0,
+            "threshold_free_useful": 4,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "context_fusion": {
+            "synthetic": 10,
+            "genuine": 20,
+            "true_flags": 0,
+            "genuine_false_flags": 0,
+            "genuine_false_groups": 0,
+            "useful": 0,
+            "threshold_free_useful": 5,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          }
+        },
+        "1": {
+          "incumbent_frames": {
+            "synthetic": 10,
+            "genuine": 20,
+            "true_flags": 2,
+            "genuine_false_flags": 1,
+            "genuine_false_groups": 1,
+            "useful": 2,
+            "threshold_free_useful": 8,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "spectrogram_local": {
+            "synthetic": 10,
+            "genuine": 20,
+            "true_flags": 1,
+            "genuine_false_flags": 2,
+            "genuine_false_groups": 1,
+            "useful": 0,
+            "threshold_free_useful": 3,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "spectrogram_context": {
+            "synthetic": 10,
+            "genuine": 20,
+            "true_flags": 2,
+            "genuine_false_flags": 2,
+            "genuine_false_groups": 1,
+            "useful": 0,
+            "threshold_free_useful": 4,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "context_fusion": {
+            "synthetic": 10,
+            "genuine": 20,
+            "true_flags": 4,
+            "genuine_false_flags": 2,
+            "genuine_false_groups": 1,
+            "useful": 1,
+            "threshold_free_useful": 5,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          }
+        },
+        "2": {
+          "incumbent_frames": {
+            "synthetic": 10,
+            "genuine": 20,
+            "true_flags": 2,
+            "genuine_false_flags": 3,
+            "genuine_false_groups": 2,
+            "useful": 2,
+            "threshold_free_useful": 8,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "spectrogram_local": {
+            "synthetic": 10,
+            "genuine": 20,
+            "true_flags": 2,
+            "genuine_false_flags": 4,
+            "genuine_false_groups": 2,
+            "useful": 0,
+            "threshold_free_useful": 3,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "spectrogram_context": {
+            "synthetic": 10,
+            "genuine": 20,
+            "true_flags": 2,
+            "genuine_false_flags": 3,
+            "genuine_false_groups": 2,
+            "useful": 0,
+            "threshold_free_useful": 4,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "context_fusion": {
+            "synthetic": 10,
+            "genuine": 20,
+            "true_flags": 4,
+            "genuine_false_flags": 3,
+            "genuine_false_groups": 2,
+            "useful": 1,
+            "threshold_free_useful": 5,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          }
+        }
+      }
+    },
+    "matched/confirmation/speech_minus5db": {
+      "incumbent_frames": {
+        "synthetic": 10,
+        "genuine": 34,
+        "true_flags": 0,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 0,
+        "threshold_free_useful": 5,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "spectrogram_local": {
+        "synthetic": 10,
+        "genuine": 34,
+        "true_flags": 0,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 0,
+        "threshold_free_useful": 4,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "spectrogram_context": {
+        "synthetic": 10,
+        "genuine": 34,
+        "true_flags": 0,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 0,
+        "threshold_free_useful": 1,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "context_fusion": {
+        "synthetic": 10,
+        "genuine": 34,
+        "true_flags": 0,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 0,
+        "threshold_free_useful": 1,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "matched_ranking": {
+        "incumbent_frames": {
+          "comparable": 10,
+          "above_all_controls": 7
+        },
+        "spectrogram_local": {
+          "comparable": 10,
+          "above_all_controls": 2
+        },
+        "spectrogram_context": {
+          "comparable": 10,
+          "above_all_controls": 2
+        },
+        "context_fusion": {
+          "comparable": 10,
+          "above_all_controls": 6
+        }
+      },
+      "equal_false_groups": {
+        "0": {
+          "incumbent_frames": {
+            "synthetic": 10,
+            "genuine": 34,
+            "true_flags": 0,
+            "genuine_false_flags": 0,
+            "genuine_false_groups": 0,
+            "useful": 0,
+            "threshold_free_useful": 5,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "spectrogram_local": {
+            "synthetic": 10,
+            "genuine": 34,
+            "true_flags": 0,
+            "genuine_false_flags": 0,
+            "genuine_false_groups": 0,
+            "useful": 0,
+            "threshold_free_useful": 4,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "spectrogram_context": {
+            "synthetic": 10,
+            "genuine": 34,
+            "true_flags": 0,
+            "genuine_false_flags": 0,
+            "genuine_false_groups": 0,
+            "useful": 0,
+            "threshold_free_useful": 1,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "context_fusion": {
+            "synthetic": 10,
+            "genuine": 34,
+            "true_flags": 1,
+            "genuine_false_flags": 0,
+            "genuine_false_groups": 0,
+            "useful": 0,
+            "threshold_free_useful": 1,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          }
+        },
+        "1": {
+          "incumbent_frames": {
+            "synthetic": 10,
+            "genuine": 34,
+            "true_flags": 4,
+            "genuine_false_flags": 1,
+            "genuine_false_groups": 1,
+            "useful": 2,
+            "threshold_free_useful": 5,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "spectrogram_local": {
+            "synthetic": 10,
+            "genuine": 34,
+            "true_flags": 1,
+            "genuine_false_flags": 3,
+            "genuine_false_groups": 1,
+            "useful": 0,
+            "threshold_free_useful": 4,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "spectrogram_context": {
+            "synthetic": 10,
+            "genuine": 34,
+            "true_flags": 1,
+            "genuine_false_flags": 3,
+            "genuine_false_groups": 1,
+            "useful": 0,
+            "threshold_free_useful": 1,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "context_fusion": {
+            "synthetic": 10,
+            "genuine": 34,
+            "true_flags": 2,
+            "genuine_false_flags": 2,
+            "genuine_false_groups": 1,
+            "useful": 0,
+            "threshold_free_useful": 1,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          }
+        },
+        "2": {
+          "incumbent_frames": {
+            "synthetic": 10,
+            "genuine": 34,
+            "true_flags": 4,
+            "genuine_false_flags": 2,
+            "genuine_false_groups": 2,
+            "useful": 2,
+            "threshold_free_useful": 5,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "spectrogram_local": {
+            "synthetic": 10,
+            "genuine": 34,
+            "true_flags": 1,
+            "genuine_false_flags": 4,
+            "genuine_false_groups": 2,
+            "useful": 0,
+            "threshold_free_useful": 4,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "spectrogram_context": {
+            "synthetic": 10,
+            "genuine": 34,
+            "true_flags": 2,
+            "genuine_false_flags": 4,
+            "genuine_false_groups": 2,
+            "useful": 0,
+            "threshold_free_useful": 1,
+            "no_measurement": 0,
+            "background_only_flags": 1
+          },
+          "context_fusion": {
+            "synthetic": 10,
+            "genuine": 34,
+            "true_flags": 3,
+            "genuine_false_flags": 4,
+            "genuine_false_groups": 2,
+            "useful": 0,
+            "threshold_free_useful": 1,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          }
+        }
+      }
+    },
+    "matched/confirmation/speech_plus15db": {
+      "incumbent_frames": {
+        "synthetic": 10,
+        "genuine": 20,
+        "true_flags": 1,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 1,
+        "threshold_free_useful": 9,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "spectrogram_local": {
+        "synthetic": 10,
+        "genuine": 20,
+        "true_flags": 1,
+        "genuine_false_flags": 2,
+        "genuine_false_groups": 1,
+        "useful": 0,
+        "threshold_free_useful": 2,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "spectrogram_context": {
+        "synthetic": 10,
+        "genuine": 20,
+        "true_flags": 1,
+        "genuine_false_flags": 2,
+        "genuine_false_groups": 1,
+        "useful": 0,
+        "threshold_free_useful": 1,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "context_fusion": {
+        "synthetic": 10,
+        "genuine": 20,
+        "true_flags": 1,
+        "genuine_false_flags": 1,
+        "genuine_false_groups": 1,
+        "useful": 0,
+        "threshold_free_useful": 1,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "matched_ranking": {
+        "incumbent_frames": {
+          "comparable": 10,
+          "above_all_controls": 6
+        },
+        "spectrogram_local": {
+          "comparable": 10,
+          "above_all_controls": 3
+        },
+        "spectrogram_context": {
+          "comparable": 10,
+          "above_all_controls": 0
+        },
+        "context_fusion": {
+          "comparable": 10,
+          "above_all_controls": 3
+        }
+      },
+      "equal_false_groups": {
+        "0": {
+          "incumbent_frames": {
+            "synthetic": 10,
+            "genuine": 20,
+            "true_flags": 2,
+            "genuine_false_flags": 0,
+            "genuine_false_groups": 0,
+            "useful": 2,
+            "threshold_free_useful": 9,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "spectrogram_local": {
+            "synthetic": 10,
+            "genuine": 20,
+            "true_flags": 0,
+            "genuine_false_flags": 0,
+            "genuine_false_groups": 0,
+            "useful": 0,
+            "threshold_free_useful": 2,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "spectrogram_context": {
+            "synthetic": 10,
+            "genuine": 20,
+            "true_flags": 0,
+            "genuine_false_flags": 0,
+            "genuine_false_groups": 0,
+            "useful": 0,
+            "threshold_free_useful": 1,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "context_fusion": {
+            "synthetic": 10,
+            "genuine": 20,
+            "true_flags": 0,
+            "genuine_false_flags": 0,
+            "genuine_false_groups": 0,
+            "useful": 0,
+            "threshold_free_useful": 1,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          }
+        },
+        "1": {
+          "incumbent_frames": {
+            "synthetic": 10,
+            "genuine": 20,
+            "true_flags": 3,
+            "genuine_false_flags": 1,
+            "genuine_false_groups": 1,
+            "useful": 3,
+            "threshold_free_useful": 9,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "spectrogram_local": {
+            "synthetic": 10,
+            "genuine": 20,
+            "true_flags": 2,
+            "genuine_false_flags": 2,
+            "genuine_false_groups": 1,
+            "useful": 0,
+            "threshold_free_useful": 2,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "spectrogram_context": {
+            "synthetic": 10,
+            "genuine": 20,
+            "true_flags": 1,
+            "genuine_false_flags": 2,
+            "genuine_false_groups": 1,
+            "useful": 0,
+            "threshold_free_useful": 1,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "context_fusion": {
+            "synthetic": 10,
+            "genuine": 20,
+            "true_flags": 1,
+            "genuine_false_flags": 1,
+            "genuine_false_groups": 1,
+            "useful": 0,
+            "threshold_free_useful": 1,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          }
+        },
+        "2": {
+          "incumbent_frames": {
+            "synthetic": 10,
+            "genuine": 20,
+            "true_flags": 3,
+            "genuine_false_flags": 2,
+            "genuine_false_groups": 2,
+            "useful": 3,
+            "threshold_free_useful": 9,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "spectrogram_local": {
+            "synthetic": 10,
+            "genuine": 20,
+            "true_flags": 3,
+            "genuine_false_flags": 4,
+            "genuine_false_groups": 2,
+            "useful": 1,
+            "threshold_free_useful": 2,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "spectrogram_context": {
+            "synthetic": 10,
+            "genuine": 20,
+            "true_flags": 2,
+            "genuine_false_flags": 4,
+            "genuine_false_groups": 2,
+            "useful": 0,
+            "threshold_free_useful": 1,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "context_fusion": {
+            "synthetic": 10,
+            "genuine": 20,
+            "true_flags": 1,
+            "genuine_false_flags": 2,
+            "genuine_false_groups": 2,
+            "useful": 0,
+            "threshold_free_useful": 1,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          }
+        }
+      }
+    },
+    "meeting/selection/clean": {
+      "incumbent_frames": {
+        "synthetic": 6,
+        "genuine": 6,
+        "true_flags": 1,
+        "genuine_false_flags": 2,
+        "genuine_false_groups": 2,
+        "useful": 1,
+        "threshold_free_useful": 6,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "incumbent_two_second": {
+        "synthetic": 6,
+        "genuine": 6,
+        "true_flags": 3,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 0,
+        "threshold_free_useful": 2,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "spectrogram_local": {
+        "synthetic": 6,
+        "genuine": 6,
+        "true_flags": 1,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 1,
+        "threshold_free_useful": 3,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "spectrogram_context": {
+        "synthetic": 6,
+        "genuine": 6,
+        "true_flags": 1,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 1,
+        "threshold_free_useful": 3,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      }
+    },
+    "meeting/selection/room": {
+      "incumbent_frames": {
+        "synthetic": 6,
+        "genuine": 6,
+        "true_flags": 0,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 0,
+        "threshold_free_useful": 0,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "incumbent_two_second": {
+        "synthetic": 6,
+        "genuine": 6,
+        "true_flags": 0,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 0,
+        "threshold_free_useful": 1,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "spectrogram_local": {
+        "synthetic": 6,
+        "genuine": 6,
+        "true_flags": 0,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 0,
+        "threshold_free_useful": 2,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "spectrogram_context": {
+        "synthetic": 6,
+        "genuine": 6,
+        "true_flags": 0,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 0,
+        "threshold_free_useful": 0,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      }
+    },
+    "meeting/confirmation/clean": {
+      "incumbent_frames": {
+        "synthetic": 6,
+        "genuine": 6,
+        "true_flags": 2,
+        "genuine_false_flags": 1,
+        "genuine_false_groups": 1,
+        "useful": 2,
+        "threshold_free_useful": 5,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "incumbent_two_second": {
+        "synthetic": 6,
+        "genuine": 6,
+        "true_flags": 4,
+        "genuine_false_flags": 1,
+        "genuine_false_groups": 1,
+        "useful": 3,
+        "threshold_free_useful": 5,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "spectrogram_local": {
+        "synthetic": 6,
+        "genuine": 6,
+        "true_flags": 0,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 0,
+        "threshold_free_useful": 2,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "spectrogram_context": {
+        "synthetic": 6,
+        "genuine": 6,
+        "true_flags": 0,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 0,
+        "threshold_free_useful": 2,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "matched_ranking": {
+        "incumbent_two_second": {
+          "comparable": 6,
+          "above_all_controls": 4
+        },
+        "spectrogram_local": {
+          "comparable": 6,
+          "above_all_controls": 4
+        },
+        "spectrogram_context": {
+          "comparable": 6,
+          "above_all_controls": 4
+        }
+      },
+      "equal_false_groups": {
+        "0": {
+          "incumbent_two_second": {
+            "synthetic": 6,
+            "genuine": 6,
+            "true_flags": 3,
+            "genuine_false_flags": 0,
+            "genuine_false_groups": 0,
+            "useful": 2,
+            "threshold_free_useful": 5,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "spectrogram_local": {
+            "synthetic": 6,
+            "genuine": 6,
+            "true_flags": 1,
+            "genuine_false_flags": 0,
+            "genuine_false_groups": 0,
+            "useful": 0,
+            "threshold_free_useful": 2,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "spectrogram_context": {
+            "synthetic": 6,
+            "genuine": 6,
+            "true_flags": 2,
+            "genuine_false_flags": 0,
+            "genuine_false_groups": 0,
+            "useful": 0,
+            "threshold_free_useful": 2,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          }
+        },
+        "1": {
+          "incumbent_two_second": {
+            "synthetic": 6,
+            "genuine": 6,
+            "true_flags": 4,
+            "genuine_false_flags": 1,
+            "genuine_false_groups": 1,
+            "useful": 3,
+            "threshold_free_useful": 5,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "spectrogram_local": {
+            "synthetic": 6,
+            "genuine": 6,
+            "true_flags": 2,
+            "genuine_false_flags": 1,
+            "genuine_false_groups": 1,
+            "useful": 0,
+            "threshold_free_useful": 2,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "spectrogram_context": {
+            "synthetic": 6,
+            "genuine": 6,
+            "true_flags": 3,
+            "genuine_false_flags": 1,
+            "genuine_false_groups": 1,
+            "useful": 1,
+            "threshold_free_useful": 2,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          }
+        },
+        "2": {
+          "incumbent_two_second": {
+            "synthetic": 6,
+            "genuine": 6,
+            "true_flags": 4,
+            "genuine_false_flags": 2,
+            "genuine_false_groups": 2,
+            "useful": 3,
+            "threshold_free_useful": 5,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "spectrogram_local": {
+            "synthetic": 6,
+            "genuine": 6,
+            "true_flags": 3,
+            "genuine_false_flags": 2,
+            "genuine_false_groups": 2,
+            "useful": 1,
+            "threshold_free_useful": 2,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "spectrogram_context": {
+            "synthetic": 6,
+            "genuine": 6,
+            "true_flags": 3,
+            "genuine_false_flags": 2,
+            "genuine_false_groups": 2,
+            "useful": 1,
+            "threshold_free_useful": 2,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          }
+        }
+      }
+    },
+    "meeting/confirmation/room": {
+      "incumbent_frames": {
+        "synthetic": 6,
+        "genuine": 6,
+        "true_flags": 0,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 0,
+        "threshold_free_useful": 1,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "incumbent_two_second": {
+        "synthetic": 6,
+        "genuine": 6,
+        "true_flags": 0,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 0,
+        "threshold_free_useful": 3,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "spectrogram_local": {
+        "synthetic": 6,
+        "genuine": 6,
+        "true_flags": 0,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 0,
+        "threshold_free_useful": 1,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "spectrogram_context": {
+        "synthetic": 6,
+        "genuine": 6,
+        "true_flags": 0,
+        "genuine_false_flags": 0,
+        "genuine_false_groups": 0,
+        "useful": 0,
+        "threshold_free_useful": 2,
+        "no_measurement": 0,
+        "background_only_flags": 0
+      },
+      "matched_ranking": {
+        "incumbent_two_second": {
+          "comparable": 6,
+          "above_all_controls": 2
+        },
+        "spectrogram_local": {
+          "comparable": 6,
+          "above_all_controls": 5
+        },
+        "spectrogram_context": {
+          "comparable": 6,
+          "above_all_controls": 4
+        }
+      },
+      "equal_false_groups": {
+        "0": {
+          "incumbent_two_second": {
+            "synthetic": 6,
+            "genuine": 6,
+            "true_flags": 0,
+            "genuine_false_flags": 0,
+            "genuine_false_groups": 0,
+            "useful": 0,
+            "threshold_free_useful": 3,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "spectrogram_local": {
+            "synthetic": 6,
+            "genuine": 6,
+            "true_flags": 1,
+            "genuine_false_flags": 0,
+            "genuine_false_groups": 0,
+            "useful": 0,
+            "threshold_free_useful": 1,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "spectrogram_context": {
+            "synthetic": 6,
+            "genuine": 6,
+            "true_flags": 0,
+            "genuine_false_flags": 0,
+            "genuine_false_groups": 0,
+            "useful": 0,
+            "threshold_free_useful": 2,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          }
+        },
+        "1": {
+          "incumbent_two_second": {
+            "synthetic": 6,
+            "genuine": 6,
+            "true_flags": 1,
+            "genuine_false_flags": 1,
+            "genuine_false_groups": 1,
+            "useful": 1,
+            "threshold_free_useful": 3,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "spectrogram_local": {
+            "synthetic": 6,
+            "genuine": 6,
+            "true_flags": 5,
+            "genuine_false_flags": 1,
+            "genuine_false_groups": 1,
+            "useful": 1,
+            "threshold_free_useful": 1,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "spectrogram_context": {
+            "synthetic": 6,
+            "genuine": 6,
+            "true_flags": 2,
+            "genuine_false_flags": 1,
+            "genuine_false_groups": 1,
+            "useful": 0,
+            "threshold_free_useful": 2,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          }
+        },
+        "2": {
+          "incumbent_two_second": {
+            "synthetic": 6,
+            "genuine": 6,
+            "true_flags": 1,
+            "genuine_false_flags": 2,
+            "genuine_false_groups": 2,
+            "useful": 1,
+            "threshold_free_useful": 3,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "spectrogram_local": {
+            "synthetic": 6,
+            "genuine": 6,
+            "true_flags": 5,
+            "genuine_false_flags": 2,
+            "genuine_false_groups": 2,
+            "useful": 1,
+            "threshold_free_useful": 1,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          },
+          "spectrogram_context": {
+            "synthetic": 6,
+            "genuine": 6,
+            "true_flags": 3,
+            "genuine_false_flags": 2,
+            "genuine_false_groups": 2,
+            "useful": 1,
+            "threshold_free_useful": 2,
+            "no_measurement": 0,
+            "background_only_flags": 0
+          }
+        }
+      }
+    }
+  },
+  "gate": {
+    "spectrogram_local": {
+      "net_noisy_useful": 0,
+      "new_noisy_families": [],
+      "additional_false_groups": 0,
+      "dry_useful_change": -2,
+      "background_false": 0,
+      "room_useful": 0,
+      "room_false_change": 0,
+      "qualifies": false
+    },
+    "spectrogram_context": {
+      "net_noisy_useful": 0,
+      "new_noisy_families": [],
+      "additional_false_groups": 0,
+      "dry_useful_change": -2,
+      "background_false": 0,
+      "room_useful": 0,
+      "room_false_change": 0,
+      "qualifies": false
+    },
+    "context_fusion": {
+      "net_noisy_useful": 0,
+      "new_noisy_families": [],
+      "additional_false_groups": 0,
+      "dry_useful_change": -1,
+      "background_false": 0,
+      "room_useful": 0,
+      "room_false_change": 0,
+      "qualifies": false
+    }
+  },
+  "commitments": {
+    "freeze": "d2e7801bbcd5733e17455d5c98614ae5eaecaaa8206a3c9b0941d1d08fb545fb",
+    "training": "ef2ed2ba18366b44d856cd5a0b9d07a1c478654c4f2feac725fc4f650b381627",
+    "points": "c143d149cfe27f3f2e8d0d8504390242cd5de573096c3aa385ef4eea69e80b66",
+    "observations": "a96047d57b9607dc279595439a6fccc8f1ae191869de4b6f82c1577b1d18d557"
+  },
+  "observation_views": 216,
+  "seconds": 1.12
+}

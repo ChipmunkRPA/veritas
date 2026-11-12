@@ -7,6 +7,7 @@ from contextlib import closing
 from pathlib import Path
 from subprocess import TimeoutExpired
 
+from app.detectors.video import picture_motion
 from app.detectors.video.decode import DecodeError, FrameTable, decode_frames
 from app.evidence import picture_hold_binding as binding
 from app.evidence import picture_sequence
@@ -15,7 +16,8 @@ DECODE_TIMEOUT_S = 8.0
 
 
 def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Callable[[], None] | None = None,
-            remaining_s: float | None = None, sequence_review: bool = False) -> dict:
+            remaining_s: float | None = None, sequence_review: bool = False,
+            motion_encoding: tuple[str | None, str | None] | None = None) -> dict:
     """Try an extended native scan under the same deadline, retaining a completed opening result."""
     opening_limit = binding.frame_limit(len(table), table.width, table.height)
     tb = table.tb
@@ -26,6 +28,8 @@ def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Calla
     opening = None
     best = None
     observed = []
+    descriptors = []
+    motion = sequence_review and picture_motion.eligible(table, motion_encoding)
     timeout = DECODE_TIMEOUT_S if remaining_s is None else min(DECODE_TIMEOUT_S, remaining_s - 1.0)
     if timeout < 0.5 and limit:
         return {"coverage": binding.coverage("unavailable", binding.INCOMPLETE, table.time_base, limit=opening_limit), "match": None}
@@ -51,6 +55,8 @@ def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Calla
                         best = equal_start, point, frame.index, digest
                 if sequence_review:
                     observed.append((point, digest))
+                if motion and frame.index < picture_sequence.MOTION_LIMIT:
+                    descriptors.append(picture_motion.descriptor(frame.rgb))
                 if scanned == opening_limit and limit > opening_limit:
                     opening = _result(table, origin, opening_limit, scanned, last_pts, longest, best)
     except (DecodeError, TimeoutExpired):
@@ -63,6 +69,9 @@ def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Calla
     if sequence_review and 0 < cover["frames_scanned"] == cover["frame_limit"]:
         cover["scan_scope"] = picture_sequence.SCAN_SCOPE
         cover["sequence_review"] = picture_sequence.scan(observed[:cover["frames_scanned"]], tb)
+        if motion and cover["frames_scanned"] >= picture_sequence.MOTION_LIMIT:
+            cover["motion_sequence_review"] = picture_motion.scan(
+                observed[:picture_sequence.MOTION_LIMIT], descriptors, tb, motion_encoding, cover["sequence_review"]["pair"])
     return result
 
 

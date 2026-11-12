@@ -17,7 +17,7 @@ from test_video_nested_evidence import _check_public_zip
 
 from app.core.canonical import canonical_hash, canonical_json
 from app.detectors.video import picture_hold
-from app.detectors.video.decode import DecodedFrame, FrameTable, probe_frames
+from app.detectors.video.decode import DecodedFrame, FrameTable, decode_frames, probe_frames
 from app.evidence import picture_hold_binding as binding
 from app.evidence import picture_sequence, service, video_packets
 from app.reports import engine, multimedia_evidence
@@ -25,6 +25,7 @@ from app.reports.specimens import specimen
 from app.storage.artefacts import register_artefact
 from app.storage.db import Analysis, AnalysisStage, Base
 from app.storage.objects import ObjectStore
+from scripts.video_lossy_sequence_transfer import deliver, read_source
 
 
 def _source(path, *, held=False, late=False, repeated=False):
@@ -42,17 +43,34 @@ def _source(path, *, held=False, late=False, repeated=False):
     return frames
 
 
-@pytest.mark.parametrize("case", ["opening_hold", "later_hold", "moving_sequence"])
+@pytest.mark.parametrize("case", ["opening_hold", "later_hold", "moving_sequence", "lossy_sequence"])
 def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monkeypatch, case):
-    repeated, late = case == "moving_sequence", case != "opening_hold"
+    lossy = case == "lossy_sequence"
+    repeated, late = case in {"moving_sequence", "lossy_sequence"}, case != "opening_hold"
     path = tmp_path / "exact-hold.mkv"
-    frames = _source(path, held=not repeated, late=late, repeated=repeated)
+    if lossy:
+        deliver(read_source(None), path, 20, 130, 22, "copy", "h264")
+        frames = [frame.rgb for frame in decode_frames(path, probe_frames(path), range(180))]
+    else:
+        frames = _source(path, held=not repeated, late=late, repeated=repeated)
     table = probe_frames(path)
     store = ObjectStore(tmp_path / "objects")
     original = store.put_file(path)
-    scan = picture_hold.inspect(store.path_for(original.sha256), table, origin=5., sequence_review=repeated)
+    origin = 0. if lossy else 5.
+    encoding = ("h264", "yuv420p") if lossy else None
+    scan = picture_hold.inspect(store.path_for(original.sha256), table, origin=origin, sequence_review=repeated,
+                                motion_encoding=encoding)
     assert scan["coverage"]["frames_scanned"] == len(frames)
-    if repeated:
+    if lossy:
+        coverage = scan["coverage"]
+        assert coverage["sequence_review"]["status"] == "no_match"
+        motion = coverage["motion_sequence_review"]
+        assert motion["status"] == "matched" and motion["frames_scanned"] == 180
+        match = motion["pair"]
+        indices = [20, 41, 130, 151]
+        assert [row[2] for row in picture_sequence.endpoints(match)] == indices
+        assert not np.array_equal(frames[20], frames[130])
+    elif repeated:
         assert scan["match"] is None and scan["coverage"]["scan_scope"] == picture_sequence.SCAN_SCOPE
         match = scan["coverage"]["sequence_review"]["pair"]
         indices = [24, 43, 145, 164]
@@ -86,7 +104,7 @@ def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monk
         result["signals"] = result["exhibits"] = result["findings"] = []
         result["manifest"]["sampling"].update({
             "frame_anchor_version": video_packets.ANCHOR_VERSION, "frame_anchor_sha256": canonical_hash([]),
-            "frame_table_sha256": canonical_hash(table.to_json()), "timeline_origin_s": 5., "picture_hold_sha256": canonical_hash(scan),
+            "frame_table_sha256": canonical_hash(table.to_json()), "timeline_origin_s": origin, "picture_hold_sha256": canonical_hash(scan),
             "video_audio_evidence": {"version": "video-audio-inputs/1", "decode_status": "absent", "source_audio_present": False,
                                      "input": None, "voice_checks": [], "av_checks": []},
         })
@@ -97,9 +115,13 @@ def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monk
         assert service.load_packet_set(db, analysis, store) == document
         assert document["coverage"]["scored_frame_indices"] == []
         [packet] = document["packets"]
-        assert packet["id"] == (picture_sequence.PACKET_ID if repeated else binding.PACKET_ID)
+        expected_packet = picture_sequence.MOTION_PACKET_ID if lossy else picture_sequence.PACKET_ID if repeated else binding.PACKET_ID
+        assert packet["id"] == expected_packet
         assert packet["picture_sequence" if repeated else "picture_hold"] == match
         assert [f["anchor"]["frame_index"] for f in packet["frames"]] == indices
+        if lossy:
+            assert packet["affects_overall_confidence"] is False
+            assert len({f["artifact_refs"]["original"] for f in packet["frames"]}) == 4
         for frame in packet["frames"]:
             ref = packet["artifacts"][frame["artifact_refs"]["original"]]
             asset = service.asset_refs(document)[ref["sha256"]]
@@ -127,7 +149,10 @@ def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monk
         pdf = engine.render_pdf(frozen)
         with pymupdf.open(stream=pdf.pdf, filetype="pdf") as rendered_pdf:
             text = " ".join(" ".join(page.get_text() for page in rendered_pdf).split())
-            if repeated:
+            if lossy:
+                assert "Similar repeated moving sequences" in text and "VPR02" in text
+                assert "Repeated ranges 1.000-2.050 s and 6.500-7.550 s" in text
+            elif repeated:
                 assert "Repeated moving sequences" in text and "VPR01" in text
                 assert "Repeated ranges 6.200-7.150 s and 12.250-13.200 s" in text
             else:
@@ -135,6 +160,21 @@ def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monk
                 assert "16 consecutive decoded frames" in text and "0.750 seconds apart" in text
         _check_public_zip(SimpleNamespace(db=db, store=store, analysis=analysis, frozen=frozen, document=document),
                           tmp_path, monkeypatch, pdf.pdf, source_video=path if late else None)
+
+
+@pytest.mark.parametrize(("kind", "status", "reason"), [
+    ("copy", "matched", None),
+    ("hold", "no_match", None),
+    ("spacing", "unavailable", "source_clock"),
+])
+def test_motion_sequence_checks_verified_spacing_and_requires_movement(tmp_path, kind, status, reason):
+    path = tmp_path / "vp9.mkv"
+    deliver(read_source(None), path, 20, 130, 22, kind, "vp9")
+    table = probe_frames(path)
+    output = picture_hold.inspect(path, table, origin=0., sequence_review=True, motion_encoding=("vp9", "yuv420p"))
+    review = output["coverage"]["motion_sequence_review"]
+    assert (review["status"], review["reason"]) == (status, reason)
+    assert (review["pair"] is not None) == (status == "matched")
 
 
 def test_repeated_sequence_requires_distinct_pixels_and_equal_verified_spacing():

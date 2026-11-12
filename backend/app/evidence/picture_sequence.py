@@ -16,6 +16,15 @@ MIN_UNIQUE = 8
 MIN_SPAN = Fraction(1, 2)
 MAX_STEP = Fraction(1, 8)
 CONTEXT = "Loops, transitions and ordinary editing can repeat a moving sequence. This check carries zero weight in the AI estimate."
+MOTION_SCHEMA = "chipmunk.video-motion-sequence/1"
+MOTION_PACKET_ID = "VPR02"
+MOTION_LIMIT = 180
+MOTION_ENCODINGS = {("h264", "yuv420p"), ("vp9", "yuv420p")}
+MOTION_PARAMETERS = {
+    "luma_grid": [40, 30], "frame_rate": 20, "maximum_picture_rms": 1.6, "minimum_motion_rms": .4,
+    "minimum_motion_cosine": .65, "minimum_motion_rms_ratio": .55, "minimum_supporting_edges": 8,
+    "maximum_support_edge_step": 3, "minimum_support_fraction": .5, "minimum_span_seconds": .5,
+}
 _SHA = re.compile(r"[a-f0-9]{64}")
 
 
@@ -98,6 +107,9 @@ def scan(observations, tb: Fraction):
 
 
 def observation(pair):
+    if "supporting_edge_offsets" in pair:
+        return (f"Two separate source ranges contain {pair['frame_count']} visually similar pictures with the same timing. "
+                f"{len(pair['supporting_edge_offsets'])} transitions show matching changes across the picture.")
     return f"Two disjoint sequences contain the same {pair['frame_count']} decoded pictures in the same order and at the same frame spacing."
 
 
@@ -105,7 +117,12 @@ def endpoints(pair):
     for occurrence in ("first", "second"):
         span = pair[occurrence]
         for offset, role in enumerate(("start", "end")):
-            yield occurrence, role, span[f"{role}_frame_index"], span["pts"][0 if offset == 0 else -1], pair["endpoint_rgb_sha256"][offset]
+            digests = span["endpoint_rgb_sha256"] if "supporting_edge_offsets" in pair else pair["endpoint_rgb_sha256"]
+            yield occurrence, role, span[f"{role}_frame_index"], span["pts"][0 if offset == 0 else -1], digests[offset]
+
+
+def picture_ref(pair, occurrence, role):
+    return f"{occurrence}_{role}_picture" if "supporting_edge_offsets" in pair else f"{role}_picture"
 
 
 def _require(condition, message):
@@ -118,32 +135,64 @@ def _close(number, expected):
 
 
 def validate(cover, document):
-    record = cover.get("sequence_review")
-    packets = [p for p in document["packets"] if p.get("id") == PACKET_ID or "picture_sequence" in p
-               or p.get("claim_scope") == "paired_frame_sequences"]
+    packets = [p for p in document["packets"] if p.get("id") in {PACKET_ID, MOTION_PACKET_ID} or "picture_sequence" in p
+               or p.get("claim_scope") == "paired_frame_sequences" or p.get("semantics") in {SCHEMA, MOTION_SCHEMA}]
+    _require(all(p.get("id") in {PACKET_ID, MOTION_PACKET_ID} for p in packets), "Unexpected repeated sequence packet")
+    exact = cover.get("sequence_review")
+    motion = cover.get("motion_sequence_review")
+    if exact is not None:
+        _require(cover.get("scan_scope") == SCAN_SCOPE and cover["frames_scanned"] == cover["frame_limit"],
+                 "Repeated sequence lacks completed coverage")
+    if motion is not None:
+        source = document["source"]
+        _require(exact is not None and cover["frames_scanned"] >= MOTION_LIMIT and (source["width"], source["height"]) == (320, 180)
+                 and motion["schema"] == MOTION_SCHEMA and motion["parameters"] == MOTION_PARAMETERS
+                 and tuple(motion["encoding"]) in MOTION_ENCODINGS, "Motion sequence has unsupported source scope or parameters")
+        if motion["status"] == "unavailable":
+            _require(motion["frames_scanned"] == 0 and (motion["reason"] == "source_clock"
+                     or (motion["reason"] == "exact_sequence" and exact["status"] == "matched")),
+                     "Motion sequence has an invalid skipped outcome")
+        else:
+            _require(motion["frames_scanned"] == MOTION_LIMIT and motion["reason"] is None and exact["status"] != "matched",
+                     "Motion sequence has invalid measured coverage")
+    _validate_pair(exact, document["source"], cover["frames_scanned"] if exact is not None else 0,
+                   [p for p in packets if p["id"] == PACKET_ID])
+    _validate_pair(motion, document["source"], motion["frames_scanned"] if motion is not None else 0,
+                   [p for p in packets if p["id"] == MOTION_PACKET_ID], motion=True)
+
+
+def _validate_pair(record, source, scanned, packets, *, motion=False):
     if record is None:
         _require(not packets, "Repeated sequence lacks a recorded scan")
         return
-    _require(record["schema"] == SCHEMA and cover.get("scan_scope") == SCAN_SCOPE
-             and cover["frames_scanned"] == cover["frame_limit"], "Repeated sequence lacks completed coverage")
+    schema = MOTION_SCHEMA if motion else SCHEMA
+    _require(record["schema"] == schema, "Repeated sequence lacks completed coverage")
     if record["status"] != "matched":
         _require(record["status"] in {"unavailable", "no_match"} and record["pair"] is None and not packets,
                  "Repeated sequence evidence disagrees with its status")
         return
     pair = record["pair"]
-    _require(len(packets) == 1 and packets[0]["id"] == PACKET_ID and packets[0].get("picture_sequence") == pair,
+    _require(len(packets) == 1 and packets[0].get("picture_sequence") == pair,
              "Repeated sequence omits the recorded pair")
-    source = document["source"]
+    _require(("supporting_edge_offsets" in pair) == motion, "Repeated sequence has the wrong matching method")
     tb = Fraction(source["time_base"])
-    count, unique = pair["frame_count"], pair["unique_pictures"]
-    _require(type(count) is int and type(unique) is int and MIN_UNIQUE <= unique <= count <= cover["frames_scanned"] // 2,
+    count = pair["frame_count"]
+    _require(type(count) is int and MIN_UNIQUE <= count <= scanned // 2,
              "Repeated sequence does not contain enough distinct moving pictures")
+    if motion:
+        supports = pair["supporting_edge_offsets"]
+        _require(all(type(value) is int for value in supports) and len(supports) >= 8 and len(supports) * 2 >= count - 1
+                 and supports[0] == 0 and supports[-1] == count - 2 and all(0 < b - a <= 3 for a, b in zip(supports, supports[1:])),
+                 "Motion sequence lacks enough repeated adjacent movement")
+    else:
+        unique = pair["unique_pictures"]
+        _require(type(unique) is int and MIN_UNIQUE <= unique <= count, "Repeated sequence lacks distinct pictures")
     spans = (pair["first"], pair["second"])
     _require(spans[0]["end_frame_index"] < spans[1]["start_frame_index"], "Repeated sequences overlap")
     intervals = []
     for span in spans:
         start, end, pts = span["start_frame_index"], span["end_frame_index"], span["pts"]
-        _require(type(start) is int and type(end) is int and 0 <= start < end < cover["frames_scanned"]
+        _require(type(start) is int and type(end) is int and 0 <= start < end < scanned
                  and end - start + 1 == len(pts) == count and all(type(p) is int for p in pts), "Repeated sequence has an invalid source interval")
         steps = _steps(pts, tb)[1:]
         elapsed = (pts[-1] - pts[0]) * tb
@@ -152,19 +201,23 @@ def validate(cover, document):
                  "Repeated sequence has incomplete clock support")
         intervals.append(steps)
     _require(intervals[0] == intervals[1], "Repeated sequence changes the native frame spacing")
-    digests = pair["endpoint_rgb_sha256"]
-    _require(len(digests) == 2 and all(_SHA.fullmatch(d) for d in [*digests, pair["rgb_sequence_sha256"]]),
-             "Repeated sequence has invalid image commitments")
+    if motion:
+        _require(all(step * tb == Fraction(1, 20) for step in intervals[0]), "Motion sequence uses unsupported frame spacing")
+    for span in spans if motion else (pair,):
+        digests = span["endpoint_rgb_sha256"]
+        _require(len(digests) == 2 and all(_SHA.fullmatch(d) for d in [*digests, span["rgb_sequence_sha256"]]),
+                 "Repeated sequence has invalid image commitments")
     packet = packets[0]
-    _require(packet.get("claim_scope") == "paired_frame_sequences" and packet.get("semantics") == SCHEMA
+    _require(packet.get("claim_scope") == "paired_frame_sequences" and packet.get("semantics") == schema
              and packet.get("evidence_type") == "anomaly" and packet.get("affects_overall_confidence") is False
              and packet.get("signal_refs") == packet.get("finding_ids") == packet.get("exhibit_refs") == []
              and packet.get("observation") == observation(pair) and packet.get("interpretation") == CONTEXT,
              "Repeated sequence is misrepresented as statistical evidence")
-    _require(set(packet["artifacts"]) == {"start_picture", "end_picture", "contact_sheet"}, "Repeated sequence lacks endpoint images")
-    for frame, (_, role, i, pts, digest) in zip(packet["frames"], endpoints(pair), strict=True):
+    refs = {picture_ref(pair, occurrence, role) for occurrence, role, *_ in endpoints(pair)}
+    _require(set(packet["artifacts"]) == refs | {"contact_sheet"}, "Repeated sequence lacks endpoint images")
+    for frame, (occurrence, role, i, pts, digest) in zip(packet["frames"], endpoints(pair), strict=True):
         anchor = frame["anchor"]
-        ref = f"{role}_picture"
+        ref = picture_ref(pair, occurrence, role)
         original = packet["artifacts"][ref]
         origin = source.get("timeline_origin_s")
         stream_s = float(pts * tb)

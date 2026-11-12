@@ -1029,9 +1029,10 @@ def render(ctx: StageContext) -> dict[str, Any]:
             hold = {"coverage": picture_hold_binding.coverage("unavailable", picture_hold_binding.PROVENANCE, table.time_base,
                                                               limit=limit), "match": None}
         else:
-            hold = picture_hold.inspect(frame_store.path, table, origin=ctx.outputs["probe"]["info"].get("timeline_origin_s"),
+            info = ctx.outputs["probe"]["info"]
+            hold = picture_hold.inspect(frame_store.path, table, origin=info.get("timeline_origin_s"),
                                         check=lambda: ctx.check("repeated-picture inspection"), remaining_s=ctx.deadline.remaining(),
-                                        sequence_review=True)
+                                        sequence_review=True, motion_encoding=(info.get("codec"), info.get("pix_fmt")))
     decode_output = ctx.outputs.get("decode") or {}
     decoded_audio = decode_output.get("audio") or {}
     stereo_sha = decoded_audio.get("stereo_context_sha256")

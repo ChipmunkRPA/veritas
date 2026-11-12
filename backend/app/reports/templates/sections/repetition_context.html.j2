@@ -14,6 +14,14 @@
 {% elif hold.sequence_review.status == 'no_match' %}<p>No exact moving sequence repeated within the checked frames.</p>
 {% else %}<p>The checked footage did not contain two usable ranges of at least half a second.</p>{% endif %}
 {% endif %}
+{% if hold.get('motion_sequence_review') %}
+<h3>Similar repeated moving sequences</h3>
+{% if hold.motion_sequence_review.status == 'matched' %}<p><a href="#multimedia-evidence-VPR02">Inspect both ranges with similar pictures and motion</a>.</p>
+{% elif hold.motion_sequence_review.status == 'no_match' %}<p>No qualifying repeat was found in the first 180 frames.</p>
+{% elif hold.motion_sequence_review.reason == 'exact_sequence' %}<p>The exact check already found a moving sequence.</p>
+{% else %}<p>This check needs verified 50 ms spacing throughout the first 180 frames.</p>{% endif %}
+<p class="caption">This check covers the first 180 native 320 × 180 frames in supported 20 fps video. A repeat may come from ordinary editing and carries no AI confidence weight. JSON pointer <span class="mono">/picture_hold/motion_sequence_review</span>.</p>
+{% endif %}
 {% endif %}
 {% for context, similar in [(evidence.get('repetition_context'), false), (evidence.get('similarity_context'), true)] if context %}
 {% set waveform = context.schema == 'chipmunk.audio-repeat-similarity/2' %}

@@ -209,6 +209,7 @@ def validate_source_clock(document: dict, table_pts: Sequence[int], interpolated
     """Check that covered source indices, clocks and declared gaps match the original frame table."""
     cover = document["picture_hold"]
     picture_sequence.validate_clock(cover.get("sequence_review"), table_pts, interpolated)
+    picture_sequence.validate_clock(cover.get("motion_sequence_review"), table_pts, interpolated)
     if "continuity_breaks" in cover:
         source = document["source"]
         tb = Fraction(source["time_base"])

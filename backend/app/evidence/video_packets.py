@@ -467,13 +467,14 @@ def _picture_hold_packet(db: Session, store: ObjectStore, analysis: Analysis, se
 
 def _picture_sequence_packet(db: Session, store: ObjectStore, analysis: Analysis, set_id: str,
                              source: dict, pair: dict, decoded: dict) -> dict:
-    packet_id = picture_sequence.PACKET_ID
+    motion = "supporting_edge_offsets" in pair
+    packet_id = picture_sequence.MOTION_PACKET_ID if motion else picture_sequence.PACKET_ID
     frames, images, labels, assets = [], [], [], {}
     for number, (occurrence, role, index, pts, digest) in enumerate(picture_sequence.endpoints(pair), 1):
         if index not in decoded or hashlib.sha256(decoded[index]).hexdigest() != digest:
             raise PacketIntegrityError("Repeated sequence endpoint differs from its decoded source picture")
         image = Image.fromarray(decoded[index])
-        ref = f"{role}_picture"
+        ref = picture_sequence.picture_ref(pair, occurrence, role)
         if ref not in assets:
             assets[ref] = _packet_image(db, store, analysis, set_id, image)
         images.append(image)
@@ -492,16 +493,19 @@ def _picture_sequence_packet(db: Session, store: ObjectStore, analysis: Analysis
     sheet.paste(first, (0, 0))
     sheet.paste(second, (0, first.height))
     assets["contact_sheet"] = _packet_image(db, store, analysis, set_id, sheet)
-    return {"id": packet_id, "title": "Same moving pictures at two source ranges", "evidence_type": "anomaly",
-            "claim_scope": "paired_frame_sequences", "semantics": picture_sequence.SCHEMA,
+    return {"id": packet_id, "title": "Similar moving pictures at two source ranges" if motion else "Same moving pictures at two source ranges",
+            "evidence_type": "anomaly", "claim_scope": "paired_frame_sequences",
+            "semantics": picture_sequence.MOTION_SCHEMA if motion else picture_sequence.SCHEMA,
             "picture_sequence": pair, "affects_overall_confidence": False, "finding_ids": [], "signal_refs": [],
             "exhibit_refs": [], "frames": frames, "observation": picture_sequence.observation(pair),
             "interpretation": picture_sequence.CONTEXT,
-            "limitations": ["The comparison requires exact decoded pixels and matching frame spacing within the scanned range."],
+            "limitations": [("The comparison checks whole-picture appearance and motion in the first 180 frames. It can miss edits "
+                             "that change speed, framing or the motion pattern." if motion else
+                             "The comparison requires exact decoded pixels and matching frame spacing within the scanned range.")],
             "measurements": [{"label": "Matching pictures in each range", "value": pair["frame_count"], "unit": "frames"},
                              {"label": "First-to-last source timestamp span", "value": pair["span_s"], "unit": "seconds"}],
             "artifacts": assets, "clip": {"status": "unavailable", "reason": "Use the original video to play either occurrence."},
-            "derivation": {"version": VERSION, "selection": "longest_pair_of_exact_moving_sequences",
+            "derivation": {"version": VERSION, "selection": "longest_pair_of_similar_moving_sequences" if motion else "longest_pair_of_exact_moving_sequences",
                            "decoder": "ffmpeg-rgb24-display-v1", "frame_pts_unit": "stream_ticks", "source_pixels": "exact_native_rgb"}}
 
 
@@ -574,6 +578,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
             "unavailable", picture_hold_binding.HISTORICAL, source["time_base"]))
     match = hold["match"] if hold is not None else None
     pair = document.get("picture_hold", {}).get("sequence_review", {}).get("pair")
+    if pair is None:
+        pair = document.get("picture_hold", {}).get("motion_sequence_review", {}).get("pair")
     boundary_indices = {i for candidate in chosen for i in candidate.get("face_boundary", {}).get("anchors", {}).values()}
     exact_indices = boundary_indices | {i for candidate in return_candidates for i in candidate["face_return"]["anchors"].values()}
     wanted = {row["frame_index"] for candidate in chosen for row in candidate["rows"]} | boundary_indices

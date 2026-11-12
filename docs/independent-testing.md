@@ -388,6 +388,10 @@ inspected frame when the original video accompanies the signed export.
 The [repeated sequence comparison](video-exact-sequence-transfer-2026-11-12.md)
 replays matching decoded frames in two separate ranges, with static holds,
 different timing, and lossy copies as separate controls.
+The [similar moving-picture comparison](video-lossy-sequence-transfer-2026-11-12.md)
+checks for repeated picture content and motion after re-encoding. Its held
+results include controls for ordinary cuts, holds, reversals and changed
+frame spacing. The signed export can replay both locations from the upload.
 The [longer timing replay](video-longer-timing-transfer-2026-11-11.md)
 tests native windows with actual timing-change opportunity and separately reports
 measured windows, redraw overlaps, ordinary controls, and unassessed inputs.

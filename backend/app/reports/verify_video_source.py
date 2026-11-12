@@ -17,7 +17,7 @@ from PIL import Image
 
 from app.core.canonical import canonical_hash
 from app.detectors.image.faces import Face
-from app.detectors.video import face_return, face_return_fine_scene
+from app.detectors.video import face_return, face_return_fine_scene, picture_motion
 from app.detectors.video.decode import DecodedFrame, FrameTable, decode_frames, probe_frames
 from app.detectors.video.frames import probe as probe_container
 from app.detectors.video.lipsync import source_mouth_patch
@@ -197,6 +197,13 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     picture_hold_binding.validate(evidence)
     hold = evidence.get("picture_hold") or {}
     sequence = hold.get("sequence_review")
+    motion = hold.get("motion_sequence_review")
+    motion_encoding = None
+    if motion is not None:
+        delivery = probe_container(original)
+        motion_encoding = delivery.get("codec"), delivery.get("pix_fmt")
+        if not picture_motion.eligible(table, motion_encoding) or motion["encoding"] != list(motion_encoding):
+            raise ValueError("The original video differs from its motion comparison source profile")
     extended = "continuity_breaks" in hold
     hold_frames = 0
     if extended or sequence is not None:
@@ -237,6 +244,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         raise ValueError("Guarded face evidence requires its dedicated version")
     indices = set(pictures) | set(mouths) | set(faces) | set(scenes) | set(range(hold_frames))
     hold_observations = []
+    motion_descriptors = []
     found = set()
     images = patches = alignments = 0
     with closing(decode_frames(original, table, sorted(indices))) as stream:
@@ -246,6 +254,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             rgb_sha = hashlib.sha256(frame.rgb).hexdigest()
             if index < hold_frames:
                 hold_observations.append((frame.pts if frame.pts_verified else None, rgb_sha))
+            if motion is not None and index < picture_sequence.MOTION_LIMIT:
+                motion_descriptors.append(picture_motion.descriptor(frame.rgb))
             if index in pictures:
                 with Image.fromarray(frame.rgb) as image:
                     for packet, item in pictures[index]:
@@ -274,6 +284,10 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         _verify_picture_hold(evidence, table, hold_observations)
     if sequence is not None and canonical_hash(picture_sequence.scan(hold_observations, table.tb)) != canonical_hash(sequence):
         raise ValueError("The original video does not reproduce its repeated moving-picture sequences")
+    if motion is not None and canonical_hash(picture_motion.scan(
+            hold_observations[:picture_sequence.MOTION_LIMIT], motion_descriptors, table.tb, motion_encoding,
+            sequence["pair"])) != canonical_hash(motion):
+        raise ValueError("The original video does not reproduce its similar moving-picture sequences")
     fine_edges = sum(_verify_scene_support(record, background_frames) for record in fine_records)
     for record in guarded_records:
         _verify_guarded_scene(record, background_frames)
@@ -282,4 +296,5 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             + (f" Recomputed fine background boundaries ({fine_edges})." if fine_edges else "")
             + (" Recomputed both guarded background boundaries and verified the source carrier." if guarded_codec else "")
             + (f" Replayed every frame in the repeated-picture inspection ({hold_frames})." if hold_frames else "")
-            + (" Recomputed the exact moving-sequence comparison." if sequence is not None else ""))
+            + (" Recomputed the exact moving-sequence comparison." if sequence is not None else "")
+            + (" Replayed the motion-aware moving-sequence check." if motion is not None else ""))

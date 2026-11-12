@@ -1,0 +1,235 @@
+{
+  "advances_both": false,
+  "independent_replay": {
+    "aggregate_sha256": "3f39b17d8003ef0ccd55a3b74aedcfe2e8a53632c82658105c6762cd9c36645f",
+    "authored_spatial_counts_replayed": 88,
+    "earlier_h264_clocks": 18,
+    "exact_held_pairs": 229,
+    "native_frames_reopened": 546,
+    "selected_native_crops_checked": 546,
+    "status": "verified"
+  },
+  "panels": {
+    "cremad": {
+      "advances": false,
+      "correct_source_groups": 10,
+      "counts": {
+        "different_source": {
+          "assessed": 0,
+          "exact_correct": 0,
+          "flag": 0,
+          "joint_correct": 0,
+          "new_correct": 0,
+          "prior_correct_lost": 0,
+          "prior_correct_retained": 0,
+          "prior_joint_correct": 0,
+          "spatial_correct": 0,
+          "time_correct": 0,
+          "views": 9,
+          "visible_source_time": 0,
+          "visible_source_time_joint": 0
+        },
+        "neural": {
+          "assessed": 20,
+          "exact_correct": 0,
+          "flag": 20,
+          "joint_correct": 20,
+          "new_correct": 0,
+          "prior_correct_lost": 0,
+          "prior_correct_retained": 20,
+          "prior_joint_correct": 20,
+          "spatial_correct": 20,
+          "time_correct": 20,
+          "views": 20,
+          "visible_source_time": 0,
+          "visible_source_time_joint": 0
+        },
+        "neutral": {
+          "assessed": 30,
+          "exact_correct": 0,
+          "flag": 2,
+          "joint_correct": 0,
+          "new_correct": 0,
+          "prior_correct_lost": 0,
+          "prior_correct_retained": 0,
+          "prior_joint_correct": 0,
+          "spatial_correct": 0,
+          "time_correct": 0,
+          "views": 30,
+          "visible_source_time": 0,
+          "visible_source_time_joint": 0
+        },
+        "ordinary_local": {
+          "assessed": 30,
+          "exact_correct": 0,
+          "flag": 20,
+          "joint_correct": 20,
+          "new_correct": 0,
+          "prior_correct_lost": 0,
+          "prior_correct_retained": 20,
+          "prior_joint_correct": 20,
+          "spatial_correct": 20,
+          "time_correct": 20,
+          "views": 30,
+          "visible_source_time": 0,
+          "visible_source_time_joint": 0
+        },
+        "tandem": {
+          "assessed": 20,
+          "exact_correct": 0,
+          "flag": 1,
+          "joint_correct": 0,
+          "new_correct": 0,
+          "prior_correct_lost": 0,
+          "prior_correct_retained": 0,
+          "prior_joint_correct": 0,
+          "spatial_correct": 0,
+          "time_correct": 0,
+          "views": 20,
+          "visible_source_time": 0,
+          "visible_source_time_joint": 0
+        }
+      },
+      "criteria": {
+        "assessed": true,
+        "group_coverage": true,
+        "neutral_flags": false,
+        "prior_recall": true,
+        "tandem_flags": false,
+        "unrelated_flags": true
+      },
+      "statuses": {
+        "different_source/insufficient_shared_picture_content": 9,
+        "neural/local_difference": 20,
+        "neutral/local_difference": 2,
+        "neutral/no_local_range": 28,
+        "ordinary_local/local_difference": 20,
+        "ordinary_local/no_local_range": 10,
+        "tandem/local_difference": 1,
+        "tandem/no_local_range": 19
+      }
+    },
+    "grid": {
+      "advances": true,
+      "correct_source_groups": 4,
+      "counts": {
+        "different_source": {
+          "assessed": 0,
+          "exact_correct": 0,
+          "flag": 0,
+          "joint_correct": 0,
+          "new_correct": 0,
+          "prior_correct_lost": 0,
+          "prior_correct_retained": 0,
+          "prior_joint_correct": 0,
+          "spatial_correct": 0,
+          "time_correct": 0,
+          "views": 8,
+          "visible_source_time": 0,
+          "visible_source_time_joint": 0
+        },
+        "neural": {
+          "assessed": 32,
+          "exact_correct": 0,
+          "flag": 24,
+          "joint_correct": 24,
+          "new_correct": 0,
+          "prior_correct_lost": 0,
+          "prior_correct_retained": 24,
+          "prior_joint_correct": 24,
+          "spatial_correct": 24,
+          "time_correct": 24,
+          "views": 32,
+          "visible_source_time": 7,
+          "visible_source_time_joint": 0
+        },
+        "neutral": {
+          "assessed": 24,
+          "exact_correct": 0,
+          "flag": 0,
+          "joint_correct": 0,
+          "new_correct": 0,
+          "prior_correct_lost": 0,
+          "prior_correct_retained": 0,
+          "prior_joint_correct": 0,
+          "spatial_correct": 0,
+          "time_correct": 0,
+          "views": 24,
+          "visible_source_time": 0,
+          "visible_source_time_joint": 0
+        },
+        "ordinary_local": {
+          "assessed": 40,
+          "exact_correct": 0,
+          "flag": 24,
+          "joint_correct": 16,
+          "new_correct": 0,
+          "prior_correct_lost": 0,
+          "prior_correct_retained": 16,
+          "prior_joint_correct": 16,
+          "spatial_correct": 16,
+          "time_correct": 24,
+          "views": 40,
+          "visible_source_time": 0,
+          "visible_source_time_joint": 0
+        },
+        "tandem": {
+          "assessed": 16,
+          "exact_correct": 0,
+          "flag": 0,
+          "joint_correct": 0,
+          "new_correct": 0,
+          "prior_correct_lost": 0,
+          "prior_correct_retained": 0,
+          "prior_joint_correct": 0,
+          "spatial_correct": 0,
+          "time_correct": 0,
+          "views": 16,
+          "visible_source_time": 0,
+          "visible_source_time_joint": 0
+        }
+      },
+      "criteria": {
+        "assessed": true,
+        "group_coverage": true,
+        "neutral_flags": true,
+        "prior_recall": true,
+        "tandem_flags": true,
+        "unrelated_flags": true
+      },
+      "statuses": {
+        "different_source/insufficient_shared_picture_content": 8,
+        "neural/local_difference": 24,
+        "neural/no_local_range": 8,
+        "neutral/no_local_range": 24,
+        "ordinary_local/local_difference": 24,
+        "ordinary_local/no_local_range": 16,
+        "tandem/no_local_range": 16
+      }
+    }
+  },
+  "prior_exposure": "Identical exact held inputs from the lossless-reference study, with newly encoded earlier copies and added controls.",
+  "runtime": {
+    "elapsed_s": 158.26073499999984,
+    "freeze_sha256": "b96c8588b0be8f4420f26c7ef4059232bee87de858b05c97d70c6a4360a83150",
+    "journal_sha256": "80634e4a24b687d21e6d0c1d0b33da7ee5e988444971501499545e0af97f6265",
+    "peak_rss_bytes": 266240000
+  },
+  "serving_change": false,
+  "spec": {
+    "alignment": "Identical dimensions and relative native presentation timestamps, complete upright picture tables. No resampling, time matching, cropping, or other alignment during comparison.",
+    "gate": {
+      "minimum_assessed": 0.8,
+      "minimum_new_groups": 3,
+      "neutral_flags_per_bank": 1,
+      "prior_joint_recall_min": 0.9,
+      "tandem_flags": 0,
+      "unrelated_flags": 0
+    },
+    "point": 2.328647418186583,
+    "reference_delivery": "H.264 yuv420p, CRF 23, medium preset, fixed 48-picture GOP, independent of submitted encodes.",
+    "schema": "chipmunk.video-reference-h264-earlier-transfer/1",
+    "submitted_deliveries": "All 184 exact previous submissions; two tandem encodes of each new earlier copy at CRF 28 and 33; nine unrelated CREMA-D sources with exactly matching native picture-clock prefixes.",
+    "truth": "Exact pre-encoding authored picture difference and half-open time range; 0.50 temporal IoU, tile covers at least one eighth changed pixels and one twelfth of the authored changed area."
+  }
+}

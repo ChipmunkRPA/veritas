@@ -1,0 +1,206 @@
+{
+  "added_components": {
+    "grid": 3,
+    "native": 2
+  },
+  "advances": false,
+  "assessment": {
+    "grid": {
+      "control_measured": 56,
+      "control_total": 56,
+      "positive_measured": 32,
+      "positive_total": 32
+    },
+    "hard_cut": {
+      "control_measured": 4,
+      "control_total": 4
+    },
+    "native": {
+      "control_measured": 40,
+      "control_total": 40,
+      "positive_measured": 20,
+      "positive_total": 20
+    },
+    "reencode": {
+      "control_measured": 8,
+      "control_total": 8
+    }
+  },
+  "candidate_lost_existing_correct": {
+    "grid": 1,
+    "native": 1
+  },
+  "comparison": {
+    "compatible_added": 0,
+    "grid_added": 8,
+    "grid_extra_flags": 13,
+    "hard_cut_extra_flags": 1,
+    "native_added": 2,
+    "native_extra_flags": 9
+  },
+  "compatible": {
+    "candidate/measured_no_range": 7,
+    "direct/measured_no_range": 7
+  },
+  "criteria": {
+    "compatible_added": false,
+    "grid_added": true,
+    "grid_components": true,
+    "grid_control_coverage": true,
+    "grid_extra_flags": false,
+    "grid_positive_coverage": true,
+    "hard_cut_extra_flags": false,
+    "native_added": false,
+    "native_components": false,
+    "native_control_coverage": true,
+    "native_extra_flags": false,
+    "native_positive_coverage": true,
+    "reencode_extra_flags": true
+  },
+  "decision_replay": {
+    "exact_held_files": 160,
+    "replayed_window_decisions": 320,
+    "report_sha256": "e9c7bd165550ea8ff03b4e4691fc078747e7db0293d29855d4a1604f470b0cdc",
+    "status": "verified",
+    "verified_before_during_after_crops": 117
+  },
+  "direct_point": 0.42381424677636104,
+  "fit_counts": [
+    [
+      4,
+      6
+    ],
+    [
+      4,
+      6
+    ],
+    [
+      4,
+      6
+    ],
+    [
+      4,
+      6
+    ],
+    [
+      4,
+      6
+    ],
+    [
+      4,
+      6
+    ],
+    [
+      4,
+      6
+    ],
+    [
+      4,
+      6
+    ]
+  ],
+  "freeze_sha256": "fddcc3658627b11f026f02e3238844ef03b9caf94123d2273deb52216067540b",
+  "held_picture_samples": 5498,
+  "outcomes": {
+    "grid": {
+      "candidate": {
+        "correct_range": 8,
+        "false_range": 13,
+        "measured_no_range": 66,
+        "misplaced_range": 1
+      },
+      "direct": {
+        "correct_range": 1,
+        "measured_no_range": 87
+      }
+    },
+    "hard_cut": {
+      "candidate": {
+        "false_range": 1,
+        "measured_no_range": 3
+      },
+      "direct": {
+        "measured_no_range": 4
+      }
+    },
+    "native": {
+      "candidate": {
+        "correct_range": 2,
+        "false_range": 9,
+        "measured_no_range": 44,
+        "misplaced_range": 5
+      },
+      "direct": {
+        "correct_range": 1,
+        "false_range": 8,
+        "measured_no_range": 49,
+        "misplaced_range": 2
+      }
+    },
+    "reencode": {
+      "candidate": {
+        "measured_no_range": 8
+      },
+      "direct": {
+        "measured_no_range": 8
+      }
+    }
+  },
+  "point": 2.026871763216292,
+  "protocol": {
+    "advance": {
+      "compatible_added": 2,
+      "grid_added": 6,
+      "grid_components": 3,
+      "grid_extra_flags": 3,
+      "hard_cut_extra_flags": 0,
+      "min_assessed": 0.8,
+      "native_added": 4,
+      "native_components": 3,
+      "native_extra_flags": 2,
+      "reencode_extra_flags": 1
+    },
+    "calibration": "Third largest ordinary development maximum. Strict exceedance.",
+    "control": [
+      29,
+      20
+    ],
+    "core": [
+      17,
+      9
+    ],
+    "feature_scale_floor": 0.04,
+    "min_quiet_pixels": 24,
+    "perioral": [
+      24,
+      14
+    ],
+    "quiet_quantile": 0.65,
+    "ridge": 0.2,
+    "scales_native_px": [
+      0.8,
+      1.65
+    ],
+    "schema": "chipmunk.video-mouth-native-texture/1",
+    "scope": "Single supplied clip, visual texture only. No audio, clean counterpart or edit mask enters held scoring.",
+    "selection": "Same native time points, eligible window widths and both flank requirements as the direct comparator.",
+    "training": "Within-clip authored window versus its before and after flanks, with matched positive and ordinary clips. Each GRID development source contributes equal positive and ordinary means."
+  },
+  "run": {
+    "calibration_sha256": "ee7b1f32c62748ec7a563695eef269c52193fcb4b681fc7ea69944972930f285",
+    "elapsed_s": 87.35231170900079,
+    "held_sha256": "33081c5148038af571ed083da6aa64d89b08b6cd514295001375a7869a310d73",
+    "peak_rss_bytes": 138739712
+  },
+  "serving_change": false,
+  "source_scope": {
+    "fit_grid_known_components": 4,
+    "fit_grid_recordings": 8,
+    "held_cremad_groups": 10,
+    "held_grid_known_components": 4,
+    "held_grid_recordings": 8,
+    "new_pretrained_weights": false,
+    "prior_project_exposure": true,
+    "same_clip_visual_only": true
+  }
+}

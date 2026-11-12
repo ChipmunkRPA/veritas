@@ -153,6 +153,11 @@ The [three-layer image comparison](image-multidepth-transfer-2026-11-11.md)
 publishes exact region counts and a standard-library replay of all 384 held
 decisions without the source media. A second verifier rebuilds native masks
 when the evaluator has the original intake.
+The [learned residual comparison](image-residual-patch-transfer-2026-11-11.md)
+rebuilds exact edited-pixel masks for 496 deliveries, including seven separately
+qualified SDXL and Kandinsky sources. The [remote crop transfer](image-remote-crop-editor-transfer-2026-11-11.md)
+replays the same inputs and verifies whether suppressing broad processing
+responses changes useful localizations.
 The [image flip comparison](image-regional-flip-transfer-2026-11-11.md) tests
 whether the sensitive detector reproduces a region under a reversible transform.
 It separately reports useful regions, processing controls and untouched photos.
@@ -172,6 +177,11 @@ The [short face-return transfer](video-short-return-margin-transfer-2026-11-11.m
 checks a fixed margin at three placement phases, then counts distinct secondary
 ranges in a separate retrospective analysis. Its reviewer checks native anchors
 and control outcomes independently of the scorer.
+The [single-file mouth texture trial](video-mouth-native-texture-transfer-2026-11-11.md)
+counts separately localized and missed redraws, ordinary retouching flags,
+and source-compatible visible motion. The [paired H.264 transfer](video-reference-h264-earlier-transfer-2026-11-11.md)
+verifies two independently encoded video copies, including tandem re-encodes
+and unrelated clips with the same picture clock.
 The [scene-referenced face motion comparison](video-webcam-motion-transfer-2026-11-11.md)
 checks whether genuine head movement can explain flagged ranges and tracks
 which clips lack enough stable background for that measurement.
@@ -229,6 +239,9 @@ condition changes flags and unassessed coverage.
 The [independent voice veto comparison](audio-independent-noise-veto-2026-11-11.md)
 replays 212 held audio views to quantify both removed false alerts and lost
 correct detections under strong noise, Opus, and audio restoration.
+The [paired noise correction](audio-paired-nuisance-transfer-2026-11-11.md)
+checks separate fit, calibration, selection and held roles and replays 77 exact
+room deliveries under the same fixed correction.
 The [temporal corroboration trial](audio-temporal-corroboration-2026-11-11.md)
 uses three native windows per track and holds the speech gate fixed when
 comparing the outcomes under two additional background recordings.

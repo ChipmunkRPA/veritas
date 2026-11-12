@@ -1,0 +1,182 @@
+{
+  "audit": {
+    "crop_bindings": 12400,
+    "region_counts": 992,
+    "result_sha256": "e7e7629247bf2b5db067e2edca0ec4227872dc49c4b622e18e5864653a5a93e9",
+    "views": 496
+  },
+  "commitments": {
+    "audit.json": "fe3fd81c589ddf2138aeac9dc6b27da2629585d2ad82ded756216f7e2feb7ddf",
+    "freeze.json": "6eb74c71c423c4566ee91957660b219e4b4fd66a18b778068d621c062c0590a5",
+    "result.json": "e7e7629247bf2b5db067e2edca0ec4227872dc49c4b622e18e5864653a5a93e9"
+  },
+  "freeze": {
+    "code": {
+      "image_crop_context_transfer.py": "128bab907b6e7699a704316a0ed78cd83eeea42ef740569302801952a26d201e",
+      "image_crop_overlap_transfer.py": "5c85bce59fdeaa0f315872b8843438c6ab732256a3fbab0eaa8c47299fce6532",
+      "image_crop_remote_context.py": "44b5d597ebddce5eeda7feddef6cf7151f9a99de5732ffd980e5f61db8eccdd5",
+      "image_edge_spread_transfer.py": "f9d434f1dbd2d04b4292e512e562cae52f7dd049690b45f97ef424b2d971c08c",
+      "image_remote_crop_editor_transfer.py": "54f203876557e76f690a0bfc7d9d778a33b8f67809b3b5cb00e716c0fa9b37cc"
+    },
+    "intakes": {
+      "earlier": {
+        "attempts.jsonl": "3b8291b96634bca1920bddfd9239a53d69e143ea8efc74e565fd7406e749f9ce",
+        "plan.json": "2fc63a2d9f666ce2e593cb7c6b503120661b74a33dbf88f297e34d96ae3c3d7b",
+        "result.json": "fb0aafa7d109ca3e7fda3256fbd9fdf0e3b2afca265081092552b54cc8388731"
+      },
+      "fresh": {
+        "attempts.jsonl": "7f1447364ca18c5729c20b9aa271ecc37834a697f4bb8afae808a7a835ee4267",
+        "plan.json": "bb2a98e53a65b991377d22d0895466e18aed03ee0050c082f94699805f1fe2c1",
+        "result.json": "2ac964b1a4b917a0c4f7ce432f5828680b7ea77154795aef01d28226bd013d75"
+      },
+      "later": {
+        "attempts.jsonl": "006a125678341700c243754a423c480b41bd86029a70f689ff1e7a467fc7fde7",
+        "plan.json": "a2176e567d71f2a80178adec7fb55e34007f6ad3114f9baf09837e233197fc34",
+        "result.json": "3d849ad48453c79002aa78d2d9cc8c7aeecc9f1979008060244c0bd01e065e86"
+      }
+    },
+    "points": {
+      "eligible_fit_controls": 4,
+      "fit_group_count": 8,
+      "relative": 8.313690900802614,
+      "remote_upper_strict": -4.78482723236084
+    },
+    "points_sha256": "7de6ed718c1819b4d027640053244e834b09dc1a62ea74e44e3704335985ca85",
+    "prior_rows": "3a1a0323c8d60ea66bbe2630bf54d4be53f86c1eff7a0d63b534ba42fefb8d91",
+    "rules": "Preserve the pre-existing native SD1.5 points unchanged. Treat JPEG as a transport stress test. Compare added and lost regions against the relative-only arm on matched pictures.",
+    "schema": "chipmunk.image-remote-crop-editor-transfer/1",
+    "weight_sha256": "b89f36275f3bf5e2b040eee36597a8f19db051bff9a473a9cf7b2466284fb387"
+  },
+  "result": {
+    "elapsed_s": 130.503,
+    "freeze_sha256": "6eb74c71c423c4566ee91957660b219e4b4fd66a18b778068d621c062c0590a5",
+    "fresh_batches": {
+      "cached_batches": 162,
+      "model_batches": 398
+    },
+    "fresh_views": 112,
+    "journals": {
+      "earlier": "5eef5b5775a57b7c8fdf408dbb4d6e5cad4b39ea6c45d888a2c147d1c0406312",
+      "fresh": "a8074e07c5d1e35eaa145f977ab248d9839ff77b4df6f5710dde18e52ebd2797",
+      "later": "00d0fc6384fec038f0ab188eb77b2bdc4dbc52ed7a68ec6e17bee073bc4632d5"
+    },
+    "prior_cached_views": 384,
+    "results": {
+      "earlier": {
+        "jpeg75": {
+          "relative_only": {
+            "feathered": 0,
+            "ordinary": 14,
+            "original": 2,
+            "processed": 8,
+            "sharp": 0,
+            "views": 96
+          },
+          "remote_control": {
+            "feathered": 0,
+            "ordinary": 14,
+            "original": 2,
+            "processed": 8,
+            "sharp": 0,
+            "views": 96
+          }
+        },
+        "png": {
+          "relative_only": {
+            "feathered": 1,
+            "ordinary": 38,
+            "original": 5,
+            "processed": 22,
+            "sharp": 3,
+            "views": 96
+          },
+          "remote_control": {
+            "feathered": 1,
+            "ordinary": 34,
+            "original": 5,
+            "processed": 18,
+            "sharp": 3,
+            "views": 96
+          }
+        }
+      },
+      "fresh": {
+        "jpeg75": {
+          "relative_only": {
+            "feathered": 1,
+            "ordinary": 3,
+            "original": 0,
+            "processed": 3,
+            "sharp": 2,
+            "views": 56
+          },
+          "remote_control": {
+            "feathered": 1,
+            "ordinary": 2,
+            "original": 0,
+            "processed": 2,
+            "sharp": 2,
+            "views": 56
+          }
+        },
+        "png": {
+          "relative_only": {
+            "feathered": 2,
+            "ordinary": 12,
+            "original": 0,
+            "processed": 11,
+            "sharp": 4,
+            "views": 56
+          },
+          "remote_control": {
+            "feathered": 2,
+            "ordinary": 7,
+            "original": 0,
+            "processed": 6,
+            "sharp": 4,
+            "views": 56
+          }
+        }
+      },
+      "later": {
+        "jpeg75": {
+          "relative_only": {
+            "feathered": 0,
+            "ordinary": 23,
+            "original": 3,
+            "processed": 13,
+            "sharp": 1,
+            "views": 96
+          },
+          "remote_control": {
+            "feathered": 0,
+            "ordinary": 21,
+            "original": 3,
+            "processed": 11,
+            "sharp": 1,
+            "views": 96
+          }
+        },
+        "png": {
+          "relative_only": {
+            "feathered": 2,
+            "ordinary": 20,
+            "original": 1,
+            "processed": 16,
+            "sharp": 4,
+            "views": 96
+          },
+          "remote_control": {
+            "feathered": 2,
+            "ordinary": 16,
+            "original": 1,
+            "processed": 12,
+            "sharp": 4,
+            "views": 96
+          }
+        }
+      }
+    }
+  },
+  "schema": "chipmunk.image-remote-crop-editor-transfer-public-summary/1"
+}

@@ -1,0 +1,444 @@
+{
+  "audit": {
+    "advance": {
+      "jpeg75": false,
+      "png": false
+    },
+    "exact_deliveries": {
+      "earlier": 192,
+      "fresh": 112,
+      "later": 192
+    },
+    "native_overlap_records": 1488,
+    "result_sha256": "2363d98c72b185acee976ef35b3959d4b13cd2d0172e04a498921ead2d046f59",
+    "status": "verified"
+  },
+  "commitments": {
+    "audit.json": "e5bb165c2830c02d6da1652303ed97d28db7f953f0433815cf870f88f9259a1d",
+    "fit.json": "01ab9ebdf223a7751dc03df22d2930ee6719177e4706af3d7cb7f59c7afe1a15",
+    "freeze.json": "1e20bb93e498d9276c9fe71ba1376c953d184d2ce8ae3d749bbd6888143c9132",
+    "result.json": "2363d98c72b185acee976ef35b3959d4b13cd2d0172e04a498921ead2d046f59"
+  },
+  "fit": {
+    "elapsed_s": 15.108,
+    "freeze_sha256": "1e20bb93e498d9276c9fe71ba1376c953d184d2ce8ae3d749bbd6888143c9132",
+    "mean_batch_losses": {
+      "binary_residual": [
+        0.6367158070206642,
+        0.5338878817856312,
+        0.510625446215272,
+        0.4953082073479891,
+        0.48267944157123566,
+        0.47163024358451366,
+        0.464204840362072,
+        0.45690493285655975
+      ],
+      "matched_processing": [
+        1.0683027058839798,
+        1.0098235495388508,
+        0.984156396239996,
+        0.9697425998747349,
+        0.9566785655915737,
+        0.9485650807619095,
+        0.9414147101342678,
+        0.9344036467373371
+      ]
+    },
+    "patches_per_source": [
+      16,
+      16,
+      16,
+      16,
+      16,
+      16,
+      16,
+      16
+    ],
+    "points": {
+      "jpeg75": {
+        "binary_residual": {
+          "point": 2.668167268236478,
+          "source_maxima": [
+            1.5139017128405532,
+            0.7711242766747133,
+            1.4219516520638615,
+            4.108823608085704,
+            2.668167268236478,
+            2.2932557029109337,
+            1.7929051333539985,
+            1.2857930585741997
+          ]
+        },
+        "matched_processing": {
+          "point": 2.608261893192927,
+          "source_maxima": [
+            1.128742867715162,
+            0.8402092266844579,
+            1.400046368234094,
+            3.9447473718060384,
+            2.608261893192927,
+            2.5489358309240995,
+            1.8836821677620665,
+            1.3204933189683492
+          ]
+        }
+      },
+      "png": {
+        "binary_residual": {
+          "point": 3.0067446028880545,
+          "source_maxima": [
+            1.7515766520752518,
+            0.8788634086492015,
+            1.3858861618987917,
+            3.832018941640853,
+            2.8114567597707114,
+            3.0067446028880545,
+            1.8598803876551704,
+            1.2744628170298204
+          ]
+        },
+        "matched_processing": {
+          "point": 3.2162841729870153,
+          "source_maxima": [
+            1.117581914359508,
+            0.8504108700471078,
+            1.3608183872645379,
+            3.2617730441399746,
+            2.6971304482883873,
+            3.2162841729870153,
+            1.9138701548309418,
+            1.3123871025939782
+          ]
+        }
+      }
+    },
+    "training_pairs": 1024,
+    "weight_sha256": {
+      "binary_residual": "5441d554300206094bc518f796af150a4742b066bef9a33ff3f0cf9ea724ab61",
+      "matched_processing": "5eb51affc67aaa47b0df564338ec7c17d19856d289b6cb258cd605f0a2a422cf"
+    }
+  },
+  "freeze": {
+    "code": {
+      "image_background_patch_score.py": "cb854082628636833e2fd005e954d0bdb7c78362e58ee98632f1ba4153224d5a",
+      "image_boundary_blend_transfer.py": "fc65a5e3f064d74a5cd6fa528d9115aee92cc8eb9e04cb6dee13398e03388aa0",
+      "image_edge_spread_transfer.py": "f9d434f1dbd2d04b4292e512e562cae52f7dd049690b45f97ef424b2d971c08c",
+      "image_relative_patch_transfer.py": "861c88e2168b3d05f1408bc79b1430b664dee8e66f2cd702d7b3550a8ca4d541",
+      "image_residual_color_transfer.py": "682fc80861ae3c80b7d80d5efb3edd3cb15635bbdf797c60b894ce4b23f8ece2",
+      "image_residual_patch_transfer.py": "6cde5f1c92004bfd15fd74ae7175ff8cad54d9f7946c47967211055c31b3de1a",
+      "image_wavelet_region_transfer.py": "cf86c593a840ab7b157055e88c041c07dcffb4dd237386ea8c7747a1d33b8585"
+    },
+    "intakes": {
+      "calibration": {
+        "attempts.jsonl": "772e801e4dcaafefdb82a71e74316ad8fcf0d377f852222ed5b91d501ed28342",
+        "plan.json": "fc51e6a4d39908e9988549dd9f0f42bbd8b216d239a7ce1c3f2c93b1151613ac",
+        "result.json": "10f881655641006cb297e035e7a40b23cfc52b90eb9d9b9d40efa547f923a1b6"
+      },
+      "earlier": {
+        "attempts.jsonl": "3b8291b96634bca1920bddfd9239a53d69e143ea8efc74e565fd7406e749f9ce",
+        "plan.json": "2fc63a2d9f666ce2e593cb7c6b503120661b74a33dbf88f297e34d96ae3c3d7b",
+        "result.json": "fb0aafa7d109ca3e7fda3256fbd9fdf0e3b2afca265081092552b54cc8388731"
+      },
+      "fit": {
+        "attempts.jsonl": "59d8591da24d8886cca3ea071eefa5488aa3ac555ff5b21e0542dc267c47fb90",
+        "plan.json": "0d5cd6aadef8162c436c674e00ad835d91d3c7b5807daf0561cb8c58adf47aef",
+        "result.json": "6a8b09a8a4a8585f44faffd5ce18bba7c42a311934ce20bb3a70842aaef4d0b8"
+      },
+      "fresh": {
+        "attempts.jsonl": "7f1447364ca18c5729c20b9aa271ecc37834a697f4bb8afae808a7a835ee4267",
+        "plan.json": "bb2a98e53a65b991377d22d0895466e18aed03ee0050c082f94699805f1fe2c1",
+        "result.json": "2ac964b1a4b917a0c4f7ce432f5828680b7ea77154795aef01d28226bd013d75"
+      },
+      "later": {
+        "attempts.jsonl": "006a125678341700c243754a423c480b41bd86029a70f689ff1e7a467fc7fde7",
+        "plan.json": "a2176e567d71f2a80178adec7fb55e34007f6ad3114f9baf09837e233197fc34",
+        "result.json": "3d849ad48453c79002aa78d2d9cc8c7aeecc9f1979008060244c0bd01e065e86"
+      }
+    },
+    "qualified_fresh_by_family": {
+      "kandinsky": 3,
+      "sdxl": 4
+    },
+    "recipe": {
+      "advancement": "Processing-aware arm must add two feathered locations in each reused panel and one in fresh, preserve at least the binary arm's useful feathered count and add at most four false control flags on at most three groups versus the format incumbent per panel. Fresh promotion requires >=6 groups and >=2 per editor.",
+      "arms": [
+        "binary_residual",
+        "matched_processing"
+      ],
+      "confidence_contribution": 0,
+      "controls": "Eight separate source groups. Strictly exceed the second-highest control-group maximum, floor .25.",
+      "epochs": 8,
+      "fit_batch": 64,
+      "grid": 24,
+      "learning_rate": 0.002,
+      "localization": "Best supported native rectangle from the fixed 24 x 24 grid. IoU >= 0.30 and recall >= 0.50.",
+      "max_training_patches_per_source": 16,
+      "paired_delivery_consistency": 0.3,
+      "patch_pixels": 24,
+      "seed": 61111,
+      "target_patch_occupancy": 0.8
+    },
+    "runtime": {
+      "numpy": "2.2.6",
+      "opencv-python-headless": "5.0.0.93",
+      "pillow": "12.3.0",
+      "safetensors": "0.8.0",
+      "torch": "2.13.0"
+    },
+    "schema": "chipmunk.image-residual-patch-transfer/1"
+  },
+  "fresh_intake": {
+    "attempts_sha256": "7f1447364ca18c5729c20b9aa271ecc37834a697f4bb8afae808a7a835ee4267",
+    "detector_forwards": 0,
+    "excluded": {},
+    "plan_sha256": "bb2a98e53a65b991377d22d0895466e18aed03ee0050c082f94699805f1fe2c1",
+    "planned": 7,
+    "qualified": {
+      "kandinsky": 3,
+      "sdxl": 4
+    },
+    "schema": "chipmunk.background-patch-intake/1"
+  },
+  "fresh_selection": {
+    "kandinsky": {
+      "component_exclusions": 32,
+      "eligible": 3,
+      "metadata_rejections": {},
+      "selected": 3
+    },
+    "sdxl": {
+      "component_exclusions": 27,
+      "eligible": 7,
+      "metadata_rejections": {},
+      "selected": 4
+    }
+  },
+  "fresh_source_commitments": {
+    "README.md": "b33ed5d0e41c33876fedf528940e12d0a26f99d7525195ef54f1e0786e8758d0",
+    "attribution.csv": "9d7b9019055f689d656312c457cab464066167d02b9fe56b8dcf89921832423f",
+    "manifest_v2.csv": "773548c9aa03011f308059b87ac47fe72110783b8d70804dc6d4f837372cf5f4",
+    "model_revisions.csv": "e7d970bfeeb8126c6b07059b9423f71055c5ebc9834bd89a41e665dd305e7bf6",
+    "recipients.csv": "a833fafa06243a6138c46a7858112f30e42640072c028c6d5736909860dedeef",
+    "splits_v2.yaml": "e9fe9ddcbf04c5b36905c5006d797d5b9fa0e304a8de7b28ecb82c96faecb0da"
+  },
+  "result": {
+    "advances": {
+      "jpeg75": false,
+      "png": false
+    },
+    "elapsed_s": 82.243,
+    "fit_sha256": "01ab9ebdf223a7751dc03df22d2930ee6719177e4706af3d7cb7f59c7afe1a15",
+    "freeze_sha256": "1e20bb93e498d9276c9fe71ba1376c953d184d2ce8ae3d749bbd6888143c9132",
+    "results": {
+      "earlier": {
+        "jpeg75": {
+          "binary_residual": {
+            "added_control_sources": 3,
+            "added_controls": 16,
+            "added_feathered": 0,
+            "feathered": 0,
+            "ordinary": 16,
+            "original": 3,
+            "sharp": 0,
+            "ungated_useful": 0
+          },
+          "format_reference": {
+            "added_control_sources": 0,
+            "added_controls": 0,
+            "added_feathered": 0,
+            "feathered": 0,
+            "ordinary": 0,
+            "original": 0,
+            "sharp": 0,
+            "ungated_useful": 0
+          },
+          "matched_processing": {
+            "added_control_sources": 4,
+            "added_controls": 19,
+            "added_feathered": 0,
+            "feathered": 0,
+            "ordinary": 19,
+            "original": 3,
+            "sharp": 0,
+            "ungated_useful": 0
+          }
+        },
+        "png": {
+          "binary_residual": {
+            "added_control_sources": 3,
+            "added_controls": 13,
+            "added_feathered": 0,
+            "feathered": 0,
+            "ordinary": 13,
+            "original": 2,
+            "sharp": 0,
+            "ungated_useful": 0
+          },
+          "format_reference": {
+            "added_control_sources": 0,
+            "added_controls": 0,
+            "added_feathered": 0,
+            "feathered": 0,
+            "ordinary": 13,
+            "original": 2,
+            "sharp": 5,
+            "ungated_useful": 0
+          },
+          "matched_processing": {
+            "added_control_sources": 2,
+            "added_controls": 12,
+            "added_feathered": 0,
+            "feathered": 0,
+            "ordinary": 12,
+            "original": 2,
+            "sharp": 0,
+            "ungated_useful": 0
+          }
+        }
+      },
+      "fresh": {
+        "jpeg75": {
+          "binary_residual": {
+            "added_control_sources": 2,
+            "added_controls": 12,
+            "added_feathered": 0,
+            "feathered": 0,
+            "ordinary": 12,
+            "original": 2,
+            "sharp": 0,
+            "ungated_useful": 0
+          },
+          "format_reference": {
+            "added_control_sources": 0,
+            "added_controls": 0,
+            "added_feathered": 0,
+            "feathered": 0,
+            "ordinary": 0,
+            "original": 0,
+            "sharp": 0,
+            "ungated_useful": 0
+          },
+          "matched_processing": {
+            "added_control_sources": 2,
+            "added_controls": 12,
+            "added_feathered": 0,
+            "feathered": 0,
+            "ordinary": 12,
+            "original": 2,
+            "sharp": 0,
+            "ungated_useful": 0
+          }
+        },
+        "png": {
+          "binary_residual": {
+            "added_control_sources": 2,
+            "added_controls": 12,
+            "added_feathered": 0,
+            "feathered": 0,
+            "ordinary": 12,
+            "original": 2,
+            "sharp": 0,
+            "ungated_useful": 0
+          },
+          "format_reference": {
+            "added_control_sources": 0,
+            "added_controls": 0,
+            "added_feathered": 0,
+            "feathered": 1,
+            "ordinary": 7,
+            "original": 1,
+            "sharp": 5,
+            "ungated_useful": 0
+          },
+          "matched_processing": {
+            "added_control_sources": 2,
+            "added_controls": 12,
+            "added_feathered": 0,
+            "feathered": 0,
+            "ordinary": 12,
+            "original": 2,
+            "sharp": 0,
+            "ungated_useful": 0
+          }
+        }
+      },
+      "later": {
+        "jpeg75": {
+          "binary_residual": {
+            "added_control_sources": 1,
+            "added_controls": 6,
+            "added_feathered": 0,
+            "feathered": 0,
+            "ordinary": 6,
+            "original": 1,
+            "sharp": 0,
+            "ungated_useful": 2
+          },
+          "format_reference": {
+            "added_control_sources": 0,
+            "added_controls": 0,
+            "added_feathered": 0,
+            "feathered": 0,
+            "ordinary": 0,
+            "original": 0,
+            "sharp": 0,
+            "ungated_useful": 0
+          },
+          "matched_processing": {
+            "added_control_sources": 1,
+            "added_controls": 6,
+            "added_feathered": 0,
+            "feathered": 0,
+            "ordinary": 6,
+            "original": 1,
+            "sharp": 0,
+            "ungated_useful": 2
+          }
+        },
+        "png": {
+          "binary_residual": {
+            "added_control_sources": 1,
+            "added_controls": 6,
+            "added_feathered": 0,
+            "feathered": 0,
+            "ordinary": 6,
+            "original": 1,
+            "sharp": 0,
+            "ungated_useful": 2
+          },
+          "format_reference": {
+            "added_control_sources": 0,
+            "added_controls": 0,
+            "added_feathered": 0,
+            "feathered": 0,
+            "ordinary": 1,
+            "original": 0,
+            "sharp": 7,
+            "ungated_useful": 0
+          },
+          "matched_processing": {
+            "added_control_sources": 1,
+            "added_controls": 1,
+            "added_feathered": 0,
+            "feathered": 0,
+            "ordinary": 1,
+            "original": 0,
+            "sharp": 0,
+            "ungated_useful": 2
+          }
+        }
+      }
+    },
+    "rows_sha256": {
+      "earlier": "81fee116cd20f7a162d0e104b2056d7903f55b05b9ddb5fdf2fbe10de801b2b8",
+      "fresh": "4e0ceabcbb74d0f8fb5d9bbb4ae838234ce31d6a10e96fc6edf13f02c6c8f8ad",
+      "later": "2f2d2b99935251dd6e76577014bea6f50fc537336a1a8d61bdf4b48682eb846b"
+    },
+    "view_counts": {
+      "earlier": 192,
+      "fresh": 112,
+      "later": 192
+    }
+  },
+  "schema": "chipmunk.image-residual-patch-public-summary/1"
+}

@@ -186,7 +186,7 @@ def _unavailable() -> ProblemError:
 
 
 def _paired_enabled(extension: str | None) -> bool:
-    if extension not in (".txt", ".docx"):
+    if extension not in (".txt", ".docx", ".eml"):
         return False
     from app.detectors.text.adapters.agreement import enabled as writing_review_enabled
 
@@ -225,15 +225,16 @@ def _compare(aid: str, original: tuple[str, int, str], earlier: bytes, include_p
         raise ProblemError(409, "Original integrity check failed", "The retained document could not be read.") from None
     if len(later) != size or hashlib.sha256(later).hexdigest() != sha256:
         raise ProblemError(409, "Original integrity check failed", "The retained document no longer matches its recorded hash and size.")
+    paired_enabled = include_paired_check and _paired_enabled(extension)
     try:
-        comparison, old_text, new_text = compare_with_text(earlier, later, extension)
+        comparison, old_text, new_text = compare_with_text(earlier, later, extension, email_body_only=paired_enabled)
     except (UnicodeError, LookupError, RecursionError):
         raise ProblemError(422, "Could not compare drafts", f"Use readable {SUPPORTED_DRAFTS}.") from None
     except ValueError as error:
         raise ProblemError(422, "Could not compare drafts", str(error)) from None
     except OSError:
         raise ProblemError(500, "Earlier-draft comparison unavailable", "The local service could not stage the comparison.") from None
-    if include_paired_check and _paired_enabled(extension):
+    if paired_enabled:
         from app.evidence import document_revision_writing as paired
 
         candidate = None

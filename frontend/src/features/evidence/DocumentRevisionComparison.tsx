@@ -77,7 +77,7 @@ function DraftResult({ result }: { result: DocumentRevisionResponse }) {
       </div>
     </div>
     <p className="mt-2 mb-0 text-small text-text-muted">{comparison.scope} {comparison.interpretation}</p>
-    {html && <p className="mt-2 mb-0 text-caption text-text-muted">
+    {comparison.format === 'email' && <p className="mt-2 mb-0 text-caption text-text-muted">
       Earlier MIME part {comparison.earlier.mime_part} · Analyzed MIME part {comparison.later.mime_part}
     </p>}
     {paired && <section aria-label="Experimental paired writing check" className="mt-4 rounded-md border border-border p-3">

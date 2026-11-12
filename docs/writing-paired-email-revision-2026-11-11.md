@@ -31,3 +31,15 @@ The current classifier read the later text with its standard three-sentence wind
 A useful location required at least 0.30 non-whitespace character intersection over union and 0.50 changed-character recall. The two added paired hits came from different source groups and generators. Both classifiers’ later raw responses stayed below 0.15 on those hits despite their relative increases. One of seven generated body pairs and four of ten forum revisions lacked matching context, so they had no paired statistical reading. The statistical arm remains in research. The local feature uses the exact comparison.
 
 The run completed 57 CPU forwards over 223 model-input combinations. A separate replay checked 122 exact MIME files, 1,046 changed-token offsets, 229 current context references, 74 paired input references and 147 outcome and source-group counts. The [research runner](../backend/scripts/writing_paired_email_revision.py) accepts a frozen local directory of paired fixtures and both pinned snapshots.
+
+## Email format verification
+
+The authenticated local **Compare with an earlier draft** form now offers the optional paired writing check on matching plain-text `.eml` files and supported HTML-only replies. One changed sentence must have two unchanged neighbors in the same body paragraph. The score uses the exact body context from each draft. Marked quotes, signatures, attachments and headers stay outside the paired reading. The report links each body result to the exact wording changes and MIME parts of the two files. This check uses uncalibrated model responses and adds zero authorship confidence weight.
+
+Rewrapping 53 previously evaluated English journal draft pairs in each email format preserved all 34 eligible pairs and their exact classifier inputs. Each format reproduced five joint increases on 23 eligible generated rewrites and zero on 11 eligible ordinary revisions using saved responses. The bodies, including their surrounding sentences, were previously used in the journal study. The new deliveries changed the trailing quotation independently of the body. Four authenticated local API comparisons re-ran both installed checkpoints and verified source positions, PDF, JSON and offline replay. Quote-only changes stayed outside the optional check. [Original source panel](writing-journal-body-transfer-2026-11-11.md)
+
+Run the focused API and replay tests with locally authored MIME fixtures from the backend directory.
+
+```sh
+.venv/bin/python -B -m pytest -q tests/test_document_revision_access.py -k paired_email
+```

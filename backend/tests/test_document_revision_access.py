@@ -324,6 +324,7 @@ def test_word_comparison_uses_exact_body_paragraph_coordinates_in_api_pdf_and_re
 
 def test_email_comparison_preserves_roles_and_exact_original_excerpts_in_json_and_pdf(reference_http, monkeypatch, tmp_path):
     f = _install(reference_http, monkeypatch)
+    monkeypatch.setattr(settings, "text_checkpoint_agreement_review", False)
     previous = "📎 Send the crème  brûlée on Tuesday.\n\n-- \nOld signature\n\n> Review the earlier draft."
     latest = "📎 Send the café  order on Thursday.\n\n-- \nNew signature\n\n> Review the final draft."
     earlier = _email(previous)
@@ -366,6 +367,73 @@ def test_email_comparison_preserves_roles_and_exact_original_excerpts_in_json_an
 
     mislabeled = f.client.post(_url("email-draft"), headers=f.viewer, files=_upload(b"This is plain text with no email headers."))
     assert mislabeled.status_code == 422 and not list(staged.iterdir())
+
+
+@pytest.mark.parametrize("html", [False, True])
+def test_paired_email_checks_only_the_bound_body_context(reference_http, monkeypatch, tmp_path, html):
+    f = _install(reference_http, monkeypatch)
+    monkeypatch.setattr(settings, "text_detector_mode", "candidate")
+    monkeypatch.setattr(settings, "text_window_sentences", 3)
+    monkeypatch.setattr(settings, "text_checkpoint_agreement_review", True)
+    heading = "The committee shared the schedule in a separate note."
+    lead = "The committee met on Monday morning to review the budget. "
+    tail = " The final minutes will be available after the next meeting."
+    old_focus = "The draft gives the survey date and meeting location."
+    new_focus = "The revision includes a detailed account of the survey and its outcomes."
+
+    def message(focus, quote):
+        paragraph = lead + focus + tail
+        if html:
+            return _html_email(f"<p>{heading}</p><p>{paragraph}</p>", quote=quote, cte="base64")
+        return _email(f"{heading}\n\n{paragraph}\n\n-- \nMeeting coordinator\n\n> {quote}\n")
+
+    older_quote, newer_quote = "Older quotation about projected revenue.", "Revised quotation about travel costs."
+    earlier, later = message(old_focus, older_quote), message(new_focus, newer_quote)
+    _saved(f, "paired-mail", ".eml", later)
+    url = _url("paired-mail")
+    assert f.client.get(url, headers=f.viewer).json()["paired_check_available"] is True
+    inputs = []
+
+    def measure(candidate):
+        inputs.append((candidate.earlier, candidate.later))
+        return [{"earlier": .1, "later": .4}, {"earlier": .3, "later": .6}]
+
+    monkeypatch.setattr(paired, "score", measure)
+    standard = f.client.post(url, headers=f.viewer, files=_upload(earlier)).json()["comparison"]
+    assert "paired_check" not in standard and not inputs
+    response = f.client.post(url, headers=f.viewer, files=_upload(earlier),
+                             data={"include_pdf": "true", "include_paired_check": "true"})
+    assert response.status_code == 200 and response.headers["cache-control"] == "no-store"
+    payload = response.json()
+    comparison = payload["comparison"]
+    check = comparison["paired_check"]
+    assert {key: value for key, value in comparison.items() if key != "paired_check"} == standard
+    assert check["status"] == "joint_increase" and check["authorship_confidence_contribution"] == 0
+    assert inputs == [(lead + old_focus + tail, lead + new_focus + tail)]
+    assert check["change_ids"] == [change["id"] for change in comparison["changes"] if change["role"] == "body"]
+    for side, original, focus in (("earlier", earlier, old_focus), ("later", later, new_focus)):
+        mime = BytesParser(policy=policy.default).parsebytes(original).get_body(preferencelist=("plain", "html"))
+        decoded = mime.get_content()
+        if html:
+            decoded = f"{heading}\n\n{lead}{focus}{tail}"
+        row = check[side]
+        assert decoded[row["start"]:row["end"]] == row["text"] == focus
+        assert comparison[side]["mime_part"]
+    with pymupdf.open(stream=base64.b64decode(payload["pdf"]), filetype="pdf") as report:
+        text = " ".join(" ".join(page.get_text().split()) for page in report)
+        assert "Experimental paired writing check" in text and "MIME part" in text
+        assert "covers only the reply body" in text and "ModernBERT" not in text
+        assert any(page.get_links() for page in report)
+    old, new, report = (tmp_path / name for name in ("earlier.eml", "later.eml", "comparison.json"))
+    old.write_bytes(earlier)
+    new.write_bytes(later)
+    report.write_text(json.dumps(comparison))
+    assert review(report, old, new)["paired_scope_and_saved_response_arithmetic"] == "joint_increase"
+    only_quote = f.client.post(url, headers=f.viewer, files=_upload(message(new_focus, older_quote)),
+                               data={"include_paired_check": "true"})
+    assert only_quote.status_code == 200
+    assert only_quote.json()["comparison"]["paired_check"]["status"] == "outside_scope"
+    assert len(inputs) == 1
 
 
 def test_html_reply_comparison_preserves_split_words_and_mime_positions(reference_http, monkeypatch, tmp_path):

@@ -16,6 +16,9 @@ SCOPE = ("This experimental check compares one changed sentence and its two unch
 WORD_SCOPE = ("This experimental check compares one changed sentence and its two unchanged neighbors in the same "
               "top-level body paragraph of a short English Word draft. Responses are uncalibrated and carry zero "
               "authorship confidence weight.")
+EMAIL_SCOPE = ("This experimental check compares one changed sentence and its two unchanged neighbors within one "
+               "paragraph of a short English email body. The check covers only the reply body. Responses are "
+               "uncalibrated and carry zero authorship confidence weight.")
 STATUS_TEXT = {
     "outside_scope": "This draft pair falls outside the exact single-sentence comparison scope.",
     "unavailable": "The local writing checks could not complete the paired comparison.",
@@ -43,9 +46,11 @@ def _source(text: str):
 
 
 def paired_input(comparison: dict, earlier: str, later: str) -> PairedInput | None:
-    """Pair one interior changed sentence and verify all source ranges before scoring."""
+    """Pair an interior changed sentence. For EML, use the verified decoded body prefix from the draft comparison."""
     changes = comparison["changes"]
-    if comparison["format"] not in ("plain_text", "docx") or not changes:
+    if comparison["format"] == "email":
+        changes = [change for change in changes if change["role"] == "body"]
+    if comparison["format"] not in ("plain_text", "docx", "email") or not changes:
         return None
     old, new = _source(earlier), _source(later)
     if old is None or new is None:
@@ -128,7 +133,8 @@ def _direction(responses: list[dict]) -> str:
 
 def result(candidate: PairedInput | None, responses: list[dict] | None = None, *, draft_format: str = "plain_text") -> dict:
     status = "outside_scope" if candidate is None else _direction(responses) if responses is not None else "unavailable"
-    value = {"schema": SCHEMA, "status": status, "scope": WORD_SCOPE if draft_format == "docx" else SCOPE,
+    scope = {"docx": WORD_SCOPE, "email": EMAIL_SCOPE}.get(draft_format, SCOPE)
+    value = {"schema": SCHEMA, "status": status, "scope": scope,
              "summary": STATUS_TEXT[status],
              "authorship_confidence_contribution": 0}
     if candidate is not None:

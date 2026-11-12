@@ -13,6 +13,8 @@ ROOT = Path(__file__).resolve().parents[2]
 RECEIPTS = ROOT / "docs/evaluation-panels"
 BASE = RECEIPTS / "audio-edge-window-grouped-2026-11-12.json"
 RECEIPT = RECEIPTS / "audio-short-codec-transfer-2026-11-12.json"
+CONFIRM_SOURCE = RECEIPTS / "audio-communication-replication-2026-11-12.json"
+CONFIRM_SCHEMA = "chipmunk.audio-short-mp3-confirmation/1"
 SCHEMA = "chipmunk.audio-short-codec-transfer/1"
 GRID = ((0, 64000), (32000, 96000), (0, 32000), (16000, 48000), (32000, 64000), (48000, 80000), (64000, 96000))
 ARMS = {"full": (0, 1), "combined": (2, 3, 4, 5, 6)}
@@ -185,11 +187,90 @@ def native(run, held):
     return result
 
 
+def confirm_metrics(rows, cutoffs):
+    metrics = {arm: held_metrics(rows, "mp3", arm, cutoffs[arm]) for arm in ARMS}
+    full, short = (metrics[arm] for arm in ARMS)
+    recovered = len(set(short["useful_groups"]) - set(full["useful_groups"]))
+    new_false = len(set(short["false_groups"]) - set(full["false_groups"]))
+    return metrics, {"new_useful_groups": recovered, "new_false_groups": new_false,
+                     "passes": recovered >= 2 and new_false <= 1}
+
+
+def confirm_inspect(receipt):
+    require(receipt["schema"] == CONFIRM_SCHEMA
+            and receipt["earlier_codec_receipt"]["sha256"] == hashlib.sha256(RECEIPT.read_bytes()).hexdigest()
+            and receipt["source_receipt"]["sha256"] == hashlib.sha256(CONFIRM_SOURCE.read_bytes()).hexdigest(),
+            "Confirmation source or earlier cutoff commitment changed")
+    prior = load(RECEIPT)
+    points = {arm: prior["points"]["mp3"][arm]["1"] for arm in ARMS}
+    rows = receipt["held"]
+    require(receipt["cutoffs"] == points and len(rows) == 52 and len({row["group"] for row in rows}) == 16
+            and receipt["response_rows"]["sha256"] == rows_digest(rows), "Confirmation role or point changed")
+    require(sum(row["truth"] is not None for row in rows) == 12 and receipt["native_window_bindings"] == 364
+            and receipt["confidence_weight"] == 0, "Confirmation denominator or scope changed")
+    for number, row in enumerate(rows):
+        scores = row["scores"]["mp3"]
+        require(row["id"] == f"case-{number:02d}" and len(scores) == len(GRID)
+                and all(value is None or (type(value) in (int, float) and math.isfinite(value)) for value in scores),
+                "Confirmation windows or file ordering changed")
+        truth = row["truth"]
+        require((truth is not None) == (row["condition"] == "synthetic")
+                and (truth is None or (len(truth) == 2 and all(type(i) is int for i in truth)
+                     and 0 <= truth[0] < truth[1] <= 96000)), "Invalid known edit interval")
+    results, admission = confirm_metrics(rows, points)
+    require(results == receipt["results"] and admission == receipt["admission"], "Confirmation outcomes changed")
+    return results, admission
+
+
+def confirm_native(run):
+    from scripts import audio_short_codec_transfer as codec
+    from scripts import audio_short_mp3_confirmation as producer
+
+    selected, scored = (load(run / f"{name}.json") for name in ("inputs", "scores"))
+    freeze = load(run / "freeze.json")
+    require(freeze == producer.frozen(run, selected), "Confirmation freeze changed")
+    rows, checks = [], 0
+    for source, result, (prior, original) in zip(selected, scored, producer.source_cases(), strict=True):
+        require({key: result[key] for key in source} == source and {key: source[key] for key in prior} == prior
+                and prior["original"]["sha256"] == codec.digest(original), "Confirmation input assignment changed")
+        item = source["delivery"]
+        path = run / item["path"]
+        pcm, clock = codec.decode_delivered(path, "mp3")
+        require(item["bytes"]["sha256"] == codec.sha(path) and item["pcm"]["sha256"] == codec.digest(pcm)
+                and item["clock"] == clock, "Confirmation native source or clock changed")
+        windows = result["windows"]
+        require(tuple((window["start"], window["end"]) for window in windows) == GRID and all(
+            window["pcm_sha256"] == codec.digest(pcm[2*window["start"]:2*window["end"]]) for window in windows),
+            "Confirmation window input changed")
+        checks += len(windows)
+        rows.append({key: prior[key] for key in ("id", "group", "truth", "family", "condition")} |
+                    {"scores": {"mp3": [window["score"] for window in windows]}})
+    results, admission = confirm_metrics(rows, freeze["cutoffs"])
+    require(load(run / "results.json") == {"freeze": {"sha256": codec.sha(run / "freeze.json")}, "metrics": results},
+            "Scorer and independent confirmation metrics differ")
+    receipt = {key: freeze[key] for key in ("schema", "earlier_codec_receipt", "source_receipt", "cutoffs",
+                                           "generator_profiles_previously_used")} | {
+        "held": rows, "response_rows": {"sha256": rows_digest(rows)}, "results": results, "admission": admission,
+        "freeze": {"sha256": codec.sha(run / "freeze.json")}, "native_window_bindings": checks, "confidence_weight": 0,
+    }
+    confirm_inspect(receipt)
+    return receipt
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("receipt", nargs="?", type=Path, default=RECEIPT)
     parser.add_argument("--native", nargs=2, type=Path, metavar=("RUN", "HELD"))
+    parser.add_argument("--confirmation", action="store_true", help="Review the separate MP3 confirmation receipt")
+    parser.add_argument("--confirmation-native", type=Path, metavar="RUN")
     args = parser.parse_args()
+    if args.confirmation or args.confirmation_native:
+        require(args.receipt != RECEIPT and args.native is None, "Supply a separate confirmation receipt path")
+        if args.confirmation_native:
+            dump(args.receipt, confirm_native(args.confirmation_native))
+        results, admission = confirm_inspect(load(args.receipt))
+        print(json.dumps({"results": results, "admission": admission}, sort_keys=True))
+        return
     if args.native:
         dump(args.receipt, native(*args.native))
     _, results, admission = inspect(load(args.receipt), load(BASE))

@@ -43,6 +43,21 @@ def test_scope_excludes_lossy_stereo_multitrack_and_clock_changes():
     assert not binding.supported_source(mapping | {"timeline": [dict(mapping["timeline"][0], source_pts=1)]})
 
 
+def test_mp3_uses_its_frozen_point_and_exact_source_clock():
+    wav = source(np.zeros(binding.SAMPLES, np.float32))
+    mp3 = wav | {"source_codec": "mp3", "source_container": "mp3", "source_bit_rate": 48000,
+                 "timeline": [dict(wav["timeline"][0], source_pts=1105)]}
+    assert binding.supported_source(mp3)
+    assert not binding.supported_source(mp3 | {"source_bit_rate": 64000})
+    assert not binding.supported_source(mp3 | {"timeline": wav["timeline"]})
+    response = [{"start_sample": 48000, "end_sample": 80000, "logit": 7.0}]
+    assert binding.selected_range(response) is not None and binding.selected_range(response, "mp3") is None
+    response[0]["logit"] = 7.1
+    assert binding.selected_range(response, "mp3") == {"start_sample": 48000, "end_sample": 80000}
+    assert binding.source_metadata_matches({"source_codec": "mp3"}, mp3)
+    assert not binding.source_metadata_matches({"source_codec": "mp3", "source_bit_rate": 64000}, mp3)
+
+
 @pytest.mark.skipif(not which("ffmpeg") or not which("ffprobe"), reason="Requires the local audio decoder")
 def test_native_flac_depth_and_exact_decoded_samples(tmp_path):
     source_pcm = np.arange(binding.SAMPLES, dtype=np.int32).astype("<i2").astype(np.float32) / 32768

@@ -32,7 +32,7 @@ def build(record, *, store, source, pcm, mapping, asset, waveform):
     checked = [{key: row[key] for key in ("start_sample", "end_sample")} for row in responses]
     if raw["schema"] != binding.SCHEMA or any(type(row["logit"]) not in (int, float) or not math.isfinite(row["logit"]) for row in responses):
         raise ValueError("Short speech-window response is invalid")
-    selected = binding.selected_range(responses)
+    selected = binding.selected_range(responses, source.get("source_codec"))
     if raw["selected"] != selected or (selected is not None) != (raw["status"] == "flagged"):
         raise ValueError("Short speech-window flag differs from its frozen response")
     document = {

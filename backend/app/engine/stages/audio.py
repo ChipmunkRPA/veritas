@@ -153,6 +153,7 @@ def decode(ctx: StageContext) -> dict[str, Any]:
         db.commit()
     return {"sample_rate": SR, "samples": int(len(pcm)), "seconds": round(len(pcm) / SR, 3),
             "short_voice_review_source_supported": supported_source(decoded.mapping),
+            "short_voice_review_source_codec": decoded.mapping.get("source_codec"),
             "sha256": hashlib.sha256(pcm.tobytes()).hexdigest(), "evidence_input": binding, "artefacts": objects,
             "source_clock_break_count": len(clock_breaks)}
 
@@ -179,7 +180,7 @@ def _short_voice_review(ctx: StageContext, track, entries: list[dict]) -> dict:
     if settings.audio_detector_mode != "candidate":
         return short_voice_review.skipped("The short-window check is unavailable in this audio configuration.")
     facts = ctx.outputs["probe"]["facts"]
-    if (Profile(ctx.profile) is not Profile.FULL or facts.get("container") not in {"wav", "flac"}
+    if (Profile(ctx.profile) is not Profile.FULL or facts.get("container") not in {"wav", "flac", "mp3"}
             or not ctx.outputs["decode"].get("short_voice_review_source_supported")):
         return short_voice_review.skipped(SCOPE_REASON)
     if not any(e.get("detector_id") == short_voice_review.PellaVoiceDetector.spec.id and e.get("status") == "ok" for e in entries):
@@ -188,8 +189,9 @@ def _short_voice_review(ctx: StageContext, track, entries: list[dict]) -> dict:
     if remaining is not None and remaining < short_voice_review.BUDGET_S + short_voice_review.PIPELINE_RESERVE_S:
         return short_voice_review.skipped("The optional short-window check did not have enough analysis time.")
     detector = short_voice_review.ShortVoiceReview()
+    source_codec = ctx.outputs["decode"].get("short_voice_review_source_codec")
     run_ctx = RunContext(analysis_id=ctx.analysis_id, media=common.media(ctx), profile=ctx.profile, device="cpu",
-                         dtype=None, lease=None, outputs=StageOutputs(audio=track), deadline=ctx.deadline,
+                         dtype=None, lease=None, outputs=StageOutputs(audio=track, probe={"source_codec": source_codec}), deadline=ctx.deadline,
                          exhibits=ctx.exhibits.bind(detector.spec.id), log=ctx.log.bind(detector_id=detector.spec.id))
     store = ctx.state["run_store"]
     review = run_detector(detector, run_ctx, store=store, models=ctx.state.get("models"), timeout_s=short_voice_review.BUDGET_S)

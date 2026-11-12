@@ -23,7 +23,7 @@ The short and Full arms use the same classifier and half-speech admission. The F
 | MP3, stricter | 1 | 3 | 0 → 2 | 0 → 1 |
 | Opus, stricter | 0 | 2 | 0 → 1 | 0 → 2 |
 
-All 50 held files were assessed in both windows and each lossy delivery. At the primary point, the shorter MP3 arm flagged four genuine files across two groups. Opus flagged two files across two groups. The stricter MP3 point retained both useful locations and dropped two genuine alerts from one group. Both lossy profiles failed the primary addition rule. The stricter MP3 result warrants a separate confirmation using the frozen point and new source groups. The two-second check continues to abstain on lossy uploads.
+All 50 held files were assessed in both windows and each lossy delivery. At the primary point, the shorter MP3 arm flagged four genuine files across two groups. Opus flagged two files across two groups. The stricter MP3 point retained both useful locations and dropped two genuine alerts from one group. Both lossy profiles failed the primary addition rule. The later [MP3 confirmation](audio-short-mp3-confirmation-2026-11-12.md) uses the stricter point unchanged and explains the narrow release scope. The two-second check continues to abstain on Opus.
 
 ## Local FLAC support
 

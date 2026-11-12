@@ -28,7 +28,7 @@ def skipped(reason: str) -> dict:
     return {"schema": SCHEMA, "status": "skipped", "reason": reason, "responses": [], "selected": None}
 
 
-def scan(pcm, spans, classifier, deadline) -> dict:
+def scan(pcm, spans, classifier, deadline, *, codec=None) -> dict:
     intervals = [(a, b) for a, b in GRID if window_in_speech(spans, a / RATE, b / RATE)]
     if not intervals:
         return skipped("No two-second interval contained enough detected speech.")
@@ -38,7 +38,7 @@ def scan(pcm, spans, classifier, deadline) -> dict:
         probability, = classifier.predict([pcm[a:b]])
         responses.append({"start_sample": a, "end_sample": b, "logit": calibration.logit(probability)})
     deadline.check("short voice review")
-    selected = selected_range(responses)
+    selected = selected_range(responses, codec)
     if selected:
         status, reason = "flagged", "A two-second speech window returned an elevated response for review."
     else:
@@ -66,7 +66,8 @@ class ShortVoiceReview(Detector):
         pcm = ctx.outputs.audio.pcm
         spans = ctx.lease.get(ACTIVITY_MODEL).obj.spans(pcm)
         model = ctx.lease.get(PellaVoiceDetector.MODEL_ID).obj
-        review = scan(pcm, spans, model, ctx.deadline)
+        codec = (ctx.outputs.probe or {}).get("source_codec")
+        review = scan(pcm, spans, model, ctx.deadline, codec=codec)
         return DetectorResult(status="ok", details={
             "short_voice_review": review,
             "pcm_sha256": hashlib.sha256(pcm.astype("<f4").tobytes()).hexdigest(),

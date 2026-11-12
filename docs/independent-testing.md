@@ -501,6 +501,9 @@ the exact source sample positions.
 The [short speech codec comparison](audio-short-codec-transfer-2026-11-12.md)
 replays the lossless match and recalculates separate MP3 and Opus points,
 held interval matches, and ordinary-group errors using public window responses.
+The [separate MP3 confirmation](audio-short-mp3-confirmation-2026-11-12.md)
+reuses the stricter MP3 points on different host recordings and source groups.
+It verifies the offset between decoded excerpt time and the original MP3 clock.
 The [two-microphone noise trial](audio-natural-stereo-coherence-2026-11-11.md)
 compares score directions after a fixed filter with two recorded meeting
 backgrounds, six genuine readers and three synthetic generator families.

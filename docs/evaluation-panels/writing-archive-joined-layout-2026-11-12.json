@@ -1,0 +1,5315 @@
+{
+  "schema": "chipmunk.writing-archive-joined-layout-transfer/1",
+  "source_and_method": {
+    "schema": "chipmunk.writing-archive-joined-layout-transfer/1",
+    "method": {
+      "scope": "One extracted plain-text paragraph, exact first and last eight tokens for each consecutive indexed paragraph.",
+      "attribution": "Unique complete sequence of three or more paragraph edges, followed by the unchanged archive fingerprint checks on every recovered span.",
+      "known_edit": "Replace one interior alphabetic token in the third paragraph with a distinct word already present in the same document.",
+      "selection": "Up to five work groups per pinned volume in deterministic hash order, excluding earlier queried works, exact 12-word overlaps and repeated sender keys within this panel. Prefer sender keys absent from prior queries. One extra archive-absent group per volume where eligible.",
+      "controls": "Same-work reversed paragraphs, one paragraph from another source, added unrelated introduction, quote marker, out-of-index and duplicated library entries.",
+      "advance": "At least 12 independent indexed work groups, at least 75% of all exact normalized originals and known edits, and zero incorrect attributions or differences on identical flattened copies."
+    },
+    "archive_sha256": "29c3e843f74bcaa244ee15af6f5cebd572091051614d554823bebab46b7ca24e",
+    "parent_outcomes_sha256": "e89c25697df4759042f00cb2fbabcced9fa1ee94502fdf9a9b055c5125afa399",
+    "volumes": {
+      "frus1961-63v09": "e2f31e6d66b76f4d81c9311661a48ad3679aaf8dbaaddd9a48e2d9f2cae65d31",
+      "frus1964-68v08": "2b11b34daf9ba996254ce33b5dfe68518216e45beeab0199417e519f01e04c86",
+      "frus1964-68v15": "b0925e5f64418901b75f0a3a749c70cf239719cd59a8a90d503787e6313bea5a",
+      "frus1964-68v24": "c0fd378ef1ef3ffc33b28a67a33730672cbd725ca83bb4f2920f60e7be4820a9"
+    },
+    "implementation_sha256": {
+      "document_archive.py": "b73a97629adfc9d2d4d7a28e68d6831b1476bb540a20607004564ed99ca45143",
+      "document_archive_layout.py": "d3796ea4a555820ca8d406868664caffca04182153c42c2fe4a581d03d4c909d",
+      "writing_archive_joined_layout_transfer.py": "b75480d2107a3c1e9d0d54a0486dd25b4d2b7879952427260532325329b544d4"
+    }
+  },
+  "held_inputs": [
+    [
+      "frus1961-63v09/d277",
+      "native_original",
+      "847f1403ad7db941f0b94967917dea46484d55248833a79c5f06f804a56b4e43",
+      "frus1961-63v09/d277",
+      null
+    ],
+    [
+      "frus1961-63v09/d277",
+      "joined_original",
+      "64d1575315024b73138b11bf2cd7248fc6e083ba4b4faf8907b60bf85394f3ed",
+      "frus1961-63v09/d277",
+      null
+    ],
+    [
+      "frus1961-63v09/d277",
+      "joined_edit",
+      "12a833eb3bc1715022f5b038b861d72b4e2444372041cb04a25976e10ea66008",
+      "frus1961-63v09/d277",
+      [
+        1195,
+        1203
+      ]
+    ],
+    [
+      "frus1961-63v09/d277",
+      "reordered",
+      "0925995cdd0bd9a98d043e340621faaf13c6e380267d32d303faa6d52e8a6a78",
+      null,
+      null
+    ],
+    [
+      "frus1961-63v09/d277",
+      "mixed_sources",
+      "2b4e2937860d0e8da5ba794a27df21674620d044aecf6084776743bbc7442e97",
+      null,
+      null
+    ],
+    [
+      "frus1961-63v09/d277",
+      "intro_added",
+      "b85a6f1d32c304439a15ff9a5783fff462182750ca3249ea10032dd811b6c88b",
+      null,
+      null
+    ],
+    [
+      "frus1961-63v09/d277",
+      "quoted",
+      "58d1b8eb6f2245cf07343d6017d2e9ad466f40413708e5dbfdeddf9c5a9cec36",
+      null,
+      null
+    ],
+    [
+      "frus1961-63v09/d277",
+      "duplicate_index",
+      "64d1575315024b73138b11bf2cd7248fc6e083ba4b4faf8907b60bf85394f3ed",
+      null,
+      null
+    ],
+    [
+      "frus1961-63v09/d50",
+      "native_original",
+      "9805446ec3a7a4bd669ad3f0c0e9c6a4a0c74f27c1674fc4373c4deec57bcb78",
+      "frus1961-63v09/d50",
+      null
+    ],
+    [
+      "frus1961-63v09/d50",
+      "joined_original",
+      "9220e30f4eff7b2a68b6c1f11ae0ed5cd72a1c335a13f7f25eb128abd854e842",
+      "frus1961-63v09/d50",
+      null
+    ],
+    [
+      "frus1961-63v09/d50",
+      "joined_edit",
+      "f085ebd44a8538ac1b59cf04e05cad9fc8b0ea32e3091495454453b10dd47e94",
+      "frus1961-63v09/d50",
+      [
+        1055,
+        1060
+      ]
+    ],
+    [
+      "frus1961-63v09/d50",
+      "reordered",
+      "8b0c924e718b5bbdfe43ed84ef0a846282b854f394fcda99bda22da2f4b325f7",
+      null,
+      null
+    ],
+    [
+      "frus1961-63v09/d50",
+      "mixed_sources",
+      "a384e597498d8bff5edffc5644035b8e3cea494c73a848542092d1a7fe55ed83",
+      null,
+      null
+    ],
+    [
+      "frus1961-63v09/d50",
+      "intro_added",
+      "084ef384db4d1a9521eec849b8764722654a5ce4a02642c0d1d6f3a94682c61b",
+      null,
+      null
+    ],
+    [
+      "frus1961-63v09/d50",
+      "quoted",
+      "908abd2870295b152acf77fe362bcc1eaecd17b6ff8041bd6b119287376fd688",
+      null,
+      null
+    ],
+    [
+      "frus1961-63v09/d50",
+      "duplicate_index",
+      "9220e30f4eff7b2a68b6c1f11ae0ed5cd72a1c335a13f7f25eb128abd854e842",
+      null,
+      null
+    ],
+    [
+      "frus1961-63v09/d26",
+      "native_original",
+      "91dbf17b05c6481a3e0ea0b2949bf2638c4c35b396a06f1feb7e75d3eb488128",
+      "frus1961-63v09/d26",
+      null
+    ],
+    [
+      "frus1961-63v09/d26",
+      "joined_original",
+      "e4e280e94fd322deff83950de0260d610ec14c8a3692b535897d2d7d81d4228e",
+      "frus1961-63v09/d26",
+      null
+    ],
+    [
+      "frus1961-63v09/d26",
+      "joined_edit",
+      "212e2a48e53033b5e8d8b4fe1578ec73456a4fda5d06cc68964ac98e6296537f",
+      "frus1961-63v09/d26",
+      [
+        1064,
+        1073
+      ]
+    ],
+    [
+      "frus1961-63v09/d26",
+      "reordered",
+      "2fcbe3a47f6938da8b7d6b143f034d72dbf585024a9b84b0eb69c4d4c79c3c90",
+      null,
+      null
+    ],
+    [
+      "frus1961-63v09/d26",
+      "mixed_sources",
+      "25ff10ceb265819e5efd1bb38d229a929dbb7fd30994d1b064521c42d071004a",
+      null,
+      null
+    ],
+    [
+      "frus1961-63v09/d26",
+      "intro_added",
+      "041e699bb7fb538898897c0e2ab5ceaa0fcacc02944b91ff018649bb67a20d43",
+      null,
+      null
+    ],
+    [
+      "frus1961-63v09/d26",
+      "quoted",
+      "738c6df7bd9f351e7e9774998609a0fe114d06db5fd22775059266d4e610189f",
+      null,
+      null
+    ],
+    [
+      "frus1961-63v09/d26",
+      "duplicate_index",
+      "e4e280e94fd322deff83950de0260d610ec14c8a3692b535897d2d7d81d4228e",
+      null,
+      null
+    ],
+    [
+      "frus1961-63v09/d230",
+      "native_original",
+      "1ae96704515949ab2c396e9649f1d72928d19a92456c21095fb403d9e01aa51b",
+      "frus1961-63v09/d230",
+      null
+    ],
+    [
+      "frus1961-63v09/d230",
+      "joined_original",
+      "185af5985de2be9c3666e8e05d8d320242dd4ffbb552c2e02caf686dff2d5b4b",
+      "frus1961-63v09/d230",
+      null
+    ],
+    [
+      "frus1961-63v09/d230",
+      "joined_edit",
+      "167b1d7e4e7868de8da1dcdda5c73dea86a6aaee857c4f9aeba30c54d9dfb900",
+      "frus1961-63v09/d230",
+      [
+        996,
+        1001
+      ]
+    ],
+    [
+      "frus1961-63v09/d230",
+      "reordered",
+      "e27e2a67f28e24d97f2a844c055c0abd5a8031ec3147854cef06cc1293b33dca",
+      null,
+      null
+    ],
+    [
+      "frus1961-63v09/d230",
+      "mixed_sources",
+      "2bfabf3a4b82a00a686280205ab6f540624c8636b472d452227efb2dcb983beb",
+      null,
+      null
+    ],
+    [
+      "frus1961-63v09/d230",
+      "intro_added",
+      "d55b38df0dcfef5d8deb7f349eb8394a48c8037d2ff8062b90f5c32b0600208f",
+      null,
+      null
+    ],
+    [
+      "frus1961-63v09/d230",
+      "quoted",
+      "e8d093d9e00f3df6dbf4d0d799a13dc1ee0ff96ecb25a183e69f6ed382d35967",
+      null,
+      null
+    ],
+    [
+      "frus1961-63v09/d230",
+      "duplicate_index",
+      "185af5985de2be9c3666e8e05d8d320242dd4ffbb552c2e02caf686dff2d5b4b",
+      null,
+      null
+    ],
+    [
+      "frus1961-63v09/d63",
+      "native_original",
+      "d301ebab2d2339fb282c4bcc48a481b030f4a7ab654d4fcee500b1c21ecf9dad",
+      "frus1961-63v09/d63",
+      null
+    ],
+    [
+      "frus1961-63v09/d63",
+      "joined_original",
+      "43aabf8b0da2bb39e53fb645d240f5391e84675c14df4d8b3789c47a73a1f7e9",
+      "frus1961-63v09/d63",
+      null
+    ],
+    [
+      "frus1961-63v09/d63",
+      "joined_edit",
+      "cb5410de9aadf1f3638ea38b203ab3b8f87b81d830e6f8d2980d6ad4d359a5c6",
+      "frus1961-63v09/d63",
+      [
+        668,
+        675
+      ]
+    ],
+    [
+      "frus1961-63v09/d63",
+      "reordered",
+      "82d41732e36488e8a7e6b5fea5ced7e4e5e2d7ccfda6a001d5319f78bf5b3f11",
+      null,
+      null
+    ],
+    [
+      "frus1961-63v09/d63",
+      "mixed_sources",
+      "945052c96d8791c45292ddc4d80aac41e5ae10feec47ea0114529b75ea4b7684",
+      null,
+      null
+    ],
+    [
+      "frus1961-63v09/d63",
+      "intro_added",
+      "1cf2e7429814011a22b8b461973ca547ab3fd78b12cdddf82e642a65fd21e99f",
+      null,
+      null
+    ],
+    [
+      "frus1961-63v09/d63",
+      "quoted",
+      "80df58d908ae369f1385705acdcc57d561dbe68436d81f05dbd5bb4723fa945f",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v08/d119",
+      "native_original",
+      "803b2f3ef030f35bb3ee90820b31fe3e02918e19e4b8ca2702d6ac2d7be0723c",
+      "frus1964-68v08/d119",
+      null
+    ],
+    [
+      "frus1964-68v08/d119",
+      "joined_original",
+      "5d169f161fa83f8248dd34b6d8a579667838fd3520a91d772855ee1c958ad2a6",
+      "frus1964-68v08/d119",
+      null
+    ],
+    [
+      "frus1964-68v08/d119",
+      "joined_edit",
+      "184176760eea4994707fa1fef796c9d5136fa5b3313d29f85033c58dc3de97bb",
+      "frus1964-68v08/d119",
+      [
+        1005,
+        1009
+      ]
+    ],
+    [
+      "frus1964-68v08/d119",
+      "reordered",
+      "ab322c3a50c9ac1a6025060a1ff751d488700f048a45bf56bf7d22379ad74fb3",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v08/d119",
+      "mixed_sources",
+      "192e22228880af67746e8437d9d62222a83e9fa14adb43820c58a8e6aed33fba",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v08/d119",
+      "intro_added",
+      "8a812c868e1cea5aedeef9810623b0e4521162b86428f74f45d00cdf60d5aef7",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v08/d119",
+      "quoted",
+      "eee40267b726f910aa40907512676378c3397fb0d5ea26281250ddedd166cd03",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v08/d54",
+      "native_original",
+      "653e0ac66ba81c9d6858673470c167eeccb60dc6259dea7167fb64402199d696",
+      "frus1964-68v08/d54",
+      null
+    ],
+    [
+      "frus1964-68v08/d54",
+      "joined_original",
+      "be8f59d4fdad8ca787f49feed6ac5d295ed4d3c6d0036516c960751680d0133e",
+      "frus1964-68v08/d54",
+      null
+    ],
+    [
+      "frus1964-68v08/d54",
+      "joined_edit",
+      "ea9078f527f361b8ed78fb318dd723efda64cd1f73b2b78ab2da7fb752e39f17",
+      "frus1964-68v08/d54",
+      [
+        1098,
+        1106
+      ]
+    ],
+    [
+      "frus1964-68v08/d54",
+      "reordered",
+      "829e59bd79879d12c920dbf860b42b0914ad4b2cbfe046f140da0a3e6ff363db",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v08/d54",
+      "mixed_sources",
+      "ef17a1b567c128168b2a5dfacaf78ef26c126cc9f0f5fe1b6c712e049361812d",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v08/d54",
+      "intro_added",
+      "a8b0f59ea517afb2fd60f941910ec6501f2d2646a8b5cf0f9accbca704d6654d",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v08/d54",
+      "quoted",
+      "4a7ed71c58184b08dd31e97c2345bb774aa6c4a0a7186432db3f1c8953f629cf",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v08/d198",
+      "native_original",
+      "52b23ed3cc84bc2f67e95a4c2bdf6daa6efe7907c21f160a7ed97304575ce5f6",
+      "frus1964-68v08/d198",
+      null
+    ],
+    [
+      "frus1964-68v08/d198",
+      "joined_original",
+      "db6a8b8f252df377f3edec1ed459e1713ef2074d1c82051bdd4b5ce7e7d5773f",
+      "frus1964-68v08/d198",
+      null
+    ],
+    [
+      "frus1964-68v08/d198",
+      "joined_edit",
+      "ba288fd2756e96d369340717dff97f36142d7e18b6db628f08ffda9d258494d2",
+      "frus1964-68v08/d198",
+      [
+        531,
+        535
+      ]
+    ],
+    [
+      "frus1964-68v08/d198",
+      "reordered",
+      "1d65ecb472625c800e6d12551cf7f94758bf20b3b6f4c2801d4b464c4496e401",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v08/d198",
+      "mixed_sources",
+      "eb901c515bbcd8a32d461fbe01c8c8393e4784e82e83af2038d0d28366598a48",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v08/d198",
+      "intro_added",
+      "73cc6e788b63959ceadcf07ba988b49740a2e45701cec060bc1a56e6e44dd8c8",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v08/d198",
+      "quoted",
+      "0ee3689a1758c8b7115482f4ccb5a74bf0b9f3f8b0789ef542c0ba16b5f37749",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v08/d178",
+      "native_original",
+      "fe869540fa386bdc2f5112f1a434a32148ecf7893f893bed48a05e0989d6b5bf",
+      "frus1964-68v08/d178",
+      null
+    ],
+    [
+      "frus1964-68v08/d178",
+      "joined_original",
+      "a13dcc287556ffcc88914e2fe230dc4d75887282d3c04e7d8453856419b7a955",
+      "frus1964-68v08/d178",
+      null
+    ],
+    [
+      "frus1964-68v08/d178",
+      "joined_edit",
+      "9affc2d3ae2fd929742c57aee81a58386a92498dbf2f26c18fddcf22ad4eea2b",
+      "frus1964-68v08/d178",
+      [
+        1267,
+        1273
+      ]
+    ],
+    [
+      "frus1964-68v08/d178",
+      "reordered",
+      "56da9945cb34aa676dbe409c52416321dca4dfd91aaddc101abfe0071656548e",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v08/d178",
+      "mixed_sources",
+      "0a6e73ee0684a8b98893632a0b9229481f34dfd8a2b8bcd9603a0c8667104916",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v08/d178",
+      "intro_added",
+      "df5261e8d74d424fcff7d7bb6026ab3f4bac62a079d31f8e53537e413b520fef",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v08/d178",
+      "quoted",
+      "a52060adca6f6ce13f72fd98cbc40af771fc68ad867d8772653b67bf833f2195",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v08/d217",
+      "native_original",
+      "e6d228a8e2adbe58f3a0bd7d6adf795d0bee94468c61d58d30af64ea2d8ce030",
+      "frus1964-68v08/d217",
+      null
+    ],
+    [
+      "frus1964-68v08/d217",
+      "joined_original",
+      "c0aa62c3d7b92f36b27795c78d499069a67e434e11f90b47fd256d7c9209388b",
+      "frus1964-68v08/d217",
+      null
+    ],
+    [
+      "frus1964-68v08/d217",
+      "joined_edit",
+      "d1d62b67c065fa9a815a9470c5ac4f1fd4e35d90484bc4edbf1e0ee0ed8302de",
+      "frus1964-68v08/d217",
+      [
+        1436,
+        1441
+      ]
+    ],
+    [
+      "frus1964-68v08/d217",
+      "reordered",
+      "5d1cfbcd4f961c47767c9e03330b9eddcc3702a73a2ba7cee8e2300f4912f20f",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v08/d217",
+      "mixed_sources",
+      "d993037d2785c637d6cbe13990804e5c1bf83e2d191fbd98fd56105f716665bf",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v08/d217",
+      "intro_added",
+      "1ea9bb0b7ab033d727be013631e8ccc3e92b88fc2d97018878373a15423cd5ea",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v08/d217",
+      "quoted",
+      "daf4b6f10739b494eb56430578f6ed1d7cab63b45e1ad4d8ab95c101943152f7",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v15/d35",
+      "native_original",
+      "21918733cd7f500f5ad3ab005745a138928d515f1ee92b9e18148898e6f1b456",
+      "frus1964-68v15/d35",
+      null
+    ],
+    [
+      "frus1964-68v15/d35",
+      "joined_original",
+      "13275b1a13a9db2135557262944fd49aea54bd2fda84488702754f32c950fc94",
+      "frus1964-68v15/d35",
+      null
+    ],
+    [
+      "frus1964-68v15/d35",
+      "joined_edit",
+      "67aaf135af3b8627bb9251b48609eb479983cf4942176d405756b6671de40dd5",
+      "frus1964-68v15/d35",
+      [
+        1626,
+        1632
+      ]
+    ],
+    [
+      "frus1964-68v15/d35",
+      "reordered",
+      "232a27be31cbe6c18910f19d4fbac81350e18d28c5253148ca6e5a328bf6173a",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v15/d35",
+      "mixed_sources",
+      "0b6de9a888db982b13794ec4c53fb82f2190cadfae3cb77f700166d1f57d58eb",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v15/d35",
+      "intro_added",
+      "88c1a00ae3187b5e001ccdcfd9f01e2889790ae9f3f4a318cf6a8d4df6c6689e",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v15/d35",
+      "quoted",
+      "d596ca1ac6874511a5533da3138f32773b1b31c592d463b903ad54a4d3a46a36",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v24/d9",
+      "native_original",
+      "79b761312dc9da84898da50b1629f084424d26d7039eec5906756a2ae370fc6d",
+      "frus1964-68v24/d9",
+      null
+    ],
+    [
+      "frus1964-68v24/d9",
+      "joined_original",
+      "bac6233d87b377f63c2ea3f7886a57089236eeed6c4e8cf5ec90f18a31f15712",
+      "frus1964-68v24/d9",
+      null
+    ],
+    [
+      "frus1964-68v24/d9",
+      "joined_edit",
+      "1b1d17cf91dd5054ea22163fcd8fcc318c32a8a6821ca394b7f43f3cf06e11a2",
+      "frus1964-68v24/d9",
+      [
+        1490,
+        1495
+      ]
+    ],
+    [
+      "frus1964-68v24/d9",
+      "reordered",
+      "f796befbf4c337aa93aebbe7874371f4f26439c0de984ae3834509f2ea42d6da",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v24/d9",
+      "mixed_sources",
+      "86852d6975e58af80c7a92fb1be8824af98f9c33eb1980ee689aa249f7895df4",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v24/d9",
+      "intro_added",
+      "7b3121f847e3cbd7cff9023783dd87a7b4f315f09142fba27334ef37fdca9670",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v24/d9",
+      "quoted",
+      "2a792df3469338576e61161130698118efa65ec39658ec0cbabe4e8697558959",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v24/d305",
+      "native_original",
+      "bbd52b31c7c1d245d2fffd558434245efde04ae9874192dd2983ca6b25733822",
+      "frus1964-68v24/d305",
+      null
+    ],
+    [
+      "frus1964-68v24/d305",
+      "joined_original",
+      "a40c42414420a24de266da14e39293d737a55fa077cd643901eaf5618775e63d",
+      "frus1964-68v24/d305",
+      null
+    ],
+    [
+      "frus1964-68v24/d305",
+      "joined_edit",
+      "a8d279aeffe7ea97d6a137dc5ba7372a15c3411b5a9c519426fedcdeaeac5a3a",
+      "frus1964-68v24/d305",
+      [
+        1445,
+        1454
+      ]
+    ],
+    [
+      "frus1964-68v24/d305",
+      "reordered",
+      "95cb4511f004070a80c8c817a4072b997d5b951e1f9359988a5466871a8505cf",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v24/d305",
+      "mixed_sources",
+      "02eef8c940519a253efd951a28aba57de887094da5a059a39cddeb1e9982ed3d",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v24/d305",
+      "intro_added",
+      "983536e65ba1c68a40f0667b3ae474c329c62f426a28f7a788e992803eae5c81",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v24/d305",
+      "quoted",
+      "dd909c212471f61ef2b90c64bb7745c839d7a9b668e3c76ef151bfc05481944d",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v24/d249",
+      "native_original",
+      "61502a70cfb39237a6adac0f7d6af1b4dfc66fc7c56267b7c58b39e2289949b1",
+      "frus1964-68v24/d249",
+      null
+    ],
+    [
+      "frus1964-68v24/d249",
+      "joined_original",
+      "55d70faf6f25e7219d9ccc948e017bbf8971aedcc65285d8317b10cf53e8def1",
+      "frus1964-68v24/d249",
+      null
+    ],
+    [
+      "frus1964-68v24/d249",
+      "joined_edit",
+      "1c115c1f1d3757c80faf6857546243e61f92244e293712b7cb12effd45adebc1",
+      "frus1964-68v24/d249",
+      [
+        893,
+        897
+      ]
+    ],
+    [
+      "frus1964-68v24/d249",
+      "reordered",
+      "c09a8b61fb416c63e5fec28dd2aa52b98a9b30d5d908190be9105963c269b273",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v24/d249",
+      "mixed_sources",
+      "f176eeacbef661e414842b6702cfe1b8e3bd47d04c9ac902038b63b952dc5d72",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v24/d249",
+      "intro_added",
+      "e1cad268c2c3c798e838784be0670baef63a6ade061980b34aa7111a96533e44",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v24/d249",
+      "quoted",
+      "17cb9b04c7e87fcbd826881e204b2a5f4e8584ed6e4b38a475f5c0a4454ebd9c",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v24/d337",
+      "native_original",
+      "bea6af71c4db1669668e7c75840dfeba8884441d44a0eb31b32d28c7fed53140",
+      "frus1964-68v24/d337",
+      null
+    ],
+    [
+      "frus1964-68v24/d337",
+      "joined_original",
+      "3ea31ba7de775b365edbb19bf871ac40b09ce9f4c4cf2e604c0191cfdb31a38f",
+      "frus1964-68v24/d337",
+      null
+    ],
+    [
+      "frus1964-68v24/d337",
+      "joined_edit",
+      "adea1468def19d59a674d24d3b9e514daf9748b27bdebb2b5583515c9ad82832",
+      "frus1964-68v24/d337",
+      [
+        1076,
+        1080
+      ]
+    ],
+    [
+      "frus1964-68v24/d337",
+      "reordered",
+      "efd9965afac2ed4219b828f84dccf5ab42832f2344ee4da7bae348195f352eb2",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v24/d337",
+      "mixed_sources",
+      "ed0a5d8171a7d97612ef1a00759fc99adb6ed31153c540053bac09a5ea37a5d9",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v24/d337",
+      "intro_added",
+      "97f4f3506ebc593ae3aac171819b7c5bef1a431bcaf71022d342872196357d24",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v24/d337",
+      "quoted",
+      "66990684a70841a73190e427f23e77689981fd908ce44c210c8c86a2d23cb94a",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v24/d605",
+      "native_original",
+      "4ee953f8be50dcf3e24aaff395762a549e6dfdbdddb4f15879e8410b6ec98825",
+      "frus1964-68v24/d605",
+      null
+    ],
+    [
+      "frus1964-68v24/d605",
+      "joined_original",
+      "e4494be7098fa582c48edaab1d30d19269d65158d3bc0a616acc02b341d9ddd8",
+      "frus1964-68v24/d605",
+      null
+    ],
+    [
+      "frus1964-68v24/d605",
+      "joined_edit",
+      "6bff4da2c68c4c2712bc4fa2f3f574687f1b5c2ca1531a5a8489936836b6459e",
+      "frus1964-68v24/d605",
+      [
+        551,
+        556
+      ]
+    ],
+    [
+      "frus1964-68v24/d605",
+      "reordered",
+      "b4f9fa0ba1de7ec201c56070733f73d6437a2acae99f3f4d247e728ed0761b70",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v24/d605",
+      "mixed_sources",
+      "06f0c531ac7c35c1b0bab2b2e2c515f2f5be067f876fb841c037ee5290b4d7f4",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v24/d605",
+      "intro_added",
+      "32c109ed6897e481d80d74c202d57f39e8d9472aa1f28ffadd3dad048911e1ce",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v24/d605",
+      "quoted",
+      "517afdd1a2106b258ea6796e375c0b65ec728100fdd2650602a3075fa738386c",
+      null,
+      null
+    ],
+    [
+      "frus1961-63v09/d270",
+      "out_of_index",
+      "faf2e89e61bff5f01b730236e7d081bb99b9a29548af35b48ff7f6fe929f5a08",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v08/d317",
+      "out_of_index",
+      "36b50d4a79ce500119aa77bc5a7740fad8d325a90bb84a9e33294e6037cb9e53",
+      null,
+      null
+    ],
+    [
+      "frus1964-68v24/d357",
+      "out_of_index",
+      "29cd12aa7323e1e0d21e7de77169964629176de0f10c22422ec856dd708804eb",
+      null,
+      null
+    ],
+    [
+      "frus1961-63v09/d262",
+      "earlier_generated_reflow",
+      "aa05803003226157826c8ee7e71318c82070262c54bcb1dd583fa42f67be6992",
+      "frus1961-63v09/d262",
+      [
+        848,
+        966
+      ]
+    ],
+    [
+      "frus1961-63v09/d120",
+      "earlier_generated_reflow",
+      "3bd25ac7d4f25ad9827b4ab4a093fce371882fee438802fb425484975099f097",
+      "frus1961-63v09/d120",
+      [
+        1331,
+        1411
+      ]
+    ],
+    [
+      "frus1961-63v09/d120",
+      "earlier_generated_reflow",
+      "009b65eb7dede348bb77eed6a5244adaf3f51c8c70682da13f3629f9442d6907",
+      "frus1961-63v09/d120",
+      [
+        1331,
+        1438
+      ]
+    ],
+    [
+      "frus1961-63v09/d138",
+      "earlier_generated_reflow",
+      "3bc646576fe655fc4d6e8f6572fe6e24ee1c219249f70c8b313b212b1a84e51e",
+      "frus1961-63v09/d138",
+      [
+        369,
+        489
+      ]
+    ],
+    [
+      "frus1961-63v09/d138",
+      "earlier_generated_reflow",
+      "ffa2a0e32c9d937ea22e180005f55cb8ead2e686d177a620f0a39145ba22dc93",
+      "frus1961-63v09/d138",
+      [
+        369,
+        496
+      ]
+    ],
+    [
+      "frus1964-68v08/d180",
+      "earlier_generated_reflow",
+      "8f3ca6e95ac2f04c3272cdf4b7c393eb98fafde61f544e297c0015b03850bc08",
+      "frus1964-68v08/d180",
+      [
+        917,
+        1015
+      ]
+    ],
+    [
+      "frus1964-68v08/d124",
+      "earlier_generated_reflow",
+      "2eaeb9af5aa794d707b3d3d2ea71e3ce85fc39debc2d09acd806c7d24e0652b1",
+      "frus1964-68v08/d124",
+      [
+        1090,
+        1223
+      ]
+    ],
+    [
+      "frus1964-68v08/d64",
+      "earlier_generated_reflow",
+      "bfe13226fa5d30c27d421a8e701bab52c9fd6483b100bccd9081dfa21e08332e",
+      "frus1964-68v08/d64",
+      [
+        2341,
+        2471
+      ]
+    ],
+    [
+      "frus1964-68v08/d64",
+      "earlier_generated_reflow",
+      "7a84f1b94de8c977a4c9fbfc9c6b148cd88582efa729cc90c63bc82a8aa44d1e",
+      "frus1964-68v08/d64",
+      [
+        2341,
+        2481
+      ]
+    ],
+    [
+      "frus1964-68v15/d72",
+      "earlier_generated_reflow",
+      "ed82ad3d43030ae22336c3a2706d57400ba795f350f70e022e2cba18c0747e2a",
+      "frus1964-68v15/d72",
+      [
+        3811,
+        3930
+      ]
+    ],
+    [
+      "frus1964-68v15/d72",
+      "earlier_generated_reflow",
+      "411553f2a36c3cce1e3dfccf69aa99ac4f7f0f535d39d8a1489322401acc6977",
+      "frus1964-68v15/d72",
+      [
+        3811,
+        3944
+      ]
+    ],
+    [
+      "frus1964-68v15/d122",
+      "earlier_generated_reflow",
+      "8218996fe4aedea66cd2ca10201593ac5133ca8d1a689b0a59ccbd29a19ab6bc",
+      "frus1964-68v15/d122",
+      [
+        1972,
+        2121
+      ]
+    ],
+    [
+      "frus1964-68v15/d268",
+      "earlier_generated_reflow",
+      "f0017fb7e271ae03415beb5d39a345ffc7a2803330c98663a1334a3e24a8e5cc",
+      "frus1964-68v15/d268",
+      [
+        988,
+        1065
+      ]
+    ],
+    [
+      "frus1964-68v15/d39",
+      "earlier_generated_reflow",
+      "d76d7c03cee0ac46d48dfdf5bbfe9fd3819bb57f1a6d5e6a9b0af2bf195cc024",
+      "frus1964-68v15/d39",
+      [
+        224,
+        325
+      ]
+    ],
+    [
+      "frus1964-68v15/d39",
+      "earlier_generated_reflow",
+      "59b1c30cbcd6af7321dd5046b9f8c09c8c715212708915d3666298bdbdc85ac8",
+      "frus1964-68v15/d39",
+      [
+        224,
+        344
+      ]
+    ],
+    [
+      "frus1964-68v24/d208",
+      "earlier_generated_reflow",
+      "19a5e2583f5ccf58030949895f2a29919084e6997983dfcb59db33321b5aa0dc",
+      "frus1964-68v24/d208",
+      [
+        895,
+        1023
+      ]
+    ],
+    [
+      "frus1964-68v24/d208",
+      "earlier_generated_reflow",
+      "9ae889b945bdfce73e6c8f02b5293d9dd1e7afedd98123ec8ed434f063b9fcd4",
+      "frus1964-68v24/d208",
+      [
+        895,
+        1009
+      ]
+    ],
+    [
+      "frus1964-68v24/d247",
+      "earlier_generated_reflow",
+      "4c9231aeac4cd5a1a0ee1413c7c0bb97f2c2cd001bbbc76a38c1fe18c52b54c0",
+      "frus1964-68v24/d247",
+      [
+        1935,
+        2093
+      ]
+    ],
+    [
+      "frus1964-68v24/d247",
+      "earlier_generated_reflow",
+      "0e4d977e8359a66081b63815832b0da1406d670458d6ab35d2a22699d486b0e1",
+      "frus1964-68v24/d247",
+      [
+        1935,
+        2105
+      ]
+    ],
+    [
+      "frus1964-68v24/d395",
+      "earlier_generated_reflow",
+      "e1e8a4e91183379b32f658ad96079b582a56ddfd60d9290427d068ac1e025cd6",
+      "frus1964-68v24/d395",
+      [
+        2447,
+        2545
+      ]
+    ],
+    [
+      "frus1964-68v24/d188",
+      "earlier_generated_reflow",
+      "30157ff102e3a35367cbe75c089b59441fef967e40c35aba87b511128e13f2a6",
+      "frus1964-68v24/d188",
+      [
+        1267,
+        1383
+      ]
+    ]
+  ],
+  "outcomes": [
+    {
+      "group": "frus1961-63v09/d277",
+      "role": "native_original",
+      "source": "frus1961-63v09/d277",
+      "baseline": "frus1961-63v09/d277",
+      "expected": "frus1961-63v09/d277",
+      "truth": null,
+      "aligned": [
+        [
+          1,
+          0,
+          215
+        ],
+        [
+          2,
+          217,
+          909
+        ],
+        [
+          3,
+          911,
+          1622
+        ],
+        [
+          4,
+          1624,
+          2266
+        ],
+        [
+          5,
+          2268,
+          2913
+        ],
+        [
+          6,
+          2915,
+          3529
+        ]
+      ],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1961-63v09/d277",
+      "role": "joined_original",
+      "source": "frus1961-63v09/d277",
+      "baseline": null,
+      "expected": "frus1961-63v09/d277",
+      "truth": null,
+      "aligned": [
+        [
+          1,
+          0,
+          215
+        ],
+        [
+          2,
+          216,
+          908
+        ],
+        [
+          3,
+          909,
+          1620
+        ],
+        [
+          4,
+          1621,
+          2263
+        ],
+        [
+          5,
+          2264,
+          2909
+        ],
+        [
+          6,
+          2910,
+          3524
+        ]
+      ],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1961-63v09/d277",
+      "role": "joined_edit",
+      "source": "frus1961-63v09/d277",
+      "baseline": null,
+      "expected": "frus1961-63v09/d277",
+      "truth": [
+        1195,
+        1203
+      ],
+      "aligned": [
+        [
+          1,
+          0,
+          215
+        ],
+        [
+          2,
+          216,
+          908
+        ],
+        [
+          3,
+          909,
+          1620
+        ],
+        [
+          4,
+          1621,
+          2263
+        ],
+        [
+          5,
+          2264,
+          2909
+        ],
+        [
+          6,
+          2910,
+          3524
+        ]
+      ],
+      "changes": [
+        [
+          1195,
+          1203
+        ]
+      ],
+      "useful": true,
+      "exact": true
+    },
+    {
+      "group": "frus1961-63v09/d277",
+      "role": "reordered",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1961-63v09/d277",
+      "role": "mixed_sources",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1961-63v09/d277",
+      "role": "intro_added",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1961-63v09/d277",
+      "role": "quoted",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1961-63v09/d277",
+      "role": "duplicate_index",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1961-63v09/d50",
+      "role": "native_original",
+      "source": "frus1961-63v09/d50",
+      "baseline": "frus1961-63v09/d50",
+      "expected": "frus1961-63v09/d50",
+      "truth": null,
+      "aligned": [
+        [
+          1,
+          0,
+          310
+        ],
+        [
+          2,
+          312,
+          686
+        ],
+        [
+          3,
+          688,
+          1609
+        ],
+        [
+          4,
+          1611,
+          2646
+        ],
+        [
+          5,
+          2648,
+          2974
+        ],
+        [
+          6,
+          2976,
+          3182
+        ]
+      ],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1961-63v09/d50",
+      "role": "joined_original",
+      "source": "frus1961-63v09/d50",
+      "baseline": null,
+      "expected": "frus1961-63v09/d50",
+      "truth": null,
+      "aligned": [
+        [
+          1,
+          0,
+          310
+        ],
+        [
+          2,
+          311,
+          685
+        ],
+        [
+          3,
+          686,
+          1607
+        ],
+        [
+          4,
+          1608,
+          2643
+        ],
+        [
+          5,
+          2644,
+          2970
+        ],
+        [
+          6,
+          2971,
+          3177
+        ]
+      ],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1961-63v09/d50",
+      "role": "joined_edit",
+      "source": "frus1961-63v09/d50",
+      "baseline": null,
+      "expected": "frus1961-63v09/d50",
+      "truth": [
+        1055,
+        1060
+      ],
+      "aligned": [
+        [
+          1,
+          0,
+          310
+        ],
+        [
+          2,
+          311,
+          685
+        ],
+        [
+          3,
+          686,
+          1607
+        ],
+        [
+          4,
+          1608,
+          2643
+        ],
+        [
+          5,
+          2644,
+          2970
+        ],
+        [
+          6,
+          2971,
+          3177
+        ]
+      ],
+      "changes": [
+        [
+          1055,
+          1060
+        ]
+      ],
+      "useful": true,
+      "exact": true
+    },
+    {
+      "group": "frus1961-63v09/d50",
+      "role": "reordered",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1961-63v09/d50",
+      "role": "mixed_sources",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1961-63v09/d50",
+      "role": "intro_added",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1961-63v09/d50",
+      "role": "quoted",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1961-63v09/d50",
+      "role": "duplicate_index",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1961-63v09/d26",
+      "role": "native_original",
+      "source": "frus1961-63v09/d26",
+      "baseline": "frus1961-63v09/d26",
+      "expected": "frus1961-63v09/d26",
+      "truth": null,
+      "aligned": [
+        [
+          1,
+          0,
+          369
+        ],
+        [
+          2,
+          371,
+          755
+        ],
+        [
+          3,
+          757,
+          1504
+        ],
+        [
+          4,
+          1506,
+          2029
+        ],
+        [
+          5,
+          2031,
+          2335
+        ],
+        [
+          6,
+          2337,
+          3456
+        ]
+      ],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1961-63v09/d26",
+      "role": "joined_original",
+      "source": "frus1961-63v09/d26",
+      "baseline": null,
+      "expected": "frus1961-63v09/d26",
+      "truth": null,
+      "aligned": [
+        [
+          1,
+          0,
+          369
+        ],
+        [
+          2,
+          370,
+          754
+        ],
+        [
+          3,
+          755,
+          1502
+        ],
+        [
+          4,
+          1503,
+          2026
+        ],
+        [
+          5,
+          2027,
+          2331
+        ],
+        [
+          6,
+          2332,
+          3451
+        ]
+      ],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1961-63v09/d26",
+      "role": "joined_edit",
+      "source": "frus1961-63v09/d26",
+      "baseline": null,
+      "expected": "frus1961-63v09/d26",
+      "truth": [
+        1064,
+        1073
+      ],
+      "aligned": [
+        [
+          1,
+          0,
+          369
+        ],
+        [
+          2,
+          370,
+          754
+        ],
+        [
+          3,
+          755,
+          1502
+        ],
+        [
+          4,
+          1503,
+          2026
+        ],
+        [
+          5,
+          2027,
+          2331
+        ],
+        [
+          6,
+          2332,
+          3451
+        ]
+      ],
+      "changes": [
+        [
+          1064,
+          1073
+        ]
+      ],
+      "useful": true,
+      "exact": true
+    },
+    {
+      "group": "frus1961-63v09/d26",
+      "role": "reordered",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1961-63v09/d26",
+      "role": "mixed_sources",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1961-63v09/d26",
+      "role": "intro_added",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1961-63v09/d26",
+      "role": "quoted",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1961-63v09/d26",
+      "role": "duplicate_index",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1961-63v09/d230",
+      "role": "native_original",
+      "source": "frus1961-63v09/d230",
+      "baseline": "frus1961-63v09/d230",
+      "expected": "frus1961-63v09/d230",
+      "truth": null,
+      "aligned": [
+        [
+          1,
+          0,
+          183
+        ],
+        [
+          2,
+          185,
+          687
+        ],
+        [
+          3,
+          689,
+          1457
+        ],
+        [
+          4,
+          1459,
+          1779
+        ],
+        [
+          5,
+          1781,
+          2578
+        ],
+        [
+          6,
+          2580,
+          3092
+        ]
+      ],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1961-63v09/d230",
+      "role": "joined_original",
+      "source": "frus1961-63v09/d230",
+      "baseline": null,
+      "expected": "frus1961-63v09/d230",
+      "truth": null,
+      "aligned": [
+        [
+          1,
+          0,
+          183
+        ],
+        [
+          2,
+          184,
+          686
+        ],
+        [
+          3,
+          687,
+          1455
+        ],
+        [
+          4,
+          1456,
+          1776
+        ],
+        [
+          5,
+          1777,
+          2574
+        ],
+        [
+          6,
+          2575,
+          3087
+        ]
+      ],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1961-63v09/d230",
+      "role": "joined_edit",
+      "source": "frus1961-63v09/d230",
+      "baseline": null,
+      "expected": "frus1961-63v09/d230",
+      "truth": [
+        996,
+        1001
+      ],
+      "aligned": [
+        [
+          1,
+          0,
+          183
+        ],
+        [
+          2,
+          184,
+          686
+        ],
+        [
+          3,
+          687,
+          1455
+        ],
+        [
+          4,
+          1456,
+          1776
+        ],
+        [
+          5,
+          1777,
+          2574
+        ],
+        [
+          6,
+          2575,
+          3087
+        ]
+      ],
+      "changes": [
+        [
+          996,
+          1001
+        ]
+      ],
+      "useful": true,
+      "exact": true
+    },
+    {
+      "group": "frus1961-63v09/d230",
+      "role": "reordered",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1961-63v09/d230",
+      "role": "mixed_sources",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1961-63v09/d230",
+      "role": "intro_added",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1961-63v09/d230",
+      "role": "quoted",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1961-63v09/d230",
+      "role": "duplicate_index",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1961-63v09/d63",
+      "role": "native_original",
+      "source": "frus1961-63v09/d63",
+      "baseline": "frus1961-63v09/d63",
+      "expected": "frus1961-63v09/d63",
+      "truth": null,
+      "aligned": [
+        [
+          1,
+          0,
+          179
+        ],
+        [
+          2,
+          181,
+          521
+        ],
+        [
+          3,
+          523,
+          878
+        ],
+        [
+          4,
+          880,
+          1162
+        ],
+        [
+          5,
+          1164,
+          1370
+        ],
+        [
+          6,
+          1372,
+          1635
+        ]
+      ],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1961-63v09/d63",
+      "role": "joined_original",
+      "source": "frus1961-63v09/d63",
+      "baseline": null,
+      "expected": "frus1961-63v09/d63",
+      "truth": null,
+      "aligned": [
+        [
+          1,
+          0,
+          179
+        ],
+        [
+          2,
+          180,
+          520
+        ],
+        [
+          3,
+          521,
+          876
+        ],
+        [
+          4,
+          877,
+          1159
+        ],
+        [
+          5,
+          1160,
+          1366
+        ],
+        [
+          6,
+          1367,
+          1630
+        ]
+      ],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1961-63v09/d63",
+      "role": "joined_edit",
+      "source": "frus1961-63v09/d63",
+      "baseline": null,
+      "expected": "frus1961-63v09/d63",
+      "truth": [
+        668,
+        675
+      ],
+      "aligned": [
+        [
+          1,
+          0,
+          179
+        ],
+        [
+          2,
+          180,
+          520
+        ],
+        [
+          3,
+          521,
+          876
+        ],
+        [
+          4,
+          877,
+          1159
+        ],
+        [
+          5,
+          1160,
+          1366
+        ],
+        [
+          6,
+          1367,
+          1630
+        ]
+      ],
+      "changes": [
+        [
+          668,
+          675
+        ]
+      ],
+      "useful": true,
+      "exact": true
+    },
+    {
+      "group": "frus1961-63v09/d63",
+      "role": "reordered",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1961-63v09/d63",
+      "role": "mixed_sources",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1961-63v09/d63",
+      "role": "intro_added",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1961-63v09/d63",
+      "role": "quoted",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v08/d119",
+      "role": "native_original",
+      "source": "frus1964-68v08/d119",
+      "baseline": "frus1964-68v08/d119",
+      "expected": "frus1964-68v08/d119",
+      "truth": null,
+      "aligned": [
+        [
+          2,
+          0,
+          538
+        ],
+        [
+          3,
+          540,
+          863
+        ],
+        [
+          4,
+          865,
+          1195
+        ],
+        [
+          5,
+          1197,
+          1682
+        ],
+        [
+          6,
+          1684,
+          2284
+        ],
+        [
+          7,
+          2286,
+          2641
+        ]
+      ],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v08/d119",
+      "role": "joined_original",
+      "source": "frus1964-68v08/d119",
+      "baseline": null,
+      "expected": "frus1964-68v08/d119",
+      "truth": null,
+      "aligned": [
+        [
+          2,
+          0,
+          538
+        ],
+        [
+          3,
+          539,
+          862
+        ],
+        [
+          4,
+          863,
+          1193
+        ],
+        [
+          5,
+          1194,
+          1679
+        ],
+        [
+          6,
+          1680,
+          2280
+        ],
+        [
+          7,
+          2281,
+          2636
+        ]
+      ],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v08/d119",
+      "role": "joined_edit",
+      "source": "frus1964-68v08/d119",
+      "baseline": null,
+      "expected": "frus1964-68v08/d119",
+      "truth": [
+        1005,
+        1009
+      ],
+      "aligned": [
+        [
+          2,
+          0,
+          538
+        ],
+        [
+          3,
+          539,
+          862
+        ],
+        [
+          4,
+          863,
+          1193
+        ],
+        [
+          5,
+          1194,
+          1679
+        ],
+        [
+          6,
+          1680,
+          2280
+        ],
+        [
+          7,
+          2281,
+          2636
+        ]
+      ],
+      "changes": [
+        [
+          1005,
+          1009
+        ]
+      ],
+      "useful": true,
+      "exact": true
+    },
+    {
+      "group": "frus1964-68v08/d119",
+      "role": "reordered",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v08/d119",
+      "role": "mixed_sources",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v08/d119",
+      "role": "intro_added",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v08/d119",
+      "role": "quoted",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v08/d54",
+      "role": "native_original",
+      "source": "frus1964-68v08/d54",
+      "baseline": "frus1964-68v08/d54",
+      "expected": "frus1964-68v08/d54",
+      "truth": null,
+      "aligned": [
+        [
+          2,
+          0,
+          293
+        ],
+        [
+          3,
+          295,
+          851
+        ],
+        [
+          4,
+          853,
+          1461
+        ],
+        [
+          5,
+          1463,
+          2114
+        ],
+        [
+          6,
+          2116,
+          2532
+        ],
+        [
+          7,
+          2534,
+          2868
+        ]
+      ],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v08/d54",
+      "role": "joined_original",
+      "source": "frus1964-68v08/d54",
+      "baseline": null,
+      "expected": "frus1964-68v08/d54",
+      "truth": null,
+      "aligned": [
+        [
+          2,
+          0,
+          293
+        ],
+        [
+          3,
+          294,
+          850
+        ],
+        [
+          4,
+          851,
+          1459
+        ],
+        [
+          5,
+          1460,
+          2111
+        ],
+        [
+          6,
+          2112,
+          2528
+        ],
+        [
+          7,
+          2529,
+          2863
+        ]
+      ],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v08/d54",
+      "role": "joined_edit",
+      "source": "frus1964-68v08/d54",
+      "baseline": null,
+      "expected": "frus1964-68v08/d54",
+      "truth": [
+        1098,
+        1106
+      ],
+      "aligned": [
+        [
+          2,
+          0,
+          293
+        ],
+        [
+          3,
+          294,
+          850
+        ],
+        [
+          4,
+          851,
+          1459
+        ],
+        [
+          5,
+          1460,
+          2111
+        ],
+        [
+          6,
+          2112,
+          2528
+        ],
+        [
+          7,
+          2529,
+          2863
+        ]
+      ],
+      "changes": [
+        [
+          1098,
+          1106
+        ]
+      ],
+      "useful": true,
+      "exact": true
+    },
+    {
+      "group": "frus1964-68v08/d54",
+      "role": "reordered",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v08/d54",
+      "role": "mixed_sources",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v08/d54",
+      "role": "intro_added",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v08/d54",
+      "role": "quoted",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v08/d198",
+      "role": "native_original",
+      "source": "frus1964-68v08/d198",
+      "baseline": "frus1964-68v08/d198",
+      "expected": "frus1964-68v08/d198",
+      "truth": null,
+      "aligned": [
+        [
+          1,
+          0,
+          178
+        ],
+        [
+          2,
+          180,
+          460
+        ],
+        [
+          3,
+          462,
+          632
+        ],
+        [
+          4,
+          634,
+          877
+        ],
+        [
+          5,
+          879,
+          1269
+        ],
+        [
+          6,
+          1271,
+          1425
+        ]
+      ],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v08/d198",
+      "role": "joined_original",
+      "source": "frus1964-68v08/d198",
+      "baseline": null,
+      "expected": "frus1964-68v08/d198",
+      "truth": null,
+      "aligned": [
+        [
+          1,
+          0,
+          178
+        ],
+        [
+          2,
+          179,
+          459
+        ],
+        [
+          3,
+          460,
+          630
+        ],
+        [
+          4,
+          631,
+          874
+        ],
+        [
+          5,
+          875,
+          1265
+        ],
+        [
+          6,
+          1266,
+          1420
+        ]
+      ],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v08/d198",
+      "role": "joined_edit",
+      "source": "frus1964-68v08/d198",
+      "baseline": null,
+      "expected": "frus1964-68v08/d198",
+      "truth": [
+        531,
+        535
+      ],
+      "aligned": [
+        [
+          1,
+          0,
+          178
+        ],
+        [
+          2,
+          179,
+          459
+        ],
+        [
+          3,
+          460,
+          630
+        ],
+        [
+          4,
+          631,
+          874
+        ],
+        [
+          5,
+          875,
+          1265
+        ],
+        [
+          6,
+          1266,
+          1420
+        ]
+      ],
+      "changes": [
+        [
+          531,
+          535
+        ]
+      ],
+      "useful": true,
+      "exact": true
+    },
+    {
+      "group": "frus1964-68v08/d198",
+      "role": "reordered",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v08/d198",
+      "role": "mixed_sources",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v08/d198",
+      "role": "intro_added",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v08/d198",
+      "role": "quoted",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v08/d178",
+      "role": "native_original",
+      "source": "frus1964-68v08/d178",
+      "baseline": "frus1964-68v08/d178",
+      "expected": "frus1964-68v08/d178",
+      "truth": null,
+      "aligned": [
+        [
+          7,
+          0,
+          681
+        ],
+        [
+          8,
+          683,
+          1168
+        ],
+        [
+          9,
+          1170,
+          1391
+        ],
+        [
+          10,
+          1393,
+          1643
+        ],
+        [
+          11,
+          1645,
+          1950
+        ],
+        [
+          12,
+          1952,
+          2450
+        ]
+      ],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v08/d178",
+      "role": "joined_original",
+      "source": "frus1964-68v08/d178",
+      "baseline": null,
+      "expected": "frus1964-68v08/d178",
+      "truth": null,
+      "aligned": [
+        [
+          7,
+          0,
+          681
+        ],
+        [
+          8,
+          682,
+          1167
+        ],
+        [
+          9,
+          1168,
+          1389
+        ],
+        [
+          10,
+          1390,
+          1640
+        ],
+        [
+          11,
+          1641,
+          1946
+        ],
+        [
+          12,
+          1947,
+          2445
+        ]
+      ],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v08/d178",
+      "role": "joined_edit",
+      "source": "frus1964-68v08/d178",
+      "baseline": null,
+      "expected": "frus1964-68v08/d178",
+      "truth": [
+        1267,
+        1273
+      ],
+      "aligned": [
+        [
+          7,
+          0,
+          681
+        ],
+        [
+          8,
+          682,
+          1167
+        ],
+        [
+          9,
+          1168,
+          1389
+        ],
+        [
+          10,
+          1390,
+          1640
+        ],
+        [
+          11,
+          1641,
+          1946
+        ],
+        [
+          12,
+          1947,
+          2445
+        ]
+      ],
+      "changes": [
+        [
+          1267,
+          1273
+        ]
+      ],
+      "useful": true,
+      "exact": true
+    },
+    {
+      "group": "frus1964-68v08/d178",
+      "role": "reordered",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v08/d178",
+      "role": "mixed_sources",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v08/d178",
+      "role": "intro_added",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v08/d178",
+      "role": "quoted",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v08/d217",
+      "role": "native_original",
+      "source": "frus1964-68v08/d217",
+      "baseline": "frus1964-68v08/d217",
+      "expected": "frus1964-68v08/d217",
+      "truth": null,
+      "aligned": [
+        [
+          1,
+          0,
+          934
+        ],
+        [
+          2,
+          936,
+          1368
+        ],
+        [
+          3,
+          1370,
+          1521
+        ],
+        [
+          4,
+          1523,
+          1861
+        ],
+        [
+          5,
+          1863,
+          2286
+        ],
+        [
+          6,
+          2288,
+          2551
+        ]
+      ],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v08/d217",
+      "role": "joined_original",
+      "source": "frus1964-68v08/d217",
+      "baseline": null,
+      "expected": "frus1964-68v08/d217",
+      "truth": null,
+      "aligned": [
+        [
+          1,
+          0,
+          934
+        ],
+        [
+          2,
+          935,
+          1367
+        ],
+        [
+          3,
+          1368,
+          1519
+        ],
+        [
+          4,
+          1520,
+          1858
+        ],
+        [
+          5,
+          1859,
+          2282
+        ],
+        [
+          6,
+          2283,
+          2546
+        ]
+      ],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v08/d217",
+      "role": "joined_edit",
+      "source": "frus1964-68v08/d217",
+      "baseline": null,
+      "expected": "frus1964-68v08/d217",
+      "truth": [
+        1436,
+        1441
+      ],
+      "aligned": [
+        [
+          1,
+          0,
+          934
+        ],
+        [
+          2,
+          935,
+          1367
+        ],
+        [
+          3,
+          1368,
+          1519
+        ],
+        [
+          4,
+          1520,
+          1858
+        ],
+        [
+          5,
+          1859,
+          2282
+        ],
+        [
+          6,
+          2283,
+          2546
+        ]
+      ],
+      "changes": [
+        [
+          1436,
+          1441
+        ]
+      ],
+      "useful": true,
+      "exact": true
+    },
+    {
+      "group": "frus1964-68v08/d217",
+      "role": "reordered",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v08/d217",
+      "role": "mixed_sources",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v08/d217",
+      "role": "intro_added",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v08/d217",
+      "role": "quoted",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v15/d35",
+      "role": "native_original",
+      "source": "frus1964-68v15/d35",
+      "baseline": "frus1964-68v15/d35",
+      "expected": "frus1964-68v15/d35",
+      "truth": null,
+      "aligned": [
+        [
+          1,
+          0,
+          427
+        ],
+        [
+          2,
+          429,
+          1254
+        ],
+        [
+          3,
+          1256,
+          2155
+        ],
+        [
+          4,
+          2157,
+          2713
+        ],
+        [
+          5,
+          2715,
+          3509
+        ],
+        [
+          6,
+          3511,
+          4320
+        ]
+      ],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v15/d35",
+      "role": "joined_original",
+      "source": "frus1964-68v15/d35",
+      "baseline": null,
+      "expected": "frus1964-68v15/d35",
+      "truth": null,
+      "aligned": [
+        [
+          1,
+          0,
+          427
+        ],
+        [
+          2,
+          428,
+          1253
+        ],
+        [
+          3,
+          1254,
+          2153
+        ],
+        [
+          4,
+          2154,
+          2710
+        ],
+        [
+          5,
+          2711,
+          3505
+        ],
+        [
+          6,
+          3506,
+          4315
+        ]
+      ],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v15/d35",
+      "role": "joined_edit",
+      "source": "frus1964-68v15/d35",
+      "baseline": null,
+      "expected": "frus1964-68v15/d35",
+      "truth": [
+        1626,
+        1632
+      ],
+      "aligned": [
+        [
+          1,
+          0,
+          427
+        ],
+        [
+          2,
+          428,
+          1253
+        ],
+        [
+          3,
+          1254,
+          2153
+        ],
+        [
+          4,
+          2154,
+          2710
+        ],
+        [
+          5,
+          2711,
+          3505
+        ],
+        [
+          6,
+          3506,
+          4315
+        ]
+      ],
+      "changes": [
+        [
+          1626,
+          1632
+        ]
+      ],
+      "useful": true,
+      "exact": true
+    },
+    {
+      "group": "frus1964-68v15/d35",
+      "role": "reordered",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v15/d35",
+      "role": "mixed_sources",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v15/d35",
+      "role": "intro_added",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v15/d35",
+      "role": "quoted",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v24/d9",
+      "role": "native_original",
+      "source": "frus1964-68v24/d9",
+      "baseline": "frus1964-68v24/d9",
+      "expected": "frus1964-68v24/d9",
+      "truth": null,
+      "aligned": [
+        [
+          2,
+          0,
+          500
+        ],
+        [
+          3,
+          502,
+          1206
+        ],
+        [
+          4,
+          1208,
+          1916
+        ],
+        [
+          5,
+          1918,
+          3032
+        ],
+        [
+          6,
+          3034,
+          3521
+        ],
+        [
+          7,
+          3523,
+          4058
+        ]
+      ],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v24/d9",
+      "role": "joined_original",
+      "source": "frus1964-68v24/d9",
+      "baseline": null,
+      "expected": "frus1964-68v24/d9",
+      "truth": null,
+      "aligned": [
+        [
+          2,
+          0,
+          500
+        ],
+        [
+          3,
+          501,
+          1205
+        ],
+        [
+          4,
+          1206,
+          1914
+        ],
+        [
+          5,
+          1915,
+          3029
+        ],
+        [
+          6,
+          3030,
+          3517
+        ],
+        [
+          7,
+          3518,
+          4053
+        ]
+      ],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v24/d9",
+      "role": "joined_edit",
+      "source": "frus1964-68v24/d9",
+      "baseline": null,
+      "expected": "frus1964-68v24/d9",
+      "truth": [
+        1490,
+        1495
+      ],
+      "aligned": [
+        [
+          2,
+          0,
+          500
+        ],
+        [
+          3,
+          501,
+          1205
+        ],
+        [
+          4,
+          1206,
+          1914
+        ],
+        [
+          5,
+          1915,
+          3029
+        ],
+        [
+          6,
+          3030,
+          3517
+        ],
+        [
+          7,
+          3518,
+          4053
+        ]
+      ],
+      "changes": [
+        [
+          1490,
+          1495
+        ]
+      ],
+      "useful": true,
+      "exact": true
+    },
+    {
+      "group": "frus1964-68v24/d9",
+      "role": "reordered",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v24/d9",
+      "role": "mixed_sources",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v24/d9",
+      "role": "intro_added",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v24/d9",
+      "role": "quoted",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v24/d305",
+      "role": "native_original",
+      "source": "frus1964-68v24/d305",
+      "baseline": "frus1964-68v24/d305",
+      "expected": "frus1964-68v24/d305",
+      "truth": null,
+      "aligned": [
+        [
+          1,
+          0,
+          805
+        ],
+        [
+          2,
+          807,
+          1326
+        ],
+        [
+          3,
+          1328,
+          1617
+        ],
+        [
+          4,
+          1619,
+          2135
+        ],
+        [
+          5,
+          2137,
+          2653
+        ],
+        [
+          6,
+          2655,
+          2996
+        ]
+      ],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v24/d305",
+      "role": "joined_original",
+      "source": "frus1964-68v24/d305",
+      "baseline": null,
+      "expected": "frus1964-68v24/d305",
+      "truth": null,
+      "aligned": [
+        [
+          1,
+          0,
+          805
+        ],
+        [
+          2,
+          806,
+          1325
+        ],
+        [
+          3,
+          1326,
+          1615
+        ],
+        [
+          4,
+          1616,
+          2132
+        ],
+        [
+          5,
+          2133,
+          2649
+        ],
+        [
+          6,
+          2650,
+          2991
+        ]
+      ],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v24/d305",
+      "role": "joined_edit",
+      "source": "frus1964-68v24/d305",
+      "baseline": null,
+      "expected": "frus1964-68v24/d305",
+      "truth": [
+        1445,
+        1454
+      ],
+      "aligned": [
+        [
+          1,
+          0,
+          805
+        ],
+        [
+          2,
+          806,
+          1325
+        ],
+        [
+          3,
+          1326,
+          1615
+        ],
+        [
+          4,
+          1616,
+          2132
+        ],
+        [
+          5,
+          2133,
+          2649
+        ],
+        [
+          6,
+          2650,
+          2991
+        ]
+      ],
+      "changes": [
+        [
+          1445,
+          1454
+        ]
+      ],
+      "useful": true,
+      "exact": true
+    },
+    {
+      "group": "frus1964-68v24/d305",
+      "role": "reordered",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v24/d305",
+      "role": "mixed_sources",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v24/d305",
+      "role": "intro_added",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v24/d305",
+      "role": "quoted",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v24/d249",
+      "role": "native_original",
+      "source": "frus1964-68v24/d249",
+      "baseline": "frus1964-68v24/d249",
+      "expected": "frus1964-68v24/d249",
+      "truth": null,
+      "aligned": [
+        [
+          1,
+          0,
+          634
+        ],
+        [
+          2,
+          636,
+          827
+        ],
+        [
+          3,
+          829,
+          969
+        ],
+        [
+          4,
+          971,
+          1644
+        ],
+        [
+          5,
+          1646,
+          2527
+        ],
+        [
+          6,
+          2529,
+          3425
+        ]
+      ],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v24/d249",
+      "role": "joined_original",
+      "source": "frus1964-68v24/d249",
+      "baseline": null,
+      "expected": "frus1964-68v24/d249",
+      "truth": null,
+      "aligned": [
+        [
+          1,
+          0,
+          634
+        ],
+        [
+          2,
+          635,
+          826
+        ],
+        [
+          3,
+          827,
+          967
+        ],
+        [
+          4,
+          968,
+          1641
+        ],
+        [
+          5,
+          1642,
+          2523
+        ],
+        [
+          6,
+          2524,
+          3420
+        ]
+      ],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v24/d249",
+      "role": "joined_edit",
+      "source": "frus1964-68v24/d249",
+      "baseline": null,
+      "expected": "frus1964-68v24/d249",
+      "truth": [
+        893,
+        897
+      ],
+      "aligned": [
+        [
+          1,
+          0,
+          634
+        ],
+        [
+          2,
+          635,
+          826
+        ],
+        [
+          3,
+          827,
+          967
+        ],
+        [
+          4,
+          968,
+          1641
+        ],
+        [
+          5,
+          1642,
+          2523
+        ],
+        [
+          6,
+          2524,
+          3420
+        ]
+      ],
+      "changes": [
+        [
+          893,
+          897
+        ]
+      ],
+      "useful": true,
+      "exact": true
+    },
+    {
+      "group": "frus1964-68v24/d249",
+      "role": "reordered",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v24/d249",
+      "role": "mixed_sources",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v24/d249",
+      "role": "intro_added",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v24/d249",
+      "role": "quoted",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v24/d337",
+      "role": "native_original",
+      "source": "frus1964-68v24/d337",
+      "baseline": "frus1964-68v24/d337",
+      "expected": "frus1964-68v24/d337",
+      "truth": null,
+      "aligned": [
+        [
+          2,
+          0,
+          440
+        ],
+        [
+          3,
+          442,
+          787
+        ],
+        [
+          4,
+          789,
+          1490
+        ],
+        [
+          5,
+          1492,
+          1705
+        ],
+        [
+          6,
+          1707,
+          1939
+        ],
+        [
+          7,
+          1941,
+          2240
+        ]
+      ],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v24/d337",
+      "role": "joined_original",
+      "source": "frus1964-68v24/d337",
+      "baseline": null,
+      "expected": "frus1964-68v24/d337",
+      "truth": null,
+      "aligned": [
+        [
+          2,
+          0,
+          440
+        ],
+        [
+          3,
+          441,
+          786
+        ],
+        [
+          4,
+          787,
+          1488
+        ],
+        [
+          5,
+          1489,
+          1702
+        ],
+        [
+          6,
+          1703,
+          1935
+        ],
+        [
+          7,
+          1936,
+          2235
+        ]
+      ],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v24/d337",
+      "role": "joined_edit",
+      "source": "frus1964-68v24/d337",
+      "baseline": null,
+      "expected": "frus1964-68v24/d337",
+      "truth": [
+        1076,
+        1080
+      ],
+      "aligned": [
+        [
+          2,
+          0,
+          440
+        ],
+        [
+          3,
+          441,
+          786
+        ],
+        [
+          4,
+          787,
+          1488
+        ],
+        [
+          5,
+          1489,
+          1702
+        ],
+        [
+          6,
+          1703,
+          1935
+        ],
+        [
+          7,
+          1936,
+          2235
+        ]
+      ],
+      "changes": [
+        [
+          1076,
+          1080
+        ]
+      ],
+      "useful": true,
+      "exact": true
+    },
+    {
+      "group": "frus1964-68v24/d337",
+      "role": "reordered",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v24/d337",
+      "role": "mixed_sources",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v24/d337",
+      "role": "intro_added",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v24/d337",
+      "role": "quoted",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v24/d605",
+      "role": "native_original",
+      "source": "frus1964-68v24/d605",
+      "baseline": "frus1964-68v24/d605",
+      "expected": "frus1964-68v24/d605",
+      "truth": null,
+      "aligned": [
+        [
+          3,
+          0,
+          213
+        ],
+        [
+          4,
+          215,
+          444
+        ],
+        [
+          5,
+          446,
+          708
+        ],
+        [
+          6,
+          710,
+          1032
+        ],
+        [
+          7,
+          1034,
+          1712
+        ],
+        [
+          8,
+          1714,
+          2147
+        ]
+      ],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v24/d605",
+      "role": "joined_original",
+      "source": "frus1964-68v24/d605",
+      "baseline": null,
+      "expected": "frus1964-68v24/d605",
+      "truth": null,
+      "aligned": [
+        [
+          3,
+          0,
+          213
+        ],
+        [
+          4,
+          214,
+          443
+        ],
+        [
+          5,
+          444,
+          706
+        ],
+        [
+          6,
+          707,
+          1029
+        ],
+        [
+          7,
+          1030,
+          1708
+        ],
+        [
+          8,
+          1709,
+          2142
+        ]
+      ],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v24/d605",
+      "role": "joined_edit",
+      "source": "frus1964-68v24/d605",
+      "baseline": null,
+      "expected": "frus1964-68v24/d605",
+      "truth": [
+        551,
+        556
+      ],
+      "aligned": [
+        [
+          3,
+          0,
+          213
+        ],
+        [
+          4,
+          214,
+          443
+        ],
+        [
+          5,
+          444,
+          706
+        ],
+        [
+          6,
+          707,
+          1029
+        ],
+        [
+          7,
+          1030,
+          1708
+        ],
+        [
+          8,
+          1709,
+          2142
+        ]
+      ],
+      "changes": [
+        [
+          551,
+          556
+        ]
+      ],
+      "useful": true,
+      "exact": true
+    },
+    {
+      "group": "frus1964-68v24/d605",
+      "role": "reordered",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v24/d605",
+      "role": "mixed_sources",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v24/d605",
+      "role": "intro_added",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v24/d605",
+      "role": "quoted",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1961-63v09/d270",
+      "role": "out_of_index",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v08/d317",
+      "role": "out_of_index",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v24/d357",
+      "role": "out_of_index",
+      "source": null,
+      "baseline": null,
+      "expected": null,
+      "truth": null,
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1961-63v09/d262",
+      "role": "earlier_generated_reflow",
+      "source": "frus1961-63v09/d262",
+      "baseline": null,
+      "expected": "frus1961-63v09/d262",
+      "truth": [
+        848,
+        966
+      ],
+      "aligned": [
+        [
+          6,
+          0,
+          618
+        ],
+        [
+          7,
+          619,
+          1221
+        ],
+        [
+          8,
+          1222,
+          1633
+        ],
+        [
+          9,
+          1634,
+          1849
+        ],
+        [
+          10,
+          1850,
+          2030
+        ],
+        [
+          11,
+          2031,
+          2365
+        ]
+      ],
+      "changes": [
+        [
+          848,
+          850
+        ],
+        [
+          851,
+          864
+        ],
+        [
+          875,
+          879
+        ],
+        [
+          880,
+          886
+        ],
+        [
+          887,
+          899
+        ],
+        [
+          900,
+          906
+        ],
+        [
+          911,
+          920
+        ],
+        [
+          931,
+          932
+        ],
+        [
+          933,
+          943
+        ],
+        [
+          944,
+          947
+        ]
+      ],
+      "useful": true,
+      "exact": false
+    },
+    {
+      "group": "frus1961-63v09/d120",
+      "role": "earlier_generated_reflow",
+      "source": null,
+      "baseline": null,
+      "expected": "frus1961-63v09/d120",
+      "truth": [
+        1331,
+        1411
+      ],
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1961-63v09/d120",
+      "role": "earlier_generated_reflow",
+      "source": null,
+      "baseline": null,
+      "expected": "frus1961-63v09/d120",
+      "truth": [
+        1331,
+        1438
+      ],
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1961-63v09/d138",
+      "role": "earlier_generated_reflow",
+      "source": null,
+      "baseline": null,
+      "expected": "frus1961-63v09/d138",
+      "truth": [
+        369,
+        489
+      ],
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1961-63v09/d138",
+      "role": "earlier_generated_reflow",
+      "source": null,
+      "baseline": null,
+      "expected": "frus1961-63v09/d138",
+      "truth": [
+        369,
+        496
+      ],
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v08/d180",
+      "role": "earlier_generated_reflow",
+      "source": null,
+      "baseline": null,
+      "expected": "frus1964-68v08/d180",
+      "truth": [
+        917,
+        1015
+      ],
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v08/d124",
+      "role": "earlier_generated_reflow",
+      "source": "frus1964-68v08/d124",
+      "baseline": null,
+      "expected": "frus1964-68v08/d124",
+      "truth": [
+        1090,
+        1223
+      ],
+      "aligned": [
+        [
+          8,
+          0,
+          766
+        ],
+        [
+          9,
+          767,
+          1464
+        ],
+        [
+          10,
+          1465,
+          2395
+        ],
+        [
+          11,
+          2396,
+          3205
+        ],
+        [
+          12,
+          3206,
+          4064
+        ],
+        [
+          13,
+          4065,
+          4293
+        ]
+      ],
+      "changes": [
+        [
+          1095,
+          1100
+        ],
+        [
+          1115,
+          1123
+        ],
+        [
+          1186,
+          1188
+        ],
+        [
+          1189,
+          1193
+        ],
+        [
+          1194,
+          1196
+        ],
+        [
+          1197,
+          1209
+        ]
+      ],
+      "useful": true,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v08/d64",
+      "role": "earlier_generated_reflow",
+      "source": null,
+      "baseline": null,
+      "expected": "frus1964-68v08/d64",
+      "truth": [
+        2341,
+        2471
+      ],
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v08/d64",
+      "role": "earlier_generated_reflow",
+      "source": null,
+      "baseline": null,
+      "expected": "frus1964-68v08/d64",
+      "truth": [
+        2341,
+        2481
+      ],
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v15/d72",
+      "role": "earlier_generated_reflow",
+      "source": null,
+      "baseline": null,
+      "expected": "frus1964-68v15/d72",
+      "truth": [
+        3811,
+        3930
+      ],
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v15/d72",
+      "role": "earlier_generated_reflow",
+      "source": null,
+      "baseline": null,
+      "expected": "frus1964-68v15/d72",
+      "truth": [
+        3811,
+        3944
+      ],
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v15/d122",
+      "role": "earlier_generated_reflow",
+      "source": "frus1964-68v15/d122",
+      "baseline": null,
+      "expected": "frus1964-68v15/d122",
+      "truth": [
+        1972,
+        2121
+      ],
+      "aligned": [
+        [
+          2,
+          0,
+          801
+        ],
+        [
+          3,
+          802,
+          1312
+        ],
+        [
+          4,
+          1313,
+          2293
+        ],
+        [
+          5,
+          2294,
+          3392
+        ],
+        [
+          6,
+          3393,
+          4160
+        ],
+        [
+          7,
+          4161,
+          4719
+        ]
+      ],
+      "changes": [
+        [
+          1983,
+          1993
+        ],
+        [
+          1994,
+          1999
+        ],
+        [
+          2003,
+          2009
+        ],
+        [
+          2014,
+          2020
+        ],
+        [
+          2038,
+          2047
+        ],
+        [
+          2050,
+          2060
+        ],
+        [
+          2061,
+          2068
+        ],
+        [
+          2073,
+          2080
+        ],
+        [
+          2080,
+          2081
+        ],
+        [
+          2098,
+          2106
+        ],
+        [
+          2110,
+          2120
+        ]
+      ],
+      "useful": true,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v15/d268",
+      "role": "earlier_generated_reflow",
+      "source": null,
+      "baseline": null,
+      "expected": "frus1964-68v15/d268",
+      "truth": [
+        988,
+        1065
+      ],
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v15/d39",
+      "role": "earlier_generated_reflow",
+      "source": "frus1964-68v15/d39",
+      "baseline": null,
+      "expected": "frus1964-68v15/d39",
+      "truth": [
+        224,
+        325
+      ],
+      "aligned": [
+        [
+          1,
+          0,
+          167
+        ],
+        [
+          2,
+          168,
+          590
+        ],
+        [
+          3,
+          591,
+          907
+        ],
+        [
+          4,
+          908,
+          1733
+        ],
+        [
+          5,
+          1734,
+          2661
+        ],
+        [
+          6,
+          2662,
+          3591
+        ]
+      ],
+      "changes": [
+        [
+          224,
+          228
+        ],
+        [
+          260,
+          263
+        ],
+        [
+          264,
+          270
+        ],
+        [
+          271,
+          273
+        ],
+        [
+          274,
+          276
+        ],
+        [
+          277,
+          285
+        ],
+        [
+          286,
+          288
+        ],
+        [
+          309,
+          310
+        ],
+        [
+          311,
+          317
+        ],
+        [
+          318,
+          324
+        ]
+      ],
+      "useful": true,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v15/d39",
+      "role": "earlier_generated_reflow",
+      "source": "frus1964-68v15/d39",
+      "baseline": null,
+      "expected": "frus1964-68v15/d39",
+      "truth": [
+        224,
+        344
+      ],
+      "aligned": [
+        [
+          1,
+          0,
+          167
+        ],
+        [
+          2,
+          168,
+          609
+        ],
+        [
+          3,
+          610,
+          926
+        ],
+        [
+          4,
+          927,
+          1752
+        ],
+        [
+          5,
+          1753,
+          2680
+        ],
+        [
+          6,
+          2681,
+          3610
+        ]
+      ],
+      "changes": [
+        [
+          232,
+          237
+        ],
+        [
+          238,
+          242
+        ],
+        [
+          279,
+          283
+        ],
+        [
+          284,
+          289
+        ],
+        [
+          310,
+          311
+        ],
+        [
+          329,
+          335
+        ],
+        [
+          336,
+          338
+        ],
+        [
+          339,
+          343
+        ]
+      ],
+      "useful": true,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v24/d208",
+      "role": "earlier_generated_reflow",
+      "source": "frus1964-68v24/d208",
+      "baseline": null,
+      "expected": "frus1964-68v24/d208",
+      "truth": [
+        895,
+        1023
+      ],
+      "aligned": [
+        [
+          1,
+          0,
+          424
+        ],
+        [
+          2,
+          425,
+          714
+        ],
+        [
+          3,
+          715,
+          1326
+        ],
+        [
+          4,
+          1327,
+          1615
+        ],
+        [
+          5,
+          1616,
+          1955
+        ],
+        [
+          6,
+          1956,
+          2414
+        ]
+      ],
+      "changes": [
+        [
+          913,
+          918
+        ],
+        [
+          919,
+          923
+        ],
+        [
+          930,
+          938
+        ],
+        [
+          938,
+          939
+        ],
+        [
+          952,
+          963
+        ],
+        [
+          969,
+          979
+        ],
+        [
+          1009,
+          1010
+        ],
+        [
+          1011,
+          1022
+        ]
+      ],
+      "useful": true,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v24/d208",
+      "role": "earlier_generated_reflow",
+      "source": "frus1964-68v24/d208",
+      "baseline": null,
+      "expected": "frus1964-68v24/d208",
+      "truth": [
+        895,
+        1009
+      ],
+      "aligned": [
+        [
+          1,
+          0,
+          424
+        ],
+        [
+          2,
+          425,
+          714
+        ],
+        [
+          3,
+          715,
+          1312
+        ],
+        [
+          4,
+          1313,
+          1601
+        ],
+        [
+          5,
+          1602,
+          1941
+        ],
+        [
+          6,
+          1942,
+          2400
+        ]
+      ],
+      "changes": [
+        [
+          913,
+          916
+        ],
+        [
+          931,
+          937
+        ],
+        [
+          937,
+          938
+        ],
+        [
+          939,
+          953
+        ],
+        [
+          954,
+          958
+        ],
+        [
+          959,
+          966
+        ],
+        [
+          966,
+          967
+        ],
+        [
+          968,
+          979
+        ],
+        [
+          979,
+          980
+        ],
+        [
+          997,
+          1008
+        ]
+      ],
+      "useful": true,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v24/d247",
+      "role": "earlier_generated_reflow",
+      "source": "frus1964-68v24/d247",
+      "baseline": null,
+      "expected": "frus1964-68v24/d247",
+      "truth": [
+        1935,
+        2093
+      ],
+      "aligned": [
+        [
+          1,
+          0,
+          1026
+        ],
+        [
+          2,
+          1027,
+          1268
+        ],
+        [
+          3,
+          1269,
+          1867
+        ],
+        [
+          4,
+          1868,
+          2388
+        ],
+        [
+          5,
+          2389,
+          2776
+        ],
+        [
+          6,
+          2777,
+          3195
+        ]
+      ],
+      "changes": [
+        [
+          1947,
+          1951
+        ],
+        [
+          1955,
+          1961
+        ],
+        [
+          1962,
+          1966
+        ],
+        [
+          1967,
+          1975
+        ],
+        [
+          1976,
+          1980
+        ],
+        [
+          1994,
+          1996
+        ],
+        [
+          2008,
+          2009
+        ],
+        [
+          2019,
+          2022
+        ],
+        [
+          2029,
+          2030
+        ],
+        [
+          2035,
+          2039
+        ],
+        [
+          2040,
+          2042
+        ],
+        [
+          2057,
+          2058
+        ],
+        [
+          2059,
+          2064
+        ],
+        [
+          2065,
+          2071
+        ],
+        [
+          2078,
+          2085
+        ],
+        [
+          2086,
+          2092
+        ]
+      ],
+      "useful": true,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v24/d247",
+      "role": "earlier_generated_reflow",
+      "source": "frus1964-68v24/d247",
+      "baseline": null,
+      "expected": "frus1964-68v24/d247",
+      "truth": [
+        1935,
+        2105
+      ],
+      "aligned": [
+        [
+          1,
+          0,
+          1026
+        ],
+        [
+          2,
+          1027,
+          1268
+        ],
+        [
+          3,
+          1269,
+          1867
+        ],
+        [
+          4,
+          1868,
+          2400
+        ],
+        [
+          5,
+          2401,
+          2788
+        ],
+        [
+          6,
+          2789,
+          3207
+        ]
+      ],
+      "changes": [
+        [
+          1947,
+          1951
+        ],
+        [
+          1964,
+          1972
+        ],
+        [
+          2010,
+          2011
+        ],
+        [
+          2026,
+          2030
+        ],
+        [
+          2040,
+          2041
+        ],
+        [
+          2046,
+          2050
+        ],
+        [
+          2051,
+          2053
+        ],
+        [
+          2068,
+          2069
+        ],
+        [
+          2070,
+          2075
+        ],
+        [
+          2076,
+          2079
+        ]
+      ],
+      "useful": true,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v24/d395",
+      "role": "earlier_generated_reflow",
+      "source": null,
+      "baseline": null,
+      "expected": "frus1964-68v24/d395",
+      "truth": [
+        2447,
+        2545
+      ],
+      "aligned": [],
+      "changes": [],
+      "useful": false,
+      "exact": false
+    },
+    {
+      "group": "frus1964-68v24/d188",
+      "role": "earlier_generated_reflow",
+      "source": "frus1964-68v24/d188",
+      "baseline": null,
+      "expected": "frus1964-68v24/d188",
+      "truth": [
+        1267,
+        1383
+      ],
+      "aligned": [
+        [
+          1,
+          0,
+          283
+        ],
+        [
+          2,
+          284,
+          605
+        ],
+        [
+          3,
+          606,
+          1132
+        ],
+        [
+          4,
+          1133,
+          1871
+        ],
+        [
+          5,
+          1872,
+          2163
+        ],
+        [
+          6,
+          2164,
+          3068
+        ]
+      ],
+      "changes": [
+        [
+          1267,
+          1270
+        ],
+        [
+          1301,
+          1304
+        ],
+        [
+          1305,
+          1309
+        ],
+        [
+          1310,
+          1321
+        ],
+        [
+          1322,
+          1329
+        ],
+        [
+          1330,
+          1336
+        ],
+        [
+          1337,
+          1346
+        ],
+        [
+          1347,
+          1350
+        ],
+        [
+          1351,
+          1355
+        ],
+        [
+          1356,
+          1358
+        ],
+        [
+          1359,
+          1362
+        ],
+        [
+          1363,
+          1365
+        ],
+        [
+          1366,
+          1372
+        ],
+        [
+          1373,
+          1382
+        ]
+      ],
+      "useful": true,
+      "exact": false
+    }
+  ],
+  "audit": {
+    "source_spans": 348,
+    "decisions": 140,
+    "changed_tokens": 119,
+    "freeze_sha256": "0271bd70c264994177f1015040fb2be70a0d64886a1f41eb092d4b41809cf8b4",
+    "results_sha256": "462f57a1d8b7898fdc1c4436e7f7ad47b8cba086b1aa45e675e1a50125de0387",
+    "counts": {
+      "native_original": {
+        "total": 16,
+        "baseline": 16,
+        "matched": 16,
+        "false_attribution": 0,
+        "useful": 0,
+        "exact": 0,
+        "has_changes": 0
+      },
+      "joined_original": {
+        "total": 16,
+        "baseline": 0,
+        "matched": 16,
+        "false_attribution": 0,
+        "useful": 0,
+        "exact": 0,
+        "has_changes": 0
+      },
+      "joined_edit": {
+        "total": 16,
+        "baseline": 0,
+        "matched": 16,
+        "false_attribution": 0,
+        "useful": 16,
+        "exact": 16,
+        "has_changes": 16
+      },
+      "reordered": {
+        "total": 16,
+        "baseline": 0,
+        "matched": 0,
+        "false_attribution": 0,
+        "useful": 0,
+        "exact": 0,
+        "has_changes": 0
+      },
+      "mixed_sources": {
+        "total": 16,
+        "baseline": 0,
+        "matched": 0,
+        "false_attribution": 0,
+        "useful": 0,
+        "exact": 0,
+        "has_changes": 0
+      },
+      "intro_added": {
+        "total": 16,
+        "baseline": 0,
+        "matched": 0,
+        "false_attribution": 0,
+        "useful": 0,
+        "exact": 0,
+        "has_changes": 0
+      },
+      "quoted": {
+        "total": 16,
+        "baseline": 0,
+        "matched": 0,
+        "false_attribution": 0,
+        "useful": 0,
+        "exact": 0,
+        "has_changes": 0
+      },
+      "duplicate_index": {
+        "total": 4,
+        "baseline": 0,
+        "matched": 0,
+        "false_attribution": 0,
+        "useful": 0,
+        "exact": 0,
+        "has_changes": 0
+      },
+      "out_of_index": {
+        "total": 3,
+        "baseline": 0,
+        "matched": 0,
+        "false_attribution": 0,
+        "useful": 0,
+        "exact": 0,
+        "has_changes": 0
+      },
+      "earlier_generated_reflow": {
+        "total": 21,
+        "baseline": 0,
+        "matched": 10,
+        "false_attribution": 0,
+        "useful": 10,
+        "exact": 0,
+        "has_changes": 10
+      }
+    },
+    "advance": true
+  },
+  "alteration_test": "Rejected one code-point shift in a changed token.",
+  "confidence_weight": 0
+}

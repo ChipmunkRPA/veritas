@@ -76,6 +76,15 @@ the discrepancies and confirms rejection, without clearing the failed audit.
 
 ## Video: explain the temporal features and context
 
+The [7 November compression study revision](https://arxiv.org/abs/2608.28685v2)
+reports separate results for genuine H.264 re-encoding and image-level JPEG
+augmentation. Its corrected, matched comparisons attribute the strongest
+compression benefit in that experiment to data diversity. This informed the
+[direct and tandem encode test](video-face-compression-stability-2026-11-12.md),
+which pairs every retained original and swap across four actual H.264 treatments.
+The comparison uses the app's existing appearance measurements and imports no
+paper weights, data or code.
+
 October's [explicit forensic-feature method](https://arxiv.org/html/2610.03380v1)
 uses tracked face sequences, overlapping temporal windows and four descriptor
 families: photometric, textural, geometric and compression. The sequence model

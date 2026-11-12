@@ -1,0 +1,262 @@
+{
+  "advances": true,
+  "independent_authoring": {
+    "byte_identical_mp4s": 128,
+    "media_sha256": "8c47ffc8b311eb86b71bd0e9673775d6e4e58147337194769165dbecde4000d7",
+    "original_source_pictures": 1920,
+    "publisher_source_pictures": 280
+  },
+  "method": {
+    "candidate": "For a selected coarse range, measure the same aligned 112-pixel faces again after 112\u219256 area downsample and 56\u2192112 linear upsample. Keep the exact same coarse centers, triplets, face alignment, track and response calculation. A low-pass response at or below the current point suppresses that coarse range and its dependent refinement. Retain all previously measured short ranges. Missing repeat evidence keeps the coarse range.",
+    "gate": {
+      "maximum_lost_useful_held_swaps": 0,
+      "minimum_distinct_held_sources": 2,
+      "minimum_false_removals": 2,
+      "minimum_held_true_coarse_support": 4,
+      "temporal_iou": "1/2"
+    },
+    "schema": "chipmunk.video-face-compression-stability/1",
+    "scope": "Silent upright 640x360 25 fps H.264 yuv420p; 120 native pictures. Four exposed genuine compression alerts and matching swaps; twelve distinct held source groups with originals and publisher swaps. Held sources had prior exposure at CRF 23.",
+    "treatments": {
+      "direct23": [
+        null,
+        23
+      ],
+      "direct36": [
+        null,
+        36
+      ],
+      "tandem23": [
+        "direct23",
+        23
+      ],
+      "tandem36": [
+        "direct23",
+        36
+      ]
+    }
+  },
+  "outcomes": {
+    "development/original/direct23": {
+      "candidate_flags": 0,
+      "candidate_useful": 0,
+      "coarse_flags": 0,
+      "current_flags": 0,
+      "current_useful": 0,
+      "false_removed": 0,
+      "files": 4,
+      "suppressed_coarse": 0,
+      "suppressed_useful_coarse": 0,
+      "useful_coarse": 0,
+      "useful_losses": 0
+    },
+    "development/original/direct36": {
+      "candidate_flags": 4,
+      "candidate_useful": 0,
+      "coarse_flags": 4,
+      "current_flags": 4,
+      "current_useful": 0,
+      "false_removed": 0,
+      "files": 4,
+      "suppressed_coarse": 0,
+      "suppressed_useful_coarse": 0,
+      "useful_coarse": 0,
+      "useful_losses": 0
+    },
+    "development/original/tandem23": {
+      "candidate_flags": 0,
+      "candidate_useful": 0,
+      "coarse_flags": 0,
+      "current_flags": 0,
+      "current_useful": 0,
+      "false_removed": 0,
+      "files": 4,
+      "suppressed_coarse": 0,
+      "suppressed_useful_coarse": 0,
+      "useful_coarse": 0,
+      "useful_losses": 0
+    },
+    "development/original/tandem36": {
+      "candidate_flags": 2,
+      "candidate_useful": 0,
+      "coarse_flags": 4,
+      "current_flags": 4,
+      "current_useful": 0,
+      "false_removed": 2,
+      "files": 4,
+      "suppressed_coarse": 2,
+      "suppressed_useful_coarse": 0,
+      "useful_coarse": 0,
+      "useful_losses": 0
+    },
+    "development/swap/direct23": {
+      "candidate_flags": 4,
+      "candidate_useful": 4,
+      "coarse_flags": 4,
+      "current_flags": 4,
+      "current_useful": 4,
+      "false_removed": 0,
+      "files": 4,
+      "suppressed_coarse": 0,
+      "suppressed_useful_coarse": 0,
+      "useful_coarse": 4,
+      "useful_losses": 0
+    },
+    "development/swap/direct36": {
+      "candidate_flags": 4,
+      "candidate_useful": 3,
+      "coarse_flags": 4,
+      "current_flags": 4,
+      "current_useful": 3,
+      "false_removed": 0,
+      "files": 4,
+      "suppressed_coarse": 0,
+      "suppressed_useful_coarse": 0,
+      "useful_coarse": 3,
+      "useful_losses": 0
+    },
+    "development/swap/tandem23": {
+      "candidate_flags": 4,
+      "candidate_useful": 4,
+      "coarse_flags": 4,
+      "current_flags": 4,
+      "current_useful": 4,
+      "false_removed": 0,
+      "files": 4,
+      "suppressed_coarse": 0,
+      "suppressed_useful_coarse": 0,
+      "useful_coarse": 4,
+      "useful_losses": 0
+    },
+    "development/swap/tandem36": {
+      "candidate_flags": 4,
+      "candidate_useful": 4,
+      "coarse_flags": 4,
+      "current_flags": 4,
+      "current_useful": 4,
+      "false_removed": 0,
+      "files": 4,
+      "suppressed_coarse": 0,
+      "suppressed_useful_coarse": 0,
+      "useful_coarse": 4,
+      "useful_losses": 0
+    },
+    "held/original/direct23": {
+      "candidate_flags": 0,
+      "candidate_useful": 0,
+      "coarse_flags": 0,
+      "current_flags": 0,
+      "current_useful": 0,
+      "false_removed": 0,
+      "files": 12,
+      "suppressed_coarse": 0,
+      "suppressed_useful_coarse": 0,
+      "useful_coarse": 0,
+      "useful_losses": 0
+    },
+    "held/original/direct36": {
+      "candidate_flags": 2,
+      "candidate_useful": 0,
+      "coarse_flags": 6,
+      "current_flags": 6,
+      "current_useful": 0,
+      "false_removed": 4,
+      "files": 12,
+      "suppressed_coarse": 4,
+      "suppressed_useful_coarse": 0,
+      "useful_coarse": 0,
+      "useful_losses": 0
+    },
+    "held/original/tandem23": {
+      "candidate_flags": 0,
+      "candidate_useful": 0,
+      "coarse_flags": 0,
+      "current_flags": 0,
+      "current_useful": 0,
+      "false_removed": 0,
+      "files": 12,
+      "suppressed_coarse": 0,
+      "suppressed_useful_coarse": 0,
+      "useful_coarse": 0,
+      "useful_losses": 0
+    },
+    "held/original/tandem36": {
+      "candidate_flags": 5,
+      "candidate_useful": 0,
+      "coarse_flags": 6,
+      "current_flags": 6,
+      "current_useful": 0,
+      "false_removed": 1,
+      "files": 12,
+      "suppressed_coarse": 1,
+      "suppressed_useful_coarse": 0,
+      "useful_coarse": 0,
+      "useful_losses": 0
+    },
+    "held/swap/direct23": {
+      "candidate_flags": 12,
+      "candidate_useful": 12,
+      "coarse_flags": 12,
+      "current_flags": 12,
+      "current_useful": 12,
+      "false_removed": 0,
+      "files": 12,
+      "suppressed_coarse": 0,
+      "suppressed_useful_coarse": 0,
+      "useful_coarse": 12,
+      "useful_losses": 0
+    },
+    "held/swap/direct36": {
+      "candidate_flags": 12,
+      "candidate_useful": 12,
+      "coarse_flags": 12,
+      "current_flags": 12,
+      "current_useful": 12,
+      "false_removed": 0,
+      "files": 12,
+      "suppressed_coarse": 0,
+      "suppressed_useful_coarse": 0,
+      "useful_coarse": 12,
+      "useful_losses": 0
+    },
+    "held/swap/tandem23": {
+      "candidate_flags": 12,
+      "candidate_useful": 12,
+      "coarse_flags": 12,
+      "current_flags": 12,
+      "current_useful": 12,
+      "false_removed": 0,
+      "files": 12,
+      "suppressed_coarse": 0,
+      "suppressed_useful_coarse": 0,
+      "useful_coarse": 12,
+      "useful_losses": 0
+    },
+    "held/swap/tandem36": {
+      "candidate_flags": 12,
+      "candidate_useful": 12,
+      "coarse_flags": 12,
+      "current_flags": 12,
+      "current_useful": 12,
+      "false_removed": 0,
+      "files": 12,
+      "suppressed_coarse": 0,
+      "suppressed_useful_coarse": 0,
+      "useful_coarse": 12,
+      "useful_losses": 0
+    }
+  },
+  "removed_false_groups": {
+    "development": 2,
+    "held": 4
+  },
+  "score_seal": {
+    "cases": 128,
+    "elapsed_s": 681.1015218329994,
+    "journal_sha256": "ebf223264296f5a64c6be35105b720192359fa6b36bc25dad67743ad2ee002b4",
+    "media_sha256": "8c47ffc8b311eb86b71bd0e9673775d6e4e58147337194769165dbecde4000d7"
+  },
+  "serving_change": false,
+  "verified_coarse_ranges": 84,
+  "verified_face_picture_occurrences": 1812
+}

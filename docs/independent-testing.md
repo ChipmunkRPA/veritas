@@ -669,6 +669,12 @@ customers or unknown generators. Report all original/edit counts alongside rates
 
 ## Review an audio supplement by acoustic condition
 
+The [separated-stream presence comparison](audio-stream-presence-transfer-2026-11-11.md)
+adds a natural meeting panel selected from public word annotations before
+inference. Its separate verifier reconstructs exact input clocks, confirms
+the development and confirmation roles and checks the published arithmetic.
+The local recordings and per-interval outputs remain with the evaluator.
+
 The [hard-overlap source panel](audio-hard-overlap-transfer-2026-11-11.md)
 is reconstructible from pinned public VoxPopuli test partitions and the
 commercially reviewed model assets. It includes a separate standard-library

@@ -1,0 +1,574 @@
+{
+  "assessed": 21,
+  "baseline": {
+    "forwards": 6,
+    "unique_inputs": 42
+  },
+  "causal": {
+    "elapsed_seconds": 3.774,
+    "forwards": 21
+  },
+  "commitments": {
+    "admission": "5d636527ec6ff8f32cb4f703e16c00af365c24a4cb78b67aa99473b557e6e474",
+    "audit_logits": "f31a6defd4769aa1e049af4babf6f72b73d9442335a45224765ae064b478d4c5",
+    "baseline": "514cce1ac104a2740f57d0bae740a41a7c02c3d2bd02e4385ea9b0bcdb5c7d18",
+    "causal": "801469eab4d30d8c21eefa4b8534e02487816875d17226f160030b09c8af779e",
+    "freeze": "b697c56fcf0d237e7c51ce47eee061dd2929144942f207b2dd156f174c882e06",
+    "holdout": "c76b62a073f7b35b69c51617a62f9ed5308bb592438137d33671846d1b5536d8",
+    "independent_replay": "f82bcc87e4f88dfe59f9059946d15663258b8e70b7afcc02322231a1d36c31f3",
+    "protocol": "90217805a0464bd80231be27ec6701dde30ce9ce024f4a698b9b9daa3eecb155",
+    "runner": "6112f8673062d571a1e20c0c7e850468440374a515de07350d57cf9b2f2233ca"
+  },
+  "counts": {
+    "human_sentence": {
+      "curvature": {
+        "against_original_higher": 4,
+        "against_original_lower": 4,
+        "target_rank_higher": 3,
+        "target_rank_lower": 5
+      },
+      "mean_log_probability": {
+        "against_original_higher": 3,
+        "against_original_lower": 5,
+        "target_rank_higher": 2,
+        "target_rank_lower": 6
+      },
+      "native_context": {
+        "against_original_higher": 2,
+        "against_original_lower": 6,
+        "target_rank_higher": 4,
+        "target_rank_lower": 4
+      }
+    },
+    "original": {
+      "curvature": {
+        "target_rank_higher": 4,
+        "target_rank_lower": 4
+      },
+      "mean_log_probability": {
+        "target_rank_higher": 1,
+        "target_rank_lower": 7
+      },
+      "native_context": {
+        "target_rank_higher": 3,
+        "target_rank_lower": 5
+      }
+    },
+    "qwen": {
+      "curvature": {
+        "against_both_human_controls_higher": 1,
+        "against_both_human_controls_lower": 1,
+        "against_genuine_edit_higher": 1,
+        "against_genuine_edit_lower": 1,
+        "against_original_higher": 1,
+        "against_original_lower": 1,
+        "target_rank_lower": 2
+      },
+      "mean_log_probability": {
+        "against_both_human_controls_lower": 2,
+        "against_genuine_edit_lower": 2,
+        "against_original_lower": 2,
+        "target_rank_lower": 2
+      },
+      "native_context": {
+        "against_both_human_controls_higher": 2,
+        "against_genuine_edit_higher": 2,
+        "against_original_higher": 2,
+        "target_rank_higher": 1,
+        "target_rank_lower": 1
+      }
+    },
+    "smol2": {
+      "curvature": {
+        "against_both_human_controls_higher": 2,
+        "against_both_human_controls_lower": 1,
+        "against_genuine_edit_higher": 2,
+        "against_genuine_edit_lower": 1,
+        "against_original_higher": 2,
+        "against_original_lower": 1,
+        "target_rank_higher": 2,
+        "target_rank_lower": 1
+      },
+      "mean_log_probability": {
+        "against_both_human_controls_lower": 3,
+        "against_genuine_edit_higher": 1,
+        "against_genuine_edit_lower": 2,
+        "against_original_lower": 3,
+        "target_rank_lower": 3
+      },
+      "native_context": {
+        "against_both_human_controls_higher": 3,
+        "against_genuine_edit_higher": 3,
+        "against_original_higher": 3,
+        "target_rank_higher": 1,
+        "target_rank_lower": 2
+      }
+    }
+  },
+  "decision": {
+    "confidence_change": false,
+    "production_change": false,
+    "reason": "The candidate improved on its same-model likelihood reference and was weaker than the current classifier on paired human controls. The target rankings found complementary examples in this very small panel."
+  },
+  "generation": {
+    "admission": {
+      "qwen": {
+        "admitted": 2,
+        "not_one_sentence": 1,
+        "word_geometry": 5
+      },
+      "smol2": {
+        "admitted": 3,
+        "copied_target": 2,
+        "word_geometry": 3
+      }
+    },
+    "freeze_sha256": "99c1c730f9737576a8a281a07d7be1925cddbee6e6a4d01925f4a639f1814073",
+    "generator_checkpoints": {
+      "qwen": {
+        "license": "Apache-2.0",
+        "local_config_sha256": {
+          "config.json": "98d2ff8cc47488d08a2b0b3acf4eb99ef210779b42bd48605f6b8e36acdbf670",
+          "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+          "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+          "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+          "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+          "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+        },
+        "repo": "Qwen/Qwen2.5-1.5B-Instruct",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+        "weights_sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee"
+      },
+      "smol2": {
+        "license": "Apache-2.0",
+        "local_config_sha256": {
+          "config.json": "994f50b16abb4ae00880baefe03c10260b5bd608d2bf586f7056ca05a534feea",
+          "generation_config.json": "87b916edaaab66b3899b9d0dd0752727dff6666686da0504d89ae0a6e055a013",
+          "merges.txt": "0b54e8aa4e53d5383e2e4bc635a56b43f9647f7b13832d5d9ecd8f82dac4f510",
+          "special_tokens_map.json": "2b7379f3ae813529281a5c602bc5a11c1d4e0a99107aaa597fe936c1e813ca52",
+          "tokenizer.json": "9ca9acddb6525a194ec8ac7a87f24fbba7232a9a15ffa1af0c1224fcd888e47c",
+          "tokenizer_config.json": "4ec77d44f62efeb38d7e044a1db318f6a939438425312dfa333b8382dbad98df",
+          "vocab.json": "82b84012e3add4d01d12ba14442026e49b8cbbaead1f79ecf3d919784f82dc79"
+        },
+        "repo": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+        "revision": "31b70e2e869a7173562077fd711b654946d38674",
+        "weights_sha256": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8"
+      }
+    },
+    "generator_policies": {
+      "qwen": {
+        "max_tokens": 144,
+        "seed": 735961,
+        "temp": 0.35,
+        "top_p": 0.9
+      },
+      "smol2": {
+        "max_tokens": 144,
+        "seed": 389177,
+        "temp": 0.5,
+        "top_p": 0.9
+      }
+    },
+    "prompts": {
+      "qwen": "Rewrite ONLY the target sentence from an ordinary destination guide in fresh language and with a different sentence structure. Preserve all claims, relationships, technical names, and qualifiers. Write EXACTLY one sentence that fits the context, around {words} words. Output only the replacement sentence. End after its final punctuation.\n\nBefore: {left}\nTarget: {target}\nAfter: {right}",
+      "smol2": "Say the same thing in a different way. Return only one complete sentence, without quotation marks, labels or commentary. Use between {minimum} and {maximum} words. Preserve the facts and technical terms.\n\n{target}"
+    }
+  },
+  "independent_replay": {
+    "complete_vocabulary_rows_replayed": 4,
+    "constructed_human_replacements": 4,
+    "exact_native_contexts": 42,
+    "generated_exact_replacements": 5,
+    "genuine_revision_pairs": 4,
+    "identical_target_prefix_groups": 8,
+    "paired_metric_comparisons": 132,
+    "publisher_offsets": 52,
+    "scored_focuses": 42,
+    "scored_tokens": 1337
+  },
+  "paired_target_localization_vs_current": {
+    "0->0": 1,
+    "0->1": 2,
+    "1->0": 2
+  },
+  "protocol": {
+    "generation": "Two pinned Apache-2.0 instruction model families each make one local attempt to replace the exact target sentence. Retain complete source-aligned, distinct outputs under earlier sentence, copy, EOS, word-count and historical overlap checks. Before and after text outside the changed sentence is identical. Record all exclusions.",
+    "interpretation": "These are small, selected travel-guide examples. The scoring checkpoint shares a family with one generator, so show both generator families separately. Quantization, genre, names, copyedit strength, and pretraining exposure may matter. No production, confidence, or customer evidence decisions follow from this experiment alone.",
+    "methods": {
+      "curvature": "Same-model Fast-DetectGPT analytical statistic for exact focus tokens. Sum observed log probabilities minus their conditional expectation, divided by square root of summed per-token conditional variance. Compute exact full model vocabulary moments, with quantized local weights. Larger values mean observed tokens were more predictable than the scorer's conditional expectation.",
+      "mean_log_probability": "Mean observed conditional log probability of exact focus tokens using the same local causal model as curvature.",
+      "native_context": "Current classifier on both original three-sentence contexts; rank the two raw responses only."
+    },
+    "metrics": "Compare the two exact focus ranks in each case. For known generated targets compare the same target score with the original and the genuine-revision or human-substitution control from the same source. Report wins, losses, and ties by generator and control type. Also report when the genuine human control outranks the original. These are paired ranking tests without an authorship verdict.",
+    "schema": "chipmunk.travel-curvature-protocol/1",
+    "scope": "Four consecutive English sentences in one 68–134-word plain-text upload; both interior sentences have at least 12 model segmentation words. Score exact tokens in each interior focus with preceding paragraph tokens as causal context; refuse any non-whitespace character that is uncovered, shared with another sentence, or belongs to the unpredicted first token. No score cutoff or fitted weights.",
+    "sources": "Distinct Wikivoyage travel-guide pages with source versions from 2017–2021. Use four genuine adjacent revision pairs with one interior change in the selected excerpt and four separately labeled same-guide human sentence substitutions. Source topic and version selection use only legal rights, edit evidence, and exact app geometry. Exclude quotations, external text, media and templates. No normalized exact 12-token overlap across source groups or known prior packets."
+  },
+  "schema": "chipmunk.writing-token-curvature/1",
+  "scorer": {
+    "assets": {
+      "config.json": "0e8c8aa86468aba09c9d32157ff4bc2301c7e6c50e4398960425b2ea71e66f77",
+      "generation_config.json": "8c970692323e3ea0e9b8b0a4dca79388d31226e41f83c9fd6014804280ebf6e8",
+      "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+      "model.safetensors": "a961db72e75d52b18e6b0c9d379e51a26973b233385e0e127fdda7d648aec796",
+      "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+      "tokenizer_config.json": "c91efca15ceff6e9ee9424db58a6f59cd41294e550a86cbd07e3c1fb500b34f9",
+      "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+    },
+    "license": "Apache-2.0",
+    "overlapping_generator_family": "qwen",
+    "quantization": {
+      "bits": 4,
+      "group_size": 64,
+      "mode": "affine"
+    },
+    "revision": "8faed761d45a263340a0528343f099c05c9a4323",
+    "runtime": {
+      "mlx": "0.32.4",
+      "mlx-lm": "0.31.3",
+      "transformers": "5.22.1"
+    }
+  },
+  "scratch_bytes": 65007641,
+  "source_outcomes": {
+    "guide-01": {
+      "human_control_type": "genuine_revision",
+      "human_sentence": {
+        "curvature": {
+          "against_original": "lower",
+          "target_rank": "lower"
+        },
+        "mean_log_probability": {
+          "against_original": "lower",
+          "target_rank": "higher"
+        },
+        "native_context": {
+          "against_original": "lower",
+          "target_rank": "higher"
+        }
+      },
+      "original": {
+        "curvature": {
+          "target_rank": "higher"
+        },
+        "mean_log_probability": {
+          "target_rank": "higher"
+        },
+        "native_context": {
+          "target_rank": "higher"
+        }
+      }
+    },
+    "guide-02": {
+      "human_control_type": "genuine_revision",
+      "human_sentence": {
+        "curvature": {
+          "against_original": "higher",
+          "target_rank": "lower"
+        },
+        "mean_log_probability": {
+          "against_original": "higher",
+          "target_rank": "lower"
+        },
+        "native_context": {
+          "against_original": "higher",
+          "target_rank": "lower"
+        }
+      },
+      "original": {
+        "curvature": {
+          "target_rank": "lower"
+        },
+        "mean_log_probability": {
+          "target_rank": "lower"
+        },
+        "native_context": {
+          "target_rank": "lower"
+        }
+      },
+      "smol2": {
+        "curvature": {
+          "against_both_human_controls": "higher",
+          "against_genuine_edit": "higher",
+          "against_original": "higher",
+          "target_rank": "higher"
+        },
+        "mean_log_probability": {
+          "against_both_human_controls": "lower",
+          "against_genuine_edit": "lower",
+          "against_original": "lower",
+          "target_rank": "lower"
+        },
+        "native_context": {
+          "against_both_human_controls": "higher",
+          "against_genuine_edit": "higher",
+          "against_original": "higher",
+          "target_rank": "lower"
+        }
+      }
+    },
+    "guide-03": {
+      "human_control_type": "genuine_revision",
+      "human_sentence": {
+        "curvature": {
+          "against_original": "higher",
+          "target_rank": "higher"
+        },
+        "mean_log_probability": {
+          "against_original": "higher",
+          "target_rank": "higher"
+        },
+        "native_context": {
+          "against_original": "lower",
+          "target_rank": "lower"
+        }
+      },
+      "original": {
+        "curvature": {
+          "target_rank": "higher"
+        },
+        "mean_log_probability": {
+          "target_rank": "lower"
+        },
+        "native_context": {
+          "target_rank": "lower"
+        }
+      }
+    },
+    "guide-04": {
+      "human_control_type": "genuine_revision",
+      "human_sentence": {
+        "curvature": {
+          "against_original": "lower",
+          "target_rank": "lower"
+        },
+        "mean_log_probability": {
+          "against_original": "lower",
+          "target_rank": "lower"
+        },
+        "native_context": {
+          "against_original": "lower",
+          "target_rank": "lower"
+        }
+      },
+      "original": {
+        "curvature": {
+          "target_rank": "lower"
+        },
+        "mean_log_probability": {
+          "target_rank": "lower"
+        },
+        "native_context": {
+          "target_rank": "lower"
+        }
+      }
+    },
+    "guide-05": {
+      "human_control_type": "constructed_same_guide_sentence",
+      "human_sentence": {
+        "curvature": {
+          "against_original": "higher",
+          "target_rank": "lower"
+        },
+        "mean_log_probability": {
+          "against_original": "higher",
+          "target_rank": "lower"
+        },
+        "native_context": {
+          "against_original": "lower",
+          "target_rank": "higher"
+        }
+      },
+      "original": {
+        "curvature": {
+          "target_rank": "lower"
+        },
+        "mean_log_probability": {
+          "target_rank": "lower"
+        },
+        "native_context": {
+          "target_rank": "higher"
+        }
+      },
+      "qwen": {
+        "curvature": {
+          "against_both_human_controls": "lower",
+          "against_genuine_edit": "lower",
+          "against_original": "lower",
+          "target_rank": "lower"
+        },
+        "mean_log_probability": {
+          "against_both_human_controls": "lower",
+          "against_genuine_edit": "lower",
+          "against_original": "lower",
+          "target_rank": "lower"
+        },
+        "native_context": {
+          "against_both_human_controls": "higher",
+          "against_genuine_edit": "higher",
+          "against_original": "higher",
+          "target_rank": "higher"
+        }
+      },
+      "smol2": {
+        "curvature": {
+          "against_both_human_controls": "lower",
+          "against_genuine_edit": "lower",
+          "against_original": "lower",
+          "target_rank": "lower"
+        },
+        "mean_log_probability": {
+          "against_both_human_controls": "lower",
+          "against_genuine_edit": "lower",
+          "against_original": "lower",
+          "target_rank": "lower"
+        },
+        "native_context": {
+          "against_both_human_controls": "higher",
+          "against_genuine_edit": "higher",
+          "against_original": "higher",
+          "target_rank": "higher"
+        }
+      }
+    },
+    "guide-06": {
+      "human_control_type": "constructed_same_guide_sentence",
+      "human_sentence": {
+        "curvature": {
+          "against_original": "lower",
+          "target_rank": "higher"
+        },
+        "mean_log_probability": {
+          "against_original": "lower",
+          "target_rank": "lower"
+        },
+        "native_context": {
+          "against_original": "lower",
+          "target_rank": "higher"
+        }
+      },
+      "original": {
+        "curvature": {
+          "target_rank": "higher"
+        },
+        "mean_log_probability": {
+          "target_rank": "lower"
+        },
+        "native_context": {
+          "target_rank": "higher"
+        }
+      },
+      "smol2": {
+        "curvature": {
+          "against_both_human_controls": "higher",
+          "against_genuine_edit": "higher",
+          "against_original": "higher",
+          "target_rank": "higher"
+        },
+        "mean_log_probability": {
+          "against_both_human_controls": "lower",
+          "against_genuine_edit": "higher",
+          "against_original": "lower",
+          "target_rank": "lower"
+        },
+        "native_context": {
+          "against_both_human_controls": "higher",
+          "against_genuine_edit": "higher",
+          "against_original": "higher",
+          "target_rank": "lower"
+        }
+      }
+    },
+    "guide-07": {
+      "human_control_type": "constructed_same_guide_sentence",
+      "human_sentence": {
+        "curvature": {
+          "against_original": "higher",
+          "target_rank": "lower"
+        },
+        "mean_log_probability": {
+          "against_original": "lower",
+          "target_rank": "lower"
+        },
+        "native_context": {
+          "against_original": "lower",
+          "target_rank": "lower"
+        }
+      },
+      "original": {
+        "curvature": {
+          "target_rank": "lower"
+        },
+        "mean_log_probability": {
+          "target_rank": "lower"
+        },
+        "native_context": {
+          "target_rank": "lower"
+        }
+      },
+      "qwen": {
+        "curvature": {
+          "against_both_human_controls": "higher",
+          "against_genuine_edit": "higher",
+          "against_original": "higher",
+          "target_rank": "lower"
+        },
+        "mean_log_probability": {
+          "against_both_human_controls": "lower",
+          "against_genuine_edit": "lower",
+          "against_original": "lower",
+          "target_rank": "lower"
+        },
+        "native_context": {
+          "against_both_human_controls": "higher",
+          "against_genuine_edit": "higher",
+          "against_original": "higher",
+          "target_rank": "lower"
+        }
+      }
+    },
+    "guide-08": {
+      "human_control_type": "constructed_same_guide_sentence",
+      "human_sentence": {
+        "curvature": {
+          "against_original": "lower",
+          "target_rank": "higher"
+        },
+        "mean_log_probability": {
+          "against_original": "lower",
+          "target_rank": "lower"
+        },
+        "native_context": {
+          "against_original": "higher",
+          "target_rank": "higher"
+        }
+      },
+      "original": {
+        "curvature": {
+          "target_rank": "higher"
+        },
+        "mean_log_probability": {
+          "target_rank": "lower"
+        },
+        "native_context": {
+          "target_rank": "lower"
+        }
+      }
+    }
+  },
+  "sources": {
+    "cross_group_control_hits": 0,
+    "genuine_revision_editors": 4,
+    "known_prior_texts": 45399,
+    "license": "CC BY-SA 4.0",
+    "normalized_exact_12_token_history_hits": 0,
+    "ordinary_control_types": {
+      "constructed_same_guide_sentence": 4,
+      "genuine_revision": 4
+    },
+    "private_roster_sha256": "5ae8b5c49afb2eafa8a0abeda5a37a107d43980e7d410e1463e8548e01b21177",
+    "publisher": "Wikivoyage",
+    "rights_policy": "https://en.wikivoyage.org/wiki/Wikivoyage:How_to_re-use_Wikivoyage_guides",
+    "source_groups": 8
+  }
+}

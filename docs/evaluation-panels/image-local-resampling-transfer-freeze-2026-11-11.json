@@ -1,0 +1,169 @@
+{
+  "implementation_sha256": {
+    "backend/scripts/image_background_patch_score.py": "cb854082628636833e2fd005e954d0bdb7c78362e58ee98632f1ba4153224d5a",
+    "backend/scripts/image_background_patch_transfer.py": "da6ba064bc850d7bbc59b605c29305251d317cfc186ccb3d652cf713080f9dfe",
+    "backend/scripts/image_bg_real_insertion_score.py": "b8a91de6e686b5037ea65297aac52961ea995d701ca8aacf362b8715f94e303d",
+    "backend/scripts/image_boundary_blend_transfer.py": "fc65a5e3f064d74a5cd6fa528d9115aee92cc8eb9e04cb6dee13398e03388aa0",
+    "backend/scripts/image_edge_spread_transfer.py": "f9d434f1dbd2d04b4292e512e562cae52f7dd049690b45f97ef424b2d971c08c",
+    "backend/scripts/image_flux_detector_comparison_v280.py": "2a423629be60a7ed31478d37dca5c3ce3b4a84031b95d178deddd12388f1327d",
+    "backend/scripts/image_local_resampling_transfer.py": "52af616c15f9bb7cd25e2c1aee0cdbc1ad3756494d5eef1bac4c3c97903f8c5d"
+  },
+  "intake_sha256": {
+    "development": {
+      "attempts.jsonl": "59d8591da24d8886cca3ea071eefa5488aa3ac555ff5b21e0542dc267c47fb90",
+      "plan.json": "0d5cd6aadef8162c436c674e00ad835d91d3c7b5807daf0561cb8c58adf47aef",
+      "result.json": "6a8b09a8a4a8585f44faffd5ce18bba7c42a311934ce20bb3a70842aaef4d0b8"
+    },
+    "earlier": {
+      "attempts.jsonl": "3b8291b96634bca1920bddfd9239a53d69e143ea8efc74e565fd7406e749f9ce",
+      "plan.json": "2fc63a2d9f666ce2e593cb7c6b503120661b74a33dbf88f297e34d96ae3c3d7b",
+      "result.json": "fb0aafa7d109ca3e7fda3256fbd9fdf0e3b2afca265081092552b54cc8388731"
+    },
+    "later": {
+      "attempts.jsonl": "006a125678341700c243754a423c480b41bd86029a70f689ff1e7a467fc7fde7",
+      "plan.json": "a2176e567d71f2a80178adec7fb55e34007f6ad3114f9baf09837e233197fc34",
+      "result.json": "3d849ad48453c79002aa78d2d9cc8c7aeecc9f1979008060244c0bd01e065e86"
+    }
+  },
+  "method": {
+    "arms": [
+      "both_axes",
+      "quadrant_agreement"
+    ],
+    "authored_resampling": [
+      "resampled_linear",
+      "resampled_cubic",
+      "resampled_feathered"
+    ],
+    "cell_pixels": 16,
+    "confidence_contribution": 0,
+    "controls": [
+      "original",
+      "local_processing",
+      "global_processing",
+      "blur",
+      "feathered_processing",
+      "local_contrast",
+      "whole_linear",
+      "whole_cubic",
+      "native_paste"
+    ],
+    "development_roles": [
+      "original",
+      "global_processing",
+      "local_processing",
+      "blurred",
+      "local_contrast",
+      "sharpened",
+      "whole_linear",
+      "whole_cubic",
+      "native_paste"
+    ],
+    "flank_gap_cells": 1,
+    "flank_outer_cells": 3,
+    "formats": [
+      "png",
+      "jpeg75"
+    ],
+    "frequencies_cycles_per_pixel": [
+      0.15,
+      0.16,
+      0.16666666666666666,
+      0.17,
+      0.18,
+      0.19,
+      0.2,
+      0.21,
+      0.22,
+      0.27,
+      0.28,
+      0.2857142857142857,
+      0.29,
+      0.3,
+      0.31,
+      0.32,
+      0.33,
+      0.3333333333333333,
+      0.34,
+      0.35,
+      0.4,
+      0.41,
+      0.42,
+      0.42857142857142855,
+      0.43,
+      0.44,
+      0.45,
+      0.46
+    ],
+    "generated_edit_pilot_rule": "In both panels, quadrant agreement must localize at least two unmodified generated feathered edits at the same control bounds. This is separate from geometric evidence qualification.",
+    "geometry_pilot_rule": "In both panels, quadrant agreement must localize at least 18 of 36 authored edits including at least 4 of 12 feathered; at most 14 of 108 ordinary flags from at most 6 of 12 source groups.",
+    "mask_rule": "The selected native rectangle. Useful at 0.30 IoU and 0.50 edited-pixel recall.",
+    "min_texture": 0.65,
+    "minimum_point": 0.015,
+    "point_rule": "Strictly above the second-highest of eight source-level control maxima per delivery and arm.",
+    "scale_assignment": "Source slot modulo two, applied to both dimensions without anisotropic resize.",
+    "scales": [
+      [
+        6,
+        5
+      ],
+      [
+        7,
+        5
+      ]
+    ],
+    "sizes_hw_cells": [
+      [
+        6,
+        6
+      ],
+      [
+        6,
+        9
+      ],
+      [
+        9,
+        6
+      ],
+      [
+        8,
+        8
+      ],
+      [
+        8,
+        12
+      ],
+      [
+        12,
+        8
+      ],
+      [
+        10,
+        10
+      ],
+      [
+        12,
+        12
+      ]
+    ],
+    "unmodified_generated_edits": [
+      "edited",
+      "feathered_edit"
+    ]
+  },
+  "previous_confirmation_sha256": {
+    "earlier": "dae5623b6eb947c98b3e97e5ab73a3735ee3cf392d4a902c038869d8259b146e",
+    "later": "be4fffd689162bc37c4691fc46128ca495d716e265d282a8ed3f449ac84473e0"
+  },
+  "runtime": {
+    "numpy": "2.2.6",
+    "opencv": "5.0.0",
+    "pillow": "12.3.0"
+  },
+  "schema": "chipmunk.image-local-resampling-transfer/1",
+  "source_group_counts": [
+    8,
+    12,
+    12
+  ]
+}

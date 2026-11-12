@@ -1,0 +1,192 @@
+{
+  "advance": "Rank needs six more correct intervals than current, two more than dense centroid, gains in at least three held groups, at most two ordinary false flags, zero cut false flags, and at least 90% coverage separately on held swaps and ordinary controls.",
+  "freeze_sha256": "565d0d25dde09be902f57e8a576d1c5758edbbafccf0821330d1fe7012fda25c",
+  "groups_with_rank_gain": 5,
+  "held": {
+    "current": {
+      "camera": {
+        "measured_no_flag": 3,
+        "unassessed": 3
+      },
+      "cut": {
+        "false_flag": 4,
+        "measured_no_flag": 1,
+        "unassessed": 1
+      },
+      "rtfs": {
+        "measured_no_flag": 50,
+        "unassessed": 10
+      },
+      "swap": {
+        "localized": 20,
+        "measured_no_flag": 10,
+        "unassessed": 6
+      }
+    },
+    "dense_centroid": {
+      "camera": {
+        "measured_no_flag": 6
+      },
+      "cut": {
+        "measured_no_flag": 5,
+        "unassessed": 1
+      },
+      "rtfs": {
+        "measured_no_flag": 50,
+        "unassessed": 10
+      },
+      "swap": {
+        "localized": 4,
+        "measured_no_flag": 26,
+        "unassessed": 6
+      }
+    },
+    "rank": {
+      "camera": {
+        "false_flag": 4,
+        "measured_no_flag": 2
+      },
+      "cut": {
+        "false_flag": 3,
+        "measured_no_flag": 2,
+        "unassessed": 1
+      },
+      "rtfs": {
+        "false_flag": 38,
+        "measured_no_flag": 12,
+        "unassessed": 10
+      },
+      "swap": {
+        "localized": 14,
+        "measured_no_flag": 8,
+        "unassessed": 6,
+        "wrong_interval": 8
+      }
+    },
+    "rank_without_guard": {
+      "camera": {
+        "false_flag": 4,
+        "measured_no_flag": 2
+      },
+      "cut": {
+        "false_flag": 3,
+        "measured_no_flag": 2,
+        "unassessed": 1
+      },
+      "rtfs": {
+        "false_flag": 38,
+        "measured_no_flag": 12,
+        "unassessed": 10
+      },
+      "swap": {
+        "localized": 14,
+        "measured_no_flag": 8,
+        "unassessed": 6,
+        "wrong_interval": 8
+      }
+    }
+  },
+  "pilot_advances": false,
+  "point_sha256": "654f52f72ae31ced34b3982c9b1157c5354f80b3819e782114ebfa295adf033b",
+  "points": {
+    "development_journal_sha256": "9e3c91ab73f3e078913e58dbe2d4d6b9cd3b4bc0220e11b21e680c5efa52a3b6",
+    "freeze_sha256": "565d0d25dde09be902f57e8a576d1c5758edbbafccf0821330d1fe7012fda25c",
+    "measured_controls": {
+      "dense_centroid": 45,
+      "rank": 45
+    },
+    "planned_controls": 45,
+    "points": {
+      "current": 0.11243900750879454,
+      "dense_centroid": 0.730877355355221,
+      "rank": -0.012715119386331408,
+      "rank_without_guard": -0.012715119386331408
+    }
+  },
+  "policy": "Research evidence for a temporary face appearance transition only. No identity match, originality inference, or overall confidence contribution.",
+  "runtime": {
+    "development": {
+      "elapsed_s": 280.2707328750985,
+      "journal_sha256": "9e3c91ab73f3e078913e58dbe2d4d6b9cd3b4bc0220e11b21e680c5efa52a3b6",
+      "peak_rss_bytes": 348487680,
+      "verified_frames": 1246
+    },
+    "held": {
+      "elapsed_s": 391.4973542919615,
+      "journal_sha256": "15d51e753da0a5db1fb71ed3fafd01e1ecbb16b43ea6a6d1bf1add0a1b08de5e",
+      "peak_rss_bytes": 323567616,
+      "verified_frames": 2469
+    }
+  },
+  "schema": "chipmunk.video-face-return-transfer/1",
+  "swaps_by_duration": {
+    "current": {
+      "1/2": {
+        "localized": 10,
+        "unassessed": 2
+      },
+      "3/4": {
+        "localized": 10,
+        "unassessed": 2
+      },
+      "3/8": {
+        "measured_no_flag": 10,
+        "unassessed": 2
+      }
+    },
+    "dense_centroid": {
+      "1/2": {
+        "measured_no_flag": 10,
+        "unassessed": 2
+      },
+      "3/4": {
+        "measured_no_flag": 10,
+        "unassessed": 2
+      },
+      "3/8": {
+        "localized": 4,
+        "measured_no_flag": 6,
+        "unassessed": 2
+      }
+    },
+    "rank": {
+      "1/2": {
+        "localized": 4,
+        "measured_no_flag": 2,
+        "unassessed": 2,
+        "wrong_interval": 4
+      },
+      "3/4": {
+        "measured_no_flag": 6,
+        "unassessed": 2,
+        "wrong_interval": 4
+      },
+      "3/8": {
+        "localized": 10,
+        "unassessed": 2
+      }
+    },
+    "rank_without_guard": {
+      "1/2": {
+        "localized": 4,
+        "measured_no_flag": 2,
+        "unassessed": 2,
+        "wrong_interval": 4
+      },
+      "3/4": {
+        "measured_no_flag": 6,
+        "unassessed": 2,
+        "wrong_interval": 4
+      },
+      "3/8": {
+        "localized": 10,
+        "unassessed": 2
+      }
+    }
+  },
+  "window_coverage": {
+    "guarded": 32,
+    "scene_unavailable": 0,
+    "windows": 10055
+  }
+}

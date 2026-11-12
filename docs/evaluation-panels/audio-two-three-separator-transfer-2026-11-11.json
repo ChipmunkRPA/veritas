@@ -1,0 +1,169 @@
+{
+  "confirm": {
+    "advance": false,
+    "affected_groups": {
+      "constructed_confirmation/dry/novel_energy/three": 12,
+      "constructed_confirmation/dry/novel_energy/two": 3,
+      "constructed_confirmation/dry/qualified_novel_energy/three": 11,
+      "constructed_confirmation/dry/qualified_novel_energy/two": 3,
+      "constructed_confirmation/novel_energy/three": 12,
+      "constructed_confirmation/novel_energy/two": 3,
+      "constructed_confirmation/qualified_novel_energy/three": 12,
+      "constructed_confirmation/qualified_novel_energy/two": 3,
+      "constructed_confirmation/reflective/novel_energy/three": 8,
+      "constructed_confirmation/reflective/qualified_novel_energy/three": 8,
+      "natural_confirmation/native_mono/novel_energy/three": 2,
+      "natural_confirmation/native_mono/novel_energy/two": 2,
+      "natural_confirmation/native_mono/qualified_novel_energy/three": 2,
+      "natural_confirmation/native_mono/qualified_novel_energy/two": 1,
+      "natural_confirmation/novel_energy/three": 2,
+      "natural_confirmation/novel_energy/two": 2,
+      "natural_confirmation/qualified_novel_energy/three": 2,
+      "natural_confirmation/qualified_novel_energy/two": 1
+    },
+    "freeze_sha256": "9cd3cfc3c9310b649f6ffd313fb55d88e74a1cb73a34278eb5c74360b09dcd50",
+    "points_sha256": "d0cff47802ba41f303a14f071f2517a5b7e9b9d93570febe845335429cb79615",
+    "response_sha256": "035ff3dd1e71b76e1e5e5dc8e2b652b1d54092c492238f08ef68df118537ca40",
+    "seconds": 193.86592920904513,
+    "separation_forwards": 228,
+    "totals": {
+      "constructed_confirmation": {
+        "novel_energy_three_flag": 20,
+        "novel_energy_three_unassessed": 0,
+        "novel_energy_two_flag": 3,
+        "novel_energy_two_unassessed": 0,
+        "planned_three": 52,
+        "planned_two": 26,
+        "qualified_novel_energy_three_flag": 19,
+        "qualified_novel_energy_three_unassessed": 2,
+        "qualified_novel_energy_two_flag": 3,
+        "qualified_novel_energy_two_unassessed": 5
+      },
+      "constructed_confirmation/dry": {
+        "novel_energy_three_flag": 12,
+        "novel_energy_three_unassessed": 0,
+        "novel_energy_two_flag": 3,
+        "novel_energy_two_unassessed": 0,
+        "planned_three": 26,
+        "planned_two": 13,
+        "qualified_novel_energy_three_flag": 11,
+        "qualified_novel_energy_three_unassessed": 1,
+        "qualified_novel_energy_two_flag": 3,
+        "qualified_novel_energy_two_unassessed": 4
+      },
+      "constructed_confirmation/reflective": {
+        "novel_energy_three_flag": 8,
+        "novel_energy_three_unassessed": 0,
+        "novel_energy_two_flag": 0,
+        "novel_energy_two_unassessed": 0,
+        "planned_three": 26,
+        "planned_two": 13,
+        "qualified_novel_energy_three_flag": 8,
+        "qualified_novel_energy_three_unassessed": 1,
+        "qualified_novel_energy_two_flag": 0,
+        "qualified_novel_energy_two_unassessed": 1
+      },
+      "natural_confirmation": {
+        "novel_energy_three_flag": 5,
+        "novel_energy_three_unassessed": 0,
+        "novel_energy_two_flag": 3,
+        "novel_energy_two_unassessed": 0,
+        "planned_three": 18,
+        "planned_two": 18,
+        "qualified_novel_energy_three_flag": 3,
+        "qualified_novel_energy_three_unassessed": 5,
+        "qualified_novel_energy_two_flag": 1,
+        "qualified_novel_energy_two_unassessed": 7
+      },
+      "natural_confirmation/native_mono": {
+        "novel_energy_three_flag": 5,
+        "novel_energy_three_unassessed": 0,
+        "novel_energy_two_flag": 3,
+        "novel_energy_two_unassessed": 0,
+        "planned_three": 18,
+        "planned_two": 18,
+        "qualified_novel_energy_three_flag": 3,
+        "qualified_novel_energy_three_unassessed": 5,
+        "qualified_novel_energy_two_flag": 1,
+        "qualified_novel_energy_two_unassessed": 7
+      }
+    }
+  },
+  "fit": {
+    "advance": false,
+    "affected_groups": {
+      "development/novel_energy/two": 1,
+      "development/qualified_novel_energy/two": 1,
+      "development/reflective/novel_energy/two": 1,
+      "development/reflective/qualified_novel_energy/two": 1
+    },
+    "freeze_sha256": "9cd3cfc3c9310b649f6ffd313fb55d88e74a1cb73a34278eb5c74360b09dcd50",
+    "points_sha256": "d0cff47802ba41f303a14f071f2517a5b7e9b9d93570febe845335429cb79615",
+    "response_sha256": "043c9b331061f0f38b6809d44d368843c9455567a7feb41e3f0c1b3c9d440fc3",
+    "seconds": 28.496059208060615,
+    "separation_forwards": 32,
+    "totals": {
+      "constructed_confirmation": {},
+      "development": {
+        "novel_energy_two_flag": 1,
+        "novel_energy_two_unassessed": 0,
+        "planned_two": 16,
+        "qualified_novel_energy_two_flag": 1,
+        "qualified_novel_energy_two_unassessed": 4
+      },
+      "development/dry": {
+        "novel_energy_two_flag": 0,
+        "novel_energy_two_unassessed": 0,
+        "planned_two": 8,
+        "qualified_novel_energy_two_flag": 0,
+        "qualified_novel_energy_two_unassessed": 4
+      },
+      "development/reflective": {
+        "novel_energy_two_flag": 1,
+        "novel_energy_two_unassessed": 0,
+        "planned_two": 8,
+        "qualified_novel_energy_two_flag": 1,
+        "qualified_novel_energy_two_unassessed": 0
+      }
+    }
+  },
+  "freeze": {
+    "cases": {
+      "constructed_confirmation": 78,
+      "development": 16,
+      "natural_confirmation": 36
+    },
+    "implementation_sha256": "0dd450905a11a092fde8ee78a4e236f4352d9d8ab0ea69e649c8b0f7f00badb9",
+    "method": {
+      "advance": "At least half the three-voice cases and at most one in six two-voice controls must receive compound support in both panels.",
+      "matching": "At native alignment, match two outputs to the best distinct pair of three outputs by total absolute correlation. Score the unmatched third output by residual RMS after least-squares projection onto the two-output subspace, divided by mixture RMS.",
+      "points": "Second-highest group maximum over the 16 constructed development two-voice controls. Replay all constructed and natural confirmation cases.",
+      "qualification": "Require both matched correlations >=0.60 and at least 0.48 s independently detected speech in the unmatched output. The reference labels never enter this calculation."
+    },
+    "schema": "chipmunk.two-three-separator-transfer/1",
+    "source_roster_freeze_sha256": "1f6121cacb4edc256b643dd767f89c03ea52f4ca5257ccfca5300949002af679",
+    "three_voice_revision": "1f2d824e2333aec9e60d0030fb144885c1afc426",
+    "two_voice_assets": {
+      "decoder.ckpt": "05340634088efb00ec448f548af107d5d932057ea214dd64497f34106247e184",
+      "encoder.ckpt": "740d082e75b92370bc12f176d5b5554f6383cf8bc607da8ac8a550255987ed4a",
+      "hyperparams.yaml": "19b0c807be63a5767509c30adb5c0176688ff2d077fd9bb95d0cf188cbd4d4e5",
+      "masknet.ckpt": "f54762647082a8fe75a1cacc6c3d463b967223fc77c836cc4fb8ca2a272d9a75"
+    },
+    "two_voice_revision": "eb43c5bfbb2aa654630adbf849373bcec0a20ed4"
+  },
+  "independent_arithmetic_replay": {
+    "verified_cases": 130,
+    "verified_condition_rollups": 9,
+    "verified_group_points": 2,
+    "verified_native_clocks": 36
+  },
+  "points": {
+    "development_sha256": "043c9b331061f0f38b6809d44d368843c9455567a7feb41e3f0c1b3c9d440fc3",
+    "freeze_sha256": "9cd3cfc3c9310b649f6ffd313fb55d88e74a1cb73a34278eb5c74360b09dcd50",
+    "values": {
+      "novel_energy": 6.162820916419861,
+      "qualified_novel_energy": 6.162820916419861
+    }
+  },
+  "schema": "chipmunk.two-three-separator-transfer-public/1"
+}

@@ -97,6 +97,29 @@ integration remains unfinished.
 
 ## Progress on 11 November
 
+- The [stream-presence transfer](audio-stream-presence-transfer-2026-11-11.md)
+  separated lab and natural results. The stability cue found 37/52 controlled
+  three-voice cases with zero flags on 26 two-voice controls. It found zero of
+  18 natural three-voice windows from three AMI rooms. The release includes
+  independent annotation selection and native sample-clock verification.
+  The paired separator experiment supported 3/18 natural three-voice cases
+  with 1/18 false flags. Its 19/52 controlled support also fell below the
+  advancement requirement.
+- The [local resampling cue](image-local-resampling-transfer-2026-11-11.md)
+  localized 11/72 intentionally resized PNG patches with 3/216 ordinary PNG
+  flags. It found zero corresponding JPEG75 regions and zero unmodified
+  generated edits. The supported cue is specific to native resampling geometry.
+- The [short face-return comparison](video-face-return-transfer-2026-11-11.md)
+  found 10/12 swaps at 0.375 seconds versus 0/12 for the current appearance
+  check, but added 42/66 ordinary false flags at its original frozen point.
+  Requiring a positive rank margin after scoring preserved those 10 short hits
+  and removed the false flags. Test the fixed positive-margin cue on different
+  source groups before relying on that result.
+- The [writing token-curvature test](writing-token-curvature-2026-11-11.md)
+  scored 3/5 generated edits above both paired human controls versus 5/5 with
+  the current context response. Both ranked two exact locations first, in
+  different examples. The new score also rose on four of eight human edits.
+
 - The [similar-voice audio transfer](audio-hard-overlap-transfer-2026-11-11.md)
   tested 504 new mixtures from 63 distinct VoxPopuli speakers. The strongest
   prior normalized rule reduced mistaken three-voice routes from 181 to 163 of

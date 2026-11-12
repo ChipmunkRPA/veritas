@@ -1,0 +1,306 @@
+{
+  "confirm": {
+    "advance": false,
+    "affected_groups": {
+      "constructed_confirmation/activity/three": 9,
+      "constructed_confirmation/activity/two": 2,
+      "constructed_confirmation/aligned_stability/three": 13,
+      "constructed_confirmation/aligned_stability/two": 1,
+      "constructed_confirmation/dry/activity/three": 8,
+      "constructed_confirmation/dry/activity/two": 1,
+      "constructed_confirmation/dry/aligned_stability/three": 12,
+      "constructed_confirmation/dry/aligned_stability/two": 1,
+      "constructed_confirmation/dry/raw_energy/three": 13,
+      "constructed_confirmation/dry/raw_energy/two": 13,
+      "constructed_confirmation/dry/stable_independent/three": 12,
+      "constructed_confirmation/raw_energy/three": 13,
+      "constructed_confirmation/raw_energy/two": 13,
+      "constructed_confirmation/reflective/activity/three": 6,
+      "constructed_confirmation/reflective/activity/two": 2,
+      "constructed_confirmation/reflective/aligned_stability/three": 10,
+      "constructed_confirmation/reflective/raw_energy/three": 13,
+      "constructed_confirmation/reflective/raw_energy/two": 13,
+      "constructed_confirmation/reflective/stable_independent/three": 10,
+      "constructed_confirmation/stable_independent/three": 13,
+      "natural_confirmation/aligned_stability/three": 1,
+      "natural_confirmation/native_mono/aligned_stability/three": 1,
+      "natural_confirmation/native_mono/raw_energy/three": 3,
+      "natural_confirmation/native_mono/raw_energy/two": 3,
+      "natural_confirmation/raw_energy/three": 3,
+      "natural_confirmation/raw_energy/two": 3
+    },
+    "forwards": 342,
+    "freeze_sha256": "1f6121cacb4edc256b643dd767f89c03ea52f4ca5257ccfca5300949002af679",
+    "points_sha256": "778980fbbf63c0470934e71828fe0a606112d0b8ba9af4ddd8a52e1713cd3026",
+    "private_response_sha256": "a2761bcd93ab072460c222ead90c49ea59cd7952a6a0a32bd05593012c52ed3b",
+    "seconds": 299.14834979199804,
+    "totals": {
+      "constructed_confirmation": {
+        "activity_qualified_three": 52,
+        "activity_qualified_two": 24,
+        "activity_three_flag": 23,
+        "activity_two_flag": 3,
+        "aligned_stability_three_flag": 37,
+        "aligned_stability_two_flag": 1,
+        "planned_three": 52,
+        "planned_two": 26,
+        "raw_energy_three_flag": 52,
+        "raw_energy_two_flag": 26,
+        "reference_third_recovered": 40,
+        "reference_third_recovered_and_compound_flagged": 34,
+        "stable_independent_three_flag": 37,
+        "stable_independent_two_flag": 0,
+        "unmatched_largely_both_known_voices": 1,
+        "unmatched_largely_one_known_voice": 3,
+        "unmatched_unexplained_by_linear_reference_mix": 22
+      },
+      "constructed_confirmation/dry": {
+        "activity_qualified_three": 26,
+        "activity_qualified_two": 11,
+        "activity_three_flag": 12,
+        "activity_two_flag": 1,
+        "aligned_stability_three_flag": 21,
+        "aligned_stability_two_flag": 1,
+        "planned_three": 26,
+        "planned_two": 13,
+        "raw_energy_three_flag": 26,
+        "raw_energy_two_flag": 13,
+        "reference_third_recovered": 22,
+        "reference_third_recovered_and_compound_flagged": 19,
+        "stable_independent_three_flag": 21,
+        "stable_independent_two_flag": 0,
+        "unmatched_largely_one_known_voice": 2,
+        "unmatched_unexplained_by_linear_reference_mix": 11
+      },
+      "constructed_confirmation/reflective": {
+        "activity_qualified_three": 26,
+        "activity_qualified_two": 13,
+        "activity_three_flag": 11,
+        "activity_two_flag": 2,
+        "aligned_stability_three_flag": 16,
+        "aligned_stability_two_flag": 0,
+        "planned_three": 26,
+        "planned_two": 13,
+        "raw_energy_three_flag": 26,
+        "raw_energy_two_flag": 13,
+        "reference_third_recovered": 18,
+        "reference_third_recovered_and_compound_flagged": 15,
+        "stable_independent_three_flag": 16,
+        "stable_independent_two_flag": 0,
+        "unmatched_largely_both_known_voices": 1,
+        "unmatched_largely_one_known_voice": 1,
+        "unmatched_unexplained_by_linear_reference_mix": 11
+      },
+      "natural_confirmation": {
+        "activity_qualified_three": 12,
+        "activity_qualified_two": 5,
+        "activity_three_flag": 0,
+        "activity_two_flag": 0,
+        "aligned_stability_three_flag": 1,
+        "aligned_stability_two_flag": 0,
+        "planned_three": 18,
+        "planned_two": 18,
+        "raw_energy_three_flag": 18,
+        "raw_energy_two_flag": 18,
+        "stable_independent_three_flag": 0,
+        "stable_independent_two_flag": 0
+      },
+      "natural_confirmation/native_mono": {
+        "activity_qualified_three": 12,
+        "activity_qualified_two": 5,
+        "activity_three_flag": 0,
+        "activity_two_flag": 0,
+        "aligned_stability_three_flag": 1,
+        "aligned_stability_two_flag": 0,
+        "planned_three": 18,
+        "planned_two": 18,
+        "raw_energy_three_flag": 18,
+        "raw_energy_two_flag": 18,
+        "stable_independent_three_flag": 0,
+        "stable_independent_two_flag": 0
+      }
+    }
+  },
+  "fit": {
+    "advance": false,
+    "affected_groups": {
+      "development/activity/three": 4,
+      "development/activity/two": 1,
+      "development/aligned_stability/three": 8,
+      "development/aligned_stability/two": 1,
+      "development/dry/activity/three": 4,
+      "development/dry/activity/two": 1,
+      "development/dry/aligned_stability/three": 8,
+      "development/dry/aligned_stability/two": 1,
+      "development/dry/raw_energy/three": 8,
+      "development/dry/raw_energy/two": 8,
+      "development/dry/stable_independent/three": 8,
+      "development/dry/stable_independent/two": 1,
+      "development/raw_energy/three": 8,
+      "development/raw_energy/two": 8,
+      "development/reflective/activity/three": 4,
+      "development/reflective/activity/two": 1,
+      "development/reflective/aligned_stability/three": 7,
+      "development/reflective/aligned_stability/two": 1,
+      "development/reflective/raw_energy/three": 8,
+      "development/reflective/raw_energy/two": 8,
+      "development/reflective/stable_independent/three": 7,
+      "development/reflective/stable_independent/two": 1,
+      "development/stable_independent/three": 8,
+      "development/stable_independent/two": 1
+    },
+    "forwards": 144,
+    "freeze_sha256": "1f6121cacb4edc256b643dd767f89c03ea52f4ca5257ccfca5300949002af679",
+    "points_sha256": "778980fbbf63c0470934e71828fe0a606112d0b8ba9af4ddd8a52e1713cd3026",
+    "private_response_sha256": "4725496f1819176768d4305f6e1f7689d09b1e0f7641ded0a56806bd01426bda",
+    "seconds": 126.04702083300799,
+    "totals": {
+      "constructed_confirmation": {},
+      "development": {
+        "activity_qualified_three": 32,
+        "activity_qualified_two": 14,
+        "activity_three_flag": 14,
+        "activity_two_flag": 2,
+        "aligned_stability_three_flag": 27,
+        "aligned_stability_two_flag": 2,
+        "planned_three": 32,
+        "planned_two": 16,
+        "raw_energy_three_flag": 32,
+        "raw_energy_two_flag": 16,
+        "reference_third_recovered": 26,
+        "reference_third_recovered_and_compound_flagged": 25,
+        "stable_independent_three_flag": 27,
+        "stable_independent_two_flag": 2,
+        "unmatched_largely_both_known_voices": 1,
+        "unmatched_largely_one_known_voice": 4,
+        "unmatched_unexplained_by_linear_reference_mix": 11
+      },
+      "development/dry": {
+        "activity_qualified_three": 16,
+        "activity_qualified_two": 6,
+        "activity_three_flag": 7,
+        "activity_two_flag": 1,
+        "aligned_stability_three_flag": 15,
+        "aligned_stability_two_flag": 1,
+        "planned_three": 16,
+        "planned_two": 8,
+        "raw_energy_three_flag": 16,
+        "raw_energy_two_flag": 8,
+        "reference_third_recovered": 15,
+        "reference_third_recovered_and_compound_flagged": 14,
+        "stable_independent_three_flag": 15,
+        "stable_independent_two_flag": 1,
+        "unmatched_largely_one_known_voice": 2,
+        "unmatched_unexplained_by_linear_reference_mix": 6
+      },
+      "development/reflective": {
+        "activity_qualified_three": 16,
+        "activity_qualified_two": 8,
+        "activity_three_flag": 7,
+        "activity_two_flag": 1,
+        "aligned_stability_three_flag": 12,
+        "aligned_stability_two_flag": 1,
+        "planned_three": 16,
+        "planned_two": 8,
+        "raw_energy_three_flag": 16,
+        "raw_energy_two_flag": 8,
+        "reference_third_recovered": 11,
+        "reference_third_recovered_and_compound_flagged": 11,
+        "stable_independent_three_flag": 12,
+        "stable_independent_two_flag": 1,
+        "unmatched_largely_both_known_voices": 1,
+        "unmatched_largely_one_known_voice": 2,
+        "unmatched_unexplained_by_linear_reference_mix": 5
+      }
+    }
+  },
+  "freeze": {
+    "activity_sha256": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720",
+    "cases": {
+      "constructed_confirmation": 78,
+      "development": 48,
+      "natural_confirmation": 36
+    },
+    "implementation_sha256": "8d49b925f6e983de3a23bea442022a3b2cdd67f39fae123e6136c21f9596ea46",
+    "input_roster_sha256": "ab0ea51da0f6d74f86416ed184cb48d78e4307826cda91b7e891ff882d87383e",
+    "method": {
+      "activity": "Measure 16 kHz activity on the three base outputs. Require at least 160 ms of shared activity with each output at or above 4% of mixture RMS.",
+      "advance": "A compound cue must flag at least half the three-voice inputs and at most one in six two-voice controls in both confirmation panels. The result carries zero authenticity weight.",
+      "comparison": "Fit each score at the second-highest maximum over two-voice controls from the eight development source groups. A result above its own strict point supports three voices. Also replay the raw 10% RMS rule.",
+      "independence": "Use the weakest base stream's unexplained energy after fitting the other two streams by least squares at exact alignment. Compound stability is the minimum of aligned stability and independence.",
+      "source_roles": "Eight earlier separator-pilot triplets for point selection, all 13 remaining VoxPopuli triplets for constructed confirmation, and three separately downloaded first-party natural AMI rooms with annotation-controlled two- and three-voice intervals.",
+      "stability": "Permute the two shifted output sets to match the base output set by absolute sample-aligned correlation. Use the weakest aligned output across both shifts.",
+      "views_at_8_khz": [
+        [
+          0,
+          0
+        ],
+        [
+          320,
+          80
+        ],
+        [
+          720,
+          160
+        ]
+      ]
+    },
+    "native_sources": [
+      {
+        "group": 0,
+        "sha256": "e4a5b8995e8cc47ae4fb25eda51087382bcffd1e1ffba0e8489d195b32c66c69"
+      },
+      {
+        "group": 1,
+        "sha256": "e0374bc9e4dc6d7029ddd0fbf1710b9816a0992dc4a37048ae841aaa1d0b8b5b"
+      },
+      {
+        "group": 2,
+        "sha256": "690624fe64863c718f999a11ac4aad46bb1b28fe1c7febe8cd65bbd9618fb8ae"
+      }
+    ],
+    "natural_selection_sha256": "6a35b68edec375a83db430ee8dca94abba2270e0159253aa8bd0f86ff48b457f",
+    "parent_manifest_sha256": "207f2084f1dd036f197c404c5b727f7740266b6eaa2037cb6488da33c954399a",
+    "schema": "chipmunk.stream-presence-transfer/1",
+    "separator_assets": {
+      "decoder.ckpt": "9afdda4e4ecb9eefb5d49329193c7a9215ae7443aab206f2fe4eb0f50988ca53",
+      "encoder.ckpt": "e949e80c1a96965b723460209bb155eac1fdb2f6d2cf4e7b3e1d3152716f38d0",
+      "hyperparams.yaml": "4f0ae05600c66d7f8cf1269f54fd32dad576d4d473ad7169ef6ab26190658233",
+      "masknet.ckpt": "416af7b09d912c486261dd824788dd92d3b21373c8ec4d029209792522f4dbcb"
+    },
+    "separator_revision": "1f2d824e2333aec9e60d0030fb144885c1afc426"
+  },
+  "independent_source_annotation_verification": {
+    "distinct_natural_participants": 12,
+    "distinct_natural_recordings": 3,
+    "minimum_exact_overlap_centiseconds": {
+      "2": 46,
+      "3": 49
+    },
+    "native_cases_by_reference_voice_count": {
+      "2": 18,
+      "3": 18
+    },
+    "source_plan_sha256": "6a35b68edec375a83db430ee8dca94abba2270e0159253aa8bd0f86ff48b457f"
+  },
+  "natural_plan_selector_sha256": "b3605f30c71b11845eb59cbf9e474d073ebad3e880403dd039617fe90d997000",
+  "points": {
+    "development_sha256": "4725496f1819176768d4305f6e1f7689d09b1e0f7641ded0a56806bd01426bda",
+    "freeze_sha256": "1f6121cacb4edc256b643dd767f89c03ea52f4ca5257ccfca5300949002af679",
+    "points": {
+      "activity": 0.838,
+      "aligned_stability": 0.9358035750129593,
+      "stable_independent": 0.9358035750129593
+    }
+  },
+  "portable_verification": {
+    "verified_advancement_outcome": false,
+    "verified_condition_rollups": 9,
+    "verified_constructed_confirmation_groups": 13,
+    "verified_development_groups": 8,
+    "verified_natural_source_clocks": 36,
+    "verified_pcm_ranges": 162
+  },
+  "portable_verifier_sha256": "ab55637c9d06f4df527d9be34a4f2f528321b65188b315087bee77a815ca3a6d",
+  "schema": "chipmunk.stream-presence-transfer-public/1"
+}

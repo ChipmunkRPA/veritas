@@ -1,0 +1,40 @@
+{
+  "clone_sources_with_activity_in_discarded_channel": 2,
+  "generator_families": [
+    "DuplexGen PLN / Chatterbox"
+  ],
+  "groups_attempted": 17,
+  "historical_exclusion_keys": 34018,
+  "known_previous_dialogue_context_groups": 8,
+  "known_previous_speaker_identity_groups": 14,
+  "metadata_slots_frozen": {
+    "confirmation": 16,
+    "selection": 10
+  },
+  "method": {
+    "clocks": "Retain first eight seconds of host, first four seconds of enrollment and first three seconds of generated donor. The donor is the sidecar-declared native user channel only, at its original clock before normalization. Original normalized decode and WAV round trip are mono 16 kHz s16 with a single continuous source range. Six seconds can be cut from host after a two-second same-host genuine donor reserve. Future clip mix and edit ranges require a separate freeze.",
+    "identity": "Compare publisher PLN isolated user-turn sidecar's LibriSpeech user_prompt_speaker_id against exact original LibriSpeech Parquet speaker ID and utterance path for both genuine sources. These are declared corpus identities. Original synthesis prompt paths are stripped.",
+    "order": "Before reading any selected audio, salt-order canonical identities and choose one unique dialogue/script clone per identity from metadata. Freeze up to ten point and sixteen held candidates, alternating source-role allocation while both have space. Use the first six/eight source-qualified speakers, respectively. Within each identity retain ordered metadata candidates, pair different chapters, and reject any known exact prior source/script or byte/PCM match. Previously known speaker or dialogue context can enter a role and is disclosed. Never read detector scores.",
+    "reference": "Bind four exact seconds from an original whose full duration is at least four and at most five seconds and which differs from the host utterance and chapter. The public renderer requires source prompts longer than five seconds. The exact archived synthesis prompt cannot be verified independently.",
+    "scope": "One documented synthesis family and no detector or acoustic measurements. Room names allocate four separate meeting cohorts prospectively; this stage does not read or qualify any room audio or claim full-panel independence from model training."
+  },
+  "new_neural_calls": 0,
+  "private_commitments": {
+    "freeze": "944bdef592ea370911f63d3b1990a266132edb915d2a60ab3f97c8501ce0b844",
+    "sources": "fb8e7fae5bf1c66ba4527f55de571cb3e63cd78078b738154e77f1e485f5a20b"
+  },
+  "proof_source_minimum_met": true,
+  "qualified_by_future_room": {
+    "ES2004a": 3,
+    "ES2010d": 4,
+    "IS1007a": 4,
+    "IS1009a": 3
+  },
+  "qualified_groups": {
+    "confirmation": 8,
+    "selection": 6
+  },
+  "schema": "chipmunk.audio-same-speaker-clone-sources/1",
+  "source_wav_files": 42,
+  "unavailable_groups": 3
+}

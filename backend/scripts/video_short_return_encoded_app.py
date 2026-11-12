@@ -11,6 +11,7 @@ import io
 import json
 import os
 import secrets
+import sys
 import time
 import uuid
 from fractions import Fraction
@@ -169,6 +170,9 @@ def encode_report(client, aid, source, evidence, images, folder):
 
 
 def configure(output, root):
+    if "app.core.config" in sys.modules:
+        raise RuntimeError("Set up the isolated smoke test before importing application settings")
+    output = output.resolve()
     output.mkdir(mode=0o700, exist_ok=False)
     data = output / "app"
     os.environ.update(VERITAS_DATA_DIR=str(data), VERITAS_DATABASE_URL=f"sqlite:///{data}/veritas.db",

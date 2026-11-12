@@ -148,8 +148,11 @@ class LocaliserDetector(Detector):
                               quality={"regions": float(n), "unreliable_share": out.conditions["unreliable"],
                                        "tiles": float(out.resolution_policy["tiles"]),
                                        "screening_scale": round(self.INPUT / max(width, height), 4)})
-        units = [UnitScore(f"region:{k}", stat["mean"], "score", quality={"area_share": stat["area_share"], "max": stat["max"]})
-                 for k, stat in enumerate(out.region_stats, 1)]
+        region_ids = ([str(region["display_id"]).removeprefix("R") for region in out.regions]
+                      if "flip_consistency" in out.resolution_policy else list(range(1, n + 1)))
+        units = [UnitScore(f"region:{region_id}", stat["mean"], "score",
+                           quality={"area_share": stat["area_share"], "max": stat["max"]})
+                 for region_id, stat in zip(region_ids, out.region_stats, strict=True)]
         flagged = float((out.anomaly_map >= self.REGION_THRESHOLD).mean())
         largest = (f"; R1 mean {out.region_stats[0]['mean']:.2f} over {100 * out.region_stats[0]['area_share']:.1f} % of the "
                    "image" if n else "")

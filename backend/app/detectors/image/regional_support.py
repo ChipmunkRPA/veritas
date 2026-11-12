@@ -20,6 +20,7 @@ class RegionalReadout:
     regions: list[dict]
     stats: list[dict]
     selected_grid_mask: np.ndarray
+    component_masks: tuple[np.ndarray, ...]
 
     def source_mask(self, width: int, height: int) -> np.ndarray:
         return np.asarray(Image.fromarray(self.selected_grid_mask.astype(np.uint8) * 255).resize(
@@ -63,7 +64,8 @@ def readout(raw: np.ndarray, gate: bool, threshold: float, data: bytes, pixels: 
             raise ValueError("Regional component membership is ambiguous")
         memberships.append(matches[0])
     selected = np.isin(labels, memberships)
-    return RegionalReadout(floating, recorded, reliable, conditions, regions, stats, selected)
+    return RegionalReadout(floating, recorded, reliable, conditions, regions, stats, selected,
+                           tuple(labels == label for label in memberships))
 
 
 def shared_pixels(a: RegionalReadout, b: RegionalReadout) -> np.ndarray:

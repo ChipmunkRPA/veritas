@@ -26,7 +26,11 @@ from app.api.public_projection import alias_signal
 from app.core.canonical import FLOAT_DP, canonical_hash, canonical_json
 from app.detectors.image import sharp_boundary
 from app.engine.media import MAX_PIXELS, MAX_SIDE, refuse_truncated_images
-from app.evidence.image_eligibility import validate_gate, validate_inspection_coverage
+from app.evidence.image_eligibility import (
+    validate_flip_consistency,
+    validate_gate,
+    validate_inspection_coverage,
+)
 from app.evidence.source_geometry import pixel_bounds
 from app.storage.artefacts import get_artefact, register_artefact
 from app.storage.db import Analysis, Artefact
@@ -256,6 +260,13 @@ def _localisation_component(signals: list[dict], values: np.ndarray, reliable: n
     if len(matches) != 1:
         raise PacketIntegrityError("The recorded region cannot be matched to one local editing component")
     component = labels == matches[0]
+    repeat = rule.get("resolution_policy", {}).get("flip_consistency")
+    retained = None
+    if repeat is not None:
+        bounds = list(_box(rect).values())
+        retained = next((row for row in repeat["candidates"] if row["retained"] and row["bounds"] == bounds), None)
+        if retained is None or retained["source_pixels"] != int(component.sum()):
+            raise PacketIntegrityError("Image region does not match its recorded repeat-pass selection")
     return component, {"threshold": threshold, "comparison": "greater_or_equal", "grid": [gw, gh],
                        "region_cells": int(component.sum()), "region_area_fraction": float(component.mean()),
                        "reliable_area_fraction": float(reliable.mean()),
@@ -265,6 +276,7 @@ def _localisation_component(signals: list[dict], values: np.ndarray, reliable: n
                        "selection": "connected_component", "connectivity": 8,
                        "capability": "ai_inpainting" if rule.get("capability") == "ai_inpainting" else "local_editing",
                        "validation_status": "limited_local_evaluation" if gate else "local_evaluation_pending",
+                       **({"flip_consistency": retained} if retained is not None else {}),
                        **({"candidate_eligibility": gate} if gate is not None else {})}
 
 
@@ -285,6 +297,12 @@ def _inspection_record(signals: list[dict], heat: dict, values: np.ndarray, reli
     minimum = max(1, math.ceil(rule["minimum_region_fraction"] * values.size))
     raw = sum(int(s[cv2.CC_STAT_AREA]) >= minimum for s in stats[1:])
     eligible = raw if gate is None or gate["eligible"] else 0
+    repeat = rule.get("resolution_policy", {}).get("flip_consistency")
+    if repeat is not None:
+        try:
+            eligible = validate_flip_consistency(repeat, eligible, values.shape[1], values.shape[0])
+        except ValueError as exc:
+            raise PacketIntegrityError(str(exc)) from exc
     return {"signal_refs": [_public_signal(s) for s in signals], "exhibit_ref": heat["id"],
             "scalar_map_sha256": scalar_sha, "map_grid": list(values.shape[::-1]),
             "selection_rule": {k: rule[k] for k in ("threshold", "comparison", "scalar_encoding",
@@ -293,6 +311,7 @@ def _inspection_record(signals: list[dict], heat: dict, values: np.ndarray, reli
             "excluded_area_fraction": float(1 - reliable.mean()),
             "raw_components": raw, "eligible_components": eligible, "selected_components": 0,
             "omitted_components": eligible,
+            **({"flip_consistency": repeat} if repeat is not None else {}),
             **({"candidate_eligibility": gate} if gate is not None else {})}
 
 
@@ -380,6 +399,8 @@ def validate_packet_source_mapping(document: dict[str, Any], result: dict[str, A
         rules = [s.get("details", {}).get("localisation", {}) for s in signals]
         if not rules or any(r.get("candidate_eligibility") != check.get("candidate_eligibility") for r in rules):
             raise PacketIntegrityError("Image inspection eligibility differs from the frozen check")
+        if any(r.get("resolution_policy", {}).get("flip_consistency") != check.get("flip_consistency") for r in rules):
+            raise PacketIntegrityError("Image repeat-pass evidence differs from the frozen check")
     for packet in document.get("packets", []):
         for ref in packet.get("exhibit_refs", []):
             heat = maps.get(ref)
@@ -527,6 +548,10 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                     observation = (f"A local editing check marked {100 * localisation['region_area_fraction']:.2f}% of the image "
                                    f"in this connected region at score ≥ {localisation['threshold']:.2f}; "
                                    f"its mean response is {mean:.3f}")
+                    if flip := localisation.get("flip_consistency"):
+                        overlap = round(100 * flip["shared_pixels"] / flip["source_pixels"], 3)
+                        measurements.append({"label": "Flipped-pass overlap on the source grid", "value": overlap, "unit": "%"})
+                        limits.append("The same check supported this region after a horizontal flip. This measures repeatability and carries zero weight in AI authorship confidence.")
                     limits.append(f"The measured mask grid is {gw} × {gh}; displayed boundaries are resampled to the original, not original-pixel certainty.")
                     limits.append("This check is not validated for general AI editing detection. Local testing found missed edits and false alarms on authentic images.")
                     if np.ptp(values[reliable]) == 0:

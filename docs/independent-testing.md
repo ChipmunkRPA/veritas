@@ -121,6 +121,13 @@ on two panels of sharp and feathered image edits.
 The [semantic context comparison](image-semantic-context-transfer-2026-11-11.md)
 compares a forensic patch response with its response relative to distant,
 semantically similar patches on two licensed panels.
+The [image flip comparison](image-regional-flip-transfer-2026-11-11.md) tests
+whether the sensitive detector reproduces a region under a reversible transform.
+It separately reports useful regions, processing controls and untouched photos.
+The [stereo speech coverage comparison](audio-channel-speech-gap-transfer-2026-11-11.md)
+checks exact channel samples and annotated speech in intervals left unscored
+by the mono voice check. The [blind writing probe](writing-blind-rewrite-probe-2026-11-11.md)
+checks source-character positions and human false highlights on new rewrites.
 
 The [offline video interval verifier](video-native-interval-replay-2026-11-11.md)
 checks the source clock and exact before, during and after pixels with Python
@@ -130,6 +137,9 @@ The [short face-return transfer](video-short-return-margin-transfer-2026-11-11.m
 checks a fixed margin at three placement phases, then counts distinct secondary
 ranges in a separate retrospective analysis. Its reviewer checks native anchors
 and control outcomes independently of the scorer.
+The [scene-referenced face motion comparison](video-webcam-motion-transfer-2026-11-11.md)
+checks whether genuine head movement can explain flagged ranges and tracks
+which clips lack enough stable background for that measurement.
 The [lip-sync coverage comparison](video-lipsync-mouth-coverage-2026-11-11.md)
 checks held mouth frames on real moving footage, matched to original and
 recompressed controls, with a separate authored false-collapse regression.

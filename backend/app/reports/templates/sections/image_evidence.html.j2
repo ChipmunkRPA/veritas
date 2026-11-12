@@ -75,10 +75,15 @@
 <div><dt>Measured regions before image gate</dt><dd>{{ check.counts.raw }}</dd></div>
 <div><dt>{{ check.eligible_count_label }}</dt><dd>{{ check.counts.eligible }}</dd></div>
 <div><dt>Shown in these evidence cards</dt><dd>{{ check.counts.selected }}</dd></div>
-<div><dt>Eligible regions not shown</dt><dd>{{ check.counts.omitted }}</dd></div>
+<div><dt>{{ 'Supported regions not shown' if check.has_flip else 'Eligible regions not shown' }}</dt><dd>{{ check.counts.omitted }}</dd></div>
 </dl>
 {% if check.counts.suppressed %}<p class="caption">{{ check.counts.suppressed }} measured region(s) were withheld by the image gate. The raw map remains in the evidence record; withheld regions are not cleared as authentic.</p>{% endif %}
-{% if check.counts.omitted %}<p class="caption">{{ check.counts.omitted }} eligible region(s) are not shown because of display limits or evidence requirements. These cards are not an exhaustive map of possible edits.</p>{% endif %}
+{% if check.flip %}
+<p class="caption">The flip check uses the same detector on a horizontal flip. It retains a region when at least 50% of its source pixels overlap after mapping back. It contributes no AI authorship weight.</p>
+<p class="caption">The flip check withheld {{ check.flip.withheld }} of {{ check.flip.inspected }} candidate regions.</p>
+{% if check.flip.outside_limit %}<p class="caption">{{ check.flip.outside_limit }} measured {{ 'region was' if check.flip.outside_limit == 1 else 'regions were' }} outside the two-candidate review limit.</p>{% endif %}
+{% elif check.has_flip %}<p class="caption">Flip-check coverage is unavailable.</p>{% endif %}
+{% if check.counts.omitted %}<p class="caption">{{ check.counts.omitted }} {{ 'supported' if check.has_flip else 'eligible' }} {{ 'region is' if check.counts.omitted == 1 else 'regions are' }} not shown because of display limits or evidence requirements. These cards are not an exhaustive map of possible edits.</p>{% endif %}
 {% else %}<p class="caption">Region coverage counts are unavailable. Missing counts do not establish that no regions were measured.</p>{% endif %}
 {% if check.map_grid %}<p class="caption">Measured grid {{ check.map_grid | join(' × ') }}. Displaying a larger image does not add detection detail.</p>{% endif %}
 {% if check.excluded_percent is not none %}<p class="caption">{{ check.excluded_percent }}% of the measured grid was excluded as less reliable. Those areas were not cleared.</p>{% endif %}

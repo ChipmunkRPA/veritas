@@ -11,6 +11,7 @@ import re
 _SHA = re.compile(r"[a-f0-9]{64}")
 RESPONSE_GATE = "image-candidate-eligibility/1"
 AREA_GATE = "image-candidate-eligibility/2"
+FLIP_CONSISTENCY = "image-flip-consistency/1"
 
 
 def area_counts(gate: dict) -> tuple[int, int, int]:
@@ -68,6 +69,32 @@ def validate_gate(gate: dict, *, source_sha256: str | None = None,
             raise ValueError("The image candidate gate is bound to a different source or response map")
 
 
+def validate_flip_consistency(review: dict, raw_eligible: int, width: int, height: int) -> int:
+    if (not isinstance(review, dict) or review.get("schema") != FLIP_CONSISTENCY
+            or max(width, height) != 768 or min(width, height) < 512
+            or any(not _SHA.fullmatch(str(review.get(key, ""))) for key in ("aligned_mask_sha256", "reflected_input_sha256"))):
+        raise ValueError("The image repeat pass has an unsupported scope or commitment")
+    rows = review.get("candidates")
+    if not isinstance(rows, list) or not 1 <= len(rows) == min(raw_eligible, 2):
+        raise ValueError("The image repeat pass differs from the ranked original regions")
+    for index, row in enumerate(rows, 1):
+        if not isinstance(row, dict):
+            raise ValueError("The image repeat pass has an invalid region measurement")
+        pixels, shared, box = (row.get(key) for key in ("source_pixels", "shared_pixels", "bounds"))
+        if (row.get("region_id") != f"R{index}" or not isinstance(box, list) or len(box) != 4
+                or any(type(value) is not int for value in (*box, pixels, shared))):
+            raise ValueError("The image repeat pass has an invalid region measurement")
+        x, y, w, h = box
+        if (not (0 <= x < x + w <= width and 0 <= y < y + h <= height and 0 <= shared <= pixels <= w * h and pixels > 0)
+                or type(row.get("retained")) is not bool or row["retained"] != (2 * shared >= pixels)):
+            raise ValueError("The image repeat pass contradicts its source-pixel overlap")
+    supported = sum(row["retained"] for row in rows)
+    counts = {"inspected_components": len(rows), "supported_components": supported, "withheld_components": len(rows) - supported}
+    if any(type(review.get(key)) is not int or review[key] != value for key, value in counts.items()):
+        raise ValueError("The image repeat pass has contradictory coverage counts")
+    return supported
+
+
 def validate_inspection_coverage(document: dict) -> None:
     """Check exact counts/bindings without importing inference or image libraries."""
     if document.get("version") != "image-evidence-3":
@@ -91,6 +118,11 @@ def validate_inspection_coverage(document: dict) -> None:
         if gate is not None:
             validate_gate(gate, source_sha256=document["source"]["sha256"], scalar_map_sha256=check.get("scalar_map_sha256"))
         expected = raw if gate is None or gate["eligible"] else 0
+        repeat = check.get("flip_consistency")
+        if repeat is not None:
+            if gate is None or not gate["eligible"]:
+                raise ValueError("The image repeat pass requires an eligible original map")
+            expected = validate_flip_consistency(repeat, expected, document["source"]["width"], document["source"]["height"])
         if eligible != expected or selected > eligible or omitted != eligible - selected:
             raise ValueError("Image inspection coverage contradicts candidate selection")
         packets = [p for p in document.get("packets", []) if p.get("evidence_type") == "localisation"
@@ -102,6 +134,15 @@ def validate_inspection_coverage(document: dict) -> None:
                 raise ValueError("A selected region has different image candidate eligibility")
             if packet.get("anchor", {}).get("scalar_sha256") != check.get("scalar_map_sha256"):
                 raise ValueError("A selected region uses a different response map")
+            selection = packet.get("localisation", {}).get("flip_consistency")
+            if repeat is not None:
+                region = packet.get("region") or {}
+                bounds = [region.get(key) for key in ("x", "y", "w", "h")]
+                if (selection not in repeat["candidates"] or not selection["retained"] or selection["bounds"] != bounds
+                        or selection["source_pixels"] != packet["localisation"].get("region_cells")):
+                    raise ValueError("A displayed region differs from the retained image repeat pass")
+            elif selection is not None:
+                raise ValueError("A displayed region has no recorded image repeat pass")
         overview = document.get("overview") or {}
         if not any(a.get("sha256") == check.get("scalar_map_sha256") for a in overview.values()):
             raise ValueError("The original measured image response is not included")

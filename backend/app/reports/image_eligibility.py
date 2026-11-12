@@ -62,10 +62,25 @@ def inspection_check_view(check: dict) -> dict:
     valid = valid and eligible <= raw and selected <= eligible and omitted == eligible - selected
     exclusion = check.get("excluded_area_fraction")
     eligibility = eligibility_view(check.get("candidate_eligibility"))
+    has_flip = "flip_consistency" in check
+    flip = check.get("flip_consistency")
+    flip_view = None
+    if valid and isinstance(flip, dict) and flip.get("schema") == "image-flip-consistency/1":
+        inspected, supported, withheld = (flip.get(key) for key in
+                                          ("inspected_components", "supported_components", "withheld_components"))
+        if (all(type(value) is int for value in (inspected, supported, withheld))
+                and eligible <= inspected <= min(2, raw) and supported == eligible and withheld == inspected - supported):
+            flip_view = {"inspected": inspected, "withheld": withheld,
+                         "outside_limit": raw - inspected if eligibility["status"] != "withheld" else 0}
+    suppressed = 0
+    if valid:
+        suppressed = raw - eligible if not has_flip else raw if eligibility["status"] == "withheld" else 0
+    eligible_label = "Eligible after image gate" if eligibility["status"] in {"eligible", "withheld"} else "Available for region selection"
     return {"label": "Check " + ", ".join(labels) if labels else "Recorded image check",
             "eligibility": eligibility,
-            "eligible_count_label": "Eligible after image gate" if eligibility["status"] in {"eligible", "withheld"} else "Available for region selection",
+            "eligible_count_label": "Supported by the flip check" if has_flip else eligible_label,
             "counts": {"raw": raw, "eligible": eligible, "selected": selected, "omitted": omitted,
-                       "suppressed": raw - eligible} if valid else None,
+                       "suppressed": suppressed} if valid else None,
+            "has_flip": has_flip, "flip": flip_view,
             "map_grid": check.get("map_grid"),
             "excluded_percent": round(exclusion * 100, 3) if type(exclusion) in (int, float) and math.isfinite(exclusion) and 0 <= exclusion <= 1 else None}

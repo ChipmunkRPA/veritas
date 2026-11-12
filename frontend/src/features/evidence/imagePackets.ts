@@ -34,6 +34,13 @@ export interface ImageInspectionCheck {
   signal_refs: { id: string; display_id: string | null }[]
   exhibit_ref: string
   candidate_eligibility?: CandidateEligibility
+  flip_consistency?: {
+    schema: 'image-flip-consistency/1'
+    candidates: { region_id: 'R1' | 'R2'; source_pixels: number; shared_pixels: number; retained: boolean }[]
+    inspected_components: number
+    supported_components: number
+    withheld_components: number
+  }
   map_grid?: [number, number]
   excluded_area_fraction?: number
   reliability_mask_sha256?: string | null

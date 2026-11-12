@@ -1,0 +1,88 @@
+{
+  "arms": {
+    "translation_context": {
+      "advances": false,
+      "camera_contextualized": 3,
+      "camera_groups_contextualized": 1,
+      "gros_contextualized": 0,
+      "useful_swap_ranges_contextualized": 0
+    },
+    "translation_roll_context": {
+      "advances": false,
+      "camera_contextualized": 3,
+      "camera_groups_contextualized": 1,
+      "gros_contextualized": 0,
+      "useful_swap_ranges_contextualized": 0
+    }
+  },
+  "baseline_selected": {
+    "camera": 12,
+    "gros": 4,
+    "positive_correct": 6
+  },
+  "coverage": {
+    "camera": {
+      "background_registration_unassessed": 6,
+      "measured": 6
+    },
+    "gros": {
+      "background_registration_unassessed": 4
+    },
+    "positive": {
+      "background_registration_unassessed": 2,
+      "measured": 4
+    }
+  },
+  "freeze_sha256": "305adabba1a0b50df94fcec6f49881b27d712fd1f76cffa6a53c090e5268bc83",
+  "independent_audit": {
+    "exact_intervals": 28,
+    "freeze_sha256": "305adabba1a0b50df94fcec6f49881b27d712fd1f76cffa6a53c090e5268bc83",
+    "geometry_arm_decisions": 20,
+    "journal_sha256": {
+      "camera": "55aa7e760f974adfee7c978387197ab491c2f41b1a982a9943f4d0ac1f04dee7",
+      "gros": "f4ca08c2728264c4e4b7341bf7bb1900e931d630d299212f5d67702375514ce3",
+      "positive": "eddc58f373f5c2f523e2dc130faaba81516317cf6e3e63110b25846ee4d3df32"
+    },
+    "rows": 22,
+    "status": "verified"
+  },
+  "journal_sha256": {
+    "camera": "55aa7e760f974adfee7c978387197ab491c2f41b1a982a9943f4d0ac1f04dee7",
+    "gros": "f4ca08c2728264c4e4b7341bf7bb1900e931d630d299212f5d67702375514ce3",
+    "positive": "eddc58f373f5c2f523e2dc130faaba81516317cf6e3e63110b25846ee4d3df32"
+  },
+  "operational_clock_amendment_sha256": "9a5827d9da203c77e5621e5595bed2a705d8081d22c1796cb9471ed1c1da26c5",
+  "schema": "chipmunk.video-webcam-motion-transfer-result/1",
+  "scope": "Archived webcam and prior-exposed swap sources, plus four fresh standardized controlled camera participants. Scene evidence requires measurable reference texture.",
+  "serving_change_adopted": false,
+  "source_intake": {
+    "crc_and_exact_member_range_verified": 4,
+    "public_license": "CC-BY-4.0",
+    "selected_members": 4,
+    "source_bytes": 874562199,
+    "source_datasets": [
+      "10.17632/xgg8xcscr5.1",
+      "10.17632/f47pm7rwt3.1"
+    ]
+  },
+  "verification": {
+    "camera_motion_input_pictures": 152,
+    "gros_delivery_native_timestamps_verified": 2190,
+    "gros_elapsed_s_sum": 111.403,
+    "gros_motion_input_pictures": 34,
+    "gros_registered_background_templates": [
+      0,
+      0,
+      0,
+      7
+    ],
+    "known_swap_motion_input_pictures": 72,
+    "privately_redecoded_example_frames": 3,
+    "privately_verified_example_pngs": 6
+  },
+  "views": {
+    "camera": 12,
+    "gros": 4,
+    "positive": 6
+  }
+}

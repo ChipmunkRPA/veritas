@@ -386,6 +386,23 @@ describe('image evidence cards', () => {
     expect(screen.queryByText(/measured regions were withheld/)).toBeNull()
   })
 
+  it('distinguishes flip-check rejection, unreviewed regions, and display limits', () => {
+    show({ ...evidence, packets: [], coverage: { inspection_checks: [check({ candidate_eligibility: gate(.5),
+      eligible_components: 1, selected_components: 0, omitted_components: 1,
+      flip_consistency: { schema: 'image-flip-consistency/1', inspected_components: 2, supported_components: 1,
+        withheld_components: 1, candidates: [
+          { region_id: 'R1', source_pixels: 11, shared_pixels: 5, retained: false },
+          { region_id: 'R2', source_pixels: 10, shared_pixels: 5, retained: true },
+        ] },
+    })] } })
+    expect(screen.getByText('Supported by the flip check')).toBeTruthy()
+    expect(screen.getByText(/same detector on a horizontal flip.*50% of its source pixels.*no AI authorship weight/)).toBeTruthy()
+    expect(screen.getByText('The flip check withheld 1 of 2 candidate regions.')).toBeTruthy()
+    expect(screen.getByText('10 measured regions were outside the two-candidate review limit.')).toBeTruthy()
+    expect(screen.getByText(/1 supported region is not shown/)).toBeTruthy()
+    expect(screen.queryByText(/measured regions were withheld by the image gate/)).toBeNull()
+  })
+
   it('does not infer passed eligibility from absent or inconsistent metadata', () => {
     const { unmount } = show({ ...evidence, coverage: { inspection_checks: [check({ candidate_eligibility: undefined,
       eligible_components: 12, selected_components: 2, omitted_components: 10 })] } })

@@ -1,0 +1,662 @@
+{
+  "both_probes_assessable": {
+    "human_splice": 6,
+    "original": 5,
+    "qwen": 2,
+    "smol2": 3
+  },
+  "counts": {
+    "human_splice": {
+      "both_flags": 0,
+      "both_locates_replacement": 0,
+      "cases": 8,
+      "current_flags": 1,
+      "current_locates_replacement": 1,
+      "qwen_available": 7,
+      "qwen_flags": 3,
+      "qwen_locates_replacement": 2,
+      "smol2_available": 6,
+      "smol2_flags": 2,
+      "smol2_locates_replacement": 1,
+      "union_flags": 1,
+      "union_locates_replacement": 1
+    },
+    "original": {
+      "both_flags": 1,
+      "both_locates_replacement": 0,
+      "cases": 8,
+      "current_flags": 0,
+      "current_locates_replacement": 0,
+      "qwen_available": 7,
+      "qwen_flags": 5,
+      "qwen_locates_replacement": 0,
+      "smol2_available": 5,
+      "smol2_flags": 3,
+      "smol2_locates_replacement": 0,
+      "union_flags": 1,
+      "union_locates_replacement": 0
+    },
+    "qwen": {
+      "both_flags": 0,
+      "both_locates_replacement": 0,
+      "cases": 5,
+      "current_flags": 0,
+      "current_locates_replacement": 0,
+      "qwen_available": 4,
+      "qwen_flags": 4,
+      "qwen_locates_replacement": 4,
+      "smol2_available": 2,
+      "smol2_flags": 1,
+      "smol2_locates_replacement": 0,
+      "union_flags": 0,
+      "union_locates_replacement": 0
+    },
+    "smol2": {
+      "both_flags": 0,
+      "both_locates_replacement": 0,
+      "cases": 6,
+      "current_flags": 0,
+      "current_locates_replacement": 0,
+      "qwen_available": 5,
+      "qwen_flags": 3,
+      "qwen_locates_replacement": 3,
+      "smol2_available": 3,
+      "smol2_flags": 2,
+      "smol2_locates_replacement": 1,
+      "union_flags": 0,
+      "union_locates_replacement": 0
+    }
+  },
+  "current_inputs": 89,
+  "current_model_weights_sha256": "4a1561fadf44ec72934edd6158ff8c76e9388ade1384dbeeea6eb15f93251087",
+  "decision": {
+    "advance_met": false,
+    "confidence_changed": false,
+    "research_only": true
+  },
+  "execution": {
+    "generation_attempts": {
+      "qwen": 8,
+      "smol2": 8
+    },
+    "generation_seconds": {
+      "qwen": 6.176,
+      "smol2": 6.882
+    },
+    "probe_runtime": {
+      "mlx": "0.32.4",
+      "mlx-lm": "0.31.3",
+      "transformers": "5.22.1"
+    }
+  },
+  "extra_human_groups": 1,
+  "freeze": {
+    "cases_sha256": "dab26f31398c829ea0e3adbc0c1c76fe9b408e9c8b87c3df12901602a03caaed",
+    "code_sha256": "1c3b0c7c849677a1efb9b887e0d51beacdfb3fd11b4cb93fdadc545a1bb25b7e",
+    "generation_outputs": {
+      "qwen": "01771fd32761541ea129592b2ec1bdeb956e495f13146adf1dc394ad25fa30fe",
+      "smol2": "35a09e4d39065480d0155fcf4d3b78cb88050c1cd45e8ea856aef98ba5bcc44b"
+    },
+    "originals_sha256": "02b43d3bdb7582d95ddb1c8b03245c5d85b28767ba59486615ea4280f0b67fd4",
+    "probe_inputs_sha256": "4b9afe5c9b694d24cb740462f1e005ebe16856e2a21511f242382b61301c783d",
+    "prompts": {
+      "edit": "Rewrite this sentence in different words, preserving all facts, names and numbers. Return only one complete replacement sentence between {minimum} and {maximum} words. Use no labels, quotations or extra lines.\n\n{sentence}",
+      "probe": "Copyedit this sentence lightly for clarity and natural wording. Preserve its meaning and facts. Return only the revised sentence.\n\n{sentence}"
+    },
+    "settings": {
+      "qwen": {
+        "seed": 82456,
+        "temperature": 0.5,
+        "top_p": 0.9
+      },
+      "smol2": {
+        "seed": 25967,
+        "temperature": 0.6,
+        "top_p": 0.9
+      }
+    }
+  },
+  "generation_freeze_sha256": "a3b1fe57971bb40f77a74c9f10019aa2e8041f155b4c353cdae9aab7cdbd95ff",
+  "generators": {
+    "qwen": {
+      "license": "Apache-2.0",
+      "repo": "Qwen/Qwen2.5-1.5B-Instruct",
+      "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+      "weights_sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee"
+    },
+    "smol2": {
+      "license": "Apache-2.0",
+      "repo": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "revision": "31b70e2e869a7173562077fd711b654946d38674",
+      "weights_sha256": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8"
+    }
+  },
+  "human_groups": {
+    "both": 1,
+    "current": 1,
+    "qwen": 6,
+    "smol2": 4,
+    "union": 2
+  },
+  "method": {
+    "advance": "At least two more useful source groups in the union with current, useful detections from both generation families and at most one additional human source group flagged. Fresh single-publisher development only.",
+    "baseline": "First six positive (raw response at least .5) existing three-sentence classifier contexts in source order.",
+    "distance": "Casefold lexical-word Levenshtein edits divided by the greater lexical word count. Abstain if either probe input lacks one valid sentence.",
+    "geometry": "Two exact interior sentence spans, each with 12\u201340 words, in a single four-sentence source excerpt.",
+    "probe": "Each local instruction model independently lightly copyedits each exact isolated focus with greedy decoding.",
+    "selection": "Select the focus whose probe copyedit changes fewer words by at least .15 in both models. Test each model alone and the union with current.",
+    "useful": "Non-whitespace character intersection over union at least .30 with the generated replacement. Human flags counted for both untouched and genuine-prose replacements."
+  },
+  "native_current_forwards": 23,
+  "new_useful_groups": 0,
+  "probe_inputs_per_model": 35,
+  "probe_seconds": {
+    "qwen": 17.724,
+    "smol2": 17.684
+  },
+  "response_sha256": "57e883663c09d61b231fbb12d48fdbf300c56bb3c6e6186faedd07cd332e27c8",
+  "schema": "chipmunk.writing-blind-rewrite-probe/1",
+  "scoring_freeze_sha256": "6cfa12104aa6de6a78efedc1deb82ca7929849ae7d09d4f825d54bbe3792daa4",
+  "scoring_seconds": 18.735,
+  "sources": {
+    "excluded_at_intake": [
+      "hawaii",
+      "teton"
+    ],
+    "preparation_sha256": "a3b350ebf1ea052374a0a7edf373af3e4bf4b72bd7633baa180e9315f3f597b8",
+    "prior_packet_digests": [
+      "fb7dbfa725728926c86c6627e7871ba8fcc9e0faa50bba384b13992c624a9752",
+      "f8cd90699e21efe9adb4cc607d5572a7e1fed6ebb9d2068a291dd69effdcb123",
+      "0885ad4cf9d9481dcee25a4e7684e7c0a7b1ac54cb17013a1de257be24d64d46",
+      "c1d4868cd91b6a750777531032aef96425bab179ad2070403327a097b079b37c",
+      "a42a934b97005bc69c4ef983ab0839d5804b6fc60066e42b9520c950984a51b9",
+      "e10769c188e69889c54f1116c5a4f8f03cbb58f4194a19a3a1ea9e969a92d28c",
+      "1aa08df98620fbe9d251f978ee6f61042cd7aa9d2f98937ec0f35f16a3b48d41",
+      "5442c89d86f7c8d3a052df7f39ed6df8fbb6f0f32dd7fb286cff240ee2745f93",
+      "0d9847ca82940beadcf14660d33d981d230950dff57f58f2d770f6067acf2329",
+      "593b70240923772b883e72a1ff9b14d59f6e8a2e8e8993c11658d3dfced01438",
+      "92f89bf520197aa2e6e9703814fe0ee5169720f2defcee9be5b464d24474ef82",
+      "2eda831c9fa9f2db5e2b3c2cf6a80a0b8e55cddbfd0aecb31903675fb27817fe",
+      "3921dcdccc1aaa732408210776ee18c17c6d634a3889f6ff209104d3ad3724e7",
+      "ac66fda8bd896fafe1102fd6f8e2a1c9fff3c5a6cc3789ca9448a28be4e9cff3",
+      "86c0f4b58bbfd4166a82586ac61fc58a595170b67992661ada3812022d208d1e",
+      "e8142517c08744d123aa11ad585d0d7b44fb1c384e599b72100d0f656c717f98",
+      "0641d20f9326522061bee792cad5f8963faf26bf37268e491f901cb7c2ce5cfb",
+      "7409f1ddcff8714fb5fc0ba05a6c1c3cbd0d479ee97cc7b0762b62fc07b3f7c5",
+      "de8a8afd0022cd0b679c5d985017b7f9ee6f584f96d986130daa82471e649ef5",
+      "3f60e9989879b7a51b994edbe4536a5bd30556670f47b6677815bf0ed45c0acc",
+      "4e43edf33c695a8a4f757d079089dab85a632c648762554bac9f5cc573bb923b",
+      "f1f646f8e94b332259194c04861c7b966ee86278aa117995c74ccb78236452fa",
+      "6d4431a85a70916ba7af5c19f062eed6c277183d7b4bb5c6cea42f520e717f48",
+      "e494c33e29a893abc16a1845f028bedcf9a65b5a8ce9f963323c267c006627a2",
+      "b5c4dece64d08ef3523c1f8d8e9afdc68fb4b756876a55b61be0205c611fa62e",
+      "5dd8010b4b81fc6598528a19a0b22f5a904da960e6edba2e04cf053ed7794440",
+      "4682454d4b72a0c8899159973bd2e91b4f8432be4c42148a4f10719a1fc75582",
+      "46f681020eb07a197875d64bf4ece4efec619b7d1de4c81825d470d9add04f8a",
+      "a36f5ba115854f1a36d2525c4b835785a2dbeeb1119e3faee090cfd22c3ccd17",
+      "a26404420a2e363848d6816255ff02218b7de1b17d1c7b55a93cd75661605e60",
+      "7fbc0a71d4d4be00b47b5b9d2440c9cc8227e8de8b5959eb6c28c24473e7b5d3",
+      "e20c08cce48a3f7d177850ff6114bfb7139532925188bebdf1bd75ab585222cb",
+      "936de16d306d642b9ff1f80ccc9b8da9548fa7c5d3a8b849155400721a350e20",
+      "46a6db00d5617fb95fc03e514208df5942235b429cbe5dd4f919928507176bff",
+      "dbd1dbe88197a44446f8f705eb58ad2ee7b20f6dc7ce3233fe76d8189e5358c8",
+      "d1b814a28fd3fd60e666546d6063d76fd7fabd62ef828d9581ce13ac814f6ad0",
+      "36117d37aa219dafb4a6f13959dfbecf3f8d0a02c81eb70f232d249b587768ec",
+      "0caca63a72bd00864b1c069ee3776e24b83c0d0e0f3dee4489535888188a0fbc",
+      "30d76269e14096222de528a3fd2c11c47928557b983cf706ed7f80c196573e3c",
+      "f3db42f44c9dc5891d4f345ceac7a3bb7209dc1784b9aae30405778ba86c3a81",
+      "dc4059f7e05a15fe47df3887c70260e669e7b87f2f9290b68f7f2971633ffbfe",
+      "042ecaea92828aace974a844fd3fc0b29cd49850fb36d9e92ac5b88f981886f1",
+      "056a571848a6ba8e6c63b54236da10eb73f49e1062f8dd38e741c0b98b215593",
+      "3c67fe9301a5622637818880d16044a1349209dbf84188351ac8fdbd7c076188",
+      "d8bcccf2088fe2139cdbb87f8fd0461699f9592b9b8225fcc00c8a9c24cb047f",
+      "e5933fa3238cca286a257dd28dd49ed77a15929b664ba4af626a913845a63c3f",
+      "445770b02bbc05e83d89db2926ec09ca1e6f78c8243b6ac975eeafc5cfe58e48",
+      "fbad8d0024d657d3a03f9146e2409a82553b4bb24a99af6e0d3c3f9e60d3e27d",
+      "e675b4b2a7efb2d1b0735fd32dcd0fc5d7f2b43660f0e5e7c8cdd803ecccd090",
+      "b8491dd965316384a4acdd7f64a9210553c4fd93f98e04475fe7cb19182c6ef3",
+      "3326bf5d022b3b54ede968d536fe59da29a98eb1fa3fe93de1b788611023c2ef",
+      "a078ae7be0d401e1d1d82b334ce70e99b27ffcdcdab326b06cb7dfd1c0ace6a2",
+      "fb7280df49271a66487cea5d0842633135e3bd0d3b89b7f1f0370c4540397dab",
+      "a078ae7be0d401e1d1d82b334ce70e99b27ffcdcdab326b06cb7dfd1c0ace6a2",
+      "1f62b5b840be0bd0eeff20299a69d55dfef79ebae43460b09f01f082caf295f3",
+      "139db959b029ef6923b00143641120db2a111016f6c83b994c8f5bed9871930b",
+      "59c917bccd8e3070283feb0a29308c6104f81a4366dd475b28126ef916292b3b",
+      "1a464207ae76376b996c2a63b016c4f7b0d0a7542f3356b456c0fa7fb369d612",
+      "c6e3b2fdd0280012726eba6fd720683363577960fd77c9ec8eb62f0800ad580a",
+      "c76b62a073f7b35b69c51617a62f9ed5308bb592438137d33671846d1b5536d8",
+      "159955a9de09c2055a9b026bfbccf3cf50765885196e3ac41d6258bb353b1189"
+    ],
+    "prior_source_packets": 61,
+    "prior_text_entries": 45457,
+    "right": "NPS-authored release prose only; excluding pictures, third-party quotes, navigation, and lists.",
+    "rights_url": "https://home.nps.gov/aboutus/disclaimer.htm",
+    "shared_12_word_fragments": 0,
+    "sources": {
+      "battlefield": {
+        "anchors": [
+          {
+            "publisher_codepoints": [
+              198,
+              292
+            ],
+            "sentence_index": 2,
+            "sha256": "8641e192002f47c48dfb6ce7569a3029a46569e15ab45c93edb56c4a7f232fcb"
+          },
+          {
+            "publisher_codepoints": [
+              293,
+              376
+            ],
+            "sentence_index": 3,
+            "sha256": "14023484c6c7b0b2381b7e9bd5320b24442c419f6f799d9d0820197c9008164f"
+          },
+          {
+            "publisher_codepoints": [
+              377,
+              545
+            ],
+            "sentence_index": 4,
+            "sha256": "6b384ba5939b5c42a993af453b5cda1c69c2b0a4a32d83926578807b97819afa"
+          },
+          {
+            "publisher_codepoints": [
+              546,
+              660
+            ],
+            "sentence_index": 5,
+            "sha256": "d8f1d4a3b813033de0f5b98531de3713843b71c78bcfcbb2924971849493ead1"
+          },
+          {
+            "publisher_codepoints": [
+              950,
+              1023
+            ],
+            "sentence_index": 9,
+            "sha256": "244578adc90acfbfaea5a1f860d16390bebaf27f2de0fe08cc41ce935601a781"
+          }
+        ],
+        "date": "May 15, 2020",
+        "html_sha256": "a99a59b183dabdc06ac5d7fd4d6210a14a84d1425a8a24f2dd5dbec572cb38e5",
+        "normalized_body_sha256": "39f6e97f0d47332f25c072dc5537a780d59649e076bbfcecbc08d66415e08cdd",
+        "publisher": "U.S. National Park Service",
+        "target_index": 1,
+        "title": "Heartland Network intern will publish article in national journal - Wilson's Creek National Battlefield (U.S. National Park Service)",
+        "url": "https://home.nps.gov/wicr/learn/news/20-12.htm"
+      },
+      "buffalo": {
+        "anchors": [
+          {
+            "publisher_codepoints": [
+              567,
+              693
+            ],
+            "sentence_index": 4,
+            "sha256": "1681de4e45b0c8f0cfe03f8a5aaabb75821327230b4d9088f9898a26ece6026c"
+          },
+          {
+            "publisher_codepoints": [
+              694,
+              787
+            ],
+            "sentence_index": 5,
+            "sha256": "b6ad705f057139d0db39e557fbe717d2bf165b9ed1c630344f261fa6153ef185"
+          },
+          {
+            "publisher_codepoints": [
+              788,
+              871
+            ],
+            "sentence_index": 6,
+            "sha256": "54ea062f4ffb671ba4513a384a49c2032b7453f3f6c1ac80d4862ecb445bb502"
+          },
+          {
+            "publisher_codepoints": [
+              872,
+              981
+            ],
+            "sentence_index": 7,
+            "sha256": "a4aacae856f27117659b93c43dac307f136f612b11c17c78975dca9597f8ba75"
+          },
+          {
+            "publisher_codepoints": [
+              1071,
+              1181
+            ],
+            "sentence_index": 9,
+            "sha256": "bb327794b612c066d494c3bae8cad2cac71b27b69cfdb84ec99b11d1735042ff"
+          }
+        ],
+        "date": "October 7, 2019",
+        "html_sha256": "47ed5ed341d6d8049d93a766c009558df203c461717add3fee0046f87238b58e",
+        "normalized_body_sha256": "266a7356c01d9370ee2a2b6dd61e26973bb9b8f82a1b3b05a6d3928432e9d14c",
+        "publisher": "U.S. National Park Service",
+        "target_index": 2,
+        "title": "Low-Level Flights to Image 3D Geology in Northern Arkansas - Buffalo National River (U.S. National Park Service)",
+        "url": "https://www.nps.gov/buff/learn/news/low-level-flights-to-image-3d-geology-in-northern-arkansas.htm"
+      },
+      "denali": {
+        "anchors": [
+          {
+            "publisher_codepoints": [
+              2299,
+              2467
+            ],
+            "sentence_index": 12,
+            "sha256": "645dba08bfd325857f5c2c5df0f49419ff484d151bb6c840dcee444f3a8714b0"
+          },
+          {
+            "publisher_codepoints": [
+              2468,
+              2579
+            ],
+            "sentence_index": 13,
+            "sha256": "d2349f50065697e1483e00b8d2dc645adb7b23411eafb679bae7271bb75c8779"
+          },
+          {
+            "publisher_codepoints": [
+              2580,
+              2668
+            ],
+            "sentence_index": 14,
+            "sha256": "a510004689607f1433aadb6354cc398fc3d4d03930a852d7373b4534cb682abc"
+          },
+          {
+            "publisher_codepoints": [
+              3165,
+              3438
+            ],
+            "sentence_index": 17,
+            "sha256": "c7b7b6b58f4721e03e0fb57b686b2986709d2ad70afd66a7d6591ccbc6e68ef1"
+          },
+          {
+            "publisher_codepoints": [
+              1615,
+              1744
+            ],
+            "sentence_index": 8,
+            "sha256": "804b7cfeb0f68ae4a8c57d44692a4b3e76ea125a96eeec6a95d1b3497379e0f5"
+          }
+        ],
+        "date": "August 17, 2019",
+        "html_sha256": "fe345136bbf8eff0aecfb93a08f65a44c5753a7842ae577cf3fc2d2415e36927",
+        "normalized_body_sha256": "6fa91589cdf0a567f3c9cd28eb751e4e69f0eefef61858aba45e43ff5a75b93b",
+        "publisher": "U.S. National Park Service",
+        "target_index": 1,
+        "title": "park road to reopen 8-18-2019 - Denali National Park & Preserve (U.S. National Park Service)",
+        "url": "https://www.nps.gov/dena/learn/news/park-road-to-reopen-8-18-2019.htm"
+      },
+      "fossil": {
+        "anchors": [
+          {
+            "publisher_codepoints": [
+              1586,
+              1769
+            ],
+            "sentence_index": 11,
+            "sha256": "cc91247ad01e0eb042337bad38749e29b659730f21f60ad348cd0701b6d44d7b"
+          },
+          {
+            "publisher_codepoints": [
+              1770,
+              1953
+            ],
+            "sentence_index": 12,
+            "sha256": "44a843e7e0cdf0ea27fdc9e66e797003d6969bcfa3993050b762a235a3ead4c9"
+          },
+          {
+            "publisher_codepoints": [
+              1954,
+              2148
+            ],
+            "sentence_index": 13,
+            "sha256": "373c844595bac93fd391f90aebebcf2b874659cdaa323dbbd620326ed7b131b4"
+          },
+          {
+            "publisher_codepoints": [
+              2149,
+              2235
+            ],
+            "sentence_index": 14,
+            "sha256": "4be7b033fafe8006e9e3d5ef88cbfbb52b7f72d385e01e607166c640d5354261"
+          },
+          {
+            "publisher_codepoints": [
+              498,
+              664
+            ],
+            "sentence_index": 4,
+            "sha256": "9c9795c891c5fdca3f9a3cb803424056ea75c4c7b99e637fd7cd1e4ed85b729b"
+          }
+        ],
+        "date": "October 14, 2020",
+        "html_sha256": "a0642b6dcb86f199c9e3340fdc2896f77c1d2c40d7813159bc68a67605e48f96",
+        "normalized_body_sha256": "68f9c9292bb148a5100cc25d1a4f427b4f7043e10bf832e2089c515ae54bb920",
+        "publisher": "U.S. National Park Service",
+        "target_index": 2,
+        "title": "National Parks Dig into National Fossil Day on October 14 - Office of Communications (U.S. National Park Service)",
+        "url": "https://www.nps.gov/orgs/1207/national-parks-dig-into-national-fossil-day-on-october-14.htm"
+      },
+      "grants": {
+        "anchors": [
+          {
+            "publisher_codepoints": [
+              0,
+              214
+            ],
+            "sentence_index": 0,
+            "sha256": "7b08f05f6b0d3827fd57fcf6d5d552569fa869aab51b0c15c01d91a9f9d86b91"
+          },
+          {
+            "publisher_codepoints": [
+              215,
+              407
+            ],
+            "sentence_index": 1,
+            "sha256": "ed3d2dcd0543892270893fa452815c1a2e54be1e8b8193421068fbbc584ea129"
+          },
+          {
+            "publisher_codepoints": [
+              408,
+              567
+            ],
+            "sentence_index": 2,
+            "sha256": "3286602fbc53ee6017d4a1e32d5f432ab3033f1bf7795bdc59ac037e67a85b62"
+          },
+          {
+            "publisher_codepoints": [
+              568,
+              779
+            ],
+            "sentence_index": 3,
+            "sha256": "827025f6ee6328ad1a8c00a2e725dacef1634d7f62600786b89a9468025ef199"
+          },
+          {
+            "publisher_codepoints": [
+              4222,
+              4436
+            ],
+            "sentence_index": 10,
+            "sha256": "cc7676d2505aa5f11198d50337575b1c7dca6137fd5f54ce2d95cf4fe2eed89f"
+          }
+        ],
+        "date": "July 7, 2020",
+        "html_sha256": "ba1239d12a1c46417279f65cd85249e35d864e007ea37ab273a6a50fc96ce479",
+        "normalized_body_sha256": "873febd0bdd5319c53591c9647fd09876d856c1b50a0f0c0519cb0856ce83d70",
+        "publisher": "U.S. National Park Service",
+        "target_index": 1,
+        "title": "National Park Service Awards  $750,000 in Underrepresented Community Grants - Office of Communications (U.S. National Park Service)",
+        "url": "https://www.nps.gov/orgs/1207/07-07-20-nps-awards-750-000-in-underrepresented-community-grants.htm"
+      },
+      "thicket": {
+        "anchors": [
+          {
+            "publisher_codepoints": [
+              168,
+              315
+            ],
+            "sentence_index": 1,
+            "sha256": "74ce31e5f7672fdd9e2818f54f1d07ff93f496f55f619f33f6694d582ddf9e63"
+          },
+          {
+            "publisher_codepoints": [
+              316,
+              488
+            ],
+            "sentence_index": 2,
+            "sha256": "477e8209a387b3fb7614dbbd1d580187ae2d340df7c4ddb22379633c3e8689a4"
+          },
+          {
+            "publisher_codepoints": [
+              489,
+              611
+            ],
+            "sentence_index": 3,
+            "sha256": "bba8c6de32769a76c3bcee2d032413ac10719c557537a4261ec123ee0a2efaed"
+          },
+          {
+            "publisher_codepoints": [
+              612,
+              712
+            ],
+            "sentence_index": 4,
+            "sha256": "d6e85504a0036fd3fa4165614e8c1de6ef0a48e9a2adf552aeba9fcb5d915221"
+          },
+          {
+            "publisher_codepoints": [
+              1809,
+              1933
+            ],
+            "sentence_index": 12,
+            "sha256": "c287f3a9af58f72777b8543aa13dcf51355d43695572c07b3fd4dcf276bcb136"
+          }
+        ],
+        "date": "December 4, 2020",
+        "html_sha256": "126d97fc00f0692a023ff6706b6690746d3d6d06dfd3d5cd002848c9ffee10a2",
+        "normalized_body_sha256": "7b31720c8432dca7718534018bb0e8ac18e0421fb046d5e919acfb146eaaf70d",
+        "publisher": "U.S. National Park Service",
+        "target_index": 2,
+        "title": "Big Thicket Announces Texan By Nature Certification - Big Thicket National Preserve (U.S. National Park Service)",
+        "url": "https://www.nps.gov/bith/learn/news/texan-by-nature-certification.htm"
+      },
+      "trail": {
+        "anchors": [
+          {
+            "publisher_codepoints": [
+              313,
+              482
+            ],
+            "sentence_index": 2,
+            "sha256": "e7c2d88ad6783ba767eed829fa14e17c6832a32268d8b56f1aaa390bf2d5bb66"
+          },
+          {
+            "publisher_codepoints": [
+              483,
+              675
+            ],
+            "sentence_index": 3,
+            "sha256": "2d0c81ec5e72b70d95a01995a1bee823f478863f16bb2904ae67cdf8e3f4f411"
+          },
+          {
+            "publisher_codepoints": [
+              676,
+              845
+            ],
+            "sentence_index": 4,
+            "sha256": "f6322b115d9648bbea06d1eb6e6126e308e44b70d40fbb2150b8ade66f7d70d2"
+          },
+          {
+            "publisher_codepoints": [
+              846,
+              977
+            ],
+            "sentence_index": 5,
+            "sha256": "2beea1de90b22d0484bbf9f8b333a37977a33fd59da7dacbfef3ef9cc9105781"
+          },
+          {
+            "publisher_codepoints": [
+              1180,
+              1351
+            ],
+            "sentence_index": 7,
+            "sha256": "6e8e5e2d4dca1d19fa35295d81ffef3c29629c86ac002f132b4b30407ee6bd67"
+          }
+        ],
+        "date": "May 29, 2019",
+        "html_sha256": "db5fbf2ad5d3b07de3a71c1d9b8029fefbc905c8c1ad9e978f3aae0578e43660",
+        "normalized_body_sha256": "0c4972b0679a73c10a9bd01796303fd8d61399ede0ec4f771d6990e81d9a516e",
+        "publisher": "U.S. National Park Service",
+        "target_index": 1,
+        "title": "Follow Lewis and Clark this Summer as a Citizen Scientist - Lewis & Clark National Historic Trail (U.S. National Park Service)",
+        "url": "https://www.nps.gov/lecl/learn/news/follow-lewis-and-clark-this-summer-as-a-citizen-scientist.htm"
+      },
+      "whiskeytown": {
+        "anchors": [
+          {
+            "publisher_codepoints": [
+              410,
+              570
+            ],
+            "sentence_index": 2,
+            "sha256": "d23755043940e66e9636de38a6f0c012a9921abfce935e9476672dada5b0ffab"
+          },
+          {
+            "publisher_codepoints": [
+              571,
+              715
+            ],
+            "sentence_index": 3,
+            "sha256": "852e228e4f35ea5dac7f74b6130610d747815d8f9ad15fac77e18846f1d7e1c2"
+          },
+          {
+            "publisher_codepoints": [
+              716,
+              854
+            ],
+            "sentence_index": 4,
+            "sha256": "9e700da9344f401091e67d8670b50fdac535af2458949d2f77050b2e0df973ec"
+          },
+          {
+            "publisher_codepoints": [
+              855,
+              1141
+            ],
+            "sentence_index": 5,
+            "sha256": "8a577445b1df861b9915db2da47940ca6b14a728aff886a52fd5f6f792a68b1c"
+          },
+          {
+            "publisher_codepoints": [
+              2018,
+              2121
+            ],
+            "sentence_index": 17,
+            "sha256": "9d713b1a70f080e0d7241037b50e55a290dc4de6bf5461a308b0ce5cc0d18c14"
+          }
+        ],
+        "date": "April 24, 2020",
+        "html_sha256": "8c640c05acc3d6e52c800985d3ed07940d0ca1b4ff9ce3ae656d940add7f1672",
+        "normalized_body_sha256": "23004fcc993429b487062ebfdae2ce919303463546d67abc24153b78c4398ef0",
+        "publisher": "U.S. National Park Service",
+        "target_index": 2,
+        "title": "Goats to be used to Manage Vegetation and Fuels at Whiskeytown National Recreation Area - Whiskeytown National Recreation Area (U.S. National Park Service)",
+        "url": "https://www.nps.gov/whis/learn/news/goats-at-whiskeytown-nra.htm"
+      }
+    }
+  },
+  "sources_sha256": "22ec75372d625b1010e9bd7e98c84d1f0f9a8925281df23be59fc2c3c8d1df25",
+  "useful_groups": {
+    "both": 0,
+    "current": 0,
+    "qwen": 4,
+    "smol2": 1,
+    "union": 0
+  },
+  "verification": {
+    "aggregate_counts": 64,
+    "complete_fixtures": 27,
+    "exact_focus_ranges": 54,
+    "native_context_ranges": 108,
+    "probe_distances": 108,
+    "publisher_sentence_ranges": 40
+  }
+}

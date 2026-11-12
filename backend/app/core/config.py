@@ -214,6 +214,7 @@ class Settings(BaseSettings):
 
     # Optional native PNG region evidence; old checks stay available for comparison/rollback.
     image_region_mode: Literal["legacy", "candidate"] = "legacy"
+    image_region_flip_review: bool = False  # Development-only repeatability filter for sensitive PNG regions.
     image_sharp_boundary_enabled: bool = False
     image_reference_comparison_enabled: bool = False  # Development-only comparison of an uploaded earlier copy.
     document_revision_comparison_enabled: bool = False  # Authenticated development-only earlier-draft comparison.

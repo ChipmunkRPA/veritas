@@ -48,26 +48,27 @@ def test_localiser_prose_hides_architectures_and_generated_observations_only():
     from copy import deepcopy
 
     from app.detectors.image.adapters.localisers import MesorchDetector, RadarDetector
+    from app.detectors.image.adapters.regional import RegionalDetector
 
     signals = [{'id': f'{detector.spec.id}:global', 'detector_id': detector.spec.id,
                 'name': detector.spec.name, 'reference': detector.REFERENCE,
                 'observed': f'{detector.METHOD} integrity score 0.750; 2 regions at map ≥ 0.5; '
                             'source note says “Mesorch”.'}
-               for detector in (MesorchDetector, RadarDetector)]
+               for detector in (MesorchDetector, RadarDetector, RegionalDetector)]
     provenance = {'id': 'img.meta.exif:global', 'detector_id': 'img.meta.exif', 'category': 'provenance',
                   'observed': 'Software=Mesorch, Depth Anything V2 Base', 'reference': 'Source says RADAR'}
     payload = {'signals': [*signals, provenance], 'metadata': {'Software': 'Mesorch'},
                'annotations': [{'body': 'RADAR was written in the source.'}]}
     before = deepcopy(payload)
     projected = project(payload)
-    for signal in projected['signals'][:2]:
+    for signal in projected['signals'][:-1]:
         assert 'uncalibrated local editing response' in signal['reference']
         assert 'not proof of AI editing' in signal['reference']
         assert all(name not in signal['reference'] for name in
                    ('Mesorch', 'RADAR', 'ConvNeXt', 'SegFormer', 'DINOv2', 'Depth Anything', 'MiT-B3', 'ViT-B/14'))
         assert signal['observed'].startswith('a detection check integrity score 0.750; 2 regions at map ≥ 0.5;')
         assert 'source note says “Mesorch”.' in signal['observed']
-    assert projected['signals'][2] == provenance
+    assert projected['signals'][-1] == provenance
     assert projected['metadata'] == payload['metadata'] and projected['annotations'] == payload['annotations']
     # The v1 JSON export downgrades signals to their scoped id without detector_id.
     legacy = deepcopy(payload)

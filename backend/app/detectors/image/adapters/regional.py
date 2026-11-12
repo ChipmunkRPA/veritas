@@ -1,17 +1,39 @@
 """Sensitive lossless-image region evidence; optional, with legacy check retained."""
 from __future__ import annotations
 
+import hashlib
 from typing import Any
 
 import numpy as np
 from PIL import Image
 
+from app.core.config import settings
 from app.detectors.image import localiser as loc
 from app.detectors.image import regional
 from app.detectors.image.adapters.common import H2, image_spec, original_bytes
 from app.detectors.image.adapters.localisers import PNG_SIGNATURE, LocaliserDetector
 from app.detectors.image.regional_support import readout
 from app.engine.detector import Applicability, InputUnit, RunContext
+from app.evidence.image_eligibility import FLIP_CONSISTENCY
+
+
+def flip_components(measured, aligned):
+    """Keep original top-two component geometry when the repeat supports half its pixels."""
+    rows, retained, stats = [], [], []
+    for region, stat, component in zip(measured.regions[:2], measured.stats[:2], measured.component_masks, strict=True):
+        pixels = int(np.count_nonzero(component))
+        overlap = int(np.count_nonzero(component & aligned))
+        supported = overlap * 2 >= pixels
+        box = region["region"]["bbox"]
+        rows.append({"region_id": region["display_id"], "bounds": [int(box[k]) for k in ("x", "y", "w", "h")],
+                     "source_pixels": pixels, "shared_pixels": overlap, "retained": supported})
+        if supported:
+            retained.append(region)
+            stats.append(stat)
+    review = {"schema": FLIP_CONSISTENCY, "candidates": rows, "inspected_components": len(rows),
+              "supported_components": len(retained), "withheld_components": len(rows) - len(retained),
+              "aligned_mask_sha256": hashlib.sha256(aligned.tobytes()).hexdigest()}
+    return retained, stats, review
 
 
 class RegionalDetector(LocaliserDetector):
@@ -28,7 +50,7 @@ class RegionalDetector(LocaliserDetector):
 
     def applicable(self, ctx: RunContext) -> Applicability:
         if not original_bytes(ctx).startswith(PNG_SIGNATURE):
-            return Applicability(False, "Sensitive regional screening is currently assessed on PNG images")
+            return Applicability(False, "This local editing check is currently assessed on PNG images")
         return super().applicable(ctx)
 
     def predict(self, model: Any, images: list[np.ndarray], device: Any) -> list[np.ndarray]:
@@ -42,10 +64,23 @@ class RegionalDetector(LocaliserDetector):
             raise ValueError("Regional response is not registered to this source")
         measured = readout(prediction.raw_mask, prediction.candidate_eligibility["eligible"],
                            self.REGION_THRESHOLD, original_bytes(ctx), pixels)
+        regions, stats = measured.regions, measured.stats
+        repeat = {}
+        if (settings.environment == "dev" and settings.image_region_flip_review and regions
+                and max(width, height) == 768 and min(width, height) >= 512):
+            ctx.deadline.check("regional repeatability check")
+            reflected = np.ascontiguousarray(pixels[:, ::-1])
+            reflected_prediction = loaded.obj.predict(Image.fromarray(reflected))
+            reflected_readout = readout(reflected_prediction.raw_mask, reflected_prediction.candidate_eligibility["eligible"],
+                                        self.REGION_THRESHOLD, original_bytes(ctx), reflected)
+            aligned = np.ascontiguousarray(reflected_readout.selected_grid_mask[:, ::-1])
+            regions, stats, review = flip_components(measured, aligned)
+            repeat = {"flip_consistency": {**review,
+                      "reflected_input_sha256": reflected_prediction.geometry["input_float32_sha256"]}}
         return loc.LocaliserOutput(
             anomaly_map=measured.floating, reliable=measured.reliable, reliability_source="conditions",
-            integrity_score=loc.integrity_score(measured.floating, measured.reliable), regions=measured.regions,
-            region_stats=measured.stats, method=self.METHOD, weights_sha256=str(loaded.revision),
+            integrity_score=loc.integrity_score(measured.floating, measured.reliable), regions=regions,
+            region_stats=stats, method=self.METHOD, weights_sha256=str(loaded.revision),
             conditions=measured.conditions, candidate_eligibility=prediction.candidate_eligibility,
             resolution_policy={"mode": "screening", "input_px": self.INPUT,
                                "grid": list(measured.floating.shape[::-1]), "tiles": 0, "overlap_px": 0,
@@ -53,14 +88,14 @@ class RegionalDetector(LocaliserDetector):
                                "canvas_size": [1024, 1024], "padding_position": "top_left",
                                "source_rgb_sha256": prediction.geometry["source_rgb_sha256"],
                                "input_float32_sha256": prediction.geometry["input_float32_sha256"],
-                               "native_binding": prediction.binding})
+                               "native_binding": prediction.binding, **repeat})
 
     def run(self, ctx: RunContext):
         result = super().run(ctx)
         if result.status != "ok":
             return result
         count = int(result.metrics["regions"])
-        result.observed = f"Sensitive regional screening marked {count} candidate region(s) for closer inspection."
+        result.observed = f"The local editing check marked {count} candidate region(s) for closer inspection."
         result.reasoning = (
             ("Local editing cues were found in the highlighted areas. " if count else
              "No region met this check's selection rules. This does not establish that the file is original. ")
@@ -76,4 +111,7 @@ class RegionalDetector(LocaliserDetector):
                                "These uncalibrated cues cannot determine who or what edited the image.")
         result.details["authorship_confidence_contribution"] = 0.
         result.details["localisation"]["validation_status"] = "limited_local_evaluation"
+        if (review := result.details["localisation"]["resolution_policy"].get("flip_consistency")) is not None:
+            result.reasoning += (f" A horizontally flipped repeat pass supported {review['supported_components']} "
+                                 f"of {review['inspected_components']} inspected regions on the original pixel grid.")
         return result

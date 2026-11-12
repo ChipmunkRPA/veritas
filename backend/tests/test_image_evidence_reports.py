@@ -167,6 +167,7 @@ def test_measured_mask_is_frozen_rendered_and_committed(tmp_path, monkeypatch):
 def test_summary_pdf_and_manifest_present_non_mirrored_pair(packet_fixture, monkeypatch, basis, explanation, affine_review, version):
     db, store, analysis, _, _ = packet_fixture
     monkeypatch.setattr(settings, "environment", "dev")
+    monkeypatch.setattr(settings, "image_embedded_pair_review", False)
     monkeypatch.setattr(settings, "image_affine_copy_review", affine_review)
     if basis == "geometric_features":
         monkeypatch.setattr("app.detectors.image.copy_similarity.analyse_translation", lambda _: ("no_pair", []))

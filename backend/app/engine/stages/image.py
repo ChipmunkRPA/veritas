@@ -33,6 +33,7 @@ from app.detectors.image.local_jpeg_grid import DETECTOR_ID as LOCAL_GRID_DETECT
 from app.detectors.image.sharp_boundary import DETECTOR_ID as SHARP_BOUNDARY_DETECTOR_ID
 from app.engine import provenance_gate
 from app.engine import tiles as tile_pyramid
+from app.engine.detector import Profile
 from app.engine.fusion import abstain
 from app.engine.fusion.decisive import (
     CAPTURE_VERBAL,
@@ -51,7 +52,7 @@ from app.engine.fusion.runtime import DECLARED_AI_VERBAL
 from app.engine.media import MAX_PIXELS
 from app.engine.runner import StageContext
 from app.engine.stages import common
-from app.evidence import image_thumbnail_evidence
+from app.evidence import image_thumbnail_evidence, image_whole_review
 from app.evidence.image_copy_similarity_binding import credential_skip
 from app.schemas.evidence import AnalysisResultV2, Decision, Exhibit, HeatmapExhibit, SignalV2
 from app.schemas.legacy import (
@@ -509,19 +510,28 @@ def render(ctx: StageContext) -> dict[str, Any]:
             tiles = tile_pyramid.build_tileset(db, ctx.store, _media(ctx).native_pixels(), analysis_id=ctx.analysis_id)
         db.commit()
     legacy = _legacy_artifacts(ctx)
-    preview_exhibits, preview_artefacts = [], []
-    if ((ctx.outputs.get("ingest") or {}).get("mime") == "image/jpeg" and not ctx.state.get("refusion")
-            and not provenance_gate.stop(ctx)):
+    image_exhibits, image_artefacts = [], []
+    ingest = ctx.outputs.get("ingest") or {}
+    jpeg = ingest.get("mime") == "image/jpeg"
+    whole_review = (settings.image_whole_review_python is not None and settings.environment == "dev"
+                    and ctx.profile == Profile.FULL)
+    if (jpeg or whole_review) and not ctx.state.get("refusion") and not provenance_gate.stop(ctx):
         writer = ctx.exhibits.bind(image_thumbnail_evidence.CREATOR)
-        ids = set(image_thumbnail_evidence.add_exhibits(bytes(_media(ctx).original_bytes()), writer))
-        preview_exhibits = [e.model_dump(mode="json") for e in writer.exhibits if e.id in ids]
-        payloads = {e.get("payload_artefact_id") for e in preview_exhibits if e["kind"] == "image"}
-        preview_artefacts = [dataclasses.asdict(a) for a in writer.artefacts if a.id in payloads]
-        if preview_artefacts:
-            common.index_artefacts(ctx, (), extra=preview_artefacts)
-    records.extend(preview_artefacts)
+        ids = set()
+        if jpeg:
+            ids.update(image_thumbnail_evidence.add_exhibits(bytes(_media(ctx).original_bytes()), writer))
+        if whole_review:
+            sha = ingest["sha256"]
+            ids.update(image_whole_review.add_exhibits(ctx.store.path_for(sha), sha, writer,
+                                                      remaining=ctx.deadline.remaining()))
+        image_exhibits = [e.model_dump(mode="json") for e in writer.exhibits if e.id in ids]
+        payloads = {e.get("payload_artefact_id") for e in image_exhibits if e["kind"] == "image"}
+        image_artefacts = [dataclasses.asdict(a) for a in writer.artefacts if a.id in payloads]
+        if image_artefacts:
+            common.index_artefacts(ctx, (), extra=image_artefacts)
+    records.extend(image_artefacts)
     return {"artefacts_indexed": len(records), "bytes": sum(a["size_bytes"] for a in records), "tiles": tiles,
-            "legacy_artifacts": legacy, "exhibits": preview_exhibits, "artefacts": preview_artefacts}
+            "legacy_artifacts": legacy, "exhibits": image_exhibits, "artefacts": image_artefacts}
 
 
 def build_result(ctx: StageContext) -> AnalysisResultV2:

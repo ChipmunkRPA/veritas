@@ -313,11 +313,15 @@ def exhibit_images(db: Session, analysis: Analysis, result: dict[str, Any], stor
     preview_hashes = {}
     if getattr(analysis, "kind", None) == "image":
         from app.evidence.image_thumbnail_evidence import from_result
+        from app.evidence.image_whole_review import from_result as whole_image_review
 
         preview = from_result(result)
         if preview and preview["source_sha256"] == analysis.sha256:
             preview_hashes = {asset["exhibit_id"]: asset["sha256"]
                               for region in preview["regions"] for asset in region["crops"].values()}
+        review = whole_image_review(result)
+        if review and review["source_sha256"] == analysis.sha256:
+            preview_hashes.update({crop["exhibit_id"]: crop["sha256"] for crop in review["crops"]})
     if finding_thumbnails_only:
         records = [*finding_heatmaps(result).values(), *(e for e in records if e.get("id") in preview_hashes)]
     for exhibit in records:

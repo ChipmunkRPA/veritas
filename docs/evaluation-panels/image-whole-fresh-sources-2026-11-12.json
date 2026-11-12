@@ -1,0 +1,1103 @@
+{
+  "frozen_input_record": {
+    "file": "freeze.json",
+    "sha256": "729042123b1f39efff8b4224f89455d7d4a18db938af31d052bf5a7cb69d97c4"
+  },
+  "frozen_record": {
+    "candidate": {
+      "files": {
+        "3_Dense/model.safetensors": {
+          "bytes": 1690,
+          "sha256": "b09918c3838ef3b9dbd7057b0a8d382eced8fa06363ed62a5f60abe65cc65809"
+        },
+        "model.safetensors": {
+          "bytes": 877599816,
+          "sha256": "c5ae3fac7470126f25d2dca2386d8728f7c828fae53e8ac9eb006937821ea006"
+        }
+      },
+      "repository": "abacusai/Smaug-AI-Image-Detector",
+      "revision": "c7c95951e04a87b884a4ad479401b1128c3903bd"
+    },
+    "candidate_weight_record_sha256": "f8ef4c285ed4d344bce32e03fcdbd5127d68c7566fa53ca086780569723ff17b",
+    "criteria": {
+      "format_maximum_additional_ordinary_groups": 1,
+      "format_minimum_added_synthetic": 2,
+      "format_minimum_represented_generator_families": 2,
+      "minimum_complete_deliveries": 68
+    },
+    "intake_sha256": "b7ef79d6745efca984353d63e9fcb0d2c9134ba9fc54938d34a9768561dea98f",
+    "items": [
+      {
+        "family": "Qwen-Image-2512",
+        "format": "native",
+        "label": "synthetic",
+        "path": "objects/a13f94db9da7c2525b53cbe038825857d0048fcb15d456b8108583477d4d17b2.jpg",
+        "sha256": "a13f94db9da7c2525b53cbe038825857d0048fcb15d456b8108583477d4d17b2",
+        "source_index": 0
+      },
+      {
+        "family": "Qwen-Image-2512",
+        "format": "jpeg75",
+        "label": "synthetic",
+        "path": "deliveries/000-jpeg75.jpg",
+        "sha256": "abba40d1e6ef51d54aaebe27cc9299d95a2875bddb0e5ba910a3f23b74203605",
+        "source_index": 0
+      },
+      {
+        "family": "Qwen-Image-2512",
+        "format": "native",
+        "label": "synthetic",
+        "path": "objects/2c2a0d9a6fbc76cdcdaf03b139ab272a337885545b37ec61c248e1d423489da8.jpg",
+        "sha256": "2c2a0d9a6fbc76cdcdaf03b139ab272a337885545b37ec61c248e1d423489da8",
+        "source_index": 1
+      },
+      {
+        "family": "Qwen-Image-2512",
+        "format": "jpeg75",
+        "label": "synthetic",
+        "path": "deliveries/001-jpeg75.jpg",
+        "sha256": "84b780ebfbde33b8cd8c2b9c8cb7122b74279900721c5a921f2e2d44f92e4c7c",
+        "source_index": 1
+      },
+      {
+        "family": "Qwen-Image-2512",
+        "format": "native",
+        "label": "synthetic",
+        "path": "objects/e6f0af23d8e265706a6e56d2223b6ec8cd0fdc42b52151fa9a237e3e93c3779e.jpg",
+        "sha256": "e6f0af23d8e265706a6e56d2223b6ec8cd0fdc42b52151fa9a237e3e93c3779e",
+        "source_index": 2
+      },
+      {
+        "family": "Qwen-Image-2512",
+        "format": "jpeg75",
+        "label": "synthetic",
+        "path": "deliveries/002-jpeg75.jpg",
+        "sha256": "66e8225fc3c065caa08919e49e9be2edca40523acbb598c0043f3c740c5d1f32",
+        "source_index": 2
+      },
+      {
+        "family": "Qwen-Image-2512",
+        "format": "native",
+        "label": "synthetic",
+        "path": "objects/252c6664799bdf24ed80e0af1acfa65fdf0c149dd8db192c583bc2fc9f01fdd0.jpg",
+        "sha256": "252c6664799bdf24ed80e0af1acfa65fdf0c149dd8db192c583bc2fc9f01fdd0",
+        "source_index": 3
+      },
+      {
+        "family": "Qwen-Image-2512",
+        "format": "jpeg75",
+        "label": "synthetic",
+        "path": "deliveries/003-jpeg75.jpg",
+        "sha256": "76e183c7ef11ed5aa50fd484f2c879c8e271b8448e416a83c5dd373c84ce91dd",
+        "source_index": 3
+      },
+      {
+        "family": "Qwen-Image-2512",
+        "format": "native",
+        "label": "synthetic",
+        "path": "objects/b65762515cb9b276e3bc2e1953b9cb3671684a990ccd66387ae72c8e8a0b4c29.jpg",
+        "sha256": "b65762515cb9b276e3bc2e1953b9cb3671684a990ccd66387ae72c8e8a0b4c29",
+        "source_index": 4
+      },
+      {
+        "family": "Qwen-Image-2512",
+        "format": "jpeg75",
+        "label": "synthetic",
+        "path": "deliveries/004-jpeg75.jpg",
+        "sha256": "bc24d3a9551d893b165f203706319bdf5eb5bae5397c544572dc180078895bbc",
+        "source_index": 4
+      },
+      {
+        "family": "Qwen-Image-2512",
+        "format": "native",
+        "label": "synthetic",
+        "path": "objects/d079bf557a6c7cbad36909de43a5adba05a69b91bbb8193bdc65e34c31e828df.jpg",
+        "sha256": "d079bf557a6c7cbad36909de43a5adba05a69b91bbb8193bdc65e34c31e828df",
+        "source_index": 5
+      },
+      {
+        "family": "Qwen-Image-2512",
+        "format": "jpeg75",
+        "label": "synthetic",
+        "path": "deliveries/005-jpeg75.jpg",
+        "sha256": "456881cdb6e26be3c5e1f066ad81439536af381ffffff714db040cae4477d7c6",
+        "source_index": 5
+      },
+      {
+        "family": "GLM-Image",
+        "format": "native",
+        "label": "synthetic",
+        "path": "objects/e5824ff3d2a7408d36a9300ddd86841951b575de36acea8f36cab76af9c7c8d7.jpg",
+        "sha256": "e5824ff3d2a7408d36a9300ddd86841951b575de36acea8f36cab76af9c7c8d7",
+        "source_index": 6
+      },
+      {
+        "family": "GLM-Image",
+        "format": "jpeg75",
+        "label": "synthetic",
+        "path": "deliveries/006-jpeg75.jpg",
+        "sha256": "db7d93bf6477bde55e03c09162a65cad49dc7dfbb4295228a4ba427c75265fca",
+        "source_index": 6
+      },
+      {
+        "family": "GLM-Image",
+        "format": "native",
+        "label": "synthetic",
+        "path": "objects/401ca4c7a7ba183804b911d3681e86903eb8a1a4fdae4913ee0579789ae65ddf.jpg",
+        "sha256": "401ca4c7a7ba183804b911d3681e86903eb8a1a4fdae4913ee0579789ae65ddf",
+        "source_index": 7
+      },
+      {
+        "family": "GLM-Image",
+        "format": "jpeg75",
+        "label": "synthetic",
+        "path": "deliveries/007-jpeg75.jpg",
+        "sha256": "b4cd51b30d21e2f780f4fe3f5141379b3fbc2f873286672fe56877ab55c3e5f8",
+        "source_index": 7
+      },
+      {
+        "family": "GLM-Image",
+        "format": "native",
+        "label": "synthetic",
+        "path": "objects/4e3c2db72626178ef5cc9b397704e6f5160358f3307cf17474f34ad4f85a0e1c.jpg",
+        "sha256": "4e3c2db72626178ef5cc9b397704e6f5160358f3307cf17474f34ad4f85a0e1c",
+        "source_index": 8
+      },
+      {
+        "family": "GLM-Image",
+        "format": "jpeg75",
+        "label": "synthetic",
+        "path": "deliveries/008-jpeg75.jpg",
+        "sha256": "17ac269da522fc9cbd4eebac8a408c3968ed41e870e948f809ff7d2a3c1ba634",
+        "source_index": 8
+      },
+      {
+        "family": "GLM-Image",
+        "format": "native",
+        "label": "synthetic",
+        "path": "objects/1e2ea262f1f18f2af431ac24b223b8cce2ff9ee2fa23ffd0a0e12f9cf9ffd63d.jpg",
+        "sha256": "1e2ea262f1f18f2af431ac24b223b8cce2ff9ee2fa23ffd0a0e12f9cf9ffd63d",
+        "source_index": 9
+      },
+      {
+        "family": "GLM-Image",
+        "format": "jpeg75",
+        "label": "synthetic",
+        "path": "deliveries/009-jpeg75.jpg",
+        "sha256": "d3ee04e8e861a511131be524622de2f0dbca579fac520cb169d3ae3d47777d7c",
+        "source_index": 9
+      },
+      {
+        "family": "GLM-Image",
+        "format": "native",
+        "label": "synthetic",
+        "path": "objects/03bf2519ef4f6c6d7c1bac2a268155dbfdec4e7838f6067c4f090116bbbfe40c.jpg",
+        "sha256": "03bf2519ef4f6c6d7c1bac2a268155dbfdec4e7838f6067c4f090116bbbfe40c",
+        "source_index": 10
+      },
+      {
+        "family": "GLM-Image",
+        "format": "jpeg75",
+        "label": "synthetic",
+        "path": "deliveries/010-jpeg75.jpg",
+        "sha256": "ba2748f46ee8e58112ac22f771e64d855a4d409c2fdd301a1535977541235d11",
+        "source_index": 10
+      },
+      {
+        "family": "GLM-Image",
+        "format": "native",
+        "label": "synthetic",
+        "path": "objects/494cd301272fb7022566b256866593169f43f2f7bd730710ddf5db9aaaea877b.jpg",
+        "sha256": "494cd301272fb7022566b256866593169f43f2f7bd730710ddf5db9aaaea877b",
+        "source_index": 11
+      },
+      {
+        "family": "GLM-Image",
+        "format": "jpeg75",
+        "label": "synthetic",
+        "path": "deliveries/011-jpeg75.jpg",
+        "sha256": "71e2c21ae34164663f61d9cba3c11a7ad3dc86fd2c8f875191de6ffb61a2745c",
+        "source_index": 11
+      },
+      {
+        "family": "FLUX.2_max",
+        "format": "native",
+        "label": "synthetic",
+        "path": "objects/eb7546a9ada19638852c1e9c6a7d378a71526907ddfcf5d4f085e72a4f05f07f.jpg",
+        "sha256": "eb7546a9ada19638852c1e9c6a7d378a71526907ddfcf5d4f085e72a4f05f07f",
+        "source_index": 12
+      },
+      {
+        "family": "FLUX.2_max",
+        "format": "jpeg75",
+        "label": "synthetic",
+        "path": "deliveries/012-jpeg75.jpg",
+        "sha256": "6b565d73045cb85e9f26b71815e04e6a39d5fcaf5d65be1ef7ce52d7c95cd7f8",
+        "source_index": 12
+      },
+      {
+        "family": "FLUX.2_max",
+        "format": "native",
+        "label": "synthetic",
+        "path": "objects/ead098a7eef53c8113b2e9abfb750da48abd09328af9d37b8442a8ebd5cc88c0.jpg",
+        "sha256": "ead098a7eef53c8113b2e9abfb750da48abd09328af9d37b8442a8ebd5cc88c0",
+        "source_index": 13
+      },
+      {
+        "family": "FLUX.2_max",
+        "format": "jpeg75",
+        "label": "synthetic",
+        "path": "deliveries/013-jpeg75.jpg",
+        "sha256": "e788ffd51ce30ed9c90bbd3160d5cd75c280e5a3c4e754c55f8ea061d7f0362b",
+        "source_index": 13
+      },
+      {
+        "family": "FLUX.2_max",
+        "format": "native",
+        "label": "synthetic",
+        "path": "objects/0693276da719119415d8c9bf7de150ef91634cb53e54b80c44c3f12614680c0c.jpg",
+        "sha256": "0693276da719119415d8c9bf7de150ef91634cb53e54b80c44c3f12614680c0c",
+        "source_index": 14
+      },
+      {
+        "family": "FLUX.2_max",
+        "format": "jpeg75",
+        "label": "synthetic",
+        "path": "deliveries/014-jpeg75.jpg",
+        "sha256": "6d3259eeefefa6b6f8cf3fbfc5310a318c019506bdbf9bec805b97c8c0679f40",
+        "source_index": 14
+      },
+      {
+        "family": "FLUX.2_max",
+        "format": "native",
+        "label": "synthetic",
+        "path": "objects/bfaebf8030fb6eac99bbfc20bcbed4e34033fb2499a3207195ca679abf3495bc.jpg",
+        "sha256": "bfaebf8030fb6eac99bbfc20bcbed4e34033fb2499a3207195ca679abf3495bc",
+        "source_index": 15
+      },
+      {
+        "family": "FLUX.2_max",
+        "format": "jpeg75",
+        "label": "synthetic",
+        "path": "deliveries/015-jpeg75.jpg",
+        "sha256": "1cfed6dc971c5fb891cf9595065cd733e6c0c1e1db9cedfd14deb49639b4a950",
+        "source_index": 15
+      },
+      {
+        "family": "FLUX.2_max",
+        "format": "native",
+        "label": "synthetic",
+        "path": "objects/93df9f13c4590d14a010079695b5a17377d2367df5f3a797338cda9c2ea7ae6c.jpg",
+        "sha256": "93df9f13c4590d14a010079695b5a17377d2367df5f3a797338cda9c2ea7ae6c",
+        "source_index": 16
+      },
+      {
+        "family": "FLUX.2_max",
+        "format": "jpeg75",
+        "label": "synthetic",
+        "path": "deliveries/016-jpeg75.jpg",
+        "sha256": "5a6a86c28c7cea1fb1bb20e2d63a6f79f8d7bcf20ff982d2083879556fe2f588",
+        "source_index": 16
+      },
+      {
+        "family": "FLUX.2_max",
+        "format": "native",
+        "label": "synthetic",
+        "path": "objects/0466c07b23d310292f312a6bbc4f6173ca4c4d2cc686efe420bd9d6e47addb4d.jpg",
+        "sha256": "0466c07b23d310292f312a6bbc4f6173ca4c4d2cc686efe420bd9d6e47addb4d",
+        "source_index": 17
+      },
+      {
+        "family": "FLUX.2_max",
+        "format": "jpeg75",
+        "label": "synthetic",
+        "path": "deliveries/017-jpeg75.jpg",
+        "sha256": "897b6f713c8956474b54bbfb89670cb4f6415f5e51c07eb76155ddeac9630ad8",
+        "source_index": 17
+      },
+      {
+        "family": "architecture",
+        "format": "native",
+        "label": "ordinary",
+        "path": "objects/344f53f67ddc72adc7711c2a16bfe06796a82d14401a02041c94cfd09ee07b79.jpg",
+        "sha256": "344f53f67ddc72adc7711c2a16bfe06796a82d14401a02041c94cfd09ee07b79",
+        "source_index": 18
+      },
+      {
+        "family": "architecture",
+        "format": "jpeg75",
+        "label": "ordinary",
+        "path": "deliveries/018-jpeg75.jpg",
+        "sha256": "f3cb295a054a368e07cd268a448b18e53cc77662dd0676015cc1c9ee2f3fe3b2",
+        "source_index": 18
+      },
+      {
+        "family": "lakes",
+        "format": "native",
+        "label": "ordinary",
+        "path": "objects/3c17c7ad804183fade56a9e85a3569a717bbaea6ef5a912e7c6eaae44d9984f4.jpg",
+        "sha256": "3c17c7ad804183fade56a9e85a3569a717bbaea6ef5a912e7c6eaae44d9984f4",
+        "source_index": 19
+      },
+      {
+        "family": "lakes",
+        "format": "jpeg75",
+        "label": "ordinary",
+        "path": "deliveries/019-jpeg75.jpg",
+        "sha256": "45542e74a9ce02b7b53038a9b025d75e3fbc100cfe76851f30ac90659f058ba5",
+        "source_index": 19
+      },
+      {
+        "family": "lakes",
+        "format": "native",
+        "label": "ordinary",
+        "path": "objects/2b6816275b26e22f7609d72e69f75d7be73c0b797e9dcb00eacfa9b35adde935.jpg",
+        "sha256": "2b6816275b26e22f7609d72e69f75d7be73c0b797e9dcb00eacfa9b35adde935",
+        "source_index": 20
+      },
+      {
+        "family": "lakes",
+        "format": "jpeg75",
+        "label": "ordinary",
+        "path": "deliveries/020-jpeg75.jpg",
+        "sha256": "fa5d46d52bdca95995fbe0a62ae6aa866e88ed49459dfcce0058b828ca1b8cf3",
+        "source_index": 20
+      },
+      {
+        "family": "forests",
+        "format": "native",
+        "label": "ordinary",
+        "path": "objects/673747b90b351f8b6dc2956ee96ad15c6ea5e4f270b0ab8407d954dce47b4347.jpg",
+        "sha256": "673747b90b351f8b6dc2956ee96ad15c6ea5e4f270b0ab8407d954dce47b4347",
+        "source_index": 21
+      },
+      {
+        "family": "forests",
+        "format": "jpeg75",
+        "label": "ordinary",
+        "path": "deliveries/021-jpeg75.jpg",
+        "sha256": "bbdc7f3a15aa61f243ded343884762b603007a9d246a044b5d3e556113faa684",
+        "source_index": 21
+      },
+      {
+        "family": "abandoned",
+        "format": "native",
+        "label": "ordinary",
+        "path": "objects/7743986a7a30d8017ef7213c8dcebcf23e9fbda63b3f15b9d7de067c7c309904.jpg",
+        "sha256": "7743986a7a30d8017ef7213c8dcebcf23e9fbda63b3f15b9d7de067c7c309904",
+        "source_index": 22
+      },
+      {
+        "family": "abandoned",
+        "format": "jpeg75",
+        "label": "ordinary",
+        "path": "deliveries/022-jpeg75.jpg",
+        "sha256": "0a76d295dac40df76110098464644b9b3a122688a4ef3cc8f679aa95f6969d7d",
+        "source_index": 22
+      },
+      {
+        "family": "abandoned",
+        "format": "native",
+        "label": "ordinary",
+        "path": "objects/2f26e4e8aefc4f2d560a30e592521a14af361e25b47239b41cee31a32982d488.jpg",
+        "sha256": "2f26e4e8aefc4f2d560a30e592521a14af361e25b47239b41cee31a32982d488",
+        "source_index": 23
+      },
+      {
+        "family": "abandoned",
+        "format": "jpeg75",
+        "label": "ordinary",
+        "path": "deliveries/023-jpeg75.jpg",
+        "sha256": "270bb5f51e4c8dc35f1b72c341686937fe9d6e85df47b093f01efda41fe6eab4",
+        "source_index": 23
+      },
+      {
+        "family": "building-exteriors",
+        "format": "native",
+        "label": "ordinary",
+        "path": "objects/19bb44ebdc6709a4409bd8674158f24da74660de85a6cf4ab8d8e323e7ca3c7d.jpg",
+        "sha256": "19bb44ebdc6709a4409bd8674158f24da74660de85a6cf4ab8d8e323e7ca3c7d",
+        "source_index": 24
+      },
+      {
+        "family": "building-exteriors",
+        "format": "jpeg75",
+        "label": "ordinary",
+        "path": "deliveries/024-jpeg75.jpg",
+        "sha256": "52c07d16c64cba82940fa735d1ce20710ea81f4f5e0effeed3322c4d3303db1b",
+        "source_index": 24
+      },
+      {
+        "family": "abandoned",
+        "format": "native",
+        "label": "ordinary",
+        "path": "objects/2be1638a4a5aefe37470ce19970d9883cb1c76e1751fc127c884d5cbaf2771d8.jpg",
+        "sha256": "2be1638a4a5aefe37470ce19970d9883cb1c76e1751fc127c884d5cbaf2771d8",
+        "source_index": 25
+      },
+      {
+        "family": "abandoned",
+        "format": "jpeg75",
+        "label": "ordinary",
+        "path": "deliveries/025-jpeg75.jpg",
+        "sha256": "3478a2f5f196c8620350da62a06848a26c36c8a12fa27a342da14785b52a9ec5",
+        "source_index": 25
+      },
+      {
+        "family": "cityscapes",
+        "format": "native",
+        "label": "ordinary",
+        "path": "objects/12068f2e78a122c5bbaf273702a30c00fe2c187a8b93c15e5d9bd506ee02f467.jpg",
+        "sha256": "12068f2e78a122c5bbaf273702a30c00fe2c187a8b93c15e5d9bd506ee02f467",
+        "source_index": 26
+      },
+      {
+        "family": "cityscapes",
+        "format": "jpeg75",
+        "label": "ordinary",
+        "path": "deliveries/026-jpeg75.jpg",
+        "sha256": "18b5e895b7ccc1c93d7dffda79e410c4723346cc5ddabc6557d5460ed4e1b942",
+        "source_index": 26
+      },
+      {
+        "family": "cityscapes",
+        "format": "native",
+        "label": "ordinary",
+        "path": "objects/29a3fb89f04f60f8b6eca20a7fea8ec97c99fc28db56a34e5e7cef6fa66c2e94.jpg",
+        "sha256": "29a3fb89f04f60f8b6eca20a7fea8ec97c99fc28db56a34e5e7cef6fa66c2e94",
+        "source_index": 27
+      },
+      {
+        "family": "cityscapes",
+        "format": "jpeg75",
+        "label": "ordinary",
+        "path": "deliveries/027-jpeg75.jpg",
+        "sha256": "a1492e580cfdf19d10547825d8bda7f61353c851d39eb05a7bacfd15162b55dc",
+        "source_index": 27
+      },
+      {
+        "family": "lakes",
+        "format": "native",
+        "label": "ordinary",
+        "path": "objects/0c734244232ff89d7daceebf9eb659d4a853d9dcc27bd4cdd7af90855a91321f.jpg",
+        "sha256": "0c734244232ff89d7daceebf9eb659d4a853d9dcc27bd4cdd7af90855a91321f",
+        "source_index": 28
+      },
+      {
+        "family": "lakes",
+        "format": "jpeg75",
+        "label": "ordinary",
+        "path": "deliveries/028-jpeg75.jpg",
+        "sha256": "25b0f376edadeb287c3530e015059353a1cb932183ccb214fb278400e858c3ef",
+        "source_index": 28
+      },
+      {
+        "family": "forests",
+        "format": "native",
+        "label": "ordinary",
+        "path": "objects/ad2b39217fe6564e0d39e7db713977a702eab2adc959f2d465af380efad491d1.jpg",
+        "sha256": "ad2b39217fe6564e0d39e7db713977a702eab2adc959f2d465af380efad491d1",
+        "source_index": 29
+      },
+      {
+        "family": "forests",
+        "format": "jpeg75",
+        "label": "ordinary",
+        "path": "deliveries/029-jpeg75.jpg",
+        "sha256": "70c2329163d6fd6813954e343b689c4de7b7b6fec055cedc1d00d1c91d877b83",
+        "source_index": 29
+      },
+      {
+        "family": "forests",
+        "format": "native",
+        "label": "ordinary",
+        "path": "objects/79cb31e377f7ceaa1a15df73ef8994072d927457642a47ef837bc4fce25038e8.jpg",
+        "sha256": "79cb31e377f7ceaa1a15df73ef8994072d927457642a47ef837bc4fce25038e8",
+        "source_index": 30
+      },
+      {
+        "family": "forests",
+        "format": "jpeg75",
+        "label": "ordinary",
+        "path": "deliveries/030-jpeg75.jpg",
+        "sha256": "857d08b22963d88fc4b50de3187e5785c1c3fddf3c197ae089adf12466e7f690",
+        "source_index": 30
+      },
+      {
+        "family": "architecture",
+        "format": "native",
+        "label": "ordinary",
+        "path": "objects/133d8e045ab867b158f07bb1e5a3355940de939d3fe41094078166d29f2f1d68.jpg",
+        "sha256": "133d8e045ab867b158f07bb1e5a3355940de939d3fe41094078166d29f2f1d68",
+        "source_index": 31
+      },
+      {
+        "family": "architecture",
+        "format": "jpeg75",
+        "label": "ordinary",
+        "path": "deliveries/031-jpeg75.jpg",
+        "sha256": "c4ffe9db44297d4acfc623ab6579f36000afef19e55f9cc7a2bb46342f633046",
+        "source_index": 31
+      },
+      {
+        "family": "abandoned",
+        "format": "native",
+        "label": "ordinary",
+        "path": "objects/db4cec05c989fe5112550cea3a1a363354d4fe37d23e835566b5f8939bdeb79b.jpg",
+        "sha256": "db4cec05c989fe5112550cea3a1a363354d4fe37d23e835566b5f8939bdeb79b",
+        "source_index": 32
+      },
+      {
+        "family": "abandoned",
+        "format": "jpeg75",
+        "label": "ordinary",
+        "path": "deliveries/032-jpeg75.jpg",
+        "sha256": "eff0bdc4d6fa690bd7a7ad1c7577229fb6973ce7173674e5b9d0d082705d1723",
+        "source_index": 32
+      },
+      {
+        "family": "cityscapes",
+        "format": "native",
+        "label": "ordinary",
+        "path": "objects/e99ed01cffbdd48075a4ee8b317007761e901cc9678e6fa831afe5c94876c57b.jpg",
+        "sha256": "e99ed01cffbdd48075a4ee8b317007761e901cc9678e6fa831afe5c94876c57b",
+        "source_index": 33
+      },
+      {
+        "family": "cityscapes",
+        "format": "jpeg75",
+        "label": "ordinary",
+        "path": "deliveries/033-jpeg75.jpg",
+        "sha256": "38ee3f9c5886a5667df5d74cf3bb234b10954a875df3c25ca39eed679dc79b05",
+        "source_index": 33
+      }
+    ],
+    "jpeg75": {
+      "optimize": false,
+      "progressive": false,
+      "quality": 75,
+      "subsampling": 2
+    },
+    "operating_point": {
+      "calibration_groups": 24,
+      "calibration_inputs": 48,
+      "kind": "strictly_greater_than_max_of_48_genuine_responses",
+      "note": "Empirical genuine-tail operating point, not an AI probability, accuracy guarantee or public screening threshold.",
+      "raw_mean_logit": -5.4320597648620605
+    },
+    "plan_sha256": "ddc90e0be753eedb4f6aca43db07b367a0f69d39704d9daa171487127f149ad2",
+    "prior_operating_point_sha256": "c97b5e02b26a2c8763c9f1c8cb543f5ab63780b65f0f554e0450a42ca470d4bc",
+    "schema": "chipmunk.image-whole-fresh-source-freeze/1",
+    "scope": "Compare the actual current Full statistical AI direction against a positive-only supplement. Report the baseline and the supplement separately and do not adjust the inherited point. Run no serving or overall confidence change based on this small cohort."
+  },
+  "generated_source": {
+    "license": "https://www.apache.org/licenses/LICENSE-2.0",
+    "license_url": "https://huggingface.co/datasets/Qwen/Qwen-Image-Bench/resolve/d2493deb153b020cf169c7e3f57d15e4dd697038/README.md",
+    "pinned_card_sha256": "5bf9648d1aecda14cf0fc91b79a6be25c116f619c53461024c8f8e9ba2379403",
+    "pinned_file_listing_sha256": "8ccd969f6eab46be4125bc71d8e64934ae9a55f43020c6161b097cf8387b55df",
+    "repository": "Qwen/Qwen-Image-Bench",
+    "revision": "d2493deb153b020cf169c7e3f57d15e4dd697038"
+  },
+  "media_included": false,
+  "ordinary_source_receipt": {
+    "file": "image-affine-native-scale-2026-11-11.json",
+    "sha256": "e30981fd296d9cf2cd9ba417a24b5aec58b917697dbc8239f5a8f29ed0efe7d3"
+  },
+  "prior_operating_point": {
+    "file": "image-v7-smaug-genuine-operating-point.json",
+    "sha256": "c97b5e02b26a2c8763c9f1c8cb543f5ab63780b65f0f554e0450a42ca470d4bc"
+  },
+  "schema": "chipmunk.image-whole-fresh-source-manifest/1",
+  "sources": [
+    {
+      "bytes": 393286,
+      "difference_hash": "3233335b373333e6",
+      "family": "Qwen-Image-2512",
+      "group": "prompt-0066",
+      "label": "synthetic",
+      "license": "https://www.apache.org/licenses/LICENSE-2.0",
+      "path": "images/Qwen-Image-2512/000066_53957540.jpg",
+      "prompt_id": 66,
+      "rgb_sha256": "190bc894fe21f3088e95b548dd24479285984610d93306979c0b77f188eb5434",
+      "sha256": "a13f94db9da7c2525b53cbe038825857d0048fcb15d456b8108583477d4d17b2",
+      "url": "https://huggingface.co/datasets/Qwen/Qwen-Image-Bench/resolve/d2493deb153b020cf169c7e3f57d15e4dd697038/images/Qwen-Image-2512/000066_53957540.jpg"
+    },
+    {
+      "bytes": 271871,
+      "difference_hash": "6ee66e389b9e9494",
+      "family": "Qwen-Image-2512",
+      "group": "prompt-0003",
+      "label": "synthetic",
+      "license": "https://www.apache.org/licenses/LICENSE-2.0",
+      "path": "images/Qwen-Image-2512/000003_e329d8de.jpg",
+      "prompt_id": 3,
+      "rgb_sha256": "b5085b0e63745cb3999581d8b6383020e68962c2f99a7671c432d539b4374e9a",
+      "sha256": "2c2a0d9a6fbc76cdcdaf03b139ab272a337885545b37ec61c248e1d423489da8",
+      "url": "https://huggingface.co/datasets/Qwen/Qwen-Image-Bench/resolve/d2493deb153b020cf169c7e3f57d15e4dd697038/images/Qwen-Image-2512/000003_e329d8de.jpg"
+    },
+    {
+      "bytes": 438119,
+      "difference_hash": "e360e3e1e0e1e869",
+      "family": "Qwen-Image-2512",
+      "group": "prompt-0078",
+      "label": "synthetic",
+      "license": "https://www.apache.org/licenses/LICENSE-2.0",
+      "path": "images/Qwen-Image-2512/000078_1db08fb8.jpg",
+      "prompt_id": 78,
+      "rgb_sha256": "8b1a2b8e9b20691945f0203f1a5e6d9aa56849977d1a73a185664f1fd891696a",
+      "sha256": "e6f0af23d8e265706a6e56d2223b6ec8cd0fdc42b52151fa9a237e3e93c3779e",
+      "url": "https://huggingface.co/datasets/Qwen/Qwen-Image-Bench/resolve/d2493deb153b020cf169c7e3f57d15e4dd697038/images/Qwen-Image-2512/000078_1db08fb8.jpg"
+    },
+    {
+      "bytes": 383562,
+      "difference_hash": "f2d267e4f9e0c1f1",
+      "family": "Qwen-Image-2512",
+      "group": "prompt-0020",
+      "label": "synthetic",
+      "license": "https://www.apache.org/licenses/LICENSE-2.0",
+      "path": "images/Qwen-Image-2512/000020_8eeeafb8.jpg",
+      "prompt_id": 20,
+      "rgb_sha256": "348ae1997f8cf132c610f4a63a1863d5a185be91eb6eea2216896eaf6e32fcc0",
+      "sha256": "252c6664799bdf24ed80e0af1acfa65fdf0c149dd8db192c583bc2fc9f01fdd0",
+      "url": "https://huggingface.co/datasets/Qwen/Qwen-Image-Bench/resolve/d2493deb153b020cf169c7e3f57d15e4dd697038/images/Qwen-Image-2512/000020_8eeeafb8.jpg"
+    },
+    {
+      "bytes": 214911,
+      "difference_hash": "07c6c4d7535313c3",
+      "family": "Qwen-Image-2512",
+      "group": "prompt-0034",
+      "label": "synthetic",
+      "license": "https://www.apache.org/licenses/LICENSE-2.0",
+      "path": "images/Qwen-Image-2512/000034_1a8246ac.jpg",
+      "prompt_id": 34,
+      "rgb_sha256": "4835cdfe407f3379f662b7d34b351af7adb5f9a1dab892a06755656cd2f6fb7b",
+      "sha256": "b65762515cb9b276e3bc2e1953b9cb3671684a990ccd66387ae72c8e8a0b4c29",
+      "url": "https://huggingface.co/datasets/Qwen/Qwen-Image-Bench/resolve/d2493deb153b020cf169c7e3f57d15e4dd697038/images/Qwen-Image-2512/000034_1a8246ac.jpg"
+    },
+    {
+      "bytes": 373194,
+      "difference_hash": "39359198c8c8cae0",
+      "family": "Qwen-Image-2512",
+      "group": "prompt-0105",
+      "label": "synthetic",
+      "license": "https://www.apache.org/licenses/LICENSE-2.0",
+      "path": "images/Qwen-Image-2512/000105_4ae55ea5.jpg",
+      "prompt_id": 105,
+      "rgb_sha256": "198a10f89da85e83c5837dad372cdae9053f7ad43d78068511f99769c0533707",
+      "sha256": "d079bf557a6c7cbad36909de43a5adba05a69b91bbb8193bdc65e34c31e828df",
+      "url": "https://huggingface.co/datasets/Qwen/Qwen-Image-Bench/resolve/d2493deb153b020cf169c7e3f57d15e4dd697038/images/Qwen-Image-2512/000105_4ae55ea5.jpg"
+    },
+    {
+      "bytes": 343424,
+      "difference_hash": "6e694c361c59535b",
+      "family": "GLM-Image",
+      "group": "prompt-0092",
+      "label": "synthetic",
+      "license": "https://www.apache.org/licenses/LICENSE-2.0",
+      "path": "images/GLM-Image/000092_e09f1a49.jpg",
+      "prompt_id": 92,
+      "rgb_sha256": "5131ed335cb9c7f36479178819ad4afd3c65ee21e098592992c8f9fb92e25020",
+      "sha256": "e5824ff3d2a7408d36a9300ddd86841951b575de36acea8f36cab76af9c7c8d7",
+      "url": "https://huggingface.co/datasets/Qwen/Qwen-Image-Bench/resolve/d2493deb153b020cf169c7e3f57d15e4dd697038/images/GLM-Image/000092_e09f1a49.jpg"
+    },
+    {
+      "bytes": 258647,
+      "difference_hash": "2e2e6a2a8a4f0626",
+      "family": "GLM-Image",
+      "group": "prompt-0065",
+      "label": "synthetic",
+      "license": "https://www.apache.org/licenses/LICENSE-2.0",
+      "path": "images/GLM-Image/000065_ee3633e2.jpg",
+      "prompt_id": 65,
+      "rgb_sha256": "15ccd47a1bfa7d54b3053735825d0b91c59bb772466fd956e6eddfde3e48f516",
+      "sha256": "401ca4c7a7ba183804b911d3681e86903eb8a1a4fdae4913ee0579789ae65ddf",
+      "url": "https://huggingface.co/datasets/Qwen/Qwen-Image-Bench/resolve/d2493deb153b020cf169c7e3f57d15e4dd697038/images/GLM-Image/000065_ee3633e2.jpg"
+    },
+    {
+      "bytes": 266659,
+      "difference_hash": "9d3dbe93862b2d27",
+      "family": "GLM-Image",
+      "group": "prompt-0014",
+      "label": "synthetic",
+      "license": "https://www.apache.org/licenses/LICENSE-2.0",
+      "path": "images/GLM-Image/000014_68c56a72.jpg",
+      "prompt_id": 14,
+      "rgb_sha256": "032f2fbc952f33f3b587f9939497eeedf8be7d5d7c8c3a884572ea43834aa01e",
+      "sha256": "4e3c2db72626178ef5cc9b397704e6f5160358f3307cf17474f34ad4f85a0e1c",
+      "url": "https://huggingface.co/datasets/Qwen/Qwen-Image-Bench/resolve/d2493deb153b020cf169c7e3f57d15e4dd697038/images/GLM-Image/000014_68c56a72.jpg"
+    },
+    {
+      "bytes": 650138,
+      "difference_hash": "44e92b1c93cee800",
+      "family": "GLM-Image",
+      "group": "prompt-0019",
+      "label": "synthetic",
+      "license": "https://www.apache.org/licenses/LICENSE-2.0",
+      "path": "images/GLM-Image/000019_e6680606.jpg",
+      "prompt_id": 19,
+      "rgb_sha256": "37a92204917188b13440aa2a0b1533e968d295e5c2a2c1941572b14af4b9e2af",
+      "sha256": "1e2ea262f1f18f2af431ac24b223b8cce2ff9ee2fa23ffd0a0e12f9cf9ffd63d",
+      "url": "https://huggingface.co/datasets/Qwen/Qwen-Image-Bench/resolve/d2493deb153b020cf169c7e3f57d15e4dd697038/images/GLM-Image/000019_e6680606.jpg"
+    },
+    {
+      "bytes": 260833,
+      "difference_hash": "c7832326aca9991d",
+      "family": "GLM-Image",
+      "group": "prompt-0050",
+      "label": "synthetic",
+      "license": "https://www.apache.org/licenses/LICENSE-2.0",
+      "path": "images/GLM-Image/000050_3d7b6707.jpg",
+      "prompt_id": 50,
+      "rgb_sha256": "12728e271ee308f4b3edb09ab5bd854c3a6a5a101a79606ad57a0a9f35c30639",
+      "sha256": "03bf2519ef4f6c6d7c1bac2a268155dbfdec4e7838f6067c4f090116bbbfe40c",
+      "url": "https://huggingface.co/datasets/Qwen/Qwen-Image-Bench/resolve/d2493deb153b020cf169c7e3f57d15e4dd697038/images/GLM-Image/000050_3d7b6707.jpg"
+    },
+    {
+      "bytes": 446932,
+      "difference_hash": "33334d0f0d4d4dcc",
+      "family": "GLM-Image",
+      "group": "prompt-0041",
+      "label": "synthetic",
+      "license": "https://www.apache.org/licenses/LICENSE-2.0",
+      "path": "images/GLM-Image/000041_f66692cc.jpg",
+      "prompt_id": 41,
+      "rgb_sha256": "d863f53b94f7c3588149431574985eebc5fa9e68f7326466d8bc08bed838656a",
+      "sha256": "494cd301272fb7022566b256866593169f43f2f7bd730710ddf5db9aaaea877b",
+      "url": "https://huggingface.co/datasets/Qwen/Qwen-Image-Bench/resolve/d2493deb153b020cf169c7e3f57d15e4dd697038/images/GLM-Image/000041_f66692cc.jpg"
+    },
+    {
+      "bytes": 304566,
+      "difference_hash": "b0d06430b20cf4f0",
+      "family": "FLUX.2_max",
+      "group": "prompt-0022",
+      "label": "synthetic",
+      "license": "https://www.apache.org/licenses/LICENSE-2.0",
+      "path": "images/FLUX.2_max/000022_56f56407.jpg",
+      "prompt_id": 22,
+      "rgb_sha256": "0c4745b15bbdf4952ec086692bd2859285194d6a04b26eb988ceba27eac4a7a1",
+      "sha256": "eb7546a9ada19638852c1e9c6a7d378a71526907ddfcf5d4f085e72a4f05f07f",
+      "url": "https://huggingface.co/datasets/Qwen/Qwen-Image-Bench/resolve/d2493deb153b020cf169c7e3f57d15e4dd697038/images/FLUX.2_max/000022_56f56407.jpg"
+    },
+    {
+      "bytes": 297972,
+      "difference_hash": "8e4c07133737333b",
+      "family": "FLUX.2_max",
+      "group": "prompt-0069",
+      "label": "synthetic",
+      "license": "https://www.apache.org/licenses/LICENSE-2.0",
+      "path": "images/FLUX.2_max/000069_86cabdae.jpg",
+      "prompt_id": 69,
+      "rgb_sha256": "c9fab5837eec6030f11493eeb9d774151cf4097d3bfc5d79bdc7d35bcd184868",
+      "sha256": "ead098a7eef53c8113b2e9abfb750da48abd09328af9d37b8442a8ebd5cc88c0",
+      "url": "https://huggingface.co/datasets/Qwen/Qwen-Image-Bench/resolve/d2493deb153b020cf169c7e3f57d15e4dd697038/images/FLUX.2_max/000069_86cabdae.jpg"
+    },
+    {
+      "bytes": 451379,
+      "difference_hash": "7e76787c683838b0",
+      "family": "FLUX.2_max",
+      "group": "prompt-0006",
+      "label": "synthetic",
+      "license": "https://www.apache.org/licenses/LICENSE-2.0",
+      "path": "images/FLUX.2_max/000006_ed1d9cdc.jpg",
+      "prompt_id": 6,
+      "rgb_sha256": "25cc25495fddb84a9d1bd0b1b9df72b25cf5d165d37096913245f87d9b004864",
+      "sha256": "0693276da719119415d8c9bf7de150ef91634cb53e54b80c44c3f12614680c0c",
+      "url": "https://huggingface.co/datasets/Qwen/Qwen-Image-Bench/resolve/d2493deb153b020cf169c7e3f57d15e4dd697038/images/FLUX.2_max/000006_ed1d9cdc.jpg"
+    },
+    {
+      "bytes": 497733,
+      "difference_hash": "6362272028333424",
+      "family": "FLUX.2_max",
+      "group": "prompt-0057",
+      "label": "synthetic",
+      "license": "https://www.apache.org/licenses/LICENSE-2.0",
+      "path": "images/FLUX.2_max/000057_0d42c1d2.jpg",
+      "prompt_id": 57,
+      "rgb_sha256": "c235bdffa03ae0d9bc6ed4b1345bce77eaaa2c8b30c2599702c6d6629ee2a44e",
+      "sha256": "bfaebf8030fb6eac99bbfc20bcbed4e34033fb2499a3207195ca679abf3495bc",
+      "url": "https://huggingface.co/datasets/Qwen/Qwen-Image-Bench/resolve/d2493deb153b020cf169c7e3f57d15e4dd697038/images/FLUX.2_max/000057_0d42c1d2.jpg"
+    },
+    {
+      "bytes": 365395,
+      "difference_hash": "e0e0f0e4a0e8f0f0",
+      "family": "FLUX.2_max",
+      "group": "prompt-0052",
+      "label": "synthetic",
+      "license": "https://www.apache.org/licenses/LICENSE-2.0",
+      "path": "images/FLUX.2_max/000052_93a4cec8.jpg",
+      "prompt_id": 52,
+      "rgb_sha256": "395c807bea6a75b3482d9eac21cee51ad29fb9afa53431f13227cd3d48942ae4",
+      "sha256": "93df9f13c4590d14a010079695b5a17377d2367df5f3a797338cda9c2ea7ae6c",
+      "url": "https://huggingface.co/datasets/Qwen/Qwen-Image-Bench/resolve/d2493deb153b020cf169c7e3f57d15e4dd697038/images/FLUX.2_max/000052_93a4cec8.jpg"
+    },
+    {
+      "bytes": 210373,
+      "difference_hash": "0a9a4b8767478733",
+      "family": "FLUX.2_max",
+      "group": "prompt-0044",
+      "label": "synthetic",
+      "license": "https://www.apache.org/licenses/LICENSE-2.0",
+      "path": "images/FLUX.2_max/000044_744d9636.jpg",
+      "prompt_id": 44,
+      "rgb_sha256": "a46e9a95c94db43ffd1c6640075010e7e8ab88390cf4ddd70f950216ce709301",
+      "sha256": "0466c07b23d310292f312a6bbc4f6173ca4c4d2cc686efe420bd9d6e47addb4d",
+      "url": "https://huggingface.co/datasets/Qwen/Qwen-Image-Bench/resolve/d2493deb153b020cf169c7e3f57d15e4dd697038/images/FLUX.2_max/000044_744d9636.jpg"
+    },
+    {
+      "archive_sha256": "344f53f67ddc72adc7711c2a16bfe06796a82d14401a02041c94cfd09ee07b79",
+      "author": "Moheen Reeyad",
+      "bytes": 938324,
+      "difference_hash": "68381c85a7273df9",
+      "family": "architecture",
+      "file": "source-06.jpg",
+      "group": "moheen reeyad",
+      "label": "ordinary",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Chittagong_University_Railway_station_(04).jpg",
+      "publisher_delivery": "thumb",
+      "rgb_sha256": "2163d5d0d5985e2ba7d481b3ab5e108b3822e2353a80b58aa69e2e4c6eb5fabc",
+      "sha256": "344f53f67ddc72adc7711c2a16bfe06796a82d14401a02041c94cfd09ee07b79",
+      "title": "File:Chittagong University Railway station (04).jpg"
+    },
+    {
+      "archive_sha256": "3c17c7ad804183fade56a9e85a3569a717bbaea6ef5a912e7c6eaae44d9984f4",
+      "author": "Calle Eklund",
+      "bytes": 814691,
+      "difference_hash": "412385f4b6f4feae",
+      "family": "lakes",
+      "file": "source-36.jpg",
+      "group": "calle eklund",
+      "label": "ordinary",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Hessesj%C3%B6n_2019-07-30.jpg",
+      "publisher_delivery": "thumb",
+      "rgb_sha256": "27ca3c97015d92e15cbb5277db7a9a0219e127e902f3b1929b6007c4344f099a",
+      "sha256": "3c17c7ad804183fade56a9e85a3569a717bbaea6ef5a912e7c6eaae44d9984f4",
+      "title": "File:Hessesj\u00f6n 2019-07-30.jpg"
+    },
+    {
+      "archive_sha256": "2b6816275b26e22f7609d72e69f75d7be73c0b797e9dcb00eacfa9b35adde935",
+      "author": "Agnes Monkelbaan",
+      "bytes": 496545,
+      "difference_hash": "101ac888c881c1c3",
+      "family": "lakes",
+      "file": "source-04.jpg",
+      "group": "agnes monkelbaan",
+      "label": "ordinary",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Delleboersterheide,_natuurgebied_van_het_It_Fryske_Gea._25-12-2019._(actm.)_30.jpg",
+      "publisher_delivery": "thumb",
+      "rgb_sha256": "3a8d33f77ffdcdb6129fa43b6da84be23f8422c88e0d93fe18ba3abf009cabc7",
+      "sha256": "2b6816275b26e22f7609d72e69f75d7be73c0b797e9dcb00eacfa9b35adde935",
+      "title": "File:Delleboersterheide, natuurgebied van het It Fryske Gea. 25-12-2019. (actm.) 30.jpg"
+    },
+    {
+      "archive_sha256": "673747b90b351f8b6dc2956ee96ad15c6ea5e4f270b0ab8407d954dce47b4347",
+      "author": "Vyacheslav Argenberg",
+      "bytes": 754232,
+      "difference_hash": "40e0b85e6e3c3b3b",
+      "family": "forests",
+      "file": "source-05.jpg",
+      "group": "vyacheslav argenberg",
+      "label": "ordinary",
+      "license": "https://creativecommons.org/licenses/by/4.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Mae_Hong_Son,_Forested_hills_2,_Thailand.jpg",
+      "publisher_delivery": "thumb",
+      "rgb_sha256": "ebd0e8d9f8653742222d25ad9d19c3237c32dd6b93b13afaab7ee731c1800feb",
+      "sha256": "673747b90b351f8b6dc2956ee96ad15c6ea5e4f270b0ab8407d954dce47b4347",
+      "title": "File:Mae Hong Son, Forested hills 2, Thailand.jpg"
+    },
+    {
+      "archive_sha256": "7743986a7a30d8017ef7213c8dcebcf23e9fbda63b3f15b9d7de067c7c309904",
+      "author": "Grunpfnul",
+      "bytes": 722717,
+      "difference_hash": "f0b0f1f2ededdf96",
+      "family": "abandoned",
+      "file": "source-29.jpg",
+      "group": "grunpfnul",
+      "label": "ordinary",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0",
+      "page": "https://commons.wikimedia.org/wiki/File:BE_SERAI_Tanks.jpg",
+      "publisher_delivery": "thumb",
+      "rgb_sha256": "3effda741924e114b1d0f7fe1209a62be598ea3868147149a2f8871c978d7c46",
+      "sha256": "7743986a7a30d8017ef7213c8dcebcf23e9fbda63b3f15b9d7de067c7c309904",
+      "title": "File:BE SERAI Tanks.jpg"
+    },
+    {
+      "archive_sha256": "2f26e4e8aefc4f2d560a30e592521a14af361e25b47239b41cee31a32982d488",
+      "author": "Trougnouf",
+      "bytes": 870173,
+      "difference_hash": "363f3f32333b3b7b",
+      "family": "abandoned",
+      "file": "source-19.jpg",
+      "group": "trougnouf",
+      "label": "ordinary",
+      "license": "https://creativecommons.org/licenses/by/4.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Barbed_wires_by_the_water_treatment_plant_of_an_abandoned_steel_factory_in_Oupeye,_Belgium_(DSCF3303).jpg",
+      "publisher_delivery": "thumb",
+      "rgb_sha256": "480df4ad146cced70202469efd4674d71a9cda53a28274936bf2a7e011fc51f1",
+      "sha256": "2f26e4e8aefc4f2d560a30e592521a14af361e25b47239b41cee31a32982d488",
+      "title": "File:Barbed wires by the water treatment plant of an abandoned steel factory in Oupeye, Belgium (DSCF3303).jpg"
+    },
+    {
+      "archive_sha256": "19bb44ebdc6709a4409bd8674158f24da74660de85a6cf4ab8d8e323e7ca3c7d",
+      "author": "Adrian Tync",
+      "bytes": 647490,
+      "difference_hash": "0122e0f0b0320c03",
+      "family": "building-exteriors",
+      "file": "source-03.jpg",
+      "group": "adrian tync",
+      "label": "ordinary",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Krakow_Palac_Sztuki_2025.jpg",
+      "publisher_delivery": "thumb",
+      "rgb_sha256": "318cf4f1abb69ecb72fe8aa0cc387146eb073ae05218b9b0b83d9bc23d470a0a",
+      "sha256": "19bb44ebdc6709a4409bd8674158f24da74660de85a6cf4ab8d8e323e7ca3c7d",
+      "title": "File:Krakow Palac Sztuki 2025.jpg"
+    },
+    {
+      "archive_sha256": "2be1638a4a5aefe37470ce19970d9883cb1c76e1751fc127c884d5cbaf2771d8",
+      "author": "Alexander Novikov",
+      "bytes": 2829245,
+      "difference_hash": "c8f0f4f4e4e5213c",
+      "family": "abandoned",
+      "file": "source-01.jpg",
+      "group": "alexander novikov",
+      "label": "ordinary",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Cinema_Rodina_-_001.jpg",
+      "publisher_delivery": "original",
+      "rgb_sha256": "fe5ab2c7cce6622212717f59dfe56ba64059901faafeffa0b78e94ba1a861f91",
+      "sha256": "2be1638a4a5aefe37470ce19970d9883cb1c76e1751fc127c884d5cbaf2771d8",
+      "title": "File:Cinema Rodina - 001.jpg"
+    },
+    {
+      "archive_sha256": "12068f2e78a122c5bbaf273702a30c00fe2c187a8b93c15e5d9bd506ee02f467",
+      "author": "Marcin Konsek",
+      "bytes": 956609,
+      "difference_hash": "870cc5a4a8486483",
+      "family": "cityscapes",
+      "file": "source-30.jpg",
+      "group": "marcin konsek",
+      "label": "ordinary",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0",
+      "page": "https://commons.wikimedia.org/wiki/File:2016_Rangun,_Ulica_Anawratha_(02).jpg",
+      "publisher_delivery": "thumb",
+      "rgb_sha256": "95f96eff6de371d8c3ea00407687c3f53c5497db19a6c5f603a12cbbafb9e601",
+      "sha256": "12068f2e78a122c5bbaf273702a30c00fe2c187a8b93c15e5d9bd506ee02f467",
+      "title": "File:2016 Rangun, Ulica Anawratha (02).jpg"
+    },
+    {
+      "archive_sha256": "29a3fb89f04f60f8b6eca20a7fea8ec97c99fc28db56a34e5e7cef6fa66c2e94",
+      "author": "ThibautRe",
+      "bytes": 647174,
+      "difference_hash": "ececdc7dc8d07c48",
+      "family": "cityscapes",
+      "file": "source-20.jpg",
+      "group": "thibautre",
+      "label": "ordinary",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Cornimont_depuis_la_croix_de_mission.jpg",
+      "publisher_delivery": "thumb",
+      "rgb_sha256": "5cc5b47e07e85b36b9270f5c0d2357c054a9fca8fdfd7e5e3b5f7116dd8eae40",
+      "sha256": "29a3fb89f04f60f8b6eca20a7fea8ec97c99fc28db56a34e5e7cef6fa66c2e94",
+      "title": "File:Cornimont depuis la croix de mission.jpg"
+    },
+    {
+      "archive_sha256": "0c734244232ff89d7daceebf9eb659d4a853d9dcc27bd4cdd7af90855a91321f",
+      "author": "CEphoto, Uwe Aranas",
+      "bytes": 357252,
+      "difference_hash": "67686064e0c00c00",
+      "family": "lakes",
+      "file": "source-10.jpg",
+      "group": "cephoto, uwe aranas",
+      "label": "ordinary",
+      "license": "https://creativecommons.org/licenses/by-sa/3.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Babagon_Sabah_Babagon-Dam-02.jpg",
+      "publisher_delivery": "thumb",
+      "rgb_sha256": "817a75cec783136808f98bef6af6434e0edf514880eaa30f7d323ba8da5c0d40",
+      "sha256": "0c734244232ff89d7daceebf9eb659d4a853d9dcc27bd4cdd7af90855a91321f",
+      "title": "File:Babagon Sabah Babagon-Dam-02.jpg"
+    },
+    {
+      "archive_sha256": "ad2b39217fe6564e0d39e7db713977a702eab2adc959f2d465af380efad491d1",
+      "author": "Kuhnmi",
+      "bytes": 817752,
+      "difference_hash": "c9d49c0d4d373212",
+      "family": "forests",
+      "file": "source-37.jpg",
+      "group": "kuhnmi",
+      "label": "ordinary",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Baumsilhouetten_am_Uetliberg_mit_Novembernebel_und_Sonnenstrahlen.jpg",
+      "publisher_delivery": "thumb",
+      "rgb_sha256": "655f47dafa81063fed0cc0dba44af17141d37b6e07ed1724f0f9116be00daeb5",
+      "sha256": "ad2b39217fe6564e0d39e7db713977a702eab2adc959f2d465af380efad491d1",
+      "title": "File:Baumsilhouetten am Uetliberg mit Novembernebel und Sonnenstrahlen.jpg"
+    },
+    {
+      "archive_sha256": "79cb31e377f7ceaa1a15df73ef8994072d927457642a47ef837bc4fce25038e8",
+      "author": "Ximonic (Simo R\u00e4s\u00e4nen)",
+      "bytes": 1191426,
+      "difference_hash": "46d490b2e0c0e0a0",
+      "family": "forests",
+      "file": "source-17.jpg",
+      "group": "ximonic (simo r\u00e4s\u00e4nen)",
+      "label": "ordinary",
+      "license": "https://creativecommons.org/licenses/by/3.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Swamp_forest_of_Palokallio_conservation_reserve_in_Kuninkaanm%C3%A4ki,_Vantaa,_Finland,_2021_April.jpg",
+      "publisher_delivery": "thumb",
+      "rgb_sha256": "bc35a725669c20d40c852664ba8648931673e739bbb1d906d2f64c471010a1f6",
+      "sha256": "79cb31e377f7ceaa1a15df73ef8994072d927457642a47ef837bc4fce25038e8",
+      "title": "File:Swamp forest of Palokallio conservation reserve in Kuninkaanm\u00e4ki, Vantaa, Finland, 2021 April.jpg"
+    },
+    {
+      "archive_sha256": "133d8e045ab867b158f07bb1e5a3355940de939d3fe41094078166d29f2f1d68",
+      "author": "Rhododendrites",
+      "bytes": 716657,
+      "difference_hash": "eeddd3c71b1b8eec",
+      "family": "architecture",
+      "file": "source-18.jpg",
+      "group": "rhododendrites",
+      "label": "ordinary",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Cornell_Tech_buildings_(42013).jpg",
+      "publisher_delivery": "thumb",
+      "rgb_sha256": "e839bb6cd331e00fdfab1fbe578df78ea35fa0bd62df6b8560d6fcf7abdcdf51",
+      "sha256": "133d8e045ab867b158f07bb1e5a3355940de939d3fe41094078166d29f2f1d68",
+      "title": "File:Cornell Tech buildings (42013).jpg"
+    },
+    {
+      "archive_sha256": "db4cec05c989fe5112550cea3a1a363354d4fe37d23e835566b5f8939bdeb79b",
+      "author": "Hons084",
+      "bytes": 711933,
+      "difference_hash": "9e989426a3e9ffff",
+      "family": "abandoned",
+      "file": "source-34.jpg",
+      "group": "hons084",
+      "label": "ordinary",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0",
+      "page": "https://commons.wikimedia.org/wiki/File:2014_Nowy_Aton,_Opuszczony_budynek.jpg",
+      "publisher_delivery": "thumb",
+      "rgb_sha256": "fb18dc4b666ccffd9fda5be6a98878e14b1ccd4dddde46cc3887fc2ee8512dac",
+      "sha256": "db4cec05c989fe5112550cea3a1a363354d4fe37d23e835566b5f8939bdeb79b",
+      "title": "File:2014 Nowy Aton, Opuszczony budynek.jpg"
+    },
+    {
+      "archive_sha256": "e99ed01cffbdd48075a4ee8b317007761e901cc9678e6fa831afe5c94876c57b",
+      "author": "Ralf Roletschek",
+      "bytes": 564968,
+      "difference_hash": "2cc8c2a2b6b7b448",
+      "family": "cityscapes",
+      "file": "source-14.jpg",
+      "group": "ralf roletschek",
+      "label": "ordinary",
+      "license": "https://creativecommons.org/licenses/by/3.0",
+      "page": "https://commons.wikimedia.org/wiki/File:13-08-06-abu-dhabi-by-RalfR-077.jpg",
+      "publisher_delivery": "thumb",
+      "rgb_sha256": "52e7683c5f26ee861ac24791bc16bf2aa1950378249070b739caa06dc57849ee",
+      "sha256": "e99ed01cffbdd48075a4ee8b317007761e901cc9678e6fa831afe5c94876c57b",
+      "title": "File:13-08-06-abu-dhabi-by-RalfR-077.jpg"
+    }
+  ]
+}

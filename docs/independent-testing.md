@@ -195,6 +195,10 @@ display-oriented main crops and original stored preview pixels separately.
 The [mirrored EXIF transfer](image-thumbnail-mirror-2026-11-12.md) adds four
 reflections and checks both stored preview conventions. Its public readback
 distinguishes useful feathered-region locations from missed compact edits.
+The [separate whole-image panel](image-whole-fresh-holdout-2026-11-12.md)
+compares the current Full result and a positive supplementary cue on 34
+generated and ordinary source groups in two delivery formats. Its reviewer
+replays the outcome counts and records unavailable Full results separately.
 The [Ultra HDR gain-map pilot](image-gainmap-localization-2026-11-12.md)
 tests two ways to locate local changes in JPEGs that retain a gain map but
 have no embedded thumbnail. Its source replay records a camera-original false

@@ -1,0 +1,17 @@
+{% if v.get("whole_image_review") %}
+{% set review = v.whole_image_review %}
+<section class="chapter-cont image-evidence" aria-labelledby="whole-image-review-heading">
+<h2 class="chapter-title" id="whole-image-review-heading">Supplementary whole-image check</h2>
+<p>{{ review.interpretation }}</p>
+{% if review.crops %}
+<div class="evidence-plates evidence-plates-pair">
+{% for crop in review.crops %}
+<figure>
+{% if crop.uri %}<img src="{{ crop.uri }}" alt="Inspected image view {{ crop.region }}">{% endif %}
+<figcaption>Inspected image view {{ crop.region }} · 528 × 528 px input. Source x {{ crop.bounds.x }}, y {{ crop.bounds.y }}, {{ crop.bounds.w }} × {{ crop.bounds.h }} px.</figcaption>
+</figure>
+{% endfor %}
+</div>
+{% endif %}
+</section>
+{% endif %}

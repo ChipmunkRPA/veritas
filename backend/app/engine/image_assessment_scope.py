@@ -5,6 +5,8 @@ import math
 from collections.abc import Mapping
 from typing import Any
 
+from app.evidence.image_whole_review import from_result as whole_image_review
+
 
 def _counted(row):
     value = row.get("logit")
@@ -60,17 +62,29 @@ def image_scope(result: Mapping[str, Any], answer: dict) -> dict:
               "headline": f"{label} lean towards AI generation or alteration" if answer["direction"] == "ai" else
                           f"{label} lean original; local edits remain unresolved",
               "meaning": "The calibrated estimate applies to the listed image checks, not a finding that every part of the file is original or AI-generated."}
-    if answer["direction"] == "original" and local_cues:
+    whole_cue = (whole_image_review(result) or {}).get("status") == "flagged"
+    if answer["direction"] == "original" and (local_cues or whole_cue):
         component = {k: scoped[k] for k in ("direction", "headline", "confidence_pct", "confidence_label",
                                            "probability_ai_pct", "interval_pct", "interval_label", "scope_label")}
         interval = answer["interval_pct"]
         uncertainty = (f" (90% reference-fit interval {interval[0]:g}-{interval[1]:g}%)" if interval else "")
-        note = (f"The separate {subject} estimate leans original at {answer['confidence_pct']:g}%{uncertainty}. "
+        estimate = f"The separate {subject} estimate leans original at {answer['confidence_pct']:g}%{uncertainty}. "
+        if whole_cue:
+            note = (estimate + "A supplementary check found a pattern associated with fully generated images. "
+                    "It carries zero weight in the calibrated estimate. No whole-file confidence percentage is assigned.")
+            headline = "Inconclusive: image checks disagree"
+            meaning = ("The calibrated checks and the supplementary whole-image cue point in different directions. "
+                       "Review the inspected image views and limitations before drawing a conclusion about the file.")
+        else:
+            note = (estimate +
                 "That percentage does not cover the highlighted editing cues. Ordinary edits and AI edits can produce "
                 "such cues; their AI origin remains inconclusive. No whole-file confidence percentage is assigned.")
-        return {**scoped, "direction": "inconclusive", "headline": "Local editing cues found; AI origin is inconclusive",
+            headline = "Local editing cues found; AI origin is inconclusive"
+            meaning = ("A local check highlighted editing cues that the whole-image estimate cannot resolve. Inspect the source crops, masks "
+                       "and limitations; neither AI editing nor an entirely original file is established.")
+        return {**scoped, "direction": "inconclusive", "headline": headline,
                 "confidence_pct": None, "confidence_label": None, "probability_ai_pct": None,
                 "interval_pct": None, "interval_label": None, "scope_note": note,
                 "component_estimate": component,
-                "meaning": "A local check highlighted editing cues that the whole-image estimate cannot resolve. Inspect the source crops, masks and limitations; neither AI editing nor an entirely original file is established."}
+                "meaning": meaning}
     return scoped

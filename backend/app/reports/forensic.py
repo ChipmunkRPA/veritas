@@ -1358,10 +1358,14 @@ def exhibit_rows(snapshot: ReportSnapshot, images: dict[str, str], signals: dict
     recorded = _source_size(profile)
     findings = result.get("findings") or []
     records = list(result.get("exhibits") or [])
-    if kind == "image" and snapshot.report.redacted:
-        from app.evidence.image_thumbnail_evidence import is_preview_exhibit
+    if kind == "image":
+        from app.evidence.image_whole_review import is_review_exhibit
 
-        records = [item for item in records if not is_preview_exhibit(item)]
+        records = [item for item in records if not is_review_exhibit(item)]
+        if snapshot.report.redacted:
+            from app.evidence.image_thumbnail_evidence import is_preview_exhibit
+
+            records = [item for item in records if not is_preview_exhibit(item)]
     out, crop_start, crops = [], {}, 0
     for e in records:  # crops are numbered in stored order, as the viewer's catalogue numbers them
         if e["kind"] == "regions" and regions_lens(e) == "crops":

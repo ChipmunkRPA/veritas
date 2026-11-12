@@ -136,6 +136,7 @@ def verified_set(snapshot: ReportSnapshot) -> dict[str, Any] | None:
 
 
 def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], *, result: dict | None = None) -> None:
+    from app.detectors.video import face_detail_repeat
     from app.detectors.video.decode import FrameTable
     from app.evidence import (
         face_boundary_binding,
@@ -147,6 +148,7 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
     from app.evidence.face_interval_binding import validate_packet as validate_face_interval
     from app.evidence.image_packets import _bounds
     from app.evidence.mp4 import validate_clip_binding
+    from app.evidence.video_packets import face_detail_coverage
 
     records = {r["stage"]: json.loads(_bytes(r["sha256"], store)) for r in document.get("source_records", [])}
     table_doc = records.get("probe", {}).get("frame_table")
@@ -160,6 +162,10 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
     by_index = {anchor["frame_index"]: anchor for anchor in anchors}
     if len(by_index) != len(anchors):
         raise ObjectIntegrityError("Frozen video frames have ambiguous identities")
+    if repeat := (document.get("coverage") or {}).get("face_detail_repeat"):
+        frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
+        if face_detail_coverage(frozen, table, by_index) != repeat:
+            raise ObjectIntegrityError("Lower-detail coverage differs from the frozen analysis measurement")
     try:
         picture_hold_binding.validate_record(document, records["render"].get("picture_hold"), table_pts=table.pts,
                                              interpolated=table.interpolated, canonical_hash=canonical_hash)
@@ -217,7 +223,7 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
                            and canonical_hash((s.get("details") or {}).get("face_return")) == commitment), None)
             if signal is None:
                 raise ObjectIntegrityError("Short face-change evidence differs from the frozen review check")
-            face_return_binding.validate_distinct(face_return, signal["details"].get("face_sequence"))
+            face_return_binding.validate_distinct(face_return, face_detail_repeat.original_range(signal["details"]))
         clip = packet.get("clip") or {}
         if clip.get("status") == "ready":
             start, end = clip["start_frame_index"], clip["end_frame_index_exclusive"]
@@ -501,8 +507,11 @@ def _coverage(kind: str, document: dict) -> str:
     coverage, source = document.get("coverage") or {}, document["source"]
     if kind == "video":
         label = "visual frame or window checks" if document.get("version") in NESTED_VIDEO_VERSIONS else "frame or window checks"
-        return (f"{coverage.get('scored_frame_count', 0)} of {source['frame_count']} source frames were used by recorded {label}; "
-                "unscored frames and gaps have no negative finding.")
+        summary = (f"{coverage.get('scored_frame_count', 0)} of {source['frame_count']} source frames were used by recorded {label}; "
+                   "unscored frames and gaps have no negative finding.")
+        if repeat := coverage.get("face_detail_repeat"):
+            summary += " " + repeat["observation"]
+        return summary
     if kind == "audio":
         rate = source["sample_rate"]
         summary = (f"{coverage.get('scored_samples', 0)} uniquely scored samples of {source['samples']} decoded samples at {rate} Hz; "

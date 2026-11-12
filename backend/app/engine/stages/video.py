@@ -911,6 +911,7 @@ def synthesise(ctx: StageContext) -> dict[str, Any]:
         sequence = details.get("face_sequence")
         short_change = details.get("face_return")
         short_coverage = (details.get("face_return_check") or {}).get("status")
+        detail_status = (details.get("face_detail_repeat") or {}).get("status")
         for finding in out["findings"]:
             if signal["id"] not in finding["evidence_ids"]:
                 continue
@@ -922,8 +923,15 @@ def synthesise(ctx: StageContext) -> dict[str, Any]:
                                review_priority="medium" if whole["flagged"] else "info", standalone_strength=None, standalone_direction=None,
                                sentences=[{"text": text, "evidence_ids": finding["evidence_ids"]} for text in (first, second)])
                 continue
-            if sequence:
+            if detail_status == "withheld":
+                title = "Brief face-change range to review" if short_change else "Face change did not repeat at lower detail"
+                first = signal["observed"]
+                if not short_change and short_coverage in {"not_applicable", "unassessed"}:
+                    first += " The separate brief face-change check could not assess this clip."
+            elif sequence:
                 title, first = "Possible face-change range", sequence_observation(sequence)
+                if detail_status == "retained":
+                    first += " The change remained when the same frames were checked at lower detail."
                 if short_change:
                     first += " " + face_return_binding.observation(short_change)
                 elif short_coverage in {"not_applicable", "unassessed"}:
@@ -964,6 +972,11 @@ def _native_render_anchors(ctx: StageContext, frame_store: FrameStore) -> list[d
             refined_indices.update(item["frame_index"] for item in boundary["frame_inputs"])
             for record in (boundary, details["face_sequence"], *details.get("face_sequence_windows", [])):
                 inputs.extend(record["frame_inputs"])
+        elif details.get("face_detail_repeat"):
+            for record in details.get("face_sequence_windows", []):
+                inputs.extend(record["frame_inputs"])
+            if measurement := details["face_detail_repeat"].get("measurement"):
+                refined_indices.update(item["frame_index"] for item in measurement["frame_inputs"])
         if face_return := details.get("face_return"):
             supplemental = [*face_return["frame_inputs"], *face_return["scene_frame_inputs"]]
             refined_indices.update(item["frame_index"] for item in supplemental)

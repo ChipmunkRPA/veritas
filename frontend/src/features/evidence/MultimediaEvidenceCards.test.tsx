@@ -125,6 +125,17 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.queryByText(/response 0\.700|flagged range/)).toBeNull()
   })
 
+  it('explains a withheld coarse range in source coverage without a new finding card', () => {
+    const set = structuredClone(video)
+    set.packets = []
+    const observation = 'The sampled face change at 2.360–2.880 s weakened when the same frames were checked at lower detail. The interval was withheld from the review ranges.'
+    set.coverage!.face_detail_repeat = { status: 'withheld', observation, start_pts: 59000, end_pts: 72000,
+      time_base: '1/25000', start_stream_s: 2.36, end_stream_s: 2.88, affects_overall_confidence: false }
+    show(set)
+    expect(screen.getByText(observation)).toBeTruthy()
+    expect(screen.queryByRole('article')).toBeNull()
+  })
+
   it('shows measured and refined ranges with source crops and playback navigation', () => {
     const set = { ...structuredClone(video), version: 'video-evidence-11' }
     const item = set.packets[0]

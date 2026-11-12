@@ -1,0 +1,66 @@
+{
+  "browser": {
+    "browser_errors": 0,
+    "explicit_repeat_status": true,
+    "plain_view_cases": 2
+  },
+  "cases": [
+    {
+      "case": "held-06-original-direct36.mp4",
+      "coarse_visible": false,
+      "confidence_equal": true,
+      "fine_visible": false,
+      "native_detail_measurement_replayed": true,
+      "pdf_and_signed_report_verified": true,
+      "status": "withheld"
+    },
+    {
+      "case": "held-01-original-tandem36.mp4",
+      "coarse_visible": false,
+      "confidence_equal": true,
+      "fine_visible": false,
+      "native_detail_measurement_replayed": true,
+      "pdf_and_signed_report_verified": true,
+      "status": "withheld"
+    },
+    {
+      "case": "held-06-swap-direct36.mp4",
+      "coarse_visible": true,
+      "confidence_equal": true,
+      "fine_visible": false,
+      "native_detail_measurement_replayed": true,
+      "pdf_and_signed_report_verified": true,
+      "status": "retained"
+    },
+    {
+      "case": "held-01-swap-tandem36.mp4",
+      "coarse_visible": true,
+      "confidence_equal": true,
+      "fine_visible": false,
+      "native_detail_measurement_replayed": true,
+      "pdf_and_signed_report_verified": true,
+      "status": "retained"
+    },
+    {
+      "case": "held-01-original-direct23.mp4",
+      "coarse_visible": false,
+      "confidence_equal": true,
+      "fine_visible": false,
+      "native_detail_measurement_replayed": false,
+      "pdf_and_signed_report_verified": false,
+      "status": null
+    },
+    {
+      "case": "g0-swap_a.mp4",
+      "coarse_visible": false,
+      "confidence_equal": true,
+      "fine_visible": true,
+      "native_detail_measurement_replayed": false,
+      "pdf_and_signed_report_verified": true,
+      "status": null
+    }
+  ],
+  "paid_off_on_analyses": 12,
+  "runtime_s": 135.2,
+  "simulated_stripe_usd": "9.99"
+}

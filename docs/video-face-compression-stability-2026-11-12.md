@@ -24,13 +24,19 @@ Advancement requires removing at least two ordinary alerts from two held groups,
 
 The repeat removed five held alerts across four source groups, including one group that gained on both heavy deliveries. It preserved all 48 useful held swap locations. These are repeated deliveries of twelve source groups with swaps by two publisher methods. In the exposed discovery groups, direct CRF 36 also triggered all four originals. The repeat removed two of the four earlier tandem alerts and none of the four direct alerts there. The affected groups establish that heavy encoding can be sufficient to trigger the current review even without a second encode.
 
-The candidate cleared its frozen criteria for this exact delivery profile. The study tested the current stages in isolation and modeled the supplemental display decision. A separate app acceptance run must verify the combined behavior with the short face-change checks. [Aggregate and independent replay](evaluation-panels/video-face-compression-stability-2026-11-12.json)
+The candidate cleared its frozen criteria for this exact delivery profile. The study tested the current stages in isolation and modeled the supplemental display decision. [Aggregate and independent replay](evaluation-panels/video-face-compression-stability-2026-11-12.json)
 
 The CPU screen completed 128 cases in 681 seconds. Independent authoring rebuilt all 128 files byte for byte from 1,920 verified original pictures and 280 publisher pictures. A separate process recreated 1,812 selected face-crop occurrences from 84 coarse ranges, reproduced both responses on the exact admitted weights, and rechecked the held decisions.
 
+## App verification
+
+Set `VERITAS_VIDEO_FACE_DETAIL_REPEAT_REVIEW=true` with the appearance review enabled to run the optional check. The app uses the existing coarse selection and its native source frames. It runs the repeat after the brief face check so the original coarse interval remains the basis for deciding whether a separate short range is distinct. When the optional repeat cannot finish, the measured review range remains available and the coverage identifies the unavailable repeat. The app, PDF, and JSON identify which original time interval the repeat checked and whether its appearance change persisted. The measurement carries zero overall confidence weight.
+
+Twelve simulated paid worker analyses compared six files with the option off and on. Two genuine heavy encodes lost their earlier coarse alerts. Their two matched publisher swaps kept the exact intervals and timing refinements. A moderate direct genuine delivery remained clear. A separate brief swap kept its v15 interval and source-bound evidence. The four actual lower-detail responses and aligned crop hashes matched the held study. All six analysis decisions matched their paired results. Five reports and signed packages verified against the original uploaded videos, and the JSON evidence matched the API. Chrome verified the ordinary view of a withheld interval and a retained swap. [App verification receipt](evaluation-panels/video-face-compression-app-2026-11-12.json)
+
 ## Replay
 
-Use the retained native archive and both prior panel directories. The independent reader rebuilds the delivery bytes and recomputes the selected native crops, both appearance scores, and the range decisions. The public output contains aggregate counts and commitments.
+Use the retained native archive, both prior panel directories, and the original comparison code at `47b3ff5ae4fd6e9ddf734ec90b68dc79bce85614`. The independent reader rebuilds the delivery bytes and recomputes the selected native crops, both appearance scores, and the range decisions. The public output contains aggregate counts and commitments.
 
 ```sh
 export PYTHONPATH=backend PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1

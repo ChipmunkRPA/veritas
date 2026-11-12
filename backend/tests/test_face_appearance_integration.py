@@ -21,6 +21,8 @@ from app.detectors.video.adapters.face_appearance import DETECTOR, FaceAppearanc
 from app.detectors.video.adapters.face_sequence import SequenceInputs
 from app.detectors.video.decode import DecodedFrame, DecodeError, FrameTable
 from app.detectors.video.frame_store import FrameStore
+from app.engine.boundary import Deadline, DetectorTimeout
+from app.engine.detector import DetectorResult
 from app.engine.fusion.runtime import annotate
 from app.engine.registry import get_registry
 from app.evidence.face_interval_binding import validate_packet, validate_sequence_record
@@ -144,6 +146,39 @@ def test_inspection_response_never_acquires_probability_or_fusion_weight():
     [value] = annotate([signal], {}, artefact_detectors=['existing.classifier'])
     assert value['effective_weight'] == 0 and value['calibrated_probability'] is None and value['log_lr'] is None
     assert value['contribution_logit'] is None and value['contribution_pp'] is None
+
+
+@pytest.mark.parametrize("state", ["withheld", "retained", "unassessed"])
+def test_lower_detail_repeat_preserves_already_measured_brief_range(monkeypatch, state):
+    table, coarse, _ = appearance_record()
+    brief = {"start_stream_s": 2.16, "end_stream_s": 2.4}
+    boundary = {"start_pts": coarse["start_pts"], "end_pts": coarse["end_pts"]}
+    details = {"face_sequence": coarse, "face_boundary": boundary, "face_return": brief, "review_only": True}
+    result = DetectorResult(status="ok", details=details, observed="Coarse appearance review.")
+    store = SimpleNamespace(iter_many=lambda indices, timeout_s: ((index, None) for index in indices),
+                            native_pts_verified=lambda _: True)
+    inputs = SimpleNamespace(table=table, store=store, encoding=("h264", "yuv420p"))
+    monkeypatch.setattr(settings, "video_face_detail_repeat_review", True)
+    monkeypatch.setattr(settings, "face_min_size", 48)
+    monkeypatch.setattr(adapter.face_detail_repeat, "supported", lambda *_: True)
+
+    def measure(selected, recorded_table, encoding, frames, recognizer, check):
+        assert selected is coarse and recorded_table is table and encoding == inputs.encoding
+        assert [index for index, pts, _ in frames if pts == table.pts[index]] == [
+            row["frame_index"] for row in coarse["frame_inputs"]]
+        if state == "unassessed":
+            raise DetectorTimeout("Simulated optional timeout")
+        return {"status": state}
+
+    monkeypatch.setattr(adapter.face_detail_repeat, "measure", measure)
+    assert adapter._repeat_face_detail(result, inputs, object(), Deadline(12)) is result
+    assert details["face_detail_repeat"]["status"] == state
+    assert details["face_return"] is brief
+    if state == "withheld":
+        assert details["face_sequence"] is None and "face_boundary" not in details
+        assert "was withheld" in result.observed and "2.160 to 2.400 s" in result.observed
+    else:
+        assert details["face_sequence"] is coarse and details["face_boundary"] is boundary
 
 
 def boundary_table(pts=tuple(range(145)), time_base="1/24"):

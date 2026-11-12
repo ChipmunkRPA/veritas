@@ -58,6 +58,9 @@ export interface VideoEvidenceSet extends SetBase {
     reason: string | null; packet_id: string | null }
   coverage?: { frame_count: number; scored_frame_count: number; window_frame_indices: number[]; window_check_count: number;
     decoded_frame_indices: number[]; table_truncated: boolean; unmapped_observations: number;
+    face_detail_repeat?: { status: 'withheld' | 'retained' | 'unassessed'; observation: string;
+      start_pts: number; end_pts: number; time_base: string; start_stream_s: number; end_stream_s: number;
+      affects_overall_confidence: false };
     channels?: Partial<Record<'audio' | 'av_sync' | 'av', { status: string; reason: string | null; successful_check_count?: number }>> } | null
   /** Present in video-evidence-3 and later. Both channels belong to this parent set. */
   audio?: VideoAudioChannel

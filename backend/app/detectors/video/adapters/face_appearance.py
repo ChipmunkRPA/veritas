@@ -11,17 +11,24 @@ from app.core.config import settings
 from app.detectors.image.adapters.common import revisions
 from app.detectors.image.faces import detect_faces
 from app.detectors.video import face_appearance as method
-from app.detectors.video import face_boundary, face_return, face_return_fine_scene
+from app.detectors.video import face_boundary, face_detail_repeat, face_return, face_return_fine_scene
 from app.detectors.video.adapters.common import CPU_ONLY, FULL_DEEP, video_spec
 from app.detectors.video.adapters.face_sequence import FAMILY, FaceSequenceReviewDetector, SequenceInputs
 from app.detectors.video.decode import DecodeError
+from app.engine.boundary import Deadline, DetectorTimeout
 from app.engine.detector import ActivationUse, Applicability, DetectorResult, InputUnit, UnitScore
 from app.evidence.face_intervals import bind_tracks
-from app.evidence.face_return_binding import DENSE_FRAME_PROFILES, FINE_SCENE_FRAME_COUNT, FINE_SCENE_METHOD
+from app.evidence.face_return_binding import (
+    DENSE_FRAME_PROFILES,
+    FINE_SCENE_FRAME_COUNT,
+    FINE_SCENE_METHOD,
+    observation,
+)
 
 DETECTOR = "vid.review.face_appearance"
 BOUNDARY_BUDGET_S = 8.0
 RETURN_BUDGET_S = 12.0
+DETAIL_REPEAT_BUDGET_S = 4.0
 COARSE_RESULT_RESERVE_S = 1.0
 
 
@@ -269,6 +276,44 @@ def _with_return(result, inputs, yunet, recognizer, deadline):
         details={**result.details, 'review_only': True}, model_revisions=result.model_revisions)
 
 
+def _repeat_face_detail(result, inputs, recognizer, deadline):
+    details = result.details
+    coarse = details.get("face_sequence")
+    if (not settings.video_face_detail_repeat_review or settings.face_min_size != 48 or coarse is None
+            or not face_detail_repeat.supported(inputs.table, inputs.encoding)):
+        return result
+    coverage = {key: coarse[key] for key in ("start_pts", "end_pts", "time_base", "start_stream_s", "end_stream_s")}
+    coverage["status"] = "unassessed"
+    details["face_detail_repeat"] = coverage
+    remaining = deadline.remaining() if deadline is not None else None
+    budget = DETAIL_REPEAT_BUDGET_S if remaining is None else min(DETAIL_REPEAT_BUDGET_S, remaining - COARSE_RESULT_RESERVE_S)
+    if budget <= 0:
+        return result
+    stop = deadline.nested(budget) if deadline is not None else Deadline(budget)
+    table = inputs.table
+    indices = sorted(item["frame_index"] for item in coarse["frame_inputs"])
+    try:
+        with closing(inputs.store.iter_many(indices, timeout_s=budget)) as frames:
+            measured = face_detail_repeat.measure(
+                coarse, table, inputs.encoding,
+                ((index, table.pts[index] if inputs.store.native_pts_verified(index) else None, rgb)
+                 for index, rgb in frames), recognizer, check=stop.check,
+            )
+    except (DecodeError, DetectorTimeout, cv2.error, ValueError):
+        return result
+    coverage.update(status=measured["status"], measurement=measured)
+    if coverage["status"] == "withheld":
+        details["face_sequence"] = None
+        details.pop("face_boundary", None)
+        start, end = coverage["start_stream_s"], coverage["end_stream_s"]
+        result.observed = face_detail_repeat.observation("withheld", start, end)
+        if short := details.get("face_return"):
+            result.observed += " " + observation(short)
+    elif coverage["status"] == "retained":
+        result.observed += " The change remained when the same frames were checked at lower detail."
+    return result
+
+
 class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
     APPEARANCE = 'opencv.sface.2021dec'
     spec = video_spec(DETECTOR, 'Face appearance transition review', InputUnit.FRAME_BATCH, (), ('series',),
@@ -291,6 +336,7 @@ class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
         return (*super().activation_plan(ctx), ActivationUse(self.APPEARANCE, 1, '112 px aligned face',
             'One native aligned face at a time; 128 float32 appearance values per retained frame',
             (f'At most 192 coarse face inputs and {face_boundary.MAX_FRAMES} optional timing inputs.{return_inputs}',
+             'An enabled lower-detail repeat reads the same input frames from the selected coarse range.',
              'Face vectors stay in working memory.')))
 
     def run(self, ctx):
@@ -352,4 +398,5 @@ class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
                      'unverified_timestamp_frames': float(unverified)},
             details=details,
             exhibit_ids=[exhibit], model_revisions=revisions(ctx, self.YUNET, self.DINO, self.APPEARANCE))
-        return _with_return(result, inputs, yunet, recognizer, ctx.deadline)
+        result = _with_return(result, inputs, yunet, recognizer, ctx.deadline)
+        return _repeat_face_detail(result, inputs, recognizer, ctx.deadline)

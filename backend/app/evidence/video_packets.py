@@ -22,6 +22,7 @@ from sqlalchemy.orm import Session
 
 from app.api.public_projection import alias_signal
 from app.core.canonical import canonical_hash, canonical_json
+from app.detectors.video import face_detail_repeat
 from app.detectors.video.decode import FrameTable, decode_frames
 from app.evidence import (
     face_alignment_context,
@@ -360,7 +361,7 @@ def _return_observations(result: dict, table: FrameTable, source: dict, anchors:
         record = json.loads(canonical_json(record))
         face_return_binding.validate_record(record, source, table_pts=table.pts, interpolated=table.interpolated,
                                             rotation=table.rotation, truncated=table.truncated)
-        face_return_binding.validate_distinct(record, details.get("face_sequence"))
+        face_return_binding.validate_distinct(record, face_detail_repeat.original_range(details))
         for item in (*record["frame_inputs"], *record["scene_frame_inputs"]):
             i = item["frame_index"]
             if i not in anchors or any(item[key] != anchors[i][key] for key in ("pts", "decoded_rgb_sha256")):
@@ -380,6 +381,36 @@ def _return_observations(result: dict, table: FrameTable, source: dict, anchors:
                            "peak": {"frame_index": record["anchors"]["during"], "score": record["response"]},
                            "threshold": None, "scored_frame_count": len(indices)})
     return candidates, scored
+
+
+def face_detail_coverage(result, table, anchors):
+    projected = None
+    for signal in result.get("signals", []):
+        details = signal.get("details") or {}
+        if (repeat := details.get("face_detail_repeat")) is None:
+            continue
+        if projected is not None or signal.get("status", "ok") != "ok" or signal.get("effective_weight") != 0.0:
+            raise PacketIntegrityError("Lower-detail coverage needs one confidence-neutral face check")
+        status = repeat["status"]
+        coarse = face_detail_repeat.original_range(details)
+        fields = ("start_pts", "end_pts", "time_base", "start_stream_s", "end_stream_s")
+        if (status not in {"withheld", "retained", "unassessed"} or coarse is None
+                or any(repeat[key] != coarse[key] for key in fields)):
+            raise PacketIntegrityError("Lower-detail coverage differs from the selected native range")
+        if status != "unassessed":
+            measurement = repeat["measurement"]
+            face_detail_repeat.validate(measurement, coarse)
+            if status != measurement["status"] or not face_detail_repeat.supported(table, tuple(measurement["source_encoding"])):
+                raise PacketIntegrityError("Lower-detail coverage differs from the measured repeat")
+        if status == "withheld" and (details.get("face_sequence") or details.get("face_boundary")):
+            raise PacketIntegrityError("A withheld face range still has published review evidence")
+        for item in coarse["frame_inputs"]:
+            known = anchors.get(item["frame_index"])
+            if known is None or any(known[key] != item[key] for key in ("pts", "decoded_rgb_sha256")):
+                raise PacketIntegrityError("Lower-detail coverage differs from the committed frame inputs")
+        projected = {**{key: repeat[key] for key in fields}, "status": status, "affects_overall_confidence": False,
+                     "observation": face_detail_repeat.observation(status, repeat["start_stream_s"], repeat["end_stream_s"])}
+    return projected
 
 
 def _contact(images: list[Image.Image], labels: list[str]) -> Image.Image:
@@ -495,6 +526,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                 "limitations": ["These are sampled frame observations. Unscored frames and gaps are not negative findings.",
                                 "Frame and face classification scores do not locate edited pixels or prove AI editing.",
                                 "The contact sheet shows neighbouring scored samples, not necessarily consecutive video frames."]}
+    if repeat := face_detail_coverage(result, table, anchors):
+        document["coverage"]["face_detail_repeat"] = repeat
     if VERSION in PICTURE_HOLD_VERSIONS:
         document["picture_hold"] = (hold["coverage"] if hold is not None else picture_hold_binding.coverage(
             "unavailable", picture_hold_binding.HISTORICAL, source["time_base"]))

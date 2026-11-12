@@ -117,3 +117,27 @@ the consumed pilot, with the exact source bytes and clocks rechecked.
 PYTHONPATH=backend python3 -B -S -m scripts.audio_vocal_event_voice_conflict review \
   docs/evaluation-panels/audio-vocal-event-voice-conflict-2026-11-12.json
 ```
+
+## Can a separate speech classifier catch those misses?
+
+A separate CPU classifier scored the central 0.5–3.5 s of all 58 files where
+the serving speech check leaned original. Its operating point stayed at the
+maximum score among 21 assessed genuine or background views from an earlier
+competing-speech calibration. The source recordings, WAV and MP3 delivery
+bytes, decoded samples and source clocks matched the pilot commitments.
+[Checkpoint and licensing](audio-independent-background-transfer-2026-11-11.md) ·
+[Original calibration](audio-disagreement-transfer-2026-11-12.md)
+
+The second opinion caught **0/3** wrong-original WAV results and **0/2**
+wrong-original MP3 results. It would have withheld an original tendency on
+**2/28** ordinary WAV deliveries and **3/25** ordinary MP3 deliveries.
+Those ordinary cases came from one voice group per format. The check stays
+experimental. The diagnostic uses the same pilot cases as the shorter-window
+comparison. It measures a single three-second view and gives no precise edit
+boundary or result for other background conditions.
+[Score and decision ledger](evaluation-panels/audio-vocal-event-second-opinion-2026-11-12.json)
+
+```sh
+PYTHONPATH=backend python3 -B -S -m scripts.audio_vocal_event_second_opinion review \
+  docs/evaluation-panels/audio-vocal-event-second-opinion-2026-11-12.json
+```

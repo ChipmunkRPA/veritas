@@ -1,0 +1,178 @@
+{
+  "schema": "chipmunk.video-lipsync-local-delay-intake/1",
+  "publisher_revision": "1658cd342dff90010aa843eaeebd53610a08b1dc",
+  "publisher_tree_sha256": "79928e69b59b6f20fd87db56bb7b6d2646082dd82e28081798da607039756926",
+  "prior_acquisition_sha256": "3de3a0bd75fbbebf6da2911a78e341c2ced7c6ef7d03e8fa66c6b8bf088fab99",
+  "history_sha256": {
+    "lipsync-v10/calibration-inputs/manifest.json": "7dd19c67eabc1862c84ca4e5bcce12ab7de98945f92d8c7149c748f1b78f0996",
+    "lipsync-v10/calibration-inputs-v2/manifest.json": "6edcab13fdfbfa5dd270f44b3d80e621698f8d4d7ce0dd88d65fe82a7c1beeef",
+    "lipsync-v10/calibration-plan.json": "7b690d7ef83d2ffa3182749ef6790b4395673e952272bb49405bc744ab5a3cab",
+    "lipsync-v11/training-inputs/manifest.json": "68a4f963cfb4c3ce9baa62cb5f647a87066a59dddac9ba65ef41911cf037ce76",
+    "lipsync-v11/training-plan.json": "b16fc04782677ab719973bf8fe7b47ba8d5ce8c4440efb1df57fc202fef4ce89",
+    "lipsync-v4/development/inputs/manifest.json": "eccc734a18a805f3b73bdeeb0232739b41ecf7cd1fd9339596cad622265efe00",
+    "lipsync-v4/development/inputs-v2/manifest.json": "d652d3d67ff9bc670ed0e7b18eecc0958daf71fcd6a05c55f0dfd2c16b32a0b2",
+    "lipsync-v4/development/plan.json": "059560f57547c6e8621d2e93fcb142bc9bbb76958d210084de4b27c232ca1d26",
+    "lipsync-v6/training-inputs/manifest.json": "c0126feb234f4a4cd673204f8fa3c21b7a9e95fb5f57290dbd4f6af2f4379522",
+    "lipsync-v6/training-plan.json": "b6b7a98bbc148668a3ffcd4377c08568634f849a54cd0b61979c2f99381f8933",
+    "lipsync-v8/training-inputs/manifest.json": "a707fb41de0cecd89c30195946f77f5a96af11992f77cf3d555faeb3ff1a3ed3",
+    "lipsync-v8/training-plan.json": "5758792737166080c04fbc9fa139d09f9c3a754a875767430c3bc40f2812a5a2",
+    "multimodal/video-manifest.json": "762c0c9774a06fe094ff21ddae054212967bacb3e637f5bfc0759d47c1e2f0b1",
+    "rule80-v1/video-manifest.json": "599a1715c7d1ac5f9c4d43694a712f959d658a3312f364f022daf43c2e28234b",
+    "video-v17-sface/intervals/manifest.json": "cc71debd8d1587089e2e28ca7c6e0775a6fc6a17af9df46a937fed166b9b311e",
+    "video-v17-sface/sources/manifest.json": "d1ea0edb5b1833506d0694b3625afad8061cd8fff82dcd70ac9ba15de379c2a3",
+    "video-v2/av-controls/manifest.json": "8e178406a2b4df843e54ac75801355a174e5ba7c4b298179e8df52e18351e969",
+    "video-v2/av-controls/short-synthetic/manifest.json": "4c0f540068e6053fb5532f95599b8b6cfd2a978ca62f2628792535b405145146",
+    "video-v2/deepaction/manifest.json": "3b5688815c31dab4111e00c33cc3de7f6928ca0576bbf321a52db8bba8a08030",
+    "video-v2/face-swap/manifest.json": "a86cc49c7b0a40815e0e5921fdf1ccb7260f174d6d937d4e6ed2d684223977eb",
+    "video-v2/genbuster/locked/manifest.json": "2780f76362c3a081e30cf6fc0eb63fb26a0168748d350b03d3d611f12f803cd6",
+    "video-v3/av/manifest.json": "55936efe0be93b3fbd80dc3ac824158273ab869c98883b430686483d12f74b40",
+    "video-v3/face-splice/manifest.json": "afc5435b1657ddcfd8b1cf84911bb80f280c4ece610d7af9d1bc390ca1f0350f",
+    "video-v3/face-swap/manifest.json": "b732512832ea90eb36db1c7255c2e6c05a78bf5d4b7f8fb1d78ccf87f32bf8b5",
+    "video-v4/face-sources/manifest.json": "a604addc29bc9efa9b5f88e9d6b6a6fc2355ddede85be26da7c362e4ff547a49",
+    "video-v4/intervals/manifest.json": "88d21ead5044c55722fa70d71da9bc411d90c8a60d6aeee56bdb90b08e43e732",
+    "video-v5/intervals/manifest.json": "82b7b77de9d8dbdd4e29ed72403828bc334643d997180be36fe62fc8b3fac341",
+    "video-v5/sources/manifest.json": "101876f69cf5b2abb4cc2355f45d4b8e8f200371bc543d3592ab5dffb53887f7",
+    "video-v6/intervals/manifest.json": "15758eb29000c9d5e2dab80334caa7190766bd839de85fa4c4ca6d26fdf59e58",
+    "video-v6/sources/manifest.json": "1607a5a935be65443572f8e9e43e4d1436015c6c57b1d0431d61401ea0eeb297"
+  },
+  "previous_actor_count": 76,
+  "qualified_actor_count": 15,
+  "ordering_salt": "chipmunk-local-lipsync-recovery/1",
+  "sources": [
+    {
+      "actor": "1010",
+      "ordinal": 1,
+      "split": "development",
+      "source_path": "VideoFlash/1010_ITS_NEU_XX.flv",
+      "pointer_git_sha1": "37bbff73c666459db8e20563bd8c57e51cd0e9b0",
+      "pointer_bytes": 131,
+      "file": "source-01.flv"
+    },
+    {
+      "actor": "1045",
+      "ordinal": 2,
+      "split": "development",
+      "source_path": "VideoFlash/1045_ITS_NEU_XX.flv",
+      "pointer_git_sha1": "b089fd185404722f0bb69d65a2f85af1c470732c",
+      "pointer_bytes": 131,
+      "file": "source-02.flv"
+    },
+    {
+      "actor": "1091",
+      "ordinal": 3,
+      "split": "development",
+      "source_path": "VideoFlash/1091_ITS_NEU_XX.flv",
+      "pointer_git_sha1": "4527f4a921737b1700afb334a407b3bde0fa46d6",
+      "pointer_bytes": 131,
+      "file": "source-03.flv"
+    },
+    {
+      "actor": "1034",
+      "ordinal": 4,
+      "split": "development",
+      "source_path": "VideoFlash/1034_ITS_NEU_XX.flv",
+      "pointer_git_sha1": "c7c4d37fe9ecf341cbe2c385046dec0c23518131",
+      "pointer_bytes": 131,
+      "file": "source-04.flv"
+    },
+    {
+      "actor": "1066",
+      "ordinal": 5,
+      "split": "held",
+      "source_path": "VideoFlash/1066_ITS_NEU_XX.flv",
+      "pointer_git_sha1": "f2f5e3cba3d62c4ab193e38bad7dbf5ce65c4558",
+      "pointer_bytes": 131,
+      "file": "source-05.flv"
+    },
+    {
+      "actor": "1030",
+      "ordinal": 6,
+      "split": "held",
+      "source_path": "VideoFlash/1030_ITS_NEU_XX.flv",
+      "pointer_git_sha1": "7412eb8ac34fbeac261dcef6bb8bd8a9994f9e18",
+      "pointer_bytes": 131,
+      "file": "source-06.flv"
+    },
+    {
+      "actor": "1014",
+      "ordinal": 7,
+      "split": "held",
+      "source_path": "VideoFlash/1014_ITS_NEU_XX.flv",
+      "pointer_git_sha1": "956ee1570cf05384c3a7c0811a9751319553f3a7",
+      "pointer_bytes": 131,
+      "file": "source-07.flv"
+    },
+    {
+      "actor": "1050",
+      "ordinal": 8,
+      "split": "held",
+      "source_path": "VideoFlash/1050_ITS_NEU_XX.flv",
+      "pointer_git_sha1": "e2e3f3bfc1cf11970bad3376cfb242f71d3276ee",
+      "pointer_bytes": 131,
+      "file": "source-08.flv"
+    },
+    {
+      "actor": "1082",
+      "ordinal": 9,
+      "split": "held",
+      "source_path": "VideoFlash/1082_ITS_NEU_XX.flv",
+      "pointer_git_sha1": "4450bebc7829f92e228f593cc875a93ef80d0f36",
+      "pointer_bytes": 131,
+      "file": "source-09.flv"
+    },
+    {
+      "actor": "1019",
+      "ordinal": 10,
+      "split": "held",
+      "source_path": "VideoFlash/1019_ITS_NEU_XX.flv",
+      "pointer_git_sha1": "f5114e4c94b1c66c0f6df7fcb7706988ce1298ac",
+      "pointer_bytes": 131,
+      "file": "source-10.flv"
+    },
+    {
+      "actor": "1015",
+      "ordinal": 11,
+      "split": "held",
+      "source_path": "VideoFlash/1015_ITS_NEU_XX.flv",
+      "pointer_git_sha1": "7e47e2dbbef24d68ca40f3a311ff9aed567a7be3",
+      "pointer_bytes": 131,
+      "file": "source-11.flv"
+    },
+    {
+      "actor": "1073",
+      "ordinal": 12,
+      "split": "held",
+      "source_path": "VideoFlash/1073_ITS_NEU_XX.flv",
+      "pointer_git_sha1": "c3283075f7a9ed480d6b6618d5bc654e0edc35df",
+      "pointer_bytes": 131,
+      "file": "source-12.flv"
+    },
+    {
+      "actor": "1029",
+      "ordinal": 13,
+      "split": "held",
+      "source_path": "VideoFlash/1029_ITS_NEU_XX.flv",
+      "pointer_git_sha1": "3e60c30476a98da18b4a6824a254716a567da7fe",
+      "pointer_bytes": 131,
+      "file": "source-13.flv"
+    },
+    {
+      "actor": "1057",
+      "ordinal": 14,
+      "split": "held",
+      "source_path": "VideoFlash/1057_ITS_NEU_XX.flv",
+      "pointer_git_sha1": "1686ea51dc053694fdd183ccc14749848057dd4d",
+      "pointer_bytes": 131,
+      "file": "source-14.flv"
+    },
+    {
+      "actor": "1069",
+      "ordinal": 15,
+      "split": "held",
+      "source_path": "VideoFlash/1069_ITS_NEU_XX.flv",
+      "pointer_git_sha1": "336b8993d5f9e1fab1521470fdae46ddb5e0a6b7",
+      "pointer_bytes": 131,
+      "file": "source-15.flv"
+    }
+  ]
+}

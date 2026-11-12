@@ -25,13 +25,23 @@ An isolated Full test analysis used one simulated USD 9.99 checkout. The authent
 
 ## Replay
 
-Use the source folder from the earlier CREMA-D local-delay study and a new local run directory. The first command seals the inputs. The next three author and score the matched views. The independent reader uses a separate waveform-correlation implementation and reopens every output file. Keep source recordings and playable excerpts local.
+The published [intake roster](evaluation-panels/video-paired-soundtrack-sources/intake-freeze.json) lets a reviewer start without the project's earlier private source folder. Download the 15 clips from the pinned CREMA-D release with the existing acquisition command. It checks every upstream Git LFS pointer, clip length and clip SHA-256. The generated receipt must match the [published intake receipt](evaluation-panels/video-paired-soundtrack-sources/intake-receipt.json) byte for byte. Use a local backend environment with FFmpeg and keep source recordings and playable excerpts local.
 
 ```sh
 export PYTHONPATH=backend PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1
+replay=$(mktemp -d)
+prior="$replay/sources"
+run="$replay/run"
+roster=docs/evaluation-panels/video-paired-soundtrack-sources
+mkdir "$prior"
+cp "$roster/intake-freeze.json" "$prior/"
+backend/.venv/bin/python -B -m scripts.prepare_video_lipsync_local_delay_transfer acquire "$prior" || exit 1
+cmp "$roster/intake-receipt.json" "$prior/intake-receipt.json" || exit 1
 for phase in freeze development held report; do
   backend/.venv/bin/python -B -m scripts.video_reference_soundtrack_panel "$phase" "$run" "$prior" --workers 2 || exit 1
 done
 backend/.venv/bin/python -B -m scripts.review_video_reference_soundtrack_panel "$run/receipt.json" --run "$run" --workers 2
 python3 -B -S -m scripts.review_video_reference_soundtrack_panel docs/evaluation-panels/video-paired-soundtrack-transfer-2026-11-12.json
 ```
+
+The panel seals the downloaded inputs before authoring the matched views. The native verifier uses a separate waveform-correlation implementation and reopens each output file. A local replay from an empty directory reproduced the published results and verified all 198 held deliveries, 13,104 pictures and 88 playable excerpts. Compare the `results` section of your new receipt with the published one. Exact encoded-file hashes may depend on the FFmpeg build.

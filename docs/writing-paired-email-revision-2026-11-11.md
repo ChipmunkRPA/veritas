@@ -38,6 +38,8 @@ The authenticated local **Compare with an earlier draft** form now offers the op
 
 Rewrapping 53 previously evaluated English journal draft pairs in each email format preserved all 34 eligible pairs and their exact classifier inputs. Each format reproduced five joint increases on 23 eligible generated rewrites and zero on 11 eligible ordinary revisions using saved responses. The bodies, including their surrounding sentences, were previously used in the journal study. The new deliveries changed the trailing quotation independently of the body. Four authenticated local API comparisons re-ran both installed checkpoints and verified source positions, PDF, JSON and offline replay. Quote-only changes stayed outside the optional check. [Original source panel](writing-journal-body-transfer-2026-11-11.md)
 
+One HTML reply also completed Full analysis after simulated checkout. In Chrome's plain view, the earlier draft upload reproduced the expected input hash, linked three body changes, and downloaded the comparison PDF.
+
 Run the focused API and replay tests with locally authored MIME fixtures from the backend directory.
 
 ```sh

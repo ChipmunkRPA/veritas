@@ -7,7 +7,7 @@ from types import SimpleNamespace
 import cv2
 import numpy as np
 import pytest
-from PIL import Image
+from PIL import Image, ImageOps
 
 from app.detectors.image.adapters.provenance import MetadataConsistencyDetector
 from app.engine.exhibits import ExhibitWriter
@@ -18,16 +18,22 @@ from app.reports import engine, figures
 from app.reports.specimens import specimen
 from app.storage.objects import ObjectStore
 from scripts.image_thumbnail_localization_transfer import color_patch, jpeg, preview_from, thumbnail
+from scripts.image_thumbnail_orientation_transfer import encode as rotated_carrier
 
 
-def _pair():
+def _pair(orientation=1):
     rng = np.random.default_rng(1)
     colors = rng.integers(0, 256, (15, 20, 3), dtype=np.uint8)
     smooth = cv2.resize(colors, (512, 384), interpolation=cv2.INTER_CUBIC).astype(np.float32) * .60 + 52
     before = np.clip(np.rint(smooth + rng.normal(0, 3, smooth.shape)), 0, 255).astype(np.uint8)
     earlier = Image.fromarray(before)
+    changed = Image.fromarray(color_patch(before, 1))
+    if orientation == 6:
+        earlier, changed = (image.transpose(Image.Transpose.ROTATE_90) for image in (earlier, changed))
+        embedded = thumbnail(earlier)
+        return rotated_carrier(changed, orientation, embedded), rotated_carrier(earlier, orientation, embedded)
     embedded = thumbnail(earlier)
-    return jpeg(Image.fromarray(color_patch(before, 1)), preview=embedded), jpeg(earlier, preview=embedded)
+    return jpeg(changed, preview=embedded), jpeg(earlier, preview=embedded)
 
 
 def _run(store, source, monkeypatch):
@@ -50,8 +56,9 @@ def _run(store, source, monkeypatch):
 
 
 @pytest.mark.parametrize("profile", ["standard", "summary"])
-def test_report_and_export_keep_source_crops_with_numeric_coordinates(tmp_path, monkeypatch, profile):
-    altered, clean = _pair()
+@pytest.mark.parametrize("orientation", [1, 6])
+def test_report_and_export_keep_source_crops_with_numeric_coordinates(tmp_path, monkeypatch, profile, orientation):
+    altered, clean = _pair(orientation)
     store = ObjectStore(tmp_path / "objects")
     clean_outcome, clean_result = _run(store, clean, monkeypatch)
     assert clean_outcome.status == "ok"
@@ -60,6 +67,8 @@ def test_report_and_export_keep_source_crops_with_numeric_coordinates(tmp_path, 
     positive, result = _run(store, altered, monkeypatch)
     published = evidence.from_result(result)
     assert published["source_sha256"] == result["input"]["sha256"]
+    assert published["main_exif_orientation"] == orientation
+    assert published["preview_alignment_orientation"] == (orientation if orientation != 1 else 0)
     assert published["authorship_confidence_contribution"] == 0
     assert positive.aggregate is None and positive.unit_scores == []
     assert any(item["title"] == "Embedded thumbnail vs main image" for item in result["exhibits"])
@@ -70,11 +79,21 @@ def test_report_and_export_keep_source_crops_with_numeric_coordinates(tmp_path, 
             assert min(w, h) > 0 and min(x, y) >= 0
             crop = region["crops"][role]
             with Image.open(io.BytesIO(source)) as original, Image.open(io.BytesIO(store.read_bytes(crop["sha256"]))) as image:
-                expected = original.convert("RGB").crop((x, y, x + w, y + h))
+                axes = ImageOps.exif_transpose(original) if role == "main_image" else original
+                expected = axes.convert("RGB").crop((x, y, x + w, y + h))
                 assert (crop["display_width"], crop["display_height"]) == image.size
                 assert not crop["display_reduced"]
                 assert image.size == expected.size
                 np.testing.assert_array_equal(np.asarray(image), np.asarray(expected))
+
+    if orientation == 1:
+        import copy
+
+        old = copy.deepcopy(result)
+        table = next(item for item in old["exhibits"] if item["title"] == evidence.TABLE)
+        table["columns"] = table["columns"][:-1]
+        table["rows"] = [row[:-1] for row in table["rows"]]
+        assert evidence.from_result(old) == published
 
     # A resumed run starts with a fresh writer and cached provenance exhibits.
     # Render must keep its exhibit IDs without reusing the metadata namespace.

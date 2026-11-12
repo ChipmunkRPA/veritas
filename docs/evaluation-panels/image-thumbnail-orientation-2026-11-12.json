@@ -1,0 +1,77 @@
+{
+  "authorship_confidence_contribution": 0,
+  "code": {
+    "image_thumbnail_evidence.py": "3670c7e81f40ba45b53db0e44517816fb295fe2630b813051ef6d6b7f410e22c",
+    "image_thumbnail_localization.py": "036a358acdb715fabbc1e56727f6d98094c28f012764f1215763d2b96c73599f",
+    "image_thumbnail_localization_transfer.py": "c88d06fcd311c45dbb6508b11acaf86fcedd4cf89b86a056601646071f1f6d44",
+    "image_thumbnail_orientation_transfer.py": "95ba3cbf0ac20f103bb45d6fad61e33f8d325bd4b159a8c0b0adb9e9e98eb74b"
+  },
+  "confirmation_freeze_sha256": "1e0b4003e088fa415de7e2739344b842aff3b6503304baf22b47faa8aea9ef16",
+  "control_views": {
+    "clean": 102,
+    "foreign": 36,
+    "without_preview": 36
+  },
+  "criteria": {
+    "maximum_clean_groups": 1,
+    "maximum_new_genuine_highlights": 0,
+    "maximum_wrong_correspondence": 0,
+    "minimum_localized": 48,
+    "minimum_per_orientation_convention": 6
+  },
+  "decision": "evidence_only",
+  "held": {
+    "authored_clean_groups_flagged": 0,
+    "branches": {
+      "3/preview_display_upright": {
+        "clean_comparable": 17,
+        "clean_flags": 0,
+        "useful_edits": 11
+      },
+      "3/same_raw_axes": {
+        "clean_comparable": 17,
+        "clean_flags": 0,
+        "useful_edits": 11
+      },
+      "6/preview_display_upright": {
+        "clean_comparable": 17,
+        "clean_flags": 0,
+        "useful_edits": 11
+      },
+      "6/same_raw_axes": {
+        "clean_comparable": 17,
+        "clean_flags": 0,
+        "useful_edits": 11
+      },
+      "8/preview_display_upright": {
+        "clean_comparable": 17,
+        "clean_flags": 0,
+        "useful_edits": 11
+      },
+      "8/same_raw_axes": {
+        "clean_comparable": 17,
+        "clean_flags": 0,
+        "useful_edits": 11
+      }
+    },
+    "genuine_derived_views_flagged": 0,
+    "passed": true,
+    "useful_rotated_total": 66,
+    "useful_upright": 11,
+    "wrong_correspondences": 0
+  },
+  "original_orientation_freeze_sha256": "0dd8b2865417427fb1ec59605eb464994aa4c2a6634f6999378d18267fad86d6",
+  "raw_preview_region_checks": 66,
+  "runtime_case_checks": 258,
+  "schema": "chipmunk.image-thumbnail-orientation-public-result/1",
+  "source_groups": {
+    "edited_photo_groups": 12,
+    "genuine_photo_groups": 5
+  },
+  "upright_parity": {
+    "cases": 177,
+    "freeze_sha256": "115e76c818a40b74142fd1a6694f045de25e47ce96697c2276ccfabef523cae6",
+    "mask_and_area_checks": 354,
+    "matched_original_rows": true
+  }
+}

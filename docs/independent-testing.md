@@ -185,6 +185,9 @@ The [embedded JPEG preview comparison](image-thumbnail-localization-2026-11-12.m
 uses a retained preview within a single upload to locate localized differences.
 It replays the measured regions and distinguishes ordinary edits, processing
 controls, and incompatible previews.
+The [EXIF orientation transfer](image-thumbnail-orientation-2026-11-12.md)
+replays rotated main images and both preview-storage conventions. It checks
+display-oriented main crops and original stored preview pixels separately.
 The [two-photo difference pilot](image-embedded-pair-difference-transfer-2026-11-12.md)
 replays source-pixel differences when one PNG contains two matching photo areas.
 The [separate confirmation](image-embedded-pair-difference-confirmation-2026-11-12.md)

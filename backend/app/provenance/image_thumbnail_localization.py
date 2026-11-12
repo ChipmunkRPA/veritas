@@ -22,6 +22,7 @@ MAX_SELECTED_FRACTION = .25
 PILOT_COMPONENT_FRACTION = .0012
 CONFIRMATION_COMPONENT_FRACTION = .004
 KERNELS = (Image.Resampling.LANCZOS, Image.Resampling.BOX)
+ROTATIONS = {3: Image.Transpose.ROTATE_180, 6: Image.Transpose.ROTATE_270, 8: Image.Transpose.ROTATE_90}
 
 
 def _trim(image):
@@ -40,11 +41,12 @@ def _trim(image):
     return image[top:bottom, left:right], (left, top, right, bottom)
 
 
-def _preview(blob, native_size):
+def _preview(blob, native_size, operation=0):
     with Image.open(io.BytesIO(blob)) as image:
         if image.format != "JPEG" or min(image.size) < MIN_SIDE or max(image.size) > MAX_SIDE:
             return None
-        image = np.asarray(image.convert("RGB"))
+        rgb = image.convert("RGB")
+        image = np.asarray(rgb.transpose(ROTATIONS[operation]) if operation else rgb)
     native_aspect = native_size[0] / native_size[1]
     if abs((image.shape[1] / image.shape[0]) / native_aspect - 1) <= MAX_ASPECT_DELTA:
         h, w = image.shape[:2]
@@ -115,24 +117,8 @@ def _mapped(regions, trim, thumbnail_size, native_size):
                "selected_thumbnail_pixels": region["selected_pixels"]}
 
 
-def measure(data: bytes, *, minimum_component_fraction: float = PILOT_COMPONENT_FRACTION):
-    """Measure a compact difference only after both thumbnail renderings agree."""
-    with Image.open(io.BytesIO(data)) as original:
-        native_size = original.size
-        if (original.format != "JPEG" or native_size[0] * native_size[1] > MAX_MAIN_PIXELS
-                or min(native_size) < 160 or original.getexif().get(274, 1) != 1):
-            return {"status": "unsupported_carrier"}, None
-        blob = _pillow_thumbnail(original, original.getexif())
-        if blob is None:
-            return {"status": "no_retained_thumbnail"}, None
-        proof = _preview(blob, native_size)
-        if proof is None:
-            return {"status": "unsupported_thumbnail"}, None
-        before, trim = proof
-        h, w = before.shape[:2]
-        original.draft("RGB", (w * 3, h * 3))
-        main = original.convert("RGB")
-
+def _projected(main, before, trim, native_size, minimum_component_fraction):
+    h, w = before.shape[:2]
     supported, controls, support = [], [], []
     for kernel in KERNELS:
         after = np.asarray(main.resize((w, h), kernel))
@@ -155,3 +141,47 @@ def measure(data: bytes, *, minimum_component_fraction: float = PILOT_COMPONENT_
             "regions": list(_mapped(regions, trim, (w, h), native_size)),
             "luma_regions": list(_mapped(luma_regions, trim, (w, h), native_size)), "support": support,
             "confidence_weight": 0}, (mask, luma_mask)
+
+
+def measure(data: bytes, *, minimum_component_fraction: float = PILOT_COMPONENT_FRACTION):
+    """Measure a compact difference only after both thumbnail renderings agree."""
+    with Image.open(io.BytesIO(data)) as original:
+        raw = original.size
+        exif = original.getexif()
+        orientation = exif.get(274, 1)
+        if (original.format != "JPEG" or raw[0] * raw[1] > MAX_MAIN_PIXELS or min(raw) < 160
+                or orientation not in (1, *ROTATIONS)):
+            return {"status": "unsupported_carrier"}, None
+        blob = _pillow_thumbnail(original, exif)
+        if blob is None:
+            return {"status": "no_retained_thumbnail"}, None
+        native_size = raw[::-1] if orientation in (6, 8) else raw
+        if orientation == 1:
+            proof = _preview(blob, native_size)
+            if proof is None:
+                return {"status": "unsupported_thumbnail"}, None
+            before, trim = proof
+            h, w = before.shape[:2]
+            original.draft("RGB", (w * 3, h * 3))
+            main = original.convert("RGB")
+            return _projected(main, before, trim, native_size, minimum_component_fraction)
+
+        with Image.open(io.BytesIO(blob)) as preview:
+            preview_size = preview.size
+        proofs = [(operation, proof) for operation in (0, orientation)
+                  if (proof := _preview(blob, native_size, operation)) is not None]
+        if not proofs:
+            return {"status": "unsupported_thumbnail"}, None
+        edge = max(preview_size)
+        original.draft("RGB", tuple(round(3 * edge * n / max(raw)) for n in raw))
+        main = original.convert("RGB").transpose(ROTATIONS[orientation])
+
+    matches = []
+    for operation, (before, trim) in proofs:
+        result, masks = _projected(main, before, trim, native_size, minimum_component_fraction)
+        if masks is not None:
+            matches.append(({**result, "main_orientation": orientation, "preview_orientation": operation,
+                             "preview_raw_size": preview_size}, masks))
+    if len(matches) != 1:
+        return {"status": "ambiguous_preview_orientation" if matches else "alignment_unresolved"}, None
+    return matches[0]

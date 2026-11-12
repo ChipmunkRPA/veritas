@@ -38,21 +38,19 @@ class Disclosure:
 
 DISCLOSURES: tuple[Disclosure, ...] = (
     Disclosure("image.families", _kind("image"), "generator families",
-               "Generator families are not validated. When a family is left out of training, detection at the 5 % threshold "
-               "averages 58 % (target 75 %), and the weakest family reaches 25 %."),
+               "Performance varied when the earlier benchmark left a generator family out of training. The check flagged "
+               "58 % of generated images on average and 25 % from the weakest tested family."),
     Disclosure("image.real_strata", _kind("image"), "kinds of genuine photograph",
-               "Kinds of genuine photograph are not validated. False alarms at the 5 % threshold range from 3.6 % of camera originals "
-               "to 11.7 % of social-platform images, and in the field 5 of 52 camera originals were called AI (9.6 %, Wilson "
-               "4.2–20.6 %; Fisher exact p = 0.06 against the 3.6 % of camera originals on the benchmark)."),
+               "In an earlier benchmark, 3.6 % of genuine camera originals and 11.7 % of genuine social-platform images were "
+               "flagged. A separate field test flagged 5 of 52 genuine camera originals."),
     Disclosure("image.calibration", _kind("image"), "calibration",
-               "Calibration is not validated. The expected calibration error on test is 0.054 against a 0.05 target, so a stated "
-               "likelihood can be off by several points."),
+               "Calibration in an earlier test did not meet its accuracy criterion. Error for this particular upload is unknown."),
     Disclosure("image.transforms", _kind("image"), "re-saved and edited copies",
                "Re-saved and edited copies are not validated. Detection falls by 13 to 28 points after JPEG or WebP re-saving or "
                "halving the size, and false alarms rise by up to 23 points with added noise or a screenshot."),
     Disclosure("image.faces", _has_face, "AI-generated faces",
-               "AI-generated faces are not validated. Detection at the 5 % threshold is 63 % (58 of 92) against 85 %, and 51 % for "
-               "face-swap stills."),
+               "An earlier image benchmark flagged 58 of 92 generated faces and 95 of 185 face-swap stills. Results for this "
+               "image depend on the type of face change and the condition of the file."),
     Disclosure("image.localisers", _ran("loc.mesorch", "loc.radar", "loc.fused"), "region maps",
                "Region maps are not validated and carry no weight in the decision. An earlier evaluation of one local editing "
                "check marked regions on 36 % of genuine photographs; this is not an error rate for every check or image. "
@@ -64,11 +62,12 @@ DISCLOSURES: tuple[Disclosure, ...] = (
                "The sensitive regional check finds editing cues and can also highlight untouched images or ordinary edits. "
                "AI authorship is inconclusive from this check alone. Its uncalibrated responses and regional highlights "
                "carry no weight in the overall authorship confidence."),
-    Disclosure("image.unadmitted_detectors", _ran("img.spai", "img.univfd"), "SPAI and UnivFD",
-               "SPAI and UnivFD are not admitted: their scores are shown but carry no weight in the decision."),
+    Disclosure("image.unadmitted_detectors", _ran("img.spai", "img.univfd"), "supplementary image checks",
+               "Supplementary image checks can show individual scores and carry no weight in the decision."),
     Disclosure("video.synthesis", _kind("video"), "fully generated video",
-               "Fully generated video is not validated. Detection at the 5 % threshold averages 60 % across vendors (target 80 %), "
-               "and Sora videos reach 21 %."),
+               "Detection varied by generator in an earlier video benchmark. In separate benchmark comparisons, one generator "
+               "had 4 of 19 generated clips flagged and the genuine set had 4 of 162 clips flagged. These counts describe "
+               "those test sets. Performance on this upload is unknown."),
     # N-17 (browser QA P1-5 c): the entry's checks are the lip-sync checks and the face-swap check of a whole track. The synthesis
     # frame checks and the per-frame face-swap check are fitted, by their one score for the whole video.
     Disclosure("video.lanes", _kind("video"), "the lip-sync and face-track lanes, and the segments of every lane",
@@ -80,8 +79,8 @@ DISCLOSURES: tuple[Disclosure, ...] = (
                "validated either: the decision uses each fitted check's one score for the whole video, as listed where the estimate "
                "is explained."),
     Disclosure("audio.synthetic_voice", _kind("audio"), "cloned voices",
-               "Cloned voices are not validated. At the operating threshold only 1 of 89 cloned voices recorded in the wild was flagged, so "
-               "a low score says little about whether a voice is cloned."),
+               "An earlier voice benchmark flagged only 1 of 89 in-the-wild cloned voice recordings. A low score provides "
+               "limited evidence about whether a voice was cloned."),
 )
 
 

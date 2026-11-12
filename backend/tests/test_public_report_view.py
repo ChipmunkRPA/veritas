@@ -8,6 +8,20 @@ from app.reports.snapshot import snapshot_hash
 from app.reports.specimens import specimen
 
 
+def test_public_benchmark_disclosures_use_observed_results_without_targets():
+    from app.engine.fusion.disclosures import for_result
+
+    video = {row['id']: row for row in for_result({'kind': 'video'})}
+    text = video['video.synthesis']['text']
+    assert 'earlier video benchmark' in text and '4 of 19' in text and '4 of 162' in text
+    assert 'this upload is unknown' in text and '60 %' not in text and '80 %' not in text
+    image = for_result({'kind': 'image', 'condition_profile': {'min_face_px': 100},
+                        'signals': [{'detector_id': 'img.spai', 'status': 'ok'}]})
+    combined = str([*image, *video.values(), *for_result({'kind': 'audio'})])
+    for hidden in ('threshold', 'target', 'SPAI', 'UnivFD', 'Sora'):
+        assert hidden not in combined
+
+
 def test_skipped_check_diagnostics_are_private_even_without_statistical_signals():
     original = specimen('video', 'standard')
     result = deepcopy(original.result)

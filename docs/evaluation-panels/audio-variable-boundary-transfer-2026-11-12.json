@@ -1,0 +1,128 @@
+{
+  "schema": "chipmunk.audio-variable-boundary-transfer/1",
+  "method": {
+    "sources": "Eight held episodes from distinct LibriSpeech hosts, different-reader genuine controls, and unused exact English ElevenLabs v4 archived recordings with eight declared donor voices and unique texts. Use only samples after the previously analyzed genuine four-second prefixes. Balance four edit durations and two AMI rooms. Two isolated room controls remain genuine. No previously scored exact archive recording is eligible as generated donor in the bound source history.",
+    "rooms": "Fresh nonoverlapping six-second intervals from two native AMI rooms absent from the earlier paired-boundary panel. Earlier studies used both rooms. Require at least 80% speech, at least 1.2 s of concurrent annotated words overall, and at least max(240 ms, half the edit length) with two annotated background voices inside each edit. Use -5 dB whole-clip level and matched 20 ms fades/gain/PCM outside exact splice.",
+    "candidates": "Apply the original paired endpoint score unchanged, at .40, .64, .80 and 1.04-second intervals. Scale each duration by its own median and interquartile range from the same 12 already measured genuine point controls. Use the strongest standardized interval. Replay the earlier fixed .80-second arm and current native two-second model, with their earlier fixed points unchanged.",
+    "outcomes": "Freeze the maximum variable response on the same 12 genuine controls before any held inference. Count a genuine host group once if either matched ordinary splice flags. Separately show ordinary-splice localized cues and synthetic localizations at fixed and retrospective equal false-group budgets 0, 1 and 2. Useful requires 0.30 time IoU and 0.50 edit coverage. Variable-duration advantage requires additional useful locations at the same false groups and no isolated-room flag before a new prospective trial."
+  },
+  "fixed": {
+    "current": {
+      "ai_flags": 2,
+      "useful_ranges": 1,
+      "false_groups": 2,
+      "unassessed": 1,
+      "background_false_flags": 0
+    },
+    "boundary": {
+      "ai_flags": 0,
+      "useful_ranges": 0,
+      "false_groups": 0,
+      "unassessed": 0,
+      "background_false_flags": 0
+    },
+    "variable": {
+      "ai_flags": 0,
+      "useful_ranges": 0,
+      "false_groups": 0,
+      "unassessed": 0,
+      "background_false_flags": 0
+    }
+  },
+  "equal_false_groups": {
+    "0": {
+      "current": {
+        "ai_flags": 0,
+        "useful_ranges": 0,
+        "false_groups": 0,
+        "unassessed": 1,
+        "background_false_flags": 0
+      },
+      "boundary": {
+        "ai_flags": 1,
+        "useful_ranges": 0,
+        "false_groups": 0,
+        "unassessed": 0,
+        "background_false_flags": 0
+      },
+      "variable": {
+        "ai_flags": 1,
+        "useful_ranges": 0,
+        "false_groups": 0,
+        "unassessed": 0,
+        "background_false_flags": 0
+      }
+    },
+    "1": {
+      "current": {
+        "ai_flags": 1,
+        "useful_ranges": 0,
+        "false_groups": 1,
+        "unassessed": 1,
+        "background_false_flags": 0
+      },
+      "boundary": {
+        "ai_flags": 1,
+        "useful_ranges": 0,
+        "false_groups": 1,
+        "unassessed": 0,
+        "background_false_flags": 0
+      },
+      "variable": {
+        "ai_flags": 1,
+        "useful_ranges": 0,
+        "false_groups": 1,
+        "unassessed": 0,
+        "background_false_flags": 0
+      }
+    },
+    "2": {
+      "current": {
+        "ai_flags": 2,
+        "useful_ranges": 1,
+        "false_groups": 2,
+        "unassessed": 1,
+        "background_false_flags": 0
+      },
+      "boundary": {
+        "ai_flags": 1,
+        "useful_ranges": 0,
+        "false_groups": 2,
+        "unassessed": 0,
+        "background_false_flags": 1
+      },
+      "variable": {
+        "ai_flags": 2,
+        "useful_ranges": 1,
+        "false_groups": 2,
+        "unassessed": 0,
+        "background_false_flags": 1
+      }
+    }
+  },
+  "fixed_located_genuine_splices": {
+    "current": {
+      "ordinary_same_host": 0,
+      "ordinary_other_voice": 1
+    },
+    "boundary": {
+      "ordinary_same_host": 0,
+      "ordinary_other_voice": 0
+    },
+    "variable": {
+      "ordinary_same_host": 0,
+      "ordinary_other_voice": 0
+    }
+  },
+  "counts": {
+    "ordinary_same_host": 8,
+    "ordinary_other_voice": 8,
+    "synthetic": 8,
+    "background_only": 2
+  },
+  "commitments": {
+    "freeze": "b74032598f6ff8e378a5655509ef89e7e098b49bf34d6d0d227e1c8a5b81e571",
+    "roster": "fde7922defc1b5556bca919288b8d6a71f72731fb1d579cf805e9c8eee15fa75",
+    "current": "7e7d266353533aacd61a4147716c341cd59cdadbe993dfdc225c87f686dbd4da"
+  }
+}

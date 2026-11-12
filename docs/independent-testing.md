@@ -59,6 +59,9 @@ closures, native pictures, and unchanged soundtracks.
 The [detector readout on those fixtures](grid-reserve-neural-mouth-readout-2026-11-12.md)
 repeats current and experimental timing checks on those exact clips and
 verifies source crops where an inspection range appears.
+The [marked earlier-video timing study](grid-paired-closure-timing-2026-11-12.md)
+replays independently measured mouth movement and speech changes at a marked
+event, with coherent retiming and ordinary processing controls.
 
 The [earlier-audio comparison](audio-reference-comparison-2026-11-11.md#replay-without-the-app)
 replays changed sample ranges, difference waveforms, and playable excerpts
@@ -109,6 +112,9 @@ when two or more genuine background speakers are talking.
 The [original-audio boundary study](audio-original-pcm-boundary-transfer-2026-11-12.md)
 replays exact ranges and compares useful locations at fixed and matched
 false-group counts without separating the soundtrack.
+The [variable-duration audio transfer](audio-variable-boundary-transfer-2026-11-12.md)
+compares four span durations on new expressive inserts and paired genuine
+edits in two rooms with competing speech.
 The [controlled room-speech attenuation study](audio-room-reference-transfer-2026-11-12.md)
 reconstructs each changed waveform independently and checks whether improved
 foreground reconstruction recovers short synthetic inserts.

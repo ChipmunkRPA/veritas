@@ -1,0 +1,232 @@
+{
+  "advances": false,
+  "alerted_cut_source_pairs": 0,
+  "available_source_groups": 22,
+  "candidate_elapsed_s": 12.932163083001797,
+  "candidate_journal_sha256": "207be619c67f55b1c9177672c42cf5aad5623d9b4632d7bb3cabfee6d5ec74f6",
+  "candidate_sha256": "ab7908fbaafe35a5e879190ada426401d7b248e8d37069db733b330a5df2eca6",
+  "evaluation_freeze_sha256": "3606d13014f5d459740ee75cab1b9c9d5f465ff4ca9b1c8447d0acc5886757f6",
+  "gate": {
+    "independent_pairs": false,
+    "no_false_matches": true,
+    "useful_cut_removals": false,
+    "useful_swap_coarse_coverage": true,
+    "useful_swap_preservation": true
+  },
+  "held_counts": {
+    "camera_punch": {
+      "candidate_matches": 0,
+      "cases": 6,
+      "coarse_measured": 6,
+      "coarse_selected": 0,
+      "cut_within_one_picture": 0,
+      "exact_cut": 0,
+      "false_cut_match": 0,
+      "lost_useful_coarse_swap": 0,
+      "short_selected": 0,
+      "shot_boundary": 0,
+      "useful_coarse_swap": 0,
+      "useful_counterfactual_swap": 0,
+      "useful_current_swap": 0
+    },
+    "direct_cut": {
+      "candidate_matches": 0,
+      "cases": 36,
+      "coarse_measured": 36,
+      "coarse_selected": 0,
+      "cut_within_one_picture": 0,
+      "exact_cut": 0,
+      "false_cut_match": 0,
+      "lost_useful_coarse_swap": 0,
+      "short_selected": 0,
+      "shot_boundary": 36,
+      "useful_coarse_swap": 0,
+      "useful_counterfactual_swap": 0,
+      "useful_current_swap": 0
+    },
+    "graded_cut": {
+      "candidate_matches": 0,
+      "cases": 36,
+      "coarse_measured": 36,
+      "coarse_selected": 0,
+      "cut_within_one_picture": 0,
+      "exact_cut": 0,
+      "false_cut_match": 0,
+      "lost_useful_coarse_swap": 0,
+      "short_selected": 0,
+      "shot_boundary": 33,
+      "useful_coarse_swap": 0,
+      "useful_counterfactual_swap": 0,
+      "useful_current_swap": 0
+    },
+    "light": {
+      "candidate_matches": 0,
+      "cases": 6,
+      "coarse_measured": 6,
+      "coarse_selected": 0,
+      "cut_within_one_picture": 0,
+      "exact_cut": 0,
+      "false_cut_match": 0,
+      "lost_useful_coarse_swap": 0,
+      "short_selected": 0,
+      "shot_boundary": 0,
+      "useful_coarse_swap": 0,
+      "useful_counterfactual_swap": 0,
+      "useful_current_swap": 0
+    },
+    "long_swap": {
+      "candidate_matches": 0,
+      "cases": 12,
+      "coarse_measured": 12,
+      "coarse_selected": 12,
+      "cut_within_one_picture": 0,
+      "exact_cut": 0,
+      "false_cut_match": 0,
+      "lost_useful_coarse_swap": 0,
+      "short_selected": 0,
+      "shot_boundary": 0,
+      "useful_coarse_swap": 12,
+      "useful_counterfactual_swap": 12,
+      "useful_current_swap": 12
+    },
+    "original": {
+      "candidate_matches": 0,
+      "cases": 12,
+      "coarse_measured": 12,
+      "coarse_selected": 0,
+      "cut_within_one_picture": 0,
+      "exact_cut": 0,
+      "false_cut_match": 0,
+      "lost_useful_coarse_swap": 0,
+      "short_selected": 0,
+      "shot_boundary": 0,
+      "useful_coarse_swap": 0,
+      "useful_counterfactual_swap": 0,
+      "useful_current_swap": 0
+    }
+  },
+  "improved_cut_source_pairs": 0,
+  "incumbent_elapsed_s": 458.95227924999926,
+  "incumbent_seal_sha256": "02130c102ad537bda11b3d0e2812ad5d55cb943f247557b3fa9dff64c3ae6361",
+  "independent_authoring": {
+    "counts": {
+      "authored_intervals": 96,
+      "byte_identical_mp4s": 108,
+      "verified_native_source_pictures": 1680
+    },
+    "freeze_sha256": "ed32f956ae79cfab45456b6a3fae4967eb6e2e7ff15b8ea5a0a108d673da1637",
+    "media_sha256": "0676c8d7f1eea8a84f47c2bae675dda07ec501310b8b0f4ae798cc83aec3b532",
+    "status": "verified"
+  },
+  "independent_authoring_sha256": "e590f7b8b9ced9f981ae13757fc75957bb4faf8b41138492d631cf9c015c45a8",
+  "independent_replay": {
+    "accepted_candidate_native_frames_verified": 0,
+    "aggregate_sha256": "f09eec53ee3043c98d4f6f077760d812154e131c6eba5f5cf7666dfb73ce1c97",
+    "decisions": 108,
+    "selected_cut_or_candidate_intervals": [],
+    "status": "verified"
+  },
+  "independent_replay_sha256": "9bd80a62533d1169e736356ff876ad1bd048e569069fc641b6e64f3de68039e0",
+  "paid_worker_parity": {
+    "historical_paid_receipt_sha256": "870bc1e5d0f40cfdf67b8c37897a7bc11bb707c0774ac8a84f32da2538808ab1",
+    "maximum_allowed_raw_response_delta": 2e-06,
+    "n": 4,
+    "rows": [
+      {
+        "absolute_response_delta": 2.5771329967283485e-07,
+        "role": "historical genuine cut with tracked false range",
+        "same_decisions_and_native_bindings": true
+      },
+      {
+        "absolute_response_delta": 3.0091452554725784e-07,
+        "role": "historical genuine cut with tracked false range",
+        "same_decisions_and_native_bindings": true
+      },
+      {
+        "absolute_response_delta": 3.8098361110350254e-07,
+        "role": "historical long swap",
+        "same_decisions_and_native_bindings": true
+      },
+      {
+        "absolute_response_delta": 0.0,
+        "role": "historical genuine original",
+        "same_decisions_and_native_bindings": true
+      }
+    ],
+    "status": "verified"
+  },
+  "pair_gray_distances": [
+    0.1603291316526611,
+    0.17790616246498597,
+    0.13336834733893557,
+    0.17636554621848738,
+    0.24609593837535013,
+    0.24516806722689075
+  ],
+  "pair_palette_distances": [
+    0.33308531746031733,
+    0.4436383928571429,
+    0.509734623015873,
+    0.5246775793650793,
+    0.5028521825396826,
+    0.5110987103174603
+  ],
+  "protocol": {
+    "candidate_sha256": "ab7908fbaafe35a5e879190ada426401d7b248e8d37069db733b330a5df2eca6",
+    "color_grade": "For each source compute per-channel RGB mean and standard deviation over the outer 40 percent of the frame, pooled over seven fixed genuine source pictures. For a graded cut apply target/source standard-deviation ratio clipped to .80\u20131.20 and a mean-matching offset clipped to \u00b124 RGB levels. Apply it uniformly to the entire authentic donor frame, with rounding and clipping. No compositing or generated pixels are used; the arithmetic color grade is an ordinary video edit.",
+    "conditional_challenge": "Finish and seal all genuine cut and collateral incumbent outputs before the fixed candidate sees any of these deliveries. Use every selected real coarse range. All genuine cuts without one and all unaffected controls remain in the ledger. Do not estimate false-alarm rate from the alert-conditioned subset.",
+    "cut_spans": [
+      [
+        59,
+        69
+      ],
+      [
+        65,
+        77
+      ],
+      [
+        71,
+        81
+      ]
+    ],
+    "deliveries": "Each direction of every pair supplies exact whole-picture cuts at all three fixed spans, both direct and with an ordinary constant donor color grade. Other views include an original, one publisher swap, and one lighting or camera-punch control per source. Exact 640x360/25 120-picture H.264 yuv420p MP4, CRF 23, silent, with earlier-nearest native source pictures and no interpolation.",
+    "gate": {
+      "exact_native_edge_tolerance_pictures": 1,
+      "maximum_false_matched_on_controls": 0,
+      "maximum_useful_swap_losses": 0,
+      "minimum_cut_removals": 2,
+      "minimum_independent_pairs": 2,
+      "minimum_useful_swap_coarse": 1
+    },
+    "long_swap_spans": [
+      [
+        50,
+        68
+      ],
+      [
+        56,
+        78
+      ]
+    ],
+    "matching": "At seven fixed genuine sample times, average the masked outer grayscale distance and normalized HSV palette intersection distance. Weight them .35 and .65. Compute maximum-cardinality minimum-weight disjoint matching on all eligible sources and keep its six least-distant pairs. No face model, incumbent alert, guard feature, or label enters pair selection.",
+    "ordinary_span": [
+      65,
+      77
+    ],
+    "preview_ticks": [
+      0,
+      55,
+      64,
+      73,
+      82,
+      96,
+      118
+    ],
+    "schema": "chipmunk.video-native-background-challenge/1",
+    "sources": "Use only native archived real target and publisher swap groups outside all 65 known previous short-review/scene study source URLs and donor keys. Preserve source rate, original delivery identity, and native-frame hashes privately. Known linkage excludes aliases documented in the publisher metadata; general project exposure and unknown identity linkage remain possible."
+  },
+  "serving_change": false,
+  "source_freeze_sha256": "ed32f956ae79cfab45456b6a3fae4967eb6e2e7ff15b8ea5a0a108d673da1637",
+  "source_group_count": 12,
+  "source_pair_count": 6
+}

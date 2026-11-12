@@ -348,7 +348,7 @@ def _report_scaffold(f):
     return f.frozen.model_copy(update={'result':result,'evidence':evidence})
 
 
-@pytest.mark.parametrize('width,height', [(1920, 1080), (1280, 720)])
+@pytest.mark.parametrize('width,height', [(1920, 1080), (1280, 720), (640, 360)])
 def test_short_face_change_keeps_exact_source_frames_in_pdf_json_and_offline_verifier(
     av_fixture, av_source, tmp_path, monkeypatch, width, height,
 ):
@@ -423,7 +423,7 @@ def test_short_face_change_keeps_exact_source_frames_in_pdf_json_and_offline_ver
                                         ({}, {'interpolated': [0]})]:
         with pytest.raises(ValueError, match='complete native timestamps'):
             face_return_binding.validate_packet(packet, {**f.document['source'], **source_change}, **table_change)
-    if height == 720:
+    if height in {720, 360}:
         altered = copy.deepcopy(packet)
         altered['face_return']['frame_inputs'][0]['pts'] -= 1
         with pytest.raises(ValueError, match='exact 25 Hz source clock'):

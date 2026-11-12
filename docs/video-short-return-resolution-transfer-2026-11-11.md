@@ -24,7 +24,7 @@ Both arms met the frozen gate with gains in all six groups and zero added false 
 
 ## Local application replay
 
-The optional short-range review now also accepts upright native 720p at exact 25 Hz. The input still needs a 2–8 second native clock and enough single-face measurements. Enable the check with `VERITAS_VIDEO_FACE_REVIEW_MODE=appearance` and `VERITAS_VIDEO_FACE_SHORT_RETURN_REVIEW=true`. The 360p arm remains experimental.
+This trial added upright native 720p at exact 25 Hz to the optional short-range review. The input needs a 2–8 second native clock and enough single-face measurements. Enable the check with `VERITAS_VIDEO_FACE_REVIEW_MODE=appearance` and `VERITAS_VIDEO_FACE_SHORT_RETURN_REVIEW=true`. A separate trial validated and added encoded 360p25. [Encoded 360p follow-up](video-short-return-encoded-360p-2026-11-11.md)
 
 Four 720p inputs ran through the local Full-profile checkout and worker with the face detection, tracking and appearance paths enabled. An isolated Stripe stub supplied test-mode responses. Checkout and an unpaid event created zero analyses. Each paid event queued one analysis and its repeated delivery added none. Every input ran with the short check off and on, and the fixture replay verified all 150 pictures and exact clock for each input.
 

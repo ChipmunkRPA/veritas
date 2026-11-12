@@ -1,0 +1,599 @@
+{
+  "elapsed_s": 72.392,
+  "freeze_sha256": "a471b0450440701060497f24d96fb3f150fe383c9926a9b8315f01ad5aa55a16",
+  "frozen": {
+    "implementation_sha256": {
+      "backend/app/detectors/image/jpeg_dq.py": "3b176132b5c63ac062f2f53aa9d7dc2c766d4c92c1818825d23d40751bbd9f0e",
+      "backend/app/detectors/image/sharp_boundary.py": "04c120cd027e50bd107fd15778f66fe38c43d64439e090835dfad99727e41cbc",
+      "backend/scripts/image_background_patch_score.py": "cb854082628636833e2fd005e954d0bdb7c78362e58ee98632f1ba4153224d5a",
+      "backend/scripts/image_background_patch_transfer.py": "da6ba064bc850d7bbc59b605c29305251d317cfc186ccb3d652cf713080f9dfe",
+      "backend/scripts/image_bg_real_insertion_score.py": "b8a91de6e686b5037ea65297aac52961ea995d701ca8aacf362b8715f94e303d",
+      "backend/scripts/image_boundary_blend_transfer.py": "fc65a5e3f064d74a5cd6fa528d9115aee92cc8eb9e04cb6dee13398e03388aa0",
+      "backend/scripts/image_boundary_prominence_holdout.py": "e35c45fa3bce518272a06590577917d8f3e83b557f475e2a9d0a80e9bb5ab584",
+      "backend/scripts/image_contour_continuation_transfer.py": "dc00be2113abfd6fd07e9addecbf1befdbc3ac1dbb255c561b71f03ee801a84e",
+      "backend/scripts/image_edge_spread_transfer.py": "f9d434f1dbd2d04b4292e512e562cae52f7dd049690b45f97ef424b2d971c08c",
+      "backend/scripts/image_flux_detector_comparison_v280.py": "2a423629be60a7ed31478d37dca5c3ce3b4a84031b95d178deddd12388f1327d",
+      "backend/scripts/image_local_resampling_transfer.py": "52af616c15f9bb7cd25e2c1aee0cdbc1ad3756494d5eef1bac4c3c97903f8c5d",
+      "backend/scripts/image_residual_color_transfer.py": "682fc80861ae3c80b7d80d5efb3edd3cb15635bbdf797c60b894ce4b23f8ece2",
+      "backend/scripts/image_residual_sign_transfer.py": "d7f68a53a1bd8c203e11dcc74461792fdca0c48569d3d21f18cf0b19f329c8fb"
+    },
+    "intake_sha256": {
+      "development": {
+        "attempts.jsonl": "59d8591da24d8886cca3ea071eefa5488aa3ac555ff5b21e0542dc267c47fb90",
+        "plan.json": "0d5cd6aadef8162c436c674e00ad835d91d3c7b5807daf0561cb8c58adf47aef",
+        "result.json": "6a8b09a8a4a8585f44faffd5ce18bba7c42a311934ce20bb3a70842aaef4d0b8"
+      },
+      "earlier": {
+        "attempts.jsonl": "3b8291b96634bca1920bddfd9239a53d69e143ea8efc74e565fd7406e749f9ce",
+        "plan.json": "2fc63a2d9f666ce2e593cb7c6b503120661b74a33dbf88f297e34d96ae3c3d7b",
+        "result.json": "fb0aafa7d109ca3e7fda3256fbd9fdf0e3b2afca265081092552b54cc8388731"
+      },
+      "later": {
+        "attempts.jsonl": "006a125678341700c243754a423c480b41bd86029a70f689ff1e7a467fc7fde7",
+        "plan.json": "a2176e567d71f2a80178adec7fb55e34007f6ad3114f9baf09837e233197fc34",
+        "result.json": "3d849ad48453c79002aa78d2d9cc8c7aeecc9f1979008060244c0bd01e065e86"
+      }
+    },
+    "method": {
+      "advance": {
+        "additional_feathered": 2,
+        "additional_ordinary_groups": 3,
+        "additional_ordinary_views": 4,
+        "arm": "two_distances",
+        "scope": "each held panel and delivery separately"
+      },
+      "arms": [
+        "short_crossing",
+        "two_distances"
+      ],
+      "baseline": "Existing PNG sharp-boundary check and aligned JPEG double-quantization region.",
+      "candidate_sizes": [
+        [
+          6,
+          6
+        ],
+        [
+          6,
+          9
+        ],
+        [
+          9,
+          6
+        ],
+        [
+          8,
+          8
+        ],
+        [
+          8,
+          12
+        ],
+        [
+          12,
+          8
+        ],
+        [
+          10,
+          10
+        ],
+        [
+          12,
+          12
+        ]
+      ],
+      "confidence_contribution": 0,
+      "continuation_ratio": 0.65,
+      "fit_roles": [
+        "original",
+        "global_processing",
+        "local_processing",
+        "blurred",
+        "local_contrast",
+        "sharpened",
+        "hard_same_image_paste",
+        "hard_other_photo_paste",
+        "feathered_same_image_paste",
+        "feathered_other_photo_paste"
+      ],
+      "formats": [
+        "png",
+        "jpeg75"
+      ],
+      "held_roles": [
+        "edited",
+        "feathered_edit",
+        "original",
+        "local_processing",
+        "global_processing",
+        "blur",
+        "feathered_processing",
+        "local_contrast",
+        "hard_same_image_paste",
+        "hard_other_photo_paste",
+        "feathered_same_image_paste",
+        "feathered_other_photo_paste"
+      ],
+      "minimum_crossings": 3,
+      "native_cell": 16,
+      "outward_control_displacement_px": [
+        16,
+        32
+      ],
+      "point_rule": "Strictly above the second-highest of eight development control source maxima or 0.10, whichever is larger.",
+      "region_score": "Third strongest side above local exterior references. The second arm requires the same side at both distances.",
+      "slopes": [
+        -2,
+        -1,
+        0,
+        1,
+        2
+      ],
+      "smoothing_sigma_near_px_gradient_floor": [
+        [
+          1.15,
+          4,
+          4.0
+        ],
+        [
+          2.1,
+          8,
+          2.5
+        ]
+      ],
+      "useful": "At least 0.30 native changed-pixel IoU and 0.50 recall."
+    },
+    "previous_confirmation_sha256": {
+      "earlier": "dae5623b6eb947c98b3e97e5ab73a3735ee3cf392d4a902c038869d8259b146e",
+      "later": "be4fffd689162bc37c4691fc46128ca495d716e265d282a8ed3f449ac84473e0"
+    },
+    "runtime": {
+      "numpy": "2.2.6",
+      "opencv": "5.0.0",
+      "pillow": "12.3.0"
+    },
+    "schema": "chipmunk.image-contour-continuation-transfer/1",
+    "source_group_counts": [
+      8,
+      12,
+      12
+    ]
+  },
+  "independent_readback": {
+    "aggregate_sha256": "09eb5a3384cb1ff2222abc5caeef36c452e958764245f84506fb50eb2b9bf01b",
+    "masks": 1728,
+    "status": "verified",
+    "unthresholded_rank_checks": 192,
+    "views": 576
+  },
+  "journal_sha256": {
+    "earlier": "a27f6b77cc3cb832ac999d2f3db42a4ccddee94a67d8e27edbcd5c18380f5dd9",
+    "later": "c6a2940a63216cfb67929028d901e6647a44baa9b52423021509d03ea690f8b3"
+  },
+  "operating_points": {
+    "jpeg75": {
+      "short_crossing": {
+        "point": 0.46026879880163407,
+        "source_maxima": [
+          0.4683794577916463,
+          0.37475889000025664,
+          0.3961131185680241,
+          0.33357858657836914,
+          0.41372017065684,
+          0.4450619916121165,
+          0.3528458674748739,
+          0.46026879880163407
+        ]
+      },
+      "two_distances": {
+        "point": 0.28707269390860757,
+        "source_maxima": [
+          0.2881505423121982,
+          0.20778469787621356,
+          0.16227444012959802,
+          0.23876476562940152,
+          0.26371482014656067,
+          0.28707269390860757,
+          0.13688110311826074,
+          0.25242951143355596
+        ]
+      }
+    },
+    "png": {
+      "short_crossing": {
+        "point": 0.444334211803618,
+        "source_maxima": [
+          0.444334211803618,
+          0.36516710619131726,
+          0.4441496804356575,
+          0.3514608421495983,
+          0.4054694715000335,
+          0.4856881151596705,
+          0.29197637843234203,
+          0.4420095682144165
+        ]
+      },
+      "two_distances": {
+        "point": 0.280931113825904,
+        "source_maxima": [
+          0.280931113825904,
+          0.21165906637907028,
+          0.18395766864220303,
+          0.24135889496122087,
+          0.24683745950460434,
+          0.2500688284635544,
+          0.046981324752171816,
+          0.3187618275483449
+        ]
+      }
+    }
+  },
+  "points_sha256": "be54f71bf2e6bc401a1496c6455e893ddd7b125d54567b274852f27a12c849bf",
+  "results": {
+    "earlier": {
+      "jpeg75": {
+        "format_reference": {
+          "extra_feathered": 0,
+          "extra_ordinary": 0,
+          "extra_ordinary_groups": 0,
+          "feathered": 0,
+          "generator_hits": {
+            "kandinsky": 0,
+            "sdxl": 0
+          },
+          "newly_flagged_groups": 0,
+          "ordinary": 0,
+          "ordinary_groups": 0,
+          "per_control": {
+            "blur": 0,
+            "feathered_other_photo_paste": 0,
+            "feathered_processing": 0,
+            "feathered_same_image_paste": 0,
+            "global_processing": 0,
+            "hard_other_photo_paste": 0,
+            "hard_same_image_paste": 0,
+            "local_contrast": 0,
+            "local_processing": 0,
+            "original": 0
+          },
+          "sharp": 0,
+          "unassessed_controls": 0,
+          "unassessed_positives": 0,
+          "useful_before_point": null
+        },
+        "short_crossing": {
+          "extra_feathered": 0,
+          "extra_ordinary": 27,
+          "extra_ordinary_groups": 6,
+          "feathered": 0,
+          "generator_hits": {
+            "kandinsky": 0,
+            "sdxl": 0
+          },
+          "newly_flagged_groups": 6,
+          "ordinary": 27,
+          "ordinary_groups": 6,
+          "per_control": {
+            "blur": 3,
+            "feathered_other_photo_paste": 2,
+            "feathered_processing": 3,
+            "feathered_same_image_paste": 2,
+            "global_processing": 4,
+            "hard_other_photo_paste": 2,
+            "hard_same_image_paste": 2,
+            "local_contrast": 3,
+            "local_processing": 3,
+            "original": 3
+          },
+          "sharp": 0,
+          "unassessed_controls": 0,
+          "unassessed_positives": 0,
+          "useful_before_point": 1
+        },
+        "two_distances": {
+          "extra_feathered": 0,
+          "extra_ordinary": 0,
+          "extra_ordinary_groups": 0,
+          "feathered": 0,
+          "generator_hits": {
+            "kandinsky": 0,
+            "sdxl": 0
+          },
+          "newly_flagged_groups": 0,
+          "ordinary": 0,
+          "ordinary_groups": 0,
+          "per_control": {
+            "blur": 0,
+            "feathered_other_photo_paste": 0,
+            "feathered_processing": 0,
+            "feathered_same_image_paste": 0,
+            "global_processing": 0,
+            "hard_other_photo_paste": 0,
+            "hard_same_image_paste": 0,
+            "local_contrast": 0,
+            "local_processing": 0,
+            "original": 0
+          },
+          "sharp": 0,
+          "unassessed_controls": 0,
+          "unassessed_positives": 0,
+          "useful_before_point": 1
+        }
+      },
+      "png": {
+        "format_reference": {
+          "extra_feathered": 0,
+          "extra_ordinary": 0,
+          "extra_ordinary_groups": 0,
+          "feathered": 0,
+          "generator_hits": {
+            "kandinsky": 4,
+            "sdxl": 1
+          },
+          "newly_flagged_groups": 0,
+          "ordinary": 33,
+          "ordinary_groups": 10,
+          "per_control": {
+            "blur": 2,
+            "feathered_other_photo_paste": 2,
+            "feathered_processing": 2,
+            "feathered_same_image_paste": 2,
+            "global_processing": 2,
+            "hard_other_photo_paste": 10,
+            "hard_same_image_paste": 6,
+            "local_contrast": 3,
+            "local_processing": 2,
+            "original": 2
+          },
+          "sharp": 5,
+          "unassessed_controls": 0,
+          "unassessed_positives": 0,
+          "useful_before_point": null
+        },
+        "short_crossing": {
+          "extra_feathered": 0,
+          "extra_ordinary": 24,
+          "extra_ordinary_groups": 5,
+          "feathered": 0,
+          "generator_hits": {
+            "kandinsky": 0,
+            "sdxl": 0
+          },
+          "newly_flagged_groups": 0,
+          "ordinary": 39,
+          "ordinary_groups": 6,
+          "per_control": {
+            "blur": 4,
+            "feathered_other_photo_paste": 3,
+            "feathered_processing": 4,
+            "feathered_same_image_paste": 4,
+            "global_processing": 4,
+            "hard_other_photo_paste": 4,
+            "hard_same_image_paste": 4,
+            "local_contrast": 4,
+            "local_processing": 4,
+            "original": 4
+          },
+          "sharp": 0,
+          "unassessed_controls": 0,
+          "unassessed_positives": 0,
+          "useful_before_point": 0
+        },
+        "two_distances": {
+          "extra_feathered": 0,
+          "extra_ordinary": 0,
+          "extra_ordinary_groups": 0,
+          "feathered": 0,
+          "generator_hits": {
+            "kandinsky": 0,
+            "sdxl": 0
+          },
+          "newly_flagged_groups": 0,
+          "ordinary": 1,
+          "ordinary_groups": 1,
+          "per_control": {
+            "blur": 0,
+            "feathered_other_photo_paste": 0,
+            "feathered_processing": 0,
+            "feathered_same_image_paste": 0,
+            "global_processing": 0,
+            "hard_other_photo_paste": 0,
+            "hard_same_image_paste": 1,
+            "local_contrast": 0,
+            "local_processing": 0,
+            "original": 0
+          },
+          "sharp": 0,
+          "unassessed_controls": 0,
+          "unassessed_positives": 0,
+          "useful_before_point": 1
+        }
+      }
+    },
+    "later": {
+      "jpeg75": {
+        "format_reference": {
+          "extra_feathered": 0,
+          "extra_ordinary": 0,
+          "extra_ordinary_groups": 0,
+          "feathered": 0,
+          "generator_hits": {
+            "kandinsky": 0,
+            "sdxl": 0
+          },
+          "newly_flagged_groups": 0,
+          "ordinary": 0,
+          "ordinary_groups": 0,
+          "per_control": {
+            "blur": 0,
+            "feathered_other_photo_paste": 0,
+            "feathered_processing": 0,
+            "feathered_same_image_paste": 0,
+            "global_processing": 0,
+            "hard_other_photo_paste": 0,
+            "hard_same_image_paste": 0,
+            "local_contrast": 0,
+            "local_processing": 0,
+            "original": 0
+          },
+          "sharp": 0,
+          "unassessed_controls": 0,
+          "unassessed_positives": 0,
+          "useful_before_point": null
+        },
+        "short_crossing": {
+          "extra_feathered": 0,
+          "extra_ordinary": 38,
+          "extra_ordinary_groups": 5,
+          "feathered": 0,
+          "generator_hits": {
+            "kandinsky": 0,
+            "sdxl": 0
+          },
+          "newly_flagged_groups": 5,
+          "ordinary": 38,
+          "ordinary_groups": 5,
+          "per_control": {
+            "blur": 4,
+            "feathered_other_photo_paste": 4,
+            "feathered_processing": 4,
+            "feathered_same_image_paste": 5,
+            "global_processing": 1,
+            "hard_other_photo_paste": 4,
+            "hard_same_image_paste": 4,
+            "local_contrast": 4,
+            "local_processing": 4,
+            "original": 4
+          },
+          "sharp": 0,
+          "unassessed_controls": 0,
+          "unassessed_positives": 0,
+          "useful_before_point": 0
+        },
+        "two_distances": {
+          "extra_feathered": 0,
+          "extra_ordinary": 3,
+          "extra_ordinary_groups": 1,
+          "feathered": 0,
+          "generator_hits": {
+            "kandinsky": 0,
+            "sdxl": 0
+          },
+          "newly_flagged_groups": 1,
+          "ordinary": 3,
+          "ordinary_groups": 1,
+          "per_control": {
+            "blur": 0,
+            "feathered_other_photo_paste": 0,
+            "feathered_processing": 0,
+            "feathered_same_image_paste": 1,
+            "global_processing": 0,
+            "hard_other_photo_paste": 1,
+            "hard_same_image_paste": 1,
+            "local_contrast": 0,
+            "local_processing": 0,
+            "original": 0
+          },
+          "sharp": 0,
+          "unassessed_controls": 0,
+          "unassessed_positives": 0,
+          "useful_before_point": 0
+        }
+      },
+      "png": {
+        "format_reference": {
+          "extra_feathered": 0,
+          "extra_ordinary": 0,
+          "extra_ordinary_groups": 0,
+          "feathered": 0,
+          "generator_hits": {
+            "kandinsky": 5,
+            "sdxl": 2
+          },
+          "newly_flagged_groups": 0,
+          "ordinary": 18,
+          "ordinary_groups": 9,
+          "per_control": {
+            "blur": 0,
+            "feathered_other_photo_paste": 0,
+            "feathered_processing": 0,
+            "feathered_same_image_paste": 0,
+            "global_processing": 0,
+            "hard_other_photo_paste": 9,
+            "hard_same_image_paste": 8,
+            "local_contrast": 1,
+            "local_processing": 0,
+            "original": 0
+          },
+          "sharp": 7,
+          "unassessed_controls": 0,
+          "unassessed_positives": 0,
+          "useful_before_point": null
+        },
+        "short_crossing": {
+          "extra_feathered": 0,
+          "extra_ordinary": 23,
+          "extra_ordinary_groups": 4,
+          "feathered": 0,
+          "generator_hits": {
+            "kandinsky": 0,
+            "sdxl": 0
+          },
+          "newly_flagged_groups": 1,
+          "ordinary": 29,
+          "ordinary_groups": 5,
+          "per_control": {
+            "blur": 2,
+            "feathered_other_photo_paste": 3,
+            "feathered_processing": 3,
+            "feathered_same_image_paste": 4,
+            "global_processing": 1,
+            "hard_other_photo_paste": 4,
+            "hard_same_image_paste": 4,
+            "local_contrast": 2,
+            "local_processing": 3,
+            "original": 3
+          },
+          "sharp": 0,
+          "unassessed_controls": 0,
+          "unassessed_positives": 0,
+          "useful_before_point": 1
+        },
+        "two_distances": {
+          "extra_feathered": 0,
+          "extra_ordinary": 3,
+          "extra_ordinary_groups": 1,
+          "feathered": 0,
+          "generator_hits": {
+            "kandinsky": 0,
+            "sdxl": 0
+          },
+          "newly_flagged_groups": 1,
+          "ordinary": 3,
+          "ordinary_groups": 1,
+          "per_control": {
+            "blur": 0,
+            "feathered_other_photo_paste": 0,
+            "feathered_processing": 0,
+            "feathered_same_image_paste": 1,
+            "global_processing": 0,
+            "hard_other_photo_paste": 1,
+            "hard_same_image_paste": 1,
+            "local_contrast": 0,
+            "local_processing": 0,
+            "original": 0
+          },
+          "sharp": 0,
+          "unassessed_controls": 0,
+          "unassessed_positives": 0,
+          "useful_before_point": 0
+        }
+      }
+    }
+  },
+  "schema": "chipmunk.image-contour-continuation-transfer/1",
+  "two_distances_advances": {
+    "jpeg75": false,
+    "png": false
+  },
+  "views": 576
+}

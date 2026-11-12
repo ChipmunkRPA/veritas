@@ -1,0 +1,103 @@
+{
+  "added_source_groups": 2,
+  "advance": false,
+  "cells": {
+    "clean/opus": {
+      "additional": 0,
+      "baseline_flagged": 0,
+      "baseline_localized": 16,
+      "candidate_flagged": 0,
+      "candidate_localized": 9,
+      "controls": 16,
+      "edits": 16,
+      "extra_false": 0
+    },
+    "clean/pcm": {
+      "additional": 0,
+      "baseline_flagged": 0,
+      "baseline_localized": 16,
+      "candidate_flagged": 0,
+      "candidate_localized": 12,
+      "controls": 16,
+      "edits": 16,
+      "extra_false": 0
+    },
+    "native/opus": {
+      "baseline_flagged": 0,
+      "candidate_flagged": 1,
+      "controls": 4,
+      "extra_false": 1
+    },
+    "native/pcm": {
+      "baseline_flagged": 0,
+      "candidate_flagged": 1,
+      "controls": 4,
+      "extra_false": 1
+    },
+    "sequential/opus": {
+      "additional": 1,
+      "baseline_flagged": 0,
+      "baseline_localized": 6,
+      "candidate_flagged": 0,
+      "candidate_localized": 2,
+      "controls": 16,
+      "edits": 16,
+      "extra_false": 0
+    },
+    "sequential/pcm": {
+      "additional": 0,
+      "baseline_flagged": 0,
+      "baseline_localized": 8,
+      "candidate_flagged": 2,
+      "candidate_localized": 2,
+      "controls": 16,
+      "edits": 16,
+      "extra_false": 2
+    },
+    "simultaneous/opus": {
+      "additional": 0,
+      "baseline_flagged": 0,
+      "baseline_localized": 0,
+      "candidate_flagged": 0,
+      "candidate_localized": 0,
+      "controls": 16,
+      "edits": 16,
+      "extra_false": 0
+    },
+    "simultaneous/pcm": {
+      "additional": 1,
+      "baseline_flagged": 0,
+      "baseline_localized": 2,
+      "candidate_flagged": 0,
+      "candidate_localized": 1,
+      "controls": 16,
+      "edits": 16,
+      "extra_false": 0
+    }
+  },
+  "extra_correct": 2,
+  "extra_false": 4,
+  "false_source_groups": 2,
+  "fit_sha256": "011d5d096ca22615366b1a5289546b4285592ca15924bea8d5b9d3382f2760af",
+  "freeze_sha256": "943627198d61e21ec1c1aa2a7ea470d5a5549995ca5457c91d610cf33fb92285",
+  "held_sha256": "2f766ed5d7b48149712061020d7cff5d68a5453e95c2be79512749d4589e6c6a",
+  "method": {
+    "baseline": "Exact and two-band ranges, with waveform fallback when both are empty.",
+    "gate": "At least 8 additional useful locations across four held source groups, <=2 extra held false views from <=1 group, and no flags on native room controls.",
+    "hash": "Two quantized peak frequencies plus the elapsed frame count, with a one-frame tolerance.",
+    "materialization": "500 ms or 650 ms foreground copy with 20 ms tapers; clean and -5 dB room mixtures; PCM and 32 kb/s Opus.",
+    "rank": "Distinct anchor count plus frequency-band and temporal coverage bonuses.",
+    "selection": "Cutoff above the second highest development source-level false maximum across deliveries.",
+    "spectrum": "512-sample Hann; 80-sample hop; salient local peaks between 187.5 Hz and 4.5 kHz.",
+    "truth": "Both spans overlap at least 150 ms of the two copy interiors, with lag error at most 10 ms.",
+    "verify": "Vote across distinct anchor times, with anchors in two bands and across at least three 50 ms cells."
+  },
+  "minimum": 52,
+  "native_flags": 2,
+  "point_sha256": "7e3cabffecd257fc2f081998c139c2d4a0a9625144dc1cb6d48e8c00b59f28ad",
+  "schema": "chipmunk.audio-landmark-repeat/1",
+  "views": [
+    236,
+    200
+  ]
+}

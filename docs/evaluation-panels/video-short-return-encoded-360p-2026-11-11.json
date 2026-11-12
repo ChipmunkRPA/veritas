@@ -1,0 +1,146 @@
+{
+  "assessed_coverage": {
+    "hard_cut": "1",
+    "ordinary": "1",
+    "swap": "1"
+  },
+  "counts": {
+    "hard_cut": {
+      "added_ranges": 0,
+      "assessed": 4,
+      "incumbent_ranges": 0,
+      "not_assessed": 0,
+      "views": 4
+    },
+    "ordinary": {
+      "added_ranges": 0,
+      "assessed": 20,
+      "incumbent_ranges": 2,
+      "not_assessed": 0,
+      "views": 20
+    },
+    "swap": {
+      "added_ranges": 7,
+      "added_wrong_ranges": 0,
+      "additional_correct": 7,
+      "assessed": 8,
+      "combined_correct": 8,
+      "incumbent_correct": 1,
+      "incumbent_ranges": 3,
+      "not_assessed": 0,
+      "views": 8
+    }
+  },
+  "decoded_picture_digests_verified": 4800,
+  "distinct_gain_source_groups": 4,
+  "experiment": {
+    "delivery": {
+      "codec": "H.264",
+      "crf": 23,
+      "dimensions": [
+        640,
+        360
+      ],
+      "rate_hz": 25,
+      "recompression_crf": 36
+    },
+    "detector_base_commit": "3613cba593e600dc34d40ebd6072d36267d6ffa2",
+    "eligible_duration_seconds": 6,
+    "excluded_source_groups_across_three_prior_panels": 18,
+    "frozen_detector_sha256": "815bec3a968b2b555e313791621ab372b1540e88654a859cd19e922246ae6add",
+    "frozen_validator_sha256": "88a3971cfedead11dac4830fff090da5f04a3eab76f369f8404669f06d8fc9d6",
+    "frozen_worker_sha256": "0e684b5712416fdf4c15279307b5e950b5ff563e22cca3bcaab01de9bb53d16a",
+    "native_source_groups_by_height": {
+      "1080": 2,
+      "720": 2
+    },
+    "paid_before_analysis_and_idempotency_checked": true,
+    "payments": "local test transport only",
+    "prior_panel_freeze_sha256": [
+      "65f46eb1edd695e0dae138d9c646e146ca56b8fc232d1ff7d6eae1359b6786b6",
+      "fb477a8811040a1702314f45ecc4444c17bbabac98c6cf2b92dd891635c79536",
+      "51f382ad84ee34404862ff7ae12f99435405895d9f8202be602ccab722ef6a79"
+    ],
+    "review_contributes_to_overall_confidence": false
+  },
+  "frame_and_crop_pngs_verified": 42,
+  "freeze_sha256": "97e2c8ef6da843d46fc5e8cf0e10b658cc07539ccb92267802bc6ae5be3073b7",
+  "gate": "At least four added correct short intervals across three source groups; at least 80% assessed separately for swaps and ordinary controls; at most one new matched ordinary flag and zero new hard-cut flags.",
+  "journal_sha256": "4c43539ffda9849af7b1cf2f571a89f322b2988d02d04cc1212912966dbd3f99",
+  "maximum_added_endpoint_error_ms": 80.0,
+  "media_manifest_sha256": "97279e9240918be53a8df2d8619a92f4bd9b91ba1c1e35c4de8382fce30bf3b3",
+  "median_added_iou": 0.6363636363636364,
+  "pilot_advances": true,
+  "schema": "chipmunk.video-short-return-encoded-audit/1",
+  "serving_replay": {
+    "assessed_coverage": {},
+    "checkout_and_unpaid_event_queued_zero_analyses": true,
+    "counts": {
+      "hard_cut": {
+        "added_ranges": 0,
+        "assessed": 1,
+        "incumbent_ranges": 0,
+        "not_assessed": 0,
+        "views": 1
+      },
+      "ordinary": {
+        "added_ranges": 0,
+        "assessed": 1,
+        "incumbent_ranges": 0,
+        "not_assessed": 0,
+        "views": 1
+      },
+      "swap": {
+        "added_ranges": 1,
+        "added_wrong_ranges": 0,
+        "additional_correct": 1,
+        "assessed": 1,
+        "combined_correct": 1,
+        "incumbent_correct": 0,
+        "incumbent_ranges": 0,
+        "not_assessed": 0,
+        "views": 1
+      }
+    },
+    "decoded_picture_digests_verified": 450,
+    "distinct_gain_source_groups": 1,
+    "evidence_api_matches_json_export": true,
+    "frame_and_crop_pngs_verified": 6,
+    "freeze_sha256": "97e2c8ef6da843d46fc5e8cf0e10b658cc07539ccb92267802bc6ae5be3073b7",
+    "gate": "At least four added correct short intervals across three source groups; at least 80% assessed separately for swaps and ordinary controls; at most one new matched ordinary flag and zero new hard-cut flags.",
+    "historical_packets": {
+      "1080p25": {
+        "independently_pinned_signer": false,
+        "original_source_replayed": true,
+        "verification": "self_consistent"
+      },
+      "720p25": {
+        "independently_pinned_signer": false,
+        "original_source_replayed": true,
+        "verification": "self_consistent"
+      }
+    },
+    "journal_sha256": "c59f9c11af4feefc73946b126745713ba81270b644ec596af59f2cdc3452f17a",
+    "maximum_added_endpoint_error_ms": 80.0,
+    "media_manifest_sha256": "97279e9240918be53a8df2d8619a92f4bd9b91ba1c1e35c4de8382fce30bf3b3",
+    "median_added_iou": 0.6363636363636364,
+    "off_on_decision_parity": true,
+    "paid_analyses": 6,
+    "paid_delivery_queued_exactly_once": true,
+    "pdf_embedded_all_six_exact_pictures": true,
+    "pilot_advances": null,
+    "sample_ground_truth_seconds": [
+      2.68,
+      3.04
+    ],
+    "sample_selected_seconds": [
+      2.76,
+      3.12
+    ],
+    "schema": "chipmunk.video-short-return-encoded-audit/1",
+    "shared_production_profile": true,
+    "signed_package_replayed_original_upload": true,
+    "views": 3
+  },
+  "views": 32
+}

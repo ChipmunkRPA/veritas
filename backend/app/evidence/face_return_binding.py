@@ -13,6 +13,11 @@ METHOD = "face-short-return/1"
 POINT = 0.10
 SCENE_POINT = 0.55
 ROLES = ("before", "during", "after")
+PROFILE_STEPS = {
+    (1920, 1080): (Fraction(1, 25), Fraction(1, 30)),
+    (1280, 720): (Fraction(1, 25),),
+    (640, 360): (Fraction(1, 25),),
+}
 _SHA = re.compile(r"[a-f0-9]{64}")
 
 
@@ -74,7 +79,8 @@ def validate_record(record, source, *, table_pts=None, interpolated=(), rotation
     _require(record["method"] == METHOD and record["time_base"] == source["time_base"],
              "Short face-change method or source clock differs")
     dimensions = (source["width"], source["height"])
-    _require(dimensions in ((1920, 1080), (1280, 720)) and not (rotation or truncated or interpolated),
+    allowed_steps = PROFILE_STEPS.get(dimensions)
+    _require(allowed_steps is not None and not (rotation or truncated or interpolated),
              "Short face-change evidence requires a supported upright source and complete native timestamps")
     base = Fraction(source["time_base"])
     a, b = record["start_pts"], record["end_pts"]
@@ -108,7 +114,6 @@ def validate_record(record, source, *, table_pts=None, interpolated=(), rotation
     if table_pts is not None:
         times = [(pts - table_pts[0]) * base for pts in table_pts]
         step = times[1] - times[0]
-        allowed_steps = (Fraction(1, 25),) if dimensions == (1280, 720) else (Fraction(1, 25), Fraction(1, 30))
         _require(step in allowed_steps and 2 <= times[-1] + step <= 8
                  and all(t == i * step for i, t in enumerate(times)),
                  "Short face-change evidence requires a bounded native frame clock")
@@ -125,14 +130,14 @@ def validate_record(record, source, *, table_pts=None, interpolated=(), rotation
     _require(indices == [scheduled[entry - 1], scheduled[entry], scheduled[exit_ - 1], scheduled[exit_]]
              and (scene[indices[1]]["pts"], scene[indices[3]]["pts"]) == (a, b),
              "Short face-change scene samples disagree with its boundary positions")
-    if dimensions == (1280, 720):
+    if allowed_steps == (Fraction(1, 25),):
         # A verifier without the original source still checks the clock of every committed picture.
         first = before[0]
         first_pts = faces[first]["pts"]
         _require(source["frame_count"] <= 200 and all(
             (item["pts"] - first_pts) * base == Fraction(i - first, 25)
             for i, item in (*faces.items(), *scene.items())),
-            "Short 720p face-change evidence requires an exact 25 Hz source clock")
+            "Short face-change evidence requires an exact 25 Hz source clock")
     for i in faces.keys() & scene.keys():
         _require(all(faces[i][key] == scene[i][key] for key in ("pts", "decoded_rgb_sha256")),
                  "Short face and scene measurements disagree on a source picture")

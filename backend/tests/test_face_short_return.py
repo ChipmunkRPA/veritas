@@ -63,7 +63,9 @@ def test_scope_and_exclusive_overlap_are_exact():
     assert face_return.schedule(table_for(24)) is None
     assert face_return.schedule(replace(table, width=1280, height=720)) == face_return.schedule(table)
     assert face_return.schedule(replace(table_for(30), width=1280, height=720)) is None
-    assert face_return.schedule(replace(table, width=640, height=360)) is None
+    assert face_return.schedule(replace(table, width=640, height=360)) == face_return.schedule(table)
+    assert face_return.schedule(replace(table_for(30), width=640, height=360)) is None
+    assert face_return.schedule(replace(table, width=854, height=480)) is None
     candidate = face_return.Range(10, 19, .2, (1., 1.), ((0, 1, 2), (10, 12, 15), (19, 22, 25)), (8, 10, 17, 19))
     assert face_return.distinct(candidate, table, None)
     assert not face_return.distinct(candidate, table, {"start_pts": table.pts[10], "end_pts": table.pts[28]})

@@ -12,6 +12,7 @@ import numpy as np
 
 from app.detectors.image.faces import Face, iou
 from app.detectors.video.decode import FrameTable
+from app.evidence.face_return_binding import PROFILE_STEPS
 
 METHOD = "face-short-return/1"
 POINT = .10
@@ -26,7 +27,6 @@ MINIMUM_TILE_COUNT = 8
 SCENE_CORRELATION_POINT = .55
 MAX_GAP = .26
 MINIMUM_FACE_IOU = .25
-PROFILE_STEPS = {(1920, 1080): (Fraction(1, 25), Fraction(1, 30)), (1280, 720): (Fraction(1, 25),)}
 
 
 @dataclass(frozen=True)
@@ -51,7 +51,7 @@ class Range:
 
 
 def schedule(table: FrameTable) -> tuple[tuple[Fraction, ...], tuple[int, ...]] | None:
-    """Use a bounded scan on exact upright 1080p25/30 and 720p25 clocks."""
+    """Use a bounded scan on exact upright 1080p25/30, 720p25, and 360p25 clocks."""
     allowed_steps = PROFILE_STEPS.get((table.width, table.height))
     if table.rotation or table.interpolated or table.truncated or allowed_steps is None:
         return None

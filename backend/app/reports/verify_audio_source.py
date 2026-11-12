@@ -66,8 +66,11 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         raise ValueError("Decoded audio stream or source timeline differs from its commitment")
     if "audio_stream_indices" in source and source["audio_stream_indices"] != decoded.mapping.get("audio_stream_indices"):
         raise ValueError("Audio track coverage differs from the original container")
-    if "source_codec" in source and source["source_codec"] != decoded.mapping.get("source_codec"):
-        raise ValueError("Audio codec scope differs from the original container")
+    if "source_codec" in source:
+        from app.evidence.audio_short_review_binding import source_metadata
+
+        if source_metadata(source) != source_metadata(decoded.mapping):
+            raise ValueError("Audio codec scope differs from the original container")
     if audio["coverage"]["decode_limit_reached"] != (len(decoded.pcm) >= decoded.mapping["limit_samples"]):
         raise ValueError("Decoded audio duration disagrees with the recorded coverage limit")
 

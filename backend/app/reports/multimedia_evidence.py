@@ -345,11 +345,12 @@ def _verify_audio(document: dict, store: ObjectStore, assets: dict[str, bytes], 
             raise ObjectIntegrityError("Frozen sound-category evidence differs from its recorded inputs") from error
     if (review := document.get("short_voice_review")) is not None:
         from app.evidence import audio_packets, audio_short_review
+        from app.evidence.audio_short_review_binding import source_metadata
 
         result = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
         record = result["manifest"]["sampling"]["audio_evidence"]["short_voice_review"]
         try:
-            if source.get("source_codec") != mapping.get("source_codec"):
+            if source_metadata(source) != source_metadata(mapping):
                 raise ValueError("Audio codec scope changed")
             audio_short_review.verify(review, record, store=store, source=source, pcm=pcm, mapping=mapping,
                                      read_asset=assets.__getitem__, waveform=audio_packets._chart)

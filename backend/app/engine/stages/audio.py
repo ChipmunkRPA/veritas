@@ -179,7 +179,7 @@ def _short_voice_review(ctx: StageContext, track, entries: list[dict]) -> dict:
     if settings.audio_detector_mode != "candidate":
         return short_voice_review.skipped("The short-window check is unavailable in this audio configuration.")
     facts = ctx.outputs["probe"]["facts"]
-    if (Profile(ctx.profile) is not Profile.FULL or facts.get("container") != "wav"
+    if (Profile(ctx.profile) is not Profile.FULL or facts.get("container") not in {"wav", "flac"}
             or not ctx.outputs["decode"].get("short_voice_review_source_supported")):
         return short_voice_review.skipped(SCOPE_REASON)
     if not any(e.get("detector_id") == short_voice_review.PellaVoiceDetector.spec.id and e.get("status") == "ok" for e in entries):

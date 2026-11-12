@@ -123,7 +123,8 @@ def decode_audio(path: Path, *, source_sha256: str, max_seconds: float = 600.0,
         if hashlib.file_digest(stream, "sha256").hexdigest() != source_sha256:
             raise ValueError("The audio decoder input differs from the recorded original")
     try:
-        entries = "stream=index,channels,channel_layout,sample_rate,codec_name,time_base,start_pts,duration:format=start_time,duration"
+        entries = ("stream=index,channels,channel_layout,sample_rate,codec_name,bits_per_raw_sample,time_base,start_pts,duration"
+                   ":format=format_name,start_time,duration")
         probe = subprocess.run(["ffprobe", "-v", "error", "-protocol_whitelist", "file", "-select_streams", "a",
                                 "-show_entries", entries, "-of", "json", _input(path)],
                                capture_output=True, text=True, timeout=60, check=True, stdin=subprocess.DEVNULL)
@@ -193,6 +194,10 @@ def decode_audio(path: Path, *, source_sha256: str, max_seconds: float = 600.0,
             "source_timing_precision_s": 1 / SAMPLE_RATE,
             "limit_samples": maximum,
         }
+        if mapping["source_codec"] == "flac":
+            mapping["source_container"] = fmt.get("format_name")
+            bits = _number(stream.get("bits_per_raw_sample"))
+            mapping["source_bit_depth"] = int(bits) if bits is not None else None
         if len(streams) > 1:
             mapping["audio_stream_indices"] = [int(track["index"]) for track in streams]
         verified_stereo = None

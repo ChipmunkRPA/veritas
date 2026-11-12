@@ -1,6 +1,8 @@
 from contextlib import nullcontext
 from copy import deepcopy
 from hashlib import sha256
+from shutil import which
+from subprocess import run
 from threading import Event
 from types import SimpleNamespace
 
@@ -10,7 +12,7 @@ import pytest
 from app.core.canonical import canonical_json
 from app.core.config import settings
 from app.detectors.audio import short_voice_review
-from app.detectors.audio.decode import read_wav
+from app.detectors.audio.decode import decode_audio, read_wav, wav_bytes
 from app.detectors.video.adapters.common import AudioTrack
 from app.engine import boundary
 from app.engine.boundary import Cancelled, Deadline
@@ -31,10 +33,29 @@ def source(pcm):
 def test_scope_excludes_lossy_stereo_multitrack_and_clock_changes():
     mapping = source(np.zeros(binding.SAMPLES, np.float32))
     assert binding.supported_source(mapping)
+    flac = mapping | {"source_codec": "flac", "source_container": "flac", "source_bit_depth": 16}
+    assert binding.supported_source(flac)
+    assert not binding.supported_source(flac | {"source_bit_depth": 24})
+    assert not binding.supported_source(flac | {"source_container": "ogg"})
     assert not binding.supported_source(mapping | {"source_codec": "opus"})
     assert not binding.supported_source(mapping | {"source_channels": 2})
     assert not binding.supported_source(mapping | {"audio_stream_indices": [0, 1]})
     assert not binding.supported_source(mapping | {"timeline": [dict(mapping["timeline"][0], source_pts=1)]})
+
+
+@pytest.mark.skipif(not which("ffmpeg") or not which("ffprobe"), reason="Requires the local audio decoder")
+def test_native_flac_depth_and_exact_decoded_samples(tmp_path):
+    source_pcm = np.arange(binding.SAMPLES, dtype=np.int32).astype("<i2").astype(np.float32) / 32768
+    input_wav = tmp_path / "source.wav"
+    input_wav.write_bytes(wav_bytes(source_pcm))
+    for depth, sample_format in ((16, "s16"), (24, "s32")):
+        output = tmp_path / f"source-{depth}.flac"
+        run(["ffmpeg", "-nostdin", "-v", "error", "-i", str(input_wav), "-c:a", "flac",
+             "-sample_fmt", sample_format, "-bits_per_raw_sample", str(depth), str(output)], check=True)
+        decoded = decode_audio(output, source_sha256=sha256(output.read_bytes()).hexdigest())
+        assert decoded.mapping["source_container"] == "flac" and decoded.mapping["source_bit_depth"] == depth
+        assert binding.supported_source(decoded.mapping) == (depth == 16)
+        np.testing.assert_array_equal(decoded.pcm, source_pcm)
 
 
 @pytest.mark.parametrize("optional", [DetectorResult.timeout("slow"), DetectorResult.failed("invalid")])

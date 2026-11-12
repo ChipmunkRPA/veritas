@@ -319,8 +319,9 @@ def build_content(db: Session, analysis: Analysis, store: ObjectStore, result: d
         document["source"]["audio_stream_indices"] = mapping["audio_stream_indices"]
     if analysis.kind == "audio" and (review := record.get("short_voice_review")):
         from app.evidence.audio_short_review import build as build_short_voice_review
+        from app.evidence.audio_short_review_binding import source_metadata
 
-        document["source"]["source_codec"] = mapping.get("source_codec")
+        document["source"].update(source_metadata(mapping))
         document["short_voice_review"] = build_short_voice_review(
             review, store=store, source=document["source"], pcm=pcm, mapping=mapping,
             asset=lambda data, media_type, **metadata: _asset(db, store, analysis, set_id, data, media_type, **metadata),

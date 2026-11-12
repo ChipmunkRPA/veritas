@@ -13,15 +13,26 @@ REVIEW_POINT = 6.822523597593649
 TITLE = "Short speech-window review"
 LIMITATION = ("This is a clue for the complete two-second window. It cannot establish AI generation or the boundaries "
               "of an edit. It carries no weight in the overall assessment.")
-SCOPE_REASON = "This check requires Full analysis of a six-second, 16 kHz mono PCM WAV with a continuous source clock."
+SCOPE_REASON = "This check requires Full analysis of a six-second, 16 kHz, 16-bit mono WAV or FLAC with a continuous source clock."
+
+
+def source_metadata(mapping: dict) -> dict:
+    metadata = {"source_codec": mapping.get("source_codec")}
+    if metadata["source_codec"] == "flac":
+        metadata["source_container"] = mapping.get("source_container")
+        metadata["source_bit_depth"] = mapping.get("source_bit_depth")
+    return metadata
 
 
 def supported_source(mapping: dict) -> bool:
+    codec = mapping.get("source_codec")
+    lossless = codec == "pcm_s16le" or (
+        codec == "flac" and mapping.get("source_container") == "flac" and mapping.get("source_bit_depth") == 16
+    )
     return (
-        mapping.get("samples") == SAMPLES
+        lossless and mapping.get("samples") == SAMPLES
         and mapping.get("sample_rate") == mapping.get("source_sample_rate") == RATE
         and mapping.get("channels") == mapping.get("source_channels") == 1
-        and mapping.get("source_codec") == "pcm_s16le"
         and len(mapping.get("audio_stream_indices", [0])) == 1
         and mapping.get("timeline_time_base") == "1/16000"
         and mapping.get("timeline") == [{"start_sample": 0, "end_sample": SAMPLES, "source_pts": 0}]

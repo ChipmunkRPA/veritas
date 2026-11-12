@@ -22,7 +22,10 @@ MAX_SELECTED_FRACTION = .25
 PILOT_COMPONENT_FRACTION = .0012
 CONFIRMATION_COMPONENT_FRACTION = .004
 KERNELS = (Image.Resampling.LANCZOS, Image.Resampling.BOX)
-ROTATIONS = {3: Image.Transpose.ROTATE_180, 6: Image.Transpose.ROTATE_270, 8: Image.Transpose.ROTATE_90}
+TRANSFORMS = {2: Image.Transpose.FLIP_LEFT_RIGHT, 3: Image.Transpose.ROTATE_180,
+              4: Image.Transpose.FLIP_TOP_BOTTOM, 5: Image.Transpose.TRANSPOSE,
+              6: Image.Transpose.ROTATE_270, 7: Image.Transpose.TRANSVERSE, 8: Image.Transpose.ROTATE_90}
+SWAPPED_AXES = frozenset({5, 6, 7, 8})
 
 
 def _trim(image):
@@ -46,7 +49,7 @@ def _preview(blob, native_size, operation=0):
         if image.format != "JPEG" or min(image.size) < MIN_SIDE or max(image.size) > MAX_SIDE:
             return None
         rgb = image.convert("RGB")
-        image = np.asarray(rgb.transpose(ROTATIONS[operation]) if operation else rgb)
+        image = np.asarray(rgb.transpose(TRANSFORMS[operation]) if operation else rgb)
     native_aspect = native_size[0] / native_size[1]
     if abs((image.shape[1] / image.shape[0]) / native_aspect - 1) <= MAX_ASPECT_DELTA:
         h, w = image.shape[:2]
@@ -150,12 +153,12 @@ def measure(data: bytes, *, minimum_component_fraction: float = PILOT_COMPONENT_
         exif = original.getexif()
         orientation = exif.get(274, 1)
         if (original.format != "JPEG" or raw[0] * raw[1] > MAX_MAIN_PIXELS or min(raw) < 160
-                or orientation not in (1, *ROTATIONS)):
+                or orientation not in (1, *TRANSFORMS)):
             return {"status": "unsupported_carrier"}, None
         blob = _pillow_thumbnail(original, exif)
         if blob is None:
             return {"status": "no_retained_thumbnail"}, None
-        native_size = raw[::-1] if orientation in (6, 8) else raw
+        native_size = raw[::-1] if orientation in SWAPPED_AXES else raw
         if orientation == 1:
             proof = _preview(blob, native_size)
             if proof is None:
@@ -174,7 +177,7 @@ def measure(data: bytes, *, minimum_component_fraction: float = PILOT_COMPONENT_
             return {"status": "unsupported_thumbnail"}, None
         edge = max(preview_size)
         original.draft("RGB", tuple(round(3 * edge * n / max(raw)) for n in raw))
-        main = original.convert("RGB").transpose(ROTATIONS[orientation])
+        main = original.convert("RGB").transpose(TRANSFORMS[orientation])
 
     matches = []
     for operation, (before, trim) in proofs:

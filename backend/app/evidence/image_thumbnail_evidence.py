@@ -49,11 +49,13 @@ def _stored_preview_bounds(region, measurement):
         return box
     width, height = measurement["preview_raw_size"]
     x, y, w, h = (box[key] for key in BOX_KEYS)
-    if orientation == 3:
-        return {"x": width - x - w, "y": height - y - h, "w": w, "h": h}
-    if orientation == 6:
-        return {"x": y, "y": height - x - w, "w": h, "h": w}
-    return {"x": width - y - h, "y": x, "w": h, "h": w}
+    if orientation in localization.SWAPPED_AXES:
+        x, y, w, h = y, x, h, w
+    if orientation in (2, 3, 7, 8):
+        x = width - x - w
+    if orientation in (3, 4, 6, 7):
+        y = height - y - h
+    return {"x": x, "y": y, "w": w, "h": h}
 
 
 def _coordinates(box):
@@ -137,10 +139,11 @@ def from_result(result):
     rows, orientations = [], set()
     try:
         for region, main, thumb, marked, main_size, thumb_size, *orientation in table["rows"]:
-            main_tag, preview_turn = map(int, orientation[0].split(",")) if orientation else (1, 0)
-            if len(orientation) > 1 or (main_tag, preview_turn) not in {(1, 0), (3, 0), (3, 3), (6, 0), (6, 6), (8, 0), (8, 8)}:
+            main_tag, preview_alignment = map(int, orientation[0].split(",")) if orientation else (1, 0)
+            if (len(orientation) > 1 or main_tag not in (1, *localization.TRANSFORMS)
+                    or (preview_alignment != 0 and (main_tag == 1 or preview_alignment != main_tag))):
                 return None
-            orientations.add((main_tag, preview_turn))
+            orientations.add((main_tag, preview_alignment))
             photos = {key: crops[f"{name} {region}"] for key, name in (("main_image", MAIN), ("embedded_preview", PREVIEW))}
             boxes = {key: dict(zip(BOX_KEYS, map(int, data.split(",")), strict=True))
                      for key, data in (("main_image", main), ("embedded_preview", thumb))}

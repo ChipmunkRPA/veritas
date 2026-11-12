@@ -18,20 +18,22 @@ from app.reports import engine, figures
 from app.reports.specimens import specimen
 from app.storage.objects import ObjectStore
 from scripts.image_thumbnail_localization_transfer import color_patch, jpeg, preview_from, thumbnail
+from scripts.image_thumbnail_mirror_transfer import OPERATIONS as MIRRORS
 from scripts.image_thumbnail_orientation_transfer import encode as rotated_carrier
 
 
-def _pair(orientation=1):
+def _pair(orientation=1, *, display_preview=False):
     rng = np.random.default_rng(1)
     colors = rng.integers(0, 256, (15, 20, 3), dtype=np.uint8)
     smooth = cv2.resize(colors, (512, 384), interpolation=cv2.INTER_CUBIC).astype(np.float32) * .60 + 52
     before = np.clip(np.rint(smooth + rng.normal(0, 3, smooth.shape)), 0, 255).astype(np.uint8)
     earlier = Image.fromarray(before)
     changed = Image.fromarray(color_patch(before, 1))
-    if orientation == 6:
-        earlier, changed = (image.transpose(Image.Transpose.ROTATE_90) for image in (earlier, changed))
-        embedded = thumbnail(earlier)
-        return rotated_carrier(changed, orientation, embedded), rotated_carrier(earlier, orientation, embedded)
+    if orientation != 1:
+        inverse = Image.Transpose.ROTATE_90 if orientation == 6 else MIRRORS[orientation]
+        before_raw, after_raw = (image.transpose(inverse) for image in (earlier, changed))
+        embedded = thumbnail(earlier if display_preview else before_raw)
+        return rotated_carrier(after_raw, orientation, embedded), rotated_carrier(before_raw, orientation, embedded)
     embedded = thumbnail(earlier)
     return jpeg(changed, preview=embedded), jpeg(earlier, preview=embedded)
 
@@ -56,9 +58,9 @@ def _run(store, source, monkeypatch):
 
 
 @pytest.mark.parametrize("profile", ["standard", "summary"])
-@pytest.mark.parametrize("orientation", [1, 6])
-def test_report_and_export_keep_source_crops_with_numeric_coordinates(tmp_path, monkeypatch, profile, orientation):
-    altered, clean = _pair(orientation)
+@pytest.mark.parametrize(("orientation", "display_preview"), [(1, False), (6, False), (2, False), (4, True), (5, False), (7, True)])
+def test_report_and_export_keep_source_crops_with_numeric_coordinates(tmp_path, monkeypatch, profile, orientation, display_preview):
+    altered, clean = _pair(orientation, display_preview=display_preview)
     store = ObjectStore(tmp_path / "objects")
     clean_outcome, clean_result = _run(store, clean, monkeypatch)
     assert clean_outcome.status == "ok"
@@ -68,9 +70,12 @@ def test_report_and_export_keep_source_crops_with_numeric_coordinates(tmp_path, 
     published = evidence.from_result(result)
     assert published["source_sha256"] == result["input"]["sha256"]
     assert published["main_exif_orientation"] == orientation
-    assert published["preview_alignment_orientation"] == (orientation if orientation != 1 else 0)
+    assert published["preview_alignment_orientation"] == (orientation if orientation != 1 and not display_preview else 0)
     assert published["authorship_confidence_contribution"] == 0
-    assert positive.aggregate is None and positive.unit_scores == []
+    with monkeypatch.context() as before:
+        before.setattr(localization, "measure", lambda *_args, **_kwargs: ({"status": "unsupported_carrier"}, None))
+        baseline, _ = _run(store, altered, before)
+    assert positive.aggregate == baseline.aggregate and positive.unit_scores == baseline.unit_scores
     assert any(item["title"] == "Embedded thumbnail vs main image" for item in result["exhibits"])
     for region in published["regions"]:
         for role, source in (("main_image", altered), ("embedded_preview", preview_from(altered))):

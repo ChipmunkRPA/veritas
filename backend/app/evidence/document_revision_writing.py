@@ -19,6 +19,9 @@ WORD_SCOPE = ("This experimental check compares one changed sentence and its two
 EMAIL_SCOPE = ("This experimental check compares one changed sentence and its two unchanged neighbors within one "
                "paragraph of a short English email body. The check covers only the reply body. Responses are "
                "uncalibrated and carry zero authorship confidence weight.")
+PDF_SCOPE = ("This experimental check compares one changed sentence and two unchanged neighboring sentences in one "
+             "text block on a single upright PDF page with selectable text and a verified reading order. Responses are "
+             "uncalibrated and carry zero authorship confidence weight.")
 STATUS_TEXT = {
     "outside_scope": "This draft pair falls outside the exact single-sentence comparison scope.",
     "unavailable": "The local writing checks could not complete the paired comparison.",
@@ -50,7 +53,7 @@ def paired_input(comparison: dict, earlier: str, later: str) -> PairedInput | No
     changes = comparison["changes"]
     if comparison["format"] == "email":
         changes = [change for change in changes if change["role"] == "body"]
-    if comparison["format"] not in ("plain_text", "docx", "email") or not changes:
+    if comparison["format"] not in ("plain_text", "docx", "email", "pdf") or not changes:
         return None
     old, new = _source(earlier), _source(later)
     if old is None or new is None:
@@ -112,6 +115,14 @@ def paired_input(comparison: dict, earlier: str, later: str) -> PairedInput | No
                 anchors.add((anchor["body_index"], start))
             if len(anchors) != 1:
                 return None
+    if comparison["format"] == "pdf":
+        for side in ("earlier", "later"):
+            for change in changes:
+                item = change[side]
+                pages = item.get("pdf_pages") or []
+                if (len(pages) != 1 or pages[0]["page"] != 1 or pages[0]["page_rotation"] != 0
+                        or (item["changed_tokens"] and not pages[0]["word_regions"])):
+                    return None
     return PairedInput(old_input, new_input, {"earlier": before, "later": after,
                                              "change_ids": [change["id"] for change in changes]})
 
@@ -133,7 +144,7 @@ def _direction(responses: list[dict]) -> str:
 
 def result(candidate: PairedInput | None, responses: list[dict] | None = None, *, draft_format: str = "plain_text") -> dict:
     status = "outside_scope" if candidate is None else _direction(responses) if responses is not None else "unavailable"
-    scope = {"docx": WORD_SCOPE, "email": EMAIL_SCOPE}.get(draft_format, SCOPE)
+    scope = {"docx": WORD_SCOPE, "email": EMAIL_SCOPE, "pdf": PDF_SCOPE}.get(draft_format, SCOPE)
     value = {"schema": SCHEMA, "status": status, "scope": scope,
              "summary": STATUS_TEXT[status],
              "authorship_confidence_contribution": 0}

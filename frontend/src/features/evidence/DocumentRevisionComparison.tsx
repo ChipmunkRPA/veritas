@@ -166,6 +166,7 @@ function DraftForm({ analysisId, extension, pairedCheckAvailable }: {
     {extension === '.docx' && <p className="mt-2 mb-0 text-small text-text-muted">Checks wording and punctuation in body paragraphs.</p>}
     {extension === '.eml' && <p className="mt-2 mb-0 text-small text-text-muted">Use two plain-text emails or two HTML-only replies with two, three, five or six simple body paragraphs and a trailing blockquote.</p>}
     {extension === '.pdf' && <p className="mt-2 mb-0 text-small text-text-muted">Use unlocked PDFs with selectable text on every page, up to 12 pages each.</p>}
+    {extension === '.pdf' && pairedCheckAvailable && <p className="mt-2 mb-0 text-small text-text-muted">The paired writing check covers one upright page per draft with selectable text and an unambiguous reading order.</p>}
     <form onSubmit={event => void submit(event)} className="mt-4 flex flex-wrap items-end gap-3">
       <div className="min-w-0">
         <label htmlFor={inputId} className="mb-1 block text-small font-medium">Earlier draft</label>

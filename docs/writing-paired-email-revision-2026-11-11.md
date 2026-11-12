@@ -1,6 +1,6 @@
 # Comparing an analyzed message with an earlier draft
 
-Chipmunk Verify can compare an uploaded earlier draft with the retained original of a completed local analysis. Enable `VERITAS_DOCUMENT_REVISION_COMPARISON_ENABLED=true` in development, then sign in and open a completed `.eml`, `.txt` or `.docx` analysis. The comparison requires the same format on both sides and an active revision. A session or API key must have access to the retained analysis.
+Chipmunk Verify can compare an uploaded earlier draft with the retained original of a completed local analysis. Enable `VERITAS_DOCUMENT_REVISION_COMPARISON_ENABLED=true` in development, then sign in and open a completed `.eml`, `.txt`, `.docx` or `.pdf` analysis. The comparison requires the same format on both sides and an active revision. A session or API key must have access to the retained analysis.
 
 The comparison highlights changed words and punctuation side by side. Intervening unchanged text stays unmarked. For email, the selected plain-text MIME body, marked quotes and signatures use distinct evidence sections. The source excerpts preserve their decoded spelling and spacing. Each range counts Unicode code points, includes its start and excludes its end. The same ranges, excerpts and file hashes are available in the standalone JSON and PDF. The comparison leaves the analysis result and its confidence calculation alone. The earlier file is transient, and the comparison requires no new analysis or payment.
 
@@ -35,6 +35,12 @@ The run completed 57 CPU forwards over 223 model-input combinations. A separate 
 ## Email format verification
 
 The authenticated local **Compare with an earlier draft** form now offers the optional paired writing check on matching plain-text `.eml` files and supported HTML-only replies. One changed sentence must have two unchanged neighbors in the same body paragraph. The score uses the exact body context from each draft. Marked quotes, signatures, attachments and headers stay outside the paired reading. The report links each body result to the exact wording changes and MIME parts of the two files. This check uses uncalibrated model responses and adds zero authorship confidence weight.
+
+## Selectable PDF drafts
+
+The optional paired check also accepts two single-page, upright PDFs with selectable text and complete native word boxes in a consistent reading order. It compares a changed sentence and its two unchanged neighbors in one text block. The existing comparison links the result to exact changed-word coordinates and highlighted source crops. Multi-page and rotated PDFs can still use the basic wording comparison when eligible.
+
+Four local comparisons repackaged two previously measured journal works as native PDF drafts. Both known generated rewrites reproduced the earlier increase, and neither genuine later revision showed a joint increase. The exact text-window hashes matched the earlier measurements in all four. Original-file replay verified 68 changed word boxes and 17 source previews across the four JSON exports and generated comparison reports. These examples verify the PDF path on selected known inputs. [Earlier journal evaluation](writing-journal-body-transfer-2026-11-11.md)
 
 Rewrapping 53 previously evaluated English journal draft pairs in each email format preserved all 34 eligible pairs and their exact classifier inputs. Each format reproduced five joint increases on 23 eligible generated rewrites and zero on 11 eligible ordinary revisions using saved responses. The bodies, including their surrounding sentences, were previously used in the journal study. The new deliveries changed the trailing quotation independently of the body. Four authenticated local API comparisons re-ran both installed checkpoints and verified source positions, PDF, JSON and offline replay. Quote-only changes stayed outside the optional check. [Original source panel](writing-journal-body-transfer-2026-11-11.md)
 

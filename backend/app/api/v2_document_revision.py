@@ -186,7 +186,7 @@ def _unavailable() -> ProblemError:
 
 
 def _paired_enabled(extension: str | None) -> bool:
-    if extension not in (".txt", ".docx", ".eml"):
+    if extension not in (".txt", ".docx", ".eml", ".pdf"):
         return False
     from app.detectors.text.adapters.agreement import enabled as writing_review_enabled
 
@@ -227,7 +227,8 @@ def _compare(aid: str, original: tuple[str, int, str], earlier: bytes, include_p
         raise ProblemError(409, "Original integrity check failed", "The retained document no longer matches its recorded hash and size.")
     paired_enabled = include_paired_check and _paired_enabled(extension)
     try:
-        comparison, old_text, new_text = compare_with_text(earlier, later, extension, email_body_only=paired_enabled)
+        comparison, old_text, new_text = compare_with_text(earlier, later, extension, email_body_only=paired_enabled,
+                                                          pdf_paired_text_only=paired_enabled)
     except (UnicodeError, LookupError, RecursionError):
         raise ProblemError(422, "Could not compare drafts", f"Use readable {SUPPORTED_DRAFTS}.") from None
     except ValueError as error:

@@ -111,6 +111,7 @@ def _upload(data, extension=".eml"):
 
 def test_pdf_comparison_binds_repeated_text_to_both_original_pages(reference_http, monkeypatch, tmp_path):
     f = _install(reference_http, monkeypatch)
+    monkeypatch.setattr(settings, "text_checkpoint_agreement_review", False)
     earlier, later = _pdf_draft("amber", 90), _pdf_draft("green", 0)
     retained = _saved(f, "pdf-draft", ".pdf", later)
     url = _url("pdf-draft")
@@ -167,6 +168,73 @@ def test_pdf_comparison_binds_repeated_text_to_both_original_pages(reference_htt
     exported.write_text(json.dumps(comparison))
     with pytest.raises(ValueError, match="does not replay"):
         review(exported, old, new)
+
+
+def test_single_page_pdf_paired_review_keeps_page_evidence_and_replays(reference_http, monkeypatch, tmp_path):
+    f = _install(reference_http, monkeypatch)
+    monkeypatch.setattr(settings, "text_detector_mode", "candidate")
+    monkeypatch.setattr(settings, "text_window_sentences", 3)
+    monkeypatch.setattr(settings, "text_checkpoint_agreement_review", True)
+    prefix = "The committee met on Monday morning to review the budget. "
+    earlier_sentence = "The draft gives the survey date and meeting location."
+    later_sentence = "The revision includes a detailed account of the survey and its outcomes."
+    suffix = " The final minutes will be available after the next meeting."
+
+    def pdf(sentence, layout="single"):
+        with pymupdf.open() as document:
+            page = document.new_page()
+            right = 325 if layout == "columns" else 530
+            assert page.insert_textbox((54, 55, right, 300), prefix + sentence + suffix, fontsize=11, lineheight=1.32) >= 0
+            if layout == "columns":
+                assert page.insert_textbox((350, 56, 530, 220), "Another column contains independent notes for the committee.", fontsize=11) >= 0
+            elif layout == "two_pages":
+                document.new_page().insert_text((54, 55), "The second page contains separate notes.")
+            elif layout == "rotation":
+                page.set_rotation(90)
+            return document.tobytes()
+
+    older, newer = pdf(earlier_sentence), pdf(later_sentence)
+    _saved(f, "paired-pdf", ".pdf", newer)
+    url = _url("paired-pdf")
+    assert f.client.get(url, headers=f.viewer).json()["paired_check_available"] is True
+    scored = []
+
+    def score(candidate):
+        scored.append(candidate)
+        return [{"earlier": .1, "later": .4}, {"earlier": .3, "later": .6}]
+
+    monkeypatch.setattr(paired, "score", score)
+    standard = f.client.post(url, headers=f.viewer, files=_upload(older, ".pdf"))
+    assert standard.status_code == 200 and not scored
+    response = f.client.post(url, headers=f.viewer, files=_upload(older, ".pdf"),
+                             data={"include_paired_check": "true", "include_pdf": "true"})
+    assert response.status_code == 200, response.text
+    payload = response.json()
+    comparison = payload["comparison"]
+    check = comparison["paired_check"]
+    assert check["status"] == "joint_increase" and check["authorship_confidence_contribution"] == 0
+    assert {k: v for k, v in comparison.items() if k != "paired_check"} == standard.json()["comparison"]
+    assert [check[key]["text"] for key in ("earlier", "later")] == [earlier_sentence, later_sentence]
+    assert check["change_ids"] == [change["id"] for change in comparison["changes"]]
+    assert all(change[side]["pdf_pages"][0]["word_regions"] for change in comparison["changes"] for side in ("earlier", "later"))
+    with pymupdf.open(stream=base64.b64decode(payload["pdf"]), filetype="pdf") as report:
+        text = " ".join(" ".join(page.get_text().split()) for page in report)
+        assert "Experimental paired writing check" in text and "Page 1 · highlighted source crop" in text
+        assert "zero authorship confidence weight" in text and "ModernBERT" not in text and "Tropa" not in text
+    old, new, exported = (tmp_path / name for name in ("earlier.pdf", "later.pdf", "comparison.json"))
+    old.write_bytes(older)
+    new.write_bytes(newer)
+    exported.write_text(json.dumps(comparison))
+    assert review(exported, old, new)["paired_scope_and_saved_response_arithmetic"] == "joint_increase"
+    for layout in ("two_pages", "rotation", "columns"):
+        aid = f"paired-pdf-{layout}"
+        _saved(f, aid, ".pdf", pdf(later_sentence, layout))
+        outcome = f.client.post(_url(aid), headers=f.viewer, files=_upload(pdf(earlier_sentence, layout), ".pdf"),
+                                data={"include_paired_check": "true"})
+        assert outcome.status_code == 200, outcome.text
+        assert outcome.json()["comparison"]["paired_check"]["status"] == "outside_scope"
+        assert outcome.json()["comparison"]["changes"]
+    assert len(scored) == 1
 
 
 def test_pdf_drafts_with_unmapped_or_locked_pages_are_refused():

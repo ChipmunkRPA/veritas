@@ -271,8 +271,8 @@ def _email_body_prefix(text: str, by_role: dict) -> str:
 
 
 def compare_with_text(earlier: bytes, later: bytes, extension: str, *,
-                      email_body_only: bool = False) -> tuple[dict, str, str]:
-    """Return the comparison and its ephemeral decoded text, optionally bounded to the email body prefix."""
+                      email_body_only: bool = False, pdf_paired_text_only: bool = False) -> tuple[dict, str, str]:
+    """Return the unchanged comparison and ephemeral text under the requested writing scope."""
     if extension not in FORMATS:
         raise ValueError(f"Choose two {SUPPORTED_DRAFTS}.")
     if any(not 0 < len(item) <= MAX_BYTES for item in (earlier, later)):
@@ -306,4 +306,6 @@ def compare_with_text(earlier: bytes, later: bytes, extension: str, *,
             "scope": scope, "interpretation": INTERPRETATION}
     if extension == ".eml" and email_body_only:
         return result, _email_body_prefix(old_text, old_tokens), _email_body_prefix(new_text, new_tokens)
+    if extension == ".pdf" and pdf_paired_text_only:
+        return result, document_revision_pdf.paired_text(old_text, old_layout), document_revision_pdf.paired_text(new_text, new_layout)
     return result, old_text, new_text

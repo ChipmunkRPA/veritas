@@ -5,6 +5,7 @@ from __future__ import annotations
 import base64
 import hashlib
 import json
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -63,6 +64,44 @@ def page_locations(extent, changed_tokens, source_map):
     if any(not any(word["start"] <= a and word["end"] >= b for word in words) for a, b in changed_tokens):
         raise ValueError("Some changed tokens could not be located in the source PDF text layer.")
     return list(pages.values())
+
+
+def paired_text(text: str, source_map: list[dict]) -> str:
+    """Require one upright native page with unambiguous top-to-bottom word boxes."""
+    if not source_map:
+        return ""
+    cursor, previous_bottom = 0, 0.
+    for index, block in enumerate(source_map):
+        if (block.get("page") != 1 or block.get("page_rotation") != 0 or block.get("extraction") != "text_layer"
+                or block["start"] != cursor + (2 if index else 0) or text[cursor:block["start"]] != ("\n\n" if index else "")):
+            return ""
+        start, end = block["start"], block["end"]
+        width, height = block["page_width"], block["page_height"]
+        words = [(start + match.start(), start + match.end()) for match in re.finditer(r"\S+", text[start:end])]
+        fragments = block.get("fragments") or []
+        if not words or words != [(item["start"], item["end"]) for item in fragments]:
+            return ""
+        try:
+            _, top, _, bottom = _rect(block["bbox"], width, height)
+            if top < previous_bottom - .5:
+                return ""
+            line_top = line_bottom = previous_right = None
+            for item in fragments:
+                x0, y0, x1, y1 = _rect(item["bbox"], width, height)
+                if line_top is None or y0 > line_top + 2:
+                    if line_bottom is not None and y0 < line_bottom - .5:
+                        return ""
+                    line_top, line_bottom = y0, y1
+                else:
+                    if (y0 < line_top - 2 or x0 < previous_right - .5
+                            or x0 - previous_right > 2 * max(y1 - y0, line_bottom - line_top)):
+                        return ""
+                    line_bottom = max(line_bottom, y1)
+                previous_right = x1
+        except DocumentPacketIntegrityError:
+            return ""
+        cursor, previous_bottom = end, bottom
+    return text if cursor == len(text) else ""
 
 
 def render_previews(changes: list[dict], earlier: Path, later: Path) -> list[dict]:

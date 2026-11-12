@@ -46,7 +46,7 @@ def review(export: Path, earlier: Path, later: Path) -> dict:
         raise ValueError("The optional paired writing check has invalid fields")
     paired = received.pop("paired_check", None)
     expected, old_text, new_text = compare_with_text(_read(earlier, MAX_BYTES), _read(later, MAX_BYTES), extension,
-                                                    email_body_only=paired is not None)
+                                                    email_body_only=paired is not None, pdf_paired_text_only=paired is not None)
     if json.dumps(received, sort_keys=True, allow_nan=False) != json.dumps(expected, sort_keys=True, allow_nan=False):
         raise ValueError("The comparison does not replay from these source bytes and decoded positions")
     roles = Counter(row["role"] for row in expected["changes"])

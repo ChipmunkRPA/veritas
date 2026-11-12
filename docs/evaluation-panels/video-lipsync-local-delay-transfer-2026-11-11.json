@@ -1,0 +1,183 @@
+{
+  "added_localization_groups": {
+    "short_aperture": 0,
+    "short_joint": 0
+  },
+  "app_route_replay": {
+    "cases": {
+      "genuine": {
+        "exact_pcm_samples_verified": 45132,
+        "measured_windows": 1,
+        "native_pictures_and_pts_verified": 83,
+        "published_result_verified": true,
+        "timing_signal": false
+      },
+      "local_late": {
+        "exact_pcm_samples_verified": 45132,
+        "measured_windows": 1,
+        "native_pictures_and_pts_verified": 83,
+        "published_result_verified": true,
+        "timing_signal": false
+      }
+    },
+    "private_receipt_sha256": "d64a8a4b43883e074b802128e11be99f6c7fcbfdebe922360ae3eb0549ec88f2",
+    "scope": "Current timing, face and production track adapters on one matched pair. The isolated set used fallback fusion."
+  },
+  "by_condition": {
+    "gain": {
+      "current": {
+        "measured_no_range": 1,
+        "unassessed": 10
+      },
+      "short_aperture": {
+        "measured_no_range": 4,
+        "unassessed": 7
+      },
+      "short_joint": {
+        "measured_no_range": 4,
+        "unassessed": 7
+      }
+    },
+    "genuine": {
+      "current": {
+        "measured_no_range": 2,
+        "unassessed": 9
+      },
+      "short_aperture": {
+        "measured_no_range": 5,
+        "unassessed": 6
+      },
+      "short_joint": {
+        "measured_no_range": 5,
+        "unassessed": 6
+      }
+    },
+    "global_early": {
+      "current": {
+        "measured_no_range": 1,
+        "unassessed": 10
+      },
+      "short_aperture": {
+        "false_range": 1,
+        "measured_no_range": 3,
+        "unassessed": 7
+      },
+      "short_joint": {
+        "measured_no_range": 4,
+        "unassessed": 7
+      }
+    },
+    "global_late": {
+      "current": {
+        "measured_no_range": 2,
+        "unassessed": 9
+      },
+      "short_aperture": {
+        "measured_no_range": 7,
+        "unassessed": 4
+      },
+      "short_joint": {
+        "measured_no_range": 7,
+        "unassessed": 4
+      }
+    },
+    "local_early": {
+      "current": {
+        "measured_no_range": 1,
+        "unassessed": 10
+      },
+      "short_aperture": {
+        "measured_no_range": 4,
+        "unassessed": 7
+      },
+      "short_joint": {
+        "measured_no_range": 4,
+        "unassessed": 7
+      }
+    },
+    "local_late": {
+      "current": {
+        "measured_no_range": 2,
+        "unassessed": 9
+      },
+      "short_aperture": {
+        "measured_no_range": 6,
+        "unassessed": 4,
+        "wrong_range": 1
+      },
+      "short_joint": {
+        "measured_no_range": 7,
+        "unassessed": 4
+      }
+    }
+  },
+  "calibration_sha256": "85af2a993a5346319937b098a4250e55410743fbbb9528ca720ee593c4c7d7cd",
+  "conditions": {
+    "authored_duration_ms": 640,
+    "candidate_points": {
+      "short_aperture": 0.7451634536509709,
+      "short_joint": 0.6307050723643887
+    },
+    "edge_mix_ms": 5,
+    "held_views": 66,
+    "local_edits": 22,
+    "minimum_temporal_iou": 0.4,
+    "negative_controls": 44,
+    "signed_edit_shift_magnitude_ms": 200
+  },
+  "freeze_sha256": "d7f3c1bea5dccf1f3d580ea4b10ed9d2bba8c0ec600df3f0be92895fedeee439",
+  "held_groups": 11,
+  "held_journal_sha256": "b96d459a019601004ff7b5e9af17af3902759af28587083ec89533d62c136129",
+  "independent_audit": {
+    "aggregate_sha256": "e89ae495cd3efb7c3f749839a90017010c5cef3d7b49b8397899dadad12c71b8",
+    "bound_pcm_ranges": 102,
+    "distinct_exact_source_pictures_and_crops_replayed": 234,
+    "held_pcm_inputs_rebuilt": 66,
+    "native_mouth_picture_records": 612,
+    "status": "verified"
+  },
+  "lost_incumbent_correct_ranges": {},
+  "pilot_advances": {
+    "short_aperture": false,
+    "short_joint": false
+  },
+  "schema": "chipmunk.video-lipsync-local-delay-transfer-result/1",
+  "scope": "Controlled local retiming only. Single spoken sentence. Coverage depends on usable face and speech windows. The results do not measure synchronized retalking or AI authorship.",
+  "selected_wrong_range": {
+    "authored_delay_ms": 200,
+    "authored_end_s": 1.68,
+    "authored_start_s": 1.04,
+    "method": "short_aperture",
+    "reported_end_s": 1.6,
+    "reported_relative_delay_ms": -280,
+    "reported_start_s": 1.12,
+    "temporal_iou": 0.75
+  },
+  "source": {
+    "development_groups": 4,
+    "held_groups": 11,
+    "intake_freeze_sha256": "381facff6d473f4d75686298c956af3b999c77f5fec0c4aa8419b90a5b8f759e",
+    "prior_actor_codes_excluded": 76,
+    "publisher_byte_receipt_sha256": "1d2cb7f65ab2a87a287f2b09c1809b06bf60bf85b9dadb93bb924968a858c2b8",
+    "retention": "Persistent local rerun after system restart erased the interrupted temporary run.",
+    "revision": "1658cd342dff90010aa843eaeebd53610a08b1dc",
+    "same_sentence_sources": 15
+  },
+  "totals": {
+    "current": {
+      "measured_no_range": 9,
+      "unassessed": 57
+    },
+    "short_aperture": {
+      "false_range": 1,
+      "measured_no_range": 29,
+      "unassessed": 35,
+      "wrong_range": 1
+    },
+    "short_joint": {
+      "measured_no_range": 31,
+      "unassessed": 35
+    }
+  },
+  "verified_native_pictures": 597
+}

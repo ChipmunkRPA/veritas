@@ -1,0 +1,338 @@
+{
+  "advance": false,
+  "baseline_sha256": "6eb5df96d1e2d41d5e0263deb84717478600266f94455ea7884adb666e3520e7",
+  "checks": {
+    "clean": true,
+    "genuine": true,
+    "genuine_assessed": true,
+    "isolated": true,
+    "new_families": false,
+    "new_groups": false,
+    "scenes_with_gain": false
+  },
+  "confirmation_sha256": "0d20c3d573ee48fc14a8d659a5ef99f43d3f66e2067c66d61bc938d782e515d8",
+  "counts": [
+    {
+      "assessed": 3,
+      "candidate_alone_ai": 0,
+      "combined_ai": 3,
+      "condition": "clean",
+      "family": "clone",
+      "incumbent_ai": 3,
+      "incumbent_inconclusive": 0,
+      "incumbent_original": 0,
+      "planned": 3,
+      "raw_point_combined_ai": 3,
+      "role": "prospective",
+      "unassessed": 0
+    },
+    {
+      "assessed": 1,
+      "candidate_alone_ai": 0,
+      "combined_ai": 1,
+      "condition": "clean",
+      "family": "expressive",
+      "incumbent_ai": 1,
+      "incumbent_inconclusive": 0,
+      "incumbent_original": 0,
+      "planned": 3,
+      "raw_point_combined_ai": 1,
+      "role": "prospective",
+      "unassessed": 2
+    },
+    {
+      "assessed": 16,
+      "candidate_alone_ai": 0,
+      "combined_ai": 0,
+      "condition": "clean",
+      "family": "genuine",
+      "incumbent_ai": 0,
+      "incumbent_inconclusive": 2,
+      "incumbent_original": 14,
+      "planned": 16,
+      "raw_point_combined_ai": 0,
+      "role": "prospective",
+      "unassessed": 0
+    },
+    {
+      "assessed": 3,
+      "candidate_alone_ai": 0,
+      "combined_ai": 3,
+      "condition": "clean",
+      "family": "stock",
+      "incumbent_ai": 3,
+      "incumbent_inconclusive": 0,
+      "incumbent_original": 0,
+      "planned": 3,
+      "raw_point_combined_ai": 3,
+      "role": "prospective",
+      "unassessed": 0
+    },
+    {
+      "assessed": true,
+      "candidate_alone_ai": false,
+      "combined_ai": false,
+      "condition": "isolated_mostly_single_interferer",
+      "family": "background",
+      "incumbent_ai": false,
+      "incumbent_inconclusive": false,
+      "incumbent_original": true,
+      "planned": 1,
+      "raw_point_combined_ai": false,
+      "role": "prospective",
+      "unassessed": false
+    },
+    {
+      "assessed": true,
+      "candidate_alone_ai": false,
+      "combined_ai": false,
+      "condition": "isolated_overlapping_interferers",
+      "family": "background",
+      "incumbent_ai": false,
+      "incumbent_inconclusive": true,
+      "incumbent_original": false,
+      "planned": 1,
+      "raw_point_combined_ai": false,
+      "role": "prospective",
+      "unassessed": false
+    },
+    {
+      "assessed": 3,
+      "candidate_alone_ai": 0,
+      "combined_ai": 2,
+      "condition": "mostly_single_interferer",
+      "family": "clone",
+      "incumbent_ai": 2,
+      "incumbent_inconclusive": 1,
+      "incumbent_original": 0,
+      "planned": 3,
+      "raw_point_combined_ai": 2,
+      "role": "prospective",
+      "unassessed": 0
+    },
+    {
+      "assessed": 3,
+      "candidate_alone_ai": 0,
+      "combined_ai": 1,
+      "condition": "mostly_single_interferer",
+      "family": "expressive",
+      "incumbent_ai": 1,
+      "incumbent_inconclusive": 2,
+      "incumbent_original": 0,
+      "planned": 3,
+      "raw_point_combined_ai": 1,
+      "role": "prospective",
+      "unassessed": 0
+    },
+    {
+      "assessed": 16,
+      "candidate_alone_ai": 0,
+      "combined_ai": 3,
+      "condition": "mostly_single_interferer",
+      "family": "genuine",
+      "incumbent_ai": 3,
+      "incumbent_inconclusive": 13,
+      "incumbent_original": 0,
+      "planned": 16,
+      "raw_point_combined_ai": 3,
+      "role": "prospective",
+      "unassessed": 0
+    },
+    {
+      "assessed": 3,
+      "candidate_alone_ai": 0,
+      "combined_ai": 1,
+      "condition": "mostly_single_interferer",
+      "family": "stock",
+      "incumbent_ai": 1,
+      "incumbent_inconclusive": 2,
+      "incumbent_original": 0,
+      "planned": 3,
+      "raw_point_combined_ai": 1,
+      "role": "prospective",
+      "unassessed": 0
+    },
+    {
+      "assessed": 3,
+      "candidate_alone_ai": 1,
+      "combined_ai": 3,
+      "condition": "overlapping_interferers",
+      "family": "clone",
+      "incumbent_ai": 3,
+      "incumbent_inconclusive": 0,
+      "incumbent_original": 0,
+      "planned": 3,
+      "raw_point_combined_ai": 3,
+      "role": "prospective",
+      "unassessed": 0
+    },
+    {
+      "assessed": 3,
+      "candidate_alone_ai": 0,
+      "combined_ai": 0,
+      "condition": "overlapping_interferers",
+      "family": "expressive",
+      "incumbent_ai": 0,
+      "incumbent_inconclusive": 3,
+      "incumbent_original": 0,
+      "planned": 3,
+      "raw_point_combined_ai": 0,
+      "role": "prospective",
+      "unassessed": 0
+    },
+    {
+      "assessed": 16,
+      "candidate_alone_ai": 0,
+      "combined_ai": 12,
+      "condition": "overlapping_interferers",
+      "family": "genuine",
+      "incumbent_ai": 12,
+      "incumbent_inconclusive": 4,
+      "incumbent_original": 0,
+      "planned": 16,
+      "raw_point_combined_ai": 15,
+      "role": "prospective",
+      "unassessed": 0
+    },
+    {
+      "assessed": 3,
+      "candidate_alone_ai": 0,
+      "combined_ai": 2,
+      "condition": "overlapping_interferers",
+      "family": "stock",
+      "incumbent_ai": 2,
+      "incumbent_inconclusive": 1,
+      "incumbent_original": 0,
+      "planned": 3,
+      "raw_point_combined_ai": 2,
+      "role": "prospective",
+      "unassessed": 0
+    }
+  ],
+  "evidence_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+  "freeze": {
+    "ami_annotation_sha256": "b56e5babb2496b8795deeeda7e71178d7fbc9963f94276cf2a3f4b56ebbc9f9d",
+    "candidate_assets": {
+      "official-README.md": "160d8cf926c19dff4faad87d9f170f77455ed1d2dfa4656d07ced220e29231c7",
+      "quantization_metadata.json": "8e23249f993a9cd30c4ba3c7da9c514343f143af4a1882d85ddc4d7216c9ed0b",
+      "quantized-README.md": "7f550379e313fcc59beba7c754dabf941b3d0a409b1262cefb03995493279258",
+      "spectra-aasist3-int8-dynamic.onnx": "444f832d306a2be4f823119f84e698e8821db6a1aab248593d4b05b7a9a48108"
+    },
+    "candidate_samples": 64600,
+    "confirmation_foreground_manifest_sha256": "409d0dd8614dbc70ed27986bfdb4c0597e61cf04f29297ea874cec39ad8e8843",
+    "incumbent_assets": {
+      "pellav2_detector.pt": "d21aedfb52e2f87706c2753715a29665482b0f4a034800c31579df5d458559ac",
+      "silero_vad.jit": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720",
+      "w2v-bert-config.json": "f5572bd5998b68182e9c328a43127ed21fed687f6910497136b91a4e3b0e3675"
+    },
+    "incumbent_calibration_sha256": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf",
+    "input_samples": 48000,
+    "planned": {
+      "point": 115,
+      "prospective": 77
+    },
+    "point_baseline_result_sha256": "738fb00f42781ef2afe45af72b8ab61747e7de7431000dfc6f72b78becba58e8",
+    "point_source_result_sha256": "af7b558a456d4bbb0e97dde96bf0fb8a9e402652cd514d1c061d32c99fa9a792",
+    "point_unavailable_views": 5,
+    "prospective_backgrounds": [
+      {
+        "annotated_overlap_ms": 0,
+        "archive_sha256": "dd6f2caa7dc2ca8357964efa4d252a025151e11de4ce496b3b12d89bfd6464ba",
+        "meeting": "ES2012b",
+        "original_start_sample": 6000000,
+        "pcm_sha256": "efed693d7671b37338150a9da86be42dfe465c06784ec14ee10850e121ce78b8"
+      },
+      {
+        "annotated_overlap_ms": 2400,
+        "archive_sha256": "164dda162e5e8e851cb56b629116e916835d571b6b4cdf3d164337297b0a853d",
+        "meeting": "IS1001b",
+        "original_start_sample": 6048000,
+        "pcm_sha256": "36deaf205eb669b1905f8a09c74b5f7f93081ade33e360df2b8a17f787fa08b3"
+      }
+    ],
+    "recovery_preparation_sha256": "562e99c40080f0b6ea45d63fc1ed54e84931c65cb018497829419b43d0e49df3",
+    "room_selection_code_sha256": "497c41a0ab547aad6903339260332ff50756d9499d030f55b57c7552837cc386",
+    "roster_sha256": "98f984119b22d8e4e90cf5ebbecd3fdcfdfeb15f9405c554acd86dabf0bef9b0",
+    "rule": {
+      "additional_clean_genuine_max": 0,
+      "additional_genuine_max": 1,
+      "isolated_genuine_max": 0,
+      "minimum_genuine_assessed_each_prospective_scene": 6,
+      "minimum_new_noisy_synthetic_families": 2,
+      "minimum_new_noisy_synthetic_groups": 3,
+      "minimum_point_genuine_groups": 8,
+      "minimum_prospective_scenes_with_gain": 2,
+      "point": "strict excess of the maximum eligible genuine score"
+    },
+    "runner_sha256": "eb2ebdc5619a4e94dd2bc2d0347395dadbf2d28f1634e5c6cfb7c22904beaa29",
+    "schema": "chipmunk.audio-independent-background-recovery-comparison/1"
+  },
+  "freeze_sha256": "975cd2233b48da2f25d46a072264c9204f0e0076d23e9dd9298d6940dc46d664",
+  "independent_audit": {
+    "advance": false,
+    "exact_remixes": 50,
+    "replayed_model_inputs": 159,
+    "sha256": "1eb2f01c94d0f3aa104ca5645d08f49d3161e4cf42cff8262b920d108f7c48b3",
+    "verified_intervals": 0,
+    "verified_native_waveforms": 192
+  },
+  "original_aggregate_sha256": "7cf3288fdebe48a15692525afa7ea10dee5654831f55a6bb986275cd3b1e7ed5",
+  "point_eligibility": {
+    "eligible_views": 28,
+    "genuine_groups": 15
+  },
+  "point_sha256": "4a191d221e64d83bd913594863f8e4bc634d92b3cad8dbaa693b6540dadee5b0",
+  "prospective_gained_families": 0,
+  "prospective_gained_groups": 0,
+  "ranking": [
+    {
+      "candidate_auc": 0.9553571428571429,
+      "condition": "clean",
+      "raw_auc": 1.0,
+      "role": "prospective"
+    },
+    {
+      "candidate_auc": null,
+      "condition": "isolated_mostly_single_interferer",
+      "raw_auc": null,
+      "role": "prospective"
+    },
+    {
+      "candidate_auc": null,
+      "condition": "isolated_overlapping_interferers",
+      "raw_auc": null,
+      "role": "prospective"
+    },
+    {
+      "candidate_auc": 0.7847222222222222,
+      "condition": "mostly_single_interferer",
+      "raw_auc": 0.6388888888888888,
+      "role": "prospective"
+    },
+    {
+      "candidate_auc": 0.6944444444444444,
+      "condition": "overlapping_interferers",
+      "raw_auc": 0.4375,
+      "role": "prospective"
+    }
+  ],
+  "resources": {
+    "confirmation": {
+      "elapsed_seconds": 57.76042345799988,
+      "forwards": 76,
+      "peak_rss_bytes": 908640256
+    },
+    "point": {
+      "elapsed_seconds": 60.54424304200006,
+      "forwards": 85,
+      "peak_rss_bytes": 947994624
+    }
+  },
+  "runtime": {
+    "numpy": "2.2.6",
+    "onnxruntime": "1.23.2",
+    "provider": "CPUExecutionProvider"
+  },
+  "schema": "chipmunk.audio-independent-background-comparison-evaluation/1",
+  "source_evidence_intervals": 0
+}

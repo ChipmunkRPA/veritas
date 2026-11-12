@@ -1,0 +1,1319 @@
+{
+  "commitments": {
+    "cases.jsonl": "93deaac2e2b7db1090d385c0aad91add086596507b8f4d4b753f0a70859b994e",
+    "generate-qwen.json": "ae9d5300c22bb1e22c0045d74cdae852267d4bdaa4b3b5eb636fd6e6b58e2363",
+    "generate-smol2.json": "5b8ab0430bcfc49ea0d23e3e04714d6a6b684dee068384f99761567aa6abc022",
+    "generation-freeze.json": "817231526a76c2db945b4918075f452268c2c7268a8aa5cf8d041495b0be12ff",
+    "order-freeze.json": "8848459b27bd840b5e3a90d1f495b13a58e6fe6460f5dd864fe709d573dd90b0",
+    "order-qwen.json": "be6d302683516b0616c021713d65843e8d78b9ba5ff12eba52483d145c348acf",
+    "order-result.json": "7d46e770bf7b7db3be500ba3c28def48e249b0ac55b4516bde50cc65307c7f41",
+    "order-smol2.json": "005e01a220f3e83ab2af6d83ceb6e798b17796b401e7d3e57dce390a43b5bbba",
+    "originals.jsonl": "96848496188f23e4bec2314f96ba4250029a1d5e35c3e8255b44689f3713fccd",
+    "private-order-readout.json": "6be4681485d371770eeb1f4dfd6cb525c949c767c0663ba208bf66ed8c154c75",
+    "requests.json": "27831db9cac6cd8cdadfa3fcd289a039a3489d902eb1b0233ab2d1793f796e1c",
+    "scoring-freeze.json": "30e884eeee5e67543e73ce2401b05170529c414aa5566c05a8ce853ecaaed68c",
+    "sources.json": "6c782213773cddbf029076f0ea8dce6872f84c80a8511a023e51eb3e63e97ab6",
+    "urls.json": "e361b0aa29d66a0567c33d191ffa910e081ba25683313c8ff13b8395c57b8bba"
+  },
+  "data": {
+    "geometry": {
+      "disjointness": "Exclude shared normalized 12-word fragments with the declared retained history and other admitted releases.",
+      "donor": "First same-release sentence at least two sentence indices beyond the window, with 12 to 40 lexical words and a target word-count ratio of .75 to 1.33.",
+      "selection": "First eligible excerpt and donor in publisher order; target alternates between interior sentences for each publisher.",
+      "window": "Four consecutive native sentences. Interior sentences have 12 to 40 lexical words."
+    },
+    "history": [
+      {
+        "matched_sources": 0,
+        "packet": "elife_originals",
+        "source_sha256": "063c960dafe75757b3b6483ab88802c9c6cd78fa6e0a347014ac148c283d758f",
+        "text_entries": 5
+      },
+      {
+        "matched_sources": 0,
+        "packet": "elife_rewrites",
+        "source_sha256": "b5c4dece64d08ef3523c1f8d8e9afdc68fb4b756876a55b61be0205c611fa62e",
+        "text_entries": 11
+      },
+      {
+        "matched_sources": 0,
+        "packet": "elife_transfer_originals",
+        "source_sha256": "a8676385711bf3d66165a6c3a8add0d8aee7881288302388ca88739e8e30389b",
+        "text_entries": 26
+      },
+      {
+        "matched_sources": 0,
+        "packet": "elife_transfer_rewrites",
+        "source_sha256": "4682454d4b72a0c8899159973bd2e91b4f8432be4c42148a4f10719a1fc75582",
+        "text_entries": 48
+      },
+      {
+        "matched_sources": 0,
+        "packet": "elife_editorial_originals",
+        "source_sha256": "d690f9466193dafb94a054c02fb27bade0bc6d04819cafa9cc8b846acb97b16f",
+        "text_entries": 12
+      },
+      {
+        "matched_sources": 0,
+        "packet": "elife_editorial_controls",
+        "source_sha256": "46f681020eb07a197875d64bf4ece4efec619b7d1de4c81825d470d9add04f8a",
+        "text_entries": 25
+      },
+      {
+        "matched_sources": 0,
+        "packet": "opai_bench",
+        "source_sha256": "4e43edf33c695a8a4f757d079089dab85a632c648762554bac9f5cc573bb923b",
+        "text_entries": 60
+      },
+      {
+        "matched_sources": 0,
+        "packet": "gohumanize",
+        "source_sha256": "a42a934b97005bc69c4ef983ab0839d5804b6fc60066e42b9520c950984a51b9",
+        "text_entries": 262
+      },
+      {
+        "matched_sources": 0,
+        "packet": "notice_originals",
+        "source_sha256": "498ba32f67342852a2f3104e644516d72ca98f666c8097f496222213950bdf57",
+        "text_entries": 6
+      },
+      {
+        "matched_sources": 0,
+        "packet": "notice_controls",
+        "source_sha256": "dbd1dbe88197a44446f8f705eb58ad2ee7b20f6dc7ce3233fe76d8189e5358c8",
+        "text_entries": 18
+      },
+      {
+        "matched_sources": 0,
+        "packet": "notice_rewrites",
+        "source_sha256": "d1b814a28fd3fd60e666546d6063d76fd7fabd62ef828d9581ce13ac814f6ad0",
+        "text_entries": 8
+      },
+      {
+        "matched_sources": 0,
+        "packet": "llmtrace_english",
+        "source_sha256": "6d4431a85a70916ba7af5c19f062eed6c277183d7b4bb5c6cea42f520e717f48",
+        "text_entries": 38429
+      }
+    ],
+    "preparation_sha256": "86425074514ec213fcf46d95b3c975c362d06e3c16287970a3bc712f15845027",
+    "prior_source_packets": 12,
+    "prior_text_entries": 38910,
+    "rejected": {
+      "gao-census": "Publisher returned HTTP 403 during initial intake",
+      "gao-fiscal": "Publisher returned HTTP 403 during initial intake",
+      "gao-recovery": "Publisher returned HTTP 403 during initial intake",
+      "gao-resilience": "Publisher returned HTTP 403 during initial intake",
+      "gao-school": "Publisher returned HTTP 403 during initial intake",
+      "gao-spending": "Publisher returned HTTP 403 during initial intake"
+    },
+    "rights": "Federal government-duty release prose, excluding quotes, captions, and contacts.",
+    "rights_urls": [
+      "https://www.usa.gov/government-copyright",
+      "https://www.nal.usda.gov/programs/speccoll"
+    ],
+    "shared_admitted_12_word_fragments": 0,
+    "sources": {
+      "faa-airport": {
+        "anchors": [
+          {
+            "publisher_codepoints": [
+              0,
+              206
+            ],
+            "sentence_index": 0,
+            "sha256": "c93123cd831253f0a531cdfb9962053b16f672ec2171aace6f957a6c1ce7e6f3"
+          },
+          {
+            "publisher_codepoints": [
+              207,
+              329
+            ],
+            "sentence_index": 1,
+            "sha256": "f2aa269eb7d052f609fdc4755a07f26ad192700a50dfcae6a05446ceef61ce03"
+          },
+          {
+            "publisher_codepoints": [
+              330,
+              425
+            ],
+            "sentence_index": 2,
+            "sha256": "e32d77baefc755f11677338c3812d6730bbe6496af89fb0d09e178a107a91b7b"
+          },
+          {
+            "publisher_codepoints": [
+              426,
+              645
+            ],
+            "sentence_index": 3,
+            "sha256": "84f701d644c7b2bb260b2cb4e9795d0cb589c23e0a2786d0d11772a5aee9596a"
+          },
+          {
+            "publisher_codepoints": [
+              728,
+              851
+            ],
+            "sentence_index": 5,
+            "sha256": "28c1a8f5d90d5b62a9f4e3abba3c3e0a74b451f5c0daa26430502f527542ec43"
+          }
+        ],
+        "date": "Wednesday, May 15, 2019",
+        "html_sha256": "fd78eb13ee83d90cbf3e2614726b9ac7a590b91c7278e130f5dc2668cecbf12a",
+        "normalized_body_sha256": "f7ce5a3abeb2b5691b50723e6a66ba0fdd8f487e846a6f4c9b580eeb79c2775d",
+        "publisher": "FAA",
+        "target_index": 2,
+        "title": "U.S. Transportation Secretary Elaine L. Chao Announces $779 Million in Funding for Airport Infrastructure",
+        "url": "https://www.faa.gov/newsroom/us-transportation-secretary-elaine-l-chao-announces-779-million-funding-airport?newsId=23615"
+      },
+      "faa-beyond": {
+        "anchors": [
+          {
+            "publisher_codepoints": [
+              0,
+              190
+            ],
+            "sentence_index": 0,
+            "sha256": "02ff83ff5c643a1acffd1f3eb864db5494eb0150edb32865ecffa8db95840c33"
+          },
+          {
+            "publisher_codepoints": [
+              191,
+              411
+            ],
+            "sentence_index": 1,
+            "sha256": "ba12f1d3b72a08041031acb33e5316231d5db35a8dfcbc8b566333af1ae0874f"
+          },
+          {
+            "publisher_codepoints": [
+              412,
+              536
+            ],
+            "sentence_index": 2,
+            "sha256": "eee4b4c82c8f309adf9d1badbd5bbfacb551cd11d8b1a2337f7dcb8f470d96bc"
+          },
+          {
+            "publisher_codepoints": [
+              537,
+              695
+            ],
+            "sentence_index": 3,
+            "sha256": "a382390723770f4da00fc5e1afb82b0f7b1fad548016b63cb397f949c574d6fd"
+          },
+          {
+            "publisher_codepoints": [
+              893,
+              1019
+            ],
+            "sentence_index": 5,
+            "sha256": "f7c32e2549a3c6d86ffd875cdd83beed6affc898ae2137d6285e4e47f886faf8"
+          }
+        ],
+        "date": "Friday, October 30, 2020",
+        "html_sha256": "a77d13487e5f7c0fe217f09ab0f35eed126a2c7f8100dc67f268218e05bb7519",
+        "normalized_body_sha256": "53c1dd6e5abd760294711a62f9486c587a1d6db115720c0a7513d65700b41587",
+        "publisher": "FAA",
+        "target_index": 2,
+        "title": "U.S. Transportation Secretary Elaine L. Chao Announces Successful Completion of Drone Pilot Program, Announces New Program Called BEYOND",
+        "url": "https://www.faa.gov/newsroom/us-transportation-secretary-elaine-l-chao-announces-successful-completion-drone-pilot"
+      },
+      "faa-design": {
+        "anchors": [
+          {
+            "publisher_codepoints": [
+              0,
+              239
+            ],
+            "sentence_index": 0,
+            "sha256": "923cb502a9bdce573198c29a1a2b42512f0651e9ce62d8882d3dcbdc31c6bda5"
+          },
+          {
+            "publisher_codepoints": [
+              240,
+              365
+            ],
+            "sentence_index": 1,
+            "sha256": "b22dbe7691a66514f77a1b9f9b924103c31a5529aadf831d5b50c43684281431"
+          },
+          {
+            "publisher_codepoints": [
+              366,
+              514
+            ],
+            "sentence_index": 2,
+            "sha256": "a15962f80c667b9a392937d18cb7961688aec2ded81cdfae93b030a6990907e5"
+          },
+          {
+            "publisher_codepoints": [
+              515,
+              676
+            ],
+            "sentence_index": 3,
+            "sha256": "2b116ab37ef93e12c351f956cbeb400317c865feb8adeddaa781b1e467ca2cf3"
+          },
+          {
+            "publisher_codepoints": [
+              804,
+              971
+            ],
+            "sentence_index": 5,
+            "sha256": "1e4a915a78a10921575f2b16cd7ca419b85532ba21c144f5e4302fca2a8c4297"
+          }
+        ],
+        "date": "Friday, October 23, 2020",
+        "html_sha256": "5d5e58a2e8642864dce186f0b66b98b2dd3b8ea0d5623558f34b9b3ccdff67c2",
+        "normalized_body_sha256": "4874a6c0b2632ef407aa8632b1c74f06b182d16414e275fdcdf0c26ffb142d41",
+        "publisher": "FAA",
+        "target_index": 2,
+        "title": "FAA Virtual Airport Design Challenge Takes Off",
+        "url": "https://www.faa.gov/newsroom/faa-virtual-airport-design-challenge-takes"
+      },
+      "faa-metroplex": {
+        "anchors": [
+          {
+            "publisher_codepoints": [
+              0,
+              257
+            ],
+            "sentence_index": 0,
+            "sha256": "d0e213186983bd11d79892c46504d97838e0a499ec8cc135e97a6a7f7bfedd40"
+          },
+          {
+            "publisher_codepoints": [
+              258,
+              380
+            ],
+            "sentence_index": 1,
+            "sha256": "659c620c87da7e2368bc9f540192ff29652fd8115b32bf77ee08510d2bb0ef9a"
+          },
+          {
+            "publisher_codepoints": [
+              381,
+              502
+            ],
+            "sentence_index": 2,
+            "sha256": "b4851fe0d0a1350755ffd158863164c6ad3244ed6e3d5721586adfa559053fb2"
+          },
+          {
+            "publisher_codepoints": [
+              503,
+              561
+            ],
+            "sentence_index": 3,
+            "sha256": "e4e5fb74b04c251ffca861a42f90bead08bb5d6720991053d2a9150fe01a2b60"
+          },
+          {
+            "publisher_codepoints": [
+              757,
+              857
+            ],
+            "sentence_index": 5,
+            "sha256": "fd55c9276a605c00ad167327aa11c9c4058be077a9e7447d2baa78f67f5c9dcc"
+          }
+        ],
+        "date": "Monday, October 26, 2020",
+        "html_sha256": "667ec1e5523e25a8782d0f3686e2760f344bd61bb6d5e5729e07a05ea04567b2",
+        "normalized_body_sha256": "bac20aac84bceaad447ce5da80a903d92a6208ade49e225735c489655ed56965",
+        "publisher": "FAA",
+        "target_index": 1,
+        "title": "FAA Issues Record of Decision on Florida Metroplex",
+        "url": "https://www.faa.gov/newsroom/faa-issues-record-decision-florida-metroplex"
+      },
+      "faa-montana": {
+        "anchors": [
+          {
+            "publisher_codepoints": [
+              0,
+              281
+            ],
+            "sentence_index": 0,
+            "sha256": "2525b592159c3d91aae86def271a1b2dae01d4b4868abe1d0e224b8634f41870"
+          },
+          {
+            "publisher_codepoints": [
+              282,
+              546
+            ],
+            "sentence_index": 1,
+            "sha256": "f0153bd622490cf62afab907c8f0864ba95b6ca73544572d129bcc5ba37afb2f"
+          },
+          {
+            "publisher_codepoints": [
+              547,
+              745
+            ],
+            "sentence_index": 2,
+            "sha256": "9bdf15f1ad9d41e882171394925b4ac92b86b7d9aedfd1bbcaec9f507317d77c"
+          },
+          {
+            "publisher_codepoints": [
+              746,
+              890
+            ],
+            "sentence_index": 3,
+            "sha256": "a8de9d1c3c29b87231d423475bc9ca094b39e8403915609518cc05c5d893767b"
+          },
+          {
+            "publisher_codepoints": [
+              1304,
+              1520
+            ],
+            "sentence_index": 7,
+            "sha256": "f4b4490d676d922316f1b8066adfc1cac8cd5df740a8b232c16fd5fe89ee7316"
+          }
+        ],
+        "date": "Tuesday, April 14, 2020",
+        "html_sha256": "374468d57259a6a31f8cccd6dd0bd1c37dd7a12479c98c90d37576ad397f91b6",
+        "normalized_body_sha256": "b8cf67371043c38d7fa4b96cf31931db0b33818ad00fddf424c5ca27128e5668",
+        "publisher": "FAA",
+        "target_index": 1,
+        "title": "U.S. Transportation Secretary Elaine L. Chao Announces $73.82 Million to Montana Airports in Response to COVID-19",
+        "url": "https://www.faa.gov/newsroom/us-transportation-secretary-elaine-l-chao-announces-7382-million-montana-airports-response"
+      },
+      "faa-uas": {
+        "anchors": [
+          {
+            "publisher_codepoints": [
+              0,
+              172
+            ],
+            "sentence_index": 0,
+            "sha256": "ec73878486283b1e1b2d3da3e163e099e09b43774ec68ef031a76640561fc87b"
+          },
+          {
+            "publisher_codepoints": [
+              173,
+              337
+            ],
+            "sentence_index": 1,
+            "sha256": "09eee162d42932e5bec80f0dcd3ee0fd3767ebd2255c425a85e3e47ccddecc53"
+          },
+          {
+            "publisher_codepoints": [
+              338,
+              548
+            ],
+            "sentence_index": 2,
+            "sha256": "3e56d7b6201065b790eaee6ed74bf2b5c8c49d0cd54eee25d3e53255066fbb52"
+          },
+          {
+            "publisher_codepoints": [
+              549,
+              750
+            ],
+            "sentence_index": 3,
+            "sha256": "14eb21da010a1ebee9f45dfa3d67182f176e9395ef7e58b73219bc083ae015a2"
+          },
+          {
+            "publisher_codepoints": [
+              1223,
+              1396
+            ],
+            "sentence_index": 7,
+            "sha256": "9090f4d5da6eeb4e635d0dbaf9b0f00afb1b2af8e2b556c6d4eed75faef21eab"
+          }
+        ],
+        "date": "Monday, December 28, 2020",
+        "html_sha256": "011a62b19c78fc3772b231509c0a5e1b57813037354f788eee2ac98dbb8fd483",
+        "normalized_body_sha256": "d219ae10f05e60a9d16a6a44e846db4cfd9b51eda2a2803c5bd80b9487ebb9af",
+        "publisher": "FAA",
+        "target_index": 1,
+        "title": "U.S. Department of Transportation Issues Two Much-Anticipated Drone Rules to Advance Safety and Innovation in the United States",
+        "url": "https://www.faa.gov/newsroom/us-department-transportation-issues-two-much-anticipated-drone-rules-advance-safety-and"
+      },
+      "usda-conservation": {
+        "anchors": [
+          {
+            "publisher_codepoints": [
+              0,
+              257
+            ],
+            "sentence_index": 0,
+            "sha256": "0944317aa75bffd895dff3627886931af254165c02c1e64c956bfa90cbc52aae"
+          },
+          {
+            "publisher_codepoints": [
+              258,
+              511
+            ],
+            "sentence_index": 1,
+            "sha256": "bdb5524eb9e36fb544f2df0a6ee5a71f03d7827ff5cf4d301f619e647861cbb5"
+          },
+          {
+            "publisher_codepoints": [
+              512,
+              627
+            ],
+            "sentence_index": 2,
+            "sha256": "ff3f91b47e4c5cec268fc502fda7a11627df52c58afe00a4e723a910b5233afa"
+          },
+          {
+            "publisher_codepoints": [
+              628,
+              954
+            ],
+            "sentence_index": 3,
+            "sha256": "4ebaaaee8d3ad4d38a7be647c93a604231b969207ac818fd7204a5b2c8f1b244"
+          },
+          {
+            "publisher_codepoints": [
+              1146,
+              1398
+            ],
+            "sentence_index": 5,
+            "sha256": "4a44def4a733f5ceb53692248775982429ecc9e78f29ff37a11be1bfd3336d5f"
+          }
+        ],
+        "date": "March 26, 2020",
+        "html_sha256": "0cfd04bb554dcfdf85af95d0cf1cfbf58a6d01d6939bb9b9215139b47626fdb9",
+        "normalized_body_sha256": "e1740e37ae2d3cf2adc2b3a3987da20e6230329f7359b6f18e7314dcbbbebfdb",
+        "publisher": "USDA FSA",
+        "target_index": 1,
+        "title": "USDA Announces More Than 3.4 Million Acres Selected for General Signup Conservation Reserve Program",
+        "url": "https://www.fsa.usda.gov/news-events/news/03-26-2020/usda-announces-34-million-acres-selected-general-signup-conservation-10"
+      },
+      "usda-dairy": {
+        "anchors": [
+          {
+            "publisher_codepoints": [
+              0,
+              298
+            ],
+            "sentence_index": 0,
+            "sha256": "0df2b6c45c020b47f772473ffda0b0f2454f48aafcea9b62fd348860deba8028"
+          },
+          {
+            "publisher_codepoints": [
+              299,
+              395
+            ],
+            "sentence_index": 1,
+            "sha256": "0e39938f53ac4b6ed8fd31f06ac685dfcc599f29cece0fd3a81e25894dba756a"
+          },
+          {
+            "publisher_codepoints": [
+              396,
+              628
+            ],
+            "sentence_index": 2,
+            "sha256": "5b98d511a5e8b928323bfe84bd2524d7128c1fff8eebd15aa4c5d232db0be440"
+          },
+          {
+            "publisher_codepoints": [
+              629,
+              702
+            ],
+            "sentence_index": 3,
+            "sha256": "517ef61ff5144654473f306b87229b00317288b2fe23fd9938ac391666478e79"
+          },
+          {
+            "publisher_codepoints": [
+              1142,
+              1216
+            ],
+            "sentence_index": 7,
+            "sha256": "f4a45f667d275c061d7a3a71aaa0a4c89d5de7c95632124d9c57d189d6230091"
+          }
+        ],
+        "date": "June 18, 2020",
+        "html_sha256": "81b2c56b8d33e71bb4e346820b97ad79ca00667aa59041f35b9ecb55ddcacca7",
+        "normalized_body_sha256": "6ed68e165aeda4cc56ddd61efb18af6b6aae4571f368e89b193801137c7a89bd",
+        "publisher": "USDA FSA",
+        "target_index": 1,
+        "title": "USDA Dairy Safety-Net Program Signup to Begin October 12",
+        "url": "https://www.fsa.usda.gov/news-events/news/06-18-2020/usda-dairy-safety-net-program-signup-begin-october-12"
+      },
+      "usda-food": {
+        "anchors": [
+          {
+            "publisher_codepoints": [
+              0,
+              297
+            ],
+            "sentence_index": 0,
+            "sha256": "aa1c01c9414781a8e6b4204affa1ab150dd1cc8eab221523bf7c1c99a03265ff"
+          },
+          {
+            "publisher_codepoints": [
+              298,
+              454
+            ],
+            "sentence_index": 1,
+            "sha256": "c257ca2cff8e676c15b6d24e55207ef24705819426572914d69cc8b50a9cf195"
+          },
+          {
+            "publisher_codepoints": [
+              455,
+              550
+            ],
+            "sentence_index": 2,
+            "sha256": "4296a88dcf0bdf41e80c60aabe668cb71c155d75297366377ba1877d66a2b2d2"
+          },
+          {
+            "publisher_codepoints": [
+              551,
+              635
+            ],
+            "sentence_index": 3,
+            "sha256": "7532c6318a497a30f62b00e8232314b2dddd9cd1b2c3208509dd0628c331cc30"
+          },
+          {
+            "publisher_codepoints": [
+              992,
+              1063
+            ],
+            "sentence_index": 8,
+            "sha256": "e0d198624887f1c8894420ba53232ad898052d8410d4ef64c98ee04a76fe7860"
+          }
+        ],
+        "date": "October 26, 2020",
+        "html_sha256": "860ee384fc8a288231fae63700d4e56562d766948d4af087286b4e28313ab1ec",
+        "normalized_body_sha256": "08610d3c20237685fd601cf00b57799e17ca031f955a3d6c2a0afd1e49a63e59",
+        "publisher": "USDA FSA",
+        "target_index": 2,
+        "title": "More than $7 Billion Paid in Second Round of USDA Coronavirus Food Assistance Program",
+        "url": "https://www.fsa.usda.gov/news-events/news/10-26-2020/7-billion-paid-second-round-usda-coronavirus-food-assistance-program"
+      },
+      "usda-loans": {
+        "anchors": [
+          {
+            "publisher_codepoints": [
+              0,
+              274
+            ],
+            "sentence_index": 0,
+            "sha256": "604893ae20b0ab85702e2e463c2c07fe4b85f55233efc1d5e2e6bf01a59c9084"
+          },
+          {
+            "publisher_codepoints": [
+              275,
+              490
+            ],
+            "sentence_index": 1,
+            "sha256": "2e9d5d7a4ee34b3a2f973c18dc49fc84e1e329e1f5c86cfeb0809bdaf7c13b50"
+          },
+          {
+            "publisher_codepoints": [
+              491,
+              662
+            ],
+            "sentence_index": 2,
+            "sha256": "4362b69c7d32db0ed4293dc1e398526ff74eab0674dbc0d256d39165244e7cf2"
+          },
+          {
+            "publisher_codepoints": [
+              663,
+              815
+            ],
+            "sentence_index": 3,
+            "sha256": "b8612d1ec4f679b0eaca016ee7f2b745b8e71a7180efa80977ad017c310d9509"
+          },
+          {
+            "publisher_codepoints": [
+              1733,
+              1992
+            ],
+            "sentence_index": 11,
+            "sha256": "f4882d6646cef9a117b329658ed53d7e4a334dd1ee1de8685af2338a597ee566"
+          }
+        ],
+        "date": "December 02, 2020",
+        "html_sha256": "4ff6e5cdb0d03daa06e615ace8d5dc6081161082e854dea084a3ad0f370863b6",
+        "normalized_body_sha256": "949bf6f4b9a2e9248b2a94d55cfdc7f327dd5d5885eb3ec7b87a43af6b0839f0",
+        "publisher": "USDA FSA",
+        "target_index": 1,
+        "title": "USDA Offers Targeted Farm Loan Funding for Underserved Groups and Beginning Farmers",
+        "url": "https://www.fsa.usda.gov/news-events/news/12-02-2020/usda-offers-targeted-farm-loan-funding-underserved-groups-beginning"
+      },
+      "usda-newfarmers": {
+        "anchors": [
+          {
+            "publisher_codepoints": [
+              611,
+              690
+            ],
+            "sentence_index": 2,
+            "sha256": "9ee0dc4b0a8dcc5abe6ef808ffa4f8efd8cd1857bda288da4d655ee9e53a38d7"
+          },
+          {
+            "publisher_codepoints": [
+              691,
+              852
+            ],
+            "sentence_index": 3,
+            "sha256": "0d56fa4beaa75489d9347cb2d348b26d186129218ffe8d1a9c564ab42b44f7fa"
+          },
+          {
+            "publisher_codepoints": [
+              853,
+              1044
+            ],
+            "sentence_index": 4,
+            "sha256": "accfa3cc732c619ea8d989f3cd760a07063b05d18f42a39dffa91d27c37d08e9"
+          },
+          {
+            "publisher_codepoints": [
+              1045,
+              1284
+            ],
+            "sentence_index": 5,
+            "sha256": "39784e87e09707bcb36dab2171d299aef2b6c7487d6bf326e8b7d3a5702801ca"
+          },
+          {
+            "publisher_codepoints": [
+              1400,
+              1616
+            ],
+            "sentence_index": 7,
+            "sha256": "18e173b5ae6f52893c27019c1aecf62faf84e25feb09b5f3c3cf830a2b672705"
+          }
+        ],
+        "date": "March 16, 2020",
+        "html_sha256": "950eac66441016bd09e1c090ff1274da3c7d34d12c37aaf4b66961b2222fa6a5",
+        "normalized_body_sha256": "23eb85bc0332c42d98bc90217c2104b4c0d255dd3b916c2a80268da81aa525e5",
+        "publisher": "USDA FSA",
+        "target_index": 2,
+        "title": "USDA Stands Up New Team to Better Serve Beginning Farmers and Ranchers",
+        "url": "https://www.fsa.usda.gov/news-events/news/03-16-2020/usda-stands-new-team-better-serve-beginning-farmers-ranchers-11"
+      },
+      "usda-offices": {
+        "anchors": [
+          {
+            "publisher_codepoints": [
+              438,
+              506
+            ],
+            "sentence_index": 2,
+            "sha256": "6f7ee5922e41aeef56f54868e8a594b9c6c14671c458c78e6f5d83c72489a5af"
+          },
+          {
+            "publisher_codepoints": [
+              507,
+              695
+            ],
+            "sentence_index": 3,
+            "sha256": "fac525069dc6bcff948f4934686f4d70e3a250c38ac2505cf8ad93593625f244"
+          },
+          {
+            "publisher_codepoints": [
+              696,
+              865
+            ],
+            "sentence_index": 4,
+            "sha256": "00d2f60320dcc2a00260fbc64c16649872300439e0b56937f5d256602fb04abe"
+          },
+          {
+            "publisher_codepoints": [
+              866,
+              998
+            ],
+            "sentence_index": 5,
+            "sha256": "14c34b9ba9e665c9625657eb95100d543100a5e52365d8121a1026ada700b686"
+          },
+          {
+            "publisher_codepoints": [
+              1788,
+              1956
+            ],
+            "sentence_index": 10,
+            "sha256": "ee37f8226607ea4f822db30af65eb3cc9c0c9b6904b93f8b3dbe0d1125e7555d"
+          }
+        ],
+        "date": "March 26, 2020",
+        "html_sha256": "b107ba75e56aae535bb7ca55c94f377cba6a94028a898c6147167afc3771400c",
+        "normalized_body_sha256": "951b0c2393f724a34d3e768e3eafcc74e718ff07b51517f03f392989b85aa513",
+        "publisher": "USDA FSA",
+        "target_index": 2,
+        "title": "FSA Makes Changes to Farm Loan, Disaster, Conservation and Safety Net Programs to Make it Easier for Customers to Conduct Business",
+        "url": "https://www.fsa.usda.gov/news-events/news/03-26-2020/fsa-makes-changes-farm-loan-disaster-conservation-safety-net-programs-5"
+      }
+    }
+  },
+  "generation": {
+    "admitted_by_kind": {
+      "human_splice": 12,
+      "original": 12,
+      "qwen": 8,
+      "smol2": 11
+    },
+    "attempts_per_family": {
+      "qwen": 12,
+      "smol2": 12
+    }
+  },
+  "method": {
+    "advance": "Agreement added to current must add useful edit groups in both publishers and both generator families, with no more than one extra flagged human source group. Development scope only.",
+    "agreement": "Both models independently select the same source sentence after balancing. Neither and inconclusive answers do not propose a source span.",
+    "balanced": "Require all six valid assignments, a shared semantic choice winning at least four times, and its mean log score at least log(1.50) ahead of either other semantic choice.",
+    "current": "Existing first-six positive native three-sentence context regions, with raw point .5.",
+    "fixed": "First assignment's most likely label requires at least 1.50 times the second label's probability.",
+    "input": "One submitted passage, original sentence order fixed. Each candidate label A/B/C represents sentence 2, sentence 3 or neither. All six assignments are scored.",
+    "response": "Sum full-vocabulary next-token probabilities of bare and leading-space uppercase labels where each is a single token. Each permutation requires at least .20 total label mass to be assessed.",
+    "useful": "At least .30 non-whitespace character intersection over union with the single authored edit. Count flags on untouched and human-spliced controls and group by publisher."
+  },
+  "model_assets": {
+    "generators": {
+      "qwen": {
+        "license": "Apache-2.0",
+        "local_config_files": [
+          {
+            "file": "config.json",
+            "sha256": "98d2ff8cc47488d08a2b0b3acf4eb99ef210779b42bd48605f6b8e36acdbf670"
+          },
+          {
+            "file": "generation_config.json",
+            "sha256": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6"
+          },
+          {
+            "file": "merges.txt",
+            "sha256": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3"
+          },
+          {
+            "file": "tokenizer.json",
+            "sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539"
+          },
+          {
+            "file": "tokenizer_config.json",
+            "sha256": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583"
+          },
+          {
+            "file": "vocab.json",
+            "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+          }
+        ],
+        "repo": "Qwen/Qwen2.5-1.5B-Instruct",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+        "weights_sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee"
+      },
+      "smol2": {
+        "license": "Apache-2.0",
+        "local_config_files": [
+          {
+            "file": "config.json",
+            "sha256": "994f50b16abb4ae00880baefe03c10260b5bd608d2bf586f7056ca05a534feea"
+          },
+          {
+            "file": "generation_config.json",
+            "sha256": "87b916edaaab66b3899b9d0dd0752727dff6666686da0504d89ae0a6e055a013"
+          },
+          {
+            "file": "merges.txt",
+            "sha256": "0b54e8aa4e53d5383e2e4bc635a56b43f9647f7b13832d5d9ecd8f82dac4f510"
+          },
+          {
+            "file": "special_tokens_map.json",
+            "sha256": "2b7379f3ae813529281a5c602bc5a11c1d4e0a99107aaa597fe936c1e813ca52"
+          },
+          {
+            "file": "tokenizer.json",
+            "sha256": "9ca9acddb6525a194ec8ac7a87f24fbba7232a9a15ffa1af0c1224fcd888e47c"
+          },
+          {
+            "file": "tokenizer_config.json",
+            "sha256": "4ec77d44f62efeb38d7e044a1db318f6a939438425312dfa333b8382dbad98df"
+          },
+          {
+            "file": "vocab.json",
+            "sha256": "82b84012e3add4d01d12ba14442026e49b8cbbaead1f79ecf3d919784f82dc79"
+          }
+        ],
+        "repo": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+        "revision": "31b70e2e869a7173562077fd711b654946d38674",
+        "weights_sha256": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8"
+      }
+    },
+    "incumbent": [
+      {
+        "file": "NOTICE",
+        "sha256": "4fe6835a2928bcfd7467888a9422d805dfa2fe6364437c1af01cf1945c3edd57"
+      },
+      {
+        "file": "config.json",
+        "sha256": "deac399da91c0cc96f5570fa5eae7cb716e32f6feb00860ce3e42c84f86c01a3"
+      },
+      {
+        "file": "model.safetensors",
+        "sha256": "4a1561fadf44ec72934edd6158ff8c76e9388ade1384dbeeea6eb15f93251087"
+      },
+      {
+        "file": "serving_head.json",
+        "sha256": "098ce573e07d8d99221d9eac41f7acae7b324071490a06023f837efe43df4cab"
+      },
+      {
+        "file": "tokenizer.json",
+        "sha256": "2c070ff353c36f85e20919da787a30e1e8e52b626d0e026e044f373378f6d0bf"
+      },
+      {
+        "file": "tokenizer_config.json",
+        "sha256": "d8089020d294f20cb21eca751b5f7f68a0b62ea2716a78576cbd587605382432"
+      }
+    ],
+    "runtime": {
+      "qwen": {
+        "mlx": "0.32.4",
+        "mlx-lm": "0.31.3",
+        "transformers": "5.22.1"
+      },
+      "smol2": {
+        "mlx": "0.32.4",
+        "mlx-lm": "0.31.3",
+        "transformers": "5.22.1"
+      }
+    }
+  },
+  "recovery": {
+    "continuity": "Same official publisher URLs and scoring procedure. New source freeze, using the retained benchmark history; some temporary history was lost.",
+    "previous_freeze_sha256": "18969e93ed3669ba07d2f30e7abccf0f72cdbf59f951c13972886fa200418f01",
+    "publisher_urls_restored": 12
+  },
+  "replay": {
+    "current_context_ranges": 172,
+    "exact_prompts": 516,
+    "fixture_files": 43,
+    "focus_ranges": 86,
+    "outcome_counts": 375,
+    "publisher_ranges": 60
+  },
+  "results": {
+    "advance": false,
+    "cases": 43,
+    "counts": {
+      "FAA": {
+        "human_splice": {
+          "agreement_flags": 0,
+          "agreement_locations": 0,
+          "cases": 6,
+          "current_flags": 1,
+          "current_locations": 1,
+          "qwen_all_orders": 6,
+          "qwen_balanced_abstentions": 4,
+          "qwen_balanced_flags": 1,
+          "qwen_balanced_locations": 1,
+          "qwen_balanced_neither": 1,
+          "qwen_disagreed_by_order": 6,
+          "qwen_fixed_abstentions": 2,
+          "qwen_fixed_flags": 3,
+          "qwen_fixed_locations": 1,
+          "qwen_fixed_neither": 1,
+          "smol2_all_orders": 6,
+          "smol2_balanced_abstentions": 1,
+          "smol2_balanced_flags": 0,
+          "smol2_balanced_locations": 0,
+          "smol2_balanced_neither": 5,
+          "smol2_disagreed_by_order": 6,
+          "smol2_fixed_abstentions": 2,
+          "smol2_fixed_flags": 0,
+          "smol2_fixed_locations": 0,
+          "smol2_fixed_neither": 4,
+          "union_flags": 1,
+          "union_locations": 1
+        },
+        "original": {
+          "agreement_flags": 0,
+          "agreement_locations": 0,
+          "cases": 6,
+          "current_flags": 2,
+          "current_locations": 0,
+          "qwen_all_orders": 6,
+          "qwen_balanced_abstentions": 4,
+          "qwen_balanced_flags": 0,
+          "qwen_balanced_locations": 0,
+          "qwen_balanced_neither": 2,
+          "qwen_disagreed_by_order": 6,
+          "qwen_fixed_abstentions": 3,
+          "qwen_fixed_flags": 1,
+          "qwen_fixed_locations": 0,
+          "qwen_fixed_neither": 2,
+          "smol2_all_orders": 6,
+          "smol2_balanced_abstentions": 0,
+          "smol2_balanced_flags": 0,
+          "smol2_balanced_locations": 0,
+          "smol2_balanced_neither": 6,
+          "smol2_disagreed_by_order": 6,
+          "smol2_fixed_abstentions": 1,
+          "smol2_fixed_flags": 0,
+          "smol2_fixed_locations": 0,
+          "smol2_fixed_neither": 5,
+          "union_flags": 2,
+          "union_locations": 0
+        },
+        "qwen": {
+          "agreement_flags": 0,
+          "agreement_locations": 0,
+          "cases": 4,
+          "current_flags": 1,
+          "current_locations": 1,
+          "qwen_all_orders": 4,
+          "qwen_balanced_abstentions": 3,
+          "qwen_balanced_flags": 0,
+          "qwen_balanced_locations": 0,
+          "qwen_balanced_neither": 1,
+          "qwen_disagreed_by_order": 4,
+          "qwen_fixed_abstentions": 4,
+          "qwen_fixed_flags": 0,
+          "qwen_fixed_locations": 0,
+          "qwen_fixed_neither": 0,
+          "smol2_all_orders": 4,
+          "smol2_balanced_abstentions": 1,
+          "smol2_balanced_flags": 0,
+          "smol2_balanced_locations": 0,
+          "smol2_balanced_neither": 3,
+          "smol2_disagreed_by_order": 4,
+          "smol2_fixed_abstentions": 1,
+          "smol2_fixed_flags": 0,
+          "smol2_fixed_locations": 0,
+          "smol2_fixed_neither": 3,
+          "union_flags": 1,
+          "union_locations": 1
+        },
+        "smol2": {
+          "agreement_flags": 0,
+          "agreement_locations": 0,
+          "cases": 5,
+          "current_flags": 2,
+          "current_locations": 0,
+          "qwen_all_orders": 5,
+          "qwen_balanced_abstentions": 3,
+          "qwen_balanced_flags": 0,
+          "qwen_balanced_locations": 0,
+          "qwen_balanced_neither": 2,
+          "qwen_disagreed_by_order": 4,
+          "qwen_fixed_abstentions": 2,
+          "qwen_fixed_flags": 2,
+          "qwen_fixed_locations": 1,
+          "qwen_fixed_neither": 1,
+          "smol2_all_orders": 5,
+          "smol2_balanced_abstentions": 0,
+          "smol2_balanced_flags": 0,
+          "smol2_balanced_locations": 0,
+          "smol2_balanced_neither": 5,
+          "smol2_disagreed_by_order": 5,
+          "smol2_fixed_abstentions": 2,
+          "smol2_fixed_flags": 0,
+          "smol2_fixed_locations": 0,
+          "smol2_fixed_neither": 3,
+          "union_flags": 2,
+          "union_locations": 0
+        }
+      },
+      "USDA FSA": {
+        "human_splice": {
+          "agreement_flags": 0,
+          "agreement_locations": 0,
+          "cases": 6,
+          "current_flags": 0,
+          "current_locations": 0,
+          "qwen_all_orders": 6,
+          "qwen_balanced_abstentions": 2,
+          "qwen_balanced_flags": 2,
+          "qwen_balanced_locations": 0,
+          "qwen_balanced_neither": 2,
+          "qwen_disagreed_by_order": 6,
+          "qwen_fixed_abstentions": 1,
+          "qwen_fixed_flags": 4,
+          "qwen_fixed_locations": 2,
+          "qwen_fixed_neither": 1,
+          "smol2_all_orders": 6,
+          "smol2_balanced_abstentions": 2,
+          "smol2_balanced_flags": 0,
+          "smol2_balanced_locations": 0,
+          "smol2_balanced_neither": 4,
+          "smol2_disagreed_by_order": 6,
+          "smol2_fixed_abstentions": 2,
+          "smol2_fixed_flags": 0,
+          "smol2_fixed_locations": 0,
+          "smol2_fixed_neither": 4,
+          "union_flags": 0,
+          "union_locations": 0
+        },
+        "original": {
+          "agreement_flags": 0,
+          "agreement_locations": 0,
+          "cases": 6,
+          "current_flags": 1,
+          "current_locations": 0,
+          "qwen_all_orders": 6,
+          "qwen_balanced_abstentions": 2,
+          "qwen_balanced_flags": 2,
+          "qwen_balanced_locations": 0,
+          "qwen_balanced_neither": 2,
+          "qwen_disagreed_by_order": 4,
+          "qwen_fixed_abstentions": 1,
+          "qwen_fixed_flags": 3,
+          "qwen_fixed_locations": 0,
+          "qwen_fixed_neither": 2,
+          "smol2_all_orders": 6,
+          "smol2_balanced_abstentions": 0,
+          "smol2_balanced_flags": 0,
+          "smol2_balanced_locations": 0,
+          "smol2_balanced_neither": 6,
+          "smol2_disagreed_by_order": 6,
+          "smol2_fixed_abstentions": 2,
+          "smol2_fixed_flags": 0,
+          "smol2_fixed_locations": 0,
+          "smol2_fixed_neither": 4,
+          "union_flags": 1,
+          "union_locations": 0
+        },
+        "qwen": {
+          "agreement_flags": 0,
+          "agreement_locations": 0,
+          "cases": 4,
+          "current_flags": 0,
+          "current_locations": 0,
+          "qwen_all_orders": 4,
+          "qwen_balanced_abstentions": 2,
+          "qwen_balanced_flags": 1,
+          "qwen_balanced_locations": 0,
+          "qwen_balanced_neither": 1,
+          "qwen_disagreed_by_order": 3,
+          "qwen_fixed_abstentions": 0,
+          "qwen_fixed_flags": 3,
+          "qwen_fixed_locations": 1,
+          "qwen_fixed_neither": 1,
+          "smol2_all_orders": 4,
+          "smol2_balanced_abstentions": 0,
+          "smol2_balanced_flags": 0,
+          "smol2_balanced_locations": 0,
+          "smol2_balanced_neither": 4,
+          "smol2_disagreed_by_order": 4,
+          "smol2_fixed_abstentions": 1,
+          "smol2_fixed_flags": 0,
+          "smol2_fixed_locations": 0,
+          "smol2_fixed_neither": 3,
+          "union_flags": 0,
+          "union_locations": 0
+        },
+        "smol2": {
+          "agreement_flags": 0,
+          "agreement_locations": 0,
+          "cases": 6,
+          "current_flags": 1,
+          "current_locations": 1,
+          "qwen_all_orders": 6,
+          "qwen_balanced_abstentions": 3,
+          "qwen_balanced_flags": 2,
+          "qwen_balanced_locations": 0,
+          "qwen_balanced_neither": 1,
+          "qwen_disagreed_by_order": 5,
+          "qwen_fixed_abstentions": 2,
+          "qwen_fixed_flags": 3,
+          "qwen_fixed_locations": 1,
+          "qwen_fixed_neither": 1,
+          "smol2_all_orders": 6,
+          "smol2_balanced_abstentions": 0,
+          "smol2_balanced_flags": 0,
+          "smol2_balanced_locations": 0,
+          "smol2_balanced_neither": 6,
+          "smol2_disagreed_by_order": 6,
+          "smol2_fixed_abstentions": 2,
+          "smol2_fixed_flags": 0,
+          "smol2_fixed_locations": 0,
+          "smol2_fixed_neither": 4,
+          "union_flags": 1,
+          "union_locations": 1
+        }
+      },
+      "all": {
+        "human_splice": {
+          "agreement_flags": 0,
+          "agreement_locations": 0,
+          "cases": 12,
+          "current_flags": 1,
+          "current_locations": 1,
+          "qwen_all_orders": 12,
+          "qwen_balanced_abstentions": 6,
+          "qwen_balanced_flags": 3,
+          "qwen_balanced_locations": 1,
+          "qwen_balanced_neither": 3,
+          "qwen_disagreed_by_order": 12,
+          "qwen_fixed_abstentions": 3,
+          "qwen_fixed_flags": 7,
+          "qwen_fixed_locations": 3,
+          "qwen_fixed_neither": 2,
+          "smol2_all_orders": 12,
+          "smol2_balanced_abstentions": 3,
+          "smol2_balanced_flags": 0,
+          "smol2_balanced_locations": 0,
+          "smol2_balanced_neither": 9,
+          "smol2_disagreed_by_order": 12,
+          "smol2_fixed_abstentions": 4,
+          "smol2_fixed_flags": 0,
+          "smol2_fixed_locations": 0,
+          "smol2_fixed_neither": 8,
+          "union_flags": 1,
+          "union_locations": 1
+        },
+        "original": {
+          "agreement_flags": 0,
+          "agreement_locations": 0,
+          "cases": 12,
+          "current_flags": 3,
+          "current_locations": 0,
+          "qwen_all_orders": 12,
+          "qwen_balanced_abstentions": 6,
+          "qwen_balanced_flags": 2,
+          "qwen_balanced_locations": 0,
+          "qwen_balanced_neither": 4,
+          "qwen_disagreed_by_order": 10,
+          "qwen_fixed_abstentions": 4,
+          "qwen_fixed_flags": 4,
+          "qwen_fixed_locations": 0,
+          "qwen_fixed_neither": 4,
+          "smol2_all_orders": 12,
+          "smol2_balanced_abstentions": 0,
+          "smol2_balanced_flags": 0,
+          "smol2_balanced_locations": 0,
+          "smol2_balanced_neither": 12,
+          "smol2_disagreed_by_order": 12,
+          "smol2_fixed_abstentions": 3,
+          "smol2_fixed_flags": 0,
+          "smol2_fixed_locations": 0,
+          "smol2_fixed_neither": 9,
+          "union_flags": 3,
+          "union_locations": 0
+        },
+        "qwen": {
+          "agreement_flags": 0,
+          "agreement_locations": 0,
+          "cases": 8,
+          "current_flags": 1,
+          "current_locations": 1,
+          "qwen_all_orders": 8,
+          "qwen_balanced_abstentions": 5,
+          "qwen_balanced_flags": 1,
+          "qwen_balanced_locations": 0,
+          "qwen_balanced_neither": 2,
+          "qwen_disagreed_by_order": 7,
+          "qwen_fixed_abstentions": 4,
+          "qwen_fixed_flags": 3,
+          "qwen_fixed_locations": 1,
+          "qwen_fixed_neither": 1,
+          "smol2_all_orders": 8,
+          "smol2_balanced_abstentions": 1,
+          "smol2_balanced_flags": 0,
+          "smol2_balanced_locations": 0,
+          "smol2_balanced_neither": 7,
+          "smol2_disagreed_by_order": 8,
+          "smol2_fixed_abstentions": 2,
+          "smol2_fixed_flags": 0,
+          "smol2_fixed_locations": 0,
+          "smol2_fixed_neither": 6,
+          "union_flags": 1,
+          "union_locations": 1
+        },
+        "smol2": {
+          "agreement_flags": 0,
+          "agreement_locations": 0,
+          "cases": 11,
+          "current_flags": 3,
+          "current_locations": 1,
+          "qwen_all_orders": 11,
+          "qwen_balanced_abstentions": 6,
+          "qwen_balanced_flags": 2,
+          "qwen_balanced_locations": 0,
+          "qwen_balanced_neither": 3,
+          "qwen_disagreed_by_order": 9,
+          "qwen_fixed_abstentions": 4,
+          "qwen_fixed_flags": 5,
+          "qwen_fixed_locations": 2,
+          "qwen_fixed_neither": 2,
+          "smol2_all_orders": 11,
+          "smol2_balanced_abstentions": 0,
+          "smol2_balanced_flags": 0,
+          "smol2_balanced_locations": 0,
+          "smol2_balanced_neither": 11,
+          "smol2_disagreed_by_order": 11,
+          "smol2_fixed_abstentions": 4,
+          "smol2_fixed_flags": 0,
+          "smol2_fixed_locations": 0,
+          "smol2_fixed_neither": 7,
+          "union_flags": 3,
+          "union_locations": 1
+        }
+      }
+    },
+    "extra_human_groups": {
+      "FAA": 0,
+      "USDA FSA": 0,
+      "all": 0
+    },
+    "extra_useful_groups": {
+      "FAA": 0,
+      "USDA FSA": 0,
+      "all": 0
+    },
+    "extra_useful_groups_by_generator": {
+      "qwen": 0,
+      "smol2": 0
+    },
+    "freeze_sha256": "8848459b27bd840b5e3a90d1f495b13a58e6fe6460f5dd864fe709d573dd90b0",
+    "human_groups": {
+      "FAA": {
+        "agreement": 0,
+        "current": 2,
+        "qwen_balanced": 1,
+        "qwen_fixed": 4,
+        "smol2_balanced": 0,
+        "smol2_fixed": 0,
+        "union": 2
+      },
+      "USDA FSA": {
+        "agreement": 0,
+        "current": 1,
+        "qwen_balanced": 2,
+        "qwen_fixed": 5,
+        "smol2_balanced": 0,
+        "smol2_fixed": 0,
+        "union": 1
+      },
+      "all": {
+        "agreement": 0,
+        "current": 3,
+        "qwen_balanced": 3,
+        "qwen_fixed": 9,
+        "smol2_balanced": 0,
+        "smol2_fixed": 0,
+        "union": 3
+      }
+    },
+    "native_current_forwards": 36,
+    "native_current_inputs": 141,
+    "native_probe_seconds": {
+      "qwen": 70.903,
+      "smol2": 71.168
+    },
+    "order_forwards_per_model": 258,
+    "readout_sha256": "6be4681485d371770eeb1f4dfd6cb525c949c767c0663ba208bf66ed8c154c75",
+    "useful_groups": {
+      "FAA": {
+        "agreement": 0,
+        "current": 1,
+        "qwen_balanced": 0,
+        "qwen_fixed": 1,
+        "smol2_balanced": 0,
+        "smol2_fixed": 0,
+        "union": 1
+      },
+      "USDA FSA": {
+        "agreement": 0,
+        "current": 1,
+        "qwen_balanced": 0,
+        "qwen_fixed": 1,
+        "smol2_balanced": 0,
+        "smol2_fixed": 0,
+        "union": 1
+      },
+      "all": {
+        "agreement": 0,
+        "current": 2,
+        "qwen_balanced": 0,
+        "qwen_fixed": 2,
+        "smol2_balanced": 0,
+        "smol2_fixed": 0,
+        "union": 2
+      }
+    }
+  },
+  "schema": "chipmunk.writing-option-order-transfer/1",
+  "scope": "Local development comparison of short English U.S. government release excerpts. Raw fixture prose and model responses stay local."
+}

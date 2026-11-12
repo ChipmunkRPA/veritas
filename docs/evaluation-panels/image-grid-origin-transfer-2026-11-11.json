@@ -1,0 +1,485 @@
+{
+  "counts": {
+    "earlier": {
+      "arms": {
+        "flip": {
+          "additional_useful_groups_vs_flip": 0,
+          "controls_flagged": 30,
+          "controls_flagged_by_type": {
+            "blur": 4,
+            "feathered_processing": 6,
+            "global_processing": 5,
+            "local_contrast": 4,
+            "local_processing": 7,
+            "original": 4
+          },
+          "missed": 23,
+          "useful": 1,
+          "useful_lost_vs_flip": 0
+        },
+        "horizontal_offset": {
+          "additional_useful_groups_vs_flip": 0,
+          "controls_flagged": 49,
+          "controls_flagged_by_type": {
+            "blur": 8,
+            "feathered_processing": 9,
+            "global_processing": 8,
+            "local_contrast": 7,
+            "local_processing": 9,
+            "original": 8
+          },
+          "missed": 24,
+          "useful": 0,
+          "useful_lost_vs_flip": 1
+        },
+        "native": {
+          "additional_useful_groups_vs_flip": 0,
+          "controls_flagged": 47,
+          "controls_flagged_by_type": {
+            "blur": 8,
+            "feathered_processing": 9,
+            "global_processing": 6,
+            "local_contrast": 7,
+            "local_processing": 9,
+            "original": 8
+          },
+          "missed": 23,
+          "useful": 1,
+          "useful_lost_vs_flip": 0
+        },
+        "offset_intersection": {
+          "additional_useful_groups_vs_flip": 0,
+          "controls_flagged": 42,
+          "controls_flagged_by_type": {
+            "blur": 7,
+            "feathered_processing": 8,
+            "global_processing": 6,
+            "local_contrast": 6,
+            "local_processing": 8,
+            "original": 7
+          },
+          "missed": 24,
+          "useful": 0,
+          "useful_lost_vs_flip": 1
+        },
+        "original_supported_by_both": {
+          "additional_useful_groups_vs_flip": 0,
+          "controls_flagged": 38,
+          "controls_flagged_by_type": {
+            "blur": 5,
+            "feathered_processing": 8,
+            "global_processing": 6,
+            "local_contrast": 5,
+            "local_processing": 8,
+            "original": 6
+          },
+          "missed": 24,
+          "useful": 0,
+          "useful_lost_vs_flip": 1
+        },
+        "original_supported_by_either": {
+          "additional_useful_groups_vs_flip": 0,
+          "controls_flagged": 47,
+          "controls_flagged_by_type": {
+            "blur": 8,
+            "feathered_processing": 9,
+            "global_processing": 6,
+            "local_contrast": 7,
+            "local_processing": 9,
+            "original": 8
+          },
+          "missed": 23,
+          "useful": 1,
+          "useful_lost_vs_flip": 0
+        },
+        "recompression": {
+          "additional_useful_groups_vs_flip": 0,
+          "controls_flagged": 11,
+          "controls_flagged_by_type": {
+            "blur": 2,
+            "feathered_processing": 2,
+            "global_processing": 1,
+            "local_contrast": 2,
+            "local_processing": 2,
+            "original": 2
+          },
+          "missed": 24,
+          "useful": 0,
+          "useful_lost_vs_flip": 1
+        },
+        "vertical_offset": {
+          "additional_useful_groups_vs_flip": 1,
+          "controls_flagged": 49,
+          "controls_flagged_by_type": {
+            "blur": 8,
+            "feathered_processing": 9,
+            "global_processing": 7,
+            "local_contrast": 8,
+            "local_processing": 9,
+            "original": 8
+          },
+          "missed": 23,
+          "useful": 1,
+          "useful_lost_vs_flip": 1
+        }
+      },
+      "controls": 72,
+      "positive": 24
+    },
+    "flux": {
+      "arms": {
+        "flip": {
+          "additional_useful_groups_vs_flip": 0,
+          "controls_flagged": 7,
+          "controls_flagged_by_type": {
+            "blur": 2,
+            "copy_move": 1,
+            "original": 2,
+            "tone": 2
+          },
+          "missed": 5,
+          "useful": 1,
+          "useful_lost_vs_flip": 0
+        },
+        "horizontal_offset": {
+          "additional_useful_groups_vs_flip": 0,
+          "controls_flagged": 17,
+          "controls_flagged_by_type": {
+            "blur": 3,
+            "copy_move": 4,
+            "original": 5,
+            "tone": 5
+          },
+          "missed": 5,
+          "useful": 1,
+          "useful_lost_vs_flip": 0
+        },
+        "native": {
+          "additional_useful_groups_vs_flip": 0,
+          "controls_flagged": 18,
+          "controls_flagged_by_type": {
+            "blur": 4,
+            "copy_move": 4,
+            "original": 5,
+            "tone": 5
+          },
+          "missed": 5,
+          "useful": 1,
+          "useful_lost_vs_flip": 0
+        },
+        "offset_intersection": {
+          "additional_useful_groups_vs_flip": 0,
+          "controls_flagged": 14,
+          "controls_flagged_by_type": {
+            "blur": 3,
+            "copy_move": 3,
+            "original": 4,
+            "tone": 4
+          },
+          "missed": 5,
+          "useful": 1,
+          "useful_lost_vs_flip": 0
+        },
+        "original_supported_by_both": {
+          "additional_useful_groups_vs_flip": 0,
+          "controls_flagged": 10,
+          "controls_flagged_by_type": {
+            "blur": 2,
+            "copy_move": 2,
+            "original": 3,
+            "tone": 3
+          },
+          "missed": 5,
+          "useful": 1,
+          "useful_lost_vs_flip": 0
+        },
+        "original_supported_by_either": {
+          "additional_useful_groups_vs_flip": 0,
+          "controls_flagged": 12,
+          "controls_flagged_by_type": {
+            "blur": 3,
+            "copy_move": 3,
+            "original": 3,
+            "tone": 3
+          },
+          "missed": 5,
+          "useful": 1,
+          "useful_lost_vs_flip": 0
+        },
+        "recompression": {
+          "additional_useful_groups_vs_flip": 0,
+          "controls_flagged": 6,
+          "controls_flagged_by_type": {
+            "blur": 2,
+            "copy_move": 2,
+            "original": 1,
+            "tone": 1
+          },
+          "missed": 6,
+          "useful": 0,
+          "useful_lost_vs_flip": 1
+        },
+        "vertical_offset": {
+          "additional_useful_groups_vs_flip": 0,
+          "controls_flagged": 16,
+          "controls_flagged_by_type": {
+            "blur": 4,
+            "copy_move": 4,
+            "original": 4,
+            "tone": 4
+          },
+          "missed": 5,
+          "useful": 1,
+          "useful_lost_vs_flip": 0
+        }
+      },
+      "controls": 24,
+      "positive": 6
+    },
+    "later": {
+      "arms": {
+        "flip": {
+          "additional_useful_groups_vs_flip": 0,
+          "controls_flagged": 38,
+          "controls_flagged_by_type": {
+            "blur": 5,
+            "feathered_processing": 7,
+            "global_processing": 7,
+            "local_contrast": 5,
+            "local_processing": 8,
+            "original": 6
+          },
+          "missed": 22,
+          "useful": 2,
+          "useful_lost_vs_flip": 0
+        },
+        "horizontal_offset": {
+          "additional_useful_groups_vs_flip": 0,
+          "controls_flagged": 55,
+          "controls_flagged_by_type": {
+            "blur": 9,
+            "feathered_processing": 10,
+            "global_processing": 9,
+            "local_contrast": 9,
+            "local_processing": 10,
+            "original": 8
+          },
+          "missed": 22,
+          "useful": 2,
+          "useful_lost_vs_flip": 0
+        },
+        "native": {
+          "additional_useful_groups_vs_flip": 0,
+          "controls_flagged": 62,
+          "controls_flagged_by_type": {
+            "blur": 10,
+            "feathered_processing": 11,
+            "global_processing": 10,
+            "local_contrast": 10,
+            "local_processing": 11,
+            "original": 10
+          },
+          "missed": 22,
+          "useful": 2,
+          "useful_lost_vs_flip": 0
+        },
+        "offset_intersection": {
+          "additional_useful_groups_vs_flip": 0,
+          "controls_flagged": 55,
+          "controls_flagged_by_type": {
+            "blur": 9,
+            "feathered_processing": 10,
+            "global_processing": 9,
+            "local_contrast": 9,
+            "local_processing": 10,
+            "original": 8
+          },
+          "missed": 22,
+          "useful": 2,
+          "useful_lost_vs_flip": 0
+        },
+        "original_supported_by_both": {
+          "additional_useful_groups_vs_flip": 0,
+          "controls_flagged": 55,
+          "controls_flagged_by_type": {
+            "blur": 9,
+            "feathered_processing": 10,
+            "global_processing": 9,
+            "local_contrast": 9,
+            "local_processing": 10,
+            "original": 8
+          },
+          "missed": 22,
+          "useful": 2,
+          "useful_lost_vs_flip": 0
+        },
+        "original_supported_by_either": {
+          "additional_useful_groups_vs_flip": 0,
+          "controls_flagged": 56,
+          "controls_flagged_by_type": {
+            "blur": 9,
+            "feathered_processing": 10,
+            "global_processing": 9,
+            "local_contrast": 9,
+            "local_processing": 10,
+            "original": 9
+          },
+          "missed": 22,
+          "useful": 2,
+          "useful_lost_vs_flip": 0
+        },
+        "recompression": {
+          "additional_useful_groups_vs_flip": 0,
+          "controls_flagged": 12,
+          "controls_flagged_by_type": {
+            "blur": 0,
+            "feathered_processing": 2,
+            "global_processing": 6,
+            "local_contrast": 1,
+            "local_processing": 2,
+            "original": 1
+          },
+          "missed": 24,
+          "useful": 0,
+          "useful_lost_vs_flip": 2
+        },
+        "vertical_offset": {
+          "additional_useful_groups_vs_flip": 0,
+          "controls_flagged": 60,
+          "controls_flagged_by_type": {
+            "blur": 10,
+            "feathered_processing": 10,
+            "global_processing": 10,
+            "local_contrast": 10,
+            "local_processing": 10,
+            "original": 10
+          },
+          "missed": 22,
+          "useful": 2,
+          "useful_lost_vs_flip": 0
+        }
+      },
+      "controls": 72,
+      "positive": 24
+    }
+  },
+  "freeze": {
+    "code_sha256": {
+      "backend/app/detectors/image/jpeg_bitstream.py": "a14ffabb7afaf4279e5c7637731bb03f0cfdffcfd50b7efcdf62e2d335a23f2a",
+      "backend/app/detectors/image/localiser.py": "1edb4cbe6595b42ed02fb46d5f400605929d012be42965799aa48f83b07b1e8c",
+      "backend/app/detectors/image/regional.py": "61aee712ea97bceb1e3b5f7a351d32e50f1b4c30075cb5746b0b103a31eddf34",
+      "backend/app/detectors/image/regional_graph/GLoRA_vit.py": "83b4706dc3e4580b19d88d9555d2e6203203ba1b4dee77c0f8bd5f63d8dffe75",
+      "backend/app/detectors/image/regional_graph/RelayFormer.py": "34c7b53384f50983a0486e6ee829f16cb2f541d45d15ee3a680c0200b687992a",
+      "backend/app/detectors/image/regional_graph/__init__.py": "e97c58130a621e301273c695b0bc6960182ddfa275b5bc661181159f99132bb1",
+      "backend/app/detectors/image/regional_graph/rotary.py": "10118f80b6d4c387311f4283144d4826afdcde0dc2ff3f8d963ac2516d59bb97",
+      "backend/app/detectors/image/regional_support.py": "331ed565966f08efb61aed5edb82c05e0b36c032aadae3bb17503d7a89f27882",
+      "backend/app/detectors/image/splice.py": "f8cd14a6b8058fb58f87ecf0f984ee447ba70156fc100ca4b321e6ddc28d78ac",
+      "backend/scripts/image_background_patch_score.py": "cb854082628636833e2fd005e954d0bdb7c78362e58ee98632f1ba4153224d5a",
+      "backend/scripts/image_edge_spread_transfer.py": "f9d434f1dbd2d04b4292e512e562cae52f7dd049690b45f97ef424b2d971c08c",
+      "backend/scripts/image_flux_product_comparison_v288.py": "4a699d15883f5d1b6051c30eb39e9fda1646c06350be1b8dd970ec6cd00a5b1f",
+      "backend/scripts/image_grid_origin_transfer.py": "ec6b4c1abdf92e7fcff1916b5a8b85c611cbb2170f35e3d18d3fef86325e4a91",
+      "backend/scripts/image_regional_flip_transfer.py": "d5da3d164ea4a1af29d358b01d4c4573d7b468ba3bb73e4d4f3c4c335b980b8f"
+    },
+    "cohorts": [
+      "earlier",
+      "later",
+      "flux"
+    ],
+    "flux_source_receipt_sha256": "0118e1e7ec93249c0c31fb3776c332eb0052a7542d19ad1f82c42c82b7f8615f",
+    "intakes": {
+      "earlier": {
+        "attempts.jsonl": "3b8291b96634bca1920bddfd9239a53d69e143ea8efc74e565fd7406e749f9ce",
+        "plan.json": "2fc63a2d9f666ce2e593cb7c6b503120661b74a33dbf88f297e34d96ae3c3d7b",
+        "result.json": "fb0aafa7d109ca3e7fda3256fbd9fdf0e3b2afca265081092552b54cc8388731"
+      },
+      "later": {
+        "attempts.jsonl": "006a125678341700c243754a423c480b41bd86029a70f689ff1e7a467fc7fde7",
+        "plan.json": "a2176e567d71f2a80178adec7fb55e34007f6ad3114f9baf09837e233197fc34",
+        "result.json": "3d849ad48453c79002aa78d2d9cc8c7aeecc9f1979008060244c0bd01e065e86"
+      }
+    },
+    "method": {
+      "advance": {
+        "offset_intersection": "Gain useful locations on at least two photos over flip with no more ordinary flags in each retained panel.",
+        "original_supported_by_both": "Keep every useful flip location and lower ordinary flags by at least 20% in both retained panels."
+      },
+      "arms": [
+        "native",
+        "flip",
+        "recompression",
+        "horizontal_offset",
+        "vertical_offset",
+        "offset_intersection",
+        "original_supported_by_both",
+        "original_supported_by_either"
+      ],
+      "confidence_contribution": 0,
+      "gate_fraction": 0.01,
+      "native_component_overlap": 0.5,
+      "offsets_yx": [
+        [
+          0,
+          32
+        ],
+        [
+          32,
+          0
+        ]
+      ],
+      "padding": "reflect above or left",
+      "raw_point": 0.9,
+      "useful_iou": 0.3,
+      "useful_recall": 0.5
+    },
+    "previous_flip_journal_sha256": "bc715cda937fcf6d0e4f5171f3bebb8158e5212ef6439ee44891c1a41949d29d",
+    "previous_flip_result_sha256": "61f2a87a193c10ac16f3d93ff8f79eb5e1e6f7477bee8acec693dfa555711d9b",
+    "runtime": {
+      "device": "cpu",
+      "numpy": "2.2.6",
+      "opencv": "5.0.0",
+      "threads": 2,
+      "torch": "2.13.0"
+    },
+    "schema": "chipmunk.image-grid-origin-transfer/1",
+    "source_views": [
+      96,
+      96,
+      30
+    ],
+    "weights_sha256": {
+      "recompression": "ca3aa144e6ca08f2bb2eae93ac45d76c27a2922770e028bf90ef76ce974ee061",
+      "regional": "587d553353ddab1c81f45e86fbc9ad2326dee9086c6b566d9abcacc221380590"
+    }
+  },
+  "freeze_sha256": "d7424e15ce2c1c4e530ca08e00bdeea67a9fd53ce3c05da0500cca476814f05b",
+  "independent_audit": {
+    "advancement": {
+      "discovery": false,
+      "filter": false
+    },
+    "earlier_mask_matches": 576,
+    "native_measurements_verified": 1776,
+    "shifted_inputs_verified": 444,
+    "source_views": 222
+  },
+  "inference_calls": 534,
+  "journal_sha256": "a1fd47f08fd49e6174567b657fd5d3c5816918e4a2e0f494a7e5f7b3b57c3dce",
+  "previous_flip_replay": {
+    "exact_outcome_counts": true,
+    "published_aggregate_sha256": "4c27892691302e3fb10a89076d3ec413db07f73a1bbfc5e3f0adddf873c5db17",
+    "rows_sha256": "bc715cda937fcf6d0e4f5171f3bebb8158e5212ef6439ee44891c1a41949d29d"
+  },
+  "recovery": {
+    "additional_views": 30,
+    "corrected_encoder": {
+      "file": "backend/scripts/image_flux_detector_comparison_v280.py",
+      "sha256": "2a423629be60a7ed31478d37dca5c3ce3b4a84031b95d178deddd12388f1327d"
+    },
+    "initial_freeze_sha256": "478a5fb2c5801c5eeb673540b966baa413f5b19a3ca0d11a8240dc27038e950f",
+    "retained_earlier_views": 192,
+    "retained_journal_prefix_sha256": "f7aa487724fbfb7b2e73b56d3e7f05674b2f09d0e9d8ef8d24d0c0d86740920b",
+    "transfer_elapsed_s": 62.315
+  },
+  "schema": "chipmunk.image-grid-origin-transfer/1",
+  "scope": "Native PNG regional localization on two retained panels and a separate six-photo editor transfer. Repeatability only, with zero AI confidence weight."
+}

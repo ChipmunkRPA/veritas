@@ -62,6 +62,9 @@ verifies source crops where an inspection range appears.
 The [marked earlier-video timing study](grid-paired-closure-timing-2026-11-12.md)
 replays independently measured mouth movement and speech changes at a marked
 event, with coherent retiming and ordinary processing controls.
+The [single-video release timing study](grid-single-clip-release-timing-2026-11-12.md)
+reconstructs 120 native deliveries and verifies how often nearby acoustic
+transients can support the same visible speech event.
 
 The [earlier-audio comparison](audio-reference-comparison-2026-11-11.md#replay-without-the-app)
 replays changed sample ranges, difference waveforms, and playable excerpts
@@ -141,6 +144,8 @@ the exact photo area, then verifies the effect of the surrounding frame.
 The [fixed-photo framing test](image-viewport-frame-perturbation-2026-11-12.md)
 changes only the frame around matched clean and edited photos and replays both
 the original and newly selected regions.
+The [two-photo difference pilot](image-embedded-pair-difference-transfer-2026-11-12.md)
+replays source-pixel differences when one PNG contains two matching photo areas.
 The [quality-90 earlier-copy study](image-reference-jpeg90-transfer-2026-11-12.md)
 rebuilds both JPEG deliveries, checks mapped native crops, and verifies the
 paid result's API, PDF, and JSON evidence in the local app.

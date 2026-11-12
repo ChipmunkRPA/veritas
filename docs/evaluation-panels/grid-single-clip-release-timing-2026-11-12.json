@@ -1,0 +1,213 @@
+{
+  "schema": "chipmunk.grid-single-clip-release-study/1",
+  "scope": {
+    "held_native_sources": 12,
+    "held_source_groups": 6,
+    "discovery_source_groups": 2,
+    "earlier_trial_exposure": "Earlier source qualification and paired or prior short timing testing. New exact media deliveries and no overlap with this trial's discovery group.",
+    "native_geometry": [
+      360,
+      288
+    ],
+    "pictures_per_clip": 75,
+    "pictures_per_second": 25,
+    "mono_sample_rate": 16000,
+    "decoded_samples_per_clip": 47648,
+    "affects_overall_confidence": false
+  },
+  "method": {
+    "video": "Eye-normalized three-gap median. Last picture at or below .055 before a crossing and a rise of at least .032 over the next four native pictures. Anchor is the midpoint of the bracketing pair.",
+    "audio": "5 ms bins. Broadband speech after a quiet interval and a high-pass transient at 1,600 Hz. Require an eightfold high-band rise, and normalize floor and sustained energy to the clip's 90th percentile. Keep the strongest candidate per 70 ms neighborhood.",
+    "association": "Unique acoustic and visual association after removing ambiguous alternatives. One concordant association on either side must agree within 60 ms. The middle pair needs a 160\u2013400 ms change with no close alternative in either modality.",
+    "normal_radius_ms": 80,
+    "flank_consistency_ms": 60,
+    "flank_max_gap_ms": 800,
+    "local_min_ms": 160,
+    "local_max_ms": 400,
+    "known_shift_tolerance_ms": 80,
+    "authored_crossfade_samples": 160,
+    "gate": {
+      "correct": 8,
+      "correct_source_groups": 3,
+      "minimum_assessed_fraction": 0.6,
+      "maximum_control_flags": 1
+    }
+  },
+  "discovery": {
+    "original": {
+      "views": 2,
+      "assessed": 2,
+      "flags": 0
+    },
+    "source_time_neural": {
+      "views": 2,
+      "assessed": 2,
+      "flags": 0
+    },
+    "earlier_drive_neural": {
+      "views": 2,
+      "assessed": 2,
+      "flags": 0
+    },
+    "earlier_pixels_ordinary": {
+      "views": 2,
+      "assessed": 2,
+      "flags": 0
+    }
+  },
+  "discovery_delayed_anchors_ms": [
+    {
+      "original_picture_interval": [
+        520,
+        560
+      ],
+      "shifted_picture_interval": [
+        840,
+        880
+      ],
+      "original_nearby_acoustic_candidate": 565,
+      "shifted_nearby_acoustic_candidate": 800
+    },
+    {
+      "original_picture_interval": [
+        800,
+        840
+      ],
+      "shifted_picture_interval": [
+        1120,
+        1160
+      ],
+      "original_nearby_acoustic_candidate": 855,
+      "shifted_nearby_acoustic_candidate": 1120
+    }
+  ],
+  "held": {
+    "untouched": {
+      "local_shift_truth": false,
+      "views": 12,
+      "assessed": 3,
+      "flags": 0,
+      "correct": 0,
+      "current_assessed": 11,
+      "current_flags": 0,
+      "current_correct": 0
+    },
+    "remux": {
+      "local_shift_truth": false,
+      "views": 12,
+      "assessed": 3,
+      "flags": 0,
+      "correct": 0,
+      "current_assessed": 11,
+      "current_flags": 0,
+      "current_correct": 0
+    },
+    "early_audio_later": {
+      "local_shift_truth": true,
+      "views": 12,
+      "assessed": 2,
+      "flags": 0,
+      "correct": 0,
+      "current_assessed": 11,
+      "current_flags": 0,
+      "current_correct": 0
+    },
+    "early_audio_earlier": {
+      "local_shift_truth": true,
+      "views": 12,
+      "assessed": 1,
+      "flags": 0,
+      "correct": 0,
+      "current_assessed": 11,
+      "current_flags": 0,
+      "current_correct": 0
+    },
+    "middle_audio_later": {
+      "local_shift_truth": true,
+      "views": 12,
+      "assessed": 1,
+      "flags": 0,
+      "correct": 0,
+      "current_assessed": 12,
+      "current_flags": 0,
+      "current_correct": 0
+    },
+    "middle_audio_earlier": {
+      "local_shift_truth": true,
+      "views": 12,
+      "assessed": 2,
+      "flags": 0,
+      "correct": 0,
+      "current_assessed": 11,
+      "current_flags": 0,
+      "current_correct": 0
+    },
+    "local_gain": {
+      "local_shift_truth": false,
+      "views": 12,
+      "assessed": 1,
+      "flags": 0,
+      "correct": 0,
+      "current_assessed": 11,
+      "current_flags": 0,
+      "current_correct": 0
+    },
+    "local_lowpass": {
+      "local_shift_truth": false,
+      "views": 12,
+      "assessed": 2,
+      "flags": 0,
+      "correct": 0,
+      "current_assessed": 11,
+      "current_flags": 0,
+      "current_correct": 0
+    },
+    "global_audio_later": {
+      "local_shift_truth": false,
+      "views": 12,
+      "assessed": 1,
+      "flags": 0,
+      "correct": 0,
+      "current_assessed": 12,
+      "current_flags": 0,
+      "current_correct": 0
+    },
+    "global_audio_earlier": {
+      "local_shift_truth": false,
+      "views": 12,
+      "assessed": 1,
+      "flags": 0,
+      "correct": 0,
+      "current_assessed": 11,
+      "current_flags": 0,
+      "current_correct": 0
+    }
+  },
+  "known_signed_localizations": 0,
+  "correct_groups": 0,
+  "gates": {
+    "correct": false,
+    "groups": false,
+    "coverage": false,
+    "control_flags": true
+  },
+  "advances": false,
+  "native_readback": {
+    "verified": true,
+    "source_groups": 6,
+    "held_originals": 12,
+    "native_pictures": 9000,
+    "exact_pcm_samples": 5717760,
+    "deliveries": 120,
+    "aggregate_sha256": "ce53a9a3ad7771000ea9c2e2bc0351e2ff92c247294080ac992fba35885501ba",
+    "readout_sha256": "b33f3b35a96dc35eb958d2cb705d6b117de00808e58348183a5e5a087b2f956e"
+  },
+  "commitments": {
+    "discovery": "580167b9644b63034c421f52ac6319d10dae167236c35345ea7c0146cbe28a41",
+    "freeze": "e09346a235f854e5b557335e24cffcbb057d86642b80f94be248ac0b90e05ef5",
+    "media": "6e4726141db14977e45a3cdb2a6c44222e376f39cf4e198968d1cbd1b7862e5f",
+    "readout": "b33f3b35a96dc35eb958d2cb705d6b117de00808e58348183a5e5a087b2f956e",
+    "aggregate": "ce53a9a3ad7771000ea9c2e2bc0351e2ff92c247294080ac992fba35885501ba",
+    "independent-replay": "8a42419a038b6a1d22007425bcd034032010a689f0321cdb85c9eeb60b51ad61"
+  }
+}

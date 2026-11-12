@@ -95,6 +95,27 @@ remaining requirements here and in linked experiment records; do not call the
 overall improvement program complete while any required media evaluation or
 integration remains unfinished.
 
+## Progress on 12 November
+
+- The [single-video mouth-region check](video-mouth-local-hold-2026-11-12.md)
+  localized 26 of 28 known held-mouth edits on its two-second H.264 profile.
+  None of the 81 assessed controls produced an alert, and three cuts were
+  unassessed. The app, PDF, JSON and signed source replay agree on the range
+  and the three before, during and after picture and crop pairs.
+- The [earlier-photo screenshot comparison](image-reference-screenshot-holdout-2026-11-12.md)
+  localized 17 of 18 known edits versus zero with the prior app. All 18
+  unchanged photo placements were recovered without a highlight. The
+  [Word archive comparison](writing-archive-word-transfer-2026-11-12.md)
+  recovered all 53 expected source matches and made zero claims on 43
+  controls. Both comparisons report measured differences with their
+  native source positions and carry zero weight in the AI estimate.
+- The [independent speech diagnostic](audio-vocal-event-mixtures-2026-11-12.md#can-a-separate-speech-classifier-catch-those-misses)
+  caught none of the five wrong-original deliveries with competing vocal
+  events and stays experimental. The
+  [paired-video soundtrack replay](video-paired-soundtrack-transfer-2026-11-12.md#replay)
+  can now start from the pinned public recordings. The local replay
+  regenerated and verified all 198 held deliveries.
+
 ## Progress on 11 November
 
 - The [residual color comparison](image-residual-color-transfer-2026-11-11.md)

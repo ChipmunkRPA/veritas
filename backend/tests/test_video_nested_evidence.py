@@ -426,7 +426,7 @@ def test_short_face_change_keeps_exact_source_frames_in_pdf_json_and_offline_ver
     if height in {720, 360}:
         altered = copy.deepcopy(packet)
         altered['face_return']['frame_inputs'][0]['pts'] -= 1
-        with pytest.raises(ValueError, match='exact 25 Hz source clock'):
+        with pytest.raises(ValueError, match='exact source clock'):
             face_return_binding.validate_packet(altered, f.document['source'])
 
     monkeypatch.setattr(multimedia_evidence, 'default_store', lambda: f.store)
@@ -557,6 +557,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
                         'app.evidence.audio_similarity_binding',
                         'app.evidence.av_binding','app.evidence.face_interval_binding','app.evidence.face_boundary_binding','app.evidence.face_boundary_clock','app.evidence.face_alignment_context',
                         'app.evidence.face_lighting_context','app.evidence.face_return_binding','app.evidence.video_packet_versions','app.evidence.picture_hold_binding', 'app.evidence.picture_sequence',
+                        'app.evidence.mouth_local_hold_binding','app.evidence.source_geometry',
                         'app.evidence.image_eligibility','app.evidence.image_copy_similarity_binding','app.evidence.document_scope'):
             return None
         if fullname.startswith(('app.storage','app.core.config','app.detectors','app.evidence','app.api')):

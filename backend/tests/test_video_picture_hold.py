@@ -3,6 +3,7 @@ from __future__ import annotations
 import copy
 import hashlib
 import io
+import json
 import subprocess
 from fractions import Fraction
 from types import SimpleNamespace
@@ -16,10 +17,10 @@ from sqlalchemy.orm import Session
 from test_video_nested_evidence import _check_public_zip
 
 from app.core.canonical import canonical_hash, canonical_json
-from app.detectors.video import picture_hold
+from app.detectors.video import mouth_local_hold, picture_hold
 from app.detectors.video.decode import DecodedFrame, FrameTable, decode_frames, probe_frames
+from app.evidence import mouth_local_hold_binding, picture_sequence, service, video_packets
 from app.evidence import picture_hold_binding as binding
-from app.evidence import picture_sequence, service, video_packets
 from app.reports import engine, multimedia_evidence
 from app.reports.specimens import specimen
 from app.storage.artefacts import register_artefact
@@ -28,6 +29,7 @@ from app.storage.objects import ObjectStore
 from scripts.video_lossy_sequence_transfer import deliver, read_source
 from scripts.video_motion_late_transfer import encode as late_authored
 from scripts.video_motion_sequence_360p_transfer import authored
+from scripts.video_mouth_local_hold_panel import encode as encode_mouth_hold
 
 
 def _source(path, *, held=False, late=False, repeated=False):
@@ -61,15 +63,32 @@ def _motion_raster(count):
     return b"".join(frames)
 
 
+def _mouth_source(path, monkeypatch):
+    texture = np.indices((68, 80)).sum(axis=0) % 5 * 28 + 26
+    frames = []
+    for i in range(50):
+        rgb = np.full((288, 360, 3), 72 + (i % 4) * 4, dtype=np.uint8)
+        core = texture + (70 if 16 <= i < 26 else (i % 6) * 7)
+        rgb[125:193, 140:220] = core[..., None]
+        frames.append(rgb)
+    encode_mouth_hold(path, frames, 0)
+    monkeypatch.setattr(mouth_local_hold, "local_detector_path", lambda: path)
+    monkeypatch.setattr(mouth_local_hold, "load_yunet", lambda _: None)
+    monkeypatch.setattr(mouth_local_hold, "source_geometry", lambda *_: (mouth_local_hold.Geometry(180, 159, 44), 1))
+
+
 @pytest.mark.parametrize("case", ["opening_hold", "later_hold", "moving_sequence", "lossy_sequence", "lossy_sequence_360p",
-                                   "lossy_sequence_360p_late"])
+                                   "lossy_sequence_360p_late", "mouth_hold"])
 def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monkeypatch, case, request):
+    mouth = case == "mouth_hold"
     high_res = case.startswith("lossy_sequence_360p")
     extension = case == "lossy_sequence_360p_late"
     lossy = case.startswith("lossy_sequence")
-    repeated, late = lossy or case == "moving_sequence", case != "opening_hold"
-    path = tmp_path / "exact-hold.mkv"
-    if lossy:
+    repeated, late = mouth or lossy or case == "moving_sequence", case != "opening_hold"
+    path = tmp_path / ("mouth-hold.mp4" if mouth else "exact-hold.mkv")
+    if mouth:
+        _mouth_source(path, monkeypatch)
+    elif lossy:
         if extension:
             indices = late_authored(_motion_raster(450), path, 0, "late_cross", "h264")
         elif high_res:
@@ -85,12 +104,24 @@ def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monk
         frames = {frame.index: frame.rgb for frame in decode_frames(path, table, indices)}
     store = ObjectStore(tmp_path / "objects")
     original = store.put_file(path)
-    origin = 0. if lossy else 5.
-    encoding = ("h264", "yuv420p") if lossy else None
+    origin = 0. if lossy or mouth else 5.
+    encoding = ("h264", "yuv420p") if lossy or mouth else None
     scan = picture_hold.inspect(store.path_for(original.sha256), table, origin=origin, sequence_review=repeated,
-                                motion_encoding=encoding)
+                                motion_encoding=encoding, mouth_review=mouth)
     assert scan["coverage"]["frames_scanned"] == len(table)
-    if lossy:
+    if mouth:
+        review = scan["coverage"]["mouth_local_hold"]
+        assert review["status"] == "matched" and review["affects_overall_confidence"] is False
+        match = review["match"]
+        assert match["frames"] == [16, 26]
+        indices = [15, 21, 26]
+        assert match["anchors"] == indices
+        frames = [frame.rgb for frame in decode_frames(path, table, None)]
+        mouth_local_hold.verify_measurements(frames, json.loads(canonical_json(match)))
+        altered_match = {**match, "minimum_flank_peak": match["minimum_flank_peak"] + .1}
+        with pytest.raises(ValueError, match="do not reproduce the held mouth-region measurements"):
+            mouth_local_hold.verify_measurements(frames, altered_match)
+    elif lossy:
         coverage = scan["coverage"]
         assert coverage["sequence_review"]["status"] == "no_match"
         motion = coverage["motion_sequence_review"]
@@ -118,7 +149,7 @@ def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monk
     database = create_engine("sqlite://")
     Base.metadata.create_all(database)
     with Session(database) as db:
-        analysis = Analysis(id="video-picture-hold", kind="video", filename=path.name, content_type="video/x-matroska",
+        analysis = Analysis(id="video-picture-hold", kind="video", filename=path.name, content_type="video/mp4" if mouth else "video/x-matroska",
                             size_bytes=original.size_bytes, sha256=original.sha256, status="done", revision=1,
                             result_schema_version=2)
         db.add(analysis)
@@ -144,11 +175,24 @@ def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monk
         document = service.persist_packet_set(db, analysis, store, result=result)
         assert service.load_packet_set(db, analysis, store) == document
         assert document["coverage"]["scored_frame_indices"] == []
-        [packet] = document["packets"]
-        expected_packet = picture_sequence.MOTION_PACKET_ID if lossy else picture_sequence.PACKET_ID if repeated else binding.PACKET_ID
+        expected_packet = (mouth_local_hold_binding.PACKET_ID if mouth else picture_sequence.MOTION_PACKET_ID if lossy
+                           else picture_sequence.PACKET_ID if repeated else binding.PACKET_ID)
+        [packet] = [candidate for candidate in document["packets"] if candidate["id"] == expected_packet] if mouth else document["packets"]
         assert packet["id"] == expected_packet
-        assert packet["picture_sequence" if repeated else "picture_hold"] == match
+        assert canonical_hash(packet["mouth_local_hold" if mouth else "picture_sequence" if repeated else "picture_hold"]) == canonical_hash(match)
         assert [f["anchor"]["frame_index"] for f in packet["frames"]] == indices
+        if mouth:
+            assert not packet["affects_overall_confidence"]
+            assert [f["interval_role"] for f in packet["frames"]] == ["before", "during", "after"]
+            modified = copy.deepcopy(document)
+            next(p for p in modified["packets"] if p["id"] == expected_packet)["window"]["end_playback_s"] += .01
+            with pytest.raises(ValueError, match="differs from the committed clock"):
+                binding.validate(modified)
+            x, y, w, h = match["box"]
+            for frame in packet["frames"]:
+                crop = packet["artifacts"][frame["artifact_refs"]["crop"]]
+                with Image.open(io.BytesIO(store.read_bytes(crop["sha256"]))) as saved:
+                    np.testing.assert_array_equal(np.asarray(saved), frames[frame["anchor"]["frame_index"]][y:y+h, x:x+w])
         if lossy:
             assert packet["affects_overall_confidence"] is False
             assert len({f["artifact_refs"]["original"] for f in packet["frames"]}) == 4
@@ -164,13 +208,13 @@ def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monk
                 np.testing.assert_array_equal(np.asarray(saved), frames[frame["anchor"]["frame_index"]])
         changed = copy.deepcopy(document)
         changed["picture_hold"]["last_pts"] += 1
-        changed["picture_hold"]["last_stream_time_s"] += .001
+        changed["picture_hold"]["last_stream_time_s"] += float(table.tb)
         with pytest.raises(ValueError, match="recorded native inspection"):
             binding.validate(changed)
         changed = copy.deepcopy(document)
-        if repeated:
-            changed["packets"][0]["frames"][2]["anchor"]["frame_index"] += 1
-            with pytest.raises(ValueError, match="endpoint differs"):
+        if mouth or repeated:
+            next(p for p in changed["packets"] if p["id"] == expected_packet)["frames"][2]["anchor"]["frame_index"] += 1
+            with pytest.raises(ValueError, match="Mouth hold image differs" if mouth else "endpoint differs"):
                 binding.validate(changed)
         else:
             changed["packets"][0]["picture_hold"]["pts"][1] = match["start_pts"]
@@ -184,7 +228,10 @@ def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monk
         pdf = engine.render_pdf(frozen)
         with pymupdf.open(stream=pdf.pdf, filetype="pdf") as rendered_pdf:
             text = " ".join(" ".join(page.get_text() for page in rendered_pdf).split())
-            if lossy:
+            if mouth:
+                assert "Mouth-region picture hold" in text and "VPH02" in text
+                assert "0.640 to 1.040 s" in text and "Exact measured mouth-region crop" in text
+            elif lossy:
                 assert "Similar repeated moving sequences" in text and "VPR02" in text
                 if extension:
                     assert "first 450 native 640 × 360 frames" in text

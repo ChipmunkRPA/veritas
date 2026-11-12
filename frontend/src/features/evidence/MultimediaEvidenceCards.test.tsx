@@ -236,6 +236,56 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.queryByRole('link', { name: 'Inspect the recorded hold' })).toBeNull()
   })
 
+  it('links the measured mouth-region hold and shows exact crops before, during and after it', () => {
+    const set = { ...structuredClone(video), version: 'video-evidence-17' }
+    set.picture_hold = { status: 'no_match', frames_scanned: 50, frame_limit: 50, last_frame_index: 49,
+      last_stream_time_s: 13.64, last_pts: 13640, time_base: '1/1000', reason: null, packet_id: null,
+      mouth_local_hold: { status: 'matched', frames_scanned: 50, packet_id: 'VPH02', affects_overall_confidence: false } }
+    const item = set.packets[0]
+    item.id = 'VPH02'
+    item.title = 'Mouth-region picture hold'
+    item.claim_scope = 'sampled_window'
+    item.mouth_local_hold = { frames: [8, 12], box: [110, 86, 24, 18] }
+    item.window = { frame_indices: [8, 9, 10, 11], start_pts: 12000, end_pts: 12160,
+      time_base: '1/1000', start_stream_s: 12, end_stream_s: 12.16, start_playback_s: 2, end_playback_s: 2.16 }
+    item.frames = (['before', 'during', 'after'] as const).map((interval_role, i) => {
+      const frame_index = [7, 8, 12][i]
+      const pts = 12000 + 40 * (frame_index - 8)
+      return { ...item.frames[0], id: `VPH02.${i + 1}`, interval_role, score: null, is_peak: false,
+        anchor: { frame_index, pts, time_base: '1/1000', stream_time_s: pts / 1000, playback_time_s: pts / 1000 - 10 } }
+    })
+    show(set)
+    const coverage = within(screen.getByRole('region', { name: 'Mouth-region picture hold' }))
+    expect(coverage.getByRole('link', { name: 'Inspect the measured mouth-region hold' }).getAttribute('href')).toBe('#media-evidence-VPH02')
+    expect(coverage.getByText(/first 50 source frames.*no weight in overall AI confidence/)).toBeTruthy()
+    const measured = within(screen.getByRole('article'))
+    expect(measured.getByText('12.000 s–12.160 s')).toBeTruthy()
+    expect(measured.getByText(/The end is exclusive\. Source frames 8–11/)).toBeTruthy()
+    for (const role of ['before', 'during', 'after']) expect(measured.getByText(new RegExp(`${role} hold range`))).toBeTruthy()
+    expect(measured.getAllByAltText(/exact original video frame/)).toHaveLength(3)
+    expect(measured.getAllByAltText(/exact measured mouth region/)).toHaveLength(3)
+    expect(measured.queryByAltText(/source face crop for context/)).toBeNull()
+    fireEvent.click(measured.getByRole('button', { name: 'Go to frame 8 in playback' }))
+    expect(screen.getByText(/Selected frame 8 · source 12\.000 s · player 2\.000 s/)).toBeTruthy()
+  })
+
+  it.each([
+    ['no_match', 'No qualifying mouth-region hold was found in the checked frames.'],
+    ['no_stable_face', 'A stable mouth region could not be tracked in the checked frames.'],
+    ['unavailable', 'A mouth-region hold could not be assessed in this video.'],
+  ] as const)('explains mouth-region coverage with status %s and no evidence packet', (status, message) => {
+    const set = { ...structuredClone(video), packets: [] }
+    set.picture_hold = { status: 'no_match', frames_scanned: 50, frame_limit: 50, last_frame_index: 49,
+      last_stream_time_s: 13.64, last_pts: 13640, time_base: '1/1000', reason: null, packet_id: null,
+      mouth_local_hold: { status, frames_scanned: 50, packet_id: null, affects_overall_confidence: false } }
+    show(set)
+    const coverage = within(screen.getByRole('region', { name: 'Mouth-region picture hold' }))
+    expect(coverage.getByText(message)).toBeTruthy()
+    expect(coverage.getByText(/first 50 source frames/)).toBeTruthy()
+    expect(coverage.queryByRole('link')).toBeNull()
+    expect(screen.queryByRole('article')).toBeNull()
+  })
+
   it('shows two original time ranges and one identical recording in the video voice lane', () => {
     const set = { ...structuredClone(video), version: 'video-evidence-10' }
     const sample = (start_sample: number) => ({ start_sample, end_sample: start_sample + 4000,

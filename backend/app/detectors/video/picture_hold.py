@@ -10,15 +10,15 @@ from subprocess import TimeoutExpired
 
 from app.detectors.video import picture_motion
 from app.detectors.video.decode import DecodeError, FrameTable, decode_frames
+from app.evidence import mouth_local_hold_binding, picture_sequence
 from app.evidence import picture_hold_binding as binding
-from app.evidence import picture_sequence
 
 DECODE_TIMEOUT_S = 8.0
 
 
 def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Callable[[], None] | None = None,
             remaining_s: float | None = None, sequence_review: bool = False,
-            motion_encoding: tuple[str | None, str | None] | None = None) -> dict:
+            motion_encoding: tuple[str | None, str | None] | None = None, mouth_review: bool = False) -> dict:
     """Try an extended native scan under the same deadline, retaining a completed opening result."""
     opening_limit = binding.frame_limit(len(table), table.width, table.height)
     tb = table.tb
@@ -30,6 +30,8 @@ def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Calla
     best = None
     observed = []
     descriptors = []
+    mouth_profile = mouth_review and sequence_review and mouth_local_hold_binding.eligible(table, motion_encoding)
+    mouth_frames = []
     motion_profile = picture_motion.profile(table, motion_encoding) if sequence_review else None
     extended_profile = (picture_motion.profile(table, motion_encoding, schema=picture_sequence.MOTION_EXTENDED_SCHEMA)
                         if motion_profile is not None else None)
@@ -60,6 +62,8 @@ def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Calla
                         best = equal_start, point, frame.index, digest
                 if sequence_review:
                     observed.append((point, digest))
+                if mouth_profile:
+                    mouth_frames.append(frame.rgb)
                 if frame.index < motion_limit:
                     descriptors.append(picture_motion.descriptor(frame.rgb))
                 if scanned == opening_limit and limit > opening_limit:
@@ -89,6 +93,13 @@ def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Calla
                         and (extended_pair is None or extended_pair["second"]["end_frame_index"] >= opening_limit)):
                     motion = extended_motion
             cover["motion_sequence_review"] = motion
+        if mouth_profile and len(mouth_frames) == len(table) and all(point is not None for point, _ in observed):
+            from app.detectors.video import mouth_local_hold
+
+            detector_path = (mouth_local_hold.local_detector_path()
+                             if remaining_s is None or remaining_s - (time.monotonic() - started) > 1.0 else None)
+            cover["mouth_local_hold"] = mouth_local_hold.record(mouth_frames, table.pts, [digest for _, digest in observed],
+                                                               detector_path=detector_path)
     return result
 
 

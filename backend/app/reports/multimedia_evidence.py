@@ -236,7 +236,7 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
             if end < len(table) and clip["last_frame_duration"]["ticks"] != (table.pts[end] - table.pts[end - 1]) * table.tb.numerator:
                 raise ObjectIntegrityError("Video context final duration differs from the next source frame")
         brightness_inputs = {}
-        repetition = "picture_hold" in packet or "picture_sequence" in packet
+        repetition = any(key in packet for key in ("picture_hold", "picture_sequence", "mouth_local_hold"))
         coarse_frames = len(packet["frames"])
         for position, frame in enumerate((*packet["frames"], *packet.get("face_boundary_frames", ()))):
             refined = position >= coarse_frames
@@ -671,6 +671,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             row["picture_hold"] = copy.deepcopy(hold)
             repeated_sequence = packet.get("picture_sequence")
             row["picture_sequence"] = copy.deepcopy(repeated_sequence)
+            mouth_hold = packet.get("mouth_local_hold")
             if sheet := packet["artifacts"].get("contact_sheet"):
                 caption = ("Endpoints of both repeated ranges" if repeated_sequence else "Endpoints of the verified hold"
                            if hold else "Sampled frames (not continuous playback)")
@@ -689,9 +690,10 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                                       "region_meaning": frame["region_meaning"], "context_region": frame.get("context_region"),
                                       "interval_role": frame.get("interval_role"), "refined": position >= coarse_count,
                                       "first_refined": position == coarse_count,
-                                      "images": [plate(role, packet["artifacts"][frame["artifact_refs"][role]], {"original": "Exact decoded source frame" if hold or repeated_sequence else "Exact analysed source frame", "context": "Frame context", "crop": "Original mouth-input crop" if packet_kind == "av" else "Original face-context crop", "measured_patch": "Exact measured gray mouth patch"}[role])
+                                      "images": [plate(role, packet["artifacts"][frame["artifact_refs"][role]], {"original": "Exact decoded source frame" if hold or repeated_sequence or mouth_hold else "Exact analysed source frame", "context": "Frame context", "crop": "Exact measured mouth-region crop" if mouth_hold else "Original mouth-input crop" if packet_kind == "av" else "Original face-context crop", "measured_patch": "Exact measured gray mouth patch"}[role])
                                                  for role in ("original", "context", "crop", "measured_patch")
-                                                 if role in frame["artifact_refs"] and (not (hold or repeated_sequence) or role == "original")]})
+                                                 if role in frame["artifact_refs"] and (not (hold or repeated_sequence) or role == "original")
+                                                 and (not mouth_hold or role != "context")]})
         elif packet_kind == "audio":
             row["images"] = [plate(role, packet["artifacts"][role]) for role in ("waveform", "scores")]
             row["audio"] = {"interval": copy.deepcopy(packet["interval"]), "context_interval": copy.deepcopy(packet["context_interval"]),
@@ -800,6 +802,8 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             if repeat := row["picture_sequence"]:
                 row["locator"] = "Repeated ranges " + " and ".join(
                     f"{repeat[side]['start_stream_s']:.3f}-{repeat[side]['end_stream_s']:.3f} s" for side in ("first", "second"))
+            if packet.get("mouth_local_hold"):
+                row["locator"] = f"Mouth-region hold {row['window']['start_stream_s']:.3f}-{row['window']['end_stream_s']:.3f} s"
         else:
             locations = []
             for anchor in packet["anchors"]:

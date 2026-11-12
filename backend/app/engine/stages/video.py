@@ -1032,7 +1032,7 @@ def render(ctx: StageContext) -> dict[str, Any]:
             info = ctx.outputs["probe"]["info"]
             hold = picture_hold.inspect(frame_store.path, table, origin=info.get("timeline_origin_s"),
                                         check=lambda: ctx.check("repeated-picture inspection"), remaining_s=ctx.deadline.remaining(),
-                                        sequence_review=True, motion_encoding=(info.get("codec"), info.get("pix_fmt")))
+                                        sequence_review=True, motion_encoding=(info.get("codec"), info.get("pix_fmt")), mouth_review=True)
     decode_output = ctx.outputs.get("decode") or {}
     decoded_audio = decode_output.get("audio") or {}
     stereo_sha = decoded_audio.get("stereo_context_sha256")

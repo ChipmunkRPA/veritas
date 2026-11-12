@@ -31,6 +31,7 @@ export interface VideoEvidencePacket extends PacketBase {
   picture_hold?: { start_frame_index: number; end_frame_index: number; start_pts: number; end_pts: number; time_base: string;
     start_stream_s: number; end_stream_s: number; start_playback_s: number | null; end_playback_s: number | null;
     span_s: number; frame_count: number; decoded_rgb_sha256: string; pts: number[] }
+  mouth_local_hold?: { frames: [number, number]; box: [number, number, number, number] }
   picture_sequence?: { first: PictureSequenceSpan; second: PictureSequenceSpan; frame_count: number; span_s: number }
   face_interval?: { start_stream_s: number; end_stream_s: number; lift: number;
     samples: Record<'before' | 'during' | 'after', { frame_index: number; pts: number; score: number }[]> }
@@ -59,6 +60,8 @@ export interface VideoEvidenceSet extends SetBase {
     last_frame_index: number | null; last_stream_time_s: number | null; last_pts: number | null; time_base: string;
     reason: string | null; packet_id: string | null; scan_scope?: 'extended-native-prefix/1' | 'native-sequence-prefix/1'; continuity_breaks?: number;
     sequence_review?: { status: 'matched' | 'no_match' | 'unavailable' }
+    mouth_local_hold?: { status: 'matched' | 'no_match' | 'no_stable_face' | 'unavailable'; frames_scanned: number;
+      packet_id: 'VPH02' | null; affects_overall_confidence: false }
     motion_sequence_review?: { status: 'matched' | 'no_match' | 'unavailable'; frames_scanned: number; parameters: { frame_rate: 20 | 25 }
       reason: 'source_clock' | 'exact_sequence' | null } }
   coverage?: { frame_count: number; scored_frame_count: number; window_frame_indices: number[]; window_check_count: number;

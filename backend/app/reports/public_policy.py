@@ -5,7 +5,7 @@ from app.reports import engine
 _PREVIOUS_PUBLIC_TEMPLATES = {
     "veritas-report-2.0.r83", "veritas-report-2.0.r84", "veritas-report-2.0.r85", "veritas-report-2.0.r87", "veritas-report-2.0.r88",
     "veritas-report-2.0.r89", "veritas-report-2.0.r90", "veritas-report-2.0.r91", "veritas-report-2.0.r92", "veritas-report-2.0.r94",
-    "veritas-report-2.0.r95", "veritas-report-2.0.r96", "veritas-report-2.0.r97", "veritas-report-2.0.r98",
+    "veritas-report-2.0.r95", "veritas-report-2.0.r96", "veritas-report-2.0.r97", "veritas-report-2.0.r98", "veritas-report-2.0.r99",
 }
 
 

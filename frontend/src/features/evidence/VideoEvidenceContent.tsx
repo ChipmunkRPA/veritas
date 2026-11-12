@@ -60,6 +60,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
     player.current?.scrollIntoView?.({ block: 'center', behavior: 'auto' })
   }
   const hold = set.picture_hold
+  const mouthHold = hold?.mouth_local_hold
   const motion = hold?.motion_sequence_review
   const motionRate = motion?.parameters.frame_rate ?? 20
   const motionLimit = motion?.frames_scanned || motionRate * 9
@@ -67,18 +68,21 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
   const renderFrames = (packet: VideoEvidencePacket, frames: VideoEvidenceFrame[], refined: boolean) =>
     <div className="mt-5 space-y-5">{frames.map((frame) => {
       const crop = frame.artifact_refs.crop && packet.artifacts[frame.artifact_refs.crop]
+      const mouthCrop = packet.mouth_local_hold && crop
       const navigationKnown = frame.anchor.playback_time_s != null && Number.isFinite(frame.anchor.playback_time_s) && frame.anchor.playback_time_s >= 0
       const occurrence = packet.picture_sequence && (frame.anchor.frame_index <= packet.picture_sequence.first.end_frame_index
         ? 'First occurrence' : 'Second occurrence')
       return <div key={frame.id} className="rounded-md border border-border p-3">
-        <p className="m-0 mb-3 text-small font-medium">{occurrence && `${occurrence} · `}{frame.interval_role && <span className="capitalize">{frame.interval_role} {refined ? 'refined' : 'flagged'} range · </span>}Frame {frame.anchor.frame_index}{frame.is_peak ? ' · highest response in this sample sequence' : ''}
+        <p className="m-0 mb-3 text-small font-medium">{occurrence && `${occurrence} · `}{frame.interval_role && <span className="capitalize">{frame.interval_role} {refined ? 'refined' : packet.mouth_local_hold ? 'hold' : 'flagged'} range · </span>}Frame {frame.anchor.frame_index}{frame.is_peak ? ' · highest response in this sample sequence' : ''}
           {frame.score !== null && <span className="font-mono"> · response {frame.score.toFixed(3)}</span>}</p>
         <div className={evidenceGrid}>
           <figure className="m-0 min-w-0"><EvidencePicture set={set} artifact={packet.artifacts[frame.artifact_refs.original]} token={token} ready={mediaReady} alt={`${frame.id}: exact original video frame`} />
             <figcaption className="mt-2 text-caption text-text-muted">Exact source frame pixels, without diagnostic overlays.</figcaption></figure>
           {!packet.picture_hold && !packet.picture_sequence && <figure className="m-0 min-w-0"><EvidencePicture set={set} artifact={crop || packet.artifacts[frame.artifact_refs.context]} token={token} ready={mediaReady}
-            alt={`${frame.id}: ${crop ? 'source face crop for context' : 'frame context with its recorded label'}`} />
-            <figcaption className="mt-2 text-caption text-text-muted">{crop ? 'Detected-face crop for inspection; not an edit boundary or the exact aligned classifier input.' : 'Source context with a navigation label; no local edit mask is available.'}</figcaption></figure>}
+            alt={`${frame.id}: ${mouthCrop ? 'exact measured mouth region' : crop ? 'source face crop for context' : 'frame context with its recorded label'}`} />
+            <figcaption className="mt-2 text-caption text-text-muted">{mouthCrop ? 'Exact pixels of the measured mouth region.'
+              : crop ? 'Detected-face crop for inspection; not an edit boundary or the exact aligned classifier input.'
+              : 'Source context with a navigation label; no local edit mask is available.'}</figcaption></figure>}
         </div>
         <p className="mt-3 mb-0 text-caption font-mono text-text-muted">Source {seconds(frame.anchor.stream_time_s)} · PTS {frame.anchor.pts} at {frame.anchor.time_base} · player {navigationKnown ? seconds(frame.anchor.playback_time_s!) : 'mapping unavailable'}</p>
         <Button variant="text" className="mt-2" disabled={!navigationKnown || !mediaReady} onClick={() => chooseFrame(frame)}>Go to frame {frame.anchor.frame_index} in playback</Button>
@@ -96,6 +100,20 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
       {!!hold.continuity_breaks && <p className="mt-2 mb-0 text-caption text-text-muted">The scan found {hold.continuity_breaks} gaps or unverifiable transitions in the frame sequence.</p>}
       {hold.status !== 'unavailable' && laterFrames > 0 && <p className="mt-2 mb-0 text-caption text-text-muted">{laterFrames} later {laterFrames === 1 ? 'frame was' : 'frames were'} outside this check.</p>}
       <p className="mt-2 mb-0 text-caption text-text-muted">Still cards, capture interruptions, and ordinary editing can repeat a frame. This check carries no AI confidence weight.</p>
+    </section>}
+    {mouthHold && <section aria-labelledby="video-mouth-local-hold-heading" className="mt-4 rounded-md border border-border p-4">
+      <h3 id="video-mouth-local-hold-heading" className="m-0 text-body font-medium">Mouth-region picture hold</h3>
+      <p className="mt-2 mb-0 text-small">{mouthHold.status === 'matched' && mouthHold.packet_id
+        ? <a className="underline" href={`#media-evidence-${mouthHold.packet_id}`}>Inspect the measured mouth-region hold</a>
+        : mouthHold.status === 'no_match' ? 'No qualifying mouth-region hold was found in the checked frames.'
+        : mouthHold.status === 'no_stable_face' ? 'A stable mouth region could not be tracked in the checked frames.'
+        : 'A mouth-region hold could not be assessed in this video.'}</p>
+      <p className="mt-2 mb-0 text-caption text-text-muted">
+        {mouthHold.frames_scanned > 0 && (mouthHold.status === 'unavailable'
+          ? <>The first {mouthHold.frames_scanned} source frames were verified. </>
+          : <>Coverage includes only the first {mouthHold.frames_scanned} source frames. </>)}
+        This observation carries no weight in overall AI confidence.
+      </p>
     </section>}
     {hold?.sequence_review && <section aria-labelledby="video-picture-sequence-heading" className="mt-4 rounded-md border border-border p-4">
       <h3 id="video-picture-sequence-heading" className="m-0 text-body font-medium">Repeated moving sequences</h3>
@@ -145,6 +163,8 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
         ? <>{packet.picture_hold.frame_count} consecutive decoded frames have identical pixels over <strong>{seconds(packet.picture_hold.span_s)}</strong> between the first and last source timestamps.</>
         : packet.picture_sequence
         ? <>First occurrence <strong>{seconds(packet.picture_sequence.first.start_stream_s)}–{seconds(packet.picture_sequence.first.end_stream_s)}</strong> · Second occurrence <strong>{seconds(packet.picture_sequence.second.start_stream_s)}–{seconds(packet.picture_sequence.second.end_stream_s)}</strong> on the source clock.</>
+        : packet.mouth_local_hold && packet.window
+        ? <>Measured mouth-region hold <strong>{seconds(packet.window.start_stream_s)}–{seconds(packet.window.end_stream_s)}</strong> on the source clock. The end is exclusive. Source frames {packet.mouth_local_hold.frames[0]}–{packet.mouth_local_hold.frames[1] - 1}.</>
         : packet.whole_face_review
         ? 'Two checks compared faces at six sampled positions across the clip. The three frames shown below are examples of those inputs.'
         : packet.face_sequence
@@ -158,7 +178,9 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
         : 'Individual sampled-frame responses. A face crop is context, not a mask of edited pixels.'}</p>
       {packet.window && <details className="mt-3 text-small text-text-muted"><summary className="cursor-pointer">Exact window coverage</summary>
         <p className="mt-2 mb-0">Source timestamps {seconds(packet.window.start_stream_s)}–{seconds(packet.window.end_stream_s)}. {packet.whole_face_review ? 'Planned frame indices' : 'Input frame indices'}: {packet.window.frame_indices.join(', ')}.</p>
-        <p className="mt-2 mb-0">{packet.whole_face_review ? 'These positions show sample coverage. Some frames may lack a usable face, and intervals between samples were unassessed.' : 'Only these frames were input to this window. This does not establish continuous coverage between them.'}</p>
+        <p className="mt-2 mb-0">{packet.mouth_local_hold ? 'The recorded window lists the source frames used for the mouth-region measurement.'
+          : packet.whole_face_review ? 'These positions show sample coverage. Some frames may lack a usable face, and intervals between samples were unassessed.'
+          : 'Only these frames were input to this window. This does not establish continuous coverage between them.'}</p>
       </details>}
       {!packet.picture_hold && !packet.picture_sequence && !packet.whole_face_review && <ContextClip packet={packet} set={set} token={token} ready={mediaReady} />}
       {packet.face_boundary && packet.face_boundary_frames && <section className="mt-5 rounded-md border border-border p-3">

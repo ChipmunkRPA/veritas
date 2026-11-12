@@ -31,6 +31,7 @@ from app.evidence import (
     face_intervals,
     face_lighting_context,
     face_return_binding,
+    mouth_local_hold_binding,
     picture_hold_binding,
     picture_sequence,
     whole_face_binding,
@@ -511,6 +512,47 @@ def _picture_sequence_packet(db: Session, store: ObjectStore, analysis: Analysis
                            "decoder": "ffmpeg-rgb24-display-v1", "frame_pts_unit": "stream_ticks", "source_pixels": "exact_native_rgb"}}
 
 
+def _mouth_hold_packet(db: Session, store: ObjectStore, analysis: Analysis, set_id: str,
+                       source: dict, table: FrameTable, review: dict, decoded: dict) -> dict:
+    match = review["match"]
+    packet_id = mouth_local_hold_binding.PACKET_ID
+    bounds = mouth_local_hold_binding.region(match["box"])
+    crop_bounds = _bounds(bounds, table.width, table.height)
+    origin = source["timeline_origin_s"]
+    frames, assets = [], {}
+    for i, role in zip(match["anchors"], mouth_local_hold_binding.ROLES, strict=True):
+        digest = review["frame_hashes"][i]
+        if i not in decoded or hashlib.sha256(decoded[i].tobytes()).hexdigest() != digest:
+            raise PacketIntegrityError("Held mouth region differs from its recorded native picture")
+        image = Image.fromarray(decoded[i])
+        original, crop = f"{role}_original", f"{role}_crop"
+        assets[original] = _packet_image(db, store, analysis, set_id, image)
+        assets[crop] = _packet_image(db, store, analysis, set_id, image.crop(crop_bounds))
+        stream_s = table.seconds(i)
+        frames.append({"id": f"{packet_id}.{role}", "interval_role": role, "anchor": {
+            "frame_index": i, "pts": table.pts[i], "time_base": table.time_base, "decoded_rgb_sha256": digest,
+            "original_sha256": source["sha256"], "width": table.width, "height": table.height,
+            "stream_selector": source["stream_selector"], "coordinate_space": source["coordinate_space"],
+            "stream_time_s": stream_s, "playback_time_s": None if origin is None else stream_s - origin},
+            "score": None, "is_peak": False, "context_region": bounds, "region_meaning": "measured_mouth_region",
+            "artifact_refs": {"original": original, "context": original, "crop": crop}})
+    start, end = match["frames"]
+    first, last = table.seconds(start), table.seconds(end)
+    return {"id": packet_id, "title": "Mouth-region picture hold", "evidence_type": "anomaly", "claim_scope": "sampled_window",
+            "semantics": mouth_local_hold_binding.SCHEMA, "mouth_local_hold": match, "affects_overall_confidence": False,
+            "finding_ids": [], "signal_refs": [], "exhibit_refs": [], "frames": frames, "artifacts": assets,
+            "window": {"frame_indices": list(range(start - 1, end + 1)), "time_base": table.time_base,
+                       "start_pts": table.pts[start], "end_pts": table.pts[end], "start_stream_s": first, "end_stream_s": last,
+                       "start_playback_s": None if origin is None else first - origin,
+                       "end_playback_s": None if origin is None else last - origin},
+            "observation": mouth_local_hold_binding.observation(review, table.tb), "interpretation": mouth_local_hold_binding.CONTEXT,
+            "measurements": mouth_local_hold_binding.measurements(match),
+            "limitations": ["The box is the measured area. The check compares consecutive picture brightness within the box and surrounding face areas."],
+            "clip": {"status": "unavailable", "reason": "Use the original video to play the measured range."},
+            "derivation": {"version": VERSION, "selection": "longest_qualified_mouth_region_hold", "decoder": "ffmpeg-rgb24-display-v1",
+                           "frame_pts_unit": "stream_ticks", "source_pixels": "exact_native_rgb"}}
+
+
 def _channel_coverage(db: Session, store: ObjectStore, analysis: Analysis, result: dict) -> dict:
     probe, render = _stage(db, store, analysis.id, "probe"), _stage(db, store, analysis.id, "render")
     has_audio = probe[0].get("info", {}).get("has_audio") if probe else None
@@ -583,12 +625,16 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     if review.get("pair") is None:
         review = document.get("picture_hold", {}).get("motion_sequence_review", {})
     pair = review.get("pair")
+    mouth_review = document.get("picture_hold", {}).get("mouth_local_hold", {})
+    mouth_match = mouth_review.get("match")
     boundary_indices = {i for candidate in chosen for i in candidate.get("face_boundary", {}).get("anchors", {}).values()}
     exact_indices = boundary_indices | {i for candidate in return_candidates for i in candidate["face_return"]["anchors"].values()}
     wanted = {row["frame_index"] for candidate in chosen for row in candidate["rows"]} | boundary_indices
     endpoints = {match["start_frame_index"], match["end_frame_index"]} if match is not None else set()
     if pair is not None:
         endpoints.update(row[2] for row in picture_sequence.endpoints(pair))
+    if mouth_match is not None:
+        endpoints.update(mouth_match["anchors"])
     selected = sorted(wanted | endpoints)
     decoded = {}
     if selected:
@@ -814,6 +860,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document["packets"].append(_picture_hold_packet(db, store, analysis, set_id, source, match, decoded))
     if pair is not None:
         document["packets"].append(_picture_sequence_packet(db, store, analysis, set_id, source, review, decoded))
+    if mouth_match is not None:
+        document["packets"].append(_mouth_hold_packet(db, store, analysis, set_id, source, table, mouth_review, decoded))
     if VERSION in NESTED_VERSIONS:
         from app.evidence import video_audio, video_av
 

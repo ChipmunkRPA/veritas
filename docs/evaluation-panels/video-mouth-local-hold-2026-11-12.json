@@ -1,0 +1,4652 @@
+{
+  "freeze_sha256": "e96f7ebda0c4589c325f29b730e5fd9e39e427c7b3ded5b7052876fb8269a43a",
+  "frozen_bindings": {
+    "backend/data/independent-evaluation/grid-fresh-release-qualification-2026-11-12/freeze.json": "f47bad1fff02a5c55c5d8fe706c4c95d787dddcbae645d59ca7592afeab42774",
+    "backend/data/independent-evaluation/video-lipsync-local-delay-recovery-2026-11-11/intake-receipt.json": "1d2cb7f65ab2a87a287f2b09c1809b06bf60bf85b9dadb93bb924968a858c2b8",
+    "backend/scripts/video_mouth_local_hold.py": "b2f97e9f69a04f3e1f1e9f6f6c77c7385c8888a96a3f922212da8a54f781ee15",
+    "backend/scripts/video_mouth_local_hold_panel.py": "18344a4ae8392aa73b7cf2108654d82cb65caeca425fa62bcb776e53c218283c",
+    "models/weights/face_detection_yunet_2023mar.onnx": "8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4"
+  },
+  "gate": {
+    "crema_groups": 5,
+    "crema_minimum": 10,
+    "grid_groups": 4,
+    "grid_minimum": 8,
+    "maximum_alerts_per_bank": 1,
+    "maximum_cut_or_whole_hold_alerts": 0,
+    "minimum_assessed_per_bank": "4/5",
+    "minimum_region_precision": "3/4",
+    "time_iou": "1/2"
+  },
+  "local_app_verification": {
+    "anchor_frames": [
+      12,
+      17,
+      21
+    ],
+    "control_status": "no_match",
+    "exact_crops": 3,
+    "json_evidence_parity": true,
+    "original_images": 3,
+    "page_errors": 0,
+    "paid_cases": 2,
+    "playback_seek": true,
+    "positive_status": "matched",
+    "signed_source_replay": true,
+    "source_range_s": [
+      0.52,
+      0.84
+    ],
+    "standard_pdf_positive_images": 6,
+    "unpaid_jobs": 0
+  },
+  "native_verification": {
+    "crops": 78,
+    "deliveries": 112,
+    "frames": 5600,
+    "measured_edges": 206
+  },
+  "results": {
+    "crema": {
+      "admitted": true,
+      "assessed": {
+        "mouth_blur": 8,
+        "mouth_early": 8,
+        "mouth_late": 8,
+        "off_mouth_hold": 8,
+        "original": 8,
+        "tandem": 8,
+        "whole_cut": 5,
+        "whole_hold": 8
+      },
+      "cases": {
+        "mouth_blur": 8,
+        "mouth_early": 8,
+        "mouth_late": 8,
+        "off_mouth_hold": 8,
+        "original": 8,
+        "tandem": 8,
+        "whole_cut": 8,
+        "whole_hold": 8
+      },
+      "false_or_mislocated": {},
+      "groups": 8,
+      "true_locations": {
+        "mouth_early": 8,
+        "mouth_late": 7
+      }
+    },
+    "grid": {
+      "admitted": true,
+      "assessed": {
+        "mouth_blur": 6,
+        "mouth_early": 6,
+        "mouth_late": 6,
+        "off_mouth_hold": 6,
+        "original": 6,
+        "tandem": 6,
+        "whole_cut": 6,
+        "whole_hold": 6
+      },
+      "cases": {
+        "mouth_blur": 6,
+        "mouth_early": 6,
+        "mouth_late": 6,
+        "off_mouth_hold": 6,
+        "original": 6,
+        "tandem": 6,
+        "whole_cut": 6,
+        "whole_hold": 6
+      },
+      "false_or_mislocated": {},
+      "groups": 6,
+      "true_locations": {
+        "mouth_early": 6,
+        "mouth_late": 5
+      }
+    }
+  },
+  "rows": [
+    {
+      "bank": "grid",
+      "cases": [
+        {
+          "anchors": [
+            {
+              "crop_sha256": "7bc403b515c0322a8e78231add5022f1aa8724dda9e4d6ccd8c6be7d5461d8bb",
+              "frame_sha256": "4c8492874931f38b31dbd719e94d7f7b81de829087e1859074b717a505a9c8e8",
+              "index": 12,
+              "pts": 6144,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "43a4eb70b191b494de51400043ecf3d431cc2e4e9c7892baa291054d20ae8879",
+              "frame_sha256": "ab83c94cb79f635e09b52a765fe228d69f2fce1deb9c0b8f17c0f259dcb37b9e",
+              "index": 17,
+              "pts": 8704,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "0f34e2f4662518ddffecd005f0e190e1376f3f24bf995786e5ca8d645353b255",
+              "frame_sha256": "9cd44902e8e208fe2657cc2ef04040ae684d6d1b01d25fdf60b316d875209f36",
+              "index": 21,
+              "pts": 10752,
+              "time_base": "1/12800"
+            }
+          ],
+          "authored_box": [
+            163,
+            173,
+            65,
+            43
+          ],
+          "authored_changes": [
+            3639,
+            3646,
+            3668,
+            3678,
+            3670,
+            3647,
+            3617,
+            3657
+          ],
+          "authored_frames": [
+            13,
+            21
+          ],
+          "choice": {
+            "anchors": [
+              12,
+              17,
+              21
+            ],
+            "box": [
+              176,
+              192,
+              36,
+              24
+            ],
+            "context_boxes": [
+              [
+                128,
+                166,
+                24,
+                24
+              ],
+              [
+                236,
+                166,
+                24,
+                24
+              ],
+              [
+                154,
+                131,
+                24,
+                24
+              ],
+              [
+                211,
+                131,
+                24,
+                24
+              ],
+              [
+                182,
+                227,
+                24,
+                24
+              ]
+            ],
+            "frames": [
+              13,
+              21
+            ],
+            "maximum_patch_mean_difference": 0.24537037037037038,
+            "minimum_flank_peak": 9.91550925925926,
+            "minimum_patch_near_equal_fraction": 0.9432870370370371,
+            "moving_context_edges": 7,
+            "total_edges": 7
+          },
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "62e9bfbd1628c5b3e9a232f37c1b3187fa4d2b517e8691216fff5b8c54bc58fa",
+          "role": "mouth_early",
+          "sha256": "d611ea57436932647fdb3075943f60fc90c609409b4271bb937a7f0071dc2866",
+          "state": "matched"
+        },
+        {
+          "anchors": [
+            {
+              "crop_sha256": "4e752ecde649f2f5fada72b0d3089cdc4fa815fb98b0e2ff6e9dc7bc5f281e48",
+              "frame_sha256": "61ac0f454e1e758d304ec6356f97dd1915502baaec929d755b58d09682aa735c",
+              "index": 25,
+              "pts": 12800,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "b982d19f3721fa1018799db305bd49ce1df3567220a3955ab7ff78ffc93dcf5a",
+              "frame_sha256": "3a3e29a430056c0a3633d1b6089ebfd5fc06a52ef6a190747798a5b094d90652",
+              "index": 30,
+              "pts": 15360,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "29a6a0e9d8b2448826dedbe6ed47ebabf438b1fe2592fbf3ed1f4f05b8eceb43",
+              "frame_sha256": "c9c6627ef8d566c02daab4cdba731e588deb65f49f3ca9a57e33cbcce039d156",
+              "index": 35,
+              "pts": 17920,
+              "time_base": "1/12800"
+            }
+          ],
+          "authored_box": [
+            164,
+            175,
+            63,
+            41
+          ],
+          "authored_changes": [
+            3376,
+            3369,
+            3389,
+            3380,
+            3405,
+            3422,
+            3427,
+            3415,
+            3400,
+            3395
+          ],
+          "authored_frames": [
+            26,
+            36
+          ],
+          "choice": {
+            "anchors": [
+              25,
+              30,
+              35
+            ],
+            "box": [
+              161,
+              180,
+              36,
+              24
+            ],
+            "context_boxes": [
+              [
+                128,
+                166,
+                24,
+                24
+              ],
+              [
+                237,
+                166,
+                24,
+                24
+              ],
+              [
+                154,
+                131,
+                24,
+                24
+              ],
+              [
+                211,
+                131,
+                24,
+                24
+              ],
+              [
+                183,
+                227,
+                24,
+                24
+              ]
+            ],
+            "frames": [
+              26,
+              35
+            ],
+            "maximum_patch_mean_difference": 0.047453703703703706,
+            "minimum_flank_peak": 3.446759259259259,
+            "minimum_patch_near_equal_fraction": 0.9918981481481481,
+            "moving_context_edges": 8,
+            "total_edges": 8
+          },
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "19cead4f48ba7c9a2756c410587400a5d7ea5c4dab460da69c352d1a0cfb3f05",
+          "role": "mouth_late",
+          "sha256": "d084ae804750cb19c1f5a610b59c0a8cd703a5e408d4d736b368225a3969dcbd",
+          "state": "matched"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": null,
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "3b8b3d3d720674a3916f07a44ba39ff758359a5f6302a12c02b9baaf2656c0c4",
+          "role": "original",
+          "sha256": "67fa61b05a1a6b73bf053616bfb2dfe4608b3d6174ffe2bc17075bd4aa5f412f",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": null,
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "f85a1f24f741584a8da018faf718ccd14e5b4e1d34ffc0d2e5d52a36fcb8f515",
+          "role": "tandem",
+          "sha256": "6b96e569d343ddbfc0e9b16fc825dc0fcb5932e455dda9c96dba1784932c4126",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": [
+            26,
+            36
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "527cfd8d7ffa221b7c55dad8cec11931748aac9947457061683fa1b9fbed9e64",
+          "role": "whole_hold",
+          "sha256": "8199a6c58417f4579c3ffb6210fcf3ac51874e937ce2fb6bf07af38f8b3977aa",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": [
+            26,
+            36
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "7a023f2ad37f8c964cc7072e15a13f3cddd51a8911d85f9ad32795611e1ca5b4",
+          "role": "whole_cut",
+          "sha256": "ac258f3f2d213d729319432f19a6cabba044b337c971df94bcf73bfa6f0fc247",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": [
+            164,
+            175,
+            63,
+            41
+          ],
+          "authored_changes": [
+            3343,
+            3382,
+            3392,
+            3374,
+            3332,
+            3341,
+            3361,
+            3347,
+            3381,
+            3378
+          ],
+          "authored_frames": [
+            26,
+            36
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "6beeb97cf1fdf222032782043f9b8b1583360ffb4cdb50de6c03286016e8ecad",
+          "role": "mouth_blur",
+          "sha256": "e89d4238c57500d1b3377fae77378d940f2a205872225476fd5d630a39ba2e88",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": [
+            164,
+            113,
+            63,
+            41
+          ],
+          "authored_changes": [
+            3383,
+            3370,
+            3379,
+            3424,
+            3448,
+            3440,
+            3439,
+            3425,
+            3414,
+            3407
+          ],
+          "authored_frames": [
+            26,
+            36
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "29f782f50bd7db0213c3d878e59219ce8059b7dd1eac33651dec8077de2a3bb6",
+          "role": "off_mouth_hold",
+          "sha256": "062c46339240edd02b348961c5b15a76ba92fda7e9c87e0929996fa9bc48afc4",
+          "state": "no_match"
+        }
+      ],
+      "donor_group": 11,
+      "group": 10,
+      "mapped_pts_sha256": "1ef8c6a9cf6412f015a6259e6c59e529882914ae361b6c991ce6813ed7028924",
+      "source_sha256": "86a30fc2b43650d5bbcd43adc4ac97df2acb9d8874f7fee19e60a37b1cf46b66"
+    },
+    {
+      "bank": "grid",
+      "cases": [
+        {
+          "anchors": [
+            {
+              "crop_sha256": "b386b49ed0c2da7b4bfdc2abacbea979d3d627a2b59755ac2623227725f47715",
+              "frame_sha256": "941bf447f5d9be465e2c858807bb8b20e3b544b7cd664b854616b0f989ee52b3",
+              "index": 13,
+              "pts": 6656,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "3125b5050ae667c6ed111207cec594def27117e74020adc82be131991dbb5a2f",
+              "frame_sha256": "48f64be69bee9d6ec11b8e65b0afd30d812fdc45909eee7840cfe420256461c7",
+              "index": 18,
+              "pts": 9216,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "d6f3eb675f764da48b024c94a7be9d4741f277c989cd509de669524d893a5c96",
+              "frame_sha256": "b10910c580b4d0dd45d9e5ab884e19cc954b5b83babce45ddbba07cad7d324f8",
+              "index": 22,
+              "pts": 11264,
+              "time_base": "1/12800"
+            }
+          ],
+          "authored_box": [
+            153,
+            186,
+            63,
+            42
+          ],
+          "authored_changes": [
+            3512,
+            3501,
+            3518,
+            3485,
+            3478,
+            3514,
+            3510,
+            3520
+          ],
+          "authored_frames": [
+            14,
+            22
+          ],
+          "choice": {
+            "anchors": [
+              13,
+              18,
+              22
+            ],
+            "box": [
+              153,
+              183,
+              32,
+              22
+            ],
+            "context_boxes": [
+              [
+                125,
+                179,
+                22,
+                22
+              ],
+              [
+                222,
+                179,
+                22,
+                22
+              ],
+              [
+                149,
+                148,
+                22,
+                22
+              ],
+              [
+                199,
+                148,
+                22,
+                22
+              ],
+              [
+                174,
+                234,
+                22,
+                22
+              ]
+            ],
+            "frames": [
+              14,
+              22
+            ],
+            "maximum_patch_mean_difference": 0.14772727272727273,
+            "minimum_flank_peak": 3.274147727272727,
+            "minimum_patch_near_equal_fraction": 0.9715909090909091,
+            "moving_context_edges": 6,
+            "total_edges": 7
+          },
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "96af9a4040b9560134f971c4119b2f1d6c107d62c70c251425bf8d6de87f9ec9",
+          "role": "mouth_early",
+          "sha256": "b7bf566333ad3404608a8fea48753447b31f9c2e7eb99a3c33502a9b85f7075f",
+          "state": "matched"
+        },
+        {
+          "anchors": [
+            {
+              "crop_sha256": "3649afacfa805908b664e2eb0fd497d0be9d050b86842d0876dc77e0104c0886",
+              "frame_sha256": "7d7a8ad198209d7659368a9c29b71685ec6cd7e31aaae75bf143d075e0c82b2c",
+              "index": 26,
+              "pts": 13312,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "824a0e1b5e37682c1275c805ed4920bbe3c5a449c8e3f7e07203e34b5a32db42",
+              "frame_sha256": "7d103db9a6702c5d4a5b9cc6a00e3bb3c33b38e9bf1d180adbb472104db24a1a",
+              "index": 32,
+              "pts": 16384,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "6ae90f823f84356cadcb182935ff093f165403c06a111c82085e99508838a627",
+              "frame_sha256": "b799b64bf587518f1a2ab431db93c76bbc75a53298352011792f2fc703357a39",
+              "index": 37,
+              "pts": 18944,
+              "time_base": "1/12800"
+            }
+          ],
+          "authored_box": [
+            155,
+            188,
+            59,
+            39
+          ],
+          "authored_changes": [
+            3018,
+            3069,
+            3058,
+            3089,
+            3090,
+            3097,
+            3111,
+            3103,
+            3102,
+            3062
+          ],
+          "authored_frames": [
+            27,
+            37
+          ],
+          "choice": {
+            "anchors": [
+              26,
+              32,
+              37
+            ],
+            "box": [
+              171,
+              193,
+              26,
+              18
+            ],
+            "context_boxes": [
+              [
+                119,
+                177,
+                24,
+                24
+              ],
+              [
+                225,
+                177,
+                24,
+                24
+              ],
+              [
+                144,
+                142,
+                24,
+                24
+              ],
+              [
+                200,
+                142,
+                24,
+                24
+              ],
+              [
+                172,
+                237,
+                24,
+                24
+              ]
+            ],
+            "frames": [
+              27,
+              37
+            ],
+            "maximum_patch_mean_difference": 0.23717948717948717,
+            "minimum_flank_peak": 2.517094017094017,
+            "minimum_patch_near_equal_fraction": 0.9423076923076923,
+            "moving_context_edges": 6,
+            "total_edges": 9
+          },
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "14684b5afee3302ca9ce706d22586267a8f812c43abd8cdb03bf0a7ed9a564a1",
+          "role": "mouth_late",
+          "sha256": "0f1adb78ef609442c694cfc99f692b2ffbc21f4a94655ca84fbf9abb01f4cf71",
+          "state": "matched"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": null,
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "1bcb634e371f39fe516b8f0debb78601a4ac44782d2a2631cf5c6a1808a7538e",
+          "role": "original",
+          "sha256": "499e390bc295623037ddfa26002590d8ebf8251b5e7f05c6ea812b19ba5ad473",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": null,
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "151883970a7a8aa8fbaf8d42a2c44e36b35bab369ae61df2e558c6bca9434f04",
+          "role": "tandem",
+          "sha256": "96173770ea1162214446a97dff1789cb16f2457f82fe613dc562f4694457327f",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": [
+            27,
+            37
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "084ad6b4d90e0d4657309adc9f0012963725e9eeed0ce6e3b0ad8fd9afa4bf0e",
+          "role": "whole_hold",
+          "sha256": "d389d0e34ed15be88d358ec257fb338d205ec930a72307869e1864cde10f007b",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": [
+            27,
+            37
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "1060f1926718b5851dfeb54cbe908271bf192f3abf424898e3748963de4ec2d6",
+          "role": "whole_cut",
+          "sha256": "63b7da3af7b273a890ba32436294dd8295eec6b5a56e8430792d9a369e64a011",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": [
+            155,
+            188,
+            59,
+            39
+          ],
+          "authored_changes": [
+            3033,
+            3022,
+            3016,
+            3041,
+            3035,
+            3020,
+            3026,
+            3033,
+            3037,
+            3002
+          ],
+          "authored_frames": [
+            27,
+            37
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "c7f15acc2dacd7b490547c9db1aeaf826befcc2f2cea0f41aa9c3fa9ea6cb4f9",
+          "role": "mouth_blur",
+          "sha256": "cdcc1292397bf4fa6f2b156e5af57aa5068e4b13f838413b5b3a7a9c5141130b",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": [
+            155,
+            130,
+            59,
+            39
+          ],
+          "authored_changes": [
+            2800,
+            2881,
+            2959,
+            2985,
+            3026,
+            3041,
+            3046,
+            3024,
+            3041,
+            3083
+          ],
+          "authored_frames": [
+            27,
+            37
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "3a2fc78d5f769a0155c6c185bab917aa851fc6e3282807da07a296c12fb2baa3",
+          "role": "off_mouth_hold",
+          "sha256": "70b41f4f72d69edc9f3d52c55395e69c411b0fa54e3f258e206049be0eec9712",
+          "state": "no_match"
+        }
+      ],
+      "donor_group": 12,
+      "group": 11,
+      "mapped_pts_sha256": "1ef8c6a9cf6412f015a6259e6c59e529882914ae361b6c991ce6813ed7028924",
+      "source_sha256": "6541790181f73fb29217fb91547b52b847822bb0e424f602ebaf163e64596aae"
+    },
+    {
+      "bank": "grid",
+      "cases": [
+        {
+          "anchors": [
+            {
+              "crop_sha256": "06ab20fd54503a3fb348944eafae6d55445e870bca5231f2e1d702cd357364aa",
+              "frame_sha256": "f38bf9e05337295e56d93b3ca36fc4f5370fc903e00139c2996ced28e2408f0d",
+              "index": 11,
+              "pts": 5632,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "2fb541eb92378c8ffbe12377ea69c91a578c133f35a76ec0c01066dcf510d1e1",
+              "frame_sha256": "33a9b349b16553556ba8926acf3e15e7a0d272c8e790e4cdae98872a7f9b4e14",
+              "index": 16,
+              "pts": 8192,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "750eaf1ac16c15ab2719d6c54a110267bc83a6efa9209f27106d426dc3187f95",
+              "frame_sha256": "64dc880493561fd26776a61daca538fed7602178eef19da43c941c17496a7cdd",
+              "index": 20,
+              "pts": 10240,
+              "time_base": "1/12800"
+            }
+          ],
+          "authored_box": [
+            165,
+            164,
+            48,
+            31
+          ],
+          "authored_changes": [
+            2135,
+            2140,
+            2141,
+            2164,
+            2167,
+            2167,
+            2163,
+            2146
+          ],
+          "authored_frames": [
+            12,
+            20
+          ],
+          "choice": {
+            "anchors": [
+              11,
+              16,
+              20
+            ],
+            "box": [
+              168,
+              168,
+              20,
+              14
+            ],
+            "context_boxes": [
+              [
+                141,
+                157,
+                18,
+                18
+              ],
+              [
+                222,
+                157,
+                18,
+                18
+              ],
+              [
+                160,
+                131,
+                18,
+                18
+              ],
+              [
+                202,
+                131,
+                18,
+                18
+              ],
+              [
+                181,
+                203,
+                18,
+                18
+              ]
+            ],
+            "frames": [
+              12,
+              20
+            ],
+            "maximum_patch_mean_difference": 0.4035714285714286,
+            "minimum_flank_peak": 11.257142857142858,
+            "minimum_patch_near_equal_fraction": 0.9464285714285714,
+            "moving_context_edges": 7,
+            "total_edges": 7
+          },
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "ba679cceeae03cf1eabaecd67daae649c8f0c28d0f145c2a67dc84757f9af881",
+          "role": "mouth_early",
+          "sha256": "1d7cb454e388a9106da562e7a5ce3ea6b6bc42d9d20f8c1591886e101fbbc325",
+          "state": "matched"
+        },
+        {
+          "anchors": [],
+          "authored_box": [
+            167,
+            164,
+            46,
+            30
+          ],
+          "authored_changes": [
+            2040,
+            2040,
+            2040,
+            2034,
+            2027,
+            2026,
+            2028,
+            2019,
+            2034,
+            2038
+          ],
+          "authored_frames": [
+            25,
+            35
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "fd6e0728f235df35817cb3e018d6ce28a4568ac77154ea506a62e80687276b84",
+          "role": "mouth_late",
+          "sha256": "0ae774decf46e6d80307bda9432ab3c67fcc2ba1442f64eb8cfefb9da96adad5",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": null,
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "abc971647cb2772eda10e21c8cea08810b4837ac0c06cfe1fc2a6de0d4ca246c",
+          "role": "original",
+          "sha256": "02c828132e6a89874a248875111e17d3433a60ade375089bbf9604b77b2ddf15",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": null,
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "a16bd1eb64fad4f663e358d8db08d787f22edcefb5364d5d8b3b0f55ea9c4166",
+          "role": "tandem",
+          "sha256": "8fd835008e09f9ecd3e5267c8ca44d86e1de08217842d54e75757d022ed73dfd",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": [
+            25,
+            35
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "020ceee22fec8b388b44ade1470ca058d451979801a283692170eb01d410931e",
+          "role": "whole_hold",
+          "sha256": "4bfa4a2abd501de1459d2133d3788786a6cac6b9b584f6d38c9e467eedb73beb",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": [
+            25,
+            35
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "4b95aeec986f75887cbb826c442d89c61f086ab006d247e3566ea7bf6fa365c3",
+          "role": "whole_cut",
+          "sha256": "44b128e809f6048ab8e8ef302b43b32c4b17905ede7d3497a722a2118f7f005e",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": [
+            167,
+            164,
+            46,
+            30
+          ],
+          "authored_changes": [
+            2002,
+            2006,
+            2005,
+            1989,
+            1983,
+            1983,
+            1986,
+            1997,
+            2003,
+            2008
+          ],
+          "authored_frames": [
+            25,
+            35
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "dac7f74f07710198c6d256a1635a526ef0a8fa766f10080d06bf2e80fbad5236",
+          "role": "mouth_blur",
+          "sha256": "36135ede479239d1344978a272b69ba51c0cd2b6e4c085251647576f4fecc697",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": [
+            167,
+            117,
+            46,
+            30
+          ],
+          "authored_changes": [
+            1974,
+            1980,
+            1994,
+            1983,
+            1970,
+            1971,
+            1984,
+            1985,
+            1971,
+            1973
+          ],
+          "authored_frames": [
+            25,
+            35
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "7a40ecfeaa58b574184f0101e0c2030a8220838c0a542eee1624b7403b540172",
+          "role": "off_mouth_hold",
+          "sha256": "e9d028e19b5b058bd58ce34acff406c7fc1afec80800cc8b1f812971b070f0e3",
+          "state": "no_match"
+        }
+      ],
+      "donor_group": 13,
+      "group": 12,
+      "mapped_pts_sha256": "1ef8c6a9cf6412f015a6259e6c59e529882914ae361b6c991ce6813ed7028924",
+      "source_sha256": "aa4931fdfd39746ed7e5e18d866c9527aa309860ee9dcbd1797f8e4c4a8e09a7"
+    },
+    {
+      "bank": "grid",
+      "cases": [
+        {
+          "anchors": [
+            {
+              "crop_sha256": "d9e66aece53497372b4a9018c33e779afffe0f0af64d06d641cfe3302d81c177",
+              "frame_sha256": "4c58094daa877f36f1918808270385086df31de5e9f0c3385ddf113d3f8ccfe4",
+              "index": 12,
+              "pts": 6144,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "107f68f5bd63057723ba00f005e8aae7524627a8af7287190a3ee07ee1a19e97",
+              "frame_sha256": "dba62962cbb63ce41f7d32e8ea9d82dbed4e91f8985cae1223434cdb9ab5d362",
+              "index": 17,
+              "pts": 8704,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "400800d02ee1b76b5634d22496cb8df87a2dcb969c1e3e1bd872371bc7eb6b22",
+              "frame_sha256": "45975db706d73239c38c460bebb441c4f917a1a7e77a205b2ffb324bf47d4f86",
+              "index": 21,
+              "pts": 10752,
+              "time_base": "1/12800"
+            }
+          ],
+          "authored_box": [
+            149,
+            180,
+            47,
+            30
+          ],
+          "authored_changes": [
+            1982,
+            1981,
+            1994,
+            1999,
+            2028,
+            2038,
+            2039,
+            2049
+          ],
+          "authored_frames": [
+            13,
+            21
+          ],
+          "choice": {
+            "anchors": [
+              12,
+              17,
+              21
+            ],
+            "box": [
+              156,
+              190,
+              26,
+              18
+            ],
+            "context_boxes": [
+              [
+                122,
+                172,
+                18,
+                18
+              ],
+              [
+                205,
+                172,
+                18,
+                18
+              ],
+              [
+                142,
+                145,
+                18,
+                18
+              ],
+              [
+                186,
+                145,
+                18,
+                18
+              ],
+              [
+                164,
+                219,
+                18,
+                18
+              ]
+            ],
+            "frames": [
+              13,
+              21
+            ],
+            "maximum_patch_mean_difference": 0.16025641025641027,
+            "minimum_flank_peak": 2.6303418803418803,
+            "minimum_patch_near_equal_fraction": 0.9764957264957265,
+            "moving_context_edges": 6,
+            "total_edges": 7
+          },
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "2d230fc86281588bc5937b869acee37e85b968335dfffbf57768651f52724d1d",
+          "role": "mouth_early",
+          "sha256": "7c5d019e2d1513bce2ef4d7ef8a186860c2760f2806de4e2cbf265306804fc0e",
+          "state": "matched"
+        },
+        {
+          "anchors": [
+            {
+              "crop_sha256": "0c91ecd2300adff584f3f73cf9e77fad86ddc13699fddf1fd107227fd7f57fcb",
+              "frame_sha256": "c691ee904ff946cba0e74d08861aefd452da125694b733d86f04c4b53fa15e9e",
+              "index": 25,
+              "pts": 12800,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "e1eca846f755a402a5bfa0728968773e2ce811e3f39215fe730cb0f173ba72ac",
+              "frame_sha256": "dc10b574bf3d36072db82d573ab139c00a8b7aacc4f394be3ee6e171975ed3c9",
+              "index": 31,
+              "pts": 15872,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "f663dd80c2904721897e1dbd49fd4442aec7a6ccc650c7388b0c2d5c62f9d479",
+              "frame_sha256": "b2cc2ea50fc46f11351da57b08b8ca4296085999651b27d8c32e3791b4580f1b",
+              "index": 36,
+              "pts": 18432,
+              "time_base": "1/12800"
+            }
+          ],
+          "authored_box": [
+            150,
+            180,
+            46,
+            30
+          ],
+          "authored_changes": [
+            2004,
+            1988,
+            1976,
+            1985,
+            1980,
+            1974,
+            1983,
+            1975,
+            1979,
+            1973
+          ],
+          "authored_frames": [
+            26,
+            36
+          ],
+          "choice": {
+            "anchors": [
+              25,
+              31,
+              36
+            ],
+            "box": [
+              159,
+              188,
+              20,
+              14
+            ],
+            "context_boxes": [
+              [
+                122,
+                172,
+                18,
+                18
+              ],
+              [
+                205,
+                172,
+                18,
+                18
+              ],
+              [
+                142,
+                145,
+                18,
+                18
+              ],
+              [
+                185,
+                145,
+                18,
+                18
+              ],
+              [
+                164,
+                218,
+                18,
+                18
+              ]
+            ],
+            "frames": [
+              26,
+              36
+            ],
+            "maximum_patch_mean_difference": 0.37142857142857144,
+            "minimum_flank_peak": 3.4357142857142855,
+            "minimum_patch_near_equal_fraction": 0.9607142857142857,
+            "moving_context_edges": 7,
+            "total_edges": 9
+          },
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "61288e10861e27ec23d2002e8ac30a085b7a4f62c4ea019a1d3127658693e2b0",
+          "role": "mouth_late",
+          "sha256": "0e985bce89df9ac8f8bcbc2ed9cf57406354656d70df42e300972a72acce4a71",
+          "state": "matched"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": null,
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "05b269ed9bb235f1688714b06f6c398098a4dc89ae420b9b0539c7e474735f33",
+          "role": "original",
+          "sha256": "4d3c3503333cc794ed2b36c278b1b7eda6b44f9f17b03386c72929f2a401af74",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": null,
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "1f3265368cec8eab9fc060f8b5ca6ec55e246de1ce92311aa74d7447b3142010",
+          "role": "tandem",
+          "sha256": "e924d0098e38b5737e49dd20002d787ca575fa21a9c88a94371b9544a531370e",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": [
+            26,
+            36
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "78ddf7ea8094574765df6a89efb38e019934c62a1bd8ec430d4fefd86bcabb95",
+          "role": "whole_hold",
+          "sha256": "8c9e9bc5fd46c574cdad3ce2c084a7de2ad6ccc5ffe074643ac18a3fc73ea4f0",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": [
+            26,
+            36
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "4545b5a5ab03e2e94e4fc9f4378b1b5f071821c6700e1fddc08e4c1121da70db",
+          "role": "whole_cut",
+          "sha256": "d7eb05fb0f4adea43cee0b49fde0bc8222af65615cf3859c589ce031ba19e7e9",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": [
+            150,
+            180,
+            46,
+            30
+          ],
+          "authored_changes": [
+            1953,
+            1960,
+            1961,
+            1950,
+            1967,
+            1962,
+            1972,
+            1961,
+            1962,
+            1969
+          ],
+          "authored_frames": [
+            26,
+            36
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "f3057f7143ba8f3d81fc52eb41bfbbcb66e74f9836ff6a2f15bd8d4c2e94c0d2",
+          "role": "mouth_blur",
+          "sha256": "29091888f48d2916419e05d20676d8b07dd6705143fae083ce86a3a12cf02d02",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": [
+            150,
+            133,
+            46,
+            30
+          ],
+          "authored_changes": [
+            1942,
+            1937,
+            1944,
+            1941,
+            1965,
+            1965,
+            1969,
+            1993,
+            1999,
+            1990
+          ],
+          "authored_frames": [
+            26,
+            36
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "319f496e067947d73383d7136916b92dd2a1eac103b0a108f8825b6f8814c315",
+          "role": "off_mouth_hold",
+          "sha256": "afc6c8117ad5e0b982322bfd89005773e86f45a377a078be241faf191f8840e3",
+          "state": "no_match"
+        }
+      ],
+      "donor_group": 14,
+      "group": 13,
+      "mapped_pts_sha256": "1ef8c6a9cf6412f015a6259e6c59e529882914ae361b6c991ce6813ed7028924",
+      "source_sha256": "c9ef8d7862c439ba7f4f1f4d3728d5b225d875c246cc745f3868a524a37b7675"
+    },
+    {
+      "bank": "grid",
+      "cases": [
+        {
+          "anchors": [
+            {
+              "crop_sha256": "95915fcb34bb16840fb30c2690039c0c156c5ad6aafe87fe4d86a7309d7933e0",
+              "frame_sha256": "38b12b1ab1ee4c44df2fd683f77ca96db1aa7ea4b9a70925cd52325e70c9dd07",
+              "index": 13,
+              "pts": 6656,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "1278a59d37383a726b4496a2a2639fddd9b92b9e25107c24b18cf083892ba516",
+              "frame_sha256": "7de242af25fa10b67571c082c95a9139345cc7562c46d0c0c00eb13cc7f6ca68",
+              "index": 18,
+              "pts": 9216,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "dd0aff21fd046de8f48f16c03a3f2e7563eb57aeb3a82a060fedf20ef65f4de4",
+              "frame_sha256": "84ec4801d92e87275a8c0b04b96640f139f0dde17b4350222e66298cff15fa78",
+              "index": 22,
+              "pts": 11264,
+              "time_base": "1/12800"
+            }
+          ],
+          "authored_box": [
+            165,
+            189,
+            57,
+            37
+          ],
+          "authored_changes": [
+            2876,
+            2883,
+            2900,
+            2916,
+            2910,
+            2907,
+            2886,
+            2888
+          ],
+          "authored_frames": [
+            14,
+            22
+          ],
+          "choice": {
+            "anchors": [
+              13,
+              18,
+              22
+            ],
+            "box": [
+              174,
+              192,
+              24,
+              18
+            ],
+            "context_boxes": [
+              [
+                131,
+                176,
+                22,
+                24
+              ],
+              [
+                236,
+                176,
+                22,
+                24
+              ],
+              [
+                156,
+                142,
+                22,
+                24
+              ],
+              [
+                211,
+                142,
+                22,
+                24
+              ],
+              [
+                183,
+                235,
+                22,
+                24
+              ]
+            ],
+            "frames": [
+              14,
+              22
+            ],
+            "maximum_patch_mean_difference": 0.20833333333333334,
+            "minimum_flank_peak": 12.62962962962963,
+            "minimum_patch_near_equal_fraction": 0.9421296296296297,
+            "moving_context_edges": 7,
+            "total_edges": 7
+          },
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "640ec0327ea79256b4d68bb1598349482860142bfcdd2b816a98561a8ab077e5",
+          "role": "mouth_early",
+          "sha256": "cd66c7a2401903e4f8155f5956c19ef0a32b8aa02d98ad4ff78d7a431d461f8b",
+          "state": "matched"
+        },
+        {
+          "anchors": [
+            {
+              "crop_sha256": "be50e6eef4dd66886128ac439444d91ec01b2594749c39d5a272a591944f2d15",
+              "frame_sha256": "798319a5fc739679dc2b2006d8f4d7b08033f20da390e97f48aede42692114ca",
+              "index": 26,
+              "pts": 13312,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "970ab39dd6c1205ba38abadd82bfe632cb6af7a2bdb139b8c5b4ca9b86f461d4",
+              "frame_sha256": "ce4b96f5582c3da6698ef6278a79e1d90a6389e1f61dffd0ca076d363b049ebf",
+              "index": 32,
+              "pts": 16384,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "deae4bffb4e15bad71e28a9e32dfd84a71ec67d9a59738fa8bdce9b4bc8c7bc1",
+              "frame_sha256": "a59331e08b38521c127e0e71168bdddd49a4f682090b315064735dfe03c069d4",
+              "index": 37,
+              "pts": 18944,
+              "time_base": "1/12800"
+            }
+          ],
+          "authored_box": [
+            167,
+            190,
+            56,
+            37
+          ],
+          "authored_changes": [
+            2828,
+            2812,
+            2831,
+            2851,
+            2856,
+            2863,
+            2867,
+            2872,
+            2860,
+            2809
+          ],
+          "authored_frames": [
+            27,
+            37
+          ],
+          "choice": {
+            "anchors": [
+              26,
+              32,
+              37
+            ],
+            "box": [
+              165,
+              199,
+              34,
+              22
+            ],
+            "context_boxes": [
+              [
+                131,
+                176,
+                22,
+                24
+              ],
+              [
+                236,
+                176,
+                22,
+                24
+              ],
+              [
+                156,
+                142,
+                22,
+                24
+              ],
+              [
+                211,
+                142,
+                22,
+                24
+              ],
+              [
+                183,
+                236,
+                22,
+                24
+              ]
+            ],
+            "frames": [
+              27,
+              37
+            ],
+            "maximum_patch_mean_difference": 0.22727272727272727,
+            "minimum_flank_peak": 10.094919786096257,
+            "minimum_patch_near_equal_fraction": 0.9491978609625669,
+            "moving_context_edges": 9,
+            "total_edges": 9
+          },
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "5b22891b6873421a52d5a31141e6fe9d5ff18ca66fcc8da5727a538192bce8be",
+          "role": "mouth_late",
+          "sha256": "c021456b43eb08bf656d26d2c9ae4a21f68d356d511aca7130da4b0511e95075",
+          "state": "matched"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": null,
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "976e83e4174a6ef7845fcbcc686dcf6de34dc18cdbf2680dd61523394d8910f9",
+          "role": "original",
+          "sha256": "7683bb179a1563d888ca74d9fbc7c801409c12845c63e2744a762f4e88943e99",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": null,
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "97101e13990d9f264a3e218dc6c5126048db69ef3546f759774e2d12181e70da",
+          "role": "tandem",
+          "sha256": "8b9e78da5c5cef004f21a6ad74b8a9e2c263ba4c1ccc228f0d4477bec168f959",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": [
+            27,
+            37
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "63bed936cf62637a5660013c938c0bb39e995b81e68e4e299c47a91baac18e80",
+          "role": "whole_hold",
+          "sha256": "701627e74b2350d0df299ea60c6a1ec052b521c5784721b06b152c141cde4766",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": [
+            27,
+            37
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "c5489daadc82cf2abf29fe5133a325528722eae54012767f586e0a7b32f7019c",
+          "role": "whole_cut",
+          "sha256": "d7b4afc76be9f9cce985f81ed981ebb6c1cd188e3bfe5507a3621253ca578adc",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": [
+            167,
+            190,
+            56,
+            37
+          ],
+          "authored_changes": [
+            2752,
+            2772,
+            2738,
+            2739,
+            2745,
+            2736,
+            2735,
+            2748,
+            2729,
+            2734
+          ],
+          "authored_frames": [
+            27,
+            37
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "04084b2547de66a278feae586328fca773046250122b4573fdec6f205cb5d057",
+          "role": "mouth_blur",
+          "sha256": "3c07656d7a879db5e548cc145d3c43695b3d572dafc44bd3bd4504d432ca9c18",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": [
+            167,
+            134,
+            56,
+            37
+          ],
+          "authored_changes": [
+            2769,
+            2801,
+            2817,
+            2848,
+            2845,
+            2856,
+            2853,
+            2848,
+            2857,
+            2818
+          ],
+          "authored_frames": [
+            27,
+            37
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "e299cc9a22c09d55ab369411688e0abb6e26cb72e498761fa7b1e00d585bba2f",
+          "role": "off_mouth_hold",
+          "sha256": "de062cb8d288b698048a5551a06d4cd6a4df0eb41d6ce5bd8433ec9a4028d147",
+          "state": "no_match"
+        }
+      ],
+      "donor_group": 15,
+      "group": 14,
+      "mapped_pts_sha256": "1ef8c6a9cf6412f015a6259e6c59e529882914ae361b6c991ce6813ed7028924",
+      "source_sha256": "9c97d3956efa0657a16586d0bc94a70d3dc3f95dc012ec3ed766921d9c6636e7"
+    },
+    {
+      "bank": "grid",
+      "cases": [
+        {
+          "anchors": [
+            {
+              "crop_sha256": "78db1f5351a9841e85b6f211b067733e985243646078f44a61afbd219a83756f",
+              "frame_sha256": "cbb611376e99cee9edf65a8480cbef841c8f2ef16e42675a0d6569418ee5f3af",
+              "index": 11,
+              "pts": 5632,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "7951ee60654b0b12cecbb5664fced7285e02919cde5296c772289d33cce9a3c6",
+              "frame_sha256": "e9e97a456e6313693c7621fc8dddce7491c006e9d038aa4db280e8b7c2554e1a",
+              "index": 16,
+              "pts": 8192,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "050ba7f9221ee4c680f3a8dec7209cb200fad735d22f95f66242bcd1fecd2229",
+              "frame_sha256": "d63eae143a33253b872eb49efc44e2b2667779f8a115ce9a02b3e048a1e1651c",
+              "index": 20,
+              "pts": 10240,
+              "time_base": "1/12800"
+            }
+          ],
+          "authored_box": [
+            155,
+            181,
+            63,
+            42
+          ],
+          "authored_changes": [
+            3460,
+            3461,
+            3486,
+            3484,
+            3511,
+            3499,
+            3491,
+            3501
+          ],
+          "authored_frames": [
+            12,
+            20
+          ],
+          "choice": {
+            "anchors": [
+              11,
+              16,
+              20
+            ],
+            "box": [
+              189,
+              191,
+              24,
+              16
+            ],
+            "context_boxes": [
+              [
+                127,
+                174,
+                22,
+                24
+              ],
+              [
+                229,
+                174,
+                22,
+                24
+              ],
+              [
+                151,
+                141,
+                22,
+                24
+              ],
+              [
+                205,
+                141,
+                22,
+                24
+              ],
+              [
+                178,
+                232,
+                22,
+                24
+              ]
+            ],
+            "frames": [
+              12,
+              20
+            ],
+            "maximum_patch_mean_difference": 0.2630208333333333,
+            "minimum_flank_peak": 3.5598958333333335,
+            "minimum_patch_near_equal_fraction": 0.9505208333333334,
+            "moving_context_edges": 7,
+            "total_edges": 7
+          },
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "804dbff361688224213ca2d22399528a496c6dd1fed7109a617f730209791e26",
+          "role": "mouth_early",
+          "sha256": "3ad73ebd93a134c5e64c8fb50c26688fcc351d4cef41c406a77c78e8e1bd8585",
+          "state": "matched"
+        },
+        {
+          "anchors": [
+            {
+              "crop_sha256": "f49d38a6f216012d1b04bfc8711bcd8e151ba29c6d7fb000cdd9f99eb8550e20",
+              "frame_sha256": "59a2fb10a15d7a449af2089137a9403d70efc16543333639dc9948d30d5fd867",
+              "index": 24,
+              "pts": 12288,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "719e5501ea3e116948a55b0a45461669c324f098e0fc13899d1a6ac116ea0875",
+              "frame_sha256": "74679ffff64b838adad945e54dfb25032f392c4476f3460714826a6787e455df",
+              "index": 30,
+              "pts": 15360,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "4cc886154e07a3748dc28521e02760dcd66554819bc5b8458283eab6df806559",
+              "frame_sha256": "0616e22caf5bea662fe672f47254d22b32650e4094a21a2ccda9f8578574d7e6",
+              "index": 35,
+              "pts": 17920,
+              "time_base": "1/12800"
+            }
+          ],
+          "authored_box": [
+            159,
+            184,
+            63,
+            42
+          ],
+          "authored_changes": [
+            3480,
+            3485,
+            3515,
+            3515,
+            3530,
+            3529,
+            3533,
+            3532,
+            3522,
+            3515
+          ],
+          "authored_frames": [
+            25,
+            35
+          ],
+          "choice": {
+            "anchors": [
+              24,
+              30,
+              35
+            ],
+            "box": [
+              156,
+              192,
+              34,
+              22
+            ],
+            "context_boxes": [
+              [
+                126,
+                174,
+                22,
+                24
+              ],
+              [
+                229,
+                174,
+                22,
+                24
+              ],
+              [
+                150,
+                140,
+                22,
+                24
+              ],
+              [
+                205,
+                140,
+                22,
+                24
+              ],
+              [
+                178,
+                233,
+                22,
+                24
+              ]
+            ],
+            "frames": [
+              25,
+              35
+            ],
+            "maximum_patch_mean_difference": 0.1925133689839572,
+            "minimum_flank_peak": 12.608288770053475,
+            "minimum_patch_near_equal_fraction": 0.9518716577540107,
+            "moving_context_edges": 9,
+            "total_edges": 9
+          },
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "d978a38c39966cff94984025e16713b1a81dd6e89bff7b41e52edfc4e5d3b86a",
+          "role": "mouth_late",
+          "sha256": "3e04a1f55408a9e433d1f947703a2f976aab440efaca0771f1b7e2ee2cb006fb",
+          "state": "matched"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": null,
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "1851e1c13ccc6c73001151621c81fb36416d924396140fa971aac5f1ef96c954",
+          "role": "original",
+          "sha256": "8a43c672a7dc5ed135867c5af6721388104e18e238cfa1ad8762216554ff065e",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": null,
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "64af81d0eec543648e230c95ec22e848213582671ee80e1a5b7b3b9fb7a3bc49",
+          "role": "tandem",
+          "sha256": "8b67d3a0cb41a16a772b64b72427ed11c45320a18bd4f0307e9d7b3a6d2a18c4",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": [
+            25,
+            35
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "1f08e1399b36b5dad53da74fe9c1e876cdff33047660c3a7d8e87a075219eb6b",
+          "role": "whole_hold",
+          "sha256": "7584d625790754cf745df8303fadbe7e42feb88b413f606cf6f93f3d3e3f08dd",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": [
+            25,
+            35
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "4118a01c3b34ad24c7b2e5a775b0d7b540f794e6985e6404cdab68c2ef7efac8",
+          "role": "whole_cut",
+          "sha256": "c23c74cd1f5ca6f28b1ad3f6703fb3a6f1e901d97c1f5cd3c6297226cd80a925",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": [
+            159,
+            184,
+            63,
+            42
+          ],
+          "authored_changes": [
+            3381,
+            3403,
+            3408,
+            3401,
+            3396,
+            3398,
+            3411,
+            3416,
+            3397,
+            3425
+          ],
+          "authored_frames": [
+            25,
+            35
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "31f286e4e83364aebdd49b3c14bba78245de867adfed489e503826064f030430",
+          "role": "mouth_blur",
+          "sha256": "283a6d517d84251e7cd3454acd7d8bc56066ec0e786ec4eb62531e01d237f075",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": [
+            159,
+            122,
+            63,
+            42
+          ],
+          "authored_changes": [
+            3457,
+            3451,
+            3469,
+            3505,
+            3493,
+            3507,
+            3519,
+            3508,
+            3499,
+            3495
+          ],
+          "authored_frames": [
+            25,
+            35
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "e35f52506307b8e0968b91de978f2b4d486d6eded7ee8c560dd479b017027f25",
+          "role": "off_mouth_hold",
+          "sha256": "c7a1bdd224ff2152bf078e14662ece1e6ce7c1ad6d701a2f942d305d3409ed3d",
+          "state": "no_match"
+        }
+      ],
+      "donor_group": 10,
+      "group": 15,
+      "mapped_pts_sha256": "1ef8c6a9cf6412f015a6259e6c59e529882914ae361b6c991ce6813ed7028924",
+      "source_sha256": "18b75fb18c4c64988be94566a55e6176ed05a4c5a44b7dcc57d173bace54b75d"
+    },
+    {
+      "bank": "crema",
+      "cases": [
+        {
+          "anchors": [
+            {
+              "crop_sha256": "049f50ceaa87d31198ac578a207c43d006353885d09e72d687191b81522cb788",
+              "frame_sha256": "c806c2bcae40d60693369299048282de82f212040a149d5ea814bdbb264d96f3",
+              "index": 13,
+              "pts": 6656,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "cb2eda76b241525377606555bb5f16e06c1daf861ab8480d4f7296cdc00cc251",
+              "frame_sha256": "33fb3e5644116be022485697301d91ef80858bb6da1d7e492caeaa5165b88ba7",
+              "index": 18,
+              "pts": 9216,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "dd4acbab587fb07080d70a7a902a4a7a1f4dd7a9976f46420810c43d2de8dce0",
+              "frame_sha256": "132c4254cc78c00e6eb148aa53a48a92bd08b5b3baf53514dd99aa5c0a980fea",
+              "index": 22,
+              "pts": 11264,
+              "time_base": "1/12800"
+            }
+          ],
+          "authored_box": [
+            208,
+            158,
+            71,
+            47
+          ],
+          "authored_changes": [
+            4143,
+            4197,
+            4263,
+            4255,
+            4293,
+            4284,
+            4288,
+            4277
+          ],
+          "authored_frames": [
+            14,
+            22
+          ],
+          "choice": {
+            "anchors": [
+              13,
+              18,
+              22
+            ],
+            "box": [
+              204,
+              162,
+              38,
+              26
+            ],
+            "context_boxes": [
+              [
+                172,
+                151,
+                26,
+                26
+              ],
+              [
+                289,
+                151,
+                26,
+                26
+              ],
+              [
+                200,
+                113,
+                26,
+                26
+              ],
+              [
+                261,
+                113,
+                26,
+                26
+              ],
+              [
+                230,
+                217,
+                26,
+                26
+              ]
+            ],
+            "frames": [
+              14,
+              22
+            ],
+            "maximum_patch_mean_difference": 0.3724696356275304,
+            "minimum_flank_peak": 4.799595141700405,
+            "minimum_patch_near_equal_fraction": 0.9453441295546559,
+            "moving_context_edges": 7,
+            "total_edges": 7
+          },
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "3a27853523f7964e38877c4e58d4991a8780dd5344518806db845f7f8db066ca",
+          "role": "mouth_early",
+          "sha256": "4ede50a6cd974b6b7320cd07f31f083c0eed58258bbb559a123b5b150de86098",
+          "state": "matched"
+        },
+        {
+          "anchors": [
+            {
+              "crop_sha256": "c8be04a7e9094aa4b0ed562074e9c1f91fdd364c12fc5afab292e131956049d7",
+              "frame_sha256": "9eafdf327926df7d4086d3fadb29583d1ae2fb8e4931e2e2872bdde08d4fffe6",
+              "index": 26,
+              "pts": 13312,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "028d49947fdb09d42572d1ef5a9f9f0101e20f777b6fcf383bd91bad7ee3751b",
+              "frame_sha256": "274cca7e45670f4ca67b6daf0249b2b8ecb1f345aa83bb6893f5a73ccef99379",
+              "index": 32,
+              "pts": 16384,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "583163767e685c7ba104cddba2bd720bc42d98dc07e8ec4fd8195e3962e0c914",
+              "frame_sha256": "a995b3b7c326c1401b18ff6489b69e909952e123e2b6a65980425ec3e09b5ff3",
+              "index": 37,
+              "pts": 18944,
+              "time_base": "1/12800"
+            }
+          ],
+          "authored_box": [
+            207,
+            158,
+            71,
+            48
+          ],
+          "authored_changes": [
+            4244,
+            4213,
+            4233,
+            4314,
+            4346,
+            4356,
+            4356,
+            4343,
+            4333,
+            4342
+          ],
+          "authored_frames": [
+            27,
+            37
+          ],
+          "choice": {
+            "anchors": [
+              26,
+              32,
+              37
+            ],
+            "box": [
+              225,
+              185,
+              28,
+              20
+            ],
+            "context_boxes": [
+              [
+                172,
+                150,
+                26,
+                26
+              ],
+              [
+                289,
+                150,
+                26,
+                26
+              ],
+              [
+                199,
+                112,
+                26,
+                26
+              ],
+              [
+                261,
+                112,
+                26,
+                26
+              ],
+              [
+                230,
+                216,
+                26,
+                26
+              ]
+            ],
+            "frames": [
+              27,
+              37
+            ],
+            "maximum_patch_mean_difference": 0.2785714285714286,
+            "minimum_flank_peak": 9.6,
+            "minimum_patch_near_equal_fraction": 0.9428571428571428,
+            "moving_context_edges": 9,
+            "total_edges": 9
+          },
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "2a908a5abd75b3374978adf9c847b64743873d6b3b1563bf203fbbae5bee6598",
+          "role": "mouth_late",
+          "sha256": "cb22b6cebdcabd88b55db97eacf76fc25ab574e2c7d09953be0ff0fce24f32ed",
+          "state": "matched"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": null,
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "47dfab1cdce9d1cf14e21a134f92f5097c746acb11b8932784638980c18d23fc",
+          "role": "original",
+          "sha256": "bdfda7a73c7ec50d10e3e084f96f3732d1fe44a4c35ecb37af1033f901029cdf",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": null,
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "7e32de0d6ce975e0372228e2842bf96b8a6da3a5ddfaea95db91b8cb6dfb8602",
+          "role": "tandem",
+          "sha256": "dd2ecff7dc1b095b42d65752d7f3640d538336ca411329f4a6d1e48b19bac706",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": [
+            27,
+            37
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "4ade15c47990a929cefe6fcbfeb9adfc1ddb41b17cab2ef227c073abf117ef86",
+          "role": "whole_hold",
+          "sha256": "838030a9447fa4f5f7fd18d3f69a063521d05e6aad0bb906cbe8778f44b19097",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": [
+            27,
+            37
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "4772766c2ef8eb88c1a0b863a071936cee969b5e9e0ef871830dc807f6ba49b9",
+          "role": "whole_cut",
+          "sha256": "dc165fe46873aa186b516800416745438ca4b0a696c3e9a86204c3d4673e0e01",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": [
+            207,
+            158,
+            71,
+            48
+          ],
+          "authored_changes": [
+            4260,
+            4260,
+            4266,
+            4269,
+            4257,
+            4261,
+            4244,
+            4252,
+            4258,
+            4254
+          ],
+          "authored_frames": [
+            27,
+            37
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "97fd65719e48ecbea133b545d5d2ee649c83f1c81eb834dd085d715b9e006ec3",
+          "role": "mouth_blur",
+          "sha256": "ba234b7b828b65d30d196e787ed2fbd85528a8e9065137526e0d0f3a71c1e534",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": [
+            207,
+            89,
+            71,
+            48
+          ],
+          "authored_changes": [
+            3523,
+            3800,
+            3980,
+            3938,
+            4021,
+            4198,
+            4183,
+            4194,
+            4239,
+            4284
+          ],
+          "authored_frames": [
+            27,
+            37
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "4256ac589602892e4ee1754092bafd3b0139dcafca29319c6d5de340dcd51009",
+          "role": "off_mouth_hold",
+          "sha256": "6a5bd9808ab8d77659f53372d6b9f4e64a50b15b526feafc4da1cb0fc3c78008",
+          "state": "no_match"
+        }
+      ],
+      "donor_group": 6,
+      "group": 5,
+      "mapped_pts_sha256": "bcc0276e34b3ce5a9b5d605ad1775e7b7a393c3d7b9f79a2040d3f8f507e76ca",
+      "source_sha256": "c37ad95ab47a1b19e870ef4e862704d7d936608da28e323eff21c09e65e20c28"
+    },
+    {
+      "bank": "crema",
+      "cases": [
+        {
+          "anchors": [
+            {
+              "crop_sha256": "7c24a9cf9656fdd67a4932df1e39941309b31df8ab6afb48bf475173bfe37274",
+              "frame_sha256": "7c84804c21329f9878254468924eb9839eeb5eb4fef93737db8e05ea6c604124",
+              "index": 11,
+              "pts": 5632,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "f31196cad9951cae56adc9dcbdb2c5d323ca3879612f2380136166ac9b4c351f",
+              "frame_sha256": "00c26bdeb7e9cedfef21a7664b9b08f95554ad40857f4bfd4f3e7aca9ed43077",
+              "index": 16,
+              "pts": 8192,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "45105badc841ab41b15a898bbbacb91e2b97abf9a66668d4fbb062a230fe3ccc",
+              "frame_sha256": "095a73889e9a8c829c5c5d919c56d2813eb4681b7e9659cbc0b6c54d52580dcf",
+              "index": 20,
+              "pts": 10240,
+              "time_base": "1/12800"
+            }
+          ],
+          "authored_box": [
+            206,
+            137,
+            64,
+            42
+          ],
+          "authored_changes": [
+            3311,
+            3448,
+            3498,
+            3477,
+            3521,
+            3530,
+            3539,
+            3528
+          ],
+          "authored_frames": [
+            12,
+            20
+          ],
+          "choice": {
+            "anchors": [
+              11,
+              16,
+              20
+            ],
+            "box": [
+              208,
+              141,
+              32,
+              22
+            ],
+            "context_boxes": [
+              [
+                180,
+                132,
+                22,
+                22
+              ],
+              [
+                278,
+                132,
+                22,
+                22
+              ],
+              [
+                204,
+                101,
+                22,
+                22
+              ],
+              [
+                255,
+                101,
+                22,
+                22
+              ],
+              [
+                229,
+                188,
+                22,
+                22
+              ]
+            ],
+            "frames": [
+              12,
+              20
+            ],
+            "maximum_patch_mean_difference": 0.2755681818181818,
+            "minimum_flank_peak": 6.96875,
+            "minimum_patch_near_equal_fraction": 0.9403409090909091,
+            "moving_context_edges": 7,
+            "total_edges": 7
+          },
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "f8f52833597206e49b58fab937cb52bae64c01a07730990fe1a6bae1a287d383",
+          "role": "mouth_early",
+          "sha256": "f2bf3a291dea86cca7bd755eddb6dcc1deae0151e89e32a74300f23b867d8976",
+          "state": "matched"
+        },
+        {
+          "anchors": [],
+          "authored_box": [
+            211,
+            140,
+            58,
+            38
+          ],
+          "authored_changes": [
+            2842,
+            2806,
+            2834,
+            2889,
+            2966,
+            2980,
+            2992,
+            2993,
+            3003,
+            3005
+          ],
+          "authored_frames": [
+            25,
+            35
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "1beda6da8b255118279d73b4be0fcf6cf1ceb926627dbea781aa9c5263e0aef5",
+          "role": "mouth_late",
+          "sha256": "2af58f1629d8f53874edfeb8eff831225408bad5a1c3b552f6ded2e4a5a221ef",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": null,
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "90cdc575dfb8d0286aab89a0b201f57e6be6cb6ad83664d62d11b3727309f916",
+          "role": "original",
+          "sha256": "cbcacf7c07c45ee318d3a47a7f51e18f0fe09459cff78b1a77ff405cee067dac",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": null,
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "8b7db7b973c5d29f0a63d9808d7a28080ab2f705f0618e5f5037ef94f78ed2d2",
+          "role": "tandem",
+          "sha256": "9e16697548130427e167e51e116105493ef11f510f72857fdd2aa43c175374cb",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": [
+            25,
+            35
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "2dff1b95f95350f1dbbb9a389dd4e72a866c74c6bce16aca3e583bf2b431487d",
+          "role": "whole_hold",
+          "sha256": "f983f05eea50a5f8b68d5e486942bf3835d2f4b0e93a64a6a8ee07677428b767",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": [
+            25,
+            35
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "76022c18973d78ffc9fd4bf5931b08f3b2d00de0aee18366e3b0ffc66524e692",
+          "role": "whole_cut",
+          "sha256": "3ce985116d2e8a6f3d91f224e1eef82602df0f5782c001c62a959449a038e56c",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": [
+            211,
+            140,
+            58,
+            38
+          ],
+          "authored_changes": [
+            2933,
+            2941,
+            2936,
+            2926,
+            2933,
+            2946,
+            2936,
+            2944,
+            2938,
+            2939
+          ],
+          "authored_frames": [
+            25,
+            35
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "3c4cefaedc02975517747cff1858b8538215097b52a3cd3561d1626e790a7a8a",
+          "role": "mouth_blur",
+          "sha256": "3cd83401c49b8d9e15b2d81ac209ca99a99bbb6b512112e1c06918f26872a317",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": [
+            211,
+            83,
+            58,
+            38
+          ],
+          "authored_changes": [
+            2685,
+            2729,
+            2755,
+            2807,
+            2870,
+            2932,
+            2892,
+            2909,
+            2860,
+            2896
+          ],
+          "authored_frames": [
+            25,
+            35
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "baf974558ca6b7894fb6735276fb0ae5f3ffd28cac8d4e141f8d56ea7b16f6e9",
+          "role": "off_mouth_hold",
+          "sha256": "ba58543f8b2fa01c126ad979768d4986537e2524b6dacb48e807bb7fd0e0038b",
+          "state": "no_match"
+        }
+      ],
+      "donor_group": 7,
+      "group": 6,
+      "mapped_pts_sha256": "bcc0276e34b3ce5a9b5d605ad1775e7b7a393c3d7b9f79a2040d3f8f507e76ca",
+      "source_sha256": "e07b8ff982671950291f41af3019881cd95df86dda5c55e31e1159971506e257"
+    },
+    {
+      "bank": "crema",
+      "cases": [
+        {
+          "anchors": [
+            {
+              "crop_sha256": "d0ce82ae6b6b73e818cff050135b3f58ff4eb316cc34f949b002ab95e83af3ed",
+              "frame_sha256": "4b646b50c454ac03440bbd4af22ded8fef18af38f418a5fb56e2d3acf61b9141",
+              "index": 12,
+              "pts": 6144,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "920e1c62ed460abb42946bb9e4aa2ae39d3f51b863f4143efb1b9101428888f6",
+              "frame_sha256": "a8a786603913ac9a32fbe6f47115882f4fbcebc047f8c04ba06fd2a3bca0a1d5",
+              "index": 17,
+              "pts": 8704,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "ccbfec0d73fcaddc48d599cc9f646a22d3a99ca3d383ee364a77866f95db8fcf",
+              "frame_sha256": "538876a48e8edfedcca4875e5394016b2db4a9d8a0fc7a60aae32ae6ef335ecb",
+              "index": 21,
+              "pts": 10752,
+              "time_base": "1/12800"
+            }
+          ],
+          "authored_box": [
+            210,
+            134,
+            56,
+            37
+          ],
+          "authored_changes": [
+            2819,
+            2808,
+            2829,
+            2850,
+            2854,
+            2862,
+            2852,
+            2855
+          ],
+          "authored_frames": [
+            13,
+            21
+          ],
+          "choice": {
+            "anchors": [
+              12,
+              17,
+              21
+            ],
+            "box": [
+              211,
+              143,
+              32,
+              22
+            ],
+            "context_boxes": [
+              [
+                180,
+                127,
+                22,
+                22
+              ],
+              [
+                276,
+                127,
+                22,
+                22
+              ],
+              [
+                203,
+                96,
+                22,
+                22
+              ],
+              [
+                253,
+                96,
+                22,
+                22
+              ],
+              [
+                228,
+                182,
+                22,
+                22
+              ]
+            ],
+            "frames": [
+              13,
+              21
+            ],
+            "maximum_patch_mean_difference": 0.27982954545454547,
+            "minimum_flank_peak": 4.173295454545454,
+            "minimum_patch_near_equal_fraction": 0.9460227272727273,
+            "moving_context_edges": 7,
+            "total_edges": 7
+          },
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "c31c4c93e8b83ad6bdcb4ab5ac49c8b165ca9143c289549d9abc5a445abf728f",
+          "role": "mouth_early",
+          "sha256": "c768c6fde7e5755c2138c5fd65d1c8753a5f1976eea6eb4b4df97c72d6da4b62",
+          "state": "matched"
+        },
+        {
+          "anchors": [
+            {
+              "crop_sha256": "d2d71f842837b424269024452d529dac2e40e6edc713c8d5f0fe501b0a5007c8",
+              "frame_sha256": "3bcb298fc0f33e453b82376dc39a12f6824e6490908ce0d9676478ec403a0e88",
+              "index": 25,
+              "pts": 12800,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "cf69cec4f896d698d9cc2d27a20b6dddf8bd294e4d9c41ec7f5f90fe510b73d5",
+              "frame_sha256": "3886188fda9bd5cec65ead2cb8814cb7592c88e7909e12dbf2631b2f7a199468",
+              "index": 31,
+              "pts": 15872,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "7f9bb545fe5fa13c1f3ed659574234db69170131e2dc56fd9ad6f958de7d921f",
+              "frame_sha256": "4421589d147e8bc363867f79c04d35ae70b0b094fad72d8421fbddfb3445df31",
+              "index": 36,
+              "pts": 18432,
+              "time_base": "1/12800"
+            }
+          ],
+          "authored_box": [
+            211,
+            136,
+            57,
+            37
+          ],
+          "authored_changes": [
+            2782,
+            2861,
+            2846,
+            2849,
+            2847,
+            2854,
+            2865,
+            2871,
+            2871,
+            2871
+          ],
+          "authored_frames": [
+            26,
+            36
+          ],
+          "choice": {
+            "anchors": [
+              25,
+              31,
+              36
+            ],
+            "box": [
+              207,
+              135,
+              32,
+              22
+            ],
+            "context_boxes": [
+              [
+                179,
+                127,
+                22,
+                22
+              ],
+              [
+                276,
+                127,
+                22,
+                22
+              ],
+              [
+                202,
+                96,
+                22,
+                22
+              ],
+              [
+                253,
+                96,
+                22,
+                22
+              ],
+              [
+                228,
+                181,
+                22,
+                22
+              ]
+            ],
+            "frames": [
+              26,
+              36
+            ],
+            "maximum_patch_mean_difference": 0.17613636363636365,
+            "minimum_flank_peak": 3.383522727272727,
+            "minimum_patch_near_equal_fraction": 0.9758522727272727,
+            "moving_context_edges": 9,
+            "total_edges": 9
+          },
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "6bec5dcb1848a350ef980b0304086a3ed832a14b78326cbc24f0a40c276df572",
+          "role": "mouth_late",
+          "sha256": "fd3588ee310da196ae77253ada74f379b483be0ce60a55ddfaca5a205ad79a66",
+          "state": "matched"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": null,
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "95621fdb244356d5fbe64e1a66cc2e5e77abe17e596c1b4be7c22bea750ac590",
+          "role": "original",
+          "sha256": "f3732a60deeb1e023edff8c7b0478a07e247c2adfef0cd7f2fbb21e6fff8b956",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": null,
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "2d52a07a458fdc3ab5b31b305b12047f233c9be788625df0972e19f3d0ca12c9",
+          "role": "tandem",
+          "sha256": "e3967160e1439b692ed340ba91ef2acc5be60ab18b82f60dfb3aa1243bf9f8d0",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": [
+            26,
+            36
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "76a7a07cd029e9be89bc5f837931114f41088e84f41e471b4d3fc2046f6953a5",
+          "role": "whole_hold",
+          "sha256": "c3a26b2ad8407d462b88216d0e76c3074b17072e6fb052045ee3b64cfc81f2d7",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": [
+            26,
+            36
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "adc82eb824c6b2d11472ae49e6ea54a0fff3433315b9e5bf7fd1498c59d78394",
+          "role": "whole_cut",
+          "sha256": "c8a0e89d6d024977d8a1a7dde70363935e6ec7ad26e3f86a32f944224f352569",
+          "state": "no_stable_face"
+        },
+        {
+          "anchors": [],
+          "authored_box": [
+            211,
+            136,
+            57,
+            37
+          ],
+          "authored_changes": [
+            2858,
+            2873,
+            2890,
+            2884,
+            2888,
+            2887,
+            2879,
+            2881,
+            2881,
+            2883
+          ],
+          "authored_frames": [
+            26,
+            36
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "735cc3615a97b9b9e1fcf0d489e3e24fec0bcab2174c6d312fc5c8a6b8403f6d",
+          "role": "mouth_blur",
+          "sha256": "8507b468aaf577b706afe14edd6333c28b3f6d6b3d941d469e43e64ebeacaba2",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": [
+            211,
+            80,
+            57,
+            37
+          ],
+          "authored_changes": [
+            2668,
+            2760,
+            2800,
+            2819,
+            2839,
+            2838,
+            2833,
+            2842,
+            2850,
+            2863
+          ],
+          "authored_frames": [
+            26,
+            36
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "625edb5361c7340464e6e8cfd4e6d8f8a437ec70575bfa27d8514d31c9de0fdb",
+          "role": "off_mouth_hold",
+          "sha256": "4f52af23a9a52e159fdc42493b1c2a6f5edce4ad2bcbe2da6119c84ee4cdd97b",
+          "state": "no_match"
+        }
+      ],
+      "donor_group": 9,
+      "group": 7,
+      "mapped_pts_sha256": "bcc0276e34b3ce5a9b5d605ad1775e7b7a393c3d7b9f79a2040d3f8f507e76ca",
+      "source_sha256": "086b809b6f73eb380c84c57bfe7d2ac802adbfb9354b8f0272142f321932da50"
+    },
+    {
+      "bank": "crema",
+      "cases": [
+        {
+          "anchors": [
+            {
+              "crop_sha256": "3a2a0fb01f39b9a1080620c1165dc25fb980b0f76cd7f401adddb622c95306a0",
+              "frame_sha256": "a6d885294266cac6ec4804a39bb51dcef411afe61561ec4cc46c864fa950cd0c",
+              "index": 11,
+              "pts": 5632,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "1d8c623baf0b8a1d35a3c8c2d67f444b2be7f839a737ea21e8be253fd42f21db",
+              "frame_sha256": "4a011e6ce2cdbfabc586ceefb2ef4288b9ffd3cbc7506d0085b331772a2a2e13",
+              "index": 16,
+              "pts": 8192,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "4587cc1eaa52cd116f9b508ad08aac9e158371c9da9bfc054b236d190ce06a66",
+              "frame_sha256": "fceac766dc761815575716f7e6d8d45e0ca003bf6713e93081c721ed48802797",
+              "index": 20,
+              "pts": 10240,
+              "time_base": "1/12800"
+            }
+          ],
+          "authored_box": [
+            213,
+            184,
+            78,
+            52
+          ],
+          "authored_changes": [
+            5059,
+            5073,
+            5081,
+            5082,
+            5105,
+            5118,
+            5126,
+            5121
+          ],
+          "authored_frames": [
+            12,
+            20
+          ],
+          "choice": {
+            "anchors": [
+              11,
+              16,
+              20
+            ],
+            "box": [
+              217,
+              187,
+              40,
+              28
+            ],
+            "context_boxes": [
+              [
+                181,
+                178,
+                28,
+                28
+              ],
+              [
+                305,
+                178,
+                28,
+                28
+              ],
+              [
+                211,
+                138,
+                28,
+                28
+              ],
+              [
+                275,
+                138,
+                28,
+                28
+              ],
+              [
+                243,
+                248,
+                28,
+                28
+              ]
+            ],
+            "frames": [
+              12,
+              20
+            ],
+            "maximum_patch_mean_difference": 0.2625,
+            "minimum_flank_peak": 16.759821428571428,
+            "minimum_patch_near_equal_fraction": 0.9526785714285714,
+            "moving_context_edges": 7,
+            "total_edges": 7
+          },
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "89c2647e5bd313b48e2a9d6487e195140219d6940609123421fcef7350d246ab",
+          "role": "mouth_early",
+          "sha256": "8129056e98b2d3dc903bb9948fcdb1e3b69105fd633409cb8167f34efb3aae90",
+          "state": "matched"
+        },
+        {
+          "anchors": [
+            {
+              "crop_sha256": "b9ddea60f824d6a37dc380103fba1d964646204b199192838757b6ee1e41964f",
+              "frame_sha256": "7f64ddbefe16a46c622ed996548eedfc394748cec321cbafa5484a55e5fa7657",
+              "index": 24,
+              "pts": 12288,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "9c619dc5872cd86ecc8c3dfe102dbe53dce78f12a0ffb645411b11929ab80eae",
+              "frame_sha256": "031bc2416ba8deca80f1dbe787de3780349ca708b84f6f900183bdde86bb06d1",
+              "index": 30,
+              "pts": 15360,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "8332f93c19992f9e8b914eddfa60a9b0a9d1f1ef120a5350b28144fa9fab31f8",
+              "frame_sha256": "354b7b6cce0b3c0d29f71b1ee58d3a1537908f73ec18dbd6c611e0965512bdae",
+              "index": 35,
+              "pts": 17920,
+              "time_base": "1/12800"
+            }
+          ],
+          "authored_box": [
+            219,
+            184,
+            76,
+            51
+          ],
+          "authored_changes": [
+            4903,
+            4883,
+            4873,
+            4898,
+            4896,
+            4910,
+            4899,
+            4910,
+            4926,
+            4928
+          ],
+          "authored_frames": [
+            25,
+            35
+          ],
+          "choice": {
+            "anchors": [
+              24,
+              30,
+              35
+            ],
+            "box": [
+              216,
+              186,
+              40,
+              28
+            ],
+            "context_boxes": [
+              [
+                180,
+                178,
+                28,
+                28
+              ],
+              [
+                304,
+                178,
+                28,
+                28
+              ],
+              [
+                210,
+                138,
+                28,
+                28
+              ],
+              [
+                274,
+                138,
+                28,
+                28
+              ],
+              [
+                242,
+                248,
+                28,
+                28
+              ]
+            ],
+            "frames": [
+              25,
+              35
+            ],
+            "maximum_patch_mean_difference": 0.2883928571428571,
+            "minimum_flank_peak": 14.3875,
+            "minimum_patch_near_equal_fraction": 0.9410714285714286,
+            "moving_context_edges": 9,
+            "total_edges": 9
+          },
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "199c0b34bfbe260196bc5d4a48ed6f00c0ce17d7287cbc2b3ae626d61a12932e",
+          "role": "mouth_late",
+          "sha256": "e9520acc1b8f9c14f9bde6501c6685303c27b17f15f6e9fc4bdab31d75382e6f",
+          "state": "matched"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": null,
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "a75aaddd9f89d8e752e8c148313ab784b7f9c6b3f33d7d83044f76247d179892",
+          "role": "original",
+          "sha256": "f97dc52394ef59480b7a21c237adbb1325112d2cc42385ae8da8e5df2a349370",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": null,
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "1bcd47a21eb0c15b21a802249b8b76cfa58a3b3eee86344836c8a72862025db8",
+          "role": "tandem",
+          "sha256": "27953f698f531e1fa09f8046a0029ecce7a2855f24183741fc3bc23b4e454f83",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": [
+            25,
+            35
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "625d3990bc764b6aab1fd06d1fff508f5c116bbb4c762d40f16e7871291d1588",
+          "role": "whole_hold",
+          "sha256": "1680b397a982ab226e2cb1ef9f04f6f088c95867ee598cbba1d98ae24d37e700",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": [
+            25,
+            35
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "a0e0e8d4a7542a06bf3280d09c5191fdf5646ddea79c8ec61ece8ccc5a91100b",
+          "role": "whole_cut",
+          "sha256": "a8c4db3100604cee95246ee5c1fd99042bc43b54ad02e66c27cd660a85747f14",
+          "state": "no_stable_face"
+        },
+        {
+          "anchors": [],
+          "authored_box": [
+            219,
+            184,
+            76,
+            51
+          ],
+          "authored_changes": [
+            4799,
+            4790,
+            4800,
+            4823,
+            4792,
+            4808,
+            4810,
+            4776,
+            4770,
+            4745
+          ],
+          "authored_frames": [
+            25,
+            35
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "bd23a9ce4660cfe2ccbd8e3570124fd39f312067376379fa6fe1eb982304ddce",
+          "role": "mouth_blur",
+          "sha256": "cad75193d558648231863c074710ab48bef59aef430d89c23f2de6799554629d",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": [
+            219,
+            111,
+            76,
+            51
+          ],
+          "authored_changes": [
+            4839,
+            4838,
+            4854,
+            4835,
+            4850,
+            4870,
+            4864,
+            4857,
+            4906,
+            4907
+          ],
+          "authored_frames": [
+            25,
+            35
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "ffb6ed15acad906e3f3159ca0fc4b5ad5800ff84aa8af926e7c7442fa7e36c89",
+          "role": "off_mouth_hold",
+          "sha256": "b864820f69bf1edc96f3772a1833d0646b9f1c4d8f84a7b690d3e810aca07274",
+          "state": "no_match"
+        }
+      ],
+      "donor_group": 11,
+      "group": 9,
+      "mapped_pts_sha256": "bcc0276e34b3ce5a9b5d605ad1775e7b7a393c3d7b9f79a2040d3f8f507e76ca",
+      "source_sha256": "09cf8994de83114e49d78adb651fcebb6b9298a18936306acdc519874afd6aab"
+    },
+    {
+      "bank": "crema",
+      "cases": [
+        {
+          "anchors": [
+            {
+              "crop_sha256": "5f8d71cbf7581332de67ed4ce042da733170af4bfe908c7a2ff7b5ada58f8a54",
+              "frame_sha256": "81fae1260f8c8ecc725cee8f767e299abfd66ad177747f8575921c7ed017f33d",
+              "index": 13,
+              "pts": 6656,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "676243d965582cb5746c0e089b6ea2823bda9c9dbd6fa2b0cc70aead8424b635",
+              "frame_sha256": "d8d063c21a3f8dd825ee7ee09b3217c8c7db006a7634f0fff2d0c1cd57402b8e",
+              "index": 18,
+              "pts": 9216,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "dcf906d7b9879202c0aafa328aa309fe622e0a1a6b05e078810b941eaeb031d0",
+              "frame_sha256": "d6552b8ae8b5e1fc6a51978ff9e85717f52252c6483c1996380bc829dbb5155f",
+              "index": 22,
+              "pts": 11264,
+              "time_base": "1/12800"
+            }
+          ],
+          "authored_box": [
+            193,
+            126,
+            53,
+            34
+          ],
+          "authored_changes": [
+            2551,
+            2551,
+            2552,
+            2555,
+            2554,
+            2555,
+            2552,
+            2553
+          ],
+          "authored_frames": [
+            14,
+            22
+          ],
+          "choice": {
+            "anchors": [
+              13,
+              18,
+              22
+            ],
+            "box": [
+              216,
+              141,
+              22,
+              14
+            ],
+            "context_boxes": [
+              [
+                168,
+                111,
+                20,
+                20
+              ],
+              [
+                257,
+                111,
+                20,
+                20
+              ],
+              [
+                189,
+                83,
+                20,
+                20
+              ],
+              [
+                236,
+                83,
+                20,
+                20
+              ],
+              [
+                213,
+                161,
+                20,
+                20
+              ]
+            ],
+            "frames": [
+              14,
+              22
+            ],
+            "maximum_patch_mean_difference": 0.17207792207792208,
+            "minimum_flank_peak": 37.8051948051948,
+            "minimum_patch_near_equal_fraction": 0.948051948051948,
+            "moving_context_edges": 7,
+            "total_edges": 7
+          },
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "b159fc849de98492f79d04cf5ed6b53382c7cad9c33d216aa833d1578bd9fd0f",
+          "role": "mouth_early",
+          "sha256": "2b2fbb0124b97dfb85e5ad9529811ecf6206c520f6b87eec3869bfb4bf3ad7fa",
+          "state": "matched"
+        },
+        {
+          "anchors": [
+            {
+              "crop_sha256": "652958d8d65d2926dba79a8612d3a83ec16fc8cd4db0589e292b1697d5670e2f",
+              "frame_sha256": "9e0c3ff89a736c27a22d7554688c87fd89e3ca3fc638912d5dc0f74829bc5338",
+              "index": 26,
+              "pts": 13312,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "3a7c6362fef70dfcc4ad97807737bf392910d3607be6b68dff5b8e5c33f640b7",
+              "frame_sha256": "22d5a7898dc800585cfc7bb8fd2ac90a632d2190838d6967d99e09dfa53d7be3",
+              "index": 32,
+              "pts": 16384,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "08950449215ea83117933a6341b180b2e46c65489ef4d117b20e10cc7c534154",
+              "frame_sha256": "9895f135c3b7bdb75202725c4372939b4c2305eb42bcbbd9d41f7e11374493bb",
+              "index": 37,
+              "pts": 18944,
+              "time_base": "1/12800"
+            }
+          ],
+          "authored_box": [
+            193,
+            118,
+            53,
+            35
+          ],
+          "authored_changes": [
+            2425,
+            2505,
+            2590,
+            2603,
+            2605,
+            2610,
+            2617,
+            2618,
+            2621,
+            2621
+          ],
+          "authored_frames": [
+            27,
+            37
+          ],
+          "choice": {
+            "anchors": [
+              26,
+              32,
+              37
+            ],
+            "box": [
+              208,
+              123,
+              28,
+              20
+            ],
+            "context_boxes": [
+              [
+                167,
+                112,
+                20,
+                20
+              ],
+              [
+                257,
+                112,
+                20,
+                20
+              ],
+              [
+                189,
+                83,
+                20,
+                20
+              ],
+              [
+                235,
+                83,
+                20,
+                20
+              ],
+              [
+                212,
+                163,
+                20,
+                20
+              ]
+            ],
+            "frames": [
+              27,
+              37
+            ],
+            "maximum_patch_mean_difference": 0.19285714285714287,
+            "minimum_flank_peak": 10.275,
+            "minimum_patch_near_equal_fraction": 0.9553571428571429,
+            "moving_context_edges": 9,
+            "total_edges": 9
+          },
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "2e9cae4692cb88dd807bfd008935e69bb444103946abf6b1527a1978b2023e16",
+          "role": "mouth_late",
+          "sha256": "1a67d70a7818848d6351692069d3c23129f8b57e79481371f943606bd6b7d552",
+          "state": "matched"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": null,
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "785fe2aed7a5f4c97c4b4e121061de2feaeb288374947b84fbe9f2f022303944",
+          "role": "original",
+          "sha256": "03f202f989b13659ebc318bebdd5823e4b627510056a6c805d9074bc3a3fe169",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": null,
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "9f13da3be6361dba3789d321519767bab35590509d5347feb84d276b90fa125c",
+          "role": "tandem",
+          "sha256": "e1bb48a18801e4f3dd2e4be2b73d88b378380a6da12fa434dc939899f0eb3c8a",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": [
+            27,
+            37
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "81a89450ed76a7edeca7ce79aaa9393cb55684b009e9a792a9dce4ca229362a3",
+          "role": "whole_hold",
+          "sha256": "6d019a9b1e68675f6583ffe32faaadec2fe1889d0003cb08ad1b3c78dcaed465",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": [
+            27,
+            37
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "db307ead57016a99aad2fea89edff1b325a93f62c0d26f8049124299644d2836",
+          "role": "whole_cut",
+          "sha256": "0addb160b4ce2596901d3cb0ceb49a8d03c58e11c118e5ab17dc1ef98e9b15f4",
+          "state": "no_stable_face"
+        },
+        {
+          "anchors": [],
+          "authored_box": [
+            193,
+            118,
+            53,
+            35
+          ],
+          "authored_changes": [
+            2573,
+            2554,
+            2573,
+            2578,
+            2587,
+            2584,
+            2583,
+            2593,
+            2584,
+            2572
+          ],
+          "authored_frames": [
+            27,
+            37
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "bb72d53a864a52db7126335b54f55a9922ff60bd09a5273e7074b5140b07a283",
+          "role": "mouth_blur",
+          "sha256": "9ceecb3906dcf46013343cd0e600901925b623c9e420171e117b3b9a8353cb0c",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": [
+            193,
+            64,
+            53,
+            35
+          ],
+          "authored_changes": [
+            2376,
+            2451,
+            2467,
+            2536,
+            2555,
+            2581,
+            2610,
+            2612,
+            2612,
+            2609
+          ],
+          "authored_frames": [
+            27,
+            37
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "aa6d4d4affc1b0bd7386cca8f47c825aa5f8081ad5a029aaa4a2e52dea4732c2",
+          "role": "off_mouth_hold",
+          "sha256": "fd9959a12264072f595b8ecb3966456adb5d94d213b73ff52721ccdeea3ed1ea",
+          "state": "no_match"
+        }
+      ],
+      "donor_group": 12,
+      "group": 11,
+      "mapped_pts_sha256": "bcc0276e34b3ce5a9b5d605ad1775e7b7a393c3d7b9f79a2040d3f8f507e76ca",
+      "source_sha256": "1d3b4d077e24ae4aa8593fee14b6222170cbaf624f7008f9820ddb1e534ab516"
+    },
+    {
+      "bank": "crema",
+      "cases": [
+        {
+          "anchors": [
+            {
+              "crop_sha256": "7c3a377cecabacae1c8e0ca17156b5b41d0c7ae1a824dda3752996cdd00f0c3f",
+              "frame_sha256": "ad82c63a5c8aa6e0aad9145060f6f491d50fb865601df0da9f55df2bfcf90bb7",
+              "index": 11,
+              "pts": 5632,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "4aa43866a3af73dcf645d00a334a3c28d59102a6a88abce4b7907126de3ed23f",
+              "frame_sha256": "716d1c63e7be67b9d80f8238237e1ba1e2fa92d94e2fabe8f779925e1a662756",
+              "index": 16,
+              "pts": 8192,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "f592b5b770c38fdb20f85dcc6c529ed0380e50e4e4cdd9c3ca5787b656353900",
+              "frame_sha256": "be284db4a5071aa843a73eff078db73ef0aaa795b6719fbd476bcd48127ae974",
+              "index": 20,
+              "pts": 10240,
+              "time_base": "1/12800"
+            }
+          ],
+          "authored_box": [
+            194,
+            202,
+            74,
+            49
+          ],
+          "authored_changes": [
+            4653,
+            4645,
+            4662,
+            4662,
+            4660,
+            4664,
+            4663,
+            4668
+          ],
+          "authored_frames": [
+            12,
+            20
+          ],
+          "choice": {
+            "anchors": [
+              11,
+              16,
+              20
+            ],
+            "box": [
+              192,
+              208,
+              40,
+              28
+            ],
+            "context_boxes": [
+              [
+                155,
+                204,
+                28,
+                28
+              ],
+              [
+                281,
+                204,
+                28,
+                28
+              ],
+              [
+                185,
+                163,
+                28,
+                28
+              ],
+              [
+                251,
+                163,
+                28,
+                28
+              ],
+              [
+                218,
+                274,
+                28,
+                28
+              ]
+            ],
+            "frames": [
+              12,
+              20
+            ],
+            "maximum_patch_mean_difference": 0.23482142857142857,
+            "minimum_flank_peak": 14.226785714285715,
+            "minimum_patch_near_equal_fraction": 0.9482142857142857,
+            "moving_context_edges": 7,
+            "total_edges": 7
+          },
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "b7c95fbd50fdcc3008b964757a77cb358a015d4b0ce3840ede70b02f567eff5b",
+          "role": "mouth_early",
+          "sha256": "8bd110371e59ba8f9fbbb7918949e93d2a5385ff4842fa15819dd9993e7590f6",
+          "state": "matched"
+        },
+        {
+          "anchors": [
+            {
+              "crop_sha256": "9bc351287403e56164281b401829ddcabd29c4ec492eda8e5656e3aaaceafdee",
+              "frame_sha256": "5e14a98fcbd98eca891a9c16306b5df358400a8c96862db35bec32eaa688f0c6",
+              "index": 24,
+              "pts": 12288,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "aeb3e50189832314efa15594dfae5f9f2b33078893b2038d51c8f538a7cc5ccc",
+              "frame_sha256": "0684d496b1c9a7d9a871a5f7253deb7c6c2fe1f472551d37d285ab755787c08c",
+              "index": 30,
+              "pts": 15360,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "2879416d50081725436b5886723dbca5faa37db70623581cc947bbfd4feb867e",
+              "frame_sha256": "9b0018e9e6792bce812cf73f93b40f84eacda6cb559b12606d617ede2deca3f5",
+              "index": 35,
+              "pts": 17920,
+              "time_base": "1/12800"
+            }
+          ],
+          "authored_box": [
+            191,
+            208,
+            75,
+            50
+          ],
+          "authored_changes": [
+            4754,
+            4799,
+            4800,
+            4795,
+            4807,
+            4807,
+            4811,
+            4811,
+            4809,
+            4809
+          ],
+          "authored_frames": [
+            25,
+            35
+          ],
+          "choice": {
+            "anchors": [
+              24,
+              30,
+              35
+            ],
+            "box": [
+              196,
+              227,
+              40,
+              28
+            ],
+            "context_boxes": [
+              [
+                156,
+                203,
+                28,
+                28
+              ],
+              [
+                281,
+                203,
+                28,
+                28
+              ],
+              [
+                186,
+                162,
+                28,
+                28
+              ],
+              [
+                251,
+                162,
+                28,
+                28
+              ],
+              [
+                218,
+                273,
+                28,
+                28
+              ]
+            ],
+            "frames": [
+              25,
+              35
+            ],
+            "maximum_patch_mean_difference": 0.30892857142857144,
+            "minimum_flank_peak": 22.59017857142857,
+            "minimum_patch_near_equal_fraction": 0.9410714285714286,
+            "moving_context_edges": 9,
+            "total_edges": 9
+          },
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "10cf36ce3da4fe4cc60976527c8860f8edaad4bcea10871929a8a4f1908eec09",
+          "role": "mouth_late",
+          "sha256": "6111a3c5a7d93f681ea5c7a7f21c05cad53663b214de4c365b9a6df9a4bcb2be",
+          "state": "matched"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": null,
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "a814b239398d9fc766b4362d145428f2fb8693097c0bba5021ff99291d04082e",
+          "role": "original",
+          "sha256": "c904ed2d04bf53ca36f26ddab7c281b18a782c5dac1e5be0cf73ae6f9d5873f8",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": null,
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "05d58b9ccceb3a927a61b49822d2cec4fb67d76f28e2dbce24fea31015897c2c",
+          "role": "tandem",
+          "sha256": "1bd66b0e150746fa7993fe4efe0b33db98356321482958d17609891a1c458c96",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": [
+            25,
+            35
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "b0ad7333e4791f5c1d22bd8f21f846558db3a8f3be64f993134a595aa1d9f4c0",
+          "role": "whole_hold",
+          "sha256": "8e167a91208d6da278d377f58ae6ade223c6fa545cf4c5b0c1fd93b8da7b7909",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": [
+            25,
+            35
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "149df7f4cc2cb2257df9e67b6055674a26179a724885bf03fe399cdf9bcefe04",
+          "role": "whole_cut",
+          "sha256": "4910eed4424cbe500b63e42dd322cb52348bf3c65861f178e14b3233be688f5d",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": [
+            191,
+            208,
+            75,
+            50
+          ],
+          "authored_changes": [
+            4722,
+            4717,
+            4720,
+            4698,
+            4669,
+            4679,
+            4679,
+            4672,
+            4661,
+            4665
+          ],
+          "authored_frames": [
+            25,
+            35
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "3b474f23ac290cc5e444f0e5b999b618dc5ae9ff468b9d6329e9d5d42b4acb42",
+          "role": "mouth_blur",
+          "sha256": "c2cc34fdb4a778f9d3ddf7af0641e37654a0083f68a52a1462789d62c279470f",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": [
+            191,
+            136,
+            75,
+            50
+          ],
+          "authored_changes": [
+            4713,
+            4764,
+            4795,
+            4798,
+            4802,
+            4808,
+            4813,
+            4809,
+            4799,
+            4803
+          ],
+          "authored_frames": [
+            25,
+            35
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "cfa45d2d94b6710ebf6f12322c43a8aaad76366d6c3211167963d985e7e3231c",
+          "role": "off_mouth_hold",
+          "sha256": "ca3469d4e45e3ff355a9e612f679aa1a7a4f58600f770280e2e5a44d821c282b",
+          "state": "no_match"
+        }
+      ],
+      "donor_group": 14,
+      "group": 12,
+      "mapped_pts_sha256": "bcc0276e34b3ce5a9b5d605ad1775e7b7a393c3d7b9f79a2040d3f8f507e76ca",
+      "source_sha256": "f05439b0c50e1388ef3fdfcd738ff3c48f6742b00a8915cfa923d6234f3b93fc"
+    },
+    {
+      "bank": "crema",
+      "cases": [
+        {
+          "anchors": [
+            {
+              "crop_sha256": "9dd568053be23edda8923ea77761c60f70cd4d1d0ad0f84cc216b98bff3b77fa",
+              "frame_sha256": "aaf35de3384067cd11140d588a2bb632af45c2ed049a39b514bbe4a66744e40f",
+              "index": 13,
+              "pts": 6656,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "3b4304695ac8e0ee0f351f168f1b30a51ed7810cdd78b93725c43e72d4c2b400",
+              "frame_sha256": "7619d24f6654dc3b88633204a765101f3506d5cec6cb0b2aa7117930ae36fb0d",
+              "index": 18,
+              "pts": 9216,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "a9a9a8057c12bbbed184e4c93341d657fe3201ebc69dee69c3bef87cb71bf17a",
+              "frame_sha256": "06140db850c1761e05b2354709cee1272061dd016559daa9075ba6fe77633ff5",
+              "index": 22,
+              "pts": 11264,
+              "time_base": "1/12800"
+            }
+          ],
+          "authored_box": [
+            200,
+            193,
+            74,
+            50
+          ],
+          "authored_changes": [
+            4688,
+            4694,
+            4696,
+            4703,
+            4717,
+            4725,
+            4720,
+            4717
+          ],
+          "authored_frames": [
+            14,
+            22
+          ],
+          "choice": {
+            "anchors": [
+              13,
+              18,
+              22
+            ],
+            "box": [
+              197,
+              206,
+              40,
+              28
+            ],
+            "context_boxes": [
+              [
+                162,
+                181,
+                28,
+                28
+              ],
+              [
+                285,
+                181,
+                28,
+                28
+              ],
+              [
+                191,
+                141,
+                28,
+                28
+              ],
+              [
+                256,
+                141,
+                28,
+                28
+              ],
+              [
+                223,
+                251,
+                28,
+                28
+              ]
+            ],
+            "frames": [
+              14,
+              22
+            ],
+            "maximum_patch_mean_difference": 0.24017857142857144,
+            "minimum_flank_peak": 16.394642857142856,
+            "minimum_patch_near_equal_fraction": 0.9419642857142857,
+            "moving_context_edges": 7,
+            "total_edges": 7
+          },
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "46bc1f3fed9eb416b803c57f030a7c2cd156a5254278167a19ecab00e94beea0",
+          "role": "mouth_early",
+          "sha256": "dd662e49bd319a0901c96d3ad8887d5ca8aa2bafd32658958ccc77dac40cf35c",
+          "state": "matched"
+        },
+        {
+          "anchors": [
+            {
+              "crop_sha256": "8d6bdd29603ce605d4946903c5d2ab709d7894fa6e3131fa0f9e07de9a5b774a",
+              "frame_sha256": "5cb4e68b790a44df1b0074be4d010933576643704063250d56218e98118308c5",
+              "index": 24,
+              "pts": 12288,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "17e4b3a582515d345ee8748bf5c8044223da6e311c741b7cdb792328349390b0",
+              "frame_sha256": "51f03b5f81165d6582cad6253745769ed05c0ca089cafc03682a4a12fa51e353",
+              "index": 30,
+              "pts": 15360,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "6fb4f61fdcf6b4f25c626c88a60a6b14a3611a29601d8faf441604f798de5e52",
+              "frame_sha256": "234284e2d6942f939e8b980080170d12a4c8cbc404fb5203f16b974525a8404c",
+              "index": 36,
+              "pts": 18432,
+              "time_base": "1/12800"
+            }
+          ],
+          "authored_box": [
+            199,
+            191,
+            75,
+            50
+          ],
+          "authored_changes": [
+            4316,
+            4580,
+            4625,
+            4750,
+            4779,
+            4778,
+            4773,
+            4790,
+            4780,
+            4775
+          ],
+          "authored_frames": [
+            27,
+            37
+          ],
+          "choice": {
+            "anchors": [
+              24,
+              30,
+              36
+            ],
+            "box": [
+              239,
+              192,
+              38,
+              26
+            ],
+            "context_boxes": [
+              [
+                165,
+                183,
+                26,
+                28
+              ],
+              [
+                285,
+                183,
+                26,
+                28
+              ],
+              [
+                193,
+                144,
+                26,
+                28
+              ],
+              [
+                256,
+                144,
+                26,
+                28
+              ],
+              [
+                225,
+                251,
+                26,
+                28
+              ]
+            ],
+            "frames": [
+              25,
+              36
+            ],
+            "maximum_patch_mean_difference": 0.2894736842105263,
+            "minimum_flank_peak": 3.529352226720648,
+            "minimum_patch_near_equal_fraction": 0.9423076923076923,
+            "moving_context_edges": 10,
+            "total_edges": 10
+          },
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "40044c8185efa9fe23dd747b0bec37bba69d3b572ad052f4062111ade313646c",
+          "role": "mouth_late",
+          "sha256": "2c62092d050b91f96080e41f84e320689a88c92a7e1685e1b109129b15c58c38",
+          "state": "matched"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": null,
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "5d8e183fd11312220319a342746be15a9ec5f1617872794b642a578fef72dc22",
+          "role": "original",
+          "sha256": "0040b848e7edb651820267be6706872832971ff3efd38767cbae3c07672403ce",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": null,
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "d1d46f18e298c0a9592c01e2fef162889244f314884117c44c7677cb44ca0659",
+          "role": "tandem",
+          "sha256": "1feaa0d158b4ecf14ade1cd7cd2767ad421bff51ee18213fd0f0dd66d6e53e31",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": [
+            27,
+            37
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "7f88bbf16596e5399af062b803bc41cba62d4a897d4eb659f952a60e85db6816",
+          "role": "whole_hold",
+          "sha256": "62ea237d99c9950ccff810fd6c50978fdfd49dec245a14072aabc10519bea7fb",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": [
+            27,
+            37
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "e798d6efe43b05cc44e72cd00a98307d5e3fda372cdb2b4e00273820a5cdbc4f",
+          "role": "whole_cut",
+          "sha256": "55f6a6b0e4725e555bb7232970637480b15a5b9978a1f7fa6b8bb0bb119d836b",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": [
+            199,
+            191,
+            75,
+            50
+          ],
+          "authored_changes": [
+            4707,
+            4699,
+            4699,
+            4726,
+            4723,
+            4727,
+            4720,
+            4738,
+            4719,
+            4737
+          ],
+          "authored_frames": [
+            27,
+            37
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "3028492ab6649c16ca3096d4b035027dcf4789a524929212b3e6ae385583688a",
+          "role": "mouth_blur",
+          "sha256": "9b079f64684383f7b97e3f35c5e4949ec71c463a2c6c779fdeccbbf7a78c5819",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": [
+            199,
+            119,
+            75,
+            50
+          ],
+          "authored_changes": [
+            4175,
+            4485,
+            4610,
+            4581,
+            4614,
+            4591,
+            4656,
+            4646,
+            4640,
+            4636
+          ],
+          "authored_frames": [
+            27,
+            37
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "7f8f78be4b51287fac40516664d6651e856ea5944e4d983f8240badb128058d7",
+          "role": "off_mouth_hold",
+          "sha256": "bc6859adebda9b89e38c35dbdd5f994b20949ebcbf2d856a8021fb6e3e6207b2",
+          "state": "no_match"
+        }
+      ],
+      "donor_group": 15,
+      "group": 14,
+      "mapped_pts_sha256": "bcc0276e34b3ce5a9b5d605ad1775e7b7a393c3d7b9f79a2040d3f8f507e76ca",
+      "source_sha256": "8e5df28eae31b9eaccfb621cc1e39221cfa5a8292a79db9534a403b84e1864e3"
+    },
+    {
+      "bank": "crema",
+      "cases": [
+        {
+          "anchors": [
+            {
+              "crop_sha256": "fa00d1fd34ebfb8ae952d8d3cb176bd9e14ed613759e40802e0709ad140b11c8",
+              "frame_sha256": "e776e271e86dc78e164a45ccadb2f49a96fb06f6c03d38a38b073928eb582f8e",
+              "index": 11,
+              "pts": 5632,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "a26089ec00171a92698604c91114ef9937fc1264ad2c0f9b533733eda792110f",
+              "frame_sha256": "dc5d07def0c277c691b3f490106631f09e1778152347142c4e2a49d3e3f7c45e",
+              "index": 16,
+              "pts": 8192,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "7304ad1b849ef75b4d521edbdfc5bf12e63b5e28161613f032c0d6161e62e334",
+              "frame_sha256": "480be7acb679ac7be89d266ac9f2f9f73b0521201fc8cb89141f505bd1ce9ba5",
+              "index": 20,
+              "pts": 10240,
+              "time_base": "1/12800"
+            }
+          ],
+          "authored_box": [
+            191,
+            180,
+            71,
+            47
+          ],
+          "authored_changes": [
+            4265,
+            4299,
+            4282,
+            4281,
+            4275,
+            4295,
+            4323,
+            4327
+          ],
+          "authored_frames": [
+            12,
+            20
+          ],
+          "choice": {
+            "anchors": [
+              11,
+              16,
+              20
+            ],
+            "box": [
+              189,
+              186,
+              38,
+              26
+            ],
+            "context_boxes": [
+              [
+                153,
+                166,
+                26,
+                26
+              ],
+              [
+                269,
+                166,
+                26,
+                26
+              ],
+              [
+                181,
+                129,
+                26,
+                26
+              ],
+              [
+                242,
+                129,
+                26,
+                26
+              ],
+              [
+                211,
+                232,
+                26,
+                26
+              ]
+            ],
+            "frames": [
+              12,
+              20
+            ],
+            "maximum_patch_mean_difference": 0.17611336032388664,
+            "minimum_flank_peak": 23.437246963562753,
+            "minimum_patch_near_equal_fraction": 0.9655870445344129,
+            "moving_context_edges": 7,
+            "total_edges": 7
+          },
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "bc871e4a2bca438f4e9d397739e354802b0867464204d113d182dd0027e9f60a",
+          "role": "mouth_early",
+          "sha256": "14aef56b86b1e64da5d0e9b6212ba16680a7d9b2f81ec8217ff2ba591b924a7c",
+          "state": "matched"
+        },
+        {
+          "anchors": [
+            {
+              "crop_sha256": "96c2ca2aaf27d05dcc020284266184457a196458678967ed63b3a4ca4fe0c696",
+              "frame_sha256": "f8a90a29135c729b3d8e5418dc5a79c8115d79f8f75234f7f5f898d4da0c3819",
+              "index": 24,
+              "pts": 12288,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "18000c8bd8d62976159b3d70e41e455ee68701b1925f349063df6006b66eaddc",
+              "frame_sha256": "41038a5596ec0241e81fb7f62e44ba552bd8661ab8d888af2037f3be3ec25d07",
+              "index": 30,
+              "pts": 15360,
+              "time_base": "1/12800"
+            },
+            {
+              "crop_sha256": "c70f8933bf9cab7485e8e4d75d52f3e610c3f10eaf49d589f8c82eaba27cddef",
+              "frame_sha256": "496447df6b092164a12a7446b69544db157d6141040eb5426f5e70e0d099bc42",
+              "index": 35,
+              "pts": 17920,
+              "time_base": "1/12800"
+            }
+          ],
+          "authored_box": [
+            189,
+            175,
+            69,
+            46
+          ],
+          "authored_changes": [
+            3845,
+            3850,
+            3872,
+            3957,
+            4046,
+            4035,
+            4063,
+            4081,
+            4107,
+            4097
+          ],
+          "authored_frames": [
+            25,
+            35
+          ],
+          "choice": {
+            "anchors": [
+              24,
+              30,
+              35
+            ],
+            "box": [
+              189,
+              178,
+              38,
+              26
+            ],
+            "context_boxes": [
+              [
+                152,
+                166,
+                26,
+                26
+              ],
+              [
+                269,
+                166,
+                26,
+                26
+              ],
+              [
+                180,
+                128,
+                26,
+                26
+              ],
+              [
+                241,
+                128,
+                26,
+                26
+              ],
+              [
+                211,
+                233,
+                26,
+                26
+              ]
+            ],
+            "frames": [
+              25,
+              35
+            ],
+            "maximum_patch_mean_difference": 0.23684210526315788,
+            "minimum_flank_peak": 3.763157894736842,
+            "minimum_patch_near_equal_fraction": 0.9595141700404858,
+            "moving_context_edges": 9,
+            "total_edges": 9
+          },
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "9504f2a787728a6a69731b40bc39e210cca31120588c626d70cdda96898db633",
+          "role": "mouth_late",
+          "sha256": "3188accf9465b90a9ed8f6a62297e52edcd3ebfd5a50e760f4f962db7b031da8",
+          "state": "matched"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": null,
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "fb4cabcab6b9f1b8b06d1b2aa8aef30acf410edd31784f424640ca1bead9c7d4",
+          "role": "original",
+          "sha256": "618d8a983cfc40e709a160141261e925abff0225e7fa7596caf58ea9f2bf4269",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": null,
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "9530a132ed29dd402d831c64349d28a0837c9913eca7e34ad74b42f9e0fdceef",
+          "role": "tandem",
+          "sha256": "1d6b81aaeefa7e27f03c82369ebcfb3ab26ab0eb3bf43fdcc0d32d9f48cff35c",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": [
+            25,
+            35
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "4037bd241e6945c3ee4b3fb3efa9030379779d18730e46354feb21399955bbdf",
+          "role": "whole_hold",
+          "sha256": "fa6dfefd36687edd33201d43293bd86c2f929d2754e5f60369ddb86ddf8ccc3f",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": null,
+          "authored_changes": null,
+          "authored_frames": [
+            25,
+            35
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "5a47ffb73f84ea6477065818d1c47b1733e17f885becc48cf7292f1fb7aafa95",
+          "role": "whole_cut",
+          "sha256": "2e50de472e9558294e4589de7ccc92d9c9af62521d32514b1dfdb296c187f945",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": [
+            189,
+            175,
+            69,
+            46
+          ],
+          "authored_changes": [
+            4055,
+            4058,
+            4066,
+            4059,
+            4051,
+            4034,
+            4046,
+            4045,
+            4058,
+            4045
+          ],
+          "authored_frames": [
+            25,
+            35
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "6cac59f904e2507e06111f259e6e98cb5d17925eb37f5f1b141cb8e9ede891f5",
+          "role": "mouth_blur",
+          "sha256": "2eab4ff63c20a2a823454a37902189e5d83e2b013a9b0f2109ed875bdc7a0675",
+          "state": "no_match"
+        },
+        {
+          "anchors": [],
+          "authored_box": [
+            189,
+            108,
+            69,
+            46
+          ],
+          "authored_changes": [
+            3280,
+            3595,
+            3627,
+            3740,
+            3748,
+            3753,
+            3788,
+            3767,
+            3935,
+            3958
+          ],
+          "authored_frames": [
+            25,
+            35
+          ],
+          "choice": null,
+          "native_picture_pts_sha256": "c85e677142d52ab56b54d0bbf8d47e63c23f9a33d830fe7eecf51f91fceaa2f9",
+          "native_rgb_sha256": "78cc2bcc8b7bf75937790c503cf88063faac1424075786a0ad90869a261c2879",
+          "role": "off_mouth_hold",
+          "sha256": "a97c23a71d7882965d67402196630875803b6bf1e0119b2ca6bcfad8b7d11b46",
+          "state": "no_match"
+        }
+      ],
+      "donor_group": 5,
+      "group": 15,
+      "mapped_pts_sha256": "bcc0276e34b3ce5a9b5d605ad1775e7b7a393c3d7b9f79a2040d3f8f507e76ca",
+      "source_sha256": "56967cf69c14e18a8e31077b8a05da289764e5a62febf461114b96b7c437dcdb"
+    }
+  ],
+  "schema": "chipmunk.video-mouth-local-hold-panel/1"
+}

@@ -21,7 +21,7 @@ from app.detectors.video import face_return, face_return_fine_scene, picture_mot
 from app.detectors.video.decode import DecodedFrame, FrameTable, decode_frames, probe_frames
 from app.detectors.video.frames import probe as probe_container
 from app.detectors.video.lipsync import source_mouth_patch
-from app.evidence import picture_hold_binding, picture_sequence
+from app.evidence import mouth_local_hold_binding, picture_hold_binding, picture_sequence
 from app.evidence.face_boundary_binding import validate_packet as validate_face_boundary
 from app.evidence.face_return_binding import DENSE_ENCODING, FINE_SCENE_METHOD, GUARDED_METHODS
 from app.evidence.face_return_binding import validate_packet as validate_face_return
@@ -203,6 +203,11 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     hold = evidence.get("picture_hold") or {}
     sequence = hold.get("sequence_review")
     motion = hold.get("motion_sequence_review")
+    local_mouth = hold.get("mouth_local_hold")
+    if local_mouth is not None:
+        delivery = delivery if delivery is not None else probe_container(original)
+        if not mouth_local_hold_binding.eligible(table, (delivery.get("codec"), delivery.get("pix_fmt"))):
+            raise ValueError("The original video differs from the mouth-region review profile")
     motion_encoding = None
     motion_profile = None
     motion_limit = 0
@@ -215,7 +220,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         motion_limit = motion_profile[1]
     extended = "continuity_breaks" in hold
     hold_frames = 0
-    if extended or sequence is not None:
+    if extended or sequence is not None or local_mouth is not None:
         picture_hold_binding.validate_source_clock(evidence, table.pts, table.interpolated)
         hold_frames = hold["frames_scanned"]
     pictures, mouths, faces, scenes = defaultdict(list), defaultdict(list), defaultdict(list), defaultdict(list)
@@ -254,6 +259,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     indices = set(pictures) | set(mouths) | set(faces) | set(scenes) | set(range(hold_frames))
     hold_observations = []
     motion_descriptors = []
+    mouth_pictures = []
     found = set()
     images = patches = alignments = 0
     with closing(decode_frames(original, table, sorted(indices))) as stream:
@@ -265,6 +271,9 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                 hold_observations.append((frame.pts if frame.pts_verified else None, rgb_sha))
             if index < motion_limit:
                 motion_descriptors.append(picture_motion.descriptor(frame.rgb))
+            if local_mouth is not None:
+                _frame_anchor(frame, local_mouth["pts"][index], local_mouth["frame_hashes"][index], "Mouth-region input", rgb_sha)
+                mouth_pictures.append(frame.rgb)
             if index in pictures:
                 with Image.fromarray(frame.rgb) as image:
                     for packet, item in pictures[index]:
@@ -305,6 +314,12 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                                          sequence["pair"], source_profile=motion_profile, schema=motion["schema"])
         if canonical_hash(reproduced) != canonical_hash(motion):
             raise ValueError("The original video does not reproduce its similar moving-picture sequences")
+    if local_mouth is not None:
+        from app.detectors.video.mouth_local_hold import verify_measurements
+
+        if len(mouth_pictures) != mouth_local_hold_binding.FRAME_COUNT:
+            raise ValueError("The source is missing a verified mouth-region input")
+        verify_measurements(mouth_pictures, local_mouth["match"])
     fine_edges = sum(_verify_scene_support(record, background_frames) for record in fine_records)
     for record in guarded_records:
         _verify_guarded_scene(record, background_frames)
@@ -313,5 +328,6 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             + (f" Recomputed fine background boundaries ({fine_edges})." if fine_edges else "")
             + (" Recomputed both guarded background boundaries and verified the source carrier." if guarded_codec else "")
             + (f" Replayed every frame in the repeated-picture inspection ({hold_frames})." if hold_frames else "")
+            + (" Recomputed the held mouth-region pixel measurements." if local_mouth and local_mouth["match"] else "")
             + (" Recomputed the exact moving-sequence comparison." if sequence is not None else "")
             + (" Replayed the motion-aware moving-sequence check." if motion is not None else ""))

@@ -1,10 +1,12 @@
-"""Recompute selected PNG seam responses or video refinement schedules from an original."""
+"""Recompute selected image and video evidence measurements from the original files."""
 from __future__ import annotations
 
 import argparse
 import hashlib
+import io
 import json
 import math
+import re
 import stat
 import subprocess
 from fractions import Fraction
@@ -106,6 +108,64 @@ def review_image(path: Path, document: dict) -> list[dict]:
                 output.append({"packet": packet["id"], "relative_responses_reproduced": len(measured),
                                "maximum_absolute_difference": largest_error})
     return output
+
+
+def review_image_views(path: Path, document: dict, asset_dir: Path, digest: str) -> tuple[str, list[dict]]:
+    """Replay the actual classifier input pixels without importing a detector."""
+    from PIL import Image
+
+    if document.get("kind") != "image" or document.get("sha256") != digest:
+        raise ValueError("The JSON export does not match the supplied image digest")
+    record = document.get("whole_image_review")
+    if record is None:
+        return "no_measurement_recorded", []
+    status = record["status"]
+    crops = record["crops"]
+    if (record["source_sha256"] != digest or type(record["authorship_confidence_contribution"]) is not int
+            or record["authorship_confidence_contribution"] != 0 or not isinstance(crops, list)
+            or status not in {"flagged", "no_flag", "skipped"} or len(crops) != (3 if status == "flagged" else 0)):
+        raise ValueError("The whole-image review has inconsistent coverage or source binding")
+    if not crops:
+        return status, []
+
+    with Image.open(path, formats=["JPEG"]) as original:
+        width, height = original.size
+        if (original.mode != "RGB" or original.getexif().get(274, 1) != 1
+                or min(width, height) < 1024 or max(width, height) > 4920):
+            raise ValueError("Inspected views require the supported upright RGB JPEG")
+        scale = 576 / min(width, height)
+        resized_width, resized_height = round(width * scale), round(height * scale)
+        dx, dy = resized_width - 528, resized_height - 528
+        positions = (((0, dy // 2), (dx // 2, dy // 2), (dx, dy // 2)) if resized_width >= resized_height
+                     else ((dx // 2, 0), (dx // 2, dy // 2), (dx // 2, dy)))
+        matches = []
+        with original.resize((resized_width, resized_height), Image.Resampling.LANCZOS) as resized:
+            for number, (crop, (left, top)) in enumerate(zip(crops, positions, strict=True), 1):
+                right, bottom = left + 528, top + 528
+                x = math.floor(Fraction(left * width, resized_width))
+                y = math.floor(Fraction(top * height, resized_height))
+                bounds = {"x": x, "y": y,
+                          "w": math.ceil(Fraction(right * width, resized_width)) - x,
+                          "h": math.ceil(Fraction(bottom * height, resized_height)) - y}
+                recorded = crop["bounds"]
+                if (type(crop["region"]) is not int or crop["region"] != number or recorded != bounds
+                        or any(type(value) is not int for value in recorded.values())):
+                    raise ValueError(f"Inspected view {number} has different source coordinates")
+                sha = crop["sha256"]
+                if not isinstance(sha, str) or re.fullmatch(r"[0-9a-f]{64}", sha) is None:
+                    raise ValueError(f"Inspected view {number} lacks a valid SHA-256")
+                asset = asset_dir / f"{sha}.png"
+                _regular(asset, 900_000)
+                body = asset.read_bytes()
+                if hashlib.sha256(body).hexdigest() != sha:
+                    raise ValueError(f"Inspected view {number} differs from its exported SHA-256")
+                with Image.open(io.BytesIO(body), formats=["PNG"]) as plate:
+                    with resized.crop((left, top, right, bottom)) as expected:
+                        if plate.mode != "RGB" or plate.size != expected.size or plate.tobytes() != expected.tobytes():
+                            raise ValueError(f"Inspected view {number} differs from the regenerated source pixels")
+                matches.append({"region": number, "bounds": bounds, "asset_sha256": sha,
+                                "rgb_pixels_reproduced": 528 * 528})
+    return "matched", matches
 
 
 def _native_clock(path: Path) -> tuple[Fraction, list[int]]:
@@ -229,31 +289,40 @@ def review_video(path: Path, document: dict) -> list[dict]:
     return [_video_packet(packet, pts, base) for packet in packets]
 
 
-def review(kind: str, source: Path, evidence: Path) -> dict:
+def review(kind: str, source: Path, evidence: Path, *, asset_dir: Path | None = None) -> dict:
     _regular(source, MAX_SOURCE_BYTES)
     _regular(evidence, MAX_EVIDENCE_BYTES)
     data = evidence.read_bytes()
     document = json.loads(data)
+    if not isinstance(document, dict):
+        raise ValueError("Expected a JSON evidence object")
     digest = _sha256(source)
-    if (document["schema"] != f"chipmunk.{kind}-evidence/1" or document["status"] != "ready"
-            or document["source"]["sha256"] != digest):
-        raise ValueError("The evidence schema or its original source digest does not match")
-    matches = (review_image if kind == "image" else review_video)(source, document)
+    if kind == "image-views":
+        if asset_dir is None:
+            raise ValueError("Image view replay requires a directory of downloaded crop PNGs")
+        status, matches = review_image_views(source, document, asset_dir, digest)
+        detail = {"modality": "image", "status": status, "inspected_views": matches}
+    else:
+        if (document["schema"] != f"chipmunk.{kind}-evidence/1" or document["status"] != "ready"
+                or document["source"]["sha256"] != digest):
+            raise ValueError("The evidence schema or its original source digest does not match")
+        matches = (review_image if kind == "image" else review_video)(source, document)
+        detail = {"modality": kind, "status": "matched" if matches else "no_measurement_recorded", "packets": matches}
     if _sha256(source) != digest:
         raise ValueError("The original source changed during the replay")
-    return {"schema": "chipmunk.evidence-measurement-review/1", "modality": kind,
-            "source_sha256": digest, "evidence_sha256": hashlib.sha256(data).hexdigest(),
-            "status": "matched" if matches else "no_measurement_recorded", "packets": matches}
+    return {"schema": "chipmunk.evidence-measurement-review/1", "source_sha256": digest,
+            "evidence_sha256": hashlib.sha256(data).hexdigest(), **detail}
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("kind", choices=("image", "video"))
+    parser.add_argument("kind", choices=("image", "video", "image-views"))
     parser.add_argument("source", type=Path)
-    parser.add_argument("evidence", type=Path, help="evidence.json extracted from an independently verified ZIP")
+    parser.add_argument("evidence", type=Path, help="evidence.json from a verified ZIP, or the analysis JSON for image-views")
+    parser.add_argument("--assets", type=Path, help="Directory containing the exported image views named by SHA-256")
     args = parser.parse_args()
     try:
-        result = review(args.kind, args.source, args.evidence)
+        result = review(args.kind, args.source, args.evidence, asset_dir=args.assets)
     except (ImportError, OSError, KeyError, IndexError, TypeError, ValueError, ZeroDivisionError) as error:
         parser.exit(1, f"Evidence replay failed: {error}\n")
     print(json.dumps(result, sort_keys=True, indent=2, allow_nan=False))

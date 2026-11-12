@@ -73,6 +73,47 @@ def test_no_recorded_measurement_is_explicit_and_wrong_original_is_refused(tmp_p
         review("image", src, evidence)
 
 
+def test_exported_image_views_reproduce_resized_pixels_and_reject_tampering(tmp_path):
+    source = tmp_path / "source.jpg"
+    with Image.new("RGB", (1024, 1536), (44, 65, 139)) as image:
+        draw = ImageDraw.Draw(image)
+        draw.rectangle((13, 32, 670, 799), fill=(129, 95, 188))
+        draw.rectangle((643, 1043, 950, 1480), fill=(47, 11, 64))
+        image.save(source, quality=92)
+    crops = []
+    with Image.open(source) as original, original.resize((576, 864), Image.Resampling.LANCZOS) as resized:
+        for number, (row, y, height) in enumerate(((0, 0, 939), (168, 298, 940), (336, 597, 939)), 1):
+            plate = tmp_path / f"crop-{number}.png"
+            with resized.crop((24, row, 552, row + 528)) as view:
+                view.save(plate)
+            digest = hashlib.sha256(plate.read_bytes()).hexdigest()
+            plate.rename(tmp_path / f"{digest}.png")
+            crops.append({"region": number, "bounds": {"x": 42, "y": y, "w": 940, "h": height}, "sha256": digest})
+    digest = hashlib.sha256(source.read_bytes()).hexdigest()
+    record = {"source_sha256": digest, "status": "flagged", "crops": crops, "authorship_confidence_contribution": 0}
+    document = {"kind": "image", "sha256": digest, "whole_image_review": record}
+    evidence = _write(tmp_path, document)
+    completed = subprocess.run([sys.executable, "-I", str(CLI), "image-views", str(source), str(evidence),
+                                "--assets", str(tmp_path)], capture_output=True, text=True, timeout=20)
+    assert completed.returncode == 0, completed.stderr
+    result = json.loads(completed.stdout)
+    assert result["status"] == "matched"
+    assert [view["rgb_pixels_reproduced"] for view in result["inspected_views"]] == [278784] * 3
+    crops[0]["bounds"]["x"] += 1
+    with pytest.raises(ValueError, match="different source coordinates"):
+        review("image-views", source, _write(tmp_path, document), asset_dir=tmp_path)
+    crops[0]["bounds"]["x"] -= 1
+    crops[0]["sha256"] = crops[1]["sha256"]  # A valid, correctly named plate from the wrong source position.
+    with pytest.raises(ValueError, match="regenerated source pixels"):
+        review("image-views", source, _write(tmp_path, document), asset_dir=tmp_path)
+    record.update(status="skipped", crops=[])
+    result = review("image-views", source, _write(tmp_path, document), asset_dir=tmp_path)
+    assert result["status"] == "skipped" and result["inspected_views"] == []
+    source.write_bytes(b"different source")
+    with pytest.raises(ValueError, match="supplied image digest"):
+        review("image-views", source, evidence, asset_dir=tmp_path)
+
+
 def test_schedule_resolves_nearest_ties_and_duplicate_pts_in_source_order():
     pts = [-5, -4, -2, -2, -1, 0, 1, 4, 5, 8, 11, 15, 18]
     base = Fraction(1, 24)

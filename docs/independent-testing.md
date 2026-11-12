@@ -199,6 +199,8 @@ The [separate whole-image panel](image-whole-fresh-holdout-2026-11-12.md)
 compares the current Full result and a positive supplementary cue on 34
 generated and ordinary source groups in two delivery formats. Its reviewer
 replays the outcome counts and records unavailable Full results separately.
+The [whole-image view replay](#verify-the-inspected-views-from-a-jpeg)
+checks the actual exported crop pixels and their bounds against the submitted JPEG.
 The [Ultra HDR gain-map pilot](image-gainmap-localization-2026-11-12.md)
 tests two ways to locate local changes in JPEGs that retain a gain map but
 have no embedded thumbnail. Its source replay records a camera-original false
@@ -881,6 +883,35 @@ source ticks, and displayed frame references.
 ```sh
 python -m pytest tests/test_evidence_measurement_review.py
 ```
+
+### Verify the inspected views from a JPEG
+
+Download the analysis JSON and keep the exact original JPEG. Under
+`whole_image_review.crops`, download each PNG from its `url` using the same
+authorized browser session. Save each PNG in a local directory as its
+`sha256` value followed by `.png`. Run this from `backend` with Python 3.11 or
+later and Pillow. The app and detector weights are unnecessary.
+
+```sh
+python -I scripts/review_evidence_measurements.py image-views original.jpg \
+  analysis.json --assets downloaded-crops
+```
+
+The reviewer checks the original file digest, recomputes the three 528 × 528
+views, and compares their RGB pixels and source bounds against the export.
+It reports the crop digests and measured pixel counts. An ordinary result
+with no elevated response reports `no_flag`, while unavailable coverage
+reports `skipped`. Both have zero published views to compare.
+
+This uses the customer JSON and crop bytes as supplied. Verification covers
+the input pixels and coordinates. Rechecking the detector response requires
+the separate inference runner, and authenticating the JSON itself requires
+an independently trusted copy of the export.
+
+The standalone command reproduced all three crops from an actual Full
+analysis and returned `no_flag` for its matched-scope ordinary control.
+The regression test also rejects a shifted rectangle and a valid PNG from the
+wrong position.
 
 ### Verify an earlier-copy image comparison
 

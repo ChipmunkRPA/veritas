@@ -16,7 +16,10 @@ from app.evidence.document_scope import (
     PASSAGE_COVERAGE_STATES as STATES,
 )
 from app.evidence.document_scope import (
+    PDF_PAGE_COVERAGE_KEY,
+    PDF_PAGE_COVERAGE_SCHEMA,
     check_range,
+    page_gaps,
 )
 from app.evidence.document_scope import (
     validate_passage_coverage as validate,
@@ -27,6 +30,8 @@ LABELS = {
     "context_only": "Read as context only",
     "response_range": "Local response recorded",
 }
+PDF_EXTRACTION_LABELS = {"text_layer": "Selectable text", "ocr": "Recognized text",
+                         "mixed": "Selectable and recognized text"}
 
 
 def _location(block: dict, number: int) -> dict:
@@ -95,19 +100,38 @@ def _marks(result: dict, text: str) -> tuple[bytearray, bytearray]:
     return context, response
 
 
-def build(result: dict, text: str, mapping: list[dict]) -> dict:
+def _page_sources(meta: dict, mapping: list[dict]) -> dict[int, str]:
+    total = meta["pages"]
+    if meta["method"] != "pymupdf" or type(total) is not int or total < 1:
+        raise ValueError("Page evidence requires a counted PDF extraction")
+    modes: dict[int, set[str]] = {}
+    for block in mapping:
+        page, extraction = block.get("page"), block.get("extraction", "text_layer")
+        if (block.get("kind") != "pdf" or type(page) is not int or not 1 <= page <= total
+                or extraction not in {"text_layer", "ocr"}):
+            raise ValueError("Text block does not map to a known PDF page")
+        modes.setdefault(page, set()).add(extraction)
+    return {page: "mixed" if len(found) > 1 else next(iter(found)) for page, found in sorted(modes.items())}
+
+
+def build(result: dict, text: str, mapping: list[dict], *, pdf_meta: dict | None = None) -> dict:
     context, response = _marks(result, text)
     ranges: list[dict] = []
     counts = dict.fromkeys(STATES, 0)
+    sources = _page_sources(pdf_meta, mapping) if pdf_meta is not None else {}
+    page_counts = {page: dict.fromkeys(STATES, 0) for page in sources}
     total = 0
     for number, block in enumerate(mapping, 1):
         start, end = check_range(block, len(text))
+        counts_on_page = page_counts.get(block.get("page"))
         current = None
         for index in range(start, end):
             if text[index].isspace():
                 continue
             state = STATES[2 if response[index] else context[index]]
             counts[state] += 1
+            if counts_on_page is not None:
+                counts_on_page[state] += 1
             if current is not None and current["state"] == state:
                 current["end"] = index + 1
                 current["characters"] += 1
@@ -117,17 +141,28 @@ def build(result: dict, text: str, mapping: list[dict]) -> dict:
             total += 1
             if len(ranges) < MAX_RANGES:
                 ranges.append(current)
-    return {"schema": SCHEMA, "count_unit": "non_whitespace_unicode_codepoint",
-            "mapped_characters": sum(counts.values()), "counts": counts, "ranges": ranges,
-            "omitted_ranges": total - len(ranges)}
+    record = {"schema": SCHEMA, "count_unit": "non_whitespace_unicode_codepoint",
+              "mapped_characters": sum(counts.values()), "counts": counts, "ranges": ranges,
+              "omitted_ranges": total - len(ranges)}
+    if pdf_meta is not None:
+        partial = {page["page"] for page in pdf_meta.get("partially_checked_pages", [])}
+        record[PDF_PAGE_COVERAGE_KEY] = {"schema": PDF_PAGE_COVERAGE_SCHEMA, "page_count": pdf_meta["pages"],
+            "mapped_pages": [{"page": page, "extraction": mode, "unchecked_image_areas": page in partial, "counts": page_counts[page]}
+                             for page, mode in sources.items()],
+            "unmapped_page_ranges": page_gaps(pdf_meta["pages"], list(sources))}
+    return record
 
 
-def verify_source(document: dict, text: str, mapping: list[dict], *, result: dict | None = None) -> None:
+def verify_source(document: dict, text: str, mapping: list[dict], *, result: dict | None = None,
+                  meta: dict | None = None) -> None:
     record = (document.get("coverage") or {}).get(KEY)
     if record is None:
         return
     validate(document)
-    if result is not None and record != build(result, text, mapping):
+    pdf = record.get(PDF_PAGE_COVERAGE_KEY)
+    if pdf is not None and meta is None:
+        raise ValueError("PDF page coverage has no source extraction metadata")
+    if result is not None and record != build(result, text, mapping, pdf_meta=meta if pdf is not None else None):
         raise ValueError("Document passage coverage differs from the frozen responses")
     blocks = [check_range(block, len(text)) for block in mapping]
     if record["mapped_characters"] != sum(not char.isspace() for start, end in blocks for char in text[start:end]):
@@ -142,3 +177,19 @@ def verify_source(document: dict, text: str, mapping: list[dict], *, result: dic
                 or any(row.get(key) != value for key, value in expected.items())
                 or row["characters"] != sum(not char.isspace() for char in text[start:end])):
             raise ValueError("Document passage coverage differs from the extracted source positions")
+    if pdf is not None:
+        _verify_pdf_pages(pdf, meta, text, mapping, blocks)
+
+
+def _verify_pdf_pages(pdf: dict, meta: dict, text: str, mapping: list[dict], blocks: list[tuple[int, int]]) -> None:
+    sources = _page_sources(meta, mapping)
+    partial = {item["page"] for item in meta.get("partially_checked_pages", [])}
+    counts = dict.fromkeys(sources, 0)
+    for block, (start, end) in zip(mapping, blocks, strict=True):
+        counts[block["page"]] += sum(not char.isspace() for char in text[start:end])
+    observed = {row["page"]: (row["extraction"], row["unchecked_image_areas"], sum(row["counts"].values()))
+                for row in pdf["mapped_pages"]}
+    expected = {page: (mode, page in partial, counts[page]) for page, mode in sources.items()}
+    if (pdf["page_count"] != meta["pages"] or observed != expected
+            or pdf["unmapped_page_ranges"] != page_gaps(meta["pages"], list(sources))):
+        raise ValueError("PDF page coverage differs from the original extraction")

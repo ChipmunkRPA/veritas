@@ -83,9 +83,10 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     extension = EXTENSIONS.get(source.get("method"))
     if extension is None:
         raise ValueError("Original-document verification supports plain text, DOCX, EML and PDF")
-    replay_ocr = extension == ".pdf" and any(
-        row.get("status") == "extracted" for row in (coverage.get("ocr") or {}).get("pages", [])
-    )
+    ocr_pages = (coverage.get("ocr") or {}).get("pages", [])
+    page_coverage = (coverage.get(document_passage_coverage.KEY) or {}).get(document_scope.PDF_PAGE_COVERAGE_KEY)
+    used_ocr = extension == ".pdf" and any(row.get("status") == "extracted" for row in ocr_pages)
+    replay_ocr = used_ocr or (extension == ".pdf" and page_coverage is not None and bool(ocr_pages))
     if extension == ".docx":
         from docx.opc.exceptions import OpcError
         from lxml.etree import XMLSyntaxError
@@ -97,7 +98,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             raise ValueError("The supplied DOCX cannot be parsed locally") from error
     else:
         doc = extract(original, extension, allow_ocr=replay_ocr)
-    if replay_ocr and not doc.source_rasters:
+    if used_ocr and not doc.source_rasters:
         raise ValueError("The local OCR runtime could not reproduce the original scan. Check that the verified OCR data are installed.")
     if extension == ".eml" and doc.meta["email"]["body_content_type"] != "text/plain" and not (
         document_scope.mapped_email_html(doc.meta["email"])
@@ -116,7 +117,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     document_repeat.verify_source(evidence, text, mapping)
     document_matched_context.verify_source(evidence, text, mapping)
     document_paragraph_priority.verify_source(evidence, text, mapping)
-    document_passage_coverage.verify_source(evidence, text, mapping)
+    document_passage_coverage.verify_source(evidence, text, mapping, meta=doc.meta)
     document_scope.validate_checkpoint_agreement(evidence, text, mapping=mapping)
 
     pdf_bytes = original.read_bytes() if extension == ".pdf" else None
@@ -154,6 +155,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         window_count += len(packet["supporting_windows"])
     if _sha(original) != commitment["sha256"]:
         raise ValueError("The supplied original changed during document replay")
-    image_label = "PDF images, including OCR source rasters" if replay_ocr else "native PDF images"
+    image_label = "PDF images, including OCR source rasters" if used_ocr else "native PDF images"
+    page_detail = f" Verified mapped text coverage across {page_coverage['page_count']} PDF pages." if page_coverage else ""
     return (f"Original SHA-256, extracted text and source mapping matched. Verified passages ({packet_count}), "
-            f"recorded input windows ({window_count}) and {image_label} ({images}).")
+            f"recorded input windows ({window_count}) and {image_label} ({images}).{page_detail}")

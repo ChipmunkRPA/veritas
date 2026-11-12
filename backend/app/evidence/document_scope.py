@@ -18,6 +18,8 @@ PASSAGE_COVERAGE_KEY = "local_passage_coverage"
 PASSAGE_COVERAGE_SCHEMA = "document-local-passage-coverage/1"
 PASSAGE_COVERAGE_MAX_RANGES = 256
 PASSAGE_COVERAGE_STATES = ("no_local_record", "context_only", "response_range")
+PDF_PAGE_COVERAGE_KEY = "pdf_pages"
+PDF_PAGE_COVERAGE_SCHEMA = "document-pdf-page-coverage/1"
 CHECKPOINT_AGREEMENT_KEY = "writing_second_check"
 CHECKPOINT_AGREEMENT_SCHEMA = "document-writing-second-check/1"
 CHECKPOINT_AGREEMENT_EMAIL_SCHEMA = "document-writing-second-check/2"
@@ -250,3 +252,55 @@ def validate_passage_coverage(document: dict) -> None:
         displayed[state] += amount
     if any(displayed[key] > value or not omitted and displayed[key] != value for key, value in counts.items()):
         raise ValueError("Document passage coverage counts differ from the saved ranges")
+    if PDF_PAGE_COVERAGE_KEY in record:
+        _validate_pdf_pages(document, record)
+
+
+def page_gaps(total: int, mapped: list[int]) -> list[list[int]]:
+    """Compress uncovered page numbers into inclusive one-based ranges."""
+    boundaries = [0, *mapped, total + 1]
+    return [[a + 1, b - 1] for a, b in zip(boundaries, boundaries[1:]) if b - a > 1]
+
+
+def _validate_pdf_pages(document: dict, passage: dict) -> None:
+    coverage = document["coverage"]
+    record = passage[PDF_PAGE_COVERAGE_KEY]
+    total, rows = record["page_count"], record["mapped_pages"]
+    if (document["source"]["method"] != "pymupdf" or record["schema"] != PDF_PAGE_COVERAGE_SCHEMA
+            or set(record) != {"schema", "page_count", "mapped_pages", "unmapped_page_ranges"}
+            or type(total) is not int or total < 1 or not isinstance(rows, list)):
+        raise ValueError("Invalid PDF page coverage")
+    observed_ocr = {p["page"]: "mixed" if p.get("coverage_scope") == "image_region" else "ocr"
+                    for p in (coverage.get("ocr") or {}).get("pages", []) if p["status"] == "extracted"}
+    partial = {p["page"] for p in coverage.get("partially_checked_pages", [])}
+    retained: dict[int, Counter] = {}
+    for item in passage["ranges"]:
+        if type(page := item.get("page")) is not int:
+            raise ValueError("A retained PDF range has no source page")
+        retained.setdefault(page, Counter())[item["state"]] += item["characters"]
+    previous, totals = 0, Counter()
+    for row in rows:
+        page, counts = row["page"], row["counts"]
+        if (set(row) != {"page", "counts", "extraction", "unchecked_image_areas"}
+                or type(page) is not int or not previous < page <= total or set(counts) != set(PASSAGE_COVERAGE_STATES)
+                or any(type(value) is not int or value < 0 for value in counts.values()) or not sum(counts.values())
+                or row["extraction"] != observed_ocr.get(page, "text_layer")
+                or row["unchecked_image_areas"] is not (page in partial)):
+            raise ValueError("Invalid mapped PDF page evidence")
+        visible = retained.pop(page, Counter())
+        if any(visible[state] > count or not passage["omitted_ranges"] and visible[state] != count for state, count in counts.items()):
+            raise ValueError("PDF page counts disagree with retained ranges")
+        totals.update(counts)
+        previous = page
+    mapped = [row["page"] for row in rows]
+    gaps = page_gaps(total, mapped)
+    unmapped = coverage.get("unmapped_pages", [])
+    reported_gaps = record["unmapped_page_ranges"]
+    if (retained or dict(totals) != (passage["counts"] if rows else {}) or not partial.issubset(mapped)
+            or not set(observed_ocr).issubset(mapped) or reported_gaps != gaps
+            or any(type(bound) is not int for gap in reported_gaps for bound in gap)
+            or len(unmapped) != total - len(mapped)
+            or any(type(page) is not int or not 1 <= page <= total for page in unmapped)
+            or unmapped != sorted(set(unmapped))
+            or set(unmapped).intersection(mapped)):
+        raise ValueError("PDF page totals differ from the recorded passage and extraction coverage")

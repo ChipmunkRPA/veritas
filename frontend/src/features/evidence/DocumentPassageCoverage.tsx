@@ -6,6 +6,34 @@ const labels: Record<DocumentCoverageState, string> = {
   context_only: 'Read as context only',
   no_local_record: 'No exact local record',
 }
+const extractionLabels = { text_layer: 'Selectable text', ocr: 'Recognized text', mixed: 'Selectable and recognized text' }
+
+function PdfPageCoverage({ coverage }: { coverage: NonNullable<Coverage['pdf_pages']> }) {
+  const rows = [
+    ...coverage.mapped_pages.map((row) => ({ start: row.page, end: row.page, label: extractionLabels[row.extraction],
+      partial: row.unchecked_image_areas, counts: row.counts })),
+    ...coverage.unmapped_page_ranges.map(([start, end]) => ({ start, end, label: 'No mapped text', partial: false, counts: null })),
+  ].sort((a, b) => a.start - b.start)
+  return <details className="mt-4 text-small" open={rows.length <= 12}>
+    <summary className="cursor-pointer font-medium">Text coverage by PDF page</summary>
+    <p className="mt-2 mb-0 text-caption text-text-muted">
+      The source contains {coverage.page_count.toLocaleString()} {coverage.page_count === 1 ? 'page' : 'pages'}.
+      Counts exclude whitespace and cover mapped text. Unmapped text and unchecked image areas have no local result.
+    </p>
+    <div className="mt-2 overflow-x-auto">
+      <table className="w-full text-left text-small">
+        <thead><tr><th scope="col" className="py-1 pr-3">PDF page</th><th scope="col" className="py-1 pr-3">Extraction</th>
+          <th scope="col" className="py-1 pr-3">Local response</th><th scope="col" className="py-1 pr-3">Context only</th>
+          <th scope="col" className="py-1">No local record</th></tr></thead>
+        <tbody>{rows.map((row) => <tr key={row.start} className="border-t border-border">
+          <th scope="row" className="py-1 pr-3 font-normal">{row.start === row.end ? `Page ${row.start}` : `Pages ${row.start}–${row.end}`}</th>
+          <td className="py-1 pr-3">{row.label}{row.partial && <span className="block text-caption text-text-muted">Unchecked image areas</span>}</td>
+          {states.map((state) => <td key={state} className="py-1 pr-3 font-mono">{row.counts?.[state].toLocaleString() ?? '—'}</td>)}
+        </tr>)}</tbody>
+      </table>
+    </div>
+  </details>
+}
 
 function location(row: Coverage['ranges'][number]) {
   const place = row.page != null ? `Page ${row.page}`
@@ -30,6 +58,7 @@ export default function DocumentPassageCoverage({ coverage }: { coverage: Covera
       A local response applies to its recorded input window. Context-only text was read as part of another response.
       Text without an exact local record has no passage-level conclusion here.
     </p>
+    {coverage.pdf_pages && <PdfPageCoverage coverage={coverage.pdf_pages} />}
     {coverage.ranges.length > 0 && <details className="mt-3 text-small">
       <summary className="cursor-pointer">Source ranges ({coverage.ranges.length.toLocaleString()})</summary>
       <p className="mt-2 mb-0 text-caption text-text-muted">Offsets use extracted Unicode characters. Each range includes its start and excludes its end.</p>

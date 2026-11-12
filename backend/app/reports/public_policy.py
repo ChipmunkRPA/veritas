@@ -2,12 +2,13 @@
 from app.reports import engine
 
 # These generations already used the public-safe headline and check labels.
-_PREVIOUS_PUBLIC_TEMPLATES = {
+_FACE_SCOPE_LEGACY_TEMPLATES = {
     "veritas-report-2.0.r83", "veritas-report-2.0.r84", "veritas-report-2.0.r85", "veritas-report-2.0.r87", "veritas-report-2.0.r88",
     "veritas-report-2.0.r89", "veritas-report-2.0.r90", "veritas-report-2.0.r91", "veritas-report-2.0.r92", "veritas-report-2.0.r94",
     "veritas-report-2.0.r95", "veritas-report-2.0.r96", "veritas-report-2.0.r97", "veritas-report-2.0.r98", "veritas-report-2.0.r99",
     "veritas-report-2.0.r100",
 }
+_PREVIOUS_PUBLIC_TEMPLATES = _FACE_SCOPE_LEGACY_TEMPLATES | {"veritas-report-2.0.r101"}
 
 
 def downloadable_template(template: str, kind: str | None = None) -> bool:
@@ -21,7 +22,7 @@ def package_template(template: str, kind: str | None = None) -> bool:
 
 
 def needs_legacy_face_scope_check(template: str, kind: str) -> bool:
-    return kind == "image" and template in _PREVIOUS_PUBLIC_TEMPLATES
+    return kind == "image" and template in _FACE_SCOPE_LEGACY_TEMPLATES
 
 
 def legacy_face_scope_safe(frozen) -> bool:

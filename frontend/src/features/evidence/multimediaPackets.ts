@@ -279,6 +279,13 @@ export interface DocumentPassageCoverage {
   ranges: { start: number; end: number; state: DocumentCoverageState; characters: number;
     source_block: number; page?: number; paragraph?: number; mime_part?: string; quote_role?: string }[]
   omitted_ranges: number
+  pdf_pages?: {
+    schema: 'document-pdf-page-coverage/1'
+    page_count: number
+    mapped_pages: { page: number; extraction: 'text_layer' | 'ocr' | 'mixed'; unchecked_image_areas: boolean;
+      counts: Record<DocumentCoverageState, number> }[]
+    unmapped_page_ranges: [number, number][]
+  }
 }
 export interface DocumentEvidenceSet extends SetBase {
   schema: 'chipmunk.document-evidence/1'; packets: DocumentEvidencePacket[]; omitted_windows: number

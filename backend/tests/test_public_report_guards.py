@@ -33,8 +33,9 @@ def test_old_reports_are_preserved_but_not_served(monkeypatch, template):
 @pytest.mark.parametrize('template', [v2_reports.engine.TEMPLATE_SET, 'veritas-report-2.0.r87', 'veritas-report-2.0.r88', 'veritas-report-2.0.r89',
                                      'veritas-report-2.0.r90', 'veritas-report-2.0.r91', 'veritas-report-2.0.r92', 'veritas-report-2.0.r94',
                                      'veritas-report-2.0.r95', 'veritas-report-2.0.r96', 'veritas-report-2.0.r97', 'veritas-report-2.0.r98',
-                                     'veritas-report-2.0.r99', 'veritas-report-2.0.r100'])
+                                     'veritas-report-2.0.r99', 'veritas-report-2.0.r100', 'veritas-report-2.0.r101'])
 def test_public_safe_reports_remain_downloadable(monkeypatch, template):
+    from app.engine.fusion.runtime import FACE_SCOPE_CAVEAT
     from app.reports.public_policy import package_template
 
     row = SimpleNamespace(id='report', status='done', artefact_id='new', template_set=template,
@@ -42,9 +43,11 @@ def test_public_safe_reports_remain_downloadable(monkeypatch, template):
     monkeypatch.setattr(v2_reports, 'get_session', _session)
     monkeypatch.setattr(v2_reports, '_report', lambda db, ident: row)
     monkeypatch.setattr(v2_reports, '_analysis', lambda db, ident: SimpleNamespace(kind='image'))
+    caveat = (FACE_SCOPE_CAVEAT.format(name='Previously named face check') if template == 'veritas-report-2.0.r101'
+              else 'Source metadata was retained.')
     monkeypatch.setattr(v2_reports, '_public_snapshot', lambda db, row: SimpleNamespace(
         report=SimpleNamespace(id=row.id, template_set=row.template_set),
-        analysis=SimpleNamespace(id=row.analysis_id, kind='image'), result={'caveats': ['Source metadata was retained.']}))
+        analysis=SimpleNamespace(id=row.analysis_id, kind='image'), result={'caveats': [caveat]}))
     monkeypatch.setattr(v2_reports, '_artefact', lambda *args: object())
     monkeypatch.setattr(v2_reports, '_binary', lambda *args: Response(content=b'pdf', media_type='application/pdf'))
     response = v2_reports.report_file('new', None)

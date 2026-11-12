@@ -508,7 +508,11 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     if partially_checked := decoded["meta"].get("partially_checked_pages"):
         document["coverage"]["partially_checked_pages"] = partially_checked
     try:
-        document["coverage"][document_passage_coverage.KEY] = document_passage_coverage.build(result, text, mapping)
+        meta = decoded["meta"]
+        pages = meta.get("pages")
+        pdf_meta = meta if meta.get("method") == "pymupdf" and type(pages) is int and pages > 0 else None
+        document["coverage"][document_passage_coverage.KEY] = document_passage_coverage.build(
+            result, text, mapping, pdf_meta=pdf_meta)
     except (ValueError, KeyError, TypeError) as error:
         raise DocumentPacketIntegrityError("Local passage coverage differs from the frozen inputs") from error
     document["repeated_passages"] = document_repeat.build(document["source"], text, mapping)
@@ -638,7 +642,8 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
             document_repeat.verify_source(document, decoded["text"], decoded["source_map"])
             document_matched_context.verify_source(document, decoded["text"], decoded["source_map"], result=result)
             document_paragraph_priority.verify_source(document, decoded["text"], decoded["source_map"], result=result)
-            document_passage_coverage.verify_source(document, decoded["text"], decoded["source_map"], result=result)
+            document_passage_coverage.verify_source(document, decoded["text"], decoded["source_map"],
+                                                    result=result, meta=decoded["meta"])
             document_scope.validate_checkpoint_agreement(document, decoded["text"], result=result, mapping=decoded["source_map"])
         except (ValueError, KeyError, TypeError, AttributeError) as error:
             raise DocumentPacketIntegrityError("Document review evidence differs from the frozen text or source mapping") from error

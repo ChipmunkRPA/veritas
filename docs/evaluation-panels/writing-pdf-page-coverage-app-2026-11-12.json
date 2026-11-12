@@ -1,0 +1,244 @@
+{
+  "billing": {
+    "paid_cases": 3,
+    "unpaid_jobs": 0
+  },
+  "browser_page_errors": 0,
+  "cases": {
+    "edited": {
+      "browser_and_json_match": true,
+      "export_json_sha256": "5650d2afab24a6066a2662868a073bab10afd71a1caddce0745e043c41cb44ef",
+      "known_foci": [
+        {
+          "context_only_characters": 0,
+          "focus_sha256": "f5a13adc40b8759d6858f892ef078ac267aad487c93b9a25543cf62de2662b5d",
+          "mapped_characters": 230,
+          "page": 1,
+          "range": [
+            146,
+            413
+          ],
+          "response_characters": 230,
+          "source_text_sha256": "43ac0d1779642aa1148e23fcc48f82699bdb7aede08ed4169d07bdf4a5da614e",
+          "unrecorded_characters": 0
+        },
+        {
+          "context_only_characters": 0,
+          "focus_sha256": "325ffa71d60a8ac068ae6bc423ad1ba230d69c466d0edbe36815bf6cd4bf716f",
+          "mapped_characters": 55,
+          "page": 4,
+          "range": [
+            737,
+            802
+          ],
+          "response_characters": 55,
+          "source_text_sha256": "c6215dc447857a3e53a5b0bb693745c490e2cc69484aeb6b67edf06e35e11bfa",
+          "unrecorded_characters": 0
+        }
+      ],
+      "page_coverage": {
+        "mapped_pages": [
+          {
+            "counts": {
+              "context_only": 0,
+              "no_local_record": 0,
+              "response_range": 471
+            },
+            "extraction": "text_layer",
+            "page": 1,
+            "unchecked_image_areas": false
+          },
+          {
+            "counts": {
+              "context_only": 0,
+              "no_local_record": 0,
+              "response_range": 30
+            },
+            "extraction": "text_layer",
+            "page": 3,
+            "unchecked_image_areas": true
+          },
+          {
+            "counts": {
+              "context_only": 0,
+              "no_local_record": 0,
+              "response_range": 248
+            },
+            "extraction": "ocr",
+            "page": 4,
+            "unchecked_image_areas": false
+          }
+        ],
+        "page_count": 4,
+        "schema": "document-pdf-page-coverage/1",
+        "unmapped_page_ranges": [
+          [
+            2,
+            2
+          ]
+        ]
+      },
+      "page_coverage_report_pages": [
+        5
+      ],
+      "pdf_sha256": "e9f80ba1471af3a1acb5b7981eb5bbbc262c86f9d223bbe405be68b75767050f",
+      "recorded_contexts": 7,
+      "selected_passages": 0,
+      "signed_original_replay": "verified",
+      "signed_package_sha256": "18461078b2d9c053dc92991cceecd6e4526e8f33a338e976bf162df568e09bc5",
+      "source_sha256": "08cad4d1157a100a24bd990419287f042474f641f4427f19a7a44fc23ef4b317",
+      "standard_report_template": "veritas-report-2.0.r102"
+    },
+    "genuine": {
+      "browser_and_json_match": true,
+      "export_json_sha256": "cc2cffbf0e19340dc9e10dbeb0f9bbc2fcfdd8d11b6a2818460b59c03f9121fb",
+      "known_foci": [
+        {
+          "context_only_characters": 0,
+          "focus_sha256": "b6d781012458fc415b2f9dd4d77afff253e53abbf1907b785d8a2d62667e26c8",
+          "mapped_characters": 223,
+          "page": 1,
+          "range": [
+            146,
+            409
+          ],
+          "response_characters": 223,
+          "source_text_sha256": "b2d74b40391abd152d568c066e643622facff10749332acf9fd8ce597a6dd2e9",
+          "unrecorded_characters": 0
+        },
+        {
+          "context_only_characters": 0,
+          "focus_sha256": "548f8ba26b70eb5baa588cbad6611b6a46c258cfd721c3415fe0fbf25f8a4b1c",
+          "mapped_characters": 71,
+          "page": 4,
+          "range": [
+            733,
+            818
+          ],
+          "response_characters": 71,
+          "source_text_sha256": "cd7f0de41322adeb5a521f3fd2c4a57845741adc3be0a2fa4df7c501fa88c61b",
+          "unrecorded_characters": 0
+        }
+      ],
+      "page_coverage": {
+        "mapped_pages": [
+          {
+            "counts": {
+              "context_only": 0,
+              "no_local_record": 0,
+              "response_range": 464
+            },
+            "extraction": "text_layer",
+            "page": 1,
+            "unchecked_image_areas": false
+          },
+          {
+            "counts": {
+              "context_only": 0,
+              "no_local_record": 0,
+              "response_range": 30
+            },
+            "extraction": "text_layer",
+            "page": 3,
+            "unchecked_image_areas": true
+          },
+          {
+            "counts": {
+              "context_only": 0,
+              "no_local_record": 0,
+              "response_range": 264
+            },
+            "extraction": "ocr",
+            "page": 4,
+            "unchecked_image_areas": false
+          }
+        ],
+        "page_count": 4,
+        "schema": "document-pdf-page-coverage/1",
+        "unmapped_page_ranges": [
+          [
+            2,
+            2
+          ]
+        ]
+      },
+      "page_coverage_report_pages": [
+        5
+      ],
+      "pdf_sha256": "6f870d2517713a68078440e10f523c3f16ff2cac53e90f3b695480ea9233b337",
+      "recorded_contexts": 7,
+      "selected_passages": 0,
+      "signed_original_replay": "verified",
+      "signed_package_sha256": "0bd9d47ab9ab8307767964e44cc3b5463a49fe1f5b56944ba293d5114ec8d142",
+      "source_sha256": "c16fe66fbe3be63eb2b11a9d755ac08340589c2c39618ef01cce1d674d7447d0",
+      "standard_report_template": "veritas-report-2.0.r102"
+    },
+    "native_blank": {
+      "browser_and_json_match": true,
+      "export_json_sha256": "b98a10f259b169ffc2e53332efe6affdc9d314fd3c7a58d554b8c7ddfb82df7b",
+      "known_foci": [
+        {
+          "context_only_characters": 0,
+          "focus_sha256": "b6d781012458fc415b2f9dd4d77afff253e53abbf1907b785d8a2d62667e26c8",
+          "mapped_characters": 223,
+          "page": 1,
+          "range": [
+            146,
+            409
+          ],
+          "response_characters": 223,
+          "source_text_sha256": "b2d74b40391abd152d568c066e643622facff10749332acf9fd8ce597a6dd2e9",
+          "unrecorded_characters": 0
+        }
+      ],
+      "page_coverage": {
+        "mapped_pages": [
+          {
+            "counts": {
+              "context_only": 0,
+              "no_local_record": 0,
+              "response_range": 464
+            },
+            "extraction": "text_layer",
+            "page": 1,
+            "unchecked_image_areas": false
+          }
+        ],
+        "page_count": 2,
+        "schema": "document-pdf-page-coverage/1",
+        "unmapped_page_ranges": [
+          [
+            2,
+            2
+          ]
+        ]
+      },
+      "page_coverage_report_pages": [
+        5
+      ],
+      "pdf_sha256": "534a179120a60566322ab396241d85e7d73bc1ad06d7ebbb72b93a73d30fd1bf",
+      "recorded_contexts": 3,
+      "selected_passages": 0,
+      "signed_original_replay": "verified",
+      "signed_package_sha256": "fa718bee3b3c246225e76635862bad092068cd4004bb829b53b6bc8324796f0a",
+      "source_sha256": "e679dd0c6f64c57fc4f39582f74f5de382e901fc2de25a03b566505bece8a7f6",
+      "standard_report_template": "veritas-report-2.0.r102"
+    }
+  },
+  "detection_limit": "The worker recorded contexts covering both known edited passages and selected zero passage cards in the edited file.",
+  "historical": {
+    "evidence_version": "document-evidence-5",
+    "original_pdf_sha256": "936c4d4f505a376e11bd07f2252f4ba24bc71aae7dea43e5289fc3e463c72a08",
+    "previous_report_bytes_match": true,
+    "report_pdf_sha256": "79047c86b384d1b77756e3f95dbb58d04bca7d46877ac5eb22ae8124db864cec",
+    "signed_original_replay": "verified",
+    "signed_package_sha256": "ee443058a1bf2c0cf19ce3840e6576765969e6957208cd37bbd11bb57740a46b"
+  },
+  "independent_worker_count": "Rebuilt every page count from the actual saved context and focus ranges and the source map. Signed source verification re-extracted each PDF and checked mapped totals, modes and unmapped pages.",
+  "schema": "chipmunk.writing-pdf-page-coverage-app/1",
+  "source_works": {
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "page_1": "https://doi.org/10.12688/f1000research.10529.2",
+    "page_4": "https://doi.org/10.12688/f1000research.9618.2"
+  }
+}

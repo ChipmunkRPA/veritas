@@ -184,6 +184,59 @@ def test_coverage_counts_every_source_block_even_when_the_export_range_list_is_b
     )
 
 
+def test_pdf_page_coverage_distinguishes_recorded_text_and_unread_source_pages():
+    text = "A é\n\nC D\n\nE F\n\nG H\n\nI J"
+    spans = [(0, 3), (5, 8), (10, 13), (15, 18), (20, 23)]
+    mapping = [{"start": a, "end": b, "kind": "pdf", "page": page, "extraction": mode}
+               for (a, b), page, mode in zip(spans, (1, 3, 4, 5, 5),
+                   ("text_layer", "text_layer", "ocr", "text_layer", "ocr"), strict=True)]
+    ocr = {"pages": [{"page": 2, "status": "unchecked"}, {"page": 4, "status": "extracted"},
+                     {"page": 5, "status": "extracted", "coverage_scope": "image_region"}]}
+    partial = [{"page": 3}]
+    meta = {"method": "pymupdf", "pages": 6, "partially_checked_pages": partial}
+    first, third = ({"start": a, "end": b} for a, b in spans[:2])
+    window = {"focus": first, "spans": [first, third], "token_coverage": {"tokens": 4}}
+    signal = {"status": "ok", "details": {"text_evidence": {"version": "scored-context/1",
+        "offset_unit": "unicode_codepoint", "extracted_text_sha256": text_hash(text), "windows": [window]}}}
+    result = {"signals": [signal]}
+    record = document_passage_coverage.build(result, text, mapping, pdf_meta=meta)
+    pdf = record["pdf_pages"]
+    assert pdf["unmapped_page_ranges"] == [[2, 2], [6, 6]]
+    assert [(row["page"], row["extraction"], row["unchecked_image_areas"]) for row in pdf["mapped_pages"]] == [
+        (1, "text_layer", False), (3, "text_layer", True), (4, "ocr", False), (5, "mixed", False)]
+    assert [row["counts"] for row in pdf["mapped_pages"]] == [
+        {"response_range": 2, "context_only": 0, "no_local_record": 0},
+        {"response_range": 0, "context_only": 2, "no_local_record": 0},
+        {"response_range": 0, "context_only": 0, "no_local_record": 2},
+        {"response_range": 0, "context_only": 0, "no_local_record": 4},
+    ]
+    document = {"source": {"method": "pymupdf", "chars": len(text)}, "coverage": {
+        document_passage_coverage.KEY: record, "ocr": ocr, "partially_checked_pages": partial, "unmapped_pages": [2, 6]}}
+    document_passage_coverage.verify_source(document, text, mapping, result=result, meta=meta)
+    document_passage_coverage.verify_source(document, text, mapping, meta=meta)
+
+
+def test_pdf_page_replay_checks_counts_beyond_the_retained_range_limit():
+    first_page = document_passage_coverage.MAX_RANGES + 2
+    total = first_page + 3
+    text = "A\n\n" * total
+    mapping = [{"start": i * 3, "end": i * 3 + 1, "page": 1 if i < first_page else 2, "kind": "pdf"}
+               for i in range(total)]
+    meta = {"method": "pymupdf", "pages": 2}
+    record = document_passage_coverage.build({}, text, mapping, pdf_meta=meta)
+    document = {"source": {"method": "pymupdf", "chars": len(text)}, "coverage": {document_passage_coverage.KEY: record}}
+    assert record["omitted_ranges"] == 5
+    assert [row["counts"]["no_local_record"] for row in record["pdf_pages"]["mapped_pages"]] == [first_page, 3]
+    document_passage_coverage.verify_source(document, text, mapping, meta=meta)
+
+    first, second = record["pdf_pages"]["mapped_pages"]
+    first["counts"]["no_local_record"] -= 1
+    second["counts"]["no_local_record"] += 1
+    document_passage_coverage.validate(document)
+    with pytest.raises(ValueError, match="differs from the original extraction"):
+        document_passage_coverage.verify_source(document, text, mapping, meta=meta)
+
+
 def test_other_check_disagreement_is_retained_for_selected_context(packet_factory):
     db, store, analysis, result, _, _ = packet_factory()
     second = deepcopy(result["signals"][0])

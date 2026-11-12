@@ -52,6 +52,20 @@ Samples [{{ window.start_sample }}, {{ window.end_sample }}) at 16000 Hz.
 </tbody></table>
 {% endif %}
 <p class="caption">Ranges use extracted Unicode characters and exclude the end position. {% if writing.additional_ranges %}{{ writing.additional_ranges }} more retained ranges appear in the JSON report. {% endif %}{% if writing.omitted_ranges %}The counts include {{ writing.omitted_ranges }} additional ranges beyond the retained list. {% endif %}JSON pointer <span class="mono">/coverage/local_passage_coverage</span>.</p>
+{% if writing.pdf_pages %}
+{% set page_coverage = writing.pdf_pages %}
+<h3>Text coverage by PDF page</h3>
+<p class="caption">The source contains {{ page_coverage.page_count }} {% if page_coverage.page_count == 1 %}page{% else %}pages{% endif %}. Counts exclude whitespace and cover mapped text. Unmapped text and unchecked image areas have no local result.</p>
+<table class="multimedia-locator"><thead><tr><th>PDF page</th><th>Extraction</th><th>Local response</th><th>Context only</th><th>No local record</th></tr></thead><tbody>
+{% for row in page_coverage.rows %}
+<tr><td>{% if row.start == row.end %}Page {{ row.start }}{% else %}Pages {{ row.start }}–{{ row.end }}{% endif %}</td>
+<td>{{ row.label }}{% if row.get('partial') %}. Unchecked image areas{% endif %}</td>
+{% if row.counts %}<td>{{ row.counts.response_range }}</td><td>{{ row.counts.context_only }}</td><td>{{ row.counts.no_local_record }}</td>
+{% else %}<td>—</td><td>—</td><td>—</td>{% endif %}</tr>
+{% endfor %}
+</tbody></table>
+<p class="caption">{% if page_coverage.additional_rows %}{{ page_coverage.additional_rows }} more rows appear in the JSON report. {% endif %}JSON pointer <span class="mono">/coverage/local_passage_coverage/pdf_pages</span>.</p>
+{% endif %}
 {% endif %}
 {% if evidence.get('writing_agreement') %}
 <h3>Second writing check</h3>

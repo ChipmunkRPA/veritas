@@ -423,7 +423,7 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
             document_paragraph_priority.verify_source(document, text, mapping, result=frozen)
         if document_passage_coverage.KEY in coverage:
             frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
-            document_passage_coverage.verify_source(document, text, mapping, result=frozen)
+            document_passage_coverage.verify_source(document, text, mapping, result=frozen, meta=decoded["meta"])
         if document_scope.CHECKPOINT_AGREEMENT_KEY in coverage:
             frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
             document_scope.validate_checkpoint_agreement(document, text, result=frozen, mapping=mapping)

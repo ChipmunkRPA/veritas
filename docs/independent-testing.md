@@ -154,6 +154,9 @@ The [two-photo difference pilot](image-embedded-pair-difference-transfer-2026-11
 replays source-pixel differences when one PNG contains two matching photo areas.
 The [separate confirmation](image-embedded-pair-difference-confirmation-2026-11-12.md)
 checks new layouts and documents the ambiguity when a third matching area is present.
+The [third-copy holdout](image-embedded-pair-third-guard-2026-11-12.md)
+tests when to withhold the comparison while retaining the exact differences
+in valid pairs.
 The [quality-90 earlier-copy study](image-reference-jpeg90-transfer-2026-11-12.md)
 rebuilds both JPEG deliveries, checks mapped native crops, and verifies the
 paid result's API, PDF, and JSON evidence in the local app.

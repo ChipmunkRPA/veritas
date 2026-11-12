@@ -1,0 +1,3257 @@
+{
+  "audit": {
+    "approximate_witnesses": 2693,
+    "exact_guard_tiles": 4555,
+    "exact_masks": 75,
+    "views": 96
+  },
+  "confirmation_sha256": "58e314577bbf37bba612e3037995b00a9f387ed8141bd0ec8ae3d9a5927223f5",
+  "elapsed_s": 18.119150666003407,
+  "freeze_sha256": "e7a269527e82777422b3e4450daea75fc8edfecf167fa1b2d1085d2ad8c339e6",
+  "result": {
+    "by_role": {
+      "duplicate": {
+        "approximate_guard": 0,
+        "base_exact_masks": 0,
+        "base_flags": 0,
+        "combined_guard": 0,
+        "exact_guard": 0,
+        "retained": 0,
+        "retained_exact_masks": 0,
+        "views": 12
+      },
+      "exact_third": {
+        "approximate_guard": 8,
+        "base_exact_masks": 8,
+        "base_flags": 8,
+        "combined_guard": 8,
+        "exact_guard": 3,
+        "retained": 0,
+        "retained_exact_masks": 0,
+        "views": 12
+      },
+      "feather": {
+        "approximate_guard": 0,
+        "base_exact_masks": 10,
+        "base_flags": 10,
+        "combined_guard": 0,
+        "exact_guard": 0,
+        "retained": 10,
+        "retained_exact_masks": 10,
+        "views": 12
+      },
+      "local": {
+        "approximate_guard": 0,
+        "base_exact_masks": 12,
+        "base_flags": 12,
+        "combined_guard": 0,
+        "exact_guard": 0,
+        "retained": 12,
+        "retained_exact_masks": 12,
+        "views": 12
+      },
+      "partial_third": {
+        "approximate_guard": 1,
+        "base_exact_masks": 12,
+        "base_flags": 12,
+        "combined_guard": 12,
+        "exact_guard": 12,
+        "retained": 0,
+        "retained_exact_masks": 0,
+        "views": 12
+      },
+      "resampled_third": {
+        "approximate_guard": 12,
+        "base_exact_masks": 12,
+        "base_flags": 12,
+        "combined_guard": 12,
+        "exact_guard": 0,
+        "retained": 0,
+        "retained_exact_masks": 0,
+        "views": 12
+      },
+      "sharp": {
+        "approximate_guard": 0,
+        "base_exact_masks": 9,
+        "base_flags": 9,
+        "combined_guard": 0,
+        "exact_guard": 0,
+        "retained": 9,
+        "retained_exact_masks": 9,
+        "views": 12
+      },
+      "unrelated": {
+        "approximate_guard": 0,
+        "base_exact_masks": 12,
+        "base_flags": 12,
+        "combined_guard": 0,
+        "exact_guard": 0,
+        "retained": 12,
+        "retained_exact_masks": 12,
+        "views": 12
+      }
+    },
+    "lost_exact_pair_masks": 0,
+    "passed": true
+  },
+  "rows": [
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        18,
+        83
+      ],
+      "retained": true,
+      "role": "local",
+      "second": [
+        694,
+        83
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 0,
+      "target": 3869,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": false,
+      "base_flag": false,
+      "exact_guard": null,
+      "exact_mask": false,
+      "first": [
+        18,
+        83
+      ],
+      "retained": false,
+      "role": "sharp",
+      "second": [
+        694,
+        83
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 0,
+      "target": 24875,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": false,
+      "base_flag": false,
+      "exact_guard": null,
+      "exact_mask": false,
+      "first": [
+        18,
+        83
+      ],
+      "retained": false,
+      "role": "feather",
+      "second": [
+        694,
+        83
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 0,
+      "target": 23351,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        18,
+        83
+      ],
+      "retained": true,
+      "role": "unrelated",
+      "second": [
+        694,
+        83
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 0,
+      "target": 3869,
+      "third": [
+        356,
+        86
+      ]
+    },
+    {
+      "approximate_guard": {
+        "box": [
+          363,
+          79,
+          665,
+          530
+        ],
+        "count": 339,
+        "kind": "resampled_third",
+        "matched_features": 339,
+        "matrix": [
+          [
+            1.0000365439800474,
+            5.2117219855679766e-05,
+            337.97564316052205
+          ],
+          [
+            -5.2117219855679766e-05,
+            1.0000365439800474,
+            2.9876194628920185
+          ]
+        ],
+        "pixel_witnesses": 126
+      },
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        18,
+        83
+      ],
+      "retained": false,
+      "role": "exact_third",
+      "second": [
+        694,
+        83
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 0,
+      "target": 3869,
+      "third": [
+        356,
+        86
+      ]
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": {
+        "box": [
+          358,
+          100,
+          507,
+          401
+        ],
+        "count": 196,
+        "kind": "exact_third",
+        "translation": [
+          255,
+          -52
+        ]
+      },
+      "exact_mask": true,
+      "first": [
+        18,
+        83
+      ],
+      "retained": false,
+      "role": "partial_third",
+      "second": [
+        694,
+        83
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 0,
+      "target": 3869,
+      "third": [
+        356,
+        86
+      ]
+    },
+    {
+      "approximate_guard": {
+        "box": [
+          362,
+          79,
+          611,
+          434
+        ],
+        "count": 231,
+        "kind": "resampled_third",
+        "matched_features": 233,
+        "matrix": [
+          [
+            0.7798102544401014,
+            -0.0002603274407273013,
+            342.0979443029762
+          ],
+          [
+            0.0002603274407273013,
+            0.7798102544401014,
+            21.147875737857884
+          ]
+        ],
+        "pixel_witnesses": 115
+      },
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        18,
+        83
+      ],
+      "retained": false,
+      "role": "resampled_third",
+      "second": [
+        694,
+        83
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 0,
+      "target": 3869,
+      "third": [
+        356,
+        86
+      ]
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": false,
+      "exact_guard": null,
+      "exact_mask": false,
+      "first": [
+        18,
+        83
+      ],
+      "retained": false,
+      "role": "duplicate",
+      "second": [
+        694,
+        83
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 0,
+      "target": 0,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        19,
+        84
+      ],
+      "retained": true,
+      "role": "local",
+      "second": [
+        697,
+        91
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 1,
+      "target": 3869,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        19,
+        84
+      ],
+      "retained": true,
+      "role": "sharp",
+      "second": [
+        697,
+        91
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 1,
+      "target": 2503,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        19,
+        84
+      ],
+      "retained": true,
+      "role": "feather",
+      "second": [
+        697,
+        91
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 1,
+      "target": 2173,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        19,
+        84
+      ],
+      "retained": true,
+      "role": "unrelated",
+      "second": [
+        697,
+        91
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 1,
+      "target": 3869,
+      "third": [
+        358,
+        87
+      ]
+    },
+    {
+      "approximate_guard": {
+        "box": [
+          366,
+          84,
+          667,
+          531
+        ],
+        "count": 297,
+        "kind": "resampled_third",
+        "matched_features": 298,
+        "matrix": [
+          [
+            1.0001004428908746,
+            2.6206026190546276e-05,
+            338.9773033015068
+          ],
+          [
+            -2.6206026190546276e-05,
+            1.0001004428908746,
+            2.981497423685654
+          ]
+        ],
+        "pixel_witnesses": 151
+      },
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        19,
+        84
+      ],
+      "retained": false,
+      "role": "exact_third",
+      "second": [
+        697,
+        91
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 1,
+      "target": 3869,
+      "third": [
+        358,
+        87
+      ]
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": {
+        "box": [
+          370,
+          93,
+          506,
+          413
+        ],
+        "count": 195,
+        "kind": "exact_third",
+        "translation": [
+          256,
+          -52
+        ]
+      },
+      "exact_mask": true,
+      "first": [
+        19,
+        84
+      ],
+      "retained": false,
+      "role": "partial_third",
+      "second": [
+        697,
+        91
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 1,
+      "target": 3869,
+      "third": [
+        358,
+        87
+      ]
+    },
+    {
+      "approximate_guard": {
+        "box": [
+          362,
+          82,
+          613,
+          434
+        ],
+        "count": 232,
+        "kind": "resampled_third",
+        "matched_features": 234,
+        "matrix": [
+          [
+            0.7799968294038582,
+            3.0371234782312926e-07,
+            343.32486649011935
+          ],
+          [
+            -3.0371234782312926e-07,
+            0.7799968294038582,
+            21.339789805104203
+          ]
+        ],
+        "pixel_witnesses": 145
+      },
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        19,
+        84
+      ],
+      "retained": false,
+      "role": "resampled_third",
+      "second": [
+        697,
+        91
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 1,
+      "target": 3869,
+      "third": [
+        358,
+        87
+      ]
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": false,
+      "exact_guard": null,
+      "exact_mask": false,
+      "first": [
+        19,
+        84
+      ],
+      "retained": false,
+      "role": "duplicate",
+      "second": [
+        697,
+        91
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 1,
+      "target": 0,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        29,
+        31
+      ],
+      "retained": true,
+      "role": "local",
+      "second": [
+        545,
+        495
+      ],
+      "shape": [
+        944,
+        944
+      ],
+      "slot": 2,
+      "target": 3868,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        29,
+        31
+      ],
+      "retained": true,
+      "role": "sharp",
+      "second": [
+        545,
+        495
+      ],
+      "shape": [
+        944,
+        944
+      ],
+      "slot": 2,
+      "target": 13748,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        29,
+        31
+      ],
+      "retained": true,
+      "role": "feather",
+      "second": [
+        545,
+        495
+      ],
+      "shape": [
+        944,
+        944
+      ],
+      "slot": 2,
+      "target": 12668,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        29,
+        31
+      ],
+      "retained": true,
+      "role": "unrelated",
+      "second": [
+        545,
+        495
+      ],
+      "shape": [
+        944,
+        944
+      ],
+      "slot": 2,
+      "target": 3868,
+      "third": [
+        480,
+        29
+      ]
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": false,
+      "base_flag": false,
+      "exact_guard": null,
+      "exact_mask": false,
+      "first": [
+        29,
+        31
+      ],
+      "retained": false,
+      "role": "exact_third",
+      "second": [
+        545,
+        495
+      ],
+      "shape": [
+        944,
+        944
+      ],
+      "slot": 2,
+      "target": 3868,
+      "third": [
+        480,
+        29
+      ]
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": {
+        "box": [
+          482,
+          30,
+          631,
+          358
+        ],
+        "count": 220,
+        "kind": "exact_third",
+        "translation": [
+          368,
+          -57
+        ]
+      },
+      "exact_mask": true,
+      "first": [
+        29,
+        31
+      ],
+      "retained": false,
+      "role": "partial_third",
+      "second": [
+        545,
+        495
+      ],
+      "shape": [
+        944,
+        944
+      ],
+      "slot": 2,
+      "target": 3868,
+      "third": [
+        480,
+        29
+      ]
+    },
+    {
+      "approximate_guard": {
+        "box": [
+          476,
+          26,
+          736,
+          373
+        ],
+        "count": 250,
+        "kind": "resampled_third",
+        "matched_features": 251,
+        "matrix": [
+          [
+            0.780073580540199,
+            -1.925440138756073e-05,
+            457.57312823666103
+          ],
+          [
+            1.925440138756073e-05,
+            0.780073580540199,
+            4.646208331037279
+          ]
+        ],
+        "pixel_witnesses": 129
+      },
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        29,
+        31
+      ],
+      "retained": false,
+      "role": "resampled_third",
+      "second": [
+        545,
+        495
+      ],
+      "shape": [
+        944,
+        944
+      ],
+      "slot": 2,
+      "target": 3868,
+      "third": [
+        480,
+        29
+      ]
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": false,
+      "exact_guard": null,
+      "exact_mask": false,
+      "first": [
+        29,
+        31
+      ],
+      "retained": false,
+      "role": "duplicate",
+      "second": [
+        545,
+        495
+      ],
+      "shape": [
+        944,
+        944
+      ],
+      "slot": 2,
+      "target": 0,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        21,
+        86
+      ],
+      "retained": true,
+      "role": "local",
+      "second": [
+        703,
+        86
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 3,
+      "target": 3869,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        21,
+        86
+      ],
+      "retained": true,
+      "role": "sharp",
+      "second": [
+        703,
+        86
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 3,
+      "target": 5899,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        21,
+        86
+      ],
+      "retained": true,
+      "role": "feather",
+      "second": [
+        703,
+        86
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 3,
+      "target": 5417,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        21,
+        86
+      ],
+      "retained": true,
+      "role": "unrelated",
+      "second": [
+        703,
+        86
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 3,
+      "target": 3869,
+      "third": [
+        362,
+        89
+      ]
+    },
+    {
+      "approximate_guard": {
+        "box": [
+          359,
+          81,
+          677,
+          413
+        ],
+        "count": 319,
+        "kind": "resampled_third",
+        "matched_features": 319,
+        "matrix": [
+          [
+            1.0000125931855746,
+            0.0001000197706663671,
+            340.97560254339953
+          ],
+          [
+            -0.0001000197706663671,
+            1.0000125931855746,
+            3.028188678004984
+          ]
+        ],
+        "pixel_witnesses": 117
+      },
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": {
+        "box": [
+          360,
+          79,
+          682,
+          532
+        ],
+        "count": 744,
+        "kind": "exact_third",
+        "translation": [
+          341,
+          3
+        ]
+      },
+      "exact_mask": true,
+      "first": [
+        21,
+        86
+      ],
+      "retained": false,
+      "role": "exact_third",
+      "second": [
+        703,
+        86
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 3,
+      "target": 3869,
+      "third": [
+        362,
+        89
+      ]
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": {
+        "box": [
+          372,
+          100,
+          504,
+          401
+        ],
+        "count": 182,
+        "kind": "exact_third",
+        "translation": [
+          258,
+          -52
+        ]
+      },
+      "exact_mask": true,
+      "first": [
+        21,
+        86
+      ],
+      "retained": false,
+      "role": "partial_third",
+      "second": [
+        703,
+        86
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 3,
+      "target": 3869,
+      "third": [
+        362,
+        89
+      ]
+    },
+    {
+      "approximate_guard": {
+        "box": [
+          358,
+          82,
+          610,
+          351
+        ],
+        "count": 211,
+        "kind": "resampled_third",
+        "matched_features": 216,
+        "matrix": [
+          [
+            0.7804960243042721,
+            -0.0002865850308329043,
+            345.793508497755
+          ],
+          [
+            0.0002865850308329043,
+            0.7804960243042721,
+            21.612790379187498
+          ]
+        ],
+        "pixel_witnesses": 109
+      },
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        21,
+        86
+      ],
+      "retained": false,
+      "role": "resampled_third",
+      "second": [
+        703,
+        86
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 3,
+      "target": 3869,
+      "third": [
+        362,
+        89
+      ]
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": false,
+      "exact_guard": null,
+      "exact_mask": false,
+      "first": [
+        21,
+        86
+      ],
+      "retained": false,
+      "role": "duplicate",
+      "second": [
+        703,
+        86
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 3,
+      "target": 0,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        22,
+        87
+      ],
+      "retained": true,
+      "role": "local",
+      "second": [
+        706,
+        94
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 4,
+      "target": 3869,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        22,
+        87
+      ],
+      "retained": true,
+      "role": "sharp",
+      "second": [
+        706,
+        94
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 4,
+      "target": 9372,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        22,
+        87
+      ],
+      "retained": true,
+      "role": "feather",
+      "second": [
+        706,
+        94
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 4,
+      "target": 8593,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        22,
+        87
+      ],
+      "retained": true,
+      "role": "unrelated",
+      "second": [
+        706,
+        94
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 4,
+      "target": 3869,
+      "third": [
+        364,
+        90
+      ]
+    },
+    {
+      "approximate_guard": {
+        "box": [
+          360,
+          83,
+          680,
+          531
+        ],
+        "count": 280,
+        "kind": "resampled_third",
+        "matched_features": 281,
+        "matrix": [
+          [
+            0.9999604723261976,
+            -6.662574032472463e-05,
+            342.03092052689504
+          ],
+          [
+            6.662574032472463e-05,
+            0.9999604723261976,
+            3.0021769591339686
+          ]
+        ],
+        "pixel_witnesses": 175
+      },
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": {
+        "box": [
+          361,
+          79,
+          681,
+          532
+        ],
+        "count": 752,
+        "kind": "exact_third",
+        "translation": [
+          342,
+          3
+        ]
+      },
+      "exact_mask": true,
+      "first": [
+        22,
+        87
+      ],
+      "retained": false,
+      "role": "exact_third",
+      "second": [
+        706,
+        94
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 4,
+      "target": 3869,
+      "third": [
+        364,
+        90
+      ]
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": {
+        "box": [
+          373,
+          93,
+          503,
+          420
+        ],
+        "count": 197,
+        "kind": "exact_third",
+        "translation": [
+          259,
+          -52
+        ]
+      },
+      "exact_mask": true,
+      "first": [
+        22,
+        87
+      ],
+      "retained": false,
+      "role": "partial_third",
+      "second": [
+        706,
+        94
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 4,
+      "target": 3869,
+      "third": [
+        364,
+        90
+      ]
+    },
+    {
+      "approximate_guard": {
+        "box": [
+          359,
+          83,
+          612,
+          435
+        ],
+        "count": 218,
+        "kind": "resampled_third",
+        "matched_features": 220,
+        "matrix": [
+          [
+            0.7799956072510484,
+            -1.3310488366848122e-05,
+            347.0072437876313
+          ],
+          [
+            1.3310488366848122e-05,
+            0.7799956072510484,
+            21.99182183979097
+          ]
+        ],
+        "pixel_witnesses": 149
+      },
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        22,
+        87
+      ],
+      "retained": false,
+      "role": "resampled_third",
+      "second": [
+        706,
+        94
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 4,
+      "target": 3869,
+      "third": [
+        364,
+        90
+      ]
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": false,
+      "exact_guard": null,
+      "exact_mask": false,
+      "first": [
+        22,
+        87
+      ],
+      "retained": false,
+      "role": "duplicate",
+      "second": [
+        706,
+        94
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 4,
+      "target": 0,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        29,
+        34
+      ],
+      "retained": true,
+      "role": "local",
+      "second": [
+        545,
+        498
+      ],
+      "shape": [
+        944,
+        944
+      ],
+      "slot": 5,
+      "target": 3868,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        29,
+        34
+      ],
+      "retained": true,
+      "role": "sharp",
+      "second": [
+        545,
+        498
+      ],
+      "shape": [
+        944,
+        944
+      ],
+      "slot": 5,
+      "target": 4116,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        29,
+        34
+      ],
+      "retained": true,
+      "role": "feather",
+      "second": [
+        545,
+        498
+      ],
+      "shape": [
+        944,
+        944
+      ],
+      "slot": 5,
+      "target": 3741,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        29,
+        34
+      ],
+      "retained": true,
+      "role": "unrelated",
+      "second": [
+        545,
+        498
+      ],
+      "shape": [
+        944,
+        944
+      ],
+      "slot": 5,
+      "target": 3868,
+      "third": [
+        480,
+        32
+      ]
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": false,
+      "base_flag": false,
+      "exact_guard": null,
+      "exact_mask": false,
+      "first": [
+        29,
+        34
+      ],
+      "retained": false,
+      "role": "exact_third",
+      "second": [
+        545,
+        498
+      ],
+      "shape": [
+        944,
+        944
+      ],
+      "slot": 5,
+      "target": 3868,
+      "third": [
+        480,
+        32
+      ]
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": {
+        "box": [
+          482,
+          38,
+          631,
+          358
+        ],
+        "count": 217,
+        "kind": "exact_third",
+        "translation": [
+          368,
+          -57
+        ]
+      },
+      "exact_mask": true,
+      "first": [
+        29,
+        34
+      ],
+      "retained": false,
+      "role": "partial_third",
+      "second": [
+        545,
+        498
+      ],
+      "shape": [
+        944,
+        944
+      ],
+      "slot": 5,
+      "target": 3868,
+      "third": [
+        480,
+        32
+      ]
+    },
+    {
+      "approximate_guard": {
+        "box": [
+          472,
+          27,
+          735,
+          367
+        ],
+        "count": 226,
+        "kind": "resampled_third",
+        "matched_features": 227,
+        "matrix": [
+          [
+            0.7803892071858146,
+            -3.165594694130551e-05,
+            457.4546622311798
+          ],
+          [
+            3.165594694130551e-05,
+            0.7803892071858146,
+            5.211731000598791
+          ]
+        ],
+        "pixel_witnesses": 138
+      },
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        29,
+        34
+      ],
+      "retained": false,
+      "role": "resampled_third",
+      "second": [
+        545,
+        498
+      ],
+      "shape": [
+        944,
+        944
+      ],
+      "slot": 5,
+      "target": 3868,
+      "third": [
+        480,
+        32
+      ]
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": false,
+      "exact_guard": null,
+      "exact_mask": false,
+      "first": [
+        29,
+        34
+      ],
+      "retained": false,
+      "role": "duplicate",
+      "second": [
+        545,
+        498
+      ],
+      "shape": [
+        944,
+        944
+      ],
+      "slot": 5,
+      "target": 0,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        24,
+        89
+      ],
+      "retained": true,
+      "role": "local",
+      "second": [
+        702,
+        89
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 6,
+      "target": 3869,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        24,
+        89
+      ],
+      "retained": true,
+      "role": "sharp",
+      "second": [
+        702,
+        89
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 6,
+      "target": 7604,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        24,
+        89
+      ],
+      "retained": true,
+      "role": "feather",
+      "second": [
+        702,
+        89
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 6,
+      "target": 7103,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        24,
+        89
+      ],
+      "retained": true,
+      "role": "unrelated",
+      "second": [
+        702,
+        89
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 6,
+      "target": 3869,
+      "third": [
+        363,
+        92
+      ]
+    },
+    {
+      "approximate_guard": {
+        "box": [
+          362,
+          84,
+          679,
+          530
+        ],
+        "count": 348,
+        "kind": "resampled_third",
+        "matched_features": 348,
+        "matrix": [
+          [
+            0.9999773480709493,
+            -1.663853030178356e-05,
+            339.00493655643515
+          ],
+          [
+            1.663853030178356e-05,
+            0.9999773480709493,
+            2.9993294387493856
+          ]
+        ],
+        "pixel_witnesses": 163
+      },
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": {
+        "box": [
+          358,
+          79,
+          684,
+          532
+        ],
+        "count": 774,
+        "kind": "exact_third",
+        "translation": [
+          339,
+          3
+        ]
+      },
+      "exact_mask": true,
+      "first": [
+        24,
+        89
+      ],
+      "retained": false,
+      "role": "exact_third",
+      "second": [
+        702,
+        89
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 6,
+      "target": 3869,
+      "third": [
+        363,
+        92
+      ]
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": {
+        "box": [
+          370,
+          100,
+          506,
+          420
+        ],
+        "count": 203,
+        "kind": "exact_third",
+        "translation": [
+          256,
+          -52
+        ]
+      },
+      "exact_mask": true,
+      "first": [
+        24,
+        89
+      ],
+      "retained": false,
+      "role": "partial_third",
+      "second": [
+        702,
+        89
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 6,
+      "target": 3869,
+      "third": [
+        363,
+        92
+      ]
+    },
+    {
+      "approximate_guard": {
+        "box": [
+          360,
+          85,
+          614,
+          435
+        ],
+        "count": 206,
+        "kind": "resampled_third",
+        "matched_features": 206,
+        "matrix": [
+          [
+            0.7801831850214256,
+            0.0002057991789215612,
+            344.3230327879363
+          ],
+          [
+            -0.0002057991789215612,
+            0.7801831850214256,
+            22.43425258341635
+          ]
+        ],
+        "pixel_witnesses": 119
+      },
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        24,
+        89
+      ],
+      "retained": false,
+      "role": "resampled_third",
+      "second": [
+        702,
+        89
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 6,
+      "target": 3869,
+      "third": [
+        363,
+        92
+      ]
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": false,
+      "exact_guard": null,
+      "exact_mask": false,
+      "first": [
+        24,
+        89
+      ],
+      "retained": false,
+      "role": "duplicate",
+      "second": [
+        702,
+        89
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 6,
+      "target": 0,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        25,
+        90
+      ],
+      "retained": true,
+      "role": "local",
+      "second": [
+        705,
+        97
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 7,
+      "target": 3863,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": false,
+      "base_flag": false,
+      "exact_guard": null,
+      "exact_mask": false,
+      "first": [
+        25,
+        90
+      ],
+      "retained": false,
+      "role": "sharp",
+      "second": [
+        705,
+        97
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 7,
+      "target": 13594,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": false,
+      "base_flag": false,
+      "exact_guard": null,
+      "exact_mask": false,
+      "first": [
+        25,
+        90
+      ],
+      "retained": false,
+      "role": "feather",
+      "second": [
+        705,
+        97
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 7,
+      "target": 13242,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        25,
+        90
+      ],
+      "retained": true,
+      "role": "unrelated",
+      "second": [
+        705,
+        97
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 7,
+      "target": 3863,
+      "third": [
+        365,
+        93
+      ]
+    },
+    {
+      "approximate_guard": {
+        "box": [
+          381,
+          93,
+          680,
+          539
+        ],
+        "count": 347,
+        "kind": "resampled_third",
+        "matched_features": 348,
+        "matrix": [
+          [
+            0.9999958550733143,
+            5.5167211239744415e-05,
+            339.9883381772346
+          ],
+          [
+            -5.5167211239744415e-05,
+            0.9999958550733143,
+            3.0123811244334178
+          ]
+        ],
+        "pixel_witnesses": 142
+      },
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        25,
+        90
+      ],
+      "retained": false,
+      "role": "exact_third",
+      "second": [
+        705,
+        97
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 7,
+      "target": 3863,
+      "third": [
+        365,
+        93
+      ]
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": {
+        "box": [
+          371,
+          93,
+          505,
+          420
+        ],
+        "count": 185,
+        "kind": "exact_third",
+        "translation": [
+          257,
+          -52
+        ]
+      },
+      "exact_mask": true,
+      "first": [
+        25,
+        90
+      ],
+      "retained": false,
+      "role": "partial_third",
+      "second": [
+        705,
+        97
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 7,
+      "target": 3863,
+      "third": [
+        365,
+        93
+      ]
+    },
+    {
+      "approximate_guard": {
+        "box": [
+          376,
+          91,
+          621,
+          442
+        ],
+        "count": 220,
+        "kind": "resampled_third",
+        "matched_features": 220,
+        "matrix": [
+          [
+            0.7801796765962734,
+            1.6489236240273072e-05,
+            345.65622297990853
+          ],
+          [
+            -1.6489236240273072e-05,
+            0.7801796765962734,
+            22.629738195150978
+          ]
+        ],
+        "pixel_witnesses": 120
+      },
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        25,
+        90
+      ],
+      "retained": false,
+      "role": "resampled_third",
+      "second": [
+        705,
+        97
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 7,
+      "target": 3863,
+      "third": [
+        365,
+        93
+      ]
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": false,
+      "exact_guard": null,
+      "exact_mask": false,
+      "first": [
+        25,
+        90
+      ],
+      "retained": false,
+      "role": "duplicate",
+      "second": [
+        705,
+        97
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 7,
+      "target": 0,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        29,
+        37
+      ],
+      "retained": true,
+      "role": "local",
+      "second": [
+        545,
+        501
+      ],
+      "shape": [
+        944,
+        944
+      ],
+      "slot": 8,
+      "target": 3869,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        29,
+        37
+      ],
+      "retained": true,
+      "role": "sharp",
+      "second": [
+        545,
+        501
+      ],
+      "shape": [
+        944,
+        944
+      ],
+      "slot": 8,
+      "target": 4383,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        29,
+        37
+      ],
+      "retained": true,
+      "role": "feather",
+      "second": [
+        545,
+        501
+      ],
+      "shape": [
+        944,
+        944
+      ],
+      "slot": 8,
+      "target": 3524,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        29,
+        37
+      ],
+      "retained": true,
+      "role": "unrelated",
+      "second": [
+        545,
+        501
+      ],
+      "shape": [
+        944,
+        944
+      ],
+      "slot": 8,
+      "target": 3869,
+      "third": [
+        480,
+        35
+      ]
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": false,
+      "base_flag": false,
+      "exact_guard": null,
+      "exact_mask": false,
+      "first": [
+        29,
+        37
+      ],
+      "retained": false,
+      "role": "exact_third",
+      "second": [
+        545,
+        501
+      ],
+      "shape": [
+        944,
+        944
+      ],
+      "slot": 8,
+      "target": 3869,
+      "third": [
+        480,
+        35
+      ]
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": {
+        "box": [
+          482,
+          68,
+          631,
+          358
+        ],
+        "count": 179,
+        "kind": "exact_third",
+        "translation": [
+          368,
+          -57
+        ]
+      },
+      "exact_mask": true,
+      "first": [
+        29,
+        37
+      ],
+      "retained": false,
+      "role": "partial_third",
+      "second": [
+        545,
+        501
+      ],
+      "shape": [
+        944,
+        944
+      ],
+      "slot": 8,
+      "target": 3869,
+      "third": [
+        480,
+        35
+      ]
+    },
+    {
+      "approximate_guard": {
+        "box": [
+          467,
+          100,
+          736,
+          375
+        ],
+        "count": 200,
+        "kind": "resampled_third",
+        "matched_features": 201,
+        "matrix": [
+          [
+            0.7804490630605182,
+            8.995909451895616e-05,
+            457.37558757074015
+          ],
+          [
+            -8.995909451895616e-05,
+            0.7804490630605182,
+            5.813889782329193
+          ]
+        ],
+        "pixel_witnesses": 112
+      },
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        29,
+        37
+      ],
+      "retained": false,
+      "role": "resampled_third",
+      "second": [
+        545,
+        501
+      ],
+      "shape": [
+        944,
+        944
+      ],
+      "slot": 8,
+      "target": 3869,
+      "third": [
+        480,
+        35
+      ]
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": false,
+      "exact_guard": null,
+      "exact_mask": false,
+      "first": [
+        29,
+        37
+      ],
+      "retained": false,
+      "role": "duplicate",
+      "second": [
+        545,
+        501
+      ],
+      "shape": [
+        944,
+        944
+      ],
+      "slot": 8,
+      "target": 0,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        27,
+        92
+      ],
+      "retained": true,
+      "role": "local",
+      "second": [
+        711,
+        92
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 9,
+      "target": 3869,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": false,
+      "base_flag": false,
+      "exact_guard": null,
+      "exact_mask": false,
+      "first": [
+        27,
+        92
+      ],
+      "retained": false,
+      "role": "sharp",
+      "second": [
+        711,
+        92
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 9,
+      "target": 22302,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        27,
+        92
+      ],
+      "retained": true,
+      "role": "feather",
+      "second": [
+        711,
+        92
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 9,
+      "target": 21529,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        27,
+        92
+      ],
+      "retained": true,
+      "role": "unrelated",
+      "second": [
+        711,
+        92
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 9,
+      "target": 3869,
+      "third": [
+        369,
+        95
+      ]
+    },
+    {
+      "approximate_guard": {
+        "box": [
+          383,
+          99,
+          685,
+          370
+        ],
+        "count": 327,
+        "kind": "resampled_third",
+        "matched_features": 330,
+        "matrix": [
+          [
+            0.9999481816368878,
+            -6.156920522498933e-05,
+            342.0201713695797
+          ],
+          [
+            6.156920522498933e-05,
+            0.9999481816368878,
+            3.0057449712792583
+          ]
+        ],
+        "pixel_witnesses": 128
+      },
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        27,
+        92
+      ],
+      "retained": false,
+      "role": "exact_third",
+      "second": [
+        711,
+        92
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 9,
+      "target": 3869,
+      "third": [
+        369,
+        95
+      ]
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": {
+        "box": [
+          373,
+          100,
+          503,
+          420
+        ],
+        "count": 104,
+        "kind": "exact_third",
+        "translation": [
+          259,
+          -52
+        ]
+      },
+      "exact_mask": true,
+      "first": [
+        27,
+        92
+      ],
+      "retained": false,
+      "role": "partial_third",
+      "second": [
+        711,
+        92
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 9,
+      "target": 3869,
+      "third": [
+        369,
+        95
+      ]
+    },
+    {
+      "approximate_guard": {
+        "box": [
+          378,
+          96,
+          624,
+          393
+        ],
+        "count": 219,
+        "kind": "resampled_third",
+        "matched_features": 221,
+        "matrix": [
+          [
+            0.780411618070312,
+            -0.0003872278291160195,
+            348.0977627657704
+          ],
+          [
+            0.0003872278291160195,
+            0.780411618070312,
+            22.97634905093524
+          ]
+        ],
+        "pixel_witnesses": 112
+      },
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        27,
+        92
+      ],
+      "retained": false,
+      "role": "resampled_third",
+      "second": [
+        711,
+        92
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 9,
+      "target": 3869,
+      "third": [
+        369,
+        95
+      ]
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": false,
+      "exact_guard": null,
+      "exact_mask": false,
+      "first": [
+        27,
+        92
+      ],
+      "retained": false,
+      "role": "duplicate",
+      "second": [
+        711,
+        92
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 9,
+      "target": 0,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        28,
+        93
+      ],
+      "retained": true,
+      "role": "local",
+      "second": [
+        704,
+        100
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 10,
+      "target": 3747,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        28,
+        93
+      ],
+      "retained": true,
+      "role": "sharp",
+      "second": [
+        704,
+        100
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 10,
+      "target": 8648,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        28,
+        93
+      ],
+      "retained": true,
+      "role": "feather",
+      "second": [
+        704,
+        100
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 10,
+      "target": 8186,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        28,
+        93
+      ],
+      "retained": true,
+      "role": "unrelated",
+      "second": [
+        704,
+        100
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 10,
+      "target": 3747,
+      "third": [
+        366,
+        96
+      ]
+    },
+    {
+      "approximate_guard": {
+        "box": [
+          380,
+          90,
+          677,
+          541
+        ],
+        "count": 320,
+        "kind": "resampled_third",
+        "matched_features": 322,
+        "matrix": [
+          [
+            0.9999111276692083,
+            -9.876709665778e-06,
+            338.01037133830596
+          ],
+          [
+            9.876709665778e-06,
+            0.9999111276692083,
+            3.0109441051242825
+          ]
+        ],
+        "pixel_witnesses": 130
+      },
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        28,
+        93
+      ],
+      "retained": false,
+      "role": "exact_third",
+      "second": [
+        704,
+        100
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 10,
+      "target": 3747,
+      "third": [
+        366,
+        96
+      ]
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": {
+        "box": [
+          369,
+          100,
+          518,
+          420
+        ],
+        "count": 217,
+        "kind": "exact_third",
+        "translation": [
+          255,
+          -52
+        ]
+      },
+      "exact_mask": true,
+      "first": [
+        28,
+        93
+      ],
+      "retained": false,
+      "role": "partial_third",
+      "second": [
+        704,
+        100
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 10,
+      "target": 3747,
+      "third": [
+        366,
+        96
+      ]
+    },
+    {
+      "approximate_guard": {
+        "box": [
+          377,
+          90,
+          622,
+          443
+        ],
+        "count": 193,
+        "kind": "resampled_third",
+        "matched_features": 194,
+        "matrix": [
+          [
+            0.7800845664769953,
+            0.00031659190386081965,
+            344.2292239617504
+          ],
+          [
+            -0.00031659190386081965,
+            0.7800845664769953,
+            23.396445704208865
+          ]
+        ],
+        "pixel_witnesses": 107
+      },
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        28,
+        93
+      ],
+      "retained": false,
+      "role": "resampled_third",
+      "second": [
+        704,
+        100
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 10,
+      "target": 3747,
+      "third": [
+        366,
+        96
+      ]
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": false,
+      "exact_guard": null,
+      "exact_mask": false,
+      "first": [
+        28,
+        93
+      ],
+      "retained": false,
+      "role": "duplicate",
+      "second": [
+        704,
+        100
+      ],
+      "shape": [
+        688,
+        1088
+      ],
+      "slot": 10,
+      "target": 0,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        29,
+        40
+      ],
+      "retained": true,
+      "role": "local",
+      "second": [
+        545,
+        504
+      ],
+      "shape": [
+        944,
+        944
+      ],
+      "slot": 11,
+      "target": 3869,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        29,
+        40
+      ],
+      "retained": true,
+      "role": "sharp",
+      "second": [
+        545,
+        504
+      ],
+      "shape": [
+        944,
+        944
+      ],
+      "slot": 11,
+      "target": 4300,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        29,
+        40
+      ],
+      "retained": true,
+      "role": "feather",
+      "second": [
+        545,
+        504
+      ],
+      "shape": [
+        944,
+        944
+      ],
+      "slot": 11,
+      "target": 3734,
+      "third": null
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        29,
+        40
+      ],
+      "retained": true,
+      "role": "unrelated",
+      "second": [
+        545,
+        504
+      ],
+      "shape": [
+        944,
+        944
+      ],
+      "slot": 11,
+      "target": 3869,
+      "third": [
+        480,
+        38
+      ]
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": false,
+      "base_flag": false,
+      "exact_guard": null,
+      "exact_mask": false,
+      "first": [
+        29,
+        40
+      ],
+      "retained": false,
+      "role": "exact_third",
+      "second": [
+        545,
+        504
+      ],
+      "shape": [
+        944,
+        944
+      ],
+      "slot": 11,
+      "target": 3869,
+      "third": [
+        480,
+        38
+      ]
+    },
+    {
+      "approximate_guard": {
+        "box": [
+          473,
+          36,
+          633,
+          365
+        ],
+        "count": 147,
+        "kind": "resampled_third",
+        "matched_features": 147,
+        "matrix": [
+          [
+            1.0000616938851692,
+            -1.614337143440173e-05,
+            367.98599858504593
+          ],
+          [
+            1.614337143440173e-05,
+            1.0000616938851692,
+            -57.00997839274751
+          ]
+        ],
+        "pixel_witnesses": 66
+      },
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": {
+        "box": [
+          482,
+          38,
+          631,
+          358
+        ],
+        "count": 190,
+        "kind": "exact_third",
+        "translation": [
+          368,
+          -57
+        ]
+      },
+      "exact_mask": true,
+      "first": [
+        29,
+        40
+      ],
+      "retained": false,
+      "role": "partial_third",
+      "second": [
+        545,
+        504
+      ],
+      "shape": [
+        944,
+        944
+      ],
+      "slot": 11,
+      "target": 3869,
+      "third": [
+        480,
+        38
+      ]
+    },
+    {
+      "approximate_guard": {
+        "box": [
+          473,
+          31,
+          736,
+          375
+        ],
+        "count": 240,
+        "kind": "resampled_third",
+        "matched_features": 242,
+        "matrix": [
+          [
+            0.7804210663976371,
+            -0.0004363300724575418,
+            457.5549928095425
+          ],
+          [
+            0.0004363300724575418,
+            0.7804210663976371,
+            6.454622155036916
+          ]
+        ],
+        "pixel_witnesses": 140
+      },
+      "base_comparison": true,
+      "base_flag": true,
+      "exact_guard": null,
+      "exact_mask": true,
+      "first": [
+        29,
+        40
+      ],
+      "retained": false,
+      "role": "resampled_third",
+      "second": [
+        545,
+        504
+      ],
+      "shape": [
+        944,
+        944
+      ],
+      "slot": 11,
+      "target": 3869,
+      "third": [
+        480,
+        38
+      ]
+    },
+    {
+      "approximate_guard": null,
+      "base_comparison": true,
+      "base_flag": false,
+      "exact_guard": null,
+      "exact_mask": false,
+      "first": [
+        29,
+        40
+      ],
+      "retained": false,
+      "role": "duplicate",
+      "second": [
+        545,
+        504
+      ],
+      "shape": [
+        944,
+        944
+      ],
+      "slot": 11,
+      "target": 0,
+      "third": null
+    }
+  ],
+  "rule": {
+    "blurred_patch_correlation": 0.97,
+    "confidence_weight": 0,
+    "exact_grid_cells": 6,
+    "exact_max_occurrences": 8,
+    "exact_minimum_span": 128,
+    "exact_tiles": 12,
+    "gate": {
+      "lost_exact_pair_masks": 0,
+      "lost_exact_partial_third_challenges": 0,
+      "minimum_exact_challenge": 6,
+      "minimum_partial_challenge": 4,
+      "minimum_resampled_challenge": 8,
+      "minimum_resampled_suppression_fraction": 0.75,
+      "minimum_true_pair_admissions": 12
+    },
+    "minimum_independent_patch_matches": 10,
+    "sift_angle_degrees": 5.0,
+    "sift_minimum_inlier_share": 0.55,
+    "sift_minimum_inliers": 12,
+    "sift_ransac_pixels": 2.0,
+    "sift_ratio": 0.72,
+    "sift_reference_span": 160,
+    "sift_scale": [
+      0.6,
+      1.3
+    ],
+    "sift_third_span": 128,
+    "third_separation": 8
+  },
+  "schema": "chipmunk.image-embedded-pair-third-guard/1",
+  "source_sha256": "0901ace2a3abaa09584f70ae426d328b74a5cc1cba6ca877fc753fb32ee865c7"
+}

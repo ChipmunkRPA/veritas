@@ -7,14 +7,20 @@ import re
 from fractions import Fraction
 
 from app.evidence.face_interval_binding import face_context_box, validate_face_input
-from app.evidence.video_packet_versions import DENSE_SHORT_FACE_VERSION, SHORT_FACE_VERSION
+from app.evidence.video_packet_versions import (
+    DENSE_DURATION_FACE_VERSION,
+    DENSE_SHORT_FACE_VERSION,
+    SHORT_FACE_VERSION,
+)
 
 METHOD = "face-short-return/1"
 DENSE_METHOD = "face-short-return/2"
+DENSE_DURATION_METHOD = "face-short-return/3"
 DENSE_ENCODING = ("h264", "yuv420p")
 DENSE_DIMENSIONS = (640, 360)
-DENSE_FRAME_COUNT = 120
-METHOD_VERSIONS = {METHOD: SHORT_FACE_VERSION, DENSE_METHOD: DENSE_SHORT_FACE_VERSION}
+DENSE_FRAME_PROFILES = {80: DENSE_DURATION_METHOD, 120: DENSE_METHOD, 150: DENSE_DURATION_METHOD}
+METHOD_VERSIONS = {METHOD: SHORT_FACE_VERSION, DENSE_METHOD: DENSE_SHORT_FACE_VERSION,
+                   DENSE_DURATION_METHOD: DENSE_DURATION_FACE_VERSION}
 POINT = 0.10
 SCENE_POINT = 0.55
 ROLES = ("before", "during", "after")
@@ -106,14 +112,16 @@ def validate_record(record, source, *, table_pts=None, interpolated=(), rotation
     before, during, after = (groups[role] for role in ROLES)
     faces = _native_inputs(record["frame_inputs"], source, table_pts, interpolated)
     scheduled = record["scheduled_frame_indices"]
-    _require(50 <= source["frame_count"] <= 240 and 11 <= len(scheduled) <= 64
-             and all(type(i) is int and 0 <= i < source["frame_count"] for i in scheduled)
+    frame_count = source["frame_count"]
+    maximum_samples = 75 if method == DENSE_DURATION_METHOD else 64
+    _require(50 <= frame_count <= 240 and 11 <= len(scheduled) <= maximum_samples
+             and all(type(i) is int and 0 <= i < frame_count for i in scheduled)
              and scheduled == sorted(set(scheduled)) and scheduled[0] == 0
              and not set(scheduled).intersection(interpolated), "Short face-change evidence has an invalid sample grid")
-    if method == DENSE_METHOD:
-        _require(dimensions == DENSE_DIMENSIONS and source["frame_count"] == DENSE_FRAME_COUNT
+    if method != METHOD:
+        _require(dimensions == DENSE_DIMENSIONS and DENSE_FRAME_PROFILES.get(frame_count) == method
                  and tuple(record.get("source_encoding", ())) == DENSE_ENCODING
-                 and scheduled == list(range(0, DENSE_FRAME_COUNT, 2)),
+                 and scheduled == list(range(0, frame_count, 2)),
                  "Dense short face-change evidence requires its measured H.264 delivery and native sample grid")
     entry = scheduled.index(record["start_frame_index"])
     exit_ = scheduled.index(record["end_frame_index"])

@@ -74,19 +74,20 @@ def test_scope_and_exclusive_overlap_are_exact():
     assert not face_return.distinct(replace(candidate, end=23), table, None)
 
 
-def test_dense_fallback_requires_measured_h264_profile_and_exact_native_ticks():
+@pytest.mark.parametrize("frame_count", [80, 120, 150])
+def test_dense_fallback_requires_measured_h264_profile_and_exact_native_ticks(frame_count):
     original = table_for(25)
     table = replace(original, width=640, height=360, coded_width=640, coded_height=360,
-                    pts=original.pts[:120], pict_types=original.pict_types[:120])
+                    pts=original.pts[:frame_count], pict_types=original.pict_types[:frame_count])
     encoding = ("h264", "yuv420p")
     times, scheduled = face_return.dense_schedule(table, encoding)
-    assert times == tuple(Fraction(i, 25) for i in range(120))
-    assert scheduled == tuple(range(0, 120, 2))
+    assert times == tuple(Fraction(i, 25) for i in range(frame_count))
+    assert scheduled == tuple(range(0, frame_count, 2))
     assert face_return.dense_schedule(table, ("hevc", "yuv420p")) is None
     assert face_return.dense_schedule(table, ("h264", "yuv444p")) is None
     assert face_return.dense_schedule(replace(table, rotation=90), encoding) is None
     assert face_return.dense_schedule(replace(table, pts=(*table.pts[:-1], table.pts[-1] + 1)), encoding) is None
-    assert face_return.dense_schedule(replace(table, pts=original.pts), encoding) is None
+    assert face_return.dense_schedule(replace(table, pts=table.pts[:-1]), encoding) is None
 
 
 @pytest.mark.parametrize("first_status", ["localized", "unassessed", "no_distinct_range"])

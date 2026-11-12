@@ -1584,7 +1584,7 @@ detectors:
 
   - id: vid.review.face_appearance
     adapter: app.detectors.video.adapters.face_appearance:FaceAppearanceReviewDetector
-    version: 0.1.3
+    version: 0.1.4
     name: "Face appearance transition review"
     modality: video
     family: face-sequence-review
@@ -1598,7 +1598,7 @@ detectors:
     threat: [face_swap]
     training_data: "No task-specific head fitted. Upstream facial representation training provenance not fully established. Review point selected on60 consumed genuine clips before AI development."
     coverage_date: "2026-11-07 source-disjoint local v17 confirmation"
-    input_constraints: ["Native aligned 112 px BGR input, float32 128-value output normalized in float64", "At most 64 centers; three consecutive native frames with verified decoder timestamps per center", "Same tracked windows as v16: two flanks per side, at least three core centers, core 0.52-2.6 seconds, center gaps at most 0.55 seconds", "Optional timing estimate for a flagged coarse span of at most one second; up to 30 same-track native samples at 12 Hz and two corroborating state transitions", "Optional 12.5 Hz fallback for upright 640x360 H.264 4:2:0, exactly 120 pictures at 25 fps, when the 8 Hz check measures no distinct range"]
+    input_constraints: ["Native aligned 112 px BGR input, float32 128-value output normalized in float64", "At most 64 centers; three consecutive native frames with verified decoder timestamps per center", "Same tracked windows as v16: two flanks per side, at least three core centers, core 0.52-2.6 seconds, center gaps at most 0.55 seconds", "Optional timing estimate for a flagged coarse span of at most one second; up to 30 same-track native samples at 12 Hz and two corroborating state transitions", "Optional 12.5 Hz fallback for upright 640x360 H.264 4:2:0 with exactly 80, 120 or 150 pictures at 25 fps, when the 8 Hz check measures no distinct range"]
     contamination_sets: [RTFS-10K, "upstream face identities unknown"]
     fp_modes: ["Fresh combined genuine/control review flags26/60, all from shared fallback; not a whole-file false-positive rate"]
     citation: "OpenCV Zoo SFace model and Apache-2.0 directory notice. Frozen method/native contracts and development/confirmation: docs/video-v16-sface-development-evaluation.md and docs/video-v17-sface-confirmation-evaluation.md."

@@ -21,7 +21,7 @@ from app.evidence.face_boundary_binding import validate_packet as validate_face_
 from app.evidence.face_return_binding import DENSE_ENCODING
 from app.evidence.face_return_binding import validate_packet as validate_face_return
 from app.evidence.source_geometry import pixel_bounds
-from app.evidence.video_packet_versions import DENSE_SHORT_FACE_VERSION
+from app.evidence.video_packet_versions import DENSE_FACE_VERSIONS
 from app.reports.public_verify import SCHEMA
 from app.reports.verify_image_source import _matches
 
@@ -97,7 +97,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
 
     evidence = json.loads(archive.read("evidence.json"))
     source = evidence["source"]
-    if evidence["version"] == DENSE_SHORT_FACE_VERSION:
+    if evidence["version"] in DENSE_FACE_VERSIONS:
         delivery = probe_container(original)
         if (delivery.get("codec"), delivery.get("pix_fmt")) != DENSE_ENCODING:
             raise ValueError("The original video encoding differs from the dense short face-change scope")

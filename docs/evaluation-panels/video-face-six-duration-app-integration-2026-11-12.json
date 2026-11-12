@@ -1,0 +1,92 @@
+{
+  "schema": "chipmunk.six-picture-duration-app-integration/1",
+  "study_commit": "f8611b8cad24409825078afb39818bec818f5af0",
+  "scope": {
+    "width": 640,
+    "height": 360,
+    "encoding": [
+      "h264",
+      "yuv420p"
+    ],
+    "pictures": [
+      80,
+      120,
+      150
+    ],
+    "fps": 25,
+    "profile_smoke": "full",
+    "worker_checks": "isolated face detection, tracking and appearance review",
+    "simulated_payment_usd": 9.99
+  },
+  "paired_app_runs": 8,
+  "all_decisions_and_incumbents_identical": true,
+  "unpaid_orders_created_no_analyses_or_jobs": true,
+  "paid_orders_idempotent": true,
+  "positive_proofs": {
+    "80": {
+      "known_range_s": [
+        2.16,
+        2.4
+      ],
+      "selected_range_s": [
+        2.16,
+        2.4
+      ],
+      "anchor_source_s": [
+        "52/25",
+        "56/25",
+        "12/5"
+      ],
+      "native_originals_and_crops_verified": 6,
+      "signed_original_video_verified": true,
+      "api_and_json_match": true,
+      "pdf_contains_pixel_exact_images": true,
+      "evidence_version": "video-evidence-14",
+      "affects_overall_confidence": false
+    },
+    "150": {
+      "known_range_s": [
+        2.48,
+        2.72
+      ],
+      "selected_range_s": [
+        2.48,
+        2.72
+      ],
+      "anchor_source_s": [
+        "12/5",
+        "64/25",
+        "68/25"
+      ],
+      "native_originals_and_crops_verified": 6,
+      "signed_original_video_verified": true,
+      "api_and_json_match": true,
+      "pdf_contains_pixel_exact_images": true,
+      "evidence_version": "video-evidence-14",
+      "affects_overall_confidence": false
+    }
+  },
+  "genuine_and_cut_additional_ranges": 0,
+  "models_hidden_in_public_exports": true,
+  "old_evidence_replay": [
+    {
+      "version": "video-evidence-12",
+      "archive_sha256": "54043dc77c78d31ec18ac045eef2a1d485d93bb70307d9422fbf6ca8e94f9c71",
+      "original_signature_replay_verified": true,
+      "archive_unchanged": true
+    },
+    {
+      "version": "video-evidence-13",
+      "archive_sha256": "d8d07c534b774e1d4c6b383d2abe84a7e290c068b4c907ad9c73a02be1d9b3c4",
+      "original_signature_replay_verified": true,
+      "archive_unchanged": true
+    }
+  ],
+  "tamper_rejections_per_new_scope": [
+    "version_downgrade",
+    "v13_method_substitution",
+    "wrong_sample_grid",
+    "wrong_codec",
+    "off_rate_native_clock"
+  ]
+}

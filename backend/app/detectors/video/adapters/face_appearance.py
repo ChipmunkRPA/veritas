@@ -17,7 +17,7 @@ from app.detectors.video.adapters.face_sequence import FAMILY, FaceSequenceRevie
 from app.detectors.video.decode import DecodeError
 from app.engine.detector import ActivationUse, Applicability, DetectorResult, InputUnit, UnitScore
 from app.evidence.face_intervals import bind_tracks
-from app.evidence.face_return_binding import DENSE_METHOD
+from app.evidence.face_return_binding import DENSE_FRAME_PROFILES
 
 DETECTOR = "vid.review.face_appearance"
 BOUNDARY_BUDGET_S = 8.0
@@ -139,7 +139,8 @@ def _inspect_return(details, inputs, yunet, recognizer, deadline, incumbent):
         return
     dense_coverage = {"measured_face_frames": 0}
     coverage["dense_fallback"] = dense_coverage
-    _return_pass(details, inputs, yunet, recognizer, deadline, incumbent, dense, dense_coverage, DENSE_METHOD, stop)
+    _return_pass(details, inputs, yunet, recognizer, deadline, incumbent, dense, dense_coverage,
+                 DENSE_FRAME_PROFILES[len(table)], stop)
     if dense_coverage["status"] == "localized":
         coverage["status"] = "localized"
 
@@ -208,7 +209,7 @@ def _return_pass(details, inputs, yunet, recognizer, deadline, incumbent, planne
         "frame_inputs": [face_inputs[index] for group in candidate.support for index in group],
         "scene_frame_inputs": [scene_inputs[index] for index in candidate.scene_frames],
     }
-    if record_method == DENSE_METHOD:
+    if record_method != face_return.METHOD:
         details["face_return"]["source_encoding"] = list(inputs.encoding)
 
 
@@ -235,7 +236,7 @@ class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
     APPEARANCE = 'opencv.sface.2021dec'
     spec = video_spec(DETECTOR, 'Face appearance transition review', InputUnit.FRAME_BATCH, (), ('series',),
         family=FAMILY, model_ids=(FaceSequenceReviewDetector.YUNET, FaceSequenceReviewDetector.DINO, APPEARANCE),
-        needs=('frames', 'faces'), profiles=FULL_DEEP, devices=CPU_ONLY, timeout_s=120., version='0.1.3')
+        needs=('frames', 'faces'), profiles=FULL_DEEP, devices=CPU_ONLY, timeout_s=120., version='0.1.4')
 
     def applicable(self, ctx):
         incumbent = super().applicable(ctx)
@@ -246,7 +247,7 @@ class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
         return incumbent
 
     def activation_plan(self, ctx):
-        return_inputs = (" Up to 64 additional native inputs for the distinct return check, with up to 60 fallback inputs "
+        return_inputs = (" Up to 64 additional native inputs for the distinct return check, with up to 75 fallback inputs "
                          "on the tested H.264 profile." if settings.video_face_short_return_review else "")
         return (*super().activation_plan(ctx), ActivationUse(self.APPEARANCE, 1, '112 px aligned face',
             'One native aligned face at a time; 128 float32 appearance values per retained frame',

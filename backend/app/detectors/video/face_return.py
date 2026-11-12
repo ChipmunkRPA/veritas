@@ -15,7 +15,7 @@ from app.detectors.video.decode import FrameTable
 from app.evidence.face_return_binding import (
     DENSE_DIMENSIONS,
     DENSE_ENCODING,
-    DENSE_FRAME_COUNT,
+    DENSE_FRAME_PROFILES,
     PROFILE_STEPS,
 )
 
@@ -75,11 +75,11 @@ def schedule(table: FrameTable) -> tuple[tuple[Fraction, ...], tuple[int, ...]] 
 
 
 def dense_schedule(table: FrameTable, encoding: tuple[str | None, str | None]):
-    """Use every second native picture for the measured 4.8-second H.264 delivery."""
-    if encoding != DENSE_ENCODING or (table.width, table.height) != DENSE_DIMENSIONS or len(table) != DENSE_FRAME_COUNT:
+    """Use every second native picture on the qualified H.264 deliveries."""
+    if encoding != DENSE_ENCODING or (table.width, table.height) != DENSE_DIMENSIONS or len(table) not in DENSE_FRAME_PROFILES:
         return None
     planned = schedule(table)
-    return None if planned is None else (planned[0], tuple(range(0, DENSE_FRAME_COUNT, 2)))
+    return None if planned is None else (planned[0], tuple(range(0, len(table), 2)))
 
 
 def scene(rgb: np.ndarray, face: Face | None) -> tuple[np.ndarray, np.ndarray]:

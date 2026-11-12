@@ -30,6 +30,12 @@ The independent audit reopened 7,360 decoded H.264 pictures and matched 48 selec
 
 A private runtime preview used the app's existing short-range measurement function with each proposed sample grid. It checked a known swap, a genuine original and a whole-picture cut at each length. Both passes completed together in under 3.3 seconds for all six clips, within the shared 12-second budget. The two swap intervals, raw scores and native frame bindings matched the held scorer. The four controls yielded no distinct range. This preview exercises measurement and timing before admitting the additional profiles to the evidence format.
 
+## Local app
+
+The optional face appearance review now supports exact 80, 120 or 150 pictures for its 12.5 Hz fallback. Set `VERITAS_VIDEO_FACE_REVIEW_MODE=appearance` and `VERITAS_VIDEO_FACE_SHORT_RETURN_REVIEW=true` to use it with qualifying 640 × 360 H.264 4:2:0 at exact 25 fps. The earlier 8 Hz check takes precedence. The app shows the source-clock interval and original pictures and crops for before, during, and after. This evidence carries zero weight in the overall confidence. Version 14 binds either 80 or 150 pictures to its exact source grid. Version 13 retains its 120-picture contract, and version 12 retains the 8 Hz contract.
+
+The isolated Full-profile worker completed eight analyses across off/on pairs for the two held swaps, a genuine original and a whole-picture cut. It used real face detection, tracking and appearance checks, with simulated Stripe transport. Unpaid events queued zero analyses or jobs. Repeat paid events queued one analysis per order. Confidence decisions and incumbent ranges agreed in every pair. The two swaps reproduced the exact held-example ranges, and both controls produced no additional range. All 12 original and crop images matched native source pixels in the authenticated evidence, JSON and PDF. Both new signed packages replayed against the uploaded sources. Archived versions 12 and 13 also replayed against their originals with the signed package bytes intact. The verifier rejected five altered evidence forms at each new duration. [App and export replay](evaluation-panels/video-face-six-duration-app-integration-2026-11-12.json)
+
 ## Reproduce
 
 Use the retained native archive and the previous private 4.8-second transfer. Write all new outputs to a separate private folder.

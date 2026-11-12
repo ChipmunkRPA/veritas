@@ -1,0 +1,392 @@
+{
+  "schema": "chipmunk.audio-enrolled-target-transfer/1",
+  "method": {
+    "source": "Reuse verified episode identities and edits from the earlier long-clip trial. Rerender every submitted mono mixture from the exact host, donor and new native AMI Array1-01 interval. Each 0.8-second edit intersects at least 400 ms of concurrent background words from two or more annotated voices. Global SNR is -5 dB. No new external models or sources.",
+    "roles": "Same disjoint LibriSpeech hosts and distinct generator donor groups. Use two held meeting sessions separate from both the new point rooms and prior long-clip held rooms. References are four-second different utterances. True enrollment is the same canonical LibriSpeech speaker. Sham is a distinct speaker in the same role and not the ordinary different-voice donor. A common generic dictionary comes from four separate genuine confidence_cal speakers.",
+    "scope": "The generated donor voices do not share declared host identity. A correct enrollment can suppress the generated substitution or an ordinary other speaker. Test this preservation directly and leave original samples available. Isolated AMI controls have no claimed target enrollment and are skipped by this check.",
+    "features": "512-point periodic Hann power spectrum, 128-sample hops. Fit deterministic prototypes from the highest-energy 60% of each clean reference. Normalize weighted frame powers to unit norm, choose farthest cosine templates and make four cosine assignment/mean updates. Twelve templates for each target or sham, six each from four generic references. Equalize frequency by fourth root inverse generic median power with 1e-7 floor and 90th percentile weight cap.",
+    "mask": "Fit nonnegative activations for submitted power by 28 squared-error multiplicative updates with templates fixed. Split target and generic fitted powers. Apply square root of target fraction on the original mixture phase with .20 amplitude floor. Fit correct and sham separately with the identical generic templates. Use no clean target or nuisance component in mask fitting.",
+    "qualification": "Separate exact-component acoustic audit for whole, known edit and surrounding context. For ordinary same-host controls require median correct enrollment gain at least .5 dB in each held room, and correct gain above sham in at least two-thirds overall. The same test requires median synthetic edit retention no worse than -3 dB under correct enrollment in each room. Failure limits the result to source-selectivity measurement."
+  },
+  "outcomes": [
+    {
+      "role": "confirmation",
+      "meeting": "ES2010d",
+      "arm": "ordinary_other_voice",
+      "views": 5,
+      "median": {
+        "correct": {
+          "whole": {
+            "snr_gain_db": 2.18220099082217,
+            "retained_target_db": -2.5574536580130576
+          },
+          "edit": {
+            "snr_gain_db": 3.4935979743686443,
+            "retained_target_db": -2.8920606969321465
+          },
+          "outside": {
+            "snr_gain_db": 2.0368185712535922,
+            "retained_target_db": -2.6544812645732083
+          }
+        },
+        "sham": {
+          "whole": {
+            "snr_gain_db": -0.6901976167483062,
+            "retained_target_db": -6.337013193994209
+          },
+          "edit": {
+            "snr_gain_db": -4.513026810133837,
+            "retained_target_db": -10.469873009492169
+          },
+          "outside": {
+            "snr_gain_db": -0.8133186841769842,
+            "retained_target_db": -5.898559603262355
+          }
+        }
+      }
+    },
+    {
+      "role": "confirmation",
+      "meeting": "ES2010d",
+      "arm": "ordinary_same_host",
+      "views": 5,
+      "median": {
+        "correct": {
+          "whole": {
+            "snr_gain_db": 2.335252775661903,
+            "retained_target_db": -2.581652354067943
+          },
+          "edit": {
+            "snr_gain_db": 4.1568624143015285,
+            "retained_target_db": -3.8918681790011767
+          },
+          "outside": {
+            "snr_gain_db": 2.0368175930268593,
+            "retained_target_db": -2.6544426667714935
+          }
+        },
+        "sham": {
+          "whole": {
+            "snr_gain_db": -0.6465191933377081,
+            "retained_target_db": -5.7082706045292655
+          },
+          "edit": {
+            "snr_gain_db": -0.28900436602831103,
+            "retained_target_db": -3.3703769938669694
+          },
+          "outside": {
+            "snr_gain_db": -0.8132071863854318,
+            "retained_target_db": -5.898622510908042
+          }
+        }
+      }
+    },
+    {
+      "role": "confirmation",
+      "meeting": "ES2010d",
+      "arm": "synthetic",
+      "views": 5,
+      "median": {
+        "correct": {
+          "whole": {
+            "snr_gain_db": 2.337959607479847,
+            "retained_target_db": -2.7907331990618123
+          },
+          "edit": {
+            "snr_gain_db": 3.540673722881316,
+            "retained_target_db": -5.067775587616936
+          },
+          "outside": {
+            "snr_gain_db": 2.036822321479157,
+            "retained_target_db": -2.6545519739774686
+          }
+        },
+        "sham": {
+          "whole": {
+            "snr_gain_db": -0.35587736723087726,
+            "retained_target_db": -5.943649693418987
+          },
+          "edit": {
+            "snr_gain_db": -1.6391271806068026,
+            "retained_target_db": -6.255810866892073
+          },
+          "outside": {
+            "snr_gain_db": -0.8132162892943633,
+            "retained_target_db": -5.898604597567525
+          }
+        }
+      }
+    },
+    {
+      "role": "confirmation",
+      "meeting": "IS1007a",
+      "arm": "ordinary_other_voice",
+      "views": 4,
+      "median": {
+        "correct": {
+          "whole": {
+            "snr_gain_db": 0.39694010927608714,
+            "retained_target_db": -3.162572610547331
+          },
+          "edit": {
+            "snr_gain_db": 1.1193029764529645,
+            "retained_target_db": -4.840382078557134
+          },
+          "outside": {
+            "snr_gain_db": 0.31608019373006435,
+            "retained_target_db": -3.1542898286031678
+          }
+        },
+        "sham": {
+          "whole": {
+            "snr_gain_db": -0.20031147404642535,
+            "retained_target_db": -6.788275390738279
+          },
+          "edit": {
+            "snr_gain_db": -1.339598797434054,
+            "retained_target_db": -11.773089447571778
+          },
+          "outside": {
+            "snr_gain_db": 0.11566485677927218,
+            "retained_target_db": -6.403866844864256
+          }
+        }
+      }
+    },
+    {
+      "role": "confirmation",
+      "meeting": "IS1007a",
+      "arm": "ordinary_same_host",
+      "views": 4,
+      "median": {
+        "correct": {
+          "whole": {
+            "snr_gain_db": 0.34976951822451285,
+            "retained_target_db": -3.1495048524872646
+          },
+          "edit": {
+            "snr_gain_db": 0.9142309486288931,
+            "retained_target_db": -3.6236304514927506
+          },
+          "outside": {
+            "snr_gain_db": 0.31612418673537546,
+            "retained_target_db": -3.154459605588567
+          }
+        },
+        "sham": {
+          "whole": {
+            "snr_gain_db": -0.13448382951369808,
+            "retained_target_db": -6.729118799935356
+          },
+          "edit": {
+            "snr_gain_db": -1.8786198954702047,
+            "retained_target_db": -10.980331081585074
+          },
+          "outside": {
+            "snr_gain_db": 0.1155950180767027,
+            "retained_target_db": -6.40386188944329
+          }
+        }
+      }
+    },
+    {
+      "role": "confirmation",
+      "meeting": "IS1007a",
+      "arm": "synthetic",
+      "views": 4,
+      "median": {
+        "correct": {
+          "whole": {
+            "snr_gain_db": 0.3515762099177313,
+            "retained_target_db": -3.334637686574365
+          },
+          "edit": {
+            "snr_gain_db": -0.9416168055541005,
+            "retained_target_db": -6.7315784364826134
+          },
+          "outside": {
+            "snr_gain_db": 0.3161087125572597,
+            "retained_target_db": -3.1544559444216365
+          }
+        },
+        "sham": {
+          "whole": {
+            "snr_gain_db": 0.9580581342494614,
+            "retained_target_db": -5.056220370588906
+          },
+          "edit": {
+            "snr_gain_db": 3.442100145423881,
+            "retained_target_db": -4.9648402930069535
+          },
+          "outside": {
+            "snr_gain_db": 0.11581169295315252,
+            "retained_target_db": -6.4038550625308
+          }
+        }
+      }
+    },
+    {
+      "role": "selection",
+      "meeting": "ES2004a",
+      "arm": "ordinary_other_voice",
+      "views": 3,
+      "median": {
+        "correct": {
+          "whole": {
+            "snr_gain_db": -0.3957908724805925,
+            "retained_target_db": -3.376489450837199
+          },
+          "edit": {
+            "snr_gain_db": -0.2934827728320435,
+            "retained_target_db": -5.450598636257395
+          },
+          "outside": {
+            "snr_gain_db": -0.3235901002929973,
+            "retained_target_db": -3.2485460067509115
+          }
+        },
+        "sham": {
+          "whole": {
+            "snr_gain_db": 1.2172879659559923,
+            "retained_target_db": -6.9339134928424215
+          },
+          "edit": {
+            "snr_gain_db": 3.609555260438043,
+            "retained_target_db": -9.46267983883799
+          },
+          "outside": {
+            "snr_gain_db": 1.5651159959286414,
+            "retained_target_db": -6.795972652284088
+          }
+        }
+      }
+    },
+    {
+      "role": "selection",
+      "meeting": "ES2004a",
+      "arm": "ordinary_same_host",
+      "views": 3,
+      "median": {
+        "correct": {
+          "whole": {
+            "snr_gain_db": -0.30887558028966566,
+            "retained_target_db": -3.277079335683437
+          },
+          "edit": {
+            "snr_gain_db": 0.8587359434144273,
+            "retained_target_db": -3.6949517293036864
+          },
+          "outside": {
+            "snr_gain_db": -0.323332407021919,
+            "retained_target_db": -3.248219934790986
+          }
+        },
+        "sham": {
+          "whole": {
+            "snr_gain_db": 1.2792189175098403,
+            "retained_target_db": -6.909430905414612
+          },
+          "edit": {
+            "snr_gain_db": 1.27665653228454,
+            "retained_target_db": -8.77040075808713
+          },
+          "outside": {
+            "snr_gain_db": 1.5651579997976244,
+            "retained_target_db": -6.795786128676598
+          }
+        }
+      }
+    },
+    {
+      "role": "selection",
+      "meeting": "IS1009a",
+      "arm": "ordinary_other_voice",
+      "views": 3,
+      "median": {
+        "correct": {
+          "whole": {
+            "snr_gain_db": 0.49224121811661536,
+            "retained_target_db": -3.298222840796941
+          },
+          "edit": {
+            "snr_gain_db": -1.3412449295843025,
+            "retained_target_db": -5.0578031876215945
+          },
+          "outside": {
+            "snr_gain_db": 0.8178527641101869,
+            "retained_target_db": -3.0102226203035305
+          }
+        },
+        "sham": {
+          "whole": {
+            "snr_gain_db": -1.036582159698237,
+            "retained_target_db": -5.995881735234228
+          },
+          "edit": {
+            "snr_gain_db": -3.1347634950508514,
+            "retained_target_db": -5.282447856962099
+          },
+          "outside": {
+            "snr_gain_db": -0.635197070097834,
+            "retained_target_db": -6.1516326371624865
+          }
+        }
+      }
+    },
+    {
+      "role": "selection",
+      "meeting": "IS1009a",
+      "arm": "ordinary_same_host",
+      "views": 3,
+      "median": {
+        "correct": {
+          "whole": {
+            "snr_gain_db": 0.5054537297124924,
+            "retained_target_db": -3.2305457806527644
+          },
+          "edit": {
+            "snr_gain_db": -0.6166280426185153,
+            "retained_target_db": -4.521995024739672
+          },
+          "outside": {
+            "snr_gain_db": 0.8178506761209969,
+            "retained_target_db": -3.010161106479805
+          }
+        },
+        "sham": {
+          "whole": {
+            "snr_gain_db": -1.2742675873518623,
+            "retained_target_db": -5.72523857859268
+          },
+          "edit": {
+            "snr_gain_db": -1.5183077513049659,
+            "retained_target_db": -5.719351353716993
+          },
+          "outside": {
+            "snr_gain_db": -0.6350922011402256,
+            "retained_target_db": -6.151625165145834
+          }
+        }
+      }
+    }
+  ],
+  "acoustic_gate": {
+    "right_reference_beats_sham": 8,
+    "same_host_cases": 9,
+    "two_thirds_specific": true,
+    "each_room_genuine_median_snr_gain": true,
+    "each_room_edit_preserved": false,
+    "qualifies": false
+  },
+  "scope": {
+    "measured": 39,
+    "no_target_enrollment": 4
+  },
+  "neural_authenticity_scores_measured": 0,
+  "commitments": {
+    "freeze": "8b18c410666f0c4e46feaa193543abb648eb39d1ab7442527dd5f97e23b23d6f",
+    "roster": "8cb3d757ca9b786e8b4b2243ae4f2b99515b29c9682a9aa8ca78945b268cfd4a",
+    "measurements": "889f2759055c197d9d480b403206d7f3af8c786525daea5d6009e430a16ab959"
+  },
+  "seconds": 1.346
+}

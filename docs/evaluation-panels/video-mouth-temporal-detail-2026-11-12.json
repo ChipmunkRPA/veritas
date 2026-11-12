@@ -1,0 +1,225 @@
+{
+  "admitted_to_serving": false,
+  "aggregate": {
+    "advances": false,
+    "comparison": {
+      "compatible_added": 0,
+      "grid_added": 3,
+      "grid_extra": 11,
+      "grid_groups": 1,
+      "hard_cut_extra": 2,
+      "native_added": 3,
+      "native_extra": 10,
+      "native_groups": 2
+    },
+    "compatible": {
+      "direct": {
+        "measured_no_range": 7
+      },
+      "fine": {
+        "measured_no_range": 7
+      },
+      "scale_adjusted": {
+        "measured_no_range": 7
+      }
+    },
+    "coverage": {
+      "grid": {
+        "control": 56,
+        "control_assessed": 56,
+        "positive": 32,
+        "positive_assessed": 32
+      },
+      "hard_cut": {
+        "control": 4,
+        "control_assessed": 4
+      },
+      "native": {
+        "control": 40,
+        "control_assessed": 40,
+        "positive": 20,
+        "positive_assessed": 20
+      },
+      "reencode": {
+        "control": 8,
+        "control_assessed": 8
+      }
+    },
+    "criteria": {
+      "compatible_added": false,
+      "coverage": true,
+      "grid_added": false,
+      "grid_extra": false,
+      "grid_groups": false,
+      "hard_cut_extra": false,
+      "native_added": true,
+      "native_extra": false,
+      "native_groups": true,
+      "reencode_extra": true
+    },
+    "freeze_sha256": "1d4b38528d20e2ed43aa47ec9584e77e90917b74f15c2bc35f11e5b35dcdf36f",
+    "outcomes": {
+      "grid": {
+        "direct": {
+          "correct_range": 1,
+          "measured_no_range": 87
+        },
+        "fine": {
+          "correct_range": 1,
+          "false_range": 14,
+          "measured_no_range": 68,
+          "misplaced_range": 5
+        },
+        "scale_adjusted": {
+          "correct_range": 3,
+          "false_range": 11,
+          "measured_no_range": 66,
+          "misplaced_range": 8
+        }
+      },
+      "hard_cut": {
+        "direct": {
+          "measured_no_range": 4
+        },
+        "fine": {
+          "false_range": 1,
+          "measured_no_range": 3
+        },
+        "scale_adjusted": {
+          "false_range": 2,
+          "measured_no_range": 2
+        }
+      },
+      "native": {
+        "direct": {
+          "correct_range": 1,
+          "false_range": 8,
+          "measured_no_range": 49,
+          "misplaced_range": 2
+        },
+        "fine": {
+          "correct_range": 5,
+          "false_range": 7,
+          "measured_no_range": 45,
+          "misplaced_range": 3
+        },
+        "scale_adjusted": {
+          "correct_range": 3,
+          "false_range": 10,
+          "measured_no_range": 43,
+          "misplaced_range": 4
+        }
+      },
+      "reencode": {
+        "direct": {
+          "measured_no_range": 8
+        },
+        "fine": {
+          "measured_no_range": 8
+        },
+        "scale_adjusted": {
+          "measured_no_range": 8
+        }
+      }
+    },
+    "points": {
+      "direct": 0.42381424677636104,
+      "fine": 0.016982227563858032,
+      "scale_adjusted": 0.012645602226257324
+    },
+    "protocol": {
+      "blur_sigmas": [
+        0.65,
+        1.55,
+        3.1
+      ],
+      "coverage_floor": 0.75,
+      "cue": "Align the eye positions. Track both ways between adjacent measured pictures. Compare the signed correlation of motion-aligned narrow and broad luminance bands in the perioral skin and nearby cheek reference. Exclude the inner mouth and require the tracking map to preserve the same region in both views. The primary arm subtracts the broad-band gap from the fine-band gap to control general motion.",
+      "ellipse_radii": [
+        [
+          15,
+          9
+        ],
+        [
+          22,
+          13
+        ],
+        [
+          28,
+          18
+        ]
+      ],
+      "flow": {
+        "cycle_error_max_px": 1.25,
+        "displacement_max_px": 12.0,
+        "parameters": [
+          0.5,
+          3,
+          13,
+          3,
+          5,
+          1.2,
+          0
+        ]
+      },
+      "gate": {
+        "compatible_added": 2,
+        "grid_added": 4,
+        "grid_extra": 3,
+        "grid_groups": 2,
+        "hard_cut_extra": 0,
+        "native_added": 2,
+        "native_extra": 3,
+        "native_groups": 2,
+        "reencode_extra": 1
+      },
+      "hypothesis": "A local neural redraw may lose trackable fine surface detail while retaining broad face motion.",
+      "pixel_support": {
+        "per_band_min_std": 0.35,
+        "per_region_min": 48
+      },
+      "points": "For each arm, strict exceedance of its third-largest measured ordinary development maximum or zero.",
+      "schema": "chipmunk.video-mouth-temporal-detail/1",
+      "time": "Single submitted video, same native sample grid and source-only shot checks as the prior comparator. The soundtrack is checked for evidence and excluded from scoring."
+    },
+    "runtime": {
+      "calibration_sha256": "e8705f7b7a7547bfe4815370e6126c7d8640fa9fe1c8f29cc66f5d5850f02825",
+      "elapsed_s": 84.49701179200201,
+      "held_sha256": "4c86af3302932644519fdc5e897c79e910e3741880fcdac1bf07926befde7dc5",
+      "peak_rss_bytes": 151502848
+    }
+  },
+  "independent_replay": {
+    "aggregate_sha256": "aa5b2d6e20bc63db29fa139f8460788b0882e5412ac3aff0e8d7cc61ea738c24",
+    "anonymous_example": {
+      "aligned_source_pcm_samples": 6416,
+      "anchors_s": [
+        "593/1000",
+        "19/25",
+        "1061/1000"
+      ],
+      "authored_s": [
+        "347/500",
+        "681/500"
+      ],
+      "correct": true,
+      "iou": "367/702",
+      "observed_s": [
+        "33/50",
+        "1061/1000"
+      ],
+      "source_compatible": false
+    },
+    "candidate_pcm_intervals": 25,
+    "compatible_pictures": 1050,
+    "compatible_pixel_masks": 140,
+    "crop_images": 144,
+    "decisions": 480,
+    "identical_picture_scores_under_audio_delay": 8,
+    "media_files": 160,
+    "source_compatible_pcm_pairs_equal": 7,
+    "status": "verified"
+  },
+  "inputs_had_previous_project_exposure": true,
+  "schema": "chipmunk.video-mouth-temporal-detail-public/1"
+}

@@ -1,0 +1,1014 @@
+{
+  "independent_replay": {
+    "aggregate_sha256": "135ca4898400bbf87b8dc667a08c4cc1bebf8ff47a4e5673eeb5e11f64f91c38",
+    "altered_input_hash_rejected": true,
+    "checked_fixture_files": 82,
+    "checked_input_bindings": 1055,
+    "exact_input_overlap_between_calibration_and_pilot": 0,
+    "held_decision_records": 18,
+    "verified": true
+  },
+  "metadata_work_groups": 496,
+  "public_outcomes": [
+    {
+      "arms": {
+        "center_deletion": {
+          "flag": false,
+          "useful": false
+        },
+        "combined": {
+          "flag": false,
+          "useful": false
+        },
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        }
+      },
+      "group": "source-01",
+      "matched_plus_current": false,
+      "role": "before"
+    },
+    {
+      "arms": {
+        "center_deletion": {
+          "flag": false,
+          "useful": false
+        },
+        "combined": {
+          "flag": false,
+          "useful": false
+        },
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        }
+      },
+      "group": "source-01",
+      "matched_plus_current": false,
+      "role": "after"
+    },
+    {
+      "arms": {
+        "center_deletion": {
+          "flag": false,
+          "useful": false
+        },
+        "combined": {
+          "flag": false,
+          "useful": false
+        },
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": true,
+          "useful": true
+        }
+      },
+      "group": "source-01",
+      "matched_plus_current": true,
+      "role": "qwen"
+    },
+    {
+      "arms": {
+        "center_deletion": {
+          "flag": false,
+          "useful": false
+        },
+        "combined": {
+          "flag": false,
+          "useful": false
+        },
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": true,
+          "useful": true
+        }
+      },
+      "group": "source-01",
+      "matched_plus_current": true,
+      "role": "smol2"
+    },
+    {
+      "arms": {
+        "center_deletion": {
+          "flag": false,
+          "useful": false
+        },
+        "combined": {
+          "flag": false,
+          "useful": false
+        },
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        }
+      },
+      "group": "source-02",
+      "matched_plus_current": false,
+      "role": "before"
+    },
+    {
+      "arms": {
+        "center_deletion": {
+          "flag": false,
+          "useful": false
+        },
+        "combined": {
+          "flag": true,
+          "useful": false
+        },
+        "current": {
+          "flag": true,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        }
+      },
+      "group": "source-02",
+      "matched_plus_current": false,
+      "role": "after"
+    },
+    {
+      "arms": {
+        "center_deletion": {
+          "flag": false,
+          "useful": false
+        },
+        "combined": {
+          "flag": false,
+          "useful": false
+        },
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": true,
+          "useful": false
+        }
+      },
+      "group": "source-02",
+      "matched_plus_current": false,
+      "role": "smol2"
+    },
+    {
+      "arms": {
+        "center_deletion": {
+          "flag": false,
+          "useful": false
+        },
+        "combined": {
+          "flag": false,
+          "useful": false
+        },
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        }
+      },
+      "group": "source-03",
+      "matched_plus_current": false,
+      "role": "before"
+    },
+    {
+      "arms": {
+        "center_deletion": {
+          "flag": false,
+          "useful": false
+        },
+        "combined": {
+          "flag": false,
+          "useful": false
+        },
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        }
+      },
+      "group": "source-03",
+      "matched_plus_current": false,
+      "role": "after"
+    },
+    {
+      "arms": {
+        "center_deletion": {
+          "flag": false,
+          "useful": false
+        },
+        "combined": {
+          "flag": false,
+          "useful": false
+        },
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        }
+      },
+      "group": "source-03",
+      "matched_plus_current": false,
+      "role": "qwen"
+    },
+    {
+      "arms": {
+        "center_deletion": {
+          "flag": false,
+          "useful": false
+        },
+        "combined": {
+          "flag": false,
+          "useful": false
+        },
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        }
+      },
+      "group": "source-03",
+      "matched_plus_current": false,
+      "role": "smol2"
+    },
+    {
+      "arms": {
+        "center_deletion": {
+          "flag": false,
+          "useful": false
+        },
+        "combined": {
+          "flag": false,
+          "useful": false
+        },
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        }
+      },
+      "group": "source-04",
+      "matched_plus_current": false,
+      "role": "before"
+    },
+    {
+      "arms": {
+        "center_deletion": {
+          "flag": false,
+          "useful": false
+        },
+        "combined": {
+          "flag": false,
+          "useful": false
+        },
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        }
+      },
+      "group": "source-04",
+      "matched_plus_current": false,
+      "role": "after"
+    },
+    {
+      "arms": {
+        "center_deletion": {
+          "flag": false,
+          "useful": false
+        },
+        "combined": {
+          "flag": false,
+          "useful": false
+        },
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        }
+      },
+      "group": "source-04",
+      "matched_plus_current": false,
+      "role": "qwen"
+    },
+    {
+      "arms": {
+        "center_deletion": {
+          "flag": false,
+          "useful": false
+        },
+        "combined": {
+          "flag": false,
+          "useful": false
+        },
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        }
+      },
+      "group": "source-05",
+      "matched_plus_current": false,
+      "role": "before"
+    },
+    {
+      "arms": {
+        "center_deletion": {
+          "flag": false,
+          "useful": false
+        },
+        "combined": {
+          "flag": false,
+          "useful": false
+        },
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        }
+      },
+      "group": "source-05",
+      "matched_plus_current": false,
+      "role": "after"
+    },
+    {
+      "arms": {
+        "center_deletion": {
+          "flag": false,
+          "useful": false
+        },
+        "combined": {
+          "flag": false,
+          "useful": false
+        },
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        }
+      },
+      "group": "source-05",
+      "matched_plus_current": false,
+      "role": "qwen"
+    },
+    {
+      "arms": {
+        "center_deletion": {
+          "flag": false,
+          "useful": false
+        },
+        "combined": {
+          "flag": false,
+          "useful": false
+        },
+        "current": {
+          "flag": false,
+          "useful": false
+        },
+        "matched_context": {
+          "flag": false,
+          "useful": false
+        }
+      },
+      "group": "source-05",
+      "matched_plus_current": false,
+      "role": "smol2"
+    }
+  ],
+  "schema": "chipmunk.writing-pep-editorial-intake-summary/1",
+  "serving_changed": false,
+  "single_file_pilot": {
+    "counts": {
+      "after": {
+        "center_deletion": {
+          "flags": 0,
+          "useful": 0
+        },
+        "combined": {
+          "flags": 1,
+          "useful": 0
+        },
+        "current": {
+          "flags": 1,
+          "useful": 0
+        },
+        "files": 5,
+        "matched_context": {
+          "flags": 0,
+          "useful": 0
+        }
+      },
+      "before": {
+        "center_deletion": {
+          "flags": 0,
+          "useful": 0
+        },
+        "combined": {
+          "flags": 0,
+          "useful": 0
+        },
+        "current": {
+          "flags": 0,
+          "useful": 0
+        },
+        "files": 5,
+        "matched_context": {
+          "flags": 0,
+          "useful": 0
+        }
+      },
+      "qwen": {
+        "center_deletion": {
+          "flags": 0,
+          "useful": 0
+        },
+        "combined": {
+          "flags": 0,
+          "useful": 0
+        },
+        "current": {
+          "flags": 0,
+          "useful": 0
+        },
+        "files": 4,
+        "matched_context": {
+          "flags": 1,
+          "useful": 1
+        }
+      },
+      "smol2": {
+        "center_deletion": {
+          "flags": 0,
+          "useful": 0
+        },
+        "combined": {
+          "flags": 0,
+          "useful": 0
+        },
+        "current": {
+          "flags": 0,
+          "useful": 0
+        },
+        "files": 4,
+        "matched_context": {
+          "flags": 2,
+          "useful": 1
+        }
+      }
+    },
+    "cpu_forwards": {
+      "calibration": 131,
+      "holdout": 34
+    },
+    "decision": {
+      "added_later_false_groups": 0,
+      "added_over_matched_groups": 0,
+      "advances": false,
+      "gain_groups_by_generator": {
+        "qwen": 0,
+        "smol2": 0
+      },
+      "unique_gain_groups": 0
+    },
+    "distinct_contexts": {
+      "calibration": 524,
+      "holdout": 136
+    },
+    "generator_admission": {
+      "qwen": {
+        "admitted": 4,
+        "attempted": 5
+      },
+      "smol2": {
+        "admitted": 4,
+        "attempted": 5
+      }
+    },
+    "holdout_sha256": "6ff84d5f042b790ffda3e4d70e8dc4dbb24f3829d4c258bfd1445bb54479b5a1",
+    "outcome_sha256": "ff6d05f152ce6d28cf995ac9bb2f39fb56d1d5634919afbb72458bd09edbc1d8",
+    "point_sha256": "a7d4ab9eb612b8d80cca92965dec671b47ace4ce742cc0aa9ac4f54db78360ee",
+    "schema": "chipmunk.writing-center-deletion-transfer/1"
+  },
+  "source_intakes": {
+    "immediate_neighbors": {
+      "counts": {
+        "author_header_changed": 18,
+        "missing_explicit_terms_or_authors": 154,
+        "no_material_center": 845,
+        "qualified": 2,
+        "unavailable_blob": 202
+      },
+      "history": [
+        {
+          "matched_sources": 0,
+          "packet": "previous-agreement",
+          "source_sha256": "8db9676dfde8ed023cbe79d92f82d2bea2544b18537c56baed1dbd6e29b0234b",
+          "text_entries": 100
+        },
+        {
+          "matched_sources": 0,
+          "packet": "llmtrace",
+          "source_sha256": "6d4431a85a70916ba7af5c19f062eed6c277183d7b4bb5c6cea42f520e717f48",
+          "text_entries": 38429
+        },
+        {
+          "matched_sources": 0,
+          "packet": "elife-v301",
+          "source_sha256": "46f681020eb07a197875d64bf4ece4efec619b7d1de4c81825d470d9add04f8a",
+          "text_entries": 25
+        },
+        {
+          "matched_sources": 0,
+          "packet": "elife-v286",
+          "source_sha256": "a8676385711bf3d66165a6c3a8add0d8aee7881288302388ca88739e8e30389b",
+          "text_entries": 26
+        },
+        {
+          "matched_sources": 0,
+          "packet": "elife-v272",
+          "source_sha256": "063c960dafe75757b3b6483ab88802c9c6cd78fa6e0a347014ac148c283d758f",
+          "text_entries": 5
+        },
+        {
+          "matched_sources": 0,
+          "packet": "opai-v257",
+          "source_sha256": "4e43edf33c695a8a4f757d079089dab85a632c648762554bac9f5cc573bb923b",
+          "text_entries": 60
+        },
+        {
+          "matched_sources": 0,
+          "packet": "f1000-previous",
+          "source_sha256": "f8e0f135cd4aef110b78523dd104f47f44fe24aa4a2cb316c78f5e1a99d4deb5",
+          "text_entries": 18
+        },
+        {
+          "matched_sources": 0,
+          "packet": "publisher-abstract-pilot",
+          "source_sha256": "da3edb1f530f62dae1d0911282dca11419153e1126a3a1a2aa84d9d0a31b6c9a",
+          "text_entries": 4
+        },
+        {
+          "matched_sources": 0,
+          "packet": "wellcome-gates",
+          "source_sha256": "e8633d587e1943f1f9dd7c7dc1d93f7809590fcb82a7956ddaa6621e2499ea69",
+          "text_entries": 42
+        }
+      ],
+      "mechanical_groups": 2,
+      "originals_sha256": "386e8b86b9a953522255196d34196ca4bca767b3c7d36a95bbc71430aa1f471c",
+      "plan": {
+        "comparison": "Source qualification for a single-file test. Each published version supplies five consecutive body sentences. Require one material 12\u201340-word center edit between exactly matched immediate neighbors. The two outermost context sentences may independently differ across historical versions. No editing or substitution in either authentic control.",
+        "difference": "Require normalized lexical edit distance at least 0.15 in the anchored natural center. The human variants are independent chronological controls, and may contain other revisions.",
+        "scope": "Require at least two eligible internal positions in each five-sentence passage. Use the exact legacy renderer, dated Git roster and prior attribution and exposure checks."
+      },
+      "qualified_groups": 2,
+      "schema": "chipmunk.writing-pep-revision-intake/1",
+      "source_freeze_sha256": "ca99845262b3686f7949ac54cc6ac774b4a2ccef803a2327ea72f4db0b954eb8",
+      "source_receipt_sha256": "03cdb371e06ee7e80a9edbcaa9a3298f0b01e3b4e41fc77c4a9a743a3f113b88",
+      "source_replay_log_sha256": "e9c31c88864d0c2f51a02f58bdefef4b535b77b82f588be356fb1b1c2e16654d",
+      "source_replay_verified": true,
+      "unchanged_outer_context_groups": 1,
+      "work_pool": 200
+    },
+    "initial": {
+      "counts": {
+        "author_header_changed": 19,
+        "missing_explicit_terms_or_authors": 233,
+        "no_material_center": 770,
+        "qualified": 1,
+        "unavailable_blob": 202
+      },
+      "history": [
+        {
+          "matched_sources": 0,
+          "packet": "previous-agreement",
+          "source_sha256": "8db9676dfde8ed023cbe79d92f82d2bea2544b18537c56baed1dbd6e29b0234b",
+          "text_entries": 100
+        },
+        {
+          "matched_sources": 0,
+          "packet": "llmtrace",
+          "source_sha256": "6d4431a85a70916ba7af5c19f062eed6c277183d7b4bb5c6cea42f520e717f48",
+          "text_entries": 38429
+        },
+        {
+          "matched_sources": 0,
+          "packet": "elife-v301",
+          "source_sha256": "46f681020eb07a197875d64bf4ece4efec619b7d1de4c81825d470d9add04f8a",
+          "text_entries": 25
+        },
+        {
+          "matched_sources": 0,
+          "packet": "elife-v286",
+          "source_sha256": "a8676385711bf3d66165a6c3a8add0d8aee7881288302388ca88739e8e30389b",
+          "text_entries": 26
+        },
+        {
+          "matched_sources": 0,
+          "packet": "elife-v272",
+          "source_sha256": "063c960dafe75757b3b6483ab88802c9c6cd78fa6e0a347014ac148c283d758f",
+          "text_entries": 5
+        },
+        {
+          "matched_sources": 0,
+          "packet": "opai-v257",
+          "source_sha256": "4e43edf33c695a8a4f757d079089dab85a632c648762554bac9f5cc573bb923b",
+          "text_entries": 60
+        },
+        {
+          "matched_sources": 0,
+          "packet": "f1000-previous",
+          "source_sha256": "f8e0f135cd4aef110b78523dd104f47f44fe24aa4a2cb316c78f5e1a99d4deb5",
+          "text_entries": 18
+        },
+        {
+          "matched_sources": 0,
+          "packet": "publisher-abstract-pilot",
+          "source_sha256": "da3edb1f530f62dae1d0911282dca11419153e1126a3a1a2aa84d9d0a31b6c9a",
+          "text_entries": 4
+        },
+        {
+          "matched_sources": 0,
+          "packet": "wellcome-gates",
+          "source_sha256": "e8633d587e1943f1f9dd7c7dc1d93f7809590fcb82a7956ddaa6621e2499ea69",
+          "text_entries": 42
+        }
+      ],
+      "mechanical_groups": 1,
+      "originals_sha256": "527e6581bc0e649c71d29dd349a37a0200ef23d643f0754d65478831374dd427",
+      "qualified_groups": 1,
+      "schema": "chipmunk.writing-pep-revision-intake/1",
+      "source_freeze_sha256": "fda3c74b07ee9d548efa2013e3524c51ccd69ffcc64124a61d4a632abcb19a40",
+      "source_receipt_sha256": "89666ce79ffbc54bdc4bc9ce3d4f0801c165aae4e13798b2fbc1f82a186df4b4",
+      "source_replay_log_sha256": "8b9339f428b9c3ece30910b3ecfac45aa58003a4c5a1c2302fe4ead2cccc5abb",
+      "source_replay_verified": true,
+      "work_pool": 200
+    },
+    "legacy_layout": {
+      "counts": {
+        "author_header_changed": 20,
+        "missing_explicit_terms_or_authors": 154,
+        "no_material_center": 848,
+        "qualified": 1,
+        "unavailable_blob": 202
+      },
+      "history": [
+        {
+          "matched_sources": 0,
+          "packet": "previous-agreement",
+          "source_sha256": "8db9676dfde8ed023cbe79d92f82d2bea2544b18537c56baed1dbd6e29b0234b",
+          "text_entries": 100
+        },
+        {
+          "matched_sources": 0,
+          "packet": "llmtrace",
+          "source_sha256": "6d4431a85a70916ba7af5c19f062eed6c277183d7b4bb5c6cea42f520e717f48",
+          "text_entries": 38429
+        },
+        {
+          "matched_sources": 0,
+          "packet": "elife-v301",
+          "source_sha256": "46f681020eb07a197875d64bf4ece4efec619b7d1de4c81825d470d9add04f8a",
+          "text_entries": 25
+        },
+        {
+          "matched_sources": 0,
+          "packet": "elife-v286",
+          "source_sha256": "a8676385711bf3d66165a6c3a8add0d8aee7881288302388ca88739e8e30389b",
+          "text_entries": 26
+        },
+        {
+          "matched_sources": 0,
+          "packet": "elife-v272",
+          "source_sha256": "063c960dafe75757b3b6483ab88802c9c6cd78fa6e0a347014ac148c283d758f",
+          "text_entries": 5
+        },
+        {
+          "matched_sources": 0,
+          "packet": "opai-v257",
+          "source_sha256": "4e43edf33c695a8a4f757d079089dab85a632c648762554bac9f5cc573bb923b",
+          "text_entries": 60
+        },
+        {
+          "matched_sources": 0,
+          "packet": "f1000-previous",
+          "source_sha256": "f8e0f135cd4aef110b78523dd104f47f44fe24aa4a2cb316c78f5e1a99d4deb5",
+          "text_entries": 18
+        },
+        {
+          "matched_sources": 0,
+          "packet": "publisher-abstract-pilot",
+          "source_sha256": "da3edb1f530f62dae1d0911282dca11419153e1126a3a1a2aa84d9d0a31b6c9a",
+          "text_entries": 4
+        },
+        {
+          "matched_sources": 0,
+          "packet": "wellcome-gates",
+          "source_sha256": "e8633d587e1943f1f9dd7c7dc1d93f7809590fcb82a7956ddaa6621e2499ea69",
+          "text_entries": 42
+        }
+      ],
+      "layout": {
+        "binding": "Keep original Git blob hashes and normalized-document and paragraph offsets. Replay the renderer from the Git blob.",
+        "geometry": "Keep exact five-sentence center edits, length, word distance, and overlap conditions. In legacy TXT normalize the four-space body indent and match the plain Copyright heading. In either format render only simple inline literal names and numeric reference labels. Leave other markup unassessed."
+      },
+      "mechanical_groups": 1,
+      "originals_sha256": "384b3da31e0a2a97808eeccf271e8dcac99b4d303de5d949ce59d8793feba66d",
+      "qualified_groups": 1,
+      "schema": "chipmunk.writing-pep-revision-intake/1",
+      "source_freeze_sha256": "061f155d1ec776fceb2e1da18dbe5e436a42a723e391667406ed58743b4f3ad6",
+      "source_receipt_sha256": "876ba1c6590631eb9efaebae06e67b4865166f2cce99fabb6673c2deedb3e10f",
+      "source_replay_log_sha256": "69961640c704369c576d58048bb9e235d60c99c7228b04ddd8fe788a8c2abf36",
+      "source_replay_verified": true,
+      "work_pool": 200
+    },
+    "prose_diff": {
+      "counts": {
+        "author_header_changed": 18,
+        "identity_overlap_rejected": 2,
+        "missing_explicit_terms_or_authors": 154,
+        "no_anchored_center_replacement": 460,
+        "no_eligible_excerpt": 361,
+        "qualified": 6,
+        "unavailable_blob": 201
+      },
+      "history": [
+        {
+          "matched_sources": 0,
+          "packet": "previous-agreement",
+          "source_sha256": "8db9676dfde8ed023cbe79d92f82d2bea2544b18537c56baed1dbd6e29b0234b",
+          "text_entries": 100
+        },
+        {
+          "matched_sources": 0,
+          "packet": "llmtrace",
+          "source_sha256": "6d4431a85a70916ba7af5c19f062eed6c277183d7b4bb5c6cea42f520e717f48",
+          "text_entries": 38429
+        },
+        {
+          "matched_sources": 0,
+          "packet": "elife-v301",
+          "source_sha256": "46f681020eb07a197875d64bf4ece4efec619b7d1de4c81825d470d9add04f8a",
+          "text_entries": 25
+        },
+        {
+          "matched_sources": 0,
+          "packet": "elife-v286",
+          "source_sha256": "a8676385711bf3d66165a6c3a8add0d8aee7881288302388ca88739e8e30389b",
+          "text_entries": 26
+        },
+        {
+          "matched_sources": 0,
+          "packet": "elife-v272",
+          "source_sha256": "063c960dafe75757b3b6483ab88802c9c6cd78fa6e0a347014ac148c283d758f",
+          "text_entries": 5
+        },
+        {
+          "matched_sources": 0,
+          "packet": "opai-v257",
+          "source_sha256": "4e43edf33c695a8a4f757d079089dab85a632c648762554bac9f5cc573bb923b",
+          "text_entries": 60
+        },
+        {
+          "matched_sources": 0,
+          "packet": "f1000-previous",
+          "source_sha256": "f8e0f135cd4aef110b78523dd104f47f44fe24aa4a2cb316c78f5e1a99d4deb5",
+          "text_entries": 18
+        },
+        {
+          "matched_sources": 0,
+          "packet": "publisher-abstract-pilot",
+          "source_sha256": "da3edb1f530f62dae1d0911282dca11419153e1126a3a1a2aa84d9d0a31b6c9a",
+          "text_entries": 4
+        },
+        {
+          "matched_sources": 0,
+          "packet": "wellcome-gates",
+          "source_sha256": "e8633d587e1943f1f9dd7c7dc1d93f7809590fcb82a7956ddaa6621e2499ea69",
+          "text_entries": 42
+        }
+      ],
+      "mechanical_groups": 6,
+      "originals_sha256": "80f42ce5203b71d04dc9d0a2d2c72e1588dc81e8731eed16a64e4be110c672d9",
+      "plan": {
+        "difference": "Select only an equal-length diff replacement opcode with 1\u20133 sentences and exact equal opcodes on either side. Lexical edit distance between 0.10 and 0.70 at the scored center.",
+        "human_pair": "Within a bounded Git parent-to-child prose diff, locate an interior one-to-one sentence replacement bracketed by exact matched prose in the full source. Five consecutive sentences in each authentic file may differ outside the changed center. Preserve both texts and source anchors as published.",
+        "length": "Require 12\u201340 words per revised center, 6\u201365 words per neighboring sentence, 60\u2013225 words per native five-sentence excerpt, and at least two eligible interior candidate positions.",
+        "scope": "Single-file prospective admission. Use the same 200 PEP histories, exact publisher licenses, source renderer, recorded identity separation and nine retained history packets."
+      },
+      "qualified_groups": 4,
+      "schema": "chipmunk.writing-pep-revision-intake/1",
+      "source_freeze_sha256": "d3671b7734b98cc232a44f400de8ac2c69708da73ac64502c347b9b7f0683343",
+      "source_receipt_sha256": "967357be1360aac7cad0faeb956770890cff54c44d84656edcf732838c9bf848",
+      "source_replay_log_sha256": "b888a9b4150c7f1f908be9cd2644d5e3c5b0de88e6a0b68ae6f77837f193e6d7",
+      "source_replay_verified": true,
+      "work_pool": 200
+    },
+    "prose_diff_extension": {
+      "combined": {
+        "cross_block_identity_overlap": 4,
+        "extension_admitted_to_combined": 1
+      },
+      "counts": {
+        "author_header_changed": 15,
+        "identity_overlap_rejected": 1,
+        "missing_explicit_terms_or_authors": 117,
+        "no_anchored_center_replacement": 584,
+        "no_eligible_excerpt": 497,
+        "qualified": 6,
+        "unavailable_blob": 319
+      },
+      "extension_qualification": 5,
+      "extension_work_pool": 296,
+      "first_qualified_groups": 4,
+      "history": [
+        {
+          "matched_sources": 0,
+          "packet": "previous-agreement",
+          "source_sha256": "8db9676dfde8ed023cbe79d92f82d2bea2544b18537c56baed1dbd6e29b0234b",
+          "text_entries": 100
+        },
+        {
+          "matched_sources": 0,
+          "packet": "llmtrace",
+          "source_sha256": "6d4431a85a70916ba7af5c19f062eed6c277183d7b4bb5c6cea42f520e717f48",
+          "text_entries": 38429
+        },
+        {
+          "matched_sources": 0,
+          "packet": "elife-v301",
+          "source_sha256": "46f681020eb07a197875d64bf4ece4efec619b7d1de4c81825d470d9add04f8a",
+          "text_entries": 25
+        },
+        {
+          "matched_sources": 0,
+          "packet": "elife-v286",
+          "source_sha256": "a8676385711bf3d66165a6c3a8add0d8aee7881288302388ca88739e8e30389b",
+          "text_entries": 26
+        },
+        {
+          "matched_sources": 0,
+          "packet": "elife-v272",
+          "source_sha256": "063c960dafe75757b3b6483ab88802c9c6cd78fa6e0a347014ac148c283d758f",
+          "text_entries": 5
+        },
+        {
+          "matched_sources": 0,
+          "packet": "opai-v257",
+          "source_sha256": "4e43edf33c695a8a4f757d079089dab85a632c648762554bac9f5cc573bb923b",
+          "text_entries": 60
+        },
+        {
+          "matched_sources": 0,
+          "packet": "f1000-previous",
+          "source_sha256": "f8e0f135cd4aef110b78523dd104f47f44fe24aa4a2cb316c78f5e1a99d4deb5",
+          "text_entries": 18
+        },
+        {
+          "matched_sources": 0,
+          "packet": "publisher-abstract-pilot",
+          "source_sha256": "da3edb1f530f62dae1d0911282dca11419153e1126a3a1a2aa84d9d0a31b6c9a",
+          "text_entries": 4
+        },
+        {
+          "matched_sources": 0,
+          "packet": "wellcome-gates",
+          "source_sha256": "e8633d587e1943f1f9dd7c7dc1d93f7809590fcb82a7956ddaa6621e2499ea69",
+          "text_entries": 42
+        }
+      ],
+      "mechanical_groups": 6,
+      "method": {
+        "combination": "Keep earlier admitted works first. Omit repeated documented authors, recorded editors, and normalized 12-token overlap across the first and extension blocks.",
+        "scope": "All remaining work IDs after the first 200 SHA-256-ordered dated PEP histories. Preserve the same prose-diff and source-rights conditions."
+      },
+      "originals_sha256": "e1c793216ed6ec9b83279646a09a54e063abf093db478d4a7f58590b45875506",
+      "plan": {
+        "difference": "Select only an equal-length diff replacement opcode with 1\u20133 sentences and exact equal opcodes on either side. Lexical edit distance between 0.10 and 0.70 at the scored center.",
+        "human_pair": "Within a bounded Git parent-to-child prose diff, locate an interior one-to-one sentence replacement bracketed by exact matched prose in the full source. Five consecutive sentences in each authentic file may differ outside the changed center. Preserve both texts and source anchors as published.",
+        "length": "Require 12\u201340 words per revised center, 6\u201365 words per neighboring sentence, 60\u2013225 words per native five-sentence excerpt, and at least two eligible interior candidate positions.",
+        "scope": "Single-file prospective admission. Use the same 200 PEP histories, exact publisher licenses, source renderer, recorded identity separation and nine retained history packets."
+      },
+      "qualified_groups": 5,
+      "schema": "chipmunk.writing-pep-revision-intake/1",
+      "source_freeze_sha256": "434a5f2f47a4b3f3be32e7238b18878ea3e1ceb5c463ba626defe829f3b1bb10",
+      "source_receipt_sha256": "5521c6b3481edc8ef1f2ddb6d1a5fecd84aba24474c2631f0064995c38babd7a",
+      "source_replay_log_sha256": "b99721715158244ce129746608247da87f786371391fb5dc8497d3254fe2b563",
+      "source_replay_verified": true,
+      "work_pool": 296
+    }
+  },
+  "source_revisions": [
+    {
+      "earlier_date": "2018-11-03T01:48:43+00:00",
+      "earlier_sha256": "7cbe7a5113595622265432454049cdff912f7259c8679abc25224fd827322394",
+      "earlier_version_url": "https://github.com/python/peps/blob/de61996457799c38ca86447af67571446398c038/pep-8015.rst",
+      "later_date": "2018-11-03T03:27:21+00:00",
+      "later_sha256": "7f8183f9d3e9fefb3c6f0cfe0f093c489eb503a3fd3d7e707d88d76dfe737d30",
+      "later_version_url": "https://github.com/python/peps/blob/19e6ed2b9cadbabd6226fe1c5166cf0e0b186b21/pep-8015.rst",
+      "license": "Public-domain or CC0 statement in both exact Git blobs",
+      "work": "pep-8015"
+    },
+    {
+      "earlier_date": "2019-10-04T17:15:55+00:00",
+      "earlier_sha256": "6fe0b3310fad56f3191d50ce353f3cca9ff5ebf0fe4923a1b3554ef9a382461f",
+      "earlier_version_url": "https://github.com/python/peps/blob/16da804bc6d4753e5faedf1972098c197e8727d0/pep-0605.rst",
+      "later_date": "2019-10-05T14:04:21+00:00",
+      "later_sha256": "4177856ad2558b844701cf4ec0f9b95d31ad0f452d8c730af2e51d79d2690266",
+      "later_version_url": "https://github.com/python/peps/blob/6a05714aefe3bb244a3b2507382e481d375f7f0f/pep-0605.rst",
+      "license": "Public-domain or CC0 statement in both exact Git blobs",
+      "work": "pep-0605"
+    },
+    {
+      "earlier_date": "2018-09-14T18:20:55+00:00",
+      "earlier_sha256": "084e3d76ed67894dfed2f805827c34a87086238d5cf33de0e2089db4e9d9a2a6",
+      "earlier_version_url": "https://github.com/python/peps/blob/495a6be1300ea99c0ab81b654491948ffb337e0e/pep-8002.rst",
+      "later_date": "2018-09-14T20:33:01+00:00",
+      "later_sha256": "4e7e431b3d80a6eccc12a2f0b781d68e91127a273b9bdfd75ec40c363bf436b8",
+      "later_version_url": "https://github.com/python/peps/blob/8ccc9a2887ae6d53dffd551d120abc52b3bab584/pep-8002.rst",
+      "license": "Public-domain or CC0 statement in both exact Git blobs",
+      "work": "pep-8002"
+    },
+    {
+      "earlier_date": "2017-11-25T16:03:16+00:00",
+      "earlier_sha256": "499fc80a7b2d36ceb674f7c192979b579baa07b43ff9ac8089c0556d07033529",
+      "earlier_version_url": "https://github.com/python/peps/blob/039d3b7132b7e5e452e720972ac86728760cdb06/pep-0557.rst",
+      "later_date": "2017-11-25T20:41:52+00:00",
+      "later_sha256": "8b13b2e5a7b9c4e4ea24db75ab84ffcbc69fc578d461d3e2254812463aff1a63",
+      "later_version_url": "https://github.com/python/peps/blob/17cc5bc3f75056d7f10c53a0228daf4cd5b9899e/pep-0557.rst",
+      "license": "Public-domain or CC0 statement in both exact Git blobs",
+      "work": "pep-0557"
+    },
+    {
+      "earlier_date": "2015-02-09T09:03:43+00:00",
+      "earlier_sha256": "03ec5a2e6cb9465b7816106bb329a15c11115fe924232696cf87342c8f4ffef4",
+      "earlier_version_url": "https://github.com/python/peps/blob/b6fa3e2e91baf976bf16e256816f2e6db983d92c/pep-0485.txt",
+      "later_date": "2015-02-11T12:13:44+00:00",
+      "later_sha256": "ca9839749a5fdede458fd17ceb155fc4fb490a41c0b8484b642e34da4d0455f3",
+      "later_version_url": "https://github.com/python/peps/blob/2ca23b9a32ddbf16d6b4645215836dd71daf8df6/pep-0485.txt",
+      "license": "Public-domain or CC0 statement in both exact Git blobs",
+      "work": "pep-0485"
+    }
+  ],
+  "trial_commitments": {
+    "aggregate.json": "135ca4898400bbf87b8dc667a08c4cc1bebf8ff47a4e5673eeb5e11f64f91c38",
+    "audit.json": "6b768ed7dfd1828bc81ec6f3147e35f0ae7d8454bc88a54cb4e5ec1eb993a571",
+    "freeze.json": "697c2c4f7826bce967ecb7a08c87e83a6880522576298af2a15ff9e62c5b228d",
+    "holdout-freeze.json": "78a6ff5190c8a5182d9b794ae41196bbde7a59fd039aee4c8d4b4a0e240c5a31",
+    "operating-points.json": "a7d4ab9eb612b8d80cca92965dec671b47ace4ce742cc0aa9ac4f54db78360ee"
+  },
+  "uncalibrated_unique_top_rank_replacement": {
+    "center_deletion": 4,
+    "matched_context": 5
+  }
+}

@@ -1,0 +1,150 @@
+{
+  "initial_study_revision": "7ad76bcb806733542a19439509f69c494c25d66f",
+  "spec": {
+    "schema": "chipmunk.video-reference-h264-grid-reserve/1",
+    "cohort": "All 16 ready GRID reserve clips across eight known source components, separate from initial pilot.",
+    "delivery": "Independent H.264 yuv420p MP4. Earlier CRF23 medium fixed GOP48. Delivery CRF28/33 veryfast.",
+    "authorship": "Two ordinary authored edits in a fixed lower-central rectangle. No synthetic render or authorship labels.",
+    "edit": {
+      "frames": [
+        27,
+        47
+      ],
+      "xyxy": [
+        136,
+        157,
+        224,
+        203
+      ],
+      "tone_plus": 46,
+      "blur_sigma": 2.5,
+      "global_tone_plus": 12
+    },
+    "point": 2.328647418186583,
+    "gate": {
+      "tone_joint_min": 14,
+      "tone_group_min": 6,
+      "neutral_flags_max": 1,
+      "tandem_flags_max": 0,
+      "unrelated_flags_max": 0,
+      "coverage_min": 0.8
+    }
+  },
+  "runtime": {
+    "elapsed_s": 70.05976850000297,
+    "peak_rss_bytes": 357744640,
+    "freeze_sha256": "6b893cd9647a3728bcd70f7849c795923a6b8e42fd8d0a93730b1b0e8525e46f",
+    "held_sha256": "324f3e289882f459501e9560d882b30f1b0f9c1182ad3119f09b6874f5f3ea79"
+  },
+  "counts": {
+    "neutral_crf28": {
+      "views": 16,
+      "flag": 0,
+      "assessed": 16,
+      "exact_correct": 0,
+      "time_correct": 0,
+      "spatial_correct": 0,
+      "joint_correct": 0
+    },
+    "neutral_crf33": {
+      "views": 16,
+      "flag": 0,
+      "assessed": 16,
+      "exact_correct": 0,
+      "time_correct": 0,
+      "spatial_correct": 0,
+      "joint_correct": 0
+    },
+    "global_tone": {
+      "views": 16,
+      "flag": 0,
+      "assessed": 16,
+      "exact_correct": 0,
+      "time_correct": 0,
+      "spatial_correct": 0,
+      "joint_correct": 0
+    },
+    "tandem_crf28": {
+      "views": 16,
+      "flag": 0,
+      "assessed": 16,
+      "exact_correct": 0,
+      "time_correct": 0,
+      "spatial_correct": 0,
+      "joint_correct": 0
+    },
+    "tandem_crf33": {
+      "views": 16,
+      "flag": 0,
+      "assessed": 16,
+      "exact_correct": 0,
+      "time_correct": 0,
+      "spatial_correct": 0,
+      "joint_correct": 0
+    },
+    "unrelated": {
+      "views": 16,
+      "flag": 0,
+      "assessed": 0,
+      "exact_correct": 0,
+      "time_correct": 0,
+      "spatial_correct": 0,
+      "joint_correct": 0
+    },
+    "local_tone": {
+      "views": 16,
+      "flag": 16,
+      "assessed": 16,
+      "exact_correct": 0,
+      "time_correct": 16,
+      "spatial_correct": 16,
+      "joint_correct": 16
+    },
+    "local_blur": {
+      "views": 16,
+      "flag": 15,
+      "assessed": 16,
+      "exact_correct": 0,
+      "time_correct": 15,
+      "spatial_correct": 15,
+      "joint_correct": 15
+    }
+  },
+  "useful_tone_groups": 8,
+  "criteria": {
+    "tone_locations": true,
+    "tone_groups": true,
+    "coverage": true,
+    "neutral": true,
+    "tandem": true,
+    "unrelated": true
+  },
+  "advances": true,
+  "descriptive_exact_edit_bounds": {
+    "matched": 5,
+    "authored_edits": 32
+  },
+  "independent_replay": {
+    "status": "verified",
+    "matched_clock_pairs": 128,
+    "native_originals": 16,
+    "before_during_after_crops": 186,
+    "authored_spatial_counts": 31,
+    "aggregate_sha256": "bcce70d04c52dd6db85556724604f2f16665c87966536a39b3b318ba9cbfb4d7"
+  },
+  "scope": {
+    "earlier_codec": "h264",
+    "submitted_codec": "h264",
+    "pixel_format": "yuv420p",
+    "width": 360,
+    "height": 288,
+    "frames_per_second": 25,
+    "source_recordings": 16,
+    "source_groups": 8,
+    "source_license": "CC-BY-4.0",
+    "prior_exposure": "Native pictures extracted before the study. No previous paired test on this roster.",
+    "authorship_inference": false,
+    "initial_joint_gate_passed": false,
+    "serving_change_in_study": false
+  }
+}

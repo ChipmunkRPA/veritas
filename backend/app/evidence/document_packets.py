@@ -446,7 +446,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
             groups.setdefault((a, b), []).append(output_window)
     candidates = [key for key, values in groups.items() if any(document_scope.supports_inspection(w) for w in values)]
     matched = sorted(key for key in candidates if document_matched_context.packet_record(groups[key]) is not None)
-    reply_review = bool(checkpoint_review and checkpoint_review["schema"] == document_scope.CHECKPOINT_AGREEMENT_EMAIL_SCHEMA)
+    reply_review = bool(checkpoint_review and checkpoint_review["schema"] in document_scope.CHECKPOINT_AGREEMENT_EMAIL_PARAGRAPHS)
     priority = (sorted({(row["start"], row["end"]) for row in checkpoint_review["ranges"]}.intersection(candidates))
                 if reply_review else matched)
     # Ratios and classifier outputs are not commensurate. Reserve half the

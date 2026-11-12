@@ -47,6 +47,9 @@ and reports separate outcomes for authentic scene cuts.
 The [compression repeat study](video-face-compression-stability-2026-11-12.md)
 rebuilds single and tandem encodes, checks exact face crops, and reproduces
 both appearance measurements at the original time interval.
+The [motion-aligned mouth detail study](video-mouth-temporal-detail-2026-11-12.md)
+checks native mouth crops and PCM intervals. It measures both missed
+source-compatible redraws and flags on ordinary video.
 
 The [earlier-audio comparison](audio-reference-comparison-2026-11-11.md#replay-without-the-app)
 replays changed sample ranges, difference waveforms, and playable excerpts
@@ -60,6 +63,9 @@ adds dated before-and-after revisions and separate scientific publisher controls
 The [email reply layout replay](writing-reply-paragraph-transfer-2026-11-12.md#replay)
 reopens the raw MIME part, verifies the measured text against native body
 positions, and records when reformatting changes sentence segmentation.
+The [exact per-email replay](writing-reply-native-batches-2026-11-12.md)
+repeats the second check in source order and follows the resulting locations
+through the local paid worker, public exports, and source-bound evidence bundle.
 
 The [audio supplement example](#review-an-audio-supplement-by-acoustic-condition)
 uses authored scores to show how an acoustic routing error can add a genuine
@@ -80,6 +86,8 @@ and matched loud competing speech.
 The [long-room voice confirmation](audio-spectra-long-room-holdout-2026-11-12.md)
 checks native waveform bindings, the exact shared and exclusive window samples,
 and held performance at fixed and equal false-alarm counts.
+The [enrolled-speaker extraction study](audio-enrolled-target-transfer-2026-11-12.md)
+checks how much of each known insert remains after suppressing competing speech.
 The [controlled room-speech attenuation study](audio-room-reference-transfer-2026-11-12.md)
 reconstructs each changed waveform independently and checks whether improved
 foreground reconstruction recovers short synthetic inserts.

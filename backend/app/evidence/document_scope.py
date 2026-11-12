@@ -21,6 +21,12 @@ PASSAGE_COVERAGE_STATES = ("no_local_record", "context_only", "response_range")
 CHECKPOINT_AGREEMENT_KEY = "writing_second_check"
 CHECKPOINT_AGREEMENT_SCHEMA = "document-writing-second-check/1"
 CHECKPOINT_AGREEMENT_EMAIL_SCHEMA = "document-writing-second-check/2"
+CHECKPOINT_AGREEMENT_EMAIL_LAYOUT_SCHEMA = "document-writing-second-check/3"
+CHECKPOINT_AGREEMENT_EMAIL_PARAGRAPHS = {
+    CHECKPOINT_AGREEMENT_EMAIL_SCHEMA: frozenset({1, 4}),
+    CHECKPOINT_AGREEMENT_EMAIL_LAYOUT_SCHEMA: frozenset({2, 3, 5, 6}),
+}
+REPLY_BODY_PARAGRAPHS = frozenset().union(*CHECKPOINT_AGREEMENT_EMAIL_PARAGRAPHS.values())
 CHECKPOINT_AGREEMENT_MAX = 6
 CHECKPOINT_AGREEMENT_LABELS = {
     "corroborated": "Both checks gave an AI-like response",
@@ -57,7 +63,7 @@ def email_agreement_body_spans(mapping: list[dict], email: dict, size: int) -> l
         else:
             return None
         previous = end
-    return body if excluded and len(body) in {1, 4} and previous == size else None
+    return body if excluded and len(body) in REPLY_BODY_PARAGRAPHS and previous == size else None
 
 
 def checkpoint_window_in_scope(window: dict, body_spans: list[dict] | None) -> bool:
@@ -76,14 +82,17 @@ def validate_checkpoint_agreement(
     if record is not None:
         fields = {"schema", "ranges", "authorship_confidence_contribution"}
         size = document["source"]["chars"]
-        if record.get("schema") == CHECKPOINT_AGREEMENT_EMAIL_SCHEMA:
+        schema = record.get("schema")
+        if not isinstance(schema, str):
+            raise ValueError("Unknown second writing check schema")
+        if reply_paragraphs := CHECKPOINT_AGREEMENT_EMAIL_PARAGRAPHS.get(schema):
             fields.add("body_spans")
             body_spans = record.get("body_spans")
             email = coverage.get("email")
             if (document["source"].get("method") != "email" or not isinstance(email, dict)
                     or email.get("body_content_type") != "text/plain"
                     or not isinstance(email.get("body_part"), str) or not email["body_part"]
-                    or not isinstance(body_spans, list) or len(body_spans) not in {1, 4}):
+                    or not isinstance(body_spans, list) or len(body_spans) not in reply_paragraphs):
                 raise ValueError("Invalid second-check email body scope")
             boundaries = [check_range(block, size) for block in body_spans]
             if (any(set(block) != {"start", "end"} for block in body_spans) or boundaries[0][0] != 0
@@ -91,7 +100,7 @@ def validate_checkpoint_agreement(
                     or boundaries[-1][1] + 2 >= size
                     or mapping is not None and email_agreement_body_spans(mapping, email, size) != body_spans):
                 raise ValueError("Second-check email scope differs from the mapped reply body")
-        elif record.get("schema") != CHECKPOINT_AGREEMENT_SCHEMA:
+        elif schema != CHECKPOINT_AGREEMENT_SCHEMA:
             raise ValueError("Unknown second writing check schema")
         ranges = record["ranges"]
         if (set(record) != fields or type(record["authorship_confidence_contribution"]) is not int

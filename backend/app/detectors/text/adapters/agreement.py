@@ -84,7 +84,7 @@ def candidates(decoded: dict, primary: dict) -> list[dict] | None:
         text = text[:end]
         paragraphs = len(body_spans)
         sentences = sum(sentence["end"] <= end for sentence in decoded["sentences"])
-    if (paragraphs not in {1, 4} or not 68 <= len(text.split(None, 420)) <= 420
+    if ((body_spans is None and paragraphs not in {1, 4}) or not 68 <= len(text.split(None, 420)) <= 420
             or paragraphs == 1 and sentences != 4):
         return None
     language = _ocr_language(text)
@@ -135,7 +135,10 @@ def record(ctx, detected: dict, decoded: dict) -> None:
              "authorship_confidence_contribution": 0}
     document = {"coverage": {KEY: value}, "source": {"chars": len(text)}}
     if (body_spans := _email_reply_body(decoded)) is not None:
-        value.update(schema=document_scope.CHECKPOINT_AGREEMENT_EMAIL_SCHEMA, body_spans=body_spans)
+        legacy = document_scope.CHECKPOINT_AGREEMENT_EMAIL_SCHEMA
+        schema = (legacy if len(body_spans) in document_scope.CHECKPOINT_AGREEMENT_EMAIL_PARAGRAPHS[legacy]
+                  else document_scope.CHECKPOINT_AGREEMENT_EMAIL_LAYOUT_SCHEMA)
+        value.update(schema=schema, body_spans=body_spans)
         document["source"]["method"] = "email"
         document["coverage"]["email"] = decoded["meta"]["email"]
     mapping = decoded.get("source_map") if body_spans is not None else None

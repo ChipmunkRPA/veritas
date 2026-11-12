@@ -59,10 +59,11 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.getByText('Quoted 😀 <script>text</script>')).toBeTruthy()
   })
 
-  it('labels the second check on an email reply as body-only', () => {
+  it.each(['document-writing-second-check/2', 'document-writing-second-check/3'] as const)(
+    'labels the second check on an email reply as body-only for %s', (schema) => {
     const set = structuredClone(document)
     set.coverage!.writing_second_check = {
-      schema: 'document-writing-second-check/2', authorship_confidence_contribution: 0,
+      schema, authorship_confidence_contribution: 0,
       body_spans: [{ start: 0, end: 30 }], ranges: [],
     }
     show(set)

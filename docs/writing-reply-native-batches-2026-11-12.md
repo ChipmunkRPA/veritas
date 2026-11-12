@@ -19,6 +19,12 @@ The follow-up recomputes the second check for each original and reformatted repl
 
 There were 33 distinct ordered requests, including the empty request, and 75 second-check context inputs. The CPU stage made 35 model forwards. The independent reader reopened every delivered email and mapped the precise source contexts, score bindings, and outcome decisions. All 24 HTML-only and interleaved-quotation controls remained excluded. The 308 deliveries reuse 100 known-origin excerpts across 28 source groups. These results measure layout transfer. They do not estimate accuracy on independent workplace mail or authorship reliability beyond the measured passages.
 
+## Local app verification
+
+The same passage check now covers the four additional layouts in supported replies when the second writing check is enabled. It inspects up to six primary-positive contexts wholly inside the contiguous reply body. Each context stays within one paragraph. The scope excludes signatures, quoted messages, HTML-only replies, and replies with interleaved quotations. This evidence contributes zero to the overall authorship confidence.
+
+Seven local analyses exercised the paid worker with simulated payment. Four known-generated layouts reproduced two corroborated passages each. The known-human control reproduced its previously observed corroborated passage. Both excluded controls stayed outside the check. The verified MIME offsets matched the PDF, API, and JSON. Chrome opened both passage links in the three-paragraph report. The signed bundle verified against the original email, rejected a different original and a changed scope, and remained compatible with an archived version 2 bundle. [Local verification receipt](evaluation-panels/writing-reply-layout-app-2026-11-12.json)
+
 ## Replay
 
 Use the retained evaluation source root as `panels` and the earlier completed layout run as `prior`. The two checkpoint directories contain the exact pinned assets. Set `initial` and `native` to new local directories.

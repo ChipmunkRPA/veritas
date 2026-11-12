@@ -87,6 +87,49 @@ def test_reply_scope_replays_the_exact_body_and_rejects_quoted_context():
         document_scope.validate_checkpoint_agreement(altered_range)
 
 
+@pytest.mark.parametrize("paragraphs", [2, 3, 5, 6])
+def test_new_reply_layout_keeps_exact_windows_and_rejects_legacy_scope(monkeypatch, paragraphs):
+    paragraph = (
+        "We compared the recorded version of the document against the file saved with our earlier review, "
+        "and the next review will include the dates, the names of the reviewers, and every comment received since the meeting."
+    )
+    blocks = [paragraph] * paragraphs
+    text = "\n\n".join([*blocks, "> A previous message."])
+    email = {"body_content_type": "text/plain", "body_part": "1.1"}
+    mapping = []
+    start = 0
+    for index, block in enumerate([*blocks, "> A previous message."]):
+        end = start + len(block)
+        mapping.append({"start": start, "end": end, "kind": "email", "mime_part": "1.1",
+                        "quote_role": "body" if index < paragraphs else "quoted",
+                        "source_ranges": [[start, end, start, end]]})
+        start = end + 2
+    spans = [{key: row[key] for key in ("start", "end")} for row in mapping]
+    windows = []
+    for i, pair in enumerate((spans[:2], spans[-2:])):
+        content = " ".join(text[s["start"]:s["end"]] for s in pair)
+        windows.append({"focus": pair[0], "spans": pair, "input_sha256": text_hash(content), "score": .8,
+                        "token_coverage": {"tokens": 30, "token_windows": 1}, "unit_ref": f"sentence:{i}"})
+    primary = {"detector_id": document_matched_context.DETECTOR, "status": "ok", "version": "1.0.0",
+               "model_revisions": {document_matched_context.MODEL: document_matched_context.REVISION},
+               "details": {"text_evidence": {"windows": windows}}}
+    decoded = {"meta": {"method": "email", "email": email}, "paragraphs": list(spans),
+               "sentences": list(spans), "text": text, "source_map": mapping}
+    monkeypatch.setattr("app.detectors.text.extract._ocr_language", lambda _: {"code": "en", "status": "supported"})
+    monkeypatch.setattr(agreement, "_review", lambda *_: {})
+    agreement.record(context(Deadline(60)), {"detectors": [primary]}, decoded)
+    result = primary["details"]["text_evidence"][agreement.KEY]
+    assert result["schema"] == document_scope.CHECKPOINT_AGREEMENT_EMAIL_LAYOUT_SCHEMA
+    assert result["body_spans"] == spans[:paragraphs]
+    assert [row["input_sha256"] for row in result["ranges"]] == [windows[0]["input_sha256"]]
+    assert result["authorship_confidence_contribution"] == 0
+    document = {"source": {"chars": len(text), "method": "email"}, "coverage": {"email": email, agreement.KEY: result}}
+    document_scope.validate_checkpoint_agreement(document, text, result={"signals": [primary]}, mapping=mapping)
+    result["schema"] = document_scope.CHECKPOINT_AGREEMENT_EMAIL_SCHEMA
+    with pytest.raises(ValueError, match="Invalid second-check email body scope"):
+        document_scope.validate_checkpoint_agreement(document, text, mapping=mapping)
+
+
 def test_review_timeout_preserves_a_parent_budget_and_primary_response(monkeypatch):
     text, window, evidence, detected = source()
     monkeypatch.setattr(agreement, "candidates", lambda *_: [window])

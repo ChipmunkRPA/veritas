@@ -578,7 +578,7 @@ def _writing_agreement_view(coverage: dict) -> dict | None:
     record = coverage.get(document_scope.CHECKPOINT_AGREEMENT_KEY)
     if record is None:
         return None
-    return {"email_reply_body": record["schema"] == document_scope.CHECKPOINT_AGREEMENT_EMAIL_SCHEMA,
+    return {"email_reply_body": record["schema"] in document_scope.CHECKPOINT_AGREEMENT_EMAIL_PARAGRAPHS,
             "ranges": [{**row, "label": document_scope.CHECKPOINT_AGREEMENT_LABELS[row["state"]]} for row in record["ranges"]]}
 
 

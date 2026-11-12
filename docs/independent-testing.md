@@ -355,6 +355,10 @@ fixed sentence ranker and its combination with the current check.
 The [multi-paragraph writing transfer](writing-multiparagraph-localization-transfer-2026-11-12.md)
 replays native article passages and constructed email equivalents, including
 unrelated paragraphs and quoted text.
+The [independent sentence comparison](writing-multiblock-independent-2026-11-12.md)
+checks all eligible interior sentences in multi-paragraph text. Its reader
+replays exact edit coverage, fitted comparisons, and false alarms on original
+and ordinary revised passages.
 The [public-archive writing comparison](writing-archive-source-evidence-2026-11-12.md)
 replays exact archive matching and source offsets, including a publisher
 correction, missing-source controls, and quoted text that must be ignored.

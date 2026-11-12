@@ -350,6 +350,8 @@ def _project(value: Any, *, field: str, source_text: bool, candidates: tuple[str
                 out[key] = 'Analysis check'
             elif key == 'artifacts' and isinstance(item, list):
                 out[key] = [artifact_alias(part) if isinstance(part, str) else walk(part) for part in item]
+            elif field == 'segments' and key == 'sources' and isinstance(item, list) and not is_source:
+                out[key] = [alias_signal(part) if isinstance(part, str) else walk(part) for part in item]
             elif key == 'scores' and field == 'faces' and isinstance(item, dict):
                 out[key] = {'check.' + hashlib.sha256(str(k).encode()).hexdigest()[:16]: v for k, v in item.items()}
             elif key == 'scores' and field in {'finding_sentence', 'source_sentence'} and isinstance(item, dict):

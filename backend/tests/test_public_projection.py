@@ -51,6 +51,18 @@ def test_generated_validation_disclosures_hide_names_without_rewriting_source_te
     assert output['text'] == payload['text'] and output['metadata'] == payload['metadata']
 
 
+def test_segment_source_references_use_the_same_public_ids_as_the_signals():
+    private_id = 'aud.pella_v2:global'
+    segment = {'start_s': 2, 'end_s': 6, 'sources': [private_id]}
+    signal = {'id': private_id, 'detector_id': 'aud.pella_v2', 'segments': [segment]}
+    payload = {'items': [signal], 'metadata': {'segments': [segment]}}
+    shown, = project(payload)['items']
+    assert shown['id'] == alias_id(private_id) and shown['id'] != private_id
+    assert shown['segments'] == [{'start_s': 2, 'end_s': 6, 'sources': [shown['id']]}]
+    assert project(payload)['metadata'] == payload['metadata']
+    assert segment['sources'] == [private_id]
+
+
 def test_new_local_inspection_has_explicit_validation_disclosure():
     from app.engine.fusion.disclosures import for_result
 

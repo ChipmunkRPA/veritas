@@ -18,8 +18,9 @@ from test_image_packets import packet_fixture as packet_fixture
 from app.core.canonical import canonical_hash, canonical_json
 from app.core.config import settings
 from app.detectors.image import copy_move, copy_similarity
-from app.evidence import image_packets_v5, image_packets_v7, service
+from app.evidence import image_jpeg_copy_blocks_source, image_packets_v5, image_packets_v7, service
 from app.evidence.image_copy_similarity_binding import V7, V8, V9, V10, V11, VERSION, supported_size
+from app.evidence.image_embedded_pair_binding import base_document
 from app.reports import engine, image_evidence, snapshot, verify_image_source
 from app.reports.specimens import specimen
 from app.storage.artefacts import register_artefact
@@ -357,6 +358,62 @@ def test_affine_pair_api_and_pdf_preserve_the_two_native_crops_and_binary_masks(
                 if pixmap.n == 1:
                     images.add(pymupdf.Pixmap(pymupdf.csRGB, pixmap).samples)
         assert expected_rgb <= images
+
+
+@pytest.mark.parametrize("wrapped", [False, True])
+def test_jpeg_copy_evidence_proves_equal_encoded_blocks_and_rejects_altered_coordinates(evidence_http, monkeypatch, wrapped):
+    f = evidence_http
+    aid = "image-unprepared"
+    monkeypatch.setattr(settings, "environment", "dev")
+    monkeypatch.setattr(settings, "image_jpeg_block_copy_review", True)
+    monkeypatch.setattr(settings, "image_affine_copy_review", wrapped)
+    monkeypatch.setattr(settings, "image_embedded_pair_review", wrapped)
+    rng = np.random.default_rng(822)
+    pixels = rng.integers(0, 256, (512, 768, 3), dtype=np.uint8)
+    pixels[41:89, 49:97] = pixels[233:281, 241:289]
+    raw = io.BytesIO()
+    Image.fromarray(pixels).save(raw, "JPEG", quality=75, subsampling=2)
+    original = raw.getvalue()
+    with Image.open(io.BytesIO(original)) as source:
+        rgb = source.convert("RGB")
+    assert image_packets_v7.selected_translation_pairs(np.asarray(rgb)) == ("no_pair", [], None)
+    with Session(f.engine) as db:
+        analysis = db.get(Analysis, aid)
+        stored = f.store.put_bytes(original)
+        analysis.sha256, analysis.size_bytes = stored.sha256, stored.size_bytes
+        result = copy.deepcopy(specimen("image", "standard").result)
+        result.update(exhibits=[], signals=[], findings=[])
+        result["input"]["sha256"] = stored.sha256
+        analysis.result_hash = canonical_hash(result)
+        f.store.put_bytes(canonical_json(result))
+        evidence = service.persist_packet_set(db, analysis, f.store, result=result)
+        assert evidence["version"] == ("image-evidence-15" if wrapped else "image-evidence-16")
+        base = base_document(evidence)
+        assert base["version"] == ("image-evidence-17" if wrapped else "image-evidence-16")
+        assert evidence["original_result_hash"] == analysis.result_hash
+        check = evidence["copy_translation"]
+        assert check["basis"] == "jpeg_brightness_blocks" and check["jpeg_block_review"] == "supported_pair"
+        assert check["authorship_confidence_contribution"] == 0
+        pair, = check["pairs"]
+        assert image_jpeg_copy_blocks_source.verify(original, [pair]) == 25
+        wrong = copy.deepcopy(base)
+        wrong["copy_translation"]["pairs"][0]["regions"]["area_a"]["x"] += 1
+        wrong["sha256"] = image_packets_v5.packet_hash(wrong)
+        with pytest.raises(image_packets_v7.PacketIntegrityError, match="encoded block grid"):
+            image_packets_v7.validate_packet_set(wrong, **image_packets_v5._binding(analysis))
+        wrong_pair = copy.deepcopy(pair)
+        wrong_pair["regions"]["area_b"]["x"] += 8
+        with pytest.raises(ValueError, match="different encoded brightness blocks"):
+            image_jpeg_copy_blocks_source.verify(original, [wrong_pair])
+        db.commit()
+    monkeypatch.setattr(settings, "image_jpeg_block_copy_review", False)
+    reply = f.client.get(f"/api/v2/analyses/{aid}/evidence-packets", headers=f.viewer)
+    assert reply.status_code == 200 and reply.json() == evidence
+    for role, asset in pair["artifacts"].items():
+        response = f.client.get(asset["url"], headers=f.viewer)
+        assert response.status_code == 200
+        with Image.open(io.BytesIO(response.content)) as plate:
+            assert plate.tobytes() == rgb.crop(image_packets_v7.box_bounds(pair["regions"][role], *rgb.size)).tobytes()
 
 
 @pytest.mark.parametrize("large", [False, True])

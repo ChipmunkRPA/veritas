@@ -7,6 +7,7 @@ import json
 import math
 from typing import Any
 
+import cv2
 import numpy as np
 from PIL import Image
 from sqlalchemy.orm import Session
@@ -19,6 +20,10 @@ from app.evidence import image_packets_v5 as prior
 from app.evidence.image_copy_similarity_binding import (
     AFFINE_VERSIONS,
     CREDENTIAL_VERSIONS,
+    JPEG_BLOCK_AFFINE_VERSION,
+    JPEG_BLOCK_BASIS,
+    JPEG_BLOCK_VERSION,
+    JPEG_BLOCK_VERSIONS,
     NOTE,
     PAIR_LIMIT,
     REFLECTION_VERSIONS,
@@ -47,7 +52,8 @@ from app.storage.db import Analysis, Artefact
 from app.storage.objects import ObjectStore
 
 CREATOR = "image-evidence-packets/10"
-_CREATORS = {affine.LARGE_VERSION: "image-evidence-packets/12", affine.VERSION: "image-evidence-packets/11",
+_CREATORS = {JPEG_BLOCK_AFFINE_VERSION: "image-evidence-packets/15", JPEG_BLOCK_VERSION: "image-evidence-packets/14",
+             affine.LARGE_VERSION: "image-evidence-packets/12", affine.VERSION: "image-evidence-packets/11",
              VERSION: CREATOR, V11: "image-evidence-packets/9",
              V10: "image-evidence-packets/8", V9: "image-evidence-packets/7",
              V8: "image-evidence-packets/6", V7: "image-evidence-packets/5"}
@@ -57,7 +63,11 @@ PacketIntegrityError = prior.PacketIntegrityError
 
 
 def _active_version() -> str:
-    return affine.LARGE_VERSION if settings.environment == "dev" and settings.image_affine_copy_review else VERSION
+    if settings.environment != "dev":
+        return VERSION
+    if settings.image_jpeg_block_copy_review:
+        return JPEG_BLOCK_AFFINE_VERSION if settings.image_affine_copy_review else JPEG_BLOCK_VERSION
+    return affine.LARGE_VERSION if settings.image_affine_copy_review else VERSION
 
 
 def current_set_id(analysis: Analysis) -> str:
@@ -129,6 +139,14 @@ def validate_assets(document: dict, store: ObjectStore) -> None:
                         or not all(edge.any() for edge in (pixels[0], pixels[-1], pixels[:, 0], pixels[:, -1]))
                         or int(np.count_nonzero(pixels)) != pair["selected_pixels"][role]):
                     raise PacketIntegrityError("Geometric copy mask differs from its recorded geometry")
+    translation = document.get("copy_translation") or {}
+    if translation.get("basis") == JPEG_BLOCK_BASIS:
+        from app.evidence.image_jpeg_copy_blocks_source import verify
+
+        try:
+            verify(legacy._verified(store, document["source"]["sha256"]), translation["pairs"])
+        except (OSError, ValueError) as error:
+            raise PacketIntegrityError(str(error)) from error
 
 
 def _crop_box(box: copy_move.Box, width: int, height: int) -> tuple[int, int, int, int]:
@@ -186,7 +204,7 @@ def _copy_record(db: Session, analysis: Analysis, store: ObjectStore, document: 
 def _affine_record(db: Session, analysis: Analysis, store: ObjectStore, document: dict,
                    source: Image.Image | None, *, skip: bool) -> dict:
     version = document["version"]
-    expanded = version == affine.LARGE_VERSION
+    expanded = version in affine.LARGE_VERSIONS
     record = {"schema": affine.LARGE_SCHEMA if expanded else affine.SCHEMA,
               "source_sha256": analysis.sha256, "status": "unsupported_geometry",
               "pairs": [], "authorship_confidence_contribution": 0, "interpretation": affine.NOTE}
@@ -260,6 +278,7 @@ def build_packet_set(
     size = document["source"]["width"], document["source"]["height"]
     status, boxes = "unsupported_geometry", []
     translation_status, translations, basis, source = "unsupported_geometry", [], None, None
+    jpeg_status = None
     skipped = result_skip(result) is not None
     if skipped:
         status = translation_status = SKIPPED_CREDENTIALS
@@ -269,10 +288,23 @@ def build_packet_set(
         status, boxes = copy_similarity.analyse(rgb)
         if supported_size(*size, version=V8):
             translation_status, translations, basis = selected_translation_pairs(rgb)
+            if version in JPEG_BLOCK_VERSIONS and translation_status == "no_pair":
+                from app.detectors.image import jpeg_copy_blocks
+
+                data = legacy._verified(store, analysis.sha256)
+                try:
+                    jpeg_status, extra = (jpeg_copy_blocks.analyse(data) if data.startswith(b"\xff\xd8")
+                                          else ("unsupported_profile", []))
+                except cv2.error:
+                    jpeg_status, extra = "unavailable", []
+                if extra:
+                    translation_status, translations, basis = "supported_pair", extra, JPEG_BLOCK_BASIS
     document["copy_similarity"] = _copy_record(db, analysis, store, document, source, status, boxes, reflected=True)
     document["copy_translation"] = _copy_record(db, analysis, store, document, source, translation_status,
                                                 translations, reflected=False)
     document["copy_translation"]["basis"] = basis
+    if version in JPEG_BLOCK_VERSIONS:
+        document["copy_translation"]["jpeg_block_review"] = jpeg_status
     if version in AFFINE_VERSIONS:
         document[affine.KEY] = _affine_record(db, analysis, store, document, source, skip=skipped)
     document = json.loads(canonical_json(document))

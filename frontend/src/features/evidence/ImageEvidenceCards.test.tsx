@@ -237,6 +237,19 @@ describe('image evidence cards', () => {
     expect(reflection.queryByText(explanation)).toBeNull()
   })
 
+  it('explains exact JPEG block matches and displays completed negative coverage', () => {
+    const blockCheck = { ...translated, basis: 'jpeg_brightness_blocks', jpeg_block_review: 'supported_pair' } as const
+    const first = show({ ...copyOnly, version: 'image-evidence-16', copy_translation: blockCheck })
+    const explanation = 'The complete encoded brightness blocks matched exactly in both areas.'
+    expect(screen.getByText(explanation)).toBeTruthy()
+    expect(screen.getByRole('heading', { name: 'T01 · Non-mirrored pair' })).toBeTruthy()
+    first.unmount()
+    show({ ...copyOnly, version: 'image-evidence-16',
+      copy_translation: { ...translated, basis: null, jpeg_block_review: 'no_pair', status: 'no_pair', pairs: [] } })
+    expect(screen.getByText('The JPEG brightness-block check found no qualifying repeated area.')).toBeTruthy()
+    expect(screen.queryByText(explanation)).toBeNull()
+  })
+
   it('pairs each geometric comparison mask with the native source crop and exact area link', () => {
     show({ ...copyOnly, version: 'image-evidence-13', copy_affine: geometric })
     const check = within(screen.getByRole('region', { name: 'Geometric copy comparison' }))

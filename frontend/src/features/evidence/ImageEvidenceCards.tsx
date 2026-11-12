@@ -75,6 +75,15 @@ function RegionalComparison({ set, token, mediaReady }: { set: ImageEvidenceSet;
 const copyBasisText = {
   native_patch_alignment: 'The match aligns patches on the original pixel grid.',
   geometric_features: 'The match uses corresponding features in both areas.',
+  jpeg_brightness_blocks: 'The complete encoded brightness blocks matched exactly in both areas.',
+}
+
+const jpegCoverageText = {
+  supported_pair: copyBasisText.jpeg_brightness_blocks,
+  no_pair: 'The JPEG brightness-block check found no qualifying repeated area.',
+  unsupported_profile: 'The brightness-block check requires an upright JPEG within its tested size and encoding scope.',
+  unavailable: 'The JPEG brightness-block check could not read the encoded blocks.',
+  unassessed_match_budget: 'The brightness-block check found too many competing offsets.',
 }
 
 function CopySimilarity({ set, field, token, mediaReady }: {
@@ -87,9 +96,12 @@ function CopySimilarity({ set, field, token, mediaReady }: {
   const heading = geometric ? 'Geometric copy comparison' : reflected ? 'Same-image copy similarity' : 'Copy similarity without mirroring'
   const sectionId = `image-${field.replace('_', '-')}`
   const baseVersion = set.prior_embedded_pair_evidence?.version ?? set.version
-  const wide = (geometric && baseVersion === 'image-evidence-14') || (reflected &&
-    ['image-evidence-9', 'image-evidence-10', 'image-evidence-11', 'image-evidence-12', 'image-evidence-13', 'image-evidence-14'].includes(baseVersion))
+  const wide = (geometric && ['image-evidence-14', 'image-evidence-17'].includes(baseVersion)) || (reflected &&
+    ['image-evidence-9', 'image-evidence-10', 'image-evidence-11', 'image-evidence-12', 'image-evidence-13',
+      'image-evidence-14', 'image-evidence-16', 'image-evidence-17'].includes(baseVersion))
   const basis = field === 'copy_translation' && set.copy_translation?.basis
+  const jpegReview = field === 'copy_translation' && set.copy_translation?.jpeg_block_review
+  const basisText = jpegReview ? jpegCoverageText[jpegReview] : basis && check.pairs.length > 0 && copyBasisText[basis]
   const proposalSearch = geometric ? set.copy_affine?.proposal_search : undefined
   const statusText = {
     supported_pair: geometric ? 'Matching detail was found after geometric alignment.'
@@ -106,7 +118,7 @@ function CopySimilarity({ set, field, token, mediaReady }: {
     <p className="mt-2 mb-0 text-small text-text">{statusText[check.status]}</p>
     <p className="mt-2 mb-0 text-small text-text-muted">{check.interpretation}</p>
     {!reflected && <p className="mt-2 mb-0 text-caption text-text-muted">This check carries zero weight in AI authorship confidence.</p>}
-    {check.pairs.length > 0 && basis && <p className="mt-2 mb-0 text-caption text-text-muted">{copyBasisText[basis]}</p>}
+    {basisText && <p className="mt-2 mb-0 text-caption text-text-muted">{basisText}</p>}
     {proposalSearch?.basis === 'reduced' && <p className="mt-2 mb-0 text-caption text-text-muted">The candidate search used a {proposalSearch.width} × {proposalSearch.height} pixel working image. The check measured any matching masks on the original pixel grid.</p>}
     {check.pairs.length > 0 && <p className="mt-2 mb-0 text-caption text-text-muted">Coordinates use native pixels in the oriented original.</p>}
     {check.pairs.map(pair => <article key={pair.id} className="mt-4 border-t border-border pt-4">

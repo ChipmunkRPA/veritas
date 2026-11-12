@@ -106,7 +106,11 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
     store = store or default_store()
     store.verify(document["source"]["sha256"])
     from app.evidence import image_copy_affine_binding as affine
-    from app.evidence.image_copy_similarity_binding import SKIPPED_CREDENTIALS, status_text
+    from app.evidence.image_copy_similarity_binding import (
+        JPEG_BLOCK_STATUS_TEXT,
+        SKIPPED_CREDENTIALS,
+        status_text,
+    )
     from app.evidence.image_packets_v8 import validate_assets
 
     validate_assets(document, store)
@@ -137,8 +141,11 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             check["observation"] = (status_text(status, version=base_version)
                                     if field == "copy_similarity" or status == SKIPPED_CREDENTIALS
                                     else TRANSLATION_STATUS[status])
-        if field == "copy_translation" and check["pairs"] and (basis := check.get("basis")) in TRANSLATION_BASIS_TEXT:
-            check["basis_text"] = TRANSLATION_BASIS_TEXT[basis]
+        if field == "copy_translation":
+            if (jpeg_review := check.get("jpeg_block_review")) is not None:
+                check["basis_text"] = JPEG_BLOCK_STATUS_TEXT[jpeg_review]
+            elif check["pairs"] and (basis := check.get("basis")) in TRANSLATION_BASIS_TEXT:
+                check["basis_text"] = TRANSLATION_BASIS_TEXT[basis]
         for pair in check["pairs"]:
             pair["images"] = []
             for role, label in (("area_a", "Area A"), ("area_b", "Area B")):

@@ -1,0 +1,256 @@
+{
+  "confidence_weight": 0,
+  "edit_source_groups": 18,
+  "freeze_sha256": "0cdc3064a3290cf4edfd0dd8257fd25d1eaeb4a6896a45805a17315aa866f832",
+  "gate": {
+    "maximum_extra_control_groups": 1,
+    "maximum_extra_original_groups": 0,
+    "maximum_wrong_added_pairs": 1,
+    "minimum_added_aligned_medium_groups": 3,
+    "minimum_added_aligned_small_groups": 3
+  },
+  "held_scope": "Authored same-image translations on credited reference photos with separate native and ordinary control deliveries.",
+  "isolated_full_verification": {
+    "frontend_typecheck": "passed",
+    "positive": {
+      "copy_pairs": 1,
+      "crop_size": [
+        32,
+        40
+      ],
+      "exact_brightness_blocks_per_crop": 20,
+      "native_crops": 2
+    },
+    "positive_and_control_api_json_pdf_signed_package": "verified",
+    "private_model_names_in_new_pdf_text": 0,
+    "report_template": "veritas-report-2.0.r101",
+    "simulated_prepaid_checkouts": 2,
+    "targeted_backend_tests_passed": 87,
+    "targeted_frontend_tests_passed": 33,
+    "unchanged": {
+      "check": "completed",
+      "copy_pairs": 0
+    }
+  },
+  "ordinary_assessed": 171,
+  "ordinary_deliveries": 186,
+  "repeated_detail_source_groups": 8,
+  "reproduced_held_views": 330,
+  "rows_sha256": "79037e794debf2967881e5d88568b953d09c0da7a462ee69af58d672f3c8dd55",
+  "schema": "chipmunk.image-jpeg-copy-blocks-transfer/1",
+  "summary": {
+    "added_useful_groups": {
+      "aligned_medium": 8,
+      "aligned_small": 15,
+      "offgrid_medium": 0,
+      "offgrid_small": 0
+    },
+    "extra_control_groups": 0,
+    "extra_original_groups": 0,
+    "passed": true,
+    "strata": {
+      "photo/75/aligned_medium": {
+        "assessed": 18,
+        "baseline_pairs": 11,
+        "baseline_useful": 11,
+        "block_pairs": 17,
+        "block_useful": 17,
+        "combined_useful": 17,
+        "fallback_added": 6,
+        "views": 18
+      },
+      "photo/75/aligned_small": {
+        "assessed": 18,
+        "baseline_pairs": 4,
+        "baseline_useful": 3,
+        "block_pairs": 16,
+        "block_useful": 16,
+        "combined_useful": 15,
+        "fallback_added": 12,
+        "views": 18
+      },
+      "photo/75/blur": {
+        "assessed": 18,
+        "baseline_pairs": 0,
+        "baseline_useful": 0,
+        "block_pairs": 0,
+        "block_useful": 0,
+        "combined_useful": 0,
+        "fallback_added": 0,
+        "views": 18
+      },
+      "photo/75/offgrid_medium": {
+        "assessed": 18,
+        "baseline_pairs": 5,
+        "baseline_useful": 4,
+        "block_pairs": 0,
+        "block_useful": 0,
+        "combined_useful": 4,
+        "fallback_added": 0,
+        "views": 18
+      },
+      "photo/75/offgrid_small": {
+        "assessed": 18,
+        "baseline_pairs": 0,
+        "baseline_useful": 0,
+        "block_pairs": 0,
+        "block_useful": 0,
+        "combined_useful": 0,
+        "fallback_added": 0,
+        "views": 18
+      },
+      "photo/75/original": {
+        "assessed": 18,
+        "baseline_pairs": 0,
+        "baseline_useful": 0,
+        "block_pairs": 0,
+        "block_useful": 0,
+        "combined_useful": 0,
+        "fallback_added": 0,
+        "views": 18
+      },
+      "photo/75/resize": {
+        "assessed": 18,
+        "baseline_pairs": 0,
+        "baseline_useful": 0,
+        "block_pairs": 0,
+        "block_useful": 0,
+        "combined_useful": 0,
+        "fallback_added": 0,
+        "views": 18
+      },
+      "photo/75/tone": {
+        "assessed": 18,
+        "baseline_pairs": 0,
+        "baseline_useful": 0,
+        "block_pairs": 0,
+        "block_useful": 0,
+        "combined_useful": 0,
+        "fallback_added": 0,
+        "views": 18
+      },
+      "photo/90/aligned_medium": {
+        "assessed": 18,
+        "baseline_pairs": 11,
+        "baseline_useful": 10,
+        "block_pairs": 18,
+        "block_useful": 18,
+        "combined_useful": 17,
+        "fallback_added": 7,
+        "views": 18
+      },
+      "photo/90/aligned_small": {
+        "assessed": 18,
+        "baseline_pairs": 3,
+        "baseline_useful": 2,
+        "block_pairs": 18,
+        "block_useful": 18,
+        "combined_useful": 17,
+        "fallback_added": 15,
+        "views": 18
+      },
+      "photo/90/blur": {
+        "assessed": 18,
+        "baseline_pairs": 0,
+        "baseline_useful": 0,
+        "block_pairs": 0,
+        "block_useful": 0,
+        "combined_useful": 0,
+        "fallback_added": 0,
+        "views": 18
+      },
+      "photo/90/offgrid_medium": {
+        "assessed": 18,
+        "baseline_pairs": 9,
+        "baseline_useful": 9,
+        "block_pairs": 0,
+        "block_useful": 0,
+        "combined_useful": 9,
+        "fallback_added": 0,
+        "views": 18
+      },
+      "photo/90/offgrid_small": {
+        "assessed": 18,
+        "baseline_pairs": 1,
+        "baseline_useful": 1,
+        "block_pairs": 0,
+        "block_useful": 0,
+        "combined_useful": 1,
+        "fallback_added": 0,
+        "views": 18
+      },
+      "photo/90/original": {
+        "assessed": 18,
+        "baseline_pairs": 0,
+        "baseline_useful": 0,
+        "block_pairs": 0,
+        "block_useful": 0,
+        "combined_useful": 0,
+        "fallback_added": 0,
+        "views": 18
+      },
+      "photo/90/resize": {
+        "assessed": 18,
+        "baseline_pairs": 0,
+        "baseline_useful": 0,
+        "block_pairs": 0,
+        "block_useful": 0,
+        "combined_useful": 0,
+        "fallback_added": 0,
+        "views": 18
+      },
+      "photo/90/tone": {
+        "assessed": 18,
+        "baseline_pairs": 0,
+        "baseline_useful": 0,
+        "block_pairs": 0,
+        "block_useful": 0,
+        "combined_useful": 0,
+        "fallback_added": 0,
+        "views": 18
+      },
+      "photo/native/original": {
+        "assessed": 9,
+        "baseline_pairs": 0,
+        "baseline_useful": 0,
+        "block_pairs": 0,
+        "block_useful": 0,
+        "combined_useful": 0,
+        "fallback_added": 0,
+        "views": 18
+      },
+      "repetition/75/original": {
+        "assessed": 8,
+        "baseline_pairs": 0,
+        "baseline_useful": 0,
+        "block_pairs": 0,
+        "block_useful": 0,
+        "combined_useful": 0,
+        "fallback_added": 0,
+        "views": 8
+      },
+      "repetition/90/original": {
+        "assessed": 8,
+        "baseline_pairs": 0,
+        "baseline_useful": 0,
+        "block_pairs": 0,
+        "block_useful": 0,
+        "combined_useful": 0,
+        "fallback_added": 0,
+        "views": 8
+      },
+      "repetition/native/original": {
+        "assessed": 2,
+        "baseline_pairs": 0,
+        "baseline_useful": 0,
+        "block_pairs": 0,
+        "block_useful": 0,
+        "combined_useful": 0,
+        "fallback_added": 0,
+        "views": 8
+      }
+    },
+    "views": 330,
+    "wrong_added_pairs": 0
+  }
+}

@@ -8,7 +8,9 @@ import re
 KEY = "copy_affine"
 VERSION = "image-evidence-13"
 LARGE_VERSION = "image-evidence-14"
-AFFINE_VERSIONS = frozenset({VERSION, LARGE_VERSION})
+JPEG_BLOCK_AFFINE_VERSION = "image-evidence-17"
+LARGE_VERSIONS = frozenset({LARGE_VERSION, JPEG_BLOCK_AFFINE_VERSION})
+AFFINE_VERSIONS = LARGE_VERSIONS | {VERSION}
 SCHEMA = "same-image-affine-support/1"
 LARGE_SCHEMA = "same-image-affine-support/2"
 ROLES = ("area_a", "area_b")
@@ -34,7 +36,7 @@ def supported(width: int, height: int, *, version: str = VERSION) -> bool:
     short, long = sorted((width, height))
     if long <= 1024:
         return short >= 384 and long >= 513
-    return version == LARGE_VERSION and short >= 768 and long <= 2048
+    return version in LARGE_VERSIONS and short >= 768 and long <= 2048
 
 
 def search_geometry(width: int, height: int) -> dict:
@@ -46,7 +48,7 @@ def search_geometry(width: int, height: int) -> dict:
 
 
 def status_text(status: str, version: str) -> str:
-    return LARGE_COVERAGE_TEXT if status == "unsupported_geometry" and version == LARGE_VERSION else STATUS_TEXT[status]
+    return LARGE_COVERAGE_TEXT if status == "unsupported_geometry" and version in LARGE_VERSIONS else STATUS_TEXT[status]
 
 
 def validate(document, *, box_bounds, url, credential_status):
@@ -56,7 +58,7 @@ def validate(document, *, box_bounds, url, credential_status):
             raise ValueError("Geometric copy support requires its own evidence version")
         return
     source, record = document["source"], document.get(KEY)
-    large = version == LARGE_VERSION
+    large = version in LARGE_VERSIONS
     fields = {"schema", "source_sha256", "status", "pairs", "authorship_confidence_contribution", "interpretation"}
     if large:
         fields.add("proposal_search")

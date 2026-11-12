@@ -13,9 +13,12 @@ V11 = "image-evidence-11"
 V12 = "image-evidence-12"
 V13 = "image-evidence-13"
 V14 = "image-evidence-14"
+JPEG_BLOCK_VERSION = "image-evidence-16"
+JPEG_BLOCK_AFFINE_VERSION = "image-evidence-17"
+JPEG_BLOCK_VERSIONS = frozenset({JPEG_BLOCK_VERSION, JPEG_BLOCK_AFFINE_VERSION})
 VERSION = V12
-AFFINE_VERSIONS = frozenset({V13, V14})
-CREDENTIAL_VERSIONS = AFFINE_VERSIONS | {V12}
+AFFINE_VERSIONS = frozenset({V13, V14, JPEG_BLOCK_AFFINE_VERSION})
+CREDENTIAL_VERSIONS = AFFINE_VERSIONS | {V12, JPEG_BLOCK_VERSION}
 TRANSLATION_VERSIONS = CREDENTIAL_VERSIONS | {V10, V11}
 BASIS_VERSIONS = CREDENTIAL_VERSIONS | {V11}
 REFLECTION_VERSIONS = frozenset({V7, V8, V9}) | TRANSLATION_VERSIONS
@@ -23,6 +26,14 @@ LARGE_IMAGE_VERSIONS = TRANSLATION_VERSIONS | {V9}
 SCHEMA = "same-image-reflection-similarity/1"
 TRANSLATION_SCHEMA = "same-image-copy-similarity/1"
 SKIPPED_CREDENTIALS = "skipped_trusted_ai_credentials"
+JPEG_BLOCK_BASIS = "jpeg_brightness_blocks"
+JPEG_BLOCK_STATUS_TEXT = {
+    "supported_pair": "The complete encoded brightness blocks matched exactly in both areas.",
+    "no_pair": "The JPEG brightness-block check found no qualifying repeated area.",
+    "unsupported_profile": "The brightness-block check requires an upright JPEG within its tested size and encoding scope.",
+    "unavailable": "The JPEG brightness-block check could not read the encoded blocks.",
+    "unassessed_match_budget": "The brightness-block check found too many competing offsets.",
+}
 SKIPPED_CREDENTIALS_TEXT = "Trusted Content Credentials cover this image and declare AI involvement. The two copy checks were skipped."
 TRANSLATION_NOTE = (
     "The two crops show similar image detail without mirroring. Copies and naturally repeated detail can both produce "
@@ -167,6 +178,7 @@ def copy_records(document: dict) -> Iterator[dict]:
 
 def _validate_check(document: dict, record: dict, size: tuple[int, int], supported: bool, *, reflected: bool) -> None:
     has_basis = not reflected and document["version"] in BASIS_VERSIONS
+    has_jpeg_review = not reflected and document["version"] in JPEG_BLOCK_VERSIONS
     fields = {
         "schema",
         "source_sha256",
@@ -178,6 +190,8 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
     }
     if has_basis:
         fields.add("basis")
+    if has_jpeg_review:
+        fields.add("jpeg_block_review")
     if not isinstance(record, dict) or set(record) != fields:
         raise ValueError("Copy similarity has an invalid record")
     status, pairs = record["status"], record["pairs"]
@@ -200,8 +214,18 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
     if has_basis:
         basis = record["basis"]
         expected = ("native_patch_alignment", "geometric_features") if pairs else (None,)
+        if has_jpeg_review and record["jpeg_block_review"] == "supported_pair":
+            expected = (JPEG_BLOCK_BASIS,)
         if basis not in expected:
             raise ValueError("Copy similarity has an invalid matching basis")
+    jpeg_pair = has_jpeg_review and record["jpeg_block_review"] == "supported_pair"
+    if has_jpeg_review:
+        jpeg_status = record["jpeg_block_review"]
+        if (jpeg_status is not None and (jpeg_status not in JPEG_BLOCK_STATUS_TEXT
+                or (status != "no_pair" and not (status == "supported_pair" and jpeg_pair))
+                or (jpeg_status != "unsupported_profile" and document["source"]["exif_orientation"] != 1))
+                or jpeg_pair and not pairs):
+            raise ValueError("JPEG block coverage differs from the completed copy check")
     for index, pair in enumerate(pairs, 1):
         if (
             not isinstance(pair, dict)
@@ -230,6 +254,8 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
         ax, ay, aw, ah = boxes[0]
         bx, by, bw, bh = boxes[1]
         overlaps = ax < bx + bw and bx < ax + aw and ay < by + bh and by < ay + ah
-        equal_size = reflected or record.get("basis") == "native_patch_alignment"
+        equal_size = reflected or record.get("basis") in {"native_patch_alignment", JPEG_BLOCK_BASIS}
         if overlaps or (equal_size and (aw, ah) != (bw, bh)):
             raise ValueError("The paired areas must be separate and aligned areas must share a native size")
+        if jpeg_pair and (any(value % 8 for box in boxes for value in box) or not 24 <= min(aw, ah) <= max(aw, ah) <= 128):
+            raise ValueError("JPEG copy areas do not follow the supported encoded block grid")

@@ -11,7 +11,7 @@ from zipfile import ZipFile
 from PIL import Image, ImageOps
 
 from app.evidence import image_embedded_pair_binding as embedded_pair
-from app.evidence.image_copy_similarity_binding import ROLES, box_bounds, copy_records
+from app.evidence.image_copy_similarity_binding import JPEG_BLOCK_BASIS, ROLES, box_bounds, copy_records
 
 MAX_SOURCE_BYTES = 60 * 1024 * 1024
 MAX_SOURCE_PIXELS = 80_000_000
@@ -169,6 +169,12 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             raise ValueError('Exact two-area evidence requires a PNG within the tested source scope')
         with original_png:
             embedded_pixels.verify(original_png, pair, lambda digest: archive.read(f'assets/{digest}.png'))
+    matched_blocks = 0
+    translation = evidence.get('copy_translation') or {}
+    if translation.get('basis') == JPEG_BLOCK_BASIS:
+        from app.evidence.image_jpeg_copy_blocks_source import verify
+
+        matched_blocks = verify(data, translation['pairs'])
     crop_count = len(crops) + (2 if pair is not None else 0)
     detail = (f'Original SHA-256 and {crop_count} unannotated crops matched at their recorded EXIF-oriented coordinates.'
               if crop_count else 'Original SHA-256 matched. No unannotated crops were recorded.')
@@ -176,6 +182,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         detail += f' Recomputed {pair["different_pixels"]} differing pixels in the exact aligned comparison.'
     if masks:
         detail += f' Recomputed {masks} geometric copy masks from the source image.'
+    if matched_blocks:
+        detail += f' Reproduced {matched_blocks} matching encoded JPEG brightness blocks per paired area in total.'
     if repeated:
         detail += f' Recomputed repeat-pass overlap for {repeated} source regions from their recorded masks.'
     if quality:

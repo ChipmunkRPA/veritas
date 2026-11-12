@@ -1,0 +1,3433 @@
+{
+  "freeze": {
+    "advance": {
+      "bonafide_false_max": 2,
+      "spoof_supported": 10
+    },
+    "native_profile": "16 kHz mono signed 16-bit FLAC, 6\u201314 s",
+    "prior_freeze": "d4fad995557d3b6c205e73e897aa31def8ec8d14fc272e246c1c36aea0ad3ee4",
+    "roster": "cc4cfbbd78985e9b201ccb5fa6a352c00c60185900f79bdbbdc5772c4d846770",
+    "rule": "At least two AI windows and zero original windows; otherwise no local corroboration",
+    "runner": "2ca0759be331a549f5341ea7e606bd5e3285135910643c38f0abf1c0240dce57",
+    "schema": "chipmunk.audio-radar-long-confirmation/1",
+    "source_files": {
+      "dev-labels.txt": "33dbf6ef66df46c50716c419fab0c1c73edc160ca06996dbaf719bebe47204a3",
+      "dev-languages.txt": "f28f2ebcad8ce58f0042f3f1fd2fa0c385284a9ca008e776f2d9ac9ae4dccd72",
+      "dev-prefix.gz": "6e85fce6e8ee74784769f0bd76f77c379af44a1dab9848d61fc791a9ada05266"
+    }
+  },
+  "intake": [
+    {
+      "duration": "12.2388",
+      "flac_sha256": "51d968886f0df488f8731e872b5dfbf72acd7ae2c796b29ee22f0a14aa4b48dd",
+      "id": "RADAR2026-DEV011855",
+      "label": "bonafide",
+      "pcm_sha256": "f6ff20ceccbbf861fd7188bca1c4075b07e58bb25f3faddfdbaea292527542a5",
+      "samples": 195820
+    },
+    {
+      "duration": "7.1900",
+      "flac_sha256": "fa0e24449d4987e76c8e9df67a163da1afb90e280695b1ca6db2f1418f3de6bd",
+      "id": "RADAR2026-DEV027434",
+      "label": "bonafide",
+      "pcm_sha256": "73e1a5a6b13fa21c1b64e9b115bdf545cf83792d90b88988f6d429aa89dc5b0d",
+      "samples": 115040
+    },
+    {
+      "duration": "13.5700",
+      "flac_sha256": "c0c3914d95b65bc01f77f17ed47e2aa65ba95b4854e4518f8e305a4c567581ad",
+      "id": "RADAR2026-DEV041174",
+      "label": "bonafide",
+      "pcm_sha256": "8bcf90f956f426d7ed6170118ef86980548d1e17d87545173c258d8b818ba9d0",
+      "samples": 217120
+    },
+    {
+      "duration": "9.4239",
+      "flac_sha256": "a93d11ca88fd92b063aaf91cb1ba254b38b2050e94dc4f1952d8d94e691e44de",
+      "id": "RADAR2026-DEV029216",
+      "label": "bonafide",
+      "pcm_sha256": "59be7dc53f775fcabce77f5236d22b0c167b79fca9b32f1b6134a213f842cecd",
+      "samples": 150783
+    },
+    {
+      "duration": "8.0858",
+      "flac_sha256": "bae01f3dd379f2b71c1e3a2e3d86e86e74f33e957570066cf25d391df76edef0",
+      "id": "RADAR2026-DEV013491",
+      "label": "bonafide",
+      "pcm_sha256": "5d2dfc04293e419ad61d6012c2e07b1a93b5aa6bab47de766de79853086d646f",
+      "samples": 129373
+    },
+    {
+      "duration": "10.7121",
+      "flac_sha256": "fa56da6124c370f839cbe6f77ea261125923c7ada6a57c50e8346151fc99d38c",
+      "id": "RADAR2026-DEV013242",
+      "label": "bonafide",
+      "pcm_sha256": "f0b00f45a5928126dcdf235c969e543cc3df3e3cfd3ab67cbb1e0be5143abb6e",
+      "samples": 171394
+    },
+    {
+      "duration": "6.0280",
+      "flac_sha256": "dc56b7fcd04cda336ab82f07c959e6522234fba34dda93a864e9b090d3a65c31",
+      "id": "RADAR2026-DEV020871",
+      "label": "bonafide",
+      "pcm_sha256": "1eecf143f65e4c97aba1a8533538a55cf83a948fe478b53bdb83f57bcbbf0968",
+      "samples": 96448
+    },
+    {
+      "duration": "9.4891",
+      "flac_sha256": "c1a3946745520f74c0eacdd73fb5f9ff94c3469ae86dfd5b254e811cb9079df8",
+      "id": "RADAR2026-DEV008818",
+      "label": "bonafide",
+      "pcm_sha256": "1018734a92fd3cea090ebec9444025080ffe0168a4699e345b27bbfac983034d",
+      "samples": 151825
+    },
+    {
+      "duration": "9.5240",
+      "flac_sha256": "e53176ce7ae803ef169b1c302dc3d729bfd4ddfa180899bf75234c8aaee39875",
+      "id": "RADAR2026-DEV010897",
+      "label": "bonafide",
+      "pcm_sha256": "707554e3618952aef23a8bf427a05e6b38fe953853e6bd20d4eade680ca4042b",
+      "samples": 152384
+    },
+    {
+      "duration": "9.6623",
+      "flac_sha256": "cb3c07a3d1ad028cf17afd02b351ea2e2dd997595c01693460c39dfe7e59a0c6",
+      "id": "RADAR2026-DEV028112",
+      "label": "bonafide",
+      "pcm_sha256": "b6b89897e23f9682e4050f44fa55fd4168428127cd3faa9efb36ee1abc86d74d",
+      "samples": 154597
+    },
+    {
+      "duration": "12.0026",
+      "flac_sha256": "e2bf56fe98164644118f6d2fb12cdf15fe8adfe71d66a6890411ce7e328fc6ca",
+      "id": "RADAR2026-DEV006040",
+      "label": "bonafide",
+      "pcm_sha256": "f71fd1900114a8fe3fca01ca6dcc234ff6d91d9be61176b2827c81cc7f7407ad",
+      "samples": 192041
+    },
+    {
+      "duration": "13.9601",
+      "flac_sha256": "11ee368842ce8fa925af267bc471aa2b0c5dee3479e94f81b0d446872a7254a6",
+      "id": "RADAR2026-DEV011013",
+      "label": "bonafide",
+      "pcm_sha256": "46e0b7db83346938e6d7a029bafb54d97ac19f3b9641106143284b3a8edc4194",
+      "samples": 223361
+    },
+    {
+      "duration": "7.6853",
+      "flac_sha256": "6546ac9bb307c0fa3d960c9b282b1b14861dbc09c6dd217aa1b239a2b03cac46",
+      "id": "RADAR2026-DEV034998",
+      "label": "bonafide",
+      "pcm_sha256": "79900080da76b2fb1e35bc9bc8dc3d2e5bbbbab2bbae1e6abd6059a9f7aaee7a",
+      "samples": 122965
+    },
+    {
+      "duration": "12.3453",
+      "flac_sha256": "0761a5131c3072f63ffb823d523377bbbbfa85dc872143162d05cf2847e5708f",
+      "id": "RADAR2026-DEV014704",
+      "label": "bonafide",
+      "pcm_sha256": "323170142944e58b36ce5c9c700306f3cad4af400c7ea99093c0b191c24f04da",
+      "samples": 197525
+    },
+    {
+      "duration": "8.3174",
+      "flac_sha256": "6d8447f46d173b00654cb69637e074ed2820a06180059a32497f7bce3469e3a1",
+      "id": "RADAR2026-DEV020522",
+      "label": "bonafide",
+      "pcm_sha256": "3ef2e3a103038bcfe631010b99c8a261c255f24cabe523e7eb0d9ddc2d785114",
+      "samples": 133078
+    },
+    {
+      "duration": "10.2201",
+      "flac_sha256": "fb186b9c00f8fdb30ee0b65492865890ce3e6829b0cb1ef86daa60efc2d6e4c8",
+      "id": "RADAR2026-DEV017344",
+      "label": "bonafide",
+      "pcm_sha256": "8e9bf30563505a4bf92bb230898f17fbce947efc1937ba8b6c1d1029739dc7ad",
+      "samples": 163522
+    },
+    {
+      "duration": "11.5780",
+      "flac_sha256": "b4984d54e5baa2512bc494b574b502c98e0fde1b0acfdf955be44f190c76e48a",
+      "id": "RADAR2026-DEV014991",
+      "label": "bonafide",
+      "pcm_sha256": "b9e4180a4dc8ee5325999f47d90ca083ae872372bf7bdb5fe407767e49cbf3a7",
+      "samples": 185248
+    },
+    {
+      "duration": "6.5400",
+      "flac_sha256": "59f4423254fadd5147bd06045fb73311fa7f4306f6fe7fde776bf671ecf87571",
+      "id": "RADAR2026-DEV023532",
+      "label": "bonafide",
+      "pcm_sha256": "3256e31b9e4cb45499fd57863c3361d5b40c74b1c2f2644ec880527eccd32127",
+      "samples": 104640
+    },
+    {
+      "duration": "12.4417",
+      "flac_sha256": "840d4e9a7faab428f56212f19dd669195ead154c47da188278534365ddac921e",
+      "id": "RADAR2026-DEV001506",
+      "label": "bonafide",
+      "pcm_sha256": "1ef810384e1bbe9cde9ee868c5bc449ea7c30595920148853a23ca62c537ed35",
+      "samples": 199067
+    },
+    {
+      "duration": "8.7800",
+      "flac_sha256": "e2c5cb4034748b2ab6aabf22c395275793419189a555be7ceddd8d86efb9d5e9",
+      "id": "RADAR2026-DEV027988",
+      "label": "bonafide",
+      "pcm_sha256": "1939bb726c3d8db09abb91f7529c747a0d7cdab75bbbf885744c146cde73933b",
+      "samples": 140480
+    },
+    {
+      "duration": "6.2034",
+      "flac_sha256": "d27d591dac92061e8aca1d1eb8893bb6bc167bfc9af1c46d34d26e07e0e887d5",
+      "id": "RADAR2026-DEV001855",
+      "label": "spoof",
+      "pcm_sha256": "d6e36b414ccc38d324f3031e9ce6f3fcda8d61db758a0cdabaaf06ac7153537d",
+      "samples": 99254
+    },
+    {
+      "duration": "7.4944",
+      "flac_sha256": "d6a7338287bb36477cb346efb400bf3c82abfc8217a0783591892adb6c16d291",
+      "id": "RADAR2026-DEV041877",
+      "label": "spoof",
+      "pcm_sha256": "0059161b890f4f41089a8b18f851a8e0abc9e49d95f71238fb51130241ea2763",
+      "samples": 119911
+    },
+    {
+      "duration": "8.4693",
+      "flac_sha256": "c2ac0a166ea00202f59815031d4a36875108de88b890e7fc4f561d8fa963cdbd",
+      "id": "RADAR2026-DEV029703",
+      "label": "spoof",
+      "pcm_sha256": "93ec596ca6c44854c603d8feb00f20e8a619d2fe5a34a1404f7595dffb600d8e",
+      "samples": 135509
+    },
+    {
+      "duration": "6.2437",
+      "flac_sha256": "c6703ef84afddbd23300fc4e78bb641a513da04d8bd3b988ba2daadfbe3226e3",
+      "id": "RADAR2026-DEV042534",
+      "label": "spoof",
+      "pcm_sha256": "ffbacdbf98afd0e73af979a8977d40f7603e385fd715e6c40c7916e10ef4252d",
+      "samples": 99899
+    },
+    {
+      "duration": "7.0222",
+      "flac_sha256": "903074e3f445563529af9ee0137720e6e229af3d80574508e79211cd203aeed7",
+      "id": "RADAR2026-DEV035059",
+      "label": "spoof",
+      "pcm_sha256": "c60ebaee06567caddb53bb0a3052814353bb480f5e46ca7dd7def3a343a7df35",
+      "samples": 112355
+    },
+    {
+      "duration": "6.3659",
+      "flac_sha256": "69358c46783366dc0a491d7c29c8c70d975c68e09bd04a478290a2cea3cc2531",
+      "id": "RADAR2026-DEV019136",
+      "label": "spoof",
+      "pcm_sha256": "24f23a67c26c8479d47f64219cf5dc62a6717c212c736ad75d5a809b68cf9d48",
+      "samples": 101854
+    },
+    {
+      "duration": "7.7322",
+      "flac_sha256": "19233fe370a801b3b703fbfb8f9b1ffccee3a2fe1ac60bd65b7352d2b98e90f7",
+      "id": "RADAR2026-DEV006369",
+      "label": "spoof",
+      "pcm_sha256": "d02e6385a7b0769d8ec763b55602a1614dedbd474955a9a832f7ddd296b883e3",
+      "samples": 123716
+    },
+    {
+      "duration": "7.9830",
+      "flac_sha256": "5f4ce427c8228ef3c35685479143ca6e2febfe561f55a71aefdcb84ca51143d1",
+      "id": "RADAR2026-DEV005115",
+      "label": "spoof",
+      "pcm_sha256": "bab1b2718215d3ad8440a3842cefa5ef5b93fa34b88085d1ce4ec64844c9c554",
+      "samples": 127728
+    },
+    {
+      "duration": "11.4741",
+      "flac_sha256": "eff3b66c333adcbab76c26d160a17266a338c08879d0509e7e538dba005bc361",
+      "id": "RADAR2026-DEV033027",
+      "label": "spoof",
+      "pcm_sha256": "cd733d3a0baa72241828487496b6ef7341e7efc3093bbb9d6c42daab25b9ec73",
+      "samples": 183585
+    },
+    {
+      "duration": "7.1494",
+      "flac_sha256": "7bcad8c24a937475547dcea9dc64ba35613d32048e0bbb135a190aa43bb9c61d",
+      "id": "RADAR2026-DEV024561",
+      "label": "spoof",
+      "pcm_sha256": "cd6b3eb8068870d29811a91b7adc370d718ee1441556c9aa52b861f5354923fb",
+      "samples": 114391
+    },
+    {
+      "duration": "10.2051",
+      "flac_sha256": "5117ddeb8d45e3132596484f671ec89e453dc2db8dfdce37910a3140268d615c",
+      "id": "RADAR2026-DEV030037",
+      "label": "spoof",
+      "pcm_sha256": "0743a23fd350372ee73f3cf2b6e3c0e2aebae87c1eac688f483a48cb4d366260",
+      "samples": 163281
+    },
+    {
+      "duration": "6.5254",
+      "flac_sha256": "c7fb065507140f5d37736df85acbfa5d9be4b42960a0aebfd11aad89e8cfc640",
+      "id": "RADAR2026-DEV039580",
+      "label": "spoof",
+      "pcm_sha256": "b41dfe897ad08885bef05765023aa13a23a15c92cbd3e26b76a60e824a841e80",
+      "samples": 104406
+    },
+    {
+      "duration": "7.1421",
+      "flac_sha256": "54dd42f05fc8e2cc6cc8dd5162ceaebdc3b72f142e07f781fef5a3e4dcc644ca",
+      "id": "RADAR2026-DEV026049",
+      "label": "spoof",
+      "pcm_sha256": "c80eb9213d5b851ec81f8830156bcacdbce3fff5c40c87fdb45363701b7b7ef9",
+      "samples": 114273
+    },
+    {
+      "duration": "8.3227",
+      "flac_sha256": "84ad0b73565f769753cd74f2b22eb5e2f592ccb7fbaa1d633e800f1aa7a261e5",
+      "id": "RADAR2026-DEV025235",
+      "label": "spoof",
+      "pcm_sha256": "581cde597a32d8937f3f57ef144f65016e8313bf4786c04bec27f43839d6c5d4",
+      "samples": 133163
+    },
+    {
+      "duration": "7.9450",
+      "flac_sha256": "2340a3a07914d469f80783539dbb113203a4c6075842d8e65c9c01e197c88932",
+      "id": "RADAR2026-DEV034977",
+      "label": "spoof",
+      "pcm_sha256": "8829c3b05fe6403aa610a7e3d2e269a33d4b112ea0cc0508454a70a281104780",
+      "samples": 127120
+    },
+    {
+      "duration": "10.9480",
+      "flac_sha256": "47b0a0dd353780e0b0cd1d0d959cebd06c83e8f15287e3a42f136f7911ee25df",
+      "id": "RADAR2026-DEV010317",
+      "label": "spoof",
+      "pcm_sha256": "ca3edcc8218bac397d68d6a1c21efa9d9edd287acb0cb43b3ea35250fe9d7282",
+      "samples": 175168
+    },
+    {
+      "duration": "13.4550",
+      "flac_sha256": "d56b8f16d2e06ad6a9aaf2e277f1fb41c81d59809fe0924e6b19dfa14ce0123d",
+      "id": "RADAR2026-DEV000317",
+      "label": "spoof",
+      "pcm_sha256": "a03ae5bab654b8bcdf024c883cb5ca8087f54ad893842dc491148410da2914e0",
+      "samples": 215280
+    },
+    {
+      "duration": "7.0650",
+      "flac_sha256": "e54b9831e99aac33733891cf0f7d43bbfb7a4e8bc14b2d29341f09d414f9e4be",
+      "id": "RADAR2026-DEV015115",
+      "label": "spoof",
+      "pcm_sha256": "86d868938fb24ffbf6ce2df11e6dc76313ac38aa4ad5933216443e18908e8828",
+      "samples": 113040
+    },
+    {
+      "duration": "7.1050",
+      "flac_sha256": "d424f3eae41f6ca26a9d0f75d38344ec369f38a7dbb0809ba07989dc7ee4f172",
+      "id": "RADAR2026-DEV007201",
+      "label": "spoof",
+      "pcm_sha256": "0ff94c9e0a4ec5d7932932e0d93cacd554f099212e15cd0d7af0b7d62bcdbb5a",
+      "samples": 113680
+    },
+    {
+      "duration": "11.9253",
+      "flac_sha256": "91ea5252f690b6619ce621e617fe4d56be9ac64eca1229180a674d296e14c175",
+      "id": "RADAR2026-DEV017201",
+      "label": "spoof",
+      "pcm_sha256": "353b9ea6147fce2b56b2d6bcdd73766c68eb3bc3256796062429d67f6f830b7a",
+      "samples": 190805
+    }
+  ],
+  "rows": [
+    {
+      "duration": "12.2388",
+      "flac_sha256": "51d968886f0df488f8731e872b5dfbf72acd7ae2c796b29ee22f0a14aa4b48dd",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.0009292176885840794,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            128000
+          ],
+          [
+            96000,
+            160000
+          ],
+          [
+            128000,
+            192000
+          ],
+          [
+            160000,
+            195820
+          ]
+        ]
+      },
+      "id": "RADAR2026-DEV011855",
+      "label": "bonafide",
+      "pcm_sha256": "f6ff20ceccbbf861fd7188bca1c4075b07e58bb25f3faddfdbaea292527542a5",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "a12cff98f89fa9283d29c166a0a343b59e7360ea1f865af33e91033f49608e3d",
+          "response": {
+            "decision": "original",
+            "raw": 0.0008696060394868255,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            73910,
+            121910
+          ],
+          "pcm_sha256": "853b958b2b21e966ec78af8dfe75379e658baab04c44765b055f3e9c4e25fd7f",
+          "response": {
+            "decision": "original",
+            "raw": 0.0010249121114611626,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            147820,
+            195820
+          ],
+          "pcm_sha256": "922209b88496d099e57c1e1874f4513f6ca9d2a0bc769447c3d0415ad9c6606d",
+          "response": {
+            "decision": "original",
+            "raw": 0.0008868985460139811,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 195820
+    },
+    {
+      "duration": "7.1900",
+      "flac_sha256": "fa0e24449d4987e76c8e9df67a163da1afb90e280695b1ca6db2f1418f3de6bd",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.000950498836270223,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            115040
+          ]
+        ]
+      },
+      "id": "RADAR2026-DEV027434",
+      "label": "bonafide",
+      "pcm_sha256": "73e1a5a6b13fa21c1b64e9b115bdf545cf83792d90b88988f6d429aa89dc5b0d",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "306edb704b0b03dbf4b8277b7e6639b78cf7a6f8b857638f1687eb1a5787352f",
+          "response": {
+            "decision": "original",
+            "raw": 0.0009876517578959465,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            67040,
+            115040
+          ],
+          "pcm_sha256": "f2941480431392a326b83b0e188da5b180c88d8a4b9e41815fb8c47146081b11",
+          "response": {
+            "decision": "original",
+            "raw": 0.0011606550542637706,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 115040
+    },
+    {
+      "duration": "13.5700",
+      "flac_sha256": "c0c3914d95b65bc01f77f17ed47e2aa65ba95b4854e4518f8e305a4c567581ad",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.0007846863785137733,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            128000
+          ],
+          [
+            96000,
+            160000
+          ],
+          [
+            128000,
+            192000
+          ],
+          [
+            160000,
+            217120
+          ]
+        ]
+      },
+      "id": "RADAR2026-DEV041174",
+      "label": "bonafide",
+      "pcm_sha256": "8bcf90f956f426d7ed6170118ef86980548d1e17d87545173c258d8b818ba9d0",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "ce274ea70422e8070dabf5188689d3405f25685de7e75b69ae97df5e0146e53e",
+          "response": {
+            "decision": "original",
+            "raw": 0.0008125245221890509,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            84560,
+            132560
+          ],
+          "pcm_sha256": "8bd89b5b7c083c3fd4fccc40bed9603f8f19ba896e48f655b16b67bf55dd310a",
+          "response": {
+            "decision": "original",
+            "raw": 0.0008368538692593575,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            169120,
+            217120
+          ],
+          "pcm_sha256": "0a626e2ced238a1b1de6bffc3128bfd8980fdf41cdc346b82b1352321911a0a0",
+          "response": {
+            "decision": "original",
+            "raw": 0.0008175338734872639,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 217120
+    },
+    {
+      "duration": "9.4239",
+      "flac_sha256": "a93d11ca88fd92b063aaf91cb1ba254b38b2050e94dc4f1952d8d94e691e44de",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.0008065558940870687,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            128000
+          ],
+          [
+            96000,
+            150783
+          ]
+        ]
+      },
+      "id": "RADAR2026-DEV029216",
+      "label": "bonafide",
+      "pcm_sha256": "59be7dc53f775fcabce77f5236d22b0c167b79fca9b32f1b6134a213f842cecd",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "366502d4db1be652cd7d977f6c1ecc7184581b38e58f414e88a94bbfe52a8154",
+          "response": {
+            "decision": "original",
+            "raw": 0.0008108793990686536,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            51391,
+            99391
+          ],
+          "pcm_sha256": "15ec01ccd1c4fcb21f32ad5a608027a77bc89e449e272613828105464d4b314b",
+          "response": {
+            "decision": "original",
+            "raw": 0.000805696181487292,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            102783,
+            150783
+          ],
+          "pcm_sha256": "506990b7a9513c8dd75d1c7e4aefd99a3dba20b7c7e452d9040daf88d54949e9",
+          "response": {
+            "decision": "original",
+            "raw": 0.0008602199959568679,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 150783
+    },
+    {
+      "duration": "8.0858",
+      "flac_sha256": "bae01f3dd379f2b71c1e3a2e3d86e86e74f33e957570066cf25d391df76edef0",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.0007397125591523945,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            128000
+          ],
+          [
+            96000,
+            129373
+          ]
+        ]
+      },
+      "id": "RADAR2026-DEV013491",
+      "label": "bonafide",
+      "pcm_sha256": "5d2dfc04293e419ad61d6012c2e07b1a93b5aa6bab47de766de79853086d646f",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "a209be2b8e933c919f86cd4866571554cd0cb6b660c5f384188d0a0d650491db",
+          "response": {
+            "decision": "original",
+            "raw": 0.0007464513764716685,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            81373,
+            129373
+          ],
+          "pcm_sha256": "b20d52a31458c6ca123ba3f9335771cf50636835c4ab0fb0310a481aefc202cf",
+          "response": {
+            "decision": "original",
+            "raw": 0.0007521806983277202,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 129373
+    },
+    {
+      "duration": "10.7121",
+      "flac_sha256": "fa56da6124c370f839cbe6f77ea261125923c7ada6a57c50e8346151fc99d38c",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.0010903956484980882,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            128000
+          ],
+          [
+            96000,
+            160000
+          ],
+          [
+            128000,
+            171394
+          ]
+        ]
+      },
+      "id": "RADAR2026-DEV013242",
+      "label": "bonafide",
+      "pcm_sha256": "f0b00f45a5928126dcdf235c969e543cc3df3e3cfd3ab67cbb1e0be5143abb6e",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "0cfe99ef5095814e8ceeea66eb899c699bd83c04b983772bb9b6ebf4e8e2227b",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.0018091601086780429,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            61697,
+            109697
+          ],
+          "pcm_sha256": "259359b51ff79b1f2b1e2d6304f5c6e0fba59af3dfda8753b2d0cf66a47ebc33",
+          "response": {
+            "decision": "original",
+            "raw": 0.0011547617614269257,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            123394,
+            171394
+          ],
+          "pcm_sha256": "2d0f23309301962e1f2af828a8b28dcaf32cda47ee290e996216ca331581492e",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.0010452419519424438,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 171394
+    },
+    {
+      "duration": "6.0280",
+      "flac_sha256": "dc56b7fcd04cda336ab82f07c959e6522234fba34dda93a864e9b090d3a65c31",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.0007599508195805053,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            96448
+          ]
+        ]
+      },
+      "id": "RADAR2026-DEV020871",
+      "label": "bonafide",
+      "pcm_sha256": "1eecf143f65e4c97aba1a8533538a55cf83a948fe478b53bdb83f57bcbbf0968",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "bcba09ff7050eabd56f3ce1b1c245542f1b8637bb5be585d48844a798c86ff61",
+          "response": {
+            "decision": "original",
+            "raw": 0.0007793022086843848,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            48448,
+            96448
+          ],
+          "pcm_sha256": "4e31b8bd95b74601f03864d58b427dde4a570516f46b2df12149a98da7a073df",
+          "response": {
+            "decision": "original",
+            "raw": 0.0007358171860687435,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 96448
+    },
+    {
+      "duration": "9.4891",
+      "flac_sha256": "c1a3946745520f74c0eacdd73fb5f9ff94c3469ae86dfd5b254e811cb9079df8",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.0030359916078547635,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            128000
+          ]
+        ]
+      },
+      "id": "RADAR2026-DEV008818",
+      "label": "bonafide",
+      "pcm_sha256": "1018734a92fd3cea090ebec9444025080ffe0168a4699e345b27bbfac983034d",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "1133cc71f051fa694c6ec2d5f26b952c4b69dcfa32a1f3c2b7cfa9e40598d13f",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.001843565609306097,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            51912,
+            99912
+          ],
+          "pcm_sha256": "02e2c9dfa036b3f877edb01542d46ffc49972c7630e3613998a1b6a835b11344",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.005943029187619686,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            103825,
+            151825
+          ],
+          "pcm_sha256": "583e1dcee613f3dc1701fde4ab1fb37e10e65178b7b334df7548d4b6822c42b0",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        }
+      ],
+      "samples": 151825
+    },
+    {
+      "duration": "9.5240",
+      "flac_sha256": "e53176ce7ae803ef169b1c302dc3d729bfd4ddfa180899bf75234c8aaee39875",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.0008503319695591927,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            128000
+          ],
+          [
+            96000,
+            152384
+          ]
+        ]
+      },
+      "id": "RADAR2026-DEV010897",
+      "label": "bonafide",
+      "pcm_sha256": "707554e3618952aef23a8bf427a05e6b38fe953853e6bd20d4eade680ca4042b",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "f2e3677d8d1854ad254f6523a59bce968c1df988de88051d772b8f8b3bcc514e",
+          "response": {
+            "decision": "original",
+            "raw": 0.0009015284013003111,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            52192,
+            100192
+          ],
+          "pcm_sha256": "45e7c69edd37d195cb68551b316c76206f12299f1c31b838425d8c0ced90581e",
+          "response": {
+            "decision": "original",
+            "raw": 0.0009388609323650599,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            104384,
+            152384
+          ],
+          "pcm_sha256": "43c5b3eb1581dba7715980e73eb7f1746253633a511d9af1594e57308be4be34",
+          "response": {
+            "decision": "original",
+            "raw": 0.0008719599572941661,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 152384
+    },
+    {
+      "duration": "9.6623",
+      "flac_sha256": "cb3c07a3d1ad028cf17afd02b351ea2e2dd997595c01693460c39dfe7e59a0c6",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.0017642970196902752,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            128000
+          ],
+          [
+            96000,
+            154597
+          ]
+        ]
+      },
+      "id": "RADAR2026-DEV028112",
+      "label": "bonafide",
+      "pcm_sha256": "b6b89897e23f9682e4050f44fa55fd4168428127cd3faa9efb36ee1abc86d74d",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "5d9462743384b606b602b44a72670dfada717d260cb241fff4245023cbee6010",
+          "response": {
+            "decision": "original",
+            "raw": 0.0011531865457072854,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            53298,
+            101298
+          ],
+          "pcm_sha256": "d8525c88206fa94e269ef9a8d89ff5c9eac0aa95ef82a2f97ba1a2e22d1bb0a9",
+          "response": {
+            "decision": "original",
+            "raw": 0.001047675497829914,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            106597,
+            154597
+          ],
+          "pcm_sha256": "113333b0c521bc39d33df675209daa3d6fa997dd11773ed6042e521222cd7147",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.012657159939408302,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 154597
+    },
+    {
+      "duration": "12.0026",
+      "flac_sha256": "e2bf56fe98164644118f6d2fb12cdf15fe8adfe71d66a6890411ce7e328fc6ca",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.0008661768049933016,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            128000
+          ],
+          [
+            96000,
+            160000
+          ],
+          [
+            128000,
+            192000
+          ]
+        ]
+      },
+      "id": "RADAR2026-DEV006040",
+      "label": "bonafide",
+      "pcm_sha256": "f71fd1900114a8fe3fca01ca6dcc234ff6d91d9be61176b2827c81cc7f7407ad",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "29ac8c1c616c33e9f3111dd6f03f19022c2d20d00f9b6ad8f9c2aa676ddcc633",
+          "response": {
+            "decision": "original",
+            "raw": 0.0007979581714607775,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            72020,
+            120020
+          ],
+          "pcm_sha256": "e5dfd1ae89df70035e004d4523720958c1b253d3c073aa478f619e8f3b24e906",
+          "response": {
+            "decision": "original",
+            "raw": 0.0008537038811482489,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            144041,
+            192041
+          ],
+          "pcm_sha256": "6b2d8783b651ce84fc8612c74c5214f1a92bb3cbd6816841291da0311002bc04",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.0018562010955065489,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 192041
+    },
+    {
+      "duration": "13.9601",
+      "flac_sha256": "11ee368842ce8fa925af267bc471aa2b0c5dee3479e94f81b0d446872a7254a6",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.0007543695974163711,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            128000
+          ],
+          [
+            96000,
+            160000
+          ],
+          [
+            128000,
+            192000
+          ],
+          [
+            160000,
+            223361
+          ]
+        ]
+      },
+      "id": "RADAR2026-DEV011013",
+      "label": "bonafide",
+      "pcm_sha256": "46e0b7db83346938e6d7a029bafb54d97ac19f3b9641106143284b3a8edc4194",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "5503b20da6fa60592e97012e0510d63f7cd3d1a64f8077309784860c825c69f6",
+          "response": {
+            "decision": "original",
+            "raw": 0.0007472962024621665,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            87680,
+            135680
+          ],
+          "pcm_sha256": "2cededc6ecdab87e6ccaae5c0ed64dd9e4d315f6606367e8636a54c34ac6ae93",
+          "response": {
+            "decision": "original",
+            "raw": 0.0007308800704777241,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            175361,
+            223361
+          ],
+          "pcm_sha256": "44b3eec42f2eb8781240d8c76a3e58db3176df9c5357d76b8d504ca4e2b047a9",
+          "response": {
+            "decision": "original",
+            "raw": 0.0008058175444602966,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 223361
+    },
+    {
+      "duration": "7.6853",
+      "flac_sha256": "6546ac9bb307c0fa3d960c9b282b1b14861dbc09c6dd217aa1b239a2b03cac46",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.0008254070028973123,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            122965
+          ]
+        ]
+      },
+      "id": "RADAR2026-DEV034998",
+      "label": "bonafide",
+      "pcm_sha256": "79900080da76b2fb1e35bc9bc8dc3d2e5bbbbab2bbae1e6abd6059a9f7aaee7a",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "7ff722b41f62ff1ecc277d985d503b0074cbe8b6d11e0d2c75c1975e437abbb1",
+          "response": {
+            "decision": "original",
+            "raw": 0.0007834720308892429,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            74965,
+            122965
+          ],
+          "pcm_sha256": "6a1026e5716e2816cc0214748c8e64ac1d6fd68979ccb683c41e2d33202afd70",
+          "response": {
+            "decision": "original",
+            "raw": 0.0009095533168874681,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 122965
+    },
+    {
+      "duration": "12.3453",
+      "flac_sha256": "0761a5131c3072f63ffb823d523377bbbbfa85dc872143162d05cf2847e5708f",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.000832742943506067,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            128000
+          ],
+          [
+            96000,
+            160000
+          ],
+          [
+            128000,
+            192000
+          ],
+          [
+            160000,
+            197525
+          ]
+        ]
+      },
+      "id": "RADAR2026-DEV014704",
+      "label": "bonafide",
+      "pcm_sha256": "323170142944e58b36ce5c9c700306f3cad4af400c7ea99093c0b191c24f04da",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "0dfd1e93981c327e84ab5a47559b88f24a3bc6ffbb6fdf3e47cba50e3cbb8bf3",
+          "response": {
+            "decision": "original",
+            "raw": 0.0007369399536401033,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            74762,
+            122762
+          ],
+          "pcm_sha256": "984f3d2ac4d2919a30526c7032ef0d2ec790f4504c5045e1a63510c98f369af6",
+          "response": {
+            "decision": "original",
+            "raw": 0.0007932130829431117,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            149525,
+            197525
+          ],
+          "pcm_sha256": "b5bd49dd84287879e147b5468f90e35f0bebba6363276806a2bc9e29aaa9e416",
+          "response": {
+            "decision": "original",
+            "raw": 0.0009865611791610718,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 197525
+    },
+    {
+      "duration": "8.3174",
+      "flac_sha256": "6d8447f46d173b00654cb69637e074ed2820a06180059a32497f7bce3469e3a1",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.0014432335883611813,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            128000
+          ],
+          [
+            96000,
+            133078
+          ]
+        ]
+      },
+      "id": "RADAR2026-DEV020522",
+      "label": "bonafide",
+      "pcm_sha256": "3ef2e3a103038bcfe631010b99c8a261c255f24cabe523e7eb0d9ddc2d785114",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "14ce9d8a30a9ae0ffbf83733181d71f297bfd6b9a26d105ca05b428f45f0074c",
+          "response": {
+            "decision": "original",
+            "raw": 0.0008034234051592648,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            85078,
+            133078
+          ],
+          "pcm_sha256": "a68c092ce0339fc41ac5cd969bef516d908989d5347616cfe4c7ca00f6e110aa",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.06395581364631653,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 133078
+    },
+    {
+      "duration": "10.2201",
+      "flac_sha256": "fb186b9c00f8fdb30ee0b65492865890ce3e6829b0cb1ef86daa60efc2d6e4c8",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.0007556405733339488,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            128000
+          ],
+          [
+            96000,
+            160000
+          ],
+          [
+            128000,
+            163522
+          ]
+        ]
+      },
+      "id": "RADAR2026-DEV017344",
+      "label": "bonafide",
+      "pcm_sha256": "8e9bf30563505a4bf92bb230898f17fbce947efc1937ba8b6c1d1029739dc7ad",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "e392ebbbc04045c2f7b811c383cf58014cf26220aeae21de4e1e25999991a9c6",
+          "response": {
+            "decision": "original",
+            "raw": 0.0007357687572948635,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            57761,
+            105761
+          ],
+          "pcm_sha256": "a56db5cced1504a96f1f24c36a6be3d237bb2dc870f3fc67e15240dfffce7e8d",
+          "response": {
+            "decision": "original",
+            "raw": 0.0007481288048438728,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            115522,
+            163522
+          ],
+          "pcm_sha256": "5b8cf771cabfcd7394a41d6b52412c8afb27813436c3d0f34ca6fbd169319937",
+          "response": {
+            "decision": "original",
+            "raw": 0.0007764265174046159,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 163522
+    },
+    {
+      "duration": "11.5780",
+      "flac_sha256": "b4984d54e5baa2512bc494b574b502c98e0fde1b0acfdf955be44f190c76e48a",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.0007997691980563104,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            128000
+          ],
+          [
+            96000,
+            160000
+          ],
+          [
+            128000,
+            185248
+          ]
+        ]
+      },
+      "id": "RADAR2026-DEV014991",
+      "label": "bonafide",
+      "pcm_sha256": "b9e4180a4dc8ee5325999f47d90ca083ae872372bf7bdb5fe407767e49cbf3a7",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "9b67d945851ec4dd2a513aded6abf9fec792c73984953280c4e8c71aa9438231",
+          "response": {
+            "decision": "original",
+            "raw": 0.0009211949072778225,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            68624,
+            116624
+          ],
+          "pcm_sha256": "246c7a14c0839b51a78aa3fffe6f3c443d47729b8fac37132d4a1c8c9cc5ac53",
+          "response": {
+            "decision": "original",
+            "raw": 0.0007608917076140642,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            137248,
+            185248
+          ],
+          "pcm_sha256": "e0f9ed59dd7d4ffeb5a5e01af6eabec130317c4b158905a268e1d5cfea6cd79e",
+          "response": {
+            "decision": "original",
+            "raw": 0.0007740555447526276,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 185248
+    },
+    {
+      "duration": "6.5400",
+      "flac_sha256": "59f4423254fadd5147bd06045fb73311fa7f4306f6fe7fde776bf671ecf87571",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.0007969658472575247,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            104640
+          ]
+        ]
+      },
+      "id": "RADAR2026-DEV023532",
+      "label": "bonafide",
+      "pcm_sha256": "3256e31b9e4cb45499fd57863c3361d5b40c74b1c2f2644ec880527eccd32127",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "c1f02ae522843a177da92bd4b1e8909d20d3bd15b3cefb1cb2e45ce600bdd739",
+          "response": {
+            "decision": "original",
+            "raw": 0.0007781871827319264,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            56640,
+            104640
+          ],
+          "pcm_sha256": "42e1767c492c540d0d80c420b37584a148d1163928f7e66bde26e5c398f85dad",
+          "response": {
+            "decision": "original",
+            "raw": 0.0008293433929793537,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 104640
+    },
+    {
+      "duration": "12.4417",
+      "flac_sha256": "840d4e9a7faab428f56212f19dd669195ead154c47da188278534365ddac921e",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.0007350630282113949,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            128000
+          ],
+          [
+            96000,
+            160000
+          ],
+          [
+            128000,
+            192000
+          ],
+          [
+            160000,
+            199067
+          ]
+        ]
+      },
+      "id": "RADAR2026-DEV001506",
+      "label": "bonafide",
+      "pcm_sha256": "1ef810384e1bbe9cde9ee868c5bc449ea7c30595920148853a23ca62c537ed35",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "b8ab4cebb594cd40757dbc3853a981b03ebdf5097a27dbb38bf2fd282d9eae4d",
+          "response": {
+            "decision": "original",
+            "raw": 0.0007369715603999794,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            75533,
+            123533
+          ],
+          "pcm_sha256": "27de790df1e47b1ea986f56040449bb613edb381b7f0c01a71d7fd367ff654fc",
+          "response": {
+            "decision": "original",
+            "raw": 0.0007088910206221044,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            151067,
+            199067
+          ],
+          "pcm_sha256": "15110e365866ec78b8d3f73ba7ae866abb9c69d6b66b6f6495b10fee9ce16792",
+          "response": {
+            "decision": "original",
+            "raw": 0.0008563656592741609,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 199067
+    },
+    {
+      "duration": "8.7800",
+      "flac_sha256": "e2c5cb4034748b2ab6aabf22c395275793419189a555be7ceddd8d86efb9d5e9",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.24938519732677378,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            128000
+          ],
+          [
+            96000,
+            140480
+          ]
+        ]
+      },
+      "id": "RADAR2026-DEV027988",
+      "label": "bonafide",
+      "pcm_sha256": "1939bb726c3d8db09abb91f7529c747a0d7cdab75bbbf885744c146cde73933b",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "f9841ccae1dda9a255b07d3e7ddc55d0b2f4ee76009b48b406e141fb53c2466b",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.005069246515631676,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            92480,
+            140480
+          ],
+          "pcm_sha256": "8cfc0da9e6ed9e117e28c6d2626c9d341dbbdf1f4b1448e3a33ab2a891d08464",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.9883628487586975,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 140480
+    },
+    {
+      "duration": "6.2034",
+      "flac_sha256": "d27d591dac92061e8aca1d1eb8893bb6bc167bfc9af1c46d34d26e07e0e887d5",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.9984415173530579,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            99254
+          ]
+        ]
+      },
+      "id": "RADAR2026-DEV001855",
+      "label": "spoof",
+      "pcm_sha256": "d6e36b414ccc38d324f3031e9ce6f3fcda8d61db758a0cdabaaf06ac7153537d",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "785e7a771dfa766e828d9bffaf75b72d5ee74df3bcf57838e7224e8cf6924433",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9993419051170349,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            51254,
+            99254
+          ],
+          "pcm_sha256": "6ae9cf4e0ffc2ac510bc56b425b17a28ba76d1ddfd907ab1eb218662c6919644",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9992788434028625,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 99254
+    },
+    {
+      "duration": "7.4944",
+      "flac_sha256": "d6a7338287bb36477cb346efb400bf3c82abfc8217a0783591892adb6c16d291",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.9992607037226359,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            119911
+          ]
+        ]
+      },
+      "id": "RADAR2026-DEV041877",
+      "label": "spoof",
+      "pcm_sha256": "0059161b890f4f41089a8b18f851a8e0abc9e49d95f71238fb51130241ea2763",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "1faa333b113d50406a422aecf4faa97af9e782847ab8ed66aca4b104c77c7bf2",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9993857145309448,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            71911,
+            119911
+          ],
+          "pcm_sha256": "db09449af39088e9ccf52d44c8253ece26b8549a976db27a35e9a44898decb4e",
+          "response": {
+            "decision": "ai",
+            "raw": 0.998828113079071,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 119911
+    },
+    {
+      "duration": "8.4693",
+      "flac_sha256": "c2ac0a166ea00202f59815031d4a36875108de88b890e7fc4f561d8fa963cdbd",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.9993724673986435,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            128000
+          ],
+          [
+            96000,
+            135509
+          ]
+        ]
+      },
+      "id": "RADAR2026-DEV029703",
+      "label": "spoof",
+      "pcm_sha256": "93ec596ca6c44854c603d8feb00f20e8a619d2fe5a34a1404f7595dffb600d8e",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "c0663963db836dfcd91db7ecc6ccea30e83f735b41b2d80d570cdec4c581a94f",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9993383288383484,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            87509,
+            135509
+          ],
+          "pcm_sha256": "e18392ef80db5e0d33c4c1bd385c1d56a86e075e5e7f2f0a20cf46bc287225d7",
+          "response": {
+            "decision": "ai",
+            "raw": 0.999358594417572,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 135509
+    },
+    {
+      "duration": "6.2437",
+      "flac_sha256": "c6703ef84afddbd23300fc4e78bb641a513da04d8bd3b988ba2daadfbe3226e3",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.9994563857714335,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            99899
+          ]
+        ]
+      },
+      "id": "RADAR2026-DEV042534",
+      "label": "spoof",
+      "pcm_sha256": "ffbacdbf98afd0e73af979a8977d40f7603e385fd715e6c40c7916e10ef4252d",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "da5250fc050452953f3403e466576d977f233aeacd826d022b051b5ec108b29c",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9994489550590515,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            51899,
+            99899
+          ],
+          "pcm_sha256": "98463b30462ab66ee7927077bf9b53e28ca976c2c5ea281b408bc30bff2e51ea",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9994484782218933,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 99899
+    },
+    {
+      "duration": "7.0222",
+      "flac_sha256": "903074e3f445563529af9ee0137720e6e229af3d80574508e79211cd203aeed7",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.4987279246561229,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ]
+        ]
+      },
+      "id": "RADAR2026-DEV035059",
+      "label": "spoof",
+      "pcm_sha256": "c60ebaee06567caddb53bb0a3052814353bb480f5e46ca7dd7def3a343a7df35",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "267556b11b8e881e11549e8b63644466982e329854a8904c3323823e4ca00888",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        },
+        {
+          "interval": [
+            64355,
+            112355
+          ],
+          "pcm_sha256": "314b4264ad81f6503129384663679be654a927d7f8ab4c5191eb1fc834821d47",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        }
+      ],
+      "samples": 112355
+    },
+    {
+      "duration": "6.3659",
+      "flac_sha256": "69358c46783366dc0a491d7c29c8c70d975c68e09bd04a478290a2cea3cc2531",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.9968642592430115,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            101854
+          ]
+        ]
+      },
+      "id": "RADAR2026-DEV019136",
+      "label": "spoof",
+      "pcm_sha256": "24f23a67c26c8479d47f64219cf5dc62a6717c212c736ad75d5a809b68cf9d48",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "2a30108463eb4d8d1da5213a3cfdce84ea8cf8339fb0fa99d9669f478696b12b",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9960072636604309,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            53854,
+            101854
+          ],
+          "pcm_sha256": "0652fdae482aa5644afd6f89b619f3a29905f7392f120aa485817547571a4852",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9993625283241272,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 101854
+    },
+    {
+      "duration": "7.7322",
+      "flac_sha256": "19233fe370a801b3b703fbfb8f9b1ffccee3a2fe1ac60bd65b7352d2b98e90f7",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.9993197123209635,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            123716
+          ]
+        ]
+      },
+      "id": "RADAR2026-DEV006369",
+      "label": "spoof",
+      "pcm_sha256": "d02e6385a7b0769d8ec763b55602a1614dedbd474955a9a832f7ddd296b883e3",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "1bee518c12c5d35c2bf1b6c36ec293600bb2001ec01d15155cbe1ace7e220548",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9993181228637695,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            75716,
+            123716
+          ],
+          "pcm_sha256": "c41dfe41c33801089a4004701e5f0f770b0cf2232759e6bc411c11197cd7c1bc",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9993146657943726,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 123716
+    },
+    {
+      "duration": "7.9830",
+      "flac_sha256": "5f4ce427c8228ef3c35685479143ca6e2febfe561f55a71aefdcb84ca51143d1",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.9994451403617859,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            127728
+          ]
+        ]
+      },
+      "id": "RADAR2026-DEV005115",
+      "label": "spoof",
+      "pcm_sha256": "bab1b2718215d3ad8440a3842cefa5ef5b93fa34b88085d1ce4ec64844c9c554",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "d9137a158f0bf75182d3f81f1bf957aa628b5c9eb3ccacdd8a2e470ccbef9feb",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9994219541549683,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            79728,
+            127728
+          ],
+          "pcm_sha256": "c040c850b6cec98f008c31aead8fdead0e8c544a48ad4067e42e38d8c63e45e2",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9994503855705261,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 127728
+    },
+    {
+      "duration": "11.4741",
+      "flac_sha256": "eff3b66c333adcbab76c26d160a17266a338c08879d0509e7e538dba005bc361",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.998092246055603,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            128000
+          ],
+          [
+            96000,
+            160000
+          ],
+          [
+            128000,
+            183585
+          ]
+        ]
+      },
+      "id": "RADAR2026-DEV033027",
+      "label": "spoof",
+      "pcm_sha256": "cd733d3a0baa72241828487496b6ef7341e7efc3093bbb9d6c42daab25b9ec73",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "96164a5c1e407cb2741a48da2b07b1f2955647a137b1d50844238a52fa556d4b",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9977961778640747,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            67792,
+            115792
+          ],
+          "pcm_sha256": "0fa4f71c9cd9a3a8f754ed1805dc38119bbd73945209491399c3ac13fbfdabcb",
+          "response": {
+            "decision": "ai",
+            "raw": 0.999405026435852,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            135585,
+            183585
+          ],
+          "pcm_sha256": "62008e8f655bbcc0403caca4b5afbfa28e68a45e26239703235ec87f3d126717",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.010574030689895153,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 183585
+    },
+    {
+      "duration": "7.1494",
+      "flac_sha256": "7bcad8c24a937475547dcea9dc64ba35613d32048e0bbb135a190aa43bb9c61d",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.9994379281997681,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            114391
+          ]
+        ]
+      },
+      "id": "RADAR2026-DEV024561",
+      "label": "spoof",
+      "pcm_sha256": "cd6b3eb8068870d29811a91b7adc370d718ee1441556c9aa52b861f5354923fb",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "38a2f3a193adc2434c602637d1b6b9669a52d3a26fc58ec14c4a775225940fb6",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9994438290596008,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            66391,
+            114391
+          ],
+          "pcm_sha256": "e28a596512431fd3f78f9089659112266ca9b507a283914512a6232b3b3799f7",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9994348883628845,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 114391
+    },
+    {
+      "duration": "10.2051",
+      "flac_sha256": "5117ddeb8d45e3132596484f671ec89e453dc2db8dfdce37910a3140268d615c",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.9993587732315063,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            128000
+          ],
+          [
+            96000,
+            160000
+          ],
+          [
+            128000,
+            163281
+          ]
+        ]
+      },
+      "id": "RADAR2026-DEV030037",
+      "label": "spoof",
+      "pcm_sha256": "0743a23fd350372ee73f3cf2b6e3c0e2aebae87c1eac688f483a48cb4d366260",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "9539b105595ba529927344547eb1d8048a6995c8af94070d6d768e7d4d5304ba",
+          "response": {
+            "decision": "ai",
+            "raw": 0.999427855014801,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            57640,
+            105640
+          ],
+          "pcm_sha256": "27b25a483eac635b25ff2b62b14a9357be65c89738e3a5453024b5e7bcaf0a3a",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9993438124656677,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            115281,
+            163281
+          ],
+          "pcm_sha256": "33e10f76737815e092e09d098b77bbc019b888f8a3226c112c465581847e9953",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9993550181388855,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 163281
+    },
+    {
+      "duration": "6.5254",
+      "flac_sha256": "c7fb065507140f5d37736df85acbfa5d9be4b42960a0aebfd11aad89e8cfc640",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.9994516571362814,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            104406
+          ]
+        ]
+      },
+      "id": "RADAR2026-DEV039580",
+      "label": "spoof",
+      "pcm_sha256": "b41dfe897ad08885bef05765023aa13a23a15c92cbd3e26b76a60e824a841e80",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "a123237e640179696817924e07a0f77d9fda7bb462bffad17374ff9262e1b500",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9994571805000305,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            56406,
+            104406
+          ],
+          "pcm_sha256": "f9cc20d5bbc572df2bc6e103a159a403d57b6ed2a72f43c1ad974478be9ff4d5",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9994509816169739,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 104406
+    },
+    {
+      "duration": "7.1421",
+      "flac_sha256": "54dd42f05fc8e2cc6cc8dd5162ceaebdc3b72f142e07f781fef5a3e4dcc644ca",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.9994054635365804,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            114273
+          ]
+        ]
+      },
+      "id": "RADAR2026-DEV026049",
+      "label": "spoof",
+      "pcm_sha256": "c80eb9213d5b851ec81f8830156bcacdbce3fff5c40c87fdb45363701b7b7ef9",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "a50761ff0c5c1d13c9bea55bd2ef55a05a9eff2b4b73dbe34f38c4ab8b76e33d",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9994437098503113,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            66273,
+            114273
+          ],
+          "pcm_sha256": "5c9e27409fe5a16cb399840588dc1bfc99cf6de1e10285be01ff477b2e821ae2",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9993597865104675,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 114273
+    },
+    {
+      "duration": "8.3227",
+      "flac_sha256": "84ad0b73565f769753cd74f2b22eb5e2f592ccb7fbaa1d633e800f1aa7a261e5",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.999441921710968,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            128000
+          ],
+          [
+            96000,
+            133163
+          ]
+        ]
+      },
+      "id": "RADAR2026-DEV025235",
+      "label": "spoof",
+      "pcm_sha256": "581cde597a32d8937f3f57ef144f65016e8313bf4786c04bec27f43839d6c5d4",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "0737eccc81177479139b5f358cd8d687eec4afec0522aa53f01addd9e922c2ac",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9994237422943115,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            85163,
+            133163
+          ],
+          "pcm_sha256": "2e9ace87d60876810017e07d7701f0747e4c2af692eaccf6518e5bf1c3647a78",
+          "response": {
+            "decision": "ai",
+            "raw": 0.999448835849762,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 133163
+    },
+    {
+      "duration": "7.9450",
+      "flac_sha256": "2340a3a07914d469f80783539dbb113203a4c6075842d8e65c9c01e197c88932",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.0013340638251975179,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            127120
+          ]
+        ]
+      },
+      "id": "RADAR2026-DEV034977",
+      "label": "spoof",
+      "pcm_sha256": "8829c3b05fe6403aa610a7e3d2e269a33d4b112ea0cc0508454a70a281104780",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "d22dc0ddfbd35dcfb59cd972715e1fca6e955e93dbc748bfc62c1e8f8ccf17cd",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.0036091699730604887,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            79120,
+            127120
+          ],
+          "pcm_sha256": "17cf93919a6063554a3fdab5aad6100088c910dc837634eedfe2527602bdefa8",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        }
+      ],
+      "samples": 127120
+    },
+    {
+      "duration": "10.9480",
+      "flac_sha256": "47b0a0dd353780e0b0cd1d0d959cebd06c83e8f15287e3a42f136f7911ee25df",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.9991686820983887,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            128000
+          ],
+          [
+            96000,
+            160000
+          ],
+          [
+            128000,
+            175168
+          ]
+        ]
+      },
+      "id": "RADAR2026-DEV010317",
+      "label": "spoof",
+      "pcm_sha256": "ca3edcc8218bac397d68d6a1c21efa9d9edd287acb0cb43b3ea35250fe9d7282",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "7bfacfd6e0409f484b8247b63346c7b825e217efb4b0598ca3c1655cd5255aee",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9992938041687012,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            63584,
+            111584
+          ],
+          "pcm_sha256": "a8997bf3f5942d60529be11abaf6cbc37f4e0c129178a157f196a5e526e72b6c",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9993335604667664,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            127168,
+            175168
+          ],
+          "pcm_sha256": "92e7916d5c887b42d7f9f73c283c2cf1149bccf67377e0967c4d96eba2f324f9",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9989932179450989,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 175168
+    },
+    {
+      "duration": "13.4550",
+      "flac_sha256": "d56b8f16d2e06ad6a9aaf2e277f1fb41c81d59809fe0924e6b19dfa14ce0123d",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.9994416236877441,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            128000
+          ],
+          [
+            96000,
+            160000
+          ],
+          [
+            128000,
+            192000
+          ],
+          [
+            160000,
+            215280
+          ]
+        ]
+      },
+      "id": "RADAR2026-DEV000317",
+      "label": "spoof",
+      "pcm_sha256": "a03ae5bab654b8bcdf024c883cb5ca8087f54ad893842dc491148410da2914e0",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "3f0b52a0defeaaae40ae9adf427b964873062717eaf089d7aa97173397dd3a2e",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9994211196899414,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            83640,
+            131640
+          ],
+          "pcm_sha256": "c2f46837c6d30de10edad7b7e6612e41a0ceb47923ce0a64393541739e59ba50",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9994308352470398,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            167280,
+            215280
+          ],
+          "pcm_sha256": "bc60ebee9a2cb4f6105f73a9154a37eb5f8fcaf78a3a02edb575f2cf460b3928",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9994335770606995,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 215280
+    },
+    {
+      "duration": "7.0650",
+      "flac_sha256": "e54b9831e99aac33733891cf0f7d43bbfb7a4e8bc14b2d29341f09d414f9e4be",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.9991613626480103,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            113040
+          ]
+        ]
+      },
+      "id": "RADAR2026-DEV015115",
+      "label": "spoof",
+      "pcm_sha256": "86d868938fb24ffbf6ce2df11e6dc76313ac38aa4ad5933216443e18908e8828",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "f7a88ed09a2cc4d563c34afb888cf9649780c262f9648d306eaca387fd075201",
+          "response": {
+            "decision": "ai",
+            "raw": 0.999322772026062,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            65040,
+            113040
+          ],
+          "pcm_sha256": "373c6b6b95567566cca3af94227eb132971e3a3749f2dda84f92044520a262b5",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9992644190788269,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 113040
+    },
+    {
+      "duration": "7.1050",
+      "flac_sha256": "d424f3eae41f6ca26a9d0f75d38344ec369f38a7dbb0809ba07989dc7ee4f172",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.999463419119517,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            113680
+          ]
+        ]
+      },
+      "id": "RADAR2026-DEV007201",
+      "label": "spoof",
+      "pcm_sha256": "0ff94c9e0a4ec5d7932932e0d93cacd554f099212e15cd0d7af0b7d62bcdbb5a",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "3a1057257313a5f72b6004d9194e31ff49c8db84284cfc85b584b4b260b74ba0",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9994580149650574,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            65680,
+            113680
+          ],
+          "pcm_sha256": "ccfcc265fa1565091662ac47cac9355f2a1299914cbc806cf7e1821fda357bc0",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9994522929191589,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 113680
+    },
+    {
+      "duration": "11.9253",
+      "flac_sha256": "91ea5252f690b6619ce621e617fe4d56be9ac64eca1229180a674d296e14c175",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.9994671702384949,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            128000
+          ],
+          [
+            96000,
+            160000
+          ],
+          [
+            128000,
+            190805
+          ]
+        ]
+      },
+      "id": "RADAR2026-DEV017201",
+      "label": "spoof",
+      "pcm_sha256": "353b9ea6147fce2b56b2d6bcdd73766c68eb3bc3256796062429d67f6f830b7a",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "4703d3986a068de7ce09b60f644a3987b2a0911ef5aab27b8fdb08bfb2d4e145",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9994675517082214,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            71402,
+            119402
+          ],
+          "pcm_sha256": "64310e23608d2b1a847ddd651485519a9741afe34d5fbabc8ed0952db5ee4af7",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9994687438011169,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            142805,
+            190805
+          ],
+          "pcm_sha256": "438bac30638464017119cb306a4fbc34d8c6aaf53ae1e177e169757837112dee",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9994572997093201,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 190805
+    }
+  ],
+  "rows_sha256": "4aca7187ee0a448e5f445dd74be5928ebbae0388a000fea79fa6590b672bca65",
+  "summary": {
+    "counts": {
+      "bonafide": {
+        "corroborated_ai": 0,
+        "files": 20,
+        "native_inconclusive": 20,
+        "native_unassessed": 0,
+        "one_ai": 0,
+        "two_assessed": 20
+      },
+      "spoof": {
+        "corroborated_ai": 18,
+        "files": 20,
+        "native_inconclusive": 20,
+        "native_unassessed": 0,
+        "one_ai": 18,
+        "two_assessed": 18
+      }
+    },
+    "passes": true
+  }
+}

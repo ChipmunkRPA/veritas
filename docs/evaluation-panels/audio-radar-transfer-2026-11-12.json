@@ -1,0 +1,4875 @@
+{
+  "freeze": {
+    "candidate": "At least two AI windows and zero original windows; otherwise no local corroboration",
+    "compressed_bytes": 33554432,
+    "intake_sha256": "614c41d076d5c5f4db7f11ab7a9a14716ef1944687486a2a58a5c4fabdd24035",
+    "minimum_usefulness": {
+      "maximum_long_bonafide_flags": 2,
+      "minimum_long_spoof_flags": 8
+    },
+    "noise": {
+      "delivery": "Same peak-safe gain for the two mixtures and unoverlaid control, s16 PCM",
+      "offsets_s": {
+        "cafe": [
+          22,
+          96,
+          174,
+          262
+        ],
+        "traffic": [
+          2,
+          6,
+          10,
+          14
+        ]
+      },
+      "selection": "Equal class assignment by sealed within-class rank modulo four",
+      "target_db": -5
+    },
+    "publisher": "https://doi.org/10.5281/zenodo.22110815",
+    "runner_sha256": "a6713900c1bbc69342f4921c6392ee6f15420b4f074b931db464c05a74b8c435",
+    "schema": "chipmunk.audio-radar-transfer/1",
+    "selection": "EN, one whole-file label, official 2.5\u20134 s or 6\u201314 s, 16 per class by salted SHA-256",
+    "source_files": {
+      "LICENSE.txt": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411",
+      "archive-prefix.gz": "d50b195fdccb37443c7a5e57169941c1646333afda57f97e72bca18c019c837c",
+      "cafe.ogg": "6360791fdcee1f64638f0fc9abd6d2c7a1aa75fd3d2b80033170a02d025099dc",
+      "labels.txt": "dc51de1f7a6fcfb4e26ffd7fc458b5e0e290e6541bf6d2f0710250f67d29d3ba",
+      "languages.txt": "ff11556268e4b404ac1fba048c7ef7cf9a0baaeb1a3889c5572ff6390d0e6735",
+      "traffic.ogg": "9702be26fec457ac8c54df61fbe62f120189119b5734377cda9e5ae442566efd"
+    },
+    "voice_assets": {
+      "class_labels_indices.csv": "cdd1049833c4b86127c2773ac0d14a2754b6a6d0d1798002ed5c66e699708429",
+      "panns-Cnn10.pth": "5240bdc47444e331bbeb54fd741d2b3f933a4526e84b0c17bf3593df94b13962",
+      "pellav2_detector.pt": "d21aedfb52e2f87706c2753715a29665482b0f4a034800c31579df5d458559ac",
+      "silero_vad.jit": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720",
+      "w2v-bert-config.json": "f5572bd5998b68182e9c328a43127ed21fed687f6910497136b91a4e3b0e3675"
+    },
+    "windows": "Disjoint 3 s at start/end, plus center for >=9 s, on exact decoded mono clock"
+  },
+  "intake": [
+    {
+      "duration": "2.5330",
+      "flac_bytes": 40694,
+      "flac_sha256": "050e3e5cc765c664e9d464567ed51601d6c0397e47420f6a69b3e02ec140edac",
+      "id": "RADAR2026-EVAL051321",
+      "label": "bonafide",
+      "stratum": "short"
+    },
+    {
+      "duration": "2.7546",
+      "flac_bytes": 59230,
+      "flac_sha256": "e300d869d1afce77ef196e7dcd0404006ce5115957f08aa1ac078e4f0a9aa2ff",
+      "id": "RADAR2026-EVAL000284",
+      "label": "bonafide",
+      "stratum": "short"
+    },
+    {
+      "duration": "2.9090",
+      "flac_bytes": 79580,
+      "flac_sha256": "e19e0881a8d2cc7f84068629ab3085c403340f5d8066af0deb34e6dd9b48516c",
+      "id": "RADAR2026-EVAL024364",
+      "label": "bonafide",
+      "stratum": "short"
+    },
+    {
+      "duration": "3.6200",
+      "flac_bytes": 85289,
+      "flac_sha256": "ea8754df677cbd9f5cc5a4bcbc084b3ae9a1d4e61b8b67aa411d416b6d20e74a",
+      "id": "RADAR2026-EVAL062912",
+      "label": "bonafide",
+      "stratum": "short"
+    },
+    {
+      "duration": "3.7953",
+      "flac_bytes": 61890,
+      "flac_sha256": "623b9acb89c167fed3ea3066d2ce76b27c0f127a127e7cd88cf51831efb81989",
+      "id": "RADAR2026-EVAL033858",
+      "label": "bonafide",
+      "stratum": "short"
+    },
+    {
+      "duration": "3.9435",
+      "flac_bytes": 82070,
+      "flac_sha256": "3980b8cbb9106493f3109ab839f7f84470d2e717f18f2694007d2a859aed1ab9",
+      "id": "RADAR2026-EVAL091890",
+      "label": "bonafide",
+      "stratum": "short"
+    },
+    {
+      "duration": "3.9494",
+      "flac_bytes": 77131,
+      "flac_sha256": "6721114ec2ffbf7cbeea891a1f766684101a01d3db29b8142a827cd565e561bf",
+      "id": "RADAR2026-EVAL085580",
+      "label": "bonafide",
+      "stratum": "short"
+    },
+    {
+      "duration": "2.7120",
+      "flac_bytes": 61458,
+      "flac_sha256": "9312054febdd3c4e91f551cc5b93a6c7a8833c8021f8418163381569a282087c",
+      "id": "RADAR2026-EVAL007404",
+      "label": "bonafide",
+      "stratum": "short"
+    },
+    {
+      "duration": "2.5028",
+      "flac_bytes": 42556,
+      "flac_sha256": "bd5362125d7b573298b1a6431b2f6cd7625778c0f1370a09819c04e382371bd3",
+      "id": "RADAR2026-EVAL087102",
+      "label": "bonafide",
+      "stratum": "short"
+    },
+    {
+      "duration": "3.7338",
+      "flac_bytes": 62118,
+      "flac_sha256": "2405ecb1f0dddd436244e6bd4b86ad4866dc30063da5d6033ea328e59ed7174d",
+      "id": "RADAR2026-EVAL049654",
+      "label": "bonafide",
+      "stratum": "short"
+    },
+    {
+      "duration": "2.8300",
+      "flac_bytes": 75280,
+      "flac_sha256": "fa06b49947331c977771761fcc45caa0613709d191cac8434b4831276462b92a",
+      "id": "RADAR2026-EVAL027548",
+      "label": "bonafide",
+      "stratum": "short"
+    },
+    {
+      "duration": "3.2040",
+      "flac_bytes": 61750,
+      "flac_sha256": "8d9d937dae64a4a943742ae2b6ae8f8221823447d8e15f94a55d3a449858e9f3",
+      "id": "RADAR2026-EVAL072857",
+      "label": "bonafide",
+      "stratum": "short"
+    },
+    {
+      "duration": "2.8800",
+      "flac_bytes": 44487,
+      "flac_sha256": "e12d7c9519aa93c33dc8a6454f9dc816e44a292a9a79d2531d67d4394ea0e708",
+      "id": "RADAR2026-EVAL061797",
+      "label": "bonafide",
+      "stratum": "short"
+    },
+    {
+      "duration": "3.0476",
+      "flac_bytes": 69138,
+      "flac_sha256": "fecaf8d7baa1010c979b54e3cf2d4cbbef025db004055577c09770fe5f84aed1",
+      "id": "RADAR2026-EVAL096656",
+      "label": "bonafide",
+      "stratum": "short"
+    },
+    {
+      "duration": "3.4980",
+      "flac_bytes": 72376,
+      "flac_sha256": "30487dde713f0784affd763a4e8437f8f69080dfdd2fffce89c93f10ab30c4a9",
+      "id": "RADAR2026-EVAL082245",
+      "label": "bonafide",
+      "stratum": "short"
+    },
+    {
+      "duration": "3.5570",
+      "flac_bytes": 68806,
+      "flac_sha256": "4441710ed97488f90f462f73d6357ae7cd5ff0ecd38a7e24fc2e52af6dba3ede",
+      "id": "RADAR2026-EVAL014697",
+      "label": "bonafide",
+      "stratum": "short"
+    },
+    {
+      "duration": "3.4059",
+      "flac_bytes": 63958,
+      "flac_sha256": "f4865cb069b62058a7be702c6703c3f4dd086a44dee0bd9009e8692fbf4f60ed",
+      "id": "RADAR2026-EVAL021189",
+      "label": "spoof",
+      "stratum": "short"
+    },
+    {
+      "duration": "3.5294",
+      "flac_bytes": 46342,
+      "flac_sha256": "e01671e4c15e314710dba610a524c5803bae8e7ec3ec09e771c683dde9e1fdff",
+      "id": "RADAR2026-EVAL084684",
+      "label": "spoof",
+      "stratum": "short"
+    },
+    {
+      "duration": "2.8038",
+      "flac_bytes": 34145,
+      "flac_sha256": "91c9b2f99d59e3170f56b4218e284043639741d209ea8114ba5365fbe5860efd",
+      "id": "RADAR2026-EVAL076402",
+      "label": "spoof",
+      "stratum": "short"
+    },
+    {
+      "duration": "3.0547",
+      "flac_bytes": 67566,
+      "flac_sha256": "e681a63ed30d62a37a8ba019874da9a093db772c58ac008e1c8df682c1aadd03",
+      "id": "RADAR2026-EVAL082615",
+      "label": "spoof",
+      "stratum": "short"
+    },
+    {
+      "duration": "2.9566",
+      "flac_bytes": 51253,
+      "flac_sha256": "ea5ee43c3e35ce35165be8b9642cd6987b4bce9e28c40fa14cd6b4703b1ca7d8",
+      "id": "RADAR2026-EVAL037548",
+      "label": "spoof",
+      "stratum": "short"
+    },
+    {
+      "duration": "3.8200",
+      "flac_bytes": 71954,
+      "flac_sha256": "5fd3162f54e8545a8764f9628a5bf682e0eeb298f56065b0e91e2c96f522276d",
+      "id": "RADAR2026-EVAL023858",
+      "label": "spoof",
+      "stratum": "short"
+    },
+    {
+      "duration": "3.4619",
+      "flac_bytes": 53511,
+      "flac_sha256": "b284de110f1a965401ea0857438e28d67b1032daa80d7b113e45d6221bbaf72f",
+      "id": "RADAR2026-EVAL073600",
+      "label": "spoof",
+      "stratum": "short"
+    },
+    {
+      "duration": "2.5338",
+      "flac_bytes": 61830,
+      "flac_sha256": "0ec0fb8594529e1bac79b046f34dc12bf5064abb4023086bb097594cf37858c7",
+      "id": "RADAR2026-EVAL034671",
+      "label": "spoof",
+      "stratum": "short"
+    },
+    {
+      "duration": "2.5040",
+      "flac_bytes": 44693,
+      "flac_sha256": "cc809de03d57c8618f423c83182053f0c6fe03b228bfb4cc3b53f9fe5e7d1642",
+      "id": "RADAR2026-EVAL070186",
+      "label": "spoof",
+      "stratum": "short"
+    },
+    {
+      "duration": "3.8260",
+      "flac_bytes": 53816,
+      "flac_sha256": "aa4d5c7f6e664748f50172ae1582f8207c0760988e1299428abf39bb509da66a",
+      "id": "RADAR2026-EVAL092750",
+      "label": "spoof",
+      "stratum": "short"
+    },
+    {
+      "duration": "3.8699",
+      "flac_bytes": 64631,
+      "flac_sha256": "6c3181ed7751870be1c60c922d1efd67673626961e5c3119776b1f15fba2cc8a",
+      "id": "RADAR2026-EVAL062154",
+      "label": "spoof",
+      "stratum": "short"
+    },
+    {
+      "duration": "3.2500",
+      "flac_bytes": 58176,
+      "flac_sha256": "fa6988ec3abd11676e30d28282d0b85e806b661f6129aba6f06142401d277ed8",
+      "id": "RADAR2026-EVAL002256",
+      "label": "spoof",
+      "stratum": "short"
+    },
+    {
+      "duration": "3.0416",
+      "flac_bytes": 65080,
+      "flac_sha256": "12b16994f2cb628e9deff9ad4e0a138133a16380fea0af33288f6292d58bfbd3",
+      "id": "RADAR2026-EVAL077643",
+      "label": "spoof",
+      "stratum": "short"
+    },
+    {
+      "duration": "3.1670",
+      "flac_bytes": 49917,
+      "flac_sha256": "b95bed5822728d4b46989c44d3ee919c7d6bc18ebcade03f61d72aa600aeb7d0",
+      "id": "RADAR2026-EVAL017404",
+      "label": "spoof",
+      "stratum": "short"
+    },
+    {
+      "duration": "2.9703",
+      "flac_bytes": 47923,
+      "flac_sha256": "ff153aaf07d61a38761755516c4206b99bb6126c24d694a9f76f42422aceda2f",
+      "id": "RADAR2026-EVAL096343",
+      "label": "spoof",
+      "stratum": "short"
+    },
+    {
+      "duration": "2.9493",
+      "flac_bytes": 48671,
+      "flac_sha256": "04aa6678d513936471e2a80c9c89843aa0c7db1cf518637f0443cb5cca21d7fb",
+      "id": "RADAR2026-EVAL061778",
+      "label": "spoof",
+      "stratum": "short"
+    },
+    {
+      "duration": "8.3134",
+      "flac_bytes": 113676,
+      "flac_sha256": "b6e08290089665d3f967cbc7824fc2c3a3c6111d0b2c1a7b436b71c8c1541ef3",
+      "id": "RADAR2026-EVAL102421",
+      "label": "bonafide",
+      "stratum": "long"
+    },
+    {
+      "duration": "11.6200",
+      "flac_bytes": 212953,
+      "flac_sha256": "f71b09fc4d7cc95c3ea63bf400f41d93f2b589dc30eda1b139fbdcea44342ff4",
+      "id": "RADAR2026-EVAL012606",
+      "label": "bonafide",
+      "stratum": "long"
+    },
+    {
+      "duration": "6.9285",
+      "flac_bytes": 82899,
+      "flac_sha256": "647617b66ed82e6236bcb54b87d6450b0a5d6d050fc61db284e3e0e9341208ad",
+      "id": "RADAR2026-EVAL102564",
+      "label": "bonafide",
+      "stratum": "long"
+    },
+    {
+      "duration": "7.9190",
+      "flac_bytes": 142861,
+      "flac_sha256": "867d573bfb423a7a968243701ba4552fbc875089000466353cb223a8a0f12bc3",
+      "id": "RADAR2026-EVAL028347",
+      "label": "bonafide",
+      "stratum": "long"
+    },
+    {
+      "duration": "7.0929",
+      "flac_bytes": 165831,
+      "flac_sha256": "8da0a01ce0f661cf018b6a706a34300c2697d00faf694919c514d0e3ec116cd5",
+      "id": "RADAR2026-EVAL053609",
+      "label": "bonafide",
+      "stratum": "long"
+    },
+    {
+      "duration": "11.7000",
+      "flac_bytes": 217327,
+      "flac_sha256": "fcf046a16e5b0d3edd0a8a774714d9107a7d3d6723f456b3a7d521c20a93332c",
+      "id": "RADAR2026-EVAL067356",
+      "label": "bonafide",
+      "stratum": "long"
+    },
+    {
+      "duration": "13.7100",
+      "flac_bytes": 250355,
+      "flac_sha256": "4aefbb06414870878869d92aac8c657ec82337a646ee8e0b3abce3af4f53bb9d",
+      "id": "RADAR2026-EVAL022875",
+      "label": "bonafide",
+      "stratum": "long"
+    },
+    {
+      "duration": "6.6558",
+      "flac_bytes": 128718,
+      "flac_sha256": "07a26e5696020cfda867fb8a64969049baeed4fd0d8abb3a7e64a5f884373c52",
+      "id": "RADAR2026-EVAL095979",
+      "label": "bonafide",
+      "stratum": "long"
+    },
+    {
+      "duration": "11.3230",
+      "flac_bytes": 128675,
+      "flac_sha256": "5727c7e29d310077010cb9e01f98dfdd7b458e2284f21d9c20b24c326f49b1eb",
+      "id": "RADAR2026-EVAL004697",
+      "label": "bonafide",
+      "stratum": "long"
+    },
+    {
+      "duration": "6.7730",
+      "flac_bytes": 173301,
+      "flac_sha256": "b6899637ea9f740b8b745baae8d4a228b13c3c819e2edcc7f08d98fe72abcfa7",
+      "id": "RADAR2026-EVAL016645",
+      "label": "bonafide",
+      "stratum": "long"
+    },
+    {
+      "duration": "6.5034",
+      "flac_bytes": 124846,
+      "flac_sha256": "c80c26b5102876f4e53bda88ad60daa135e00b09cadbeb3f6c595049c7ca56c0",
+      "id": "RADAR2026-EVAL061282",
+      "label": "bonafide",
+      "stratum": "long"
+    },
+    {
+      "duration": "6.0804",
+      "flac_bytes": 112176,
+      "flac_sha256": "c90fa3f6be71496ed8fa8122842f787c724b0c8e53dd6abd21d6319defeacaae",
+      "id": "RADAR2026-EVAL013851",
+      "label": "bonafide",
+      "stratum": "long"
+    },
+    {
+      "duration": "10.4817",
+      "flac_bytes": 171188,
+      "flac_sha256": "7966cdf2f6b15a8f9a27931606bc45723063365ef473e1317d651b900f94ca49",
+      "id": "RADAR2026-EVAL092615",
+      "label": "bonafide",
+      "stratum": "long"
+    },
+    {
+      "duration": "8.3974",
+      "flac_bytes": 180668,
+      "flac_sha256": "a931a73822e7189125502830f1b5c2095c12d45d06621af805b5ef6c23a967ae",
+      "id": "RADAR2026-EVAL073250",
+      "label": "bonafide",
+      "stratum": "long"
+    },
+    {
+      "duration": "10.3700",
+      "flac_bytes": 244851,
+      "flac_sha256": "1449d0edc5cbe9a041bb0021f442c4d0662bce4d2e818e8d7282514cf53ed368",
+      "id": "RADAR2026-EVAL045677",
+      "label": "bonafide",
+      "stratum": "long"
+    },
+    {
+      "duration": "7.2122",
+      "flac_bytes": 61228,
+      "flac_sha256": "abc71018f177ae3f487906e25432798487f82acfce27e3507cc2f6223c3479f7",
+      "id": "RADAR2026-EVAL055732",
+      "label": "bonafide",
+      "stratum": "long"
+    },
+    {
+      "duration": "9.8804",
+      "flac_bytes": 143684,
+      "flac_sha256": "f6214e0da01bf5e26021e195246e0ad9114aebb9afcaf6b0354e566c09e49941",
+      "id": "RADAR2026-EVAL020632",
+      "label": "spoof",
+      "stratum": "long"
+    },
+    {
+      "duration": "11.4191",
+      "flac_bytes": 141112,
+      "flac_sha256": "84021b4d9b8c032740b92b8b6a5010d5dcf9783b61bfcd29085f3867d4eb4db6",
+      "id": "RADAR2026-EVAL021920",
+      "label": "spoof",
+      "stratum": "long"
+    },
+    {
+      "duration": "6.1116",
+      "flac_bytes": 105499,
+      "flac_sha256": "301abfde2f851ad74b6e913128c428ce2c83327ce5058f39e32fcc6bedb024bf",
+      "id": "RADAR2026-EVAL080628",
+      "label": "spoof",
+      "stratum": "long"
+    },
+    {
+      "duration": "6.1475",
+      "flac_bytes": 131767,
+      "flac_sha256": "51b241dc0545870c504cfe95658d69e6c2cbab83cdfa5a00b4315bcda362210a",
+      "id": "RADAR2026-EVAL044573",
+      "label": "spoof",
+      "stratum": "long"
+    },
+    {
+      "duration": "6.3006",
+      "flac_bytes": 80955,
+      "flac_sha256": "564b95c2b30e21079cd6322c957bafdb318b0d78849a6629455e5e9ea2434f71",
+      "id": "RADAR2026-EVAL038717",
+      "label": "spoof",
+      "stratum": "long"
+    },
+    {
+      "duration": "8.5454",
+      "flac_bytes": 108921,
+      "flac_sha256": "91c6851d8e7bd4706abf911430a0a9466f8807bc9212e3f6cac7d0a52e7e3242",
+      "id": "RADAR2026-EVAL016350",
+      "label": "spoof",
+      "stratum": "long"
+    },
+    {
+      "duration": "6.4749",
+      "flac_bytes": 141526,
+      "flac_sha256": "84c5bd02b6565870075d922bf210ea5b48ae2caa4017897ec27c65e6f793b65e",
+      "id": "RADAR2026-EVAL088218",
+      "label": "spoof",
+      "stratum": "long"
+    },
+    {
+      "duration": "7.9106",
+      "flac_bytes": 143208,
+      "flac_sha256": "4d7bcb8226c5852df6e25bd9eb80399b689b5a7ce47549490885451b3bac17c0",
+      "id": "RADAR2026-EVAL086656",
+      "label": "spoof",
+      "stratum": "long"
+    },
+    {
+      "duration": "8.8675",
+      "flac_bytes": 197650,
+      "flac_sha256": "d170704b9ad7972389208f55edf2902e2ea980ab456e19cf6cd37024ae02e035",
+      "id": "RADAR2026-EVAL067213",
+      "label": "spoof",
+      "stratum": "long"
+    },
+    {
+      "duration": "6.3079",
+      "flac_bytes": 72217,
+      "flac_sha256": "0376733d988c866d1c27bb06d9b10a733fa060eaba01a6a8f24cb667f9f14d8d",
+      "id": "RADAR2026-EVAL043259",
+      "label": "spoof",
+      "stratum": "long"
+    },
+    {
+      "duration": "8.7271",
+      "flac_bytes": 125066,
+      "flac_sha256": "54a2b1d8e6fd75bd6f51f534748f5492d6e5525c753d954fd71192c65861cd3a",
+      "id": "RADAR2026-EVAL012256",
+      "label": "spoof",
+      "stratum": "long"
+    },
+    {
+      "duration": "6.0943",
+      "flac_bytes": 104836,
+      "flac_sha256": "f75df7c29eab187d1063b417e83969be7d1f81815d402bf3a81338697db1aee9",
+      "id": "RADAR2026-EVAL050926",
+      "label": "spoof",
+      "stratum": "long"
+    },
+    {
+      "duration": "10.7704",
+      "flac_bytes": 208509,
+      "flac_sha256": "bf856c3b7fe8531c4df4aec1a9f64923f1c4e1f501501c062f10f376c8ffcebf",
+      "id": "RADAR2026-EVAL035430",
+      "label": "spoof",
+      "stratum": "long"
+    },
+    {
+      "duration": "6.3623",
+      "flac_bytes": 104962,
+      "flac_sha256": "62e4a509b720158e3251ebcfe936c6ad7f2212cbd9e007cd5c50922959061b05",
+      "id": "RADAR2026-EVAL099409",
+      "label": "spoof",
+      "stratum": "long"
+    },
+    {
+      "duration": "8.9826",
+      "flac_bytes": 196904,
+      "flac_sha256": "fd1beb21343f973838c7d7f16f661ee57640239a86161a41ac7eec57165094a7",
+      "id": "RADAR2026-EVAL066547",
+      "label": "spoof",
+      "stratum": "long"
+    },
+    {
+      "duration": "6.4933",
+      "flac_bytes": 102898,
+      "flac_sha256": "35e2fcdf79438a41334ea42cc874cbcf486ddbc7fdb7a2f5ea240013aed9db76",
+      "id": "RADAR2026-EVAL024734",
+      "label": "spoof",
+      "stratum": "long"
+    }
+  ],
+  "rows": [
+    {
+      "duration": "2.5330",
+      "flac_bytes": 40694,
+      "flac_sha256": "050e3e5cc765c664e9d464567ed51601d6c0397e47420f6a69b3e02ec140edac",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.03898061439394951,
+        "scope": true,
+        "windows": [
+          [
+            0,
+            40528
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL051321",
+      "label": "bonafide",
+      "matched_gain": 1.0,
+      "mixtures": {
+        "cafe": {
+          "pcm_sha256": "4a178f0d59d4ba4747be60f491e25c150521d8946e6831ea1f3d306d92e032e1",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        },
+        "gain_control": {
+          "pcm_sha256": "a6f2de30d8ba0a7bc6cac27782829e797220108eba00f1bfb357d0910dab875f",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.03898061439394951,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                40528
+              ]
+            ]
+          }
+        },
+        "traffic": {
+          "pcm_sha256": "f2ae9f91a153dbb2b6fa8bbf394f258a3fa9419118036e23ae61f02d66b3c8c1",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        }
+      },
+      "pcm_sha256": "a6f2de30d8ba0a7bc6cac27782829e797220108eba00f1bfb357d0910dab875f",
+      "portions": [],
+      "samples": 40528,
+      "stratum": "short"
+    },
+    {
+      "duration": "2.7546",
+      "flac_bytes": 59230,
+      "flac_sha256": "e300d869d1afce77ef196e7dcd0404006ce5115957f08aa1ac078e4f0a9aa2ff",
+      "full": {
+        "decision": "ai",
+        "raw": 0.9929760694503784,
+        "scope": true,
+        "windows": [
+          [
+            0,
+            44074
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL000284",
+      "label": "bonafide",
+      "matched_gain": 0.8750200355334452,
+      "mixtures": {
+        "cafe": {
+          "pcm_sha256": "63eb0bd82c4a6d5d595a3a2289eafe210795d6024d7325778e56080e692918f5",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        },
+        "gain_control": {
+          "pcm_sha256": "d3ce38af8bf2b1f72fa7561b429049ee554a248260534ee6ec80dc23aacc43ed",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.991331934928894,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                44074
+              ]
+            ]
+          }
+        },
+        "traffic": {
+          "pcm_sha256": "f19619b5530c866d32416eef49381d1562cd2306b75a40ae0ad535093c2ddb68",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        }
+      },
+      "pcm_sha256": "72d258070e0aa3ada32708a3e4f7e2e87975c9ee1dbf3e109b01ac47c11a56c0",
+      "portions": [],
+      "samples": 44074,
+      "stratum": "short"
+    },
+    {
+      "duration": "2.9090",
+      "flac_bytes": 79580,
+      "flac_sha256": "e19e0881a8d2cc7f84068629ab3085c403340f5d8066af0deb34e6dd9b48516c",
+      "full": {
+        "decision": "original",
+        "raw": 0.0008700145990587771,
+        "scope": true,
+        "windows": [
+          [
+            0,
+            46544
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL024364",
+      "label": "bonafide",
+      "matched_gain": 0.8019271660375128,
+      "mixtures": {
+        "cafe": {
+          "pcm_sha256": "76e68b484222889a757bc6ed1c4ee589f0c8f2fa3293b4a09e45e6efed8102c0",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        },
+        "gain_control": {
+          "pcm_sha256": "13d87fdd3c58a2ac6ab98dbbcdb2522874a41485937ef7b6bc10cb9204736260",
+          "response": {
+            "decision": "original",
+            "raw": 0.0008699002210050821,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                46544
+              ]
+            ]
+          }
+        },
+        "traffic": {
+          "pcm_sha256": "93ffa772fcc616139dd75716a42c93470a4755b8a32985f3175424fb2578ee1c",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.988594651222229,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                46544
+              ]
+            ]
+          }
+        }
+      },
+      "pcm_sha256": "e695fc911d4ea9898dc3728d0b4b630293ef1286221ff5ab77c80fd4790323c6",
+      "portions": [],
+      "samples": 46544,
+      "stratum": "short"
+    },
+    {
+      "duration": "3.6200",
+      "flac_bytes": 85289,
+      "flac_sha256": "ea8754df677cbd9f5cc5a4bcbc084b3ae9a1d4e61b8b67aa411d416b6d20e74a",
+      "full": {
+        "decision": "unassessed",
+        "raw": null,
+        "scope": false,
+        "windows": []
+      },
+      "id": "RADAR2026-EVAL062912",
+      "label": "bonafide",
+      "matched_gain": 0.6362172524262893,
+      "mixtures": {
+        "cafe": {
+          "pcm_sha256": "e805bfb12b65d9b94245055bb6f4192e14239ffe74eb8a8bfb3ee73675c0b3cd",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        },
+        "gain_control": {
+          "pcm_sha256": "b4e49c2c39fa0bc9d9e26136e748a29eb3ff9feaa838cd46ad4fbe23690a74af",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        },
+        "traffic": {
+          "pcm_sha256": "880d1e9cb3145ed15325e69c6a72064ef01671c809fe42dcd9a4f5a1abd11946",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        }
+      },
+      "pcm_sha256": "ba0c31a65e1e600ec6f3c05c8ef2c39f284720dde308bbe3da0c9ebe72dd6b88",
+      "portions": [],
+      "samples": 57920,
+      "stratum": "short"
+    },
+    {
+      "duration": "3.7953",
+      "flac_bytes": 61890,
+      "flac_sha256": "623b9acb89c167fed3ea3066d2ce76b27c0f127a127e7cd88cf51831efb81989",
+      "full": {
+        "decision": "original",
+        "raw": 0.0008192104869522154,
+        "scope": true,
+        "windows": [
+          [
+            0,
+            60725
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL033858",
+      "label": "bonafide",
+      "matched_gain": 1.0,
+      "mixtures": {
+        "cafe": {
+          "pcm_sha256": "6983d301d96d2e7ceb50684e83195fa457f79d48aa62fe225f48037475367083",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        },
+        "gain_control": {
+          "pcm_sha256": "55b638dfc0f903c050fe8da07d1748f88ce0bfc38ceff09d3b7ee6ea007ef657",
+          "response": {
+            "decision": "original",
+            "raw": 0.0008192104869522154,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                60725
+              ]
+            ]
+          }
+        },
+        "traffic": {
+          "pcm_sha256": "1aa6214c8d78253c077ed0532c2f9d3632e852091754b15e22a345323dd3b6d0",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9991598129272461,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                60725
+              ]
+            ]
+          }
+        }
+      },
+      "pcm_sha256": "55b638dfc0f903c050fe8da07d1748f88ce0bfc38ceff09d3b7ee6ea007ef657",
+      "portions": [],
+      "samples": 60725,
+      "stratum": "short"
+    },
+    {
+      "duration": "3.9435",
+      "flac_bytes": 82070,
+      "flac_sha256": "3980b8cbb9106493f3109ab839f7f84470d2e717f18f2694007d2a859aed1ab9",
+      "full": {
+        "decision": "unassessed",
+        "raw": null,
+        "scope": false,
+        "windows": []
+      },
+      "id": "RADAR2026-EVAL091890",
+      "label": "bonafide",
+      "matched_gain": 1.0,
+      "mixtures": {
+        "cafe": {
+          "pcm_sha256": "14ecd8bb4b09c42e1136ef95151a5609751b5ae1a65c766f82e941a96ea42d1e",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        },
+        "gain_control": {
+          "pcm_sha256": "1f6ef434517849b0ffc64ea8ef939402efd7c020a07ee30a2a7dbba8e10f8e88",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        },
+        "traffic": {
+          "pcm_sha256": "c74f85e34d00c41e4d49dcf648625b0c1e48f992e6780d1a0849525daec285d6",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        }
+      },
+      "pcm_sha256": "1f6ef434517849b0ffc64ea8ef939402efd7c020a07ee30a2a7dbba8e10f8e88",
+      "portions": [],
+      "samples": 63096,
+      "stratum": "short"
+    },
+    {
+      "duration": "3.9494",
+      "flac_bytes": 77131,
+      "flac_sha256": "6721114ec2ffbf7cbeea891a1f766684101a01d3db29b8142a827cd565e561bf",
+      "full": {
+        "decision": "original",
+        "raw": 0.0007365460623987019,
+        "scope": true,
+        "windows": [
+          [
+            0,
+            63191
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL085580",
+      "label": "bonafide",
+      "matched_gain": 1.0,
+      "mixtures": {
+        "cafe": {
+          "pcm_sha256": "157e501033008563b9ae5663ddc786a83a56a277398964b754c07a555f3f0936",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        },
+        "gain_control": {
+          "pcm_sha256": "8423a358ec6ee27fe293de7011122b6b0ab25d750d79229403c2b5994b296c56",
+          "response": {
+            "decision": "original",
+            "raw": 0.0007365460623987019,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                63191
+              ]
+            ]
+          }
+        },
+        "traffic": {
+          "pcm_sha256": "ea2b64f467907071b27f69fc610e81331aa80f1868ed8c0bbf9282eb7b2d9af5",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        }
+      },
+      "pcm_sha256": "8423a358ec6ee27fe293de7011122b6b0ab25d750d79229403c2b5994b296c56",
+      "portions": [],
+      "samples": 63191,
+      "stratum": "short"
+    },
+    {
+      "duration": "2.7120",
+      "flac_bytes": 61458,
+      "flac_sha256": "9312054febdd3c4e91f551cc5b93a6c7a8833c8021f8418163381569a282087c",
+      "full": {
+        "decision": "original",
+        "raw": 0.0010075167519971728,
+        "scope": true,
+        "windows": [
+          [
+            0,
+            43392
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL007404",
+      "label": "bonafide",
+      "matched_gain": 0.46371715216907633,
+      "mixtures": {
+        "cafe": {
+          "pcm_sha256": "595d05166c1938efe317165ed602397389d97dbd7448f836d1bcae060674cf58",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        },
+        "gain_control": {
+          "pcm_sha256": "b9c088796b8085f5197a1b5d4b806f4d29f5d5de6eea746d9d2d58e2cda284d1",
+          "response": {
+            "decision": "original",
+            "raw": 0.0010075484169647098,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                43392
+              ]
+            ]
+          }
+        },
+        "traffic": {
+          "pcm_sha256": "668a8496d78711871b7cf19fc1c48661c91052fc84a3505e77ad074781ec979c",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        }
+      },
+      "pcm_sha256": "935edc1548eb92cebe7834bba2eb49af0e768cccb68b3bef8b00579070bd7ad8",
+      "portions": [],
+      "samples": 43392,
+      "stratum": "short"
+    },
+    {
+      "duration": "2.5028",
+      "flac_bytes": 42556,
+      "flac_sha256": "bd5362125d7b573298b1a6431b2f6cd7625778c0f1370a09819c04e382371bd3",
+      "full": {
+        "decision": "unassessed",
+        "raw": null,
+        "scope": false,
+        "windows": []
+      },
+      "id": "RADAR2026-EVAL087102",
+      "label": "bonafide",
+      "matched_gain": 1.0,
+      "mixtures": {
+        "cafe": {
+          "pcm_sha256": "5009a663a2e90989228fd56f9272ca8717f14c578f40aa7ce4499e3b16180313",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        },
+        "gain_control": {
+          "pcm_sha256": "d8339aaa86154fe9d78b484e79515d11d35b786081c16ff88322800330ed5244",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        },
+        "traffic": {
+          "pcm_sha256": "21872747bc53bc602f89032dc49e52fc7527785d48b683e03c381df8218ab03f",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        }
+      },
+      "pcm_sha256": "d8339aaa86154fe9d78b484e79515d11d35b786081c16ff88322800330ed5244",
+      "portions": [],
+      "samples": 40045,
+      "stratum": "short"
+    },
+    {
+      "duration": "3.7338",
+      "flac_bytes": 62118,
+      "flac_sha256": "2405ecb1f0dddd436244e6bd4b86ad4866dc30063da5d6033ea328e59ed7174d",
+      "full": {
+        "decision": "unassessed",
+        "raw": null,
+        "scope": false,
+        "windows": []
+      },
+      "id": "RADAR2026-EVAL049654",
+      "label": "bonafide",
+      "matched_gain": 1.0,
+      "mixtures": {
+        "cafe": {
+          "pcm_sha256": "f8797d4fdac5e2baef5eda9f727b69d52d2bd1da1d67d361558b34e4244da30d",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        },
+        "gain_control": {
+          "pcm_sha256": "538e137943a6d0e58437f9c2974c010be03305a9417e5e77a6c33a6de991c57e",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        },
+        "traffic": {
+          "pcm_sha256": "6175cb3acec23622141343ae67839f268a7a57855f697a47539429b541f4cf80",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        }
+      },
+      "pcm_sha256": "538e137943a6d0e58437f9c2974c010be03305a9417e5e77a6c33a6de991c57e",
+      "portions": [],
+      "samples": 59740,
+      "stratum": "short"
+    },
+    {
+      "duration": "2.8300",
+      "flac_bytes": 75280,
+      "flac_sha256": "fa06b49947331c977771761fcc45caa0613709d191cac8434b4831276462b92a",
+      "full": {
+        "decision": "original",
+        "raw": 0.0009357227245345712,
+        "scope": true,
+        "windows": [
+          [
+            0,
+            45280
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL027548",
+      "label": "bonafide",
+      "matched_gain": 0.49456129085527806,
+      "mixtures": {
+        "cafe": {
+          "pcm_sha256": "1f9dbe05b30ffdfec2030921aa63255e73976ff4730572a7ca4cfcd4da64ea8a",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        },
+        "gain_control": {
+          "pcm_sha256": "01af7c43b94101f10f7ce7a11fd59af645c04d6b7580193061f7b418b7144ed3",
+          "response": {
+            "decision": "original",
+            "raw": 0.0009355890797451138,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                45280
+              ]
+            ]
+          }
+        },
+        "traffic": {
+          "pcm_sha256": "3a4140fcd8c7971f3b281029935bfaec33a7eecd119d70b46433bbdd22750899",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        }
+      },
+      "pcm_sha256": "bca9ef63134397c4a6b74ea7f958b4f047bede2b7ba00f9d82119b179daa64ef",
+      "portions": [],
+      "samples": 45280,
+      "stratum": "short"
+    },
+    {
+      "duration": "3.2040",
+      "flac_bytes": 61750,
+      "flac_sha256": "8d9d937dae64a4a943742ae2b6ae8f8221823447d8e15f94a55d3a449858e9f3",
+      "full": {
+        "decision": "original",
+        "raw": 0.000997341936454177,
+        "scope": true,
+        "windows": [
+          [
+            0,
+            51264
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL072857",
+      "label": "bonafide",
+      "matched_gain": 0.9043872886531049,
+      "mixtures": {
+        "cafe": {
+          "pcm_sha256": "8a35664b3467a56238ee6bea1cdd0632bacb5dc7baa182728b697ca96c7d0957",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        },
+        "gain_control": {
+          "pcm_sha256": "c10a4b46017fab27b0c7f32186bb166960e64da1a1af59b5d3c68f7c659f624b",
+          "response": {
+            "decision": "original",
+            "raw": 0.001015795860439539,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                51264
+              ]
+            ]
+          }
+        },
+        "traffic": {
+          "pcm_sha256": "d856e056513aeb2e5dcc64ef6d06155f11f33971080c3698e52f621b37343e8d",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        }
+      },
+      "pcm_sha256": "42fec0beb6733f7973053368cbc534e0fbc3e4fc8a5b1ba05cc2d00c66c0d7de",
+      "portions": [],
+      "samples": 51264,
+      "stratum": "short"
+    },
+    {
+      "duration": "2.8800",
+      "flac_bytes": 44487,
+      "flac_sha256": "e12d7c9519aa93c33dc8a6454f9dc816e44a292a9a79d2531d67d4394ea0e708",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.0033450538758188486,
+        "scope": true,
+        "windows": [
+          [
+            0,
+            46080
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL061797",
+      "label": "bonafide",
+      "matched_gain": 0.8708232651334835,
+      "mixtures": {
+        "cafe": {
+          "pcm_sha256": "6f9d835206f98b33d4db60645e441d5f2d6565dc35a73870f19815fdfa0e5cd8",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        },
+        "gain_control": {
+          "pcm_sha256": "c7f78d3d9718f084f093c4f9871486e5356a17f55adcc5c6a6354a850b580dd6",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.0025749553460627794,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                46080
+              ]
+            ]
+          }
+        },
+        "traffic": {
+          "pcm_sha256": "4898a257e6492c698e601a981d8129a416673bae80fe650377e86e0a32cf6c6a",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        }
+      },
+      "pcm_sha256": "cb17e54a70e5f5acc04d9ce8e14e492dac820baa429c888033020ed3d67d9eb1",
+      "portions": [],
+      "samples": 46080,
+      "stratum": "short"
+    },
+    {
+      "duration": "3.0476",
+      "flac_bytes": 69138,
+      "flac_sha256": "fecaf8d7baa1010c979b54e3cf2d4cbbef025db004055577c09770fe5f84aed1",
+      "full": {
+        "decision": "original",
+        "raw": 0.0010297754779458046,
+        "scope": true,
+        "windows": [
+          [
+            0,
+            48761
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL096656",
+      "label": "bonafide",
+      "matched_gain": 0.6837271952122123,
+      "mixtures": {
+        "cafe": {
+          "pcm_sha256": "06f60e3b4d5a67b6949cba69f7992710b2761aa8893953bba2cd8960cee9587f",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.098507821559906,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48761
+              ]
+            ]
+          }
+        },
+        "gain_control": {
+          "pcm_sha256": "bf6778e6b60a04d6764622fec834f9a2b5b54e51fbff38ed9179644707c2d71c",
+          "response": {
+            "decision": "original",
+            "raw": 0.001025155303068459,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48761
+              ]
+            ]
+          }
+        },
+        "traffic": {
+          "pcm_sha256": "0df2c1adff9d7c0fc26bad2477343c10bd5c3f9065d53c595d8366b945f51919",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.6361739635467529,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48761
+              ]
+            ]
+          }
+        }
+      },
+      "pcm_sha256": "6e89475856f08bc7108b44e0f473852ebe9494754a7106b129eb6ef5a9b45f15",
+      "portions": [],
+      "samples": 48761,
+      "stratum": "short"
+    },
+    {
+      "duration": "3.4980",
+      "flac_bytes": 72376,
+      "flac_sha256": "30487dde713f0784affd763a4e8437f8f69080dfdd2fffce89c93f10ab30c4a9",
+      "full": {
+        "decision": "unassessed",
+        "raw": null,
+        "scope": false,
+        "windows": []
+      },
+      "id": "RADAR2026-EVAL082245",
+      "label": "bonafide",
+      "matched_gain": 1.0,
+      "mixtures": {
+        "cafe": {
+          "pcm_sha256": "4ea485b48d8174b86f15464c9096b161ce36bcf42ce598b0d5e0d34aeb4b85bf",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        },
+        "gain_control": {
+          "pcm_sha256": "f17b87548945ca7f3ad9ea893bdc9c1fc850eec3fee412fff671995628b21197",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        },
+        "traffic": {
+          "pcm_sha256": "9cb6ed1d080f374a36d7b088138314edd5c7b297c1370253866ea57496d0a675",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        }
+      },
+      "pcm_sha256": "f17b87548945ca7f3ad9ea893bdc9c1fc850eec3fee412fff671995628b21197",
+      "portions": [],
+      "samples": 55968,
+      "stratum": "short"
+    },
+    {
+      "duration": "3.5570",
+      "flac_bytes": 68806,
+      "flac_sha256": "4441710ed97488f90f462f73d6357ae7cd5ff0ecd38a7e24fc2e52af6dba3ede",
+      "full": {
+        "decision": "original",
+        "raw": 0.0007577488431707025,
+        "scope": true,
+        "windows": [
+          [
+            0,
+            56912
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL014697",
+      "label": "bonafide",
+      "matched_gain": 1.0,
+      "mixtures": {
+        "cafe": {
+          "pcm_sha256": "600105074aacac840c26060424d835cb02f6a1440c7269cd0e44320b10369f12",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.013539507985115051,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                56912
+              ]
+            ]
+          }
+        },
+        "gain_control": {
+          "pcm_sha256": "f1fe312b958aa0d8ebc3e861e975a77315301faad2d869c5a7f8eca452da4cb8",
+          "response": {
+            "decision": "original",
+            "raw": 0.0007577488431707025,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                56912
+              ]
+            ]
+          }
+        },
+        "traffic": {
+          "pcm_sha256": "9d9cdc47f4e8ec7edcf77a9a8a6aee24b9f16fffe835594a9650d90ddfa460d6",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.02362169325351715,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                56912
+              ]
+            ]
+          }
+        }
+      },
+      "pcm_sha256": "f1fe312b958aa0d8ebc3e861e975a77315301faad2d869c5a7f8eca452da4cb8",
+      "portions": [],
+      "samples": 56912,
+      "stratum": "short"
+    },
+    {
+      "duration": "3.4059",
+      "flac_bytes": 63958,
+      "flac_sha256": "f4865cb069b62058a7be702c6703c3f4dd086a44dee0bd9009e8692fbf4f60ed",
+      "full": {
+        "decision": "ai",
+        "raw": 0.9994661211967468,
+        "scope": true,
+        "windows": [
+          [
+            0,
+            54495
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL021189",
+      "label": "spoof",
+      "matched_gain": 0.6948921519743806,
+      "mixtures": {
+        "cafe": {
+          "pcm_sha256": "28bb7109c628c0b254b09179dbfa8619b3fe418fff962af550de36024699fc1f",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        },
+        "gain_control": {
+          "pcm_sha256": "41fd9f11de0b55141164a01f30b096b65361fe20a8a94ed28005c4b5bec91d6a",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9994671940803528,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                54495
+              ]
+            ]
+          }
+        },
+        "traffic": {
+          "pcm_sha256": "2cf98ac451c996d33589261ed69d7df49477b5dbaf7d0238837463814994299e",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9989362359046936,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                54495
+              ]
+            ]
+          }
+        }
+      },
+      "pcm_sha256": "ac57b3a149cc057a1ade58fc67732bdcedcbb6ca2a99c6472af6f968732901a7",
+      "portions": [],
+      "samples": 54495,
+      "stratum": "short"
+    },
+    {
+      "duration": "3.5294",
+      "flac_bytes": 46342,
+      "flac_sha256": "e01671e4c15e314710dba610a524c5803bae8e7ec3ec09e771c683dde9e1fdff",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.009761201217770576,
+        "scope": true,
+        "windows": [
+          [
+            0,
+            56471
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL084684",
+      "label": "spoof",
+      "matched_gain": 1.0,
+      "mixtures": {
+        "cafe": {
+          "pcm_sha256": "daa8bf38702d1db1093fbb26c90276e545ded916830c11cd4cf062fb15025343",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.005384079646319151,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                56471
+              ]
+            ]
+          }
+        },
+        "gain_control": {
+          "pcm_sha256": "8e4950da4d7c11a863f4ab09eb6dfcc20135c186f05c8a2eb2cbe826822c5404",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.009761201217770576,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                56471
+              ]
+            ]
+          }
+        },
+        "traffic": {
+          "pcm_sha256": "013184638c69ba3bc47c4a3de1a54ef9dd850bc73796dded05977025fc90ff76",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.03571270778775215,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                56471
+              ]
+            ]
+          }
+        }
+      },
+      "pcm_sha256": "8e4950da4d7c11a863f4ab09eb6dfcc20135c186f05c8a2eb2cbe826822c5404",
+      "portions": [],
+      "samples": 56471,
+      "stratum": "short"
+    },
+    {
+      "duration": "2.8038",
+      "flac_bytes": 34145,
+      "flac_sha256": "91c9b2f99d59e3170f56b4218e284043639741d209ea8114ba5365fbe5860efd",
+      "full": {
+        "decision": "ai",
+        "raw": 0.999240517616272,
+        "scope": true,
+        "windows": [
+          [
+            0,
+            44861
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL076402",
+      "label": "spoof",
+      "matched_gain": 1.0,
+      "mixtures": {
+        "cafe": {
+          "pcm_sha256": "5ee52e08d35321a8a9a584ffe1b6ed6d67354e9494941988055289fc4a58b548",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        },
+        "gain_control": {
+          "pcm_sha256": "bf0fa0d353ab41656560ad13036ad989ed3fa1d773fac6ef28e324887ae91774",
+          "response": {
+            "decision": "ai",
+            "raw": 0.999240517616272,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                44861
+              ]
+            ]
+          }
+        },
+        "traffic": {
+          "pcm_sha256": "11b0d5cabdc8c90b577b3faf5544f388dd516854ff169083f0d7bfadd7925ebd",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.9723963737487793,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                44861
+              ]
+            ]
+          }
+        }
+      },
+      "pcm_sha256": "bf0fa0d353ab41656560ad13036ad989ed3fa1d773fac6ef28e324887ae91774",
+      "portions": [],
+      "samples": 44861,
+      "stratum": "short"
+    },
+    {
+      "duration": "3.0547",
+      "flac_bytes": 67566,
+      "flac_sha256": "e681a63ed30d62a37a8ba019874da9a093db772c58ac008e1c8df682c1aadd03",
+      "full": {
+        "decision": "ai",
+        "raw": 0.9994544386863708,
+        "scope": true,
+        "windows": [
+          [
+            0,
+            48875
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL082615",
+      "label": "spoof",
+      "matched_gain": 0.6044656422110811,
+      "mixtures": {
+        "cafe": {
+          "pcm_sha256": "f06a0bf9344e8c819c43761487eeb1b8d2d3eb656859df431d4ff962a3a91ea5",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        },
+        "gain_control": {
+          "pcm_sha256": "759ea87162dcb3171335390684e67980df8852bb14896546459542735574e5cd",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9994540810585022,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48875
+              ]
+            ]
+          }
+        },
+        "traffic": {
+          "pcm_sha256": "037a2c8bcf4e6e03ec31c643dc262b1e2833a81c979844dadf484dd7e39c38e5",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        }
+      },
+      "pcm_sha256": "32fa0ba1d3a6017007a1c2a7c23d255b2b501bf56b978a34c6849534726e9399",
+      "portions": [],
+      "samples": 48875,
+      "stratum": "short"
+    },
+    {
+      "duration": "2.9566",
+      "flac_bytes": 51253,
+      "flac_sha256": "ea5ee43c3e35ce35165be8b9642cd6987b4bce9e28c40fa14cd6b4703b1ca7d8",
+      "full": {
+        "decision": "ai",
+        "raw": 0.9982348680496216,
+        "scope": true,
+        "windows": [
+          [
+            0,
+            47305
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL037548",
+      "label": "spoof",
+      "matched_gain": 1.0,
+      "mixtures": {
+        "cafe": {
+          "pcm_sha256": "7dc983bef91dda871a501eaf2bea3c4f8b8d2f2a2862e51931e7efe2de9ec6d2",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.03219097480177879,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                47305
+              ]
+            ]
+          }
+        },
+        "gain_control": {
+          "pcm_sha256": "51c410577731be50208c8b47b14145594a522dabbc77722d4c89fcd247314ac8",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9982348680496216,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                47305
+              ]
+            ]
+          }
+        },
+        "traffic": {
+          "pcm_sha256": "3a7b1be1e7c79c96cea03f96eb88331e8dd34b70489bbff27cf14a804235c456",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        }
+      },
+      "pcm_sha256": "51c410577731be50208c8b47b14145594a522dabbc77722d4c89fcd247314ac8",
+      "portions": [],
+      "samples": 47305,
+      "stratum": "short"
+    },
+    {
+      "duration": "3.8200",
+      "flac_bytes": 71954,
+      "flac_sha256": "5fd3162f54e8545a8764f9628a5bf682e0eeb298f56065b0e91e2c96f522276d",
+      "full": {
+        "decision": "ai",
+        "raw": 0.9994485974311829,
+        "scope": true,
+        "windows": [
+          [
+            0,
+            61120
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL023858",
+      "label": "spoof",
+      "matched_gain": 0.4116741843714533,
+      "mixtures": {
+        "cafe": {
+          "pcm_sha256": "ddc4ea3fabdf550fde6ec1805599b25a476219aa5be120d0199b38739ca562ed",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        },
+        "gain_control": {
+          "pcm_sha256": "93ec998bebfa53d0de4a8853ad8127b1cf48e45155688325abfb0cf025f8024c",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9994496703147888,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                61120
+              ]
+            ]
+          }
+        },
+        "traffic": {
+          "pcm_sha256": "8aa69bf4399b32dbade21107ed0e72c51a32ddf26ad57f16d184d630cd08a83c",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        }
+      },
+      "pcm_sha256": "6c61f4e326f315a91c0b0a959a3fef9f50d62caecd3fe23f3d2f24f963b076ce",
+      "portions": [],
+      "samples": 61120,
+      "stratum": "short"
+    },
+    {
+      "duration": "3.4619",
+      "flac_bytes": 53511,
+      "flac_sha256": "b284de110f1a965401ea0857438e28d67b1032daa80d7b113e45d6221bbaf72f",
+      "full": {
+        "decision": "unassessed",
+        "raw": null,
+        "scope": false,
+        "windows": []
+      },
+      "id": "RADAR2026-EVAL073600",
+      "label": "spoof",
+      "matched_gain": 0.9935668604655349,
+      "mixtures": {
+        "cafe": {
+          "pcm_sha256": "228bcae3cf13d78a9e2f0722496ce875787c6a4ea93743d12bd12d36bb7cb92b",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.016819126904010773,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                55390
+              ]
+            ]
+          }
+        },
+        "gain_control": {
+          "pcm_sha256": "7a4469fea666314665980ad5cf3ef0186038d94189a4c39c15df722321033128",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        },
+        "traffic": {
+          "pcm_sha256": "ffd20c807d4fef85e0d8dab35175a132eab57b8b98eba87a74f4f0336d48aebf",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.021801257506012917,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                55390
+              ]
+            ]
+          }
+        }
+      },
+      "pcm_sha256": "0f7705f7e87e7dbfb0d59322d521c29774c8f2b1f0618e2c34243e954f9181bf",
+      "portions": [],
+      "samples": 55390,
+      "stratum": "short"
+    },
+    {
+      "duration": "2.5338",
+      "flac_bytes": 61830,
+      "flac_sha256": "0ec0fb8594529e1bac79b046f34dc12bf5064abb4023086bb097594cf37858c7",
+      "full": {
+        "decision": "ai",
+        "raw": 0.9994240999221802,
+        "scope": true,
+        "windows": [
+          [
+            0,
+            40541
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL034671",
+      "label": "spoof",
+      "matched_gain": 0.5565420658204261,
+      "mixtures": {
+        "cafe": {
+          "pcm_sha256": "7863bddc6d25f3ca12089b8abe4d5b3b740a7287d50a1ed164aca08dfb69716c",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        },
+        "gain_control": {
+          "pcm_sha256": "f254a880c416c40b0d8c1ddb819f34cca31a489a92c6f35a3d76ff6e64372624",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9994243383407593,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                40541
+              ]
+            ]
+          }
+        },
+        "traffic": {
+          "pcm_sha256": "36bb63b05fd356748cd92d4613bdfcaa428c87d2081576adb1bd8c9c59fb1fd6",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.9904148578643799,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                40541
+              ]
+            ]
+          }
+        }
+      },
+      "pcm_sha256": "3aedba2d951e841a3bc98b5512998d06aeab2971b9f467dcf44c50839da095e9",
+      "portions": [],
+      "samples": 40541,
+      "stratum": "short"
+    },
+    {
+      "duration": "2.5040",
+      "flac_bytes": 44693,
+      "flac_sha256": "cc809de03d57c8618f423c83182053f0c6fe03b228bfb4cc3b53f9fe5e7d1642",
+      "full": {
+        "decision": "ai",
+        "raw": 0.9993488192558289,
+        "scope": true,
+        "windows": [
+          [
+            0,
+            40064
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL070186",
+      "label": "spoof",
+      "matched_gain": 1.0,
+      "mixtures": {
+        "cafe": {
+          "pcm_sha256": "a79584c756bb99b17247a2c57263b77d741be5c4fdd5d6737fd7d942cfbbe5fa",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        },
+        "gain_control": {
+          "pcm_sha256": "2df6991c7d45ad131751340f6b78feeaaaa60f1a42257b38ddf3dffe866a9ecd",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9993488192558289,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                40064
+              ]
+            ]
+          }
+        },
+        "traffic": {
+          "pcm_sha256": "8d36fad7897cbc7bcc28d4492a24a2d2f6d137f371ff294c433d091af61888c0",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        }
+      },
+      "pcm_sha256": "2df6991c7d45ad131751340f6b78feeaaaa60f1a42257b38ddf3dffe866a9ecd",
+      "portions": [],
+      "samples": 40064,
+      "stratum": "short"
+    },
+    {
+      "duration": "3.8260",
+      "flac_bytes": 53816,
+      "flac_sha256": "aa4d5c7f6e664748f50172ae1582f8207c0760988e1299428abf39bb509da66a",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.0033555813133716583,
+        "scope": true,
+        "windows": [
+          [
+            0,
+            61216
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL092750",
+      "label": "spoof",
+      "matched_gain": 1.0,
+      "mixtures": {
+        "cafe": {
+          "pcm_sha256": "90415f098109dd898f3d198576be00eebf91de9da2cb4d43590270e3c8748078",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        },
+        "gain_control": {
+          "pcm_sha256": "13b2e3c75fac9cb89cac3052481a20357512c65a31258c9aa0bc2e4bdf7ae08b",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.0033555813133716583,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                61216
+              ]
+            ]
+          }
+        },
+        "traffic": {
+          "pcm_sha256": "bbe646c0ca16c5accf9ad4fc8d6a7b998ed13de469c00faae7a7f12d7f9971c8",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        }
+      },
+      "pcm_sha256": "13b2e3c75fac9cb89cac3052481a20357512c65a31258c9aa0bc2e4bdf7ae08b",
+      "portions": [],
+      "samples": 61216,
+      "stratum": "short"
+    },
+    {
+      "duration": "3.8699",
+      "flac_bytes": 64631,
+      "flac_sha256": "6c3181ed7751870be1c60c922d1efd67673626961e5c3119776b1f15fba2cc8a",
+      "full": {
+        "decision": "original",
+        "raw": 0.0010712980292737484,
+        "scope": true,
+        "windows": [
+          [
+            0,
+            61919
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL062154",
+      "label": "spoof",
+      "matched_gain": 1.0,
+      "mixtures": {
+        "cafe": {
+          "pcm_sha256": "2eb5b58e902b065c52e3592f8ae74c0b8fae2203d61a74d3fdb59c228cbb8e42",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        },
+        "gain_control": {
+          "pcm_sha256": "ae21a79b721fae52fa8d9bf890cb0e3aada3491956ca02c44361e6b738ce1617",
+          "response": {
+            "decision": "original",
+            "raw": 0.0010712980292737484,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                61919
+              ]
+            ]
+          }
+        },
+        "traffic": {
+          "pcm_sha256": "b7a3c5e13df9453639b3d6e5a698132c8e030b5b163006ec06c3a8af0cf0110a",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        }
+      },
+      "pcm_sha256": "ae21a79b721fae52fa8d9bf890cb0e3aada3491956ca02c44361e6b738ce1617",
+      "portions": [],
+      "samples": 61919,
+      "stratum": "short"
+    },
+    {
+      "duration": "3.2500",
+      "flac_bytes": 58176,
+      "flac_sha256": "fa6988ec3abd11676e30d28282d0b85e806b661f6129aba6f06142401d277ed8",
+      "full": {
+        "decision": "ai",
+        "raw": 0.9991508722305298,
+        "scope": true,
+        "windows": [
+          [
+            0,
+            52000
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL002256",
+      "label": "spoof",
+      "matched_gain": 0.5289734566593193,
+      "mixtures": {
+        "cafe": {
+          "pcm_sha256": "ec1166624c8d3189d47636683eaa039a0ec930640df05f38a6b0951e42dc681c",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        },
+        "gain_control": {
+          "pcm_sha256": "66b065e0b09b40228197fc72840b6c0f0f7cc5b443238969e4919f1c72d961f7",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9991158843040466,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                52000
+              ]
+            ]
+          }
+        },
+        "traffic": {
+          "pcm_sha256": "514fd315aa83c88eefe7e3e364d7492bf0ed669e03ed825adb9975ade70bab47",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        }
+      },
+      "pcm_sha256": "42adbb4b59dbe4639bdc9a9583a1ccdc292435cebd7d4ccb8a194c5e4cfadbe0",
+      "portions": [],
+      "samples": 52000,
+      "stratum": "short"
+    },
+    {
+      "duration": "3.0416",
+      "flac_bytes": 65080,
+      "flac_sha256": "12b16994f2cb628e9deff9ad4e0a138133a16380fea0af33288f6292d58bfbd3",
+      "full": {
+        "decision": "ai",
+        "raw": 0.9993773102760315,
+        "scope": true,
+        "windows": [
+          [
+            0,
+            48666
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL077643",
+      "label": "spoof",
+      "matched_gain": 0.9856242864555291,
+      "mixtures": {
+        "cafe": {
+          "pcm_sha256": "59694b0f1d2b46e39af937f3ab3c8cdb54f2cbcfc99ad7cc364555e28f85ba15",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.9559491872787476,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48666
+              ]
+            ]
+          }
+        },
+        "gain_control": {
+          "pcm_sha256": "7f40304013e40245f9766d975e169bdb38eb2edcaae3aae2f59d1b2868ce0538",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9993762373924255,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48666
+              ]
+            ]
+          }
+        },
+        "traffic": {
+          "pcm_sha256": "324680a4363bbf43e7c01d2086e8aea9182e0d2a8e3df7ff527449f955065f8b",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9980133771896362,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48666
+              ]
+            ]
+          }
+        }
+      },
+      "pcm_sha256": "22746cadf266c46eafa768b9f4834ff45db05acf675232d082400ebd89d7aae7",
+      "portions": [],
+      "samples": 48666,
+      "stratum": "short"
+    },
+    {
+      "duration": "3.1670",
+      "flac_bytes": 49917,
+      "flac_sha256": "b95bed5822728d4b46989c44d3ee919c7d6bc18ebcade03f61d72aa600aeb7d0",
+      "full": {
+        "decision": "ai",
+        "raw": 0.9993768334388733,
+        "scope": true,
+        "windows": [
+          [
+            0,
+            50672
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL017404",
+      "label": "spoof",
+      "matched_gain": 1.0,
+      "mixtures": {
+        "cafe": {
+          "pcm_sha256": "a017c5f52a091096a4d9dfd3f2ff37156ec7eede5fd0dd94d2f2004827f53db8",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.008238793350756168,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                50672
+              ]
+            ]
+          }
+        },
+        "gain_control": {
+          "pcm_sha256": "3ab5c81ff2a016a3298e2f5970acdf9c1097f7e9ae03251d6cc826910ff82c1d",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9993768334388733,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                50672
+              ]
+            ]
+          }
+        },
+        "traffic": {
+          "pcm_sha256": "dfeaddf4346ce340f1c3f5993ab515df2df3345847f673bf9da4bd785bbd4064",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.03438378870487213,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                50672
+              ]
+            ]
+          }
+        }
+      },
+      "pcm_sha256": "3ab5c81ff2a016a3298e2f5970acdf9c1097f7e9ae03251d6cc826910ff82c1d",
+      "portions": [],
+      "samples": 50672,
+      "stratum": "short"
+    },
+    {
+      "duration": "2.9703",
+      "flac_bytes": 47923,
+      "flac_sha256": "ff153aaf07d61a38761755516c4206b99bb6126c24d694a9f76f42422aceda2f",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.9877869486808777,
+        "scope": true,
+        "windows": [
+          [
+            0,
+            47524
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL096343",
+      "label": "spoof",
+      "matched_gain": 0.7061167269349158,
+      "mixtures": {
+        "cafe": {
+          "pcm_sha256": "448aa61db26f4beea8df8f03dfbe8a17957df99506f838272b928fde5d0a51c6",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        },
+        "gain_control": {
+          "pcm_sha256": "5c285d9f41fb8738b68205486b3d6817605c75e959218739ac8b4200c9320760",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.014422561973333359,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                47524
+              ]
+            ]
+          }
+        },
+        "traffic": {
+          "pcm_sha256": "505f63db8b39f1fba6e88e05a7c2ac64d584bc69c9bd9f46abe2e43928d9acba",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9977203011512756,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                47524
+              ]
+            ]
+          }
+        }
+      },
+      "pcm_sha256": "6f7542fa0105d8ac4166dd39015820bc86c2df885083c69bf1b6830100a0dbd5",
+      "portions": [],
+      "samples": 47524,
+      "stratum": "short"
+    },
+    {
+      "duration": "2.9493",
+      "flac_bytes": 48671,
+      "flac_sha256": "04aa6678d513936471e2a80c9c89843aa0c7db1cf518637f0443cb5cca21d7fb",
+      "full": {
+        "decision": "ai",
+        "raw": 0.999437153339386,
+        "scope": true,
+        "windows": [
+          [
+            0,
+            47189
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL061778",
+      "label": "spoof",
+      "matched_gain": 0.7142549081512315,
+      "mixtures": {
+        "cafe": {
+          "pcm_sha256": "5c32dd746b925b6091b9d605b3cb5bb8d490c748dcfe4a8036af0b66f92bfbf5",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        },
+        "gain_control": {
+          "pcm_sha256": "5223ed93db6ccfb36473f33416948a9044394018e408eb51ea0f053de6291c87",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9994348883628845,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                47189
+              ]
+            ]
+          }
+        },
+        "traffic": {
+          "pcm_sha256": "3fa9431f85339f7a79ec70a40f109a7aaeef3be436d1b58abeae67ce547f8d36",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        }
+      },
+      "pcm_sha256": "713bf3c59c953afd680ea150b9f67f120ed3649ec5a5476e53f236f52f40020f",
+      "portions": [],
+      "samples": 47189,
+      "stratum": "short"
+    },
+    {
+      "duration": "8.3134",
+      "flac_bytes": 113676,
+      "flac_sha256": "b6e08290089665d3f967cbc7824fc2c3a3c6111d0b2c1a7b436b71c8c1541ef3",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.0026999624678865075,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL102421",
+      "label": "bonafide",
+      "matched_gain": null,
+      "mixtures": {},
+      "pcm_sha256": "34939d38366aa1cfab5892eddc38d08a9b6291891a74f9adbc9e8f8737518b49",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "d5f151b59916d01ca045a0e6f0846eafd57562b9c583e4cc4cc06c0f0924ab63",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.0015756553038954735,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            85014,
+            133014
+          ],
+          "pcm_sha256": "4cf73003066d4cc7d55f59d935d1b55c8535c497733af6433fa7830050a0585b",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        }
+      ],
+      "samples": 133014,
+      "stratum": "long"
+    },
+    {
+      "duration": "11.6200",
+      "flac_bytes": 212953,
+      "flac_sha256": "f71b09fc4d7cc95c3ea63bf400f41d93f2b589dc30eda1b139fbdcea44342ff4",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.0009068208164535463,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            128000
+          ],
+          [
+            96000,
+            160000
+          ],
+          [
+            128000,
+            185920
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL012606",
+      "label": "bonafide",
+      "matched_gain": null,
+      "mixtures": {},
+      "pcm_sha256": "ea31a06551361d9581b82ae43599e2ebefe2dffc82d31b6700ae643389a5c212",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "96b1036dd00884e92813c21dcbe037f786a5805f22a34c12479355e335475ef3",
+          "response": {
+            "decision": "original",
+            "raw": 0.0008129675406962633,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            68960,
+            116960
+          ],
+          "pcm_sha256": "0450d2488d9e3efb73feec25ae8cea679d36e31a2d19424bf8ddd48a00b265e4",
+          "response": {
+            "decision": "original",
+            "raw": 0.0008242944022640586,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            137920,
+            185920
+          ],
+          "pcm_sha256": "3c0e9e8497a5dbea482a2393e85a0e4af83d1e5233c93a8ab1042b60a9d43b1b",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        }
+      ],
+      "samples": 185920,
+      "stratum": "long"
+    },
+    {
+      "duration": "6.9285",
+      "flac_bytes": 82899,
+      "flac_sha256": "647617b66ed82e6236bcb54b87d6450b0a5d6d050fc61db284e3e0e9341208ad",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.0010745066489713888,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            110856
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL102564",
+      "label": "bonafide",
+      "matched_gain": null,
+      "mixtures": {},
+      "pcm_sha256": "b6dc22473b8f786a4d799b074ab7b574fa28b9293d9fead605cdb43bace3c789",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "395104ac8cc89c3b76704fb6680b0a38e71b01594377e353b106db259b2b1b29",
+          "response": {
+            "decision": "original",
+            "raw": 0.0010957197519019246,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            62856,
+            110856
+          ],
+          "pcm_sha256": "b5b1549e53a65969a7ef5489aef08fb09d634ab6cfdb8fb0556cebd0cfaa5ae3",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        }
+      ],
+      "samples": 110856,
+      "stratum": "long"
+    },
+    {
+      "duration": "7.9190",
+      "flac_bytes": 142861,
+      "flac_sha256": "867d573bfb423a7a968243701ba4552fbc875089000466353cb223a8a0f12bc3",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.0008105274367456635,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            126704
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL028347",
+      "label": "bonafide",
+      "matched_gain": null,
+      "mixtures": {},
+      "pcm_sha256": "27d96368fd921f2df3cea6c4855d0dff6175c4b90ecbfce15917bc9cef57afe0",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "8805a6af5dd113cfd5d232c60e6177c5fd09fd05567623e313be1cc3377da50a",
+          "response": {
+            "decision": "original",
+            "raw": 0.0008395871263928711,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            78704,
+            126704
+          ],
+          "pcm_sha256": "a2eb55e8810b88280b638f598de57f5e271f7aa8f97f4e3a11d3fafaafad5868",
+          "response": {
+            "decision": "original",
+            "raw": 0.001137214945629239,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 126704,
+      "stratum": "long"
+    },
+    {
+      "duration": "7.0929",
+      "flac_bytes": 165831,
+      "flac_sha256": "8da0a01ce0f661cf018b6a706a34300c2697d00faf694919c514d0e3ec116cd5",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.000793513764316837,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            113487
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL053609",
+      "label": "bonafide",
+      "matched_gain": null,
+      "mixtures": {},
+      "pcm_sha256": "470579bef76c6961f84e46b40ac4da8edc0cab26218f3f83c6ea949e0e5ff27b",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "4a356a9d3fe487155521a5848131f746efda76241cd811eb7bd1baf097d85ee6",
+          "response": {
+            "decision": "original",
+            "raw": 0.0008049108437262475,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            65487,
+            113487
+          ],
+          "pcm_sha256": "93fbd898bd923127e0575331cc911bb05bd2498a28010fafc6d8aa8a5b0f31c5",
+          "response": {
+            "decision": "original",
+            "raw": 0.0008734483853913844,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 113487,
+      "stratum": "long"
+    },
+    {
+      "duration": "11.7000",
+      "flac_bytes": 217327,
+      "flac_sha256": "fcf046a16e5b0d3edd0a8a774714d9107a7d3d6723f456b3a7d521c20a93332c",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.0008222128031775356,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            128000
+          ],
+          [
+            96000,
+            160000
+          ],
+          [
+            128000,
+            187200
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL067356",
+      "label": "bonafide",
+      "matched_gain": null,
+      "mixtures": {},
+      "pcm_sha256": "3bd130a58deea409858d8736e87c6671269bf3a028f3109b7b0a3f4cb945cd48",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "69611d80c9b6d5fb754c12c286606367d795c6f5375877c4b0ce330eaefd9702",
+          "response": {
+            "decision": "original",
+            "raw": 0.0008215439738705754,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            69600,
+            117600
+          ],
+          "pcm_sha256": "6e5e35c9acd8408fb9a7e6c2874dd926786aa530a0802dbf520fddd479a226ce",
+          "response": {
+            "decision": "original",
+            "raw": 0.0008721098420210183,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            139200,
+            187200
+          ],
+          "pcm_sha256": "2d19c099374e8dee9975502f6a2839213a4e8430244caa26dc26dccad4d81c43",
+          "response": {
+            "decision": "original",
+            "raw": 0.0009014991228468716,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 187200,
+      "stratum": "long"
+    },
+    {
+      "duration": "13.7100",
+      "flac_bytes": 250355,
+      "flac_sha256": "4aefbb06414870878869d92aac8c657ec82337a646ee8e0b3abce3af4f53bb9d",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.0012966550809020798,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            128000
+          ],
+          [
+            96000,
+            160000
+          ],
+          [
+            128000,
+            192000
+          ],
+          [
+            160000,
+            219360
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL022875",
+      "label": "bonafide",
+      "matched_gain": null,
+      "mixtures": {},
+      "pcm_sha256": "0bef7d8364c71d9135bc61e86de1b9433953e47c95676f709f18a62b8845b202",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "2bfba7ae38da3fc4386b40d61e2a61833ed1a5d1d9b96fdef11bb3410b084400",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.0016593860927969217,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            85680,
+            133680
+          ],
+          "pcm_sha256": "5033530e49ea8836d1d60db5e7fe3d67debdef0e3194f99f73748acc2a18d500",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.0018765222048386931,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            171360,
+            219360
+          ],
+          "pcm_sha256": "0de3783502eb4002dc1cd6b3f9ec4bc20adf7397465dbc7472e9c9990d45440a",
+          "response": {
+            "decision": "original",
+            "raw": 0.0010445371735841036,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 219360,
+      "stratum": "long"
+    },
+    {
+      "duration": "6.6558",
+      "flac_bytes": 128718,
+      "flac_sha256": "07a26e5696020cfda867fb8a64969049baeed4fd0d8abb3a7e64a5f884373c52",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.0007164322111445168,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            106493
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL095979",
+      "label": "bonafide",
+      "matched_gain": null,
+      "mixtures": {},
+      "pcm_sha256": "6e906e861f8b8e49f1c146ed31ae3e2de1fa92e79fa0d223e8b700e7a8dcb003",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "ba51c5adc2ca6de864bec60f5532a4f5520356c4b32dcccc28d469aba592a1dd",
+          "response": {
+            "decision": "original",
+            "raw": 0.0006859985296614468,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            58493,
+            106493
+          ],
+          "pcm_sha256": "f4dd7620ac370b03569399f873f7cd535661a40e091c4c681fa09db111304639",
+          "response": {
+            "decision": "original",
+            "raw": 0.0007461427012458444,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 106493,
+      "stratum": "long"
+    },
+    {
+      "duration": "11.3230",
+      "flac_bytes": 128675,
+      "flac_sha256": "5727c7e29d310077010cb9e01f98dfdd7b458e2284f21d9c20b24c326f49b1eb",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.0007675808446947485,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            128000
+          ],
+          [
+            96000,
+            160000
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL004697",
+      "label": "bonafide",
+      "matched_gain": null,
+      "mixtures": {},
+      "pcm_sha256": "c9092aed7694c7ef92295e7ea05964de2d89d321bfd005089098053f8322f70b",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "b9c1a08a0d4e210e689a3f33d08bdfd1b8ee7e8313285223d61ae7a02d16ee81",
+          "response": {
+            "decision": "original",
+            "raw": 0.0007371945539489388,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            66584,
+            114584
+          ],
+          "pcm_sha256": "02c87ecaa4f9b349b87bc7b3745245bbae958aac8ae2c7f399adab84a43f46e1",
+          "response": {
+            "decision": "original",
+            "raw": 0.0008239696035161614,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            133168,
+            181168
+          ],
+          "pcm_sha256": "36395a0bdf232ea4188c39e20d705252a6e07d8c32e9aa6b622b50cfcf854a93",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        }
+      ],
+      "samples": 181168,
+      "stratum": "long"
+    },
+    {
+      "duration": "6.7730",
+      "flac_bytes": 173301,
+      "flac_sha256": "b6899637ea9f740b8b745baae8d4a228b13c3c819e2edcc7f08d98fe72abcfa7",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.0008694705708573262,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            108368
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL016645",
+      "label": "bonafide",
+      "matched_gain": null,
+      "mixtures": {},
+      "pcm_sha256": "870a896ec7e21c33257c5160b065934e99368a3e86fa5365c812982b1deb1564",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "3d4f0c5b6e2469b00dba0065502541bd49165a12350aac5f1e28d961b822c39d",
+          "response": {
+            "decision": "original",
+            "raw": 0.000900484505109489,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            60368,
+            108368
+          ],
+          "pcm_sha256": "0516af4c56b1280a21132b671fb82db65a81f8dac1566a54e2cfe68c5ea10c05",
+          "response": {
+            "decision": "original",
+            "raw": 0.0009454335086047649,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 108368,
+      "stratum": "long"
+    },
+    {
+      "duration": "6.5034",
+      "flac_bytes": 124846,
+      "flac_sha256": "c80c26b5102876f4e53bda88ad60daa135e00b09cadbeb3f6c595049c7ca56c0",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.0007451284327544272,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            104055
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL061282",
+      "label": "bonafide",
+      "matched_gain": null,
+      "mixtures": {},
+      "pcm_sha256": "68b09a7852831d9183595bee8032f66e634653db6d01b1608cee37828edd47f7",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "03f3d528cfdf379eeed76ad186b840c77b6e671f0136a349d81fc9aaed2476d8",
+          "response": {
+            "decision": "original",
+            "raw": 0.0007936311885714531,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            56055,
+            104055
+          ],
+          "pcm_sha256": "b37ab8e0055e36b3e594411b4c05736b53ea2fa3993fdbe901ed8edd8dd7c81a",
+          "response": {
+            "decision": "original",
+            "raw": 0.0007348312065005302,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 104055,
+      "stratum": "long"
+    },
+    {
+      "duration": "6.0804",
+      "flac_bytes": 112176,
+      "flac_sha256": "c90fa3f6be71496ed8fa8122842f787c724b0c8e53dd6abd21d6319defeacaae",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.0021999472131331763,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            97286
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL013851",
+      "label": "bonafide",
+      "matched_gain": null,
+      "mixtures": {},
+      "pcm_sha256": "13c00448d796f26c4def30a2f67e967adbdff340dd99f030c73b661243b2dff4",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "d99e297f99a0426586960976f38e167834ffcf28b805a59c56bd1742179ec118",
+          "response": {
+            "decision": "original",
+            "raw": 0.0010264550801366568,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            49286,
+            97286
+          ],
+          "pcm_sha256": "9ca57a906e1c4966e8bbc5b2c8e5bb8b38b1374a1c3faf625b691860caed88ca",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.0017811635043472052,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 97286,
+      "stratum": "long"
+    },
+    {
+      "duration": "10.4817",
+      "flac_bytes": 171188,
+      "flac_sha256": "7966cdf2f6b15a8f9a27931606bc45723063365ef473e1317d651b900f94ca49",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.1304050087928772,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            128000
+          ],
+          [
+            96000,
+            160000
+          ],
+          [
+            128000,
+            167707
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL092615",
+      "label": "bonafide",
+      "matched_gain": null,
+      "mixtures": {},
+      "pcm_sha256": "5a55099578846ff7468f6aa8a13c7f0baecf642235f71fb00b11996ca19e2734",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "1ce0610adb635216e429a483c2b5bcbf78668e60b18e5c623f2b5bd78860fc06",
+          "response": {
+            "decision": "original",
+            "raw": 0.0007674587541259825,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            59853,
+            107853
+          ],
+          "pcm_sha256": "7fd1cfe1e9ece4664c56021b8fea92705dcb77d1a1e119dcbc260afdd19e5143",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.004071829374879599,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            119707,
+            167707
+          ],
+          "pcm_sha256": "63a38c1363cdce3266655b298ecf960b14c2d282f3a64a6add2939b6746e39ed",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.0016340402653440833,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 167707,
+      "stratum": "long"
+    },
+    {
+      "duration": "8.3974",
+      "flac_bytes": 180668,
+      "flac_sha256": "a931a73822e7189125502830f1b5c2095c12d45d06621af805b5ef6c23a967ae",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.0020696541178040206,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL073250",
+      "label": "bonafide",
+      "matched_gain": null,
+      "mixtures": {},
+      "pcm_sha256": "f382c608660a0fd2f22f1e6562640b0056a05c4b70f61c39ebefdd52e9d4da0a",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "6134dc950752021e9373db5e056dd98516202a564948f6742095a44e365a5026",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.0021062693558633327,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            86358,
+            134358
+          ],
+          "pcm_sha256": "f168d389f0332bf355acbf8e510456bcefdc2bb38eca3661310216e23456786c",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.9588508009910583,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 134358,
+      "stratum": "long"
+    },
+    {
+      "duration": "10.3700",
+      "flac_bytes": 244851,
+      "flac_sha256": "1449d0edc5cbe9a041bb0021f442c4d0662bce4d2e818e8d7282514cf53ed368",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.006887256447225809,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            128000
+          ],
+          [
+            96000,
+            160000
+          ],
+          [
+            128000,
+            165920
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL045677",
+      "label": "bonafide",
+      "matched_gain": null,
+      "mixtures": {},
+      "pcm_sha256": "871376536d68143b558c1dbda1dbfe48930664ad5c0f59bc501175b7ac0fb009",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "18201b426f9d24a0719f1c93fb8d7367f3942d86d2cb81f37456a909dcdfc2bc",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.003880253527313471,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            58960,
+            106960
+          ],
+          "pcm_sha256": "92aa87c1b1fd586c2f87c6ea78568ac6d4d3d9ae1d9a8101f57b73926b32258c",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.002385576954111457,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            117920,
+            165920
+          ],
+          "pcm_sha256": "fee68464c7c15e72020bb7dd8beae4a4f12bb0cf64c24acef95d8b34e4fad104",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.9892862439155579,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 165920,
+      "stratum": "long"
+    },
+    {
+      "duration": "7.2122",
+      "flac_bytes": 61228,
+      "flac_sha256": "abc71018f177ae3f487906e25432798487f82acfce27e3507cc2f6223c3479f7",
+      "full": {
+        "decision": "unassessed",
+        "raw": null,
+        "scope": false,
+        "windows": []
+      },
+      "id": "RADAR2026-EVAL055732",
+      "label": "bonafide",
+      "matched_gain": null,
+      "mixtures": {},
+      "pcm_sha256": "4f76f22e453bf2a0231b34f30a8b27d7a3d3c01a099e7757212937278e5036c8",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "4497c14b0c0189a31516177d2dd99ace8f68de4aa1b904ba4ce1a25a0da723e4",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        },
+        {
+          "interval": [
+            67395,
+            115395
+          ],
+          "pcm_sha256": "4a66fd6345cfdcd36c8130d80105d9f002a388a80cd419913fa7286ff3d238ef",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        }
+      ],
+      "samples": 115395,
+      "stratum": "long"
+    },
+    {
+      "duration": "9.8804",
+      "flac_bytes": 143684,
+      "flac_sha256": "f6214e0da01bf5e26021e195246e0ad9114aebb9afcaf6b0354e566c09e49941",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.4990678688045591,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            128000
+          ],
+          [
+            96000,
+            158086
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL020632",
+      "label": "spoof",
+      "matched_gain": null,
+      "mixtures": {},
+      "pcm_sha256": "34227607ced60d1a1feaecca4c030bf58d0b01f7677b56ac16f5ab3c5dfc2802",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "ffb3528133aa5748c4b5fa62bdd55db32c9282602230230085e9b36164bd1c96",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.026146300137043,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            55043,
+            103043
+          ],
+          "pcm_sha256": "1c6ea2dbd5d34ace2a535110939907c3498f9e6a9d0f0c014fab0e10ae947fb9",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.006728926673531532,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            110086,
+            158086
+          ],
+          "pcm_sha256": "9babf1e9ce8574d392eea991ee5e3bc45d16f5b8b76cc7a8f0df16acf9a8d28b",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.0017316623125225306,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 158086,
+      "stratum": "long"
+    },
+    {
+      "duration": "11.4191",
+      "flac_bytes": 141112,
+      "flac_sha256": "84021b4d9b8c032740b92b8b6a5010d5dcf9783b61bfcd29085f3867d4eb4db6",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.9994107127189636,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            128000
+          ],
+          [
+            96000,
+            160000
+          ],
+          [
+            128000,
+            182705
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL021920",
+      "label": "spoof",
+      "matched_gain": null,
+      "mixtures": {},
+      "pcm_sha256": "7e2c1959906a0e50dbe811b864952ec893bddb45096db312aa48a77e16a4f75a",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "611fe652c1372588ebab652d6fd8681935a311842603d36a363d71b4234ac7a2",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9993108510971069,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            67352,
+            115352
+          ],
+          "pcm_sha256": "c6c456363fd2993ea9f37797f739d6de3002390279e69a2d69ffd55bc4fe387c",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9994035959243774,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            134705,
+            182705
+          ],
+          "pcm_sha256": "577775302e7a7ae797ef06825152b1d6ce641b7db3deaaf935514b90c180f320",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9994173049926758,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 182705,
+      "stratum": "long"
+    },
+    {
+      "duration": "6.1116",
+      "flac_bytes": 105499,
+      "flac_sha256": "301abfde2f851ad74b6e913128c428ce2c83327ce5058f39e32fcc6bedb024bf",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.9977065722147623,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            97786
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL080628",
+      "label": "spoof",
+      "matched_gain": null,
+      "mixtures": {},
+      "pcm_sha256": "ec887c68d85353c5ef788d4387adc5eee51961ee051a9e07c7d5fdceede8e774",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "053cfa8de84670423a9905fa1f8fb1b13a46a61b0500d5328b64cd767626d043",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9993060827255249,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            49786,
+            97786
+          ],
+          "pcm_sha256": "6395b2574814b6f9bd81bd10a027ca73dca04d071735ef6670cd50fc69a53d51",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9990297555923462,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 97786,
+      "stratum": "long"
+    },
+    {
+      "duration": "6.1475",
+      "flac_bytes": 131767,
+      "flac_sha256": "51b241dc0545870c504cfe95658d69e6c2cbab83cdfa5a00b4315bcda362210a",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.9940950274467468,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            98360
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL044573",
+      "label": "spoof",
+      "matched_gain": null,
+      "mixtures": {},
+      "pcm_sha256": "5ef76a62af8d40f496b4afca89bbe22e6bbd79ccdfd48d27189aeff3639376b3",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "b0e3f999e3d97569131a2a7b580fe89e35a5c19636fee938501ab705312c95df",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9994483590126038,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            50360,
+            98360
+          ],
+          "pcm_sha256": "b48ca8015700b5ec8a129efe66f7758b2c458110499fab7a2d3176164eb90f14",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9990032315254211,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 98360,
+      "stratum": "long"
+    },
+    {
+      "duration": "6.3006",
+      "flac_bytes": 80955,
+      "flac_sha256": "564b95c2b30e21079cd6322c957bafdb318b0d78849a6629455e5e9ea2434f71",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.998476485411326,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            100810
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL038717",
+      "label": "spoof",
+      "matched_gain": null,
+      "mixtures": {},
+      "pcm_sha256": "96d8251c088fb6f3273cac9d7e02f7ae658000f94427640112e6734efc5c6eee",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "10161c7f95cf8c053b90424406e8fe898039644095a50eb3a34c1faae794aea7",
+          "response": {
+            "decision": "ai",
+            "raw": 0.996757447719574,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            52810,
+            100810
+          ],
+          "pcm_sha256": "ac6891e26114e32f197e1d22a885507b1f4ea4345213cccd26a73d675765188d",
+          "response": {
+            "decision": "ai",
+            "raw": 0.998997151851654,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 100810,
+      "stratum": "long"
+    },
+    {
+      "duration": "8.5454",
+      "flac_bytes": 108921,
+      "flac_sha256": "91c6851d8e7bd4706abf911430a0a9466f8807bc9212e3f6cac7d0a52e7e3242",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.9813631922006607,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            128000
+          ],
+          [
+            96000,
+            136726
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL016350",
+      "label": "spoof",
+      "matched_gain": null,
+      "mixtures": {},
+      "pcm_sha256": "50283f8906ed48ba975cd9543c915e772e31c4a3b7ffbc1fd0cc05c1d4053b39",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "f55ed66e958f0db1682cdf4e3dcb4b5673d3a922c459f33c088e6094173bd159",
+          "response": {
+            "decision": "ai",
+            "raw": 0.999295711517334,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            88726,
+            136726
+          ],
+          "pcm_sha256": "320c733f80b078e1da098bec944987e325aded9f6178102963d6411f5719c312",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.977568507194519,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 136726,
+      "stratum": "long"
+    },
+    {
+      "duration": "6.4749",
+      "flac_bytes": 141526,
+      "flac_sha256": "84c5bd02b6565870075d922bf210ea5b48ae2caa4017897ec27c65e6f793b65e",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.9988986055056254,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            103598
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL088218",
+      "label": "spoof",
+      "matched_gain": null,
+      "mixtures": {},
+      "pcm_sha256": "141e9ffa56a13840da142c5c81a72f1ebeb85c448332747cd9d2a71d30081a59",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "f9175aa93b6a7471093b9f05cc38b138d326c603b8f516ce5d392c5d8231764f",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9980121850967407,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            55598,
+            103598
+          ],
+          "pcm_sha256": "002ca4eef068b7c359c7d554e4d7784001ffbc4e470891c25e0cc030ce2ad30f",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9992256164550781,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 103598,
+      "stratum": "long"
+    },
+    {
+      "duration": "7.9106",
+      "flac_bytes": 143208,
+      "flac_sha256": "4d7bcb8226c5852df6e25bd9eb80399b689b5a7ce47549490885451b3bac17c0",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.9993024269739786,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            126569
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL086656",
+      "label": "spoof",
+      "matched_gain": null,
+      "mixtures": {},
+      "pcm_sha256": "4bc160e67cb3b878ba4de95e00077975699d1dfb49e1657efe6db2290d752979",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "7d971008ec11290d9b54fe1beaa6e69d9135c5ddb89296af209b4e7c9938493a",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9993809461593628,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            78569,
+            126569
+          ],
+          "pcm_sha256": "55d81b14e41a692c72e0c1781996e1fe7e86f0d8fa2fe906665f0c2f127cf20c",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9994136095046997,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 126569,
+      "stratum": "long"
+    },
+    {
+      "duration": "8.8675",
+      "flac_bytes": 197650,
+      "flac_sha256": "d170704b9ad7972389208f55edf2902e2ea980ab456e19cf6cd37024ae02e035",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.9994540810585022,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            128000
+          ],
+          [
+            96000,
+            141880
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL067213",
+      "label": "spoof",
+      "matched_gain": null,
+      "mixtures": {},
+      "pcm_sha256": "2dcbdb7f02ad762e274b25565c18eff7735f1fca00a4455b40f84c686ead6e9f",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "f96bf0a402422a7abcd40484a4aec1e7c6a3d26a26267929a6b5bc0802b31ae2",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9994491934776306,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            93880,
+            141880
+          ],
+          "pcm_sha256": "4a67dd7c627a3410245e3dda267a18f26a2a0f250b01ddeaba1b159593bf640a",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9994458556175232,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 141880,
+      "stratum": "long"
+    },
+    {
+      "duration": "6.3079",
+      "flac_bytes": 72217,
+      "flac_sha256": "0376733d988c866d1c27bb06d9b10a733fa060eaba01a6a8f24cb667f9f14d8d",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.9990126192569733,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL043259",
+      "label": "spoof",
+      "matched_gain": null,
+      "mixtures": {},
+      "pcm_sha256": "93ae7ae7d604e43253bb6045716131d8e9d52a3bee3ff873b404a0aa758c0def",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "ada361e265b17d4e57231fa6e994e20e7247ece3b644e0a71d4cc4919fe35a25",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9959812164306641,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            52927,
+            100927
+          ],
+          "pcm_sha256": "1e516f39f77f59fa8232c8922156a66e722037262f7bba83dff46b7b1c60c4c3",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        }
+      ],
+      "samples": 100927,
+      "stratum": "long"
+    },
+    {
+      "duration": "8.7271",
+      "flac_bytes": 125066,
+      "flac_sha256": "54a2b1d8e6fd75bd6f51f534748f5492d6e5525c753d954fd71192c65861cd3a",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.9991451501846313,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL012256",
+      "label": "spoof",
+      "matched_gain": null,
+      "mixtures": {},
+      "pcm_sha256": "b1ba20a77f54345cff72aae78231c53d2e43a9c00b00b9b33afa0697863df24e",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "5d5de360dd430266a12c766ab71ece4c6d4261226f39a9ed247818041541b5bd",
+          "response": {
+            "decision": "ai",
+            "raw": 0.999292254447937,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            91633,
+            139633
+          ],
+          "pcm_sha256": "4c683e3a549fb874a8d522893735fc1b0930da15d43f08af27eca57f547e8f7a",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        }
+      ],
+      "samples": 139633,
+      "stratum": "long"
+    },
+    {
+      "duration": "6.0943",
+      "flac_bytes": 104836,
+      "flac_sha256": "f75df7c29eab187d1063b417e83969be7d1f81815d402bf3a81338697db1aee9",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.999303917090098,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            97509
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL050926",
+      "label": "spoof",
+      "matched_gain": null,
+      "mixtures": {},
+      "pcm_sha256": "97584c40ea2343a82e7ce8e2ad35a2d9372946e170de437f8d053d0ca634fce2",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "f33fb198d98aaa43209af715f25d5aa3f0845a4e1057a8636b0927ffdd0ace99",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9994458556175232,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            49509,
+            97509
+          ],
+          "pcm_sha256": "277065ef450c15ed46827f1b6370d517f8dfa3ac2aa8605b218dc4edab0db9be",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9991438388824463,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 97509,
+      "stratum": "long"
+    },
+    {
+      "duration": "10.7704",
+      "flac_bytes": 208509,
+      "flac_sha256": "bf856c3b7fe8531c4df4aec1a9f64923f1c4e1f501501c062f10f376c8ffcebf",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.9993897914886475,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            128000
+          ],
+          [
+            96000,
+            160000
+          ],
+          [
+            128000,
+            172326
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL035430",
+      "label": "spoof",
+      "matched_gain": null,
+      "mixtures": {},
+      "pcm_sha256": "5493cffcc43042b28cb6b751c9843ac22773fd2b593b9dc9fce630b1a77c7adb",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "5d9593096d0374b314bae4c3c16b4ae429236475153f7bd1b120ecc39d47a2df",
+          "response": {
+            "decision": "ai",
+            "raw": 0.999316930770874,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            62163,
+            110163
+          ],
+          "pcm_sha256": "db1297b48e79b21a8804d908ca8c942b733b76c28a9e449feaee2961471c81f4",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9994045495986938,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            124326,
+            172326
+          ],
+          "pcm_sha256": "0b4fb4506eddc6a95186de4a3935e1e0a9180b5a43b396be9d046bcf188fdea9",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9993971586227417,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 172326,
+      "stratum": "long"
+    },
+    {
+      "duration": "6.3623",
+      "flac_bytes": 104962,
+      "flac_sha256": "62e4a509b720158e3251ebcfe936c6ad7f2212cbd9e007cd5c50922959061b05",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.9994199474652609,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            101797
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL099409",
+      "label": "spoof",
+      "matched_gain": null,
+      "mixtures": {},
+      "pcm_sha256": "c077fde66795dcebc68d35443280a3deb42dbf96cff19ecbd25a983f583ddfff",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "5cc41fa13b6d1522e95789bccbaf6132170128765ceb526f66881677cc9ad504",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9994271993637085,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            53797,
+            101797
+          ],
+          "pcm_sha256": "21bf90952e9de129bd5bf596b6e40ca9716ae6828b57d50d26950062a9fa0b2e",
+          "response": {
+            "decision": "ai",
+            "raw": 0.999424934387207,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 101797,
+      "stratum": "long"
+    },
+    {
+      "duration": "8.9826",
+      "flac_bytes": 196904,
+      "flac_sha256": "fd1beb21343f973838c7d7f16f661ee57640239a86161a41ac7eec57165094a7",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.9972245693206787,
+        "scope": false,
+        "windows": [
+          [
+            0,
+            64000
+          ],
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            128000
+          ],
+          [
+            96000,
+            143722
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL066547",
+      "label": "spoof",
+      "matched_gain": null,
+      "mixtures": {},
+      "pcm_sha256": "02332aa0cf5ed7ddc89fc5bf84f40e3e76bd839c196352c0fc0d9ae9bedd2788",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "253bcde4a538a654c2551970c232c02be6da2964978968888b481dfc00c2a0bd",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.9847339987754822,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        },
+        {
+          "interval": [
+            95722,
+            143722
+          ],
+          "pcm_sha256": "766738b5bb09f55c7634a84cd048fb3af2fe75e76d0843d56be6b35d70452b01",
+          "response": {
+            "decision": "ai",
+            "raw": 0.9982333183288574,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 143722,
+      "stratum": "long"
+    },
+    {
+      "duration": "6.4933",
+      "flac_bytes": 102898,
+      "flac_sha256": "35e2fcdf79438a41334ea42cc874cbcf486ddbc7fdb7a2f5ea240013aed9db76",
+      "full": {
+        "decision": "inconclusive",
+        "raw": 0.5111512551084161,
+        "scope": false,
+        "windows": [
+          [
+            32000,
+            96000
+          ],
+          [
+            64000,
+            103893
+          ]
+        ]
+      },
+      "id": "RADAR2026-EVAL024734",
+      "label": "spoof",
+      "matched_gain": null,
+      "mixtures": {},
+      "pcm_sha256": "d05801d7ba2bce96f872f7425552eb3a6e33cdfffb51880faeb000dd2a4dad38",
+      "portions": [
+        {
+          "interval": [
+            0,
+            48000
+          ],
+          "pcm_sha256": "30b74c35c439516f39a384832569909efaa83372e7881bf93dc5ba1b05e09ddd",
+          "response": {
+            "decision": "unassessed",
+            "raw": null,
+            "scope": false,
+            "windows": []
+          }
+        },
+        {
+          "interval": [
+            55893,
+            103893
+          ],
+          "pcm_sha256": "925df3ba9cded78e43100e0efd342250567949919935a3736020bcd80bba4f83",
+          "response": {
+            "decision": "inconclusive",
+            "raw": 0.004544605500996113,
+            "scope": true,
+            "windows": [
+              [
+                0,
+                48000
+              ]
+            ]
+          }
+        }
+      ],
+      "samples": 103893,
+      "stratum": "long"
+    }
+  ],
+  "rows_sha256": "29c63cd1ef933fdd0f76c44ec1505bf8a0d9adfd2d9eb3de3e9d24e5901f023d",
+  "summary": {
+    "counts": {
+      "long/bonafide": {
+        "ai": 0,
+        "any_ai_portion": 0,
+        "corroborated_ai_portions": 0,
+        "files": 16,
+        "inconclusive": 15,
+        "original": 0,
+        "two_portions_assessed": 13,
+        "unassessed": 1
+      },
+      "long/spoof": {
+        "ai": 0,
+        "any_ai_portion": 14,
+        "corroborated_ai_portions": 10,
+        "files": 16,
+        "inconclusive": 16,
+        "original": 0,
+        "two_portions_assessed": 13,
+        "unassessed": 0
+      },
+      "short/bonafide": {
+        "ai": 1,
+        "files": 16,
+        "inconclusive": 2,
+        "original": 8,
+        "unassessed": 5
+      },
+      "short/spoof": {
+        "ai": 11,
+        "files": 16,
+        "inconclusive": 3,
+        "original": 1,
+        "unassessed": 1
+      }
+    },
+    "follow_up_criterion_met": true,
+    "matched_short_scenes": {
+      "cafe/bonafide": {
+        "ai": 0,
+        "inconclusive": 2,
+        "original": 0,
+        "unassessed": 14
+      },
+      "cafe/spoof": {
+        "ai": 0,
+        "inconclusive": 5,
+        "original": 0,
+        "unassessed": 11
+      },
+      "gain_control/bonafide": {
+        "ai": 0,
+        "inconclusive": 3,
+        "original": 8,
+        "unassessed": 5
+      },
+      "gain_control/spoof": {
+        "ai": 11,
+        "inconclusive": 3,
+        "original": 1,
+        "unassessed": 1
+      },
+      "traffic/bonafide": {
+        "ai": 1,
+        "inconclusive": 3,
+        "original": 0,
+        "unassessed": 12
+      },
+      "traffic/spoof": {
+        "ai": 3,
+        "inconclusive": 5,
+        "original": 0,
+        "unassessed": 8
+      }
+    }
+  }
+}

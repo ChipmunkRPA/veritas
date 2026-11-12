@@ -159,6 +159,10 @@ licensed recorded controls, with exact byte ranges, file hashes, and decoding.
 The [paired vocal-event mixtures](audio-vocal-event-mixtures-2026-11-12.md)
 replay changes in the voice decision when a known event is added to the same
 speech. The ledger reports the WAV and MP3 renderings separately.
+The [RADAR transfer and longer-file confirmation](audio-radar-transfer-2026-11-12.md)
+start from bounded prefixes of two public archive splits. A model-free
+reader reopens official labels, native clocks and all matched short
+mixtures, then reproduces the decision counts from the saved responses.
 The [speech-context comparison](audio-remote-neighbor-transfer-2026-11-12.md)
 compares recurring acoustic contexts on the original mixtures and verifies
 fresh and previously tested source groups separately.

@@ -20,6 +20,8 @@ from html import unescape
 from html.parser import HTMLParser
 from pathlib import Path
 
+from app.evidence.document_scope import EMAIL_HTML_COORDINATES
+
 
 @dataclass
 class Document:
@@ -39,7 +41,6 @@ OCR_MAX_PIXELS = 4_000_000
 OCR_MAX_RASTER_BYTES = 24 * 1024 * 1024
 OCR_BUDGET_SECONDS = 70.0
 NATIVE_COMPARISON_MAX_PAGES = 12
-EMAIL_HTML_COORDINATES = "decoded-html-codepoint"
 
 
 def text_hash(text: str) -> str:

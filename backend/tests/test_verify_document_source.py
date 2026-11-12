@@ -75,11 +75,36 @@ def test_cli_rejects_a_resigned_source_range_shift(multimedia_package, tmp_path,
     assert "source positions differ" in altered_receipt["checks"][-1]["detail"]
 
 
-@pytest.mark.parametrize("multimedia_package", ["hybrid_document"], indirect=True)
-def test_explicitly_refuses_to_replay_ocr(multimedia_package):
+@pytest.mark.parametrize("multimedia_package", ["hybrid_document", "scanned_document"], indirect=True)
+def test_replays_signed_ocr_positions_and_source_pixels(multimedia_package, tmp_path, monkeypatch):
     f = multimedia_package
     built = package.build(f.db, f.row, store=f.store, key=f.key, exported_at=datetime.now(UTC))
     assert verify.verify_package(built.path, expect_key_id=f.key.key_id).ok
-    replay = verify.verify_package(built.path, expect_key_id=f.key.key_id, source_document=f.store.path_for(f.analysis.sha256))
+    original = f.store.path_for(f.analysis.sha256)
+    replay = verify.verify_package(built.path, expect_key_id=f.key.key_id, source_document=original)
+    assert replay.ok, replay.as_dict()
+    assert "PDF images, including OCR source rasters (4)" in replay.checks[-1].detail
+
+    def change_ocr_coverage(files):
+        evidence = json.loads(files["evidence.json"])
+        page = evidence["coverage"]["ocr"]["pages"][0]
+        page["mean_recognition_confidence"] -= 1
+        evidence["sha256"] = packet_hash(evidence)
+        files["evidence.json"] = canonical_json(evidence)
+        bundle = json.loads(files["bundle.json"])
+        bundle["evidence"].update(set_sha256=evidence["sha256"], sha256=hashlib.sha256(files["evidence.json"]).hexdigest())
+        bundle["reports"][0]["evidence_set_sha256"] = evidence["sha256"]
+        files["bundle.json"] = canonical_json(bundle)
+
+    altered = rewrite(built.path, tmp_path / "altered-ocr.zip", change_ocr_coverage, f.key)
+    assert verify.verify_package(altered, expect_key_id=f.key.key_id).ok
+    replay = verify.verify_package(altered, expect_key_id=f.key.key_id, source_document=original)
     assert not replay.ok
-    assert "contains OCR evidence" in replay.checks[-1].detail
+    assert "coverage differs" in replay.checks[-1].detail
+
+    from app.detectors.text import extract as text_extract
+
+    monkeypatch.setattr(text_extract, "_ocr_runtime", lambda: {"available": False, "reason": "Test without OCR"})
+    replay = verify.verify_package(built.path, expect_key_id=f.key.key_id, source_document=original)
+    assert not replay.ok
+    assert "verified OCR data are installed" in replay.checks[-1].detail

@@ -1166,7 +1166,7 @@ def build_parser() -> argparse.ArgumentParser:
     source.add_argument("--source-image", metavar="IMAGE", help="compare crops in a public image package with a local original")
     source.add_argument("--source-audio", metavar="MEDIA", help="compare clip samples and timestamps with a local audio or video original; can be combined with --source-video")
     source.add_argument("--source-video", metavar="VIDEO", help="compare frames, crops and mouth patches with a local video original")
-    source.add_argument("--source-document", metavar="DOCUMENT", help="compare excerpts, positions and native PDF images with a local original")
+    source.add_argument("--source-document", metavar="DOCUMENT", help="compare excerpts, positions and PDF source images with a local original")
     p_package_verify.add_argument("--json", action="store_true")
     p_package_verify.set_defaults(func=_verify)
 

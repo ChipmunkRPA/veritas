@@ -6,8 +6,6 @@ import hashlib
 import re
 from collections import Counter
 
-from app.detectors.text.extract import EMAIL_HTML_COORDINATES
-
 VERSION = "document-evidence-5"
 MATCHED_VERSION = "document-evidence-6"
 PARAGRAPH_PRIORITY_VERSION = "document-evidence-7"
@@ -25,6 +23,7 @@ CHECKPOINT_AGREEMENT_SCHEMA = "document-writing-second-check/1"
 CHECKPOINT_AGREEMENT_EMAIL_SCHEMA = "document-writing-second-check/2"
 CHECKPOINT_AGREEMENT_EMAIL_LAYOUT_SCHEMA = "document-writing-second-check/3"
 CHECKPOINT_AGREEMENT_HTML_SCHEMA = "document-writing-second-check/4"
+EMAIL_HTML_COORDINATES = "decoded-html-codepoint"
 CHECKPOINT_AGREEMENT_EMAIL_PARAGRAPHS = {
     CHECKPOINT_AGREEMENT_EMAIL_SCHEMA: frozenset({1, 4}),
     CHECKPOINT_AGREEMENT_EMAIL_LAYOUT_SCHEMA: frozenset({2, 3, 5, 6}),

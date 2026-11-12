@@ -115,15 +115,16 @@ def test_actual_0023_to_0024_migration_preserves_legacy_package_bytes_and_every_
     db_engine.dispose()
 
 
-@pytest.fixture(params=["video", "audio", "document", "document_agreement", "hybrid_document", "image", "image_translation",
-                        "image_affine", "image_affine_large"])
+@pytest.fixture(params=["video", "audio", "document", "document_agreement", "hybrid_document", "scanned_document",
+                        "image", "image_translation", "image_affine", "image_affine_large"])
 def multimedia_package(request, tmp_path, monkeypatch):
     hybrid = request.param == "hybrid_document"
+    scanned = request.param == "scanned_document"
     agreement = request.param == "document_agreement"
     translated = request.param == "image_translation"
     large_affine = request.param == "image_affine_large"
     geometric = large_affine or request.param == "image_affine"
-    kind = "document" if hybrid or agreement else "image" if translated or geometric else request.param
+    kind = "document" if hybrid or scanned or agreement else "image" if translated or geometric else request.param
     if kind == "image":
         fixture = request.getfixturevalue("packet_fixture")
         if geometric:
@@ -149,19 +150,24 @@ def multimedia_package(request, tmp_path, monkeypatch):
         _replace_entry(store, analysis, result, entry)
         store.put_bytes(canonical_json(result))
         document = audio_packets.build_packet_set(db, analysis, store, result)
-    elif hybrid:
+    elif hybrid or scanned:
         from app.detectors.text.extract import _ocr_runtime
 
         if not _ocr_runtime().get("available"):
             pytest.skip("Verified local OCR runtime is unavailable")
-        source_pdf = tmp_path / "hybrid.pdf"
-        hybrid_pdf(source_pdf, rotation=90)
-        db, store, analysis, result, *_ = request.getfixturevalue("packet_factory")(
-            ".pdf", source_pdf=source_pdf, scores=(0.1, 0.1, 0.1, 0.93))
+        build_document = request.getfixturevalue("packet_factory")
+        if hybrid:
+            source_pdf = tmp_path / "hybrid.pdf"
+            hybrid_pdf(source_pdf, rotation=90)
+            db, store, analysis, result, *_ = build_document(".pdf", source_pdf=source_pdf, scores=(0.1, 0.1, 0.1, 0.93))
+        else:
+            db, store, analysis, result, *_ = build_document(".pdf", ocr=True)
         document = document_packets.build_packet_set(db, analysis, store, result)
         assert document["coverage"]["ocr"]["pages"][0]["status"] == "extracted"
         packet, = document["packets"]
-        assert any(anchor.get("ocr", {}).get("coverage_scope") == "image_region" for anchor in packet["anchors"])
+        assert any(anchor.get("extraction") == "ocr" for anchor in packet["anchors"])
+        if hybrid:
+            assert any(anchor.get("ocr", {}).get("coverage_scope") == "image_region" for anchor in packet["anchors"])
         assert "page1_ocr_input" in packet["artifacts"]
     elif agreement:
         db, store, analysis, result, *_ = request.getfixturevalue("packet_factory")(".txt", scores=(.91, .93, .81))

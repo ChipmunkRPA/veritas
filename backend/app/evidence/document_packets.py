@@ -12,6 +12,7 @@ import json
 import math
 import re
 import uuid
+from collections.abc import Callable
 from typing import Any
 
 from PIL import Image, ImageDraw
@@ -228,7 +229,10 @@ def _png(image: Image.Image) -> bytes:
     return output.getvalue()
 
 
-def _pdf_plates(source: bytes, anchors: list[dict], store: ObjectStore | None = None) -> dict[str, tuple[Image.Image, dict]]:
+def _pdf_plates(
+    source: bytes, anchors: list[dict], store: ObjectStore | None = None, *,
+    read_ocr_raster: Callable[[str], bytes] | None = None,
+) -> dict[str, tuple[Image.Image, dict]]:
     import pymupdf
 
     grouped: dict[int, list[dict]] = {}
@@ -257,9 +261,14 @@ def _pdf_plates(source: bytes, anchors: list[dict], store: ObjectStore | None = 
                        if anchor.get("extraction") == "ocr" or anchor.get("ocr")]
             frozen = rasters[0] if rasters else None
             if rasters:
-                if store is None or frozen is None or any(raster != frozen for raster in rasters):
+                if frozen is None or any(raster != frozen for raster in rasters):
                     raise DocumentPacketIntegrityError("An OCR page has inconsistent frozen input rasters")
-                raster_bytes = _verified(store, frozen["sha256"])
+                if read_ocr_raster is not None:
+                    raster_bytes = read_ocr_raster(frozen["sha256"])
+                elif store is not None:
+                    raster_bytes = _verified(store, frozen["sha256"])
+                else:
+                    raise DocumentPacketIntegrityError("An OCR page requires its exact input raster")
                 with Image.open(io.BytesIO(raster_bytes)) as opened:
                     engine_input = opened.convert("RGB")
                 if engine_input.size != (frozen["width"], frozen["height"]):
@@ -348,6 +357,14 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
                 raise DocumentPacketIntegrityError("Invalid document evidence image")
 
 
+def public_ocr_coverage(meta: dict) -> dict | None:
+    coverage = copy.deepcopy(meta.get("ocr"))
+    for page in (coverage or {}).get("pages", []):
+        for private_key in ("engine_version", "language_data_sha256", "languages_requested"):
+            page.pop(private_key, None)
+    return coverage
+
+
 def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result: dict[str, Any]) -> dict[str, Any]:
     if analysis.kind != "document" or canonical_hash(result) != analysis.result_hash or result.get("input", {}).get("sha256") != analysis.sha256:
         raise DocumentPacketIntegrityError("Document evidence requires an intact published document result")
@@ -355,10 +372,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     decoded = _decode(db, analysis, store, result)
     text, mapping = decoded["text"], decoded["source_map"]
     binding = result["manifest"]["sampling"]["document_source"]
-    public_ocr = copy.deepcopy(decoded["meta"].get("ocr"))
-    for page in (public_ocr or {}).get("pages", []):
-        for private_key in ("engine_version", "language_data_sha256", "languages_requested"):
-            page.pop(private_key, None)
+    public_ocr = public_ocr_coverage(decoded["meta"])
     groups: dict[tuple[int, int], list[dict]] = {}
     scored = 0
     check_coverage = []

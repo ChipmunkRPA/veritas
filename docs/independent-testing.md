@@ -65,6 +65,9 @@ event, with coherent retiming and ordinary processing controls.
 The [single-video release timing study](grid-single-clip-release-timing-2026-11-12.md)
 reconstructs 120 native deliveries and verifies how often nearby acoustic
 transients can support the same visible speech event.
+The [phoneme qualification](video-phone-release-qualification-2026-11-12.md)
+compares blind and supplied-transcript decoding, and replays acoustic timing
+against the original PCM and publisher word intervals.
 
 The [earlier-audio comparison](audio-reference-comparison-2026-11-11.md#replay-without-the-app)
 replays changed sample ranges, difference waveforms, and playable excerpts
@@ -84,6 +87,9 @@ through the local paid worker, public exports, and source-bound evidence bundle.
 The [HTML email source replay](writing-html-reply-transfer-2026-11-12.md)
 reopens the decoded HTML part and verifies exact passage locations while
 keeping trailing quoted replies out of the second check.
+The [scanned PDF study](writing-ocr-scan-transfer-2026-11-12.md) measures
+which exact classifier inputs survive recognition and checks whether a
+signed report can be replayed against the original scan.
 The [archive boundary comparison](writing-archive-changed-edge-2026-11-12.md)
 reconstructs exact submitted and reference coordinates after a word changes
 next to a lost paragraph break and checks open-set and ambiguous controls.
@@ -124,6 +130,9 @@ edits in two rooms with competing speech.
 The [short native-response transfer](audio-short-native-response-transfer-2026-11-12.md)
 runs short windows on held room recordings and compares the locations at
 fixed and matched false-alarm counts.
+The [speech-context comparison](audio-remote-neighbor-transfer-2026-11-12.md)
+compares recurring acoustic contexts on the original mixtures and verifies
+fresh and previously tested source groups separately.
 The [controlled room-speech attenuation study](audio-room-reference-transfer-2026-11-12.md)
 reconstructs each changed waveform independently and checks whether improved
 foreground reconstruction recovers short synthetic inserts.
@@ -881,10 +890,11 @@ python -m app.cli verify evidence.zip --public-key instance-key.pem --source-doc
 
 With the project dependencies installed, this compares the original's SHA-256,
 re-extracted text and source mapping with the signed record. It checks the exact
-excerpts, positions, supporting input ranges, repeated passages and any native PDF
-page images in the package. It supports plain text, DOCX, plain-body EML and
-native-text PDF. OCR-dependent files can still use signature and package integrity
-verification. The replay does not score authorship.
+excerpts, positions, supporting input ranges, repeated passages and any PDF
+page images in the package. It supports plain text, DOCX, source-mapped EML,
+and PDF. PDFs with OCR evidence require the project's verified OCR data and
+a compatible local renderer and recognizer. Replay checks the exact OCR input
+and the source pixels behind the crop. The replay does not score authorship.
 
 ## Choose a review to reproduce
 

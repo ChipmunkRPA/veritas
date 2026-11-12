@@ -1,0 +1,4085 @@
+{
+  "freeze": {
+    "backgrounds": {
+      "restaurant.ogg": [
+        "0aeb1fa7a3d9647d3284e97d9880b6375b54db2eda6a517c64e3bb02ac8a51cc",
+        [
+          6,
+          18,
+          36,
+          54
+        ]
+      ],
+      "vienna.wav": [
+        "a4b1807f396592351d7ffb17873391cec9b9144f9216af3d463b1f2009e90e36",
+        [
+          2,
+          8,
+          14,
+          20
+        ]
+      ]
+    },
+    "decision_rule": {
+      "max_clean_or_isolated_flags": 0,
+      "max_noisy_genuine_groups": 2,
+      "min_families": 3,
+      "min_noisy_synthetic_groups": 4,
+      "min_scenes": 2
+    },
+    "excluded_panel_sha256": "bf253f0dc47c0e05ca79f7f89186fd71dd9c5300798fa0331c95cc33b935afe3",
+    "model": {
+      "files": {
+        "LICENSE": "a3d882953f026d3e2fdd57842d9c522c8320d4c0388af2278bcf4d438d255a2c",
+        "config.json": "e69986483774f01893d2727503addc49ef201d19e6e1a266b8d4e971e28c478d",
+        "model.safetensors": "06badaf4029b297f97f7fe48d62990b48d5482608210df577354e0d4e0ed70e1"
+      },
+      "revision": "31f82f2efad1095034492f236e8dac9239ba713b"
+    },
+    "panel_authenticity_forwards_before_freeze": 0,
+    "previous_selection_freeze_sha256": "775f23725f49d1b849af058e571742172ab6b6a1f067a15e2e9df4aa2d638711",
+    "prior_enhancer_license_sha256": "c467165e5860b4a7494ef4a6e2788e4115d95b5b8989bb5f86287089adddf794",
+    "prior_enhancer_sha256": "b4718df6228e7bdf1a8a435cf98f838636eb2fd331acabf86ba87c5192ebcb87",
+    "publisher_archive_sha256": "a6d76436a371643920d1fc00fcc640d98964bd16e5075bab24d46694f77cc3d7",
+    "reviewer_sha256": "5f80a94d0dc70d26306bd08def04045ab0082a280573d4fc87b30f1061df6977",
+    "roster_sha256": "07add55338fd3b25b24ec76854ba125a6f633d4a47f5258497af72287dcd65f0",
+    "runner_sha256": "85f346a906637c470f9bac48b9b020d9d444fc0208c1a9b3af554bf0af6f1ad6",
+    "runtime": {
+      "mlx": "0.32.4",
+      "mlx-audio": "0.6.5",
+      "mlx-metal": "0.32.4",
+      "onnxruntime": "1.31.1"
+    },
+    "schema": "chipmunk.nemotron-noise-transfer/1",
+    "voice_assets": {
+      "class_labels_indices.csv": "cdd1049833c4b86127c2773ac0d14a2754b6a6d0d1798002ed5c66e699708429",
+      "panns-Cnn10.pth": "5240bdc47444e331bbeb54fd741d2b3f933a4526e84b0c17bf3593df94b13962",
+      "pellav2_detector.pt": "d21aedfb52e2f87706c2753715a29665482b0f4a034800c31579df5d458559ac",
+      "silero_vad.jit": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720",
+      "w2v-bert-config.json": "f5572bd5998b68182e9c328a43127ed21fed687f6910497136b91a4e3b0e3675"
+    }
+  },
+  "freeze_sha256": "adbe001c9b14ac80089704dcd9c57ed52dfce2d209e04fba33a1f10ab051a091",
+  "held": [
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.485124125917968,
+          "pcm_sha256": "2fb0fbfcba73bec6659610edb329e817c837e825467b994eaad2b1c07d1263c5",
+          "suppression_db": 0.13892707132915416
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.501845119899118,
+          "pcm_sha256": "d0800daef63f4ea5e6d7e83e64d540698684160cf971b28b027d9381f719a651",
+          "suppression_db": 0.05770079959302314
+        }
+      },
+      "family": "xttsv2",
+      "group": "5694",
+      "id": 56,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start_sample": null,
+        "center_start_sample": 12010,
+        "family": "xttsv2",
+        "group": "5694",
+        "id": "dev01-xttsv2-full_5694_64029_000016_000007",
+        "label": "spoof",
+        "samples": 72021,
+        "wav_sha256": "1adaa7613f3ef102780e196b205d4fa692458a58b266ce29566f9b458fcfed2f"
+      },
+      "pcm_sha256": "d4f0ad6d2e814f3264f4b91e15652a9fadff7098e8a9b03f6dbc9e241a61a7c2",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.480246425895414,
+          "pcm_sha256": "e5d30bae552f291b278bb45bbcdbf436039cc1dfb0723987d0656b617c42622a",
+          "suppression_db": 6.828952505255897
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.273323571979048,
+          "pcm_sha256": "3c937adcde71bc6c2f80b35680682b678cd7275902af04c325583384e4e4c971",
+          "suppression_db": 9.890025919945613
+        }
+      },
+      "family": "xttsv2",
+      "group": "5694",
+      "id": 57,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start_sample": 96000,
+        "center_start_sample": 12010,
+        "family": "xttsv2",
+        "group": "5694",
+        "id": "dev01-xttsv2-full_5694_64029_000016_000007",
+        "label": "spoof",
+        "samples": 72021,
+        "wav_sha256": "1adaa7613f3ef102780e196b205d4fa692458a58b266ce29566f9b458fcfed2f"
+      },
+      "pcm_sha256": "d89d905ca289ea408f30bd14880da1717b4418d40f3ef304085642eb02b28e1e",
+      "role": "held",
+      "scene": "restaurant.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.463983481680281,
+          "pcm_sha256": "bd432673e5d11ac2cadc1a7e058e0ae3467a50d23b314a80fbcb1a67beb41e74",
+          "suppression_db": 6.574641923645568
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 6.748578749998818,
+          "pcm_sha256": "dc9f653aa3cd82659bb46b3b58f88091a217a0e7fe11ec3589a4ebb3d7d35ad4",
+          "suppression_db": 12.529386723446763
+        }
+      },
+      "family": "xttsv2",
+      "group": "5694",
+      "id": 58,
+      "incumbent": "inconclusive",
+      "label": "spoof",
+      "origin": {
+        "background_start_sample": 32000,
+        "center_start_sample": 12010,
+        "family": "xttsv2",
+        "group": "5694",
+        "id": "dev01-xttsv2-full_5694_64029_000016_000007",
+        "label": "spoof",
+        "samples": 72021,
+        "wav_sha256": "1adaa7613f3ef102780e196b205d4fa692458a58b266ce29566f9b458fcfed2f"
+      },
+      "pcm_sha256": "b77c548dafa1183cf2b7f2a1aae0a3a89204af59e339986b1a9058aeb0ab67b3",
+      "role": "held",
+      "scene": "vienna.wav"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.520830984344045,
+          "pcm_sha256": "101d39148fbc6e9a917fda34331bf024c5d1058f7a816868b6e88e6bf20d592c",
+          "suppression_db": 0.38301275024330617
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.548755720222873,
+          "pcm_sha256": "a3c6a9298f40560055c893c9c5aac238a7d5122b30c44447f62a7342d47fce99",
+          "suppression_db": 0.28449072819236954
+        }
+      },
+      "family": "xttsv2",
+      "group": "2277",
+      "id": 59,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start_sample": null,
+        "center_start_sample": 52458,
+        "family": "xttsv2",
+        "group": "2277",
+        "id": "dev01-xttsv2-full_2277_149896_000003_000001",
+        "label": "spoof",
+        "samples": 152917,
+        "wav_sha256": "7ae05dbfc984fc747d28899ea16ec493b8119ac13a86cc5019edf4685dadd4e9"
+      },
+      "pcm_sha256": "84ae6e1f996644e61ebbf9bc0a8ee02a385ba80414628b4faa84c0be9c7f802d",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.48151657999842,
+          "pcm_sha256": "5b0af25e2811989b0dc233ddf83287ffadc26396cead3d0e9e5a0b8b0200a2b6",
+          "suppression_db": 7.425232326190332
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.299824088038036,
+          "pcm_sha256": "cc7c76b1b836f25f9036266d82cd988ae66da8c86e160c8dd79d038033ff6b5e",
+          "suppression_db": 12.266347054652844
+        }
+      },
+      "family": "xttsv2",
+      "group": "2277",
+      "id": 60,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start_sample": 288000,
+        "center_start_sample": 52458,
+        "family": "xttsv2",
+        "group": "2277",
+        "id": "dev01-xttsv2-full_2277_149896_000003_000001",
+        "label": "spoof",
+        "samples": 152917,
+        "wav_sha256": "7ae05dbfc984fc747d28899ea16ec493b8119ac13a86cc5019edf4685dadd4e9"
+      },
+      "pcm_sha256": "46c937476fbf10e94587e0e90461bae64b0a53c7dd1e0c09e6fcbc22e4809e56",
+      "role": "held",
+      "scene": "restaurant.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.429812405646569,
+          "pcm_sha256": "3d7aa190f08c2c1e14ae43c5454e9f21e8a14286255c70f849b3581eb4b9ec85",
+          "suppression_db": 6.701027988572495
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.390173436305665,
+          "pcm_sha256": "14b39f36256f5fff5b141bb4d01186ea609f3129efbadf050653c4608ab9a569",
+          "suppression_db": 12.677342932215339
+        }
+      },
+      "family": "xttsv2",
+      "group": "2277",
+      "id": 61,
+      "incumbent": "unassessed",
+      "label": "spoof",
+      "origin": {
+        "background_start_sample": 128000,
+        "center_start_sample": 52458,
+        "family": "xttsv2",
+        "group": "2277",
+        "id": "dev01-xttsv2-full_2277_149896_000003_000001",
+        "label": "spoof",
+        "samples": 152917,
+        "wav_sha256": "7ae05dbfc984fc747d28899ea16ec493b8119ac13a86cc5019edf4685dadd4e9"
+      },
+      "pcm_sha256": "f4de2e9bbec241ebd1a2d4aa5e64fe85e0e0ab27d9a8809c22abc023c03a1636",
+      "role": "held",
+      "scene": "vienna.wav"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.572945934786709,
+          "pcm_sha256": "c730a99eaded127313d553ac1b1da3690a581c506a843bfdbd909ce028570b02",
+          "suppression_db": 0.2995872052206974
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.570627780895359,
+          "pcm_sha256": "a2c4e05cca27375b2dff37e13ec2f4010ef165b9bf3d8be7814c933def3f058e",
+          "suppression_db": 0.032385385696329774
+        }
+      },
+      "family": "yourtts",
+      "group": "251",
+      "id": 62,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start_sample": null,
+        "center_start_sample": 41800,
+        "family": "yourtts",
+        "group": "251",
+        "id": "dev01-yourtts-full_251_136532_000021_000000",
+        "label": "spoof",
+        "samples": 131600,
+        "wav_sha256": "65219d3dfacaf48a1ee0a9a767f5a8343ab3b970e7879a3e1d435fbe1d8668dd"
+      },
+      "pcm_sha256": "44396f794f5832e8d41eff6ea2af6285d7a881bceb42a5b13dc0bd9b632f376a",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.483637091135217,
+          "pcm_sha256": "edc31b2c9d2a480142f431d10f695b99f2d8d30dbae7e951b8ec3785a4dea7c8",
+          "suppression_db": 6.544248213896017
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.276425428964446,
+          "pcm_sha256": "e49c230370989e14264dcb428f6aeba237371dbfec4246f4eb7f133284eb6bac",
+          "suppression_db": 11.343725349642948
+        }
+      },
+      "family": "yourtts",
+      "group": "251",
+      "id": 63,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start_sample": 576000,
+        "center_start_sample": 41800,
+        "family": "yourtts",
+        "group": "251",
+        "id": "dev01-yourtts-full_251_136532_000021_000000",
+        "label": "spoof",
+        "samples": 131600,
+        "wav_sha256": "65219d3dfacaf48a1ee0a9a767f5a8343ab3b970e7879a3e1d435fbe1d8668dd"
+      },
+      "pcm_sha256": "ed21a412184067c1956767c1255669d709dee176c4bc8d3c789da2194e0d67e1",
+      "role": "held",
+      "scene": "restaurant.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.492164338389804,
+          "pcm_sha256": "2897f8ed97d5bc28c6ba2201ac3e2137feb585f761616f062abd15176cf06b1f",
+          "suppression_db": 6.4920663383116075
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.29629684839507,
+          "pcm_sha256": "85aaa40fe23f8653523b42d933c0b5a5d25b2849966a8bf3212b9a0031ef1f9c",
+          "suppression_db": 14.003871661145224
+        }
+      },
+      "family": "yourtts",
+      "group": "251",
+      "id": 64,
+      "incumbent": "inconclusive",
+      "label": "spoof",
+      "origin": {
+        "background_start_sample": 224000,
+        "center_start_sample": 41800,
+        "family": "yourtts",
+        "group": "251",
+        "id": "dev01-yourtts-full_251_136532_000021_000000",
+        "label": "spoof",
+        "samples": 131600,
+        "wav_sha256": "65219d3dfacaf48a1ee0a9a767f5a8343ab3b970e7879a3e1d435fbe1d8668dd"
+      },
+      "pcm_sha256": "bc02ac6784a9d55a7b694a9657a6d522107305ec3a67ea8b4f02c7903a32d9b9",
+      "role": "held",
+      "scene": "vienna.wav"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.531016928444138,
+          "pcm_sha256": "263a4fb38b683b2e247b9589faac73c850594b85563ea20ea4b693dbaf05b3f2",
+          "suppression_db": 0.1845365605797736
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.530349459192101,
+          "pcm_sha256": "c047c5aa668a265bfa500426044a84e437d2d985a5de3e76fa106f9dfc13e8cc",
+          "suppression_db": 0.06746097722804766
+        }
+      },
+      "family": "yourtts",
+      "group": "2086",
+      "id": 65,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start_sample": null,
+        "center_start_sample": 840,
+        "family": "yourtts",
+        "group": "2086",
+        "id": "dev01-yourtts-full_2086_149220_000016_000004",
+        "label": "spoof",
+        "samples": 49680,
+        "wav_sha256": "594ba1119158693069f89bfd1fb239ce25747e6a2566cafa045d8e56cc4fc0ca"
+      },
+      "pcm_sha256": "e24d6798f37dbfac36d6c8f6c97b180deb6d120e5205bc51b9548cc91ec3a7aa",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.504009177124015,
+          "pcm_sha256": "f9c222e89b935b1563e09dec1ce0c6a84260ddf8d9bc9b5f99dc1a4271dc0a1a",
+          "suppression_db": 6.870561760068259
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.396185486284103,
+          "pcm_sha256": "48e2c08926bce6d461fa52467bdc48bbc986acda62c8315dc8aad0b39d5817f7",
+          "suppression_db": 11.686477335563294
+        }
+      },
+      "family": "yourtts",
+      "group": "2086",
+      "id": 66,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start_sample": 864000,
+        "center_start_sample": 840,
+        "family": "yourtts",
+        "group": "2086",
+        "id": "dev01-yourtts-full_2086_149220_000016_000004",
+        "label": "spoof",
+        "samples": 49680,
+        "wav_sha256": "594ba1119158693069f89bfd1fb239ce25747e6a2566cafa045d8e56cc4fc0ca"
+      },
+      "pcm_sha256": "b03ee035ad2bdc6caf715190598907d8c4532aa4ffd73b64fc4e44401b0e1c93",
+      "role": "held",
+      "scene": "restaurant.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.5114021610070925,
+          "pcm_sha256": "ca3ddef82c96cf552b558b92bbd562729def7753d480a43a4a1e6b361b5f4edb",
+          "suppression_db": 7.03578959365005
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.485549399010815,
+          "pcm_sha256": "e668263d334464386bcd97003a45e912783324feaa736cec00e9630e75899fe7",
+          "suppression_db": 11.242685819011061
+        }
+      },
+      "family": "yourtts",
+      "group": "2086",
+      "id": 67,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start_sample": 320000,
+        "center_start_sample": 840,
+        "family": "yourtts",
+        "group": "2086",
+        "id": "dev01-yourtts-full_2086_149220_000016_000004",
+        "label": "spoof",
+        "samples": 49680,
+        "wav_sha256": "594ba1119158693069f89bfd1fb239ce25747e6a2566cafa045d8e56cc4fc0ca"
+      },
+      "pcm_sha256": "13516fc81a7e04a3aa7f597aeeef66f30462bc36a15327f8c6b4104b4b8f4ef5",
+      "role": "held",
+      "scene": "vienna.wav"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.459207459538133,
+          "pcm_sha256": "a9c5bdcbfa4eba53ac9daf234a18c3ed6a050843344216c670034f123f13a8d3",
+          "suppression_db": 0.31044106922523923
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.531462155316926,
+          "pcm_sha256": "0d2458d224d44c6224013d571fddc360d4b3275decab7952331264f3090400a2",
+          "suppression_db": 0.3433648903846974
+        }
+      },
+      "family": "elevenlab",
+      "group": "2412",
+      "id": 68,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start_sample": null,
+        "center_start_sample": 37858,
+        "family": "elevenlab",
+        "group": "2412",
+        "id": "dev01-elevenlab-full_2412_153954_000008_000002",
+        "label": "spoof",
+        "samples": 123716,
+        "wav_sha256": "b3669eebfe2e31b0d1da3b07f8399f0c4b6b894462674b466139cde52f5b9e60"
+      },
+      "pcm_sha256": "282a732aa1605e66a7370865070ab0e7ea3537810a24f099d203afbc1f3e2f56",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.49152226931055,
+          "pcm_sha256": "7e61fb609c1857df16c1d85db86a8a760ed12f7b147a86d137429797ea6dfd4b",
+          "suppression_db": 6.157110702113564
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.487039279102941,
+          "pcm_sha256": "1b530e8cef4deffd24227cb1a7672bfa406dd59e4e34957d889f1a5225a2d671",
+          "suppression_db": 7.549440374559464
+        }
+      },
+      "family": "elevenlab",
+      "group": "2412",
+      "id": 69,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start_sample": 96000,
+        "center_start_sample": 37858,
+        "family": "elevenlab",
+        "group": "2412",
+        "id": "dev01-elevenlab-full_2412_153954_000008_000002",
+        "label": "spoof",
+        "samples": 123716,
+        "wav_sha256": "b3669eebfe2e31b0d1da3b07f8399f0c4b6b894462674b466139cde52f5b9e60"
+      },
+      "pcm_sha256": "aa053074863bd7ebff1e7f82cb5800a41b5a7c69fb266e66275c104c162c1710",
+      "role": "held",
+      "scene": "restaurant.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.422596541841203,
+          "pcm_sha256": "8220d6d7db345c24655819bbbcc46e767e14174652354b919fa6ab2c760c8baa",
+          "suppression_db": 6.283372082496265
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.403408738994271,
+          "pcm_sha256": "02acead0b04696469f4fc2622c7ed31f986a57d35a82d744b11355e9e69453f9",
+          "suppression_db": 8.59720259106779
+        }
+      },
+      "family": "elevenlab",
+      "group": "2412",
+      "id": 70,
+      "incumbent": "inconclusive",
+      "label": "spoof",
+      "origin": {
+        "background_start_sample": 32000,
+        "center_start_sample": 37858,
+        "family": "elevenlab",
+        "group": "2412",
+        "id": "dev01-elevenlab-full_2412_153954_000008_000002",
+        "label": "spoof",
+        "samples": 123716,
+        "wav_sha256": "b3669eebfe2e31b0d1da3b07f8399f0c4b6b894462674b466139cde52f5b9e60"
+      },
+      "pcm_sha256": "f3158afbe285dfb995fbd32b1ffe6cc26eb829b8cc0712a10cefad3dc1d11a96",
+      "role": "held",
+      "scene": "vienna.wav"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.416821348098206,
+          "pcm_sha256": "e0dd022be09d4ba69132b9bda4acd06fd86b3388155a0475905f90fc2c4f5f10",
+          "suppression_db": 0.27691951049784735
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.4495180443945115,
+          "pcm_sha256": "bdf7c30eedc41849407de649db5bcdd9dcf8b1f4006f0ddadda26770fe30f073",
+          "suppression_db": 0.03617852348048277
+        }
+      },
+      "family": "elevenlab",
+      "group": "3752",
+      "id": 71,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start_sample": null,
+        "center_start_sample": 67533,
+        "family": "elevenlab",
+        "group": "3752",
+        "id": "dev01-elevenlab-full_3752_4944_000088_000002",
+        "label": "spoof",
+        "samples": 183066,
+        "wav_sha256": "add58f4bc1c9df947bf23a46a060bb9ea209553f78629ac2dbf5f2308013f471"
+      },
+      "pcm_sha256": "f023abf029a7abb531dad6fd60d2b145e245b471d81f6b4d9839e45748ed8b60",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.445218857737954,
+          "pcm_sha256": "8fc7977335bce4ce60d022528a65f500461a3367392c551f8926bdf7410c726b",
+          "suppression_db": 6.455344251717202
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.214763083467193,
+          "pcm_sha256": "42de02b095b6901fa280f2628d183626b0a7aa29dd3443e274077f80868499e6",
+          "suppression_db": 12.816495584566141
+        }
+      },
+      "family": "elevenlab",
+      "group": "3752",
+      "id": 72,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start_sample": 288000,
+        "center_start_sample": 67533,
+        "family": "elevenlab",
+        "group": "3752",
+        "id": "dev01-elevenlab-full_3752_4944_000088_000002",
+        "label": "spoof",
+        "samples": 183066,
+        "wav_sha256": "add58f4bc1c9df947bf23a46a060bb9ea209553f78629ac2dbf5f2308013f471"
+      },
+      "pcm_sha256": "b71b16944d86cd74558455f309a0b35f3ff7f0e442bcb07b337c6cfbd9eecf9f",
+      "role": "held",
+      "scene": "restaurant.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.458586176505701,
+          "pcm_sha256": "d2d27ea07da7d32115073f3b071634202b93015100dd0ff3f4cb14f966565feb",
+          "suppression_db": 7.154633664747328
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 6.771617430319339,
+          "pcm_sha256": "2e02eec8831fea82abc204726429ffe76f155509345e086f4b171914d0816e5d",
+          "suppression_db": 16.143619567157636
+        }
+      },
+      "family": "elevenlab",
+      "group": "3752",
+      "id": 73,
+      "incumbent": "inconclusive",
+      "label": "spoof",
+      "origin": {
+        "background_start_sample": 128000,
+        "center_start_sample": 67533,
+        "family": "elevenlab",
+        "group": "3752",
+        "id": "dev01-elevenlab-full_3752_4944_000088_000002",
+        "label": "spoof",
+        "samples": 183066,
+        "wav_sha256": "add58f4bc1c9df947bf23a46a060bb9ea209553f78629ac2dbf5f2308013f471"
+      },
+      "pcm_sha256": "01dea094a6e7e8936309b67e0f0b0043c579b973fcf900260894d1437c647e66",
+      "role": "held",
+      "scene": "vienna.wav"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.403604687122388,
+          "pcm_sha256": "d9cd1148a3290f3ffa3e1e71ec19553e9a504ae1eabfa537449a1a05be522748",
+          "suppression_db": 1.380478188073354
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.467006204178731,
+          "pcm_sha256": "4e6eb9bca289bb089fd934bfde59d9acc76e5a3661cf1bdc92d860c9f6911685",
+          "suppression_db": 0.6597110461136226
+        }
+      },
+      "family": "cosyvoice",
+      "group": "2902",
+      "id": 74,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start_sample": null,
+        "center_start_sample": 74917,
+        "family": "cosyvoice",
+        "group": "2902",
+        "id": "dev01-cosyvoice-full_2902_9008_000002_000001",
+        "label": "spoof",
+        "samples": 197834,
+        "wav_sha256": "6fe95a651c9e590d56e7a9ae5f200bca4cd92a7e6e61a9f5fbab90a7df5efee6"
+      },
+      "pcm_sha256": "1d8fb2c80b5d85e9574811f9cb7228995b84a77b34404fbbbd18c7673946a214",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.46335922864145,
+          "pcm_sha256": "ed9e9971da3d71ce8ab046e3892dd9ac09cb7d758a6b66b3ad4bb3a274cf7079",
+          "suppression_db": 7.2046190576250275
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 3.937706861508272,
+          "pcm_sha256": "63e63ea6b4d383c429e8f68c426f636801225aa6edaa0ba3e6e3f798d4b7186b",
+          "suppression_db": 11.918225742705292
+        }
+      },
+      "family": "cosyvoice",
+      "group": "2902",
+      "id": 75,
+      "incumbent": "unassessed",
+      "label": "spoof",
+      "origin": {
+        "background_start_sample": 576000,
+        "center_start_sample": 74917,
+        "family": "cosyvoice",
+        "group": "2902",
+        "id": "dev01-cosyvoice-full_2902_9008_000002_000001",
+        "label": "spoof",
+        "samples": 197834,
+        "wav_sha256": "6fe95a651c9e590d56e7a9ae5f200bca4cd92a7e6e61a9f5fbab90a7df5efee6"
+      },
+      "pcm_sha256": "6dfa0436fab7788bbccd794d92e2da95e9a63eca5a876870d445eba658b44eda",
+      "role": "held",
+      "scene": "restaurant.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.392690224836863,
+          "pcm_sha256": "fea889d235a8bcf4b52e069f8c334567f470ebbb2ba4a2a2f799d1e343586780",
+          "suppression_db": 7.243818275050406
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -2.461298036555,
+          "pcm_sha256": "460ebe3faba54ea7e29c94d0e4b2b62be1065011cb28e293443fdf03513df65c",
+          "suppression_db": 13.318984016502114
+        }
+      },
+      "family": "cosyvoice",
+      "group": "2902",
+      "id": 76,
+      "incumbent": "unassessed",
+      "label": "spoof",
+      "origin": {
+        "background_start_sample": 224000,
+        "center_start_sample": 74917,
+        "family": "cosyvoice",
+        "group": "2902",
+        "id": "dev01-cosyvoice-full_2902_9008_000002_000001",
+        "label": "spoof",
+        "samples": 197834,
+        "wav_sha256": "6fe95a651c9e590d56e7a9ae5f200bca4cd92a7e6e61a9f5fbab90a7df5efee6"
+      },
+      "pcm_sha256": "f49ded9af02ce56c03d7c009ea5a542a89dc034548fd59b5141210d9a2b44aaa",
+      "role": "held",
+      "scene": "vienna.wav"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.486187647568986,
+          "pcm_sha256": "7d2bec32a4e31a8bf6890dafdafc4dd18b157b23bb7dae728c03624180a01751",
+          "suppression_db": 0.5205623258769093
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.519070047298208,
+          "pcm_sha256": "daf08ff2aa798d06c11b05025401fa1223d5d498bfa96c69b76cba523bd3d4e7",
+          "suppression_db": 0.07049539911394302
+        }
+      },
+      "family": "cosyvoice",
+      "group": "1272",
+      "id": 77,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start_sample": null,
+        "center_start_sample": 26155,
+        "family": "cosyvoice",
+        "group": "1272",
+        "id": "dev01-cosyvoice-full_1272_141231_000029_000002",
+        "label": "spoof",
+        "samples": 100310,
+        "wav_sha256": "0b630dc97046a5818be70b68b901c3dad89d88002ac7b5ff9d32c931ce7a90ab"
+      },
+      "pcm_sha256": "95b938e75ea4118dc95d28eb7ed89ed422edfa082b02169b5c48a069f32e61df",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.479189193742218,
+          "pcm_sha256": "450c98c63babf475a6a615dcdfc86b50f5d370e73e178424f76548d67bc5adb3",
+          "suppression_db": 7.874431357207648
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 3.4530218738653318,
+          "pcm_sha256": "945f11141876bf56bafa809b626bd2908ae335bd1f8a7cae17761d9e4d441bb0",
+          "suppression_db": 11.864786532277748
+        }
+      },
+      "family": "cosyvoice",
+      "group": "1272",
+      "id": 78,
+      "incumbent": "inconclusive",
+      "label": "spoof",
+      "origin": {
+        "background_start_sample": 864000,
+        "center_start_sample": 26155,
+        "family": "cosyvoice",
+        "group": "1272",
+        "id": "dev01-cosyvoice-full_1272_141231_000029_000002",
+        "label": "spoof",
+        "samples": 100310,
+        "wav_sha256": "0b630dc97046a5818be70b68b901c3dad89d88002ac7b5ff9d32c931ce7a90ab"
+      },
+      "pcm_sha256": "ab901ec731a0b9d3febb41f393c038c9f716c40abb4d60a4a2243b0dee8d30f2",
+      "role": "held",
+      "scene": "restaurant.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.502061315233824,
+          "pcm_sha256": "84fc02aed4aa090603fe61ceb1a1e3a8f76e8ac5238555ff723b96c917dbab6d",
+          "suppression_db": 7.51165507103015
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 6.282483659044928,
+          "pcm_sha256": "74c90668bb14c332c3204bb9d914ab9bac76ce6680f5934c4612a2ae997b0641",
+          "suppression_db": 11.965174878774619
+        }
+      },
+      "family": "cosyvoice",
+      "group": "1272",
+      "id": 79,
+      "incumbent": "inconclusive",
+      "label": "spoof",
+      "origin": {
+        "background_start_sample": 320000,
+        "center_start_sample": 26155,
+        "family": "cosyvoice",
+        "group": "1272",
+        "id": "dev01-cosyvoice-full_1272_141231_000029_000002",
+        "label": "spoof",
+        "samples": 100310,
+        "wav_sha256": "0b630dc97046a5818be70b68b901c3dad89d88002ac7b5ff9d32c931ce7a90ab"
+      },
+      "pcm_sha256": "fcdb88c9790fbe5b4b4453b3a7f9de568c9e5176fcfb0d867591abe8c81248da",
+      "role": "held",
+      "scene": "vienna.wav"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.5168732229807524,
+          "pcm_sha256": "230d97560bfe3006e8fccb353c1f23c49df68c22aeccbe8a0e27b3c45f2fa1b1",
+          "suppression_db": 0.49880724727060893
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.518190738991058,
+          "pcm_sha256": "b44296f781f34678c7216556406619659955ab3c3dcc786661eabb5e1eadb14e",
+          "suppression_db": 0.06367718202954421
+        }
+      },
+      "family": "gptsovits",
+      "group": "2428",
+      "id": 80,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start_sample": null,
+        "center_start_sample": 43360,
+        "family": "gptsovits",
+        "group": "2428",
+        "id": "dev01-gptsovits-full_2428_83699_000011_000004",
+        "label": "spoof",
+        "samples": 134720,
+        "wav_sha256": "4fdb5d7716baac42a1ce953fe509651b1067a3f74499e34709f5c8e08304a5fb"
+      },
+      "pcm_sha256": "f327bce837401068fa9b1737963dbae8ddd3196637b442782949b8f9e945b094",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.461904150166906,
+          "pcm_sha256": "fc0365a81e15fa1307a3f787d1d13a1d5eb5ea85c9b5faed30e4e89d53f48412",
+          "suppression_db": 6.970420557776965
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.455279162795449,
+          "pcm_sha256": "aabfc7f52840b2804395fac355835acdf010d4a1a92895761f01853e5a744f5e",
+          "suppression_db": 7.446188411508151
+        }
+      },
+      "family": "gptsovits",
+      "group": "2428",
+      "id": 81,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start_sample": 96000,
+        "center_start_sample": 43360,
+        "family": "gptsovits",
+        "group": "2428",
+        "id": "dev01-gptsovits-full_2428_83699_000011_000004",
+        "label": "spoof",
+        "samples": 134720,
+        "wav_sha256": "4fdb5d7716baac42a1ce953fe509651b1067a3f74499e34709f5c8e08304a5fb"
+      },
+      "pcm_sha256": "5f95d0b37b1c6564614d84c5cc80457c4a7ebec87c880ac921de7c995d9e77e9",
+      "role": "held",
+      "scene": "restaurant.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.474340254629702,
+          "pcm_sha256": "7973992b6c06a68d9376dbaa8695b72ef61ceb622137e89174fc6d99a5642bdd",
+          "suppression_db": 6.739983995699572
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.371117018600764,
+          "pcm_sha256": "4cc39fa5b4cad0b6006f8d524f0aabf510bf5c66c0e03cafacebbc137bccad14",
+          "suppression_db": 10.263290545472838
+        }
+      },
+      "family": "gptsovits",
+      "group": "2428",
+      "id": 82,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start_sample": 32000,
+        "center_start_sample": 43360,
+        "family": "gptsovits",
+        "group": "2428",
+        "id": "dev01-gptsovits-full_2428_83699_000011_000004",
+        "label": "spoof",
+        "samples": 134720,
+        "wav_sha256": "4fdb5d7716baac42a1ce953fe509651b1067a3f74499e34709f5c8e08304a5fb"
+      },
+      "pcm_sha256": "ea4e5d83c580f7d075d8a2f9d1b9e23c9a3c9864a728d63d350e1a6e8049efd0",
+      "role": "held",
+      "scene": "vienna.wav"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.507916307881214,
+          "pcm_sha256": "aa08b73871a60488ba5e5faaed0c01ea3cb05ffadc98c77587fcd770b8243759",
+          "suppression_db": 0.4369042923688099
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.5325760895843334,
+          "pcm_sha256": "0ec1418ff18bd6fe6ff65b1907ee12e245fe138595979642dea53a4fcc56555e",
+          "suppression_db": 0.05691003244692943
+        }
+      },
+      "family": "gptsovits",
+      "group": "422",
+      "id": 83,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start_sample": null,
+        "center_start_sample": 34400,
+        "family": "gptsovits",
+        "group": "422",
+        "id": "dev01-gptsovits-full_422_122949_000013_000010",
+        "label": "spoof",
+        "samples": 116800,
+        "wav_sha256": "dd23c40904cf5232da69a8f52e9f22dbf00d439bc62f01a9d888dd61fa50603d"
+      },
+      "pcm_sha256": "487a5425afffb0b4ecf2a79880bb8b6134a907d8f5f0fbf00be28bfc41069561",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.479189193742218,
+          "pcm_sha256": "37fb4fd46d257b8373a4fd9f2dbde57485a16a19ee73d4edd3986e8007885bde",
+          "suppression_db": 6.8609514758294265
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.371306747290244,
+          "pcm_sha256": "4bb60b1a081898b9d715adfa3458f782dfd25eeac584c237db0b18317737d0f4",
+          "suppression_db": 12.73373602937712
+        }
+      },
+      "family": "gptsovits",
+      "group": "422",
+      "id": 84,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start_sample": 288000,
+        "center_start_sample": 34400,
+        "family": "gptsovits",
+        "group": "422",
+        "id": "dev01-gptsovits-full_422_122949_000013_000010",
+        "label": "spoof",
+        "samples": 116800,
+        "wav_sha256": "dd23c40904cf5232da69a8f52e9f22dbf00d439bc62f01a9d888dd61fa50603d"
+      },
+      "pcm_sha256": "536576c8cd869461054628e457020ba23e08824d02a34efbdac27257a0a02707",
+      "role": "held",
+      "scene": "restaurant.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.486400487543644,
+          "pcm_sha256": "bbc8f8d208bdde2c5c9c6390d3758d3e63e0c17b2fe5bc5d82371631109c1abf",
+          "suppression_db": 6.559157773231421
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.3724458750339785,
+          "pcm_sha256": "22c1c8170493f497f976d52f2e1ea47216554d92650e5a808dcad08fe57ccb03",
+          "suppression_db": 12.925761159765987
+        }
+      },
+      "family": "gptsovits",
+      "group": "422",
+      "id": 85,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start_sample": 128000,
+        "center_start_sample": 34400,
+        "family": "gptsovits",
+        "group": "422",
+        "id": "dev01-gptsovits-full_422_122949_000013_000010",
+        "label": "spoof",
+        "samples": 116800,
+        "wav_sha256": "dd23c40904cf5232da69a8f52e9f22dbf00d439bc62f01a9d888dd61fa50603d"
+      },
+      "pcm_sha256": "4bcc7bfefc9e3e0399985b811a6a89346db2ab90b4ed935263acf2cc78adbeda",
+      "role": "held",
+      "scene": "vienna.wav"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.429611261137202,
+          "pcm_sha256": "3509636f87773545beb78c3ae4c0219e5c4403b670f831ff428c3a6db48dd040",
+          "suppression_db": 0.40682932862048965
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.518410493671195,
+          "pcm_sha256": "573d03c0bf6cce3d3d5765454067f4d3655e94d9ef2425411220d157125855a6",
+          "suppression_db": 0.11794424461376099
+        }
+      },
+      "family": "ljjets",
+      "group": "6295",
+      "id": 86,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start_sample": null,
+        "center_start_sample": 47239,
+        "family": "ljjets",
+        "group": "6295",
+        "id": "dev01-ljjets-full_6295_244435_000038_000003",
+        "label": "spoof",
+        "samples": 142478,
+        "wav_sha256": "acd16007476421bde568e998c50bd2b4080c7185645d3054fb1fed43d1601485"
+      },
+      "pcm_sha256": "8f0dcc5c1496be79f358f4d45c36625dd306c4f8f338936220facb0aeabb5008",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.5168732229807524,
+          "pcm_sha256": "a01a81f76d3a0e8fb3febdd319d30eda9b53a04ceddfa7122e4f7a8f31b54747",
+          "suppression_db": 7.042021248897679
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.367897119353832,
+          "pcm_sha256": "2c84ddb138bbf09b07c9b4eecb1fdc5eb8618a606b6d8bd1ba29c4290fab8b0b",
+          "suppression_db": 10.144705193504437
+        }
+      },
+      "family": "ljjets",
+      "group": "6295",
+      "id": 87,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start_sample": 576000,
+        "center_start_sample": 47239,
+        "family": "ljjets",
+        "group": "6295",
+        "id": "dev01-ljjets-full_6295_244435_000038_000003",
+        "label": "spoof",
+        "samples": 142478,
+        "wav_sha256": "acd16007476421bde568e998c50bd2b4080c7185645d3054fb1fed43d1601485"
+      },
+      "pcm_sha256": "b38a0034758a31c0b3e8ff5f7fe2416a6c5193f3d50b2e5153e5521367e7408c",
+      "role": "held",
+      "scene": "restaurant.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.406548520248295,
+          "pcm_sha256": "89ff9ab830ea1185171196ffb4420b418b519cfdafcdf87789caea546ecea6e1",
+          "suppression_db": 6.2930335605721766
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 6.761140586204837,
+          "pcm_sha256": "9c304d16574fdaa6716a5642382f5a97963f64c6435ce9340db33ad9823a8f92",
+          "suppression_db": 10.851772907934032
+        }
+      },
+      "family": "ljjets",
+      "group": "6295",
+      "id": 88,
+      "incumbent": "inconclusive",
+      "label": "spoof",
+      "origin": {
+        "background_start_sample": 224000,
+        "center_start_sample": 47239,
+        "family": "ljjets",
+        "group": "6295",
+        "id": "dev01-ljjets-full_6295_244435_000038_000003",
+        "label": "spoof",
+        "samples": 142478,
+        "wav_sha256": "acd16007476421bde568e998c50bd2b4080c7185645d3054fb1fed43d1601485"
+      },
+      "pcm_sha256": "45660aa9bf17e2c0a1d63bcd18be029791a0359a27f41624c21e7e083b2f4e1c",
+      "role": "held",
+      "scene": "vienna.wav"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.437688730052152,
+          "pcm_sha256": "ee1aed1e20d243cbfa1892fcb2f7328e61d0b7426ffb0aa52d532c768dc595aa",
+          "suppression_db": 0.46916800446658974
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.497100596668201,
+          "pcm_sha256": "bfeb96709f47e8b08858a6a9d6b4d7ac9ae03067862f399d25e2c9bc62caf65c",
+          "suppression_db": 0.18285837747723407
+        }
+      },
+      "family": "ljjets",
+      "group": "2078",
+      "id": 89,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start_sample": null,
+        "center_start_sample": 42316,
+        "family": "ljjets",
+        "group": "2078",
+        "id": "dev01-ljjets-full_2078_142845_000019_000004",
+        "label": "spoof",
+        "samples": 132632,
+        "wav_sha256": "6b1ed5fb78af8114593058d7850381b75c5fdbd8134493896a129cfd94a7455d"
+      },
+      "pcm_sha256": "0eee98de874b7bfc359733cc12d5f963e9b9a502017358b13bd0478d96a7fd48",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.526132457388547,
+          "pcm_sha256": "e46067f7b49cb9fbe366a08ef5b321a19309391b9eaa8a6f0b5bb8ca6937e0ba",
+          "suppression_db": 7.181592712298761
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.165136588822657,
+          "pcm_sha256": "62d64007473d15371af7c0a9cbb51b27d42486cc959eebb93c072848bf700b8c",
+          "suppression_db": 12.82546191425441
+        }
+      },
+      "family": "ljjets",
+      "group": "2078",
+      "id": 90,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": {
+        "background_start_sample": 864000,
+        "center_start_sample": 42316,
+        "family": "ljjets",
+        "group": "2078",
+        "id": "dev01-ljjets-full_2078_142845_000019_000004",
+        "label": "spoof",
+        "samples": 132632,
+        "wav_sha256": "6b1ed5fb78af8114593058d7850381b75c5fdbd8134493896a129cfd94a7455d"
+      },
+      "pcm_sha256": "a68dc661db2b3619cfc56531a50b4e60bd48eb6128558bf5f544ca1bff74ce55",
+      "role": "held",
+      "scene": "restaurant.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.518190738991058,
+          "pcm_sha256": "42cce4ede6c46fe52e251867dbbda679752c1e56cd712fbb19e12ccf25263b3f",
+          "suppression_db": 6.901375551994054
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.329862899240285,
+          "pcm_sha256": "5d31d1c24efad76647d934400b2bf9826a631f1370bd39ce5c042c5b267af57d",
+          "suppression_db": 10.949850910320595
+        }
+      },
+      "family": "ljjets",
+      "group": "2078",
+      "id": 91,
+      "incumbent": "inconclusive",
+      "label": "spoof",
+      "origin": {
+        "background_start_sample": 320000,
+        "center_start_sample": 42316,
+        "family": "ljjets",
+        "group": "2078",
+        "id": "dev01-ljjets-full_2078_142845_000019_000004",
+        "label": "spoof",
+        "samples": 132632,
+        "wav_sha256": "6b1ed5fb78af8114593058d7850381b75c5fdbd8134493896a129cfd94a7455d"
+      },
+      "pcm_sha256": "b572375b78fffee8c7592aa06fc28051ede61d322b8c43518b7240fa6f05a3d1",
+      "role": "held",
+      "scene": "vienna.wav"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": -7.111744906320919,
+          "pcm_sha256": "33628f25b4159205ade2a446798491d0a19ca0f3e584b7b3fae3b6e60c6d6809",
+          "suppression_db": 0.2501511473494501
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -7.07332608850882,
+          "pcm_sha256": "cbb949c98c70ae22ee1cfd2880980d5d97f1bff9cfa167068f05874e1d890aa1",
+          "suppression_db": 0.03475252198057462
+        }
+      },
+      "family": null,
+      "group": "5683",
+      "id": 92,
+      "incumbent": "original",
+      "label": "bonafide",
+      "origin": {
+        "background_start_sample": null,
+        "center_start_sample": 22480,
+        "family": null,
+        "group": "5683",
+        "id": "test-clean_5683_32865_000038_000002",
+        "label": "bonafide",
+        "samples": 92960,
+        "wav_sha256": "635067ca04b754424321ea4ad2d85fe8b19f46f572ecd0c42f1595e3ba522ecc"
+      },
+      "pcm_sha256": "caff920a7d5015849655b985d21d52b81ac65ed1d310048b515ad9c0e4c67b4c",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.466380064098159,
+          "pcm_sha256": "12c6c12f0161e5f8552d2d407273a684b231a25ac5c88295331c41e62839c72d",
+          "suppression_db": 6.570311169828679
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.310034664652599,
+          "pcm_sha256": "97bd028a44f4092c46e81b41ea5237a6fb9881161a59dcf301d32ddd6f32537c",
+          "suppression_db": 8.012473218029669
+        }
+      },
+      "family": null,
+      "group": "5683",
+      "id": 93,
+      "incumbent": "ai",
+      "label": "bonafide",
+      "origin": {
+        "background_start_sample": 96000,
+        "center_start_sample": 22480,
+        "family": null,
+        "group": "5683",
+        "id": "test-clean_5683_32865_000038_000002",
+        "label": "bonafide",
+        "samples": 92960,
+        "wav_sha256": "635067ca04b754424321ea4ad2d85fe8b19f46f572ecd0c42f1595e3ba522ecc"
+      },
+      "pcm_sha256": "74d0bd7e9ed84b21ae803d699e27ada0ebb10fdd2e67a516d4806ac6e8216bd4",
+      "role": "held",
+      "scene": "restaurant.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.362240081864096,
+          "pcm_sha256": "a86b528613fc00489552147dc7ae2561697413c3519376609a758a93f81c46fb",
+          "suppression_db": 6.501667162500566
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.14950627984405,
+          "pcm_sha256": "a7238a33e634d5c886d3b17fe8ede13fa71c5e71ee0b3619c8735d7ae89ef6be",
+          "suppression_db": 9.62171276309803
+        }
+      },
+      "family": null,
+      "group": "5683",
+      "id": 94,
+      "incumbent": "original",
+      "label": "bonafide",
+      "origin": {
+        "background_start_sample": 32000,
+        "center_start_sample": 22480,
+        "family": null,
+        "group": "5683",
+        "id": "test-clean_5683_32865_000038_000002",
+        "label": "bonafide",
+        "samples": 92960,
+        "wav_sha256": "635067ca04b754424321ea4ad2d85fe8b19f46f572ecd0c42f1595e3ba522ecc"
+      },
+      "pcm_sha256": "6171b6ea05faf14a77f1d6afc5a3cedf62c044d6f83f0c1ad4d417598f539db1",
+      "role": "held",
+      "scene": "vienna.wav"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": -7.10988802714996,
+          "pcm_sha256": "20b98ce208bb90527ecda099140acee0e38bc73ec68d10a5a0ac01004d0ad091",
+          "suppression_db": 0.4736676495794648
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -6.974529751483892,
+          "pcm_sha256": "2d3c47013bf05dfa0e3198c40e4fd4883de1639f3cf08d3a32537985bf5501b9",
+          "suppression_db": 0.08498675419526017
+        }
+      },
+      "family": null,
+      "group": "4507",
+      "id": 95,
+      "incumbent": "original",
+      "label": "bonafide",
+      "origin": {
+        "background_start_sample": null,
+        "center_start_sample": 6560,
+        "family": null,
+        "group": "4507",
+        "id": "test-clean_4507_16021_000039_000001",
+        "label": "bonafide",
+        "samples": 61121,
+        "wav_sha256": "dc076640c1b6c9eecf64c222183486c8b203ef6c4d79decc653dd44802168216"
+      },
+      "pcm_sha256": "b6813f78315d914258290513ebf1e1974afd6e2f0e8a9ad9c0b1996a1ffbe855",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.4091068625466585,
+          "pcm_sha256": "94bca86f9dee2557497a8149be9a6856e9c454b0fcb153f5ebda60ec52d2e544",
+          "suppression_db": 8.257542204712468
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 5.922044929572247,
+          "pcm_sha256": "4a92fb729fa7ab8ef83e8bc08196bb81ab0861c97244c79110798f9baf0ae270",
+          "suppression_db": 9.802629072135096
+        }
+      },
+      "family": null,
+      "group": "4507",
+      "id": 96,
+      "incumbent": "inconclusive",
+      "label": "bonafide",
+      "origin": {
+        "background_start_sample": 288000,
+        "center_start_sample": 6560,
+        "family": null,
+        "group": "4507",
+        "id": "test-clean_4507_16021_000039_000001",
+        "label": "bonafide",
+        "samples": 61121,
+        "wav_sha256": "dc076640c1b6c9eecf64c222183486c8b203ef6c4d79decc653dd44802168216"
+      },
+      "pcm_sha256": "1eb8e95626ccc997332768df880141e5dba86b485170cc7b1d81ca2d780b9353",
+      "role": "held",
+      "scene": "restaurant.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.403996698462952,
+          "pcm_sha256": "3a06eb159bd1a5eb6fba2088d738900a64080c0c114e2ea60323aed11adf1661",
+          "suppression_db": 7.491875573824655
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 6.25469882046845,
+          "pcm_sha256": "7d52b5c55b81afdcf3681317e207f6de1c99752a98f831ecfcca89ade15a91cb",
+          "suppression_db": 10.131113447210478
+        }
+      },
+      "family": null,
+      "group": "4507",
+      "id": 97,
+      "incumbent": "inconclusive",
+      "label": "bonafide",
+      "origin": {
+        "background_start_sample": 128000,
+        "center_start_sample": 6560,
+        "family": null,
+        "group": "4507",
+        "id": "test-clean_4507_16021_000039_000001",
+        "label": "bonafide",
+        "samples": 61121,
+        "wav_sha256": "dc076640c1b6c9eecf64c222183486c8b203ef6c4d79decc653dd44802168216"
+      },
+      "pcm_sha256": "ec423a8b850a93f37733536c10aa104798c8baf2f4f88ac0ec8cf333cc2565ba",
+      "role": "held",
+      "scene": "vienna.wav"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": -7.088541505804771,
+          "pcm_sha256": "f05c8e368419dc15d3ee7ad6873aa12732159f79452162eab15a901201e17869",
+          "suppression_db": 0.4951160691250528
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -7.013453421475267,
+          "pcm_sha256": "7408efb8914bb8df301eae2e185b93342fee957882a32f033313d56ef6469c62",
+          "suppression_db": 0.09204638590467226
+        }
+      },
+      "family": null,
+      "group": "1089",
+      "id": 98,
+      "incumbent": "original",
+      "label": "bonafide",
+      "origin": {
+        "background_start_sample": null,
+        "center_start_sample": 2480,
+        "family": null,
+        "group": "1089",
+        "id": "test-clean_1089_134686_000027_000000",
+        "label": "bonafide",
+        "samples": 52960,
+        "wav_sha256": "6b44f07c3feb96baa080e605d61f3ff94bcf28bb1a6ff65e7cf65adbb68f287d"
+      },
+      "pcm_sha256": "8515ceb23c7c7a70c0e94dcee99cd8eb5985fc9e90fa2acc61dda5cf575f57b8",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.4834248377893715,
+          "pcm_sha256": "d6ac664399140b4223bf40fa69ef2a3a8c0a470043b66a9eb4f0bd396cccc86c",
+          "suppression_db": 7.105764204092171
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 5.354996541068863,
+          "pcm_sha256": "b7eb0ad85bfd7713945047d4d168ed5762daadfcafb19f96180a2e87eb07eef4",
+          "suppression_db": 8.117933898201223
+        }
+      },
+      "family": null,
+      "group": "1089",
+      "id": 99,
+      "incumbent": "ai",
+      "label": "bonafide",
+      "origin": {
+        "background_start_sample": 576000,
+        "center_start_sample": 2480,
+        "family": null,
+        "group": "1089",
+        "id": "test-clean_1089_134686_000027_000000",
+        "label": "bonafide",
+        "samples": 52960,
+        "wav_sha256": "6b44f07c3feb96baa080e605d61f3ff94bcf28bb1a6ff65e7cf65adbb68f287d"
+      },
+      "pcm_sha256": "ee2b5f43a58ac94c0065ee0ed43420b58c5943606a0cd98df5044c07ac10970d",
+      "role": "held",
+      "scene": "restaurant.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 6.880678636372977,
+          "pcm_sha256": "78437cdd3918f7c450059e03ba5adf50cb254752440b4893071aff16da939f5d",
+          "suppression_db": 6.833406268450355
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -1.8490734298462748,
+          "pcm_sha256": "63eb345f2719f3fce9f18eb6384732f7cc63245c87ae8731e874e9cfd872535c",
+          "suppression_db": 9.749494971670778
+        }
+      },
+      "family": null,
+      "group": "1089",
+      "id": 100,
+      "incumbent": "inconclusive",
+      "label": "bonafide",
+      "origin": {
+        "background_start_sample": 224000,
+        "center_start_sample": 2480,
+        "family": null,
+        "group": "1089",
+        "id": "test-clean_1089_134686_000027_000000",
+        "label": "bonafide",
+        "samples": 52960,
+        "wav_sha256": "6b44f07c3feb96baa080e605d61f3ff94bcf28bb1a6ff65e7cf65adbb68f287d"
+      },
+      "pcm_sha256": "29a4e53f837552e08d380e97a1bbc6049dfd13a98ba1b49ced951c87b45d5578",
+      "role": "held",
+      "scene": "vienna.wav"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": -7.205480113172415,
+          "pcm_sha256": "551ef511771f405be8f28f6ae6b6031d8e764ba34e38a8582bb5a00da85b0289",
+          "suppression_db": 0.7599973061528142
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -7.174641620713894,
+          "pcm_sha256": "f9d584447eefc7fd3d50a038137e17634c51068792f325dad614c8def5b3c5cc",
+          "suppression_db": 0.09910768010167985
+        }
+      },
+      "family": null,
+      "group": "8463",
+      "id": 101,
+      "incumbent": "original",
+      "label": "bonafide",
+      "origin": {
+        "background_start_sample": null,
+        "center_start_sample": 68640,
+        "family": null,
+        "group": "8463",
+        "id": "test-clean_8463_294828_000042_000001",
+        "label": "bonafide",
+        "samples": 185280,
+        "wav_sha256": "8545e60354213c518e5d0f7b30c70a9ecc971ee9954228482c557db2f4c8353b"
+      },
+      "pcm_sha256": "cfb084ca21308bfaeed75c9ebf5f6c765acd3c0a56a1e635a585b4788149a34c",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.4368780442611495,
+          "pcm_sha256": "d2c0207891f32210843322514c0f483b3221fa773321f49769729ffd0f8c4f4d",
+          "suppression_db": 7.0784540020765565
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 6.540353454798529,
+          "pcm_sha256": "8eea20b41b424dd716e1e4a0557f32f8ee0dc0211a23f9948e78b771898700ad",
+          "suppression_db": 12.48990049387658
+        }
+      },
+      "family": null,
+      "group": "8463",
+      "id": 102,
+      "incumbent": "ai",
+      "label": "bonafide",
+      "origin": {
+        "background_start_sample": 864000,
+        "center_start_sample": 68640,
+        "family": null,
+        "group": "8463",
+        "id": "test-clean_8463_294828_000042_000001",
+        "label": "bonafide",
+        "samples": 185280,
+        "wav_sha256": "8545e60354213c518e5d0f7b30c70a9ecc971ee9954228482c557db2f4c8353b"
+      },
+      "pcm_sha256": "e4deb7a266acc93d5c2e11ebba38a0155666e10115eb6784e1e58ab4811c83a4",
+      "role": "held",
+      "scene": "restaurant.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.363180704678679,
+          "pcm_sha256": "665981a7948fbbb107f4ae8c558be35bc0cfc664a91d6d5cb1c910033017b257",
+          "suppression_db": 7.051688762487254
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -0.05040890216719385,
+          "pcm_sha256": "1d8cd71d93f154af0909b2a8f6202b369ef8d2b1a2641dc0235514918e197185",
+          "suppression_db": 9.067249467028054
+        }
+      },
+      "family": null,
+      "group": "8463",
+      "id": 103,
+      "incumbent": "inconclusive",
+      "label": "bonafide",
+      "origin": {
+        "background_start_sample": 320000,
+        "center_start_sample": 68640,
+        "family": null,
+        "group": "8463",
+        "id": "test-clean_8463_294828_000042_000001",
+        "label": "bonafide",
+        "samples": 185280,
+        "wav_sha256": "8545e60354213c518e5d0f7b30c70a9ecc971ee9954228482c557db2f4c8353b"
+      },
+      "pcm_sha256": "eaf3f4cd20741f57a2f43d451ad0652bbd12ec68c5fcdb90541430ef992ca10b",
+      "role": "held",
+      "scene": "vienna.wav"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": -6.943345099994578,
+          "pcm_sha256": "2ec8e962330840c3092c436fe7329c0bab0f1aaa61668ecdb6edfa354c20ee4e",
+          "suppression_db": 0.7446001620740567
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -6.622409815692116,
+          "pcm_sha256": "1141784bee3ede0bee36be2566f9099b3c8f4e973cbf92321492261c8a306885",
+          "suppression_db": 0.08958019202696633
+        }
+      },
+      "family": null,
+      "group": "1580",
+      "id": 104,
+      "incumbent": "original",
+      "label": "bonafide",
+      "origin": {
+        "background_start_sample": null,
+        "center_start_sample": 25839,
+        "family": null,
+        "group": "1580",
+        "id": "test-clean_1580_141083_000047_000007",
+        "label": "bonafide",
+        "samples": 99679,
+        "wav_sha256": "7ee8ee4d2a3cfb254bfa096297782611fa321647087e6bacdf046b0fb32cbdf9"
+      },
+      "pcm_sha256": "75eeb4e93362dafef36f120d651bf41dd48f4dedb8f99e1f1c5f6ab0d7b16ebe",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.4507497819695825,
+          "pcm_sha256": "76d0e07f8f493f878bab62afb9248f962ef111e885f4eadf37e39e160c29f717",
+          "suppression_db": 6.49255104282214
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.3175591802661755,
+          "pcm_sha256": "25b04d2ef6a71651555581a153a6526988e187b8532daf7b6bebcccadc1f6592",
+          "suppression_db": 7.448791556245475
+        }
+      },
+      "family": null,
+      "group": "1580",
+      "id": 105,
+      "incumbent": "ai",
+      "label": "bonafide",
+      "origin": {
+        "background_start_sample": 96000,
+        "center_start_sample": 25839,
+        "family": null,
+        "group": "1580",
+        "id": "test-clean_1580_141083_000047_000007",
+        "label": "bonafide",
+        "samples": 99679,
+        "wav_sha256": "7ee8ee4d2a3cfb254bfa096297782611fa321647087e6bacdf046b0fb32cbdf9"
+      },
+      "pcm_sha256": "8bd00c5bd10c45e0d18eae03705d08b6825ffee8b55e2e257954191d45882baa",
+      "role": "held",
+      "scene": "restaurant.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.45900032235237,
+          "pcm_sha256": "9bc9e0c53a510924b4afcd95f8661220cc7f9940e9b17e4f6dd83846bc0a18e0",
+          "suppression_db": 6.586806217147643
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 6.861334315608133,
+          "pcm_sha256": "40dbe638f0e4082f341364959add96eda18f8f655806b7a7e24a91e7d257410c",
+          "suppression_db": 7.590324235144578
+        }
+      },
+      "family": null,
+      "group": "1580",
+      "id": 106,
+      "incumbent": "original",
+      "label": "bonafide",
+      "origin": {
+        "background_start_sample": 32000,
+        "center_start_sample": 25839,
+        "family": null,
+        "group": "1580",
+        "id": "test-clean_1580_141083_000047_000007",
+        "label": "bonafide",
+        "samples": 99679,
+        "wav_sha256": "7ee8ee4d2a3cfb254bfa096297782611fa321647087e6bacdf046b0fb32cbdf9"
+      },
+      "pcm_sha256": "eb0558e5eb7100b08ad9d284c9a190f30a312f5a0484a62608a07b921c3e75cf",
+      "role": "held",
+      "scene": "vienna.wav"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": -7.195606223286384,
+          "pcm_sha256": "09e13da7d6ed40d3fdba5cb60303b43bb3c29c4e768bde02c4aebdc70290573b",
+          "suppression_db": 0.4262389420727454
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -7.165722849205843,
+          "pcm_sha256": "29846f773b9cb7e3e8fd586fc09db5aea9c4a2e8d7d92867130bf386dc9c5b53",
+          "suppression_db": 0.11249046945214093
+        }
+      },
+      "family": null,
+      "group": "6829",
+      "id": 107,
+      "incumbent": "original",
+      "label": "bonafide",
+      "origin": {
+        "background_start_sample": null,
+        "center_start_sample": 18880,
+        "family": null,
+        "group": "6829",
+        "id": "test-clean_6829_68771_000035_000000",
+        "label": "bonafide",
+        "samples": 85760,
+        "wav_sha256": "9e62fe874313edba6c41b6712b2157f45c7b79cb7c1c13ccd9203ab899520433"
+      },
+      "pcm_sha256": "0c156f7d515e5ed67fbf5b2c11380d62c5ec234e31c4a3a89450af65a638588b",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.465545819352552,
+          "pcm_sha256": "b04c61e03fea413c51479987730d3ddde1094c7cb5efae03d5a8caf5aa449195",
+          "suppression_db": 6.444766287674058
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.391140683350963,
+          "pcm_sha256": "304502b8acbc987159cb4ce4e7f3ffb9cc7d717051fa7e1ddfd691b11b58f717",
+          "suppression_db": 9.695691893488517
+        }
+      },
+      "family": null,
+      "group": "6829",
+      "id": 108,
+      "incumbent": "ai",
+      "label": "bonafide",
+      "origin": {
+        "background_start_sample": 288000,
+        "center_start_sample": 18880,
+        "family": null,
+        "group": "6829",
+        "id": "test-clean_6829_68771_000035_000000",
+        "label": "bonafide",
+        "samples": 85760,
+        "wav_sha256": "9e62fe874313edba6c41b6712b2157f45c7b79cb7c1c13ccd9203ab899520433"
+      },
+      "pcm_sha256": "3b023536c28733b4e0e2b54c5e965bcbdafa41ac41295ca6516e33ef8de1e6d5",
+      "role": "held",
+      "scene": "restaurant.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.409501034539967,
+          "pcm_sha256": "83e14929cb674b8f3bf5f8f7e71e6560b80c97a81fc1611c0a946cdcdcb5594f",
+          "suppression_db": 6.3664508509342745
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.084316862564527,
+          "pcm_sha256": "852c29999af910a17afe7927eb9245140e03c3c97a8eb9b67483381c7b3d9c27",
+          "suppression_db": 11.897426439361151
+        }
+      },
+      "family": null,
+      "group": "6829",
+      "id": 109,
+      "incumbent": "inconclusive",
+      "label": "bonafide",
+      "origin": {
+        "background_start_sample": 128000,
+        "center_start_sample": 18880,
+        "family": null,
+        "group": "6829",
+        "id": "test-clean_6829_68771_000035_000000",
+        "label": "bonafide",
+        "samples": 85760,
+        "wav_sha256": "9e62fe874313edba6c41b6712b2157f45c7b79cb7c1c13ccd9203ab899520433"
+      },
+      "pcm_sha256": "621d951fa430bc3e5ae1538aadaf38ae0812e7f4f4ef1651cb2e42df0b0ad8d8",
+      "role": "held",
+      "scene": "vienna.wav"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": -7.113041890664879,
+          "pcm_sha256": "c91253050084557f520efd9e6156e34d567b86b19c40497e70f3993f16f01364",
+          "suppression_db": 0.5336662422826102
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -6.967414797787233,
+          "pcm_sha256": "13e7a54c43a3dc91f57509545d2a93ca2b0f9aa3deb0c51add79e692458bf784",
+          "suppression_db": 0.06528826304955698
+        }
+      },
+      "family": null,
+      "group": "1320",
+      "id": 110,
+      "incumbent": "original",
+      "label": "bonafide",
+      "origin": {
+        "background_start_sample": null,
+        "center_start_sample": 48000,
+        "family": null,
+        "group": "1320",
+        "id": "test-clean_1320_122612_000037_000000",
+        "label": "bonafide",
+        "samples": 144000,
+        "wav_sha256": "488b5e004ccfdfa8babb445f7c5302277bd940e5c3bcaa7c1712ffc35fa70de2"
+      },
+      "pcm_sha256": "f737dfe71e89e9e91c4bb04c1856614b7f986a2ef433856f467c53393a902153",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.494522121092662,
+          "pcm_sha256": "17d803a542b8f94b550b0fa3d9fe1e1080bf25372c83ebe4b6646cbfb515ba4e",
+          "suppression_db": 6.604865902690448
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.038984903762291,
+          "pcm_sha256": "04ccfd23487b9428c80e6b2ad985c8d338cc0e6187b448466fe5c3d7bbec6458",
+          "suppression_db": 12.75674912914464
+        }
+      },
+      "family": null,
+      "group": "1320",
+      "id": 111,
+      "incumbent": "ai",
+      "label": "bonafide",
+      "origin": {
+        "background_start_sample": 576000,
+        "center_start_sample": 48000,
+        "family": null,
+        "group": "1320",
+        "id": "test-clean_1320_122612_000037_000000",
+        "label": "bonafide",
+        "samples": 144000,
+        "wav_sha256": "488b5e004ccfdfa8babb445f7c5302277bd940e5c3bcaa7c1712ffc35fa70de2"
+      },
+      "pcm_sha256": "0b32a3c264017257f45e82ff6b137a1eb9b7f0ecc9f23bf161ba541e82beecab",
+      "role": "held",
+      "scene": "restaurant.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.478766613296938,
+          "pcm_sha256": "fc15c9a4376cc5db6ae961cae17bcaaf58f25bbac273f5e6ec2691e66be4b851",
+          "suppression_db": 6.863381369974118
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 6.651757858871163,
+          "pcm_sha256": "1615d6f50924b35146e36962239bbd97f0ea7e3d30aef221e14a165a00a15074",
+          "suppression_db": 15.858708275063728
+        }
+      },
+      "family": null,
+      "group": "1320",
+      "id": 112,
+      "incumbent": "unassessed",
+      "label": "bonafide",
+      "origin": {
+        "background_start_sample": 224000,
+        "center_start_sample": 48000,
+        "family": null,
+        "group": "1320",
+        "id": "test-clean_1320_122612_000037_000000",
+        "label": "bonafide",
+        "samples": 144000,
+        "wav_sha256": "488b5e004ccfdfa8babb445f7c5302277bd940e5c3bcaa7c1712ffc35fa70de2"
+      },
+      "pcm_sha256": "999e4d3e5be730d33a1b688b648688b560b29f7a48b11c10d52903d5c0fb1a80",
+      "role": "held",
+      "scene": "vienna.wav"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": -7.181452805107459,
+          "pcm_sha256": "e9a9f364e8515ed1384af04868d97c2c9ebbcdc71933d5b939e7dc126947eac2",
+          "suppression_db": 0.45631600436969455
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -7.114508591410093,
+          "pcm_sha256": "c4c10bcbbb4c11dff1c15e0f0f4dc4cc129722c24e199a53b4b4c44e6e376fbf",
+          "suppression_db": 0.047014658398214615
+        }
+      },
+      "family": null,
+      "group": "4446",
+      "id": 113,
+      "incumbent": "original",
+      "label": "bonafide",
+      "origin": {
+        "background_start_sample": null,
+        "center_start_sample": 11360,
+        "family": null,
+        "group": "4446",
+        "id": "test-clean_4446_2271_000007_000006",
+        "label": "bonafide",
+        "samples": 70720,
+        "wav_sha256": "585a06f5036306900b31df71a5a5862b77ae013197d417032887ba80bf8a7cc2"
+      },
+      "pcm_sha256": "fc50cdb3e1d747e8bc92ec0d27a02ae85c7701ce7262dd392a4ca95b6eeeea66",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.36827539402982,
+          "pcm_sha256": "4a54809f365f5f096bc8f342cec260fa18950874bc2e149e36c15aad0716f1e3",
+          "suppression_db": 7.946653111165887
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -5.0259179685818145,
+          "pcm_sha256": "4ab12523f6f81fbca29d85e26dffa16cc06df6ee858dff9e4a8d3e4f4112d9eb",
+          "suppression_db": 11.013712289879265
+        }
+      },
+      "family": null,
+      "group": "4446",
+      "id": 114,
+      "incumbent": "inconclusive",
+      "label": "bonafide",
+      "origin": {
+        "background_start_sample": 864000,
+        "center_start_sample": 11360,
+        "family": null,
+        "group": "4446",
+        "id": "test-clean_4446_2271_000007_000006",
+        "label": "bonafide",
+        "samples": 70720,
+        "wav_sha256": "585a06f5036306900b31df71a5a5862b77ae013197d417032887ba80bf8a7cc2"
+      },
+      "pcm_sha256": "0ce0dca54f1339e94dccbdc896c127bf0c9cc76e7a81d666442d09d46ff43d39",
+      "role": "held",
+      "scene": "restaurant.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.35344115406214,
+          "pcm_sha256": "a1625b70e99d70cb6ef9c511b57536f3a0a0e9ab955102b51800cf8848b8c232",
+          "suppression_db": 7.444163324567194
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -1.0425647187191427,
+          "pcm_sha256": "8a072e7e930f7c4bbfb73c63e6a707da7de0f087d66f9fa071adc7dcb63e97cb",
+          "suppression_db": 11.967878846386517
+        }
+      },
+      "family": null,
+      "group": "4446",
+      "id": 115,
+      "incumbent": "inconclusive",
+      "label": "bonafide",
+      "origin": {
+        "background_start_sample": 320000,
+        "center_start_sample": 11360,
+        "family": null,
+        "group": "4446",
+        "id": "test-clean_4446_2271_000007_000006",
+        "label": "bonafide",
+        "samples": 70720,
+        "wav_sha256": "585a06f5036306900b31df71a5a5862b77ae013197d417032887ba80bf8a7cc2"
+      },
+      "pcm_sha256": "e33c10d79e2e6be596667c871caa4c0e4b5ea7cec0ba0e4c5448d4078860dffd",
+      "role": "held",
+      "scene": "vienna.wav"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": -7.182267223952625,
+          "pcm_sha256": "b2d629a731d31ad05c4f24313cde096be7a238f4260614f2874469373b1a79b4",
+          "suppression_db": 0.2630168349328892
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -7.11081546500346,
+          "pcm_sha256": "9bbb1097ee2ba66add22309a33d3ce34451cca2cd5437936f07feb3a27e7c511",
+          "suppression_db": 0.03321190472618399
+        }
+      },
+      "family": null,
+      "group": "7021",
+      "id": 116,
+      "incumbent": "original",
+      "label": "bonafide",
+      "origin": {
+        "background_start_sample": null,
+        "center_start_sample": 28240,
+        "family": null,
+        "group": "7021",
+        "id": "test-clean_7021_85628_000021_000001",
+        "label": "bonafide",
+        "samples": 104480,
+        "wav_sha256": "e333d007b24ebda42913f960a0c415e5b4bd9c0c3b727f9f0d1f893179e28708"
+      },
+      "pcm_sha256": "83e98a4af839c10918964519b1b8771ffdfb8d4f7ade3eae0428286ce4daf218",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.437891504109886,
+          "pcm_sha256": "aa3b131b484f36f4dd28b0aae1d792486125930f9401e22ef895a30d858eed9b",
+          "suppression_db": 6.583443383251382
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 6.886041073331567,
+          "pcm_sha256": "40433b8b0c3896e37bc83b9a442de7f68642a37b7b1e0a0577f7f8e9edb9ae92",
+          "suppression_db": 8.7506765088023
+        }
+      },
+      "family": null,
+      "group": "7021",
+      "id": 117,
+      "incumbent": "ai",
+      "label": "bonafide",
+      "origin": {
+        "background_start_sample": 96000,
+        "center_start_sample": 28240,
+        "family": null,
+        "group": "7021",
+        "id": "test-clean_7021_85628_000021_000001",
+        "label": "bonafide",
+        "samples": 104480,
+        "wav_sha256": "e333d007b24ebda42913f960a0c415e5b4bd9c0c3b727f9f0d1f893179e28708"
+      },
+      "pcm_sha256": "eec60ef838da150925c1d43466520e4295c2bd7b4e92c5479fc58f2e4e968288",
+      "role": "held",
+      "scene": "restaurant.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.318998854360846,
+          "pcm_sha256": "4fae64c93681001546e1047f8e1efc3856a0f401965c7f5ddfe9060eef8bbe4c",
+          "suppression_db": 6.695173618440959
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 6.743192247049923,
+          "pcm_sha256": "b3fc2b15b723500df9ad8100e0759e60dab456e6073c9a74745d00546ccf30ad",
+          "suppression_db": 9.745392867485242
+        }
+      },
+      "family": null,
+      "group": "7021",
+      "id": 118,
+      "incumbent": "inconclusive",
+      "label": "bonafide",
+      "origin": {
+        "background_start_sample": 32000,
+        "center_start_sample": 28240,
+        "family": null,
+        "group": "7021",
+        "id": "test-clean_7021_85628_000021_000001",
+        "label": "bonafide",
+        "samples": 104480,
+        "wav_sha256": "e333d007b24ebda42913f960a0c415e5b4bd9c0c3b727f9f0d1f893179e28708"
+      },
+      "pcm_sha256": "48803dae99e94f69c80e7a01e760d52f8e0ccd7120148f3f8920a878126669ed",
+      "role": "held",
+      "scene": "vienna.wav"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": false,
+          "logit": -3.539668380219202,
+          "pcm_sha256": "0f30683e92a0e892e5d9fc0dbb5090ea5443e1e5a6cddd99b790eddf4868b62b",
+          "suppression_db": 0.08403737933487225
+        },
+        "old_enhancer": {
+          "admitted": false,
+          "logit": 6.178562731441982,
+          "pcm_sha256": "62905356ab5865e650020638200be4ac3bc349e4f814c2b395f7bcd3e2a12ebb",
+          "suppression_db": 0.1333986960568616
+        }
+      },
+      "family": null,
+      "group": "121",
+      "id": 119,
+      "incumbent": "unassessed",
+      "label": "bonafide",
+      "origin": {
+        "background_start_sample": null,
+        "center_start_sample": 23200,
+        "family": null,
+        "group": "121",
+        "id": "test-clean_121_127105_000018_000001",
+        "label": "bonafide",
+        "samples": 94400,
+        "wav_sha256": "ab01b1e10e0ab2e40ed79e8b1ca15235ece6e807e9a2643181bab95be32f61f3"
+      },
+      "pcm_sha256": "da000e76b550cb7114b81ae61d99a1918f865b4659970c27acdef3fca0ed32fe",
+      "role": "held",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": false,
+          "logit": 7.287881822721902,
+          "pcm_sha256": "f2605b3a3b5e006045d36a9c28edad3eef8e24ecca516762a023716b3cac3498",
+          "suppression_db": 6.751789241864145
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 5.472421699357951,
+          "pcm_sha256": "df37526a59eb7a9606dae9e2534c475c3dd3e20f2a85007621deda9f0da87a26",
+          "suppression_db": 10.854544248546258
+        }
+      },
+      "family": null,
+      "group": "121",
+      "id": 120,
+      "incumbent": "inconclusive",
+      "label": "bonafide",
+      "origin": {
+        "background_start_sample": 288000,
+        "center_start_sample": 23200,
+        "family": null,
+        "group": "121",
+        "id": "test-clean_121_127105_000018_000001",
+        "label": "bonafide",
+        "samples": 94400,
+        "wav_sha256": "ab01b1e10e0ab2e40ed79e8b1ca15235ece6e807e9a2643181bab95be32f61f3"
+      },
+      "pcm_sha256": "2f1f9dd5cb6c9ca941a744b060185a4d036be12e1f8a3f3c344dcbd824589b41",
+      "role": "held",
+      "scene": "restaurant.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": false,
+          "logit": 7.318098815512762,
+          "pcm_sha256": "3cea42a4b4e76694465cf32d9d30ae54b78e26bf9f6952f86f7bfe7616540294",
+          "suppression_db": 6.528306330733697
+        },
+        "old_enhancer": {
+          "admitted": false,
+          "logit": 7.4898120955871885,
+          "pcm_sha256": "da3b1bbceefe76721381ec6f108277858c890c2fcc9e7c7ac687e6795cf22158",
+          "suppression_db": 7.497649144411024
+        }
+      },
+      "family": null,
+      "group": "121",
+      "id": 121,
+      "incumbent": "unassessed",
+      "label": "bonafide",
+      "origin": {
+        "background_start_sample": 128000,
+        "center_start_sample": 23200,
+        "family": null,
+        "group": "121",
+        "id": "test-clean_121_127105_000018_000001",
+        "label": "bonafide",
+        "samples": 94400,
+        "wav_sha256": "ab01b1e10e0ab2e40ed79e8b1ca15235ece6e807e9a2643181bab95be32f61f3"
+      },
+      "pcm_sha256": "3b9277baf0cab623e5a8092f359efae1ab4549208ac5ac8015fa965c238a8ce7",
+      "role": "held",
+      "scene": "vienna.wav"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 6.774959802298705,
+          "pcm_sha256": "713d7092bca562cecc2a1d874cca45190142c135378fd65dc24932a44fa699fa",
+          "suppression_db": 8.182400255478058
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -6.401676139723351,
+          "pcm_sha256": "d216b212995a53bd6f0833b8e15dfe07be31be36e3b787a1bbd61c8b6a4b282c",
+          "suppression_db": 9.331802723717034
+        }
+      },
+      "family": null,
+      "group": "restaurant.ogg-0",
+      "id": 122,
+      "incumbent": "inconclusive",
+      "label": "isolated",
+      "origin": {
+        "background_start_sample": 96000
+      },
+      "pcm_sha256": "7e41758b8dd80a199987e64f8a303edcd3877c9a47fc624e86d21ee234bc30ad",
+      "role": "held",
+      "scene": "restaurant.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.164210375492774,
+          "pcm_sha256": "b0c1e91e10759c844caed2417914d387fc02b556222f96542366af0e843347da",
+          "suppression_db": 11.551193669742872
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -7.052782098965913,
+          "pcm_sha256": "53e6c5f91d4ee869a9a868d522f106204628323399c153f6886fd8180e2843d1",
+          "suppression_db": 12.609789283132027
+        }
+      },
+      "family": null,
+      "group": "restaurant.ogg-1",
+      "id": 123,
+      "incumbent": "unassessed",
+      "label": "isolated",
+      "origin": {
+        "background_start_sample": 288000
+      },
+      "pcm_sha256": "a0e4c413843d183c86c24c34a5f24664c886ecece38a623456cd5b1f10b91533",
+      "role": "held",
+      "scene": "restaurant.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 0.0495976528918356,
+          "pcm_sha256": "5b02008dc6f2fb891076b13c038f49f7db3557ebef603878767b43b0dbfee836",
+          "suppression_db": 16.03811046895391
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -6.914270367656205,
+          "pcm_sha256": "f067e87a7fffbfa81055c24334970549d12286610e4d876c0212117d6a0d20b1",
+          "suppression_db": 12.630978365734883
+        }
+      },
+      "family": null,
+      "group": "restaurant.ogg-2",
+      "id": 124,
+      "incumbent": "unassessed",
+      "label": "isolated",
+      "origin": {
+        "background_start_sample": 576000
+      },
+      "pcm_sha256": "c1b93a0dab6ca10aa217674ffbcc4a91f08215949870f28a74d54e8cc6065299",
+      "role": "held",
+      "scene": "restaurant.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 6.036159792631113,
+          "pcm_sha256": "d5888cc9fe89ca6ae703a094bb92ba07dd36eb494669272081da03e670580257",
+          "suppression_db": 14.194710024446483
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -6.968504439940386,
+          "pcm_sha256": "81371ca94d458ea3d162d9a34ed4e72f8500fd5539383932fc5d56be808006bf",
+          "suppression_db": 16.028382599594664
+        }
+      },
+      "family": null,
+      "group": "restaurant.ogg-3",
+      "id": 125,
+      "incumbent": "unassessed",
+      "label": "isolated",
+      "origin": {
+        "background_start_sample": 864000
+      },
+      "pcm_sha256": "c43833016365423b2a1606f65c4862cc5f07752b27a5e134af335258f3b63765",
+      "role": "held",
+      "scene": "restaurant.ogg"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": false,
+          "logit": -4.765901496915769,
+          "pcm_sha256": "afe2e977aadc7f0553908adadf54a53c75a146165cceacaa2c5d357dd3748a8c",
+          "suppression_db": 24.34805158743327
+        },
+        "old_enhancer": {
+          "admitted": false,
+          "logit": 7.047600206951111,
+          "pcm_sha256": "01b3f57f84de719f4d836831252a89d6a2f2b28f9afefcf0a7ee2ad9543f01bf",
+          "suppression_db": 30.746718868143038
+        }
+      },
+      "family": null,
+      "group": "vienna.wav-0",
+      "id": 126,
+      "incumbent": "unassessed",
+      "label": "isolated",
+      "origin": {
+        "background_start_sample": 32000
+      },
+      "pcm_sha256": "549742e66e589158ea63d564d6b66880f2440c2b3f7f86af0f84d290197fe2be",
+      "role": "held",
+      "scene": "vienna.wav"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": false,
+          "logit": -4.2749795330580405,
+          "pcm_sha256": "1978489e1312e1156fe9a49222b0501dad5ae2e0836a150a47712b8f41abfa59",
+          "suppression_db": 15.740361747519824
+        },
+        "old_enhancer": {
+          "admitted": false,
+          "logit": 7.487891635717731,
+          "pcm_sha256": "32e2f506ff9c40318377aae12bfbed246b083db09cc11bd02b255bda2d5efca6",
+          "suppression_db": 31.50692140971206
+        }
+      },
+      "family": null,
+      "group": "vienna.wav-1",
+      "id": 127,
+      "incumbent": "unassessed",
+      "label": "isolated",
+      "origin": {
+        "background_start_sample": 128000
+      },
+      "pcm_sha256": "c50650e760fa642af30c8eb9078517ae61ecfc279bd516c9f0dc1560aa94f305",
+      "role": "held",
+      "scene": "vienna.wav"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": false,
+          "logit": 4.537623774734443,
+          "pcm_sha256": "d6453f38b013f617aba31b9b2ddc8498d9afe05722fe68124aaff91d6eda4b98",
+          "suppression_db": 17.313652698788
+        },
+        "old_enhancer": {
+          "admitted": false,
+          "logit": 7.140499990227101,
+          "pcm_sha256": "917405abc045bf24a1dec4452e3eac9c3a2f4a15a127c66bde9f63d639077eb8",
+          "suppression_db": 25.114615119365027
+        }
+      },
+      "family": null,
+      "group": "vienna.wav-2",
+      "id": 128,
+      "incumbent": "unassessed",
+      "label": "isolated",
+      "origin": {
+        "background_start_sample": 224000
+      },
+      "pcm_sha256": "1f859ad91c5d0fd590156351183318ea5933b43d74750a822e77344eaeefbd71",
+      "role": "held",
+      "scene": "vienna.wav"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": false,
+          "logit": -3.4896354838767034,
+          "pcm_sha256": "a8b235a55d70cff4780d70fa6b6f7a5adade1c9fee2eb9f14240200e2022b474",
+          "suppression_db": 14.357967505521971
+        },
+        "old_enhancer": {
+          "admitted": false,
+          "logit": 0.9860957406712703,
+          "pcm_sha256": "b76316914baf17e6292c500346e61d287068da1de92adf4033eaee372d51a5c1",
+          "suppression_db": 13.569389159552026
+        }
+      },
+      "family": null,
+      "group": "vienna.wav-3",
+      "id": 129,
+      "incumbent": "unassessed",
+      "label": "isolated",
+      "origin": {
+        "background_start_sample": 320000
+      },
+      "pcm_sha256": "f3a0c21c5fca3dfa16193a195d2c5f65664f5450a50e3516c108002049d48552",
+      "role": "held",
+      "scene": "vienna.wav"
+    }
+  ],
+  "model_free_pcm_checks": 390,
+  "repeat_max_abs": 1.1920928955078125e-07,
+  "result": {
+    "arms": {
+      "new_enhancer": {
+        "advances": true,
+        "cells": {
+          "gain_control/bonafide": {
+            "combined_ai": 0,
+            "enhanced_assessed": 9,
+            "incumbent_ai": 0,
+            "original_assessed": 9,
+            "planned": 10
+          },
+          "gain_control/spoof": {
+            "combined_ai": 12,
+            "enhanced_assessed": 12,
+            "incumbent_ai": 12,
+            "original_assessed": 12,
+            "planned": 12
+          },
+          "restaurant.ogg/bonafide": {
+            "combined_ai": 7,
+            "enhanced_assessed": 9,
+            "incumbent_ai": 7,
+            "original_assessed": 10,
+            "planned": 10
+          },
+          "restaurant.ogg/isolated": {
+            "combined_ai": 0,
+            "enhanced_assessed": 4,
+            "incumbent_ai": 0,
+            "original_assessed": 1,
+            "planned": 4
+          },
+          "restaurant.ogg/spoof": {
+            "combined_ai": 12,
+            "enhanced_assessed": 12,
+            "incumbent_ai": 10,
+            "original_assessed": 11,
+            "planned": 12
+          },
+          "vienna.wav/bonafide": {
+            "combined_ai": 1,
+            "enhanced_assessed": 9,
+            "incumbent_ai": 0,
+            "original_assessed": 8,
+            "planned": 10
+          },
+          "vienna.wav/isolated": {
+            "combined_ai": 0,
+            "enhanced_assessed": 0,
+            "incumbent_ai": 0,
+            "original_assessed": 0,
+            "planned": 4
+          },
+          "vienna.wav/spoof": {
+            "combined_ai": 9,
+            "enhanced_assessed": 12,
+            "incumbent_ai": 3,
+            "original_assessed": 10,
+            "planned": 12
+          }
+        },
+        "generator_families": [
+          "cosyvoice",
+          "elevenlab",
+          "ljjets",
+          "xttsv2",
+          "yourtts"
+        ],
+        "new_clean_or_isolated_false_flags": 0,
+        "new_noisy_genuine_groups": 1,
+        "new_noisy_synthetic_groups": 7,
+        "noisy_scenes_with_gains": [
+          "restaurant.ogg",
+          "vienna.wav"
+        ]
+      },
+      "old_enhancer": {
+        "advances": false,
+        "cells": {
+          "gain_control/bonafide": {
+            "combined_ai": 0,
+            "enhanced_assessed": 9,
+            "incumbent_ai": 0,
+            "original_assessed": 9,
+            "planned": 10
+          },
+          "gain_control/spoof": {
+            "combined_ai": 12,
+            "enhanced_assessed": 12,
+            "incumbent_ai": 12,
+            "original_assessed": 12,
+            "planned": 12
+          },
+          "restaurant.ogg/bonafide": {
+            "combined_ai": 7,
+            "enhanced_assessed": 10,
+            "incumbent_ai": 7,
+            "original_assessed": 10,
+            "planned": 10
+          },
+          "restaurant.ogg/isolated": {
+            "combined_ai": 0,
+            "enhanced_assessed": 4,
+            "incumbent_ai": 0,
+            "original_assessed": 1,
+            "planned": 4
+          },
+          "restaurant.ogg/spoof": {
+            "combined_ai": 10,
+            "enhanced_assessed": 12,
+            "incumbent_ai": 10,
+            "original_assessed": 11,
+            "planned": 12
+          },
+          "vienna.wav/bonafide": {
+            "combined_ai": 0,
+            "enhanced_assessed": 9,
+            "incumbent_ai": 0,
+            "original_assessed": 8,
+            "planned": 10
+          },
+          "vienna.wav/isolated": {
+            "combined_ai": 0,
+            "enhanced_assessed": 0,
+            "incumbent_ai": 0,
+            "original_assessed": 0,
+            "planned": 4
+          },
+          "vienna.wav/spoof": {
+            "combined_ai": 5,
+            "enhanced_assessed": 12,
+            "incumbent_ai": 3,
+            "original_assessed": 10,
+            "planned": 12
+          }
+        },
+        "generator_families": [
+          "elevenlab",
+          "xttsv2"
+        ],
+        "new_clean_or_isolated_false_flags": 0,
+        "new_noisy_genuine_groups": 0,
+        "new_noisy_synthetic_groups": 2,
+        "noisy_scenes_with_gains": [
+          "vienna.wav"
+        ]
+      }
+    },
+    "held_inputs": 74,
+    "points": {
+      "new_enhancer": 7.422796281843017,
+      "old_enhancer": 7.3658191593180415
+    },
+    "selection_inputs": 56
+  },
+  "selection": [
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": -7.069107033342847,
+          "pcm_sha256": "e27bb2a732750367814db258890397f4eaf5a42f6d78bc6fea19e535aed233e2",
+          "suppression_db": 0.39703054634003976
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -6.920298169891356,
+          "pcm_sha256": "319fb9bceeee9a422069189cb870d7544b2e793cd89ebf7d5cc56a1085d279cd",
+          "suppression_db": 0.1693372721993515
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV034998",
+      "id": 0,
+      "incumbent": "original",
+      "label": "bonafide",
+      "origin": 36,
+      "pcm_sha256": "ea0ff981d66f0f2245ca1723c5416029dfdc20a0d14c195e4f37ab73b0121511",
+      "role": "selection",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.3166604339521415,
+          "pcm_sha256": "4a4b70f10b6add9fc832d24fbe38c0071f4031e3f502883497d78961a5ff86ca",
+          "suppression_db": 7.277976776028138
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -5.294213833796129,
+          "pcm_sha256": "bcfd4e817ecbc8aec4c4ba3762a6b9327fd3503b1ec5c3824d12b68e5ac668c6",
+          "suppression_db": 8.533392674956051
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV034998",
+      "id": 1,
+      "incumbent": "inconclusive",
+      "label": "bonafide",
+      "origin": 37,
+      "pcm_sha256": "b4fd5a474ba7a0435df525f303e1927ffc6db1d8716bec42ea61a3001ec8022f",
+      "role": "selection",
+      "scene": "slot-6"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.422596541841203,
+          "pcm_sha256": "f888d691b4db046091202eb281cb5c5cc0f9f5e03247c722da10bda74fa4853a",
+          "suppression_db": 7.392838968896912
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.284744330641829,
+          "pcm_sha256": "6c15f80451bb87b423d85f91b785b2e9fb68d1e141148681660f2ad81a85dba1",
+          "suppression_db": 14.713209162583764
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV034998",
+      "id": 2,
+      "incumbent": "inconclusive",
+      "label": "bonafide",
+      "origin": 38,
+      "pcm_sha256": "03799cc0128043f627920881200175fe4d8645504c70afd509480ce13ae3b6bc",
+      "role": "selection",
+      "scene": "slot-4"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": -6.341617554725533,
+          "pcm_sha256": "377cab6bb3f7c5e3290fdd4e5914124dbda125d9be21a6961c4a50f97ad0bfae",
+          "suppression_db": 4.158867899353727
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -7.135968215737808,
+          "pcm_sha256": "0a6a8f4925422e328264802a8722281fb73e71f9f624f7a0b304a1819f0a7d0f",
+          "suppression_db": 0.27454050029409827
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV014704",
+      "id": 3,
+      "incumbent": "original",
+      "label": "bonafide",
+      "origin": 39,
+      "pcm_sha256": "7bb654fbf9037b8c792f5d9d08544f5ea78af5d19c78c6ccbc37411c40c88ff3",
+      "role": "selection",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.032199710679371,
+          "pcm_sha256": "8c550e64c7ab5a26a4e1506f2f4de170766a4c73a1f9b555129b5ef5a6ec56c0",
+          "suppression_db": 13.10218802515658
+        },
+        "old_enhancer": {
+          "admitted": false,
+          "logit": -2.4691475235029605,
+          "pcm_sha256": "57144c51f35af9398dbd3234d13d0a11641db6854a9e154489733982fd1fdfa2",
+          "suppression_db": 20.48927489345555
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV014704",
+      "id": 4,
+      "incumbent": "unassessed",
+      "label": "bonafide",
+      "origin": 40,
+      "pcm_sha256": "e69c5c942942bc80382ce96e7528fef208889996daf14a8c7512a026964342a5",
+      "role": "selection",
+      "scene": "slot-6"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 6.850502203404178,
+          "pcm_sha256": "5d3ec6793db7414de5ee34d8e95058dd29c81a5a369ab7504162f9067e01e377",
+          "suppression_db": 12.6761840641789
+        },
+        "old_enhancer": {
+          "admitted": false,
+          "logit": 7.344349394512895,
+          "pcm_sha256": "207df3450e97a9cfc413787d77ce54af62b7933105f9261561caeb23c8c9d9b7",
+          "suppression_db": 23.698310840138017
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV014704",
+      "id": 5,
+      "incumbent": "unassessed",
+      "label": "bonafide",
+      "origin": 41,
+      "pcm_sha256": "605733e80b122c70e5b9e73bc0573ef574cb293f2c555ea6d0afb91086c1b71e",
+      "role": "selection",
+      "scene": "slot-4"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.182742179124602,
+          "pcm_sha256": "33d417edfcb7741a31d28e405cb926d22452a9f500bf9c6d3694943eba41757a",
+          "suppression_db": 2.827300067211716
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -6.753802265933653,
+          "pcm_sha256": "f74516adbe9202fb6c3d0d0aa7b8f649201d45df2ced26845cd2c4688abd65c5",
+          "suppression_db": 0.8895759371787844
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV020522",
+      "id": 6,
+      "incumbent": "inconclusive",
+      "label": "bonafide",
+      "origin": 42,
+      "pcm_sha256": "434b81cad829eff478e7d5d91e2f205194fa981200b8913846310a2a9541434f",
+      "role": "selection",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.334973409526966,
+          "pcm_sha256": "16887baf2dd3df9793ff533a12045813a241431966b0f8bbcd6af9537311d402",
+          "suppression_db": 8.325782602355321
+        },
+        "old_enhancer": {
+          "admitted": false,
+          "logit": -4.887029571252634,
+          "pcm_sha256": "d76426386a3679bca61538ce56c4ccdb58288d1c94e9338f980bc68da5e45f42",
+          "suppression_db": 14.025948483878455
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV020522",
+      "id": 7,
+      "incumbent": "unassessed",
+      "label": "bonafide",
+      "origin": 43,
+      "pcm_sha256": "2d7019138833568863861b5d05c7d6f9a23e85aefea894a47cb91e7577ae3f4c",
+      "role": "selection",
+      "scene": "slot-6"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.422796281843017,
+          "pcm_sha256": "edcda839bb1042ad04b9b27e53f41077a97710dedae6b8b2f106e4957c5925e1",
+          "suppression_db": 6.448987614921701
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.146469910873373,
+          "pcm_sha256": "fc78a25206d6d7efc942d6dafa486278de40a24407a00200baa548fd96b79acc",
+          "suppression_db": 15.429810170694559
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV020522",
+      "id": 8,
+      "incumbent": "unassessed",
+      "label": "bonafide",
+      "origin": 44,
+      "pcm_sha256": "d8128cbd08edfba0058302048ce0d9df4eb02a91481fccf613763af56fe203f8",
+      "role": "selection",
+      "scene": "slot-4"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": -7.143573712869601,
+          "pcm_sha256": "09efc0e750c1f44ada073f6e6d58772fbcc396af42a4de97b384722d9f5074a4",
+          "suppression_db": 0.3365850182012045
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -6.90688513872734,
+          "pcm_sha256": "8a5d76efc101ddbc37dcb31b42f3ba0df3cfc0c6ca312fa28603e456166ba5e2",
+          "suppression_db": 0.2481261429841301
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV017344",
+      "id": 9,
+      "incumbent": "original",
+      "label": "bonafide",
+      "origin": 45,
+      "pcm_sha256": "26b32fae72154a49b85e90c944293dc5819af7ed452c63a9e06ce3ad74842c15",
+      "role": "selection",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.2577873682544976,
+          "pcm_sha256": "8acbf59f2505774a00c4866c17b2f614978362dbdda211e142eb16c170c10fe8",
+          "suppression_db": 11.715407919211406
+        },
+        "old_enhancer": {
+          "admitted": false,
+          "logit": -4.522423807760825,
+          "pcm_sha256": "fb473b82b32ff646a004627f369ec7f492fd272276605c271053815dc51c18d5",
+          "suppression_db": 18.820558400425103
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV017344",
+      "id": 10,
+      "incumbent": "unassessed",
+      "label": "bonafide",
+      "origin": 46,
+      "pcm_sha256": "9469236b9768516f9308c4f441902029968eb63b0ef6c21c2ff46af76ae7a0e5",
+      "role": "selection",
+      "scene": "slot-6"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.334607506811269,
+          "pcm_sha256": "a32f68c1c74e5b42367e0b98b41655ff5be80c72e7b5f44257c6dad6ebfca0d1",
+          "suppression_db": 9.813483621930994
+        },
+        "old_enhancer": {
+          "admitted": false,
+          "logit": 0.12135332275914734,
+          "pcm_sha256": "4005cfd5b5f62c58bee71815430259360c354a85af990a6bfeaf179d6d1184b6",
+          "suppression_db": 22.89925584818951
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV017344",
+      "id": 11,
+      "incumbent": "unassessed",
+      "label": "bonafide",
+      "origin": 47,
+      "pcm_sha256": "40ff6bbbd706e9332a40290bdca7328b20986cd33754c87ae22d9510514d067f",
+      "role": "selection",
+      "scene": "slot-4"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": -7.1664104752605065,
+          "pcm_sha256": "83573ab92758483ae91254e2d47eb14e18a1dd9950c7e11e83411063d380a320",
+          "suppression_db": 0.4886215898476407
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -7.117210334252287,
+          "pcm_sha256": "97ca886b1b82afd11cfeeec5fbe354acddbea8a5518db6257765648e2555c78e",
+          "suppression_db": 0.19633219800603688
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV014991",
+      "id": 12,
+      "incumbent": "original",
+      "label": "bonafide",
+      "origin": 48,
+      "pcm_sha256": "4247e456cab0abd7f555c428af8ca9acd97c1768ea838ffb25981674caa3db12",
+      "role": "selection",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.239074096451398,
+          "pcm_sha256": "3ef2e1fd51a7c1a506067f0d0e3d93318ed7166ec0f744badb7dbb22f0c530b1",
+          "suppression_db": 6.782992754280541
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -3.712213926262775,
+          "pcm_sha256": "e9ca1cb4df44171e37577c5c128a1c052c7abe2c024188b1230ad43835f7bfad",
+          "suppression_db": 8.08493329400397
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV014991",
+      "id": 13,
+      "incumbent": "inconclusive",
+      "label": "bonafide",
+      "origin": 49,
+      "pcm_sha256": "33612a854f74b1b29dba62235e02f5caa61b5f2865ffdfb8695101baf5cf0141",
+      "role": "selection",
+      "scene": "slot-6"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.39579652079497,
+          "pcm_sha256": "017c537bb58f3f21545178427d943805d3590ac1a3e517e6544bb5f53e35dd19",
+          "suppression_db": 6.995396518465514
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.3658191593180415,
+          "pcm_sha256": "095c3b504504ae075faca0d0596bd884bf779753f3908c03a16a10b7fd37b915",
+          "suppression_db": 12.216576407592859
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV014991",
+      "id": 14,
+      "incumbent": "unassessed",
+      "label": "bonafide",
+      "origin": 50,
+      "pcm_sha256": "42ff8460a81a403c431dd3b293c28f463460afa2e478647327ab9d9481df0ca4",
+      "role": "selection",
+      "scene": "slot-4"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": -7.152875873056382,
+          "pcm_sha256": "0f050c6d4f4fac8b906ebe40b4863de44382549ebc468e3ae52ac4238f22add9",
+          "suppression_db": 0.3548472765142514
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -7.096185664989565,
+          "pcm_sha256": "3a74e2c205fe52c40e8da8b6c1538732eadfcd5d48ce87a5fa4603e0e4d26214",
+          "suppression_db": 0.06155104608299281
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV023532",
+      "id": 15,
+      "incumbent": "original",
+      "label": "bonafide",
+      "origin": 51,
+      "pcm_sha256": "203095af374cc25ab0959032dabae0e34560df5fc03ec85514975db53c7af013",
+      "role": "selection",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.310391695670388,
+          "pcm_sha256": "a9836681d4314a72b18a376a8732c58e6ccdab828de742be007cb248d69aeec3",
+          "suppression_db": 11.832072075141696
+        },
+        "old_enhancer": {
+          "admitted": false,
+          "logit": -4.203685723224885,
+          "pcm_sha256": "f52e557140c3d0cbeec02c73322689fe0d7f25995e88210e4fcdb090e5f4fac5",
+          "suppression_db": 19.998315340764464
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV023532",
+      "id": 16,
+      "incumbent": "unassessed",
+      "label": "bonafide",
+      "origin": 52,
+      "pcm_sha256": "4e6c1faf88eb15ac6ba925662588cadd78ef36ec7e5c8ce361c53e305066f29c",
+      "role": "selection",
+      "scene": "slot-6"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.117411565772788,
+          "pcm_sha256": "43e68bbaaf91889f478d5814edcd986e981fb20de78a8063186370df353df2d8",
+          "suppression_db": 10.430851875413625
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.331502720462257,
+          "pcm_sha256": "bc6e3033ee75da30f2327544a0e48afc70ef366a7f457f8dcf21124ccf8f562e",
+          "suppression_db": 20.303680349365255
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV023532",
+      "id": 17,
+      "incumbent": "unassessed",
+      "label": "bonafide",
+      "origin": 53,
+      "pcm_sha256": "076c51eaeed7231521de588e6cf471eaad43b6adb4e33e4d3a4e2ba61c81f85e",
+      "role": "selection",
+      "scene": "slot-4"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": -7.203934188482411,
+          "pcm_sha256": "d92439c7ccce12141b495d60079d2e7fe6459724ade7e6b0c4442ee01fa36d03",
+          "suppression_db": 1.4228645941091234
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -7.246738379914828,
+          "pcm_sha256": "bf9abe7bd1304912744aa8add3eb6022880b0a2af6554483428b75cd4f8d7bea",
+          "suppression_db": 0.23924676849259588
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV001506",
+      "id": 18,
+      "incumbent": "original",
+      "label": "bonafide",
+      "origin": 54,
+      "pcm_sha256": "cad59174384d20c0b3d7a3d7d55198ab428701bca5043462a842626f4bf4eaca",
+      "role": "selection",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 6.293201582223956,
+          "pcm_sha256": "7341123b07e915feacf5fe5949afbded3aaa030a5d41ffd917c5a74741adeacf",
+          "suppression_db": 7.72461723992086
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -5.0026001647088245,
+          "pcm_sha256": "4c3175a1f008bd4b6a09b5c351db0f5992c619cbffdf85fcc3fec3570e24c81e",
+          "suppression_db": 11.640639937520403
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV001506",
+      "id": 19,
+      "incumbent": "inconclusive",
+      "label": "bonafide",
+      "origin": 55,
+      "pcm_sha256": "046055ad3881ef60536572a9518c5bdc3c67beb445ff15d5562831cd3194ad48",
+      "role": "selection",
+      "scene": "slot-6"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 6.048028638619268,
+          "pcm_sha256": "d981a9614fb91d16c67924e6f16e8a50496ce31d020673bfaa0f5187a456986c",
+          "suppression_db": 8.858545285782192
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -5.3095674475373045,
+          "pcm_sha256": "1216e7b8d852f81bff5ac765b3951fa5e99c1efbc072d1b2ae73c428cb4b21c3",
+          "suppression_db": 11.877574406175109
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV001506",
+      "id": 20,
+      "incumbent": "unassessed",
+      "label": "bonafide",
+      "origin": 56,
+      "pcm_sha256": "d63ea0ad9d0f63df555b7ff50c15995e85065e0433790143f48501824e0c62a0",
+      "role": "selection",
+      "scene": "slot-4"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": -7.045286131293397,
+          "pcm_sha256": "935be099a9556793fbc0a1c006ed8f3fc6012277b0f2d252c10ba437e91762f2",
+          "suppression_db": 0.47491715258662853
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -5.353429785841678,
+          "pcm_sha256": "6be65706666f0b2f04790b121c6ceacc614eec47043cf81ef3a3367f4ebe5cec",
+          "suppression_db": 0.6861139733643785
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV027988",
+      "id": 21,
+      "incumbent": "original",
+      "label": "bonafide",
+      "origin": 57,
+      "pcm_sha256": "d601aabd9fc0e8b031f0b2ba5a9679bafded0fc55d555ff7cda981023904fb71",
+      "role": "selection",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.273667748657547,
+          "pcm_sha256": "6e465f596c5ab486a540310ba94936df239c3884ceeb3935a455b9589974d862",
+          "suppression_db": 13.243060255417484
+        },
+        "old_enhancer": {
+          "admitted": false,
+          "logit": 4.675975814739143,
+          "pcm_sha256": "1e2113b36677d40942139651e6d35e4638f149e2dd21da65186ecc622f621e5a",
+          "suppression_db": 19.32801516798566
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV027988",
+      "id": 22,
+      "incumbent": "unassessed",
+      "label": "bonafide",
+      "origin": 58,
+      "pcm_sha256": "6626add0b08272b8b93938d83ba192418d44f9715fb6265a8fef79c5f54a5756",
+      "role": "selection",
+      "scene": "slot-6"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": false,
+          "logit": 5.027936852311303,
+          "pcm_sha256": "b04f38d6b0a5784583fa4e26a2629c2713b48575d79a37331fb06925f78e9ac9",
+          "suppression_db": 11.68775586213014
+        },
+        "old_enhancer": {
+          "admitted": false,
+          "logit": 7.3146860269673715,
+          "pcm_sha256": "395470be234783245aa6fac415603435c3280638fbe8f2a8a45b6a527ab595ba",
+          "suppression_db": 22.307579297510234
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV027988",
+      "id": 23,
+      "incumbent": "unassessed",
+      "label": "bonafide",
+      "origin": 59,
+      "pcm_sha256": "150a768915100e070328f1846f51a06aed288958165d75bc1c5ff2e72bbc2b3e",
+      "role": "selection",
+      "scene": "slot-4"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.47665638252359,
+          "pcm_sha256": "ac88b172827ae89beac9efcd2bfd150cbc9de330dd03a91172f9a00a6ab3f439",
+          "suppression_db": 0.4012545859142977
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.483849389491458,
+          "pcm_sha256": "44a0dc849a4fcecbe1582a645ee5364954bb76ad00d673f16f839aa3bd85a6aa",
+          "suppression_db": 0.08817737624573065
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV026049",
+      "id": 24,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": 96,
+      "pcm_sha256": "f5aea490b132c68f2b2d577789ee9d74522e46e4920c2393fb618f3b0592aa18",
+      "role": "selection",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.38959353627906,
+          "pcm_sha256": "b3c3cad274de05ecba6aebd2cb0d2c5cec13a58c8d42f3adc7f4f79f827adcf5",
+          "suppression_db": 6.86626390588494
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.256094699951405,
+          "pcm_sha256": "ec1d58031b6867229e9df9279e20ddffcba06f150f07d6788a691e3f7ea66277",
+          "suppression_db": 9.501569730591973
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV026049",
+      "id": 25,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": 97,
+      "pcm_sha256": "b41be4f2cddd4acf5bda56a199fd08e498b18c31abf1e5740202506f16e3a8f2",
+      "role": "selection",
+      "scene": "slot-6"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.406351995191646,
+          "pcm_sha256": "c220499c25cff8236ec8e960ab2805560a970081def2e4ee7ef78fd42948583d",
+          "suppression_db": 6.980873744126206
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.227666435499816,
+          "pcm_sha256": "ee60a98440fb116b6b9e0d5515db14a063b5ab79c139f4a8c7aec19698b5b6a0",
+          "suppression_db": 13.366063116503915
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV026049",
+      "id": 26,
+      "incumbent": "inconclusive",
+      "label": "spoof",
+      "origin": 98,
+      "pcm_sha256": "70db9a6f40f2192bcea0d3ef6bc73b136f4456cca27171b9464cbb3fff539087",
+      "role": "selection",
+      "scene": "slot-4"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.4898120955871885,
+          "pcm_sha256": "6bf634189a72b3d525e6f266a9ba7f82c872759152c80f0b3314679a672b8194",
+          "suppression_db": 0.7432257363921027
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.530127068302013,
+          "pcm_sha256": "d48a81b800d1ae357003047e470a6021f19632656a17b7725eac1102c42786df",
+          "suppression_db": 0.10285900235801622
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV025235",
+      "id": 27,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": 99,
+      "pcm_sha256": "f57d602c6cd8722e63c48fae71b8d1eb98d06ad384f375f3a0cb6f4fd0f519f0",
+      "role": "selection",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.3880487762281275,
+          "pcm_sha256": "b7ad8449d969869ef0bedd68a669895509660069820dc27a510371e5524a186f",
+          "suppression_db": 11.1066445425963
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -3.0647387720529315,
+          "pcm_sha256": "fdba4b82f27f01075ab6c3d6bd4ca3a6bd557da5c08fb2f4a432222615e60ee8",
+          "suppression_db": 19.201586825618207
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV025235",
+      "id": 28,
+      "incumbent": "unassessed",
+      "label": "spoof",
+      "origin": 100,
+      "pcm_sha256": "70c4168a8cf861dd97e6d66fe3ee0e6ebb03dd007518ab17066286624a75c21c",
+      "role": "selection",
+      "scene": "slot-6"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.434652037163476,
+          "pcm_sha256": "d9b2cca3c72b5c79221979d418e2e17d27b302f4d87807439a005f844f9d1769",
+          "suppression_db": 10.119628003714256
+        },
+        "old_enhancer": {
+          "admitted": false,
+          "logit": 7.2120080172403185,
+          "pcm_sha256": "c8081264501e3340c32c548a1ae9998b6635e79145e87cb02a6f0c9352aba699",
+          "suppression_db": 19.053714431252082
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV025235",
+      "id": 29,
+      "incumbent": "unassessed",
+      "label": "spoof",
+      "origin": 101,
+      "pcm_sha256": "74c91ee189385081b548ecabc532f150d4902eb6afcbc0d89eed237a3a4c9f65",
+      "role": "selection",
+      "scene": "slot-4"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.39832750174718,
+          "pcm_sha256": "38922b525a2ba6e414cdc8df252cb220032100dc3fedf43273209846b2b7777f",
+          "suppression_db": 6.285414193654782
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": -6.273426522938071,
+          "pcm_sha256": "99c835d516126206d89d434669fce1fd7a232ba792ed8dd0ea40ddfd74d2f6f9",
+          "suppression_db": 6.31027093012294
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV034977",
+      "id": 30,
+      "incumbent": "inconclusive",
+      "label": "spoof",
+      "origin": 102,
+      "pcm_sha256": "53d3b43f51c5a9f62721caf6f23ce73b3175cf0ce3657561d06fe3566567de7c",
+      "role": "selection",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.330591377150127,
+          "pcm_sha256": "856244ea95b20d67bfc05ae3cdbac13ab48a0ea247732f90efa96e7bcc34ecd1",
+          "suppression_db": 11.801690379792827
+        },
+        "old_enhancer": {
+          "admitted": false,
+          "logit": -2.103614345267614,
+          "pcm_sha256": "6c1129e4359e32abe7fba7a37d05698f9c001f9009902abb42c133c0bdf6fe95",
+          "suppression_db": 20.007046172980274
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV034977",
+      "id": 31,
+      "incumbent": "unassessed",
+      "label": "spoof",
+      "origin": 103,
+      "pcm_sha256": "b0c739ecf3fbd0c16b707cfc23dc228f1c9c1226e95d785b0125e23bea42be91",
+      "role": "selection",
+      "scene": "slot-6"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.20716454825316,
+          "pcm_sha256": "b3e59d879914672170593388eb83dc5804f19fe9ae23803910c2790c5cc48e85",
+          "suppression_db": 11.047344583315471
+        },
+        "old_enhancer": {
+          "admitted": false,
+          "logit": 6.624468054997967,
+          "pcm_sha256": "50f0abee42fe24371a3232b39118cfe1b5e9da23f273c02d71d21ec27d76dd7f",
+          "suppression_db": 17.925854736402115
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV034977",
+      "id": 32,
+      "incumbent": "unassessed",
+      "label": "spoof",
+      "origin": 104,
+      "pcm_sha256": "ec0bf8bb637be38f8ec7fc39dca03bc978937f112c761e093bd03f70e6a8ff8c",
+      "role": "selection",
+      "scene": "slot-4"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.494307547602223,
+          "pcm_sha256": "2ded58281f125fee581cbf76da5c7099d366e661159acd20cac1268aa6972715",
+          "suppression_db": 0.6004158330170594
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.486187647568986,
+          "pcm_sha256": "e8056d1e03cc5128ceab3bfeddaf0a154805d5dbc1b5e822873bd009a6483ed7",
+          "suppression_db": 0.23854020397282125
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV010317",
+      "id": 33,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": 105,
+      "pcm_sha256": "01a9da94e86e734e9d6880e4027dd0ec0175ed354ea5824cd17b10559e5404c9",
+      "role": "selection",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.461904150166906,
+          "pcm_sha256": "0e0bb6f313a93162435177efeaa0e0d145ae5d340e6b3b81fd23895465d91fb4",
+          "suppression_db": 12.83785126092962
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.22111231564257,
+          "pcm_sha256": "3361d02e99c14f1875a40bcfc799e19f4a06f99e8ada54e7141aaeb24941a342",
+          "suppression_db": 19.05689566568382
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV010317",
+      "id": 34,
+      "incumbent": "unassessed",
+      "label": "spoof",
+      "origin": 106,
+      "pcm_sha256": "379b1834fe15ebdb08d0f7d2b31176f9f46f75d6d1d6f751674b508777167493",
+      "role": "selection",
+      "scene": "slot-6"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.255925590374503,
+          "pcm_sha256": "c8145fa29cbf525ec17bec7e8392672eeebae22b20d45647cbb6f636daf7fec2",
+          "suppression_db": 10.04977473734076
+        },
+        "old_enhancer": {
+          "admitted": false,
+          "logit": 6.544086156700462,
+          "pcm_sha256": "a8fddc99b05f460c773701cff40a50da35636c0dd389c92b98f95564013359f2",
+          "suppression_db": 22.84460732322635
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV010317",
+      "id": 35,
+      "incumbent": "unassessed",
+      "label": "spoof",
+      "origin": 107,
+      "pcm_sha256": "67cd0f53cd9683d882934252cd46c15d6e59ed539a730a5a03a2a13d9d80795b",
+      "role": "selection",
+      "scene": "slot-4"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.441344961535794,
+          "pcm_sha256": "afa484ff2a3119c45f9f06b45715c68a06826913fb159a6207f9c0abf17fc40e",
+          "suppression_db": 2.125457361462593
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.508133818461112,
+          "pcm_sha256": "adf035902f1256f589d209da1c1ffa27eb7e88f92e1ac4cedad33b1d2644b854",
+          "suppression_db": 0.1065825303888293
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV000317",
+      "id": 36,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": 108,
+      "pcm_sha256": "467af6aedad58674e749607f9b4db05757906bc3153537048e1c0cdd3f5b3958",
+      "role": "selection",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.445831898122197,
+          "pcm_sha256": "13698df25558caff5bbda528d5315432a2daa9b3f1625219aa928b9c1615f1af",
+          "suppression_db": 7.903577419455877
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.458172201907342,
+          "pcm_sha256": "0da2c0d46d7fb01ef89cdd43e09fa776284d07e52e15db6a6f625085b5818271",
+          "suppression_db": 7.45709524359003
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV000317",
+      "id": 37,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": 109,
+      "pcm_sha256": "55557904a286ebdfe7b0aa7b86af1b9eb4f47cc01e2061f14d797b8ffd15bb92",
+      "role": "selection",
+      "scene": "slot-6"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.424996055890533,
+          "pcm_sha256": "3aff0e527a299c112ced1abe208c96b14ca07e509779f6573b10ea78d775a827",
+          "suppression_db": 7.528062589802536
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.531462155316926,
+          "pcm_sha256": "6339b505422c0be5d6ba9005a32c1d0035d30ca3e653a5c7b9f2aa3a01f10978",
+          "suppression_db": 10.723468545840353
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV000317",
+      "id": 38,
+      "incumbent": "unassessed",
+      "label": "spoof",
+      "origin": 110,
+      "pcm_sha256": "86d0a8f8ad290eb7f746ec2bc12f252b271a779ff57516ad1ebbe4729cf50d5d",
+      "role": "selection",
+      "scene": "slot-4"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.507698844550007,
+          "pcm_sha256": "105ca0a462fd910ddf5e867632b2252becb3bb2a2a6a28497243d477d7fcb142",
+          "suppression_db": 0.45473304465788317
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.498392329175374,
+          "pcm_sha256": "3b6de1b049b91e027c86335398dd9bf692d6b4d4a083195a2512fe48bd4e5a30",
+          "suppression_db": 0.4227302005715732
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV015115",
+      "id": 39,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": 111,
+      "pcm_sha256": "3efcbac8fadbb05a63d74e89e1c32d1f523f7e757f516297ad3e82c7408f1f65",
+      "role": "selection",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 6.529770364347551,
+          "pcm_sha256": "1b95b0bb1da9b4af522d3c2d867930d43a79b7b8663a8d692eca2a606e34a468",
+          "suppression_db": 12.529628835360834
+        },
+        "old_enhancer": {
+          "admitted": false,
+          "logit": 4.963004059790651,
+          "pcm_sha256": "2b35c50aa921dcfe5ac79680dbd12f51519893288a4f7bc2c701f7111b0eaeb8",
+          "suppression_db": 23.32106285277531
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV015115",
+      "id": 40,
+      "incumbent": "unassessed",
+      "label": "spoof",
+      "origin": 112,
+      "pcm_sha256": "fd03e54b8cf8e5fd5c2e0b451dbb2dfb97bb970a8195c25a0ac7d50aa4d22c67",
+      "role": "selection",
+      "scene": "slot-6"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.258126245516826,
+          "pcm_sha256": "dbd3852e9c18198876bf9e550c8017c835911146a61dfce82efb6e880b5cf03c",
+          "suppression_db": 9.502425419589983
+        },
+        "old_enhancer": {
+          "admitted": false,
+          "logit": 7.333693334576718,
+          "pcm_sha256": "0684351b385852943972f678cc0bb2542fe26af7e78ad9a23ce6c7e590e96e8f",
+          "suppression_db": 22.322841676902975
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV015115",
+      "id": 41,
+      "incumbent": "unassessed",
+      "label": "spoof",
+      "origin": 113,
+      "pcm_sha256": "da4083544c91b9d7ca90f5abf71e9b1f0fc291b39543f2173a6da321e8026ce5",
+      "role": "selection",
+      "scene": "slot-4"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.535925348888463,
+          "pcm_sha256": "64d25e143973d238bf19e26418eee881e21082a987fb66c4ed3e0fe710271051",
+          "suppression_db": 0.5899349819109169
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.5316848430308125,
+          "pcm_sha256": "72109f7497ec97e8054a0a08c2a162b6053379bdb31fa4893f47be7a5cabbc7e",
+          "suppression_db": 0.048016082721477255
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV007201",
+      "id": 42,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": 114,
+      "pcm_sha256": "19a749a1381ef2cf54bd1e351120fac1d50e179aeb1422015e3e59aea82f0ea5",
+      "role": "selection",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.469724012200153,
+          "pcm_sha256": "4eba08e9b2dd2910de1e923ffa52516da22759d15b29e7028587f8acf53c1404",
+          "suppression_db": 7.301976232563967
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 4.5337895536912916,
+          "pcm_sha256": "99a99ba5446bd7d3d7894472b454da95476c9abe7a3c01e7fd25bc929eadb94e",
+          "suppression_db": 12.849350919027813
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV007201",
+      "id": 43,
+      "incumbent": "inconclusive",
+      "label": "spoof",
+      "origin": 115,
+      "pcm_sha256": "bbc045c20bae16e7a5067af65380ce19b85d26b741d9d4dd01827f7b718ff951",
+      "role": "selection",
+      "scene": "slot-6"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.496025424644892,
+          "pcm_sha256": "f476fa7685ed5eca2759a53d83fb2f7b36c94ca9992bf2cb64b83259b4ccdcb0",
+          "suppression_db": 7.066453481951653
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.3460131324294276,
+          "pcm_sha256": "0f08bfc7291f87a34ea39293af17bf9ec5f87c02c7e188e664401b8cce03e2cf",
+          "suppression_db": 13.61033017344879
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV007201",
+      "id": 44,
+      "incumbent": "original",
+      "label": "spoof",
+      "origin": 116,
+      "pcm_sha256": "15bcc50df4b6ba1a89b23070887ff5145d6d9610b90aae574e48cafaa5420006",
+      "role": "selection",
+      "scene": "slot-4"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.53503111684955,
+          "pcm_sha256": "b1dfa655a7097329a97e643e3937d3cd767c15ad0a35a103470a7a39da5cd0d5",
+          "suppression_db": 0.5131944009797134
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.547171174579677,
+          "pcm_sha256": "e4ee34a92cbc9f80cc30bed6d623967b72b843025ecf13d14723e1b261072a59",
+          "suppression_db": 0.07333084981256832
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV017201",
+      "id": 45,
+      "incumbent": "ai",
+      "label": "spoof",
+      "origin": 117,
+      "pcm_sha256": "778c59e4fdea2936c5ce8804ce7f4fafca7529f93649372adaaa54cd70815aeb",
+      "role": "selection",
+      "scene": "gain_control"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.476445603882215,
+          "pcm_sha256": "eeccfef70a5ee5e1734d34796d42154a8808afd476e7b23cdf1a3a8cb86fc4b5",
+          "suppression_db": 11.596900822860508
+        },
+        "old_enhancer": {
+          "admitted": true,
+          "logit": 7.310927480999659,
+          "pcm_sha256": "76550a1556b9aba9bfe76fe0ca7a74930e5b8276bfecad078922798852ded4cd",
+          "suppression_db": 15.575209751890199
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV017201",
+      "id": 46,
+      "incumbent": "inconclusive",
+      "label": "spoof",
+      "origin": 118,
+      "pcm_sha256": "ac8f1eb75b8856cd018271e3816f3b9f50fb3b60a3a10427042ccc3042629de1",
+      "role": "selection",
+      "scene": "slot-6"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": true,
+          "logit": 7.417814697488071,
+          "pcm_sha256": "fb0691dd7ea8156bfcf3b93c3b7681ded6ede76da9de84378e14c9f6b1ca4c53",
+          "suppression_db": 9.648507662170791
+        },
+        "old_enhancer": {
+          "admitted": false,
+          "logit": 2.377751558637685,
+          "pcm_sha256": "a5966944358d869807765d3272b099098f7936c549fb484a9e85ee04308f6548",
+          "suppression_db": 21.995015768155554
+        }
+      },
+      "family": null,
+      "group": "RADAR2026-DEV017201",
+      "id": 47,
+      "incumbent": "unassessed",
+      "label": "spoof",
+      "origin": 119,
+      "pcm_sha256": "d6525de02f355ba6c8fa50afdf7fd578d930230b1a088e252ee34ea7e83d6972",
+      "role": "selection",
+      "scene": "slot-4"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": false,
+          "logit": 0.30758058980729475,
+          "pcm_sha256": "548c1eb3ce306511d42f7348d43236d2cae1784f6cd97241e9585c5937fbe71c",
+          "suppression_db": 5.424092794568377
+        },
+        "old_enhancer": {
+          "admitted": false,
+          "logit": -2.6541213791926888,
+          "pcm_sha256": "b02427521ae4a2c0c271689029d4779fd1e3f63744b165abd167b99653c83f0b",
+          "suppression_db": 13.608214429673431
+        }
+      },
+      "family": null,
+      "group": "slot-6",
+      "id": 48,
+      "incumbent": "unassessed",
+      "label": "isolated",
+      "origin": 128,
+      "pcm_sha256": "5cc8e24fc406b34839ab829228b2b834a027e2fbfc0a17ea207b5d3d0f4fe137",
+      "role": "selection",
+      "scene": "isolated-0"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": false,
+          "logit": -2.80946543738705,
+          "pcm_sha256": "3e9ddb354771caf024af111170ceeed847305058c7bf0e1a96cb9e98016c171e",
+          "suppression_db": 11.678044147224133
+        },
+        "old_enhancer": {
+          "admitted": false,
+          "logit": 5.6154348566708405,
+          "pcm_sha256": "be60a4e8c35ce2617755262856f3eb8f07add7d7cc05f07c3202de98d2e688fb",
+          "suppression_db": 22.236596550885096
+        }
+      },
+      "family": null,
+      "group": "slot-6",
+      "id": 49,
+      "incumbent": "unassessed",
+      "label": "isolated",
+      "origin": 129,
+      "pcm_sha256": "5967a83da107d0d8595011e89e55bda210dddded14ee3d411bb6d5805f3fd9a9",
+      "role": "selection",
+      "scene": "isolated-1"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": false,
+          "logit": -4.455014730727418,
+          "pcm_sha256": "a3d9d780cfb533fdb969f47999447dd5a30b3c0b65f10ef6c9787dd4efdbfd11",
+          "suppression_db": 9.55686938804592
+        },
+        "old_enhancer": {
+          "admitted": false,
+          "logit": 7.437891504109886,
+          "pcm_sha256": "36d5c2983033129ef490bb0bb85e25b3202982330e17f7f00e666117fe75dce9",
+          "suppression_db": 27.057471867388664
+        }
+      },
+      "family": null,
+      "group": "slot-6",
+      "id": 50,
+      "incumbent": "unassessed",
+      "label": "isolated",
+      "origin": 130,
+      "pcm_sha256": "ca1b58fa18d77178a0bac931b682e4f30ed08dd7b025754c35cdc7251248d9b7",
+      "role": "selection",
+      "scene": "isolated-2"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": false,
+          "logit": -6.393914237909166,
+          "pcm_sha256": "2dba7c0f7d5ef4bb2c6af535266dbca2ea7e134b97ec342d097dcd2592f20621",
+          "suppression_db": 15.71966331228467
+        },
+        "old_enhancer": {
+          "admitted": false,
+          "logit": 2.3583866346445017,
+          "pcm_sha256": "1c4abea7c4ab8cd11d71de1384df4d40916bdb40cfb9077068807550a6631d05",
+          "suppression_db": 26.891564068972038
+        }
+      },
+      "family": null,
+      "group": "slot-6",
+      "id": 51,
+      "incumbent": "unassessed",
+      "label": "isolated",
+      "origin": 131,
+      "pcm_sha256": "343d27502d5cdd1e97799734c03ba5d0b9dc502c717792c95b5a81dabdce50de",
+      "role": "selection",
+      "scene": "isolated-3"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": false,
+          "logit": -3.941254146969841,
+          "pcm_sha256": "c9810572ae63c3418f2a54edfd95ba16bf2d203049e63456eed242b2dbc6df42",
+          "suppression_db": 19.450642504969487
+        },
+        "old_enhancer": {
+          "admitted": false,
+          "logit": 7.4898120955871885,
+          "pcm_sha256": "eacf7543d650227509655555093a3aee1705dbb462dac019fd1fbf3e9ec29e72",
+          "suppression_db": 28.350881796629285
+        }
+      },
+      "family": null,
+      "group": "slot-4",
+      "id": 52,
+      "incumbent": "unassessed",
+      "label": "isolated",
+      "origin": 132,
+      "pcm_sha256": "6469baf93746ce671d01386f51f599d645893125e4933794df20cddfb5a0d6b6",
+      "role": "selection",
+      "scene": "isolated-0"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": false,
+          "logit": -6.17983817970324,
+          "pcm_sha256": "3317a089c1d0ec821d633496cac48eeb40f836427634c93af867c5da020edab7",
+          "suppression_db": 16.227312279252118
+        },
+        "old_enhancer": {
+          "admitted": false,
+          "logit": 7.392302614583478,
+          "pcm_sha256": "5e2e2316a8c57d0a6f91d21eef8e1a51266ac60a44f2df2092d79bbd73bef22c",
+          "suppression_db": 27.788496042558695
+        }
+      },
+      "family": null,
+      "group": "slot-4",
+      "id": 53,
+      "incumbent": "unassessed",
+      "label": "isolated",
+      "origin": 133,
+      "pcm_sha256": "ee4ccd6a2bf6213a1f726d9c206b9086dfc55f472d1d18b9d0ef126abebea10b",
+      "role": "selection",
+      "scene": "isolated-1"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": false,
+          "logit": -4.447230296218047,
+          "pcm_sha256": "1cb9473f64677370edc395c520268d4ddbdcaa035b43fd7a3c52d103fc6741c5",
+          "suppression_db": 18.24520180933009
+        },
+        "old_enhancer": {
+          "admitted": false,
+          "logit": 7.399497808217197,
+          "pcm_sha256": "9d9983229e9cbb7b2ced6733d81b832d24edad2af4ee9d33f71538f2828ec605",
+          "suppression_db": 27.388295866003737
+        }
+      },
+      "family": null,
+      "group": "slot-4",
+      "id": 54,
+      "incumbent": "unassessed",
+      "label": "isolated",
+      "origin": 134,
+      "pcm_sha256": "e67600e0f5f0adccaa676606ef328828a8255f58077aa602c75a5b688d948637",
+      "role": "selection",
+      "scene": "isolated-2"
+    },
+    {
+      "candidates": {
+        "new_enhancer": {
+          "admitted": false,
+          "logit": -5.329671815387823,
+          "pcm_sha256": "db784b1841cd5a04f7e4c638dfe827b1eb1f05ac9c2631c7e8e7a0c50e5924be",
+          "suppression_db": 16.039576439369593
+        },
+        "old_enhancer": {
+          "admitted": false,
+          "logit": 7.501845119899118,
+          "pcm_sha256": "f275dd45f55d55e3e3dfd5bd920158b649707e0b5694d5a9ce3a2bfd61cd714e",
+          "suppression_db": 27.753976237298108
+        }
+      },
+      "family": null,
+      "group": "slot-4",
+      "id": 55,
+      "incumbent": "unassessed",
+      "label": "isolated",
+      "origin": 135,
+      "pcm_sha256": "2a7fb82760df332efb3e13e7c6081da8b581ddbcea2c7b95dfd1edea7648dddb",
+      "role": "selection",
+      "scene": "isolated-3"
+    }
+  ]
+}

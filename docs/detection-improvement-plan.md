@@ -97,6 +97,19 @@ integration remains unfinished.
 
 ## Progress on 12 November
 
+- The [720p30 face-change extension](video-face-two-returns-hd-2026-11-12.md)
+  found five additional swap ranges, including three after tandem
+  recompression, on eight separate retained source groups. It added no
+  locations on 32 ordinary or cut files and 16 mixed single-edit controls.
+  Full worker, signed source replay and browser tests reproduced both ranges.
+- The [cross-format earlier-image comparison](image-reference-cross-format-local-edits-2026-11-12.md)
+  located ten of 12 feathered AI patches. Five compression or tone controls
+  also showed overlays. A second-panel stability guard removed those nuisance
+  flags and missed all six held feathered FLUX edits. It stays experimental.
+- The [matched substantial writing revision test](writing-clipped-rank-transfer-2026-11-12.md)
+  found zero new locations from clipped token ranks and produced additional
+  genuine flags. The alternate classifier added two rewrite locations and
+  seven genuine flags. Both previously missed PDF passages remained missed.
 - The [second brief face-change range](video-face-two-returns-2026-11-12.md)
   localized 16 of 16 authored swaps across eight two-edit videos, up from
   eight. It added no locations on 32 single-swap and mixed controls and

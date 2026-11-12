@@ -58,6 +58,9 @@ The [two-range face-change study](video-face-two-returns-2026-11-12.md)
 checks two separate edits in the same file alongside single edits, ordinary
 processing and genuine picture cuts. Its replay verifies native pictures and
 the authored edit locations separately from the signed app output.
+The [720p30 extension](video-face-two-returns-hd-2026-11-12.md) independently
+reopens the source clock and both guarded boundaries on the higher-resolution
+delivery, including two successive encodes.
 The [compression repeat study](video-face-compression-stability-2026-11-12.md)
 rebuilds single and tandem encodes, checks exact face crops, and reproduces
 both appearance measurements at the original time interval.
@@ -71,6 +74,9 @@ of redraws that preserve source-time mouth motion.
 The [source-aligned writing study](writing-source-aligned-transfer-2026-11-12.md#replay)
 provides a standard-library reader for 204 decisions and source positions
 for reconstructing the publisher versions and matched revision controls.
+The [clipped token-rank comparison](writing-clipped-rank-transfer-2026-11-12.md)
+recalculates 484 decisions on matched writing revisions from a public scalar
+receipt. Native source references and offsets support a separate input audit.
 The [native word-clock qualification](grid-reserve-word-clocks-2026-11-12.md)
 aligns publisher word intervals with original embedded speech and replays four
 ordinary mouth changes with unchanged soundtracks.

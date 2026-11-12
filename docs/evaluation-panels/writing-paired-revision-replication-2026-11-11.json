@@ -1,0 +1,555 @@
+{
+  "diagnostic": {
+    "audit": {
+      "aggregate_sha256": "940599766f976d646d2a966459094c25d3524d8f0e40a30a394ca9824db66ef9",
+      "cases": 31,
+      "distinct_inputs": 111,
+      "groups": 9,
+      "status": "verified_without_model_inference"
+    },
+    "commitments": {
+      "aggregate.json": "940599766f976d646d2a966459094c25d3524d8f0e40a30a394ca9824db66ef9",
+      "audit.json": "a1914072549695554a6c5af064986b5c262f9b01c29fd2e3b890a3b67d7a8b0f",
+      "cases.json": "b2ceac31afc0d4b8f20a7ec65f65f6bf732b328abffe18a43f1173bb300daf55",
+      "current.json": "08c322228e18e347e8b0b02a37ce39a6dbbdcd523a1a77809f7efc1489974e21",
+      "freeze.json": "5480990f251438b757c971707c7d24c5be6b7f4269a1c7f15594fdc5ab747311",
+      "generated-qwen.json": "a0f486e6c7405eacc0a3bd69f6efcaac60491c40f7514582d30a051a4cd1eff1",
+      "generated-smol2.json": "6d47e84fb441c92debe2e1347166259ec11fd05b6de180afa629df728e3829ae",
+      "private-outcomes.json": "272702d6a67e029455d2c21dcf15e4714b99d4aaac1a8e1e1464b24afe94de3b",
+      "scoring-freeze.json": "acb36f79b6ae6b332a80ea49578a351b40fe4ed7ae75c40326c586f2129c68b1",
+      "second.json": "4d0cb28cd5d21a52c595f26e670830ef347aa9ee729c46119e8d812c12752252"
+    },
+    "results": {
+      "admission": {
+        "qwen": {
+          "admitted": 7,
+          "attempted": 9
+        },
+        "smol2": {
+          "admitted": 6,
+          "attempted": 9
+        }
+      },
+      "cached_responses": {
+        "current": 72,
+        "second": 72
+      },
+      "counts": {
+        "f1000/before": {
+          "agreement_exact_focus": 0,
+          "agreement_flag": 1,
+          "agreement_no_flag": 8,
+          "agreement_useful": 0,
+          "agreement_wrong_only": 0,
+          "cases": 9,
+          "combined_exact_focus": 0,
+          "combined_flag": 0,
+          "combined_no_flag": 9,
+          "combined_useful": 0,
+          "combined_wrong_only": 0,
+          "current_exact_focus": 0,
+          "current_flag": 3,
+          "current_no_flag": 6,
+          "current_useful": 0,
+          "current_wrong_only": 0,
+          "draft_hunks": 0,
+          "hunks_within_focus": 0,
+          "paired_eligible": 0,
+          "paired_exact_focus": 0,
+          "paired_flag": 0,
+          "paired_no_flag": 9,
+          "paired_useful": 0,
+          "paired_wrong_only": 0,
+          "unchanged_agreement": 1
+        },
+        "f1000/edited": {
+          "agreement_exact_focus": 0,
+          "agreement_flag": 0,
+          "agreement_no_flag": 9,
+          "agreement_useful": 0,
+          "agreement_wrong_only": 0,
+          "cases": 9,
+          "combined_exact_focus": 0,
+          "combined_flag": 0,
+          "combined_no_flag": 9,
+          "combined_useful": 0,
+          "combined_wrong_only": 0,
+          "current_exact_focus": 0,
+          "current_flag": 2,
+          "current_no_flag": 7,
+          "current_useful": 0,
+          "current_wrong_only": 0,
+          "draft_hunks": 11,
+          "hunks_within_focus": 9,
+          "paired_eligible": 9,
+          "paired_exact_focus": 0,
+          "paired_flag": 0,
+          "paired_no_flag": 9,
+          "paired_useful": 0,
+          "paired_wrong_only": 0,
+          "unchanged_agreement": 0
+        },
+        "f1000/qwen": {
+          "agreement_exact_focus": 1,
+          "agreement_flag": 1,
+          "agreement_no_flag": 6,
+          "agreement_useful": 0,
+          "agreement_wrong_only": 1,
+          "cases": 7,
+          "combined_exact_focus": 3,
+          "combined_flag": 3,
+          "combined_no_flag": 4,
+          "combined_useful": 2,
+          "combined_wrong_only": 1,
+          "current_exact_focus": 1,
+          "current_flag": 3,
+          "current_no_flag": 4,
+          "current_useful": 0,
+          "current_wrong_only": 3,
+          "draft_hunks": 18,
+          "hunks_within_focus": 7,
+          "paired_eligible": 7,
+          "paired_exact_focus": 2,
+          "paired_flag": 2,
+          "paired_no_flag": 5,
+          "paired_useful": 2,
+          "paired_wrong_only": 0,
+          "unchanged_agreement": 0
+        },
+        "f1000/smol2": {
+          "agreement_exact_focus": 1,
+          "agreement_flag": 1,
+          "agreement_no_flag": 5,
+          "agreement_useful": 1,
+          "agreement_wrong_only": 0,
+          "cases": 6,
+          "combined_exact_focus": 1,
+          "combined_flag": 1,
+          "combined_no_flag": 5,
+          "combined_useful": 1,
+          "combined_wrong_only": 0,
+          "current_exact_focus": 1,
+          "current_flag": 2,
+          "current_no_flag": 4,
+          "current_useful": 1,
+          "current_wrong_only": 1,
+          "draft_hunks": 17,
+          "hunks_within_focus": 6,
+          "paired_eligible": 6,
+          "paired_exact_focus": 1,
+          "paired_flag": 1,
+          "paired_no_flag": 5,
+          "paired_useful": 1,
+          "paired_wrong_only": 0,
+          "unchanged_agreement": 0
+        }
+      },
+      "decisions": {
+        "qwen": {
+          "added_false_groups": 0,
+          "added_useful_groups": 2,
+          "admitted_groups": 7,
+          "lost_useful_groups": 0,
+          "replicated": true
+        },
+        "smol2": {
+          "added_false_groups": 0,
+          "added_useful_groups": 0,
+          "admitted_groups": 6,
+          "lost_useful_groups": 0,
+          "replicated": false
+        }
+      },
+      "distinct_inputs": 111,
+      "method": {
+        "agreement": "Current positives must have a second response of at least 0.5 on the exact same input.",
+        "combined": "Use agreement on changed native inputs and the paired center.",
+        "current": "First six native windows at or above the existing raw comparison point of 0.5.",
+        "diagnostic": "Reuse the exact earlier and later F1000 versions. Reuse prior detector responses only for byte-identical native input. Different generation weights and seed; same source groups as the previous transfer.",
+        "generation": "Exactly one completed rewrite attempt at each original center per generator. All flanking sentences must remain exact. Reject invalid output or an exact duplicate of the known human revision.",
+        "holdout": "Use qualified publisher-deposited versions from works absent from the earlier source panel. Retain native-window geometry and group by publisher and generator. No reuse of prior scores.",
+        "outcomes": "Useful localization is at least 0.30 non-whitespace character IoU and 0.50 recall. Also count exact center, wrong-only, no flag and false flags on natural later revisions.",
+        "paired": "With exact matched neighboring sentences, mark the center only when both later model-specific AI-like odds are independently at least twice the earlier odds.",
+        "replication": "An adequate additional generator lane admits at least six source groups. It supports the result if paired adds at least two useful source groups, loses none and adds at most one human false-flag group over same-window agreement. Reused F1000 sources remain diagnostic."
+      },
+      "native_forwards": {
+        "current": 10,
+        "second": 10
+      },
+      "outcomes_sha256": "272702d6a67e029455d2c21dcf15e4714b99d4aaac1a8e1e1464b24afe94de3b",
+      "schema": "chipmunk.writing-paired-revision-replication/1",
+      "scope": "diagnostic",
+      "score_freeze_sha256": "acb36f79b6ae6b332a80ea49578a351b40fe4ed7ae75c40326c586f2129c68b1",
+      "score_receipts": {
+        "current": "08c322228e18e347e8b0b02a37ce39a6dbbdcd523a1a77809f7efc1489974e21",
+        "second": "4d0cb28cd5d21a52c595f26e670830ef347aa9ee729c46119e8d812c12752252"
+      }
+    }
+  },
+  "holdout": {
+    "audit": {
+      "aggregate_sha256": "3135dca99baf893c954329143e30421bdacaf611c39e44a4041f0a0249472900",
+      "cases": 7,
+      "distinct_inputs": 25,
+      "groups": 2,
+      "status": "verified_without_model_inference"
+    },
+    "commitments": {
+      "aggregate.json": "3135dca99baf893c954329143e30421bdacaf611c39e44a4041f0a0249472900",
+      "audit.json": "1c3123c7d22049263dc8c840570b97572b97bab4dd397a7835f5decd559a81c1",
+      "cases.json": "bac6965a0fcfbe4a05e0b8e6e5d18d3e69fd4f7ebd8c4fc8c4bfa9d647880a1b",
+      "current.json": "58894f7ed8d850e9133302eae5d974e009b72e77f9e3d7e918320f1d202fabab",
+      "freeze.json": "4f808266e3d524e3812b2dd495adf21d16e621701a09f7d5ecd188fbde5aaf1b",
+      "generated-qwen.json": "a1325736a7f95bb9b066a9dec400c96f43441dbd23b4e69648fe053c8aa50275",
+      "generated-smol2.json": "d6d0baa31df0d8a784d75bfbc7dd5e068b711cae6509038c9b205256fa39f3c4",
+      "private-outcomes.json": "edc25b0bf997a6a51716975eaf45e6808ab4bb7c19909ba0aab4c936874004ea",
+      "scoring-freeze.json": "c7a593d598d2457173299de82de904adbd41bc75eaaa92c04baa772d8b9999c5",
+      "second.json": "aab17d50c453130795312906c8b433a3661477e576a0c575ca375591953fd17b"
+    },
+    "results": {
+      "admission": {
+        "qwen": {
+          "admitted": 2,
+          "attempted": 2
+        },
+        "smol2": {
+          "admitted": 1,
+          "attempted": 2
+        }
+      },
+      "cached_responses": {
+        "current": 0,
+        "second": 0
+      },
+      "counts": {
+        "copernicus/before": {
+          "agreement_exact_focus": false,
+          "agreement_flag": false,
+          "agreement_no_flag": true,
+          "agreement_useful": false,
+          "agreement_wrong_only": false,
+          "cases": 1,
+          "combined_exact_focus": false,
+          "combined_flag": false,
+          "combined_no_flag": true,
+          "combined_useful": false,
+          "combined_wrong_only": false,
+          "current_exact_focus": false,
+          "current_flag": false,
+          "current_no_flag": true,
+          "current_useful": false,
+          "current_wrong_only": false,
+          "draft_hunks": 0,
+          "hunks_within_focus": false,
+          "paired_eligible": false,
+          "paired_exact_focus": false,
+          "paired_flag": false,
+          "paired_no_flag": true,
+          "paired_useful": false,
+          "paired_wrong_only": false,
+          "unchanged_agreement": false
+        },
+        "copernicus/edited": {
+          "agreement_exact_focus": false,
+          "agreement_flag": false,
+          "agreement_no_flag": true,
+          "agreement_useful": false,
+          "agreement_wrong_only": false,
+          "cases": 1,
+          "combined_exact_focus": false,
+          "combined_flag": false,
+          "combined_no_flag": true,
+          "combined_useful": false,
+          "combined_wrong_only": false,
+          "current_exact_focus": false,
+          "current_flag": false,
+          "current_no_flag": true,
+          "current_useful": false,
+          "current_wrong_only": false,
+          "draft_hunks": 1,
+          "hunks_within_focus": true,
+          "paired_eligible": true,
+          "paired_exact_focus": false,
+          "paired_flag": false,
+          "paired_no_flag": true,
+          "paired_useful": false,
+          "paired_wrong_only": false,
+          "unchanged_agreement": false
+        },
+        "copernicus/qwen": {
+          "agreement_exact_focus": false,
+          "agreement_flag": false,
+          "agreement_no_flag": true,
+          "agreement_useful": false,
+          "agreement_wrong_only": false,
+          "cases": 1,
+          "combined_exact_focus": false,
+          "combined_flag": false,
+          "combined_no_flag": true,
+          "combined_useful": false,
+          "combined_wrong_only": false,
+          "current_exact_focus": false,
+          "current_flag": false,
+          "current_no_flag": true,
+          "current_useful": false,
+          "current_wrong_only": false,
+          "draft_hunks": 2,
+          "hunks_within_focus": true,
+          "paired_eligible": true,
+          "paired_exact_focus": false,
+          "paired_flag": false,
+          "paired_no_flag": true,
+          "paired_useful": false,
+          "paired_wrong_only": false,
+          "unchanged_agreement": false
+        },
+        "copernicus/smol2": {
+          "agreement_exact_focus": false,
+          "agreement_flag": false,
+          "agreement_no_flag": true,
+          "agreement_useful": false,
+          "agreement_wrong_only": false,
+          "cases": 1,
+          "combined_exact_focus": false,
+          "combined_flag": false,
+          "combined_no_flag": true,
+          "combined_useful": false,
+          "combined_wrong_only": false,
+          "current_exact_focus": false,
+          "current_flag": false,
+          "current_no_flag": true,
+          "current_useful": false,
+          "current_wrong_only": false,
+          "draft_hunks": 2,
+          "hunks_within_focus": true,
+          "paired_eligible": true,
+          "paired_exact_focus": false,
+          "paired_flag": false,
+          "paired_no_flag": true,
+          "paired_useful": false,
+          "paired_wrong_only": false,
+          "unchanged_agreement": false
+        },
+        "peerj/before": {
+          "agreement_exact_focus": false,
+          "agreement_flag": false,
+          "agreement_no_flag": true,
+          "agreement_useful": false,
+          "agreement_wrong_only": false,
+          "cases": 1,
+          "combined_exact_focus": false,
+          "combined_flag": false,
+          "combined_no_flag": true,
+          "combined_useful": false,
+          "combined_wrong_only": false,
+          "current_exact_focus": false,
+          "current_flag": false,
+          "current_no_flag": true,
+          "current_useful": false,
+          "current_wrong_only": false,
+          "draft_hunks": 0,
+          "hunks_within_focus": false,
+          "paired_eligible": false,
+          "paired_exact_focus": false,
+          "paired_flag": false,
+          "paired_no_flag": true,
+          "paired_useful": false,
+          "paired_wrong_only": false,
+          "unchanged_agreement": false
+        },
+        "peerj/edited": {
+          "agreement_exact_focus": false,
+          "agreement_flag": false,
+          "agreement_no_flag": true,
+          "agreement_useful": false,
+          "agreement_wrong_only": false,
+          "cases": 1,
+          "combined_exact_focus": false,
+          "combined_flag": false,
+          "combined_no_flag": true,
+          "combined_useful": false,
+          "combined_wrong_only": false,
+          "current_exact_focus": false,
+          "current_flag": false,
+          "current_no_flag": true,
+          "current_useful": false,
+          "current_wrong_only": false,
+          "draft_hunks": 1,
+          "hunks_within_focus": true,
+          "paired_eligible": true,
+          "paired_exact_focus": false,
+          "paired_flag": false,
+          "paired_no_flag": true,
+          "paired_useful": false,
+          "paired_wrong_only": false,
+          "unchanged_agreement": false
+        },
+        "peerj/qwen": {
+          "agreement_exact_focus": false,
+          "agreement_flag": false,
+          "agreement_no_flag": true,
+          "agreement_useful": false,
+          "agreement_wrong_only": false,
+          "cases": 1,
+          "combined_exact_focus": true,
+          "combined_flag": true,
+          "combined_no_flag": false,
+          "combined_useful": true,
+          "combined_wrong_only": false,
+          "current_exact_focus": false,
+          "current_flag": false,
+          "current_no_flag": true,
+          "current_useful": false,
+          "current_wrong_only": false,
+          "draft_hunks": 4,
+          "hunks_within_focus": true,
+          "paired_eligible": true,
+          "paired_exact_focus": true,
+          "paired_flag": true,
+          "paired_no_flag": false,
+          "paired_useful": true,
+          "paired_wrong_only": false,
+          "unchanged_agreement": false
+        }
+      },
+      "decisions": {
+        "qwen": {
+          "added_false_groups": 0,
+          "added_useful_groups": 1,
+          "admitted_groups": 2,
+          "lost_useful_groups": 0,
+          "replicated": false
+        },
+        "smol2": {
+          "added_false_groups": 0,
+          "added_useful_groups": 0,
+          "admitted_groups": 1,
+          "lost_useful_groups": 0,
+          "replicated": false
+        }
+      },
+      "distinct_inputs": 25,
+      "method": {
+        "agreement": "Current positives must have a second response of at least 0.5 on the exact same input.",
+        "combined": "Use agreement on changed native inputs and the paired center.",
+        "current": "First six native windows at or above the existing raw comparison point of 0.5.",
+        "diagnostic": "Reuse the exact earlier and later F1000 versions. Reuse prior detector responses only for byte-identical native input. Different generation weights and seed; same source groups as the previous transfer.",
+        "generation": "Exactly one completed rewrite attempt at each original center per generator. All flanking sentences must remain exact. Reject invalid output or an exact duplicate of the known human revision.",
+        "holdout": "Use qualified publisher-deposited versions from works absent from the earlier source panel. Retain native-window geometry and group by publisher and generator. No reuse of prior scores.",
+        "outcomes": "Useful localization is at least 0.30 non-whitespace character IoU and 0.50 recall. Also count exact center, wrong-only, no flag and false flags on natural later revisions.",
+        "paired": "With exact matched neighboring sentences, mark the center only when both later model-specific AI-like odds are independently at least twice the earlier odds.",
+        "replication": "An adequate additional generator lane admits at least six source groups. It supports the result if paired adds at least two useful source groups, loses none and adds at most one human false-flag group over same-window agreement. Reused F1000 sources remain diagnostic."
+      },
+      "native_forwards": {
+        "current": 7,
+        "second": 7
+      },
+      "outcomes_sha256": "edc25b0bf997a6a51716975eaf45e6808ab4bb7c19909ba0aab4c936874004ea",
+      "schema": "chipmunk.writing-paired-revision-replication/1",
+      "scope": "holdout",
+      "score_freeze_sha256": "c7a593d598d2457173299de82de904adbd41bc75eaaa92c04baa772d8b9999c5",
+      "score_receipts": {
+        "current": "58894f7ed8d850e9133302eae5d974e009b72e77f9e3d7e918320f1d202fabab",
+        "second": "aab17d50c453130795312906c8b433a3661477e576a0c575ca375591953fd17b"
+      }
+    },
+    "source": {
+      "catalog_commitments": {
+        "copernicus": {
+          "dispositions": {
+            "metadata_or_parse_rejected": 8,
+            "no_exact_edit": 39,
+            "selected": 1
+          },
+          "sha256": "413d80c364a1244e76c8dccbb4ea753be4391d318cefaf06c37ea53e865b6f4c"
+        },
+        "peerj": {
+          "dispositions": {
+            "metadata_or_parse_rejected": 6,
+            "no_exact_edit": 41,
+            "selected": 1
+          },
+          "sha256": "bc14296950c1bfb72aae1c0b91f255becb086819543dd1ba9ef499206f907ec6"
+        }
+      },
+      "history": [
+        {
+          "matched_sources": 0,
+          "packet": "previous-agreement",
+          "source_sha256": "8db9676dfde8ed023cbe79d92f82d2bea2544b18537c56baed1dbd6e29b0234b",
+          "text_entries": 100
+        },
+        {
+          "matched_sources": 0,
+          "packet": "llmtrace",
+          "source_sha256": "6d4431a85a70916ba7af5c19f062eed6c277183d7b4bb5c6cea42f520e717f48",
+          "text_entries": 38429
+        },
+        {
+          "matched_sources": 0,
+          "packet": "elife-v301",
+          "source_sha256": "d690f9466193dafb94a054c02fb27bade0bc6d04819cafa9cc8b846acb97b16f",
+          "text_entries": 12
+        },
+        {
+          "matched_sources": 0,
+          "packet": "elife-v286",
+          "source_sha256": "a8676385711bf3d66165a6c3a8add0d8aee7881288302388ca88739e8e30389b",
+          "text_entries": 26
+        },
+        {
+          "matched_sources": 0,
+          "packet": "elife-v272",
+          "source_sha256": "063c960dafe75757b3b6483ab88802c9c6cd78fa6e0a347014ac148c283d758f",
+          "text_entries": 5
+        },
+        {
+          "matched_sources": 0,
+          "packet": "opai-v257",
+          "source_sha256": "4e43edf33c695a8a4f757d079089dab85a632c648762554bac9f5cc573bb923b",
+          "text_entries": 60
+        },
+        {
+          "matched_sources": 0,
+          "packet": "f1000-previous-source-panel",
+          "source_sha256": "f8e0f135cd4aef110b78523dd104f47f44fe24aa4a2cb316c78f5e1a99d4deb5",
+          "text_entries": 18
+        }
+      ],
+      "published_revisions": [
+        {
+          "after_date": "2016-09-12",
+          "after_doi": "10.7287/peerj.preprints.2225v2",
+          "after_license": [
+            "http://creativecommons.org/licenses/by/4.0"
+          ],
+          "before_date": "2016-07-04",
+          "before_doi": "10.7287/peerj.preprints.2225v1",
+          "before_license": [
+            "http://creativecommons.org/licenses/by/4.0"
+          ],
+          "group": "516cb1d4bd27adb8",
+          "publisher": "peerj"
+        },
+        {
+          "after_date": "2018-11-27",
+          "after_doi": "10.5194/tc-12-3693-2018",
+          "after_license": [
+            "https://creativecommons.org/licenses/by/4.0"
+          ],
+          "before_date": "2018-01-02",
+          "before_doi": "10.5194/tc-2017-280",
+          "before_license": [
+            "https://creativecommons.org/licenses/by/4.0"
+          ],
+          "group": "1499e4a2826c2a46",
+          "publisher": "copernicus"
+        }
+      ],
+      "source_plan_sha256": "b293436a90cb8ce6f3fde73b4b0be7d043f33f95565760a6d15bc21e2500d97a",
+      "source_receipt_sha256": "0118f67b9700034e73c42d51e9fb233958d5aaa7d9808e81052d48aab6c316c2"
+    }
+  },
+  "schema": "chipmunk.writing-paired-revision-replication-public-summary/1",
+  "serving_change": false
+}

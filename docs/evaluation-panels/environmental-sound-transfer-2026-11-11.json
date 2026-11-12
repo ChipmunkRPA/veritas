@@ -1,0 +1,148 @@
+{
+  "arms": {
+    "magnitude": {
+      "advance_isolated": false,
+      "advance_speech_mix": false,
+      "cells": {
+        "native/audiogen": {
+          "flagged": 1,
+          "planned": 18
+        },
+        "native/audiolcm": {
+          "flagged": 10,
+          "planned": 18
+        },
+        "native/real": {
+          "flagged": 2,
+          "planned": 18
+        },
+        "opus/audiogen": {
+          "flagged": 1,
+          "planned": 18
+        },
+        "opus/audiolcm": {
+          "flagged": 10,
+          "planned": 18
+        },
+        "opus/real": {
+          "flagged": 2,
+          "planned": 18
+        },
+        "speech_mix/audiogen": {
+          "flagged": 0,
+          "planned": 18
+        },
+        "speech_mix/audiolcm": {
+          "flagged": 1,
+          "planned": 18
+        },
+        "speech_mix/real": {
+          "flagged": 0,
+          "planned": 18
+        }
+      },
+      "passes_view": {
+        "native": false,
+        "opus": false,
+        "speech_mix": false
+      },
+      "selection_false_flags": 1,
+      "selection_true_flags": 3
+    },
+    "texture": {
+      "advance_isolated": false,
+      "advance_speech_mix": false,
+      "cells": {
+        "native/audiogen": {
+          "flagged": 6,
+          "planned": 18
+        },
+        "native/audiolcm": {
+          "flagged": 7,
+          "planned": 18
+        },
+        "native/real": {
+          "flagged": 4,
+          "planned": 18
+        },
+        "opus/audiogen": {
+          "flagged": 7,
+          "planned": 18
+        },
+        "opus/audiolcm": {
+          "flagged": 7,
+          "planned": 18
+        },
+        "opus/real": {
+          "flagged": 4,
+          "planned": 18
+        },
+        "speech_mix/audiogen": {
+          "flagged": 16,
+          "planned": 18
+        },
+        "speech_mix/audiolcm": {
+          "flagged": 16,
+          "planned": 18
+        },
+        "speech_mix/real": {
+          "flagged": 17,
+          "planned": 18
+        }
+      },
+      "passes_view": {
+        "native": false,
+        "opus": false,
+        "speech_mix": false
+      },
+      "selection_false_flags": 1,
+      "selection_true_flags": 10
+    }
+  },
+  "dataset_revision": "b0832726deb55484dbce869c6f09c41f7e9e5fbb",
+  "exact_held_views": 162,
+  "freeze_sha256": "6933be668bdd576ee024de08713d4819b8253126a0ee744b567dece19c0af7a8",
+  "head_sha256": "905e823edfe6310457f05580c317388f71b619c5f88f3de9091060109804598c",
+  "intake_sha256": "a5c5009a9079bd47d59a9f98ba3ad40679eb57bbbfe10337f8fb6c6a1d6cfd4c",
+  "method": {
+    "advance": "Each unseen generator requires at least 11/18 isolated hits in native and Opus, and each delivery at most 2/18 genuine false alarms. For a mixed claim require that gate separately in the speech mixture.",
+    "bands": [
+      93,
+      218,
+      437,
+      843,
+      1500,
+      2500,
+      4218,
+      6875
+    ],
+    "development_generators": [
+      "audioldm1",
+      "audioldm2"
+    ],
+    "eligible": "First 1100 publisher rows. Original recording must have one unambiguous exact Clotho source match and CC0 grant. No duplicate Freesound creator or sound identifier. Use only TTA synthetic outputs.",
+    "feature_frame": [
+      512,
+      128
+    ],
+    "fit": "Equal weight for the two origins and each source within an origin. Standardized ridge head with penalty 0.50.",
+    "held_generators": [
+      "audiogen",
+      "audiolcm"
+    ],
+    "input": "Center three seconds of exact decoded mono at 16 kHz. Test native, 32 kb/s Opus, and -6 dB environment-to-genuine-speech mixtures on held source pairs.",
+    "magnitude": "Per-band relative energy median, interquartile range and spectral flatness.",
+    "order": "chipmunk-environmental-20261111-v1",
+    "role_sizes": {
+      "fit": 12,
+      "held": 18,
+      "selection": 10
+    },
+    "selection": "Lowest point above the second-highest genuine response. At most one false result in ten source controls.",
+    "texture": "Per-band log-envelope residue, normalized discrete Teager energy, and 8 and 24 ms lag consistency."
+  },
+  "schema": "chipmunk.environmental-sound-transfer/1",
+  "scores_sha256": "119fb3aec01e836795c431e726bb2ae82d8b3092a08ab639dacd0cc084d9992c",
+  "unique_source_groups": 40,
+  "upstream_protocol_revision": "d6179d1c773ca78e4939be5933c9914f97815920"
+}

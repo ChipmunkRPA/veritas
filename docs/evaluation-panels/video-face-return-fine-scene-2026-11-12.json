@@ -1,0 +1,313 @@
+{
+  "advances": true,
+  "counts": {
+    "cut": {
+      "added_flags": 0,
+      "added_useful": 0,
+      "attempted_retry": 8,
+      "cases": 8,
+      "combined_useful": 0,
+      "prior_flags": 2,
+      "prior_useful": 0
+    },
+    "ordinary": {
+      "added_flags": 0,
+      "added_useful": 0,
+      "attempted_retry": 16,
+      "cases": 16,
+      "combined_useful": 0,
+      "prior_flags": 0,
+      "prior_useful": 0
+    },
+    "swap": {
+      "added_flags": 4,
+      "added_useful": 4,
+      "attempted_retry": 7,
+      "cases": 7,
+      "combined_useful": 5,
+      "prior_flags": 1,
+      "prior_useful": 1
+    }
+  },
+  "development_and_intake_commitments": {
+    "candidate_development.py": "0e9dfad53cb995baee305f63f06b8e107161bc2dd42ef9c9de5c37ff6917c989",
+    "development-result.json": "318460d7b4e5f915a2c8db0b310c0f063999a9fff7e38e3ea15c23546eeebfd0",
+    "freeze.json": "3dc73c58ddcc068e01bf588ea600f7fb599c40fba7445618c869cf98e57bf918",
+    "source-only-extra-preflight.json": "a3403c7d6ed546b00f38ca1f70497d865be79b448e5384fd64f5584ee6cad25f",
+    "source-only-genuine-cut-inventory.json": "9a672c1f637b842bf758b497c7bf042e5a659132bb65f4824b5014fdf8311821",
+    "source-only-preflight.json": "eef3c3e71c8863666fe0adcd94ff1a1f5023aa9b1f478af3d2a4e083553915a3"
+  },
+  "gate": {
+    "added_useful": true,
+    "cuts": true,
+    "ordinary": true,
+    "positive_groups": true,
+    "preserves_existing_ranges": true
+  },
+  "independent_replay": {
+    "aggregate_sha256": "15bfa7c715d669f5651293e9ab1c6daf713b732d7bbcf6ad2e621354850e81cd",
+    "candidate_ranges": [
+      {
+        "added_useful": true,
+        "authored_frames": [
+          54,
+          60
+        ],
+        "candidate_frames": [
+          54,
+          60
+        ],
+        "fine_background": [
+          {
+            "chroma_p90": 1.0208333730697632,
+            "count": 32,
+            "luma_p90": 2.3411459922790527,
+            "median": 0.9848127365112305,
+            "old_count": 7,
+            "passes": true,
+            "qualified_quadrants": [
+              0,
+              2,
+              3
+            ],
+            "sectors": 5
+          },
+          {
+            "chroma_p90": 0.9557291269302368,
+            "count": 31,
+            "luma_p90": 2.0989584922790527,
+            "median": 0.9822484254837036,
+            "old_count": 7,
+            "passes": true,
+            "qualified_quadrants": [
+              0,
+              2,
+              3
+            ],
+            "sectors": 5
+          }
+        ],
+        "native_anchor_frames": {
+          "after": 60,
+          "before": 52,
+          "during": 56
+        },
+        "prior_frames": [],
+        "role": "swap",
+        "source_scope": "video-face-scene-continuity-2026-11-12",
+        "useful": true
+      },
+      {
+        "added_useful": true,
+        "authored_frames": [
+          67,
+          73
+        ],
+        "candidate_frames": [
+          68,
+          74
+        ],
+        "fine_background": [
+          {
+            "chroma_p90": 1.078125,
+            "count": 31,
+            "luma_p90": 1.3125,
+            "median": 0.9958438873291016,
+            "old_count": 7,
+            "passes": true,
+            "qualified_quadrants": [
+              0,
+              2,
+              3
+            ],
+            "sectors": 5
+          },
+          {
+            "chroma_p90": 1.0130208730697632,
+            "count": 31,
+            "luma_p90": 1.6015625,
+            "median": 0.9924266338348389,
+            "old_count": 7,
+            "passes": true,
+            "qualified_quadrants": [
+              0,
+              2,
+              3
+            ],
+            "sectors": 5
+          }
+        ],
+        "native_anchor_frames": {
+          "after": 74,
+          "before": 66,
+          "during": 70
+        },
+        "prior_frames": [],
+        "role": "swap",
+        "source_scope": "video-face-scene-continuity-2026-11-12",
+        "useful": true
+      },
+      {
+        "added_useful": true,
+        "authored_frames": [
+          54,
+          60
+        ],
+        "candidate_frames": [
+          54,
+          60
+        ],
+        "fine_background": [
+          {
+            "chroma_p90": 1.3661458492279053,
+            "count": 29,
+            "luma_p90": 1.6781246662139893,
+            "median": 0.9908387660980225,
+            "old_count": 6,
+            "passes": true,
+            "qualified_quadrants": [
+              0,
+              2,
+              3
+            ],
+            "sectors": 5
+          },
+          {
+            "chroma_p90": 1.3078123331069946,
+            "count": 29,
+            "luma_p90": 1.8874995708465576,
+            "median": 0.9875513315200806,
+            "old_count": 6,
+            "passes": true,
+            "qualified_quadrants": [
+              0,
+              2,
+              3
+            ],
+            "sectors": 5
+          }
+        ],
+        "native_anchor_frames": {
+          "after": 60,
+          "before": 52,
+          "during": 56
+        },
+        "prior_frames": [],
+        "role": "swap",
+        "source_scope": "video-native-background-panel-2026-11-12",
+        "useful": true
+      },
+      {
+        "added_useful": true,
+        "authored_frames": [
+          67,
+          73
+        ],
+        "candidate_frames": [
+          68,
+          74
+        ],
+        "fine_background": [
+          {
+            "chroma_p90": 1.4671870470046997,
+            "count": 30,
+            "luma_p90": 1.7364577054977417,
+            "median": 0.988685131072998,
+            "old_count": 6,
+            "passes": true,
+            "qualified_quadrants": [
+              0,
+              2,
+              3
+            ],
+            "sectors": 5
+          },
+          {
+            "chroma_p90": 1.3635417222976685,
+            "count": 26,
+            "luma_p90": 1.393749713897705,
+            "median": 0.9945225119590759,
+            "old_count": 6,
+            "passes": true,
+            "qualified_quadrants": [
+              0,
+              2,
+              3
+            ],
+            "sectors": 4
+          }
+        ],
+        "native_anchor_frames": {
+          "after": 74,
+          "before": 66,
+          "during": 70
+        },
+        "prior_frames": [],
+        "role": "swap",
+        "source_scope": "video-native-background-panel-2026-11-12",
+        "useful": true
+      }
+    ],
+    "counts": {
+      "decisions_replayed": 31,
+      "exact_native_crops": 12,
+      "native_pictures_reopened": 3720,
+      "new_byte_identical_reconstructions": 2,
+      "recorded_face_inputs": 44,
+      "recorded_scene_edge_pictures": 16,
+      "selected_edges_with_measured_faces": 8,
+      "selected_fine_edges": 8
+    },
+    "status": "verified"
+  },
+  "independent_replay_sha256": "6abbf6fc76409b698836a241ae3a6d5f1d0e52160e885049834dfc628f5b3546",
+  "protocol": {
+    "authoring_shift_order": [
+      0,
+      2,
+      -2,
+      -4,
+      -6,
+      -8,
+      -10,
+      -12
+    ],
+    "candidate": "Preserve all existing ranges. When neither incumbent short pass produced a range, consider the same dense rank with the same face, response, duration and deduplication rules. Supplement only unavailable original scene edges using the frozen fine-grid checks. Keep every observed low-correlation rejection. A selected candidate needs at least one supplemented edge. Retry only after complete valid source measurement and within the original short-check budget.",
+    "gate": {
+      "maximum_added_cuts": 0,
+      "maximum_added_ordinary": 1,
+      "maximum_lost_prior_ranges": 0,
+      "minimum_added_useful": 3,
+      "minimum_positive_groups": 2,
+      "minimum_useful_iou": "1/2"
+    },
+    "new_swap_intervals": [
+      [
+        54,
+        60
+      ],
+      [
+        67,
+        73
+      ]
+    ],
+    "schema": "chipmunk.video-face-return-fine-scene/1",
+    "scope": "Exact upright 640x360 25 fps H.264 4:2:0 MP4s, 120 native pictures. Three known-key-separated low-texture source groups, independent of the g4/g7 development pair. These recordings appeared in other project studies.",
+    "selection": "Freeze five existing known short swap deliveries, eight exact ordinary cross-recording cuts and sixteen ordinary original/recompression/lighting/motion controls. Author two further six-picture swaps in one separately retained low-texture source. Try the fixed interval and preferred publisher variant first, alternate variant second, then the fixed shifts. Require every changed picture to differ from the authenticated same-time original before encoding. Never select on detector output."
+  },
+  "runtime": {
+    "elapsed_s": 154.37420500000007,
+    "freeze_sha256": "d79e5b0f992627b0e484e3b2824e007affcd3385a798d5a476f365fc2bae7fe9",
+    "journal_sha256": "b5ae9ea59c82639cb13b8c36f8faff80a1f6db71d231e70113a341dbdf9ccf89",
+    "score_cases": 31,
+    "scratch_port_parity_checks": 8
+  },
+  "scope": {
+    "held_source_groups": 3,
+    "known_source_or_donor_overlap_with_development_pair": 0,
+    "prior_project_exposure": true,
+    "source_groups_with_additions": 2
+  },
+  "serving_change": false,
+  "useful_source_groups": 2
+}

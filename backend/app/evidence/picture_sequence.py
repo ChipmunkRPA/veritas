@@ -17,8 +17,11 @@ MIN_SPAN = Fraction(1, 2)
 MAX_STEP = Fraction(1, 8)
 CONTEXT = "Loops, transitions and ordinary editing can repeat a moving sequence. This check carries zero weight in the AI estimate."
 MOTION_SCHEMA = "chipmunk.video-motion-sequence/1"
+MOTION_EXTENDED_SCHEMA = "chipmunk.video-motion-sequence/2"
+MOTION_SCHEMAS = frozenset({MOTION_SCHEMA, MOTION_EXTENDED_SCHEMA})
 MOTION_PACKET_ID = "VPR02"
 MOTION_PROFILES = {(320, 180): (20, 180), (640, 360): (25, 225)}
+MOTION_EXTENDED_PROFILES = {(640, 360): (25, 450)}
 MOTION_ENCODINGS = {("h264", "yuv420p"), ("vp9", "yuv420p")}
 MOTION_PARAMETERS = {
     "luma_grid": [40, 30], "maximum_picture_rms": 1.6, "minimum_motion_rms": .4,
@@ -26,6 +29,14 @@ MOTION_PARAMETERS = {
     "maximum_support_edge_step": 3, "minimum_support_fraction": .5, "minimum_span_seconds": .5,
 }
 _SHA = re.compile(r"[a-f0-9]{64}")
+
+
+def motion_profile(dimensions, schema):
+    if schema == MOTION_SCHEMA:
+        return MOTION_PROFILES.get(dimensions)
+    if schema == MOTION_EXTENDED_SCHEMA:
+        return MOTION_EXTENDED_PROFILES.get(dimensions)
+    return None
 
 
 def _steps(ticks, tb):
@@ -136,7 +147,7 @@ def _close(number, expected):
 
 def validate(cover, document):
     packets = [p for p in document["packets"] if p.get("id") in {PACKET_ID, MOTION_PACKET_ID} or "picture_sequence" in p
-               or p.get("claim_scope") == "paired_frame_sequences" or p.get("semantics") in {SCHEMA, MOTION_SCHEMA}]
+               or p.get("claim_scope") == "paired_frame_sequences" or p.get("semantics") in MOTION_SCHEMAS | {SCHEMA}]
     _require(all(p.get("id") in {PACKET_ID, MOTION_PACKET_ID} for p in packets), "Unexpected repeated sequence packet")
     exact = cover.get("sequence_review")
     motion = cover.get("motion_sequence_review")
@@ -146,14 +157,15 @@ def validate(cover, document):
                  "Repeated sequence lacks completed coverage")
     if motion is not None:
         source = document["source"]
-        profile = MOTION_PROFILES.get((source["width"], source["height"]))
-        _require(profile is not None, "Motion sequence has unsupported source dimensions")
+        schema = motion["schema"]
+        profile = motion_profile((source["width"], source["height"]), schema)
+        _require(profile is not None, "Motion sequence has unsupported source dimensions or method")
         motion_rate, limit = profile
         _require(exact is not None and cover["frames_scanned"] >= limit
-                 and motion["schema"] == MOTION_SCHEMA and motion["parameters"] == (MOTION_PARAMETERS | {"frame_rate": motion_rate})
+                 and motion["parameters"] == (MOTION_PARAMETERS | {"frame_rate": motion_rate})
                  and tuple(motion["encoding"]) in MOTION_ENCODINGS, "Motion sequence has unsupported source scope or parameters")
         if motion["status"] == "unavailable":
-            _require(motion["frames_scanned"] == 0 and (motion["reason"] == "source_clock"
+            _require(schema == MOTION_SCHEMA and motion["frames_scanned"] == 0 and (motion["reason"] == "source_clock"
                      or (motion["reason"] == "exact_sequence" and exact["status"] == "matched")),
                      "Motion sequence has an invalid skipped outcome")
         else:
@@ -170,8 +182,8 @@ def _validate_pair(record, source, scanned, packets, *, motion_rate=None):
         _require(not packets, "Repeated sequence lacks a recorded scan")
         return
     motion = motion_rate is not None
-    schema = MOTION_SCHEMA if motion else SCHEMA
-    _require(record["schema"] == schema, "Repeated sequence lacks completed coverage")
+    schema = record["schema"]
+    _require(schema in MOTION_SCHEMAS if motion else schema == SCHEMA, "Repeated sequence lacks completed coverage")
     if record["status"] != "matched":
         _require(record["status"] in {"unavailable", "no_match"} and record["pair"] is None and not packets,
                  "Repeated sequence evidence disagrees with its status")
@@ -193,6 +205,9 @@ def _validate_pair(record, source, scanned, packets, *, motion_rate=None):
         unique = pair["unique_pictures"]
         _require(type(unique) is int and MIN_UNIQUE <= unique <= count, "Repeated sequence lacks distinct pictures")
     spans = (pair["first"], pair["second"])
+    if schema == MOTION_EXTENDED_SCHEMA:
+        _, opening_limit = MOTION_PROFILES[(source["width"], source["height"])]
+        _require(spans[1]["end_frame_index"] >= opening_limit, "Extended motion sequence lies wholly inside the opening scope")
     _require(spans[0]["end_frame_index"] < spans[1]["start_frame_index"], "Repeated sequences overlap")
     intervals = []
     for span in spans:
@@ -236,7 +251,14 @@ def _validate_pair(record, source, scanned, packets, *, motion_rate=None):
                  and frame["artifact_refs"] == {"original": ref, "context": ref}, "Repeated sequence endpoint differs from its image or clock")
 
 
-def validate_clock(record, table_pts: Sequence[int], interpolated: Sequence[int]):
+def validate_clock(record, table_pts: Sequence[int], interpolated: Sequence[int], *, tb: Fraction):
+    if record and record["schema"] == MOTION_EXTENDED_SCHEMA:
+        limit = record["frames_scanned"]
+        pts = table_pts[:limit]
+        step = Fraction(1, record["parameters"]["frame_rate"])
+        _require(len(pts) == limit and not set(interpolated).intersection(range(limit))
+                 and all((b - a) * tb == step for a, b in zip(pts, pts[1:])),
+                 "Extended motion sequence lacks a complete verified native clock")
     if not record or record["pair"] is None:
         return
     inferred = set(interpolated)

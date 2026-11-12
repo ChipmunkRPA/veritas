@@ -1,0 +1,2576 @@
+{
+  "admitted": true,
+  "freeze_sha256": "193bf5b21ed164129df66e72b37d2afda76df00219639100fe59bfc7d8f3d57a",
+  "metrics": {
+    "h264": {
+      "added_flags": {},
+      "cases": 72,
+      "continuous_full_clock": 63,
+      "controls": 36,
+      "extension_useful": {
+        "camera_late_both": 3,
+        "camera_late_cross": 2,
+        "camera_opening": 3,
+        "camera_opening_after_gap": 3,
+        "publisher_late_both": 5,
+        "publisher_late_cross": 5,
+        "publisher_opening": 6,
+        "publisher_opening_after_gap": 6
+      },
+      "lost_existing": 0,
+      "opening_flags": {
+        "cut": 1,
+        "hold": 1,
+        "ordinary": 1,
+        "reverse": 1
+      },
+      "opening_useful": {
+        "camera_late_both": 0,
+        "camera_late_cross": 0,
+        "camera_opening": 3,
+        "camera_opening_after_gap": 3,
+        "publisher_late_both": 0,
+        "publisher_late_cross": 0,
+        "publisher_opening": 6,
+        "publisher_opening_after_gap": 6
+      }
+    },
+    "vp9": {
+      "added_flags": {},
+      "cases": 72,
+      "continuous_full_clock": 63,
+      "controls": 36,
+      "extension_useful": {
+        "camera_late_both": 3,
+        "camera_late_cross": 2,
+        "camera_opening": 3,
+        "camera_opening_after_gap": 3,
+        "publisher_late_both": 5,
+        "publisher_late_cross": 5,
+        "publisher_opening": 6,
+        "publisher_opening_after_gap": 6
+      },
+      "lost_existing": 0,
+      "opening_flags": {
+        "cut": 1,
+        "hold": 1,
+        "ordinary": 1,
+        "reverse": 1
+      },
+      "opening_useful": {
+        "camera_late_both": 0,
+        "camera_late_cross": 0,
+        "camera_opening": 3,
+        "camera_opening_after_gap": 3,
+        "publisher_late_both": 0,
+        "publisher_late_cross": 0,
+        "publisher_opening": 6,
+        "publisher_opening_after_gap": 6
+      }
+    }
+  },
+  "parameters": {
+    "luma_grid": [
+      40,
+      30
+    ],
+    "maximum_picture_rms": 1.6,
+    "maximum_support_edge_step": 3,
+    "minimum_motion_cosine": 0.65,
+    "minimum_motion_rms": 0.4,
+    "minimum_motion_rms_ratio": 0.55,
+    "minimum_span_seconds": 0.5,
+    "minimum_support_fraction": 0.5,
+    "minimum_supporting_edges": 8
+  },
+  "rows": [
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": [
+        42,
+        64,
+        288,
+        310
+      ],
+      "full_clock": true,
+      "opening": null,
+      "role": "late_cross",
+      "source": "cat",
+      "truth": [
+        42,
+        64,
+        288,
+        310
+      ]
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": [
+        240,
+        262,
+        382,
+        404
+      ],
+      "full_clock": true,
+      "opening": null,
+      "role": "late_both",
+      "source": "cat",
+      "truth": [
+        240,
+        262,
+        382,
+        404
+      ]
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": [
+        24,
+        46,
+        151,
+        173
+      ],
+      "role": "opening",
+      "source": "cat",
+      "truth": [
+        24,
+        46,
+        151,
+        173
+      ]
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": false,
+      "opening": [
+        24,
+        46,
+        151,
+        173
+      ],
+      "role": "opening_after_gap",
+      "source": "cat",
+      "truth": [
+        24,
+        46,
+        151,
+        173
+      ]
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "ordinary",
+      "source": "cat",
+      "truth": null
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "cut",
+      "source": "cat",
+      "truth": null
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "hold",
+      "source": "cat",
+      "truth": null
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "reverse",
+      "source": "cat",
+      "truth": null
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": [
+        42,
+        64,
+        288,
+        310
+      ],
+      "full_clock": true,
+      "opening": null,
+      "role": "late_cross",
+      "source": "cat",
+      "truth": [
+        42,
+        64,
+        288,
+        310
+      ]
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": [
+        240,
+        262,
+        382,
+        404
+      ],
+      "full_clock": true,
+      "opening": null,
+      "role": "late_both",
+      "source": "cat",
+      "truth": [
+        240,
+        262,
+        382,
+        404
+      ]
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": [
+        24,
+        46,
+        151,
+        173
+      ],
+      "role": "opening",
+      "source": "cat",
+      "truth": [
+        24,
+        46,
+        151,
+        173
+      ]
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": false,
+      "opening": [
+        24,
+        46,
+        151,
+        173
+      ],
+      "role": "opening_after_gap",
+      "source": "cat",
+      "truth": [
+        24,
+        46,
+        151,
+        173
+      ]
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "ordinary",
+      "source": "cat",
+      "truth": null
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "cut",
+      "source": "cat",
+      "truth": null
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "hold",
+      "source": "cat",
+      "truth": null
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "reverse",
+      "source": "cat",
+      "truth": null
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": [
+        46,
+        72,
+        291,
+        317
+      ],
+      "full_clock": true,
+      "opening": null,
+      "role": "late_cross",
+      "source": "rain",
+      "truth": [
+        46,
+        72,
+        291,
+        317
+      ]
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": [
+        241,
+        267,
+        383,
+        409
+      ],
+      "full_clock": true,
+      "opening": null,
+      "role": "late_both",
+      "source": "rain",
+      "truth": [
+        241,
+        267,
+        383,
+        409
+      ]
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": [
+        25,
+        51,
+        152,
+        178
+      ],
+      "role": "opening",
+      "source": "rain",
+      "truth": [
+        25,
+        51,
+        152,
+        178
+      ]
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": false,
+      "opening": [
+        25,
+        51,
+        152,
+        178
+      ],
+      "role": "opening_after_gap",
+      "source": "rain",
+      "truth": [
+        25,
+        51,
+        152,
+        178
+      ]
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "ordinary",
+      "source": "rain",
+      "truth": null
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "cut",
+      "source": "rain",
+      "truth": null
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "hold",
+      "source": "rain",
+      "truth": null
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "reverse",
+      "source": "rain",
+      "truth": null
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": [
+        46,
+        72,
+        291,
+        317
+      ],
+      "full_clock": true,
+      "opening": null,
+      "role": "late_cross",
+      "source": "rain",
+      "truth": [
+        46,
+        72,
+        291,
+        317
+      ]
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": [
+        241,
+        267,
+        383,
+        409
+      ],
+      "full_clock": true,
+      "opening": null,
+      "role": "late_both",
+      "source": "rain",
+      "truth": [
+        241,
+        267,
+        383,
+        409
+      ]
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": [
+        25,
+        51,
+        152,
+        178
+      ],
+      "role": "opening",
+      "source": "rain",
+      "truth": [
+        25,
+        51,
+        152,
+        178
+      ]
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": false,
+      "opening": [
+        25,
+        51,
+        152,
+        178
+      ],
+      "role": "opening_after_gap",
+      "source": "rain",
+      "truth": [
+        25,
+        51,
+        152,
+        178
+      ]
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "ordinary",
+      "source": "rain",
+      "truth": null
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "cut",
+      "source": "rain",
+      "truth": null
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "hold",
+      "source": "rain",
+      "truth": null
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "reverse",
+      "source": "rain",
+      "truth": null
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": [
+        50,
+        80,
+        294,
+        324
+      ],
+      "full_clock": true,
+      "opening": null,
+      "role": "late_cross",
+      "source": "train",
+      "truth": [
+        50,
+        80,
+        294,
+        324
+      ]
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": [
+        242,
+        272,
+        384,
+        414
+      ],
+      "full_clock": true,
+      "opening": null,
+      "role": "late_both",
+      "source": "train",
+      "truth": [
+        242,
+        272,
+        384,
+        414
+      ]
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": [
+        26,
+        56,
+        153,
+        183
+      ],
+      "role": "opening",
+      "source": "train",
+      "truth": [
+        26,
+        56,
+        153,
+        183
+      ]
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": false,
+      "opening": [
+        26,
+        56,
+        153,
+        183
+      ],
+      "role": "opening_after_gap",
+      "source": "train",
+      "truth": [
+        26,
+        56,
+        153,
+        183
+      ]
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "ordinary",
+      "source": "train",
+      "truth": null
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "cut",
+      "source": "train",
+      "truth": null
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "hold",
+      "source": "train",
+      "truth": null
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "reverse",
+      "source": "train",
+      "truth": null
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": [
+        50,
+        80,
+        294,
+        324
+      ],
+      "full_clock": true,
+      "opening": null,
+      "role": "late_cross",
+      "source": "train",
+      "truth": [
+        50,
+        80,
+        294,
+        324
+      ]
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": [
+        242,
+        272,
+        384,
+        414
+      ],
+      "full_clock": true,
+      "opening": null,
+      "role": "late_both",
+      "source": "train",
+      "truth": [
+        242,
+        272,
+        384,
+        414
+      ]
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": [
+        26,
+        56,
+        153,
+        183
+      ],
+      "role": "opening",
+      "source": "train",
+      "truth": [
+        26,
+        56,
+        153,
+        183
+      ]
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": false,
+      "opening": [
+        26,
+        56,
+        153,
+        183
+      ],
+      "role": "opening_after_gap",
+      "source": "train",
+      "truth": [
+        26,
+        56,
+        153,
+        183
+      ]
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "ordinary",
+      "source": "train",
+      "truth": null
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "cut",
+      "source": "train",
+      "truth": null
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "hold",
+      "source": "train",
+      "truth": null
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "reverse",
+      "source": "train",
+      "truth": null
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": [
+        54,
+        76,
+        297,
+        319
+      ],
+      "full_clock": true,
+      "opening": null,
+      "role": "late_cross",
+      "source": "grain",
+      "truth": [
+        54,
+        76,
+        297,
+        319
+      ]
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": [
+        243,
+        265,
+        385,
+        407
+      ],
+      "full_clock": true,
+      "opening": null,
+      "role": "late_both",
+      "source": "grain",
+      "truth": [
+        243,
+        265,
+        385,
+        407
+      ]
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": [
+        27,
+        49,
+        154,
+        176
+      ],
+      "role": "opening",
+      "source": "grain",
+      "truth": [
+        27,
+        49,
+        154,
+        176
+      ]
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": false,
+      "opening": [
+        27,
+        49,
+        154,
+        176
+      ],
+      "role": "opening_after_gap",
+      "source": "grain",
+      "truth": [
+        27,
+        49,
+        154,
+        176
+      ]
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "ordinary",
+      "source": "grain",
+      "truth": null
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "cut",
+      "source": "grain",
+      "truth": null
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "hold",
+      "source": "grain",
+      "truth": null
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "reverse",
+      "source": "grain",
+      "truth": null
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": [
+        54,
+        76,
+        297,
+        319
+      ],
+      "full_clock": true,
+      "opening": null,
+      "role": "late_cross",
+      "source": "grain",
+      "truth": [
+        54,
+        76,
+        297,
+        319
+      ]
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": [
+        243,
+        265,
+        385,
+        407
+      ],
+      "full_clock": true,
+      "opening": null,
+      "role": "late_both",
+      "source": "grain",
+      "truth": [
+        243,
+        265,
+        385,
+        407
+      ]
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": [
+        27,
+        49,
+        154,
+        176
+      ],
+      "role": "opening",
+      "source": "grain",
+      "truth": [
+        27,
+        49,
+        154,
+        176
+      ]
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": false,
+      "opening": [
+        27,
+        49,
+        154,
+        176
+      ],
+      "role": "opening_after_gap",
+      "source": "grain",
+      "truth": [
+        27,
+        49,
+        154,
+        176
+      ]
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "ordinary",
+      "source": "grain",
+      "truth": null
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "cut",
+      "source": "grain",
+      "truth": null
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "hold",
+      "source": "grain",
+      "truth": null
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "reverse",
+      "source": "grain",
+      "truth": null
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": [
+        167,
+        187,
+        190,
+        210
+      ],
+      "role": "late_cross",
+      "source": "sprint",
+      "truth": [
+        58,
+        84,
+        300,
+        326
+      ]
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": [
+        167,
+        187,
+        190,
+        210
+      ],
+      "role": "late_both",
+      "source": "sprint",
+      "truth": [
+        244,
+        270,
+        386,
+        412
+      ]
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": [
+        28,
+        54,
+        155,
+        181
+      ],
+      "role": "opening",
+      "source": "sprint",
+      "truth": [
+        28,
+        54,
+        155,
+        181
+      ]
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": false,
+      "opening": [
+        28,
+        54,
+        155,
+        181
+      ],
+      "role": "opening_after_gap",
+      "source": "sprint",
+      "truth": [
+        28,
+        54,
+        155,
+        181
+      ]
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": [
+        167,
+        187,
+        190,
+        210
+      ],
+      "role": "ordinary",
+      "source": "sprint",
+      "truth": null
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": [
+        167,
+        187,
+        190,
+        210
+      ],
+      "role": "cut",
+      "source": "sprint",
+      "truth": null
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": [
+        167,
+        187,
+        190,
+        210
+      ],
+      "role": "hold",
+      "source": "sprint",
+      "truth": null
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": [
+        167,
+        187,
+        190,
+        210
+      ],
+      "role": "reverse",
+      "source": "sprint",
+      "truth": null
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": [
+        167,
+        187,
+        190,
+        210
+      ],
+      "role": "late_cross",
+      "source": "sprint",
+      "truth": [
+        58,
+        84,
+        300,
+        326
+      ]
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": [
+        167,
+        187,
+        190,
+        210
+      ],
+      "role": "late_both",
+      "source": "sprint",
+      "truth": [
+        244,
+        270,
+        386,
+        412
+      ]
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": [
+        28,
+        54,
+        155,
+        181
+      ],
+      "role": "opening",
+      "source": "sprint",
+      "truth": [
+        28,
+        54,
+        155,
+        181
+      ]
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": false,
+      "opening": [
+        28,
+        54,
+        155,
+        181
+      ],
+      "role": "opening_after_gap",
+      "source": "sprint",
+      "truth": [
+        28,
+        54,
+        155,
+        181
+      ]
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": [
+        167,
+        187,
+        190,
+        210
+      ],
+      "role": "ordinary",
+      "source": "sprint",
+      "truth": null
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": [
+        167,
+        187,
+        190,
+        210
+      ],
+      "role": "cut",
+      "source": "sprint",
+      "truth": null
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": [
+        167,
+        187,
+        190,
+        210
+      ],
+      "role": "hold",
+      "source": "sprint",
+      "truth": null
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": [
+        167,
+        187,
+        190,
+        210
+      ],
+      "role": "reverse",
+      "source": "sprint",
+      "truth": null
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": [
+        62,
+        92,
+        303,
+        333
+      ],
+      "full_clock": true,
+      "opening": null,
+      "role": "late_cross",
+      "source": "training",
+      "truth": [
+        62,
+        92,
+        303,
+        333
+      ]
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": [
+        245,
+        275,
+        387,
+        417
+      ],
+      "full_clock": true,
+      "opening": null,
+      "role": "late_both",
+      "source": "training",
+      "truth": [
+        245,
+        275,
+        387,
+        417
+      ]
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": [
+        24,
+        54,
+        156,
+        186
+      ],
+      "role": "opening",
+      "source": "training",
+      "truth": [
+        24,
+        54,
+        156,
+        186
+      ]
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": false,
+      "opening": [
+        24,
+        54,
+        156,
+        186
+      ],
+      "role": "opening_after_gap",
+      "source": "training",
+      "truth": [
+        24,
+        54,
+        156,
+        186
+      ]
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "ordinary",
+      "source": "training",
+      "truth": null
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "cut",
+      "source": "training",
+      "truth": null
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "hold",
+      "source": "training",
+      "truth": null
+    },
+    {
+      "codec": "h264",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "reverse",
+      "source": "training",
+      "truth": null
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": [
+        62,
+        92,
+        303,
+        333
+      ],
+      "full_clock": true,
+      "opening": null,
+      "role": "late_cross",
+      "source": "training",
+      "truth": [
+        62,
+        92,
+        303,
+        333
+      ]
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": [
+        245,
+        275,
+        387,
+        417
+      ],
+      "full_clock": true,
+      "opening": null,
+      "role": "late_both",
+      "source": "training",
+      "truth": [
+        245,
+        275,
+        387,
+        417
+      ]
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": [
+        24,
+        54,
+        156,
+        186
+      ],
+      "role": "opening",
+      "source": "training",
+      "truth": [
+        24,
+        54,
+        156,
+        186
+      ]
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": false,
+      "opening": [
+        24,
+        54,
+        156,
+        186
+      ],
+      "role": "opening_after_gap",
+      "source": "training",
+      "truth": [
+        24,
+        54,
+        156,
+        186
+      ]
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "ordinary",
+      "source": "training",
+      "truth": null
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "cut",
+      "source": "training",
+      "truth": null
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "hold",
+      "source": "training",
+      "truth": null
+    },
+    {
+      "codec": "vp9",
+      "cohort": "publisher",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "reverse",
+      "source": "training",
+      "truth": null
+    },
+    {
+      "codec": "h264",
+      "cohort": "camera",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "late_cross",
+      "source": "camera-01-05",
+      "truth": [
+        66,
+        88,
+        306,
+        328
+      ]
+    },
+    {
+      "codec": "h264",
+      "cohort": "camera",
+      "exact": null,
+      "extension": [
+        246,
+        268,
+        388,
+        410
+      ],
+      "full_clock": true,
+      "opening": null,
+      "role": "late_both",
+      "source": "camera-01-05",
+      "truth": [
+        246,
+        268,
+        388,
+        410
+      ]
+    },
+    {
+      "codec": "h264",
+      "cohort": "camera",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": [
+        25,
+        47,
+        157,
+        179
+      ],
+      "role": "opening",
+      "source": "camera-01-05",
+      "truth": [
+        25,
+        47,
+        157,
+        179
+      ]
+    },
+    {
+      "codec": "h264",
+      "cohort": "camera",
+      "exact": null,
+      "extension": null,
+      "full_clock": false,
+      "opening": [
+        25,
+        47,
+        157,
+        179
+      ],
+      "role": "opening_after_gap",
+      "source": "camera-01-05",
+      "truth": [
+        25,
+        47,
+        157,
+        179
+      ]
+    },
+    {
+      "codec": "h264",
+      "cohort": "camera",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "ordinary",
+      "source": "camera-01-05",
+      "truth": null
+    },
+    {
+      "codec": "h264",
+      "cohort": "camera",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "cut",
+      "source": "camera-01-05",
+      "truth": null
+    },
+    {
+      "codec": "h264",
+      "cohort": "camera",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "hold",
+      "source": "camera-01-05",
+      "truth": null
+    },
+    {
+      "codec": "h264",
+      "cohort": "camera",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "reverse",
+      "source": "camera-01-05",
+      "truth": null
+    },
+    {
+      "codec": "vp9",
+      "cohort": "camera",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "late_cross",
+      "source": "camera-01-05",
+      "truth": [
+        66,
+        88,
+        306,
+        328
+      ]
+    },
+    {
+      "codec": "vp9",
+      "cohort": "camera",
+      "exact": null,
+      "extension": [
+        246,
+        268,
+        388,
+        410
+      ],
+      "full_clock": true,
+      "opening": null,
+      "role": "late_both",
+      "source": "camera-01-05",
+      "truth": [
+        246,
+        268,
+        388,
+        410
+      ]
+    },
+    {
+      "codec": "vp9",
+      "cohort": "camera",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": [
+        25,
+        47,
+        157,
+        179
+      ],
+      "role": "opening",
+      "source": "camera-01-05",
+      "truth": [
+        25,
+        47,
+        157,
+        179
+      ]
+    },
+    {
+      "codec": "vp9",
+      "cohort": "camera",
+      "exact": null,
+      "extension": null,
+      "full_clock": false,
+      "opening": [
+        25,
+        47,
+        157,
+        179
+      ],
+      "role": "opening_after_gap",
+      "source": "camera-01-05",
+      "truth": [
+        25,
+        47,
+        157,
+        179
+      ]
+    },
+    {
+      "codec": "vp9",
+      "cohort": "camera",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "ordinary",
+      "source": "camera-01-05",
+      "truth": null
+    },
+    {
+      "codec": "vp9",
+      "cohort": "camera",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "cut",
+      "source": "camera-01-05",
+      "truth": null
+    },
+    {
+      "codec": "vp9",
+      "cohort": "camera",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "hold",
+      "source": "camera-01-05",
+      "truth": null
+    },
+    {
+      "codec": "vp9",
+      "cohort": "camera",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "reverse",
+      "source": "camera-01-05",
+      "truth": null
+    },
+    {
+      "codec": "h264",
+      "cohort": "camera",
+      "exact": null,
+      "extension": [
+        70,
+        96,
+        309,
+        335
+      ],
+      "full_clock": true,
+      "opening": null,
+      "role": "late_cross",
+      "source": "camera-03-06",
+      "truth": [
+        70,
+        96,
+        309,
+        335
+      ]
+    },
+    {
+      "codec": "h264",
+      "cohort": "camera",
+      "exact": null,
+      "extension": [
+        247,
+        268,
+        389,
+        410
+      ],
+      "full_clock": true,
+      "opening": null,
+      "role": "late_both",
+      "source": "camera-03-06",
+      "truth": [
+        247,
+        273,
+        389,
+        415
+      ]
+    },
+    {
+      "codec": "h264",
+      "cohort": "camera",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": [
+        26,
+        52,
+        158,
+        184
+      ],
+      "role": "opening",
+      "source": "camera-03-06",
+      "truth": [
+        26,
+        52,
+        158,
+        184
+      ]
+    },
+    {
+      "codec": "h264",
+      "cohort": "camera",
+      "exact": null,
+      "extension": null,
+      "full_clock": false,
+      "opening": [
+        26,
+        52,
+        158,
+        184
+      ],
+      "role": "opening_after_gap",
+      "source": "camera-03-06",
+      "truth": [
+        26,
+        52,
+        158,
+        184
+      ]
+    },
+    {
+      "codec": "h264",
+      "cohort": "camera",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "ordinary",
+      "source": "camera-03-06",
+      "truth": null
+    },
+    {
+      "codec": "h264",
+      "cohort": "camera",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "cut",
+      "source": "camera-03-06",
+      "truth": null
+    },
+    {
+      "codec": "h264",
+      "cohort": "camera",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "hold",
+      "source": "camera-03-06",
+      "truth": null
+    },
+    {
+      "codec": "h264",
+      "cohort": "camera",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "reverse",
+      "source": "camera-03-06",
+      "truth": null
+    },
+    {
+      "codec": "vp9",
+      "cohort": "camera",
+      "exact": null,
+      "extension": [
+        70,
+        96,
+        309,
+        335
+      ],
+      "full_clock": true,
+      "opening": null,
+      "role": "late_cross",
+      "source": "camera-03-06",
+      "truth": [
+        70,
+        96,
+        309,
+        335
+      ]
+    },
+    {
+      "codec": "vp9",
+      "cohort": "camera",
+      "exact": null,
+      "extension": [
+        247,
+        268,
+        389,
+        410
+      ],
+      "full_clock": true,
+      "opening": null,
+      "role": "late_both",
+      "source": "camera-03-06",
+      "truth": [
+        247,
+        273,
+        389,
+        415
+      ]
+    },
+    {
+      "codec": "vp9",
+      "cohort": "camera",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": [
+        26,
+        52,
+        158,
+        184
+      ],
+      "role": "opening",
+      "source": "camera-03-06",
+      "truth": [
+        26,
+        52,
+        158,
+        184
+      ]
+    },
+    {
+      "codec": "vp9",
+      "cohort": "camera",
+      "exact": null,
+      "extension": null,
+      "full_clock": false,
+      "opening": [
+        26,
+        52,
+        158,
+        184
+      ],
+      "role": "opening_after_gap",
+      "source": "camera-03-06",
+      "truth": [
+        26,
+        52,
+        158,
+        184
+      ]
+    },
+    {
+      "codec": "vp9",
+      "cohort": "camera",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "ordinary",
+      "source": "camera-03-06",
+      "truth": null
+    },
+    {
+      "codec": "vp9",
+      "cohort": "camera",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "cut",
+      "source": "camera-03-06",
+      "truth": null
+    },
+    {
+      "codec": "vp9",
+      "cohort": "camera",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "hold",
+      "source": "camera-03-06",
+      "truth": null
+    },
+    {
+      "codec": "vp9",
+      "cohort": "camera",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "reverse",
+      "source": "camera-03-06",
+      "truth": null
+    },
+    {
+      "codec": "h264",
+      "cohort": "camera",
+      "exact": null,
+      "extension": [
+        74,
+        104,
+        312,
+        342
+      ],
+      "full_clock": true,
+      "opening": null,
+      "role": "late_cross",
+      "source": "camera-08-11",
+      "truth": [
+        74,
+        104,
+        312,
+        342
+      ]
+    },
+    {
+      "codec": "h264",
+      "cohort": "camera",
+      "exact": null,
+      "extension": [
+        262,
+        278,
+        404,
+        420
+      ],
+      "full_clock": true,
+      "opening": null,
+      "role": "late_both",
+      "source": "camera-08-11",
+      "truth": [
+        248,
+        278,
+        390,
+        420
+      ]
+    },
+    {
+      "codec": "h264",
+      "cohort": "camera",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": [
+        27,
+        57,
+        159,
+        189
+      ],
+      "role": "opening",
+      "source": "camera-08-11",
+      "truth": [
+        27,
+        57,
+        159,
+        189
+      ]
+    },
+    {
+      "codec": "h264",
+      "cohort": "camera",
+      "exact": null,
+      "extension": null,
+      "full_clock": false,
+      "opening": [
+        27,
+        57,
+        159,
+        189
+      ],
+      "role": "opening_after_gap",
+      "source": "camera-08-11",
+      "truth": [
+        27,
+        57,
+        159,
+        189
+      ]
+    },
+    {
+      "codec": "h264",
+      "cohort": "camera",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "ordinary",
+      "source": "camera-08-11",
+      "truth": null
+    },
+    {
+      "codec": "h264",
+      "cohort": "camera",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "cut",
+      "source": "camera-08-11",
+      "truth": null
+    },
+    {
+      "codec": "h264",
+      "cohort": "camera",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "hold",
+      "source": "camera-08-11",
+      "truth": null
+    },
+    {
+      "codec": "h264",
+      "cohort": "camera",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "reverse",
+      "source": "camera-08-11",
+      "truth": null
+    },
+    {
+      "codec": "vp9",
+      "cohort": "camera",
+      "exact": null,
+      "extension": [
+        74,
+        104,
+        312,
+        342
+      ],
+      "full_clock": true,
+      "opening": null,
+      "role": "late_cross",
+      "source": "camera-08-11",
+      "truth": [
+        74,
+        104,
+        312,
+        342
+      ]
+    },
+    {
+      "codec": "vp9",
+      "cohort": "camera",
+      "exact": null,
+      "extension": [
+        261,
+        278,
+        403,
+        420
+      ],
+      "full_clock": true,
+      "opening": null,
+      "role": "late_both",
+      "source": "camera-08-11",
+      "truth": [
+        248,
+        278,
+        390,
+        420
+      ]
+    },
+    {
+      "codec": "vp9",
+      "cohort": "camera",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": [
+        27,
+        57,
+        159,
+        189
+      ],
+      "role": "opening",
+      "source": "camera-08-11",
+      "truth": [
+        27,
+        57,
+        159,
+        189
+      ]
+    },
+    {
+      "codec": "vp9",
+      "cohort": "camera",
+      "exact": null,
+      "extension": null,
+      "full_clock": false,
+      "opening": [
+        27,
+        57,
+        159,
+        189
+      ],
+      "role": "opening_after_gap",
+      "source": "camera-08-11",
+      "truth": [
+        27,
+        57,
+        159,
+        189
+      ]
+    },
+    {
+      "codec": "vp9",
+      "cohort": "camera",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "ordinary",
+      "source": "camera-08-11",
+      "truth": null
+    },
+    {
+      "codec": "vp9",
+      "cohort": "camera",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "cut",
+      "source": "camera-08-11",
+      "truth": null
+    },
+    {
+      "codec": "vp9",
+      "cohort": "camera",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "hold",
+      "source": "camera-08-11",
+      "truth": null
+    },
+    {
+      "codec": "vp9",
+      "cohort": "camera",
+      "exact": null,
+      "extension": null,
+      "full_clock": true,
+      "opening": null,
+      "role": "reverse",
+      "source": "camera-08-11",
+      "truth": null
+    }
+  ],
+  "schema": "chipmunk.video-motion-late-transfer/1",
+  "sources": [
+    {
+      "cohort": "publisher",
+      "files": [
+        {
+          "author": "NairobiPapel (Kamaa)",
+          "download": "https://upload.wikimedia.org/wikipedia/commons/f/f2/Cat_Play.webm",
+          "frames": 450,
+          "page": "https://commons.wikimedia.org/wiki/File:Cat_Play.webm",
+          "sha256": "d531de2ec5362e808722752a78f07310c6779217602eb6f078233c5c06eff4b9",
+          "start": 5,
+          "terms": "CC BY-SA 4.0"
+        }
+      ],
+      "name": "cat"
+    },
+    {
+      "cohort": "publisher",
+      "files": [
+        {
+          "author": "Obed Makolo",
+          "download": "https://upload.wikimedia.org/wikipedia/commons/0/05/Water_flowing_in_a_channel_during_rainfall.webm",
+          "frames": 450,
+          "page": "https://commons.wikimedia.org/wiki/File:Water_flowing_in_a_channel_during_rainfall.webm",
+          "sha256": "2069e103777dc507c9af69bb1af9f9ed9006c16f459bf2e4c9e5186f16ef6bfd",
+          "start": 0,
+          "terms": "CC BY-SA 4.0"
+        }
+      ],
+      "name": "rain"
+    },
+    {
+      "cohort": "publisher",
+      "files": [
+        {
+          "author": "Ludovic Hirlimann",
+          "download": "https://upload.wikimedia.org/wikipedia/commons/6/6d/Train_arriving_in_UlaanBaatar_.webm",
+          "frames": 450,
+          "page": "https://commons.wikimedia.org/wiki/File:Train_arriving_in_UlaanBaatar_.webm",
+          "sha256": "8f9442610060ea8b1ab8cfb20f8601d1a72441b92756bf44ccd66e6a6eb0dbeb",
+          "start": 9,
+          "terms": "CC BY-SA 4.0"
+        }
+      ],
+      "name": "train"
+    },
+    {
+      "cohort": "publisher",
+      "files": [
+        {
+          "author": "Nolanus",
+          "download": "https://upload.wikimedia.org/wikipedia/commons/d/d8/Video_2025-11-30_at_3.28.25_AM.webm",
+          "frames": 450,
+          "page": "https://commons.wikimedia.org/wiki/File:Video_2025-11-30_at_3.28.25_AM.webm",
+          "sha256": "cc663ddcefb6befc6e7606ca0502a62f91426cbe92cca932d4b2a97a2cc66612",
+          "start": 3,
+          "terms": "CC0 1.0"
+        }
+      ],
+      "name": "grain"
+    },
+    {
+      "cohort": "publisher",
+      "files": [
+        {
+          "author": "SRF/Einstein/Anatol Hug, Peter H\u00f6llrigl",
+          "download": "https://upload.wikimedia.org/wikipedia/commons/6/62/Was_passiert_bei_einem_Sprint.webm",
+          "frames": 450,
+          "page": "https://commons.wikimedia.org/wiki/File:Was_passiert_bei_einem_Sprint.webm",
+          "sha256": "40fb260d941ae5a1edd9bd8a624ad2f899f7b421d89bcc706a9582ca9cd354ff",
+          "start": 20,
+          "terms": "CC BY-SA 4.0"
+        }
+      ],
+      "name": "sprint"
+    },
+    {
+      "cohort": "publisher",
+      "files": [
+        {
+          "author": "Dallas J Plummer",
+          "download": "https://upload.wikimedia.org/wikipedia/commons/a/ae/New_York_Personal_Trainer_Joshua_Bailey_Circuit_Training.webm",
+          "frames": 450,
+          "page": "https://commons.wikimedia.org/wiki/File:New_York_Personal_Trainer_Joshua_Bailey_Circuit_Training.webm",
+          "sha256": "c72253267878540d1b17a015e55ad87bb323274b06eec29b09e9f164a49c3afc",
+          "start": 20,
+          "terms": "CC BY-SA 4.0"
+        }
+      ],
+      "name": "training"
+    },
+    {
+      "cohort": "camera",
+      "files": [
+        {
+          "frames": 225,
+          "sha256": "5c948cbf162db7f21d8a1f79de8a558fd46fb7450557f1b493a329a7ca2b4c09",
+          "slot": 1,
+          "start": 0
+        },
+        {
+          "frames": 225,
+          "sha256": "5424783d7fa9d1b7efbc19f2ff0f75bcb1f7dbc39b0cf81585065a6195f72148",
+          "slot": 5,
+          "start": 0
+        }
+      ],
+      "name": "camera-01-05"
+    },
+    {
+      "cohort": "camera",
+      "files": [
+        {
+          "frames": 225,
+          "sha256": "59b622217a1b9fb8cc6241e0883dace4f0004471803134e731097a0b1101f93d",
+          "slot": 3,
+          "start": 0
+        },
+        {
+          "frames": 225,
+          "sha256": "fd8c414384d5478610d08496199dbd7f2a0c3bc1506e80a95b10e7f2b439f385",
+          "slot": 6,
+          "start": 0
+        }
+      ],
+      "name": "camera-03-06"
+    },
+    {
+      "cohort": "camera",
+      "files": [
+        {
+          "frames": 225,
+          "sha256": "2a8d01b821e8efb513b2d6d3bad9865487b8b49ef01d12a9863a385029458e81",
+          "slot": 8,
+          "start": 0
+        },
+        {
+          "frames": 225,
+          "sha256": "87d9864e2a86d857aea76a00b04408ed5c7cf33e5408089312ba4b4c21fc66e5",
+          "slot": 11,
+          "start": 0
+        }
+      ],
+      "name": "camera-08-11"
+    }
+  ],
+  "verification": {
+    "deliveries": 144,
+    "max_decode_and_describe_s": 2.7025560830006725,
+    "max_motion_comparison_s": 0.03362058399943635,
+    "native_pictures": 64800,
+    "source_files": 12
+  }
+}

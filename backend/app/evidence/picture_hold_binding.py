@@ -208,11 +208,11 @@ def validate_record(document: dict, record: dict | None, *, table_pts: Sequence[
 def validate_source_clock(document: dict, table_pts: Sequence[int], interpolated: Sequence[int]) -> None:
     """Check that covered source indices, clocks and declared gaps match the original frame table."""
     cover = document["picture_hold"]
-    picture_sequence.validate_clock(cover.get("sequence_review"), table_pts, interpolated)
-    picture_sequence.validate_clock(cover.get("motion_sequence_review"), table_pts, interpolated)
+    tb = Fraction(document["source"]["time_base"])
+    picture_sequence.validate_clock(cover.get("sequence_review"), table_pts, interpolated, tb=tb)
+    picture_sequence.validate_clock(cover.get("motion_sequence_review"), table_pts, interpolated, tb=tb)
     if "continuity_breaks" in cover:
         source = document["source"]
-        tb = Fraction(source["time_base"])
         expected = extended_frame_limit(table_pts, tb, source["width"], source["height"])
         _require(expected == cover["frame_limit"], "Picture hold extension differs from its source-clock budget")
         inferred = set(interpolated)

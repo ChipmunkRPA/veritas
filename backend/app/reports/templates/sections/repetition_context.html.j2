@@ -17,7 +17,7 @@
 {% if hold.get('motion_sequence_review') %}
 {% set motion = hold.motion_sequence_review %}
 {% set motion_rate = motion.parameters.frame_rate %}
-{% set motion_limit = motion_rate * 9 %}
+{% set motion_limit = motion.frames_scanned or motion_rate * 9 %}
 <h3>Similar repeated moving sequences</h3>
 {% if motion.status == 'matched' %}<p><a href="#multimedia-evidence-VPR02">Inspect both ranges with similar pictures and motion</a>.</p>
 {% elif motion.status == 'no_match' %}<p>No qualifying repeat was found in the first {{ motion_limit }} frames.</p>

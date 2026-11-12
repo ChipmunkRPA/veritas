@@ -442,6 +442,10 @@ The [360p transfer](video-motion-sequence-360p-transfer-2026-11-12.md) applies
 the fixed method to H.264 and VP9 at 25 fps, with eight published controls
 covering real repeated activity and editing. It verifies the new 225-frame
 prefix and replays the exact earlier 180-frame package format.
+The [18-second repeat study](video-motion-late-transfer-2026-11-12.md)
+replays both time ranges and all four source pictures, and reports which
+opening matches survive a later clock gap. A standard-library reader
+checks the held outcomes for both codecs.
 The [longer timing replay](video-longer-timing-transfer-2026-11-11.md)
 tests native windows with actual timing-change opportunity and separately reports
 measured windows, redraw overlaps, ordinary controls, and unassessed inputs.

@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import hashlib
+import time
 from collections.abc import Callable
 from contextlib import closing
 from pathlib import Path
@@ -30,7 +31,10 @@ def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Calla
     observed = []
     descriptors = []
     motion_profile = picture_motion.profile(table, motion_encoding) if sequence_review else None
-    motion_limit = motion_profile[1] if motion_profile is not None else 0
+    extended_profile = (picture_motion.profile(table, motion_encoding, schema=picture_sequence.MOTION_EXTENDED_SCHEMA)
+                        if motion_profile is not None else None)
+    motion_limit = (extended_profile or motion_profile or (0, 0))[1]
+    started = time.monotonic()
     timeout = DECODE_TIMEOUT_S if remaining_s is None else min(DECODE_TIMEOUT_S, remaining_s - 1.0)
     if timeout < 0.5 and limit:
         return {"coverage": binding.coverage("unavailable", binding.INCOMPLETE, table.time_base, limit=opening_limit), "match": None}
@@ -70,10 +74,21 @@ def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Calla
     if sequence_review and 0 < cover["frames_scanned"] == cover["frame_limit"]:
         cover["scan_scope"] = picture_sequence.SCAN_SCOPE
         cover["sequence_review"] = picture_sequence.scan(observed[:cover["frames_scanned"]], tb)
-        if motion_profile is not None and cover["frames_scanned"] >= motion_limit:
-            cover["motion_sequence_review"] = picture_motion.scan(
-                observed[:motion_limit], descriptors, tb, motion_encoding, cover["sequence_review"]["pair"],
-                source_profile=motion_profile)
+        if motion_profile is not None and cover["frames_scanned"] >= motion_profile[1]:
+            opening_limit = motion_profile[1]
+            exact_pair = cover["sequence_review"]["pair"]
+            motion = picture_motion.scan(observed[:opening_limit], descriptors[:opening_limit], tb, motion_encoding,
+                                         exact_pair, source_profile=motion_profile)
+            if (motion["status"] == "no_match" and extended_profile is not None and cover["frames_scanned"] >= motion_limit
+                    and (remaining_s is None or remaining_s - (time.monotonic() - started) > 1.0)):
+                extended_motion = picture_motion.scan(
+                    observed[:motion_limit], descriptors, tb, motion_encoding, exact_pair, source_profile=extended_profile,
+                    schema=picture_sequence.MOTION_EXTENDED_SCHEMA)
+                extended_pair = extended_motion["pair"]
+                if (extended_motion["status"] != "unavailable"
+                        and (extended_pair is None or extended_pair["second"]["end_frame_index"] >= opening_limit)):
+                    motion = extended_motion
+            cover["motion_sequence_review"] = motion
     return result
 
 

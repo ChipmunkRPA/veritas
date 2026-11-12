@@ -62,7 +62,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
   const hold = set.picture_hold
   const motion = hold?.motion_sequence_review
   const motionRate = motion?.parameters.frame_rate ?? 20
-  const motionLimit = motionRate * 9
+  const motionLimit = motion?.frames_scanned || motionRate * 9
   const laterFrames = hold && set.coverage ? set.coverage.frame_count - hold.frames_scanned : 0
   const renderFrames = (packet: VideoEvidencePacket, frames: VideoEvidenceFrame[], refined: boolean) =>
     <div className="mt-5 space-y-5">{frames.map((frame) => {

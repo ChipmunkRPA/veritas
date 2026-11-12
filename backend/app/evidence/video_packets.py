@@ -466,10 +466,11 @@ def _picture_hold_packet(db: Session, store: ObjectStore, analysis: Analysis, se
 
 
 def _picture_sequence_packet(db: Session, store: ObjectStore, analysis: Analysis, set_id: str,
-                             source: dict, pair: dict, decoded: dict) -> dict:
+                             source: dict, review: dict, decoded: dict) -> dict:
+    pair = review["pair"]
     motion = "supporting_edge_offsets" in pair
     packet_id = picture_sequence.MOTION_PACKET_ID if motion else picture_sequence.PACKET_ID
-    motion_limit = picture_sequence.MOTION_PROFILES[(source["width"], source["height"])][1] if motion else None
+    motion_limit = review["frames_scanned"] if motion else None
     frames, images, labels, assets = [], [], [], {}
     for number, (occurrence, role, index, pts, digest) in enumerate(picture_sequence.endpoints(pair), 1):
         if index not in decoded or hashlib.sha256(decoded[index]).hexdigest() != digest:
@@ -496,7 +497,7 @@ def _picture_sequence_packet(db: Session, store: ObjectStore, analysis: Analysis
     assets["contact_sheet"] = _packet_image(db, store, analysis, set_id, sheet)
     return {"id": packet_id, "title": "Similar moving pictures at two source ranges" if motion else "Same moving pictures at two source ranges",
             "evidence_type": "anomaly", "claim_scope": "paired_frame_sequences",
-            "semantics": picture_sequence.MOTION_SCHEMA if motion else picture_sequence.SCHEMA,
+            "semantics": review["schema"],
             "picture_sequence": pair, "affects_overall_confidence": False, "finding_ids": [], "signal_refs": [],
             "exhibit_refs": [], "frames": frames, "observation": picture_sequence.observation(pair),
             "interpretation": picture_sequence.CONTEXT,
@@ -578,9 +579,10 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document["picture_hold"] = (hold["coverage"] if hold is not None else picture_hold_binding.coverage(
             "unavailable", picture_hold_binding.HISTORICAL, source["time_base"]))
     match = hold["match"] if hold is not None else None
-    pair = document.get("picture_hold", {}).get("sequence_review", {}).get("pair")
-    if pair is None:
-        pair = document.get("picture_hold", {}).get("motion_sequence_review", {}).get("pair")
+    review = document.get("picture_hold", {}).get("sequence_review", {})
+    if review.get("pair") is None:
+        review = document.get("picture_hold", {}).get("motion_sequence_review", {})
+    pair = review.get("pair")
     boundary_indices = {i for candidate in chosen for i in candidate.get("face_boundary", {}).get("anchors", {}).values()}
     exact_indices = boundary_indices | {i for candidate in return_candidates for i in candidate["face_return"]["anchors"].values()}
     wanted = {row["frame_index"] for candidate in chosen for row in candidate["rows"]} | boundary_indices
@@ -811,7 +813,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     if match is not None:
         document["packets"].append(_picture_hold_packet(db, store, analysis, set_id, source, match, decoded))
     if pair is not None:
-        document["packets"].append(_picture_sequence_packet(db, store, analysis, set_id, source, pair, decoded))
+        document["packets"].append(_picture_sequence_packet(db, store, analysis, set_id, source, review, decoded))
     if VERSION in NESTED_VERSIONS:
         from app.evidence import video_audio, video_av
 

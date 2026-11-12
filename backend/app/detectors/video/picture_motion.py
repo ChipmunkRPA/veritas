@@ -10,13 +10,21 @@ from app.core.canonical import canonical_hash
 from app.evidence import picture_sequence as binding
 
 
-def profile(table, encoding):
+def profile(table, encoding, *, schema=binding.MOTION_SCHEMA):
     dimensions = table.width, table.height
     if (tuple(encoding or ()) not in binding.MOTION_ENCODINGS or table.rotation
             or dimensions != (table.coded_width, table.coded_height)):
         return None
-    supported = binding.MOTION_PROFILES.get(dimensions)
-    return supported if supported is not None and len(table) >= supported[1] else None
+    supported = binding.motion_profile(dimensions, schema)
+    if supported is None or len(table) < supported[1]:
+        return None
+    if schema == binding.MOTION_EXTENDED_SCHEMA:
+        rate, limit = supported
+        tb, step = table.tb, Fraction(1, rate)
+        if any(i < limit for i in table.interpolated) or any(
+                (b - a) * tb != step for a, b in pairwise(table.pts[:limit])):
+            return None
+    return supported
 
 
 def descriptor(rgb):
@@ -64,9 +72,9 @@ def _pair(values, frame_rate):
     return result
 
 
-def scan(observations, values, tb, encoding, exact_pair, *, source_profile):
+def scan(observations, values, tb, encoding, exact_pair, *, source_profile, schema=binding.MOTION_SCHEMA):
     frame_rate, limit = source_profile
-    result = {"schema": binding.MOTION_SCHEMA, "status": "unavailable", "reason": "source_clock", "frames_scanned": 0,
+    result = {"schema": schema, "status": "unavailable", "reason": "source_clock", "frames_scanned": 0,
               "encoding": list(encoding), "parameters": binding.MOTION_PARAMETERS | {"frame_rate": frame_rate}, "pair": None}
     if len(observations) != limit:
         return result

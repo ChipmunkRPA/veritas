@@ -26,6 +26,7 @@ from app.storage.artefacts import register_artefact
 from app.storage.db import Analysis, AnalysisStage, Base
 from app.storage.objects import ObjectStore
 from scripts.video_lossy_sequence_transfer import deliver, read_source
+from scripts.video_motion_late_transfer import encode as late_authored
 from scripts.video_motion_sequence_360p_transfer import authored
 
 
@@ -46,26 +47,36 @@ def _source(path, *, held=False, late=False, repeated=False):
 
 @pytest.fixture(scope="module")
 def motion_raster_360p():
+    return _motion_raster(225)
+
+
+def _motion_raster(count):
     x, y = np.meshgrid(np.arange(40), np.arange(30))
     chroma = bytes([128]) * (640 * 360 // 2)
     frames = []
-    for i in range(225):
-        grid = ((7 * x + 3 * y + 9 * i) % 205 + 20).astype("u1")
+    for i in range(count):
+        drift = i // 11 if count > 225 else 0
+        grid = (((7 + drift) * x + 3 * y + 9 * i) % 205 + 20).astype("u1")
         frames.append(grid.repeat(12, axis=0).repeat(16, axis=1).tobytes() + chroma)
     return b"".join(frames)
 
 
-@pytest.mark.parametrize("case", ["opening_hold", "later_hold", "moving_sequence", "lossy_sequence", "lossy_sequence_360p"])
+@pytest.mark.parametrize("case", ["opening_hold", "later_hold", "moving_sequence", "lossy_sequence", "lossy_sequence_360p",
+                                   "lossy_sequence_360p_late"])
 def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monkeypatch, case, request):
-    high_res = case == "lossy_sequence_360p"
+    high_res = case.startswith("lossy_sequence_360p")
+    extension = case == "lossy_sequence_360p_late"
     lossy = case.startswith("lossy_sequence")
     repeated, late = lossy or case == "moving_sequence", case != "opening_hold"
     path = tmp_path / "exact-hold.mkv"
     if lossy:
-        indices = [21, 43, 147, 169] if high_res else [20, 41, 130, 151]
-        if high_res:
+        if extension:
+            indices = late_authored(_motion_raster(450), path, 0, "late_cross", "h264")
+        elif high_res:
+            indices = [21, 43, 147, 169]
             authored(request.getfixturevalue("motion_raster_360p"), path, 21, 147, 23, "copy", "h264")
         else:
+            indices = [20, 41, 130, 151]
             deliver(read_source(None), path, 20, 130, 22, "copy", "h264")
     else:
         frames = _source(path, held=not repeated, late=late, repeated=repeated)
@@ -83,8 +94,9 @@ def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monk
         coverage = scan["coverage"]
         assert coverage["sequence_review"]["status"] == "no_match"
         motion = coverage["motion_sequence_review"]
-        assert motion["status"] == "matched" and motion["frames_scanned"] == (225 if high_res else 180)
+        assert motion["status"] == "matched" and motion["frames_scanned"] == (450 if extension else 225 if high_res else 180)
         assert motion["parameters"]["frame_rate"] == (25 if high_res else 20)
+        assert motion["schema"] == (picture_sequence.MOTION_EXTENDED_SCHEMA if extension else picture_sequence.MOTION_SCHEMA)
         match = motion["pair"]
         assert [row[2] for row in picture_sequence.endpoints(match)] == indices
         assert not np.array_equal(frames[indices[0]], frames[indices[2]])
@@ -140,6 +152,11 @@ def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monk
         if lossy:
             assert packet["affects_overall_confidence"] is False
             assert len({f["artifact_refs"]["original"] for f in packet["frames"]}) == 4
+            if extension:
+                interrupted = list(table.pts)
+                interrupted[400] += 1
+                with pytest.raises(ValueError, match="complete verified native clock"):
+                    picture_sequence.validate_clock(motion, interrupted, (), tb=table.tb)
         for frame in packet["frames"]:
             ref = packet["artifacts"][frame["artifact_refs"]["original"]]
             asset = service.asset_refs(document)[ref["sha256"]]
@@ -169,7 +186,10 @@ def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monk
             text = " ".join(" ".join(page.get_text() for page in rendered_pdf).split())
             if lossy:
                 assert "Similar repeated moving sequences" in text and "VPR02" in text
-                if high_res:
+                if extension:
+                    assert "first 450 native 640 × 360 frames" in text
+                    assert "Repeated ranges 1.680-2.560 s and 11.520-12.400 s" in text
+                elif high_res:
                     assert "first 225 native 640 × 360 frames" in text
                     assert "Repeated ranges 0.840-1.720 s and 5.880-6.760 s" in text
                 else:
@@ -207,6 +227,30 @@ def test_motion_sequence_360p_abstains_when_frame_spacing_varies(tmp_path, motio
     review = output["coverage"]["motion_sequence_review"]
     assert (review["status"], review["reason"], review["frames_scanned"], review["pair"]) == ("unavailable", "source_clock", 0, None)
     assert review["parameters"]["frame_rate"] == 25
+
+
+def test_larger_motion_matrix_keeps_opening_record_if_pair_ends_inside_it(monkeypatch, tmp_path):
+    ticks = tuple(i * 40 for i in range(450))
+    table = FrameTable("1/1000", ticks, (0,), "I" * len(ticks), 640, 360, 640, 360)
+    rgb = np.zeros((360, 640, 3), dtype=np.uint8)
+
+    def decode(path, table, indices, **kwargs):
+        for i in indices:
+            yield DecodedFrame(i, table.pts[i], rgb)
+
+    opening = {"schema": picture_sequence.MOTION_SCHEMA, "status": "no_match", "pair": None}
+    longer = {"schema": picture_sequence.MOTION_EXTENDED_SCHEMA, "status": "matched",
+              "pair": {"second": {"end_frame_index": 200}}}
+
+    def scan(*args, source_profile, **kwargs):
+        return longer if source_profile[1] == 450 else opening
+
+    monkeypatch.setattr(picture_hold, "decode_frames", decode)
+    monkeypatch.setattr(picture_hold.picture_motion, "descriptor", lambda _: None)
+    monkeypatch.setattr(picture_hold.picture_motion, "scan", scan)
+    result = picture_hold.inspect(tmp_path / "source.mp4", table, origin=0., sequence_review=True,
+                                  motion_encoding=("h264", "yuv420p"))
+    assert result["coverage"]["motion_sequence_review"] == opening
 
 
 def test_repeated_sequence_requires_distinct_pixels_and_equal_verified_spacing():

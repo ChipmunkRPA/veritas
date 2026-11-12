@@ -1,0 +1,186 @@
+{
+  "audit": {
+    "fitting_crop_bindings": 800,
+    "held_crop_bindings": 12400,
+    "result_sha256": "f629f56d89500d8438cf9e6d65b2e35c8f38d25c802dec1154edb7a0a840ae23",
+    "verified": true
+  },
+  "points": {
+    "control_group_maxima": [
+      6.35174560546875,
+      6.457713603973389,
+      4.126533031463623,
+      5.501402854919434,
+      4.692054748535156,
+      4.829202651977539,
+      5.9626688957214355,
+      13.843618392944336
+    ],
+    "input_bindings": 800,
+    "point": 6.457713603973389
+  },
+  "protocol": {
+    "checkpoint": "b89f36275f3bf5e2b040eee36597a8f19db051bff9a473a9cf7b2466284fb387",
+    "code_sha256": "f4da2dbbb91cf986531b08e2fa84d94875434e0697d87f466fa7e872cf62e54b",
+    "fitting_intake": {
+      "attempts.jsonl": "59d8591da24d8886cca3ea071eefa5488aa3ac555ff5b21e0542dc267c47fb90",
+      "plan.json": "0d5cd6aadef8162c436c674e00ad835d91d3c7b5807daf0561cb8c58adf47aef",
+      "result.json": "6a8b09a8a4a8585f44faffd5ce18bba7c42a311934ce20bb3a70842aaef4d0b8"
+    },
+    "fitting_ledger": "e2b6bbe314cbca1c77177505ae9878f0141504ab8cd66d5c7a7f6d415ba8d48d",
+    "held_intakes": {
+      "earlier": {
+        "attempts.jsonl": "3b8291b96634bca1920bddfd9239a53d69e143ea8efc74e565fd7406e749f9ce",
+        "plan.json": "2fc63a2d9f666ce2e593cb7c6b503120661b74a33dbf88f297e34d96ae3c3d7b",
+        "result.json": "fb0aafa7d109ca3e7fda3256fbd9fdf0e3b2afca265081092552b54cc8388731"
+      },
+      "fresh": {
+        "attempts.jsonl": "7f1447364ca18c5729c20b9aa271ecc37834a697f4bb8afae808a7a835ee4267",
+        "plan.json": "bb2a98e53a65b991377d22d0895466e18aed03ee0050c082f94699805f1fe2c1",
+        "result.json": "2ac964b1a4b917a0c4f7ce432f5828680b7ea77154795aef01d28226bd013d75"
+      },
+      "later": {
+        "attempts.jsonl": "006a125678341700c243754a423c480b41bd86029a70f689ff1e7a467fc7fde7",
+        "plan.json": "a2176e567d71f2a80178adec7fb55e34007f6ad3114f9baf09837e233197fc34",
+        "result.json": "3d849ad48453c79002aa78d2d9cc8c7aeecc9f1979008060244c0bd01e065e86"
+      }
+    },
+    "held_ledgers": {
+      "earlier": "5eef5b5775a57b7c8fdf408dbb4d6e5cad4b39ea6c45d888a2c147d1c0406312",
+      "fresh": "a8074e07c5d1e35eaa145f977ab248d9839ff77b4df6f5710dde18e52ebd2797",
+      "later": "00d0fc6384fec038f0ab188eb77b2bdc4dbc52ed7a68ec6e17bee073bc4632d5"
+    },
+    "native_point_receipt": "6eb74c71c423c4566ee91957660b219e4b4fd66a18b778068d621c062c0590a5",
+    "native_points": {
+      "eligible_fit_controls": 4,
+      "fit_group_count": 8,
+      "relative": 8.313690900802614,
+      "remote_upper_strict": -4.78482723236084
+    },
+    "rules": {
+      "advance": "Each twelve-source panel needs at least one added useful fallback location and at most two added ordinary flags. The seven-source transfer must add a useful fallback location and at most one ordinary flag.",
+      "fallback": "Use the native remote result when it has a flag, otherwise use the paired result.",
+      "paired": "Select the largest per-crop minimum of within-view median-centered logits.",
+      "point": "Strictly above the second-highest of eight fitting-source control maxima."
+    },
+    "schema": "chipmunk.image-crop-delivery-consistency/1"
+  },
+  "result": {
+    "advancement_by_panel": {
+      "earlier": false,
+      "fresh": false,
+      "later": false
+    },
+    "advances": false,
+    "freeze_sha256": "f31a49cc56d314d792da5b70b10aa454bc0e54ba33c53c01969e14b5c7c31911",
+    "held_crop_bindings": 12400,
+    "held_views": 496,
+    "journals": {
+      "earlier": "3305d0ed00017209c312524a5f9a3398e40826ee5f512879fbfd5014bd9bcc58",
+      "fresh": "f6927793e3f19152297b8a1a87a98889140db68dac915fb95eba6de9a9ad60a1",
+      "later": "e6d942a392912fb9c8929a9f8ccc2f191f0ae5315c46da35861e8a9e5218edbf"
+    },
+    "neural_forwards": 0,
+    "points_sha256": "c9ed4bcef1df49d8196e2fcc168133b5cbcaba290195f035c604d7b7752c5f8e",
+    "results": {
+      "earlier": {
+        "native_remote": {
+          "added_locations": 0,
+          "added_ordinary": 0,
+          "cleared_ordinary": 0,
+          "feathered": 1,
+          "lost_locations": 0,
+          "ordinary": 34,
+          "sharp": 3,
+          "untouched": 5
+        },
+        "native_with_fallback": {
+          "added_locations": 0,
+          "added_ordinary": 7,
+          "cleared_ordinary": 0,
+          "feathered": 1,
+          "lost_locations": 0,
+          "ordinary": 41,
+          "sharp": 3,
+          "untouched": 5
+        },
+        "paired_minimum": {
+          "added_locations": 0,
+          "added_ordinary": 7,
+          "cleared_ordinary": 16,
+          "feathered": 0,
+          "lost_locations": 3,
+          "ordinary": 25,
+          "sharp": 1,
+          "untouched": 3
+        }
+      },
+      "fresh": {
+        "native_remote": {
+          "added_locations": 0,
+          "added_ordinary": 0,
+          "cleared_ordinary": 0,
+          "feathered": 2,
+          "lost_locations": 0,
+          "ordinary": 7,
+          "sharp": 4,
+          "untouched": 0
+        },
+        "native_with_fallback": {
+          "added_locations": 0,
+          "added_ordinary": 7,
+          "cleared_ordinary": 0,
+          "feathered": 2,
+          "lost_locations": 0,
+          "ordinary": 14,
+          "sharp": 4,
+          "untouched": 1
+        },
+        "paired_minimum": {
+          "added_locations": 0,
+          "added_ordinary": 7,
+          "cleared_ordinary": 7,
+          "feathered": 2,
+          "lost_locations": 2,
+          "ordinary": 7,
+          "sharp": 2,
+          "untouched": 1
+        }
+      },
+      "later": {
+        "native_remote": {
+          "added_locations": 0,
+          "added_ordinary": 0,
+          "cleared_ordinary": 0,
+          "feathered": 2,
+          "lost_locations": 0,
+          "ordinary": 16,
+          "sharp": 4,
+          "untouched": 1
+        },
+        "native_with_fallback": {
+          "added_locations": 0,
+          "added_ordinary": 10,
+          "cleared_ordinary": 0,
+          "feathered": 2,
+          "lost_locations": 0,
+          "ordinary": 26,
+          "sharp": 4,
+          "untouched": 3
+        },
+        "paired_minimum": {
+          "added_locations": 0,
+          "added_ordinary": 10,
+          "cleared_ordinary": 6,
+          "feathered": 0,
+          "lost_locations": 5,
+          "ordinary": 20,
+          "sharp": 1,
+          "untouched": 3
+        }
+      }
+    }
+  },
+  "schema": "chipmunk.image-crop-delivery-consistency/1",
+  "source_scope": "Eight separate fitting groups and three previously exposed held groups of 12, 12 and 7 photos."
+}

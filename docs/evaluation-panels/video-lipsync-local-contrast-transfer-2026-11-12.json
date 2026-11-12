@@ -1,0 +1,320 @@
+{
+  "schema": "chipmunk.grid-lipsync-local-contrast-result/1",
+  "serving_change": false,
+  "source": {
+    "bank": "GRID",
+    "source_license": "CC-BY-4.0",
+    "prior_project_exposure": true,
+    "fit_recordings": 12,
+    "point_recordings": 4,
+    "held_recordings": 16,
+    "fit_groups": 6,
+    "point_groups": 2,
+    "held_groups": 8,
+    "native_fps": 25,
+    "samples_per_original": 47648
+  },
+  "freeze_sha256": "c2ca4ca515a30f690fcab2f245d8419a2daf517f6f7c825e7fe3b7afbf297d37",
+  "fit": {
+    "aligned_pairs": 519,
+    "shifted_pairs": 2700
+  },
+  "advance": false,
+  "criteria": {
+    "adds_correct": false,
+    "held_source_groups": false,
+    "preserves_current": true,
+    "ordinary_flags": false,
+    "coverage": true
+  },
+  "qualified_groups": 2,
+  "by_condition": {
+    "current": {
+      "recorded": {
+        "views": 16,
+        "measured": 15,
+        "flagged": 0,
+        "correct": 0,
+        "misplaced_or_wrong_lag": 0
+      },
+      "local_gain": {
+        "views": 16,
+        "measured": 14,
+        "flagged": 0,
+        "correct": 0,
+        "misplaced_or_wrong_lag": 0
+      },
+      "local_lowpass": {
+        "views": 16,
+        "measured": 15,
+        "flagged": 0,
+        "correct": 0,
+        "misplaced_or_wrong_lag": 0
+      },
+      "local_noise": {
+        "views": 16,
+        "measured": 15,
+        "flagged": 0,
+        "correct": 0,
+        "misplaced_or_wrong_lag": 0
+      },
+      "constant_early": {
+        "views": 16,
+        "measured": 16,
+        "flagged": 0,
+        "correct": 0,
+        "misplaced_or_wrong_lag": 0
+      },
+      "constant_late": {
+        "views": 16,
+        "measured": 16,
+        "flagged": 0,
+        "correct": 0,
+        "misplaced_or_wrong_lag": 0
+      },
+      "short_early": {
+        "views": 16,
+        "measured": 14,
+        "flagged": 0,
+        "correct": 0,
+        "misplaced_or_wrong_lag": 0
+      },
+      "short_late": {
+        "views": 16,
+        "measured": 16,
+        "flagged": 0,
+        "correct": 0,
+        "misplaced_or_wrong_lag": 0
+      },
+      "long_early": {
+        "views": 16,
+        "measured": 15,
+        "flagged": 0,
+        "correct": 0,
+        "misplaced_or_wrong_lag": 0
+      },
+      "long_late": {
+        "views": 16,
+        "measured": 14,
+        "flagged": 0,
+        "correct": 0,
+        "misplaced_or_wrong_lag": 0
+      }
+    },
+    "candidate": {
+      "recorded": {
+        "views": 16,
+        "measured": 16,
+        "flagged": 3,
+        "correct": 0,
+        "misplaced_or_wrong_lag": 0
+      },
+      "local_gain": {
+        "views": 16,
+        "measured": 16,
+        "flagged": 3,
+        "correct": 0,
+        "misplaced_or_wrong_lag": 0
+      },
+      "local_lowpass": {
+        "views": 16,
+        "measured": 16,
+        "flagged": 5,
+        "correct": 0,
+        "misplaced_or_wrong_lag": 0
+      },
+      "local_noise": {
+        "views": 16,
+        "measured": 16,
+        "flagged": 1,
+        "correct": 0,
+        "misplaced_or_wrong_lag": 0
+      },
+      "constant_early": {
+        "views": 16,
+        "measured": 16,
+        "flagged": 3,
+        "correct": 0,
+        "misplaced_or_wrong_lag": 0
+      },
+      "constant_late": {
+        "views": 16,
+        "measured": 16,
+        "flagged": 2,
+        "correct": 0,
+        "misplaced_or_wrong_lag": 0
+      },
+      "short_early": {
+        "views": 16,
+        "measured": 16,
+        "flagged": 4,
+        "correct": 0,
+        "misplaced_or_wrong_lag": 4
+      },
+      "short_late": {
+        "views": 16,
+        "measured": 16,
+        "flagged": 4,
+        "correct": 1,
+        "misplaced_or_wrong_lag": 3
+      },
+      "long_early": {
+        "views": 16,
+        "measured": 16,
+        "flagged": 4,
+        "correct": 1,
+        "misplaced_or_wrong_lag": 3
+      },
+      "long_late": {
+        "views": 16,
+        "measured": 16,
+        "flagged": 4,
+        "correct": 0,
+        "misplaced_or_wrong_lag": 4
+      }
+    }
+  },
+  "counts": {
+    "current": {
+      "ordinary": {
+        "views": 96,
+        "measured": 91
+      },
+      "edited": {
+        "views": 64,
+        "measured": 59
+      }
+    },
+    "candidate": {
+      "ordinary": {
+        "views": 96,
+        "measured": 96,
+        "flagged": 17
+      },
+      "edited": {
+        "views": 64,
+        "measured": 64,
+        "flagged": 16,
+        "misplaced_or_wrong_lag": 14,
+        "correct": 2
+      }
+    }
+  },
+  "runtime": {
+    "elapsed_s": 10.794751833000191,
+    "peak_rss_bytes": 415793152,
+    "point_sha256": "a3212feef3fc99b530bb4492aa0ad82f3c17e1188935e6172e7ec2a5243469d6",
+    "held_sha256": "10f6b13ef0e1359637fd9b983a31e3e4cbc5dd4d1df8b9a2178eeac444ebf467"
+  },
+  "point": {
+    "value": 0.2610859752352778,
+    "ordinary": 24,
+    "measured": 24,
+    "journal_sha256": "d35efec57c557f8912cf2729e5d113d0b66b5c0073fca749a82f251abe0407c6",
+    "head_sha256": "dd23e780f60b4d0c17450bac4b47041d117080afdcae9ec952bf7ef3b90f78a5"
+  },
+  "frozen_method": {
+    "fit": "L2 logistic pair interaction on synchronized and within-utterance shifted active source ticks",
+    "spectral_edges_hz": [
+      140.0,
+      204.52876739581887,
+      298.8001192318066,
+      436.52300060146496,
+      637.7250803781563,
+      931.6651759081699,
+      1361.0880718150463,
+      1988.4404688963082,
+      2904.951986738042,
+      4243.901779939758,
+      6200.0
+    ],
+    "fit_lags_ticks": [
+      -8,
+      -5,
+      -3,
+      3,
+      5,
+      8
+    ],
+    "lags_ticks": [
+      -8,
+      -7,
+      -6,
+      -5,
+      -4,
+      -3,
+      -2,
+      -1,
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "search_widths_ticks": [
+      12,
+      16,
+      20,
+      24
+    ],
+    "flank_ticks": 10,
+    "fade_samples": 160,
+    "shift_tolerance_ticks": 2,
+    "minimum_iou": "2/5",
+    "point": "Max of 0.025 and the largest measured ordinary calibration response plus 0.025",
+    "gate": "At least four more correctly localized signed shifts than current across three held components; preserve all current correct shifts; at most one added control flag; at least 75% held positive and ordinary coverage."
+  },
+  "anonymous_correct_examples": [
+    {
+      "condition": "short_late",
+      "known_extent_ticks": [
+        30,
+        46
+      ],
+      "known_delay_ticks": 5,
+      "selected_extent_ticks": [
+        30,
+        42
+      ],
+      "selected_relative_lag_ticks": 7,
+      "time_iou": "3/4",
+      "native_picture_ticks": [
+        25,
+        36,
+        47
+      ]
+    },
+    {
+      "condition": "long_early",
+      "known_extent_ticks": [
+        26,
+        48
+      ],
+      "known_delay_ticks": -7,
+      "selected_extent_ticks": [
+        32,
+        44
+      ],
+      "selected_relative_lag_ticks": -5,
+      "time_iou": "6/11",
+      "native_picture_ticks": [
+        27,
+        38,
+        49
+      ]
+    }
+  ],
+  "independent_replay": {
+    "status": "verified",
+    "source_recordings": 16,
+    "native_pictures": 1200,
+    "held_pcm_and_candidate_scores_replayed": 160,
+    "native_mouth_crops": 480,
+    "exact_pcm_ranges": 960,
+    "aggregate_sha256": "ed0ca1064c6b41276fb454e1674f6b123e7339f81b1f51710108a3fc5229b108"
+  }
+}

@@ -1,0 +1,531 @@
+{
+  "advancement": {
+    "no_added_clean_or_background_false_flags": true,
+    "no_noisy_net_synthetic_loss_vs_current": true,
+    "noisy_false_reduction_vs_current": false,
+    "three_voice_no_false_increase_vs_current": false,
+    "three_voice_no_lost_current": true,
+    "three_voice_restoration": false
+  },
+  "advances": false,
+  "assets": {
+    "calibration_sha256": "912e1f25a6813fc610f6c93301263a77b36e01d40b6ba555c4421b57762719bf",
+    "incumbent_assets": {
+      "pellav2_detector.pt": "d21aedfb52e2f87706c2753715a29665482b0f4a034800c31579df5d458559ac",
+      "silero_vad.jit": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720",
+      "w2v-bert-config.json": "f5572bd5998b68182e9c328a43127ed21fed687f6910497136b91a4e3b0e3675"
+    },
+    "paired_points_sha256": "1b31820f631ac0cc8610e42696fb83f2c425f07a282fa26319f2007816416836",
+    "room_annotation_sha256": "b56e5babb2496b8795deeeda7e71178d7fbc9963f94276cf2a3f4b56ebbc9f9d",
+    "secondary_assets": {
+      "official-README.md": "160d8cf926c19dff4faad87d9f170f77455ed1d2dfa4656d07ced220e29231c7",
+      "quantization_metadata.json": "8e23249f993a9cd30c4ba3c7da9c514343f143af4a1882d85ddc4d7216c9ed0b",
+      "quantized-README.md": "7f550379e313fcc59beba7c754dabf941b3d0a409b1262cefb03995493279258",
+      "spectra-aasist3-int8-dynamic.onnx": "444f832d306a2be4f823119f84e698e8821db6a1aab248593d4b05b7a9a48108"
+    },
+    "source_receipts": {
+      "development": "4e97d28cfbe5a293ffffe10c419f9dd08a9e85a74e2b0431d2d4e402dbe693a8",
+      "earlier_roster": "98f984119b22d8e4e90cf5ebbecd3fdcfdfeb15f9405c554acd86dabf0bef9b0",
+      "holdout": "409d0dd8614dbc70ed27986bfdb4c0597e61cf04f29297ea874cec39ad8e8843",
+      "v84_variants": "8411c76325bc4dcde649db08ed05747c5eb917df13d811d1068b7395ee562d24"
+    }
+  },
+  "audit": {
+    "advancement": {
+      "no_added_clean_or_background_false_flags": true,
+      "no_noisy_net_synthetic_loss_vs_current": true,
+      "noisy_false_reduction_vs_current": false,
+      "three_voice_no_false_increase_vs_current": false,
+      "three_voice_no_lost_current": true,
+      "three_voice_restoration": false
+    },
+    "exact_pcm": 130,
+    "held_subgroups": {
+      "held_room_1": {
+        "2_voices": {
+          "background": {
+            "current_ai": 0,
+            "current_unassessed": 0,
+            "disagreement_ai": 0,
+            "disagreement_unassessed": 0,
+            "independent_ai": 0,
+            "independent_unassessed": 0,
+            "paired_ai": 0,
+            "paired_unassessed": 0,
+            "planned": 1
+          },
+          "clone": {
+            "current_ai": 0,
+            "current_unassessed": 0,
+            "disagreement_ai": 2,
+            "disagreement_unassessed": 0,
+            "independent_ai": 0,
+            "independent_unassessed": 0,
+            "paired_ai": 2,
+            "paired_unassessed": 0,
+            "planned": 3
+          },
+          "expressive": {
+            "current_ai": 0,
+            "current_unassessed": 0,
+            "disagreement_ai": 0,
+            "disagreement_unassessed": 0,
+            "independent_ai": 0,
+            "independent_unassessed": 0,
+            "paired_ai": 0,
+            "paired_unassessed": 0,
+            "planned": 3
+          },
+          "genuine": {
+            "current_ai": 0,
+            "current_unassessed": 0,
+            "disagreement_ai": 0,
+            "disagreement_unassessed": 0,
+            "independent_ai": 0,
+            "independent_unassessed": 0,
+            "paired_ai": 0,
+            "paired_unassessed": 0,
+            "planned": 8
+          },
+          "stock": {
+            "current_ai": 2,
+            "current_unassessed": 0,
+            "disagreement_ai": 2,
+            "disagreement_unassessed": 0,
+            "independent_ai": 0,
+            "independent_unassessed": 0,
+            "paired_ai": 2,
+            "paired_unassessed": 0,
+            "planned": 3
+          }
+        },
+        "3_voices": {
+          "background": {
+            "current_ai": 0,
+            "current_unassessed": 0,
+            "disagreement_ai": 0,
+            "disagreement_unassessed": 0,
+            "independent_ai": 0,
+            "independent_unassessed": 0,
+            "paired_ai": 0,
+            "paired_unassessed": 0,
+            "planned": 1
+          },
+          "clone": {
+            "current_ai": 1,
+            "current_unassessed": 0,
+            "disagreement_ai": 2,
+            "disagreement_unassessed": 0,
+            "independent_ai": 0,
+            "independent_unassessed": 0,
+            "paired_ai": 2,
+            "paired_unassessed": 0,
+            "planned": 3
+          },
+          "expressive": {
+            "current_ai": 0,
+            "current_unassessed": 0,
+            "disagreement_ai": 2,
+            "disagreement_unassessed": 0,
+            "independent_ai": 0,
+            "independent_unassessed": 0,
+            "paired_ai": 2,
+            "paired_unassessed": 0,
+            "planned": 3
+          },
+          "genuine": {
+            "current_ai": 0,
+            "current_unassessed": 0,
+            "disagreement_ai": 1,
+            "disagreement_unassessed": 0,
+            "independent_ai": 0,
+            "independent_unassessed": 0,
+            "paired_ai": 1,
+            "paired_unassessed": 0,
+            "planned": 8
+          },
+          "stock": {
+            "current_ai": 2,
+            "current_unassessed": 0,
+            "disagreement_ai": 2,
+            "disagreement_unassessed": 0,
+            "independent_ai": 0,
+            "independent_unassessed": 0,
+            "paired_ai": 2,
+            "paired_unassessed": 0,
+            "planned": 3
+          }
+        }
+      },
+      "held_room_2": {
+        "2_voices": {
+          "background": {
+            "current_ai": 0,
+            "current_unassessed": 0,
+            "disagreement_ai": 0,
+            "disagreement_unassessed": 0,
+            "independent_ai": 0,
+            "independent_unassessed": 0,
+            "paired_ai": 0,
+            "paired_unassessed": 0,
+            "planned": 1
+          },
+          "clone": {
+            "current_ai": 3,
+            "current_unassessed": 0,
+            "disagreement_ai": 3,
+            "disagreement_unassessed": 0,
+            "independent_ai": 1,
+            "independent_unassessed": 0,
+            "paired_ai": 3,
+            "paired_unassessed": 0,
+            "planned": 3
+          },
+          "expressive": {
+            "current_ai": 0,
+            "current_unassessed": 0,
+            "disagreement_ai": 2,
+            "disagreement_unassessed": 0,
+            "independent_ai": 0,
+            "independent_unassessed": 0,
+            "paired_ai": 2,
+            "paired_unassessed": 0,
+            "planned": 3
+          },
+          "genuine": {
+            "current_ai": 3,
+            "current_unassessed": 0,
+            "disagreement_ai": 6,
+            "disagreement_unassessed": 0,
+            "independent_ai": 1,
+            "independent_unassessed": 0,
+            "paired_ai": 6,
+            "paired_unassessed": 0,
+            "planned": 8
+          },
+          "stock": {
+            "current_ai": 2,
+            "current_unassessed": 0,
+            "disagreement_ai": 3,
+            "disagreement_unassessed": 0,
+            "independent_ai": 2,
+            "independent_unassessed": 0,
+            "paired_ai": 3,
+            "paired_unassessed": 0,
+            "planned": 3
+          }
+        },
+        "3_voices": {
+          "background": {
+            "current_ai": 0,
+            "current_unassessed": 1,
+            "disagreement_ai": 0,
+            "disagreement_unassessed": 1,
+            "independent_ai": 0,
+            "independent_unassessed": 1,
+            "paired_ai": 0,
+            "paired_unassessed": 1,
+            "planned": 1
+          },
+          "clone": {
+            "current_ai": 2,
+            "current_unassessed": 0,
+            "disagreement_ai": 3,
+            "disagreement_unassessed": 0,
+            "independent_ai": 0,
+            "independent_unassessed": 0,
+            "paired_ai": 3,
+            "paired_unassessed": 0,
+            "planned": 3
+          },
+          "expressive": {
+            "current_ai": 1,
+            "current_unassessed": 0,
+            "disagreement_ai": 2,
+            "disagreement_unassessed": 0,
+            "independent_ai": 0,
+            "independent_unassessed": 0,
+            "paired_ai": 2,
+            "paired_unassessed": 0,
+            "planned": 3
+          },
+          "genuine": {
+            "current_ai": 2,
+            "current_unassessed": 0,
+            "disagreement_ai": 6,
+            "disagreement_unassessed": 0,
+            "independent_ai": 0,
+            "independent_unassessed": 0,
+            "paired_ai": 6,
+            "paired_unassessed": 0,
+            "planned": 8
+          },
+          "stock": {
+            "current_ai": 3,
+            "current_unassessed": 0,
+            "disagreement_ai": 3,
+            "disagreement_unassessed": 0,
+            "independent_ai": 2,
+            "independent_unassessed": 0,
+            "paired_ai": 3,
+            "paired_unassessed": 0,
+            "planned": 3
+          }
+        }
+      }
+    },
+    "independent_graph_inputs": 126,
+    "outcome_cells": 32,
+    "result_sha256": "1c6dfffeab27088d1c5162f25c4a20103e5644e2fbd7c3e4e46e66b5e908e517",
+    "transitions": {
+      "calibration": {
+        "lost": {},
+        "restored": {}
+      },
+      "confirmation": {
+        "lost": {},
+        "restored": {}
+      }
+    }
+  },
+  "calibration": {
+    "disputed_control_groups": 0,
+    "disputed_control_views": 0,
+    "genuine_or_background_views": 21
+  },
+  "commitments": {
+    "audit": "55f795d53c634a1fc79b23fe7e87ba23cced48947691b87689ece8df07724651",
+    "freeze": "0dc803c901b50c08ca368e056bc12f1bc7740b24d74196370028031c9fed6790",
+    "points": "b2cf6a9e1c15d54e32b59f797eafadd1d33f7472efc0ad5b16f3cef442ba6a38",
+    "result": "1c6dfffeab27088d1c5162f25c4a20103e5644e2fbd7c3e4e46e66b5e908e517"
+  },
+  "method": {
+    "advance": "Restore a current synthetic AI flag lost by the correction in the three-voice interference condition, lose no current synthetic AI flags in that condition, and make no additional genuine false flags versus current there or versus paired on clean and isolated controls. Overall noisy false flags must remain below current without a net synthetic loss. Any positive result is local evidence only.",
+    "disagreement": "Only restore a current AI flag withheld by paired correction. Require the independent score to exceed every disputed genuine or isolated background score in calibration. Use the standalone point if no disputed genuine score is available. Do not alter the admitted span.",
+    "independent": "The independent checkpoint's score must strictly exceed the maximum genuine calibration score. Preserve original and unassessed directions.",
+    "mixture": "Use exact -5 dB recorded background mixes and one same-gain clean control per foreground.",
+    "paired": "The existing frozen nuisance correction, with its original operating point.",
+    "room_cuts": "One deterministic unused annotated two-voice and three-voice cut per room. First room calibrates."
+  },
+  "results": {
+    "calibration": {
+      "2_voices": {
+        "current": {
+          "genuine_inconclusive": 5,
+          "genuine_original": 2,
+          "synthetic_ai": 1,
+          "synthetic_inconclusive": 5
+        },
+        "disagreement": {
+          "genuine_inconclusive": 5,
+          "genuine_original": 2,
+          "synthetic_ai": 3,
+          "synthetic_inconclusive": 3
+        },
+        "independent": {
+          "genuine_inconclusive": 5,
+          "genuine_original": 2,
+          "synthetic_ai": 1,
+          "synthetic_inconclusive": 5
+        },
+        "paired": {
+          "genuine_inconclusive": 5,
+          "genuine_original": 2,
+          "synthetic_ai": 3,
+          "synthetic_inconclusive": 3
+        }
+      },
+      "3_voices": {
+        "current": {
+          "genuine_ai": 2,
+          "genuine_inconclusive": 5,
+          "synthetic_ai": 3,
+          "synthetic_inconclusive": 3
+        },
+        "disagreement": {
+          "genuine_ai": 2,
+          "genuine_inconclusive": 5,
+          "synthetic_ai": 5,
+          "synthetic_inconclusive": 1
+        },
+        "independent": {
+          "genuine_inconclusive": 7,
+          "synthetic_ai": 1,
+          "synthetic_inconclusive": 5
+        },
+        "paired": {
+          "genuine_ai": 2,
+          "genuine_inconclusive": 5,
+          "synthetic_ai": 5,
+          "synthetic_inconclusive": 1
+        }
+      },
+      "clean": {
+        "current": {
+          "genuine_original": 7,
+          "synthetic_ai": 6
+        },
+        "disagreement": {
+          "genuine_original": 7,
+          "synthetic_ai": 6
+        },
+        "independent": {
+          "genuine_original": 7,
+          "synthetic_ai": 6
+        },
+        "paired": {
+          "genuine_original": 7,
+          "synthetic_ai": 6
+        }
+      },
+      "isolated": {
+        "current": {
+          "background_unassessed": 2
+        },
+        "disagreement": {
+          "background_unassessed": 2
+        },
+        "independent": {
+          "background_unassessed": 2
+        },
+        "paired": {
+          "background_unassessed": 2
+        }
+      }
+    },
+    "confirmation": {
+      "2_voices": {
+        "current": {
+          "genuine_ai": 3,
+          "genuine_inconclusive": 13,
+          "synthetic_ai": 7,
+          "synthetic_inconclusive": 11
+        },
+        "disagreement": {
+          "genuine_ai": 6,
+          "genuine_inconclusive": 10,
+          "synthetic_ai": 12,
+          "synthetic_inconclusive": 6
+        },
+        "independent": {
+          "genuine_ai": 1,
+          "genuine_inconclusive": 15,
+          "synthetic_ai": 3,
+          "synthetic_inconclusive": 15
+        },
+        "paired": {
+          "genuine_ai": 6,
+          "genuine_inconclusive": 10,
+          "synthetic_ai": 12,
+          "synthetic_inconclusive": 6
+        }
+      },
+      "3_voices": {
+        "current": {
+          "genuine_ai": 2,
+          "genuine_inconclusive": 14,
+          "synthetic_ai": 9,
+          "synthetic_inconclusive": 8,
+          "synthetic_original": 1
+        },
+        "disagreement": {
+          "genuine_ai": 7,
+          "genuine_inconclusive": 9,
+          "synthetic_ai": 14,
+          "synthetic_inconclusive": 3,
+          "synthetic_original": 1
+        },
+        "independent": {
+          "genuine_inconclusive": 16,
+          "synthetic_ai": 2,
+          "synthetic_inconclusive": 15,
+          "synthetic_original": 1
+        },
+        "paired": {
+          "genuine_ai": 7,
+          "genuine_inconclusive": 9,
+          "synthetic_ai": 14,
+          "synthetic_inconclusive": 3,
+          "synthetic_original": 1
+        }
+      },
+      "clean": {
+        "current": {
+          "genuine_inconclusive": 2,
+          "genuine_original": 6,
+          "synthetic_ai": 6,
+          "synthetic_inconclusive": 2,
+          "synthetic_unassessed": 1
+        },
+        "disagreement": {
+          "genuine_inconclusive": 2,
+          "genuine_original": 6,
+          "synthetic_ai": 7,
+          "synthetic_inconclusive": 1,
+          "synthetic_unassessed": 1
+        },
+        "independent": {
+          "genuine_inconclusive": 2,
+          "genuine_original": 6,
+          "synthetic_ai": 6,
+          "synthetic_inconclusive": 2,
+          "synthetic_unassessed": 1
+        },
+        "paired": {
+          "genuine_inconclusive": 2,
+          "genuine_original": 6,
+          "synthetic_ai": 7,
+          "synthetic_inconclusive": 1,
+          "synthetic_unassessed": 1
+        }
+      },
+      "isolated": {
+        "current": {
+          "background_inconclusive": 3,
+          "background_unassessed": 1
+        },
+        "disagreement": {
+          "background_inconclusive": 3,
+          "background_unassessed": 1
+        },
+        "independent": {
+          "background_inconclusive": 3,
+          "background_unassessed": 1
+        },
+        "paired": {
+          "background_inconclusive": 3,
+          "background_unassessed": 1
+        }
+      }
+    }
+  },
+  "runtime": {
+    "calibration-secondary": {
+      "elapsed_s": 23.91168766699775,
+      "independent_forwards": 39,
+      "peak_rss_bytes": 951894016
+    },
+    "calibration-voice": {
+      "activity_forwards": 3854,
+      "elapsed_s": 33.13770270799796,
+      "incumbent_forwards": 48,
+      "peak_rss_bytes": 2964209664
+    },
+    "confirmation-secondary": {
+      "elapsed_s": 50.728349334000086,
+      "independent_forwards": 87,
+      "peak_rss_bytes": 952811520
+    },
+    "confirmation-voice": {
+      "activity_forwards": 8366,
+      "elapsed_s": 71.0590806250002,
+      "incumbent_forwards": 94,
+      "peak_rss_bytes": 2966437888
+    }
+  },
+  "schema": "chipmunk.audio-disagreement-transfer-public/1",
+  "views": {
+    "calibration": 41,
+    "confirmation": 89
+  }
+}

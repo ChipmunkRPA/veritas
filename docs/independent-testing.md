@@ -50,6 +50,9 @@ false flag.
 The [mono speech-interference study](audio-mono-dereverb-transfer-2026-11-11.md)
 reconstructs matched noisy inputs and checks which true and false voice flags
 change when reducing predictable late sound.
+The [competing-voices disagreement study](audio-disagreement-transfer-2026-11-12.md)
+reconstructs exact mixtures across calibration and two held meeting rooms.
+It compares four voice policies and records when the second opinion cannot act.
 
 The [video tracking evidence fixture](video-face-tracking-context.md) exercises
 the same recorded values in a saved packet and report without downloading
@@ -159,6 +162,9 @@ rebuilds exact edited-pixel masks for 496 deliveries, including seven separately
 qualified SDXL and Kandinsky sources. The [remote crop transfer](image-remote-crop-editor-transfer-2026-11-11.md)
 replays the same inputs and verifies whether suppressing broad processing
 responses changes useful localizations.
+The [paired PNG and JPEG crop comparison](image-crop-delivery-consistency-2026-11-12.md)
+checks whether converting the same PNG to JPEG corroborates the native crop,
+with separate counts for lost edit locations and added ordinary flags.
 The [image flip comparison](image-regional-flip-transfer-2026-11-11.md) tests
 whether the sensitive detector reproduces a region under a reversible transform.
 It separately reports useful regions, processing controls and untouched photos.
@@ -194,6 +200,9 @@ which clips lack enough stable background for that measurement.
 The [lip-sync coverage comparison](video-lipsync-mouth-coverage-2026-11-11.md)
 checks held mouth frames on real moving footage, matched to original and
 recompressed controls, with a separate authored false-collapse regression.
+The [local audiovisual timing comparison](video-lipsync-local-contrast-transfer-2026-11-12.md)
+reconstructs 160 exact soundtrack deliveries and checks signed timing estimates,
+ordinary controls, native mouth crops, and PCM slices.
 The [timing and codec follow-up](video-timing-coverage-and-codec-holds-2026-11-11.md)
 records when a single timing window leaves change unassessed and compares
 exact and approximate picture holds on the same lossy and lossless deliveries.

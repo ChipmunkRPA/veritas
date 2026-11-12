@@ -163,6 +163,10 @@ The [RADAR transfer and longer-file confirmation](audio-radar-transfer-2026-11-1
 start from bounded prefixes of two public archive splits. A model-free
 reader reopens official labels, native clocks and all matched short
 mixtures, then reproduces the decision counts from the saved responses.
+The [enhanced-speech comparison](audio-noise-views-transfer-2026-11-12.md)
+keeps the development and held noise recordings separate. Its public
+replay recounts the fixed decisions and shows the best held gain allowed
+by each added genuine false-alarm budget.
 The [speech-context comparison](audio-remote-neighbor-transfer-2026-11-12.md)
 compares recurring acoustic contexts on the original mixtures and verifies
 fresh and previously tested source groups separately.

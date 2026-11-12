@@ -1,0 +1,368 @@
+{
+  "development": {
+    "150": {
+      "added_groups": 2,
+      "advance": false,
+      "counts": {
+        "cut": {
+          "added_locations": 0,
+          "cases": 2,
+          "combined_located": 0,
+          "current_flagged": 0,
+          "current_located": 0,
+          "fallback_flagged": 0,
+          "fallback_wrong_range": 0,
+          "measured_fallback": 2
+        },
+        "ordinary": {
+          "added_locations": 0,
+          "cases": 10,
+          "combined_located": 0,
+          "current_flagged": 0,
+          "current_located": 0,
+          "fallback_flagged": 0,
+          "fallback_wrong_range": 0,
+          "measured_fallback": 10
+        },
+        "positive": {
+          "added_locations": 4,
+          "cases": 4,
+          "combined_located": 4,
+          "current_flagged": 0,
+          "current_located": 0,
+          "fallback_flagged": 4,
+          "fallback_wrong_range": 0,
+          "measured_fallback": 4
+        }
+      },
+      "criteria": {
+        "coverage": true,
+        "cut": true,
+        "groups": false,
+        "located": true,
+        "ordinary": true
+      }
+    },
+    "80": {
+      "added_groups": 2,
+      "advance": false,
+      "counts": {
+        "cut": {
+          "added_locations": 0,
+          "cases": 2,
+          "combined_located": 0,
+          "current_flagged": 0,
+          "current_located": 0,
+          "fallback_flagged": 0,
+          "fallback_wrong_range": 0,
+          "measured_fallback": 2
+        },
+        "ordinary": {
+          "added_locations": 0,
+          "cases": 10,
+          "combined_located": 0,
+          "current_flagged": 0,
+          "current_located": 0,
+          "fallback_flagged": 0,
+          "fallback_wrong_range": 0,
+          "measured_fallback": 10
+        },
+        "positive": {
+          "added_locations": 4,
+          "cases": 4,
+          "combined_located": 4,
+          "current_flagged": 0,
+          "current_located": 0,
+          "fallback_flagged": 4,
+          "fallback_wrong_range": 0,
+          "measured_fallback": 4
+        }
+      },
+      "criteria": {
+        "coverage": true,
+        "cut": true,
+        "groups": false,
+        "located": true,
+        "ordinary": true
+      }
+    }
+  },
+  "endpoint_summary": {
+    "150": {
+      "exact_intervals": 4,
+      "lowest_correct_margin": 0.5040591227468516,
+      "maximum_absolute_endpoint_error_ms": 40,
+      "maximum_control_margin": 0.021804348293052486,
+      "median_iou": "6/7",
+      "minimum_iou": "5/7"
+    },
+    "80": {
+      "exact_intervals": 4,
+      "lowest_correct_margin": 0.4445358232333336,
+      "maximum_absolute_endpoint_error_ms": 40,
+      "maximum_control_margin": -0.008713358358910211,
+      "median_iou": "6/7",
+      "minimum_iou": "5/7"
+    }
+  },
+  "freeze_sha256": "53ecd90ddab4b5af2ff2fc19cfef8455652b6df9505152bfd224bda1e80760c7",
+  "held": {
+    "150": {
+      "added_groups": 4,
+      "advance": true,
+      "counts": {
+        "cut": {
+          "added_locations": 0,
+          "cases": 4,
+          "combined_located": 0,
+          "current_flagged": 0,
+          "current_located": 0,
+          "fallback_flagged": 0,
+          "fallback_wrong_range": 0,
+          "measured_fallback": 4
+        },
+        "ordinary": {
+          "added_locations": 0,
+          "cases": 20,
+          "combined_located": 0,
+          "current_flagged": 0,
+          "current_located": 0,
+          "fallback_flagged": 0,
+          "fallback_wrong_range": 0,
+          "measured_fallback": 20
+        },
+        "positive": {
+          "added_locations": 8,
+          "cases": 8,
+          "combined_located": 8,
+          "current_flagged": 0,
+          "current_located": 0,
+          "fallback_flagged": 8,
+          "fallback_wrong_range": 0,
+          "measured_fallback": 8
+        }
+      },
+      "criteria": {
+        "coverage": true,
+        "cut": true,
+        "groups": true,
+        "located": true,
+        "ordinary": true
+      }
+    },
+    "80": {
+      "added_groups": 4,
+      "advance": true,
+      "counts": {
+        "cut": {
+          "added_locations": 0,
+          "cases": 4,
+          "combined_located": 0,
+          "current_flagged": 0,
+          "current_located": 0,
+          "fallback_flagged": 0,
+          "fallback_wrong_range": 0,
+          "measured_fallback": 4
+        },
+        "ordinary": {
+          "added_locations": 0,
+          "cases": 20,
+          "combined_located": 0,
+          "current_flagged": 0,
+          "current_located": 0,
+          "fallback_flagged": 0,
+          "fallback_wrong_range": 0,
+          "measured_fallback": 20
+        },
+        "positive": {
+          "added_locations": 8,
+          "cases": 8,
+          "combined_located": 8,
+          "current_flagged": 0,
+          "current_located": 0,
+          "fallback_flagged": 8,
+          "fallback_wrong_range": 0,
+          "measured_fallback": 8
+        }
+      },
+      "criteria": {
+        "coverage": true,
+        "cut": true,
+        "groups": true,
+        "located": true,
+        "ordinary": true
+      }
+    }
+  },
+  "independent_replay": {
+    "aggregate_sha256": "d8a0e4f3d0377822b5efa878919fb648b48f85d51afd91f37b0252fbab87443d",
+    "byte_identical_reconstructions": 64,
+    "checked_crops": 48,
+    "decoded_h264_pictures": 7360,
+    "examples": {
+      "150": {
+        "anchor_s": [
+          "12/5",
+          "64/25",
+          "68/25"
+        ],
+        "iou": "1",
+        "range_s": [
+          "62/25",
+          "68/25"
+        ],
+        "truth_s": [
+          "62/25",
+          "68/25"
+        ]
+      },
+      "80": {
+        "anchor_s": [
+          "52/25",
+          "56/25",
+          "12/5"
+        ],
+        "iou": "1",
+        "range_s": [
+          "54/25",
+          "12/5"
+        ],
+        "truth_s": [
+          "54/25",
+          "12/5"
+        ]
+      }
+    },
+    "held_files": 64,
+    "native_source_pictures": 840,
+    "status": "verified",
+    "timing_decisions_replayed": 128,
+    "verified_ordinary_or_swap_intervals": 40,
+    "verified_whole_picture_cuts": 8
+  },
+  "private_application_measurement_preview": {
+    "n": 6,
+    "results": [
+      {
+        "elapsed_seconds": 1.824,
+        "measurement_status": "localized",
+        "pictures": 80,
+        "range_s": [
+          2.16,
+          2.4
+        ],
+        "role": "known_swap"
+      },
+      {
+        "elapsed_seconds": 1.777,
+        "measurement_status": "no_distinct_range",
+        "pictures": 80,
+        "range_s": null,
+        "role": "genuine_original"
+      },
+      {
+        "elapsed_seconds": 1.795,
+        "measurement_status": "no_distinct_range",
+        "pictures": 80,
+        "range_s": null,
+        "role": "whole_picture_cut"
+      },
+      {
+        "elapsed_seconds": 3.264,
+        "measurement_status": "localized",
+        "pictures": 150,
+        "range_s": [
+          2.48,
+          2.72
+        ],
+        "role": "known_swap"
+      },
+      {
+        "elapsed_seconds": 3.266,
+        "measurement_status": "no_distinct_range",
+        "pictures": 150,
+        "range_s": null,
+        "role": "genuine_original"
+      },
+      {
+        "elapsed_seconds": 3.193,
+        "measurement_status": "no_distinct_range",
+        "pictures": 150,
+        "range_s": null,
+        "role": "whole_picture_cut"
+      }
+    ],
+    "status": "verified"
+  },
+  "protocol": {
+    "codec": "h264/yuv420p",
+    "criteria_per_duration": {
+      "additional_correct": 4,
+      "additional_cut_max": 0,
+      "additional_groups": 3,
+      "additional_ordinary_max": 1,
+      "coverage_min": 0.9
+    },
+    "dedupe_iou": "1/2",
+    "definition": "Preserve the coarse and 8 Hz checks. If 8 Hz measured a winner but emitted no distinct range, evaluate the unchanged guarded rank on every second native picture. Only runtime duration eligibility varies.",
+    "fps": 25,
+    "frames": [
+      80,
+      150
+    ],
+    "ordinary": [
+      "original",
+      "recompressed",
+      "ordinary_light",
+      "ordinary_blur",
+      "ordinary_time_step",
+      "hard_cut"
+    ],
+    "primary_crf": 23,
+    "schema": "chipmunk.video-face-six-duration/1",
+    "shape": [
+      640,
+      360
+    ],
+    "spans": {
+      "150": [
+        [
+          62,
+          68
+        ],
+        [
+          89,
+          95
+        ]
+      ],
+      "80": [
+        [
+          54,
+          60
+        ],
+        [
+          61,
+          67
+        ]
+      ]
+    },
+    "tandem_crf": 36,
+    "threshold": 0.1
+  },
+  "runtime": {
+    "elapsed_s": 157.27890045799722,
+    "journal_sha256": "cf6862aaf98445d45713423b8ba5cddaee32fd36f61e650158ff3de2864a3151",
+    "media_sha256": "796beba09814536516bfb458ecf7a6345f5e286f08032a146416629f35337029",
+    "peak_rss_bytes": 280821760
+  },
+  "schema": "chipmunk.video-face-six-duration-result/1",
+  "scored_source_frames": 5920,
+  "serving_change_in_study": false,
+  "source_scope": {
+    "development_groups": 2,
+    "held_groups": 4,
+    "older_groups_excluded": 31,
+    "source_data_prior_project_exposure": true,
+    "split_by_known_source_and_donor_keys": true
+  }
+}

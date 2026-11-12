@@ -240,6 +240,9 @@ source-compatible mouth motion, including their native pictures and PCM.
 The [six-picture face-swap comparison](video-face-six-picture-transfer-2026-11-12.md)
 re-creates the authored H.264 swaps and hard cuts and compares denser sampling
 with the additional consecutive support rule.
+The [six-picture duration transfer](video-face-six-duration-transfer-2026-11-12.md)
+rebuilds 64 held H.264 deliveries byte for byte and verifies native ranges and
+source crops at two additional clip lengths.
 The [timing and codec follow-up](video-timing-coverage-and-codec-holds-2026-11-11.md)
 records when a single timing window leaves change unassessed and compares
 exact and approximate picture holds on the same lossy and lossless deliveries.

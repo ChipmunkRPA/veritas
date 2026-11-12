@@ -1,0 +1,461 @@
+{
+  "schema": "chipmunk.audio-same-speaker-enrollment-transfer/1",
+  "method": {
+    "comparison": "Reapply the earlier frozen target mask unchanged with a genuine same-speaker reference, a sham from a distinct reader, and the exact submitted mono mixture as acoustic baseline. Use the earlier four distinct generic reference speakers unchanged. No detector scores or fitting across test cases.",
+    "sources": "Use every source-qualified speaker group in its prospective role and reserved meeting. Each 6-second host follows a 2-second same-host control reserve. Match an ordinary same-host splice, an ordinary different-reader splice and a publisher-linked clone splice at the same 0.8-second sample range. Other voice and sham use different same-role speakers. Donor selection uses only fixed salted grid order and signal energy.",
+    "rooms": "Rerender native speech from the reserved AMI rooms at -5 dB over the entire waveform. Exclude exact previously used capture intervals, including all prior enrollment trial cuts. Choose the first eligible host interval in its fixed salted order that permits at least 400 ms of two annotated overlapping voices in the reserved room. All matched arms share background, peak scaling and exact samples outside the edit.",
+    "decision": "Reuse prior held acoustic gates unchanged: true enrollment beats sham in at least two-thirds of genuine same-host edits, median exact-edit SNR improves by at least 0.5 dB in each held room on genuine same-host edits, and median synthetic foreground retention in the exact edit is at least -3 dB in both held rooms. This stage has no authenticity outcome or false-alarm operating point."
+  },
+  "outcomes": [
+    {
+      "role": "confirmation",
+      "meeting": "ES2010d",
+      "arm": "ordinary_other_voice",
+      "views": 4,
+      "median": {
+        "correct": {
+          "whole": {
+            "snr_gain_db": -0.03734402498429379,
+            "retained_target_db": -3.110918252759882
+          },
+          "edit": {
+            "snr_gain_db": -1.7176511312550433,
+            "retained_target_db": -4.252353518025858
+          },
+          "outside": {
+            "snr_gain_db": 0.13819371669440406,
+            "retained_target_db": -2.9490093689611463
+          }
+        },
+        "sham": {
+          "whole": {
+            "snr_gain_db": 0.7113465538390171,
+            "retained_target_db": -5.347986237301074
+          },
+          "edit": {
+            "snr_gain_db": 0.6075422148157731,
+            "retained_target_db": -5.300679254019395
+          },
+          "outside": {
+            "snr_gain_db": 0.5962669603030464,
+            "retained_target_db": -5.259678442550623
+          }
+        }
+      }
+    },
+    {
+      "role": "confirmation",
+      "meeting": "ES2010d",
+      "arm": "ordinary_same_host",
+      "views": 4,
+      "median": {
+        "correct": {
+          "whole": {
+            "snr_gain_db": 0.1824165222757932,
+            "retained_target_db": -2.9050624184945173
+          },
+          "edit": {
+            "snr_gain_db": 0.4829425396948238,
+            "retained_target_db": -2.7427878029796506
+          },
+          "outside": {
+            "snr_gain_db": 0.13825677973767725,
+            "retained_target_db": -2.9489693548066276
+          }
+        },
+        "sham": {
+          "whole": {
+            "snr_gain_db": 0.7647161417364199,
+            "retained_target_db": -5.481495919201867
+          },
+          "edit": {
+            "snr_gain_db": 0.9748028878331517,
+            "retained_target_db": -5.093149403631805
+          },
+          "outside": {
+            "snr_gain_db": 0.5965593622891965,
+            "retained_target_db": -5.259339617538387
+          }
+        }
+      }
+    },
+    {
+      "role": "confirmation",
+      "meeting": "ES2010d",
+      "arm": "synthetic",
+      "views": 4,
+      "median": {
+        "correct": {
+          "whole": {
+            "snr_gain_db": 0.14867104836483636,
+            "retained_target_db": -2.8945180993400426
+          },
+          "edit": {
+            "snr_gain_db": 0.027334542177398502,
+            "retained_target_db": -2.642958438434405
+          },
+          "outside": {
+            "snr_gain_db": 0.13860797196780528,
+            "retained_target_db": -2.9490000065451154
+          }
+        },
+        "sham": {
+          "whole": {
+            "snr_gain_db": 0.5361908172776255,
+            "retained_target_db": -5.698635532543763
+          },
+          "edit": {
+            "snr_gain_db": 0.12195204637049284,
+            "retained_target_db": -6.755895563399102
+          },
+          "outside": {
+            "snr_gain_db": 0.5966386137443807,
+            "retained_target_db": -5.259368498745156
+          }
+        }
+      }
+    },
+    {
+      "role": "confirmation",
+      "meeting": "IS1007a",
+      "arm": "ordinary_other_voice",
+      "views": 4,
+      "median": {
+        "correct": {
+          "whole": {
+            "snr_gain_db": 1.5338952747550278,
+            "retained_target_db": -3.9490962739051203
+          },
+          "edit": {
+            "snr_gain_db": -1.217848936594324,
+            "retained_target_db": -7.587589304407179
+          },
+          "outside": {
+            "snr_gain_db": 2.513400830446027,
+            "retained_target_db": -3.249124099706168
+          }
+        },
+        "sham": {
+          "whole": {
+            "snr_gain_db": -0.7393545036777835,
+            "retained_target_db": -5.140173054727286
+          },
+          "edit": {
+            "snr_gain_db": -0.34775616547634236,
+            "retained_target_db": -6.14354988414685
+          },
+          "outside": {
+            "snr_gain_db": -0.11970983933560331,
+            "retained_target_db": -4.810622788821247
+          }
+        }
+      }
+    },
+    {
+      "role": "confirmation",
+      "meeting": "IS1007a",
+      "arm": "ordinary_same_host",
+      "views": 4,
+      "median": {
+        "correct": {
+          "whole": {
+            "snr_gain_db": 1.8734839435242587,
+            "retained_target_db": -3.3681186968126964
+          },
+          "edit": {
+            "snr_gain_db": 0.5876936997568443,
+            "retained_target_db": -4.23108217907664
+          },
+          "outside": {
+            "snr_gain_db": 2.5130173596548913,
+            "retained_target_db": -3.248994291453975
+          }
+        },
+        "sham": {
+          "whole": {
+            "snr_gain_db": 0.037639587549281206,
+            "retained_target_db": -5.077336838818983
+          },
+          "edit": {
+            "snr_gain_db": 0.2906262542056608,
+            "retained_target_db": -5.941909078196755
+          },
+          "outside": {
+            "snr_gain_db": -0.1196255504913808,
+            "retained_target_db": -4.810895752847518
+          }
+        }
+      }
+    },
+    {
+      "role": "confirmation",
+      "meeting": "IS1007a",
+      "arm": "synthetic",
+      "views": 4,
+      "median": {
+        "correct": {
+          "whole": {
+            "snr_gain_db": 1.880893231673516,
+            "retained_target_db": -3.222321488005141
+          },
+          "edit": {
+            "snr_gain_db": -0.6119684211824268,
+            "retained_target_db": -3.572317008974347
+          },
+          "outside": {
+            "snr_gain_db": 2.513084505580892,
+            "retained_target_db": -3.2488944890891784
+          }
+        },
+        "sham": {
+          "whole": {
+            "snr_gain_db": -0.00017780813229872905,
+            "retained_target_db": -5.1105884571171565
+          },
+          "edit": {
+            "snr_gain_db": -0.017766328897571126,
+            "retained_target_db": -5.493606068118942
+          },
+          "outside": {
+            "snr_gain_db": -0.11952830793235325,
+            "retained_target_db": -4.8106573202777945
+          }
+        }
+      }
+    },
+    {
+      "role": "selection",
+      "meeting": "ES2004a",
+      "arm": "ordinary_other_voice",
+      "views": 3,
+      "median": {
+        "correct": {
+          "whole": {
+            "snr_gain_db": 3.270238167871849,
+            "retained_target_db": -2.344250461071334
+          },
+          "edit": {
+            "snr_gain_db": 0.5096346518763397,
+            "retained_target_db": -4.900361176448335
+          },
+          "outside": {
+            "snr_gain_db": 2.659672744575838,
+            "retained_target_db": -2.071270185818311
+          }
+        },
+        "sham": {
+          "whole": {
+            "snr_gain_db": 0.6211503545677468,
+            "retained_target_db": -3.407799567829428
+          },
+          "edit": {
+            "snr_gain_db": -1.7923739006174344,
+            "retained_target_db": -7.101668529706943
+          },
+          "outside": {
+            "snr_gain_db": 0.4247501634509614,
+            "retained_target_db": -3.147737535160215
+          }
+        }
+      }
+    },
+    {
+      "role": "selection",
+      "meeting": "ES2004a",
+      "arm": "ordinary_same_host",
+      "views": 3,
+      "median": {
+        "correct": {
+          "whole": {
+            "snr_gain_db": 3.296827099470197,
+            "retained_target_db": -2.1867165078819544
+          },
+          "edit": {
+            "snr_gain_db": 1.0369401069206212,
+            "retained_target_db": -4.360855021994485
+          },
+          "outside": {
+            "snr_gain_db": 2.6595482388093448,
+            "retained_target_db": -2.0713794576425846
+          }
+        },
+        "sham": {
+          "whole": {
+            "snr_gain_db": 0.744773079533279,
+            "retained_target_db": -3.287368502902999
+          },
+          "edit": {
+            "snr_gain_db": -1.06580999003058,
+            "retained_target_db": -5.140372653182599
+          },
+          "outside": {
+            "snr_gain_db": 0.42439365118104133,
+            "retained_target_db": -3.147629275284465
+          }
+        }
+      }
+    },
+    {
+      "role": "selection",
+      "meeting": "ES2004a",
+      "arm": "synthetic",
+      "views": 3,
+      "median": {
+        "correct": {
+          "whole": {
+            "snr_gain_db": 3.275685031543844,
+            "retained_target_db": -2.1102263368036502
+          },
+          "edit": {
+            "snr_gain_db": -0.3789065347844769,
+            "retained_target_db": -5.372166967419213
+          },
+          "outside": {
+            "snr_gain_db": 2.6594696218379372,
+            "retained_target_db": -2.0713448221182276
+          }
+        },
+        "sham": {
+          "whole": {
+            "snr_gain_db": 0.7566133132637489,
+            "retained_target_db": -3.2549900007119534
+          },
+          "edit": {
+            "snr_gain_db": -1.823938131787294,
+            "retained_target_db": -4.63335261094066
+          },
+          "outside": {
+            "snr_gain_db": 0.42446734418638266,
+            "retained_target_db": -3.1474031824238295
+          }
+        }
+      }
+    },
+    {
+      "role": "selection",
+      "meeting": "IS1009a",
+      "arm": "ordinary_other_voice",
+      "views": 3,
+      "median": {
+        "correct": {
+          "whole": {
+            "snr_gain_db": 0.2263421711343847,
+            "retained_target_db": -3.679297652522698
+          },
+          "edit": {
+            "snr_gain_db": 0.24490396110380352,
+            "retained_target_db": -3.274434394172887
+          },
+          "outside": {
+            "snr_gain_db": 0.22269660349878873,
+            "retained_target_db": -3.6197082103040685
+          }
+        },
+        "sham": {
+          "whole": {
+            "snr_gain_db": 0.1331714637249748,
+            "retained_target_db": -4.305651585146262
+          },
+          "edit": {
+            "snr_gain_db": -1.2326526399442077,
+            "retained_target_db": -6.995302262986636
+          },
+          "outside": {
+            "snr_gain_db": 0.2919688866109018,
+            "retained_target_db": -3.8058989784939463
+          }
+        }
+      }
+    },
+    {
+      "role": "selection",
+      "meeting": "IS1009a",
+      "arm": "ordinary_same_host",
+      "views": 3,
+      "median": {
+        "correct": {
+          "whole": {
+            "snr_gain_db": 0.3843827062073064,
+            "retained_target_db": -3.540370582064472
+          },
+          "edit": {
+            "snr_gain_db": -0.06526667361276894,
+            "retained_target_db": -3.196026896206945
+          },
+          "outside": {
+            "snr_gain_db": 0.22299154981216773,
+            "retained_target_db": -3.619695060013382
+          }
+        },
+        "sham": {
+          "whole": {
+            "snr_gain_db": 0.2679223520168659,
+            "retained_target_db": -4.110947483310079
+          },
+          "edit": {
+            "snr_gain_db": -0.32428280580242674,
+            "retained_target_db": -3.67564748211769
+          },
+          "outside": {
+            "snr_gain_db": 0.29231543764980383,
+            "retained_target_db": -3.8059464437377137
+          }
+        }
+      }
+    },
+    {
+      "role": "selection",
+      "meeting": "IS1009a",
+      "arm": "synthetic",
+      "views": 3,
+      "median": {
+        "correct": {
+          "whole": {
+            "snr_gain_db": 0.1957852001898832,
+            "retained_target_db": -3.675276907366941
+          },
+          "edit": {
+            "snr_gain_db": 0.05954423663784514,
+            "retained_target_db": -3.945928204626287
+          },
+          "outside": {
+            "snr_gain_db": 0.22305595273904277,
+            "retained_target_db": -3.6196945554427264
+          }
+        },
+        "sham": {
+          "whole": {
+            "snr_gain_db": 0.4078355920164194,
+            "retained_target_db": -3.971054794274029
+          },
+          "edit": {
+            "snr_gain_db": 0.4782151444908198,
+            "retained_target_db": -4.669138619970431
+          },
+          "outside": {
+            "snr_gain_db": 0.29175080700210554,
+            "retained_target_db": -3.80581236726166
+          }
+        }
+      }
+    }
+  ],
+  "acoustic_gate": {
+    "right_reference_beats_sham": 6,
+    "same_host_cases": 8,
+    "two_thirds_specific": true,
+    "each_room_genuine_median_snr_gain": false,
+    "each_room_edit_preserved": false,
+    "qualifies": false
+  },
+  "scope": {
+    "measured": 42
+  },
+  "neural_authenticity_scores_measured": 0,
+  "commitments": {
+    "freeze": "1f58cd8a596f0d763c4b92fd103e48eaaad2535df3873f97c7a9c6b7ad4172cf",
+    "roster": "50611f97df076a3d136a45a588681cccefd101925359a65ff168beaa462ac201",
+    "measurements": "c2cad521c9d7992206e28af0721e068021673a4fe826a2f0608aa022686cbc9a"
+  },
+  "seconds": 1.281
+}

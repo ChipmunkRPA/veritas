@@ -1,0 +1,187 @@
+import { useEffect, useId, useRef, useState, type FormEvent } from 'react'
+import { useQuery } from '@tanstack/react-query'
+import { Button } from '../../components/ui'
+import { saveBlob } from '../../lib/api/reports'
+import {
+  compareWithEarlierImage, comparisonAvailability, comparisonPdfData, imageReferenceExport, referencePngSrc,
+  type ImageReferenceResult, type NativeImageArea, type ReferencePng,
+} from './imageReferenceApi'
+
+type ComparisonState =
+  | { status: 'idle' | 'pending' }
+  | { status: 'error'; message: string }
+  | { status: 'done'; result: ImageReferenceResult }
+
+const unassessed: Record<string, string> = {
+  different_dimensions: 'The copies have different dimensions and a common area could not be measured.',
+  unsupported_dimensions: 'The image dimensions are outside the supported comparison range.',
+  unaligned: 'The copies could not be aligned reliably.',
+  integer_alignment_unresolved: 'The copies could not be aligned reliably on their pixel grids.',
+  insufficient_common_background: 'Too little matching background was available for a reliable comparison.',
+  partial_jpeg_delivery_unassessed: 'The submitted JPEG extends outside the aligned area, so its compression could not be compared reliably.',
+  uncertain_delivery: 'The available compression comparisons did not provide enough support.',
+}
+
+function NativeArea({ area }: { area: NativeImageArea }) {
+  return <span className="font-mono">x {area.x}, y {area.y} · {area.w} × {area.h} px</span>
+}
+
+function ComparisonPicture({ result, artifact, label }: {
+  result: ImageReferenceResult; artifact?: ReferencePng; label: string
+}) {
+  const [failed, setFailed] = useState(false)
+  const src = referencePngSrc(result.pngs, artifact)
+  return <figure className="m-0 min-w-0">
+    <figcaption className="mb-2 text-small font-medium text-text">{label}</figcaption>
+    <div className="flex min-h-24 items-center justify-center overflow-hidden rounded-md border border-border bg-surface-2">
+      {src && artifact && !failed
+        ? <img className="block h-auto max-h-80 w-full object-contain" src={src} alt={label}
+            width={artifact.width} height={artifact.height} loading="lazy" onError={() => setFailed(true)} />
+        : <p className="m-4 text-small text-text-muted">This evidence image is unavailable.</p>}
+    </div>
+  </figure>
+}
+
+function ComparisonResult({ result }: { result: ImageReferenceResult }) {
+  const { comparison } = result
+  const { reference, submitted, regions, mask, alignment } = comparison
+  const comparable = comparison.status === 'comparable'
+  const reason = Object.prototype.hasOwnProperty.call(unassessed, comparison.status)
+    ? unassessed[comparison.status] : 'The selected copies could not be compared reliably.'
+  const pdf = comparisonPdfData(result)
+  const download = () => {
+    const json = JSON.stringify(imageReferenceExport(result), null, 2) + '\n'
+    saveBlob(new Blob([json], { type: 'application/json' }), 'chipmunk-verify-image-comparison.json')
+  }
+  return <div className="mt-5 border-t border-border pt-4">
+    <div className="flex flex-wrap items-baseline justify-between gap-3">
+      <p className="m-0 text-small font-medium text-text" role="status">
+        {comparable ? regions.length === 0 ? 'No localized differences found' : `${regions.length} difference ${regions.length === 1 ? 'region' : 'regions'} found`
+          : 'Comparison unassessed'}
+      </p>
+      <div className="flex flex-wrap gap-x-4 gap-y-1">
+        {pdf && <Button variant="text" onClick={() => {
+          const decoded = atob(pdf)
+          const bytes = new Uint8Array(decoded.length)
+          for (let index = 0; index < decoded.length; index++) bytes[index] = decoded.charCodeAt(index)
+          saveBlob(new Blob([bytes], { type: 'application/pdf' }), 'chipmunk-verify-image-comparison.pdf')
+        }}>Download comparison PDF</Button>}
+        <Button variant="text" onClick={download}>Download comparison JSON</Button>
+      </div>
+    </div>
+    {!pdf && <p className="mt-2 mb-0 text-caption text-text-muted">The comparison PDF is unavailable. The JSON download includes the measurements and images.</p>}
+    {comparable
+      ? regions.length === 0 && <p className="mt-2 mb-0 text-small text-text-muted">
+          No localized differences met the comparison criteria in the measured area. Small changes may still be present.
+        </p>
+      : <p className="mt-2 mb-0 text-small text-text-muted">{reason}</p>}
+    {(alignment || (comparable && regions.length > 0)) && <p className="mt-3 mb-0 text-caption text-text-muted">
+      Coordinates use each image’s own pixels, measured from the top left after correcting its stored orientation.
+    </p>}
+    {alignment && <dl className="mt-3 mb-0 grid grid-cols-1 gap-2 text-small text-text-muted sm:grid-cols-2">
+      <div><dt className="font-medium text-text">Submitted image overlap</dt><dd className="m-0"><NativeArea area={alignment.submitted_overlap} /></dd></div>
+      <div><dt className="font-medium text-text">Earlier copy overlap</dt><dd className="m-0"><NativeArea area={alignment.reference_overlap} /></dd></div>
+      <div className="sm:col-span-2"><dt className="sr-only">Comparison coverage</dt><dd className="m-0">Pixels outside the overlap were unassessed.</dd></div>
+    </dl>}
+    {comparable && regions.length > 0 && <>
+      {mask && <div className="mt-4 max-w-xl">
+        <ComparisonPicture result={result} artifact={mask} label="Difference mask in submitted image coordinates" />
+        <p className="mt-2 mb-0 text-caption text-text-muted">White marks the selected differences. Black includes unselected and potentially unassessed pixels.</p>
+      </div>}
+      <ol className="mt-4 mb-0 list-none space-y-4 p-0">
+        {regions.map((region, index) => <li key={index} className="rounded-md border border-border p-3">
+          <h3 className="m-0 text-small font-medium">Difference region {index + 1}</h3>
+          <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <div className="min-w-0">
+              <ComparisonPicture result={result} artifact={region.reference_crop} label={`Earlier copy crop for region ${index + 1}`} />
+              <p className="mt-2 mb-0 text-caption text-text-muted"><NativeArea area={region.reference_region ?? region} /></p>
+            </div>
+            <div className="min-w-0">
+              <ComparisonPicture result={result} artifact={region.submitted_crop} label={`Submitted image crop for region ${index + 1}`} />
+              <p className="mt-2 mb-0 text-caption text-text-muted"><NativeArea area={region} /></p>
+            </div>
+          </div>
+        </li>)}
+      </ol>
+      {!!comparison.additional_regions && <p className="mt-3 mb-0 text-small text-text-muted">
+        {comparison.additional_regions} more {comparison.additional_regions === 1 ? 'region was' : 'regions were'} omitted from this bounded view.
+      </p>}
+    </>}
+    <details className="mt-4 text-small text-text-muted">
+      <summary className="cursor-pointer">Source file records</summary>
+      <dl className="mt-2 mb-0 space-y-2 text-caption">
+        <div><dt>Earlier copy · {reference.width} × {reference.height} px · SHA-256</dt><dd className="m-0 break-all font-mono">{reference.sha256}</dd></div>
+        <div><dt>Submitted image · {submitted.width} × {submitted.height} px · SHA-256</dt><dd className="m-0 break-all font-mono">{submitted.sha256}</dd></div>
+      </dl>
+    </details>
+  </div>
+}
+
+function ComparisonForm({ analysisId }: { analysisId: string }) {
+  const headingId = useId()
+  const fileId = useId()
+  const formatId = useId()
+  const [file, setFile] = useState<File | null>(null)
+  const [state, setState] = useState<ComparisonState>({ status: 'idle' })
+  const active = useRef<AbortController | null>(null)
+  useEffect(() => () => active.current?.abort(), [])
+
+  const chooseFile = (next: File | null) => {
+    active.current?.abort()
+    active.current = null
+    setFile(next)
+    setState({ status: 'idle' })
+  }
+
+  const compare = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    if (!file || active.current) return
+    const request = new AbortController()
+    active.current = request
+    setState({ status: 'pending' })
+    try {
+      const result = await compareWithEarlierImage(analysisId, file, request.signal)
+      if (active.current === request && !request.signal.aborted) setState({ status: 'done', result })
+    } catch (error) {
+      if (active.current === request && !request.signal.aborted) {
+        setState({ status: 'error', message: error instanceof Error ? error.message : 'Please try again.' })
+      }
+    } finally {
+      if (active.current === request) active.current = null
+    }
+  }
+
+  return <section aria-labelledby={headingId} className="rounded-md border border-border p-4">
+    <h2 id={headingId} className="m-0 text-body font-medium text-text">Compare with an earlier copy</h2>
+    <p className="mt-2 mb-0 max-w-[75ch] text-small text-text-muted">
+      Choose an earlier copy to look for pixel differences. Ordinary processing can produce differences, and establishing how a change was made or which copy came first requires separate evidence.
+    </p>
+    <form onSubmit={event => void compare(event)} className="mt-4 flex flex-wrap items-end gap-3">
+      <div className="min-w-0">
+        <label htmlFor={fileId} className="mb-1 block text-small font-medium text-text">Earlier copy</label>
+        <input id={fileId} type="file" accept="image/png,image/jpeg,.png,.jpg,.jpeg" aria-describedby={formatId}
+          onChange={event => chooseFile(event.currentTarget.files?.[0] ?? null)}
+          className="block max-w-full text-small text-text file:mr-2 file:cursor-pointer file:rounded-sm file:border file:border-border file:bg-surface-2 file:px-2 file:py-1 file:text-text" />
+        <p id={formatId} className="mt-1 mb-0 text-caption text-text-muted">PNG or JPEG, up to 4 megapixels.</p>
+      </div>
+      <Button type="submit" variant="primary" disabled={!file || state.status === 'pending'}>
+        {state.status === 'pending' ? 'Comparing…' : state.status === 'error' ? 'Retry comparison' : 'Compare images'}
+      </Button>
+    </form>
+    {state.status === 'pending' && <p role="status" className="mt-3 mb-0 text-small text-text-muted">Measuring pixel differences…</p>}
+    {state.status === 'error' && <p role="alert" className="mt-3 mb-0 text-small text-danger">Comparison failed. {state.message}</p>}
+    {state.status === 'done' && <ComparisonResult result={state.result} />}
+  </section>
+}
+
+export default function ImageReferenceComparison({ analysisId }: { analysisId: string }) {
+  const availability = useQuery({
+    queryKey: ['analysis', analysisId, 'image-reference-comparison'],
+    queryFn: ({ signal }) => comparisonAvailability(analysisId, signal),
+    refetchOnMount: 'always',
+    refetchOnWindowFocus: false,
+    retry: false,
+  })
+  return availability.isFetchedAfterMount && availability.data === true && !availability.isError
+    ? <ComparisonForm key={analysisId} analysisId={analysisId} /> : null
+}

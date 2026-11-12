@@ -9,11 +9,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
-from app.api import auth, jobs, state
+from app.api import auth, jobs, state, v2_image_reference
 from app.api.demo import router as demo_router
 from app.api.routes import KIND_LIMITS, public, router
 from app.api.security import refuse_nul
-from app.api.v2 import install_problem_handlers
+from app.api.v2 import install_problem_handlers, problem
 from app.api.v2 import router as v2_router
 from app.api.v2_annotations import router as v2_annotations_router
 from app.api.v2_audit import router as v2_audit_router
@@ -104,6 +104,8 @@ def body_limit(path: str) -> int:
         return max(KIND_LIMITS.values()) + 1024 * 1024  # the declared kind is a form field; intake enforces its own limit
     if path == "/api/v2/batches":
         return settings.batch_max_bytes + 16 * 1024 * 1024
+    if v2_image_reference.is_comparison_path(path) and v2_image_reference.enabled():
+        return v2_image_reference.upload_limit() + 1024 * 1024
     return settings.max_json_bytes
 
 
@@ -118,6 +120,8 @@ def upload_limiter(scope):
         declared = path.rsplit("/", 1)[-1]
     elif path == "/api/v2/batches":
         field_caps = {"archive": settings.batch_max_bytes}
+    elif v2_image_reference.is_comparison_path(path) and v2_image_reference.enabled():
+        declared, field_caps = "image", {"reference": v2_image_reference.upload_limit()}
     elif not ((path.startswith("/api/v2/cases/") and path.endswith("/items")) or path == "/api/v2/billing/checkout"):
         return None
     content_type = next((v for k, v in scope["headers"] if k == b"content-type"), b"")
@@ -143,6 +147,9 @@ class BodyLimitMiddleware:
         limit = body_limit(scope["path"])
         declared = next((v for k, v in scope["headers"] if k == b"content-length"), None)
         if declared is not None and declared.isdigit() and int(declared) > limit:
+            if v2_image_reference.is_comparison_path(scope["path"]):
+                response = problem(413, "Request body exceeds the limit", "The image upload is larger than allowed.", scope["path"])
+                return await response(scope, receive, send)
             return await _too_large(limit)(scope, receive, send)
         limiter = upload_limiter(scope)
         received = 0
@@ -236,6 +243,7 @@ app.include_router(v2_review_router)
 app.include_router(v2_rerun_router)
 app.include_router(v2_evidence_router)
 app.include_router(v2_evidence_packets_router)
+app.include_router(v2_image_reference.router)
 app.include_router(v2_models_router)
 app.include_router(v2_refusion_router)
 app.include_router(v2_reports_router)

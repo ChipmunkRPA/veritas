@@ -1,6 +1,18 @@
-# Offline comparison with an earlier image
+# Compare an image with an earlier copy
 
-If you have an independently obtained earlier copy, you can compare it with the submitted image on your own machine. The command preserves the original source coordinates and writes a full-size difference mask, both original crops, and JSON with the source and artifact hashes.
+If you have an independently obtained earlier copy, you can compare it with the submitted image on your own machine. Ordinary processing can produce differences. Establishing the earlier file's provenance or the cause of a difference requires separate evidence.
+
+## Local app
+
+Set `VERITAS_IMAGE_REFERENCE_COMPARISON_ENABLED=true` in `backend/.env` and restart the local API. Open a completed image analysis in the normal view, select **Compare with an earlier copy**, then choose a single-frame PNG or JPEG. Each image may have up to 4 million pixels. The submitted source must still be available and match its recorded SHA-256.
+
+The app shows both exact crops, their native positions and the submitted-image difference mask. Verified integer crops and translations include both overlap areas. Downloads include a separate comparison PDF and JSON with the original file commitments and PNG assets. The earlier copy is staged temporarily for the request. The comparison carries zero AI confidence weight and requires a completed analysis.
+
+A local browser test used a cropped JPEG with a known edit and an earlier PNG. Simulated Stripe payment released the original analysis, and the supplemental comparison used its retained source. The browser loaded both crops and the mask and downloaded both exports. A separate HTTP test reopened the PDF and matched its embedded pixels and recorded hashes to the JSON. An identical pair returned no selected region. An unalignable pair returned an unassessed result.
+
+## Command-line comparison
+
+The offline command preserves the original source coordinates and writes a full-size difference mask, both original crops, and JSON with the source and artifact hashes.
 
 ```sh
 cd backend

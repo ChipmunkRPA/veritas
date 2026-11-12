@@ -621,6 +621,24 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v2/analyses/{aid}/image-reference-comparison": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Image Reference Availability */
+        get: operations["image_reference_availability_api_v2_analyses__aid__image_reference_comparison_get"];
+        put?: never;
+        /** Image Reference Comparison */
+        post: operations["image_reference_comparison_api_v2_analyses__aid__image_reference_comparison_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v2/analyses/{aid}/packages": {
         parameters: {
             query?: never;
@@ -2296,6 +2314,11 @@ export interface components {
             /** Next After Seq */
             next_after_seq?: number | null;
         };
+        /** Availability */
+        Availability: {
+            /** Available */
+            available: boolean;
+        };
         /** BBox */
         BBox: {
             /** H */
@@ -2505,6 +2528,16 @@ export interface components {
             risk_notice_sha256?: string | null;
             /** Risk Notice Version */
             risk_notice_version?: string | null;
+        };
+        /** Body_image_reference_comparison_api_v2_analyses__aid__image_reference_comparison_post */
+        Body_image_reference_comparison_api_v2_analyses__aid__image_reference_comparison_post: {
+            /**
+             * Include Pdf
+             * @default false
+             */
+            include_pdf: boolean;
+            /** Reference */
+            reference: string;
         };
         /** CalibrationInfo */
         CalibrationInfo: {
@@ -2721,6 +2754,19 @@ export interface components {
             reason?: string | null;
             /** Valid */
             valid: boolean;
+        };
+        /** Comparison */
+        Comparison: {
+            /** Comparison */
+            comparison: {
+                [key: string]: unknown;
+            };
+            /** Pdf */
+            pdf?: string | null;
+            /** Pngs */
+            pngs: {
+                [key: string]: string;
+            };
         };
         /** ConclusionOut */
         ConclusionOut: {
@@ -7077,6 +7123,133 @@ export interface operations {
             };
             /** @description Unprocessable Entity */
             422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Problem"];
+                    "application/problem+json": unknown;
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Problem"];
+                    "application/problem+json": unknown;
+                };
+            };
+        };
+    };
+    image_reference_availability_api_v2_analyses__aid__image_reference_comparison_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                aid: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Availability"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Problem"];
+                    "application/problem+json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    image_reference_comparison_api_v2_analyses__aid__image_reference_comparison_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                aid: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "multipart/form-data": components["schemas"]["Body_image_reference_comparison_api_v2_analyses__aid__image_reference_comparison_post"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Comparison"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Problem"];
+                    "application/problem+json": unknown;
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Problem"];
+                    "application/problem+json": unknown;
+                };
+            };
+            /** @description Request Entity Too Large */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Problem"];
+                    "application/problem+json": unknown;
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Problem"];
+                    "application/problem+json": unknown;
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
                 headers: {
                     [name: string]: unknown;
                 };

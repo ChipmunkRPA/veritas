@@ -22,11 +22,12 @@ Check capacity with `python -m app.cli models plan` from the backend directory.
 | `VERITAS_IMAGE_REGION_MODE=candidate` | Full or Deep, supported upright RGB PNGs. The region check runs on CPU. | Source crops, masks and the exact area flagged by either or both eligible region checks. Sensitivity improved on the earlier panel. A later transfer found 2/24 edits and highlighted 62/72 controls, supporting opt-in use. [Confirmation](image-native-confirmation-v46-result.md) · [Later transfer](image-active-png-transfer-2026-11-11.md) |
 | `VERITAS_VIDEO_WHOLE_FACE_REVIEW=true` | Quick, Full or Deep, supported videos with a verified native frame clock. | A face-swap cue across six sampled frames with representative original frames and crops. The paired check flagged 45/48 whole-clip swaps versus 26/48, with 0/24 original flags in both arms on that panel. A separate transfer missed the outside publisher's swap and flagged two variants of one camera recording. [Confirmation](video-face-pe-confirmation-2026-11-11.md) · [Outside transfer](video-face-pe-publisher-2026-11-11.md) |
 | `VERITAS_TEXT_ISOLATED_PARAGRAPH_REVIEW=true` | Eligible plain-text articles with the local candidate text mode selected. | Additional readings of up to two complete paragraphs without their surrounding context. The same classifier supplies both readings, and some genres produced frequent human-writing flags in evaluation. [Replication](writing-paragraph-replication-2026-11-11.md) |
+| `VERITAS_IMAGE_REFERENCE_COMPARISON_ENABLED=true` | Development instances, on completed image analyses with a retained original. The reviewer supplies an earlier PNG or JPEG. | A separate comparison with both original crops, the measured mask and PDF and JSON downloads. This comparison covers supported single-frame images of up to 4 million pixels. [Evaluation and usage](image-reference-comparison-2026-11-11.md) |
 
-These checks have zero overall confidence weight. The image evidence does not attribute
-an edit to AI, and six video samples cannot establish the boundaries of a short swap.
-The rollback values are `VERITAS_IMAGE_REGION_MODE=legacy`,
-`VERITAS_VIDEO_WHOLE_FACE_REVIEW=false` and `VERITAS_TEXT_ISOLATED_PARAGRAPH_REVIEW=false`.
+These checks have zero overall confidence weight. The image evidence describes pixel
+observations, and the six video samples describe the sampled moments. Restore the
+default values with `VERITAS_IMAGE_REGION_MODE=legacy`, `VERITAS_VIDEO_WHOLE_FACE_REVIEW=false`,
+`VERITAS_TEXT_ISOLATED_PARAGRAPH_REVIEW=false` and `VERITAS_IMAGE_REFERENCE_COMPARISON_ENABLED=false`.
 
 **A prod start without a container.** The command line of the row "Single process, no container", from `backend/`,
 with the flags of the image's own command and the loopback address (put a TLS proxy in front: "TLS"):

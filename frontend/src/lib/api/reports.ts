@@ -100,7 +100,7 @@ export async function downloadFile(path: string, filename: string): Promise<void
   saveBlob(await response.blob(), filename)
 }
 
-function saveBlob(blob: Blob, filename: string): void {
+export function saveBlob(blob: Blob, filename: string): void {
   const url = URL.createObjectURL(blob)
   const a = document.createElement('a')
   a.href = url

@@ -1,0 +1,232 @@
+{
+  "advances": false,
+  "calibration_sha256": "abdedc8ae11c9eaff06ea307c2a715ca4f5ae2f69987bd17478dce10a8a55293",
+  "comparisons": {
+    "amplitude": {
+      "added_over_direct": 2,
+      "assessed": 88,
+      "correct": 2,
+      "extra_control_ranges": 6,
+      "source_compatible_correct": 0,
+      "source_components": 1
+    },
+    "head_adjusted_slope": {
+      "added_over_direct": 4,
+      "assessed": 88,
+      "correct": 4,
+      "extra_control_ranges": 14,
+      "source_compatible_correct": 2,
+      "source_components": 2
+    },
+    "slope": {
+      "added_over_direct": 5,
+      "assessed": 88,
+      "correct": 5,
+      "extra_control_ranges": 16,
+      "source_compatible_correct": 2,
+      "source_components": 2
+    }
+  },
+  "counts": {
+    "amplitude": {
+      "compatible": {
+        "measured_no_range": 7
+      },
+      "control": {
+        "false_range": 6,
+        "measured_no_range": 50
+      },
+      "other_neural": {
+        "correct_range": 2,
+        "measured_no_range": 23
+      }
+    },
+    "direct": {
+      "compatible": {
+        "measured_no_range": 7
+      },
+      "control": {
+        "measured_no_range": 56
+      },
+      "other_neural": {
+        "correct_range": 1,
+        "measured_no_range": 24
+      }
+    },
+    "head_adjusted_slope": {
+      "compatible": {
+        "correct_range": 2,
+        "measured_no_range": 5
+      },
+      "control": {
+        "false_range": 14,
+        "measured_no_range": 42
+      },
+      "other_neural": {
+        "correct_range": 2,
+        "measured_no_range": 22,
+        "misplaced_range": 1
+      }
+    },
+    "slope": {
+      "compatible": {
+        "correct_range": 2,
+        "measured_no_range": 5
+      },
+      "control": {
+        "false_range": 16,
+        "measured_no_range": 40
+      },
+      "other_neural": {
+        "correct_range": 3,
+        "measured_no_range": 21,
+        "misplaced_range": 1
+      }
+    }
+  },
+  "gate": {
+    "amplitude": {
+      "added_over_direct": true,
+      "correct": false,
+      "coverage": true,
+      "ordinary": false,
+      "source_compatible_correct": false,
+      "source_components": false
+    },
+    "head_adjusted_slope": {
+      "added_over_direct": true,
+      "correct": false,
+      "coverage": true,
+      "ordinary": false,
+      "source_compatible_correct": true,
+      "source_components": false
+    },
+    "slope": {
+      "added_over_direct": true,
+      "correct": false,
+      "coverage": true,
+      "ordinary": false,
+      "source_compatible_correct": true,
+      "source_components": false
+    }
+  },
+  "held_runtime": {
+    "elapsed_s": 3.284333957999479,
+    "freeze_sha256": "4c7a454c73f3e784be58f84e7a725e6cdd34030032b2d9d95e41fe30ab1c9852",
+    "journal_sha256": "5ebe06834ffbb43beaedb005dc990a6c684c8d65f2b90dd7c247a16e753defb1",
+    "rss_bytes": 95354880
+  },
+  "historical_observer_completion_sha256": "8931ea64f5e45a7b2a170ea8458f8260545b6041c73b29a0438e9115a3fa1a96",
+  "historical_observer_freeze_sha256": "6ff39194f84eb45ff0f3338c6071852a546eb2702159bc9151c4f4c898835682",
+  "independent_replay": {
+    "aggregate_sha256": "9a404a3f3762912c828268f4e8ac28dd61cbcbb7afe2dc9309b4806b5dcf06a5",
+    "compatible_correct_examples": [
+      {
+        "authored_s": [
+          "27/25",
+          "47/25"
+        ],
+        "native_picture_s": [
+          "26/25",
+          "37/25",
+          "47/25"
+        ],
+        "selected_s": [
+          "27/25",
+          "47/25"
+        ]
+      },
+      {
+        "authored_s": [
+          "27/25",
+          "47/25"
+        ],
+        "native_picture_s": [
+          "32/25",
+          "39/25",
+          "9/5"
+        ],
+        "selected_s": [
+          "33/25",
+          "9/5"
+        ]
+      }
+    ],
+    "counts": {
+      "audio_only_control_pairs_identical": 8,
+      "compatible_changed_picture_masks": 140,
+      "compatible_decoded_pictures": 1050,
+      "compatible_exact_original_pcm_pairs": 7,
+      "replayed_candidate_decisions": 264,
+      "selected_native_mouth_crops": 147,
+      "verified_held_clips": 88
+    },
+    "ordinary_flags_by_condition": {
+      "amplitude": {
+        "audio_delay_320ms": 1,
+        "brightness_liveportrait": 1,
+        "brightness_musetalk": 1,
+        "genuine_frame_retime": 1,
+        "original": 1,
+        "resample_musetalk": 1
+      },
+      "head_adjusted_slope": {
+        "audio_delay_320ms": 2,
+        "brightness_liveportrait": 2,
+        "brightness_musetalk": 2,
+        "genuine_frame_retime": 2,
+        "original": 2,
+        "resample_liveportrait": 2,
+        "resample_musetalk": 2
+      },
+      "slope": {
+        "audio_delay_320ms": 2,
+        "brightness_liveportrait": 3,
+        "brightness_musetalk": 3,
+        "genuine_frame_retime": 2,
+        "original": 2,
+        "resample_liveportrait": 2,
+        "resample_musetalk": 2
+      }
+    },
+    "status": "verified"
+  },
+  "independent_replay_sha256": "ab76a392c2a4206d2293ff1ac2bca1792b2f2effcab731b163a3fce4484b0fb6",
+  "new_neural_calls": 0,
+  "points": {
+    "amplitude": 0.998808414749111,
+    "head_adjusted_slope": 0.5081405436297307,
+    "slope": 0.5081405436297307
+  },
+  "protocol": {
+    "features": "Compute the mean of log standard-deviation ratios between first, second or third temporal differences and position, with a fixed 0.002 eye-normalized geometry floor. Contrast the core against the larger flank. The amplitude comparator uses log position standard deviation. The second candidate subtracts any positive contemporaneous excess of the same slope on log eye scale, eye roll and two nose offsets.",
+    "flank": 10,
+    "floor": 0.002,
+    "gate": {
+      "added_over_direct": 2,
+      "correct": 6,
+      "maximum_extra_control_ranges": 2,
+      "minimum_assessed_fraction": 0.75,
+      "source_compatible_correct": 2,
+      "source_components": 3
+    },
+    "minimum_iou": "1/2",
+    "native_step_s": "1/25",
+    "scan": "Search 12, 16 and 20 consecutive picture windows with ten consecutive pictures in each flank. Analyze only in-file geometry on one native clock, with no interpolation. Strict ordinary development comparison points are independently fixed from the third-highest case maximum for each arm.",
+    "schema": "chipmunk.video-mouth-dynamics-transfer/1",
+    "scope": "Actual retained native 25 fps GRID pilot pictures and four retained lip geometry measures, three inner-lip gaps and inner-mouth width. Use only the saved geometry of the tested picture itself, including exact RGB and timestamp matches to an earlier observation. Reuse the earlier known source-disjoint development/held component split. General project exposure remains.",
+    "source_compatible": "Existing independently measured visible motion agrees with source time and waveform is original. Achieved phoneme-level timing and listener synchrony have not been established.",
+    "widths": [
+      12,
+      16,
+      20
+    ]
+  },
+  "role_scope": {
+    "development_source_components": 4,
+    "held_source_components": 4,
+    "known_overlap_between_roles": 0,
+    "prior_project_exposure": true
+  },
+  "serving_change": false
+}

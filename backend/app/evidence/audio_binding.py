@@ -264,7 +264,7 @@ def _validate(channel, source_sha256):
     if 'similarity_context' in channel:
         from app.evidence.audio_similarity_binding import validate
 
-        validate(channel['similarity_context'], source)
+        validate(channel['similarity_context'], source, channel.get('repetition_context'))
 
     coverage=channel['coverage']
     for window in coverage['windows']:

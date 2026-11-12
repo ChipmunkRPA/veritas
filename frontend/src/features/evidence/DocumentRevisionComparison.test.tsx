@@ -68,3 +68,28 @@ it('displays the exact server excerpts and Unicode ranges and downloads both rep
   })
   expect(JSON.parse(exported)).toEqual(comparison)
 })
+
+it('offers Word uploads and shows the server paragraph and body offsets', async () => {
+  const source = { sha256: '0'.repeat(64), bytes: 30, decoded_text_sha256: '1'.repeat(64), decoded_characters: 40, mime_part: null }
+  const comparison: DraftComparison = {
+    schema: 'chipmunk.document-revision-comparison/1', format: 'docx', coordinate_space: 'docx_body_unicode_codepoint',
+    earlier: source, later: source, scope: 'Top-level body paragraphs.', interpretation: 'Compare the wording.',
+    changes: [{ id: 'C01', role: 'body', earlier: { start: 20, end: 24, text: 'soup', changed_tokens: [[20, 24]],
+      paragraphs: [{ paragraph: 2, body_index: 3, start: 1, end: 5 }] },
+    later: { start: 20, end: 24, text: 'café', changed_tokens: [[20, 24]],
+      paragraphs: [{ paragraph: 2, body_index: 3, start: 1, end: 5 }] } }],
+  }
+  vi.mocked(draftAvailability).mockResolvedValue('.docx')
+  vi.mocked(compareDraft).mockResolvedValue({ comparison })
+  show()
+  const input = await screen.findByLabelText('Earlier draft')
+  expect(input.getAttribute('accept')).toBe('.docx')
+  const file = new File(['earlier'], 'earlier.DOCX')
+  fireEvent.change(input, { target: { files: [file] } })
+  fireEvent.click(screen.getByRole('button', { name: 'Compare drafts' }))
+  await screen.findByText('C01 · Word body text')
+  expect(compareDraft).toHaveBeenCalledWith('draft-analysis', file, expect.any(AbortSignal))
+  expect(screen.getAllByText('Paragraph 2 [1, 5)')).toHaveLength(2)
+  expect(screen.getAllByText('[20, 24)')).toHaveLength(2)
+  expect(screen.getByText('café').tagName).toBe('MARK')
+})

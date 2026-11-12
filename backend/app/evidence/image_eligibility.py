@@ -72,7 +72,8 @@ def validate_gate(gate: dict, *, source_sha256: str | None = None,
 def validate_flip_consistency(review: dict, raw_eligible: int, width: int, height: int) -> int:
     if (not isinstance(review, dict) or review.get("schema") != FLIP_CONSISTENCY
             or max(width, height) != 768 or min(width, height) < 512
-            or any(not _SHA.fullmatch(str(review.get(key, ""))) for key in ("aligned_mask_sha256", "reflected_input_sha256"))):
+            or any(not _SHA.fullmatch(str(review.get(key, ""))) for key in ("aligned_mask_sha256", "reflected_input_sha256"))
+            or ("aligned_mask_png_sha256" in review and not _SHA.fullmatch(str(review["aligned_mask_png_sha256"])))):
         raise ValueError("The image repeat pass has an unsupported scope or commitment")
     rows = review.get("candidates")
     if not isinstance(rows, list) or not 1 <= len(rows) == min(raw_eligible, 2):
@@ -149,3 +150,9 @@ def validate_inspection_coverage(document: dict) -> None:
         reliability = check.get("reliability_mask_sha256")
         if reliability is not None and not any(a.get("sha256") == reliability for a in overview.values()):
             raise ValueError("The recorded image quality exclusions are not included")
+        if repeat and (repeat_png := repeat.get("aligned_mask_png_sha256")):
+            if reliability is None:
+                raise ValueError("The aligned repeat-pass mask requires the original quality exclusions")
+            if not any(a.get("sha256") == repeat_png and [a.get("width"), a.get("height")] == check["map_grid"]
+                       and a.get("media_type") == "image/png" for a in overview.values()):
+                raise ValueError("The aligned repeat-pass mask is missing from the evidence")

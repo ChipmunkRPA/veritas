@@ -430,12 +430,16 @@ python -m app.cli verify evidence.zip --public-key instance-key.pem --source-ima
 
 This optional check runs locally. It compares the original SHA-256 and
 then checks every unannotated inspection crop and both sides of a same-image
-match at their recorded EXIF-oriented coordinates. If the export contains no
-unannotated crops, it reports the source hash check alone. Pillow is enough for
+match at their recorded EXIF-oriented coordinates. Pillow is enough for
 the crop comparison. For a geometric copy match in `image-evidence-13`, the
 project Python environment also recomputes both masks with the recorded
 alignment and starting box. This replay does not rerun sparse proposal
 generation. [Geometric copy evaluation](image-affine-copy-transfer-2026-11-11.md)
+
+When the export includes an aligned repeat-pass mask, the project environment
+also recomputes the overlap of every inspected component with that mask, even
+when the check withheld all crops. It uses the recorded response and quality
+masks without running a detector. [Regional repeat pass](image-regional-flip-transfer-2026-11-11.md)
 
 The ordinary archive
 verification remains available with only the ZIP and a key. The pixel check
@@ -606,9 +610,11 @@ decoded text positions, and the exact changed-token ranges locally.
   chipmunk-verify-draft-comparison.json earlier.eml later.eml
 ```
 
-Use two `.eml` files or two `.txt` files. The output gives the verified range
-counts by role. The comparison locates differences and leaves revision order
-and authorship to other evidence. This replay uses no model or remote service.
+Use matching `.eml`, `.txt` or `.docx` files. The output gives the verified range
+counts by role. Word replay also checks the top-level body paragraph numbers,
+XML body-child positions and paragraph-local character ranges. The comparison
+locates differences and leaves revision order and authorship to other evidence.
+This replay uses no model or remote service.
 
 ### Replay document evidence against the original
 

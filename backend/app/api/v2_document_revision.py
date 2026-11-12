@@ -20,7 +20,7 @@ from app.api.v2_evidence import _analysis
 from app.cases import review
 from app.core.config import settings
 from app.core.logging import get_logger
-from app.evidence.document_revision import MAX_BYTES
+from app.evidence.document_revision import FORMATS, MAX_BYTES, SUPPORTED_DRAFTS
 from app.storage.db import get_session
 from app.storage.objects import ObjectNotFound, ObjectStoreError, default_store
 
@@ -35,7 +35,7 @@ router = APIRouter(prefix="/api/v2", tags=["evidence"], dependencies=[Depends(ra
 
 class DocumentRevisionAvailability(BaseModel):
     available: bool
-    extension: Literal[".eml", ".txt"] | None = None
+    extension: Literal[".eml", ".txt", ".docx"] | None = None
 
 
 class DraftSource(BaseModel):
@@ -46,11 +46,19 @@ class DraftSource(BaseModel):
     mime_part: str | None
 
 
+class DraftParagraph(BaseModel):
+    paragraph: int
+    body_index: int
+    start: int
+    end: int
+
+
 class DraftExcerpt(BaseModel):
     start: int
     end: int
     text: str
     changed_tokens: list[tuple[int, int]]
+    paragraphs: list[DraftParagraph] | None = None
 
 
 class DraftChange(BaseModel):
@@ -62,8 +70,8 @@ class DraftChange(BaseModel):
 
 class DraftComparison(BaseModel):
     schema_name: Literal["chipmunk.document-revision-comparison/1"] = Field(alias="schema")
-    format: Literal["email", "plain_text"]
-    coordinate_space: Literal["decoded_source_unicode_codepoint"]
+    format: Literal["email", "plain_text", "docx"]
+    coordinate_space: Literal["decoded_source_unicode_codepoint", "docx_body_unicode_codepoint"]
     earlier: DraftSource
     later: DraftSource
     changes: list[DraftChange]
@@ -97,7 +105,7 @@ def _original(aid: str, *, reject_inactive: bool = False) -> tuple[str, int, str
         analysis = _analysis(db, aid)
         extension = Path(analysis.filename).suffix.lower()
         if (not enabled() or analysis.kind != "document" or analysis.status != "done" or not analysis.result_hash
-                or extension not in {".eml", ".txt"} or not 0 < analysis.size_bytes <= upload_limit()):
+                or extension not in FORMATS or not 0 < analysis.size_bytes <= upload_limit()):
             return None
         if analysis.withdrawn_at is not None:
             if reject_inactive:
@@ -111,7 +119,7 @@ def _original(aid: str, *, reject_inactive: bool = False) -> tuple[str, int, str
 
 
 def _unavailable() -> ProblemError:
-    return ProblemError(404, "Earlier-draft comparison unavailable", "A retained, completed, active .eml or .txt analysis is required.")
+    return ProblemError(404, "Earlier-draft comparison unavailable", "A retained, completed, active .eml, .txt or .docx analysis is required.")
 
 
 @router.get(ROUTE, response_model=DocumentRevisionAvailability, responses=problem_responses(401, 404))
@@ -145,7 +153,7 @@ def _compare(aid: str, original: tuple[str, int, str], earlier: bytes, include_p
     try:
         comparison = compare(earlier, later, extension)
     except (UnicodeError, LookupError, RecursionError):
-        raise ProblemError(422, "Could not compare drafts", "Use readable plain-text files or emails with a plain-text body.") from None
+        raise ProblemError(422, "Could not compare drafts", f"Use readable {SUPPORTED_DRAFTS}.") from None
     except ValueError as error:
         raise ProblemError(422, "Could not compare drafts", str(error)) from None
     except OSError:
@@ -168,7 +176,7 @@ def _compare(aid: str, original: tuple[str, int, str], earlier: bytes, include_p
     ROUTE, response_model=DocumentRevisionResponse, responses=problem_responses(400, 401, 404, 409, 413, 422, 429, 500),
     openapi_extra={"requestBody": {"required": True, "content": {"multipart/form-data": {"schema": {
         "type": "object", "required": ["earlier"], "properties": {
-            "earlier": {"type": "string", "format": "binary", "description": "Earlier .eml or .txt with the same extension."},
+            "earlier": {"type": "string", "format": "binary", "description": f"Earlier version. Use {SUPPORTED_DRAFTS}."},
             "include_pdf": {"type": "string", "enum": ["true", "false"], "default": "false"},
         },
     }}}}},

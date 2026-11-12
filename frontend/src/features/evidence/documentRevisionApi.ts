@@ -3,6 +3,7 @@ import type { components } from '../../lib/api/schema'
 
 export type DraftComparison = components['schemas']['DraftComparison']
 export type DraftExcerpt = components['schemas']['DraftExcerpt']
+export type DraftExtension = NonNullable<components['schemas']['DocumentRevisionAvailability']['extension']>
 export type DocumentRevisionResponse = components['schemas']['DocumentRevisionResponse']
 
 const route = '/api/v2/analyses/{aid}/document-revision-comparison'

@@ -20,6 +20,7 @@ from sqlalchemy.orm import Session
 
 from app.api.public_projection import alias_signal
 from app.core.canonical import canonical_hash, canonical_json
+from app.core.config import settings
 from app.detectors.audio.coverage import interval_union
 from app.detectors.audio.decode import SAMPLE_RATE, read_wav, source_ranges, wav_bytes
 from app.evidence.audio_binding import (
@@ -134,7 +135,7 @@ def validate_content(document: dict[str, Any]) -> None:
         from app.evidence.audio_similarity_binding import validate
 
         try:
-            validate(document["similarity_context"], source)
+            validate(document["similarity_context"], source, document.get("repetition_context"))
         except ValueError as error:
             raise PacketIntegrityError(str(error)) from error
     if document.get("stereo_context") is not None:
@@ -364,6 +365,7 @@ def build_content(db: Session, analysis: Analysis, store: ObjectStore, result: d
     document["similarity_context"] = build_similarity(
         pcm, mapping, document["source"],
         lambda data, media_type, **metadata: _asset(db, store, analysis, set_id, data, media_type, **metadata),
+        repetition=document["repetition_context"] if settings.environment == "dev" and settings.audio_waveform_repeat_review else None,
     )
     return document
 

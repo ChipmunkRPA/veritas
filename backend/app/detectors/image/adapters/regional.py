@@ -75,8 +75,11 @@ class RegionalDetector(LocaliserDetector):
                                         self.REGION_THRESHOLD, original_bytes(ctx), reflected)
             aligned = np.ascontiguousarray(reflected_readout.selected_grid_mask[:, ::-1])
             regions, stats, review = flip_components(measured, aligned)
-            repeat = {"flip_consistency": {**review,
-                      "reflected_input_sha256": reflected_prediction.geometry["input_float32_sha256"]}}
+            proof = ctx.exhibits.binary_mask(aligned)
+            repeat = {
+                "flip_consistency": {**review, "aligned_mask_png_sha256": proof.sha256,
+                                     "reflected_input_sha256": reflected_prediction.geometry["input_float32_sha256"]},
+            }
         return loc.LocaliserOutput(
             anomaly_map=measured.floating, reliable=measured.reliable, reliability_source="conditions",
             integrity_score=loc.integrity_score(measured.floating, measured.reliable), regions=regions,

@@ -37,14 +37,19 @@ def _side(label, excerpt):
         cursor = token_end
     segments.append(escape(text[cursor:]))
     value = "".join(segments) or "No text at this location."
+    anchors = " · ".join(f'Paragraph {item["paragraph"]} [{item["start"]}, {item["end"]})'
+                         for item in excerpt.get("paragraphs") or ())
+    paragraph_ranges = f'<p class="coordinates">{anchors}</p>' if anchors else ""
     return (f'<div class="side"><p class="coordinates">{label} [{start}, {end})</p>'
-            f'<p class="excerpt">{value}</p></div>')
+            f'{paragraph_ranges}<p class="excerpt">{value}</p></div>')
 
 
 def render(comparison: dict) -> bytes:
     changes = []
+    docx = comparison["format"] == "docx"
+    format_label = {"plain_text": "Text", "docx": "Word body text"}.get(comparison["format"])
     for change in comparison["changes"]:
-        label = "Text" if comparison["format"] == "plain_text" else LABELS[change["role"]]
+        label = format_label or LABELS[change["role"]]
         changes.append(f'<section><h2>{escape(change["id"])} · {label}</h2>'
                        f'{_side("Earlier draft", change["earlier"])}{_side("Analyzed version", change["later"])}</section>')
     sources = []
@@ -52,11 +57,13 @@ def render(comparison: dict) -> bytes:
         source = comparison[key]
         part = f' · MIME part {escape(source["mime_part"])}' if source["mime_part"] else ""
         sources.append(f'<p><strong>{label}</strong>{part}<br>SHA-256 <span class="hash">{escape(source["sha256"])}</span></p>')
+    positions = ("Word offsets count Unicode code points in the body text. Two line breaks separate included paragraphs. "
+                 "Each paragraph range uses offsets within that paragraph." if docx else "Ranges use decoded Unicode code points.")
     content = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Earlier-draft comparison</title>
 <meta name="author" content="Chipmunk Verify"><style>{STYLE}</style></head><body>
 <p class="brand">CHIPMUNK VERIFY</p><h1>Earlier-draft comparison</h1>
 <p>{escape(comparison['scope'])}</p><p>{escape(comparison['interpretation'])}</p>
-<p>Highlights mark changed words and punctuation. Ranges use decoded Unicode code points. Each range includes its start and excludes its end.</p>
+<p>Highlights mark changed words and punctuation. {positions} Each range includes its start and excludes its end.</p>
 <div class="sources">{''.join(sources)}</div>{''.join(changes) or '<p>No word or punctuation changes found.</p>'}
 </body></html>'''
 

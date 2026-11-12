@@ -11,6 +11,7 @@ from scipy.signal import butter, sosfiltfilt
 
 from app.detectors.audio.decode import source_ranges, wav_bytes
 from app.evidence import audio_similarity_binding as binding
+from app.evidence import audio_waveform_similarity
 
 _FILTERS = tuple(
     butter(binding.FILTER_ORDER, band, fs=binding.SAMPLE_RATE, btype="bandpass", output="sos")
@@ -121,7 +122,7 @@ def find_similar_spans(pcm_s16le: bytes) -> SimilarityResult:
     return SimilarityResult("measured", spans=tuple(spans))
 
 
-def build(pcm, mapping, source, make_asset):
+def build(pcm, mapping, source, make_asset, *, repetition=None):
     """Freeze the two actual source clips and bind each to its own sample hash."""
     samples = len(pcm)
     if (mapping["source_sha256"] != source["sha256"] or mapping["pcm_sha256"] != source["pcm_sha256"]
@@ -154,6 +155,10 @@ def build(pcm, mapping, source, make_asset):
             raise ValueError("Expected the exact decoded signed 16-bit input")
         payload = scaled.astype("<i2").tobytes()
         result = find_similar_spans(payload)
+        if repetition is not None and not repetition["pairs"] and not result.spans:
+            context.update(schema=binding.WAVEFORM_SCHEMA, method=deepcopy(binding.WAVEFORM_METHOD),
+                           frequency_band_search={"status": result.status, "reason": result.reason})
+            result = audio_waveform_similarity.find_similar_spans(payload)
         context.update(searched_interval={"start_sample": 0, "end_sample": samples}, status=result.status, reason=result.reason)
         for index, span in enumerate(result.spans, 1):
             count = span.first[1] - span.first[0]
@@ -166,13 +171,13 @@ def build(pcm, mapping, source, make_asset):
                 pair["artifacts"][f"{role}_clip"] = make_asset(wav_bytes(pcm[start:end]), "audio/wav", samples=count,
                                                               sample_rate=binding.SAMPLE_RATE, channels=1)
             context["pairs"].append(pair)
-    binding.validate(context, source)
+    binding.validate(context, source, repetition)
     return context
 
 
-def verify(context, *, pcm, mapping, source, read_asset):
+def verify(context, *, pcm, mapping, source, read_asset, repetition=None):
     """Replay the measured ranges and compare both WAVs to the frozen PCM."""
-    binding.validate(context, source)
+    binding.validate(context, source, repetition)
 
     def checked_asset(data, media_type, **metadata):
         sha = hashlib.sha256(data).hexdigest()
@@ -180,7 +185,8 @@ def verify(context, *, pcm, mapping, source, read_asset):
             raise ValueError("Repeated-audio similarity playback clip differs from its source samples")
         return {"sha256": sha, "media_type": media_type, **metadata}
 
-    expected = build(pcm, mapping, source, checked_asset)
+    expected = build(pcm, mapping, source, checked_asset,
+                     repetition=repetition if context["schema"] == binding.WAVEFORM_SCHEMA else None)
     recorded = deepcopy(context)
     for pair in recorded["pairs"]:
         for clip in pair["artifacts"].values():

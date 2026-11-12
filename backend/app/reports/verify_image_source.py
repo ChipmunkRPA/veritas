@@ -77,6 +77,23 @@ def _verify_geometric_masks(archive, evidence, source):
     return 2 * len(pairs)
 
 
+def _verify_flip_masks(archive, checks, size):
+    if not checks:
+        return 0
+    from app.evidence.image_flip_mask import png_grid, verify_overlap
+
+    regions = 0
+    for check in checks:
+        repeat = check["flip_consistency"]
+        scalar = archive.read(f"assets/{check['scalar_map_sha256']}.png")
+        reliable = archive.read(f"assets/{check['reliability_mask_sha256']}.png")
+        aligned = archive.read(f"assets/{repeat['aligned_mask_png_sha256']}.png")
+        verify_overlap(png_grid(scalar, size).astype(float) * (1 / 255.0), png_grid(reliable, size) > 127,
+                       check["selection_rule"]["threshold"], repeat, aligned)
+        regions += len(repeat["candidates"])
+    return regions
+
+
 def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     """Bind source bytes and EXIF coordinates, then compare every unannotated crop."""
     from app.reports.public_verify import SCHEMA
@@ -92,7 +109,9 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
 
     evidence = json.loads(archive.read('evidence.json'))
     crops = list(_crops(evidence))
-    if not crops:
+    repeat_checks = [check for check in (evidence.get("coverage") or {}).get("inspection_checks", [])
+                     if (check.get("flip_consistency") or {}).get("aligned_mask_png_sha256")]
+    if not crops and not repeat_checks:
         return 'Original SHA-256 matched. No unannotated crops were recorded.'
     declared = evidence['source']
     with Image.open(io.BytesIO(data)) as raw:
@@ -112,7 +131,11 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                 if not _matches(source, bounds, plate):
                     raise ValueError(f'{label} differs from pixels at its recorded source coordinates')
         masks = _verify_geometric_masks(archive, evidence, source)
-    detail = f'Original SHA-256 and {len(crops)} unannotated crops matched at their recorded EXIF-oriented coordinates.'
+        repeated = _verify_flip_masks(archive, repeat_checks, source.size)
+    detail = (f'Original SHA-256 and {len(crops)} unannotated crops matched at their recorded EXIF-oriented coordinates.'
+              if crops else 'Original SHA-256 matched. No unannotated crops were recorded.')
     if masks:
         detail += f' Recomputed {masks} geometric copy masks from the source image.'
+    if repeated:
+        detail += f' Recomputed repeat-pass overlap for {repeated} source regions from their recorded masks.'
     return detail

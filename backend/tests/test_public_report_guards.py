@@ -30,7 +30,7 @@ def test_old_reports_are_preserved_but_not_served(monkeypatch, template):
     assert row.artefact_id == 'old'
 
 
-@pytest.mark.parametrize('template', [v2_reports.engine.TEMPLATE_SET])
+@pytest.mark.parametrize('template', [v2_reports.engine.TEMPLATE_SET, 'veritas-report-2.0.r87'])
 def test_public_safe_reports_remain_downloadable(monkeypatch, template):
     row = SimpleNamespace(status='done', artefact_id='new', template_set=template,
                           analysis_id='analysis', display_id='report')
@@ -42,6 +42,11 @@ def test_public_safe_reports_remain_downloadable(monkeypatch, template):
     response = v2_reports.report_file('new', None)
     assert response.status_code == 200
     assert response.body == b'pdf'
+    if template != v2_reports.engine.TEMPLATE_SET:
+        with pytest.raises(ProblemError) as error:
+            v2_reports.report_preview('new')
+        assert error.value.status == 409
+        assert 'saved PDF is still available' in error.value.detail
 
 
 def test_internal_package_download_stays_blocked(monkeypatch):
@@ -65,7 +70,7 @@ def test_reports_using_the_old_headline_rule_require_a_new_copy(kind):
         assert check(v2_reports.engine.TEMPLATE_SET, kind)
 
 
-@pytest.mark.parametrize('template', ['veritas-report-2.0.r83', 'veritas-report-2.0.r84', 'veritas-report-2.0.r85'])
+@pytest.mark.parametrize('template', ['veritas-report-2.0.r83', 'veritas-report-2.0.r84', 'veritas-report-2.0.r85', 'veritas-report-2.0.r87'])
 def test_previous_public_safe_report_stays_downloadable_after_clock_evidence_update(template):
     from app.reports.public_policy import downloadable_template, package_template
 

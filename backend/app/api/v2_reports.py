@@ -245,6 +245,9 @@ def report_preview(report_id: str) -> HTMLResponse:
     with get_session() as db:
         row = _report(db, report_id)
         if row.template_set != engine.TEMPLATE_SET:
+            if downloadable_template(row.template_set):
+                raise ProblemError(409, "Earlier preview unavailable",
+                                   "Generate a new report for an HTML preview. The completed report's saved PDF is still available.")
             raise ProblemError(409, "Earlier report unavailable", "This earlier report may contain model names. Generate a new report to preview a version with neutral check labels. The original remains stored.")
         data = _read_verified(_artefact(db, row.snapshot_artefact_id, row.analysis_id))
         requested_template = row.template_set

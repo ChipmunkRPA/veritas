@@ -37,7 +37,7 @@ def _clips(audio: dict, alignment: dict) -> Iterator[tuple[str, dict, list[dict]
 
 
 def check(archive: ZipFile, bundle: dict, original: Path) -> str:
-    """Re-decode the original and verify every published playback interval against it."""
+    """Re-decode the original, verify playback intervals and replay waveform fallback."""
     kind = bundle.get("analysis", {}).get("kind")
     if bundle.get("schema") != SCHEMA or kind not in {"audio", "video"}:
         raise ValueError("Original-audio verification requires a public audio or video evidence package")
@@ -79,7 +79,16 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     expected = {entry["sha256"] for entry in bundle["artifacts"] if entry["media_type"] == "audio/wav"}
     if covered != expected:
         raise ValueError("The source comparison did not account for every WAV asset in the package")
+    replay_detail = ""
+    similarity = audio.get("similarity_context")
+    if similarity and similarity["schema"] == "chipmunk.audio-repeat-similarity/2":
+        from app.evidence.audio_similarity import verify
+
+        paths = {entry["sha256"]: entry["file"] for entry in bundle["artifacts"] if entry["media_type"] == "audio/wav"}
+        verify(similarity, pcm=decoded.pcm, mapping=decoded.mapping, source=source,
+               read_asset=lambda sha: archive.read(paths[sha]), repetition=audio.get("repetition_context"))
+        replay_detail = " Recomputed the bounded waveform similarity result."
     interval_label = "interval" if intervals == 1 else "intervals"
     asset_label = "asset" if len(covered) == 1 else "assets"
     return (f"Original SHA-256, {len(decoded.pcm):,} decoded mono samples and source timeline matched. "
-            f"Verified {intervals} published playback {interval_label} across {len(covered)} WAV {asset_label}.")
+            f"Verified {intervals} published playback {interval_label} across {len(covered)} WAV {asset_label}.{replay_detail}")

@@ -4716,7 +4716,8 @@
               {
                 "enum": [
                   ".eml",
-                  ".txt"
+                  ".txt",
+                  ".docx"
                 ],
                 "type": "string"
               },
@@ -4811,7 +4812,10 @@
             "type": "array"
           },
           "coordinate_space": {
-            "const": "decoded_source_unicode_codepoint",
+            "enum": [
+              "decoded_source_unicode_codepoint",
+              "docx_body_unicode_codepoint"
+            ],
             "title": "Coordinate Space",
             "type": "string"
           },
@@ -4821,7 +4825,8 @@
           "format": {
             "enum": [
               "email",
-              "plain_text"
+              "plain_text",
+              "docx"
             ],
             "title": "Format",
             "type": "string"
@@ -4879,6 +4884,20 @@
             "title": "End",
             "type": "integer"
           },
+          "paragraphs": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/DraftParagraph"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Paragraphs"
+          },
           "start": {
             "title": "Start",
             "type": "integer"
@@ -4895,6 +4914,34 @@
           "changed_tokens"
         ],
         "title": "DraftExcerpt",
+        "type": "object"
+      },
+      "DraftParagraph": {
+        "properties": {
+          "body_index": {
+            "title": "Body Index",
+            "type": "integer"
+          },
+          "end": {
+            "title": "End",
+            "type": "integer"
+          },
+          "paragraph": {
+            "title": "Paragraph",
+            "type": "integer"
+          },
+          "start": {
+            "title": "Start",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "paragraph",
+          "body_index",
+          "start",
+          "end"
+        ],
+        "title": "DraftParagraph",
         "type": "object"
       },
       "DraftSource": {
@@ -13542,7 +13589,7 @@
               "schema": {
                 "properties": {
                   "earlier": {
-                    "description": "Earlier .eml or .txt with the same extension.",
+                    "description": "Earlier version. Use matching .eml, .txt or .docx files.",
                     "format": "binary",
                     "type": "string"
                   },

@@ -336,7 +336,8 @@ def _verify_audio(document: dict, store: ObjectStore, assets: dict[str, bytes], 
         from app.evidence.audio_similarity import verify
 
         try:
-            verify(similarity, pcm=pcm, mapping=mapping, source=source, read_asset=lambda sha: assets[sha])
+            verify(similarity, pcm=pcm, mapping=mapping, source=source, read_asset=lambda sha: assets[sha],
+                   repetition=document.get("repetition_context"))
         except (ValueError, KeyError, TypeError) as error:
             raise ObjectIntegrityError("Frozen audio similarity differs from its recorded samples") from error
 

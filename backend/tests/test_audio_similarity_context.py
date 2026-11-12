@@ -8,17 +8,20 @@ from types import SimpleNamespace
 
 import numpy as np
 import pytest
+from scipy.signal import butter, sosfiltfilt
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 from test_audio_evidence import audio_fixture  # noqa: F401
 from test_video_nested_evidence import _check_public_zip
 
 from app.core.canonical import canonical_hash, canonical_json
+from app.core.config import settings
 from app.detectors.audio.decode import decode_audio, read_wav, source_ranges, wav_bytes
 from app.detectors.video.decode import probe_frames
 from app.evidence import (
     audio_exact_repetition,
     audio_packets,
+    audio_repetition,
     audio_similarity,
     audio_similarity_binding,
     service,
@@ -44,6 +47,20 @@ def _similar_pcm():
     return pcm
 
 
+def _waveform_repeat_pcm():
+    rng = np.random.default_rng(394)
+
+    def band_noise(lower, upper, samples):
+        filt = butter(6, (lower, upper), btype="bandpass", output="sos", fs=RATE)
+        return sosfiltfilt(filt, rng.normal(0, 1, samples))
+
+    donor = band_noise(3300, 4800, LENGTH) * 10500
+    pcm = sum(band_noise(a, b, COUNT) * 300 for a, b in ((240, 760), (1200, 2300), (2700, 5300)))
+    pcm[FIRST:FIRST + LENGTH] += donor
+    pcm[SECOND:SECOND + LENGTH] += donor
+    return np.rint(np.clip(pcm, -32768, 32767)).astype("<i2")
+
+
 def _normalize(samples):
     return samples.astype("<f4") / np.float32(32768)
 
@@ -66,16 +83,25 @@ def _assets():
 
 
 @pytest.mark.parametrize("kind", ["audio", "video"])
-def test_published_similarity_freezes_two_distinct_exact_wavs_and_source_clocks(tmp_path, monkeypatch, kind):
-    original = _similar_pcm()
+@pytest.mark.parametrize("waveform", [False, True], ids=["frequency-bands", "waveform-fallback"])
+def test_published_similarity_freezes_two_distinct_exact_wavs_and_source_clocks(tmp_path, monkeypatch, kind, waveform):
+    monkeypatch.setattr(settings, "environment", "dev")
+    monkeypatch.setattr(settings, "audio_waveform_repeat_review", True)
+    original = _waveform_repeat_pcm() if waveform else _similar_pcm()
     assert not audio_exact_repetition.find_repeated_spans(original.tobytes()).spans
+    if waveform:
+        assert not audio_similarity.find_similar_spans(original.tobytes()).spans
+    else:
+        monkeypatch.setattr(audio_similarity.audio_waveform_similarity, "find_similar_spans",
+                            lambda *_: pytest.fail("An existing frequency-band pair should skip the fallback"))
     source = tmp_path / "sample.wav"
     source.write_bytes(wav_bytes(_normalize(original)))
     if kind == "video":
         encoded = tmp_path / "offset.mkv"
+        codec = ["-c:a", "pcm_s16le"] if waveform else ["-c:a", "libopus", "-b:a", "64k"]
         subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-f", "lavfi", "-i", "color=size=96x64:rate=25:d=4",
                         "-itsoffset", "0.4", "-i", str(source), "-map", "0:v", "-map", "1:a", "-c:v", "ffv1",
-                        "-c:a", "libopus", "-b:a", "64k", "-output_ts_offset", "5", str(encoded)], check=True, timeout=20)
+                        *codec, "-output_ts_offset", "5", str(encoded)], check=True, timeout=20)
         source = encoded
     store = ObjectStore(tmp_path / "objects")
     source_record = store.put_file(source)
@@ -117,11 +143,18 @@ def test_published_similarity_freezes_two_distinct_exact_wavs_and_source_clocks(
         analysis.result_hash = store.put_bytes(canonical_json(result)).sha256
         db.flush()
         document = service.persist_packet_set(db, analysis, store, result=result)
+        monkeypatch.setattr(settings, "audio_waveform_repeat_review", False)
         assert service.load_packet_set(db, analysis, store) == document
         content = document if kind == "audio" else document["audio"]
         context = content["similarity_context"]
         assert context["status"] == "measured" and context["affects_overall_confidence"] is False
-        assert content["repetition_context"]["pairs"] == []
+        repetition = content["repetition_context"]
+        assert repetition["pairs"] == []
+        assert context["schema"] == (audio_similarity_binding.WAVEFORM_SCHEMA if waveform else audio_similarity_binding.SCHEMA)
+        if waveform:
+            assert context["frequency_band_search"] == {"status": "measured", "reason": None}
+            with pytest.raises(ValueError, match="earlier searches"):
+                audio_similarity_binding.validate(context, content["source"], {**repetition, "pairs": [{}]})
         [pair] = context["pairs"]
         assert pair["id"] == "RS01" and pair["lag_samples"] == SECOND - FIRST
         assert pair["sample_count"] >= LENGTH - 640
@@ -135,9 +168,11 @@ def test_published_similarity_freezes_two_distinct_exact_wavs_and_source_clocks(
             assert part["pcm_s16le_sha256"] == hashlib.sha256(np.rint(decoded.pcm[start:stop] * 32768).astype("<i2").tobytes()).hexdigest()
             asset = pair["artifacts"][f"{name}_clip"]
             np.testing.assert_array_equal(read_wav(store.read_bytes(asset["sha256"])), decoded.pcm[start:stop])
-        audio_similarity.verify(context, pcm=decoded.pcm, mapping=decoded.mapping, source=content["source"], read_asset=store.read_bytes)
+        audio_similarity.verify(context, pcm=decoded.pcm, mapping=decoded.mapping, source=content["source"],
+                                read_asset=store.read_bytes, repetition=repetition)
         with pytest.raises(ValueError, match="playback clip"):
-            audio_similarity.verify(context, pcm=decoded.pcm, mapping=decoded.mapping, source=content["source"], read_asset=lambda _: b"bad")
+            audio_similarity.verify(context, pcm=decoded.pcm, mapping=decoded.mapping, source=content["source"],
+                                    read_asset=lambda _: b"bad", repetition=repetition)
 
         snapshot = snapshot.model_copy(update={
             "result": result, "evidence": document,
@@ -150,6 +185,9 @@ def test_published_similarity_freezes_two_distinct_exact_wavs_and_source_clocks(
         text = " ".join(reports_engine.pdf_text(rendered.pdf).split())
         compact = "".join(text.split())
         assert "Similar repeated audio" in text and "RS01" in text and "similar sound" in text
+        if waveform:
+            assert "compared waveform patterns" in text
+        assert "Matches carry no AI confidence weight." in text
         assert ("/audio/similarity_context" if kind == "video" else "/similarity_context") in text
         asset_refs = service.asset_refs(document)
         for role in ("first", "second"):
@@ -194,6 +232,30 @@ def test_bounded_search_reports_ineligible_inputs_and_ambiguous_pairs(mode, stat
                                      lambda *args, **kwargs: pytest.fail("No pair expected"))
     assert (context["status"], context["reason"], context["pairs"]) == (status, reason, [])
     assert (context["searched_interval"] is None) == (mode in {"short", "long", "gap"})
+
+
+@pytest.mark.parametrize("mode,status,reason", [
+    ("quiet", "unavailable", "insufficient_signal_variation"),
+    ("periodic", "ambiguous", "periodic_signal"),
+    ("unrelated", "measured", None),
+])
+def test_waveform_fallback_does_not_add_pairs_to_controls(mode, status, reason):
+    raw = np.random.default_rng(124).integers(-10000, 10000, size=COUNT, dtype="<i2")
+    if mode == "quiet":
+        raw.fill(0)
+    elif mode == "periodic":
+        raw = np.rint(6000 * np.sin(np.arange(COUNT) * 2 * np.pi * 500 / RATE)).astype("<i2")
+    pcm = _normalize(raw)
+    source = _source(pcm)
+    mapping = {**source, "source_sha256": source["sha256"]}
+    assets, save = _assets()
+    repetition = audio_repetition.build(pcm, mapping, source, save)
+    assert not repetition["pairs"]
+    result = audio_similarity.build(pcm, mapping, source, save, repetition=repetition)
+    assert result["schema"] == audio_similarity_binding.WAVEFORM_SCHEMA
+    assert (result["status"], result["reason"], result["pairs"]) == (status, reason, [])
+    assert result["affects_overall_confidence"] is False
+    assert not assets
 
 
 def test_similarity_binding_rejects_retiming_support_and_conflicting_assets():

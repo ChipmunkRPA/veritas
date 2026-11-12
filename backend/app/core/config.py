@@ -139,6 +139,7 @@ class Settings(BaseSettings):
     # VERITAS_OFFLINE: no network fetches; HF hub and transformers read the local cache only. Unset: true in prod, false in dev
     # (PL-01, ARCHITECTURE §8.5); `models fetch` and a models-init container set VERITAS_OFFLINE=false explicitly.
     offline: bool | None = None
+    audio_waveform_repeat_review: bool = False  # development-only repeat evidence, with no voice confidence weight
 
     @model_validator(mode="after")
     def _apply_offline_env(self):

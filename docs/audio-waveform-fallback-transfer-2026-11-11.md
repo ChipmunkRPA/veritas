@@ -1,6 +1,6 @@
 # Waveform fallback on new meetings, speakers, and backgrounds
 
-The waveform fallback added **5 correct localizations across 2 source groups**. The exact and two-band checks localized **629 of 720** known-copy views. With the fallback the total reached **634 of 720**, with **zero added flags across 720 ordinary controls**. The result fell below the frozen detection and source-group criteria. The fallback remains experimental. [Audited aggregate](evaluation-panels/audio-waveform-fallback-transfer-2026-11-11.json)
+The waveform fallback added **5 correct localizations across 2 source groups**. The exact and two-band checks localized **629 of 720** known-copy views. With the fallback the total reached **634 of 720**, with **zero added flags across 720 ordinary controls**. The result fell below the frozen detection and source-group criteria. [Audited aggregate](evaluation-panels/audio-waveform-fallback-transfer-2026-11-11.json)
 
 ## Held source panel
 
@@ -25,9 +25,15 @@ Every added correct pair had the exact authored lag. The median of the smaller s
 
 The separate standard-library reviewer checks the complete planned roster, source group binding, clock geometry, fixed route and every reported pair against the authored ranges. The private receipt covers each source and each encoded and decoded payload hash. A second decode and score run reproduced the complete journal byte for byte, including codec and decoded PCM digests. This trial measures localization of within-recording copies in short continuous audio. It leaves natural different-source edits, longer recordings, and AI origin outside scope.
 
+## Local app trial
+
+Development instances can opt in with `VERITAS_AUDIO_WAVEFORM_REPEAT_REVIEW=true`. The setting defaults to false and applies to new evidence sets in development. For standalone audio or a video soundtrack, the check runs on continuous 2.5–4 second mono input only when neither the exact nor the frequency-band comparison produced a pair. It examines at most 12 candidate lags and can return up to eight pairs. Each reported pair includes the same two exact playback clips, source timestamp ranges and sample commitments in the analysis and its JSON, PDF and evidence package. The comparison contributes zero weight to the file's AI direction or confidence. ZIP-only verification checks the signed metadata and playback assets without importing the signal processing runtime. Verification with the original supplied via `--source-audio` also reconstructs the waveform measurement. Both legacy and new evidence remain verifiable with the setting off.
+
 ## Reproduce
 
 Pass the original [AMI annotation-plan receipt](audio-stream-presence-transfer-2026-11-11.md), [VoxPopuli manifest and stems](audio-hard-overlap-transfer-2026-11-11.md), and pinned DEMAND kitchen and traffic publisher ZIPs. The worker requires the exact source commitments and uses the installed FFmpeg and ffprobe binaries. Its private freeze records both binary hashes. No model weights or neural inference are needed.
+
+Use the historical checkout for the published run's byte-for-byte freeze. The app now calls the same waveform calculation from the evidence module.
 
 ```sh
 export PYTHONPATH=backend OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1

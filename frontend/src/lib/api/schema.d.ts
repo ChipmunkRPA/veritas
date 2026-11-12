@@ -3230,7 +3230,7 @@ export interface components {
             /** Available */
             available: boolean;
             /** Extension */
-            extension?: (".eml" | ".txt") | null;
+            extension?: (".eml" | ".txt" | ".docx") | null;
         };
         /** DocumentRevisionResponse */
         DocumentRevisionResponse: {
@@ -3256,15 +3256,15 @@ export interface components {
             changes: components["schemas"]["DraftChange"][];
             /**
              * Coordinate Space
-             * @constant
+             * @enum {string}
              */
-            coordinate_space: "decoded_source_unicode_codepoint";
+            coordinate_space: "decoded_source_unicode_codepoint" | "docx_body_unicode_codepoint";
             earlier: components["schemas"]["DraftSource"];
             /**
              * Format
              * @enum {string}
              */
-            format: "email" | "plain_text";
+            format: "email" | "plain_text" | "docx";
             /** Interpretation */
             interpretation: string;
             later: components["schemas"]["DraftSource"];
@@ -3285,10 +3285,23 @@ export interface components {
             ][];
             /** End */
             end: number;
+            /** Paragraphs */
+            paragraphs?: components["schemas"]["DraftParagraph"][] | null;
             /** Start */
             start: number;
             /** Text */
             text: string;
+        };
+        /** DraftParagraph */
+        DraftParagraph: {
+            /** Body Index */
+            body_index: number;
+            /** End */
+            end: number;
+            /** Paragraph */
+            paragraph: number;
+            /** Start */
+            start: number;
         };
         /** DraftSource */
         DraftSource: {
@@ -6854,7 +6867,7 @@ export interface operations {
                 "multipart/form-data": {
                     /**
                      * Format: binary
-                     * @description Earlier .eml or .txt with the same extension.
+                     * @description Earlier version. Use matching .eml, .txt or .docx files.
                      */
                     earlier: string;
                     /**

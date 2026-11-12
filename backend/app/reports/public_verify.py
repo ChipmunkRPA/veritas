@@ -242,7 +242,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
 
             _require((analysis['kind'] == 'audio' and part is evidence) or part is evidence.get('audio'),
                      'Audio similarity is outside the audio evidence')
-            validate_similarity_context(similarity, part['source'])
+            validate_similarity_context(similarity, part['source'], part.get('repetition_context'))
             for pair in similarity['pairs']:
                 groups.append(pair['artifacts'])
                 for side in ('first', 'second'):

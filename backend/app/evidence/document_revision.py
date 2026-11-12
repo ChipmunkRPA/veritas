@@ -7,18 +7,27 @@ import re
 from difflib import SequenceMatcher
 from email import policy
 from email.parser import BytesParser
+from io import BytesIO
 from pathlib import Path
 from tempfile import TemporaryDirectory
+from zipfile import BadZipFile, ZipFile
 
 from app.detectors.text.extract import _normalise, extract, text_hash
+from app.storage.files import check_docx_safe
 
 SCHEMA = "chipmunk.document-revision-comparison/1"
 TOKENS = re.compile(r"\w+(?:[’'-]\w+)*|[^\w\s]")
 MAX_BYTES = 1024 * 1024
 MAX_CHARS = 30_000
 MAX_TOKENS = 2_000
+MAX_DOCX_XML_BYTES = 2 * 1024 * 1024
 ROLES = ("body", "quoted", "signature")
+FORMATS = {".eml": "email", ".txt": "plain_text", ".docx": "docx"}
+SUPPORTED_DRAFTS = "matching .eml, .txt or .docx files"
 SCOPE = "Compares words and punctuation in the decoded text. Email body, quoted text and signatures are mapped separately."
+DOCX_SCOPE = ("Compares words and punctuation in top-level Word body paragraphs. Tables, headers, footers, text boxes, "
+              "embedded content, formatting and tracked revision markup are outside this comparison.")
+DOCX_PART = "word/document.xml"
 INTERPRETATION = "This comparison locates changes between the supplied versions. The revision sequence and authorship require independent evidence."
 
 
@@ -60,7 +69,69 @@ def _part_id(message, target, parent="1"):
     return None
 
 
+def _source_record(data, decoded, mime_part=None):
+    return {"sha256": hashlib.sha256(data).hexdigest(), "bytes": len(data),
+            "decoded_text_sha256": text_hash(decoded), "decoded_characters": len(decoded), "mime_part": mime_part}
+
+
+def _docx_part(archive, name):
+    matches = [info for info in archive.infolist() if info.filename == name]
+    if len(matches) != 1 or not 0 < matches[0].file_size <= MAX_DOCX_XML_BYTES:
+        raise ValueError("The Word document must contain one readable body within the XML size limit.")
+    with archive.open(matches[0]) as stream:
+        data = stream.read(MAX_DOCX_XML_BYTES + 1)
+    if len(data) != matches[0].file_size:
+        raise ValueError("The Word document contains a damaged XML part.")
+    return data
+
+
+def _docx_source(data):
+    from docx.oxml import parse_xml
+    from docx.oxml.ns import qn
+    from docx.text.paragraph import Paragraph
+    from lxml.etree import XMLSyntaxError
+
+    check_docx_safe(BytesIO(data))
+    try:
+        with ZipFile(BytesIO(data)) as archive:
+            declarations = parse_xml(_docx_part(archive, "[Content_Types].xml"))
+            namespace = "{http://schemas.openxmlformats.org/package/2006/content-types}"
+            content_type = "application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"
+            if not any(node.get("PartName") == f"/{DOCX_PART}" and node.get("ContentType") == content_type
+                       for node in declarations.findall(namespace + "Override")):
+                raise ValueError("Choose a Word document saved in the standard .docx format.")
+            document = parse_xml(_docx_part(archive, DOCX_PART))
+    except (BadZipFile, RuntimeError, NotImplementedError, XMLSyntaxError) as error:
+        raise ValueError("The Word document body could not be read.") from error
+    if (document.tag != qn("w:document") or (body := document.find(qn("w:body"))) is None
+            or document.getroottree().docinfo.doctype or declarations.getroottree().docinfo.doctype):
+        raise ValueError("The Word document body could not be read.")
+    paragraphs, anchors, paragraph_number, cursor = [], [], 0, 0
+    for body_index, element in enumerate(body):
+        if element.tag != qn("w:p"):
+            continue
+        paragraph_number += 1
+        value = Paragraph(element, None).text
+        if not value.strip():
+            continue
+        start = cursor + (2 if paragraphs else 0)
+        cursor = start + len(value)
+        if cursor > MAX_CHARS:
+            raise ValueError(f"Each version can contain up to {MAX_CHARS:,} decoded body characters.")
+        paragraphs.append(value)
+        anchors.append((paragraph_number, body_index, start, cursor))
+    if not paragraphs:
+        raise ValueError("Each Word version needs readable top-level body paragraphs.")
+    decoded = "\n\n".join(paragraphs)
+    body_tokens = tokens(decoded, [(start, end) for _, _, start, end in anchors])
+    if len(body_tokens) > MAX_TOKENS:
+        raise ValueError(f"Each version can contain up to {MAX_TOKENS:,} words and punctuation tokens.")
+    return decoded, {"body": body_tokens, "quoted": [], "signature": []}, _source_record(data, decoded), anchors
+
+
 def _source(path: Path, data: bytes, extension: str):
+    if extension == ".docx":
+        return _docx_source(data)
     if extension == ".eml":
         message = BytesParser(policy=policy.default).parsebytes(data)
         if not any(field in message for field in ("From", "To", "Subject", "Date", "Message-ID", "Content-Type", "MIME-Version")):
@@ -101,33 +172,39 @@ def _source(path: Path, data: bytes, extension: str):
     role_tokens = {role: tokens(decoded, ranges) for role, ranges in offsets.items()}
     if sum(len(rows) for rows in role_tokens.values()) > MAX_TOKENS:
         raise ValueError(f"Each version can contain up to {MAX_TOKENS:,} words and punctuation tokens.")
-    record = {"sha256": hashlib.sha256(data).hexdigest(), "bytes": len(data), "decoded_text_sha256": text_hash(decoded),
-              "decoded_characters": len(decoded), "mime_part": mime_part}
-    return decoded, role_tokens, record
+    return decoded, role_tokens, _source_record(data, decoded, mime_part), None
 
 
-def _excerpt(text: str, extent: list[int] | None, changed_tokens: list[list[int]]) -> dict | None:
+def _excerpt(text: str, extent: list[int] | None, changed_tokens: list[list[int]], paragraphs) -> dict | None:
     if extent is None:
         return None
     start, end = extent
-    return {"start": start, "end": end, "text": text[start:end], "changed_tokens": changed_tokens}
+    result = {"start": start, "end": end, "text": text[start:end], "changed_tokens": changed_tokens}
+    if paragraphs is not None:
+        result["paragraphs"] = [
+            {"paragraph": paragraph, "body_index": index, "start": max(start, a) - a, "end": min(end, b) - a}
+            for paragraph, index, a, b in paragraphs
+            if max(start, a) < min(end, b) or start == end and a <= start <= b
+        ]
+    return result
 
 
 def compare(earlier: bytes, later: bytes, extension: str) -> dict:
-    if extension not in {".eml", ".txt"}:
-        raise ValueError("Choose two .eml files or two .txt files.")
+    if extension not in FORMATS:
+        raise ValueError(f"Choose two {SUPPORTED_DRAFTS}.")
     if any(not 0 < len(item) <= MAX_BYTES for item in (earlier, later)):
         raise ValueError("Each version must be nonempty and at most 1 MiB.")
     with TemporaryDirectory(prefix="document-revision-") as staging:
         directory = Path(staging)
-        old_text, old_tokens, old_source = _source(directory / f"earlier{extension}", earlier, extension)
-        new_text, new_tokens, new_source = _source(directory / f"later{extension}", later, extension)
+        old_text, old_tokens, old_source, old_paragraphs = _source(directory / f"earlier{extension}", earlier, extension)
+        new_text, new_tokens, new_source, new_paragraphs = _source(directory / f"later{extension}", later, extension)
     changes = []
     for role in ROLES:
         for change in differences(old_tokens[role], new_tokens[role]):
-            before = _excerpt(old_text, change["earlier"], change["earlier_changed_tokens"])
-            after = _excerpt(new_text, change["later"], change["later_changed_tokens"])
+            before = _excerpt(old_text, change["earlier"], change["earlier_changed_tokens"], old_paragraphs)
+            after = _excerpt(new_text, change["later"], change["later_changed_tokens"], new_paragraphs)
             changes.append({"id": f"C{len(changes) + 1:02d}", "role": role, "earlier": before, "later": after})
-    return {"schema": SCHEMA, "format": "email" if extension == ".eml" else "plain_text",
-            "coordinate_space": "decoded_source_unicode_codepoint", "earlier": old_source, "later": new_source,
-            "changes": changes, "scope": SCOPE, "interpretation": INTERPRETATION}
+    return {"schema": SCHEMA, "format": FORMATS[extension],
+            "coordinate_space": "docx_body_unicode_codepoint" if extension == ".docx" else "decoded_source_unicode_codepoint",
+            "earlier": old_source, "later": new_source, "changes": changes,
+            "scope": DOCX_SCOPE if extension == ".docx" else SCOPE, "interpretation": INTERPRETATION}

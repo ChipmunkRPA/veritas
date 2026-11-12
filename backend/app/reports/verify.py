@@ -174,7 +174,7 @@ def _image_source(archive: zipfile.ZipFile, bundle: dict, original: Path) -> Che
     try:
         return Check(name, True, verify_image_source.check(archive, bundle, original))
     except ImportError:
-        return Check(name, False, "Install the project dependencies to reproduce the geometric masks from the original image.")
+        return Check(name, False, "Install the project dependencies to reproduce the recorded image mask measurements.")
     except (ValueError, TypeError, KeyError, OSError, Image.DecompressionBombError) as error:
         return Check(name, False, str(error))
 

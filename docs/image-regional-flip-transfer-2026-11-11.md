@@ -35,6 +35,8 @@ Set `VERITAS_IMAGE_REGION_MODE=candidate` and `VERITAS_IMAGE_REGION_FLIP_REVIEW=
 
 An isolated Full-profile test used the real app worker and installed regional checkpoint on a matched edited PNG and untouched PNG. Both original passes proposed two regions. The repeat retained one region on the edit and withheld both on the untouched image. With the repeat enabled or disabled, each fixture returned the same original regional score and overall decision. Simulated Stripe payment preceded every analysis. The evidence API and JSON matched the signed package, the PDFs included the repeat-pass findings, and the published crop matched the original pixels. The public exports used model-neutral wording. This test limited scheduling to the regional detector.
 
+New signed evidence ZIPs include the aligned repeat-pass binary PNG when the check inspected regions, including when it withheld all of them. The JSON records the PNG digest and per-region pixel counts. The local verifier reconstructs each original component from the recorded response and reliability maps, then recomputes its overlap with the aligned mask. An isolated prepaid replay verified the package, original PNG and both component counts on each of the edited and untouched fixtures. [Source verification command](independent-testing.md#verify-image-crops-from-a-signed-export)
+
 ## Reproduce
 
 From `backend`, use the rights-qualified retained intakes, the current pinned checkpoints, and an unused scratch output directory. Keep private masks and source images local. Provide the previous active PNG receipt directory to match the two original-orientation checks against their earlier inference.

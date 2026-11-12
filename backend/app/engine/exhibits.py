@@ -148,6 +148,12 @@ class ExhibitWriter:
 
     # --- exhibit kinds ---------------------------------------------------------------------------------------
 
+    def binary_mask(self, values: np.ndarray) -> PendingArtefact:
+        """Keep source-bound binary support as a PNG without creating a scored exhibit."""
+        if values.ndim != 2 or not values.size or values.dtype != np.bool_:
+            raise ValueError("a binary mask must be a non-empty Boolean pixel grid")
+        return self._put(_png(values.astype(np.uint8) * 255), media_type="image/png", role="mask")
+
     def heatmap(self, values: Any, *, semantics: str, title: str, caption: str = "", calibrated: bool = False,
                 value_range: tuple[float, float] | None = None, mask: Any = None, source_signal_ids: list[str] | None = None,
                 media_ref: str = "analysis_copy", coordinate_space: CoordinateSpace | None = None,

@@ -2,12 +2,17 @@ from __future__ import annotations
 
 import base64
 import hashlib
+import json
 from contextlib import contextmanager
 from datetime import UTC, datetime
 from email.message import EmailMessage
+from io import BytesIO
 from tempfile import TemporaryDirectory
 
 import pymupdf
+import pytest
+from docx import Document
+from docx.oxml import OxmlElement
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 from test_image_reference_access import reference_http as reference_http
@@ -17,6 +22,7 @@ from app.core.config import settings
 from app.evidence import document_revision
 from app.reports.document_revision_pdf import _side
 from app.storage.db import Analysis, Artefact, BillingOrderRow
+from scripts.review_document_revision_export import review
 
 
 def _email(text):
@@ -26,6 +32,26 @@ def _email(text):
     message.add_alternative("<p>Excluded HTML body</p>", subtype="html")
     message.add_attachment(b"Excluded attachment body", maintype="application", subtype="octet-stream", filename="fixture.bin")
     return message.as_bytes()
+
+
+def _word(body, omitted):
+    word = Document()
+    word.add_paragraph("A shared opening.").runs[0].bold = True
+    word.add_table(rows=1, cols=1).cell(0, 0).text = "Table " + omitted
+    word.add_paragraph()
+    paragraph = word.add_paragraph(body)
+    tracked = OxmlElement("w:ins")
+    run = OxmlElement("w:r")
+    text = OxmlElement("w:t")
+    text.text = "Tracked " + omitted
+    run.append(text)
+    tracked.append(run)
+    paragraph._p.append(tracked)
+    word.sections[0].header.paragraphs[0].text = "Header " + omitted
+    word.sections[0].footer.paragraphs[0].text = "Footer " + omitted
+    file = BytesIO()
+    word.save(file)
+    return file.getvalue()
 
 
 def _install(fixture, monkeypatch):
@@ -55,6 +81,53 @@ def _url(aid):
 
 def _upload(data, extension=".eml"):
     return {"earlier": ("earlier" + extension, data, "application/octet-stream")}
+
+
+def test_word_comparison_uses_exact_body_paragraph_coordinates_in_api_pdf_and_replay(reference_http, monkeypatch, tmp_path):
+    f = _install(reference_http, monkeypatch)
+    texts = ("📎 Send the crème  brûlée on Tuesday.", "📎 Send the café  order on Thursday.")
+    earlier, later = (_word(text, f"Excluded{index}") for index, text in enumerate(texts))
+    _saved(f, "word-draft", ".DOCX", later)
+    url = _url("word-draft")
+    assert f.client.get(url, headers=f.viewer).json() == {"available": True, "extension": ".docx"}
+    wrong = f.client.post(url, headers=f.viewer, files=_upload(earlier, ".txt"))
+    assert wrong.status_code == 422
+    bad = f.client.post(url, headers=f.viewer, files=_upload(b"Not a Word document", ".docx"))
+    assert bad.status_code == 422
+    response = f.client.post(url, headers=f.viewer, files=_upload(earlier, ".DOCX"), data={"include_pdf": "true"})
+    assert response.status_code == 200, response.text
+    assert response.headers["cache-control"] == "no-store"
+    result = response.json()
+    comparison = result["comparison"]
+    assert comparison["format"] == "docx" and comparison["coordinate_space"] == "docx_body_unicode_codepoint"
+    assert len(comparison["changes"]) == 1 and "Excluded" not in response.text
+    change = comparison["changes"][0]
+    assert change["role"] == "body"
+    for name, body in zip(("earlier", "later"), texts, strict=True):
+        source = "A shared opening.\n\n" + body
+        excerpt = change[name]
+        (anchor,) = excerpt["paragraphs"]
+        assert anchor["paragraph"] == 3 and anchor["body_index"] == 3
+        assert excerpt["text"] == source[excerpt["start"]:excerpt["end"]] == body[anchor["start"]:anchor["end"]]
+        assert all(excerpt["start"] <= a < b <= excerpt["end"] for a, b in excerpt["changed_tokens"])
+        assert comparison[name]["decoded_text_sha256"] == hashlib.sha256(source.encode()).hexdigest()
+    with pymupdf.open(stream=base64.b64decode(result["pdf"]), filetype="pdf") as report:
+        report_text = "\n".join(page.get_text() for page in report)
+    for name in ("earlier", "later"):
+        (anchor,) = change[name]["paragraphs"]
+        assert f'Paragraph 3 [{anchor["start"]}, {anchor["end"]})' in report_text
+    assert "Word body text" in report_text and "Excluded" not in report_text
+    assert "brûlée" in report_text and "Thursday" in report_text
+
+    old_path, new_path, export = (tmp_path / name for name in ("earlier.docx", "later.docx", "report.json"))
+    old_path.write_bytes(earlier)
+    new_path.write_bytes(later)
+    export.write_text(json.dumps(comparison))
+    assert review(export, old_path, new_path)["body_paragraph_ranges_verified"] == 2
+    change["later"]["paragraphs"][0]["body_index"] -= 1
+    export.write_text(json.dumps(comparison))
+    with pytest.raises(ValueError, match="does not replay"):
+        review(export, old_path, new_path)
 
 
 def test_email_comparison_preserves_roles_and_exact_original_excerpts_in_json_and_pdf(reference_http, monkeypatch, tmp_path):

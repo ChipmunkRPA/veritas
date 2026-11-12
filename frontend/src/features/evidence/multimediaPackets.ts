@@ -126,7 +126,9 @@ export interface AudioRepetitionContext extends AudioRepeatRecord {
   schema: 'chipmunk.audio-exact-repetition/1'; pairs: (AudioRepeatPair & { pcm_s16le_sha256: string })[]
 }
 export interface AudioSimilarityContext extends AudioRepeatRecord {
-  schema: 'chipmunk.audio-repeat-similarity/1'; pairs: (AudioRepeatPair & {
+  schema: 'chipmunk.audio-repeat-similarity/1' | 'chipmunk.audio-repeat-similarity/2'
+  frequency_band_search?: Pick<AudioRepeatRecord, 'status' | 'reason'>
+  pairs: (AudioRepeatPair & {
     first: AudioRepeatSpan & { pcm_s16le_sha256: string }; second: AudioRepeatSpan & { pcm_s16le_sha256: string };
     support_windows: number })[]
 }

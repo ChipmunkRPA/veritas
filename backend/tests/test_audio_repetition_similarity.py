@@ -3,7 +3,7 @@
 import numpy as np
 import pytest
 
-from scripts import audio_repetition_similarity as similarity
+from app.evidence import audio_waveform_similarity as similarity
 
 
 def signal(seed: int, count: int = 48000) -> np.ndarray:

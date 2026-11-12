@@ -26,6 +26,7 @@ from app.api.public_projection import alias_signal
 from app.core.canonical import FLOAT_DP, canonical_hash, canonical_json
 from app.detectors.image import sharp_boundary
 from app.engine.media import MAX_PIXELS, MAX_SIDE, refuse_truncated_images
+from app.evidence import image_flip_mask
 from app.evidence.image_eligibility import (
     validate_flip_consistency,
     validate_gate,
@@ -34,7 +35,7 @@ from app.evidence.image_eligibility import (
 from app.evidence.source_geometry import pixel_bounds
 from app.storage.artefacts import get_artefact, register_artefact
 from app.storage.db import Analysis, Artefact
-from app.storage.objects import ObjectIntegrityError, ObjectStore, default_store
+from app.storage.objects import ObjectIntegrityError, ObjectNotFound, ObjectStore, default_store
 
 SCHEMA = "chipmunk.image-evidence/1"
 VERSION = "image-evidence-3"
@@ -456,16 +457,27 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         localiser = heat["semantics"] == "p_manipulated" and heat.get("created_by", "").startswith("loc.")
         inspection = None
         if localiser:
+            proof_sha = None
             try:
                 inspection = _inspection_record(signals, heat, values, reliable, scalar_sha, analysis.sha256)
                 inspection["reliability_mask_sha256"] = mask_sha
-            except PacketIntegrityError:
+                repeat = inspection.get("flip_consistency") or {}
+                if proof_sha := repeat.get("aligned_mask_png_sha256"):
+                    proof = db.scalar(select(Artefact.id).where(
+                        Artefact.analysis_id == analysis.id, Artefact.sha256 == proof_sha,
+                        Artefact.role == "mask", Artefact.media_type == "image/png",
+                        Artefact.created_by == heat.get("created_by")).limit(1))
+                    if proof is None or mask_sha is None:
+                        raise PacketIntegrityError("The repeat-pass proof belongs to a different check")
+                    image_flip_mask.verify_overlap(values, reliable, inspection["selection_rule"]["threshold"],
+                                                   repeat, _verified(store, proof_sha))
+            except (ObjectIntegrityError, ObjectNotFound, ValueError, OSError):
                 diagnostics.append("A local editing region without a reproducible component mask or image eligibility record was omitted; reanalysis is required.")
                 document["omitted_regions"] += sum(len(e.get("regions", [])) for e in matching)
                 continue
             index = len(document["coverage"]["inspection_checks"]) + 1
             document["coverage"]["inspection_checks"].append(inspection)
-            for role, sha in (("response", scalar_sha), ("reliability", mask_sha)):
+            for role, sha in (("response", scalar_sha), ("reliability", mask_sha), ("aligned_flip_mask", proof_sha)):
                 if sha is None:
                     continue
                 # Give exactly these declared measurement bytes a presentation

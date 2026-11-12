@@ -8,19 +8,24 @@ type Props = {
 function RepeatCheck({ set, token, mediaReady, videoOriginS, context }: Props & { context?: ExactContext | AudioSimilarityContext }) {
   if (!context || context.source_sha256 !== set.source.sha256 || context.pcm_sha256 !== set.source.pcm_sha256
     || context.sample_rate !== set.source.sample_rate || context.input_samples !== set.source.samples) return null
-  const similar = context.schema === 'chipmunk.audio-repeat-similarity/1'
+  const similar = context.schema !== 'chipmunk.audio-exact-repetition/1'
+  const waveform = context.schema === 'chipmunk.audio-repeat-similarity/2'
+  const method = waveform
+    ? 'The exact and frequency-band searches yielded no reportable pair. A second similarity check compared waveform patterns in the same continuous 2.5–4 second mono input. Background noise can mask repeats.'
+    : similar
+      ? 'This check compares patterns across frequency bands in continuous 2.5–4 second mono inputs. Background noise can mask repeats.'
+      : 'This check compares samples in continuous 2.5–4 second mono inputs.'
   const id = similar ? 'media-evidence-similar-audio' : 'media-evidence-repetition'
   return <section id={id} aria-labelledby={`${id}-heading`} className="mt-5 rounded-md border border-border p-4 scroll-mt-20">
     <h3 id={`${id}-heading`} className="m-0 text-body font-medium">{similar ? 'Similar repeated audio' : 'Exact repeated audio'}</h3>
-    <p className="mt-2 mb-0 text-small text-text-muted">{similar
-      ? 'This check compares patterns across frequency bands in continuous 2.5–4 second mono inputs. Background noise can mask repeats.'
-      : 'This check compares samples in continuous 2.5–4 second mono inputs.'} Loops, recurring alerts, and editing can all repeat audio. Matches carry no AI confidence weight.</p>
+    <p className="mt-2 mb-0 text-small text-text-muted">{method} Loops, recurring alerts, and editing can all repeat audio. Matches carry no AI confidence weight.</p>
     {context.status !== 'measured'
       ? <p className="mt-2 mb-0 text-small">{context.status === 'ambiguous'
-        ? 'The search reached its comparison limit before it could establish a result.'
+        ? (waveform ? 'The waveform search could not establish a reliable pair.' : 'The search reached its comparison limit before it could establish a result.')
         : 'This input could not be checked within the supported duration, source timing, and signal conditions.'}</p>
       : context.pairs.length === 0
-        ? <p className="mt-2 mb-0 text-small">No {similar ? 'similar' : 'exact active'} repeat of at least 0.15 seconds was found in the checked input.</p>
+        ? <p className="mt-2 mb-0 text-small">No {waveform ? 'waveform' : similar ? 'similar' : 'exact active'} repeat of at least 0.15 seconds was found in the checked input.
+          {waveform && context.frequency_band_search?.status !== 'measured' && ' The frequency-band search was inconclusive.'}</p>
         : <div className="mt-3 space-y-4">{context.pairs.map((pair) => <article key={pair.id} id={`media-evidence-${pair.id}`} className="border-t border-border pt-3 scroll-mt-20">
           <h4 className="m-0 text-small font-medium">{pair.id} · {seconds(pair.sample_count / context.sample_rate)} of {similar ? 'similar sound' : 'identical samples'}</h4>
           <div className={`${evidenceGrid} mt-3`}>{(['first', 'second'] as const).map((side) => {

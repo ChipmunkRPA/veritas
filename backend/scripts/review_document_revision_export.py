@@ -8,7 +8,7 @@ import sys
 from collections import Counter
 from pathlib import Path
 
-from app.evidence.document_revision import MAX_BYTES, compare
+from app.evidence.document_revision import FORMATS, MAX_BYTES, SUPPORTED_DRAFTS, compare
 
 MAX_EXPORT = 2 * 1024 * 1024
 
@@ -32,16 +32,19 @@ def _unique(fields):
 
 def review(export: Path, earlier: Path, later: Path) -> dict:
     extension = later.suffix.lower()
-    if extension not in {".eml", ".txt"} or earlier.suffix.lower() != extension:
-        raise ValueError("Use the two original files with matching .eml or .txt extensions")
+    if extension not in FORMATS or earlier.suffix.lower() != extension:
+        raise ValueError(f"Use the two original versions as {SUPPORTED_DRAFTS}")
     received = json.loads(_read(export, MAX_EXPORT), object_pairs_hook=_unique)
     expected = compare(_read(earlier, MAX_BYTES), _read(later, MAX_BYTES), extension)
     if json.dumps(received, sort_keys=True, allow_nan=False) != json.dumps(expected, sort_keys=True, allow_nan=False):
         raise ValueError("The comparison does not replay from these source bytes and decoded positions")
     roles = Counter(row["role"] for row in expected["changes"])
-    return {"source_hashes_verified": 2, "coordinate_space": expected["coordinate_space"], "changes_by_role": dict(roles),
-            "changed_token_ranges_verified": sum(len(row[side]["changed_tokens"]) for row in expected["changes"]
-                                                for side in ("earlier", "later") if row[side] is not None)}
+    excerpts = [row[side] for row in expected["changes"] for side in ("earlier", "later") if row[side] is not None]
+    result = {"source_hashes_verified": 2, "coordinate_space": expected["coordinate_space"], "changes_by_role": dict(roles),
+              "changed_token_ranges_verified": sum(len(excerpt["changed_tokens"]) for excerpt in excerpts)}
+    if extension == ".docx":
+        result["body_paragraph_ranges_verified"] = sum(len(excerpt["paragraphs"]) for excerpt in excerpts)
+    return result
 
 
 def main() -> None:

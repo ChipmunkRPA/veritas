@@ -38,6 +38,27 @@ const show = (set: MultimediaEvidenceSet, token = 'signed token', mediaReady = t
 afterEach(cleanup)
 
 describe('ordinary multimedia evidence', () => {
+  it('distinguishes second writing responses and links the matching source passage', () => {
+    const set = structuredClone(document)
+    set.coverage!.writing_second_check = {
+      schema: 'document-writing-second-check/1', authorship_confidence_contribution: 0,
+      ranges: [
+        { start: 8, end: 30, spans: [{ start: 0, end: 6 }, { start: 8, end: 30 }], state: 'corroborated' },
+        { start: 32, end: 45, spans: [{ start: 8, end: 30 }, { start: 32, end: 45 }], state: 'different' },
+        { start: 47, end: 60, spans: [{ start: 32, end: 45 }, { start: 47, end: 60 }], state: 'unavailable' },
+      ],
+    }
+    show(set)
+    expect(screen.getByRole('heading', { name: 'Second writing check' })).toBeTruthy()
+    expect(screen.getByText(/Both checks gave an AI-like response/)).toBeTruthy()
+    expect(screen.getByText(/The checks gave different responses/)).toBeTruthy()
+    expect(screen.getByText(/Second response unavailable/)).toBeTruthy()
+    const passage = screen.getByRole('link', { name: 'Passage [8, 30)' })
+    expect(passage.getAttribute('href')).toBe('#media-evidence-P01')
+    fireEvent.click(passage)
+    expect(screen.getByText('Quoted 😀 <script>text</script>')).toBeTruthy()
+  })
+
   it('shows a source-clock gap and its affected voice window in ordinary audio evidence', () => {
     const set = structuredClone(audio)
     set.coverage!.source_clock_context = { affects_overall_confidence: false, time_base: '1/16000',

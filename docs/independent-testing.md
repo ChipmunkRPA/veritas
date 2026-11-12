@@ -31,6 +31,10 @@ The [earlier-audio comparison](audio-reference-comparison-2026-11-11.md#replay-w
 replays changed sample ranges, difference waveforms, and playable excerpts
 from two continuous, clock-matched recordings.
 
+The [two-check writing replay](writing-checkpoint-agreement-2026-11-11.md#local-replay)
+checks whether both detectors responded to the same source ranges and reproduces
+the agreement and false-flag counts on the retained publisher panels.
+
 The [audio supplement example](#review-an-audio-supplement-by-acoustic-condition)
 uses authored scores to show how an acoustic routing error can add a genuine
 false flag.

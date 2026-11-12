@@ -61,6 +61,24 @@ def load_sequence_classifier(model_id: str, device: str, dtype: str) -> LoadedMo
     return LoadedModel((tokenizer, model), _revision(entry))
 
 
+def load_writing_review(model_id: str, device: str, dtype: str) -> LoadedModel:
+    import json
+
+    from transformers import AutoModelForSequenceClassification, AutoTokenizer
+
+    entry = _entry(model_id)
+    snapshot = _snapshot(model_id)
+    meta = json.loads((snapshot / "detector-config.json").read_bytes())
+    if meta["label_mapping"] != {"human": 0, "ai": 1} or meta["temperature"] <= 0:
+        raise ValueError("Unexpected writing review labels")
+    model, info = AutoModelForSequenceClassification.from_pretrained(
+        snapshot, local_files_only=True, trust_remote_code=False, use_safetensors=True, output_loading_info=True)
+    if any(info.get(key) for key in ("missing_keys", "mismatched_keys", "error_msgs", "unexpected_keys")):
+        raise ValueError("The writing review checkpoint did not load exactly")
+    tokenizer = AutoTokenizer.from_pretrained(snapshot, local_files_only=True, trust_remote_code=False)
+    return LoadedModel((tokenizer, model.to(device).eval(), meta["temperature"]), _revision(entry))
+
+
 def load_causal_lm(model_id: str, device: str, dtype: str) -> LoadedModel:
     """Binoculars LLMs: fp16 when the ModelManager grants it (accelerators, `fp16_safe`), else fp32."""
     import torch

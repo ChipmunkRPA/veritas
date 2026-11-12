@@ -314,6 +314,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
         document_matched_context.validate(document)
         document_paragraph_priority.validate(document)
         document_passage_coverage.validate(document)
+        document_scope.validate_checkpoint_agreement(document)
     except (ValueError, KeyError, TypeError, AttributeError) as error:
         raise DocumentPacketIntegrityError("Document review evidence has invalid source commitments or positions") from error
     ids = set()
@@ -363,6 +364,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     check_coverage = []
     seen_checks = set()
     matched_review = None
+    checkpoint_review = None
     for signal in result.get("signals", []):
         evidence = signal.get("details", {}).get("text_evidence") or {}
         if signal.get("status") != "ok":
@@ -380,6 +382,12 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
             continue
         if evidence.get("extracted_text_sha256") != text_hash(text) or evidence.get("offset_unit") != "unicode_codepoint":
             raise DocumentPacketIntegrityError("A text check refers to a different extracted document")
+        if document_scope.CHECKPOINT_AGREEMENT_KEY in evidence:
+            if checkpoint_review is not None or not document_matched_context.matches(
+                signal["detector_id"], signal["detector_version"], signal["model_revisions"]
+            ):
+                raise DocumentPacketIntegrityError("Second writing check has an invalid primary binding")
+            checkpoint_review = evidence[document_scope.CHECKPOINT_AGREEMENT_KEY]
         try:
             review = document_matched_context.from_signal(signal, ref)
         except (ValueError, KeyError, TypeError) as error:
@@ -465,6 +473,9 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                                               "unmapped_pages": decoded["meta"].get("unmapped_pages", []),
                                               "ocr": public_ocr, "email": decoded["meta"].get("email")},
                 "omitted_windows": max(0, len(candidates) - len(selected)), "limitations": []}
+    if checkpoint_review is not None:
+        document["coverage"][document_scope.CHECKPOINT_AGREEMENT_KEY] = checkpoint_review
+        document_scope.validate_checkpoint_agreement(document, text, result=result)
     if matched_review is not None:
         document["coverage"][document_matched_context.KEY] = matched_review
         document["coverage"]["selection_policy"] = (
@@ -605,6 +616,7 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
             document_matched_context.verify_source(document, decoded["text"], decoded["source_map"], result=result)
             document_paragraph_priority.verify_source(document, decoded["text"], decoded["source_map"], result=result)
             document_passage_coverage.verify_source(document, decoded["text"], decoded["source_map"], result=result)
+            document_scope.validate_checkpoint_agreement(document, decoded["text"], result=result)
         except (ValueError, KeyError, TypeError, AttributeError) as error:
             raise DocumentPacketIntegrityError("Document review evidence differs from the frozen text or source mapping") from error
     store.verify(analysis.sha256)

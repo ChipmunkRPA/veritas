@@ -1,0 +1,154 @@
+"""A bounded second reading of existing positive writing contexts."""
+
+from __future__ import annotations
+
+from dataclasses import replace
+
+from app.core.config import settings
+from app.detectors.text.adapters.common import CPU_ONLY, FULL_DEEP, text_spec
+from app.detectors.text.coverage import classify_complete
+from app.engine.boundary import Cancelled
+from app.engine.detector import (
+    ActivationUse,
+    Applicability,
+    Detector,
+    DetectorResult,
+    InputUnit,
+    RunContext,
+    StageOutputs,
+)
+from app.evidence import document_matched_context, document_scope
+
+ID = "txt.review.agreement"
+FAMILY = "text_review"
+MODEL = "hf.rasbt.writing_review"
+KEY = document_scope.CHECKPOINT_AGREEMENT_KEY
+BATCH = 4
+REVIEW_SECONDS = 20.0
+FINISH_RESERVE_SECONDS = 30.0
+
+
+def enabled() -> bool:
+    return (settings.environment == "dev" and settings.text_detector_mode == "candidate"
+            and settings.text_window_sentences == 3 and settings.text_checkpoint_agreement_review)
+
+
+def candidates(decoded: dict, primary: dict) -> list[dict] | None:
+    from app.detectors.text.extract import _ocr_language
+
+    text = decoded["text"]
+    if (decoded["meta"].get("method") != "plain" or len(decoded["paragraphs"]) not in {1, 4}
+            or not 68 <= len(text.split(None, 420)) <= 420
+            or len(decoded["paragraphs"]) == 1 and len(decoded["sentences"]) != 4):
+        return None
+    language = _ocr_language(text)
+    if language.get("code") != "en" or language.get("status") != "supported":
+        return None
+    if not document_matched_context.matches(primary["detector_id"], primary["version"], primary["model_revisions"]):
+        return None
+    source = primary["details"]["text_evidence"]
+    windows = [window for window in source["windows"] if window["score"] >= .5]
+    return windows[:document_scope.CHECKPOINT_AGREEMENT_MAX]
+
+
+def _review(ctx, text: str, windows: list[dict]) -> dict:
+    from app.engine.stages import common
+
+    remaining = ctx.deadline.remaining()
+    budget = REVIEW_SECONDS if remaining is None else min(REVIEW_SECONDS, remaining - FINISH_RESERVE_SECONDS)
+    if not windows or budget <= 0:
+        return {}
+    optional = replace(ctx, deadline=ctx.deadline.nested(budget))
+    try:
+        output = common.run_detectors(optional, (WritingAgreementReview.spec.modality,), include={FAMILY},
+                                      outputs=StageOutputs(document={"text": text, "review_windows": windows}))
+        reviewed = next((entry for entry in output["detectors"] if entry["detector_id"] == ID
+                         and entry["status"] == "ok"), None)
+        return reviewed["details"]["checkpoint_responses"] if reviewed else {}
+    except Cancelled:
+        raise
+    except Exception as error:
+        ctx.log.warning("writing_review.unavailable", error_type=type(error).__name__)
+        return {}
+    finally:
+        ctx.check("after the optional second writing check")
+
+
+def record(ctx, detected: dict, decoded: dict) -> None:
+    """Store the second response with the exact primary window it revisited."""
+    primary = next((entry for entry in detected["detectors"] if entry["detector_id"] == document_matched_context.DETECTOR
+                    and entry["status"] == "ok"), None)
+    if primary is None or (windows := candidates(decoded, primary)) is None:
+        return
+    evidence = primary["details"]["text_evidence"]
+    text = decoded["text"]
+    recorded = [{**window["focus"], "spans": window["spans"], "input_sha256": window["input_sha256"], "state": "unavailable"}
+                for window in windows]
+    value = {"schema": document_scope.CHECKPOINT_AGREEMENT_SCHEMA, "ranges": recorded,
+             "authorship_confidence_contribution": 0}
+    document = {"coverage": {KEY: value}, "source": {"chars": len(text)}}
+    document_scope.validate_checkpoint_agreement(document, text)
+    eligible = [window for window in windows if document_matched_context.one_complete_window(window["token_coverage"])]
+    responses = _review(ctx, text, eligible)
+    if responses:
+        try:
+            measured = []
+            for window, row in zip(windows, recorded, strict=True):
+                response = responses.get(window["unit_ref"])
+                if response and response["input_sha256"] == row["input_sha256"]:
+                    score = float.fromhex(response["response_exact_hex"])
+                    row = {**row, "response_exact_hex": response["response_exact_hex"], "tokens": response["tokens"],
+                           "state": "corroborated" if score >= .5 else "different"}
+                measured.append(row)
+            value["ranges"] = measured
+            document_scope.validate_checkpoint_agreement(document, text)
+        except (AttributeError, KeyError, TypeError, ValueError, OverflowError) as error:
+            value["ranges"] = recorded
+            ctx.log.warning("writing_review.invalid_response", error_type=type(error).__name__)
+    for window in evidence["windows"]:
+        window["score_exact_hex"] = float(window["score"]).hex()
+    evidence[KEY] = value
+
+
+class WritingAgreementReview(Detector):
+    spec = replace(text_spec(ID, "Second writing check", InputUnit.SENTENCES, model_ids=(MODEL,), devices=CPU_ONLY,
+                             timeout_s=45.0, profiles=FULL_DEEP, version="1.0.0"), family=FAMILY)
+
+    def applicable(self, ctx: RunContext) -> Applicability:
+        return Applicability(bool(enabled() and (ctx.outputs.document or {}).get("review_windows")),
+                             "no eligible primary writing contexts")
+
+    def activation_plan(self, ctx: RunContext) -> tuple[ActivationUse, ...]:
+        return (ActivationUse(MODEL, BATCH, "token window", "At most 512 tokens per input including specials"),)
+
+    def run(self, ctx: RunContext) -> DetectorResult:
+        import torch
+
+        from app.detectors.text.extract import text_hash
+
+        document = ctx.outputs.document
+        text = document["text"]
+        windows = document["review_windows"]
+        inputs = [" ".join(text[span["start"]:span["end"]] for span in window["spans"]) for window in windows]
+        if not 0 < len(windows) <= document_scope.CHECKPOINT_AGREEMENT_MAX or any(
+            text_hash(value) != window["input_sha256"] for value, window in zip(inputs, windows, strict=True)
+        ):
+            raise ValueError("Writing review input differs from the recorded context")
+        tokenizer, model, temperature = ctx.lease.get(MODEL).obj
+
+        def evaluate(encoded):
+            logits = model(encoded["input_ids"], attention_mask=encoded["attention_mask"]).logits.float()
+            if logits.shape[-1] != 2 or not torch.isfinite(logits).all():
+                raise ValueError("Invalid writing review response")
+            return (logits / temperature).softmax(dim=-1)[:, 1]
+
+        with torch.inference_mode():
+            scores, coverage = classify_complete(inputs, tokenizer, ctx.device, evaluate, max_len=512, batch=BATCH,
+                                                 check=ctx.deadline.check)
+        measured = {
+            window["unit_ref"]: {"input_sha256": window["input_sha256"], "response_exact_hex": float(score).hex(),
+                                 "tokens": proof["tokens"]}
+            for window, score, proof in zip(windows, scores, coverage, strict=True)
+            if document_matched_context.one_complete_window(proof)
+        }
+        return DetectorResult(status="ok", details={"checkpoint_responses": measured})

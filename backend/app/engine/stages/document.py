@@ -101,8 +101,21 @@ def condition(ctx: StageContext) -> dict[str, Any]:
 
 
 def detect(ctx: StageContext) -> dict[str, Any]:
-    return common.run_detectors(ctx, (Modality.TEXT,), outputs=StageOutputs(document=ctx.outputs["decode"]),
-                                max_units=DOCUMENT_MAX_UNITS)
+    from app.detectors.text.adapters import agreement
+    from app.engine.boundary import Cancelled
+
+    decoded = ctx.outputs["decode"]
+    detected = common.run_detectors(ctx, (Modality.TEXT,), outputs=StageOutputs(document=decoded),
+                                    max_units=DOCUMENT_MAX_UNITS, exclude={agreement.FAMILY})
+    if ctx.profile in agreement.FULL_DEEP and agreement.enabled():
+        try:
+            agreement.record(ctx, detected, decoded)
+        except Cancelled:
+            raise
+        except Exception as error:
+            ctx.check("after the optional second writing check")
+            ctx.log.warning("writing_review.omitted", error_type=type(error).__name__)
+    return detected
 
 
 # --- legacy fuser ------------------------------------------------------------------------------------------

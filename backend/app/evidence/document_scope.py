@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import hashlib
+import re
 from collections import Counter
 
 VERSION = "document-evidence-5"
@@ -16,6 +18,14 @@ PASSAGE_COVERAGE_KEY = "local_passage_coverage"
 PASSAGE_COVERAGE_SCHEMA = "document-local-passage-coverage/1"
 PASSAGE_COVERAGE_MAX_RANGES = 256
 PASSAGE_COVERAGE_STATES = ("no_local_record", "context_only", "response_range")
+CHECKPOINT_AGREEMENT_KEY = "writing_second_check"
+CHECKPOINT_AGREEMENT_SCHEMA = "document-writing-second-check/1"
+CHECKPOINT_AGREEMENT_MAX = 6
+CHECKPOINT_AGREEMENT_LABELS = {
+    "corroborated": "Both checks gave an AI-like response",
+    "different": "The checks gave different responses",
+    "unavailable": "Second response unavailable",
+}
 
 
 def check_range(span: dict, size: int) -> tuple[int, int]:
@@ -23,6 +33,68 @@ def check_range(span: dict, size: int) -> tuple[int, int]:
     if type(start) is not int or type(end) is not int or not 0 <= start < end <= size:
         raise ValueError("Invalid document inspection coordinates")
     return start, end
+
+
+def validate_checkpoint_agreement(document: dict, text: str | None = None, *, result: dict | None = None) -> None:
+    record = (document.get("coverage") or {}).get(CHECKPOINT_AGREEMENT_KEY)
+    if result is not None:
+        for signal in result.get("signals", []):
+            evidence = (signal.get("details") or {}).get("text_evidence") or {}
+            if CHECKPOINT_AGREEMENT_KEY not in evidence:
+                continue
+            if evidence[CHECKPOINT_AGREEMENT_KEY] != record:
+                raise ValueError("Second writing check differs from the frozen result")
+            expected = [
+                {**window["focus"], "spans": window["spans"], "input_sha256": window["input_sha256"]}
+                for window in evidence["windows"] if float.fromhex(window["score_exact_hex"]) >= .5
+            ][:CHECKPOINT_AGREEMENT_MAX]
+            if expected != [
+                {key: row[key] for key in ("start", "end", "spans", "input_sha256")} for row in record["ranges"]
+            ]:
+                raise ValueError("Second writing check differs from the primary windows")
+            break
+        else:
+            if record is not None:
+                raise ValueError("Second writing check is missing from the frozen result")
+    if record is None:
+        return
+    size = document["source"]["chars"]
+    ranges = record["ranges"]
+    if (set(record) != {"schema", "ranges", "authorship_confidence_contribution"}
+            or record["schema"] != CHECKPOINT_AGREEMENT_SCHEMA
+            or type(record["authorship_confidence_contribution"]) is not int
+            or record["authorship_confidence_contribution"] != 0
+            or not isinstance(ranges, list) or len(ranges) > CHECKPOINT_AGREEMENT_MAX
+            or text is not None and len(text) != size):
+        raise ValueError("Invalid second writing check")
+    previous = 0
+    for row in ranges:
+        focus = check_range(row, size)
+        spans = [check_range(span, size) for span in row["spans"]]
+        state = row["state"]
+        fields = {"start", "end", "spans", "input_sha256", "state"}
+        if (focus[0] < previous or len(spans) not in {2, 3} or focus not in spans
+                or any(a[1] > b[0] for a, b in zip(spans, spans[1:]))
+                or not re.fullmatch(r"[0-9a-f]{64}", row["input_sha256"])
+                or state not in CHECKPOINT_AGREEMENT_LABELS):
+            raise ValueError("Invalid second-check source coordinates")
+        if state != "unavailable":
+            fields |= {"response_exact_hex", "tokens"}
+            try:
+                response = float.fromhex(row["response_exact_hex"])
+            except OverflowError as error:
+                raise ValueError("Invalid second-check response") from error
+            if (not 0 <= response <= 1 or row["response_exact_hex"] != response.hex()
+                    or (response >= .5) != (state == "corroborated")
+                    or type(row["tokens"]) is not int or not 0 < row["tokens"] <= 512):
+                raise ValueError("Invalid second-check response")
+        if set(row) != fields or any(set(span) != {"start", "end"} for span in row["spans"]):
+            raise ValueError("Unexpected second-check evidence field")
+        if text is not None:
+            content = " ".join(text[a:b] for a, b in spans)
+            if hashlib.sha256(content.encode()).hexdigest() != row["input_sha256"]:
+                raise ValueError("Second writing check refers to a different source input")
+        previous = focus[1]
 
 
 def inspection_direction(window: dict) -> bool | None:

@@ -1,0 +1,585 @@
+{
+  "advance_agreement": true,
+  "advance_rescue": false,
+  "checkpoint_revisions": {
+    "first": "f1795c86806e6838d4afa33d0b1427f8430c9615",
+    "second": "a6efd4bf6ecd852f332b2569ae0f98cae13b7985"
+  },
+  "code_sha256": "35ae0c57fe79fbdd3364944896f4f8fe34cdd56595ee8eb03738f2d55f1355f3",
+  "documents": 100,
+  "forwards": 114,
+  "freeze_sha256": "9e5a4309e4977e4716193954d4daa85eef8b23da0b5600a48dc6cd18b9970ff3",
+  "independent_replay": {
+    "documents": 100,
+    "exact_window_occurrences": 683,
+    "outcome_counts": 374,
+    "reviewer_sha256": "b5e32377a2b28d203e588498f8cd9cf7e0c9ef4c4c2fc254f8a122b28c2ee028",
+    "status": "verified",
+    "unique_inputs": 453
+  },
+  "method": {
+    "advance_agreement": "No lost useful file and at least two cleared human source groups across the full panel.",
+    "advance_rescue": "At least two newly useful source groups, at least two publishers and generator families with added locations, and at most one new human source group flagged.",
+    "agreement": "Keep the subset of current displayed windows also at or above .5 in the second checkpoint. Do not backfill omitted windows.",
+    "current": "First six context responses at or above .5, in source order. Reuse the previously audited current scores on exact matching inputs.",
+    "rescue": "Keep all current windows. Also consider full three-sentence windows with a focus of at least 12 words. In a multi-paragraph document, take the maximum for each focus paragraph. In a single paragraph, compare individual foci. Add the strongest window only if it is at least .5, exceeds the second place by a factor of two in model odds, and is outside the existing displayed windows.",
+    "scope": "Same exact text and source positions, independent checkpoint weights. No new fit. Mixed English excerpts and controls already consumed by other project experiments.",
+    "second_only": "First six second-checkpoint responses at or above its publisher's .5 point, in source order.",
+    "useful": "One displayed window must intersect the known edit at .30 non-whitespace character IoU."
+  },
+  "outcomes": {
+    "FAA": {
+      "arms": {
+        "agreement": {
+          "gained": 0,
+          "gained_groups": 0,
+          "human_flagged": 3,
+          "human_groups_added": 0,
+          "human_groups_cleared": 0,
+          "human_groups_flagged": 2,
+          "lost": 0,
+          "useful": 1
+        },
+        "current": {
+          "gained": 0,
+          "gained_groups": 0,
+          "human_flagged": 3,
+          "human_groups_added": 0,
+          "human_groups_cleared": 0,
+          "human_groups_flagged": 2,
+          "lost": 0,
+          "useful": 1
+        },
+        "current_plus_rescue": {
+          "gained": 2,
+          "gained_groups": 2,
+          "human_flagged": 12,
+          "human_groups_added": 4,
+          "human_groups_cleared": 0,
+          "human_groups_flagged": 6,
+          "lost": 0,
+          "useful": 3
+        },
+        "second_only": {
+          "gained": 7,
+          "gained_groups": 4,
+          "human_flagged": 12,
+          "human_groups_added": 4,
+          "human_groups_cleared": 0,
+          "human_groups_flagged": 6,
+          "lost": 0,
+          "useful": 8
+        }
+      },
+      "edits": 9,
+      "human": 12
+    },
+    "USDA FSA": {
+      "arms": {
+        "agreement": {
+          "gained": 0,
+          "gained_groups": 0,
+          "human_flagged": 1,
+          "human_groups_added": 0,
+          "human_groups_cleared": 0,
+          "human_groups_flagged": 1,
+          "lost": 0,
+          "useful": 1
+        },
+        "current": {
+          "gained": 0,
+          "gained_groups": 0,
+          "human_flagged": 1,
+          "human_groups_added": 0,
+          "human_groups_cleared": 0,
+          "human_groups_flagged": 1,
+          "lost": 0,
+          "useful": 1
+        },
+        "current_plus_rescue": {
+          "gained": 5,
+          "gained_groups": 3,
+          "human_flagged": 10,
+          "human_groups_added": 5,
+          "human_groups_cleared": 0,
+          "human_groups_flagged": 6,
+          "lost": 0,
+          "useful": 6
+        },
+        "second_only": {
+          "gained": 7,
+          "gained_groups": 4,
+          "human_flagged": 11,
+          "human_groups_added": 5,
+          "human_groups_cleared": 0,
+          "human_groups_flagged": 6,
+          "lost": 0,
+          "useful": 8
+        }
+      },
+      "edits": 10,
+      "human": 12
+    },
+    "all": {
+      "arms": {
+        "agreement": {
+          "gained": 0,
+          "gained_groups": 0,
+          "human_flagged": 14,
+          "human_groups_added": 0,
+          "human_groups_cleared": 2,
+          "human_groups_flagged": 9,
+          "lost": 0,
+          "useful": 14
+        },
+        "current": {
+          "gained": 0,
+          "gained_groups": 0,
+          "human_flagged": 17,
+          "human_groups_added": 0,
+          "human_groups_cleared": 0,
+          "human_groups_flagged": 11,
+          "lost": 0,
+          "useful": 14
+        },
+        "current_plus_rescue": {
+          "gained": 14,
+          "gained_groups": 10,
+          "human_flagged": 46,
+          "human_groups_added": 15,
+          "human_groups_cleared": 0,
+          "human_groups_flagged": 26,
+          "lost": 0,
+          "useful": 28
+        },
+        "second_only": {
+          "gained": 23,
+          "gained_groups": 15,
+          "human_flagged": 49,
+          "human_groups_added": 16,
+          "human_groups_cleared": 1,
+          "human_groups_flagged": 26,
+          "lost": 2,
+          "useful": 35
+        }
+      },
+      "edits": 44,
+      "human": 56
+    },
+    "census": {
+      "arms": {
+        "agreement": {
+          "gained": 0,
+          "gained_groups": 0,
+          "human_flagged": 7,
+          "human_groups_added": 0,
+          "human_groups_cleared": 0,
+          "human_groups_flagged": 4,
+          "lost": 0,
+          "useful": 7
+        },
+        "current": {
+          "gained": 0,
+          "gained_groups": 0,
+          "human_flagged": 7,
+          "human_groups_added": 0,
+          "human_groups_cleared": 0,
+          "human_groups_flagged": 4,
+          "lost": 0,
+          "useful": 7
+        },
+        "current_plus_rescue": {
+          "gained": 5,
+          "gained_groups": 3,
+          "human_flagged": 12,
+          "human_groups_added": 4,
+          "human_groups_cleared": 0,
+          "human_groups_flagged": 8,
+          "lost": 0,
+          "useful": 12
+        },
+        "second_only": {
+          "gained": 5,
+          "gained_groups": 3,
+          "human_flagged": 16,
+          "human_groups_added": 5,
+          "human_groups_cleared": 0,
+          "human_groups_flagged": 9,
+          "lost": 2,
+          "useful": 10
+        }
+      },
+      "edits": 14,
+      "human": 18
+    },
+    "copyright": {
+      "arms": {
+        "agreement": {
+          "gained": 0,
+          "gained_groups": 0,
+          "human_flagged": 3,
+          "human_groups_added": 0,
+          "human_groups_cleared": 2,
+          "human_groups_flagged": 2,
+          "lost": 0,
+          "useful": 5
+        },
+        "current": {
+          "gained": 0,
+          "gained_groups": 0,
+          "human_flagged": 6,
+          "human_groups_added": 0,
+          "human_groups_cleared": 0,
+          "human_groups_flagged": 4,
+          "lost": 0,
+          "useful": 5
+        },
+        "current_plus_rescue": {
+          "gained": 2,
+          "gained_groups": 2,
+          "human_flagged": 12,
+          "human_groups_added": 2,
+          "human_groups_cleared": 0,
+          "human_groups_flagged": 6,
+          "lost": 0,
+          "useful": 7
+        },
+        "second_only": {
+          "gained": 4,
+          "gained_groups": 4,
+          "human_flagged": 10,
+          "human_groups_added": 2,
+          "human_groups_cleared": 1,
+          "human_groups_flagged": 5,
+          "lost": 0,
+          "useful": 9
+        }
+      },
+      "edits": 11,
+      "human": 14
+    },
+    "granite": {
+      "arms": {
+        "agreement": {
+          "gained": 0,
+          "gained_groups": 0,
+          "human_flagged": 0,
+          "human_groups_added": 0,
+          "human_groups_cleared": 0,
+          "human_groups_flagged": 0,
+          "lost": 0,
+          "useful": 7
+        },
+        "current": {
+          "gained": 0,
+          "gained_groups": 0,
+          "human_flagged": 0,
+          "human_groups_added": 0,
+          "human_groups_cleared": 0,
+          "human_groups_flagged": 0,
+          "lost": 0,
+          "useful": 7
+        },
+        "current_plus_rescue": {
+          "gained": 5,
+          "gained_groups": 5,
+          "human_flagged": 0,
+          "human_groups_added": 0,
+          "human_groups_cleared": 0,
+          "human_groups_flagged": 0,
+          "lost": 0,
+          "useful": 12
+        },
+        "second_only": {
+          "gained": 6,
+          "gained_groups": 6,
+          "human_flagged": 0,
+          "human_groups_added": 0,
+          "human_groups_cleared": 0,
+          "human_groups_flagged": 0,
+          "lost": 1,
+          "useful": 12
+        }
+      },
+      "edits": 16,
+      "human": 0
+    },
+    "human_splice": {
+      "arms": {
+        "agreement": {
+          "gained": 0,
+          "gained_groups": 0,
+          "human_flagged": 6,
+          "human_groups_added": 0,
+          "human_groups_cleared": 1,
+          "human_groups_flagged": 6,
+          "lost": 0,
+          "useful": 0
+        },
+        "current": {
+          "gained": 0,
+          "gained_groups": 0,
+          "human_flagged": 7,
+          "human_groups_added": 0,
+          "human_groups_cleared": 0,
+          "human_groups_flagged": 7,
+          "lost": 0,
+          "useful": 0
+        },
+        "current_plus_rescue": {
+          "gained": 0,
+          "gained_groups": 0,
+          "human_flagged": 23,
+          "human_groups_added": 16,
+          "human_groups_cleared": 0,
+          "human_groups_flagged": 23,
+          "lost": 0,
+          "useful": 0
+        },
+        "second_only": {
+          "gained": 0,
+          "gained_groups": 0,
+          "human_flagged": 25,
+          "human_groups_added": 19,
+          "human_groups_cleared": 1,
+          "human_groups_flagged": 25,
+          "lost": 0,
+          "useful": 0
+        }
+      },
+      "edits": 0,
+      "human": 28
+    },
+    "olmo": {
+      "arms": {
+        "agreement": {
+          "gained": 0,
+          "gained_groups": 0,
+          "human_flagged": 0,
+          "human_groups_added": 0,
+          "human_groups_cleared": 0,
+          "human_groups_flagged": 0,
+          "lost": 0,
+          "useful": 5
+        },
+        "current": {
+          "gained": 0,
+          "gained_groups": 0,
+          "human_flagged": 0,
+          "human_groups_added": 0,
+          "human_groups_cleared": 0,
+          "human_groups_flagged": 0,
+          "lost": 0,
+          "useful": 5
+        },
+        "current_plus_rescue": {
+          "gained": 2,
+          "gained_groups": 2,
+          "human_flagged": 0,
+          "human_groups_added": 0,
+          "human_groups_cleared": 0,
+          "human_groups_flagged": 0,
+          "lost": 0,
+          "useful": 7
+        },
+        "second_only": {
+          "gained": 3,
+          "gained_groups": 3,
+          "human_flagged": 0,
+          "human_groups_added": 0,
+          "human_groups_cleared": 0,
+          "human_groups_flagged": 0,
+          "lost": 1,
+          "useful": 7
+        }
+      },
+      "edits": 9,
+      "human": 0
+    },
+    "original": {
+      "arms": {
+        "agreement": {
+          "gained": 0,
+          "gained_groups": 0,
+          "human_flagged": 8,
+          "human_groups_added": 0,
+          "human_groups_cleared": 2,
+          "human_groups_flagged": 8,
+          "lost": 0,
+          "useful": 0
+        },
+        "current": {
+          "gained": 0,
+          "gained_groups": 0,
+          "human_flagged": 10,
+          "human_groups_added": 0,
+          "human_groups_cleared": 0,
+          "human_groups_flagged": 10,
+          "lost": 0,
+          "useful": 0
+        },
+        "current_plus_rescue": {
+          "gained": 0,
+          "gained_groups": 0,
+          "human_flagged": 23,
+          "human_groups_added": 13,
+          "human_groups_cleared": 0,
+          "human_groups_flagged": 23,
+          "lost": 0,
+          "useful": 0
+        },
+        "second_only": {
+          "gained": 0,
+          "gained_groups": 0,
+          "human_flagged": 24,
+          "human_groups_added": 15,
+          "human_groups_cleared": 1,
+          "human_groups_flagged": 24,
+          "lost": 0,
+          "useful": 0
+        }
+      },
+      "edits": 0,
+      "human": 28
+    },
+    "qwen": {
+      "arms": {
+        "agreement": {
+          "gained": 0,
+          "gained_groups": 0,
+          "human_flagged": 0,
+          "human_groups_added": 0,
+          "human_groups_cleared": 0,
+          "human_groups_flagged": 0,
+          "lost": 0,
+          "useful": 1
+        },
+        "current": {
+          "gained": 0,
+          "gained_groups": 0,
+          "human_flagged": 0,
+          "human_groups_added": 0,
+          "human_groups_cleared": 0,
+          "human_groups_flagged": 0,
+          "lost": 0,
+          "useful": 1
+        },
+        "current_plus_rescue": {
+          "gained": 3,
+          "gained_groups": 3,
+          "human_flagged": 0,
+          "human_groups_added": 0,
+          "human_groups_cleared": 0,
+          "human_groups_flagged": 0,
+          "lost": 0,
+          "useful": 4
+        },
+        "second_only": {
+          "gained": 6,
+          "gained_groups": 6,
+          "human_flagged": 0,
+          "human_groups_added": 0,
+          "human_groups_cleared": 0,
+          "human_groups_flagged": 0,
+          "lost": 0,
+          "useful": 7
+        }
+      },
+      "edits": 8,
+      "human": 0
+    },
+    "smol2": {
+      "arms": {
+        "agreement": {
+          "gained": 0,
+          "gained_groups": 0,
+          "human_flagged": 0,
+          "human_groups_added": 0,
+          "human_groups_cleared": 0,
+          "human_groups_flagged": 0,
+          "lost": 0,
+          "useful": 1
+        },
+        "current": {
+          "gained": 0,
+          "gained_groups": 0,
+          "human_flagged": 0,
+          "human_groups_added": 0,
+          "human_groups_cleared": 0,
+          "human_groups_flagged": 0,
+          "lost": 0,
+          "useful": 1
+        },
+        "current_plus_rescue": {
+          "gained": 4,
+          "gained_groups": 4,
+          "human_flagged": 0,
+          "human_groups_added": 0,
+          "human_groups_cleared": 0,
+          "human_groups_flagged": 0,
+          "lost": 0,
+          "useful": 5
+        },
+        "second_only": {
+          "gained": 8,
+          "gained_groups": 8,
+          "human_flagged": 0,
+          "human_groups_added": 0,
+          "human_groups_cleared": 0,
+          "human_groups_flagged": 0,
+          "lost": 0,
+          "useful": 9
+        }
+      },
+      "edits": 11,
+      "human": 0
+    }
+  },
+  "panels": {
+    "writing-grammar-seams": {
+      "baseline.json": "4695353edaf8138c62c13e66ca3fa1c901e62ee86574812834f628d3600842ad",
+      "cases.json": "81b6925c6203907253dd9e2b225d1b63e64703d4c31fb332dab88ec263de4239"
+    },
+    "writing-option-order-transfer": {
+      "private-order-readout.json": "6be4681485d371770eeb1f4dfd6cb525c949c767c0663ba208bf66ed8c154c75",
+      "sources.json": "6c782213773cddbf029076f0ea8dce6872f84c80a8511a023e51eb3e63e97ab6"
+    }
+  },
+  "readout_sha256": "e35375445f38ec1b4c6f7e6563dac3db7017d5a84981dfdb19407118b4e9aa74",
+  "rescue_gained_scopes": {
+    "kind": [
+      "granite",
+      "olmo",
+      "qwen",
+      "smol2"
+    ],
+    "publisher": [
+      "FAA",
+      "USDA FSA",
+      "census",
+      "copyright"
+    ]
+  },
+  "runtime": {
+    "huggingface_hub": "1.28.0",
+    "platform": "Darwin arm64",
+    "pysbd": "0.3.4",
+    "python": "3.12.6",
+    "threads": 1,
+    "tokenizers": "0.22.2",
+    "torch": "2.13.0",
+    "transformers": "5.15.1"
+  },
+  "schema": "chipmunk.writing-checkpoint-agreement/1",
+  "score_seconds": 341.207,
+  "scores_sha256": "cfb16bccc8ed26cd2bf30f1c6be3e4ae69f202585c78c3763d0f523319bdd0d5",
+  "second_assets": {
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "config.json": "dc4511bb21dfa4991688aba8548086c8fa6947d94018ac1a8d09ae9843749703",
+    "detector-config.json": "e72a616a5cbb0bbbe7b75d3d5e40af3c5cafdb0f0a8299ce04c5921e046619c7",
+    "model.safetensors": "e7f7a617ad4af3abd8bcb939d564d2a2ea36fdb24b893177ae10c12ebe869361",
+    "tokenizer.json": "6c8aaa9a542084f2457eab775d4eeb51f92a70c0fd9de28d5edb0ddec3c08d30"
+  },
+  "unique_inputs": 453,
+  "window_occurrences": 683
+}

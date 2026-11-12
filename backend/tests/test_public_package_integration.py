@@ -40,7 +40,14 @@ from app.api import auth, security, tokens, v2_evidence_packets, v2_reports
 from app.api.v2 import install_problem_handlers
 from app.core.canonical import canonical_hash, canonical_json
 from app.core.config import settings
-from app.evidence import audio_packets, document_packets, service, video_packets
+from app.evidence import (
+    audio_packets,
+    document_matched_context,
+    document_packets,
+    document_scope,
+    service,
+    video_packets,
+)
 from app.reports import engine, package, signing, snapshot, verify
 from app.reports.specimens import specimen
 from app.storage.artefacts import register_artefact
@@ -107,12 +114,13 @@ def test_actual_0023_to_0024_migration_preserves_legacy_package_bytes_and_every_
     db_engine.dispose()
 
 
-@pytest.fixture(params=["video", "audio", "document", "hybrid_document", "image", "image_translation", "image_affine"])
+@pytest.fixture(params=["video", "audio", "document", "document_agreement", "hybrid_document", "image", "image_translation", "image_affine"])
 def multimedia_package(request, tmp_path, monkeypatch):
     hybrid = request.param == "hybrid_document"
+    agreement = request.param == "document_agreement"
     translated = request.param == "image_translation"
     geometric = request.param == "image_affine"
-    kind = "document" if hybrid else "image" if translated or geometric else request.param
+    kind = "document" if hybrid or agreement else "image" if translated or geometric else request.param
     if kind == "image":
         fixture = request.getfixturevalue("packet_fixture")
         if geometric:
@@ -149,6 +157,27 @@ def multimedia_package(request, tmp_path, monkeypatch):
         packet, = document["packets"]
         assert any(anchor.get("ocr", {}).get("coverage_scope") == "image_region" for anchor in packet["anchors"])
         assert "page1_ocr_input" in packet["artifacts"]
+    elif agreement:
+        db, store, analysis, result, *_ = request.getfixturevalue("packet_factory")(".txt", scores=(.91, .93, .81))
+        signal = result["signals"][0]
+        signal.update(detector_id=document_matched_context.DETECTOR, detector_version="1.0.0",
+                      model_revisions={document_matched_context.MODEL: document_matched_context.REVISION})
+        evidence = signal["details"]["text_evidence"]
+        ranges = []
+        states = (("corroborated", .8), ("different", .3), ("unavailable", None))
+        for (state, response), window in zip(states, evidence["windows"], strict=True):
+            window["score_exact_hex"] = window["score"].hex()
+            row = {**window["focus"], "spans": window["spans"], "input_sha256": window["input_sha256"], "state": state}
+            if response is not None:
+                row.update(response_exact_hex=response.hex(), tokens=28)
+            ranges.append(row)
+        evidence[document_scope.CHECKPOINT_AGREEMENT_KEY] = {
+            "schema": document_scope.CHECKPOINT_AGREEMENT_SCHEMA, "ranges": ranges, "authorship_confidence_contribution": 0,
+        }
+        analysis.result_hash = canonical_hash(result)
+        store.put_bytes(canonical_json(result))
+        document = document_packets.build_packet_set(db, analysis, store, result)
+        assert document["coverage"][document_scope.CHECKPOINT_AGREEMENT_KEY]["ranges"] == ranges
     else:
         db, store, analysis, result, *_ = request.getfixturevalue("packet_factory")(".pdf")
         document = document_packets.build_packet_set(db, analysis, store, result)
@@ -214,12 +243,17 @@ def test_multimedia_zip_matches_frozen_set_and_verifies_without_application_runt
         assert bundle["analysis"]["original_result_sha256"] == f.analysis.result_hash
         assert bundle["reports"][0]["snapshot_sha256"] == snapshot.snapshot_hash(f.frozen)
         expected = service.asset_refs(frozen)
+        writing_agreement = frozen.get("coverage", {}).get(document_scope.CHECKPOINT_AGREEMENT_KEY)
         assert {entry["sha256"] for entry in bundle["artifacts"]} == set(expected)
-        assert expected and all(archive.read(entry["file"]) == f.store.read_bytes(entry["sha256"])
-                                for entry in bundle["artifacts"])
-        assert {asset["media_type"] for asset in expected.values()} == (
-            {"audio/wav", "image/png"} if f.analysis.kind == "audio" else
-            {"video/mp4", "image/png"} if f.analysis.kind == "video" else {"image/png"})
+        if writing_agreement:
+            assert not expected
+            assert [row["state"] for row in writing_agreement["ranges"]] == ["corroborated", "different", "unavailable"]
+        else:
+            assert expected and all(archive.read(entry["file"]) == f.store.read_bytes(entry["sha256"])
+                                    for entry in bundle["artifacts"])
+            assert {asset["media_type"] for asset in expected.values()} == (
+                {"audio/wav", "image/png"} if f.analysis.kind == "audio" else
+                {"video/mp4", "image/png"} if f.analysis.kind == "video" else {"image/png"})
         assert bundle["reproduction_supported"] is False
         assert bundle["custody"]["complete_event_chain_included"] is False
         public = json.loads(archive.read("result.json"))
@@ -237,6 +271,11 @@ def test_multimedia_zip_matches_frozen_set_and_verifies_without_application_runt
 
     trusted_key = tmp_path / "trusted-public.pem"
     trusted_key.write_bytes(f.key.public_pem())
+    if writing_agreement:
+        original = tmp_path / "submitted.txt"
+        original.write_bytes(f.store.read_bytes(f.analysis.sha256))
+        checked = verify.verify_package(built.path, public_key_pem=f.key.public_pem(), source_document=original)
+        assert checked.ok, checked.as_dict()
     if f.analysis.kind == "image":
         original = tmp_path / "submitted.png"
         original.write_bytes(f.store.read_bytes(f.analysis.sha256))

@@ -105,11 +105,28 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
   const partialPages = set.coverage?.partially_checked_pages ?? []
   const ocrPages = set.coverage?.ocr?.pages ?? []
   const matched = set.coverage?.matched_context_review
+  const writingAgreement = set.coverage?.writing_second_check
   const usesOcr = ocrPages.some((page) => page.status === 'extracted') || set.packets.some((packet) => packet.anchors.some((anchor) => anchor.extraction === 'ocr'))
   return <div data-testid="document-evidence-content">
     <DocumentRepeatedPassages result={set.repeated_passages} />
     <DocumentInspectionMap packets={set.packets} selectedId={selectedId} onSelect={selectPassage} />
     <DocumentPassageCoverage coverage={set.coverage?.local_passage_coverage} />
+    {writingAgreement && <section className="mt-4 rounded-md border border-border p-4 text-small text-text-muted">
+      <h3 className="m-0 text-body font-medium text-text">Second writing check</h3>
+      <p className="mt-2 mb-0">The second check revisits the exact text behind up to six AI-like responses. This evidence carries zero weight in the overall assessment.</p>
+      {writingAgreement.ranges.length === 0 ? <p className="mt-2 mb-0">The first check supplied no AI-like contexts for this review.</p>
+        : <ul className="mb-0 pl-4 list-disc">{writingAgreement.ranges.map((row) => {
+          const packet = set.packets.find((item) => item.focus.start === row.start && item.focus.end === row.end)
+          const range = `Passage [${row.start}, ${row.end})`
+          return <li key={row.start} className="mt-2">
+            {packet ? <a href={`#media-evidence-${packet.id}`} onClick={(event) => { event.preventDefault(); selectPassage(packet.id) }}>{range}</a> : range}
+            {' · '}{row.state === 'corroborated' ? 'Both checks gave an AI-like response'
+              : row.state === 'different' ? 'The checks gave different responses' : 'Second response unavailable'}
+            <div>First-check context {row.spans.map((span) => `[${span.start}, ${span.end})`).join(', ')}.
+              {!packet && ' No detailed passage card was selected.'}</div>
+          </li>
+        })}</ul>}
+    </section>}
     <div className="mt-4 rounded-md border border-border p-4 text-small text-text-muted">
       <p className="m-0">{set.coverage?.scored_windows != null ? `${set.coverage.scored_windows} scored context window(s) were recorded.` : 'Exact scored-context coverage is unavailable.'}
         {' '}The marked ranges show the text behind the recorded measurements. The responses do not determine the origin of individual words.</p>

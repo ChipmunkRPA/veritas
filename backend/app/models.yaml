@@ -525,6 +525,22 @@ models:
     footprint: {params_m: 434, fp32_mb: 1656, activation_mb_per_item: 400, estimated: true}
     load: {adapter_loader: "app.detectors.text.adapters.loaders:load_four_class_text"}
 
+  - id: hf.rasbt.writing_review
+    source:
+      type: hf
+      repo: rasbt/ai-text-detector-modernbert
+      revision: a6efd4bf6ecd852f332b2569ae0f98cae13b7985
+      files:
+        - {path: LICENSE, sha256: c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4, bytes: 11357}
+        - {path: config.json, sha256: dc4511bb21dfa4991688aba8548086c8fa6947d94018ac1a8d09ae9843749703, bytes: 2090}
+        - {path: detector-config.json, sha256: e72a616a5cbb0bbbe7b75d3d5e40af3c5cafdb0f0a8299ce04c5921e046619c7, bytes: 896}
+        - {path: model.safetensors, sha256: e7f7a617ad4af3abd8bcb939d564d2a2ea36fdb24b893177ae10c12ebe869361, bytes: 299227092}
+        - {path: tokenizer.json, sha256: 6c8aaa9a542084f2457eab775d4eeb51f92a70c0fd9de28d5edb0ddec3c08d30, bytes: 3583228}
+        - {path: tokenizer_config.json, sha256: fb54f027372062b2ca52282efb04d178a8b57167a00cd8f4e816515823a2c016, bytes: 380}
+    licence: {spdx: Apache-2.0, class: commercial, notice: "Pinned publisher checkpoint and Apache-2.0 LICENSE"}
+    footprint: {params_m: 149.61, fp32_mb: 572, activation_mb_per_item: 96, estimated: true}
+    load: {adapter_loader: "app.detectors.text.adapters.loaders:load_writing_review"}
+
   - id: local.desklib_ft_v2
     source:
       type: local
@@ -2120,6 +2136,26 @@ detectors:
     fp_modes: ["short, simple learner writing; unfamiliar text domains"]
     citation: "Pinned publisher checkpoint and docs/text-upgrade-evaluation.md"
     admission: {decision: pending, evidence: "Paired document and email evaluation in progress"}
+
+  - id: txt.review.agreement
+    adapter: app.detectors.text.adapters.agreement:WritingAgreementReview
+    version: 1.0.0
+    name: Second writing check
+    modality: text
+    family: text_review
+    hypotheses: [H1_whole_content_synthesis]
+    models: [hf.rasbt.writing_review]
+    profiles: [full, deep]
+    default_enabled: false
+    known_limitations: ["Optional local passage corroboration. No whole-file score or confidence contribution."]
+    source_url: https://huggingface.co/rasbt/ai-text-detector-modernbert
+    threat: [ai_text]
+    training_data: "Publisher reports human-vs-ai-50k. Training exposure to the retained evaluation articles is unknown."
+    coverage_date: "not established"
+    input_constraints: ["Bounded plain-text English excerpts and up to six exactly recorded contexts"]
+    fp_modes: ["Unfamiliar domains and ordinary human editing can produce positive responses."]
+    citation: "Local exact-window comparison in docs/writing-checkpoint-agreement-2026-11-11.md"
+    admission: {decision: pending, evidence: "Local corroboration only. Retained publisher panels, no serving-confidence calibration."}
 
   - id: txt.desklib
     adapter: app.detectors.text.adapters.learned:DesklibDetector

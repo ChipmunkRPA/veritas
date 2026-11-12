@@ -184,6 +184,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         validate_matched_context(evidence, published_checks={check['id'] for check in result.get('checks', [])})
         validate_paragraph_priority(evidence)
         document_scope.validate_passage_coverage(evidence)
+        document_scope.validate_checkpoint_agreement(evidence)
     if analysis['kind'] == 'document' and evidence['version'] in document_scope.CONTEXT_VERSIONS:
         from app.evidence.document_context import validate as validate_context_comparison
 

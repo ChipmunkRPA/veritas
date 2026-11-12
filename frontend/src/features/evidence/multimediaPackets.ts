@@ -254,6 +254,9 @@ export interface DocumentEvidenceSet extends SetBase {
         source_end?: number; mime_part?: string; paragraph_index?: number; page?: number; block?: number; bbox?: number[] } }[] }[] }
   coverage?: { scored_windows?: number; candidate_spans?: number; unmapped_pages?: number[];
     local_passage_coverage?: DocumentPassageCoverage;
+    writing_second_check?: { schema: 'document-writing-second-check/1'; authorship_confidence_contribution: 0;
+      ranges: { start: number; end: number; spans: { start: number; end: number }[];
+        state: 'corroborated' | 'different' | 'unavailable' }[] };
     matched_context_review?: DocumentMatchedContextReview & { eligible_sentences: number; selected_sentences: number };
     isolated_paragraph_priority?: { schema: 'document-isolated-paragraph-priority/1'; packet_id: string;
       signal_ref: EvidenceRef; authorship_confidence_contribution: 0 };

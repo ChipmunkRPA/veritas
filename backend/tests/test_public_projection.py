@@ -1,6 +1,21 @@
 from app.api.public_projection import alias_id, original_id, project, project_card
 
 
+def test_second_writing_run_keeps_private_checkpoint_details_out_of_public_projection():
+    detector = 'txt.review.agreement'
+    revision = 'a6efd4bf6ecd852f332b2569ae0f98cae13b7985'
+    model = 'hf.rasbt.writing_review'
+    run = {'id': 'run-1', 'detector_id': detector, 'status': 'failed', 'duration_ms': 15,
+           'model_revisions': {model: revision}, 'raw_output_artefact_id': 'private-run-output',
+           'reason': f'Could not load {model} revision {revision}'}
+    shown, = project({'items': [run]})['items']
+    assert shown['detector_id'] == alias_id(detector)
+    assert shown['status'] == 'failed' and shown['duration_ms'] == 15
+    assert shown['reason'] == 'The second writing response was unavailable.'
+    assert shown['model_revisions'] == {} and shown['raw_output_artefact_id'] is None
+    assert run['model_revisions'] == {model: revision}
+
+
 def test_legacy_video_voice_scores_use_the_same_public_projection_as_recording_scores():
     from copy import deepcopy
 

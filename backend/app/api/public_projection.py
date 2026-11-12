@@ -286,8 +286,17 @@ def _project(value: Any, *, field: str, source_text: bool, candidates: tuple[str
                         and (value['id'] in {'univfd_clip', 'clf_dfdc_effnet_b7', 'classifier_document',
                                             'classifier_secondary', 'binoculars_document', 'frames_general'}
                              or value['id'].startswith('clf_')))
+        writing_review = not is_source and identity == 'txt.review.agreement'
         out = {}
         for key, item in value.items():
+            if writing_review and key in {'model_revisions', 'raw_output_artefact_id', 'reason'}:
+                if key == 'model_revisions':
+                    out[key] = {}
+                elif key == 'reason' and item is not None:
+                    out[key] = 'The second writing response was unavailable.'
+                else:
+                    out[key] = None
+                continue
             if generated_coverage and key in {'title', 'statement', 'sentences'}:
                 def redact_generated(part):
                     if isinstance(part, str):

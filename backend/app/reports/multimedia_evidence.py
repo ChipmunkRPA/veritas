@@ -377,6 +377,9 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
         if document_passage_coverage.KEY in coverage:
             frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
             document_passage_coverage.verify_source(document, text, mapping, result=frozen)
+        if document_scope.CHECKPOINT_AGREEMENT_KEY in coverage:
+            frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
+            document_scope.validate_checkpoint_agreement(document, text, result=frozen)
     except (ValueError, KeyError, TypeError) as error:
         raise ObjectIntegrityError("Document review evidence differs from the recorded source extraction") from error
     for packet in document["packets"]:
@@ -543,6 +546,13 @@ def _passage_coverage_view(coverage: dict) -> dict | None:
             "ranges": [{**row, "label": LABELS[row["state"]]} for row in rows],
             "additional_ranges": len(record["ranges"]) - len(rows),
             "omitted_ranges": record["omitted_ranges"]}
+
+
+def _writing_agreement_view(coverage: dict) -> dict | None:
+    record = coverage.get(document_scope.CHECKPOINT_AGREEMENT_KEY)
+    if record is None:
+        return None
+    return {"ranges": [{**row, "label": document_scope.CHECKPOINT_AGREEMENT_LABELS[row["state"]]} for row in record["ranges"]]}
 
 
 def _voice_interval_view(interval: dict, rate: int, video_origin_s: float | None) -> dict:
@@ -806,6 +816,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "version": document["version"], "sha256": document["sha256"], "source_sha256": document["source"]["sha256"],
             "withheld": withheld, "packets": packets, "acoustic_contexts": acoustic_contexts, "coverage_note": _coverage(kind, document),
             "passage_coverage": _passage_coverage_view(document.get("coverage") or {}) if kind == "document" else None,
+            "writing_agreement": _writing_agreement_view(document.get("coverage") or {}) if kind == "document" else None,
             "coverage_details": ([f"{'Voice evidence' if key == 'audio' else 'Audio/video synchronization evidence'}: {channel['reason']}"
                                   for key, channel in (document.get("coverage", {}).get("channels") or {}).items()]
                                  if kind == "video" else

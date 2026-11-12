@@ -29,6 +29,18 @@
 {% endif %}
 <p class="caption">Ranges use extracted Unicode characters and exclude the end position. {% if writing.additional_ranges %}{{ writing.additional_ranges }} more retained ranges appear in the JSON report. {% endif %}{% if writing.omitted_ranges %}The counts include {{ writing.omitted_ranges }} additional ranges beyond the retained list. {% endif %}JSON pointer <span class="mono">/coverage/local_passage_coverage</span>.</p>
 {% endif %}
+{% if evidence.get('writing_agreement') %}
+<h3>Second writing check</h3>
+<p class="caption">The second check revisits the exact text behind up to six AI-like responses. This evidence carries zero weight in the overall assessment.</p>
+{% if evidence.writing_agreement.ranges %}
+<table class="multimedia-locator"><thead><tr><th>Passage focus</th><th>First-check context</th><th>Second check</th></tr></thead><tbody>
+{% for row in evidence.writing_agreement.ranges %}
+<tr><td>[{{ row.start }}, {{ row.end }})</td><td>{% for span in row.spans %}[{{ span.start }}, {{ span.end }}){% if not loop.last %}, {% endif %}{% endfor %}</td><td>{{ row.label }}</td></tr>
+{% endfor %}
+</tbody></table>
+<p class="caption">Ranges use extracted Unicode characters. JSON pointer <span class="mono">/coverage/writing_second_check</span>.</p>
+{% else %}<p class="caption">The first check supplied no AI-like contexts for this review.</p>{% endif %}
+{% endif %}
 {% if evidence.get('audio_source_clock') %}
 {% set clock = evidence.audio_source_clock %}
 {% set rate = evidence.audio_source_clock_rate %}

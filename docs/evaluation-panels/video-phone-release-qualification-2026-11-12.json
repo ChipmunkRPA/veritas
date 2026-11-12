@@ -1,0 +1,96 @@
+{
+  "schema": "chipmunk.video-phone-release-qualification/1",
+  "method": {
+    "identity": "Compare blind all-phone output B/P order with published full CREMA-D phrase classes. Known transcript is a ceiling and cannot establish blind identity.",
+    "anchors": "GRID publisher initial B/P word windows only. A first-difference impulse peak and independent positive log-spectral flux peak must agree within 15 ms. Both must stand out from competing peaks. These are signal landmarks with 25 ms uncertainty, without manual phoneme-release truth.",
+    "raw_comparator": "Frozen high-pass untyped transients from the preceding single-file evaluation.",
+    "timed_comparators": "Known-transcript and blind allphone B/P interval ends within 50 ms of the presealed raw landmark. Interval ends are model coordinates, not independently established releases.",
+    "scope": "Verify native PTS and canonical PCM. For an existing audio-only shift copy, only map a source anchor if the full uncertainty slice is exactly copied and both video clocks still agree.",
+    "gate": {
+      "minimum_positive_exact_phrases": 4,
+      "maximum_negative_control_flags": 1,
+      "minimum_reference_anchors": 5,
+      "minimum_blind_timed_anchors": 3,
+      "minimum_blind_shifted_anchors": 2
+    }
+  },
+  "lexical": {
+    "known": {
+      "measured": 6,
+      "positive_exact": 3,
+      "negative_nonempty": 0
+    },
+    "blind": {
+      "measured": 12,
+      "positive_exact": 0,
+      "negative_nonempty": 3
+    }
+  },
+  "timing": {
+    "grid_signal": {
+      "lexical_windows": 9,
+      "signal_landmarks": 2,
+      "raw": {
+        "anchors_with_nearby_event": 1,
+        "anchors_with_any_matching_event": 2
+      },
+      "known": {
+        "anchors_with_nearby_event": 2,
+        "anchors_with_any_matching_event": 2
+      },
+      "blind": {
+        "anchors_with_nearby_event": 1,
+        "anchors_with_any_matching_event": 2
+      }
+    },
+    "grid_shift": {
+      "lexical_windows": 0,
+      "signal_landmarks": 0,
+      "raw": {
+        "anchors_with_nearby_event": 0,
+        "anchors_with_any_matching_event": 0
+      },
+      "known": {
+        "anchors_with_nearby_event": 0,
+        "anchors_with_any_matching_event": 0
+      },
+      "blind": {
+        "anchors_with_nearby_event": 0,
+        "anchors_with_any_matching_event": 0
+      }
+    }
+  },
+  "gates": {
+    "positive_identity": false,
+    "negative_identity": false,
+    "reference_coverage": false,
+    "timed_coverage": false,
+    "shifted_coverage": false
+  },
+  "advances": false,
+  "freeze_sha256": "1bafb96499a622589b0637dae4086d9ec3973c4c3d14ce0672df41791aabc9d3",
+  "scores_sha256": "ea2a4dc4e27e38612619ce253d77d00a887364062498ab15a07d7f7cda04a139",
+  "source_counts": {
+    "crema_separate_confirmation_actors": 12,
+    "crema_positive_phrases": 5,
+    "crema_lexical_negative_controls": 7,
+    "grid_originals": 12,
+    "grid_held_groups": 6,
+    "grid_exact_audio_only_shift_pairs": 4
+  },
+  "local_asset": {
+    "pocketsphinx_wheel_sha256": "833d0ba73affdec98883e0828dbacb69ab4932f4e739062076ed679e54878f21",
+    "allphone_model_sha256": "c57e0fa4191b096b1279cfe3a77927f52568fdecfc6624ddb5cec9527c763a54"
+  },
+  "independent_audit": {
+    "verified": true,
+    "source_views": 28,
+    "exact_native_picture_times": 2132,
+    "exact_decoded_samples": 1267683,
+    "byte_exact_paired_clips": 4,
+    "freeze_sha256": "1bafb96499a622589b0637dae4086d9ec3973c4c3d14ce0672df41791aabc9d3",
+    "score_sha256": "ea2a4dc4e27e38612619ce253d77d00a887364062498ab15a07d7f7cda04a139"
+  },
+  "independent_audit_sha256": "a83b4e8e83fcd7c862a148b4211614bbba59636dfe61490b1db48fd983545e4c",
+  "interpretation": "Lexical references give expected phone identity. Signal-derived landmarks carry stated uncertainty and no manual phoneme release truth. Shift sensitivity is unavailable because no complete independently derived landmark was copied. No AI confidence weight or serving change."
+}

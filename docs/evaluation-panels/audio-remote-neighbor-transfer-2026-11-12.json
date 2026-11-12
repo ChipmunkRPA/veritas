@@ -1,0 +1,279 @@
+{
+  "schema": "chipmunk.audio-remote-neighbor-transfer/1",
+  "method": {
+    "scope": "Single original 6-second PCM waveform. Frozen WavLM layer 12 supplies acoustic-context matches and layer 4 supplies the mismatch response. These features do not prove lexical phone or speaker identity. No alteration, stems, known edit range, or earlier recording enters inference.",
+    "frames": "Native convolution stride 320 and receptive field 400 samples, frame centers at 200+320i. Center each layer across the clip and normalize every frame. Require the unchanged speech gate to admit the query center and each neighbor center. Look at least 0.80 seconds away and select the highest deep cosine match in each disjoint 0.20-second bucket. Keep four buckets with cosine at least .20.",
+    "response": "Subtract the median early cosine distance among four neighbors from the query's median early cosine distance to those neighbors. Propose .80-second ranges every .20 seconds when at least 60% of the centers have supported matches. Retain the maximum median response, otherwise unassessed. This is a fixed content-conditioned inconsistency cue, not a boundary response or model-fit authenticity probability.",
+    "roles": "Use 12 exact genuine controls for the new maximum-genuine point and the earlier exact native current operating point. Separate two previously scored original-PCM transfer panels from four freshly rendered held episodes spanning expressive and stock families in two AMI rooms. Include both ordinary counterparts and isolated rooms. All source roles, ranges and points freeze before held cue measurements.",
+    "gate": "Compare useful locations at fixed and retrospective 0/1/2 false genuine group budgets, unassessed inputs and isolated-room flags. A useful range covers at least half the edit and reaches .30 temporal IoU. A supplemental fixed union retains both intervals and does not change any model. Original-only support remains experimental if gain or ordinary-control specificity fails."
+  },
+  "result": {
+    "earlier_expressive": {
+      "counts": {
+        "ordinary_same_host": 8,
+        "ordinary_other_voice": 8,
+        "synthetic": 8,
+        "background_only": 2
+      },
+      "fixed": {
+        "current": {
+          "ai_flags": 2,
+          "useful_ranges": 1,
+          "false_groups": 2,
+          "unassessed": 1,
+          "background_false_flags": 0
+        },
+        "neighbor": {
+          "ai_flags": 2,
+          "useful_ranges": 0,
+          "false_groups": 6,
+          "unassessed": 1,
+          "background_false_flags": 1
+        }
+      },
+      "fixed_union": {
+        "ai_flags": 2,
+        "useful_ranges": 1,
+        "unassessed": 1,
+        "background_false_flags": 1,
+        "false_groups": 6
+      },
+      "equal_false_groups": {
+        "0": {
+          "current": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 0,
+            "unassessed": 1,
+            "background_false_flags": 0
+          },
+          "neighbor": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 0,
+            "unassessed": 1,
+            "background_false_flags": 0
+          }
+        },
+        "1": {
+          "current": {
+            "ai_flags": 1,
+            "useful_ranges": 0,
+            "false_groups": 1,
+            "unassessed": 1,
+            "background_false_flags": 0
+          },
+          "neighbor": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 1,
+            "unassessed": 1,
+            "background_false_flags": 0
+          }
+        },
+        "2": {
+          "current": {
+            "ai_flags": 2,
+            "useful_ranges": 1,
+            "false_groups": 2,
+            "unassessed": 1,
+            "background_false_flags": 0
+          },
+          "neighbor": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 2,
+            "unassessed": 1,
+            "background_false_flags": 0
+          }
+        }
+      },
+      "locations_before_cutoff": {
+        "current": 2,
+        "neighbor": 0
+      }
+    },
+    "earlier_two_family": {
+      "counts": {
+        "ordinary_same_host": 6,
+        "ordinary_other_voice": 6,
+        "synthetic": 6,
+        "background_only": 2
+      },
+      "fixed": {
+        "current": {
+          "ai_flags": 0,
+          "useful_ranges": 0,
+          "false_groups": 1,
+          "unassessed": 0,
+          "background_false_flags": 0
+        },
+        "neighbor": {
+          "ai_flags": 0,
+          "useful_ranges": 0,
+          "false_groups": 1,
+          "unassessed": 0,
+          "background_false_flags": 0
+        }
+      },
+      "fixed_union": {
+        "ai_flags": 0,
+        "useful_ranges": 0,
+        "unassessed": 0,
+        "background_false_flags": 0,
+        "false_groups": 2
+      },
+      "equal_false_groups": {
+        "0": {
+          "current": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "neighbor": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "background_false_flags": 0
+          }
+        },
+        "1": {
+          "current": {
+            "ai_flags": 1,
+            "useful_ranges": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "neighbor": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "background_false_flags": 0
+          }
+        },
+        "2": {
+          "current": {
+            "ai_flags": 1,
+            "useful_ranges": 0,
+            "false_groups": 2,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "neighbor": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 2,
+            "unassessed": 0,
+            "background_false_flags": 1
+          }
+        }
+      },
+      "locations_before_cutoff": {
+        "current": 2,
+        "neighbor": 2
+      }
+    },
+    "fresh": {
+      "counts": {
+        "ordinary_same_host": 4,
+        "ordinary_other_voice": 4,
+        "synthetic": 4,
+        "background_only": 2
+      },
+      "fixed": {
+        "current": {
+          "ai_flags": 0,
+          "useful_ranges": 0,
+          "false_groups": 0,
+          "unassessed": 0,
+          "background_false_flags": 0
+        },
+        "neighbor": {
+          "ai_flags": 2,
+          "useful_ranges": 2,
+          "false_groups": 0,
+          "unassessed": 0,
+          "background_false_flags": 0
+        }
+      },
+      "fixed_union": {
+        "ai_flags": 2,
+        "useful_ranges": 2,
+        "unassessed": 0,
+        "background_false_flags": 0,
+        "false_groups": 0
+      },
+      "equal_false_groups": {
+        "0": {
+          "current": {
+            "ai_flags": 0,
+            "useful_ranges": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "neighbor": {
+            "ai_flags": 3,
+            "useful_ranges": 3,
+            "false_groups": 0,
+            "unassessed": 0,
+            "background_false_flags": 0
+          }
+        },
+        "1": {
+          "current": {
+            "ai_flags": 3,
+            "useful_ranges": 2,
+            "false_groups": 1,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "neighbor": {
+            "ai_flags": 3,
+            "useful_ranges": 3,
+            "false_groups": 1,
+            "unassessed": 0,
+            "background_false_flags": 0
+          }
+        },
+        "2": {
+          "current": {
+            "ai_flags": 4,
+            "useful_ranges": 2,
+            "false_groups": 2,
+            "unassessed": 0,
+            "background_false_flags": 0
+          },
+          "neighbor": {
+            "ai_flags": 3,
+            "useful_ranges": 3,
+            "false_groups": 2,
+            "unassessed": 0,
+            "background_false_flags": 0
+          }
+        }
+      },
+      "locations_before_cutoff": {
+        "current": 2,
+        "neighbor": 3
+      }
+    }
+  },
+  "new_model_calls": {
+    "wavlm": 72,
+    "current": 28
+  },
+  "commitments": {
+    "freeze": "beb2b2b34483494b032d77da0d74fabbfb491c45c0f6fa6d15a2f36209a6e254",
+    "roster": "8dbb962d728780081b1c821f72f4f007025a938d8007a18c37fbcf06ba227e17",
+    "point": "d3514981cc1105d989307321df8efb8557c02fd67760c8058c9e7563ca8e099d",
+    "points": "91ac2bd1fbaf838dc8dd91d789c78569cf61ad273d863125e1ade34820f710bd",
+    "held": "a9c496329dced59e1cc96ab3e490d000170760c9f29e938a82f4632da3e3dcbf",
+    "fresh-current": "9e5a5ad0faa7b33ab643ee6dea04b483de35c5095179629d80abf016c47e46eb"
+  }
+}

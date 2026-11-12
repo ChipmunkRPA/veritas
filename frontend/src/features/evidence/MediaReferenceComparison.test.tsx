@@ -88,3 +88,29 @@ it('shows and exports the standalone audio difference waveform on the recording 
     'chipmunk-verify-audio-comparison.json', 'chipmunk-verify-audio-comparison.pdf',
   ])
 })
+
+it('accepts the scoped video comparison and shows native crops linked to the review interval', async () => {
+  const picture = { file: 'picture.png', media_type: 'image/png', sha256: 'c'.repeat(64) }
+  const crop = { file: 'crop.png', media_type: 'image/png', sha256: 'd'.repeat(64) }
+  const sample = (time_s: number) => ({ time_s, assets: { earlier: picture, submitted: picture }, crop_assets: { earlier: crop, submitted: crop } })
+  const comparison = {
+    schema: 'chipmunk.video-reference-comparison/2', status: 'measured', interpretation: 'Decoded source differences.',
+    submitted: { width: 360, height: 288 },
+    picture: { matching_frames: 0, changed_frames: 75, ranges: [], local_comparison: {
+      status: 'local_difference', scope: 'Ordinary edits may produce this evidence.', summary: 'A local picture difference persisted.',
+      range: { id: 'L01', start_s: 1.08, end_s: 1.88, tile: { x: 126, y: 200, w: 29, h: 20 },
+        previews: { before: sample(1.04), during: sample(1.36), after: sample(1.88) } },
+    } },
+  }
+  const fetch = vi.fn().mockResolvedValueOnce(Response.json({ available: true }))
+    .mockResolvedValueOnce(Response.json({ comparison, assets: { 'picture.png': 'iVBORw0KGgo=', 'crop.png': 'iVBORw0KGgo=' } }))
+  vi.stubGlobal('fetch', fetch)
+  show()
+  fireEvent.change(await screen.findByLabelText('Earlier video'), { target: { files: [new File(['movie'], 'earlier.mkv')] } })
+  fireEvent.click(screen.getByRole('button', { name: 'Compare videos' }))
+  expect(await screen.findByText('L01 · 1.080–1.880 s')).toBeTruthy()
+  expect(screen.getByAltText('Earlier clip comparison crop at 1.040 seconds')).toBeTruthy()
+  expect(screen.getByAltText('Analyzed clip comparison crop at 1.360 seconds')).toBeTruthy()
+  expect(screen.getByAltText('Earlier clip comparison crop at 1.880 seconds')).toBeTruthy()
+  expect(screen.getByText('Ordinary edits may produce this evidence.')).toBeTruthy()
+})

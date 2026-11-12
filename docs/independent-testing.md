@@ -28,8 +28,9 @@ for the PNG and JPEG localization and ordinary-control results.
 
 The [earlier-video comparison](video-reference-comparison-2026-11-11.md#replay-without-the-app)
 re-decodes two supplied clips and checks the JSON, native picture timestamps,
-before/during/after previews, and exact soundtrack excerpts. It can run without
-the app or detector weights.
+before/during/after previews, and exact soundtrack excerpts. On supported
+lossless-to-H.264 pairs it also replays the short local picture range and its
+native crops. It can run without the app or detector weights.
 
 The [earlier-audio comparison](audio-reference-comparison-2026-11-11.md#replay-without-the-app)
 replays changed sample ranges, difference waveforms, and playable excerpts

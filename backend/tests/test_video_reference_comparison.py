@@ -1,5 +1,6 @@
 import base64
 import hashlib
+import io
 import json
 import shutil
 import subprocess
@@ -10,11 +11,13 @@ from pathlib import Path
 import numpy as np
 import pymupdf
 import pytest
+from PIL import Image
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 from test_image_reference_access import reference_http as reference_http
 
 from app.api import v2_media_reference
+from app.core.canonical import canonical_json
 from app.core.config import settings
 from app.detectors.audio.decode import read_wav, wav_bytes
 from app.detectors.video import decode
@@ -36,6 +39,15 @@ def encode(folder, name, frames, samples=None, *, rate=25, origin=0):
         args += ["-i", str(audio), "-map", "0:v:0", "-map", "1:a:0", "-c:a", "pcm_s16le"]
     args += ["-c:v", "png", "-pix_fmt", "rgb24", "-output_ts_offset", str(origin), str(path)]
     subprocess.run(args, input=frames.tobytes(), capture_output=True, check=True, timeout=20)
+    return path
+
+
+def encode_lossy_comparison(path, pictures, *, lossless):
+    height, width = pictures.shape[1:3]
+    output = ["-c:v", "ffv1", "-pix_fmt", "bgr0"] if lossless else ["-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "28"]
+    subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-filter_threads", "1", "-threads", "1", "-f", "rawvideo",
+                    "-pixel_format", "rgb24", "-video_size", f"{width}x{height}", "-framerate", "25", "-i", "pipe:0",
+                    *output, "-threads", "1", str(path)], input=pictures.tobytes(), capture_output=True, check=True, timeout=20)
     return path
 
 
@@ -111,6 +123,94 @@ def test_offline_replay_checks_exact_bytes(tmp_path, aligned_pair):
         run(earlier, later, target, verify=True)
     with pytest.raises(ValueError, match="readable video files"):
         video_reference.compare(earlier, Path(__file__))
+
+
+def test_bounded_lossy_pair_keeps_exact_results_and_replays_local_native_crops(tmp_path, reference_http, monkeypatch):
+    yy, xx = np.indices((288, 360))
+    shade = 42 + xx * .27 + yy * .21 + 18 * np.cos(xx / 13) * np.sin(yy / 15)
+    base = np.uint8(np.stack((shade, shade + 7, shade - 5), axis=-1))
+    earlier_frames = np.stack([np.roll(base, i % 4, axis=1) for i in range(68)])
+    later_frames = earlier_frames.copy()
+    later_frames[24:44, 176:220, 110:174] = (224, 223, 219)
+    earlier = encode_lossy_comparison(tmp_path / "earlier.mkv", earlier_frames, lossless=True)
+    later = encode_lossy_comparison(tmp_path / "submitted.mkv", later_frames, lossless=False)
+    neutral = encode_lossy_comparison(tmp_path / "reencoded.mkv", earlier_frames, lossless=False)
+    wrong = encode_lossy_comparison(tmp_path / "different.mkv", 255 - earlier_frames, lossless=True)
+
+    record, assets = video_reference.compare(earlier, later)
+    local = record["picture"]["local_comparison"]
+    assert record["schema"] == video_reference.SCHEMA_WITH_LOCAL
+    assert record["affects_overall_confidence"] is False and local["status"] == "local_difference"
+    span = local["range"]
+    assert record["picture"]["matching_frames"] == 0
+    assert max(span["start_s"], .96) < min(span["end_s"], 1.76)
+    x, y, w, h = (span["tile"][key] for key in ("x", "y", "w", "h"))
+    assert 110 <= x < 174 and 176 <= y < 220
+    assert list(span["previews"]) == ["before", "during", "after"]
+    assert span["previews"]["before"]["frame"] == span["start_frame"] - 1
+    assert span["previews"]["after"]["frame"] == span["end_frame_exclusive"]
+    for side, path in (("earlier", earlier), ("submitted", later)):
+        table = decode.probe_frames(path)
+        needed = [row["frame"] for row in span["previews"].values()]
+        decoded = {f.index: f for f in decode.decode_frames(path, table, needed)}
+        for sample in span["previews"].values():
+            frame = decoded[sample["frame"]]
+            entry = sample["crop_assets"][side]
+            assert frame.pts_verified and frame.pts == sample[f"{side}_pts"]
+            assert entry["sha256"] == hashlib.sha256(assets[entry["file"]]).hexdigest()
+            with Image.open(io.BytesIO(assets[entry["file"]])) as png:
+                np.testing.assert_array_equal(np.asarray(png), frame.rgb[y:y+h, x:x+w])
+
+    f = reference_http
+    stored = f.store.put_file(later)
+    monkeypatch.setattr(settings, "video_reference_comparison_enabled", True)
+
+    @contextmanager
+    def sessions():
+        with Session(f.engine) as db:
+            yield db
+
+    monkeypatch.setattr(v2_media_reference, "get_session", sessions)
+    monkeypatch.setattr(v2_media_reference, "default_store", lambda: f.store)
+    with sessions() as db:
+        analysis = db.get(Analysis, "other-kind")
+        analysis.filename, analysis.content_type = "submitted.mkv", "video/x-matroska"
+        analysis.sha256, analysis.size_bytes = stored.sha256, stored.size_bytes
+        db.commit()
+    response = f.client.post("/api/v2/analyses/other-kind/video-reference-comparison", headers=f.viewer,
+                             data={"include_pdf": "true"},
+                             files={"earlier": ("earlier.mkv", earlier.read_bytes(), "video/x-matroska")})
+    assert response.status_code == 200 and response.headers["Cache-Control"] == "no-store"
+    package = response.json()
+    assert package["comparison"] == record
+    assert {name: base64.b64decode(data) for name, data in package["assets"].items()} == assets
+
+    with pymupdf.open(stream=base64.b64decode(package["pdf"]), filetype="pdf") as pdf:
+        assert "Local picture comparison" in pdf[0].get_text()
+        assert f"{span['start_s']:.3f} to {span['end_s']:.3f} s" in pdf[0].get_text()
+        assert "Local picture difference" in pdf[1].get_text()
+        assert all(role in pdf[1].get_text() for role in ("Before", "During", "After"))
+        assert any(image[2:4] == (w, h) for image in pdf[1].get_images())
+
+    export = tmp_path / "pair.json"
+    payload = {"comparison": record, "assets": {key: base64.b64encode(value).decode() for key, value in assets.items()}}
+    export.write_text(json.dumps(payload))
+    assert run(earlier, later, export, verify=True) == record
+    local["range"]["tile"]["x"] += 1
+    export.write_text(json.dumps(payload))
+    with pytest.raises(ValueError, match="differs from the re-decoded sources"):
+        run(earlier, later, export, verify=True)
+
+    v1, v1_assets = video_reference.compare(earlier, later, include_local=False)
+    assert v1["schema"] == video_reference.SCHEMA and "local_comparison" not in v1["picture"]
+    assert v1["picture"] == {key: value for key, value in record["picture"].items() if key != "local_comparison"}
+    historical = tmp_path / "historical"
+    historical.mkdir()
+    for name, data in {"comparison.json": canonical_json(v1) + b"\n", **v1_assets}.items():
+        (historical / name).write_bytes(data)
+    assert run(earlier, later, historical, verify=True) == v1
+    assert video_reference.compare(earlier, neutral)[0]["picture"]["local_comparison"]["status"] == "no_local_range"
+    assert video_reference.compare(wrong, later)[0]["picture"]["local_comparison"]["status"] == "insufficient_shared_picture_content"
 
 
 def test_authenticated_video_comparison_exports_exact_evidence_without_new_analysis(reference_http, aligned_pair, monkeypatch, tmp_path):

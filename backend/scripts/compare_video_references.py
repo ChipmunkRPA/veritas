@@ -5,10 +5,11 @@ from __future__ import annotations
 import argparse
 import base64
 import json
+from functools import partial
 from pathlib import Path
 
 from app.core.canonical import canonical_json
-from app.evidence.video_reference import compare
+from app.evidence.video_reference import SCHEMA, compare
 
 
 def replay(compare, earlier: Path, submitted: Path, output: Path, *, verify: bool = False) -> dict:
@@ -34,7 +35,13 @@ def replay(compare, earlier: Path, submitted: Path, output: Path, *, verify: boo
 
 
 def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False) -> dict:
-    return replay(compare, earlier, submitted, output, verify=verify)
+    compare_source = compare
+    if verify:
+        exported = json.loads((output if output.is_file() else output / "comparison.json").read_bytes())
+        record = exported.get("comparison", exported) if isinstance(exported, dict) else None
+        if isinstance(record, dict) and record.get("schema") == SCHEMA:
+            compare_source = partial(compare, include_local=False)
+    return replay(compare_source, earlier, submitted, output, verify=verify)
 
 
 def main(*, description=__doc__, runner=run):

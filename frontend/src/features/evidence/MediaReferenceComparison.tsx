@@ -10,10 +10,14 @@ const sides = ['earlier', 'submitted'] as const
 const names = { earlier: 'Earlier clip', submitted: 'Analyzed clip' }
 type Asset = { file: string; media_type: 'image/png' | 'audio/wav'; sha256: string }
 type Extent = { id: string; start_s: number; end_s: number | null; last_s?: number }
+type Tile = { x: number; y: number; w: number; h: number }
+type PicturePreviews = Record<string, { time_s: number; assets: Record<Side, Asset>; crop_assets?: Record<Side, Asset> }>
 type PictureRange = Extent & {
-  strongest_frame: { changed_pixels: number; difference_bounds: { x: number; y: number; w: number; h: number } }
-  previews: Record<string, { time_s: number; assets: Record<Side, Asset> }>
+  strongest_frame: { changed_pixels: number; difference_bounds: Tile }
+  previews: PicturePreviews
 }
+type LocalPictureRange = Extent & { tile: Tile; previews: PicturePreviews }
+type LocalComparison = { scope: string; summary: string; range?: LocalPictureRange }
 type Waveform = { low: number[]; high: number[] }
 type PictureDimensions = { width: number; height: number }
 type AudioRange = Extent & {
@@ -28,9 +32,9 @@ type Comparison = {
   interpretation: string
   audio?: { status: string; changed_samples?: number; submitted?: { samples: number }; ranges?: AudioRange[] }
 } & ({
-  schema: 'chipmunk.video-reference-comparison/1'
+  schema: 'chipmunk.video-reference-comparison/1' | 'chipmunk.video-reference-comparison/2'
   submitted: PictureDimensions
-  picture?: { matching_frames: number; changed_frames: number; ranges: PictureRange[] }
+  picture?: { matching_frames: number; changed_frames: number; ranges: PictureRange[]; local_comparison?: LocalComparison }
 } | {
   schema: 'chipmunk.audio-reference-comparison/1'
   picture?: never
@@ -98,12 +102,12 @@ function Playback({ body, name }: { body?: string; name: string }) {
   return url ? <audio className="mt-1 block w-full max-w-80" controls preload="none" src={url} aria-label={name} /> : null
 }
 
-function PictureEvidence({ span, assets, dimensions }: { span: PictureRange; assets: Result['assets']; dimensions: PictureDimensions }) {
-  const frame = span.strongest_frame
-  const box = frame.difference_bounds
+function PictureEvidence({ span, assets, dimensions }: { span: PictureRange | LocalPictureRange; assets: Result['assets']; dimensions: PictureDimensions }) {
+  const box = 'tile' in span ? span.tile : span.strongest_frame.difference_bounds
   return <details open={Object.keys(span.previews).length > 0} className="border-t border-border pt-3">
     <summary className="cursor-pointer font-medium">{span.id} · {interval(span)}</summary>
-    <p className="mt-2 mb-0 text-small text-text-muted">{frame.changed_pixels.toLocaleString()} differing pixels at the strongest change, within x {box.x}, y {box.y}, {box.w} × {box.h} px.</p>
+    <p className="mt-2 mb-0 text-small text-text-muted">{'tile' in span ? 'Measured comparison area at' :
+      `${span.strongest_frame.changed_pixels.toLocaleString()} differing pixels at the strongest change, within`} x {box.x}, y {box.y}, {box.w} × {box.h} px.</p>
     {['before', 'during', 'after'].filter(position => span.previews[position]).map(position => {
       const preview = span.previews[position]
       return <div key={position} className="mt-3">
@@ -111,14 +115,17 @@ function PictureEvidence({ span, assets, dimensions }: { span: PictureRange; ass
         <div className="grid grid-cols-2 gap-3">
           {sides.map(side => {
             const body = assetBody(assets, preview.assets[side], 'image/png')
+            const crop = preview.crop_assets && assetBody(assets, preview.crop_assets[side], 'image/png')
             return <figure key={side} className="m-0">
               {body && <div className="relative inline-block max-w-full">
                 <img className="block max-h-56 max-w-full rounded" loading="lazy"
                   src={'data:image/png;base64,' + body} alt={names[side] + ' at ' + preview.time_s.toFixed(3) + ' seconds'} />
-                {position === 'during' && <span className="pointer-events-none absolute border-2 border-amber-400"
+                {(position === 'during' || 'tile' in span) && <span className="pointer-events-none absolute border-2 border-amber-400"
                   aria-hidden style={{ left: 100 * box.x / dimensions.width + '%', top: 100 * box.y / dimensions.height + '%',
                     width: 100 * box.w / dimensions.width + '%', height: 100 * box.h / dimensions.height + '%' }} />}
               </div>}
+              {crop && <img className="mt-2 block h-auto w-24 max-w-full rounded border border-border" loading="lazy"
+                src={'data:image/png;base64,' + crop} alt={names[side] + ' comparison crop at ' + preview.time_s.toFixed(3) + ' seconds'} />}
               <figcaption className="mt-1 text-caption text-text-muted">{names[side]}</figcaption>
             </figure>
           })}
@@ -178,6 +185,12 @@ function ResultView({ result }: { result: Result }) {
       <h3 className="m-0 text-small font-medium">Pictures</h3>
       <p className="m-0 text-small">{picture.matching_frames} exact matches and {picture.changed_frames} changed decoded pictures.</p>
       {!picture.matching_frames && <p className="m-0 text-small text-text-muted">Every picture differs. Re-encoding can produce this pattern.</p>}
+      {picture.local_comparison && <section className="space-y-2" aria-label="Local picture differences">
+        <h4 className="m-0 text-small font-medium">Local picture differences</h4>
+        <p className="m-0 text-small">{picture.local_comparison.summary}</p>
+        <p className="m-0 text-caption text-text-muted">{picture.local_comparison.scope}</p>
+        {picture.local_comparison.range && <PictureEvidence span={picture.local_comparison.range} assets={assets} dimensions={comparison.submitted} />}
+      </section>}
       {picture.ranges.map(span => <PictureEvidence key={span.id} span={span} assets={assets} dimensions={comparison.submitted} />)}
     </>}
     {audio && (!isAudio || comparison.status === 'measured') && <>
@@ -218,7 +231,9 @@ function MediaReferenceForm({ analysisId, kind }: { analysisId: string; kind: Ki
     body.append('include_pdf', 'true')
     try {
       const response = await request<Result>(route(analysisId, kind), { method: 'POST', headers: authHeaders('POST'), body, signal: controller.signal })
-      if (response?.comparison?.schema !== 'chipmunk.' + kind + '-reference-comparison/1') throw new Error('The comparison response is incomplete.')
+      const schema = response?.comparison?.schema
+      if (schema !== 'chipmunk.' + kind + '-reference-comparison/1' &&
+        !(kind === 'video' && schema === 'chipmunk.video-reference-comparison/2')) throw new Error('The comparison response is incomplete.')
       if (!controller.signal.aborted) setResult(response)
     } catch (error) {
       if (!controller.signal.aborted) setError(error instanceof Error ? error.message : 'Could not compare the files.')

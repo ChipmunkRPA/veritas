@@ -15,10 +15,12 @@ from PIL import Image
 
 from app.core.canonical import canonical_hash
 from app.detectors.video.decode import DecodeError, FrameTable, decode_frames, probe_frames
+from app.evidence import video_reference_local
 from app.evidence.audio_reference import compare_tracks, marked_ranges, read_track
 from app.storage.files import VIDEO_MIMES, sniff
 
 SCHEMA = "chipmunk.video-reference-comparison/1"
+SCHEMA_WITH_LOCAL = "chipmunk.video-reference-comparison/2"
 MAX_BYTES = 48 * 1024 * 1024
 MAX_FRAMES = 360
 MAX_PIXELS = 1280 * 720
@@ -105,8 +107,12 @@ def _clock_range(tables, start, end):
             for label, table in zip(("earlier", "submitted"), tables, strict=True)}
 
 
-def _picture(paths, tables, assets):
+def _picture(paths, tables, assets, *, include_local):
+    clock = _elapsed(tables[1])
+    dt = video_reference_local.eligible(paths, tables, clock) if include_local else None
+    rects = video_reference_local.rectangles(tables[0].height, tables[0].width) if dt else None
     measurements = []
+    signals, background_errors = [], []
     for first, second in _frame_pairs(paths, tables):
         difference = first.rgb != second.rgb
         mask = difference[..., 0] | difference[..., 1] | difference[..., 2]
@@ -115,6 +121,10 @@ def _picture(paths, tables, assets):
                              "earlier_rgb_sha256": hashlib.sha256(first.rgb).hexdigest(),
                              "submitted_rgb_sha256": hashlib.sha256(second.rgb).hexdigest(),
                              "changed_pixels": count, "difference_bounds": _bounds(mask) if count else None})
+        if rects is not None:
+            signal, background = video_reference_local.measure(first.rgb, second.rgb, rects)
+            signals.append(signal)
+            background_errors.append(background)
     if len(measurements) != len(tables[0]):
         raise DecodeError("Video could not be decoded with every recorded picture.")
 
@@ -122,7 +132,6 @@ def _picture(paths, tables, assets):
     ranges = marked_ranges(np.asarray(sizes) > 0)
     top = set(sorted(ranges, key=lambda pair: (-(pair[1] - pair[0]), pair[0]))[:MAX_PRESENTED_RANGES])
     output, needed = [], set()
-    clock = _elapsed(tables[1])
     for number, (start, end) in enumerate(ranges, 1):
         strongest = max(range(start, end), key=sizes.__getitem__)
         examples = {}
@@ -139,7 +148,15 @@ def _picture(paths, tables, assets):
                        "source_ranges": _clock_range(tables, start, end), "strongest_frame": measurements[strongest],
                        "preview_indices": examples})
 
-    previews = {}
+    local = choice = None
+    if dt and rects is not None:
+        status, choice = video_reference_local.assess(signals, background_errors, dt, rects)
+        local = {"status": status, "summary": video_reference_local.STATUS[status], "scope": video_reference_local.SCOPE}
+        if choice:
+            needed.update(choice["samples"].values())
+
+    previews, crops = {}, {}
+    crop_indices = set(choice["samples"].values()) if choice else set()
     for side, path, table in zip(("earlier", "submitted"), paths, tables, strict=True):
         with closing(decode_frames(path, table, sorted(needed), timeout_s=40, max_pixels=MAX_PIXELS)) as frames:
             for frame in frames:
@@ -147,6 +164,11 @@ def _picture(paths, tables, assets):
                 if not frame.pts_verified or digest != measurements[frame.index][f"{side}_rgb_sha256"]:
                     raise DecodeError("Video could not be decoded with consistent picture evidence.")
                 previews.setdefault(frame.index, {})[side] = _image(assets, f"{side}-frame-{frame.index:03d}.png", frame.rgb)
+                if choice and frame.index in crop_indices:
+                    x, y, w, h = (choice["tile"][key] for key in ("x", "y", "w", "h"))
+                    crops.setdefault(frame.index, {})[side] = _image(
+                        assets, f"{side}-local-crop-{frame.index:03d}.png", frame.rgb[y:y+h, x:x+w]
+                    )
     if set(previews) != needed or any(len(pictures) != 2 for pictures in previews.values()):
         raise DecodeError("Video could not be decoded with all requested evidence pictures.")
 
@@ -154,11 +176,22 @@ def _picture(paths, tables, assets):
         item["previews"] = {position: {**measurements[index], "assets": previews[index], "time_s": float(clock[index])}
                             for position, index in item.pop("preview_indices").items()}
     changed = sum(size > 0 for size in sizes)
-    return {"status": "measured", "matching_frames": len(sizes) - changed, "changed_frames": changed,
-            "frame_pairs_sha256": canonical_hash(measurements), "ranges": output}
+    picture = {"status": "measured", "matching_frames": len(sizes) - changed, "changed_frames": changed,
+               "frame_pairs_sha256": canonical_hash(measurements), "ranges": output}
+    if local is not None:
+        if choice:
+            start, end = choice["frames"]
+            local["range"] = {"id": "L01", "start_frame": start, "end_frame_exclusive": end,
+                              "start_s": float(clock[start]), "end_s": float(clock[end]),
+                              "source_ranges": _clock_range(tables, start, end), "tile": choice["tile"],
+                              "previews": {role: {**measurements[index], "time_s": float(clock[index]),
+                                                  "assets": previews[index], "crop_assets": crops[index]}
+                                           for role, index in choice["samples"].items()}}
+        picture["local_comparison"] = local
+    return picture
 
 
-def compare(earlier: Path, submitted: Path) -> tuple[dict, dict[str, bytes]]:
+def compare(earlier: Path, submitted: Path, *, include_local: bool = True) -> tuple[dict, dict[str, bytes]]:
     """Report actual decoded differences at equal relative native picture timestamps."""
     paths = earlier, submitted
     sources = tuple(_identity(path) for path in paths)
@@ -169,7 +202,9 @@ def compare(earlier: Path, submitted: Path) -> tuple[dict, dict[str, bytes]]:
               "earlier": {**sources[0], **_reference(tables[0])}, "submitted": {**sources[1], **_reference(tables[1])},
               "interpretation": INTERPRETATION, "affects_overall_confidence": False}
     if status == "measured":
-        record["picture"] = _picture(paths, tables, assets)
+        record["picture"] = _picture(paths, tables, assets, include_local=include_local)
+        if "local_comparison" in record["picture"]:
+            record["schema"] = SCHEMA_WITH_LOCAL
         tracks = [read_track(path, source, max_seconds=MAX_SECONDS, video=True, origin=table.pts[0] * table.tb)
                   for path, source, table in zip(paths, sources, tables, strict=True)]
         record["audio"] = compare_tracks(*tracks, assets)

@@ -6,6 +6,8 @@ Each clip may be up to 48 MiB, 360 decoded pictures, and 12 seconds from its fir
 
 The comparison reports every consecutive range of differing decoded pictures. The three longest ranges include side-by-side pictures from before, during, and after the range when those pictures exist. The selected in-range picture has the greatest count of changed RGB pixels. An outline shows the exact native bounding rectangle of those pixels. Re-encoding and color conversion can affect every picture, and the report identifies that case explicitly. If the final picture differs, the record gives its timestamp without inferring an end time.
 
+A scoped local comparison can identify one short region after H.264 re-encoding. It uses an upright FFV1 RGB earlier copy and a color 4:2:0 H.264 delivery with exactly the same relative picture timestamps. The tested frame sizes and cadences are 360 × 288 at 25 pictures per second and 480 × 360 near 30 pictures per second. Both clips must contain at most 100 pictures. A flagged region includes the same native comparison area in the earlier and analyzed pictures before, during and after the range. The check reports when there is insufficient shared picture content or too little support on either side of a potential range. Its box covers the measured comparison area. A visual change may extend beyond the box, and ordinary processing may produce a local difference. [Held results and scope](video-reference-lossy-transfer-2026-11-11.md)
+
 The first soundtrack is compared on the same 16 kHz decoded mono sample clock when both tracks have the same relative start, sample count, and continuous timing. Adjacent 20 ms bins with differences form a range. Counts include only samples that differ. The three longest ranges include waveforms and exact playable samples for the first two seconds or less. The two waveforms share a scale. JSON contains the exact source clocks, SHA-256 commitments, waveforms, and media. The separate PDF includes source identities, all ranges, picture previews, and selected waveforms. These measurements carry zero AI-confidence weight.
 
 ## Local verification
@@ -27,3 +29,9 @@ python -m scripts.compare_video_references earlier.mov analyzed.mov downloaded-c
 ```
 
 The replay uses the same measurement implementation as the app. Record your FFmpeg and Pillow versions if two runs produce different decoded bytes. Keep source files, previews, and sound clips in your local workspace.
+
+The optional local comparison uses version 2 of the video export. The verifier rebuilds the selected interval, exact native source crops, and both picture clocks. It also verifies earlier version 1 exports using the exact comparison. Version 2 was checked against 12 held source pairs, with identical range and tile selections on the five neural redraws, no local finding on six unchanged deliveries, and explicit abstention on the different-source pair.
+
+A held video also passed a simulated $9.99 checkout, authenticated comparison, PDF, and JSON replay. The unpaid checkout created no analysis or worker job. An existing face classifier stalled on the first CPU smoke test, so the isolated repeat disabled that classifier and verified the new comparison against the exact native source crops and clocks.
+
+In the isolated local billing test, simulated Stripe confirmation of the USD 9.99 purchase preceded creation of the analysis job. The Quick worker completed the real held GRID upload with an unrelated face classifier disabled for the test. The authenticated source comparison then exported the selected frames, crops and clock range in PDF and JSON. The unpaid event left the analysis queue empty.

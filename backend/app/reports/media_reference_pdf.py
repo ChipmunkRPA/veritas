@@ -72,6 +72,12 @@ def _summary(document, record):
     _text(page, MARGIN, 458, note)
     _text(page, MARGIN, 507, "Times are relative to the first picture in each clip.", color=MUTED)
     _text(page, MARGIN, 526, "Soundtrack ranges group 20 ms bins containing different samples.", color=MUTED)
+    local = picture.get("local_comparison")
+    if local:
+        _text(page, MARGIN, 566, "Local picture comparison", size=16, font="hebo")
+        summary = f"Local picture difference at {_range(local['range'])}." if "range" in local else local["summary"]
+        page.insert_textbox((MARGIN, 583, RIGHT, 670), summary + "\n" + local["scope"],
+                            fontsize=10, fontname="helv", color=INK)
 
 
 def _audio_summary(document, record):
@@ -100,12 +106,19 @@ def _audio_summary(document, record):
 
 
 def _picture_page(document, span, assets, source):
-    page = _page(document, f"{span['id']}  Picture differences")
+    local = "tile" in span
+    title = "Local picture difference" if local else "Picture differences"
+    page = _page(document, f"{span['id']}  {title}")
     _text(page, MARGIN, 124, _range(span), color=MUTED)
-    row = span["strongest_frame"]
-    box = row["difference_bounds"]
-    _text(page, MARGIN, 143, f"At the strongest change, {row['changed_pixels']:,} pixels differ within "
-          f"x {box['x']}, y {box['y']}, {box['w']} x {box['h']} px.")
+    if local:
+        box = span["tile"]
+        label = "Measured comparison area at"
+        _text(page, MARGIN, 160, "Each pair includes the source picture and its native crop.", color=MUTED)
+    else:
+        row = span["strongest_frame"]
+        box = row["difference_bounds"]
+        label = f"At the strongest change, {row['changed_pixels']:,} pixels differ within"
+    _text(page, MARGIN, 143, f"{label} x {box['x']}, y {box['y']}, {box['w']} x {box['h']} px.")
     y = 178
     for position in ("before", "during", "after"):
         sample = span["previews"].get(position)
@@ -114,15 +127,22 @@ def _picture_page(document, span, assets, source):
         _text(page, MARGIN, y, f"{position.title()}  {sample['time_s']:.3f} s", font="hebo")
         for x, side in zip((MARGIN, 316), LABELS, strict=True):
             _text(page, x, y + 15, f"{LABELS[side]}  PTS {sample[f'{side}_pts']}", size=9, color=MUTED)
-            scale = min(250 / source["width"], 126 / source["height"])
+            available = 146 if local else 250
+            scale = min(available / source["width"], 126 / source["height"])
             width, height = source["width"] * scale, source["height"] * scale
-            left, top = x + (250 - width) / 2, y + 22 + (126 - height) / 2
+            left, top = x + (available - width) / 2, y + 22 + (126 - height) / 2
             page.insert_image(pymupdf.Rect(left, top, left + width, top + height),
                               stream=assets[sample["assets"][side]["file"]], keep_proportion=False)
-            if position == "during":
+            if position == "during" or local:
                 page.draw_rect(pymupdf.Rect(left + box["x"] * scale, top + box["y"] * scale,
                                            left + (box["x"] + box["w"]) * scale, top + (box["y"] + box["h"]) * scale),
                                color=(.96, .67, .15), width=1.4)
+            if local:
+                crop_scale = min(96 / box["w"], 112 / box["h"])
+                crop_w, crop_h = box["w"] * crop_scale, box["h"] * crop_scale
+                crop_x, crop_y = x + 152 + (96 - crop_w) / 2, y + 22 + (126 - crop_h) / 2
+                page.insert_image(pymupdf.Rect(crop_x, crop_y, crop_x + crop_w, crop_y + crop_h),
+                                  stream=assets[sample["crop_assets"][side]["file"]], keep_proportion=False)
         y += 168
 
 
@@ -170,6 +190,9 @@ def render(record, assets):
         document.set_metadata({"title": "Earlier audio comparison" if is_audio else TITLE, "author": "Chipmunk Verify"})
         (_audio_summary if is_audio else _summary)(document, record)
         remaining = []
+        local = record.get("picture", {}).get("local_comparison", {})
+        if local.get("range"):
+            _picture_page(document, local["range"], assets, record["submitted"])
         for span in record.get("picture", {}).get("ranges", []):
             if span["previews"]:
                 _picture_page(document, span, assets, record["submitted"])

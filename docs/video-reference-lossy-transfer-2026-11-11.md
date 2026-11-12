@@ -28,7 +28,7 @@ The independent reviewer verified all 184 held delivery clocks and identities, r
 
 ## Reproduce
 
-Use the source archive, the earlier paired motion study's frozen roster, and the exact code revision for this study. The runner binds the existing picture comparison implementation used by its exact baseline. The independent reviewer reopens the native clocks and selected crop pixels.
+Use the source archive and the earlier paired motion study's frozen roster. Run the study from its exact code revision because the runner binds the picture comparison implementation used by its exact baseline. The independent reviewer reopens the native clocks and selected crop pixels. [Frozen study code](https://github.com/ChipmunkRPA/veritas/tree/25e840055fe7bddafc2bcefd054abee50655f118)
 
 ```sh
 export PYTHONPATH=backend PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1

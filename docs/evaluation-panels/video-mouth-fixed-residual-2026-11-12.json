@@ -1,0 +1,338 @@
+{
+  "admitted_to_serving": false,
+  "aggregate": {
+    "addition_groups": {
+      "grid": 2,
+      "native": 1
+    },
+    "additions": {
+      "grid": 2,
+      "grid_compatible": 0,
+      "native": 2,
+      "native_compatible": 0
+    },
+    "advances": false,
+    "criteria": {
+      "coverage": true,
+      "crema": false,
+      "crema_ordinary": false,
+      "cut": true,
+      "grid": false,
+      "grid_ordinary": false,
+      "grid_source_time": false,
+      "reencode": false,
+      "reserve": false
+    },
+    "diagnostics": {
+      "grid": {
+        "direct": {
+          "above_half_iou_before_point": 5,
+          "measured_ordinary": 56,
+          "measured_positives": 32,
+          "top_score_auc": 0.5770089285714286
+        },
+        "fixed_pixel": {
+          "above_half_iou_before_point": 6,
+          "measured_ordinary": 56,
+          "measured_positives": 32,
+          "top_score_auc": 0.5460379464285714
+        },
+        "mouth_vs_face": {
+          "above_half_iou_before_point": 9,
+          "measured_ordinary": 56,
+          "measured_positives": 32,
+          "top_score_auc": 0.4790736607142857
+        }
+      },
+      "hard_cut": {
+        "direct": {
+          "above_half_iou_before_point": 0,
+          "measured_ordinary": 4,
+          "measured_positives": 0,
+          "top_score_auc": null
+        },
+        "fixed_pixel": {
+          "above_half_iou_before_point": 0,
+          "measured_ordinary": 4,
+          "measured_positives": 0,
+          "top_score_auc": null
+        },
+        "mouth_vs_face": {
+          "above_half_iou_before_point": 0,
+          "measured_ordinary": 4,
+          "measured_positives": 0,
+          "top_score_auc": null
+        }
+      },
+      "native": {
+        "direct": {
+          "above_half_iou_before_point": 7,
+          "measured_ordinary": 40,
+          "measured_positives": 20,
+          "top_score_auc": 0.58875
+        },
+        "fixed_pixel": {
+          "above_half_iou_before_point": 6,
+          "measured_ordinary": 39,
+          "measured_positives": 18,
+          "top_score_auc": 0.38461538461538464
+        },
+        "mouth_vs_face": {
+          "above_half_iou_before_point": 3,
+          "measured_ordinary": 39,
+          "measured_positives": 18,
+          "top_score_auc": 0.6096866096866097
+        }
+      },
+      "reencode": {
+        "direct": {
+          "above_half_iou_before_point": 0,
+          "measured_ordinary": 8,
+          "measured_positives": 0,
+          "top_score_auc": null
+        },
+        "fixed_pixel": {
+          "above_half_iou_before_point": 0,
+          "measured_ordinary": 8,
+          "measured_positives": 0,
+          "top_score_auc": null
+        },
+        "mouth_vs_face": {
+          "above_half_iou_before_point": 0,
+          "measured_ordinary": 8,
+          "measured_positives": 0,
+          "top_score_auc": null
+        }
+      },
+      "reserve": {
+        "fixed_pixel": {
+          "above_half_iou_before_point": 2,
+          "measured_ordinary": 4,
+          "measured_positives": 4,
+          "top_score_auc": 0.375
+        },
+        "mouth_vs_face": {
+          "above_half_iou_before_point": 0,
+          "measured_ordinary": 4,
+          "measured_positives": 4,
+          "top_score_auc": 0.5
+        }
+      }
+    },
+    "freeze_sha256": "5d471f82e0436984c6cde6b6edd454788a04c749b929263673e19f93a6b26052",
+    "new_false_ranges": {
+      "grid": 18,
+      "native": 9,
+      "reencode": 4,
+      "reserve": 2
+    },
+    "outcomes": {
+      "grid": {
+        "direct": {
+          "correct_range": 1,
+          "measured_no_range": 87
+        },
+        "fixed_pixel": {
+          "correct_range": 1,
+          "false_range": 12,
+          "measured_no_range": 71,
+          "misplaced_range": 4
+        },
+        "mouth_vs_face": {
+          "correct_range": 2,
+          "false_range": 18,
+          "measured_no_range": 59,
+          "misplaced_range": 9
+        }
+      },
+      "hard_cut": {
+        "direct": {
+          "measured_no_range": 4
+        },
+        "fixed_pixel": {
+          "measured_no_range": 4
+        },
+        "mouth_vs_face": {
+          "measured_no_range": 4
+        }
+      },
+      "native": {
+        "direct": {
+          "correct_range": 1,
+          "false_range": 8,
+          "measured_no_range": 49,
+          "misplaced_range": 2
+        },
+        "fixed_pixel": {
+          "measured_no_range": 57,
+          "unassessed": 3
+        },
+        "mouth_vs_face": {
+          "correct_range": 2,
+          "false_range": 9,
+          "measured_no_range": 43,
+          "misplaced_range": 3,
+          "unassessed": 3
+        }
+      },
+      "reencode": {
+        "direct": {
+          "measured_no_range": 8
+        },
+        "fixed_pixel": {
+          "false_range": 1,
+          "measured_no_range": 7
+        },
+        "mouth_vs_face": {
+          "false_range": 4,
+          "measured_no_range": 4
+        }
+      },
+      "reserve": {
+        "fixed_pixel": {
+          "measured_no_range": 8
+        },
+        "mouth_vs_face": {
+          "false_range": 2,
+          "measured_no_range": 4,
+          "misplaced_range": 2
+        }
+      }
+    },
+    "points": {
+      "direct": 0.42381424677636104,
+      "fixed_pixel": 0.2436782717704773,
+      "mouth_vs_face": 0.3854316771030426
+    },
+    "protocol": {
+      "admission": {
+        "coverage_each": 0.75,
+        "crema_added": 2,
+        "crema_extra_false": 3,
+        "crema_groups": 2,
+        "cut_extra_false": 0,
+        "grid_added": 4,
+        "grid_components": 2,
+        "grid_extra_false": 3,
+        "grid_source_time_added": 2,
+        "reencode_extra_false": 1,
+        "reserve_false": 0,
+        "reserve_source_time_correct": 1
+      },
+      "core_samples": [
+        4,
+        6,
+        8,
+        10
+      ],
+      "ellipses_aligned_px": [
+        [
+          17,
+          9
+        ],
+        [
+          22,
+          13
+        ],
+        [
+          28,
+          19
+        ]
+      ],
+      "flank_samples": 4,
+      "gradient_quantile": 0.6,
+      "max_mouth_drift_eye_distance": 0.28,
+      "max_relative_eye_scale_change": 0.18,
+      "min_flank_agreement": 0.06,
+      "native_blur_sigma": 0.85,
+      "offset_pixels": [
+        [
+          0,
+          -2
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          -2,
+          0
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "point": "Strict exceedance of the third largest ordinary development maximum or zero.",
+      "quiet_pixels": 48,
+      "relative_residual_clip": 8.0,
+      "sample_step_s": "2/25",
+      "schema": "chipmunk.video-mouth-fixed-residual/1",
+      "signal": "Test loss of fixed native-pixel detail agreement in the mouth and nearby face separately. Average unwarped high-pass detail in two flanks and a middle interval. Subtract the average correlation obtained at four offset positions to discount broader features. Compare agreement between flanks with the larger of the two flank-to-middle comparisons. The primary arm subtracts the face-reference deficit from the mouth deficit. No device fingerprint is established.",
+      "temporal_iou": "1/2"
+    },
+    "reserve_sha256": "a6360579ec5fe10fa0edcf3bc0149985bb7777deb4bd246f091fe810ad7eeb3f",
+    "runtime": {
+      "calibration_sha256": "18ab366fde4ba57843da3acecc33f482779b6dfa35bb44902fd2f5ec84d11af6",
+      "elapsed_s": 111.58621466699697,
+      "held_sha256": "fda4d45311046ebfb0d2759831999339e9570872a65ac51df681961538341d2e",
+      "peak_rss_bytes": 187826176
+    },
+    "source_time_compatible": {
+      "grid": {
+        "direct": {
+          "measured_no_range": 7
+        },
+        "fixed_pixel": {
+          "measured_no_range": 5,
+          "misplaced_range": 2
+        },
+        "mouth_vs_face": {
+          "measured_no_range": 5,
+          "misplaced_range": 2
+        }
+      },
+      "reserve": {
+        "fixed_pixel": {
+          "measured_no_range": 2
+        },
+        "mouth_vs_face": {
+          "measured_no_range": 1,
+          "misplaced_range": 1
+        }
+      }
+    }
+  },
+  "ai_confidence_weight": 0,
+  "independent_audit": {
+    "aggregate_sha256": "61c5543849b0093f0aa0f32ebb73fa812aead7237244a15da0c38b460c03e854",
+    "aligned_source_pcm_intervals": 24,
+    "anonymous_example": {
+      "aligned_source_pcm_samples": 7488,
+      "anchors_s": [
+        "19/25",
+        "497/500",
+        "259/200"
+      ],
+      "authored_s": [
+        "19/25",
+        "357/250"
+      ],
+      "bank": "native",
+      "correct": true,
+      "observed_s": [
+        "827/1000",
+        "259/200"
+      ],
+      "source_time_compatible": false
+    },
+    "audit_implementation_sha256": "32f9d3758170a1d6b253cce3558161aedf36f35a4238eb4c11118e27b968961d",
+    "decisions": 496,
+    "identical_picture_pairs": 8,
+    "media_files": 168,
+    "native_crops": 171,
+    "status": "verified"
+  },
+  "ordinary_development_measured": 56,
+  "schema": "chipmunk.video-mouth-fixed-residual-public-receipt/1"
+}

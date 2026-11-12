@@ -105,6 +105,26 @@ describe('ordinary multimedia evidence', () => {
     expect(clock.getByText(/No source clock break of at least 20 ms was measured in 10\.000 s/)).toBeTruthy()
   })
 
+  it('shows the flagged short speech window even when the primary voice review has no selected packet', () => {
+    const set = { ...structuredClone(audio), packets: [] }
+    const interval = { start_sample: 48000, end_sample: 80000 }
+    set.short_voice_review = {
+      schema: 'chipmunk.short-voice-review/1', status: 'flagged', title: 'Short speech-window review',
+      reason: 'A two-second speech window returned an elevated response for review.',
+      limitation: 'It carries no weight in the overall assessment.', affects_overall_confidence: false,
+      checked_windows: [interval], interval, start_s: 3, end_s: 5,
+      source_timestamp_ranges: [{ ...interval, source_start_pts: 48000, source_end_pts: 80000, time_base: '1/16000' }],
+      artifacts: { selected_clip: asset('f', 'audio/wav'), waveform: asset('2') },
+    }
+    show(set)
+    const review = within(screen.getByRole('region', { name: 'Short speech-window review' }))
+    expect(review.getByText(/3\.000 s–5\.000 s · samples \[48000, 80000\)/)).toBeTruthy()
+    expect(review.getByText('Source PTS [48000, 80000) at 1/16000.')).toBeTruthy()
+    expect(review.getByLabelText('Flagged two-second speech window').getAttribute('src')).toContain(`${'f'.repeat(64)}.wav`)
+    expect(review.getByAltText('Waveform with the flagged two-second speech window marked')).toBeTruthy()
+    expect(screen.queryByTestId('multimedia-evidence-empty')).toBeNull()
+  })
+
   it('shows the whole-clip face review as six positions and three source examples', () => {
     const set = structuredClone(video)
     const item = set.packets[0]

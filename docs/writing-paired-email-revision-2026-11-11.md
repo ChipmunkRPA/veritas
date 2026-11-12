@@ -36,12 +36,6 @@ The run completed 57 CPU forwards over 223 model-input combinations. A separate 
 
 The authenticated local **Compare with an earlier draft** form now offers the optional paired writing check on matching plain-text `.eml` files and supported HTML-only replies. One changed sentence must have two unchanged neighbors in the same body paragraph. The score uses the exact body context from each draft. Marked quotes, signatures, attachments and headers stay outside the paired reading. The report links each body result to the exact wording changes and MIME parts of the two files. This check uses uncalibrated model responses and adds zero authorship confidence weight.
 
-## Selectable PDF drafts
-
-The optional paired check also accepts two single-page, upright PDFs with selectable text and complete native word boxes in a consistent reading order. It compares a changed sentence and its two unchanged neighbors in one text block. The existing comparison links the result to exact changed-word coordinates and highlighted source crops. Multi-page and rotated PDFs can still use the basic wording comparison when eligible.
-
-Four local comparisons repackaged two previously measured journal works as native PDF drafts. Both known generated rewrites reproduced the earlier increase, and neither genuine later revision showed a joint increase. The exact text-window hashes matched the earlier measurements in all four. Original-file replay verified 68 changed word boxes and 17 source previews across the four JSON exports and generated comparison reports. These examples verify the PDF path on selected known inputs. [Earlier journal evaluation](writing-journal-body-transfer-2026-11-11.md)
-
 Rewrapping 53 previously evaluated English journal draft pairs in each email format preserved all 34 eligible pairs and their exact classifier inputs. Each format reproduced five joint increases on 23 eligible generated rewrites and zero on 11 eligible ordinary revisions using saved responses. The bodies, including their surrounding sentences, were previously used in the journal study. The new deliveries changed the trailing quotation independently of the body. Four authenticated local API comparisons re-ran both installed checkpoints and verified source positions, PDF, JSON and offline replay. Quote-only changes stayed outside the optional check. [Original source panel](writing-journal-body-transfer-2026-11-11.md)
 
 One HTML reply also completed Full analysis after simulated checkout. In Chrome's plain view, the earlier draft upload reproduced the expected input hash, linked three body changes, and downloaded the comparison PDF.
@@ -51,3 +45,11 @@ Run the focused API and replay tests with locally authored MIME fixtures from th
 ```sh
 .venv/bin/python -B -m pytest -q tests/test_document_revision_access.py -k paired_email
 ```
+
+## Selectable PDF drafts
+
+The optional paired check also accepts two single-page, upright PDFs with selectable text and complete native word boxes in a consistent reading order. It compares a changed sentence and its two unchanged neighbors in one text block. The comparison links the result to exact changed-word coordinates and highlighted source crops. Multi-page and rotated PDFs can still use the basic wording comparison when eligible.
+
+Four local comparisons repackaged two previously measured journal works as native PDF drafts. Both known generated rewrites reproduced the earlier increase, and neither genuine later revision showed a joint increase. The exact text-window hashes matched the earlier measurements in all four. Original-file replay verified 68 changed word boxes and 17 source previews across the four JSON exports and generated comparison reports. [Earlier journal evaluation](writing-journal-body-transfer-2026-11-11.md)
+
+One selectable PDF also completed Full analysis after simulated checkout. In Chrome's plain view, the earlier draft upload reproduced the exact expected input, linked three changes to their source page, and downloaded the comparison PDF.

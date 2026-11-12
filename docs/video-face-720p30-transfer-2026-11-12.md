@@ -27,7 +27,7 @@ The original advancement gate failed on coverage. The new passes assessed **6/8 
 
 When brief face-change review is enabled, Full and Deep can use the fallback on the tested upright 1280 × 720 H.264 MP4 profile with 120 native frames, an exact 30 fps clock and 8-bit 4:2:0. The 8 Hz pass supplies context and the 15 Hz pass supplies any new published range. Every new range needs the stronger background guard. A multiple-face input stays unassessed by this fallback. Existing face ranges and overall confidence are preserved. The plain view, JSON and Standard PDF show the same half-open source interval and original before, during and after crops.
 
-The local Full app recovered the held **2.400–2.600 s** range under simulated checkout, with the three exact source images and crops in its API and PDF. The ordinary original and cut showed no added range. Chrome rendered all three full images and all three crops and navigated to their source positions.
+The local Full app recovered the held **2.400–2.600 s** range under simulated checkout, with the three exact source images and crops in its API and PDF. The signed export replayed all source images and both guarded background boundaries from the upload. The previous VP9 and HEVC signed packages also replayed with the updated verifier. The ordinary original and cut showed no added range, and the multiple-face swap recorded an unassessed result. Chrome rendered all three full images and all three crops and navigated to their source positions.
 
 ## Reproduce
 

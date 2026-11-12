@@ -152,6 +152,13 @@ export interface AudioSourceClockContext {
   breaks: { boundary_sample: number; jump_samples: number; before: AudioClockSpan; after: AudioClockSpan;
     scored_windows_crossing: number }[]
 }
+export interface ShortVoiceReview {
+  schema: 'chipmunk.short-voice-review/1'; status: 'flagged' | 'no_flag' | 'skipped'
+  title: string; reason: string; limitation: string; affects_overall_confidence: false
+  checked_windows: SampleInterval[]; interval: SampleInterval | null; start_s: number | null; end_s: number | null
+  source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges']
+  artifacts: Partial<Record<'selected_clip' | 'waveform', EvidenceAsset>>
+}
 export interface AudioEvidenceSet extends SetBase {
   schema: 'chipmunk.audio-evidence/1'; packets: AudioEvidencePacket[]; omitted_windows: number
   source: { sha256: string; pcm_sha256?: string; samples?: number; sample_rate?: number; source_channels?: number; source_sample_rate?: number;
@@ -170,6 +177,7 @@ export interface AudioEvidenceSet extends SetBase {
   stereo_listening?: StereoListeningContext
   repetition_context?: AudioRepetitionContext
   similarity_context?: AudioSimilarityContext
+  short_voice_review?: ShortVoiceReview
 }
 export type VideoChannelStatus = 'ready' | 'absent' | 'unavailable' | 'not_assessed' | 'not_applicable'
 export interface VideoAudioChannel {

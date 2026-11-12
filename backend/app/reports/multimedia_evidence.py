@@ -82,6 +82,8 @@ def asset_items(document: dict[str, Any]):
         for window in (part.get("sound_events") or {}).get("windows", []):
             for role, asset in sorted(window.get("artifacts", {}).items()):
                 yield window["id"], role, asset
+        for role, asset in sorted((part.get("short_voice_review") or {}).get("artifacts", {}).items()):
+            yield None, f"short_voice_review_{role}", asset
         for window in (part.get("stereo_listening") or {}).get("windows", []):
             for role, asset in sorted(window["artifacts"].items()):
                 yield None, f"stereo_{window['stereo_window_index']}_{role}", asset
@@ -341,6 +343,18 @@ def _verify_audio(document: dict, store: ObjectStore, assets: dict[str, bytes], 
                                 source=source, pcm=pcm, mapping=mapping, waveform=audio_packets._chart)
         except (ValueError, KeyError) as error:
             raise ObjectIntegrityError("Frozen sound-category evidence differs from its recorded inputs") from error
+    if (review := document.get("short_voice_review")) is not None:
+        from app.evidence import audio_packets, audio_short_review
+
+        result = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
+        record = result["manifest"]["sampling"]["audio_evidence"]["short_voice_review"]
+        try:
+            if source.get("source_codec") != mapping.get("source_codec"):
+                raise ValueError("Audio codec scope changed")
+            audio_short_review.verify(review, record, store=store, source=source, pcm=pcm, mapping=mapping,
+                                     read_asset=assets.__getitem__, waveform=audio_packets._chart)
+        except (ValueError, KeyError, TypeError) as error:
+            raise ObjectIntegrityError("Frozen short speech-window evidence differs from its recorded inputs") from error
     if (repetition := document.get("repetition_context")) is not None:
         from app.evidence.audio_repetition import verify
 
@@ -845,7 +859,11 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
     if withheld and repeated_passages:
         for group in repeated_passages["groups"]:
             group.pop("text")
+    short_voice_review = copy.deepcopy(document.get("short_voice_review"))
+    if short_voice_review and (asset := short_voice_review["artifacts"].get("waveform")):
+        short_voice_review["waveform"] = plate("waveform", asset, "Waveform with the selected two-second window highlighted")
     return {"available": True, "kind": kind, "title": f"{kind.capitalize()} evidence", "id": document["id"],
+            "short_voice_review": short_voice_review,
             "stereo_context": stereo_context,
             "stereo_listening": stereo_listening,
             "repetition_context": copy.deepcopy(stereo_source.get("repetition_context")),

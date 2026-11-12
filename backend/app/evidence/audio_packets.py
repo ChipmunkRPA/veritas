@@ -126,6 +126,15 @@ def validate_content(document: dict[str, Any]) -> None:
     if document.get("sound_events") is not None:
         from app.evidence.sound_event_binding import validate
         validate(document["sound_events"], source)
+    if "short_voice_review" in document:
+        from app.evidence.audio_short_review_binding import validate as validate_short_voice_review
+
+        try:
+            if document.get("schema") != SCHEMA:
+                raise ValueError("Short speech-window review is for standalone audio")
+            validate_short_voice_review(document["short_voice_review"], source)
+        except ValueError as error:
+            raise PacketIntegrityError(str(error)) from error
     if document.get("repetition_context") is not None:
         from app.evidence.audio_repetition_binding import validate
 
@@ -308,6 +317,15 @@ def build_content(db: Session, analysis: Analysis, store: ObjectStore, result: d
                         "Unscored audio and audio beyond the decoded duration have not received a voice-check result."]}
     if "audio_stream_indices" in mapping:
         document["source"]["audio_stream_indices"] = mapping["audio_stream_indices"]
+    if analysis.kind == "audio" and (review := record.get("short_voice_review")):
+        from app.evidence.audio_short_review import build as build_short_voice_review
+
+        document["source"]["source_codec"] = mapping.get("source_codec")
+        document["short_voice_review"] = build_short_voice_review(
+            review, store=store, source=document["source"], pcm=pcm, mapping=mapping,
+            asset=lambda data, media_type, **metadata: _asset(db, store, analysis, set_id, data, media_type, **metadata),
+            waveform=_chart,
+        )
     document["coverage"]["unscored_intervals"] = unscored_voice_intervals(document["coverage"], document["source"])
     clock = source_clock_context(document["coverage"], document["source"], guarded=record.get("voice_clock_policy") == VOICE_CLOCK_POLICY)
     if analysis.kind == "audio" or clock["total_discontinuities"]:

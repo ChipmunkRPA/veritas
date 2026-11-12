@@ -103,6 +103,11 @@ def asset_refs(document: dict[str, Any] | None) -> dict[str, dict[str, Any]]:
             if not isinstance(sound, dict) or not isinstance(sound.get("windows"), list):
                 raise ObjectIntegrityError("The evidence has invalid sound categories")
             groups.extend(window.get("artifacts") or {} for window in sound["windows"])
+        if "short_voice_review" in part:
+            review = part["short_voice_review"]
+            if part.get("schema") != "chipmunk.audio-evidence/1" or not isinstance(review, dict):
+                raise ObjectIntegrityError("The evidence has an invalid short speech-window review")
+            groups.append(review.get("artifacts") or {})
         if listening := part.get("stereo_listening"):
             groups.extend(window["artifacts"] for window in listening["windows"])
         for key in ("repetition_context", "similarity_context"):

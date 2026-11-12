@@ -483,6 +483,10 @@ The [short-window voice test](audio-edge-window-transfer-2026-11-12.md)
 adds clips with an edit near either end under competing speech. It verifies
 separate ordinary operating points and exposes the localization and false-alarm
 trade-off when transferring the earlier experimental point to a denser grid.
+The [prospective grouped replication](audio-edge-window-grouped-2026-11-12.md)
+sets both grids to the same ordinary-group allowance before testing new speech
+and room combinations. Its replay verifies missed and recovered intervals and
+the exact source sample positions.
 The [two-microphone noise trial](audio-natural-stereo-coherence-2026-11-11.md)
 compares score directions after a fixed filter with two recorded meeting
 backgrounds, six genuine readers and three synthetic generator families.
@@ -954,13 +958,16 @@ and the replayed JSON. The comparison created no second job or order.
 
 The authenticated local app can also compare both writing responses for one
 changed sentence flanked by two unchanged sentences in a short English `.txt`,
-`.docx`, or `.eml` pair. All three sentences must be in one paragraph. For Word
-files, the check uses top-level body paragraphs. For email, it uses the selected
-plain-text body or the mapped body of a supported HTML-only reply. It leaves out
-marked quotes, signatures, headers and attachments. Linked changes preserve
-the exact wording positions in both drafts. It adds zero weight to authorship
-confidence. Replay verifies the source spans, input hashes and arithmetic of the
-saved responses. Reproducing the responses requires a separate inference run.
+`.docx`, `.eml`, or `.pdf` pair. All three sentences must be in one paragraph
+or one PDF text block. For Word files, the check uses top-level body
+paragraphs. For email, it uses the selected plain-text body or the mapped body
+of a supported HTML-only reply and excludes marked quotes, signatures, headers
+and attachments. For PDFs, both drafts must have one upright page with
+selectable text, complete word boxes and consistent top-to-bottom reading
+order. Linked changes preserve the exact wording positions in both drafts.
+The check adds zero weight to authorship confidence. Replay verifies the source
+spans, input hashes and arithmetic of the saved responses. Reproducing the
+responses requires a separate inference run.
 
 Rewrapping 53 previously tested article draft pairs in Word preserved the 34
 eligible pairs, the exact model inputs and the selected locations. The check
@@ -975,6 +982,10 @@ HTML-only replies, retained all 34 eligible paired inputs in each format.
 Four authenticated runs with both installed checks verified linked source
 positions, MIME part labels, PDF and JSON. The test isolates the effect of
 packaging and quote handling on previously scored writing. [Email comparison](writing-paired-email-revision-2026-11-11.md#email-format-verification)
+
+Four paired selectable PDFs preserved the exact text inputs from their
+earlier journal runs. Their JSON and PDF exports matched the original
+word boxes and page crops. [Selectable PDF drafts](writing-paired-email-revision-2026-11-11.md#selectable-pdf-drafts)
 
 ### Replay document evidence against the original
 

@@ -1,0 +1,1414 @@
+{
+  "budgets": {
+    "primary": 2,
+    "sensitivity": 1
+  },
+  "commitments": {
+    "freeze": "4017f894802648d55de441f351ae3955cd9afd0fa7bd87f1829e5e34382b5396",
+    "held_native_scores": "74280694157de6413fa76313be36bd67916817416e06001c48ef59af2c338d20",
+    "held_sources": "45f1f8632758d8a240a4f335063533975fd11f2ac82b0ca72f4b3d09386cd7a8",
+    "points": "9a11bb808a033e5f069eef05d8bd1a40daa17b158fa8b48739d5fdac2e571623",
+    "prior_ordinary": "bdf4d7f59283081e9fd46164d6eca5f82dcdd0136884c7e88818aab04a15d33c",
+    "public_held_rows": "e6092feae5398fd7c2535549d7910406ac1903badf76e873ba195ca345eb804f",
+    "reviewer": "679e84449ebd50df7c6761f052fef9231eb7c70c5d83e06261f0e732a91d030b",
+    "runner_sources": {
+      "backend/scripts/audio_edge_window_grouped_sources.py": "6ade4318768b8fd6f04cd1b7db9c680f204cf77ad690750118371f0281087cea",
+      "backend/scripts/audio_edge_window_grouped_transfer.py": "a671ff7ddfd017ee0176e79a99de132e93f906de5e142226650264d9c1f58406"
+    }
+  },
+  "customer_confidence_changed": false,
+  "grids": {
+    "combined": [
+      [
+        0,
+        32000
+      ],
+      [
+        16000,
+        48000
+      ],
+      [
+        32000,
+        64000
+      ],
+      [
+        48000,
+        80000
+      ],
+      [
+        64000,
+        96000
+      ]
+    ],
+    "full": [
+      [
+        0,
+        64000
+      ],
+      [
+        32000,
+        96000
+      ]
+    ]
+  },
+  "held": [
+    {
+      "arm": "untouched",
+      "coverage": "early",
+      "family": "clone",
+      "group": 1,
+      "room_group": 1,
+      "scores": [
+        -6.485674937411671,
+        -6.0447768990313255,
+        -4.914086370408292,
+        -5.393531778511232,
+        -6.227629196901617,
+        -2.759891092027821,
+        -5.184392874390628
+      ],
+      "snr_db": -5,
+      "truth": null
+    },
+    {
+      "arm": "ordinary_same_host",
+      "coverage": "early",
+      "family": "clone",
+      "group": 1,
+      "room_group": 1,
+      "scores": [
+        -6.100364635580695,
+        -6.0447768990313255,
+        -2.7681579250568413,
+        -5.393531778511232,
+        -6.227629196901617,
+        -2.759891092027821,
+        -5.184392874390628
+      ],
+      "snr_db": -5,
+      "truth": null
+    },
+    {
+      "arm": "ordinary_other_voice",
+      "coverage": "early",
+      "family": "clone",
+      "group": 1,
+      "room_group": 1,
+      "scores": [
+        -6.474082956337854,
+        -6.0447768990313255,
+        -5.243796890835316,
+        -5.393531778511232,
+        -6.227629196901617,
+        -2.759891092027821,
+        -5.184392874390628
+      ],
+      "snr_db": -5,
+      "truth": null
+    },
+    {
+      "arm": "synthetic",
+      "coverage": "early",
+      "family": "clone",
+      "group": 1,
+      "room_group": 1,
+      "scores": [
+        -6.450706025498658,
+        -6.0447768990313255,
+        -4.5776452944932915,
+        -5.393531778511232,
+        -6.227629196901617,
+        -2.759891092027821,
+        -5.184392874390628
+      ],
+      "snr_db": -5,
+      "truth": [
+        2560,
+        12800
+      ]
+    },
+    {
+      "arm": "untouched",
+      "coverage": "interior",
+      "family": "expressive",
+      "group": 2,
+      "room_group": 1,
+      "scores": [
+        -4.284719477994,
+        -1.5873369383327272,
+        -5.777094852963616,
+        -2.9446566201757975,
+        4.873637691624856,
+        -4.658147785071738,
+        -5.4574365938787945
+      ],
+      "snr_db": -8,
+      "truth": null
+    },
+    {
+      "arm": "ordinary_same_host",
+      "coverage": "interior",
+      "family": "expressive",
+      "group": 2,
+      "room_group": 1,
+      "scores": [
+        -5.253567168609701,
+        -3.430115553085047,
+        -5.777094852963616,
+        -2.9446566201757975,
+        -2.5238557295528032,
+        -4.504330625008859,
+        -5.423941607432231
+      ],
+      "snr_db": -8,
+      "truth": null
+    },
+    {
+      "arm": "ordinary_other_voice",
+      "coverage": "interior",
+      "family": "expressive",
+      "group": 2,
+      "room_group": 1,
+      "scores": [
+        -4.467486862609836,
+        4.719049031367291,
+        -5.777094852963616,
+        -2.9446566201757975,
+        4.919649800792383,
+        3.3140403250737753,
+        -5.31179999103974
+      ],
+      "snr_db": -8,
+      "truth": null
+    },
+    {
+      "arm": "synthetic",
+      "coverage": "interior",
+      "family": "expressive",
+      "group": 2,
+      "room_group": 1,
+      "scores": [
+        -5.208942416147322,
+        2.804189365847825,
+        -5.777094852963616,
+        -2.9446566201757975,
+        -1.264104872478599,
+        2.4628690975604894,
+        -5.203536075056637
+      ],
+      "snr_db": -8,
+      "truth": [
+        52480,
+        65280
+      ]
+    },
+    {
+      "arm": "untouched",
+      "coverage": "interior",
+      "family": "stock",
+      "group": 3,
+      "room_group": 1,
+      "scores": [
+        -4.473512612045679,
+        -5.2684583281335575,
+        4.457744735955103,
+        -3.47116188504207,
+        -4.232696489728724,
+        -5.565845489364286,
+        -1.1519031854176132
+      ],
+      "snr_db": -5,
+      "truth": null
+    },
+    {
+      "arm": "ordinary_same_host",
+      "coverage": "interior",
+      "family": "stock",
+      "group": 3,
+      "room_group": 1,
+      "scores": [
+        -5.824334628985827,
+        -5.802202152202927,
+        4.457744735955103,
+        -3.47116188504207,
+        -5.877166328056754,
+        -4.96522236732482,
+        2.421606402136531
+      ],
+      "snr_db": -5,
+      "truth": null
+    },
+    {
+      "arm": "ordinary_other_voice",
+      "coverage": "interior",
+      "family": "stock",
+      "group": 3,
+      "room_group": 1,
+      "scores": [
+        -4.76756091547787,
+        -1.2278101592038286,
+        4.457744735955103,
+        -3.47116188504207,
+        -5.449074801355238,
+        4.704172950740097,
+        -4.73435880534184
+      ],
+      "snr_db": -5,
+      "truth": null
+    },
+    {
+      "arm": "synthetic",
+      "coverage": "interior",
+      "family": "stock",
+      "group": 3,
+      "room_group": 1,
+      "scores": [
+        5.787082560235404,
+        6.4777286424223615,
+        4.457744735955103,
+        -3.47116188504207,
+        6.11362256456098,
+        7.1140304401405015,
+        -3.621625492046995
+      ],
+      "snr_db": -5,
+      "truth": [
+        49920,
+        65280
+      ]
+    },
+    {
+      "arm": "untouched",
+      "coverage": "late",
+      "family": "expressive",
+      "group": 4,
+      "room_group": 1,
+      "scores": [
+        3.1977481297198964,
+        -4.874486449047206,
+        4.110307822011375,
+        -4.566073397760841,
+        -5.213121899968371,
+        -4.8815288808225175,
+        -2.8386201542791096
+      ],
+      "snr_db": -5,
+      "truth": null
+    },
+    {
+      "arm": "ordinary_same_host",
+      "coverage": "late",
+      "family": "expressive",
+      "group": 4,
+      "room_group": 1,
+      "scores": [
+        3.1977481297198964,
+        -4.715744920063564,
+        4.110307822011375,
+        -4.566073397760841,
+        -5.213121899968371,
+        -4.8815288808225175,
+        -2.2198719668381206
+      ],
+      "snr_db": -5,
+      "truth": null
+    },
+    {
+      "arm": "ordinary_other_voice",
+      "coverage": "late",
+      "family": "expressive",
+      "group": 4,
+      "room_group": 1,
+      "scores": [
+        3.1977481297198964,
+        -5.458601437901205,
+        4.110307822011375,
+        -4.566073397760841,
+        -5.213121899968371,
+        -4.8815288808225175,
+        -3.613660337710797
+      ],
+      "snr_db": -5,
+      "truth": null
+    },
+    {
+      "arm": "synthetic",
+      "coverage": "late",
+      "family": "expressive",
+      "group": 4,
+      "room_group": 1,
+      "scores": [
+        3.1977481297198964,
+        -4.3769455255171845,
+        4.110307822011375,
+        -4.566073397760841,
+        -5.213121899968371,
+        -4.8815288808225175,
+        4.190393685390457
+      ],
+      "snr_db": -5,
+      "truth": [
+        80640,
+        90880
+      ]
+    },
+    {
+      "arm": "untouched",
+      "coverage": "interior",
+      "family": "stock",
+      "group": 5,
+      "room_group": 1,
+      "scores": [
+        -2.2309761573676035,
+        -2.0561253464535247,
+        -4.200375568473795,
+        1.659914542190923,
+        4.105412938239483,
+        6.722179220180169,
+        3.5438954099955082
+      ],
+      "snr_db": -8,
+      "truth": null
+    },
+    {
+      "arm": "ordinary_same_host",
+      "coverage": "interior",
+      "family": "stock",
+      "group": 5,
+      "room_group": 1,
+      "scores": [
+        0.3900382188836029,
+        4.899703403121578,
+        -4.475813832114084,
+        3.810082060998828,
+        5.982339587273552,
+        6.722179220180169,
+        3.5438954099955082
+      ],
+      "snr_db": -8,
+      "truth": null
+    },
+    {
+      "arm": "ordinary_other_voice",
+      "coverage": "interior",
+      "family": "stock",
+      "group": 5,
+      "room_group": 1,
+      "scores": [
+        4.361334919149846,
+        5.128223455502344,
+        -4.7032179471025675,
+        5.817031055219633,
+        6.018898462158856,
+        6.722179220180169,
+        3.5438954099955082
+      ],
+      "snr_db": -8,
+      "truth": null
+    },
+    {
+      "arm": "synthetic",
+      "coverage": "interior",
+      "family": "stock",
+      "group": 5,
+      "room_group": 1,
+      "scores": [
+        1.3678310141937908,
+        4.6193381650478,
+        -4.049308261292552,
+        5.110070646584979,
+        6.066008682772088,
+        6.722179220180169,
+        3.5438954099955082
+      ],
+      "snr_db": -8,
+      "truth": [
+        24320,
+        37120
+      ]
+    },
+    {
+      "arm": "untouched",
+      "coverage": "interior",
+      "family": "clone",
+      "group": 6,
+      "room_group": 1,
+      "scores": [
+        -4.7268066893165,
+        -5.985000559877882,
+        -3.714347600310418,
+        -1.7579710878622516,
+        -5.455453912749142,
+        -5.051525147252596,
+        -4.08490898340566
+      ],
+      "snr_db": -8,
+      "truth": null
+    },
+    {
+      "arm": "ordinary_same_host",
+      "coverage": "interior",
+      "family": "clone",
+      "group": 6,
+      "room_group": 1,
+      "scores": [
+        -4.123089788148883,
+        -5.865828504601699,
+        -3.636292966437877,
+        -3.6573324599934045,
+        -4.436814293108109,
+        -5.051525147252596,
+        -4.08490898340566
+      ],
+      "snr_db": -8,
+      "truth": null
+    },
+    {
+      "arm": "ordinary_other_voice",
+      "coverage": "interior",
+      "family": "clone",
+      "group": 6,
+      "room_group": 1,
+      "scores": [
+        -5.028853427624235,
+        -5.832980127200094,
+        -3.643248784402109,
+        -4.925698301563949,
+        -5.158121653544838,
+        -5.051525147252596,
+        -4.08490898340566
+      ],
+      "snr_db": -8,
+      "truth": null
+    },
+    {
+      "arm": "synthetic",
+      "coverage": "interior",
+      "family": "clone",
+      "group": 6,
+      "room_group": 1,
+      "scores": [
+        -4.587609322552485,
+        -5.770851143618784,
+        -3.6193250842130866,
+        3.7341195929115147,
+        -5.031302436528039,
+        -5.051525147252596,
+        -4.08490898340566
+      ],
+      "snr_db": -8,
+      "truth": [
+        29440,
+        44800
+      ]
+    },
+    {
+      "arm": "background_only",
+      "coverage": "room",
+      "family": null,
+      "group": 7,
+      "room_group": 1,
+      "scores": [
+        -6.787095118834271,
+        -6.761211330885998,
+        -6.389838235571477,
+        -6.826437986212031,
+        -6.1624145650620505,
+        -5.92519902198754,
+        null
+      ],
+      "snr_db": null,
+      "truth": null
+    },
+    {
+      "arm": "untouched",
+      "coverage": "early",
+      "family": "stock",
+      "group": 8,
+      "room_group": 2,
+      "scores": [
+        -6.4683055878975955,
+        -6.249619455615397,
+        -5.59723569972632,
+        -5.966258103118047,
+        -5.301947606961889,
+        -4.679145322569471,
+        -6.602046968600511
+      ],
+      "snr_db": -8,
+      "truth": null
+    },
+    {
+      "arm": "ordinary_same_host",
+      "coverage": "early",
+      "family": "stock",
+      "group": 8,
+      "room_group": 2,
+      "scores": [
+        -6.61820932010746,
+        -6.249619455615397,
+        -5.987650413683325,
+        -5.966258103118047,
+        -5.301947606961889,
+        -4.679145322569471,
+        -6.602046968600511
+      ],
+      "snr_db": -8,
+      "truth": null
+    },
+    {
+      "arm": "ordinary_other_voice",
+      "coverage": "early",
+      "family": "stock",
+      "group": 8,
+      "room_group": 2,
+      "scores": [
+        -6.513963679089356,
+        -6.249619455615397,
+        -5.462977388844191,
+        -5.966258103118047,
+        -5.301947606961889,
+        -4.679145322569471,
+        -6.602046968600511
+      ],
+      "snr_db": -8,
+      "truth": null
+    },
+    {
+      "arm": "synthetic",
+      "coverage": "early",
+      "family": "stock",
+      "group": 8,
+      "room_group": 2,
+      "scores": [
+        -6.503221957415798,
+        -6.249619455615397,
+        -5.557679135028952,
+        -5.966258103118047,
+        -5.301947606961889,
+        -4.679145322569471,
+        -6.602046968600511
+      ],
+      "snr_db": -8,
+      "truth": [
+        5120,
+        15360
+      ]
+    },
+    {
+      "arm": "untouched",
+      "coverage": "interior",
+      "family": "clone",
+      "group": 9,
+      "room_group": 2,
+      "scores": [
+        0.8150235205335272,
+        -5.1415962931105605,
+        1.8344177313116365,
+        -4.873888056659518,
+        -5.328931827884638,
+        4.573402172317374,
+        6.6884115298431
+      ],
+      "snr_db": -5,
+      "truth": null
+    },
+    {
+      "arm": "ordinary_same_host",
+      "coverage": "interior",
+      "family": "clone",
+      "group": 9,
+      "room_group": 2,
+      "scores": [
+        4.2339605440344075,
+        -3.431432081858677,
+        3.25509646926252,
+        -3.0382943354844856,
+        -3.6929388152933145,
+        4.573402172317374,
+        6.6884115298431
+      ],
+      "snr_db": -5,
+      "truth": null
+    },
+    {
+      "arm": "ordinary_other_voice",
+      "coverage": "interior",
+      "family": "clone",
+      "group": 9,
+      "room_group": 2,
+      "scores": [
+        4.578459870414357,
+        -3.983202000639773,
+        3.1418892765909314,
+        -3.0182824335839338,
+        -3.6062693737806035,
+        4.573402172317374,
+        6.6884115298431
+      ],
+      "snr_db": -5,
+      "truth": null
+    },
+    {
+      "arm": "synthetic",
+      "coverage": "interior",
+      "family": "clone",
+      "group": 9,
+      "room_group": 2,
+      "scores": [
+        4.778122387570555,
+        -3.7734832753878313,
+        4.839989630622977,
+        -0.06582621389833498,
+        -4.270324649322966,
+        4.573402172317374,
+        6.6884115298431
+      ],
+      "snr_db": -5,
+      "truth": [
+        23040,
+        35840
+      ]
+    },
+    {
+      "arm": "untouched",
+      "coverage": "interior",
+      "family": "expressive",
+      "group": 10,
+      "room_group": 2,
+      "scores": [
+        -5.904787049577587,
+        -6.200081886692087,
+        -5.4708881622133365,
+        -5.461439117600932,
+        -4.143660561914332,
+        -5.149772646351268,
+        -6.623170885937543
+      ],
+      "snr_db": -8,
+      "truth": null
+    },
+    {
+      "arm": "ordinary_same_host",
+      "coverage": "interior",
+      "family": "expressive",
+      "group": 10,
+      "room_group": 2,
+      "scores": [
+        -6.321204245756002,
+        -5.2931604323101205,
+        -5.4708881622133365,
+        -5.461439117600932,
+        -4.66510104711443,
+        -3.2889848015147103,
+        -5.2143878653002735
+      ],
+      "snr_db": -8,
+      "truth": null
+    },
+    {
+      "arm": "ordinary_other_voice",
+      "coverage": "interior",
+      "family": "expressive",
+      "group": 10,
+      "room_group": 2,
+      "scores": [
+        -6.537023508627514,
+        2.065251029582848,
+        -5.4708881622133365,
+        -5.461439117600932,
+        -5.841333388108109,
+        5.198884398657884,
+        5.267975053913248
+      ],
+      "snr_db": -8,
+      "truth": null
+    },
+    {
+      "arm": "synthetic",
+      "coverage": "interior",
+      "family": "expressive",
+      "group": 10,
+      "room_group": 2,
+      "scores": [
+        -6.093536383858738,
+        -5.126910664078626,
+        -5.4708881622133365,
+        -5.461439117600932,
+        -4.049889490152214,
+        0.44810757748283286,
+        -3.2205710185923246
+      ],
+      "snr_db": -8,
+      "truth": [
+        55040,
+        70400
+      ]
+    },
+    {
+      "arm": "untouched",
+      "coverage": "late",
+      "family": "clone",
+      "group": 11,
+      "room_group": 2,
+      "scores": [
+        -6.238330840714708,
+        -0.5062635521431835,
+        5.051347474990428,
+        -4.374163202343121,
+        -5.984999257900561,
+        -5.579991307645902,
+        6.589866624452941
+      ],
+      "snr_db": -8,
+      "truth": null
+    },
+    {
+      "arm": "ordinary_same_host",
+      "coverage": "late",
+      "family": "clone",
+      "group": 11,
+      "room_group": 2,
+      "scores": [
+        -6.238330840714708,
+        2.709051616295359,
+        5.051347474990428,
+        -4.374163202343121,
+        -5.984999257900561,
+        -5.579991307645902,
+        6.794024514662927
+      ],
+      "snr_db": -8,
+      "truth": null
+    },
+    {
+      "arm": "ordinary_other_voice",
+      "coverage": "late",
+      "family": "clone",
+      "group": 11,
+      "room_group": 2,
+      "scores": [
+        -6.238330840714708,
+        0.3254830367400646,
+        5.051347474990428,
+        -4.374163202343121,
+        -5.984999257900561,
+        -5.579991307645902,
+        6.750925325710381
+      ],
+      "snr_db": -8,
+      "truth": null
+    },
+    {
+      "arm": "synthetic",
+      "coverage": "late",
+      "family": "clone",
+      "group": 11,
+      "room_group": 2,
+      "scores": [
+        -6.238330840714708,
+        -2.0218497837506093,
+        5.051347474990428,
+        -4.374163202343121,
+        -5.984999257900561,
+        -5.579991307645902,
+        6.839395352070459
+      ],
+      "snr_db": -8,
+      "truth": [
+        80640,
+        90880
+      ]
+    },
+    {
+      "arm": "untouched",
+      "coverage": "interior",
+      "family": "expressive",
+      "group": 12,
+      "room_group": 2,
+      "scores": [
+        3.9948816613664344,
+        -5.978674945182884,
+        4.992633745630354,
+        -4.490469923463574,
+        -6.5015907974805724,
+        3.4833423842082745,
+        -3.4050374122969664
+      ],
+      "snr_db": -5,
+      "truth": null
+    },
+    {
+      "arm": "ordinary_same_host",
+      "coverage": "interior",
+      "family": "expressive",
+      "group": 12,
+      "room_group": 2,
+      "scores": [
+        4.604076624728059,
+        -6.085458717755692,
+        4.864339856816654,
+        -1.4840027575787362,
+        -6.514638911237187,
+        3.4833423842082745,
+        -3.4050374122969664
+      ],
+      "snr_db": -5,
+      "truth": null
+    },
+    {
+      "arm": "ordinary_other_voice",
+      "coverage": "interior",
+      "family": "expressive",
+      "group": 12,
+      "room_group": 2,
+      "scores": [
+        4.038020308709847,
+        -5.9533262604980175,
+        4.963436374390112,
+        -4.680985453500943,
+        -6.4691943829142255,
+        3.4833423842082745,
+        -3.4050374122969664
+      ],
+      "snr_db": -5,
+      "truth": null
+    },
+    {
+      "arm": "synthetic",
+      "coverage": "interior",
+      "family": "expressive",
+      "group": 12,
+      "room_group": 2,
+      "scores": [
+        3.7610508208552518,
+        -5.919075485853613,
+        5.1118012584475565,
+        -4.162310541228663,
+        -6.496929175327,
+        3.4833423842082745,
+        -3.4050374122969664
+      ],
+      "snr_db": -5,
+      "truth": [
+        26880,
+        39680
+      ]
+    },
+    {
+      "arm": "untouched",
+      "coverage": "interior",
+      "family": "stock",
+      "group": 13,
+      "room_group": 2,
+      "scores": [
+        -5.197554586875787,
+        3.7062161718215556,
+        -4.5471544583714705,
+        -4.6439923689302685,
+        -4.139826816081683,
+        5.993634032638696,
+        6.820441303124133
+      ],
+      "snr_db": -5,
+      "truth": null
+    },
+    {
+      "arm": "ordinary_same_host",
+      "coverage": "interior",
+      "family": "stock",
+      "group": 13,
+      "room_group": 2,
+      "scores": [
+        -5.195803683671925,
+        -3.8716878711168046,
+        -4.5471544583714705,
+        -4.6439923689302685,
+        -4.1406473942062965,
+        4.992366756668621,
+        4.664801040466022
+      ],
+      "snr_db": -5,
+      "truth": null
+    },
+    {
+      "arm": "ordinary_other_voice",
+      "coverage": "interior",
+      "family": "stock",
+      "group": 13,
+      "room_group": 2,
+      "scores": [
+        -4.856228818746019,
+        -4.255056390637382,
+        -4.5471544583714705,
+        -4.6439923689302685,
+        -2.6304326251841483,
+        4.3431816576368485,
+        4.1293613739433255
+      ],
+      "snr_db": -5,
+      "truth": null
+    },
+    {
+      "arm": "synthetic",
+      "coverage": "interior",
+      "family": "stock",
+      "group": 13,
+      "room_group": 2,
+      "scores": [
+        -5.04317187608702,
+        -4.001110094696176,
+        -4.5471544583714705,
+        -4.6439923689302685,
+        -3.4397449451575217,
+        4.379429939650372,
+        3.355555933683999
+      ],
+      "snr_db": -5,
+      "truth": [
+        62720,
+        78080
+      ]
+    },
+    {
+      "arm": "background_only",
+      "coverage": "room",
+      "family": null,
+      "group": 14,
+      "room_group": 2,
+      "scores": [
+        -7.140417071278049,
+        -7.138810153133867,
+        -6.999923669623495,
+        -6.644421091207399,
+        -7.066421581542555,
+        -7.089715956531947,
+        -6.859267237577327
+      ],
+      "snr_db": null,
+      "truth": null
+    }
+  ],
+  "new_classifier_windows": 349,
+  "points": {
+    "combined": {
+      "1": {
+        "calibration_false_groups": 1,
+        "point": 7.049524822776123
+      },
+      "2": {
+        "calibration_false_groups": 2,
+        "point": 6.822523597593649
+      }
+    },
+    "full": {
+      "1": {
+        "calibration_false_groups": 1,
+        "point": 6.864189391473502
+      },
+      "2": {
+        "calibration_false_groups": 2,
+        "point": 6.27248104080612
+      }
+    }
+  },
+  "results": {
+    "combined": {
+      "frozen_budget_outcomes": {
+        "1": {
+          "by_noise": {
+            "-5": {
+              "assessed_files": 24,
+              "background_false_files": 0,
+              "false_genuine_groups": 0,
+              "generated_assessed": 6,
+              "generated_flags": 1,
+              "genuine_false_files": 0,
+              "locations": [
+                {
+                  "coverage": "interior",
+                  "family": "stock",
+                  "group": 3,
+                  "truth": [
+                    49920,
+                    65280
+                  ],
+                  "window": [
+                    48000,
+                    80000
+                  ]
+                }
+              ],
+              "selected_half_covered": 1,
+              "useful_locations": 1
+            },
+            "-8": {
+              "assessed_files": 24,
+              "background_false_files": 0,
+              "false_genuine_groups": 0,
+              "generated_assessed": 6,
+              "generated_flags": 0,
+              "genuine_false_files": 0,
+              "locations": [],
+              "selected_half_covered": 0,
+              "useful_locations": 0
+            }
+          },
+          "by_room": {
+            "1": {
+              "assessed_files": 25,
+              "background_false_files": 0,
+              "false_genuine_groups": 0,
+              "generated_assessed": 6,
+              "generated_flags": 1,
+              "genuine_false_files": 0,
+              "locations": [
+                {
+                  "coverage": "interior",
+                  "family": "stock",
+                  "group": 3,
+                  "truth": [
+                    49920,
+                    65280
+                  ],
+                  "window": [
+                    48000,
+                    80000
+                  ]
+                }
+              ],
+              "selected_half_covered": 1,
+              "useful_locations": 1
+            },
+            "2": {
+              "assessed_files": 25,
+              "background_false_files": 0,
+              "false_genuine_groups": 0,
+              "generated_assessed": 6,
+              "generated_flags": 0,
+              "genuine_false_files": 0,
+              "locations": [],
+              "selected_half_covered": 0,
+              "useful_locations": 0
+            }
+          },
+          "total": {
+            "assessed_files": 50,
+            "background_false_files": 0,
+            "false_genuine_groups": 0,
+            "generated_assessed": 12,
+            "generated_flags": 1,
+            "generated_flags_without_useful_location": 0,
+            "genuine_false_files": 0,
+            "locations": [
+              {
+                "coverage": "interior",
+                "family": "stock",
+                "group": 3,
+                "truth": [
+                  49920,
+                  65280
+                ],
+                "window": [
+                  48000,
+                  80000
+                ]
+              }
+            ],
+            "selected_half_covered": 1,
+            "unflagged_generated_edits": 11,
+            "useful_locations": 1
+          }
+        },
+        "2": {
+          "by_noise": {
+            "-5": {
+              "assessed_files": 24,
+              "background_false_files": 0,
+              "false_genuine_groups": 0,
+              "generated_assessed": 6,
+              "generated_flags": 1,
+              "genuine_false_files": 0,
+              "locations": [
+                {
+                  "coverage": "interior",
+                  "family": "stock",
+                  "group": 3,
+                  "truth": [
+                    49920,
+                    65280
+                  ],
+                  "window": [
+                    48000,
+                    80000
+                  ]
+                }
+              ],
+              "selected_half_covered": 1,
+              "useful_locations": 1
+            },
+            "-8": {
+              "assessed_files": 24,
+              "background_false_files": 0,
+              "false_genuine_groups": 0,
+              "generated_assessed": 6,
+              "generated_flags": 1,
+              "genuine_false_files": 0,
+              "locations": [
+                {
+                  "coverage": "late",
+                  "family": "clone",
+                  "group": 11,
+                  "truth": [
+                    80640,
+                    90880
+                  ],
+                  "window": [
+                    64000,
+                    96000
+                  ]
+                }
+              ],
+              "selected_half_covered": 1,
+              "useful_locations": 1
+            }
+          },
+          "by_room": {
+            "1": {
+              "assessed_files": 25,
+              "background_false_files": 0,
+              "false_genuine_groups": 0,
+              "generated_assessed": 6,
+              "generated_flags": 1,
+              "genuine_false_files": 0,
+              "locations": [
+                {
+                  "coverage": "interior",
+                  "family": "stock",
+                  "group": 3,
+                  "truth": [
+                    49920,
+                    65280
+                  ],
+                  "window": [
+                    48000,
+                    80000
+                  ]
+                }
+              ],
+              "selected_half_covered": 1,
+              "useful_locations": 1
+            },
+            "2": {
+              "assessed_files": 25,
+              "background_false_files": 0,
+              "false_genuine_groups": 0,
+              "generated_assessed": 6,
+              "generated_flags": 1,
+              "genuine_false_files": 0,
+              "locations": [
+                {
+                  "coverage": "late",
+                  "family": "clone",
+                  "group": 11,
+                  "truth": [
+                    80640,
+                    90880
+                  ],
+                  "window": [
+                    64000,
+                    96000
+                  ]
+                }
+              ],
+              "selected_half_covered": 1,
+              "useful_locations": 1
+            }
+          },
+          "total": {
+            "assessed_files": 50,
+            "background_false_files": 0,
+            "false_genuine_groups": 0,
+            "generated_assessed": 12,
+            "generated_flags": 2,
+            "generated_flags_without_useful_location": 0,
+            "genuine_false_files": 0,
+            "locations": [
+              {
+                "coverage": "interior",
+                "family": "stock",
+                "group": 3,
+                "truth": [
+                  49920,
+                  65280
+                ],
+                "window": [
+                  48000,
+                  80000
+                ]
+              },
+              {
+                "coverage": "late",
+                "family": "clone",
+                "group": 11,
+                "truth": [
+                  80640,
+                  90880
+                ],
+                "window": [
+                  64000,
+                  96000
+                ]
+              }
+            ],
+            "selected_half_covered": 2,
+            "unflagged_generated_edits": 10,
+            "useful_locations": 2
+          }
+        }
+      },
+      "held_location_geometry": {
+        "admitted": 12,
+        "reachable": 12,
+        "strongest_before_point": 7
+      }
+    },
+    "full": {
+      "frozen_budget_outcomes": {
+        "1": {
+          "by_noise": {
+            "-5": {
+              "assessed_files": 24,
+              "background_false_files": 0,
+              "false_genuine_groups": 0,
+              "generated_assessed": 6,
+              "generated_flags": 0,
+              "genuine_false_files": 0,
+              "locations": [],
+              "selected_half_covered": 0,
+              "useful_locations": 0
+            },
+            "-8": {
+              "assessed_files": 24,
+              "background_false_files": 0,
+              "false_genuine_groups": 0,
+              "generated_assessed": 6,
+              "generated_flags": 0,
+              "genuine_false_files": 0,
+              "locations": [],
+              "selected_half_covered": 0,
+              "useful_locations": 0
+            }
+          },
+          "by_room": {
+            "1": {
+              "assessed_files": 25,
+              "background_false_files": 0,
+              "false_genuine_groups": 0,
+              "generated_assessed": 6,
+              "generated_flags": 0,
+              "genuine_false_files": 0,
+              "locations": [],
+              "selected_half_covered": 0,
+              "useful_locations": 0
+            },
+            "2": {
+              "assessed_files": 25,
+              "background_false_files": 0,
+              "false_genuine_groups": 0,
+              "generated_assessed": 6,
+              "generated_flags": 0,
+              "genuine_false_files": 0,
+              "locations": [],
+              "selected_half_covered": 0,
+              "useful_locations": 0
+            }
+          },
+          "total": {
+            "assessed_files": 50,
+            "background_false_files": 0,
+            "false_genuine_groups": 0,
+            "generated_assessed": 12,
+            "generated_flags": 0,
+            "generated_flags_without_useful_location": 0,
+            "genuine_false_files": 0,
+            "locations": [],
+            "selected_half_covered": 0,
+            "unflagged_generated_edits": 12,
+            "useful_locations": 0
+          }
+        },
+        "2": {
+          "by_noise": {
+            "-5": {
+              "assessed_files": 24,
+              "background_false_files": 0,
+              "false_genuine_groups": 0,
+              "generated_assessed": 6,
+              "generated_flags": 1,
+              "genuine_false_files": 0,
+              "locations": [],
+              "selected_half_covered": 1,
+              "useful_locations": 0
+            },
+            "-8": {
+              "assessed_files": 24,
+              "background_false_files": 0,
+              "false_genuine_groups": 0,
+              "generated_assessed": 6,
+              "generated_flags": 0,
+              "genuine_false_files": 0,
+              "locations": [],
+              "selected_half_covered": 0,
+              "useful_locations": 0
+            }
+          },
+          "by_room": {
+            "1": {
+              "assessed_files": 25,
+              "background_false_files": 0,
+              "false_genuine_groups": 0,
+              "generated_assessed": 6,
+              "generated_flags": 1,
+              "genuine_false_files": 0,
+              "locations": [],
+              "selected_half_covered": 1,
+              "useful_locations": 0
+            },
+            "2": {
+              "assessed_files": 25,
+              "background_false_files": 0,
+              "false_genuine_groups": 0,
+              "generated_assessed": 6,
+              "generated_flags": 0,
+              "genuine_false_files": 0,
+              "locations": [],
+              "selected_half_covered": 0,
+              "useful_locations": 0
+            }
+          },
+          "total": {
+            "assessed_files": 50,
+            "background_false_files": 0,
+            "false_genuine_groups": 0,
+            "generated_assessed": 12,
+            "generated_flags": 1,
+            "generated_flags_without_useful_location": 1,
+            "genuine_false_files": 0,
+            "locations": [],
+            "selected_half_covered": 1,
+            "unflagged_generated_edits": 11,
+            "useful_locations": 0
+          }
+        }
+      },
+      "held_location_geometry": {
+        "admitted": 0,
+        "reachable": 0,
+        "strongest_before_point": 0
+      }
+    }
+  },
+  "schema": "chipmunk.audio-edge-window-grouped/1",
+  "serving_admitted": false
+}

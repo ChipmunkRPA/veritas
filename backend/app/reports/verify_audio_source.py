@@ -30,6 +30,8 @@ def _clips(audio: dict, alignment: dict) -> Iterator[tuple[str, dict, list[dict]
         yield from _window_clips(event, event["source_timestamp_ranges"])
     for window in (audio.get("sound_events") or {}).get("windows", []):
         yield f"{window['id']} sound clip", window, window["source_timestamp_ranges"], window["artifacts"]["selected_clip"]
+    if (review := audio.get("short_voice_review")) and review["status"] == "flagged":
+        yield "Short speech-window clip", review["interval"], review["source_timestamp_ranges"], review["artifacts"]["selected_clip"]
     for name in ("repetition_context", "similarity_context"):
         for pair in (audio.get(name) or {}).get("pairs", []):
             for side in ("first", "second"):
@@ -64,6 +66,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         raise ValueError("Decoded audio stream or source timeline differs from its commitment")
     if "audio_stream_indices" in source and source["audio_stream_indices"] != decoded.mapping.get("audio_stream_indices"):
         raise ValueError("Audio track coverage differs from the original container")
+    if "source_codec" in source and source["source_codec"] != decoded.mapping.get("source_codec"):
+        raise ValueError("Audio codec scope differs from the original container")
     if audio["coverage"]["decode_limit_reached"] != (len(decoded.pcm) >= decoded.mapping["limit_samples"]):
         raise ValueError("Decoded audio duration disagrees with the recorded coverage limit")
 
@@ -109,6 +113,14 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         verify(similarity, pcm=decoded.pcm, mapping=decoded.mapping, source=source,
                read_asset=lambda sha: archive.read(paths[sha]), repetition=audio.get("repetition_context"))
         replay_detail += " Recomputed the bounded waveform similarity result."
+    if (review := audio.get("short_voice_review")) and review["status"] == "flagged":
+        from app.evidence.audio_packets import _chart
+
+        selected = (review["interval"]["start_sample"], review["interval"]["end_sample"])
+        waveform = _chart(decoded.pcm, [], start=0, end=len(decoded.pcm), selected=selected, scores=False)
+        if hashlib.sha256(waveform).hexdigest() != review["artifacts"]["waveform"]["sha256"]:
+            raise ValueError("Short speech-window waveform differs from the recorded samples")
+        replay_detail += " Recomputed the marked short speech-window waveform."
     interval_label = "interval" if intervals == 1 else "intervals"
     asset_label = "asset" if len(covered) == 1 else "assets"
     return (f"Original SHA-256, {len(decoded.pcm):,} decoded mono samples and source timeline matched. "

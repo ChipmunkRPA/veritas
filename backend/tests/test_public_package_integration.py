@@ -128,6 +128,7 @@ def multimedia_package(request, tmp_path, monkeypatch):
     embedded = request.param == "image_embedded_pair"
     kind = "document" if hybrid or scanned or agreement else "image" if translated or geometric or embedded else request.param
     if kind == "image":
+        monkeypatch.setattr(settings, "image_embedded_pair_review", embedded)
         fixture = request.getfixturevalue("packet_fixture")
         if embedded:
             db, store, analysis, result, _ = embedded_pair_result(fixture, monkeypatch)

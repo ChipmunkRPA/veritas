@@ -250,6 +250,13 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
             from app.evidence.sound_event_binding import validate as validate_sound_events
             validate_sound_events(sound, part['source'])
             groups.extend(window.get('artifacts') or {} for window in sound['windows'])
+        if 'short_voice_review' in part:
+            from app.evidence.audio_short_review_binding import validate as validate_short_voice_review
+
+            _require(analysis['kind'] == 'audio' and part is evidence, 'Short speech-window review is outside standalone audio')
+            review = part['short_voice_review']
+            validate_short_voice_review(review, part['source'])
+            groups.append(review['artifacts'])
         if 'stereo_listening' in part:
             from app.evidence.audio_binding import _timeline_ranges
             from app.evidence.stereo_binding import validate as validate_stereo

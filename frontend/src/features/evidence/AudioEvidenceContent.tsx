@@ -30,6 +30,7 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
   const rate = set.source.sample_rate
   const tracks = set.source.audio_stream_indices
   const clock = set.coverage?.source_clock_context
+  const shortReview = standalone ? set.short_voice_review : undefined
   const intervals = standalone && set.packets.length === 0 ? [...new Map(set.coverage?.windows?.map((window) =>
     [`${window.start_sample}:${window.end_sample}`, window] as const)).values()]
     .sort((a, b) => a.start_sample - b.start_sample || a.end_sample - b.end_sample) : []
@@ -79,9 +80,35 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
     <AudioBackgroundContext set={set} token={token} mediaReady={mediaReady} pauseAudio={pauseAudio} />
     <AudioStereoContext set={set} token={token} mediaReady={mediaReady} videoOriginS={videoOriginS} pauseAudio={pauseAudio} />
     <AudioRepetitionContext set={set} token={token} mediaReady={mediaReady} videoOriginS={videoOriginS} />
+    {shortReview && <section id="media-evidence-short-voice-review" aria-label={shortReview.title}
+      className="mt-5 rounded-md border border-border p-4 scroll-mt-20"
+      onPlayCapture={(event) => { if (event.target instanceof HTMLAudioElement) pauseAudio(event.target) }}>
+      <h3 className="m-0 text-body font-medium">{shortReview.title}</h3>
+      <p className="mt-2 mb-0 text-small">{shortReview.reason}</p>
+      {shortReview.status === 'flagged' && shortReview.interval && shortReview.start_s != null && shortReview.end_s != null && <>
+        <p className="mt-2 mb-0 font-mono text-caption text-text-muted">
+          Analyzed input {seconds(shortReview.start_s)}–{seconds(shortReview.end_s)} · samples [{shortReview.interval.start_sample}, {shortReview.interval.end_sample})
+        </p>
+        <SourceTimestamps ranges={shortReview.source_timestamp_ranges} />
+        {shortReview.artifacts.waveform && <div className="mt-4">
+          <EvidencePicture set={set} artifact={shortReview.artifacts.waveform} token={token} ready={mediaReady} chart
+            alt="Waveform with the flagged two-second speech window marked" />
+        </div>}
+        {shortReview.artifacts.selected_clip && <div className="mt-4">
+          <EvidenceAudio set={set} artifact={shortReview.artifacts.selected_clip} token={token} ready={mediaReady}
+            alt="Flagged two-second speech window" />
+        </div>}
+      </>}
+      {rate && shortReview.checked_windows.length > 0 && <details className="mt-3 text-small text-text-muted">
+        <summary className="cursor-pointer font-medium">Checked two-second windows</summary>
+        <ul className="mt-2 mb-0 list-disc pl-4">{shortReview.checked_windows.map((window) =>
+          <li key={window.start_sample}>{seconds(window.start_sample / rate)}–{seconds(window.end_sample / rate)}</li>)}</ul>
+      </details>}
+      <p className="mt-3 mb-0 text-caption text-text-muted">{shortReview.limitation}</p>
+    </section>}
     {set.packets.length > 0 && <AudioInspectionTimeline set={set} token={token} mediaReady={mediaReady} selectedId={selectedId} onSelect={select} />}
     {set.coverage && rate ? <div id={standalone ? 'media-evidence-voice-coverage' : undefined} className="scroll-mt-14 mt-4 rounded-md border border-border p-4 text-small text-text-muted">
-      <p className="m-0">Voice checks cover {seconds(set.coverage.scored_samples / rate)} of the {seconds(set.coverage.decoded_samples / rate)} decoded input.
+      <p className="m-0">{shortReview ? 'Primary voice checks' : 'Voice checks'} cover {seconds(set.coverage.scored_samples / rate)} of the {seconds(set.coverage.decoded_samples / rate)} decoded input.
         {' '}{seconds(set.coverage.unscored_samples / rate)} of that input has no window score. Overlapping windows are counted once in this coverage.</p>
       <p className="mt-2 mb-0">{set.coverage.windows.length} scored windows. Responses apply to complete windows, normally four seconds; they do not identify individual words or exact voice-replacement boundaries.</p>
       {intervals.length > 0 && <details className="mt-3" open={hash === '#media-evidence-voice-coverage' || undefined}>

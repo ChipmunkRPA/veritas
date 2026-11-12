@@ -152,4 +152,6 @@ backend/.venv/bin/python -B -m scripts.audio_radar_long_confirmation score \
   "$confirmation" "$run_dir/result.json"
 backend/.venv/bin/python -B -m scripts.audio_radar_long_confirmation review \
   "$confirmation/result.json" "$run_dir/result.json"
+python3 -I -S backend/scripts/review_audio_radar_transfer.py "$source_dir" "$confirmation" \
+  --confirmation-prior "$run_dir/result.json"
 ```

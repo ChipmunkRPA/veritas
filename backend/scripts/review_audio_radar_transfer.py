@@ -68,7 +68,7 @@ def table(path):
     return rows
 
 
-def tar_prefix(path):
+def tar_prefix(path, *, member=MEMBER):
     """Read complete regular FLAC members from a deliberately truncated gzip stream."""
     with gzip.open(path, "rb") as stream:
         try:
@@ -83,7 +83,7 @@ def tar_prefix(path):
                 payload = stream.read((length + 511) // 512 * 512)
                 if len(payload) < length:
                     return
-                match = MEMBER.fullmatch(name)
+                match = member.fullmatch(name)
                 if match is not None and header[156:157] in {b"0", b"\0"}:
                     require(payload.startswith(b"fLaC"), "Publisher audio member is not FLAC")
                     yield match[1].decode(), payload[:length]
@@ -265,12 +265,81 @@ def replay(source, panel):
             "scored_pcm_and_decisions_verified": saved is not None, "decision_summary": summary}
 
 
+def replay_confirmation(source, panel, prior_path):
+    pins = {
+        "dev-prefix.gz": "6e85fce6e8ee74784769f0bd76f77c379af44a1dab9848d61fc791a9ada05266",
+        "dev-labels.txt": "33dbf6ef66df46c50716c419fab0c1c73edc160ca06996dbaf719bebe47204a3",
+        "dev-languages.txt": "f28f2ebcad8ce58f0042f3f1fd2fa0c385284a9ca008e776f2d9ac9ae4dccd72",
+    }
+    require(all(file_sha(source / name) == pin for name, pin in pins.items()), "Confirmation source hashes differ")
+    labels, languages = (table(source / name) for name in ("dev-labels.txt", "dev-languages.txt"))
+    require(len(labels) == len(languages) == 44_034 and labels.keys() == languages.keys(), "Confirmation metadata differs")
+    candidates, seen = {name: [] for name in ("bonafide", "spoof")}, set()
+    member = re.compile(rb"RADAR2026-dev/flac/(RADAR2026-DEV[0-9]{6})\.flac")
+    for identity, raw in tar_prefix(source / "dev-prefix.gz", member=member):
+        require(identity in labels and identity not in seen, "Unknown or repeated confirmation archive member")
+        seen.add(identity)
+        duration, label, *segments = labels[identity]
+        if languages[identity] == ["EN"] and 6 <= Decimal(duration) <= 14 and segments == [f"0.0000-{duration}-{label}"]:
+            candidates[label].append({"id": identity, "duration": duration, "label": label, "flac_sha256": digest(raw)})
+    ranked = []
+    for values in candidates.values():
+        ranked.extend(sorted(values, key=lambda row: digest(f"radar-long-confirmation/1/{row['id']}".encode()))[:20])
+    prior, result = read_json(prior_path), read_json(panel / "result.json")
+    intake, rows, frozen = result["intake"], result["rows"], result["freeze"]
+    require(len(ranked) == len(intake) == len(rows) == 40 and intake == read_json(panel / "intake.json")
+            and frozen == read_json(panel / "freeze.json") and frozen["source_files"] == pins
+            and frozen["prior_freeze"] == commitment(prior["freeze"]) and frozen["roster"] == commitment(intake)
+            and result["rows_sha256"] == commitment(rows), "Confirmation source commitments differ")
+    prior_pcm = {row["pcm_sha256"] for row in prior["rows"]}
+    summary, windows = {}, 0
+    for expected, row, saved in zip(ranked, intake, rows, strict=True):
+        require(all(row[key] == value for key, value in expected.items()) and all(saved[key] == value for key, value in row.items()),
+                "Confirmation rank or row differs")
+        path = panel / f"{row['id']}.flac"
+        require(file_sha(path) == row["flac_sha256"], "Confirmation FLAC bytes differ")
+        probe = subprocess.check_output(["ffprobe", "-v", "error", "-protocol_whitelist", "file", "-select_streams", "a",
+                                         "-show_entries", "stream=codec_name,bits_per_raw_sample,sample_rate,channels",
+                                         "-of", "json", str(path)], timeout=10)
+        require(json.loads(probe)["streams"] == [{"codec_name": "flac", "sample_rate": "16000", "channels": 1,
+                                                  "bits_per_raw_sample": "16"}], "Confirmation source profile differs")
+        pcm, clock = decode(path, 15 * RATE)
+        fingerprint = pcm_sha(pcm)
+        require(len(pcm) == row["samples"] and fingerprint == row["pcm_sha256"] and fingerprint not in prior_pcm
+                and abs(Decimal(row["duration"]) * RATE - len(pcm)) <= 3, "Confirmation PCM differs or overlaps")
+        prior_pcm.add(fingerprint)
+        cursor = 0
+        for _, pts, count in clock:
+            require(pts == cursor, "Confirmation clock has a gap")
+            cursor += count
+        intervals = native_ranges(len(pcm))
+        portions = saved["portions"]
+        require([item["interval"] for item in portions] == intervals, "Confirmation intervals differ")
+        windows += len(intervals)
+        for (start, end), portion in zip(intervals, portions, strict=True):
+            require(pcm_sha(pcm[start:end]) == portion["pcm_sha256"], "Confirmation interval samples differ")
+        local = [direction(item["response"], SPAN) for item in portions]
+        full = direction(saved["full"], len(pcm))
+        require(not saved["full"]["scope"] and full in {"inconclusive", "unassessed"}, "Long whole-file scope differs")
+        counts = summary.setdefault(row["label"], Counter(files=0, native_inconclusive=0, native_unassessed=0,
+                                                           two_assessed=0, one_ai=0, corroborated_ai=0))
+        counts.update({"files": 1, f"native_{full}": 1, "two_assessed": sum(value != "unassessed" for value in local) >= 2,
+                       "one_ai": "ai" in local, "corroborated_ai": local.count("ai") >= 2 and "original" not in local})
+    passes = summary["spoof"]["corroborated_ai"] >= 10 and summary["bonafide"]["corroborated_ai"] <= 2
+    require(result["summary"] == {"counts": summary, "passes": passes}, "Confirmation decision aggregate differs")
+    return {"complete_flac_members": len(seen), "native_flac_sources": len(intake), "exact_intervals": windows,
+            "decision_summary": result["summary"]}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("source", type=Path)
     parser.add_argument("panel", type=Path)
+    parser.add_argument("--confirmation-prior", type=Path, help="Review the separate DEV panel using the first result")
     args = parser.parse_args()
-    print(json.dumps(replay(args.source, args.panel), indent=2, sort_keys=True))
+    audit = (replay_confirmation(args.source, args.panel, args.confirmation_prior) if args.confirmation_prior
+             else replay(args.source, args.panel))
+    print(json.dumps(audit, indent=2, sort_keys=True))
 
 
 if __name__ == "__main__":

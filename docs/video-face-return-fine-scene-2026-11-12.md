@@ -26,9 +26,15 @@ The two remaining missed six-picture swaps came from the third group. The gate p
 
 The Full face stages completed 31 cases in 154.4 seconds. Independent replay reopened all 3,720 delivered pictures, reconstructed both newly authored files byte for byte, and verified 44 measured face inputs, 16 edge pictures and 12 selected source crops. It recalculated all 31 decisions. [Aggregate and native replay](evaluation-panels/video-face-return-fine-scene-2026-11-12.json)
 
+## Local app and exports
+
+Full video review uses this fallback on the measured upright 640 × 360 H.264 4:2:0 profile with exactly 120 native pictures at 25 fps. It uses the existing short-check time budget after the original checks have returned no range. When a finer boundary supplies an additional range, the report and JSON include the same source timestamps, original frames and before, during and after crops. The range carries zero weight in overall AI confidence.
+
+Eight isolated Full-worker analyses used the real face stages and simulated Stripe transport. The two held swaps reproduced the intervals above. The ordinary original and genuine cut gained no additional ranges, and the existing coarse alert on the cut stayed visible. Each unpaid checkout queued zero analyses. Repeat paid events queued one analysis per order. All 12 original frame and crop images matched native pixels in the authenticated exports. In Chrome, the ordinary results view loaded the first swap’s three original frames and crops with the same hashes, and each selector displayed its recorded frame. The signed-package verifier recomputed four finer boundaries from the submitted files and rejected altered source bytes and altered tile measurements. Archived signed packages from versions 12, 13 and 14 replayed against their original files. [App and export verification](evaluation-panels/video-face-return-fine-scene-app-2026-11-12.json)
+
 ## Reproduce
 
-Use the retained source archive and pinned prior development receipts. The trial runs the existing local Full video face stages in process with an in-memory detector receipt. The independent reviewer reads the exact submitted native pictures and checks selected face crops, timing and background support. No analysis checkout or persistent database is used.
+Use the retained source archive and pinned prior development receipts with the [study revision](https://github.com/ChipmunkRPA/veritas/commit/d878d06e93bd3222bfd67cc0c10bdcffbfa2421e). The trial runs the existing local Full video face stages in process with an in-memory detector receipt. The independent reviewer reads the exact submitted native pictures and checks selected face crops, timing and background support.
 
 ```sh
 export PYTHONPATH=backend PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1

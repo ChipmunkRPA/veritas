@@ -13,6 +13,7 @@ import numpy as np
 from app.detectors.image.faces import Face, iou
 from app.detectors.video.decode import FrameTable
 from app.evidence.face_return_binding import (
+    COARSE_TILE_MIN,
     DENSE_DIMENSIONS,
     DENSE_ENCODING,
     DENSE_FRAME_PROFILES,
@@ -28,7 +29,7 @@ ROLES = ("before", "during", "after")
 CORE_SIZES = (3, 4, 6)
 FLANK_SIZE = 4
 MINIMUM_FLANK = 3
-MINIMUM_TILE_COUNT = 8
+MINIMUM_TILE_COUNT = COARSE_TILE_MIN
 SCENE_CORRELATION_POINT = .55
 MAX_GAP = .26
 MINIMUM_FACE_IOU = .25
@@ -120,7 +121,8 @@ def distribution_margin(distances: np.ndarray, before: list[int], core: list[int
     return float(np.quantile(lower, .25) - max(reference))
 
 
-def highest(times: tuple[Fraction, ...], indices: tuple[int, ...], features: dict[int, Sample]) -> Range | None:
+def highest(times: tuple[Fraction, ...], indices: tuple[int, ...], features: dict[int, Sample], *,
+            compare_scenes=None) -> Range | None:
     """Keep the top guarded interval across all core sizes before applying the duration bound."""
     visible = {i: features[i] for i in indices if features[i].vector is not None and features[i].face is not None}
     if len(visible) < 9:
@@ -128,7 +130,10 @@ def highest(times: tuple[Fraction, ...], indices: tuple[int, ...], features: dic
     order = {i: k for k, i in enumerate(visible)}
     vectors = np.asarray([sample.vector for sample in visible.values()])
     distances = 1. - np.clip(vectors @ vectors.T, -1., 1.)
-    adjacent = {(a, b): scene_correlation(features[a], features[b]) for a, b in zip(indices, indices[1:])}
+    if compare_scenes is None:
+        def compare_scenes(a, b):
+            return scene_correlation(features[a], features[b])
+    adjacent = {(a, b): compare_scenes(a, b) for a, b in zip(indices, indices[1:])}
     best = None
     for size in CORE_SIZES:
         needed = max(3, math.ceil(size * .66))

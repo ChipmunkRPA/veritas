@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 from collections import defaultdict
 from contextlib import closing
 from pathlib import Path
@@ -14,11 +15,13 @@ import numpy as np
 from PIL import Image
 
 from app.core.canonical import canonical_hash
+from app.detectors.image.faces import Face
+from app.detectors.video import face_return, face_return_fine_scene
 from app.detectors.video.decode import DecodedFrame, FrameTable, decode_frames, probe_frames
 from app.detectors.video.frames import probe as probe_container
 from app.detectors.video.lipsync import source_mouth_patch
 from app.evidence.face_boundary_binding import validate_packet as validate_face_boundary
-from app.evidence.face_return_binding import DENSE_ENCODING
+from app.evidence.face_return_binding import DENSE_ENCODING, FINE_SCENE_METHOD
 from app.evidence.face_return_binding import validate_packet as validate_face_return
 from app.evidence.source_geometry import pixel_bounds
 from app.evidence.video_packet_versions import DENSE_FACE_VERSIONS
@@ -88,6 +91,37 @@ def _verify_aligned_face(rgb: np.ndarray, row: dict) -> None:
         raise ValueError("A recorded aligned face differs from the native source pixels")
 
 
+def _verify_scene_support(record, frames) -> int:
+    count = 0
+    rows = record["scene_frame_inputs"]
+    pairs = ((rows[0], rows[1]), (rows[2], rows[3]))
+    for pair, expected, correlation in zip(pairs, record["fine_scene_edges"], record["scene_correlations_hex"], strict=True):
+        samples, fine = [], []
+        for row in pair:
+            rgb = frames[row["frame_index"]]
+            box = row["face_box"]
+            face = None if box is None else Face(*box, 0.)
+            samples.append(face_return.Sample(face, None, face_return.scene(rgb, face)))
+            if expected is not None:
+                fine.append(face_return_fine_scene.frame(rgb, box))
+        value = face_return.scene_correlation(*samples)
+        if expected is not None:
+            if value is not None:
+                raise ValueError("Fine scene support replaced an available coarse background measurement")
+            coarse_tiles = int((samples[0].scene[1] & samples[1].scene[1]).sum())
+            value, support = face_return_fine_scene.edge(*fine, coarse_tiles)
+            if support is None or any(
+                (not math.isclose(float.fromhex(measurement), float.fromhex(expected[key]), abs_tol=1e-6, rel_tol=0)
+                 if key.endswith("_hex") else measurement != expected[key])
+                for key, measurement in support.items()
+            ):
+                raise ValueError("Fine scene background measurements differ from the original video")
+            count += 1
+        if value is None or not math.isclose(value, float.fromhex(correlation), abs_tol=1e-6, rel_tol=0):
+            raise ValueError("Scene boundary correlation differs from the original video")
+    return count
+
+
 def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     if bundle.get("schema") != SCHEMA or bundle.get("analysis", {}).get("kind") != "video":
         raise ValueError("Original-video verification requires a public video evidence package")
@@ -111,6 +145,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         raise ValueError("The decoded frame table differs from its commitment. Check the local FFmpeg version.")
 
     pictures, mouths, faces, scenes = defaultdict(list), defaultdict(list), defaultdict(list), defaultdict(list)
+    fine_records, fine_indices, fine_frames = [], set(), {}
     interpolated = set(table.interpolated)
     packets = [*evidence["packets"], *(evidence.get("av") or {}).get("packets", [])]
     for packet in packets:
@@ -127,8 +162,12 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             for row in (packet.get(key) or {}).get("frame_inputs", []):
                 if row not in faces[row["frame_index"]]:
                     faces[row["frame_index"]].append(row)
-        for row in (packet.get("face_return") or {}).get("scene_frame_inputs", []):
+        record = packet.get("face_return") or {}
+        for row in record.get("scene_frame_inputs", []):
             scenes[row["frame_index"]].append(row)
+        if record.get("method") == FINE_SCENE_METHOD:
+            fine_records.append(record)
+            fine_indices.update(row["frame_index"] for row in record["scene_frame_inputs"])
     indices = set(pictures) | set(mouths) | set(faces) | set(scenes)
     found = set()
     images = patches = alignments = 0
@@ -155,9 +194,13 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                 alignments += 1
             for row in scenes[index]:
                 _frame_anchor(frame, row["pts"], row["decoded_rgb_sha256"], "Scene boundary", rgb_sha)
+            if index in fine_indices:
+                fine_frames[index] = frame.rgb
     if found != indices:
         raise ValueError("The decoder did not return every referenced native frame")
     if _sha(original) != digest:
         raise ValueError("The supplied original changed during decoding")
+    fine_edges = sum(_verify_scene_support(record, fine_frames) for record in fine_records)
     return (f"Original SHA-256 and the source frame clock matched. Verified native frames ({len(found)}), "
-            f"original images or crops ({images}), mouth patches ({patches}), and aligned face inputs ({alignments}).")
+            f"original images or crops ({images}), mouth patches ({patches}), and aligned face inputs ({alignments})."
+            + (f" Recomputed fine background boundaries ({fine_edges})." if fine_edges else ""))

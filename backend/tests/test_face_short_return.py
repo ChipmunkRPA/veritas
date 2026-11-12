@@ -7,11 +7,13 @@ import numpy as np
 import pytest
 
 from app.detectors.image.faces import Face
-from app.detectors.video import face_return
+from app.detectors.video import face_return, face_return_fine_scene
 from app.detectors.video.adapters import face_appearance
 from app.detectors.video.adapters.face_sequence import SequenceInputs
 from app.detectors.video.decode import FrameTable
 from app.engine.detector import DetectorResult, UnitScore
+from app.evidence.face_return_binding import DENSE_METHOD, FINE_SCENE_METHOD
+from scripts import video_face_return_fine_scene as frozen_fine
 from scripts import video_face_return_transfer as trial
 
 
@@ -92,8 +94,6 @@ def test_dense_fallback_requires_measured_h264_profile_and_exact_native_ticks(fr
 
 @pytest.mark.parametrize("first_status", ["localized", "unassessed", "no_distinct_range"])
 def test_dense_fallback_respects_legacy_result_and_budget(monkeypatch, first_status):
-    from app.evidence.face_return_binding import DENSE_METHOD
-
     original = table_for(25)
     table = replace(original, width=640, height=360, coded_width=640, coded_height=360,
                     pts=original.pts[:120], pict_types=original.pict_types[:120])
@@ -114,6 +114,72 @@ def test_dense_fallback_respects_legacy_result_and_budget(monkeypatch, first_sta
     assert [method for method, _ in methods] == expected and len({stop for _, stop in methods}) == 1
     if first_status != "unassessed":
         assert details["face_return"]["method"] == expected[-1]
+
+
+@pytest.mark.parametrize("frame_count,first_reason,dense_reason,expected", [
+    (120, "insufficient_same_shot_context", None, [face_return.METHOD, FINE_SCENE_METHOD]),
+    (120, None, "insufficient_same_shot_context", [face_return.METHOD, DENSE_METHOD, FINE_SCENE_METHOD]),
+    (120, None, "multiple_faces", [face_return.METHOD, DENSE_METHOD]),
+    (120, "native_timestamp_unverified", None, [face_return.METHOD]),
+    (150, "insufficient_same_shot_context", None, [face_return.METHOD]),
+])
+def test_fine_scene_reuses_deadline_and_preserves_unavailable_native_inputs(
+    monkeypatch, frame_count, first_reason, dense_reason, expected,
+):
+    original = table_for(25)
+    table = replace(original, width=640, height=360, coded_width=640, coded_height=360,
+                    pts=original.pts[:frame_count], pict_types=original.pict_types[:frame_count])
+    inputs = SequenceInputs(table, None, (), (), ("h264", "yuv420p"))
+    methods = []
+
+    def run_pass(details, inputs, yunet, recognizer, deadline, incumbent, planned, coverage, method, stop):
+        methods.append((method, stop))
+        if method == FINE_SCENE_METHOD:
+            coverage.update(status="localized", reason=None)
+            details["face_return"] = {"method": method}
+            return
+        reason = first_reason if method == face_return.METHOD else dense_reason
+        coverage.update(status="unassessed" if reason else "no_distinct_range", reason=reason)
+
+    monkeypatch.setattr(face_appearance.settings, "face_min_size", 48)
+    monkeypatch.setattr(face_appearance, "_return_pass", run_pass)
+    details = {}
+    face_appearance._inspect_return(details, inputs, None, None, None, None)
+    assert [method for method, _ in methods] == expected
+    assert len({stop for _, stop in methods}) == 1
+    if FINE_SCENE_METHOD in expected:
+        assert details["face_return"]["method"] == FINE_SCENE_METHOD
+        assert details["face_return_check"]["status"] == "localized"
+        assert details["face_return_check"]["reason"] is None
+    else:
+        assert "face_return" not in details
+
+
+@pytest.mark.parametrize("control", ["same", "brightened", "cut", "flat"])
+def test_fine_background_reproduces_frozen_measurement(control):
+    rng = np.random.default_rng(82)
+    first = rng.integers(48, 192, (360, 640, 3), dtype=np.uint8)
+    second = {
+        "same": first.copy(), "brightened": first + 20, "cut": np.flip(first, axis=1),
+        "flat": np.full_like(first, 90),
+    }[control]
+    face = Face(216, 92, 200, 176, .99)
+    pair = [(first, face), (second, None)]
+    prior = [frozen_fine.fine_frame(pixels, box) for pixels, box in pair]
+    current = [face_return_fine_scene.frame(pixels, None if box is None else box.box()) for pixels, box in pair]
+    assert all(np.array_equal(a, b) for old, new in zip(prior, current) for a, b in zip(old, new))
+    expected = frozen_fine.fine_edge(*prior)
+    value, proof = face_return_fine_scene.edge(*current, 7)
+    assert expected["passes"] == (control == "same")
+    if expected["passes"]:
+        assert value == expected["median"]
+        assert proof == {
+            "coarse_tiles": 7, "fine_tiles": expected["count"],
+            "qualified_quadrants": sorted(expected["qualified_quadrants"]), "sectors": expected["sectors"],
+            "luma_p90_hex": expected["luma_p90"].hex(), "chroma_p90_hex": expected["chroma_p90"].hex(),
+        }
+    else:
+        assert (value, proof) == (None, None)
 
 
 def test_optional_review_is_applicable_without_coarse_inputs(monkeypatch):

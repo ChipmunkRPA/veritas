@@ -1,0 +1,143 @@
+{
+  "archived": [
+    {
+      "sha256": "54043dc77c78d31ec18ac045eef2a1d485d93bb70307d9422fbf6ca8e94f9c71",
+      "signed_original_replay": true,
+      "verified_with_retained_signing_key": true,
+      "version": "video-evidence-12"
+    },
+    {
+      "sha256": "d8d07c534b774e1d4c6b383d2abe84a7e290c068b4c907ad9c73a02be1d9b3c4",
+      "signed_original_replay": true,
+      "verified_with_retained_signing_key": true,
+      "version": "video-evidence-13"
+    },
+    {
+      "sha256": "eab450ff3e625ec0679a528e772c0edd0a30b1b47a273fa075463548eb95ef07",
+      "signed_original_replay": true,
+      "verified_with_retained_signing_key": true,
+      "version": "video-evidence-14"
+    }
+  ],
+  "browser": {
+    "browser_errors": 0,
+    "exact_asset_bytes": 6,
+    "plain_view": true,
+    "selected_native_frames": [
+      52,
+      56,
+      60
+    ]
+  },
+  "cases": [
+    {
+      "case": "held-swap-1",
+      "decision_and_coarse_preserved": true,
+      "fine_scene_range": true,
+      "payment_gate_verified": true,
+      "previous_coarse_range": false,
+      "proof": {
+        "altered_background_rejected": true,
+        "altered_source_rejected": true,
+        "cli_original_replay": true,
+        "interval_frames": [
+          54,
+          60
+        ],
+        "interval_source_seconds": [
+          2.16,
+          2.4
+        ],
+        "original_frame_indices": {
+          "after": 60,
+          "before": 52,
+          "during": 56
+        },
+        "recomputed_boundaries": 2,
+        "signed_original_replay_verified": true,
+        "source_frame_crop_images_verified": 6
+      },
+      "role": "swap",
+      "truth_frames": [
+        54,
+        60
+      ]
+    },
+    {
+      "case": "held-swap-2",
+      "decision_and_coarse_preserved": true,
+      "fine_scene_range": true,
+      "payment_gate_verified": true,
+      "previous_coarse_range": false,
+      "proof": {
+        "altered_background_rejected": true,
+        "altered_source_rejected": true,
+        "cli_original_replay": true,
+        "interval_frames": [
+          68,
+          74
+        ],
+        "interval_source_seconds": [
+          2.72,
+          2.96
+        ],
+        "original_frame_indices": {
+          "after": 74,
+          "before": 66,
+          "during": 70
+        },
+        "recomputed_boundaries": 2,
+        "signed_original_replay_verified": true,
+        "source_frame_crop_images_verified": 6
+      },
+      "role": "swap",
+      "truth_frames": [
+        67,
+        73
+      ]
+    },
+    {
+      "case": "ordinary-original",
+      "decision_and_coarse_preserved": true,
+      "fine_scene_range": false,
+      "payment_gate_verified": true,
+      "previous_coarse_range": false,
+      "role": "ordinary",
+      "truth_frames": null
+    },
+    {
+      "case": "genuine-cross-recording-cut",
+      "decision_and_coarse_preserved": true,
+      "fine_scene_range": false,
+      "payment_gate_verified": true,
+      "previous_coarse_range": true,
+      "role": "cut",
+      "truth_frames": null
+    }
+  ],
+  "evidence_version": "video-evidence-15",
+  "included_in_overall_confidence": false,
+  "offline_test_stripe": true,
+  "payments": 8,
+  "private_app_receipt_sha256": "ac0724974b472d8ef64a85f5583b75bb8965cf88f828354fb8d1ebb832b0cf57",
+  "queue": {
+    "jobs_per_paid_order_with_repeated_event": 1,
+    "real_charges": 0,
+    "unpaid_jobs_per_order": 0
+  },
+  "runtime_s": 65.77,
+  "schema": "chipmunk.video-fine-scene-app-acceptance/1",
+  "scope": {
+    "chroma": "4:2:0",
+    "codec": "H.264",
+    "fps": 25,
+    "frame_dimensions": [
+      640,
+      360
+    ],
+    "native_pictures": 120,
+    "worker_profile": "Full video face checks"
+  },
+  "study_receipt_sha256": "6d956377b47fe5a996b2d585752f35a83de276358b1e132c14f0d56f5cb28eb1",
+  "study_revision": "d878d06e93bd3222bfd67cc0c10bdcffbfa2421e"
+}

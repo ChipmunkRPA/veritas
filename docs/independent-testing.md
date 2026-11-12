@@ -29,6 +29,9 @@ for the PNG and JPEG localization and ordinary-control results.
 The [earlier-image orientation comparison](image-reference-orientation-transfer-2026-11-12.md)
 reconstructs right-angle rotations and reflections. Its Pillow-only reader
 checks the original sources, native crops, and submitted difference mask.
+The [feathered-edit crop study](image-crop-layout-transfer-2026-11-12.md)
+offers a standard-library review of the result ledger and a native replay that
+separates region size limits from score and layout errors.
 
 The [earlier-video comparison](video-reference-comparison-2026-11-11.md#replay-without-the-app)
 re-decodes two supplied clips and checks the JSON, native picture timestamps,
@@ -36,6 +39,11 @@ before/during/after previews, and exact soundtrack excerpts. On supported
 pairs it also replays the short local picture range and its native crops.
 An additional Python and FFmpeg command independently checks the exported local
 interval and all six native crops without installing the app or model weights.
+
+The [brief face-change study](video-face-return-fine-scene-2026-11-12.md)
+measures whether additional background support recovers an interval around a
+face change. Its reader checks the exact boundaries and original face crops
+and reports separate outcomes for authentic scene cuts.
 
 The [earlier-audio comparison](audio-reference-comparison-2026-11-11.md#replay-without-the-app)
 replays changed sample ranges, difference waveforms, and playable excerpts
@@ -46,6 +54,9 @@ checks whether both detectors responded to the same source ranges and reproduces
 the agreement and false-flag counts on the retained publisher panels.
 The [editorial transfer](writing-agreement-ordinary-edit-2026-11-11.md#replay)
 adds dated before-and-after revisions and separate scientific publisher controls.
+The [email reply layout replay](writing-reply-paragraph-transfer-2026-11-12.md#replay)
+reopens the raw MIME part, verifies the measured text against native body
+positions, and records when reformatting changes sentence segmentation.
 
 The [audio supplement example](#review-an-audio-supplement-by-acoustic-condition)
 uses authored scores to show how an acoustic routing error can add a genuine
@@ -63,6 +74,9 @@ target-speech leakage separately for centered and displaced recordings.
 The [short edits in longer voice recordings](audio-overlap-window-transfer-2026-11-12.md)
 replays four window rules on exact six-second waveforms, with known edit times
 and matched loud competing speech.
+The [long-room voice confirmation](audio-spectra-long-room-holdout-2026-11-12.md)
+checks native waveform bindings, the exact shared and exclusive window samples,
+and held performance at fixed and equal false-alarm counts.
 The [controlled room-speech attenuation study](audio-room-reference-transfer-2026-11-12.md)
 reconstructs each changed waveform independently and checks whether improved
 foreground reconstruction recovers short synthetic inserts.

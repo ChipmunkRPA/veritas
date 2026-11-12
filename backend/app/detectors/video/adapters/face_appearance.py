@@ -11,13 +11,13 @@ from app.core.config import settings
 from app.detectors.image.adapters.common import revisions
 from app.detectors.image.faces import detect_faces
 from app.detectors.video import face_appearance as method
-from app.detectors.video import face_boundary, face_return
+from app.detectors.video import face_boundary, face_return, face_return_fine_scene
 from app.detectors.video.adapters.common import CPU_ONLY, FULL_DEEP, video_spec
 from app.detectors.video.adapters.face_sequence import FAMILY, FaceSequenceReviewDetector, SequenceInputs
 from app.detectors.video.decode import DecodeError
 from app.engine.detector import ActivationUse, Applicability, DetectorResult, InputUnit, UnitScore
 from app.evidence.face_intervals import bind_tracks
-from app.evidence.face_return_binding import DENSE_FRAME_PROFILES
+from app.evidence.face_return_binding import DENSE_FRAME_PROFILES, FINE_SCENE_FRAME_COUNT, FINE_SCENE_METHOD
 
 DETECTOR = "vid.review.face_appearance"
 BOUNDARY_BUDGET_S = 8.0
@@ -132,17 +132,30 @@ def _inspect_return(details, inputs, yunet, recognizer, deadline, incumbent):
     budget = RETURN_BUDGET_S if remaining is None else min(RETURN_BUDGET_S, remaining - COARSE_RESULT_RESERVE_S)
     stop = time.monotonic() + budget
     _return_pass(details, inputs, yunet, recognizer, deadline, incumbent, planned, coverage, face_return.METHOD, stop)
-    if coverage["status"] != "no_distinct_range" or time.monotonic() >= stop:
+    if time.monotonic() >= stop:
         return
     dense = face_return.dense_schedule(table, inputs.encoding)
     if dense is None:
         return
-    dense_coverage = {"measured_face_frames": 0}
-    coverage["dense_fallback"] = dense_coverage
-    _return_pass(details, inputs, yunet, recognizer, deadline, incumbent, dense, dense_coverage,
-                 DENSE_FRAME_PROFILES[len(table)], stop)
-    if dense_coverage["status"] == "localized":
-        coverage["status"] = "localized"
+    dense_coverage = {}
+    if coverage["status"] == "no_distinct_range":
+        dense_coverage["measured_face_frames"] = 0
+        coverage["dense_fallback"] = dense_coverage
+        _return_pass(details, inputs, yunet, recognizer, deadline, incumbent, dense, dense_coverage,
+                     DENSE_FRAME_PROFILES[len(table)], stop)
+        if dense_coverage["status"] == "localized":
+            coverage["status"] = "localized"
+            return
+    eligible = coverage["status"] == "no_distinct_range" or coverage.get("reason") == "insufficient_same_shot_context"
+    if (len(table) != FINE_SCENE_FRAME_COUNT or not eligible or time.monotonic() >= stop
+            or dense_coverage.get("reason") not in (None, "insufficient_same_shot_context")):
+        return
+    fine_coverage = {"measured_face_frames": 0}
+    coverage["fine_scene_fallback"] = fine_coverage
+    _return_pass(details, inputs, yunet, recognizer, deadline, incumbent, dense, fine_coverage,
+                 FINE_SCENE_METHOD, stop)
+    if fine_coverage["status"] == "localized":
+        coverage.update(status="localized", reason=None)
 
 
 def _return_pass(details, inputs, yunet, recognizer, deadline, incumbent, planned, coverage, record_method, stop):
@@ -153,6 +166,8 @@ def _return_pass(details, inputs, yunet, recognizer, deadline, incumbent, planne
     if budget <= 0:
         return
     features, face_inputs, scene_inputs = {}, {}, {}
+    fine = record_method == FINE_SCENE_METHOD
+    fine_frames, fine_edges = {}, {}
     try:
         with closing(inputs.store.iter_many(scheduled, timeout_s=budget)) as frames:
             for index, rgb in frames:
@@ -178,6 +193,10 @@ def _return_pass(details, inputs, yunet, recognizer, deadline, incumbent, planne
                 scene_inputs[index] = {"frame_index": index, "pts": table.pts[index], "decoded_rgb_sha256":
                     face_inputs[index]["decoded_rgb_sha256"] if observed is not None else hashlib.sha256(rgb.tobytes()).hexdigest()}
                 features[index] = face_return.Sample(face, vector, face_return.scene(rgb, face))
+                if fine:
+                    box = face.box() if face is not None else None
+                    scene_inputs[index]["face_box"] = list(box) if box is not None else None
+                    fine_frames[index] = face_return_fine_scene.frame(rgb, box)
     except (DecodeError, cv2.error, ValueError):
         coverage["reason"] = "native_measurement_unavailable"
         return
@@ -186,7 +205,19 @@ def _return_pass(details, inputs, yunet, recognizer, deadline, incumbent, planne
         return
     if time.monotonic() >= stop:
         return
-    candidate = face_return.highest(times, scheduled, features)
+    def compare_scenes(left, right):
+        first, second = features[left], features[right]
+        value = face_return.scene_correlation(first, second)
+        if value is not None:
+            return value
+        coarse_tiles = int((first.scene[1] & second.scene[1]).sum())
+        value, support = face_return_fine_scene.edge(fine_frames[left], fine_frames[right], coarse_tiles)
+        if support is not None:
+            fine_edges[left, right] = support
+        return value
+
+    candidate = (face_return.highest(times, scheduled, features, compare_scenes=compare_scenes)
+                 if fine else face_return.highest(times, scheduled, features))
     if time.monotonic() >= stop:
         return
     if candidate is None:
@@ -195,6 +226,10 @@ def _return_pass(details, inputs, yunet, recognizer, deadline, incumbent, planne
     coverage.update(status="no_distinct_range", reason=None)
     if not face_return.distinct(candidate, table, incumbent):
         return
+    if fine:
+        selected = [fine_edges.get(pair) for pair in (candidate.scene_frames[:2], candidate.scene_frames[2:])]
+        if not any(selected):
+            return
     coverage["status"] = "localized"
     start, end = candidate.start, candidate.end
     details["face_return"] = {
@@ -211,6 +246,8 @@ def _return_pass(details, inputs, yunet, recognizer, deadline, incumbent, planne
     }
     if record_method != face_return.METHOD:
         details["face_return"]["source_encoding"] = list(inputs.encoding)
+    if fine:
+        details["face_return"]["fine_scene_edges"] = selected
 
 
 def _with_return(result, inputs, yunet, recognizer, deadline):
@@ -248,7 +285,9 @@ class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
 
     def activation_plan(self, ctx):
         return_inputs = (" Up to 64 additional native inputs for the distinct return check, with up to 75 fallback inputs "
-                         "on the tested H.264 profile." if settings.video_face_short_return_review else "")
+                         "on tested H.264 profiles and up to 60 further inputs on the tested 120-frame profile when "
+                         "finer background detail is needed, within the same budget."
+                         if settings.video_face_short_return_review else "")
         return (*super().activation_plan(ctx), ActivationUse(self.APPEARANCE, 1, '112 px aligned face',
             'One native aligned face at a time; 128 float32 appearance values per retained frame',
             (f'At most 192 coarse face inputs and {face_boundary.MAX_FRAMES} optional timing inputs.{return_inputs}',

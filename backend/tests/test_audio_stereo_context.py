@@ -19,10 +19,11 @@ from app.core.canonical import canonical_json
 from app.core.config import settings
 from app.detectors.audio import decode as audio_decode
 from app.detectors.audio import stereo
-from app.detectors.audio.decode import SAMPLE_RATE, decode_audio, source_ranges, wav_bytes
+from app.detectors.audio.decode import SAMPLE_RATE, decode_audio, read_wav, source_ranges, wav_bytes
 from app.engine.stages import audio
-from app.evidence import audio_packets, stereo_binding
+from app.evidence import audio_packets, service, stereo_binding, stereo_listening
 from app.evidence.audio_binding import stereo_attenuation_overlaps, unscored_voice_intervals
+from app.evidence.stereo_listening_binding import select_windows
 from app.reports import engine, multimedia_evidence, package, signing, verify, verify_audio_source
 from app.reports import snapshot as report_snapshot
 from app.reports.specimens import specimen
@@ -181,6 +182,16 @@ def test_stereo_windows_use_real_source_pts_and_stop_after_30_seconds(tmp_path):
     assert windows[-1]["source_timestamp_ranges"][-1]["source_end_pts"] == 32 * SAMPLE_RATE
 
 
+def test_listening_selects_at_most_three_windows_and_preserves_chronological_order():
+    stereo = {"schema": stereo_binding.SCHEMA, "windows": [
+        {"status": "strong_imbalance", "level_gap_db": gap,
+         "downmix": {"strong_attenuation": strong, "attenuation_db": loss}}
+        for gap, strong, loss in [(14, False, 4), (14, True, 13), (20, False, 5),
+                                  (17, False, 2), (12, True, None)]
+    ]}
+    assert select_windows(stereo) == [1, 2, 4]
+
+
 def test_actual_audio_stage_packet_api_export_and_report_use_same_windows(tmp_path, monkeypatch):
     path = tmp_path / "source.wav"
     sha = _source(path, seconds=2, mode="first_left_then_balanced", rate=SAMPLE_RATE)
@@ -206,6 +217,18 @@ def test_actual_audio_stage_packet_api_export_and_report_use_same_windows(tmp_pa
         mapping = json.loads(store.read_bytes(evidence_input["mapping_sha256"]))
         assert packet["stereo_context"] == mapping["stereo_context"]
         assert "model" not in json.dumps(packet["stereo_context"]).lower()
+        listening = packet["stereo_listening"]
+        assert listening["affects_overall_confidence"] is False
+        assert [row["stereo_window_index"] for row in listening["windows"]] == [0, 1]
+        assets = listening["windows"][1]["artifacts"]
+        left, right, mono = (read_wav(store.read_bytes(assets[name]["sha256"])) for name in ("left", "right", "mono"))
+        assert np.any(left) and np.array_equal(left, -right) and not np.any(mono)
+        assert np.array_equal(mono, context.state["audio"].pcm[SAMPLE_RATE:2*SAMPLE_RATE])
+        assert {asset["sha256"] for asset in assets.values()} <= service.asset_refs(packet).keys()
+        assert mapping["stereo_listening_pcm_sha256"] not in service.asset_refs(packet)
+        decoded = decode_audio(path, source_sha256=sha, inspect_stereo=True)
+        raw = stereo_listening.selected_pcm(packet["stereo_context"], decoded.stereo_pcm)
+        assert stereo_listening.verify_payloads(listening, packet["stereo_context"], decoded.pcm, raw, waveform=True)
         (overlap,) = packet["coverage"]["stereo_attenuation_overlaps"]
         assert overlap == {
             "start_sample": 16000, "end_sample": 32000, "unscored_interval_index": 0, "stereo_window_index": 1,
@@ -224,6 +247,7 @@ def test_actual_audio_stage_packet_api_export_and_report_use_same_windows(tmp_pa
         monkeypatch.setattr(v2_evidence_packets, "default_store", lambda: store)
         api = v2_evidence_packets.image_evidence(analysis.id)
         assert json.loads(api.body)["stereo_context"] == packet["stereo_context"]
+        assert json.loads(api.body)["stereo_listening"] == listening
 
         snapshot = snapshot.model_copy(update={"result": result, "evidence": packet,
             "media": snapshot.media.model_copy(update={"sha256": sha, "size_bytes": stored.size_bytes}),
@@ -237,6 +261,7 @@ def test_actual_audio_stage_packet_api_export_and_report_use_same_windows(tmp_pa
         assert "/stereo_context" in words and "[16000, 32000)" in words
         assert "Strong level drop in the analyzed mono mix." in words
         assert "Mono is digitally silent" in words
+        assert "/stereo_listening/windows/1" in words
         assert "Unscored voice during a mono level drop" in words
         assert "Overlap 1.000–2.000 s of analyzed audio" in words and "/coverage/stereo_attenuation_overlaps" in words
         assert [w["downmix"]["strong_attenuation"] for w in packet["stereo_context"]["windows"]] == [False, True]
@@ -272,6 +297,12 @@ def test_actual_audio_stage_packet_api_export_and_report_use_same_windows(tmp_pa
         checked = verify.verify_package(built.path, public_key_pem=key.public_pem(), source_audio=path)
         assert checked.ok and "32,000 decoded mono samples" in checked.checks[-1].detail, checked.as_dict()
         assert "Recomputed stereo channel and mono-downmix evidence for 2 windows" in checked.checks[-1].detail
+        forged_listening = deepcopy(packet)
+        clips = forged_listening["stereo_listening"]["windows"][1]["artifacts"]
+        clips["left"], clips["right"] = clips["right"], clips["left"]
+        forged_listening["sha256"] = audio_packets.packet_hash(forged_listening)
+        with pytest.raises(ObjectIntegrityError, match="differs from its committed channel samples"):
+            multimedia_evidence.view(snapshot.model_copy(update={"evidence": forged_listening}))
         wrong_source = tmp_path / "different.wav"
         _source(wrong_source, seconds=2, mode="in_phase", rate=SAMPLE_RATE)
         checked = verify.verify_package(built.path, public_key_pem=key.public_pem(), source_audio=wrong_source)

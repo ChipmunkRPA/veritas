@@ -1,0 +1,333 @@
+{
+  "cases": 40,
+  "eligible_occurrences": 269,
+  "freeze_sha256": "765a9bf6e3d63fd3a6a4d0546320f1e1db0cf46c90adda8c37bc226cc7ebeed6",
+  "independent_audit": {
+    "scope_arm_counts": 32,
+    "scoped_cases": 40,
+    "verified_distinct_inputs": 148,
+    "verified_eligible_foci": 269,
+    "verified_native_windows": 276
+  },
+  "method": {
+    "either_agreement": "Current positive and either of the same-window or exact-focus second responses at least 0.5.",
+    "focus_agreement": "Current positive and second exact focus at least 0.5, if the focus is eligible.",
+    "inputs": "Use the exact center sentence alone when it contains at least 12 whitespace-delimited words. Retain the original native window, scope, score and first-six cap for current positives.",
+    "localization": "Report full-window non-whitespace character IoU of at least .30 and exact focus separately.",
+    "native_agreement": "Current positive and second native window at least 0.5.",
+    "scope": "Retrospective replay of all forum, OLMo and eLife files in the prior editorial agreement panel.",
+    "validation": "No fitting or retuning. For a new-source follow-up require retention of every current useful location, a reduction of at least two currently flagged human groups and at most one newly flagged human group relative to native agreement in either of the two control panels."
+  },
+  "native_window_occurrences": 276,
+  "outcomes": {
+    "all_human": {
+      "files": 30,
+      "outcomes": {
+        "current": {
+          "flagged_files": 13,
+          "flagged_groups": 6
+        },
+        "either_agreement": {
+          "flagged_files": 11,
+          "flagged_groups": 5
+        },
+        "focus_agreement": {
+          "flagged_files": 11,
+          "flagged_groups": 5
+        },
+        "native_agreement": {
+          "flagged_files": 7,
+          "flagged_groups": 3
+        }
+      }
+    },
+    "all_synthetic": {
+      "files": 10,
+      "outcomes": {
+        "current": {
+          "current_useful_lost": 0,
+          "exact_focus": 1,
+          "flagged_files": 4,
+          "flagged_groups": 2,
+          "unflagged": 6,
+          "useful": 2,
+          "wrong_location": 2
+        },
+        "either_agreement": {
+          "current_useful_lost": 1,
+          "exact_focus": 1,
+          "flagged_files": 1,
+          "flagged_groups": 1,
+          "unflagged": 9,
+          "useful": 1,
+          "wrong_location": 0
+        },
+        "focus_agreement": {
+          "current_useful_lost": 1,
+          "exact_focus": 1,
+          "flagged_files": 1,
+          "flagged_groups": 1,
+          "unflagged": 9,
+          "useful": 1,
+          "wrong_location": 0
+        },
+        "native_agreement": {
+          "current_useful_lost": 2,
+          "exact_focus": 0,
+          "flagged_files": 0,
+          "flagged_groups": 0,
+          "unflagged": 10,
+          "useful": 0,
+          "wrong_location": 0
+        }
+      }
+    },
+    "elife_human": {
+      "files": 14,
+      "outcomes": {
+        "current": {
+          "flagged_files": 11,
+          "flagged_groups": 5
+        },
+        "either_agreement": {
+          "flagged_files": 11,
+          "flagged_groups": 5
+        },
+        "focus_agreement": {
+          "flagged_files": 11,
+          "flagged_groups": 5
+        },
+        "native_agreement": {
+          "flagged_files": 7,
+          "flagged_groups": 3
+        }
+      }
+    },
+    "forum_before": {
+      "files": 8,
+      "outcomes": {
+        "current": {
+          "flagged_files": 1,
+          "flagged_groups": 1
+        },
+        "either_agreement": {
+          "flagged_files": 0,
+          "flagged_groups": 0
+        },
+        "focus_agreement": {
+          "flagged_files": 0,
+          "flagged_groups": 0
+        },
+        "native_agreement": {
+          "flagged_files": 0,
+          "flagged_groups": 0
+        }
+      }
+    },
+    "forum_edited": {
+      "files": 8,
+      "outcomes": {
+        "current": {
+          "flagged_files": 1,
+          "flagged_groups": 1
+        },
+        "either_agreement": {
+          "flagged_files": 0,
+          "flagged_groups": 0
+        },
+        "focus_agreement": {
+          "flagged_files": 0,
+          "flagged_groups": 0
+        },
+        "native_agreement": {
+          "flagged_files": 0,
+          "flagged_groups": 0
+        }
+      }
+    },
+    "forum_human": {
+      "files": 16,
+      "outcomes": {
+        "current": {
+          "flagged_files": 2,
+          "flagged_groups": 1
+        },
+        "either_agreement": {
+          "flagged_files": 0,
+          "flagged_groups": 0
+        },
+        "focus_agreement": {
+          "flagged_files": 0,
+          "flagged_groups": 0
+        },
+        "native_agreement": {
+          "flagged_files": 0,
+          "flagged_groups": 0
+        }
+      }
+    },
+    "granite": {
+      "files": 7,
+      "outcomes": {
+        "current": {
+          "current_useful_lost": 0,
+          "exact_focus": 1,
+          "flagged_files": 2,
+          "flagged_groups": 2,
+          "unflagged": 5,
+          "useful": 1,
+          "wrong_location": 1
+        },
+        "either_agreement": {
+          "current_useful_lost": 0,
+          "exact_focus": 1,
+          "flagged_files": 1,
+          "flagged_groups": 1,
+          "unflagged": 6,
+          "useful": 1,
+          "wrong_location": 0
+        },
+        "focus_agreement": {
+          "current_useful_lost": 0,
+          "exact_focus": 1,
+          "flagged_files": 1,
+          "flagged_groups": 1,
+          "unflagged": 6,
+          "useful": 1,
+          "wrong_location": 0
+        },
+        "native_agreement": {
+          "current_useful_lost": 1,
+          "exact_focus": 0,
+          "flagged_files": 0,
+          "flagged_groups": 0,
+          "unflagged": 7,
+          "useful": 0,
+          "wrong_location": 0
+        }
+      }
+    },
+    "olmo": {
+      "files": 3,
+      "outcomes": {
+        "current": {
+          "current_useful_lost": 0,
+          "exact_focus": 0,
+          "flagged_files": 2,
+          "flagged_groups": 2,
+          "unflagged": 1,
+          "useful": 1,
+          "wrong_location": 1
+        },
+        "either_agreement": {
+          "current_useful_lost": 1,
+          "exact_focus": 0,
+          "flagged_files": 0,
+          "flagged_groups": 0,
+          "unflagged": 3,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "focus_agreement": {
+          "current_useful_lost": 1,
+          "exact_focus": 0,
+          "flagged_files": 0,
+          "flagged_groups": 0,
+          "unflagged": 3,
+          "useful": 0,
+          "wrong_location": 0
+        },
+        "native_agreement": {
+          "current_useful_lost": 1,
+          "exact_focus": 0,
+          "flagged_files": 0,
+          "flagged_groups": 0,
+          "unflagged": 3,
+          "useful": 0,
+          "wrong_location": 0
+        }
+      }
+    }
+  },
+  "parent_public_sha256": "f72cfa1a4967900e7c7294632d847f4441822b874d75a248f0826b979a20c272",
+  "schema": "chipmunk.writing-agreement-focus-replay/1",
+  "scope_transitions": {
+    "current": {
+      "negative_to_negative": 209,
+      "negative_to_positive": 22,
+      "positive_to_negative": 22,
+      "positive_to_positive": 16
+    },
+    "second": {
+      "negative_to_negative": 100,
+      "negative_to_positive": 90,
+      "positive_to_negative": 1,
+      "positive_to_positive": 78
+    }
+  },
+  "score_receipts": {
+    "current": {
+      "forwards": 37,
+      "seconds": 10.946,
+      "sha256": "ca0d27fac715506e68a6dee53c958df7f3653a5204e1d431280c26f3c1137f6f"
+    },
+    "second": {
+      "forwards": 37,
+      "seconds": 47.922,
+      "sha256": "f5bd8d1113702fd1cc070b4f4529d618a5ed6ea0dfb66ab4e118a28a21c3e4bd"
+    }
+  },
+  "source_audit": {
+    "exact_windows": 92,
+    "publisher_controls": {
+      "exact_windows": 172,
+      "unique_inputs": 115,
+      "verified_files": 14,
+      "verified_scope_arms": 12
+    },
+    "source_versions_checked": 16,
+    "third_generator": {
+      "unique_inputs": 12,
+      "verified_attempts": 8,
+      "verified_files": 3
+    },
+    "unique_inputs": 77,
+    "verified_files": 23,
+    "verified_scope_arms": 15
+  },
+  "synthetic_target_diagnostic": {
+    "granite": {
+      "current": {
+        "cases": 7,
+        "focus_above_native": 6,
+        "focus_positive": 3,
+        "focus_unavailable": 0,
+        "native_positive": 1
+      },
+      "second": {
+        "cases": 7,
+        "focus_above_native": 7,
+        "focus_positive": 4,
+        "focus_unavailable": 0,
+        "native_positive": 0
+      }
+    },
+    "olmo": {
+      "current": {
+        "cases": 3,
+        "focus_above_native": 3,
+        "focus_positive": 1,
+        "focus_unavailable": 0,
+        "native_positive": 0
+      },
+      "second": {
+        "cases": 3,
+        "focus_above_native": 3,
+        "focus_positive": 2,
+        "focus_unavailable": 0,
+        "native_positive": 0
+      }
+    }
+  },
+  "unique_foci": 148
+}

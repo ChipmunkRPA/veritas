@@ -229,6 +229,17 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
             from app.evidence.sound_event_binding import validate as validate_sound_events
             validate_sound_events(sound, part['source'])
             groups.extend(window.get('artifacts') or {} for window in sound['windows'])
+        if 'stereo_listening' in part:
+            from app.evidence.audio_binding import _timeline_ranges
+            from app.evidence.stereo_binding import validate as validate_stereo
+            from app.evidence.stereo_listening_binding import validate as validate_listening
+
+            _require((analysis['kind'] == 'audio' and part is evidence) or part is evidence.get('audio'),
+                     'Stereo listening is outside the audio evidence')
+            stereo = part['stereo_context']
+            validate_stereo(stereo, part['source'], ranges=lambda a, b, src=part['source']: _timeline_ranges(src, a, b))
+            validate_listening(part['stereo_listening'], stereo)
+            groups.extend(window['artifacts'] for window in part['stereo_listening']['windows'])
         if (repeat := part.get('repetition_context')) is not None:
             from app.evidence.audio_repetition_binding import validate as validate_repetition
 

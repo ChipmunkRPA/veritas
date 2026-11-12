@@ -101,6 +101,8 @@ def asset_refs(document: dict[str, Any] | None) -> dict[str, dict[str, Any]]:
             if not isinstance(sound, dict) or not isinstance(sound.get("windows"), list):
                 raise ObjectIntegrityError("The evidence has invalid sound categories")
             groups.extend(window.get("artifacts") or {} for window in sound["windows"])
+        if listening := part.get("stereo_listening"):
+            groups.extend(window["artifacts"] for window in listening["windows"])
         for key in ("repetition_context", "similarity_context"):
             repetition = part.get(key)
             if repetition is not None:

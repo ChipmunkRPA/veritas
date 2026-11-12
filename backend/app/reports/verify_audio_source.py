@@ -78,6 +78,17 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             raise ValueError(f"{label} differs from the samples at its recorded source interval")
         covered.add(asset["sha256"])
         intervals += 1
+    if listening := audio.get("stereo_listening"):
+        from app.evidence.stereo_listening import selected_pcm, verify_payloads
+        from app.storage.objects import ObjectIntegrityError
+
+        if decoded.stereo_pcm is None:
+            raise ValueError("The original audio did not yield the aligned stereo channels")
+        try:
+            covered.update(verify_payloads(listening, stereo, decoded.pcm, selected_pcm(stereo, decoded.stereo_pcm)))
+        except ObjectIntegrityError as error:
+            raise ValueError(str(error)) from error
+        intervals += 3 * len(listening["windows"])
     expected = {entry["sha256"] for entry in bundle["artifacts"] if entry["media_type"] == "audio/wav"}
     if covered != expected:
         raise ValueError("The source comparison did not account for every WAV asset in the package")

@@ -144,6 +144,13 @@ def validate_content(document: dict[str, Any]) -> None:
             validate(document["stereo_context"], source)
         except (KeyError, TypeError, ValueError) as error:
             raise PacketIntegrityError("Invalid source-bound stereo channel context") from error
+    if "stereo_listening" in document:
+        from app.evidence.stereo_listening_binding import validate as validate_listening
+
+        try:
+            validate_listening(document["stereo_listening"], document.get("stereo_context"))
+        except ValueError as error:
+            raise PacketIntegrityError(str(error)) from error
 
 
 def _input(store: ObjectStore, analysis: Analysis, binding: dict[str, Any]) -> tuple[np.ndarray, dict[str, Any]]:
@@ -352,9 +359,19 @@ def build_content(db: Session, analysis: Analysis, store: ObjectStore, result: d
         lambda data, media_type, **metadata: _asset(db, store, analysis, set_id, data, media_type, **metadata), _chart)
     if sound_context is not None:
         document["sound_events"] = sound_context
-    if analysis.kind == "audio" and "stereo_context" in mapping:
+    if stereo_sha := record.get("stereo_context_sha256"):
+        document["stereo_context"] = json.loads(_verified(store, stereo_sha))
+        document["stereo_context_sha256"] = stereo_sha
+    elif analysis.kind == "audio" and "stereo_context" in mapping:
         document["stereo_context"] = mapping["stereo_context"]
+    if "stereo_context" in document:
         attach_stereo_attenuation_overlaps(document)
+    from app.evidence import stereo_listening
+
+    listening_digest = binding.get("stereo_listening_pcm_sha256") or mapping.get("stereo_listening_pcm_sha256")
+    if listening := stereo_listening.build(store, listening_digest, document.get("stereo_context"), pcm,
+            lambda data, media_type, **metadata: _asset(db, store, analysis, set_id, data, media_type, **metadata)):
+        document["stereo_listening"] = listening
     from app.evidence.audio_repetition import build as build_repetition
     from app.evidence.audio_similarity import build as build_similarity
 
@@ -388,6 +405,11 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
     mapping = json.loads(_verified(store, document["source"]["mapping_sha256"]))
     if document.get("stereo_context") != mapping.get("stereo_context"):
         raise PacketIntegrityError("Stereo context differs from the frozen audio input mapping")
+    listening_digest = mapping.get("stereo_listening_pcm_sha256")
+    if listening_digest is not None or "stereo_listening" in document:
+        from app.evidence import stereo_listening
+
+        stereo_listening.verify(store, document, listening_digest, read_wav(_verified(store, document["source"]["wav_sha256"])))
     return document
 
 

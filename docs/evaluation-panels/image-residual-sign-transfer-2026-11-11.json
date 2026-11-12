@@ -1,0 +1,512 @@
+{
+  "elapsed_s": 48.672,
+  "freeze_sha256": "f57bad3e312222d7375aa3236c41ded615266783df001c821fd213b93a9a03a3",
+  "frozen": {
+    "implementation_sha256": {
+      "backend/app/detectors/image/jpeg_dq.py": "3b176132b5c63ac062f2f53aa9d7dc2c766d4c92c1818825d23d40751bbd9f0e",
+      "backend/app/detectors/image/sharp_boundary.py": "04c120cd027e50bd107fd15778f66fe38c43d64439e090835dfad99727e41cbc",
+      "backend/scripts/image_background_patch_score.py": "cb854082628636833e2fd005e954d0bdb7c78362e58ee98632f1ba4153224d5a",
+      "backend/scripts/image_background_patch_transfer.py": "da6ba064bc850d7bbc59b605c29305251d317cfc186ccb3d652cf713080f9dfe",
+      "backend/scripts/image_bg_real_insertion_score.py": "b8a91de6e686b5037ea65297aac52961ea995d701ca8aacf362b8715f94e303d",
+      "backend/scripts/image_boundary_blend_transfer.py": "fc65a5e3f064d74a5cd6fa528d9115aee92cc8eb9e04cb6dee13398e03388aa0",
+      "backend/scripts/image_edge_spread_transfer.py": "f9d434f1dbd2d04b4292e512e562cae52f7dd049690b45f97ef424b2d971c08c",
+      "backend/scripts/image_flux_detector_comparison_v280.py": "2a423629be60a7ed31478d37dca5c3ce3b4a84031b95d178deddd12388f1327d",
+      "backend/scripts/image_local_resampling_transfer.py": "52af616c15f9bb7cd25e2c1aee0cdbc1ad3756494d5eef1bac4c3c97903f8c5d",
+      "backend/scripts/image_residual_color_transfer.py": "682fc80861ae3c80b7d80d5efb3edd3cb15635bbdf797c60b894ce4b23f8ece2",
+      "backend/scripts/image_residual_sign_transfer.py": "d7f68a53a1bd8c203e11dcc74461792fdca0c48569d3d21f18cf0b19f329c8fb"
+    },
+    "intake_sha256": {
+      "development": {
+        "attempts.jsonl": "59d8591da24d8886cca3ea071eefa5488aa3ac555ff5b21e0542dc267c47fb90",
+        "plan.json": "0d5cd6aadef8162c436c674e00ad835d91d3c7b5807daf0561cb8c58adf47aef",
+        "result.json": "6a8b09a8a4a8585f44faffd5ce18bba7c42a311934ce20bb3a70842aaef4d0b8"
+      },
+      "earlier": {
+        "attempts.jsonl": "3b8291b96634bca1920bddfd9239a53d69e143ea8efc74e565fd7406e749f9ce",
+        "plan.json": "2fc63a2d9f666ce2e593cb7c6b503120661b74a33dbf88f297e34d96ae3c3d7b",
+        "result.json": "fb0aafa7d109ca3e7fda3256fbd9fdf0e3b2afca265081092552b54cc8388731"
+      },
+      "later": {
+        "attempts.jsonl": "006a125678341700c243754a423c480b41bd86029a70f689ff1e7a467fc7fde7",
+        "plan.json": "a2176e567d71f2a80178adec7fb55e34007f6ad3114f9baf09837e233197fc34",
+        "result.json": "3d849ad48453c79002aa78d2d9cc8c7aeecc9f1979008060244c0bd01e065e86"
+      }
+    },
+    "method": {
+      "advance": {
+        "additional_feathered": 2,
+        "additional_ordinary_groups": 3,
+        "additional_ordinary_views": 4,
+        "arm": "two_scale",
+        "scope": "each held panel and delivery separately"
+      },
+      "arms": [
+        "fine_triplets",
+        "wide_triplets",
+        "two_scale"
+      ],
+      "baseline": "Existing PNG sharp-boundary check and aligned JPEG double-quantization region.",
+      "candidate_sizes": [
+        [
+          6,
+          6
+        ],
+        [
+          6,
+          9
+        ],
+        [
+          9,
+          6
+        ],
+        [
+          8,
+          8
+        ],
+        [
+          8,
+          12
+        ],
+        [
+          12,
+          8
+        ],
+        [
+          10,
+          10
+        ],
+        [
+          12,
+          12
+        ]
+      ],
+      "confidence_contribution": 0,
+      "fit_roles": [
+        "original",
+        "global_processing",
+        "local_processing",
+        "blurred",
+        "local_contrast",
+        "sharpened"
+      ],
+      "formats": [
+        "png",
+        "jpeg75"
+      ],
+      "held_roles": [
+        "edited",
+        "feathered_edit",
+        "original",
+        "local_processing",
+        "global_processing",
+        "blur",
+        "feathered_processing",
+        "local_contrast"
+      ],
+      "jpeg_support": "Use triplets whose complete residual footprints remain within one eight-pixel block along the sample axis.",
+      "native_cell": 16,
+      "point_rule": "Strictly above second highest of eight development control-source maxima or 0.002, whichever is greater.",
+      "region_score": "Third largest core-to-flank Hellinger distance minus median distance between flanks, floored at zero.",
+      "strata": "Orientation and local mean absolute residual above or below 4 gray levels.",
+      "strides": [
+        1,
+        2
+      ],
+      "support": {
+        "each_axis_required": true,
+        "minimum_absolute_residual": 1.0,
+        "minimum_stratum_count": 32
+      },
+      "useful": "At least 0.30 native changed-pixel IoU and 0.50 recall."
+    },
+    "previous_confirmation_sha256": {
+      "earlier": "dae5623b6eb947c98b3e97e5ab73a3735ee3cf392d4a902c038869d8259b146e",
+      "later": "be4fffd689162bc37c4691fc46128ca495d716e265d282a8ed3f449ac84473e0"
+    },
+    "runtime": {
+      "numpy": "2.2.6",
+      "opencv": "5.0.0",
+      "pillow": "12.3.0"
+    },
+    "schema": "chipmunk.image-residual-sign-transfer/1",
+    "source_group_counts": [
+      8,
+      12,
+      12
+    ]
+  },
+  "independent_replay": {
+    "aggregate_sha256": "07cf490bcfcc8873d6d58df27be67d07f52b1a7806ec9003521bccf5fb61ea56",
+    "highest_ranked_without_point": {
+      "earlier": {
+        "jpeg75": {
+          "fine_triplets": {
+            "edited": 0,
+            "feathered_edit": 0
+          },
+          "two_scale": {
+            "edited": 0,
+            "feathered_edit": 0
+          },
+          "wide_triplets": {
+            "edited": 0,
+            "feathered_edit": 0
+          }
+        },
+        "png": {
+          "fine_triplets": {
+            "edited": 1,
+            "feathered_edit": 2
+          },
+          "two_scale": {
+            "edited": 3,
+            "feathered_edit": 2
+          },
+          "wide_triplets": {
+            "edited": 1,
+            "feathered_edit": 1
+          }
+        }
+      },
+      "later": {
+        "jpeg75": {
+          "fine_triplets": {
+            "edited": 0,
+            "feathered_edit": 1
+          },
+          "two_scale": {
+            "edited": 0,
+            "feathered_edit": 0
+          },
+          "wide_triplets": {
+            "edited": 0,
+            "feathered_edit": 0
+          }
+        },
+        "png": {
+          "fine_triplets": {
+            "edited": 1,
+            "feathered_edit": 2
+          },
+          "two_scale": {
+            "edited": 0,
+            "feathered_edit": 1
+          },
+          "wide_triplets": {
+            "edited": 0,
+            "feathered_edit": 0
+          }
+        }
+      }
+    },
+    "status": "verified",
+    "two_scale_advances": {
+      "jpeg75": false,
+      "png": false
+    },
+    "verified_masks": 1536,
+    "verified_summaries": 16,
+    "verified_views": 384
+  },
+  "journal_sha256": {
+    "earlier": "dc03b86cfb868f2cdca2c0ffd9c6da115f69b12067f5b930489f7eadd60ee837",
+    "later": "4fcb8416414ec4aff6623813a2d4e42fc4291e27228e0c83dd22769a57361b55"
+  },
+  "points": {
+    "jpeg75": {
+      "fine_triplets": {
+        "point": 0.17682523593084015,
+        "source_maxima": [
+          0.31966489063602954,
+          0.04061460484156541,
+          0.024173046071622472,
+          0.08487412986381675,
+          0.06478686521431642,
+          0.04549959992716848,
+          0.17682523593084015,
+          0.061958712883818025
+        ]
+      },
+      "two_scale": {
+        "point": 0.06459074868262223,
+        "source_maxima": [
+          0.06728592770574471,
+          0.039943154127054355,
+          0.01260641410049192,
+          0.019203046552631615,
+          0.042901787174752945,
+          0.020175794912500614,
+          0.06459074868262223,
+          0.04460853304813971
+        ]
+      },
+      "wide_triplets": {
+        "point": 0.11422858719998648,
+        "source_maxima": [
+          0.11422858719998648,
+          0.0515641376082709,
+          0.024619865908113773,
+          0.024424998158359572,
+          0.042901787174752945,
+          0.020175794912500614,
+          0.15058447743017894,
+          0.04460853304813971
+        ]
+      }
+    },
+    "png": {
+      "fine_triplets": {
+        "point": 0.17304185577951403,
+        "source_maxima": [
+          0.13274141152808094,
+          0.13907195853701487,
+          0.17304185577951403,
+          0.11139127221218045,
+          0.14734117749902595,
+          0.11587784480716852,
+          0.16663904025312562,
+          0.17436627065997823
+        ]
+      },
+      "two_scale": {
+        "point": 0.07958745894488745,
+        "source_maxima": [
+          0.05467222596973214,
+          0.07685742345090109,
+          0.06831083862640006,
+          0.052205227591583483,
+          0.06024842932968184,
+          0.05593895220168691,
+          0.10138835398698656,
+          0.07958745894488745
+        ]
+      },
+      "wide_triplets": {
+        "point": 0.07958745894488745,
+        "source_maxima": [
+          0.05467222596973214,
+          0.07685742345090109,
+          0.06831083862640006,
+          0.052205227591583483,
+          0.06024842932968184,
+          0.05593895220168691,
+          0.10138835398698656,
+          0.07958745894488745
+        ]
+      }
+    }
+  },
+  "points_sha256": "515516c8f89b3be61824ca7122ccc56af71688e5e1141c950ce6d45bf002cb36",
+  "results": {
+    "earlier": {
+      "jpeg75": {
+        "fine_triplets": {
+          "extra_feathered": 0,
+          "extra_ordinary": 13,
+          "extra_ordinary_groups": 4,
+          "feathered": 0,
+          "ordinary": 13,
+          "ordinary_groups": 4,
+          "original": 2,
+          "sharp": 0,
+          "unassessed_controls": 0,
+          "unassessed_positives": 0
+        },
+        "format_reference": {
+          "extra_feathered": 0,
+          "extra_ordinary": 0,
+          "extra_ordinary_groups": 0,
+          "feathered": 0,
+          "ordinary": 0,
+          "ordinary_groups": 0,
+          "original": 0,
+          "sharp": 0,
+          "unassessed_controls": 0,
+          "unassessed_positives": 0
+        },
+        "two_scale": {
+          "extra_feathered": 0,
+          "extra_ordinary": 6,
+          "extra_ordinary_groups": 1,
+          "feathered": 0,
+          "ordinary": 6,
+          "ordinary_groups": 1,
+          "original": 1,
+          "sharp": 0,
+          "unassessed_controls": 0,
+          "unassessed_positives": 0
+        },
+        "wide_triplets": {
+          "extra_feathered": 0,
+          "extra_ordinary": 0,
+          "extra_ordinary_groups": 0,
+          "feathered": 0,
+          "ordinary": 0,
+          "ordinary_groups": 0,
+          "original": 0,
+          "sharp": 0,
+          "unassessed_controls": 0,
+          "unassessed_positives": 0
+        }
+      },
+      "png": {
+        "fine_triplets": {
+          "extra_feathered": 0,
+          "extra_ordinary": 0,
+          "extra_ordinary_groups": 0,
+          "feathered": 0,
+          "ordinary": 0,
+          "ordinary_groups": 0,
+          "original": 0,
+          "sharp": 0,
+          "unassessed_controls": 0,
+          "unassessed_positives": 0
+        },
+        "format_reference": {
+          "extra_feathered": 0,
+          "extra_ordinary": 0,
+          "extra_ordinary_groups": 0,
+          "feathered": 0,
+          "ordinary": 13,
+          "ordinary_groups": 3,
+          "original": 2,
+          "sharp": 5,
+          "unassessed_controls": 0,
+          "unassessed_positives": 0
+        },
+        "two_scale": {
+          "extra_feathered": 0,
+          "extra_ordinary": 1,
+          "extra_ordinary_groups": 1,
+          "feathered": 0,
+          "ordinary": 1,
+          "ordinary_groups": 1,
+          "original": 0,
+          "sharp": 0,
+          "unassessed_controls": 0,
+          "unassessed_positives": 0
+        },
+        "wide_triplets": {
+          "extra_feathered": 0,
+          "extra_ordinary": 1,
+          "extra_ordinary_groups": 1,
+          "feathered": 0,
+          "ordinary": 1,
+          "ordinary_groups": 1,
+          "original": 0,
+          "sharp": 0,
+          "unassessed_controls": 0,
+          "unassessed_positives": 0
+        }
+      }
+    },
+    "later": {
+      "jpeg75": {
+        "fine_triplets": {
+          "extra_feathered": 0,
+          "extra_ordinary": 11,
+          "extra_ordinary_groups": 2,
+          "feathered": 0,
+          "ordinary": 11,
+          "ordinary_groups": 2,
+          "original": 2,
+          "sharp": 0,
+          "unassessed_controls": 0,
+          "unassessed_positives": 0
+        },
+        "format_reference": {
+          "extra_feathered": 0,
+          "extra_ordinary": 0,
+          "extra_ordinary_groups": 0,
+          "feathered": 0,
+          "ordinary": 0,
+          "ordinary_groups": 0,
+          "original": 0,
+          "sharp": 0,
+          "unassessed_controls": 0,
+          "unassessed_positives": 0
+        },
+        "two_scale": {
+          "extra_feathered": 0,
+          "extra_ordinary": 0,
+          "extra_ordinary_groups": 0,
+          "feathered": 0,
+          "ordinary": 0,
+          "ordinary_groups": 0,
+          "original": 0,
+          "sharp": 0,
+          "unassessed_controls": 0,
+          "unassessed_positives": 0
+        },
+        "wide_triplets": {
+          "extra_feathered": 0,
+          "extra_ordinary": 0,
+          "extra_ordinary_groups": 0,
+          "feathered": 0,
+          "ordinary": 0,
+          "ordinary_groups": 0,
+          "original": 0,
+          "sharp": 0,
+          "unassessed_controls": 0,
+          "unassessed_positives": 0
+        }
+      },
+      "png": {
+        "fine_triplets": {
+          "extra_feathered": 0,
+          "extra_ordinary": 1,
+          "extra_ordinary_groups": 1,
+          "feathered": 0,
+          "ordinary": 1,
+          "ordinary_groups": 1,
+          "original": 0,
+          "sharp": 0,
+          "unassessed_controls": 0,
+          "unassessed_positives": 0
+        },
+        "format_reference": {
+          "extra_feathered": 0,
+          "extra_ordinary": 0,
+          "extra_ordinary_groups": 0,
+          "feathered": 0,
+          "ordinary": 1,
+          "ordinary_groups": 1,
+          "original": 0,
+          "sharp": 7,
+          "unassessed_controls": 0,
+          "unassessed_positives": 0
+        },
+        "two_scale": {
+          "extra_feathered": 0,
+          "extra_ordinary": 2,
+          "extra_ordinary_groups": 2,
+          "feathered": 0,
+          "ordinary": 2,
+          "ordinary_groups": 2,
+          "original": 0,
+          "sharp": 0,
+          "unassessed_controls": 0,
+          "unassessed_positives": 0
+        },
+        "wide_triplets": {
+          "extra_feathered": 0,
+          "extra_ordinary": 2,
+          "extra_ordinary_groups": 2,
+          "feathered": 0,
+          "ordinary": 2,
+          "ordinary_groups": 2,
+          "original": 0,
+          "sharp": 0,
+          "unassessed_controls": 0,
+          "unassessed_positives": 0
+        }
+      }
+    }
+  },
+  "schema": "chipmunk.image-residual-sign-transfer/1",
+  "two_scale_advances": {
+    "jpeg75": false,
+    "png": false
+  },
+  "views": 384
+}

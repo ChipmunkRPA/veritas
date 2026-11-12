@@ -113,6 +113,10 @@ export interface StereoChannelContext {
     source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges']
   })[]
 }
+interface StereoListeningContext {
+  schema: 'chipmunk.stereo-listening/1'; affects_overall_confidence: false
+  windows: { stereo_window_index: number; artifacts: Record<'left' | 'right' | 'mono' | 'waveform', EvidenceAsset> }[]
+}
 type AudioRepeatSpan = SampleInterval & { source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges'] }
 interface AudioRepeatPair {
   id: string; first: AudioRepeatSpan; second: AudioRepeatSpan; sample_count: number; lag_samples: number
@@ -155,6 +159,7 @@ export interface AudioEvidenceSet extends SetBase {
   acoustic_context?: AcousticContext
   sound_events?: SoundEventContext
   stereo_context?: StereoChannelContext
+  stereo_listening?: StereoListeningContext
   repetition_context?: AudioRepetitionContext
   similarity_context?: AudioSimilarityContext
 }
@@ -166,6 +171,7 @@ export interface VideoAudioChannel {
   acoustic_context?: AcousticContext
   sound_events?: SoundEventContext
   stereo_context?: StereoChannelContext
+  stereo_listening?: StereoListeningContext
   repetition_context?: AudioRepetitionContext
   similarity_context?: AudioSimilarityContext
 }

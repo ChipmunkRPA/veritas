@@ -127,6 +127,7 @@ def provenance(ctx: StageContext) -> dict[str, Any]:
 def decode(ctx: StageContext) -> dict[str, Any]:
     """Decode once, preserving the exact checked PCM and its rational source timeline."""
     from app.detectors.video.adapters.common import AudioTrack
+    from app.evidence import stereo_listening
 
     source_sha = ctx.outputs["ingest"]["sha256"]
     decoded = decode_audio(ctx.store.path_for(source_sha), source_sha256=source_sha, max_seconds=AUDIO_MAX_SECONDS, inspect_stereo=True)
@@ -137,13 +138,16 @@ def decode(ctx: StageContext) -> dict[str, Any]:
     with ctx.sessions() as db:
         wav = register_artefact(db, ctx.store, decoded.wav, media_type="audio/wav", role="working_copy",
                                created_by="audio-input/1", analysis_id=ctx.analysis_id)
+        listening = stereo_listening.freeze(db, ctx.store, ctx.analysis_id, decoded)
+        if listening is not None:
+            decoded.mapping["stereo_listening_pcm_sha256"] = listening.sha256
         mapping = register_artefact(db, ctx.store, canonical_json(decoded.mapping), media_type="application/json", role="stage_output",
                                    created_by="audio-input/1", analysis_id=ctx.analysis_id)
         binding = {"version": "audio-input/1", "pcm_sha256": decoded.mapping["pcm_sha256"],
                    "wav_sha256": wav.sha256, "mapping_sha256": mapping.sha256,
                    "sample_rate": SR, "samples": int(len(pcm))}
         objects = [{"id": a.id, "sha256": a.sha256, "size_bytes": a.bytes, "media_type": a.media_type,
-                    "role": a.role, "created_by": a.created_by} for a in (wav, mapping)]
+                    "role": a.role, "created_by": a.created_by} for a in (wav, mapping, listening) if a is not None]
         db.commit()
     return {"sample_rate": SR, "samples": int(len(pcm)), "seconds": round(len(pcm) / SR, 3),
             "sha256": hashlib.sha256(pcm.tobytes()).hexdigest(), "evidence_input": binding, "artefacts": objects,

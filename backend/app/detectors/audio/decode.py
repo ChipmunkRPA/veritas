@@ -39,6 +39,7 @@ class DecodedAudio:
     pcm: np.ndarray
     wav: bytes
     mapping: dict[str, Any]
+    stereo_pcm: np.ndarray | None = None
 
 
 def read_wav(data: bytes) -> np.ndarray:
@@ -190,9 +191,12 @@ def decode_audio(path: Path, *, source_sha256: str, max_seconds: float = 600.0,
             "source_timing_precision_s": 1 / SAMPLE_RATE,
             "limit_samples": maximum,
         }
+        verified_stereo = None
         if inspect_stereo:
             mapping["stereo_context"] = stereo.build(mapping, pcm, layout, stereo_pcm, stereo_clock)
-        return DecodedAudio(pcm, wav_bytes(pcm), mapping)
+            if stereo_pcm is not None and mapping["stereo_context"]["stereo_pcm_sha256"] is not None:
+                verified_stereo = stereo_pcm[:len(mapping["stereo_context"]["windows"]) * SAMPLE_RATE]
+        return DecodedAudio(pcm, wav_bytes(pcm), mapping, verified_stereo)
     except (subprocess.SubprocessError, json.JSONDecodeError, KeyError, IndexError, OSError) as exc:
         raise ValueError("The audio stream could not be decoded with a verified sample timeline") from exc
 

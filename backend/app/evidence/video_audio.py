@@ -1,11 +1,9 @@
 """Frozen audio inputs and voice presentation inside one parent video evidence set."""
 from __future__ import annotations
 
-import json
-
 from app.core.canonical import canonical_hash, canonical_json
-from app.evidence import audio_packets
-from app.evidence.audio_binding import VOICE_CLOCK_POLICY, attach_stereo_attenuation_overlaps
+from app.evidence import audio_packets, stereo_listening
+from app.evidence.audio_binding import VOICE_CLOCK_POLICY
 from app.storage.artefacts import get_artefact, register_artefact
 from app.storage.db import DetectorRun
 
@@ -17,12 +15,17 @@ def freeze_input(ctx, decoded) -> dict:
     with ctx.sessions() as db:
         wav = register_artefact(db, ctx.store, decoded.wav, media_type='audio/wav', role='working_copy',
                                created_by='video-audio-input/1', analysis_id=ctx.analysis_id)
+        listening = stereo_listening.freeze(db, ctx.store, ctx.analysis_id, decoded)
         mapping = register_artefact(db, ctx.store, canonical_json(source_mapping), media_type='application/json',
                                    role='stage_output', created_by='video-audio-input/1', analysis_id=ctx.analysis_id)
         binding = {'version': 'audio-input/1', 'pcm_sha256': decoded.mapping['pcm_sha256'],
                    'wav_sha256': wav.sha256, 'mapping_sha256': mapping.sha256,
                    'sample_rate': decoded.mapping['sample_rate'], 'samples': len(decoded.pcm)}
         objects = [wav, mapping]
+        if listening is not None:
+            # Preserve the mono-only mapping hash used by the AV timing proof.
+            binding['stereo_listening_pcm_sha256'] = listening.sha256
+            objects.append(listening)
         output = {'input': binding}
         if stereo_context is not None:
             stereo = register_artefact(db, ctx.store, canonical_json(stereo_context), media_type='application/json',
@@ -76,11 +79,8 @@ def build_channel(db, analysis, store, result: dict, *, set_id: str) -> dict:
         return unavailable(analysis.sha256, 'The source audio could not be decoded and frozen with a verified timeline.')
     content = audio_packets.build_content(db, analysis, store, result,
         record={'input': record['input'], 'checks': record['voice_checks'], 'sound_checks': record.get('sound_checks', []),
-                'voice_clock_policy': record.get('voice_clock_policy')}, set_id=set_id)
-    if stereo_sha := record.get('stereo_context_sha256'):
-        content['stereo_context'] = json.loads(audio_packets._verified(store, stereo_sha))
-        content['stereo_context_sha256'] = stereo_sha
-        attach_stereo_attenuation_overlaps(content)
+                'voice_clock_policy': record.get('voice_clock_policy'),
+                'stereo_context_sha256': record.get('stereo_context_sha256')}, set_id=set_id)
     assessed = bool(content['coverage']['windows'])
     return {'status': 'ready' if assessed else 'not_assessed',
             'reason': None if assessed else 'No voice-check windows were scored. Frozen audio context is not a synthesis finding.',
@@ -124,6 +124,7 @@ def verify_source_content(channel: dict, *, result: dict, store, source_sha256: 
     pcm, mapping = audio_packets._input(store, SimpleNamespace(sha256=source_sha256), binding)
     if channel.get('stereo_context_sha256') != record.get('stereo_context_sha256'):
         raise audio_packets.PacketIntegrityError('Video stereo context differs from its published commitment')
+    stereo_listening.verify(store, channel, binding.get('stereo_listening_pcm_sha256'), pcm)
     if channel.get('sound_events') is not None:
         from app.evidence.sound_events import verify
         verify(channel['sound_events'], store=store, record=record, binding=binding,

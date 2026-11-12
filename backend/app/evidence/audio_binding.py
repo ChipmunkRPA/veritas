@@ -226,7 +226,7 @@ def _validate(channel, source_sha256):
     if channel['coverage'] is None:
         require(channel['status'] in {'absent', 'unavailable'} and not channel['packets'] and not channel.get('overview')
                 and not channel.get('acoustic_context')
-                and not {'stereo_context', 'stereo_context_sha256', 'repetition_context', 'similarity_context'}.intersection(channel)
+                and not {'stereo_context', 'stereo_context_sha256', 'stereo_listening', 'repetition_context', 'similarity_context'}.intersection(channel)
                 and bool(channel['reason']), 'Unavailable video voice contains unexplained assets')
         return
     samples = source['samples']

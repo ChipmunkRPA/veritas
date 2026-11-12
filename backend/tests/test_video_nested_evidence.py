@@ -348,13 +348,14 @@ def _report_scaffold(f):
     return f.frozen.model_copy(update={'result':result,'evidence':evidence})
 
 
+@pytest.mark.parametrize('width,height', [(1920, 1080), (1280, 720)])
 def test_short_face_change_keeps_exact_source_frames_in_pdf_json_and_offline_verifier(
-    av_fixture, av_source, tmp_path, monkeypatch,
+    av_fixture, av_source, tmp_path, monkeypatch, width, height,
 ):
     f = av_fixture
     path = tmp_path / 'native-face-clock.mkv'
     subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-threads', '1', '-filter_threads', '1', '-copyts',
-                    '-i', str(av_source[0]), '-vf', 'scale=1920:1080:flags=neighbor', '-an', '-c:v', 'ffv1',
+                    '-i', str(av_source[0]), '-vf', f'scale={width}:{height}:flags=neighbor', '-an', '-c:v', 'ffv1',
                     '-threads', '1', str(path)], check=True, timeout=60)
     obj = f.store.put_file(path)
     f.analysis.sha256, f.analysis.size_bytes = obj.sha256, obj.size_bytes
@@ -373,11 +374,12 @@ def test_short_face_change_keeps_exact_source_frames_in_pdf_json_and_offline_ver
     f.anchors = {item['frame_index']: item for item in frame_store.native_anchors()}
     faces = []
     for index in indices:
-        landmarks = [[x * 20, y * 16.875] for x, y in f.by_frame[index]['landmarks']]
+        landmarks = [[x * width / 96, y * height / 64] for x, y in f.by_frame[index]['landmarks']]
         matrix = cpp_alignment(landmarks)
         aligned = cv2.warpAffine(pixels[index], matrix, (112, 112), flags=cv2.INTER_LINEAR)
         faces.append({**{key: f.anchors[index][key] for key in ('frame_index', 'pts', 'decoded_rgb_sha256')},
-                      'bbox': {'x': 240, 'y': 135, 'w': 1440, 'h': 878}, 'landmarks': landmarks, 'aligned_size': 112,
+                      'bbox': {'x': width // 8, 'y': height // 8, 'w': 3 * width // 4, 'h': 878 * height // 1080},
+                      'landmarks': landmarks, 'aligned_size': 112,
                       'alignment_side': 112, 'alignment_matrix': matrix.tolist(),
                       'alignment_matrix_hex': [[float(value).hex() for value in row] for row in matrix],
                       'aligned_rgb_sha256': hashlib.sha256(aligned.tobytes()).hexdigest()})
@@ -417,10 +419,15 @@ def test_short_face_change_keeps_exact_source_frames_in_pdf_json_and_offline_ver
     altered['frames'][0]['interval_role'] = 'after'
     with pytest.raises(ValueError, match='native sample'):
         face_return_binding.validate_packet(altered, f.document['source'])
-    for source_change, table_change in [({'width': 1280}, {}), ({}, {'rotation': 180}), ({}, {'truncated': True}),
+    for source_change, table_change in [({'width': 960}, {}), ({}, {'rotation': 180}), ({}, {'truncated': True}),
                                         ({}, {'interpolated': [0]})]:
         with pytest.raises(ValueError, match='complete native timestamps'):
             face_return_binding.validate_packet(packet, {**f.document['source'], **source_change}, **table_change)
+    if height == 720:
+        altered = copy.deepcopy(packet)
+        altered['face_return']['frame_inputs'][0]['pts'] -= 1
+        with pytest.raises(ValueError, match='exact 25 Hz source clock'):
+            face_return_binding.validate_packet(altered, f.document['source'])
 
     monkeypatch.setattr(multimedia_evidence, 'default_store', lambda: f.store)
     pdf = engine.render_pdf(f.frozen).pdf
@@ -545,6 +552,7 @@ from pathlib import Path
 class RuntimeUnavailable(importlib.abc.MetaPathFinder):
     def find_spec(self,fullname,path=None,target=None):
         if fullname in ('app.evidence','app.evidence.mp4','app.evidence.audio_binding','app.evidence.stereo_binding',
+                        'app.evidence.stereo_listening_binding',
                         'app.evidence.audio_background_binding','app.evidence.audio_repetition_binding','app.evidence.audio_exact_repetition',
                         'app.evidence.audio_similarity_binding',
                         'app.evidence.av_binding','app.evidence.face_interval_binding','app.evidence.face_boundary_binding','app.evidence.face_boundary_clock','app.evidence.face_alignment_context',
@@ -658,6 +666,8 @@ def test_real_video_soundtrack_cue_preserves_production_voice_and_av(av_source, 
         mapping = stage['source_mapping']
         assert mapping == reference.mapping
         assert binding['mapping_sha256'] == canonical_hash(reference.mapping)
+        listening_pcm_sha = binding['stereo_listening_pcm_sha256']
+        assert len(f.store.read_bytes(listening_pcm_sha)) == 4 * SAMPLE_RATE
         assert binding['pcm_sha256'] == reference.mapping['pcm_sha256']
         assert f.store.read_bytes(binding['wav_sha256']) == reference.wav
         np.testing.assert_array_equal(ctx.state['audio'].pcm, reference.pcm)
@@ -667,7 +677,8 @@ def test_real_video_soundtrack_cue_preserves_production_voice_and_av(av_source, 
         ctx.outputs['render'] = {'audio_stereo_context_sha256': stereo_sha}
         committed = video_audio.published_record(ctx)
         assert committed['stereo_context_sha256'] == stereo_sha and committed['input'] == binding
-        f.result['manifest']['sampling']['video_audio_evidence']['stereo_context_sha256'] = stereo_sha
+        f.result['manifest']['sampling']['video_audio_evidence'].update(
+            stereo_context_sha256=stereo_sha, input=binding)
         f.result = _report_scaffold(f).result
         f.analysis.result_hash = f.store.put_bytes(canonical_json(f.result)).sha256
         _freeze_parent(f)
@@ -695,6 +706,9 @@ def test_real_video_soundtrack_cue_preserves_production_voice_and_av(av_source, 
         assert [p['measurement'] for p in f.document['av']['packets']] == [p['measurement'] for p in ordinary['av']['packets']]
         assert [p['anchor'] for p in f.document['av']['packets']] == [p['anchor'] for p in ordinary['av']['packets']]
         assert 'gustking' not in json.dumps(stereo)
+        listening = f.document['audio']['stereo_listening']
+        assert [row['stereo_window_index'] for row in listening['windows']] == [2]
+        assert listening['affects_overall_confidence'] is False
 
         monkeypatch.setattr(v2_evidence_packets, 'get_session', sessions)
         monkeypatch.setattr(v2_evidence_packets, 'default_store', lambda: f.store)
@@ -705,6 +719,7 @@ def test_real_video_soundtrack_cue_preserves_production_voice_and_av(av_source, 
         text = engine.pdf_text(rendered.pdf)
         assert 'Stereo soundtrack comparison' in text and 'Mono is digitally silent' in text
         assert '[118400, 134400)' in text and '/audio/stereo_context' in text
+        assert '/audio/stereo_listening/windows/0' in text
         assert 'Video playback 2.400–3.400 s' in ' '.join(text.split())
         assert 'Unscored voice intervals' in text and '/audio/coverage/unscored_intervals' in text
         assert 'Unscored voice during a mono level drop' in text and '/audio/coverage/stereo_attenuation_overlaps' in text
@@ -728,6 +743,7 @@ def test_real_video_soundtrack_cue_preserves_production_voice_and_av(av_source, 
             validate_audio_channel(forged, f.analysis.sha256)
         omitted = copy.deepcopy(f.document)
         del omitted['audio']['stereo_context'], omitted['audio']['stereo_context_sha256']
+        del omitted['audio']['stereo_listening']
         del omitted['audio']['coverage']['stereo_attenuation_overlaps']
         omitted['sha256'] = service.packet_hash(omitted)
         with pytest.raises(ObjectIntegrityError, match='differs from its published commitment'):

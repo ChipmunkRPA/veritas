@@ -1,9 +1,9 @@
 // @vitest-environment jsdom
-import { cleanup, render, screen, within } from '@testing-library/react'
+import { cleanup, fireEvent, render, screen, within } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
-import { afterEach, expect, it } from 'vitest'
+import { afterEach, expect, it, vi } from 'vitest'
 import AudioEvidenceContent from './AudioEvidenceContent'
-import type { AudioEvidenceSet } from './multimediaPackets'
+import type { AudioEvidenceSet, EvidenceAsset } from './multimediaPackets'
 
 afterEach(cleanup)
 
@@ -88,4 +88,55 @@ it('shows mono level loss at the matching source interval without marking it as 
   rerender(<MemoryRouter><AudioEvidenceContent set={changed} token="" mediaReady={false} /></MemoryRouter>)
   expect(section.getByRole('alert')).toBeTruthy()
   expect(section.queryByText('Mono is digitally silent')).toBeNull()
+})
+
+it('plays only the committed comparison and anchors all four assets to its sample and source times', () => {
+  const set = fixture()
+  set.source.pcm_sha256 = 'd'.repeat(64)
+  set.source.samples = 32000
+  const original = set.stereo_context!
+  const first = { ...original.windows[0], downmix: { mono_rms_dbfs: -18, attenuation_db: 6, strong_attenuation: false } }
+  set.stereo_context = {
+    ...original, schema: 'chipmunk.stereo-channel-context/2', mono_pcm_sha256: set.source.pcm_sha256,
+    strong_downmix_attenuation_db: 12,
+    windows: [first, { ...first, start_sample: 16000, end_sample: 32000, source_timestamp_ranges: [{
+      start_sample: 16000, end_sample: 32000, source_start_pts: 48000, source_end_pts: 64000, time_base: '1/16000',
+    }] }],
+  }
+  const clip = (hash: string): EvidenceAsset => ({
+    sha256: hash.repeat(64), media_type: 'audio/wav', url: 'https://foreign.invalid', samples: 16000,
+    channels: 1, sample_rate: 16000,
+  })
+  set.stereo_listening = { schema: 'chipmunk.stereo-listening/1', affects_overall_confidence: false, windows: [{
+    stereo_window_index: 1, artifacts: { left: clip('1'), right: clip('2'), mono: clip('3'),
+      waveform: { sha256: '4'.repeat(64), media_type: 'image/png', url: 'https://foreign.invalid', width: 960, height: 290 } },
+  }] }
+  const { rerender } = render(<MemoryRouter><AudioEvidenceContent set={set} token="signed token" mediaReady /></MemoryRouter>)
+  const region = within(screen.getByRole('region', { name: 'Stereo channel comparison' }))
+  const comparison = within(region.getByText('Compare stereo and analyzed mono').closest('details')!)
+  expect(comparison.getAllByText(/Samples \[/)).toHaveLength(1)
+  expect(comparison.getByText('Samples [16000, 32000) at 16000 Hz.')).toBeTruthy()
+  expect(comparison.getByText('Source PTS [48000, 64000) at 1/16000.')).toBeTruthy()
+  expect(comparison.getByText(/only the selected interval.*carry no weight in the AI assessment/)).toBeTruthy()
+  for (const [label, hash] of [['Decoded left channel', '1'], ['Decoded right channel', '2'], ['Exact analyzed mono', '3']]) {
+    expect(comparison.getByLabelText(label).getAttribute('src')).toBe(
+      `/api/v2/analyses/stereo-audio/evidence-packets/set/assets/${hash.repeat(64)}.wav?token=signed%20token`,
+    )
+  }
+  const image = comparison.getByAltText(/exact analyzed mono waveforms, 1\.000 s–2\.000 s/)
+  expect(image.getAttribute('src')).toContain(`/${'4'.repeat(64)}.png?token=signed%20token`)
+  expect(image.getAttribute('width')).toBe('960')
+  expect(image.getAttribute('height')).toBe('290')
+  const left = comparison.getByLabelText('Decoded left channel') as HTMLAudioElement
+  Object.defineProperty(left, 'paused', { configurable: true, value: false })
+  const stopLeft = vi.spyOn(left, 'pause').mockImplementation(() => {
+    Object.defineProperty(left, 'paused', { configurable: true, value: true })
+  })
+  fireEvent.play(comparison.getByLabelText('Exact analyzed mono'))
+  expect(stopLeft).toHaveBeenCalledOnce()
+
+  const changed = { ...set, source: { ...set.source, pcm_sha256: 'e'.repeat(64) } }
+  rerender(<MemoryRouter><AudioEvidenceContent set={changed} token="signed token" mediaReady /></MemoryRouter>)
+  expect(region.queryByText('Compare stereo and analyzed mono')).toBeNull()
+  expect(region.queryByLabelText('Exact analyzed mono')).toBeNull()
 })

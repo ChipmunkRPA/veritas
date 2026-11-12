@@ -4,7 +4,7 @@ from app.reports import engine
 # These generations already used the public-safe headline and check labels.
 _PREVIOUS_PUBLIC_TEMPLATES = {
     "veritas-report-2.0.r83", "veritas-report-2.0.r84", "veritas-report-2.0.r85", "veritas-report-2.0.r87", "veritas-report-2.0.r88",
-    "veritas-report-2.0.r89", "veritas-report-2.0.r90",
+    "veritas-report-2.0.r89", "veritas-report-2.0.r90", "veritas-report-2.0.r91",
 }
 
 

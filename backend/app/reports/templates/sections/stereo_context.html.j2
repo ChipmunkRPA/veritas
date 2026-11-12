@@ -7,11 +7,26 @@
 {% elif stereo.status == 'too_short' %}<p>The stereo input has less than one complete second of decoded audio.</p>
 {% elif stereo.status == 'unavailable' %}<p>The stereo measurements could not be aligned to the recorded source clock.</p>
 {% else %}
-<p>Compared {{ stereo.windows | length }} complete one-second windows in the first {{ stereo.max_seconds }} seconds {% if has_downmix %}using the original stereo channels and the analyzed mono mix{% else %}before mono mixing{% endif %}. Stereo placement, mixing and microphone position can all affect these readings. They do not contribute to the AI assessment.</p>
+<p>Compared {{ stereo.windows | length }} complete one-second windows in the first {{ stereo.max_seconds }} seconds {% if has_downmix %}using the decoded stereo channels and the analyzed mono mix{% else %}before mono mixing{% endif %}. Stereo placement, mixing and microphone position can all affect these readings. They do not contribute to the AI assessment.</p>
 {% if stereo.status == 'quiet' %}<p>All measured windows fell below the {{ stereo.quiet_floor_dbfs }} dBFS review floor.</p>{% endif %}
 {% if has_downmix %}
 {% set attenuated = stereo.windows | selectattr('downmix.strong_attenuation') | list %}
 {% if attenuated %}<p><strong>Strong level drop in the analyzed mono mix.</strong> {{ attenuated | length }} complete window{% if attenuated | length != 1 %}s{% endif %} met this review condition. Sounds present in stereo may be harder to hear in the analyzed copy.</p>{% endif %}
+{% endif %}
+{% if evidence.stereo_listening %}
+<h4>Compare stereo and analyzed mono</h4>
+<p class="caption">Waveforms cover only the {{ evidence.stereo_listening | length }} selected {{ 'interval' if evidence.stereo_listening | length == 1 else 'intervals' }} below. The analysis view provides the matching audio clips. These comparisons carry no weight in the AI assessment.</p>
+{% for comparison in evidence.stereo_listening %}
+<article class="multimedia-evidence-packet multimedia-repeat-pair">
+<h4>Decoded audio {{ '%.3f' | format(comparison.start_s) }}–{{ '%.3f' | format(comparison.end_s) }} s</h4>
+<p class="caption">Samples [{{ comparison.start_sample }}, {{ comparison.end_sample }}) at {{ stereo.sample_rate }} Hz.
+{% for range in comparison.ranges %}Source PTS [{{ range.source_start_pts }}, {{ range.source_end_pts }}) at {{ range.time_base }}.{% if range.playback %} Video playback {{ '%.3f' | format(range.playback[0]) }}–{{ '%.3f' | format(range.playback[1]) }} s.{% endif %}{% endfor %}
+{% if comparison.omitted_ranges %} {{ comparison.omitted_ranges }} additional source-clock ranges in JSON.{% endif %}</p>
+{{ plates([comparison.waveform], true) }}
+<p class="caption evidence-hash">Waveform SHA-256 <span class="mono">{{ comparison.waveform.sha256 }}</span>.<br>
+JSON pointer <span class="mono">{{ comparison.json_pointer }}</span>.</p>
+</article>
+{% endfor %}
 {% endif %}
 <table class="multimedia-locator">
 <thead><tr><th>Decoded range</th><th>Source timestamps (PTS)</th><th>L / R{% if has_downmix %} / mono{% endif %} (dBFS)</th><th>Gap (dB)</th><th>Correlation</th><th>Observation</th></tr></thead>

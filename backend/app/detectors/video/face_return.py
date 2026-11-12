@@ -26,6 +26,7 @@ MINIMUM_TILE_COUNT = 8
 SCENE_CORRELATION_POINT = .55
 MAX_GAP = .26
 MINIMUM_FACE_IOU = .25
+PROFILE_STEPS = {(1920, 1080): (Fraction(1, 25), Fraction(1, 30)), (1280, 720): (Fraction(1, 25),)}
 
 
 @dataclass(frozen=True)
@@ -50,15 +51,16 @@ class Range:
 
 
 def schedule(table: FrameTable) -> tuple[tuple[Fraction, ...], tuple[int, ...]] | None:
-    """The pilot uses observed upright 1080p clocks at 25 or 30 Hz and a bounded scan."""
-    if table.rotation or table.interpolated or table.truncated or (table.width, table.height) != (1920, 1080):
+    """Use a bounded scan on exact upright 1080p25/30 and 720p25 clocks."""
+    allowed_steps = PROFILE_STEPS.get((table.width, table.height))
+    if table.rotation or table.interpolated or table.truncated or allowed_steps is None:
         return None
     if not 50 <= len(table) <= 240:
         return None
     tb = table.tb
     times = tuple((pts - table.pts[0]) * tb for pts in table.pts)
     step = times[1] - times[0]
-    if step not in (Fraction(1, 25), Fraction(1, 30)) or any(t != i * step for i, t in enumerate(times)):
+    if step not in allowed_steps or any(t != i * step for i, t in enumerate(times)):
         return None
     if not 2 <= times[-1] + step <= 8:
         return None

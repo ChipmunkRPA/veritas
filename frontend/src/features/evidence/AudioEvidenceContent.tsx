@@ -44,7 +44,9 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
     return () => node?.querySelectorAll('audio').forEach((audio) => { if (!audio.paused) audio.pause() })
   }, [])
   const selectedId = set.packets.some((packet) => packet.id === selection) ? selection : set.packets[0]?.id ?? null
-  const pauseAudio = () => root.current?.querySelectorAll('audio').forEach((audio) => { if (!audio.paused) audio.pause() })
+  const pauseAudio = (playing?: HTMLAudioElement) => root.current?.querySelectorAll('audio').forEach((audio) => {
+    if (audio !== playing && !audio.paused) audio.pause()
+  })
   const select = (packet: AudioEvidencePacket) => {
     // A hidden clip must not keep playing after a different interval is chosen.
     pauseAudio()
@@ -66,7 +68,7 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
   return <div ref={root} data-testid="audio-evidence-content">
     <AudioSoundEvents set={set} token={token} mediaReady={mediaReady} pauseAudio={pauseAudio} />
     <AudioBackgroundContext set={set} token={token} mediaReady={mediaReady} pauseAudio={pauseAudio} />
-    <AudioStereoContext set={set} videoOriginS={videoOriginS} />
+    <AudioStereoContext set={set} token={token} mediaReady={mediaReady} videoOriginS={videoOriginS} pauseAudio={pauseAudio} />
     <AudioRepetitionContext set={set} token={token} mediaReady={mediaReady} videoOriginS={videoOriginS} />
     {set.packets.length > 0 && <AudioInspectionTimeline set={set} token={token} mediaReady={mediaReady} selectedId={selectedId} onSelect={select} />}
     {set.coverage && rate ? <div className="mt-4 rounded-md border border-border p-4 text-small text-text-muted">
@@ -112,7 +114,7 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
         </ul>
       </section>}
       {set.coverage.decode_limit_reached && <p className="mt-2 mb-0">The decoding limit was reached. Audio beyond this input was not examined.</p>}
-      <p className="mt-2 mb-0">Clips reproduce the exact analyzed {measurementValue(rate)} Hz mono input. The source had {set.source.source_channels ?? 'unrecorded'} channel(s); this is a derived listening copy.</p>
+      <p className="mt-2 mb-0">Voice inspection clips reproduce the exact analyzed {measurementValue(rate)} Hz mono input. The source had {set.source.source_channels ?? 'unrecorded'} channel(s); this is a derived listening copy.</p>
     </div> : <p className="mt-3 text-small text-text-muted">Scored audio coverage is unavailable. Unexamined audio is not a negative finding.</p>}
     {set.overview && set.packets.length === 0 && <div className={`${evidenceGrid} mt-4`}>
       {(['waveform', 'scores'] as const).map((role) => set.overview?.[role] && <figure key={role} className="m-0 min-w-0">

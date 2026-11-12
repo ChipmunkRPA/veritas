@@ -133,6 +133,7 @@ def multimedia_package(request, tmp_path, monkeypatch):
                 monkeypatch.setattr(image_packets_v7, "_active_version", lambda: "image-evidence-13")
             db, store, analysis, result, _ = affine_result(fixture, large=large_affine)
         else:
+            monkeypatch.setattr(settings, "image_affine_copy_review", False)
             db, store, analysis, result, _ = reflected_result(fixture, large=not translated,
                                                               reflected=not translated, translated=translated)
         document = service.persist_packet_set(db, analysis, store, result=result)
@@ -362,7 +363,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
                         'app.evidence.face_interval_binding', 'app.evidence.face_boundary_binding', 'app.evidence.face_boundary_clock', 'app.evidence.face_alignment_context',
                         'app.evidence.face_lighting_context', 'app.evidence.face_return_binding',
                         'app.evidence.video_packet_versions', 'app.evidence.picture_hold_binding', 'app.evidence.sound_event_binding',
-                        'app.evidence.stereo_binding'):
+                        'app.evidence.stereo_binding', 'app.evidence.stereo_listening_binding'):
             return None
         if fullname.startswith(('app.storage', 'app.core.config', 'app.detectors', 'app.evidence', 'app.api',
                                 'torch', 'numpy', 'cv2', 'transformers', 'fastapi', 'sqlalchemy')):

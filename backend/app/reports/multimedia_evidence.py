@@ -82,6 +82,9 @@ def asset_items(document: dict[str, Any]):
         for window in (part.get("sound_events") or {}).get("windows", []):
             for role, asset in sorted(window.get("artifacts", {}).items()):
                 yield window["id"], role, asset
+        for window in (part.get("stereo_listening") or {}).get("windows", []):
+            for role, asset in sorted(window["artifacts"].items()):
+                yield None, f"stereo_{window['stereo_window_index']}_{role}", asset
         for key in ("repetition_context", "similarity_context"):
             for pair in (part.get(key) or {}).get("pairs", []):
                 for role, asset in sorted(pair["artifacts"].items()):
@@ -273,6 +276,7 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
 
 def _verify_audio(document: dict, store: ObjectStore, assets: dict[str, bytes], *, result: dict | None = None) -> None:
     from app.detectors.audio.decode import read_wav, source_ranges
+    from app.evidence import stereo_listening
 
     source = document["source"]
     pcm = read_wav(_bytes(source["wav_sha256"], store))
@@ -286,8 +290,10 @@ def _verify_audio(document: dict, store: ObjectStore, assets: dict[str, bytes], 
     if stereo_sha := document.get("stereo_context_sha256"):
         if canonical_json(stereo_context) != _bytes(stereo_sha, store):
             raise ObjectIntegrityError("Stereo context differs from the frozen video soundtrack measurements")
-    elif stereo_context != mapping.get("stereo_context"):
-        raise ObjectIntegrityError("Stereo context differs from the frozen audio input mapping")
+    else:
+        if stereo_context != mapping.get("stereo_context"):
+            raise ObjectIntegrityError("Stereo context differs from the frozen audio input mapping")
+        stereo_listening.verify(store, document, mapping.get("stereo_listening_pcm_sha256"), pcm)
     if stereo_context is not None:
         from app.detectors.audio.stereo import verify_mono_levels
 
@@ -783,6 +789,19 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
     video_origin_s = document["source"].get("timeline_origin_s") if kind == "video" else None
     voice_coverage = (stereo_source.get("coverage") or {}) if kind in {"audio", "video"} else {}
     rate = (stereo_source.get("source") or {}).get("sample_rate")
+    stereo_listening = []
+    stereo_prefix = "/audio" if kind == "video" else ""
+    for index, comparison in enumerate((stereo_source.get("stereo_listening") or {}).get("windows", [])):
+        window = stereo_context["windows"][comparison["stereo_window_index"]]
+        interval = _voice_interval_view(window, rate, video_origin_s)
+        caption = (f"Decoded left and right channels and exact analyzed mono, "
+                   f"{interval['start_s']:.3f}–{interval['end_s']:.3f} s. "
+                   f"Samples [{window['start_sample']}, {window['end_sample']}) at {rate} Hz.")
+        stereo_listening.append({
+            **interval, "start_sample": window["start_sample"], "end_sample": window["end_sample"],
+            "waveform": plate("waveform", comparison["artifacts"]["waveform"], caption),
+            "json_pointer": f"{stereo_prefix}/stereo_listening/windows/{index}",
+        })
     gaps = voice_coverage.get("unscored_intervals", [])
     overlaps = voice_coverage.get("stereo_attenuation_overlaps", [])
     voice_gaps = [_voice_interval_view(gap, rate, video_origin_s) for gap in gaps[:8]]
@@ -797,6 +816,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             group.pop("text")
     return {"available": True, "kind": kind, "title": f"{kind.capitalize()} evidence", "id": document["id"],
             "stereo_context": stereo_context,
+            "stereo_listening": stereo_listening,
             "repetition_context": copy.deepcopy(stereo_source.get("repetition_context")),
             "repetition_context_pointer": "/audio/repetition_context" if kind == "video" else "/repetition_context",
             "similarity_context": copy.deepcopy(stereo_source.get("similarity_context")),

@@ -1,0 +1,202 @@
+{
+  "activity_frames": 26508,
+  "advance": {
+    "rescue": false,
+    "suppress": false
+  },
+  "cells": {
+    "archived/center/genuine": {
+      "baseline_ai": 16,
+      "baseline_inconclusive": 16,
+      "candidate_ai": 17,
+      "candidate_inconclusive": 15,
+      "planned": 32,
+      "rescue": 2,
+      "suppress": 1
+    },
+    "archived/center/synthetic": {
+      "baseline_ai": 25,
+      "baseline_inconclusive": 11,
+      "candidate_ai": 28,
+      "candidate_inconclusive": 8,
+      "planned": 36,
+      "rescue": 3,
+      "suppress": 0
+    },
+    "archived/clean/genuine": {
+      "baseline_inconclusive": 1,
+      "baseline_original": 7,
+      "candidate_unassessed": 8,
+      "planned": 8,
+      "rescue": 0,
+      "suppress": 0
+    },
+    "archived/clean/synthetic": {
+      "baseline_ai": 9,
+      "candidate_unassessed": 9,
+      "planned": 9,
+      "rescue": 0,
+      "suppress": 0
+    },
+    "archived/native/genuine": {
+      "baseline_inconclusive": 5,
+      "baseline_original": 7,
+      "baseline_unassessed": 4,
+      "candidate_inconclusive": 3,
+      "candidate_unassessed": 13,
+      "planned": 16,
+      "rescue": 0,
+      "suppress": 0
+    },
+    "transfer/center/genuine": {
+      "baseline_ai": 6,
+      "baseline_inconclusive": 19,
+      "baseline_original": 3,
+      "candidate_ai": 10,
+      "candidate_inconclusive": 15,
+      "candidate_unassessed": 3,
+      "planned": 28,
+      "rescue": 4,
+      "suppress": 0
+    },
+    "transfer/center/synthetic": {
+      "baseline_ai": 18,
+      "baseline_inconclusive": 18,
+      "candidate_ai": 18,
+      "candidate_inconclusive": 18,
+      "planned": 36,
+      "rescue": 3,
+      "suppress": 3
+    },
+    "transfer/clean/genuine": {
+      "baseline_original": 7,
+      "candidate_unassessed": 7,
+      "planned": 7,
+      "rescue": 0,
+      "suppress": 0
+    },
+    "transfer/clean/synthetic": {
+      "baseline_ai": 9,
+      "candidate_unassessed": 9,
+      "planned": 9,
+      "rescue": 0,
+      "suppress": 0
+    },
+    "transfer/native/genuine": {
+      "baseline_inconclusive": 1,
+      "baseline_original": 2,
+      "baseline_unassessed": 1,
+      "candidate_unassessed": 4,
+      "planned": 4,
+      "rescue": 0,
+      "suppress": 0
+    },
+    "transfer/offset/genuine": {
+      "baseline_ai": 1,
+      "baseline_inconclusive": 12,
+      "baseline_original": 1,
+      "candidate_ai": 2,
+      "candidate_inconclusive": 11,
+      "candidate_unassessed": 1,
+      "planned": 14,
+      "rescue": 1,
+      "suppress": 0
+    },
+    "transfer/offset/synthetic": {
+      "baseline_ai": 3,
+      "baseline_inconclusive": 15,
+      "candidate_ai": 4,
+      "candidate_inconclusive": 14,
+      "planned": 18,
+      "rescue": 2,
+      "suppress": 1
+    }
+  },
+  "classifier_forwards": 291,
+  "elapsed_s": 198.856,
+  "freeze_sha256": "6b76ec6648f24c674969f6281a64403540e2eaf6b8b83737982c8b4f91eb7262",
+  "gain_families": {
+    "archived/center/rescue": 2,
+    "archived/center/suppress": 1,
+    "transfer/center/rescue": 2,
+    "transfer/offset/rescue": 2
+  },
+  "gain_groups": {
+    "archived/center/rescue": 3,
+    "archived/center/suppress": 1,
+    "transfer/center/rescue": 3,
+    "transfer/center/suppress": 0,
+    "transfer/offset/rescue": 2
+  },
+  "gain_rooms": {
+    "archived/center/rescue": 2,
+    "archived/center/suppress": 1,
+    "transfer/center/rescue": 2,
+    "transfer/offset/rescue": 2
+  },
+  "median_acoustic": {
+    "archived/center/ES2010d/sequential/snr_gain_db": 0.14427057776966096,
+    "archived/center/ES2010d/sequential/voice_error_rms_db": -240.0,
+    "archived/center/ES2010d/sequential/voice_level_change_db": 0.0,
+    "archived/center/ES2010d/simultaneous/snr_gain_db": 0.7887147653844853,
+    "archived/center/ES2010d/simultaneous/voice_error_rms_db": -240.0,
+    "archived/center/ES2010d/simultaneous/voice_level_change_db": 0.0,
+    "archived/center/IS1007a/sequential/snr_gain_db": -0.27556008321910086,
+    "archived/center/IS1007a/sequential/voice_error_rms_db": -240.0,
+    "archived/center/IS1007a/sequential/voice_level_change_db": 0.0,
+    "archived/center/IS1007a/simultaneous/snr_gain_db": 0.6620669060947003,
+    "archived/center/IS1007a/simultaneous/voice_error_rms_db": -240.0,
+    "archived/center/IS1007a/simultaneous/voice_level_change_db": 0.0,
+    "transfer/center/ES2007c/sequential/snr_gain_db": 1.2914569850526598,
+    "transfer/center/ES2007c/sequential/voice_error_rms_db": -240.0,
+    "transfer/center/ES2007c/sequential/voice_level_change_db": 0.0,
+    "transfer/center/ES2007c/simultaneous/snr_gain_db": 0.48356317825788186,
+    "transfer/center/ES2007c/simultaneous/voice_error_rms_db": -240.0,
+    "transfer/center/ES2007c/simultaneous/voice_level_change_db": 0.0,
+    "transfer/center/IS1004c/sequential/snr_gain_db": 2.04790297680905,
+    "transfer/center/IS1004c/sequential/voice_error_rms_db": -240.0,
+    "transfer/center/IS1004c/sequential/voice_level_change_db": 0.0,
+    "transfer/center/IS1004c/simultaneous/snr_gain_db": 1.6930374659707632,
+    "transfer/center/IS1004c/simultaneous/voice_error_rms_db": -240.0,
+    "transfer/center/IS1004c/simultaneous/voice_level_change_db": 0.0,
+    "transfer/offset/ES2007c/sequential/snr_gain_db": -1.3026852226323014,
+    "transfer/offset/ES2007c/sequential/voice_error_rms_db": -9.224879252800696,
+    "transfer/offset/ES2007c/sequential/voice_level_change_db": -2.676625857128115,
+    "transfer/offset/ES2007c/simultaneous/snr_gain_db": -0.5778688397874165,
+    "transfer/offset/ES2007c/simultaneous/voice_error_rms_db": -13.488184112055858,
+    "transfer/offset/ES2007c/simultaneous/voice_level_change_db": -0.2374123970348963,
+    "transfer/offset/IS1004c/sequential/snr_gain_db": -0.6053941137759049,
+    "transfer/offset/IS1004c/sequential/voice_error_rms_db": -8.932443313143617,
+    "transfer/offset/IS1004c/sequential/voice_level_change_db": -2.5172331315022487,
+    "transfer/offset/IS1004c/simultaneous/snr_gain_db": 1.6193626441757463,
+    "transfer/offset/IS1004c/simultaneous/voice_error_rms_db": -12.857144101099468,
+    "transfer/offset/IS1004c/simultaneous/voice_level_change_db": 0.5599016987904337
+  },
+  "method": {
+    "advance": "Require correct changes on at least three transfer foreground groups across both rooms. Permit at most two lost synthetic flags for suppression or one added false flag for rescue. Rescue must improve two generator families. No changes to clean or native controls. Offset variants must lose at most two true flags and add at most one false flag.",
+    "band_hz": [
+      150,
+      6500
+    ],
+    "coefficient_limit": 2.0,
+    "correlation_floor": 0.15,
+    "diagonal_loading": 0.03,
+    "fft_samples": 512,
+    "fit": "Fit every frequency from two other one-second blocks, then apply to the held block.",
+    "hop_samples": 128,
+    "offset_stress": "One foreground channel is delayed four samples and attenuated by three dB.",
+    "rescue": "Promote an admitted incumbent inconclusive case when the admitted alternative leans AI.",
+    "subtract_fraction": 0.8,
+    "suppression": "Withhold an incumbent AI flag when an admitted alternative loses AI and its raw log odds drop beyond ln(2).",
+    "target": "The fitted reference is half the channel difference, assuming equal foreground on both channels."
+  },
+  "planned": {
+    "center": 132,
+    "clean": 33,
+    "native": 20,
+    "offset": 32
+  },
+  "rss_bytes": 2957672448,
+  "schema": "chipmunk.audio-spatial-interference/1",
+  "scores_sha256": "2e27fa8ffdc4d1af12a3c1256fc71ffcc34656ade78d4af721c3f312a8c0f5d6"
+}

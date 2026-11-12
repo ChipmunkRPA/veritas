@@ -247,17 +247,31 @@ it('shows soundtrack level loss in the voice lane with the original video clock'
         source_start_pts: 118400, source_end_pts: 134400, time_base: '1/16000' }],
     }],
   }
+  const clip = (hash: string): EvidenceAsset => ({
+    sha256: hash.repeat(64), media_type: 'audio/wav', url: 'https://foreign.invalid', samples: 16000,
+    sample_rate: 16000, channels: 1,
+  })
+  audio.stereo_listening = { schema: 'chipmunk.stereo-listening/1', affects_overall_confidence: false, windows: [{
+    stereo_window_index: 0, artifacts: { left: clip('1'), right: clip('2'), mono: clip('3'),
+      waveform: { sha256: '4'.repeat(64), media_type: 'image/png', url: 'https://foreign.invalid', width: 960, height: 290 } },
+  }] }
   render(<MemoryRouter initialEntries={['/media-evidence#media-evidence-stereo']}>
-    <MultimediaEvidenceContent set={set} token="" mediaReady={false} />
+    <MultimediaEvidenceContent set={set} token="secure" mediaReady />
   </MemoryRouter>)
   expect(screen.getByRole('tab', { name: /Voice intervals.*1 mono level drop/ }).getAttribute('aria-selected')).toBe('true')
   const section = within(screen.getByRole('region', { name: 'Stereo channel comparison' }))
-  expect(section.getByText(/Strong level drop in the analyzed mono mix/)).toBeTruthy()
-  expect(section.getByText(/Decoded audio 2.000 s–3.000 s/)).toBeTruthy()
+  expect(section.getByText(/Strong level drop in the analyzed mono mix/).parentElement?.textContent).toContain(
+    'Decoded audio 2.000 s–3.000 s.',
+  )
   expect(section.getByText('7.400 s–8.400 s')).toBeTruthy()
   expect(section.getByText('Video playback 2.400 s–3.400 s')).toBeTruthy()
   expect(section.getByText('[118400, 134400) at 1/16000')).toBeTruthy()
   expect(section.getByText(/do not contribute to the AI assessment/)).toBeTruthy()
+  const comparison = within(section.getByText('Compare stereo and analyzed mono').closest('details')!)
+  expect(comparison.getByText(/Source PTS \[118400, 134400\).*Video playback 2\.400 s–3\.400 s/)).toBeTruthy()
+  expect(comparison.getByLabelText('Exact analyzed mono').getAttribute('src')).toBe(
+    `/api/v2/analyses/video-1/evidence-packets/parent%20set/assets/${'3'.repeat(64)}.wav?token=secure`,
+  )
   const overlap = within(screen.getByRole('region', { name: 'Unscored voice during a mono level drop' }))
   expect(overlap.getByText(/Overlap 2\.125 s–3\.000 s/)).toBeTruthy()
   expect(overlap.getByText(/Source PTS \[120400, 134400\).*Video playback 2\.525 s–3\.400 s/)).toBeTruthy()

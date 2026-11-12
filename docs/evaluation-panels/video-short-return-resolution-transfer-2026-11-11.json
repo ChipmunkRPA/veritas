@@ -1,0 +1,242 @@
+{
+  "by_height": {
+    "360": {
+      "assessed_coverage": {
+        "control": "1",
+        "swap": "1"
+      },
+      "pilot_advances": true,
+      "shortest_gain_source_groups": 6,
+      "totals": {
+        "cut": {
+          "current_false_flag": 8,
+          "current_measured_no_flag": 4,
+          "dense_samples": 576,
+          "dense_single_face_samples": 576,
+          "final_false_flag": 8,
+          "final_localized": 0,
+          "multiple_face_skips": 0,
+          "rank_assessed": 12,
+          "views": 12
+        },
+        "matched": {
+          "current_false_flag": 3,
+          "current_measured_no_flag": 39,
+          "dense_samples": 2016,
+          "dense_single_face_samples": 2016,
+          "final_false_flag": 3,
+          "final_localized": 0,
+          "multiple_face_skips": 0,
+          "rank_assessed": 42,
+          "views": 42
+        },
+        "swap_1/2": {
+          "current_localized": 12,
+          "dense_samples": 576,
+          "dense_single_face_samples": 576,
+          "final_false_flag": 0,
+          "final_localized": 12,
+          "multiple_face_skips": 0,
+          "rank_assessed": 12,
+          "views": 12
+        },
+        "swap_3/8": {
+          "additional_correct": 12,
+          "current_measured_no_flag": 10,
+          "current_wrong_interval": 2,
+          "dense_samples": 576,
+          "dense_single_face_samples": 576,
+          "final_false_flag": 0,
+          "final_localized": 12,
+          "multiple_face_skips": 0,
+          "rank_assessed": 12,
+          "secondary_localized": 12,
+          "views": 12
+        }
+      }
+    },
+    "720": {
+      "assessed_coverage": {
+        "control": "1",
+        "swap": "1"
+      },
+      "pilot_advances": true,
+      "shortest_gain_source_groups": 6,
+      "totals": {
+        "cut": {
+          "current_false_flag": 7,
+          "current_measured_no_flag": 5,
+          "dense_samples": 576,
+          "dense_single_face_samples": 576,
+          "final_false_flag": 7,
+          "final_localized": 0,
+          "multiple_face_skips": 0,
+          "rank_assessed": 12,
+          "views": 12
+        },
+        "matched": {
+          "current_measured_no_flag": 42,
+          "dense_samples": 2016,
+          "dense_single_face_samples": 2016,
+          "final_false_flag": 0,
+          "final_localized": 0,
+          "multiple_face_skips": 0,
+          "rank_assessed": 42,
+          "views": 42
+        },
+        "swap_1/2": {
+          "current_localized": 12,
+          "dense_samples": 576,
+          "dense_single_face_samples": 576,
+          "final_false_flag": 0,
+          "final_localized": 12,
+          "multiple_face_skips": 0,
+          "rank_assessed": 12,
+          "views": 12
+        },
+        "swap_3/8": {
+          "additional_correct": 12,
+          "current_measured_no_flag": 12,
+          "dense_samples": 576,
+          "dense_single_face_samples": 576,
+          "final_false_flag": 0,
+          "final_localized": 12,
+          "multiple_face_skips": 0,
+          "rank_assessed": 12,
+          "secondary_localized": 12,
+          "views": 12
+        }
+      }
+    }
+  },
+  "freeze_sha256": "65f46eb1edd695e0dae138d9c646e146ca56b8fc232d1ff7d6eae1359b6786b6",
+  "frozen_detector_commit": "1cf4f637c2f9c823764d98802f6f9f1e4acacbbc",
+  "frozen_detector_file_sha256": "aa4528209fc7f541b6bb243e8f20b437f50e1165e5e9fcca2dddb6f270ce884b",
+  "gate": "Per view size: at least six added correct 0.375-second ranges across three source groups; at least 80% assessed for swaps and controls separately; at most two added false ordinary ranges and zero added cut ranges.",
+  "independent_source_pixel_audit": {
+    "aggregate_sha256": "886363e5785fad28f8edbe025964294e243551911a17645ea10663195f7b86b1",
+    "by_height": {
+      "360": {
+        "max_added_endpoint_error_ms": 40.0,
+        "median_added_correct_iou": 0.8,
+        "median_added_endpoint_error_ms": 40.0,
+        "verified_before_during_after_anchors": 36,
+        "verified_windows": 156
+      },
+      "720": {
+        "max_added_endpoint_error_ms": 40.0,
+        "median_added_correct_iou": 0.8,
+        "median_added_endpoint_error_ms": 40.0,
+        "verified_before_during_after_anchors": 36,
+        "verified_windows": 156
+      }
+    },
+    "views_per_size": 78
+  },
+  "local_app_replay": {
+    "all_media_picture_checks": 600,
+    "cases": {
+      "distinct_swap": {
+        "appearance_review_seconds": 2.874,
+        "decision_parity": true,
+        "incumbent_range": false,
+        "known_edit_iou": 0.6363636363636364,
+        "known_edit_seconds": [
+          2.92,
+          3.28
+        ],
+        "native_pictures_and_crops_verified": 6,
+        "native_scope": {
+          "measured_face_frames": 48,
+          "reason": null,
+          "scheduled_frames": 48,
+          "status": "localized"
+        },
+        "new_packet_count": 1,
+        "pdf_embeds_all_verified_images": true,
+        "pdf_pages": 17,
+        "range_seconds": [
+          3.0,
+          3.36
+        ],
+        "signed_original_replay_verified": true,
+        "signed_package_sha256": "15d8187fabdcd9da286c416163b0cbb6615137c39be20beeebd1c891ef9b69fd"
+      },
+      "genuine_hard_cut": {
+        "appearance_review_seconds": 2.893,
+        "decision_parity": true,
+        "incumbent_range": false,
+        "native_scope": {
+          "measured_face_frames": 48,
+          "reason": null,
+          "scheduled_frames": 48,
+          "status": "no_distinct_range"
+        },
+        "new_packet_count": 0
+      },
+      "overlapping_swap": {
+        "appearance_review_seconds": 3.439,
+        "decision_parity": true,
+        "incumbent_range": true,
+        "native_scope": {
+          "measured_face_frames": 48,
+          "reason": null,
+          "scheduled_frames": 48,
+          "status": "no_distinct_range"
+        },
+        "new_packet_count": 0
+      },
+      "unchanged": {
+        "appearance_review_seconds": 2.821,
+        "decision_parity": true,
+        "incumbent_range": false,
+        "native_scope": {
+          "measured_face_frames": 48,
+          "reason": null,
+          "scheduled_frames": 48,
+          "status": "no_distinct_range"
+        },
+        "new_packet_count": 0
+      }
+    },
+    "checkout_and_unpaid_event_create_zero_analyses": true,
+    "historical_1080p_package": {
+      "checked_original_frames": true,
+      "historical_1080p_packet_replayed": true,
+      "independently_pinned_signer": false,
+      "verification": "self_consistent"
+    },
+    "paid_event_idempotency_verified": true,
+    "paired_paid_analyses": 8,
+    "profile": "Full, isolated actual face detector and tracking pipeline",
+    "source_dimensions": [
+      1280,
+      720
+    ],
+    "source_rate_hz": 25,
+    "stripe_transport": "isolated test stub"
+  },
+  "rule": "Change only the resolution condition; preserve the current threshold, guards, winner, duplicate handling and incumbent.",
+  "runtime": {
+    "elapsed_s": 134.68271308399926,
+    "journal_sha256": "417b511471c8d6001210cf22e35cb626a9dc99b8a7da1b7e0411161ebadb0b9b",
+    "peak_rss_bytes": 360562688,
+    "verified_source_frames": 834
+  },
+  "schema": "chipmunk.video-short-return-resolution-transfer/1",
+  "source_panel": {
+    "derived_dimensions": [
+      640,
+      360
+    ],
+    "hard_cut_controls_per_size": 12,
+    "independent_resolution_arms": false,
+    "matched_views_per_size": 66,
+    "native_dimensions": [
+      1280,
+      720
+    ],
+    "source_groups": 6,
+    "swap_families": 2
+  }
+}

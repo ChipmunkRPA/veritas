@@ -96,3 +96,24 @@ A separate implementation reopened all nine event sources and 12 speech
 stems. It regenerated all 69 exact component pairs and WAV sums, and verified
 the file hashes, decoded PCM and clocks of all 138 deliveries. The worst
 absolute mixture-level error after quantization was 0.000044 dB.
+
+## Can the shorter voice check catch the wrong-original results?
+
+A separate diagnostic reran the existing two-second voice check on every
+original-leaning case from the pilot. The frozen WAV and MP3 operating
+points came from the earlier six-second reviews. This time the three exact
+windows cover a four-second file. The rule would withhold an original
+tendency if any admitted short window strictly exceeded its carrier's
+point. A useful location had to cover at least half the known edit and
+reach 0.30 temporal IoU.
+
+All 174 windows in 58 files were scored. None exceeded its point. The check
+would have withheld **0 of 5 wrong-original results** and **0 of 53
+ordinary original-leaning results**. These are paired carrier results from
+the consumed pilot, with the exact source bytes and clocks rechecked.
+[Diagnostic ledger](evaluation-panels/audio-vocal-event-voice-conflict-2026-11-12.json)
+
+```sh
+PYTHONPATH=backend python3 -B -S -m scripts.audio_vocal_event_voice_conflict review \
+  docs/evaluation-panels/audio-vocal-event-voice-conflict-2026-11-12.json
+```

@@ -1,0 +1,637 @@
+{
+  "freeze": {
+    "cohort_sha256": "fbe313a680bbfb590e5058957734382bc0727357a2dc29f33042716c28129db5",
+    "criterion": "Locate false-original responses from at least two voice groups, with at most one ordinary group affected per carrier.",
+    "pilot_sha256": "25487ec0d39c54263ff9014f417bdad54dc0aec5462df27604f3d69bfcb775eb",
+    "points": {
+      "mp3": 7.085599896496718,
+      "wav": 6.822523597593649
+    },
+    "purpose": "Retrospective diagnostic on the complete already scored original-leaning pilot cohort. No serving gate.",
+    "runner_sha256": "6ccddd1211b91662ad8bfd8dafab46cfe228932a8ab6ed0e483718e87e6e815f",
+    "schema": "chipmunk.audio-vocal-event-voice-conflict/1",
+    "selection": "Highest admitted two-second logit, earlier start on ties. Strict excess withholds the original tendency.",
+    "windows": [
+      [
+        0,
+        32000
+      ],
+      [
+        16000,
+        48000
+      ],
+      [
+        32000,
+        64000
+      ]
+    ]
+  },
+  "response_sha256": "1c444faaca000a655453277bf468074ecd778325fe90500959decb877612ff44",
+  "rows": [
+    {
+      "carrier": "wav",
+      "id": "case-001",
+      "pcm_sha256": "b1fba24c15088b01ad07e5809d7620efa575908116fe0872b832f5fb2d3e7726",
+      "windows": [
+        -7.016749353246497,
+        -7.105751090862387,
+        -7.200077988805822
+      ]
+    },
+    {
+      "carrier": "wav",
+      "id": "case-002",
+      "pcm_sha256": "fc1b27c519f3cd76133713d59a2b6f5fdfe0a6ffb8154fd4634380532f7f7b31",
+      "windows": [
+        -6.6761723286295025,
+        2.2044014179115847,
+        -6.820539027939084
+      ]
+    },
+    {
+      "carrier": "wav",
+      "id": "case-003",
+      "pcm_sha256": "6a1545e1fb0178990503cdc062042504a1f8e7c9fe3142c500c79db388286e29",
+      "windows": [
+        -6.7149219041649575,
+        -3.9967692068592924,
+        -7.072616543604988
+      ]
+    },
+    {
+      "carrier": "wav",
+      "id": "case-004",
+      "pcm_sha256": "561a3db792a7c38feeb5d838e4064d7ecb250bff629ef9729daae137557480d8",
+      "windows": [
+        -6.782482127246025,
+        -7.023695052870636,
+        -7.162665352845552
+      ]
+    },
+    {
+      "carrier": "wav",
+      "id": "case-005",
+      "pcm_sha256": "c6e47f9ab44608cdceb23b8aeca8afed7b7da8ed49c1fd91a3b581926c85e6e1",
+      "windows": [
+        -6.806236299275868,
+        -7.062361289809982,
+        -7.171966508188056
+      ]
+    },
+    {
+      "carrier": "wav",
+      "id": "case-009",
+      "pcm_sha256": "630a6cbcd55f677256147c8458b55ec845fa9e863f92303815b522ed152f6325",
+      "windows": [
+        -6.620844810642508,
+        -5.548464248664164,
+        -6.608063705553355
+      ]
+    },
+    {
+      "carrier": "wav",
+      "id": "case-011",
+      "pcm_sha256": "e58b21623be6c4cac65326b7c13c17972b42b51030c0b8ed860011c368a1240b",
+      "windows": [
+        -6.967487845342604,
+        -6.882956078409935,
+        -7.153960255292776
+      ]
+    },
+    {
+      "carrier": "wav",
+      "id": "case-013",
+      "pcm_sha256": "1bcbc6b1787d911310c9942816fb68392afe95dee9ba7fdf22a9608c8f6e9c1b",
+      "windows": [
+        -6.952418259214465,
+        -4.613648359266127,
+        -6.317464847068009
+      ]
+    },
+    {
+      "carrier": "wav",
+      "id": "case-014",
+      "pcm_sha256": "8de476fa239ea9da31a7ec77dfa91e8ac82bd858fc9158086c166981d5443e87",
+      "windows": [
+        -6.560172052203497,
+        -3.2034754376870627,
+        -6.6277126930634465
+      ]
+    },
+    {
+      "carrier": "wav",
+      "id": "case-015",
+      "pcm_sha256": "71aa80eb53c4706081653e5dfa367a946d803b77f920467214d49e475f55bb86",
+      "windows": [
+        -6.529236309619267,
+        -4.506907502084917,
+        -7.034483851102922
+      ]
+    },
+    {
+      "carrier": "wav",
+      "id": "case-021",
+      "pcm_sha256": "7ab9344f0cab3791a6090c50f15ca967d426d941392e1c2aa9e7db1b58f9fe63",
+      "windows": [
+        -7.197076739684742,
+        -7.1657805735251605,
+        -7.139091080413928
+      ]
+    },
+    {
+      "carrier": "wav",
+      "id": "case-022",
+      "pcm_sha256": "491155b25245dae17f9d0b2e1e764e4edd11dee5f091a03a02ddd1c3bb85f9ef",
+      "windows": [
+        -6.243932684121346,
+        -4.852296797983162,
+        -7.050634808258651
+      ]
+    },
+    {
+      "carrier": "wav",
+      "id": "case-023",
+      "pcm_sha256": "21136041676e66df8b83bdb1b5175e45dbca1645a2f8a2c2f1cf104be1f09ea6",
+      "windows": [
+        -7.048704099753598,
+        -6.8833117564280215,
+        -7.10549015905974
+      ]
+    },
+    {
+      "carrier": "wav",
+      "id": "case-024",
+      "pcm_sha256": "c9c5df0279a83979ea9cc331ab751b0b3ce7200d8e1e03121c583758f202d67e",
+      "windows": [
+        -7.106121571599946,
+        -6.414639473667932,
+        -6.935120592497137
+      ]
+    },
+    {
+      "carrier": "wav",
+      "id": "case-025",
+      "pcm_sha256": "8c63ba12e423b10f199c16f725ea20333c64975032d4af189134aba7d31f1e2d",
+      "windows": [
+        -7.152996037115179,
+        -7.015458032859881,
+        -7.037108350609898
+      ]
+    },
+    {
+      "carrier": "wav",
+      "id": "case-031",
+      "pcm_sha256": "812b48b9f77d7f31f742cf7e669701226fa7b742bf8774936d91cfd230a30de4",
+      "windows": [
+        -7.072148351454637,
+        -7.137650472783779,
+        -7.1484108358836345
+      ]
+    },
+    {
+      "carrier": "wav",
+      "id": "case-032",
+      "pcm_sha256": "96e2ff5a129d8cc3b7b229cbd180bcdaf1e421e83b95ce6a90d17afb59a5d0b0",
+      "windows": [
+        -7.052822073080917,
+        -6.4862943046126,
+        -4.942636503048128
+      ]
+    },
+    {
+      "carrier": "wav",
+      "id": "case-033",
+      "pcm_sha256": "ecad98bd417169fcd69cc2b5b6e8f7a23eaebaa372af550ad29f20bbef0b5eda",
+      "windows": [
+        -7.065854033889119,
+        -6.781260549780784,
+        -6.366119398290523
+      ]
+    },
+    {
+      "carrier": "wav",
+      "id": "case-034",
+      "pcm_sha256": "3b049b00be518e2f52fec3209325e675f7acd98c8210763f375890b054b23842",
+      "windows": [
+        -6.6025801293715105,
+        -6.606544494656718,
+        -6.884557795603943
+      ]
+    },
+    {
+      "carrier": "wav",
+      "id": "case-035",
+      "pcm_sha256": "1b62b52772675e0a25f7231e62a4e431ef132b6f38839473bc77851944664998",
+      "windows": [
+        -6.671237898474732,
+        -6.730052905032648,
+        -7.001801995319892
+      ]
+    },
+    {
+      "carrier": "wav",
+      "id": "case-041",
+      "pcm_sha256": "d1973be36bc225a8108551e530b9b2516f5ea448b84f9ca9bc42e209b3013177",
+      "windows": [
+        -7.105578407797609,
+        -6.995093298221399,
+        -6.870313124952064
+      ]
+    },
+    {
+      "carrier": "wav",
+      "id": "case-043",
+      "pcm_sha256": "390f580e52b8aa18f47362eb81a3873ce28e0bd07e33e5f9bd7fae98925e129c",
+      "windows": [
+        -6.401318497594455,
+        1.091337215229279,
+        -2.1402652056172373
+      ]
+    },
+    {
+      "carrier": "wav",
+      "id": "case-044",
+      "pcm_sha256": "4f1630e968eea4cf60b3df7f7168dc0559d68ebd53f3d418f6705506671a37d0",
+      "windows": [
+        -6.953083009145424,
+        -6.6575841427915865,
+        -6.909389481218874
+      ]
+    },
+    {
+      "carrier": "wav",
+      "id": "case-045",
+      "pcm_sha256": "79ee3b1b6480332f88c882f5e1eb27b8681f0ae5940263a5455fde1e1d49fe65",
+      "windows": [
+        -6.917545325281627,
+        -6.811377555683821,
+        -6.96123215459306
+      ]
+    },
+    {
+      "carrier": "wav",
+      "id": "case-049",
+      "pcm_sha256": "43d13034cb62a6a2d1b8b9e20c8ae8507989028261e4f66b2e8600b019466a63",
+      "windows": [
+        -6.917035997536736,
+        -6.680443731205212,
+        -6.7974153094387315
+      ]
+    },
+    {
+      "carrier": "wav",
+      "id": "case-050",
+      "pcm_sha256": "d79a94cd9c0e7095544fa3ca6b20d6ec14d51231dbc6b2448ad9eed9afd22c6f",
+      "windows": [
+        -6.312121904973343,
+        -5.924161001447739,
+        -6.526710504867694
+      ]
+    },
+    {
+      "carrier": "wav",
+      "id": "case-051",
+      "pcm_sha256": "467176bb571ad3440fcd6e30b63477fae596471cd4309b6d4e6a04259401cc30",
+      "windows": [
+        -7.219388912593783,
+        -7.195593862737512,
+        -7.220431762905334
+      ]
+    },
+    {
+      "carrier": "wav",
+      "id": "case-052",
+      "pcm_sha256": "f747f3dbf89cd9c9c428532e1dacee48b0b417e9ccc69fab139709db52561232",
+      "windows": [
+        -7.164197869032656,
+        -5.97880405718631,
+        -6.417711229373208
+      ]
+    },
+    {
+      "carrier": "wav",
+      "id": "case-053",
+      "pcm_sha256": "ed087ef36e9b53cd0dfa23a724894b8b4de76959789f79d1bb39207d457532b0",
+      "windows": [
+        -7.19278149319552,
+        -6.874423950288025,
+        -7.053182586272288
+      ]
+    },
+    {
+      "carrier": "wav",
+      "id": "case-054",
+      "pcm_sha256": "97cbdf60987031847fbb87c6d6b9e84a7df9d7a43acc754fedcafbf0456071e6",
+      "windows": [
+        -6.774634847883278,
+        5.035160496959884,
+        -6.591412057813572
+      ]
+    },
+    {
+      "carrier": "wav",
+      "id": "case-055",
+      "pcm_sha256": "07c72b3efa3738355df267e067554ef63d44bc3f73ce688a6537593f3fb8f3ef",
+      "windows": [
+        -6.982625020555115,
+        -5.231669443706782,
+        -7.144663802369596
+      ]
+    },
+    {
+      "carrier": "mp3",
+      "id": "case-001",
+      "pcm_sha256": "5cec103938b7afc652c7c9f4f59824347334ee5cb82a32a0e64160cc064541d1",
+      "windows": [
+        -6.927775920247264,
+        -6.897556338442683,
+        -7.162794596803801
+      ]
+    },
+    {
+      "carrier": "mp3",
+      "id": "case-002",
+      "pcm_sha256": "4ce7c612a8069a93c1ddb963463b622c9814b3fe309b2d4d9dec94ff0c04db85",
+      "windows": [
+        -6.3934387325032125,
+        4.399116725853588,
+        -6.674384118311955
+      ]
+    },
+    {
+      "carrier": "mp3",
+      "id": "case-003",
+      "pcm_sha256": "82a85947921236756da73e1e2779d704e4bff7b977a44eb709e2e22e7f52a42b",
+      "windows": [
+        -6.528353667359979,
+        3.4652623412126613,
+        -7.005756391145835
+      ]
+    },
+    {
+      "carrier": "mp3",
+      "id": "case-004",
+      "pcm_sha256": "7172ccc6e7c080a942ee69d182cd8595eb7ee9c4c03e938c22a277d7a1d718c1",
+      "windows": [
+        -6.732804248707029,
+        -6.92679879161859,
+        -7.149245202713821
+      ]
+    },
+    {
+      "carrier": "mp3",
+      "id": "case-005",
+      "pcm_sha256": "a6e224e976b290420b6f090d034fe47519feb8ee0c076f5140eb7892096398e3",
+      "windows": [
+        -6.621912052983199,
+        -7.002654986778253,
+        -7.157198842374191
+      ]
+    },
+    {
+      "carrier": "mp3",
+      "id": "case-011",
+      "pcm_sha256": "a097f2b5640709aca9e0386b0d6a76885e33dd7850fb96d5f446850e470c1add",
+      "windows": [
+        -6.220557190402003,
+        -6.419769227044211,
+        -7.009382214684735
+      ]
+    },
+    {
+      "carrier": "mp3",
+      "id": "case-021",
+      "pcm_sha256": "d7d3587bed39635ae95a16a51c951d2187a7e6e252049cf6ba04bc8b52c5fca9",
+      "windows": [
+        -7.157447857648217,
+        -7.085190764895124,
+        -7.008912009181003
+      ]
+    },
+    {
+      "carrier": "mp3",
+      "id": "case-022",
+      "pcm_sha256": "cc800675bc80d7ca1e325318033f2deb8a67203d43663fd29382f62969ae87fa",
+      "windows": [
+        3.2931476856611246,
+        -4.524869003569971,
+        -6.904140489455781
+      ]
+    },
+    {
+      "carrier": "mp3",
+      "id": "case-023",
+      "pcm_sha256": "b61642197ca5330ee4dcd8cbecb2db0d63c8775389062a6373b636adfb099093",
+      "windows": [
+        -6.980403370654011,
+        -6.69808816584097,
+        -6.963401786053643
+      ]
+    },
+    {
+      "carrier": "mp3",
+      "id": "case-024",
+      "pcm_sha256": "c50c1ee5ed3f227e9542a2076303aced6d6a023e3299af86dd580d8589187b3f",
+      "windows": [
+        -6.970137559353612,
+        -5.962424256741976,
+        -6.788562734422441
+      ]
+    },
+    {
+      "carrier": "mp3",
+      "id": "case-025",
+      "pcm_sha256": "3087fc89b3c26e61638d6b04f1b60b7a30c14fd2d629b5cbb36d4f0a6995fdfe",
+      "windows": [
+        -7.103707239818555,
+        -6.920041060761828,
+        -6.9569106727980525
+      ]
+    },
+    {
+      "carrier": "mp3",
+      "id": "case-031",
+      "pcm_sha256": "5904de226f2cc55751111fa05da4f1c81f92ebb17ac91721a142296cf5cf9b26",
+      "windows": [
+        -6.940202258704004,
+        -7.039465916537252,
+        -7.0869474861531305
+      ]
+    },
+    {
+      "carrier": "mp3",
+      "id": "case-032",
+      "pcm_sha256": "5312ad68c9566ce001d0c81942b447ea7c7fbcb825be671fcc1cc7fd073afce8",
+      "windows": [
+        -6.948389006424282,
+        -5.279856702819659,
+        -3.0368557771323514
+      ]
+    },
+    {
+      "carrier": "mp3",
+      "id": "case-033",
+      "pcm_sha256": "bbcf99fa84c89675b1284b163b0596e22381875af91884b83e0e86f1fefa0883",
+      "windows": [
+        -6.958954753333223,
+        -6.209640558232819,
+        -5.890768084329931
+      ]
+    },
+    {
+      "carrier": "mp3",
+      "id": "case-034",
+      "pcm_sha256": "95eebe1c317397e8b8618aa8798ea78d08ce9fdcdf7145e40e71bfda074415fb",
+      "windows": [
+        -5.856345184725038,
+        -5.828014393173326,
+        -6.635989126210601
+      ]
+    },
+    {
+      "carrier": "mp3",
+      "id": "case-035",
+      "pcm_sha256": "bb79fe6c61b5a98d0166c11c13abfd177ba57a3f50713fb6f759b126ca8cbd19",
+      "windows": [
+        -5.3338155278900246,
+        -5.99247363689776,
+        -6.803332248437105
+      ]
+    },
+    {
+      "carrier": "mp3",
+      "id": "case-041",
+      "pcm_sha256": "d64197992f0ffdedb133d38ddb0b487b78adba3562e939e1246478bac22533c2",
+      "windows": [
+        -7.085342420063761,
+        -6.888673805912563,
+        -6.426479338390475
+      ]
+    },
+    {
+      "carrier": "mp3",
+      "id": "case-043",
+      "pcm_sha256": "5b8d38be885940e07e53be132dd0f52c9e02db9cd5bdaaf7928a5de656185ee1",
+      "windows": [
+        -5.98748342762274,
+        1.975518470654536,
+        -5.346146591924342
+      ]
+    },
+    {
+      "carrier": "mp3",
+      "id": "case-044",
+      "pcm_sha256": "33da933648e181fa2c342b10b5e558cdaec8bcec2fecf973f26e235d745711ab",
+      "windows": [
+        -6.891586271390593,
+        -6.382469202882738,
+        -6.771948334550636
+      ]
+    },
+    {
+      "carrier": "mp3",
+      "id": "case-045",
+      "pcm_sha256": "31cc3e1a830831176b1b49ee906b56ce8db7d57134ceeadcf3226ee3f3723c24",
+      "windows": [
+        -6.770638394187473,
+        -6.859091210145841,
+        -6.927021966370539
+      ]
+    },
+    {
+      "carrier": "mp3",
+      "id": "case-049",
+      "pcm_sha256": "f3ab3f6a5687136cf7f48be40e99fbb6f37e0f38fb4ea020e0e3c96a0bedd877",
+      "windows": [
+        -6.812901988542315,
+        -6.713034661375879,
+        -6.644012427941666
+      ]
+    },
+    {
+      "carrier": "mp3",
+      "id": "case-050",
+      "pcm_sha256": "f04bae47567c7549290a0c9d22f9602d0b1d454dade8d2f18e255d06f4202318",
+      "windows": [
+        -5.73545269548508,
+        -5.633290286735167,
+        -6.100334176531343
+      ]
+    },
+    {
+      "carrier": "mp3",
+      "id": "case-051",
+      "pcm_sha256": "5878d5f28daa1cff747796172bfe7f01c28fae9c58ff8894c7326ca66878abf1",
+      "windows": [
+        -7.149497519257706,
+        -7.1183519008149885,
+        -7.175247260750248
+      ]
+    },
+    {
+      "carrier": "mp3",
+      "id": "case-052",
+      "pcm_sha256": "f2119194121636cf604a743e515f17a451b663a6b93372a77fef2adaea3d36a5",
+      "windows": [
+        -7.060939785463241,
+        -4.374652889546432,
+        -6.100019000463092
+      ]
+    },
+    {
+      "carrier": "mp3",
+      "id": "case-053",
+      "pcm_sha256": "32f918e085bc5dd2b6b2b01b18ff792125da8ee3a4cd21b4a6752947025bfa31",
+      "windows": [
+        -7.107476286050502,
+        -6.637861213291569,
+        -6.980896958759765
+      ]
+    },
+    {
+      "carrier": "mp3",
+      "id": "case-054",
+      "pcm_sha256": "8b8d1bebd382da5c7c0ba402a7d0a5ecdefdad95f55ca8b1612dc79d2f2acc35",
+      "windows": [
+        -6.694991116776386,
+        4.616309334125679,
+        -6.740140471731047
+      ]
+    },
+    {
+      "carrier": "mp3",
+      "id": "case-055",
+      "pcm_sha256": "984bc457e6bb05415cbc1016a2a6ae5c73ab3c22b132339027eb8c57faf742b7",
+      "windows": [
+        -6.564152755317124,
+        -4.7449512025466545,
+        -7.107655989839776
+      ]
+    }
+  ],
+  "summary": {
+    "carriers": {
+      "mp3": {
+        "ordinary_files": 25,
+        "ordinary_groups_withheld": [],
+        "ordinary_withheld": 0,
+        "unassessed_files": 0,
+        "usefully_located": 0,
+        "usefully_located_groups": [],
+        "wrong_original_files": 2,
+        "wrong_original_withheld": 0
+      },
+      "wav": {
+        "ordinary_files": 28,
+        "ordinary_groups_withheld": [],
+        "ordinary_withheld": 0,
+        "unassessed_files": 0,
+        "usefully_located": 0,
+        "usefully_located_groups": [],
+        "wrong_original_files": 3,
+        "wrong_original_withheld": 0
+      }
+    },
+    "follow_up_criterion_met": false
+  }
+}

@@ -66,6 +66,9 @@ and matched loud competing speech.
 The [controlled room-speech attenuation study](audio-room-reference-transfer-2026-11-12.md)
 reconstructs each changed waveform independently and checks whether improved
 foreground reconstruction recovers short synthetic inserts.
+The [temporal voice-head comparison](audio-partial-residual-transfer-2026-11-12.md)
+replays the fitted and unfitted checks on exact short edits with competing
+speech. The public reader verifies location counts without audio or weights.
 
 The [video tracking evidence fixture](video-face-tracking-context.md) exercises
 the same recorded values in a saved packet and report without downloading
@@ -184,6 +187,9 @@ small- and large-region tradeoffs and the separate follow-up on generated edits.
 The [photo and graphics stress test](image-small-boundary-control-stress-2026-11-12.md)
 replays 120 exact views and separates correct paste locations from ordinary
 photo and graphics flags. Its public verifier needs no media or weights.
+The [photo-admission screenshot test](image-small-boundary-screenshot-admission-2026-11-12.md)
+seals the screenshots that reach the fallback before candidate scoring. Its
+public reader reproduces the added paste locations and screenshot flags.
 The [image flip comparison](image-regional-flip-transfer-2026-11-11.md) tests
 whether the sensitive detector reproduces a region under a reversible transform.
 It separately reports useful regions, processing controls and untouched photos.

@@ -1,0 +1,432 @@
+{
+  "commitments": {
+    "freeze": "6b0331d2700eab5d91ae4a18f461d51acdea9c180501f7f1382ad8eab2b0a8c4",
+    "inputs": "186c2c285b99a26189c0c30b7c35bef7ccfa274618cf616a064a21dd9cb12ca7",
+    "scores": "cfd5a5d0a16d46e2cc7a7a1e819d22c1e07c850cd09d377156493285918d1a50"
+  },
+  "fixed_point": 6.400866488004889,
+  "independent_replay": {
+    "exact_useful_original_locations_retained": 1,
+    "file_pairs_verified": 52,
+    "fixed_arms_verified": 3,
+    "new_false_groups": 0,
+    "original_false_groups_removed": 1,
+    "useful_original_locations": 1,
+    "windows_verified": 208
+  },
+  "new_classifier_windows": 102,
+  "passes_advancement": true,
+  "schema": "chipmunk.audio-communication-transfer/1",
+  "source_panel": "Retained prior 52-recording source panel; new communication deliveries with prior source exposure.",
+  "tables": {
+    "all": {
+      "equal_false_groups": {
+        "0": {
+          "both": {
+            "ai_flags": 0,
+            "background_false_flags": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "useful_ranges": 0
+          },
+          "communication": {
+            "ai_flags": 1,
+            "background_false_flags": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "useful_ranges": 1
+          },
+          "original": {
+            "ai_flags": 0,
+            "background_false_flags": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "useful_ranges": 0
+          }
+        },
+        "1": {
+          "both": {
+            "ai_flags": 0,
+            "background_false_flags": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "useful_ranges": 0
+          },
+          "communication": {
+            "ai_flags": 1,
+            "background_false_flags": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "useful_ranges": 1
+          },
+          "original": {
+            "ai_flags": 1,
+            "background_false_flags": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "useful_ranges": 0
+          }
+        },
+        "2": {
+          "both": {
+            "ai_flags": 2,
+            "background_false_flags": 0,
+            "false_groups": 2,
+            "unassessed": 0,
+            "useful_ranges": 1
+          },
+          "communication": {
+            "ai_flags": 2,
+            "background_false_flags": 0,
+            "false_groups": 2,
+            "unassessed": 0,
+            "useful_ranges": 1
+          },
+          "original": {
+            "ai_flags": 2,
+            "background_false_flags": 0,
+            "false_groups": 2,
+            "unassessed": 0,
+            "useful_ranges": 1
+          }
+        }
+      },
+      "fixed": {
+        "both": {
+          "ai_flags": 2,
+          "background_false_flags": 0,
+          "false_groups": 2,
+          "unassessed": 0,
+          "useful_ranges": 1
+        },
+        "communication": {
+          "ai_flags": 5,
+          "background_false_flags": 0,
+          "false_groups": 6,
+          "unassessed": 0,
+          "useful_ranges": 2
+        },
+        "original": {
+          "ai_flags": 3,
+          "background_false_flags": 0,
+          "false_groups": 3,
+          "unassessed": 0,
+          "useful_ranges": 1
+        }
+      },
+      "inputs": {
+        "background_only": 4,
+        "ordinary_other_voice": 12,
+        "ordinary_same_host": 12,
+        "synthetic": 12,
+        "untouched": 12
+      }
+    },
+    "clone": {
+      "equal_false_groups": {
+        "0": {
+          "both": {
+            "ai_flags": 0,
+            "background_false_flags": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "useful_ranges": 0
+          },
+          "communication": {
+            "ai_flags": 1,
+            "background_false_flags": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "useful_ranges": 1
+          },
+          "original": {
+            "ai_flags": 0,
+            "background_false_flags": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "useful_ranges": 0
+          }
+        },
+        "1": {
+          "both": {
+            "ai_flags": 1,
+            "background_false_flags": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "useful_ranges": 1
+          },
+          "communication": {
+            "ai_flags": 1,
+            "background_false_flags": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "useful_ranges": 1
+          },
+          "original": {
+            "ai_flags": 1,
+            "background_false_flags": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "useful_ranges": 1
+          }
+        },
+        "2": {
+          "both": {
+            "ai_flags": 2,
+            "background_false_flags": 0,
+            "false_groups": 2,
+            "unassessed": 0,
+            "useful_ranges": 1
+          },
+          "communication": {
+            "ai_flags": 2,
+            "background_false_flags": 0,
+            "false_groups": 2,
+            "unassessed": 0,
+            "useful_ranges": 2
+          },
+          "original": {
+            "ai_flags": 2,
+            "background_false_flags": 0,
+            "false_groups": 2,
+            "unassessed": 0,
+            "useful_ranges": 1
+          }
+        }
+      },
+      "fixed": {
+        "both": {
+          "ai_flags": 1,
+          "background_false_flags": 0,
+          "false_groups": 1,
+          "unassessed": 0,
+          "useful_ranges": 1
+        },
+        "communication": {
+          "ai_flags": 2,
+          "background_false_flags": 0,
+          "false_groups": 2,
+          "unassessed": 0,
+          "useful_ranges": 2
+        },
+        "original": {
+          "ai_flags": 1,
+          "background_false_flags": 0,
+          "false_groups": 1,
+          "unassessed": 0,
+          "useful_ranges": 1
+        }
+      },
+      "inputs": {
+        "ordinary_other_voice": 4,
+        "ordinary_same_host": 4,
+        "synthetic": 4,
+        "untouched": 4
+      }
+    },
+    "expressive": {
+      "equal_false_groups": {
+        "0": {
+          "both": {
+            "ai_flags": 0,
+            "background_false_flags": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "useful_ranges": 0
+          },
+          "communication": {
+            "ai_flags": 0,
+            "background_false_flags": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "useful_ranges": 0
+          },
+          "original": {
+            "ai_flags": 0,
+            "background_false_flags": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "useful_ranges": 0
+          }
+        },
+        "1": {
+          "both": {
+            "ai_flags": 1,
+            "background_false_flags": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "useful_ranges": 0
+          },
+          "communication": {
+            "ai_flags": 1,
+            "background_false_flags": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "useful_ranges": 0
+          },
+          "original": {
+            "ai_flags": 1,
+            "background_false_flags": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "useful_ranges": 0
+          }
+        },
+        "2": {
+          "both": {
+            "ai_flags": 2,
+            "background_false_flags": 0,
+            "false_groups": 2,
+            "unassessed": 0,
+            "useful_ranges": 0
+          },
+          "communication": {
+            "ai_flags": 2,
+            "background_false_flags": 0,
+            "false_groups": 2,
+            "unassessed": 0,
+            "useful_ranges": 0
+          },
+          "original": {
+            "ai_flags": 2,
+            "background_false_flags": 0,
+            "false_groups": 2,
+            "unassessed": 0,
+            "useful_ranges": 0
+          }
+        }
+      },
+      "fixed": {
+        "both": {
+          "ai_flags": 1,
+          "background_false_flags": 0,
+          "false_groups": 1,
+          "unassessed": 0,
+          "useful_ranges": 0
+        },
+        "communication": {
+          "ai_flags": 2,
+          "background_false_flags": 0,
+          "false_groups": 2,
+          "unassessed": 0,
+          "useful_ranges": 0
+        },
+        "original": {
+          "ai_flags": 2,
+          "background_false_flags": 0,
+          "false_groups": 2,
+          "unassessed": 0,
+          "useful_ranges": 0
+        }
+      },
+      "inputs": {
+        "ordinary_other_voice": 4,
+        "ordinary_same_host": 4,
+        "synthetic": 4,
+        "untouched": 4
+      }
+    },
+    "stock": {
+      "equal_false_groups": {
+        "0": {
+          "both": {
+            "ai_flags": 0,
+            "background_false_flags": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "useful_ranges": 0
+          },
+          "communication": {
+            "ai_flags": 0,
+            "background_false_flags": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "useful_ranges": 0
+          },
+          "original": {
+            "ai_flags": 0,
+            "background_false_flags": 0,
+            "false_groups": 0,
+            "unassessed": 0,
+            "useful_ranges": 0
+          }
+        },
+        "1": {
+          "both": {
+            "ai_flags": 1,
+            "background_false_flags": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "useful_ranges": 0
+          },
+          "communication": {
+            "ai_flags": 0,
+            "background_false_flags": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "useful_ranges": 0
+          },
+          "original": {
+            "ai_flags": 2,
+            "background_false_flags": 0,
+            "false_groups": 1,
+            "unassessed": 0,
+            "useful_ranges": 1
+          }
+        },
+        "2": {
+          "both": {
+            "ai_flags": 3,
+            "background_false_flags": 0,
+            "false_groups": 2,
+            "unassessed": 0,
+            "useful_ranges": 1
+          },
+          "communication": {
+            "ai_flags": 2,
+            "background_false_flags": 0,
+            "false_groups": 2,
+            "unassessed": 0,
+            "useful_ranges": 0
+          },
+          "original": {
+            "ai_flags": 3,
+            "background_false_flags": 0,
+            "false_groups": 2,
+            "unassessed": 0,
+            "useful_ranges": 2
+          }
+        }
+      },
+      "fixed": {
+        "both": {
+          "ai_flags": 0,
+          "background_false_flags": 0,
+          "false_groups": 0,
+          "unassessed": 0,
+          "useful_ranges": 0
+        },
+        "communication": {
+          "ai_flags": 1,
+          "background_false_flags": 0,
+          "false_groups": 2,
+          "unassessed": 0,
+          "useful_ranges": 0
+        },
+        "original": {
+          "ai_flags": 0,
+          "background_false_flags": 0,
+          "false_groups": 0,
+          "unassessed": 0,
+          "useful_ranges": 0
+        }
+      },
+      "inputs": {
+        "ordinary_other_voice": 4,
+        "ordinary_same_host": 4,
+        "synthetic": 4,
+        "untouched": 4
+      }
+    }
+  }
+}

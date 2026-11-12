@@ -24,6 +24,9 @@ function Excerpt({ label, excerpt }: { label: string; excerpt: ArchiveExcerpt | 
   return <div className="min-w-0">
     <h4 className="m-0 text-small font-medium">{label}</h4>
     {excerpt && <p className="mt-1 mb-0 font-mono text-caption text-text-muted">[{excerpt.start}, {excerpt.end})</p>}
+    {excerpt?.docx_location && <p className="mt-1 mb-0 text-caption text-text-muted">
+      Word paragraph characters [{excerpt.docx_location.paragraph_range.join(', ')})
+    </p>}
     {excerpt?.text
       ? <p className="mt-2 mb-0 whitespace-pre-wrap break-words text-small">{marked}{points.slice(cursor).join('')}</p>
       : <p className="mt-2 mb-0 text-small text-text-muted">{excerpt ? 'No text at this position.' : 'No corresponding text.'}</p>}
@@ -67,7 +70,9 @@ function ArchiveResult({ result }: { result: ArchiveComparison }) {
       <p className="mt-2 mb-0 text-caption text-text-muted">Submitted positions count Unicode code points in the extracted text. Archive positions start within the cited paragraph. Range ends are excluded.</p>
       <ol className="mt-3 mb-0 list-none space-y-3 p-0">
         {changes.map((change, i) => <li key={i} className="rounded-md border border-border p-3">
-          <h3 className="m-0 text-small font-medium">{joined ? 'Passage in submitted paragraph' : 'Submitted paragraph'} {change.submitted_paragraph}</h3>
+          <h3 className="m-0 text-small font-medium">{change.submitted.docx_location
+            ? `Word body paragraph ${change.submitted.docx_location.paragraph}`
+            : `${joined ? 'Passage in submitted paragraph' : 'Submitted paragraph'} ${change.submitted_paragraph}`}</h3>
           <div className="mt-3 grid gap-4 sm:grid-cols-2">
             <Excerpt label={change.archive_paragraph == null ? 'Archive version' : `Archive body paragraph ${change.archive_paragraph}`}
               excerpt={change.archive} />

@@ -3357,6 +3357,7 @@ export interface components {
                 number,
                 number
             ][];
+            docx_location?: components["schemas"]["DocumentArchiveWordLocation"] | null;
             /** End */
             end: number;
             /** Start */
@@ -3392,6 +3393,8 @@ export interface components {
             alignment: "fingerprint_anchor" | "bounded_pair" | "bounded_insert" | "bounded_delete";
             /** Archive Paragraph */
             archive_paragraph: number | null;
+            /** Docx Paragraph */
+            docx_paragraph?: number | null;
             /** Submitted Paragraph */
             submitted_paragraph: number;
             /** Submitted Range */
@@ -3418,6 +3421,47 @@ export interface components {
             comparison: components["schemas"]["DocumentArchiveComparison"];
             /** Pdf */
             pdf: string | null;
+        };
+        /** DocumentArchiveWordLocation */
+        DocumentArchiveWordLocation: {
+            /** Body Index */
+            body_index: number;
+            /** Changed Tokens */
+            changed_tokens: components["schemas"]["DocumentArchiveWordToken"][];
+            /** Paragraph */
+            paragraph: number;
+            /** Paragraph Range */
+            paragraph_range: [
+                number,
+                number
+            ];
+            /** Runs Complete */
+            runs_complete: boolean;
+        };
+        /** DocumentArchiveWordRun */
+        DocumentArchiveWordRun: {
+            /** Range */
+            range: [
+                number,
+                number
+            ];
+            /** Run */
+            run: number;
+        };
+        /** DocumentArchiveWordToken */
+        DocumentArchiveWordToken: {
+            /** Extracted Range */
+            extracted_range: [
+                number,
+                number
+            ];
+            /** Paragraph Range */
+            paragraph_range: [
+                number,
+                number
+            ];
+            /** Runs */
+            runs: components["schemas"]["DocumentArchiveWordRun"][];
         };
         /** DocumentRevisionAvailability */
         DocumentRevisionAvailability: {

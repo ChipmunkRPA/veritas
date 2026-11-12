@@ -259,7 +259,7 @@ export default function AnalysisWorkspace() {
   const sourceComparison = !done ? null : a.kind === 'image' ? <ImageReferenceComparison key={a.id} analysisId={a.id} />
     : a.kind === 'document' ? <>
         <DocumentRevisionComparison key={`draft-${a.id}`} analysisId={a.id} />
-        {/\.txt$/i.test(a.filename) && <DocumentArchiveComparison key={`archive-${a.id}`} analysisId={a.id} />}
+        {/\.(txt|docx)$/i.test(a.filename) && <DocumentArchiveComparison key={`archive-${a.id}`} analysisId={a.id} />}
       </>
       : (a.kind === 'video' || a.kind === 'audio') ? <MediaReferenceComparison key={a.id} analysisId={a.id} kind={a.kind} /> : null
   const body = !legacy.data ? null : !v2 ? (

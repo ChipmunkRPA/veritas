@@ -1,10 +1,12 @@
 # Public archive comparison for text analyses
 
-Set `VERITAS_DOCUMENT_ARCHIVE_COMPARISON_ENABLED=true` in the local development backend and restart it. Open a completed plain-text analysis you submitted and select **Compare with public archive** in its normal results view. The check compares the retained text against 118 selected excerpts from the U.S. Department of State's Foreign Relations of the United States archive.
+Set `VERITAS_DOCUMENT_ARCHIVE_COMPARISON_ENABLED=true` in the local development backend and restart it. Open a completed `.txt` or `.docx` analysis you submitted and select **Compare with public archive** in its normal results view. The check compares the retained text against 118 selected excerpts from the U.S. Department of State's Foreign Relations of the United States archive.
 
 A match includes the official citation, pinned archive version, word coverage and the exact changed wording on both sides. The comparison only describes aligned passages. An unmatched or ambiguous result leaves the source open. Differences may reflect ordinary edits or transcription. This evidence carries zero AI-assessment weight.
 
 If a plain-text copy joins several consecutive archive paragraphs into one, the app can recover their boundaries from source wording and compare each recovered passage. When every token position aligns uniquely and exactly one token changes near an internal boundary, the app can also locate that difference. PDF and JSON preserve positions in the submitted text. [Held layout comparison](writing-archive-joined-layout-2026-11-12.md) · [Single-word boundary comparison](writing-archive-changed-edge-2026-11-12.md)
+
+For Word, the comparison reads top-level body paragraphs. The result and PDF show the original Word paragraph number and character range. The JSON and API also locate each changed token within that paragraph and within its text runs when the run mapping is complete. Tables, headers, footers, text boxes and embedded content are outside this check. [Word source-position evaluation](writing-archive-word-transfer-2026-11-12.md)
 
 The action uses the retained original and the bundled local index. It requires the authenticated owner and an active completed analysis. Test and live billing modes also require the existing fulfilled payment receipt for that exact analysis. The action starts zero new jobs or checkouts and sends zero submitted text to an external service.
 

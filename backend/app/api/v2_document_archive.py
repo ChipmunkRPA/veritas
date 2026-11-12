@@ -1,4 +1,4 @@
-"""Optional source comparison on a completed, retained plain-text analysis."""
+"""Optional source comparison on completed plain-text and Word analyses."""
 
 from __future__ import annotations
 
@@ -21,12 +21,13 @@ from app.cases import review
 from app.core.config import settings
 from app.core.logging import get_logger
 from app.detectors.text.extract import extract
-from app.evidence import document_archive
+from app.evidence import document_archive, document_archive_word
 from app.evidence.document_revision import MAX_BYTES
 from app.storage.db import get_session
 from app.storage.objects import ObjectNotFound, ObjectStoreError, default_store
 
 ROUTE = "/analyses/{aid}/document-archive-comparison"
+FORMATS = {".txt", ".docx"}
 _slot = threading.BoundedSemaphore()
 log = get_logger(__name__)
 
@@ -71,6 +72,26 @@ class DocumentArchiveParagraph(BaseModel):
     submitted_range: tuple[int, int]
     archive_paragraph: int | None
     alignment: ArchiveAlignment
+    docx_paragraph: int | None = None
+
+
+class DocumentArchiveWordRun(BaseModel):
+    run: int
+    range: tuple[int, int]
+
+
+class DocumentArchiveWordToken(BaseModel):
+    extracted_range: tuple[int, int]
+    paragraph_range: tuple[int, int]
+    runs: list[DocumentArchiveWordRun]
+
+
+class DocumentArchiveWordLocation(BaseModel):
+    paragraph: int
+    body_index: int
+    paragraph_range: tuple[int, int]
+    changed_tokens: list[DocumentArchiveWordToken]
+    runs_complete: bool
 
 
 class DocumentArchiveExcerpt(BaseModel):
@@ -78,6 +99,7 @@ class DocumentArchiveExcerpt(BaseModel):
     end: int
     text: str
     changed_tokens: list[tuple[int, int]]
+    docx_location: DocumentArchiveWordLocation | None = None
 
 
 class DocumentArchiveChange(BaseModel):
@@ -118,14 +140,15 @@ def _authenticated(request: Request) -> bool:
     return request.state.principal.auth in {"session", "api_key", "bootstrap"}
 
 
-def _original(aid: str, owner: str, *, reject_inactive: bool = False) -> tuple[str, int, str] | None:
+def _original(aid: str, owner: str, *, reject_inactive: bool = False) -> tuple[str, int, str, str] | None:
     if not _enabled():
         return None
     with get_session() as db:
         analysis = _analysis(db, aid)
+        extension = Path(analysis.filename).suffix.lower()
         if (analysis.submitted_by != owner or analysis.kind != "document"
                 or analysis.status != "done" or not analysis.result_hash
-                or Path(analysis.filename).suffix.lower() != ".txt"
+                or extension not in FORMATS
                 or not 0 < analysis.size_bytes <= min(settings.max_document_bytes, MAX_BYTES)):
             return None
         if analysis.withdrawn_at is not None or review.superseded(db, aid):
@@ -138,11 +161,12 @@ def _original(aid: str, owner: str, *, reject_inactive: bool = False) -> tuple[s
             if reject_inactive:
                 raise ProblemError(402, "Payment receipt required", "This analysis has no confirmed payment receipt.") from None
             return None
-        return analysis.sha256, analysis.size_bytes, analysis.result_hash
+        return analysis.sha256, analysis.size_bytes, analysis.result_hash, extension
 
 
 def _unavailable() -> ProblemError:
-    return ProblemError(404, "Archive comparison unavailable", "A completed, active analysis with a retained .txt file is required.")
+    return ProblemError(404, "Archive comparison unavailable",
+                        "A completed, active analysis with a retained .txt or .docx file is required.")
 
 
 @router.get(ROUTE, response_model=DocumentArchiveAvailability, responses=problem_responses(401, 404))
@@ -150,7 +174,7 @@ def document_archive_availability(aid: str, request: Request):
     original = _original(aid, request.state.principal.id) if _authenticated(request) else None
     available = False
     if original is not None:
-        sha, size, _ = original
+        sha, size, _, _ = original
         try:
             path = default_store().path_for(sha)
             available = path.is_file() and path.stat().st_size == size
@@ -175,10 +199,10 @@ def compare_document_archive(aid: str, request: Request, include_pdf: bool = Fal
         _slot.release()
 
 
-def _compare(aid: str, owner: str, original: tuple[str, int, str], include_pdf: bool) -> JSONResponse:
+def _compare(aid: str, owner: str, original: tuple[str, int, str, str], include_pdf: bool) -> JSONResponse:
     if _original(aid, owner, reject_inactive=True) != original:
         raise _unavailable()
-    sha, size, _ = original
+    sha, size, _, extension = original
     try:
         with default_store().open(sha) as stored:
             data = stored.read(size + 1)
@@ -189,17 +213,20 @@ def _compare(aid: str, owner: str, original: tuple[str, int, str], include_pdf: 
     if len(data) != size or hashlib.sha256(data).hexdigest() != sha:
         raise ProblemError(409, "Original integrity check failed", "The retained document differs from its recorded hash and size.")
     try:
-        with TemporaryDirectory(prefix="chipmunk-archive-") as directory:
-            path = Path(directory) / "retained.txt"
-            path.write_bytes(data)
-            doc = extract(path, ".txt")
-            if "\ufffd" in doc.text or "\x00" in doc.text:
-                raise ValueError("The file contains undecodable text.")
-            comparison = document_archive.compare(doc, sha)
+        if extension == ".docx":
+            comparison = document_archive_word.compare(data, sha)
+        else:
+            with TemporaryDirectory(prefix="chipmunk-archive-") as directory:
+                path = Path(directory) / "retained.txt"
+                path.write_bytes(data)
+                doc = extract(path, ".txt")
+                if "\ufffd" in doc.text or "\x00" in doc.text:
+                    raise ValueError("The file contains undecodable text.")
+                comparison = document_archive.compare(doc, sha)
     except document_archive.ArchiveUnavailable:
         raise ProblemError(503, "Archive library unavailable", "The local archive library could not be verified.") from None
     except (UnicodeError, LookupError, ValueError):
-        raise ProblemError(422, "Could not read document", "Use a readable plain-text document.") from None
+        raise ProblemError(422, "Could not read document", "Use a readable plain-text or standard Word document.") from None
     except OSError:
         raise ProblemError(503, "Archive comparison unavailable", "The local service could not read the document.") from None
     pdf = None
@@ -213,4 +240,4 @@ def _compare(aid: str, owner: str, original: tuple[str, int, str], include_pdf: 
     if _original(aid, owner, reject_inactive=True) != original:
         raise _unavailable()
     payload = DocumentArchiveResponse.model_validate({"comparison": comparison, "pdf": pdf})
-    return JSONResponse(payload.model_dump(mode="json", by_alias=True), headers=NO_STORE)
+    return JSONResponse(payload.model_dump(mode="json", by_alias=True, exclude_unset=True), headers=NO_STORE)

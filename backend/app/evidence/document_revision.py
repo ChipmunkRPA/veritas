@@ -93,7 +93,8 @@ def _docx_part(archive, name):
     return data
 
 
-def _docx_source(data):
+def docx_body_paragraphs(data):
+    """Yield numbered top-level paragraphs from a bounded native Word package."""
     from docx.oxml import parse_xml
     from docx.oxml.ns import qn
     from docx.text.paragraph import Paragraph
@@ -114,12 +115,18 @@ def _docx_source(data):
     if (document.tag != qn("w:document") or (body := document.find(qn("w:body"))) is None
             or document.getroottree().docinfo.doctype or declarations.getroottree().docinfo.doctype):
         raise ValueError("The Word document body could not be read.")
-    paragraphs, anchors, paragraph_number, cursor = [], [], 0, 0
+    paragraph_number = 0
     for body_index, element in enumerate(body):
         if element.tag != qn("w:p"):
             continue
         paragraph_number += 1
-        value = Paragraph(element, None).text
+        yield paragraph_number, body_index, Paragraph(element, None)
+
+
+def _docx_source(data):
+    paragraphs, anchors, cursor = [], [], 0
+    for paragraph_number, body_index, paragraph in docx_body_paragraphs(data):
+        value = paragraph.text
         if not value.strip():
             continue
         start = cursor + (2 if paragraphs else 0)

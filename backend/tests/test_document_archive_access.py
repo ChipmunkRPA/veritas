@@ -5,8 +5,10 @@ import hashlib
 import uuid
 from contextlib import contextmanager
 from datetime import UTC, datetime
+from io import BytesIO
 
 import pymupdf
+from docx import Document as WordDocument
 from fastapi.testclient import TestClient
 from sqlalchemy import select
 from test_stripe_billing import billing as billing
@@ -42,7 +44,7 @@ def _install(fixture, monkeypatch):
 
 
 def _seed(fixture, identifier, text, *, owner=None, filename="original.txt"):
-    retained = fixture.store.put_bytes(text.encode())
+    retained = fixture.store.put_bytes(text.encode() if isinstance(text, str) else text)
     owner = owner or fixture.owner.id
     with fixture.sessions() as db:
         case_id = "archive-fixture"
@@ -93,6 +95,44 @@ def test_local_archive_uses_unchanged_and_no_match_without_exposing_a_reference(
         monkeypatch.setattr(settings, "document_archive_comparison_enabled", False)
         assert client.get(_url("unchanged"), headers=fixture.headers).json() == {"available": False}
         assert client.post(_url("unchanged"), headers=fixture.headers).status_code == 404
+
+
+def test_word_archive_change_keeps_native_paragraph_and_run_positions(billing, monkeypatch):
+    monkeypatch.setattr(settings, "billing_mode", "disabled")
+    word = WordDocument()
+    word.add_paragraph()
+    lead, *tail = _body().split("\n\n")
+    before, after = lead.split("opposing", 1)
+    paragraph = word.add_paragraph()
+    paragraph.add_run(f"  {before}alter")
+    paragraph.add_run(f"ed{after}")
+    for text in tail:
+        word.add_paragraph(text)
+    stream = BytesIO()
+    word.save(stream)
+    retained = _seed(billing, "word-source", stream.getvalue(), filename="source.DOCX")
+    _seed(billing, "bad-word", b"not a Word package", filename="damaged.docx")
+    with _install(billing, monkeypatch) as client:
+        assert client.get(_url("word-source"), headers=billing.headers).json() == {"available": True}
+        response = client.post(_url("word-source") + "?include_pdf=true", headers=billing.headers)
+        assert response.status_code == 200, response.text
+        result = response.json()
+        comparison = result["comparison"]
+        assert comparison["reference"]["id"] == SOURCE
+        assert comparison["submitted_sha256"] == retained.sha256
+        assert comparison["aligned_paragraphs"][0]["docx_paragraph"] == 2
+        (change,) = comparison["changes"]
+        assert change["archive"]["text"] == "opposing" and "docx_location" not in change["archive"]
+        assert change["submitted"]["text"] == "altered"
+        location = change["submitted"]["docx_location"]
+        assert (location["paragraph"], location["body_index"], location["runs_complete"]) == (2, 1, True)
+        assert location["paragraph_range"] == [len(before) + 2, len(before) + 9]
+        assert location["changed_tokens"][0]["runs"] == [
+            {"run": 1, "range": [len(before) + 2, len(before) + 7]}, {"run": 2, "range": [0, 2]},
+        ]
+        with pymupdf.open(stream=base64.b64decode(result["pdf"], validate=True), filetype="pdf") as pdf:
+            assert "Word body paragraph 2" in " ".join(" ".join(page.get_text().split()) for page in pdf)
+        assert client.post(_url("bad-word"), headers=billing.headers).status_code == 422
 
 
 def test_real_paid_checkout_and_retained_archive_evidence(billing, monkeypatch):

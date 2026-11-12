@@ -93,6 +93,26 @@ describe('Public archive comparison', () => {
     expect(screen.queryByRole('link', { name: /Source frus/ })).not.toBeInTheDocument()
   })
 
+  it('shows the changed Word paragraph and its original text range', async () => {
+    const result = structuredClone(edited)
+    result.comparison.layout = 'submitted_paragraphs'
+    result.comparison.changes[0].submitted.docx_location = {
+      paragraph: 3,
+      body_index: 2,
+      paragraph_range: [20, 26],
+      runs_complete: true,
+      changed_tokens: [{ extracted_range: [12, 16], paragraph_range: [22, 26],
+        runs: [{ run: 1, range: [2, 4] }, { run: 2, range: [0, 2] }] }],
+    }
+    vi.mocked(archiveAvailability).mockResolvedValue(true)
+    vi.mocked(compareArchive).mockResolvedValue(result)
+    show()
+    fireEvent.click(await screen.findByRole('button', { name: 'Compare with public archive' }))
+    expect(await screen.findByRole('heading', { name: 'Word body paragraph 3' })).toBeVisible()
+    expect(screen.getByText('Word paragraph characters [20, 26)')).toBeVisible()
+    expect(screen.getByText('café').tagName).toBe('MARK')
+  })
+
   it('hides the action when the retained owner is ineligible', async () => {
     vi.mocked(archiveAvailability).mockResolvedValue(false)
     show()

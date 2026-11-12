@@ -1,0 +1,785 @@
+{
+  "case_count": 96,
+  "cases": [
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": "frus1961-63v09/d208",
+      "role": "original",
+      "split_run_tokens": 0,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 32,
+      "changes": 1,
+      "reference": "frus1961-63v09/d208",
+      "role": "human_swap",
+      "split_run_tokens": 4,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": "frus1961-63v09/d262",
+      "role": "original",
+      "split_run_tokens": 0,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 28,
+      "changes": 1,
+      "reference": "frus1961-63v09/d262",
+      "role": "human_swap",
+      "split_run_tokens": 5,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 10,
+      "changes": 1,
+      "reference": "frus1961-63v09/d262",
+      "role": "qwen",
+      "split_run_tokens": 5,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": "frus1961-63v09/d120",
+      "role": "original",
+      "split_run_tokens": 0,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 14,
+      "changes": 1,
+      "reference": "frus1961-63v09/d120",
+      "role": "human_swap",
+      "split_run_tokens": 2,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 5,
+      "changes": 2,
+      "reference": "frus1961-63v09/d120",
+      "role": "qwen",
+      "split_run_tokens": 0,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 9,
+      "changes": 1,
+      "reference": "frus1961-63v09/d120",
+      "role": "smol2",
+      "split_run_tokens": 0,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": "frus1961-63v09/d138",
+      "role": "original",
+      "split_run_tokens": 0,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 23,
+      "changes": 1,
+      "reference": "frus1961-63v09/d138",
+      "role": "human_swap",
+      "split_run_tokens": 3,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 14,
+      "changes": 2,
+      "reference": "frus1961-63v09/d138",
+      "role": "qwen",
+      "split_run_tokens": 1,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 11,
+      "changes": 2,
+      "reference": "frus1961-63v09/d138",
+      "role": "smol2",
+      "split_run_tokens": 3,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": "frus1964-68v08/d180",
+      "role": "original",
+      "split_run_tokens": 0,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 12,
+      "changes": 1,
+      "reference": "frus1964-68v08/d180",
+      "role": "human_swap",
+      "split_run_tokens": 2,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 11,
+      "changes": 3,
+      "reference": "frus1964-68v08/d180",
+      "role": "smol2",
+      "split_run_tokens": 2,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": "frus1964-68v08/d124",
+      "role": "original",
+      "split_run_tokens": 0,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 20,
+      "changes": 1,
+      "reference": "frus1964-68v08/d124",
+      "role": "human_swap",
+      "split_run_tokens": 3,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 6,
+      "changes": 4,
+      "reference": "frus1964-68v08/d124",
+      "role": "qwen",
+      "split_run_tokens": 1,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": "frus1964-68v08/d64",
+      "role": "original",
+      "split_run_tokens": 0,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 18,
+      "changes": 1,
+      "reference": "frus1964-68v08/d64",
+      "role": "human_swap",
+      "split_run_tokens": 3,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 9,
+      "changes": 2,
+      "reference": "frus1964-68v08/d64",
+      "role": "qwen",
+      "split_run_tokens": 2,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 8,
+      "changes": 2,
+      "reference": "frus1964-68v08/d64",
+      "role": "smol2",
+      "split_run_tokens": 1,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": "frus1964-68v08/d147",
+      "role": "original",
+      "split_run_tokens": 0,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 14,
+      "changes": 1,
+      "reference": "frus1964-68v08/d147",
+      "role": "human_swap",
+      "split_run_tokens": 3,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": "frus1964-68v15/d72",
+      "role": "original",
+      "split_run_tokens": 0,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 29,
+      "changes": 1,
+      "reference": "frus1964-68v15/d72",
+      "role": "human_swap",
+      "split_run_tokens": 6,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 12,
+      "changes": 3,
+      "reference": "frus1964-68v15/d72",
+      "role": "qwen",
+      "split_run_tokens": 0,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 19,
+      "changes": 1,
+      "reference": "frus1964-68v15/d72",
+      "role": "smol2",
+      "split_run_tokens": 4,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": "frus1964-68v15/d122",
+      "role": "original",
+      "split_run_tokens": 0,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 26,
+      "changes": 1,
+      "reference": "frus1964-68v15/d122",
+      "role": "human_swap",
+      "split_run_tokens": 5,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 11,
+      "changes": 2,
+      "reference": "frus1964-68v15/d122",
+      "role": "qwen",
+      "split_run_tokens": 4,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": "frus1964-68v15/d268",
+      "role": "original",
+      "split_run_tokens": 0,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 15,
+      "changes": 1,
+      "reference": "frus1964-68v15/d268",
+      "role": "human_swap",
+      "split_run_tokens": 1,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 5,
+      "changes": 1,
+      "reference": "frus1964-68v15/d268",
+      "role": "qwen",
+      "split_run_tokens": 0,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": "frus1964-68v15/d39",
+      "role": "original",
+      "split_run_tokens": 0,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 25,
+      "changes": 1,
+      "reference": "frus1964-68v15/d39",
+      "role": "human_swap",
+      "split_run_tokens": 7,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 10,
+      "changes": 3,
+      "reference": "frus1964-68v15/d39",
+      "role": "qwen",
+      "split_run_tokens": 3,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 8,
+      "changes": 3,
+      "reference": "frus1964-68v15/d39",
+      "role": "smol2",
+      "split_run_tokens": 0,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": "frus1964-68v24/d208",
+      "role": "original",
+      "split_run_tokens": 0,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 14,
+      "changes": 1,
+      "reference": "frus1964-68v24/d208",
+      "role": "human_swap",
+      "split_run_tokens": 1,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 8,
+      "changes": 2,
+      "reference": "frus1964-68v24/d208",
+      "role": "qwen",
+      "split_run_tokens": 4,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 10,
+      "changes": 1,
+      "reference": "frus1964-68v24/d208",
+      "role": "smol2",
+      "split_run_tokens": 1,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": "frus1964-68v24/d247",
+      "role": "original",
+      "split_run_tokens": 0,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 23,
+      "changes": 1,
+      "reference": "frus1964-68v24/d247",
+      "role": "human_swap",
+      "split_run_tokens": 7,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 16,
+      "changes": 1,
+      "reference": "frus1964-68v24/d247",
+      "role": "qwen",
+      "split_run_tokens": 2,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 10,
+      "changes": 2,
+      "reference": "frus1964-68v24/d247",
+      "role": "smol2",
+      "split_run_tokens": 1,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": "frus1964-68v24/d395",
+      "role": "original",
+      "split_run_tokens": 0,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 21,
+      "changes": 1,
+      "reference": "frus1964-68v24/d395",
+      "role": "human_swap",
+      "split_run_tokens": 3,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 12,
+      "changes": 1,
+      "reference": "frus1964-68v24/d395",
+      "role": "qwen",
+      "split_run_tokens": 3,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": "frus1964-68v24/d188",
+      "role": "original",
+      "split_run_tokens": 0,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 13,
+      "changes": 1,
+      "reference": "frus1964-68v24/d188",
+      "role": "human_swap",
+      "split_run_tokens": 2,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 14,
+      "changes": 2,
+      "reference": "frus1964-68v24/d188",
+      "role": "qwen",
+      "split_run_tokens": 3,
+      "status": "reference_bound"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": null,
+      "role": "unknown",
+      "split_run_tokens": 0,
+      "status": "no_qualified_reference"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": null,
+      "role": "unknown",
+      "split_run_tokens": 0,
+      "status": "no_qualified_reference"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": null,
+      "role": "unknown",
+      "split_run_tokens": 0,
+      "status": "no_qualified_reference"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": null,
+      "role": "unknown",
+      "split_run_tokens": 0,
+      "status": "no_qualified_reference"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": null,
+      "role": "unknown",
+      "split_run_tokens": 0,
+      "status": "no_qualified_reference"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": null,
+      "role": "unknown",
+      "split_run_tokens": 0,
+      "status": "no_qualified_reference"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": null,
+      "role": "unknown",
+      "split_run_tokens": 0,
+      "status": "no_qualified_reference"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": null,
+      "role": "unknown",
+      "split_run_tokens": 0,
+      "status": "no_qualified_reference"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": null,
+      "role": "unknown",
+      "split_run_tokens": 0,
+      "status": "no_qualified_reference"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": null,
+      "role": "kubernetes",
+      "split_run_tokens": 0,
+      "status": "no_qualified_reference"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": null,
+      "role": "kubernetes",
+      "split_run_tokens": 0,
+      "status": "no_qualified_reference"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": null,
+      "role": "kubernetes",
+      "split_run_tokens": 0,
+      "status": "no_qualified_reference"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": null,
+      "role": "kubernetes",
+      "split_run_tokens": 0,
+      "status": "no_qualified_reference"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": null,
+      "role": "kubernetes",
+      "split_run_tokens": 0,
+      "status": "no_qualified_reference"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": null,
+      "role": "kubernetes",
+      "split_run_tokens": 0,
+      "status": "no_qualified_reference"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": null,
+      "role": "kubernetes",
+      "split_run_tokens": 0,
+      "status": "no_qualified_reference"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": null,
+      "role": "kubernetes",
+      "split_run_tokens": 0,
+      "status": "no_qualified_reference"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": null,
+      "role": "kubernetes",
+      "split_run_tokens": 0,
+      "status": "no_qualified_reference"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": null,
+      "role": "kubernetes",
+      "split_run_tokens": 0,
+      "status": "no_qualified_reference"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": null,
+      "role": "notice",
+      "split_run_tokens": 0,
+      "status": "no_qualified_reference"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": null,
+      "role": "notice",
+      "split_run_tokens": 0,
+      "status": "no_qualified_reference"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": null,
+      "role": "notice",
+      "split_run_tokens": 0,
+      "status": "no_qualified_reference"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": null,
+      "role": "notice",
+      "split_run_tokens": 0,
+      "status": "no_qualified_reference"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": null,
+      "role": "notice",
+      "split_run_tokens": 0,
+      "status": "no_qualified_reference"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": null,
+      "role": "notice",
+      "split_run_tokens": 0,
+      "status": "no_qualified_reference"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": null,
+      "role": "notice",
+      "split_run_tokens": 0,
+      "status": "no_qualified_reference"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": null,
+      "role": "notice",
+      "split_run_tokens": 0,
+      "status": "no_qualified_reference"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": null,
+      "role": "notice",
+      "split_run_tokens": 0,
+      "status": "no_qualified_reference"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": null,
+      "role": "notice",
+      "split_run_tokens": 0,
+      "status": "no_qualified_reference"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": null,
+      "role": "notice",
+      "split_run_tokens": 0,
+      "status": "no_qualified_reference"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": null,
+      "role": "notice",
+      "split_run_tokens": 0,
+      "status": "no_qualified_reference"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": null,
+      "role": "notice",
+      "split_run_tokens": 0,
+      "status": "no_qualified_reference"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": null,
+      "role": "notice",
+      "split_run_tokens": 0,
+      "status": "no_qualified_reference"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": null,
+      "role": "notice",
+      "split_run_tokens": 0,
+      "status": "no_qualified_reference"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": null,
+      "role": "notice",
+      "split_run_tokens": 0,
+      "status": "no_qualified_reference"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": null,
+      "role": "notice",
+      "split_run_tokens": 0,
+      "status": "no_qualified_reference"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": null,
+      "role": "notice",
+      "split_run_tokens": 0,
+      "status": "no_qualified_reference"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": null,
+      "role": "table_only",
+      "split_run_tokens": 0,
+      "status": "out_of_scope"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": null,
+      "role": "table_only",
+      "split_run_tokens": 0,
+      "status": "out_of_scope"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": null,
+      "role": "table_only",
+      "split_run_tokens": 0,
+      "status": "out_of_scope"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": null,
+      "role": "table_only",
+      "split_run_tokens": 0,
+      "status": "out_of_scope"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": null,
+      "role": "table_only",
+      "split_run_tokens": 0,
+      "status": "out_of_scope"
+    },
+    {
+      "changed_tokens": 0,
+      "changes": 0,
+      "reference": null,
+      "role": "table_only",
+      "split_run_tokens": 0,
+      "status": "out_of_scope"
+    }
+  ],
+  "changed_tokens": 545,
+  "freeze_sha256": "109f68032073d80c608a071bf81cc40d648923bd2c411307e8829aaae16bf2e9",
+  "matches": 53,
+  "method": {
+    "baseline": "Current plain-text comparison and its committed prior diplomatic attribution and change coordinates. Word was outside the live route.",
+    "extra_controls": "Render the first six diplomatic originals in table cells only. Require zero source claims.",
+    "inputs": "62 known-state and out-of-index diplomatic texts, 10 genuine Kubernetes articles, and 18 genuine Federal Register controls.",
+    "release": "Require correct citations and exact positions for every retained plain-text change, zero new source claims on all out-of-index and table controls, and exact raw Word text and run slices from independent XML replay.",
+    "views": "Render every text as ordinary top-level Word paragraphs. Add one blank paragraph and duplicate horizontal spaces. Split each raw paragraph into 23-codepoint native text runs."
+  },
+  "schema": "chipmunk.writing-archive-word-transfer/1",
+  "split_run_tokens": 97
+}

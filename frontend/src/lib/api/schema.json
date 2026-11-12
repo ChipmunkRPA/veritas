@@ -4912,6 +4912,16 @@
             "title": "Changed Tokens",
             "type": "array"
           },
+          "docx_location": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DocumentArchiveWordLocation"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "end": {
             "title": "End",
             "type": "integer"
@@ -5005,6 +5015,17 @@
             ],
             "title": "Archive Paragraph"
           },
+          "docx_paragraph": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Docx Paragraph"
+          },
           "submitted_paragraph": {
             "title": "Submitted Paragraph",
             "type": "integer"
@@ -5088,6 +5109,126 @@
           "pdf"
         ],
         "title": "DocumentArchiveResponse",
+        "type": "object"
+      },
+      "DocumentArchiveWordLocation": {
+        "properties": {
+          "body_index": {
+            "title": "Body Index",
+            "type": "integer"
+          },
+          "changed_tokens": {
+            "items": {
+              "$ref": "#/components/schemas/DocumentArchiveWordToken"
+            },
+            "title": "Changed Tokens",
+            "type": "array"
+          },
+          "paragraph": {
+            "title": "Paragraph",
+            "type": "integer"
+          },
+          "paragraph_range": {
+            "maxItems": 2,
+            "minItems": 2,
+            "prefixItems": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "title": "Paragraph Range",
+            "type": "array"
+          },
+          "runs_complete": {
+            "title": "Runs Complete",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "paragraph",
+          "body_index",
+          "paragraph_range",
+          "changed_tokens",
+          "runs_complete"
+        ],
+        "title": "DocumentArchiveWordLocation",
+        "type": "object"
+      },
+      "DocumentArchiveWordRun": {
+        "properties": {
+          "range": {
+            "maxItems": 2,
+            "minItems": 2,
+            "prefixItems": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "title": "Range",
+            "type": "array"
+          },
+          "run": {
+            "title": "Run",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "run",
+          "range"
+        ],
+        "title": "DocumentArchiveWordRun",
+        "type": "object"
+      },
+      "DocumentArchiveWordToken": {
+        "properties": {
+          "extracted_range": {
+            "maxItems": 2,
+            "minItems": 2,
+            "prefixItems": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "title": "Extracted Range",
+            "type": "array"
+          },
+          "paragraph_range": {
+            "maxItems": 2,
+            "minItems": 2,
+            "prefixItems": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "title": "Paragraph Range",
+            "type": "array"
+          },
+          "runs": {
+            "items": {
+              "$ref": "#/components/schemas/DocumentArchiveWordRun"
+            },
+            "title": "Runs",
+            "type": "array"
+          }
+        },
+        "required": [
+          "extracted_range",
+          "paragraph_range",
+          "runs"
+        ],
+        "title": "DocumentArchiveWordToken",
         "type": "object"
       },
       "DocumentRevisionAvailability": {

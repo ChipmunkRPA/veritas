@@ -25,8 +25,14 @@ def render(comparison: dict) -> bytes:
         b = change["submitted_paragraph"]
         label = f"Archive body paragraph {a}" if a is not None else "Archive version"
         submitted_label = f"Passage in submitted paragraph {b}" if joined else f"Submitted paragraph {b}"
+        location = change["submitted"].get("docx_location")
+        native = ""
+        if location is not None:
+            submitted_label = f"Word body paragraph {location['paragraph']}"
+            start, end = location["paragraph_range"]
+            native = f'<p class="offset">Word paragraph characters [{start}, {end}).</p>'
         changes.append(f'<section><h2>{submitted_label}</h2>'
-                       f'{_side(label, change["archive"])}{_side("Submitted text", change["submitted"])}</section>')
+                       f'{_side(label, change["archive"])}{_side("Submitted text", change["submitted"])}{native}</section>')
     if reference and not changes:
         changes.append("<p>No word or punctuation differences in the compared passages.</p>")
     html = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Public archive comparison</title>

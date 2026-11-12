@@ -1,0 +1,401 @@
+{
+  "advances": {
+    "jpeg75": false,
+    "png": false
+  },
+  "audit": {
+    "advances": {
+      "jpeg75": false,
+      "png": false
+    },
+    "cohort_results": {
+      "repeated_structure": {
+        "jpeg75": {
+          "additional_ordinary_pairs": 0,
+          "assessed": 32,
+          "combined_useful": 2,
+          "incumbent_ordinary_flags": 0,
+          "incumbent_useful": 1,
+          "ordinary_views": 16,
+          "positive_views": 16
+        },
+        "png": {
+          "additional_ordinary_pairs": 0,
+          "assessed": 32,
+          "combined_useful": 3,
+          "incumbent_ordinary_flags": 0,
+          "incumbent_useful": 2,
+          "ordinary_views": 16,
+          "positive_views": 16
+        }
+      },
+      "retained": {
+        "jpeg75": {
+          "additional_ordinary_pairs": 0,
+          "assessed": 64,
+          "combined_useful": 10,
+          "incumbent_ordinary_flags": 0,
+          "incumbent_useful": 10,
+          "ordinary_views": 32,
+          "positive_views": 32
+        },
+        "png": {
+          "additional_ordinary_pairs": 0,
+          "assessed": 64,
+          "combined_useful": 12,
+          "incumbent_ordinary_flags": 0,
+          "incumbent_useful": 11,
+          "ordinary_views": 32,
+          "positive_views": 32
+        }
+      }
+    },
+    "gained_groups": {
+      "jpeg75": 1,
+      "png": 2
+    },
+    "verified_pair_sides": 102,
+    "verified_views": 192
+  },
+  "elapsed_s": 29.5427529159997,
+  "exact_replay_journal_sha256": "bdcd889195f4da9bbbe060ff94e981585a4f1c6153b0c5690fc1012bb2034786",
+  "freeze_sha256": "f1049b4df20eb8fd23bae63fed1d26d88755dbbc2da1fe8044fa37ab2cc35f05",
+  "gained_groups": {
+    "jpeg75": 1,
+    "png": 2
+  },
+  "journal_sha256": "bdcd889195f4da9bbbe060ff94e981585a4f1c6153b0c5690fc1012bb2034786",
+  "ordinary_stress": {
+    "cache_sha256": "01488762b8bb6083910996c30a6fee98ad4bff5b7efb96b7af61d780ed35feea",
+    "code_sha256": {
+      "copy_affine.py": "d6fc0cfcb0ecde701b13bec1fa0fbb7f411a01b06aeecb387f0bf12047ade621",
+      "copy_move.py": "fa9023c67415b7ff90b6c73450f71b6441743c37194a60349f05c0a13452215c",
+      "image_copy_tone_ordinary_stress.py": "9847dadf596c55f7158c0e75a0bc6d3cdbb6fa1e8bb990ff6b2232abcf4e5233",
+      "image_copy_tone_transfer.py": "2490bf2618f5d5d797d9d7f913e35f2aa5e8a320fe68cfef5473339882d8271b"
+    },
+    "comparison_counts": {
+      "jpeg75": {
+        "additional_flag": 0,
+        "additional_pair": 0,
+        "incumbent_flag": 1,
+        "shortlisted": 1
+      },
+      "rgb": {
+        "additional_flag": 0,
+        "additional_pair": 0,
+        "incumbent_flag": 2,
+        "shortlisted": 2
+      }
+    },
+    "fallback_proposals": 0,
+    "measured_proposals": 3,
+    "measured_shortlisted_views": 3,
+    "receipt_sha256": {
+      "comparison.json": "8b1ee97e04ef0aaf3c91e48c249e2175599bfc77142ec4414a86a1c070636607",
+      "freeze.json": "2dc971055403a2b4ab72af1d852aa8d75d88b978c966a1efa890b0022bb6f899",
+      "screen.json": "1a45336fa771e7b9f4a67853074afc56ea45aa203147a3fb8fd3f633f87fc2d5"
+    },
+    "schema": "chipmunk.image-copy-tone-ordinary-stress/1",
+    "screen_counts": {
+      "jpeg75": {
+        "assessed": 151,
+        "ordinary_pair_proposals": 1,
+        "repetitive_image": 52,
+        "views": 151
+      },
+      "rgb": {
+        "assessed": 151,
+        "ordinary_pair_proposals": 2,
+        "repetitive_image": 33,
+        "views": 151
+      }
+    },
+    "screened_views": 302,
+    "shortlisted_source_groups": 2,
+    "source_groups": 151
+  },
+  "photo_groups": {
+    "planned_public_unavailable": 4,
+    "repeated_structure": 4,
+    "retained": 8
+  },
+  "protocol": {
+    "code_sha256": {
+      "copy_affine.py": "d6fc0cfcb0ecde701b13bec1fa0fbb7f411a01b06aeecb387f0bf12047ade621",
+      "copy_move.py": "fa9023c67415b7ff90b6c73450f71b6441743c37194a60349f05c0a13452215c",
+      "image_copy_tone_transfer.py": "2490bf2618f5d5d797d9d7f913e35f2aa5e8a320fe68cfef5473339882d8271b"
+    },
+    "controls": [
+      "published",
+      "global_tone",
+      "local_tone",
+      "resize"
+    ],
+    "formats": [
+      "png",
+      "jpeg75"
+    ],
+    "positive": [
+      "sharp",
+      "feathered",
+      "sharp_tone",
+      "feathered_tone"
+    ],
+    "rule": "Per delivery add useful adjusted-copy locations on at least three source photos, preserve every incumbent pair and useful location, and add at most one ordinary flag and no additional published-photo flag.",
+    "versions": {
+      "numpy": "2.2.6",
+      "opencv": "5.0.0",
+      "pillow": "12.3.0"
+    }
+  },
+  "public_photo_roster": [
+    {
+      "author": "Ajay Suresh",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://commons.wikimedia.org/wiki/File:1_Lincoln_Plaza_%2855465409462%29.jpg",
+      "sha256": "1acac6ad6f34b72b26417c3ea9607ae1ac1736b547dbb10b48be067d31af58d0",
+      "slot": 0,
+      "source_size": [
+        960,
+        1440
+      ],
+      "title": "1 Lincoln Plaza (55465409462).jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/1_Lincoln_Plaza_%2855465409462%29.jpg/960px-1_Lincoln_Plaza_%2855465409462%29.jpg"
+    },
+    {
+      "author": "Andre Carrotflower",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "page": "https://commons.wikimedia.org/wiki/File:Chautauqua_County_Courthouse_Old_and_New%2C_Mayville%2C_New_York_-_20210501.jpg",
+      "sha256": "c54d926fc4f2b88573a410f57fa9b1507781286888f829f3357e4724081dcaa6",
+      "slot": 1,
+      "source_size": [
+        960,
+        576
+      ],
+      "title": "Chautauqua County Courthouse Old and New, Mayville, New York - 20210501.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Chautauqua_County_Courthouse_Old_and_New%2C_Mayville%2C_New_York_-_20210501.jpg/960px-Chautauqua_County_Courthouse_Old_and_New%2C_Mayville%2C_New_York_-_20210501.jpg"
+    },
+    {
+      "author": "Balise42",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://commons.wikimedia.org/wiki/File:Z%C3%BCrich_Badergasse_02.jpg",
+      "sha256": "52b09a9b5314ca831422623dd3984ae994ebb923ed443f5c04baaa1ec458977e",
+      "slot": 2,
+      "source_size": [
+        960,
+        728
+      ],
+      "title": "Zürich Badergasse 02.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Z%C3%BCrich_Badergasse_02.jpg/960px-Z%C3%BCrich_Badergasse_02.jpg"
+    },
+    {
+      "author": "Hanif Al Husaini",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://commons.wikimedia.org/wiki/File:Gowes_Bike_Sharing_Station_Bundaran_HI_Jakarta_01.jpg",
+      "sha256": "b9597fe887aeed300e9c6942a9cfeb3c5537d3fdaa82b98d17dd22a6f4ff8331",
+      "slot": 3,
+      "source_size": [
+        960,
+        1280
+      ],
+      "title": "Gowes Bike Sharing Station Bundaran HI Jakarta 01.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Gowes_Bike_Sharing_Station_Bundaran_HI_Jakarta_01.jpg/960px-Gowes_Bike_Sharing_Station_Bundaran_HI_Jakarta_01.jpg"
+    },
+    {
+      "author": "Krzysztof Popławski",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://commons.wikimedia.org/wiki/File:Modernistyczny_budynek_Urz%C4%99du_Miasta_w_Sosnowcu_.-_fasada_od_ulicy_Mo%C5%9Bciskiego.jpg",
+      "slot": 4,
+      "title": "Modernistyczny budynek Urzędu Miasta w Sosnowcu .- fasada od ulicy Mościskiego.jpg"
+    },
+    {
+      "author": "Yash parmar123",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "page": "https://commons.wikimedia.org/wiki/File:Cstm_mumbai.jpg",
+      "slot": 5,
+      "title": "Cstm mumbai.jpg"
+    },
+    {
+      "author": "Whisper of the heart",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "page": "https://commons.wikimedia.org/wiki/File:Shared-use_bicycles_maintaince.jpg",
+      "slot": 6,
+      "title": "Shared-use bicycles maintaince.jpg"
+    },
+    {
+      "author": "Tim1965",
+      "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "page": "https://commons.wikimedia.org/wiki/File:1100_Vermont_Avenue_NW_-_Washington_DC_-_window.JPG",
+      "slot": 7,
+      "title": "1100 Vermont Avenue NW - Washington DC - window.JPG"
+    }
+  ],
+  "results": {
+    "jpeg75": {
+      "feathered": {
+        "added_pair": 0,
+        "additional_flag": 0,
+        "assessed": 12,
+        "combined_useful": 3,
+        "incumbent_flag": 5,
+        "incumbent_useful": 3,
+        "proposals": 5,
+        "views": 12
+      },
+      "feathered_tone": {
+        "added_pair": 0,
+        "additional_flag": 0,
+        "assessed": 12,
+        "combined_useful": 0,
+        "incumbent_flag": 4,
+        "incumbent_useful": 0,
+        "proposals": 4,
+        "views": 12
+      },
+      "global_tone": {
+        "added_pair": 0,
+        "additional_flag": 0,
+        "assessed": 12,
+        "combined_useful": 0,
+        "incumbent_flag": 0,
+        "incumbent_useful": 0,
+        "proposals": 0,
+        "views": 12
+      },
+      "local_tone": {
+        "added_pair": 0,
+        "additional_flag": 0,
+        "assessed": 12,
+        "combined_useful": 0,
+        "incumbent_flag": 0,
+        "incumbent_useful": 0,
+        "proposals": 0,
+        "views": 12
+      },
+      "published": {
+        "added_pair": 0,
+        "additional_flag": 0,
+        "assessed": 12,
+        "combined_useful": 0,
+        "incumbent_flag": 0,
+        "incumbent_useful": 0,
+        "proposals": 0,
+        "views": 12
+      },
+      "resize": {
+        "added_pair": 0,
+        "additional_flag": 0,
+        "assessed": 12,
+        "combined_useful": 0,
+        "incumbent_flag": 0,
+        "incumbent_useful": 0,
+        "proposals": 0,
+        "views": 12
+      },
+      "sharp": {
+        "added_pair": 0,
+        "additional_flag": 0,
+        "assessed": 12,
+        "combined_useful": 6,
+        "incumbent_flag": 7,
+        "incumbent_useful": 6,
+        "proposals": 7,
+        "views": 12
+      },
+      "sharp_tone": {
+        "added_pair": 1,
+        "additional_flag": 1,
+        "assessed": 12,
+        "combined_useful": 3,
+        "incumbent_flag": 6,
+        "incumbent_useful": 2,
+        "proposals": 7,
+        "views": 12
+      }
+    },
+    "png": {
+      "feathered": {
+        "added_pair": 0,
+        "additional_flag": 0,
+        "assessed": 12,
+        "combined_useful": 4,
+        "incumbent_flag": 6,
+        "incumbent_useful": 4,
+        "proposals": 6,
+        "views": 12
+      },
+      "feathered_tone": {
+        "added_pair": 1,
+        "additional_flag": 1,
+        "assessed": 12,
+        "combined_useful": 0,
+        "incumbent_flag": 5,
+        "incumbent_useful": 0,
+        "proposals": 6,
+        "views": 12
+      },
+      "global_tone": {
+        "added_pair": 0,
+        "additional_flag": 0,
+        "assessed": 12,
+        "combined_useful": 0,
+        "incumbent_flag": 0,
+        "incumbent_useful": 0,
+        "proposals": 0,
+        "views": 12
+      },
+      "local_tone": {
+        "added_pair": 0,
+        "additional_flag": 0,
+        "assessed": 12,
+        "combined_useful": 0,
+        "incumbent_flag": 0,
+        "incumbent_useful": 0,
+        "proposals": 0,
+        "views": 12
+      },
+      "published": {
+        "added_pair": 0,
+        "additional_flag": 0,
+        "assessed": 12,
+        "combined_useful": 0,
+        "incumbent_flag": 0,
+        "incumbent_useful": 0,
+        "proposals": 0,
+        "views": 12
+      },
+      "resize": {
+        "added_pair": 0,
+        "additional_flag": 0,
+        "assessed": 12,
+        "combined_useful": 0,
+        "incumbent_flag": 0,
+        "incumbent_useful": 0,
+        "proposals": 0,
+        "views": 12
+      },
+      "sharp": {
+        "added_pair": 0,
+        "additional_flag": 0,
+        "assessed": 12,
+        "combined_useful": 7,
+        "incumbent_flag": 8,
+        "incumbent_useful": 7,
+        "proposals": 8,
+        "views": 12
+      },
+      "sharp_tone": {
+        "added_pair": 2,
+        "additional_flag": 2,
+        "assessed": 12,
+        "combined_useful": 4,
+        "incumbent_flag": 6,
+        "incumbent_useful": 2,
+        "proposals": 8,
+        "views": 12
+      }
+    }
+  },
+  "schema": "chipmunk.image-copy-tone-transfer/1",
+  "views": 192
+}

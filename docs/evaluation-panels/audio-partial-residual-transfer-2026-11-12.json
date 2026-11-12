@@ -55,7 +55,60 @@
       }
     },
     "report_sha256": "90949eda7056824e9a05ebd4daebfc22f8560d9889b3e1e386f688e778baf45e",
-    "reviewer_sha256": "de5d0bccec2e23ce2ec02e335a4ca24454b3a2cd23f372d47fda560e35aa6d1f",
+    "reviewer_sha256": "76657b99b12090ee4c773c8e90ede7f44b4b3965c35e6c18343d409c84950172",
+    "descriptive_held_frontier": {
+      "genuine_false_group_budgets": [
+        0,
+        1,
+        2
+      ],
+      "maximum_useful_locations": {
+        "speech_minus5db": {
+          "incumbent_frames": [
+            0,
+            2,
+            2
+          ],
+          "clean_head": [
+            0,
+            1,
+            1
+          ],
+          "mixture_head": [
+            0,
+            1,
+            1
+          ],
+          "paired_head": [
+            0,
+            1,
+            1
+          ]
+        },
+        "speech_plus15db": {
+          "incumbent_frames": [
+            2,
+            3,
+            3
+          ],
+          "clean_head": [
+            5,
+            5,
+            5
+          ],
+          "mixture_head": [
+            2,
+            5,
+            5
+          ],
+          "paired_head": [
+            2,
+            4,
+            5
+          ]
+        }
+      }
+    },
     "meeting_replay": {
       "prepared_input_hashes": 96,
       "aggregate_cells": 20,

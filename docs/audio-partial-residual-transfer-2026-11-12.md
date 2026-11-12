@@ -24,6 +24,8 @@ The fitted arms use the same cell vectors and their differences from the recordi
 
 At −5 dB, the existing frame response ranked seven of ten edits above both matched genuine controls. The paired head ranked three. Even with the true interval supplied for a diagnostic comparison, the paired head ranked four of ten above both controls, compared with six for the existing response. The paired head added one held stock-voice location at +15 dB and preserved earlier useful flags. All eight noisy expressive examples stayed inconclusive in every arm. The study used eight fitting hosts and a 2,048-component representation. It supports measuring transfer to other sources before changing the app.
 
+Sweeping the already observed held rankings gives a separate comparison at equal false-alarm budgets. At −5 dB, allowing one genuine false-alarm group yields at most two useful locations for the existing frame response and one for each fitted head. At +15 dB, the dry-trained head reaches five useful locations with zero false-alarm groups on this panel, and the existing response reaches two. These are descriptive held rankings. The fixed points and advancement decision are the ones reported above.
+
 ## Six-second meeting-audio replay
 
 Apply the sealed heads and points to 48 earlier consumed dry and competing-meeting-speech recordings. Run exact four-second windows at 0 and 2 seconds, and retain the strongest result for each file. The additional window gives the checks two opportunities to flag. This replay uses earlier exposed waveform constructions for local evaluation. The model receives only submitted waveform samples and uses no reference channel. [Meeting construction and rights](audio-overlap-window-transfer-2026-11-12.md)

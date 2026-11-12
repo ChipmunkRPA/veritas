@@ -207,7 +207,31 @@ def replay(run):
     gate_replay(list(saved.values()), result)
     return {"bound_pcm_views": len(rows), "native_forwards": forwards, "source_linked_decisions": len(saved) * len(ARMS),
             "aggregate_cells": len(by_cell), "optimizer_checks": fitted, "report_sha256": sha(run / "result.json"),
-            "reviewer_sha256": sha(Path(__file__))}
+            "reviewer_sha256": sha(Path(__file__)), "descriptive_held_frontier": false_group_frontier(saved.values())}
+
+
+def false_group_frontier(views):
+    """Describe held ranking at equal error budgets, without fitting any operating point."""
+    result = {}
+    for condition in ("speech_minus5db", "speech_plus15db"):
+        rows = [r for r in views if r["role"] == "confirmation" and r["condition"] == condition]
+        result[condition] = {}
+        for arm in ARMS[1:]:
+            ordered = sorted(rows, key=lambda r: r["checks"][arm]["score"], reverse=True)
+            by_score = defaultdict(list)
+            for row in ordered:
+                by_score[row["checks"][arm]["score"]].append(row)
+            best, found, false_groups = [0, 0, 0], 0, set()
+            for batch in by_score.values():
+                for row in batch:
+                    if row["label"]:
+                        found += int(useful(row["checks"][arm]["range"], row["truth"]))
+                    else:
+                        false_groups.add(row["pair"] or row["id"])
+                for limit in range(len(false_groups), 3):
+                    best[limit] = max(best[limit], found)
+            result[condition][arm] = best
+    return {"genuine_false_group_budgets": [0, 1, 2], "maximum_useful_locations": result}
 
 
 def gate_replay(rows, result):

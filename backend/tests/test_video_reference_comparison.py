@@ -5,6 +5,7 @@ import json
 import shutil
 import subprocess
 from contextlib import contextmanager
+from copy import deepcopy
 from fractions import Fraction
 from pathlib import Path
 
@@ -24,6 +25,7 @@ from app.detectors.video import decode
 from app.evidence import video_reference, video_reference_local
 from app.storage.db import Analysis, Artefact, BillingOrderRow, Job, utcnow
 from scripts.compare_video_references import run
+from scripts.verify_native_video_interval import verify_comparison
 
 pytestmark = pytest.mark.skipif(not shutil.which("ffmpeg") or not shutil.which("ffprobe"), reason="FFmpeg required")
 
@@ -200,6 +202,16 @@ def test_bounded_lossy_pair_keeps_exact_results_and_replays_local_native_crops(t
     payload = {"comparison": record, "assets": {key: base64.b64encode(value).decode() for key, value in assets.items()}}
     export.write_text(json.dumps(payload))
     assert run(earlier, later, export, verify=True) == record
+    assert verify_comparison(earlier, later, payload)["native_crops_verified"] == 6
+    if not lossless:
+        altered = deepcopy(payload)
+        previews = altered["comparison"]["picture"]["local_comparison"]["range"]["previews"]
+        previews["during"]["crop_assets"]["submitted"] = previews["before"]["crop_assets"]["submitted"]
+        with pytest.raises(ValueError, match="differs from the committed native picture"):
+            verify_comparison(earlier, later, altered)
+        previews["during"]["time_s"] += .04
+        with pytest.raises(ValueError, match="Preview time differs"):
+            verify_comparison(earlier, later, altered)
     local["range"]["tile"]["x"] += 1
     export.write_text(json.dumps(payload))
     with pytest.raises(ValueError, match="differs from the re-decoded sources"):

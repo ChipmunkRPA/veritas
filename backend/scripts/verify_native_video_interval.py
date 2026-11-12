@@ -1,22 +1,26 @@
-"""Verify a three-frame video interval receipt offline with Python and FFmpeg."""
+"""Verify native video interval evidence offline with Python and FFmpeg."""
 
 from __future__ import annotations
 
 import argparse
+import base64
 import hashlib
 import json
 import re
 import subprocess
 from fractions import Fraction
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
 SCHEMA = "chipmunk.native-video-interval/1"
+COMPARISON_SCHEMA = "chipmunk.video-reference-comparison/2"
 ROLES = ("before", "during", "after")
 SHA = re.compile(r"[0-9a-f]{64}")
 TIMESTAMP = re.compile(rb"\bn:\s*(\d+)\s+pts:\s*(-?\d+)")
 INPUT_CLOCK = re.compile(rb"config in time_base:\s*(\d+)/(\d+)")
 TIMEOUT = 60
 MAX_FRAME_PIXELS = 4096 * 2160
+MAX_COMPARISON_BYTES = 48 * 1024 * 1024
 
 
 def require(condition, message):
@@ -63,7 +67,7 @@ def probe(path):
     return width, height, base, pts, stream["codec_name"]
 
 
-def rgb_frames(path, indices, pts, time_base, frame_bytes):
+def decode_rgb_frames(path, indices, pts, time_base, frame_bytes):
     selection = "+".join(f"eq(n,{index})" for index in indices)
     decoded = run([
         "ffmpeg", "-nostdin", "-hide_banner", "-loglevel", "info", "-protocol_whitelist", "file",
@@ -78,8 +82,7 @@ def rgb_frames(path, indices, pts, time_base, frame_bytes):
     require(all(int(n) == i and int(t) * native_base == pts[i] * time_base
                 for i, (n, t) in enumerate(matches)), "Decoder timestamps differ from the committed pictures")
     require(len(decoded.stdout) == len(indices) * frame_bytes, "Decoder returned incomplete native RGB")
-    return tuple(hashlib.sha256(decoded.stdout[i * frame_bytes:(i + 1) * frame_bytes]).hexdigest()
-                 for i in range(len(indices)))
+    return tuple(decoded.stdout[i * frame_bytes:(i + 1) * frame_bytes] for i in range(len(indices)))
 
 
 def check_exhibits(directory, digests, width, height):
@@ -137,7 +140,8 @@ def verify(source_path, receipt, exhibits=None):
     require(native[0] < start <= native[1] < end <= native[2], "An anchor falls outside its half-open interval role")
     expected = tuple(row["rgb_sha256"] for row in rows)
     require(all(isinstance(d, str) and bool(SHA.fullmatch(d)) for d in expected), "Invalid RGB picture digest")
-    require(rgb_frames(source_path, indices, native, time_base, width * height * 3) == expected,
+    frames = decode_rgb_frames(source_path, indices, native, time_base, width * height * 3)
+    require(tuple(hashlib.sha256(frame).hexdigest() for frame in frames) == expected,
             "Decoded RGB differs from the committed native picture")
     if exhibits is not None:
         check_exhibits(exhibits, expected, width, height)
@@ -153,20 +157,94 @@ def verify(source_path, receipt, exhibits=None):
     }
 
 
+def comparison_source(path, source):
+    require(0 < path.stat().st_size == source["bytes"] <= MAX_COMPARISON_BYTES
+            and sha_file(path) == source["sha256"], "Comparison source bytes do not match")
+    width, height, base, pts, _ = probe(path)
+    require((width, height) in {(360, 288), (480, 360)} and len(pts) <= 100,
+            "Source lies outside the local comparison dimensions or frame limit")
+    require((width, height, str(base), len(pts), pts[0], pts[-1], clock_sha256(pts)) == (
+        source["width"], source["height"], source["time_base"], source["frames"], source["first_pts"],
+        source["last_pts"], source["frame_pts_sha256"],
+    ), "Comparison geometry or absolute picture clock differs")
+    return width, height, base, pts
+
+
+def native_crop(frame, width, x, y, w, h):
+    return b"".join(frame[3 * (row * width + x):3 * (row * width + x + w)] for row in range(y, y + h))
+
+
+def verify_comparison(earlier, submitted, export):
+    record, assets = export["comparison"], export["assets"]
+    require(record["schema"] == COMPARISON_SCHEMA and record["status"] == "measured"
+            and record["affects_overall_confidence"] is False, "Expected a version 2 video comparison")
+    local = record["picture"]["local_comparison"]
+    require(local["status"] == "local_difference", "The export has no measured local picture interval")
+    region = local["range"]
+    start, end = region["start_frame"], region["end_frame_exclusive"]
+    require(type(start) is type(end) is int and 0 < start < end, "Invalid half-open comparison interval")
+    previews = region["previews"]
+    require(set(previews) == set(ROLES), "Expected one before, during and after picture")
+    indices = [previews[role]["frame"] for role in ROLES]
+    require(all(type(index) is int for index in indices) and indices[0] == start - 1
+            and start <= indices[1] < end == indices[2], "Picture indices differ from the interval roles")
+    x, y, w, h = (region["tile"][key] for key in ("x", "y", "w", "h"))
+    require(all(type(value) is int for value in (x, y, w, h)) and min(x, y) >= 0 and min(w, h) > 0,
+            "Invalid crop rectangle")
+
+    clocks = []
+    for side, path in (("earlier", earlier), ("submitted", submitted)):
+        width, height, base, pts = comparison_source(path, record[side])
+        require(end < len(pts) and x + w <= width and y + h <= height, "Interval or crop lies outside the source")
+        clock = [(tick - pts[0]) * base for tick in pts]
+        clocks.append(((width, height), clock))
+        require((region["start_s"], region["end_s"]) == (float(clock[start]), float(clock[end])),
+                "Displayed interval differs from the source clock")
+        require(region["source_ranges"][side] == {
+            "start_pts": pts[start], "last_pts": pts[end - 1], "end_exclusive_pts": pts[end],
+        }, "Interval ticks differ from the source clock")
+        ticks = [pts[index] for index in indices]
+        frames = decode_rgb_frames(path, indices, ticks, base, width * height * 3)
+        with TemporaryDirectory() as folder:
+            expected = []
+            for role, index, tick, frame in zip(ROLES, indices, ticks, frames, strict=True):
+                preview = previews[role]
+                require(preview[f"{side}_pts"] == tick and preview["time_s"] == float(clock[index]),
+                        "Preview time differs from its native picture")
+                require(preview[f"{side}_rgb_sha256"] == hashlib.sha256(frame).hexdigest(),
+                        "Native picture RGB differs from the export")
+                asset = preview["crop_assets"][side]
+                png = base64.b64decode(assets[asset["file"]], validate=True)
+                require(asset["media_type"] == "image/png" and hashlib.sha256(png).hexdigest() == asset["sha256"],
+                        "Embedded crop bytes differ from their recorded hash")
+                (Path(folder) / f"{role}.png").write_bytes(png)
+                expected.append(hashlib.sha256(native_crop(frame, width, x, y, w, h)).hexdigest())
+            check_exhibits(Path(folder), expected, w, h)
+    require(clocks[0] == clocks[1], "Relative comparison clocks or dimensions differ")
+    clock = clocks[0][1]
+    return {"status": "verified", "scope": "two source files, shared interval clock and six native picture crops",
+            "interval_seconds": [str(clock[start]), str(clock[end])], "native_crops_verified": 6}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("source", type=Path)
     parser.add_argument("receipt", type=Path)
     parser.add_argument("--expect-receipt-sha256")
     parser.add_argument("--exhibits", type=Path)
+    parser.add_argument("--earlier", type=Path, help="Earlier clip for a paired comparison JSON export")
     args = parser.parse_args()
     try:
-        require(args.receipt.stat().st_size <= 65536, "Interval receipt exceeds the metadata limit")
+        require(args.earlier is None or args.exhibits is None, "Paired comparison crops must come from the export")
+        limit = MAX_COMPARISON_BYTES if args.earlier else 65536
+        require(args.receipt.stat().st_size <= limit, "Interval receipt exceeds the metadata limit")
         payload = args.receipt.read_bytes()
         if args.expect_receipt_sha256 is not None:
             require(hashlib.sha256(payload).hexdigest() == args.expect_receipt_sha256,
                     "Receipt SHA-256 differs from the caller's commitment")
-        result = verify(args.source, json.loads(payload), args.exhibits)
+        receipt = json.loads(payload)
+        result = (verify_comparison(args.earlier, args.source, receipt) if args.earlier
+                  else verify(args.source, receipt, args.exhibits))
     except (KeyError, TypeError, ValueError, OSError) as error:
         print(json.dumps({"status": "not_verified", "reason": str(error)}))
         return 1

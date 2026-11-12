@@ -32,6 +32,14 @@ python -m scripts.compare_video_references earlier.mov analyzed.mov downloaded-c
 
 The replay uses the same measurement implementation as the app. Record your FFmpeg and Pillow versions if two runs produce different decoded bytes. Keep source files, previews, and sound clips in your local workspace.
 
+To verify a downloaded version 2 JSON with a measured local range using only Python 3.11 or later, FFmpeg, and FFprobe, run from the repository root.
+
+```sh
+python3 -I backend/scripts/verify_native_video_interval.py analyzed.mp4 downloaded-comparison.json --earlier earlier.mp4
+```
+
+This reader opens both original clips and checks file hashes, the full native timestamp arrays, the displayed interval, and all six embedded before, during, and after crops against native RGB pixels. Add `--expect-receipt-sha256` with a separately recorded JSON hash to verify the exact export bytes. The result verifies source correspondence for the recorded range. To reproduce range selection and verify the soundtrack, use the full comparison replay above.
+
 The optional local comparison uses version 2 of the video export. The verifier rebuilds the selected interval, exact native source crops, and both picture clocks. It also verifies earlier version 1 exports using the exact comparison. The initial version 2 replay covered 12 held source pairs, with identical range and tile selections on the five neural redraws, no local finding on six unchanged deliveries, and explicit abstention on the different-source pair. After the H.264 change, three archived version 1 and version 2 packages replayed with identical JSON and evidence bytes.
 
 The authenticated H.264 earlier-copy comparison located a 0.920–1.880 s review interval in a held clip with a known ordinary edit. The PDF showed before, during and after pictures, and all six native JSON crops matched both source files pixel for pixel. The stored analysis result, billing and job records, and stored file list were identical before and after the comparison. An independent re-encode and a tandem re-encode yielded no local finding. The unrelated earlier copy abstained.

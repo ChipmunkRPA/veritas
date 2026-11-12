@@ -30,7 +30,8 @@ The [earlier-video comparison](video-reference-comparison-2026-11-11.md#replay-w
 re-decodes two supplied clips and checks the JSON, native picture timestamps,
 before/during/after previews, and exact soundtrack excerpts. On supported
 pairs it also replays the short local picture range and its native crops.
-It can run without the app or detector weights.
+An additional Python and FFmpeg command independently checks the exported local
+interval and all six native crops without installing the app or model weights.
 
 The [earlier-audio comparison](audio-reference-comparison-2026-11-11.md#replay-without-the-app)
 replays changed sample ranges, difference waveforms, and playable excerpts

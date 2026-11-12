@@ -1,0 +1,5475 @@
+{
+  "audit": {
+    "comparisons": 59,
+    "exact_masks": 22,
+    "views": 126,
+    "witnesses": 49089
+  },
+  "compare_sha256": "f0d3a5cf4b6cc8089a4eb6a4a83205cc97ab1e54cdca2b1497ba5fc27525d726",
+  "elapsed_s": 18.1413924160006,
+  "freeze_sha256": "58e314577bbf37bba612e3037995b00a9f387ed8141bd0ec8ae3d9a5927223f5",
+  "parameters": {
+    "confidence_weight": 0,
+    "gates": {
+      "new_control_groups": 0,
+      "new_feathered_sources": 6,
+      "new_sharp_sources": 6
+    },
+    "max_area": 1000000,
+    "max_difference_box_share": 0.45,
+    "max_occurrences": 3,
+    "min_separation": 24,
+    "min_shift": 192,
+    "min_span": 160,
+    "min_spread_cells": 6,
+    "min_textured_values": 48,
+    "min_witnesses": 12,
+    "minimum_component": 48,
+    "minimum_difference_margin": 8,
+    "minimum_exact_match_fraction": 0.85,
+    "stride": 19,
+    "tile": 16
+  },
+  "pilot_sha256": "0ff4694f313a8389453ba57ccaabb3a7b3eea69a1a3d856d0fe7a4b8674666b7",
+  "result": {
+    "by_role": {
+      "crop_shift": {
+        "baseline_flags": 5,
+        "baseline_useful": 0,
+        "comparisons": 12,
+        "difference_flags": 0,
+        "exact_both": 0,
+        "new_exact": 0,
+        "views": 12
+      },
+      "duplicate": {
+        "baseline_flags": 2,
+        "baseline_useful": 0,
+        "comparisons": 12,
+        "difference_flags": 0,
+        "exact_both": 0,
+        "new_exact": 0,
+        "views": 12
+      },
+      "feather": {
+        "baseline_flags": 2,
+        "baseline_useful": 0,
+        "comparisons": 5,
+        "difference_flags": 5,
+        "exact_both": 5,
+        "new_exact": 5,
+        "views": 12
+      },
+      "global_tone": {
+        "baseline_flags": 2,
+        "baseline_useful": 0,
+        "comparisons": 0,
+        "difference_flags": 0,
+        "exact_both": 0,
+        "new_exact": 0,
+        "views": 12
+      },
+      "ordinary_local": {
+        "baseline_flags": 2,
+        "baseline_useful": 0,
+        "comparisons": 12,
+        "difference_flags": 12,
+        "exact_both": 12,
+        "new_exact": 12,
+        "views": 12
+      },
+      "photo": {
+        "baseline_flags": 1,
+        "baseline_useful": 0,
+        "comparisons": 0,
+        "difference_flags": 0,
+        "exact_both": 0,
+        "new_exact": 0,
+        "views": 6
+      },
+      "resampled": {
+        "baseline_flags": 2,
+        "baseline_useful": 0,
+        "comparisons": 0,
+        "difference_flags": 0,
+        "exact_both": 0,
+        "new_exact": 0,
+        "views": 12
+      },
+      "sharp": {
+        "baseline_flags": 5,
+        "baseline_useful": 3,
+        "comparisons": 5,
+        "difference_flags": 5,
+        "exact_both": 5,
+        "new_exact": 4,
+        "views": 12
+      },
+      "triple": {
+        "baseline_flags": 9,
+        "baseline_useful": 0,
+        "comparisons": 12,
+        "difference_flags": 12,
+        "exact_both": 0,
+        "new_exact": 0,
+        "views": 12
+      },
+      "ui_card": {
+        "baseline_flags": 4,
+        "baseline_useful": 0,
+        "comparisons": 1,
+        "difference_flags": 0,
+        "exact_both": 0,
+        "new_exact": 0,
+        "views": 12
+      },
+      "unrelated": {
+        "baseline_flags": 4,
+        "baseline_useful": 0,
+        "comparisons": 0,
+        "difference_flags": 0,
+        "exact_both": 0,
+        "new_exact": 0,
+        "views": 12
+      }
+    },
+    "control_groups": 12,
+    "passed": false
+  },
+  "rows": [
+    {
+      "baseline": {
+        "box": [
+          464,
+          181,
+          592,
+          373
+        ],
+        "flag": false,
+        "score": 0.6426885724067688,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": [
+          79,
+          205,
+          261,
+          362
+        ],
+        "different_pixels": 21734,
+        "exact_both": true,
+        "exact_match_pixels": 171496,
+        "false_pixels": 0,
+        "first": [
+          19,
+          76,
+          358,
+          646
+        ],
+        "found": 43468,
+        "second": [
+          402,
+          73,
+          741,
+          643
+        ],
+        "witness_count": 867
+      },
+      "family": "lama",
+      "first": [
+        17,
+        63,
+        361,
+        655
+      ],
+      "key": [
+        "panel",
+        0,
+        "sharp"
+      ],
+      "second": [
+        400,
+        60,
+        744,
+        652
+      ],
+      "target": 21734
+    },
+    {
+      "baseline": {
+        "box": [
+          464,
+          181,
+          592,
+          373
+        ],
+        "flag": false,
+        "score": 0.6378408074378967,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": [
+          80,
+          206,
+          259,
+          360
+        ],
+        "different_pixels": 20606,
+        "exact_both": true,
+        "exact_match_pixels": 172624,
+        "false_pixels": 0,
+        "first": [
+          19,
+          76,
+          358,
+          646
+        ],
+        "found": 41212,
+        "second": [
+          402,
+          73,
+          741,
+          643
+        ],
+        "witness_count": 871
+      },
+      "family": "lama",
+      "first": [
+        17,
+        63,
+        361,
+        655
+      ],
+      "key": [
+        "panel",
+        0,
+        "feather"
+      ],
+      "second": [
+        400,
+        60,
+        744,
+        652
+      ],
+      "target": 20606
+    },
+    {
+      "baseline": {
+        "box": [
+          81,
+          78,
+          209,
+          270
+        ],
+        "flag": false,
+        "score": 0.6015949845314026,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": [
+          112,
+          184,
+          169,
+          282
+        ],
+        "different_pixels": 5452,
+        "exact_both": true,
+        "exact_match_pixels": 187778,
+        "false_pixels": 0,
+        "first": [
+          19,
+          76,
+          358,
+          646
+        ],
+        "found": 10904,
+        "second": [
+          402,
+          73,
+          741,
+          643
+        ],
+        "witness_count": 971
+      },
+      "family": "lama",
+      "first": [
+        17,
+        63,
+        361,
+        655
+      ],
+      "key": [
+        "panel",
+        0,
+        "ordinary_local"
+      ],
+      "second": [
+        400,
+        60,
+        744,
+        652
+      ],
+      "target": 5452
+    },
+    {
+      "baseline": {
+        "box": [
+          81,
+          78,
+          209,
+          270
+        ],
+        "flag": false,
+        "score": 0.6015949845314026,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": null,
+        "different_pixels": 0,
+        "exact_both": false,
+        "exact_match_pixels": 193230,
+        "false_pixels": 0,
+        "first": [
+          19,
+          76,
+          358,
+          646
+        ],
+        "found": 0,
+        "second": [
+          402,
+          73,
+          741,
+          643
+        ],
+        "witness_count": 1013
+      },
+      "family": "lama",
+      "first": [
+        17,
+        63,
+        361,
+        655
+      ],
+      "key": [
+        "panel",
+        0,
+        "duplicate"
+      ],
+      "second": [
+        400,
+        60,
+        744,
+        652
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          81,
+          78,
+          209,
+          270
+        ],
+        "flag": false,
+        "score": 0.6015949845314026,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "lama",
+      "first": [
+        17,
+        63,
+        361,
+        655
+      ],
+      "key": [
+        "panel",
+        0,
+        "global_tone"
+      ],
+      "second": [
+        400,
+        60,
+        744,
+        652
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          81,
+          78,
+          209,
+          270
+        ],
+        "flag": false,
+        "score": 0.6015949845314026,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "lama",
+      "first": [
+        17,
+        63,
+        361,
+        655
+      ],
+      "key": [
+        "panel",
+        0,
+        "unrelated"
+      ],
+      "second": [
+        400,
+        60,
+        744,
+        652
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          609,
+          64,
+          737,
+          192
+        ],
+        "flag": true,
+        "score": 0.9287623167037964,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": null,
+        "different_pixels": 0,
+        "exact_both": false,
+        "exact_match_pixels": 181760,
+        "false_pixels": 0,
+        "first": [
+          38,
+          75,
+          358,
+          643
+        ],
+        "found": 0,
+        "second": [
+          414,
+          76,
+          734,
+          644
+        ],
+        "witness_count": 964
+      },
+      "family": "lama",
+      "first": [
+        17,
+        63,
+        361,
+        655
+      ],
+      "key": [
+        "panel",
+        0,
+        "crop_shift"
+      ],
+      "second": [
+        400,
+        60,
+        744,
+        652
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          81,
+          78,
+          209,
+          270
+        ],
+        "flag": false,
+        "score": 0.6015949845314026,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "lama",
+      "first": [
+        17,
+        63,
+        361,
+        655
+      ],
+      "key": [
+        "panel",
+        0,
+        "resampled"
+      ],
+      "second": [
+        400,
+        60,
+        744,
+        652
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          80,
+          87,
+          208,
+          215
+        ],
+        "flag": false,
+        "score": 0.8277299404144287,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "lama",
+      "first": [
+        17,
+        63,
+        361,
+        655
+      ],
+      "key": [
+        "panel",
+        0,
+        "ui_card"
+      ],
+      "second": [
+        400,
+        60,
+        744,
+        652
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          268,
+          281,
+          396,
+          537
+        ],
+        "flag": true,
+        "score": 1.1377840042114258,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": [
+          84,
+          102,
+          109,
+          124
+        ],
+        "different_pixels": 550,
+        "exact_both": false,
+        "exact_match_pixels": 97968,
+        "false_pixels": 1100,
+        "first": [
+          19,
+          95,
+          246,
+          529
+        ],
+        "found": 1100,
+        "second": [
+          511,
+          95,
+          738,
+          529
+        ],
+        "witness_count": 540
+      },
+      "family": "lama",
+      "first": null,
+      "key": [
+        "panel",
+        0,
+        "triple"
+      ],
+      "second": null,
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          467,
+          15,
+          659,
+          271
+        ],
+        "flag": false,
+        "score": 0.5491660237312317,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "lama",
+      "first": [
+        64,
+        18,
+        656,
+        362
+      ],
+      "key": [
+        "panel",
+        1,
+        "sharp"
+      ],
+      "second": [
+        62,
+        402,
+        654,
+        746
+      ],
+      "target": 24435
+    },
+    {
+      "baseline": {
+        "box": [
+          467,
+          15,
+          659,
+          271
+        ],
+        "flag": false,
+        "score": 0.5491660237312317,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "lama",
+      "first": [
+        64,
+        18,
+        656,
+        362
+      ],
+      "key": [
+        "panel",
+        1,
+        "feather"
+      ],
+      "second": [
+        62,
+        402,
+        654,
+        746
+      ],
+      "target": 22225
+    },
+    {
+      "baseline": {
+        "box": [
+          467,
+          15,
+          659,
+          271
+        ],
+        "flag": false,
+        "score": 0.5491660237312317,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": [
+          185,
+          113,
+          283,
+          170
+        ],
+        "different_pixels": 5413,
+        "exact_both": true,
+        "exact_match_pixels": 187478,
+        "false_pixels": 0,
+        "first": [
+          74,
+          403,
+          643,
+          742
+        ],
+        "found": 10826,
+        "second": [
+          76,
+          19,
+          645,
+          358
+        ],
+        "witness_count": 1003
+      },
+      "family": "lama",
+      "first": [
+        64,
+        18,
+        656,
+        362
+      ],
+      "key": [
+        "panel",
+        1,
+        "ordinary_local"
+      ],
+      "second": [
+        62,
+        402,
+        654,
+        746
+      ],
+      "target": 5413
+    },
+    {
+      "baseline": {
+        "box": [
+          467,
+          15,
+          659,
+          271
+        ],
+        "flag": false,
+        "score": 0.5491660237312317,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": null,
+        "different_pixels": 0,
+        "exact_both": false,
+        "exact_match_pixels": 192891,
+        "false_pixels": 0,
+        "first": [
+          74,
+          403,
+          643,
+          742
+        ],
+        "found": 0,
+        "second": [
+          76,
+          19,
+          645,
+          358
+        ],
+        "witness_count": 1045
+      },
+      "family": "lama",
+      "first": [
+        64,
+        18,
+        656,
+        362
+      ],
+      "key": [
+        "panel",
+        1,
+        "duplicate"
+      ],
+      "second": [
+        62,
+        402,
+        654,
+        746
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          467,
+          15,
+          659,
+          271
+        ],
+        "flag": false,
+        "score": 0.5491660237312317,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "lama",
+      "first": [
+        64,
+        18,
+        656,
+        362
+      ],
+      "key": [
+        "panel",
+        1,
+        "global_tone"
+      ],
+      "second": [
+        62,
+        402,
+        654,
+        746
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          294,
+          492,
+          422,
+          620
+        ],
+        "flag": true,
+        "score": 0.8878557682037354,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "lama",
+      "first": [
+        64,
+        18,
+        656,
+        362
+      ],
+      "key": [
+        "panel",
+        1,
+        "unrelated"
+      ],
+      "second": [
+        62,
+        402,
+        654,
+        746
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          391,
+          406,
+          647,
+          662
+        ],
+        "flag": false,
+        "score": 0.6017664074897766,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": null,
+        "different_pixels": 0,
+        "exact_both": false,
+        "exact_match_pixels": 195264,
+        "false_pixels": 0,
+        "first": [
+          67,
+          407,
+          643,
+          746
+        ],
+        "found": 0,
+        "second": [
+          76,
+          19,
+          652,
+          358
+        ],
+        "witness_count": 1045
+      },
+      "family": "lama",
+      "first": [
+        64,
+        18,
+        656,
+        362
+      ],
+      "key": [
+        "panel",
+        1,
+        "crop_shift"
+      ],
+      "second": [
+        62,
+        402,
+        654,
+        746
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          467,
+          15,
+          659,
+          271
+        ],
+        "flag": false,
+        "score": 0.5491660237312317,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "lama",
+      "first": [
+        64,
+        18,
+        656,
+        362
+      ],
+      "key": [
+        "panel",
+        1,
+        "resampled"
+      ],
+      "second": [
+        62,
+        402,
+        654,
+        746
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          59,
+          426,
+          251,
+          554
+        ],
+        "flag": false,
+        "score": 0.7394323945045471,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "lama",
+      "first": [
+        64,
+        18,
+        656,
+        362
+      ],
+      "key": [
+        "panel",
+        1,
+        "ui_card"
+      ],
+      "second": [
+        62,
+        402,
+        654,
+        746
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          268,
+          93,
+          460,
+          349
+        ],
+        "flag": false,
+        "score": 0.8087447285652161,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": [
+          84,
+          102,
+          109,
+          124
+        ],
+        "different_pixels": 550,
+        "exact_both": false,
+        "exact_match_pixels": 76403,
+        "false_pixels": 1100,
+        "first": [
+          19,
+          95,
+          246,
+          434
+        ],
+        "found": 1100,
+        "second": [
+          511,
+          95,
+          738,
+          434
+        ],
+        "witness_count": 424
+      },
+      "family": "lama",
+      "first": null,
+      "key": [
+        "panel",
+        1,
+        "triple"
+      ],
+      "second": null,
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          16,
+          324,
+          208,
+          580
+        ],
+        "flag": false,
+        "score": 0.7761747241020203,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "lama",
+      "first": [
+        19,
+        65,
+        363,
+        577
+      ],
+      "key": [
+        "panel",
+        2,
+        "sharp"
+      ],
+      "second": [
+        404,
+        64,
+        748,
+        576
+      ],
+      "target": 2244
+    },
+    {
+      "baseline": {
+        "box": [
+          16,
+          324,
+          208,
+          580
+        ],
+        "flag": false,
+        "score": 0.7761747241020203,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "lama",
+      "first": [
+        19,
+        65,
+        363,
+        577
+      ],
+      "key": [
+        "panel",
+        2,
+        "feather"
+      ],
+      "second": [
+        404,
+        64,
+        748,
+        576
+      ],
+      "target": 1812
+    },
+    {
+      "baseline": {
+        "box": [
+          16,
+          324,
+          208,
+          580
+        ],
+        "flag": false,
+        "score": 0.7761747241020203,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": [
+          114,
+          159,
+          171,
+          244
+        ],
+        "different_pixels": 4773,
+        "exact_both": true,
+        "exact_match_pixels": 162015,
+        "false_pixels": 0,
+        "first": [
+          19,
+          76,
+          358,
+          568
+        ],
+        "found": 9546,
+        "second": [
+          404,
+          75,
+          743,
+          567
+        ],
+        "witness_count": 854
+      },
+      "family": "lama",
+      "first": [
+        19,
+        65,
+        363,
+        577
+      ],
+      "key": [
+        "panel",
+        2,
+        "ordinary_local"
+      ],
+      "second": [
+        404,
+        64,
+        748,
+        576
+      ],
+      "target": 4773
+    },
+    {
+      "baseline": {
+        "box": [
+          16,
+          324,
+          208,
+          580
+        ],
+        "flag": false,
+        "score": 0.7761747241020203,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": null,
+        "different_pixels": 0,
+        "exact_both": false,
+        "exact_match_pixels": 166788,
+        "false_pixels": 0,
+        "first": [
+          19,
+          76,
+          358,
+          568
+        ],
+        "found": 0,
+        "second": [
+          404,
+          75,
+          743,
+          567
+        ],
+        "witness_count": 889
+      },
+      "family": "lama",
+      "first": [
+        19,
+        65,
+        363,
+        577
+      ],
+      "key": [
+        "panel",
+        2,
+        "duplicate"
+      ],
+      "second": [
+        404,
+        64,
+        748,
+        576
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          464,
+          61,
+          656,
+          253
+        ],
+        "flag": false,
+        "score": 0.788757860660553,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "lama",
+      "first": [
+        19,
+        65,
+        363,
+        577
+      ],
+      "key": [
+        "panel",
+        2,
+        "global_tone"
+      ],
+      "second": [
+        404,
+        64,
+        748,
+        576
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          16,
+          324,
+          208,
+          580
+        ],
+        "flag": false,
+        "score": 0.7761747241020203,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "lama",
+      "first": [
+        19,
+        65,
+        363,
+        577
+      ],
+      "key": [
+        "panel",
+        2,
+        "unrelated"
+      ],
+      "second": [
+        404,
+        64,
+        748,
+        576
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          457,
+          68,
+          649,
+          260
+        ],
+        "flag": true,
+        "score": 0.862301766872406,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": null,
+        "different_pixels": 0,
+        "exact_both": false,
+        "exact_match_pixels": 159068,
+        "false_pixels": 0,
+        "first": [
+          38,
+          73,
+          360,
+          567
+        ],
+        "found": 0,
+        "second": [
+          416,
+          76,
+          738,
+          570
+        ],
+        "witness_count": 869
+      },
+      "family": "lama",
+      "first": [
+        19,
+        65,
+        363,
+        577
+      ],
+      "key": [
+        "panel",
+        2,
+        "crop_shift"
+      ],
+      "second": [
+        404,
+        64,
+        748,
+        576
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          16,
+          324,
+          208,
+          580
+        ],
+        "flag": false,
+        "score": 0.7761747241020203,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "lama",
+      "first": [
+        19,
+        65,
+        363,
+        577
+      ],
+      "key": [
+        "panel",
+        2,
+        "resampled"
+      ],
+      "second": [
+        404,
+        64,
+        748,
+        576
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          464,
+          88,
+          656,
+          216
+        ],
+        "flag": true,
+        "score": 0.8513193726539612,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "lama",
+      "first": [
+        19,
+        65,
+        363,
+        577
+      ],
+      "key": [
+        "panel",
+        2,
+        "ui_card"
+      ],
+      "second": [
+        404,
+        64,
+        748,
+        576
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          448,
+          90,
+          704,
+          282
+        ],
+        "flag": true,
+        "score": 1.2270052433013916,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": [
+          84,
+          102,
+          109,
+          124
+        ],
+        "different_pixels": 550,
+        "exact_both": false,
+        "exact_match_pixels": 97968,
+        "false_pixels": 1100,
+        "first": [
+          19,
+          95,
+          246,
+          529
+        ],
+        "found": 1100,
+        "second": [
+          511,
+          95,
+          738,
+          529
+        ],
+        "witness_count": 536
+      },
+      "family": "lama",
+      "first": null,
+      "key": [
+        "panel",
+        2,
+        "triple"
+      ],
+      "second": null,
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          63,
+          111,
+          319,
+          367
+        ],
+        "flag": true,
+        "score": 0.855807900428772,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": [
+          236,
+          22,
+          336,
+          299
+        ],
+        "different_pixels": 16222,
+        "exact_both": true,
+        "exact_match_pixels": 168620,
+        "false_pixels": 0,
+        "first": [
+          76,
+          32,
+          643,
+          358
+        ],
+        "found": 32444,
+        "second": [
+          76,
+          418,
+          643,
+          744
+        ],
+        "witness_count": 761
+      },
+      "family": "lama",
+      "first": [
+        66,
+        20,
+        658,
+        364
+      ],
+      "key": [
+        "panel",
+        3,
+        "sharp"
+      ],
+      "second": [
+        66,
+        406,
+        658,
+        750
+      ],
+      "target": 16222
+    },
+    {
+      "baseline": {
+        "box": [
+          63,
+          111,
+          319,
+          367
+        ],
+        "flag": true,
+        "score": 0.855807900428772,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": [
+          238,
+          23,
+          335,
+          296
+        ],
+        "different_pixels": 14814,
+        "exact_both": true,
+        "exact_match_pixels": 170028,
+        "false_pixels": 0,
+        "first": [
+          76,
+          32,
+          643,
+          358
+        ],
+        "found": 29628,
+        "second": [
+          76,
+          418,
+          643,
+          744
+        ],
+        "witness_count": 767
+      },
+      "family": "lama",
+      "first": [
+        66,
+        20,
+        658,
+        364
+      ],
+      "key": [
+        "panel",
+        3,
+        "feather"
+      ],
+      "second": [
+        66,
+        406,
+        658,
+        750
+      ],
+      "target": 14814
+    },
+    {
+      "baseline": {
+        "box": [
+          63,
+          111,
+          319,
+          367
+        ],
+        "flag": true,
+        "score": 0.855807900428772,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": [
+          187,
+          102,
+          285,
+          159
+        ],
+        "different_pixels": 3084,
+        "exact_both": true,
+        "exact_match_pixels": 181758,
+        "false_pixels": 0,
+        "first": [
+          76,
+          32,
+          643,
+          358
+        ],
+        "found": 6168,
+        "second": [
+          76,
+          418,
+          643,
+          744
+        ],
+        "witness_count": 863
+      },
+      "family": "lama",
+      "first": [
+        66,
+        20,
+        658,
+        364
+      ],
+      "key": [
+        "panel",
+        3,
+        "ordinary_local"
+      ],
+      "second": [
+        66,
+        406,
+        658,
+        750
+      ],
+      "target": 3084
+    },
+    {
+      "baseline": {
+        "box": [
+          63,
+          111,
+          319,
+          367
+        ],
+        "flag": true,
+        "score": 0.855807900428772,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": null,
+        "different_pixels": 0,
+        "exact_both": false,
+        "exact_match_pixels": 184842,
+        "false_pixels": 0,
+        "first": [
+          76,
+          32,
+          643,
+          358
+        ],
+        "found": 0,
+        "second": [
+          76,
+          418,
+          643,
+          744
+        ],
+        "witness_count": 887
+      },
+      "family": "lama",
+      "first": [
+        66,
+        20,
+        658,
+        364
+      ],
+      "key": [
+        "panel",
+        3,
+        "duplicate"
+      ],
+      "second": [
+        66,
+        406,
+        658,
+        750
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          63,
+          111,
+          319,
+          367
+        ],
+        "flag": true,
+        "score": 0.855807900428772,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "lama",
+      "first": [
+        66,
+        20,
+        658,
+        364
+      ],
+      "key": [
+        "panel",
+        3,
+        "global_tone"
+      ],
+      "second": [
+        66,
+        406,
+        658,
+        750
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          63,
+          111,
+          319,
+          367
+        ],
+        "flag": true,
+        "score": 0.855807900428772,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "lama",
+      "first": [
+        66,
+        20,
+        658,
+        364
+      ],
+      "key": [
+        "panel",
+        3,
+        "unrelated"
+      ],
+      "second": [
+        66,
+        406,
+        658,
+        750
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          63,
+          111,
+          319,
+          367
+        ],
+        "flag": true,
+        "score": 0.855807900428772,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": null,
+        "different_pixels": 0,
+        "exact_both": false,
+        "exact_match_pixels": 189420,
+        "false_pixels": 0,
+        "first": [
+          69,
+          418,
+          643,
+          748
+        ],
+        "found": 0,
+        "second": [
+          76,
+          28,
+          650,
+          358
+        ],
+        "witness_count": 875
+      },
+      "family": "lama",
+      "first": [
+        66,
+        20,
+        658,
+        364
+      ],
+      "key": [
+        "panel",
+        3,
+        "crop_shift"
+      ],
+      "second": [
+        66,
+        406,
+        658,
+        750
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          63,
+          111,
+          319,
+          367
+        ],
+        "flag": true,
+        "score": 0.855807900428772,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "lama",
+      "first": [
+        66,
+        20,
+        658,
+        364
+      ],
+      "key": [
+        "panel",
+        3,
+        "resampled"
+      ],
+      "second": [
+        66,
+        406,
+        658,
+        750
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          63,
+          89,
+          319,
+          345
+        ],
+        "flag": true,
+        "score": 0.8437867164611816,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "lama",
+      "first": [
+        66,
+        20,
+        658,
+        364
+      ],
+      "key": [
+        "panel",
+        3,
+        "ui_card"
+      ],
+      "second": [
+        66,
+        406,
+        658,
+        750
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          542,
+          90,
+          734,
+          282
+        ],
+        "flag": false,
+        "score": 0.784824550151825,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": [
+          84,
+          102,
+          109,
+          124
+        ],
+        "different_pixels": 550,
+        "exact_both": false,
+        "exact_match_pixels": 76403,
+        "false_pixels": 1100,
+        "first": [
+          19,
+          95,
+          246,
+          434
+        ],
+        "found": 1100,
+        "second": [
+          511,
+          95,
+          738,
+          434
+        ],
+        "witness_count": 364
+      },
+      "family": "lama",
+      "first": null,
+      "key": [
+        "panel",
+        3,
+        "triple"
+      ],
+      "second": null,
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          172,
+          64,
+          364,
+          320
+        ],
+        "flag": false,
+        "score": 0.5989837050437927,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "lama",
+      "first": [
+        17,
+        67,
+        361,
+        579
+      ],
+      "key": [
+        "panel",
+        4,
+        "sharp"
+      ],
+      "second": [
+        404,
+        68,
+        748,
+        580
+      ],
+      "target": 3300
+    },
+    {
+      "baseline": {
+        "box": [
+          172,
+          64,
+          364,
+          320
+        ],
+        "flag": false,
+        "score": 0.5989837050437927,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "lama",
+      "first": [
+        17,
+        67,
+        361,
+        579
+      ],
+      "key": [
+        "panel",
+        4,
+        "feather"
+      ],
+      "second": [
+        404,
+        68,
+        748,
+        580
+      ],
+      "target": 3070
+    },
+    {
+      "baseline": {
+        "box": [
+          172,
+          64,
+          364,
+          320
+        ],
+        "flag": false,
+        "score": 0.5989837050437927,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": [
+          112,
+          162,
+          169,
+          247
+        ],
+        "different_pixels": 4810,
+        "exact_both": true,
+        "exact_match_pixels": 161978,
+        "false_pixels": 0,
+        "first": [
+          19,
+          75,
+          358,
+          567
+        ],
+        "found": 9620,
+        "second": [
+          406,
+          76,
+          745,
+          568
+        ],
+        "witness_count": 858
+      },
+      "family": "lama",
+      "first": [
+        17,
+        67,
+        361,
+        579
+      ],
+      "key": [
+        "panel",
+        4,
+        "ordinary_local"
+      ],
+      "second": [
+        404,
+        68,
+        748,
+        580
+      ],
+      "target": 4810
+    },
+    {
+      "baseline": {
+        "box": [
+          172,
+          64,
+          364,
+          320
+        ],
+        "flag": false,
+        "score": 0.5989837050437927,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": null,
+        "different_pixels": 0,
+        "exact_both": false,
+        "exact_match_pixels": 166788,
+        "false_pixels": 0,
+        "first": [
+          19,
+          75,
+          358,
+          567
+        ],
+        "found": 0,
+        "second": [
+          406,
+          76,
+          745,
+          568
+        ],
+        "witness_count": 893
+      },
+      "family": "lama",
+      "first": [
+        17,
+        67,
+        361,
+        579
+      ],
+      "key": [
+        "panel",
+        4,
+        "duplicate"
+      ],
+      "second": [
+        404,
+        68,
+        748,
+        580
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          172,
+          64,
+          364,
+          320
+        ],
+        "flag": false,
+        "score": 0.5989837050437927,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "lama",
+      "first": [
+        17,
+        67,
+        361,
+        579
+      ],
+      "key": [
+        "panel",
+        4,
+        "global_tone"
+      ],
+      "second": [
+        404,
+        68,
+        748,
+        580
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          623,
+          278,
+          751,
+          470
+        ],
+        "flag": true,
+        "score": 0.8688888549804688,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "lama",
+      "first": [
+        17,
+        67,
+        361,
+        579
+      ],
+      "key": [
+        "panel",
+        4,
+        "unrelated"
+      ],
+      "second": [
+        404,
+        68,
+        748,
+        580
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          485,
+          72,
+          741,
+          328
+        ],
+        "flag": false,
+        "score": 0.6392857432365417,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": null,
+        "different_pixels": 0,
+        "exact_both": false,
+        "exact_match_pixels": 158720,
+        "false_pixels": 0,
+        "first": [
+          38,
+          71,
+          358,
+          567
+        ],
+        "found": 0,
+        "second": [
+          418,
+          76,
+          738,
+          572
+        ],
+        "witness_count": 866
+      },
+      "family": "lama",
+      "first": [
+        17,
+        67,
+        361,
+        579
+      ],
+      "key": [
+        "panel",
+        4,
+        "crop_shift"
+      ],
+      "second": [
+        404,
+        68,
+        748,
+        580
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          172,
+          64,
+          364,
+          320
+        ],
+        "flag": false,
+        "score": 0.5989837050437927,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "lama",
+      "first": [
+        17,
+        67,
+        361,
+        579
+      ],
+      "key": [
+        "panel",
+        4,
+        "resampled"
+      ],
+      "second": [
+        404,
+        68,
+        748,
+        580
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          172,
+          304,
+          364,
+          560
+        ],
+        "flag": false,
+        "score": 0.7277452349662781,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "lama",
+      "first": [
+        17,
+        67,
+        361,
+        579
+      ],
+      "key": [
+        "panel",
+        4,
+        "ui_card"
+      ],
+      "second": [
+        404,
+        68,
+        748,
+        580
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          606,
+          90,
+          734,
+          346
+        ],
+        "flag": true,
+        "score": 0.9260213971138,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": [
+          84,
+          102,
+          109,
+          124
+        ],
+        "different_pixels": 550,
+        "exact_both": false,
+        "exact_match_pixels": 97968,
+        "false_pixels": 1100,
+        "first": [
+          19,
+          95,
+          246,
+          529
+        ],
+        "found": 1100,
+        "second": [
+          511,
+          95,
+          738,
+          529
+        ],
+        "witness_count": 542
+      },
+      "family": "lama",
+      "first": null,
+      "key": [
+        "panel",
+        4,
+        "triple"
+      ],
+      "second": null,
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          65,
+          173,
+          257,
+          365
+        ],
+        "flag": true,
+        "score": 0.8399343490600586,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": [
+          113,
+          72,
+          171,
+          271
+        ],
+        "different_pixels": 5429,
+        "exact_both": true,
+        "exact_match_pixels": 193225,
+        "false_pixels": 0,
+        "first": [
+          74,
+          19,
+          660,
+          358
+        ],
+        "found": 10858,
+        "second": [
+          76,
+          407,
+          662,
+          746
+        ],
+        "witness_count": 1000
+      },
+      "family": "lama",
+      "first": [
+        68,
+        18,
+        660,
+        362
+      ],
+      "key": [
+        "panel",
+        5,
+        "sharp"
+      ],
+      "second": [
+        70,
+        406,
+        662,
+        750
+      ],
+      "target": 5429
+    },
+    {
+      "baseline": {
+        "box": [
+          65,
+          173,
+          257,
+          365
+        ],
+        "flag": true,
+        "score": 0.8399343490600586,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": [
+          114,
+          73,
+          169,
+          270
+        ],
+        "different_pixels": 4627,
+        "exact_both": true,
+        "exact_match_pixels": 194027,
+        "false_pixels": 0,
+        "first": [
+          74,
+          19,
+          660,
+          358
+        ],
+        "found": 9254,
+        "second": [
+          76,
+          407,
+          662,
+          746
+        ],
+        "witness_count": 1008
+      },
+      "family": "lama",
+      "first": [
+        68,
+        18,
+        660,
+        362
+      ],
+      "key": [
+        "panel",
+        5,
+        "feather"
+      ],
+      "second": [
+        70,
+        406,
+        662,
+        750
+      ],
+      "target": 4627
+    },
+    {
+      "baseline": {
+        "box": [
+          65,
+          173,
+          257,
+          365
+        ],
+        "flag": true,
+        "score": 0.8399343490600586,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": [
+          191,
+          113,
+          289,
+          170
+        ],
+        "different_pixels": 5503,
+        "exact_both": true,
+        "exact_match_pixels": 193151,
+        "false_pixels": 0,
+        "first": [
+          74,
+          19,
+          660,
+          358
+        ],
+        "found": 11006,
+        "second": [
+          76,
+          407,
+          662,
+          746
+        ],
+        "witness_count": 1015
+      },
+      "family": "lama",
+      "first": [
+        68,
+        18,
+        660,
+        362
+      ],
+      "key": [
+        "panel",
+        5,
+        "ordinary_local"
+      ],
+      "second": [
+        70,
+        406,
+        662,
+        750
+      ],
+      "target": 5503
+    },
+    {
+      "baseline": {
+        "box": [
+          65,
+          173,
+          257,
+          365
+        ],
+        "flag": true,
+        "score": 0.8399343490600586,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": null,
+        "different_pixels": 0,
+        "exact_both": false,
+        "exact_match_pixels": 198654,
+        "false_pixels": 0,
+        "first": [
+          74,
+          19,
+          660,
+          358
+        ],
+        "found": 0,
+        "second": [
+          76,
+          407,
+          662,
+          746
+        ],
+        "witness_count": 1057
+      },
+      "family": "lama",
+      "first": [
+        68,
+        18,
+        660,
+        362
+      ],
+      "key": [
+        "panel",
+        5,
+        "duplicate"
+      ],
+      "second": [
+        70,
+        406,
+        662,
+        750
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          65,
+          173,
+          257,
+          365
+        ],
+        "flag": true,
+        "score": 0.8399343490600586,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "lama",
+      "first": [
+        68,
+        18,
+        660,
+        362
+      ],
+      "key": [
+        "panel",
+        5,
+        "global_tone"
+      ],
+      "second": [
+        70,
+        406,
+        662,
+        750
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          471,
+          403,
+          599,
+          531
+        ],
+        "flag": true,
+        "score": 0.875698447227478,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "lama",
+      "first": [
+        68,
+        18,
+        660,
+        362
+      ],
+      "key": [
+        "panel",
+        5,
+        "unrelated"
+      ],
+      "second": [
+        70,
+        406,
+        662,
+        750
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          65,
+          282,
+          257,
+          410
+        ],
+        "flag": true,
+        "score": 0.8866657614707947,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": null,
+        "different_pixels": 0,
+        "exact_both": false,
+        "exact_match_pixels": 193908,
+        "false_pixels": 0,
+        "first": [
+          71,
+          411,
+          643,
+          750
+        ],
+        "found": 0,
+        "second": [
+          76,
+          19,
+          648,
+          358
+        ],
+        "witness_count": 1040
+      },
+      "family": "lama",
+      "first": [
+        68,
+        18,
+        660,
+        362
+      ],
+      "key": [
+        "panel",
+        5,
+        "crop_shift"
+      ],
+      "second": [
+        70,
+        406,
+        662,
+        750
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          65,
+          173,
+          257,
+          365
+        ],
+        "flag": true,
+        "score": 0.8399343490600586,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "lama",
+      "first": [
+        68,
+        18,
+        660,
+        362
+      ],
+      "key": [
+        "panel",
+        5,
+        "resampled"
+      ],
+      "second": [
+        70,
+        406,
+        662,
+        750
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          535,
+          151,
+          663,
+          343
+        ],
+        "flag": true,
+        "score": 0.8370696902275085,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "lama",
+      "first": [
+        68,
+        18,
+        660,
+        362
+      ],
+      "key": [
+        "panel",
+        5,
+        "ui_card"
+      ],
+      "second": [
+        70,
+        406,
+        662,
+        750
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          478,
+          306,
+          734,
+          434
+        ],
+        "flag": true,
+        "score": 0.8592450022697449,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": [
+          84,
+          102,
+          109,
+          124
+        ],
+        "different_pixels": 550,
+        "exact_both": false,
+        "exact_match_pixels": 76403,
+        "false_pixels": 1100,
+        "first": [
+          19,
+          95,
+          246,
+          434
+        ],
+        "found": 1100,
+        "second": [
+          511,
+          95,
+          738,
+          434
+        ],
+        "witness_count": 424
+      },
+      "family": "lama",
+      "first": null,
+      "key": [
+        "panel",
+        5,
+        "triple"
+      ],
+      "second": null,
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          174,
+          66,
+          366,
+          322
+        ],
+        "flag": false,
+        "score": 0.5447401404380798,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "lama",
+      "first": [
+        19,
+        69,
+        363,
+        645
+      ],
+      "key": [
+        "panel",
+        6,
+        "sharp"
+      ],
+      "second": [
+        408,
+        72,
+        752,
+        648
+      ],
+      "target": 10269
+    },
+    {
+      "baseline": {
+        "box": [
+          174,
+          66,
+          366,
+          322
+        ],
+        "flag": false,
+        "score": 0.5447401404380798,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "lama",
+      "first": [
+        19,
+        69,
+        363,
+        645
+      ],
+      "key": [
+        "panel",
+        6,
+        "feather"
+      ],
+      "second": [
+        408,
+        72,
+        752,
+        648
+      ],
+      "target": 9640
+    },
+    {
+      "baseline": {
+        "box": [
+          366,
+          72,
+          622,
+          264
+        ],
+        "flag": false,
+        "score": 0.5586159229278564,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": [
+          114,
+          188,
+          171,
+          284
+        ],
+        "different_pixels": 4744,
+        "exact_both": true,
+        "exact_match_pixels": 188486,
+        "false_pixels": 0,
+        "first": [
+          19,
+          73,
+          358,
+          643
+        ],
+        "found": 9488,
+        "second": [
+          408,
+          76,
+          747,
+          646
+        ],
+        "witness_count": 866
+      },
+      "family": "lama",
+      "first": [
+        19,
+        69,
+        363,
+        645
+      ],
+      "key": [
+        "panel",
+        6,
+        "ordinary_local"
+      ],
+      "second": [
+        408,
+        72,
+        752,
+        648
+      ],
+      "target": 4744
+    },
+    {
+      "baseline": {
+        "box": [
+          366,
+          72,
+          622,
+          264
+        ],
+        "flag": false,
+        "score": 0.5540075898170471,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": null,
+        "different_pixels": 0,
+        "exact_both": false,
+        "exact_match_pixels": 193230,
+        "false_pixels": 0,
+        "first": [
+          19,
+          73,
+          358,
+          643
+        ],
+        "found": 0,
+        "second": [
+          408,
+          76,
+          747,
+          646
+        ],
+        "witness_count": 902
+      },
+      "family": "lama",
+      "first": [
+        19,
+        69,
+        363,
+        645
+      ],
+      "key": [
+        "panel",
+        6,
+        "duplicate"
+      ],
+      "second": [
+        408,
+        72,
+        752,
+        648
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          174,
+          66,
+          366,
+          322
+        ],
+        "flag": false,
+        "score": 0.5447401404380798,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "lama",
+      "first": [
+        19,
+        69,
+        363,
+        645
+      ],
+      "key": [
+        "panel",
+        6,
+        "global_tone"
+      ],
+      "second": [
+        408,
+        72,
+        752,
+        648
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          410,
+          251,
+          538,
+          379
+        ],
+        "flag": false,
+        "score": 0.722515344619751,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "lama",
+      "first": [
+        19,
+        69,
+        363,
+        645
+      ],
+      "key": [
+        "panel",
+        6,
+        "unrelated"
+      ],
+      "second": [
+        408,
+        72,
+        752,
+        648
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          617,
+          76,
+          745,
+          268
+        ],
+        "flag": false,
+        "score": 0.8063216805458069,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": null,
+        "different_pixels": 0,
+        "exact_both": false,
+        "exact_match_pixels": 182574,
+        "false_pixels": 0,
+        "first": [
+          36,
+          69,
+          358,
+          636
+        ],
+        "found": 0,
+        "second": [
+          418,
+          76,
+          740,
+          643
+        ],
+        "witness_count": 873
+      },
+      "family": "lama",
+      "first": [
+        19,
+        69,
+        363,
+        645
+      ],
+      "key": [
+        "panel",
+        6,
+        "crop_shift"
+      ],
+      "second": [
+        408,
+        72,
+        752,
+        648
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          174,
+          66,
+          366,
+          322
+        ],
+        "flag": false,
+        "score": 0.5447401404380798,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "lama",
+      "first": [
+        19,
+        69,
+        363,
+        645
+      ],
+      "key": [
+        "panel",
+        6,
+        "resampled"
+      ],
+      "second": [
+        408,
+        72,
+        752,
+        648
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          16,
+          93,
+          144,
+          349
+        ],
+        "flag": false,
+        "score": 0.7494094967842102,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "lama",
+      "first": [
+        19,
+        69,
+        363,
+        645
+      ],
+      "key": [
+        "panel",
+        6,
+        "ui_card"
+      ],
+      "second": [
+        408,
+        72,
+        752,
+        648
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          268,
+          93,
+          396,
+          285
+        ],
+        "flag": true,
+        "score": 0.859352171421051,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": [
+          84,
+          102,
+          109,
+          124
+        ],
+        "different_pixels": 550,
+        "exact_both": false,
+        "exact_match_pixels": 97968,
+        "false_pixels": 1100,
+        "first": [
+          19,
+          95,
+          246,
+          529
+        ],
+        "found": 1100,
+        "second": [
+          511,
+          95,
+          738,
+          529
+        ],
+        "witness_count": 461
+      },
+      "family": "lama",
+      "first": null,
+      "key": [
+        "panel",
+        6,
+        "triple"
+      ],
+      "second": null,
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          470,
+          494,
+          662,
+          750
+        ],
+        "flag": false,
+        "score": 0.5895376801490784,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": [
+          133,
+          30,
+          232,
+          285
+        ],
+        "different_pixels": 13962,
+        "exact_both": true,
+        "exact_match_pixels": 175316,
+        "false_pixels": 0,
+        "first": [
+          73,
+          418,
+          659,
+          741
+        ],
+        "found": 27924,
+        "second": [
+          76,
+          35,
+          662,
+          358
+        ],
+        "witness_count": 927
+      },
+      "family": "lama",
+      "first": [
+        70,
+        20,
+        662,
+        364
+      ],
+      "key": [
+        "panel",
+        7,
+        "sharp"
+      ],
+      "second": [
+        67,
+        403,
+        659,
+        747
+      ],
+      "target": 13962
+    },
+    {
+      "baseline": {
+        "box": [
+          470,
+          494,
+          662,
+          750
+        ],
+        "flag": false,
+        "score": 0.5895376801490784,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": [
+          135,
+          31,
+          232,
+          284
+        ],
+        "different_pixels": 12879,
+        "exact_both": true,
+        "exact_match_pixels": 176399,
+        "false_pixels": 0,
+        "first": [
+          73,
+          418,
+          659,
+          741
+        ],
+        "found": 25758,
+        "second": [
+          76,
+          35,
+          662,
+          358
+        ],
+        "witness_count": 933
+      },
+      "family": "lama",
+      "first": [
+        70,
+        20,
+        662,
+        364
+      ],
+      "key": [
+        "panel",
+        7,
+        "feather"
+      ],
+      "second": [
+        67,
+        403,
+        659,
+        747
+      ],
+      "target": 12879
+    },
+    {
+      "baseline": {
+        "box": [
+          470,
+          494,
+          662,
+          750
+        ],
+        "flag": false,
+        "score": 0.5895376801490784,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": [
+          191,
+          99,
+          289,
+          156
+        ],
+        "different_pixels": 5318,
+        "exact_both": true,
+        "exact_match_pixels": 183960,
+        "false_pixels": 0,
+        "first": [
+          73,
+          418,
+          659,
+          741
+        ],
+        "found": 10636,
+        "second": [
+          76,
+          35,
+          662,
+          358
+        ],
+        "witness_count": 989
+      },
+      "family": "lama",
+      "first": [
+        70,
+        20,
+        662,
+        364
+      ],
+      "key": [
+        "panel",
+        7,
+        "ordinary_local"
+      ],
+      "second": [
+        67,
+        403,
+        659,
+        747
+      ],
+      "target": 5318
+    },
+    {
+      "baseline": {
+        "box": [
+          470,
+          494,
+          662,
+          750
+        ],
+        "flag": false,
+        "score": 0.5895376801490784,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": null,
+        "different_pixels": 0,
+        "exact_both": false,
+        "exact_match_pixels": 189278,
+        "false_pixels": 0,
+        "first": [
+          73,
+          418,
+          659,
+          741
+        ],
+        "found": 0,
+        "second": [
+          76,
+          35,
+          662,
+          358
+        ],
+        "witness_count": 1037
+      },
+      "family": "lama",
+      "first": [
+        70,
+        20,
+        662,
+        364
+      ],
+      "key": [
+        "panel",
+        7,
+        "duplicate"
+      ],
+      "second": [
+        67,
+        403,
+        659,
+        747
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          470,
+          494,
+          662,
+          750
+        ],
+        "flag": false,
+        "score": 0.5894300937652588,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "lama",
+      "first": [
+        70,
+        20,
+        662,
+        364
+      ],
+      "key": [
+        "panel",
+        7,
+        "global_tone"
+      ],
+      "second": [
+        67,
+        403,
+        659,
+        747
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          64,
+          622,
+          192,
+          750
+        ],
+        "flag": false,
+        "score": 0.736512303352356,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "lama",
+      "first": [
+        70,
+        20,
+        662,
+        364
+      ],
+      "key": [
+        "panel",
+        7,
+        "unrelated"
+      ],
+      "second": [
+        67,
+        403,
+        659,
+        747
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          524,
+          407,
+          652,
+          535
+        ],
+        "flag": false,
+        "score": 0.7010705471038818,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": null,
+        "different_pixels": 0,
+        "exact_both": false,
+        "exact_match_pixels": 188352,
+        "false_pixels": 0,
+        "first": [
+          76,
+          418,
+          652,
+          745
+        ],
+        "found": 0,
+        "second": [
+          86,
+          31,
+          662,
+          358
+        ],
+        "witness_count": 1020
+      },
+      "family": "lama",
+      "first": [
+        70,
+        20,
+        662,
+        364
+      ],
+      "key": [
+        "panel",
+        7,
+        "crop_shift"
+      ],
+      "second": [
+        67,
+        403,
+        659,
+        747
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          473,
+          111,
+          665,
+          367
+        ],
+        "flag": false,
+        "score": 0.5857809782028198,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "lama",
+      "first": [
+        70,
+        20,
+        662,
+        364
+      ],
+      "key": [
+        "panel",
+        7,
+        "resampled"
+      ],
+      "second": [
+        67,
+        403,
+        659,
+        747
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          470,
+          427,
+          662,
+          683
+        ],
+        "flag": false,
+        "score": 0.7784739136695862,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": null,
+        "different_pixels": 0,
+        "exact_both": false,
+        "exact_match_pixels": 189278,
+        "false_pixels": 0,
+        "first": [
+          73,
+          418,
+          659,
+          741
+        ],
+        "found": 0,
+        "second": [
+          76,
+          35,
+          662,
+          358
+        ],
+        "witness_count": 1020
+      },
+      "family": "lama",
+      "first": [
+        70,
+        20,
+        662,
+        364
+      ],
+      "key": [
+        "panel",
+        7,
+        "ui_card"
+      ],
+      "second": [
+        67,
+        403,
+        659,
+        747
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          606,
+          242,
+          734,
+          434
+        ],
+        "flag": true,
+        "score": 0.9897362589836121,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": [
+          84,
+          102,
+          109,
+          124
+        ],
+        "different_pixels": 550,
+        "exact_both": false,
+        "exact_match_pixels": 76403,
+        "false_pixels": 1100,
+        "first": [
+          19,
+          95,
+          246,
+          434
+        ],
+        "found": 1100,
+        "second": [
+          511,
+          95,
+          738,
+          434
+        ],
+        "witness_count": 424
+      },
+      "family": "lama",
+      "first": null,
+      "key": [
+        "panel",
+        7,
+        "triple"
+      ],
+      "second": null,
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          401,
+          301,
+          593,
+          429
+        ],
+        "flag": true,
+        "score": 0.9236737489700317,
+        "useful": true
+      },
+      "evidence": null,
+      "family": "sdxl",
+      "first": [
+        17,
+        71,
+        361,
+        647
+      ],
+      "key": [
+        "panel",
+        8,
+        "sharp"
+      ],
+      "second": [
+        401,
+        69,
+        745,
+        645
+      ],
+      "target": 27648
+    },
+    {
+      "baseline": {
+        "box": [
+          364,
+          66,
+          492,
+          258
+        ],
+        "flag": false,
+        "score": 0.6273599863052368,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "sdxl",
+      "first": [
+        17,
+        71,
+        361,
+        647
+      ],
+      "key": [
+        "panel",
+        8,
+        "feather"
+      ],
+      "second": [
+        401,
+        69,
+        745,
+        645
+      ],
+      "target": 26968
+    },
+    {
+      "baseline": {
+        "box": [
+          364,
+          66,
+          492,
+          258
+        ],
+        "flag": false,
+        "score": 0.6273599863052368,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": [
+          112,
+          187,
+          169,
+          283
+        ],
+        "different_pixels": 5174,
+        "exact_both": true,
+        "exact_match_pixels": 187717,
+        "false_pixels": 0,
+        "first": [
+          19,
+          76,
+          358,
+          645
+        ],
+        "found": 10348,
+        "second": [
+          403,
+          74,
+          742,
+          643
+        ],
+        "witness_count": 1007
+      },
+      "family": "sdxl",
+      "first": [
+        17,
+        71,
+        361,
+        647
+      ],
+      "key": [
+        "panel",
+        8,
+        "ordinary_local"
+      ],
+      "second": [
+        401,
+        69,
+        745,
+        645
+      ],
+      "target": 5174
+    },
+    {
+      "baseline": {
+        "box": [
+          364,
+          66,
+          492,
+          258
+        ],
+        "flag": false,
+        "score": 0.6273599863052368,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": null,
+        "different_pixels": 0,
+        "exact_both": false,
+        "exact_match_pixels": 192891,
+        "false_pixels": 0,
+        "first": [
+          19,
+          76,
+          358,
+          645
+        ],
+        "found": 0,
+        "second": [
+          403,
+          74,
+          742,
+          643
+        ],
+        "witness_count": 1046
+      },
+      "family": "sdxl",
+      "first": [
+        17,
+        71,
+        361,
+        647
+      ],
+      "key": [
+        "panel",
+        8,
+        "duplicate"
+      ],
+      "second": [
+        401,
+        69,
+        745,
+        645
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          364,
+          66,
+          492,
+          258
+        ],
+        "flag": false,
+        "score": 0.612371027469635,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "sdxl",
+      "first": [
+        17,
+        71,
+        361,
+        647
+      ],
+      "key": [
+        "panel",
+        8,
+        "global_tone"
+      ],
+      "second": [
+        401,
+        69,
+        745,
+        645
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          620,
+          392,
+          748,
+          648
+        ],
+        "flag": false,
+        "score": 0.6129724979400635,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "sdxl",
+      "first": [
+        17,
+        71,
+        361,
+        647
+      ],
+      "key": [
+        "panel",
+        8,
+        "unrelated"
+      ],
+      "second": [
+        401,
+        69,
+        745,
+        645
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          398,
+          73,
+          526,
+          265
+        ],
+        "flag": false,
+        "score": 0.7796812057495117,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": null,
+        "different_pixels": 0,
+        "exact_both": false,
+        "exact_match_pixels": 183787,
+        "false_pixels": 0,
+        "first": [
+          38,
+          74,
+          361,
+          643
+        ],
+        "found": 0,
+        "second": [
+          415,
+          76,
+          738,
+          645
+        ],
+        "witness_count": 1015
+      },
+      "family": "sdxl",
+      "first": [
+        17,
+        71,
+        361,
+        647
+      ],
+      "key": [
+        "panel",
+        8,
+        "crop_shift"
+      ],
+      "second": [
+        401,
+        69,
+        745,
+        645
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          364,
+          66,
+          492,
+          258
+        ],
+        "flag": false,
+        "score": 0.6355913877487183,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "sdxl",
+      "first": [
+        17,
+        71,
+        361,
+        647
+      ],
+      "key": [
+        "panel",
+        8,
+        "resampled"
+      ],
+      "second": [
+        401,
+        69,
+        745,
+        645
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          108,
+          95,
+          364,
+          223
+        ],
+        "flag": false,
+        "score": 0.5833675265312195,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "sdxl",
+      "first": [
+        17,
+        71,
+        361,
+        647
+      ],
+      "key": [
+        "panel",
+        8,
+        "ui_card"
+      ],
+      "second": [
+        401,
+        69,
+        745,
+        645
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          22,
+          90,
+          278,
+          282
+        ],
+        "flag": true,
+        "score": 1.009526252746582,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": [
+          84,
+          102,
+          109,
+          124
+        ],
+        "different_pixels": 550,
+        "exact_both": false,
+        "exact_match_pixels": 97968,
+        "false_pixels": 1100,
+        "first": [
+          19,
+          95,
+          246,
+          529
+        ],
+        "found": 1100,
+        "second": [
+          511,
+          95,
+          738,
+          529
+        ],
+        "witness_count": 544
+      },
+      "family": "sdxl",
+      "first": null,
+      "key": [
+        "panel",
+        8,
+        "triple"
+      ],
+      "second": null,
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          263,
+          555,
+          455,
+          683
+        ],
+        "flag": false,
+        "score": 0.8148142695426941,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "sdxl",
+      "first": [
+        72,
+        18,
+        664,
+        362
+      ],
+      "key": [
+        "panel",
+        9,
+        "sharp"
+      ],
+      "second": [
+        71,
+        403,
+        663,
+        747
+      ],
+      "target": 36864
+    },
+    {
+      "baseline": {
+        "box": [
+          74,
+          233,
+          330,
+          361
+        ],
+        "flag": false,
+        "score": 0.5037293434143066,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "sdxl",
+      "first": [
+        72,
+        18,
+        664,
+        362
+      ],
+      "key": [
+        "panel",
+        9,
+        "feather"
+      ],
+      "second": [
+        71,
+        403,
+        663,
+        747
+      ],
+      "target": 35813
+    },
+    {
+      "baseline": {
+        "box": [
+          74,
+          233,
+          330,
+          361
+        ],
+        "flag": false,
+        "score": 0.5037293434143066,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": [
+          193,
+          113,
+          291,
+          170
+        ],
+        "different_pixels": 1867,
+        "exact_both": true,
+        "exact_match_pixels": 197126,
+        "false_pixels": 0,
+        "first": [
+          75,
+          404,
+          662,
+          743
+        ],
+        "found": 3734,
+        "second": [
+          76,
+          19,
+          663,
+          358
+        ],
+        "witness_count": 671
+      },
+      "family": "sdxl",
+      "first": [
+        72,
+        18,
+        664,
+        362
+      ],
+      "key": [
+        "panel",
+        9,
+        "ordinary_local"
+      ],
+      "second": [
+        71,
+        403,
+        663,
+        747
+      ],
+      "target": 1867
+    },
+    {
+      "baseline": {
+        "box": [
+          74,
+          233,
+          330,
+          361
+        ],
+        "flag": false,
+        "score": 0.5037293434143066,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": null,
+        "different_pixels": 0,
+        "exact_both": false,
+        "exact_match_pixels": 198993,
+        "false_pixels": 0,
+        "first": [
+          75,
+          404,
+          662,
+          743
+        ],
+        "found": 0,
+        "second": [
+          76,
+          19,
+          663,
+          358
+        ],
+        "witness_count": 678
+      },
+      "family": "sdxl",
+      "first": [
+        72,
+        18,
+        664,
+        362
+      ],
+      "key": [
+        "panel",
+        9,
+        "duplicate"
+      ],
+      "second": [
+        71,
+        403,
+        663,
+        747
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          74,
+          233,
+          330,
+          361
+        ],
+        "flag": false,
+        "score": 0.5037293434143066,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "sdxl",
+      "first": [
+        72,
+        18,
+        664,
+        362
+      ],
+      "key": [
+        "panel",
+        9,
+        "global_tone"
+      ],
+      "second": [
+        71,
+        403,
+        663,
+        747
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          68,
+          400,
+          196,
+          656
+        ],
+        "flag": false,
+        "score": 0.6996264457702637,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "sdxl",
+      "first": [
+        72,
+        18,
+        664,
+        362
+      ],
+      "key": [
+        "panel",
+        9,
+        "unrelated"
+      ],
+      "second": [
+        71,
+        403,
+        663,
+        747
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          400,
+          407,
+          656,
+          663
+        ],
+        "flag": true,
+        "score": 0.8624077439308167,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": null,
+        "different_pixels": 0,
+        "exact_both": false,
+        "exact_match_pixels": 195942,
+        "false_pixels": 0,
+        "first": [
+          76,
+          408,
+          654,
+          747
+        ],
+        "found": 0,
+        "second": [
+          84,
+          19,
+          662,
+          358
+        ],
+        "witness_count": 644
+      },
+      "family": "sdxl",
+      "first": [
+        72,
+        18,
+        664,
+        362
+      ],
+      "key": [
+        "panel",
+        9,
+        "crop_shift"
+      ],
+      "second": [
+        71,
+        403,
+        663,
+        747
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          73,
+          618,
+          329,
+          746
+        ],
+        "flag": false,
+        "score": 0.5125792622566223,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "sdxl",
+      "first": [
+        72,
+        18,
+        664,
+        362
+      ],
+      "key": [
+        "panel",
+        9,
+        "resampled"
+      ],
+      "second": [
+        71,
+        403,
+        663,
+        747
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          71,
+          427,
+          199,
+          619
+        ],
+        "flag": false,
+        "score": 0.6326115727424622,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "sdxl",
+      "first": [
+        72,
+        18,
+        664,
+        362
+      ],
+      "key": [
+        "panel",
+        9,
+        "ui_card"
+      ],
+      "second": [
+        71,
+        403,
+        663,
+        747
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          140,
+          178,
+          268,
+          434
+        ],
+        "flag": false,
+        "score": 0.7721207141876221,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": [
+          84,
+          102,
+          109,
+          124
+        ],
+        "different_pixels": 550,
+        "exact_both": false,
+        "exact_match_pixels": 76403,
+        "false_pixels": 1100,
+        "first": [
+          19,
+          95,
+          246,
+          434
+        ],
+        "found": 1100,
+        "second": [
+          511,
+          95,
+          738,
+          434
+        ],
+        "witness_count": 229
+      },
+      "family": "sdxl",
+      "first": null,
+      "key": [
+        "panel",
+        9,
+        "triple"
+      ],
+      "second": null,
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          405,
+          243,
+          597,
+          499
+        ],
+        "flag": true,
+        "score": 0.8486935496330261,
+        "useful": true
+      },
+      "evidence": null,
+      "family": "kandinsky",
+      "first": [
+        19,
+        63,
+        363,
+        655
+      ],
+      "key": [
+        "panel",
+        10,
+        "sharp"
+      ],
+      "second": [
+        405,
+        63,
+        749,
+        655
+      ],
+      "target": 29952
+    },
+    {
+      "baseline": {
+        "box": [
+          481,
+          229,
+          609,
+          357
+        ],
+        "flag": false,
+        "score": 0.6612027287483215,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "kandinsky",
+      "first": [
+        19,
+        63,
+        363,
+        655
+      ],
+      "key": [
+        "panel",
+        10,
+        "feather"
+      ],
+      "second": [
+        405,
+        63,
+        749,
+        655
+      ],
+      "target": 29260
+    },
+    {
+      "baseline": {
+        "box": [
+          20,
+          239,
+          148,
+          367
+        ],
+        "flag": false,
+        "score": 0.5848265886306763,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": [
+          114,
+          184,
+          171,
+          282
+        ],
+        "different_pixels": 5546,
+        "exact_both": true,
+        "exact_match_pixels": 186667,
+        "false_pixels": 0,
+        "first": [
+          19,
+          76,
+          358,
+          643
+        ],
+        "found": 11092,
+        "second": [
+          405,
+          76,
+          744,
+          643
+        ],
+        "witness_count": 976
+      },
+      "family": "kandinsky",
+      "first": [
+        19,
+        63,
+        363,
+        655
+      ],
+      "key": [
+        "panel",
+        10,
+        "ordinary_local"
+      ],
+      "second": [
+        405,
+        63,
+        749,
+        655
+      ],
+      "target": 5546
+    },
+    {
+      "baseline": {
+        "box": [
+          406,
+          239,
+          534,
+          367
+        ],
+        "flag": false,
+        "score": 0.5848265886306763,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": null,
+        "different_pixels": 0,
+        "exact_both": false,
+        "exact_match_pixels": 192213,
+        "false_pixels": 0,
+        "first": [
+          19,
+          76,
+          358,
+          643
+        ],
+        "found": 0,
+        "second": [
+          405,
+          76,
+          744,
+          643
+        ],
+        "witness_count": 1018
+      },
+      "family": "kandinsky",
+      "first": [
+        19,
+        63,
+        363,
+        655
+      ],
+      "key": [
+        "panel",
+        10,
+        "duplicate"
+      ],
+      "second": [
+        405,
+        63,
+        749,
+        655
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          20,
+          239,
+          148,
+          367
+        ],
+        "flag": false,
+        "score": 0.5848265886306763,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "kandinsky",
+      "first": [
+        19,
+        63,
+        363,
+        655
+      ],
+      "key": [
+        "panel",
+        10,
+        "global_tone"
+      ],
+      "second": [
+        405,
+        63,
+        749,
+        655
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          402,
+          60,
+          658,
+          252
+        ],
+        "flag": false,
+        "score": 0.7656639218330383,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "kandinsky",
+      "first": [
+        19,
+        63,
+        363,
+        655
+      ],
+      "key": [
+        "panel",
+        10,
+        "unrelated"
+      ],
+      "second": [
+        405,
+        63,
+        749,
+        655
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          550,
+          67,
+          742,
+          259
+        ],
+        "flag": false,
+        "score": 0.7694368958473206,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": null,
+        "different_pixels": 0,
+        "exact_both": false,
+        "exact_match_pixels": 183291,
+        "false_pixels": 0,
+        "first": [
+          38,
+          72,
+          359,
+          643
+        ],
+        "found": 0,
+        "second": [
+          417,
+          76,
+          738,
+          647
+        ],
+        "witness_count": 987
+      },
+      "family": "kandinsky",
+      "first": [
+        19,
+        63,
+        363,
+        655
+      ],
+      "key": [
+        "panel",
+        10,
+        "crop_shift"
+      ],
+      "second": [
+        405,
+        63,
+        749,
+        655
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          20,
+          239,
+          148,
+          367
+        ],
+        "flag": false,
+        "score": 0.5848265886306763,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "kandinsky",
+      "first": [
+        19,
+        63,
+        363,
+        655
+      ],
+      "key": [
+        "panel",
+        10,
+        "resampled"
+      ],
+      "second": [
+        405,
+        63,
+        749,
+        655
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          402,
+          444,
+          594,
+          636
+        ],
+        "flag": false,
+        "score": 0.7018606066703796,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "kandinsky",
+      "first": [
+        19,
+        63,
+        363,
+        655
+      ],
+      "key": [
+        "panel",
+        10,
+        "ui_card"
+      ],
+      "second": [
+        405,
+        63,
+        749,
+        655
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          606,
+          406,
+          734,
+          534
+        ],
+        "flag": true,
+        "score": 1.028250813484192,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": [
+          84,
+          102,
+          109,
+          124
+        ],
+        "different_pixels": 550,
+        "exact_both": false,
+        "exact_match_pixels": 97968,
+        "false_pixels": 1100,
+        "first": [
+          19,
+          95,
+          246,
+          529
+        ],
+        "found": 1100,
+        "second": [
+          511,
+          95,
+          738,
+          529
+        ],
+        "witness_count": 542
+      },
+      "family": "kandinsky",
+      "first": null,
+      "key": [
+        "panel",
+        10,
+        "triple"
+      ],
+      "second": null,
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          265,
+          515,
+          457,
+          643
+        ],
+        "flag": true,
+        "score": 2.767902135848999,
+        "useful": true
+      },
+      "evidence": {
+        "difference_box": [
+          189,
+          97,
+          381,
+          225
+        ],
+        "different_pixels": 24576,
+        "exact_both": true,
+        "exact_match_pixels": 161160,
+        "false_pixels": 0,
+        "first": [
+          75,
+          31,
+          643,
+          358
+        ],
+        "found": 49152,
+        "second": [
+          76,
+          418,
+          644,
+          745
+        ],
+        "witness_count": 863
+      },
+      "family": "kandinsky",
+      "first": [
+        64,
+        20,
+        656,
+        364
+      ],
+      "key": [
+        "panel",
+        11,
+        "sharp"
+      ],
+      "second": [
+        65,
+        407,
+        657,
+        751
+      ],
+      "target": 24576
+    },
+    {
+      "baseline": {
+        "box": [
+          169,
+          17,
+          297,
+          145
+        ],
+        "flag": false,
+        "score": 0.8005856871604919,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": [
+          190,
+          98,
+          380,
+          224
+        ],
+        "different_pixels": 23940,
+        "exact_both": true,
+        "exact_match_pixels": 161796,
+        "false_pixels": 0,
+        "first": [
+          75,
+          31,
+          643,
+          358
+        ],
+        "found": 47880,
+        "second": [
+          76,
+          418,
+          644,
+          745
+        ],
+        "witness_count": 870
+      },
+      "family": "kandinsky",
+      "first": [
+        64,
+        20,
+        656,
+        364
+      ],
+      "key": [
+        "panel",
+        11,
+        "feather"
+      ],
+      "second": [
+        65,
+        407,
+        657,
+        751
+      ],
+      "target": 23940
+    },
+    {
+      "baseline": {
+        "box": [
+          169,
+          17,
+          297,
+          145
+        ],
+        "flag": false,
+        "score": 0.8005856871604919,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": [
+          186,
+          103,
+          284,
+          160
+        ],
+        "different_pixels": 5213,
+        "exact_both": true,
+        "exact_match_pixels": 180523,
+        "false_pixels": 0,
+        "first": [
+          75,
+          31,
+          643,
+          358
+        ],
+        "found": 10426,
+        "second": [
+          76,
+          418,
+          644,
+          745
+        ],
+        "witness_count": 972
+      },
+      "family": "kandinsky",
+      "first": [
+        64,
+        20,
+        656,
+        364
+      ],
+      "key": [
+        "panel",
+        11,
+        "ordinary_local"
+      ],
+      "second": [
+        65,
+        407,
+        657,
+        751
+      ],
+      "target": 5213
+    },
+    {
+      "baseline": {
+        "box": [
+          169,
+          17,
+          297,
+          145
+        ],
+        "flag": false,
+        "score": 0.8005856871604919,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": null,
+        "different_pixels": 0,
+        "exact_both": false,
+        "exact_match_pixels": 185736,
+        "false_pixels": 0,
+        "first": [
+          75,
+          31,
+          643,
+          358
+        ],
+        "found": 0,
+        "second": [
+          76,
+          418,
+          644,
+          745
+        ],
+        "witness_count": 1020
+      },
+      "family": "kandinsky",
+      "first": [
+        64,
+        20,
+        656,
+        364
+      ],
+      "key": [
+        "panel",
+        11,
+        "duplicate"
+      ],
+      "second": [
+        65,
+        407,
+        657,
+        751
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          169,
+          17,
+          297,
+          145
+        ],
+        "flag": false,
+        "score": 0.8005856871604919,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "kandinsky",
+      "first": [
+        64,
+        20,
+        656,
+        364
+      ],
+      "key": [
+        "panel",
+        11,
+        "global_tone"
+      ],
+      "second": [
+        65,
+        407,
+        657,
+        751
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          169,
+          17,
+          297,
+          145
+        ],
+        "flag": false,
+        "score": 0.8005856871604919,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "kandinsky",
+      "first": [
+        64,
+        20,
+        656,
+        364
+      ],
+      "key": [
+        "panel",
+        11,
+        "unrelated"
+      ],
+      "second": [
+        65,
+        407,
+        657,
+        751
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          169,
+          17,
+          297,
+          145
+        ],
+        "flag": false,
+        "score": 0.8005856871604919,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": null,
+        "different_pixels": 0,
+        "exact_both": false,
+        "exact_match_pixels": 189663,
+        "false_pixels": 0,
+        "first": [
+          70,
+          418,
+          643,
+          749
+        ],
+        "found": 0,
+        "second": [
+          76,
+          27,
+          649,
+          358
+        ],
+        "witness_count": 1020
+      },
+      "family": "kandinsky",
+      "first": [
+        64,
+        20,
+        656,
+        364
+      ],
+      "key": [
+        "panel",
+        11,
+        "crop_shift"
+      ],
+      "second": [
+        65,
+        407,
+        657,
+        751
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          169,
+          17,
+          297,
+          145
+        ],
+        "flag": false,
+        "score": 0.8005856871604919,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "kandinsky",
+      "first": [
+        64,
+        20,
+        656,
+        364
+      ],
+      "key": [
+        "panel",
+        11,
+        "resampled"
+      ],
+      "second": [
+        65,
+        407,
+        657,
+        751
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          169,
+          44,
+          297,
+          172
+        ],
+        "flag": true,
+        "score": 0.9183444380760193,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "kandinsky",
+      "first": [
+        64,
+        20,
+        656,
+        364
+      ],
+      "key": [
+        "panel",
+        11,
+        "ui_card"
+      ],
+      "second": [
+        65,
+        407,
+        657,
+        751
+      ],
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          50,
+          90,
+          242,
+          218
+        ],
+        "flag": true,
+        "score": 0.9740304350852966,
+        "useful": false
+      },
+      "evidence": {
+        "difference_box": [
+          84,
+          102,
+          109,
+          124
+        ],
+        "different_pixels": 550,
+        "exact_both": false,
+        "exact_match_pixels": 76403,
+        "false_pixels": 1100,
+        "first": [
+          19,
+          95,
+          246,
+          434
+        ],
+        "found": 1100,
+        "second": [
+          511,
+          95,
+          738,
+          434
+        ],
+        "witness_count": 424
+      },
+      "family": "kandinsky",
+      "first": null,
+      "key": [
+        "panel",
+        11,
+        "triple"
+      ],
+      "second": null,
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          3,
+          3,
+          131,
+          131
+        ],
+        "flag": false,
+        "score": 0.4839254319667816,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "credited-photo",
+      "first": null,
+      "key": [
+        "standalone",
+        0,
+        "photo"
+      ],
+      "second": null,
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          386,
+          114,
+          514,
+          242
+        ],
+        "flag": false,
+        "score": 0.655911386013031,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "credited-photo",
+      "first": null,
+      "key": [
+        "standalone",
+        1,
+        "photo"
+      ],
+      "second": null,
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          262,
+          393,
+          390,
+          521
+        ],
+        "flag": false,
+        "score": 0.6163859367370605,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "credited-photo",
+      "first": null,
+      "key": [
+        "standalone",
+        2,
+        "photo"
+      ],
+      "second": null,
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          227,
+          305,
+          419,
+          497
+        ],
+        "flag": true,
+        "score": 1.207615613937378,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "credited-photo",
+      "first": null,
+      "key": [
+        "standalone",
+        3,
+        "photo"
+      ],
+      "second": null,
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          423,
+          3,
+          551,
+          131
+        ],
+        "flag": false,
+        "score": 0.5882329344749451,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "credited-photo",
+      "first": null,
+      "key": [
+        "standalone",
+        4,
+        "photo"
+      ],
+      "second": null,
+      "target": 0
+    },
+    {
+      "baseline": {
+        "box": [
+          72,
+          397,
+          200,
+          525
+        ],
+        "flag": false,
+        "score": 0.4855322539806366,
+        "useful": false
+      },
+      "evidence": null,
+      "family": "credited-photo",
+      "first": null,
+      "key": [
+        "standalone",
+        5,
+        "photo"
+      ],
+      "second": null,
+      "target": 0
+    }
+  ],
+  "schema": "chipmunk.image-embedded-pair-difference-confirmation/1",
+  "source_sha256": {
+    "commons": "0b57802c999cb34008dc95fe3dec47aab3b1146682fe6d97b2219ee2382180dc",
+    "earlier": "fb0aafa7d109ca3e7fda3256fbd9fdf0e3b2afca265081092552b54cc8388731",
+    "primary": "0901ace2a3abaa09584f70ae426d328b74a5cc1cba6ca877fc753fb32ee865c7"
+  }
+}

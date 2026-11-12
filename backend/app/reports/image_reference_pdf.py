@@ -4,7 +4,11 @@ from __future__ import annotations
 
 import pymupdf
 
-from app.detectors.image import reference_png_orientation, reference_png_oriented_crop
+from app.detectors.image import (
+    reference_png_orientation,
+    reference_png_oriented_crop,
+    reference_png_oriented_resize,
+)
 from app.evidence.image_reference import CROP_RESIZE_SCHEMA, EXACT_PNG_CROP_RESIZE_SCHEMA, RESIZE_SCHEMA
 
 PAGE_WIDTH = 612
@@ -82,6 +86,14 @@ def _summary(document, comparison, assets):
         proof = comparison["exact_oriented_crop"]
         label = reference_png_orientation.LABELS[proof["transform"]]
         _text(page, MARGIN, 302, f"Earlier crop matched using {label}.", size=10, font="hebo")
+        _text(page, MARGIN, 318, f"Earlier copy overlap: {_area(proof['native_crop'])}", size=10)
+        _text(page, MARGIN, 334, f"Exact match on {proof['matched_pixels']:,} pixels and {len(proof['matched_tiles'])} textured tiles.",
+              size=10, color=MUTED)
+        _text(page, MARGIN, 350, "Pixels outside this earlier area were unassessed.", size=10, color=MUTED)
+    if schema == reference_png_oriented_resize.SCHEMA:
+        proof = comparison["exact_oriented_resize"]
+        label = reference_png_orientation.LABELS[proof["transform"]]
+        _text(page, MARGIN, 302, f"Earlier crop matched after {label} and resizing.", size=10, font="hebo")
         _text(page, MARGIN, 318, f"Earlier copy overlap: {_area(proof['native_crop'])}", size=10)
         _text(page, MARGIN, 334, f"Exact match on {proof['matched_pixels']:,} pixels and {len(proof['matched_tiles'])} textured tiles.",
               size=10, color=MUTED)

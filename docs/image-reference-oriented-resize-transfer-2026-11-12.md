@@ -30,6 +30,10 @@ The seven existing control comparisons were unrotated identity controls. The new
 
 The native readback verified all 229 delivered file pairs, rebuilt the photo deliveries from their source records, and reconstructed all 42 accepted RGB projections without rerunning proposal selection. It independently checked connected components, the submitted mask and 20 native crop pairs. The original freeze is `0b38ec554f1ccc5713d27d87d4f6436ae11984c63a0795fa006131256fc88ce9`. The independent crop digest is `b5447d82c1e1652a8d7f5219b3428b8a46229646b29d564f5488893bbab2a9cb`. Source photos and derived image bytes stay local.
 
+## App verification
+
+The local earlier-copy endpoint tries the combined transformation when the existing paths leave a pair unassessed. A serving replay reproduced all 42 exact proofs and preserved the 187 other outcomes in the frozen panel. A simulated unpaid Stripe event queued no analysis. A paid test event released the actual worker, and a local Chrome session submitted the earlier file to the live isolated API in the plain analysis view. For the generated edit used in that test, the browser, comparison PDF and JSON showed the same native crop positions and 21,372 true changed pixels. The offline reader independently verified both source hashes, both crops and the overlay, and rejected altered crop coordinates in the HTTP regression test. [Local earlier-copy usage](image-reference-comparison-2026-11-11.md)
+
 ## Reproduce
 
 The portable reader verifies the frozen input roster, coordinate bounds, proposal witnesses, and decision ledger without the original media.
@@ -39,7 +43,7 @@ python3 -I -S backend/scripts/review_image_reference_oriented_resize_transfer.py
   docs/evaluation-panels/image-reference-oriented-resize-transfer-2026-11-12.json
 ```
 
-The native replay uses the retained 38-photo Commons archive, the seven-source BG-REAL qualified archive, and local Chromium. The capture command blocks browser network requests. Use new local directories for `ui` and `run`.
+To reproduce the original frozen study, use its pinned code and incumbent at commit `88edc830f6a156cd18b02a0a27d6c6cbc0eef4a9`. The native replay uses the retained 38-photo Commons archive, the seven-source BG-REAL qualified archive, and local Chromium. The capture command blocks browser network requests. Use new local directories for `ui` and `run`.
 
 ```sh
 export PYTHONPATH=backend PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1

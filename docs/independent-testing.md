@@ -716,6 +716,13 @@ mappings, all retained mask pixels and the exact crop and overlay bytes.
   chipmunk-verify-image-comparison.json earlier.png submitted.png
 ```
 
+When a rotated or reflected crop was also resized, use the reviewer below. It checks the projected RGB grid and the submitted mask, maps each evidence crop back to the earlier file, and reruns the bounded search to verify the recorded geometry. It also accepts the preceding comparison schemas. [Combined transformation evaluation](image-reference-oriented-resize-transfer-2026-11-12.md)
+
+```sh
+.venv/bin/python -I scripts/review_image_reference_oriented_resize_export.py \
+  chipmunk-verify-image-comparison.json earlier.png submitted.png
+```
+
 The reviewer checks both file SHA-256 commitments and native dimensions after
 orientation. It checks the overlap against the recorded integer offset,
 compares both decoded crops with the corresponding source pixels, and checks

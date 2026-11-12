@@ -190,6 +190,31 @@ describe('earlier-copy comparison', () => {
     expect(JSON.parse(await blobText(download))).toEqual({ comparison: result.comparison, pngs: result.pngs })
   })
 
+  it('shows an earlier crop matched after rotation and resize with native coordinates', async () => {
+    const result = structuredClone(comparison)
+    result.comparison.schema = 'chipmunk.image-reference-comparison/8'
+    result.comparison.submitted.width = 201
+    result.comparison.submitted.height = 297
+    result.comparison.exact_oriented_resize = {
+      transform: 'rotate_90_clockwise', matched_pixels: 58_000, matched_tiles: [[1, 1]],
+      native_crop: { x: 19, y: 19, w: 330, h: 223 }, projected_crop: { x: 14, y: 19, w: 223, h: 330 },
+      projected_rgb_sha256: hash, difference_mask_sha256: hash, kernels: ['bicubic'],
+    }
+    delete result.comparison.alignment
+    vi.stubGlobal('fetch', vi.fn((_url: string, request: RequestInit) => Promise.resolve(
+      request.method === 'POST' ? json(result) : json({ available: true }),
+    )))
+    show()
+    await choose()
+    fireEvent.click(screen.getByRole('button', { name: 'Compare images' }))
+    expect(await screen.findByText(/90-degree clockwise rotation and bicubic resizing/)).toBeTruthy()
+    expect(screen.getByText('x 19, y 19 · 330 × 223 px')).toBeTruthy()
+    expect(screen.getByText(/White marks retained differences from the reproduced resize/)).toBeTruthy()
+    fireEvent.click(screen.getByRole('button', { name: 'Download comparison JSON' }))
+    const [[download]] = vi.mocked(saveBlob).mock.calls
+    expect(JSON.parse(await blobText(download))).toEqual({ comparison: result.comparison, pngs: result.pngs })
+  })
+
   it('explains resize comparison and preserves both native coordinates in the JSON download', async () => {
     const result = structuredClone(comparison)
     result.comparison.schema = 'chipmunk.image-reference-comparison/3'

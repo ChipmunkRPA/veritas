@@ -24,6 +24,16 @@ interface DifferenceRegion extends NativeImageArea {
   submitted_overlay?: ReferencePng
 }
 
+interface OrientedCropProof {
+  transform: keyof typeof orientationLabels
+  native_crop: NativeImageArea
+  projected_crop: NativeImageArea
+  matched_pixels: number
+  matched_tiles: [number, number][]
+  projected_rgb_sha256: string
+  difference_mask_sha256: string
+}
+
 export interface ImageReferenceRecord {
   schema: string
   status: string
@@ -49,21 +59,15 @@ export interface ImageReferenceRecord {
     matched_tiles: [number, number][]
     rgb_sha256: string
   }
-  exact_oriented_crop?: {
-    transform: keyof typeof orientationLabels
-    native_crop: NativeImageArea
-    projected_crop: NativeImageArea
-    matched_pixels: number
-    matched_tiles: [number, number][]
-    projected_rgb_sha256: string
-    difference_mask_sha256: string
-  }
+  exact_oriented_crop?: OrientedCropProof
+  exact_oriented_resize?: OrientedCropProof & { kernels: string[] }
   additional_regions?: number
 }
 
 export const exactPngCropResizeSchema = 'chipmunk.image-reference-comparison/5'
 export const exactPngOrientationSchema = 'chipmunk.image-reference-comparison/6'
 export const exactOrientedCropSchema = 'chipmunk.image-reference-comparison/7'
+export const exactOrientedResizeSchema = 'chipmunk.image-reference-comparison/8'
 export const orientationLabels = {
   rotate_90_clockwise: '90-degree clockwise rotation',
   rotate_180: '180-degree rotation',
@@ -73,6 +77,8 @@ export const orientationLabels = {
   reflect_main_diagonal: 'main-diagonal reflection',
   reflect_other_diagonal: 'opposite-diagonal reflection',
 } as const
+const swapsImageAxes = new Set(['rotate_90_clockwise', 'rotate_90_counterclockwise', 'reflect_main_diagonal', 'reflect_other_diagonal'])
+const exactResizeKernels = new Set(['bicubic', 'bilinear', 'lanczos', 'opencv_area'])
 
 export interface ImageReferenceResult {
   comparison: ImageReferenceRecord
@@ -102,6 +108,10 @@ export async function comparisonAvailability(analysisId: string, signal: AbortSi
 function validArea(area?: NativeImageArea): area is NativeImageArea {
   return !!area && [area.x, area.y, area.w, area.h].every(Number.isSafeInteger)
     && area.x >= 0 && area.y >= 0 && area.w > 0 && area.h > 0
+}
+
+function validAreaWithin(area: NativeImageArea, width: number, height: number): boolean {
+  return validArea(area) && area.x + area.w <= width && area.y + area.h <= height
 }
 
 export async function compareWithEarlierImage(analysisId: string, file: File, signal: AbortSignal): Promise<ImageReferenceResult> {
@@ -138,6 +148,20 @@ export async function compareWithEarlierImage(analysisId: string, file: File, si
       || orientedCrop.native_crop.y + orientedCrop.native_crop.h > comparison.reference.height
       || !Number.isSafeInteger(orientedCrop.matched_pixels) || !Array.isArray(orientedCrop.matched_tiles))) {
     throw new Error('The server returned an incomplete oriented crop comparison.')
+  }
+  if (comparison.schema === exactOrientedResizeSchema) {
+    const proof = comparison.exact_oriented_resize
+    const swap = proof && swapsImageAxes.has(proof.transform)
+    const { width, height } = comparison.reference
+    if (comparison.status !== 'comparable' || !proof || !Object.prototype.hasOwnProperty.call(orientationLabels, proof.transform)
+        || !validAreaWithin(proof.native_crop, width, height)
+        || !validAreaWithin(proof.projected_crop, swap ? height : width, swap ? width : height)
+        || !Number.isSafeInteger(proof.matched_pixels) || proof.matched_pixels < 1
+        || proof.matched_pixels > comparison.submitted.width * comparison.submitted.height
+        || !Array.isArray(proof.matched_tiles) || !Array.isArray(proof.kernels) || proof.kernels.length < 1
+        || !proof.kernels.every(kernel => exactResizeKernels.has(kernel))) {
+      throw new Error('The server returned an incomplete oriented resize comparison.')
+    }
   }
   return result
 }

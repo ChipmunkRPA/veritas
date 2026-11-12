@@ -73,7 +73,7 @@ def _projection(comparison, ref, sub, carrier):
     return crop, projected_size, inverse, difference
 
 
-def _assets(stack, comparison, assets, ref, sub, projection):
+def _assets(stack, comparison, assets, ref, sub, projection, *, map_submitted_box=None):
     require = existing._require
     crop, projected_size, inverse, difference = projection
     components = _components(difference, *sub.size)
@@ -92,7 +92,7 @@ def _assets(stack, comparison, assets, ref, sub, projection):
     for index, (region, area) in enumerate(zip(regions, areas, strict=True), 1):
         box = existing._bounds(region, sub.size)
         earlier_box = existing._bounds(region["reference_region"], ref.size)
-        shifted = tuple(value + crop[i % 2] for i, value in enumerate(box))
+        shifted = (map_submitted_box(box) if map_submitted_box else tuple(value + crop[i % 2] for i, value in enumerate(box)))
         require(earlier_box == existing._orientation_bounds(shifted, projected_size, inverse)
                 and region["selected_pixels"] == area, "Retained region coordinates or count differ")
         component = next((item for item in components if item[0] == box and len(item[1]) == area

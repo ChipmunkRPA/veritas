@@ -14,6 +14,7 @@ from test_image_packets import _bytes
 from test_image_packets import packet_fixture as packet_fixture
 
 from app.core.canonical import canonical_hash, canonical_json
+from app.core.config import settings
 from app.detectors.image import local_jpeg_grid
 from app.engine.detector import Modality, Profile, StageOutputs
 from app.engine.exhibits import ExhibitWriter
@@ -159,8 +160,14 @@ def test_measured_mask_is_frozen_rendered_and_committed(tmp_path, monkeypatch):
     ("native_patch_alignment", "The match aligns patches on the original pixel grid."),
     ("geometric_features", "The match uses corresponding features in both areas."),
 ])
-def test_summary_pdf_and_manifest_present_non_mirrored_pair(packet_fixture, monkeypatch, basis, explanation):
+@pytest.mark.parametrize(("affine_review", "version"), [
+    (False, "image-evidence-12"),
+    (True, "image-evidence-14"),
+])
+def test_summary_pdf_and_manifest_present_non_mirrored_pair(packet_fixture, monkeypatch, basis, explanation, affine_review, version):
     db, store, analysis, _, _ = packet_fixture
+    monkeypatch.setattr(settings, "environment", "dev")
+    monkeypatch.setattr(settings, "image_affine_copy_review", affine_review)
     if basis == "geometric_features":
         monkeypatch.setattr("app.detectors.image.copy_similarity.analyse_translation", lambda _: ("no_pair", []))
     pixels = np.random.default_rng(812).integers(0, 256, (512, 768, 3), dtype=np.uint8)
@@ -175,7 +182,7 @@ def test_summary_pdf_and_manifest_present_non_mirrored_pair(packet_fixture, monk
     analysis.result_hash = canonical_hash(result)
     store.put_bytes(canonical_json(result))
     document = service.persist_packet_set(db, analysis, store, result=result)
-    assert document["version"] == "image-evidence-12"
+    assert document["version"] == version
     assert document["copy_similarity"]["pairs"] == []
     assert document["packets"] == []
     assert document["copy_translation"]["basis"] == basis
@@ -190,10 +197,13 @@ def test_summary_pdf_and_manifest_present_non_mirrored_pair(packet_fixture, monk
     assert load(dump(snapshot)).image_evidence == document
     commitment = public_manifest(snapshot, "weasyprint test", engine.TEMPLATE_SET)["image_evidence"]
     assert commitment["copy_translation"] == document["copy_translation"]
-    assert commitment["artifacts"] == [
+    translation_artifacts = [asset for asset in commitment["artifacts"] if asset["packet_id"] == "T01"]
+    assert translation_artifacts == [
         {"packet_id": "T01", "role": role, "sha256": asset["sha256"]}
         for role, asset in pair["artifacts"].items()
     ]
+    if not affine_review:
+        assert commitment["artifacts"] == translation_artifacts
     rendered = engine.render_pdf(snapshot)
     text = " ".join(engine.pdf_text(rendered.pdf).split())
     assert "T01 · Non-mirrored pair" in text

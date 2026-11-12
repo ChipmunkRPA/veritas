@@ -3,7 +3,8 @@ import { useQuery } from '@tanstack/react-query'
 import { Button } from '../../components/ui'
 import { saveBlob } from '../../lib/api/reports'
 import {
-  compareWithEarlierImage, comparisonAvailability, comparisonPdfData, exactOrientedCropSchema, exactPngCropResizeSchema, exactPngOrientationSchema,
+  compareWithEarlierImage, comparisonAvailability, comparisonPdfData, exactOrientedCropSchema, exactOrientedResizeSchema,
+  exactPngCropResizeSchema, exactPngOrientationSchema,
   imageReferenceExport, orientationLabels, referencePngSrc,
   type ImageReferenceResult, type NativeImageArea, type ReferencePng,
 } from './imageReferenceApi'
@@ -65,14 +66,15 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
   const { reference, submitted, regions, mask, alignment } = comparison
   const comparable = comparison.status === 'comparable'
   const exact = comparison.schema === exactPngCropResizeSchema ? comparison.exact_projection : undefined
-  const orientedCrop = comparison.schema === exactOrientedCropSchema ? comparison.exact_oriented_crop : undefined
+  const orientedResize = comparison.schema === exactOrientedResizeSchema ? comparison.exact_oriented_resize : undefined
+  const orientedCrop = comparison.schema === exactOrientedCropSchema ? comparison.exact_oriented_crop : orientedResize
   const orientation = comparison.schema === exactPngOrientationSchema ? comparison.exact_orientation : orientedCrop
   const cropped = comparison.schema === 'chipmunk.image-reference-comparison/4' || exact
     ? comparison.reference_crop_bounds : undefined
   const resized = comparable && (Boolean(cropped) || comparison.schema === 'chipmunk.image-reference-comparison/3')
   const completeMatch = (exact ?? orientation)?.matched_pixels === submitted.width * submitted.height
-  const kernels = comparison.supported_resize_kernels?.map(kernel => kernel === 'opencv_area' ? 'area' : kernel).join(', ')
-  const maskDescription = exact ? 'White marks retained differences from the reproduced resize.'
+  const kernels = (orientedResize?.kernels ?? comparison.supported_resize_kernels)?.map(kernel => kernel === 'opencv_area' ? 'area' : kernel).join(', ')
+  const maskDescription = (exact || orientedResize) ? 'White marks retained differences from the reproduced resize.'
     : resized ? 'White marks differences flagged by at least two tested resizes.' : 'White marks the selected differences.'
   const reason = Object.prototype.hasOwnProperty.call(unassessed, comparison.status)
     ? unassessed[comparison.status] : 'The selected copies could not be compared reliably.'
@@ -113,7 +115,8 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
       {' '}Matching pixels cover {exact.matched_tiles.length} textured tiles using {kernels} resizing.
     </p>}
     {comparable && orientation && <p className="mt-2 mb-0 text-small text-text-muted">
-      {orientedCrop ? `An earlier crop aligned using ${orientationLabels[orientation.transform]}.`
+      {orientedResize ? `An earlier crop matched after ${orientationLabels[orientation.transform]} and ${kernels} resizing.`
+        : orientedCrop ? `An earlier crop aligned using ${orientationLabels[orientation.transform]}.`
         : `The earlier copy aligned by ${orientationLabels[orientation.transform]}.`}
       {' '}{completeMatch ? 'Every submitted pixel matches after alignment.'
         : `${orientation.matched_pixels.toLocaleString('en-US')} submitted pixels match exactly after alignment.`}

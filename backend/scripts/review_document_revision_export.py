@@ -11,6 +11,7 @@ from pathlib import Path
 from app.evidence.document_revision import FORMATS, MAX_BYTES, SUPPORTED_DRAFTS, compare_with_text
 
 MAX_EXPORT = 2 * 1024 * 1024
+MAX_PDF_EXPORT = 4 * 1024 * 1024
 
 
 def _read(path: Path, limit: int) -> bytes:
@@ -34,7 +35,7 @@ def review(export: Path, earlier: Path, later: Path) -> dict:
     extension = later.suffix.lower()
     if extension not in FORMATS or earlier.suffix.lower() != extension:
         raise ValueError(f"Use the two original versions as {SUPPORTED_DRAFTS}")
-    received = json.loads(_read(export, MAX_EXPORT), object_pairs_hook=_unique)
+    received = json.loads(_read(export, MAX_PDF_EXPORT if extension == ".pdf" else MAX_EXPORT), object_pairs_hook=_unique)
     expected, old_text, new_text = compare_with_text(_read(earlier, MAX_BYTES), _read(later, MAX_BYTES), extension)
     if "paired_check" in received and not isinstance(received["paired_check"], dict):
         raise ValueError("The optional paired writing check has invalid fields")
@@ -47,6 +48,10 @@ def review(export: Path, earlier: Path, later: Path) -> dict:
               "changed_token_ranges_verified": sum(len(excerpt["changed_tokens"]) for excerpt in excerpts)}
     if extension == ".docx":
         result["body_paragraph_ranges_verified"] = sum(len(excerpt["paragraphs"]) for excerpt in excerpts)
+    if extension == ".pdf":
+        pages = [page for excerpt in excerpts for page in excerpt["pdf_pages"]]
+        result["pdf_word_regions_verified"] = sum(len(page["word_regions"]) for page in pages)
+        result["pdf_previews_verified"] = sum("preview" in page for page in pages)
     if paired is not None:
         from app.evidence.document_revision_writing import verify
 

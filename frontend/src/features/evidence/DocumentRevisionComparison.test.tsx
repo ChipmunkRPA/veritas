@@ -27,6 +27,33 @@ it('keeps the form hidden when the authenticated comparison is unavailable', asy
   expect(screen.queryByText('Compare with an earlier draft')).toBeNull()
 })
 
+it('shows the page and both views of the source PDF crop', async () => {
+  const source = { sha256: '0'.repeat(64), bytes: 100, decoded_text_sha256: '1'.repeat(64), decoded_characters: 20, mime_part: null }
+  const comparison: DraftComparison = {
+    schema: 'chipmunk.document-revision-comparison/1', format: 'pdf', coordinate_space: 'pdf_native_text_unicode_codepoint',
+    earlier: source, later: source, scope: 'Words and punctuation.', interpretation: 'Source comparison only.',
+    changes: [{ id: 'C01', role: 'body', earlier: null,
+      later: { start: 4, end: 9, text: 'green', changed_tokens: [[4, 9]], pdf_pages: [{
+        page: 2, page_width: 612, page_height: 792, page_rotation: 90,
+        word_regions: [{ start: 4, end: 9, bbox: [20, 40, 72, 60] }], preview: {
+          source_bbox: [2, 22, 90, 78], source_crop_pixels: [4, 44, 180, 156], render_scale: 2,
+          crop_png: 'YQ==', highlighted_png: 'Yg==', crop_sha256: 'a'.repeat(64), highlighted_sha256: 'b'.repeat(64),
+        },
+      }] } }],
+  }
+  vi.mocked(draftAvailability).mockResolvedValue({ extension: '.pdf', pairedCheckAvailable: false })
+  vi.mocked(compareDraft).mockResolvedValue({ comparison })
+  show()
+  const input = await screen.findByLabelText('Earlier draft')
+  expect(input.getAttribute('accept')).toBe('.pdf')
+  fireEvent.change(input, { target: { files: [new File(['earlier'], 'earlier.pdf')] } })
+  fireEvent.click(screen.getByRole('button', { name: 'Compare drafts' }))
+  await screen.findByText('C01 · PDF text')
+  expect(screen.getByText('Page 2 · highlighted source crop')).toBeTruthy()
+  expect(screen.getByAltText('Analyzed version, page 2, with changed text highlighted').getAttribute('src')).toBe('data:image/png;base64,Yg==')
+  expect(screen.getByAltText('Analyzed version, page 2, original crop').getAttribute('src')).toBe('data:image/png;base64,YQ==')
+})
+
 it('displays the exact server excerpts and Unicode ranges and downloads both reports', async () => {
   const source = { sha256: '0'.repeat(64), bytes: 20, decoded_text_sha256: '1'.repeat(64), decoded_characters: 40, mime_part: '1.1' }
   const comparison: DraftComparison = {

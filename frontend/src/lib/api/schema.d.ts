@@ -3424,7 +3424,7 @@ export interface components {
             /** Available */
             available: boolean;
             /** Extension */
-            extension?: (".eml" | ".txt" | ".docx") | null;
+            extension?: (".eml" | ".txt" | ".docx" | ".pdf") | null;
             /** Paired Check Available */
             paired_check_available?: boolean | null;
         };
@@ -3454,13 +3454,13 @@ export interface components {
              * Coordinate Space
              * @enum {string}
              */
-            coordinate_space: "decoded_source_unicode_codepoint" | "docx_body_unicode_codepoint";
+            coordinate_space: "decoded_source_unicode_codepoint" | "docx_body_unicode_codepoint" | "pdf_native_text_unicode_codepoint";
             earlier: components["schemas"]["DraftSource"];
             /**
              * Format
              * @enum {string}
              */
-            format: "email" | "plain_text" | "docx";
+            format: "email" | "plain_text" | "docx" | "pdf";
             /** Interpretation */
             interpretation: string;
             later: components["schemas"]["DraftSource"];
@@ -3484,6 +3484,8 @@ export interface components {
             end: number;
             /** Paragraphs */
             paragraphs?: components["schemas"]["DraftParagraph"][] | null;
+            /** Pdf Pages */
+            pdf_pages?: components["schemas"]["DraftPdfPage"][] | null;
             /** Start */
             start: number;
             /** Text */
@@ -3525,6 +3527,61 @@ export interface components {
             end: number;
             /** Paragraph */
             paragraph: number;
+            /** Start */
+            start: number;
+        };
+        /** DraftPdfPage */
+        DraftPdfPage: {
+            /** Page */
+            page: number;
+            /** Page Height */
+            page_height: number;
+            /** Page Rotation */
+            page_rotation: number;
+            /** Page Width */
+            page_width: number;
+            preview?: components["schemas"]["DraftPdfPreview"] | null;
+            /** Word Regions */
+            word_regions: components["schemas"]["DraftPdfWordRegion"][];
+        };
+        /** DraftPdfPreview */
+        DraftPdfPreview: {
+            /** Crop Png */
+            crop_png: string;
+            /** Crop Sha256 */
+            crop_sha256: string;
+            /** Highlighted Png */
+            highlighted_png: string;
+            /** Highlighted Sha256 */
+            highlighted_sha256: string;
+            /** Render Scale */
+            render_scale: number;
+            /** Source Bbox */
+            source_bbox: [
+                number,
+                number,
+                number,
+                number
+            ];
+            /** Source Crop Pixels */
+            source_crop_pixels: [
+                number,
+                number,
+                number,
+                number
+            ];
+        };
+        /** DraftPdfWordRegion */
+        DraftPdfWordRegion: {
+            /** Bbox */
+            bbox: [
+                number,
+                number,
+                number,
+                number
+            ];
+            /** End */
+            end: number;
             /** Start */
             start: number;
         };
@@ -7436,7 +7493,7 @@ export interface operations {
                 "multipart/form-data": {
                     /**
                      * Format: binary
-                     * @description Earlier version. Use matching .eml, .txt or .docx files.
+                     * @description Earlier version. Use matching .eml, .txt, .docx or .pdf files.
                      */
                     earlier: string;
                     /**

@@ -35,7 +35,7 @@ router = APIRouter(prefix="/api/v2", tags=["evidence"], dependencies=[Depends(ra
 
 class DocumentRevisionAvailability(BaseModel):
     available: bool
-    extension: Literal[".eml", ".txt", ".docx"] | None = None
+    extension: Literal[".eml", ".txt", ".docx", ".pdf"] | None = None
     paired_check_available: bool | None = None
 
 
@@ -54,12 +54,38 @@ class DraftParagraph(BaseModel):
     end: int
 
 
+class DraftPdfWordRegion(BaseModel):
+    start: int
+    end: int
+    bbox: tuple[float, float, float, float]
+
+
+class DraftPdfPreview(BaseModel):
+    source_bbox: tuple[float, float, float, float]
+    render_scale: float
+    source_crop_pixels: tuple[int, int, int, int]
+    crop_png: str
+    crop_sha256: str
+    highlighted_png: str
+    highlighted_sha256: str
+
+
+class DraftPdfPage(BaseModel):
+    page: int
+    page_width: float
+    page_height: float
+    page_rotation: int
+    word_regions: list[DraftPdfWordRegion]
+    preview: DraftPdfPreview | None = None
+
+
 class DraftExcerpt(BaseModel):
     start: int
     end: int
     text: str
     changed_tokens: list[tuple[int, int]]
     paragraphs: list[DraftParagraph] | None = None
+    pdf_pages: list[DraftPdfPage] | None = None
 
 
 class DraftChange(BaseModel):
@@ -96,8 +122,8 @@ class DraftPairedCheck(BaseModel):
 
 class DraftComparison(BaseModel):
     schema_name: Literal["chipmunk.document-revision-comparison/1"] = Field(alias="schema")
-    format: Literal["email", "plain_text", "docx"]
-    coordinate_space: Literal["decoded_source_unicode_codepoint", "docx_body_unicode_codepoint"]
+    format: Literal["email", "plain_text", "docx", "pdf"]
+    coordinate_space: Literal["decoded_source_unicode_codepoint", "docx_body_unicode_codepoint", "pdf_native_text_unicode_codepoint"]
     earlier: DraftSource
     later: DraftSource
     changes: list[DraftChange]
@@ -146,7 +172,7 @@ def _original(aid: str, *, reject_inactive: bool = False) -> tuple[str, int, str
 
 
 def _unavailable() -> ProblemError:
-    return ProblemError(404, "Earlier-draft comparison unavailable", "A retained, completed, active .eml, .txt or .docx analysis is required.")
+    return ProblemError(404, "Earlier-draft comparison unavailable", "A retained, completed, active .eml, .txt, .docx or .pdf analysis is required.")
 
 
 def _paired_enabled(extension: str | None) -> bool:

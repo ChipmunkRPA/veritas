@@ -28,6 +28,18 @@ function Excerpt({ label, excerpt }: { label: string; excerpt: DraftExcerpt | nu
     </p>)}
     {excerpt?.text ? <pre className="mt-2 mb-0 whitespace-pre-wrap break-words font-sans text-small"><MarkedExcerpt excerpt={excerpt} /></pre>
       : <p className="mt-2 mb-0 text-small text-text-muted">{excerpt ? 'No text at this location.' : 'No corresponding section.'}</p>}
+    {excerpt?.pdf_pages?.map(page => <div key={page.page} className="mt-3">
+      <p className="m-0 text-caption text-text-muted">Page {page.page}{page.preview ? ' · highlighted source crop' : ''}</p>
+      {page.preview && <>
+        <img alt={`${label}, page ${page.page}, with changed text highlighted`} className="mt-1 max-h-56 max-w-full rounded-sm border border-border object-contain object-left"
+          src={`data:image/png;base64,${page.preview.highlighted_png}`} />
+        <details className="mt-1 text-caption text-text-muted">
+          <summary className="cursor-pointer">View source crop without highlight</summary>
+          <img alt={`${label}, page ${page.page}, original crop`} className="mt-1 max-h-56 max-w-full rounded-sm border border-border object-contain object-left"
+            src={`data:image/png;base64,${page.preview.crop_png}`} />
+        </details>
+      </>}
+    </div>)}
   </div>
 }
 
@@ -36,7 +48,8 @@ function DraftResult({ result }: { result: DocumentRevisionResponse }) {
   const { comparison, pdf } = result
   const paired = comparison.paired_check
   const docx = comparison.format === 'docx'
-  const formatLabel = docx ? 'Word body text' : comparison.format === 'plain_text' ? 'Text' : null
+  const pdfText = comparison.format === 'pdf'
+  const formatLabel = docx ? 'Word body text' : pdfText ? 'PDF text' : comparison.format === 'plain_text' ? 'Text' : null
   const downloadJson = () => saveBlob(new Blob([JSON.stringify(comparison, null, 2) + '\n'], { type: 'application/json' }),
     'chipmunk-verify-draft-comparison.json')
   const downloadPdf = (body: string) => {
@@ -85,6 +98,7 @@ function DraftResult({ result }: { result: DocumentRevisionResponse }) {
     {!!comparison.changes.length && <>
       <p className="mt-2 mb-0 text-caption text-text-muted">Highlights mark changed words and punctuation. {docx
         ? 'Word offsets count Unicode code points in the body text. Two line breaks separate included paragraphs. Paragraph ranges start within each paragraph.'
+        : pdfText ? 'Offsets count Unicode code points in the extracted text. Page previews cover selected regions.'
         : 'Offsets count decoded Unicode code points.'} The end of each range is excluded.</p>
       <ol className="mt-3 mb-0 list-none space-y-3 p-0">
         {comparison.changes.map(change => <li key={change.id} className="rounded-md border border-border p-3">
@@ -137,6 +151,7 @@ function DraftForm({ analysisId, extension, pairedCheckAvailable }: {
     <h2 id={headingId} className="m-0 text-body font-medium">Compare with an earlier draft</h2>
     <p className="mt-2 mb-0 text-small text-text-muted">Choose an earlier {extension} file, up to 1 MiB, to see where the wording changed.</p>
     {extension === '.docx' && <p className="mt-2 mb-0 text-small text-text-muted">Checks wording and punctuation in body paragraphs.</p>}
+    {extension === '.pdf' && <p className="mt-2 mb-0 text-small text-text-muted">Use unlocked PDFs with selectable text on every page, up to 12 pages each.</p>}
     <form onSubmit={event => void submit(event)} className="mt-4 flex flex-wrap items-end gap-3">
       <div className="min-w-0">
         <label htmlFor={inputId} className="mb-1 block text-small font-medium">Earlier draft</label>

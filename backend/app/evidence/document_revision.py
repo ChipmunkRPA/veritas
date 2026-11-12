@@ -13,6 +13,7 @@ from tempfile import TemporaryDirectory
 from zipfile import BadZipFile, ZipFile
 
 from app.detectors.text.extract import _normalise, extract, text_hash
+from app.evidence import document_revision_pdf
 from app.storage.files import check_docx_safe
 
 SCHEMA = "chipmunk.document-revision-comparison/1"
@@ -22,8 +23,8 @@ MAX_CHARS = 30_000
 MAX_TOKENS = 2_000
 MAX_DOCX_XML_BYTES = 2 * 1024 * 1024
 ROLES = ("body", "quoted", "signature")
-FORMATS = {".eml": "email", ".txt": "plain_text", ".docx": "docx"}
-SUPPORTED_DRAFTS = "matching .eml, .txt or .docx files"
+FORMATS = {".eml": "email", ".txt": "plain_text", ".docx": "docx", ".pdf": "pdf"}
+SUPPORTED_DRAFTS = "matching .eml, .txt, .docx or .pdf files"
 SCOPE = "Compares words and punctuation in the decoded text. Email body, quoted text and signatures are mapped separately."
 DOCX_SCOPE = ("Compares words and punctuation in top-level Word body paragraphs. Tables, headers, footers, text boxes, "
               "embedded content, formatting and tracked revision markup are outside this comparison.")
@@ -132,6 +133,14 @@ def _docx_source(data):
 def _source(path: Path, data: bytes, extension: str):
     if extension == ".docx":
         return _docx_source(data)
+    if extension == ".pdf":
+        doc = document_revision_pdf.extract_native(path, data)
+        if len(doc.text) > MAX_CHARS:
+            raise ValueError(f"Each version can contain up to {MAX_CHARS:,} decoded characters.")
+        body = tokens(doc.text, doc.paragraphs)
+        if len(body) > MAX_TOKENS:
+            raise ValueError(f"Each version can contain up to {MAX_TOKENS:,} words and punctuation tokens.")
+        return doc.text, {"body": body, "quoted": [], "signature": []}, _source_record(data, doc.text), doc.source_map
     if extension == ".eml":
         message = BytesParser(policy=policy.default).parsebytes(data)
         if not any(field in message for field in ("From", "To", "Subject", "Date", "Message-ID", "Content-Type", "MIME-Version")):
@@ -175,15 +184,17 @@ def _source(path: Path, data: bytes, extension: str):
     return decoded, role_tokens, _source_record(data, decoded, mime_part), None
 
 
-def _excerpt(text: str, extent: list[int] | None, changed_tokens: list[list[int]], paragraphs) -> dict | None:
+def _excerpt(text: str, extent: list[int] | None, changed_tokens: list[list[int]], layout, extension: str) -> dict | None:
     if extent is None:
         return None
     start, end = extent
     result = {"start": start, "end": end, "text": text[start:end], "changed_tokens": changed_tokens}
-    if paragraphs is not None:
+    if extension == ".pdf":
+        result["pdf_pages"] = document_revision_pdf.page_locations(extent, changed_tokens, layout)
+    elif extension == ".docx":
         result["paragraphs"] = [
             {"paragraph": paragraph, "body_index": index, "start": max(start, a) - a, "end": min(end, b) - a}
-            for paragraph, index, a, b in paragraphs
+            for paragraph, index, a, b in layout
             if max(start, a) < min(end, b) or start == end and a <= start <= b
         ]
     return result
@@ -200,18 +211,25 @@ def compare_with_text(earlier: bytes, later: bytes, extension: str) -> tuple[dic
         raise ValueError(f"Choose two {SUPPORTED_DRAFTS}.")
     if any(not 0 < len(item) <= MAX_BYTES for item in (earlier, later)):
         raise ValueError("Each version must be nonempty and at most 1 MiB.")
+    changes = []
+    scope, coordinates = SCOPE, "decoded_source_unicode_codepoint"
     with TemporaryDirectory(prefix="document-revision-") as staging:
         directory = Path(staging)
-        old_text, old_tokens, old_source, old_paragraphs = _source(directory / f"earlier{extension}", earlier, extension)
-        new_text, new_tokens, new_source, new_paragraphs = _source(directory / f"later{extension}", later, extension)
-    changes = []
-    for role in ROLES:
-        for change in differences(old_tokens[role], new_tokens[role]):
-            before = _excerpt(old_text, change["earlier"], change["earlier_changed_tokens"], old_paragraphs)
-            after = _excerpt(new_text, change["later"], change["later_changed_tokens"], new_paragraphs)
-            changes.append({"id": f"C{len(changes) + 1:02d}", "role": role, "earlier": before, "later": after})
+        earlier_path, later_path = directory / f"earlier{extension}", directory / f"later{extension}"
+        old_text, old_tokens, old_source, old_layout = _source(earlier_path, earlier, extension)
+        new_text, new_tokens, new_source, new_layout = _source(later_path, later, extension)
+        for role in ROLES:
+            for change in differences(old_tokens[role], new_tokens[role]):
+                before = _excerpt(old_text, change["earlier"], change["earlier_changed_tokens"], old_layout, extension)
+                after = _excerpt(new_text, change["later"], change["later_changed_tokens"], new_layout, extension)
+                changes.append({"id": f"C{len(changes) + 1:02d}", "role": role, "earlier": before, "later": after})
+        if extension == ".pdf":
+            changes = document_revision_pdf.render_previews(changes, earlier_path, later_path)
+            scope, coordinates = document_revision_pdf.SCOPE, document_revision_pdf.COORDINATES
+    if extension == ".docx":
+        scope, coordinates = DOCX_SCOPE, "docx_body_unicode_codepoint"
     result = {"schema": SCHEMA, "format": FORMATS[extension],
-            "coordinate_space": "docx_body_unicode_codepoint" if extension == ".docx" else "decoded_source_unicode_codepoint",
+            "coordinate_space": coordinates,
             "earlier": old_source, "later": new_source, "changes": changes,
-            "scope": DOCX_SCOPE if extension == ".docx" else SCOPE, "interpretation": INTERPRETATION}
+            "scope": scope, "interpretation": INTERPRETATION}
     return result, old_text, new_text

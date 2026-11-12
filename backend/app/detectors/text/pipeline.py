@@ -456,13 +456,16 @@ def extract_command(path: Path, ext: str) -> list[str]:
     return [sys.executable, "-I", str(EXTRACT_SCRIPT), str(path), ext]
 
 
-def extract_within(path: Path, ext: str) -> Document:
+def extract_within(path: Path, ext: str, *, native_pdf_only: bool = False) -> Document:
     """`extract` in a child process with a hard limit (`document_decode_timeout_s`). A parser or a pattern that does not
     end holds the interpreter of whoever runs it, and a deadline that is checked between stages cannot interrupt it; a
     child is killed. An error of the reader is raised here under its own class name, a `ValueError` as a `ValueError`,
     so the reason shown to the person reads as it did in process (`errors.friendly_error`)."""
     limit = settings.document_decode_timeout_s
-    process = subprocess.Popen(extract_command(path, ext), stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+    command = extract_command(path, ext)
+    if native_pdf_only:
+        command.append("--native-pdf")
+    process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                                start_new_session=os.name == "posix")  # noqa: S603
     try:
         stdout, stderr = process.communicate(timeout=limit)

@@ -37,6 +37,7 @@ OCR_MAX_PAGES = 12
 OCR_MAX_PIXELS = 4_000_000
 OCR_MAX_RASTER_BYTES = 24 * 1024 * 1024
 OCR_BUDGET_SECONDS = 70.0
+NATIVE_COMPARISON_MAX_PAGES = 12
 
 
 def text_hash(text: str) -> str:
@@ -730,7 +731,16 @@ def _child(argv: list[str]) -> int:
     import sys
 
     try:
-        d = extract(Path(argv[1]), argv[2])
+        path, ext = Path(argv[1]), argv[2]
+        if argv[3:] == ["--native-pdf"] and ext == ".pdf":
+            import pymupdf
+
+            with pymupdf.open(path) as pdf:
+                if not pdf.is_pdf or pdf.needs_pass or not 1 <= len(pdf) <= NATIVE_COMPARISON_MAX_PAGES:
+                    raise ValueError(f"Use an unlocked PDF with up to {NATIVE_COMPARISON_MAX_PAGES} pages in each version.")
+            d = extract(path, ext, allow_ocr=False)
+        else:
+            d = extract(path, ext)
         out: dict = {"text": d.text, "paragraphs": d.paragraphs, "meta": d.meta, "source_map": d.source_map, "source_rasters": d.source_rasters}
     except Exception as e:  # noqa: BLE001 - handed to the parent, which raises it again
         out = {"error": {"type": type(e).__name__, "message": str(e), "value_error": isinstance(e, ValueError)}}

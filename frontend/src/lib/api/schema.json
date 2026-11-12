@@ -5102,7 +5102,8 @@
                 "enum": [
                   ".eml",
                   ".txt",
-                  ".docx"
+                  ".docx",
+                  ".pdf"
                 ],
                 "type": "string"
               },
@@ -5210,7 +5211,8 @@
           "coordinate_space": {
             "enum": [
               "decoded_source_unicode_codepoint",
-              "docx_body_unicode_codepoint"
+              "docx_body_unicode_codepoint",
+              "pdf_native_text_unicode_codepoint"
             ],
             "title": "Coordinate Space",
             "type": "string"
@@ -5222,7 +5224,8 @@
             "enum": [
               "email",
               "plain_text",
-              "docx"
+              "docx",
+              "pdf"
             ],
             "title": "Format",
             "type": "string"
@@ -5303,6 +5306,20 @@
               }
             ],
             "title": "Paragraphs"
+          },
+          "pdf_pages": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/DraftPdfPage"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pdf Pages"
           },
           "start": {
             "title": "Start",
@@ -5437,6 +5454,166 @@
           "end"
         ],
         "title": "DraftParagraph",
+        "type": "object"
+      },
+      "DraftPdfPage": {
+        "properties": {
+          "page": {
+            "title": "Page",
+            "type": "integer"
+          },
+          "page_height": {
+            "title": "Page Height",
+            "type": "number"
+          },
+          "page_rotation": {
+            "title": "Page Rotation",
+            "type": "integer"
+          },
+          "page_width": {
+            "title": "Page Width",
+            "type": "number"
+          },
+          "preview": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DraftPdfPreview"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "word_regions": {
+            "items": {
+              "$ref": "#/components/schemas/DraftPdfWordRegion"
+            },
+            "title": "Word Regions",
+            "type": "array"
+          }
+        },
+        "required": [
+          "page",
+          "page_width",
+          "page_height",
+          "page_rotation",
+          "word_regions"
+        ],
+        "title": "DraftPdfPage",
+        "type": "object"
+      },
+      "DraftPdfPreview": {
+        "properties": {
+          "crop_png": {
+            "title": "Crop Png",
+            "type": "string"
+          },
+          "crop_sha256": {
+            "title": "Crop Sha256",
+            "type": "string"
+          },
+          "highlighted_png": {
+            "title": "Highlighted Png",
+            "type": "string"
+          },
+          "highlighted_sha256": {
+            "title": "Highlighted Sha256",
+            "type": "string"
+          },
+          "render_scale": {
+            "title": "Render Scale",
+            "type": "number"
+          },
+          "source_bbox": {
+            "maxItems": 4,
+            "minItems": 4,
+            "prefixItems": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Source Bbox",
+            "type": "array"
+          },
+          "source_crop_pixels": {
+            "maxItems": 4,
+            "minItems": 4,
+            "prefixItems": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "title": "Source Crop Pixels",
+            "type": "array"
+          }
+        },
+        "required": [
+          "source_bbox",
+          "render_scale",
+          "source_crop_pixels",
+          "crop_png",
+          "crop_sha256",
+          "highlighted_png",
+          "highlighted_sha256"
+        ],
+        "title": "DraftPdfPreview",
+        "type": "object"
+      },
+      "DraftPdfWordRegion": {
+        "properties": {
+          "bbox": {
+            "maxItems": 4,
+            "minItems": 4,
+            "prefixItems": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Bbox",
+            "type": "array"
+          },
+          "end": {
+            "title": "End",
+            "type": "integer"
+          },
+          "start": {
+            "title": "Start",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "start",
+          "end",
+          "bbox"
+        ],
+        "title": "DraftPdfWordRegion",
         "type": "object"
       },
       "DraftSource": {
@@ -14574,7 +14751,7 @@
               "schema": {
                 "properties": {
                   "earlier": {
-                    "description": "Earlier version. Use matching .eml, .txt or .docx files.",
+                    "description": "Earlier version. Use matching .eml, .txt, .docx or .pdf files.",
                     "format": "binary",
                     "type": "string"
                   },

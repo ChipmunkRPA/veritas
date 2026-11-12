@@ -13,6 +13,7 @@ import pymupdf
 import pytest
 from docx import Document
 from docx.oxml import OxmlElement
+from PIL import Image
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 from test_image_reference_access import reference_http as reference_http
@@ -55,6 +56,18 @@ def _word(body, omitted):
     return file.getvalue()
 
 
+def _pdf_draft(term, rotation):
+    with pymupdf.open() as document:
+        title = document.new_page()
+        title.insert_text((60, 76), "Release plan - annual review", fontsize=18)
+        title.insert_text((60, 112), "The first page keeps the amber shipment.", fontsize=13)
+        detail = document.new_page()
+        detail.insert_text((60, 76), "Delivery details", fontsize=18)
+        detail.insert_text((60, 112), f"The second shipment will use the {term} packaging.", fontsize=13)
+        detail.set_rotation(rotation)
+        return document.tobytes()
+
+
 def _install(fixture, monkeypatch):
     @contextmanager
     def sessions():
@@ -82,6 +95,78 @@ def _url(aid):
 
 def _upload(data, extension=".eml"):
     return {"earlier": ("earlier" + extension, data, "application/octet-stream")}
+
+
+def test_pdf_comparison_binds_repeated_text_to_both_original_pages(reference_http, monkeypatch, tmp_path):
+    f = _install(reference_http, monkeypatch)
+    earlier, later = _pdf_draft("amber", 90), _pdf_draft("green", 0)
+    retained = _saved(f, "pdf-draft", ".pdf", later)
+    url = _url("pdf-draft")
+    assert f.client.get(url, headers=f.viewer).json() == {"available": True, "extension": ".pdf"}
+    response = f.client.post(url, headers=f.viewer, files=_upload(earlier, ".pdf"), data={"include_pdf": "true"})
+    assert response.status_code == 200, response.text
+    assert response.headers["cache-control"] == "no-store"
+    data = response.json()
+    comparison = data["comparison"]
+    assert comparison["format"] == "pdf" and comparison["coordinate_space"] == "pdf_native_text_unicode_codepoint"
+    assert comparison["earlier"]["sha256"] == hashlib.sha256(earlier).hexdigest()
+    assert comparison["later"]["sha256"] == retained.sha256
+    (change,) = comparison["changes"]
+    marked_pixels = []
+    for side, source, word, rotation in (("earlier", earlier, "amber", 90), ("later", later, "green", 0)):
+        excerpt = change[side]
+        assert excerpt["text"] == word
+        assert excerpt["changed_tokens"] == [[excerpt["start"], excerpt["end"]]]
+        (location,) = excerpt["pdf_pages"]
+        assert (location["page"], location["page_rotation"]) == (2, rotation)
+        preview = location["preview"]
+        with pymupdf.open(stream=source, filetype="pdf") as original:
+            page = original[1]
+            box = tuple(page.search_for(word)[0])
+            assert location["word_regions"] == [{"start": excerpt["start"], "end": excerpt["end"], "bbox": list(box)}]
+            page.set_rotation(0)
+            scale = preview["render_scale"]
+            pixels = page.get_pixmap(matrix=pymupdf.Matrix(scale, scale), alpha=False)
+            full_page = Image.frombytes("RGB", (pixels.width, pixels.height), pixels.samples)
+            crop = full_page.crop(preview["source_crop_pixels"])
+        raw = base64.b64decode(preview["crop_png"], validate=True)
+        marked = base64.b64decode(preview["highlighted_png"], validate=True)
+        assert hashlib.sha256(raw).hexdigest() == preview["crop_sha256"]
+        assert hashlib.sha256(marked).hexdigest() == preview["highlighted_sha256"]
+        with Image.open(BytesIO(raw)) as image, Image.open(BytesIO(marked)) as overlay:
+            assert image.tobytes() == crop.tobytes() and overlay.size == crop.size
+            assert overlay.tobytes() != crop.tobytes()
+            marked_pixels.append((overlay.size, overlay.tobytes()))
+    with pymupdf.open(stream=base64.b64decode(data["pdf"], validate=True), filetype="pdf") as report:
+        pages = " ".join(page.get_text() for page in report)
+        assert "Page 2 · highlighted source crop" in pages and "C01 · PDF text" in pages
+        embedded = set()
+        for page in report:
+            for image in page.get_images():
+                with Image.open(BytesIO(report.extract_image(image[0])["image"])) as pixels:
+                    embedded.add((pixels.size, pixels.convert("RGB").tobytes()))
+        assert set(marked_pixels) <= embedded
+    old, new, exported = (tmp_path / filename for filename in ("earlier.pdf", "later.pdf", "comparison.json"))
+    old.write_bytes(earlier)
+    new.write_bytes(later)
+    exported.write_text(json.dumps(comparison))
+    assert review(exported, old, new)["pdf_previews_verified"] == 2
+    change["later"]["pdf_pages"][0]["page"] = 1
+    exported.write_text(json.dumps(comparison))
+    with pytest.raises(ValueError, match="does not replay"):
+        review(exported, old, new)
+
+
+def test_pdf_drafts_with_unmapped_or_locked_pages_are_refused():
+    source = _pdf_draft("green", 0)
+    with pymupdf.open() as document:
+        blank = document.new_page()
+        blank_data = document.tobytes()
+        blank.insert_text((50, 50), "The text is locked.")
+        locked = document.tobytes(encryption=pymupdf.PDF_ENCRYPT_AES_256, user_pw="review-fixture", owner_pw="review-owner")
+    for unsupported in (blank_data, locked):
+        with pytest.raises(ValueError, match="unlocked PDFs with mapped text on every page"):
+            document_revision.compare(unsupported, source, ".pdf")
 
 
 def test_opt_in_paired_check_replays_exact_focus_and_preserves_unscored_comparison(reference_http, monkeypatch, tmp_path):
@@ -248,13 +333,13 @@ def test_auth_scope_format_mismatch_and_retained_later_integrity(reference_http,
     f = _install(reference_http, monkeypatch)
     retained = _saved(f, "text-draft", ".txt", "🙂 Crème brûlée.".encode())
     _saved(f, "pending-draft", ".txt", b"Queued draft", status="queued")
-    _saved(f, "pdf-draft", ".pdf", b"Outside the draft comparison")
+    _saved(f, "csv-draft", ".csv", b"Outside the draft comparison")
     url = _url("text-draft")
     earlier = _upload("🚀 Déjà vu.".encode(), ".txt")
     assert f.client.post(url, files=earlier).status_code == 401
     assert f.client.post(url, headers=f.outsider, files=earlier).status_code == 404
     assert f.client.post(_url("pending-draft"), headers=f.viewer, files=earlier).status_code == 404
-    assert f.client.get(_url("pdf-draft"), headers=f.viewer).json()["available"] is False
+    assert f.client.get(_url("csv-draft"), headers=f.viewer).json()["available"] is False
     assert f.client.post(url, headers=f.viewer, files=_upload(_email("A different file type"))).status_code == 422
     assert f.client.post(url, headers=f.viewer, files=_upload(b"x" * (document_revision.MAX_BYTES + 1), ".txt")).status_code == 413
     for setting, value in (("environment", "prod"), ("document_revision_comparison_enabled", False)):

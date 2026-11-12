@@ -741,10 +741,16 @@ decoded text positions, and the exact changed-token ranges locally.
   chipmunk-verify-draft-comparison.json earlier.eml later.eml
 ```
 
-Use matching `.eml`, `.txt` or `.docx` files. The output gives the verified range
+Use matching `.eml`, `.txt`, `.docx` or `.pdf` files. The output gives the verified range
 counts by role. Word replay also checks the top-level body paragraph numbers,
-XML body-child positions and paragraph-local character ranges. The comparison
-locates differences and leaves revision order and authorship to other evidence.
+XML body-child positions and paragraph-local character ranges. PDF replay also
+checks the changed words against both sources' page positions, original crops
+and highlighted crops. Each PDF must be unlocked, at most 1 MiB and 12 pages,
+and have mapped native text on every page. The browser shows the recorded
+original and highlighted crops. The downloadable PDF shows the highlighted
+crops. The JSON preserves both crops for the selected previews and page
+coordinates for every changed token. The comparison locates differences and
+leaves revision order and authorship to other evidence.
 When a plain-text export includes the experimental paired check, replay also
 verifies the exact source spans, both input hashes and the arithmetic of the
 saved responses. This offline replay verifies saved values against the stated

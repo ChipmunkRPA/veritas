@@ -216,6 +216,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                          'An isolated paragraph comparison refers to an unpublished classifier check')
 
     refs = {}
+    processed_pcm = {}
     parts = [evidence]
     if evidence['version'] in NESTED_VERSIONS:
         parts.extend(evidence[key] for key in ('audio', 'av'))
@@ -273,6 +274,9 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
             review = part['background_reduced_voice_review']
             validate_background_review(review, part['source'])
             groups.append(review['artifacts'])
+            if review['status'] == 'flagged':
+                digest = review['artifacts']['processed_clip']['sha256']
+                processed_pcm[digest] = review['processed_pcm_sha256']
         if 'stereo_listening' in part:
             from app.evidence.audio_binding import _timeline_ranges
             from app.evidence.stereo_binding import validate as validate_stereo
@@ -347,9 +351,13 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                     _require(audio.getnframes() == asset.get('samples') and audio.getframerate() == asset.get('sample_rate')
                              and audio.getnchannels() == asset.get('channels') and audio.getsampwidth() == 2,
                              'A WAV asset does not match its frozen sample dimensions')
+                    if digest in repeat_pcm or digest in processed_pcm:
+                        pcm_digest = hashlib.sha256(audio.readframes(audio.getnframes())).hexdigest()
                     if digest in repeat_pcm:
-                        _require(hashlib.sha256(audio.readframes(audio.getnframes())).hexdigest() == repeat_pcm[digest],
+                        _require(pcm_digest == repeat_pcm[digest],
                                  'A repeated-audio clip does not contain its committed samples')
+                    if digest in processed_pcm:
+                        _require(pcm_digest == processed_pcm[digest], 'The processed audio clip does not contain its committed samples')
             else:
                 dimensions = inspect_mp4(stream)
                 _require(all(canonical_hash(asset.get(k)) == canonical_hash(v) for k, v in dimensions.items()),

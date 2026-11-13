@@ -20,6 +20,8 @@ def main():
                  for dist in importlib.metadata.distributions(path=[str(packages)])}
     if not all(installed.get(package) == version for package, version in PACKAGES.items()):
         raise ValueError("Unexpected local enhancement runtime")
+    if {path.name for path in model_path.glob("*.safetensors")} != {"model.safetensors"}:
+        raise ValueError("Unexpected local enhancement weights")
     for name, digest in ASSETS.items():
         with (model_path / name).open("rb") as stream:
             if hashlib.file_digest(stream, "sha256").hexdigest() != digest:

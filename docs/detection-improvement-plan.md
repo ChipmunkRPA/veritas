@@ -97,12 +97,31 @@ integration remains unfinished.
 
 ## Progress on 13 November
 
+- The [four-second VP9 face-change check](video-brief-face-120-carrier-2026-11-13.md)
+  recovered 15 of 16 six-frame swaps across all eight source groups, with
+  zero additional flags on 40 ordinary deliveries. It displays the source
+  interval and original frames and crops on the optional local path.
+  AVC gained four exact locations across two groups and remains offline
+  for this specific check. The VP9 test measures transfer on earlier sources.
+- The [full Bayer prediction trial](image-bayer-prediction-transfer-2026-11-13.md)
+  ranked 22 of 24 known edits in useful locations. Rotations and ordinary
+  quantized processing scored above all the generated replacements, and
+  none cleared the frozen point. This candidate remains experimental.
+- The [two-pitch audio trial](audio-overlap-pitch-transfer-2026-11-13.md)
+  reproduced 180 native measurements. It found no edits at the frozen
+  point on 126 held deliveries. Incorrect peaks often followed competing
+  speech rather than the changed voice. The candidate remains experimental.
+- The [short writing typography trial](writing-typography-transfer-2026-11-13.md)
+  added five useful locations on 23 previously studied rewrites with no
+  extra genuine flags. It added none on the source-held diplomatic panel
+  and flagged one additional genuine work. The simpler normalized score
+  found three additional locations there, all from the same generator.
+  Both checks remain experimental.
 - The [contributor location counter](independent-testing.md#count-exact-locations-on-your-own-files)
-  computes exact region unions and overlap for contributed image, video,
-  audio and writing evaluations. It checks the case, input hash and
-  extent before producing counts for the portable evaluation contract.
-  Contributors can prepare aggregate results without posting private
-  files or positions.
+  checks the case, input hash and extent before counting unions and overlap
+  for image, video, audio and writing evaluations. Images support irregular
+  binary masks as well as rectangles. Contributors can share aggregate
+  results while keeping private files, masks and positions locally.
 - The [native PNG local rotation check](image-native-rotation-location-2026-11-13.md)
   found 35 of 39 authored small local rotations across 13 cameras.
   None of 130 comparison deliveries produced a rotation observation.

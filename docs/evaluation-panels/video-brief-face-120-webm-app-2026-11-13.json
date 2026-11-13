@@ -1,0 +1,161 @@
+{
+  "cases": {
+    "feature_disabled": {
+      "brief_face_coverage": {
+        "initial": {
+          "measured_face_frames": 0,
+          "reason": "native_scope",
+          "scheduled_frames": 0,
+          "status": "not_applicable"
+        }
+      },
+      "coarse_packets": 0,
+      "file_sha256": "dd57c0b3627f5007765bd8cd43590f0ef8f99d9313a33fc2d0d3c303d5ecd512",
+      "short_fallback_packets": 0,
+      "version": "video-evidence-11"
+    },
+    "ordinary_cut": {
+      "brief_face_coverage": {
+        "bounded_proposal": {
+          "measured_face_frames": 24,
+          "pixel_frames": 120,
+          "reason": null,
+          "scheduled_frames": 24,
+          "status": "no_distinct_range"
+        },
+        "initial": {
+          "measured_face_frames": 0,
+          "reason": "native_scope",
+          "scheduled_frames": 0,
+          "status": "not_applicable"
+        }
+      },
+      "coarse_packets": 0,
+      "file_sha256": "95f83fcb1fd155921b027a75e3ac1f629ae6f210ff51857f9b7cff9529c33a6e",
+      "short_fallback_packets": 0,
+      "version": "video-evidence-11"
+    },
+    "ordinary_original": {
+      "brief_face_coverage": {
+        "bounded_proposal": {
+          "measured_face_frames": 12,
+          "pixel_frames": 120,
+          "reason": null,
+          "scheduled_frames": 12,
+          "status": "no_distinct_range"
+        },
+        "initial": {
+          "measured_face_frames": 0,
+          "reason": "native_scope",
+          "scheduled_frames": 0,
+          "status": "not_applicable"
+        }
+      },
+      "coarse_packets": 0,
+      "file_sha256": "0d86ee43e4acd6d3f37db359e64f8b841ef09930bbf301cbae606aa85e1285d7",
+      "short_fallback_packets": 0,
+      "version": "video-evidence-11"
+    },
+    "short_swap": {
+      "brief_face_coverage": {
+        "bounded_proposal": {
+          "measured_face_frames": 35,
+          "pixel_frames": 120,
+          "reason": null,
+          "scheduled_frames": 35,
+          "status": "localized"
+        },
+        "initial": {
+          "measured_face_frames": 0,
+          "reason": "native_scope",
+          "scheduled_frames": 0,
+          "status": "not_applicable"
+        }
+      },
+      "coarse_packets": 0,
+      "different_original_rejected": true,
+      "exact_source_images": [
+        {
+          "frame": 61,
+          "kind": "original",
+          "pts": 2033,
+          "role": "before",
+          "sha256": "893f5f5c544539b063b39e0805ad4e5291ada0c80499509830e6d9040471cd1b"
+        },
+        {
+          "frame": 61,
+          "kind": "crop",
+          "pts": 2033,
+          "role": "before",
+          "sha256": "39e261db4f3a446bf53addd65de363d2db73ed3a75f58d095193aec3f12888f3"
+        },
+        {
+          "frame": 65,
+          "kind": "original",
+          "pts": 2167,
+          "role": "during",
+          "sha256": "45ad9b879abd51b4d65de89cba1a06a305a9f6e17cf3a477e48db9ebd147f81e"
+        },
+        {
+          "frame": 65,
+          "kind": "crop",
+          "pts": 2167,
+          "role": "during",
+          "sha256": "bf7dd3b8b78dd606373179efa221854bea8e543bb536be77dcb669425be90ea3"
+        },
+        {
+          "frame": 68,
+          "kind": "original",
+          "pts": 2267,
+          "role": "after",
+          "sha256": "4f74c265f4f5bf45cea98af151729d8805315c938aee2008405abb07f160563f"
+        },
+        {
+          "frame": 68,
+          "kind": "crop",
+          "pts": 2267,
+          "role": "after",
+          "sha256": "b380a583c97b793ad01fe335b7d3a1f20f65bc089071597e9512cd4c40b4b63f"
+        }
+      ],
+      "file_sha256": "dd57c0b3627f5007765bd8cd43590f0ef8f99d9313a33fc2d0d3c303d5ecd512",
+      "known_edit_frames": [
+        62,
+        68
+      ],
+      "measured_frames": [
+        62,
+        68
+      ],
+      "pdf_api_json_agree": true,
+      "representative_frames": {
+        "after": 68,
+        "before": 61,
+        "during": 65
+      },
+      "short_fallback_packets": 1,
+      "signed_original_replay": true,
+      "source_time_s": [
+        2.067,
+        2.267
+      ],
+      "template_set": "veritas-report-2.0.r124",
+      "version": "video-evidence-25"
+    }
+  },
+  "overall_decision_identical_flag_on_off": true,
+  "simulated_paid_jobs": 4,
+  "unpaid_jobs": 0,
+  "schema": "chipmunk.video-brief-face-120-webm-app/1",
+  "browser": {
+    "exact_crops": 3,
+    "exact_images": 3,
+    "frame_seek_controls": 3,
+    "page_errors": 0,
+    "plain_view": true,
+    "range": [
+      2.067,
+      2.267
+    ]
+  }
+}

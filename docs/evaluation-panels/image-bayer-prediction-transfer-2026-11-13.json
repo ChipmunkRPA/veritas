@@ -1,0 +1,3749 @@
+{
+  "advances": false,
+  "confirmation": [
+    {
+      "box": null,
+      "camera": 1171,
+      "input_sha256": "f0f14f8b34946193603c2b0a6462f251437d65008c38bb56e217ee705abe774d",
+      "intersection": 0,
+      "role": "original",
+      "score": 0.0,
+      "status": "assessed",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "box": null,
+      "camera": 1171,
+      "input_sha256": "67a480feff221992fd78188a49396d4cb7f98758b27ca474eb3d17050a0c4418",
+      "intersection": 0,
+      "role": "eight_bit",
+      "score": null,
+      "status": "unsupported",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "box": null,
+      "camera": 1171,
+      "input_sha256": "6c552b7dfad103a33c0afc7512edf1dc1775ad199811b5f839709e2820a1b7fc",
+      "intersection": 0,
+      "role": "resized",
+      "score": null,
+      "status": "no_repeatable_stencil",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "box": [
+        320,
+        432,
+        384,
+        496
+      ],
+      "camera": 1171,
+      "input_sha256": "332a2bb80ce386e3fa554d4849c5fade658f6c4b954d96b5e624ee37fb6a5578",
+      "intersection": 1024,
+      "role": "even_copy",
+      "score": 0.02197802197802198,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "75c408a108ce7e7d598cf733564808f98709e80ed65887c377e2867adbabfd0c"
+    },
+    {
+      "box": [
+        480,
+        400,
+        544,
+        464
+      ],
+      "camera": 1171,
+      "input_sha256": "04b2e767a47f1e52352e45648fdc659916b300d8754efe2b7ee52bfef8a36494",
+      "intersection": 1024,
+      "role": "blur",
+      "score": 0.08247250354071277,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "75c408a108ce7e7d598cf733564808f98709e80ed65887c377e2867adbabfd0c"
+    },
+    {
+      "box": [
+        432,
+        320,
+        496,
+        384
+      ],
+      "camera": 1171,
+      "input_sha256": "90721edeeb70ccab439e0eb692889157cd40ca0be98d672b0545db526226d23d",
+      "intersection": 1024,
+      "role": "local_tone",
+      "score": 0.022222222222222223,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "75c408a108ce7e7d598cf733564808f98709e80ed65887c377e2867adbabfd0c"
+    },
+    {
+      "box": [
+        368,
+        368,
+        496,
+        496
+      ],
+      "camera": 1171,
+      "input_sha256": "c400c89d95deb41d37dbaf2948f9a4f8e22b6f8e496cea70eb1644427c50eb22",
+      "intersection": 16384,
+      "role": "diagonal_cubic",
+      "score": 1.133933751385299,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "75c408a108ce7e7d598cf733564808f98709e80ed65887c377e2867adbabfd0c"
+    },
+    {
+      "box": [
+        368,
+        368,
+        496,
+        496
+      ],
+      "camera": 1171,
+      "input_sha256": "99b9a137cec2696b8fcd94feb6aaba90853ab50f62bc804a41c08504f1476b32",
+      "intersection": 16383,
+      "role": "rotation_bilinear",
+      "score": 1.2782190613555813,
+      "status": "assessed",
+      "truth_pixels": 16383,
+      "truth_sha256": "e25a18c94e2a0c558ca18a64bcc92539de7cfd174c15be873e5fcd5abdba9911"
+    },
+    {
+      "box": [
+        368,
+        368,
+        496,
+        496
+      ],
+      "camera": 1171,
+      "input_sha256": "5939da44e22d8db23883713aa03bf1bce18ca14f8045bd839b7cefd549be8d88",
+      "intersection": 16384,
+      "role": "quantized_256",
+      "score": 1.214079854805174,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "75c408a108ce7e7d598cf733564808f98709e80ed65887c377e2867adbabfd0c"
+    },
+    {
+      "box": [
+        368,
+        368,
+        496,
+        496
+      ],
+      "camera": 1171,
+      "input_sha256": "426ffe3e5dd221d4dfd8b066d68194c53d742ce3a955dd28701e41d0c817d28e",
+      "intersection": 16384,
+      "role": "quantized_257",
+      "score": 1.2195238207568981,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "75c408a108ce7e7d598cf733564808f98709e80ed65887c377e2867adbabfd0c"
+    },
+    {
+      "box": [
+        368,
+        368,
+        496,
+        496
+      ],
+      "camera": 1171,
+      "input_sha256": "51386b807c492489c7273752b366b5ea32f98791de72392d6f0b73f5c6c4d7bb",
+      "intersection": 16384,
+      "role": "generated_sharp",
+      "score": 1.2171531839023546,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "75c408a108ce7e7d598cf733564808f98709e80ed65887c377e2867adbabfd0c"
+    },
+    {
+      "box": [
+        368,
+        368,
+        496,
+        496
+      ],
+      "camera": 1171,
+      "input_sha256": "3cfccf45c7fc39dbb51757c64f37659b4077b953ac3b0726fc248be5c4841552",
+      "intersection": 16384,
+      "role": "generated_feathered",
+      "score": 1.1239395709144784,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "75c408a108ce7e7d598cf733564808f98709e80ed65887c377e2867adbabfd0c"
+    },
+    {
+      "box": [
+        368,
+        368,
+        496,
+        496
+      ],
+      "camera": 1171,
+      "input_sha256": "4203a0b4db092821e827c0ef03f853adcbde819fb5e43c239a5c8692d54f132f",
+      "intersection": 16384,
+      "role": "generated_linear_promote",
+      "score": 1.2201688770026387,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "75c408a108ce7e7d598cf733564808f98709e80ed65887c377e2867adbabfd0c"
+    },
+    {
+      "box": null,
+      "camera": 1780,
+      "input_sha256": "ced5743d30adcf5e85f9bb0f607ba1475846dd2d237bfd1454497661ca4b0950",
+      "intersection": 0,
+      "role": "original",
+      "score": 0.0,
+      "status": "assessed",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "box": null,
+      "camera": 1780,
+      "input_sha256": "7fa0af2bf08c3f5c5ff73ffc788557469b219c0030bb1920fa34ee3a284cb187",
+      "intersection": 0,
+      "role": "eight_bit",
+      "score": null,
+      "status": "unsupported",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "box": null,
+      "camera": 1780,
+      "input_sha256": "a1a3aef33efa39a378a5a3bad1a47911be7db598e2e124a2bfeae8b791ecc914",
+      "intersection": 0,
+      "role": "resized",
+      "score": null,
+      "status": "no_repeatable_stencil",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "box": [
+        784,
+        544,
+        848,
+        608
+      ],
+      "camera": 1780,
+      "input_sha256": "0bbaf995ad2740cd4e64e36560cc35883b68c3846dd88060ffce508fa5903405",
+      "intersection": 1024,
+      "role": "even_copy",
+      "score": 0.02185792349726776,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "c715b7084824ba7b2da278d12c488504c595754edea58ff32bf35be41ec332c7"
+    },
+    {
+      "box": [
+        720,
+        592,
+        848,
+        720
+      ],
+      "camera": 1780,
+      "input_sha256": "3d69f46001a0b6ee1b4d9c763d3df63cd1068dc6170baddd2a86a36a52acc8e2",
+      "intersection": 16384,
+      "role": "blur",
+      "score": 0.3986936831277797,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "c715b7084824ba7b2da278d12c488504c595754edea58ff32bf35be41ec332c7"
+    },
+    {
+      "box": [
+        784,
+        544,
+        848,
+        608
+      ],
+      "camera": 1780,
+      "input_sha256": "a9a7ff76886fa0107c8c207f04a0703232002740d30d7368a73fcd51a0a80950",
+      "intersection": 1024,
+      "role": "local_tone",
+      "score": 0.021621621621621623,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "c715b7084824ba7b2da278d12c488504c595754edea58ff32bf35be41ec332c7"
+    },
+    {
+      "box": [
+        720,
+        592,
+        848,
+        720
+      ],
+      "camera": 1780,
+      "input_sha256": "33b9cb59167d4032cc1f599fe96f708181fe8b786e7a3af0d60169beffd9f417",
+      "intersection": 16384,
+      "role": "diagonal_cubic",
+      "score": 1.1375783220438942,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "c715b7084824ba7b2da278d12c488504c595754edea58ff32bf35be41ec332c7"
+    },
+    {
+      "box": [
+        720,
+        592,
+        848,
+        720
+      ],
+      "camera": 1780,
+      "input_sha256": "cf57b2ac7efcbab0db0498f82606d538c3e89471fdc2d05ebb8adaa3e9798d41",
+      "intersection": 16383,
+      "role": "rotation_bilinear",
+      "score": 1.3038441567382906,
+      "status": "assessed",
+      "truth_pixels": 16383,
+      "truth_sha256": "52ec325a1429368bf21864ee1bbfcd2c42cbedc5fec7a27ab86424c67f9795b2"
+    },
+    {
+      "box": [
+        720,
+        592,
+        848,
+        720
+      ],
+      "camera": 1780,
+      "input_sha256": "8c6e48377847d57cbb4b1d739549f4bad64bdf6b8a34b5c1636f90c11b8e788c",
+      "intersection": 16384,
+      "role": "quantized_256",
+      "score": 1.1505898271829196,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "c715b7084824ba7b2da278d12c488504c595754edea58ff32bf35be41ec332c7"
+    },
+    {
+      "box": [
+        720,
+        592,
+        848,
+        720
+      ],
+      "camera": 1780,
+      "input_sha256": "d467cf893eab4c37799b790e82df949ac9aeb4e4ef6a796bf6d0a00ed89c4894",
+      "intersection": 16384,
+      "role": "quantized_257",
+      "score": 1.157443766236809,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "c715b7084824ba7b2da278d12c488504c595754edea58ff32bf35be41ec332c7"
+    },
+    {
+      "box": [
+        720,
+        592,
+        848,
+        720
+      ],
+      "camera": 1780,
+      "input_sha256": "740d41ab6fb9a297979f57f940deaf6bba8b4138f974bd68f916fdc54f78a4da",
+      "intersection": 16384,
+      "role": "generated_sharp",
+      "score": 1.2055684057681644,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "c715b7084824ba7b2da278d12c488504c595754edea58ff32bf35be41ec332c7"
+    },
+    {
+      "box": [
+        720,
+        592,
+        848,
+        720
+      ],
+      "camera": 1780,
+      "input_sha256": "eaf5af65cb6c5b718ebc8691a3cf1a219bb3d85ac8ef23957b4e7e2d47a56a39",
+      "intersection": 16384,
+      "role": "generated_feathered",
+      "score": 1.1466029756311593,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "c715b7084824ba7b2da278d12c488504c595754edea58ff32bf35be41ec332c7"
+    },
+    {
+      "box": [
+        720,
+        592,
+        848,
+        720
+      ],
+      "camera": 1780,
+      "input_sha256": "8bf49a82fc11b024902502a1d9b02da7ad941e122696eff3cb13acf2d71c9635",
+      "intersection": 16384,
+      "role": "generated_linear_promote",
+      "score": 1.2030732223201637,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "c715b7084824ba7b2da278d12c488504c595754edea58ff32bf35be41ec332c7"
+    },
+    {
+      "box": null,
+      "camera": 1781,
+      "input_sha256": "beaf6e248384f7d9c9d4a0e294b2ccd1bbc431f4c56f9dd453847a935bb92e26",
+      "intersection": 0,
+      "role": "original",
+      "score": 0.0,
+      "status": "assessed",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "box": null,
+      "camera": 1781,
+      "input_sha256": "1a540f9285f78c94d397dd4ff413fa9d250e0b7cb79f3bb1ac4c2e5499ac0a87",
+      "intersection": 0,
+      "role": "eight_bit",
+      "score": null,
+      "status": "unsupported",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "box": null,
+      "camera": 1781,
+      "input_sha256": "f61e8501ab217bd0d5476f871851211f9d16a88d83b94154ee8490c00b0c8166",
+      "intersection": 0,
+      "role": "resized",
+      "score": null,
+      "status": "no_repeatable_stencil",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "box": null,
+      "camera": 1781,
+      "input_sha256": "497ed6eebfe242b7c17a3d38ebc33d457e5895b918fab7852d9dc2a2706f2790",
+      "intersection": 0,
+      "role": "even_copy",
+      "score": 0.0,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "7d01b66feb9c93070374ca47d052d4a5240aec3ba63147c37a9d21bd8bed6864"
+    },
+    {
+      "box": [
+        1072,
+        816,
+        1200,
+        880
+      ],
+      "camera": 1781,
+      "input_sha256": "714b2cc1718c6eb6ed3648450683258b1e5866a0c9a7a889e8cc691d59a74340",
+      "intersection": 8192,
+      "role": "blur",
+      "score": 0.6113855584415739,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "7d01b66feb9c93070374ca47d052d4a5240aec3ba63147c37a9d21bd8bed6864"
+    },
+    {
+      "box": [
+        1136,
+        768,
+        1200,
+        832
+      ],
+      "camera": 1781,
+      "input_sha256": "ba5a4cd0a33cdc6983c97c6ff86e5084060a0625b0e9c5ef0b6c8e69e97f5cb5",
+      "intersection": 1024,
+      "role": "local_tone",
+      "score": 0.0213903743315508,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "7d01b66feb9c93070374ca47d052d4a5240aec3ba63147c37a9d21bd8bed6864"
+    },
+    {
+      "box": [
+        1072,
+        816,
+        1200,
+        944
+      ],
+      "camera": 1781,
+      "input_sha256": "1d62ea482a1b029f8690a65af4b4d7b80dafb569a596df813d612bdb54b1b8f7",
+      "intersection": 16384,
+      "role": "diagonal_cubic",
+      "score": 0.9258620926382324,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "7d01b66feb9c93070374ca47d052d4a5240aec3ba63147c37a9d21bd8bed6864"
+    },
+    {
+      "box": [
+        1072,
+        816,
+        1200,
+        944
+      ],
+      "camera": 1781,
+      "input_sha256": "9e955e607778423a0e84f1d0004243ff70d12e057333efa9896a9eca3f901d6e",
+      "intersection": 16383,
+      "role": "rotation_bilinear",
+      "score": 0.9926245724451659,
+      "status": "assessed",
+      "truth_pixels": 16383,
+      "truth_sha256": "9691fa01c022d8d65cb54d6a26914645d1de3765f1e4379e5006eb5af2894490"
+    },
+    {
+      "box": [
+        1072,
+        816,
+        1200,
+        880
+      ],
+      "camera": 1781,
+      "input_sha256": "c4fe5d61fff0bb35c8dac079c880a3496a8794389b256725cb9c084203b25e05",
+      "intersection": 8192,
+      "role": "quantized_256",
+      "score": 0.9855254550389255,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "7d01b66feb9c93070374ca47d052d4a5240aec3ba63147c37a9d21bd8bed6864"
+    },
+    {
+      "box": [
+        1072,
+        816,
+        1200,
+        944
+      ],
+      "camera": 1781,
+      "input_sha256": "e7e96573ce07ce6ae3dc08b75289769c711affb3e961b2b576690dddffbb8f16",
+      "intersection": 16384,
+      "role": "quantized_257",
+      "score": 1.0644036614719063,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "7d01b66feb9c93070374ca47d052d4a5240aec3ba63147c37a9d21bd8bed6864"
+    },
+    {
+      "box": [
+        1072,
+        816,
+        1200,
+        944
+      ],
+      "camera": 1781,
+      "input_sha256": "1efb7bf3d327fa45313497c90b778aaef83362cc2382c5183e1786596fe07d3e",
+      "intersection": 16384,
+      "role": "generated_sharp",
+      "score": 1.0569674632670434,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "7d01b66feb9c93070374ca47d052d4a5240aec3ba63147c37a9d21bd8bed6864"
+    },
+    {
+      "box": [
+        1072,
+        816,
+        1200,
+        944
+      ],
+      "camera": 1781,
+      "input_sha256": "c6fc9a55ee8fc5086a9a4afd9b68487e80758459d6da00c38886757518b76f66",
+      "intersection": 16384,
+      "role": "generated_feathered",
+      "score": 0.9708646847746638,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "7d01b66feb9c93070374ca47d052d4a5240aec3ba63147c37a9d21bd8bed6864"
+    },
+    {
+      "box": [
+        1072,
+        816,
+        1200,
+        944
+      ],
+      "camera": 1781,
+      "input_sha256": "a37a2ea85211808c74680969d1853a071761206b3d66424585c1cad1c517d076",
+      "intersection": 16384,
+      "role": "generated_linear_promote",
+      "score": 1.1860668071342257,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "7d01b66feb9c93070374ca47d052d4a5240aec3ba63147c37a9d21bd8bed6864"
+    },
+    {
+      "box": null,
+      "camera": 1791,
+      "input_sha256": "97119b8d3b4df08dc505e6882daabf74de2e7d6a52eb001afcb66514df264df0",
+      "intersection": 0,
+      "role": "original",
+      "score": 0.0,
+      "status": "assessed",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "box": null,
+      "camera": 1791,
+      "input_sha256": "9b876c3426c588078bd3b7283e46ef072f9b63ffa8d400477c92d774558707b7",
+      "intersection": 0,
+      "role": "eight_bit",
+      "score": null,
+      "status": "unsupported",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "box": null,
+      "camera": 1791,
+      "input_sha256": "9dcc041f598d42433b936bc3b0778c7d17078ca7b08bcfdb6b59facdef219c31",
+      "intersection": 0,
+      "role": "resized",
+      "score": null,
+      "status": "no_repeatable_stencil",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "box": [
+        1376,
+        1104,
+        1440,
+        1168
+      ],
+      "camera": 1791,
+      "input_sha256": "c879aebb7697df0bd403cedfb01e80dd8872b5042541a3502219387307ea67d3",
+      "intersection": 1024,
+      "role": "even_copy",
+      "score": 0.01871657754010695,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "9329153d3649d7686650b25bfab2948a93b1b14f8855a0fe1df11c057b129c53"
+    },
+    {
+      "box": [
+        1424,
+        1040,
+        1488,
+        1168
+      ],
+      "camera": 1791,
+      "input_sha256": "6261fcf0e4a7a30be453c75a2605e0cb45166393b44b97b40b6bd1739e65c934",
+      "intersection": 8192,
+      "role": "blur",
+      "score": 0.3363272674951679,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "9329153d3649d7686650b25bfab2948a93b1b14f8855a0fe1df11c057b129c53"
+    },
+    {
+      "box": [
+        1376,
+        1104,
+        1440,
+        1168
+      ],
+      "camera": 1791,
+      "input_sha256": "88ea94d2d60ecad8fdf220dde7b4ac1066a89bd678d18d81bdd757716552380f",
+      "intersection": 1024,
+      "role": "local_tone",
+      "score": 0.023121387283236993,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "9329153d3649d7686650b25bfab2948a93b1b14f8855a0fe1df11c057b129c53"
+    },
+    {
+      "box": [
+        1424,
+        1040,
+        1488,
+        1168
+      ],
+      "camera": 1791,
+      "input_sha256": "e833b4bb5ef5d2e968c3cae794e8e940ff597223189d7d90c5003a384f15c04c",
+      "intersection": 8192,
+      "role": "diagonal_cubic",
+      "score": 0.7560873658589946,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "9329153d3649d7686650b25bfab2948a93b1b14f8855a0fe1df11c057b129c53"
+    },
+    {
+      "box": [
+        1424,
+        1040,
+        1488,
+        1168
+      ],
+      "camera": 1791,
+      "input_sha256": "a14b07196fa6f048a82b021591678ea08055952c7327fdb5c11c620b5022269d",
+      "intersection": 8192,
+      "role": "rotation_bilinear",
+      "score": 0.8545364730132538,
+      "status": "assessed",
+      "truth_pixels": 16383,
+      "truth_sha256": "c42271a9a963686ca52d9b78e8fa60b3f19c70f1dff039d937cffd2520f099d3"
+    },
+    {
+      "box": [
+        1392,
+        1072,
+        1456,
+        1136
+      ],
+      "camera": 1791,
+      "input_sha256": "2005d5ee2de678219fd54f30c9f1667405be4247034cdeb422471a4137b6e19e",
+      "intersection": 2048,
+      "role": "quantized_256",
+      "score": 0.22453817231197074,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "9329153d3649d7686650b25bfab2948a93b1b14f8855a0fe1df11c057b129c53"
+    },
+    {
+      "box": [
+        1408,
+        1008,
+        1472,
+        1072
+      ],
+      "camera": 1791,
+      "input_sha256": "f0fc215096d3664232bb3f8f3c6deeca17390dff1f82d32939c3253a6ffc3746",
+      "intersection": 1536,
+      "role": "quantized_257",
+      "score": 0.34438924895955875,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "9329153d3649d7686650b25bfab2948a93b1b14f8855a0fe1df11c057b129c53"
+    },
+    {
+      "box": [
+        1408,
+        1088,
+        1472,
+        1184
+      ],
+      "camera": 1791,
+      "input_sha256": "4821172c9b8d7845077e246a9199465cd41bebd924d09cf569cd0d7064dd6262",
+      "intersection": 3840,
+      "role": "generated_sharp",
+      "score": 0.7071133396043818,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "9329153d3649d7686650b25bfab2948a93b1b14f8855a0fe1df11c057b129c53"
+    },
+    {
+      "box": [
+        1392,
+        1104,
+        1520,
+        1168
+      ],
+      "camera": 1791,
+      "input_sha256": "d522267d130ff917712aa1fe5b08f7e962deaedde991b9e835868dd5374e9b9a",
+      "intersection": 6144,
+      "role": "generated_feathered",
+      "score": 0.6910644748873062,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "9329153d3649d7686650b25bfab2948a93b1b14f8855a0fe1df11c057b129c53"
+    },
+    {
+      "box": [
+        1424,
+        1040,
+        1552,
+        1168
+      ],
+      "camera": 1791,
+      "input_sha256": "b526fc6f5daec32d9520a541bb83a1c410bdc43a241f2e5133c5928a5851b7f8",
+      "intersection": 16384,
+      "role": "generated_linear_promote",
+      "score": 1.0352481641119051,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "9329153d3649d7686650b25bfab2948a93b1b14f8855a0fe1df11c057b129c53"
+    },
+    {
+      "box": null,
+      "camera": 1851,
+      "input_sha256": "4906ce2a7931ef2847e2569b185eaa4fd9f58650ed48d2a6bf8c74ba3f1faf71",
+      "intersection": 0,
+      "role": "original",
+      "score": 0.0,
+      "status": "assessed",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "box": null,
+      "camera": 1851,
+      "input_sha256": "d20b00a7d7f111d7e154a1bce5b1caebd4a4bf399cbb2b70807d0f50e5386def",
+      "intersection": 0,
+      "role": "eight_bit",
+      "score": null,
+      "status": "unsupported",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "box": null,
+      "camera": 1851,
+      "input_sha256": "14df0c67a0352b99ba2a7345fd8463b129f7625080e06c7dcff34490436f9237",
+      "intersection": 0,
+      "role": "resized",
+      "score": null,
+      "status": "no_repeatable_stencil",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "box": [
+        752,
+        352,
+        816,
+        416
+      ],
+      "camera": 1851,
+      "input_sha256": "355fbe425d5b5bc37ee72674238e2adcd5133bbb7bfffdf166240407c62f9d60",
+      "intersection": 1024,
+      "role": "even_copy",
+      "score": 0.016853932584269662,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "288df4c387731f0986dfad35b1c4f35025723f36e7794a6a140f248ebeada543"
+    },
+    {
+      "box": [
+        688,
+        400,
+        752,
+        528
+      ],
+      "camera": 1851,
+      "input_sha256": "2d549653e93ecc3f09c5e7f5525c6692277f7c02cb5836e78d8091c0b6c11f7f",
+      "intersection": 8192,
+      "role": "blur",
+      "score": 0.37534910004421645,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "288df4c387731f0986dfad35b1c4f35025723f36e7794a6a140f248ebeada543"
+    },
+    {
+      "box": [
+        752,
+        352,
+        816,
+        416
+      ],
+      "camera": 1851,
+      "input_sha256": "c7621f24725e840d751a8fe873c4352fa9cc79665a201e26f357172d68a9a27d",
+      "intersection": 1024,
+      "role": "local_tone",
+      "score": 0.022988505747126436,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "288df4c387731f0986dfad35b1c4f35025723f36e7794a6a140f248ebeada543"
+    },
+    {
+      "box": [
+        688,
+        400,
+        816,
+        528
+      ],
+      "camera": 1851,
+      "input_sha256": "cd05b22d9a97dda54dbe97125612b96428b5a78358e95c5ca551428f6431308d",
+      "intersection": 16384,
+      "role": "diagonal_cubic",
+      "score": 1.0268045021734276,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "288df4c387731f0986dfad35b1c4f35025723f36e7794a6a140f248ebeada543"
+    },
+    {
+      "box": [
+        688,
+        400,
+        816,
+        528
+      ],
+      "camera": 1851,
+      "input_sha256": "2b40ee92c8f6578f6f0fe2ba6308e83eea70d341c5de6b1e66bfd291f89ddfcd",
+      "intersection": 16383,
+      "role": "rotation_bilinear",
+      "score": 1.1668206716220484,
+      "status": "assessed",
+      "truth_pixels": 16383,
+      "truth_sha256": "de8e526c968e27448b5e385065c7f463b5804d1285545fb914b4d2f6de8d713d"
+    },
+    {
+      "box": [
+        688,
+        400,
+        816,
+        528
+      ],
+      "camera": 1851,
+      "input_sha256": "d941b3c4d40ec1dbf94454bf2371e8f1df84da3af7f7c0a98bab5a9d128c5a6b",
+      "intersection": 16384,
+      "role": "quantized_256",
+      "score": 1.3083905905003324,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "288df4c387731f0986dfad35b1c4f35025723f36e7794a6a140f248ebeada543"
+    },
+    {
+      "box": [
+        688,
+        400,
+        816,
+        528
+      ],
+      "camera": 1851,
+      "input_sha256": "6da7702d915558d38d291a90632172dc7e0297df9a9666a21965463deba9a6dd",
+      "intersection": 16384,
+      "role": "quantized_257",
+      "score": 1.309032700202665,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "288df4c387731f0986dfad35b1c4f35025723f36e7794a6a140f248ebeada543"
+    },
+    {
+      "box": [
+        688,
+        400,
+        816,
+        528
+      ],
+      "camera": 1851,
+      "input_sha256": "2fe66d3c8e8a28155a63e6b567d4d49f3d7ff92002d817f04e1b014f896f5eed",
+      "intersection": 16384,
+      "role": "generated_sharp",
+      "score": 1.1908165450306023,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "288df4c387731f0986dfad35b1c4f35025723f36e7794a6a140f248ebeada543"
+    },
+    {
+      "box": [
+        688,
+        400,
+        816,
+        528
+      ],
+      "camera": 1851,
+      "input_sha256": "a44977c5e974b0631735813d252dc3c75788675ebda8652c0109d477e388f8c9",
+      "intersection": 16384,
+      "role": "generated_feathered",
+      "score": 1.115761418775489,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "288df4c387731f0986dfad35b1c4f35025723f36e7794a6a140f248ebeada543"
+    },
+    {
+      "box": [
+        688,
+        400,
+        816,
+        528
+      ],
+      "camera": 1851,
+      "input_sha256": "1e0614327f650795c660ee90a386eb86b064936f0af34562281ddc87c4bfe4ce",
+      "intersection": 16384,
+      "role": "generated_linear_promote",
+      "score": 1.1780823346674336,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "288df4c387731f0986dfad35b1c4f35025723f36e7794a6a140f248ebeada543"
+    },
+    {
+      "box": null,
+      "camera": 2150,
+      "input_sha256": "079a05a77281582e63f230f4b945dc4985c54ee4040d69bd92431d6a8540737f",
+      "intersection": 0,
+      "role": "original",
+      "score": 0.0,
+      "status": "assessed",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "box": null,
+      "camera": 2150,
+      "input_sha256": "7ad9efc191413125291ca62f0f70f15d3b61352974f5780c2a8927667e4c9542",
+      "intersection": 0,
+      "role": "eight_bit",
+      "score": null,
+      "status": "unsupported",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "box": null,
+      "camera": 2150,
+      "input_sha256": "f13b63ecd9d73bac1b4e7befbe4a381a74c19eb294326cc0664b419f1ca50d70",
+      "intersection": 0,
+      "role": "resized",
+      "score": null,
+      "status": "no_repeatable_stencil",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "box": [
+        1104,
+        576,
+        1168,
+        640
+      ],
+      "camera": 2150,
+      "input_sha256": "49d02708519629e7323643b48d754e696a8015a2a78851b16c8dd4fc84cafa31",
+      "intersection": 1024,
+      "role": "even_copy",
+      "score": 0.021621621621621623,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "726874d199fd696e1441c49beb0942a67c0a1681c4d28fac2f478b4b855a8cb2"
+    },
+    {
+      "box": [
+        1040,
+        624,
+        1168,
+        752
+      ],
+      "camera": 2150,
+      "input_sha256": "dce8d841068d7bebafe7651a03900ab6b0ebff73f7c523940e4f525995f55ee6",
+      "intersection": 16384,
+      "role": "blur",
+      "score": 0.8669675300868335,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "726874d199fd696e1441c49beb0942a67c0a1681c4d28fac2f478b4b855a8cb2"
+    },
+    {
+      "box": [
+        992,
+        688,
+        1056,
+        752
+      ],
+      "camera": 2150,
+      "input_sha256": "222c45294943a7b30b79c2e571984f66f67b20f0459c7ae4e7c9634965c99f91",
+      "intersection": 1024,
+      "role": "local_tone",
+      "score": 0.02195945945945946,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "726874d199fd696e1441c49beb0942a67c0a1681c4d28fac2f478b4b855a8cb2"
+    },
+    {
+      "box": [
+        1040,
+        624,
+        1168,
+        752
+      ],
+      "camera": 2150,
+      "input_sha256": "55a2d3af5cd0982087a31bb98a625df5983fc0e5d29236fca0863eca4c727584",
+      "intersection": 16384,
+      "role": "diagonal_cubic",
+      "score": 1.0381309374259897,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "726874d199fd696e1441c49beb0942a67c0a1681c4d28fac2f478b4b855a8cb2"
+    },
+    {
+      "box": [
+        1040,
+        624,
+        1168,
+        752
+      ],
+      "camera": 2150,
+      "input_sha256": "b0a158f3a80b0572ae580e661cb9f7ef1234615d9e2ae057cb6bb6441672ec81",
+      "intersection": 16383,
+      "role": "rotation_bilinear",
+      "score": 1.0457472740498623,
+      "status": "assessed",
+      "truth_pixels": 16383,
+      "truth_sha256": "5ab404e419cb27d4a4b2bb217e990f32403f4f226672f34f2ca4de140c62f6b4"
+    },
+    {
+      "box": [
+        1040,
+        624,
+        1168,
+        688
+      ],
+      "camera": 2150,
+      "input_sha256": "2a44f1128d8ee8c7474e32d102370886fb6fecb9990e7622f3d5e618fcac4c42",
+      "intersection": 8192,
+      "role": "quantized_256",
+      "score": 1.0616800999630833,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "726874d199fd696e1441c49beb0942a67c0a1681c4d28fac2f478b4b855a8cb2"
+    },
+    {
+      "box": [
+        1040,
+        624,
+        1168,
+        688
+      ],
+      "camera": 2150,
+      "input_sha256": "f7c242f142831ca9e0d0f381fc5a0155ade268f7b663923b65bbefee18b6c241",
+      "intersection": 8192,
+      "role": "quantized_257",
+      "score": 1.0971663474008155,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "726874d199fd696e1441c49beb0942a67c0a1681c4d28fac2f478b4b855a8cb2"
+    },
+    {
+      "box": [
+        1040,
+        624,
+        1168,
+        752
+      ],
+      "camera": 2150,
+      "input_sha256": "907c8566b2eb6a12ce5f09cca675b94d168b5306bd139469e931bd857d67ad0c",
+      "intersection": 16384,
+      "role": "generated_sharp",
+      "score": 1.1562918119460637,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "726874d199fd696e1441c49beb0942a67c0a1681c4d28fac2f478b4b855a8cb2"
+    },
+    {
+      "box": [
+        1040,
+        624,
+        1168,
+        752
+      ],
+      "camera": 2150,
+      "input_sha256": "47ecf2023f95da4a1a8e42c1fc21461a25e3b35c54f2328ea0d6cdc666ea7cff",
+      "intersection": 16384,
+      "role": "generated_feathered",
+      "score": 1.1440758503944775,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "726874d199fd696e1441c49beb0942a67c0a1681c4d28fac2f478b4b855a8cb2"
+    },
+    {
+      "box": [
+        1040,
+        624,
+        1168,
+        752
+      ],
+      "camera": 2150,
+      "input_sha256": "6fc176c9571e7d694dcb4c3db1078fd5929788a12ddb408c7d204bfef02d9ba7",
+      "intersection": 16384,
+      "role": "generated_linear_promote",
+      "score": 1.164743289281614,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "726874d199fd696e1441c49beb0942a67c0a1681c4d28fac2f478b4b855a8cb2"
+    },
+    {
+      "box": null,
+      "camera": 2161,
+      "input_sha256": "a5690b8993bfbabff73546bdd94e0a4f53b559a2eb2cef9c2886bb8498076eba",
+      "intersection": 0,
+      "role": "original",
+      "score": 0.0,
+      "status": "assessed",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "box": null,
+      "camera": 2161,
+      "input_sha256": "3cf3d83d12bd6e18bd25df83c5c65b228bb5f74e2bc82791549c605d95505651",
+      "intersection": 0,
+      "role": "eight_bit",
+      "score": null,
+      "status": "unsupported",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "box": null,
+      "camera": 2161,
+      "input_sha256": "ddab9d56fd1c4c78bacd9bc66f73a6d20b0c0ebfdf3a2e61f8c67b6f52746c8e",
+      "intersection": 0,
+      "role": "resized",
+      "score": null,
+      "status": "no_repeatable_stencil",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "box": [
+        1456,
+        912,
+        1520,
+        976
+      ],
+      "camera": 2161,
+      "input_sha256": "af7af0a3b2d9fde8e78d7a5929da3f7c349c36b2b48e97429fc3d52c7db373eb",
+      "intersection": 4096,
+      "role": "even_copy",
+      "score": 0.02259887005649718,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "bdccd5fcb3bfd0133b257db03438ffa91bbf4ede06570cc93747f6e37d1d9515"
+    },
+    {
+      "box": [
+        1392,
+        848,
+        1520,
+        976
+      ],
+      "camera": 2161,
+      "input_sha256": "28ce6724fadcb6e84322251e0c5ecb6131acaae4dbc968015728363e38260492",
+      "intersection": 16384,
+      "role": "blur",
+      "score": 0.529667536965625,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "bdccd5fcb3bfd0133b257db03438ffa91bbf4ede06570cc93747f6e37d1d9515"
+    },
+    {
+      "box": [
+        1344,
+        800,
+        1408,
+        864
+      ],
+      "camera": 2161,
+      "input_sha256": "be2732167848c05e1736c0248e3c3e0e01af117daddb51ac8cec45be913bea92",
+      "intersection": 256,
+      "role": "local_tone",
+      "score": 0.023668639053254437,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "bdccd5fcb3bfd0133b257db03438ffa91bbf4ede06570cc93747f6e37d1d9515"
+    },
+    {
+      "box": [
+        1392,
+        848,
+        1520,
+        976
+      ],
+      "camera": 2161,
+      "input_sha256": "0856753fdc4c8022400d5c55c93aa952e46ecd0722661a9e27b6ec13e471e5bb",
+      "intersection": 16384,
+      "role": "diagonal_cubic",
+      "score": 1.0083894245696583,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "bdccd5fcb3bfd0133b257db03438ffa91bbf4ede06570cc93747f6e37d1d9515"
+    },
+    {
+      "box": [
+        1392,
+        848,
+        1520,
+        976
+      ],
+      "camera": 2161,
+      "input_sha256": "8ae8dccc52b7dff097eeb485d7d52d349cc6554e32b7286793d389dd161f7f80",
+      "intersection": 16383,
+      "role": "rotation_bilinear",
+      "score": 1.1796115108399268,
+      "status": "assessed",
+      "truth_pixels": 16383,
+      "truth_sha256": "5c0eab7b981e56bcde3514354a08dfcee39cd716d1b13e74862de34b04c0d85f"
+    },
+    {
+      "box": [
+        1392,
+        848,
+        1520,
+        976
+      ],
+      "camera": 2161,
+      "input_sha256": "51e29c21ca26a9b7b209ccfd9230a7d9a42810e4d457090d51dac67e368b017c",
+      "intersection": 16384,
+      "role": "quantized_256",
+      "score": 1.2781961204588574,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "bdccd5fcb3bfd0133b257db03438ffa91bbf4ede06570cc93747f6e37d1d9515"
+    },
+    {
+      "box": [
+        1392,
+        848,
+        1520,
+        976
+      ],
+      "camera": 2161,
+      "input_sha256": "3825ced72adfdfe70ff3af772a2a2cf73ba32be1f6821114d1e12568100ec729",
+      "intersection": 16384,
+      "role": "quantized_257",
+      "score": 1.2894953417465693,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "bdccd5fcb3bfd0133b257db03438ffa91bbf4ede06570cc93747f6e37d1d9515"
+    },
+    {
+      "box": [
+        1392,
+        848,
+        1520,
+        976
+      ],
+      "camera": 2161,
+      "input_sha256": "e974b3af08000c60c783b4c0e4dc898eebe5876af2ae11c7c34eb930d8cd7fd3",
+      "intersection": 16384,
+      "role": "generated_sharp",
+      "score": 1.228314246812309,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "bdccd5fcb3bfd0133b257db03438ffa91bbf4ede06570cc93747f6e37d1d9515"
+    },
+    {
+      "box": [
+        1392,
+        848,
+        1520,
+        976
+      ],
+      "camera": 2161,
+      "input_sha256": "9bf44bb3e04adf5a418196ab067f98edf5f52a028b31bb6dd5b7df31525c8868",
+      "intersection": 16384,
+      "role": "generated_feathered",
+      "score": 1.114524071119495,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "bdccd5fcb3bfd0133b257db03438ffa91bbf4ede06570cc93747f6e37d1d9515"
+    },
+    {
+      "box": [
+        1392,
+        848,
+        1520,
+        976
+      ],
+      "camera": 2161,
+      "input_sha256": "1b7a73ceaeb766e569b54eda62090df235167955d56464d8e9609eefa00e3363",
+      "intersection": 16384,
+      "role": "generated_linear_promote",
+      "score": 1.2250627089143957,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "bdccd5fcb3bfd0133b257db03438ffa91bbf4ede06570cc93747f6e37d1d9515"
+    },
+    {
+      "box": null,
+      "camera": 2497,
+      "input_sha256": "ce149156186d1f5c8b97483e035f3f2f19606d0a1c3f745b5f99840ffe44375a",
+      "intersection": 0,
+      "role": "original",
+      "score": 0.0,
+      "status": "assessed",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "box": null,
+      "camera": 2497,
+      "input_sha256": "f522b4be823beb1a6369fa5abb4f3c97037bdddb67413ab4ad887d4265d926e7",
+      "intersection": 0,
+      "role": "eight_bit",
+      "score": null,
+      "status": "unsupported",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "box": null,
+      "camera": 2497,
+      "input_sha256": "8bce3a930a9b2e09eeb67f2c169b13834135c5cbda9bd0333277014f66c79a41",
+      "intersection": 0,
+      "role": "resized",
+      "score": null,
+      "status": "no_repeatable_stencil",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "box": [
+        720,
+        1024,
+        784,
+        1088
+      ],
+      "camera": 2497,
+      "input_sha256": "2bb60676324f64412f4275d109439b32542be3c17199eb2e977d29aba82379f8",
+      "intersection": 1024,
+      "role": "even_copy",
+      "score": 0.02197802197802198,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "9bc4bef0e42c2095a8d9c4bb02346ce8be5f6353b83f7108dd7ea938485b1532"
+    },
+    {
+      "box": [
+        656,
+        1072,
+        784,
+        1200
+      ],
+      "camera": 2497,
+      "input_sha256": "bedad5b38c8e7eeebdb64feb7fe2ee805a22a9a9c8986d990286dd71e324274f",
+      "intersection": 16384,
+      "role": "blur",
+      "score": 0.8395740635121988,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "9bc4bef0e42c2095a8d9c4bb02346ce8be5f6353b83f7108dd7ea938485b1532"
+    },
+    {
+      "box": [
+        720,
+        1024,
+        784,
+        1088
+      ],
+      "camera": 2497,
+      "input_sha256": "74ec9621dd958e01fb6f8674a19ea088f685f7bf7ba254028d44f29722020d94",
+      "intersection": 1024,
+      "role": "local_tone",
+      "score": 0.020053475935828877,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "9bc4bef0e42c2095a8d9c4bb02346ce8be5f6353b83f7108dd7ea938485b1532"
+    },
+    {
+      "box": [
+        656,
+        1072,
+        784,
+        1200
+      ],
+      "camera": 2497,
+      "input_sha256": "53fd30d55ff507058aba880378968b51ca876448a956a954bc0c015353c74223",
+      "intersection": 16384,
+      "role": "diagonal_cubic",
+      "score": 0.9101774715309429,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "9bc4bef0e42c2095a8d9c4bb02346ce8be5f6353b83f7108dd7ea938485b1532"
+    },
+    {
+      "box": [
+        656,
+        1072,
+        784,
+        1200
+      ],
+      "camera": 2497,
+      "input_sha256": "6b4e3f2063a3586f51cbecbca8458516738effa654c79d54959d6f012fa03522",
+      "intersection": 16383,
+      "role": "rotation_bilinear",
+      "score": 0.9299931280338807,
+      "status": "assessed",
+      "truth_pixels": 16383,
+      "truth_sha256": "cfa07b124f9fbae929f859cbbea33a2c5717212e7202c0630455775044b75fe7"
+    },
+    {
+      "box": [
+        656,
+        1072,
+        784,
+        1200
+      ],
+      "camera": 2497,
+      "input_sha256": "08ea438f9c3a1fd0fade6056fe34bd56f4d2fe2ce1cbbb57df10b6fa1aaea57c",
+      "intersection": 16384,
+      "role": "quantized_256",
+      "score": 0.8879244020565048,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "9bc4bef0e42c2095a8d9c4bb02346ce8be5f6353b83f7108dd7ea938485b1532"
+    },
+    {
+      "box": [
+        656,
+        1072,
+        784,
+        1200
+      ],
+      "camera": 2497,
+      "input_sha256": "eefd425a3a0fd72825dd8a04d12333857a2241d342ee7f5786a376493f47779e",
+      "intersection": 16384,
+      "role": "quantized_257",
+      "score": 0.8900972340733605,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "9bc4bef0e42c2095a8d9c4bb02346ce8be5f6353b83f7108dd7ea938485b1532"
+    },
+    {
+      "box": [
+        656,
+        1072,
+        784,
+        1200
+      ],
+      "camera": 2497,
+      "input_sha256": "8a6c6a43fcb14b84678e176d032827a421770ecb89bab26e1298bb4226d11757",
+      "intersection": 16384,
+      "role": "generated_sharp",
+      "score": 1.1040955646589805,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "9bc4bef0e42c2095a8d9c4bb02346ce8be5f6353b83f7108dd7ea938485b1532"
+    },
+    {
+      "box": [
+        656,
+        1072,
+        784,
+        1200
+      ],
+      "camera": 2497,
+      "input_sha256": "66111f8cd6364e83e6c8df0534369258e3c6bd66a2c94767a12ee7faac512093",
+      "intersection": 16384,
+      "role": "generated_feathered",
+      "score": 1.0155092698836015,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "9bc4bef0e42c2095a8d9c4bb02346ce8be5f6353b83f7108dd7ea938485b1532"
+    },
+    {
+      "box": [
+        656,
+        1072,
+        784,
+        1200
+      ],
+      "camera": 2497,
+      "input_sha256": "1509e76252a5ab162a4df908f4535899daf28ffb31e3d7714d7ffa1335039101",
+      "intersection": 16384,
+      "role": "generated_linear_promote",
+      "score": 1.057582076084786,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "9bc4bef0e42c2095a8d9c4bb02346ce8be5f6353b83f7108dd7ea938485b1532"
+    }
+  ],
+  "counts": {
+    "blur": {
+      "assessed": 8,
+      "baseline": 0,
+      "baseline_useful": 0,
+      "candidate": 0,
+      "candidate_useful": 0,
+      "files": 8,
+      "gained": 0,
+      "kept": 0,
+      "lost": 0,
+      "top_useful": 0
+    },
+    "diagonal_cubic": {
+      "assessed": 8,
+      "baseline": 0,
+      "baseline_useful": 0,
+      "candidate": 0,
+      "candidate_useful": 0,
+      "files": 8,
+      "gained": 0,
+      "kept": 0,
+      "lost": 0,
+      "top_useful": 0
+    },
+    "eight_bit": {
+      "assessed": 0,
+      "baseline": 0,
+      "baseline_useful": 0,
+      "candidate": 0,
+      "candidate_useful": 0,
+      "files": 8,
+      "gained": 0,
+      "kept": 0,
+      "lost": 0,
+      "top_useful": 0
+    },
+    "even_copy": {
+      "assessed": 8,
+      "baseline": 0,
+      "baseline_useful": 0,
+      "candidate": 0,
+      "candidate_useful": 0,
+      "files": 8,
+      "gained": 0,
+      "kept": 0,
+      "lost": 0,
+      "top_useful": 0
+    },
+    "generated_feathered": {
+      "assessed": 8,
+      "baseline": 5,
+      "baseline_useful": 5,
+      "candidate": 0,
+      "candidate_useful": 0,
+      "files": 8,
+      "gained": 0,
+      "kept": 0,
+      "lost": 5,
+      "top_useful": 7
+    },
+    "generated_linear_promote": {
+      "assessed": 8,
+      "baseline": 7,
+      "baseline_useful": 7,
+      "candidate": 0,
+      "candidate_useful": 0,
+      "files": 8,
+      "gained": 0,
+      "kept": 0,
+      "lost": 7,
+      "top_useful": 8
+    },
+    "generated_sharp": {
+      "assessed": 8,
+      "baseline": 6,
+      "baseline_useful": 6,
+      "candidate": 0,
+      "candidate_useful": 0,
+      "files": 8,
+      "gained": 0,
+      "kept": 0,
+      "lost": 6,
+      "top_useful": 7
+    },
+    "local_tone": {
+      "assessed": 8,
+      "baseline": 0,
+      "baseline_useful": 0,
+      "candidate": 0,
+      "candidate_useful": 0,
+      "files": 8,
+      "gained": 0,
+      "kept": 0,
+      "lost": 0,
+      "top_useful": 0
+    },
+    "original": {
+      "assessed": 8,
+      "baseline": 0,
+      "baseline_useful": 0,
+      "candidate": 0,
+      "candidate_useful": 0,
+      "files": 8,
+      "gained": 0,
+      "kept": 0,
+      "lost": 0,
+      "top_useful": 0
+    },
+    "quantized_256": {
+      "assessed": 8,
+      "baseline": 4,
+      "baseline_useful": 0,
+      "candidate": 0,
+      "candidate_useful": 0,
+      "files": 8,
+      "gained": 0,
+      "kept": 0,
+      "lost": 0,
+      "top_useful": 0
+    },
+    "quantized_257": {
+      "assessed": 8,
+      "baseline": 4,
+      "baseline_useful": 0,
+      "candidate": 0,
+      "candidate_useful": 0,
+      "files": 8,
+      "gained": 0,
+      "kept": 0,
+      "lost": 0,
+      "top_useful": 0
+    },
+    "resized": {
+      "assessed": 0,
+      "baseline": 0,
+      "baseline_useful": 0,
+      "candidate": 0,
+      "candidate_useful": 0,
+      "files": 8,
+      "gained": 0,
+      "kept": 0,
+      "lost": 0,
+      "top_useful": 0
+    },
+    "rotation_bilinear": {
+      "assessed": 8,
+      "baseline": 5,
+      "baseline_useful": 0,
+      "candidate": 0,
+      "candidate_useful": 0,
+      "files": 8,
+      "gained": 0,
+      "kept": 0,
+      "lost": 0,
+      "top_useful": 0
+    }
+  },
+  "development": {
+    "freeze_sha256": "cb13b3540414b48fcc6f4c5109f71165746ab075300e24f82d4f95d1f7ce898f",
+    "point": 1.5904309736312938,
+    "rows": [
+      {
+        "box": null,
+        "camera": 909,
+        "input_sha256": "b3e7899235350fdfcae3ebffab67ce0c58b32e7cef89fca8f345509f9e68c2c8",
+        "intersection": 0,
+        "role": "untouched",
+        "score": 0.0,
+        "status": "assessed",
+        "truth_pixels": 0,
+        "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+      },
+      {
+        "box": [
+          352,
+          320,
+          480,
+          448
+        ],
+        "camera": 909,
+        "input_sha256": "a9871d15a3faaae02c79da2d996d149ba94c1a35188e1f113c225377a3d1dcdc",
+        "intersection": 16384,
+        "role": "bilinear_horizontal",
+        "score": 0.41784426365580934,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "077545fe74d40b62c861c5204004a34adc6be545b6d52bca0932b846e80ba262"
+      },
+      {
+        "box": [
+          352,
+          320,
+          480,
+          448
+        ],
+        "camera": 909,
+        "input_sha256": "80d3640b74b559f43dae22b9d03530c96a7fbf2b79bc98a0f91c4682c2d620c3",
+        "intersection": 16384,
+        "role": "bilinear_diagonal",
+        "score": 0.8936549945697674,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "077545fe74d40b62c861c5204004a34adc6be545b6d52bca0932b846e80ba262"
+      },
+      {
+        "box": [
+          352,
+          320,
+          480,
+          448
+        ],
+        "camera": 909,
+        "input_sha256": "0773c71872434858dab2f3d5f5dcbc0c6cc63ec2a236b5215e0216effce7295b",
+        "intersection": 16384,
+        "role": "bicubic_diagonal",
+        "score": 1.114052952668242,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "077545fe74d40b62c861c5204004a34adc6be545b6d52bca0932b846e80ba262"
+      },
+      {
+        "box": [
+          352,
+          320,
+          480,
+          448
+        ],
+        "camera": 909,
+        "input_sha256": "59648a1acd13c592c067cad6647f599bbd791b1d0e2e12ab25f2455c97a46d95",
+        "intersection": 16383,
+        "role": "rotated",
+        "score": 1.4546401239427906,
+        "status": "assessed",
+        "truth_pixels": 16383,
+        "truth_sha256": "aace20d47c224723d8d82f8c40c7e84d85bb810a0d60f83c979e444c33557d19"
+      },
+      {
+        "box": [
+          352,
+          320,
+          480,
+          448
+        ],
+        "camera": 909,
+        "input_sha256": "11f0a6f2f3c18344353b8a9dbd8ac179b6f96551834bfacca8d346feb0849df8",
+        "intersection": 16384,
+        "role": "blur",
+        "score": 0.7979553983292873,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "077545fe74d40b62c861c5204004a34adc6be545b6d52bca0932b846e80ba262"
+      },
+      {
+        "box": [
+          352,
+          320,
+          480,
+          448
+        ],
+        "camera": 909,
+        "input_sha256": "8d00d3c9f5b8de787d51f38c72dc310fc54a790d6bc013258e764b45523a3725",
+        "intersection": 16384,
+        "role": "quantized_bilinear",
+        "score": 0.9584919040646861,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "077545fe74d40b62c861c5204004a34adc6be545b6d52bca0932b846e80ba262"
+      },
+      {
+        "box": [
+          304,
+          272,
+          368,
+          336
+        ],
+        "camera": 909,
+        "input_sha256": "1ee006acc500d0545d46950f105aa682d9919dbd6ba7eef628e704284caa2314",
+        "intersection": 256,
+        "role": "local_tone",
+        "score": 0.017663043478260868,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "077545fe74d40b62c861c5204004a34adc6be545b6d52bca0932b846e80ba262"
+      },
+      {
+        "box": [
+          352,
+          320,
+          480,
+          448
+        ],
+        "camera": 909,
+        "input_sha256": "3e5dca6e6835eb108ba7c5922aab8d5b49cfb0d6af4f2f994d8375004828b355",
+        "intersection": 16384,
+        "role": "generated_sharp",
+        "score": 1.0386342645945525,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "077545fe74d40b62c861c5204004a34adc6be545b6d52bca0932b846e80ba262"
+      },
+      {
+        "box": [
+          352,
+          320,
+          480,
+          448
+        ],
+        "camera": 909,
+        "input_sha256": "710a8314e74fdfbe336404e0b3f5fa234585d5ef26dc1ced0134598ca3d69e39",
+        "intersection": 16384,
+        "role": "generated_feathered",
+        "score": 0.9716726203922273,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "077545fe74d40b62c861c5204004a34adc6be545b6d52bca0932b846e80ba262"
+      },
+      {
+        "box": null,
+        "camera": 934,
+        "input_sha256": "e6eb50161c87fcf3ccffd215ac76415b1ae2148144cdede6bdfcf37ece66489f",
+        "intersection": 0,
+        "role": "untouched",
+        "score": 0.0,
+        "status": "assessed",
+        "truth_pixels": 0,
+        "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+      },
+      {
+        "box": [
+          720,
+          752,
+          848,
+          880
+        ],
+        "camera": 934,
+        "input_sha256": "7fde3f9f33c3568f59dabbead8f7f5932bbd880a9b300a415c9a6709a2a9190a",
+        "intersection": 16384,
+        "role": "bilinear_horizontal",
+        "score": 0.44711898348836177,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "91e9e76a2733560df78d92d2e5f1013ae7367eb1ab6342ed2773098eec66ee1d"
+      },
+      {
+        "box": [
+          720,
+          752,
+          848,
+          880
+        ],
+        "camera": 934,
+        "input_sha256": "5aec8fdf877074f8c536fd581d8e2b0932fc9b2d27c1ecf63e22c1d73c8569fe",
+        "intersection": 16384,
+        "role": "bilinear_diagonal",
+        "score": 0.9585245845326116,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "91e9e76a2733560df78d92d2e5f1013ae7367eb1ab6342ed2773098eec66ee1d"
+      },
+      {
+        "box": [
+          720,
+          752,
+          848,
+          880
+        ],
+        "camera": 934,
+        "input_sha256": "80ae6bd473b3bdacd4bb13ef1706bc7832ce2cdd73b2a8feeaf636657a7ecac1",
+        "intersection": 16384,
+        "role": "bicubic_diagonal",
+        "score": 1.1707233004209305,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "91e9e76a2733560df78d92d2e5f1013ae7367eb1ab6342ed2773098eec66ee1d"
+      },
+      {
+        "box": [
+          720,
+          752,
+          848,
+          880
+        ],
+        "camera": 934,
+        "input_sha256": "d9f5ba04bef46482f4739ba64c36dbbc2a11ff68bf234dcad1203ec3a80653fc",
+        "intersection": 16383,
+        "role": "rotated",
+        "score": 1.5800882638579141,
+        "status": "assessed",
+        "truth_pixels": 16383,
+        "truth_sha256": "3172d2553ef202473e997bcb365e01502f86f26e751bd87caa2ae0d603dcc6d4"
+      },
+      {
+        "box": [
+          720,
+          752,
+          848,
+          880
+        ],
+        "camera": 934,
+        "input_sha256": "312634bbe2559c0906d0b611c474642d077e47a185a6289e35fa238994b3018b",
+        "intersection": 16384,
+        "role": "blur",
+        "score": 0.7568120511594445,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "91e9e76a2733560df78d92d2e5f1013ae7367eb1ab6342ed2773098eec66ee1d"
+      },
+      {
+        "box": [
+          720,
+          752,
+          848,
+          880
+        ],
+        "camera": 934,
+        "input_sha256": "5bae6cb3b073f30178ff741d750c88bc29d38d5679589e948efa7c931dd0566f",
+        "intersection": 16384,
+        "role": "quantized_bilinear",
+        "score": 1.1620920487229518,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "91e9e76a2733560df78d92d2e5f1013ae7367eb1ab6342ed2773098eec66ee1d"
+      },
+      {
+        "box": [
+          672,
+          816,
+          736,
+          880
+        ],
+        "camera": 934,
+        "input_sha256": "f125702c07a156b5d1391fe4c6b0f960d27fbc1178d7d3aa7e2b6500725c2758",
+        "intersection": 1024,
+        "role": "local_tone",
+        "score": 0.02197802197802198,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "91e9e76a2733560df78d92d2e5f1013ae7367eb1ab6342ed2773098eec66ee1d"
+      },
+      {
+        "box": [
+          720,
+          752,
+          848,
+          880
+        ],
+        "camera": 934,
+        "input_sha256": "d1dc82462fa6ca4682cf64e3af782ec46eea8229d2c47813f45bec6d196ce231",
+        "intersection": 16384,
+        "role": "generated_sharp",
+        "score": 1.1818778807942762,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "91e9e76a2733560df78d92d2e5f1013ae7367eb1ab6342ed2773098eec66ee1d"
+      },
+      {
+        "box": [
+          720,
+          752,
+          848,
+          880
+        ],
+        "camera": 934,
+        "input_sha256": "9941fec2148176b761dff9f30fac294d20abfef28ffebb841b6b8b4b8c9bae5d",
+        "intersection": 16384,
+        "role": "generated_feathered",
+        "score": 1.0521177197799076,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "91e9e76a2733560df78d92d2e5f1013ae7367eb1ab6342ed2773098eec66ee1d"
+      },
+      {
+        "box": null,
+        "camera": 1030,
+        "input_sha256": "845ca44b8ab5a1163a1d9a9ff1cddfbe3e1f71ac6572c80431395530f873caa8",
+        "intersection": 0,
+        "role": "untouched",
+        "score": 0.0,
+        "status": "assessed",
+        "truth_pixels": 0,
+        "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+      },
+      {
+        "box": [
+          1056,
+          1152,
+          1184,
+          1280
+        ],
+        "camera": 1030,
+        "input_sha256": "93da6a6429e27f1bf2f4dfcc980c41152335f4bab7270702e09aaca060e93019",
+        "intersection": 16384,
+        "role": "bilinear_horizontal",
+        "score": 0.31341430547963245,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "4b9ea07b54c4caae8153c0cc89161e2d50ec3d8ecf72baa7b09405063d3d44b1"
+      },
+      {
+        "box": [
+          1056,
+          1152,
+          1184,
+          1280
+        ],
+        "camera": 1030,
+        "input_sha256": "9a5f8b2f43cec0f9b694bcea9ee1acd731f8a3d9b1e9f64e8fc82f8bd1f42e1f",
+        "intersection": 16384,
+        "role": "bilinear_diagonal",
+        "score": 0.9192937651031996,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "4b9ea07b54c4caae8153c0cc89161e2d50ec3d8ecf72baa7b09405063d3d44b1"
+      },
+      {
+        "box": [
+          1056,
+          1152,
+          1184,
+          1280
+        ],
+        "camera": 1030,
+        "input_sha256": "030ed28a397c42ab0088c47835db4665d55458fc56e65b4fba572080f9d7d55a",
+        "intersection": 16384,
+        "role": "bicubic_diagonal",
+        "score": 1.1541474025977765,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "4b9ea07b54c4caae8153c0cc89161e2d50ec3d8ecf72baa7b09405063d3d44b1"
+      },
+      {
+        "box": [
+          1056,
+          1152,
+          1184,
+          1280
+        ],
+        "camera": 1030,
+        "input_sha256": "42d28130ac75e4bac07550dfb826a349b4e6731425c406ffaa2d27617876a798",
+        "intersection": 16383,
+        "role": "rotated",
+        "score": 1.52053570007112,
+        "status": "assessed",
+        "truth_pixels": 16383,
+        "truth_sha256": "5b9c0f0179029faf189b30fb50375e6af8618eabc6b52886cc8bfa0df8551929"
+      },
+      {
+        "box": [
+          1056,
+          1152,
+          1184,
+          1280
+        ],
+        "camera": 1030,
+        "input_sha256": "b2c345940f6d555eef551952532dd08b6aaae18960d06a127091c08c8e30ee74",
+        "intersection": 16384,
+        "role": "blur",
+        "score": 0.8842229616200485,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "4b9ea07b54c4caae8153c0cc89161e2d50ec3d8ecf72baa7b09405063d3d44b1"
+      },
+      {
+        "box": [
+          1056,
+          1152,
+          1184,
+          1280
+        ],
+        "camera": 1030,
+        "input_sha256": "ee280f9f91395a9ce029f56ce5313efd5b129c469c02565aff9ad6c1bc9cbb36",
+        "intersection": 16384,
+        "role": "quantized_bilinear",
+        "score": 0.8501044795520661,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "4b9ea07b54c4caae8153c0cc89161e2d50ec3d8ecf72baa7b09405063d3d44b1"
+      },
+      {
+        "box": [
+          1008,
+          1216,
+          1072,
+          1280
+        ],
+        "camera": 1030,
+        "input_sha256": "5e002d48fe3fef0cfa4442d8f75ff724acaeb30d50ef649fc1da04a0af40689f",
+        "intersection": 1024,
+        "role": "local_tone",
+        "score": 0.020380434782608696,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "4b9ea07b54c4caae8153c0cc89161e2d50ec3d8ecf72baa7b09405063d3d44b1"
+      },
+      {
+        "box": [
+          1056,
+          1152,
+          1184,
+          1280
+        ],
+        "camera": 1030,
+        "input_sha256": "1b938ea2ee956ac8a90e91fb6919580166981dd928957b1e3ab270130cb57f69",
+        "intersection": 16384,
+        "role": "generated_sharp",
+        "score": 1.1837543661416448,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "4b9ea07b54c4caae8153c0cc89161e2d50ec3d8ecf72baa7b09405063d3d44b1"
+      },
+      {
+        "box": [
+          1056,
+          1152,
+          1184,
+          1280
+        ],
+        "camera": 1030,
+        "input_sha256": "0beee592b8f68eb2aedc6e5b968c0e8eb3521085d9b1791e69a33fa96011648f",
+        "intersection": 16384,
+        "role": "generated_feathered",
+        "score": 1.1413362740899113,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "4b9ea07b54c4caae8153c0cc89161e2d50ec3d8ecf72baa7b09405063d3d44b1"
+      },
+      {
+        "box": null,
+        "camera": 1080,
+        "input_sha256": "4e51c1f364f9274c3e390a67dc447f13881bccee148210c722750d0f16b29f81",
+        "intersection": 0,
+        "role": "untouched",
+        "score": 0.0,
+        "status": "assessed",
+        "truth_pixels": 0,
+        "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+      },
+      {
+        "box": [
+          1424,
+          688,
+          1552,
+          816
+        ],
+        "camera": 1080,
+        "input_sha256": "8617d959291f079a18eb28f293b38081fdfabbfaedb1ace44c96f00f00d26c11",
+        "intersection": 16376,
+        "role": "bilinear_horizontal",
+        "score": 0.4897614296623727,
+        "status": "assessed",
+        "truth_pixels": 16376,
+        "truth_sha256": "ea595d55d5eb13b8d92cd79f386c6eb7d8c3400e2058f740bd3949a203f1e1b2"
+      },
+      {
+        "box": [
+          1424,
+          688,
+          1552,
+          816
+        ],
+        "camera": 1080,
+        "input_sha256": "9b3323c4066c454d2e50c7afeefe4fa7ea7ec3a7dde8741a7f85f836b8edebfc",
+        "intersection": 16384,
+        "role": "bilinear_diagonal",
+        "score": 0.7657266744156404,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "658f1042ffa431b42d29ec581af30b3155d8b17705aa791225d67d123fbeaeca"
+      },
+      {
+        "box": [
+          1424,
+          688,
+          1552,
+          816
+        ],
+        "camera": 1080,
+        "input_sha256": "cd02f9c35e3b198902b1e5e9213aa91b274370c90bc1c2786a0be197f87d55d7",
+        "intersection": 16384,
+        "role": "bicubic_diagonal",
+        "score": 0.9588641905684401,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "658f1042ffa431b42d29ec581af30b3155d8b17705aa791225d67d123fbeaeca"
+      },
+      {
+        "box": [
+          1424,
+          688,
+          1552,
+          816
+        ],
+        "camera": 1080,
+        "input_sha256": "a7dc8e1edb2e58febc6d7aef292b40995e17725326dbddc013547d494b72ad43",
+        "intersection": 16383,
+        "role": "rotated",
+        "score": 1.2945218069279658,
+        "status": "assessed",
+        "truth_pixels": 16383,
+        "truth_sha256": "653f6417bc8b281f4d3c7f2b301900c6bc4d9bdf45004761c800fcb711a654fe"
+      },
+      {
+        "box": [
+          1424,
+          688,
+          1552,
+          816
+        ],
+        "camera": 1080,
+        "input_sha256": "fdb1623e1840cdaf531484dd1f63bb618667087a934447fc69bf1a3971b0ae7d",
+        "intersection": 16384,
+        "role": "blur",
+        "score": 0.6341838787671356,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "658f1042ffa431b42d29ec581af30b3155d8b17705aa791225d67d123fbeaeca"
+      },
+      {
+        "box": [
+          1424,
+          688,
+          1552,
+          816
+        ],
+        "camera": 1080,
+        "input_sha256": "0f2f59560e80865acac5b7832627cf1849016b98da7a4b5e56259ac833d7d3cf",
+        "intersection": 16384,
+        "role": "quantized_bilinear",
+        "score": 0.9708570152059416,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "658f1042ffa431b42d29ec581af30b3155d8b17705aa791225d67d123fbeaeca"
+      },
+      {
+        "box": [
+          1392,
+          752,
+          1456,
+          816
+        ],
+        "camera": 1080,
+        "input_sha256": "3129ad6b7e87de7c381a11d91b78266855e84629d45c9e29408ec96728460dab",
+        "intersection": 2048,
+        "role": "local_tone",
+        "score": 0.020053475935828877,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "658f1042ffa431b42d29ec581af30b3155d8b17705aa791225d67d123fbeaeca"
+      },
+      {
+        "box": [
+          1424,
+          704,
+          1552,
+          864
+        ],
+        "camera": 1080,
+        "input_sha256": "2c8cc6420cea55784c96007dbdf03a493a9d28cb54eaac95b900cdf2dc3b1a1d",
+        "intersection": 14336,
+        "role": "generated_sharp",
+        "score": 0.830271259865998,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "658f1042ffa431b42d29ec581af30b3155d8b17705aa791225d67d123fbeaeca"
+      },
+      {
+        "box": [
+          1424,
+          704,
+          1552,
+          832
+        ],
+        "camera": 1080,
+        "input_sha256": "3e4d6b1d30fa092ebd2e78041b2df31a9d1263ef884561a71245a5d61667ac44",
+        "intersection": 14336,
+        "role": "generated_feathered",
+        "score": 1.0148863015620697,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "658f1042ffa431b42d29ec581af30b3155d8b17705aa791225d67d123fbeaeca"
+      },
+      {
+        "box": null,
+        "camera": 1173,
+        "input_sha256": "483c077eefc1a6f8c188f6db22b42d0fe90c8a4744bc73f8ddae90ea9db5f695",
+        "intersection": 0,
+        "role": "untouched",
+        "score": 0.0,
+        "status": "assessed",
+        "truth_pixels": 0,
+        "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+      },
+      {
+        "box": [
+          640,
+          1088,
+          768,
+          1216
+        ],
+        "camera": 1173,
+        "input_sha256": "273f66570b09a8674bc5b1c17a56937e20d64f8da12e4eec6e3d32489649e409",
+        "intersection": 16384,
+        "role": "bilinear_horizontal",
+        "score": 0.3878196462966065,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "730ea08d5ac8c1ba304bfa70f3a70aa5626ff1f8e03d0a0ee113fa318f936543"
+      },
+      {
+        "box": [
+          640,
+          1088,
+          768,
+          1216
+        ],
+        "camera": 1173,
+        "input_sha256": "ae0588c8e9fa939199c40abb41cb1c18ad7d5f103f6baa98a7e2c85545a6c931",
+        "intersection": 16384,
+        "role": "bilinear_diagonal",
+        "score": 0.8829682386637101,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "730ea08d5ac8c1ba304bfa70f3a70aa5626ff1f8e03d0a0ee113fa318f936543"
+      },
+      {
+        "box": [
+          640,
+          1088,
+          768,
+          1216
+        ],
+        "camera": 1173,
+        "input_sha256": "0df42728e6c4fe5be6494c00a994a2fe661d30776c0225feeebf86533dfdac78",
+        "intersection": 16384,
+        "role": "bicubic_diagonal",
+        "score": 1.1483457167725983,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "730ea08d5ac8c1ba304bfa70f3a70aa5626ff1f8e03d0a0ee113fa318f936543"
+      },
+      {
+        "box": [
+          640,
+          1088,
+          768,
+          1216
+        ],
+        "camera": 1173,
+        "input_sha256": "1fa1c42f936687a3e1e680c7c7fbc622dc103dd860e6bcb05ebfdd3586dceed6",
+        "intersection": 16383,
+        "role": "rotated",
+        "score": 1.4017326738465483,
+        "status": "assessed",
+        "truth_pixels": 16383,
+        "truth_sha256": "789447db5b2534962b7627b645da369c656fb95858a4046cce6b8293d08bd992"
+      },
+      {
+        "box": [
+          640,
+          1088,
+          768,
+          1216
+        ],
+        "camera": 1173,
+        "input_sha256": "0f1f356e093e0bb5f08da54b971e4c5f0ae9f0ff7c247504b7b17991817b44c2",
+        "intersection": 16384,
+        "role": "blur",
+        "score": 0.693866854206075,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "730ea08d5ac8c1ba304bfa70f3a70aa5626ff1f8e03d0a0ee113fa318f936543"
+      },
+      {
+        "box": [
+          640,
+          1088,
+          768,
+          1216
+        ],
+        "camera": 1173,
+        "input_sha256": "b1b077d452ee7c5ce599bf52b51e93f7cf73761ba71024a55ee72413cdb9f715",
+        "intersection": 16384,
+        "role": "quantized_bilinear",
+        "score": 1.1252790709183151,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "730ea08d5ac8c1ba304bfa70f3a70aa5626ff1f8e03d0a0ee113fa318f936543"
+      },
+      {
+        "box": [
+          592,
+          1152,
+          656,
+          1216
+        ],
+        "camera": 1173,
+        "input_sha256": "676a8de088341affbae7a6444665d8ede9d1baa1182dcf20f70cf6a9b97cafc7",
+        "intersection": 1024,
+        "role": "local_tone",
+        "score": 0.022598870056497175,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "730ea08d5ac8c1ba304bfa70f3a70aa5626ff1f8e03d0a0ee113fa318f936543"
+      },
+      {
+        "box": [
+          640,
+          1088,
+          768,
+          1216
+        ],
+        "camera": 1173,
+        "input_sha256": "ec681e0c093bbe03ad12bf42a37edfb9cc2d7ab00230420ea3ccfcc249ac5c13",
+        "intersection": 16384,
+        "role": "generated_sharp",
+        "score": 1.0803613021426124,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "730ea08d5ac8c1ba304bfa70f3a70aa5626ff1f8e03d0a0ee113fa318f936543"
+      },
+      {
+        "box": [
+          640,
+          1088,
+          768,
+          1216
+        ],
+        "camera": 1173,
+        "input_sha256": "4d71f9e94e389e8918a6b5b968f830d890229ff1fd2ca34183417c1915a7545a",
+        "intersection": 16384,
+        "role": "generated_feathered",
+        "score": 0.9255289053661963,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "730ea08d5ac8c1ba304bfa70f3a70aa5626ff1f8e03d0a0ee113fa318f936543"
+      },
+      {
+        "box": null,
+        "camera": 1202,
+        "input_sha256": "412807b53d545d2e43ce02f0bec9f055a7c2dc2c956c762dbed98b680e08c51a",
+        "intersection": 0,
+        "role": "untouched",
+        "score": 0.0,
+        "status": "assessed",
+        "truth_pixels": 0,
+        "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+      },
+      {
+        "box": [
+          1008,
+          624,
+          1136,
+          752
+        ],
+        "camera": 1202,
+        "input_sha256": "4db3f6bfb85b182a186e02dec500bae47bdf3dd564f98770c85bf6900c76ca4f",
+        "intersection": 16384,
+        "role": "bilinear_horizontal",
+        "score": 0.39983345263331743,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "684db022e4d2d828c6fc98d35701eefdc97872693583dc3dc136206f67970ba8"
+      },
+      {
+        "box": [
+          1008,
+          624,
+          1136,
+          752
+        ],
+        "camera": 1202,
+        "input_sha256": "e914a2199c9e5b0b200fb11517d861505cb28e35130c945369e1cb312c8bc9e5",
+        "intersection": 16384,
+        "role": "bilinear_diagonal",
+        "score": 0.9527118341956877,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "684db022e4d2d828c6fc98d35701eefdc97872693583dc3dc136206f67970ba8"
+      },
+      {
+        "box": [
+          1008,
+          624,
+          1136,
+          752
+        ],
+        "camera": 1202,
+        "input_sha256": "603379f524f7dccd46b32847f3091a2cc4e240dd0358749843b10f64584f39b9",
+        "intersection": 16384,
+        "role": "bicubic_diagonal",
+        "score": 1.209735311877591,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "684db022e4d2d828c6fc98d35701eefdc97872693583dc3dc136206f67970ba8"
+      },
+      {
+        "box": [
+          1008,
+          624,
+          1136,
+          752
+        ],
+        "camera": 1202,
+        "input_sha256": "b0c2e6536b64454a574a9f017265aaec8a734bdf8f307991801ed09932818606",
+        "intersection": 16383,
+        "role": "rotated",
+        "score": 1.4470878185430007,
+        "status": "assessed",
+        "truth_pixels": 16383,
+        "truth_sha256": "17cadaf7cdc8c0ab636898e59f114fb9df21f6b1370da0e6d0156e2a499a8f03"
+      },
+      {
+        "box": [
+          1008,
+          624,
+          1136,
+          752
+        ],
+        "camera": 1202,
+        "input_sha256": "109e67b254163f10071a08324ef57bed41bb5b6c11c9c501b77bb403e1833d22",
+        "intersection": 16384,
+        "role": "blur",
+        "score": 0.6810265438288221,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "684db022e4d2d828c6fc98d35701eefdc97872693583dc3dc136206f67970ba8"
+      },
+      {
+        "box": [
+          1008,
+          624,
+          1136,
+          752
+        ],
+        "camera": 1202,
+        "input_sha256": "b1d622a8af89c74eb5551c9c898acc578a1088eea2eb0c4b449704f50d95569b",
+        "intersection": 16384,
+        "role": "quantized_bilinear",
+        "score": 1.2621751629510272,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "684db022e4d2d828c6fc98d35701eefdc97872693583dc3dc136206f67970ba8"
+      },
+      {
+        "box": [
+          1072,
+          576,
+          1136,
+          640
+        ],
+        "camera": 1202,
+        "input_sha256": "3323bf57a4fa46311abef1354f2a53534fa41bb098eadd3823651e9455db046d",
+        "intersection": 1024,
+        "role": "local_tone",
+        "score": 0.022222222222222223,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "684db022e4d2d828c6fc98d35701eefdc97872693583dc3dc136206f67970ba8"
+      },
+      {
+        "box": [
+          1008,
+          624,
+          1136,
+          752
+        ],
+        "camera": 1202,
+        "input_sha256": "9309c4e7659b78a27771fbe64899f5fcc54b0278bf4ac370260faed429fb03b5",
+        "intersection": 16384,
+        "role": "generated_sharp",
+        "score": 1.076672204970328,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "684db022e4d2d828c6fc98d35701eefdc97872693583dc3dc136206f67970ba8"
+      },
+      {
+        "box": [
+          1008,
+          624,
+          1136,
+          752
+        ],
+        "camera": 1202,
+        "input_sha256": "fc092dc5ffde5dde8bbad488692b8829361df754d8a8a66498766961045bc126",
+        "intersection": 16384,
+        "role": "generated_feathered",
+        "score": 0.8974604852130984,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "684db022e4d2d828c6fc98d35701eefdc97872693583dc3dc136206f67970ba8"
+      },
+      {
+        "box": null,
+        "camera": 1346,
+        "input_sha256": "8159420b8fb3c9bacfaab9d51f944ada2aae5cee4d718f6f600b0a6cab950454",
+        "intersection": 0,
+        "role": "untouched",
+        "score": 0.0,
+        "status": "assessed",
+        "truth_pixels": 0,
+        "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+      },
+      {
+        "box": [
+          1344,
+          1024,
+          1472,
+          1152
+        ],
+        "camera": 1346,
+        "input_sha256": "b5af870e977c4d383ee8d21509c55e74b7442234eb426df4a060b72c3a506a98",
+        "intersection": 16384,
+        "role": "bilinear_horizontal",
+        "score": 0.5172736377770263,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "857015a6b84dc73a8fa8628e5aa1c5b2169a70e1a981308afe8764dcc09051fa"
+      },
+      {
+        "box": [
+          1344,
+          1024,
+          1472,
+          1152
+        ],
+        "camera": 1346,
+        "input_sha256": "a7b229d9219c97993a35b1a36bb2d2031d362c468219f1fb7a9451c3da2354f9",
+        "intersection": 16384,
+        "role": "bilinear_diagonal",
+        "score": 0.9472967981618798,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "857015a6b84dc73a8fa8628e5aa1c5b2169a70e1a981308afe8764dcc09051fa"
+      },
+      {
+        "box": [
+          1344,
+          1024,
+          1472,
+          1152
+        ],
+        "camera": 1346,
+        "input_sha256": "d8a40ee58e8902841ceada08578769170b8ded119df450b6e9ce50edbf96ecc2",
+        "intersection": 16384,
+        "role": "bicubic_diagonal",
+        "score": 1.256372431553893,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "857015a6b84dc73a8fa8628e5aa1c5b2169a70e1a981308afe8764dcc09051fa"
+      },
+      {
+        "box": [
+          1344,
+          1024,
+          1472,
+          1152
+        ],
+        "camera": 1346,
+        "input_sha256": "fe2bc9b18bf58788e9bd7bfc2228d27d0098d8bef4dfd35cedf140bce3db896b",
+        "intersection": 16383,
+        "role": "rotated",
+        "score": 1.4887301088202394,
+        "status": "assessed",
+        "truth_pixels": 16383,
+        "truth_sha256": "d24d253e25c84235afaf4da2d395d18c8859b285c9185de7aab142509d1fc6d9"
+      },
+      {
+        "box": [
+          1344,
+          1024,
+          1472,
+          1152
+        ],
+        "camera": 1346,
+        "input_sha256": "64d3b2bdf802c508fcb2067de2309f9454a8abcf0286497851b13362e9523503",
+        "intersection": 16384,
+        "role": "blur",
+        "score": 1.0514662235795695,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "857015a6b84dc73a8fa8628e5aa1c5b2169a70e1a981308afe8764dcc09051fa"
+      },
+      {
+        "box": [
+          1344,
+          1024,
+          1472,
+          1152
+        ],
+        "camera": 1346,
+        "input_sha256": "6b789aaf023c54c121c75e59f342cd003188ff081ed8e4821aab253d1714d1cb",
+        "intersection": 16384,
+        "role": "quantized_bilinear",
+        "score": 1.7235192829037682,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "857015a6b84dc73a8fa8628e5aa1c5b2169a70e1a981308afe8764dcc09051fa"
+      },
+      {
+        "box": [
+          1296,
+          1088,
+          1360,
+          1152
+        ],
+        "camera": 1346,
+        "input_sha256": "8a639ef68061deed7b2d7e868704a8f9a58f95033a422239842d2b024ee1ff6a",
+        "intersection": 1024,
+        "role": "local_tone",
+        "score": 0.022988505747126436,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "857015a6b84dc73a8fa8628e5aa1c5b2169a70e1a981308afe8764dcc09051fa"
+      },
+      {
+        "box": [
+          1344,
+          1024,
+          1472,
+          1152
+        ],
+        "camera": 1346,
+        "input_sha256": "61a8dc8300fae9ede0756afd2d1b1642322f7d2b568f097c560ea67348d0f516",
+        "intersection": 16384,
+        "role": "generated_sharp",
+        "score": 1.3910057386906018,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "857015a6b84dc73a8fa8628e5aa1c5b2169a70e1a981308afe8764dcc09051fa"
+      },
+      {
+        "box": [
+          1344,
+          1024,
+          1472,
+          1152
+        ],
+        "camera": 1346,
+        "input_sha256": "33aa82e7bf1ceac024278c33f7250909e5ce4409522e31a79e6a9e4f01d3433d",
+        "intersection": 16384,
+        "role": "generated_feathered",
+        "score": 1.1529126995469752,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "857015a6b84dc73a8fa8628e5aa1c5b2169a70e1a981308afe8764dcc09051fa"
+      },
+      {
+        "box": null,
+        "camera": 1616,
+        "input_sha256": "5c75caed43c654f5aca53662a911975e49afcbb21489011652e51f984277e69d",
+        "intersection": 0,
+        "role": "untouched",
+        "score": 0.0,
+        "status": "assessed",
+        "truth_pixels": 0,
+        "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+      },
+      {
+        "box": [
+          592,
+          560,
+          720,
+          688
+        ],
+        "camera": 1616,
+        "input_sha256": "9414e09603baf7b3d3c3c0701b2b27f2ec81f46ca35049ac7e903c5553dca225",
+        "intersection": 16384,
+        "role": "bilinear_horizontal",
+        "score": 0.4339513536822675,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "429f0501557e119e5b595bbdca443495c061d407e8f4d40e1bf705343c93ee9f"
+      },
+      {
+        "box": [
+          592,
+          560,
+          720,
+          688
+        ],
+        "camera": 1616,
+        "input_sha256": "83e5b8f2fc4df9dc72f3cc537c296c4ceb58e25e91de33dc2bb4a68d75c48600",
+        "intersection": 16384,
+        "role": "bilinear_diagonal",
+        "score": 0.8639150480628726,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "429f0501557e119e5b595bbdca443495c061d407e8f4d40e1bf705343c93ee9f"
+      },
+      {
+        "box": [
+          592,
+          560,
+          720,
+          688
+        ],
+        "camera": 1616,
+        "input_sha256": "bd694d46b99ca980478104d8da0f9d5d1fce9f7eac303a58021ffc9cb7bfb811",
+        "intersection": 16384,
+        "role": "bicubic_diagonal",
+        "score": 1.1789935417030875,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "429f0501557e119e5b595bbdca443495c061d407e8f4d40e1bf705343c93ee9f"
+      },
+      {
+        "box": [
+          592,
+          560,
+          720,
+          688
+        ],
+        "camera": 1616,
+        "input_sha256": "c900a19d99186d185f6e999e476bd04675fca88fc4d43602f5eb30e5a286300d",
+        "intersection": 16383,
+        "role": "rotated",
+        "score": 1.4880929929312567,
+        "status": "assessed",
+        "truth_pixels": 16383,
+        "truth_sha256": "6275ca1427b4b1b951f42844581130355ecb27cc622ba784336d2f90c9c7f367"
+      },
+      {
+        "box": [
+          592,
+          560,
+          720,
+          688
+        ],
+        "camera": 1616,
+        "input_sha256": "36df5827466f561d89057168bdd52b7f6d980f700e17fffbc8c0c4e26ce7d56d",
+        "intersection": 16384,
+        "role": "blur",
+        "score": 0.6357668040504625,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "429f0501557e119e5b595bbdca443495c061d407e8f4d40e1bf705343c93ee9f"
+      },
+      {
+        "box": [
+          592,
+          560,
+          720,
+          688
+        ],
+        "camera": 1616,
+        "input_sha256": "1e82adf71e8330bf75a5e98df88978a7343e434726d168462aec707da51c13fc",
+        "intersection": 16384,
+        "role": "quantized_bilinear",
+        "score": 1.369170402972752,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "429f0501557e119e5b595bbdca443495c061d407e8f4d40e1bf705343c93ee9f"
+      },
+      {
+        "box": [
+          656,
+          512,
+          720,
+          576
+        ],
+        "camera": 1616,
+        "input_sha256": "42bfa75098ec62363b30ed9075a735c52820f5446191059471967241f52597b9",
+        "intersection": 1024,
+        "role": "local_tone",
+        "score": 0.02185792349726776,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "429f0501557e119e5b595bbdca443495c061d407e8f4d40e1bf705343c93ee9f"
+      },
+      {
+        "box": [
+          592,
+          560,
+          720,
+          688
+        ],
+        "camera": 1616,
+        "input_sha256": "60e2a8cdd7c3a70b85a512b4b0b5b3a533b095ff33f09baa2bab3968b387bead",
+        "intersection": 16384,
+        "role": "generated_sharp",
+        "score": 1.2581591402420074,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "429f0501557e119e5b595bbdca443495c061d407e8f4d40e1bf705343c93ee9f"
+      },
+      {
+        "box": [
+          592,
+          560,
+          720,
+          688
+        ],
+        "camera": 1616,
+        "input_sha256": "644c2caef830e090e841afceb48b8cb215933d886b938668f7b2106bce75e1b4",
+        "intersection": 16384,
+        "role": "generated_feathered",
+        "score": 1.0989008288618756,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "429f0501557e119e5b595bbdca443495c061d407e8f4d40e1bf705343c93ee9f"
+      },
+      {
+        "box": null,
+        "camera": 1742,
+        "input_sha256": "f46348f306c2881255d6a96b768342b2b521eb5ac630c40cf42d47a1fb755955",
+        "intersection": 0,
+        "role": "untouched",
+        "score": 0.0,
+        "status": "assessed",
+        "truth_pixels": 0,
+        "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+      },
+      {
+        "box": [
+          928,
+          960,
+          1056,
+          1088
+        ],
+        "camera": 1742,
+        "input_sha256": "39e0de375c3efa22cb08efba9d19b5ff7760b49830b0d1b8665ae9c087adfb0c",
+        "intersection": 16384,
+        "role": "bilinear_horizontal",
+        "score": 0.48516047885986074,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "1629c0783a3d70ee7083416e005566057fdc67016cfa53c9b478d4f25cae7be6"
+      },
+      {
+        "box": [
+          928,
+          960,
+          1056,
+          1088
+        ],
+        "camera": 1742,
+        "input_sha256": "b26a1d3cec3ab6ac841af37c7cc7f6867a200487945a0361414cfdb00c980204",
+        "intersection": 16384,
+        "role": "bilinear_diagonal",
+        "score": 0.9489647908053531,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "1629c0783a3d70ee7083416e005566057fdc67016cfa53c9b478d4f25cae7be6"
+      },
+      {
+        "box": [
+          928,
+          960,
+          1056,
+          1088
+        ],
+        "camera": 1742,
+        "input_sha256": "5e5f3c53916262b38cb1a30fd2b79be30e293171ed70dea793b9e007adb5e64b",
+        "intersection": 16384,
+        "role": "bicubic_diagonal",
+        "score": 1.209504332871769,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "1629c0783a3d70ee7083416e005566057fdc67016cfa53c9b478d4f25cae7be6"
+      },
+      {
+        "box": [
+          928,
+          960,
+          1056,
+          1088
+        ],
+        "camera": 1742,
+        "input_sha256": "98f60d92bc6d7aada8ce101efe2c516f74c623a037c5580d1fb3810713642337",
+        "intersection": 16383,
+        "role": "rotated",
+        "score": 1.5725042066521118,
+        "status": "assessed",
+        "truth_pixels": 16383,
+        "truth_sha256": "c7047487b8db6f333a625253733b1aa4edc6f62405ad8cd8f800343518c34e2c"
+      },
+      {
+        "box": [
+          928,
+          960,
+          1056,
+          1088
+        ],
+        "camera": 1742,
+        "input_sha256": "1015534ba205c9da9e63ffd26d8acf4c4acb6c229fb2619c8b57c26628e57d68",
+        "intersection": 16384,
+        "role": "blur",
+        "score": 0.6556211493329825,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "1629c0783a3d70ee7083416e005566057fdc67016cfa53c9b478d4f25cae7be6"
+      },
+      {
+        "box": [
+          928,
+          960,
+          1056,
+          1088
+        ],
+        "camera": 1742,
+        "input_sha256": "a9781542b0147f2af7ef960b06f94f667d67f670c23738aedea59048faece7e3",
+        "intersection": 16384,
+        "role": "quantized_bilinear",
+        "score": 1.1512465120422304,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "1629c0783a3d70ee7083416e005566057fdc67016cfa53c9b478d4f25cae7be6"
+      },
+      {
+        "box": [
+          992,
+          912,
+          1056,
+          976
+        ],
+        "camera": 1742,
+        "input_sha256": "270cf1c33fd615fa6665b2e1f6b3c34aff08f29494e5cfd711f7f5a703899795",
+        "intersection": 1024,
+        "role": "local_tone",
+        "score": 0.022222222222222223,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "1629c0783a3d70ee7083416e005566057fdc67016cfa53c9b478d4f25cae7be6"
+      },
+      {
+        "box": null,
+        "camera": 1742,
+        "input_sha256": "3fa07be302fa4aafb5115decd6398d4f176cbb907572b157ae0e4b28793d624a",
+        "intersection": 0,
+        "role": "generated_sharp",
+        "score": 0.0,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "1629c0783a3d70ee7083416e005566057fdc67016cfa53c9b478d4f25cae7be6"
+      },
+      {
+        "box": [
+          912,
+          944,
+          976,
+          1008
+        ],
+        "camera": 1742,
+        "input_sha256": "42bd5ff24e6cb3371628b6fe5c48bfeeb2d57ac3eb5c95947d98da5f1bbe65b7",
+        "intersection": 2304,
+        "role": "generated_feathered",
+        "score": 0.2809539779111113,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "1629c0783a3d70ee7083416e005566057fdc67016cfa53c9b478d4f25cae7be6"
+      },
+      {
+        "box": null,
+        "camera": 1788,
+        "input_sha256": "ee4b69d967e9c746b2edb1b2f9574e213321693ae765ceb76acfb53d935940f4",
+        "intersection": 0,
+        "role": "untouched",
+        "score": 0.0,
+        "status": "assessed",
+        "truth_pixels": 0,
+        "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+      },
+      {
+        "box": [
+          1296,
+          496,
+          1424,
+          624
+        ],
+        "camera": 1788,
+        "input_sha256": "8c16f39e5d0f8e0aadb88b1ca28c0b12b471f616660612944a1d70645b68e0be",
+        "intersection": 16384,
+        "role": "bilinear_horizontal",
+        "score": 0.41783175521916077,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "8deb7f119c3c46b003d7caf0d13009d24299803944dbe6471619f97ac67ac9ff"
+      },
+      {
+        "box": [
+          1296,
+          496,
+          1424,
+          624
+        ],
+        "camera": 1788,
+        "input_sha256": "06da48973b6e2316031ca6ffd9ec310b3da7eb7a5db1afdfce64bd0eadb67029",
+        "intersection": 16384,
+        "role": "bilinear_diagonal",
+        "score": 0.9324077762869564,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "8deb7f119c3c46b003d7caf0d13009d24299803944dbe6471619f97ac67ac9ff"
+      },
+      {
+        "box": [
+          1296,
+          496,
+          1424,
+          624
+        ],
+        "camera": 1788,
+        "input_sha256": "2380d0eb94f073a387b525647aca20e898f52050f07875a701657bfa43048968",
+        "intersection": 16384,
+        "role": "bicubic_diagonal",
+        "score": 1.2342170046921115,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "8deb7f119c3c46b003d7caf0d13009d24299803944dbe6471619f97ac67ac9ff"
+      },
+      {
+        "box": [
+          1296,
+          496,
+          1424,
+          624
+        ],
+        "camera": 1788,
+        "input_sha256": "7d88f4432b2eefb1b6e2438108ce8695e4ba545668c67197b7acc121b0bac4a9",
+        "intersection": 16383,
+        "role": "rotated",
+        "score": 1.34553927299488,
+        "status": "assessed",
+        "truth_pixels": 16383,
+        "truth_sha256": "1aec63bd6c730a6dfaa288dfde20ae73b0c3ebf6c9410e7206578e834aee2a20"
+      },
+      {
+        "box": [
+          1296,
+          496,
+          1424,
+          624
+        ],
+        "camera": 1788,
+        "input_sha256": "93c340f5a0061a89b2cb34e908d2800195621281d507af4a2ef4a6a083d40df7",
+        "intersection": 16384,
+        "role": "blur",
+        "score": 0.7239903611856627,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "8deb7f119c3c46b003d7caf0d13009d24299803944dbe6471619f97ac67ac9ff"
+      },
+      {
+        "box": [
+          1296,
+          496,
+          1424,
+          624
+        ],
+        "camera": 1788,
+        "input_sha256": "ca890ed6e4e733236e960891d87c99c300f0f9801076411c732b444efce748d7",
+        "intersection": 16384,
+        "role": "quantized_bilinear",
+        "score": 1.3317373557532874,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "8deb7f119c3c46b003d7caf0d13009d24299803944dbe6471619f97ac67ac9ff"
+      },
+      {
+        "box": [
+          1360,
+          448,
+          1424,
+          512
+        ],
+        "camera": 1788,
+        "input_sha256": "ac4673d609053b0a52639449a59a181c102b03ea458c1be5ea0396212621e06e",
+        "intersection": 1024,
+        "role": "local_tone",
+        "score": 0.0223463687150838,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "8deb7f119c3c46b003d7caf0d13009d24299803944dbe6471619f97ac67ac9ff"
+      },
+      {
+        "box": [
+          1296,
+          496,
+          1424,
+          624
+        ],
+        "camera": 1788,
+        "input_sha256": "92342a312cf6e9fa70fc93b4e1cedc696f4f7c9089d5f7e8cbe384dae5dfe42b",
+        "intersection": 16384,
+        "role": "generated_sharp",
+        "score": 1.085580384221963,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "8deb7f119c3c46b003d7caf0d13009d24299803944dbe6471619f97ac67ac9ff"
+      },
+      {
+        "box": [
+          1296,
+          496,
+          1424,
+          624
+        ],
+        "camera": 1788,
+        "input_sha256": "f89f680356db237fe71e76aeb4da55d422ef31d4f37aceab684b63a73e2824b5",
+        "intersection": 16384,
+        "role": "generated_feathered",
+        "score": 1.0228606838160745,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "8deb7f119c3c46b003d7caf0d13009d24299803944dbe6471619f97ac67ac9ff"
+      },
+      {
+        "box": null,
+        "camera": 2050,
+        "input_sha256": "afc04279acf2aaa9c6d6daebaa12aa344a17a963d6c123a9abb4c18da777c41e",
+        "intersection": 0,
+        "role": "untouched",
+        "score": 0.0,
+        "status": "assessed",
+        "truth_pixels": 0,
+        "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+      },
+      {
+        "box": [
+          592,
+          928,
+          656,
+          1024
+        ],
+        "camera": 2050,
+        "input_sha256": "6638f24dd1588a56760d619ca3d56cb03c8d8737d0d02d7d7bcee5f80f3f2c7f",
+        "intersection": 4608,
+        "role": "bilinear_horizontal",
+        "score": 0.4917695583371235,
+        "status": "assessed",
+        "truth_pixels": 16383,
+        "truth_sha256": "59db0b65bc10c3be3564f711b085d1e31c6792a5f397858bb2f248cd42e0e65a"
+      },
+      {
+        "box": [
+          576,
+          928,
+          640,
+          1056
+        ],
+        "camera": 2050,
+        "input_sha256": "6c66e9adb3350475501bab87db24f0daf8b5bbba5576b01407252418a02bd318",
+        "intersection": 6143,
+        "role": "bilinear_diagonal",
+        "score": 0.8564387508968965,
+        "status": "assessed",
+        "truth_pixels": 16383,
+        "truth_sha256": "d9a8b75c364dcc9f65c154ec3806bce8deeba5b5daa04f96081f0c18bc866d97"
+      },
+      {
+        "box": [
+          592,
+          928,
+          656,
+          1024
+        ],
+        "camera": 2050,
+        "input_sha256": "88b5aac0f1d3d46989eb38200b03967a56eee78b34288a36353a6a85cc4d9db8",
+        "intersection": 4608,
+        "role": "bicubic_diagonal",
+        "score": 1.5047759714256859,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "0e71f09f955e96b416cff5b165d26e7a5b003a70ebade75c4192dd4e75f5cff2"
+      },
+      {
+        "box": [
+          592,
+          928,
+          656,
+          1024
+        ],
+        "camera": 2050,
+        "input_sha256": "e4f12a00dcf1f9d318905506d1f24cca10e0acc6556ad9fd7da1b9083c7566ca",
+        "intersection": 4608,
+        "role": "rotated",
+        "score": 1.316639899243092,
+        "status": "assessed",
+        "truth_pixels": 16383,
+        "truth_sha256": "d06cb3d87cae5f9542b55ceff850df8da449fadee2ad332147e7a863411cf1cd"
+      },
+      {
+        "box": [
+          576,
+          944,
+          640,
+          1072
+        ],
+        "camera": 2050,
+        "input_sha256": "1741afcfe43a2d8875cc7c86624f86785ea662b7a815ce7ee3f441b0d2231304",
+        "intersection": 5120,
+        "role": "blur",
+        "score": 0.6740267004774175,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "0e71f09f955e96b416cff5b165d26e7a5b003a70ebade75c4192dd4e75f5cff2"
+      },
+      {
+        "box": [
+          576,
+          944,
+          640,
+          1072
+        ],
+        "camera": 2050,
+        "input_sha256": "9625b6772913fd9cedaf4b544561d5503527ca0c6d0f0cd8bfa40115ce73aad0",
+        "intersection": 5120,
+        "role": "quantized_bilinear",
+        "score": 1.0348072948819182,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "0e71f09f955e96b416cff5b165d26e7a5b003a70ebade75c4192dd4e75f5cff2"
+      },
+      {
+        "box": [
+          576,
+          880,
+          640,
+          944
+        ],
+        "camera": 2050,
+        "input_sha256": "96a25c171b6ff8c0eea0b03999d2b5e9f1bb87feea87c176a29683498fa4ecbb",
+        "intersection": 3072,
+        "role": "local_tone",
+        "score": 0.015060240963855422,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "0e71f09f955e96b416cff5b165d26e7a5b003a70ebade75c4192dd4e75f5cff2"
+      },
+      {
+        "box": [
+          576,
+          944,
+          640,
+          1072
+        ],
+        "camera": 2050,
+        "input_sha256": "ade587b896586f5322c5c1b079b12f30b7633a1c0c952a23648c79228eb52bb1",
+        "intersection": 5120,
+        "role": "generated_sharp",
+        "score": 0.5773279304636515,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "0e71f09f955e96b416cff5b165d26e7a5b003a70ebade75c4192dd4e75f5cff2"
+      },
+      {
+        "box": [
+          576,
+          944,
+          640,
+          1072
+        ],
+        "camera": 2050,
+        "input_sha256": "0a2396ff3e5d75985cb74a1bb52d3620e1eddaf517972ffdfae6a38d0f09efcb",
+        "intersection": 5120,
+        "role": "generated_feathered",
+        "score": 0.6680659373938439,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "0e71f09f955e96b416cff5b165d26e7a5b003a70ebade75c4192dd4e75f5cff2"
+      },
+      {
+        "box": null,
+        "camera": 2082,
+        "input_sha256": "0a49b878b9c59a8fc6ae0b230043ced1ff220edf89e8085167e90e2d5769bd88",
+        "intersection": 0,
+        "role": "untouched",
+        "score": 0.0,
+        "status": "assessed",
+        "truth_pixels": 0,
+        "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+      },
+      {
+        "box": [
+          880,
+          432,
+          1008,
+          560
+        ],
+        "camera": 2082,
+        "input_sha256": "75955671536c25d3ef27f9fef056d0355d851b875f4d128842eabbd1b5a6bb28",
+        "intersection": 16384,
+        "role": "bilinear_horizontal",
+        "score": 0.4868755677007117,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "8e533f407d9f64cf8ca25c2d90deb428430fb69f05ea7957be9997072398f327"
+      },
+      {
+        "box": [
+          880,
+          432,
+          1008,
+          560
+        ],
+        "camera": 2082,
+        "input_sha256": "6c48772cbfdd6a81db9052bc4e1abc8f47f8197bd4caf594de693c93dc7b3f34",
+        "intersection": 16384,
+        "role": "bilinear_diagonal",
+        "score": 0.939900565976024,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "8e533f407d9f64cf8ca25c2d90deb428430fb69f05ea7957be9997072398f327"
+      },
+      {
+        "box": [
+          880,
+          432,
+          1008,
+          560
+        ],
+        "camera": 2082,
+        "input_sha256": "8b742f2cf12caa75c68957d364bb0419946ac8c89635725bc90d3b71ffc31832",
+        "intersection": 16384,
+        "role": "bicubic_diagonal",
+        "score": 1.2079978436087,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "8e533f407d9f64cf8ca25c2d90deb428430fb69f05ea7957be9997072398f327"
+      },
+      {
+        "box": [
+          880,
+          432,
+          1008,
+          560
+        ],
+        "camera": 2082,
+        "input_sha256": "41ad1598cdc1f9a0d1d74461f67fef494bcf62995d97e85495d196f6017e88e8",
+        "intersection": 16383,
+        "role": "rotated",
+        "score": 1.5904309736312938,
+        "status": "assessed",
+        "truth_pixels": 16383,
+        "truth_sha256": "25f7002563a1eddbab47fc8d57cb80613a3411784a9fd183a449c965cdc33524"
+      },
+      {
+        "box": [
+          880,
+          432,
+          1008,
+          560
+        ],
+        "camera": 2082,
+        "input_sha256": "50ea53b31ac641d298df69004bd255bdf3cf240ee22d0c3770fa905f4ea258e1",
+        "intersection": 16384,
+        "role": "blur",
+        "score": 0.5212930617256281,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "8e533f407d9f64cf8ca25c2d90deb428430fb69f05ea7957be9997072398f327"
+      },
+      {
+        "box": [
+          880,
+          432,
+          1008,
+          560
+        ],
+        "camera": 2082,
+        "input_sha256": "7de31ade656e5c2049d5403f0d07afef8ff5de298cad5644d8ebb96da842cd70",
+        "intersection": 16384,
+        "role": "quantized_bilinear",
+        "score": 1.2780066751781873,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "8e533f407d9f64cf8ca25c2d90deb428430fb69f05ea7957be9997072398f327"
+      },
+      {
+        "box": [
+          944,
+          384,
+          1008,
+          448
+        ],
+        "camera": 2082,
+        "input_sha256": "5afd200271a1ec43293ebde5209f2b1d0265e7032e052781587e6f03bde15f40",
+        "intersection": 1024,
+        "role": "local_tone",
+        "score": 0.022598870056497175,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "8e533f407d9f64cf8ca25c2d90deb428430fb69f05ea7957be9997072398f327"
+      },
+      {
+        "box": [
+          880,
+          432,
+          1008,
+          560
+        ],
+        "camera": 2082,
+        "input_sha256": "d7537bb9389331008f00047dbc3df9111e5a15080be7fb58741b3561a21ef05e",
+        "intersection": 16384,
+        "role": "generated_sharp",
+        "score": 1.2812545552993295,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "8e533f407d9f64cf8ca25c2d90deb428430fb69f05ea7957be9997072398f327"
+      },
+      {
+        "box": [
+          880,
+          432,
+          1008,
+          560
+        ],
+        "camera": 2082,
+        "input_sha256": "f2f5be6f5c646bd2607537304eaebfa1a9791fff45bf9ff478590f57fbabe17b",
+        "intersection": 16384,
+        "role": "generated_feathered",
+        "score": 1.1995321426474561,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "8e533f407d9f64cf8ca25c2d90deb428430fb69f05ea7957be9997072398f327"
+      },
+      {
+        "box": null,
+        "camera": 2879,
+        "input_sha256": "fdc39e6ee6cd6fd122c3322ad2d00291d738cc044200832559e4a939c6c69901",
+        "intersection": 0,
+        "role": "untouched",
+        "score": 0.0,
+        "status": "assessed",
+        "truth_pixels": 0,
+        "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+      },
+      {
+        "box": [
+          1280,
+          832,
+          1344,
+          960
+        ],
+        "camera": 2879,
+        "input_sha256": "a2eb8e6b7f882ad379e9331645906cf6b6575727743ebe93947a9ec3bf7b738c",
+        "intersection": 8192,
+        "role": "bilinear_horizontal",
+        "score": 0.47835272083035285,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "65943e40df7f6b8bafc1040a91a022e1d88e04363aead427ddccdef4b4c05fe8"
+      },
+      {
+        "box": [
+          1280,
+          832,
+          1344,
+          960
+        ],
+        "camera": 2879,
+        "input_sha256": "1bb5419c084fa8dda0df96397dde486312947ce9252c6ce17b2db8d4bf4476b1",
+        "intersection": 8192,
+        "role": "bilinear_diagonal",
+        "score": 0.8782165049586353,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "65943e40df7f6b8bafc1040a91a022e1d88e04363aead427ddccdef4b4c05fe8"
+      },
+      {
+        "box": [
+          1280,
+          832,
+          1344,
+          960
+        ],
+        "camera": 2879,
+        "input_sha256": "7cdf89dfc47edceb0d895469ed37c67b7834e0493f5e1e7fcd3127b6eb9228bb",
+        "intersection": 8192,
+        "role": "bicubic_diagonal",
+        "score": 1.2538369330330281,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "65943e40df7f6b8bafc1040a91a022e1d88e04363aead427ddccdef4b4c05fe8"
+      },
+      {
+        "box": [
+          1280,
+          832,
+          1344,
+          960
+        ],
+        "camera": 2879,
+        "input_sha256": "eeaa8b3bbac3da3c19ca87375dc812e732163a7b2f01341553fb7389d0d736ac",
+        "intersection": 8191,
+        "role": "rotated",
+        "score": 1.3419697656723355,
+        "status": "assessed",
+        "truth_pixels": 16383,
+        "truth_sha256": "3622d0875c4a2bd0c19789bb78464a8e4ad027763c32c4d6ad734385ccdec572"
+      },
+      {
+        "box": [
+          1280,
+          832,
+          1344,
+          960
+        ],
+        "camera": 2879,
+        "input_sha256": "6dfa184f565d113727d15a34a31ef174d99c60a04617313639d800f4fa4e58a5",
+        "intersection": 8192,
+        "role": "blur",
+        "score": 0.8301414050416015,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "65943e40df7f6b8bafc1040a91a022e1d88e04363aead427ddccdef4b4c05fe8"
+      },
+      {
+        "box": [
+          1280,
+          832,
+          1376,
+          960
+        ],
+        "camera": 2879,
+        "input_sha256": "b4309752ad258cbf725005b172b4c2bcc95930e44276eb742f47152e6419d243",
+        "intersection": 8192,
+        "role": "quantized_bilinear",
+        "score": 0.8218944338861605,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "65943e40df7f6b8bafc1040a91a022e1d88e04363aead427ddccdef4b4c05fe8"
+      },
+      {
+        "box": [
+          1280,
+          784,
+          1344,
+          848
+        ],
+        "camera": 2879,
+        "input_sha256": "9b58d5a5694b5a87b4e610ce943c607a0ccd41c19d16373d9ce272389cd1a677",
+        "intersection": 1024,
+        "role": "local_tone",
+        "score": 0.02127659574468085,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "65943e40df7f6b8bafc1040a91a022e1d88e04363aead427ddccdef4b4c05fe8"
+      },
+      {
+        "box": [
+          1296,
+          816,
+          1360,
+          912
+        ],
+        "camera": 2879,
+        "input_sha256": "a837b01c2a9b29aa02a345636b2e6ffbc2f372ebb9ff48a7a535fead90f4a6e6",
+        "intersection": 3840,
+        "role": "generated_sharp",
+        "score": 0.8927786667801697,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "65943e40df7f6b8bafc1040a91a022e1d88e04363aead427ddccdef4b4c05fe8"
+      },
+      {
+        "box": [
+          1312,
+          832,
+          1376,
+          960
+        ],
+        "camera": 2879,
+        "input_sha256": "eda16176c15765788f5846e24cbdf1234ff690ef6d5cb1ed6e8a79aa8489479e",
+        "intersection": 4096,
+        "role": "generated_feathered",
+        "score": 0.7091463745982757,
+        "status": "assessed",
+        "truth_pixels": 16384,
+        "truth_sha256": "65943e40df7f6b8bafc1040a91a022e1d88e04363aead427ddccdef4b4c05fe8"
+      }
+    ]
+  },
+  "development_sha256": "897b005768a894485651c6950598f48124028339ad4738645afff155b38a0886",
+  "freeze": {
+    "code_sha256": "1151d99caff337ae58cff87cce18f99b1f9b2f6028ff470ce537aa65e93a0ef9",
+    "dependencies": {
+      "app.detectors.image.native_cfa": "724154703d6277c2de3f224186112cb79b1eb16fd8ddcb7f6e474f0ac157ae88",
+      "app.detectors.image.native_cfa_rotation": "2517ba7d8e1031cdf2b546a88f478527f504c8ff2a33dfaaf593d29c66f58a40",
+      "scripts.image_native_generated_grid_transfer": "7d4263db75c90d22234850e30b505a06f66573ce2825019fef9fff3fcd029592",
+      "scripts.image_native_generated_stencil_transfer": "1d38bb6e056b41e2886681966cfce6c709f2ca28048535ec85a00578c86446c3",
+      "scripts.image_native_stencil_interpolation_transfer": "0b7937515e084fd2e1f91f9a4040845da05965c2e8fbaf951d020b51e9fe473e"
+    },
+    "plan": {
+      "candidate": "Learn the dominant two-pixel grid from elsewhere in the upload using the incumbent admission. Predict red and blue at nonacquired sites using the actual observed red or blue lattice; use horizontal, vertical and diagonal neighbors. Score only interior, nonclipped, nonflat comparisons. Normalize each channel by the corresponding acquired-sample range. On a native 16-pixel grid, take the weaker local shift of the two channel error rates relative to the nearby median. Report one rectangular proposal at the existing area ranking. No original, crop coordinates or known role at inference.",
+      "confirmation": "Eight other prior CC0 camera models, yellow object composites, native and promoted deliveries, untouched and matched processing controls. Same source-conditioned generator in both panels. No new training or inference weights.",
+      "cutoff": "For each development camera use the highest ordinary response. The strict point is the second-highest source maximum. Count no repeatable grid as unassessed, never as an original-file verdict.",
+      "development": "13 prior CC0 camera models, cobalt object composites, ordinary processing and untouched controls.",
+      "gate": "Against prior four-grid texture-supported stencil-loss with the frozen interpolation veto, gain at least two useful feathered regions and two additional useful regions from the other generated deliveries, preserve at least two thirds of its useful locations per delivery, and flag at most two additional ordinary deliveries with no untouched or unsupported flag. An eligible result advances to another editor, not to AI confidence."
+    },
+    "schema": "chipmunk.image-bayer-prediction-transfer/1",
+    "sources": {
+      "confirmation": {
+        "measurements_sha256": "61c5a5583429a9e37305aa252fd59c17c8346d1ea60132873f2ab2811e9516d1",
+        "roster_sha256": "b24fac5de1be8658bc1c8cae25251072c42b747c3e90834a5cd27992c1ea4876",
+        "source_freeze_sha256": "8786a8f5e32c3caf9f45696beb9c171768f3f5f5099b07d23a72b7383fd319fe"
+      },
+      "development": {
+        "measurements_sha256": "cd5489f5af2ef7e35db85f1ff6378851dd5d0de99b3710d8892cd9a98595b5db",
+        "roster_sha256": "ac546ef78a7e3740a67f8e219547567e0729c544222942e9b513fb450a70e26e",
+        "source_freeze_sha256": "f7df0d517a0242a149d7044066d925bdd7366729896e520ff34950ab00c943bd"
+      }
+    }
+  }
+}

@@ -105,13 +105,13 @@ def validate(document):
     record = (document.get("coverage") or {}).get(KEY)
     returns = [packet["face_return"] for packet in document["packets"]
                if packet.get("face_return") and packet["face_return"]["method"] not in {windows.METHOD,carriers.METHOD}]
-    proposed = [item for item in returns if item.get("method") == proposal.METHOD]
+    proposed = [item for item in returns if item.get("method") in proposal.METHODS]
     if proposed and (record is None or BOUNDED not in record["passes"]):
         raise ValueError("Brief face proposal is missing its measured coverage")
     if record is not None:
         checked(record, document["source"]["frame_count"])
         passes = any(item["status"] == "localized" for key,item in record["passes"].items() if key != BOUNDED)
-        legacy = any(item.get("method") != proposal.METHOD for item in returns)
+        legacy = any(item.get("method") not in proposal.METHODS for item in returns)
         bounded = record["passes"].get(BOUNDED) or {}
         if passes != legacy or (bounded.get("status") == "localized") != bool(proposed):
             raise ValueError("Brief face-change coverage disagrees with the displayed ranges")

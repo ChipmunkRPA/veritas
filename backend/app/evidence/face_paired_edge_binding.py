@@ -70,7 +70,7 @@ def exact(text, low, high):
     return value
 
 
-def frame_rows(rows, source, planned, first_pts, base, *, face=False):
+def frame_rows(rows, source, planned, first_pts, base, *, face=False, relative_tick=None):
     keys = {"frame_index", "pts", "decoded_rgb_sha256"}
     if face:
         keys |= {
@@ -91,7 +91,7 @@ def frame_rows(rows, source, planned, first_pts, base, *, face=False):
             and type(pts) is int
             and i in planned
             and (not by_index or i > next(reversed(by_index)))
-            and (pts - first_pts) * base == Fraction(i, RATE)
+            and (pts - first_pts == relative_tick(i) if relative_tick else (pts - first_pts) * base == Fraction(i, RATE))
             and _SHA.fullmatch(row["decoded_rgb_sha256"]),
             "Paired face input differs from its source clock or hash",
         )

@@ -21,6 +21,7 @@ from app.evidence.video_packet_versions import (
     SHORT_CARRIER_VERSION,
     SHORT_FACE_VERSION,
     SHORT_PROPOSAL_VERSION,
+    SHORT_WEBM_PROPOSAL_VERSION,
     SHORT_WINDOW_VERSION,
 )
 
@@ -59,7 +60,7 @@ METHOD_VERSIONS = {METHOD: SHORT_FACE_VERSION, DENSE_METHOD: DENSE_SHORT_FACE_VE
                    GUARDED_CODEC_METHOD: GUARDED_CODEC_FACE_VERSION, GUARDED_720P30_METHOD: GUARDED_720P30_FACE_VERSION,
                    SECOND_METHOD: SECOND_SHORT_FACE_VERSION, SECOND_HD_METHOD: SECOND_HD_FACE_VERSION,
                    proposal.METHOD: SHORT_PROPOSAL_VERSION, short_windows.METHOD: SHORT_WINDOW_VERSION,
-                   carriers.METHOD: SHORT_CARRIER_VERSION}
+                   carriers.METHOD: SHORT_CARRIER_VERSION, proposal.WEBM_METHOD: SHORT_WEBM_PROPOSAL_VERSION}
 WINDOW_METHODS = frozenset((short_windows.METHOD, carriers.METHOD))
 POINT = 0.10
 SCENE_POINT = 0.55
@@ -154,7 +155,7 @@ def validate_set(document):
         return
     expected = [method for method, version in METHOD_VERSIONS.items() if version == document["version"]]
     _require(selected == expected, "The evidence version disagrees with its supplemental face range")
-    if selected == [proposal.METHOD]:
+    if selected and selected[0] in proposal.METHODS:
         for packet in document["packets"]:
             if boundary := packet.get("face_boundary"):
                 validate_distinct(packets[0]["face_return"], boundary)
@@ -228,7 +229,7 @@ def validate_record(record, source, *, table_pts=None, interpolated=(), rotation
     if method == short_windows.METHOD:
         short_windows.validate_record(record,source,table_pts=table_pts,interpolated=interpolated,rotation=rotation,truncated=truncated)
         return
-    if method == proposal.METHOD:
+    if method in proposal.METHODS:
         proposal.validate_record(record,source,table_pts=table_pts,interpolated=interpolated,rotation=rotation,truncated=truncated)
         return
     _require(method in METHOD_VERSIONS and record["time_base"] == source["time_base"],

@@ -56,6 +56,7 @@ from app.evidence.video_packet_versions import (
     PICTURE_HOLD_VERSIONS,
     SHORT_CARRIER_VERSION,
     SHORT_PROPOSAL_VERSION,
+    SHORT_WEBM_PROPOSAL_VERSION,
     SHORT_WINDOW_VERSION,
     SPATIAL_CUT_VERSION,
     VERSIONS,
@@ -677,7 +678,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     scored_frames |= window_frames
     set_id = current_set_id(analysis)
     version = face_return_binding.METHOD_VERSIONS[return_candidates[-1]["face_return"]["method"]] if return_candidates else VERSION
-    if version not in {SHORT_PROPOSAL_VERSION, SHORT_WINDOW_VERSION, SHORT_CARRIER_VERSION} and any(face_boundary_binding.is_paired(item.get("face_boundary")) for item in chosen):
+    if version not in {SHORT_PROPOSAL_VERSION, SHORT_WEBM_PROPOSAL_VERSION, SHORT_WINDOW_VERSION, SHORT_CARRIER_VERSION} and any(face_boundary_binding.is_paired(item.get("face_boundary")) for item in chosen):
         version = PAIRED_EDGE_VERSION
     if any(item.get("face_spatial_cut") for item in chosen):
         version = SPATIAL_CUT_VERSION
@@ -924,7 +925,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
             scene_note = ("Background patterns outside the face were similar across both ends of the selected range. "
                           if face_return["method"] in face_return_binding.GUARDED_METHODS else
                           "The surrounding scene remained similar at both sampled boundaries. ")
-            if face_return["method"] in {face_short_proposal_binding.METHOD, *face_return_binding.WINDOW_METHODS}:
+            if face_return["method"] in face_short_proposal_binding.METHODS | face_return_binding.WINDOW_METHODS:
                 scene_note = "The measured areas near the face showed limited motion at both transitions. "
             packet.update(title="Brief face-change range to review", evidence_type="anomaly", claim_scope="sampled_window",
                           semantics=face_return["method"], face_return=face_return, affects_overall_confidence=False,

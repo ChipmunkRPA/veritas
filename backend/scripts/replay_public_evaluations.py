@@ -221,10 +221,21 @@ REFERENCE_AND_ROTATION = {
     )),
     "writing": ("review_writing_gao_archive_transfer.py", ("writing-gao-archive-transfer-2026-11-13.json",), (), ()),
 }
+SINGLE_UPLOAD_TRANSFERS = {
+    "image": ("review_image_bayer_prediction_transfer.py", ("image-bayer-prediction-transfer-2026-11-13.json",), (), (
+        f"{PANELS}/image-native-generated-grid-cc0-roster-2026-11-13.json",
+        f"{PANELS}/image-native-generated-grid-measurements-2026-11-13.json",
+        f"{PANELS}/image-native-stencil-interpolation-cc0-roster-2026-11-13.json",
+        f"{PANELS}/image-native-stencil-interpolation-measurements-2026-11-13.json",
+    )),
+    "video": ("review_video_brief_face_120_carrier.py", ("video-brief-face-120-carrier-2026-11-13.json",), (), ()),
+    "audio": ("review_audio_overlap_pitch_transfer.py", ("audio-overlap-pitch-transfer-2026-11-13.json",), (), ()),
+    "writing": ("writing_typography_transfer.py", ("writing-typography-transfer-2026-11-13.json",), ("review",), ()),
+}
 SUITES = ("overview", "localization", "transfer", "source-evidence", "recent-checks", "evidence-followups", "short-edits",
           "difficult-edits", "localization-limits", "specialist-transfer", "local-evidence-2026-11-13",
           "evidence-transfer-2026-11-13", "evidence-extent-2026-11-13", "local-evidence-expansion",
-          "short-edit-transfer-2026-11-13", "delivery-and-localization", "reference-and-rotation")
+          "short-edit-transfer-2026-11-13", "delivery-and-localization", "reference-and-rotation", "single-upload-transfers")
 ISOLATED = (
     "import runpy,sys; "
     "script=sys.argv.pop(1); "
@@ -294,6 +305,8 @@ def replay_inputs(modality: str, suite: str) -> tuple[str, list[str], tuple[str,
         script, panel_names, prefix, dependencies = DELIVERY_AND_LOCALIZATION[modality]
     elif suite == "reference-and-rotation":
         script, panel_names, prefix, dependencies = REFERENCE_AND_ROTATION[modality]
+    elif suite == "single-upload-transfers":
+        script, panel_names, prefix, dependencies = SINGLE_UPLOAD_TRANSFERS[modality]
     elif suite == "source-evidence":
         script, panel_names, prefix, dependencies = SOURCE_EVIDENCE[modality]
     else:

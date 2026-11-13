@@ -1,13 +1,19 @@
 from __future__ import annotations
 
 from copy import deepcopy
+from dataclasses import replace
 from fractions import Fraction
 
 import pytest
 
 from app.core.config import settings
 from app.detectors.video.decode import FrameTable
-from app.evidence import face_boundary_binding, face_return_binding, face_short_proposal_binding
+from app.evidence import (
+    face_boundary_binding,
+    face_return_binding,
+    face_short_proposal_binding,
+    scene_return_binding,
+)
 from app.evidence import face_paired_edge_binding as paired
 from app.evidence.face_interval_binding import APPEARANCE_METHOD
 from app.evidence.video_packet_versions import BOUNDARY_VERSION, PAIRED_EDGE_VERSION, SHORT_PROPOSAL_VERSION
@@ -114,8 +120,15 @@ def test_paired_edge_rejects_altered_proof(change, reason):
         face_boundary_binding.validate_record(value, coarse, source, table_pts=table.pts)
 
 
-def test_short_proposal_requires_exact_schedule_pixel_inputs_and_arithmetic():
+@pytest.mark.parametrize("webm", [False, True])
+def test_short_proposal_requires_exact_schedule_pixel_inputs_and_arithmetic(webm):
     table, source, _, value = record()
+    if webm:
+        ticks = tuple(420 + scene_return_binding.webm_tick(i) for i in range(120))
+        table = replace(table, time_base="1/1000", pts=ticks)
+        source.update(time_base=table.time_base)
+        assert face_short_proposal_binding.webm_source(table, scene_return_binding.WEBM_ENCODING, "webm")
+        assert not face_short_proposal_binding.webm_source(table, scene_return_binding.WEBM_ENCODING, "mp4")
     old_faces = {row["frame_index"]: row for row in value["frame_inputs"]}
     sample = list(face_short_proposal_binding.ANCHOR_SAMPLES)
     proposed = [87, 93]
@@ -128,9 +141,15 @@ def test_short_proposal_requires_exact_schedule_pixel_inputs_and_arithmetic():
     edges["exit"]["frame_indices"] = face_short_proposal_binding.edge_frames(93)
     value.pop("track_id")
     value.update(
-        method=face_short_proposal_binding.METHOD,
+        method=face_short_proposal_binding.WEBM_METHOD if webm else face_short_proposal_binding.METHOD,
+        time_base=table.time_base,
+        source_first_pts=table.pts[0],
+        source_encoding=list(scene_return_binding.WEBM_ENCODING if webm else paired.ENCODING),
+        source_carrier="webm" if webm else "mp4",
         start_frame_index=87,
         end_frame_index=93,
+        start_pts=table.pts[87],
+        start_stream_s=table.seconds(87),
         end_pts=table.pts[93],
         end_stream_s=table.seconds(93),
         shortlist_anchor_indices=sample,
@@ -145,6 +164,13 @@ def test_short_proposal_requires_exact_schedule_pixel_inputs_and_arithmetic():
     value.update(response=response, response_hex=response.hex())
     assert type(settings).model_fields["video_face_unrouted_short_review"].default is False
     face_return_binding.validate_record(value, source, table_pts=table.pts)
+    if webm:
+        bad = deepcopy(value)
+        bad["scene_frame_inputs"][70]["pts"] += 1
+        with pytest.raises(ValueError, match="source clock"):
+            face_return_binding.validate_record(bad, source, table_pts=table.pts)
+        with pytest.raises(ValueError, match="measured carrier"):
+            face_return_binding.validate_record({**value, "source_carrier": "mp4"}, source, table_pts=table.pts)
     for key, changed, reason in (
         ("shortlist_edges", [87, 93, 93], "edge shortlist"),
         ("scheduled_frame_indices", planned[:-1], "face sample budget"),

@@ -54,6 +54,7 @@ from app.evidence.video_packet_versions import (
     SECOND_SHORT_FACE_VERSION,
     SHORT_CARRIER_VERSION,
     SHORT_PROPOSAL_VERSION,
+    SHORT_WEBM_PROPOSAL_VERSION,
     SHORT_WINDOW_VERSION,
     SPATIAL_CUT_VERSION,
 )
@@ -230,7 +231,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     guarded_codec = evidence["version"] in {
         GUARDED_CODEC_FACE_VERSION, GUARDED_720P30_FACE_VERSION, SECOND_SHORT_FACE_VERSION, SECOND_HD_FACE_VERSION,
     }
-    proposal = evidence["version"] == SHORT_PROPOSAL_VERSION
+    proposal = evidence["version"] in {SHORT_PROPOSAL_VERSION, SHORT_WEBM_PROPOSAL_VERSION}
     windowed = evidence["version"] == SHORT_WINDOW_VERSION
     carrier_windows = evidence["version"] == SHORT_CARRIER_VERSION
     paired = evidence["version"] in {PAIRED_EDGE_VERSION, SHORT_PROPOSAL_VERSION, SPATIAL_CUT_VERSION}
@@ -252,6 +253,11 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         if not face_paired_edge_binding.supported(table, (delivery.get("codec"),delivery.get("pix_fmt"),delivery.get("codec_tag")),
                                                   face_return.source_carrier(original)):
             raise ValueError("The original video differs from its brief face-review source profile")
+    if evidence["version"] == SHORT_WEBM_PROPOSAL_VERSION:
+        delivery = probe_container(original, include_codec_tag=True)
+        if not face_short_proposal_binding.webm_source(table, (delivery.get("codec"), delivery.get("pix_fmt"), delivery.get("codec_tag")),
+                                                       face_return.source_carrier(original)):
+            raise ValueError("The original video differs from its brief WebM face-review source profile")
     if windowed:
         delivery = probe_container(original, include_codec_tag=True)
         if not face_short_window_binding.supported(table, (delivery.get("codec"), delivery.get("pix_fmt"), delivery.get("codec_tag")),
@@ -361,7 +367,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         record = packet.get("face_return") or {}
         for row in record.get("scene_frame_inputs", []):
             scenes[row["frame_index"]].append(row)
-        if record.get("method") == face_short_proposal_binding.METHOD:
+        if record.get("method") in face_short_proposal_binding.METHODS:
             proposal_records.append(record)
             paired_indices.update(row["frame_index"] for row in record["scene_frame_inputs"])
         if record.get("method") in {face_short_window_binding.METHOD, face_short_carrier_binding.METHOD}:

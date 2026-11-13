@@ -1,0 +1,6186 @@
+{
+  "freeze": {
+    "delivery_sha256": "8083bce79f688cf3e8c5187abe2f451cd8d075048e55d45b704bd8ee6a7bc48a",
+    "input_pins": {
+      "baseline": "b198fc50afc5ca5573a6353bc0b4c81f44d756fd57f0773de222ab634a7e2a29",
+      "intake": "ba7b61a274e89872e1049b9502ae55acb65e81994e0c8c62e6655f01ab8b5efe",
+      "transfer": "9e7577d3f810e0ffc1614bf2af599c901cc78302de32205db1829a7df41223e1"
+    },
+    "method": {
+      "cue": "Compare two pitch distributions across both ends of 0.80 s candidates on an 80 ms grid. Each endpoint uses two 140 ms regions and a 20 ms guard. Require concurrent series in both regions. Score movement of the quieter series only when the stronger series stays relatively continuous.",
+      "gate": "At -5 dB gain at least two useful primary localizations above the incumbent at no more than one added ordinary flag and no background-only flag. Transfer requires at least two of six at both -5 and -10 dB with at most one ordinary flag each. Useful means at least half of the true edit covered and at least .30 temporal IoU.",
+      "input": "Only the 16 kHz mono submitted waveform. Peak-safe same-word replacements in retained AMI mixtures. Earlier copies, known levels, truths and model scores cannot enter candidate inference.",
+      "operating_point": "Use the maximum candidate score on the 38 ordinary/background primary development deliveries, including all noise levels and dry. Use a strict point. Seal development and the point before scoring held inputs. Compare the previously frozen incumbent and background-reduced points on identical primary inputs.",
+      "pitch": "A 64 ms Hann FFT advances 20 ms. Subtract a smoothed log magnitude. Seek two distinct harmonic series, with the second series supported at least 26 Hz from bins of the strongest series. Require at least five supporting partials, each at least 2.5 percent of the peak magnitude between 250 and 3600 Hz, and reject octave/subharmonic overlap.",
+      "scope": "Primary assessment reuses the earlier primary bank with two held reader groups; transfer uses three other held readers and two other AMI sessions from the clean-reference study. Their other-method outcomes were known. Count ordinary waveform replacements as genuine for synthetic detection, together with unchanged, gain, genuine resampling, EQ and isolated background."
+    },
+    "primary": 108,
+    "runner_sha256": "123e79b3029b87f0d30a913e6fca6f3a5aff80f2a5bfda3313783a52caf40102",
+    "schema": "chipmunk.audio-overlap-pitch-transfer/1",
+    "transfer": 72
+  },
+  "native_receipt_sha256": "77a7edab3ecb8f8d08abda70642feaeb810010860d7d977c235acd970e933835",
+  "points": {
+    "candidate": 0.44448318,
+    "full": 5.565338656759987,
+    "reduced_short": 7.063171419597837,
+    "short": 7.019299576959272
+  },
+  "rows": [
+    {
+      "dual_pitch_frames": 128,
+      "eligible_ranges": 0,
+      "group": 0,
+      "kind": "untouched",
+      "level": null,
+      "pcm_sha256": "b9ba3ce85e1d5903adaba959c56d1497c23a92af401ec9c59d9969efe1612b1f",
+      "role": "development",
+      "scores": {
+        "candidate": null,
+        "full": [
+          -7.157455490704865,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          -7.05772115179938,
+          [
+            0,
+            32000
+          ]
+        ],
+        "short": [
+          -6.963396113809658,
+          [
+            0,
+            32000
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 128,
+      "eligible_ranges": 0,
+      "group": 0,
+      "kind": "local_gain",
+      "level": null,
+      "pcm_sha256": "9b868158b5bbb25a30d2eb47a5cfc9872f2d072eef2b8ef07e33dd991d3d2522",
+      "role": "development",
+      "scores": {
+        "candidate": null,
+        "full": [
+          -7.147067042793568,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          -7.057722032443312,
+          [
+            0,
+            32000
+          ]
+        ],
+        "short": [
+          -6.963396113809658,
+          [
+            0,
+            32000
+          ]
+        ]
+      },
+      "truth": [
+        40880,
+        55120
+      ]
+    },
+    {
+      "dual_pitch_frames": 128,
+      "eligible_ranges": 0,
+      "group": 0,
+      "kind": "ordinary_tts",
+      "level": null,
+      "pcm_sha256": "71b152a9197c89b4274afae07d650cbf94f8e5e2f003b88a54b449a163c01bad",
+      "role": "development",
+      "scores": {
+        "candidate": null,
+        "full": [
+          -7.157340926137216,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          -7.056963881433229,
+          [
+            0,
+            32000
+          ]
+        ],
+        "short": [
+          -6.963396113809658,
+          [
+            0,
+            32000
+          ]
+        ]
+      },
+      "truth": [
+        40880,
+        55120
+      ]
+    },
+    {
+      "dual_pitch_frames": 124,
+      "eligible_ranges": 0,
+      "group": 0,
+      "kind": "synthetic_tts",
+      "level": null,
+      "pcm_sha256": "0b5d80ca9acbace897aab7ad240e8327b530c3da523215bdff55901d59ba0bb4",
+      "role": "development",
+      "scores": {
+        "candidate": null,
+        "full": [
+          6.716290766300747,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          7.245412511976796,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "short": [
+          7.235257086017845,
+          [
+            32000,
+            64000
+          ]
+        ]
+      },
+      "truth": [
+        40880,
+        55120
+      ]
+    },
+    {
+      "dual_pitch_frames": 128,
+      "eligible_ranges": 0,
+      "group": 0,
+      "kind": "ordinary_conversion",
+      "level": null,
+      "pcm_sha256": "71b152a9197c89b4274afae07d650cbf94f8e5e2f003b88a54b449a163c01bad",
+      "role": "development",
+      "scores": {
+        "candidate": null,
+        "full": [
+          -7.157340926137216,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          -7.056963881433229,
+          [
+            0,
+            32000
+          ]
+        ],
+        "short": [
+          -6.963396113809658,
+          [
+            0,
+            32000
+          ]
+        ]
+      },
+      "truth": [
+        40880,
+        55120
+      ]
+    },
+    {
+      "dual_pitch_frames": 124,
+      "eligible_ranges": 0,
+      "group": 0,
+      "kind": "synthetic_conversion",
+      "level": null,
+      "pcm_sha256": "35c62b970b2029bcd9642e0c42d226edd2b94bff24b3341367bfb96b3ea9c60f",
+      "role": "development",
+      "scores": {
+        "candidate": null,
+        "full": [
+          6.478935008139244,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          6.946941329138054,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "short": [
+          7.119918014844853,
+          [
+            32000,
+            64000
+          ]
+        ]
+      },
+      "truth": [
+        40880,
+        55120
+      ]
+    },
+    {
+      "dual_pitch_frames": 199,
+      "eligible_ranges": 3,
+      "group": 0,
+      "kind": "untouched",
+      "level": 5,
+      "pcm_sha256": "c46df9176bca80741ca0fd9595fa26efa978b4aff456bc387496db12871d1c3f",
+      "role": "development",
+      "scores": {
+        "candidate": [
+          0.19913182,
+          [
+            44032,
+            56832
+          ]
+        ],
+        "full": [
+          -5.281342521166446,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          6.543006392817459,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "short": [
+          6.497365423605496,
+          [
+            48000,
+            80000
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 196,
+      "eligible_ranges": 1,
+      "group": 0,
+      "kind": "local_gain",
+      "level": 5,
+      "pcm_sha256": "2739b660ab5dc9fbb0d77a9f58d831919cf5f3a9ff173b1add466097375f0078",
+      "role": "development",
+      "scores": {
+        "candidate": [
+          0.28018098,
+          [
+            29952,
+            42752
+          ]
+        ],
+        "full": [
+          -5.461705176248411,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          6.613988409045164,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "short": [
+          6.430960409529502,
+          [
+            48000,
+            80000
+          ]
+        ]
+      },
+      "truth": [
+        40880,
+        55120
+      ]
+    },
+    {
+      "dual_pitch_frames": 199,
+      "eligible_ranges": 3,
+      "group": 0,
+      "kind": "ordinary_tts",
+      "level": 5,
+      "pcm_sha256": "f34d76c8d4daaeed3b9f7edeceefc3b0d17d0418c82eb0604c641bd5a67b4ff4",
+      "role": "development",
+      "scores": {
+        "candidate": [
+          0.19913182,
+          [
+            44032,
+            56832
+          ]
+        ],
+        "full": [
+          -5.2169236940727215,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          6.555158265056181,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "short": [
+          6.4842446633900295,
+          [
+            48000,
+            80000
+          ]
+        ]
+      },
+      "truth": [
+        40880,
+        55120
+      ]
+    },
+    {
+      "dual_pitch_frames": 198,
+      "eligible_ranges": 1,
+      "group": 0,
+      "kind": "synthetic_tts",
+      "level": 5,
+      "pcm_sha256": "54b18efa734ada40b9aff808b7bdd4ea1ee31f6e0cbff9d0b2fda3078e9d98df",
+      "role": "development",
+      "scores": {
+        "candidate": [
+          0.07479938,
+          [
+            50432,
+            63232
+          ]
+        ],
+        "full": [
+          5.7921205573893335,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          6.841182079826169,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "short": [
+          6.549460707547133,
+          [
+            32000,
+            64000
+          ]
+        ]
+      },
+      "truth": [
+        40880,
+        55120
+      ]
+    },
+    {
+      "dual_pitch_frames": 199,
+      "eligible_ranges": 3,
+      "group": 0,
+      "kind": "ordinary_conversion",
+      "level": 5,
+      "pcm_sha256": "f34d76c8d4daaeed3b9f7edeceefc3b0d17d0418c82eb0604c641bd5a67b4ff4",
+      "role": "development",
+      "scores": {
+        "candidate": [
+          0.19913182,
+          [
+            44032,
+            56832
+          ]
+        ],
+        "full": [
+          -5.2169236940727215,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          6.555158265056181,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "short": [
+          6.4842446633900295,
+          [
+            48000,
+            80000
+          ]
+        ]
+      },
+      "truth": [
+        40880,
+        55120
+      ]
+    },
+    {
+      "dual_pitch_frames": 198,
+      "eligible_ranges": 1,
+      "group": 0,
+      "kind": "synthetic_conversion",
+      "level": 5,
+      "pcm_sha256": "4424d2b4dcda9f6c8053ff775cffe10576cd05284d9df0592486394d06b648a6",
+      "role": "development",
+      "scores": {
+        "candidate": [
+          0.23111421,
+          [
+            29952,
+            42752
+          ]
+        ],
+        "full": [
+          6.9791268402543585,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          7.204751569706649,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "short": [
+          7.180544085074143,
+          [
+            32000,
+            64000
+          ]
+        ]
+      },
+      "truth": [
+        40880,
+        55120
+      ]
+    },
+    {
+      "dual_pitch_frames": 237,
+      "eligible_ranges": 14,
+      "group": 0,
+      "kind": "background",
+      "level": 5,
+      "pcm_sha256": "20d7d739f1fe3f3b12facd47af814b4ff34ccfbfcaa43958f649dcbe61feb7d2",
+      "role": "development",
+      "scores": {
+        "candidate": [
+          0.25605628,
+          [
+            40192,
+            52992
+          ]
+        ],
+        "full": [
+          -6.649061223505235,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          -5.230891721215059,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "short": [
+          -4.621459985043563,
+          [
+            64000,
+            96000
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 206,
+      "eligible_ranges": 3,
+      "group": 0,
+      "kind": "untouched",
+      "level": 0,
+      "pcm_sha256": "6a7153eb42a3b58f88f2bd24c3bc5a2c78e540322156eb76fbff408a18100ee0",
+      "role": "development",
+      "scores": {
+        "candidate": [
+          0.44448318,
+          [
+            63232,
+            76032
+          ]
+        ],
+        "full": [
+          -3.709411142116725,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          7.063171419597837,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "short": [
+          6.996137544168364,
+          [
+            48000,
+            80000
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 203,
+      "eligible_ranges": 3,
+      "group": 0,
+      "kind": "local_gain",
+      "level": 0,
+      "pcm_sha256": "f1b618829a3945ecaff0c71db9f4bfa977c7fc7e5b75f1277852a7c4f93ac6c4",
+      "role": "development",
+      "scores": {
+        "candidate": [
+          0.44448318,
+          [
+            63232,
+            76032
+          ]
+        ],
+        "full": [
+          -3.690332389965143,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          7.010989458329465,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "short": [
+          6.908917914489602,
+          [
+            48000,
+            80000
+          ]
+        ]
+      },
+      "truth": [
+        40880,
+        55120
+      ]
+    },
+    {
+      "dual_pitch_frames": 206,
+      "eligible_ranges": 3,
+      "group": 0,
+      "kind": "ordinary_tts",
+      "level": 0,
+      "pcm_sha256": "53f63921b03dc1416ed187f2383d5d544c084bcacb01770b288e6fb0748f611c",
+      "role": "development",
+      "scores": {
+        "candidate": [
+          0.44448318,
+          [
+            63232,
+            76032
+          ]
+        ],
+        "full": [
+          -3.630139284625737,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          7.060524569052066,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "short": [
+          6.995485439311487,
+          [
+            48000,
+            80000
+          ]
+        ]
+      },
+      "truth": [
+        40880,
+        55120
+      ]
+    },
+    {
+      "dual_pitch_frames": 207,
+      "eligible_ranges": 2,
+      "group": 0,
+      "kind": "synthetic_tts",
+      "level": 0,
+      "pcm_sha256": "f173560e36161c8d46aa6ba463a062bf0b3010389cdae3ed5206f62fbbee99d7",
+      "role": "development",
+      "scores": {
+        "candidate": [
+          0.44448318,
+          [
+            63232,
+            76032
+          ]
+        ],
+        "full": [
+          6.036009497870829,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          6.975158434756758,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "short": [
+          6.869694045009986,
+          [
+            32000,
+            64000
+          ]
+        ]
+      },
+      "truth": [
+        40880,
+        55120
+      ]
+    },
+    {
+      "dual_pitch_frames": 206,
+      "eligible_ranges": 3,
+      "group": 0,
+      "kind": "ordinary_conversion",
+      "level": 0,
+      "pcm_sha256": "53f63921b03dc1416ed187f2383d5d544c084bcacb01770b288e6fb0748f611c",
+      "role": "development",
+      "scores": {
+        "candidate": [
+          0.44448318,
+          [
+            63232,
+            76032
+          ]
+        ],
+        "full": [
+          -3.630139284625737,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          7.060524569052066,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "short": [
+          6.995485439311487,
+          [
+            48000,
+            80000
+          ]
+        ]
+      },
+      "truth": [
+        40880,
+        55120
+      ]
+    },
+    {
+      "dual_pitch_frames": 210,
+      "eligible_ranges": 2,
+      "group": 0,
+      "kind": "synthetic_conversion",
+      "level": 0,
+      "pcm_sha256": "407ec31962e51ceb6cb41a78f8f1d963655d6346be97f5150b3f76e36274cfaf",
+      "role": "development",
+      "scores": {
+        "candidate": [
+          0.44448318,
+          [
+            63232,
+            76032
+          ]
+        ],
+        "full": [
+          7.076370255776928,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          7.286486168029481,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "short": [
+          7.256094699951405,
+          [
+            32000,
+            64000
+          ]
+        ]
+      },
+      "truth": [
+        40880,
+        55120
+      ]
+    },
+    {
+      "dual_pitch_frames": 238,
+      "eligible_ranges": 14,
+      "group": 0,
+      "kind": "background",
+      "level": 0,
+      "pcm_sha256": "c0ace9300f2bb6b58c483b236cf1c941b08b787921191267448d3fecf17c1696",
+      "role": "development",
+      "scores": {
+        "candidate": [
+          0.25605628,
+          [
+            40192,
+            52992
+          ]
+        ],
+        "full": [
+          -6.64862967751385,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          -5.230627071149311,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "short": [
+          -4.622770304650096,
+          [
+            64000,
+            96000
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 214,
+      "eligible_ranges": 3,
+      "group": 0,
+      "kind": "untouched",
+      "level": -5,
+      "pcm_sha256": "8a97aed641364b5eeba07fa2897edb0661d8b4a7fd7b5e8fcd543694e6ee8526",
+      "role": "development",
+      "scores": {
+        "candidate": [
+          0.07998955,
+          [
+            63232,
+            76032
+          ]
+        ],
+        "full": [
+          -1.2998535604268993,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          6.864761384078139,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "short": [
+          6.956300801574864,
+          [
+            48000,
+            80000
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 211,
+      "eligible_ranges": 3,
+      "group": 0,
+      "kind": "local_gain",
+      "level": -5,
+      "pcm_sha256": "b4293b6374e64fb67a05cfe06d63dfc496da1a37c701f4da08230e7e3200911c",
+      "role": "development",
+      "scores": {
+        "candidate": [
+          0.07998955,
+          [
+            63232,
+            76032
+          ]
+        ],
+        "full": [
+          0.09410931261798683,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          7.011254317234507,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "short": [
+          7.019299576959272,
+          [
+            48000,
+            80000
+          ]
+        ]
+      },
+      "truth": [
+        40880,
+        55120
+      ]
+    },
+    {
+      "dual_pitch_frames": 214,
+      "eligible_ranges": 3,
+      "group": 0,
+      "kind": "ordinary_tts",
+      "level": -5,
+      "pcm_sha256": "3058fb310d7026afa2228ad88be3bc043d7a3a064133896e1a7735e7c2ff2f7a",
+      "role": "development",
+      "scores": {
+        "candidate": [
+          0.07998955,
+          [
+            63232,
+            76032
+          ]
+        ],
+        "full": [
+          -1.2811898313266232,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          6.860080654615012,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "short": [
+          6.9564261870885264,
+          [
+            48000,
+            80000
+          ]
+        ]
+      },
+      "truth": [
+        40880,
+        55120
+      ]
+    },
+    {
+      "dual_pitch_frames": 217,
+      "eligible_ranges": 3,
+      "group": 0,
+      "kind": "synthetic_tts",
+      "level": -5,
+      "pcm_sha256": "99365832b50a9013c73ce6e45df6cf19ad80c2bd49f96d933089e5d40cecd32a",
+      "role": "development",
+      "scores": {
+        "candidate": [
+          0.2673724,
+          [
+            50432,
+            63232
+          ]
+        ],
+        "full": [
+          5.43147215628651,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          6.966888270110884,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "short": [
+          6.465859411519517,
+          [
+            16000,
+            48000
+          ]
+        ]
+      },
+      "truth": [
+        40880,
+        55120
+      ]
+    },
+    {
+      "dual_pitch_frames": 214,
+      "eligible_ranges": 3,
+      "group": 0,
+      "kind": "ordinary_conversion",
+      "level": -5,
+      "pcm_sha256": "3058fb310d7026afa2228ad88be3bc043d7a3a064133896e1a7735e7c2ff2f7a",
+      "role": "development",
+      "scores": {
+        "candidate": [
+          0.07998955,
+          [
+            63232,
+            76032
+          ]
+        ],
+        "full": [
+          -1.2811898313266232,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          6.860080654615012,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "short": [
+          6.9564261870885264,
+          [
+            48000,
+            80000
+          ]
+        ]
+      },
+      "truth": [
+        40880,
+        55120
+      ]
+    },
+    {
+      "dual_pitch_frames": 216,
+      "eligible_ranges": 2,
+      "group": 0,
+      "kind": "synthetic_conversion",
+      "level": -5,
+      "pcm_sha256": "ed150c8372e463c55bc6c525a53653cc67cc5fc7a39d37eee49e064391a30078",
+      "role": "development",
+      "scores": {
+        "candidate": [
+          0.07998955,
+          [
+            63232,
+            76032
+          ]
+        ],
+        "full": [
+          6.799155995155935,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          7.2332713627939125,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "short": [
+          7.246919610006301,
+          [
+            32000,
+            64000
+          ]
+        ]
+      },
+      "truth": [
+        40880,
+        55120
+      ]
+    },
+    {
+      "dual_pitch_frames": 238,
+      "eligible_ranges": 14,
+      "group": 0,
+      "kind": "background",
+      "level": -5,
+      "pcm_sha256": "5aa74ce35fc6a8ee3cf8f48b1298e458803131504e85046e626810aa5c8d82e8",
+      "role": "development",
+      "scores": {
+        "candidate": [
+          0.25605628,
+          [
+            40192,
+            52992
+          ]
+        ],
+        "full": [
+          -6.649250928266087,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          -5.228503231727865,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "short": [
+          -4.62176797371189,
+          [
+            64000,
+            96000
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 154,
+      "eligible_ranges": 0,
+      "group": 1,
+      "kind": "untouched",
+      "level": null,
+      "pcm_sha256": "f74a44d431bb3d47520b1c9178ca292f974af072ea3575f33dff1b6f0a3d41bb",
+      "role": "development",
+      "scores": {
+        "candidate": null,
+        "full": [
+          -7.139418610032596,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          -6.968737597503031,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "short": [
+          -6.9716449053733625,
+          [
+            64000,
+            96000
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 153,
+      "eligible_ranges": 0,
+      "group": 1,
+      "kind": "local_gain",
+      "level": null,
+      "pcm_sha256": "f4479644e7c730ff62a49c6bd17e9dcf33723aa5001d746251b0d991f1d62078",
+      "role": "development",
+      "scores": {
+        "candidate": null,
+        "full": [
+          -7.14127013262776,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          -6.970659214912957,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "short": [
+          -6.9716449053733625,
+          [
+            64000,
+            96000
+          ]
+        ]
+      },
+      "truth": [
+        27840,
+        39360
+      ]
+    },
+    {
+      "dual_pitch_frames": 154,
+      "eligible_ranges": 0,
+      "group": 1,
+      "kind": "ordinary_tts",
+      "level": null,
+      "pcm_sha256": "53ae93a19f8664219d70e606111d45c932f7a52b034a9ff43f174985b2895666",
+      "role": "development",
+      "scores": {
+        "candidate": null,
+        "full": [
+          -7.133157692004871,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          -6.966474012858978,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "short": [
+          -6.9716449053733625,
+          [
+            64000,
+            96000
+          ]
+        ]
+      },
+      "truth": [
+        27840,
+        39360
+      ]
+    },
+    {
+      "dual_pitch_frames": 150,
+      "eligible_ranges": 0,
+      "group": 1,
+      "kind": "synthetic_tts",
+      "level": null,
+      "pcm_sha256": "edc63dfa92b685682e20e2406b59700a4134864b34d806423b7f3bda6b3aa29a",
+      "role": "development",
+      "scores": {
+        "candidate": null,
+        "full": [
+          5.300302813814215,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          6.817708017060043,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "short": [
+          6.8624753700094345,
+          [
+            16000,
+            48000
+          ]
+        ]
+      },
+      "truth": [
+        27840,
+        39360
+      ]
+    },
+    {
+      "dual_pitch_frames": 154,
+      "eligible_ranges": 0,
+      "group": 1,
+      "kind": "ordinary_conversion",
+      "level": null,
+      "pcm_sha256": "f74a44d431bb3d47520b1c9178ca292f974af072ea3575f33dff1b6f0a3d41bb",
+      "role": "development",
+      "scores": {
+        "candidate": null,
+        "full": [
+          -7.139418610032596,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          -6.968737597503031,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "short": [
+          -6.9716449053733625,
+          [
+            64000,
+            96000
+          ]
+        ]
+      },
+      "truth": [
+        27840,
+        39360
+      ]
+    },
+    {
+      "dual_pitch_frames": 148,
+      "eligible_ranges": 0,
+      "group": 1,
+      "kind": "synthetic_conversion",
+      "level": null,
+      "pcm_sha256": "4140f285df08c19f6e99e219c7b7993ac9a39146acd1bb3f3e536467025673f8",
+      "role": "development",
+      "scores": {
+        "candidate": null,
+        "full": [
+          5.97283927938111,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          7.2610113417230036,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "short": [
+          7.293835152491149,
+          [
+            16000,
+            48000
+          ]
+        ]
+      },
+      "truth": [
+        27840,
+        39360
+      ]
+    },
+    {
+      "dual_pitch_frames": 208,
+      "eligible_ranges": 1,
+      "group": 1,
+      "kind": "untouched",
+      "level": 5,
+      "pcm_sha256": "839ac2a6dde46744630375fabcad927a297315efda923fb55acbb1a3fc18fe5e",
+      "role": "development",
+      "scores": {
+        "candidate": [
+          0.16009639,
+          [
+            42752,
+            55552
+          ]
+        ],
+        "full": [
+          5.565338656759987,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          6.994182501604679,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "short": [
+          6.6025154365865655,
+          [
+            64000,
+            96000
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 208,
+      "eligible_ranges": 1,
+      "group": 1,
+      "kind": "local_gain",
+      "level": 5,
+      "pcm_sha256": "7c7a3d1847c56eea4861fee63e893a77f672db429e001536115011f43f4b5d0e",
+      "role": "development",
+      "scores": {
+        "candidate": [
+          0.16009639,
+          [
+            42752,
+            55552
+          ]
+        ],
+        "full": [
+          5.533557175017387,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          7.003207456866743,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "short": [
+          6.6025154365865655,
+          [
+            64000,
+            96000
+          ]
+        ]
+      },
+      "truth": [
+        27840,
+        39360
+      ]
+    },
+    {
+      "dual_pitch_frames": 208,
+      "eligible_ranges": 1,
+      "group": 1,
+      "kind": "ordinary_tts",
+      "level": 5,
+      "pcm_sha256": "e6a6bb5d984d5a9b02c6b3391cb84f96112703275cf8440da214e663de81599b",
+      "role": "development",
+      "scores": {
+        "candidate": [
+          0.16009639,
+          [
+            42752,
+            55552
+          ]
+        ],
+        "full": [
+          5.50500566216924,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          6.998488642475155,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "short": [
+          6.6025154365865655,
+          [
+            64000,
+            96000
+          ]
+        ]
+      },
+      "truth": [
+        27840,
+        39360
+      ]
+    },
+    {
+      "dual_pitch_frames": 209,
+      "eligible_ranges": 1,
+      "group": 1,
+      "kind": "synthetic_tts",
+      "level": 5,
+      "pcm_sha256": "f321243c6396844fad8319710df1f88b3ac18069811d95c3cdb094da82ef913c",
+      "role": "development",
+      "scores": {
+        "candidate": [
+          0.16009639,
+          [
+            42752,
+            55552
+          ]
+        ],
+        "full": [
+          6.817817205495147,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          7.054352602332789,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "short": [
+          6.798834506747656,
+          [
+            16000,
+            48000
+          ]
+        ]
+      },
+      "truth": [
+        27840,
+        39360
+      ]
+    },
+    {
+      "dual_pitch_frames": 208,
+      "eligible_ranges": 1,
+      "group": 1,
+      "kind": "ordinary_conversion",
+      "level": 5,
+      "pcm_sha256": "839ac2a6dde46744630375fabcad927a297315efda923fb55acbb1a3fc18fe5e",
+      "role": "development",
+      "scores": {
+        "candidate": [
+          0.16009639,
+          [
+            42752,
+            55552
+          ]
+        ],
+        "full": [
+          5.565338656759987,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          6.994182501604679,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "short": [
+          6.6025154365865655,
+          [
+            64000,
+            96000
+          ]
+        ]
+      },
+      "truth": [
+        27840,
+        39360
+      ]
+    },
+    {
+      "dual_pitch_frames": 213,
+      "eligible_ranges": 1,
+      "group": 1,
+      "kind": "synthetic_conversion",
+      "level": 5,
+      "pcm_sha256": "5574e3a4b441edc158d7bcc7ce883ff927799015fb0f136606c728e1da3e5999",
+      "role": "development",
+      "scores": {
+        "candidate": [
+          0.16009639,
+          [
+            42752,
+            55552
+          ]
+        ],
+        "full": [
+          6.44822039197531,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          7.169005057419963,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "short": [
+          7.109637359421202,
+          [
+            16000,
+            48000
+          ]
+        ]
+      },
+      "truth": [
+        27840,
+        39360
+      ]
+    },
+    {
+      "dual_pitch_frames": 243,
+      "eligible_ranges": 1,
+      "group": 1,
+      "kind": "background",
+      "level": 5,
+      "pcm_sha256": "3c1993aba4903ce987a8045a356743cc5b73c78d8089f080582e87b7f7bb59d0",
+      "role": "development",
+      "scores": {
+        "candidate": [
+          0.0,
+          [
+            70912,
+            83712
+          ]
+        ],
+        "full": [
+          -7.069366400678194,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          -6.754343113182645,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "short": [
+          -6.566850645585933,
+          [
+            16000,
+            48000
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 231,
+      "eligible_ranges": 3,
+      "group": 1,
+      "kind": "untouched",
+      "level": 0,
+      "pcm_sha256": "76af48166d16d6659d21fdf9995822b6a3e6c1b2d62520e0c69178d29253840f",
+      "role": "development",
+      "scores": {
+        "candidate": [
+          0.24018481,
+          [
+            55552,
+            68352
+          ]
+        ],
+        "full": [
+          5.201605183699723,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          6.705201992070049,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "short": [
+          6.161901389735869,
+          [
+            64000,
+            96000
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 228,
+      "eligible_ranges": 3,
+      "group": 1,
+      "kind": "local_gain",
+      "level": 0,
+      "pcm_sha256": "4cb847e67f9758d5d59e03ff8315263fd42100c1cad07e10f33eaad0d26dd3a4",
+      "role": "development",
+      "scores": {
+        "candidate": [
+          0.24018481,
+          [
+            55552,
+            68352
+          ]
+        ],
+        "full": [
+          5.476737481205595,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          6.712056674197987,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "short": [
+          6.161901389735869,
+          [
+            64000,
+            96000
+          ]
+        ]
+      },
+      "truth": [
+        27840,
+        39360
+      ]
+    },
+    {
+      "dual_pitch_frames": 231,
+      "eligible_ranges": 3,
+      "group": 1,
+      "kind": "ordinary_tts",
+      "level": 0,
+      "pcm_sha256": "e4f9ba844e7fabc0635b7f427d10db354d5efe989b3c3f3dbae83b2f473631b3",
+      "role": "development",
+      "scores": {
+        "candidate": [
+          0.24018481,
+          [
+            55552,
+            68352
+          ]
+        ],
+        "full": [
+          5.126992921724216,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          6.704714160826689,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "short": [
+          6.161901389735869,
+          [
+            64000,
+            96000
+          ]
+        ]
+      },
+      "truth": [
+        27840,
+        39360
+      ]
+    },
+    {
+      "dual_pitch_frames": 229,
+      "eligible_ranges": 3,
+      "group": 1,
+      "kind": "synthetic_tts",
+      "level": 0,
+      "pcm_sha256": "be382dae202f9412d0dc9f93197d061a30ee93c24b5dc5ca53ffee8bbdeffd81",
+      "role": "development",
+      "scores": {
+        "candidate": [
+          0.24018481,
+          [
+            55552,
+            68352
+          ]
+        ],
+        "full": [
+          5.531962232951482,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          6.841182079826169,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "short": [
+          6.41024013911623,
+          [
+            16000,
+            48000
+          ]
+        ]
+      },
+      "truth": [
+        27840,
+        39360
+      ]
+    },
+    {
+      "dual_pitch_frames": 231,
+      "eligible_ranges": 3,
+      "group": 1,
+      "kind": "ordinary_conversion",
+      "level": 0,
+      "pcm_sha256": "76af48166d16d6659d21fdf9995822b6a3e6c1b2d62520e0c69178d29253840f",
+      "role": "development",
+      "scores": {
+        "candidate": [
+          0.24018481,
+          [
+            55552,
+            68352
+          ]
+        ],
+        "full": [
+          5.201605183699723,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          6.705201992070049,
+          [
+            64000,
+            96000
+          ]
+        ],
+        "short": [
+          6.161901389735869,
+          [
+            64000,
+            96000
+          ]
+        ]
+      },
+      "truth": [
+        27840,
+        39360
+      ]
+    },
+    {
+      "dual_pitch_frames": 234,
+      "eligible_ranges": 3,
+      "group": 1,
+      "kind": "synthetic_conversion",
+      "level": 0,
+      "pcm_sha256": "6fca4aeaa885c8c7a471774d735a047603f7d05c56e6e7ab7bd55a3ba0801fcc",
+      "role": "development",
+      "scores": {
+        "candidate": [
+          0.24018481,
+          [
+            55552,
+            68352
+          ]
+        ],
+        "full": [
+          6.0549217201509835,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          6.840288317751748,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "short": [
+          6.913472537630959,
+          [
+            16000,
+            48000
+          ]
+        ]
+      },
+      "truth": [
+        27840,
+        39360
+      ]
+    },
+    {
+      "dual_pitch_frames": 243,
+      "eligible_ranges": 1,
+      "group": 1,
+      "kind": "background",
+      "level": 0,
+      "pcm_sha256": "ccc03557d3419c47538acb86eb820b00a267306bd73fcaed7158f9f3a0e5f49a",
+      "role": "development",
+      "scores": {
+        "candidate": [
+          0.0,
+          [
+            70912,
+            83712
+          ]
+        ],
+        "full": [
+          -7.069512320038119,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          -6.75420379584871,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "short": [
+          -6.568310684555294,
+          [
+            16000,
+            48000
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 245,
+      "eligible_ranges": 2,
+      "group": 1,
+      "kind": "untouched",
+      "level": -5,
+      "pcm_sha256": "19a11aeef09e91f5b1a488f40f1144796e93e93c7f42f624869520c4c4a8e69f",
+      "role": "development",
+      "scores": {
+        "candidate": [
+          0.18387022,
+          [
+            52992,
+            65792
+          ]
+        ],
+        "full": [
+          -4.3921298515708225,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          6.270707560888958,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "short": [
+          5.661969650222645,
+          [
+            16000,
+            48000
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 242,
+      "eligible_ranges": 2,
+      "group": 1,
+      "kind": "local_gain",
+      "level": -5,
+      "pcm_sha256": "b4f4810297a76289fbcfdf4ac6c361cf5d4cff98083eba7999d23a46364e0be7",
+      "role": "development",
+      "scores": {
+        "candidate": [
+          0.18387022,
+          [
+            52992,
+            65792
+          ]
+        ],
+        "full": [
+          -4.1972470161869655,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          5.674218175201277,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "short": [
+          4.387590557960189,
+          [
+            16000,
+            48000
+          ]
+        ]
+      },
+      "truth": [
+        27840,
+        39360
+      ]
+    },
+    {
+      "dual_pitch_frames": 245,
+      "eligible_ranges": 2,
+      "group": 1,
+      "kind": "ordinary_tts",
+      "level": -5,
+      "pcm_sha256": "558543c2660af82c6ecd47b8d64a000be19ce4aa4d99a7e6e9efecc22bb022aa",
+      "role": "development",
+      "scores": {
+        "candidate": [
+          0.18387022,
+          [
+            52992,
+            65792
+          ]
+        ],
+        "full": [
+          -4.441218412014349,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          6.349912817796921,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "short": [
+          5.72833113269829,
+          [
+            16000,
+            48000
+          ]
+        ]
+      },
+      "truth": [
+        27840,
+        39360
+      ]
+    },
+    {
+      "dual_pitch_frames": 241,
+      "eligible_ranges": 1,
+      "group": 1,
+      "kind": "synthetic_tts",
+      "level": -5,
+      "pcm_sha256": "4e8618208155523ed6f5b3ac05f3dae92e18354ada42c6c07f408b81b5299fb0",
+      "role": "development",
+      "scores": {
+        "candidate": [
+          0.18387022,
+          [
+            52992,
+            65792
+          ]
+        ],
+        "full": [
+          -1.8268003422246037,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          6.977332710419554,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "short": [
+          6.508411994814147,
+          [
+            16000,
+            48000
+          ]
+        ]
+      },
+      "truth": [
+        27840,
+        39360
+      ]
+    },
+    {
+      "dual_pitch_frames": 245,
+      "eligible_ranges": 2,
+      "group": 1,
+      "kind": "ordinary_conversion",
+      "level": -5,
+      "pcm_sha256": "19a11aeef09e91f5b1a488f40f1144796e93e93c7f42f624869520c4c4a8e69f",
+      "role": "development",
+      "scores": {
+        "candidate": [
+          0.18387022,
+          [
+            52992,
+            65792
+          ]
+        ],
+        "full": [
+          -4.3921298515708225,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          6.270707560888958,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "short": [
+          5.661969650222645,
+          [
+            16000,
+            48000
+          ]
+        ]
+      },
+      "truth": [
+        27840,
+        39360
+      ]
+    },
+    {
+      "dual_pitch_frames": 244,
+      "eligible_ranges": 1,
+      "group": 1,
+      "kind": "synthetic_conversion",
+      "level": -5,
+      "pcm_sha256": "40ba4dcb3b7331021b63af38a001960f1365989f4db95f3e1dc6b9e3d99209da",
+      "role": "development",
+      "scores": {
+        "candidate": [
+          0.18387022,
+          [
+            52992,
+            65792
+          ]
+        ],
+        "full": [
+          3.22065748443772,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          6.438038131295826,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "short": [
+          6.150664652428884,
+          [
+            16000,
+            48000
+          ]
+        ]
+      },
+      "truth": [
+        27840,
+        39360
+      ]
+    },
+    {
+      "dual_pitch_frames": 242,
+      "eligible_ranges": 1,
+      "group": 1,
+      "kind": "background",
+      "level": -5,
+      "pcm_sha256": "5a79f19274e43bb8d40587084eb997dc3f70b8299517dad6becd4b480e970ca6",
+      "role": "development",
+      "scores": {
+        "candidate": [
+          0.0,
+          [
+            70912,
+            83712
+          ]
+        ],
+        "full": [
+          -7.06949806300589,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          -6.753878597264862,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "short": [
+          -6.567433359462275,
+          [
+            16000,
+            48000
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 130,
+      "eligible_ranges": 0,
+      "group": 2,
+      "kind": "untouched",
+      "level": null,
+      "pcm_sha256": "1a536e61e054c568fd54a883c0a2fd6dfb4407f97da680b6c92340d91b22d8d8",
+      "role": "assessment",
+      "scores": {
+        "candidate": null,
+        "full": [
+          -7.046422975455209,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          -5.8501844603116915,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "short": [
+          -6.127628852832504,
+          [
+            32000,
+            64000
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 129,
+      "eligible_ranges": 0,
+      "group": 2,
+      "kind": "local_gain",
+      "level": null,
+      "pcm_sha256": "cae8420990e07f79b2e069fcbecc6649cac1babd835f6b6670b6c2273e0fe36b",
+      "role": "assessment",
+      "scores": {
+        "candidate": null,
+        "full": [
+          -7.038301455630232,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          -5.2127523499035355,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "short": [
+          -5.309433908527204,
+          [
+            32000,
+            64000
+          ]
+        ]
+      },
+      "truth": [
+        25440,
+        39360
+      ]
+    },
+    {
+      "dual_pitch_frames": 130,
+      "eligible_ranges": 0,
+      "group": 2,
+      "kind": "ordinary_tts",
+      "level": null,
+      "pcm_sha256": "c590b816e80c667a03fe426bd59ac4e0dbf13616c9534d995d17878fab844043",
+      "role": "assessment",
+      "scores": {
+        "candidate": null,
+        "full": [
+          -7.047640779575596,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          -5.887462560712456,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "short": [
+          -6.181460328668787,
+          [
+            32000,
+            64000
+          ]
+        ]
+      },
+      "truth": [
+        25440,
+        39360
+      ]
+    },
+    {
+      "dual_pitch_frames": 131,
+      "eligible_ranges": 0,
+      "group": 2,
+      "kind": "synthetic_tts",
+      "level": null,
+      "pcm_sha256": "e645032381b8ba9803732b43aaf273b276628c65ff45e572b892a388a415062a",
+      "role": "assessment",
+      "scores": {
+        "candidate": null,
+        "full": [
+          7.330227071947098,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          7.422796281843017,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "short": [
+          7.424996055890533,
+          [
+            16000,
+            48000
+          ]
+        ]
+      },
+      "truth": [
+        25440,
+        39360
+      ]
+    },
+    {
+      "dual_pitch_frames": 130,
+      "eligible_ranges": 0,
+      "group": 2,
+      "kind": "ordinary_conversion",
+      "level": null,
+      "pcm_sha256": "1a536e61e054c568fd54a883c0a2fd6dfb4407f97da680b6c92340d91b22d8d8",
+      "role": "assessment",
+      "scores": {
+        "candidate": null,
+        "full": [
+          -7.046422975455209,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          -5.8501844603116915,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "short": [
+          -6.127628852832504,
+          [
+            32000,
+            64000
+          ]
+        ]
+      },
+      "truth": [
+        25440,
+        39360
+      ]
+    },
+    {
+      "dual_pitch_frames": 131,
+      "eligible_ranges": 0,
+      "group": 2,
+      "kind": "synthetic_conversion",
+      "level": null,
+      "pcm_sha256": "dfdcf629393edbbfb7661fac41534bed6a2b4092fe0205d4068d703839e2a88e",
+      "role": "assessment",
+      "scores": {
+        "candidate": null,
+        "full": [
+          7.33735504193757,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          7.420003541521996,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "short": [
+          7.422197181343069,
+          [
+            16000,
+            48000
+          ]
+        ]
+      },
+      "truth": [
+        25440,
+        39360
+      ]
+    },
+    {
+      "dual_pitch_frames": 168,
+      "eligible_ranges": 0,
+      "group": 2,
+      "kind": "untouched",
+      "level": 5,
+      "pcm_sha256": "989731df4c4227205b7eb211f1a8a13dcbc7b446b18c40fbb99271b65459cec0",
+      "role": "assessment",
+      "scores": {
+        "candidate": null,
+        "full": [
+          6.7398529506455125,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          7.181171619827257,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "short": [
+          7.020635616474909,
+          [
+            64000,
+            96000
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 166,
+      "eligible_ranges": 0,
+      "group": 2,
+      "kind": "local_gain",
+      "level": 5,
+      "pcm_sha256": "859bc3523120e1ed63c52e89502c73ccced4870e5c00c1bc3c19ea9ec69bb887",
+      "role": "assessment",
+      "scores": {
+        "candidate": null,
+        "full": [
+          6.796052585191796,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          7.181014699272537,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "short": [
+          7.020635616474909,
+          [
+            64000,
+            96000
+          ]
+        ]
+      },
+      "truth": [
+        25440,
+        39360
+      ]
+    },
+    {
+      "dual_pitch_frames": 168,
+      "eligible_ranges": 0,
+      "group": 2,
+      "kind": "ordinary_tts",
+      "level": 5,
+      "pcm_sha256": "7767dba46665b5e1cd026a7cd983463e601e99a4c062166ef477853a42d9438d",
+      "role": "assessment",
+      "scores": {
+        "candidate": null,
+        "full": [
+          6.73446276914044,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          7.178507308421007,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "short": [
+          7.020635616474909,
+          [
+            64000,
+            96000
+          ]
+        ]
+      },
+      "truth": [
+        25440,
+        39360
+      ]
+    },
+    {
+      "dual_pitch_frames": 171,
+      "eligible_ranges": 0,
+      "group": 2,
+      "kind": "synthetic_tts",
+      "level": 5,
+      "pcm_sha256": "91bcf9272e4221a86f02eaccaf57166cda3da6b902f1f99d120543566d96e731",
+      "role": "assessment",
+      "scores": {
+        "candidate": null,
+        "full": [
+          7.030848169613434,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          7.276598036398048,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "short": [
+          7.251538735302584,
+          [
+            16000,
+            48000
+          ]
+        ]
+      },
+      "truth": [
+        25440,
+        39360
+      ]
+    },
+    {
+      "dual_pitch_frames": 168,
+      "eligible_ranges": 0,
+      "group": 2,
+      "kind": "ordinary_conversion",
+      "level": 5,
+      "pcm_sha256": "989731df4c4227205b7eb211f1a8a13dcbc7b446b18c40fbb99271b65459cec0",
+      "role": "assessment",
+      "scores": {
+        "candidate": null,
+        "full": [
+          6.7398529506455125,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          7.181171619827257,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "short": [
+          7.020635616474909,
+          [
+            64000,
+            96000
+          ]
+        ]
+      },
+      "truth": [
+        25440,
+        39360
+      ]
+    },
+    {
+      "dual_pitch_frames": 171,
+      "eligible_ranges": 1,
+      "group": 2,
+      "kind": "synthetic_conversion",
+      "level": 5,
+      "pcm_sha256": "83ae5459e1f257b3449b8979cf68b4d93cbb19295b5fd7cbdbc73f19316ac8de",
+      "role": "assessment",
+      "scores": {
+        "candidate": [
+          0.0,
+          [
+            14592,
+            27392
+          ]
+        ],
+        "full": [
+          6.960069209695297,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          7.234594740689967,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "short": [
+          7.20443027805411,
+          [
+            16000,
+            48000
+          ]
+        ]
+      },
+      "truth": [
+        25440,
+        39360
+      ]
+    },
+    {
+      "dual_pitch_frames": 212,
+      "eligible_ranges": 6,
+      "group": 2,
+      "kind": "background",
+      "level": 5,
+      "pcm_sha256": "d85c69dd246d238d558b35e875d53517179e527f7d922f97ca225a019e4f054f",
+      "role": "assessment",
+      "scores": {
+        "candidate": [
+          0.40701181,
+          [
+            52992,
+            65792
+          ]
+        ],
+        "full": [
+          -6.972852678565976,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          -6.863558790633808,
+          [
+            0,
+            32000
+          ]
+        ],
+        "short": [
+          -6.545875532132145,
+          [
+            48000,
+            80000
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 185,
+      "eligible_ranges": 0,
+      "group": 2,
+      "kind": "untouched",
+      "level": 0,
+      "pcm_sha256": "d0cba022ac7a8eaaac8efbce08a7ac1d19575f9c7937d25c3196007d282ce1e6",
+      "role": "assessment",
+      "scores": {
+        "candidate": null,
+        "full": [
+          6.043249125708595,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          6.9476868778387235,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "short": [
+          6.6012829419021815,
+          [
+            64000,
+            96000
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 185,
+      "eligible_ranges": 0,
+      "group": 2,
+      "kind": "local_gain",
+      "level": 0,
+      "pcm_sha256": "8b9f2077fd6dc1e4effb860c37ddd0358c3e7ae5e9fc8cebcf7ceb7fc15a14b8",
+      "role": "assessment",
+      "scores": {
+        "candidate": null,
+        "full": [
+          6.206545467531077,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          7.1197704029135,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "short": [
+          6.994964060866644,
+          [
+            16000,
+            48000
+          ]
+        ]
+      },
+      "truth": [
+        25440,
+        39360
+      ]
+    },
+    {
+      "dual_pitch_frames": 185,
+      "eligible_ranges": 0,
+      "group": 2,
+      "kind": "ordinary_tts",
+      "level": 0,
+      "pcm_sha256": "6d33578ba13ca3e58ed61fbcc5e981998d40876f17be20b5b1411324feb7b473",
+      "role": "assessment",
+      "scores": {
+        "candidate": null,
+        "full": [
+          6.056454279170488,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          6.958434492310449,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "short": [
+          6.6012829419021815,
+          [
+            64000,
+            96000
+          ]
+        ]
+      },
+      "truth": [
+        25440,
+        39360
+      ]
+    },
+    {
+      "dual_pitch_frames": 192,
+      "eligible_ranges": 0,
+      "group": 2,
+      "kind": "synthetic_tts",
+      "level": 0,
+      "pcm_sha256": "3a1a7f80de929370aa4e519a5a57b1b90c9edb1d597bc7b5eb3ad527f1a6566e",
+      "role": "assessment",
+      "scores": {
+        "candidate": null,
+        "full": [
+          5.772850530708612,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          7.179133567869991,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "short": [
+          7.095059366357936,
+          [
+            16000,
+            48000
+          ]
+        ]
+      },
+      "truth": [
+        25440,
+        39360
+      ]
+    },
+    {
+      "dual_pitch_frames": 185,
+      "eligible_ranges": 0,
+      "group": 2,
+      "kind": "ordinary_conversion",
+      "level": 0,
+      "pcm_sha256": "d0cba022ac7a8eaaac8efbce08a7ac1d19575f9c7937d25c3196007d282ce1e6",
+      "role": "assessment",
+      "scores": {
+        "candidate": null,
+        "full": [
+          6.043249125708595,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          6.9476868778387235,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "short": [
+          6.6012829419021815,
+          [
+            64000,
+            96000
+          ]
+        ]
+      },
+      "truth": [
+        25440,
+        39360
+      ]
+    },
+    {
+      "dual_pitch_frames": 183,
+      "eligible_ranges": 0,
+      "group": 2,
+      "kind": "synthetic_conversion",
+      "level": 0,
+      "pcm_sha256": "4949d5e1c3fc25dc9050cbcf3717683281479cfe7389005358f84532353da55a",
+      "role": "assessment",
+      "scores": {
+        "candidate": null,
+        "full": [
+          5.449799624286237,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          7.129410715934374,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "short": [
+          7.0355865624958085,
+          [
+            16000,
+            48000
+          ]
+        ]
+      },
+      "truth": [
+        25440,
+        39360
+      ]
+    },
+    {
+      "dual_pitch_frames": 214,
+      "eligible_ranges": 6,
+      "group": 2,
+      "kind": "background",
+      "level": 0,
+      "pcm_sha256": "720f03daf188aaaf7f23eeec689b46cadd1c0bfc5a9d2d18ea847ec5f601235c",
+      "role": "assessment",
+      "scores": {
+        "candidate": [
+          0.39361066,
+          [
+            52992,
+            65792
+          ]
+        ],
+        "full": [
+          -6.972539912412977,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          -6.863840100337913,
+          [
+            0,
+            32000
+          ]
+        ],
+        "short": [
+          -6.546166468168113,
+          [
+            48000,
+            80000
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 207,
+      "eligible_ranges": 2,
+      "group": 2,
+      "kind": "untouched",
+      "level": -5,
+      "pcm_sha256": "028933b56bd5869bd9698d0784c4361307426232e99c2889b1c14c721820df71",
+      "role": "assessment",
+      "scores": {
+        "candidate": [
+          0.12857043,
+          [
+            52992,
+            65792
+          ]
+        ],
+        "full": [
+          -4.343382814359439,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          6.236125001605759,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "short": [
+          5.893886325050105,
+          [
+            16000,
+            48000
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 203,
+      "eligible_ranges": 2,
+      "group": 2,
+      "kind": "local_gain",
+      "level": -5,
+      "pcm_sha256": "05ae862eeaca5b01d46109c9c1230c04905413be8a2253064e2ac7de7017130e",
+      "role": "assessment",
+      "scores": {
+        "candidate": [
+          0.12857043,
+          [
+            52992,
+            65792
+          ]
+        ],
+        "full": [
+          -3.21056602594273,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          6.618185028236194,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "short": [
+          6.329576534970886,
+          [
+            16000,
+            48000
+          ]
+        ]
+      },
+      "truth": [
+        25440,
+        39360
+      ]
+    },
+    {
+      "dual_pitch_frames": 207,
+      "eligible_ranges": 2,
+      "group": 2,
+      "kind": "ordinary_tts",
+      "level": -5,
+      "pcm_sha256": "17c3d4863983f596451496934e0d106c3b7e10c3af0a6dfd2780308d149f300d",
+      "role": "assessment",
+      "scores": {
+        "candidate": [
+          0.12857043,
+          [
+            52992,
+            65792
+          ]
+        ],
+        "full": [
+          -4.3472128192359545,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          6.252832114179455,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "short": [
+          5.902008060981955,
+          [
+            16000,
+            48000
+          ]
+        ]
+      },
+      "truth": [
+        25440,
+        39360
+      ]
+    },
+    {
+      "dual_pitch_frames": 211,
+      "eligible_ranges": 2,
+      "group": 2,
+      "kind": "synthetic_tts",
+      "level": -5,
+      "pcm_sha256": "eb36908e7514ea38f4efa478c81e80c51ec175c1240bebe04c51009c6bec40a8",
+      "role": "assessment",
+      "scores": {
+        "candidate": [
+          0.32403032,
+          [
+            40192,
+            52992
+          ]
+        ],
+        "full": [
+          -4.706121418150189,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          5.383005079748579,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "short": [
+          5.131127746963497,
+          [
+            16000,
+            48000
+          ]
+        ]
+      },
+      "truth": [
+        25440,
+        39360
+      ]
+    },
+    {
+      "dual_pitch_frames": 207,
+      "eligible_ranges": 2,
+      "group": 2,
+      "kind": "ordinary_conversion",
+      "level": -5,
+      "pcm_sha256": "028933b56bd5869bd9698d0784c4361307426232e99c2889b1c14c721820df71",
+      "role": "assessment",
+      "scores": {
+        "candidate": [
+          0.12857043,
+          [
+            52992,
+            65792
+          ]
+        ],
+        "full": [
+          -4.343382814359439,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          6.236125001605759,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "short": [
+          5.893886325050105,
+          [
+            16000,
+            48000
+          ]
+        ]
+      },
+      "truth": [
+        25440,
+        39360
+      ]
+    },
+    {
+      "dual_pitch_frames": 209,
+      "eligible_ranges": 1,
+      "group": 2,
+      "kind": "synthetic_conversion",
+      "level": -5,
+      "pcm_sha256": "171a70ca8077c13384679d5a2d6e9362a17faf6deb741fa2ac1f38f1c912e62e",
+      "role": "assessment",
+      "scores": {
+        "candidate": [
+          0.12857043,
+          [
+            52992,
+            65792
+          ]
+        ],
+        "full": [
+          -4.8997383011106015,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          5.096045345886675,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "short": [
+          3.0370932600879046,
+          [
+            16000,
+            48000
+          ]
+        ]
+      },
+      "truth": [
+        25440,
+        39360
+      ]
+    },
+    {
+      "dual_pitch_frames": 212,
+      "eligible_ranges": 4,
+      "group": 2,
+      "kind": "background",
+      "level": -5,
+      "pcm_sha256": "68456c1b70ba00868e7f112c3cd92ec7e9ab01b2dac9ff164e2334b4765d79f0",
+      "role": "assessment",
+      "scores": {
+        "candidate": [
+          0.40701181,
+          [
+            52992,
+            65792
+          ]
+        ],
+        "full": [
+          -6.972649176557562,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          -6.86361984599054,
+          [
+            0,
+            32000
+          ]
+        ],
+        "short": [
+          -6.545737249206483,
+          [
+            48000,
+            80000
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 93,
+      "eligible_ranges": 0,
+      "group": 3,
+      "kind": "untouched",
+      "level": null,
+      "pcm_sha256": "a0ff57582011ffd73324248719d9d56b2287eb1c76b5e0d538dd26175cda4c45",
+      "role": "assessment",
+      "scores": {
+        "candidate": null,
+        "full": [
+          -7.094349792356442,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          -6.945659576606877,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "short": [
+          -6.911874329955182,
+          [
+            48000,
+            80000
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 93,
+      "eligible_ranges": 0,
+      "group": 3,
+      "kind": "local_gain",
+      "level": null,
+      "pcm_sha256": "930678a2acf730eecc25e4b9bab90e1710512a5fedeca4e6b59cee4d1610e6b3",
+      "role": "assessment",
+      "scores": {
+        "candidate": null,
+        "full": [
+          -7.09545419005015,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          -6.961673731101472,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "short": [
+          -6.911387895104485,
+          [
+            48000,
+            80000
+          ]
+        ]
+      },
+      "truth": [
+        41120,
+        54880
+      ]
+    },
+    {
+      "dual_pitch_frames": 93,
+      "eligible_ranges": 0,
+      "group": 3,
+      "kind": "ordinary_tts",
+      "level": null,
+      "pcm_sha256": "c0a00a80e5f3b9e956d591851bf5751831b019c4ba0934c059d33fd85b856e37",
+      "role": "assessment",
+      "scores": {
+        "candidate": null,
+        "full": [
+          -7.104139758322427,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          -6.8430796007078,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "short": [
+          -6.791703778565438,
+          [
+            48000,
+            80000
+          ]
+        ]
+      },
+      "truth": [
+        41120,
+        54880
+      ]
+    },
+    {
+      "dual_pitch_frames": 101,
+      "eligible_ranges": 1,
+      "group": 3,
+      "kind": "synthetic_tts",
+      "level": null,
+      "pcm_sha256": "77361ba08cc9106dbe9a22f230551211e6f3a0571772a2aaa066d6273476111d",
+      "role": "assessment",
+      "scores": {
+        "candidate": [
+          0.28575639,
+          [
+            32512,
+            45312
+          ]
+        ],
+        "full": [
+          5.167396237803951,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          7.078775961412878,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "short": [
+          7.0910353425366415,
+          [
+            32000,
+            64000
+          ]
+        ]
+      },
+      "truth": [
+        41120,
+        54880
+      ]
+    },
+    {
+      "dual_pitch_frames": 93,
+      "eligible_ranges": 0,
+      "group": 3,
+      "kind": "ordinary_conversion",
+      "level": null,
+      "pcm_sha256": "be282c34e3db4e1c195161152057ad5b38fc35195165a2ec67accc86cc32458f",
+      "role": "assessment",
+      "scores": {
+        "candidate": null,
+        "full": [
+          -7.098936127999615,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          -6.940853042482728,
+          [
+            48000,
+            80000
+          ]
+        ],
+        "short": [
+          -6.902719445414881,
+          [
+            48000,
+            80000
+          ]
+        ]
+      },
+      "truth": [
+        41120,
+        54880
+      ]
+    },
+    {
+      "dual_pitch_frames": 92,
+      "eligible_ranges": 0,
+      "group": 3,
+      "kind": "synthetic_conversion",
+      "level": null,
+      "pcm_sha256": "daf792250a20e0ec8520f6d63e324a8aa804132560743dd76fc00178163eddfe",
+      "role": "assessment",
+      "scores": {
+        "candidate": null,
+        "full": [
+          7.0620561036596845,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          7.379690603307032,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "short": [
+          7.407728481357801,
+          [
+            32000,
+            64000
+          ]
+        ]
+      },
+      "truth": [
+        41120,
+        54880
+      ]
+    },
+    {
+      "dual_pitch_frames": 189,
+      "eligible_ranges": 0,
+      "group": 3,
+      "kind": "untouched",
+      "level": 5,
+      "pcm_sha256": "06f0e47f7a032a92bb182e6ca595be0d6a99ac6bc9d76c3c3c22d70409156ebc",
+      "role": "assessment",
+      "scores": {
+        "candidate": null,
+        "full": [
+          -4.213142398431492,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          4.652702201976778,
+          [
+            0,
+            32000
+          ]
+        ],
+        "short": [
+          4.883932629415957,
+          [
+            0,
+            32000
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 188,
+      "eligible_ranges": 0,
+      "group": 3,
+      "kind": "local_gain",
+      "level": 5,
+      "pcm_sha256": "e244a394b82d36ca21b12d9b55222dfcdfccbb35b60ded0c2a9b4e32fac65a4b",
+      "role": "assessment",
+      "scores": {
+        "candidate": null,
+        "full": [
+          -4.683711005113467,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          4.675487114690652,
+          [
+            0,
+            32000
+          ]
+        ],
+        "short": [
+          4.883932629415957,
+          [
+            0,
+            32000
+          ]
+        ]
+      },
+      "truth": [
+        41120,
+        54880
+      ]
+    },
+    {
+      "dual_pitch_frames": 189,
+      "eligible_ranges": 0,
+      "group": 3,
+      "kind": "ordinary_tts",
+      "level": 5,
+      "pcm_sha256": "407fb13f5d45929ead2592a1b6a110e3d3ba000741d80d374972aa5d475acdb6",
+      "role": "assessment",
+      "scores": {
+        "candidate": null,
+        "full": [
+          -4.4726047693621895,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          4.666814327885029,
+          [
+            0,
+            32000
+          ]
+        ],
+        "short": [
+          4.883932629415957,
+          [
+            0,
+            32000
+          ]
+        ]
+      },
+      "truth": [
+        41120,
+        54880
+      ]
+    },
+    {
+      "dual_pitch_frames": 187,
+      "eligible_ranges": 1,
+      "group": 3,
+      "kind": "synthetic_tts",
+      "level": 5,
+      "pcm_sha256": "d7ef813321d0b751913b45930eeb8d5d2c74fdf62ec416f4351bcc15af91295d",
+      "role": "assessment",
+      "scores": {
+        "candidate": [
+          0.04847823,
+          [
+            35072,
+            47872
+          ]
+        ],
+        "full": [
+          4.745442579942354,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          5.403908525537242,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "short": [
+          5.881202526450281,
+          [
+            32000,
+            64000
+          ]
+        ]
+      },
+      "truth": [
+        41120,
+        54880
+      ]
+    },
+    {
+      "dual_pitch_frames": 189,
+      "eligible_ranges": 0,
+      "group": 3,
+      "kind": "ordinary_conversion",
+      "level": 5,
+      "pcm_sha256": "47c881a1d956e48dc6a9880fa47fd2f18bcb131a865498e53ce23a250b150070",
+      "role": "assessment",
+      "scores": {
+        "candidate": null,
+        "full": [
+          -4.317520669314546,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          4.644315138148794,
+          [
+            0,
+            32000
+          ]
+        ],
+        "short": [
+          4.883932629415957,
+          [
+            0,
+            32000
+          ]
+        ]
+      },
+      "truth": [
+        41120,
+        54880
+      ]
+    },
+    {
+      "dual_pitch_frames": 189,
+      "eligible_ranges": 0,
+      "group": 3,
+      "kind": "synthetic_conversion",
+      "level": 5,
+      "pcm_sha256": "176d364fc1b037b3bdfc0473e472d0a6f8e7191db604532f5b31120a2381a83d",
+      "role": "assessment",
+      "scores": {
+        "candidate": null,
+        "full": [
+          7.2481772599363286,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          7.292781989712706,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "short": [
+          7.269031314847716,
+          [
+            32000,
+            64000
+          ]
+        ]
+      },
+      "truth": [
+        41120,
+        54880
+      ]
+    },
+    {
+      "dual_pitch_frames": 248,
+      "eligible_ranges": 1,
+      "group": 3,
+      "kind": "background",
+      "level": 5,
+      "pcm_sha256": "50afbf7dd391294db1b3d433521e5a7c88aeb0a6e5c843af82bbc31c07b97099",
+      "role": "assessment",
+      "scores": {
+        "candidate": [
+          0.23678156,
+          [
+            4352,
+            17152
+          ]
+        ],
+        "full": [
+          -6.819152847167639,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          -6.488352288172396,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "short": [
+          -5.6320305258042005,
+          [
+            32000,
+            64000
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 222,
+      "eligible_ranges": 2,
+      "group": 3,
+      "kind": "untouched",
+      "level": 0,
+      "pcm_sha256": "f13f85ebebaa49266484e772b23802c5d9d81345df2fb6bbc8204f23a701756e",
+      "role": "assessment",
+      "scores": {
+        "candidate": [
+          0.19987041,
+          [
+            37632,
+            50432
+          ]
+        ],
+        "full": [
+          3.942328597968115,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          6.350186771693316,
+          [
+            0,
+            32000
+          ]
+        ],
+        "short": [
+          5.930398303649022,
+          [
+            0,
+            32000
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 216,
+      "eligible_ranges": 1,
+      "group": 3,
+      "kind": "local_gain",
+      "level": 0,
+      "pcm_sha256": "a879a54f7615c5e6329cf88c259f290faea47bbc883a2f4b57d14f5fdc63c045",
+      "role": "assessment",
+      "scores": {
+        "candidate": [
+          0.19987041,
+          [
+            37632,
+            50432
+          ]
+        ],
+        "full": [
+          -1.062704489528979,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          6.361033590621264,
+          [
+            0,
+            32000
+          ]
+        ],
+        "short": [
+          5.930398303649022,
+          [
+            0,
+            32000
+          ]
+        ]
+      },
+      "truth": [
+        41120,
+        54880
+      ]
+    },
+    {
+      "dual_pitch_frames": 222,
+      "eligible_ranges": 2,
+      "group": 3,
+      "kind": "ordinary_tts",
+      "level": 0,
+      "pcm_sha256": "06a82ba765e21d240bf4f2f1b843dc8a1341ded1a37985d8b7d3e5e261efb917",
+      "role": "assessment",
+      "scores": {
+        "candidate": [
+          0.19987041,
+          [
+            37632,
+            50432
+          ]
+        ],
+        "full": [
+          3.496865769897495,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          6.358129622282799,
+          [
+            0,
+            32000
+          ]
+        ],
+        "short": [
+          5.930398303649022,
+          [
+            0,
+            32000
+          ]
+        ]
+      },
+      "truth": [
+        41120,
+        54880
+      ]
+    },
+    {
+      "dual_pitch_frames": 213,
+      "eligible_ranges": 0,
+      "group": 3,
+      "kind": "synthetic_tts",
+      "level": 0,
+      "pcm_sha256": "04f8de9b18a299f04bb086ab22247a67466609f11073070dcd4366f2089e7416",
+      "role": "assessment",
+      "scores": {
+        "candidate": null,
+        "full": [
+          4.460031580469106,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          6.390152964763801,
+          [
+            0,
+            32000
+          ]
+        ],
+        "short": [
+          5.930398303649022,
+          [
+            0,
+            32000
+          ]
+        ]
+      },
+      "truth": [
+        41120,
+        54880
+      ]
+    },
+    {
+      "dual_pitch_frames": 222,
+      "eligible_ranges": 2,
+      "group": 3,
+      "kind": "ordinary_conversion",
+      "level": 0,
+      "pcm_sha256": "c282985f751a9874b2a067e3ba429e77b6d7f9685156f4dd61527572cdfa8bae",
+      "role": "assessment",
+      "scores": {
+        "candidate": [
+          0.19987041,
+          [
+            37632,
+            50432
+          ]
+        ],
+        "full": [
+          3.828011997854492,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          6.349981299259869,
+          [
+            0,
+            32000
+          ]
+        ],
+        "short": [
+          5.930398303649022,
+          [
+            0,
+            32000
+          ]
+        ]
+      },
+      "truth": [
+        41120,
+        54880
+      ]
+    },
+    {
+      "dual_pitch_frames": 217,
+      "eligible_ranges": 0,
+      "group": 3,
+      "kind": "synthetic_conversion",
+      "level": 0,
+      "pcm_sha256": "2d859bf2b0e7e63300c97382d7a0a1888bc34bd8216bf60f05957ebc2e5c279d",
+      "role": "assessment",
+      "scores": {
+        "candidate": null,
+        "full": [
+          6.473537115856685,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          6.658534944582119,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "short": [
+          6.314722504245536,
+          [
+            32000,
+            64000
+          ]
+        ]
+      },
+      "truth": [
+        41120,
+        54880
+      ]
+    },
+    {
+      "dual_pitch_frames": 248,
+      "eligible_ranges": 1,
+      "group": 3,
+      "kind": "background",
+      "level": 0,
+      "pcm_sha256": "ecbb2b28bf1617acd8fcb5ab41983da84cc6a4f1795a53d04606963af938577f",
+      "role": "assessment",
+      "scores": {
+        "candidate": [
+          0.23678156,
+          [
+            4352,
+            17152
+          ]
+        ],
+        "full": [
+          -6.819706961217109,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          -6.4931020832659545,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "short": [
+          -5.6324119503461025,
+          [
+            32000,
+            64000
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 244,
+      "eligible_ranges": 1,
+      "group": 3,
+      "kind": "untouched",
+      "level": -5,
+      "pcm_sha256": "411be8a4d2010301eac3d6a3470bbbb1e709deb702bac3fc5e6763b5842c12de",
+      "role": "assessment",
+      "scores": {
+        "candidate": [
+          0.03329994,
+          [
+            44032,
+            56832
+          ]
+        ],
+        "full": [
+          3.1639869969230285,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          3.4602156627637957,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "short": [
+          5.922402789664493,
+          [
+            16000,
+            48000
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 243,
+      "eligible_ranges": 2,
+      "group": 3,
+      "kind": "local_gain",
+      "level": -5,
+      "pcm_sha256": "daf6c2c4b242b5c79ee999eac19c4865e4f2dbff4a30838cb604356bbb6c98f4",
+      "role": "assessment",
+      "scores": {
+        "candidate": [
+          0.13750417,
+          [
+            44032,
+            56832
+          ]
+        ],
+        "full": [
+          1.096816054857527,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          3.0019796616062875,
+          [
+            0,
+            32000
+          ]
+        ],
+        "short": [
+          5.552555117129397,
+          [
+            16000,
+            48000
+          ]
+        ]
+      },
+      "truth": [
+        41120,
+        54880
+      ]
+    },
+    {
+      "dual_pitch_frames": 244,
+      "eligible_ranges": 1,
+      "group": 3,
+      "kind": "ordinary_tts",
+      "level": -5,
+      "pcm_sha256": "4ee0c34ac918b28bfa5464d6b41bc0b51b90c41fbaf946830bb2dcbcb3a495d3",
+      "role": "assessment",
+      "scores": {
+        "candidate": [
+          0.11839848,
+          [
+            44032,
+            56832
+          ]
+        ],
+        "full": [
+          2.9528603955377877,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          3.0212821989656633,
+          [
+            0,
+            32000
+          ]
+        ],
+        "short": [
+          5.681322537380984,
+          [
+            16000,
+            48000
+          ]
+        ]
+      },
+      "truth": [
+        41120,
+        54880
+      ]
+    },
+    {
+      "dual_pitch_frames": 234,
+      "eligible_ranges": 0,
+      "group": 3,
+      "kind": "synthetic_tts",
+      "level": -5,
+      "pcm_sha256": "6ab767837554d748f92650efbaa13087f59478804a813fc94b620341c08d1f8c",
+      "role": "assessment",
+      "scores": {
+        "candidate": null,
+        "full": [
+          2.5661304021611278,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          2.9922208993884385,
+          [
+            0,
+            32000
+          ]
+        ],
+        "short": [
+          4.171488367134294,
+          [
+            0,
+            32000
+          ]
+        ]
+      },
+      "truth": [
+        41120,
+        54880
+      ]
+    },
+    {
+      "dual_pitch_frames": 244,
+      "eligible_ranges": 1,
+      "group": 3,
+      "kind": "ordinary_conversion",
+      "level": -5,
+      "pcm_sha256": "c40a3be27e6453ccd598869f1f24a552b099679094da996f686fc81b44613f5a",
+      "role": "assessment",
+      "scores": {
+        "candidate": [
+          0.10061663,
+          [
+            44032,
+            56832
+          ]
+        ],
+        "full": [
+          3.100829347534755,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          3.4355891029686236,
+          [
+            16000,
+            48000
+          ]
+        ],
+        "short": [
+          5.900562312497564,
+          [
+            16000,
+            48000
+          ]
+        ]
+      },
+      "truth": [
+        41120,
+        54880
+      ]
+    },
+    {
+      "dual_pitch_frames": 239,
+      "eligible_ranges": 5,
+      "group": 3,
+      "kind": "synthetic_conversion",
+      "level": -5,
+      "pcm_sha256": "8ba6b944bc9715ef0cf0e255524c0093bc11b3c8cb0c0a8af25f8a1995d7bb3e",
+      "role": "assessment",
+      "scores": {
+        "candidate": [
+          0.26721141,
+          [
+            44032,
+            56832
+          ]
+        ],
+        "full": [
+          5.699207346974675,
+          [
+            32000,
+            96000
+          ]
+        ],
+        "reduced_short": [
+          6.033058260319681,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "short": [
+          5.840613024160106,
+          [
+            32000,
+            64000
+          ]
+        ]
+      },
+      "truth": [
+        41120,
+        54880
+      ]
+    },
+    {
+      "dual_pitch_frames": 248,
+      "eligible_ranges": 1,
+      "group": 3,
+      "kind": "background",
+      "level": -5,
+      "pcm_sha256": "fe80630b5d729d248c0f6abe4496bb0d96fdabb74681437e6281cc5c27bed30f",
+      "role": "assessment",
+      "scores": {
+        "candidate": [
+          0.23678156,
+          [
+            4352,
+            17152
+          ]
+        ],
+        "full": [
+          -6.820343053316254,
+          [
+            0,
+            64000
+          ]
+        ],
+        "reduced_short": [
+          -6.494547833247389,
+          [
+            32000,
+            64000
+          ]
+        ],
+        "short": [
+          -5.628277369734343,
+          [
+            32000,
+            64000
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 221,
+      "eligible_ranges": 2,
+      "group": 4,
+      "kind": "untouched",
+      "level": 0,
+      "pcm_sha256": "637a10d45a111443d368926614175d624d6cf80993d98da032ae5d8f15732c28",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.14298354,
+          [
+            36352,
+            49152
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 228,
+      "eligible_ranges": 1,
+      "group": 4,
+      "kind": "ordinary_replacement",
+      "level": 0,
+      "pcm_sha256": "c49ac30f91e4ca35a1bd7d91e83f65ae8e19aa246433edafca02ae7bf4bad804",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.0,
+          [
+            6912,
+            19712
+          ]
+        ]
+      },
+      "truth": [
+        31520,
+        43040
+      ]
+    },
+    {
+      "dual_pitch_frames": 222,
+      "eligible_ranges": 1,
+      "group": 4,
+      "kind": "local_gain",
+      "level": 0,
+      "pcm_sha256": "add0ae1fc9dcbc0e554815313071dec8b96e10770422f0fb849955eba7ac0186",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.0,
+          [
+            6912,
+            19712
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 228,
+      "eligible_ranges": 3,
+      "group": 4,
+      "kind": "synthetic_tts",
+      "level": 0,
+      "pcm_sha256": "a3453a6e02de4eedda4e966fbe8afe88e50d9852ac3ef0f6788f2df8a82c84b3",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.27277491,
+          [
+            32512,
+            45312
+          ]
+        ]
+      },
+      "truth": [
+        31520,
+        43040
+      ]
+    },
+    {
+      "dual_pitch_frames": 221,
+      "eligible_ranges": 2,
+      "group": 4,
+      "kind": "ordinary_tts",
+      "level": 0,
+      "pcm_sha256": "0139b238738f7ac15d9147f5aeba4f477d86cb72d2c21ca5b2fce75e4ae56444",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.14298354,
+          [
+            36352,
+            49152
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 225,
+      "eligible_ranges": 1,
+      "group": 4,
+      "kind": "synthetic_conversion",
+      "level": 0,
+      "pcm_sha256": "4d8d7bdb37c54c672d7d22a83ce2d11546edc5bdc485467c4a8eda656ee91b2c",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.0,
+          [
+            6912,
+            19712
+          ]
+        ]
+      },
+      "truth": [
+        31520,
+        43040
+      ]
+    },
+    {
+      "dual_pitch_frames": 221,
+      "eligible_ranges": 2,
+      "group": 4,
+      "kind": "ordinary_conversion",
+      "level": 0,
+      "pcm_sha256": "b9d527ed74e42db267d3dc66a80b2190cbfccb8c778152f9c619084aea1a9e0a",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.14298354,
+          [
+            36352,
+            49152
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 208,
+      "eligible_ranges": 1,
+      "group": 4,
+      "kind": "global_eq",
+      "level": 0,
+      "pcm_sha256": "00b474a700f59338756299c343131e4108ea7762e52de8a260656bfbfaf3cca5",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.0,
+          [
+            6912,
+            19712
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 241,
+      "eligible_ranges": 4,
+      "group": 4,
+      "kind": "untouched",
+      "level": -5,
+      "pcm_sha256": "73e34d3df7a9143b33c6327815b54809e067b958744a1d4af7888eb30c3f01fb",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.18975737,
+          [
+            45312,
+            58112
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 242,
+      "eligible_ranges": 3,
+      "group": 4,
+      "kind": "ordinary_replacement",
+      "level": -5,
+      "pcm_sha256": "1c530948d8ceb5eae70c613a5ad54a8c8a597837f5361e90a3a5a9d5cb66d791",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.18975737,
+          [
+            45312,
+            58112
+          ]
+        ]
+      },
+      "truth": [
+        31520,
+        43040
+      ]
+    },
+    {
+      "dual_pitch_frames": 239,
+      "eligible_ranges": 2,
+      "group": 4,
+      "kind": "local_gain",
+      "level": -5,
+      "pcm_sha256": "8b93d1f6c1583c553112fc457ad081563b3591aea7bc61757d2635d310d6ff7f",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.18975737,
+          [
+            45312,
+            58112
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 240,
+      "eligible_ranges": 1,
+      "group": 4,
+      "kind": "synthetic_tts",
+      "level": -5,
+      "pcm_sha256": "feb86c111bce6903852813f65fa62f56ff9f5c6448fc1fad84c2643db117b578",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.0,
+          [
+            6912,
+            19712
+          ]
+        ]
+      },
+      "truth": [
+        31520,
+        43040
+      ]
+    },
+    {
+      "dual_pitch_frames": 241,
+      "eligible_ranges": 4,
+      "group": 4,
+      "kind": "ordinary_tts",
+      "level": -5,
+      "pcm_sha256": "9a788a5f04df2321977c187c313df109b8c50bd165bc371a328275a660f2e704",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.18975737,
+          [
+            45312,
+            58112
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 240,
+      "eligible_ranges": 2,
+      "group": 4,
+      "kind": "synthetic_conversion",
+      "level": -5,
+      "pcm_sha256": "4d30bd473d94aa0e499f2efa35e36a8f5e5f7568f7ae229f17de8284c8f1f970",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.1537944,
+          [
+            36352,
+            49152
+          ]
+        ]
+      },
+      "truth": [
+        31520,
+        43040
+      ]
+    },
+    {
+      "dual_pitch_frames": 241,
+      "eligible_ranges": 4,
+      "group": 4,
+      "kind": "ordinary_conversion",
+      "level": -5,
+      "pcm_sha256": "03853b2ceeb7cd604328330fc7c5e9c511194bbba8001a57818c892db82cb7f5",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.18975737,
+          [
+            45312,
+            58112
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 226,
+      "eligible_ranges": 5,
+      "group": 4,
+      "kind": "global_eq",
+      "level": -5,
+      "pcm_sha256": "8b71ef453d0c431b8fa81353a17f957a198a0f2ada2956a3cc6a854ccfbee4b1",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.31796608,
+          [
+            19712,
+            32512
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 250,
+      "eligible_ranges": 4,
+      "group": 4,
+      "kind": "untouched",
+      "level": -10,
+      "pcm_sha256": "d7a61c189b1165e7d0230ec30cdcda7c7a3ec6a980bf996f0f7f75db39129c7c",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.16331407,
+          [
+            32512,
+            45312
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 250,
+      "eligible_ranges": 2,
+      "group": 4,
+      "kind": "ordinary_replacement",
+      "level": -10,
+      "pcm_sha256": "179f8eef721e6ddb05e8ff69ceab08788d5b162bf29909a7753951986fe12eb5",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.07584114,
+          [
+            10752,
+            23552
+          ]
+        ]
+      },
+      "truth": [
+        31520,
+        43040
+      ]
+    },
+    {
+      "dual_pitch_frames": 251,
+      "eligible_ranges": 4,
+      "group": 4,
+      "kind": "local_gain",
+      "level": -10,
+      "pcm_sha256": "ddb6cfa0c492f7f4c7dfbfdeaf63ce8ca618bb822a3a4b6fe1a0ce122a32ab84",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.07584114,
+          [
+            10752,
+            23552
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 249,
+      "eligible_ranges": 2,
+      "group": 4,
+      "kind": "synthetic_tts",
+      "level": -10,
+      "pcm_sha256": "14a28dbed5a586c28f28e35777b2c866d32aa46f6c9682a178c5a2fe681a1504",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.07584114,
+          [
+            10752,
+            23552
+          ]
+        ]
+      },
+      "truth": [
+        31520,
+        43040
+      ]
+    },
+    {
+      "dual_pitch_frames": 250,
+      "eligible_ranges": 4,
+      "group": 4,
+      "kind": "ordinary_tts",
+      "level": -10,
+      "pcm_sha256": "867ee87dced2db12709a5fa84515138fc6216bb25694542acae708d0c6d12bab",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.16331407,
+          [
+            32512,
+            45312
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 249,
+      "eligible_ranges": 2,
+      "group": 4,
+      "kind": "synthetic_conversion",
+      "level": -10,
+      "pcm_sha256": "10fd652becb25e2cc1b8411d4a9b1b60a1a1a5bdec0824a45e3f3a01a81ffc52",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.07584114,
+          [
+            10752,
+            23552
+          ]
+        ]
+      },
+      "truth": [
+        31520,
+        43040
+      ]
+    },
+    {
+      "dual_pitch_frames": 250,
+      "eligible_ranges": 4,
+      "group": 4,
+      "kind": "ordinary_conversion",
+      "level": -10,
+      "pcm_sha256": "b7335a4d6b22d03db7a4deb26254cb86ac3da976d59a78f9d28a0262b1364d18",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.16331407,
+          [
+            32512,
+            45312
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 245,
+      "eligible_ranges": 5,
+      "group": 4,
+      "kind": "global_eq",
+      "level": -10,
+      "pcm_sha256": "2839d7ba434fa3b996daa7d88b4ee9c00f742bcecee6a52dd8c987a7b6e5fd34",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.12087738,
+          [
+            19712,
+            32512
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 230,
+      "eligible_ranges": 3,
+      "group": 5,
+      "kind": "untouched",
+      "level": 0,
+      "pcm_sha256": "098a65ac3ce0ff63e86c635246e119859cea401783d70aa3b1df4503d7ac6cc5",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.21004243,
+          [
+            3072,
+            15872
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 228,
+      "eligible_ranges": 3,
+      "group": 5,
+      "kind": "ordinary_replacement",
+      "level": 0,
+      "pcm_sha256": "c51e4373edb8397b133b8a0e044c58548bad01b6fc2c5eed8e082e4eb59f968a",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.21004243,
+          [
+            3072,
+            15872
+          ]
+        ]
+      },
+      "truth": [
+        28000,
+        43520
+      ]
+    },
+    {
+      "dual_pitch_frames": 229,
+      "eligible_ranges": 3,
+      "group": 5,
+      "kind": "local_gain",
+      "level": 0,
+      "pcm_sha256": "a96e61b5124b9de963dbcb94f67498630874843d104d86088714f50e367cac5e",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.21004243,
+          [
+            3072,
+            15872
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 220,
+      "eligible_ranges": 4,
+      "group": 5,
+      "kind": "synthetic_tts",
+      "level": 0,
+      "pcm_sha256": "c142a03f45d44418348c89f4547f9f79908c43ae2200a5be6da8137bc27b53f8",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.21004243,
+          [
+            3072,
+            15872
+          ]
+        ]
+      },
+      "truth": [
+        28000,
+        43520
+      ]
+    },
+    {
+      "dual_pitch_frames": 230,
+      "eligible_ranges": 3,
+      "group": 5,
+      "kind": "ordinary_tts",
+      "level": 0,
+      "pcm_sha256": "0c8462168f935349898c85f4c1167dd9aa17a4078535f4d667ca053ff626c793",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.21004243,
+          [
+            3072,
+            15872
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 218,
+      "eligible_ranges": 3,
+      "group": 5,
+      "kind": "synthetic_conversion",
+      "level": 0,
+      "pcm_sha256": "a5e45bf6b3725b93fc4b0798451b2c4b1b04ed43ff076a1f00458b6daaeebb40",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.21004243,
+          [
+            3072,
+            15872
+          ]
+        ]
+      },
+      "truth": [
+        28000,
+        43520
+      ]
+    },
+    {
+      "dual_pitch_frames": 230,
+      "eligible_ranges": 3,
+      "group": 5,
+      "kind": "ordinary_conversion",
+      "level": 0,
+      "pcm_sha256": "098a65ac3ce0ff63e86c635246e119859cea401783d70aa3b1df4503d7ac6cc5",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.21004243,
+          [
+            3072,
+            15872
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 209,
+      "eligible_ranges": 2,
+      "group": 5,
+      "kind": "global_eq",
+      "level": 0,
+      "pcm_sha256": "c456d4a8ceb281b1c2156b5ea51d57af1ce0321126c0c8253437ad04b6a8a8df",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.25546317,
+          [
+            52992,
+            65792
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 231,
+      "eligible_ranges": 4,
+      "group": 5,
+      "kind": "untouched",
+      "level": -5,
+      "pcm_sha256": "d6f62d1738ec665890032f7bb37203db76a7a1833a1667c3a166f239345113fd",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.13388932,
+          [
+            5632,
+            18432
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 227,
+      "eligible_ranges": 6,
+      "group": 5,
+      "kind": "ordinary_replacement",
+      "level": -5,
+      "pcm_sha256": "3f4abdfd7e1ffc145f4ac8dfe38678d4bbbbfaae0fc471909f0953ab99cbf7e2",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.13388932,
+          [
+            5632,
+            18432
+          ]
+        ]
+      },
+      "truth": [
+        28000,
+        43520
+      ]
+    },
+    {
+      "dual_pitch_frames": 232,
+      "eligible_ranges": 4,
+      "group": 5,
+      "kind": "local_gain",
+      "level": -5,
+      "pcm_sha256": "59f0fe0874595814485bc7d58b556942a5e9a96d575fcb476f41b41c16078c36",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.13388932,
+          [
+            5632,
+            18432
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 219,
+      "eligible_ranges": 6,
+      "group": 5,
+      "kind": "synthetic_tts",
+      "level": -5,
+      "pcm_sha256": "25ab492f520bb10ead0e495493770cde72bc2aed671b46e10d2ee1473febe26b",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.13388932,
+          [
+            5632,
+            18432
+          ]
+        ]
+      },
+      "truth": [
+        28000,
+        43520
+      ]
+    },
+    {
+      "dual_pitch_frames": 231,
+      "eligible_ranges": 4,
+      "group": 5,
+      "kind": "ordinary_tts",
+      "level": -5,
+      "pcm_sha256": "bd4257026ddb0e2713b0b75c06e703723da7827d231e6102ca144f04fbb2b138",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.13388932,
+          [
+            5632,
+            18432
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 220,
+      "eligible_ranges": 5,
+      "group": 5,
+      "kind": "synthetic_conversion",
+      "level": -5,
+      "pcm_sha256": "0f5d2d85dc1e65cea7888d23f35af5a9bb832811c9912b73d9793fcb519e8652",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.13388932,
+          [
+            5632,
+            18432
+          ]
+        ]
+      },
+      "truth": [
+        28000,
+        43520
+      ]
+    },
+    {
+      "dual_pitch_frames": 231,
+      "eligible_ranges": 4,
+      "group": 5,
+      "kind": "ordinary_conversion",
+      "level": -5,
+      "pcm_sha256": "d6f62d1738ec665890032f7bb37203db76a7a1833a1667c3a166f239345113fd",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.13388932,
+          [
+            5632,
+            18432
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 219,
+      "eligible_ranges": 0,
+      "group": 5,
+      "kind": "global_eq",
+      "level": -5,
+      "pcm_sha256": "5ba1bd6d150552aaa17f9f57ac3c98a95c61fbcd881143f829f877200690ebf0",
+      "role": "transfer",
+      "scores": {
+        "candidate": null
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 224,
+      "eligible_ranges": 2,
+      "group": 5,
+      "kind": "untouched",
+      "level": -10,
+      "pcm_sha256": "48454f037a7980616a66e95b1a66db1400ecaac9c6deaf4f69f1c44e7bc86af4",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.06057532,
+          [
+            46592,
+            59392
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 214,
+      "eligible_ranges": 2,
+      "group": 5,
+      "kind": "ordinary_replacement",
+      "level": -10,
+      "pcm_sha256": "fc42e9b354fc3a348a2b905c10d0df9aafe9a9a8bb48fc4726c12df6317b32f8",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.06057532,
+          [
+            33792,
+            46592
+          ]
+        ]
+      },
+      "truth": [
+        28000,
+        43520
+      ]
+    },
+    {
+      "dual_pitch_frames": 226,
+      "eligible_ranges": 2,
+      "group": 5,
+      "kind": "local_gain",
+      "level": -10,
+      "pcm_sha256": "03f4bed51d4bef44d762a0c7e40d6921a26df0eb2117159c3476c5fb24c9c555",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.06057532,
+          [
+            46592,
+            59392
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 216,
+      "eligible_ranges": 2,
+      "group": 5,
+      "kind": "synthetic_tts",
+      "level": -10,
+      "pcm_sha256": "86a235c71b106225c68cc6291684f00efbb8d557022b7896977476b2f8ccfbd3",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.06057532,
+          [
+            33792,
+            46592
+          ]
+        ]
+      },
+      "truth": [
+        28000,
+        43520
+      ]
+    },
+    {
+      "dual_pitch_frames": 224,
+      "eligible_ranges": 2,
+      "group": 5,
+      "kind": "ordinary_tts",
+      "level": -10,
+      "pcm_sha256": "f1a0d39ec2b8dfe2c2611d9bf83b036e2d214bd660ed0a58ce15f4ab991defd1",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.06057532,
+          [
+            46592,
+            59392
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 213,
+      "eligible_ranges": 2,
+      "group": 5,
+      "kind": "synthetic_conversion",
+      "level": -10,
+      "pcm_sha256": "c46e010d71c6643f87dc43620876d9ec8ca2d0580326b50274743369e9e23285",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.06057532,
+          [
+            33792,
+            46592
+          ]
+        ]
+      },
+      "truth": [
+        28000,
+        43520
+      ]
+    },
+    {
+      "dual_pitch_frames": 224,
+      "eligible_ranges": 2,
+      "group": 5,
+      "kind": "ordinary_conversion",
+      "level": -10,
+      "pcm_sha256": "48454f037a7980616a66e95b1a66db1400ecaac9c6deaf4f69f1c44e7bc86af4",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.06057532,
+          [
+            46592,
+            59392
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 220,
+      "eligible_ranges": 2,
+      "group": 5,
+      "kind": "global_eq",
+      "level": -10,
+      "pcm_sha256": "977a524bec57014c1ad38825ecc71ea648f9c0cdf5c6329a642f881db3fdda9f",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.09997417,
+          [
+            20992,
+            33792
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 172,
+      "eligible_ranges": 0,
+      "group": 6,
+      "kind": "untouched",
+      "level": 0,
+      "pcm_sha256": "3687adea873e63fd8452d5b4a334c9bec694ca19c6f11f527e4a22b220fc8333",
+      "role": "transfer",
+      "scores": {
+        "candidate": null
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 170,
+      "eligible_ranges": 0,
+      "group": 6,
+      "kind": "ordinary_replacement",
+      "level": 0,
+      "pcm_sha256": "7d1a057c679f894b76a0087339fcdeda171dd31a689f17894dfbe3f2723074b5",
+      "role": "transfer",
+      "scores": {
+        "candidate": null
+      },
+      "truth": [
+        41920,
+        54080
+      ]
+    },
+    {
+      "dual_pitch_frames": 172,
+      "eligible_ranges": 0,
+      "group": 6,
+      "kind": "local_gain",
+      "level": 0,
+      "pcm_sha256": "dba09d3bb720a0a2d61b859aa295c0911e8ca2253b00179bbb37227193171e9e",
+      "role": "transfer",
+      "scores": {
+        "candidate": null
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 166,
+      "eligible_ranges": 0,
+      "group": 6,
+      "kind": "synthetic_tts",
+      "level": 0,
+      "pcm_sha256": "1dd96408f32f817ad85e4a4688500528a2fbe8990d2c116d49df31bac347c50b",
+      "role": "transfer",
+      "scores": {
+        "candidate": null
+      },
+      "truth": [
+        41920,
+        54080
+      ]
+    },
+    {
+      "dual_pitch_frames": 172,
+      "eligible_ranges": 0,
+      "group": 6,
+      "kind": "ordinary_tts",
+      "level": 0,
+      "pcm_sha256": "af9dd1cce740ff61984c279d1833601c47f907868db759f9f24229ecfed65118",
+      "role": "transfer",
+      "scores": {
+        "candidate": null
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 169,
+      "eligible_ranges": 0,
+      "group": 6,
+      "kind": "synthetic_conversion",
+      "level": 0,
+      "pcm_sha256": "8dd49fe8c432f03cdfb59c0ed3026eadde32a71414e0a4ec1c1b44684d6e676b",
+      "role": "transfer",
+      "scores": {
+        "candidate": null
+      },
+      "truth": [
+        41920,
+        54080
+      ]
+    },
+    {
+      "dual_pitch_frames": 172,
+      "eligible_ranges": 0,
+      "group": 6,
+      "kind": "ordinary_conversion",
+      "level": 0,
+      "pcm_sha256": "3687adea873e63fd8452d5b4a334c9bec694ca19c6f11f527e4a22b220fc8333",
+      "role": "transfer",
+      "scores": {
+        "candidate": null
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 155,
+      "eligible_ranges": 1,
+      "group": 6,
+      "kind": "global_eq",
+      "level": 0,
+      "pcm_sha256": "b64ce7502c4a7718fc5833ac9b3fc7557de43fbcbc892f7f3074c48db3c3d074",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.0,
+          [
+            72192,
+            84992
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 176,
+      "eligible_ranges": 0,
+      "group": 6,
+      "kind": "untouched",
+      "level": -5,
+      "pcm_sha256": "993079310e35e5be66e72a857b8bbb8d6394716493c5473100dec779298a8a9d",
+      "role": "transfer",
+      "scores": {
+        "candidate": null
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 176,
+      "eligible_ranges": 0,
+      "group": 6,
+      "kind": "ordinary_replacement",
+      "level": -5,
+      "pcm_sha256": "4653036a71560cecd2639e36f71c57dad35f6b4badf60b2584d4e2c199d4a017",
+      "role": "transfer",
+      "scores": {
+        "candidate": null
+      },
+      "truth": [
+        41920,
+        54080
+      ]
+    },
+    {
+      "dual_pitch_frames": 174,
+      "eligible_ranges": 0,
+      "group": 6,
+      "kind": "local_gain",
+      "level": -5,
+      "pcm_sha256": "8dc71d489d12aa214511808ddf2634717f473f263594fc4238aa642ae0db4422",
+      "role": "transfer",
+      "scores": {
+        "candidate": null
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 168,
+      "eligible_ranges": 0,
+      "group": 6,
+      "kind": "synthetic_tts",
+      "level": -5,
+      "pcm_sha256": "71fd8d8dc070da95a8086bd6d648d21ac33f5f58426eef2dafa2ae0536f78972",
+      "role": "transfer",
+      "scores": {
+        "candidate": null
+      },
+      "truth": [
+        41920,
+        54080
+      ]
+    },
+    {
+      "dual_pitch_frames": 176,
+      "eligible_ranges": 0,
+      "group": 6,
+      "kind": "ordinary_tts",
+      "level": -5,
+      "pcm_sha256": "a30f93e37a9f0f382ac16e7001fa3d0d45ff4727bdfea874bb5e53a8d13dc6e0",
+      "role": "transfer",
+      "scores": {
+        "candidate": null
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 174,
+      "eligible_ranges": 0,
+      "group": 6,
+      "kind": "synthetic_conversion",
+      "level": -5,
+      "pcm_sha256": "11346273884d6e5c0ef3cab9609d5673f62ab9cf65ff486eec050566e333fdec",
+      "role": "transfer",
+      "scores": {
+        "candidate": null
+      },
+      "truth": [
+        41920,
+        54080
+      ]
+    },
+    {
+      "dual_pitch_frames": 176,
+      "eligible_ranges": 0,
+      "group": 6,
+      "kind": "ordinary_conversion",
+      "level": -5,
+      "pcm_sha256": "993079310e35e5be66e72a857b8bbb8d6394716493c5473100dec779298a8a9d",
+      "role": "transfer",
+      "scores": {
+        "candidate": null
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 170,
+      "eligible_ranges": 1,
+      "group": 6,
+      "kind": "global_eq",
+      "level": -5,
+      "pcm_sha256": "f2beef1b5df1f02bae92419541f82806a92668effba1763a7ddd858baf4f9e2a",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.27620393,
+          [
+            74752,
+            87552
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 189,
+      "eligible_ranges": 2,
+      "group": 6,
+      "kind": "untouched",
+      "level": -10,
+      "pcm_sha256": "b4baa6df1187ad8b934547abe26851f18a2aaa90e7d5d36c1ce480a1a2c45039",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.2875618,
+          [
+            76032,
+            88832
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 188,
+      "eligible_ranges": 2,
+      "group": 6,
+      "kind": "ordinary_replacement",
+      "level": -10,
+      "pcm_sha256": "67658b943351872e968d2181b5ae9faeb4ad2f35fa9c04c3370f972bd8969dab",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.2875618,
+          [
+            76032,
+            88832
+          ]
+        ]
+      },
+      "truth": [
+        41920,
+        54080
+      ]
+    },
+    {
+      "dual_pitch_frames": 193,
+      "eligible_ranges": 2,
+      "group": 6,
+      "kind": "local_gain",
+      "level": -10,
+      "pcm_sha256": "9e4c5d0aec92f0b9deb0fa7e2434a2b9abe1675b742dc77be970a4172b042133",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.2875618,
+          [
+            76032,
+            88832
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 184,
+      "eligible_ranges": 2,
+      "group": 6,
+      "kind": "synthetic_tts",
+      "level": -10,
+      "pcm_sha256": "d16eb277f01772896eab2883917b5493f8a530ba63735b0c50a6723ba61ca914",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.2875618,
+          [
+            76032,
+            88832
+          ]
+        ]
+      },
+      "truth": [
+        41920,
+        54080
+      ]
+    },
+    {
+      "dual_pitch_frames": 189,
+      "eligible_ranges": 2,
+      "group": 6,
+      "kind": "ordinary_tts",
+      "level": -10,
+      "pcm_sha256": "ae45bb0c2dd69d50b1a3f25401048e6d0e460074c691bb88ca28d62f9c1496d8",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.2875618,
+          [
+            76032,
+            88832
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 190,
+      "eligible_ranges": 2,
+      "group": 6,
+      "kind": "synthetic_conversion",
+      "level": -10,
+      "pcm_sha256": "085d12afd7b06b5709a739837655490e8c953cf8407c3bb2fcfff35bc75bc964",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.2875618,
+          [
+            76032,
+            88832
+          ]
+        ]
+      },
+      "truth": [
+        41920,
+        54080
+      ]
+    },
+    {
+      "dual_pitch_frames": 189,
+      "eligible_ranges": 2,
+      "group": 6,
+      "kind": "ordinary_conversion",
+      "level": -10,
+      "pcm_sha256": "b4baa6df1187ad8b934547abe26851f18a2aaa90e7d5d36c1ce480a1a2c45039",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.2875618,
+          [
+            76032,
+            88832
+          ]
+        ]
+      },
+      "truth": null
+    },
+    {
+      "dual_pitch_frames": 180,
+      "eligible_ranges": 2,
+      "group": 6,
+      "kind": "global_eq",
+      "level": -10,
+      "pcm_sha256": "53f2044adfff5bafc9e0811fd9c9a07d960a739d8c01f5dea5aa5b434d5b4eb4",
+      "role": "transfer",
+      "scores": {
+        "candidate": [
+          0.37406839,
+          [
+            76032,
+            88832
+          ]
+        ]
+      },
+      "truth": null
+    }
+  ],
+  "schema": "chipmunk.audio-overlap-pitch-portable/1",
+  "summary": {
+    "assessment": {
+      "-5": {
+        "candidate": {
+          "available_matched_pairs": 3,
+          "background_flags": 0,
+          "misplaced_flags": 0,
+          "ordinary": 10,
+          "ordinary_flags": 0,
+          "ordinary_unassessed": 0,
+          "synthetic": 4,
+          "synthetic_above_matched_ordinary": 2,
+          "synthetic_unassessed": 1,
+          "useful_before_point": 1,
+          "useful_flags": 0
+        },
+        "full": {
+          "available_matched_pairs": 4,
+          "background_flags": 0,
+          "misplaced_flags": 1,
+          "ordinary": 10,
+          "ordinary_flags": 0,
+          "ordinary_unassessed": 0,
+          "synthetic": 4,
+          "synthetic_above_matched_ordinary": 1,
+          "synthetic_unassessed": 0,
+          "useful_before_point": 0,
+          "useful_flags": 0
+        },
+        "reduced_short": {
+          "available_matched_pairs": 4,
+          "background_flags": 0,
+          "misplaced_flags": 0,
+          "ordinary": 10,
+          "ordinary_flags": 0,
+          "ordinary_unassessed": 0,
+          "synthetic": 4,
+          "synthetic_above_matched_ordinary": 1,
+          "synthetic_unassessed": 0,
+          "useful_before_point": 3,
+          "useful_flags": 0
+        },
+        "short": {
+          "available_matched_pairs": 4,
+          "background_flags": 0,
+          "misplaced_flags": 0,
+          "ordinary": 10,
+          "ordinary_flags": 0,
+          "ordinary_unassessed": 0,
+          "synthetic": 4,
+          "synthetic_above_matched_ordinary": 0,
+          "synthetic_unassessed": 0,
+          "useful_before_point": 3,
+          "useful_flags": 0
+        }
+      },
+      "0": {
+        "candidate": {
+          "available_matched_pairs": 0,
+          "background_flags": 0,
+          "misplaced_flags": 0,
+          "ordinary": 10,
+          "ordinary_flags": 0,
+          "ordinary_unassessed": 4,
+          "synthetic": 4,
+          "synthetic_above_matched_ordinary": 0,
+          "synthetic_unassessed": 4,
+          "useful_before_point": 0,
+          "useful_flags": 0
+        },
+        "full": {
+          "available_matched_pairs": 4,
+          "background_flags": 0,
+          "misplaced_flags": 2,
+          "ordinary": 10,
+          "ordinary_flags": 4,
+          "ordinary_unassessed": 0,
+          "synthetic": 4,
+          "synthetic_above_matched_ordinary": 2,
+          "synthetic_unassessed": 0,
+          "useful_before_point": 0,
+          "useful_flags": 0
+        },
+        "reduced_short": {
+          "available_matched_pairs": 4,
+          "background_flags": 0,
+          "misplaced_flags": 0,
+          "ordinary": 10,
+          "ordinary_flags": 1,
+          "ordinary_unassessed": 0,
+          "synthetic": 4,
+          "synthetic_above_matched_ordinary": 4,
+          "synthetic_unassessed": 0,
+          "useful_before_point": 3,
+          "useful_flags": 2
+        },
+        "short": {
+          "available_matched_pairs": 4,
+          "background_flags": 0,
+          "misplaced_flags": 0,
+          "ordinary": 10,
+          "ordinary_flags": 0,
+          "ordinary_unassessed": 0,
+          "synthetic": 4,
+          "synthetic_above_matched_ordinary": 3,
+          "synthetic_unassessed": 0,
+          "useful_before_point": 3,
+          "useful_flags": 2
+        }
+      },
+      "5": {
+        "candidate": {
+          "available_matched_pairs": 0,
+          "background_flags": 0,
+          "misplaced_flags": 0,
+          "ordinary": 10,
+          "ordinary_flags": 0,
+          "ordinary_unassessed": 8,
+          "synthetic": 4,
+          "synthetic_above_matched_ordinary": 0,
+          "synthetic_unassessed": 2,
+          "useful_before_point": 0,
+          "useful_flags": 0
+        },
+        "full": {
+          "available_matched_pairs": 4,
+          "background_flags": 0,
+          "misplaced_flags": 3,
+          "ordinary": 10,
+          "ordinary_flags": 4,
+          "ordinary_unassessed": 0,
+          "synthetic": 4,
+          "synthetic_above_matched_ordinary": 4,
+          "synthetic_unassessed": 0,
+          "useful_before_point": 0,
+          "useful_flags": 0
+        },
+        "reduced_short": {
+          "available_matched_pairs": 4,
+          "background_flags": 0,
+          "misplaced_flags": 0,
+          "ordinary": 10,
+          "ordinary_flags": 4,
+          "ordinary_unassessed": 0,
+          "synthetic": 4,
+          "synthetic_above_matched_ordinary": 4,
+          "synthetic_unassessed": 0,
+          "useful_before_point": 4,
+          "useful_flags": 3
+        },
+        "short": {
+          "available_matched_pairs": 4,
+          "background_flags": 0,
+          "misplaced_flags": 0,
+          "ordinary": 10,
+          "ordinary_flags": 4,
+          "ordinary_unassessed": 0,
+          "synthetic": 4,
+          "synthetic_above_matched_ordinary": 4,
+          "synthetic_unassessed": 0,
+          "useful_before_point": 4,
+          "useful_flags": 3
+        }
+      },
+      "None": {
+        "candidate": {
+          "available_matched_pairs": 0,
+          "background_flags": 0,
+          "misplaced_flags": 0,
+          "ordinary": 8,
+          "ordinary_flags": 0,
+          "ordinary_unassessed": 8,
+          "synthetic": 4,
+          "synthetic_above_matched_ordinary": 0,
+          "synthetic_unassessed": 3,
+          "useful_before_point": 0,
+          "useful_flags": 0
+        },
+        "full": {
+          "available_matched_pairs": 4,
+          "background_flags": 0,
+          "misplaced_flags": 3,
+          "ordinary": 8,
+          "ordinary_flags": 0,
+          "ordinary_unassessed": 0,
+          "synthetic": 4,
+          "synthetic_above_matched_ordinary": 4,
+          "synthetic_unassessed": 0,
+          "useful_before_point": 0,
+          "useful_flags": 0
+        },
+        "reduced_short": {
+          "available_matched_pairs": 4,
+          "background_flags": 0,
+          "misplaced_flags": 0,
+          "ordinary": 8,
+          "ordinary_flags": 0,
+          "ordinary_unassessed": 0,
+          "synthetic": 4,
+          "synthetic_above_matched_ordinary": 4,
+          "synthetic_unassessed": 0,
+          "useful_before_point": 4,
+          "useful_flags": 4
+        },
+        "short": {
+          "available_matched_pairs": 4,
+          "background_flags": 0,
+          "misplaced_flags": 0,
+          "ordinary": 8,
+          "ordinary_flags": 0,
+          "ordinary_unassessed": 0,
+          "synthetic": 4,
+          "synthetic_above_matched_ordinary": 4,
+          "synthetic_unassessed": 0,
+          "useful_before_point": 4,
+          "useful_flags": 4
+        }
+      }
+    },
+    "development": {
+      "-5": {
+        "candidate": {
+          "available_matched_pairs": 4,
+          "background_flags": 0,
+          "misplaced_flags": 0,
+          "ordinary": 10,
+          "ordinary_flags": 0,
+          "ordinary_unassessed": 0,
+          "synthetic": 4,
+          "synthetic_above_matched_ordinary": 1,
+          "synthetic_unassessed": 0,
+          "useful_before_point": 0,
+          "useful_flags": 0
+        },
+        "full": {
+          "available_matched_pairs": 4,
+          "background_flags": 0,
+          "misplaced_flags": 1,
+          "ordinary": 10,
+          "ordinary_flags": 0,
+          "ordinary_unassessed": 0,
+          "synthetic": 4,
+          "synthetic_above_matched_ordinary": 4,
+          "synthetic_unassessed": 0,
+          "useful_before_point": 0,
+          "useful_flags": 0
+        },
+        "reduced_short": {
+          "available_matched_pairs": 4,
+          "background_flags": 0,
+          "misplaced_flags": 0,
+          "ordinary": 10,
+          "ordinary_flags": 0,
+          "ordinary_unassessed": 0,
+          "synthetic": 4,
+          "synthetic_above_matched_ordinary": 4,
+          "synthetic_unassessed": 0,
+          "useful_before_point": 4,
+          "useful_flags": 1
+        },
+        "short": {
+          "available_matched_pairs": 4,
+          "background_flags": 0,
+          "misplaced_flags": 0,
+          "ordinary": 10,
+          "ordinary_flags": 0,
+          "ordinary_unassessed": 0,
+          "synthetic": 4,
+          "synthetic_above_matched_ordinary": 3,
+          "synthetic_unassessed": 0,
+          "useful_before_point": 3,
+          "useful_flags": 1
+        }
+      },
+      "0": {
+        "candidate": {
+          "available_matched_pairs": 4,
+          "background_flags": 0,
+          "misplaced_flags": 0,
+          "ordinary": 10,
+          "ordinary_flags": 0,
+          "ordinary_unassessed": 0,
+          "synthetic": 4,
+          "synthetic_above_matched_ordinary": 0,
+          "synthetic_unassessed": 0,
+          "useful_before_point": 0,
+          "useful_flags": 0
+        },
+        "full": {
+          "available_matched_pairs": 4,
+          "background_flags": 0,
+          "misplaced_flags": 3,
+          "ordinary": 10,
+          "ordinary_flags": 0,
+          "ordinary_unassessed": 0,
+          "synthetic": 4,
+          "synthetic_above_matched_ordinary": 4,
+          "synthetic_unassessed": 0,
+          "useful_before_point": 0,
+          "useful_flags": 0
+        },
+        "reduced_short": {
+          "available_matched_pairs": 4,
+          "background_flags": 0,
+          "misplaced_flags": 0,
+          "ordinary": 10,
+          "ordinary_flags": 0,
+          "ordinary_unassessed": 0,
+          "synthetic": 4,
+          "synthetic_above_matched_ordinary": 3,
+          "synthetic_unassessed": 0,
+          "useful_before_point": 4,
+          "useful_flags": 1
+        },
+        "short": {
+          "available_matched_pairs": 4,
+          "background_flags": 0,
+          "misplaced_flags": 0,
+          "ordinary": 10,
+          "ordinary_flags": 0,
+          "ordinary_unassessed": 0,
+          "synthetic": 4,
+          "synthetic_above_matched_ordinary": 3,
+          "synthetic_unassessed": 0,
+          "useful_before_point": 4,
+          "useful_flags": 1
+        }
+      },
+      "5": {
+        "candidate": {
+          "available_matched_pairs": 4,
+          "background_flags": 0,
+          "misplaced_flags": 0,
+          "ordinary": 10,
+          "ordinary_flags": 0,
+          "ordinary_unassessed": 0,
+          "synthetic": 4,
+          "synthetic_above_matched_ordinary": 1,
+          "synthetic_unassessed": 0,
+          "useful_before_point": 0,
+          "useful_flags": 0
+        },
+        "full": {
+          "available_matched_pairs": 4,
+          "background_flags": 0,
+          "misplaced_flags": 4,
+          "ordinary": 10,
+          "ordinary_flags": 0,
+          "ordinary_unassessed": 0,
+          "synthetic": 4,
+          "synthetic_above_matched_ordinary": 4,
+          "synthetic_unassessed": 0,
+          "useful_before_point": 0,
+          "useful_flags": 0
+        },
+        "reduced_short": {
+          "available_matched_pairs": 4,
+          "background_flags": 0,
+          "misplaced_flags": 0,
+          "ordinary": 10,
+          "ordinary_flags": 0,
+          "ordinary_unassessed": 0,
+          "synthetic": 4,
+          "synthetic_above_matched_ordinary": 4,
+          "synthetic_unassessed": 0,
+          "useful_before_point": 4,
+          "useful_flags": 2
+        },
+        "short": {
+          "available_matched_pairs": 4,
+          "background_flags": 0,
+          "misplaced_flags": 0,
+          "ordinary": 10,
+          "ordinary_flags": 0,
+          "ordinary_unassessed": 0,
+          "synthetic": 4,
+          "synthetic_above_matched_ordinary": 4,
+          "synthetic_unassessed": 0,
+          "useful_before_point": 4,
+          "useful_flags": 2
+        }
+      },
+      "None": {
+        "candidate": {
+          "available_matched_pairs": 0,
+          "background_flags": 0,
+          "misplaced_flags": 0,
+          "ordinary": 8,
+          "ordinary_flags": 0,
+          "ordinary_unassessed": 8,
+          "synthetic": 4,
+          "synthetic_above_matched_ordinary": 0,
+          "synthetic_unassessed": 4,
+          "useful_before_point": 0,
+          "useful_flags": 0
+        },
+        "full": {
+          "available_matched_pairs": 4,
+          "background_flags": 0,
+          "misplaced_flags": 3,
+          "ordinary": 8,
+          "ordinary_flags": 0,
+          "ordinary_unassessed": 0,
+          "synthetic": 4,
+          "synthetic_above_matched_ordinary": 4,
+          "synthetic_unassessed": 0,
+          "useful_before_point": 0,
+          "useful_flags": 0
+        },
+        "reduced_short": {
+          "available_matched_pairs": 4,
+          "background_flags": 0,
+          "misplaced_flags": 0,
+          "ordinary": 8,
+          "ordinary_flags": 0,
+          "ordinary_unassessed": 0,
+          "synthetic": 4,
+          "synthetic_above_matched_ordinary": 4,
+          "synthetic_unassessed": 0,
+          "useful_before_point": 4,
+          "useful_flags": 2
+        },
+        "short": {
+          "available_matched_pairs": 4,
+          "background_flags": 0,
+          "misplaced_flags": 0,
+          "ordinary": 8,
+          "ordinary_flags": 0,
+          "ordinary_unassessed": 0,
+          "synthetic": 4,
+          "synthetic_above_matched_ordinary": 4,
+          "synthetic_unassessed": 0,
+          "useful_before_point": 4,
+          "useful_flags": 3
+        }
+      }
+    },
+    "eligible_development_controls": 30,
+    "gate_pass": false,
+    "transfer": {
+      "-10": {
+        "candidate": {
+          "available_matched_pairs": 6,
+          "background_flags": 0,
+          "misplaced_flags": 0,
+          "ordinary": 18,
+          "ordinary_flags": 0,
+          "ordinary_unassessed": 0,
+          "synthetic": 6,
+          "synthetic_above_matched_ordinary": 0,
+          "synthetic_unassessed": 0,
+          "useful_before_point": 2,
+          "useful_flags": 0
+        }
+      },
+      "-5": {
+        "candidate": {
+          "available_matched_pairs": 4,
+          "background_flags": 0,
+          "misplaced_flags": 0,
+          "ordinary": 18,
+          "ordinary_flags": 0,
+          "ordinary_unassessed": 6,
+          "synthetic": 6,
+          "synthetic_above_matched_ordinary": 0,
+          "synthetic_unassessed": 2,
+          "useful_before_point": 1,
+          "useful_flags": 0
+        }
+      },
+      "0": {
+        "candidate": {
+          "available_matched_pairs": 4,
+          "background_flags": 0,
+          "misplaced_flags": 0,
+          "ordinary": 18,
+          "ordinary_flags": 0,
+          "ordinary_unassessed": 5,
+          "synthetic": 6,
+          "synthetic_above_matched_ordinary": 1,
+          "synthetic_unassessed": 2,
+          "useful_before_point": 1,
+          "useful_flags": 0
+        }
+      }
+    }
+  }
+}

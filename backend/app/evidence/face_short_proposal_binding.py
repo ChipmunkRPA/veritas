@@ -6,8 +6,12 @@ from __future__ import annotations
 from fractions import Fraction
 
 from app.evidence import face_paired_edge_binding as paired
+from app.evidence import scene_return_binding as webm
 
 METHOD = "face-short-return/9"
+WEBM_METHOD = "face-short-return/12"
+WEBM_ENCODING = webm.WEBM_ENCODING
+METHODS = frozenset({METHOD, WEBM_METHOD})
 POINT = 0.10
 ANCHOR_SAMPLES = tuple(range(4, 120, 10))
 EDGE_SCAN = range(6, 115)
@@ -15,6 +19,13 @@ DURATIONS = (5, 6, 7)
 MAX_EDGES = 16
 MAX_FACE_READS = 84
 PLAN = set(range(paired.FRAME_COUNT))
+
+
+def webm_source(table, encoding, carrier):
+    return (tuple(encoding) == WEBM_ENCODING and carrier == "webm" and table.pts
+            and (table.width, table.height) == (table.coded_width, table.coded_height) == paired.SIZE
+            and not (table.rotation or table.truncated or table.interpolated)
+            and webm.valid_webm_clock(table.time_base, table.pts, table.pts[0]))
 
 
 def edge_frames(edge):
@@ -29,6 +40,14 @@ def validate_record(record, source, *, table_pts=None, interpolated=(), rotation
     require = paired.require
     base = Fraction(source["time_base"])
     first_pts = record["source_first_pts"]
+    is_webm = record["method"] == WEBM_METHOD
+    encoding = WEBM_ENCODING if is_webm else paired.ENCODING
+    carrier = "webm" if is_webm else "mp4"
+    if is_webm:
+        clock = base == webm.WEBM_TIME_BASE and (table_pts is None or webm.valid_webm_clock(base, table_pts, first_pts))
+    else:
+        clock = table_pts is None or (len(table_pts) == paired.FRAME_COUNT
+            and all((pts - first_pts) * base == Fraction(i, paired.RATE) for i, pts in enumerate(table_pts)))
     require(
         set(record)
         == {
@@ -54,24 +73,16 @@ def validate_record(record, source, *, table_pts=None, interpolated=(), rotation
             "frame_inputs",
             "scene_frame_inputs",
         }
-        and record["method"] == METHOD
+        and record["method"] in METHODS
         and record["time_base"] == source["time_base"]
         and type(first_pts) is int
-        and record["source_encoding"] == list(paired.ENCODING)
-        and record["source_carrier"] == "mp4"
+        and record["source_encoding"] == list(encoding)
+        and record["source_carrier"] == carrier
         and (source["width"], source["height"]) == paired.SIZE
         and source["frame_count"] == paired.FRAME_COUNT
         and not (rotation or truncated or interpolated)
-        and (
-            table_pts is None
-            or (
-                len(table_pts) == paired.FRAME_COUNT
-                and all(
-                    (pts - first_pts) * base == Fraction(i, paired.RATE) for i, pts in enumerate(table_pts)
-                )
-            )
-        ),
-        "Brief face proposal requires its measured HEVC source and exact native clock",
+        and clock,
+        "Brief face proposal requires its measured carrier and exact native clock",
     )
     start, stop = (record[key] for key in ("start_frame_index", "end_frame_index"))
     edges = record["shortlist_edges"]
@@ -92,8 +103,9 @@ def validate_record(record, source, *, table_pts=None, interpolated=(), rotation
         record["scheduled_frame_indices"] == planned and len(planned) <= MAX_FACE_READS,
         "Brief face proposal exceeds its face sample budget",
     )
-    faces = paired.frame_rows(record["frame_inputs"], source, planned, first_pts, base, face=True)
-    scenes = paired.frame_rows(record["scene_frame_inputs"], source, PLAN, first_pts, base)
+    relative_tick = webm.webm_tick if is_webm else None
+    faces = paired.frame_rows(record["frame_inputs"], source, planned, first_pts, base, face=True, relative_tick=relative_tick)
+    scenes = paired.frame_rows(record["scene_frame_inputs"], source, PLAN, first_pts, base, relative_tick=relative_tick)
     require(
         set(scenes) == PLAN
         and all(scenes[i]["decoded_rgb_sha256"] == row["decoded_rgb_sha256"] for i, row in faces.items()),

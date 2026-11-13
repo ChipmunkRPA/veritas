@@ -505,6 +505,16 @@ def _short_source(inputs):
     return _qualified_hevc(inputs)
 
 
+def _short_webm_source(inputs):
+    if (not settings.video_face_short_carrier_review or settings.face_min_size != 48 or not isinstance(inputs, SequenceInputs)):
+        return False
+    encoding = (*inputs.encoding, inputs.codec_tag)
+    if encoding != proposal.WEBM_ENCODING:
+        return False
+    path = getattr(inputs.store, "path", None)
+    return path is not None and proposal.webm_source(inputs.table, encoding, face_return.source_carrier(path))
+
+
 def _window_source(inputs):
     if (settings.face_min_size != 48 or not isinstance(inputs, SequenceInputs)
             or len(inputs.table) != windows.COUNT):
@@ -579,9 +589,13 @@ def _with_spatial_cut(result, inputs, yunet, deadline):
 def _with_short_proposal(result, inputs, yunet, recognizer, deadline):
     if result.status in {'ok', 'not_applicable'} and _window_source(inputs):
         return _with_short_windows(result, inputs, yunet, recognizer, deadline)
-    if result.status in {'ok', 'not_applicable'} and _short_source(inputs) and not result.details.get("face_return"):
-        _propose_short(result.details, inputs, yunet, recognizer, deadline, face_detail_repeat.original_range(result.details))
-        return _describe_return(result)
+    if result.status in {'ok', 'not_applicable'} and not result.details.get("face_return"):
+        proposal_method = (proposal.METHOD if _short_source(inputs)
+                           else proposal.WEBM_METHOD if _short_webm_source(inputs) else None)
+        if proposal_method:
+            _propose_short(result.details, inputs, yunet, recognizer, deadline,
+                           face_detail_repeat.original_range(result.details), proposal_method=proposal_method)
+            return _describe_return(result)
     return result
 
 
@@ -701,7 +715,7 @@ def _with_short_windows(result, inputs, yunet, recognizer, deadline):
                           details={**detail,'review_only':True}, model_revisions=result.model_revisions)
 
 
-def _propose_short(details, inputs, yunet, recognizer, deadline, incumbent):
+def _propose_short(details, inputs, yunet, recognizer, deadline, incumbent, *, proposal_method=proposal.METHOD):
     coverage = {"status": "unassessed", "reason": "time_budget", "pixel_frames": 0,
                 "scheduled_frames": 0, "measured_face_frames": 0}
     details["face_short_proposal_check"] = coverage
@@ -775,8 +789,11 @@ def _propose_short(details, inputs, yunet, recognizer, deadline, incumbent):
         return
     (negative, start, end), proof, gaps = selected
     middle = min((i for i in faces if start <= i < end), key=lambda i: (abs(2*i-start-end), i))
-    details["face_return"] = {"method": proposal.METHOD, "time_base": table.time_base, "source_first_pts": table.pts[0],
-        "source_encoding": list(paired.ENCODING), "source_carrier": "mp4", "start_frame_index": start, "end_frame_index": end,
+    is_webm = proposal_method == proposal.WEBM_METHOD
+    details["face_return"] = {"method": proposal_method, "time_base": table.time_base, "source_first_pts": table.pts[0],
+        "source_encoding": [*inputs.encoding, inputs.codec_tag] if is_webm else list(paired.ENCODING),
+        "source_carrier": "webm" if is_webm else "mp4",
+        "start_frame_index": start, "end_frame_index": end,
         "start_pts": table.pts[start], "end_pts": table.pts[end], "start_stream_s": table.seconds(start), "end_stream_s": table.seconds(end),
         "response": -negative, "response_hex": (-negative).hex(), "edges": proof, "return_hex": [value.hex() for value in gaps],
         "anchors": dict(zip(paired.ROLES,(start-1,middle,end),strict=True)), "scheduled_frame_indices": planned,
@@ -794,7 +811,7 @@ class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
     def applicable(self, ctx):
         incumbent = super().applicable(ctx)
         inputs = ctx.outputs.face_review
-        if not incumbent.ok and (_short_source(inputs) or _window_source(inputs)):
+        if not incumbent.ok and (_short_source(inputs) or _short_webm_source(inputs) or _window_source(inputs)):
             return Applicability(True)
         if (not incumbent.ok and settings.video_face_short_return_review and settings.face_min_size == 48
                 and isinstance(inputs, SequenceInputs) and (face_return.schedule(inputs.table) is not None
@@ -814,7 +831,7 @@ class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
              *((f'The enabled paired-edge timing refinement reads at most {paired.MAX_READS} additional native frames.',)
                if settings.video_face_paired_edge_refinement else ()),
              *((f'The enabled brief proposal reads 120 pixel inputs and measures at most {proposal.MAX_FACE_READS} face inputs.',)
-               if settings.video_face_unrouted_short_review else ()),
+               if settings.video_face_unrouted_short_review or settings.video_face_short_carrier_review else ()),
              *(("The enabled overlapping review reads 240 native pictures and compares three bounded face input sets.",)
                if settings.video_face_short_window_review or settings.video_face_short_carrier_review else ()),
              *(("The enabled cut context reads up to 77 native pictures and detects at most three face boxes.",)
@@ -825,7 +842,7 @@ class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
         inputs: SequenceInputs = ctx.outputs.face_review
         table = inputs.table
         yunet, recognizer = ctx.lease.get(self.YUNET).obj, ctx.lease.get(self.APPEARANCE).obj
-        if (settings.video_face_short_return_review or _short_source(inputs) or _window_source(inputs)) and not (incumbent := super().applicable(ctx)).ok:
+        if (settings.video_face_short_return_review or _short_source(inputs) or _short_webm_source(inputs) or _window_source(inputs)) and not (incumbent := super().applicable(ctx)).ok:
             result = DetectorResult.not_applicable(incumbent.reason or 'insufficient coarse face context')
             result.details['appearance_check_status'] = 'not_applicable'
             result.model_revisions = revisions(ctx, self.YUNET, self.DINO, self.APPEARANCE)

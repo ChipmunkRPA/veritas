@@ -55,9 +55,14 @@ uses about 4.3 MB of publisher ranges and provides a positive-only,
 model-scored comparison using fixed earlier points. The
 [English named-generator census](audio-melo-short-source-census-2026-11-13.md#native-replay)
 checks exact prompt pairing and prior speaker overlap before scoring.
+The [DailyTalkEdit audit](audio-dailytalkedit-source-audit-2026-11-13.md)
+recounts the pinned splits and timing scope from publisher metadata.
 The [matched English speech-edit comparison](audio-sine-preview-2026-11-13.md#replay)
 adds reproducible original, cut-and-paste and seamless infilling comparisons
 from a public preview, retaining its one-reader and one-generator limits.
+The [earlier-copy alignment comparison](audio-aligned-speech-difference-2026-11-13.md#replay)
+replays both recorded source clocks, short neural-edit locations, and routine
+processing controls from SINE, PartialEdit and AMI without neural weights.
 The [Word boundary omission replay](writing-gao-archive-comparison-2026-11-13.md#word-omissions-at-paragraph-breaks)
 rebuilds 168 deliveries from the pinned public archive and verifies both
 original Word character positions for every reported omission.
@@ -72,6 +77,9 @@ The [exact-block comparison](image-reference-same-jpeg-2026-11-13.md#replay)
 compares the proposed fallback with the complete app on that diagnostic bank
 and on 322 separately held pairs. It preserves the per-source advancement
 decision alongside the edit and control counts.
+The [general-video insertion source audit](video-temporal-insert-source-intake-2026-11-13.md#replay)
+verifies the archive roster and edit labels with about 152 KB of publisher
+byte ranges, preserving original and inserted cadence separately.
 
 ### Replay delivery and earlier-copy comparisons
 

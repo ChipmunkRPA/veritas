@@ -149,11 +149,21 @@ integration remains unfinished.
   paired readers appeared in earlier local source plans, so the archive
   prefix supplies development material and cannot serve as a fresh
   reader-held test.
+- The [DailyTalkEdit audit](audio-dailytalkedit-source-audit-2026-11-13.md)
+  verified 2,475 dialogue records without downloading audio. The test
+  split contains no edits at or below 0.8 seconds, the corpus uses two
+  original actors and one generator, and upstream rights remain unclear.
 - The [matched English speech-edit comparison](audio-sine-preview-2026-11-13.md)
   found two of ten cut-and-paste edits with the dense voice windows,
   versus zero with the current windows. Neither window located the ten
   seamless infilling edits. Both left all ten original controls from
   the preview's sole reader unflagged. The dense check stays experimental.
+- The [aligned earlier-copy speech comparison](audio-aligned-speech-difference-2026-11-13.md)
+  found seven of ten seamless edits and 13 of 18 clean VoiceCraft edits
+  versus zero with the current earlier-copy check. A processing guard
+  removed the nine SINE resampling and equalization flags. It could not
+  assess any noisy edits or the second clean PartialEdit generator.
+  It remains experimental.
 - The [PDF Content Credentials check](pdf-content-credentials-2026-11-13.md)
   verifies a whole-file AI declaration locally before acquiring writing models.
   Signed document coverage, modified PDF controls and payment-first behavior
@@ -163,6 +173,10 @@ integration remains unfinished.
   added four useful locations per carrier on expressive speech with no added
   ordinary flags. It added none on the separately sourced conversational clips
   and retained a synchronized-copy error. The combination stays experimental.
+- The [general-video insertion source audit](video-temporal-insert-source-intake-2026-11-13.md)
+  verified 100 labeled triplets and identified 34 with equal declared
+  original and generated frame rates. Four smallest triplets form a
+  reproducible native preflight. This intake scored no media.
 - The [JPEG90 reflection check](image-regional-jpeg90-reflection-2026-11-13.md)
   retained all four useful locations in the 11-photo confirmation and reduced
   ordinary highlights from 15 to 10. The existing JPEG75 path flagged none of

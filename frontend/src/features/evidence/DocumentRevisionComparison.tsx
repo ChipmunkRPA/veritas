@@ -2,13 +2,21 @@ import { useEffect, useId, useRef, useState, type FormEvent } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { Button } from '../../components/ui'
 import { saveBlob } from '../../lib/api/reports'
-import { compareDraft, draftAvailability, type DraftExcerpt, type DraftExtension, type DocumentRevisionResponse } from './documentRevisionApi'
+import { compareDraft, draftAvailability, type DraftComparison, type DraftExcerpt, type DraftExtension, type DocumentRevisionResponse } from './documentRevisionApi'
 
 const labels = { body: 'Message body', quoted: 'Quoted text', signature: 'Signature' }
 const sourceFormats = { plain_text: 'Plain text', docx: 'Word body text', pdf: 'PDF text layer' }
 const contextLabels = ['Previous sentence', 'Changed sentence', 'Next sentence']
+const tableSkips = {
+  no_matching_position: 'No table at the same body position.',
+  unsupported_layout: 'Outside the supported table layout.',
+  changed_structure: 'The table shape, headings or row labels changed.',
+  comparison_limit: 'The table exceeded the comparison limit.',
+}
+type WordTables = NonNullable<DraftComparison['word_tables']>
+type CellExcerpt = WordTables['compared'][number]['changes'][number]['earlier']
 
-function MarkedExcerpt({ excerpt }: { excerpt: DraftExcerpt }) {
+function MarkedExcerpt({ excerpt }: { excerpt: DraftExcerpt | CellExcerpt }) {
   const points = Array.from(excerpt.text)
   let cursor = 0
   const changes = excerpt.changed_tokens.map(([from, to]) => {
@@ -19,6 +27,43 @@ function MarkedExcerpt({ excerpt }: { excerpt: DraftExcerpt }) {
     return <span key={from}>{context}<mark className="rounded-xs border-b border-accent bg-surface-3 text-text">{points.slice(start, end).join('')}</mark></span>
   })
   return <>{changes}{points.slice(cursor).join('')}</>
+}
+
+function WordTableResults({ coverage }: { coverage: WordTables }) {
+  return <section aria-label="Word table wording changes" className="mt-4">
+    <h3 className="m-0 text-small font-medium">Word table wording changes</h3>
+    <p className="mt-2 mb-0 text-caption text-text-muted">Table, row and column numbers start at one. Character positions start within each cell.</p>
+    {coverage.compared.map(table => <div key={table.body_index} className="mt-3">
+      <h4 className="m-0 text-small font-medium">Earlier table {table.earlier_table} · Analyzed table {table.later_table}</h4>
+      {!table.changes.length && <p className="mt-2 mb-0 text-small">No wording changes in this table.</p>}
+      {!!table.changes.length && <ol className="mt-2 mb-0 list-none space-y-3 p-0">
+        {table.changes.map(change => <li key={change.id} className="rounded-md border border-border p-3">
+          <h5 className="m-0 text-small font-medium">{change.id} · Row {change.row}, column {change.column}</h5>
+          <div className="mt-3 grid gap-4 sm:grid-cols-2">
+            {(['earlier', 'later'] as const).map(side => {
+              const excerpt = change[side]
+              return <div key={side} className="min-w-0">
+                <p className="m-0 text-small font-medium">{side === 'earlier' ? 'Earlier cell' : 'Analyzed cell'}</p>
+                <p className="mt-1 mb-0 font-mono text-caption text-text-muted">[{excerpt.start}, {excerpt.end})</p>
+                {excerpt.paragraphs.map(anchor => <p key={anchor.cell_index} className="mt-1 mb-0 font-mono text-caption text-text-muted">
+                  Paragraph {anchor.paragraph} [{anchor.start}, {anchor.end})
+                </p>)}
+                {excerpt.text ? <pre className="mt-2 mb-0 whitespace-pre-wrap break-words font-sans text-small"><MarkedExcerpt excerpt={excerpt} /></pre>
+                  : <p className="mt-2 mb-0 text-small text-text-muted">No text at this location.</p>}
+              </div>
+            })}
+          </div>
+        </li>)}
+      </ol>}
+    </div>)}
+    {coverage.skipped.map(table => <p key={table.body_index} className="mt-2 mb-0 text-small text-text-muted">
+      {[table.earlier_table != null && `Earlier table ${table.earlier_table}`, table.later_table != null && `Analyzed table ${table.later_table}`]
+        .filter(Boolean).join(' / ')}. {tableSkips[table.reason]}
+    </p>)}
+    {!!coverage.omitted_positions && <p className="mt-2 mb-0 text-small text-text-muted">
+      {coverage.omitted_positions} further table positions exceed the reporting limit.
+    </p>}
+  </section>
 }
 
 function Excerpt({ label, excerpt }: { label: string; excerpt: DraftExcerpt | null }) {
@@ -61,6 +106,8 @@ function DraftResult({ result }: { result: DocumentRevisionResponse }) {
   const docx = comparison.format === 'docx'
   const pdfText = comparison.format === 'pdf'
   const html = comparison.coordinate_space === 'email_html_extracted_text_unicode_codepoint'
+  const wordTables = comparison.word_tables
+  const changeCount = comparison.changes.length + (wordTables?.compared.reduce((sum, table) => sum + table.changes.length, 0) ?? 0)
   const formatLabel = mixed ? 'Wording change' : docx ? 'Word body text' : pdfText ? 'PDF text' : comparison.format === 'plain_text' ? 'Text' : null
   const downloadJson = () => saveBlob(new Blob([JSON.stringify(comparison, null, 2) + '\n'], { type: 'application/json' }),
     'chipmunk-verify-draft-comparison.json')
@@ -71,8 +118,8 @@ function DraftResult({ result }: { result: DocumentRevisionResponse }) {
   return <div className="mt-4 border-t border-border pt-4">
     <div className="flex flex-wrap items-baseline justify-between gap-3">
       <p className="m-0 text-small font-medium" role="status">
-        {comparison.changes.length === 0 ? `No word or punctuation changes found${html ? ' in the reply body' : ''}`
-          : `${comparison.changes.length} ${comparison.changes.length === 1 ? 'change' : 'changes'} found`}
+        {changeCount === 0 ? `No word or punctuation changes found${html ? ' in the reply body' : wordTables ? ' in the compared Word text' : ''}`
+          : `${changeCount} ${changeCount === 1 ? 'change' : 'changes'} found`}
       </p>
       <div className="flex flex-wrap gap-x-4 gap-y-1">
         {pdf?.startsWith('JVBERi0') && <Button variant="text" onClick={() => downloadPdf(pdf)}>Download comparison PDF</Button>}
@@ -144,6 +191,7 @@ function DraftResult({ result }: { result: DocumentRevisionResponse }) {
         </li>)}
       </ol>
     </>}
+    {wordTables && <WordTableResults coverage={wordTables} />}
   </div>
 }
 
@@ -185,7 +233,7 @@ function DraftForm({ analysisId, extension, earlierExtensions = [extension], pai
   return <section aria-labelledby={headingId} className="rounded-md border border-border p-4">
     <h2 id={headingId} className="m-0 text-body font-medium">Compare with an earlier draft</h2>
     <p className="mt-2 mb-0 text-small text-text-muted">Choose an earlier {earlierExtensions.length > 1 ? 'TXT, DOCX or PDF' : extension} file, up to 1 MiB, to see where the wording changed.</p>
-    {extension === '.docx' && <p className="mt-2 mb-0 text-small text-text-muted">Checks wording and punctuation in body paragraphs.</p>}
+    {extension === '.docx' && <p className="mt-2 mb-0 text-small text-text-muted">Checks body wording. Two Word drafts can also compare simple tables with the same headings, row labels and layout.</p>}
     {extension === '.eml' && <p className="mt-2 mb-0 text-small text-text-muted">Use two plain-text emails or two HTML-only replies with two, three, five or six simple body paragraphs and a trailing blockquote.</p>}
     {extension === '.pdf' && <p className="mt-2 mb-0 text-small text-text-muted">Use unlocked PDFs with selectable text on every page, up to 12 pages each.</p>}
     {earlierExtensions.length > 1 && <p className="mt-2 mb-0 text-small text-text-muted">For drafts in different formats, use an upright PDF with selectable text. Multi-page PDFs need a single column per page and can have up to 12 pages.</p>}

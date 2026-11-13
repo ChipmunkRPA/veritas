@@ -14,6 +14,7 @@ from app.evidence.document_revision import (
     MAX_BYTES,
     compare_with_sources,
 )
+from app.evidence.document_revision_word_tables import SCHEMA as WORD_TABLES_SCHEMA
 
 MAX_EXPORT = 2 * 1024 * 1024
 MAX_PDF_EXPORT = 4 * 1024 * 1024
@@ -50,6 +51,7 @@ def review(export: Path, earlier: Path, later: Path) -> dict:
     expected, old_text, new_text, word_layouts = compare_with_sources(
         _read(earlier, MAX_BYTES), _read(later, MAX_BYTES), extension, earlier_extension=old_extension,
         email_body_only=paired is not None, pdf_paired_text_only=paired is not None,
+        include_word_tables=received.get("schema") == WORD_TABLES_SCHEMA,
     )
     if json.dumps(received, sort_keys=True, allow_nan=False) != json.dumps(expected, sort_keys=True, allow_nan=False):
         raise ValueError("The comparison does not replay from these source bytes and decoded positions")
@@ -67,6 +69,11 @@ def review(export: Path, earlier: Path, later: Path) -> dict:
         result["decoded_html_ranges_verified"] = sum(
             len(token["source_ranges"]) for excerpt in excerpts for token in excerpt["html_tokens"]
         )
+    if tables := expected.get("word_tables"):
+        result["word_tables_compared"] = len(tables["compared"])
+        result["word_tables_skipped"] = len(tables["skipped"])
+        result["word_cell_token_ranges_verified"] = sum(len(change[side]["changed_tokens"])
+            for table in tables["compared"] for change in table["changes"] for side in ("earlier", "later"))
     if paired is not None:
         from app.evidence.document_revision_writing import verify
 

@@ -1,0 +1,938 @@
+{
+  "schema": "chipmunk.video-reference-extent-controls/1",
+  "policy": {
+    "scope": "Same 24 fps 720x480 comparison, conventional edits only. First six sorted CREMA-D selection sources with ready originals, disjoint from earlier confirmation. No score-based inclusion.",
+    "edits": "A 184x104 transient tone change and a 64x40 one, alternate locations and durations. Test identical delivery, strong recompression, full-clip global tone and mismatched sources. Exact masks are computed before H.264.",
+    "decision": "The extent must improve median spatial IoU by at least 0.15 on large changes, preserve 5/6 small changes at the frozen time/spatial rule, and lose at most one small location relative to the tile. At least 5/6 large locations, at most one neutral flag and zero wrong-source admissions. This confirms an observable change comparison only."
+  },
+  "freeze_sha256": "43ee6de343ec1d68603e570c9835ae74e7da7dbc6d51639f248e8536dec3c8c4",
+  "source_commitments": [
+    "96f5728fa2fc02624e045f0f7f75c89dcc23c8e9aca160c303fecb505e020564",
+    "6d6fb489f18baafed4287bf48805e9ae8d8a79ed78685b70d53b2c9d8148e18f",
+    "a8f271b1e6bd3b14228e2c1e028becd381c8eb92421c532e85bbe636451b4708",
+    "eaf35eaf7d45216ac7d19e038d9b104c4acffe88359c0d7227431c115ed7a884",
+    "c7bdf0aff034f58096ff7d95e90553d4000c8dc49f268ae4f1549cd084392667",
+    "30c1952089474bc32fa87f7162372ca72dbff9be8c8b94660aadf3dc5e629a1f"
+  ],
+  "rows": [
+    {
+      "status": "no_local_range",
+      "pictures": 50,
+      "source": 0,
+      "role": "original",
+      "truth": null
+    },
+    {
+      "status": "local_difference",
+      "pictures": 50,
+      "time_base": "1/12288",
+      "carrier_hashes": [
+        "7705cbb81efa2aae39b7074291c40d9e78e27686c5034c1af469b288c1494b72",
+        "5e3c1e23cf82404eb3967177c91538c6261fd4c24aa18af82cb285db03490be2"
+      ],
+      "score": 58.64372158646583,
+      "frames": [
+        8,
+        28
+      ],
+      "tile": {
+        "x": 216,
+        "y": 153,
+        "w": 48,
+        "h": 34
+      },
+      "extent": {
+        "x": 88,
+        "y": 88,
+        "w": 192,
+        "h": 112
+      },
+      "anchors": {
+        "before": {
+          "index": 7,
+          "time": "7/24",
+          "rgb_sha256": [
+            "66687d835ede655800357f61ab8f6aa67c9526dc0cae6ca607a4a161bc941c21",
+            "7b7eadbcd41a608eb627545676f53ea50ed69e55c0f51024a83924432dabd2a7"
+          ]
+        },
+        "during": {
+          "index": 18,
+          "time": "3/4",
+          "rgb_sha256": [
+            "4a61c4ad715ceac4b88e0ff17bb3d14add6500254652c46ccff536b4072e6d82",
+            "168d07ae84fa4e7ffc7c69eac4466dea7c17c991049d0f099de984137b74f79e"
+          ]
+        },
+        "after": {
+          "index": 28,
+          "time": "7/6",
+          "rgb_sha256": [
+            "f5787a671a6c4d26beec60e0a63f030b7b9d52c15bf99060ae04e81ea62f40dd",
+            "7a4f7b652cffad919145a9cee681a8e81b3c5d07df828974a04f99552460fe30"
+          ]
+        }
+      },
+      "source": 0,
+      "role": "large",
+      "truth": [
+        12,
+        28
+      ],
+      "overlap": {
+        "changed": 19136,
+        "tile": 1632,
+        "extent": 19136
+      }
+    },
+    {
+      "status": "local_difference",
+      "pictures": 50,
+      "time_base": "1/12288",
+      "carrier_hashes": [
+        "7705cbb81efa2aae39b7074291c40d9e78e27686c5034c1af469b288c1494b72",
+        "500e152a058b9217831dab598e041da1126372166e4acb5fd257ee4c8953652e"
+      ],
+      "score": 32.80916203050053,
+      "frames": [
+        14,
+        26
+      ],
+      "tile": {
+        "x": 96,
+        "y": 102,
+        "w": 48,
+        "h": 34
+      },
+      "extent": {
+        "x": 88,
+        "y": 88,
+        "w": 72,
+        "h": 48
+      },
+      "anchors": {
+        "before": {
+          "index": 13,
+          "time": "13/24",
+          "rgb_sha256": [
+            "456c0e77d485ce0b62811ade3d2e0c5226eeff641a4e36e2b01e142ec101cf45",
+            "21a2d058227f884c98de7b697a905673a47e08acc66981d87858ef9ad334fca9"
+          ]
+        },
+        "during": {
+          "index": 20,
+          "time": "5/6",
+          "rgb_sha256": [
+            "ef00c2bf5998d886e0167fa0359a17f37a7789f1c504195ab8dd2bf2b74e67c9",
+            "c19dfda8e6f0d1fc06ba7254c374fe54be578bc8456fae3aaaa720fa28abdb81"
+          ]
+        },
+        "after": {
+          "index": 26,
+          "time": "13/12",
+          "rgb_sha256": [
+            "e8fbf8c0032f362f2e7b1fdb285722d6f50b79aa5ff54dcfa63d1136c6b666f3",
+            "3fcaced8feedf4b4bae39ce4a8814230d0bf58e2bb56f967894d9ccbfd5b8b2d"
+          ]
+        }
+      },
+      "source": 0,
+      "role": "small",
+      "truth": [
+        12,
+        28
+      ],
+      "overlap": {
+        "changed": 2560,
+        "tile": 1584,
+        "extent": 2560
+      }
+    },
+    {
+      "status": "no_local_range",
+      "pictures": 50,
+      "source": 0,
+      "role": "compression",
+      "truth": null
+    },
+    {
+      "status": "no_local_range",
+      "pictures": 50,
+      "source": 0,
+      "role": "tone",
+      "truth": null
+    },
+    {
+      "status": "insufficient_shared_picture_content",
+      "pictures": 50,
+      "source": 0,
+      "role": "wrong",
+      "truth": null
+    },
+    {
+      "status": "no_local_range",
+      "pictures": 50,
+      "source": 1,
+      "role": "original",
+      "truth": null
+    },
+    {
+      "status": "local_difference",
+      "pictures": 50,
+      "time_base": "1/12288",
+      "carrier_hashes": [
+        "b9911e77692d7a20f082f6d2ff38e8c15e739624e9de331fbaabbaf6e81098f5",
+        "58674d57f09e0c823a2ce81e644d21427dac378e09e79f692c6eee900ffdcf7b"
+      ],
+      "score": 61.39912916597198,
+      "frames": [
+        10,
+        30
+      ],
+      "tile": {
+        "x": 192,
+        "y": 136,
+        "w": 48,
+        "h": 34
+      },
+      "extent": {
+        "x": 168,
+        "y": 112,
+        "w": 192,
+        "h": 112
+      },
+      "anchors": {
+        "before": {
+          "index": 9,
+          "time": "3/8",
+          "rgb_sha256": [
+            "5433ffce62526f9b00047d75f0304395f6b6b12146bcce93411f9cac9bae8cbf",
+            "2a282206e307e50a8df5236fb5f7af1fbf45107e64e6eb2f981813d74e715580"
+          ]
+        },
+        "during": {
+          "index": 20,
+          "time": "5/6",
+          "rgb_sha256": [
+            "55406320dc4a1f45e5db3b483cb3c6791a8b0cc6f8fc64abe4a084bd8475903c",
+            "53fd012a0866c3a11d3b0fb6bc14ec5292ba600aef51bfd0176e7a4cb660c8c5"
+          ]
+        },
+        "after": {
+          "index": 30,
+          "time": "5/4",
+          "rgb_sha256": [
+            "27bf04e4f11c38b73513cffd0d91dbde6706801e5ab42dbe4352ff97abd47352",
+            "feecde32def978095cd0b4f443f3aa7839771f16d480018fe78eefaf96e50b5f"
+          ]
+        }
+      },
+      "source": 1,
+      "role": "large",
+      "truth": [
+        13,
+        30
+      ],
+      "overlap": {
+        "changed": 19136,
+        "tile": 1632,
+        "extent": 19136
+      }
+    },
+    {
+      "status": "local_difference",
+      "pictures": 50,
+      "time_base": "1/12288",
+      "carrier_hashes": [
+        "b9911e77692d7a20f082f6d2ff38e8c15e739624e9de331fbaabbaf6e81098f5",
+        "e52c74ea690101c1ef76d7fa8aa94523800f5936e14ae1cce844d6808bd4928e"
+      ],
+      "score": 54.787350278742174,
+      "frames": [
+        11,
+        31
+      ],
+      "tile": {
+        "x": 192,
+        "y": 119,
+        "w": 48,
+        "h": 34
+      },
+      "extent": {
+        "x": 168,
+        "y": 112,
+        "w": 72,
+        "h": 48
+      },
+      "anchors": {
+        "before": {
+          "index": 10,
+          "time": "5/12",
+          "rgb_sha256": [
+            "8a971ca9a16ec7c69f5adf07919b7f9c2eb1dbc75f76e70d2784e7f888a5ba11",
+            "044980e272a5467b30d6934c12eb9e494807677b18f343b43105d623ac19509e"
+          ]
+        },
+        "during": {
+          "index": 21,
+          "time": "7/8",
+          "rgb_sha256": [
+            "d7555814390b59973147676d88f8a8403fda767ab3fa6dc7053ba7d520427093",
+            "2c967c829187f15bf7becdc5235f501399ecaa1bbb9e64ecbaa1ecff0937542c"
+          ]
+        },
+        "after": {
+          "index": 31,
+          "time": "31/24",
+          "rgb_sha256": [
+            "bc637afb51f3b8ba37c688345a2ac69d7ce301bd49d0e41ffb233390a917baa4",
+            "f547d973c2d54849f27e4ad551a0fe8ead9b0c07ad196f71f382846b287131e2"
+          ]
+        }
+      },
+      "source": 1,
+      "role": "small",
+      "truth": [
+        13,
+        30
+      ],
+      "overlap": {
+        "changed": 2560,
+        "tile": 1428,
+        "extent": 2560
+      }
+    },
+    {
+      "status": "no_local_range",
+      "pictures": 50,
+      "source": 1,
+      "role": "compression",
+      "truth": null
+    },
+    {
+      "status": "no_local_range",
+      "pictures": 50,
+      "source": 1,
+      "role": "tone",
+      "truth": null
+    },
+    {
+      "status": "insufficient_shared_picture_content",
+      "pictures": 50,
+      "source": 1,
+      "role": "wrong",
+      "truth": null
+    },
+    {
+      "status": "no_local_range",
+      "pictures": 50,
+      "source": 2,
+      "role": "original",
+      "truth": null
+    },
+    {
+      "status": "local_difference",
+      "pictures": 50,
+      "time_base": "1/12288",
+      "carrier_hashes": [
+        "0380ed6ac61d135cd761aeed6f848abb4c68b48234715515a4823326c43e85f2",
+        "1f64d60bf8610fe2ad5aa81abe1c65050827a5ca9352b004de8a1b4f06a2f512"
+      ],
+      "score": 38.4269085428294,
+      "frames": [
+        14,
+        34
+      ],
+      "tile": {
+        "x": 288,
+        "y": 170,
+        "w": 48,
+        "h": 34
+      },
+      "extent": {
+        "x": 240,
+        "y": 136,
+        "w": 192,
+        "h": 112
+      },
+      "anchors": {
+        "before": {
+          "index": 13,
+          "time": "13/24",
+          "rgb_sha256": [
+            "d74d8d0b387763edaded2c7773a58718bdb33b685a225e966dd3f62f13d68110",
+            "1194f2780d42053770708b5ac526d66acf4e3fc9b2f0530159fdd54eb0f1208e"
+          ]
+        },
+        "during": {
+          "index": 24,
+          "time": "1",
+          "rgb_sha256": [
+            "e310a4d8636d43ce936458b59f78c2d48883ae72e7b42e9e2f430c4c2aaca034",
+            "7bfce745e3be777dbe774e9543b23c6968c188ad097a002829a3ed76582cbd4f"
+          ]
+        },
+        "after": {
+          "index": 34,
+          "time": "17/12",
+          "rgb_sha256": [
+            "d48567f42ae4de8706bdef786745b0133c7a6c09b360a1fe3a10a4aa5a7d7b28",
+            "4d978dc67df6383a133630cb50dc04cb1946dd119d00a7f98eb3bd6f77c9e5fa"
+          ]
+        }
+      },
+      "source": 2,
+      "role": "large",
+      "truth": [
+        14,
+        32
+      ],
+      "overlap": {
+        "changed": 19136,
+        "tile": 1632,
+        "extent": 19136
+      }
+    },
+    {
+      "status": "local_difference",
+      "pictures": 50,
+      "time_base": "1/12288",
+      "carrier_hashes": [
+        "0380ed6ac61d135cd761aeed6f848abb4c68b48234715515a4823326c43e85f2",
+        "f945b289123ad85bc4c2f91215d3651b14dc2fc3b85be0f157a7cb98b6641272"
+      ],
+      "score": 33.921055145006555,
+      "frames": [
+        16,
+        36
+      ],
+      "tile": {
+        "x": 240,
+        "y": 153,
+        "w": 48,
+        "h": 34
+      },
+      "extent": {
+        "x": 240,
+        "y": 136,
+        "w": 72,
+        "h": 48
+      },
+      "anchors": {
+        "before": {
+          "index": 15,
+          "time": "5/8",
+          "rgb_sha256": [
+            "b272bcd710ce1b5853adf3bdab5b8552ab2cafd452a4f62f7de0c9fe9e9af902",
+            "e699efb7b6ef7c71147d661da27f8f719d1fe65027fa1b434a64f19769ee81cf"
+          ]
+        },
+        "during": {
+          "index": 26,
+          "time": "13/12",
+          "rgb_sha256": [
+            "54114f08bbe752815ae94a0acadbc5323c8eb7f21db2b0339a7ea64cd6a8fc22",
+            "ce4da04fd6d3971e5f6bbff4792cc8881ba07573a659534b7bef5d1498904e84"
+          ]
+        },
+        "after": {
+          "index": 36,
+          "time": "3/2",
+          "rgb_sha256": [
+            "054ccbdec4f0cdf9798001b8c2b51587c751cc8f7827180c770ddeb88b585f7b",
+            "25ae696ae0633d9a25e9088e3aac535a7081cb90666229bb7fc216909e6913ae"
+          ]
+        }
+      },
+      "source": 2,
+      "role": "small",
+      "truth": [
+        14,
+        32
+      ],
+      "overlap": {
+        "changed": 2560,
+        "tile": 1230,
+        "extent": 2560
+      }
+    },
+    {
+      "status": "no_local_range",
+      "pictures": 50,
+      "source": 2,
+      "role": "compression",
+      "truth": null
+    },
+    {
+      "status": "no_local_range",
+      "pictures": 50,
+      "source": 2,
+      "role": "tone",
+      "truth": null
+    },
+    {
+      "status": "insufficient_shared_picture_content",
+      "pictures": 50,
+      "source": 2,
+      "role": "wrong",
+      "truth": null
+    },
+    {
+      "status": "no_local_range",
+      "pictures": 50,
+      "source": 3,
+      "role": "original",
+      "truth": null
+    },
+    {
+      "status": "local_difference",
+      "pictures": 50,
+      "time_base": "1/12288",
+      "carrier_hashes": [
+        "f794fed8a79f36e964f0fad9aa58933cfadd086e23be2d33404aefeae9adf56f",
+        "ce72f053870c19f2dec5e625e87aa8cb12c856d63e2cdcfb1ec8f0c0642a4e2e"
+      ],
+      "score": 55.42344313228831,
+      "frames": [
+        12,
+        28
+      ],
+      "tile": {
+        "x": 432,
+        "y": 170,
+        "w": 48,
+        "h": 34
+      },
+      "extent": {
+        "x": 320,
+        "y": 160,
+        "w": 192,
+        "h": 112
+      },
+      "anchors": {
+        "before": {
+          "index": 11,
+          "time": "11/24",
+          "rgb_sha256": [
+            "1abe7a16f801eea4b660afd0dfb9d2ab990ca56f9c90d48e416a9ba960fd790e",
+            "9ce13653679a0c48cf2d3b552949173df93e505f24953d81c90179ea6575d513"
+          ]
+        },
+        "during": {
+          "index": 20,
+          "time": "5/6",
+          "rgb_sha256": [
+            "5fd996272e22a94a8049dc109c08fd87fea64d7ed0f841d28828f68e27da85db",
+            "8dec5eaab3f11996902a61f0ac56cd44a82cabae0f4806ff3ceea3a3b355f5b0"
+          ]
+        },
+        "after": {
+          "index": 28,
+          "time": "7/6",
+          "rgb_sha256": [
+            "7dec073654fb6cd6ffb2df87351521f532d41e17ffa461551258fc03c3f218c2",
+            "4626b72128b8a0bfe7fe904a123066802a9497ea540610dd69b27ab2d5fbbc1b"
+          ]
+        }
+      },
+      "source": 3,
+      "role": "large",
+      "truth": [
+        12,
+        28
+      ],
+      "overlap": {
+        "changed": 19136,
+        "tile": 1632,
+        "extent": 19136
+      }
+    },
+    {
+      "status": "local_difference",
+      "pictures": 50,
+      "time_base": "1/12288",
+      "carrier_hashes": [
+        "f794fed8a79f36e964f0fad9aa58933cfadd086e23be2d33404aefeae9adf56f",
+        "277cf2d89546dc93939b4ac635ec609d91f21ad61cc76dd50056c324dc7d2edf"
+      ],
+      "score": 38.4504750708739,
+      "frames": [
+        12,
+        28
+      ],
+      "tile": {
+        "x": 336,
+        "y": 170,
+        "w": 48,
+        "h": 34
+      },
+      "extent": {
+        "x": 320,
+        "y": 160,
+        "w": 72,
+        "h": 48
+      },
+      "anchors": {
+        "before": {
+          "index": 11,
+          "time": "11/24",
+          "rgb_sha256": [
+            "1abe7a16f801eea4b660afd0dfb9d2ab990ca56f9c90d48e416a9ba960fd790e",
+            "616b9c69849dedebf924d96aa7ee986cc5d045297b19b44c8962795dd8fdc4a0"
+          ]
+        },
+        "during": {
+          "index": 20,
+          "time": "5/6",
+          "rgb_sha256": [
+            "5fd996272e22a94a8049dc109c08fd87fea64d7ed0f841d28828f68e27da85db",
+            "273e7708a23dc7a30b5ff0dd06ecf635cb86a848165afc7dff017d55b2ba7631"
+          ]
+        },
+        "after": {
+          "index": 28,
+          "time": "7/6",
+          "rgb_sha256": [
+            "7dec073654fb6cd6ffb2df87351521f532d41e17ffa461551258fc03c3f218c2",
+            "97e633d2da0cac079b3090144341579dbac545eedc326ca45c5a9a2cb21022e4"
+          ]
+        }
+      },
+      "source": 3,
+      "role": "small",
+      "truth": [
+        12,
+        28
+      ],
+      "overlap": {
+        "changed": 2560,
+        "tile": 1632,
+        "extent": 2560
+      }
+    },
+    {
+      "status": "no_local_range",
+      "pictures": 50,
+      "source": 3,
+      "role": "compression",
+      "truth": null
+    },
+    {
+      "status": "no_local_range",
+      "pictures": 50,
+      "source": 3,
+      "role": "tone",
+      "truth": null
+    },
+    {
+      "status": "insufficient_shared_picture_content",
+      "pictures": 50,
+      "source": 3,
+      "role": "wrong",
+      "truth": null
+    },
+    {
+      "status": "no_local_range",
+      "pictures": 50,
+      "source": 4,
+      "role": "original",
+      "truth": null
+    },
+    {
+      "status": "local_difference",
+      "pictures": 50,
+      "time_base": "1/12288",
+      "carrier_hashes": [
+        "04d6c7eff3023728872e39403524bf5b85011c93b0ac7b3c33f3fcc595880c58",
+        "5506db51c003c948750095396d38b59d9d9646820d00940871a6d2d75e754a6a"
+      ],
+      "score": 64.86805882564946,
+      "frames": [
+        12,
+        28
+      ],
+      "tile": {
+        "x": 432,
+        "y": 153,
+        "w": 48,
+        "h": 34
+      },
+      "extent": {
+        "x": 432,
+        "y": 153,
+        "w": 48,
+        "h": 34
+      },
+      "anchors": {
+        "before": {
+          "index": 11,
+          "time": "11/24",
+          "rgb_sha256": [
+            "d19c70a983be8891b3fcbd98ee7693656483db2156e3ed5289a5bab536fb6d4e",
+            "3f2ec8e6f9c0dfa07efe90ed2746bea0dc0c8749cf187dddfbd3a8918dfaa1e9"
+          ]
+        },
+        "during": {
+          "index": 20,
+          "time": "5/6",
+          "rgb_sha256": [
+            "fd15c262184c2146b5a3a8a38125783d00fb2687f762866ba77674704c87dd92",
+            "55ce492e4af7ce08bc875786996f2e9a3f16c7eb7209395e92b8281095e0cf0c"
+          ]
+        },
+        "after": {
+          "index": 28,
+          "time": "7/6",
+          "rgb_sha256": [
+            "7c98215411e84dfe6224b127023c6146a38a0341f194e066ae4bddf43550e6cb",
+            "e96b19863297a2262661ba970014ed74723c6568c797d22fc1f34ce13e46191f"
+          ]
+        }
+      },
+      "source": 4,
+      "role": "large",
+      "truth": [
+        13,
+        30
+      ],
+      "overlap": {
+        "changed": 19136,
+        "tile": 1632,
+        "extent": 1632
+      }
+    },
+    {
+      "status": "local_difference",
+      "pictures": 50,
+      "time_base": "1/12288",
+      "carrier_hashes": [
+        "04d6c7eff3023728872e39403524bf5b85011c93b0ac7b3c33f3fcc595880c58",
+        "b3a9566042285fec3511543447561b6fc72289816407000c7fd3b3924dcf8354"
+      ],
+      "score": 66.68591566448117,
+      "frames": [
+        14,
+        30
+      ],
+      "tile": {
+        "x": 408,
+        "y": 102,
+        "w": 48,
+        "h": 34
+      },
+      "extent": {
+        "x": 400,
+        "y": 88,
+        "w": 72,
+        "h": 48
+      },
+      "anchors": {
+        "before": {
+          "index": 13,
+          "time": "13/24",
+          "rgb_sha256": [
+            "de88bc51ce100e66395959b182e8b46fe66fd6004844be5873d68ca9e034ddb2",
+            "126973392348c810f76c77205e04c2b3b4143f92a07b8e4011f5eed68a5450be"
+          ]
+        },
+        "during": {
+          "index": 22,
+          "time": "11/12",
+          "rgb_sha256": [
+            "348d4e4e1181744c0314f66d65c46be0d6680df34d596fa30506a14d90fc1489",
+            "336f5d1502e62907f026aaf94043d4d69611efa8366526096c6f98ede6675d26"
+          ]
+        },
+        "after": {
+          "index": 30,
+          "time": "5/4",
+          "rgb_sha256": [
+            "157a7867120f186d34f57bd243affaed663a5051d1d728b884bfc23560401c75",
+            "1e0c1893861142f02713414deb341e3e4b32bf458f9f297245ed80f4f5d1ab55"
+          ]
+        }
+      },
+      "source": 4,
+      "role": "small",
+      "truth": [
+        13,
+        30
+      ],
+      "overlap": {
+        "changed": 2560,
+        "tile": 1584,
+        "extent": 2560
+      }
+    },
+    {
+      "status": "no_local_range",
+      "pictures": 50,
+      "source": 4,
+      "role": "compression",
+      "truth": null
+    },
+    {
+      "status": "no_local_range",
+      "pictures": 50,
+      "source": 4,
+      "role": "tone",
+      "truth": null
+    },
+    {
+      "status": "insufficient_shared_picture_content",
+      "pictures": 50,
+      "source": 4,
+      "role": "wrong",
+      "truth": null
+    },
+    {
+      "status": "no_local_range",
+      "pictures": 50,
+      "source": 5,
+      "role": "original",
+      "truth": null
+    },
+    {
+      "status": "insufficient_shared_picture_content",
+      "pictures": 50,
+      "source": 5,
+      "role": "large",
+      "truth": [
+        14,
+        32
+      ]
+    },
+    {
+      "status": "local_difference",
+      "pictures": 50,
+      "time_base": "1/12288",
+      "carrier_hashes": [
+        "10bb42cd8a667f919366ee56bb5f4c671c2cba750951a09e179f24b7ee3c938d",
+        "069a1aa7f6a23db54f1d83f59c4073ca56e7c1c308fa22147c68002ea6d5a1b3"
+      ],
+      "score": 41.65808689430648,
+      "frames": [
+        14,
+        30
+      ],
+      "tile": {
+        "x": 480,
+        "y": 119,
+        "w": 48,
+        "h": 34
+      },
+      "extent": {
+        "x": 472,
+        "y": 112,
+        "w": 72,
+        "h": 48
+      },
+      "anchors": {
+        "before": {
+          "index": 13,
+          "time": "13/24",
+          "rgb_sha256": [
+            "5f10dc26d88ad6c332abb2d91a539cd2935d84bd90078fdf82f234bb442b6e3b",
+            "4de3c6bac0e3a69afaca40487f8c23f61af99b3957ba409650a78506485315e8"
+          ]
+        },
+        "during": {
+          "index": 22,
+          "time": "11/12",
+          "rgb_sha256": [
+            "d6297091060c3bcf0c53adce1ea625d9cd7cca051890fe11f66c9f5bc13b5505",
+            "5fd27670598abd2488a33469dc469212a8d6759c578f05f58461358047e5e14d"
+          ]
+        },
+        "after": {
+          "index": 30,
+          "time": "5/4",
+          "rgb_sha256": [
+            "4c0a0a930580ce7cc5e4c65f2beb32b71134811b16318326b5624aada8f924e2",
+            "fb0a1db5b21f7250fadb0f3813babce71489053fbf2d2a6c39eb0dd723d3098b"
+          ]
+        }
+      },
+      "source": 5,
+      "role": "small",
+      "truth": [
+        14,
+        32
+      ],
+      "overlap": {
+        "changed": 2560,
+        "tile": 1632,
+        "extent": 2560
+      }
+    },
+    {
+      "status": "no_local_range",
+      "pictures": 50,
+      "source": 5,
+      "role": "compression",
+      "truth": null
+    },
+    {
+      "status": "local_difference",
+      "pictures": 50,
+      "time_base": "1/12288",
+      "carrier_hashes": [
+        "10bb42cd8a667f919366ee56bb5f4c671c2cba750951a09e179f24b7ee3c938d",
+        "137a9dc524f6eb53086d1b0f1128c52f59e64cdada3b10903c786fd33b6e52ac"
+      ],
+      "score": 1.890045083737841,
+      "frames": [
+        17,
+        25
+      ],
+      "tile": {
+        "x": 336,
+        "y": 221,
+        "w": 48,
+        "h": 34
+      },
+      "extent": {
+        "x": 280,
+        "y": 128,
+        "w": 168,
+        "h": 160
+      },
+      "anchors": {
+        "before": {
+          "index": 16,
+          "time": "2/3",
+          "rgb_sha256": [
+            "2bc9c972e89614688956ab172caccb6f2cb65ce6b75193f76ae9801a7a08e30c",
+            "f188f1f4c3955b4d113c384ae36ae358d756dabb90b8bac8f399667f69c0f04b"
+          ]
+        },
+        "during": {
+          "index": 21,
+          "time": "7/8",
+          "rgb_sha256": [
+            "9ccb43f9f6798bb6722c9fc9eefb8504746939b5f92c5cac503df58769a27864",
+            "e69d9d7b6faacc3ee9328d905fad515aee4f8fceb817a96fa9fc10b8f01c6fc4"
+          ]
+        },
+        "after": {
+          "index": 25,
+          "time": "25/24",
+          "rgb_sha256": [
+            "061647f8de701cbd8df43003ef462bceabd98ea5e8391cabb828f22e8471ff17",
+            "55f9e07a7626d3766d28f28b458124c18335b480eaebb895a7e9748475377831"
+          ]
+        }
+      },
+      "source": 5,
+      "role": "tone",
+      "truth": null
+    },
+    {
+      "status": "insufficient_shared_picture_content",
+      "pictures": 50,
+      "source": 5,
+      "role": "wrong",
+      "truth": null
+    }
+  ]
+}

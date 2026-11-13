@@ -3515,9 +3515,10 @@ export interface components {
              * Schema
              * @enum {string}
              */
-            schema: "chipmunk.document-revision-comparison/1" | "chipmunk.document-revision-comparison/2" | "chipmunk.document-revision-comparison/3";
+            schema: "chipmunk.document-revision-comparison/1" | "chipmunk.document-revision-comparison/2" | "chipmunk.document-revision-comparison/3" | "chipmunk.document-revision-comparison/4";
             /** Scope */
             scope: string;
+            word_tables?: components["schemas"]["DraftWordTables"] | null;
         };
         /** DraftExcerpt */
         DraftExcerpt: {
@@ -3667,6 +3668,87 @@ export interface components {
             mime_part: string | null;
             /** Sha256 */
             sha256: string;
+        };
+        /** DraftWordCellChange */
+        DraftWordCellChange: {
+            /** Column */
+            column: number;
+            earlier: components["schemas"]["DraftWordCellExcerpt"];
+            /** Id */
+            id: string;
+            later: components["schemas"]["DraftWordCellExcerpt"];
+            /** Row */
+            row: number;
+        };
+        /** DraftWordCellExcerpt */
+        DraftWordCellExcerpt: {
+            /** Changed Tokens */
+            changed_tokens: [
+                number,
+                number
+            ][];
+            /** End */
+            end: number;
+            /** Paragraphs */
+            paragraphs: components["schemas"]["DraftWordCellParagraph"][];
+            /** Start */
+            start: number;
+            /** Text */
+            text: string;
+        };
+        /** DraftWordCellParagraph */
+        DraftWordCellParagraph: {
+            /** Cell Index */
+            cell_index: number;
+            /** End */
+            end: number;
+            /** Paragraph */
+            paragraph: number;
+            /** Start */
+            start: number;
+        };
+        /** DraftWordComparedTable */
+        DraftWordComparedTable: {
+            /** Body Index */
+            body_index: number;
+            /** Changes */
+            changes: components["schemas"]["DraftWordCellChange"][];
+            /** Columns */
+            columns: number;
+            /** Earlier Table */
+            earlier_table: number;
+            /** Later Table */
+            later_table: number;
+            /** Rows */
+            rows: number;
+        };
+        /** DraftWordSkippedTable */
+        DraftWordSkippedTable: {
+            /** Body Index */
+            body_index: number;
+            /** Earlier Table */
+            earlier_table: number | null;
+            /** Later Table */
+            later_table: number | null;
+            /**
+             * Reason
+             * @enum {string}
+             */
+            reason: "no_matching_position" | "unsupported_layout" | "changed_structure" | "comparison_limit";
+        };
+        /** DraftWordTables */
+        DraftWordTables: {
+            /** Compared */
+            compared: components["schemas"]["DraftWordComparedTable"][];
+            /**
+             * Coordinate Space
+             * @constant
+             */
+            coordinate_space: "docx_table_cell_unicode_codepoint";
+            /** Omitted Positions */
+            omitted_positions: number;
+            /** Skipped */
+            skipped: components["schemas"]["DraftWordSkippedTable"][];
         };
         /** DraftWritingFocus */
         DraftWritingFocus: {

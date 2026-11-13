@@ -5415,7 +5415,8 @@
             "enum": [
               "chipmunk.document-revision-comparison/1",
               "chipmunk.document-revision-comparison/2",
-              "chipmunk.document-revision-comparison/3"
+              "chipmunk.document-revision-comparison/3",
+              "chipmunk.document-revision-comparison/4"
             ],
             "title": "Schema",
             "type": "string"
@@ -5423,6 +5424,16 @@
           "scope": {
             "title": "Scope",
             "type": "string"
+          },
+          "word_tables": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DraftWordTables"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "required": [
@@ -5945,6 +5956,238 @@
           "mime_part"
         ],
         "title": "DraftSource",
+        "type": "object"
+      },
+      "DraftWordCellChange": {
+        "properties": {
+          "column": {
+            "title": "Column",
+            "type": "integer"
+          },
+          "earlier": {
+            "$ref": "#/components/schemas/DraftWordCellExcerpt"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "later": {
+            "$ref": "#/components/schemas/DraftWordCellExcerpt"
+          },
+          "row": {
+            "title": "Row",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "row",
+          "column",
+          "earlier",
+          "later"
+        ],
+        "title": "DraftWordCellChange",
+        "type": "object"
+      },
+      "DraftWordCellExcerpt": {
+        "properties": {
+          "changed_tokens": {
+            "items": {
+              "maxItems": 2,
+              "minItems": 2,
+              "prefixItems": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "integer"
+                }
+              ],
+              "type": "array"
+            },
+            "title": "Changed Tokens",
+            "type": "array"
+          },
+          "end": {
+            "title": "End",
+            "type": "integer"
+          },
+          "paragraphs": {
+            "items": {
+              "$ref": "#/components/schemas/DraftWordCellParagraph"
+            },
+            "title": "Paragraphs",
+            "type": "array"
+          },
+          "start": {
+            "title": "Start",
+            "type": "integer"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "start",
+          "end",
+          "text",
+          "changed_tokens",
+          "paragraphs"
+        ],
+        "title": "DraftWordCellExcerpt",
+        "type": "object"
+      },
+      "DraftWordCellParagraph": {
+        "properties": {
+          "cell_index": {
+            "title": "Cell Index",
+            "type": "integer"
+          },
+          "end": {
+            "title": "End",
+            "type": "integer"
+          },
+          "paragraph": {
+            "title": "Paragraph",
+            "type": "integer"
+          },
+          "start": {
+            "title": "Start",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "paragraph",
+          "cell_index",
+          "start",
+          "end"
+        ],
+        "title": "DraftWordCellParagraph",
+        "type": "object"
+      },
+      "DraftWordComparedTable": {
+        "properties": {
+          "body_index": {
+            "title": "Body Index",
+            "type": "integer"
+          },
+          "changes": {
+            "items": {
+              "$ref": "#/components/schemas/DraftWordCellChange"
+            },
+            "title": "Changes",
+            "type": "array"
+          },
+          "columns": {
+            "title": "Columns",
+            "type": "integer"
+          },
+          "earlier_table": {
+            "title": "Earlier Table",
+            "type": "integer"
+          },
+          "later_table": {
+            "title": "Later Table",
+            "type": "integer"
+          },
+          "rows": {
+            "title": "Rows",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "body_index",
+          "earlier_table",
+          "later_table",
+          "rows",
+          "columns",
+          "changes"
+        ],
+        "title": "DraftWordComparedTable",
+        "type": "object"
+      },
+      "DraftWordSkippedTable": {
+        "properties": {
+          "body_index": {
+            "title": "Body Index",
+            "type": "integer"
+          },
+          "earlier_table": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Earlier Table"
+          },
+          "later_table": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Later Table"
+          },
+          "reason": {
+            "enum": [
+              "no_matching_position",
+              "unsupported_layout",
+              "changed_structure",
+              "comparison_limit"
+            ],
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "body_index",
+          "earlier_table",
+          "later_table",
+          "reason"
+        ],
+        "title": "DraftWordSkippedTable",
+        "type": "object"
+      },
+      "DraftWordTables": {
+        "properties": {
+          "compared": {
+            "items": {
+              "$ref": "#/components/schemas/DraftWordComparedTable"
+            },
+            "title": "Compared",
+            "type": "array"
+          },
+          "coordinate_space": {
+            "const": "docx_table_cell_unicode_codepoint",
+            "title": "Coordinate Space",
+            "type": "string"
+          },
+          "omitted_positions": {
+            "title": "Omitted Positions",
+            "type": "integer"
+          },
+          "skipped": {
+            "items": {
+              "$ref": "#/components/schemas/DraftWordSkippedTable"
+            },
+            "title": "Skipped",
+            "type": "array"
+          }
+        },
+        "required": [
+          "coordinate_space",
+          "compared",
+          "skipped",
+          "omitted_positions"
+        ],
+        "title": "DraftWordTables",
         "type": "object"
       },
       "DraftWritingFocus": {

@@ -1,0 +1,142 @@
+{
+  "design": {
+    "additional_cue": "In the interior of the selected box, fit each signed second-difference parity from two same-parity neighbors on the other lattice. Use nonnegative coefficients, both directions, offsets 0 and 1, red and blue separately. Take the stronger axis's weaker channel norm recovery. Veto strictly above 0.70. Prior pilot consumed as development.",
+    "admission": "Keep at least 80% of prior-arm useful sharp and feathered results separately, retain at least seven useful generated results in each delivery, halve ordinary flags with at most one additional flagged untouched delivery (and no more than one total). Inference support is evaluated separately for each ordinary transformation.",
+    "confidence_weight": 0,
+    "footprint": "A new source-coordinate 128-pixel square per source, with locations alternating on-grid and half-cell offset. Sharp and 10-pixel feathered alternatives share one generated render.",
+    "generator": {
+      "guidance": 1.0,
+      "prompt": "Place a small cobalt-blue ceramic diamond tile in the center of the scene. Keep the existing surfaces, colors, exposure and composition outside the new tile.",
+      "scheduler": "flow_match_euler_discrete",
+      "size": 256,
+      "source_revision": "860e87183ceb29e39627c0612ebd66d8ea66e68c",
+      "steps": 4,
+      "use_kv_cache": false
+    },
+    "ordinary": "Independent positive/negative controls include one-axis shift, unequal diagonal shift, cubic interpolation, bilinear rotation, blur, a bilinear operation after 8-bit quantization and local tone; same native position and support as the generated replacements.",
+    "preselection": "Unchanged texture-supported stencil loss, at its earlier frozen point.",
+    "scope": "Native 16-bit linear developed crops from new camera models. Source-conditioned generated composites use only exact local changed pixels; one model, prompt and fixed compositing workflow.",
+    "useful": "Native changed-pixel IoU at least 0.30 and changed-pixel recall at least 0.50."
+  },
+  "exact_native_replays": 130,
+  "freeze_sha256": "f7df0d517a0242a149d7044066d925bdd7366729896e520ff34950ab00c943bd",
+  "generated_output_sha256": [
+    "fe7e75ca36a5e1dfde512e77baaa3de18f87162f3c4a4f3668a2440fbb9642a4",
+    "265ec1bc00fecd4a2494ed61f1e2357cf1324cf12586a0f09924df0e8fa551ff",
+    "fed5b2778dbed49eabcc0073e4dcee332949161e3d87fbe4068d9d9bc23ead70",
+    "fb80d85d8cd157c2b7c0ca90e68d420fa74d511e685b55299ab9c958893604c9",
+    "bf378268b9435421a6b3f9fbea934202b26cf542d89730ff7c058d9c75f221e8",
+    "07cc685b60b7fada44dd2956907469b48fe508b2bbd711bdb25b04b48ef56432",
+    "f35a7a7e270daefd56b236825711669c1eb4365835a39e5417298a7d0bed786c",
+    "85b2be43483b93bb5e9763d37f98fd78c8a3295d8083bea3c5a07d01526ad053",
+    "49764ed3c44f094b5260173c91433a12d2a4ec450ad07c3c34ce76419f57380e",
+    "b8e6a85de52f2ea90728418acbbc0589c8f7455a40af4ba42c6253bcfad3871e",
+    "dadeb7ce90e7cd6cb5959d303cac8c1c3e11d834277af3ddf0c77056d47f4fae",
+    "00b7becf237933d007d02468f5e9b6704b3a20d15137022a81f837ca57016c2e",
+    "34cb528ffed7de917a705c598bb88344ac901c0441a24c20cddf3146747fdc12"
+  ],
+  "ledger_sha256": "cd5489f5af2ef7e35db85f1ff6378851dd5d0de99b3710d8892cd9a98595b5db",
+  "measurements": {
+    "by_role": {
+      "bicubic_diagonal": {
+        "assessed": 13,
+        "base_flags": 10,
+        "base_useful": 10,
+        "files": 13,
+        "kept_flags": 2,
+        "kept_useful": 2,
+        "vetoed": 8
+      },
+      "bilinear_diagonal": {
+        "assessed": 13,
+        "base_flags": 7,
+        "base_useful": 7,
+        "files": 13,
+        "kept_flags": 1,
+        "kept_useful": 1,
+        "vetoed": 6
+      },
+      "bilinear_horizontal": {
+        "assessed": 13,
+        "base_flags": 0,
+        "base_useful": 0,
+        "files": 13,
+        "kept_flags": 0,
+        "kept_useful": 0,
+        "vetoed": 0
+      },
+      "blur": {
+        "assessed": 13,
+        "base_flags": 1,
+        "base_useful": 1,
+        "files": 13,
+        "kept_flags": 1,
+        "kept_useful": 1,
+        "vetoed": 0
+      },
+      "generated_feathered": {
+        "assessed": 13,
+        "base_flags": 5,
+        "base_useful": 5,
+        "files": 13,
+        "kept_flags": 5,
+        "kept_useful": 5,
+        "vetoed": 0
+      },
+      "generated_sharp": {
+        "assessed": 13,
+        "base_flags": 5,
+        "base_useful": 5,
+        "files": 13,
+        "kept_flags": 5,
+        "kept_useful": 5,
+        "vetoed": 0
+      },
+      "local_tone": {
+        "assessed": 13,
+        "base_flags": 0,
+        "base_useful": 0,
+        "files": 13,
+        "kept_flags": 0,
+        "kept_useful": 0,
+        "vetoed": 0
+      },
+      "quantized_bilinear": {
+        "assessed": 13,
+        "base_flags": 5,
+        "base_useful": 5,
+        "files": 13,
+        "kept_flags": 5,
+        "kept_useful": 5,
+        "vetoed": 0
+      },
+      "rotated": {
+        "assessed": 13,
+        "base_flags": 7,
+        "base_useful": 7,
+        "files": 13,
+        "kept_flags": 7,
+        "kept_useful": 7,
+        "vetoed": 0
+      },
+      "untouched": {
+        "assessed": 13,
+        "base_flags": 0,
+        "base_useful": 0,
+        "files": 13,
+        "kept_flags": 0,
+        "kept_useful": 0,
+        "vetoed": 0
+      }
+    },
+    "gate_passed": false,
+    "ordinary_base_flags": 30,
+    "ordinary_kept_flags": 16
+  },
+  "prior_receipt_sha256": "2a696f033f3d797d22189096a19609609e39c914de7a2162f5978078186a3872",
+  "prior_runner_sha256": "1d38bb6e056b41e2886681966cfce6c709f2ca28048535ec85a00578c86446c3",
+  "roster_sha256": "ac546ef78a7e3740a67f8e219547567e0729c544222942e9b513fb450a70e26e",
+  "runner_sha256": "0b7937515e084fd2e1f91f9a4040845da05965c2e8fbaf951d020b51e9fe473e",
+  "schema": "chipmunk.image-native-stencil-interpolation-transfer/1",
+  "source_groups": 13
+}

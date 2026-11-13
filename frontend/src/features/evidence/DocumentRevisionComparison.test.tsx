@@ -54,6 +54,37 @@ it('shows the page and both views of the source PDF crop', async () => {
   expect(screen.getByAltText('Analyzed version, page 2, original crop').getAttribute('src')).toBe('data:image/png;base64,YQ==')
 })
 
+it('shows exact changes in Word table cells and explains skipped table coverage', async () => {
+  const source = { sha256: '0'.repeat(64), bytes: 100, decoded_text_sha256: '1'.repeat(64), decoded_characters: 30, mime_part: null }
+  const comparison: DraftComparison = {
+    schema: 'chipmunk.document-revision-comparison/4', format: 'docx', coordinate_space: 'docx_body_unicode_codepoint',
+    earlier: source, later: source, scope: 'Matching Word tables.', interpretation: 'Source comparison only.', changes: [],
+    word_tables: { coordinate_space: 'docx_table_cell_unicode_codepoint', omitted_positions: 0, compared: [{
+      body_index: 1, earlier_table: 1, later_table: 1, rows: 2, columns: 2,
+      changes: [{ id: 'T01', row: 2, column: 2,
+        earlier: { start: 1, end: 5, text: '🚀red', changed_tokens: [[2, 5]],
+          paragraphs: [{ paragraph: 1, cell_index: 1, start: 1, end: 5 }] },
+        later: { start: 1, end: 7, text: '🚀green', changed_tokens: [[2, 7]],
+          paragraphs: [{ paragraph: 1, cell_index: 1, start: 1, end: 7 }] },
+      }],
+    }], skipped: [{ body_index: 3, earlier_table: 2, later_table: 2, reason: 'unsupported_layout' }] },
+  }
+  vi.mocked(draftAvailability).mockResolvedValue({ extension: '.docx', pairedCheckAvailable: false })
+  vi.mocked(compareDraft).mockResolvedValue({ comparison, pdf: 'JVBERi0xLjQK' })
+  show()
+  const input = await screen.findByLabelText('Earlier draft')
+  fireEvent.change(input, { target: { files: [new File(['earlier'], 'earlier.docx')] } })
+  fireEvent.click(screen.getByRole('button', { name: 'Compare drafts' }))
+  await screen.findByText('1 change found')
+  expect(screen.getByText('T01 · Row 2, column 2')).toBeTruthy()
+  expect(screen.getByText('Paragraph 1 [1, 7)')).toBeTruthy()
+  expect(screen.getByText('green').tagName).toBe('MARK')
+  expect(screen.getByText('green').closest('pre')?.textContent).toBe('🚀green')
+  expect(screen.getByText(/Analyzed table 2.*Outside the supported table layout/)).toBeTruthy()
+  expect(screen.getByRole('button', { name: 'Download comparison JSON' })).toBeTruthy()
+  expect(screen.getByRole('button', { name: 'Download comparison PDF' })).toBeTruthy()
+})
+
 it('displays the exact server excerpts and Unicode ranges and downloads both reports', async () => {
   const source = { sha256: '0'.repeat(64), bytes: 20, decoded_text_sha256: '1'.repeat(64), decoded_characters: 40, mime_part: '1.1' }
   const comparison: DraftComparison = {

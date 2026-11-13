@@ -520,6 +520,97 @@ def test_word_comparison_uses_exact_body_paragraph_coordinates_in_api_pdf_and_re
         review(export, old_path, new_path)
 
 
+def _word_with_table(value, *, label="Review", layout="simple", bold=False, body=True):
+    word = Document()
+    if body:
+        word.add_paragraph("A shared opening paragraph.")
+    if layout == "moved":
+        word.add_paragraph("Extra body paragraph.")
+    table = word.add_table(rows=3, cols=2)
+    for row, cells in enumerate((("Item", "Wording"), (label, value), ("Second row", "Unchanged"))):
+        for col, text in enumerate(cells):
+            table.cell(row, col).paragraphs[0].add_run(text).bold = bold
+    if layout == "merged":
+        table.cell(1, 0).merge(table.cell(2, 0))
+    if layout == "nested":
+        table.cell(2, 1).add_table(rows=1, cols=1)
+    if layout == "tracked":
+        table.cell(2, 1).paragraphs[0]._p.append(OxmlElement("w:ins"))
+    out = BytesIO()
+    word.save(out)
+    return out.getvalue()
+
+
+def test_word_table_comparison_keeps_exact_native_cell_ranges_across_api_pdf_and_replay(reference_http, monkeypatch, tmp_path):
+    f = _install(reference_http, monkeypatch)
+    monkeypatch.setattr(settings, "text_checkpoint_agreement_review", False)
+    before, after = "📎 Send the crème  brûlée Tuesday.", "📎 Send the café  order Thursday."
+    earlier, later = _word_with_table(before), _word_with_table(after, bold=True)
+    _saved(f, "word-table-draft", ".docx", later)
+    response = f.client.post(_url("word-table-draft"), headers=f.viewer, files=_upload(earlier, ".docx"), data={"include_pdf": "true"})
+    assert response.status_code == 200, response.text
+    result = response.json()
+    comparison = result["comparison"]
+    assert comparison["schema"] == "chipmunk.document-revision-comparison/4" and not comparison["changes"]
+    tables = comparison["word_tables"]
+    assert tables["coordinate_space"] == "docx_table_cell_unicode_codepoint" and not tables["skipped"]
+    (table,) = tables["compared"]
+    assert (table["body_index"], table["earlier_table"], table["later_table"]) == (1, 1, 1)
+    assert all((change["row"], change["column"]) == (2, 2) for change in table["changes"])
+    for change in table["changes"]:
+        for key, source in (("earlier", before), ("later", after)):
+            cell = change[key]
+            assert cell["text"] == source[cell["start"]:cell["end"]]
+            assert cell["paragraphs"] == [{"paragraph": 1, "cell_index": 1, "start": cell["start"], "end": cell["end"]}]
+            assert all(cell["start"] <= a < b <= cell["end"] for a, b in cell["changed_tokens"])
+    with pymupdf.open(stream=base64.b64decode(result["pdf"]), filetype="pdf") as report:
+        text = " ".join(" ".join(page.get_text().split()) for page in report)
+    assert "Word table wording changes" in text and "Row 2, column 2" in text
+    assert "brûlée" in text and "Thursday" in text
+    a, b, export = (tmp_path / name for name in ("earlier.docx", "later.docx", "report.json"))
+    a.write_bytes(earlier)
+    b.write_bytes(later)
+    export.write_text(json.dumps(comparison))
+    assert review(export, a, b)["word_cell_token_ranges_verified"] >= 6
+    table["changes"][0]["row"] += 1
+    export.write_text(json.dumps(comparison))
+    with pytest.raises(ValueError, match="does not replay"):
+        review(export, a, b)
+    historical, *_ = document_revision.compare_with_sources(earlier, later, ".docx", include_word_tables=False)
+    export.write_text(json.dumps(historical))
+    assert "word_tables_compared" not in review(export, a, b)
+
+
+@pytest.mark.parametrize(("layout", "label", "reason"), [
+    ("merged", "Review", "unsupported_layout"), ("nested", "Review", "unsupported_layout"),
+    ("tracked", "Review", "unsupported_layout"), ("moved", "Review", "no_matching_position"),
+    ("simple", "Changed row label", "changed_structure"),
+])
+def test_word_table_comparison_discloses_skips_and_preserves_other_text(layout, label, reason):
+    first = _word_with_table("Earlier value")
+    second = _word_with_table("Later value", layout=layout, label=label)
+    coverage = document_revision.compare(first, second, ".docx")["word_tables"]
+    assert not coverage["compared"]
+    assert {row["reason"] for row in coverage["skipped"]} == {reason}
+
+
+def test_word_table_comparison_has_a_total_token_cap_and_ignores_formatting():
+    earlier = _word_with_table("Unchanged")
+    reformatted = _word_with_table("Unchanged", bold=True)
+    [table] = document_revision.compare(earlier, reformatted, ".docx")["word_tables"]["compared"]
+    assert not table["changes"]
+    oversized = _word_with_table(" ".join(f"word{i}" for i in range(2001)))
+    result = document_revision.compare(earlier, oversized, ".docx")["word_tables"]
+    assert not result["compared"] and result["skipped"][0]["reason"] == "comparison_limit"
+
+
+def test_word_table_can_be_the_only_readable_text_in_both_drafts():
+    earlier, later = (_word_with_table(text, body=False) for text in ("Before", "After"))
+    comparison = document_revision.compare(earlier, later, ".docx")
+    assert not comparison["changes"] and comparison["earlier"]["decoded_characters"] == 0
+    assert comparison["word_tables"]["compared"][0]["changes"][0]["later"]["text"] == "After"
+
+
 def test_email_comparison_preserves_roles_and_exact_original_excerpts_in_json_and_pdf(reference_http, monkeypatch, tmp_path):
     f = _install(reference_http, monkeypatch)
     monkeypatch.setattr(settings, "text_checkpoint_agreement_review", False)

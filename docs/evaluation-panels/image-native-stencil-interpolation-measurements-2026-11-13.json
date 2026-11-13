@@ -1,0 +1,4827 @@
+{
+  "freeze_sha256": "f7df0d517a0242a149d7044066d925bdd7366729896e520ff34950ab00c943bd",
+  "rows": [
+    {
+      "base": {
+        "box": null,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": null,
+          "reference_positive_pixels": 0
+        },
+        "score": 0.0
+      },
+      "input_sha256": "b3e7899235350fdfcae3ebffab67ce0c58b32e7cef89fca8f345509f9e68c2c8",
+      "key": 909,
+      "parity_fit": null,
+      "role": "untouched",
+      "status": "assessed",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "base": {
+        "box": [
+          352,
+          320,
+          480,
+          448
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 1.4851771618047065
+      },
+      "input_sha256": "a9871d15a3faaae02c79da2d996d149ba94c1a35188e1f113c225377a3d1dcdc",
+      "key": 909,
+      "parity_fit": [
+        [
+          0.00028388937936973946,
+          8.906315465051495e-05
+        ],
+        [
+          0.9962927950113092,
+          0.9974319998615021
+        ]
+      ],
+      "role": "bilinear_horizontal",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "077545fe74d40b62c861c5204004a34adc6be545b6d52bca0932b846e80ba262"
+    },
+    {
+      "base": {
+        "box": [
+          352,
+          320,
+          480,
+          448
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 3.3507265187518565
+      },
+      "input_sha256": "80d3640b74b559f43dae22b9d03530c96a7fbf2b79bc98a0f91c4682c2d620c3",
+      "key": 909,
+      "parity_fit": [
+        [
+          0.9966831394859146,
+          0.9979357459114642
+        ],
+        [
+          0.9937641264249693,
+          0.9954728006114953
+        ]
+      ],
+      "role": "bilinear_diagonal",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "077545fe74d40b62c861c5204004a34adc6be545b6d52bca0932b846e80ba262"
+    },
+    {
+      "base": {
+        "box": [
+          352,
+          320,
+          480,
+          448
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 3.4331767814973664
+      },
+      "input_sha256": "0773c71872434858dab2f3d5f5dcbc0c6cc63ec2a236b5215e0216effce7295b",
+      "key": 909,
+      "parity_fit": [
+        [
+          0.8817362177674315,
+          0.7692596036261902
+        ],
+        [
+          0.8937328324772048,
+          0.7380796840439114
+        ]
+      ],
+      "role": "bicubic_diagonal",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "077545fe74d40b62c861c5204004a34adc6be545b6d52bca0932b846e80ba262"
+    },
+    {
+      "base": {
+        "box": [
+          352,
+          320,
+          480,
+          448
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 1,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16383,
+          "iou": 0.99993896484375,
+          "pixel_f1": 0.999969481490524,
+          "pixels": 3145728,
+          "precision": 0.99993896484375,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16383
+        },
+        "score": 3.346339076897813
+      },
+      "input_sha256": "59648a1acd13c592c067cad6647f599bbd791b1d0e2e12ab25f2455c97a46d95",
+      "key": 909,
+      "parity_fit": [
+        [
+          0.05632440171274289,
+          0.05064610437044115
+        ],
+        [
+          0.05692422827845811,
+          0.04987565558943885
+        ]
+      ],
+      "role": "rotated",
+      "status": "assessed",
+      "truth_pixels": 16383,
+      "truth_sha256": "aace20d47c224723d8d82f8c40c7e84d85bb810a0d60f83c979e444c33557d19"
+    },
+    {
+      "base": {
+        "box": [
+          384,
+          320,
+          480,
+          448
+        ],
+        "pixels": {
+          "false_negative_pixels": 4096,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.00390625,
+          "intersection": 12288,
+          "iou": 0.75,
+          "pixel_f1": 0.8571428571428571,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 12288,
+          "recall": 0.75,
+          "reference_positive_pixels": 16384
+        },
+        "score": 1.9243746780597017
+      },
+      "input_sha256": "11f0a6f2f3c18344353b8a9dbd8ac179b6f96551834bfacca8d346feb0849df8",
+      "key": 909,
+      "parity_fit": [
+        [
+          0.8809559542208404,
+          0.8605080632709752
+        ],
+        [
+          0.8609273945628201,
+          0.853768479202718
+        ]
+      ],
+      "role": "blur",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "077545fe74d40b62c861c5204004a34adc6be545b6d52bca0932b846e80ba262"
+    },
+    {
+      "base": {
+        "box": [
+          352,
+          320,
+          480,
+          448
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 2.718130649095903
+      },
+      "input_sha256": "8d00d3c9f5b8de787d51f38c72dc310fc54a790d6bc013258e764b45523a3725",
+      "key": 909,
+      "parity_fit": [
+        [
+          0.1571963617082195,
+          0.3478568245044894
+        ],
+        [
+          0.213399609803675,
+          0.3874651445457259
+        ]
+      ],
+      "role": "quantized_bilinear",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "077545fe74d40b62c861c5204004a34adc6be545b6d52bca0932b846e80ba262"
+    },
+    {
+      "base": {
+        "box": null,
+        "pixels": {
+          "false_negative_pixels": 16384,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 0.0,
+          "pixel_f1": 0.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": 0.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 0.0
+      },
+      "input_sha256": "1ee006acc500d0545d46950f105aa682d9919dbd6ba7eef628e704284caa2314",
+      "key": 909,
+      "parity_fit": null,
+      "role": "local_tone",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "077545fe74d40b62c861c5204004a34adc6be545b6d52bca0932b846e80ba262"
+    },
+    {
+      "base": {
+        "box": [
+          352,
+          320,
+          480,
+          448
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 3.4004910826853765
+      },
+      "input_sha256": "3e5dca6e6835eb108ba7c5922aab8d5b49cfb0d6af4f2f994d8375004828b355",
+      "key": 909,
+      "parity_fit": [
+        [
+          0.0,
+          0.0013209101766318287
+        ],
+        [
+          0.004613593304000907,
+          0.0
+        ]
+      ],
+      "role": "generated_sharp",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "077545fe74d40b62c861c5204004a34adc6be545b6d52bca0932b846e80ba262"
+    },
+    {
+      "base": {
+        "box": [
+          352,
+          320,
+          480,
+          448
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 3.339603917534449
+      },
+      "input_sha256": "710a8314e74fdfbe336404e0b3f5fa234585d5ef26dc1ced0134598ca3d69e39",
+      "key": 909,
+      "parity_fit": [
+        [
+          0.0,
+          0.0013209101766318287
+        ],
+        [
+          0.004613593304000907,
+          0.0
+        ]
+      ],
+      "role": "generated_feathered",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "077545fe74d40b62c861c5204004a34adc6be545b6d52bca0932b846e80ba262"
+    },
+    {
+      "base": {
+        "box": null,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": null,
+          "reference_positive_pixels": 0
+        },
+        "score": 0.0
+      },
+      "input_sha256": "e6eb50161c87fcf3ccffd215ac76415b1ae2148144cdede6bdfcf37ece66489f",
+      "key": 934,
+      "parity_fit": null,
+      "role": "untouched",
+      "status": "assessed",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "base": {
+        "box": [
+          736,
+          768,
+          832,
+          864
+        ],
+        "pixels": {
+          "false_negative_pixels": 7168,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0029296875,
+          "intersection": 9216,
+          "iou": 0.5625,
+          "pixel_f1": 0.72,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 9216,
+          "recall": 0.5625,
+          "reference_positive_pixels": 16384
+        },
+        "score": 1.0335000806626884
+      },
+      "input_sha256": "7fde3f9f33c3568f59dabbead8f7f5932bbd880a9b300a415c9a6709a2a9190a",
+      "key": 934,
+      "parity_fit": [
+        [
+          0.00010512295249742731,
+          0.00034511629061573235
+        ],
+        [
+          0.9933589832573776,
+          0.9927030848938473
+        ]
+      ],
+      "role": "bilinear_horizontal",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "91e9e76a2733560df78d92d2e5f1013ae7367eb1ab6342ed2773098eec66ee1d"
+    },
+    {
+      "base": {
+        "box": [
+          736,
+          768,
+          832,
+          864
+        ],
+        "pixels": {
+          "false_negative_pixels": 7168,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0029296875,
+          "intersection": 9216,
+          "iou": 0.5625,
+          "pixel_f1": 0.72,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 9216,
+          "recall": 0.5625,
+          "reference_positive_pixels": 16384
+        },
+        "score": 2.368913662488159
+      },
+      "input_sha256": "5aec8fdf877074f8c536fd581d8e2b0932fc9b2d27c1ecf63e22c1d73c8569fe",
+      "key": 934,
+      "parity_fit": [
+        [
+          0.9926284464358431,
+          0.9914355113154534
+        ],
+        [
+          0.9883621661680007,
+          0.9875287144877031
+        ]
+      ],
+      "role": "bilinear_diagonal",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "91e9e76a2733560df78d92d2e5f1013ae7367eb1ab6342ed2773098eec66ee1d"
+    },
+    {
+      "base": {
+        "box": [
+          736,
+          768,
+          832,
+          864
+        ],
+        "pixels": {
+          "false_negative_pixels": 7168,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0029296875,
+          "intersection": 9216,
+          "iou": 0.5625,
+          "pixel_f1": 0.72,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 9216,
+          "recall": 0.5625,
+          "reference_positive_pixels": 16384
+        },
+        "score": 2.508548762628287
+      },
+      "input_sha256": "80ae6bd473b3bdacd4bb13ef1706bc7832ce2cdd73b2a8feeaf636657a7ecac1",
+      "key": 934,
+      "parity_fit": [
+        [
+          0.7887817469085288,
+          0.9004843546892489
+        ],
+        [
+          0.9085564733208529,
+          0.7845939825838826
+        ]
+      ],
+      "role": "bicubic_diagonal",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "91e9e76a2733560df78d92d2e5f1013ae7367eb1ab6342ed2773098eec66ee1d"
+    },
+    {
+      "base": {
+        "box": [
+          704,
+          768,
+          864,
+          864
+        ],
+        "pixels": {
+          "false_negative_pixels": 4096,
+          "false_positive_pixels": 3073,
+          "flagged_area_fraction": 0.0048828125,
+          "intersection": 12287,
+          "iou": 0.6315275493421053,
+          "pixel_f1": 0.7741549317959865,
+          "pixels": 3145728,
+          "precision": 0.7999348958333333,
+          "predicted_positive_pixels": 15360,
+          "recall": 0.7499847402795581,
+          "reference_positive_pixels": 16383
+        },
+        "score": 2.2770831659001116
+      },
+      "input_sha256": "d9f5ba04bef46482f4739ba64c36dbbc2a11ff68bf234dcad1203ec3a80653fc",
+      "key": 934,
+      "parity_fit": [
+        [
+          0.026445125701267336,
+          0.023958336481561426
+        ],
+        [
+          0.0021509456642958558,
+          0.005981749160500205
+        ]
+      ],
+      "role": "rotated",
+      "status": "assessed",
+      "truth_pixels": 16383,
+      "truth_sha256": "3172d2553ef202473e997bcb365e01502f86f26e751bd87caa2ae0d603dcc6d4"
+    },
+    {
+      "base": {
+        "box": [
+          704,
+          736,
+          864,
+          896
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 9216,
+          "flagged_area_fraction": 0.008138020833333334,
+          "intersection": 16384,
+          "iou": 0.64,
+          "pixel_f1": 0.7804878048780488,
+          "pixels": 3145728,
+          "precision": 0.64,
+          "predicted_positive_pixels": 25600,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 0.613978906998149
+      },
+      "input_sha256": "312634bbe2559c0906d0b611c474642d077e47a185a6289e35fa238994b3018b",
+      "key": 934,
+      "parity_fit": [
+        [
+          0.0206561748004771,
+          0.0169502792653089
+        ],
+        [
+          0.009522135981390734,
+          0.008504665516831045
+        ]
+      ],
+      "role": "blur",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "91e9e76a2733560df78d92d2e5f1013ae7367eb1ab6342ed2773098eec66ee1d"
+    },
+    {
+      "base": {
+        "box": [
+          736,
+          768,
+          832,
+          864
+        ],
+        "pixels": {
+          "false_negative_pixels": 7168,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0029296875,
+          "intersection": 9216,
+          "iou": 0.5625,
+          "pixel_f1": 0.72,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 9216,
+          "recall": 0.5625,
+          "reference_positive_pixels": 16384
+        },
+        "score": 2.004823481612927
+      },
+      "input_sha256": "5bae6cb3b073f30178ff741d750c88bc29d38d5679589e948efa7c931dd0566f",
+      "key": 934,
+      "parity_fit": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.018575786058686927,
+          0.00968606988165388
+        ]
+      ],
+      "role": "quantized_bilinear",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "91e9e76a2733560df78d92d2e5f1013ae7367eb1ab6342ed2773098eec66ee1d"
+    },
+    {
+      "base": {
+        "box": null,
+        "pixels": {
+          "false_negative_pixels": 16384,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 0.0,
+          "pixel_f1": 0.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": 0.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 0.0
+      },
+      "input_sha256": "f125702c07a156b5d1391fe4c6b0f960d27fbc1178d7d3aa7e2b6500725c2758",
+      "key": 934,
+      "parity_fit": null,
+      "role": "local_tone",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "91e9e76a2733560df78d92d2e5f1013ae7367eb1ab6342ed2773098eec66ee1d"
+    },
+    {
+      "base": {
+        "box": [
+          736,
+          768,
+          832,
+          864
+        ],
+        "pixels": {
+          "false_negative_pixels": 7168,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0029296875,
+          "intersection": 9216,
+          "iou": 0.5625,
+          "pixel_f1": 0.72,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 9216,
+          "recall": 0.5625,
+          "reference_positive_pixels": 16384
+        },
+        "score": 2.3028735762523755
+      },
+      "input_sha256": "d1dc82462fa6ca4682cf64e3af782ec46eea8229d2c47813f45bec6d196ce231",
+      "key": 934,
+      "parity_fit": [
+        [
+          0.000732949274972805,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ],
+      "role": "generated_sharp",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "91e9e76a2733560df78d92d2e5f1013ae7367eb1ab6342ed2773098eec66ee1d"
+    },
+    {
+      "base": {
+        "box": [
+          736,
+          768,
+          832,
+          864
+        ],
+        "pixels": {
+          "false_negative_pixels": 7168,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0029296875,
+          "intersection": 9216,
+          "iou": 0.5625,
+          "pixel_f1": 0.72,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 9216,
+          "recall": 0.5625,
+          "reference_positive_pixels": 16384
+        },
+        "score": 2.3028735762523755
+      },
+      "input_sha256": "9941fec2148176b761dff9f30fac294d20abfef28ffebb841b6b8b4b8c9bae5d",
+      "key": 934,
+      "parity_fit": [
+        [
+          0.000732949274972805,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ],
+      "role": "generated_feathered",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "91e9e76a2733560df78d92d2e5f1013ae7367eb1ab6342ed2773098eec66ee1d"
+    },
+    {
+      "base": {
+        "box": null,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": null,
+          "reference_positive_pixels": 0
+        },
+        "score": 0.0
+      },
+      "input_sha256": "845ca44b8ab5a1163a1d9a9ff1cddfbe3e1f71ac6572c80431395530f873caa8",
+      "key": 1030,
+      "parity_fit": null,
+      "role": "untouched",
+      "status": "assessed",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "base": {
+        "box": [
+          1056,
+          1152,
+          1184,
+          1280
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 1.371226709152214
+      },
+      "input_sha256": "93da6a6429e27f1bf2f4dfcc980c41152335f4bab7270702e09aaca060e93019",
+      "key": 1030,
+      "parity_fit": [
+        [
+          0.0001615698817440947,
+          1.3312633168949262e-05
+        ],
+        [
+          0.9877857460129459,
+          0.9922879243959464
+        ]
+      ],
+      "role": "bilinear_horizontal",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "4b9ea07b54c4caae8153c0cc89161e2d50ec3d8ecf72baa7b09405063d3d44b1"
+    },
+    {
+      "base": {
+        "box": [
+          1056,
+          1152,
+          1184,
+          1280
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 3.1195630261265412
+      },
+      "input_sha256": "9a5f8b2f43cec0f9b694bcea9ee1acd731f8a3d9b1e9f64e8fc82f8bd1f42e1f",
+      "key": 1030,
+      "parity_fit": [
+        [
+          0.9970045509813205,
+          0.9986438028478112
+        ],
+        [
+          0.9786461787783537,
+          0.986567692782428
+        ]
+      ],
+      "role": "bilinear_diagonal",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "4b9ea07b54c4caae8153c0cc89161e2d50ec3d8ecf72baa7b09405063d3d44b1"
+    },
+    {
+      "base": {
+        "box": [
+          1056,
+          1152,
+          1184,
+          1280
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 3.3604287417606993
+      },
+      "input_sha256": "030ed28a397c42ab0088c47835db4665d55458fc56e65b4fba572080f9d7d55a",
+      "key": 1030,
+      "parity_fit": [
+        [
+          0.7734783070804393,
+          0.900674476906067
+        ],
+        [
+          0.9090151688512044,
+          0.7628813961542373
+        ]
+      ],
+      "role": "bicubic_diagonal",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "4b9ea07b54c4caae8153c0cc89161e2d50ec3d8ecf72baa7b09405063d3d44b1"
+    },
+    {
+      "base": {
+        "box": [
+          1056,
+          1152,
+          1184,
+          1280
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 1,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16383,
+          "iou": 0.99993896484375,
+          "pixel_f1": 0.999969481490524,
+          "pixels": 3145728,
+          "precision": 0.99993896484375,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16383
+        },
+        "score": 3.1923601873304173
+      },
+      "input_sha256": "42d28130ac75e4bac07550dfb826a349b4e6731425c406ffaa2d27617876a798",
+      "key": 1030,
+      "parity_fit": [
+        [
+          0.04125165963421262,
+          0.03759135222826271
+        ],
+        [
+          0.035148305379506084,
+          0.04535215686226535
+        ]
+      ],
+      "role": "rotated",
+      "status": "assessed",
+      "truth_pixels": 16383,
+      "truth_sha256": "5b9c0f0179029faf189b30fb50375e6af8618eabc6b52886cc8bfa0df8551929"
+    },
+    {
+      "base": {
+        "box": [
+          1056,
+          1152,
+          1152,
+          1280
+        ],
+        "pixels": {
+          "false_negative_pixels": 4096,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.00390625,
+          "intersection": 12288,
+          "iou": 0.75,
+          "pixel_f1": 0.8571428571428571,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 12288,
+          "recall": 0.75,
+          "reference_positive_pixels": 16384
+        },
+        "score": 1.2696068066558877
+      },
+      "input_sha256": "b2c345940f6d555eef551952532dd08b6aaae18960d06a127091c08c8e30ee74",
+      "key": 1030,
+      "parity_fit": [
+        [
+          0.8332562793073306,
+          0.8188548664418808
+        ],
+        [
+          0.8323530082154476,
+          0.8458230508549749
+        ]
+      ],
+      "role": "blur",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "4b9ea07b54c4caae8153c0cc89161e2d50ec3d8ecf72baa7b09405063d3d44b1"
+    },
+    {
+      "base": {
+        "box": [
+          1056,
+          1152,
+          1184,
+          1280
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 2.651618827171126
+      },
+      "input_sha256": "ee280f9f91395a9ce029f56ce5313efd5b129c469c02565aff9ad6c1bc9cbb36",
+      "key": 1030,
+      "parity_fit": [
+        [
+          0.2086011280048703,
+          0.5491406187142216
+        ],
+        [
+          0.0013771090571972344,
+          0.005867211518368443
+        ]
+      ],
+      "role": "quantized_bilinear",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "4b9ea07b54c4caae8153c0cc89161e2d50ec3d8ecf72baa7b09405063d3d44b1"
+    },
+    {
+      "base": {
+        "box": null,
+        "pixels": {
+          "false_negative_pixels": 16384,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 0.0,
+          "pixel_f1": 0.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": 0.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 0.0
+      },
+      "input_sha256": "5e002d48fe3fef0cfa4442d8f75ff724acaeb30d50ef649fc1da04a0af40689f",
+      "key": 1030,
+      "parity_fit": null,
+      "role": "local_tone",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "4b9ea07b54c4caae8153c0cc89161e2d50ec3d8ecf72baa7b09405063d3d44b1"
+    },
+    {
+      "base": {
+        "box": [
+          1056,
+          1152,
+          1184,
+          1280
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 3.0177394969071316
+      },
+      "input_sha256": "1b938ea2ee956ac8a90e91fb6919580166981dd928957b1e3ab270130cb57f69",
+      "key": 1030,
+      "parity_fit": [
+        [
+          0.0027311054608792906,
+          0.0003179639087053099
+        ],
+        [
+          0.003923154152676966,
+          0.0
+        ]
+      ],
+      "role": "generated_sharp",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "4b9ea07b54c4caae8153c0cc89161e2d50ec3d8ecf72baa7b09405063d3d44b1"
+    },
+    {
+      "base": {
+        "box": [
+          1056,
+          1152,
+          1184,
+          1280
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 2.9784632121702375
+      },
+      "input_sha256": "0beee592b8f68eb2aedc6e5b968c0e8eb3521085d9b1791e69a33fa96011648f",
+      "key": 1030,
+      "parity_fit": [
+        [
+          0.0027311054608792906,
+          0.0003179639087053099
+        ],
+        [
+          0.003923154152676966,
+          0.0
+        ]
+      ],
+      "role": "generated_feathered",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "4b9ea07b54c4caae8153c0cc89161e2d50ec3d8ecf72baa7b09405063d3d44b1"
+    },
+    {
+      "base": {
+        "box": null,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": null,
+          "reference_positive_pixels": 0
+        },
+        "score": 0.0
+      },
+      "input_sha256": "4e51c1f364f9274c3e390a67dc447f13881bccee148210c722750d0f16b29f81",
+      "key": 1080,
+      "parity_fit": null,
+      "role": "untouched",
+      "status": "assessed",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "base": {
+        "box": [
+          1408,
+          704,
+          1568,
+          800
+        ],
+        "pixels": {
+          "false_negative_pixels": 4096,
+          "false_positive_pixels": 3080,
+          "flagged_area_fraction": 0.0048828125,
+          "intersection": 12280,
+          "iou": 0.6311677631578947,
+          "pixel_f1": 0.7738845475170154,
+          "pixels": 3145728,
+          "precision": 0.7994791666666666,
+          "predicted_positive_pixels": 15360,
+          "recall": 0.7498778700537372,
+          "reference_positive_pixels": 16376
+        },
+        "score": 1.1458689043350059
+      },
+      "input_sha256": "8617d959291f079a18eb28f293b38081fdfabbfaedb1ace44c96f00f00d26c11",
+      "key": 1080,
+      "parity_fit": [
+        [
+          6.42958984102826e-05,
+          0.00013138330135220588
+        ],
+        [
+          0.6809128856911186,
+          0.5680084285545319
+        ]
+      ],
+      "role": "bilinear_horizontal",
+      "status": "assessed",
+      "truth_pixels": 16376,
+      "truth_sha256": "ea595d55d5eb13b8d92cd79f386c6eb7d8c3400e2058f740bd3949a203f1e1b2"
+    },
+    {
+      "base": {
+        "box": [
+          1408,
+          704,
+          1568,
+          832
+        ],
+        "pixels": {
+          "false_negative_pixels": 2048,
+          "false_positive_pixels": 6144,
+          "flagged_area_fraction": 0.006510416666666667,
+          "intersection": 14336,
+          "iou": 0.6363636363636364,
+          "pixel_f1": 0.7777777777777778,
+          "pixels": 3145728,
+          "precision": 0.7,
+          "predicted_positive_pixels": 20480,
+          "recall": 0.875,
+          "reference_positive_pixels": 16384
+        },
+        "score": 2.690669495505466
+      },
+      "input_sha256": "9b3323c4066c454d2e50c7afeefe4fa7ea7ec3a7dde8741a7f85f836b8edebfc",
+      "key": 1080,
+      "parity_fit": [
+        [
+          0.3634549814293826,
+          0.3073929715330531
+        ],
+        [
+          0.4980571117461329,
+          0.2760565597754078
+        ]
+      ],
+      "role": "bilinear_diagonal",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "658f1042ffa431b42d29ec581af30b3155d8b17705aa791225d67d123fbeaeca"
+    },
+    {
+      "base": {
+        "box": [
+          1408,
+          704,
+          1568,
+          832
+        ],
+        "pixels": {
+          "false_negative_pixels": 2048,
+          "false_positive_pixels": 6144,
+          "flagged_area_fraction": 0.006510416666666667,
+          "intersection": 14336,
+          "iou": 0.6363636363636364,
+          "pixel_f1": 0.7777777777777778,
+          "pixels": 3145728,
+          "precision": 0.7,
+          "predicted_positive_pixels": 20480,
+          "recall": 0.875,
+          "reference_positive_pixels": 16384
+        },
+        "score": 2.8041659790156506
+      },
+      "input_sha256": "cd02f9c35e3b198902b1e5e9213aa91b274370c90bc1c2786a0be197f87d55d7",
+      "key": 1080,
+      "parity_fit": [
+        [
+          0.47961247749625735,
+          0.4979992633517637
+        ],
+        [
+          0.6013548655624367,
+          0.5449366923002397
+        ]
+      ],
+      "role": "bicubic_diagonal",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "658f1042ffa431b42d29ec581af30b3155d8b17705aa791225d67d123fbeaeca"
+    },
+    {
+      "base": {
+        "box": [
+          1408,
+          704,
+          1568,
+          832
+        ],
+        "pixels": {
+          "false_negative_pixels": 2048,
+          "false_positive_pixels": 6145,
+          "flagged_area_fraction": 0.006510416666666667,
+          "intersection": 14335,
+          "iou": 0.6363192471590909,
+          "pixel_f1": 0.7777446219786778,
+          "pixels": 3145728,
+          "precision": 0.699951171875,
+          "predicted_positive_pixels": 20480,
+          "recall": 0.874992370139779,
+          "reference_positive_pixels": 16383
+        },
+        "score": 2.68344265566209
+      },
+      "input_sha256": "a7dc8e1edb2e58febc6d7aef292b40995e17725326dbddc013547d494b72ad43",
+      "key": 1080,
+      "parity_fit": [
+        [
+          0.02746250773747927,
+          0.030505049595230038
+        ],
+        [
+          0.02413683186756377,
+          0.0031999644629169266
+        ]
+      ],
+      "role": "rotated",
+      "status": "assessed",
+      "truth_pixels": 16383,
+      "truth_sha256": "653f6417bc8b281f4d3c7f2b301900c6bc4d9bdf45004761c800fcb711a654fe"
+    },
+    {
+      "base": {
+        "box": [
+          1408,
+          704,
+          1568,
+          832
+        ],
+        "pixels": {
+          "false_negative_pixels": 2048,
+          "false_positive_pixels": 6144,
+          "flagged_area_fraction": 0.006510416666666667,
+          "intersection": 14336,
+          "iou": 0.6363636363636364,
+          "pixel_f1": 0.7777777777777778,
+          "pixels": 3145728,
+          "precision": 0.7,
+          "predicted_positive_pixels": 20480,
+          "recall": 0.875,
+          "reference_positive_pixels": 16384
+        },
+        "score": 2.6678642551575886
+      },
+      "input_sha256": "fdb1623e1840cdaf531484dd1f63bb618667087a934447fc69bf1a3971b0ae7d",
+      "key": 1080,
+      "parity_fit": [
+        [
+          0.1264842741700669,
+          0.23564455980129084
+        ],
+        [
+          0.05552760083636521,
+          0.006064521246612831
+        ]
+      ],
+      "role": "blur",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "658f1042ffa431b42d29ec581af30b3155d8b17705aa791225d67d123fbeaeca"
+    },
+    {
+      "base": {
+        "box": [
+          1408,
+          704,
+          1568,
+          800
+        ],
+        "pixels": {
+          "false_negative_pixels": 4096,
+          "false_positive_pixels": 3072,
+          "flagged_area_fraction": 0.0048828125,
+          "intersection": 12288,
+          "iou": 0.631578947368421,
+          "pixel_f1": 0.7741935483870968,
+          "pixels": 3145728,
+          "precision": 0.8,
+          "predicted_positive_pixels": 15360,
+          "recall": 0.75,
+          "reference_positive_pixels": 16384
+        },
+        "score": 2.2921922106862205
+      },
+      "input_sha256": "0f2f59560e80865acac5b7832627cf1849016b98da7a4b5e56259ac833d7d3cf",
+      "key": 1080,
+      "parity_fit": [
+        [
+          0.2476788110515452,
+          0.4211491617028986
+        ],
+        [
+          0.10343016683139805,
+          0.01034704787644014
+        ]
+      ],
+      "role": "quantized_bilinear",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "658f1042ffa431b42d29ec581af30b3155d8b17705aa791225d67d123fbeaeca"
+    },
+    {
+      "base": {
+        "box": null,
+        "pixels": {
+          "false_negative_pixels": 16384,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 0.0,
+          "pixel_f1": 0.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": 0.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 0.0
+      },
+      "input_sha256": "3129ad6b7e87de7c381a11d91b78266855e84629d45c9e29408ec96728460dab",
+      "key": 1080,
+      "parity_fit": null,
+      "role": "local_tone",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "658f1042ffa431b42d29ec581af30b3155d8b17705aa791225d67d123fbeaeca"
+    },
+    {
+      "base": {
+        "box": [
+          1408,
+          704,
+          1568,
+          832
+        ],
+        "pixels": {
+          "false_negative_pixels": 2048,
+          "false_positive_pixels": 6144,
+          "flagged_area_fraction": 0.006510416666666667,
+          "intersection": 14336,
+          "iou": 0.6363636363636364,
+          "pixel_f1": 0.7777777777777778,
+          "pixels": 3145728,
+          "precision": 0.7,
+          "predicted_positive_pixels": 20480,
+          "recall": 0.875,
+          "reference_positive_pixels": 16384
+        },
+        "score": 2.508279408695571
+      },
+      "input_sha256": "2c8cc6420cea55784c96007dbdf03a493a9d28cb54eaac95b900cdf2dc3b1a1d",
+      "key": 1080,
+      "parity_fit": [
+        [
+          0.0,
+          7.72630213996539e-06
+        ],
+        [
+          0.0,
+          0.0002217914850605185
+        ]
+      ],
+      "role": "generated_sharp",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "658f1042ffa431b42d29ec581af30b3155d8b17705aa791225d67d123fbeaeca"
+    },
+    {
+      "base": {
+        "box": [
+          1408,
+          704,
+          1568,
+          800
+        ],
+        "pixels": {
+          "false_negative_pixels": 4096,
+          "false_positive_pixels": 3072,
+          "flagged_area_fraction": 0.0048828125,
+          "intersection": 12288,
+          "iou": 0.631578947368421,
+          "pixel_f1": 0.7741935483870968,
+          "pixels": 3145728,
+          "precision": 0.8,
+          "predicted_positive_pixels": 15360,
+          "recall": 0.75,
+          "reference_positive_pixels": 16384
+        },
+        "score": 2.4729042505808176
+      },
+      "input_sha256": "3e4d6b1d30fa092ebd2e78041b2df31a9d1263ef884561a71245a5d61667ac44",
+      "key": 1080,
+      "parity_fit": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          9.168825809213743e-05
+        ]
+      ],
+      "role": "generated_feathered",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "658f1042ffa431b42d29ec581af30b3155d8b17705aa791225d67d123fbeaeca"
+    },
+    {
+      "base": {
+        "box": null,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": null,
+          "reference_positive_pixels": 0
+        },
+        "score": 0.0
+      },
+      "input_sha256": "483c077eefc1a6f8c188f6db22b42d0fe90c8a4744bc73f8ddae90ea9db5f695",
+      "key": 1173,
+      "parity_fit": null,
+      "role": "untouched",
+      "status": "assessed",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "base": {
+        "box": [
+          640,
+          1088,
+          768,
+          1216
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 1.3929469205138132
+      },
+      "input_sha256": "273f66570b09a8674bc5b1c17a56937e20d64f8da12e4eec6e3d32489649e409",
+      "key": 1173,
+      "parity_fit": [
+        [
+          2.80607395308774e-06,
+          6.9887931422041305e-06
+        ],
+        [
+          0.9906084976052714,
+          0.9920029394284658
+        ]
+      ],
+      "role": "bilinear_horizontal",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "730ea08d5ac8c1ba304bfa70f3a70aa5626ff1f8e03d0a0ee113fa318f936543"
+    },
+    {
+      "base": {
+        "box": [
+          640,
+          1088,
+          768,
+          1216
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 3.1097258655836506
+      },
+      "input_sha256": "ae0588c8e9fa939199c40abb41cb1c18ad7d5f103f6baa98a7e2c85545a6c931",
+      "key": 1173,
+      "parity_fit": [
+        [
+          0.9905551467579312,
+          0.9919664920584426
+        ],
+        [
+          0.9832895341790359,
+          0.9859099756774528
+        ]
+      ],
+      "role": "bilinear_diagonal",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "730ea08d5ac8c1ba304bfa70f3a70aa5626ff1f8e03d0a0ee113fa318f936543"
+    },
+    {
+      "base": {
+        "box": [
+          640,
+          1088,
+          768,
+          1216
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 3.337983158350847
+      },
+      "input_sha256": "0df42728e6c4fe5be6494c00a994a2fe661d30776c0225feeebf86533dfdac78",
+      "key": 1173,
+      "parity_fit": [
+        [
+          0.7985275149978535,
+          0.8990428780105988
+        ],
+        [
+          0.9092756620917741,
+          0.7755822216728279
+        ]
+      ],
+      "role": "bicubic_diagonal",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "730ea08d5ac8c1ba304bfa70f3a70aa5626ff1f8e03d0a0ee113fa318f936543"
+    },
+    {
+      "base": {
+        "box": [
+          640,
+          1088,
+          768,
+          1216
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 1,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16383,
+          "iou": 0.99993896484375,
+          "pixel_f1": 0.999969481490524,
+          "pixels": 3145728,
+          "precision": 0.99993896484375,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16383
+        },
+        "score": 3.0849397390521918
+      },
+      "input_sha256": "1fa1c42f936687a3e1e680c7c7fbc622dc103dd860e6bcb05ebfdd3586dceed6",
+      "key": 1173,
+      "parity_fit": [
+        [
+          0.03924923675369496,
+          0.043448571749830744
+        ],
+        [
+          0.034153264328726785,
+          0.04067552051778989
+        ]
+      ],
+      "role": "rotated",
+      "status": "assessed",
+      "truth_pixels": 16383,
+      "truth_sha256": "789447db5b2534962b7627b645da369c656fb95858a4046cce6b8293d08bd992"
+    },
+    {
+      "base": {
+        "box": [
+          704,
+          1088,
+          768,
+          1184
+        ],
+        "pixels": {
+          "false_negative_pixels": 10240,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.001953125,
+          "intersection": 6144,
+          "iou": 0.375,
+          "pixel_f1": 0.5454545454545454,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 6144,
+          "recall": 0.375,
+          "reference_positive_pixels": 16384
+        },
+        "score": 0.9179097705468034
+      },
+      "input_sha256": "0f1f356e093e0bb5f08da54b971e4c5f0ae9f0ff7c247504b7b17991817b44c2",
+      "key": 1173,
+      "parity_fit": [
+        [
+          0.8631259352445432,
+          0.8839590470578337
+        ],
+        [
+          0.8509272900846344,
+          0.8725246864316122
+        ]
+      ],
+      "role": "blur",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "730ea08d5ac8c1ba304bfa70f3a70aa5626ff1f8e03d0a0ee113fa318f936543"
+    },
+    {
+      "base": {
+        "box": [
+          640,
+          1088,
+          768,
+          1216
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 2.510156047336121
+      },
+      "input_sha256": "b1b077d452ee7c5ce599bf52b51e93f7cf73761ba71024a55ee72413cdb9f715",
+      "key": 1173,
+      "parity_fit": [
+        [
+          0.0012242598340254096,
+          0.0
+        ],
+        [
+          0.0015355830882390897,
+          0.003424356897108738
+        ]
+      ],
+      "role": "quantized_bilinear",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "730ea08d5ac8c1ba304bfa70f3a70aa5626ff1f8e03d0a0ee113fa318f936543"
+    },
+    {
+      "base": {
+        "box": null,
+        "pixels": {
+          "false_negative_pixels": 16384,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 0.0,
+          "pixel_f1": 0.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": 0.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 0.0
+      },
+      "input_sha256": "676a8de088341affbae7a6444665d8ede9d1baa1182dcf20f70cf6a9b97cafc7",
+      "key": 1173,
+      "parity_fit": null,
+      "role": "local_tone",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "730ea08d5ac8c1ba304bfa70f3a70aa5626ff1f8e03d0a0ee113fa318f936543"
+    },
+    {
+      "base": {
+        "box": [
+          640,
+          1088,
+          768,
+          1216
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 2.724316768526407
+      },
+      "input_sha256": "ec681e0c093bbe03ad12bf42a37edfb9cc2d7ab00230420ea3ccfcc249ac5c13",
+      "key": 1173,
+      "parity_fit": [
+        [
+          0.13038024014852256,
+          0.09177524777449642
+        ],
+        [
+          0.12956309977160774,
+          0.11601812986811322
+        ]
+      ],
+      "role": "generated_sharp",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "730ea08d5ac8c1ba304bfa70f3a70aa5626ff1f8e03d0a0ee113fa318f936543"
+    },
+    {
+      "base": {
+        "box": [
+          640,
+          1088,
+          768,
+          1216
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 2.6669108828820947
+      },
+      "input_sha256": "4d71f9e94e389e8918a6b5b968f830d890229ff1fd2ca34183417c1915a7545a",
+      "key": 1173,
+      "parity_fit": [
+        [
+          0.13038024014852256,
+          0.09177524777449642
+        ],
+        [
+          0.12956309977160774,
+          0.11601812986811322
+        ]
+      ],
+      "role": "generated_feathered",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "730ea08d5ac8c1ba304bfa70f3a70aa5626ff1f8e03d0a0ee113fa318f936543"
+    },
+    {
+      "base": {
+        "box": null,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": null,
+          "reference_positive_pixels": 0
+        },
+        "score": 0.0
+      },
+      "input_sha256": "412807b53d545d2e43ce02f0bec9f055a7c2dc2c956c762dbed98b680e08c51a",
+      "key": 1202,
+      "parity_fit": null,
+      "role": "untouched",
+      "status": "assessed",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "base": {
+        "box": [
+          1024,
+          640,
+          1120,
+          736
+        ],
+        "pixels": {
+          "false_negative_pixels": 7168,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0029296875,
+          "intersection": 9216,
+          "iou": 0.5625,
+          "pixel_f1": 0.72,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 9216,
+          "recall": 0.5625,
+          "reference_positive_pixels": 16384
+        },
+        "score": 0.8398777696504367
+      },
+      "input_sha256": "4db3f6bfb85b182a186e02dec500bae47bdf3dd564f98770c85bf6900c76ca4f",
+      "key": 1202,
+      "parity_fit": [
+        [
+          2.65291663659184e-05,
+          0.0005415365257945837
+        ],
+        [
+          0.9875958149164066,
+          0.9808192682717223
+        ]
+      ],
+      "role": "bilinear_horizontal",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "684db022e4d2d828c6fc98d35701eefdc97872693583dc3dc136206f67970ba8"
+    },
+    {
+      "base": {
+        "box": [
+          992,
+          608,
+          1120,
+          768
+        ],
+        "pixels": {
+          "false_negative_pixels": 2048,
+          "false_positive_pixels": 6144,
+          "flagged_area_fraction": 0.006510416666666667,
+          "intersection": 14336,
+          "iou": 0.6363636363636364,
+          "pixel_f1": 0.7777777777777778,
+          "pixels": 3145728,
+          "precision": 0.7,
+          "predicted_positive_pixels": 20480,
+          "recall": 0.875,
+          "reference_positive_pixels": 16384
+        },
+        "score": 1.7994501903962228
+      },
+      "input_sha256": "e914a2199c9e5b0b200fb11517d861505cb28e35130c945369e1cb312c8bc9e5",
+      "key": 1202,
+      "parity_fit": [
+        [
+          0.25615936248248605,
+          0.09949205413584472
+        ],
+        [
+          0.3055027041083265,
+          0.16275101732042785
+        ]
+      ],
+      "role": "bilinear_diagonal",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "684db022e4d2d828c6fc98d35701eefdc97872693583dc3dc136206f67970ba8"
+    },
+    {
+      "base": {
+        "box": [
+          1024,
+          608,
+          1120,
+          768
+        ],
+        "pixels": {
+          "false_negative_pixels": 4096,
+          "false_positive_pixels": 3072,
+          "flagged_area_fraction": 0.0048828125,
+          "intersection": 12288,
+          "iou": 0.631578947368421,
+          "pixel_f1": 0.7741935483870968,
+          "pixels": 3145728,
+          "precision": 0.8,
+          "predicted_positive_pixels": 15360,
+          "recall": 0.75,
+          "reference_positive_pixels": 16384
+        },
+        "score": 2.205093655334452
+      },
+      "input_sha256": "603379f524f7dccd46b32847f3091a2cc4e240dd0358749843b10f64584f39b9",
+      "key": 1202,
+      "parity_fit": [
+        [
+          0.5559937822969712,
+          0.6740900577481361
+        ],
+        [
+          0.616133327370928,
+          0.488675777812264
+        ]
+      ],
+      "role": "bicubic_diagonal",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "684db022e4d2d828c6fc98d35701eefdc97872693583dc3dc136206f67970ba8"
+    },
+    {
+      "base": {
+        "box": [
+          992,
+          608,
+          1120,
+          768
+        ],
+        "pixels": {
+          "false_negative_pixels": 2048,
+          "false_positive_pixels": 6145,
+          "flagged_area_fraction": 0.006510416666666667,
+          "intersection": 14335,
+          "iou": 0.6363192471590909,
+          "pixel_f1": 0.7777446219786778,
+          "pixels": 3145728,
+          "precision": 0.699951171875,
+          "predicted_positive_pixels": 20480,
+          "recall": 0.874992370139779,
+          "reference_positive_pixels": 16383
+        },
+        "score": 1.9084863037331037
+      },
+      "input_sha256": "b0c2e6536b64454a574a9f017265aaec8a734bdf8f307991801ed09932818606",
+      "key": 1202,
+      "parity_fit": [
+        [
+          0.000736862373318603,
+          0.0038078736843647487
+        ],
+        [
+          0.003529223598773168,
+          0.0004414637980511005
+        ]
+      ],
+      "role": "rotated",
+      "status": "assessed",
+      "truth_pixels": 16383,
+      "truth_sha256": "17cadaf7cdc8c0ab636898e59f114fb9df21f6b1370da0e6d0156e2a499a8f03"
+    },
+    {
+      "base": {
+        "box": [
+          992,
+          608,
+          1152,
+          768
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 9216,
+          "flagged_area_fraction": 0.008138020833333334,
+          "intersection": 16384,
+          "iou": 0.64,
+          "pixel_f1": 0.7804878048780488,
+          "pixels": 3145728,
+          "precision": 0.64,
+          "predicted_positive_pixels": 25600,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 0.4951158573162268
+      },
+      "input_sha256": "109e67b254163f10071a08324ef57bed41bb5b6c11c9c501b77bb403e1833d22",
+      "key": 1202,
+      "parity_fit": [
+        [
+          0.025515288249849166,
+          0.1140473420527951
+        ],
+        [
+          0.0009395921294713672,
+          0.0024054969328729525
+        ]
+      ],
+      "role": "blur",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "684db022e4d2d828c6fc98d35701eefdc97872693583dc3dc136206f67970ba8"
+    },
+    {
+      "base": {
+        "box": [
+          1024,
+          640,
+          1120,
+          736
+        ],
+        "pixels": {
+          "false_negative_pixels": 7168,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0029296875,
+          "intersection": 9216,
+          "iou": 0.5625,
+          "pixel_f1": 0.72,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 9216,
+          "recall": 0.5625,
+          "reference_positive_pixels": 16384
+        },
+        "score": 2.1423475388015683
+      },
+      "input_sha256": "b1d622a8af89c74eb5551c9c898acc578a1088eea2eb0c4b449704f50d95569b",
+      "key": 1202,
+      "parity_fit": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0002525288606383125,
+          0.0
+        ]
+      ],
+      "role": "quantized_bilinear",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "684db022e4d2d828c6fc98d35701eefdc97872693583dc3dc136206f67970ba8"
+    },
+    {
+      "base": {
+        "box": null,
+        "pixels": {
+          "false_negative_pixels": 16384,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 0.0,
+          "pixel_f1": 0.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": 0.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 0.0
+      },
+      "input_sha256": "3323bf57a4fa46311abef1354f2a53534fa41bb098eadd3823651e9455db046d",
+      "key": 1202,
+      "parity_fit": null,
+      "role": "local_tone",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "684db022e4d2d828c6fc98d35701eefdc97872693583dc3dc136206f67970ba8"
+    },
+    {
+      "base": {
+        "box": [
+          1024,
+          608,
+          1120,
+          768
+        ],
+        "pixels": {
+          "false_negative_pixels": 4096,
+          "false_positive_pixels": 3072,
+          "flagged_area_fraction": 0.0048828125,
+          "intersection": 12288,
+          "iou": 0.631578947368421,
+          "pixel_f1": 0.7741935483870968,
+          "pixels": 3145728,
+          "precision": 0.8,
+          "predicted_positive_pixels": 15360,
+          "recall": 0.75,
+          "reference_positive_pixels": 16384
+        },
+        "score": 1.8941452328618222
+      },
+      "input_sha256": "9309c4e7659b78a27771fbe64899f5fcc54b0278bf4ac370260faed429fb03b5",
+      "key": 1202,
+      "parity_fit": [
+        [
+          0.007678250394741126,
+          0.005223769021850622
+        ],
+        [
+          0.05140591823492435,
+          0.017806534838091248
+        ]
+      ],
+      "role": "generated_sharp",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "684db022e4d2d828c6fc98d35701eefdc97872693583dc3dc136206f67970ba8"
+    },
+    {
+      "base": {
+        "box": [
+          1024,
+          640,
+          1120,
+          768
+        ],
+        "pixels": {
+          "false_negative_pixels": 5632,
+          "false_positive_pixels": 1536,
+          "flagged_area_fraction": 0.00390625,
+          "intersection": 10752,
+          "iou": 0.6,
+          "pixel_f1": 0.75,
+          "pixels": 3145728,
+          "precision": 0.875,
+          "predicted_positive_pixels": 12288,
+          "recall": 0.65625,
+          "reference_positive_pixels": 16384
+        },
+        "score": 1.8880365191391053
+      },
+      "input_sha256": "fc092dc5ffde5dde8bbad488692b8829361df754d8a8a66498766961045bc126",
+      "key": 1202,
+      "parity_fit": [
+        [
+          0.012691402386802775,
+          0.013526203483656296
+        ],
+        [
+          0.05710479835098203,
+          0.12348480805193873
+        ]
+      ],
+      "role": "generated_feathered",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "684db022e4d2d828c6fc98d35701eefdc97872693583dc3dc136206f67970ba8"
+    },
+    {
+      "base": {
+        "box": null,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": null,
+          "reference_positive_pixels": 0
+        },
+        "score": 0.0
+      },
+      "input_sha256": "8159420b8fb3c9bacfaab9d51f944ada2aae5cee4d718f6f600b0a6cab950454",
+      "key": 1346,
+      "parity_fit": null,
+      "role": "untouched",
+      "status": "assessed",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "base": {
+        "box": [
+          1344,
+          1024,
+          1472,
+          1152
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 1.3208631213863602
+      },
+      "input_sha256": "b5af870e977c4d383ee8d21509c55e74b7442234eb426df4a060b72c3a506a98",
+      "key": 1346,
+      "parity_fit": [
+        [
+          5.758212631157278e-06,
+          5.0126189768628926e-05
+        ],
+        [
+          0.9932080348874268,
+          0.9963673414331936
+        ]
+      ],
+      "role": "bilinear_horizontal",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "857015a6b84dc73a8fa8628e5aa1c5b2169a70e1a981308afe8764dcc09051fa"
+    },
+    {
+      "base": {
+        "box": [
+          1344,
+          1024,
+          1472,
+          1152
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 2.9611592550629813
+      },
+      "input_sha256": "a7b229d9219c97993a35b1a36bb2d2031d362c468219f1fb7a9451c3da2354f9",
+      "key": 1346,
+      "parity_fit": [
+        [
+          0.9848219111142464,
+          0.9856151991714969
+        ],
+        [
+          0.9866062189820642,
+          0.9940099226597688
+        ]
+      ],
+      "role": "bilinear_diagonal",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "857015a6b84dc73a8fa8628e5aa1c5b2169a70e1a981308afe8764dcc09051fa"
+    },
+    {
+      "base": {
+        "box": [
+          1344,
+          1024,
+          1472,
+          1152
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 3.2596371861432196
+      },
+      "input_sha256": "d8a40ee58e8902841ceada08578769170b8ded119df450b6e9ce50edbf96ecc2",
+      "key": 1346,
+      "parity_fit": [
+        [
+          0.8089016171099626,
+          0.9105762713844976
+        ],
+        [
+          0.8825267400629917,
+          0.7751777467977561
+        ]
+      ],
+      "role": "bicubic_diagonal",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "857015a6b84dc73a8fa8628e5aa1c5b2169a70e1a981308afe8764dcc09051fa"
+    },
+    {
+      "base": {
+        "box": [
+          1344,
+          1024,
+          1472,
+          1152
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 1,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16383,
+          "iou": 0.99993896484375,
+          "pixel_f1": 0.999969481490524,
+          "pixels": 3145728,
+          "precision": 0.99993896484375,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16383
+        },
+        "score": 2.824374189219916
+      },
+      "input_sha256": "fe2bc9b18bf58788e9bd7bfc2228d27d0098d8bef4dfd35cedf140bce3db896b",
+      "key": 1346,
+      "parity_fit": [
+        [
+          0.02719619729161704,
+          0.027571813533583067
+        ],
+        [
+          0.057711790613620084,
+          0.052855227894629375
+        ]
+      ],
+      "role": "rotated",
+      "status": "assessed",
+      "truth_pixels": 16383,
+      "truth_sha256": "d24d253e25c84235afaf4da2d395d18c8859b285c9185de7aab142509d1fc6d9"
+    },
+    {
+      "base": {
+        "box": [
+          1408,
+          1024,
+          1472,
+          1152
+        ],
+        "pixels": {
+          "false_negative_pixels": 8192,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0026041666666666665,
+          "intersection": 8192,
+          "iou": 0.5,
+          "pixel_f1": 0.6666666666666666,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 8192,
+          "recall": 0.5,
+          "reference_positive_pixels": 16384
+        },
+        "score": 1.24252747930687
+      },
+      "input_sha256": "64d3b2bdf802c508fcb2067de2309f9454a8abcf0286497851b13362e9523503",
+      "key": 1346,
+      "parity_fit": [
+        [
+          0.7389276594656784,
+          0.7842168882551647
+        ],
+        [
+          0.8929880821543691,
+          0.9652611695346792
+        ]
+      ],
+      "role": "blur",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "857015a6b84dc73a8fa8628e5aa1c5b2169a70e1a981308afe8764dcc09051fa"
+    },
+    {
+      "base": {
+        "box": [
+          1344,
+          1024,
+          1472,
+          1152
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 2.758444787989497
+      },
+      "input_sha256": "6b789aaf023c54c121c75e59f342cd003188ff081ed8e4821aab253d1714d1cb",
+      "key": 1346,
+      "parity_fit": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.010059962866389771,
+          0.273629427208669
+        ]
+      ],
+      "role": "quantized_bilinear",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "857015a6b84dc73a8fa8628e5aa1c5b2169a70e1a981308afe8764dcc09051fa"
+    },
+    {
+      "base": {
+        "box": null,
+        "pixels": {
+          "false_negative_pixels": 16384,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 0.0,
+          "pixel_f1": 0.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": 0.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 0.0
+      },
+      "input_sha256": "8a639ef68061deed7b2d7e868704a8f9a58f95033a422239842d2b024ee1ff6a",
+      "key": 1346,
+      "parity_fit": null,
+      "role": "local_tone",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "857015a6b84dc73a8fa8628e5aa1c5b2169a70e1a981308afe8764dcc09051fa"
+    },
+    {
+      "base": {
+        "box": [
+          1344,
+          1024,
+          1472,
+          1152
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 2.8313520007596353
+      },
+      "input_sha256": "61a8dc8300fae9ede0756afd2d1b1642322f7d2b568f097c560ea67348d0f516",
+      "key": 1346,
+      "parity_fit": [
+        [
+          0.00014985573029646648,
+          0.00020052718718299722
+        ],
+        [
+          0.0,
+          0.00149194271277997
+        ]
+      ],
+      "role": "generated_sharp",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "857015a6b84dc73a8fa8628e5aa1c5b2169a70e1a981308afe8764dcc09051fa"
+    },
+    {
+      "base": {
+        "box": [
+          1344,
+          1024,
+          1472,
+          1152
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 2.6608963577424776
+      },
+      "input_sha256": "33aa82e7bf1ceac024278c33f7250909e5ce4409522e31a79e6a9e4f01d3433d",
+      "key": 1346,
+      "parity_fit": [
+        [
+          0.00014985573029646648,
+          0.00020052718718299722
+        ],
+        [
+          0.0,
+          0.00149194271277997
+        ]
+      ],
+      "role": "generated_feathered",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "857015a6b84dc73a8fa8628e5aa1c5b2169a70e1a981308afe8764dcc09051fa"
+    },
+    {
+      "base": {
+        "box": null,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": null,
+          "reference_positive_pixels": 0
+        },
+        "score": 0.0
+      },
+      "input_sha256": "5c75caed43c654f5aca53662a911975e49afcbb21489011652e51f984277e69d",
+      "key": 1616,
+      "parity_fit": null,
+      "role": "untouched",
+      "status": "assessed",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "base": {
+        "box": [
+          608,
+          576,
+          704,
+          704
+        ],
+        "pixels": {
+          "false_negative_pixels": 5632,
+          "false_positive_pixels": 1536,
+          "flagged_area_fraction": 0.00390625,
+          "intersection": 10752,
+          "iou": 0.6,
+          "pixel_f1": 0.75,
+          "pixels": 3145728,
+          "precision": 0.875,
+          "predicted_positive_pixels": 12288,
+          "recall": 0.65625,
+          "reference_positive_pixels": 16384
+        },
+        "score": 0.9042013001535868
+      },
+      "input_sha256": "9414e09603baf7b3d3c3c0701b2b27f2ec81f46ca35049ac7e903c5553dca225",
+      "key": 1616,
+      "parity_fit": [
+        [
+          3.3631992280014344e-06,
+          2.671780633844989e-05
+        ],
+        [
+          0.7214059963383406,
+          0.796068410433237
+        ]
+      ],
+      "role": "bilinear_horizontal",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "429f0501557e119e5b595bbdca443495c061d407e8f4d40e1bf705343c93ee9f"
+    },
+    {
+      "base": {
+        "box": [
+          608,
+          544,
+          736,
+          704
+        ],
+        "pixels": {
+          "false_negative_pixels": 2048,
+          "false_positive_pixels": 6144,
+          "flagged_area_fraction": 0.006510416666666667,
+          "intersection": 14336,
+          "iou": 0.6363636363636364,
+          "pixel_f1": 0.7777777777777778,
+          "pixels": 3145728,
+          "precision": 0.7,
+          "predicted_positive_pixels": 20480,
+          "recall": 0.875,
+          "reference_positive_pixels": 16384
+        },
+        "score": 1.7761855922431646
+      },
+      "input_sha256": "83e5b8f2fc4df9dc72f3cc537c296c4ceb58e25e91de33dc2bb4a68d75c48600",
+      "key": 1616,
+      "parity_fit": [
+        [
+          0.3960689748542886,
+          0.42367494658551597
+        ],
+        [
+          0.4728909515872155,
+          0.8041976610164777
+        ]
+      ],
+      "role": "bilinear_diagonal",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "429f0501557e119e5b595bbdca443495c061d407e8f4d40e1bf705343c93ee9f"
+    },
+    {
+      "base": {
+        "box": [
+          608,
+          544,
+          704,
+          704
+        ],
+        "pixels": {
+          "false_negative_pixels": 4096,
+          "false_positive_pixels": 3072,
+          "flagged_area_fraction": 0.0048828125,
+          "intersection": 12288,
+          "iou": 0.631578947368421,
+          "pixel_f1": 0.7741935483870968,
+          "pixels": 3145728,
+          "precision": 0.8,
+          "predicted_positive_pixels": 15360,
+          "recall": 0.75,
+          "reference_positive_pixels": 16384
+        },
+        "score": 2.294452893979266
+      },
+      "input_sha256": "bd694d46b99ca980478104d8da0f9d5d1fce9f7eac303a58021ffc9cb7bfb811",
+      "key": 1616,
+      "parity_fit": [
+        [
+          0.6842251460467808,
+          0.743591407438168
+        ],
+        [
+          0.7091133611396563,
+          0.68027313433711
+        ]
+      ],
+      "role": "bicubic_diagonal",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "429f0501557e119e5b595bbdca443495c061d407e8f4d40e1bf705343c93ee9f"
+    },
+    {
+      "base": {
+        "box": [
+          576,
+          544,
+          736,
+          704
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 9217,
+          "flagged_area_fraction": 0.008138020833333334,
+          "intersection": 16383,
+          "iou": 0.6399609375,
+          "pixel_f1": 0.7804587571159756,
+          "pixels": 3145728,
+          "precision": 0.6399609375,
+          "predicted_positive_pixels": 25600,
+          "recall": 1.0,
+          "reference_positive_pixels": 16383
+        },
+        "score": 1.6096005834168026
+      },
+      "input_sha256": "c900a19d99186d185f6e999e476bd04675fca88fc4d43602f5eb30e5a286300d",
+      "key": 1616,
+      "parity_fit": [
+        [
+          0.014135048137196238,
+          0.017547019714740486
+        ],
+        [
+          0.0006199899906881301,
+          0.0
+        ]
+      ],
+      "role": "rotated",
+      "status": "assessed",
+      "truth_pixels": 16383,
+      "truth_sha256": "6275ca1427b4b1b951f42844581130355ecb27cc622ba784336d2f90c9c7f367"
+    },
+    {
+      "base": {
+        "box": [
+          608,
+          640,
+          704,
+          704
+        ],
+        "pixels": {
+          "false_negative_pixels": 11776,
+          "false_positive_pixels": 1536,
+          "flagged_area_fraction": 0.001953125,
+          "intersection": 4608,
+          "iou": 0.2571428571428571,
+          "pixel_f1": 0.4090909090909091,
+          "pixels": 3145728,
+          "precision": 0.75,
+          "predicted_positive_pixels": 6144,
+          "recall": 0.28125,
+          "reference_positive_pixels": 16384
+        },
+        "score": 1.409415854721881
+      },
+      "input_sha256": "36df5827466f561d89057168bdd52b7f6d980f700e17fffbc8c0c4e26ce7d56d",
+      "key": 1616,
+      "parity_fit": [
+        [
+          0.5553267913697615,
+          0.7561286592212244
+        ],
+        [
+          0.39640749855243806,
+          0.5110980774443445
+        ]
+      ],
+      "role": "blur",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "429f0501557e119e5b595bbdca443495c061d407e8f4d40e1bf705343c93ee9f"
+    },
+    {
+      "base": {
+        "box": [
+          608,
+          576,
+          704,
+          672
+        ],
+        "pixels": {
+          "false_negative_pixels": 7168,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0029296875,
+          "intersection": 9216,
+          "iou": 0.5625,
+          "pixel_f1": 0.72,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 9216,
+          "recall": 0.5625,
+          "reference_positive_pixels": 16384
+        },
+        "score": 2.2534760699726455
+      },
+      "input_sha256": "1e82adf71e8330bf75a5e98df88978a7343e434726d168462aec707da51c13fc",
+      "key": 1616,
+      "parity_fit": [
+        [
+          7.284568007137615e-06,
+          0.004447359726781341
+        ],
+        [
+          0.0,
+          0.014844068894813711
+        ]
+      ],
+      "role": "quantized_bilinear",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "429f0501557e119e5b595bbdca443495c061d407e8f4d40e1bf705343c93ee9f"
+    },
+    {
+      "base": {
+        "box": null,
+        "pixels": {
+          "false_negative_pixels": 16384,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 0.0,
+          "pixel_f1": 0.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": 0.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 0.0
+      },
+      "input_sha256": "42bfa75098ec62363b30ed9075a735c52820f5446191059471967241f52597b9",
+      "key": 1616,
+      "parity_fit": null,
+      "role": "local_tone",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "429f0501557e119e5b595bbdca443495c061d407e8f4d40e1bf705343c93ee9f"
+    },
+    {
+      "base": {
+        "box": [
+          608,
+          576,
+          704,
+          672
+        ],
+        "pixels": {
+          "false_negative_pixels": 7168,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0029296875,
+          "intersection": 9216,
+          "iou": 0.5625,
+          "pixel_f1": 0.72,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 9216,
+          "recall": 0.5625,
+          "reference_positive_pixels": 16384
+        },
+        "score": 2.3983001976820666
+      },
+      "input_sha256": "60e2a8cdd7c3a70b85a512b4b0b5b3a533b095ff33f09baa2bab3968b387bead",
+      "key": 1616,
+      "parity_fit": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.002364640219282954,
+          0.0
+        ]
+      ],
+      "role": "generated_sharp",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "429f0501557e119e5b595bbdca443495c061d407e8f4d40e1bf705343c93ee9f"
+    },
+    {
+      "base": {
+        "box": [
+          608,
+          576,
+          704,
+          672
+        ],
+        "pixels": {
+          "false_negative_pixels": 7168,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0029296875,
+          "intersection": 9216,
+          "iou": 0.5625,
+          "pixel_f1": 0.72,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 9216,
+          "recall": 0.5625,
+          "reference_positive_pixels": 16384
+        },
+        "score": 2.3983001976820666
+      },
+      "input_sha256": "644c2caef830e090e841afceb48b8cb215933d886b938668f7b2106bce75e1b4",
+      "key": 1616,
+      "parity_fit": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.002364640219282954,
+          0.0
+        ]
+      ],
+      "role": "generated_feathered",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "429f0501557e119e5b595bbdca443495c061d407e8f4d40e1bf705343c93ee9f"
+    },
+    {
+      "base": {
+        "box": null,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": null,
+          "reference_positive_pixels": 0
+        },
+        "score": 0.0
+      },
+      "input_sha256": "f46348f306c2881255d6a96b768342b2b521eb5ac630c40cf42d47a1fb755955",
+      "key": 1742,
+      "parity_fit": null,
+      "role": "untouched",
+      "status": "assessed",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "base": {
+        "box": [
+          928,
+          960,
+          1056,
+          1088
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 1.3773831730752817
+      },
+      "input_sha256": "39e0de375c3efa22cb08efba9d19b5ff7760b49830b0d1b8665ae9c087adfb0c",
+      "key": 1742,
+      "parity_fit": [
+        [
+          1.9352026306096448e-05,
+          6.511938879572021e-06
+        ],
+        [
+          0.9892069681996968,
+          0.9916954965201106
+        ]
+      ],
+      "role": "bilinear_horizontal",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "1629c0783a3d70ee7083416e005566057fdc67016cfa53c9b478d4f25cae7be6"
+    },
+    {
+      "base": {
+        "box": [
+          928,
+          960,
+          1056,
+          1088
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 3.093508470141227
+      },
+      "input_sha256": "b26a1d3cec3ab6ac841af37c7cc7f6867a200487945a0361414cfdb00c980204",
+      "key": 1742,
+      "parity_fit": [
+        [
+          0.9890121639383352,
+          0.9914982743730377
+        ],
+        [
+          0.9811843122330566,
+          0.9854606387287439
+        ]
+      ],
+      "role": "bilinear_diagonal",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "1629c0783a3d70ee7083416e005566057fdc67016cfa53c9b478d4f25cae7be6"
+    },
+    {
+      "base": {
+        "box": [
+          928,
+          960,
+          1056,
+          1088
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 3.3287017148496902
+      },
+      "input_sha256": "5e5f3c53916262b38cb1a30fd2b79be30e293171ed70dea793b9e007adb5e64b",
+      "key": 1742,
+      "parity_fit": [
+        [
+          0.8119543509446925,
+          0.9158136479557066
+        ],
+        [
+          0.922601750082823,
+          0.7989412003504492
+        ]
+      ],
+      "role": "bicubic_diagonal",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "1629c0783a3d70ee7083416e005566057fdc67016cfa53c9b478d4f25cae7be6"
+    },
+    {
+      "base": {
+        "box": [
+          928,
+          960,
+          1056,
+          1088
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 1,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16383,
+          "iou": 0.99993896484375,
+          "pixel_f1": 0.999969481490524,
+          "pixels": 3145728,
+          "precision": 0.99993896484375,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16383
+        },
+        "score": 3.044506012311384
+      },
+      "input_sha256": "98f60d92bc6d7aada8ce101efe2c516f74c623a037c5580d1fb3810713642337",
+      "key": 1742,
+      "parity_fit": [
+        [
+          0.024425399627369115,
+          0.02084060858743486
+        ],
+        [
+          0.023392526865060437,
+          0.023783138831458994
+        ]
+      ],
+      "role": "rotated",
+      "status": "assessed",
+      "truth_pixels": 16383,
+      "truth_sha256": "c7047487b8db6f333a625253733b1aa4edc6f62405ad8cd8f800343518c34e2c"
+    },
+    {
+      "base": {
+        "box": null,
+        "pixels": {
+          "false_negative_pixels": 16384,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 0.0,
+          "pixel_f1": 0.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": 0.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 0.0
+      },
+      "input_sha256": "1015534ba205c9da9e63ffd26d8acf4c4acb6c229fb2619c8b57c26628e57d68",
+      "key": 1742,
+      "parity_fit": null,
+      "role": "blur",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "1629c0783a3d70ee7083416e005566057fdc67016cfa53c9b478d4f25cae7be6"
+    },
+    {
+      "base": {
+        "box": [
+          928,
+          960,
+          1056,
+          1088
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 2.9408501409692
+      },
+      "input_sha256": "a9781542b0147f2af7ef960b06f94f667d67f670c23738aedea59048faece7e3",
+      "key": 1742,
+      "parity_fit": [
+        [
+          4.2142807954781425e-05,
+          0.0
+        ],
+        [
+          0.0006467132469148984,
+          0.0
+        ]
+      ],
+      "role": "quantized_bilinear",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "1629c0783a3d70ee7083416e005566057fdc67016cfa53c9b478d4f25cae7be6"
+    },
+    {
+      "base": {
+        "box": null,
+        "pixels": {
+          "false_negative_pixels": 16384,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 0.0,
+          "pixel_f1": 0.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": 0.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 0.0
+      },
+      "input_sha256": "270cf1c33fd615fa6665b2e1f6b3c34aff08f29494e5cfd711f7f5a703899795",
+      "key": 1742,
+      "parity_fit": null,
+      "role": "local_tone",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "1629c0783a3d70ee7083416e005566057fdc67016cfa53c9b478d4f25cae7be6"
+    },
+    {
+      "base": {
+        "box": [
+          896,
+          960,
+          960,
+          1024
+        ],
+        "pixels": {
+          "false_negative_pixels": 14336,
+          "false_positive_pixels": 2048,
+          "flagged_area_fraction": 0.0013020833333333333,
+          "intersection": 2048,
+          "iou": 0.1111111111111111,
+          "pixel_f1": 0.2,
+          "pixels": 3145728,
+          "precision": 0.5,
+          "predicted_positive_pixels": 4096,
+          "recall": 0.125,
+          "reference_positive_pixels": 16384
+        },
+        "score": 0.7808029486343726
+      },
+      "input_sha256": "3fa07be302fa4aafb5115decd6398d4f176cbb907572b157ae0e4b28793d624a",
+      "key": 1742,
+      "parity_fit": [
+        [
+          0.0003046689331711594,
+          0.0
+        ],
+        [
+          0.0,
+          0.0022636659935072467
+        ]
+      ],
+      "role": "generated_sharp",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "1629c0783a3d70ee7083416e005566057fdc67016cfa53c9b478d4f25cae7be6"
+    },
+    {
+      "base": {
+        "box": [
+          928,
+          960,
+          1024,
+          1024
+        ],
+        "pixels": {
+          "false_negative_pixels": 10240,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.001953125,
+          "intersection": 6144,
+          "iou": 0.375,
+          "pixel_f1": 0.5454545454545454,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 6144,
+          "recall": 0.375,
+          "reference_positive_pixels": 16384
+        },
+        "score": 1.1967401633100516
+      },
+      "input_sha256": "42bd5ff24e6cb3371628b6fe5c48bfeeb2d57ac3eb5c95947d98da5f1bbe65b7",
+      "key": 1742,
+      "parity_fit": [
+        [
+          0.008438357393267593,
+          0.004041118041896552
+        ],
+        [
+          0.010474130047317676,
+          0.003958908520734328
+        ]
+      ],
+      "role": "generated_feathered",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "1629c0783a3d70ee7083416e005566057fdc67016cfa53c9b478d4f25cae7be6"
+    },
+    {
+      "base": {
+        "box": null,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": null,
+          "reference_positive_pixels": 0
+        },
+        "score": 0.0
+      },
+      "input_sha256": "ee4b69d967e9c746b2edb1b2f9574e213321693ae765ceb76acfb53d935940f4",
+      "key": 1788,
+      "parity_fit": null,
+      "role": "untouched",
+      "status": "assessed",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "base": {
+        "box": [
+          1312,
+          512,
+          1408,
+          608
+        ],
+        "pixels": {
+          "false_negative_pixels": 7168,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0029296875,
+          "intersection": 9216,
+          "iou": 0.5625,
+          "pixel_f1": 0.72,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 9216,
+          "recall": 0.5625,
+          "reference_positive_pixels": 16384
+        },
+        "score": 0.9886437753013521
+      },
+      "input_sha256": "8c16f39e5d0f8e0aadb88b1ca28c0b12b471f616660612944a1d70645b68e0be",
+      "key": 1788,
+      "parity_fit": [
+        [
+          0.00011575009135866843,
+          3.0374717180481348e-05
+        ],
+        [
+          0.9930441752564501,
+          0.9884766694010362
+        ]
+      ],
+      "role": "bilinear_horizontal",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "8deb7f119c3c46b003d7caf0d13009d24299803944dbe6471619f97ac67ac9ff"
+    },
+    {
+      "base": {
+        "box": [
+          1312,
+          512,
+          1408,
+          608
+        ],
+        "pixels": {
+          "false_negative_pixels": 7168,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0029296875,
+          "intersection": 9216,
+          "iou": 0.5625,
+          "pixel_f1": 0.72,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 9216,
+          "recall": 0.5625,
+          "reference_positive_pixels": 16384
+        },
+        "score": 2.2461928922644003
+      },
+      "input_sha256": "06da48973b6e2316031ca6ffd9ec310b3da7eb7a5db1afdfce64bd0eadb67029",
+      "key": 1788,
+      "parity_fit": [
+        [
+          0.9906205948010415,
+          0.9866405872389011
+        ],
+        [
+          0.9882418087703791,
+          0.980362594416228
+        ]
+      ],
+      "role": "bilinear_diagonal",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "8deb7f119c3c46b003d7caf0d13009d24299803944dbe6471619f97ac67ac9ff"
+    },
+    {
+      "base": {
+        "box": [
+          1312,
+          480,
+          1408,
+          640
+        ],
+        "pixels": {
+          "false_negative_pixels": 4096,
+          "false_positive_pixels": 3072,
+          "flagged_area_fraction": 0.0048828125,
+          "intersection": 12288,
+          "iou": 0.631578947368421,
+          "pixel_f1": 0.7741935483870968,
+          "pixels": 3145728,
+          "precision": 0.8,
+          "predicted_positive_pixels": 15360,
+          "recall": 0.75,
+          "reference_positive_pixels": 16384
+        },
+        "score": 2.452253158417944
+      },
+      "input_sha256": "2380d0eb94f073a387b525647aca20e898f52050f07875a701657bfa43048968",
+      "key": 1788,
+      "parity_fit": [
+        [
+          0.18820336200618548,
+          0.30766928660068993
+        ],
+        [
+          0.6137923868442884,
+          0.5047484695431574
+        ]
+      ],
+      "role": "bicubic_diagonal",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "8deb7f119c3c46b003d7caf0d13009d24299803944dbe6471619f97ac67ac9ff"
+    },
+    {
+      "base": {
+        "box": [
+          1280,
+          480,
+          1440,
+          640
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 9217,
+          "flagged_area_fraction": 0.008138020833333334,
+          "intersection": 16383,
+          "iou": 0.6399609375,
+          "pixel_f1": 0.7804587571159756,
+          "pixels": 3145728,
+          "precision": 0.6399609375,
+          "predicted_positive_pixels": 25600,
+          "recall": 1.0,
+          "reference_positive_pixels": 16383
+        },
+        "score": 2.164082957202445
+      },
+      "input_sha256": "7d88f4432b2eefb1b6e2438108ce8695e4ba545668c67197b7acc121b0bac4a9",
+      "key": 1788,
+      "parity_fit": [
+        [
+          0.00601492062109743,
+          0.0002180240555028634
+        ],
+        [
+          0.02823986846320048,
+          0.006706596797114828
+        ]
+      ],
+      "role": "rotated",
+      "status": "assessed",
+      "truth_pixels": 16383,
+      "truth_sha256": "1aec63bd6c730a6dfaa288dfde20ae73b0c3ebf6c9410e7206578e834aee2a20"
+    },
+    {
+      "base": {
+        "box": [
+          1280,
+          512,
+          1408,
+          608
+        ],
+        "pixels": {
+          "false_negative_pixels": 5632,
+          "false_positive_pixels": 1536,
+          "flagged_area_fraction": 0.00390625,
+          "intersection": 10752,
+          "iou": 0.6,
+          "pixel_f1": 0.75,
+          "pixels": 3145728,
+          "precision": 0.875,
+          "predicted_positive_pixels": 12288,
+          "recall": 0.65625,
+          "reference_positive_pixels": 16384
+        },
+        "score": 1.9425526956756238
+      },
+      "input_sha256": "93c340f5a0061a89b2cb34e908d2800195621281d507af4a2ef4a6a083d40df7",
+      "key": 1788,
+      "parity_fit": [
+        [
+          0.2211456053586578,
+          0.3183433715744117
+        ],
+        [
+          0.01843726062472295,
+          0.0
+        ]
+      ],
+      "role": "blur",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "8deb7f119c3c46b003d7caf0d13009d24299803944dbe6471619f97ac67ac9ff"
+    },
+    {
+      "base": {
+        "box": [
+          1312,
+          512,
+          1408,
+          608
+        ],
+        "pixels": {
+          "false_negative_pixels": 7168,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0029296875,
+          "intersection": 9216,
+          "iou": 0.5625,
+          "pixel_f1": 0.72,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 9216,
+          "recall": 0.5625,
+          "reference_positive_pixels": 16384
+        },
+        "score": 1.8046522595601642
+      },
+      "input_sha256": "ca890ed6e4e733236e960891d87c99c300f0f9801076411c732b444efce748d7",
+      "key": 1788,
+      "parity_fit": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.024574377959894478,
+          0.0001751521960897673
+        ]
+      ],
+      "role": "quantized_bilinear",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "8deb7f119c3c46b003d7caf0d13009d24299803944dbe6471619f97ac67ac9ff"
+    },
+    {
+      "base": {
+        "box": null,
+        "pixels": {
+          "false_negative_pixels": 16384,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 0.0,
+          "pixel_f1": 0.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": 0.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 0.0
+      },
+      "input_sha256": "ac4673d609053b0a52639449a59a181c102b03ea458c1be5ea0396212621e06e",
+      "key": 1788,
+      "parity_fit": null,
+      "role": "local_tone",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "8deb7f119c3c46b003d7caf0d13009d24299803944dbe6471619f97ac67ac9ff"
+    },
+    {
+      "base": {
+        "box": [
+          1312,
+          512,
+          1408,
+          608
+        ],
+        "pixels": {
+          "false_negative_pixels": 7168,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0029296875,
+          "intersection": 9216,
+          "iou": 0.5625,
+          "pixel_f1": 0.72,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 9216,
+          "recall": 0.5625,
+          "reference_positive_pixels": 16384
+        },
+        "score": 2.1789521775689393
+      },
+      "input_sha256": "92342a312cf6e9fa70fc93b4e1cedc696f4f7c9089d5f7e8cbe384dae5dfe42b",
+      "key": 1788,
+      "parity_fit": [
+        [
+          0.12383133236931665,
+          0.004038041376176027
+        ],
+        [
+          0.07248183947543974,
+          0.004858874979821515
+        ]
+      ],
+      "role": "generated_sharp",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "8deb7f119c3c46b003d7caf0d13009d24299803944dbe6471619f97ac67ac9ff"
+    },
+    {
+      "base": {
+        "box": [
+          1312,
+          512,
+          1408,
+          608
+        ],
+        "pixels": {
+          "false_negative_pixels": 7168,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0029296875,
+          "intersection": 9216,
+          "iou": 0.5625,
+          "pixel_f1": 0.72,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 9216,
+          "recall": 0.5625,
+          "reference_positive_pixels": 16384
+        },
+        "score": 2.1789521775689393
+      },
+      "input_sha256": "f89f680356db237fe71e76aeb4da55d422ef31d4f37aceab684b63a73e2824b5",
+      "key": 1788,
+      "parity_fit": [
+        [
+          0.12383133236931665,
+          0.004038041376176027
+        ],
+        [
+          0.07248183947543974,
+          0.004858874979821515
+        ]
+      ],
+      "role": "generated_feathered",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "8deb7f119c3c46b003d7caf0d13009d24299803944dbe6471619f97ac67ac9ff"
+    },
+    {
+      "base": {
+        "box": null,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": null,
+          "reference_positive_pixels": 0
+        },
+        "score": 0.0
+      },
+      "input_sha256": "afc04279acf2aaa9c6d6daebaa12aa344a17a963d6c123a9abb4c18da777c41e",
+      "key": 2050,
+      "parity_fit": null,
+      "role": "untouched",
+      "status": "assessed",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "base": {
+        "box": [
+          576,
+          896,
+          640,
+          1024
+        ],
+        "pixels": {
+          "false_negative_pixels": 8191,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0026041666666666665,
+          "intersection": 8192,
+          "iou": 0.5000305194408838,
+          "pixel_f1": 0.6666937945066124,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 8192,
+          "recall": 0.5000305194408838,
+          "reference_positive_pixels": 16383
+        },
+        "score": 0.7396097143597803
+      },
+      "input_sha256": "6638f24dd1588a56760d619ca3d56cb03c8d8737d0d02d7d7bcee5f80f3f2c7f",
+      "key": 2050,
+      "parity_fit": [
+        [
+          0.00017348692448548864,
+          0.00015918061444442078
+        ],
+        [
+          0.9951431956661034,
+          0.9962314890686512
+        ]
+      ],
+      "role": "bilinear_horizontal",
+      "status": "assessed",
+      "truth_pixels": 16383,
+      "truth_sha256": "59db0b65bc10c3be3564f711b085d1e31c6792a5f397858bb2f248cd42e0e65a"
+    },
+    {
+      "base": {
+        "box": [
+          576,
+          896,
+          640,
+          1024
+        ],
+        "pixels": {
+          "false_negative_pixels": 8192,
+          "false_positive_pixels": 1,
+          "flagged_area_fraction": 0.0026041666666666665,
+          "intersection": 8191,
+          "iou": 0.49993896484375,
+          "pixel_f1": 0.6666124109867752,
+          "pixels": 3145728,
+          "precision": 0.9998779296875,
+          "predicted_positive_pixels": 8192,
+          "recall": 0.49996948055911616,
+          "reference_positive_pixels": 16383
+        },
+        "score": 1.6228844633900936
+      },
+      "input_sha256": "6c66e9adb3350475501bab87db24f0daf8b5bbba5576b01407252418a02bd318",
+      "key": 2050,
+      "parity_fit": [
+        [
+          0.9961480491960707,
+          0.9974419296231755
+        ],
+        [
+          0.9913189980294567,
+          0.9937819101593047
+        ]
+      ],
+      "role": "bilinear_diagonal",
+      "status": "assessed",
+      "truth_pixels": 16383,
+      "truth_sha256": "d9a8b75c364dcc9f65c154ec3806bce8deeba5b5daa04f96081f0c18bc866d97"
+    },
+    {
+      "base": {
+        "box": [
+          576,
+          896,
+          640,
+          1024
+        ],
+        "pixels": {
+          "false_negative_pixels": 8192,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0026041666666666665,
+          "intersection": 8192,
+          "iou": 0.5,
+          "pixel_f1": 0.6666666666666666,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 8192,
+          "recall": 0.5,
+          "reference_positive_pixels": 16384
+        },
+        "score": 1.7462405051996073
+      },
+      "input_sha256": "88b5aac0f1d3d46989eb38200b03967a56eee78b34288a36353a6a85cc4d9db8",
+      "key": 2050,
+      "parity_fit": [
+        [
+          0.7401973738227232,
+          0.8887556642204404
+        ],
+        [
+          0.8910193459242881,
+          0.7198725357957381
+        ]
+      ],
+      "role": "bicubic_diagonal",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "0e71f09f955e96b416cff5b165d26e7a5b003a70ebade75c4192dd4e75f5cff2"
+    },
+    {
+      "base": {
+        "box": [
+          576,
+          896,
+          640,
+          1024
+        ],
+        "pixels": {
+          "false_negative_pixels": 8192,
+          "false_positive_pixels": 1,
+          "flagged_area_fraction": 0.0026041666666666665,
+          "intersection": 8191,
+          "iou": 0.49993896484375,
+          "pixel_f1": 0.6666124109867752,
+          "pixels": 3145728,
+          "precision": 0.9998779296875,
+          "predicted_positive_pixels": 8192,
+          "recall": 0.49996948055911616,
+          "reference_positive_pixels": 16383
+        },
+        "score": 1.5720466417051213
+      },
+      "input_sha256": "e4f12a00dcf1f9d318905506d1f24cca10e0acc6556ad9fd7da1b9083c7566ca",
+      "key": 2050,
+      "parity_fit": [
+        [
+          0.15102928108533964,
+          0.2340331128738926
+        ],
+        [
+          0.1908672138766242,
+          0.16727767320792575
+        ]
+      ],
+      "role": "rotated",
+      "status": "assessed",
+      "truth_pixels": 16383,
+      "truth_sha256": "d06cb3d87cae5f9542b55ceff850df8da449fadee2ad332147e7a863411cf1cd"
+    },
+    {
+      "base": {
+        "box": [
+          576,
+          896,
+          640,
+          1024
+        ],
+        "pixels": {
+          "false_negative_pixels": 8192,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0026041666666666665,
+          "intersection": 8192,
+          "iou": 0.5,
+          "pixel_f1": 0.6666666666666666,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 8192,
+          "recall": 0.5,
+          "reference_positive_pixels": 16384
+        },
+        "score": 1.487877246543241
+      },
+      "input_sha256": "1741afcfe43a2d8875cc7c86624f86785ea662b7a815ce7ee3f441b0d2231304",
+      "key": 2050,
+      "parity_fit": [
+        [
+          0.8850675856890173,
+          0.8597183941794766
+        ],
+        [
+          0.879040240422379,
+          0.8872337458642362
+        ]
+      ],
+      "role": "blur",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "0e71f09f955e96b416cff5b165d26e7a5b003a70ebade75c4192dd4e75f5cff2"
+    },
+    {
+      "base": {
+        "box": [
+          576,
+          928,
+          640,
+          1024
+        ],
+        "pixels": {
+          "false_negative_pixels": 10240,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.001953125,
+          "intersection": 6144,
+          "iou": 0.375,
+          "pixel_f1": 0.5454545454545454,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 6144,
+          "recall": 0.375,
+          "reference_positive_pixels": 16384
+        },
+        "score": 1.0960041701533652
+      },
+      "input_sha256": "9625b6772913fd9cedaf4b544561d5503527ca0c6d0f0cd8bfa40115ce73aad0",
+      "key": 2050,
+      "parity_fit": [
+        [
+          0.22450789100343105,
+          0.3974501240527776
+        ],
+        [
+          0.1718906550158007,
+          0.3223194574756786
+        ]
+      ],
+      "role": "quantized_bilinear",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "0e71f09f955e96b416cff5b165d26e7a5b003a70ebade75c4192dd4e75f5cff2"
+    },
+    {
+      "base": {
+        "box": null,
+        "pixels": {
+          "false_negative_pixels": 16384,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 0.0,
+          "pixel_f1": 0.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": 0.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 0.0
+      },
+      "input_sha256": "96a25c171b6ff8c0eea0b03999d2b5e9f1bb87feea87c176a29683498fa4ecbb",
+      "key": 2050,
+      "parity_fit": null,
+      "role": "local_tone",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "0e71f09f955e96b416cff5b165d26e7a5b003a70ebade75c4192dd4e75f5cff2"
+    },
+    {
+      "base": {
+        "box": [
+          576,
+          928,
+          640,
+          1024
+        ],
+        "pixels": {
+          "false_negative_pixels": 10240,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.001953125,
+          "intersection": 6144,
+          "iou": 0.375,
+          "pixel_f1": 0.5454545454545454,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 6144,
+          "recall": 0.375,
+          "reference_positive_pixels": 16384
+        },
+        "score": 1.295861047557356
+      },
+      "input_sha256": "ade587b896586f5322c5c1b079b12f30b7633a1c0c952a23648c79228eb52bb1",
+      "key": 2050,
+      "parity_fit": [
+        [
+          0.050581458365416054,
+          0.07908312103938153
+        ],
+        [
+          0.0003749696506404332,
+          0.018247402727034068
+        ]
+      ],
+      "role": "generated_sharp",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "0e71f09f955e96b416cff5b165d26e7a5b003a70ebade75c4192dd4e75f5cff2"
+    },
+    {
+      "base": {
+        "box": [
+          576,
+          928,
+          640,
+          1024
+        ],
+        "pixels": {
+          "false_negative_pixels": 10240,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.001953125,
+          "intersection": 6144,
+          "iou": 0.375,
+          "pixel_f1": 0.5454545454545454,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 6144,
+          "recall": 0.375,
+          "reference_positive_pixels": 16384
+        },
+        "score": 1.240415095580856
+      },
+      "input_sha256": "0a2396ff3e5d75985cb74a1bb52d3620e1eddaf517972ffdfae6a38d0f09efcb",
+      "key": 2050,
+      "parity_fit": [
+        [
+          0.050581458365416054,
+          0.07908312103938153
+        ],
+        [
+          0.0003749696506404332,
+          0.018247402727034068
+        ]
+      ],
+      "role": "generated_feathered",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "0e71f09f955e96b416cff5b165d26e7a5b003a70ebade75c4192dd4e75f5cff2"
+    },
+    {
+      "base": {
+        "box": null,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": null,
+          "reference_positive_pixels": 0
+        },
+        "score": 0.0
+      },
+      "input_sha256": "0a49b878b9c59a8fc6ae0b230043ced1ff220edf89e8085167e90e2d5769bd88",
+      "key": 2082,
+      "parity_fit": null,
+      "role": "untouched",
+      "status": "assessed",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "base": {
+        "box": [
+          896,
+          448,
+          992,
+          544
+        ],
+        "pixels": {
+          "false_negative_pixels": 7168,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0029296875,
+          "intersection": 9216,
+          "iou": 0.5625,
+          "pixel_f1": 0.72,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 9216,
+          "recall": 0.5625,
+          "reference_positive_pixels": 16384
+        },
+        "score": 0.9907660865472717
+      },
+      "input_sha256": "75955671536c25d3ef27f9fef056d0355d851b875f4d128842eabbd1b5a6bb28",
+      "key": 2082,
+      "parity_fit": [
+        [
+          6.27371340533589e-06,
+          1.3993633964592966e-05
+        ],
+        [
+          0.9913310342882011,
+          0.9908838372661538
+        ]
+      ],
+      "role": "bilinear_horizontal",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "8e533f407d9f64cf8ca25c2d90deb428430fb69f05ea7957be9997072398f327"
+    },
+    {
+      "base": {
+        "box": [
+          896,
+          448,
+          992,
+          544
+        ],
+        "pixels": {
+          "false_negative_pixels": 7168,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0029296875,
+          "intersection": 9216,
+          "iou": 0.5625,
+          "pixel_f1": 0.72,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 9216,
+          "recall": 0.5625,
+          "reference_positive_pixels": 16384
+        },
+        "score": 2.2207399705116644
+      },
+      "input_sha256": "6c48772cbfdd6a81db9052bc4e1abc8f47f8197bd4caf594de693c93dc7b3f34",
+      "key": 2082,
+      "parity_fit": [
+        [
+          0.9887603540554075,
+          0.9879747035697194
+        ],
+        [
+          0.9823018563434494,
+          0.9812586255492547
+        ]
+      ],
+      "role": "bilinear_diagonal",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "8e533f407d9f64cf8ca25c2d90deb428430fb69f05ea7957be9997072398f327"
+    },
+    {
+      "base": {
+        "box": [
+          896,
+          448,
+          992,
+          544
+        ],
+        "pixels": {
+          "false_negative_pixels": 7168,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0029296875,
+          "intersection": 9216,
+          "iou": 0.5625,
+          "pixel_f1": 0.72,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 9216,
+          "recall": 0.5625,
+          "reference_positive_pixels": 16384
+        },
+        "score": 2.461888623632911
+      },
+      "input_sha256": "8b742f2cf12caa75c68957d364bb0419946ac8c89635725bc90d3b71ffc31832",
+      "key": 2082,
+      "parity_fit": [
+        [
+          0.9181699603690077,
+          0.8118687555961256
+        ],
+        [
+          0.8060877414626052,
+          0.9226667876582483
+        ]
+      ],
+      "role": "bicubic_diagonal",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "8e533f407d9f64cf8ca25c2d90deb428430fb69f05ea7957be9997072398f327"
+    },
+    {
+      "base": {
+        "box": [
+          896,
+          448,
+          992,
+          544
+        ],
+        "pixels": {
+          "false_negative_pixels": 7168,
+          "false_positive_pixels": 1,
+          "flagged_area_fraction": 0.0029296875,
+          "intersection": 9215,
+          "iou": 0.56243896484375,
+          "pixel_f1": 0.7199499980467987,
+          "pixels": 3145728,
+          "precision": 0.9998914930555556,
+          "predicted_positive_pixels": 9216,
+          "recall": 0.5624732954892266,
+          "reference_positive_pixels": 16383
+        },
+        "score": 2.1046849890241224
+      },
+      "input_sha256": "41ad1598cdc1f9a0d1d74461f67fef494bcf62995d97e85495d196f6017e88e8",
+      "key": 2082,
+      "parity_fit": [
+        [
+          0.02426620087008302,
+          0.0293528998436704
+        ],
+        [
+          0.021410645779431414,
+          0.02932020908037425
+        ]
+      ],
+      "role": "rotated",
+      "status": "assessed",
+      "truth_pixels": 16383,
+      "truth_sha256": "25f7002563a1eddbab47fc8d57cb80613a3411784a9fd183a449c965cdc33524"
+    },
+    {
+      "base": {
+        "box": [
+          864,
+          416,
+          1024,
+          576
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 9216,
+          "flagged_area_fraction": 0.008138020833333334,
+          "intersection": 16384,
+          "iou": 0.64,
+          "pixel_f1": 0.7804878048780488,
+          "pixels": 3145728,
+          "precision": 0.64,
+          "predicted_positive_pixels": 25600,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 0.27039858508227654
+      },
+      "input_sha256": "50ea53b31ac641d298df69004bd255bdf3cf240ee22d0c3770fa905f4ea258e1",
+      "key": 2082,
+      "parity_fit": [
+        [
+          0.0032773304050086605,
+          0.007667458167484376
+        ],
+        [
+          0.004171949727975299,
+          0.0006021949902922374
+        ]
+      ],
+      "role": "blur",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "8e533f407d9f64cf8ca25c2d90deb428430fb69f05ea7957be9997072398f327"
+    },
+    {
+      "base": {
+        "box": [
+          896,
+          448,
+          992,
+          544
+        ],
+        "pixels": {
+          "false_negative_pixels": 7168,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0029296875,
+          "intersection": 9216,
+          "iou": 0.5625,
+          "pixel_f1": 0.72,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 9216,
+          "recall": 0.5625,
+          "reference_positive_pixels": 16384
+        },
+        "score": 2.3180094996001794
+      },
+      "input_sha256": "7de31ade656e5c2049d5403f0d07afef8ff5de298cad5644d8ebb96da842cd70",
+      "key": 2082,
+      "parity_fit": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          8.356909699047677e-05
+        ]
+      ],
+      "role": "quantized_bilinear",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "8e533f407d9f64cf8ca25c2d90deb428430fb69f05ea7957be9997072398f327"
+    },
+    {
+      "base": {
+        "box": null,
+        "pixels": {
+          "false_negative_pixels": 16384,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 0.0,
+          "pixel_f1": 0.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": 0.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 0.0
+      },
+      "input_sha256": "5afd200271a1ec43293ebde5209f2b1d0265e7032e052781587e6f03bde15f40",
+      "key": 2082,
+      "parity_fit": null,
+      "role": "local_tone",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "8e533f407d9f64cf8ca25c2d90deb428430fb69f05ea7957be9997072398f327"
+    },
+    {
+      "base": {
+        "box": [
+          864,
+          416,
+          1024,
+          576
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 9216,
+          "flagged_area_fraction": 0.008138020833333334,
+          "intersection": 16384,
+          "iou": 0.64,
+          "pixel_f1": 0.7804878048780488,
+          "pixels": 3145728,
+          "precision": 0.64,
+          "predicted_positive_pixels": 25600,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 1.8789628993767828
+      },
+      "input_sha256": "d7537bb9389331008f00047dbc3df9111e5a15080be7fb58741b3561a21ef05e",
+      "key": 2082,
+      "parity_fit": [
+        [
+          0.0032013050011808764,
+          0.0001217762676180012
+        ],
+        [
+          0.0030024509963322288,
+          8.96698802244078e-05
+        ]
+      ],
+      "role": "generated_sharp",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "8e533f407d9f64cf8ca25c2d90deb428430fb69f05ea7957be9997072398f327"
+    },
+    {
+      "base": {
+        "box": [
+          896,
+          416,
+          992,
+          576
+        ],
+        "pixels": {
+          "false_negative_pixels": 4096,
+          "false_positive_pixels": 3072,
+          "flagged_area_fraction": 0.0048828125,
+          "intersection": 12288,
+          "iou": 0.631578947368421,
+          "pixel_f1": 0.7741935483870968,
+          "pixels": 3145728,
+          "precision": 0.8,
+          "predicted_positive_pixels": 15360,
+          "recall": 0.75,
+          "reference_positive_pixels": 16384
+        },
+        "score": 1.809245073416016
+      },
+      "input_sha256": "f2f5be6f5c646bd2607537304eaebfa1a9791fff45bf9ff478590f57fbabe17b",
+      "key": 2082,
+      "parity_fit": [
+        [
+          0.003260398055764391,
+          0.00012148584191273848
+        ],
+        [
+          0.0032574568649329505,
+          0.00018283340076918897
+        ]
+      ],
+      "role": "generated_feathered",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "8e533f407d9f64cf8ca25c2d90deb428430fb69f05ea7957be9997072398f327"
+    },
+    {
+      "base": {
+        "box": null,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": null,
+          "reference_positive_pixels": 0
+        },
+        "score": 0.0
+      },
+      "input_sha256": "fdc39e6ee6cd6fd122c3322ad2d00291d738cc044200832559e4a939c6c69901",
+      "key": 2879,
+      "parity_fit": null,
+      "role": "untouched",
+      "status": "assessed",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "base": {
+        "box": [
+          1216,
+          832,
+          1344,
+          960
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 1.2285660113819366
+      },
+      "input_sha256": "a2eb8e6b7f882ad379e9331645906cf6b6575727743ebe93947a9ec3bf7b738c",
+      "key": 2879,
+      "parity_fit": [
+        [
+          0.0,
+          0.0004881065858142186
+        ],
+        [
+          0.9950697030866683,
+          0.9957083032648228
+        ]
+      ],
+      "role": "bilinear_horizontal",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "65943e40df7f6b8bafc1040a91a022e1d88e04363aead427ddccdef4b4c05fe8"
+    },
+    {
+      "base": {
+        "box": [
+          1216,
+          832,
+          1344,
+          960
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 2.7552010070603674
+      },
+      "input_sha256": "1bb5419c084fa8dda0df96397dde486312947ce9252c6ce17b2db8d4bf4476b1",
+      "key": 2879,
+      "parity_fit": [
+        [
+          0.9942876926070715,
+          0.9948649029600438
+        ],
+        [
+          0.9904745834438089,
+          0.9915099840608579
+        ]
+      ],
+      "role": "bilinear_diagonal",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "65943e40df7f6b8bafc1040a91a022e1d88e04363aead427ddccdef4b4c05fe8"
+    },
+    {
+      "base": {
+        "box": [
+          1216,
+          832,
+          1344,
+          960
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 2.9214132621116304
+      },
+      "input_sha256": "7cdf89dfc47edceb0d895469ed37c67b7834e0493f5e1e7fcd3127b6eb9228bb",
+      "key": 2879,
+      "parity_fit": [
+        [
+          0.894431905268729,
+          0.750574768735728
+        ],
+        [
+          0.7625041893693678,
+          0.9008510310407614
+        ]
+      ],
+      "role": "bicubic_diagonal",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "65943e40df7f6b8bafc1040a91a022e1d88e04363aead427ddccdef4b4c05fe8"
+    },
+    {
+      "base": {
+        "box": [
+          1216,
+          832,
+          1344,
+          960
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 1,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16383,
+          "iou": 0.99993896484375,
+          "pixel_f1": 0.999969481490524,
+          "pixels": 3145728,
+          "precision": 0.99993896484375,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16383
+        },
+        "score": 2.733483869916347
+      },
+      "input_sha256": "eeaa8b3bbac3da3c19ca87375dc812e732163a7b2f01341553fb7389d0d736ac",
+      "key": 2879,
+      "parity_fit": [
+        [
+          0.0457342542558824,
+          0.07066296692626262
+        ],
+        [
+          0.03526986754003447,
+          0.05086009516283574
+        ]
+      ],
+      "role": "rotated",
+      "status": "assessed",
+      "truth_pixels": 16383,
+      "truth_sha256": "3622d0875c4a2bd0c19789bb78464a8e4ad027763c32c4d6ad734385ccdec572"
+    },
+    {
+      "base": {
+        "box": [
+          1216,
+          832,
+          1344,
+          928
+        ],
+        "pixels": {
+          "false_negative_pixels": 4096,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.00390625,
+          "intersection": 12288,
+          "iou": 0.75,
+          "pixel_f1": 0.8571428571428571,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 12288,
+          "recall": 0.75,
+          "reference_positive_pixels": 16384
+        },
+        "score": 1.5795493181863034
+      },
+      "input_sha256": "6dfa184f565d113727d15a34a31ef174d99c60a04617313639d800f4fa4e58a5",
+      "key": 2879,
+      "parity_fit": [
+        [
+          0.8482699363371649,
+          0.8744110911587484
+        ],
+        [
+          0.8276177094013136,
+          0.8464175013177739
+        ]
+      ],
+      "role": "blur",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "65943e40df7f6b8bafc1040a91a022e1d88e04363aead427ddccdef4b4c05fe8"
+    },
+    {
+      "base": {
+        "box": [
+          1216,
+          832,
+          1344,
+          960
+        ],
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 2.148556800214263
+      },
+      "input_sha256": "b4309752ad258cbf725005b172b4c2bcc95930e44276eb742f47152e6419d243",
+      "key": 2879,
+      "parity_fit": [
+        [
+          0.00966268234594636,
+          0.024881008392632298
+        ],
+        [
+          0.022412523387425054,
+          0.05023145517130778
+        ]
+      ],
+      "role": "quantized_bilinear",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "65943e40df7f6b8bafc1040a91a022e1d88e04363aead427ddccdef4b4c05fe8"
+    },
+    {
+      "base": {
+        "box": null,
+        "pixels": {
+          "false_negative_pixels": 16384,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 0.0,
+          "pixel_f1": 0.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": 0.0,
+          "reference_positive_pixels": 16384
+        },
+        "score": 0.0
+      },
+      "input_sha256": "9b58d5a5694b5a87b4e610ce943c607a0ccd41c19d16373d9ce272389cd1a677",
+      "key": 2879,
+      "parity_fit": null,
+      "role": "local_tone",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "65943e40df7f6b8bafc1040a91a022e1d88e04363aead427ddccdef4b4c05fe8"
+    },
+    {
+      "base": {
+        "box": [
+          1248,
+          832,
+          1344,
+          896
+        ],
+        "pixels": {
+          "false_negative_pixels": 10240,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.001953125,
+          "intersection": 6144,
+          "iou": 0.375,
+          "pixel_f1": 0.5454545454545454,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 6144,
+          "recall": 0.375,
+          "reference_positive_pixels": 16384
+        },
+        "score": 1.7374061994735535
+      },
+      "input_sha256": "a837b01c2a9b29aa02a345636b2e6ffbc2f372ebb9ff48a7a535fead90f4a6e6",
+      "key": 2879,
+      "parity_fit": [
+        [
+          0.0,
+          0.02597641649407434
+        ],
+        [
+          0.00027094016225226447,
+          0.017684583410766397
+        ]
+      ],
+      "role": "generated_sharp",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "65943e40df7f6b8bafc1040a91a022e1d88e04363aead427ddccdef4b4c05fe8"
+    },
+    {
+      "base": {
+        "box": [
+          1248,
+          832,
+          1344,
+          896
+        ],
+        "pixels": {
+          "false_negative_pixels": 10240,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.001953125,
+          "intersection": 6144,
+          "iou": 0.375,
+          "pixel_f1": 0.5454545454545454,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 6144,
+          "recall": 0.375,
+          "reference_positive_pixels": 16384
+        },
+        "score": 1.6664713371961857
+      },
+      "input_sha256": "eda16176c15765788f5846e24cbdf1234ff690ef6d5cb1ed6e8a79aa8489479e",
+      "key": 2879,
+      "parity_fit": [
+        [
+          0.0,
+          0.02597641649407434
+        ],
+        [
+          0.00027094016225226447,
+          0.017684583410766397
+        ]
+      ],
+      "role": "generated_feathered",
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "65943e40df7f6b8bafc1040a91a022e1d88e04363aead427ddccdef4b4c05fe8"
+    }
+  ]
+}

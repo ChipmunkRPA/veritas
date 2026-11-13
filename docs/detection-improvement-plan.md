@@ -97,6 +97,26 @@ integration remains unfinished.
 
 ## Progress on 13 November
 
+- [Matching Word tables](document-word-table-comparison-2026-11-13.md) now
+  show wording changes in earlier-draft comparison with native cell and
+  paragraph coordinates. The browser, PDF, JSON and source replay found
+  all 15 edited cases and zero of six formatting controls.
+- The [paired video area study](video-reference-extent-2026-11-13.md)
+  expanded the key crop from 8.8% to 91.2% of the changed middle picture
+  pixels with the exact time interval. Both methods localized 20/20 prior
+  neural edits on a different carrier bank. The larger region found four
+  of six large conventional edits on new source groups and missed its
+  frozen five-of-six requirement. It stays offline.
+- The [interpolation-control transfer](image-native-stencil-interpolation-transfer-2026-11-13.md)
+  retained ten useful generated-edit locations across two delivery types on
+  13 new camera models, while reducing ordinary highlights from 30 to 16
+  across 104 controls. Rotation and quantization still produced false
+  alarms. The method stays experimental. Native and scalar replays matched
+  all 130 outcomes.
+- The [public-source noisy-speech replay](audio-odss-public-waveform-replay-2026-11-13.md)
+  rebuilt all 176 earlier stereo deliveries and 432 comparison views from
+  bounded publisher downloads. It verifies input preparation and acoustic
+  measurements separately from classifier accuracy.
 - The [generated-image replacement pilot](image-native-generated-stencil-transfer-2026-11-13.md)
   compared the shipped interpolation shift check with two phase-loss checks.
   The shift check found 0/12 generated replacements. Phase loss found 12/12

@@ -29,6 +29,10 @@ a { color: #285f50; }
 LABELS = {"body": "Message body", "quoted": "Quoted text", "signature": "Signature"}
 FILE_LABELS = {"plain_text": "Plain text", "docx": "Word body text", "pdf": "PDF text layer"}
 PNG_URL = "data:image/png;base64,"
+TABLE_SKIP = {"no_matching_position": "No table at the same body position.",
+              "unsupported_layout": "Outside the supported table layout.",
+              "changed_structure": "The table shape, headings or row labels changed.",
+              "comparison_limit": "The table exceeded the comparison limit."}
 
 
 def _word_position(item):
@@ -100,6 +104,29 @@ def _paired(review: dict | None) -> str:
     return "".join(output) + "</section>"
 
 
+def _word_tables(coverage):
+    if not coverage:
+        return ""
+    output = ["<section><h2>Word table wording changes</h2>",
+              "<p>Table, row and column numbers start at one. Character positions start within each cell.</p>"]
+    for table in coverage["compared"]:
+        old_number, new_number = table["earlier_table"], table["later_table"]
+        if not table["changes"]:
+            output.append(f'<p>Earlier table {old_number} and analyzed table {new_number} had no wording changes.</p>')
+        for change in table["changes"]:
+            ident = escape(change["id"])
+            output.append(f'<section><h2 id="draft-change-{ident}">{ident} · Row {change["row"]}, column {change["column"]}</h2>'
+                          f'{_side(f"Earlier table {old_number}", change["earlier"])}'
+                          f'{_side(f"Analyzed table {new_number}", change["later"])}</section>')
+    for table in coverage["skipped"]:
+        numbers = [f"{label} table {table[key]}" for key, label in (("earlier_table", "Earlier"), ("later_table", "Analyzed"))
+                   if table[key] is not None]
+        output.append(f'<p>{" / ".join(numbers)}. {TABLE_SKIP[table["reason"]]}</p>')
+    if coverage["omitted_positions"]:
+        output.append(f'<p>{coverage["omitted_positions"]} further table positions exceed the reporting limit.</p>')
+    return "".join(output) + "</section>"
+
+
 def render(comparison: dict) -> bytes:
     changes = []
     docx = comparison["format"] == "docx"
@@ -131,14 +158,16 @@ def render(comparison: dict) -> bytes:
     if mixed:
         positions = ("Each side uses its own Unicode character offsets. Word paragraph offsets start within the paragraph. "
                      "PDF source boxes use unrotated page coordinates.")
-    no_changes = "No word or punctuation changes found in the reply body." if html_reply else "No word or punctuation changes found."
+    word_tables = comparison.get("word_tables")
+    no_changes = ("No word or punctuation changes found in the top-level body paragraphs." if word_tables else
+                  "No word or punctuation changes found in the reply body." if html_reply else "No word or punctuation changes found.")
     content = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Earlier-draft comparison</title>
 <meta name="author" content="Chipmunk Verify"><style>{STYLE}</style></head><body>
 <p class="brand">CHIPMUNK VERIFY</p><h1>Earlier-draft comparison</h1>
 <p>{escape(comparison['scope'])}</p><p>{escape(comparison['interpretation'])}</p>
 <p>Highlights mark changed words and punctuation. {positions} Each range includes its start and excludes its end.</p>
 <div class="sources">{''.join(sources)}</div>{_paired(paired)}
-{''.join(changes) or f'<p>{no_changes}</p>'}
+{''.join(changes) or f'<p>{no_changes}</p>'}{_word_tables(word_tables)}
 </body></html>'''
 
     return load_weasyprint().HTML(string=content, url_fetcher=_restricted_fetcher(())).write_pdf()

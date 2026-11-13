@@ -64,6 +64,9 @@ The [cross-format draft comparison](document-mixed-format-comparison-2026-11-13.
 rebuilds all six TXT, Word and PDF directions from public publisher sources.
 It verifies both source locations and checks that a format change alone
 produces no wording highlights.
+The [Word table replay](document-word-table-comparison-2026-11-13.md#reproduce)
+checks paired cell ranges and all formatting-only controls from the
+published ledger. It can also compare an exported result against both DOCX files.
 The [two-room voice study](audio-spatial-mask-aachen-transfer-2026-11-13.md)
 publishes fixed comparison points, an alternate FFT replay and a reader for
 checking the decisions without distributing speech or separated waveforms.
@@ -106,6 +109,9 @@ uses a published CC0 camera roster to compare known locations, ordinary
 controls and incompatible image deliveries.
 The [matched utterance speech replay](audio-odss-matched-room-2026-11-13.md#reproduce)
 recomputes held background and voice flags on separate reader groups.
+The [public-source waveform replay](audio-odss-public-waveform-replay-2026-11-13.md)
+rebuilds all 176 deliveries from a clean cache with bounded publisher
+downloads, including the exact six-second excerpts used for background speech.
 The [PhonemeDF transfer replay](audio-phonemedf-matched-transfer-2026-11-13.md#reproduce)
 tests the same frozen operating points on four new readers, two generators
 and two competing-speech levels.
@@ -116,15 +122,30 @@ The [stereo path comparison](audio-stereo-path-return-transfer-2026-11-13.md#rep
 recounts recording-path flags under competing speech from an anonymous ledger.
 The [earlier-copy mouth comparison](video-paired-native-mouth-transfer-2026-11-13.md#replay)
 recomputes time and changed-pixel overlap independently on timing-preserving redraws.
+The [earlier-copy video extent study](video-reference-extent-2026-11-13.md#replay)
+recounts the time-and-pixel overlap on short authored edits and format controls.
 The [public design-system revisions](writing-uswds-revision-transfer-2026-11-13.md)
 replay passage-location flags against pinned source positions and genuine editorial controls.
 The [generated image replacement pilot](image-native-generated-stencil-transfer-2026-11-13.md)
 rebuilds all 48 regions and exact masks using the source captures and retained
 generated outputs. Independent generation requires the pinned local runtime.
+The [interpolation-control follow-up](image-native-stencil-interpolation-transfer-2026-11-13.md)
+includes 13 additional CC0 camera captures and an anonymous scalar audit of
+ordinary changes that resemble generated replacements.
 
 ### Replay the latest evidence transfer results
 
-The suite checks the earlier-copy JPEG comparison, timing-preserving mouth
+The extent suite checks all four current ledgers from a clean checkout.
+It recomputes the image interpolation controls, video region overlap,
+noisy-speech decisions and Word table results. The separate public audio
+command above rebuilds the waveforms.
+
+```sh
+review_dir=$(mktemp -d)
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/evidence-extent.json" --suite evidence-extent-2026-11-13
+```
+
+The earlier transfer suite checks the earlier-copy JPEG comparison, timing-preserving mouth
 redraws, background estimation, and all 140 writing worker deliveries. It
 replays the published decisions and misses using only the standard library.
 Use two interpreters or two checkouts to compare their receipts. Python 3.11

@@ -104,11 +104,10 @@ def _docx_part(archive, name):
     return data
 
 
-def docx_body_paragraphs(data):
-    """Yield numbered top-level paragraphs from a bounded native Word package."""
+def docx_body(data):
+    """Read the bounded main part used by the earlier-draft comparison."""
     from docx.oxml import parse_xml
     from docx.oxml.ns import qn
-    from docx.text.paragraph import Paragraph
     from lxml.etree import XMLSyntaxError
 
     check_docx_safe(BytesIO(data))
@@ -126,6 +125,13 @@ def docx_body_paragraphs(data):
     if (document.tag != qn("w:document") or (body := document.find(qn("w:body"))) is None
             or document.getroottree().docinfo.doctype or declarations.getroottree().docinfo.doctype):
         raise ValueError("The Word document body could not be read.")
+    return body
+
+
+def _word_paragraphs(body):
+    from docx.oxml.ns import qn
+    from docx.text.paragraph import Paragraph
+
     paragraph_number = 0
     for body_index, element in enumerate(body):
         if element.tag != qn("w:p"):
@@ -134,9 +140,14 @@ def docx_body_paragraphs(data):
         yield paragraph_number, body_index, Paragraph(element, None)
 
 
-def _docx_source(data):
+def docx_body_paragraphs(data):
+    """Yield numbered top-level paragraphs from a bounded native Word package."""
+    yield from _word_paragraphs(docx_body(data))
+
+
+def _docx_source(data, *, body=None, allow_empty=False):
     paragraphs, anchors, cursor = [], [], 0
-    for paragraph_number, body_index, paragraph in docx_body_paragraphs(data):
+    for paragraph_number, body_index, paragraph in _word_paragraphs(docx_body(data) if body is None else body):
         value = paragraph.text
         if not value.strip():
             continue
@@ -146,7 +157,7 @@ def _docx_source(data):
             raise ValueError(f"Each version can contain up to {MAX_CHARS:,} decoded body characters.")
         paragraphs.append(value)
         anchors.append((paragraph_number, body_index, start, cursor))
-    if not paragraphs:
+    if not paragraphs and not allow_empty:
         raise ValueError("Each Word version needs readable top-level body paragraphs.")
     decoded = "\n\n".join(paragraphs)
     body_tokens = tokens(decoded, [(start, end) for _, _, start, end in anchors])
@@ -199,9 +210,9 @@ def _html_token_sources(text, layout, changed_tokens):
     return located
 
 
-def _source(path: Path, data: bytes, extension: str, *, mixed: bool = False):
+def _source(path: Path, data: bytes, extension: str, *, mixed: bool = False, word_body=None, allow_empty_word_body=False):
     if extension == ".docx":
-        return _docx_source(data)
+        return _docx_source(data, body=word_body, allow_empty=allow_empty_word_body)
     if extension == ".pdf":
         doc = document_revision_pdf.extract_native(path, data, mixed_draft=mixed)
         if len(doc.text) > MAX_CHARS:
@@ -298,6 +309,7 @@ def compare_with_text(earlier: bytes, later: bytes, extension: str, *,
 
 def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
                          email_body_only: bool = False, pdf_paired_text_only: bool = False, earlier_extension: str | None = None,
+                         include_word_tables: bool = True,
                          ) -> tuple[dict, str, str, WordLayouts | None]:
     """Keep the native Word paragraph locations available for exact paired sentence mapping."""
     if extension not in FORMATS:
@@ -312,11 +324,20 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
     schema = SCHEMA
     scope, coordinates = SCOPE, TEXT_COORDINATES
     mixed_pdf_scope = MIXED_PDF_SCOPE
+    word_bodies = ((docx_body(earlier), docx_body(later)) if extension == ".docx" and not mixed and include_word_tables else (None, None))
+    word_tables = None
+    if word_bodies[0] is not None:
+        from app.evidence import document_revision_word_tables
+
+        word_tables = document_revision_word_tables.compare(*word_bodies)
+    has_compared_table = bool(word_tables and word_tables["compared"])
     with TemporaryDirectory(prefix="document-revision-") as staging:
         directory = Path(staging)
         earlier_path, later_path = directory / f"earlier{old_extension}", directory / f"later{extension}"
-        old_text, old_tokens, old_source, old_layout = _source(earlier_path, earlier, old_extension, mixed=mixed)
-        new_text, new_tokens, new_source, new_layout = _source(later_path, later, extension, mixed=mixed)
+        old_text, old_tokens, old_source, old_layout = _source(earlier_path, earlier, old_extension, mixed=mixed,
+            word_body=word_bodies[0], allow_empty_word_body=has_compared_table)
+        new_text, new_tokens, new_source, new_layout = _source(later_path, later, extension, mixed=mixed,
+            word_body=word_bodies[1], allow_empty_word_body=has_compared_table)
         if mixed:
             spaces = {".txt": TEXT_COORDINATES, ".docx": WORD_COORDINATES, ".pdf": document_revision_pdf.COORDINATES}
             for suffix, text, layout, source in ((old_extension, old_text, old_layout, old_source),
@@ -354,6 +375,8 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
             "scope": scope, "interpretation": INTERPRETATION}
     if mixed:
         return result, old_text, new_text, None
+    if word_tables is not None:
+        result.update(schema=document_revision_word_tables.SCHEMA, scope=document_revision_word_tables.SCOPE, word_tables=word_tables)
     if extension == ".eml" and email_body_only:
         return result, _email_body_prefix(old_text, old_tokens), _email_body_prefix(new_text, new_tokens), None
     if extension == ".pdf" and pdf_paired_text_only:

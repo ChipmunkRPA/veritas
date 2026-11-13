@@ -139,9 +139,55 @@ class DraftPairedCheck(BaseModel):
     center_responses: list[DraftWritingResponse] | None = None
 
 
+class DraftWordCellParagraph(BaseModel):
+    paragraph: int
+    cell_index: int
+    start: int
+    end: int
+
+
+class DraftWordCellExcerpt(BaseModel):
+    start: int
+    end: int
+    text: str
+    changed_tokens: list[tuple[int, int]]
+    paragraphs: list[DraftWordCellParagraph]
+
+
+class DraftWordCellChange(BaseModel):
+    id: str
+    row: int
+    column: int
+    earlier: DraftWordCellExcerpt
+    later: DraftWordCellExcerpt
+
+
+class DraftWordComparedTable(BaseModel):
+    body_index: int
+    earlier_table: int
+    later_table: int
+    rows: int
+    columns: int
+    changes: list[DraftWordCellChange]
+
+
+class DraftWordSkippedTable(BaseModel):
+    body_index: int
+    earlier_table: int | None
+    later_table: int | None
+    reason: Literal["no_matching_position", "unsupported_layout", "changed_structure", "comparison_limit"]
+
+
+class DraftWordTables(BaseModel):
+    coordinate_space: Literal["docx_table_cell_unicode_codepoint"]
+    compared: list[DraftWordComparedTable]
+    skipped: list[DraftWordSkippedTable]
+    omitted_positions: int
+
+
 class DraftComparison(BaseModel):
     schema_name: Literal["chipmunk.document-revision-comparison/1", "chipmunk.document-revision-comparison/2",
-                         "chipmunk.document-revision-comparison/3"] = Field(alias="schema")
+                         "chipmunk.document-revision-comparison/3", "chipmunk.document-revision-comparison/4"] = Field(alias="schema")
     format: Literal["email", "plain_text", "docx", "pdf", "mixed"]
     coordinate_space: Literal["decoded_source_unicode_codepoint", "docx_body_unicode_codepoint",
                               "pdf_native_text_unicode_codepoint", "email_html_extracted_text_unicode_codepoint",
@@ -152,6 +198,7 @@ class DraftComparison(BaseModel):
     scope: str
     interpretation: str
     paired_check: DraftPairedCheck | None = None
+    word_tables: DraftWordTables | None = None
 
 
 class DocumentRevisionResponse(BaseModel):

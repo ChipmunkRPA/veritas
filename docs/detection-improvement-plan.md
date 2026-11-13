@@ -115,7 +115,9 @@ integration remains unfinished.
 - [Directional separation for competing voices](audio-spatial-mask-voice-transfer-2026-11-13.md)
   added two useful locations and two ordinary-group flags while retaining the
   current mono locations. Both gains came from the same lateral layout. The
-  check stays in evaluation.
+  [two-room transfer](audio-spatial-mask-aachen-transfer-2026-11-13.md) covered
+  six synthesis families and added zero of seven edit locations. The check
+  stays in evaluation.
 - [Sentence omission](writing-omission-attribution-2026-11-13.md) added one
   eLife location and no ordinary flags there. On F1000Research it added no
   useful locations and one ordinary-group flag. It remains experimental.

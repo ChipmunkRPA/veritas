@@ -1,0 +1,2057 @@
+{
+  "exact_alternate_fft_replay": 25,
+  "forwards": 236,
+  "freeze": {
+    "aachen_archive_sha256": "d2fd52767505c402e8aed9299dcd046493c8254cfab2f769fcf480dc7c616a5f",
+    "aachen_license_sha256": "576e14bfd0215f50085d9980f8586f2cd3e69b0db43cbf1cb12aa49807406347",
+    "ami_annotations": "b56e5babb2496b8795deeeda7e71178d7fbc9963f94276cf2a3f4b56ebbc9f9d",
+    "assets": {
+      "pellav2_detector.pt": "d21aedfb52e2f87706c2753715a29665482b0f4a034800c31579df5d458559ac",
+      "silero_vad.jit": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720",
+      "w2v-bert-config.json": "f5572bd5998b68182e9c328a43127ed21fed687f6910497136b91a4e3b0e3675"
+    },
+    "background_participants": 8,
+    "complete_native_members": 852,
+    "foreground_and_genuine_speakers": 19,
+    "method": {
+      "controls": "Up to one publisher genuine delivery per unique unexposed reader and one same-reader same-exact-utterance genuine counterpart when present. For a matched utterance add a same-reader unchanged crop and a same-reader reinsert from a distinct earlier or later speech segment where the complete range is available. Distinct unpaired genuine controls remain separate groups. Add three AMI-only controls per room.",
+      "inference": "Run unchanged directional separator, prior AuxIVA both-output maximum, and rounded stereo mono. Gate each waveform with the pinned speech admission. Preserve the two frozen sample ranges and the three frozen points. Add directional responses to mono only as a parallel option. Neither prior labels nor dry stems enter inference.",
+      "mix": "Aachen publisher angle label 0 for lateral foreground and label 90 for balanced competing feed in each fixed rig. Retain complete measured coefficients, resampled from native 48 kHz to 16 kHz with the same polyphase convention as earlier room tests. Select disjoint six-second excerpts on a quarter-second grid from AMI participants excluded from the earlier directional test. Require 80% coverage by any speech, at least 400 ms of simultaneous annotated background words within the principal edit and 1.2 seconds of overlap overall for edits and their paired controls. Distinct ordinary and background-only controls require at least 600 ms overall overlap. Mix at \u22125 dB mono foreground-to-masker ratio, using exact integer summation and the same competing feed and gain for matched versions.",
+      "rule": "Count a location when the highest admitted above-point window has at least .30 temporal IoU and covers at least half of any visible publisher-labeled edit. Require at least two new source groups spanning at least two generators, zero added background-only group flags and at most one added ordinary group flag per room. Count each source speaker once in the cross-room replication.",
+      "source": "Bounded first 288 MiB of the publisher's uncompressed tar delivery. Strictly exclude every prior partial publisher speaker, and foreground and donor speaker IDs and source bytes from the three earlier directional rooms. Rank exact source IDs and six-second crop starts by SHA-256. Each selected positive has a complete .64\u20131.28 second labeled edit wholly inside 1\u20133 or 3\u20135 seconds; any other complete visible edit is retained in truth. Do not select with model scores."
+    },
+    "model_code": "5ef67c11589b7b7c1068bbd8caf5741d65e40baca5786283bc5573e6487d5444",
+    "points": {
+      "directional": 7.068065580780201,
+      "earlier_either": 6.760727907655432,
+      "mono": 5.356589748054317
+    },
+    "prefix_bytes": 301989888,
+    "prefix_sha256": "f6650272f121109adf87f4d102c5915d01bca804282fcdfd913e36ed45b7f891",
+    "prior_auxiva_code": "baf3f9ad4140a33bb527f4a079aa9d1f82a86b09eb5adcead79913bcfa4991e0",
+    "prior_comparison": "d123dedc215ebc93d7b8a093ba481aab5050cd74a8fdded01c81da6b08a55ed1",
+    "prior_exact_rosters": {
+      "audio-measured-spatial-transfer-final-2026-11-12": "28a3ecbaa264cff9de2f37a510734255fda833a4b057726127d6de0922f41f8a",
+      "audio-remote-neighbor-replication-2026-11-12": "72cddb5d4dd8621d8d179d474b79a3f48262a887100dcc6a87658dfee05d605f"
+    },
+    "prior_publisher_roster": "de3421a88b4c7d57b1ed053a4fada5017330c319bd3514bc33a619cf7f1cf768",
+    "prior_source_hash_exclusions": 208,
+    "prior_speaker_exclusions": 84,
+    "rooms": {
+      "aula_carolina": {
+        "balanced": {
+          "angle_label": 90,
+          "early_left_minus_right_db": -1.86023,
+          "members": [
+            {
+              "member": "AIR_1_4/air_binaural_aula_carolina_1_1_3_90_3.mat",
+              "native_samples": 479376,
+              "sha256": "df810543a76643e034641f03ed05c2c8140e78f75485d8bcb80d35199cb9f35f"
+            },
+            {
+              "member": "AIR_1_4/air_binaural_aula_carolina_0_1_3_90_3.mat",
+              "native_samples": 479376,
+              "sha256": "4594a51a56554a08966b0081ef48feef8c47f246f3732cff29925b9e5f7f0e90"
+            }
+          ],
+          "peaks": [
+            148,
+            148
+          ],
+          "rendered_sha256": "0e7dc0f024b07e480f8a707136b071be9dcc2f3268c66a9196898ada1995b427"
+        },
+        "lateral": {
+          "angle_label": 0,
+          "early_left_minus_right_db": -11.10536,
+          "members": [
+            {
+              "member": "AIR_1_4/air_binaural_aula_carolina_1_1_3_0_3.mat",
+              "native_samples": 479376,
+              "sha256": "f721e97904111ee978809de638716f2a301f333faa446b3112d406806e1ee8a0"
+            },
+            {
+              "member": "AIR_1_4/air_binaural_aula_carolina_0_1_3_0_3.mat",
+              "native_samples": 479376,
+              "sha256": "298c90da9b3796f97fad25e0cc70cb4f2892003edff33ab221518d2079978471"
+            }
+          ],
+          "peaks": [
+            142,
+            133
+          ],
+          "rendered_sha256": "5082632caf7fefc93089536a44a5d3b2a77b43f4f0be0c405410c1964f1217bc"
+        }
+      },
+      "stairway": {
+        "balanced": {
+          "angle_label": 90,
+          "early_left_minus_right_db": -0.82642,
+          "members": [
+            {
+              "member": "AIR_1_4/air_binaural_stairway_1_1_2_90.mat",
+              "native_samples": 96000,
+              "sha256": "38a6d70a507aba1b673a5e970f1a6ddf57c29ec54f71ac50bc4ec34eac3cd6f4"
+            },
+            {
+              "member": "AIR_1_4/air_binaural_stairway_0_1_2_90.mat",
+              "native_samples": 96000,
+              "sha256": "4a43d6dc91a64199f996d0990f8170f1d7baf13a4807951391d8ae92683b481c"
+            }
+          ],
+          "peaks": [
+            95,
+            93
+          ],
+          "rendered_sha256": "c0065d3e84a09ccfc4e5cc3a8bd040667533b46e8eaee7e127a53bbb4cc64263"
+        },
+        "lateral": {
+          "angle_label": 0,
+          "early_left_minus_right_db": 7.21164,
+          "members": [
+            {
+              "member": "AIR_1_4/air_binaural_stairway_1_1_2_0.mat",
+              "native_samples": 96000,
+              "sha256": "c62e92559f143869f573d3cac52f1a277471c43a0d5413cbada0f6240bf98ddc"
+            },
+            {
+              "member": "AIR_1_4/air_binaural_stairway_0_1_2_0.mat",
+              "native_samples": 96000,
+              "sha256": "e1183f2053355fc5dfced1b485a8350647423750e424d96fd0ccbc5af7192832"
+            }
+          ],
+          "peaks": [
+            94,
+            104
+          ],
+          "rendered_sha256": "488fd62ef8b4fb8e8f92554e6af316cae7914cab03dd8d737d78dde9cf8714c0"
+        }
+      }
+    },
+    "runner_code": "d921da01bb1c3f4c30af1fbb10045f2992fefdd84777850f4437a438f49a4cc8",
+    "schema": "chipmunk.aachen-spatial-voice/1",
+    "windows": [
+      [
+        16000,
+        48000
+      ],
+      [
+        48000,
+        80000
+      ]
+    ]
+  },
+  "freeze_sha256": "ebd9bf6dfd80d1cbf4dd9eda0bd3768784afdf5804b45cf64198526c82c35fb9",
+  "private_roster_sha256": "8e50c6f0bc24a4a83e72c1792acb31a7b752bc75969b9c020939c6a2a446680d",
+  "response_ledger_sha256": "1d3f178ee66ae29d1575f6f449c6b72c69f8b1c12d6110b98fe9fb06952ce823",
+  "responses": [
+    {
+      "case": 0,
+      "family": "cosyvoice",
+      "group": "edit-00",
+      "kind": "publisher_edit",
+      "modes": [
+        -8,
+        0,
+        10
+      ],
+      "reads": {
+        "directional": [
+          [
+            {
+              "score": -4.87355142647284
+            },
+            {
+              "score": -6.4924168328859375
+            }
+          ],
+          [
+            {
+              "score": -6.782006240757839
+            },
+            {
+              "score": -5.060756669068032
+            }
+          ],
+          [
+            {
+              "score": -5.697457269217027
+            },
+            {
+              "score": -4.372313009545359
+            }
+          ]
+        ],
+        "earlier_either": [
+          [
+            {
+              "score": 5.812488569287481
+            },
+            {
+              "score": -5.723440216022763
+            }
+          ],
+          [
+            {
+              "score": -6.914185953997011
+            },
+            {
+              "score": -5.509957849475433
+            }
+          ]
+        ],
+        "mono": [
+          [
+            {
+              "score": -6.168789839370717
+            },
+            {
+              "score": -5.334167510838419
+            }
+          ]
+        ]
+      },
+      "room": "stairway",
+      "truth": [
+        [
+          14672,
+          27872
+        ],
+        [
+          46400,
+          52640
+        ],
+        [
+          54560,
+          66640
+        ]
+      ]
+    },
+    {
+      "case": 1,
+      "family": "elevenlab",
+      "group": "edit-01",
+      "kind": "publisher_edit",
+      "modes": [
+        -11,
+        0,
+        17
+      ],
+      "reads": {
+        "directional": [
+          [
+            {
+              "score": -4.554401918838396
+            },
+            {
+              "score": -4.580075309182334
+            }
+          ],
+          [
+            {
+              "score": -6.132733346790472
+            },
+            {
+              "score": -6.630793091025894
+            }
+          ],
+          [
+            {
+              "score": null
+            },
+            {
+              "score": -4.764962156269774
+            }
+          ]
+        ],
+        "earlier_either": [
+          [
+            {
+              "score": null
+            },
+            {
+              "score": null
+            }
+          ],
+          [
+            {
+              "score": -5.499464952878425
+            },
+            {
+              "score": -3.277819628820976
+            }
+          ]
+        ],
+        "mono": [
+          [
+            {
+              "score": -5.799728420771194
+            },
+            {
+              "score": -6.403589788787112
+            }
+          ]
+        ]
+      },
+      "room": "aula_carolina",
+      "truth": [
+        [
+          2160,
+          13680
+        ],
+        [
+          14800,
+          22480
+        ],
+        [
+          23440,
+          30800
+        ],
+        [
+          57232,
+          68912
+        ],
+        [
+          86416,
+          91376
+        ]
+      ]
+    },
+    {
+      "case": 2,
+      "family": "gptsovits",
+      "group": "edit-02",
+      "kind": "publisher_edit",
+      "modes": [
+        -8,
+        0,
+        11
+      ],
+      "reads": {
+        "directional": [
+          [
+            {
+              "score": null
+            },
+            {
+              "score": null
+            }
+          ],
+          [
+            {
+              "score": -5.922039513723205
+            },
+            {
+              "score": -5.961327568848618
+            }
+          ],
+          [
+            {
+              "score": -5.480528889142296
+            },
+            {
+              "score": 4.824728039722345
+            }
+          ]
+        ],
+        "earlier_either": [
+          [
+            {
+              "score": 2.293566053410488
+            },
+            {
+              "score": 6.828686175564312
+            }
+          ],
+          [
+            {
+              "score": -6.971187542214685
+            },
+            {
+              "score": -6.5180454719888985
+            }
+          ]
+        ],
+        "mono": [
+          [
+            {
+              "score": -4.886967662553231
+            },
+            {
+              "score": 4.978070332710149
+            }
+          ]
+        ]
+      },
+      "room": "stairway",
+      "truth": [
+        [
+          52272,
+          68672
+        ]
+      ]
+    },
+    {
+      "case": 3,
+      "family": "ljjets",
+      "group": "edit-03",
+      "kind": "publisher_edit",
+      "modes": [
+        -11,
+        0,
+        7
+      ],
+      "reads": {
+        "directional": [
+          [
+            {
+              "score": -3.957138533878232
+            },
+            {
+              "score": 5.845927095308116
+            }
+          ],
+          [
+            {
+              "score": -3.737026195733203
+            },
+            {
+              "score": -4.7326969546771585
+            }
+          ],
+          [
+            {
+              "score": 4.8540310124773445
+            },
+            {
+              "score": null
+            }
+          ]
+        ],
+        "earlier_either": [
+          [
+            {
+              "score": null
+            },
+            {
+              "score": null
+            }
+          ],
+          [
+            {
+              "score": -5.80341723592701
+            },
+            {
+              "score": 4.420558592439724
+            }
+          ]
+        ],
+        "mono": [
+          [
+            {
+              "score": 3.6137006425726854
+            },
+            {
+              "score": 1.650144063577343
+            }
+          ]
+        ]
+      },
+      "room": "aula_carolina",
+      "truth": [
+        [
+          3424,
+          12384
+        ],
+        [
+          18208,
+          33648
+        ],
+        [
+          52160,
+          63920
+        ],
+        [
+          82176,
+          93216
+        ]
+      ]
+    },
+    {
+      "case": 4,
+      "family": "xttsv2",
+      "group": "edit-04",
+      "kind": "publisher_edit",
+      "modes": [
+        -9,
+        0,
+        8
+      ],
+      "reads": {
+        "directional": [
+          [
+            {
+              "score": -4.456107172874653
+            },
+            {
+              "score": -4.493138308691603
+            }
+          ],
+          [
+            {
+              "score": -6.343912055182371
+            },
+            {
+              "score": -5.513845410403439
+            }
+          ],
+          [
+            {
+              "score": -6.448155413023384
+            },
+            {
+              "score": -6.574921605260456
+            }
+          ]
+        ],
+        "earlier_either": [
+          [
+            {
+              "score": -1.281563302681954
+            },
+            {
+              "score": -5.742739680066706
+            }
+          ],
+          [
+            {
+              "score": null
+            },
+            {
+              "score": null
+            }
+          ]
+        ],
+        "mono": [
+          [
+            {
+              "score": -5.112333290752578
+            },
+            {
+              "score": -5.657539300990293
+            }
+          ]
+        ]
+      },
+      "room": "stairway",
+      "truth": [
+        [
+          57200,
+          73840
+        ],
+        [
+          74576,
+          83536
+        ]
+      ]
+    },
+    {
+      "case": 5,
+      "family": "yourtts",
+      "group": "edit-05",
+      "kind": "publisher_edit",
+      "modes": [
+        -11,
+        0,
+        15
+      ],
+      "reads": {
+        "directional": [
+          [
+            {
+              "score": 4.21252901181681
+            },
+            {
+              "score": 4.584316905519667
+            }
+          ],
+          [
+            {
+              "score": -5.804785679787057
+            },
+            {
+              "score": -5.879023120098269
+            }
+          ],
+          [
+            {
+              "score": null
+            },
+            {
+              "score": -5.879536629726033
+            }
+          ]
+        ],
+        "earlier_either": [
+          [
+            {
+              "score": null
+            },
+            {
+              "score": -6.53990933987365
+            }
+          ],
+          [
+            {
+              "score": 5.7241160216989515
+            },
+            {
+              "score": 6.552640645653828
+            }
+          ]
+        ],
+        "mono": [
+          [
+            {
+              "score": -4.323923170928101
+            },
+            {
+              "score": -3.797235242263788
+            }
+          ]
+        ]
+      },
+      "room": "aula_carolina",
+      "truth": [
+        [
+          6000,
+          14560
+        ],
+        [
+          29456,
+          33296
+        ],
+        [
+          34352,
+          40432
+        ],
+        [
+          50768,
+          65168
+        ],
+        [
+          66032,
+          71872
+        ]
+      ]
+    },
+    {
+      "case": 6,
+      "family": "ljjets",
+      "group": "edit-06",
+      "kind": "publisher_edit",
+      "modes": [
+        -22,
+        0,
+        11
+      ],
+      "reads": {
+        "directional": [
+          [
+            {
+              "score": -6.90293604330497
+            },
+            {
+              "score": -6.799078439197701
+            }
+          ],
+          [
+            {
+              "score": -7.086190176070825
+            },
+            {
+              "score": null
+            }
+          ],
+          [
+            {
+              "score": -5.460436886060919
+            },
+            {
+              "score": -4.272647877973537
+            }
+          ]
+        ],
+        "earlier_either": [
+          [
+            {
+              "score": -4.144413926673591
+            },
+            {
+              "score": 4.378650082377102
+            }
+          ],
+          [
+            {
+              "score": null
+            },
+            {
+              "score": null
+            }
+          ]
+        ],
+        "mono": [
+          [
+            {
+              "score": -6.913284263540073
+            },
+            {
+              "score": -4.7233709693913895
+            }
+          ]
+        ]
+      },
+      "room": "stairway",
+      "truth": [
+        [
+          20320,
+          31360
+        ],
+        [
+          44160,
+          78160
+        ]
+      ]
+    },
+    {
+      "case": 7,
+      "family": null,
+      "group": "genuine-00",
+      "kind": "genuine",
+      "modes": [
+        -8,
+        0,
+        11
+      ],
+      "reads": {
+        "directional": [
+          [
+            {
+              "score": 4.968855915393728
+            },
+            {
+              "score": -6.932065070683317
+            }
+          ],
+          [
+            {
+              "score": -4.81008628333728
+            },
+            {
+              "score": -7.019249901260164
+            }
+          ],
+          [
+            {
+              "score": 5.504946554234583
+            },
+            {
+              "score": -4.4200591623503085
+            }
+          ]
+        ],
+        "earlier_either": [
+          [
+            {
+              "score": 6.563808134813541
+            },
+            {
+              "score": -4.828258441312949
+            }
+          ],
+          [
+            {
+              "score": -6.100613662519012
+            },
+            {
+              "score": -6.966797882223751
+            }
+          ]
+        ],
+        "mono": [
+          [
+            {
+              "score": 5.48507707960904
+            },
+            {
+              "score": -6.826557165760579
+            }
+          ]
+        ]
+      },
+      "room": "stairway",
+      "truth": []
+    },
+    {
+      "case": 8,
+      "family": null,
+      "group": "genuine-01",
+      "kind": "genuine",
+      "modes": [
+        -11,
+        0,
+        8
+      ],
+      "reads": {
+        "directional": [
+          [
+            {
+              "score": -4.695941017992313
+            },
+            {
+              "score": 2.5404523966736208
+            }
+          ],
+          [
+            {
+              "score": -5.667443251642523
+            },
+            {
+              "score": -4.578847912942598
+            }
+          ],
+          [
+            {
+              "score": -4.79539773575125
+            },
+            {
+              "score": -3.4910836355000296
+            }
+          ]
+        ],
+        "earlier_either": [
+          [
+            {
+              "score": -6.946434966122989
+            },
+            {
+              "score": -6.564622898366295
+            }
+          ],
+          [
+            {
+              "score": 4.118876121563856
+            },
+            {
+              "score": 5.80565331167129
+            }
+          ]
+        ],
+        "mono": [
+          [
+            {
+              "score": -4.3662376860879375
+            },
+            {
+              "score": 3.8163036502590533
+            }
+          ]
+        ]
+      },
+      "room": "aula_carolina",
+      "truth": []
+    },
+    {
+      "case": 9,
+      "family": null,
+      "group": "genuine-02",
+      "kind": "genuine",
+      "modes": [
+        -9,
+        0,
+        10
+      ],
+      "reads": {
+        "directional": [
+          [
+            {
+              "score": null
+            },
+            {
+              "score": null
+            }
+          ],
+          [
+            {
+              "score": null
+            },
+            {
+              "score": -6.48668808920123
+            }
+          ],
+          [
+            {
+              "score": -5.663890854573011
+            },
+            {
+              "score": -6.872580506075686
+            }
+          ]
+        ],
+        "earlier_either": [
+          [
+            {
+              "score": -4.588824774383562
+            },
+            {
+              "score": 6.2655947097035805
+            }
+          ],
+          [
+            {
+              "score": -5.624100701239227
+            },
+            {
+              "score": -6.834745886225119
+            }
+          ]
+        ],
+        "mono": [
+          [
+            {
+              "score": -5.681709273451615
+            },
+            {
+              "score": -6.57466035940717
+            }
+          ]
+        ]
+      },
+      "room": "stairway",
+      "truth": []
+    },
+    {
+      "case": 10,
+      "family": null,
+      "group": "genuine-03",
+      "kind": "genuine",
+      "modes": [
+        -10,
+        0,
+        17
+      ],
+      "reads": {
+        "directional": [
+          [
+            {
+              "score": 4.546959707759155
+            },
+            {
+              "score": -3.147746516175063
+            }
+          ],
+          [
+            {
+              "score": -3.958453635735485
+            },
+            {
+              "score": 3.249940704133301
+            }
+          ],
+          [
+            {
+              "score": 2.7660050973979553
+            },
+            {
+              "score": -2.052842418963494
+            }
+          ]
+        ],
+        "earlier_either": [
+          [
+            {
+              "score": -2.7469993477899854
+            },
+            {
+              "score": 4.656448501101273
+            }
+          ],
+          [
+            {
+              "score": 6.365996664677782
+            },
+            {
+              "score": -3.260202861121411
+            }
+          ]
+        ],
+        "mono": [
+          [
+            {
+              "score": 7.12450480826805
+            },
+            {
+              "score": 6.597769853132296
+            }
+          ]
+        ]
+      },
+      "room": "aula_carolina",
+      "truth": []
+    },
+    {
+      "case": 11,
+      "family": null,
+      "group": "genuine-04",
+      "kind": "genuine",
+      "modes": [
+        -8,
+        0,
+        11
+      ],
+      "reads": {
+        "directional": [
+          [
+            {
+              "score": -6.331709921277544
+            },
+            {
+              "score": -6.833416499561988
+            }
+          ],
+          [
+            {
+              "score": -3.5321848549199477
+            },
+            {
+              "score": -5.175540490085399
+            }
+          ],
+          [
+            {
+              "score": -3.536691125556971
+            },
+            {
+              "score": -5.995538678695304
+            }
+          ]
+        ],
+        "earlier_either": [
+          [
+            {
+              "score": 5.2419079730319815
+            },
+            {
+              "score": -4.755378753094725
+            }
+          ],
+          [
+            {
+              "score": -5.726996470706704
+            },
+            {
+              "score": -6.1748718980660735
+            }
+          ]
+        ],
+        "mono": [
+          [
+            {
+              "score": 3.484582529654476
+            },
+            {
+              "score": -6.034375222429404
+            }
+          ]
+        ]
+      },
+      "room": "stairway",
+      "truth": []
+    },
+    {
+      "case": 12,
+      "family": null,
+      "group": "genuine-05",
+      "kind": "genuine",
+      "modes": [
+        -11,
+        0,
+        15
+      ],
+      "reads": {
+        "directional": [
+          [
+            {
+              "score": -2.846642495360093
+            },
+            {
+              "score": -4.453309547554698
+            }
+          ],
+          [
+            {
+              "score": 3.303174693314637
+            },
+            {
+              "score": -5.425130778425041
+            }
+          ],
+          [
+            {
+              "score": -6.082591021439744
+            },
+            {
+              "score": -6.259120062823796
+            }
+          ]
+        ],
+        "earlier_either": [
+          [
+            {
+              "score": 4.655943511707939
+            },
+            {
+              "score": -5.759734166707932
+            }
+          ],
+          [
+            {
+              "score": 2.1794309221446735
+            },
+            {
+              "score": -5.394694316708268
+            }
+          ]
+        ],
+        "mono": [
+          [
+            {
+              "score": 0.14719325307755904
+            },
+            {
+              "score": 4.693037494246786
+            }
+          ]
+        ]
+      },
+      "room": "aula_carolina",
+      "truth": []
+    },
+    {
+      "case": 13,
+      "family": null,
+      "group": "genuine-06",
+      "kind": "genuine",
+      "modes": [
+        0,
+        9,
+        14
+      ],
+      "reads": {
+        "directional": [
+          [
+            {
+              "score": -3.5593030609496648
+            },
+            {
+              "score": -3.543366628176291
+            }
+          ],
+          [
+            {
+              "score": null
+            },
+            {
+              "score": -5.551771179095258
+            }
+          ],
+          [
+            {
+              "score": -5.68766881449788
+            },
+            {
+              "score": -6.841553151004496
+            }
+          ]
+        ],
+        "earlier_either": [
+          [
+            {
+              "score": -6.456138087799779
+            },
+            {
+              "score": -5.891532925449155
+            }
+          ],
+          [
+            {
+              "score": -5.603975313282722
+            },
+            {
+              "score": null
+            }
+          ]
+        ],
+        "mono": [
+          [
+            {
+              "score": 3.2266974827797745
+            },
+            {
+              "score": 4.146659462731928
+            }
+          ]
+        ]
+      },
+      "room": "stairway",
+      "truth": []
+    },
+    {
+      "case": 14,
+      "family": null,
+      "group": "genuine-07",
+      "kind": "genuine",
+      "modes": [
+        -11,
+        0,
+        15
+      ],
+      "reads": {
+        "directional": [
+          [
+            {
+              "score": -4.056604418674572
+            },
+            {
+              "score": -6.229344368734537
+            }
+          ],
+          [
+            {
+              "score": -6.184594185216672
+            },
+            {
+              "score": -6.5885015288244055
+            }
+          ],
+          [
+            {
+              "score": null
+            },
+            {
+              "score": -6.886931478065441
+            }
+          ]
+        ],
+        "earlier_either": [
+          [
+            {
+              "score": null
+            },
+            {
+              "score": null
+            }
+          ],
+          [
+            {
+              "score": -4.577524158149568
+            },
+            {
+              "score": -3.9341034421476317
+            }
+          ]
+        ],
+        "mono": [
+          [
+            {
+              "score": -5.889187303651092
+            },
+            {
+              "score": -6.20850374319299
+            }
+          ]
+        ]
+      },
+      "room": "aula_carolina",
+      "truth": []
+    },
+    {
+      "case": 15,
+      "family": null,
+      "group": "genuine-08",
+      "kind": "genuine",
+      "modes": [
+        -9,
+        0,
+        10
+      ],
+      "reads": {
+        "directional": [
+          [
+            {
+              "score": -5.509449011035225
+            },
+            {
+              "score": -1.350169336834902
+            }
+          ],
+          [
+            {
+              "score": -5.241660166604648
+            },
+            {
+              "score": null
+            }
+          ],
+          [
+            {
+              "score": 4.324100376110429
+            },
+            {
+              "score": -5.544719685880066
+            }
+          ]
+        ],
+        "earlier_either": [
+          [
+            {
+              "score": 6.772869514012867
+            },
+            {
+              "score": 4.777740564251421
+            }
+          ],
+          [
+            {
+              "score": -5.758455299685155
+            },
+            {
+              "score": null
+            }
+          ]
+        ],
+        "mono": [
+          [
+            {
+              "score": -4.088982591705886
+            },
+            {
+              "score": -2.6286787754133507
+            }
+          ]
+        ]
+      },
+      "room": "stairway",
+      "truth": []
+    },
+    {
+      "case": 16,
+      "family": null,
+      "group": "genuine-09",
+      "kind": "genuine",
+      "modes": [
+        -10,
+        0,
+        9
+      ],
+      "reads": {
+        "directional": [
+          [
+            {
+              "score": -5.413154107449331
+            },
+            {
+              "score": 3.804548800724581
+            }
+          ],
+          [
+            {
+              "score": -5.204784426828318
+            },
+            {
+              "score": -6.598865514655101
+            }
+          ],
+          [
+            {
+              "score": null
+            },
+            {
+              "score": null
+            }
+          ]
+        ],
+        "earlier_either": [
+          [
+            {
+              "score": null
+            },
+            {
+              "score": null
+            }
+          ],
+          [
+            {
+              "score": -3.951752958554163
+            },
+            {
+              "score": 5.094213517545001
+            }
+          ]
+        ],
+        "mono": [
+          [
+            {
+              "score": -4.116487538164522
+            },
+            {
+              "score": -4.419588102413892
+            }
+          ]
+        ]
+      },
+      "room": "aula_carolina",
+      "truth": []
+    },
+    {
+      "case": 17,
+      "family": null,
+      "group": "genuine-10",
+      "kind": "genuine",
+      "modes": [
+        -9,
+        0,
+        10
+      ],
+      "reads": {
+        "directional": [
+          [
+            {
+              "score": -4.259861950871787
+            },
+            {
+              "score": -5.734024070736803
+            }
+          ],
+          [
+            {
+              "score": null
+            },
+            {
+              "score": null
+            }
+          ],
+          [
+            {
+              "score": 6.021413289286686
+            },
+            {
+              "score": -6.421788206164677
+            }
+          ]
+        ],
+        "earlier_either": [
+          [
+            {
+              "score": 7.0752401550932165
+            },
+            {
+              "score": -5.2784457439558485
+            }
+          ],
+          [
+            {
+              "score": null
+            },
+            {
+              "score": null
+            }
+          ]
+        ],
+        "mono": [
+          [
+            {
+              "score": -4.071981411535881
+            },
+            {
+              "score": -3.673547008018306
+            }
+          ]
+        ]
+      },
+      "room": "stairway",
+      "truth": []
+    },
+    {
+      "case": 18,
+      "family": null,
+      "group": "genuine-11",
+      "kind": "genuine",
+      "modes": [
+        -10,
+        0,
+        15
+      ],
+      "reads": {
+        "directional": [
+          [
+            {
+              "score": 5.494772687542694
+            },
+            {
+              "score": 2.271040913028053
+            }
+          ],
+          [
+            {
+              "score": null
+            },
+            {
+              "score": null
+            }
+          ],
+          [
+            {
+              "score": -2.1387992472612702
+            },
+            {
+              "score": -2.103512338532699
+            }
+          ]
+        ],
+        "earlier_either": [
+          [
+            {
+              "score": null
+            },
+            {
+              "score": null
+            }
+          ],
+          [
+            {
+              "score": -3.1051831403201717
+            },
+            {
+              "score": -4.974246941553009
+            }
+          ]
+        ],
+        "mono": [
+          [
+            {
+              "score": null
+            },
+            {
+              "score": null
+            }
+          ]
+        ]
+      },
+      "room": "aula_carolina",
+      "truth": []
+    },
+    {
+      "case": 19,
+      "family": null,
+      "group": "stairway-background-0",
+      "kind": "background_only",
+      "modes": [
+        -9,
+        0,
+        8
+      ],
+      "reads": {
+        "directional": [
+          [
+            {
+              "score": -6.661641581057472
+            },
+            {
+              "score": -6.566713258485215
+            }
+          ],
+          [
+            {
+              "score": -6.900366816880352
+            },
+            {
+              "score": -6.673093783190379
+            }
+          ],
+          [
+            {
+              "score": -7.1000981733328405
+            },
+            {
+              "score": -7.1491269720842
+            }
+          ]
+        ],
+        "earlier_either": [
+          [
+            {
+              "score": -6.829945507292114
+            },
+            {
+              "score": -6.911763180909857
+            }
+          ],
+          [
+            {
+              "score": -6.721011209600541
+            },
+            {
+              "score": 5.048202144458291
+            }
+          ]
+        ],
+        "mono": [
+          [
+            {
+              "score": -6.69931748522923
+            },
+            {
+              "score": -6.2140330911338975
+            }
+          ]
+        ]
+      },
+      "room": "stairway",
+      "truth": []
+    },
+    {
+      "case": 20,
+      "family": null,
+      "group": "stairway-background-1",
+      "kind": "background_only",
+      "modes": [
+        -8,
+        0,
+        8
+      ],
+      "reads": {
+        "directional": [
+          [
+            {
+              "score": -6.90942663660494
+            },
+            {
+              "score": -6.758633083182598
+            }
+          ],
+          [
+            {
+              "score": -3.38012528267762
+            },
+            {
+              "score": -6.8434705201159245
+            }
+          ],
+          [
+            {
+              "score": -7.1148462516528985
+            },
+            {
+              "score": -7.033160227878309
+            }
+          ]
+        ],
+        "earlier_either": [
+          [
+            {
+              "score": null
+            },
+            {
+              "score": null
+            }
+          ],
+          [
+            {
+              "score": 5.547563833531728
+            },
+            {
+              "score": -6.129229629329661
+            }
+          ]
+        ],
+        "mono": [
+          [
+            {
+              "score": 5.603159827795863
+            },
+            {
+              "score": -6.322850185672952
+            }
+          ]
+        ]
+      },
+      "room": "stairway",
+      "truth": []
+    },
+    {
+      "case": 21,
+      "family": null,
+      "group": "stairway-background-2",
+      "kind": "background_only",
+      "modes": [
+        -8,
+        0,
+        8
+      ],
+      "reads": {
+        "directional": [
+          [
+            {
+              "score": null
+            },
+            {
+              "score": null
+            }
+          ],
+          [
+            {
+              "score": -6.545191782635177
+            },
+            {
+              "score": -4.282346662244312
+            }
+          ],
+          [
+            {
+              "score": null
+            },
+            {
+              "score": null
+            }
+          ]
+        ],
+        "earlier_either": [
+          [
+            {
+              "score": null
+            },
+            {
+              "score": null
+            }
+          ],
+          [
+            {
+              "score": -6.474947874806024
+            },
+            {
+              "score": 4.201065724756513
+            }
+          ]
+        ],
+        "mono": [
+          [
+            {
+              "score": -6.478326779558644
+            },
+            {
+              "score": -3.186959541862602
+            }
+          ]
+        ]
+      },
+      "room": "stairway",
+      "truth": []
+    },
+    {
+      "case": 22,
+      "family": null,
+      "group": "aula_carolina-background-0",
+      "kind": "background_only",
+      "modes": [],
+      "reads": {
+        "directional": [],
+        "earlier_either": [
+          [
+            {
+              "score": null
+            },
+            {
+              "score": null
+            }
+          ],
+          [
+            {
+              "score": 4.798986125334146
+            },
+            {
+              "score": -5.353721597232798
+            }
+          ]
+        ],
+        "mono": [
+          [
+            {
+              "score": 5.797480223388587
+            },
+            {
+              "score": -5.236614274849305
+            }
+          ]
+        ]
+      },
+      "room": "aula_carolina",
+      "truth": []
+    },
+    {
+      "case": 23,
+      "family": null,
+      "group": "aula_carolina-background-1",
+      "kind": "background_only",
+      "modes": [
+        -8,
+        0,
+        8
+      ],
+      "reads": {
+        "directional": [
+          [
+            {
+              "score": -6.504805594261346
+            },
+            {
+              "score": null
+            }
+          ],
+          [
+            {
+              "score": -5.32923128823894
+            },
+            {
+              "score": -3.911298448474826
+            }
+          ],
+          [
+            {
+              "score": -5.815989487265721
+            },
+            {
+              "score": null
+            }
+          ]
+        ],
+        "earlier_either": [
+          [
+            {
+              "score": -5.504112255318085
+            },
+            {
+              "score": -5.656864174792545
+            }
+          ],
+          [
+            {
+              "score": -5.024120280409295
+            },
+            {
+              "score": null
+            }
+          ]
+        ],
+        "mono": [
+          [
+            {
+              "score": -3.755811219948701
+            },
+            {
+              "score": -2.630435239894263
+            }
+          ]
+        ]
+      },
+      "room": "aula_carolina",
+      "truth": []
+    },
+    {
+      "case": 24,
+      "family": null,
+      "group": "aula_carolina-background-2",
+      "kind": "background_only",
+      "modes": [
+        0,
+        15
+      ],
+      "reads": {
+        "directional": [
+          [
+            {
+              "score": -5.499194597831542
+            },
+            {
+              "score": -6.404255356870904
+            }
+          ],
+          [
+            {
+              "score": null
+            },
+            {
+              "score": null
+            }
+          ]
+        ],
+        "earlier_either": [
+          [
+            {
+              "score": null
+            },
+            {
+              "score": null
+            }
+          ],
+          [
+            {
+              "score": -4.838384563703234
+            },
+            {
+              "score": -6.335898413887884
+            }
+          ]
+        ],
+        "mono": [
+          [
+            {
+              "score": -5.460089669310164
+            },
+            {
+              "score": -6.045675751635629
+            }
+          ]
+        ]
+      },
+      "room": "aula_carolina",
+      "truth": []
+    }
+  ],
+  "schema": "chipmunk.aachen-spatial-voice/1",
+  "summary": {
+    "added_locations": {},
+    "gates": {
+      "background_per_room": true,
+      "ordinary_per_room": true,
+      "two_edits": false,
+      "two_families": false
+    },
+    "layouts": {
+      "aula_carolina": {
+        "additive": {
+          "added_background_groups": 0,
+          "added_locations": 0,
+          "added_ordinary_groups": 0,
+          "flagged_ordinary_groups": 2,
+          "located": 0
+        },
+        "directional": {
+          "assessed": 11,
+          "flagged_background_only_groups": 0,
+          "flagged_ordinary_groups": 0,
+          "located": 0,
+          "unassessed": 1,
+          "wrong_edit_windows": 0
+        },
+        "earlier_either": {
+          "assessed": 12,
+          "flagged_background_only_groups": 0,
+          "flagged_ordinary_groups": 0,
+          "located": 0,
+          "unassessed": 0,
+          "wrong_edit_windows": 0
+        },
+        "mono": {
+          "assessed": 11,
+          "flagged_background_only_groups": 1,
+          "flagged_ordinary_groups": 2,
+          "located": 0,
+          "unassessed": 1,
+          "wrong_edit_windows": 0
+        },
+        "totals": {
+          "cases": 12,
+          "edits": 3,
+          "ordinary_groups": 9
+        }
+      },
+      "pooled": {
+        "additive": {
+          "added_background_groups": 0,
+          "added_locations": 0,
+          "added_ordinary_groups": 0,
+          "flagged_ordinary_groups": 4,
+          "located": 0
+        },
+        "directional": {
+          "assessed": 24,
+          "flagged_background_only_groups": 0,
+          "flagged_ordinary_groups": 0,
+          "located": 0,
+          "unassessed": 1,
+          "wrong_edit_windows": 0
+        },
+        "earlier_either": {
+          "assessed": 25,
+          "flagged_background_only_groups": 0,
+          "flagged_ordinary_groups": 2,
+          "located": 1,
+          "unassessed": 0,
+          "wrong_edit_windows": 0
+        },
+        "mono": {
+          "assessed": 24,
+          "flagged_background_only_groups": 2,
+          "flagged_ordinary_groups": 4,
+          "located": 0,
+          "unassessed": 1,
+          "wrong_edit_windows": 0
+        },
+        "totals": {
+          "cases": 25,
+          "edits": 7,
+          "ordinary_groups": 18
+        }
+      },
+      "stairway": {
+        "additive": {
+          "added_background_groups": 0,
+          "added_locations": 0,
+          "added_ordinary_groups": 0,
+          "flagged_ordinary_groups": 2,
+          "located": 0
+        },
+        "directional": {
+          "assessed": 13,
+          "flagged_background_only_groups": 0,
+          "flagged_ordinary_groups": 0,
+          "located": 0,
+          "unassessed": 0,
+          "wrong_edit_windows": 0
+        },
+        "earlier_either": {
+          "assessed": 13,
+          "flagged_background_only_groups": 0,
+          "flagged_ordinary_groups": 2,
+          "located": 1,
+          "unassessed": 0,
+          "wrong_edit_windows": 0
+        },
+        "mono": {
+          "assessed": 13,
+          "flagged_background_only_groups": 1,
+          "flagged_ordinary_groups": 2,
+          "located": 0,
+          "unassessed": 0,
+          "wrong_edit_windows": 0
+        },
+        "totals": {
+          "cases": 13,
+          "edits": 4,
+          "ordinary_groups": 9
+        }
+      }
+    },
+    "passed": false
+  }
+}

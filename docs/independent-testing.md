@@ -64,6 +64,9 @@ The [cross-format draft comparison](document-mixed-format-comparison-2026-11-13.
 rebuilds all six TXT, Word and PDF directions from public publisher sources.
 It verifies both source locations and checks that a format change alone
 produces no wording highlights.
+The [two-room voice study](audio-spatial-mask-aachen-transfer-2026-11-13.md)
+publishes fixed comparison points, an alternate FFT replay and a reader for
+checking the decisions without distributing speech or separated waveforms.
 
 The [large-image copy comparison](image-affine-native-scale-2026-11-11.md#reproduce)
 provides a licensed roster, exact source commitments, and a separate reader

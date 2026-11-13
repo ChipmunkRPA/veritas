@@ -95,6 +95,15 @@ const offgridCoverageText = {
   unassessed_match_budget: 'Too many competing offsets prevented a distinct between-block comparison.',
 }
 
+const smallPngCoverageText = {
+  supported_pair: 'Every RGB pixel in the two crops matches exactly. Pixels outside the crops differ on at least three sides.',
+  no_pair: 'The small-copy check found no qualifying exact pair.',
+  unsupported_profile: 'The small-copy check covers upright, static 8-bit RGB PNGs with sides from 384 to 768 pixels.',
+  unavailable: 'The small-copy check could not complete.',
+  ambiguous_pairs: 'Multiple exact pairs made this comparison ambiguous.',
+  unassessed_match_budget: 'Too many competing offsets prevented a distinct small-copy comparison.',
+}
+
 function CopySimilarity({ set, field, token, mediaReady }: {
   set: ImageEvidenceSet; field: 'copy_similarity' | 'copy_translation' | 'copy_affine'; token: string; mediaReady: boolean
 }) {
@@ -105,14 +114,15 @@ function CopySimilarity({ set, field, token, mediaReady }: {
   const heading = geometric ? 'Geometric copy comparison' : reflected ? 'Same-image copy similarity' : 'Copy similarity without mirroring'
   const sectionId = `image-${field.replace('_', '-')}`
   const baseVersion = set.prior_embedded_pair_evidence?.version ?? set.version
-  const wide = (geometric && ['image-evidence-14', 'image-evidence-17', 'image-evidence-19'].includes(baseVersion)) || (reflected &&
+  const wide = (geometric && ['image-evidence-14', 'image-evidence-17', 'image-evidence-19', 'image-evidence-21'].includes(baseVersion)) || (reflected &&
     ['image-evidence-9', 'image-evidence-10', 'image-evidence-11', 'image-evidence-12', 'image-evidence-13',
-      'image-evidence-14', 'image-evidence-16', 'image-evidence-17', 'image-evidence-18', 'image-evidence-19'].includes(baseVersion))
+      'image-evidence-14', 'image-evidence-16', 'image-evidence-17', 'image-evidence-18', 'image-evidence-19', 'image-evidence-20', 'image-evidence-21'].includes(baseVersion))
   const basis = field === 'copy_translation' && set.copy_translation?.basis
   const jpegReview = field === 'copy_translation' && set.copy_translation?.jpeg_block_review
   const offgrid = field === 'copy_translation' ? set.copy_translation?.jpeg_offgrid_review : undefined
-  const basisText = offgrid ? offgridCoverageText[offgrid.status] : jpegReview ? jpegCoverageText[jpegReview]
-    : basis && check.pairs.length > 0 && copyBasisText[basis]
+  const smallPng = field === 'copy_translation' ? set.copy_translation?.small_png_copy_review : undefined
+  const basisText = smallPng ? smallPngCoverageText[smallPng.status] : offgrid ? offgridCoverageText[offgrid.status] : jpegReview ? jpegCoverageText[jpegReview]
+    : basis && basis !== 'png_exact_small_copy' && check.pairs.length > 0 && copyBasisText[basis]
   const proposalSearch = geometric ? set.copy_affine?.proposal_search : undefined
   const statusText = {
     supported_pair: geometric ? 'Matching detail was found after geometric alignment.'
@@ -130,6 +140,10 @@ function CopySimilarity({ set, field, token, mediaReady }: {
     <p className="mt-2 mb-0 text-small text-text-muted">{check.interpretation}</p>
     {!reflected && <p className="mt-2 mb-0 text-caption text-text-muted">This check carries zero weight in AI authorship confidence.</p>}
     {basisText && <p className="mt-2 mb-0 text-caption text-text-muted">{basisText}</p>}
+    {smallPng?.measurement && <p className="mt-2 mb-0 text-caption text-text-muted">
+      Compared {smallPng.measurement.matching_pixels.toLocaleString('en-US')} RGB pixels in each crop.
+      Mean surrounding differences (top, bottom, left, right) {smallPng.measurement.perimeter_mean_absolute_difference.map(value => value.toFixed(2)).join(', ')} of 255 levels.
+    </p>}
     {offgrid?.measurement && <p className="mt-2 mb-0 text-caption text-text-muted">
       Mean RGB difference inside {offgrid.measurement.interior_mean.toFixed(2)} of 255 levels.
       Surrounding differences (left, right, top, bottom) {offgrid.measurement.perimeter_means.map(value => value?.toFixed(2) ?? 'unavailable').join(', ')}.

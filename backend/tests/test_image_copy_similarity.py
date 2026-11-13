@@ -557,3 +557,64 @@ def test_report_and_json_share_source_bound_pair_and_redaction(packet_fixture, m
         image["uri"] is None
         for image in image_evidence.view(redacted)["copy_similarity"]["pairs"][0]["images"]
     )
+
+
+def test_small_png_copy_preserves_exact_crops_and_rejects_unsupported_sources(evidence_http, monkeypatch):
+    from app.evidence import image_exact_small_copy_source
+    from app.evidence.image_copy_similarity_binding import SMALL_PNG_BASIS
+    from scripts.image_png_exif_preview_transfer import corrupt_crc
+
+    f = evidence_http
+    aid = "image-unprepared"
+    monkeypatch.setattr(settings, "environment", "dev")
+    monkeypatch.setattr(settings, "image_small_png_copy_review", True)
+    monkeypatch.setattr(settings, "image_affine_copy_review", True)
+    monkeypatch.setattr(settings, "image_embedded_pair_review", True)
+    rng = np.random.default_rng(1532)
+    rgb = rng.integers(0, 256, (512, 512, 3), dtype=np.uint8)
+    rgb[74:108, 85:119] = rgb[344:378, 335:369]
+    image = Image.fromarray(rgb)
+    encoded = _bytes(image, format="PNG")
+    for wrong in (_bytes(image, format="JPEG"), _bytes(image.convert("RGBA"), format="PNG"), corrupt_crc(encoded, b"IDAT"),
+                  corrupt_crc(encoded, b"IEND"), _bytes(image.resize((800, 800)), format="PNG")):
+        assert image_exact_small_copy_source.review(wrong)[0]["status"] == "unsupported_profile"
+    with Session(f.engine) as db:
+        analysis = db.get(Analysis, aid)
+        analysis.content_type = "image/png"
+        stored = f.store.put_bytes(encoded)
+        analysis.sha256, analysis.size_bytes = stored.sha256, stored.size_bytes
+        result = copy.deepcopy(specimen("image", "standard").result)
+        result.update(exhibits=[], signals=[], findings=[])
+        result["input"]["sha256"] = stored.sha256
+        analysis.result_hash = canonical_hash(result)
+        f.store.put_bytes(canonical_json(result))
+        evidence = service.persist_packet_set(db, analysis, f.store, result=result)
+        base = base_document(evidence)
+        assert base["version"] == "image-evidence-21"
+        check = base["copy_translation"]
+        assert check["basis"] == SMALL_PNG_BASIS and check["authorship_confidence_contribution"] == 0
+        pair, = check["pairs"]
+        assert pair["regions"] == {"area_a": {"x": 85, "y": 74, "w": 34, "h": 34},
+                                   "area_b": {"x": 335, "y": 344, "w": 34, "h": 34}}
+        measurement = check["small_png_copy_review"]["measurement"]
+        assert measurement["matching_pixels"] == 34 ** 2
+        image_exact_small_copy_source.verify(encoded, pair, measurement)
+        changed = copy.deepcopy(pair)
+        changed["regions"]["area_a"]["x"] += 1
+        with pytest.raises(ValueError, match="measurement differs"):
+            image_exact_small_copy_source.verify(encoded, changed, measurement)
+        changed = copy.deepcopy(base)
+        changed["copy_translation"]["small_png_copy_review"]["measurement"]["matching_pixels"] += 1
+        changed["sha256"] = image_packets_v5.packet_hash(changed)
+        with pytest.raises(image_packets_v7.PacketIntegrityError, match="exact crop geometry"):
+            image_packets_v7.validate_packet_set(changed, **image_packets_v5._binding(analysis))
+        db.commit()
+    monkeypatch.setattr(settings, "image_small_png_copy_review", False)
+    reply = f.client.get(f"/api/v2/analyses/{aid}/evidence-packets", headers=f.viewer)
+    assert reply.status_code == 200 and reply.json() == evidence
+    for role, crop in pair["artifacts"].items():
+        bounds = image_packets_v7.box_bounds(pair["regions"][role], *image.size)
+        response = f.client.get(crop["url"], headers=f.viewer)
+        assert response.status_code == 200
+        with Image.open(io.BytesIO(response.content)) as output:
+            assert output.tobytes() == image.crop(bounds).tobytes()

@@ -17,11 +17,25 @@ JPEG_BLOCK_VERSION = "image-evidence-16"
 JPEG_BLOCK_AFFINE_VERSION = "image-evidence-17"
 JPEG_OFFGRID_VERSION = "image-evidence-18"
 JPEG_OFFGRID_AFFINE_VERSION = "image-evidence-19"
+SMALL_PNG_COPY_VERSION = "image-evidence-20"
+SMALL_PNG_COPY_AFFINE_VERSION = "image-evidence-21"
+SMALL_PNG_VERSIONS = frozenset({SMALL_PNG_COPY_VERSION, SMALL_PNG_COPY_AFFINE_VERSION})
+SMALL_PNG_MIN_SIDE, SMALL_PNG_MAX_SIDE = 384, 768
+SMALL_PNG_CROP_MIN, SMALL_PNG_CROP_MAX = 16, 56
+SMALL_PNG_BASIS = "png_exact_small_copy"
+SMALL_PNG_STATUS_TEXT = {
+    "supported_pair": "Every RGB pixel in the two crops matches exactly. Pixels outside the crops differ on at least three sides.",
+    "no_pair": "The small-copy check found no qualifying exact pair.",
+    "unsupported_profile": "The small-copy check covers upright, static 8-bit RGB PNGs with sides from 384 to 768 pixels.",
+    "unavailable": "The small-copy check could not complete.",
+    "ambiguous_pairs": "Multiple exact pairs made this comparison ambiguous.",
+    "unassessed_match_budget": "Too many competing offsets prevented a distinct small-copy comparison.",
+}
 JPEG_OFFGRID_VERSIONS = frozenset({JPEG_OFFGRID_VERSION, JPEG_OFFGRID_AFFINE_VERSION})
 JPEG_BLOCK_VERSIONS = JPEG_OFFGRID_VERSIONS | {JPEG_BLOCK_VERSION, JPEG_BLOCK_AFFINE_VERSION}
 VERSION = V12
-AFFINE_VERSIONS = frozenset({V13, V14, JPEG_BLOCK_AFFINE_VERSION, JPEG_OFFGRID_AFFINE_VERSION})
-CREDENTIAL_VERSIONS = AFFINE_VERSIONS | {V12, JPEG_BLOCK_VERSION, JPEG_OFFGRID_VERSION}
+AFFINE_VERSIONS = frozenset({V13, V14, JPEG_BLOCK_AFFINE_VERSION, JPEG_OFFGRID_AFFINE_VERSION, SMALL_PNG_COPY_AFFINE_VERSION})
+CREDENTIAL_VERSIONS = AFFINE_VERSIONS | {V12, JPEG_BLOCK_VERSION, JPEG_OFFGRID_VERSION, SMALL_PNG_COPY_VERSION}
 TRANSLATION_VERSIONS = CREDENTIAL_VERSIONS | {V10, V11}
 BASIS_VERSIONS = CREDENTIAL_VERSIONS | {V11}
 REFLECTION_VERSIONS = frozenset({V7, V8, V9}) | TRANSLATION_VERSIONS
@@ -218,10 +232,36 @@ def _rgb_level(value: object, ceiling: float) -> bool:
     return isinstance(value, (float, int)) and not isinstance(value, bool) and 0 <= value <= ceiling
 
 
+def _validate_small_png(review) -> bool:
+    if review is None:
+        return False
+    if not isinstance(review, dict) or set(review) != {"status", "measurement"}:
+        raise ValueError("Small PNG copy comparison has an invalid record")
+    status, measurement = review["status"], review["measurement"]
+    if status not in SMALL_PNG_STATUS_TEXT or (status == "supported_pair") != (measurement is not None):
+        raise ValueError("Small PNG copy comparison has an invalid status")
+    if measurement is None:
+        return False
+    if not isinstance(measurement, dict) or set(measurement) != {"matching_pixels", "different_color_values",
+                                                               "perimeter_mean_absolute_difference"}:
+        raise ValueError("Small PNG copy comparison has an invalid measurement")
+    count, colors, rim = (measurement[key] for key in ("matching_pixels", "different_color_values",
+                                                        "perimeter_mean_absolute_difference"))
+    if (type(count) is not int or type(colors) is not int or not 64 <= colors <= count
+            or not isinstance(rim, list) or len(rim) != 4
+            or any(type(value) not in (int, float) or not 0 <= value <= 255 for value in rim)
+            or sum(value >= 3.0 for value in rim) < 3):
+        raise ValueError("Small PNG copy comparison has invalid pixel or perimeter values")
+    return True
+
+
 def _validate_check(document: dict, record: dict, size: tuple[int, int], supported: bool, *, reflected: bool) -> None:
     has_basis = not reflected and document["version"] in BASIS_VERSIONS
     has_jpeg_review = not reflected and document["version"] in JPEG_BLOCK_VERSIONS
     has_offgrid_review = not reflected and document["version"] in JPEG_OFFGRID_VERSIONS
+    has_small_png_review = not reflected and document["version"] in SMALL_PNG_VERSIONS
+    if has_small_png_review:
+        supported |= SMALL_PNG_MIN_SIDE <= min(size) <= max(size) <= SMALL_PNG_MAX_SIDE
     fields = {
         "schema",
         "source_sha256",
@@ -237,6 +277,8 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
         fields.add("jpeg_block_review")
     if has_offgrid_review:
         fields.add("jpeg_offgrid_review")
+    if has_small_png_review:
+        fields.add("small_png_copy_review")
     if not isinstance(record, dict) or set(record) != fields:
         raise ValueError("Copy similarity has an invalid record")
     status, pairs = record["status"], record["pairs"]
@@ -263,6 +305,14 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
             raise ValueError("Between-block JPEG coverage is outside its native source geometry")
     if offgrid_pair and len(pairs) != 1:
         raise ValueError("Between-block JPEG evidence must contain one measured pair")
+    small_png_pair = False
+    if has_small_png_review and (review := record["small_png_copy_review"]) is not None:
+        small_png_pair = _validate_small_png(review)
+        if (not SMALL_PNG_MIN_SIDE <= min(size) <= max(size) <= SMALL_PNG_MAX_SIDE
+                or (review["status"] != "unsupported_profile" and document["source"]["exif_orientation"] != 1)
+                or status != ("supported_pair" if small_png_pair else "no_pair")
+                or (small_png_pair and len(pairs) != 1)):
+            raise ValueError("Small PNG copy coverage differs from the native source or recorded result")
     if has_basis:
         basis = record["basis"]
         expected = ("native_patch_alignment", "geometric_features") if pairs else (None,)
@@ -270,6 +320,8 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
             expected = (JPEG_BLOCK_BASIS,)
         if offgrid_pair:
             expected = (OFFGRID_BASIS,)
+        if small_png_pair:
+            expected = (SMALL_PNG_BASIS,)
         if basis not in expected:
             raise ValueError("Copy similarity has an invalid matching basis")
     jpeg_pair = has_jpeg_review and record["jpeg_block_review"] == "supported_pair"
@@ -308,9 +360,13 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
         ax, ay, aw, ah = boxes[0]
         bx, by, bw, bh = boxes[1]
         overlaps = ax < bx + bw and bx < ax + aw and ay < by + bh and by < ay + ah
-        equal_size = reflected or offgrid_pair or record.get("basis") in {"native_patch_alignment", JPEG_BLOCK_BASIS}
+        equal_size = reflected or offgrid_pair or small_png_pair or record.get("basis") in {"native_patch_alignment", JPEG_BLOCK_BASIS}
         if overlaps or (equal_size and (aw, ah) != (bw, bh)):
             raise ValueError("The paired areas must be separate and aligned areas must share a native size")
+        if small_png_pair and (not SMALL_PNG_CROP_MIN <= min(aw, ah) <= max(aw, ah) <= SMALL_PNG_CROP_MAX
+                               or record["small_png_copy_review"]["measurement"]["matching_pixels"] != aw * ah
+                               or pair["artifacts"]["area_a"]["sha256"] != pair["artifacts"]["area_b"]["sha256"]):
+            raise ValueError("Small PNG copy pair differs from its exact crop geometry or pixels")
         if jpeg_pair and (any(value % 8 for box in boxes for value in box) or not 24 <= min(aw, ah) <= max(aw, ah) <= 128):
             raise ValueError("JPEG copy areas do not follow the supported encoded block grid")
         if offgrid_pair and (not ((bx - ax) % 8 or (by - ay) % 8)

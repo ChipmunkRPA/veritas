@@ -34,6 +34,12 @@ from app.evidence.image_copy_similarity_binding import (
     ROLES,
     SCHEMA,
     SKIPPED_CREDENTIALS,
+    SMALL_PNG_BASIS,
+    SMALL_PNG_COPY_AFFINE_VERSION,
+    SMALL_PNG_COPY_VERSION,
+    SMALL_PNG_MAX_SIDE,
+    SMALL_PNG_MIN_SIDE,
+    SMALL_PNG_VERSIONS,
     TRANSLATION_NOTE,
     TRANSLATION_SCHEMA,
     V7,
@@ -56,7 +62,8 @@ from app.storage.db import Analysis, Artefact
 from app.storage.objects import ObjectStore
 
 CREATOR = "image-evidence-packets/10"
-_CREATORS = {JPEG_OFFGRID_AFFINE_VERSION: "image-evidence-packets/17", JPEG_OFFGRID_VERSION: "image-evidence-packets/16",
+_CREATORS = {SMALL_PNG_COPY_AFFINE_VERSION: "image-evidence-packets/19", SMALL_PNG_COPY_VERSION: "image-evidence-packets/18",
+             JPEG_OFFGRID_AFFINE_VERSION: "image-evidence-packets/17", JPEG_OFFGRID_VERSION: "image-evidence-packets/16",
              JPEG_BLOCK_AFFINE_VERSION: "image-evidence-packets/15", JPEG_BLOCK_VERSION: "image-evidence-packets/14",
              affine.LARGE_VERSION: "image-evidence-packets/12", affine.VERSION: "image-evidence-packets/11",
              VERSION: CREATOR, V11: "image-evidence-packets/9",
@@ -77,8 +84,14 @@ def _active_version() -> str:
     return affine.LARGE_VERSION if settings.image_affine_copy_review else VERSION
 
 
+def _analysis_version(analysis: Analysis) -> str:
+    if settings.environment == "dev" and settings.image_small_png_copy_review and analysis.content_type == "image/png":
+        return SMALL_PNG_COPY_AFFINE_VERSION if settings.image_affine_copy_review else SMALL_PNG_COPY_VERSION
+    return _active_version()
+
+
 def current_set_id(analysis: Analysis) -> str:
-    return prior.current_set_id(analysis, _active_version())
+    return prior.current_set_id(analysis, _analysis_version(analysis))
 
 
 def validate_packet_set(document: dict[str, Any], **binding: Any) -> None:
@@ -152,6 +165,14 @@ def validate_assets(document: dict, store: ObjectStore) -> None:
 
         try:
             verify(legacy._verified(store, document["source"]["sha256"]), translation["pairs"])
+        except (OSError, ValueError) as error:
+            raise PacketIntegrityError(str(error)) from error
+    if translation.get("basis") == SMALL_PNG_BASIS:
+        from app.evidence.image_exact_small_copy_source import verify
+
+        try:
+            verify(legacy._verified(store, document["source"]["sha256"]), translation["pairs"][0],
+                   translation["small_png_copy_review"]["measurement"])
         except (OSError, ValueError) as error:
             raise PacketIntegrityError(str(error)) from error
     if translation.get("basis") == OFFGRID_BASIS:
@@ -283,7 +304,7 @@ def build_packet_set(
     base = prior.load_packet_set(db, analysis, store, set_id=prior.current_set_id(analysis))
     if base is None:
         base = prior.build_packet_set(db, analysis, store, result)
-    version = _active_version()
+    version = _analysis_version(analysis)
     document = {
         **base,
         "id": current_set_id(analysis),
@@ -293,7 +314,7 @@ def build_packet_set(
     size = document["source"]["width"], document["source"]["height"]
     status, boxes = "unsupported_geometry", []
     translation_status, translations, basis, source = "unsupported_geometry", [], None, None
-    jpeg_status = offgrid_review = None
+    jpeg_status = offgrid_review = small_png_review = None
     skipped = result_skip(result) is not None
     if skipped:
         status = translation_status = SKIPPED_CREDENTIALS
@@ -323,6 +344,19 @@ def build_packet_set(
                         offgrid_review, extra = {"status": "unavailable", "measurement": None}, []
                     if extra:
                         translation_status, translations, basis = "supported_pair", extra, OFFGRID_BASIS
+    if (version in SMALL_PNG_VERSIONS and not skipped
+            and SMALL_PNG_MIN_SIDE <= min(size) <= max(size) <= SMALL_PNG_MAX_SIDE
+            and translation_status in {"no_pair", "unsupported_geometry"}):
+        from app.evidence.image_exact_small_copy_source import review
+
+        try:
+            small_png_review, extra = review(legacy._verified(store, analysis.sha256))
+        except (cv2.error, OSError, ValueError, SystemError):
+            small_png_review, extra = {"status": "unavailable", "measurement": None}, []
+        translation_status = "supported_pair" if extra else "no_pair"
+        if extra:
+            source = source if source is not None else _source(document, store)
+            translations, basis = extra, SMALL_PNG_BASIS
     document["copy_similarity"] = _copy_record(db, analysis, store, document, source, status, boxes, reflected=True)
     document["copy_translation"] = _copy_record(db, analysis, store, document, source, translation_status,
                                                 translations, reflected=False)
@@ -331,6 +365,8 @@ def build_packet_set(
         document["copy_translation"]["jpeg_block_review"] = jpeg_status
     if version in JPEG_OFFGRID_VERSIONS:
         document["copy_translation"]["jpeg_offgrid_review"] = offgrid_review
+    if version in SMALL_PNG_VERSIONS:
+        document["copy_translation"]["small_png_copy_review"] = small_png_review
     if version in AFFINE_VERSIONS:
         document[affine.KEY] = _affine_record(db, analysis, store, document, source, skip=skipped)
     document = json.loads(canonical_json(document))
@@ -393,4 +429,4 @@ def persist_packet_set(
 
 
 def unavailable_packet_set(analysis: Analysis) -> dict[str, Any]:
-    return {**prior.unavailable_packet_set(analysis), "version": _active_version()}
+    return {**prior.unavailable_packet_set(analysis), "version": _analysis_version(analysis)}

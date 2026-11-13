@@ -1,0 +1,173 @@
+{
+  "app": {
+    "edited": {
+      "analysis_jobs": 1,
+      "exact_png_copy": true,
+      "prepayment_jobs": 0,
+      "signed_source_replay": true,
+      "verified_original_crops": 2
+    },
+    "jpeg": {
+      "analysis_jobs": 1,
+      "exact_png_copy": false,
+      "prepayment_jobs": 0,
+      "signed_source_replay": true,
+      "verified_original_crops": 0
+    },
+    "opt-out": {
+      "analysis_jobs": 1,
+      "exact_png_copy": false,
+      "prepayment_jobs": 0,
+      "signed_source_replay": true,
+      "verified_original_crops": 0
+    },
+    "ordinary": {
+      "analysis_jobs": 1,
+      "exact_png_copy": false,
+      "prepayment_jobs": 0,
+      "signed_source_replay": true,
+      "verified_original_crops": 0
+    },
+    "repetition": {
+      "analysis_jobs": 1,
+      "exact_png_copy": false,
+      "prepayment_jobs": 0,
+      "signed_source_replay": true,
+      "verified_original_crops": 0
+    }
+  },
+  "app_receipt_sha256": "f535ba0429f302b63550b7d5ae1447c5c3f988fc97904dc2a6de5742187cb525",
+  "authorship_confidence_weight": 0,
+  "calibration_groups_flagged": 0,
+  "calibration_sha256": "6a888791b4a6ef2c49220f92b700e780c258eda887e116f34afb06ce8891e7b1",
+  "calibration_views": 24,
+  "code": {
+    "exact_small_copy.py": "1dad7b72b206b5cf08d8f1e83a8b36718e818fc97976f4bdfb11f4b7b56b1c64",
+    "image_exact_small_copy_transfer.py": "11d35fa6223fc78201ccef1d2d4b66f5fbb239affc6b2db2c2eae4f5c8b1a0bc",
+    "image_jpeg_offgrid_quality95_transfer.py": "7427f67c8f0afc163e16b5fe31aef81427cd72442f068175fcc928d48198c368",
+    "image_local_residual_covariance.py": "20f40fbff3d20f8eba538dc02badfac11677cb21619a4ff8f7f30d7247c0a209",
+    "selected_translation_pairs": "3917dff59e1f13db9b236e9c65b6fe356195aae77843fa5df76ee0232e95308c",
+    "translation_pairs": "e1977dbb726c103dca8c248e20708dec0f4e0f19df6b6c46e8b29958aca2dad0"
+  },
+  "criteria": {
+    "added_feather": 4,
+    "added_sharp": 8,
+    "control_groups": 1,
+    "wrong_boxes": 0
+  },
+  "freeze_sha256": "216496e449e5c15195553d85efc130435d877f067d9ebb644d0469eb2c5d6e0f",
+  "gate_actual": {
+    "added_feather": 15,
+    "added_sharp": 29,
+    "control_groups": 0,
+    "wrong_boxes": 0
+  },
+  "held_sha256": "9898ff3cac5f7f639983808622fd5d3c25249e9e2d8a57c68659798e6b4c10e9",
+  "held_views": 114,
+  "native_replay": "Repeated exactly",
+  "passed": true,
+  "runtime_scope": {
+    "config": "VERITAS_IMAGE_SMALL_PNG_COPY_REVIEW",
+    "crop_side_px": [
+      16,
+      56
+    ],
+    "default_enabled": false,
+    "environment": "dev",
+    "geometry_px": [
+      384,
+      768
+    ]
+  },
+  "schema": "chipmunk.image-exact-small-copy/1",
+  "screenshots": {
+    "candidate_flags": 0,
+    "chrome_version": "157.0.8103.51",
+    "controls": 8,
+    "existing_copy_flags": 7,
+    "freeze_sha256": "a2ec2edc5a7c40c63697ee28f8b8287e6d1f7baa8479d550a187ebfff1315692",
+    "layout_capture_source_sha256": "d31e284186849c1ae493015ee30e586db5cfd5e5e829a9a779346baca460e03c",
+    "result_sha256": "bc4b8683390d20a5c3cc7b30bc8487e55078bf03663ff15154a9deb6d385b66f"
+  },
+  "source_exclusion_sha256": [
+    "baf205c87eb0c71daeb0384d992ea24bfb6bfdb1c795e0423b8bcacdadaeffca",
+    "4213a743811bfbfc966eeee0315af9b2811b6a0ad1d0f331c531ecb101e2858f",
+    "3593ef387d89aea2002ee2b6d546c85e837e4978f3387da2312c34c4e30651b7",
+    "3d1b3961e9432d0b587df5bbcf410c4e89af2f0cdec17553ddce87602e1c692d",
+    "0cdc3064a3290cf4edfd0dd8257fd25d1eaeb4a6896a45805a17315aa866f832",
+    "c2512644dc09c8805e6c785e3dafa39e3a4552df1930ed0f6b739b436d099b6b",
+    "db93f04fa25403825e861338f946efc1ddb3fa989cdb2d5af110a01ad697a29d"
+  ],
+  "source_exposure": {
+    "edit_photos": "Contributor-disjoint from prior JPEG comparison sets. New local edits.",
+    "generated": "Previously measured source-preserving generated edits.",
+    "repetition": "Retained licensed architecture photos."
+  },
+  "strata": {
+    "blur": {
+      "candidate_flags": 0,
+      "candidate_only_useful": 0,
+      "combined_useful": 0,
+      "current_flags": 0,
+      "current_useful": 0,
+      "views": 16
+    },
+    "feather44": {
+      "candidate_flags": 15,
+      "candidate_only_useful": 15,
+      "combined_useful": 15,
+      "current_flags": 0,
+      "current_useful": 0,
+      "views": 16
+    },
+    "generated_feathered": {
+      "candidate_flags": 0,
+      "candidate_only_useful": 0,
+      "combined_useful": 0,
+      "current_flags": 0,
+      "current_useful": 0,
+      "views": 6
+    },
+    "original": {
+      "candidate_flags": 0,
+      "candidate_only_useful": 0,
+      "combined_useful": 0,
+      "current_flags": 0,
+      "current_useful": 0,
+      "views": 16
+    },
+    "repetition": {
+      "candidate_flags": 0,
+      "candidate_only_useful": 0,
+      "combined_useful": 0,
+      "current_flags": 0,
+      "current_useful": 0,
+      "views": 12
+    },
+    "sharp28": {
+      "candidate_flags": 14,
+      "candidate_only_useful": 14,
+      "combined_useful": 14,
+      "current_flags": 0,
+      "current_useful": 0,
+      "views": 16
+    },
+    "sharp36": {
+      "candidate_flags": 15,
+      "candidate_only_useful": 15,
+      "combined_useful": 15,
+      "current_flags": 0,
+      "current_useful": 0,
+      "views": 16
+    },
+    "tone": {
+      "candidate_flags": 0,
+      "candidate_only_useful": 0,
+      "combined_useful": 0,
+      "current_flags": 0,
+      "current_useful": 0,
+      "views": 16
+    }
+  },
+  "verified_crops": 88
+}

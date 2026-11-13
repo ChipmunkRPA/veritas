@@ -261,6 +261,19 @@ describe('image evidence cards', () => {
     expect(translation.getByRole('link', { name: 'Area B in the original image' })).toBeTruthy()
   })
 
+  it('shows the exact small PNG copy and both source coordinates', () => {
+    show({ ...copyOnly, version: 'image-evidence-20', copy_translation: { ...translated, basis: 'png_exact_small_copy',
+      small_png_copy_review: { status: 'supported_pair', measurement: { matching_pixels: 1024, different_color_values: 721,
+        perimeter_mean_absolute_difference: [6.74, 40.29, 41.18, 24.47] } } } })
+    const check = within(screen.getByRole('region', { name: 'Copy similarity without mirroring' }))
+    expect(check.getByText(/Every RGB pixel in the two crops matches exactly/)).toBeTruthy()
+    expect(check.getByText(/Compared 1,024 RGB pixels in each crop/)).toBeTruthy()
+    expect(check.getByText(/6.74, 40.29, 41.18, 24.47/)).toBeTruthy()
+    expect(check.getByRole('link', { name: 'Area A in the original image' })).toBeTruthy()
+    expect(check.getByRole('link', { name: 'Area B in the original image' })).toBeTruthy()
+    expect(check.getByText(/zero weight in AI authorship confidence/)).toBeTruthy()
+  })
+
   it('pairs each geometric comparison mask with the native source crop and exact area link', () => {
     show({ ...copyOnly, version: 'image-evidence-13', copy_affine: geometric })
     const check = within(screen.getByRole('region', { name: 'Geometric copy comparison' }))

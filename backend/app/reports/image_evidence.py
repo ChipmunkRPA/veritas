@@ -110,6 +110,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
         JPEG_BLOCK_STATUS_TEXT,
         OFFGRID_STATUS_TEXT,
         SKIPPED_CREDENTIALS,
+        SMALL_PNG_STATUS_TEXT,
         status_text,
     )
     from app.evidence.image_packets_v8 import validate_assets
@@ -143,7 +144,13 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                                     if field == "copy_similarity" or status == SKIPPED_CREDENTIALS
                                     else TRANSLATION_STATUS[status])
         if field == "copy_translation":
-            if review := check.get("jpeg_offgrid_review"):
+            if small_review := check.get("small_png_copy_review"):
+                check["basis_text"] = SMALL_PNG_STATUS_TEXT[small_review["status"]]
+                if measured := small_review["measurement"]:
+                    perimeter = ", ".join(f"{value:.2f}" for value in measured["perimeter_mean_absolute_difference"])
+                    check["basis_text"] += (f" Compared {measured['matching_pixels']:,} RGB pixels in each crop. "
+                                            f"Mean surrounding differences (top, bottom, left, right) {perimeter} of 255 levels.")
+            elif review := check.get("jpeg_offgrid_review"):
                 check["basis_text"] = OFFGRID_STATUS_TEXT[review["status"]]
                 if measured := review["measurement"]:
                     perimeter = ", ".join("unavailable" if value is None else f"{value:.2f}"

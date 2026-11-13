@@ -1,0 +1,158 @@
+{
+  "admitted_to_serving": false,
+  "ai_confidence_weight": 0,
+  "held": {
+    "advances": false,
+    "freeze_sha256": "e3723e6eb3e8dd06d9496ef8fd0c3d8943616c509591b46a607d51c949950079",
+    "gains": {
+      "added_correct": 0,
+      "added_cut_flags": 0,
+      "added_misplaced_ranges": 0,
+      "added_ordinary_flags": 0,
+      "sources_with_gain": 0
+    },
+    "gate": {
+      "added_correct": false,
+      "added_cut_flags": true,
+      "added_misplaced_ranges": true,
+      "added_ordinary_flags": true,
+      "sources_with_gain": false
+    },
+    "protocol": {
+      "candidate": "When the sparse pass has an otherwise qualifying range outside the 720p publication scope, try the unchanged 15 Hz guarded pass within the original deadline. Reuse native inputs for the existing second range if the dense pass qualifies.",
+      "codec": {
+        "primary_crf": 23,
+        "tandem_crf": 35
+      },
+      "gate": {
+        "added_correct": 3,
+        "added_cut_flags": 0,
+        "added_misplaced_ranges": 1,
+        "added_ordinary_flags": 1,
+        "minimum_overlap": "1/2",
+        "sources_with_gain": 2
+      },
+      "placements": [
+        [
+          61,
+          69
+        ],
+        [
+          83,
+          93
+        ]
+      ],
+      "schema": "chipmunk.video-face-hd-sparse-retry/1",
+      "scope": [
+        1280,
+        720,
+        30,
+        120,
+        "h264",
+        "yuv420p",
+        "mp4"
+      ],
+      "sources": "Eight archived exact-30fps groups separated by original links and known donor keys from three preceding studies."
+    },
+    "runtime": {
+      "elapsed_s": 298.76146412499656,
+      "held_sha256": "f46aba94b94dbef5aedc4fd1006da28bdb74d868fa3cf3ed4fed9fef0d6d2769",
+      "rss": 5865177088
+    },
+    "strata": {
+      "cross_recording_cuts": {
+        "added_wrong": 0,
+        "after": 0,
+        "after_flag": 0,
+        "before": 0,
+        "before_flag": 0,
+        "files": 8,
+        "retry": 0,
+        "retry_measured": 0,
+        "truth": 0
+      },
+      "dual_swap": {
+        "added_wrong": 0,
+        "after": 7,
+        "after_flag": 8,
+        "before": 7,
+        "before_flag": 8,
+        "files": 8,
+        "retry": 0,
+        "retry_measured": 0,
+        "truth": 16
+      },
+      "genuine_original": {
+        "added_wrong": 0,
+        "after": 0,
+        "after_flag": 0,
+        "before": 0,
+        "before_flag": 0,
+        "files": 8,
+        "retry": 0,
+        "retry_measured": 0,
+        "truth": 0
+      },
+      "same_source_jump": {
+        "added_wrong": 0,
+        "after": 0,
+        "after_flag": 0,
+        "before": 0,
+        "before_flag": 0,
+        "files": 8,
+        "retry": 0,
+        "retry_measured": 0,
+        "truth": 0
+      },
+      "tandem_dual_swap": {
+        "added_wrong": 0,
+        "after": 7,
+        "after_flag": 8,
+        "before": 7,
+        "before_flag": 8,
+        "files": 8,
+        "retry": 0,
+        "retry_measured": 0,
+        "truth": 16
+      },
+      "tandem_original": {
+        "added_wrong": 0,
+        "after": 0,
+        "after_flag": 0,
+        "before": 0,
+        "before_flag": 0,
+        "files": 8,
+        "retry": 0,
+        "retry_measured": 0,
+        "truth": 0
+      }
+    }
+  },
+  "independent_native_readback": {
+    "aggregate_sha256": "7f1f4ec526263cfec8eff768ad5aaa4740f8269a917e9e5123bfa04372bbc1bd",
+    "exact_encoded_reconstructions": 24,
+    "exact_native_pictures": 5760,
+    "examples": {},
+    "native_review_crops": 0,
+    "status": "verified"
+  },
+  "previously_observed_diagnostic": {
+    "exact_authored_ranges": 10,
+    "example": {
+      "anchor_frames": [
+        88,
+        94,
+        98
+      ],
+      "source_clock_s": [
+        "3",
+        "49/15"
+      ]
+    },
+    "replayed_background_boundaries": 20,
+    "source_anchors": 30,
+    "source_files": 6,
+    "status": "verified"
+  },
+  "schema": "chipmunk.video-face-hd-sparse-retry-public/1"
+}

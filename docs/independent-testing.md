@@ -58,6 +58,9 @@ checks exact prompt pairing and prior speaker overlap before scoring.
 The [matched English speech-edit comparison](audio-sine-preview-2026-11-13.md#replay)
 adds reproducible original, cut-and-paste and seamless infilling comparisons
 from a public preview, retaining its one-reader and one-generator limits.
+The [Word boundary omission replay](writing-gao-archive-comparison-2026-11-13.md#word-omissions-at-paragraph-breaks)
+rebuilds 168 deliveries from the pinned public archive and verifies both
+original Word character positions for every reported omission.
 
 The [JPEG90 paired-source audit](image-jpeg90-reflection-source-context-2026-11-13.md)
 replays the original regional masks and checks whether highlighted pixels

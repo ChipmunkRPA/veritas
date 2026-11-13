@@ -55,9 +55,12 @@ def render(comparison: dict) -> bytes:
             start, end = location["paragraph_range"]
             native = f'<p class="offset">Word paragraph characters [{start}, {end}).</p>'
         if locations := change["submitted"].get("docx_locations"):
-            submitted_label = "Change across Word paragraphs"
+            submitted = change["submitted"]
+            submitted_label = ("Archive wording missing between Word paragraphs"
+                               if submitted["start"] == submitted["end"] else "Change across Word paragraphs")
             native = "".join(
-                f'<p class="offset">Word body paragraph {item["paragraph"]}, characters [{start}, {end}).</p>'
+                (f'<p class="offset">Word body paragraph {item["paragraph"]}, boundary at character {start}.</p>'
+                 if start == end else f'<p class="offset">Word body paragraph {item["paragraph"]}, characters [{start}, {end}).</p>')
                 for item in locations for start, end in (item["paragraph_range"],)
             )
         if pages := change["submitted"].get("pdf_pages"):

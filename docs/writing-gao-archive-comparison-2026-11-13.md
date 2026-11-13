@@ -24,8 +24,10 @@ For Word uploads, the matched passage also reports each top-level body
 paragraph and its native character range. Wording differences include
 original paragraph and run coordinates where the visible text maps to
 ordinary Word runs. A wording change that spans multiple paragraphs
-shows the exact range in each paragraph. When a deletion would fall at
-an ambiguous paragraph edge, the comparison abstains. Tables, headers, footers, text boxes,
+shows the exact range in each paragraph. Wording omitted at the break
+between adjacent ordinary body paragraphs has two native boundary points.
+When a deletion would fall at an ambiguous or unsupported paragraph edge,
+the comparison abstains. Tables, headers, footers, text boxes,
 embedded content, formatting and tracked revisions are outside the check.
 
 Selectable PDFs report the submitted page numbers and extracted character
@@ -94,6 +96,73 @@ backend's `python-docx` version.
 PYTHONPATH=backend backend/.venv/bin/python -B -m scripts.review_gao_word_paragraphs "$pack" \
   docs/evaluation-panels/writing-gao-archive-transfer-2026-11-13.json \
   docs/evaluation-panels/writing-gao-exact-excerpt-2026-11-13.json
+```
+
+### Word omissions at paragraph breaks
+
+The Word comparison can now show missing archive wording at the break
+between adjacent native body paragraphs. It reports the end of the first
+paragraph's compared text and the start of the next. The comparison
+highlights the omitted words in the archive excerpt. In the submitted
+document, the positions are zero-width and carry no highlight. Both
+points use native Unicode character offsets, including any leading
+indentation. In the browser and PDF they are labeled as boundaries.
+JSON retains both zero-width ranges and the exact omitted archive text.
+
+The rule uses the existing source attribution and interior token alignment.
+It requires adjacent Word body elements with ordinary text runs and no
+recognized quote style. A blank paragraph, table, tracked change, field or
+directly hidden run blocks a new boundary finding. The rule also withholds a
+finding if a repeated neighboring token can move the omission across the
+break. The verifier selects the exact replay rule using the scope
+recorded in the export, including both earlier Word rules.
+
+A deterministic fixture roster used 24 separate reports from the pinned
+12,228-report index. It excluded IDs found in the three earlier comparison
+ledgers. Each report supplied seven Word deliveries using ASCII
+transcriptions and ordinary runs. The first eligible middle sequence of
+five distinct words set the possible omission site before comparison.
+The controls put a paragraph break at the same site with unchanged
+wording, an intervening empty paragraph or table, a styled quotation, or
+the word retained in a hidden run.
+
+| Word delivery | Files | Earlier source matches | Current source matches | Exact omission findings |
+| --- | ---: | ---: | ---: | ---: |
+| One omitted word | 24 | 0 | 20 | 20 |
+| Three omitted words | 24 | 0 | 20 | 20 |
+| Unchanged reflow | 24 | 20 | 20 | 0 |
+| Intervening blank paragraph | 24 | 0 | 0 | 0 |
+| Intervening table containing the word | 24 | 0 | 0 | 0 |
+| Styled quote | 24 | 0 | 0 | 0 |
+| Word retained in a hidden run | 24 | 20 | 20 | 0 |
+
+The same four report groups lacked source attribution for both
+omission lengths. Every finding matched the expected source and omitted
+transcript range. Native Word readback verified all 80 boundary points.
+These controlled deliveries measure omission localization on this
+collection. They give no estimate of AI authorship or performance on
+other document layouts. The hidden controls preserve the existing
+comparison's source matches because the word is present in the native
+text. [Scalar receipt](evaluation-panels/writing-gao-word-boundary-deletions-2026-11-13.json)
+
+An isolated local worker processed the held GAO-20-95 fixture after
+simulated $9.99 payment. No analysis was created before confirmation.
+Chrome displayed both native positions, highlighted the omitted archive
+word, and downloaded matching JSON and a one-page PDF with both
+boundary labels. The native verifier reproduced the JSON from the
+same original Word bytes. A second full panel run reproduced all 168
+Word hashes and positions.
+
+Run the first command to recount the public receipt with standard-library
+Python. The second reconstructs all 168 Word files and checks their hashes,
+transcript positions and native Word boundaries against that receipt.
+
+```sh
+PYTHONPATH=backend python3 -B -S -m scripts.review_gao_word_boundary_deletions \
+  docs/evaluation-panels/writing-gao-word-boundary-deletions-2026-11-13.json
+PYTHONPATH=backend backend/.venv/bin/python -B -m scripts.review_gao_word_boundary_deletions \
+  docs/evaluation-panels/writing-gao-word-boundary-deletions-2026-11-13.json \
+  --pack "$pack" --exclude docs/evaluation-panels/writing-gao-{archive-transfer,exact-excerpt,word-paragraphs}-2026-11-13.json
 ```
 
 ## Held test

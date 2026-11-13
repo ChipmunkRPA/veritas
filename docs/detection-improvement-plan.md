@@ -113,6 +113,11 @@ integration remains unfinished.
   localized 38 of 48 authored changes across paragraph breaks on 24
   held report sources. No unchanged reflow, boundary deletion or quote
   received a change. The browser, PDF and JSON show exact native positions.
+- The [Word boundary omission check](writing-gao-archive-comparison-2026-11-13.md#word-omissions-at-paragraph-breaks)
+  located 40 of 48 known omissions across adjacent paragraphs on 24
+  separate reports. It added no omission findings on 120 ordinary layout,
+  quote and hidden-text controls. Browser, PDF and JSON show the two
+  native character positions and the omitted wording from the archive.
 - The [public bandwidth replay](audio-bandwidth-return-2026-11-13.md#replay-from-public-source-ranges)
   now downloads only the pinned 12.3 MB needed from the AMI publisher and
   reproduces all 192 audio measurements from a clean checkout.

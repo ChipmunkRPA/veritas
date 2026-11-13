@@ -94,7 +94,7 @@ def replay(pack, excluded):
         for role, parts, target in fixtures:
             data = _word(parts)
             digest = hashlib.sha256(data).hexdigest()
-            current = document_archive_word.compare_gao(data, digest, PACK_SHA, reports, index)
+            current = document_archive_word.compare_gao(data, digest, PACK_SHA, reports, index, allow_boundary_deletion=False)
             previous = document_archive_word.compare_gao(data, digest, PACK_SHA, reports, index, allow_multi_paragraph=False)
             source = (current["reference"] or {}).get("id")
             _require(source in {None, name}, "A comparison matched a different source")

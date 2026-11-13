@@ -175,6 +175,29 @@ def test_gao_archive_local_transcript_matches_api_and_pdf(billing, monkeypatch, 
     _seed(billing, "gao-word-changed", word_changed, filename="changed.docx")
     word_crosses = word_fixture(crop.replace("Monday", "Thursday"), split_change=True, cross_paragraph=True)
     _seed(billing, "gao-word-crosses", word_crosses, filename="cross.docx")
+    before, after = crop.split("Monday", 1)
+    left, right = before.rstrip(), after.lstrip()
+
+    def omitted_at_boundary(interruption=None):
+        from docx.oxml import OxmlElement
+
+        word = WordDocument()
+        first = word.add_paragraph(left)
+        if interruption == "empty":
+            word.add_paragraph()
+        elif interruption == "table":
+            word.add_table(1, 1).cell(0, 0).text = "Monday"
+        elif interruption == "tracked":
+            first._p.append(OxmlElement("w:del"))
+        word.add_paragraph(right)
+        output = BytesIO()
+        word.save(output)
+        return output.getvalue()
+
+    word_omitted = omitted_at_boundary()
+    _seed(billing, "gao-word-omitted", word_omitted, filename="omitted.docx")
+    for interruption in ("empty", "table", "tracked"):
+        _seed(billing, f"gao-word-omitted-{interruption}", omitted_at_boundary(interruption), filename="omitted.docx")
     table_word = WordDocument()
     table_word.add_table(1, 1).cell(0, 0).text = crop
     table_file = BytesIO()
@@ -312,6 +335,39 @@ def test_gao_archive_local_transcript_matches_api_and_pdf(billing, monkeypatch, 
         assert previous["status"] == "out_of_scope" and previous["reference"] is None
         export.write_text(json.dumps(previous))
         assert review(export, word_source, pack_path, pack_sha)["status"] == "out_of_scope"
+        omission_body = client.post(_url("gao-word-omitted"), headers=billing.headers,
+                                    params={"include_pdf": True, **selection}).json()
+        omitted = omission_body["comparison"]
+        assert omitted["status"] == "reference_bound" and omitted["reference"]["id"] == "GAO-16-442"
+        missing, = omitted["changes"]
+        assert missing["archive"]["text"] == "Monday"
+        assert missing["submitted"]["text"] == "" and missing["submitted"]["changed_tokens"] == []
+        assert missing["submitted"]["start"] == missing["submitted"]["end"] == len(left) + 2
+        assert [(row["paragraph"], row["paragraph_range"], row["changed_tokens"])
+                for row in missing["submitted"]["docx_locations"]] == [(1, [len(left), len(left)], []), (2, [0, 0], [])]
+        with pymupdf.open(stream=base64.b64decode(omission_body["pdf"]), filetype="pdf") as pdf:
+            omission_pdf = " ".join(" ".join(page.get_text().split()) for page in pdf)
+            assert "Archive wording missing between Word paragraphs" in omission_pdf and "Monday" in omission_pdf
+            assert f"Word body paragraph 1, boundary at character {len(left)}." in omission_pdf
+            assert "Word body paragraph 2, boundary at character 0." in omission_pdf
+        word_source.write_bytes(word_omitted)
+        export.write_text(json.dumps(omitted))
+        assert review(export, word_source, pack_path, pack_sha)["exact_changes_verified"] == 1
+        missing["submitted"]["docx_locations"][0]["paragraph_range"][0] -= 1
+        export.write_text(json.dumps(omitted))
+        with pytest.raises(ValueError, match="does not replay"):
+            review(export, word_source, pack_path, pack_sha)
+        pre_omission = document_archive_word.compare_gao(word_omitted, omitted["submitted_sha256"], pack_sha, reports,
+                                                         packed_index, allow_boundary_deletion=False)
+        export.write_text(json.dumps(pre_omission))
+        assert pre_omission["status"] == review(export, word_source, pack_path, pack_sha)["status"] == "out_of_scope"
+        export.write_text(json.dumps(pre_omission | {"scope": omitted["scope"]}))
+        with pytest.raises(ValueError, match="does not replay"):
+            review(export, word_source, pack_path, pack_sha)
+        for interruption in ("empty", "table", "tracked"):
+            interrupted = client.post(_url(f"gao-word-omitted-{interruption}"), headers=billing.headers, params=selection)
+            proof = interrupted.json()["comparison"]
+            assert proof["status"] == "out_of_scope" and proof["reference"] is None and not proof["changes"]
         table = client.post(_url("gao-word-table-only"), headers=billing.headers, params=selection).json()["comparison"]
         assert table["status"] == "out_of_scope" and table["reference"] is None
         assert table["coverage"]["body_paragraphs"] == 0 and not table["aligned_paragraphs"]

@@ -11,7 +11,7 @@ from tempfile import TemporaryDirectory
 from app.detectors.text.extract import extract
 from app.evidence import document_archive_pdf
 from app.evidence import document_gao_archive as gao
-from app.evidence.document_archive_word import LEGACY_GAO_WORD_SCOPE, compare_gao
+from app.evidence.document_archive_word import GAO_WORD_BOUNDARY_SCOPE, LEGACY_GAO_WORD_SCOPE, compare_gao
 from app.evidence.document_revision import MAX_BYTES
 from app.evidence.document_revision_pdf import MAX_PREVIEW_BYTES
 from scripts.review_document_revision_export import _read, _unique
@@ -33,8 +33,11 @@ def review(export: Path, submitted: Path, pack: Path, sha256: str):
     if extension == ".pdf":
         expected = document_archive_pdf.compare(original, upload_sha256, gao_archive=(sha256, catalog, index))
     elif extension == ".docx":
-        legacy = isinstance(proof.get("scope"), str) and proof["scope"].endswith(LEGACY_GAO_WORD_SCOPE)
-        expected = compare_gao(original, upload_sha256, sha256, catalog, index, allow_multi_paragraph=not legacy)
+        scope = proof.get("scope")
+        legacy = isinstance(scope, str) and scope.endswith(LEGACY_GAO_WORD_SCOPE)
+        allow_boundary_deletion = isinstance(scope, str) and scope.endswith(GAO_WORD_BOUNDARY_SCOPE)
+        expected = compare_gao(original, upload_sha256, sha256, catalog, index, allow_multi_paragraph=not legacy,
+                               allow_boundary_deletion=allow_boundary_deletion)
     else:
         with TemporaryDirectory(prefix="chipmunk-gao-review-") as directory:
             staged = Path(directory) / "retained.txt"

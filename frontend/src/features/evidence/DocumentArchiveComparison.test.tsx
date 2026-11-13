@@ -168,6 +168,30 @@ describe('Public archive comparison', () => {
     expect(screen.getByText('right').tagName).toBe('MARK')
   })
 
+  it('shows the two paragraph endpoints of omitted wording', async () => {
+    const result = structuredClone(edited)
+    result.comparison.schema = 'chipmunk.document-archive-comparison/2'
+    result.comparison.changes[0].submitted = {
+      start: 18, end: 18, text: '', changed_tokens: [],
+      docx_locations: [
+        { paragraph: 3, body_index: 2, paragraph_range: [16, 16], runs_complete: true, changed_tokens: [] },
+        { paragraph: 4, body_index: 3, paragraph_range: [0, 0], runs_complete: true, changed_tokens: [] },
+      ],
+    }
+    vi.mocked(archiveAvailability).mockResolvedValue({ gaoAvailable: true })
+    vi.mocked(compareArchive).mockResolvedValue(result)
+    show()
+    const collection = await screen.findByLabelText('Archive collection')
+    fireEvent.change(collection, { target: { value: 'gao' } })
+    fireEvent.click(screen.getByRole('button', { name: 'Compare with public archive' }))
+    expect(await screen.findByRole('heading', { name: 'Archive wording missing between Word paragraphs' })).toBeVisible()
+    const positions = screen.getByRole('list', { name: 'Changed Word positions' })
+    expect(positions).toHaveTextContent('Word body paragraph 3, boundary at character 16.')
+    expect(positions).toHaveTextContent('Word body paragraph 4, boundary at character 0.')
+    expect(screen.getByText('No text at this position.')).toBeVisible()
+    expect(screen.getByText('tea').tagName).toBe('MARK')
+  })
+
   it('shows the matched PDF page and the exact original and highlighted crops', async () => {
     const result = structuredClone(edited)
     result.comparison.aligned_paragraphs[0].pdf_pages = [{ page: 2, extracted_range: [10, 16] }]

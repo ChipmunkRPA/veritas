@@ -13,7 +13,9 @@ const statusLabels = {
 
 function changeHeading(excerpt: ArchiveExcerpt, paragraph: number, joined: boolean) {
   if (excerpt.docx_location) return `Word body paragraph ${excerpt.docx_location.paragraph}`
-  if (excerpt.docx_locations?.length) return 'Change across Word paragraphs'
+  if (excerpt.docx_locations?.length) {
+    return excerpt.start === excerpt.end ? 'Archive wording missing between Word paragraphs' : 'Change across Word paragraphs'
+  }
   if (excerpt.pdf_pages?.length) return `Submitted PDF · ${excerpt.pdf_pages.map(page => `page ${page.page}`).join(', ')}`
   return `${joined ? 'Passage in submitted paragraph' : 'Submitted paragraph'} ${paragraph}`
 }
@@ -36,7 +38,9 @@ function Excerpt({ label, excerpt }: { label: string; excerpt: ArchiveExcerpt | 
     </p>}
     {!!excerpt?.docx_locations?.length && <ul aria-label="Changed Word positions" className="mt-1 mb-0 text-caption text-text-muted">
       {excerpt.docx_locations.map(location => <li key={location.body_index}>
-        Word body paragraph {location.paragraph}, characters [{location.paragraph_range.join(', ')}).
+        Word body paragraph {location.paragraph}, {location.paragraph_range[0] === location.paragraph_range[1]
+          ? `boundary at character ${location.paragraph_range[0]}.`
+          : `characters [${location.paragraph_range.join(', ')}).`}
       </li>)}
     </ul>}
     {excerpt?.text

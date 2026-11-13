@@ -1,0 +1,502 @@
+{
+  "audit": {
+    "current_luma_repeat": 96,
+    "exact_delivery_truth_and_diagnostic_grid": 96,
+    "native_boxes_and_flags": 288,
+    "neural_inference_repeated": false
+  },
+  "calibration_count": 0,
+  "checkpoint": "ed25f3a31f01632728cabb09d1542f84ab7b0056",
+  "deliveries": 96,
+  "design": {
+    "background_edits": "Use the prior deterministic native 1/16-area rectangle inside the publisher's edited mask. Preserve all source pixels outside the measured footprint.",
+    "confidence_weight": 0,
+    "controls": [
+      "original",
+      "local_processing",
+      "global_processing",
+      "local_blur",
+      "local_copy",
+      "local_tone"
+    ],
+    "encoding": "JPEG75 4:2:0, identical final encode for every view.",
+    "family_targets": {
+      "kandinsky": 6,
+      "sd15": 6
+    },
+    "feather": "Eight-pixel cosine transition contained in the exact sharp edit mask.",
+    "gate": {
+      "additional_ordinary_groups": 2,
+      "additional_useful_feathered_groups": 3,
+      "minimum_families": 2,
+      "misplaced_edit_flags": 4
+    },
+    "insertion_native_semantic_area": [
+      0.004,
+      0.08
+    ],
+    "maximum_ordered_attempts_per_family": {
+      "kandinsky": 7,
+      "sd15": 8
+    },
+    "paired_diagnostic": "Compare median inpainted log-odds on the same token sites at 50% or more exact feathered occupancy. The region and truth are known to this diagnostic only.",
+    "ranking_diagnostic": "Count useful proposed rectangles before the prior operating point; report whether the highest rectangle equals that of the untouched photo.",
+    "scope": "New credited photographs within the same publisher, excluding known local exposure. Fixed heads and original ordinary-only operating points.",
+    "useful": {
+      "iou": 0.3,
+      "recall": 0.5
+    }
+  },
+  "elapsed_s": 42.73,
+  "fit_count": 0,
+  "forwards": {
+    "batches": 312,
+    "deliveries": 96,
+    "tiles": 1248
+  },
+  "intake": {
+    "journal_sha256": "06de7299f77183c95c74750c1f971c17acdbd184603d06ab8e8604a79a81e3cf",
+    "plan_sha256": "c9c2a8e77c23c98883e92c552c2dfbf7a10ac7cebfe368b77eee070abbfbed95",
+    "qualified": {
+      "kandinsky": 6,
+      "sd15": 6
+    },
+    "status": {
+      "qualified": 12,
+      "reserve_unopened": 3
+    }
+  },
+  "known_site_diagnostic": {
+    "kandinsky/binary/local_blur": {
+      "feathered_higher": 6,
+      "groups": 6,
+      "median_paired_gap": 0.32485673843847007
+    },
+    "kandinsky/binary/local_copy": {
+      "feathered_higher": 5,
+      "groups": 6,
+      "median_paired_gap": 0.16532120890064494
+    },
+    "kandinsky/binary/local_processing": {
+      "feathered_higher": 6,
+      "groups": 6,
+      "median_paired_gap": 0.3281321779326589
+    },
+    "kandinsky/binary/local_tone": {
+      "feathered_higher": 6,
+      "groups": 6,
+      "median_paired_gap": 0.35825905089988086
+    },
+    "kandinsky/binary/original": {
+      "feathered_higher": 6,
+      "groups": 6,
+      "median_paired_gap": 0.32736000151163946
+    },
+    "kandinsky/three_class/local_blur": {
+      "feathered_higher": 6,
+      "groups": 6,
+      "median_paired_gap": 0.2702905662448032
+    },
+    "kandinsky/three_class/local_copy": {
+      "feathered_higher": 5,
+      "groups": 6,
+      "median_paired_gap": 0.14679194986278432
+    },
+    "kandinsky/three_class/local_processing": {
+      "feathered_higher": 6,
+      "groups": 6,
+      "median_paired_gap": 0.2717460047804302
+    },
+    "kandinsky/three_class/local_tone": {
+      "feathered_higher": 6,
+      "groups": 6,
+      "median_paired_gap": 0.2985068512673721
+    },
+    "kandinsky/three_class/original": {
+      "feathered_higher": 6,
+      "groups": 6,
+      "median_paired_gap": 0.27329552805715074
+    },
+    "sd15/binary/local_blur": {
+      "feathered_higher": 5,
+      "groups": 6,
+      "median_paired_gap": 0.27375141613628273
+    },
+    "sd15/binary/local_copy": {
+      "feathered_higher": 4,
+      "groups": 6,
+      "median_paired_gap": 0.18750433053514542
+    },
+    "sd15/binary/local_processing": {
+      "feathered_higher": 5,
+      "groups": 6,
+      "median_paired_gap": 0.26898575455672363
+    },
+    "sd15/binary/local_tone": {
+      "feathered_higher": 5,
+      "groups": 6,
+      "median_paired_gap": 0.24456396825342025
+    },
+    "sd15/binary/original": {
+      "feathered_higher": 5,
+      "groups": 6,
+      "median_paired_gap": 0.27832754660380604
+    },
+    "sd15/three_class/local_blur": {
+      "feathered_higher": 5,
+      "groups": 6,
+      "median_paired_gap": 0.23188536136442323
+    },
+    "sd15/three_class/local_copy": {
+      "feathered_higher": 4,
+      "groups": 6,
+      "median_paired_gap": 0.1639202253096152
+    },
+    "sd15/three_class/local_processing": {
+      "feathered_higher": 5,
+      "groups": 6,
+      "median_paired_gap": 0.22186380163938804
+    },
+    "sd15/three_class/local_tone": {
+      "feathered_higher": 5,
+      "groups": 6,
+      "median_paired_gap": 0.20762911656424793
+    },
+    "sd15/three_class/original": {
+      "feathered_higher": 5,
+      "groups": 6,
+      "median_paired_gap": 0.22775105208288196
+    }
+  },
+  "measurements_sha256": "7156a513140b338e091230f61a385bd37f9272933b3bff196396eb4a560f353d",
+  "outcome": {
+    "binary": {
+      "actual": {
+        "additional_ordinary_groups": 5,
+        "additional_useful_feathered_groups": 2,
+        "minimum_families": 1,
+        "misplaced_edit_flags": 8
+      },
+      "ordinary_groups": 5,
+      "passes": false,
+      "useful_feathered_vs_binary": 0
+    },
+    "three_class": {
+      "actual": {
+        "additional_ordinary_groups": 5,
+        "additional_useful_feathered_groups": 2,
+        "minimum_families": 1,
+        "misplaced_edit_flags": 6
+      },
+      "ordinary_groups": 5,
+      "passes": false,
+      "useful_feathered_vs_binary": 0
+    }
+  },
+  "points": {
+    "binary": 0.6112154889273517,
+    "three_class": 0.5234852860134196
+  },
+  "prior_probe": {
+    "freeze.json": "7041774c64d953496e4b6bafa5ab214f821c12cb8ea78b96d13b2f72bb1e9559",
+    "heads.json": "5c17bdc8f5ba93e4ca942cc1dd68caf937b509e819b726c09a7239c27a9e3956",
+    "points.json": "a6e9abc477534ecca746a6f96b2b7aca8d8f1f4b5f18336e5d0b5e7f86f8cb52"
+  },
+  "process_peak_rss_bytes_mac": 899923968,
+  "publisher_revision": "aaba6cd1ced4ce3c846be9641fed092adb4919d1",
+  "same_feathered_box_as_original": {
+    "binary": 6,
+    "three_class": 7
+  },
+  "schema": "chipmunk.image-three-class-patch-fresh/1",
+  "strata": {
+    "kandinsky/feathered/binary": {
+      "flagged": 4,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/feathered/current_luma": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/feathered/three_class": {
+      "flagged": 3,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/global_processing/binary": {
+      "flagged": 3,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/global_processing/current_luma": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/global_processing/three_class": {
+      "flagged": 3,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/local_blur/binary": {
+      "flagged": 3,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/local_blur/current_luma": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/local_blur/three_class": {
+      "flagged": 2,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/local_copy/binary": {
+      "flagged": 3,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/local_copy/current_luma": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/local_copy/three_class": {
+      "flagged": 3,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/local_processing/binary": {
+      "flagged": 4,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/local_processing/current_luma": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/local_processing/three_class": {
+      "flagged": 3,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/local_tone/binary": {
+      "flagged": 4,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/local_tone/current_luma": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/local_tone/three_class": {
+      "flagged": 3,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/original/binary": {
+      "flagged": 4,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/original/current_luma": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/original/three_class": {
+      "flagged": 3,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/sharp/binary": {
+      "flagged": 4,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/sharp/current_luma": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "kandinsky/sharp/three_class": {
+      "flagged": 3,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sd15/feathered/binary": {
+      "flagged": 2,
+      "useful": 2,
+      "useful_before_point": 3,
+      "views": 6
+    },
+    "sd15/feathered/current_luma": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sd15/feathered/three_class": {
+      "flagged": 2,
+      "useful": 2,
+      "useful_before_point": 3,
+      "views": 6
+    },
+    "sd15/global_processing/binary": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sd15/global_processing/current_luma": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sd15/global_processing/three_class": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sd15/local_blur/binary": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sd15/local_blur/current_luma": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sd15/local_blur/three_class": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sd15/local_copy/binary": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sd15/local_copy/current_luma": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sd15/local_copy/three_class": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sd15/local_processing/binary": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sd15/local_processing/current_luma": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sd15/local_processing/three_class": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sd15/local_tone/binary": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sd15/local_tone/current_luma": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sd15/local_tone/three_class": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sd15/original/binary": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sd15/original/current_luma": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sd15/original/three_class": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sd15/sharp/binary": {
+      "flagged": 2,
+      "useful": 2,
+      "useful_before_point": 3,
+      "views": 6
+    },
+    "sd15/sharp/current_luma": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "sd15/sharp/three_class": {
+      "flagged": 2,
+      "useful": 2,
+      "useful_before_point": 3,
+      "views": 6
+    }
+  }
+}

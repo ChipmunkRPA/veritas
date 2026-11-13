@@ -229,6 +229,7 @@ class Settings(BaseSettings):
     image_jpeg_offgrid_copy_review: bool = False  # Development-only texture and perimeter matching for selected JPEGs.
     image_embedded_pair_review: bool = False  # Development-only exact differences between two matching PNG areas.
     image_whole_review_python: Path | None = None  # Optional local Python environment for the supplementary image check.
+    image_whole_png_review_enabled: bool = False  # Also review eligible upright RGB PNGs in development.
 
     # --- audio (video sound track) ---
     audio_enabled: bool = True  # score the sound track of a video with audio_classifiers

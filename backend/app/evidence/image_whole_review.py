@@ -15,6 +15,7 @@ from collections.abc import Mapping
 from contextlib import nullcontext
 from pathlib import Path
 
+import numpy as np
 import psutil
 from PIL import Image
 
@@ -22,6 +23,7 @@ from app.core.config import BACKEND_DIR, settings
 from app.core.logging import get_logger
 from app.engine.exhibits import ExhibitBudgetExceeded
 from app.engine.models import MemoryBudgetExceeded, get_model_manager
+from app.evidence import image_png_layout
 from app.storage.objects import ObjectStoreError
 
 CREATOR = "render"
@@ -45,6 +47,11 @@ NO_FLAG = ("The supplementary whole-image check measured three image views and g
 UNAVAILABLE = "The supplementary whole-image check was unavailable for this analysis."
 SCOPE = ("The supplementary check covers upright RGB JPEGs with a short side of at least 1,024 pixels "
          "and a long side of at most 4,920 pixels.")
+PNG_SCOPE = ("The supplementary check covers upright RGB PNGs with a short side of at least 768 pixels "
+             "and a long side of at most 4,920 pixels. "
+             "PNG files with a transparent color or multiple frames are outside its scope.")
+PNG_LAYOUT = ("The supplementary whole-image check was skipped because this PNG contains areas or edges "
+              "consistent with a rendered layout. This check is evaluated for photographic images.")
 
 
 def _coordinates(bounds):
@@ -88,11 +95,15 @@ def _output(directory, source_sha256, size):
 def add_exhibits(source: Path, source_sha256: str, writer, *, remaining: float | None):
     """A missing, busy or slow optional check leaves primary analysis intact."""
     python = settings.image_whole_review_python
+    formats = ["JPEG", "PNG"] if settings.image_whole_png_review_enabled else ["JPEG"]
     try:
-        with Image.open(source, formats=["JPEG"]) as image:
+        with Image.open(source, formats=formats) as image:
             size = image.size
-            if image.mode != "RGB" or image.getexif().get(274, 1) != 1 or min(size) < MIN_SIDE or max(size) > MAX_SIDE:
-                return _summary(writer, "skipped", SCOPE)
+            is_png = image.format == "PNG"
+            min_side = 768 if is_png else MIN_SIDE
+            if (image.mode != "RGB" or image.getexif().get(274, 1) != 1 or min(size) < min_side or max(size) > MAX_SIDE
+                    or (is_png and (image.n_frames != 1 or "transparency" in image.info or not _true_color_png(source)))):
+                return _summary(writer, "skipped", PNG_SCOPE if is_png else SCOPE)
     except (OSError, ValueError, SyntaxError, Image.DecompressionBombError):
         return _summary(writer, "skipped", SCOPE)
     if python is None or not python.is_file() or settings.models_dir is None:
@@ -103,7 +114,8 @@ def add_exhibits(source: Path, source_sha256: str, writer, *, remaining: float |
     except (OSError, psutil.Error):
         log.info("image_review.skipped", reason="resource_check_unavailable")
         return _summary(writer, "skipped", UNAVAILABLE)
-    if (disk < settings.min_free_bytes or (remaining is not None and remaining < TIMEOUT_S + 5)
+    preparation = image_png_layout.TIMEOUT_S if is_png else 0
+    if (disk < settings.min_free_bytes or (remaining is not None and remaining < TIMEOUT_S + preparation + 5)
             or not LOCK.acquire(blocking=False)):
         log.info("image_review.skipped", reason="resource_or_deadline", available_memory=memory, free_disk=disk,
                  remaining_seconds=remaining)
@@ -116,6 +128,10 @@ def add_exhibits(source: Path, source_sha256: str, writer, *, remaining: float |
             if reclaim and (memory := psutil.virtual_memory().available) < MEMORY_RESERVE:
                 log.info("image_review.skipped", reason="insufficient_memory", available_memory=memory)
                 return _summary(writer, "skipped", UNAVAILABLE)
+            if is_png:
+                with Image.open(source, formats=["PNG"]) as image:
+                    if image_png_layout.has_interface_layout(np.asarray(image), source):
+                        return _summary(writer, "skipped", PNG_LAYOUT)
             with tempfile.TemporaryDirectory(prefix="chipmunk-image-review-") as tmp:
                 directory = Path(tmp)
                 env = {key: os.environ[key] for key in ("PATH", "LANG", "LC_ALL", "TMPDIR") if key in os.environ}
@@ -142,6 +158,12 @@ def add_exhibits(source: Path, source_sha256: str, writer, *, remaining: float |
         return _summary(writer, "skipped", UNAVAILABLE)
     finally:
         LOCK.release()
+
+
+def _true_color_png(source):
+    with source.open("rb") as stream:
+        head = stream.read(26)
+    return head[:16] == b"\x89PNG\r\n\x1a\n\x00\x00\x00\x0dIHDR" and head[24:26] == b"\x08\x02"
 
 
 def is_review_exhibit(item):

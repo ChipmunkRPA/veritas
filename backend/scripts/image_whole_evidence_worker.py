@@ -46,7 +46,7 @@ def inspect(source, model_dir, output):
     assets.check_tensor_file(model[3], model_dir / "3_Dense/model.safetensors", 769)
     processor = model[0].processor.image_processor
     processor.max_soft_tokens = processor.image_seq_length = 140
-    with Image.open(source, formats=["JPEG"]) as image:
+    with Image.open(source, formats=["JPEG", "PNG"]) as image:
         crops, traces = views(image, 3)
     with torch.inference_mode():
         responses = model.encode([{"image": crop} for crop in crops], batch_size=3, convert_to_tensor=True,

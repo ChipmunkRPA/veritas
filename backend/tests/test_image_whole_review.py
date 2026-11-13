@@ -15,6 +15,7 @@ from app.engine.customer_assessment import customer_assessment
 from app.engine.detector import Profile
 from app.engine.exhibits import ExhibitWriter
 from app.engine.stages import image as image_stage
+from app.evidence import image_png_layout
 from app.evidence import image_whole_review as review
 from app.storage.objects import ObjectStore
 
@@ -120,6 +121,7 @@ def test_configured_full_png_explicitly_reports_scope_skip(tmp_path, monkeypatch
         Image.new("RGB", (1024, 1024)).save(buffer, "PNG")
         source = store.put_bytes(buffer.getvalue())
     monkeypatch.setattr(review.settings, "image_whole_review_python", tmp_path / "not-needed")
+    monkeypatch.setattr(review.settings, "image_whole_png_review_enabled", False)
     monkeypatch.setattr(review.settings, "environment", "dev")
     monkeypatch.setattr(image_stage, "_legacy_artifacts", lambda _: {})
     context = SimpleNamespace(analysis_id="png", exhibits=ExhibitWriter("png", store), store=store,
@@ -130,3 +132,33 @@ def test_configured_full_png_explicitly_reports_scope_skip(tmp_path, monkeypatch
     projected = review.from_result({**rendered, "input": {"sha256": source.sha256}})
     assert projected["status"] == "skipped" and projected["interpretation"] == review.SCOPE
     assert not projected["crops"] and not rendered["artefacts"]
+
+
+@pytest.mark.parametrize("mode,expected", [("RGB", review.PNG_LAYOUT), ("RGBA", review.PNG_SCOPE)])
+def test_opted_in_png_rejects_outside_scope_without_worker(tmp_path, monkeypatch, mode, expected):
+    source = tmp_path / "layout.png"
+    Image.new(mode, (1024, 1024)).save(source, "PNG")
+    sha = hashlib.sha256(source.read_bytes()).hexdigest()
+    monkeypatch.setattr(review.settings, "image_whole_review_python", source)
+    monkeypatch.setattr(review.settings, "image_whole_png_review_enabled", True)
+    monkeypatch.setattr(review.settings, "models_dir", tmp_path)
+    monkeypatch.setattr(review.settings, "data_dir", tmp_path)
+    monkeypatch.setattr(review.settings, "min_free_bytes", 0)
+    monkeypatch.setattr(review, "MEMORY_RESERVE", 0)
+    monkeypatch.setattr(review.subprocess, "run", lambda *args, **kwargs: pytest.fail("unexpected worker"))
+    writer = ExhibitWriter("png", ObjectStore(tmp_path / "objects")).bind(review.CREATOR)
+    ids = review.add_exhibits(source, sha, writer, remaining=240)
+    result = {"input": {"sha256": sha}, "exhibits": [x.model_dump(mode="json") for x in writer.exhibits if x.id in ids]}
+    projected = review.from_result(result)
+    assert projected["status"] == "skipped" and projected["interpretation"] == expected
+    assert not projected["crops"] and projected["authorship_confidence_contribution"] == 0
+
+
+@pytest.mark.parametrize("width,repeats", [(25, image_png_layout.MAX_WORDS + 1), (4920, 2)])
+def test_png_layout_bounds_recognized_word_work(width, repeats):
+    header = b"level\tblock_num\tpar_num\tline_num\tleft\ttop\twidth\theight\tconf\ttext\n"
+    word = f"5\t1\t1\t1\t0\t0\t{width}\t96\t99\tWord\n".encode()
+    with pytest.raises(ValueError, match="word measurement exceeds its size limit"):
+        image_png_layout._word_boxes(header + word * repeats)
+    with pytest.raises(ValueError, match="output exceeds its size limit"):
+        image_png_layout._word_boxes(b"x" * (image_png_layout.MAX_TSV_BYTES + 1))

@@ -154,7 +154,8 @@ def _compare(aid: str, kind: str, original: tuple[str, int, str], earlier: Uploa
             try:
                 if kind == "audio":
                     record, assets = audio_reference.compare(
-                        reference, submitted, filenames=(earlier.filename or "", original[2])
+                        reference, submitted, filenames=(earlier.filename or "", original[2]),
+                        include_local_timing=settings.audio_reference_local_timing,
                     )
                 elif timing_event_s is None:
                     record, assets = video_reference.compare(reference, submitted)

@@ -1,0 +1,17 @@
+{% set position = evidence.passage_position %}
+<h3 id="document-passage-position">Three-sentence writing check</h3>
+{% if position.status == 'flagged' %}
+<p>The middle sentence showed a stronger AI-like writing response than both neighbors. This check marked that sentence for inspection.</p>
+{% elif position.status == 'unassessed' %}
+<p>The input met the scope for this check. Complete responses were unavailable.</p>
+{% else %}
+<p>The middle sentence did not reach the review level for a stronger AI-like writing response than both neighbors. This result leaves authorship undetermined.</p>
+{% endif %}
+{% if position.text %}<p><strong>Middle sentence.</strong> {{ position.text }}</p>{% endif %}
+<table class="multimedia-locator">
+<thead><tr><th>Sentence</th><th>Original text characters</th><th>Raw response</th></tr></thead>
+<tbody>{% for row in position.rows %}
+<tr><td>{{ row.label }}</td><td>[{{ row.source_start }}, {{ row.source_end }})</td><td>{{ '%.4g' | format(row.response) if row.response is not none else 'Unavailable' }}</td></tr>
+{% endfor %}</tbody>
+</table>
+<p class="caption">Each response uses its sentence and immediate neighbors. This check carries zero weight in the overall assessment. JSON pointer <span class="mono">/coverage/passage_position_review</span>.</p>

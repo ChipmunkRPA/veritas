@@ -317,6 +317,13 @@ export interface DocumentUnselectedResponses {
       | { kind: 'text' | 'docx'; paragraph: number })[]
     check: string; input_sha256: string; direction: 'supports_ai' | 'opposes_ai'; response: number; text: string }[]
 }
+export interface DocumentPassagePosition {
+  schema: 'document-passage-position-review/1'; status: 'flagged' | 'no_flag' | 'unassessed'
+  authorship_confidence_contribution: 0; focus_text: string; signal_ref: EvidenceRef
+  sentences: { start: number; end: number; source_start: number; source_end: number }[]
+  readings?: { input_sha256: string; response_hex: string; focus_tokens: number; neighbor_tokens: number }[]
+  contrast_hex?: string
+}
 export interface DocumentEvidenceSet extends SetBase {
   schema: 'chipmunk.document-evidence/1'; packets: DocumentEvidencePacket[]; omitted_windows: number
   source: { sha256: string; chars?: number; method?: string; offset_unit: 'unicode_codepoint' }
@@ -329,6 +336,7 @@ export interface DocumentEvidenceSet extends SetBase {
     email_body_alternatives?: EmailBodyAlternatives;
     local_passage_coverage?: DocumentPassageCoverage;
     unselected_passage_responses?: DocumentUnselectedResponses;
+    passage_position_review?: DocumentPassagePosition;
     writing_second_check?: { schema: 'document-writing-second-check/1' | 'document-writing-second-check/2' | 'document-writing-second-check/3' | 'document-writing-second-check/4' | 'document-writing-second-check/5' | 'document-writing-second-check/6'; authorship_confidence_contribution: 0;
       body_spans?: { start: number; end: number }[];
       pdf_spans?: { start: number; end: number; page: number }[];

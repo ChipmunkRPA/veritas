@@ -100,6 +100,12 @@ class _SequenceClassifier(Detector):
                     "extracted_text_sha256": text_hash(doc.text), "join": "single_space_between_sentences",
                     "windows": input_windows}
         model_revisions = revisions(ctx, self.MODEL_ID)
+        if self.ISOLATED_PARAGRAPH_REVIEW and settings.text_passage_position_review:
+            from app.detectors.text.passage_position import capture
+            from app.evidence.document_passage_position import KEY
+
+            if (position := capture(clf, doc, sents, ctx, self.spec, model_revisions)) is not None:
+                evidence[KEY] = position
         if (settings.environment == "dev" and settings.text_matched_context_review and settings.text_detector_mode == "candidate"
                 and settings.text_window_sentences == 3):
             from app.evidence import document_matched_context

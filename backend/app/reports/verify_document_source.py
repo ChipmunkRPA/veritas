@@ -18,6 +18,7 @@ from app.evidence import (
     document_matched_context,
     document_paragraph_priority,
     document_passage_coverage,
+    document_passage_position,
     document_repeat,
     document_scope,
     document_unselected_responses,
@@ -122,6 +123,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     document_passage_coverage.verify_source(evidence, text, mapping, meta=doc.meta)
     document_scope.validate_checkpoint_agreement(evidence, text, mapping=mapping)
     unselected = document_unselected_responses.verify_source(evidence, text, mapping)
+    position = document_passage_position.verify_source(evidence, text, mapping)
     alternatives = email_alternatives.verify_source(evidence, original.read_bytes()) if email_alternatives.KEY in coverage else None
 
     pdf_bytes = original.read_bytes() if extension == ".pdf" else None
@@ -163,5 +165,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     page_detail = f" Verified mapped text coverage across {page_coverage['page_count']} PDF pages." if page_coverage else ""
     unselected_detail = f" Verified {unselected} additional recorded response locations and inputs." if unselected else ""
     alternative_detail = " Verified both decoded email body renditions and reported source positions." if alternatives and "parts" in alternatives else ""
+    position_detail = " Verified all three writing position inputs and their source ranges." if position else ""
     return (f"Original SHA-256, extracted text and source mapping matched. Verified passages ({packet_count}), "
-            f"recorded input windows ({window_count}) and {image_label} ({images}).{page_detail}{unselected_detail}{alternative_detail}")
+            f"recorded input windows ({window_count}) and {image_label} ({images})."
+            f"{page_detail}{unselected_detail}{alternative_detail}{position_detail}")

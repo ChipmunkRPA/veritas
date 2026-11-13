@@ -1,0 +1,701 @@
+{
+  "freeze_sha256": "89b20e6e30da4039afa6cc4af4ead9e92ea1e6c10b8577f674f22a268f344b3b",
+  "license": "CC BY 4.0",
+  "originals_only": true,
+  "publisher_record": 3736465,
+  "results": {
+    "counts": {
+      "ambiguous_reopening": 2,
+      "development": 8,
+      "held": 24,
+      "no_clear_burst": 9,
+      "no_clear_reopening": 4,
+      "observed_reopening": 26,
+      "planned": 32,
+      "qualified_original_event": 17,
+      "signal_supported_burst": 23,
+      "unavailable": 13,
+      "unresolved_clock_agreement_or_flanks": 2
+    },
+    "scheduled": [
+      2,
+      3,
+      9,
+      12,
+      15,
+      18,
+      19,
+      21,
+      23,
+      25,
+      28,
+      30,
+      31
+    ],
+    "source_groups": 7
+  },
+  "rows": [
+    {
+      "audio_status": "signal_supported_burst",
+      "condition": "p",
+      "group": 1,
+      "ordinal": 1,
+      "phoneme": "b",
+      "split": "development",
+      "status": "unavailable",
+      "visual_status": "no_clear_reopening"
+    },
+    {
+      "audio_commitment": "6b136c871cc698cc2809a28649d33cb2bb09cbb81f0c36873b528afe104a0e18",
+      "audio_range_s": [
+        "7/8",
+        "89/100"
+      ],
+      "audio_status": "signal_supported_burst",
+      "condition": "p",
+      "group": 1,
+      "native_edit_frames": [
+        15,
+        31
+      ],
+      "native_edit_range_s": [
+        "5/8",
+        "31/24"
+      ],
+      "ordinal": 2,
+      "phoneme": "b",
+      "signed_midpoint_delta_s": "1/75",
+      "split": "development",
+      "status": "qualified_original_event",
+      "visual_range_s": [
+        "7/8",
+        "11/12"
+      ],
+      "visual_status": "observed_reopening"
+    },
+    {
+      "audio_commitment": "471619f47e61605f51618beb2d71b7af9846cf0f2346df98e07acc5714c026a4",
+      "audio_range_s": [
+        "23/25",
+        "187/200"
+      ],
+      "audio_status": "signal_supported_burst",
+      "condition": "l",
+      "group": 1,
+      "native_edit_frames": [
+        16,
+        32
+      ],
+      "native_edit_range_s": [
+        "2/3",
+        "4/3"
+      ],
+      "ordinal": 3,
+      "phoneme": "b",
+      "signed_midpoint_delta_s": "1/100",
+      "split": "development",
+      "status": "qualified_original_event",
+      "visual_range_s": [
+        "11/12",
+        "23/24"
+      ],
+      "visual_status": "observed_reopening"
+    },
+    {
+      "audio_commitment": "dc37fe887c4bd417dbedbc96fe7faf73a9e66d60f2fb160fec94b65c1cbacd43",
+      "audio_range_s": [
+        "21/20",
+        "213/200"
+      ],
+      "audio_status": "signal_supported_burst",
+      "condition": "l",
+      "group": 1,
+      "native_edit_frames": [
+        19,
+        35
+      ],
+      "native_edit_range_s": [
+        "19/24",
+        "35/24"
+      ],
+      "ordinal": 4,
+      "phoneme": "b",
+      "signed_midpoint_delta_s": "1/200",
+      "split": "development",
+      "status": "qualified_original_event",
+      "visual_range_s": [
+        "25/24",
+        "13/12"
+      ],
+      "visual_status": "observed_reopening"
+    },
+    {
+      "audio_status": "no_clear_burst",
+      "condition": "p",
+      "group": 2,
+      "ordinal": 5,
+      "phoneme": "p",
+      "split": "development",
+      "status": "unavailable",
+      "visual_status": "observed_reopening"
+    },
+    {
+      "audio_status": "no_clear_burst",
+      "condition": "p",
+      "group": 2,
+      "ordinal": 6,
+      "phoneme": "b",
+      "split": "development",
+      "status": "unavailable",
+      "visual_status": "observed_reopening"
+    },
+    {
+      "audio_status": "signal_supported_burst",
+      "condition": "l",
+      "group": 2,
+      "ordinal": 7,
+      "phoneme": "p",
+      "split": "development",
+      "status": "unavailable",
+      "visual_status": "ambiguous_reopening"
+    },
+    {
+      "audio_status": "no_clear_burst",
+      "condition": "l",
+      "group": 2,
+      "ordinal": 8,
+      "phoneme": "p",
+      "split": "development",
+      "status": "unavailable",
+      "visual_status": "observed_reopening"
+    },
+    {
+      "audio_commitment": "bf3beec922407f98c4d14f1a7511731b19517d9999ffa7361a4a32066221e809",
+      "audio_range_s": [
+        "37/40",
+        "47/50"
+      ],
+      "audio_status": "signal_supported_burst",
+      "condition": "p",
+      "group": 3,
+      "native_edit_frames": [
+        16,
+        32
+      ],
+      "native_edit_range_s": [
+        "1001/1500",
+        "1001/750"
+      ],
+      "ordinal": 9,
+      "phoneme": "b",
+      "signed_midpoint_delta_s": "19/3200",
+      "split": "held",
+      "status": "qualified_original_event",
+      "visual_range_s": [
+        "11011/12000",
+        "23023/24000"
+      ],
+      "visual_status": "observed_reopening"
+    },
+    {
+      "audio_range_s": [
+        "151/200",
+        "77/100"
+      ],
+      "audio_status": "signal_supported_burst",
+      "condition": "p",
+      "group": 3,
+      "ordinal": 10,
+      "phoneme": "b",
+      "signed_midpoint_delta_s": "-3587/22960",
+      "split": "held",
+      "status": "unresolved_clock_agreement_or_flanks",
+      "visual_range_s": [
+        "24/41",
+        "180/287"
+      ],
+      "visual_status": "observed_reopening"
+    },
+    {
+      "audio_status": "no_clear_burst",
+      "condition": "l",
+      "group": 3,
+      "ordinal": 11,
+      "phoneme": "b",
+      "split": "held",
+      "status": "unavailable",
+      "visual_status": "observed_reopening"
+    },
+    {
+      "audio_commitment": "fb3acb859e36f02fec21a560880b88756fad7360d968a31a1e529c2bb64916b7",
+      "audio_range_s": [
+        "43/50",
+        "7/8"
+      ],
+      "audio_status": "signal_supported_burst",
+      "condition": "l",
+      "group": 3,
+      "native_edit_frames": [
+        14,
+        30
+      ],
+      "native_edit_range_s": [
+        "7007/12000",
+        "1001/800"
+      ],
+      "ordinal": 12,
+      "phoneme": "b",
+      "signed_midpoint_delta_s": "-599/48000",
+      "split": "held",
+      "status": "qualified_original_event",
+      "visual_range_s": [
+        "1001/1200",
+        "7007/8000"
+      ],
+      "visual_status": "observed_reopening"
+    },
+    {
+      "audio_status": "no_clear_burst",
+      "condition": "p",
+      "group": 4,
+      "ordinal": 13,
+      "phoneme": "p",
+      "split": "held",
+      "status": "unavailable",
+      "visual_status": "no_clear_reopening"
+    },
+    {
+      "audio_status": "signal_supported_burst",
+      "condition": "p",
+      "group": 4,
+      "ordinal": 14,
+      "phoneme": "b",
+      "split": "held",
+      "status": "unavailable",
+      "visual_status": "ambiguous_reopening"
+    },
+    {
+      "audio_commitment": "2d813c0e6e805877a51fa6c1eb43771266652fc8baa7c5c98535f3497373ae48",
+      "audio_range_s": [
+        "31/50",
+        "127/200"
+      ],
+      "audio_status": "signal_supported_burst",
+      "condition": "l",
+      "group": 4,
+      "native_edit_frames": [
+        8,
+        24
+      ],
+      "native_edit_range_s": [
+        "48/145",
+        "144/145"
+      ],
+      "ordinal": 15,
+      "phoneme": "p",
+      "signed_midpoint_delta_s": "-11/400",
+      "split": "held",
+      "status": "qualified_original_event",
+      "visual_range_s": [
+        "84/145",
+        "18/29"
+      ],
+      "visual_status": "observed_reopening"
+    },
+    {
+      "audio_commitment": "8ef04ecfb4cde6e315b71df79498aaabe8f33e2e50e7cbf037b5448a0f059ac4",
+      "audio_range_s": [
+        "209/200",
+        "53/50"
+      ],
+      "audio_status": "signal_supported_burst",
+      "condition": "l",
+      "group": 4,
+      "native_edit_frames": [
+        20,
+        36
+      ],
+      "native_edit_range_s": [
+        "240/289",
+        "432/289"
+      ],
+      "ordinal": 16,
+      "phoneme": "b",
+      "signed_midpoint_delta_s": "5531/115600",
+      "split": "held",
+      "status": "qualified_original_event",
+      "visual_range_s": [
+        "312/289",
+        "324/289"
+      ],
+      "visual_status": "observed_reopening"
+    },
+    {
+      "audio_status": "no_clear_burst",
+      "condition": "p",
+      "group": 5,
+      "ordinal": 17,
+      "phoneme": "p",
+      "split": "held",
+      "status": "unavailable",
+      "visual_status": "observed_reopening"
+    },
+    {
+      "audio_commitment": "ef1a1af2c3e29e7f15ec9771ad3e033c38410dd06f18cb48a113b13e24bbc2cc",
+      "audio_range_s": [
+        "181/200",
+        "23/25"
+      ],
+      "audio_status": "signal_supported_burst",
+      "condition": "p",
+      "group": 5,
+      "native_edit_frames": [
+        16,
+        32
+      ],
+      "native_edit_range_s": [
+        "192/289",
+        "384/289"
+      ],
+      "ordinal": 18,
+      "phoneme": "b",
+      "signed_midpoint_delta_s": "503/23120",
+      "split": "held",
+      "status": "qualified_original_event",
+      "visual_range_s": [
+        "264/289",
+        "276/289"
+      ],
+      "visual_status": "observed_reopening"
+    },
+    {
+      "audio_commitment": "5c2339720ed465d9fc45118c201e3ad57e4a38e52705803f02d1e2621d8ad34c",
+      "audio_range_s": [
+        "203/200",
+        "103/100"
+      ],
+      "audio_status": "signal_supported_burst",
+      "condition": "l",
+      "group": 5,
+      "native_edit_frames": [
+        18,
+        34
+      ],
+      "native_edit_range_s": [
+        "216/287",
+        "408/287"
+      ],
+      "ordinal": 19,
+      "phoneme": "b",
+      "signed_midpoint_delta_s": "31/16400",
+      "split": "held",
+      "status": "qualified_original_event",
+      "visual_range_s": [
+        "288/287",
+        "300/287"
+      ],
+      "visual_status": "observed_reopening"
+    },
+    {
+      "audio_commitment": "db7e2a292318dda4d2cd992161bdfa42861cdd33da5f2ccbffc52d71a62535b6",
+      "audio_range_s": [
+        "21/25",
+        "171/200"
+      ],
+      "audio_status": "signal_supported_burst",
+      "condition": "l",
+      "group": 5,
+      "native_edit_frames": [
+        15,
+        31
+      ],
+      "native_edit_range_s": [
+        "180/289",
+        "372/289"
+      ],
+      "ordinal": 20,
+      "phoneme": "b",
+      "signed_midpoint_delta_s": "5229/115600",
+      "split": "held",
+      "status": "qualified_original_event",
+      "visual_range_s": [
+        "252/289",
+        "264/289"
+      ],
+      "visual_status": "observed_reopening"
+    },
+    {
+      "audio_commitment": "64b92b8f72ed18ee5c26c2ee4144aa07ea1f8612a6fa10df1554edcd8a44e1a0",
+      "audio_range_s": [
+        "39/40",
+        "99/100"
+      ],
+      "audio_status": "signal_supported_burst",
+      "condition": "p",
+      "group": 6,
+      "native_edit_frames": [
+        17,
+        33
+      ],
+      "native_edit_range_s": [
+        "204/287",
+        "396/287"
+      ],
+      "ordinal": 21,
+      "phoneme": "b",
+      "signed_midpoint_delta_s": "9/114800",
+      "split": "held",
+      "status": "qualified_original_event",
+      "visual_range_s": [
+        "276/287",
+        "288/287"
+      ],
+      "visual_status": "observed_reopening"
+    },
+    {
+      "audio_status": "no_clear_burst",
+      "condition": "p",
+      "group": 6,
+      "ordinal": 22,
+      "phoneme": "p",
+      "split": "held",
+      "status": "unavailable",
+      "visual_status": "observed_reopening"
+    },
+    {
+      "audio_commitment": "ef1838aad6d2ae681fcfe841f75ce1821b490b8a3c8841a019f30cc21e75532d",
+      "audio_range_s": [
+        "87/100",
+        "177/200"
+      ],
+      "audio_status": "signal_supported_burst",
+      "condition": "l",
+      "group": 6,
+      "native_edit_frames": [
+        15,
+        31
+      ],
+      "native_edit_range_s": [
+        "180/287",
+        "372/287"
+      ],
+      "ordinal": 23,
+      "phoneme": "b",
+      "signed_midpoint_delta_s": "2463/114800",
+      "split": "held",
+      "status": "qualified_original_event",
+      "visual_range_s": [
+        "36/41",
+        "264/287"
+      ],
+      "visual_status": "observed_reopening"
+    },
+    {
+      "audio_status": "signal_supported_burst",
+      "condition": "l",
+      "group": 6,
+      "ordinal": 24,
+      "phoneme": "b",
+      "split": "held",
+      "status": "unavailable",
+      "visual_status": "no_clear_reopening"
+    },
+    {
+      "audio_commitment": "630bced624362e0c991dd6633173ece3affd35c8c7a0ff9af40c271b4cbe5bdd",
+      "audio_range_s": [
+        "201/200",
+        "51/50"
+      ],
+      "audio_status": "signal_supported_burst",
+      "condition": "p",
+      "group": 7,
+      "native_edit_frames": [
+        19,
+        35
+      ],
+      "native_edit_range_s": [
+        "228/289",
+        "420/289"
+      ],
+      "ordinal": 25,
+      "phoneme": "b",
+      "signed_midpoint_delta_s": "63/1360",
+      "split": "held",
+      "status": "qualified_original_event",
+      "visual_range_s": [
+        "300/289",
+        "312/289"
+      ],
+      "visual_status": "observed_reopening"
+    },
+    {
+      "audio_status": "no_clear_burst",
+      "condition": "p",
+      "group": 7,
+      "ordinal": 26,
+      "phoneme": "p",
+      "split": "held",
+      "status": "unavailable",
+      "visual_status": "observed_reopening"
+    },
+    {
+      "audio_status": "no_clear_burst",
+      "condition": "l",
+      "group": 7,
+      "ordinal": 27,
+      "phoneme": "p",
+      "split": "held",
+      "status": "unavailable",
+      "visual_status": "no_clear_reopening"
+    },
+    {
+      "audio_commitment": "17516f9ecc6351f6c35a11efdc9bb608fd7ced949297142d14e06cc50d2bd2e7",
+      "audio_range_s": [
+        "1",
+        "203/200"
+      ],
+      "audio_status": "signal_supported_burst",
+      "condition": "l",
+      "group": 7,
+      "native_edit_frames": [
+        18,
+        34
+      ],
+      "native_edit_range_s": [
+        "216/289",
+        "24/17"
+      ],
+      "ordinal": 28,
+      "phoneme": "b",
+      "signed_midpoint_delta_s": "1133/115600",
+      "split": "held",
+      "status": "qualified_original_event",
+      "visual_range_s": [
+        "288/289",
+        "300/289"
+      ],
+      "visual_status": "observed_reopening"
+    },
+    {
+      "audio_range_s": [
+        "34/25",
+        "11/8"
+      ],
+      "audio_status": "signal_supported_burst",
+      "condition": "p",
+      "group": 8,
+      "ordinal": 29,
+      "phoneme": "p",
+      "signed_midpoint_delta_s": "23011/114800",
+      "split": "held",
+      "status": "unresolved_clock_agreement_or_flanks",
+      "visual_range_s": [
+        "444/287",
+        "456/287"
+      ],
+      "visual_status": "observed_reopening"
+    },
+    {
+      "audio_commitment": "a5085b34f6cbe2c621ee9dce453d98508139be3458073327931cff4c99984c75",
+      "audio_range_s": [
+        "191/200",
+        "97/100"
+      ],
+      "audio_status": "signal_supported_burst",
+      "condition": "p",
+      "group": 8,
+      "native_edit_frames": [
+        17,
+        33
+      ],
+      "native_edit_range_s": [
+        "17017/24000",
+        "11011/8000"
+      ],
+      "ordinal": 30,
+      "phoneme": "b",
+      "signed_midpoint_delta_s": "847/48000",
+      "split": "held",
+      "status": "qualified_original_event",
+      "visual_range_s": [
+        "23023/24000",
+        "1001/1000"
+      ],
+      "visual_status": "observed_reopening"
+    },
+    {
+      "audio_commitment": "f7212a6bc05534f3f15a95049859fc04cf8c7ac3769c360b414d769695a30bd2",
+      "audio_range_s": [
+        "17/25",
+        "139/200"
+      ],
+      "audio_status": "signal_supported_burst",
+      "condition": "l",
+      "group": 8,
+      "native_edit_frames": [
+        11,
+        27
+      ],
+      "native_edit_range_s": [
+        "11011/24000",
+        "9009/8000"
+      ],
+      "ordinal": 31,
+      "phoneme": "b",
+      "signed_midpoint_delta_s": "407/9600",
+      "split": "held",
+      "status": "qualified_original_event",
+      "visual_range_s": [
+        "17017/24000",
+        "3003/4000"
+      ],
+      "visual_status": "observed_reopening"
+    },
+    {
+      "audio_commitment": "275f72f29901b5d9331adf5761d3797d51db7ea1c473cf70533661db90cfc8ab",
+      "audio_range_s": [
+        "23/25",
+        "187/200"
+      ],
+      "audio_status": "signal_supported_burst",
+      "condition": "l",
+      "group": 8,
+      "native_edit_frames": [
+        15,
+        31
+      ],
+      "native_edit_range_s": [
+        "1001/1600",
+        "31031/24000"
+      ],
+      "ordinal": 32,
+      "phoneme": "b",
+      "signed_midpoint_delta_s": "-1477/48000",
+      "split": "held",
+      "status": "qualified_original_event",
+      "visual_range_s": [
+        "7007/8000",
+        "11011/12000"
+      ],
+      "visual_status": "observed_reopening"
+    }
+  ],
+  "schema": "chipmunk.lombard-original-mouth-event-public/1",
+  "source_audit": {
+    "audio_files": 32,
+    "audio_samples": 1263200,
+    "burst_excerpts": 23,
+    "front_files": 32,
+    "observed_native_crops": 52,
+    "picture_pts": 1924
+  },
+  "spec": {
+    "audio": "Decode the publisher-aligned external 16 kHz WAV. Detect one distinct 15 ms high-band burst with speech following, using the publisher forced-phone end only as a coarse neighborhood. Record competing events and exact PCM hash.",
+    "joint": "At most 80 ms between acoustic and visual bracket midpoints. The audible and visible event and temporal flanks must fit within the original paired release coordinates. Native audio and video start at their released zero origins. This is independent measured local-event agreement, without external human validation or whole-clip synchronization.",
+    "maximum_bracket_midpoint_difference": "2/25",
+    "normalization": "Keep complete uniform native picture cadence from 23.5 to 25 fps and every exact float32 sample. A separate rendering contract must preserve each exact cadence.",
+    "render_span": "Half-open 16-picture span from six pictures before the last closed picture. Require three-picture outside flanks and keep both labelled event brackets inside the interval.",
+    "scope": "Source-only qualification. No renderer or detection checkpoint is loaded.",
+    "video": "Decode the silent front video. A separate muted pass finds two consecutive near-closed observations and the first clear crossing followed by a sustained reopening. Use the same coarse forced-phone anchor, with no acoustic measurements. Retain native picture PTS, RGB and crop commitments."
+  }
+}

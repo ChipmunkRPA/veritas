@@ -20,6 +20,7 @@ from app.core.canonical import canonical_hash
 from app.core.config import settings
 from app.detectors.audio.decode import read_wav, wav_bytes
 from app.evidence import audio_reference
+from app.evidence import video_reference_soundtrack as reference_timing
 from app.reports.media_reference_pdf import render as render_comparison
 from app.storage.db import Analysis, Artefact, BillingOrderRow, Job, utcnow
 from scripts.compare_audio_references import run
@@ -97,6 +98,66 @@ def test_stereo_comparison_preserves_changes_hidden_by_downmix_and_exact_tail(tm
     mono = save(tmp_path, "mono", before.mean(axis=1) / 32768)
     mixed, _ = audio_reference.compare(earlier, mono)
     assert mixed["stereo_comparison"]["status"] == "stereo_pair_required"
+
+
+def test_local_timing_evidence_replays_offsets_excerpts_and_pdf(tmp_path):
+    rng = np.random.default_rng(231)
+    original = rng.integers(-6000, 6000, 48000, dtype=np.int16).astype(np.float32) / 32768
+    shifted = original.copy()
+    shifted[16000:26240] = original[12800:23040]
+    earlier = save(tmp_path, "timing-earlier", original)
+    analyzed = save(tmp_path, "timing-analyzed", shifted)
+    record, assets = audio_reference.compare(earlier, analyzed, include_local_timing=True)
+    assert record["schema"] == audio_reference.SCHEMA_WITH_LOCAL_TIMING
+    timing = record["local_timing"]
+    assert timing["status"] == "local_shift" and timing["offset_ms"] == 200
+    assert timing["affects_overall_confidence"] is False
+    span = timing["range"]
+    assert span["earlier"]["samples"] == span["earlier"]["source_pts"] == [12800, 23040]
+    assert span["submitted"]["samples"] == span["submitted"]["source_pts"] == [16000, 26240]
+    for side in ("earlier", "submitted"):
+        np.testing.assert_array_equal(read_wav(assets[span[side]["audio"]["file"]]), original[12800:23040])
+    with pymupdf.open(stream=render_comparison(record, assets), filetype="pdf") as report:
+        timing_page = report[-1].get_text()
+        assert "Local audio timing" in timing_page
+        assert "0.800 to 1.440 s" in timing_page and "1.000 to 1.640 s" in timing_page
+
+    exported = tmp_path / "comparison.json"
+    package = {"comparison": record, "assets": {name: base64.b64encode(raw).decode() for name, raw in assets.items()}}
+    exported.write_text(json.dumps(package))
+    assert run(earlier, analyzed, exported, verify=True) == record
+    package["comparison"]["local_timing"]["range"]["submitted"]["samples"][0] += 1
+    exported.write_text(json.dumps(package))
+    with pytest.raises(ValueError, match="differs from the re-decoded sources"):
+        run(earlier, analyzed, exported, verify=True)
+
+    globally_shifted = save(tmp_path, "timing-globally-shifted", np.r_[np.zeros(3200), original[:-3200]])
+    silence = save(tmp_path, "timing-silence", np.zeros_like(original))
+    for alternative, outcome in ((earlier, "no_local_shift"), (globally_shifted, "no_local_shift"), (silence, "unassessed")):
+        compared, _ = audio_reference.compare(earlier, alternative, include_local_timing=True)
+        assert compared["local_timing"]["status"] == outcome
+        assert "range" not in compared["local_timing"]
+    wrapped = tmp_path / "timing-ogg-flac.ogg"
+    subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-i", str(analyzed), "-c:a", "flac", "-f", "ogg", str(wrapped)],
+                   capture_output=True, check=True, timeout=20)
+    unsupported, _ = audio_reference.compare(earlier, wrapped, include_local_timing=True)
+    assert unsupported["local_timing"]["status"] == "unassessed"
+    assert "range" not in unsupported["local_timing"]
+    assert "local_timing" not in audio_reference.compare(earlier, analyzed)[0]
+
+
+@pytest.mark.parametrize("span", [
+    {"earlier_samples": [-4, 4476], "submitted_samples": [3200, 7680], "shift_samples": 3204},
+    {"earlier_samples": [42000, 46480], "submitted_samples": [45200, 49680], "shift_samples": 3200},
+])
+def test_local_timing_rejects_a_match_outside_either_sample_clock(tmp_path, monkeypatch, span):
+    samples = np.ones(48000, dtype=np.float32) * .1
+    earlier = save(tmp_path, "timing-clock-earlier", samples)
+    submitted = save(tmp_path, "timing-clock-submitted", samples)
+    monkeypatch.setattr(reference_timing, "measure", lambda *_: (span, 12))
+    record, assets = audio_reference.compare(earlier, submitted, include_local_timing=True)
+    assert record["local_timing"]["status"] == "unassessed"
+    assert "range" not in record["local_timing"] and not assets
 
 
 @pytest.fixture
@@ -495,6 +556,14 @@ def test_authenticated_audio_comparison_pdf_json_and_temporary_storage(
         config.setattr(settings, "audio_reference_comparison_enabled", False)
         assert f.client.get(endpoint, headers=f.viewer).json() == {"available": False}
         assert f.client.post(endpoint, headers=f.viewer, files=files).status_code == 404
+
+    with monkeypatch.context() as config:
+        config.setattr(settings, "audio_reference_local_timing", True)
+        optional = f.client.post(endpoint, headers=f.viewer, files=files, data={"include_pdf": "true"})
+        assert optional.status_code == 200, optional.text
+        assert optional.json()["comparison"]["local_timing"]["status"] == "no_local_shift"
+        with pymupdf.open(stream=base64.b64decode(optional.json()["pdf"], validate=True), filetype="pdf") as report:
+            assert "Local audio timing" in report[-1].get_text()
 
     f.client.cookies.set(auth.SESSION_COOKIE, f.session)
     assert f.client.post(endpoint, files=files).status_code == 403

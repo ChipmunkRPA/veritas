@@ -459,6 +459,7 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
         document_matched_context,
         document_paragraph_priority,
         document_passage_coverage,
+        document_passage_position,
         document_unselected_responses,
         email_alternatives,
     )
@@ -497,6 +498,9 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
         if document_unselected_responses.KEY in coverage:
             frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
             document_unselected_responses.verify_source(document, text, mapping, result=frozen)
+        if document_passage_position.KEY in coverage:
+            frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
+            document_passage_position.verify_source(document, text, mapping, result=frozen)
         if document_scope.CHECKPOINT_AGREEMENT_KEY in coverage:
             frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
             document_scope.validate_checkpoint_agreement(document, text, result=frozen, mapping=mapping)
@@ -603,12 +607,15 @@ def quoted_values(snapshot: ReportSnapshot) -> list[str]:
     """Verbatim submitted text is exempt from generated-prose vocabulary checks."""
     if snapshot.analysis.kind != "document" or snapshot.evidence is None:
         return []
+    from app.evidence.document_passage_position import KEY as PASSAGE_POSITION
     from app.evidence.document_unselected_responses import KEY as UNSELECTED_RESPONSES
     from app.evidence.document_unselected_responses import REPORT_EXCERPT_CHARS
 
     repeats = (snapshot.evidence.get("repeated_passages") or {}).get("groups", [])
     extra = ((snapshot.evidence.get("coverage") or {}).get(UNSELECTED_RESPONSES) or {}).get("rows", [])
     excerpts = [row["text"][:REPORT_EXCERPT_CHARS] for row in extra]
+    if position := (snapshot.evidence.get("coverage") or {}).get(PASSAGE_POSITION):
+        excerpts.append(position["focus_text"])
     isolated = [input["text"] for packet in snapshot.evidence["packets"]
                 if (review := (packet.get("context_comparison") or {}).get("isolated_paragraph"))
                 for input in (review["context"], review["paragraph"])]
@@ -708,6 +715,18 @@ def _unselected_writing_responses_view(coverage: dict, *, withheld: bool) -> dic
         rows.append({**{key: value for key, value in row.items() if key != "text"}, "label": DIRECTIONS[row["direction"]],
                      "excerpt": excerpt[:REPORT_EXCERPT_CHARS], "shortened": len(excerpt) > REPORT_EXCERPT_CHARS})
     return {**record, "rows": rows}
+
+
+def _passage_position_view(coverage: dict, *, withheld: bool) -> dict | None:
+    from app.evidence.document_passage_position import KEY, LABELS
+
+    if (record := coverage.get(KEY)) is None:
+        return None
+    readings = record.get("readings")
+    return {"status": record["status"], "text": None if withheld else record["focus_text"],
+            "rows": [{"label": label.capitalize(), **span,
+                      "response": float.fromhex(readings[i]["response_hex"]) if readings is not None else None}
+                     for i, (label, span) in enumerate(zip(LABELS, record["sentences"], strict=True))]}
 
 
 def _writing_agreement_view(coverage: dict) -> dict | None:
@@ -1054,6 +1073,8 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "withheld": withheld, "packets": packets, "acoustic_contexts": acoustic_contexts, "coverage_note": _coverage(kind, document),
             "passage_coverage": _passage_coverage_view(document.get("coverage") or {}) if kind == "document" else None,
             "unselected_writing_responses": _unselected_writing_responses_view(document.get("coverage") or {}, withheld=withheld)
+            if kind == "document" else None,
+            "passage_position": _passage_position_view(document.get("coverage") or {}, withheld=withheld)
             if kind == "document" else None,
             "writing_agreement": _writing_agreement_view(document.get("coverage") or {}) if kind == "document" else None,
             "email_body_alternatives": (document.get("coverage") or {}).get("email_body_alternatives") if kind == "document" else None,

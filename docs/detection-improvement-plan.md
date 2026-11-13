@@ -97,6 +97,10 @@ integration remains unfinished.
 
 ## Progress on 12 November
 
+- The [local audio timing check](audio-reference-local-shift-2026-11-12.md) compares a short recording with its earlier copy. It recovered 34 of 48 known moves and added zero ranges on 216 held controls. The local app and downloadable evidence use the same two time ranges and waveforms.
+- The [three-sentence writing check](writing-position-app-2026-11-12.md) adds source-linked evidence in the browser, PDF and JSON on eligible CPU runs. It added six correct sentence locations and no genuine groups across three historical publisher evaluations.
+- The [JPEG texture ranking](image-jpeg-texture-rank-transfer-2026-11-12.md) remains experimental after useful localization on only one fresh photo group. The [Lombard source qualification](lombard-original-mouth-event-2026-11-12.md) provides genuine controls for a separate synchronized mouth-redraw test.
+
 - The [positive-only audio combination](audio-selective-fusion-transfer-2026-11-12.md)
   added ten AI flags and one new genuine false-flag group in the archived
   confirmation. The same fixed rule added zero flags on 32 unused published

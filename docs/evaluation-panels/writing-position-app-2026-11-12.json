@@ -1,0 +1,107 @@
+{
+  "altered_original_rejected": true,
+  "assets": [
+    {
+      "file": "backend/app/detectors/text/calibrations/passage-position-head-v1.json",
+      "sha256": "d44984c5c137a4c8653a226932491b950764e989507756320428d993cff8b498"
+    },
+    {
+      "file": "docs/evaluation-panels/writing-position-qwen-confirmation-2026-11-12.json",
+      "sha256": "bcf34e91fc5871803fcb2fb2409cfe7fa745ed92a9b32bb07be8fea1b72d1c31"
+    }
+  ],
+  "browser": {
+    "api_json_and_report_download_match": true,
+    "exact_excerpt": true,
+    "exact_ranges": 3,
+    "page_errors": 0,
+    "plain_view": true
+  },
+  "browser_original_ranges": [
+    [
+      0,
+      183
+    ],
+    [
+      184,
+      371
+    ],
+    [
+      372,
+      477
+    ]
+  ],
+  "cases": [
+    {
+      "all_surfaces_match": true,
+      "enabled": false,
+      "group": "gates-12854",
+      "middle_range": null,
+      "original_sha256": "46d1b93e48c7afef199336d62a001cb6071ec01c3e6ade1b3edac1e8bb00fa42",
+      "role": "qwen",
+      "status": null
+    },
+    {
+      "all_surfaces_match": true,
+      "enabled": true,
+      "group": "gates-12854",
+      "middle_range": [
+        184,
+        371
+      ],
+      "original_sha256": "46d1b93e48c7afef199336d62a001cb6071ec01c3e6ade1b3edac1e8bb00fa42",
+      "role": "qwen",
+      "status": "flagged"
+    },
+    {
+      "all_surfaces_match": true,
+      "enabled": true,
+      "group": "wellcome-15314",
+      "middle_range": [
+        279,
+        494
+      ],
+      "original_sha256": "f2a7541469bef560a4a3ba862900ba76c4baccb9267f45e213a8551ff5c445f2",
+      "role": "qwen",
+      "status": "flagged"
+    },
+    {
+      "all_surfaces_match": true,
+      "enabled": true,
+      "group": "gates-12758",
+      "middle_range": [
+        63,
+        261
+      ],
+      "original_sha256": "7bc4092dab2cbfb995d4e8dd65cec9d67b088b28dcd9bd8c36ae4604792ce0c9",
+      "role": "ordinary",
+      "status": "no_flag"
+    }
+  ],
+  "environment": "Local Mac CPU; cached weights and signed simulated Stripe webhook events",
+  "paid_jobs": 4,
+  "primary_decision_scores_and_finding_contents_equal_on_same_source": true,
+  "prior_signed_email_package_verified_with_original": true,
+  "profile": "Standard",
+  "public_outputs": [
+    {
+      "file": "report.pdf",
+      "sha256": "22cc068f00165379befc5e404ea71e0018580dc494c6a11d09cee0ab84950e51"
+    },
+    {
+      "file": "export.json",
+      "sha256": "e80932f3b1dd1dbedf034201983c174d73417961800accd392cddec6eaa090ef"
+    },
+    {
+      "file": "signed-writing.zip",
+      "sha256": "d9e03e089b297ffc0cd863bd81c22f669d401e5503fdac3cf1bb60d75252e592"
+    }
+  ],
+  "rendered_pdf_page": 7,
+  "rendered_pdf_total_pages": 14,
+  "schema": "chipmunk.writing-position-app-receipt/1",
+  "signed_coverage_commitment_deletion_rejected_in_unit_test": true,
+  "source_signed_replay": true,
+  "template": "veritas-report-2.0.r114",
+  "unpaid_jobs": 0
+}

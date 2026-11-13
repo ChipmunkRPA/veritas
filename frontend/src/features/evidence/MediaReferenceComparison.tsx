@@ -40,7 +40,7 @@ type SoundtrackSide = { start_s: number; end_s: number; audio: Asset; waveform: 
 type SoundtrackTiming = {
   summary: string
   scope: string
-  range?: Record<Side, SoundtrackSide> & { picture: { frame_index: number; time_s: number; asset: Asset } }
+  range?: Record<Side, SoundtrackSide> & { picture?: { frame_index: number; time_s: number; asset: Asset } }
 }
 type AdditionalSoundtrack = {
   scope: string
@@ -93,15 +93,17 @@ type Comparison = {
   additional_soundtrack?: AdditionalSoundtrack
   level_adjusted?: never
   stereo_comparison?: never
+  local_timing?: never
 } | {
   schema: 'chipmunk.audio-reference-comparison/1' | 'chipmunk.audio-reference-comparison/2' | 'chipmunk.audio-reference-comparison/3'
-    | 'chipmunk.audio-reference-comparison/4' | 'chipmunk.audio-reference-comparison/5'
+    | 'chipmunk.audio-reference-comparison/4' | 'chipmunk.audio-reference-comparison/5' | 'chipmunk.audio-reference-comparison/6'
   picture?: never
   timing?: never
   soundtrack_alignment?: never
   additional_soundtrack?: never
   level_adjusted?: LevelAdjustedAudio
   stereo_comparison?: StereoComparison
+  local_timing?: SoundtrackTiming
 })
 type Result = { comparison: Comparison; assets: Record<string, string>; pdf?: string | null }
 type Availability = { available: boolean; timing_available?: boolean }
@@ -315,25 +317,31 @@ function TimingEvidence({ timing, assets }: { timing: TimingComparison; assets: 
   </section>
 }
 
-function SoundtrackTimingEvidence({ timing, assets }: { timing: SoundtrackTiming; assets: Result['assets'] }) {
+function SoundtrackTimingEvidence({ timing, assets, audioOnly = false }: {
+  timing: SoundtrackTiming; assets: Result['assets']; audioOnly?: boolean
+}) {
   const span = timing.range
-  const image = span && assetBody(assets, span.picture.asset, 'image/png')
+  const picture = span?.picture
+  const image = picture && assetBody(assets, picture.asset, 'image/png')
+  const title = audioOnly ? 'Local audio timing' : 'Local soundtrack timing'
+  const labels = audioOnly ? { earlier: 'Earlier recording', submitted: 'Analyzed recording' } : names
+  const excerpt = audioOnly ? 'matched excerpt' : 'matched soundtrack'
   const maximum = span ? Math.max(.01, ...sides.flatMap(side => [...span[side].waveform.low, ...span[side].waveform.high].map(Math.abs))) : 1
-  return <section className="space-y-2" aria-label="Local soundtrack timing">
-    <h3 className="m-0 text-small font-medium">Local soundtrack timing</h3>
+  return <section className="space-y-2" aria-label={title}>
+    <h3 className="m-0 text-small font-medium">{title}</h3>
     <p className="m-0 text-small">{timing.summary}</p>
     {span && <>
-      {image && <figure className="m-0 max-w-80 space-y-1">
+      {image && picture && <figure className="m-0 max-w-80 space-y-1">
         <img src={'data:image/png;base64,' + image} className="h-auto w-full rounded border border-border"
-          alt={`Analyzed clip picture ${span.picture.frame_index} at ${sourceSeconds.format(span.picture.time_s)} seconds`} />
-        <figcaption className="text-caption text-text-muted">Picture at {sourceSeconds.format(span.picture.time_s)} s in the analyzed clip.</figcaption>
+          alt={`Analyzed clip picture ${picture.frame_index} at ${sourceSeconds.format(picture.time_s)} seconds`} />
+        <figcaption className="text-caption text-text-muted">Picture at {sourceSeconds.format(picture.time_s)} s in the analyzed clip.</figcaption>
       </figure>}
       <div className="grid gap-4 sm:grid-cols-2">{sides.map(side => {
         const row = span[side]
         return <div className="min-w-0 space-y-2" key={side}>
-          <p className="m-0 text-small font-medium">{names[side]} · {sourceSeconds.format(row.start_s)}–{sourceSeconds.format(row.end_s)} s</p>
-          <ClipWaveform wave={row.waveform} maximum={maximum} name={`${names[side]} matched soundtrack`} />
-          <Playback body={assetBody(assets, row.audio, 'audio/wav')} name={`Play ${names[side].toLowerCase()} matched soundtrack`} />
+          <p className="m-0 text-small font-medium">{labels[side]} · {sourceSeconds.format(row.start_s)}–{sourceSeconds.format(row.end_s)} s</p>
+          <ClipWaveform wave={row.waveform} maximum={maximum} name={`${labels[side]} ${excerpt}`} />
+          <Playback body={assetBody(assets, row.audio, 'audio/wav')} name={`Play ${labels[side].toLowerCase()} ${excerpt}`} />
         </div>
       })}</div>
     </>}
@@ -362,6 +370,7 @@ function ResultView({ result }: { result: Result }) {
     {comparison.status !== 'measured' && <p className="m-0 text-small">{notes[comparison.status] ?? 'The files could not be compared.'}</p>}
     {comparison.timing && <TimingEvidence timing={comparison.timing} assets={assets} />}
     {comparison.soundtrack_alignment && <SoundtrackTimingEvidence timing={comparison.soundtrack_alignment} assets={assets} />}
+    {comparison.local_timing && <SoundtrackTimingEvidence timing={comparison.local_timing} assets={assets} audioOnly />}
     {picture && !comparison.soundtrack_alignment && (picture.changed_frames > 0 || audio?.status !== 'measured') &&
       <p className="m-0 text-caption text-text-muted">{picture.changed_frames > 0
         ? 'Local soundtrack timing was skipped because the decoded pictures differ.'
@@ -469,12 +478,15 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable }: { analysisId:
     try {
       const response = await request<Result>(route(analysisId, kind), { method: 'POST', headers: authHeaders('POST'), body, signal: controller.signal })
       const schema = response?.comparison?.schema
-      const accepted = kind === 'audio' ? [1, 2, 3, 4, 5] : [1, 2, 3, 4, 5, 6]
+      const accepted = [1, 2, 3, 4, 5, 6]
       if (!accepted.some(version => schema === `chipmunk.${kind}-reference-comparison/${version}`)) {
         throw new Error('The comparison response is incomplete.')
       }
       if (schema === 'chipmunk.audio-reference-comparison/3' && !response.comparison.audio?.trim_alignment) {
         throw new Error('The comparison response is missing its shared audio range.')
+      }
+      if (schema === 'chipmunk.audio-reference-comparison/6' && !response.comparison.local_timing) {
+        throw new Error('The comparison response is missing its local audio timing result.')
       }
       if (!controller.signal.aborted) setResult(response)
     } catch (error) {

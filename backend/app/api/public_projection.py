@@ -201,7 +201,7 @@ _ID_FIELDS = frozenset({'id', 'detector_id', 'created_by', 'source_signal_ids', 
                         'fuser_id', 'fuser_version', 'fusion_id', 'calibration_id'})
 _SOURCE_FIELDS = frozenset({'filename', 'original_filename', 'observed', 'metadata', 'provenance', 'provenance_record',
                             'stored_record', 'input', 'annotation', 'annotations', 'examiner', 'review', 'notes',
-                            'note', 'intake_notes', 'supplied_by', 'source', 'source_data', 'content', 'text_original'})
+                            'note', 'intake_notes', 'supplied_by', 'source', 'source_data', 'content', 'text_original', 'focus_text'})
 _TEXT_FIELDS = frozenset({'name', 'title', 'statement', 'reasoning', 'reference', 'caption', 'reason', 'status_reason',
                           'error', 'benchmark_note', 'dissent_note', 'description', 'disclosures', 'fp_modes', 'reference_range',
                           'coverage_date', 'reasons', 'caveats'})

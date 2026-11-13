@@ -148,6 +148,33 @@ it('shows the localized audio difference after volume adjustment alongside the r
   ])
 })
 
+it('shows both timestamps and waveforms for a moved excerpt in two recordings', async () => {
+  const audio = { file: 'excerpt.wav', media_type: 'audio/wav', sha256: 'c'.repeat(64) }
+  const waveform = { low: [-.4], high: [.2] }
+  const comparison = {
+    schema: 'chipmunk.audio-reference-comparison/6', status: 'measured', interpretation: 'Decoded audio differences.',
+    local_timing: {
+      summary: 'The matching excerpt occurs 200.0 ms later in the analyzed recording.',
+      scope: 'Copying or ordinary editing can produce this pattern.',
+      range: {
+        earlier: { start_s: .8, end_s: 1.44, audio, waveform },
+        submitted: { start_s: 1, end_s: 1.64, audio, waveform },
+      },
+    },
+  }
+  vi.stubGlobal('fetch', vi.fn().mockResolvedValueOnce(Response.json({ available: true }))
+    .mockResolvedValueOnce(Response.json({ comparison, assets: {}, pdf: 'JVBERi0xLjQK' })))
+  show('audio')
+  fireEvent.change(await screen.findByLabelText('Earlier audio'), { target: { files: [new File(['audio'], 'earlier.wav')] } })
+  fireEvent.click(screen.getByRole('button', { name: 'Compare recordings' }))
+  expect(await screen.findByRole('region', { name: 'Local audio timing' })).toBeTruthy()
+  expect(screen.getByText('Earlier recording · 0.800–1.440 s')).toBeTruthy()
+  expect(screen.getByText('Analyzed recording · 1.000–1.640 s')).toBeTruthy()
+  expect(screen.getAllByRole('img', { name: /matched excerpt waveform/ })).toHaveLength(2)
+  expect(screen.getByRole('button', { name: 'Download PDF' })).toBeTruthy()
+  expect(screen.getByRole('button', { name: 'Download JSON evidence' })).toBeTruthy()
+})
+
 it('accepts the scoped video comparison and shows native crops linked to the review interval', async () => {
   const picture = { file: 'picture.png', media_type: 'image/png', sha256: 'c'.repeat(64) }
   const crop = { file: 'crop.png', media_type: 'image/png', sha256: 'd'.repeat(64) }

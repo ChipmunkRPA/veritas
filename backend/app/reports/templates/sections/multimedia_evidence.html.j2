@@ -117,6 +117,9 @@ Samples [{{ window.start_sample }}, {{ window.end_sample }}) at 16000 Hz.
 {% if evidence.get('unselected_writing_responses') %}
 {% include 'sections/document_unselected_responses.html.j2' %}
 {% endif %}
+{% if evidence.get('passage_position') %}
+{% include 'sections/document_passage_position.html.j2' %}
+{% endif %}
 {% if evidence.get('writing_agreement') %}
 <h3>Second writing check</h3>
 <p class="caption">The second check revisits the exact text behind up to six AI-like responses. This evidence carries zero weight in the overall assessment.</p>
@@ -329,7 +332,7 @@ On the original timeline, the audio spans {{ '%.3f' | format(item.before.source_
 {% if packet.limitations %}<p class="evidence-limits"><strong>Limits:</strong> {{ packet.limitations | join(' ') }}</p>{% endif %}
 {% if packet.assets %}<details open class="multimedia-asset-list"><summary>Frozen evidence assets</summary>{% for asset in packet.assets %}<p class="caption evidence-hash">{{ asset.role | replace('_', ' ') }} ({{ asset.media_type }}) - SHA-256 <span class="mono">{{ asset.sha256 }}</span></p>{% endfor %}</details>{% endif %}
 </article>
-{% else %}{% if not (evidence.get('repetition_context') and evidence.repetition_context.pairs) and not (evidence.get('similarity_context') and evidence.similarity_context.pairs) and not (evidence.get('repeated_passages') and evidence.repeated_passages.groups) %}<p>No usable local candidates were recorded in this evidence set. This does not establish authenticity or human authorship.</p>{% endif %}{% endfor %}
+{% else %}{% if not (evidence.get('repetition_context') and evidence.repetition_context.pairs) and not (evidence.get('similarity_context') and evidence.similarity_context.pairs) and not (evidence.get('repeated_passages') and evidence.repeated_passages.groups) and not (evidence.get('passage_position') and evidence.passage_position.status == 'flagged') %}<p>No usable local candidates were recorded in this evidence set. This does not establish authenticity or human authorship.</p>{% endif %}{% endfor %}
 {% if evidence.omitted %}<p class="caption">{{ evidence.omitted }} additional candidates were omitted from this bounded evidence set.</p>{% endif %}
 {% for note in evidence.limitations %}<p class="caption">{{ note }}</p>{% endfor %}
 {% endif %}

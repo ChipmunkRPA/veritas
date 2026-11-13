@@ -22,6 +22,7 @@ SCHEMA_WITH_LEVEL_ADJUSTMENT = "chipmunk.audio-reference-comparison/2"
 SCHEMA_WITH_TRIM_ALIGNMENT = "chipmunk.audio-reference-comparison/3"
 SCHEMA_WITH_TRIM_AND_LEVEL = "chipmunk.audio-reference-comparison/4"
 SCHEMA_WITH_STEREO = "chipmunk.audio-reference-comparison/5"
+SCHEMA_WITH_LOCAL_TIMING = "chipmunk.audio-reference-comparison/6"
 MAX_BYTES = 48 * 1024 * 1024
 MAX_SECONDS = 30
 MAX_PRESENTED_RANGES = 3
@@ -57,6 +58,10 @@ STEREO_SCOPE = (
     "in one or both channels even when the mono mix matches. Ordinary mixing and encoding can change these samples. "
     "These measurements contribute zero weight to the AI estimate."
 )
+LOCAL_TIMING_SCOPE = (
+    "This check looks for distinctive sound at a different time in the two recordings, with matching timing on both "
+    "sides. Copying or ordinary editing can produce this pattern. This comparison contributes zero weight to the AI estimate."
+)
 
 
 def _identity(path: Path, filename: str) -> dict:
@@ -87,17 +92,17 @@ def _read_track(path, source, *, max_seconds, origin, video, stream_position=0, 
             options["retain_stereo"] = True
         decoded = decode_audio(path, source_sha256=source["sha256"], max_seconds=max_seconds + 1, **options)
     except AudioStreamUnavailable:
-        return ("no_stream", None, None), False, False, None
+        return ("no_stream", None, None), False, False, None, False
     except (ValueError, RuntimeError):
-        return ("unverified_audio_clock", None, None), False, False, None
+        return ("unverified_audio_clock", None, None), False, False, None, False
     mapping = decoded.mapping
     channel_info = {"channels": mapping["source_channels"], "sample_rate": mapping["source_sample_rate"],
                     "stream_index": mapping["source_stream_index"]}
     stereo = channel_info, decoded.stereo_pcm
     if (not video or stream_position) and mapping["samples"] > max_seconds * AUDIO_RATE:
-        return ("comparison_limit", None, None), False, False, stereo
+        return ("comparison_limit", None, None), False, False, stereo, False
     if len(mapping["timeline"]) != 1 or mapping["samples"] >= mapping["limit_samples"]:
-        return ("unverified_audio_clock", None, None), False, False, stereo
+        return ("unverified_audio_clock", None, None), False, False, stereo, False
     pts = mapping["timeline"][0]["source_pts"]
     relative = Fraction(pts, AUDIO_RATE) - origin
     native_lossless = (mapping["source_channels"] == 1 and mapping["source_sample_rate"] == AUDIO_RATE
@@ -106,12 +111,15 @@ def _read_track(path, source, *, max_seconds, origin, video, stream_position=0, 
         mapping["source_codec"] in {"pcm_s16le", "pcm_s16be"}
         or (mapping["source_codec"] == "flac" and mapping.get("source_bit_depth") == 16)
     )
+    native_timing = exact_s16 and (mapping["source_codec"], mapping.get("source_container")) in {
+        ("pcm_s16le", "wav"), ("flac", "flac"),
+    }
     return ("measured", decoded.pcm, {"pcm_sha256": mapping["pcm_sha256"], "source_pts": pts,
-                                     "relative_start": str(relative), "samples": len(decoded.pcm)}), native_lossless, exact_s16, stereo
+                                     "relative_start": str(relative), "samples": len(decoded.pcm)}), native_lossless, exact_s16, stereo, native_timing
 
 
 def read_track(path, source, *, max_seconds, origin=Fraction(0), video=False, stream_position=0):
-    track, _, _, _ = _read_track(path, source, max_seconds=max_seconds, origin=origin, video=video, stream_position=stream_position)
+    track, *_ = _read_track(path, source, max_seconds=max_seconds, origin=origin, video=video, stream_position=stream_position)
     return track
 
 
@@ -308,11 +316,49 @@ def _audio_trim(first, second, assets, *, adjust_volume=False):
                                "overlap": overlap, "support": supports}}, adjusted
 
 
+def _local_timing(decoded, audio, assets):
+    from app.evidence import video_reference_soundtrack as timing
+
+    (earlier, *_, earlier_native), (submitted, *_, submitted_native) = decoded
+    result = {"status": "unassessed", "scope": LOCAL_TIMING_SCOPE, "affects_overall_confidence": False}
+    if audio["status"] != "measured" or not (earlier_native and submitted_native):
+        return result | {"summary": "This timing check needs two continuous 16 kHz mono PCM16 WAV or FLAC recordings with matching clocks."}
+    if not timing.MIN_SAMPLES <= audio["earlier"]["samples"] <= timing.MAX_SAMPLES:
+        return result | {"summary": "This timing check supports recordings from 1.5 to 12 seconds."}
+    span, support = timing.measure(earlier[1], submitted[1])
+    result.update(matched_windows=support, sample_rate=AUDIO_RATE)
+    if support < 2 * timing.FLANK_WINDOWS + timing.MIN_WINDOWS:
+        return result | {"summary": "Too few distinctive excerpts matched to assess local timing."}
+    if span is None:
+        return result | {"status": "no_local_shift", "summary": "No qualifying local timing change was found in the matched excerpts."}
+    milliseconds = span["shift_samples"] * 1000 / AUDIO_RATE
+    direction = "later" if milliseconds > 0 else "earlier"
+    ranges = (("earlier", earlier, span["earlier_samples"]), ("submitted", submitted, span["submitted_samples"]))
+    if any(not 0 <= start < end <= len(track[1]) for _, track, (start, end) in ranges):
+        return result | {"summary": "The matched excerpt extends beyond one recording’s verified sample clock."}
+    excerpts = {}
+    for side, track, (start, end) in ranges:
+        pcm = track[1][start:end]
+        excerpts[side] = {
+            "samples": [start, end], "start_s": start / AUDIO_RATE, "end_s": end / AUDIO_RATE,
+            "source_pts": [track[2]["source_pts"] + start, track[2]["source_pts"] + end],
+            "pcm_sha256": hashlib.sha256((pcm * 32768).astype("<i2").tobytes()).hexdigest(),
+            "waveform": envelope(pcm),
+            "audio": _wav_asset(assets, f"local-timing-{side}.wav", wav_bytes(pcm)),
+        }
+    return result | {
+        "status": "local_shift", "offset_ms": milliseconds,
+        "summary": f"The matching excerpt occurs {abs(milliseconds):.1f} ms {direction} in the analyzed recording.",
+        "range": span | excerpts | {"support_sha256": canonical_hash(span)},
+    }
+
+
 def compare(earlier: Path, submitted: Path, *, filenames: tuple[str, str] | None = None,
             include_level_adjustment: bool = True,
             include_trim_alignment: bool = True,
             include_trim_level_adjustment: bool = True,
-            include_stereo: bool = True) -> tuple[dict, dict[str, bytes]]:
+            include_stereo: bool = True,
+            include_local_timing: bool = False) -> tuple[dict, dict[str, bytes]]:
     """Compare continuous recordings and recover a small, exactly supported edge trim."""
     paths = earlier, submitted
     filenames = filenames or (earlier.name, submitted.name)
@@ -344,6 +390,8 @@ def compare(earlier: Path, submitted: Path, *, filenames: tuple[str, str] | None
         stereo = _compare_stereo((first, second), assets)
         if stereo is not None:
             record.update(schema=SCHEMA_WITH_STEREO, stereo_comparison=stereo)
+    if include_local_timing:
+        record.update(schema=SCHEMA_WITH_LOCAL_TIMING, local_timing=_local_timing((first, second), audio, assets))
     if sources != tuple(_identity(path, name) for path, name in zip(paths, filenames, strict=True)):
         raise ValueError("One of the recordings changed while the comparison was running.")
     return record, assets

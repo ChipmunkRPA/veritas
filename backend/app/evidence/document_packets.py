@@ -26,6 +26,7 @@ from app.evidence import (
     document_matched_context,
     document_paragraph_priority,
     document_passage_coverage,
+    document_passage_position,
     document_repeat,
     document_scope,
     document_unselected_responses,
@@ -325,6 +326,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
         document_matched_context.validate(document)
         document_paragraph_priority.validate(document)
         document_passage_coverage.validate(document)
+        document_passage_position.validate(document)
         document_unselected_responses.validate(document)
         document_scope.validate_checkpoint_agreement(document)
         if email_alternatives.KEY in document.get("coverage", {}):
@@ -596,12 +598,16 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
             packet["observation"] = ("The recorded response on this three-sentence context selected its middle "
                                      "sentence for review.")
         document["packets"].append(packet)
+    position = document_passage_position.from_result(result)
+    if position is not None:
+        document["coverage"][document_passage_position.KEY] = position
+        document_passage_position.verify_source(document, text, mapping)
     warning = decoded["meta"].get("coverage_warning")
     if warning:
         document["limitations"].append(warning)
     if not scored:
         document["limitations"].append("No successful learned check recorded exact scored contexts for this analysis.")
-    elif not document["packets"]:
+    elif not document["packets"] and (position is None or position["status"] != "flagged"):
         document["limitations"].append("No recorded context reached the selection boundary. This does not establish human authorship.")
     if any(c["status"] == "context_not_recorded" for c in check_coverage):
         document["limitations"].append("Some successful document-level or heuristic checks do not provide exact local input proof. See check coverage; their aggregate scores are not treated as local authorship evidence.")
@@ -661,6 +667,7 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
             document_passage_coverage.verify_source(document, decoded["text"], decoded["source_map"],
                                                     result=result, meta=decoded["meta"])
             document_unselected_responses.verify_source(document, decoded["text"], decoded["source_map"], result=result)
+            document_passage_position.verify_source(document, decoded["text"], decoded["source_map"], result=result)
             document_scope.validate_checkpoint_agreement(document, decoded["text"], result=result, mapping=decoded["source_map"])
             alternatives = email_alternatives.result_review(result)
             email_alternatives.validate_set(document, canonical_hash(alternatives) if alternatives is not None else None)

@@ -9,6 +9,7 @@ from pathlib import Path
 from app.evidence.audio_reference import (
     SCHEMA,
     SCHEMA_WITH_LEVEL_ADJUSTMENT,
+    SCHEMA_WITH_LOCAL_TIMING,
     SCHEMA_WITH_TRIM_ALIGNMENT,
     SCHEMA_WITH_TRIM_AND_LEVEL,
     compare,
@@ -27,6 +28,8 @@ def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False) -
                                      include_trim_level_adjustment=False, include_stereo=False)
         elif isinstance(record, dict) and record.get("schema") == SCHEMA_WITH_TRIM_AND_LEVEL:
             compare_source = partial(compare, include_stereo=False)
+        elif isinstance(record, dict) and record.get("schema") == SCHEMA_WITH_LOCAL_TIMING:
+            compare_source = partial(compare, include_local_timing=True)
     return replay(compare_source, earlier, submitted, output, verify=verify)
 
 

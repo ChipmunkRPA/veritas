@@ -50,10 +50,13 @@ def public_result(result: dict) -> dict:
         if window_review := face_windows.from_result(result):
             source_coverage[face_windows.COMMITMENT] = canonical_hash(window_review)
     if result.get('kind') == 'document':
+        from app.evidence import document_passage_position
         from app.evidence.email_alternatives import COMMITMENT, result_review
 
         if alternatives := result_review(result):
             source_coverage[COMMITMENT] = canonical_hash(alternatives)
+        if position := document_passage_position.from_result(result):
+            source_coverage[document_passage_position.COMMITMENT] = canonical_hash(position)
     checks = [{k: s[k] for k in ('id', 'display_id', 'category', 'family', 'scope', 'status', 'raw_score',
                                 'raw_score_kind', 'calibrated_probability') if k in s}
               for s in public.get('signals') or []]

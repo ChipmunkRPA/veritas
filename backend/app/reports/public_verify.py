@@ -13,6 +13,7 @@ import wave
 
 from app.core.canonical import canonical_hash
 from app.evidence import (
+    document_passage_position,
     document_scope,
     email_alternatives,
     face_boundary_binding,
@@ -85,7 +86,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
     _require(result.get('original_result_sha256') == analysis['original_result_sha256'], 'The result commits to a different original')
     _require(set(result) <= {'schema', 'is_projection', 'original_result_sha256', 'decision', 'findings', 'checks', 'note',
                              IMAGE_EDITOR_PREVIEW, face_return_coverage.COMMITMENT, email_alternatives.COMMITMENT,
-                             face_short_window_binding.COMMITMENT},
+                             face_short_window_binding.COMMITMENT, document_passage_position.COMMITMENT},
              'The public result contains unsupported internal fields')
     evidence = _document(archive, names, bundle.get('evidence'), 'evidence.json')
     binding = bundle['evidence']
@@ -222,6 +223,8 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                     _require(cue is None and 'copy_donor' not in assets, 'Copy evidence is missing its component mask')
     _require(analysis['kind'] == 'document' or email_alternatives.COMMITMENT not in result,
              'Email body rendition commitments require document evidence')
+    _require(analysis['kind'] == 'document' or document_passage_position.COMMITMENT not in result,
+             'Writing position commitments require document evidence')
     if analysis['kind'] == 'document':
         from app.evidence.document_matched_context import validate as validate_matched_context
         from app.evidence.document_paragraph_priority import validate as validate_paragraph_priority
@@ -232,6 +235,8 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         validate_matched_context(evidence, published_checks={check['id'] for check in result.get('checks', [])})
         validate_paragraph_priority(evidence)
         document_scope.validate_passage_coverage(evidence)
+        document_passage_position.validate(evidence, published_checks={check["id"] for check in result.get("checks", [])})
+        document_passage_position.validate_commitment(evidence, result.get(document_passage_position.COMMITMENT))
         document_scope.validate_checkpoint_agreement(evidence)
         validate_unselected_responses(evidence, published_checks={check.get('display_id') for check in result.get('checks', [])})
         email_alternatives.validate_set(evidence, result.get(email_alternatives.COMMITMENT))

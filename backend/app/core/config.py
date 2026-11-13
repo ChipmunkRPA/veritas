@@ -220,6 +220,7 @@ class Settings(BaseSettings):
     image_reference_comparison_enabled: bool = False  # Development-only comparison of an uploaded earlier copy.
     image_reference_jpeg_png_envelope: bool = False  # Optional earlier standard JPEG to cropped PNG color differences.
     audio_reference_comparison_enabled: bool = False  # Authenticated comparison of a short earlier recording.
+    audio_reference_local_timing: bool = False  # Find localized changes in the timing of matching excerpts.
     video_reference_comparison_enabled: bool = False  # Authenticated development-only comparison of a short earlier clip.
     video_reference_timing_model_path: Path | None = None  # Optional pinned local landmark task for a marked earlier closure.
     document_revision_comparison_enabled: bool = False  # Authenticated development-only earlier-draft comparison.
@@ -266,6 +267,7 @@ class Settings(BaseSettings):
     text_paragraph_evidence_priority: bool = False
     text_matched_context_review: bool = False
     text_checkpoint_agreement_review: bool = False
+    text_passage_position_review: bool = False
     text_classifier_id: str = "desklib/ai-text-detector-v1.01"  # base checkpoint (HF Hub)
     # fine-tuned on 2025-26 LLM output (scripts/finetune_text_detector.py); used automatically when present
     text_classifier_finetuned_path: Path = BACKEND_DIR / "data" / "weights" / "desklib-ft-v2"

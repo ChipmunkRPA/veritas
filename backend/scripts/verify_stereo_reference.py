@@ -20,6 +20,7 @@ BIN = 320
 MAX_SAMPLES = RATE * 30
 MAX_BYTES = 48 * 1024 * 1024
 SCHEMA = "chipmunk.audio-reference-comparison/5"
+SCHEMA_WITH_LOCAL_TIMING = "chipmunk.audio-reference-comparison/6"
 SIDES = ("earlier", "submitted")
 FRAME = re.compile(rb"\bn:(\d+)\s+pts:(-?\d+).*?\bnb_samples:(\d+)")
 
@@ -139,9 +140,9 @@ def verify(earlier, submitted, export):
     package = json.loads(export.read_bytes())
     record, assets = package["comparison"], package["assets"]
     stereo = record["stereo_comparison"]
-    require(record["schema"] == SCHEMA and stereo["status"] == "measured"
+    require(record["schema"] in {SCHEMA, SCHEMA_WITH_LOCAL_TIMING} and stereo["status"] == "measured"
             and stereo["source_time_base"] == f"1/{RATE}" and stereo["affects_overall_confidence"] is False,
-            "The export needs a measured version 5 stereo comparison")
+            "The export needs a measured stereo comparison")
     require(set(stereo["channels"]) == {"left", "right"}, "Stereo comparison must include both channels")
     first, first_pts = decode(earlier, record["earlier"], stereo["sources"]["earlier"])
     second, second_pts = decode(submitted, record["submitted"], stereo["sources"]["submitted"])

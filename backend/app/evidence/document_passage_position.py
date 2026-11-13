@@ -1,0 +1,172 @@
+"""Source-bound writing position evidence for exactly three mapped sentences."""
+
+from __future__ import annotations
+
+import math
+import re
+
+from app.core.canonical import canonical_hash
+from app.evidence import document_matched_context
+from app.evidence.document_scope import check_range
+
+KEY = "passage_position_review"
+COMMITMENT = "writing_position_review_sha256"
+SCHEMA = "document-passage-position-review/1"
+POINT = 2.7579683180027486
+MAX_CHARS = 1800
+LABELS = ("opening", "middle", "closing")
+SCOPES = ((0, 1), (0, 1, 2), (1, 2))
+SHA256 = re.compile(r"[0-9a-f]{64}")
+
+
+def geometry(text, mapping, method, sentences):
+    from app.detectors.text.extract import _ocr_language
+
+    if method != "plain" or not 0 < len(text) <= MAX_CHARS or len(mapping) != 1 or len(sentences) != 3:
+        return None
+    block = mapping[0]
+    if (block.get("kind") != "text" or (block.get("start"), block.get("end")) != (0, len(text))
+            or "\ufffd" in text or any(unit.paragraph != 0 for unit in sentences)):
+        return None
+    ranges = block.get("source_ranges") or []
+    if len(ranges) != 1:
+        return None
+    start, end, source_start, source_end = ranges[0]
+    if (start, end) != (0, len(text)) or not 0 <= source_start < source_end or end - start != source_end - source_start:
+        return None
+    if (not 12 <= sentences[1].n_words <= 65 or any(not 7 <= sentences[i].n_words <= 80 for i in (0, 2))
+            or sentences[0].start != 0 or sentences[-1].end != len(text)):
+        return None
+    language = _ocr_language(text)
+    if language.get("code") != "en" or language.get("status") != "supported":
+        return None
+    rows = []
+    for unit in sentences:
+        if text[unit.start:unit.end] != unit.text:
+            return None
+        rows.append({"start": unit.start, "end": unit.end, "source_start": unit.start + source_start,
+                     "source_end": unit.end + source_start})
+    return rows
+
+
+def inputs(text, spans):
+    words = [text[row["start"]:row["end"]] for row in spans]
+    return [(" ".join(words[j] for j in selected),
+             sum(len(words[j]) + 1 for j in selected if j < i),
+             len(words[i])) for i, selected in enumerate(SCOPES)]
+
+
+def _amount(value):
+    if not isinstance(value, str):
+        raise ValueError("An exact writing response is missing")
+    response = float.fromhex(value)
+    if not math.isfinite(response) or response.hex() != value:
+        raise ValueError("Invalid exact writing response")
+    return response
+
+
+def record(spans, readings, focus_text):
+    left, center, right = (_amount(item["response_hex"]) for item in readings)
+    contrast = center - max(left, right)
+    return {"schema": SCHEMA, "status": "flagged" if contrast > POINT else "no_flag",
+            "authorship_confidence_contribution": 0, "sentences": spans, "readings": readings,
+            "contrast_hex": contrast.hex(), "focus_text": focus_text}
+
+
+def from_signal(signal, ref):
+    payload = (signal.get("details", {}).get("text_evidence") or {}).get(KEY)
+    if payload is None:
+        return None
+    if not document_matched_context.matches(signal["detector_id"], signal["detector_version"], signal["model_revisions"]):
+        raise ValueError("The writing position check has a different classifier binding")
+    return {**payload, "signal_ref": ref}
+
+
+def from_result(result):
+    from app.api.public_projection import alias_signal
+
+    rows = [review for signal in result.get("signals", [])
+            if (review := from_signal(signal, {"id": alias_signal(signal["id"]), "display_id": signal.get("display_id")}))]
+    if len(rows) > 1:
+        raise ValueError("Repeated writing position evidence")
+    return rows[0] if rows else None
+
+
+def validate_commitment(document, expected):
+    value = (document.get("coverage") or {}).get(KEY)
+    if expected != (canonical_hash(value) if value is not None else None):
+        raise ValueError("Writing position evidence differs from its published result commitment")
+
+
+def unassessed(spans, focus_text):
+    return {"schema": SCHEMA, "status": "unassessed", "authorship_confidence_contribution": 0,
+            "sentences": spans, "focus_text": focus_text}
+
+
+def validate(document, *, published_checks=None):
+    value = (document.get("coverage") or {}).get(KEY)
+    if value is None:
+        return None
+    required = {"schema", "status", "authorship_confidence_contribution", "sentences", "signal_ref", "focus_text"}
+    if value.get("status") != "unassessed":
+        required.update(("readings", "contrast_hex"))
+    if (set(value) != required or value["schema"] != SCHEMA or value["authorship_confidence_contribution"] != 0
+            or document["source"].get("method") != "plain"):
+        raise ValueError("Invalid writing position scope")
+    checks = {row["signal_ref"]["id"] for row in document.get("coverage", {}).get("checks", [])}
+    ref = value["signal_ref"]
+    if (ref.get("id") not in checks or published_checks is not None and ref["id"] not in published_checks
+            or not isinstance(ref.get("display_id"), str) or not re.fullmatch(r"S[0-9]{2,6}", ref["display_id"])):
+        raise ValueError("Writing position evidence has no recorded check")
+    spans = value["sentences"]
+    if len(spans) != 3:
+        raise ValueError("Three complete writing positions required")
+    size = document["source"]["chars"]
+    first_source = spans[0]["source_start"]
+    previous = -1
+    for row in spans:
+        a, b = check_range(row, size)
+        if (set(row) != {"start", "end", "source_start", "source_end"} or a <= previous
+                or row["source_start"] != a + first_source or row["source_end"] != b + first_source):
+            raise ValueError("Writing positions are not contiguous with the original source map")
+        previous = b
+    if spans[0]["start"] != 0 or spans[-1]["end"] != size or type(first_source) is not int or first_source < 0:
+        raise ValueError("Writing positions do not span the one mapped paragraph")
+    if not isinstance(value["focus_text"], str) or len(value["focus_text"]) != spans[1]["end"] - spans[1]["start"]:
+        raise ValueError("Writing position evidence has an invalid focus excerpt")
+    if value["status"] == "unassessed":
+        return value
+    readings = value["readings"]
+    if len(readings) != 3:
+        raise ValueError("Three complete writing responses required")
+    for row in readings:
+        if (set(row) != {"input_sha256", "response_hex", "focus_tokens", "neighbor_tokens"}
+                or not SHA256.fullmatch(row["input_sha256"])
+                or any(type(row[key]) is not int or row[key] <= 0 for key in ("focus_tokens", "neighbor_tokens"))
+                or row["focus_tokens"] + row["neighbor_tokens"] > 512):
+            raise ValueError("Incomplete writing input coverage")
+    expected = record(spans, readings, value["focus_text"])
+    if expected != {key: item for key, item in value.items() if key != "signal_ref"}:
+        raise ValueError("The writing position direction does not replay")
+    return value
+
+
+def verify_source(document, text, mapping, *, result=None):
+    from app.detectors.text.extract import from_string, text_hash
+    from app.detectors.text.segment import segment
+
+    value = validate(document)
+    if result is not None and canonical_hash(value) != canonical_hash(from_result(result)):
+        raise ValueError("Writing position evidence differs from the recorded analysis")
+    if value is None:
+        return False
+    source = from_string(text)
+    mapped = geometry(text, mapping, document["source"]["method"], segment(source))
+    if mapped != value["sentences"] or value["focus_text"] != text[mapped[1]["start"]:mapped[1]["end"]]:
+        raise ValueError("Writing sentence positions differ from the original source")
+    if value["status"] == "unassessed":
+        return False
+    for (content, _, _), row in zip(inputs(text, mapped), value["readings"], strict=True):
+        if text_hash(content) != row["input_sha256"]:
+            raise ValueError("Writing input differs from the original source")
+    return True

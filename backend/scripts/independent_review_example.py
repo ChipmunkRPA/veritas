@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from app.bench.independent import LOCALIZATION_UNITS, SCHEMA, compare, digest, freeze
+from app.bench.independent_locations import TRUTH_SCHEMA
 
 EXTENTS = {"audio": 48_000, "image": 1_000, "text": 500, "video": 100}
 BASELINE = ((.2, 0, 0), (.8, 10, 0), (.2, 0, 0), (.8, 9, 7), (.3, 3, 1), (None, 0, 0))
@@ -46,6 +47,30 @@ def _receipt(manifest, system, split, values):
             "weight_sha256": [], "score_kind": "raw", "response_units": "fictional response units", "predictions": outcomes}
 
 
+def _location_example(manifest, confirmation):
+    cases = {case["id"]: case for case in manifest["cases"] if case["split"] == "confirmation"}
+    truth = {"schema": TRUTH_SCHEMA, "manifest_sha256": digest(manifest), "split": "confirmation", "cases": []}
+    predictions = []
+    for row in confirmation["predictions"]:
+        case = cases[row["id"]]
+        geometry = case["localization_truth"]
+        source, target = geometry["source_units"], geometry["target_units"]
+        image = case["modality"] == "image"
+        extent = [source // 10, 10] if image else [source]
+        def region(start, size, image=image):
+            if size == 0:
+                return []
+            return [[start // 10, 0, (start + size) // 10, 10]] if image else [[start, start + size]]
+        truth["cases"].append({"id": row["id"], "input_sha256": row["input_sha256"],
+                               "extent": extent, "regions": region(0, target)})
+        location = row["localization"]
+        if location["status"] == "ok":
+            reported, overlap = (location[k] for k in ("reported_units", "overlap_units"))
+            location = {"status": "ok", "regions": region(target - overlap, reported)}
+        predictions.append({**row, "localization": location})
+    return truth, {**confirmation, "predictions": predictions}
+
+
 def create(directory, write):
     directory.mkdir()
     manifest = _manifest()
@@ -61,5 +86,9 @@ def create(directory, write):
         confirmation["freeze_sha256"] = digest(lock)
         for suffix, data in (("development", development), ("freeze", lock), ("confirmation", confirmation)):
             write(directory / f"{name}-{suffix}.json", data)
+        if name == "candidate":
+            truth, response = _location_example(manifest, confirmation)
+            write(directory / "location-truth.json", truth)
+            write(directory / "candidate-locations.json", response)
         systems.extend((confirmation, lock))
     write(directory / "comparison.json", compare(manifest, *systems, require_freeze_commitment=True))

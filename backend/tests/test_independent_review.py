@@ -5,6 +5,7 @@ from copy import deepcopy
 import pytest
 
 from app.bench import independent as review
+from app.bench import independent_locations as locations
 
 
 def fixture():
@@ -32,6 +33,46 @@ def fixture():
                                  "response": .8 if r["label"] else .2}
                                 for r in cases if r["split"] == split]}
     return manifest, receipt
+
+
+def test_coordinate_locations_count_shared_area_once_and_remove_private_positions():
+    manifest, receipt = fixture()
+    for case in manifest["cases"]:
+        case["localization_truth"] = {"unit": review.LOCALIZATION_UNITS[case["modality"]], "source_units": 100,
+                                      "target_units": 30 if case["label"] else 0}
+    response = receipt("confirmation")
+    by_id = {row["id"]: row for row in response["predictions"]}
+    truth = {"schema": locations.TRUTH_SCHEMA, "split": "confirmation", "manifest_sha256": review.digest(manifest),
+             "cases": []}
+    for case in manifest["cases"]:
+        if case["split"] != "confirmation":
+            continue
+        image = case["modality"] == "image"
+        target = [[0, 0, 5, 5], [1, 0, 6, 5]] if image else [[5, 25], [15, 35]]
+        selected = [[3, 2, 8, 7], [4, 2, 9, 7]] if image else [[20, 40], [30, 50]]
+        truth["cases"].append({"id": case["id"], "input_sha256": case["input_sha256"],
+                               "extent": [10, 10] if image else [100], "regions": target if case["label"] else []})
+        by_id[case["id"]]["localization"] = {"status": "ok", "regions": selected}
+    original = deepcopy(response)
+    output = locations.count_locations(manifest, truth, response)
+    assert original == response
+    cases = {case["id"]: case for case in manifest["cases"]}
+    for row in output["predictions"]:
+        case = cases[row["id"]]
+        overlap = (9 if case["modality"] == "image" else 15) if case["label"] else 0
+        assert row["localization"] == {"status": "ok", "reported_units": 30, "overlap_units": overlap}
+
+    with pytest.raises(ValueError, match="Every planned"):
+        locations.count_locations(manifest, {**truth, "cases": truth["cases"][1:]}, response)
+    with pytest.raises(ValueError, match="exact manifest"):
+        locations.count_locations(manifest, {**truth, "manifest_sha256": "0" * 64}, response)
+    image_id = next(case["id"] for case in manifest["cases"] if case["modality"] == "image" and case["split"] == "confirmation")
+    by_id[image_id]["localization"]["regions"] = [[0, 0, 11, 10]]
+    with pytest.raises(ValueError, match="within the source"):
+        locations.count_locations(manifest, truth, response)
+    by_id[image_id]["localization"] = {"status": "not_applicable", "reason": "No valid source map"}
+    output = locations.count_locations(manifest, truth, response)
+    assert next(row["localization"] for row in output["predictions"] if row["id"] == image_id) == by_id[image_id]["localization"]
 
 
 def test_four_media_fixture_audits_and_summarizes_without_loading_models():

@@ -45,6 +45,11 @@ def main() -> None:
     pair.add_argument("candidate_lock", type=Path)
     pair.add_argument("output", type=Path)
     pair.add_argument("--require-freeze-commitment", action="store_true", help="Require both confirmation receipts to commit to their exact freezes")
+    locations = commands.add_parser("count-locations", help="Count source-coordinate overlap for all planned localization cases")
+    locations.add_argument("manifest", type=Path)
+    locations.add_argument("truth", type=Path)
+    locations.add_argument("response", type=Path)
+    locations.add_argument("output", type=Path)
     example = commands.add_parser("demo", help="Create a fictional four-modality example with no media or weights")
     example.add_argument("output", type=Path)
     args = parser.parse_args()
@@ -62,6 +67,13 @@ def main() -> None:
     elif args.command == "summarize":
         result = summarize(manifest, read(args.confirmation), read(args.lock),
                            require_freeze_commitment=args.require_freeze_commitment)
+    elif args.command == "count-locations":
+        from app.bench.independent_locations import count_locations
+
+        result = count_locations(manifest, read(args.truth), read(args.response))
+        write(args.output, result)
+        print(digest(result))
+        return
     else:
         result = compare(manifest, read(args.baseline), read(args.baseline_lock),
                          read(args.candidate), read(args.candidate_lock),

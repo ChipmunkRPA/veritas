@@ -97,6 +97,12 @@ integration remains unfinished.
 
 ## Progress on 13 November
 
+- The [contributor location counter](independent-testing.md#count-exact-locations-on-your-own-files)
+  computes exact region unions and overlap for contributed image, video,
+  audio and writing evaluations. It checks the case, input hash and
+  extent before producing counts for the portable evaluation contract.
+  Contributors can prepare aggregate results without posting private
+  files or positions.
 - The [re-encoded trim check](video-trimmed-reencode-transfer-2026-11-13.md)
   adds local video comparison when two clips have matching motion and the
   analyzed clip is shorter. It localized 27 of 33 authored edits and flagged

@@ -1973,6 +1973,48 @@ from public source metadata. Those two checks used public files from commit
 `b0aa41f`. [Mouth review instructions](mouth-public-portable-review-v12.md) ·
 [Audio metadata commands](#model-free-checks)
 
+### Count exact locations on your own files
+
+Use `count-locations` to calculate the overlap between your known edit
+locations and the regions a check reports. It counts the union of
+overlapping regions once and checks bounds against the submitted file
+geometry. The output works with `summarize` and `compare` above.
+The command reads JSON only. Keep the native files, coordinates and any
+identifying annotations in your own workspace. Share the aggregate
+summary after reviewing its labels.
+
+```sh
+scratch=$(mktemp -d)
+review=backend/scripts/independent_review.py
+python3 -IS "$review" demo "$scratch/example"
+python3 -IS "$review" count-locations "$scratch/example/manifest.json" \
+  "$scratch/example/location-truth.json" "$scratch/example/candidate-locations.json" \
+  "$scratch/candidate-counts.json"
+cmp "$scratch/example/candidate-confirmation.json" "$scratch/candidate-counts.json"
+```
+
+For your own data, copy the structure of the demo files. The truth file
+uses `chipmunk.independent-location-truth/1`, the manifest digest and the
+split. Its `cases` bind each planned location to the case ID, exact input
+hash, source `extent`, and `regions`. The source and target union sizes
+must agree with `localization_truth` in the manifest. The response uses the
+normal receipt fields, with `localization.regions` in place of the two
+overlap counts for each measured case.
+
+| Media | Extent | Region |
+| --- | --- | --- |
+| Image | `[width, height]` in submitted pixels | `[left, top, right, bottom]` |
+| Video | `[decoded_frame_count]` | `[first_frame, end_frame]` |
+| Audio | `[decoded_sample_count]` | `[first_sample, end_sample]` |
+| Writing | `[extracted_codepoint_count]` | `[start, end]` in the same extracted text |
+
+All coordinates start at zero and use exclusive ends. An assessed
+check with no located region uses an empty list. An unassessed check uses
+its status and reason, without a region list. Confirm the clock, frame
+order or text extraction against the original before entering positions.
+Use this tool for rectangle or interval annotations. An irregular pixel
+mask requires exact mask arithmetic or a faithful rectangle decomposition.
+
 ## Review an audio supplement by acoustic condition
 
 The [separated-stream presence comparison](audio-stream-presence-transfer-2026-11-11.md)

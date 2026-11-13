@@ -22,6 +22,31 @@ replays a PNG seam or video frame schedule directly from a supplied original
 and its signed evidence record. Start there to check those measurements on a
 local export.
 
+### Replay difficult edits across four media
+
+Run from a clean checkout with Python 3.11 or later. The readers use only
+published ledgers. They reproduce the reported score and overlap arithmetic
+without downloading media, rerunning models, or creating GitHub issues.
+
+```sh
+review_dir=$(mktemp -d)
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/difficult-edits.json" --suite difficult-edits
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/difficult-edits.json" --format-issue
+```
+
+The suite covers [feathered image edits](image-masked-context-transfer-2026-11-13.md),
+[mouth edits with preserved speech timing](video-mouth-chroma-coupling-2026-11-13.md),
+[short voice replacements under competing speech](audio-unassigned-stereo-voice-2026-11-13.md),
+and [exact writing locations](writing-position-qwen-confirmation-2026-11-12.md).
+The first three ledgers include negative or mixed results. Use a separate
+reproduction for native media, new inference, or fresh accuracy estimates.
+Python 3.11 and 3.12 reproduced the same four reader outputs locally.
+The [independent evaluation form](https://github.com/ChipmunkRPA/veritas/issues/new?template=independent-evaluation.yml)
+accepts the output and the exact claim being checked.
+The [longer writing source replay](writing-f1000-revision-spans-2026-11-13.md)
+separately retrieves original and revised publisher XML, then verifies their
+exact sentence locations without running a classifier.
+
 The [large-image copy comparison](image-affine-native-scale-2026-11-11.md#reproduce)
 provides a licensed roster, exact source commitments, and a separate reader
 for the PNG and JPEG localization and ordinary-control results.

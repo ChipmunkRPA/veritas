@@ -1,0 +1,6538 @@
+{
+  "development_sha256": "eb393af2cdcf442c89674eb268c8ab9dfc435454431163be359f988e55c2ffa6",
+  "freeze_sha256": "56362e326d06231be19b9d67da05fe89eb5b79ed7e5f2b745a3a0b6abcd0fda8",
+  "held_sha256": "20fe199f272c268e276f681aef3d7724f012e862a5a8a7340cdf9f6bc6c0fa17",
+  "native_audit": {
+    "denoise_changed_pictures": 192,
+    "denoise_pictures_reconstructed": 707,
+    "derived_clock_entries": 1414,
+    "files": 6,
+    "picture_crops": 29,
+    "ranges": 10
+  },
+  "ordinary_derivatives_sha256": "f98aac396c6282534d4f412cfab95d0a72e2c3d61abfa217a4f336c566e86919",
+  "points": {
+    "color_coupling": 0.1584488432854414,
+    "conditioned_chroma": 0.25604304671287537,
+    "luma_control": 0.6105693653225899
+  },
+  "protocol": {
+    "arms": "Local-minus-outer change in log luma residual energy, luma/chroma regression coupling, or log chroma residual energy after separately regressing each chroma axis on luma. Values use RGB-decoder YCrCb conversion and do not establish sensor identity.",
+    "decision": "Per arm, the larger of 0.03 and the third-largest positive ordinary development score. Flag when strictly larger. Correct range uses native time IoU at least 0.50.",
+    "gate": "At least four source-event-aligned redraws localized across three groups, at least 70% coverage in each main class, at most two ordinary flags, and zero untouched, recompression or cut flags. Color arms must also exceed the luma comparator's useful locations without extra ordinary flags. No claim of generator-independent validation.",
+    "input": "One upright short upload, native RGB pixels, verified source picture clock and observed single-face geometry. No audio, earlier copy, edit mask or supplied range enters measurement.",
+    "new_controls": "First committed original from each of 12 additional speaker groups. Add whole-picture H.264 4:2:0 CRF 28 and ordinary local chroma denoising in the central 16 pictures. Denoising uses a mouth-centered 26 by 15 elliptical feather and 35% of a 1.3-native-pixel chroma blur with two-picture end ramps. Preserve every original timestamp. These controls are held, never used to choose the points.",
+    "patches": "Eight sectors of 5 by 5 sample points around two mouth-centered elliptical rails, at 1.0 and 1.7 times the 15 by 8 normalized eye-unit radii. Gaussian band pass at 0.75 and 1.9 native pixels. Neighbor rails require luma residual RMS of at least 0.25 and within a factor of 3.",
+    "range": "Scan 8, 12, 16 and 20 pictures with five-picture flanks in one observed shot. Each sector requires at least 80% observed pictures per window, with a same-direction change against each flank. At least three consistent sectors. Keep one strongest range, with separate arms and no selection using held labels."
+  },
+  "schema": "chipmunk.video-mouth-chroma-coupling/1",
+  "splits": {
+    "development": {
+      "native_pictures": 4200,
+      "observed_geometry": 4200,
+      "rows": [
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.12894316017627716,
+              "seconds": [
+                "33/25",
+                "49/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.1161455363035202,
+              "seconds": [
+                "1/5",
+                "21/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.13131026923656464,
+              "seconds": [
+                "18/25",
+                "6/5"
+              ]
+            }
+          },
+          "clip": 1,
+          "edit": null,
+          "family": "grid",
+          "group": 1,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.12342053838074207,
+              "seconds": [
+                "33/25",
+                "49/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.1161455363035202,
+              "seconds": [
+                "1/5",
+                "21/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.19038750231266022,
+              "seconds": [
+                "7/5",
+                "43/25"
+              ]
+            }
+          },
+          "clip": 1,
+          "edit": null,
+          "family": "grid",
+          "group": 1,
+          "role": "resample_musetalk"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.1584488432854414,
+              "seconds": [
+                "33/25",
+                "49/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.1161455363035202,
+              "seconds": [
+                "1/5",
+                "21/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.18794110417366028,
+              "seconds": [
+                "33/25",
+                "41/25"
+              ]
+            }
+          },
+          "clip": 1,
+          "edit": null,
+          "family": "grid",
+          "group": 1,
+          "role": "resample_liveportrait"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.11426630988717079,
+              "seconds": [
+                "22/25",
+                "38/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.1161455363035202,
+              "seconds": [
+                "1/5",
+                "21/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.19512291252613068,
+              "seconds": [
+                "12/25",
+                "28/25"
+              ]
+            }
+          },
+          "clip": 1,
+          "edit": null,
+          "family": "grid",
+          "group": 1,
+          "role": "brightness_musetalk"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.14250819012522697,
+              "seconds": [
+                "31/25",
+                "47/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.1161455363035202,
+              "seconds": [
+                "1/5",
+                "21/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.1888248473405838,
+              "seconds": [
+                "36/25",
+                "44/25"
+              ]
+            }
+          },
+          "clip": 1,
+          "edit": null,
+          "family": "grid",
+          "group": 1,
+          "role": "brightness_liveportrait"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.09665856696665287,
+              "seconds": [
+                "41/25",
+                "49/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.1161455363035202,
+              "seconds": [
+                "1/5",
+                "21/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.1472242921590805,
+              "seconds": [
+                "18/25",
+                "38/25"
+              ]
+            }
+          },
+          "clip": 1,
+          "edit": null,
+          "family": "grid",
+          "group": 1,
+          "role": "genuine_frame_retime"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.12894316017627716,
+              "seconds": [
+                "33/25",
+                "49/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.1161455363035202,
+              "seconds": [
+                "1/5",
+                "21/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.13131026923656464,
+              "seconds": [
+                "18/25",
+                "6/5"
+              ]
+            }
+          },
+          "clip": 1,
+          "edit": null,
+          "family": "grid",
+          "group": 1,
+          "role": "audio_delay_320ms"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.09973982721567154,
+              "seconds": [
+                "49/25",
+                "57/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.07386964559555054,
+              "seconds": [
+                "14/25",
+                "34/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.048395633697509766,
+              "seconds": [
+                "31/25",
+                "39/25"
+              ]
+            }
+          },
+          "clip": 2,
+          "edit": null,
+          "family": "grid",
+          "group": 1,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.10054389387369156,
+              "seconds": [
+                "49/25",
+                "57/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.07248923182487488,
+              "seconds": [
+                "14/25",
+                "34/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.0521569699048996,
+              "seconds": [
+                "31/25",
+                "39/25"
+              ]
+            }
+          },
+          "clip": 2,
+          "edit": null,
+          "family": "grid",
+          "group": 1,
+          "role": "resample_musetalk"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.09854260832071304,
+              "seconds": [
+                "49/25",
+                "57/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.15235793590545654,
+              "seconds": [
+                "23/25",
+                "7/5"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.05387347936630249,
+              "seconds": [
+                "13/25",
+                "33/25"
+              ]
+            }
+          },
+          "clip": 2,
+          "edit": null,
+          "family": "grid",
+          "group": 1,
+          "role": "resample_liveportrait"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.13342766091227531,
+              "seconds": [
+                "49/25",
+                "57/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.11049579083919525,
+              "seconds": [
+                "1",
+                "37/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.08971226215362549,
+              "seconds": [
+                "7/5",
+                "47/25"
+              ]
+            }
+          },
+          "clip": 2,
+          "edit": null,
+          "family": "grid",
+          "group": 1,
+          "role": "brightness_musetalk"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.13856524974107742,
+              "seconds": [
+                "49/25",
+                "57/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.17516112327575684,
+              "seconds": [
+                "24/25",
+                "8/5"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.0552418977022171,
+              "seconds": [
+                "2/5",
+                "6/5"
+              ]
+            }
+          },
+          "clip": 2,
+          "edit": null,
+          "family": "grid",
+          "group": 1,
+          "role": "brightness_liveportrait"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.07637670822441578,
+              "seconds": [
+                "31/25",
+                "43/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.057227879762649536,
+              "seconds": [
+                "48/25",
+                "56/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.05243811011314392,
+              "seconds": [
+                "38/25",
+                "46/25"
+              ]
+            }
+          },
+          "clip": 2,
+          "edit": null,
+          "family": "grid",
+          "group": 1,
+          "role": "genuine_frame_retime"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.09973982721567154,
+              "seconds": [
+                "49/25",
+                "57/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.07386964559555054,
+              "seconds": [
+                "14/25",
+                "34/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.048395633697509766,
+              "seconds": [
+                "31/25",
+                "39/25"
+              ]
+            }
+          },
+          "clip": 2,
+          "edit": null,
+          "family": "grid",
+          "group": 1,
+          "role": "audio_delay_320ms"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.07764885574579239,
+              "seconds": [
+                "48/25",
+                "56/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.21287106722593307,
+              "seconds": [
+                "39/25",
+                "47/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.2445775792002678,
+              "seconds": [
+                "38/25",
+                "46/25"
+              ]
+            }
+          },
+          "clip": 3,
+          "edit": null,
+          "family": "grid",
+          "group": 2,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.07723067328333855,
+              "seconds": [
+                "48/25",
+                "56/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.22161640971899033,
+              "seconds": [
+                "39/25",
+                "47/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.24694731086492538,
+              "seconds": [
+                "38/25",
+                "46/25"
+              ]
+            }
+          },
+          "clip": 3,
+          "edit": null,
+          "family": "grid",
+          "group": 2,
+          "role": "resample_musetalk"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.07678120210766792,
+              "seconds": [
+                "48/25",
+                "56/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.18801598250865936,
+              "seconds": [
+                "41/25",
+                "49/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.19013293832540512,
+              "seconds": [
+                "39/25",
+                "47/25"
+              ]
+            }
+          },
+          "clip": 3,
+          "edit": null,
+          "family": "grid",
+          "group": 2,
+          "role": "resample_liveportrait"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.07626057788729668,
+              "seconds": [
+                "48/25",
+                "56/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.21201343834400177,
+              "seconds": [
+                "27/25",
+                "39/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.21072527766227722,
+              "seconds": [
+                "44/25",
+                "64/25"
+              ]
+            }
+          },
+          "clip": 3,
+          "edit": null,
+          "family": "grid",
+          "group": 2,
+          "role": "brightness_musetalk"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.08576884120702744,
+              "seconds": [
+                "48/25",
+                "56/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.19109228998422623,
+              "seconds": [
+                "7/5",
+                "47/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.22207139432430267,
+              "seconds": [
+                "46/25",
+                "66/25"
+              ]
+            }
+          },
+          "clip": 3,
+          "edit": null,
+          "family": "grid",
+          "group": 2,
+          "role": "brightness_liveportrait"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.03976255655288696,
+              "seconds": [
+                "51/25",
+                "59/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.1297271028161049,
+              "seconds": [
+                "9/5",
+                "57/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.22063755989074707,
+              "seconds": [
+                "42/25",
+                "62/25"
+              ]
+            }
+          },
+          "clip": 3,
+          "edit": null,
+          "family": "grid",
+          "group": 2,
+          "role": "genuine_frame_retime"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.07764885574579239,
+              "seconds": [
+                "48/25",
+                "56/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.21287106722593307,
+              "seconds": [
+                "39/25",
+                "47/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.2445775792002678,
+              "seconds": [
+                "38/25",
+                "46/25"
+              ]
+            }
+          },
+          "clip": 3,
+          "edit": null,
+          "family": "grid",
+          "group": 2,
+          "role": "audio_delay_320ms"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.07852476462721825,
+              "seconds": [
+                "2",
+                "14/5"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.06024044752120972,
+              "seconds": [
+                "36/25",
+                "52/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.17059758305549622,
+              "seconds": [
+                "34/25",
+                "2"
+              ]
+            }
+          },
+          "clip": 4,
+          "edit": null,
+          "family": "grid",
+          "group": 2,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.08323376625776291,
+              "seconds": [
+                "33/25",
+                "53/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.06093031167984009,
+              "seconds": [
+                "36/25",
+                "52/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.16382116079330444,
+              "seconds": [
+                "34/25",
+                "2"
+              ]
+            }
+          },
+          "clip": 4,
+          "edit": null,
+          "family": "grid",
+          "group": 2,
+          "role": "resample_musetalk"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.06312446109950542,
+              "seconds": [
+                "2",
+                "14/5"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.09685483574867249,
+              "seconds": [
+                "36/25",
+                "52/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.24286359548568726,
+              "seconds": [
+                "31/25",
+                "51/25"
+              ]
+            }
+          },
+          "clip": 4,
+          "edit": null,
+          "family": "grid",
+          "group": 2,
+          "role": "resample_liveportrait"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.06862693652510643,
+              "seconds": [
+                "2",
+                "14/5"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.15843063592910767,
+              "seconds": [
+                "19/25",
+                "39/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.09833285957574844,
+              "seconds": [
+                "58/25",
+                "14/5"
+              ]
+            }
+          },
+          "clip": 4,
+          "edit": null,
+          "family": "grid",
+          "group": 2,
+          "role": "brightness_musetalk"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.0708627924323082,
+              "seconds": [
+                "2",
+                "14/5"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.15375234186649323,
+              "seconds": [
+                "18/25",
+                "38/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.21512040495872498,
+              "seconds": [
+                "39/25",
+                "51/25"
+              ]
+            }
+          },
+          "clip": 4,
+          "edit": null,
+          "family": "grid",
+          "group": 2,
+          "role": "brightness_liveportrait"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.06862693652510643,
+              "seconds": [
+                "2",
+                "14/5"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.10825970768928528,
+              "seconds": [
+                "24/25",
+                "44/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.19046428799629211,
+              "seconds": [
+                "42/25",
+                "2"
+              ]
+            }
+          },
+          "clip": 4,
+          "edit": null,
+          "family": "grid",
+          "group": 2,
+          "role": "genuine_frame_retime"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.07852476462721825,
+              "seconds": [
+                "2",
+                "14/5"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.06024044752120972,
+              "seconds": [
+                "36/25",
+                "52/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.17059758305549622,
+              "seconds": [
+                "34/25",
+                "2"
+              ]
+            }
+          },
+          "clip": 4,
+          "edit": null,
+          "family": "grid",
+          "group": 2,
+          "role": "audio_delay_320ms"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.030518088722601533,
+              "seconds": [
+                "49/25",
+                "57/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.25604304671287537,
+              "seconds": [
+                "36/25",
+                "44/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.24259287118911743,
+              "seconds": [
+                "9/25",
+                "17/25"
+              ]
+            }
+          },
+          "clip": 5,
+          "edit": null,
+          "family": "grid",
+          "group": 3,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.030518088722601533,
+              "seconds": [
+                "49/25",
+                "57/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.23863735795021057,
+              "seconds": [
+                "36/25",
+                "44/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.24336792528629303,
+              "seconds": [
+                "39/25",
+                "47/25"
+              ]
+            }
+          },
+          "clip": 5,
+          "edit": null,
+          "family": "grid",
+          "group": 3,
+          "role": "resample_musetalk"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.030518088722601533,
+              "seconds": [
+                "49/25",
+                "57/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.26316940784454346,
+              "seconds": [
+                "36/25",
+                "44/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.24259287118911743,
+              "seconds": [
+                "9/25",
+                "17/25"
+              ]
+            }
+          },
+          "clip": 5,
+          "edit": null,
+          "family": "grid",
+          "group": 3,
+          "role": "resample_liveportrait"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.05251876823604107,
+              "seconds": [
+                "41/25",
+                "49/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.2534346580505371,
+              "seconds": [
+                "6/5",
+                "42/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.24259287118911743,
+              "seconds": [
+                "9/25",
+                "17/25"
+              ]
+            }
+          },
+          "clip": 5,
+          "edit": null,
+          "family": "grid",
+          "group": 3,
+          "role": "brightness_musetalk"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.016811498440802097,
+              "seconds": [
+                "61/25",
+                "69/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.21551471948623657,
+              "seconds": [
+                "16/25",
+                "36/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.24259287118911743,
+              "seconds": [
+                "9/25",
+                "17/25"
+              ]
+            }
+          },
+          "clip": 5,
+          "edit": null,
+          "family": "grid",
+          "group": 3,
+          "role": "brightness_liveportrait"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.024701374815776944,
+              "seconds": [
+                "48/25",
+                "56/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.17377963662147522,
+              "seconds": [
+                "8/25",
+                "16/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.24259287118911743,
+              "seconds": [
+                "9/25",
+                "17/25"
+              ]
+            }
+          },
+          "clip": 5,
+          "edit": null,
+          "family": "grid",
+          "group": 3,
+          "role": "genuine_frame_retime"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.030518088722601533,
+              "seconds": [
+                "49/25",
+                "57/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.25604304671287537,
+              "seconds": [
+                "36/25",
+                "44/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.24259287118911743,
+              "seconds": [
+                "9/25",
+                "17/25"
+              ]
+            }
+          },
+          "clip": 5,
+          "edit": null,
+          "family": "grid",
+          "group": 3,
+          "role": "audio_delay_320ms"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.07457515504211187,
+              "seconds": [
+                "7/25",
+                "3/5"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.100217804312706,
+              "seconds": [
+                "37/25",
+                "49/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.6105693653225899,
+              "seconds": [
+                "28/25",
+                "44/25"
+              ]
+            }
+          },
+          "clip": 6,
+          "edit": null,
+          "family": "grid",
+          "group": 3,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.07457515504211187,
+              "seconds": [
+                "7/25",
+                "3/5"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.1109268069267273,
+              "seconds": [
+                "37/25",
+                "49/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.6034208387136459,
+              "seconds": [
+                "28/25",
+                "44/25"
+              ]
+            }
+          },
+          "clip": 6,
+          "edit": null,
+          "family": "grid",
+          "group": 3,
+          "role": "resample_musetalk"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.07457515504211187,
+              "seconds": [
+                "7/25",
+                "3/5"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.10564712435007095,
+              "seconds": [
+                "2",
+                "62/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.6422706916928291,
+              "seconds": [
+                "28/25",
+                "44/25"
+              ]
+            }
+          },
+          "clip": 6,
+          "edit": null,
+          "family": "grid",
+          "group": 3,
+          "role": "resample_liveportrait"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.07457515504211187,
+              "seconds": [
+                "7/25",
+                "3/5"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.18857252597808838,
+              "seconds": [
+                "29/25",
+                "9/5"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.47058846056461334,
+              "seconds": [
+                "29/25",
+                "9/5"
+              ]
+            }
+          },
+          "clip": 6,
+          "edit": null,
+          "family": "grid",
+          "group": 3,
+          "role": "brightness_musetalk"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.07953307125717402,
+              "seconds": [
+                "3/5",
+                "23/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.15096762031316757,
+              "seconds": [
+                "29/25",
+                "9/5"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.46706220507621765,
+              "seconds": [
+                "29/25",
+                "9/5"
+              ]
+            }
+          },
+          "clip": 6,
+          "edit": null,
+          "family": "grid",
+          "group": 3,
+          "role": "brightness_liveportrait"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.07457515504211187,
+              "seconds": [
+                "7/25",
+                "3/5"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.10468807816505432,
+              "seconds": [
+                "44/25",
+                "52/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.45820116996765137,
+              "seconds": [
+                "38/25",
+                "46/25"
+              ]
+            }
+          },
+          "clip": 6,
+          "edit": null,
+          "family": "grid",
+          "group": 3,
+          "role": "genuine_frame_retime"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.07457515504211187,
+              "seconds": [
+                "7/25",
+                "3/5"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.100217804312706,
+              "seconds": [
+                "37/25",
+                "49/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.6105693653225899,
+              "seconds": [
+                "28/25",
+                "44/25"
+              ]
+            }
+          },
+          "clip": 6,
+          "edit": null,
+          "family": "grid",
+          "group": 3,
+          "role": "audio_delay_320ms"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.084311218932271,
+              "seconds": [
+                "9/5",
+                "53/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.1452818363904953,
+              "seconds": [
+                "48/25",
+                "56/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.11240386962890625,
+              "seconds": [
+                "41/25",
+                "49/25"
+              ]
+            }
+          },
+          "clip": 7,
+          "edit": null,
+          "family": "grid",
+          "group": 4,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.08994121477007866,
+              "seconds": [
+                "9/5",
+                "53/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.130583718419075,
+              "seconds": [
+                "48/25",
+                "56/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.11745612323284149,
+              "seconds": [
+                "41/25",
+                "49/25"
+              ]
+            }
+          },
+          "clip": 7,
+          "edit": null,
+          "family": "grid",
+          "group": 4,
+          "role": "resample_musetalk"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.08754805848002434,
+              "seconds": [
+                "9/5",
+                "53/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.13611242175102234,
+              "seconds": [
+                "48/25",
+                "56/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.16922567784786224,
+              "seconds": [
+                "39/25",
+                "51/25"
+              ]
+            }
+          },
+          "clip": 7,
+          "edit": null,
+          "family": "grid",
+          "group": 4,
+          "role": "resample_liveportrait"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.10292432270944118,
+              "seconds": [
+                "1",
+                "9/5"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.1839742362499237,
+              "seconds": [
+                "48/25",
+                "56/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.13793432712554932,
+              "seconds": [
+                "24/25",
+                "44/25"
+              ]
+            }
+          },
+          "clip": 7,
+          "edit": null,
+          "family": "grid",
+          "group": 4,
+          "role": "brightness_musetalk"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.14831248298287392,
+              "seconds": [
+                "7/5",
+                "43/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.1675308719277382,
+              "seconds": [
+                "14/25",
+                "34/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.2625993639230728,
+              "seconds": [
+                "8/5",
+                "52/25"
+              ]
+            }
+          },
+          "clip": 7,
+          "edit": null,
+          "family": "grid",
+          "group": 4,
+          "role": "brightness_liveportrait"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.084334846585989,
+              "seconds": [
+                "21/25",
+                "33/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.13525131344795227,
+              "seconds": [
+                "48/25",
+                "56/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.15811887383460999,
+              "seconds": [
+                "32/25",
+                "48/25"
+              ]
+            }
+          },
+          "clip": 7,
+          "edit": null,
+          "family": "grid",
+          "group": 4,
+          "role": "genuine_frame_retime"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.084311218932271,
+              "seconds": [
+                "9/5",
+                "53/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.1452818363904953,
+              "seconds": [
+                "48/25",
+                "56/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.11240386962890625,
+              "seconds": [
+                "41/25",
+                "49/25"
+              ]
+            }
+          },
+          "clip": 7,
+          "edit": null,
+          "family": "grid",
+          "group": 4,
+          "role": "audio_delay_320ms"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.17528953403234482,
+              "seconds": [
+                "33/25",
+                "9/5"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.11405059695243835,
+              "seconds": [
+                "36/25",
+                "56/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.21243885904550552,
+              "seconds": [
+                "46/25",
+                "58/25"
+              ]
+            }
+          },
+          "clip": 8,
+          "edit": null,
+          "family": "grid",
+          "group": 4,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.1533205322921276,
+              "seconds": [
+                "33/25",
+                "9/5"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.10629811882972717,
+              "seconds": [
+                "36/25",
+                "56/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.21743062138557434,
+              "seconds": [
+                "46/25",
+                "58/25"
+              ]
+            }
+          },
+          "clip": 8,
+          "edit": null,
+          "family": "grid",
+          "group": 4,
+          "role": "resample_musetalk"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.12710798950865865,
+              "seconds": [
+                "33/25",
+                "41/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.12995214760303497,
+              "seconds": [
+                "36/25",
+                "56/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.2554498165845871,
+              "seconds": [
+                "42/25",
+                "2"
+              ]
+            }
+          },
+          "clip": 8,
+          "edit": null,
+          "family": "grid",
+          "group": 4,
+          "role": "resample_liveportrait"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.13108529150485992,
+              "seconds": [
+                "33/25",
+                "9/5"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.12524444609880447,
+              "seconds": [
+                "44/25",
+                "56/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.21376530826091766,
+              "seconds": [
+                "47/25",
+                "11/5"
+              ]
+            }
+          },
+          "clip": 8,
+          "edit": null,
+          "family": "grid",
+          "group": 4,
+          "role": "brightness_musetalk"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.11674289405345917,
+              "seconds": [
+                "34/25",
+                "46/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.15524005144834518,
+              "seconds": [
+                "18/25",
+                "6/5"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.22786825895309448,
+              "seconds": [
+                "48/25",
+                "12/5"
+              ]
+            }
+          },
+          "clip": 8,
+          "edit": null,
+          "family": "grid",
+          "group": 4,
+          "role": "brightness_liveportrait"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.12690313160419464,
+              "seconds": [
+                "7/5",
+                "47/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.18772685527801514,
+              "seconds": [
+                "43/25",
+                "11/5"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.1607842668890953,
+              "seconds": [
+                "42/25",
+                "58/25"
+              ]
+            }
+          },
+          "clip": 8,
+          "edit": null,
+          "family": "grid",
+          "group": 4,
+          "role": "genuine_frame_retime"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.17528953403234482,
+              "seconds": [
+                "33/25",
+                "9/5"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.11405059695243835,
+              "seconds": [
+                "36/25",
+                "56/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.21243885904550552,
+              "seconds": [
+                "46/25",
+                "58/25"
+              ]
+            }
+          },
+          "clip": 8,
+          "edit": null,
+          "family": "grid",
+          "group": 4,
+          "role": "audio_delay_320ms"
+        }
+      ],
+      "summary": {
+        "color_coupling": {
+          "aligned_localized": 0,
+          "auc_among_measured": null,
+          "coverage": {
+            "grid_measured": 56,
+            "grid_total": 56
+          },
+          "criteria": {
+            "coverage": false,
+            "localized": false,
+            "ordinary": false,
+            "over_luma": false
+          },
+          "essential_ordinary_flags": 1,
+          "localized_groups": 0,
+          "ordinary_flags": 2,
+          "roles": {
+            "grid:audio_delay_320ms": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 1,
+              "measured": 8,
+              "raw_localized": 0,
+              "rows": 8
+            },
+            "grid:brightness_liveportrait": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 0,
+              "measured": 8,
+              "raw_localized": 0,
+              "rows": 8
+            },
+            "grid:brightness_musetalk": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 0,
+              "measured": 8,
+              "raw_localized": 0,
+              "rows": 8
+            },
+            "grid:genuine_frame_retime": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 0,
+              "measured": 8,
+              "raw_localized": 0,
+              "rows": 8
+            },
+            "grid:original": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 1,
+              "measured": 8,
+              "raw_localized": 0,
+              "rows": 8
+            },
+            "grid:resample_liveportrait": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 0,
+              "measured": 8,
+              "raw_localized": 0,
+              "rows": 8
+            },
+            "grid:resample_musetalk": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 0,
+              "measured": 8,
+              "raw_localized": 0,
+              "rows": 8
+            }
+          },
+          "wrong_positive_ranges": 0
+        },
+        "conditioned_chroma": {
+          "aligned_localized": 0,
+          "auc_among_measured": null,
+          "coverage": {
+            "grid_measured": 56,
+            "grid_total": 56
+          },
+          "criteria": {
+            "coverage": false,
+            "localized": false,
+            "ordinary": true,
+            "over_luma": false
+          },
+          "essential_ordinary_flags": 0,
+          "localized_groups": 0,
+          "ordinary_flags": 1,
+          "roles": {
+            "grid:audio_delay_320ms": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 0,
+              "measured": 8,
+              "raw_localized": 0,
+              "rows": 8
+            },
+            "grid:brightness_liveportrait": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 0,
+              "measured": 8,
+              "raw_localized": 0,
+              "rows": 8
+            },
+            "grid:brightness_musetalk": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 0,
+              "measured": 8,
+              "raw_localized": 0,
+              "rows": 8
+            },
+            "grid:genuine_frame_retime": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 0,
+              "measured": 8,
+              "raw_localized": 0,
+              "rows": 8
+            },
+            "grid:original": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 0,
+              "measured": 8,
+              "raw_localized": 0,
+              "rows": 8
+            },
+            "grid:resample_liveportrait": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 1,
+              "measured": 8,
+              "raw_localized": 0,
+              "rows": 8
+            },
+            "grid:resample_musetalk": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 0,
+              "measured": 8,
+              "raw_localized": 0,
+              "rows": 8
+            }
+          },
+          "wrong_positive_ranges": 0
+        },
+        "luma_control": {
+          "aligned_localized": 0,
+          "auc_among_measured": null,
+          "coverage": {
+            "grid_measured": 56,
+            "grid_total": 56
+          },
+          "criteria": {
+            "coverage": false,
+            "localized": false,
+            "ordinary": true
+          },
+          "essential_ordinary_flags": 0,
+          "localized_groups": 0,
+          "ordinary_flags": 1,
+          "roles": {
+            "grid:audio_delay_320ms": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 0,
+              "measured": 8,
+              "raw_localized": 0,
+              "rows": 8
+            },
+            "grid:brightness_liveportrait": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 0,
+              "measured": 8,
+              "raw_localized": 0,
+              "rows": 8
+            },
+            "grid:brightness_musetalk": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 0,
+              "measured": 8,
+              "raw_localized": 0,
+              "rows": 8
+            },
+            "grid:genuine_frame_retime": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 0,
+              "measured": 8,
+              "raw_localized": 0,
+              "rows": 8
+            },
+            "grid:original": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 0,
+              "measured": 8,
+              "raw_localized": 0,
+              "rows": 8
+            },
+            "grid:resample_liveportrait": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 1,
+              "measured": 8,
+              "raw_localized": 0,
+              "rows": 8
+            },
+            "grid:resample_musetalk": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 0,
+              "measured": 8,
+              "raw_localized": 0,
+              "rows": 8
+            }
+          },
+          "wrong_positive_ranges": 0
+        }
+      }
+    },
+    "held": {
+      "native_pictures": 8011,
+      "observed_geometry": 8011,
+      "rows": [
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.01692846603691578,
+              "seconds": [
+                "7/25",
+                "19/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.08830702304840088,
+              "seconds": [
+                "24/25",
+                "8/5"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.229557191953063,
+              "seconds": [
+                "58/25",
+                "66/25"
+              ]
+            }
+          },
+          "clip": 9,
+          "edit": null,
+          "family": "codec",
+          "group": 5,
+          "role": "reencode"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.09385845810174942,
+              "seconds": [
+                "9/5",
+                "53/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.10926267504692078,
+              "seconds": [
+                "51/25",
+                "59/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.16284362971782684,
+              "seconds": [
+                "19/25",
+                "39/25"
+              ]
+            }
+          },
+          "clip": 9,
+          "edit": null,
+          "family": "codec",
+          "group": 5,
+          "role": "hard_cut"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.06360681354999542,
+              "seconds": [
+                "12/5",
+                "68/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.13846778869628906,
+              "seconds": [
+                "16/25",
+                "28/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.2323586456477642,
+              "seconds": [
+                "12/25",
+                "32/25"
+              ]
+            }
+          },
+          "clip": 10,
+          "edit": null,
+          "family": "codec",
+          "group": 6,
+          "role": "reencode"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.01837250217795372,
+              "seconds": [
+                "2/5",
+                "18/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.06234663724899292,
+              "seconds": [
+                "11/25",
+                "19/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "clip": 10,
+          "edit": null,
+          "family": "codec",
+          "group": 6,
+          "role": "hard_cut"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.03748215734958649,
+              "seconds": [
+                "13/25",
+                "33/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.12075966596603394,
+              "seconds": [
+                "12/25",
+                "32/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.18679118156433105,
+              "seconds": [
+                "26/25",
+                "34/25"
+              ]
+            }
+          },
+          "clip": 11,
+          "edit": null,
+          "family": "codec",
+          "group": 7,
+          "role": "reencode"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.08172935247421265,
+              "seconds": [
+                "2/5",
+                "26/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.16797345876693726,
+              "seconds": [
+                "42/25",
+                "62/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.26115545630455017,
+              "seconds": [
+                "46/25",
+                "62/25"
+              ]
+            }
+          },
+          "clip": 12,
+          "edit": null,
+          "family": "codec",
+          "group": 8,
+          "role": "reencode"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.07868094742298126,
+              "seconds": [
+                "11/25",
+                "27/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.1210426390171051,
+              "seconds": [
+                "2/5",
+                "22/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.1633002758026123,
+              "seconds": [
+                "3/5",
+                "7/5"
+              ]
+            }
+          },
+          "clip": 13,
+          "edit": null,
+          "family": "codec",
+          "group": 9,
+          "role": "reencode"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.03882545232772827,
+              "seconds": [
+                "44/25",
+                "12/5"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.09690368175506592,
+              "seconds": [
+                "8/5",
+                "48/25"
+              ]
+            }
+          },
+          "clip": 14,
+          "edit": null,
+          "family": "codec",
+          "group": 10,
+          "role": "reencode"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.0537696685642004,
+              "seconds": [
+                "38/25",
+                "46/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.09638059139251709,
+              "seconds": [
+                "22/25",
+                "42/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "clip": 15,
+          "edit": null,
+          "family": "codec",
+          "group": 11,
+          "role": "reencode"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.04380427859723568,
+              "seconds": [
+                "38/25",
+                "2"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.0737316906452179,
+              "seconds": [
+                "51/25",
+                "63/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.14639731124043465,
+              "seconds": [
+                "7/5",
+                "51/25"
+              ]
+            }
+          },
+          "clip": 16,
+          "edit": null,
+          "family": "codec",
+          "group": 12,
+          "role": "reencode"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.05916466540656984,
+              "seconds": [
+                "52/25",
+                "12/5"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.13973075151443481,
+              "seconds": [
+                "6/25",
+                "22/25"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.3287479877471924,
+              "seconds": [
+                "4/5",
+                "36/25"
+              ]
+            }
+          },
+          "clip": 17,
+          "edit": null,
+          "family": "codec",
+          "group": 13,
+          "role": "hard_cut"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.044504595920443535,
+              "seconds": [
+                "1/5",
+                "13/25"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.12083590030670166,
+              "seconds": [
+                "17/25",
+                "1"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.12403863668441772,
+              "seconds": [
+                "62/25",
+                "14/5"
+              ]
+            }
+          },
+          "clip": 18,
+          "edit": null,
+          "family": "codec",
+          "group": 14,
+          "role": "hard_cut"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.10409998893737793,
+              "seconds": [
+                "3003/4000",
+                "17017/12000"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.4837048649787903,
+              "seconds": [
+                "19019/24000",
+                "7007/4800"
+              ]
+            }
+          },
+          "clip": 19,
+          "edit": null,
+          "family": "lombard",
+          "group": 15,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.15631788969039917,
+              "seconds": [
+                "19019/24000",
+                "7007/4800"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.4609755277633667,
+              "seconds": [
+                "19019/24000",
+                "7007/4800"
+              ]
+            }
+          },
+          "clip": 19,
+          "edit": null,
+          "family": "lombard",
+          "group": 15,
+          "role": "resample_ordinary"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.12730050086975098,
+              "seconds": [
+                "1001/1500",
+                "1001/750"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.3652852475643158,
+              "seconds": [
+                "3003/4000",
+                "17017/12000"
+              ]
+            }
+          },
+          "clip": 19,
+          "edit": null,
+          "family": "lombard",
+          "group": 15,
+          "role": "delayed_pixels_ordinary"
+        },
+        {
+          "aligned": true,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.0858880877494812,
+              "seconds": [
+                "3003/4000",
+                "17017/12000"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.2669691741466522,
+              "seconds": [
+                "19019/24000",
+                "7007/4800"
+              ]
+            }
+          },
+          "clip": 19,
+          "edit": [
+            "1001/1500",
+            "1001/750"
+          ],
+          "family": "lombard",
+          "group": 15,
+          "role": "source_time_neural"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "luma_control": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "clip": 20,
+          "edit": null,
+          "family": "lombard",
+          "group": 15,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "luma_control": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "clip": 20,
+          "edit": null,
+          "family": "lombard",
+          "group": 15,
+          "role": "resample_ordinary"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "luma_control": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "clip": 20,
+          "edit": null,
+          "family": "lombard",
+          "group": 15,
+          "role": "delayed_pixels_ordinary"
+        },
+        {
+          "aligned": true,
+          "arms": {
+            "color_coupling": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "luma_control": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "clip": 20,
+          "edit": [
+            "7007/12000",
+            "1001/800"
+          ],
+          "family": "lombard",
+          "group": 15,
+          "role": "source_time_neural"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.03959796158596873,
+              "seconds": [
+                "78/145",
+                "126/145"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.14398452639579773,
+              "seconds": [
+                "18/29",
+                "138/145"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.4561430811882019,
+              "seconds": [
+                "156/145",
+                "204/145"
+              ]
+            }
+          },
+          "clip": 21,
+          "edit": null,
+          "family": "lombard",
+          "group": 16,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.015309171751141548,
+              "seconds": [
+                "234/145",
+                "354/145"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.09312126040458679,
+              "seconds": [
+                "342/145",
+                "78/29"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.26752936840057373,
+              "seconds": [
+                "222/145",
+                "294/145"
+              ]
+            }
+          },
+          "clip": 21,
+          "edit": null,
+          "family": "lombard",
+          "group": 16,
+          "role": "resample_ordinary"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.015309171751141548,
+              "seconds": [
+                "234/145",
+                "354/145"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.09312126040458679,
+              "seconds": [
+                "342/145",
+                "78/29"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.26752936840057373,
+              "seconds": [
+                "222/145",
+                "294/145"
+              ]
+            }
+          },
+          "clip": 21,
+          "edit": null,
+          "family": "lombard",
+          "group": 16,
+          "role": "delayed_pixels_ordinary"
+        },
+        {
+          "aligned": true,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.02864699624478817,
+              "seconds": [
+                "78/145",
+                "126/145"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.17734971642494202,
+              "seconds": [
+                "42/145",
+                "138/145"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.3981729745864868,
+              "seconds": [
+                "156/145",
+                "204/145"
+              ]
+            }
+          },
+          "clip": 21,
+          "edit": [
+            "48/145",
+            "144/145"
+          ],
+          "family": "lombard",
+          "group": 16,
+          "role": "source_time_neural"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "luma_control": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "clip": 22,
+          "edit": null,
+          "family": "lombard",
+          "group": 17,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.07924270629882812,
+              "seconds": [
+                "288/289",
+                "432/289"
+              ]
+            }
+          },
+          "clip": 22,
+          "edit": null,
+          "family": "lombard",
+          "group": 17,
+          "role": "resample_ordinary"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "luma_control": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "clip": 22,
+          "edit": null,
+          "family": "lombard",
+          "group": 17,
+          "role": "delayed_pixels_ordinary"
+        },
+        {
+          "aligned": true,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "luma_control": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "clip": 22,
+          "edit": [
+            "192/289",
+            "384/289"
+          ],
+          "family": "lombard",
+          "group": 17,
+          "role": "source_time_neural"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "luma_control": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "clip": 23,
+          "edit": null,
+          "family": "lombard",
+          "group": 17,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.022941588424146175,
+              "seconds": [
+                "216/287",
+                "360/287"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.10004305839538574,
+              "seconds": [
+                "144/287",
+                "288/287"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.11313273012638092,
+              "seconds": [
+                "24/41",
+                "312/287"
+              ]
+            }
+          },
+          "clip": 23,
+          "edit": null,
+          "family": "lombard",
+          "group": 17,
+          "role": "resample_ordinary"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.0733000636100769,
+              "seconds": [
+                "216/287",
+                "360/287"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "clip": 23,
+          "edit": null,
+          "family": "lombard",
+          "group": 17,
+          "role": "delayed_pixels_ordinary"
+        },
+        {
+          "aligned": true,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "luma_control": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "clip": 23,
+          "edit": [
+            "216/287",
+            "408/287"
+          ],
+          "family": "lombard",
+          "group": 17,
+          "role": "source_time_neural"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.011028132401406765,
+              "seconds": [
+                "576/287",
+                "96/41"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.08740854263305664,
+              "seconds": [
+                "132/287",
+                "324/287"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.20311419665813446,
+              "seconds": [
+                "324/287",
+                "60/41"
+              ]
+            }
+          },
+          "clip": 24,
+          "edit": null,
+          "family": "lombard",
+          "group": 18,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.026191889308393,
+              "seconds": [
+                "300/287",
+                "396/287"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.1314288079738617,
+              "seconds": [
+                "132/287",
+                "372/287"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.059719234704971313,
+              "seconds": [
+                "36/41",
+                "348/287"
+              ]
+            }
+          },
+          "clip": 24,
+          "edit": null,
+          "family": "lombard",
+          "group": 18,
+          "role": "resample_ordinary"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.015541965141892433,
+              "seconds": [
+                "432/287",
+                "96/41"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "luma_control": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "clip": 24,
+          "edit": null,
+          "family": "lombard",
+          "group": 18,
+          "role": "delayed_pixels_ordinary"
+        },
+        {
+          "aligned": true,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.011028132401406765,
+              "seconds": [
+                "576/287",
+                "96/41"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.0674990713596344,
+              "seconds": [
+                "96/287",
+                "192/287"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "clip": 24,
+          "edit": [
+            "204/287",
+            "396/287"
+          ],
+          "family": "lombard",
+          "group": 18,
+          "role": "source_time_neural"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.22267252206802368,
+              "seconds": [
+                "540/287",
+                "684/287"
+              ]
+            }
+          },
+          "clip": 25,
+          "edit": null,
+          "family": "lombard",
+          "group": 18,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.22267252206802368,
+              "seconds": [
+                "540/287",
+                "684/287"
+              ]
+            }
+          },
+          "clip": 25,
+          "edit": null,
+          "family": "lombard",
+          "group": 18,
+          "role": "resample_ordinary"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.22267252206802368,
+              "seconds": [
+                "540/287",
+                "684/287"
+              ]
+            }
+          },
+          "clip": 25,
+          "edit": null,
+          "family": "lombard",
+          "group": 18,
+          "role": "delayed_pixels_ordinary"
+        },
+        {
+          "aligned": true,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.22267252206802368,
+              "seconds": [
+                "540/287",
+                "684/287"
+              ]
+            }
+          },
+          "clip": 25,
+          "edit": [
+            "180/287",
+            "372/287"
+          ],
+          "family": "lombard",
+          "group": 18,
+          "role": "source_time_neural"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.05171377118676901,
+              "seconds": [
+                "120/289",
+                "216/289"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.07408928871154785,
+              "seconds": [
+                "636/289",
+                "732/289"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.33100512623786926,
+              "seconds": [
+                "120/289",
+                "216/289"
+              ]
+            }
+          },
+          "clip": 26,
+          "edit": null,
+          "family": "lombard",
+          "group": 19,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.029717279598116875,
+              "seconds": [
+                "264/289",
+                "360/289"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.07408928871154785,
+              "seconds": [
+                "636/289",
+                "732/289"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.4062094986438751,
+              "seconds": [
+                "120/289",
+                "216/289"
+              ]
+            }
+          },
+          "clip": 26,
+          "edit": null,
+          "family": "lombard",
+          "group": 19,
+          "role": "resample_ordinary"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.0854807198047638,
+              "seconds": [
+                "180/289",
+                "372/289"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.08056119084358215,
+              "seconds": [
+                "252/289",
+                "492/289"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "clip": 26,
+          "edit": null,
+          "family": "lombard",
+          "group": 19,
+          "role": "delayed_pixels_ordinary"
+        },
+        {
+          "aligned": true,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.048907820135354996,
+              "seconds": [
+                "144/289",
+                "384/289"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.07408928871154785,
+              "seconds": [
+                "636/289",
+                "732/289"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.24952280521392822,
+              "seconds": [
+                "120/289",
+                "216/289"
+              ]
+            }
+          },
+          "clip": 26,
+          "edit": [
+            "228/289",
+            "420/289"
+          ],
+          "family": "lombard",
+          "group": 19,
+          "role": "source_time_neural"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.07785215601325035,
+              "seconds": [
+                "252/289",
+                "348/289"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.07627612352371216,
+              "seconds": [
+                "432/289",
+                "624/289"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "clip": 27,
+          "edit": null,
+          "family": "lombard",
+          "group": 19,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.06701534986495972,
+              "seconds": [
+                "432/289",
+                "624/289"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "clip": 27,
+          "edit": null,
+          "family": "lombard",
+          "group": 19,
+          "role": "resample_ordinary"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.07864338159561157,
+              "seconds": [
+                "432/289",
+                "624/289"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "clip": 27,
+          "edit": null,
+          "family": "lombard",
+          "group": 19,
+          "role": "delayed_pixels_ordinary"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.10971051454544067,
+              "seconds": [
+                "312/289",
+                "24/17"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "clip": 27,
+          "edit": [
+            "216/289",
+            "24/17"
+          ],
+          "family": "lombard",
+          "group": 19,
+          "role": "source_time_neural"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.032962591387331486,
+              "seconds": [
+                "1001/3000",
+                "7007/6000"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.02878791093826294,
+              "seconds": [
+                "19019/24000",
+                "31031/24000"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.0726785957813263,
+              "seconds": [
+                "3003/4000",
+                "17017/12000"
+              ]
+            }
+          },
+          "clip": 28,
+          "edit": null,
+          "family": "lombard",
+          "group": 20,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.036340903490781784,
+              "seconds": [
+                "11011/24000",
+                "31031/24000"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.14976727962493896,
+              "seconds": [
+                "1001/1200",
+                "1001/600"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.057158708572387695,
+              "seconds": [
+                "11011/24000",
+                "31031/24000"
+              ]
+            }
+          },
+          "clip": 28,
+          "edit": null,
+          "family": "lombard",
+          "group": 20,
+          "role": "resample_ordinary"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "luma_control": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "clip": 28,
+          "edit": null,
+          "family": "lombard",
+          "group": 20,
+          "role": "delayed_pixels_ordinary"
+        },
+        {
+          "aligned": true,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.01969665288925171,
+              "seconds": [
+                "1001/1200",
+                "1001/750"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.029485762119293213,
+              "seconds": [
+                "23023/24000",
+                "31031/24000"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.051693499088287354,
+              "seconds": [
+                "19019/24000",
+                "31031/24000"
+              ]
+            }
+          },
+          "clip": 28,
+          "edit": [
+            "17017/24000",
+            "11011/8000"
+          ],
+          "family": "lombard",
+          "group": 20,
+          "role": "source_time_neural"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.05891995504498482,
+              "seconds": [
+                "37037/24000",
+                "53053/24000"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.03614214062690735,
+              "seconds": [
+                "9009/8000",
+                "7007/4800"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "clip": 29,
+          "edit": null,
+          "family": "lombard",
+          "group": 20,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.05891995504498482,
+              "seconds": [
+                "37037/24000",
+                "53053/24000"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.0758257806301117,
+              "seconds": [
+                "13013/24000",
+                "11011/8000"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.061885491013526917,
+              "seconds": [
+                "7007/24000",
+                "1001/1600"
+              ]
+            }
+          },
+          "clip": 29,
+          "edit": null,
+          "family": "lombard",
+          "group": 20,
+          "role": "resample_ordinary"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.05891995504498482,
+              "seconds": [
+                "37037/24000",
+                "53053/24000"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "luma_control": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "clip": 29,
+          "edit": null,
+          "family": "lombard",
+          "group": 20,
+          "role": "delayed_pixels_ordinary"
+        },
+        {
+          "aligned": true,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.05891995504498482,
+              "seconds": [
+                "37037/24000",
+                "53053/24000"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.016805753111839294,
+              "seconds": [
+                "7007/6000",
+                "3003/2000"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.08075371384620667,
+              "seconds": [
+                "1001/4800",
+                "13013/24000"
+              ]
+            }
+          },
+          "clip": 29,
+          "edit": [
+            "11011/24000",
+            "9009/8000"
+          ],
+          "family": "lombard",
+          "group": 20,
+          "role": "source_time_neural"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.03130835620686412,
+              "seconds": [
+                "5/8",
+                "35/24"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.09348326921463013,
+              "seconds": [
+                "2/3",
+                "3/2"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.09876558184623718,
+              "seconds": [
+                "11/24",
+                "19/24"
+              ]
+            }
+          },
+          "clip": 30,
+          "edit": null,
+          "family": "fresh",
+          "group": 21,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.038575172424316406,
+              "seconds": [
+                "13/24",
+                "25/24"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.09814724326133728,
+              "seconds": [
+                "5/24",
+                "25/24"
+              ]
+            }
+          },
+          "clip": 31,
+          "edit": null,
+          "family": "fresh",
+          "group": 21,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "luma_control": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "clip": 32,
+          "edit": null,
+          "family": "fresh",
+          "group": 21,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.014249742031097412,
+              "seconds": [
+                "29/12",
+                "11/4"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.09152424335479736,
+              "seconds": [
+                "13/24",
+                "7/8"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.24775981903076172,
+              "seconds": [
+                "23/12",
+                "9/4"
+              ]
+            }
+          },
+          "clip": 33,
+          "edit": null,
+          "family": "fresh",
+          "group": 21,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.004507081583142281,
+              "seconds": [
+                "41/24",
+                "49/24"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.03218740224838257,
+              "seconds": [
+                "1/2",
+                "4/3"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.13220936059951782,
+              "seconds": [
+                "35/24",
+                "17/8"
+              ]
+            }
+          },
+          "clip": 34,
+          "edit": null,
+          "family": "fresh",
+          "group": 22,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.00837567017879337,
+              "seconds": [
+                "9/8",
+                "13/8"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.10408294200897217,
+              "seconds": [
+                "1/3",
+                "1"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.1831827312707901,
+              "seconds": [
+                "5/24",
+                "17/24"
+              ]
+            }
+          },
+          "clip": 35,
+          "edit": null,
+          "family": "fresh",
+          "group": 22,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.07265360746532679,
+              "seconds": [
+                "5/4",
+                "7/4"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.11916354298591614,
+              "seconds": [
+                "25/24",
+                "11/8"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.20953112840652466,
+              "seconds": [
+                "23/24",
+                "13/8"
+              ]
+            }
+          },
+          "clip": 36,
+          "edit": null,
+          "family": "fresh",
+          "group": 22,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.02243299363180995,
+              "seconds": [
+                "5/4",
+                "23/12"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.12961116433143616,
+              "seconds": [
+                "11/12",
+                "5/4"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.25042644143104553,
+              "seconds": [
+                "37/24",
+                "49/24"
+              ]
+            }
+          },
+          "clip": 37,
+          "edit": null,
+          "family": "fresh",
+          "group": 22,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "luma_control": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "clip": 38,
+          "edit": null,
+          "family": "fresh",
+          "group": 23,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "luma_control": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "clip": 39,
+          "edit": null,
+          "family": "fresh",
+          "group": 23,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "luma_control": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "clip": 40,
+          "edit": null,
+          "family": "fresh",
+          "group": 23,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "luma_control": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "clip": 41,
+          "edit": null,
+          "family": "fresh",
+          "group": 23,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.022354048676788807,
+              "seconds": [
+                "7/6",
+                "5/3"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.040989458560943604,
+              "seconds": [
+                "4/3",
+                "5/3"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "clip": 42,
+          "edit": null,
+          "family": "fresh",
+          "group": 24,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.027261490002274513,
+              "seconds": [
+                "7/8",
+                "11/8"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.044595032930374146,
+              "seconds": [
+                "1",
+                "5/3"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.017574161291122437,
+              "seconds": [
+                "1/2",
+                "7/6"
+              ]
+            }
+          },
+          "clip": 43,
+          "edit": null,
+          "family": "fresh",
+          "group": 24,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.020489757880568504,
+              "seconds": [
+                "5/3",
+                "2"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.14297640323638916,
+              "seconds": [
+                "13/24",
+                "29/24"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.07099568843841553,
+              "seconds": [
+                "7/8",
+                "29/24"
+              ]
+            }
+          },
+          "clip": 44,
+          "edit": null,
+          "family": "fresh",
+          "group": 24,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.05549612152390182,
+              "seconds": [
+                "31/24",
+                "13/8"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.10845792293548584,
+              "seconds": [
+                "1/2",
+                "1"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.06443554162979126,
+              "seconds": [
+                "13/24",
+                "29/24"
+              ]
+            }
+          },
+          "clip": 45,
+          "edit": null,
+          "family": "fresh",
+          "group": 24,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.0033766585402190685,
+              "seconds": [
+                "348/289",
+                "492/289"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.3044491708278656,
+              "seconds": [
+                "108/289",
+                "12/17"
+              ]
+            }
+          },
+          "clip": 46,
+          "edit": null,
+          "family": "fresh",
+          "group": 25,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "luma_control": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "clip": 47,
+          "edit": null,
+          "family": "fresh",
+          "group": 25,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.03655286133289337,
+              "seconds": [
+                "35/24",
+                "47/24"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "luma_control": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "clip": 48,
+          "edit": null,
+          "family": "fresh",
+          "group": 25,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "luma_control": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "clip": 49,
+          "edit": null,
+          "family": "fresh",
+          "group": 25,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.003324761986732483,
+              "seconds": [
+                "29/24",
+                "49/24"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.041390180587768555,
+              "seconds": [
+                "1",
+                "4/3"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.21646443009376526,
+              "seconds": [
+                "7/6",
+                "2"
+              ]
+            }
+          },
+          "clip": 50,
+          "edit": null,
+          "family": "fresh",
+          "group": 26,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.022799422964453697,
+              "seconds": [
+                "31031/24000",
+                "13013/8000"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.07262235879898071,
+              "seconds": [
+                "1001/800",
+                "7007/4000"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.41287297010421753,
+              "seconds": [
+                "13013/24000",
+                "7007/8000"
+              ]
+            }
+          },
+          "clip": 51,
+          "edit": null,
+          "family": "fresh",
+          "group": 26,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.02127236407250166,
+              "seconds": [
+                "1001/4000",
+                "3003/4000"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.08884546160697937,
+              "seconds": [
+                "11011/12000",
+                "1001/800"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.30696025490760803,
+              "seconds": [
+                "7007/8000",
+                "29029/24000"
+              ]
+            }
+          },
+          "clip": 52,
+          "edit": null,
+          "family": "fresh",
+          "group": 26,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.03927730768918991,
+              "seconds": [
+                "41/24",
+                "49/24"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.06306540966033936,
+              "seconds": [
+                "1",
+                "11/6"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.09446865320205688,
+              "seconds": [
+                "3/2",
+                "2"
+              ]
+            }
+          },
+          "clip": 53,
+          "edit": null,
+          "family": "fresh",
+          "group": 26,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.06149487756192684,
+              "seconds": [
+                "11011/8000",
+                "3003/1600"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.024342268705368042,
+              "seconds": [
+                "19019/24000",
+                "7007/4800"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.21548514068126678,
+              "seconds": [
+                "1001/2000",
+                "1001/1000"
+              ]
+            }
+          },
+          "clip": 54,
+          "edit": null,
+          "family": "fresh",
+          "group": 27,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.017126579768955708,
+              "seconds": [
+                "13013/6000",
+                "1001/400"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.05411958694458008,
+              "seconds": [
+                "7007/8000",
+                "11011/8000"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.026263713836669922,
+              "seconds": [
+                "31031/24000",
+                "17017/8000"
+              ]
+            }
+          },
+          "clip": 55,
+          "edit": null,
+          "family": "fresh",
+          "group": 27,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.03731776028871536,
+              "seconds": [
+                "1001/600",
+                "7007/3000"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.07316821813583374,
+              "seconds": [
+                "1001/750",
+                "13013/6000"
+              ]
+            }
+          },
+          "clip": 56,
+          "edit": null,
+          "family": "fresh",
+          "group": 27,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.00714773777872324,
+              "seconds": [
+                "13013/6000",
+                "1001/400"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.05741885304450989,
+              "seconds": [
+                "61061/24000",
+                "23023/8000"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.10600613057613373,
+              "seconds": [
+                "13013/6000",
+                "1001/375"
+              ]
+            }
+          },
+          "clip": 57,
+          "edit": null,
+          "family": "fresh",
+          "group": 27,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "luma_control": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "clip": 58,
+          "edit": null,
+          "family": "fresh",
+          "group": 28,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "luma_control": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "clip": 59,
+          "edit": null,
+          "family": "fresh",
+          "group": 28,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "luma_control": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "clip": 60,
+          "edit": null,
+          "family": "fresh",
+          "group": 28,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "luma_control": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "clip": 61,
+          "edit": null,
+          "family": "fresh",
+          "group": 28,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.10175576992332935,
+              "seconds": [
+                "576/289",
+                "672/289"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.15339407324790955,
+              "seconds": [
+                "552/289",
+                "648/289"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.2719178944826126,
+              "seconds": [
+                "528/289",
+                "672/289"
+              ]
+            }
+          },
+          "clip": 62,
+          "edit": null,
+          "family": "fresh",
+          "group": 29,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "luma_control": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "clip": 63,
+          "edit": null,
+          "family": "fresh",
+          "group": 29,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.01919281459413469,
+              "seconds": [
+                "24/17",
+                "648/289"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.017071187496185303,
+              "seconds": [
+                "444/289",
+                "540/289"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.15331828594207764,
+              "seconds": [
+                "300/289",
+                "396/289"
+              ]
+            }
+          },
+          "clip": 64,
+          "edit": null,
+          "family": "fresh",
+          "group": 29,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.026022936450317502,
+              "seconds": [
+                "5/24",
+                "25/24"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.03268587589263916,
+              "seconds": [
+                "17/24",
+                "37/24"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.34164655953645706,
+              "seconds": [
+                "17/24",
+                "25/24"
+              ]
+            }
+          },
+          "clip": 65,
+          "edit": null,
+          "family": "fresh",
+          "group": 29,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.05834054946899414,
+              "seconds": [
+                "1001/2400",
+                "3003/4000"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.04088914394378662,
+              "seconds": [
+                "3003/2000",
+                "11011/6000"
+              ]
+            }
+          },
+          "clip": 66,
+          "edit": null,
+          "family": "fresh",
+          "group": 30,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.043746158480644226,
+              "seconds": [
+                "288/287",
+                "384/287"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.06386643648147583,
+              "seconds": [
+                "12/41",
+                "180/287"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.19379088282585144,
+              "seconds": [
+                "468/287",
+                "564/287"
+              ]
+            }
+          },
+          "clip": 67,
+          "edit": null,
+          "family": "fresh",
+          "group": 30,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.04586769640445709,
+              "seconds": [
+                "384/287",
+                "528/287"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.15272733569145203,
+              "seconds": [
+                "360/287",
+                "552/287"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.30012181401252747,
+              "seconds": [
+                "312/287",
+                "72/41"
+              ]
+            }
+          },
+          "clip": 68,
+          "edit": null,
+          "family": "fresh",
+          "group": 30,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.049790771678090096,
+              "seconds": [
+                "7007/6000",
+                "1001/600"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.07618546485900879,
+              "seconds": [
+                "7007/4000",
+                "29029/12000"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.15488819777965546,
+              "seconds": [
+                "1001/1000",
+                "1001/600"
+              ]
+            }
+          },
+          "clip": 69,
+          "edit": null,
+          "family": "fresh",
+          "group": 30,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.03875131672248244,
+              "seconds": [
+                "13/8",
+                "47/24"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.06667467951774597,
+              "seconds": [
+                "13/24",
+                "7/8"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.1353643536567688,
+              "seconds": [
+                "11/12",
+                "7/4"
+              ]
+            }
+          },
+          "clip": 70,
+          "edit": null,
+          "family": "fresh",
+          "group": 31,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.048256564885377884,
+              "seconds": [
+                "9/4",
+                "31/12"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.038687124848365784,
+              "seconds": [
+                "11/6",
+                "5/2"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.10898846387863159,
+              "seconds": [
+                "4/3",
+                "2"
+              ]
+            }
+          },
+          "clip": 71,
+          "edit": null,
+          "family": "fresh",
+          "group": 31,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.08546045701950788,
+              "seconds": [
+                "42/143",
+                "114/143"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.14595401287078857,
+              "seconds": [
+                "90/143",
+                "186/143"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.12728893756866455,
+              "seconds": [
+                "102/143",
+                "150/143"
+              ]
+            }
+          },
+          "clip": 72,
+          "edit": null,
+          "family": "fresh",
+          "group": 31,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.026363381184637547,
+              "seconds": [
+                "186/143",
+                "258/143"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.10386085510253906,
+              "seconds": [
+                "18/11",
+                "282/143"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.15115195512771606,
+              "seconds": [
+                "6/13",
+                "138/143"
+              ]
+            }
+          },
+          "clip": 73,
+          "edit": null,
+          "family": "fresh",
+          "group": 31,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.04131897748447955,
+              "seconds": [
+                "11011/24000",
+                "19019/24000"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.07332034409046173,
+              "seconds": [
+                "53053/24000",
+                "13013/4800"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.4995614290237427,
+              "seconds": [
+                "7007/12000",
+                "11011/12000"
+              ]
+            }
+          },
+          "clip": 74,
+          "edit": null,
+          "family": "fresh",
+          "group": 32,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.0374054757412523,
+              "seconds": [
+                "7007/6000",
+                "3003/2000"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.061429738998413086,
+              "seconds": [
+                "3003/8000",
+                "29029/24000"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.6752089262008667,
+              "seconds": [
+                "1001/2000",
+                "1001/1000"
+              ]
+            }
+          },
+          "clip": 75,
+          "edit": null,
+          "family": "fresh",
+          "group": 32,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.05038551054894924,
+              "seconds": [
+                "37037/24000",
+                "3003/1600"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.08613726496696472,
+              "seconds": [
+                "1001/2400",
+                "3003/4000"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.3693792074918747,
+              "seconds": [
+                "11011/24000",
+                "19019/24000"
+              ]
+            }
+          },
+          "clip": 76,
+          "edit": null,
+          "family": "fresh",
+          "group": 32,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.04971160413697362,
+              "seconds": [
+                "1001/1000",
+                "3003/2000"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.06388647854328156,
+              "seconds": [
+                "31031/24000",
+                "13013/8000"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.2836249768733978,
+              "seconds": [
+                "3003/8000",
+                "7007/8000"
+              ]
+            }
+          },
+          "clip": 77,
+          "edit": null,
+          "family": "fresh",
+          "group": 32,
+          "role": "original"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.06726053357124329,
+              "seconds": [
+                "3/4",
+                "13/12"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.3584669306874275,
+              "seconds": [
+                "5/24",
+                "13/24"
+              ]
+            }
+          },
+          "clip": 30,
+          "edit": null,
+          "family": "new_ordinary",
+          "group": 21,
+          "role": "reencode"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.032649809028953314,
+              "seconds": [
+                "5/8",
+                "35/24"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.08843839168548584,
+              "seconds": [
+                "3/8",
+                "25/24"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.09876558184623718,
+              "seconds": [
+                "11/24",
+                "19/24"
+              ]
+            }
+          },
+          "clip": 30,
+          "edit": null,
+          "family": "new_ordinary",
+          "group": 21,
+          "ordinary_changed_pictures": 16,
+          "role": "local_chroma_denoise"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.011171214748173952,
+              "seconds": [
+                "4/3",
+                "5/3"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.09852580726146698,
+              "seconds": [
+                "9/8",
+                "47/24"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.24899828433990479,
+              "seconds": [
+                "23/12",
+                "9/4"
+              ]
+            }
+          },
+          "clip": 34,
+          "edit": null,
+          "family": "new_ordinary",
+          "group": 22,
+          "role": "reencode"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.004507081583142281,
+              "seconds": [
+                "41/24",
+                "49/24"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.05357196927070618,
+              "seconds": [
+                "1/2",
+                "4/3"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.13143259286880493,
+              "seconds": [
+                "35/24",
+                "17/8"
+              ]
+            }
+          },
+          "clip": 34,
+          "edit": null,
+          "family": "new_ordinary",
+          "group": 22,
+          "ordinary_changed_pictures": 16,
+          "role": "local_chroma_denoise"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "luma_control": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "clip": 38,
+          "edit": null,
+          "family": "new_ordinary",
+          "group": 23,
+          "role": "reencode"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "luma_control": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "clip": 38,
+          "edit": null,
+          "family": "new_ordinary",
+          "group": 23,
+          "ordinary_changed_pictures": 16,
+          "role": "local_chroma_denoise"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.012133251875638962,
+              "seconds": [
+                "1",
+                "5/3"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.010545551776885986,
+              "seconds": [
+                "23/24",
+                "13/8"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "clip": 42,
+          "edit": null,
+          "family": "new_ordinary",
+          "group": 24,
+          "role": "reencode"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.019815586507320404,
+              "seconds": [
+                "7/6",
+                "5/3"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.040989458560943604,
+              "seconds": [
+                "4/3",
+                "5/3"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "clip": 42,
+          "edit": null,
+          "family": "new_ordinary",
+          "group": 24,
+          "ordinary_changed_pictures": 16,
+          "role": "local_chroma_denoise"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.06922110915184021,
+              "seconds": [
+                "60/289",
+                "156/289"
+              ]
+            }
+          },
+          "clip": 46,
+          "edit": null,
+          "family": "new_ordinary",
+          "group": 25,
+          "role": "reencode"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.3050525486469269,
+              "seconds": [
+                "108/289",
+                "12/17"
+              ]
+            }
+          },
+          "clip": 46,
+          "edit": null,
+          "family": "new_ordinary",
+          "group": 25,
+          "ordinary_changed_pictures": 16,
+          "role": "local_chroma_denoise"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.028810925781726837,
+              "seconds": [
+                "29/24",
+                "37/24"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.05458223819732666,
+              "seconds": [
+                "7/6",
+                "11/6"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.12391021847724915,
+              "seconds": [
+                "1/2",
+                "1"
+              ]
+            }
+          },
+          "clip": 50,
+          "edit": null,
+          "family": "new_ordinary",
+          "group": 26,
+          "role": "reencode"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.09722200036048889,
+              "seconds": [
+                "1/4",
+                "3/4"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.21646374464035034,
+              "seconds": [
+                "7/6",
+                "2"
+              ]
+            }
+          },
+          "clip": 50,
+          "edit": null,
+          "family": "new_ordinary",
+          "group": 26,
+          "ordinary_changed_pictures": 16,
+          "role": "local_chroma_denoise"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "luma_control": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "clip": 54,
+          "edit": null,
+          "family": "new_ordinary",
+          "group": 27,
+          "role": "reencode"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.03860100265592337,
+              "seconds": [
+                "17017/12000",
+                "23023/12000"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.031798869371414185,
+              "seconds": [
+                "19019/24000",
+                "7007/4800"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.22476892173290253,
+              "seconds": [
+                "1001/2000",
+                "1001/1000"
+              ]
+            }
+          },
+          "clip": 54,
+          "edit": null,
+          "family": "new_ordinary",
+          "group": 27,
+          "ordinary_changed_pictures": 16,
+          "role": "local_chroma_denoise"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "luma_control": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "clip": 58,
+          "edit": null,
+          "family": "new_ordinary",
+          "group": 28,
+          "role": "reencode"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            },
+            "luma_control": {
+              "measured": false,
+              "score": null,
+              "seconds": null
+            }
+          },
+          "clip": 58,
+          "edit": null,
+          "family": "new_ordinary",
+          "group": 28,
+          "ordinary_changed_pictures": 16,
+          "role": "local_chroma_denoise"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.008309730095788836,
+              "seconds": [
+                "420/289",
+                "564/289"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.051271796226501465,
+              "seconds": [
+                "228/289",
+                "324/289"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.25173698365688324,
+              "seconds": [
+                "480/289",
+                "672/289"
+              ]
+            }
+          },
+          "clip": 62,
+          "edit": null,
+          "family": "new_ordinary",
+          "group": 29,
+          "role": "reencode"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.10175576992332935,
+              "seconds": [
+                "576/289",
+                "672/289"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.15339407324790955,
+              "seconds": [
+                "552/289",
+                "648/289"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.2719178944826126,
+              "seconds": [
+                "528/289",
+                "672/289"
+              ]
+            }
+          },
+          "clip": 62,
+          "edit": null,
+          "family": "new_ordinary",
+          "group": 29,
+          "ordinary_changed_pictures": 16,
+          "role": "local_chroma_denoise"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.013231311924755573,
+              "seconds": [
+                "1001/3000",
+                "1001/1500"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.00786009430885315,
+              "seconds": [
+                "1001/2000",
+                "1001/1200"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.011511921882629395,
+              "seconds": [
+                "1001/3000",
+                "1001/1200"
+              ]
+            }
+          },
+          "clip": 66,
+          "edit": null,
+          "family": "new_ordinary",
+          "group": 30,
+          "role": "reencode"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": null,
+              "seconds": null
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.05515599250793457,
+              "seconds": [
+                "1001/2400",
+                "3003/4000"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.0426144003868103,
+              "seconds": [
+                "3003/2000",
+                "11011/6000"
+              ]
+            }
+          },
+          "clip": 66,
+          "edit": null,
+          "family": "new_ordinary",
+          "group": 30,
+          "ordinary_changed_pictures": 16,
+          "role": "local_chroma_denoise"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.0433963667601347,
+              "seconds": [
+                "17/12",
+                "7/4"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.05065816640853882,
+              "seconds": [
+                "11/12",
+                "5/4"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.1675441861152649,
+              "seconds": [
+                "19/24",
+                "13/8"
+              ]
+            }
+          },
+          "clip": 70,
+          "edit": null,
+          "family": "new_ordinary",
+          "group": 31,
+          "role": "reencode"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.03875131672248244,
+              "seconds": [
+                "13/8",
+                "47/24"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.04558566212654114,
+              "seconds": [
+                "7/12",
+                "11/12"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.135081946849823,
+              "seconds": [
+                "11/12",
+                "7/4"
+              ]
+            }
+          },
+          "clip": 70,
+          "edit": null,
+          "family": "new_ordinary",
+          "group": 31,
+          "ordinary_changed_pictures": 16,
+          "role": "local_chroma_denoise"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.04179612174630165,
+              "seconds": [
+                "1001/750",
+                "11011/6000"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.07514378428459167,
+              "seconds": [
+                "13013/24000",
+                "1001/960"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.306504987180233,
+              "seconds": [
+                "1001/3000",
+                "1001/1500"
+              ]
+            }
+          },
+          "clip": 74,
+          "edit": null,
+          "family": "new_ordinary",
+          "group": 32,
+          "role": "reencode"
+        },
+        {
+          "aligned": false,
+          "arms": {
+            "color_coupling": {
+              "measured": true,
+              "score": 0.04131897748447955,
+              "seconds": [
+                "11011/24000",
+                "19019/24000"
+              ]
+            },
+            "conditioned_chroma": {
+              "measured": true,
+              "score": 0.07332034409046173,
+              "seconds": [
+                "53053/24000",
+                "13013/4800"
+              ]
+            },
+            "luma_control": {
+              "measured": true,
+              "score": 0.4995614290237427,
+              "seconds": [
+                "7007/12000",
+                "11011/12000"
+              ]
+            }
+          },
+          "clip": 74,
+          "edit": null,
+          "family": "new_ordinary",
+          "group": 32,
+          "ordinary_changed_pictures": 16,
+          "role": "local_chroma_denoise"
+        }
+      ],
+      "summary": {
+        "color_coupling": {
+          "aligned_localized": 0,
+          "auc_among_measured": "335/891",
+          "coverage": {
+            "aligned_positive_measured": 9,
+            "aligned_positive_total": 10,
+            "codec_measured": 12,
+            "codec_total": 12,
+            "fresh_measured": 36,
+            "fresh_total": 48,
+            "lombard_measured": 30,
+            "lombard_total": 33,
+            "new_ordinary_measured": 21,
+            "new_ordinary_total": 24,
+            "unaligned_neural_measured": 1,
+            "unaligned_neural_total": 1
+          },
+          "criteria": {
+            "coverage": true,
+            "localized": false,
+            "ordinary": true,
+            "over_luma": false
+          },
+          "essential_ordinary_flags": 0,
+          "localized_groups": 0,
+          "ordinary_flags": 0,
+          "roles": {
+            "codec:hard_cut": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 0,
+              "measured": 4,
+              "raw_localized": 0,
+              "rows": 4
+            },
+            "codec:reencode": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 0,
+              "measured": 8,
+              "raw_localized": 0,
+              "rows": 8
+            },
+            "fresh:original": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 0,
+              "measured": 36,
+              "raw_localized": 0,
+              "rows": 48
+            },
+            "lombard:delayed_pixels_ordinary": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 0,
+              "measured": 10,
+              "raw_localized": 0,
+              "rows": 11
+            },
+            "lombard:original": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 0,
+              "measured": 10,
+              "raw_localized": 0,
+              "rows": 11
+            },
+            "lombard:resample_ordinary": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 0,
+              "measured": 10,
+              "raw_localized": 0,
+              "rows": 11
+            },
+            "lombard:source_time_neural": {
+              "aligned": 10,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 3,
+              "flags": 0,
+              "measured": 10,
+              "raw_localized": 3,
+              "rows": 11
+            },
+            "new_ordinary:local_chroma_denoise": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 0,
+              "measured": 10,
+              "raw_localized": 0,
+              "rows": 12
+            },
+            "new_ordinary:reencode": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 0,
+              "measured": 11,
+              "raw_localized": 0,
+              "rows": 12
+            }
+          },
+          "wrong_positive_ranges": 0
+        },
+        "conditioned_chroma": {
+          "aligned_localized": 0,
+          "auc_among_measured": "338/891",
+          "coverage": {
+            "aligned_positive_measured": 9,
+            "aligned_positive_total": 10,
+            "codec_measured": 12,
+            "codec_total": 12,
+            "fresh_measured": 36,
+            "fresh_total": 48,
+            "lombard_measured": 30,
+            "lombard_total": 33,
+            "new_ordinary_measured": 21,
+            "new_ordinary_total": 24,
+            "unaligned_neural_measured": 1,
+            "unaligned_neural_total": 1
+          },
+          "criteria": {
+            "coverage": true,
+            "localized": false,
+            "ordinary": true,
+            "over_luma": false
+          },
+          "essential_ordinary_flags": 0,
+          "localized_groups": 0,
+          "ordinary_flags": 0,
+          "roles": {
+            "codec:hard_cut": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 0,
+              "measured": 4,
+              "raw_localized": 0,
+              "rows": 4
+            },
+            "codec:reencode": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 0,
+              "measured": 8,
+              "raw_localized": 0,
+              "rows": 8
+            },
+            "fresh:original": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 0,
+              "measured": 36,
+              "raw_localized": 0,
+              "rows": 48
+            },
+            "lombard:delayed_pixels_ordinary": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 0,
+              "measured": 10,
+              "raw_localized": 0,
+              "rows": 11
+            },
+            "lombard:original": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 0,
+              "measured": 10,
+              "raw_localized": 0,
+              "rows": 11
+            },
+            "lombard:resample_ordinary": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 0,
+              "measured": 10,
+              "raw_localized": 0,
+              "rows": 11
+            },
+            "lombard:source_time_neural": {
+              "aligned": 10,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 3,
+              "flags": 0,
+              "measured": 10,
+              "raw_localized": 4,
+              "rows": 11
+            },
+            "new_ordinary:local_chroma_denoise": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 0,
+              "measured": 10,
+              "raw_localized": 0,
+              "rows": 12
+            },
+            "new_ordinary:reencode": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 0,
+              "measured": 11,
+              "raw_localized": 0,
+              "rows": 12
+            }
+          },
+          "wrong_positive_ranges": 0
+        },
+        "luma_control": {
+          "aligned_localized": 0,
+          "auc_among_measured": "785/1782",
+          "coverage": {
+            "aligned_positive_measured": 9,
+            "aligned_positive_total": 10,
+            "codec_measured": 12,
+            "codec_total": 12,
+            "fresh_measured": 36,
+            "fresh_total": 48,
+            "lombard_measured": 30,
+            "lombard_total": 33,
+            "new_ordinary_measured": 21,
+            "new_ordinary_total": 24,
+            "unaligned_neural_measured": 1,
+            "unaligned_neural_total": 1
+          },
+          "criteria": {
+            "coverage": true,
+            "localized": false,
+            "ordinary": false
+          },
+          "essential_ordinary_flags": 1,
+          "localized_groups": 0,
+          "ordinary_flags": 1,
+          "roles": {
+            "codec:hard_cut": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 0,
+              "measured": 4,
+              "raw_localized": 0,
+              "rows": 4
+            },
+            "codec:reencode": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 0,
+              "measured": 8,
+              "raw_localized": 0,
+              "rows": 8
+            },
+            "fresh:original": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 1,
+              "measured": 36,
+              "raw_localized": 0,
+              "rows": 48
+            },
+            "lombard:delayed_pixels_ordinary": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 0,
+              "measured": 10,
+              "raw_localized": 0,
+              "rows": 11
+            },
+            "lombard:original": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 0,
+              "measured": 10,
+              "raw_localized": 0,
+              "rows": 11
+            },
+            "lombard:resample_ordinary": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 0,
+              "measured": 10,
+              "raw_localized": 0,
+              "rows": 11
+            },
+            "lombard:source_time_neural": {
+              "aligned": 10,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 2,
+              "flags": 0,
+              "measured": 10,
+              "raw_localized": 2,
+              "rows": 11
+            },
+            "new_ordinary:local_chroma_denoise": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 0,
+              "measured": 10,
+              "raw_localized": 0,
+              "rows": 12
+            },
+            "new_ordinary:reencode": {
+              "aligned": 0,
+              "aligned_localized": 0,
+              "aligned_raw_localized": 0,
+              "flags": 0,
+              "measured": 11,
+              "raw_localized": 0,
+              "rows": 12
+            }
+          },
+          "wrong_positive_ranges": 0
+        }
+      }
+    }
+  }
+}

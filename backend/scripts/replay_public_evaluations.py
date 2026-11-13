@@ -98,7 +98,20 @@ SHORT_EDITS = {
     "audio": ("review_audio_modulation_partial_transfer.py", "audio-modulation-partial-transfer-2026-11-12.json", (), ()),
     "writing": ("review_writing_two_context_transfer.py", "writing-two-context-transfer-2026-11-12.json", (), ()),
 }
-SUITES = ("overview", "localization", "transfer", "source-evidence", "recent-checks", "evidence-followups", "short-edits")
+DIFFICULT_EDITS = {
+    "image": ("review_image_masked_context_public.py", "image-masked-context-transfer-2026-11-13.json", (), ()),
+    "video": ("review_video_mouth_chroma_coupling.py", "video-mouth-chroma-coupling-2026-11-13.json", (), (
+        f"{SCRIPTS}/review_video_mouth_contour_phase.py",
+    )),
+    "audio": ("review_audio_unassigned_stereo_voice.py", "audio-unassigned-stereo-voice-2026-11-13.json", (), ()),
+    "writing": ("review_writing_position_qwen.py", "writing-position-qwen-confirmation-2026-11-12.json", (), (
+        f"{SCRIPTS}/review_writing_position_confirmation.py",
+        f"{PANELS}/writing-position-qwen-admission-2026-11-12.json",
+        f"{PANELS}/writing-two-context-transfer-2026-11-12.json",
+    )),
+}
+SUITES = ("overview", "localization", "transfer", "source-evidence", "recent-checks", "evidence-followups", "short-edits",
+          "difficult-edits")
 ISOLATED = (
     "import runpy,sys; "
     "script=sys.argv.pop(1); "
@@ -144,6 +157,9 @@ def replay_inputs(modality: str, suite: str) -> tuple[str, list[str], tuple[str,
         panel_names = (panel,)
     elif suite == "short-edits":
         script, panel, prefix, dependencies = SHORT_EDITS[modality]
+        panel_names = (panel,)
+    elif suite == "difficult-edits":
+        script, panel, prefix, dependencies = DIFFICULT_EDITS[modality]
         panel_names = (panel,)
     elif suite == "source-evidence":
         script, panel_names, prefix, dependencies = SOURCE_EVIDENCE[modality]

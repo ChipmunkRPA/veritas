@@ -95,6 +95,34 @@ remaining requirements here and in linked experiment records; do not call the
 overall improvement program complete while any required media evaluation or
 integration remains unfinished.
 
+## Progress on 13 November
+
+- The [three-sentence writing check](writing-position-app-2026-11-12.md) now
+  runs on the local Apple GPU. It reproduced all 68 CPU decisions and passed
+  the prepaid worker, browser, PDF, JSON, and signed source replay.
+- The [masked image-context study](image-masked-context-transfer-2026-11-13.md)
+  retained three useful feathered locations versus two for the visible-only
+  head and reduced flagged ordinary groups from five to one. All three
+  locations came from one generator family in the reused confirmation panel.
+  The study stays outside the detector.
+- The [longer writing source study](writing-f1000-revision-spans-2026-11-13.md)
+  qualified nine previously unused genuine article revision pairs and bound 274
+  passage locations and classifier inputs to official XML. Two retrievals
+  reproduced the source receipts. No classifier was scored on this panel.
+- The [two-output stereo study](audio-unassigned-stereo-voice-2026-11-13.md)
+  found four of eight off-center edits when both outputs had to support a
+  finding, with five newly flagged genuine groups. At the same retrospective
+  budget of one false group it found two versus zero for the downmix. In
+  the two-competitor layout this rule lost two current locations. It stays
+  outside serving.
+- The [mouth color study](video-mouth-chroma-coupling-2026-11-13.md) found zero
+  of ten source-event-aligned neural redraws and no ordinary flags for either
+  color variant. It remains offline.
+- The [four-media replay](independent-testing.md#replay-difficult-edits-across-four-media)
+  reproduces the public image, video, audio and writing measurements and
+  creates a compact issue receipt. It can run without app dependencies or
+  private media.
+
 ## Progress on 12 November
 
 - The [synchronized mouth-redraw test](lombard-neural-mouth-redraw-2026-11-12.md) verified retained local timing on ten of eleven neural clips. The existing single-upload timing check had insufficient windows on all 44 held deliveries. Earlier-copy comparison found all eleven changed picture ranges. The tested single-upload candidates produced too many genuine flags for adoption.

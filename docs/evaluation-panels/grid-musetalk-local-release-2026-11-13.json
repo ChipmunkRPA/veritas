@@ -1,0 +1,663 @@
+{
+  "chroma_freeze_sha256": "56362e326d06231be19b9d67da05fe89eb5b79ed7e5f2b745a3a0b6abcd0fda8",
+  "freeze_sha256": "81a9205189299a512f2162a74e6ece28b30e5cc2c933f54a795bed7dbd83ca0a",
+  "private_result_sha256": "757a67c81dce6e4e7fea76c6c91411e5abaedf8bd11aeb20549b7cb27f624def",
+  "protocol": {
+    "binding": "Require original event and delivered event each within 80 ms of the independently measured acoustic burst midpoint. Require both ordinary source-time region deliveries retain the same event. Verified exact original PCM and native pictures through the existing v149/v157 readbacks.",
+    "scope": "One local stop-like event, not independently labeled phoneme identity or full-clip/perceived synchrony. Previously exposed pilot sources, separately frozen source-timing qualification. No detector score used.",
+    "speech": "Select a unique salient original PCM burst in the fixed usable edit neighborhood with the existing audio-only transient method. Candidate span is frame times 29 through 34 inclusive and 0.65 minimum salience margin. No transcript, renderer target or mouth measurement enters acoustic selection.",
+    "visual": "Mute the clip and find closure/reopening events from saved observed inner lip gaps, using the median eye-normalized aperture. Require <=.075 then <=.055 then >.055, and >=.032 growth over the next four pictures. Report all candidates. Source and output must each have one visual event in the fixed usable edit neighborhood and matched events may differ by no more than one frame.",
+    "wrong_event_controls": "Require an exact native earlier-picture retime to move the detected event by eight frames within one-frame error and not admit a different source-time event. Independently search the shifted soundtrack for its burst in the corresponding later range; it must move 320 ms within 15 ms and fail alignment with unchanged pictures."
+  },
+  "rows": [
+    {
+      "acoustic": {
+        "sample": 21080,
+        "status": "observed"
+      },
+      "clip": 1,
+      "earlier_neural_also_matches": false,
+      "genuine_audio_visual_event": true,
+      "group": 1,
+      "ordinary_preserved_event": true,
+      "overlaps_chroma_development": true,
+      "picture_retime_control": true,
+      "qualified": true,
+      "redraw_retained_event": true,
+      "shifted_acoustic": {
+        "sample": 26200,
+        "status": "observed"
+      },
+      "soundtrack_delay_control": true,
+      "visual_last_closed": {
+        "audio_delay_320ms": [
+          31
+        ],
+        "brightness_musetalk": [
+          31
+        ],
+        "genuine_frame_retime": [
+          39
+        ],
+        "musetalk_earlier_320ms": [
+          32,
+          40
+        ],
+        "musetalk_source_time": [
+          32
+        ],
+        "original": [
+          31
+        ],
+        "resample_musetalk": [
+          31
+        ]
+      }
+    },
+    {
+      "acoustic": {
+        "sample": 19640,
+        "status": "observed"
+      },
+      "clip": 2,
+      "earlier_neural_also_matches": false,
+      "genuine_audio_visual_event": false,
+      "group": 1,
+      "ordinary_preserved_event": false,
+      "overlaps_chroma_development": true,
+      "picture_retime_control": false,
+      "qualified": false,
+      "redraw_retained_event": false,
+      "shifted_acoustic": {
+        "sample": 24760,
+        "status": "observed"
+      },
+      "soundtrack_delay_control": false,
+      "visual_last_closed": {
+        "audio_delay_320ms": [],
+        "brightness_musetalk": [],
+        "genuine_frame_retime": [],
+        "musetalk_earlier_320ms": [
+          29
+        ],
+        "musetalk_source_time": [],
+        "original": [],
+        "resample_musetalk": []
+      }
+    },
+    {
+      "acoustic": {
+        "sample": 19560,
+        "status": "observed"
+      },
+      "clip": 3,
+      "earlier_neural_also_matches": false,
+      "genuine_audio_visual_event": false,
+      "group": 2,
+      "ordinary_preserved_event": false,
+      "overlaps_chroma_development": false,
+      "picture_retime_control": false,
+      "qualified": false,
+      "redraw_retained_event": false,
+      "shifted_acoustic": {
+        "sample": 24680,
+        "status": "observed"
+      },
+      "soundtrack_delay_control": false,
+      "visual_last_closed": {
+        "audio_delay_320ms": [
+          34
+        ],
+        "brightness_musetalk": [
+          34
+        ],
+        "genuine_frame_retime": [
+          32,
+          42
+        ],
+        "musetalk_earlier_320ms": [
+          31,
+          34,
+          41
+        ],
+        "musetalk_source_time": [
+          32
+        ],
+        "original": [
+          34
+        ],
+        "resample_musetalk": [
+          34
+        ]
+      }
+    },
+    {
+      "acoustic": {
+        "sample": 20040,
+        "status": "observed"
+      },
+      "clip": 4,
+      "earlier_neural_also_matches": false,
+      "genuine_audio_visual_event": false,
+      "group": 2,
+      "ordinary_preserved_event": false,
+      "overlaps_chroma_development": false,
+      "picture_retime_control": false,
+      "qualified": false,
+      "redraw_retained_event": false,
+      "shifted_acoustic": {
+        "sample": 25160,
+        "status": "observed"
+      },
+      "soundtrack_delay_control": false,
+      "visual_last_closed": {
+        "audio_delay_320ms": [],
+        "brightness_musetalk": [],
+        "genuine_frame_retime": [
+          28,
+          32
+        ],
+        "musetalk_earlier_320ms": [
+          30,
+          33
+        ],
+        "musetalk_source_time": [],
+        "original": [],
+        "resample_musetalk": []
+      }
+    },
+    {
+      "acoustic": {
+        "sample": 19480,
+        "status": "observed"
+      },
+      "clip": 5,
+      "earlier_neural_also_matches": false,
+      "genuine_audio_visual_event": false,
+      "group": 3,
+      "ordinary_preserved_event": false,
+      "overlaps_chroma_development": true,
+      "picture_retime_control": false,
+      "qualified": false,
+      "redraw_retained_event": false,
+      "shifted_acoustic": {
+        "sample": 24600,
+        "status": "observed"
+      },
+      "soundtrack_delay_control": false,
+      "visual_last_closed": {
+        "audio_delay_320ms": [],
+        "brightness_musetalk": [],
+        "genuine_frame_retime": [],
+        "musetalk_earlier_320ms": [],
+        "musetalk_source_time": [
+          31
+        ],
+        "original": [],
+        "resample_musetalk": []
+      }
+    },
+    {
+      "acoustic": {
+        "sample": 20520,
+        "status": "observed"
+      },
+      "clip": 6,
+      "earlier_neural_also_matches": false,
+      "genuine_audio_visual_event": false,
+      "group": 3,
+      "ordinary_preserved_event": false,
+      "overlaps_chroma_development": true,
+      "picture_retime_control": false,
+      "qualified": false,
+      "redraw_retained_event": false,
+      "shifted_acoustic": {
+        "sample": 25640,
+        "status": "observed"
+      },
+      "soundtrack_delay_control": false,
+      "visual_last_closed": {
+        "audio_delay_320ms": [],
+        "brightness_musetalk": [],
+        "genuine_frame_retime": [
+          30
+        ],
+        "musetalk_earlier_320ms": [
+          29
+        ],
+        "musetalk_source_time": [
+          44
+        ],
+        "original": [],
+        "resample_musetalk": []
+      }
+    },
+    {
+      "acoustic": {
+        "sample": 20200,
+        "status": "observed"
+      },
+      "clip": 7,
+      "earlier_neural_also_matches": false,
+      "genuine_audio_visual_event": false,
+      "group": 4,
+      "ordinary_preserved_event": false,
+      "overlaps_chroma_development": true,
+      "picture_retime_control": false,
+      "qualified": false,
+      "redraw_retained_event": false,
+      "shifted_acoustic": {
+        "sample": 25320,
+        "status": "observed"
+      },
+      "soundtrack_delay_control": false,
+      "visual_last_closed": {
+        "audio_delay_320ms": [],
+        "brightness_musetalk": [],
+        "genuine_frame_retime": [],
+        "musetalk_earlier_320ms": [],
+        "musetalk_source_time": [],
+        "original": [],
+        "resample_musetalk": []
+      }
+    },
+    {
+      "acoustic": {
+        "sample": 21640,
+        "status": "observed"
+      },
+      "clip": 8,
+      "earlier_neural_also_matches": false,
+      "genuine_audio_visual_event": false,
+      "group": 4,
+      "ordinary_preserved_event": false,
+      "overlaps_chroma_development": true,
+      "picture_retime_control": false,
+      "qualified": false,
+      "redraw_retained_event": false,
+      "shifted_acoustic": {
+        "sample": 26760,
+        "status": "observed"
+      },
+      "soundtrack_delay_control": false,
+      "visual_last_closed": {
+        "audio_delay_320ms": [],
+        "brightness_musetalk": [],
+        "genuine_frame_retime": [
+          35
+        ],
+        "musetalk_earlier_320ms": [
+          36
+        ],
+        "musetalk_source_time": [],
+        "original": [],
+        "resample_musetalk": []
+      }
+    },
+    {
+      "acoustic": {
+        "status": "no_unique_burst"
+      },
+      "clip": 9,
+      "earlier_neural_also_matches": false,
+      "genuine_audio_visual_event": false,
+      "group": 5,
+      "ordinary_preserved_event": false,
+      "overlaps_chroma_development": false,
+      "picture_retime_control": false,
+      "qualified": false,
+      "redraw_retained_event": false,
+      "shifted_acoustic": {
+        "status": "no_unique_burst"
+      },
+      "soundtrack_delay_control": false,
+      "visual_last_closed": {
+        "audio_delay_320ms": [
+          30,
+          36
+        ],
+        "brightness_musetalk": [
+          30,
+          36
+        ],
+        "genuine_frame_retime": [
+          38,
+          44
+        ],
+        "musetalk_earlier_320ms": [
+          42
+        ],
+        "musetalk_source_time": [
+          34
+        ],
+        "original": [
+          30,
+          36
+        ],
+        "resample_musetalk": [
+          30,
+          36
+        ]
+      }
+    },
+    {
+      "acoustic": {
+        "sample": 21160,
+        "status": "observed"
+      },
+      "clip": 10,
+      "earlier_neural_also_matches": false,
+      "genuine_audio_visual_event": false,
+      "group": 5,
+      "ordinary_preserved_event": false,
+      "overlaps_chroma_development": false,
+      "picture_retime_control": false,
+      "qualified": false,
+      "redraw_retained_event": false,
+      "shifted_acoustic": {
+        "sample": 26280,
+        "status": "observed"
+      },
+      "soundtrack_delay_control": false,
+      "visual_last_closed": {
+        "audio_delay_320ms": [
+          36
+        ],
+        "brightness_musetalk": [
+          36
+        ],
+        "genuine_frame_retime": [
+          31,
+          44
+        ],
+        "musetalk_earlier_320ms": [
+          29,
+          42
+        ],
+        "musetalk_source_time": [
+          34
+        ],
+        "original": [
+          36
+        ],
+        "resample_musetalk": [
+          36
+        ]
+      }
+    },
+    {
+      "acoustic": {
+        "status": "no_unique_burst"
+      },
+      "clip": 11,
+      "earlier_neural_also_matches": false,
+      "genuine_audio_visual_event": false,
+      "group": 6,
+      "ordinary_preserved_event": false,
+      "overlaps_chroma_development": true,
+      "picture_retime_control": false,
+      "qualified": false,
+      "redraw_retained_event": false,
+      "shifted_acoustic": {
+        "status": "no_unique_burst"
+      },
+      "soundtrack_delay_control": false,
+      "visual_last_closed": {
+        "audio_delay_320ms": [
+          28,
+          43
+        ],
+        "brightness_musetalk": [
+          28,
+          43
+        ],
+        "genuine_frame_retime": [
+          28,
+          36
+        ],
+        "musetalk_earlier_320ms": [
+          34
+        ],
+        "musetalk_source_time": [
+          41
+        ],
+        "original": [
+          28,
+          43
+        ],
+        "resample_musetalk": [
+          28,
+          43
+        ]
+      }
+    },
+    {
+      "acoustic": {
+        "sample": 19560,
+        "status": "observed"
+      },
+      "clip": 12,
+      "earlier_neural_also_matches": false,
+      "genuine_audio_visual_event": true,
+      "group": 6,
+      "ordinary_preserved_event": true,
+      "overlaps_chroma_development": true,
+      "picture_retime_control": true,
+      "qualified": false,
+      "redraw_retained_event": false,
+      "shifted_acoustic": {
+        "sample": 24680,
+        "status": "observed"
+      },
+      "soundtrack_delay_control": true,
+      "visual_last_closed": {
+        "audio_delay_320ms": [
+          29
+        ],
+        "brightness_musetalk": [
+          29
+        ],
+        "genuine_frame_retime": [
+          28,
+          37
+        ],
+        "musetalk_earlier_320ms": [
+          35
+        ],
+        "musetalk_source_time": [
+          28
+        ],
+        "original": [
+          29
+        ],
+        "resample_musetalk": [
+          29
+        ]
+      }
+    },
+    {
+      "acoustic": {
+        "sample": 21000,
+        "status": "observed"
+      },
+      "clip": 13,
+      "earlier_neural_also_matches": false,
+      "genuine_audio_visual_event": false,
+      "group": 7,
+      "ordinary_preserved_event": false,
+      "overlaps_chroma_development": false,
+      "picture_retime_control": false,
+      "qualified": false,
+      "redraw_retained_event": false,
+      "shifted_acoustic": {
+        "sample": 26120,
+        "status": "observed"
+      },
+      "soundtrack_delay_control": false,
+      "visual_last_closed": {
+        "audio_delay_320ms": [
+          30,
+          32,
+          40
+        ],
+        "brightness_musetalk": [
+          30,
+          32,
+          40
+        ],
+        "genuine_frame_retime": [
+          38,
+          40
+        ],
+        "musetalk_earlier_320ms": [
+          39
+        ],
+        "musetalk_source_time": [
+          39
+        ],
+        "original": [
+          30,
+          32,
+          40
+        ],
+        "resample_musetalk": [
+          30,
+          32,
+          40
+        ]
+      }
+    },
+    {
+      "acoustic": {
+        "sample": 18680,
+        "status": "observed"
+      },
+      "clip": 14,
+      "earlier_neural_also_matches": false,
+      "genuine_audio_visual_event": false,
+      "group": 7,
+      "ordinary_preserved_event": false,
+      "overlaps_chroma_development": false,
+      "picture_retime_control": false,
+      "qualified": false,
+      "redraw_retained_event": false,
+      "shifted_acoustic": {
+        "sample": 23800,
+        "status": "observed"
+      },
+      "soundtrack_delay_control": false,
+      "visual_last_closed": {
+        "audio_delay_320ms": [
+          28,
+          37
+        ],
+        "brightness_musetalk": [
+          28,
+          37
+        ],
+        "genuine_frame_retime": [
+          36
+        ],
+        "musetalk_earlier_320ms": [],
+        "musetalk_source_time": [],
+        "original": [
+          28,
+          37
+        ],
+        "resample_musetalk": [
+          28,
+          37
+        ]
+      }
+    },
+    {
+      "acoustic": {
+        "sample": 18840,
+        "status": "observed"
+      },
+      "clip": 15,
+      "earlier_neural_also_matches": false,
+      "genuine_audio_visual_event": false,
+      "group": 8,
+      "ordinary_preserved_event": false,
+      "overlaps_chroma_development": false,
+      "picture_retime_control": false,
+      "qualified": false,
+      "redraw_retained_event": false,
+      "shifted_acoustic": {
+        "sample": 23960,
+        "status": "observed"
+      },
+      "soundtrack_delay_control": false,
+      "visual_last_closed": {
+        "audio_delay_320ms": [],
+        "brightness_musetalk": [],
+        "genuine_frame_retime": [
+          32
+        ],
+        "musetalk_earlier_320ms": [
+          34
+        ],
+        "musetalk_source_time": [],
+        "original": [],
+        "resample_musetalk": []
+      }
+    },
+    {
+      "acoustic": {
+        "sample": 18920,
+        "status": "observed"
+      },
+      "clip": 16,
+      "earlier_neural_also_matches": false,
+      "genuine_audio_visual_event": false,
+      "group": 8,
+      "ordinary_preserved_event": false,
+      "overlaps_chroma_development": false,
+      "picture_retime_control": false,
+      "qualified": false,
+      "redraw_retained_event": false,
+      "shifted_acoustic": {
+        "sample": 24040,
+        "status": "observed"
+      },
+      "soundtrack_delay_control": false,
+      "visual_last_closed": {
+        "audio_delay_320ms": [
+          43
+        ],
+        "brightness_musetalk": [
+          42
+        ],
+        "genuine_frame_retime": [
+          34
+        ],
+        "musetalk_earlier_320ms": [
+          30,
+          34
+        ],
+        "musetalk_source_time": [
+          43
+        ],
+        "original": [
+          43
+        ],
+        "resample_musetalk": [
+          43
+        ]
+      }
+    }
+  ],
+  "schema": "chipmunk.grid-musetalk-local-release/1",
+  "summary": {
+    "earlier_neural_also_matches": 0,
+    "genuine_audio_visual_event": 2,
+    "no_unique_burst": 2,
+    "observed": 14,
+    "ordinary_preserved_event": 2,
+    "picture_retime_control": 2,
+    "qualified": 1,
+    "redraw_retained_event": 1,
+    "soundtrack_delay_control": 2
+  }
+}

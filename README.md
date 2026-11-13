@@ -126,7 +126,7 @@ and [small-edit tiling](docs/tiled-splice-evaluation.md) comparisons retain
 complete candidate outcomes and their original admission decisions.
 The [active improvement plan](docs/detection-improvement-plan.md) tracks the next
 video, audio and writing evaluations. Independent contributors can use the
-[clean-checkout evaluation replays](docs/independent-testing.md#replay-recent-evaluations-from-a-clean-checkout),
+[clean-checkout evaluation replays](docs/independent-testing.md#replay-difficult-edits-across-four-media),
 [portable testing contract](docs/independent-testing.md), and evaluation issue form.
 The [complete-video temporal experiment](docs/mouth-temporal-v11-evaluation.md)
 located more edits but failed its ordinary-footage false-alarm requirements;

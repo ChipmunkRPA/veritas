@@ -1,0 +1,4603 @@
+{
+  "assets": {
+    "pellav2_detector.pt": "d21aedfb52e2f87706c2753715a29665482b0f4a034800c31579df5d458559ac",
+    "silero_vad.jit": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720",
+    "w2v-bert-config.json": "f5572bd5998b68182e9c328a43127ed21fed687f6910497136b91a4e3b0e3675"
+  },
+  "freeze_sha256": "281e41e8b330ee9438cb28bc0376acc4d3900a5a354d40e1b3df718d792c63de",
+  "native_replay": {
+    "audited_cases": 160,
+    "distinct_admitted_windows": 818,
+    "verified_windows": 960
+  },
+  "policy": {
+    "arms": "Use the original stereo mean, the balance-routed output, the higher score across either anonymous output, or the lower score when both outputs score. Score both without speaker labels. Each output must pass the speech check and be unclipped.",
+    "case_roles": "Surrey uses genuine views only to set the points. BBC and the three Huddersfield layouts are reported separately. The exact audio was used in prior studies.",
+    "locations": "A useful range covers half the edited time and reaches at least 0.30 temporal IoU. Preserve all original findings in the additive comparison. A source group flags when any ordinary version flags. Report all missed and unassessed files.",
+    "review": "For each layout, compare extra and lost ranges, added ordinary groups, background-only flags, and equal-false-group budgets. No variant serves or enters confidence on this reused panel.",
+    "windows": "Use the original two-second grid. Each fixed point is the highest eligible genuine Surrey file response, with strict excess. Prefer the earlier interval at a tie."
+  },
+  "private_ledger_sha256": "2559c0f0d3648e89e2d14b50bb19eae08fcea382b7cac1e912c6cb6b99f163de",
+  "runner_sha256": "7ab09e2c8fd161e309cb99f1c0e4fe1ba86afdb5416af86ea4bb4a546fcfea56",
+  "scalar_replay_rows": [
+    {
+      "case": 0,
+      "family": null,
+      "group": 0,
+      "kind": "untouched",
+      "location": "surrey",
+      "route": null,
+      "scores": [
+        [
+          -1.8749360346602435,
+          -3.797740885555199
+        ],
+        [
+          -2.9326174305421664,
+          -5.114106114936443
+        ],
+        [
+          -4.854556090912984,
+          -2.020281464876077
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 1,
+      "family": null,
+      "group": 0,
+      "kind": "ordinary_same_host",
+      "location": "surrey",
+      "route": 1,
+      "scores": [
+        [
+          -1.8749360346602435,
+          -4.585593211454031
+        ],
+        [
+          -5.37583923902353,
+          -5.991553248322725
+        ],
+        [
+          -4.133017507743773,
+          -3.9648587848485843
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 2,
+      "family": null,
+      "group": 0,
+      "kind": "ordinary_other_voice",
+      "location": "surrey",
+      "route": null,
+      "scores": [
+        [
+          -1.8749360346602435,
+          -2.7178304252630743
+        ],
+        [
+          1.5132938700597005,
+          -6.018857005625359
+        ],
+        [
+          -3.7725925419136632,
+          -2.09135815044134
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 3,
+      "family": "clone",
+      "group": 0,
+      "kind": "synthetic",
+      "location": "surrey",
+      "route": 1,
+      "scores": [
+        [
+          -1.8749360346602435,
+          -4.667736496361679
+        ],
+        [
+          -5.241092735567725,
+          -4.917193373937634
+        ],
+        [
+          2.2122231449119933,
+          7.004127590861076
+        ]
+      ],
+      "truth": [
+        58880,
+        71680
+      ]
+    },
+    {
+      "case": 4,
+      "family": null,
+      "group": 1,
+      "kind": "untouched",
+      "location": "surrey",
+      "route": 1,
+      "scores": [
+        [
+          5.356589748054317,
+          -3.7359721871990548
+        ],
+        [
+          -6.757904473514867,
+          -6.780301121986521
+        ],
+        [
+          -3.2738118507544915,
+          4.599537493883419
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 5,
+      "family": null,
+      "group": 1,
+      "kind": "ordinary_same_host",
+      "location": "surrey",
+      "route": 1,
+      "scores": [
+        [
+          4.861183811605603,
+          -3.7352510132103403
+        ],
+        [
+          -6.878252987608706,
+          -6.757909797247158
+        ],
+        [
+          5.3678647596224955,
+          4.0610677724941455
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 6,
+      "family": null,
+      "group": 1,
+      "kind": "ordinary_other_voice",
+      "location": "surrey",
+      "route": 1,
+      "scores": [
+        [
+          2.8508481522643514,
+          -3.7346519942175878
+        ],
+        [
+          -6.654812356522866,
+          -6.76490737062478
+        ],
+        [
+          3.099171936944175,
+          3.7590296293738583
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 7,
+      "family": "expressive",
+      "group": 1,
+      "kind": "synthetic",
+      "location": "surrey",
+      "route": 1,
+      "scores": [
+        [
+          4.627993896511041,
+          -3.736139293366214
+        ],
+        [
+          -6.560313247341018,
+          -6.678522140867437
+        ],
+        [
+          5.2347032135642255,
+          4.178863711013441
+        ]
+      ],
+      "truth": [
+        17920,
+        33280
+      ]
+    },
+    {
+      "case": 8,
+      "family": null,
+      "group": 2,
+      "kind": "untouched",
+      "location": "surrey",
+      "route": 1,
+      "scores": [
+        [
+          4.745456535560609,
+          -5.943206797653335
+        ],
+        [
+          -6.808836445003375,
+          -6.39013096809546
+        ],
+        [
+          6.591085158059048,
+          -3.2080436127843943
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 9,
+      "family": null,
+      "group": 2,
+      "kind": "ordinary_same_host",
+      "location": "surrey",
+      "route": 1,
+      "scores": [
+        [
+          4.745456535560609,
+          -6.089463273266988
+        ],
+        [
+          -6.850908263402659,
+          -6.333252955620729
+        ],
+        [
+          6.760727907655432,
+          -4.580440969238704
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 10,
+      "family": null,
+      "group": 2,
+      "kind": "ordinary_other_voice",
+      "location": "surrey",
+      "route": 1,
+      "scores": [
+        [
+          4.745456535560609,
+          -6.267316795865925
+        ],
+        [
+          -6.921834995418019,
+          -6.380227111581735
+        ],
+        [
+          6.679906463125389,
+          -5.189640027244224
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 11,
+      "family": "stock",
+      "group": 2,
+      "kind": "synthetic",
+      "location": "surrey",
+      "route": 1,
+      "scores": [
+        [
+          4.745456535560609,
+          -6.256026219224075
+        ],
+        [
+          -6.891619214103921,
+          -6.278310796872931
+        ],
+        [
+          6.581033150956828,
+          -3.3306774942926687
+        ]
+      ],
+      "truth": [
+        55040,
+        67840
+      ]
+    },
+    {
+      "case": 12,
+      "family": null,
+      "group": 3,
+      "kind": "background_only",
+      "location": "surrey",
+      "route": 0,
+      "scores": [
+        [
+          -5.379424107254935,
+          null
+        ],
+        [
+          -4.232642134586592,
+          null
+        ],
+        [
+          -5.581947299357446,
+          null
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 13,
+      "family": null,
+      "group": 4,
+      "kind": "untouched",
+      "location": "surrey",
+      "route": 0,
+      "scores": [
+        [
+          -6.4706658694873305,
+          4.557419856883443
+        ],
+        [
+          -6.530469856582728,
+          -4.304032291980367
+        ],
+        [
+          -4.0832161614017455,
+          -6.329049070600665
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 14,
+      "family": null,
+      "group": 4,
+      "kind": "ordinary_same_host",
+      "location": "surrey",
+      "route": 0,
+      "scores": [
+        [
+          -6.396322256130054,
+          4.568961938113933
+        ],
+        [
+          -6.271514429862841,
+          -3.7679000118111334
+        ],
+        [
+          -4.452907575304846,
+          -6.350687987855541
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 15,
+      "family": null,
+      "group": 4,
+      "kind": "ordinary_other_voice",
+      "location": "surrey",
+      "route": 0,
+      "scores": [
+        [
+          -3.7839252697014265,
+          4.567331843198663
+        ],
+        [
+          -6.257988943648639,
+          3.950501000689403
+        ],
+        [
+          -4.284945428702376,
+          -5.896313700254611
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 16,
+      "family": "clone",
+      "group": 4,
+      "kind": "synthetic",
+      "location": "surrey",
+      "route": 0,
+      "scores": [
+        [
+          -6.334054062965405,
+          4.571264920675751
+        ],
+        [
+          -6.092321915097278,
+          0.632045060286458
+        ],
+        [
+          -4.367170376976278,
+          -6.118937530253125
+        ]
+      ],
+      "truth": [
+        30720,
+        46080
+      ]
+    },
+    {
+      "case": 17,
+      "family": null,
+      "group": 5,
+      "kind": "untouched",
+      "location": "surrey",
+      "route": 1,
+      "scores": [
+        [
+          -2.7501671165812547,
+          -6.595567677250022
+        ],
+        [
+          -5.067221660836383,
+          -6.733402297794715
+        ],
+        [
+          -3.078625674761677,
+          -5.37385270572405
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 18,
+      "family": null,
+      "group": 5,
+      "kind": "ordinary_same_host",
+      "location": "surrey",
+      "route": 1,
+      "scores": [
+        [
+          -2.8161024795325362,
+          -6.595305438772388
+        ],
+        [
+          -4.862059514270934,
+          -6.543523337211028
+        ],
+        [
+          -4.133818167928412,
+          -5.332794672541303
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 19,
+      "family": null,
+      "group": 5,
+      "kind": "ordinary_other_voice",
+      "location": "surrey",
+      "route": 1,
+      "scores": [
+        [
+          -2.4690952364816217,
+          -6.591930399151528
+        ],
+        [
+          -4.416882518074435,
+          -6.171033854031101
+        ],
+        [
+          -3.5289783530378274,
+          -4.8865985445081295
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 20,
+      "family": "expressive",
+      "group": 5,
+      "kind": "synthetic",
+      "location": "surrey",
+      "route": 1,
+      "scores": [
+        [
+          -2.870754212954128,
+          -6.6009702448062635
+        ],
+        [
+          1.5211089313550956,
+          -6.246862924262073
+        ],
+        [
+          4.259411902446082,
+          -6.004564296867122
+        ]
+      ],
+      "truth": [
+        33280,
+        46080
+      ]
+    },
+    {
+      "case": 21,
+      "family": null,
+      "group": 6,
+      "kind": "untouched",
+      "location": "surrey",
+      "route": 0,
+      "scores": [
+        [
+          0.36274423452256777,
+          -4.4494900723142266
+        ],
+        [
+          6.601722944688516,
+          -3.146479115123809
+        ],
+        [
+          -6.686333667685084,
+          -5.853428821030989
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 22,
+      "family": null,
+      "group": 6,
+      "kind": "ordinary_same_host",
+      "location": "surrey",
+      "route": 0,
+      "scores": [
+        [
+          0.36274423452256777,
+          -4.997675426033748
+        ],
+        [
+          6.18339505404173,
+          -4.764310864683047
+        ],
+        [
+          -6.6012801924918145,
+          -5.513856940536729
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 23,
+      "family": null,
+      "group": 6,
+      "kind": "ordinary_other_voice",
+      "location": "surrey",
+      "route": 0,
+      "scores": [
+        [
+          0.36274423452256777,
+          -5.876777693711784
+        ],
+        [
+          6.115464266327453,
+          5.650585194518995
+        ],
+        [
+          -6.7961645529433135,
+          -6.024768375475808
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 24,
+      "family": "expressive",
+      "group": 6,
+      "kind": "synthetic",
+      "location": "surrey",
+      "route": 0,
+      "scores": [
+        [
+          0.36274423452256777,
+          -5.768335797188937
+        ],
+        [
+          6.185601918253143,
+          -4.337628850443923
+        ],
+        [
+          -6.866803668848658,
+          -5.825367977188668
+        ]
+      ],
+      "truth": [
+        60160,
+        75520
+      ]
+    },
+    {
+      "case": 25,
+      "family": null,
+      "group": 7,
+      "kind": "background_only",
+      "location": "surrey",
+      "route": 0,
+      "scores": [
+        [
+          -5.273566677047925,
+          -6.472831686026748
+        ],
+        [
+          -5.578819284219184,
+          -6.60285950904536
+        ],
+        [
+          -3.7571407196353044,
+          -4.738599740418633
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 26,
+      "family": null,
+      "group": 8,
+      "kind": "untouched",
+      "location": "bbc",
+      "route": 1,
+      "scores": [
+        [
+          -6.651281348447408,
+          5.310171066271003
+        ],
+        [
+          -7.174647254303809,
+          -4.137742017710485
+        ],
+        [
+          -3.0613837774847297,
+          7.223074051673557
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 27,
+      "family": null,
+      "group": 8,
+      "kind": "ordinary_same_host",
+      "location": "bbc",
+      "route": 1,
+      "scores": [
+        [
+          -6.885676894356836,
+          5.310171066271003
+        ],
+        [
+          -7.173427636385244,
+          -5.7313218193869995
+        ],
+        [
+          -4.398134201822786,
+          7.179916943275584
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 28,
+      "family": null,
+      "group": 8,
+      "kind": "ordinary_other_voice",
+      "location": "bbc",
+      "route": 1,
+      "scores": [
+        [
+          -4.2990303719486,
+          5.310171066271003
+        ],
+        [
+          -7.157012046738984,
+          -4.682240902159502
+        ],
+        [
+          5.562659405393245,
+          7.2146008107727315
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 29,
+      "family": "clone",
+      "group": 8,
+      "kind": "synthetic",
+      "location": "bbc",
+      "route": 1,
+      "scores": [
+        [
+          -5.497580520462902,
+          5.310171066271003
+        ],
+        [
+          -7.152043315437011,
+          -4.501068120889731
+        ],
+        [
+          6.991971389057106,
+          7.204912254194321
+        ]
+      ],
+      "truth": [
+        20480,
+        33280
+      ]
+    },
+    {
+      "case": 30,
+      "family": null,
+      "group": 9,
+      "kind": "untouched",
+      "location": "bbc",
+      "route": 0,
+      "scores": [
+        [
+          -4.227598163310039,
+          -4.3136453609062535
+        ],
+        [
+          6.005226878547123,
+          -2.8950402778541178
+        ],
+        [
+          -4.050094557927147,
+          -0.07697864596996984
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 31,
+      "family": null,
+      "group": 9,
+      "kind": "ordinary_same_host",
+      "location": "bbc",
+      "route": 0,
+      "scores": [
+        [
+          -4.137530372653445,
+          -4.314613265087741
+        ],
+        [
+          4.828234312687333,
+          -1.644248627692203
+        ],
+        [
+          -3.915922140685078,
+          -0.2419363097447944
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 32,
+      "family": null,
+      "group": 9,
+      "kind": "ordinary_other_voice",
+      "location": "bbc",
+      "route": 0,
+      "scores": [
+        [
+          -4.000839239230231,
+          -4.314672989175542
+        ],
+        [
+          5.5518892147128565,
+          0.36000945637664306
+        ],
+        [
+          -4.459337725534606,
+          3.759375153664634
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 33,
+      "family": "expressive",
+      "group": 9,
+      "kind": "synthetic",
+      "location": "bbc",
+      "route": 0,
+      "scores": [
+        [
+          -3.299858126486937,
+          -4.314849821447891
+        ],
+        [
+          7.062892474172879,
+          4.501588186349319
+        ],
+        [
+          -4.02081676676873,
+          -2.0511152520296188
+        ]
+      ],
+      "truth": [
+        29440,
+        44800
+      ]
+    },
+    {
+      "case": 34,
+      "family": null,
+      "group": 10,
+      "kind": "untouched",
+      "location": "bbc",
+      "route": 1,
+      "scores": [
+        [
+          4.149073155172227,
+          -5.205093431916906
+        ],
+        [
+          -5.166956866001356,
+          -6.776112549205214
+        ],
+        [
+          -3.622920943977678,
+          2.649328921353298
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 35,
+      "family": null,
+      "group": 10,
+      "kind": "ordinary_same_host",
+      "location": "bbc",
+      "route": 1,
+      "scores": [
+        [
+          4.149073155172227,
+          -5.161032700747246
+        ],
+        [
+          -4.251149161767723,
+          -6.961731957911307
+        ],
+        [
+          -3.5894765852046766,
+          -3.14213798861313
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 36,
+      "family": null,
+      "group": 10,
+      "kind": "ordinary_other_voice",
+      "location": "bbc",
+      "route": 1,
+      "scores": [
+        [
+          4.149073155172227,
+          -5.117387752580038
+        ],
+        [
+          -2.071665259629494,
+          -6.722283910612709
+        ],
+        [
+          2.6035100051063504,
+          3.0118534158580954
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 37,
+      "family": "stock",
+      "group": 10,
+      "kind": "synthetic",
+      "location": "bbc",
+      "route": 1,
+      "scores": [
+        [
+          4.149073155172227,
+          -5.2584953312519795
+        ],
+        [
+          -4.849018532751425,
+          -6.933304768576
+        ],
+        [
+          -2.641283498244608,
+          -3.6568622631466985
+        ]
+      ],
+      "truth": [
+        51200,
+        64000
+      ]
+    },
+    {
+      "case": 38,
+      "family": null,
+      "group": 11,
+      "kind": "background_only",
+      "location": "bbc",
+      "route": 0,
+      "scores": [
+        [
+          -6.5756492181407635,
+          -6.072372430868171
+        ],
+        [
+          null,
+          -6.865572005276385
+        ],
+        [
+          -6.18266632117729,
+          -5.581638258455172
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 39,
+      "family": null,
+      "group": 12,
+      "kind": "untouched",
+      "location": "bbc",
+      "route": 0,
+      "scores": [
+        [
+          3.99982294812129,
+          5.6935785704185395
+        ],
+        [
+          5.463916087494523,
+          7.191821005765865
+        ],
+        [
+          -6.369390957951499,
+          -6.764483432086876
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 40,
+      "family": null,
+      "group": 12,
+      "kind": "ordinary_same_host",
+      "location": "bbc",
+      "route": 0,
+      "scores": [
+        [
+          3.99982294812129,
+          -1.0992829931256605
+        ],
+        [
+          5.04003612384409,
+          7.171644176958447
+        ],
+        [
+          -6.429519634304499,
+          -6.713339283155678
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 41,
+      "family": null,
+      "group": 12,
+      "kind": "ordinary_other_voice",
+      "location": "bbc",
+      "route": 0,
+      "scores": [
+        [
+          3.99982294812129,
+          -2.5172638472437847
+        ],
+        [
+          5.651798209287052,
+          3.737774096237883
+        ],
+        [
+          -6.569921484816213,
+          -6.7493439318406825
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 42,
+      "family": "clone",
+      "group": 12,
+      "kind": "synthetic",
+      "location": "bbc",
+      "route": 0,
+      "scores": [
+        [
+          3.99982294812129,
+          4.823777990272355
+        ],
+        [
+          4.114268378010408,
+          7.171644176958447
+        ],
+        [
+          -5.9422330863901385,
+          -6.695339186101515
+        ]
+      ],
+      "truth": [
+        61440,
+        76800
+      ]
+    },
+    {
+      "case": 43,
+      "family": null,
+      "group": 13,
+      "kind": "untouched",
+      "location": "bbc",
+      "route": 1,
+      "scores": [
+        [
+          -4.828429250516826,
+          6.391436846066797
+        ],
+        [
+          -6.672961251021943,
+          -4.115931003617985
+        ],
+        [
+          -3.0488820297184724,
+          6.210858656956367
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 44,
+      "family": null,
+      "group": 13,
+      "kind": "ordinary_same_host",
+      "location": "bbc",
+      "route": 1,
+      "scores": [
+        [
+          -4.647367541990155,
+          6.391436846066797
+        ],
+        [
+          -6.21878911064856,
+          -5.457463245402019
+        ],
+        [
+          5.537364845369145,
+          5.924642305825184
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 45,
+      "family": null,
+      "group": 13,
+      "kind": "ordinary_other_voice",
+      "location": "bbc",
+      "route": 1,
+      "scores": [
+        [
+          4.819776433645319,
+          6.391436846066797
+        ],
+        [
+          -6.091432574661428,
+          -5.463523905875162
+        ],
+        [
+          5.794264937639647,
+          6.062016633212259
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 46,
+      "family": "expressive",
+      "group": 13,
+      "kind": "synthetic",
+      "location": "bbc",
+      "route": 1,
+      "scores": [
+        [
+          -4.278527218460897,
+          6.391436846066797
+        ],
+        [
+          -6.24138933102213,
+          -5.191856300940495
+        ],
+        [
+          5.0792987993419345,
+          6.666343405120515
+        ]
+      ],
+      "truth": [
+        29440,
+        42240
+      ]
+    },
+    {
+      "case": 47,
+      "family": null,
+      "group": 14,
+      "kind": "untouched",
+      "location": "bbc",
+      "route": 0,
+      "scores": [
+        [
+          3.2136416295613883,
+          4.855437332650684
+        ],
+        [
+          3.621350367449102,
+          6.014941743070936
+        ],
+        [
+          -4.369318903283766,
+          4.664382105786362
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 48,
+      "family": null,
+      "group": 14,
+      "kind": "ordinary_same_host",
+      "location": "bbc",
+      "route": 0,
+      "scores": [
+        [
+          4.8998820934818985,
+          4.855437332650684
+        ],
+        [
+          4.632711713979273,
+          5.975878112122755
+        ],
+        [
+          -3.71974710384328,
+          5.293257860950446
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 49,
+      "family": null,
+      "group": 14,
+      "kind": "ordinary_other_voice",
+      "location": "bbc",
+      "route": 0,
+      "scores": [
+        [
+          4.3122448416661605,
+          4.855437332650684
+        ],
+        [
+          4.752521665521496,
+          6.004838288055193
+        ],
+        [
+          -3.4137127154467257,
+          -1.6956258504229687
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 50,
+      "family": "expressive",
+      "group": 14,
+      "kind": "synthetic",
+      "location": "bbc",
+      "route": 0,
+      "scores": [
+        [
+          5.302234921042061,
+          4.855437332650684
+        ],
+        [
+          4.7921835446661145,
+          5.565746652936901
+        ],
+        [
+          -2.5722313287133503,
+          5.80678930106991
+        ]
+      ],
+      "truth": [
+        25600,
+        40960
+      ]
+    },
+    {
+      "case": 51,
+      "family": null,
+      "group": 15,
+      "kind": "background_only",
+      "location": "bbc",
+      "route": 0,
+      "scores": [
+        [
+          -6.902975049829178,
+          -7.043965339380481
+        ],
+        [
+          -6.732330315801981,
+          -6.903241170562876
+        ],
+        [
+          -6.8573502714231065,
+          -6.943474797687924
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 52,
+      "family": null,
+      "group": 16,
+      "kind": "untouched",
+      "location": "balanced_target",
+      "route": 0,
+      "scores": [
+        [
+          6.256506608819955,
+          6.178158681047817
+        ],
+        [
+          7.157750755039178,
+          5.173252004960298
+        ],
+        [
+          -6.022748958763299,
+          -4.92107252352502
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 53,
+      "family": null,
+      "group": 16,
+      "kind": "ordinary_same_host",
+      "location": "balanced_target",
+      "route": 0,
+      "scores": [
+        [
+          6.256506608819955,
+          6.225996505706928
+        ],
+        [
+          7.134041288302257,
+          5.159850871542293
+        ],
+        [
+          -6.0126128869314925,
+          -5.024042095683833
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 54,
+      "family": null,
+      "group": 16,
+      "kind": "ordinary_other_voice",
+      "location": "balanced_target",
+      "route": 0,
+      "scores": [
+        [
+          6.256506608819955,
+          6.417978500403401
+        ],
+        [
+          7.087027419881356,
+          -2.230490227689778
+        ],
+        [
+          -5.992462112783075,
+          -4.332407960472824
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 55,
+      "family": "expressive",
+      "group": 16,
+      "kind": "synthetic",
+      "location": "balanced_target",
+      "route": 0,
+      "scores": [
+        [
+          6.256506608819955,
+          5.239951370316596
+        ],
+        [
+          7.074816695823725,
+          -2.59578824801898
+        ],
+        [
+          -6.148101855128556,
+          -5.1429071561347
+        ]
+      ],
+      "truth": [
+        55040,
+        67840
+      ]
+    },
+    {
+      "case": 56,
+      "family": null,
+      "group": 16,
+      "kind": "untouched",
+      "location": "lateral_target",
+      "route": 0,
+      "scores": [
+        [
+          3.754297520042656,
+          5.909091527346999
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          5.618308004254331,
+          5.257398014703889
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 57,
+      "family": null,
+      "group": 16,
+      "kind": "ordinary_same_host",
+      "location": "lateral_target",
+      "route": 0,
+      "scores": [
+        [
+          3.754297520042656,
+          4.049687007592493
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          6.172432903974393,
+          6.25264563432519
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 58,
+      "family": null,
+      "group": 16,
+      "kind": "ordinary_other_voice",
+      "location": "lateral_target",
+      "route": 0,
+      "scores": [
+        [
+          3.754297520042656,
+          4.842719458615024
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          6.03445776696413,
+          6.378565666190701
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 59,
+      "family": "expressive",
+      "group": 16,
+      "kind": "synthetic",
+      "location": "lateral_target",
+      "route": 0,
+      "scores": [
+        [
+          3.754297520042656,
+          2.683700764432835
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          5.919699628266748,
+          5.442231435082491
+        ]
+      ],
+      "truth": [
+        55040,
+        67840
+      ]
+    },
+    {
+      "case": 60,
+      "family": null,
+      "group": 16,
+      "kind": "untouched",
+      "location": "second_competitor",
+      "route": 1,
+      "scores": [
+        [
+          1.045646132634102,
+          6.8748822656319355
+        ],
+        [
+          5.175371393441852,
+          null
+        ],
+        [
+          1.0723026814023462,
+          5.068247999044247
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 61,
+      "family": null,
+      "group": 16,
+      "kind": "ordinary_same_host",
+      "location": "second_competitor",
+      "route": 1,
+      "scores": [
+        [
+          1.045646132634102,
+          5.670989576448882
+        ],
+        [
+          6.80431388437309,
+          null
+        ],
+        [
+          3.3304008794988507,
+          4.481438836866205
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 62,
+      "family": null,
+      "group": 16,
+      "kind": "ordinary_other_voice",
+      "location": "second_competitor",
+      "route": 1,
+      "scores": [
+        [
+          1.045646132634102,
+          6.454394927475838
+        ],
+        [
+          7.0235811905026235,
+          null
+        ],
+        [
+          5.090412722866808,
+          6.85860107446126
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 63,
+      "family": "expressive",
+      "group": 16,
+      "kind": "synthetic",
+      "location": "second_competitor",
+      "route": 1,
+      "scores": [
+        [
+          1.045646132634102,
+          5.55049688806513
+        ],
+        [
+          2.2751435402763214,
+          null
+        ],
+        [
+          4.123896217332067,
+          2.56455991986662
+        ]
+      ],
+      "truth": [
+        55040,
+        67840
+      ]
+    },
+    {
+      "case": 64,
+      "family": null,
+      "group": 17,
+      "kind": "untouched",
+      "location": "balanced_target",
+      "route": 1,
+      "scores": [
+        [
+          1.7929458161457577,
+          -4.403349374398309
+        ],
+        [
+          3.7288164053593857,
+          -6.48043586851695
+        ],
+        [
+          -2.487942639958285,
+          -2.374577050116372
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 65,
+      "family": null,
+      "group": 17,
+      "kind": "ordinary_same_host",
+      "location": "balanced_target",
+      "route": 1,
+      "scores": [
+        [
+          1.9363791824083116,
+          -4.3879652359815955
+        ],
+        [
+          -5.2193117395857005,
+          -6.400295275401085
+        ],
+        [
+          -4.899512754383332,
+          0.20042125012332468
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 66,
+      "family": null,
+      "group": 17,
+      "kind": "ordinary_other_voice",
+      "location": "balanced_target",
+      "route": 1,
+      "scores": [
+        [
+          3.9892254513762997,
+          -4.369323731418791
+        ],
+        [
+          -4.957391274148171,
+          -6.185280273552187
+        ],
+        [
+          4.258340931151011,
+          -3.266065845067995
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 67,
+      "family": "stock",
+      "group": 17,
+      "kind": "synthetic",
+      "location": "balanced_target",
+      "route": 1,
+      "scores": [
+        [
+          1.9073835374914907,
+          -4.501940711135208
+        ],
+        [
+          -4.511724440004275,
+          -6.5274896815742975
+        ],
+        [
+          5.279301849311743,
+          -1.812567228829108
+        ]
+      ],
+      "truth": [
+        20480,
+        35840
+      ]
+    },
+    {
+      "case": 68,
+      "family": null,
+      "group": 17,
+      "kind": "untouched",
+      "location": "lateral_target",
+      "route": 1,
+      "scores": [
+        [
+          -4.542469039719542,
+          -5.9025002059085105
+        ],
+        [
+          -6.063359261638089,
+          4.0216378255654135
+        ],
+        [
+          -4.944794606500889,
+          -5.407273259485529
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 69,
+      "family": null,
+      "group": 17,
+      "kind": "ordinary_same_host",
+      "location": "lateral_target",
+      "route": 1,
+      "scores": [
+        [
+          -3.937718878914641,
+          -5.782510733288459
+        ],
+        [
+          -1.9093859561678193,
+          -4.121256368568748
+        ],
+        [
+          -3.510766243488547,
+          -5.641839023180831
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 70,
+      "family": null,
+      "group": 17,
+      "kind": "ordinary_other_voice",
+      "location": "lateral_target",
+      "route": 1,
+      "scores": [
+        [
+          -5.557373555635995,
+          -5.820009199096616
+        ],
+        [
+          3.8596852768759335,
+          -4.0109944156078035
+        ],
+        [
+          -4.331071389869481,
+          -5.767860953401805
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 71,
+      "family": "stock",
+      "group": 17,
+      "kind": "synthetic",
+      "location": "lateral_target",
+      "route": 1,
+      "scores": [
+        [
+          -3.692846801515194,
+          -5.908534090068793
+        ],
+        [
+          4.449122950271371,
+          -4.672060081332685
+        ],
+        [
+          3.6162997271763544,
+          -5.813594820904006
+        ]
+      ],
+      "truth": [
+        20480,
+        35840
+      ]
+    },
+    {
+      "case": 72,
+      "family": null,
+      "group": 17,
+      "kind": "untouched",
+      "location": "second_competitor",
+      "route": 1,
+      "scores": [
+        [
+          5.234386702598991,
+          -3.172751958785645
+        ],
+        [
+          -4.11850546779694,
+          -5.422519662757701
+        ],
+        [
+          6.678765213063733,
+          4.558371889721014
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 73,
+      "family": null,
+      "group": 17,
+      "kind": "ordinary_same_host",
+      "location": "second_competitor",
+      "route": 1,
+      "scores": [
+        [
+          6.364849159199125,
+          -3.189413068061703
+        ],
+        [
+          -3.7937581061299164,
+          -5.206782320560122
+        ],
+        [
+          7.122282769107505,
+          4.38323536688213
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 74,
+      "family": null,
+      "group": 17,
+      "kind": "ordinary_other_voice",
+      "location": "second_competitor",
+      "route": 1,
+      "scores": [
+        [
+          5.522400113392157,
+          -3.0608549451179323
+        ],
+        [
+          -4.385483759924475,
+          -5.413798406093926
+        ],
+        [
+          5.974840578256518,
+          3.5434457376665836
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 75,
+      "family": "stock",
+      "group": 17,
+      "kind": "synthetic",
+      "location": "second_competitor",
+      "route": 1,
+      "scores": [
+        [
+          5.556653119992553,
+          -3.2527110936687724
+        ],
+        [
+          -3.5621456880514826,
+          -5.15524345451298
+        ],
+        [
+          6.004061557559008,
+          4.335533628039245
+        ]
+      ],
+      "truth": [
+        20480,
+        35840
+      ]
+    },
+    {
+      "case": 76,
+      "family": null,
+      "group": 18,
+      "kind": "untouched",
+      "location": "balanced_target",
+      "route": 0,
+      "scores": [
+        [
+          -3.005425009549768,
+          -6.06206322289559
+        ],
+        [
+          -2.9771338028191585,
+          -5.498009679576998
+        ],
+        [
+          -6.85154870694851,
+          -6.723660443115805
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 77,
+      "family": null,
+      "group": 18,
+      "kind": "ordinary_same_host",
+      "location": "balanced_target",
+      "route": 0,
+      "scores": [
+        [
+          -1.1271521164309837,
+          -6.053442963042643
+        ],
+        [
+          0.7770086416504918,
+          -5.119985591707038
+        ],
+        [
+          -5.985960017619091,
+          -6.549489020316903
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 78,
+      "family": null,
+      "group": 18,
+      "kind": "ordinary_other_voice",
+      "location": "balanced_target",
+      "route": 0,
+      "scores": [
+        [
+          0.9554876106317216,
+          -5.79232692731429
+        ],
+        [
+          -4.595275857650302,
+          -5.106983160587506
+        ],
+        [
+          -4.869231169022135,
+          -6.047512094205002
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 79,
+      "family": "stock",
+      "group": 18,
+      "kind": "synthetic",
+      "location": "balanced_target",
+      "route": 0,
+      "scores": [
+        [
+          1.9195922939647763,
+          -5.957738877061096
+        ],
+        [
+          4.696256986768314,
+          -5.219690831675409
+        ],
+        [
+          -6.357144434924902,
+          -6.569025028379045
+        ]
+      ],
+      "truth": [
+        29440,
+        42240
+      ]
+    },
+    {
+      "case": 80,
+      "family": null,
+      "group": 18,
+      "kind": "untouched",
+      "location": "lateral_target",
+      "route": 0,
+      "scores": [
+        [
+          -3.265176321825661,
+          -4.377679820891848
+        ],
+        [
+          -2.647741807642457,
+          -5.981524066852091
+        ],
+        [
+          -2.353028544739732,
+          -5.227875757332162
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 81,
+      "family": null,
+      "group": 18,
+      "kind": "ordinary_same_host",
+      "location": "lateral_target",
+      "route": 0,
+      "scores": [
+        [
+          -2.939354103504414,
+          -4.403632111101927
+        ],
+        [
+          4.067801127009279,
+          -4.451533793251639
+        ],
+        [
+          6.035208305269774,
+          -2.520360940428782
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 82,
+      "family": null,
+      "group": 18,
+      "kind": "ordinary_other_voice",
+      "location": "lateral_target",
+      "route": 0,
+      "scores": [
+        [
+          4.407150648175835,
+          -4.823822032949392
+        ],
+        [
+          5.210981681737891,
+          -5.089271497744838
+        ],
+        [
+          4.653301195194591,
+          2.9507824268594596
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 83,
+      "family": "stock",
+      "group": 18,
+      "kind": "synthetic",
+      "location": "lateral_target",
+      "route": 0,
+      "scores": [
+        [
+          3.834969200418269,
+          -4.616196676833879
+        ],
+        [
+          4.2777248972646635,
+          -5.566382330650506
+        ],
+        [
+          5.2891808257634025,
+          -2.7495894825847724
+        ]
+      ],
+      "truth": [
+        29440,
+        42240
+      ]
+    },
+    {
+      "case": 84,
+      "family": null,
+      "group": 18,
+      "kind": "untouched",
+      "location": "second_competitor",
+      "route": null,
+      "scores": [
+        [
+          -3.463770120209378,
+          null
+        ],
+        [
+          -4.352118063224692,
+          null
+        ],
+        [
+          3.0839455000680127,
+          -5.6027793961680645
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 85,
+      "family": null,
+      "group": 18,
+      "kind": "ordinary_same_host",
+      "location": "second_competitor",
+      "route": null,
+      "scores": [
+        [
+          -2.4379506370743367,
+          null
+        ],
+        [
+          -2.8842654476158622,
+          null
+        ],
+        [
+          0.1445525973165417,
+          -5.79237745140203
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 86,
+      "family": null,
+      "group": 18,
+      "kind": "ordinary_other_voice",
+      "location": "second_competitor",
+      "route": null,
+      "scores": [
+        [
+          -1.9130192270068203,
+          -4.716553622594007
+        ],
+        [
+          -3.563209597002814,
+          null
+        ],
+        [
+          2.851657370212813,
+          -5.807784579040226
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 87,
+      "family": "stock",
+      "group": 18,
+      "kind": "synthetic",
+      "location": "second_competitor",
+      "route": null,
+      "scores": [
+        [
+          4.940435689355286,
+          -4.765514447542091
+        ],
+        [
+          1.803757702708866,
+          null
+        ],
+        [
+          -2.5610378505028946,
+          -6.090866054070648
+        ]
+      ],
+      "truth": [
+        29440,
+        42240
+      ]
+    },
+    {
+      "case": 88,
+      "family": null,
+      "group": 19,
+      "kind": "untouched",
+      "location": "balanced_target",
+      "route": 1,
+      "scores": [
+        [
+          5.301401246494546,
+          6.639572811586156
+        ],
+        [
+          -2.611774946520107,
+          4.232349339852088
+        ],
+        [
+          -1.9878608908619264,
+          3.5721076572558346
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 89,
+      "family": null,
+      "group": 19,
+      "kind": "ordinary_same_host",
+      "location": "balanced_target",
+      "route": 1,
+      "scores": [
+        [
+          -1.0710978160711266,
+          6.5528921233678235
+        ],
+        [
+          -2.639383735157651,
+          4.4737861662529665
+        ],
+        [
+          -4.097570900464702,
+          3.139951080039705
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 90,
+      "family": null,
+      "group": 19,
+      "kind": "ordinary_other_voice",
+      "location": "balanced_target",
+      "route": 1,
+      "scores": [
+        [
+          3.970240052058492,
+          6.781046407606478
+        ],
+        [
+          -3.638941529425627,
+          5.089442714289738
+        ],
+        [
+          -3.9765124236820704,
+          3.9028977082511824
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 91,
+      "family": "clone",
+      "group": 19,
+      "kind": "synthetic",
+      "location": "balanced_target",
+      "route": 1,
+      "scores": [
+        [
+          5.756196685228698,
+          6.620693516352903
+        ],
+        [
+          3.484873688515393,
+          4.513485375913624
+        ],
+        [
+          4.53121309952635,
+          3.274682113010642
+        ]
+      ],
+      "truth": [
+        26880,
+        42240
+      ]
+    },
+    {
+      "case": 92,
+      "family": null,
+      "group": 19,
+      "kind": "untouched",
+      "location": "lateral_target",
+      "route": 1,
+      "scores": [
+        [
+          6.675112448421632,
+          4.853968899589886
+        ],
+        [
+          -4.297855423507558,
+          -5.837173535619254
+        ],
+        [
+          -2.9750239969557213,
+          -3.0783596515511937
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 93,
+      "family": null,
+      "group": 19,
+      "kind": "ordinary_same_host",
+      "location": "lateral_target",
+      "route": 1,
+      "scores": [
+        [
+          -3.740921559892489,
+          5.08126895080638
+        ],
+        [
+          6.900581632783889,
+          -5.075663596217515
+        ],
+        [
+          -3.6268587168655255,
+          -3.29683115726818
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 94,
+      "family": null,
+      "group": 19,
+      "kind": "ordinary_other_voice",
+      "location": "lateral_target",
+      "route": 1,
+      "scores": [
+        [
+          3.6900433424142536,
+          5.114126733771878
+        ],
+        [
+          6.1421935593356745,
+          -4.88690757462249
+        ],
+        [
+          2.725361125473571,
+          -3.5280108293205323
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 95,
+      "family": "clone",
+      "group": 19,
+      "kind": "synthetic",
+      "location": "lateral_target",
+      "route": 1,
+      "scores": [
+        [
+          5.317961339619805,
+          5.331942883499228
+        ],
+        [
+          6.835942606030896,
+          -5.695263831675972
+        ],
+        [
+          -2.38008837756529,
+          -3.5210343057757676
+        ]
+      ],
+      "truth": [
+        26880,
+        42240
+      ]
+    },
+    {
+      "case": 96,
+      "family": null,
+      "group": 19,
+      "kind": "untouched",
+      "location": "second_competitor",
+      "route": null,
+      "scores": [
+        [
+          4.54881646390366,
+          3.3283011098936237
+        ],
+        [
+          -3.1123595727698308,
+          3.7490374449395008
+        ],
+        [
+          -1.8624417819917498,
+          3.546431114867632
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 97,
+      "family": null,
+      "group": 19,
+      "kind": "ordinary_same_host",
+      "location": "second_competitor",
+      "route": null,
+      "scores": [
+        [
+          -0.27490691981952986,
+          3.9326437207834792
+        ],
+        [
+          -4.173221650416781,
+          4.54923657032696
+        ],
+        [
+          -3.9450399979137925,
+          -1.6554589177219738
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 98,
+      "family": null,
+      "group": 19,
+      "kind": "ordinary_other_voice",
+      "location": "second_competitor",
+      "route": 0,
+      "scores": [
+        [
+          5.943813793392907,
+          4.184556101475004
+        ],
+        [
+          -3.7523455131545944,
+          5.2349745875888765
+        ],
+        [
+          3.374123942957515,
+          -1.026945388281217
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 99,
+      "family": "clone",
+      "group": 19,
+      "kind": "synthetic",
+      "location": "second_competitor",
+      "route": 0,
+      "scores": [
+        [
+          3.257609269947634,
+          3.7939209335725317
+        ],
+        [
+          -3.54371284402965,
+          2.747228445363758
+        ],
+        [
+          -3.7622389837371712,
+          2.157425605871789
+        ]
+      ],
+      "truth": [
+        26880,
+        42240
+      ]
+    },
+    {
+      "case": 100,
+      "family": null,
+      "group": 20,
+      "kind": "untouched",
+      "location": "balanced_target",
+      "route": 0,
+      "scores": [
+        [
+          4.786718832743426,
+          3.1824190637583625
+        ],
+        [
+          6.7250618097285075,
+          1.965566229646008
+        ],
+        [
+          null,
+          -4.548114753705265
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 101,
+      "family": null,
+      "group": 20,
+      "kind": "ordinary_same_host",
+      "location": "balanced_target",
+      "route": 0,
+      "scores": [
+        [
+          1.7782396290579794,
+          3.1443740627796894
+        ],
+        [
+          4.543645492153836,
+          -2.6333627900450325
+        ],
+        [
+          null,
+          -4.70407778693056
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 102,
+      "family": null,
+      "group": 20,
+      "kind": "ordinary_other_voice",
+      "location": "balanced_target",
+      "route": 0,
+      "scores": [
+        [
+          4.307551591530597,
+          3.1281163804090033
+        ],
+        [
+          6.7713046536381025,
+          4.611758406174995
+        ],
+        [
+          null,
+          -4.884289717841412
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 103,
+      "family": "clone",
+      "group": 20,
+      "kind": "synthetic",
+      "location": "balanced_target",
+      "route": 0,
+      "scores": [
+        [
+          4.343327575076697,
+          3.1743281641467718
+        ],
+        [
+          5.073507641437668,
+          -2.5673581671183388
+        ],
+        [
+          null,
+          -4.976347871698136
+        ]
+      ],
+      "truth": [
+        17920,
+        30720
+      ]
+    },
+    {
+      "case": 104,
+      "family": null,
+      "group": 20,
+      "kind": "untouched",
+      "location": "lateral_target",
+      "route": 0,
+      "scores": [
+        [
+          3.4812430076748035,
+          -2.353623897845046
+        ],
+        [
+          null,
+          -2.468483494450138
+        ],
+        [
+          -2.947609352090636,
+          6.068282216190519
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 105,
+      "family": null,
+      "group": 20,
+      "kind": "ordinary_same_host",
+      "location": "lateral_target",
+      "route": 0,
+      "scores": [
+        [
+          2.9534118046472733,
+          -2.3411760225568448
+        ],
+        [
+          null,
+          0.18152326494915738
+        ],
+        [
+          2.8691261147432394,
+          4.8422665358995705
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 106,
+      "family": null,
+      "group": 20,
+      "kind": "ordinary_other_voice",
+      "location": "lateral_target",
+      "route": 0,
+      "scores": [
+        [
+          -2.556156153659149,
+          -2.326414414323464
+        ],
+        [
+          null,
+          -3.739186830622289
+        ],
+        [
+          -3.311792395788033,
+          3.3886949528689807
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 107,
+      "family": "clone",
+      "group": 20,
+      "kind": "synthetic",
+      "location": "lateral_target",
+      "route": 0,
+      "scores": [
+        [
+          3.4027594349709256,
+          -2.302487609759886
+        ],
+        [
+          null,
+          -1.7266661953845042
+        ],
+        [
+          -2.6084203338107748,
+          5.5751606074862075
+        ]
+      ],
+      "truth": [
+        17920,
+        30720
+      ]
+    },
+    {
+      "case": 108,
+      "family": null,
+      "group": 20,
+      "kind": "untouched",
+      "location": "second_competitor",
+      "route": 1,
+      "scores": [
+        [
+          -2.32656794916043,
+          2.625015546010603
+        ],
+        [
+          -5.619893081286838,
+          null
+        ],
+        [
+          null,
+          -5.872752193986962
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 109,
+      "family": null,
+      "group": 20,
+      "kind": "ordinary_same_host",
+      "location": "second_competitor",
+      "route": 1,
+      "scores": [
+        [
+          0.7770904134144491,
+          2.5557703541532693
+        ],
+        [
+          -5.624371970630572,
+          null
+        ],
+        [
+          null,
+          -6.087015658262137
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 110,
+      "family": null,
+      "group": 20,
+      "kind": "ordinary_other_voice",
+      "location": "second_competitor",
+      "route": 1,
+      "scores": [
+        [
+          2.545148774565104,
+          2.698632712720122
+        ],
+        [
+          -5.781847909547523,
+          -5.1396102636199865
+        ],
+        [
+          null,
+          -6.040759039283818
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 111,
+      "family": "clone",
+      "group": 20,
+      "kind": "synthetic",
+      "location": "second_competitor",
+      "route": null,
+      "scores": [
+        [
+          -3.018176551649057,
+          2.62765415782516
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          -5.955803376237858
+        ]
+      ],
+      "truth": [
+        17920,
+        30720
+      ]
+    },
+    {
+      "case": 112,
+      "family": null,
+      "group": 21,
+      "kind": "untouched",
+      "location": "balanced_target",
+      "route": 0,
+      "scores": [
+        [
+          -4.887263266750963,
+          -3.336058146221136
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          -4.235074080721101,
+          4.841936566849495
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 113,
+      "family": null,
+      "group": 21,
+      "kind": "ordinary_same_host",
+      "location": "balanced_target",
+      "route": 0,
+      "scores": [
+        [
+          -5.83244804886419,
+          -3.2520798913981332
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          -4.076497080694203,
+          5.729937145101744
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 114,
+      "family": null,
+      "group": 21,
+      "kind": "ordinary_other_voice",
+      "location": "balanced_target",
+      "route": 0,
+      "scores": [
+        [
+          -5.6532187642378515,
+          -3.318676724726539
+        ],
+        [
+          null,
+          1.3575133848602832
+        ],
+        [
+          -6.387002889711948,
+          5.507091434074014
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 115,
+      "family": "expressive",
+      "group": 21,
+      "kind": "synthetic",
+      "location": "balanced_target",
+      "route": 0,
+      "scores": [
+        [
+          -5.498287171319181,
+          -3.2551214683586758
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          -5.834650524316794,
+          6.165599090994211
+        ]
+      ],
+      "truth": [
+        28160,
+        43520
+      ]
+    },
+    {
+      "case": 116,
+      "family": null,
+      "group": 21,
+      "kind": "untouched",
+      "location": "lateral_target",
+      "route": 1,
+      "scores": [
+        [
+          -3.9141325677275858,
+          1.349974368534358
+        ],
+        [
+          -3.9722638646896975,
+          7.090175150912454
+        ],
+        [
+          -4.247042643394048,
+          -3.4591914249654896
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 117,
+      "family": null,
+      "group": 21,
+      "kind": "ordinary_same_host",
+      "location": "lateral_target",
+      "route": 1,
+      "scores": [
+        [
+          -3.9802422364550103,
+          1.2725471982803314
+        ],
+        [
+          -4.355105389675566,
+          7.0533851832548535
+        ],
+        [
+          -4.734066044297348,
+          -3.9736366180107945
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 118,
+      "family": null,
+      "group": 21,
+      "kind": "ordinary_other_voice",
+      "location": "lateral_target",
+      "route": 1,
+      "scores": [
+        [
+          -5.155696881391265,
+          1.3107323815940186
+        ],
+        [
+          -4.67275238309302,
+          6.844428665771183
+        ],
+        [
+          -5.448112053677017,
+          -3.1577014731234927
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 119,
+      "family": "expressive",
+      "group": 21,
+      "kind": "synthetic",
+      "location": "lateral_target",
+      "route": 1,
+      "scores": [
+        [
+          -3.4904035895401,
+          1.268281208231631
+        ],
+        [
+          -4.472714419024364,
+          7.112124405722374
+        ],
+        [
+          -3.7654266245737826,
+          -3.874273585179958
+        ]
+      ],
+      "truth": [
+        28160,
+        43520
+      ]
+    },
+    {
+      "case": 120,
+      "family": null,
+      "group": 21,
+      "kind": "untouched",
+      "location": "second_competitor",
+      "route": 1,
+      "scores": [
+        [
+          -4.49413350742444,
+          -3.9597043639999874
+        ],
+        [
+          4.9371775973459195,
+          -3.6201339097167735
+        ],
+        [
+          -6.266118026090408,
+          -4.901823951686796
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 121,
+      "family": null,
+      "group": 21,
+      "kind": "ordinary_same_host",
+      "location": "second_competitor",
+      "route": 1,
+      "scores": [
+        [
+          -4.815797815272448,
+          -3.9068076136417575
+        ],
+        [
+          5.136345796734195,
+          -2.4054653518177753
+        ],
+        [
+          -6.274830314966005,
+          -4.765988380821699
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 122,
+      "family": null,
+      "group": 21,
+      "kind": "ordinary_other_voice",
+      "location": "second_competitor",
+      "route": 1,
+      "scores": [
+        [
+          -4.162914257923491,
+          -3.999373877809819
+        ],
+        [
+          3.42263424727868,
+          -2.746383013685227
+        ],
+        [
+          -6.222616176131557,
+          -4.812309314863021
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 123,
+      "family": "expressive",
+      "group": 21,
+      "kind": "synthetic",
+      "location": "second_competitor",
+      "route": 1,
+      "scores": [
+        [
+          -4.3471049573681935,
+          -3.9672033305781835
+        ],
+        [
+          -2.5445327678614116,
+          -3.1401715224892115
+        ],
+        [
+          -6.568189640021616,
+          -4.815427741309987
+        ]
+      ],
+      "truth": [
+        28160,
+        43520
+      ]
+    },
+    {
+      "case": 124,
+      "family": null,
+      "group": 22,
+      "kind": "untouched",
+      "location": "balanced_target",
+      "route": 0,
+      "scores": [
+        [
+          -4.800137481394452,
+          -5.232909667403937
+        ],
+        [
+          -4.697700554788252,
+          -5.2764863913785724
+        ],
+        [
+          -4.965711627891709,
+          -3.002776624605651
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 125,
+      "family": null,
+      "group": 22,
+      "kind": "ordinary_same_host",
+      "location": "balanced_target",
+      "route": 0,
+      "scores": [
+        [
+          -4.800137481394452,
+          -5.5037426381646
+        ],
+        [
+          -4.584115029741504,
+          -4.222395871267314
+        ],
+        [
+          -4.943542547398225,
+          -5.065928929807223
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 126,
+      "family": null,
+      "group": 22,
+      "kind": "ordinary_other_voice",
+      "location": "balanced_target",
+      "route": 0,
+      "scores": [
+        [
+          -4.800137481394452,
+          -5.192134788485422
+        ],
+        [
+          -4.770592704816116,
+          -6.440594666042475
+        ],
+        [
+          -4.914814040296813,
+          -2.9194634307314797
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 127,
+      "family": "expressive",
+      "group": 22,
+      "kind": "synthetic",
+      "location": "balanced_target",
+      "route": 0,
+      "scores": [
+        [
+          -4.800137481394452,
+          -4.711845397271764
+        ],
+        [
+          -3.8170683017288143,
+          -4.695425935263175
+        ],
+        [
+          -4.924087021378976,
+          -2.559738093893447
+        ]
+      ],
+      "truth": [
+        48640,
+        61440
+      ]
+    },
+    {
+      "case": 128,
+      "family": null,
+      "group": 22,
+      "kind": "untouched",
+      "location": "lateral_target",
+      "route": 1,
+      "scores": [
+        [
+          -3.9984841123270094,
+          -5.059805802530146
+        ],
+        [
+          4.11305941971435,
+          -2.6841204647322536
+        ],
+        [
+          -3.3592000340596724,
+          -5.152103877243612
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 129,
+      "family": null,
+      "group": 22,
+      "kind": "ordinary_same_host",
+      "location": "lateral_target",
+      "route": 1,
+      "scores": [
+        [
+          -3.9984841123270094,
+          -4.321657137180775
+        ],
+        [
+          2.4498343060779524,
+          -3.060766235702384
+        ],
+        [
+          1.8970177876416154,
+          -4.5197849336983005
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 130,
+      "family": null,
+      "group": 22,
+      "kind": "ordinary_other_voice",
+      "location": "lateral_target",
+      "route": 1,
+      "scores": [
+        [
+          -3.9984841123270094,
+          -3.7241372889423463
+        ],
+        [
+          -5.617277104314677,
+          -5.764096303443591
+        ],
+        [
+          -3.1274576340785076,
+          -3.23168852268424
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 131,
+      "family": "expressive",
+      "group": 22,
+      "kind": "synthetic",
+      "location": "lateral_target",
+      "route": 0,
+      "scores": [
+        [
+          -3.9984841123270094,
+          -3.259814764231835
+        ],
+        [
+          -5.144866942542229,
+          -2.5399942173324948
+        ],
+        [
+          6.369901042534937,
+          5.336171628660535
+        ]
+      ],
+      "truth": [
+        48640,
+        61440
+      ]
+    },
+    {
+      "case": 132,
+      "family": null,
+      "group": 22,
+      "kind": "untouched",
+      "location": "second_competitor",
+      "route": 0,
+      "scores": [
+        [
+          5.1677136163297845,
+          3.151412644054078
+        ],
+        [
+          -4.355942746801296,
+          -4.206844286405141
+        ],
+        [
+          -4.35418129440169,
+          -4.111229843382553
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 133,
+      "family": null,
+      "group": 22,
+      "kind": "ordinary_same_host",
+      "location": "second_competitor",
+      "route": 0,
+      "scores": [
+        [
+          5.1677136163297845,
+          -2.6179405023901667
+        ],
+        [
+          -4.316832612069802,
+          -4.131345251135486
+        ],
+        [
+          -3.235753814875795,
+          -2.936852694850067
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 134,
+      "family": null,
+      "group": 22,
+      "kind": "ordinary_other_voice",
+      "location": "second_competitor",
+      "route": 0,
+      "scores": [
+        [
+          5.1677136163297845,
+          4.528485184401891
+        ],
+        [
+          -4.8242177961060255,
+          -5.205723741675378
+        ],
+        [
+          0.6863825698393415,
+          -1.9164304140870023
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 135,
+      "family": "expressive",
+      "group": 22,
+      "kind": "synthetic",
+      "location": "second_competitor",
+      "route": 0,
+      "scores": [
+        [
+          5.1677136163297845,
+          5.695701299992574
+        ],
+        [
+          -4.549674035091689,
+          -3.9269270635305755
+        ],
+        [
+          -3.164162933467265,
+          4.451102938962813
+        ]
+      ],
+      "truth": [
+        48640,
+        61440
+      ]
+    },
+    {
+      "case": 136,
+      "family": null,
+      "group": 23,
+      "kind": "untouched",
+      "location": "balanced_target",
+      "route": 1,
+      "scores": [
+        [
+          1.4246571127322145,
+          -4.528567853760524
+        ],
+        [
+          -4.126352293310113,
+          -2.9899926763066893
+        ],
+        [
+          null,
+          -6.621684045449368
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 137,
+      "family": null,
+      "group": 23,
+      "kind": "ordinary_same_host",
+      "location": "balanced_target",
+      "route": 1,
+      "scores": [
+        [
+          3.9486879149724645,
+          -4.527405720647737
+        ],
+        [
+          -3.4718213186316964,
+          -4.119275071831219
+        ],
+        [
+          2.475849601652082,
+          -6.5043916844397
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 138,
+      "family": null,
+      "group": 23,
+      "kind": "ordinary_other_voice",
+      "location": "balanced_target",
+      "route": 1,
+      "scores": [
+        [
+          5.869780054941165,
+          -4.522029906532673
+        ],
+        [
+          -5.571943315361252,
+          -4.260986304832678
+        ],
+        [
+          null,
+          -6.489133870752713
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 139,
+      "family": "stock",
+      "group": 23,
+      "kind": "synthetic",
+      "location": "balanced_target",
+      "route": 1,
+      "scores": [
+        [
+          -1.7427136585625704,
+          -4.519267495424053
+        ],
+        [
+          -5.556564354786028,
+          -3.6450558098630172
+        ],
+        [
+          null,
+          -6.647122346536476
+        ]
+      ],
+      "truth": [
+        16640,
+        32000
+      ]
+    },
+    {
+      "case": 140,
+      "family": null,
+      "group": 23,
+      "kind": "untouched",
+      "location": "lateral_target",
+      "route": 1,
+      "scores": [
+        [
+          -4.404742207033875,
+          -6.016198129209697
+        ],
+        [
+          3.1178720318400766,
+          -6.732604031485375
+        ],
+        [
+          -4.853136019824206,
+          null
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 141,
+      "family": null,
+      "group": 23,
+      "kind": "ordinary_same_host",
+      "location": "lateral_target",
+      "route": 1,
+      "scores": [
+        [
+          4.281348073765367,
+          -6.046002887450647
+        ],
+        [
+          -6.328333888963025,
+          -6.742172736325403
+        ],
+        [
+          -3.2207417372623786,
+          null
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 142,
+      "family": null,
+      "group": 23,
+      "kind": "ordinary_other_voice",
+      "location": "lateral_target",
+      "route": 1,
+      "scores": [
+        [
+          -2.9541661673565858,
+          -6.016437025057413
+        ],
+        [
+          -4.624884659012666,
+          -6.649259580740527
+        ],
+        [
+          -2.4733736208859067,
+          null
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 143,
+      "family": "stock",
+      "group": 23,
+      "kind": "synthetic",
+      "location": "lateral_target",
+      "route": 1,
+      "scores": [
+        [
+          4.297940640931018,
+          -6.022269275951315
+        ],
+        [
+          -5.412769790690252,
+          -6.845243492651571
+        ],
+        [
+          -4.020829140252965,
+          null
+        ]
+      ],
+      "truth": [
+        16640,
+        32000
+      ]
+    },
+    {
+      "case": 144,
+      "family": null,
+      "group": 23,
+      "kind": "untouched",
+      "location": "second_competitor",
+      "route": 1,
+      "scores": [
+        [
+          0.6310785575773881,
+          -2.930175087658951
+        ],
+        [
+          3.5935904314610356,
+          null
+        ],
+        [
+          -3.3286695225082417,
+          -3.179088599153963
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 145,
+      "family": null,
+      "group": 23,
+      "kind": "ordinary_same_host",
+      "location": "second_competitor",
+      "route": 1,
+      "scores": [
+        [
+          1.308202021043641,
+          -2.8749475455043396
+        ],
+        [
+          -3.5593359453428053,
+          null
+        ],
+        [
+          -3.447539267770639,
+          -3.735258376303688
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 146,
+      "family": null,
+      "group": 23,
+      "kind": "ordinary_other_voice",
+      "location": "second_competitor",
+      "route": 1,
+      "scores": [
+        [
+          -0.4953346357158932,
+          -2.976464556312257
+        ],
+        [
+          -2.8196173421135162,
+          null
+        ],
+        [
+          -3.779909173711561,
+          -3.4892045916665952
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 147,
+      "family": "stock",
+      "group": 23,
+      "kind": "synthetic",
+      "location": "second_competitor",
+      "route": 1,
+      "scores": [
+        [
+          -2.331876438276261,
+          -2.897020757298541
+        ],
+        [
+          1.9334319198717862,
+          null
+        ],
+        [
+          null,
+          -3.4704342229033065
+        ]
+      ],
+      "truth": [
+        16640,
+        32000
+      ]
+    },
+    {
+      "case": 148,
+      "family": null,
+      "group": 24,
+      "kind": "background_only",
+      "location": "balanced_target",
+      "route": 1,
+      "scores": [
+        [
+          null,
+          -6.611496879315884
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          -6.603572809354752
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 149,
+      "family": null,
+      "group": 24,
+      "kind": "background_only",
+      "location": "lateral_target",
+      "route": 1,
+      "scores": [
+        [
+          null,
+          -6.106380425289604
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          -5.998242414578242
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 150,
+      "family": null,
+      "group": 24,
+      "kind": "background_only",
+      "location": "second_competitor",
+      "route": null,
+      "scores": [
+        [
+          4.834216793623787,
+          -6.702847446445942
+        ],
+        [
+          6.943407529267564,
+          null
+        ],
+        [
+          null,
+          -7.081562074485946
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 151,
+      "family": null,
+      "group": 25,
+      "kind": "background_only",
+      "location": "balanced_target",
+      "route": 0,
+      "scores": [
+        [
+          5.4235216393860615,
+          null
+        ],
+        [
+          -6.397772777883021,
+          null
+        ],
+        [
+          4.476457557933188,
+          null
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 152,
+      "family": null,
+      "group": 25,
+      "kind": "background_only",
+      "location": "lateral_target",
+      "route": 1,
+      "scores": [
+        [
+          5.8458441705708,
+          null
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          5.484352929665167,
+          null
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 153,
+      "family": null,
+      "group": 25,
+      "kind": "background_only",
+      "location": "second_competitor",
+      "route": 0,
+      "scores": [
+        [
+          -3.2693747745795636,
+          null
+        ],
+        [
+          4.481912972176882,
+          null
+        ],
+        [
+          -5.173960247899127,
+          null
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 154,
+      "family": null,
+      "group": 26,
+      "kind": "background_only",
+      "location": "balanced_target",
+      "route": 0,
+      "scores": [
+        [
+          -3.4225811645295194,
+          null
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          -3.834290528164862,
+          null
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 155,
+      "family": null,
+      "group": 26,
+      "kind": "background_only",
+      "location": "lateral_target",
+      "route": 1,
+      "scores": [
+        [
+          -2.874604204409083,
+          null
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          -2.6444873777995546,
+          null
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 156,
+      "family": null,
+      "group": 26,
+      "kind": "background_only",
+      "location": "second_competitor",
+      "route": 0,
+      "scores": [
+        [
+          -2.893362990267334,
+          null
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          -4.9849557734433905,
+          null
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 157,
+      "family": null,
+      "group": 27,
+      "kind": "background_only",
+      "location": "balanced_target",
+      "route": 0,
+      "scores": [
+        [
+          -6.137427311916286,
+          null
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          -5.897965942717209,
+          -6.237437317491159
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 158,
+      "family": null,
+      "group": 27,
+      "kind": "background_only",
+      "location": "lateral_target",
+      "route": 1,
+      "scores": [
+        [
+          -6.273372674985325,
+          null
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          -6.175627711085179,
+          null
+        ]
+      ],
+      "truth": null
+    },
+    {
+      "case": 159,
+      "family": null,
+      "group": 27,
+      "kind": "background_only",
+      "location": "second_competitor",
+      "route": 1,
+      "scores": [
+        [
+          null,
+          null
+        ],
+        [
+          -5.831126225292385,
+          null
+        ],
+        [
+          null,
+          -4.67390442008916
+        ]
+      ],
+      "truth": null
+    }
+  ],
+  "scalar_replay_sha256": "d805470f4c39a153046866e04b9ae57da287c610a0985896f1655c04e1245e53",
+  "schema": "chipmunk.audio-unassigned-stereo-voice/1",
+  "separator_sha256": "baf3f9ad4140a33bb527f4a079aa9d1f82a86b09eb5adcead79913bcfa4991e0",
+  "sources": {
+    "pilot": "28a3ecbaa264cff9de2f37a510734255fda833a4b057726127d6de0922f41f8a",
+    "transfer": "2c327a1f52931510cd07091cb4b7fb38ae868c7895d456e548e660fcc6e47e11"
+  },
+  "summary": {
+    "all_admitted": {
+      "points": {
+        "balanced": 6.760727907655432,
+        "both": -3.7725925419136632,
+        "either": 6.760727907655432,
+        "original": 5.356589748054317
+      },
+      "trials": {
+        "balanced_target": {
+          "edited": 8,
+          "equal_false_group": {
+            "0": {
+              "balanced": 0,
+              "both": 0,
+              "either": 0,
+              "original": 0
+            },
+            "1": {
+              "balanced": 0,
+              "both": 1,
+              "either": 0,
+              "original": 0
+            },
+            "2": {
+              "balanced": 4,
+              "both": 1,
+              "either": 0,
+              "original": 0
+            }
+          },
+          "fixed": {
+            "balanced": {
+              "AI flags": 1,
+              "assessed": 31,
+              "background_flags": 0,
+              "false_clips": 4,
+              "false_groups": 2,
+              "inconclusive": 26,
+              "lost_locations": 0,
+              "new_background_flags": 0,
+              "new_false_groups": 1,
+              "new_families": [],
+              "new_locations": 0,
+              "unassessed": 5,
+              "useful_locations": 0,
+              "wrong_locations": 1
+            },
+            "both": {
+              "AI flags": 1,
+              "assessed": 30,
+              "background_flags": 0,
+              "false_clips": 6,
+              "false_groups": 4,
+              "inconclusive": 23,
+              "lost_locations": 0,
+              "new_background_flags": 0,
+              "new_false_groups": 2,
+              "new_families": [
+                "clone"
+              ],
+              "new_locations": 1,
+              "unassessed": 6,
+              "useful_locations": 1,
+              "wrong_locations": 0
+            },
+            "either": {
+              "AI flags": 1,
+              "assessed": 36,
+              "background_flags": 0,
+              "false_clips": 4,
+              "false_groups": 2,
+              "inconclusive": 31,
+              "lost_locations": 0,
+              "new_background_flags": 0,
+              "new_false_groups": 1,
+              "new_families": [],
+              "new_locations": 0,
+              "unassessed": 0,
+              "useful_locations": 0,
+              "wrong_locations": 1
+            },
+            "original": {
+              "AI flags": 2,
+              "assessed": 36,
+              "background_flags": 1,
+              "false_clips": 8,
+              "false_groups": 4,
+              "inconclusive": 26,
+              "lost_locations": 0,
+              "new_background_flags": 0,
+              "new_false_groups": 0,
+              "new_families": [],
+              "new_locations": 0,
+              "unassessed": 0,
+              "useful_locations": 0,
+              "wrong_locations": 2
+            }
+          },
+          "ordinary": 28
+        },
+        "bbc": {
+          "edited": 6,
+          "equal_false_group": {
+            "0": {
+              "balanced": 0,
+              "both": 0,
+              "either": 0,
+              "original": 0
+            },
+            "1": {
+              "balanced": 0,
+              "both": 0,
+              "either": 0,
+              "original": 0
+            },
+            "2": {
+              "balanced": 2,
+              "both": 0,
+              "either": 2,
+              "original": 0
+            }
+          },
+          "fixed": {
+            "balanced": {
+              "AI flags": 3,
+              "assessed": 26,
+              "background_flags": 0,
+              "false_clips": 5,
+              "false_groups": 2,
+              "inconclusive": 18,
+              "lost_locations": 0,
+              "new_background_flags": 0,
+              "new_false_groups": 1,
+              "new_families": [
+                "clone",
+                "expressive"
+              ],
+              "new_locations": 2,
+              "unassessed": 0,
+              "useful_locations": 2,
+              "wrong_locations": 1
+            },
+            "both": {
+              "AI flags": 2,
+              "assessed": 26,
+              "background_flags": 0,
+              "false_clips": 7,
+              "false_groups": 3,
+              "inconclusive": 17,
+              "lost_locations": 0,
+              "new_background_flags": 0,
+              "new_false_groups": 3,
+              "new_families": [],
+              "new_locations": 0,
+              "unassessed": 0,
+              "useful_locations": 0,
+              "wrong_locations": 2
+            },
+            "either": {
+              "AI flags": 3,
+              "assessed": 26,
+              "background_flags": 0,
+              "false_clips": 5,
+              "false_groups": 2,
+              "inconclusive": 18,
+              "lost_locations": 0,
+              "new_background_flags": 0,
+              "new_false_groups": 1,
+              "new_families": [
+                "clone",
+                "expressive"
+              ],
+              "new_locations": 2,
+              "unassessed": 0,
+              "useful_locations": 2,
+              "wrong_locations": 1
+            },
+            "original": {
+              "AI flags": 1,
+              "assessed": 26,
+              "background_flags": 0,
+              "false_clips": 4,
+              "false_groups": 2,
+              "inconclusive": 21,
+              "lost_locations": 0,
+              "new_background_flags": 0,
+              "new_false_groups": 0,
+              "new_families": [],
+              "new_locations": 0,
+              "unassessed": 0,
+              "useful_locations": 0,
+              "wrong_locations": 1
+            }
+          },
+          "ordinary": 20
+        },
+        "lateral_target": {
+          "edited": 8,
+          "equal_false_group": {
+            "0": {
+              "balanced": 0,
+              "both": 0,
+              "either": 0,
+              "original": 0
+            },
+            "1": {
+              "balanced": 0,
+              "both": 2,
+              "either": 0,
+              "original": 0
+            },
+            "2": {
+              "balanced": 2,
+              "both": 2,
+              "either": 1,
+              "original": 0
+            }
+          },
+          "fixed": {
+            "balanced": {
+              "AI flags": 0,
+              "assessed": 32,
+              "background_flags": 0,
+              "false_clips": 0,
+              "false_groups": 0,
+              "inconclusive": 32,
+              "lost_locations": 0,
+              "new_background_flags": 0,
+              "new_false_groups": 0,
+              "new_families": [],
+              "new_locations": 0,
+              "unassessed": 4,
+              "useful_locations": 0,
+              "wrong_locations": 0
+            },
+            "both": {
+              "AI flags": 5,
+              "assessed": 28,
+              "background_flags": 0,
+              "false_clips": 13,
+              "false_groups": 6,
+              "inconclusive": 10,
+              "lost_locations": 0,
+              "new_background_flags": 0,
+              "new_false_groups": 5,
+              "new_families": [
+                "clone",
+                "expressive",
+                "stock"
+              ],
+              "new_locations": 4,
+              "unassessed": 8,
+              "useful_locations": 4,
+              "wrong_locations": 1
+            },
+            "either": {
+              "AI flags": 2,
+              "assessed": 36,
+              "background_flags": 0,
+              "false_clips": 4,
+              "false_groups": 2,
+              "inconclusive": 30,
+              "lost_locations": 0,
+              "new_background_flags": 0,
+              "new_false_groups": 1,
+              "new_families": [
+                "clone"
+              ],
+              "new_locations": 1,
+              "unassessed": 0,
+              "useful_locations": 1,
+              "wrong_locations": 1
+            },
+            "original": {
+              "AI flags": 0,
+              "assessed": 36,
+              "background_flags": 1,
+              "false_clips": 3,
+              "false_groups": 3,
+              "inconclusive": 33,
+              "lost_locations": 0,
+              "new_background_flags": 0,
+              "new_false_groups": 0,
+              "new_families": [],
+              "new_locations": 0,
+              "unassessed": 0,
+              "useful_locations": 0,
+              "wrong_locations": 0
+            }
+          },
+          "ordinary": 28
+        },
+        "second_competitor": {
+          "edited": 8,
+          "equal_false_group": {
+            "0": {
+              "balanced": 0,
+              "both": 0,
+              "either": 0,
+              "original": 0
+            },
+            "1": {
+              "balanced": 0,
+              "both": 0,
+              "either": 0,
+              "original": 0
+            },
+            "2": {
+              "balanced": 1,
+              "both": 1,
+              "either": 0,
+              "original": 0
+            }
+          },
+          "fixed": {
+            "balanced": {
+              "AI flags": 0,
+              "assessed": 27,
+              "background_flags": 0,
+              "false_clips": 2,
+              "false_groups": 2,
+              "inconclusive": 25,
+              "lost_locations": 3,
+              "new_background_flags": 0,
+              "new_false_groups": 0,
+              "new_families": [],
+              "new_locations": 0,
+              "unassessed": 9,
+              "useful_locations": 0,
+              "wrong_locations": 0
+            },
+            "both": {
+              "AI flags": 4,
+              "assessed": 29,
+              "background_flags": 0,
+              "false_clips": 10,
+              "false_groups": 4,
+              "inconclusive": 15,
+              "lost_locations": 2,
+              "new_background_flags": 0,
+              "new_false_groups": 2,
+              "new_families": [
+                "stock"
+              ],
+              "new_locations": 1,
+              "unassessed": 7,
+              "useful_locations": 2,
+              "wrong_locations": 2
+            },
+            "either": {
+              "AI flags": 0,
+              "assessed": 36,
+              "background_flags": 1,
+              "false_clips": 4,
+              "false_groups": 3,
+              "inconclusive": 32,
+              "lost_locations": 3,
+              "new_background_flags": 1,
+              "new_false_groups": 1,
+              "new_families": [],
+              "new_locations": 0,
+              "unassessed": 0,
+              "useful_locations": 0,
+              "wrong_locations": 0
+            },
+            "original": {
+              "AI flags": 3,
+              "assessed": 35,
+              "background_flags": 0,
+              "false_clips": 6,
+              "false_groups": 3,
+              "inconclusive": 26,
+              "lost_locations": 0,
+              "new_background_flags": 0,
+              "new_false_groups": 0,
+              "new_families": [],
+              "new_locations": 0,
+              "unassessed": 1,
+              "useful_locations": 3,
+              "wrong_locations": 0
+            }
+          },
+          "ordinary": 28
+        }
+      }
+    },
+    "shared": {
+      "points": {
+        "balanced": 6.760727907655432,
+        "both": -3.7725925419136632,
+        "either": 6.760727907655432,
+        "original": 5.356589748054317
+      },
+      "trials": {
+        "balanced_target": {
+          "edited": 8,
+          "equal_false_group": {
+            "0": {
+              "balanced": 0,
+              "both": 0,
+              "either": 0,
+              "original": 0
+            },
+            "1": {
+              "balanced": 0,
+              "both": 1,
+              "either": 0,
+              "original": 0
+            },
+            "2": {
+              "balanced": 4,
+              "both": 1,
+              "either": 0,
+              "original": 0
+            }
+          },
+          "fixed": {
+            "balanced": {
+              "AI flags": 1,
+              "assessed": 31,
+              "background_flags": 0,
+              "false_clips": 4,
+              "false_groups": 2,
+              "inconclusive": 26,
+              "lost_locations": 0,
+              "new_background_flags": 0,
+              "new_false_groups": 1,
+              "new_families": [],
+              "new_locations": 0,
+              "unassessed": 5,
+              "useful_locations": 0,
+              "wrong_locations": 1
+            },
+            "both": {
+              "AI flags": 1,
+              "assessed": 30,
+              "background_flags": 0,
+              "false_clips": 6,
+              "false_groups": 4,
+              "inconclusive": 23,
+              "lost_locations": 0,
+              "new_background_flags": 0,
+              "new_false_groups": 2,
+              "new_families": [
+                "clone"
+              ],
+              "new_locations": 1,
+              "unassessed": 6,
+              "useful_locations": 1,
+              "wrong_locations": 0
+            },
+            "either": {
+              "AI flags": 1,
+              "assessed": 36,
+              "background_flags": 0,
+              "false_clips": 4,
+              "false_groups": 2,
+              "inconclusive": 31,
+              "lost_locations": 0,
+              "new_background_flags": 0,
+              "new_false_groups": 1,
+              "new_families": [],
+              "new_locations": 0,
+              "unassessed": 0,
+              "useful_locations": 0,
+              "wrong_locations": 1
+            },
+            "original": {
+              "AI flags": 2,
+              "assessed": 36,
+              "background_flags": 1,
+              "false_clips": 8,
+              "false_groups": 4,
+              "inconclusive": 26,
+              "lost_locations": 0,
+              "new_background_flags": 0,
+              "new_false_groups": 0,
+              "new_families": [],
+              "new_locations": 0,
+              "unassessed": 0,
+              "useful_locations": 0,
+              "wrong_locations": 2
+            }
+          },
+          "ordinary": 28
+        },
+        "bbc": {
+          "edited": 6,
+          "equal_false_group": {
+            "0": {
+              "balanced": 0,
+              "both": 0,
+              "either": 0,
+              "original": 0
+            },
+            "1": {
+              "balanced": 0,
+              "both": 0,
+              "either": 0,
+              "original": 0
+            },
+            "2": {
+              "balanced": 2,
+              "both": 0,
+              "either": 2,
+              "original": 0
+            }
+          },
+          "fixed": {
+            "balanced": {
+              "AI flags": 3,
+              "assessed": 26,
+              "background_flags": 0,
+              "false_clips": 5,
+              "false_groups": 2,
+              "inconclusive": 18,
+              "lost_locations": 0,
+              "new_background_flags": 0,
+              "new_false_groups": 1,
+              "new_families": [
+                "clone",
+                "expressive"
+              ],
+              "new_locations": 2,
+              "unassessed": 0,
+              "useful_locations": 2,
+              "wrong_locations": 1
+            },
+            "both": {
+              "AI flags": 2,
+              "assessed": 26,
+              "background_flags": 0,
+              "false_clips": 7,
+              "false_groups": 3,
+              "inconclusive": 17,
+              "lost_locations": 0,
+              "new_background_flags": 0,
+              "new_false_groups": 3,
+              "new_families": [],
+              "new_locations": 0,
+              "unassessed": 0,
+              "useful_locations": 0,
+              "wrong_locations": 2
+            },
+            "either": {
+              "AI flags": 3,
+              "assessed": 26,
+              "background_flags": 0,
+              "false_clips": 5,
+              "false_groups": 2,
+              "inconclusive": 18,
+              "lost_locations": 0,
+              "new_background_flags": 0,
+              "new_false_groups": 1,
+              "new_families": [
+                "clone",
+                "expressive"
+              ],
+              "new_locations": 2,
+              "unassessed": 0,
+              "useful_locations": 2,
+              "wrong_locations": 1
+            },
+            "original": {
+              "AI flags": 1,
+              "assessed": 26,
+              "background_flags": 0,
+              "false_clips": 4,
+              "false_groups": 2,
+              "inconclusive": 21,
+              "lost_locations": 0,
+              "new_background_flags": 0,
+              "new_false_groups": 0,
+              "new_families": [],
+              "new_locations": 0,
+              "unassessed": 0,
+              "useful_locations": 0,
+              "wrong_locations": 1
+            }
+          },
+          "ordinary": 20
+        },
+        "lateral_target": {
+          "edited": 8,
+          "equal_false_group": {
+            "0": {
+              "balanced": 0,
+              "both": 0,
+              "either": 0,
+              "original": 0
+            },
+            "1": {
+              "balanced": 0,
+              "both": 2,
+              "either": 0,
+              "original": 0
+            },
+            "2": {
+              "balanced": 2,
+              "both": 2,
+              "either": 1,
+              "original": 0
+            }
+          },
+          "fixed": {
+            "balanced": {
+              "AI flags": 0,
+              "assessed": 32,
+              "background_flags": 0,
+              "false_clips": 0,
+              "false_groups": 0,
+              "inconclusive": 32,
+              "lost_locations": 0,
+              "new_background_flags": 0,
+              "new_false_groups": 0,
+              "new_families": [],
+              "new_locations": 0,
+              "unassessed": 4,
+              "useful_locations": 0,
+              "wrong_locations": 0
+            },
+            "both": {
+              "AI flags": 5,
+              "assessed": 28,
+              "background_flags": 0,
+              "false_clips": 13,
+              "false_groups": 6,
+              "inconclusive": 10,
+              "lost_locations": 0,
+              "new_background_flags": 0,
+              "new_false_groups": 5,
+              "new_families": [
+                "clone",
+                "expressive",
+                "stock"
+              ],
+              "new_locations": 4,
+              "unassessed": 8,
+              "useful_locations": 4,
+              "wrong_locations": 1
+            },
+            "either": {
+              "AI flags": 2,
+              "assessed": 36,
+              "background_flags": 0,
+              "false_clips": 4,
+              "false_groups": 2,
+              "inconclusive": 30,
+              "lost_locations": 0,
+              "new_background_flags": 0,
+              "new_false_groups": 1,
+              "new_families": [
+                "clone"
+              ],
+              "new_locations": 1,
+              "unassessed": 0,
+              "useful_locations": 1,
+              "wrong_locations": 1
+            },
+            "original": {
+              "AI flags": 0,
+              "assessed": 36,
+              "background_flags": 1,
+              "false_clips": 3,
+              "false_groups": 3,
+              "inconclusive": 33,
+              "lost_locations": 0,
+              "new_background_flags": 0,
+              "new_false_groups": 0,
+              "new_families": [],
+              "new_locations": 0,
+              "unassessed": 0,
+              "useful_locations": 0,
+              "wrong_locations": 0
+            }
+          },
+          "ordinary": 28
+        },
+        "second_competitor": {
+          "edited": 8,
+          "equal_false_group": {
+            "0": {
+              "balanced": 0,
+              "both": 0,
+              "either": 0,
+              "original": 0
+            },
+            "1": {
+              "balanced": 0,
+              "both": 0,
+              "either": 0,
+              "original": 0
+            },
+            "2": {
+              "balanced": 1,
+              "both": 1,
+              "either": 0,
+              "original": 0
+            }
+          },
+          "fixed": {
+            "balanced": {
+              "AI flags": 0,
+              "assessed": 26,
+              "background_flags": 0,
+              "false_clips": 2,
+              "false_groups": 2,
+              "inconclusive": 24,
+              "lost_locations": 3,
+              "new_background_flags": 0,
+              "new_false_groups": 0,
+              "new_families": [],
+              "new_locations": 0,
+              "unassessed": 10,
+              "useful_locations": 0,
+              "wrong_locations": 0
+            },
+            "both": {
+              "AI flags": 4,
+              "assessed": 29,
+              "background_flags": 0,
+              "false_clips": 10,
+              "false_groups": 4,
+              "inconclusive": 15,
+              "lost_locations": 2,
+              "new_background_flags": 0,
+              "new_false_groups": 2,
+              "new_families": [
+                "stock"
+              ],
+              "new_locations": 1,
+              "unassessed": 7,
+              "useful_locations": 2,
+              "wrong_locations": 2
+            },
+            "either": {
+              "AI flags": 0,
+              "assessed": 35,
+              "background_flags": 1,
+              "false_clips": 4,
+              "false_groups": 3,
+              "inconclusive": 31,
+              "lost_locations": 3,
+              "new_background_flags": 1,
+              "new_false_groups": 1,
+              "new_families": [],
+              "new_locations": 0,
+              "unassessed": 1,
+              "useful_locations": 0,
+              "wrong_locations": 0
+            },
+            "original": {
+              "AI flags": 3,
+              "assessed": 35,
+              "background_flags": 0,
+              "false_clips": 6,
+              "false_groups": 3,
+              "inconclusive": 26,
+              "lost_locations": 0,
+              "new_background_flags": 0,
+              "new_false_groups": 0,
+              "new_families": [],
+              "new_locations": 0,
+              "unassessed": 1,
+              "useful_locations": 3,
+              "wrong_locations": 0
+            }
+          },
+          "ordinary": 28
+        }
+      }
+    }
+  },
+  "windows": [
+    [
+      16000,
+      48000
+    ],
+    [
+      48000,
+      80000
+    ]
+  ]
+}

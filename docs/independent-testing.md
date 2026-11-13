@@ -67,6 +67,12 @@ produces no wording highlights.
 The [two-room voice study](audio-spatial-mask-aachen-transfer-2026-11-13.md)
 publishes fixed comparison points, an alternate FFT replay and a reader for
 checking the decisions without distributing speech or separated waveforms.
+The [room and competing-speech ladder](audio-room-stress-transfer-2026-11-13.md#replay)
+and [mouth luminance detail study](video-mouth-luma-condition-2026-11-13.md#replay-the-published-ledger)
+include standalone standard-library readers for both findings and misses.
+The [JPEG tile main bank](image-regional-tile-rescue-2026-11-13.md#coverage-and-replay)
+provides anonymous per-file pixel counts and recomputes the ordinary flags and
+edit overlap without the images or weights.
 
 The [large-image copy comparison](image-affine-native-scale-2026-11-11.md#reproduce)
 provides a licensed roster, exact source commitments, and a separate reader

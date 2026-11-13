@@ -1,0 +1,5012 @@
+{
+  "assessment": {
+    "forwards": 424,
+    "rows": [
+      {
+        "actual_snr_db": null,
+        "case": 0,
+        "family": "cosyvoice",
+        "group": "edit-00",
+        "kind": "publisher_edit",
+        "responses": {
+          "mono": [
+            [
+              7.3102131642488954,
+              7.4110792761845
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "dry",
+        "truth": [
+          [
+            14672,
+            27872
+          ],
+          [
+            46400,
+            52640
+          ],
+          [
+            54560,
+            66640
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": null,
+        "case": 1,
+        "family": "cosyvoice",
+        "group": "edit-00",
+        "kind": "publisher_edit",
+        "responses": {
+          "mono": [
+            [
+              7.185890705829086,
+              7.405369948120248
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "early_room",
+        "truth": [
+          [
+            14672,
+            27872
+          ],
+          [
+            46400,
+            52640
+          ],
+          [
+            54560,
+            66640
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": null,
+        "case": 2,
+        "family": "cosyvoice",
+        "group": "edit-00",
+        "kind": "publisher_edit",
+        "responses": {
+          "mono": [
+            [
+              -5.935018559847416,
+              4.085402105101266
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "full_room",
+        "truth": [
+          [
+            14672,
+            27872
+          ],
+          [
+            46400,
+            52640
+          ],
+          [
+            54560,
+            66640
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": 4.999999,
+        "case": 3,
+        "family": "cosyvoice",
+        "group": "edit-00",
+        "kind": "publisher_edit",
+        "responses": {
+          "auxiva": [
+            [
+              5.3146887104351075,
+              6.031436273529367
+            ],
+            [
+              -6.793513766226676,
+              -6.645971256364106
+            ]
+          ],
+          "mono": [
+            [
+              -4.405560465498156,
+              -4.532368692144653
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "snr_5",
+        "truth": [
+          [
+            14672,
+            27872
+          ],
+          [
+            46400,
+            52640
+          ],
+          [
+            54560,
+            66640
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": -7e-06,
+        "case": 4,
+        "family": "cosyvoice",
+        "group": "edit-00",
+        "kind": "publisher_edit",
+        "responses": {
+          "auxiva": [
+            [
+              6.1945661871433675,
+              4.26969690575562
+            ],
+            [
+              -6.932314883946206,
+              -6.573704739437641
+            ]
+          ],
+          "mono": [
+            [
+              -4.756267517725163,
+              -5.0901307795580415
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "snr_0",
+        "truth": [
+          [
+            14672,
+            27872
+          ],
+          [
+            46400,
+            52640
+          ],
+          [
+            54560,
+            66640
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": -5.000005,
+        "case": 5,
+        "family": "cosyvoice",
+        "group": "edit-00",
+        "kind": "publisher_edit",
+        "responses": {
+          "auxiva": [
+            [
+              6.087554159727661,
+              -5.609124632173533
+            ],
+            [
+              -6.904000211823425,
+              -5.561450030753759
+            ]
+          ],
+          "mono": [
+            [
+              -6.160140993782059,
+              -5.3107824742216065
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "snr_-5",
+        "truth": [
+          [
+            14672,
+            27872
+          ],
+          [
+            46400,
+            52640
+          ],
+          [
+            54560,
+            66640
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": -10.000005,
+        "case": 6,
+        "family": "cosyvoice",
+        "group": "edit-00",
+        "kind": "publisher_edit",
+        "responses": {
+          "auxiva": [
+            [
+              -4.826628681831269,
+              -6.433326702594536
+            ],
+            [
+              -6.803704284144191,
+              -3.916560157470198
+            ]
+          ],
+          "mono": [
+            [
+              -6.29346035648518,
+              -4.0932569240888474
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "snr_-10",
+        "truth": [
+          [
+            14672,
+            27872
+          ],
+          [
+            46400,
+            52640
+          ],
+          [
+            54560,
+            66640
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": null,
+        "case": 7,
+        "family": "elevenlab",
+        "group": "edit-01",
+        "kind": "publisher_edit",
+        "responses": {
+          "mono": [
+            [
+              6.628663650224604,
+              -4.459884217456307
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "dry",
+        "truth": [
+          [
+            2160,
+            13680
+          ],
+          [
+            14800,
+            22480
+          ],
+          [
+            23440,
+            30800
+          ],
+          [
+            57232,
+            68912
+          ],
+          [
+            86416,
+            91376
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": null,
+        "case": 8,
+        "family": "elevenlab",
+        "group": "edit-01",
+        "kind": "publisher_edit",
+        "responses": {
+          "mono": [
+            [
+              6.909994771478931,
+              4.5373221962617665
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "early_room",
+        "truth": [
+          [
+            2160,
+            13680
+          ],
+          [
+            14800,
+            22480
+          ],
+          [
+            23440,
+            30800
+          ],
+          [
+            57232,
+            68912
+          ],
+          [
+            86416,
+            91376
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": null,
+        "case": 9,
+        "family": "elevenlab",
+        "group": "edit-01",
+        "kind": "publisher_edit",
+        "responses": {
+          "mono": [
+            [
+              -4.511410299945796,
+              -6.7129544625839594
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "full_room",
+        "truth": [
+          [
+            2160,
+            13680
+          ],
+          [
+            14800,
+            22480
+          ],
+          [
+            23440,
+            30800
+          ],
+          [
+            57232,
+            68912
+          ],
+          [
+            86416,
+            91376
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": 4.999994,
+        "case": 10,
+        "family": "elevenlab",
+        "group": "edit-01",
+        "kind": "publisher_edit",
+        "responses": {
+          "auxiva": [
+            [
+              null,
+              null
+            ],
+            [
+              -6.071140303727679,
+              -5.129149964693821
+            ]
+          ],
+          "mono": [
+            [
+              -5.675066922240345,
+              -5.984313071598484
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "snr_5",
+        "truth": [
+          [
+            2160,
+            13680
+          ],
+          [
+            14800,
+            22480
+          ],
+          [
+            23440,
+            30800
+          ],
+          [
+            57232,
+            68912
+          ],
+          [
+            86416,
+            91376
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": -1.2e-05,
+        "case": 11,
+        "family": "elevenlab",
+        "group": "edit-01",
+        "kind": "publisher_edit",
+        "responses": {
+          "auxiva": [
+            [
+              null,
+              null
+            ],
+            [
+              -5.137933730440818,
+              -3.7434463010181567
+            ]
+          ],
+          "mono": [
+            [
+              -5.95879930771112,
+              -6.256995641003728
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "snr_0",
+        "truth": [
+          [
+            2160,
+            13680
+          ],
+          [
+            14800,
+            22480
+          ],
+          [
+            23440,
+            30800
+          ],
+          [
+            57232,
+            68912
+          ],
+          [
+            86416,
+            91376
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": -5.000013,
+        "case": 12,
+        "family": "elevenlab",
+        "group": "edit-01",
+        "kind": "publisher_edit",
+        "responses": {
+          "auxiva": [
+            [
+              null,
+              null
+            ],
+            [
+              -5.5440703397905935,
+              -3.281901832961651
+            ]
+          ],
+          "mono": [
+            [
+              -5.8018149931237035,
+              -6.404222530365782
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "snr_-5",
+        "truth": [
+          [
+            2160,
+            13680
+          ],
+          [
+            14800,
+            22480
+          ],
+          [
+            23440,
+            30800
+          ],
+          [
+            57232,
+            68912
+          ],
+          [
+            86416,
+            91376
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": -10.000012,
+        "case": 13,
+        "family": "elevenlab",
+        "group": "edit-01",
+        "kind": "publisher_edit",
+        "responses": {
+          "auxiva": [
+            [
+              -6.595954924719505,
+              null
+            ],
+            [
+              -5.623280969631217,
+              -3.518320549408155
+            ]
+          ],
+          "mono": [
+            [
+              -5.051666216610241,
+              -6.81035140486869
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "snr_-10",
+        "truth": [
+          [
+            2160,
+            13680
+          ],
+          [
+            14800,
+            22480
+          ],
+          [
+            23440,
+            30800
+          ],
+          [
+            57232,
+            68912
+          ],
+          [
+            86416,
+            91376
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": null,
+        "case": 14,
+        "family": "gptsovits",
+        "group": "edit-02",
+        "kind": "publisher_edit",
+        "responses": {
+          "mono": [
+            [
+              -7.120120079528971,
+              4.18027281735359
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "dry",
+        "truth": [
+          [
+            52272,
+            68672
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": null,
+        "case": 15,
+        "family": "gptsovits",
+        "group": "edit-02",
+        "kind": "publisher_edit",
+        "responses": {
+          "mono": [
+            [
+              -7.111902709693488,
+              1.3663162810455307
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "early_room",
+        "truth": [
+          [
+            52272,
+            68672
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": null,
+        "case": 16,
+        "family": "gptsovits",
+        "group": "edit-02",
+        "kind": "publisher_edit",
+        "responses": {
+          "mono": [
+            [
+              -7.011570027919413,
+              -6.530336883491203
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "full_room",
+        "truth": [
+          [
+            52272,
+            68672
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": 5.000014,
+        "case": 17,
+        "family": "gptsovits",
+        "group": "edit-02",
+        "kind": "publisher_edit",
+        "responses": {
+          "auxiva": [
+            [
+              -4.512123582187245,
+              5.204816154890091
+            ],
+            [
+              null,
+              -6.5014409871313354
+            ]
+          ],
+          "mono": [
+            [
+              -2.2499766394919023,
+              4.720069412847997
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "snr_5",
+        "truth": [
+          [
+            52272,
+            68672
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": -5e-06,
+        "case": 18,
+        "family": "gptsovits",
+        "group": "edit-02",
+        "kind": "publisher_edit",
+        "responses": {
+          "auxiva": [
+            [
+              0.41955568788731457,
+              5.68732564527195
+            ],
+            [
+              -6.869688991494565,
+              -6.426085040582816
+            ]
+          ],
+          "mono": [
+            [
+              -4.234836583973904,
+              5.997893346095907
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "snr_0",
+        "truth": [
+          [
+            52272,
+            68672
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": -5.000008,
+        "case": 19,
+        "family": "gptsovits",
+        "group": "edit-02",
+        "kind": "publisher_edit",
+        "responses": {
+          "auxiva": [
+            [
+              3.066773768089013,
+              6.8637320323483735
+            ],
+            [
+              -6.988964038354937,
+              -6.5467948950123205
+            ]
+          ],
+          "mono": [
+            [
+              -4.871719389726986,
+              4.990260012368345
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "snr_-5",
+        "truth": [
+          [
+            52272,
+            68672
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": -9.999998,
+        "case": 20,
+        "family": "gptsovits",
+        "group": "edit-02",
+        "kind": "publisher_edit",
+        "responses": {
+          "auxiva": [
+            [
+              3.549870559880737,
+              6.882540578766322
+            ],
+            [
+              -6.742987173330818,
+              -5.872301161276749
+            ]
+          ],
+          "mono": [
+            [
+              -5.508725225889701,
+              -0.9304194444317495
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "snr_-10",
+        "truth": [
+          [
+            52272,
+            68672
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": null,
+        "case": 21,
+        "family": "ljjets",
+        "group": "edit-03",
+        "kind": "publisher_edit",
+        "responses": {
+          "mono": [
+            [
+              -5.9840201836384495,
+              7.257617972617163
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "dry",
+        "truth": [
+          [
+            3424,
+            12384
+          ],
+          [
+            18208,
+            33648
+          ],
+          [
+            52160,
+            63920
+          ],
+          [
+            82176,
+            93216
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": null,
+        "case": 22,
+        "family": "ljjets",
+        "group": "edit-03",
+        "kind": "publisher_edit",
+        "responses": {
+          "mono": [
+            [
+              3.212857585133951,
+              7.083889549531808
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "early_room",
+        "truth": [
+          [
+            3424,
+            12384
+          ],
+          [
+            18208,
+            33648
+          ],
+          [
+            52160,
+            63920
+          ],
+          [
+            82176,
+            93216
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": null,
+        "case": 23,
+        "family": "ljjets",
+        "group": "edit-03",
+        "kind": "publisher_edit",
+        "responses": {
+          "mono": [
+            [
+              -2.4036903023826834,
+              6.43415782562304
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "full_room",
+        "truth": [
+          [
+            3424,
+            12384
+          ],
+          [
+            18208,
+            33648
+          ],
+          [
+            52160,
+            63920
+          ],
+          [
+            82176,
+            93216
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": 5.000014,
+        "case": 24,
+        "family": "ljjets",
+        "group": "edit-03",
+        "kind": "publisher_edit",
+        "responses": {
+          "auxiva": [
+            [
+              null,
+              null
+            ],
+            [
+              -6.64994146826527,
+              4.528716463902417
+            ]
+          ],
+          "mono": [
+            [
+              -1.7116460949287036,
+              5.497438539276868
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "snr_5",
+        "truth": [
+          [
+            3424,
+            12384
+          ],
+          [
+            18208,
+            33648
+          ],
+          [
+            52160,
+            63920
+          ],
+          [
+            82176,
+            93216
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": 7e-06,
+        "case": 25,
+        "family": "ljjets",
+        "group": "edit-03",
+        "kind": "publisher_edit",
+        "responses": {
+          "auxiva": [
+            [
+              null,
+              null
+            ],
+            [
+              -6.719779961521421,
+              3.8422514204457765
+            ]
+          ],
+          "mono": [
+            [
+              2.769054411325919,
+              5.738601996391798
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "snr_0",
+        "truth": [
+          [
+            3424,
+            12384
+          ],
+          [
+            18208,
+            33648
+          ],
+          [
+            52160,
+            63920
+          ],
+          [
+            82176,
+            93216
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": -4.999993,
+        "case": 26,
+        "family": "ljjets",
+        "group": "edit-03",
+        "kind": "publisher_edit",
+        "responses": {
+          "auxiva": [
+            [
+              null,
+              -6.253843241230936
+            ],
+            [
+              -5.767972017538929,
+              4.48825406065784
+            ]
+          ],
+          "mono": [
+            [
+              3.6201974897165243,
+              1.653122457255002
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "snr_-5",
+        "truth": [
+          [
+            3424,
+            12384
+          ],
+          [
+            18208,
+            33648
+          ],
+          [
+            52160,
+            63920
+          ],
+          [
+            82176,
+            93216
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": -9.999999,
+        "case": 27,
+        "family": "ljjets",
+        "group": "edit-03",
+        "kind": "publisher_edit",
+        "responses": {
+          "auxiva": [
+            [
+              null,
+              -5.828050591386892
+            ],
+            [
+              -3.9936668832386006,
+              3.2479438725913807
+            ]
+          ],
+          "mono": [
+            [
+              3.46359499992383,
+              -3.272447118993695
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "snr_-10",
+        "truth": [
+          [
+            3424,
+            12384
+          ],
+          [
+            18208,
+            33648
+          ],
+          [
+            52160,
+            63920
+          ],
+          [
+            82176,
+            93216
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": null,
+        "case": 28,
+        "family": "xttsv2",
+        "group": "edit-04",
+        "kind": "publisher_edit",
+        "responses": {
+          "mono": [
+            [
+              -7.133795685477834,
+              7.419605213783309
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "dry",
+        "truth": [
+          [
+            57200,
+            73840
+          ],
+          [
+            74576,
+            83536
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": null,
+        "case": 29,
+        "family": "xttsv2",
+        "group": "edit-04",
+        "kind": "publisher_edit",
+        "responses": {
+          "mono": [
+            [
+              -7.1806231181015905,
+              7.3944363303308425
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "early_room",
+        "truth": [
+          [
+            57200,
+            73840
+          ],
+          [
+            74576,
+            83536
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": null,
+        "case": 30,
+        "family": "xttsv2",
+        "group": "edit-04",
+        "kind": "publisher_edit",
+        "responses": {
+          "mono": [
+            [
+              -6.074723673728838,
+              -5.871810942565454
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "full_room",
+        "truth": [
+          [
+            57200,
+            73840
+          ],
+          [
+            74576,
+            83536
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": 5.000014,
+        "case": 31,
+        "family": "xttsv2",
+        "group": "edit-04",
+        "kind": "publisher_edit",
+        "responses": {
+          "auxiva": [
+            [
+              3.7406358435317797,
+              -6.400513635616336
+            ],
+            [
+              null,
+              -7.083531439723697
+            ]
+          ],
+          "mono": [
+            [
+              2.0341569166990325,
+              -5.106790115894631
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "snr_5",
+        "truth": [
+          [
+            57200,
+            73840
+          ],
+          [
+            74576,
+            83536
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": 1.1e-05,
+        "case": 32,
+        "family": "xttsv2",
+        "group": "edit-04",
+        "kind": "publisher_edit",
+        "responses": {
+          "auxiva": [
+            [
+              0.2200168776639182,
+              -5.841010091294637
+            ],
+            [
+              null,
+              -6.856471015737073
+            ]
+          ],
+          "mono": [
+            [
+              -3.886078887304891,
+              -5.830925943282125
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "snr_0",
+        "truth": [
+          [
+            57200,
+            73840
+          ],
+          [
+            74576,
+            83536
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": -4.999998,
+        "case": 33,
+        "family": "xttsv2",
+        "group": "edit-04",
+        "kind": "publisher_edit",
+        "responses": {
+          "auxiva": [
+            [
+              -0.9749430906826647,
+              -5.7378330396018855
+            ],
+            [
+              null,
+              null
+            ]
+          ],
+          "mono": [
+            [
+              -5.123711539982538,
+              -5.661626765920185
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "snr_-5",
+        "truth": [
+          [
+            57200,
+            73840
+          ],
+          [
+            74576,
+            83536
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": -9.999999,
+        "case": 34,
+        "family": "xttsv2",
+        "group": "edit-04",
+        "kind": "publisher_edit",
+        "responses": {
+          "auxiva": [
+            [
+              -6.037605276449524,
+              -6.384928679528145
+            ],
+            [
+              null,
+              null
+            ]
+          ],
+          "mono": [
+            [
+              -5.544017836551738,
+              -5.503499030189205
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "snr_-10",
+        "truth": [
+          [
+            57200,
+            73840
+          ],
+          [
+            74576,
+            83536
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": null,
+        "case": 35,
+        "family": "yourtts",
+        "group": "edit-05",
+        "kind": "publisher_edit",
+        "responses": {
+          "mono": [
+            [
+              6.254387461597206,
+              7.528793759461075
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "dry",
+        "truth": [
+          [
+            6000,
+            14560
+          ],
+          [
+            29456,
+            33296
+          ],
+          [
+            34352,
+            40432
+          ],
+          [
+            50768,
+            65168
+          ],
+          [
+            66032,
+            71872
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": null,
+        "case": 36,
+        "family": "yourtts",
+        "group": "edit-05",
+        "kind": "publisher_edit",
+        "responses": {
+          "mono": [
+            [
+              5.920748753489041,
+              7.501845119899118
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "early_room",
+        "truth": [
+          [
+            6000,
+            14560
+          ],
+          [
+            29456,
+            33296
+          ],
+          [
+            34352,
+            40432
+          ],
+          [
+            50768,
+            65168
+          ],
+          [
+            66032,
+            71872
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": null,
+        "case": 37,
+        "family": "yourtts",
+        "group": "edit-05",
+        "kind": "publisher_edit",
+        "responses": {
+          "mono": [
+            [
+              -6.2339462802522485,
+              6.5961929698482145
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "full_room",
+        "truth": [
+          [
+            6000,
+            14560
+          ],
+          [
+            29456,
+            33296
+          ],
+          [
+            34352,
+            40432
+          ],
+          [
+            50768,
+            65168
+          ],
+          [
+            66032,
+            71872
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": 5.000017,
+        "case": 38,
+        "family": "yourtts",
+        "group": "edit-05",
+        "kind": "publisher_edit",
+        "responses": {
+          "auxiva": [
+            [
+              null,
+              -6.016660717591255
+            ],
+            [
+              3.898961762744404,
+              7.163901827961696
+            ]
+          ],
+          "mono": [
+            [
+              -5.786158594856576,
+              5.230731409609604
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "snr_5",
+        "truth": [
+          [
+            6000,
+            14560
+          ],
+          [
+            29456,
+            33296
+          ],
+          [
+            34352,
+            40432
+          ],
+          [
+            50768,
+            65168
+          ],
+          [
+            66032,
+            71872
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": 1e-06,
+        "case": 39,
+        "family": "yourtts",
+        "group": "edit-05",
+        "kind": "publisher_edit",
+        "responses": {
+          "auxiva": [
+            [
+              null,
+              -5.768223268561311
+            ],
+            [
+              6.56720403688291,
+              6.795518484411398
+            ]
+          ],
+          "mono": [
+            [
+              -4.882625626511335,
+              3.7165884069894015
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "snr_0",
+        "truth": [
+          [
+            6000,
+            14560
+          ],
+          [
+            29456,
+            33296
+          ],
+          [
+            34352,
+            40432
+          ],
+          [
+            50768,
+            65168
+          ],
+          [
+            66032,
+            71872
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": -4.999996,
+        "case": 40,
+        "family": "yourtts",
+        "group": "edit-05",
+        "kind": "publisher_edit",
+        "responses": {
+          "auxiva": [
+            [
+              null,
+              -6.52946942868539
+            ],
+            [
+              5.7111040243409015,
+              6.54745750837038
+            ]
+          ],
+          "mono": [
+            [
+              -4.306991146009899,
+              -3.8041960782239443
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "snr_-5",
+        "truth": [
+          [
+            6000,
+            14560
+          ],
+          [
+            29456,
+            33296
+          ],
+          [
+            34352,
+            40432
+          ],
+          [
+            50768,
+            65168
+          ],
+          [
+            66032,
+            71872
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": -9.999996,
+        "case": 41,
+        "family": "yourtts",
+        "group": "edit-05",
+        "kind": "publisher_edit",
+        "responses": {
+          "auxiva": [
+            [
+              -5.549335489704264,
+              -6.810461064963302
+            ],
+            [
+              -3.5052815144823595,
+              0.5704480060102142
+            ]
+          ],
+          "mono": [
+            [
+              -3.2471866012358612,
+              -5.204828760639659
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "snr_-10",
+        "truth": [
+          [
+            6000,
+            14560
+          ],
+          [
+            29456,
+            33296
+          ],
+          [
+            34352,
+            40432
+          ],
+          [
+            50768,
+            65168
+          ],
+          [
+            66032,
+            71872
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": null,
+        "case": 42,
+        "family": "ljjets",
+        "group": "edit-06",
+        "kind": "publisher_edit",
+        "responses": {
+          "mono": [
+            [
+              6.819675231307424,
+              6.703154694241502
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "dry",
+        "truth": [
+          [
+            20320,
+            31360
+          ],
+          [
+            44160,
+            78160
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": null,
+        "case": 43,
+        "family": "ljjets",
+        "group": "edit-06",
+        "kind": "publisher_edit",
+        "responses": {
+          "mono": [
+            [
+              7.214763083467193,
+              6.736776492380861
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "early_room",
+        "truth": [
+          [
+            20320,
+            31360
+          ],
+          [
+            44160,
+            78160
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": null,
+        "case": 44,
+        "family": "ljjets",
+        "group": "edit-06",
+        "kind": "publisher_edit",
+        "responses": {
+          "mono": [
+            [
+              -6.100430042208366,
+              6.910473746318669
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "full_room",
+        "truth": [
+          [
+            20320,
+            31360
+          ],
+          [
+            44160,
+            78160
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": 5.000001,
+        "case": 45,
+        "family": "ljjets",
+        "group": "edit-06",
+        "kind": "publisher_edit",
+        "responses": {
+          "auxiva": [
+            [
+              -4.448389997347901,
+              6.8671673247167995
+            ],
+            [
+              -6.992157471416195,
+              -6.715441687925221
+            ]
+          ],
+          "mono": [
+            [
+              -4.6820568913926355,
+              3.522343748221277
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "snr_5",
+        "truth": [
+          [
+            20320,
+            31360
+          ],
+          [
+            44160,
+            78160
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": -1e-06,
+        "case": 46,
+        "family": "ljjets",
+        "group": "edit-06",
+        "kind": "publisher_edit",
+        "responses": {
+          "auxiva": [
+            [
+              -4.467389145184394,
+              4.914337902472136
+            ],
+            [
+              null,
+              -6.628230113710711
+            ]
+          ],
+          "mono": [
+            [
+              -5.673287800779386,
+              -3.060514698947835
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "snr_0",
+        "truth": [
+          [
+            20320,
+            31360
+          ],
+          [
+            44160,
+            78160
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": -4.999992,
+        "case": 47,
+        "family": "ljjets",
+        "group": "edit-06",
+        "kind": "publisher_edit",
+        "responses": {
+          "auxiva": [
+            [
+              -4.1248883934038325,
+              4.39434127152788
+            ],
+            [
+              null,
+              null
+            ]
+          ],
+          "mono": [
+            [
+              -6.911778406077693,
+              -4.7159280242245885
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "snr_-5",
+        "truth": [
+          [
+            20320,
+            31360
+          ],
+          [
+            44160,
+            78160
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": -9.999993,
+        "case": 48,
+        "family": "ljjets",
+        "group": "edit-06",
+        "kind": "publisher_edit",
+        "responses": {
+          "auxiva": [
+            [
+              -5.275885544140046,
+              -3.700143831794651
+            ],
+            [
+              null,
+              null
+            ]
+          ],
+          "mono": [
+            [
+              -7.084412100870832,
+              -6.59194086915625
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "snr_-10",
+        "truth": [
+          [
+            20320,
+            31360
+          ],
+          [
+            44160,
+            78160
+          ]
+        ]
+      },
+      {
+        "actual_snr_db": null,
+        "case": 49,
+        "family": null,
+        "group": "genuine-00",
+        "kind": "genuine",
+        "responses": {
+          "mono": [
+            [
+              -6.97710992001612,
+              -7.01444250968899
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "dry",
+        "truth": []
+      },
+      {
+        "actual_snr_db": null,
+        "case": 50,
+        "family": null,
+        "group": "genuine-00",
+        "kind": "genuine",
+        "responses": {
+          "mono": [
+            [
+              -6.060523995477601,
+              -6.962589256095132
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "early_room",
+        "truth": []
+      },
+      {
+        "actual_snr_db": null,
+        "case": 51,
+        "family": null,
+        "group": "genuine-00",
+        "kind": "genuine",
+        "responses": {
+          "mono": [
+            [
+              5.820360474420393,
+              -4.650521282658312
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "full_room",
+        "truth": []
+      },
+      {
+        "actual_snr_db": 4.999999,
+        "case": 52,
+        "family": null,
+        "group": "genuine-00",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              6.410822088601242,
+              3.742410946487262
+            ],
+            [
+              -6.155391700648838,
+              -6.833106028765582
+            ]
+          ],
+          "mono": [
+            [
+              6.730051341915559,
+              -6.219797113705224
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "snr_5",
+        "truth": []
+      },
+      {
+        "actual_snr_db": -7e-06,
+        "case": 53,
+        "family": null,
+        "group": "genuine-00",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              5.639716420841343,
+              -2.7061087712656997
+            ],
+            [
+              -6.496919574267966,
+              -6.883907301754818
+            ]
+          ],
+          "mono": [
+            [
+              6.565929225603222,
+              -6.494635587016168
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "snr_0",
+        "truth": []
+      },
+      {
+        "actual_snr_db": -5.000005,
+        "case": 54,
+        "family": null,
+        "group": "genuine-00",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              6.558524952931719,
+              -4.829110170282311
+            ],
+            [
+              -6.1007146679990365,
+              -6.963473370066405
+            ]
+          ],
+          "mono": [
+            [
+              5.485932245983396,
+              -6.825695047117129
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "snr_-5",
+        "truth": []
+      },
+      {
+        "actual_snr_db": -10.000001,
+        "case": 55,
+        "family": null,
+        "group": "genuine-00",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              6.525356107049778,
+              -6.466869416931512
+            ],
+            [
+              -6.42567676219726,
+              -6.980320972844101
+            ]
+          ],
+          "mono": [
+            [
+              -2.4000845534698856,
+              -7.006505905116727
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "snr_-10",
+        "truth": []
+      },
+      {
+        "actual_snr_db": null,
+        "case": 56,
+        "family": null,
+        "group": "genuine-01",
+        "kind": "genuine",
+        "responses": {
+          "mono": [
+            [
+              -7.139665595716213,
+              -7.152204545702014
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "dry",
+        "truth": []
+      },
+      {
+        "actual_snr_db": null,
+        "case": 57,
+        "family": null,
+        "group": "genuine-01",
+        "kind": "genuine",
+        "responses": {
+          "mono": [
+            [
+              -7.077631950349924,
+              -7.089072221664971
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "early_room",
+        "truth": []
+      },
+      {
+        "actual_snr_db": null,
+        "case": 58,
+        "family": null,
+        "group": "genuine-01",
+        "kind": "genuine",
+        "responses": {
+          "mono": [
+            [
+              -5.652714745083119,
+              -6.404671605383587
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "full_room",
+        "truth": []
+      },
+      {
+        "actual_snr_db": 4.999985,
+        "case": 59,
+        "family": null,
+        "group": "genuine-01",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              -5.663157023428833,
+              -6.172632190833509
+            ],
+            [
+              -6.095787480901089,
+              -5.864789070286972
+            ]
+          ],
+          "mono": [
+            [
+              -3.1988534386738228,
+              -4.630792077616882
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "snr_5",
+        "truth": []
+      },
+      {
+        "actual_snr_db": -1.1e-05,
+        "case": 60,
+        "family": null,
+        "group": "genuine-01",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              -6.25248710513078,
+              -6.363742356748952
+            ],
+            [
+              -3.2358479483855773,
+              -4.814880353733563
+            ]
+          ],
+          "mono": [
+            [
+              4.116928542424701,
+              5.540253022503799
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "snr_0",
+        "truth": []
+      },
+      {
+        "actual_snr_db": -5.0,
+        "case": 61,
+        "family": null,
+        "group": "genuine-01",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              -6.94569204415408,
+              -6.558267614081864
+            ],
+            [
+              4.141891520700018,
+              5.767236614440676
+            ]
+          ],
+          "mono": [
+            [
+              -4.362329469169965,
+              3.81617919421875
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "snr_-5",
+        "truth": []
+      },
+      {
+        "actual_snr_db": -10.000002,
+        "case": 62,
+        "family": null,
+        "group": "genuine-01",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              null,
+              null
+            ],
+            [
+              5.238236772040719,
+              5.765704005320806
+            ]
+          ],
+          "mono": [
+            [
+              -5.454170292159099,
+              -4.112851125577811
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "snr_-10",
+        "truth": []
+      },
+      {
+        "actual_snr_db": null,
+        "case": 63,
+        "family": null,
+        "group": "genuine-02",
+        "kind": "genuine",
+        "responses": {
+          "mono": [
+            [
+              -7.033679983457295,
+              -7.140757104681841
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "dry",
+        "truth": []
+      },
+      {
+        "actual_snr_db": null,
+        "case": 64,
+        "family": null,
+        "group": "genuine-02",
+        "kind": "genuine",
+        "responses": {
+          "mono": [
+            [
+              -6.856496839112091,
+              -7.118788198919377
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "early_room",
+        "truth": []
+      },
+      {
+        "actual_snr_db": null,
+        "case": 65,
+        "family": null,
+        "group": "genuine-02",
+        "kind": "genuine",
+        "responses": {
+          "mono": [
+            [
+              -6.086202687142065,
+              -6.109217703691641
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "full_room",
+        "truth": []
+      },
+      {
+        "actual_snr_db": 4.999943,
+        "case": 66,
+        "family": null,
+        "group": "genuine-02",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              2.205479617636524,
+              5.614248361001
+            ],
+            [
+              -6.783843520538273,
+              -7.066922244013241
+            ]
+          ],
+          "mono": [
+            [
+              -5.64224151150308,
+              -3.6851253524739764
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "snr_5",
+        "truth": []
+      },
+      {
+        "actual_snr_db": -1.5e-05,
+        "case": 67,
+        "family": null,
+        "group": "genuine-02",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              -4.12640567347378,
+              6.83516459732016
+            ],
+            [
+              -6.028624088956533,
+              -6.847765895781485
+            ]
+          ],
+          "mono": [
+            [
+              -5.702108831535515,
+              -5.784590286011273
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "snr_0",
+        "truth": []
+      },
+      {
+        "actual_snr_db": -5.000039,
+        "case": 68,
+        "family": null,
+        "group": "genuine-02",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              -4.5850161939148695,
+              6.264053345830213
+            ],
+            [
+              -5.605407749838045,
+              -6.8084869038003815
+            ]
+          ],
+          "mono": [
+            [
+              -5.689327222151007,
+              -6.5683359594336626
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "snr_-5",
+        "truth": []
+      },
+      {
+        "actual_snr_db": -10.000026,
+        "case": 69,
+        "family": null,
+        "group": "genuine-02",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              -3.8193788290634685,
+              -6.943533910593989
+            ],
+            [
+              null,
+              -6.740945752527523
+            ]
+          ],
+          "mono": [
+            [
+              -5.509025619423272,
+              -6.875178402984525
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "snr_-10",
+        "truth": []
+      },
+      {
+        "actual_snr_db": null,
+        "case": 84,
+        "family": null,
+        "group": "genuine-05",
+        "kind": "genuine",
+        "responses": {
+          "mono": [
+            [
+              -7.208946670561056,
+              -7.171691920376503
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "dry",
+        "truth": []
+      },
+      {
+        "actual_snr_db": null,
+        "case": 85,
+        "family": null,
+        "group": "genuine-05",
+        "kind": "genuine",
+        "responses": {
+          "mono": [
+            [
+              -7.2297764331325265,
+              -7.148023639772801
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "early_room",
+        "truth": []
+      },
+      {
+        "actual_snr_db": null,
+        "case": 86,
+        "family": null,
+        "group": "genuine-05",
+        "kind": "genuine",
+        "responses": {
+          "mono": [
+            [
+              -5.976612051171822,
+              -3.849031182736043
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "full_room",
+        "truth": []
+      },
+      {
+        "actual_snr_db": 5.000003,
+        "case": 87,
+        "family": null,
+        "group": "genuine-05",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              -4.882025724205677,
+              -7.014984123761497
+            ],
+            [
+              -3.25813246216642,
+              -5.680853880060199
+            ]
+          ],
+          "mono": [
+            [
+              5.026113660227577,
+              -3.094851924227343
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "snr_5",
+        "truth": []
+      },
+      {
+        "actual_snr_db": -1.5e-05,
+        "case": 88,
+        "family": null,
+        "group": "genuine-05",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              -2.404654984074908,
+              -6.049820882164869
+            ],
+            [
+              4.1764474252491715,
+              -6.197477311195821
+            ]
+          ],
+          "mono": [
+            [
+              3.4668571647525024,
+              -1.7683242353260227
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "snr_0",
+        "truth": []
+      },
+      {
+        "actual_snr_db": -5.000003,
+        "case": 89,
+        "family": null,
+        "group": "genuine-05",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              4.784490387963932,
+              -5.725322295027673
+            ],
+            [
+              2.2387441729896045,
+              -5.41556841626966
+            ]
+          ],
+          "mono": [
+            [
+              1.3147873518160746,
+              4.668100524692311
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "snr_-5",
+        "truth": []
+      },
+      {
+        "actual_snr_db": -10.000004,
+        "case": 90,
+        "family": null,
+        "group": "genuine-05",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              2.952551928275783,
+              -6.665326189294195
+            ],
+            [
+              -4.218347603005727,
+              -2.0941393855041324
+            ]
+          ],
+          "mono": [
+            [
+              -3.0296792702544177,
+              -5.0112247400604675
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "snr_-10",
+        "truth": []
+      },
+      {
+        "actual_snr_db": null,
+        "case": 91,
+        "family": null,
+        "group": "genuine-06",
+        "kind": "genuine",
+        "responses": {
+          "mono": [
+            [
+              -7.201573312167116,
+              -7.164136845774583
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "dry",
+        "truth": []
+      },
+      {
+        "actual_snr_db": null,
+        "case": 92,
+        "family": null,
+        "group": "genuine-06",
+        "kind": "genuine",
+        "responses": {
+          "mono": [
+            [
+              -7.214366876941779,
+              -7.114992135436291
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "early_room",
+        "truth": []
+      },
+      {
+        "actual_snr_db": null,
+        "case": 93,
+        "family": null,
+        "group": "genuine-06",
+        "kind": "genuine",
+        "responses": {
+          "mono": [
+            [
+              -7.097311962983717,
+              -7.0851173826208065
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "full_room",
+        "truth": []
+      },
+      {
+        "actual_snr_db": 4.999955,
+        "case": 94,
+        "family": null,
+        "group": "genuine-06",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              -6.675952006343876,
+              -6.258314545527575
+            ],
+            [
+              -5.428113917965759,
+              -3.1711946159070696
+            ]
+          ],
+          "mono": [
+            [
+              -5.937735067575134,
+              -4.898228569358131
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "snr_5",
+        "truth": []
+      },
+      {
+        "actual_snr_db": -8e-06,
+        "case": 95,
+        "family": null,
+        "group": "genuine-06",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              -6.61996461016518,
+              -5.7716246214324505
+            ],
+            [
+              -5.3829536259304485,
+              6.200478953370864
+            ]
+          ],
+          "mono": [
+            [
+              -2.3784289037815576,
+              -3.0673148390569067
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "snr_0",
+        "truth": []
+      },
+      {
+        "actual_snr_db": -5.0,
+        "case": 96,
+        "family": null,
+        "group": "genuine-06",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              -6.44956443046029,
+              -5.890108157584039
+            ],
+            [
+              -5.589802679898251,
+              null
+            ]
+          ],
+          "mono": [
+            [
+              3.216209373893422,
+              4.139479097418079
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "snr_-5",
+        "truth": []
+      },
+      {
+        "actual_snr_db": -9.999995,
+        "case": 97,
+        "family": null,
+        "group": "genuine-06",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              -6.518848490526101,
+              -6.0116305205822105
+            ],
+            [
+              -5.338986953116148,
+              null
+            ]
+          ],
+          "mono": [
+            [
+              2.8970457102758918,
+              -4.24023061759075
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "snr_-10",
+        "truth": []
+      },
+      {
+        "actual_snr_db": null,
+        "case": 98,
+        "family": null,
+        "group": "genuine-07",
+        "kind": "genuine",
+        "responses": {
+          "mono": [
+            [
+              -6.984835671831691,
+              -7.174627765262693
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "dry",
+        "truth": []
+      },
+      {
+        "actual_snr_db": null,
+        "case": 99,
+        "family": null,
+        "group": "genuine-07",
+        "kind": "genuine",
+        "responses": {
+          "mono": [
+            [
+              -7.0232782971157315,
+              -7.215768762031953
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "early_room",
+        "truth": []
+      },
+      {
+        "actual_snr_db": null,
+        "case": 100,
+        "family": null,
+        "group": "genuine-07",
+        "kind": "genuine",
+        "responses": {
+          "mono": [
+            [
+              -6.137338130693401,
+              -7.048610182611218
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "full_room",
+        "truth": []
+      },
+      {
+        "actual_snr_db": 5.000005,
+        "case": 101,
+        "family": null,
+        "group": "genuine-07",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              null,
+              null
+            ],
+            [
+              -6.524383602970064,
+              -6.928089183697284
+            ]
+          ],
+          "mono": [
+            [
+              -4.665060040323123,
+              -6.679293139776915
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "snr_5",
+        "truth": []
+      },
+      {
+        "actual_snr_db": 1.3e-05,
+        "case": 102,
+        "family": null,
+        "group": "genuine-07",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              null,
+              null
+            ],
+            [
+              -5.53604695390032,
+              -6.707112343581972
+            ]
+          ],
+          "mono": [
+            [
+              -5.586616043506834,
+              -6.643702432067448
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "snr_0",
+        "truth": []
+      },
+      {
+        "actual_snr_db": -4.999991,
+        "case": 103,
+        "family": null,
+        "group": "genuine-07",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              null,
+              -5.771138149023079
+            ],
+            [
+              -4.538322939834437,
+              -3.952313125455746
+            ]
+          ],
+          "mono": [
+            [
+              -5.905579647849921,
+              -6.197244657237172
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "snr_-5",
+        "truth": []
+      },
+      {
+        "actual_snr_db": -9.999994,
+        "case": 104,
+        "family": null,
+        "group": "genuine-07",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              null,
+              null
+            ],
+            [
+              -5.421254086722804,
+              -6.669031191738093
+            ]
+          ],
+          "mono": [
+            [
+              -5.984090796023386,
+              -6.665447273746601
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "snr_-10",
+        "truth": []
+      },
+      {
+        "actual_snr_db": null,
+        "case": 105,
+        "family": null,
+        "group": "genuine-08",
+        "kind": "genuine",
+        "responses": {
+          "mono": [
+            [
+              -6.330631246501575,
+              -6.79133222367822
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "dry",
+        "truth": []
+      },
+      {
+        "actual_snr_db": null,
+        "case": 106,
+        "family": null,
+        "group": "genuine-08",
+        "kind": "genuine",
+        "responses": {
+          "mono": [
+            [
+              -6.6653924084044105,
+              -6.912201875548953
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "early_room",
+        "truth": []
+      },
+      {
+        "actual_snr_db": null,
+        "case": 107,
+        "family": null,
+        "group": "genuine-08",
+        "kind": "genuine",
+        "responses": {
+          "mono": [
+            [
+              -2.7821226641014976,
+              -4.273302572095332
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "full_room",
+        "truth": []
+      },
+      {
+        "actual_snr_db": 5.000019,
+        "case": 108,
+        "family": null,
+        "group": "genuine-08",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              6.447239001771339,
+              3.935808069354485
+            ],
+            [
+              -4.448644608632286,
+              -6.880780144868918
+            ]
+          ],
+          "mono": [
+            [
+              4.99936726770463,
+              4.327362655848168
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "snr_5",
+        "truth": []
+      },
+      {
+        "actual_snr_db": 2.2e-05,
+        "case": 109,
+        "family": null,
+        "group": "genuine-08",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              6.555158265056181,
+              3.7927254948159623
+            ],
+            [
+              -5.979748271038196,
+              -6.672336573814076
+            ]
+          ],
+          "mono": [
+            [
+              -2.808713912729004,
+              3.5732630748237186
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "snr_0",
+        "truth": []
+      },
+      {
+        "actual_snr_db": -4.999992,
+        "case": 110,
+        "family": null,
+        "group": "genuine-08",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              6.7829428944076025,
+              4.771149739970116
+            ],
+            [
+              -5.803019520644358,
+              null
+            ]
+          ],
+          "mono": [
+            [
+              -4.077867491604844,
+              -2.68286182440955
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "snr_-5",
+        "truth": []
+      },
+      {
+        "actual_snr_db": -9.999998,
+        "case": 111,
+        "family": null,
+        "group": "genuine-08",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              5.639648858508834,
+              -3.026952726782739
+            ],
+            [
+              -5.98322492912077,
+              null
+            ]
+          ],
+          "mono": [
+            [
+              -5.373884233225849,
+              null
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "snr_-10",
+        "truth": []
+      },
+      {
+        "actual_snr_db": null,
+        "case": 112,
+        "family": null,
+        "group": "genuine-09",
+        "kind": "genuine",
+        "responses": {
+          "mono": [
+            [
+              -7.062925363356083,
+              -7.1667766721229205
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "dry",
+        "truth": []
+      },
+      {
+        "actual_snr_db": null,
+        "case": 113,
+        "family": null,
+        "group": "genuine-09",
+        "kind": "genuine",
+        "responses": {
+          "mono": [
+            [
+              -7.205232601664585,
+              -7.177867845486277
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "early_room",
+        "truth": []
+      },
+      {
+        "actual_snr_db": null,
+        "case": 114,
+        "family": null,
+        "group": "genuine-09",
+        "kind": "genuine",
+        "responses": {
+          "mono": [
+            [
+              -5.060249790923101,
+              -5.865325908406748
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "full_room",
+        "truth": []
+      },
+      {
+        "actual_snr_db": 4.999984,
+        "case": 115,
+        "family": null,
+        "group": "genuine-09",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              null,
+              null
+            ],
+            [
+              -5.968140147366685,
+              -6.858845223605866
+            ]
+          ],
+          "mono": [
+            [
+              null,
+              -3.974596084541767
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "snr_5",
+        "truth": []
+      },
+      {
+        "actual_snr_db": 2e-06,
+        "case": 116,
+        "family": null,
+        "group": "genuine-09",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              null,
+              null
+            ],
+            [
+              -5.400085424753645,
+              -6.866242932088187
+            ]
+          ],
+          "mono": [
+            [
+              null,
+              -2.661247335623221
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "snr_0",
+        "truth": []
+      },
+      {
+        "actual_snr_db": -5.000001,
+        "case": 117,
+        "family": null,
+        "group": "genuine-09",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              null,
+              null
+            ],
+            [
+              -3.975004702951554,
+              5.049896019185937
+            ]
+          ],
+          "mono": [
+            [
+              -4.117093613309255,
+              -4.43160531405338
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "snr_-5",
+        "truth": []
+      },
+      {
+        "actual_snr_db": -10.000006,
+        "case": 118,
+        "family": null,
+        "group": "genuine-09",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              null,
+              null
+            ],
+            [
+              -4.904086129197885,
+              -6.235187565951726
+            ]
+          ],
+          "mono": [
+            [
+              -4.1958270206030015,
+              -5.512414950441693
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "snr_-10",
+        "truth": []
+      },
+      {
+        "actual_snr_db": null,
+        "case": 133,
+        "family": null,
+        "group": "stairway-background-0",
+        "kind": "background_only",
+        "responses": {
+          "auxiva": [
+            [
+              -6.829945507292114,
+              -6.911763180909857
+            ],
+            [
+              -6.721011209600541,
+              5.048202144458291
+            ]
+          ],
+          "mono": [
+            [
+              -6.69931748522923,
+              -6.2140330911338975
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "background_only",
+        "truth": []
+      },
+      {
+        "actual_snr_db": null,
+        "case": 134,
+        "family": null,
+        "group": "stairway-background-1",
+        "kind": "background_only",
+        "responses": {
+          "auxiva": [
+            [
+              null,
+              null
+            ],
+            [
+              5.547563833531728,
+              -6.129229629329661
+            ]
+          ],
+          "mono": [
+            [
+              5.603159827795863,
+              -6.322850185672952
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "background_only",
+        "truth": []
+      },
+      {
+        "actual_snr_db": null,
+        "case": 135,
+        "family": null,
+        "group": "stairway-background-2",
+        "kind": "background_only",
+        "responses": {
+          "auxiva": [
+            [
+              null,
+              null
+            ],
+            [
+              -6.474947874806024,
+              4.201065724756513
+            ]
+          ],
+          "mono": [
+            [
+              -6.478326779558644,
+              -3.186959541862602
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "stairway",
+        "stage": "background_only",
+        "truth": []
+      },
+      {
+        "actual_snr_db": null,
+        "case": 136,
+        "family": null,
+        "group": "aula_carolina-background-0",
+        "kind": "background_only",
+        "responses": {
+          "auxiva": [
+            [
+              null,
+              null
+            ],
+            [
+              4.798986125334146,
+              -5.353721597232798
+            ]
+          ],
+          "mono": [
+            [
+              5.797480223388587,
+              -5.236614274849305
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "background_only",
+        "truth": []
+      },
+      {
+        "actual_snr_db": null,
+        "case": 137,
+        "family": null,
+        "group": "aula_carolina-background-1",
+        "kind": "background_only",
+        "responses": {
+          "auxiva": [
+            [
+              -5.504112255318085,
+              -5.656864174792545
+            ],
+            [
+              -5.024120280409295,
+              null
+            ]
+          ],
+          "mono": [
+            [
+              -3.755811219948701,
+              -2.630435239894263
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "background_only",
+        "truth": []
+      },
+      {
+        "actual_snr_db": null,
+        "case": 138,
+        "family": null,
+        "group": "aula_carolina-background-2",
+        "kind": "background_only",
+        "responses": {
+          "auxiva": [
+            [
+              null,
+              null
+            ],
+            [
+              -4.838384563703234,
+              -6.335898413887884
+            ]
+          ],
+          "mono": [
+            [
+              -5.460089669310164,
+              -6.045675751635629
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "aula_carolina",
+        "stage": "background_only",
+        "truth": []
+      }
+    ]
+  },
+  "development": {
+    "forwards": 106,
+    "rows": [
+      {
+        "actual_snr_db": 5.000008,
+        "case": 73,
+        "family": null,
+        "group": "genuine-03",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              0.9824232266511072,
+              4.717873460008788
+            ],
+            [
+              5.218675076938528,
+              -5.665642738495446
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "aula_carolina",
+        "stage": "snr_5",
+        "truth": []
+      },
+      {
+        "actual_snr_db": -5e-06,
+        "case": 74,
+        "family": null,
+        "group": "genuine-03",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              -2.507693499036474,
+              5.2745041875473815
+            ],
+            [
+              6.645026276137862,
+              -4.591800737166579
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "aula_carolina",
+        "stage": "snr_0",
+        "truth": []
+      },
+      {
+        "actual_snr_db": -4.999994,
+        "case": 75,
+        "family": null,
+        "group": "genuine-03",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              -2.710712844147685,
+              4.7445846770622975
+            ],
+            [
+              6.3599954940719865,
+              -3.26813929962373
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "aula_carolina",
+        "stage": "snr_-5",
+        "truth": []
+      },
+      {
+        "actual_snr_db": -9.999998,
+        "case": 76,
+        "family": null,
+        "group": "genuine-03",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              -5.708206197392905,
+              -5.417099939476389
+            ],
+            [
+              6.398707422838692,
+              6.150271670301083
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "aula_carolina",
+        "stage": "snr_-10",
+        "truth": []
+      },
+      {
+        "actual_snr_db": 5.000024,
+        "case": 80,
+        "family": null,
+        "group": "genuine-04",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              -4.338267825311065,
+              -6.498591388190303
+            ],
+            [
+              -3.650707659662491,
+              -5.488940710759398
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "stairway",
+        "stage": "snr_5",
+        "truth": []
+      },
+      {
+        "actual_snr_db": 1.3e-05,
+        "case": 81,
+        "family": null,
+        "group": "genuine-04",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              2.5282913939332983,
+              -6.095530511855526
+            ],
+            [
+              -6.581506727898166,
+              -6.178550778957388
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "stairway",
+        "stage": "snr_0",
+        "truth": []
+      },
+      {
+        "actual_snr_db": -4.99999,
+        "case": 82,
+        "family": null,
+        "group": "genuine-04",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              5.281111301667294,
+              -4.768853138732726
+            ],
+            [
+              -5.663954791170695,
+              -6.155551485845442
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "stairway",
+        "stage": "snr_-5",
+        "truth": []
+      },
+      {
+        "actual_snr_db": -9.999988,
+        "case": 83,
+        "family": null,
+        "group": "genuine-04",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              4.567138515417305,
+              -1.6112233591330891
+            ],
+            [
+              -5.574824316536821,
+              -5.96410081866294
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "stairway",
+        "stage": "snr_-10",
+        "truth": []
+      },
+      {
+        "actual_snr_db": 5.000009,
+        "case": 122,
+        "family": null,
+        "group": "genuine-10",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              7.2510337941120655,
+              -4.674972502280337
+            ],
+            [
+              -4.763567866180117,
+              -6.277068109827609
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "stairway",
+        "stage": "snr_5",
+        "truth": []
+      },
+      {
+        "actual_snr_db": 4e-06,
+        "case": 123,
+        "family": null,
+        "group": "genuine-10",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              7.261691397582362,
+              4.019232030375583
+            ],
+            [
+              -5.354803038142504,
+              -6.085345258417225
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "stairway",
+        "stage": "snr_0",
+        "truth": []
+      },
+      {
+        "actual_snr_db": -4.999996,
+        "case": 124,
+        "family": null,
+        "group": "genuine-10",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              7.07115419487876,
+              -5.280018811909062
+            ],
+            [
+              null,
+              null
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "stairway",
+        "stage": "snr_-5",
+        "truth": []
+      },
+      {
+        "actual_snr_db": -9.999992,
+        "case": 125,
+        "family": null,
+        "group": "genuine-10",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              6.47167982243595,
+              -5.741077442249788
+            ],
+            [
+              null,
+              null
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "stairway",
+        "stage": "snr_-10",
+        "truth": []
+      },
+      {
+        "actual_snr_db": 5.00002,
+        "case": 129,
+        "family": null,
+        "group": "genuine-11",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              null,
+              null
+            ],
+            [
+              -6.74385833319703,
+              -6.107028008836796
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "aula_carolina",
+        "stage": "snr_5",
+        "truth": []
+      },
+      {
+        "actual_snr_db": 2e-06,
+        "case": 130,
+        "family": null,
+        "group": "genuine-11",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              null,
+              null
+            ],
+            [
+              -5.72054531642961,
+              -5.641443238958855
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "aula_carolina",
+        "stage": "snr_0",
+        "truth": []
+      },
+      {
+        "actual_snr_db": -4.999986,
+        "case": 131,
+        "family": null,
+        "group": "genuine-11",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              null,
+              null
+            ],
+            [
+              -3.0924038540910472,
+              -4.993981861853577
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "aula_carolina",
+        "stage": "snr_-5",
+        "truth": []
+      },
+      {
+        "actual_snr_db": -9.999976,
+        "case": 132,
+        "family": null,
+        "group": "genuine-11",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              null,
+              null
+            ],
+            [
+              4.883037430240242,
+              -3.121944628513822
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "aula_carolina",
+        "stage": "snr_-10",
+        "truth": []
+      },
+      {
+        "actual_snr_db": 4.999996,
+        "case": 142,
+        "family": null,
+        "group": "new-control-00",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              -6.749693864124024,
+              -5.220841420196081
+            ],
+            [
+              -5.704304164668256,
+              -4.683709158079034
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "stairway",
+        "stage": "snr_5",
+        "truth": []
+      },
+      {
+        "actual_snr_db": -7e-06,
+        "case": 143,
+        "family": null,
+        "group": "new-control-00",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              -4.270137847688813,
+              -5.555977826086376
+            ],
+            [
+              -4.355237014158867,
+              -5.389053340318134
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "stairway",
+        "stage": "snr_0",
+        "truth": []
+      },
+      {
+        "actual_snr_db": -5.000009,
+        "case": 144,
+        "family": null,
+        "group": "new-control-00",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              -6.108708381310772,
+              -7.005122679095757
+            ],
+            [
+              -5.6560439712553965,
+              -4.921110691437775
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "stairway",
+        "stage": "snr_-5",
+        "truth": []
+      },
+      {
+        "actual_snr_db": -10.000005,
+        "case": 145,
+        "family": null,
+        "group": "new-control-00",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              -6.758340812021774,
+              -6.889532533423562
+            ],
+            [
+              -5.60116860783988,
+              -3.83533669874366
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "stairway",
+        "stage": "snr_-10",
+        "truth": []
+      },
+      {
+        "actual_snr_db": 5.000008,
+        "case": 149,
+        "family": null,
+        "group": "new-control-01",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              -6.120428509909105,
+              null
+            ],
+            [
+              -6.230623320859457,
+              -6.764742304534527
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "aula_carolina",
+        "stage": "snr_5",
+        "truth": []
+      },
+      {
+        "actual_snr_db": 1.3e-05,
+        "case": 150,
+        "family": null,
+        "group": "new-control-01",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              null,
+              null
+            ],
+            [
+              -4.041888219219154,
+              -5.982136757928388
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "aula_carolina",
+        "stage": "snr_0",
+        "truth": []
+      },
+      {
+        "actual_snr_db": -4.999992,
+        "case": 151,
+        "family": null,
+        "group": "new-control-01",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              null,
+              -3.5614724340802093
+            ],
+            [
+              -3.034013542173102,
+              -4.932530434314352
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "aula_carolina",
+        "stage": "snr_-5",
+        "truth": []
+      },
+      {
+        "actual_snr_db": -9.999995,
+        "case": 152,
+        "family": null,
+        "group": "new-control-01",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              null,
+              -4.7926182243646105
+            ],
+            [
+              4.809142387765909,
+              -4.796205968154087
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "aula_carolina",
+        "stage": "snr_-10",
+        "truth": []
+      },
+      {
+        "actual_snr_db": 5.000011,
+        "case": 156,
+        "family": null,
+        "group": "new-control-02",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              5.081123241871797,
+              7.000845271339715
+            ],
+            [
+              -7.076290615868953,
+              -6.673595459811383
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "stairway",
+        "stage": "snr_5",
+        "truth": []
+      },
+      {
+        "actual_snr_db": 4e-06,
+        "case": 157,
+        "family": null,
+        "group": "new-control-02",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              3.6417887445063233,
+              6.889729801183357
+            ],
+            [
+              -7.059496407770301,
+              -6.815239951802619
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "stairway",
+        "stage": "snr_0",
+        "truth": []
+      },
+      {
+        "actual_snr_db": -4.999993,
+        "case": 158,
+        "family": null,
+        "group": "new-control-02",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              4.650557636143442,
+              5.261731668576934
+            ],
+            [
+              -6.998607606780599,
+              null
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "stairway",
+        "stage": "snr_-5",
+        "truth": []
+      },
+      {
+        "actual_snr_db": -9.999993,
+        "case": 159,
+        "family": null,
+        "group": "new-control-02",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              -2.6927926806290765,
+              -3.053364336503901
+            ],
+            [
+              -6.8689708653925345,
+              null
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "stairway",
+        "stage": "snr_-10",
+        "truth": []
+      },
+      {
+        "actual_snr_db": 4.999993,
+        "case": 163,
+        "family": null,
+        "group": "new-control-03",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              null,
+              null
+            ],
+            [
+              4.717459275691633,
+              7.267490595030369
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "aula_carolina",
+        "stage": "snr_5",
+        "truth": []
+      },
+      {
+        "actual_snr_db": -2e-06,
+        "case": 164,
+        "family": null,
+        "group": "new-control-03",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              -6.637497882567292,
+              -6.735509334584102
+            ],
+            [
+              6.607195080969606,
+              7.0598291902801025
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "aula_carolina",
+        "stage": "snr_0",
+        "truth": []
+      },
+      {
+        "actual_snr_db": -4.999992,
+        "case": 165,
+        "family": null,
+        "group": "new-control-03",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              -6.341790740665089,
+              -6.9728550436641035
+            ],
+            [
+              6.81814484219495,
+              4.640713816871538
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "aula_carolina",
+        "stage": "snr_-5",
+        "truth": []
+      },
+      {
+        "actual_snr_db": -9.999997,
+        "case": 166,
+        "family": null,
+        "group": "new-control-03",
+        "kind": "genuine",
+        "responses": {
+          "auxiva": [
+            [
+              null,
+              -6.927435868917013
+            ],
+            [
+              -1.0840192496782193,
+              -5.666876750202089
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "aula_carolina",
+        "stage": "snr_-10",
+        "truth": []
+      }
+    ]
+  },
+  "freeze": {
+    "ancestor": "27e89663650b7d26d79300335d0d7d0157ef5d4dad9b5ffbacbea7194e05cc47",
+    "assessment_background_groups": 6,
+    "assessment_edit_groups": 7,
+    "assessment_ordinary_reader_groups": 8,
+    "assets": {
+      "pellav2_detector.pt": "d21aedfb52e2f87706c2753715a29665482b0f4a034800c31579df5d458559ac",
+      "silero_vad.jit": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720",
+      "w2v-bert-config.json": "f5572bd5998b68182e9c328a43127ed21fed687f6910497136b91a4e3b0e3675"
+    },
+    "distinct_point_groups": 8,
+    "levels_db": [
+      5,
+      0,
+      -5,
+      -10
+    ],
+    "method": {
+      "decision": "For follow-up, an additive arm must gain at least two edit groups from two generator families at each of two adjacent levels. Across levels permit at most one added ordinary group and zero added background-only groups. The same source counts once across levels. Paired dry/early/full transition analyses are diagnostic and do not affect the gate.",
+      "ladder": "For each source compare dry, direct arrival and first 8 ms of response, complete six-second room render, and full room plus the same competing speech at +5, 0, \u22125 and \u221210 dB. Preserve the original authored label clock. Match dry/early/full foreground RMS and use the same scalar gain at all stages within the group. Set gain for worst-case peak and independently round and exactly add integer stems. Reuse the same genuine controls at each level.",
+      "points": "Use the earlier mono and AuxIVA points as primary comparison. Before evaluation inference, freeze a second AuxIVA point at the strict maximum from the eight ordinary development readers across all four noisy levels. No positives, evaluation controls or background-only controls enter point fitting. Only the development point stage writes this value.",
+      "scoring": "Use the two pinned two-second windows, speech admission and commercial voice weights. At noisy levels run native mono and both anonymous prior AuxIVA outputs. Select the strongest admitted response per arm and report its exact window. Clean stages use only mono. A useful location exceeds its point, overlaps at least half of a publisher edit and has interval IoU of at least 0.30. Inconclusive inputs are counted separately.",
+      "sources": "Reuse seven exact Aachen publisher edit clips and measured room/background assignments. Reuse 12 known ordinary clips, reserving two per room for point selection before new inference, and add four previously unselected genuine speakers from the same publisher prefix to point selection, two per room. Reserve all six Aachen background-only clips and eight other genuine voices for assessment. These are exposed Aachen cohorts for controlled diagnostics, not fresh release validation."
+    },
+    "new_point_groups": 4,
+    "prior_points": {
+      "directional": 7.068065580780201,
+      "earlier_either": 6.760727907655432,
+      "mono": 5.356589748054317
+    },
+    "prior_source_freeze": "ebd9bf6dfd80d1cbf4dd9eda0bd3768784afdf5804b45cf64198526c82c35fb9",
+    "prior_source_roster": "8e50c6f0bc24a4a83e72c1792acb31a7b752bc75969b9c020939c6a2a446680d",
+    "runner": "e79aeebb165e331a5f17b11a26d758d653f2415369e1965519b4d72f3bfb76f2",
+    "schema": "chipmunk.audio-room-stress/1",
+    "windows": [
+      [
+        16000,
+        48000
+      ],
+      [
+        48000,
+        80000
+      ]
+    ]
+  },
+  "freeze_sha256": "7fe1a579f08af6649b7f028a441633c31c1ae6df403ade4e131842a8d7ac5c0d",
+  "point": {
+    "development_sha256": "b2529a6087ccf5bc7384cd6b490c27be035419fd5ff4101abec1c7b9c4a8c512",
+    "freeze_sha256": "7fe1a579f08af6649b7f028a441633c31c1ae6df403ade4e131842a8d7ac5c0d",
+    "point": 7.267490595030369
+  },
+  "private_roster_sha256": "0c7197d9092110b20b74deafb7832d7b7ae71334e834c30493cea82880441adb",
+  "schema": "chipmunk.audio-room-stress/1",
+  "summary": {
+    "decision": {
+      "auxiva_development": {
+        "added_background_only_groups": 0,
+        "added_genuine_groups": 0,
+        "passes": false,
+        "passes_adjacent_levels": false
+      },
+      "auxiva_prior": {
+        "added_background_only_groups": 0,
+        "added_genuine_groups": 2,
+        "passes": false,
+        "passes_adjacent_levels": false
+      }
+    },
+    "paired_transitions": {
+      "dry_to_early_room": {
+        "gained_locations": [],
+        "lost_locations": [],
+        "median_log_odds_change": -0.025169,
+        "paired_truth_window_scores": 7
+      },
+      "early_room_to_full_room": {
+        "gained_locations": [],
+        "lost_locations": [
+          "edit-00",
+          "edit-04"
+        ],
+        "median_log_odds_change": -3.319968,
+        "paired_truth_window_scores": 7
+      },
+      "full_room_to_snr_5": {
+        "gained_locations": [],
+        "lost_locations": [
+          "edit-05",
+          "edit-06"
+        ],
+        "median_log_odds_change": -0.936719,
+        "paired_truth_window_scores": 7
+      },
+      "snr_-5_to_snr_-10": {
+        "gained_locations": [],
+        "lost_locations": [],
+        "median_log_odds_change": -0.406129,
+        "paired_truth_window_scores": 7
+      },
+      "snr_0_to_snr_-5": {
+        "gained_locations": [],
+        "lost_locations": [
+          "edit-02",
+          "edit-03"
+        ],
+        "median_log_odds_change": -1.007633,
+        "paired_truth_window_scores": 7
+      },
+      "snr_5_to_snr_0": {
+        "gained_locations": [
+          "edit-02"
+        ],
+        "lost_locations": [],
+        "median_log_odds_change": -0.350707,
+        "paired_truth_window_scores": 7
+      }
+    },
+    "stages": {
+      "background_only": {
+        "auxiva_development": {
+          "added_ordinary": [],
+          "additions": {},
+          "background": [],
+          "located": [],
+          "ordinary": [],
+          "unassessed": [],
+          "wrong": []
+        },
+        "auxiva_prior": {
+          "added_ordinary": [],
+          "additions": {},
+          "background": [],
+          "located": [],
+          "ordinary": [],
+          "unassessed": [],
+          "wrong": []
+        },
+        "mono": {
+          "background": [
+            "aula_carolina-background-0",
+            "stairway-background-1"
+          ],
+          "located": [],
+          "ordinary": [
+            "aula_carolina-background-0",
+            "stairway-background-1"
+          ],
+          "unassessed": [],
+          "wrong": []
+        },
+        "mono_ranges": {}
+      },
+      "dry": {
+        "mono": {
+          "background": [],
+          "located": [
+            "edit-00",
+            "edit-03",
+            "edit-04",
+            "edit-05",
+            "edit-06"
+          ],
+          "ordinary": [],
+          "unassessed": [],
+          "wrong": [
+            "edit-01"
+          ]
+        },
+        "mono_ranges": {
+          "edit-00": {
+            "family": "cosyvoice",
+            "room": "stairway",
+            "truth": [
+              [
+                14672,
+                27872
+              ],
+              [
+                46400,
+                52640
+              ],
+              [
+                54560,
+                66640
+              ]
+            ],
+            "window": [
+              48000,
+              80000
+            ]
+          },
+          "edit-03": {
+            "family": "ljjets",
+            "room": "aula_carolina",
+            "truth": [
+              [
+                3424,
+                12384
+              ],
+              [
+                18208,
+                33648
+              ],
+              [
+                52160,
+                63920
+              ],
+              [
+                82176,
+                93216
+              ]
+            ],
+            "window": [
+              48000,
+              80000
+            ]
+          },
+          "edit-04": {
+            "family": "xttsv2",
+            "room": "stairway",
+            "truth": [
+              [
+                57200,
+                73840
+              ],
+              [
+                74576,
+                83536
+              ]
+            ],
+            "window": [
+              48000,
+              80000
+            ]
+          },
+          "edit-05": {
+            "family": "yourtts",
+            "room": "aula_carolina",
+            "truth": [
+              [
+                6000,
+                14560
+              ],
+              [
+                29456,
+                33296
+              ],
+              [
+                34352,
+                40432
+              ],
+              [
+                50768,
+                65168
+              ],
+              [
+                66032,
+                71872
+              ]
+            ],
+            "window": [
+              48000,
+              80000
+            ]
+          },
+          "edit-06": {
+            "family": "ljjets",
+            "room": "stairway",
+            "truth": [
+              [
+                20320,
+                31360
+              ],
+              [
+                44160,
+                78160
+              ]
+            ],
+            "window": [
+              16000,
+              48000
+            ]
+          }
+        }
+      },
+      "early_room": {
+        "mono": {
+          "background": [],
+          "located": [
+            "edit-00",
+            "edit-03",
+            "edit-04",
+            "edit-05",
+            "edit-06"
+          ],
+          "ordinary": [],
+          "unassessed": [],
+          "wrong": [
+            "edit-01"
+          ]
+        },
+        "mono_ranges": {
+          "edit-00": {
+            "family": "cosyvoice",
+            "room": "stairway",
+            "truth": [
+              [
+                14672,
+                27872
+              ],
+              [
+                46400,
+                52640
+              ],
+              [
+                54560,
+                66640
+              ]
+            ],
+            "window": [
+              48000,
+              80000
+            ]
+          },
+          "edit-03": {
+            "family": "ljjets",
+            "room": "aula_carolina",
+            "truth": [
+              [
+                3424,
+                12384
+              ],
+              [
+                18208,
+                33648
+              ],
+              [
+                52160,
+                63920
+              ],
+              [
+                82176,
+                93216
+              ]
+            ],
+            "window": [
+              48000,
+              80000
+            ]
+          },
+          "edit-04": {
+            "family": "xttsv2",
+            "room": "stairway",
+            "truth": [
+              [
+                57200,
+                73840
+              ],
+              [
+                74576,
+                83536
+              ]
+            ],
+            "window": [
+              48000,
+              80000
+            ]
+          },
+          "edit-05": {
+            "family": "yourtts",
+            "room": "aula_carolina",
+            "truth": [
+              [
+                6000,
+                14560
+              ],
+              [
+                29456,
+                33296
+              ],
+              [
+                34352,
+                40432
+              ],
+              [
+                50768,
+                65168
+              ],
+              [
+                66032,
+                71872
+              ]
+            ],
+            "window": [
+              48000,
+              80000
+            ]
+          },
+          "edit-06": {
+            "family": "ljjets",
+            "room": "stairway",
+            "truth": [
+              [
+                20320,
+                31360
+              ],
+              [
+                44160,
+                78160
+              ]
+            ],
+            "window": [
+              16000,
+              48000
+            ]
+          }
+        }
+      },
+      "full_room": {
+        "mono": {
+          "background": [],
+          "located": [
+            "edit-03",
+            "edit-05",
+            "edit-06"
+          ],
+          "ordinary": [
+            "genuine-00"
+          ],
+          "unassessed": [],
+          "wrong": []
+        },
+        "mono_ranges": {
+          "edit-03": {
+            "family": "ljjets",
+            "room": "aula_carolina",
+            "truth": [
+              [
+                3424,
+                12384
+              ],
+              [
+                18208,
+                33648
+              ],
+              [
+                52160,
+                63920
+              ],
+              [
+                82176,
+                93216
+              ]
+            ],
+            "window": [
+              48000,
+              80000
+            ]
+          },
+          "edit-05": {
+            "family": "yourtts",
+            "room": "aula_carolina",
+            "truth": [
+              [
+                6000,
+                14560
+              ],
+              [
+                29456,
+                33296
+              ],
+              [
+                34352,
+                40432
+              ],
+              [
+                50768,
+                65168
+              ],
+              [
+                66032,
+                71872
+              ]
+            ],
+            "window": [
+              48000,
+              80000
+            ]
+          },
+          "edit-06": {
+            "family": "ljjets",
+            "room": "stairway",
+            "truth": [
+              [
+                20320,
+                31360
+              ],
+              [
+                44160,
+                78160
+              ]
+            ],
+            "window": [
+              48000,
+              80000
+            ]
+          }
+        }
+      },
+      "snr_-10": {
+        "auxiva_development": {
+          "added_ordinary": [],
+          "additions": {},
+          "background": [],
+          "located": [],
+          "ordinary": [],
+          "unassessed": [],
+          "wrong": []
+        },
+        "auxiva_prior": {
+          "added_ordinary": [],
+          "additions": {
+            "edit-02": {
+              "family": "gptsovits",
+              "room": "stairway",
+              "truth": [
+                [
+                  52272,
+                  68672
+                ]
+              ],
+              "window": [
+                48000,
+                80000
+              ]
+            }
+          },
+          "background": [],
+          "located": [
+            "edit-02"
+          ],
+          "ordinary": [],
+          "unassessed": [],
+          "wrong": []
+        },
+        "mono": {
+          "background": [],
+          "located": [],
+          "ordinary": [],
+          "unassessed": [],
+          "wrong": []
+        },
+        "mono_ranges": {}
+      },
+      "snr_-5": {
+        "auxiva_development": {
+          "added_ordinary": [],
+          "additions": {},
+          "background": [],
+          "located": [],
+          "ordinary": [],
+          "unassessed": [],
+          "wrong": []
+        },
+        "auxiva_prior": {
+          "added_ordinary": [
+            "genuine-08"
+          ],
+          "additions": {
+            "edit-02": {
+              "family": "gptsovits",
+              "room": "stairway",
+              "truth": [
+                [
+                  52272,
+                  68672
+                ]
+              ],
+              "window": [
+                48000,
+                80000
+              ]
+            }
+          },
+          "background": [],
+          "located": [
+            "edit-02"
+          ],
+          "ordinary": [
+            "genuine-08"
+          ],
+          "unassessed": [],
+          "wrong": []
+        },
+        "mono": {
+          "background": [],
+          "located": [],
+          "ordinary": [
+            "genuine-00"
+          ],
+          "unassessed": [],
+          "wrong": []
+        },
+        "mono_ranges": {}
+      },
+      "snr_0": {
+        "auxiva_development": {
+          "added_ordinary": [],
+          "additions": {},
+          "background": [],
+          "located": [],
+          "ordinary": [],
+          "unassessed": [],
+          "wrong": []
+        },
+        "auxiva_prior": {
+          "added_ordinary": [
+            "genuine-02"
+          ],
+          "additions": {
+            "edit-05": {
+              "family": "yourtts",
+              "room": "aula_carolina",
+              "truth": [
+                [
+                  6000,
+                  14560
+                ],
+                [
+                  29456,
+                  33296
+                ],
+                [
+                  34352,
+                  40432
+                ],
+                [
+                  50768,
+                  65168
+                ],
+                [
+                  66032,
+                  71872
+                ]
+              ],
+              "window": [
+                48000,
+                80000
+              ]
+            }
+          },
+          "background": [],
+          "located": [
+            "edit-05"
+          ],
+          "ordinary": [
+            "genuine-02"
+          ],
+          "unassessed": [],
+          "wrong": []
+        },
+        "mono": {
+          "background": [],
+          "located": [
+            "edit-02",
+            "edit-03"
+          ],
+          "ordinary": [
+            "genuine-00",
+            "genuine-01"
+          ],
+          "unassessed": [],
+          "wrong": []
+        },
+        "mono_ranges": {
+          "edit-02": {
+            "family": "gptsovits",
+            "room": "stairway",
+            "truth": [
+              [
+                52272,
+                68672
+              ]
+            ],
+            "window": [
+              48000,
+              80000
+            ]
+          },
+          "edit-03": {
+            "family": "ljjets",
+            "room": "aula_carolina",
+            "truth": [
+              [
+                3424,
+                12384
+              ],
+              [
+                18208,
+                33648
+              ],
+              [
+                52160,
+                63920
+              ],
+              [
+                82176,
+                93216
+              ]
+            ],
+            "window": [
+              48000,
+              80000
+            ]
+          }
+        }
+      },
+      "snr_5": {
+        "auxiva_development": {
+          "added_ordinary": [],
+          "additions": {},
+          "background": [],
+          "located": [],
+          "ordinary": [],
+          "unassessed": [],
+          "wrong": []
+        },
+        "auxiva_prior": {
+          "added_ordinary": [],
+          "additions": {
+            "edit-05": {
+              "family": "yourtts",
+              "room": "aula_carolina",
+              "truth": [
+                [
+                  6000,
+                  14560
+                ],
+                [
+                  29456,
+                  33296
+                ],
+                [
+                  34352,
+                  40432
+                ],
+                [
+                  50768,
+                  65168
+                ],
+                [
+                  66032,
+                  71872
+                ]
+              ],
+              "window": [
+                48000,
+                80000
+              ]
+            },
+            "edit-06": {
+              "family": "ljjets",
+              "room": "stairway",
+              "truth": [
+                [
+                  20320,
+                  31360
+                ],
+                [
+                  44160,
+                  78160
+                ]
+              ],
+              "window": [
+                48000,
+                80000
+              ]
+            }
+          },
+          "background": [],
+          "located": [
+            "edit-05",
+            "edit-06"
+          ],
+          "ordinary": [],
+          "unassessed": [],
+          "wrong": []
+        },
+        "mono": {
+          "background": [],
+          "located": [
+            "edit-03"
+          ],
+          "ordinary": [
+            "genuine-00"
+          ],
+          "unassessed": [],
+          "wrong": []
+        },
+        "mono_ranges": {
+          "edit-03": {
+            "family": "ljjets",
+            "room": "aula_carolina",
+            "truth": [
+              [
+                3424,
+                12384
+              ],
+              [
+                18208,
+                33648
+              ],
+              [
+                52160,
+                63920
+              ],
+              [
+                82176,
+                93216
+              ]
+            ],
+            "window": [
+              48000,
+              80000
+            ]
+          }
+        }
+      }
+    }
+  }
+}

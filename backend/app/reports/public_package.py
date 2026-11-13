@@ -50,8 +50,10 @@ def public_result(result: dict) -> dict:
             source_coverage[COMMITMENT] = canonical_hash(brief_review)
         if window_review := face_windows.from_result(result):
             source_coverage[face_windows.COMMITMENT] = canonical_hash(window_review)
-        if scene_commitment := result.get("manifest", {}).get("sampling", {}).get(scene_return_binding.COMMITMENT):
-            source_coverage[scene_return_binding.COMMITMENT] = scene_commitment
+        sampling = result.get("manifest", {}).get("sampling", {})
+        for key in (scene_return_binding.COMMITMENT, scene_return_binding.COVERAGE_COMMITMENT):
+            if commitment := sampling.get(key):
+                source_coverage[key] = commitment
     if result.get('kind') == 'document':
         from app.evidence import document_passage_position
         from app.evidence.email_alternatives import COMMITMENT, result_review

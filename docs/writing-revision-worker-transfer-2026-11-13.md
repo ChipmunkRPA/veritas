@@ -51,7 +51,9 @@ sources. The comparison measures app parity and transfer on known sources.
 A strict location covers at least half of the labeled non-whitespace
 characters in the version and has at least 0.30 intersection over union.
 A separate measure asks whether the union of visible highlights covers half
-of any one publisher-labeled region. Byte-identical versions retain their
+of any one publisher-labeled region. The benchmark projects recorded edit
+operations into text spans. Overlap with those spans measures localization
+against the publisher annotations. Byte-identical versions retain their
 operation history in a separate stratum. A release would require strict
 locations missed by the app on at least three different reports across both
 generator families, with at most two held genuine reports selected and no
@@ -104,6 +106,33 @@ publisher-annotation overlap. None improved strict localization. The three
 fitted arms remain experimental. The remaining four batches are outside
 this result. [First held batch and source-range receipt](evaluation-panels/writing-revision-worker-held-batch0-2026-11-13.json)
 
+## Three completed held batches
+
+The first 12 of 20 source groups supplied 84 deliveries. They comprised
+12 originals, 61 changed versions and 11 byte-identical edited deliveries.
+All 84 document conclusions were inconclusive. The worker published 494
+inspection packets, including 283 without primary-classifier support.
+
+| Inspection method | Genuine reports selected | Changed versions with any half-covered region | Strict changed-version locations |
+| --- | ---: | ---: | ---: |
+| Prior primary proxy | 11/12 | 50/61 | 2/61 |
+| Full worker, displayed packets | 12/12 | 55/61 | 2/61 |
+| Full worker packets with primary support | 11/12 | 47/61 | 1/61 |
+| Full worker packets with primary support and an exact ratio reduction | 8/12 | 27/61 | 0/61 |
+| Genuine-fit absolute response | 2/12 | 7/61 | 0/61 |
+| Genuine-fit within-document response | 3/12 | 10/61 | 0/61 |
+| Genuine-fit within-document agreement | 3/12 | 7/61 | 0/61 |
+
+The broader app highlights touched more of the changed versions. They also
+covered 13,160 non-whitespace characters in the genuine originals, up from
+11,324 under the prior proxy. In the changed versions, 32.1% of the marked
+characters fell inside a publisher edit span, compared with 39.9% under the
+prior proxy. Both strict app locations appeared in the
+earliest editing stage, one from each generator. The three frozen candidates
+added zero strict locations. This readout covers three of five planned
+batches. One interrupted batch recovered 17 saved rows and one already-paid
+job before submitting its remaining ten deliveries. [Three-batch receipt](evaluation-panels/writing-revision-worker-held-batches0-2-2026-11-13.json)
+
 ## Replay
 
 ```sh
@@ -112,6 +141,9 @@ PYTHONPATH=backend python3 -B -S -m scripts.review_writing_revision_worker_trans
   docs/evaluation-panels/writing-revision-trajectory-2026-11-13.json
 PYTHONPATH=backend python3 -B -S -m scripts.review_writing_revision_worker_transfer review \
   docs/evaluation-panels/writing-revision-worker-held-batch0-2026-11-13.json \
+  docs/evaluation-panels/writing-revision-trajectory-2026-11-13.json
+PYTHONPATH=backend python3 -B -S -m scripts.review_writing_revision_worker_transfer review \
+  docs/evaluation-panels/writing-revision-worker-held-batches0-2-2026-11-13.json \
   docs/evaluation-panels/writing-revision-trajectory-2026-11-13.json
 ```
 
@@ -130,7 +162,11 @@ backend/.venv/bin/python -B -m scripts.writing_revision_worker_transfer held "$p
 ```
 
 Subsequent batches use `--batch 1` through `--batch 4` and new output
-directories. Each worker records a per-file progress journal. The public
+directories. Each worker records a per-file progress journal. An interrupted
+held batch can be restarted with the same arguments and `--resume`, using
+its existing isolated output directory. The runner verifies saved rows
+against the authenticated API and JSON, then recovers any already-paid test
+job before making a new simulated purchase. The public
 reader accepts only consecutive completed batches and uses the prior
 ledger's recorded native source overlaps. It checks the fit arithmetic,
 identical-input behavior, and packet metrics from scalar and source-range

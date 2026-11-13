@@ -60,6 +60,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
     player.current?.scrollIntoView?.({ block: 'center', behavior: 'auto' })
   }
   const hold = set.picture_hold
+  const sceneReview = set.coverage?.scene_return_review
   const mouthHold = hold?.mouth_local_hold
   const motion = hold?.motion_sequence_review
   const motionRate = motion?.parameters.frame_rate ?? 20
@@ -149,6 +150,12 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
       {set.coverage.brief_face_windows.observations.map((observation) => <p key={observation}
         className="mt-2 mb-0 text-small">{observation}</p>)}
       <p className="mt-2 mb-0 text-caption text-text-muted">This check carries zero AI confidence weight.</p>
+    </section>}
+    {sceneReview && <section aria-labelledby="video-scene-return-coverage-heading" className="mt-4 rounded-md border border-border p-4">
+      <h3 id="video-scene-return-coverage-heading" className="m-0 text-body font-medium">Picture-change coverage</h3>
+      <p className="mt-2 mb-0 text-small">{sceneReview.observation}{sceneReview.packet_id &&
+        <> <a className="underline" href={`#media-evidence-${sceneReview.packet_id}`}>Inspect the three source frames</a></>}</p>
+      <p className="mt-2 mb-0 text-caption text-text-muted">{sceneReview.limitation}</p>
     </section>}
     {set.coverage ? <div className="mt-4 rounded-md border border-border p-4 text-small text-text-muted">
       <p className="m-0">{set.coverage.scored_frame_count} frame(s) were inputs to recorded {hasNestedVideoEvidence(set.version) ? 'visual frame or window' : 'frame or window'} checks in a table of {set.coverage.frame_count} frames.

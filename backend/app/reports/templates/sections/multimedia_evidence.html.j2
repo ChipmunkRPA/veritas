@@ -57,6 +57,12 @@
 {% for observation in evidence.brief_face_windows.observations %}<p class="caption">{{ observation }}</p>{% endfor %}
 <p class="caption">This check carries zero AI confidence weight. JSON pointer <span class="mono">/coverage/brief_face_windows</span>.</p>
 {% endif %}
+{% if evidence.get('scene_return_review') %}
+{% set review = evidence.scene_return_review %}
+<h3>Picture-change coverage</h3>
+<p class="caption">{{ review.observation }}{% if review.packet_id %} See evidence {{ review.packet_id }} for the three source frames.{% endif %}</p>
+<p class="caption">{{ review.limitation }} JSON pointer <span class="mono">/coverage/scene_return_review</span>.</p>
+{% endif %}
 {% if evidence.get('short_voice_review') %}
 {% set review = evidence.short_voice_review %}
 <h3 id="multimedia-short-voice-review">{{ review.title }}</h3>
@@ -305,7 +311,7 @@ On the original timeline, the audio spans {{ '%.3f' | format(item.before.source_
 {% if 'matched_context_selected' in window %}
 <p class="caption">Check {{ window.signal_ref.display_id or 'recorded check' }}. Uncalibrated response {{ '%.4f' | format(window.score) }}. {% if window.matched_context_selected %}This AI-like context response selected its middle sentence for review.{% elif window.get('matched_context_eligible') %}This context response did not select its middle sentence for review.{% else %}This input was outside short-passage review coverage.{% endif %} The response describes writing patterns across the full input.</p>
 {% else %}
-<p class="caption">Check {{ window.signal_ref.display_id or 'recorded check' }} - {% if window.score_kind == 'perplexity_ratio' %}raw writing-pattern ratio{% else %}uncalibrated response{% endif %} {{ '%.4f' | format(window.score) }}. Inspection boundary: {% if window.ai_when == 'lt' %}below{% else %}at or above{% endif %} {{ window.threshold }}. {% if window.supports_ai %}This response supports inspection at that boundary.{% else %}This response does not support the AI flag at that boundary; disagreement is retained.{% endif %} This is not a calibrated authorship probability.</p>
+<p class="caption">Check {{ window.signal_ref.display_id or 'recorded check' }}. {% if window.score_kind == 'perplexity_ratio' %}Raw writing-pattern ratio{% else %}Uncalibrated response{% endif %} {{ '%.4f' | format(window.score) }}. {% if window.supports_ai %}AI-like response for this input.{% else %}No AI-like flag for this input.{% endif %} {% if window.score_kind == 'perplexity_ratio' %}This ratio compares how predictable the text was with a reference based on token predictions.{% else %}This raw response measures writing patterns across the input.{% endif %} It carries no passage-level authorship confidence.</p>
 {% endif %}
 <p class="caption">{% if window.score_kind == 'perplexity_ratio' %}Source envelope{% else %}Input ranges{% endif %} {% for span in window.spans %}[{{ span.start }}, {{ span.end }}){% if not loop.last %}, {% endif %}{% endfor %}{% if window.score_kind == 'perplexity_ratio' %}. The excerpt covers the actual recorded token contexts; exact token sequences and selected-token ranges are retained in JSON.{% else %}; these ranges were joined with a space.{% endif %}</p>
 {% if not evidence.withheld %}<blockquote>{{ window.text }}</blockquote>{% endif %}

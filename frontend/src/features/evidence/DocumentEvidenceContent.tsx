@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Button } from '../../components/ui'
 import { EvidenceLimits, EvidencePicture, EvidenceReferences, evidenceCard, evidenceGrid } from './EvidenceMedia'
-import DocumentInspectionMap, { passageLocation, RecordedPassage, windowSupportsInspection } from './DocumentInspectionMap'
+import DocumentInspectionMap, { passageLocation, RecordedPassage, windowInspectionDirection } from './DocumentInspectionMap'
 import DocumentContextComparison from './DocumentContextComparison'
 import DocumentPassageCoverage from './DocumentPassageCoverage'
 import DocumentRepeatedPassages from './DocumentRepeatedPassages'
@@ -104,22 +104,19 @@ function EmailBodyComparison({ review }: { review?: EmailBodyAlternatives }) {
 
 function ScoredContext({ window, index }: { window: DocumentEvidenceWindow; index: number }) {
   const ratio = window.score_kind === 'perplexity_ratio'
-  const threshold = window.threshold ?? 0.5
-  const supports = windowSupportsInspection(window)
+  const supports = windowInspectionDirection(window) === true
   const matched = typeof window.matched_context_selected === 'boolean'
   const eligible = typeof window.score_exact_hex === 'string'
   return <div className="rounded-md border border-border p-4">
     <p className="m-0 text-small"><span className="font-medium">{window.signal_ref.display_id ?? `Check ${index + 1}`}</span>
       {' '}· <span className="font-mono">{window.score.toFixed(3)}</span> {ratio ? 'raw writing-pattern ratio' : 'uncalibrated response'}
       {' '}· {matched ? (supports ? 'AI-like context selected for review' : eligible ? 'Context did not select this sentence' : 'Outside short-passage review coverage')
-        : supports ? 'AI-like response for this input' : 'Opposing response for this input'}</p>
+        : supports ? 'AI-like response for this input' : 'No AI-like flag for this input'}</p>
     <p className="mt-2 mb-0 text-caption text-text-muted">{matched ? (eligible
       ? 'The check read three sentences together and uses the middle sentence as a review location. The response is an uncalibrated writing-pattern measurement.'
       : 'This response was recorded for the original writing check. Short-passage review covers only eligible middle sentences.')
-      : ratio ? `Ratios below ${threshold} support inspection; this is not a percentage or an authorship probability.`
-      : `Responses at or above ${threshold} support inspection; the response is not a calibrated authorship probability.`}
-      {' '}Displayed values are rounded; the direction uses the recorded full-precision response.
-      {!supports && !matched && ' Disagreement is retained.'}</p>
+      : ratio ? 'This ratio compares how predictable the text was with a reference based on token predictions. It carries no passage-level authorship confidence.'
+      : 'This raw response measures writing patterns across the input. It carries no passage-level authorship confidence.'}</p>
     {ratio && <p className="mt-3 mb-0 text-caption text-text-muted">Source text covering the actual token contexts is shown below. The recorded token sequences and scored token ranges are preserved in JSON; the excerpt alone does not reproduce the token input.</p>}
     {ratio ? <details className="mt-3 text-small"><summary className="cursor-pointer text-text-muted">Full source text for the recorded token contexts ({Array.from(window.text).length.toLocaleString()} characters)</summary>
       <blockquote className="m-0 mt-3 pl-3 border-l border-border whitespace-pre-wrap break-words">{window.text}</blockquote>
@@ -271,6 +268,7 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
       const pages = [...new Set(Object.values(packet.artifacts).map((asset) => asset.page).filter((page): page is number => typeof page === 'number'))].sort((a, b) => a - b)
       const roles = new Set(packet.anchors.map((anchor) => anchor.quote_role))
       const includesQuotedText = roles.has('quoted') || roles.has('signature')
+      const directions = packet.supporting_windows.map(windowInspectionDirection)
       return <article key={packet.id} id={`media-evidence-${packet.id}`} tabIndex={-1}
         ref={(node) => { if (node) articles.current.set(packet.id, node); else articles.current.delete(packet.id) }}
         aria-label={`${packet.id}: source passage and reasons`} data-selected={selectedId === packet.id ? 'true' : undefined}
@@ -291,6 +289,9 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
         {pages.map((page) => <PagePlates key={page} set={set} packet={packet} page={page} token={token} mediaReady={mediaReady} />)}
         <div className="mt-5 space-y-3">
           <h4 className="m-0 text-small font-medium">What each check actually read</h4>
+          {directions.includes(true) && directions.includes(false) && <p className="m-0 text-small text-text-muted">
+            Disagreement is retained. One response was AI-like and another did not flag its input. Authorship remains undetermined.
+          </p>}
           {packet.supporting_windows.map((window, index) => <ScoredContext key={`${window.signal_ref.id}:${index}`} window={window} index={index} />)}
         </div>
         <DocumentContextComparison comparison={packet.context_comparison} focus={packet.focus} />
@@ -309,7 +310,9 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
             </li>
           })}</ul>
         </details>
-        <p className="mt-4 mb-0 text-small">{packet.interpretation}</p><EvidenceLimits lines={packet.limitations} /><EvidenceReferences packet={packet} />
+        <p className="mt-4 mb-0 text-small">{packet.interpretation}</p>
+        <EvidenceLimits lines={packet.limitations.filter((line) => line !== 'Each check uses its own recorded operating threshold. Threshold direction is not a validated probability or proof of authorship.')} />
+        <EvidenceReferences packet={packet} />
       </article>
     })}</div>
   </div>

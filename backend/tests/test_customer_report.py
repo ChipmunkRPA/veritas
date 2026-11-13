@@ -78,7 +78,8 @@ def test_customer_packet_inferences_keep_mixed_text_and_acoustics_uncertain():
     ]
     shown = customer_view(frozen, out, lambda x: x)
     packets = {p['id']: p for p in shown['evidence']['packets']}
-    assert 'Mixed evidence' in packets['T01']['customer_inference']
+    assert 'The recorded checks disagree' in packets['T01']['customer_inference']
+    assert 'Authorship remains undetermined' in packets['T01']['customer_inference']
     for key in ['B01', 'AV01']:
         assert 'No AI/original conclusion' in packets[key]['customer_inference']
 
@@ -92,14 +93,16 @@ def test_matched_passage_inference_uses_selection_and_keeps_other_check_disagree
          'windows': [{'supports_ai': True, 'matched_context_selected': False}, {'supports_ai': True}]},
         {'id': 'T03', 'kind': 'document',
          'windows': [{'supports_ai': False, 'matched_context_selected': False, 'matched_context_eligible': True}, {'supports_ai': True}]},
+        {'id': 'T04', 'kind': 'document', 'windows': [{'supports_ai': False}]},
     ]
     shown = customer_view(frozen, out, lambda x: x)
     packets = {p['id']: p for p in shown['evidence']['packets']}
     matched = packets['T01']['customer_inference']
     assert 'AI-like writing pattern across the three-sentence context' in matched
     assert 'did not corroborate' in matched and 'zero weight' in matched
-    assert 'Leaning towards AI-written text' in packets['T02']['customer_inference']
-    assert 'Mixed evidence' in packets['T03']['customer_inference']
+    assert 'showed an AI-like writing pattern' in packets['T02']['customer_inference']
+    assert 'The recorded checks disagree' in packets['T03']['customer_inference']
+    assert packets['T04']['customer_inference'] == "No AI-like flag was recorded for this input. Authorship remains undetermined."
 
 
 def test_customer_partial_views_are_not_rewritten():

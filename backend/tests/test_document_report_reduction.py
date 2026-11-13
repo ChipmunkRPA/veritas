@@ -50,10 +50,19 @@ def test_pdf_keeps_ratio_reduction_distinct_from_full_forward_context(packet_fac
     assert ratio["contexts"][0]["source_token_range"] == [0, full_end]
     assert ratio["contexts"][0]["scored_token_range"] == [0, full_end]
     assert ratio["supports_ai"] is False  # Raw ratio 1.4 is above the lower-is-AI boundary.
+    assert "threshold" not in ratio and "ai_when" not in ratio
     html = " ".join(engine.render_html(snapshot, embed_fonts=False).split())
     assert f"This passage's ratio uses {reduction_end} selected token(s), intersecting source characters [0, {reduction_end})." in html
     assert "The reduction includes neighbouring sentences because the focus sentence was short." in html
     assert f"Actual token context [0, {full_end}); predicted tokens in that forward pass [0, {full_end})" in html
     assert "not necessarily all the tokens used for this passage's ratio" in html
-    assert "disagreement is retained" in html
+    assert "No AI-like flag for this input." in html
+    assert "It carries no passage-level authorship confidence." in html
+    assert "The recorded checks disagree. One response was AI-like and another did not flag its input." in html
+    assert "Inspection boundary:" not in html
+    assert "Each check uses its own recorded operating threshold" not in html
+    pdf = " ".join(engine.pdf_text(engine.render_pdf(snapshot).pdf).split())
+    assert "No AI-like flag for this input." in pdf
+    assert "Inspection boundary:" not in pdf
+    assert "Each check uses its own recorded operating threshold" not in pdf
     assert snapshot.evidence == original  # Rendering does not rewrite the frozen evidence.

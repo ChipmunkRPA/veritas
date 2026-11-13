@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import fcntl
 import json
 import math
 import os
@@ -127,7 +128,58 @@ def assess(client, row, aid, *, export):
             "optional_reviews": [key for key in OPTIONAL if key in evidence["coverage"]]}
 
 
-def run(prior, output, phase, *, device, fit_receipt=None, points_path=None, batches_path=None, batch=None, limit=None):
+def recover(client, log, worker, rows):
+    from sqlalchemy import select
+
+    from app.api import auth
+    from app.storage.db import Analysis, BillingOrderRow, Job, PrincipalRow, get_session
+
+    log.seek(0)
+    measured = [json.loads(line) for line in log]
+    source.require([row["record_id"] for row in measured] == [row["record_id"] for row in rows[:len(measured)]],
+                   "The saved journal is not a complete prefix of the frozen batch")
+    with get_session() as db:
+        orders = db.execute(select(BillingOrderRow, Analysis, Job).join(Analysis, Analysis.id == BillingOrderRow.analysis_id)
+            .join(Job, (Job.subject_id == Analysis.id) & (Job.type == "analysis"))
+            .order_by(BillingOrderRow.created_at, BillingOrderRow.id)).all()
+        source.require(len(measured) <= len(orders) <= min(len(measured) + 1, len(rows))
+                       and len(orders) == paid.counts()[0] == paid.counts()[1], "Isolated batch orders differ from the saved prefix")
+        owners = {order.owner_id for order, _, _ in orders}
+        source.require(len(owners) == 1, "The retained batch must have one evaluation account")
+        owner = db.get(PrincipalRow, owners.pop())
+        source.require(owner is not None and owner.username.startswith("opai-worker-eval-"), "Use an isolated writing study account")
+        for index, (order, analysis, job) in enumerate(orders):
+            source.require(order.status == "fulfilled" and order.mode == "test" and order.paid_at is not None
+                           and (order.amount_minor, order.currency, order.kind, order.profile) == (999, "usd", "document", "full")
+                           and order.sha256 == analysis.sha256 == rows[index]["text_sha256"]
+                           and analysis.submitted_by == owner.id and (order.stripe_session_id or "").startswith("cs_test_"),
+                           "Saved analysis or payment does not match the frozen input")
+            if index < len(measured):
+                source.require((analysis.status, job.status) == ("done", "done"), "A journaled case is incomplete")
+        retained = [(analysis.id, job.status) for _, analysis, job in orders]
+        key, _ = auth.issue_api_key(db, owner)
+        db.commit()
+    client.headers["X-API-Key"] = key
+    for row, saved, (aid, _) in zip(rows[:len(measured)], measured, retained[:len(measured)], strict=True):
+        source.require(assess(client, row, aid, export=True) == saved, "Journal and retained API evidence disagree")
+    if len(retained) > len(measured):
+        aid, status = retained[-1]
+        if status != "done":
+            worker.sweep(force=True)
+            source.require(worker.run_once(), "The interrupted paid job is not ready for a retry")
+        observed = assess(client, rows[len(measured)], aid, export=True)
+        measured.append(observed)
+        write_progress(log, observed)
+    return measured
+
+
+def write_progress(log, observed):
+    print(json.dumps(observed, sort_keys=True, allow_nan=False), file=log, flush=True)
+    os.fsync(log.fileno())
+
+
+def run(prior, output, phase, *, device, fit_receipt=None, points_path=None, batches_path=None, batch=None, limit=None,
+        resume=False):
     rows = phase_rows(roster(prior), phase)
     if phase == "held":
         source.require(fit_receipt is not None and points_path is not None and batches_path is not None and batch is not None,
@@ -146,7 +198,13 @@ def run(prior, output, phase, *, device, fit_receipt=None, points_path=None, bat
         rows = [by_id[record_id] for record_id in batches["batches"][batch]]
     if limit is not None:
         rows = rows[:limit]
-    paid.configure(output, source.ROOT)
+    journal = output / "progress.jsonl"
+    receipt = output / "worker.json"
+    if resume:
+        source.require(phase == "held" and limit is None and journal.is_file()
+                       and (output / "app" / "veritas.db").is_file() and not receipt.exists(),
+                       "Resume requires an incomplete held batch in an existing isolated output directory")
+    paid.configure(output, source.ROOT, resume=resume)
     os.environ.update(VERITAS_DEVICE=device, VERITAS_RUN_WORKER="false", VERITAS_ENVIRONMENT="dev", VERITAS_LOG_LEVEL="WARNING",
                       VERITAS_TEXT_DETECTOR_MODE="candidate", VERITAS_TEXT_WINDOW_SENTENCES="3", VERITAS_WEBHOOKS_ENABLED="false",
                       VERITAS_TEXT_ISOLATED_PARAGRAPH_REVIEW="true", VERITAS_TEXT_PARAGRAPH_EVIDENCE_PRIORITY="true",
@@ -168,29 +226,36 @@ def run(prior, output, phase, *, device, fit_receipt=None, points_path=None, bat
                    "Use isolated state and offline models")
     stub = paid.PaymentStub()
     service._stripe = stub
-    measured = []
     start = time.monotonic()
-    with TestClient(app, client=("127.0.0.1", 50000)) as client, (output / "progress.jsonl").open("x") as log:
-        worker = jobs.build_worker()
-        with get_session() as db:
-            owner = auth.new_principal("opai-worker-eval-" + uuid.uuid4().hex[:8], "examiner")
-            db.add(owner)
-            db.flush()
-            key, _ = auth.issue_api_key(db, owner)
-            db.commit()
-        client.headers["X-API-Key"] = key
-        for index, row in enumerate(rows):
-            aid = upload(client, stub, row, worker)
-            observed = assess(client, row, aid, export=True)
-            measured.append(observed)
-            print(json.dumps(observed, sort_keys=True, allow_nan=False), file=log, flush=True)
-            print(phase, index + 1, len(rows), row["family"], len(observed["packets"]), observed["document_decision"], flush=True)
-    source.seal(output / "worker.json", {"schema": SCHEMA, "phase": phase, "limited": limit is not None, "device": device,
-        "fit_worker_sha256": source.digest(fit_receipt) if fit_receipt else None,
-        "points_sha256": source.digest(points_path) if points_path else None,
-        "batch": batch, "batches_sha256": source.digest(batches_path) if batches_path else None,
-        "source_roster_sha256": source.digest(prior / "roster.json"), "runner_sha256": source.digest(Path(__file__)),
-        "worker_duration_s": round(time.monotonic() - start, 3), "rows": measured})
+    with journal.open("a+" if resume else "x") as log:
+        fcntl.flock(log.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+        with TestClient(app, client=("127.0.0.1", 50000)) as client:
+            worker = jobs.build_worker()
+            if resume:
+                measured = recover(client, log, worker, rows)
+                print(phase, "recovered", len(measured), len(rows), flush=True)
+            else:
+                measured = []
+                with get_session() as db:
+                    owner = auth.new_principal("opai-worker-eval-" + uuid.uuid4().hex[:8], "examiner")
+                    db.add(owner)
+                    db.flush()
+                    key, _ = auth.issue_api_key(db, owner)
+                    db.commit()
+                client.headers["X-API-Key"] = key
+            recovered = len(measured)
+            for index, row in enumerate(rows[recovered:], start=recovered):
+                aid = upload(client, stub, row, worker)
+                observed = assess(client, row, aid, export=True)
+                measured.append(observed)
+                write_progress(log, observed)
+                print(phase, index + 1, len(rows), row["family"], len(observed["packets"]), observed["document_decision"], flush=True)
+        source.seal(receipt, {"schema": SCHEMA, "phase": phase, "limited": limit is not None, "device": device,
+            "fit_worker_sha256": source.digest(fit_receipt) if fit_receipt else None,
+            "points_sha256": source.digest(points_path) if points_path else None,
+            "batch": batch, "batches_sha256": source.digest(batches_path) if batches_path else None,
+            "source_roster_sha256": source.digest(prior / "roster.json"), "runner_sha256": source.digest(Path(__file__)),
+            "worker_duration_s": round(time.monotonic() - start, 3), "recovered_cases": recovered, "rows": measured})
 
 
 def main():
@@ -204,9 +269,10 @@ def main():
     parser.add_argument("--batches", type=Path)
     parser.add_argument("--batch", type=int)
     parser.add_argument("--limit", type=int)
+    parser.add_argument("--resume", action="store_true")
     args = parser.parse_args()
     run(args.prior, args.output, args.phase, device=args.device, fit_receipt=args.fit_receipt,
-        points_path=args.points, batches_path=args.batches, batch=args.batch, limit=args.limit)
+        points_path=args.points, batches_path=args.batches, batch=args.batch, limit=args.limit, resume=args.resume)
 
 
 if __name__ == "__main__":

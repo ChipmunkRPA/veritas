@@ -268,19 +268,38 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
 
     picture_hold_binding.validate(evidence)
     scene_return_binding.validate(evidence, pts=table.pts, canonical_hash=canonical_hash)
-    if source.get(scene_return_binding.COMMITMENT):
+    scene_return_binding.validate_coverage(evidence, canonical_hash=canonical_hash)
+    scene_coverage = (evidence.get("coverage") or {}).get(scene_return_binding.COVERAGE) or {}
+    scene_committed = source.get(scene_return_binding.COMMITMENT)
+    if scene_committed or scene_coverage.get("status") == "no_match":
         delivery = probe_container(original, include_codec_tag=True)
         scene_encoding = (delivery.get("codec"), delivery.get("pix_fmt"), delivery.get("codec_tag"))
-        if scene_encoding != ("hevc", "yuv420p", "hvc1") or face_return.source_carrier(original) != "mp4":
+        if (scene_encoding not in scene_return_binding.ENCODINGS or face_return.source_carrier(original) != "mp4"
+                or not scene_return.supported(table)):
             raise ValueError("Picture-change evidence uses a different video delivery profile")
+        verified = 0
+
+        def native_pictures(frames):
+            nonlocal verified
+            for frame in frames:
+                if frame.index != verified or verified >= len(table) or not frame.pts_verified or frame.pts != table.pts[verified]:
+                    raise ValueError("Picture-change source frames do not match the verified clock")
+                verified += 1
+                yield frame
+
         with closing(decode_stream(original, table, timeout_s=20)) as frames:
-            found = scene_return.detect(frames, table)
-        [packet] = [item for item in evidence["packets"] if item["id"] == scene_return_binding.PACKET_ID]
-        record = packet[scene_return_binding.KEY]
-        if found is None or canonical_hash(scene_return_binding.record(
-            found, table, [item["decoded_rgb_sha256"] for item in record["anchors"]],
-        )) != source[scene_return_binding.COMMITMENT]:
-            raise ValueError("The standalone picture-change interval or tile support differs from the original")
+            found = scene_return.detect(native_pictures(frames), table)
+        if verified != len(table):
+            raise ValueError("The original video did not reproduce the complete picture-change scan")
+        if scene_committed:
+            [packet] = [item for item in evidence["packets"] if item["id"] == scene_return_binding.PACKET_ID]
+            record = packet[scene_return_binding.KEY]
+            if found is None or canonical_hash(scene_return_binding.record(
+                found, table, [item["decoded_rgb_sha256"] for item in record["anchors"]],
+            )) != scene_committed:
+                raise ValueError("The standalone picture-change interval or tile support differs from the original")
+        elif found is not None:
+            raise ValueError("The original video did not reproduce the recorded no-match result")
     hold = evidence.get("picture_hold") or {}
     sequence = hold.get("sequence_review")
     motion = hold.get("motion_sequence_review")

@@ -1,0 +1,77 @@
+{
+  "analysis_count": 5,
+  "unpaid_jobs": 0,
+  "outcomes": [
+    {
+      "role": "0-0-layout_cut",
+      "profile": "full",
+      "coverage": "matched",
+      "reason": null,
+      "displayed_picture_changes": 1,
+      "source_frames": 3,
+      "signed_bundle_verified": true,
+      "original_source_replay": true,
+      "pdf_coverage_verified": true
+    },
+    {
+      "role": "layout_h264",
+      "profile": "full",
+      "coverage": "matched",
+      "reason": null,
+      "displayed_picture_changes": 1,
+      "source_frames": 3,
+      "signed_bundle_verified": true,
+      "original_source_replay": true,
+      "pdf_coverage_verified": true
+    },
+    {
+      "role": "0-0-camera_shift",
+      "profile": "full",
+      "coverage": "no_match",
+      "reason": null,
+      "displayed_picture_changes": 0,
+      "source_frames": 0,
+      "signed_bundle_verified": true,
+      "original_source_replay": true,
+      "pdf_coverage_verified": true
+    },
+    {
+      "role": "ordinary-640p",
+      "profile": "full",
+      "coverage": "unavailable",
+      "reason": "unsupported_video",
+      "displayed_picture_changes": 0,
+      "source_frames": 0,
+      "signed_bundle_verified": true,
+      "original_source_replay": false,
+      "pdf_coverage_verified": true
+    },
+    {
+      "role": "0-0-layout_cut",
+      "profile": "quick",
+      "coverage": "unavailable",
+      "reason": "profile",
+      "displayed_picture_changes": 0,
+      "source_frames": 0,
+      "signed_bundle_verified": true,
+      "original_source_replay": false,
+      "pdf_coverage_verified": true
+    }
+  ],
+  "schema": "chipmunk.video-scene-return-coverage-local/1",
+  "browser": {
+    "coverage_statuses": [
+      "matched",
+      "matched",
+      "no_match",
+      "profile",
+      "unsupported_video"
+    ],
+    "json_matches": true,
+    "original_frames": 6,
+    "page_errors": 0,
+    "plain_view": true,
+    "source_clock": true
+  },
+  "checkout": "simulated test-mode payment in an isolated app"
+}

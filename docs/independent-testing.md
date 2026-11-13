@@ -91,11 +91,19 @@ recomputes the cut and control counts from a public ledger. With the retained
 deliveries it also reopens all timestamps and the exact supporting images using
 FFmpeg. The [earlier-copy JPEG structure trial](image-reference-structure-jpeg-2026-11-13.md)
 publishes source-group results and the native comparison and export replays.
+The [neighbor-predicted mouth study](video-mouth-blind-prediction-2026-11-13.md)
+recomputes the decision totals and publishes before, during and after
+frame commitments. The [single-upload image residual trial](image-residual-template-transfer-2026-11-13.md)
+replays the JPEG observations and source-mask overlap with the retained
+qualification archives.
 The [Full writing worker replay](writing-revision-worker-transfer-2026-11-13.md#replay)
 checks which ranges reached the app on genuine government-report excerpts and
 recomputes the separate candidate points from source-bound scalar records.
 The [matched utterance speech replay](audio-odss-matched-room-2026-11-13.md#reproduce)
 recomputes held background and voice flags on separate reader groups.
+The [PhonemeDF transfer replay](audio-phonemedf-matched-transfer-2026-11-13.md#reproduce)
+tests the same frozen operating points on four new readers, two generators
+and two competing-speech levels.
 Run these four studies together from a clean checkout to save a shareable
 receipt of the scalar checks.
 

@@ -95,11 +95,11 @@ def _packet_inference(packet: dict) -> str:
                 inference += " Another recorded response did not corroborate this clue."
             return inference + " Review the marked sentence in context. This clue carries zero weight in the overall assessment."
         if directions == {True, False}:
-            return "Mixed evidence for this passage: the recorded checks disagree. No reliable AI/original conclusion can be assigned to these words."
+            return "The recorded checks disagree. One response was AI-like and another did not flag its input. Authorship remains undetermined."
         if directions == {True}:
-            return "Leaning towards AI-written text in the scored context. This is an inspection clue, not a calibrated probability or proof of authorship for the highlighted words."
+            return "The scored context showed an AI-like writing pattern. The highlight gives a location to review. Authorship remains undetermined."
         if directions == {False}:
-            return "The recorded checks did not flag this scored context as AI-written. Human authorship is not established by a low response."
+            return "No AI-like flag was recorded for this input. Authorship remains undetermined."
     if kind == "audio" and "reaches the check's 0.5 inspection threshold" in str(packet.get("interpretation")):
         return "Leaning towards a synthetic-voice pattern in this complete window. This is an uncalibrated inspection clue; it does not establish a replaced voice or an exact edit boundary."
     if kind == "video":

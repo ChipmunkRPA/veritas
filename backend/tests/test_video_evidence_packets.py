@@ -70,6 +70,26 @@ def test_scene_return_rejects_wrong_support_clock_or_score():
             binding.validate(broken, pts=table.pts, canonical_hash=canonical_hash)
 
 
+@pytest.mark.parametrize(("status", "reason", "count"), [
+    ("matched", None, 120), ("no_match", None, 120), ("unavailable", "missing_anchors", 120),
+    ("unavailable", "incomplete_decode", 12), ("unavailable", "profile", 0),
+    ("unavailable", "unsupported_video", 0), ("unavailable", "provenance", 0),
+    ("unavailable", "scan_unavailable", 0),
+])
+def test_scene_return_coverage_binds_scope_and_does_not_influence_confidence(status, reason, count):
+    binding = scene_return_binding
+    value = binding.coverage(status, reason=reason, frames_scanned=count)
+    source = {"width": 1280, "height": 720, "frame_count": 120, binding.COVERAGE_COMMITMENT: canonical_hash(value)}
+    if status == "matched":
+        source[binding.COMMITMENT] = "a" * 64
+    document = {"source": source, "coverage": {binding.COVERAGE: value}}
+    binding.validate_coverage(document, canonical_hash=canonical_hash)
+    value["affects_overall_confidence"] = True
+    source[binding.COVERAGE_COMMITMENT] = canonical_hash(value)
+    with pytest.raises(ValueError, match="Picture-change"):
+        binding.validate_coverage(document, canonical_hash=canonical_hash)
+
+
 @pytest.fixture(scope="module")
 def vfr_source(tmp_path_factory):
     path = tmp_path_factory.mktemp("video-source")

@@ -76,6 +76,9 @@ export interface VideoEvidenceSet extends SetBase {
       affects_overall_confidence: false };
     brief_face_review?: { observations: string[]; affects_overall_confidence: false };
     brief_face_windows?: { observations: string[]; affects_overall_confidence: false };
+    scene_return_review?: { status: 'matched' | 'no_match' | 'unavailable'; frames_scanned: number;
+      reason: 'unsupported_video' | 'profile' | 'provenance' | 'scan_unavailable' | 'incomplete_decode' | 'missing_anchors' | null;
+      packet_id: 'VSC01' | null; observation: string; limitation: string; affects_overall_confidence: false };
     channels?: Partial<Record<'audio' | 'av_sync' | 'av', { status: string; reason: string | null; successful_check_count?: number }>> } | null
   /** Present in video-evidence-3 and later. Both channels belong to this parent set. */
   audio?: VideoAudioChannel

@@ -1,0 +1,3559 @@
+{
+  "assessment": {
+    "forwards": {
+      "frontal": 96,
+      "mono": 132,
+      "wpe": 94
+    },
+    "rows": [
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-00-prompt-0",
+        "fft_max_lsb": {},
+        "group": "source-reader-00",
+        "id": "source-reader-00-prompt-0:natural:room",
+        "input_sha256": "e8be877a021b63a423a1d8b4be7bfd92c008301e38fc7ce3e9701c229e738207",
+        "level_db": null,
+        "measured_snr_db": null,
+        "noise_position": "left",
+        "origin": "natural",
+        "responses": {
+          "mono": -7.107708967315818
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "mono": "e27fad7ea4b65fdc98c76f15c390dea20d2d453190fa7ed455e3ad0335e73bf9"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 1.862158,
+          "wpe": -0.131903
+        },
+        "case": "source-reader-00-prompt-0",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-00",
+        "id": "source-reader-00-prompt-0:natural:0",
+        "input_sha256": "5c1a8d2b161abbb2c03b58212fc2f422d4560c9e1567aed04daadf20be555cfb",
+        "level_db": 0,
+        "measured_snr_db": -1.7e-05,
+        "noise_position": "left",
+        "origin": "natural",
+        "responses": {
+          "frontal": 5.5203724816319895,
+          "mono": 4.7800841926053845,
+          "wpe": 6.44988339646864
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "9d346436c2c50cfc4442b9d0ef48523266a36b3685d459b9ed426ae950c5b457",
+          "mono": "8dc33af9e5512f8f9df217d9403b7d5ba829d7a297275628f33e27cf17fd31ac",
+          "wpe": "64c2bd071e6d3b77bed2b6ce735a8ee55954f819fc228490b0eb36d3ccf51bbb"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 2.152834,
+          "wpe": 0.478662
+        },
+        "case": "source-reader-00-prompt-0",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-00",
+        "id": "source-reader-00-prompt-0:natural:-5",
+        "input_sha256": "7b59677ae76de1ea67f23087a222df486e3a8a6ead0a741fc2681c4e1a20fab2",
+        "level_db": -5,
+        "measured_snr_db": -5.000018,
+        "noise_position": "left",
+        "origin": "natural",
+        "responses": {
+          "frontal": 5.428426863840724,
+          "mono": -1.210106755153532,
+          "wpe": 4.884884644222526
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "db7c2de46638ff21b1d32651c43af25ac147d88e6c1aec0ffc15ace55e8dc29e",
+          "mono": "afe02282d6e60e4f4561bbb7096bc89c89b5acd62e470d50b198f4d982f57526",
+          "wpe": "5827fc385e59a165dea475e8be68eb7ae8352543f47974e0c73947df8da97e34"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-00-prompt-0",
+        "fft_max_lsb": {},
+        "group": "source-reader-00",
+        "id": "source-reader-00-prompt-0:melotts:room",
+        "input_sha256": "0d619200948aae50d5df485ed775bc9ad6ff00f6299645d90570af949dec4b04",
+        "level_db": null,
+        "measured_snr_db": null,
+        "noise_position": "left",
+        "origin": "melotts",
+        "responses": {
+          "mono": 5.538846103505998
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "mono": "ec05126390f068a247d6138ab553a41cbe84741644c13e324182d301da8364d1"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 2.012569,
+          "wpe": 1.424938
+        },
+        "case": "source-reader-00-prompt-0",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-00",
+        "id": "source-reader-00-prompt-0:melotts:0",
+        "input_sha256": "cb11d2aa8484f7360dcbd722c0c11fdd0d0d17780fb3808afcc367715ddce140",
+        "level_db": 0,
+        "measured_snr_db": -5e-06,
+        "noise_position": "left",
+        "origin": "melotts",
+        "responses": {
+          "frontal": 5.94027799242441,
+          "mono": 6.276451040920347,
+          "wpe": 7.020635616474909
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "5aaf11b8e7dd87de4eb91eade7eb2be6db41bdb36b3a0abb75df0c892861e860",
+          "mono": "416b4e208792a57348a487e4c6fbc8d78e8f897880c458a5f4889b89a934aa38",
+          "wpe": "6366119c3e3a6d8ff1c8782ec4b0fde40790bcfcf2ee9a6e6d382d66537a755e"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 2.164706,
+          "wpe": 1.667587
+        },
+        "case": "source-reader-00-prompt-0",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-00",
+        "id": "source-reader-00-prompt-0:melotts:-5",
+        "input_sha256": "fd3e4df7bdc87eaa1ffc48ea12f32c97f640cd079f8b5286483900223105177f",
+        "level_db": -5,
+        "measured_snr_db": -5.000006,
+        "noise_position": "left",
+        "origin": "melotts",
+        "responses": {
+          "frontal": 6.658441797637128,
+          "mono": 6.177639426463796,
+          "wpe": 6.537459816822056
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "c2e65daf8828ca498a0e81886e723631346504ccaafc558da7bb0f91435249bb",
+          "mono": "a068bf2ed4b328e3d68512eebdea134c5adf7d9b181c76fc5f65073c2b7b9c5e",
+          "wpe": "ec60634c8386fd52c82f33180502ceef52b5197bb106d476058f9ecf41f5eaa6"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-00-prompt-0",
+        "fft_max_lsb": {},
+        "group": "source-reader-00",
+        "id": "source-reader-00-prompt-0:chatterbox:room",
+        "input_sha256": "40ce0aecfadf12b44d51d65d775e4cd8aa8de185227cbbd760b31d1859235e03",
+        "level_db": null,
+        "measured_snr_db": null,
+        "noise_position": "left",
+        "origin": "chatterbox",
+        "responses": {
+          "mono": -6.2839837187344925
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "mono": "4062b06742ec2d47919ec4f169a965ac2ebb29b3865a096587a5422ca006922d"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 1.973234,
+          "wpe": 0.674506
+        },
+        "case": "source-reader-00-prompt-0",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-00",
+        "id": "source-reader-00-prompt-0:chatterbox:0",
+        "input_sha256": "b4917cffd62bd443d4b8c8d77840e96c192b982d78ca0491301a7a2c920eb7d7",
+        "level_db": 0,
+        "measured_snr_db": -8e-06,
+        "noise_position": "left",
+        "origin": "chatterbox",
+        "responses": {
+          "frontal": 6.967141721390827,
+          "mono": 7.128368059006542,
+          "wpe": 7.12970881738031
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "6d3138e64ff7fb1cd2d94fbda4eec5e19d8b3e73a179039fd0f108ce236c8b12",
+          "mono": "e6fdb0714b0e09244666fdcd05f8b4f278eb3a1f26e81ca2b4698f98b1e8b62a",
+          "wpe": "dcd5bb9047e3c117272b5ab9cd46e24d3194f6588aad6ab93f0dd1473c0ae927"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 2.17563,
+          "wpe": 0.970487
+        },
+        "case": "source-reader-00-prompt-0",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-00",
+        "id": "source-reader-00-prompt-0:chatterbox:-5",
+        "input_sha256": "68adf846726001e9944dfcf862cdf119995bfd33b85bb5f8e197386f5977fd53",
+        "level_db": -5,
+        "measured_snr_db": -5.000009,
+        "noise_position": "left",
+        "origin": "chatterbox",
+        "responses": {
+          "frontal": 6.9207669703716475,
+          "mono": 6.6222195944944175,
+          "wpe": 6.550882065147532
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "acc2f8d2d1fc18dbf80358173d4ee49a8319e4a1343c68983e57fa0fc558c42d",
+          "mono": "61fc0400f5de1b5f680b63ccc55a66ed3aa29442bf9973a2a69ee442233b5e75",
+          "wpe": "bdd562a61ff8082e75d7442f6222d6ae6d5f5b784c10c26e178b5b20785da303"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-00-prompt-0",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-00",
+        "id": "source-reader-00-prompt-0:background:0",
+        "input_sha256": "65ad6e708fe53be341f42df981095b82c8e4084c7e0f0d13c79784235cbe4296",
+        "level_db": 0,
+        "measured_snr_db": null,
+        "noise_position": "left",
+        "origin": "background",
+        "responses": {
+          "frontal": -7.033947007681793,
+          "mono": -6.960359542786855,
+          "wpe": -6.898475646341109
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "4c6f53576ed5ba3f4db36b1983fa34cf488190526f7312eaf2bd203499a8a582",
+          "mono": "0d7df298dcab3e126d9bd179284c5396decba9f38c64274e3b14cb4355227a27",
+          "wpe": "62292b33e77abf4488852e2c8026a5dfd42c28559ea942bb46db8915d2b5d068"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-00-prompt-0",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-00",
+        "id": "source-reader-00-prompt-0:background:-5",
+        "input_sha256": "06cee4866004af3cdd313e891d18d973d4057503400a8461fcd7ad3bc3e55012",
+        "level_db": -5,
+        "measured_snr_db": null,
+        "noise_position": "left",
+        "origin": "background",
+        "responses": {
+          "frontal": -7.033995631345013,
+          "mono": -6.958373573534342,
+          "wpe": -6.900907013132965
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "1e60b6bf20208155c4354fb58a702493d16ce518679ed440807bded4674607fc",
+          "mono": "1093b27419481aace5f4895b64bf2c9471043329f62b4c43f307e9bb5e142db7",
+          "wpe": "1403d137bebca259087c50105d367f4251a1470b3cfa7b2e57525c679df807aa"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-00-prompt-1",
+        "fft_max_lsb": {},
+        "group": "source-reader-00",
+        "id": "source-reader-00-prompt-1:natural:room",
+        "input_sha256": "7dbb68ba874b3559d3d149558a9e3de62db44fc99a33af8fe1a4885af7e114b6",
+        "level_db": null,
+        "measured_snr_db": null,
+        "noise_position": "right",
+        "origin": "natural",
+        "responses": {
+          "mono": -7.236951325144103
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "mono": "f25e5b3a9051a97f9ebf436a55d8d34f8736662663fa9d18a5f542bcc8799194"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 2.535499,
+          "wpe": 0.243101
+        },
+        "case": "source-reader-00-prompt-1",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-00",
+        "id": "source-reader-00-prompt-1:natural:0",
+        "input_sha256": "fc64697bd1e446bf844bc002fd267837dc3c7b35705893c41c96c56699c3e196",
+        "level_db": 0,
+        "measured_snr_db": -6e-06,
+        "noise_position": "right",
+        "origin": "natural",
+        "responses": {
+          "frontal": 5.848355673511948,
+          "mono": 6.636925534064387,
+          "wpe": 6.733157371044086
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "fa214890f7826a9cd00fae81315b6e96a6957105d5e741a7f4b608b4f452df9d",
+          "mono": "c226950e33f8ab1834d68c909be467f1e79d9d85769eb24d101730998e5b316c",
+          "wpe": "b2f1c17a1c77d5db2a0d6a88b95a20b6aac102040efcd8097645205af276fc4d"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 2.745553,
+          "wpe": 0.92318
+        },
+        "case": "source-reader-00-prompt-1",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-00",
+        "id": "source-reader-00-prompt-1:natural:-5",
+        "input_sha256": "2fa396b9c9f1b80d010ccc12c441aa3c255ce93cdcced1d68d020c4577a4cdda",
+        "level_db": -5,
+        "measured_snr_db": -4.999985,
+        "noise_position": "right",
+        "origin": "natural",
+        "responses": {
+          "frontal": 7.1382422213699,
+          "mono": 7.224056362621699,
+          "wpe": 7.210390923455193
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "f77c433a08ce2cd16900dc582d4649d31cb7ebea347087bef8bb28b84618e8ca",
+          "mono": "ed28194d5837c18191223e2fd605f3b71a413739a2b212ded8aced6aff60d6ca",
+          "wpe": "0e272f58b03ec245c633245071657b1245840efa6b905f3ee05c026843cecd96"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-00-prompt-1",
+        "fft_max_lsb": {},
+        "group": "source-reader-00",
+        "id": "source-reader-00-prompt-1:melotts:room",
+        "input_sha256": "ea7989e8b79f71d8543aa91ce283ddccfd29d2b7e41e5d87da8a36d6e1195e98",
+        "level_db": null,
+        "measured_snr_db": null,
+        "noise_position": "right",
+        "origin": "melotts",
+        "responses": {
+          "mono": 7.131051372915735
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "mono": "792a9cde92d8f8a32015cd1ae5e9c412ba3677f05669765897b91de9e4f97fa2"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 2.279016,
+          "wpe": 1.745535
+        },
+        "case": "source-reader-00-prompt-1",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-00",
+        "id": "source-reader-00-prompt-1:melotts:0",
+        "input_sha256": "13d757e067e1989a3d09bb290b84417594c3df7f955cfc898238e12bbf483a6c",
+        "level_db": 0,
+        "measured_snr_db": -2.4e-05,
+        "noise_position": "right",
+        "origin": "melotts",
+        "responses": {
+          "frontal": 6.753379797616852,
+          "mono": 6.062119454701154,
+          "wpe": 6.993271452410822
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "ee595dd214495f264cdea47c7a1ce015d312470c69fdcd41d3bcbd905f152b94",
+          "mono": "8cebee54a931f4aa364f297ea879caaa2f465e76a61c14c48923b688a8f958f6",
+          "wpe": "ff517cd4831f8c50c893db28d215ef0f662b49f4917ad01870f2fa59d8f3063f"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 2.679861,
+          "wpe": 2.057135
+        },
+        "case": "source-reader-00-prompt-1",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-00",
+        "id": "source-reader-00-prompt-1:melotts:-5",
+        "input_sha256": "02f4c6773bf36bfb57d013131d04eed755d9ca16ba66daf7bfbe21d4101b7687",
+        "level_db": -5,
+        "measured_snr_db": -5.000003,
+        "noise_position": "right",
+        "origin": "melotts",
+        "responses": {
+          "frontal": 6.419335202284837,
+          "mono": 5.170160772432267,
+          "wpe": 6.705787703099356
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "f7a0e6fb102d9b261a3eccdfcd5d0e0e117a7d3087077bc8d4341712a52b0e12",
+          "mono": "6e5a7a394f4634014678f88b65be5a35e8141b745c450db94ab243f17e7c2b1c",
+          "wpe": "8458847bf6367ba0eb09ea5ea6f2bb430da92564810553a84bb1f9cbce8460da"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-00-prompt-1",
+        "fft_max_lsb": {},
+        "group": "source-reader-00",
+        "id": "source-reader-00-prompt-1:chatterbox:room",
+        "input_sha256": "24d3f27978141ca380dc4d640ad9e5f859aa27bd3693778e529cee5a271c59d5",
+        "level_db": null,
+        "measured_snr_db": null,
+        "noise_position": "right",
+        "origin": "chatterbox",
+        "responses": {
+          "mono": 7.0959237644251525
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "mono": "d14c4cd29d96e67ec6047aedb481381f0bba606982f197e5631015dc44ca58df"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 1.907746,
+          "wpe": 0.659007
+        },
+        "case": "source-reader-00-prompt-1",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-00",
+        "id": "source-reader-00-prompt-1:chatterbox:0",
+        "input_sha256": "926b9ab6becc50f7add769ab567f86c8e2719acb1cc6f380e0dce1fcce6360a2",
+        "level_db": 0,
+        "measured_snr_db": -8e-06,
+        "noise_position": "right",
+        "origin": "chatterbox",
+        "responses": {
+          "frontal": 6.828575796564383,
+          "mono": 5.097347366966949,
+          "wpe": 5.838532275722372
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "04f96029a0fc3f00e74e1bc919e3c4a888cb6bdf861f87a5b67a03a3754832ea",
+          "mono": "825127159148c4038beb6c826e0cb0ed26bd6558e4f30f21df15f1a0f058648d",
+          "wpe": "0d98ff973fe3f1431dd192f33d90af2adca40d3a82cce9ed5b6676fd3bf1f2fa"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 2.142136,
+          "wpe": 0.893543
+        },
+        "case": "source-reader-00-prompt-1",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-00",
+        "id": "source-reader-00-prompt-1:chatterbox:-5",
+        "input_sha256": "02d8c5a0bd0d28b17decbcd413083c6b6456007d172cf86be7b4b2631ccfceff",
+        "level_db": -5,
+        "measured_snr_db": -4.999987,
+        "noise_position": "right",
+        "origin": "chatterbox",
+        "responses": {
+          "frontal": 5.9771056709343675,
+          "mono": -4.077791208970404,
+          "wpe": -4.0708666051210916
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "c42d6a8fd393a5d6500153ec02a6fd53212394146c4c8b3bcdd626b36d7716c5",
+          "mono": "933d5ec3bcd3f101168d19d0c8b7d099735ce84c7294a5899082d42326451764",
+          "wpe": "53819f7f4530c47d81c555ec43e74e1ad8083b82c83c48c29f41649aacdbfca5"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-00-prompt-1",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-00",
+        "id": "source-reader-00-prompt-1:background:0",
+        "input_sha256": "163d11960fddec659713db6561b33bdcbc91531800a445c2e4a35a4bf98d2b0d",
+        "level_db": 0,
+        "measured_snr_db": null,
+        "noise_position": "right",
+        "origin": "background",
+        "responses": {
+          "frontal": -6.90378907697117,
+          "mono": -6.770481129171933,
+          "wpe": -6.45870776244811
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "465a0edd38680f61dc9f221c376236a8d7bd2fc3a63314a622ad0cd2f6f7738f",
+          "mono": "51d88f7e6950eed493b05af63ebb7dcbba068d73972012b0cf5625c0a2a5a5b5",
+          "wpe": "d68543ac649b1564bf7487294b700c22371f043b18c757bf84801e0f33ff3a1a"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-00-prompt-1",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-00",
+        "id": "source-reader-00-prompt-1:background:-5",
+        "input_sha256": "790941e717a8922842cc7d2fda0e46f8df41850ca39adf2cc43204a1398a8356",
+        "level_db": -5,
+        "measured_snr_db": null,
+        "noise_position": "right",
+        "origin": "background",
+        "responses": {
+          "frontal": -6.905789380314324,
+          "mono": -6.763978924098296,
+          "wpe": -6.439423568363829
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "7b5fbfafc674c6bf912a3bde5ba7fd37d200d68179dd70ffd596210bb57e6a35",
+          "mono": "b6a381cc82250b914faf82e69f63a54908483cc743f89c93212a223a383916e5",
+          "wpe": "74cd5faf0e03b8b24ebccf35a13d2c6dcd977b33147d67e3a75e8b6360c0532a"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-00-prompt-2",
+        "fft_max_lsb": {},
+        "group": "source-reader-00",
+        "id": "source-reader-00-prompt-2:natural:room",
+        "input_sha256": "06a2beb61f943eed61ced7af47854cd20beb49aa40c91575b452ffd9e8ee3a52",
+        "level_db": null,
+        "measured_snr_db": null,
+        "noise_position": "left",
+        "origin": "natural",
+        "responses": {
+          "mono": -7.220847596858263
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "mono": "ac396d4a08abe03a513736c7394b626e08c227f3a6e3b6c244603e1fe5379192"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 0.228036,
+          "wpe": 1.061005
+        },
+        "case": "source-reader-00-prompt-2",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-00",
+        "id": "source-reader-00-prompt-2:natural:0",
+        "input_sha256": "1d300e7b54a237f899197147e8e2944134c1140f008525cf86329924e11d0d46",
+        "level_db": 0,
+        "measured_snr_db": 3e-06,
+        "noise_position": "left",
+        "origin": "natural",
+        "responses": {
+          "frontal": -3.9483170080368524,
+          "mono": 5.6930797544199505,
+          "wpe": 5.666087976209498
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "3d994fabcd7314cb3d13579759c9505ab8f39ba75b91c3acaffc69cae1906d11",
+          "mono": "5108b0b6c974aca341770bf6c729005898b833ad2dc8f27a754c8feeca6119d7",
+          "wpe": "90145853601013e2a1adc30022ef6be4b8897846f10c8051e773cd591abcd0ad"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 0.497256,
+          "wpe": 1.327424
+        },
+        "case": "source-reader-00-prompt-2",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-00",
+        "id": "source-reader-00-prompt-2:natural:-5",
+        "input_sha256": "0e2a5171359a5271e8763d95f47486e12d917a0e99280750d5135da2ee8be93a",
+        "level_db": -5,
+        "measured_snr_db": -4.999994,
+        "noise_position": "left",
+        "origin": "natural",
+        "responses": {
+          "frontal": 5.798547680042844,
+          "mono": 6.8890261386526666,
+          "wpe": 5.766393390578664
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "f3384377dcbfa24c3cceb5e67a055d842725833afa9376096bcd13d4be88cc43",
+          "mono": "6f32d624fabb1fe19c0986cb0ea022b6e6e64c289d4127f879307f4e477f0bba",
+          "wpe": "c9b5377108518b279c062609fe8cdef76f193143f6d7284d9c9bc39e45357d44"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-00-prompt-2",
+        "fft_max_lsb": {},
+        "group": "source-reader-00",
+        "id": "source-reader-00-prompt-2:melotts:room",
+        "input_sha256": "6ca8db89a79da11cfac7573d74e439de23598118d4d95387b81c313de1a1477f",
+        "level_db": null,
+        "measured_snr_db": null,
+        "noise_position": "left",
+        "origin": "melotts",
+        "responses": {
+          "mono": 6.9646100892189144
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "mono": "58627fb53cca26d08ca374ae1a59e6ac8866f0864657bc237cac514a1a896ece"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 0.576427,
+          "wpe": 1.417591
+        },
+        "case": "source-reader-00-prompt-2",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-00",
+        "id": "source-reader-00-prompt-2:melotts:0",
+        "input_sha256": "7df4c97de747d4533e1ed6bb09912b71e370c565ca81856ef0b35ca723e94824",
+        "level_db": 0,
+        "measured_snr_db": -7e-06,
+        "noise_position": "left",
+        "origin": "melotts",
+        "responses": {
+          "frontal": 7.3014154084693015,
+          "mono": 7.290328908857539,
+          "wpe": 7.292255823398856
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "66cb24ae0927721fcb368fb1d5300322f90adc17a1968b3b23a6a73daec89e33",
+          "mono": "f25bd367e3673ce7840e3f7ad66dbe9cb76f60c13559ed520f0abc15bf3367a6",
+          "wpe": "d5493780d9dbe3ef696eccbe797316db0be172e1ab654487662ab5645d6b144f"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 0.891158,
+          "wpe": 1.58497
+        },
+        "case": "source-reader-00-prompt-2",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-00",
+        "id": "source-reader-00-prompt-2:melotts:-5",
+        "input_sha256": "faec4cd6aab59dc3c583624494f4beabc413487051067e65f62c40ae6cb52673",
+        "level_db": -5,
+        "measured_snr_db": -5.000004,
+        "noise_position": "left",
+        "origin": "melotts",
+        "responses": {
+          "frontal": 7.3081623374856495,
+          "mono": 7.2327755465986545,
+          "wpe": 7.261521340316341
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "a933c17f11f851952f669c4ae2b1ad33943aa0c91bea77d35ac44cf9cc68b675",
+          "mono": "f2c7505fc8e9c47c6f99d5853c641af7a25149ed2f862f9e7bf63bbd9b9f2202",
+          "wpe": "334f11cae346f4d6a61bed1073af4e029cb1ea28dcb65c6e0456b88c2ba0dd7a"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-00-prompt-2",
+        "fft_max_lsb": {},
+        "group": "source-reader-00",
+        "id": "source-reader-00-prompt-2:chatterbox:room",
+        "input_sha256": "05a29a18a156a7227decdf989067f8df428409f000ddfa545fe56138354ae328",
+        "level_db": null,
+        "measured_snr_db": null,
+        "noise_position": "left",
+        "origin": "chatterbox",
+        "responses": {
+          "mono": 7.183213827583403
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "mono": "be5f5345ac7c0d89d57cc55657afdd7bafdd2b42bfe80994aa17e2fe9357c057"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 0.453136,
+          "wpe": 1.489674
+        },
+        "case": "source-reader-00-prompt-2",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-00",
+        "id": "source-reader-00-prompt-2:chatterbox:0",
+        "input_sha256": "d956c21496a53a26a12045bf40c6c0786282f58a879736bb10bd20864d59d4b1",
+        "level_db": 0,
+        "measured_snr_db": -5e-06,
+        "noise_position": "left",
+        "origin": "chatterbox",
+        "responses": {
+          "frontal": 7.319178959250781,
+          "mono": 7.305671334713754,
+          "wpe": 7.366007886675709
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "84701f4b52501228f1272c58f64b3e564c0369b1226f58edb1804a012eccaa5d",
+          "mono": "2bd17b486e94039d8af8cddd5df35d6cd942e7c5a4a7307b0eb2998f31fa7b01",
+          "wpe": "eef6c44df6ebbcd9401c62e9426f2bebb9aad377b7d1dd38c604016fd95f8edb"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 0.706879,
+          "wpe": 1.648334
+        },
+        "case": "source-reader-00-prompt-2",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-00",
+        "id": "source-reader-00-prompt-2:chatterbox:-5",
+        "input_sha256": "e739565aaf30bf0e4ad518e18a55e0263bf85a6688118ebefbd40db2d9e490c8",
+        "level_db": -5,
+        "measured_snr_db": -5.000002,
+        "noise_position": "left",
+        "origin": "chatterbox",
+        "responses": {
+          "frontal": 7.295416976410641,
+          "mono": 7.19452101993065,
+          "wpe": 7.313252535927851
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "e219c13314602cdf905810fde16852028cfbc95c42de2d9c91224c2db7e8a196",
+          "mono": "184690b9dd0d46412a1a3322ab9d7b905c10d0b2dd81758ac5d5331dac6c0190",
+          "wpe": "44682f20332b8622252b98dd4d06a40521926aff5db86837c4a7cd27bb77b419"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-00-prompt-2",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-00",
+        "id": "source-reader-00-prompt-2:background:0",
+        "input_sha256": "94fb1019aefc34e6e6de510e15f6134c23bcbf1b4ff94bb3fb85dc23b335b233",
+        "level_db": 0,
+        "measured_snr_db": null,
+        "noise_position": "left",
+        "origin": "background",
+        "responses": {
+          "frontal": -6.28144934121675,
+          "mono": -6.437477106894685,
+          "wpe": -6.420482567974125
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "25b1469658f48b263542478cec1b0074591fce2523f9e0a7e858dd93f2db240c",
+          "mono": "8b9ead94b1ae9544a4b9304d6c00a5251ce3cd2671ab41d61653207d53bf7aca",
+          "wpe": "b338abded9527f0914999ee54d5a0d6f010a54f69bdbb0488f2e5584ec53e2f1"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-00-prompt-2",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-00",
+        "id": "source-reader-00-prompt-2:background:-5",
+        "input_sha256": "c73e7be3b0b5f15d21e937dcd892edb94bce615c689e1d3f4ed552f22e84a1b2",
+        "level_db": -5,
+        "measured_snr_db": null,
+        "noise_position": "left",
+        "origin": "background",
+        "responses": {
+          "frontal": -6.270425794894984,
+          "mono": -6.4284563373632215,
+          "wpe": -6.422773333153388
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "f1ede041e8651b95b36392b1a7b3c0ee019124bc443ab9dfe7ecfc9b7c6356f0",
+          "mono": "3672160999b72133cf6b4882c8e46cc1815e5afe915e63424eae6b2d726647dd",
+          "wpe": "13cc92c1de19ef166ad9f4a8245ff904218ebb4c33f7d23337044dc5194ea8c6"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-01-prompt-0",
+        "fft_max_lsb": {},
+        "group": "source-reader-01",
+        "id": "source-reader-01-prompt-0:natural:room",
+        "input_sha256": "7d31bb7886ad8507e91becebf6f44ccc8373985e3f9daf5459e38568df1a4a9d",
+        "level_db": null,
+        "measured_snr_db": null,
+        "noise_position": "left",
+        "origin": "natural",
+        "responses": {
+          "mono": -7.214990610606629
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "mono": "e917f7f08bc7c7afd7f3a9804ddf4aa60118e4a22b50aaa4ad09d2611d1a0880"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 0.802662,
+          "wpe": 2.230571
+        },
+        "case": "source-reader-01-prompt-0",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-01",
+        "id": "source-reader-01-prompt-0:natural:0",
+        "input_sha256": "44121ef2907f93507a5a4ba70f3a4adada2aca3beb195d0159a09957ec2a913e",
+        "level_db": 0,
+        "measured_snr_db": -4e-06,
+        "noise_position": "left",
+        "origin": "natural",
+        "responses": {
+          "frontal": 6.883589443752995,
+          "mono": 5.203532734932056,
+          "wpe": 5.604170259291301
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "04b1f0f1676719ecdad7c2a1283e5df7aa836d64c4d39b49a25a932eb4b8fa7a",
+          "mono": "994bd3ef4075dc39c89b7374a041be9fa773944953223beab57152569d443350",
+          "wpe": "ab34758130c8fbe742a90e998bc891b289086187a6f75f497a27f12d94f55bde"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 1.099294,
+          "wpe": 2.625672
+        },
+        "case": "source-reader-01-prompt-0",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-01",
+        "id": "source-reader-01-prompt-0:natural:-5",
+        "input_sha256": "5d99de5831e191accfd9ebb7d2557dace7ae04669557565112e116bfb87c0ad0",
+        "level_db": -5,
+        "measured_snr_db": -5.000005,
+        "noise_position": "left",
+        "origin": "natural",
+        "responses": {
+          "frontal": 7.0507640312923465,
+          "mono": 2.767687905073785,
+          "wpe": 5.709382937483828
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "b0c6f7f41dd773045e95e5c4b35be599f9629dd23683089f624410cf84d44789",
+          "mono": "73d7b76e1bbede41d0b0154aa004e06da62bd6e737f3623c5748ac5c8bc4b7c4",
+          "wpe": "2b19ac6726cb6d6db5125db4c4a2d533a077ef67d758303356a2b95dfaa0f9b6"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-01-prompt-0",
+        "fft_max_lsb": {},
+        "group": "source-reader-01",
+        "id": "source-reader-01-prompt-0:melotts:room",
+        "input_sha256": "1f36d1c0e1edae0dca3a453a9d4c1a669d6f7e196f40bf993e93e53277c6de50",
+        "level_db": null,
+        "measured_snr_db": null,
+        "noise_position": "left",
+        "origin": "melotts",
+        "responses": {
+          "mono": -6.243938942123173
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "mono": "cbcb662d5cfc2b4d8dc6b50e196381cff773be90c8a8c1e2f287bde9f98f94b4"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 0.79277,
+          "wpe": 2.355616
+        },
+        "case": "source-reader-01-prompt-0",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-01",
+        "id": "source-reader-01-prompt-0:melotts:0",
+        "input_sha256": "9daa297305793f2c5d33368892a5f5d12bb4cfb30b654d301d96f13ba3b2cee1",
+        "level_db": 0,
+        "measured_snr_db": -4e-06,
+        "noise_position": "left",
+        "origin": "melotts",
+        "responses": {
+          "frontal": 5.8042599896042235,
+          "mono": -2.213497583269422,
+          "wpe": 5.292000714587825
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "27c0c12bd0401f1256e7391d76c58e1fe7a92122a567c5ce0b9bd033e4afea33",
+          "mono": "18401669c1a58a0b2f578d7ce90dc474e34ffe3768589e2e7d4fc24a328f8577",
+          "wpe": "b2403a3a5c236e88354d2306b3eeafb5c56cdf01e28631e40de5766cf9ed8e9c"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 1.078971,
+          "wpe": 2.664652
+        },
+        "case": "source-reader-01-prompt-0",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-01",
+        "id": "source-reader-01-prompt-0:melotts:-5",
+        "input_sha256": "115dff19e4a4f74cc3defb54968d5a0d23f5fd8c3e07b25a90e79fe51d65c384",
+        "level_db": -5,
+        "measured_snr_db": -5.000004,
+        "noise_position": "left",
+        "origin": "melotts",
+        "responses": {
+          "frontal": 4.781030384522381,
+          "mono": -4.395609827613213,
+          "wpe": 3.7702272381474926
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "5bda708e8d567ad7b00ea9d683a968d47593e2475bd06f4b8312d20852e8df28",
+          "mono": "31b764f965c4e8bae6e1ded60a63802570d2d781598a94e1ffeca5330eaf22b0",
+          "wpe": "ecfbfcf264eb81b8eef19b12f885841d9e8a582fa58f7bff54962bafb7ec801e"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-01-prompt-0",
+        "fft_max_lsb": {},
+        "group": "source-reader-01",
+        "id": "source-reader-01-prompt-0:chatterbox:room",
+        "input_sha256": "971a9f4027cc9f0e17c8863e1b8320d6b35847ae2910fdaea46fc5b931c50eaa",
+        "level_db": null,
+        "measured_snr_db": null,
+        "noise_position": "left",
+        "origin": "chatterbox",
+        "responses": {
+          "mono": 7.035179535169761
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "mono": "06b5d18bc9e3ea13dee634a82de473f23bf02d2dd8318a3c6ea64a9f21638f2f"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 0.771603,
+          "wpe": 2.384119
+        },
+        "case": "source-reader-01-prompt-0",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-01",
+        "id": "source-reader-01-prompt-0:chatterbox:0",
+        "input_sha256": "fe2dfd131caacb3d7c2f5ca6cc8a460df695a42a3f8ace7fa31d55b59d32f73f",
+        "level_db": 0,
+        "measured_snr_db": 1.5e-05,
+        "noise_position": "left",
+        "origin": "chatterbox",
+        "responses": {
+          "frontal": 7.202184117961953,
+          "mono": 6.805931183730498,
+          "wpe": 7.1306036544216616
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "ebe2857c82a75e290139439c400421a858d00d5b23a9bc289625ee631b9415f8",
+          "mono": "56db2daed736dbaf857d5964029cf95ecbde13236696ef4b049c9f105514dd2d",
+          "wpe": "4135f3fb5a5a2b85ab201df4ec065de843743e70575deae1b4f16d9b46ac4677"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 0.937751,
+          "wpe": 2.508653
+        },
+        "case": "source-reader-01-prompt-0",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-01",
+        "id": "source-reader-01-prompt-0:chatterbox:-5",
+        "input_sha256": "623b47886008bb986c84f0f750f571e99cf64c3e29049ca568dfe6c22fd931c4",
+        "level_db": -5,
+        "measured_snr_db": -4.999985,
+        "noise_position": "left",
+        "origin": "chatterbox",
+        "responses": {
+          "frontal": 6.969425672791895,
+          "mono": 2.006249412925512,
+          "wpe": 4.597960499933864
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "0c78ef075ee11a179b07823cd627c03fdc58f771ee2646fa267ec06b3b8df647",
+          "mono": "0b0be6ca2216dd923ca8e002ad508c587668a2a9d039464e951640aea033fabe",
+          "wpe": "123b5391326ea1a6bb634a75326ec5db32c9fc61defe9eb38e797e3f0095e258"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-01-prompt-0",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-01",
+        "id": "source-reader-01-prompt-0:background:0",
+        "input_sha256": "1041b0861bdb6635572b4aa742b8469f8c2771cfc9a556d29f6f1ff331f421db",
+        "level_db": 0,
+        "measured_snr_db": null,
+        "noise_position": "left",
+        "origin": "background",
+        "responses": {
+          "frontal": -6.912053553013056,
+          "mono": -7.082056482190509,
+          "wpe": -6.575643523112594
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "c239caf09797e3c8854c4e7fd11f09e6ec53b16a9e9b5038874b91a2bddfbc07",
+          "mono": "fd5e992234d4a4348f1acf1ec816dd4a60f3342eb9d7795975f65bbe86aa2f71",
+          "wpe": "f4605ed508f9ffe2baf1756fc809aac53ab17d81845833c0920890f221b422f6"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-01-prompt-0",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-01",
+        "id": "source-reader-01-prompt-0:background:-5",
+        "input_sha256": "abb58aa36c14154da08bb857aef12d5156ae713b275d23e30445e5a81a34a710",
+        "level_db": -5,
+        "measured_snr_db": null,
+        "noise_position": "left",
+        "origin": "background",
+        "responses": {
+          "frontal": -6.912570082137074,
+          "mono": -7.08225250866602,
+          "wpe": -6.573486263130081
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "14da49774dd7254f816383df79dbea527284fc541ff43cc59180084009ae4792",
+          "mono": "d68dd3329e65c8d1c25ba3fd078581a9b522e96c8a1f425ee4bc97784e86a5a5",
+          "wpe": "7febb1ddebcd982d62edc7daf483a339ae266f05709de64060fd3fb4f627871c"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-01-prompt-1",
+        "fft_max_lsb": {},
+        "group": "source-reader-01",
+        "id": "source-reader-01-prompt-1:natural:room",
+        "input_sha256": "1fc6c8abcd10b966c103cc3b34893f703b8c2fd4825268543152db6890bbc2ee",
+        "level_db": null,
+        "measured_snr_db": null,
+        "noise_position": "right",
+        "origin": "natural",
+        "responses": {
+          "mono": -7.239749892323237
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "mono": "d5557fc1f891813e5aebcc9c164e02d2c5807c8d79dce7927dd6eb0802cf0aa5"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 2.52629,
+          "wpe": 0.345899
+        },
+        "case": "source-reader-01-prompt-1",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-01",
+        "id": "source-reader-01-prompt-1:natural:0",
+        "input_sha256": "a8908e31906c3db5c7d97b297acb5d2a46367de434f0b4c44dfc458e89af5a31",
+        "level_db": 0,
+        "measured_snr_db": 9e-06,
+        "noise_position": "right",
+        "origin": "natural",
+        "responses": {
+          "frontal": 6.403174623433955,
+          "mono": 4.482764812507126,
+          "wpe": 6.166112155219538
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "ded59b53e4bcbbc8f6350446be0a550bf2bec9bc33ff59834306c1feb004cd98",
+          "mono": "769f44e52fd3daea0f72ff4329973ce74bf1697cccc158c3dc16f5c47551e9ab",
+          "wpe": "3fe9d146e181d1d68f48762f87e32eed5c4e6f8fcfe8789931e550d65beada4c"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 2.78149,
+          "wpe": 0.513839
+        },
+        "case": "source-reader-01-prompt-1",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-01",
+        "id": "source-reader-01-prompt-1:natural:-5",
+        "input_sha256": "e9ae604ff2e108eb7a671b0891ebe4d052cf751706635bb293d79d4760d8ff24",
+        "level_db": -5,
+        "measured_snr_db": -4.999983,
+        "noise_position": "right",
+        "origin": "natural",
+        "responses": {
+          "frontal": 5.940460181323904,
+          "mono": -2.90832188856366,
+          "wpe": 4.491240883632672
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "0571bc82e8b7566260ee670dcd24374b741f978e7968ad5feab9c0e9dadb926f",
+          "mono": "a22d4116e1dadb1fbebc20a5310cbd552ee7f69d9aab8e5144ac449d00a59667",
+          "wpe": "41694c2797bef6f2f44f060e4f720df137373c02a1c13de5d4ae2591e6dcfc65"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-01-prompt-1",
+        "fft_max_lsb": {},
+        "group": "source-reader-01",
+        "id": "source-reader-01-prompt-1:melotts:room",
+        "input_sha256": "ab2ecd75f152055ee706b60c331fdf7095bcdeb492a04706dfb657d25fe13313",
+        "level_db": null,
+        "measured_snr_db": null,
+        "noise_position": "right",
+        "origin": "melotts",
+        "responses": {
+          "mono": -5.331447609931188
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "mono": "e64cc98eab18f2c83334faa19d7c27189971dae575720e1c1710a1048cfdaccd"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 2.649569,
+          "wpe": 1.188171
+        },
+        "case": "source-reader-01-prompt-1",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-01",
+        "id": "source-reader-01-prompt-1:melotts:0",
+        "input_sha256": "f48d3b3082c2689fd281a7f60efc31fed4e656d421667d19418532d835239410",
+        "level_db": 0,
+        "measured_snr_db": -6e-06,
+        "noise_position": "right",
+        "origin": "melotts",
+        "responses": {
+          "frontal": 6.7133348635087895,
+          "mono": 2.7240842715749745,
+          "wpe": 6.310631445255527
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "ea667ab210a5993284c6bcc875e2185f4da95af4abc875ce240fef1a9f31ca3b",
+          "mono": "66ba7eed8ddf00388238de618d9c289eb4e3e927de121ec646f284457bd44f45",
+          "wpe": "4fc6e2607fe217b5e1fb165d146214020b12b1f26c2272a4503985938c75fb00"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 2.781726,
+          "wpe": 1.257245
+        },
+        "case": "source-reader-01-prompt-1",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-01",
+        "id": "source-reader-01-prompt-1:melotts:-5",
+        "input_sha256": "9a6985543674ab053765b4140865c8d9cdf380c8041413f3381c90d91628a604",
+        "level_db": -5,
+        "measured_snr_db": -4.999998,
+        "noise_position": "right",
+        "origin": "melotts",
+        "responses": {
+          "frontal": 5.75839880404929,
+          "mono": -3.962983857674157,
+          "wpe": 5.363912515550784
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "5cb8a804718699eaea2512cd05dd009137b08de489aaad6b4f6b9610bb68728f",
+          "mono": "aeb2a601ce29e4c609b53ffd8cd2b55007f264f9158e7d89c82738d9bdde3816",
+          "wpe": "345e435dc650243036b3726770d2c282b8b0278de6e472ab3fcb0294667d917f"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-01-prompt-1",
+        "fft_max_lsb": {},
+        "group": "source-reader-01",
+        "id": "source-reader-01-prompt-1:chatterbox:room",
+        "input_sha256": "abbb306bab850b9eab90264bf8fe933553c33a1648351d6dbff790e15038e8d3",
+        "level_db": null,
+        "measured_snr_db": null,
+        "noise_position": "right",
+        "origin": "chatterbox",
+        "responses": {
+          "mono": 7.126137442357228
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "mono": "5e12d0f90e3a9be508db051d4e7f1a98a25a73449754da2e2d6216fb700d90e2"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 2.40366,
+          "wpe": 0.358826
+        },
+        "case": "source-reader-01-prompt-1",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-01",
+        "id": "source-reader-01-prompt-1:chatterbox:0",
+        "input_sha256": "1b145e9f9369a56f48b7ffc7290fdfc9029072e43c354c9b879a0c8912ceedf2",
+        "level_db": 0,
+        "measured_snr_db": -9e-06,
+        "noise_position": "right",
+        "origin": "chatterbox",
+        "responses": {
+          "frontal": 7.374918440099968,
+          "mono": 7.016100333212865,
+          "wpe": 7.204590910996004
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "9010eb24020d0d94aebd1ade9906ddc32b26d300a89cc0175459b5f41c06daa6",
+          "mono": "4ed5ebc76b05663871dade63d4ad823aace77e50f85720e27eefe70fbab600b4",
+          "wpe": "a2102894112df9309dbd0f4aaab0462648ea3051e5891a8fd5881a046e650d0d"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 2.660958,
+          "wpe": 0.666636
+        },
+        "case": "source-reader-01-prompt-1",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-01",
+        "id": "source-reader-01-prompt-1:chatterbox:-5",
+        "input_sha256": "9ff20ae5d3af7f9c215936cc08a56de6629493f31d78b9f63c18ee11dbaac0e1",
+        "level_db": -5,
+        "measured_snr_db": -5.000001,
+        "noise_position": "right",
+        "origin": "chatterbox",
+        "responses": {
+          "frontal": 7.144803823275969,
+          "mono": 4.993524217060241,
+          "wpe": 5.883954721911679
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "9322862a68846e3a40789be246337acfef207372addf7f0da9c66e082e61d150",
+          "mono": "a5b9a868fa2c665630a36733e9e01757290b4d8c34a92d7897c667b93f79486b",
+          "wpe": "fa8d6d74d6078f1785d7cc16f8bd992efc82e6d119071b911f911d81fc3ea926"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-01-prompt-1",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-01",
+        "id": "source-reader-01-prompt-1:background:0",
+        "input_sha256": "06e5f29a6df05a85e3b972405236dc09b66045d24f2f49e5cd601b8c68bf1f91",
+        "level_db": 0,
+        "measured_snr_db": null,
+        "noise_position": "right",
+        "origin": "background",
+        "responses": {
+          "frontal": -6.9917711971990695,
+          "mono": -6.861312821877081,
+          "wpe": -6.842219436971858
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "e87b25b110e12baaecb465782f5e8c3dedf6e32675d408573bf2face875dc3d6",
+          "mono": "b50eb92c1e7fde224df7ef4d736222aef4a004310ddb248637ac6f16461d6eda",
+          "wpe": "35955dcb08cd8412db1e42e64c23244345968734c4c3801dd103316d52c9f88f"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-01-prompt-1",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-01",
+        "id": "source-reader-01-prompt-1:background:-5",
+        "input_sha256": "f2828962fea49c76764233b2631585d037113690195ba7b2d6df9ddea78b4a2d",
+        "level_db": -5,
+        "measured_snr_db": null,
+        "noise_position": "right",
+        "origin": "background",
+        "responses": {
+          "frontal": -6.991665852466663,
+          "mono": -6.861481665876918,
+          "wpe": -6.843078616492126
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "afb735ce6d2b4b5cad610cc98c927f95d91765f5d1a881fd9bdfe6473f47d860",
+          "mono": "e665667d323b73f73f6f76a753702b1681ddb0a79d26dc3f972b9df4a752091d",
+          "wpe": "355221ea430a571cb7637fd64d585a4b76506d7e57e0d081f93b73fc33d3efda"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-01-prompt-2",
+        "fft_max_lsb": {},
+        "group": "source-reader-01",
+        "id": "source-reader-01-prompt-2:natural:room",
+        "input_sha256": "3400950899237d2dc1c0fa62cca2305cb6367bd87bf5d81dce66066e3b62b7cc",
+        "level_db": null,
+        "measured_snr_db": null,
+        "noise_position": "left",
+        "origin": "natural",
+        "responses": {
+          "mono": -7.217681344664655
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "mono": "fa938d97956a4e7b8520002a11e020b3e8b0ad67a7c7cba87814aa1d2ceaf8b8"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 2.26376,
+          "wpe": 0.875732
+        },
+        "case": "source-reader-01-prompt-2",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-01",
+        "id": "source-reader-01-prompt-2:natural:0",
+        "input_sha256": "ae1e10514db8ca6dff711e80cbc3f07ba7eead550b104a1460efd16362857e88",
+        "level_db": 0,
+        "measured_snr_db": -8e-06,
+        "noise_position": "left",
+        "origin": "natural",
+        "responses": {
+          "frontal": 4.388185436640937,
+          "mono": 6.199771118161249,
+          "wpe": 6.178851438438268
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "919ea50ebd4f1ad42693061b7d41e981931cc57f851f129efd05145551fd48bd",
+          "mono": "6fdb7c6510f7695e4cec59d0e3eb9be085ed885aa3b28f91b40dfef816cc67da",
+          "wpe": "1443e16b8ec73f11f506f0bc63facdd2d7357ca8ca6ca7a4a58cb52777a083cf"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 2.616515,
+          "wpe": 1.298286
+        },
+        "case": "source-reader-01-prompt-2",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-01",
+        "id": "source-reader-01-prompt-2:natural:-5",
+        "input_sha256": "2a025a1ab375f84db3f513d0a3fd549e52f3754407fc09f9f76fb1e2be6b63a8",
+        "level_db": -5,
+        "measured_snr_db": -5.000008,
+        "noise_position": "left",
+        "origin": "natural",
+        "responses": {
+          "frontal": 6.988340161272888,
+          "mono": 7.134340771321047,
+          "wpe": 7.092901629079213
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "0a1616cac8556639126cd4ed882a504560af2e2c31f04f56afefc6908daa2417",
+          "mono": "f4d3a21e1b463a0c41617afabcc0e002b8a0ac7476fbdc686280b0c5cd4eda99",
+          "wpe": "a6c11aff9e8404fea68ffa37ae3a0272ee990f0e2e8ecc74438a5b4b492b3ae0"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-01-prompt-2",
+        "fft_max_lsb": {},
+        "group": "source-reader-01",
+        "id": "source-reader-01-prompt-2:melotts:room",
+        "input_sha256": "16ea19e94edbc686298b6789734b09941f8a66336e1735e7bcaf457e77d9053c",
+        "level_db": null,
+        "measured_snr_db": null,
+        "noise_position": "left",
+        "origin": "melotts",
+        "responses": {
+          "mono": 6.731252534326619
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "mono": "511345f8dbf21e08c49bf2a70881448f913296de57b1c44d0868c0906df55cbf"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 2.348901,
+          "wpe": 1.511501
+        },
+        "case": "source-reader-01-prompt-2",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-01",
+        "id": "source-reader-01-prompt-2:melotts:0",
+        "input_sha256": "6730cdf98bff7f263f20747ca57219d4dcfb5ef9030aaa024c524ba97298af9f",
+        "level_db": 0,
+        "measured_snr_db": 4e-06,
+        "noise_position": "left",
+        "origin": "melotts",
+        "responses": {
+          "frontal": 7.453835772213453,
+          "mono": 7.430214815939321,
+          "wpe": 7.342135368829509
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "e8e2f37e924942eb2460871480a5e26f672d07bf386056cb65a094790af4ee57",
+          "mono": "e06ebb519fae0eb7c6f2f36f15b1e54abdee7af3db4aa8ffa25ec89133a7bce2",
+          "wpe": "f8319cf9ba88a069c1f43512a6252e0c814fbae010c25207d29b17e5cde26611"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 2.617503,
+          "wpe": 1.672734
+        },
+        "case": "source-reader-01-prompt-2",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-01",
+        "id": "source-reader-01-prompt-2:melotts:-5",
+        "input_sha256": "a64c63c78a89361a7630381dcfcb0dbf9860cb5d3f8d81c30f9dda8609561429",
+        "level_db": -5,
+        "measured_snr_db": -4.999995,
+        "noise_position": "left",
+        "origin": "melotts",
+        "responses": {
+          "frontal": 7.447468510047336,
+          "mono": 7.342504033306984,
+          "wpe": 7.0262665216070355
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "18e30bf2eea45747c0262f3b263504c4949a4d06232a85599cc7bc004f05990b",
+          "mono": "b2750a81367640c5a86477013635964700ac6ceee3bc52aa750ddf3695eb2d22",
+          "wpe": "16ec0db0bfdfb6b8235b49714b517ff8cd83d02e415c611c73b3ffa85235de9d"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-01-prompt-2",
+        "fft_max_lsb": {},
+        "group": "source-reader-01",
+        "id": "source-reader-01-prompt-2:chatterbox:room",
+        "input_sha256": "bec9eaa36af44a16351589111dd908f994d9d8cd70aef37e7e3cbac644ad54ce",
+        "level_db": null,
+        "measured_snr_db": null,
+        "noise_position": "left",
+        "origin": "chatterbox",
+        "responses": {
+          "mono": -6.0951786487807205
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "mono": "f7384654ea1b8a0874645acf143f511c9f912742230aa41fdee2322c691cf8c0"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 1.961851,
+          "wpe": 0.190994
+        },
+        "case": "source-reader-01-prompt-2",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-01",
+        "id": "source-reader-01-prompt-2:chatterbox:0",
+        "input_sha256": "807d94ccc8316489158ff16d50fc5413ed1639b9f5659b98f791b2df1175c1a3",
+        "level_db": 0,
+        "measured_snr_db": 3e-06,
+        "noise_position": "left",
+        "origin": "chatterbox",
+        "responses": {
+          "frontal": 7.3888208583366985,
+          "mono": 7.394824767658578,
+          "wpe": 7.374918440099968
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "4323280b21ea3b7ff5d170a0b78aecc89e8092337aa9de7a9c79ff8d201eefff",
+          "mono": "1f2930fb7ac5ab42f2a20d3ffb204f9e2c1ad006e1eaf6e354223dc0fafb7068",
+          "wpe": "db451492d91701375de8d498179406827998f9b017402741f3d3aa84eff3fc36"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 2.63474,
+          "wpe": 0.798858
+        },
+        "case": "source-reader-01-prompt-2",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-01",
+        "id": "source-reader-01-prompt-2:chatterbox:-5",
+        "input_sha256": "2af482df237dac005ecbcc72bfa0ad0029109fe065bd5ae6528ec5ef9c0bab03",
+        "level_db": -5,
+        "measured_snr_db": -4.999996,
+        "noise_position": "left",
+        "origin": "chatterbox",
+        "responses": {
+          "frontal": 7.408318983805075,
+          "mono": 7.295944806820849,
+          "wpe": 7.146924779812576
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "bbe99920308d06982059b328b728ed1443d81ff614aad09c89f6b423dad28df2",
+          "mono": "7d1baaf50f75d77690fc2d322f1f41ae1ea7f2de3d3bde667974ee37f4769706",
+          "wpe": "7375c06958b066ee902c1557ba435c2f07fef2ff729e1063cc7dfeed41bcf3e8"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-01-prompt-2",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-01",
+        "id": "source-reader-01-prompt-2:background:0",
+        "input_sha256": "df8e6fb1210a9714c93aa894ad2df3e7a0f3b94a415d5cbb953ccec1273f28c9",
+        "level_db": 0,
+        "measured_snr_db": null,
+        "noise_position": "left",
+        "origin": "background",
+        "responses": {
+          "frontal": 6.16332197167561,
+          "mono": 6.545000711960825,
+          "wpe": -4.552623779743252
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "b4aa0f92f8db87f0fa12d7d01a61e08174dafad5619ce31f3ae4577328f52b2a",
+          "mono": "eed08cd839818007b4935e95cdbcf38d7dfbd528eee3a5a1c418c3d1f319119a",
+          "wpe": "730b9d209b765f84608ff4fd895b41cc5fab8d392b62d832b59b50767ab4191a"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-01-prompt-2",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-01",
+        "id": "source-reader-01-prompt-2:background:-5",
+        "input_sha256": "d7c49d5dccac73fabf5261ae5ca4cd70706fcec319a5cc925c7372892e3ae78f",
+        "level_db": -5,
+        "measured_snr_db": null,
+        "noise_position": "left",
+        "origin": "background",
+        "responses": {
+          "frontal": 6.16491541286583,
+          "mono": 6.539525848804801,
+          "wpe": -4.547639881052522
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "2cf2959d7f31de224a3b18b27a164f23eb80ff934a8d7643d889a251f1a47a90",
+          "mono": "470939c21e8a0aec206499227b087c37802806abafd61d0d18c4394caaecd924",
+          "wpe": "918fe246facd196a7ecc4995240c8a6e3e173795720d324d21e7a775b74d92f3"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-02-prompt-0",
+        "fft_max_lsb": {},
+        "group": "source-reader-02",
+        "id": "source-reader-02-prompt-0:natural:room",
+        "input_sha256": "78adb24f87e03f2d5e7f602a32329a8a9295dac862138b01426e7cb2ab86ea2d",
+        "level_db": null,
+        "measured_snr_db": null,
+        "noise_position": "left",
+        "origin": "natural",
+        "responses": {
+          "mono": -7.172639821186049
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "mono": "e9b3334a7752c4230ae5a9304206b21d1672cc696ba165008a8b3505ecb3d59e"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 1.922584,
+          "wpe": 0.041626
+        },
+        "case": "source-reader-02-prompt-0",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-02",
+        "id": "source-reader-02-prompt-0:natural:0",
+        "input_sha256": "d5eacea8352a2170d5dd25723899d00c239fcc6427c9e37201ccc2cac3009dc9",
+        "level_db": 0,
+        "measured_snr_db": 1.2e-05,
+        "noise_position": "left",
+        "origin": "natural",
+        "responses": {
+          "frontal": 5.458496920559137,
+          "mono": 6.663437352916575,
+          "wpe": 6.766002329455828
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "f7da96996771161b1ae942fb9e855d2a9824348396724e925709ec9c9ed2f3d6",
+          "mono": "df5b2044f960d8392d349019197589a86a2d3a7d9d4fa232f88b61d04846d37a",
+          "wpe": "305e0301b3dfa0fc08b81019069c957937914c32e08b3ebf6c11870b3cd69d74"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 2.338877,
+          "wpe": 0.430869
+        },
+        "case": "source-reader-02-prompt-0",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-02",
+        "id": "source-reader-02-prompt-0:natural:-5",
+        "input_sha256": "1d36bd13c2bcd847d9fb5c76a293bd063f942d08ffc5b8aea28120b2b1381155",
+        "level_db": -5,
+        "measured_snr_db": -5.000005,
+        "noise_position": "left",
+        "origin": "natural",
+        "responses": {
+          "frontal": 5.999969377483471,
+          "mono": 4.730701194054621,
+          "wpe": 5.188538223778764
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "f8d4eb2f0fa6e56337bfad86d6fcc37d07d32106e709c440d11c0944a150b49f",
+          "mono": "4c5af99e5a169c71e7ccab4e2757b74074e38c1a08a77e9cc35138a0aac00d0d",
+          "wpe": "13655cfdef2126ccec623880c9f70d74621b5c9856ce74957a93b48ddd7763d0"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-02-prompt-0",
+        "fft_max_lsb": {},
+        "group": "source-reader-02",
+        "id": "source-reader-02-prompt-0:melotts:room",
+        "input_sha256": "f3c6d11c6962412e49cf2535db59b4727b3dcb4eb5a581f8dfdc80ea3c60a970",
+        "level_db": null,
+        "measured_snr_db": null,
+        "noise_position": "left",
+        "origin": "melotts",
+        "responses": {
+          "mono": 7.30318651333211
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "mono": "b6df87925c2476b4bc1416a0a2110ba1d10de8f204c0a7d0b2965e02a61d2120"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 1.979181,
+          "wpe": 0.982163
+        },
+        "case": "source-reader-02-prompt-0",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-02",
+        "id": "source-reader-02-prompt-0:melotts:0",
+        "input_sha256": "db3cb27409a36a2afa5650493c952b94a0375c5a0a8f6340cdcef423eecc494e",
+        "level_db": 0,
+        "measured_snr_db": 1.5e-05,
+        "noise_position": "left",
+        "origin": "melotts",
+        "responses": {
+          "frontal": 6.983046640268885,
+          "mono": 7.256094699951405,
+          "wpe": 7.147379855425866
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "73bd608002e6b63f4699fd7c922cae89a1375a92a418961aadb28fc1617efdcc",
+          "mono": "311efa5e81524ed8fbf79b95f3786cea7bbc7efc2b955adca9375b5c5bda170c",
+          "wpe": "18a10e74395dfdc29e97930728b494a2dad798c3ceafdfbf6701c52cbb7a3b1b"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 2.463868,
+          "wpe": 1.398534
+        },
+        "case": "source-reader-02-prompt-0",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-02",
+        "id": "source-reader-02-prompt-0:melotts:-5",
+        "input_sha256": "55be12eb3397fa3f57903a292e3de5e8f888e7fb3585300401fb2a0531674e29",
+        "level_db": -5,
+        "measured_snr_db": -5.000002,
+        "noise_position": "left",
+        "origin": "melotts",
+        "responses": {
+          "frontal": 7.205394462402312,
+          "mono": 7.2901539185338695,
+          "wpe": 7.194202993136222
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "4c0492efebc361d0da0ce6adbe3000254a54ab6fc86e3a8b23cc915822fb0d1b",
+          "mono": "116118266f08814f09d8ed9d6869312899892e99ce569f30f50db988bc43e3fb",
+          "wpe": "3f5663054588f0f1801e7a580cf3548a8503bb8c28df748d1299dbdc2c63aaf4"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-02-prompt-0",
+        "fft_max_lsb": {},
+        "group": "source-reader-02",
+        "id": "source-reader-02-prompt-0:chatterbox:room",
+        "input_sha256": "1e3ae7de3f4be0acaebd27190355434cfdb2c36e0d152f39f96d41b9155fbf5b",
+        "level_db": null,
+        "measured_snr_db": null,
+        "noise_position": "left",
+        "origin": "chatterbox",
+        "responses": {
+          "mono": -3.5856685191398014
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "mono": "d6d4babe9ebd1b9e5801788438922f08521cfbf4405d6bcb9d245972edbaee5e"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 2.117775,
+          "wpe": 0.169424
+        },
+        "case": "source-reader-02-prompt-0",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-02",
+        "id": "source-reader-02-prompt-0:chatterbox:0",
+        "input_sha256": "4bc1e0c922636ecdde6d390dcf21ea4dd8eb18fdcb41c16f4ebfd25b16a61b93",
+        "level_db": 0,
+        "measured_snr_db": 2e-05,
+        "noise_position": "left",
+        "origin": "chatterbox",
+        "responses": {
+          "frontal": 7.025191525228549,
+          "mono": 7.238907836601221,
+          "wpe": 7.23641724549335
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "12a350ce93857efdff302dfa23ed5f18c0d87893887a1c6560e0b8736d8cd925",
+          "mono": "7a9616d71a33d30e16c65c3c76bd12f70b0d88bd89c9a545c62882b51009bdd3",
+          "wpe": "7e514de1445f7fe65d3bdb4fc62c3b621f741f368a595745ee8abad27710a15b"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 2.400557,
+          "wpe": 0.676287
+        },
+        "case": "source-reader-02-prompt-0",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-02",
+        "id": "source-reader-02-prompt-0:chatterbox:-5",
+        "input_sha256": "73994fb9913ef32465b7992332dbeabc38c2b781dfd85527bf2520facc0921da",
+        "level_db": -5,
+        "measured_snr_db": -4.999997,
+        "noise_position": "left",
+        "origin": "chatterbox",
+        "responses": {
+          "frontal": 7.258295727161237,
+          "mono": 7.154842176498986,
+          "wpe": 7.059412194605477
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "7a73d364d9248df34969346dcf326791daef9b506e2bc6e724b8539c1f2a7d6c",
+          "mono": "a3342a671780d48fc105472365d2486c478964cb56404619000b01a057f66c7e",
+          "wpe": "0f292382970d64b856aab0ba5e88fed5043b7c4bf93a2dfd10fcd5fd3d8c7a21"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-02-prompt-0",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-02",
+        "id": "source-reader-02-prompt-0:background:0",
+        "input_sha256": "822aaefaa966b11bd15cc1e1e31daf3d5d4263e89c53b06025b43d1d14f4dba9",
+        "level_db": 0,
+        "measured_snr_db": null,
+        "noise_position": "left",
+        "origin": "background",
+        "responses": {
+          "frontal": -6.791752817064016,
+          "mono": -6.334307721214674,
+          "wpe": -6.418684982521002
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "55d1963ef43a453e8e61400d6349b412433cbda36efd8d45caa6a3d642b47537",
+          "mono": "3e7c8c0042750313ff1d297f70c0fca8a6a2ac584a4c6254432a028349f4e524",
+          "wpe": "75be7b9953f44d9cf20b9bc99704d7d7b03efee9daa3e0a8a831e3cbed6c1116"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-02-prompt-0",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-02",
+        "id": "source-reader-02-prompt-0:background:-5",
+        "input_sha256": "49c5ffbf5852415b70c56860533e499c943ada00df46dfb379588e0dbe7432f5",
+        "level_db": -5,
+        "measured_snr_db": null,
+        "noise_position": "left",
+        "origin": "background",
+        "responses": {
+          "frontal": -6.787339210197671,
+          "mono": -6.334028259645869,
+          "wpe": -6.411446610490318
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "dc897f1ff6574b6b583b9c715f60be1860e5a9d03e28ae0c872ac6c3ad62cb44",
+          "mono": "d6ce1e9950461486a8c598b9d6812a691cc896df660c1dbf12b6c3a33e2361c0",
+          "wpe": "80a5d113dd204c07dea5f6523d3b3f23018598208e2e7887191f8f4fefc7177d"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-02-prompt-1",
+        "fft_max_lsb": {},
+        "group": "source-reader-02",
+        "id": "source-reader-02-prompt-1:natural:room",
+        "input_sha256": "d7082d45e0682925eba62e3bc174b3b1dbeb3ae90c4b941cbca49e4c4901ddbb",
+        "level_db": null,
+        "measured_snr_db": null,
+        "noise_position": "right",
+        "origin": "natural",
+        "responses": {
+          "mono": -7.186951640954005
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "mono": "4105d31286288cf9c79acc653cabba2c5d30e5f6cbfaea5a26719d9aac3b2a88"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 2.784061,
+          "wpe": -0.003342
+        },
+        "case": "source-reader-02-prompt-1",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-02",
+        "id": "source-reader-02-prompt-1:natural:0",
+        "input_sha256": "487bbc242e8d22a86c8d623192d78fd7498c176c2abd8cc0606d9a94b0ffb9c9",
+        "level_db": 0,
+        "measured_snr_db": -3e-06,
+        "noise_position": "right",
+        "origin": "natural",
+        "responses": {
+          "frontal": -5.199867311579031,
+          "mono": -5.278014183212109,
+          "wpe": -3.6797380029265443
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "56ae47765e5e8758b2afc47d4f3b951e5cb505eb67231cbd7871ddf06b06a44c",
+          "mono": "0e81aff19940c61bc3e132b150a1edefbffaacc541f10e33acaa27361c6b5c52",
+          "wpe": "f631f60790e756aa5c5202588908faa0d6ab1ebd5810312e8833cfdf8fe0faff"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 3.117674,
+          "wpe": 0.349043
+        },
+        "case": "source-reader-02-prompt-1",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-02",
+        "id": "source-reader-02-prompt-1:natural:-5",
+        "input_sha256": "dc5295b3c0b20f03820bf9c45f9a754d8860c31c736b84a5d0920546937d479c",
+        "level_db": -5,
+        "measured_snr_db": -5.000003,
+        "noise_position": "right",
+        "origin": "natural",
+        "responses": {
+          "frontal": -5.065395323695337,
+          "mono": -5.824279303822526,
+          "wpe": -5.146882519600797
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "9c22300b0eaa044674ca6d8dff155f2beca8134ea8f058f1dbe44b90b1074cbf",
+          "mono": "44542f4a2bdfd1ed12bfaa6d56214c2df652e5f6ddd7c87bf15ad3d86c54c2ca",
+          "wpe": "9b66452491231ba5a74445b196e748b318afecd271205d91f6df0c75c9d33085"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-02-prompt-1",
+        "fft_max_lsb": {},
+        "group": "source-reader-02",
+        "id": "source-reader-02-prompt-1:melotts:room",
+        "input_sha256": "99e985735c4ea777436c144f0ec364348bc381e3c66f65699a12c3a0854bcd9a",
+        "level_db": null,
+        "measured_snr_db": null,
+        "noise_position": "right",
+        "origin": "melotts",
+        "responses": {
+          "mono": 3.713475965154569
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "mono": "9575b42be7f9025422e360326b52e688b155c0575efd21159798d15573f0e74c"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 3.003947,
+          "wpe": 0.299002
+        },
+        "case": "source-reader-02-prompt-1",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-02",
+        "id": "source-reader-02-prompt-1:melotts:0",
+        "input_sha256": "2044a903fa17e73ee5262fef7f615508ad07107a0e9277426433421857307e2d",
+        "level_db": 0,
+        "measured_snr_db": -5e-06,
+        "noise_position": "right",
+        "origin": "melotts",
+        "responses": {
+          "frontal": 6.949428651973322,
+          "mono": 5.768867573329898,
+          "wpe": 6.15864165746316
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "08b28cf849dd5532cee679e4fbeec9f26af6305a88736c79275032da9ca0a463",
+          "mono": "7c43d2c156ad4a435abebb3a87770ed01b4a8b3c4839158d47ec215fd407a91f",
+          "wpe": "3a7d63fc289187bda1c56c57c5c09724ea47f2a910e78421b8afc337fe7db148"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 3.16888,
+          "wpe": 0.44064
+        },
+        "case": "source-reader-02-prompt-1",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-02",
+        "id": "source-reader-02-prompt-1:melotts:-5",
+        "input_sha256": "044fa7cd7e44804fd0ffc8e1be597d94a213c17fd59adc6c2789b7bb4c10057e",
+        "level_db": -5,
+        "measured_snr_db": -5.000005,
+        "noise_position": "right",
+        "origin": "melotts",
+        "responses": {
+          "frontal": 6.67189765981704,
+          "mono": 4.849808232597847,
+          "wpe": 5.238690687120455
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "4b4c363e8c34bf3362ffd02808e7bead1804defda99194485a8aa0394795c9eb",
+          "mono": "6aef913c7f522dd2ea4801cf38f3162f79559f7e8f7a82aec90d58efef9f9149",
+          "wpe": "7a05458ed845e41849a850600ca0ae9f8bf23624e7f13ac4e49b489159f5ee59"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-02-prompt-1",
+        "fft_max_lsb": {},
+        "group": "source-reader-02",
+        "id": "source-reader-02-prompt-1:chatterbox:room",
+        "input_sha256": "5629390acf5ff26e10b503cb58767bd13fe2acf21d177db559a0281e50deb604",
+        "level_db": null,
+        "measured_snr_db": null,
+        "noise_position": "right",
+        "origin": "chatterbox",
+        "responses": {
+          "mono": 6.722973589702127
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "mono": "5b33aeb966e70796722dcb554b8ca9432ed731c024f55e0ebf3b512e1a711c23"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 2.806598,
+          "wpe": -0.156923
+        },
+        "case": "source-reader-02-prompt-1",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-02",
+        "id": "source-reader-02-prompt-1:chatterbox:0",
+        "input_sha256": "fe48c59bc7296b156d190387c7a85edfccb4134e8db439a33aa5107633a64dac",
+        "level_db": 0,
+        "measured_snr_db": 1e-06,
+        "noise_position": "right",
+        "origin": "chatterbox",
+        "responses": {
+          "frontal": 6.755942946571218,
+          "mono": -3.4666939076930676,
+          "wpe": 5.392714976332116
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "8c9a6bc03e9d2d291fb2d32399285c637f12f0972671fc6c280e794fa1d71b6d",
+          "mono": "dc33dc6d06c87cbc094ed152ba53e362e9c20cd31aa1fada5aeab68df6352f3a",
+          "wpe": "213bf9edb0685c892e8484d4cab36d11320d07eeed8f232f22b3f93000546acc"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 3.121282,
+          "wpe": 0.119322
+        },
+        "case": "source-reader-02-prompt-1",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-02",
+        "id": "source-reader-02-prompt-1:chatterbox:-5",
+        "input_sha256": "9f9e3d6d6712ed306ab3afbcbb04da613f1b26bd62c27d89f5379d04532ff21a",
+        "level_db": -5,
+        "measured_snr_db": -4.999999,
+        "noise_position": "right",
+        "origin": "chatterbox",
+        "responses": {
+          "frontal": -3.388486443827791,
+          "mono": -5.474923135994619,
+          "wpe": -4.914970419335612
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "817adb49e34ff374c0d5e8276a31f5e35771b4d86490e13d5c5bfdd65ec2ae6a",
+          "mono": "32ef780019399c03dba5e768f5182c120bacc287af8145cb6130729511264e57",
+          "wpe": "aeaf5165ee19e75c3bba88890ea229223f1f1172698d66bd2ce9731717af1d4a"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-02-prompt-1",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-02",
+        "id": "source-reader-02-prompt-1:background:0",
+        "input_sha256": "38d7aac2f8fbe83dc273c3fd4771279bb2c610659d9d66526c69b5d35285e33c",
+        "level_db": 0,
+        "measured_snr_db": null,
+        "noise_position": "right",
+        "origin": "background",
+        "responses": {
+          "frontal": -6.61701394962337,
+          "mono": -6.807123189808562,
+          "wpe": -6.92903802191655
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "a50980a505ae918568318f7adef05e3512d648d83e4047382d73c868782f9f09",
+          "mono": "3d627d2182aec9fe223d30667a193436cbd8de94d7ca3296a3273e86fe438b0b",
+          "wpe": "071e59ae9a8b95fbe5c8d986dd4556d4b382a847646603607596c06c8f45e8bc"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-02-prompt-1",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-02",
+        "id": "source-reader-02-prompt-1:background:-5",
+        "input_sha256": "ad2162a8c1f938b79691046b936f5b8ce226deb7ef85eaca2a1b023fb8fa201c",
+        "level_db": -5,
+        "measured_snr_db": null,
+        "noise_position": "right",
+        "origin": "background",
+        "responses": {
+          "frontal": -6.612204539754831,
+          "mono": -6.807065059155593,
+          "wpe": -6.927887907823613
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "a4af6fea4fac945bb83f355ecfdde5fb1fcf6a36df79df7831c78c964b87f4af",
+          "mono": "eaf95577c97be42693dc8c9c32e2b36021474cc6e03d6e153020a4c7981ee53d",
+          "wpe": "e21f36d0e6a097a5e727a43325e35446da2d6883402e25c98cdae5726f404b76"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-02-prompt-2",
+        "fft_max_lsb": {},
+        "group": "source-reader-02",
+        "id": "source-reader-02-prompt-2:natural:room",
+        "input_sha256": "614031eb37399e225fcb3ceb51f2f58f35b4b3a73b863829324834a34731737f",
+        "level_db": null,
+        "measured_snr_db": null,
+        "noise_position": "left",
+        "origin": "natural",
+        "responses": {
+          "mono": -7.027966994445351
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "mono": "f4467ca37d8e8b6a5c338adb542424dbf2625fe49d882d29d707bcd62dd2cd34"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 1.881809,
+          "wpe": 1.076603
+        },
+        "case": "source-reader-02-prompt-2",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-02",
+        "id": "source-reader-02-prompt-2:natural:0",
+        "input_sha256": "60dbdee980d68304d1888cc21847d08e4e64fa863a57fb0d724715992fc5ad47",
+        "level_db": 0,
+        "measured_snr_db": -1e-06,
+        "noise_position": "left",
+        "origin": "natural",
+        "responses": {
+          "frontal": 7.314865357726023,
+          "mono": 7.203467021083636,
+          "wpe": 7.290854063382628
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "ee28bdfea0d4635e299078ebd34b04ff380da3b24521f7d7ee3d2bcb9cf5ff55",
+          "mono": "c45cf22ead03bfbaa519f45f68f35cd9ec6e9c33a8868886b08d5cdfbbd23f58",
+          "wpe": "6337bb382344e97d7db91b8ae7ea3ed1305da933390d43876a92174f365787ef"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 2.202933,
+          "wpe": 1.453635
+        },
+        "case": "source-reader-02-prompt-2",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-02",
+        "id": "source-reader-02-prompt-2:natural:-5",
+        "input_sha256": "e866a8904ace57141fbde91de9f442602d73604d599efb39e9f7c4d160e17ac1",
+        "level_db": -5,
+        "measured_snr_db": -5.000002,
+        "noise_position": "left",
+        "origin": "natural",
+        "responses": {
+          "frontal": 6.785953023551204,
+          "mono": -0.2306885165875412,
+          "wpe": 6.526253733227894
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "4d3328330fa27dea860a0e7a22b241f3158658a1c98c94bcd0b761148fd7ac3a",
+          "mono": "d96ffe991b633882f9336c6bca87147c71dc6a41f9c0f7f590454284ab11b43c",
+          "wpe": "338438947d916968c93ffb65679487d9bb1453d225720b7d5ad3f40e03aa62c0"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-02-prompt-2",
+        "fft_max_lsb": {},
+        "group": "source-reader-02",
+        "id": "source-reader-02-prompt-2:melotts:room",
+        "input_sha256": "8bb4a51e4d52e8d08d89a5be343223b5d142ab36f44d535c7ddac3734e53d67f",
+        "level_db": null,
+        "measured_snr_db": null,
+        "noise_position": "left",
+        "origin": "melotts",
+        "responses": {
+          "mono": 7.035722275030542
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "mono": "b4fd4b0fa897bb934c2797fddf6a036e2a8022ca91f957777288c88a6ff69a1e"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 2.063193,
+          "wpe": 1.128892
+        },
+        "case": "source-reader-02-prompt-2",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-02",
+        "id": "source-reader-02-prompt-2:melotts:0",
+        "input_sha256": "fe6da4463181522d749267f42f9540c0d34129823c9abd446d3673b12c06c2ca",
+        "level_db": 0,
+        "measured_snr_db": 0.0,
+        "noise_position": "left",
+        "origin": "melotts",
+        "responses": {
+          "frontal": 7.307806100327524,
+          "mono": 7.143896215011412,
+          "wpe": 7.361112499662403
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "a2cee5f6a03f69109248807b63e6469cf6c3a33898670db01264ea5358c5498a",
+          "mono": "f5062cb1e9911552db2d7bd3cbea77406aa7a9760e389c5a4a3001a8a94d58be",
+          "wpe": "5225215e9afdad4ec174635550714458d6bf19529a5faa54ad358da2423569f8"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 2.316055,
+          "wpe": 1.258435
+        },
+        "case": "source-reader-02-prompt-2",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-02",
+        "id": "source-reader-02-prompt-2:melotts:-5",
+        "input_sha256": "b51598c792d0e9a08116d60fee533c9f5246a03e24f088f15e38c3e7c97bec94",
+        "level_db": -5,
+        "measured_snr_db": -5.000001,
+        "noise_position": "left",
+        "origin": "melotts",
+        "responses": {
+          "frontal": 7.03057808007501,
+          "mono": 3.4804817462397812,
+          "wpe": 7.0155016107677515
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "8bf4894b66d7c57281e818fffe0b7f1a96ba58b69a74d6afc8f39af62531b096",
+          "mono": "ea2e7e9f9be2758fac4140f52f7d40f413796b64c166e9190764355bdc6066d9",
+          "wpe": "f259a70e6f5020e1830f0a381d95d87ba5ddfa28200e388ddee894c6f2ab5969"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-02-prompt-2",
+        "fft_max_lsb": {},
+        "group": "source-reader-02",
+        "id": "source-reader-02-prompt-2:chatterbox:room",
+        "input_sha256": "0d6837402aade010f84b7dba04074478e7fc11fcf51b3468dd728d6e33397442",
+        "level_db": null,
+        "measured_snr_db": null,
+        "noise_position": "left",
+        "origin": "chatterbox",
+        "responses": {
+          "mono": 4.993016552484169
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "mono": "9dbbe34dfafa4ec814257d3af679481fef604c0e43a86e75cb66f292fc437750"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 1.789198,
+          "wpe": -1.414154
+        },
+        "case": "source-reader-02-prompt-2",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-02",
+        "id": "source-reader-02-prompt-2:chatterbox:0",
+        "input_sha256": "0ee69616c8e59acc50c80ec1ac7dcb7c9401029262726f8551fbadd7eafc051a",
+        "level_db": 0,
+        "measured_snr_db": 1e-06,
+        "noise_position": "left",
+        "origin": "chatterbox",
+        "responses": {
+          "frontal": 7.311284830553549,
+          "mono": 6.902718632970745,
+          "wpe": 7.233106063451902
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "8910261b6c6f03099ee6dcbaa036e11d5b231dcc9ffe3739c8c37413a83e36f6",
+          "mono": "2156041f06d49b8f7bcff626ad5361da147814903ea92304bda6b49e042efc54",
+          "wpe": "b3a93ce45775b558b4be9df13954aa307d1ad27e6604e2b7374d330f77cc0d63"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 2.176608,
+          "wpe": -0.809569
+        },
+        "case": "source-reader-02-prompt-2",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-02",
+        "id": "source-reader-02-prompt-2:chatterbox:-5",
+        "input_sha256": "3161e7b22e9b2d6564ad04135526fa4d34da62141c5ff3d401fac899168c66e4",
+        "level_db": -5,
+        "measured_snr_db": -5.0,
+        "noise_position": "left",
+        "origin": "chatterbox",
+        "responses": {
+          "frontal": 6.787540940719885,
+          "mono": 3.7920315496937063,
+          "wpe": 6.525519252065617
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "5e3e2e470643a398cef5a669164e36ce1d7b88bb1f8da2f3f28cc0b484335369",
+          "mono": "89668d9fb121d9aaeef4513e3a245f8975e7029b66844cb2eaa0b2d0081c54e9",
+          "wpe": "1b96e534f96107d3325b4d724e13741d81c7552548b1f8dfed2e0f1332387508"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-02-prompt-2",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-02",
+        "id": "source-reader-02-prompt-2:background:0",
+        "input_sha256": "af198941be21c3603afb0d5f9d43dede39951765d97e6b73c98bc230945e1b24",
+        "level_db": 0,
+        "measured_snr_db": null,
+        "noise_position": "left",
+        "origin": "background",
+        "responses": {
+          "frontal": -6.377472919992873,
+          "mono": -6.310092953067204,
+          "wpe": -6.508451468766124
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "d02325b53cfe5cf232afd01b4d208747a62277ef09a7e1f456fa0a83ec3fe4fa",
+          "mono": "bbbace712e8b9144140a7ffeeee3f5e6ba0536819b1afbff078b85024e68e665",
+          "wpe": "86627d92615f81a95c98099973fd407078636c18ca31e1410acf096accacee20"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-02-prompt-2",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-02",
+        "id": "source-reader-02-prompt-2:background:-5",
+        "input_sha256": "704f9f98384a614e5c74a56db60b81c6ad0cc3bea3efe2926a8a0988fe21dc4a",
+        "level_db": -5,
+        "measured_snr_db": null,
+        "noise_position": "left",
+        "origin": "background",
+        "responses": {
+          "frontal": -6.375353887517004,
+          "mono": -6.309921295487808,
+          "wpe": -6.510299632260545
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "23dd26c78149d5d4e88a5419483db517109b421a6b1f5f5032d901837c4a1f69",
+          "mono": "c0c055a00776a8c3a95bb1be7ae94b07436ff548cc3e6fc1a5d84bb7a11ef1df",
+          "wpe": "a3abc3ee0789b4e27b51a873edb0b96f428177bef7b2fa1ba7c826d24b541dc6"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-03-prompt-0",
+        "fft_max_lsb": {},
+        "group": "source-reader-03",
+        "id": "source-reader-03-prompt-0:natural:room",
+        "input_sha256": "1cedc8520020a34a7fc06d56cd127822c550cca228f59c1fa10eb6d523b94a82",
+        "level_db": null,
+        "measured_snr_db": null,
+        "noise_position": "left",
+        "origin": "natural",
+        "responses": {
+          "mono": -7.260754614557755
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "mono": "4c92f6d0007c372230065c304f77a2d749c28887def437524646262fc98e5d2a"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 1.696206,
+          "wpe": 0.529401
+        },
+        "case": "source-reader-03-prompt-0",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-03",
+        "id": "source-reader-03-prompt-0:natural:0",
+        "input_sha256": "93e556901ca5ff849dc85bf5f112efecfda9d9b751af4236693bd62f1fd83350",
+        "level_db": 0,
+        "measured_snr_db": 9e-06,
+        "noise_position": "left",
+        "origin": "natural",
+        "responses": {
+          "frontal": -4.169986730407213,
+          "mono": -5.361429670773465,
+          "wpe": -3.6153884140282826
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "30fe7fca633f6c62684597f2911aaaaf4fa7b2c78de0876f3c75093fb867f1e9",
+          "mono": "f0b4e7d2b8af36ce6bad36e176f689855385cc1e6d20822b9653aa60f66a7d9f",
+          "wpe": "5e24e874f6c43006d6b371ecad6e259c5c0f25da5980dd456419ea78190861b3"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 2.019314,
+          "wpe": 0.771194
+        },
+        "case": "source-reader-03-prompt-0",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-03",
+        "id": "source-reader-03-prompt-0:natural:-5",
+        "input_sha256": "6c2422a46bcac3041d48dad2080f914f8e0597165587c068f9fc7230fb94d3bc",
+        "level_db": -5,
+        "measured_snr_db": -4.999994,
+        "noise_position": "left",
+        "origin": "natural",
+        "responses": {
+          "frontal": -4.560779056961501,
+          "mono": -4.924452736735145,
+          "wpe": -4.46401312854267
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "1111b1ea890865e079939f9f890cc16088fdbeb078e69e3c210189811cb7894c",
+          "mono": "b2dbb3df5944367c9fb511605e0ca8576e95b8d8721db51dc6da4eaf8bbb5ec3",
+          "wpe": "b264acd89bf2fe84364c0c1c43a8aed903d8848236986b00bfa0f2aab5ffb18c"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-03-prompt-0",
+        "fft_max_lsb": {},
+        "group": "source-reader-03",
+        "id": "source-reader-03-prompt-0:melotts:room",
+        "input_sha256": "9069efd345ba29f06e1beae159dda610d126b6fdd3b98bd744e59c95cd145b60",
+        "level_db": null,
+        "measured_snr_db": null,
+        "noise_position": "left",
+        "origin": "melotts",
+        "responses": {
+          "mono": 7.187152893247369
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "mono": "7a100a119720063909c15a4173fb964c85a49d19e28ea3ac21ff0e3a6ea0059b"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 1.885766,
+          "wpe": 0.680658
+        },
+        "case": "source-reader-03-prompt-0",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-03",
+        "id": "source-reader-03-prompt-0:melotts:0",
+        "input_sha256": "ef0033c0eb2e8e5ca62378416563845b7a70b88eb6d26afa28c39a73ac9e9b86",
+        "level_db": 0,
+        "measured_snr_db": 8e-06,
+        "noise_position": "left",
+        "origin": "melotts",
+        "responses": {
+          "frontal": 6.837500437795954,
+          "mono": 6.344142950974063,
+          "wpe": 7.003470266069356
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "53f6bb11369d069b16573bb505731b44f0ade814340efe08fd9dceaf091f802a",
+          "mono": "94473117d29cbb9ce14a7db3fa865b1022e8c73b37184858a1922960af0b4b04",
+          "wpe": "9efecc11cdd7cdcefcbb1b5f67807ca23ef3f68624eefddbc7186148864466f6"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 2.135957,
+          "wpe": 0.81206
+        },
+        "case": "source-reader-03-prompt-0",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-03",
+        "id": "source-reader-03-prompt-0:melotts:-5",
+        "input_sha256": "a8bf4f3e56bd509451271ddbf90aba5cac98a52652d01bf97ddacb7a06545361",
+        "level_db": -5,
+        "measured_snr_db": -4.999995,
+        "noise_position": "left",
+        "origin": "melotts",
+        "responses": {
+          "frontal": 6.65862810018203,
+          "mono": 4.726548840449394,
+          "wpe": 6.2790001061045215
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "3b0bc101df629a9b26ecc8a26a9f86e26cc120eae0268b8eb2313f61b10534c3",
+          "mono": "8fcfd3cac883df91cd067241bd253a15ea0164c1e59d932035fe8d9842c12c5b",
+          "wpe": "a3c6f80bea31e9864ea968d54fc49b1be357fa79ddec03beabde9956efafdd74"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-03-prompt-0",
+        "fft_max_lsb": {},
+        "group": "source-reader-03",
+        "id": "source-reader-03-prompt-0:chatterbox:room",
+        "input_sha256": "c344236f4fd242814ad6e2e295bb55463ebb0af926fa4d1cb2b8d8ed4b699029",
+        "level_db": null,
+        "measured_snr_db": null,
+        "noise_position": "left",
+        "origin": "chatterbox",
+        "responses": {
+          "mono": 4.3636418327721955
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "mono": "01f1f2cf29e896d0effb611b23822f39e57332071cc1b6b7b586111bb4e56aa0"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 1.716414,
+          "wpe": 0.958232
+        },
+        "case": "source-reader-03-prompt-0",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-03",
+        "id": "source-reader-03-prompt-0:chatterbox:0",
+        "input_sha256": "20757d0f98a3ddd1ccc273d0f72f7dc4c9417ca5b34732ae55b3a12b7830a97c",
+        "level_db": 0,
+        "measured_snr_db": -0.0,
+        "noise_position": "left",
+        "origin": "chatterbox",
+        "responses": {
+          "frontal": 7.37701539025438,
+          "mono": 7.22865326360708,
+          "wpe": 7.292781989712706
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "88785e1c5176b398725f071ec3d507f7fe9045b81cafeffb7bf3abe09a2c849b",
+          "mono": "d679a95864bd2e3dd6c536390d117e5398cbc1488e16fb81b056ff8f792885b2",
+          "wpe": "d83d591f19b94c2c5a985331ca569fe40a2d7e46373cc3addd1378265859b2fe"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 2.091256,
+          "wpe": 1.032421
+        },
+        "case": "source-reader-03-prompt-0",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-03",
+        "id": "source-reader-03-prompt-0:chatterbox:-5",
+        "input_sha256": "e4624bde7463e6a4b8e3bbc6fd451549f28590f83c562ee1714a9dad2115b9e5",
+        "level_db": -5,
+        "measured_snr_db": -5.000003,
+        "noise_position": "left",
+        "origin": "chatterbox",
+        "responses": {
+          "frontal": 7.312357645022555,
+          "mono": 5.989201417727672,
+          "wpe": 6.828465429720293
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "5efdf877465e22d338e3f094934b1718b91aab72f769983e5f62ddfb64faadef",
+          "mono": "e372f627af9ecea462623d2362521be1b569c4b265a7efcb65bd759cede28946",
+          "wpe": "b91831353c1eac0bfe67b6077de924f3699e284d2a3b6bcf6be8e8aac36ef54b"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-03-prompt-0",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-03",
+        "id": "source-reader-03-prompt-0:background:0",
+        "input_sha256": "62394dc5c9589150c8d83ea1f123102c42512bbfb836fde803fa4578c2862ff0",
+        "level_db": 0,
+        "measured_snr_db": null,
+        "noise_position": "left",
+        "origin": "background",
+        "responses": {
+          "frontal": -6.94543166708138,
+          "mono": -6.578984264975371,
+          "wpe": null
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "64121e5ef4f02fbf1eb3e7d7c9af6c5f571a178ca223295f617159856f521259",
+          "mono": "f84ce39d154b013c4dae63b244ceaff2adebda7fa3e1f1a8861bb3a555852beb",
+          "wpe": "515b01788792db5a4f47a4159c61a31b0ba0a8e14e70181ae1080cb8f1944bc4"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-03-prompt-0",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-03",
+        "id": "source-reader-03-prompt-0:background:-5",
+        "input_sha256": "23780d2a8831cdd6388f4d229035cdae6aebdbd3ca5deb43b5da7308983ff90c",
+        "level_db": -5,
+        "measured_snr_db": null,
+        "noise_position": "left",
+        "origin": "background",
+        "responses": {
+          "frontal": -6.945963819399913,
+          "mono": -6.5791015772310555,
+          "wpe": null
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "6ef4225ebf2be391a11dff2c0d8d4b3ff066f1200187dfcca772d9b6eb31e6d7",
+          "mono": "9c35a9555de98b809c81b8d17ba0f93dfca43704f7b4f90dc2a7902c41c2a12d",
+          "wpe": "7c0d1791388cabf62348ba073b343e4fab8b8cf818c451544c47c4f4425c41e5"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-03-prompt-1",
+        "fft_max_lsb": {},
+        "group": "source-reader-03",
+        "id": "source-reader-03-prompt-1:natural:room",
+        "input_sha256": "a40a60c8659c0f847ac28ba29dde560bc800292bbeb145cb00ebdd1677ff79ad",
+        "level_db": null,
+        "measured_snr_db": null,
+        "noise_position": "right",
+        "origin": "natural",
+        "responses": {
+          "mono": -7.227910080707741
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "mono": "0eb8fa6936ca177fc58c39b9124039300c7ae9f7b74148519754573906caeb1c"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 2.807143,
+          "wpe": 1.577308
+        },
+        "case": "source-reader-03-prompt-1",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-03",
+        "id": "source-reader-03-prompt-1:natural:0",
+        "input_sha256": "1cc88c511ec1b98f391d474b419e37f2fcb490c1de49826d540d30d0ae2a6457",
+        "level_db": 0,
+        "measured_snr_db": 2e-06,
+        "noise_position": "right",
+        "origin": "natural",
+        "responses": {
+          "frontal": 5.181724151989679,
+          "mono": 3.5080064859061664,
+          "wpe": 5.102453215413481
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "30ac14f779ee0fdd0d36d1541f0d027f878a42c943cfbd5304e6276221bb157e",
+          "mono": "8a89a371ac35473f2bd396386bf2283980510f73277fcef688508d9e44802c3a",
+          "wpe": "d186496e4286f7f1e3c1fc3952ba335ebc25fc1a85c35ae60dd4673f5c112597"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 3.001233,
+          "wpe": 1.810235
+        },
+        "case": "source-reader-03-prompt-1",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-03",
+        "id": "source-reader-03-prompt-1:natural:-5",
+        "input_sha256": "6bc00fe723828a8f379d4bd1aa46f3cf87c810edd975782539a1270377de84d3",
+        "level_db": -5,
+        "measured_snr_db": -4.999989,
+        "noise_position": "right",
+        "origin": "natural",
+        "responses": {
+          "frontal": 6.360756659851814,
+          "mono": -4.332725522651451,
+          "wpe": 4.45733427741401
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "7f202d50634ad8e85d068e1e890fb0787eac5b90c4327145c4c417831beb0a87",
+          "mono": "a9392ecd49311963d84d26176c4cac6c1fde1e80df0d3c9b5b5ddcd95a8d18f4",
+          "wpe": "36e651d0bf9977847320e63e9fe829b846ea190dca723bf05c0d21b393423651"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-03-prompt-1",
+        "fft_max_lsb": {},
+        "group": "source-reader-03",
+        "id": "source-reader-03-prompt-1:melotts:room",
+        "input_sha256": "e250f14cbeddaa890175d5aaa4ed08430424f1412f2e09b3d1c86a5991b9814e",
+        "level_db": null,
+        "measured_snr_db": null,
+        "noise_position": "right",
+        "origin": "melotts",
+        "responses": {
+          "mono": 6.249914568866013
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "mono": "9f2d4442d68a7b331c34efbb990ff3b96a3cdd707ea63240107df071d3451759"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 3.133632,
+          "wpe": 1.327381
+        },
+        "case": "source-reader-03-prompt-1",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-03",
+        "id": "source-reader-03-prompt-1:melotts:0",
+        "input_sha256": "511da96c3f91d7016a2b904f0e38b7ddb228b928efc53fa5c6bb030d002a754c",
+        "level_db": 0,
+        "measured_snr_db": -5e-06,
+        "noise_position": "right",
+        "origin": "melotts",
+        "responses": {
+          "frontal": 6.883706052105444,
+          "mono": 4.488888709330251,
+          "wpe": 6.618274509116779
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "1d88e00130d17e7f28cdd96d6d1db3854ec36fe0309b1e5c5fdb5d26c998e8ae",
+          "mono": "34757a4142bc58ce091b415cc5947767f6828de5ef290a9985d2916301c98dc9",
+          "wpe": "3459c9f7c8533fe75c5a6e9344efc5b8639789c6bdfa2effe770f2ceeeed0816"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 3.334238,
+          "wpe": 1.461949
+        },
+        "case": "source-reader-03-prompt-1",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-03",
+        "id": "source-reader-03-prompt-1:melotts:-5",
+        "input_sha256": "4dadd5252859581faba65aeaa86db4b0d840eb194a15c7eea8213566309bb82b",
+        "level_db": -5,
+        "measured_snr_db": -4.999996,
+        "noise_position": "right",
+        "origin": "melotts",
+        "responses": {
+          "frontal": 6.636925534064387,
+          "mono": -2.343760033667673,
+          "wpe": 6.047344457491608
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "44985b91ed553ceb23522439376efb95222b82f17fd42ab348adc0a7380b9252",
+          "mono": "84378c032ae9b61d5540f72ae9112aa14b841ba41eff2fd966bc29e158d14855",
+          "wpe": "4e888c349583940246d677959c5261dc96954d6df44dca8de6553381797a263d"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-03-prompt-1",
+        "fft_max_lsb": {},
+        "group": "source-reader-03",
+        "id": "source-reader-03-prompt-1:chatterbox:room",
+        "input_sha256": "eb16ed0ba57f258d6c5e80ba3af2b1ceeb9e34d30ac63d667c724d5387f3d035",
+        "level_db": null,
+        "measured_snr_db": null,
+        "noise_position": "right",
+        "origin": "chatterbox",
+        "responses": {
+          "mono": 7.096716785148342
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "mono": "d428f46482750f706f926d8e8901351adafcb5708ad8cc409a1139b6fdd6afda"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 2.545193,
+          "wpe": 0.952945
+        },
+        "case": "source-reader-03-prompt-1",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-03",
+        "id": "source-reader-03-prompt-1:chatterbox:0",
+        "input_sha256": "23e63d3530a4cb69713f8c4bc14ec58afbc2a3c3ad85c64bcf9ebe63f6f63a67",
+        "level_db": 0,
+        "measured_snr_db": -1.1e-05,
+        "noise_position": "right",
+        "origin": "chatterbox",
+        "responses": {
+          "frontal": 7.083177765984364,
+          "mono": 6.277024016452431,
+          "wpe": 7.187152893247369
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "18d84aeb506414fed3cb3142f406c72fbb7e8d67e5544eb8fc095ba9ab36fac8",
+          "mono": "9dab3d5bf2582cbfccf5e1e88f720a5d4061db4727e4d0ebf5c08f19d8d1a629",
+          "wpe": "feefc74d4f5bfb3a0beaf83c9007a905d30ab49828a150ca33c6f28516848a94"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 2.958902,
+          "wpe": 1.155483
+        },
+        "case": "source-reader-03-prompt-1",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-03",
+        "id": "source-reader-03-prompt-1:chatterbox:-5",
+        "input_sha256": "dd96813c936b721ecf75b954228dc8bd48214aadd45a7468b0e6b7e41782366e",
+        "level_db": -5,
+        "measured_snr_db": -5.000002,
+        "noise_position": "right",
+        "origin": "chatterbox",
+        "responses": {
+          "frontal": 6.2327374698561275,
+          "mono": -0.548347089621583,
+          "wpe": 5.550017753930269
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "1815dc9683b1037df97c16d9918344db11b0ee7c2dea3e5b9dc209ddc388fffd",
+          "mono": "c2b68e4a66bc1afc9777fbda3f0813ca89cff4e06f7a326babfe29c931fd1541",
+          "wpe": "504d40bce1b5dd7e82069b5f8de7249c98f1aafe3c88b4adcc7f520e491d0b55"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-03-prompt-1",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-03",
+        "id": "source-reader-03-prompt-1:background:0",
+        "input_sha256": "e95dfffd9a2316bbcda90108ec45e9395481255f9fe0705d880a62346e04ea5b",
+        "level_db": 0,
+        "measured_snr_db": null,
+        "noise_position": "right",
+        "origin": "background",
+        "responses": {
+          "frontal": -6.3626403633155535,
+          "mono": -6.697072934359811,
+          "wpe": -5.837979817598277
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "4dfe43cc461a131bc7d5e80687aaa5dff9a9901ba848ef178ca1cbbc029cc9ad",
+          "mono": "5d29faee29840c7dafdc8abcbda8dd93484572b4339c7270d5d76ce0fdfb9f70",
+          "wpe": "9c1594f11440308d02f6777d289a5c80bb04cd32416581b32284d3d678b05a57"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-03-prompt-1",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-03",
+        "id": "source-reader-03-prompt-1:background:-5",
+        "input_sha256": "4ece547b8e0b4d3f5d7a409cf6744d605fb91b8b57f0cb9bb2ceb2d0015436a1",
+        "level_db": -5,
+        "measured_snr_db": null,
+        "noise_position": "right",
+        "origin": "background",
+        "responses": {
+          "frontal": -6.37140087888457,
+          "mono": -6.704248465412879,
+          "wpe": -5.82658103675382
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "03955fd5eb23ef7b04ece85e42f02b8bd7dc71ee64b430bc38b646ccb821dac8",
+          "mono": "88c6d3ed914c3cbd8b541be5d5af9d2bada95366dcbe74f24c188143af340e6b",
+          "wpe": "525288ef3fd1e714427a9765fb547780823836ae245be19c5e86275d0bec6a95"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-03-prompt-2",
+        "fft_max_lsb": {},
+        "group": "source-reader-03",
+        "id": "source-reader-03-prompt-2:natural:room",
+        "input_sha256": "55c31113ecab82fa4333ae129d8b1b2d3a0287ed68cc34b1a2281588eb5f40d0",
+        "level_db": null,
+        "measured_snr_db": null,
+        "noise_position": "left",
+        "origin": "natural",
+        "responses": {
+          "mono": -7.150910374132711
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "mono": "244aa7e06dfcac1bc3ab857ef44452cce943d64cb7cd4441c5ebe564181d6d7a"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 2.194996,
+          "wpe": 0.448331
+        },
+        "case": "source-reader-03-prompt-2",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-03",
+        "id": "source-reader-03-prompt-2:natural:0",
+        "input_sha256": "7dcab8e369c5f402f2421e90108268159618caad23069a218cbd8b6fb3ef16fe",
+        "level_db": 0,
+        "measured_snr_db": -1e-06,
+        "noise_position": "left",
+        "origin": "natural",
+        "responses": {
+          "frontal": 7.14571225474053,
+          "mono": 6.762379642292036,
+          "wpe": 7.207003502015983
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "17090c3d50e04e90c8a50c646c1e9efcf1fd116af9b66205a6eca7da0df6d7d9",
+          "mono": "a5cae87773519e2760f9f5ae564bccbc821bab54f00a30671d8e7dc8bb85edf8",
+          "wpe": "d0ce5311748b06b90ad7fd8b96854eb6af7adeb378f66081306888089f940217"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 2.658088,
+          "wpe": 0.613139
+        },
+        "case": "source-reader-03-prompt-2",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-03",
+        "id": "source-reader-03-prompt-2:natural:-5",
+        "input_sha256": "621f268c81b2736f65e4c4a2387cd43e169e157fef94dec689fd7b47f21475f6",
+        "level_db": -5,
+        "measured_snr_db": -5.000006,
+        "noise_position": "left",
+        "origin": "natural",
+        "responses": {
+          "frontal": 7.10395500885562,
+          "mono": 3.646980121177101,
+          "wpe": 6.477339801482046
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "699beb016ce5e0a93ab30c5e3969b33f6f9747049501033ff83e872684b16385",
+          "mono": "73ab68e63a253887a9174abee5ef8b38f101e8a8002325423f33d1e2f7a61d07",
+          "wpe": "65ffb15e1d46adef4171ca853c9b4621f8dc3d572a15e438c15789fe23fc0d78"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-03-prompt-2",
+        "fft_max_lsb": {},
+        "group": "source-reader-03",
+        "id": "source-reader-03-prompt-2:melotts:room",
+        "input_sha256": "98a7511aa2107a48f4533955c789e0eb13e220696997cd072f77b0c470516d50",
+        "level_db": null,
+        "measured_snr_db": null,
+        "noise_position": "left",
+        "origin": "melotts",
+        "responses": {
+          "mono": 6.159377715267873
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "mono": "d44dfc38b5d24e01b90c63950e0fa10e9e4a6ed2e0fdea59378baba330afe328"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 2.113199,
+          "wpe": 1.340189
+        },
+        "case": "source-reader-03-prompt-2",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-03",
+        "id": "source-reader-03-prompt-2:melotts:0",
+        "input_sha256": "94c90e3a5588ca282d2384882b912ee1812599f778340df3756c40043c9642a3",
+        "level_db": 0,
+        "measured_snr_db": 3e-06,
+        "noise_position": "left",
+        "origin": "melotts",
+        "responses": {
+          "frontal": 6.616397085527065,
+          "mono": 5.432613076730162,
+          "wpe": 6.282867909264861
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "81f64e98780f594d748675d55941647fbda975a801019d64ff5650416cf75d82",
+          "mono": "1d01680ff6ca96918c0231a5de3f76ec647f582d5fa1d373a612d6bef6f1b744",
+          "wpe": "7e1210465fa851a2b24f4b30f556763000dc21990b121c33722a37789f61177f"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 2.321094,
+          "wpe": 1.451564
+        },
+        "case": "source-reader-03-prompt-2",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-03",
+        "id": "source-reader-03-prompt-2:melotts:-5",
+        "input_sha256": "e9c02aa19aa014ae6c2dc1ca506d91f1b5d1172107dce68bc2663001f63387d1",
+        "level_db": -5,
+        "measured_snr_db": -5.000002,
+        "noise_position": "left",
+        "origin": "melotts",
+        "responses": {
+          "frontal": 5.015670731764835,
+          "mono": -3.880530130888648,
+          "wpe": 4.823333430990629
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "33b525110f2f412f36d709a3fd8eeee46db0d08e674ee6b395a06b499fadd00a",
+          "mono": "61ecbed76cc72852a1fdc726dc669fd48335cd63373fe2eb05dfcccc00e77ea7",
+          "wpe": "bb82bbe19992f1105fdaad44881af802e952412e1d9e65681cd3c1bb20c09935"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-03-prompt-2",
+        "fft_max_lsb": {},
+        "group": "source-reader-03",
+        "id": "source-reader-03-prompt-2:chatterbox:room",
+        "input_sha256": "edb84e0323bc1cc06fc31d122053a20158f19b2e322cd2639abb87076fee26cd",
+        "level_db": null,
+        "measured_snr_db": null,
+        "noise_position": "left",
+        "origin": "chatterbox",
+        "responses": {
+          "mono": 7.258465237494098
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "mono": "5ed7682e9ded7171bc3d86b9cc0d219f3363687c52aa0105bf86cb74312d8562"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 2.020895,
+          "wpe": -0.927369
+        },
+        "case": "source-reader-03-prompt-2",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-03",
+        "id": "source-reader-03-prompt-2:chatterbox:0",
+        "input_sha256": "54e0025f1fa1d50f1b6003aaec95784d9c02c22c60978463cf9c23ee56d054e0",
+        "level_db": 0,
+        "measured_snr_db": 5e-06,
+        "noise_position": "left",
+        "origin": "chatterbox",
+        "responses": {
+          "frontal": 7.421199476471813,
+          "mono": 7.346568326625476,
+          "wpe": 7.3954077063556865
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "ff6bfec9da114324e5465ddc7a75cf4188963d92e6f546e06b4ba087cbad635a",
+          "mono": "c2d6bfd1fc66e1c6cbcdf3362d6fc45b159430380f648514d31c8a2b21fe1db8",
+          "wpe": "d26d0f6429e9f1a083c7f878915e823096a2aa95c056ac0dc1654d410763e0ef"
+        }
+      },
+      {
+        "acoustic_gain_db": {
+          "frontal": 2.461021,
+          "wpe": -0.570295
+        },
+        "case": "source-reader-03-prompt-2",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-03",
+        "id": "source-reader-03-prompt-2:chatterbox:-5",
+        "input_sha256": "d322bace88316e0d1f73f4e0732b5abf39e48e14bb18c259e78c7706efab95b8",
+        "level_db": -5,
+        "measured_snr_db": -5.0,
+        "noise_position": "left",
+        "origin": "chatterbox",
+        "responses": {
+          "frontal": 7.340110136943066,
+          "mono": 7.022643022606245,
+          "wpe": 7.066384887529358
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "f12c1310e86ae697a243a7d085411acfdc9641e4786df2cd992974b2d210d186",
+          "mono": "2008c8c600ed75eaf75af6b165ffc6a4764bae945bbbadba3825e0cc90241c86",
+          "wpe": "bc6ddd55e228521c00b5cec11adc13add1a8e0a387387ab015fb74281734c0be"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-03-prompt-2",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-03",
+        "id": "source-reader-03-prompt-2:background:0",
+        "input_sha256": "f1999c2ab1b7e36f24ef032501caa3cd353c8ea7ea5824d840c8da968d695a5d",
+        "level_db": 0,
+        "measured_snr_db": null,
+        "noise_position": "left",
+        "origin": "background",
+        "responses": {
+          "frontal": -6.546431538993811,
+          "mono": -6.5215435468552165,
+          "wpe": -5.610995314796741
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "114431c6de2be78f133bd15c880fdde6dc6d6473b876444cfa7306d1761cd9d5",
+          "mono": "167ab8de7252a3e524bd3224f872e0f6ed0fd92fdf62e10836b251e184d57253",
+          "wpe": "c03c92f6e99ce0b1e434f87fc322a076e954e62db324f7245f2be45a802a4175"
+        }
+      },
+      {
+        "acoustic_gain_db": null,
+        "case": "source-reader-03-prompt-2",
+        "fft_max_lsb": {
+          "frontal": 0,
+          "wpe": 1
+        },
+        "group": "source-reader-03",
+        "id": "source-reader-03-prompt-2:background:-5",
+        "input_sha256": "2fe1d84dddfac0fc3d31ec3376f4be39a57b0ff45e4cbff8cefd2b6ed81906f5",
+        "level_db": -5,
+        "measured_snr_db": null,
+        "noise_position": "left",
+        "origin": "background",
+        "responses": {
+          "frontal": -6.543093626232416,
+          "mono": -6.522079395006931,
+          "wpe": -5.616340215986937
+        },
+        "role": "assessment",
+        "window_hashes": {
+          "frontal": "255598862964c3985b96ee905605e692c4f2f98c0344119b5aafa9aa06cc3e3f",
+          "mono": "2537062bdd6c8c2004a7e190295960683a2b2a4559a34dfac9633f8353f8bddd",
+          "wpe": "032bcfc47b2ee320930b0069d53eec2e1242dd6160e745efb1ecc78cfe440da2"
+        }
+      }
+    ]
+  },
+  "freeze": {
+    "archive_identities": {
+      "chatterbox": [
+        "ChatterboxTTS",
+        7848724770,
+        "ce8e6a0c2a1456ca201347032c906059"
+      ],
+      "melotts": [
+        "MeloTTS",
+        7703256782,
+        "e12abaafe46a405e37ed9b24d1f9d76e"
+      ],
+      "natural": [
+        "real",
+        9420947621,
+        "71371f453e3d56199f047b0ee16edac1"
+      ]
+    },
+    "background_roster_sha256": "b981428d620792696687d5f33950d5873ced2ae32169b8c38d38583f0fce6960",
+    "background_source": [
+      "ES2012b",
+      "dd6f2caa7dc2ca8357964efa4d252a025151e11de4ce496b3b12d89bfd6464ba"
+    ],
+    "code_sha256": "dcf86e03cc7c0b24279b64e7d76bbe0f72258090629a3c28f875c89e10f1c61c",
+    "delivery_roster_sha256": "cb31913f858c77f6ec1d53370abdc26ff4b1d7060a00a2f2ed1f356bb56f3bdc",
+    "intake": {
+      "archive_count": {
+        "chatterbox": 357,
+        "melotts": 364,
+        "natural": 311
+      },
+      "chunks_sha256": {
+        "chatterbox": [
+          "b44dc8078f8077aa65b3300d62862182c29f0abfeef4dab56bae7ef9dc1f304e",
+          "de3acf48c5699fb3ff2a2f46aba885f2007c02db43d2291db303978aafe728b2",
+          "1010ac37dfc7ab5f7c9bc50f57c57d9d92589836bf4544bbb82470f0129c14c2",
+          "9b15774d2e2722284da193a79d770bcc8714600d7d6116386fc22ee822edda8d",
+          "31cb8c9be1f6a71f3d3d6eb640ca79ea847e24a0fdcf509e666b64f3b1d724bb",
+          "51fcee593c1c13f3b763c9f59ecd16efe76c6e17518105028b93a90f9aaa0d15",
+          "23e340db12c0a4db75c1b608e0a8e7669f10a0d0dcc513cfb5391d44c6fc30a7",
+          "d8538de9d76ae41ab65dc795fc857d1e3c5119968ff02b8856d632538fe38c68",
+          "02427c8d52058087515aa4dd7ab5475da88497b3bda6e9b6e630b904834a86e8",
+          "b653622e4a35559864cb7bc90550417ae5989a1a3e889a95bf7680adc4a815e1",
+          "1f3bb70ef29bfe6ef9c983f8b0200e5679a7f3991a9dfbb4f6c1b510fbb155e9",
+          "2f3a9521eb2cedb591649ec0f5379db952c4578602433340907cc2a997cb925a"
+        ],
+        "melotts": [
+          "b23abe3a883eb4c2609b4a72f25fdfbfb219cb3bf3db188350a2e2ae3772b08c",
+          "6f5ffd0dfb84613ddf626a0756d2a152720e270d9f19c4e67aefe4d7cf384d12",
+          "46b673136ea6a364030ae83d95ee62563754eae721753f16ab6fc0119fb5381c",
+          "ea616b2e750d7ec1fc8bbe487f264cd45eb7eb98a4fa0b100d78e81cf1123ba5",
+          "2b3bceb20d0b5399d2f93f40903884d60ebd130ee0105ffee654d61b9aeb613d",
+          "8f1dbe87deca124c86842246874384bfefe041d628308b00e05d2d7744d92c32",
+          "f7779308b2aa70c35a82f05ae654d1d1fe8694c16b7281fea43820af18256f03",
+          "ed0de8cfb31c4952379799f8fc6e76db9732b395be03c0edc6d3dc275b54c5e4",
+          "73dffbcb0330a430801778e607ca09f3fb32da2283a6958ba99143cbe65db881",
+          "a06a62bc1693ca7e0be51dd5dc2f52ab40498632050f97ae91eaff4b65d46312",
+          "e4af9691387af3c0688da901af18d2166c55bb98f0879c3e13b57e75a13117be",
+          "b3ede0c2b41880a3c8c54edd4eb9a122f7da1cb8da8f993558cd06cc0de17f86"
+        ],
+        "natural": [
+          "658f1ae458ffbf71b80f6e660bcf6b98d4d5a5e8b3fa27f3b1a416e894560221",
+          "03c19eefb1a41ba72bcab151c23f2cf27dba297964f5758d018279376608e307",
+          "290e2ab06d06d25a7f2e1595ea7edaea4876e1263966619eec2b5ca11071409a",
+          "3170c57a77a03c9f3104bed201675815a44e4a8ba1c82ab26a56fb63f26786ae",
+          "2f96d37d2cafc00d10b48eabf82264c1e8bd683c116197f8b87f7bca0549efa2",
+          "74e4b763284c7b19d402b3e4c9ffe606fc39338930f36cdd12df5df05c5201ae",
+          "55b0f0bb4f178a97601ba3eedf4e9dc7fb0acb142320b0b467a1b3d0d3ed9b23",
+          "d7b9351db2d4ffa3b468ed9c8ed5ccece98ae13bd56415ea211348f20891a78a",
+          "f92bbc098ad5480b2ae706c7018b1f2b8577b2768ba7f7d739dc25b56423c882",
+          "ec13d281e849e45fe2242f16f1e78699681e0531d45e63fe0d97abb13bedb1c2",
+          "1ff0a67cc62f5cacff774bb6d4024e2602cf3a9c4ae75bae839f485f4813a746",
+          "6319571ad57cf797f647e2eaefbf949a90e0c2d142de903b25514aed13b52535"
+        ]
+      },
+      "common_counts": [
+        32,
+        81,
+        96,
+        102
+      ],
+      "eligible_counts": [
+        3,
+        7,
+        15,
+        17
+      ],
+      "release_record_sha256": "e72a7900bc3a7f236a15c3a3bdb79301b51ed4156799b0576d370dedbbda15df"
+    },
+    "levels_db": [
+      0,
+      -5
+    ],
+    "method": {
+      "masking": "Reuse the pinned BBC room and ES2012b AMI annotated speech recording from ODSS. Reserve the eight ODSS assessment excerpts before selecting nonoverlapping new excerpts. Use the same new masker, location and common gain for all three origins per case. Alternate left and right. Measure room mean level at 0 and -5 dB. Use the identical background-only waveform and repeat room-only native scores.",
+      "policy": "Freeze each operating point from ODSS development before new model inference. The selective route preserves mono flags and adds a flag only if native mono meets the ODSS development one-genuine-reader point and both cleaned views exceed their respective zero-genuine-reader points. The ODSS assessment remains retrospective. Report each generator and genuine/background counts and original utterance-reader groups independently.",
+      "source": "Use complete archived WAV members and exact publisher utterance identifiers with unique normalized transcripts. Select three prompts per source reader by salted SHA-256 from utterances of 6 to 14 seconds in each version with a maximum duration ratio of 1.25. Use each origin's first six seconds, then score the fixed middle three seconds. The full prompt matches by construction. This cropped middle interval is not phoneme-aligned across origins."
+    },
+    "odss_receipt_sha256": "b664e009c7c62dc890a4817358288d143874257e1d66c0fd250edafea9e41f4a",
+    "points": {
+      "frontal": {
+        "one": 2.659480261663396,
+        "zero": 4.873891025785238
+      },
+      "mono": {
+        "one": 3.181390972200118,
+        "zero": 6.398707422838692
+      },
+      "wpe": {
+        "one": 4.346269172327075,
+        "zero": 5.664545957647945
+      }
+    },
+    "publisher": "https://zenodo.org/records/19522979",
+    "room_assets": [
+      {
+        "bytes": 131160,
+        "filename": "BBCRD_LR_M+000.wav",
+        "git_blob_sha1": "0fc8a92eb335e372d91eeb28f00e23dd5eac5d43",
+        "sha256": "711ca5d7388310148d5b7b25e00739060cc143ffcc8ac63a405657b6bcaebb7a",
+        "url": "https://raw.githubusercontent.com/bbc/bbcrd-brirs/c88a293ed81f4aa820bcbc4138f951552819e001/ambix-configs/irs/BBCRD_LR_M+000.wav"
+      },
+      {
+        "bytes": 131160,
+        "filename": "BBCRD_LR_M+090.wav",
+        "git_blob_sha1": "a5307acc7f13da3c24a85487262e59adcb58995b",
+        "sha256": "765cde5f7a0c2784fdab640f9a95cdfa811200efe2478d0375c34746ff1e4325",
+        "url": "https://raw.githubusercontent.com/bbc/bbcrd-brirs/c88a293ed81f4aa820bcbc4138f951552819e001/ambix-configs/irs/BBCRD_LR_M+090.wav"
+      },
+      {
+        "bytes": 131160,
+        "filename": "BBCRD_LR_M-090.wav",
+        "git_blob_sha1": "650f383bfac67c7bdf93c5454c4aaf1d005dbb2b",
+        "sha256": "ffb81d6fe73cdd450b58e48b7dd8191818404b46d064fc6db17559e1f55ad718",
+        "url": "https://raw.githubusercontent.com/bbc/bbcrd-brirs/c88a293ed81f4aa820bcbc4138f951552819e001/ambix-configs/irs/BBCRD_LR_M-090.wav"
+      }
+    ],
+    "room_code_sha256": "352729f2f576e1233e3c70e8dbd35715118bdbba889c55b6b3fe157a65385734",
+    "sample_rate": 16000,
+    "schema": "chipmunk.audio-phonemedf-matched-transfer/1",
+    "source_roster_sha256": "fa400bd0087397b0fbed9e16d3427b841adcd0abcb7ca134315aa5a1c7f9e722",
+    "speech_assets": {
+      "pellav2_detector.pt": "d21aedfb52e2f87706c2753715a29665482b0f4a034800c31579df5d458559ac",
+      "silero_vad.jit": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720",
+      "w2v-bert-config.json": "f5572bd5998b68182e9c328a43127ed21fed687f6910497136b91a4e3b0e3675"
+    },
+    "window_samples": [
+      24000,
+      72000
+    ],
+    "wpe_code_sha256": "8d5dbe3c12c54eedc253c766342f3cec040670e7dcaebe8f0998afc590e3bfb7"
+  }
+}

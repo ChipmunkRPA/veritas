@@ -1,0 +1,281 @@
+{
+  "code_sha256": {
+    "image_reference_delivery_envelope_lama.py": "31e8e21e3dfc88952d1d0df8677a8fc6c8cf2f2579b10013cdef10fba54654fc",
+    "image_reference_monotone_jpeg_confirmation.py": "93277f6e3d2ffe19801eb0dd0ec2a059a7028483b83122b44f0294406c72b18b",
+    "image_residual_encoder_transfer.py": "0b7d9bf7d41e9784062e815673db8f766b1769f6e1bc8ccb402b5840db5c429f",
+    "image_residual_template_transfer.py": "db06d8cd1e81aab1005d8c6668bddc24855e7297c76d8706e820909e771f9d76",
+    "jpeg_dq.py": "3b176132b5c63ac062f2f53aa9d7dc2c766d4c92c1818825d23d40751bbd9f0e"
+  },
+  "design": {
+    "admission": "At least three additional useful deliveries in at least two held photo groups, at most two additional flagged ordinary files across at most one additional group. Further independent replication needed before use.",
+    "cells": 16,
+    "channels": "Luma, red-minus-luma and blue-minus-luma. Signed full-image phase means normalized by cell residual RMS.",
+    "confidence_weight": 0,
+    "content_distance_maximum": 1.35,
+    "cutoff": "Strictly exceed the second-highest of eight development-source ordinary maxima, with a floor of 0.15. No edit scores used in cutoff selection.",
+    "denoise_sigma": 1.1,
+    "inputs": "One decoded JPEG75, 4:2:0. The earlier copy, role and exact changed-pixel mask are never passed to the probe.",
+    "minimum_chebyshev_separation_in_cells": 5,
+    "minimum_expected_projection": 0.075,
+    "minimum_peer_quadrants": 3,
+    "minimum_template_cosine": 0.6,
+    "minimum_template_norm": 0.1,
+    "neighbour_limit": 144,
+    "peer_cells_per_fold": 16,
+    "periods": [
+      2,
+      4,
+      8
+    ],
+    "reference": "Fit two distant, alternating spatial folds matched by brightness, coarse texture and chroma. Measure shortfall against the lower cross-fold median projection, with a joint spread floor of 0.08.",
+    "region": "At least 65% supported cells, 0.3\u201312% image area, side ratio at most 3, sides 2/3/4/5/6/8/10 cells. Maximum sum of cell shortfall above 0.35 divided by the square root of the number of cells; unsupported cells contribute zero.",
+    "useful": "Native changed-pixel IoU at least 0.30 and recall at least 0.50."
+  },
+  "development_groups": 8,
+  "development_sha256": "d314fb8f59a1412c7f9095b7e469d30e7186439562cb0e905d4956d4d1e932c3",
+  "exact_replays": 248,
+  "freeze_sha256": "95ae64f41c21b3ac35c7b10bfe5aa715397a8266ec64f381bad32d71b8c3d98b",
+  "held_groups": 25,
+  "held_metrics": {
+    "admission": {
+      "additional_ordinary_flags": 5,
+      "additional_ordinary_groups": 3,
+      "additional_useful_files": 0,
+      "additional_useful_groups": 0,
+      "passed": false
+    },
+    "aligned_luma": {
+      "ordinary_flagged": 5,
+      "ordinary_groups": 5,
+      "roles": {
+        "feathered": {
+          "files": 25,
+          "flagged": 0,
+          "flagged_groups": 0,
+          "useful": 0
+        },
+        "global_resize": {
+          "files": 25,
+          "flagged": 0,
+          "flagged_groups": 0,
+          "useful": 0
+        },
+        "local_blur": {
+          "files": 25,
+          "flagged": 0,
+          "flagged_groups": 0,
+          "useful": 0
+        },
+        "local_copy": {
+          "files": 25,
+          "flagged": 0,
+          "flagged_groups": 0,
+          "useful": 0
+        },
+        "local_tone": {
+          "files": 25,
+          "flagged": 0,
+          "flagged_groups": 0,
+          "useful": 0
+        },
+        "original": {
+          "files": 25,
+          "flagged": 0,
+          "flagged_groups": 0,
+          "useful": 0
+        },
+        "second_jpeg": {
+          "files": 25,
+          "flagged": 5,
+          "flagged_groups": 5,
+          "useful": 0
+        },
+        "sharp": {
+          "files": 25,
+          "flagged": 0,
+          "flagged_groups": 0,
+          "useful": 0
+        }
+      }
+    },
+    "luma_or_template": {
+      "ordinary_flagged": 10,
+      "ordinary_groups": 8,
+      "roles": {
+        "feathered": {
+          "files": 25,
+          "flagged": 2,
+          "flagged_groups": 2,
+          "useful": 0
+        },
+        "global_resize": {
+          "files": 25,
+          "flagged": 1,
+          "flagged_groups": 1,
+          "useful": 0
+        },
+        "local_blur": {
+          "files": 25,
+          "flagged": 2,
+          "flagged_groups": 2,
+          "useful": 0
+        },
+        "local_copy": {
+          "files": 25,
+          "flagged": 0,
+          "flagged_groups": 0,
+          "useful": 0
+        },
+        "local_tone": {
+          "files": 25,
+          "flagged": 0,
+          "flagged_groups": 0,
+          "useful": 0
+        },
+        "original": {
+          "files": 25,
+          "flagged": 1,
+          "flagged_groups": 1,
+          "useful": 0
+        },
+        "second_jpeg": {
+          "files": 25,
+          "flagged": 6,
+          "flagged_groups": 6,
+          "useful": 0
+        },
+        "sharp": {
+          "files": 25,
+          "flagged": 2,
+          "flagged_groups": 2,
+          "useful": 0
+        }
+      }
+    },
+    "template": {
+      "ordinary_flagged": 6,
+      "ordinary_groups": 4,
+      "roles": {
+        "feathered": {
+          "files": 25,
+          "flagged": 2,
+          "flagged_groups": 2,
+          "useful": 0
+        },
+        "global_resize": {
+          "files": 25,
+          "flagged": 1,
+          "flagged_groups": 1,
+          "useful": 0
+        },
+        "local_blur": {
+          "files": 25,
+          "flagged": 2,
+          "flagged_groups": 2,
+          "useful": 0
+        },
+        "local_copy": {
+          "files": 25,
+          "flagged": 0,
+          "flagged_groups": 0,
+          "useful": 0
+        },
+        "local_tone": {
+          "files": 25,
+          "flagged": 0,
+          "flagged_groups": 0,
+          "useful": 0
+        },
+        "original": {
+          "files": 25,
+          "flagged": 1,
+          "flagged_groups": 1,
+          "useful": 0
+        },
+        "second_jpeg": {
+          "files": 25,
+          "flagged": 2,
+          "flagged_groups": 2,
+          "useful": 0
+        },
+        "sharp": {
+          "files": 25,
+          "flagged": 2,
+          "flagged_groups": 2,
+          "useful": 0
+        }
+      }
+    },
+    "ungated_template": {
+      "ordinary_flagged": 150,
+      "ordinary_groups": 25,
+      "roles": {
+        "feathered": {
+          "files": 25,
+          "flagged": 25,
+          "flagged_groups": 25,
+          "useful": 0
+        },
+        "global_resize": {
+          "files": 25,
+          "flagged": 25,
+          "flagged_groups": 25,
+          "useful": 0
+        },
+        "local_blur": {
+          "files": 25,
+          "flagged": 25,
+          "flagged_groups": 25,
+          "useful": 0
+        },
+        "local_copy": {
+          "files": 25,
+          "flagged": 25,
+          "flagged_groups": 25,
+          "useful": 0
+        },
+        "local_tone": {
+          "files": 25,
+          "flagged": 25,
+          "flagged_groups": 25,
+          "useful": 0
+        },
+        "original": {
+          "files": 25,
+          "flagged": 25,
+          "flagged_groups": 25,
+          "useful": 0
+        },
+        "second_jpeg": {
+          "files": 25,
+          "flagged": 25,
+          "flagged_groups": 25,
+          "useful": 0
+        },
+        "sharp": {
+          "files": 25,
+          "flagged": 25,
+          "flagged_groups": 25,
+          "useful": 0
+        }
+      }
+    }
+  },
+  "held_sha256": "0ef315913ce6df5a52557b2c8e7427ca0654156437d9693e15c372ad2a9b026c",
+  "held_template_supported_files": 200,
+  "previously_exposed_plan_sha256": [
+    "35e3b219ba6908d3ae4ad213049800db205541c4b560fc42e48527754842de35",
+    "318a2b98fb4d62a3a0ebd039cda708d2ee4d575068577de2c63fda742632bd55"
+  ],
+  "qualified_roster_sha256": [
+    "0901ace2a3abaa09584f70ae426d328b74a5cc1cba6ca877fc753fb32ee865c7",
+    "2fd9fdbbb156182fc0c5234c29de799daf5c0f2746cbc53c55aeba6fe0acaa00"
+  ],
+  "runtime": {
+    "numpy": "2.2.6",
+    "opencv": "5.0.0",
+    "pillow": "12.3.0"
+  },
+  "schema": "chipmunk.image-residual-template-transfer/1",
+  "scoring_point": 4.982267372310162
+}

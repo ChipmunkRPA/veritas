@@ -808,8 +808,9 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.getByAltText('P01: page 2 original crop').getAttribute('src')).toContain(`${'e'.repeat(64)}.png`)
   })
 
-  it('shows raw pattern ratios with their actual threshold direction and exact token context record', () => {
+  it('shows raw pattern ratios and their direction without an authorship confidence or cutoff', () => {
     const set = structuredClone(document)
+    set.packets[0].limitations = ['Each check uses its own recorded operating threshold. Threshold direction is not a validated probability or proof of authorship.']
     set.packets[0].supporting_windows = [{ ...document.packets[0].supporting_windows[0], score: 1.2,
       score_kind: 'perplexity_ratio', threshold: 0.9, ai_when: 'lt', direction: 'opposes_ai',
       inference_contexts: [{ id: 'context-1', source_token_range: [0, 200], scored_token_range: [0, 200],
@@ -817,9 +818,11 @@ describe('ordinary multimedia evidence', () => {
         token_ids_sha256: 'b'.repeat(64), anchor_token_count: 1, context_limit: 1024, stride: 768 }] }]
     show(set)
     expect(screen.getByText(/raw writing-pattern ratio/)).toBeTruthy()
-    expect(screen.getByText(/Opposing response for this input/)).toBeTruthy()
-    expect(screen.getByText(/Ratios below 0.9/)).toBeTruthy()
+    expect(screen.getByText('1.200')).toBeTruthy()
+    expect(screen.getByText(/No AI-like flag for this input/)).toBeTruthy()
+    expect(screen.getByText(/carries no passage-level authorship confidence/)).toBeTruthy()
     expect(screen.getByText(/Actual token context \[0, 200\)/)).toBeTruthy()
+    expect(screen.queryByText(/Ratios below 0.9|recorded operating threshold|Disagreement is retained/)).toBeNull()
     expect(screen.queryByText(/120%/)).toBeNull()
   })
 

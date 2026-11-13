@@ -96,7 +96,7 @@ def _stage(db: Session, store: ObjectStore, analysis_id: str, name: str) -> tupl
     return json.loads(_verified(store, art.sha256)), art.sha256
 
 
-def _records(db: Session, store: ObjectStore, analysis: Analysis, result: dict) -> tuple[FrameTable, dict, dict, list, dict | None, dict | None]:
+def _records(db: Session, store: ObjectStore, analysis: Analysis, result: dict) -> tuple[FrameTable, dict, dict, list, dict | None, dict | None, dict | None]:
     probe, render = _stage(db, store, analysis.id, "probe"), _stage(db, store, analysis.id, "render")
     sampling = result.get("manifest", {}).get("sampling", {})
     if (probe is None or render is None or sampling.get("frame_anchor_version") != ANCHOR_VERSION
@@ -141,7 +141,13 @@ def _records(db: Session, store: ObjectStore, analysis: Analysis, result: dict) 
         raise PacketIntegrityError("Picture-change record differs from its published commitment")
     if commitment is not None:
         source[scene_return_binding.COMMITMENT] = commitment
-    return table, source, by_index, [{"stage": "probe", "sha256": probe[1]}, {"stage": "render", "sha256": render[1]}], hold, scene
+    scene_coverage = render[0].get(scene_return_binding.COVERAGE)
+    digest = sampling.get(scene_return_binding.COVERAGE_COMMITMENT)
+    if (canonical_hash(scene_coverage) if scene_coverage is not None else None) != digest:
+        raise PacketIntegrityError("Picture-change coverage differs from its published commitment")
+    if digest is not None:
+        source[scene_return_binding.COVERAGE_COMMITMENT] = digest
+    return table, source, by_index, [{"stage": "probe", "sha256": probe[1]}, {"stage": "render", "sha256": render[1]}], hold, scene, scene_coverage
 
 
 def _signals(result: dict, exhibit: dict) -> list[dict]:
@@ -651,7 +657,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     if canonical_hash(result) != analysis.result_hash or result.get("input", {}).get("sha256") != analysis.sha256:
         raise PacketIntegrityError("Video result or original identity does not match")
     store.verify(analysis.sha256)
-    table, source, anchors, records, hold, scene = _records(db, store, analysis, result)
+    table, source, anchors, records, hold, scene, scene_coverage = _records(db, store, analysis, result)
     candidates, scored_frames, omitted = _observations(db, store, analysis, result, table, anchors)
     window_candidates, window_frames = _window_observations(result, table, anchors)
     sequence_candidates, sequence_frames = _sequence_observations(result, table, source, anchors)
@@ -688,6 +694,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                                 "The contact sheet shows neighbouring scored samples, not necessarily consecutive video frames."]}
     if repeat := face_detail_coverage(result, table, anchors):
         document["coverage"]["face_detail_repeat"] = repeat
+    if scene_coverage is not None:
+        document["coverage"][scene_return_binding.COVERAGE] = scene_coverage
     try:
         if brief_review := face_return_coverage.from_result(result, len(table)):
             document["coverage"][face_return_coverage.KEY] = brief_review
@@ -1001,6 +1009,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
     try:
         picture_hold_binding.validate(document)
         scene_return_binding.validate(document, canonical_hash=canonical_hash)
+        scene_return_binding.validate_coverage(document, canonical_hash=canonical_hash)
         face_return_binding.validate_set(document)
         face_boundary_binding.validate_set(document)
         face_spatial_cut_binding.validate_set(document)

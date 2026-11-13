@@ -86,6 +86,8 @@ def _settings(monkeypatch, *, enabled):
     monkeypatch.setattr(settings, "text_detector_mode", "candidate")
     monkeypatch.setattr(settings, "text_window_sentences", 3)
     monkeypatch.setattr(settings, "text_isolated_paragraph_review", False)
+    monkeypatch.setattr(settings, "text_passage_position_review", False)
+    monkeypatch.setattr(settings, "text_long_passage_position_review", False)
     monkeypatch.setattr(settings, "text_matched_context_review", enabled)
 
 

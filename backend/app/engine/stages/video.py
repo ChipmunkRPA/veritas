@@ -79,7 +79,7 @@ from app.detectors.video.shots import METHOD as SHOT_METHOD
 from app.detectors.video.shots import ShotDetector, detect_shots
 from app.engine import card_copy, provenance_gate
 from app.engine.boundary import DetectorTimeout
-from app.engine.detector import Lane, Modality, StageOutputs
+from app.engine.detector import Lane, Modality, Profile, StageOutputs
 from app.engine.exhibits import exhibit_payload_hash
 from app.engine.fusion import abstain, decisive
 from app.engine.fusion.runtime import DECLARED_AI_VERBAL
@@ -256,37 +256,52 @@ def shots(ctx: StageContext) -> dict[str, Any]:
     """Shot boundaries on the ≤ 640 px stream (`video/shots.py`) and the sampling plan rebuilt with clips per detected shot
     (same seed and legacy set as the probe plan). Persisted."""
     probed = ctx.outputs["probe"]
+    enabled = settings.environment == "dev" and settings.video_scene_return_review
     if not probed.get("frame_table") or not probed.get("plan"):
-        return {"method": SHOT_METHOD, "boundaries": [], "ranges": [], "plan": None}
+        outcome = {"method": SHOT_METHOD, "boundaries": [], "ranges": [], "plan": None}
+        if enabled:
+            outcome[scene_return_binding.COVERAGE] = scene_return_binding.coverage("unavailable", reason="unsupported_video")
+        return outcome
     table = FrameTable.from_json(probed["frame_table"])
     path = common.media_path(ctx)
     info = probed["info"]
-    review = (settings.environment == "dev" and settings.video_scene_return_review
-              and (info.get("codec"), info.get("pix_fmt"), info.get("codec_tag")) == ("hevc", "yuv420p", "hvc1")
+    review = (enabled and (info.get("codec"), info.get("pix_fmt"), info.get("codec_tag")) in scene_return_binding.ENCODINGS
               and scene_return.supported(table) and source_carrier(path) == "mp4")
     stream = decode_stream(path, table, check=ctx.check)
-    measured = None
+    outcome = {}
     if review:
         # Score the same low-resolution stream without touching the shot plan or face routing.
         detector = ShotDetector(table)
+        verified = 0
+        exhausted = False
 
         def observe():
+            nonlocal verified, exhausted
             for frame in stream:
                 detector.update(frame.index, frame.rgb)
+                if (frame.index == verified < len(table) and frame.pts_verified and frame.pts == table.pts[verified]):
+                    verified += 1
                 yield frame
+            exhausted = True
 
         measured = scene_return.detect(observe(), table)
         for frame in stream:
             detector.update(frame.index, frame.rgb)
+        if measured is not None:
+            outcome[scene_return_binding.KEY] = {"start": measured.start, "end": measured.stop, "tiles": list(measured.tiles)}
+        elif exhausted and verified == len(table):
+            outcome[scene_return_binding.COVERAGE] = scene_return_binding.coverage("no_match", frames_scanned=verified)
+        else:
+            outcome[scene_return_binding.COVERAGE] = scene_return_binding.coverage(
+                "unavailable", reason="incomplete_decode", frames_scanned=verified)
     else:
         detector = detect_shots(stream, table)
+        if enabled:
+            outcome[scene_return_binding.COVERAGE] = scene_return_binding.coverage("unavailable", reason="unsupported_video")
     base = probed["plan"]
     plan = sampling.build_plan(table, ctx.profile, seed=base["seed"], legacy_frames=len(base["legacy"]["frames"]),
                                shots=detector.ranges())
-    outcome = {**detector.as_json(), "plan": plan}
-    if measured is not None:
-        outcome[scene_return_binding.KEY] = {"start": measured.start, "end": measured.stop, "tiles": list(measured.tiles)}
-    return outcome
+    return {**detector.as_json(), "plan": plan, **outcome}
 
 
 def tracks(ctx: StageContext) -> dict[str, Any]:
@@ -1098,8 +1113,21 @@ def render(ctx: StageContext) -> dict[str, Any]:
                                         check=lambda: ctx.check("repeated-picture inspection"), remaining_s=ctx.deadline.remaining(),
                                         sequence_review=True, motion_encoding=(info.get("codec"), info.get("pix_fmt")), mouth_review=True)
     scene = None
+    scene_coverage = None
+    shot_output = ctx.outputs.get("shots") or {}
+    if settings.environment == "dev" and settings.video_scene_return_review:
+        if provenance_gate.stop(ctx):
+            scene_coverage = scene_return_binding.coverage("unavailable", reason="provenance")
+        elif frame_store is None:
+            scene_coverage = scene_return_binding.coverage("unavailable", reason="unsupported_video")
+        elif ctx.profile == Profile.QUICK:
+            scene_coverage = scene_return_binding.coverage("unavailable", reason="profile")
+        elif not shot_output:
+            scene_coverage = scene_return_binding.coverage("unavailable", reason="scan_unavailable")
+        else:
+            scene_coverage = shot_output.get(scene_return_binding.COVERAGE)
     if frame_store is not None and not provenance_gate.stop(ctx):
-        pending = (ctx.outputs.get("shots") or {}).get(scene_return_binding.KEY)
+        pending = shot_output.get(scene_return_binding.KEY)
         remaining = ctx.deadline.remaining()
         if pending is not None and (remaining is None or remaining > 2):
             found = scene_return.SceneReturn(pending["start"], pending["end"], tuple(pending["tiles"]))
@@ -1113,6 +1141,10 @@ def render(ctx: StageContext) -> dict[str, Any]:
                     scene = scene_return_binding.record(found, frame_store.table, [by_index[i] for i in found.anchors])
             except DecodeError:
                 ctx.log.warning("video.scene_return_frames_unavailable")
+        if pending is not None:
+            scene_coverage = (scene_return_binding.coverage("matched", frames_scanned=scene_return_binding.FRAME_COUNT)
+                              if scene is not None else scene_return_binding.coverage(
+                                  "unavailable", reason="missing_anchors", frames_scanned=scene_return_binding.FRAME_COUNT))
     decode_output = ctx.outputs.get("decode") or {}
     decoded_audio = decode_output.get("audio") or {}
     stereo_sha = decoded_audio.get("stereo_context_sha256")
@@ -1123,6 +1155,7 @@ def render(ctx: StageContext) -> dict[str, Any]:
             "frame_anchor_version": "stream-pts-rgb24/1", "frame_anchors": anchors,
             "picture_hold": hold,
             **({scene_return_binding.KEY: scene} if scene is not None else {}),
+            **({scene_return_binding.COVERAGE: scene_coverage} if scene_coverage is not None else {}),
             "audio_mapping": ctx.state.get("video_audio_mapping"), "audio_status": decoded_audio.get("status"),
             "audio_stereo_context_sha256": stereo_sha}
 
@@ -1150,6 +1183,8 @@ def publish(ctx: StageContext) -> dict[str, Any]:
         result.manifest.sampling["picture_hold_sha256"] = canonical_hash(rendered["picture_hold"])
     if rendered.get(scene_return_binding.KEY) is not None:
         result.manifest.sampling[scene_return_binding.COMMITMENT] = canonical_hash(rendered[scene_return_binding.KEY])
+    if rendered.get(scene_return_binding.COVERAGE) is not None:
+        result.manifest.sampling[scene_return_binding.COVERAGE_COMMITMENT] = canonical_hash(rendered[scene_return_binding.COVERAGE])
     for entry in (ctx.outputs.get("detect") or {}).get("detectors", []):
         if entry["detector_id"] != APPEARANCE_REVIEW:
             continue

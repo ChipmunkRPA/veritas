@@ -169,11 +169,12 @@ def encode_report(client, aid, source, evidence, images, folder):
     return {"source_frame_crop_images_verified": len(images), "signed_original_replay_verified": True}
 
 
-def configure(output, root):
+def configure(output, root, *, resume=False):
     if "app.core.config" in sys.modules:
         raise RuntimeError("Set up the isolated smoke test before importing application settings")
     output = output.resolve()
-    output.mkdir(mode=0o700, exist_ok=False)
+    if not resume:
+        output.mkdir(mode=0o700, exist_ok=False)
     data = output / "app"
     os.environ.update(VERITAS_DATA_DIR=str(data), VERITAS_DATABASE_URL=f"sqlite:///{data}/veritas.db",
         VERITAS_MODELS_DIR=str(root / "models"), VERITAS_HF_HOME=str(root / "models/hf"), VERITAS_DEVICE="cpu",

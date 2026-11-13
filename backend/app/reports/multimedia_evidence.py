@@ -123,13 +123,14 @@ def _validate(document: dict, *, kind: str, analysis_id: str, revision: int, res
     source = document["source"]
     sampling = result.get("manifest", {}).get("sampling", {})
     if kind == "video":
-        from app.evidence.scene_return_binding import COMMITMENT
+        from app.evidence import scene_return_binding
 
         if (sampling.get("frame_anchor_version") != "stream-pts-rgb24/1"
                 or any(source.get(key) != sampling.get(key) or not source.get(key)
                        for key in ("frame_table_sha256", "frame_anchor_sha256"))
                 or source.get("timeline_origin_s") != sampling.get("timeline_origin_s")
-                or source.get(COMMITMENT) != sampling.get(COMMITMENT)
+                or any(source.get(key) != sampling.get(key)
+                       for key in (scene_return_binding.COMMITMENT, scene_return_binding.COVERAGE_COMMITMENT))
                 or ("picture_hold" in document and source.get("picture_hold_sha256") != sampling.get("picture_hold_sha256"))):
             raise ObjectIntegrityError("Video evidence does not match the published source-frame commitments")
     elif kind == "audio":
@@ -215,6 +216,8 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
         if (canonical_hash(scene) if scene is not None else None) != source.get(scene_return_binding.COMMITMENT):
             raise ValueError("Picture-change record differs from the frozen render output")
         scene_return_binding.validate(document, scene, pts=table.pts, canonical_hash=canonical_hash)
+        if records["render"].get(scene_return_binding.COVERAGE) != document["coverage"].get(scene_return_binding.COVERAGE):
+            raise ValueError("Picture-change coverage differs from the frozen render output")
     except (ValueError, KeyError, TypeError) as error:
         raise ObjectIntegrityError("Picture evidence differs from the recorded native inspection") from error
     for packet in document["packets"]:
@@ -924,6 +927,9 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
         else:
             from app.evidence import document_paragraph_priority
 
+            row["limitations"] = [line for line in row["limitations"] if line != (
+                "Each check uses its own recorded operating threshold. "
+                "Threshold direction is not a validated probability or proof of authorship.")]
             row["images"] = [plate(role, asset, f"Page {asset.get('page', '?')} - {asset.get('role', role)}")
                              for role, asset in sorted(packet["artifacts"].items())]
             focus, context = packet["focus"], packet["context"]
@@ -970,13 +976,13 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                                        "token_coverage": copy.deepcopy(window.get("token_coverage", {})),
                                        "text": None if withheld else window["text"]}
                 context_window.update(score_kind=window.get("score_kind", "classifier_probability"),
-                                      threshold=window.get("threshold", 0.5), ai_when=window.get("ai_when", "gte"),
                                       input_semantics=window.get("input_semantics"),
                                       scored_spans=copy.deepcopy(window.get("scored_spans", [])),
                                       tokens_scored=window.get("tokens_scored"), neighbor_expansion=window.get("neighbor_expansion"))
+                cutoff = window.get("threshold", 0.5)  # Older packets may not have an explicit direction.
+                lower_supports = window.get("ai_when", "lt" if context_window["score_kind"] == "perplexity_ratio" else "gte") == "lt"
                 supports = (window["direction"] == "supports_ai" if window.get("direction") else
-                            window["score"] < context_window["threshold"] if context_window["ai_when"] == "lt"
-                            else window["score"] >= context_window["threshold"])
+                            window["score"] < cutoff if lower_supports else window["score"] >= cutoff)
                 context_window["supports_ai"] = supports
                 if "matched_context_selected" in window:
                     context_window["matched_context_selected"] = window["matched_context_selected"]
@@ -1114,6 +1120,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "similarity_context_pointer": "/audio/similarity_context" if kind == "video" else "/similarity_context",
             "repeated_passages": repeated_passages,
             "picture_hold": copy.deepcopy(document.get("picture_hold")),
+            "scene_return_review": (document.get("coverage") or {}).get("scene_return_review") if kind == "video" else None,
             "brief_face_review": (document.get("coverage") or {}).get("brief_face_review") if kind == "video" else None,
             "brief_face_windows": (document.get("coverage") or {}).get("brief_face_windows") if kind == "video" else None,
             "picture_frame_count": document["source"].get("frame_count", 0) if kind == "video" else 0,

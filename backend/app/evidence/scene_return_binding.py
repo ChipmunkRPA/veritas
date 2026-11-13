@@ -5,10 +5,59 @@ from fractions import Fraction
 SCHEMA = "picture-change-return/1"
 KEY = "scene_return"
 COMMITMENT = "scene_return_sha256"
+COVERAGE = "scene_return_review"
+COVERAGE_COMMITMENT = "scene_return_review_sha256"
 PACKET_ID = "VSC01"
 TITLE = "Short picture change and return"
 INTERPRETATION = "An ordinary edit can produce this pattern. The observation carries no weight in overall AI confidence."
 ROLES = ("before", "during", "after")
+FRAME_COUNT = 120
+ENCODINGS = frozenset({("hevc", "yuv420p", "hvc1"), ("h264", "yuv420p", "avc1")})
+LIMITATION = "This check looks for a short change followed by a return to a similar picture. It carries no weight in overall AI confidence."
+DESCRIPTIONS = {
+    "unsupported_video": "This check requires a supported four-second 720p H.264 or HEVC MP4 with verified timing at 30 frames per second.",
+    "profile": "The selected analysis profile did not run this check.",
+    "provenance": "The analysis stopped at verified provenance before this observation was issued.",
+    "scan_unavailable": "This check could not complete during the analysis.",
+    "incomplete_decode": "The decoder could not verify all 120 frames in sequence, so the check reached no result.",
+    "missing_anchors": "A possible change was measured, but its before, during and after source frames could not all be verified.",
+}
+
+
+def coverage(status, *, reason=None, frames_scanned=0):
+    if status == "matched":
+        description = "Checked all 120 source frames and recorded a short picture change with three verified source images."
+    elif status == "no_match":
+        description = "Checked all 120 source frames. No qualifying short picture change followed by a return was found."
+    else:
+        description = DESCRIPTIONS[reason]
+    return {"status": status, "reason": reason, "frames_scanned": frames_scanned,
+            "packet_id": PACKET_ID if status == "matched" else None, "observation": description,
+            "limitation": LIMITATION, "affects_overall_confidence": False}
+
+
+def validate_coverage(document, *, canonical_hash):
+    source = document["source"]
+    digest = source.get(COVERAGE_COMMITMENT)
+    value = (document.get("coverage") or {}).get(COVERAGE)
+    if digest is None and value is None:
+        return
+    if not isinstance(value, dict) or canonical_hash(value) != digest:
+        raise ValueError("Picture-change coverage differs from its source commitment")
+    status, reason, count = value["status"], value["reason"], value["frames_scanned"]
+    supported = (source["width"], source["height"], source["frame_count"]) == (1280, 720, FRAME_COUNT)
+    table = document["coverage"]
+    complete = (status in {"matched", "no_match"} and reason is None) or (status == "unavailable" and reason == "missing_anchors")
+    if (type(count) is not int or not 0 <= count <= FRAME_COUNT
+            or (status == "matched") != (source.get(COMMITMENT) is not None)
+            or (complete and count != FRAME_COUNT)
+            or (not complete and (status != "unavailable" or reason not in DESCRIPTIONS))
+            or (not complete and reason != "incomplete_decode" and count != 0)
+            or ((complete or reason == "incomplete_decode")
+                and (not supported or table.get("table_truncated") or table.get("interpolated_frame_indices")))
+            or value.get("affects_overall_confidence") is not False
+            or value != coverage(status, reason=reason, frames_scanned=count)):
+        raise ValueError("Picture-change coverage misrepresents the recorded inspection")
 
 
 def frames_for(start, end):

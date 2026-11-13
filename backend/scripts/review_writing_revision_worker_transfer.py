@@ -252,6 +252,7 @@ def publish(prior_path, fit_path, held_paths, point_path, batch_path, output):
     held = [source.read(path) for path in held_paths]
     source.require(fit["schema"] == SCHEMA and fit["phase"] == "fit" and not fit["limited"] and matches_points(fitted, fit_path),
                    "Invalid full fit output")
+    recovered = []
     for index, batch in enumerate(held):
         source.require(batch["schema"] == SCHEMA and batch["phase"] == "held" and batch["batch"] == index
                        and not batch["limited"] and fit["device"] == batch["device"]
@@ -260,6 +261,9 @@ def publish(prior_path, fit_path, held_paths, point_path, batch_path, output):
                        and batch["points_sha256"] == source.digest(point_path)
                        and batch["batches_sha256"] == source.digest(batch_path)
                        and [row["record_id"] for row in batch["rows"]] == batch_plan["batches"][index], "Unbound held worker output")
+        retained = batch.get("recovered_cases", 0)
+        source.require(type(retained) is int and 0 <= retained <= len(batch["rows"]), "Invalid recovered batch prefix")
+        recovered.append(retained)
     rows = attach_sources([*fit["rows"], *(row for batch in held for row in batch["rows"])], prior)
     validate_rows(rows, prior, len(held))
     receipt = {"schema": PUBLIC_SCHEMA, "prior_sha256": source.digest(prior_path), "source_roster_sha256": fit["source_roster_sha256"],
@@ -267,6 +271,7 @@ def publish(prior_path, fit_path, held_paths, point_path, batch_path, output):
                "runner_sha256": {"fit": fit["runner_sha256"], "held": [batch["runner_sha256"] for batch in held]},
                "fitted": fitted, "device": fit["device"], "planned_batches": len(batch_plan["batches"]),
                "completed_batches": len(held), "batch_plan_sha256": source.digest(batch_path),
+               "recovered_held_prefix_rows": recovered,
                "runtime_s": {"fit": fit["worker_duration_s"], "held": [batch["worker_duration_s"] for batch in held]},
                "payment": {"amount_cents": 999, "currency": "usd", "unpaid_jobs": 0, "simulated_paid_jobs": len(rows)},
                "rows": rows, "results": summarize(rows, fitted["cutoffs"])}
@@ -288,6 +293,11 @@ def review(path, prior_path):
         return result
     source.require(data["planned_batches"] == len(expected_batches(prior))
                    and data["completed_batches"] == len(data["worker_sha256"]["held"]), "Invalid batch coverage")
+    if (recovered := data.get("recovered_held_prefix_rows")) is not None:
+        batches = expected_batches(prior)[:data["completed_batches"]]
+        source.require(len(recovered) == len(batches)
+                       and all(type(count) is int and 0 <= count <= len(batch)
+                               for count, batch in zip(recovered, batches, strict=True)), "Invalid recovered batch prefixes")
     validate_rows(rows, prior, data["completed_batches"])
     cutoffs = fit_cutoffs([row for row in rows if row["role"] == "fit"])
     source.require(cutoffs == data["fitted"]["cutoffs"] and data["fitted"]["fit_worker_sha256"] == data["worker_sha256"]["fit"],

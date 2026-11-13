@@ -1,0 +1,205 @@
+{
+  "confidence_weight": 0,
+  "delivery_scope": {
+    "carrier": "MP4",
+    "codec": "H.264",
+    "frames": 120,
+    "frames_per_second": "30/1",
+    "height": 720,
+    "pixel_format": "yuv420p",
+    "rotation": 0,
+    "tag": "avc1",
+    "test_audio_streams": 0,
+    "test_origin_ticks": 0,
+    "test_time_base": "1/30000",
+    "width": 1280
+  },
+  "detector_sha256": "716e4c9134bf0f7e7c32e697944736dd77d3b0bc88de11ac33e6a97127c73a0d",
+  "earlier_hevc_decisions_sha256": "2418435d3db082582d99a753cbf220a0667ca5100c747d25b899273ed96c247a",
+  "earlier_hevc_native_rgb_anchors_verified": 42,
+  "earlier_hevc_timestamps_verified": 6720,
+  "ffmpeg_version": "ffmpeg version 7.0.2 Copyright (c) 2000-2024 the FFmpeg developers",
+  "paired_inputs": "56 previously evaluated HEVC deliveries re-encoded without changing any rational frame timestamp or frame order. Four earlier webcam actor pairs, tested in both directions. These are repeated sources.",
+  "recipes": [
+    {
+      "admission_passed": true,
+      "by_role": {
+        "camera_shift": {
+          "exact_expected_ranges": 0,
+          "files": 8,
+          "unexpected_ranges": 0
+        },
+        "full_camera": {
+          "exact_expected_ranges": 0,
+          "files": 8,
+          "unexpected_ranges": 0
+        },
+        "grade": {
+          "exact_expected_ranges": 0,
+          "files": 8,
+          "unexpected_ranges": 0
+        },
+        "layout_cut": {
+          "exact_expected_ranges": 8,
+          "files": 8,
+          "unexpected_ranges": 0
+        },
+        "one_way_hard_cut": {
+          "exact_expected_ranges": 0,
+          "files": 12,
+          "unexpected_ranges": 0
+        },
+        "reflected_camera_retime": {
+          "exact_expected_ranges": 0,
+          "files": 6,
+          "unexpected_ranges": 0
+        },
+        "speaker_and_layout_cut": {
+          "exact_expected_ranges": 6,
+          "files": 8,
+          "unexpected_ranges": 0
+        },
+        "speaker_only": {
+          "exact_expected_ranges": 0,
+          "files": 8,
+          "unexpected_ranges": 0
+        },
+        "unchanged": {
+          "exact_expected_ranges": 0,
+          "files": 8,
+          "unexpected_ranges": 0
+        }
+      },
+      "comparison_run_results_sha256": "b8660177d507db3fc5bec02d5e4f860a7b7f9df964f15f273590f63ed516f125",
+      "encoder_arguments": [
+        "-preset",
+        "veryfast",
+        "-crf",
+        "21",
+        "-map_metadata",
+        "-1",
+        "-an",
+        "-sn",
+        "-dn",
+        "-c:v",
+        "libx264",
+        "-threads",
+        "1",
+        "-pix_fmt",
+        "yuv420p",
+        "-fps_mode",
+        "passthrough",
+        "-enc_time_base",
+        "demux",
+        "-video_track_timescale",
+        "30000",
+        "-tag:v",
+        "avc1",
+        "-movflags",
+        "+faststart"
+      ],
+      "exact_paired_ranges_retained": 14,
+      "exact_paired_tile_sets_retained": 14,
+      "frame_timestamps_verified": 8880,
+      "freeze_sha256": "b47081eaa53d64596dd6afb59ca8417be339273043d7c06c8b688e09fb31e9c0",
+      "independent_framehash_audit_sha256": "6c9b55c3ca577f9245d1616b33cda9b5786a249e757f8001bdab698523262864",
+      "native_rgb_anchors_verified": 42,
+      "ordinary_deliveries": 58,
+      "ordinary_highlights": 0,
+      "paired_deliveries": 56,
+      "paired_misses_retained": 2,
+      "recipe": "veryfast21",
+      "repeat_output_byte_hashes_and_result_rows": 74,
+      "results_sha256": "1c71bb92a309d2982332a9b1568dd2f92b4db02f6a2b230a1f3da392a838b692",
+      "supplemental_control_sources_sha256": {
+        "camera_retime_panel": "c3fbcdbef1bd912b7d32ba3f29d7fef15df234a5b26bab6e46a03235360388d7",
+        "hard_cut_panel": "dfde672f87c6fd7f72dc42909607ece0278a92fe32244be4ba8a356984f2d812"
+      }
+    },
+    {
+      "admission_passed": true,
+      "by_role": {
+        "camera_shift": {
+          "exact_expected_ranges": 0,
+          "files": 8,
+          "unexpected_ranges": 0
+        },
+        "full_camera": {
+          "exact_expected_ranges": 0,
+          "files": 8,
+          "unexpected_ranges": 0
+        },
+        "grade": {
+          "exact_expected_ranges": 0,
+          "files": 8,
+          "unexpected_ranges": 0
+        },
+        "layout_cut": {
+          "exact_expected_ranges": 8,
+          "files": 8,
+          "unexpected_ranges": 0
+        },
+        "speaker_and_layout_cut": {
+          "exact_expected_ranges": 6,
+          "files": 8,
+          "unexpected_ranges": 0
+        },
+        "speaker_only": {
+          "exact_expected_ranges": 0,
+          "files": 8,
+          "unexpected_ranges": 0
+        },
+        "unchanged": {
+          "exact_expected_ranges": 0,
+          "files": 8,
+          "unexpected_ranges": 0
+        }
+      },
+      "comparison_run_results_sha256": "e23c5c9b9e3221f55df4abcdd7048d4299152c951a5fd60e170bb3608b5fa865",
+      "encoder_arguments": [
+        "-preset",
+        "medium",
+        "-crf",
+        "29",
+        "-map_metadata",
+        "-1",
+        "-an",
+        "-sn",
+        "-dn",
+        "-c:v",
+        "libx264",
+        "-threads",
+        "1",
+        "-pix_fmt",
+        "yuv420p",
+        "-fps_mode",
+        "passthrough",
+        "-enc_time_base",
+        "demux",
+        "-video_track_timescale",
+        "30000",
+        "-tag:v",
+        "avc1",
+        "-movflags",
+        "+faststart"
+      ],
+      "exact_paired_ranges_retained": 14,
+      "exact_paired_tile_sets_retained": 14,
+      "frame_timestamps_verified": 6720,
+      "freeze_sha256": "c258956206d547184899f695205f9c055019e79b7da5717bc41ccd6236d19772",
+      "independent_framehash_audit_sha256": "bf8d358b1c29dfd022bf5845482a27a9a371ebbb34732f68eb888bdaa268d1e2",
+      "native_rgb_anchors_verified": 42,
+      "ordinary_deliveries": 40,
+      "ordinary_highlights": 0,
+      "paired_deliveries": 56,
+      "paired_misses_retained": 2,
+      "recipe": "medium29",
+      "repeat_output_byte_hashes_and_result_rows": 56,
+      "results_sha256": "b7f9919c4295eadd9304973f344aaa2d90523a0440785697ef5917992e29bc79",
+      "supplemental_control_sources_sha256": null
+    }
+  ],
+  "runner_sha256": "f967c696f14403f45eadd610bfd93638d1e707ff6be182049404676aca0eb68c",
+  "schema": "chipmunk.video-scene-return-h264-transfer/1",
+  "supplemental_inputs": "12 one-way cuts at frames 39 and 77, composed from six groups of archived genuine camera pictures, and six reflected retimes from a separate camera-control bank. Source images are verified before scale and timeline conversion to the target H.264 profile."
+}

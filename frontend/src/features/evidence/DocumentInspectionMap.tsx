@@ -2,16 +2,12 @@ import { Fragment, useState } from 'react'
 import { Button } from '../../components/ui'
 import type { DocumentEvidencePacket, DocumentEvidenceWindow } from './multimediaPackets'
 
-function windowInspectionDirection(window: DocumentEvidenceWindow): boolean | null {
+export function windowInspectionDirection(window: DocumentEvidenceWindow): boolean | null {
   if (typeof window.matched_context_selected === 'boolean') return window.score_exact_hex ? window.matched_context_selected : null
   if (window.direction) return window.direction === 'supports_ai'
   const boundary = window.threshold ?? 0.5
   const lowerSupports = window.ai_when === 'lt' || (!window.ai_when && window.score_kind === 'perplexity_ratio')
   return lowerSupports ? window.score < boundary : window.score >= boundary
-}
-
-export function windowSupportsInspection(window: DocumentEvidenceWindow): boolean {
-  return windowInspectionDirection(window) === true
 }
 
 export function passageLocation(packet: DocumentEvidencePacket): string {
@@ -105,7 +101,7 @@ export default function DocumentInspectionMap({ packets, selectedId, onSelect }:
     <p className="mt-2 mb-0 text-small text-text-muted">Select a review location to see the text the check measured, its source and the recorded responses.</p>
     <ol className="m-0 mt-4 p-0 list-none grid gap-2 min-[960px]:grid-cols-2">
       {packets.map((packet) => {
-        const supporting = packet.supporting_windows.filter(windowSupportsInspection).length
+        const supporting = packet.supporting_windows.filter((window) => windowInspectionDirection(window) === true).length
         const opposing = packet.supporting_windows.filter((window) => windowInspectionDirection(window) === false).length
         const basis = packet.inspection_scope?.basis
         const reading = supporting && opposing ? 'Responses disagree' : supporting

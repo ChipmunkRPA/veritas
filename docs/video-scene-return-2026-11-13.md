@@ -7,8 +7,15 @@ browser, PDF and JSON use the same source interval and three exact decoded
 frames from before, during and after the change. This observation carries
 zero AI confidence weight. An ordinary edit can produce the same result.
 
-The optional Full and Deep check covers upright 1280 × 720 HEVC MP4 files
-with the `hvc1` tag, 4:2:0 chroma and exactly 120 verified frames at 30 fps.
+New analyses also record whether all 120 frames were checked, whether
+a matching range was found, and why a check was unavailable when it
+could not be completed. Media Evidence, the Standard PDF and JSON use
+the same record. The optional observation has its own source commitment.
+An older analysis keeps its original recorded evidence.
+
+The optional Full and Deep check covers upright 1280 × 720 MP4 files
+with H.264 (`avc1`) or HEVC (`hvc1`), 8-bit 4:2:0 chroma and exactly
+120 verified frames at 30 fps.
 The check looks for a change lasting 6–24 frames followed by a return to a
 similar picture. It can miss edits outside that range, cuts without a return,
 and changes in low-texture areas. To enable it on a development instance,
@@ -45,6 +52,19 @@ new geometric layouts, durations and lighting and camera-shift controls.
 | Speaker and layout both change | 8 | 0 | 6 |
 | Unchanged, speaker only, camera shift, color grade, full camera | 40 | 0 | 0 |
 
+## H.264 transfer
+
+Two H.264 encodes of the same source panel preserved all 14 exact
+ranges, the supporting tiles, and both misses. Neither encode flagged
+any of the 40 matched ordinary controls. The CRF 21 encode also flagged
+zero of 18 supplemental ordinary clips derived from distinct retained
+sources, including 12 one-way cuts and six continuous retimes.
+The same source material appears in both encodes. This compares delivery
+formats and does not add independent positive examples.
+[Paired carrier ledger](evaluation-panels/video-scene-return-h264-transfer-2026-11-13.json)
+
+## Local application verification
+
 The 14 displayed ranges matched both authored boundaries, including
 the exclusive end. FFmpeg independently reproduced all 6,720
 decoded timestamps and 42 selected source images. The positive and control
@@ -58,6 +78,16 @@ the option disabled produced the same overall decision and omitted the
 picture-change card. All three analyses queued after simulated payment.
 [Scalar ledger](evaluation-panels/video-scene-return-transfer-2026-11-13.json) ·
 [Local application receipt](evaluation-panels/video-scene-return-local-2026-11-13.json)
+
+A separate local check exercised the four coverage outcomes that arise
+from normal uploads. The range with a match displayed three source
+frames, the ordinary camera movement reported a completed scan with
+no match, a 360p H.264 control was reported as unsupported,
+and the Quick profile said the check had not run. Chrome, the PDF and
+JSON agreed on the outcomes, including a matching range on both supported
+carriers. All analyses queued after simulated payment and all signed
+packages verified.
+[Coverage receipt](evaluation-panels/video-scene-return-coverage-2026-11-13.json)
 
 ## Reproduce
 
@@ -79,4 +109,16 @@ export PYTHONPATH=backend OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1
 backend/.venv/bin/python -B -m scripts.video_scene_return_transfer freeze "$run" --prior "$prior"
 backend/.venv/bin/python -B -m scripts.video_scene_return_transfer prepare "$run"
 backend/.venv/bin/python -B -m scripts.video_scene_return_transfer score "$run"
+```
+
+For the paired H.264 test, use that completed HEVC run and separate
+scratch directories for the two encoder recipes.
+
+```sh
+for recipe in veryfast21 medium29; do
+  for phase in run audit; do
+    backend/.venv/bin/python -B -m scripts.video_scene_return_h264_transfer "$phase" \
+      "$scratch/$recipe" --hevc "$run" --recipe "$recipe" || exit 1
+  done
+done
 ```

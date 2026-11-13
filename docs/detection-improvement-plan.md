@@ -97,6 +97,32 @@ integration remains unfinished.
 
 ## Progress on 13 November
 
+- The standalone video picture-change check now states whether the source
+  frames were checked, whether it found a range and why the check was
+  unavailable. Chrome, the PDF and JSON matched on a positive, a supported
+  no-match, an unsupported input and a Quick-profile upload. Two paired H.264
+  encodes retained all 14 exact ranges and flagged zero of 40 matched ordinary
+  controls. A further 18 ordinary H.264 controls yielded zero flags.
+  [Local test](video-scene-return-2026-11-13.md)
+- The [neighbor-predicted mouth study](video-mouth-blind-prediction-2026-11-13.md)
+  found one of 17 authored redraws with the simpler cue and zero with the
+  motion-adjusted cue. The arms flagged 17 and eight of 75 ordinary files.
+  Neither is enabled.
+- The [single-upload residual template](image-residual-template-transfer-2026-11-13.md)
+  found zero useful locations on 50 known removals. Adding it raised ordinary
+  highlights from five to ten of 150 at the frozen points. It remains offline.
+- Writing details in the browser and PDF now explain whether each scored
+  input gave an AI-like flag, whether readings disagreed and where to review
+  the source. The first three new worker batches localized two of 61 changed
+  deliveries under the strict annotation rule and selected all 12 genuine
+  controls for inspection. All 84 document assessments were inconclusive.
+  [Worker comparison](writing-revision-worker-transfer-2026-11-13.md#three-completed-held-batches)
+- [Selective voice cleanup](audio-phonemedf-matched-transfer-2026-11-13.md)
+  flagged 36 of 48 noisy synthetic recordings versus 21 with the original
+  input, and 10 of 24 noisy genuine recordings versus seven. At −5 dB it
+  flagged 15 of 24 synthetic recordings versus eight, and four of 12 genuine
+  recordings versus three. It remains outside the confidence score.
+
 - The [standalone video picture-change check](video-scene-return-2026-11-13.md)
   filled the face-routing gap on eight held layout-only cuts. It also located
   six of eight speaker-plus-layout cuts and flagged none of 40 controls.

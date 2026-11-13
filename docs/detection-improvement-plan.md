@@ -100,6 +100,10 @@ integration remains unfinished.
 - The [cross-format draft comparison](document-mixed-format-comparison-2026-11-13.md)
   adds exact wording evidence for TXT, DOCX and supported PDFs. Public source
   replay checked 60 edited and 60 unchanged comparisons in all six directions.
+- The [JPEG regional check](image-regional-jpeg-transfer-2026-11-13.md)
+  usefully localized 10 of 40 known edits versus zero for the aligned luma
+  check. It highlighted five of 120 ordinary deliveries versus three.
+  Development opt-in applies only to the evaluated JPEG profile.
 - The [mouth chroma-grid trial](video-mouth-chroma-grid-2026-11-13.md)
   localized zero of 23 held neural mouth edits and zero of 17 after H.264
   re-encoding. The candidate remains offline.

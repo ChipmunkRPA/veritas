@@ -1,0 +1,576 @@
+{
+  "code_sha256": {
+    "backend/app/detectors/image/regional.py": "61aee712ea97bceb1e3b5f7a351d32e50f1b4c30075cb5746b0b103a31eddf34",
+    "backend/app/detectors/image/regional_support.py": "331ed565966f08efb61aed5edb82c05e0b36c032aadae3bb17503d7a89f27882",
+    "backend/scripts/image_directional_structure_transfer.py": "35b072b90c80a48e66aeaa395c4041865110a97b5c92f0785775b87291ee2a51",
+    "backend/scripts/image_masked_context_new_editors.py": "e38ad48a3e8fa86e7cccb526c80aa56afc04ea84203120c06c17de43ef49537e",
+    "backend/scripts/image_masked_context_transfer.py": "e1190b4cc7d48227314d20e40d91e6302dca8bb24fd8d592a17efe46c47c98a8",
+    "backend/scripts/image_regional_jpeg_transfer.py": "5af2ef8177501aeb2de334ef8d5d9d4163555117caacab08e0e5a62a8d3a69a2",
+    "backend/scripts/image_three_class_patch_fresh.py": "48d38070407b0cb4c436264bf11e058eb7b810a47ee29d91c5dd62f68f93b2ca"
+  },
+  "design": {
+    "comparison": "Existing aligned JPEG luma region, sensitive native learned regions alone, and corroborated native learned regions.",
+    "confidence_weight": 0,
+    "delivery": "One JPEG75 4:2:0 upload. Use decoded upright RGB without registration or a source pair.",
+    "derived": {
+      "optimize": false,
+      "progressive": false,
+      "quality": 90,
+      "subsampling": "4:2:0"
+    },
+    "native": {
+      "area_fraction": 0.01,
+      "component_cap": 2,
+      "pixel_cutoff": 0.9
+    },
+    "primary": "Retain an unchanged native component when at least half of its grid pixels also belong to a selected component in the derived view.",
+    "quality_support": "Apply the original upload conditions mask to both views.",
+    "useful": {
+      "changed_pixel_recall": 0.5,
+      "intersection_over_union": 0.3
+    }
+  },
+  "exact_source_replays": 160,
+  "input_ledgers_sha256": {
+    "chipmunk-image-three-class-fresh-20261112/measurements.json": "7156a513140b338e091230f61a385bd37f9272933b3bff196396eb4a560f353d",
+    "chipmunk-image-three-class-fresh-20261112/plan.json": "c9c2a8e77c23c98883e92c552c2dfbf7a10ac7cebfe368b77eee070abbfbed95",
+    "chipmunk-masked-context-new-editors-20261113/intake.json": "6668cc9bd09ca78863d12b0a2df0713d3c004928660133a93c58d48cb9d8476e",
+    "chipmunk-masked-context-new-editors-20261113/plan.json": "318a2b98fb4d62a3a0ebd039cda708d2ee4d575068577de2c63fda742632bd55"
+  },
+  "journal_sha256": {
+    "confirmation": "4643365fbd6fd02ecafe18ea94d9598915e88e6ae02eedd98fc5686f55111076",
+    "external": "3ed479cc3a19f23fdd5632687620d692b222df5d124ec9591c90ea1c425b785e"
+  },
+  "last_execution_script_sha256": "49e3d36a423a35c68b2e8c7dd7dfd257383f9effd878c1a8320bfa927186265a",
+  "model_sha256": "587d553353ddab1c81f45e86fbc9ad2326dee9086c6b566d9abcacc221380590",
+  "paid_local_route": {
+    "browser_crop_and_mask_verified": true,
+    "exact_source_mask_replayed": true,
+    "json_and_pdf_snapshot_match": true,
+    "model_names_hidden": true,
+    "original_crop_overlay_mask_hashes_verified": true,
+    "payment_before_weight_load_and_inference": true,
+    "pdf_signature_verified": true,
+    "price_usd_minor": 999,
+    "regional_forwards": 1,
+    "simulated_stripe_only": true,
+    "source_sha256": "35caa98a2cb4a3cba85c5910b3d11b5cfe6fa211728ecd1a160478f9bafb8df3",
+    "verification_files_sha256": {
+      "backend/app/core/inference_runtime.py": "cee64f30ac2c5aaafee97e127fe86e164d388841198923eee504df93b763b13c",
+      "backend/app/detectors/image/adapters/regional.py": "596da97e973f54530d3b58a69b05ac12fd51f34e845a95db096433f3184522d9",
+      "backend/app/engine/registry.py": "c7c124a16bb15850c8785bc7efa23d6e314cc67b1e4edd2c3926dbc7af18fb24",
+      "backend/app/evidence/image_packets_v4.py": "d02996c22702f8484c126b3a39ada621b6530ceb087c7e1e1fc3ed217ed954fa",
+      "backend/tests/test_native_regional_jpeg_paid.py": "d8511275051d429a6939860f0a52b52516f15a7694da9175e17fd38db63a7ba2",
+      "frontend/e2e/native-regional-jpeg-paid.mjs": "a0cd95a0fc17a67ed0c01d04920a18522bd841a1d622b99461068db0ea05ffcf"
+    }
+  },
+  "publication_script_adjustment": "Import ordering only. Source AST outside PIL imports verified identical.",
+  "results": {
+    "confirmation": {
+      "derived_forwards": 10,
+      "paired": {
+        "corroborated/current_luma": {
+          "feathered": {
+            "gain_families": [
+              "kandinsky",
+              "sd15"
+            ],
+            "gain_groups": 4,
+            "gains": 4,
+            "loss_groups": 0,
+            "losses": 0
+          },
+          "sharp": {
+            "gain_families": [
+              "kandinsky",
+              "sd15"
+            ],
+            "gain_groups": 5,
+            "gains": 5,
+            "loss_groups": 0,
+            "losses": 0
+          }
+        },
+        "corroborated/native": {
+          "feathered": {
+            "gain_families": [],
+            "gain_groups": 0,
+            "gains": 0,
+            "loss_groups": 0,
+            "losses": 0
+          },
+          "sharp": {
+            "gain_families": [],
+            "gain_groups": 0,
+            "gains": 0,
+            "loss_groups": 0,
+            "losses": 0
+          }
+        },
+        "native/current_luma": {
+          "feathered": {
+            "gain_families": [
+              "kandinsky",
+              "sd15"
+            ],
+            "gain_groups": 4,
+            "gains": 4,
+            "loss_groups": 0,
+            "losses": 0
+          },
+          "sharp": {
+            "gain_families": [
+              "kandinsky",
+              "sd15"
+            ],
+            "gain_groups": 5,
+            "gains": 5,
+            "loss_groups": 0,
+            "losses": 0
+          }
+        }
+      },
+      "sources": 12,
+      "strata": {
+        "corroborated": {
+          "feathered": {
+            "flagged_groups": 4,
+            "flags": 4,
+            "useful": 4,
+            "views": 12
+          },
+          "global_processing": {
+            "flagged_groups": 0,
+            "flags": 0,
+            "useful": 0,
+            "views": 12
+          },
+          "local_blur": {
+            "flagged_groups": 0,
+            "flags": 0,
+            "useful": 0,
+            "views": 12
+          },
+          "local_copy": {
+            "flagged_groups": 0,
+            "flags": 0,
+            "useful": 0,
+            "views": 12
+          },
+          "local_processing": {
+            "flagged_groups": 0,
+            "flags": 0,
+            "useful": 0,
+            "views": 12
+          },
+          "local_tone": {
+            "flagged_groups": 0,
+            "flags": 0,
+            "useful": 0,
+            "views": 12
+          },
+          "ordinary_groups_flagged": 0,
+          "original": {
+            "flagged_groups": 0,
+            "flags": 0,
+            "useful": 0,
+            "views": 12
+          },
+          "sharp": {
+            "flagged_groups": 6,
+            "flags": 6,
+            "useful": 5,
+            "views": 12
+          },
+          "wrong_regions": 1
+        },
+        "current_luma": {
+          "feathered": {
+            "flagged_groups": 0,
+            "flags": 0,
+            "useful": 0,
+            "views": 12
+          },
+          "global_processing": {
+            "flagged_groups": 0,
+            "flags": 0,
+            "useful": 0,
+            "views": 12
+          },
+          "local_blur": {
+            "flagged_groups": 0,
+            "flags": 0,
+            "useful": 0,
+            "views": 12
+          },
+          "local_copy": {
+            "flagged_groups": 0,
+            "flags": 0,
+            "useful": 0,
+            "views": 12
+          },
+          "local_processing": {
+            "flagged_groups": 0,
+            "flags": 0,
+            "useful": 0,
+            "views": 12
+          },
+          "local_tone": {
+            "flagged_groups": 0,
+            "flags": 0,
+            "useful": 0,
+            "views": 12
+          },
+          "ordinary_groups_flagged": 0,
+          "original": {
+            "flagged_groups": 0,
+            "flags": 0,
+            "useful": 0,
+            "views": 12
+          },
+          "sharp": {
+            "flagged_groups": 0,
+            "flags": 0,
+            "useful": 0,
+            "views": 12
+          },
+          "wrong_regions": 0
+        },
+        "native": {
+          "feathered": {
+            "flagged_groups": 4,
+            "flags": 4,
+            "useful": 4,
+            "views": 12
+          },
+          "global_processing": {
+            "flagged_groups": 0,
+            "flags": 0,
+            "useful": 0,
+            "views": 12
+          },
+          "local_blur": {
+            "flagged_groups": 0,
+            "flags": 0,
+            "useful": 0,
+            "views": 12
+          },
+          "local_copy": {
+            "flagged_groups": 0,
+            "flags": 0,
+            "useful": 0,
+            "views": 12
+          },
+          "local_processing": {
+            "flagged_groups": 0,
+            "flags": 0,
+            "useful": 0,
+            "views": 12
+          },
+          "local_tone": {
+            "flagged_groups": 0,
+            "flags": 0,
+            "useful": 0,
+            "views": 12
+          },
+          "ordinary_groups_flagged": 0,
+          "original": {
+            "flagged_groups": 0,
+            "flags": 0,
+            "useful": 0,
+            "views": 12
+          },
+          "sharp": {
+            "flagged_groups": 6,
+            "flags": 6,
+            "useful": 5,
+            "views": 12
+          },
+          "wrong_regions": 1
+        }
+      },
+      "views": 96
+    },
+    "external": {
+      "derived_forwards": 8,
+      "paired": {
+        "corroborated/current_luma": {
+          "feathered": {
+            "gain_families": [],
+            "gain_groups": 0,
+            "gains": 0,
+            "loss_groups": 0,
+            "losses": 0
+          },
+          "sharp": {
+            "gain_families": [
+              "sdxl"
+            ],
+            "gain_groups": 1,
+            "gains": 1,
+            "loss_groups": 0,
+            "losses": 0
+          }
+        },
+        "corroborated/native": {
+          "feathered": {
+            "gain_families": [],
+            "gain_groups": 0,
+            "gains": 0,
+            "loss_groups": 0,
+            "losses": 0
+          },
+          "sharp": {
+            "gain_families": [],
+            "gain_groups": 0,
+            "gains": 0,
+            "loss_groups": 0,
+            "losses": 0
+          }
+        },
+        "native/current_luma": {
+          "feathered": {
+            "gain_families": [],
+            "gain_groups": 0,
+            "gains": 0,
+            "loss_groups": 0,
+            "losses": 0
+          },
+          "sharp": {
+            "gain_families": [
+              "sdxl"
+            ],
+            "gain_groups": 1,
+            "gains": 1,
+            "loss_groups": 0,
+            "losses": 0
+          }
+        }
+      },
+      "sources": 7,
+      "strata": {
+        "corroborated": {
+          "feathered": {
+            "flagged_groups": 1,
+            "flags": 1,
+            "useful": 0,
+            "views": 8
+          },
+          "global_processing": {
+            "flagged_groups": 0,
+            "flags": 0,
+            "useful": 0,
+            "views": 2
+          },
+          "global_resize": {
+            "flagged_groups": 1,
+            "flags": 1,
+            "useful": 0,
+            "views": 6
+          },
+          "local_blur": {
+            "flagged_groups": 1,
+            "flags": 1,
+            "useful": 0,
+            "views": 8
+          },
+          "local_copy": {
+            "flagged_groups": 1,
+            "flags": 1,
+            "useful": 0,
+            "views": 8
+          },
+          "local_processing": {
+            "flagged_groups": 0,
+            "flags": 0,
+            "useful": 0,
+            "views": 2
+          },
+          "local_tone": {
+            "flagged_groups": 1,
+            "flags": 1,
+            "useful": 0,
+            "views": 8
+          },
+          "ordinary_groups_flagged": 2,
+          "original": {
+            "flagged_groups": 1,
+            "flags": 1,
+            "useful": 0,
+            "views": 8
+          },
+          "second_jpeg": {
+            "flagged_groups": 0,
+            "flags": 0,
+            "useful": 0,
+            "views": 6
+          },
+          "sharp": {
+            "flagged_groups": 2,
+            "flags": 2,
+            "useful": 1,
+            "views": 8
+          },
+          "wrong_regions": 2
+        },
+        "current_luma": {
+          "feathered": {
+            "flagged_groups": 0,
+            "flags": 0,
+            "useful": 0,
+            "views": 8
+          },
+          "global_processing": {
+            "flagged_groups": 0,
+            "flags": 0,
+            "useful": 0,
+            "views": 2
+          },
+          "global_resize": {
+            "flagged_groups": 0,
+            "flags": 0,
+            "useful": 0,
+            "views": 6
+          },
+          "local_blur": {
+            "flagged_groups": 0,
+            "flags": 0,
+            "useful": 0,
+            "views": 8
+          },
+          "local_copy": {
+            "flagged_groups": 0,
+            "flags": 0,
+            "useful": 0,
+            "views": 8
+          },
+          "local_processing": {
+            "flagged_groups": 0,
+            "flags": 0,
+            "useful": 0,
+            "views": 2
+          },
+          "local_tone": {
+            "flagged_groups": 0,
+            "flags": 0,
+            "useful": 0,
+            "views": 8
+          },
+          "ordinary_groups_flagged": 3,
+          "original": {
+            "flagged_groups": 0,
+            "flags": 0,
+            "useful": 0,
+            "views": 8
+          },
+          "second_jpeg": {
+            "flagged_groups": 3,
+            "flags": 3,
+            "useful": 0,
+            "views": 6
+          },
+          "sharp": {
+            "flagged_groups": 0,
+            "flags": 0,
+            "useful": 0,
+            "views": 8
+          },
+          "wrong_regions": 0
+        },
+        "native": {
+          "feathered": {
+            "flagged_groups": 1,
+            "flags": 1,
+            "useful": 0,
+            "views": 8
+          },
+          "global_processing": {
+            "flagged_groups": 0,
+            "flags": 0,
+            "useful": 0,
+            "views": 2
+          },
+          "global_resize": {
+            "flagged_groups": 1,
+            "flags": 1,
+            "useful": 0,
+            "views": 6
+          },
+          "local_blur": {
+            "flagged_groups": 1,
+            "flags": 1,
+            "useful": 0,
+            "views": 8
+          },
+          "local_copy": {
+            "flagged_groups": 1,
+            "flags": 1,
+            "useful": 0,
+            "views": 8
+          },
+          "local_processing": {
+            "flagged_groups": 0,
+            "flags": 0,
+            "useful": 0,
+            "views": 2
+          },
+          "local_tone": {
+            "flagged_groups": 1,
+            "flags": 1,
+            "useful": 0,
+            "views": 8
+          },
+          "ordinary_groups_flagged": 2,
+          "original": {
+            "flagged_groups": 1,
+            "flags": 1,
+            "useful": 0,
+            "views": 8
+          },
+          "second_jpeg": {
+            "flagged_groups": 0,
+            "flags": 0,
+            "useful": 0,
+            "views": 6
+          },
+          "sharp": {
+            "flagged_groups": 2,
+            "flags": 2,
+            "useful": 1,
+            "views": 8
+          },
+          "wrong_regions": 2
+        }
+      },
+      "views": 64
+    }
+  },
+  "runtime": {
+    "cpu_threads": 2,
+    "device": "cpu",
+    "dtype": "float32",
+    "numpy": "2.2.6",
+    "opencv": "5.0.0",
+    "pillow": "12.3.0",
+    "torch": "2.13.0"
+  },
+  "schema": "chipmunk.image-regional-jpeg-transfer/1",
+  "separate_complete_executions": 3,
+  "source_disjointness": {
+    "checked_fields": [
+      "photo_id",
+      "author",
+      "source_sha256"
+    ],
+    "external_photos": 7,
+    "main_photos": 12,
+    "recorded_regional_roles": [
+      "calibration",
+      "confirmation",
+      "diagnostic",
+      "fit",
+      "point"
+    ],
+    "regional_plan_sha256": "f38ec72f525edf0000f772c4bb75c36b031a796b1f0c2bebbe2260bde147a14a"
+  }
+}

@@ -1,4 +1,4 @@
-"""Sensitive lossless-image region evidence; optional, with legacy check retained."""
+"""Optional source-aligned regional evidence for PNG and a bounded JPEG profile."""
 from __future__ import annotations
 
 import hashlib
@@ -8,13 +8,24 @@ import numpy as np
 from PIL import Image
 
 from app.core.config import settings
+from app.detectors.image import jpeg_bitstream, regional
 from app.detectors.image import localiser as loc
-from app.detectors.image import regional
 from app.detectors.image.adapters.common import H2, image_spec, original_bytes
 from app.detectors.image.adapters.localisers import PNG_SIGNATURE, LocaliserDetector
 from app.detectors.image.regional_support import readout
 from app.engine.detector import Applicability, InputUnit, RunContext
 from app.evidence.image_eligibility import FLIP_CONSISTENCY
+
+JPEG_SIGNATURE = b"\xff\xd8"
+
+
+def evaluated_jpeg(data: bytes) -> bool:
+    structure = jpeg_bitstream.read(data)
+    return bool(structure and structure.frame == "baseline" and structure.precision == 8
+                and max(structure.width, structure.height) == 768 and min(structure.width, structure.height) >= 512
+                and [(c.id, c.h, c.v) for c in structure.components] == [(1, 2, 2), (2, 1, 1), (3, 1, 1)]
+                and all(structure.table_bits.get(c.table_id) == 8 for c in structure.components)
+                and structure.ijg_quality == 75 and structure.table(2) == structure.table(1))
 
 
 def flip_components(measured, aligned):
@@ -49,9 +60,20 @@ class RegionalDetector(LocaliserDetector):
                       model_ids=(MODEL,), devices=("cpu",), lane="cpu", timeout_s=180., version="0.1.0")
 
     def applicable(self, ctx: RunContext) -> Applicability:
-        if not original_bytes(ctx).startswith(PNG_SIGNATURE):
-            return Applicability(False, "This local editing check is currently assessed on PNG images")
-        return super().applicable(ctx)
+        data = original_bytes(ctx)
+        jpeg_review = settings.environment == "dev" and settings.image_region_jpeg_review
+        if data.startswith(PNG_SIGNATURE):
+            if jpeg_review and settings.image_region_mode == "legacy":
+                from app.engine.registry import get_registry
+
+                if self.spec.id not in get_registry().policy.allow_detectors:
+                    return Applicability(False, "The optional regional review is enabled for eligible JPEG images")
+            return super().applicable(ctx)
+        if jpeg_review and evaluated_jpeg(data):
+            info = ctx.media.info()
+            if info["mode"] == "RGB" and info["exif_orientation"] == 1:
+                return super().applicable(ctx)
+        return Applicability(False, "This local editing check covers PNG and a limited JPEG review profile")
 
     def predict(self, model: Any, images: list[np.ndarray], device: Any) -> list[np.ndarray]:
         return [model.predict(Image.fromarray(pixels)).raw_mask for pixels in images]
@@ -62,17 +84,19 @@ class RegionalDetector(LocaliserDetector):
         height, width = pixels.shape[:2]
         if prediction.raw_mask.shape != (height, width):
             raise ValueError("Regional response is not registered to this source")
+        data = original_bytes(ctx)
+        jpeg = data.startswith(JPEG_SIGNATURE)
         measured = readout(prediction.raw_mask, prediction.candidate_eligibility["eligible"],
-                           self.REGION_THRESHOLD, original_bytes(ctx), pixels)
+                           self.REGION_THRESHOLD, data, pixels)
         regions, stats = measured.regions, measured.stats
         repeat = {}
-        if (settings.environment == "dev" and settings.image_region_flip_review and regions
+        if (not jpeg and settings.environment == "dev" and settings.image_region_flip_review and regions
                 and max(width, height) == 768 and min(width, height) >= 512):
             ctx.deadline.check("regional repeatability check")
             reflected = np.ascontiguousarray(pixels[:, ::-1])
             reflected_prediction = loaded.obj.predict(Image.fromarray(reflected))
             reflected_readout = readout(reflected_prediction.raw_mask, reflected_prediction.candidate_eligibility["eligible"],
-                                        self.REGION_THRESHOLD, original_bytes(ctx), reflected)
+                                        self.REGION_THRESHOLD, data, reflected)
             aligned = np.ascontiguousarray(reflected_readout.selected_grid_mask[:, ::-1])
             regions, stats, review = flip_components(measured, aligned)
             proof = ctx.exhibits.binary_mask(aligned)
@@ -91,6 +115,7 @@ class RegionalDetector(LocaliserDetector):
                                "canvas_size": [1024, 1024], "padding_position": "top_left",
                                "source_rgb_sha256": prediction.geometry["source_rgb_sha256"],
                                "input_float32_sha256": prediction.geometry["input_float32_sha256"],
+                               **({"source_format": "JPEG"} if jpeg else {}),
                                "native_binding": prediction.binding, **repeat})
 
     def run(self, ctx: RunContext):
@@ -114,7 +139,10 @@ class RegionalDetector(LocaliserDetector):
                                "These uncalibrated cues cannot determine who or what edited the image.")
         result.details["authorship_confidence_contribution"] = 0.
         result.details["localisation"]["validation_status"] = "limited_local_evaluation"
-        if (review := result.details["localisation"]["resolution_policy"].get("flip_consistency")) is not None:
+        policy = result.details["localisation"]["resolution_policy"]
+        if policy.get("source_format") == "JPEG":
+            result.reasoning += " JPEG compression can obscure small or softly blended edits."
+        if (review := policy.get("flip_consistency")) is not None:
             result.reasoning += (f" A horizontally flipped repeat pass supported {review['supported_components']} "
                                  f"of {review['inspected_components']} inspected regions on the original pixel grid.")
         return result

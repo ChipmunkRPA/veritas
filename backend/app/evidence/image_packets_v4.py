@@ -267,6 +267,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
             old = (f"The whole image was resized to {policy.get('input_px')} × {policy.get('input_px')} "
                    "for this check; a larger displayed map does not add detection detail.")
             packet["limitations"] = [note if line == old else line for line in packet["limitations"]]
+        if policy.get("source_format") == "JPEG":
+            packet["limitations"].append("JPEG compression can obscure small or softly blended edits.")
     assets = [*(document.get("overview") or {}).values(),
               *(art for packet in document["packets"] for art in packet["artifacts"].values())]
     for asset in assets:

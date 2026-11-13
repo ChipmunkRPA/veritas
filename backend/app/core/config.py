@@ -214,9 +214,10 @@ class Settings(BaseSettings):
     video_min_frames: int = 16  # v0.3 video pipeline: fewest frames sampled from a video
     video_face_track_iou: float = 0.3  # overlap (IoU) from which face boxes of consecutive frames are one track
 
-    # Optional native PNG region evidence; old checks stay available for comparison/rollback.
+    # Optional native image region evidence; old checks stay available for comparison/rollback.
     image_region_mode: Literal["legacy", "candidate"] = "legacy"
     image_region_flip_review: bool = False  # Development-only repeatability filter for sensitive PNG regions.
+    image_region_jpeg_review: bool = False  # Development-only regional evidence for the evaluated JPEG profile.
     image_sharp_boundary_enabled: bool = False
     image_reference_comparison_enabled: bool = False  # Development-only comparison of an uploaded earlier copy.
     image_reference_jpeg_png_envelope: bool = False  # Optional earlier standard JPEG to cropped PNG color differences.

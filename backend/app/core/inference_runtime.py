@@ -9,7 +9,8 @@ _lock = threading.Lock()
 
 
 def configure_worker() -> None:
-    if settings.image_region_mode != "candidate":
+    jpeg_review = settings.environment == "dev" and settings.image_region_jpeg_review
+    if settings.image_region_mode != "candidate" and not jpeg_review:
         return
     import torch
 

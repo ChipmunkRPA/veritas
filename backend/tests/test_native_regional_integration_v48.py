@@ -89,6 +89,81 @@ def test_png_scope_size_and_empty_result_never_assert_original(context):
     assert not detector.applicable(f.ctx).ok
 
 
+@pytest.mark.parametrize(("quality", "sampling", "size", "orientation", "progressive", "supported"), [
+    (75, "4:2:0", (768, 512), 1, False, True),
+    (75, "4:2:0", (512, 768), 1, False, True),
+    (90, "4:2:0", (768, 512), 1, False, False),
+    (75, "4:4:4", (768, 512), 1, False, False),
+    (75, "4:2:0", (769, 512), 1, False, False),
+    (75, "4:2:0", (768, 511), 1, False, False),
+    (75, "4:2:0", (768, 512), 6, False, False),
+    (75, "4:2:0", (768, 512), 1, True, False),
+])
+def test_jpeg_scope_requires_opt_in_and_evaluated_encoding(monkeypatch, quality, sampling, size, orientation,
+                                                         progressive, supported):
+    output = io.BytesIO()
+    exif = Image.Exif()
+    exif[0x0112] = orientation
+    image = Image.new("RGB", size, (90, 100, 110))
+    image.save(output, format="JPEG", quality=quality, subsampling=sampling, exif=exif, progressive=progressive)
+    media = SimpleNamespace(original_bytes=output.getvalue, native_pixels=lambda: np.asarray(image),
+                            info=lambda: {"mode": "RGB", "exif_orientation": orientation})
+    ctx = SimpleNamespace(media=media)
+    detector = RegionalDetector()
+    monkeypatch.setattr(settings, "environment", "dev")
+    monkeypatch.setattr(settings, "image_region_mode", "candidate")
+    monkeypatch.setattr(settings, "image_region_jpeg_review", False)
+    assert not detector.applicable(ctx).ok
+    monkeypatch.setattr(settings, "image_region_jpeg_review", True)
+    assert detector.applicable(ctx).ok is supported
+    monkeypatch.setattr(settings, "image_region_mode", "legacy")
+    assert detector.applicable(ctx).ok is supported
+    monkeypatch.setattr(settings, "image_region_mode", "candidate")
+    monkeypatch.setattr(settings, "environment", "prod")
+    assert not detector.applicable(ctx).ok
+
+
+def test_jpeg_scope_rejects_distinct_third_component_quantization():
+    from app.detectors.image import jpeg_bitstream
+    from app.detectors.image.adapters.regional import evaluated_jpeg
+
+    image = Image.new("RGB", (768, 512), (90, 100, 110))
+    output = io.BytesIO()
+    image.save(output, format="JPEG", quality=75, subsampling="4:2:0")
+    original = output.getvalue()
+    structure = jpeg_bitstream.parse(original)
+    unusual = list(structure.table(1))
+    unusual[0] += 1
+    output = io.BytesIO()
+    image.save(output, format="JPEG", qtables=[list(structure.table(0)), list(structure.table(1)), unusual],
+               subsampling="4:2:0")
+    altered = output.getvalue()
+    assert jpeg_bitstream.parse(altered).ijg_quality == 75
+    assert evaluated_jpeg(original)
+    assert not evaluated_jpeg(altered)
+
+
+def test_jpeg_only_toggle_preserves_png_and_splice_selection(context, monkeypatch):
+    from app.engine import registry as engine_registry
+
+    manifest = load_manifest()
+    registry = DetectorRegistry(manifest, parse_policy("commercial"))
+    monkeypatch.setattr(engine_registry, "get_registry", lambda: registry)
+    monkeypatch.setattr(settings, "environment", "dev")
+    monkeypatch.setattr(settings, "image_region_mode", "legacy")
+    monkeypatch.setattr(settings, "image_region_jpeg_review", False)
+    before = registry.decision("loc.splice")
+    monkeypatch.setattr(settings, "image_region_jpeg_review", True)
+    assert registry.decision(RegionalDetector.spec.id).enabled
+    assert registry.decision("loc.splice") == before
+    assert not RegionalDetector().applicable(context.ctx).ok
+    monkeypatch.setattr(settings, "image_region_mode", "candidate")
+    assert RegionalDetector().applicable(context.ctx).ok
+    monkeypatch.setattr(settings, "image_region_mode", "legacy")
+    monkeypatch.setattr(settings, "environment", "prod")
+    assert not registry.decision(RegionalDetector.spec.id).enabled
+
+
 @pytest.mark.parametrize("failure", ["wrong_shape", "nonfinite", "exception"])
 def test_failed_check_cannot_be_a_negative_authorship_finding(context, failure):
     f = context
@@ -173,8 +248,17 @@ def test_worker_configuration_legacy_is_noop_and_candidate_only_changes_threads(
     monkeypatch.setattr(torch, "set_num_threads", observed.append)
     monkeypatch.setattr(torch, "get_num_threads", lambda: 6)
     monkeypatch.setattr(settings, "image_region_mode", "legacy")
+    monkeypatch.setattr(settings, "image_region_jpeg_review", False)
     configure_worker()
     assert observed == []
     monkeypatch.setattr(settings, "image_region_mode", "candidate")
     configure_worker()
     assert observed == [2]
+    monkeypatch.setattr(settings, "image_region_mode", "legacy")
+    monkeypatch.setattr(settings, "image_region_jpeg_review", True)
+    monkeypatch.setattr(settings, "environment", "prod")
+    configure_worker()
+    assert observed == [2]
+    monkeypatch.setattr(settings, "environment", "dev")
+    configure_worker()
+    assert observed == [2, 2]

@@ -105,7 +105,7 @@ class Applicability:
 
 
 class MediaHandle(Protocol):
-    """Three input accessors (D13): bitstream, native pixels, ≤ 4096 px analysis copy."""
+    """Access the bitstream, native pixels, decoded metadata, and ≤ 4096 px analysis copy."""
 
     sha256: str
     kind: str
@@ -113,6 +113,8 @@ class MediaHandle(Protocol):
     def original_bytes(self) -> bytes | memoryview: ...
 
     def native_pixels(self, tile: tuple[int, int, int, int] | None = None) -> Any: ...
+
+    def info(self) -> dict[str, Any]: ...
 
     def analysis_copy(self) -> tuple[Any, float]: ...  # (array, scale_to_original)
 

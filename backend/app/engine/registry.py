@@ -122,7 +122,9 @@ class DetectorRegistry:
                            or detector_id == "vid.review.face_appearance" and settings.video_face_review_mode == "appearance"
                            or detector_id == "vid.review.whole_face" and settings.video_whole_face_review)
         regional_review = (detector_id in {"loc.native_regional", "loc.splice"}
-                           and settings.image_region_mode == "candidate")
+                           and settings.image_region_mode == "candidate"
+                           or detector_id == "loc.native_regional"
+                           and settings.environment == "dev" and settings.image_region_jpeg_review)
         boundary_review = detector_id == "img.forensic.sharp_boundary" and settings.image_sharp_boundary_enabled
         writing_review = (detector_id == "txt.review.agreement" and settings.environment == "dev"
                           and text_candidate and settings.text_checkpoint_agreement_review)

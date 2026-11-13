@@ -10,7 +10,7 @@ import pytest
 from app.core.canonical import canonical_json
 from app.core.config import settings
 from app.detectors.audio import background_voice_review as detector
-from app.detectors.audio.decode import read_wav
+from app.detectors.audio.decode import decode_audio, read_wav, wav_bytes
 from app.engine.boundary import Deadline
 from app.engine.detector import Profile
 from app.engine.stages import audio
@@ -42,6 +42,26 @@ def test_declines_audio_outside_the_held_scope(override):
     mapping = source(np.zeros(48_000, dtype="<f4"))
     assert binding.supported_source(mapping)
     assert not binding.supported_source(mapping | override)
+
+
+def test_lossless_flac_matches_the_original_pcm_and_clock(tmp_path):
+    import shutil
+    import subprocess
+
+    if not shutil.which("ffmpeg") or not shutil.which("ffprobe"):
+        pytest.skip("Native audio decoder required")
+    pcm = np.arange(48_000, dtype=np.int32).astype("<i2").astype("<f4") / 32768.0
+    original = tmp_path / "original.wav"
+    original.write_bytes(wav_bytes(pcm))
+    flac = tmp_path / "lossless.flac"
+    subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-i", str(original), "-c:a", "flac", str(flac)],
+                   check=True, timeout=10)
+    decoded = [decode_audio(path, source_sha256=sha256(path.read_bytes()).hexdigest()) for path in (original, flac)]
+    for item in decoded:
+        assert binding.supported_source(item.mapping)
+        np.testing.assert_array_equal(item.pcm, pcm)
+    assert decoded[0].mapping["timeline"] == decoded[1].mapping["timeline"]
+    assert decoded[0].mapping["pcm_sha256"] == decoded[1].mapping["pcm_sha256"]
 
 
 def test_scope_preserves_existing_direction_and_checks_provenance(monkeypatch):

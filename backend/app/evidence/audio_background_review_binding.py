@@ -26,8 +26,9 @@ TIMESTAMPS = [{**INTERVAL, "source_start_pts": 0, "source_end_pts": SPAN, "time_
 
 
 def supported_source(source):
-    return (type(source.get("samples")) is int and source["samples"] == SPAN and source.get("source_codec") == "pcm_s16le"
-            and source.get("source_container") == "wav" and source.get("source_bit_depth") == 16
+    return (type(source.get("samples")) is int and source["samples"] == SPAN
+            and (source.get("source_codec"), source.get("source_container")) in {("pcm_s16le", "wav"), ("flac", "flac")}
+            and source.get("source_bit_depth") == 16
             and source.get("source_channels") == source.get("channels") == 1
             and source.get("source_sample_rate") == source.get("sample_rate") == RATE
             and source.get("source_stream_index") == 0 and source.get("audio_stream_indices", [0]) == [0]

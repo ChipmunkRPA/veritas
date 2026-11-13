@@ -150,7 +150,7 @@ processing an upload. Inference uses local files. Remove the two paths to
 disable the additional check.
 
 The app runs this check on a single, continuous, exactly three-second
-16 kHz mono PCM16 WAV when the primary voice result is inconclusive or the
+16 kHz mono PCM16 WAV or FLAC when the primary voice result is inconclusive or the
 original did not contain enough detected speech. A flag presents the original
 waveform and two playback clips covering samples `[0, 48000)`. The PDF shows
 the same interval and waveform. The JSON evidence includes separate asset
@@ -166,6 +166,12 @@ tendency. A same-input comparison with the optional review disabled preserved
 the whole-file decision, assessments and three ordinary check records. The
 signed evidence ZIP verified against the original WAV. The JSON, waveform,
 two playback assets and PDF matched the saved evidence.
+
+The lossless FLAC check requires the same native samples and timeline as
+WAV. An isolated paid run reproduced the same positive and control
+decisions on FLAC. The matched WAV and FLAC positives shared the exact
+original playback and waveform bytes. Both PDFs embedded that waveform
+and both signed packages verified with their respective original files.
 
 ## Replay
 

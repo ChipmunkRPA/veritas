@@ -104,6 +104,7 @@ known-third-party = ["alembic"]  # backend/alembic/ holds migration scripts, not
 "scripts/video_short_return_encoded_app.py" = ["I001"]  # preserve the source bytes committed before the held run
 "scripts/video_brief_face_120_carrier.py" = ["I001"]  # preserve the source bytes committed before the held run
 "scripts/writing_typography_transfer.py" = ["I001"]  # preserve the source bytes committed before the held run
+"scripts/image_regional_jpeg90_carrier.py" = ["F401", "SIM102"]  # preserve the source bytes committed before the direct held run
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

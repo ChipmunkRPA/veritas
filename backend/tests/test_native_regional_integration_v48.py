@@ -36,6 +36,7 @@ def test_optional_mode_commercial_policy_denial_and_rollback(monkeypatch):
     assert model.load.pickle is False and model.source.files[0].sha256 == regional.CHECKPOINT_SHA256
     registry = DetectorRegistry(manifest, parse_policy("commercial"))
     monkeypatch.setattr(settings, "image_region_mode", "legacy")
+    monkeypatch.setattr(settings, "image_region_jpeg_review", False)
     assert not registry.decision(card.id).enabled
     before = registry.decision("loc.splice")
     monkeypatch.setattr(settings, "image_region_mode", "candidate")
@@ -75,8 +76,9 @@ def context(tmp_path):
     return SimpleNamespace(ctx=ctx, fake=fake, store=store, writer=writer, source=source, pixels=pixels)
 
 
-def test_png_scope_size_and_empty_result_never_assert_original(context):
+def test_png_scope_size_and_empty_result_never_assert_original(context, monkeypatch):
     f, detector = context, RegionalDetector()
+    monkeypatch.setattr(settings, "image_region_jpeg_review", False)
     assert detector.applicable(f.ctx).ok
     result = detector.run(f.ctx)
     assert result.status == "ok" and result.metrics["regions"] == 0

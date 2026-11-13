@@ -1,0 +1,231 @@
+{
+  "schema": "chipmunk.video-face-hd-retry-scene-challenge/1",
+  "admitted_to_serving": false,
+  "ai_confidence_weight": 0,
+  "serving_video_comparator_revision": "d4937d8",
+  "runner_sha256": "e781efadbdc13d956850fe9045c0aacb3cb8ef16129fdb72e3634a2fb54b82ff",
+  "source_exposure": {
+    "genuine_pairs": 8,
+    "genuine_people": 16,
+    "swap_source_groups": 7,
+    "previous_project_exposure": true
+  },
+  "publisher_terms": {
+    "GRID": "CC-BY-4.0",
+    "RTFS": "CC-BY-SA-4.0",
+    "RTFS_donor_source_attribution": "incomplete"
+  },
+  "same_interval_sparse_localizations": 29,
+  "sparse_unassessed": {
+    "multiple_faces": 1
+  },
+  "sparse_elapsed_s": 49.58,
+  "full_retry": {
+    "genuine_deliveries": 3,
+    "genuine_source_pairs": 2,
+    "swap_deliveries": 3,
+    "swap_source_groups": 2,
+    "measured_frames_per_delivery": 60,
+    "added_ranges": 0
+  },
+  "encoded_media_bytes": 13463572,
+  "held_and_audit": {
+    "protocol": {
+      "schema": "chipmunk.video-face-hd-retry-scene-challenge/1",
+      "delivery": [
+        1280,
+        720,
+        30,
+        120,
+        "h264",
+        "yuv420p",
+        "mp4"
+      ],
+      "placements": [
+        [
+          63,
+          74
+        ],
+        [
+          85,
+          96
+        ]
+      ],
+      "placement_rule": "Both half-open intervals contain three 8 Hz samples and no fourth. Alternate phases by cohort ordinal.",
+      "genuine_controls": "Pair sixteen separately archived genuine GRID speakers in archive order. Compose a whole centered webcam picture on a fixed geometric surround. Test ordinary viewing, a different speaker cutaway, tandem compression of that cutaway, earlier motion of the same speaker, and a same-person punch-in.",
+      "genuine_clock": "From native 25 Hz picture i use floor(n*5/6)-12 for delivery frame n with reflection at the source edges. The genuine guest uses the same rule. No generated intermediate pictures.",
+      "webcam_tile": {
+        "xywh": [
+          360,
+          136,
+          560,
+          448
+        ],
+        "reframe_source_crop": [
+          24,
+          20,
+          336,
+          270
+        ],
+        "jump_delivery_frames": 18
+      },
+      "surround": "Deterministic fixed low-contrast geometric slide texture supplies unchanged border tiles.",
+      "swaps": "All seven remaining exact-clock archival RTFS groups separated by known host URL and donor from recent HD brief-range and retry panels. Use one publisher swap, alternating family, and its tandem encode.",
+      "crf": [
+        23,
+        35
+      ],
+      "gate": {
+        "added_correct": 3,
+        "sources_with_gain": 2,
+        "added_ordinary_flags": 1,
+        "added_cut_flags": 0,
+        "added_misplaced_ranges": 1,
+        "minimum_overlap": "1/2"
+      },
+      "maximum_media_bytes": 104857600
+    },
+    "freeze_sha256": "47e73c6dab329809f89c50af162bb5eac9294956f36ab3d7841249f91359cae2",
+    "media_sha256": "bba120480ff4afda17bbcb8d7e13a2c7a3ceac8faa617fbba2f7463f48737dbc",
+    "runtime": {
+      "held_sha256": "798c145c6a7d2f2b956aa8e5d8f1bb3c38098bfa5b02a71e3c07718c46b09b86",
+      "sparse_sha256": "f9f62188df189d2a6e60fb5a2983b7f4b6c8dea8fcfcc88423d7878933c84e2e",
+      "elapsed_s": 402.2919211670087,
+      "rss_bytes": 5919424512
+    },
+    "native_frames": 7320,
+    "crops": 0,
+    "guarded_boundaries": 0,
+    "exact_branch_rebuilds": 6,
+    "strata": {
+      "ordinary": {
+        "files": 8,
+        "truth": 0,
+        "sparse_screen": 0,
+        "full_retry": 0,
+        "dense_measured": 0,
+        "before_useful": 0,
+        "combined_useful": 0,
+        "before_flags": 0,
+        "combined_flags": 0,
+        "retry_ranges": 0,
+        "wrong_retry_ranges": 0,
+        "retry_at_ordinary_intervention": 0
+      },
+      "person_switch": {
+        "files": 8,
+        "truth": 0,
+        "sparse_screen": 8,
+        "full_retry": 2,
+        "dense_measured": 2,
+        "before_useful": 0,
+        "combined_useful": 0,
+        "before_flags": 7,
+        "combined_flags": 7,
+        "retry_ranges": 0,
+        "wrong_retry_ranges": 0,
+        "retry_at_ordinary_intervention": 0
+      },
+      "tandem_person_switch": {
+        "files": 8,
+        "truth": 0,
+        "sparse_screen": 8,
+        "full_retry": 1,
+        "dense_measured": 1,
+        "before_useful": 0,
+        "combined_useful": 0,
+        "before_flags": 8,
+        "combined_flags": 8,
+        "retry_ranges": 0,
+        "wrong_retry_ranges": 0,
+        "retry_at_ordinary_intervention": 0
+      },
+      "same_person_jump": {
+        "files": 8,
+        "truth": 0,
+        "sparse_screen": 0,
+        "full_retry": 0,
+        "dense_measured": 0,
+        "before_useful": 0,
+        "combined_useful": 0,
+        "before_flags": 0,
+        "combined_flags": 0,
+        "retry_ranges": 0,
+        "wrong_retry_ranges": 0,
+        "retry_at_ordinary_intervention": 0
+      },
+      "same_person_reframe": {
+        "files": 8,
+        "truth": 0,
+        "sparse_screen": 0,
+        "full_retry": 0,
+        "dense_measured": 0,
+        "before_useful": 0,
+        "combined_useful": 0,
+        "before_flags": 0,
+        "combined_flags": 0,
+        "retry_ranges": 0,
+        "wrong_retry_ranges": 0,
+        "retry_at_ordinary_intervention": 0
+      },
+      "original": {
+        "files": 7,
+        "truth": 0,
+        "sparse_screen": 0,
+        "full_retry": 0,
+        "dense_measured": 0,
+        "before_useful": 0,
+        "combined_useful": 0,
+        "before_flags": 0,
+        "combined_flags": 0,
+        "retry_ranges": 0,
+        "wrong_retry_ranges": 0,
+        "retry_at_ordinary_intervention": 0
+      },
+      "publisher_swap": {
+        "files": 7,
+        "truth": 7,
+        "sparse_screen": 7,
+        "full_retry": 1,
+        "dense_measured": 1,
+        "before_useful": 6,
+        "combined_useful": 6,
+        "before_flags": 7,
+        "combined_flags": 7,
+        "retry_ranges": 0,
+        "wrong_retry_ranges": 0,
+        "retry_at_ordinary_intervention": 0
+      },
+      "tandem_publisher_swap": {
+        "files": 7,
+        "truth": 7,
+        "sparse_screen": 6,
+        "full_retry": 2,
+        "dense_measured": 2,
+        "before_useful": 5,
+        "combined_useful": 5,
+        "before_flags": 7,
+        "combined_flags": 7,
+        "retry_ranges": 0,
+        "wrong_retry_ranges": 0,
+        "retry_at_ordinary_intervention": 0
+      }
+    },
+    "gains": {
+      "added_correct": 0,
+      "sources_with_gain": 0,
+      "added_ordinary_flags": 0,
+      "added_cut_flags": 0,
+      "added_misplaced_ranges": 0
+    },
+    "gate": {
+      "added_correct": false,
+      "sources_with_gain": false,
+      "added_ordinary_flags": true,
+      "added_cut_flags": true,
+      "added_misplaced_ranges": true
+    },
+    "advances": false,
+    "examples": {}
+  }
+}

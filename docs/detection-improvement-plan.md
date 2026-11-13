@@ -97,6 +97,15 @@ integration remains unfinished.
 
 ## Progress on 13 November
 
+- The [released FLAME JPEG comparison](image-flame-jpeg-transfer-2026-11-13.md)
+  found no useful region on 26 object removals. Its published point with local
+  region filtering highlighted 38 of 48 held ordinary files. Its separately
+  fitted ordinary point returned no held regions. It stays offline.
+- The [blind dereverberation comparison](audio-wpe-room-transfer-2026-11-13.md)
+  raised the source-pooled full-room and noisy union from four to five of
+  seven edits at the prior mono point and from two to six of eight false
+  genuine groups. Its independently fitted point added zero edits. It stays
+  experimental pending a prospective matched-room retest.
 - The [entropy-conditioned writing trial](writing-entropy-conditioned-2026-11-13.md)
   measured all 39 known edit locations and added zero useful locations. It
   added flags on three eLife control works and stays offline.

@@ -76,6 +76,11 @@ edit overlap without the images or weights.
 The [entropy-conditioned writing trial](writing-entropy-conditioned-2026-11-13.md#replay)
 replays exact sentence outcomes and genuine-work flags from scalars without
 the text, token IDs or weights.
+The [JPEG detector transfer](image-flame-jpeg-transfer-2026-11-13.md#replay)
+and [blind dereverberation trial](audio-wpe-room-transfer-2026-11-13.md#replay)
+publish source-group results and standard-library checks for both operating
+points. The voice replay binds the unchanged mono measurements to the earlier
+public ledger.
 
 ### Replay the latest localization comparisons
 

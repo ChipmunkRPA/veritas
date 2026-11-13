@@ -134,6 +134,11 @@ integration remains unfinished.
   scanned 3,333 native WAVs from bounded publisher ranges. It verified six
   short edits and two speaker-matched controls. Those bounded ranges do
   not support a supervised fit.
+- The [Half-Truth native audio test](audio-had-native-intake-2026-11-13.md#positive-only-localization-check)
+  found useful locations on eight of eight known Mandarin edits with
+  one-second windows, versus two with the stock two-second windows.
+  The public test prefix contains no fully genuine recordings.
+  The shorter check remains experimental.
 - The [PDF Content Credentials check](pdf-content-credentials-2026-11-13.md)
   verifies a whole-file AI declaration locally before acquiring writing models.
   Signed document coverage, modified PDF controls and payment-first behavior
@@ -152,6 +157,11 @@ integration remains unfinished.
   highlighted components lacked corroboration from the aligned earlier copy.
   Nine were pixel-identical. The one corroborated region was a known
   conventional paste. Standalone JPEG90 reflection stays experimental.
+- The [paired JPEG90 transfer](image-jpeg90-paired-corroboration-2026-11-13.md)
+  measured 154 pairs across 14 photos outside the preceding JPEG90 banks.
+  The earlier-copy check located 24 of 28 generated changes and 26 of 42
+  ordinary local changes. Intersecting with the learned mask lost both
+  useful standalone locations. The combined candidate stays experimental.
 - The [selectable PDF archive comparison](writing-gao-archive-comparison-2026-11-13.md)
   matches indexed report wording and places verified changes on the original
   pages, with the source crop in the browser and report. A two-page transfer

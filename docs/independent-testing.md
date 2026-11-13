@@ -50,11 +50,16 @@ checks publisher protocols, timing annotations and bounded delivery probes
 with standard-library Python. It reports what the labels support before
 any voice model is trained or evaluated. The [native intake](audio-partialspoof-native-intake-2026-11-13.md#replay)
 then checks the candidate label positions against their original sample clocks.
+The [Half-Truth audio replay](audio-had-native-intake-2026-11-13.md#replay-the-intake)
+uses about 4.3 MB of publisher ranges and provides a positive-only,
+model-scored comparison using fixed earlier points.
 
 The [JPEG90 paired-source audit](image-jpeg90-reflection-source-context-2026-11-13.md)
 replays the original regional masks and checks whether highlighted pixels
 also changed relative to an earlier copy. Its scalar receipt keeps source
-images and pixel masks local.
+images and pixel masks local. The [separate transfer](image-jpeg90-paired-corroboration-2026-11-13.md#replay)
+counts exact local overlap, ordinary processing and incompatible reference
+outcomes on 154 pairs.
 
 ### Replay delivery and earlier-copy comparisons
 

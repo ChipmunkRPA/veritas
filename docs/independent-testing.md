@@ -39,6 +39,9 @@ checks the original sources, native crops, and submitted difference mask.
 The [feathered-edit crop study](image-crop-layout-transfer-2026-11-12.md)
 offers a standard-library review of the result ledger and a native replay that
 separates region size limits from score and layout errors.
+The [signed residual phase study](image-phase-locked-residual-2026-11-12.md)
+checks two pixel-grid periods on known generated regions and ordinary views.
+Neither period supplied a useful location at its frozen point.
 
 The [earlier-video comparison](video-reference-comparison-2026-11-11.md#replay-without-the-app)
 re-decodes two supplied clips and checks the JSON, native picture timestamps,
@@ -61,6 +64,10 @@ the authored edit locations separately from the signed app output.
 The [720p30 extension](video-face-two-returns-hd-2026-11-12.md) independently
 reopens the source clock and both guarded boundaries on the higher-resolution
 delivery, including two successive encodes.
+The [subject-context comparison](video-face-subject-context-2026-11-12.md)
+checks whether the area below the face helps recognize ordinary speaker cuts.
+The [near-head transfer](video-face-near-head-transfer-2026-11-12.md) adds
+independent source groups and measures confounds from zoom and brightness.
 The [compression repeat study](video-face-compression-stability-2026-11-12.md)
 rebuilds single and tandem encodes, checks exact face crops, and reproduces
 both appearance measurements at the original time interval.

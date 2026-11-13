@@ -1,0 +1,241 @@
+{
+  "schema": "chipmunk.video-face-subject-context/1",
+  "admitted_to_serving": false,
+  "ai_confidence_weight": 0,
+  "upstream_source_manifest_sha256": "bba120480ff4afda17bbcb8d7e13a2c7a3ceac8faa617fbba2f7463f48737dbc",
+  "runner_sha256": "5886e11312541d4867245e0661a17c84292327fc67712c856da41f17f0ed8e88",
+  "held_and_development": {
+    "protocol": {
+      "schema": "chipmunk.video-face-subject-context/1",
+      "input": "The previously frozen 61 exact 720p30 H.264 deliveries and completed Full face results",
+      "development_groups": {
+        "grid": [
+          1,
+          3,
+          5,
+          7
+        ],
+        "rtfs": [
+          1,
+          3,
+          5
+        ]
+      },
+      "confirmation_groups": {
+        "grid": [
+          2,
+          4,
+          6,
+          8
+        ],
+        "rtfs": [
+          2,
+          4,
+          6,
+          7
+        ]
+      },
+      "report_interval": [
+        "short_range",
+        "boundary_refinement",
+        "coarse"
+      ],
+      "boundary_radius_frames": 8,
+      "geometry_offsets_frames": [
+        -9,
+        -6,
+        -3,
+        3,
+        6,
+        9
+      ],
+      "geometry_rule": "Median of at least four single-face flank observations with boxes overlapping the median by half",
+      "inner_ellipse": [
+        0.43,
+        0.47
+      ],
+      "head_annulus": [
+        0.82,
+        0.88
+      ],
+      "lower_box_relative_to_face_center": [
+        -0.66,
+        0.86,
+        0.66,
+        1.55
+      ],
+      "minimum_region_fraction_inside_picture": 0.8,
+      "output_resolution": [
+        96,
+        128
+      ],
+      "motion_reference": "Median absolute luma change of adjacent pairs in the 12 frames outside each boundary-search interval",
+      "selection": "Largest positive central face excess in each nonoverlapping boundary window, before considering other areas",
+      "minimum_face_luma_excess": 4.0,
+      "minimum_head_luma_excess": 3.0,
+      "minimum_lower_luma_excess": 3.0,
+      "minimum_lower_to_face_excess_ratio": 0.25,
+      "rule": "Both boundaries must show sufficient central, head annulus and lower-region excess. A no-broad-change result gives no positive claim. Authored times are used only by the separate timing diagnostic.",
+      "gate": {
+        "minimum_cutaway_sources_qualified": 3,
+        "minimum_reported_swap_fraction_assessed": 0.75,
+        "maximum_swap_deliveries_with_broad_annotation": 1
+      }
+    },
+    "runtime": {
+      "observations_sha256": "b1975b7699c6f70ac1afc90851bacb0463e8d7f7c0c0c646d1f597057ac6941d",
+      "freeze_sha256": "c836ad74c730689c1fa9d413aa64f6c771d414d83a6b55e5ad2a4be1246e4e24",
+      "elapsed_s": 25.995057541003916
+    },
+    "scores": {
+      "development": {
+        "ordinary": {
+          "files": 4,
+          "observed_no_reported_range": 4
+        },
+        "person_switch": {
+          "files": 4,
+          "observed_lower_region_outside_picture": 2,
+          "diagnostic_lower_region_outside_picture": 3,
+          "observed_assessed": 1,
+          "observed_within_two_frames": 1,
+          "diagnostic_assessed": 1,
+          "diagnostic_within_two_frames": 1,
+          "observed_no_reported_range": 1
+        },
+        "tandem_person_switch": {
+          "files": 4,
+          "observed_lower_region_outside_picture": 3,
+          "diagnostic_lower_region_outside_picture": 3,
+          "observed_assessed": 1,
+          "observed_within_two_frames": 1,
+          "diagnostic_assessed": 1,
+          "diagnostic_within_two_frames": 1
+        },
+        "same_person_jump": {
+          "files": 4,
+          "observed_no_reported_range": 4,
+          "diagnostic_lower_region_outside_picture": 3,
+          "diagnostic_insufficient_face_transition": 1,
+          "diagnostic_within_two_frames": 1
+        },
+        "same_person_reframe": {
+          "files": 4,
+          "observed_no_reported_range": 4,
+          "diagnostic_lower_region_outside_picture": 3,
+          "diagnostic_assessed": 1,
+          "diagnostic_within_two_frames": 1
+        },
+        "original": {
+          "files": 3,
+          "observed_no_reported_range": 3
+        },
+        "publisher_swap": {
+          "files": 3,
+          "observed_assessed": 2,
+          "observed_within_two_frames": 2,
+          "diagnostic_assessed": 2,
+          "diagnostic_within_two_frames": 2,
+          "observed_lower_region_outside_picture": 1,
+          "diagnostic_lower_region_outside_picture": 1
+        },
+        "tandem_publisher_swap": {
+          "files": 3,
+          "observed_assessed": 2,
+          "observed_within_two_frames": 2,
+          "diagnostic_assessed": 2,
+          "diagnostic_within_two_frames": 2,
+          "observed_lower_region_outside_picture": 1,
+          "diagnostic_lower_region_outside_picture": 1
+        }
+      },
+      "confirmation": {
+        "ordinary": {
+          "files": 4,
+          "observed_no_reported_range": 4
+        },
+        "person_switch": {
+          "files": 4,
+          "observed_assessed": 1,
+          "observed_within_two_frames": 1,
+          "diagnostic_assessed": 1,
+          "diagnostic_within_two_frames": 1,
+          "observed_lower_region_outside_picture": 3,
+          "diagnostic_lower_region_outside_picture": 3
+        },
+        "tandem_person_switch": {
+          "files": 4,
+          "observed_assessed": 1,
+          "observed_within_two_frames": 1,
+          "diagnostic_assessed": 1,
+          "diagnostic_within_two_frames": 1,
+          "observed_lower_region_outside_picture": 3,
+          "diagnostic_lower_region_outside_picture": 3
+        },
+        "same_person_jump": {
+          "files": 4,
+          "observed_no_reported_range": 4,
+          "diagnostic_insufficient_face_transition": 1,
+          "diagnostic_within_two_frames": 1,
+          "diagnostic_lower_region_outside_picture": 3
+        },
+        "same_person_reframe": {
+          "files": 4,
+          "observed_no_reported_range": 4,
+          "diagnostic_assessed": 1,
+          "diagnostic_broad": 1,
+          "diagnostic_within_two_frames": 1,
+          "diagnostic_lower_region_outside_picture": 3
+        },
+        "original": {
+          "files": 4,
+          "observed_no_reported_range": 4
+        },
+        "publisher_swap": {
+          "files": 4,
+          "observed_insufficient_face_transition": 1,
+          "observed_within_two_frames": 2,
+          "diagnostic_insufficient_face_transition": 1,
+          "diagnostic_within_two_frames": 2,
+          "observed_assessed": 1,
+          "diagnostic_assessed": 1,
+          "observed_lower_region_outside_picture": 2,
+          "diagnostic_lower_region_outside_picture": 2
+        },
+        "tandem_publisher_swap": {
+          "files": 4,
+          "observed_insufficient_face_transition": 1,
+          "observed_within_two_frames": 2,
+          "diagnostic_insufficient_face_transition": 1,
+          "diagnostic_within_two_frames": 2,
+          "observed_assessed": 1,
+          "diagnostic_assessed": 1,
+          "observed_lower_region_outside_picture": 2,
+          "diagnostic_lower_region_outside_picture": 2
+        }
+      }
+    },
+    "native_frame_reads": 4064,
+    "held_qualified_cutaway_sources": 0,
+    "held_swap_reported": 8,
+    "held_swap_assessed": 2,
+    "held_swap_broad": 0,
+    "gate": {
+      "cutaway_sources": false,
+      "swap_coverage": false,
+      "swap_annotations": true
+    },
+    "advances": false
+  },
+  "timing_example": {
+    "boundary_frames": [
+      85,
+      96
+    ],
+    "native_relative_seconds": [
+      "17/6",
+      "16/5"
+    ],
+    "both_first_and_tandem": true
+  }
+}

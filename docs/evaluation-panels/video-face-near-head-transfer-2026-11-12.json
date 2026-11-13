@@ -1,0 +1,148 @@
+{
+  "schema": "chipmunk.video-face-near-head-transfer/1",
+  "admitted_to_serving": false,
+  "ai_confidence_weight": 0,
+  "runner_sha256": "9d2ded325cb00c7b49337af3c8c171663c99703d948ee8e65dfb6acd0c5c8e03",
+  "development_receipt_sha256": "80cd70974ffe5df477bcfae5a7e41e42872e0de572ed77a30da750221d8ad3d8",
+  "rtfs_manifest_sha256": "767a10820b2cc13348b9d1aaeb57a53c8c4acc38d81656733c4f7f5555d2c8db",
+  "source_separation": {
+    "crema_distinct_actors": 10,
+    "crema_distinct_pairs": 5,
+    "rtfs_development": 7,
+    "rtfs_transfer": 8,
+    "rtfs_shared_known_hosts_or_donors": 0,
+    "previous_project_exposure": true
+  },
+  "native_audit": {
+    "reads": 1426,
+    "edges": 124,
+    "intervals": 62
+  },
+  "repeated_control_deliveries_matching_exactly": 30,
+  "first_scoring_attempt": "stopped on NumPy scalar after unchanged sham; conversion only changed",
+  "transfer": {
+    "protocol": {
+      "schema": "chipmunk.video-face-near-head-transfer/1",
+      "delivery": [
+        1280,
+        720,
+        30,
+        120,
+        "h264",
+        "yuv420p"
+      ],
+      "ordinary_sources": "Ten distinct qualified CREMA-D originals in archive order, paired into five fixed-layout cutaways.",
+      "swap_sources": "Eight previously evaluated RTFS source groups from the 720p two-return study, separated from this assay's GRID/RTFS development. Both swap windows on both primary and tandem deliveries.",
+      "truth": "Source-timed engineering assay only. All boundaries are supplied. This does not measure report coverage.",
+      "crema_placements": [
+        [
+          56,
+          67
+        ],
+        [
+          61,
+          72
+        ]
+      ],
+      "crema_tile_xywh": [
+        360,
+        150,
+        560,
+        420
+      ],
+      "face_ellipse": [
+        0.43,
+        0.47
+      ],
+      "head_ellipse": [
+        0.77,
+        0.76
+      ],
+      "sector_support": 2,
+      "face_excess_minimum": 4.0,
+      "sector_excess_minimum": 8.0,
+      "sector_to_face_minimum": 0.55,
+      "minimum_sector_visible_fraction": 0.8,
+      "motion_reference": "Median of adjacent differences at offsets [-10,-9,-8,-7,7,8,9,10] around each supplied edge.",
+      "gate": {
+        "cutaway_groups": 4,
+        "swap_annotation_max": 2,
+        "ordinary_processing_max": 1,
+        "assessment_minimum": 0.75
+      }
+    },
+    "runtime": {
+      "elapsed_s": 17.042748584004585,
+      "media_sha256": "7dc11858e6e919a28ace0c5a00b1674266208eee76a3752e2e85628618d81320",
+      "freeze_sha256": "fda589437323671f13ca1666110997eff0578f2568edbb5ae1610503a5ef5022",
+      "observations_sha256": "7332ca9bfbac892eb93a005812bc5525ce44208aa1a7a5a65de3e7c84a211b78"
+    },
+    "counts": {
+      "unchanged": {
+        "files": 5,
+        "intervals": 5,
+        "assessed": 5,
+        "central_transition": 0,
+        "broad": 0
+      },
+      "cutaway": {
+        "files": 5,
+        "intervals": 5,
+        "assessed": 5,
+        "central_transition": 5,
+        "broad": 5
+      },
+      "tandem_cutaway": {
+        "files": 5,
+        "intervals": 5,
+        "assessed": 5,
+        "central_transition": 5,
+        "broad": 5
+      },
+      "jump": {
+        "files": 5,
+        "intervals": 5,
+        "assessed": 5,
+        "central_transition": 4,
+        "broad": 0
+      },
+      "punch_in": {
+        "files": 5,
+        "intervals": 5,
+        "assessed": 5,
+        "central_transition": 5,
+        "broad": 5
+      },
+      "gain": {
+        "files": 5,
+        "intervals": 5,
+        "assessed": 5,
+        "central_transition": 5,
+        "broad": 1
+      },
+      "two_swaps": {
+        "files": 8,
+        "intervals": 16,
+        "assessed": 16,
+        "central_transition": 16,
+        "broad": 0
+      },
+      "tandem_two_swaps": {
+        "files": 8,
+        "intervals": 16,
+        "assessed": 16,
+        "central_transition": 15,
+        "broad": 0
+      }
+    },
+    "ordinary_cutaway_groups_qualified": 5,
+    "native_frame_reads": 1426,
+    "gate": {
+      "cutaway_groups": true,
+      "swap_annotations": true,
+      "ordinary_processing": false,
+      "assessment": true
+    },
+    "advances": false
+  }
+}

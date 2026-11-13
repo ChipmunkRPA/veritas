@@ -1,0 +1,163 @@
+{
+  "authorship_confidence_weight": 0,
+  "calibration_sha256": "1fd90b4ee7cfb39010b0a0a7099ca7af26f6482b4b3d6d3a245f032da42ab7d8",
+  "calibration_views": 32,
+  "counts": {
+    "period_eight": {
+      "feathered": {
+        "assessed": 30,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 30
+      },
+      "interface": {
+        "assessed": 24,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 24
+      },
+      "native": {
+        "assessed": 18,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 18
+      },
+      "ordinary": {
+        "assessed": 66,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 66
+      }
+    },
+    "period_four": {
+      "feathered": {
+        "assessed": 30,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 2,
+        "views": 30
+      },
+      "interface": {
+        "assessed": 24,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 24
+      },
+      "native": {
+        "assessed": 18,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 1,
+        "views": 18
+      },
+      "ordinary": {
+        "assessed": 66,
+        "flagged": 0,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 66
+      }
+    },
+    "sharp_boundary": {
+      "feathered": {
+        "assessed": 29,
+        "flagged": 10,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 30
+      },
+      "interface": {
+        "assessed": 24,
+        "flagged": 13,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 24
+      },
+      "native": {
+        "assessed": 17,
+        "flagged": 5,
+        "useful": 4,
+        "useful_before_point": 5,
+        "views": 18
+      },
+      "ordinary": {
+        "assessed": 62,
+        "flagged": 4,
+        "useful": 0,
+        "useful_before_point": 0,
+        "views": 66
+      }
+    }
+  },
+  "cutoffs": {
+    "period_eight": 0.29112435217868193,
+    "period_four": 0.21055200099913668
+  },
+  "engineered_grid": {
+    "absent_period_four_score": 0.010755252294466552,
+    "authored_box": [
+      128,
+      112,
+      240,
+      208
+    ],
+    "channel": "red_green",
+    "direction": [
+      1,
+      1
+    ],
+    "period_four_score": 0.7980045753920033,
+    "recovered_box": [
+      144,
+      112,
+      240,
+      208
+    ]
+  },
+  "first_attempt_freeze_sha256": "cb90a7d29cfc9fab4dd87b952dcf8dd6174c63e42e507af6d0f10a996ebfe96f",
+  "freeze_sha256": "4f41066a4ef5c597c3f4e0601cdd666377d0dd73558b50f47dc3d22ef9272a04",
+  "gate": {
+    "maximum_extra_photo_groups": 2,
+    "maximum_extra_screenshot_groups": 1,
+    "maximum_mislocalized_edits": 2,
+    "minimum_alternate_feathered_gains": 1,
+    "minimum_primary_feathered_gains": 2
+  },
+  "held_gate_counts": {
+    "period_eight": {
+      "alternate_feathered_gains": 0,
+      "extra_photo_groups": 0,
+      "extra_screenshot_groups": 0,
+      "mislocalized_edits": 0,
+      "primary_feathered_gains": 0
+    },
+    "period_four": {
+      "alternate_feathered_gains": 0,
+      "extra_photo_groups": 0,
+      "extra_screenshot_groups": 0,
+      "mislocalized_edits": 0,
+      "primary_feathered_gains": 0
+    }
+  },
+  "held_sha256": "c69be83c20aea8990858b3ecd6aa1631af572143f0a94641202b6f93577d1995",
+  "method_sha256": "6810e29087e1fe8d59760f59fe8350130a00756b2efe8bf08f965a44a504c468",
+  "native_replay_exact": true,
+  "passed": {
+    "period_eight": false,
+    "period_four": false
+  },
+  "runtime": {
+    "numpy": "2.2.6",
+    "opencv": "5.0.0",
+    "pillow": "12.3.0"
+  },
+  "runtime_forwards": 0,
+  "schema": "chipmunk.image-phase-locked-residual-receipt/1",
+  "source_commitment": "2eacbfb5f2388c55560215e23430d818025268ee3d2e111cd18fa085698a9785",
+  "views": 138
+}

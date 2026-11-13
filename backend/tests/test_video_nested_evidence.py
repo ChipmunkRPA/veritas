@@ -752,7 +752,8 @@ from pathlib import Path
 class RuntimeUnavailable(importlib.abc.MetaPathFinder):
     def find_spec(self,fullname,path=None,target=None):
         if fullname in ('app.evidence','app.evidence.mp4','app.evidence.audio_binding','app.evidence.stereo_binding',
-                        'app.evidence.stereo_listening_binding',
+                        'app.evidence.stereo_listening_binding', 'app.evidence.stereo_repetition_binding',
+                        'app.evidence.audio_gain_repetition_binding',
                         'app.evidence.audio_background_binding','app.evidence.audio_repetition_binding','app.evidence.audio_exact_repetition',
                         'app.evidence.audio_similarity_binding',
                         'app.evidence.av_binding','app.evidence.face_interval_binding','app.evidence.face_boundary_binding','app.evidence.face_boundary_clock','app.evidence.face_alignment_context',

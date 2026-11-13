@@ -45,6 +45,10 @@ Neither period supplied a useful location at its frozen point.
 The [earlier-JPEG comparison](image-reference-delivery-envelope-2026-11-12.md)
 checks soft changes, ordinary re-encoding and global contrast. Its export
 reviewer reopens both originals and verifies the displayed crop and overlay.
+The [photographic PNG supplement](image-png-layout-guard-2026-11-12.md)
+replays the scope check on paired browser layouts and ordinary photos.
+Its public ledger compares the separate indications against 74 exact
+Full app results and records native crop commitments.
 
 The [earlier-video comparison](video-reference-comparison-2026-11-11.md#replay-without-the-app)
 re-decodes two supplied clips and checks the JSON, native picture timestamps,

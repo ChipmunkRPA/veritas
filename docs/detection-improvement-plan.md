@@ -97,6 +97,14 @@ integration remains unfinished.
 
 ## Progress on 12 November
 
+- The [photographic PNG supplement](image-png-layout-guard-2026-11-12.md)
+  added 12 indications on pixel-identical PNG deliveries of previously
+  tested generated JPEGs across three families. On eight new native
+  generated PNGs, the main Full checks already indicated all eight and
+  the supplement agreed on four. The screen-layout check kept all seven
+  raw false indications out of the supplement across 24 authored browser
+  deliveries. The local opt-in shows its inspected crops and reports
+  a scope skip on detected screen layouts.
 - The [short HTML reply extension](writing-html-reply-short-layouts-2026-11-12.md)
   preserved 14 useful locations and 13 existing genuine flags over 100
   matched plain-text and HTML-only emails. It assessed two more reply

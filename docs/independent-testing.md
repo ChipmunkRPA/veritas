@@ -1451,9 +1451,11 @@ The verifier checked the 34 localized WAV pairs from the published held panel an
 ### Replay the stereo export and the latest held checks
 
 Run from the repository root with Python 3.11 or later. The first command also
-needs FFmpeg and FFprobe, both original audio files, and a version 5 JSON export.
+needs FFmpeg and FFprobe, both original audio files, and a JSON export with a
+measured stereo section.
 It reopens the original recordings and verifies exact source intervals,
-channel samples, playable excerpts and waveforms. The other commands read
+channel samples, playable excerpts and waveforms. Version 7 includes the
+exact timing matches for each recorded channel. The other commands read
 public receipts and recalculate the held decisions without model weights.
 
 ```sh
@@ -1469,6 +1471,16 @@ PYTHONPATH=backend python3 -B -S -m scripts.review_video_mouth_sector_persistenc
 
 The [image line-pattern audit](image-line-fingerprint-transfer-2026-11-12.md)
 reopens the licensed photo and edit sources to check the location arithmetic.
+
+Three further reviews cover [stereo timing under competing speech](audio-reference-stereo-channel-timing-2026-11-12.md),
+[original character locations in signed writing evidence](document-original-text-locations-2026-11-12.md),
+and [head and mouth motion in synchronized video edits](video-mouth-rigid-coupling-2026-11-12.md).
+The writing verifier needs the original document and signed package. The stereo
+challenge needs the separately acquired publisher speech and room measurements.
+The video result reader can recalculate the held decisions from the public
+receipt alone. The [image region proposal audit](image-patch-proposal-audit-2026-11-12.md)
+replays both blind and earlier-copy localization on separately acquired photos
+and exact edit masks.
 
 To save a single cross-media receipt, run the `short-edits` suite. It uses
 the video, audio and writing readers above and the [public image thumbnail

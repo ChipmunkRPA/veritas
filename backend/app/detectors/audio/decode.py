@@ -131,7 +131,8 @@ def _read_stereo(path: Path, limit: int) -> np.ndarray:
 
 
 def decode_audio(path: Path, *, source_sha256: str, max_seconds: float = 600.0,
-                 inspect_stereo: bool = False, stream_position: int = 0) -> DecodedAudio:
+                 inspect_stereo: bool = False, stream_position: int = 0,
+                 retain_stereo: bool = False) -> DecodedAudio:
     if not (0 < max_seconds <= 600):
         raise ValueError("Audio decoding is bounded to 600 seconds")
     if not shutil.which("ffmpeg") or not shutil.which("ffprobe"):
@@ -155,9 +156,9 @@ def decode_audio(path: Path, *, source_sha256: str, max_seconds: float = 600.0,
         layout = stream.get("channel_layout")
         stereo_pcm, stereo_clock = None, None
         capture_stereo = False
-        if inspect_stereo:
+        if inspect_stereo or retain_stereo:
             from app.detectors.audio import stereo
-            capture_stereo = maximum >= SAMPLE_RATE and stereo.supports_stereo(int(stream["channels"]), layout)
+            capture_stereo = (retain_stereo or maximum >= SAMPLE_RATE) and stereo.supports_stereo(int(stream["channels"]), layout)
         with tempfile.TemporaryDirectory() as temp:
             output = Path(temp) / "decoded.wav"
             command = ["ffmpeg", "-nostdin", "-v", "info", "-y", "-protocol_whitelist", "file", "-copyts", "-i", _input(path)]
@@ -230,6 +231,9 @@ def decode_audio(path: Path, *, source_sha256: str, max_seconds: float = 600.0,
             mapping["stereo_context"] = stereo.build(mapping, pcm, layout, stereo_pcm, stereo_clock)
             if stereo_pcm is not None and mapping["stereo_context"]["stereo_pcm_sha256"] is not None:
                 verified_stereo = stereo_pcm[:len(mapping["stereo_context"]["windows"]) * SAMPLE_RATE]
+        if (retain_stereo and stereo_clock is not None and stereo_pcm is not None and len(stereo_pcm) == len(pcm)
+                and stereo_clock["timeline"] == timeline):
+            verified_stereo = stereo_pcm
         return DecodedAudio(pcm, wav_bytes(pcm), mapping, verified_stereo)
     except (subprocess.SubprocessError, json.JSONDecodeError, KeyError, IndexError, OSError) as exc:
         raise ValueError("The audio stream could not be decoded with a verified sample timeline") from exc

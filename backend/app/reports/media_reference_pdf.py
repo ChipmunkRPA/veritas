@@ -8,6 +8,7 @@ from app.evidence.audio_reference import (
     AUDIO_RATE,
     MAX_SECONDS,
     SCHEMA_WITH_LEVEL_ADJUSTMENT,
+    SCHEMA_WITH_STEREO,
     SCHEMA_WITH_TRIM_ALIGNMENT,
     SCHEMA_WITH_TRIM_AND_LEVEL,
 )
@@ -253,13 +254,13 @@ def _soundtrack_timing_page(document, timing, assets):
     _text(page, MARGIN, 720, "Waveforms share one scale. The JSON includes both playable excerpts.", size=9, color=MUTED)
 
 
-def _sound_page(document, span, *, level_adjusted=False, second_track=False):
+def _sound_page(document, span, *, level_adjusted=False, track_title=None):
     difference = span.get("difference")
     if level_adjusted:
         title = "Volume-adjusted difference"
         count_note = "samples cannot be explained by the measured volume adjustment."
     else:
-        title = "Second soundtrack differences" if second_track else ("Audio differences" if difference is not None else "Soundtrack differences")
+        title = track_title or ("Audio differences" if difference is not None else "Soundtrack differences")
         count_note = "differing samples in the selected range."
     page = _page(document, f"{span['id']}  {title}")
     aligned = span.get("file_ranges")
@@ -270,6 +271,9 @@ def _sound_page(document, span, *, level_adjusted=False, second_track=False):
         _text(page, MARGIN, 169, f"Earlier clip  {_audio_file_range(aligned['earlier'])}", color=MUTED)
     else:
         _text(page, MARGIN, 169, f"Waveforms cover {span['start_s']:.3f} to {preview['end_s']:.3f} s.")
+    if "first_differing_sample" in span:
+        _text(page, MARGIN, 188, f"First and last differing samples  {span['first_differing_sample']:,} and {span['last_differing_sample']:,}.",
+              size=9, color=MUTED)
     waveforms = preview["waveforms"]
     residual = preview.get("difference_waveform")
     maximum = max(.01, *(abs(level) for values in waveforms.values() for field in ("low", "high") for level in values[field]))
@@ -343,16 +347,40 @@ def _additional_soundtrack_pages(document, track):
     remaining = []
     for span in track["ranges"]:
         if span.get("preview"):
-            _sound_page(document, span, second_track=True)
+            _sound_page(document, span, track_title="Second soundtrack differences")
         else:
             remaining.append((span["id"], f"{_range(span)} - {span['changed_samples']:,} differing samples"))
     _remaining_ranges(document, remaining, "Additional second soundtrack ranges")
 
 
+def _stereo_pages(document, comparison):
+    page = _page(document, "Left and right channel comparison")
+    page.insert_textbox((MARGIN, 125, RIGHT, 200), comparison["scope"], fontsize=11, fontname="helv", color=INK)
+    if comparison["status"] != "measured":
+        notes = {**AUDIO_ONLY_STATUS, "stereo_pair_required": "Both copies need a recorded left and right channel.",
+                 "audio_unassessed": "Both stereo streams need verifiable, continuous sample clocks."}
+        _text(page, MARGIN, 225, notes[comparison["status"]])
+        return
+    for y, (side, label) in zip((222, 283), LABELS.items(), strict=True):
+        source = comparison["sources"][side]
+        _text(page, MARGIN, y, f"{label} · source stream {source['stream_index']} at {source['sample_rate']:,} Hz", font="hebo")
+        _text(page, MARGIN, y + 19, "Decoded stereo SHA-256 " + source["stereo_pcm_sha256"], size=9, font="cour", color=MUTED)
+    for y, (label, result) in zip((365, 392), comparison["channels"].items(), strict=True):
+        _text(page, MARGIN, y, f"{label.capitalize()} channel · {result['changed_samples']:,} decoded samples differ.")
+    for label, result in comparison["channels"].items():
+        remaining = []
+        for span in result["ranges"]:
+            if span.get("preview"):
+                _sound_page(document, span, track_title=f"{label.capitalize()} channel differences")
+            else:
+                remaining.append((span["id"], f"{_range(span)} - {span['changed_samples']:,} differing samples"))
+        _remaining_ranges(document, remaining, f"Additional {label} channel ranges")
+
+
 def render(record, assets):
     with pymupdf.open() as document:
         is_audio = record["schema"] in (AUDIO_SCHEMA, SCHEMA_WITH_LEVEL_ADJUSTMENT, SCHEMA_WITH_TRIM_ALIGNMENT,
-                                        SCHEMA_WITH_TRIM_AND_LEVEL)
+                                        SCHEMA_WITH_TRIM_AND_LEVEL, SCHEMA_WITH_STEREO)
         document.set_metadata({"title": "Earlier audio comparison" if is_audio else TITLE, "author": "Chipmunk Verify"})
         adjusted = record.get("level_adjusted")
         if adjusted and record["schema"] != SCHEMA_WITH_TRIM_AND_LEVEL:
@@ -382,4 +410,6 @@ def render(record, assets):
             _soundtrack_timing_page(document, record["soundtrack_alignment"], assets)
         if "additional_soundtrack" in record:
             _additional_soundtrack_pages(document, record["additional_soundtrack"])
+        if "stereo_comparison" in record:
+            _stereo_pages(document, record["stereo_comparison"])
         return document.tobytes(deflate=True, garbage=4)

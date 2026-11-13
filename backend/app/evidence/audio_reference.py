@@ -21,6 +21,7 @@ SCHEMA = "chipmunk.audio-reference-comparison/1"
 SCHEMA_WITH_LEVEL_ADJUSTMENT = "chipmunk.audio-reference-comparison/2"
 SCHEMA_WITH_TRIM_ALIGNMENT = "chipmunk.audio-reference-comparison/3"
 SCHEMA_WITH_TRIM_AND_LEVEL = "chipmunk.audio-reference-comparison/4"
+SCHEMA_WITH_STEREO = "chipmunk.audio-reference-comparison/5"
 MAX_BYTES = 48 * 1024 * 1024
 MAX_SECONDS = 30
 MAX_PRESENTED_RANGES = 3
@@ -51,6 +52,11 @@ TRIM_LEVEL_INTERPRETATION = (
     "analyzed minus volume-adjusted earlier samples within the shared span. Samples outside it were left unassessed. "
     "Ordinary processing and edits can produce differences. This comparison contributes zero weight to the AI estimate."
 )
+STEREO_SCOPE = (
+    "The two recorded channels are compared separately at 16 kHz in their original order. A change can be audible "
+    "in one or both channels even when the mono mix matches. Ordinary mixing and encoding can change these samples. "
+    "These measurements contribute zero weight to the AI estimate."
+)
 
 
 def _identity(path: Path, filename: str) -> dict:
@@ -74,19 +80,24 @@ def _wav_asset(assets, filename, content):
     return {"file": filename, "sha256": hashlib.sha256(content).hexdigest(), "media_type": "audio/wav"}
 
 
-def _read_track(path, source, *, max_seconds, origin, video, stream_position=0):
+def _read_track(path, source, *, max_seconds, origin, video, stream_position=0, include_stereo=False):
     try:
         options = {"stream_position": stream_position} if stream_position else {}
+        if include_stereo:
+            options["retain_stereo"] = True
         decoded = decode_audio(path, source_sha256=source["sha256"], max_seconds=max_seconds + 1, **options)
     except AudioStreamUnavailable:
-        return ("no_stream", None, None), False, False
+        return ("no_stream", None, None), False, False, None
     except (ValueError, RuntimeError):
-        return ("unverified_audio_clock", None, None), False, False
+        return ("unverified_audio_clock", None, None), False, False, None
     mapping = decoded.mapping
+    channel_info = {"channels": mapping["source_channels"], "sample_rate": mapping["source_sample_rate"],
+                    "stream_index": mapping["source_stream_index"]}
+    stereo = channel_info, decoded.stereo_pcm
     if (not video or stream_position) and mapping["samples"] > max_seconds * AUDIO_RATE:
-        return ("comparison_limit", None, None), False, False
+        return ("comparison_limit", None, None), False, False, stereo
     if len(mapping["timeline"]) != 1 or mapping["samples"] >= mapping["limit_samples"]:
-        return ("unverified_audio_clock", None, None), False, False
+        return ("unverified_audio_clock", None, None), False, False, stereo
     pts = mapping["timeline"][0]["source_pts"]
     relative = Fraction(pts, AUDIO_RATE) - origin
     native_lossless = (mapping["source_channels"] == 1 and mapping["source_sample_rate"] == AUDIO_RATE
@@ -96,11 +107,11 @@ def _read_track(path, source, *, max_seconds, origin, video, stream_position=0):
         or (mapping["source_codec"] == "flac" and mapping.get("source_bit_depth") == 16)
     )
     return ("measured", decoded.pcm, {"pcm_sha256": mapping["pcm_sha256"], "source_pts": pts,
-                                     "relative_start": str(relative), "samples": len(decoded.pcm)}), native_lossless, exact_s16
+                                     "relative_start": str(relative), "samples": len(decoded.pcm)}), native_lossless, exact_s16, stereo
 
 
 def read_track(path, source, *, max_seconds, origin=Fraction(0), video=False, stream_position=0):
-    track, _, _ = _read_track(path, source, max_seconds=max_seconds, origin=origin, video=video, stream_position=stream_position)
+    track, _, _, _ = _read_track(path, source, max_seconds=max_seconds, origin=origin, video=video, stream_position=stream_position)
     return track
 
 
@@ -109,7 +120,8 @@ def _source_ranges(first, second, start, end):
             for side, track in (("earlier", first), ("submitted", second))}
 
 
-def _measure_changes(first, second, assets, difference, delta, *, origin, prefix="", id_prefix="A"):
+def _measure_changes(first, second, assets, difference, delta, *, origin, prefix="", id_prefix="A",
+                     evidence_per_range=False):
     changed_per_bin = np.add.reduceat(difference, np.arange(0, len(difference), AUDIO_BIN_SAMPLES), dtype=np.int64)
     ranges = marked_ranges(changed_per_bin > 0)
     top = set(sorted(ranges, key=lambda pair: (-(pair[1] - pair[0]), pair[0]))[:MAX_PRESENTED_RANGES])
@@ -120,6 +132,10 @@ def _measure_changes(first, second, assets, difference, delta, *, origin, prefix
                 "start_s": float(origin + Fraction(start, AUDIO_RATE)), "end_s": float(origin + Fraction(end, AUDIO_RATE)),
                 "changed_samples": int(np.sum(changed_per_bin[first_bin:after_bin])),
                 "source_ranges": _source_ranges(first, second, start, end)}
+        if evidence_per_range:
+            sample_offsets = np.flatnonzero(difference[start:end])
+            item["first_differing_sample"] = start + int(sample_offsets[0])
+            item["last_differing_sample"] = start + int(sample_offsets[-1])
         if delta is not None:
             span = delta[start:end].astype(np.float64)
             item["difference"] = {"peak": float(np.max(np.abs(span))), "rms": float(np.sqrt(np.mean(span**2)))}
@@ -151,6 +167,37 @@ def compare_tracks(first, second, assets, *, standalone=False, preview_prefix=""
     origin = Fraction(0) if standalone else Fraction(right["relative_start"])
     return {"status": "measured", "earlier": left, "submitted": right,
             **_measure_changes(first, second, assets, first[1] != second[1], delta, origin=origin, prefix=preview_prefix)}
+
+
+def _compare_stereo(decoded, assets):
+    labels = ("earlier", "submitted")
+    tracks = [item[0] for item in decoded]
+    inputs = [item[3] for item in decoded]
+    sources = {side: item[0] if item is not None else None for side, item in zip(labels, inputs, strict=True)}
+    if not any(source and source["channels"] == 2 for source in sources.values()):
+        return None
+    coverage = {"scope": STEREO_SCOPE, "sources": sources, "affects_overall_confidence": False,
+                "source_time_base": f"1/{AUDIO_RATE}"}
+    if not all(source and source["channels"] == 2 for source in sources.values()):
+        return {**coverage, "status": "stereo_pair_required"}
+    if any(track[0] == "comparison_limit" for track in tracks):
+        return {**coverage, "status": "comparison_limit"}
+    if any(track[0] != "measured" or item[1] is None for track, item in zip(tracks, inputs, strict=True)):
+        return {**coverage, "status": "audio_unassessed"}
+    if any(tracks[0][2][key] != tracks[1][2][key] for key in ("relative_start", "samples")):
+        return {**coverage, "status": "audio_timelines_differ"}
+
+    pcm = [item[1] for item in inputs]
+    sources = {side: {**sources[side], "stereo_pcm_sha256": hashlib.sha256(signal.astype("<i2", copy=False).tobytes()).hexdigest()}
+               for side, signal in zip(labels, pcm, strict=True)}
+    channels = {}
+    for index, label in enumerate(("left", "right")):
+        views = [("measured", signal[:, index].astype(np.float32) / 32768, {"source_pts": track[2]["source_pts"]})
+                 for signal, track in zip(pcm, tracks, strict=True)]
+        earlier, analyzed = views[0][1], views[1][1]
+        channels[label] = _measure_changes(*views, assets, analyzed != earlier, analyzed - earlier, origin=Fraction(0),
+                                           prefix=f"{label}-", id_prefix=label[0].upper(), evidence_per_range=True)
+    return {**coverage, "sources": sources, "status": "measured", "channels": channels}
 
 
 def _gain_bounds(bounds):
@@ -264,12 +311,13 @@ def _audio_trim(first, second, assets, *, adjust_volume=False):
 def compare(earlier: Path, submitted: Path, *, filenames: tuple[str, str] | None = None,
             include_level_adjustment: bool = True,
             include_trim_alignment: bool = True,
-            include_trim_level_adjustment: bool = True) -> tuple[dict, dict[str, bytes]]:
+            include_trim_level_adjustment: bool = True,
+            include_stereo: bool = True) -> tuple[dict, dict[str, bytes]]:
     """Compare continuous recordings and recover a small, exactly supported edge trim."""
     paths = earlier, submitted
     filenames = filenames or (earlier.name, submitted.name)
     sources = tuple(_identity(path, name) for path, name in zip(paths, filenames, strict=True))
-    first, second = [_read_track(path, source, max_seconds=MAX_SECONDS, origin=Fraction(0), video=False)
+    first, second = [_read_track(path, source, max_seconds=MAX_SECONDS, origin=Fraction(0), video=False, include_stereo=include_stereo)
                      for path, source in zip(paths, sources, strict=True)]
     tracks = first[0], second[0]
     assets: dict[str, bytes] = {}
@@ -292,6 +340,10 @@ def compare(earlier: Path, submitted: Path, *, filenames: tuple[str, str] | None
         adjusted = _level_adjusted(*tracks, assets)
         if adjusted is not None:
             record.update(schema=SCHEMA_WITH_LEVEL_ADJUSTMENT, level_adjusted=adjusted)
+    if include_stereo:
+        stereo = _compare_stereo((first, second), assets)
+        if stereo is not None:
+            record.update(schema=SCHEMA_WITH_STEREO, stereo_comparison=stereo)
     if sources != tuple(_identity(path, name) for path, name in zip(paths, filenames, strict=True)):
         raise ValueError("One of the recordings changed while the comparison was running.")
     return record, assets

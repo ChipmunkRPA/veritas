@@ -3,6 +3,7 @@ import hashlib
 import json
 import shutil
 import subprocess
+import wave
 from contextlib import contextmanager
 from fractions import Fraction
 from pathlib import Path
@@ -30,6 +31,61 @@ def save(folder, name, samples):
     path = folder / f"{name}.wav"
     path.write_bytes(wav_bytes(samples))
     return path
+
+
+def save_stereo(folder, name, samples):
+    path = folder / f"{name}.wav"
+    with wave.open(str(path), "wb") as output:
+        output.setparams((2, 2, 16000, 0, "NONE", ""))
+        output.writeframes(samples.astype("<i2", copy=False).tobytes())
+    return path
+
+
+def test_stereo_comparison_preserves_changes_hidden_by_downmix_and_exact_tail(tmp_path):
+    rng = np.random.default_rng(451)
+    before = rng.integers(-4000, 4001, (20123, 2), dtype=np.int16) * 2
+    after = before.copy()
+    after[12801:13511] += [160, -160]
+    after[-13:] += [-120, 120]
+    earlier = save_stereo(tmp_path, "earlier-stereo", before)
+    analyzed = save_stereo(tmp_path, "analyzed-stereo", after)
+    record, assets = audio_reference.compare(earlier, analyzed)
+    assert record["schema"] == audio_reference.SCHEMA_WITH_STEREO
+    assert record["status"] == "measured" and record["audio"]["changed_samples"] == 0
+    result = record["stereo_comparison"]
+    assert result["status"] == "measured" and result["affects_overall_confidence"] is False
+    for side, samples in (("earlier", before), ("submitted", after)):
+        assert result["sources"][side]["stereo_pcm_sha256"] == hashlib.sha256(samples.astype("<i2").tobytes()).hexdigest()
+    for index, label in enumerate(("left", "right")):
+        channel = result["channels"][label]
+        assert channel["changed_samples"] == 723
+        for idx, (span, bounds) in enumerate(zip(channel["ranges"], ((12800, 13760), (19840, 20123)), strict=True), 1):
+            start, end = bounds
+            assert span["id"] == f"{label[0].upper()}{idx:02d}"
+            assert (span["start_sample"], span["end_sample"]) == bounds
+            assert (span["first_differing_sample"], span["last_differing_sample"]) == ((12801, 13510), (20110, 20122))[idx - 1]
+            assert "difference_waveform" in span["preview"]
+            for side, samples in (("earlier", before), ("submitted", after)):
+                assert span["source_ranges"][side] == {"start_pts": start, "end_exclusive_pts": end}
+                wav = assets[span["preview"]["assets"][side]["file"]]
+                np.testing.assert_array_equal(read_wav(wav), samples[start:end, index] / 32768)
+    with pymupdf.open(stream=render_comparison(record, assets), filetype="pdf") as document:
+        report = " ".join(page.get_text() for page in document)
+        assert all(text in report for text in ("Left and right channel comparison", "L01", "R02", "Difference waveform",
+                                               "Source ticks [19840, 20123)"))
+    output = tmp_path / "stereo-replay"
+    assert run(earlier, analyzed, output) == run(earlier, analyzed, output, verify=True) == record
+    legacy, _ = audio_reference.compare(earlier, analyzed, include_stereo=False)
+    historical = tmp_path / "historical.json"
+    historical.write_text(json.dumps({"comparison": legacy, "assets": {}}))
+    assert run(earlier, analyzed, historical, verify=True) == legacy
+
+    shortened = save_stereo(tmp_path, "shortened-stereo", after[:-23])
+    mismatched, _ = audio_reference.compare(earlier, shortened)
+    assert mismatched["stereo_comparison"]["status"] == "audio_timelines_differ"
+    mono = save(tmp_path, "mono", before.mean(axis=1) / 32768)
+    mixed, _ = audio_reference.compare(earlier, mono)
+    assert mixed["stereo_comparison"]["status"] == "stereo_pair_required"
 
 
 @pytest.fixture
@@ -377,7 +433,12 @@ def test_volume_adjustment_abstains_without_matching_support_or_native_samples(t
                    capture_output=True, check=True, timeout=20)
     for variant in (*incompatible, stereo):
         record, _ = audio_reference.compare(earlier, variant)
-        assert record["schema"] == audio_reference.SCHEMA and record["status"] == "measured"
+        assert record["status"] == "measured"
+        if variant == stereo:
+            assert record["schema"] == audio_reference.SCHEMA_WITH_STEREO
+            assert record["stereo_comparison"]["status"] == "stereo_pair_required"
+        else:
+            assert record["schema"] == audio_reference.SCHEMA
         assert "level_adjusted" not in record and record["audio"]["changed_samples"] > 0
 
 

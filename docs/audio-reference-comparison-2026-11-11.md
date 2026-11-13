@@ -24,6 +24,14 @@ Eight distinct retained genuine speech sources supplied three-second mono contro
 
 Authenticated app tests verify the JSON and PDF against the same decoded intervals. A second fixture preserves a nonzero 16 kHz source origin while displaying elapsed seconds relative to the first sample. Tests also verify that access checks apply and the comparison does not add objects, analyses, jobs, or payment records.
 
+### Changes in the recorded stereo channels
+
+Version 5 also compares the left and right channels of the first audio stream separately when both files have two channels and identical continuous clocks. It uses the original channel order and decoded 16 kHz signed 16-bit PCM. For each affected channel, the app shows the 20 ms bins with changes, the exact first and last differing sample inside each range, and the source-clock ticks. It provides playable excerpts from both copies, their waveforms, and a difference waveform for up to three ranges per channel. PDF and JSON preserve the same coordinates. A mono counterpart, trim, incompatible clock, or unavailable channel capture leaves the stereo check unassessed. Ordinary mixes and encoding can produce differences. The check measures changes between two supplied copies and leaves the AI confidence score unchanged.
+
+Using the 12 retained six-second speech groups with competing room speech, an engineered control applied each generated or ordinary replacement to the left channel and the equal-and-opposite change to the right channel. The mono mix matched in all 48 pairs. Channel comparison recovered all 12 generated replacements, all 24 ordinary replacements, and zero differences in all 12 untouched pairs. A second panel used 26 pairs from the held measured-room stereo mixtures. Channel comparison reproduced the sample-level differences on all 18 edits, including the room response tails, and found zero differences on six untouched copies and two isolated background controls. A lossless FLAC conversion matched both channels. The controlled cancellation tests validate the sample measurement and do not represent prevalence or detection accuracy on random uploads. [Competing speech panel](audio-remote-neighbor-replication-2026-11-12.md) · [Measured-room stereo panel](audio-measured-spatial-transfer-2026-11-12.md)
+
+Local Chrome verified six waveforms, four playable excerpts, and API-equivalent PDF and JSON for the 0.320–0.960 s example. An independent calculation checked the two source hashes, each range and its changed samples, and WAV readback. Offline JSON replay reproduced the exact artifacts. The request created no new job, payment, analysis, or retained evidence object.
+
 ### Volume-adjusted copies with recorded competing speech
 
 The local panel generated 52 new signed 16-bit WAV pairs using retained six-second PCM from 12 held speech groups and four room-only controls. The three authored edit variants for each speech group share the unchanged host and background outside known edit bounds. They include one generated speech insert from one of three synthesis families, one ordinary same-reader insert, and one ordinary other-reader insert. The speech mixes use recorded overlapping talkers from four rooms at −5 dB foreground-to-background ratio over the clip. [Source preparation and rights](audio-remote-neighbor-replication-2026-11-12.md#held-sources-and-frozen-comparison)
@@ -62,4 +70,4 @@ python -m scripts.compare_audio_references earlier.wav analyzed.wav evidence-fol
 python -m scripts.compare_audio_references earlier.wav analyzed.wav chipmunk-verify-audio-comparison.json --verify
 ```
 
-Replay uses the app's measurement implementation and supports all four export versions. Record the FFmpeg version if runs produce different decoded bytes. Keep private audio and exports in your local workspace.
+Replay uses the app's measurement implementation and supports all five export versions. Record the FFmpeg version if runs produce different decoded bytes. Keep private audio and exports in your local workspace.

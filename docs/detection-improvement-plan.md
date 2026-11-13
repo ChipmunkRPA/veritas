@@ -139,6 +139,16 @@ integration remains unfinished.
   one-second windows, versus two with the stock two-second windows.
   The public test prefix contains no fully genuine recordings.
   The shorter check remains experimental.
+- The [English named-generator census](audio-melo-short-source-census-2026-11-13.md)
+  verified 914 eligible genuine and generated prompt pairs. All 11
+  paired readers appeared in earlier local source plans, so the archive
+  prefix supplies development material and cannot serve as a fresh
+  reader-held test.
+- The [matched English speech-edit comparison](audio-sine-preview-2026-11-13.md)
+  found two of ten cut-and-paste edits with the dense voice windows,
+  versus zero with the current windows. Neither window located the ten
+  seamless infilling edits. Both left all ten original controls from
+  the preview's sole reader unflagged. The dense check stays experimental.
 - The [PDF Content Credentials check](pdf-content-credentials-2026-11-13.md)
   verifies a whole-file AI declaration locally before acquiring writing models.
   Signed document coverage, modified PDF controls and payment-first behavior

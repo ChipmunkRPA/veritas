@@ -52,7 +52,12 @@ any voice model is trained or evaluated. The [native intake](audio-partialspoof-
 then checks the candidate label positions against their original sample clocks.
 The [Half-Truth audio replay](audio-had-native-intake-2026-11-13.md#replay-the-intake)
 uses about 4.3 MB of publisher ranges and provides a positive-only,
-model-scored comparison using fixed earlier points.
+model-scored comparison using fixed earlier points. The
+[English named-generator census](audio-melo-short-source-census-2026-11-13.md#native-replay)
+checks exact prompt pairing and prior speaker overlap before scoring.
+The [matched English speech-edit comparison](audio-sine-preview-2026-11-13.md#replay)
+adds reproducible original, cut-and-paste and seamless infilling comparisons
+from a public preview, retaining its one-reader and one-generator limits.
 
 The [JPEG90 paired-source audit](image-jpeg90-reflection-source-context-2026-11-13.md)
 replays the original regional masks and checks whether highlighted pixels

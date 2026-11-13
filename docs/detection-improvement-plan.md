@@ -97,6 +97,10 @@ integration remains unfinished.
 
 ## Progress on 12 November
 
+- The [JPEG coefficient-transition study](image-jpeg-signed-transitions-2026-11-12.md)
+  added three feathered JPEG90 locations and seven ordinary source-group
+  flags. A fresh 120-view BG-REAL comparison found no useful locations or
+  ordinary flags. The two source replays matched and the cue stays offline.
 - The [frequency-view speech study](audio-subband-partial-transfer-2026-11-12.md)
   added three gain-only locations and zero under louder rain or train sound.
   The two separately frozen points added no genuine file flags. It did not

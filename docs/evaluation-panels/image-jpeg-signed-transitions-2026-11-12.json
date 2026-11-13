@@ -1,0 +1,1833 @@
+{
+  "archive": {
+    "calibration_sha256": "acc7553ab5dbfbc1994a34b2b08cf78b5f045f971da95e373fdf013fb409cbd0",
+    "freeze_sha256": "2361a0cfe95a17aa0b8fe2c446fb115b567d7102f6df5b6ec3731bd30dc19503",
+    "held_sha256": "68de152c032966e9867fcb78127a13e5651d2772a193fe1f4652ef3ffa2eff77",
+    "input_counts": {
+      "calibration": 192,
+      "fit": 240,
+      "held": 480
+    },
+    "native_replay": "exact input and measurement parity",
+    "operating_points": {
+      "75": {
+        "between": 6.017549127703389,
+        "combined": 5.495639810724194,
+        "within": 4.836164242201581
+      },
+      "90": {
+        "between": 4.493549333494238,
+        "combined": 4.366533086964715,
+        "within": 3.873038304123303
+      }
+    },
+    "outcomes": {
+      "75/between": {
+        "actual": {
+          "added_families": 1,
+          "added_feathered_sources": 1,
+          "extra_control_groups": 5,
+          "wrong_edit_views": 4
+        },
+        "passed": false
+      },
+      "75/combined": {
+        "actual": {
+          "added_families": 1,
+          "added_feathered_sources": 1,
+          "extra_control_groups": 6,
+          "wrong_edit_views": 7
+        },
+        "passed": false
+      },
+      "75/within": {
+        "actual": {
+          "added_families": 2,
+          "added_feathered_sources": 2,
+          "extra_control_groups": 6,
+          "wrong_edit_views": 9
+        },
+        "passed": false
+      },
+      "90/between": {
+        "actual": {
+          "added_families": 2,
+          "added_feathered_sources": 2,
+          "extra_control_groups": 5,
+          "wrong_edit_views": 6
+        },
+        "passed": false
+      },
+      "90/combined": {
+        "actual": {
+          "added_families": 1,
+          "added_feathered_sources": 1,
+          "extra_control_groups": 5,
+          "wrong_edit_views": 6
+        },
+        "passed": false
+      },
+      "90/within": {
+        "actual": {
+          "added_families": 3,
+          "added_feathered_sources": 3,
+          "extra_control_groups": 7,
+          "wrong_edit_views": 7
+        },
+        "passed": false
+      }
+    },
+    "strata": {
+      "75/firefly/feather/between": {
+        "flagged": 1,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 2
+      },
+      "75/firefly/feather/combined": {
+        "flagged": 0,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 2
+      },
+      "75/firefly/feather/jpeg_compression": {
+        "flagged": 0,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/firefly/feather/within": {
+        "flagged": 1,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 2
+      },
+      "75/firefly/local_blur/between": {
+        "flagged": 1,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/firefly/local_blur/combined": {
+        "flagged": 1,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/firefly/local_blur/jpeg_compression": {
+        "flagged": 0,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/firefly/local_blur/within": {
+        "flagged": 1,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/firefly/local_tone/between": {
+        "flagged": 1,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/firefly/local_tone/combined": {
+        "flagged": 1,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/firefly/local_tone/jpeg_compression": {
+        "flagged": 0,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/firefly/local_tone/within": {
+        "flagged": 1,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/firefly/ordinary/between": {
+        "flagged": 1,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/firefly/ordinary/combined": {
+        "flagged": 1,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/firefly/ordinary/jpeg_compression": {
+        "flagged": 0,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/firefly/ordinary/within": {
+        "flagged": 1,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/firefly/sharp/between": {
+        "flagged": 1,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 2
+      },
+      "75/firefly/sharp/combined": {
+        "flagged": 0,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 2
+      },
+      "75/firefly/sharp/jpeg_compression": {
+        "flagged": 0,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/firefly/sharp/within": {
+        "flagged": 1,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 2
+      },
+      "75/flux-fill/feather/between": {
+        "flagged": 0,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 4
+      },
+      "75/flux-fill/feather/combined": {
+        "flagged": 1,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 4
+      },
+      "75/flux-fill/feather/jpeg_compression": {
+        "flagged": 0,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/flux-fill/feather/within": {
+        "flagged": 2,
+        "total": 16,
+        "useful": 1,
+        "useful_before_point": 5
+      },
+      "75/flux-fill/local_blur/between": {
+        "flagged": 0,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/flux-fill/local_blur/combined": {
+        "flagged": 1,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/flux-fill/local_blur/jpeg_compression": {
+        "flagged": 0,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/flux-fill/local_blur/within": {
+        "flagged": 2,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/flux-fill/local_tone/between": {
+        "flagged": 1,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/flux-fill/local_tone/combined": {
+        "flagged": 2,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/flux-fill/local_tone/jpeg_compression": {
+        "flagged": 0,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/flux-fill/local_tone/within": {
+        "flagged": 2,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/flux-fill/ordinary/between": {
+        "flagged": 1,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/flux-fill/ordinary/combined": {
+        "flagged": 2,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/flux-fill/ordinary/jpeg_compression": {
+        "flagged": 0,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/flux-fill/ordinary/within": {
+        "flagged": 2,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/flux-fill/sharp/between": {
+        "flagged": 0,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 4
+      },
+      "75/flux-fill/sharp/combined": {
+        "flagged": 2,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 4
+      },
+      "75/flux-fill/sharp/jpeg_compression": {
+        "flagged": 0,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/flux-fill/sharp/within": {
+        "flagged": 2,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 4
+      },
+      "75/sd2/feather/between": {
+        "flagged": 2,
+        "total": 16,
+        "useful": 1,
+        "useful_before_point": 1
+      },
+      "75/sd2/feather/combined": {
+        "flagged": 3,
+        "total": 16,
+        "useful": 1,
+        "useful_before_point": 1
+      },
+      "75/sd2/feather/jpeg_compression": {
+        "flagged": 0,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/sd2/feather/within": {
+        "flagged": 3,
+        "total": 16,
+        "useful": 1,
+        "useful_before_point": 1
+      },
+      "75/sd2/local_blur/between": {
+        "flagged": 3,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/sd2/local_blur/combined": {
+        "flagged": 3,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/sd2/local_blur/jpeg_compression": {
+        "flagged": 0,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/sd2/local_blur/within": {
+        "flagged": 3,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/sd2/local_tone/between": {
+        "flagged": 3,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/sd2/local_tone/combined": {
+        "flagged": 3,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/sd2/local_tone/jpeg_compression": {
+        "flagged": 0,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/sd2/local_tone/within": {
+        "flagged": 3,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/sd2/ordinary/between": {
+        "flagged": 3,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/sd2/ordinary/combined": {
+        "flagged": 3,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/sd2/ordinary/jpeg_compression": {
+        "flagged": 0,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/sd2/ordinary/within": {
+        "flagged": 3,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/sd2/sharp/between": {
+        "flagged": 2,
+        "total": 16,
+        "useful": 1,
+        "useful_before_point": 1
+      },
+      "75/sd2/sharp/combined": {
+        "flagged": 3,
+        "total": 16,
+        "useful": 1,
+        "useful_before_point": 1
+      },
+      "75/sd2/sharp/jpeg_compression": {
+        "flagged": 0,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/sd2/sharp/within": {
+        "flagged": 3,
+        "total": 16,
+        "useful": 1,
+        "useful_before_point": 1
+      },
+      "90/firefly/feather/between": {
+        "flagged": 0,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 2
+      },
+      "90/firefly/feather/combined": {
+        "flagged": 0,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 2
+      },
+      "90/firefly/feather/jpeg_compression": {
+        "flagged": 1,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/firefly/feather/within": {
+        "flagged": 1,
+        "total": 16,
+        "useful": 1,
+        "useful_before_point": 3
+      },
+      "90/firefly/local_blur/between": {
+        "flagged": 0,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/firefly/local_blur/combined": {
+        "flagged": 0,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/firefly/local_blur/jpeg_compression": {
+        "flagged": 1,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/firefly/local_blur/within": {
+        "flagged": 1,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/firefly/local_tone/between": {
+        "flagged": 0,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/firefly/local_tone/combined": {
+        "flagged": 0,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/firefly/local_tone/jpeg_compression": {
+        "flagged": 1,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/firefly/local_tone/within": {
+        "flagged": 1,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/firefly/ordinary/between": {
+        "flagged": 0,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/firefly/ordinary/combined": {
+        "flagged": 0,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/firefly/ordinary/jpeg_compression": {
+        "flagged": 1,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/firefly/ordinary/within": {
+        "flagged": 1,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/firefly/sharp/between": {
+        "flagged": 0,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 2
+      },
+      "90/firefly/sharp/combined": {
+        "flagged": 0,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 2
+      },
+      "90/firefly/sharp/jpeg_compression": {
+        "flagged": 1,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/firefly/sharp/within": {
+        "flagged": 1,
+        "total": 16,
+        "useful": 1,
+        "useful_before_point": 3
+      },
+      "90/flux-fill/feather/between": {
+        "flagged": 3,
+        "total": 16,
+        "useful": 2,
+        "useful_before_point": 5
+      },
+      "90/flux-fill/feather/combined": {
+        "flagged": 2,
+        "total": 16,
+        "useful": 1,
+        "useful_before_point": 6
+      },
+      "90/flux-fill/feather/jpeg_compression": {
+        "flagged": 1,
+        "total": 16,
+        "useful": 1,
+        "useful_before_point": 1
+      },
+      "90/flux-fill/feather/within": {
+        "flagged": 3,
+        "total": 16,
+        "useful": 2,
+        "useful_before_point": 5
+      },
+      "90/flux-fill/local_blur/between": {
+        "flagged": 2,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/flux-fill/local_blur/combined": {
+        "flagged": 2,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/flux-fill/local_blur/jpeg_compression": {
+        "flagged": 2,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/flux-fill/local_blur/within": {
+        "flagged": 3,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/flux-fill/local_tone/between": {
+        "flagged": 2,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/flux-fill/local_tone/combined": {
+        "flagged": 2,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/flux-fill/local_tone/jpeg_compression": {
+        "flagged": 0,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/flux-fill/local_tone/within": {
+        "flagged": 3,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/flux-fill/ordinary/between": {
+        "flagged": 2,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/flux-fill/ordinary/combined": {
+        "flagged": 2,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/flux-fill/ordinary/jpeg_compression": {
+        "flagged": 1,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/flux-fill/ordinary/within": {
+        "flagged": 3,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/flux-fill/sharp/between": {
+        "flagged": 2,
+        "total": 16,
+        "useful": 1,
+        "useful_before_point": 5
+      },
+      "90/flux-fill/sharp/combined": {
+        "flagged": 2,
+        "total": 16,
+        "useful": 1,
+        "useful_before_point": 6
+      },
+      "90/flux-fill/sharp/jpeg_compression": {
+        "flagged": 1,
+        "total": 16,
+        "useful": 1,
+        "useful_before_point": 1
+      },
+      "90/flux-fill/sharp/within": {
+        "flagged": 3,
+        "total": 16,
+        "useful": 1,
+        "useful_before_point": 4
+      },
+      "90/sd2/feather/between": {
+        "flagged": 3,
+        "total": 16,
+        "useful": 1,
+        "useful_before_point": 1
+      },
+      "90/sd2/feather/combined": {
+        "flagged": 3,
+        "total": 16,
+        "useful": 1,
+        "useful_before_point": 1
+      },
+      "90/sd2/feather/jpeg_compression": {
+        "flagged": 1,
+        "total": 16,
+        "useful": 1,
+        "useful_before_point": 1
+      },
+      "90/sd2/feather/within": {
+        "flagged": 3,
+        "total": 16,
+        "useful": 1,
+        "useful_before_point": 1
+      },
+      "90/sd2/local_blur/between": {
+        "flagged": 3,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/sd2/local_blur/combined": {
+        "flagged": 3,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/sd2/local_blur/jpeg_compression": {
+        "flagged": 0,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/sd2/local_blur/within": {
+        "flagged": 3,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/sd2/local_tone/between": {
+        "flagged": 3,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/sd2/local_tone/combined": {
+        "flagged": 3,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/sd2/local_tone/jpeg_compression": {
+        "flagged": 0,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/sd2/local_tone/within": {
+        "flagged": 3,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/sd2/ordinary/between": {
+        "flagged": 3,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/sd2/ordinary/combined": {
+        "flagged": 3,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/sd2/ordinary/jpeg_compression": {
+        "flagged": 0,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/sd2/ordinary/within": {
+        "flagged": 3,
+        "total": 16,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/sd2/sharp/between": {
+        "flagged": 3,
+        "total": 16,
+        "useful": 1,
+        "useful_before_point": 1
+      },
+      "90/sd2/sharp/combined": {
+        "flagged": 3,
+        "total": 16,
+        "useful": 1,
+        "useful_before_point": 1
+      },
+      "90/sd2/sharp/jpeg_compression": {
+        "flagged": 2,
+        "total": 16,
+        "useful": 1,
+        "useful_before_point": 1
+      },
+      "90/sd2/sharp/within": {
+        "flagged": 3,
+        "total": 16,
+        "useful": 1,
+        "useful_before_point": 1
+      }
+    }
+  },
+  "code": {
+    "image_jpeg_signed_transitions.py": "026afaec8910abe3824ef91a813c8b1485eae61f2c8a81970f3c57208a39a7ab",
+    "image_matched_detail_transfer.py": "d37e90b0fbbc9fc9cb33f0d6397c9e7c0a887f420cd57f9c71b150332bb450bd",
+    "jpeg_dq.py": "3b176132b5c63ac062f2f53aa9d7dc2c766d4c92c1818825d23d40751bbd9f0e",
+    "prepare_tgif_localization.py": "c18705473785c2826d74a742a9a080476e8cf54c969689f5f90be9ae1ad7f6bb"
+  },
+  "design": {
+    "advance": {
+      "added_families": 2,
+      "added_feathered_sources": 6,
+      "extra_control_groups": 3,
+      "wrong_edit_views": 4
+    },
+    "cell_px": 8,
+    "coefficient_states": [
+      -2,
+      -1,
+      0,
+      1,
+      2
+    ],
+    "confidence_weight": 0,
+    "families": [
+      "firefly",
+      "sd2",
+      "flux-fill"
+    ],
+    "formats": [
+      75,
+      90
+    ],
+    "frequencies": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        2,
+        0
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        1
+      ],
+      [
+        2,
+        2
+      ],
+      [
+        0,
+        3
+      ],
+      [
+        3,
+        0
+      ]
+    ],
+    "mask_box_sides": [
+      32,
+      360
+    ],
+    "maximum_cells_per_group_class": 48,
+    "maximum_mask_share": 0.08,
+    "minimum_mask_share": 0.001,
+    "operating_point": "Strictly above the second-highest ordinary per-source maximum; fixed by delivery and arm.",
+    "proposal_sizes_in_blocks": [
+      4,
+      6,
+      8,
+      10,
+      12,
+      16,
+      20,
+      24,
+      30,
+      36
+    ],
+    "quality_subsampling": "4:2:0",
+    "ridge": 0.1,
+    "source_roles": {
+      "calibration": [
+        [
+          "tgif-confirmation-v3",
+          8
+        ]
+      ],
+      "fit": [
+        [
+          "tgif-pairs-v2",
+          8
+        ]
+      ],
+      "held": [
+        [
+          "tgif-confirmation-v4",
+          8
+        ],
+        [
+          "tgif-confirmation-v5",
+          8
+        ]
+      ]
+    },
+    "support": {
+      "min_iou": 0.3,
+      "minimum_positive_pixel_share": 0.5
+    },
+    "window_blocks": 6
+  },
+  "external": {
+    "acquisition_sha256": "868118ef08bcf4219f704927394f25f0f8e5d85d161de5ac707dd5465fb88797",
+    "freeze_sha256": "9b9915105a9a29f70747bed954c21d66ffbe057c7f0b21e6849d71fffc8a099b",
+    "held_sha256": "83e7a4cfb5ed702ded248d6c06729d994ba203ec8a088487bba9a0730bb0457a",
+    "input_count": 120,
+    "native_replay": "byte-for-byte",
+    "outcomes": {
+      "75/between": {
+        "actual": {
+          "added_families": 0,
+          "added_feathered_sources": 0,
+          "extra_control_groups": 0,
+          "wrong_edit_views": 0
+        },
+        "passed": false
+      },
+      "75/combined": {
+        "actual": {
+          "added_families": 0,
+          "added_feathered_sources": 0,
+          "extra_control_groups": 0,
+          "wrong_edit_views": 0
+        },
+        "passed": false
+      },
+      "75/within": {
+        "actual": {
+          "added_families": 0,
+          "added_feathered_sources": 0,
+          "extra_control_groups": 0,
+          "wrong_edit_views": 0
+        },
+        "passed": false
+      },
+      "90/between": {
+        "actual": {
+          "added_families": 0,
+          "added_feathered_sources": 0,
+          "extra_control_groups": 0,
+          "wrong_edit_views": 0
+        },
+        "passed": false
+      },
+      "90/combined": {
+        "actual": {
+          "added_families": 0,
+          "added_feathered_sources": 0,
+          "extra_control_groups": 0,
+          "wrong_edit_views": 0
+        },
+        "passed": false
+      },
+      "90/within": {
+        "actual": {
+          "added_families": 0,
+          "added_feathered_sources": 0,
+          "extra_control_groups": 0,
+          "wrong_edit_views": 0
+        },
+        "passed": false
+      }
+    },
+    "overlap_checks": {
+      "prior_graph_exact_or_near": 0,
+      "prior_graph_photo_count": 866,
+      "within_panel_near": 0
+    },
+    "plan_sha256": "915b08fbdb26a4a49fe9c585eddbb9d495459af7bfb63b8e5d460daa43ea70a0",
+    "public_release_revision": "aaba6cd1ced4ce3c846be9641fed092adb4919d1",
+    "publisher_splits": {
+      "test_id": 2,
+      "test_subject_ood": 5,
+      "train": 5
+    },
+    "qualified_groups": 12,
+    "schema": "chipmunk.image-jpeg-small-bg-real-holdout/1",
+    "source_attribution_and_commitments": [
+      {
+        "attribution": {
+          "Author": "Roger Lew",
+          "AuthorProfileURL": "https://www.flickr.com/people/rogerlew/",
+          "License": "https://creativecommons.org/licenses/by/2.0/",
+          "OriginalLandingURL": "https://flickr.com/78842900@N00/20295139923"
+        },
+        "edited": {
+          "path": "v2/images/d/oi_d66327f55f665567_F5.png",
+          "sha256": "5b89fcf0d0135c91ce0cce147e4f0f62837cbb4cf6c9560918585e567691f7cb"
+        },
+        "edited_area": 0.0437342325846354,
+        "family": "lama",
+        "mask": {
+          "path": "v2/masks/edit/d/oi_d66327f55f665567_F5_edit.png",
+          "sha256": "70c36de3ba4ded421ac84b26a8ce24cac080a57ec0096bfb32bd0f65a4874787"
+        },
+        "publisher_split": "test_subject_ood",
+        "shape": [
+          768,
+          512
+        ],
+        "source": {
+          "path": "v2/images/d/oi_d66327f55f665567_A0.png",
+          "sha256": "3c11a04761ebb9d88708ad48743342d3700e2586fbe1862ae3210a9090ef0ee0"
+        },
+        "source_id": "oi_d66327f55f665567"
+      },
+      {
+        "attribution": {
+          "Author": "Bruno Kussler Marques",
+          "AuthorProfileURL": "https://www.flickr.com/people/bkm_br/",
+          "License": "https://creativecommons.org/licenses/by/2.0/",
+          "OriginalLandingURL": "https://www.flickr.com/photos/bkm_br/45334050"
+        },
+        "edited": {
+          "path": "v2/images/a/oi_a000607a6cb1116b_F5.png",
+          "sha256": "4c4ac2777fc7727c4f5868346a87183d763164e146d6f153b92e4f4ad8f0347e"
+        },
+        "edited_area": 0.0210910373263888,
+        "family": "lama",
+        "mask": {
+          "path": "v2/masks/edit/a/oi_a000607a6cb1116b_F5_edit.png",
+          "sha256": "d07471e4d6338984ef8a7d302cdf7a0d9adb24915b3604534a4f235f52bb75f1"
+        },
+        "publisher_split": "train",
+        "shape": [
+          768,
+          576
+        ],
+        "source": {
+          "path": "v2/images/a/oi_a000607a6cb1116b_A0.png",
+          "sha256": "c8d02b1aca276644d1955d5883cfcdcd7993c8bf90a6f194a21b4223780d9674"
+        },
+        "source_id": "oi_a000607a6cb1116b"
+      },
+      {
+        "attribution": {
+          "Author": "Elena Gatti",
+          "AuthorProfileURL": "https://www.flickr.com/people/madely87/",
+          "License": "https://creativecommons.org/licenses/by/2.0/",
+          "OriginalLandingURL": "https://www.flickr.com/photos/madely87/9172113331/"
+        },
+        "edited": {
+          "path": "v2/images/a/oi_ad36465df2063c13_F5.png",
+          "sha256": "c70be93c7290e14c9f9f4c94757c71f3c40c7761aaf3d82176d2177331d8e426"
+        },
+        "edited_area": 0.0421956380208333,
+        "family": "lama",
+        "mask": {
+          "path": "v2/masks/edit/a/oi_ad36465df2063c13_F5_edit.png",
+          "sha256": "3a65161e6db6f8e59f40a2153a888dd5cc172147eb915912473aa7fa4534bfa2"
+        },
+        "publisher_split": "train",
+        "shape": [
+          768,
+          512
+        ],
+        "source": {
+          "path": "v2/images/a/oi_ad36465df2063c13_A0.png",
+          "sha256": "8f1c1e68325c2e27e68e69982727f7ff9b8fe2aa30517cfde0a80fd9733dde8f"
+        },
+        "source_id": "oi_ad36465df2063c13"
+      },
+      {
+        "attribution": {
+          "Author": "Phillip Capper",
+          "AuthorProfileURL": "https://www.flickr.com/people/flissphil/",
+          "License": "https://creativecommons.org/licenses/by/2.0/",
+          "OriginalLandingURL": "https://www.flickr.com/photos/flissphil/2951352966/"
+        },
+        "edited": {
+          "path": "v2/images/b/oi_bbe6d9c004b30db6_F5.png",
+          "sha256": "3e06cbd548655ed26f1e1d60af496e34a9ebd3270566ba0458668f2f0631282b"
+        },
+        "edited_area": 0.0200169881184895,
+        "family": "lama",
+        "mask": {
+          "path": "v2/masks/edit/b/oi_bbe6d9c004b30db6_F5_edit.png",
+          "sha256": "9800ed2d43962ce238f2a1576ffd3765b814c61616f5b8d7ee3c23a0402a7fed"
+        },
+        "publisher_split": "train",
+        "shape": [
+          768,
+          512
+        ],
+        "source": {
+          "path": "v2/images/b/oi_bbe6d9c004b30db6_A0.png",
+          "sha256": "ddf7025480ae2e7ed5fbf8e5de2d241da5d0c1f84eaf6f99c737eae5abee7eeb"
+        },
+        "source_id": "oi_bbe6d9c004b30db6"
+      },
+      {
+        "attribution": {
+          "Author": "ResoluteSupportMedia",
+          "AuthorProfileURL": "https://www.flickr.com/people/isafmedia/",
+          "License": "https://creativecommons.org/licenses/by/2.0/",
+          "OriginalLandingURL": "https://www.flickr.com/photos/isafmedia/5576185846"
+        },
+        "edited": {
+          "path": "v2/images/5/oi_5abe970565f64f30_F5.png",
+          "sha256": "4601c50f398d0bad56be79714532df3e2063298b093e2cb75e1f13564992dcad"
+        },
+        "edited_area": 0.0478591918945312,
+        "family": "lama",
+        "mask": {
+          "path": "v2/masks/edit/5/oi_5abe970565f64f30_F5_edit.png",
+          "sha256": "f537ff48550909129aa07344511023295ffcefab3435ec4fe850fc8d82c2cf6f"
+        },
+        "publisher_split": "train",
+        "shape": [
+          768,
+          512
+        ],
+        "source": {
+          "path": "v2/images/5/oi_5abe970565f64f30_A0.png",
+          "sha256": "ea4c2dfca081b37438a509dd75e207f2c75aad356b921df29f8b997c76850595"
+        },
+        "source_id": "oi_5abe970565f64f30"
+      },
+      {
+        "attribution": {
+          "Author": "Andrew Malone",
+          "AuthorProfileURL": "https://www.flickr.com/people/andrewmalone/",
+          "License": "https://creativecommons.org/licenses/by/2.0/",
+          "OriginalLandingURL": "https://www.flickr.com/photos/andrewmalone/229545839"
+        },
+        "edited": {
+          "path": "v2/images/7/oi_7585ff09dfc97465_F5.png",
+          "sha256": "107ecd9ca27e7419ee748bf6c9bb70e034ee03f0c4da4f85d65b6fe29fea41f3"
+        },
+        "edited_area": 0.0126953125,
+        "family": "lama",
+        "mask": {
+          "path": "v2/masks/edit/7/oi_7585ff09dfc97465_F5_edit.png",
+          "sha256": "6104a8a88ce3ab1c61194a87a2ecd4fcab0dc3326eb8d0890fd36be339d1cbb2"
+        },
+        "publisher_split": "train",
+        "shape": [
+          768,
+          576
+        ],
+        "source": {
+          "path": "v2/images/7/oi_7585ff09dfc97465_A0.png",
+          "sha256": "0821d541508dcb0180b65861292eb5b1b48fe086626e288d7ea840086783e184"
+        },
+        "source_id": "oi_7585ff09dfc97465"
+      },
+      {
+        "attribution": {
+          "Author": "Donald Judge",
+          "AuthorProfileURL": "https://www.flickr.com/people/donaldjudge/",
+          "License": "https://creativecommons.org/licenses/by/2.0/",
+          "OriginalLandingURL": "https://www.flickr.com/photos/donaldjudge/14344710277"
+        },
+        "edited": {
+          "path": "v2/images/0/oi_09d7b488d0a07f0b_F5.png",
+          "sha256": "301a92a478cae3c9273769fc56a1adba8c8a545344399dcb4dcb4c79a7ed4b6b"
+        },
+        "edited_area": 0.0350471658909574,
+        "family": "sd15-inpaint",
+        "mask": {
+          "path": "v2/masks/edit/0/oi_09d7b488d0a07f0b_F5_edit.png",
+          "sha256": "097ae1cb528204a92867fb3df712f23d0f673236cbb1c0ed90da20c3227c9dac"
+        },
+        "publisher_split": "test_id",
+        "shape": [
+          752,
+          768
+        ],
+        "source": {
+          "path": "v2/images/0/oi_09d7b488d0a07f0b_A0.png",
+          "sha256": "4d43ddde03c57ac0105911ff5f0cae3bc16fc29aaf01c3ecee6ddbdda21a3bfc"
+        },
+        "source_id": "oi_09d7b488d0a07f0b"
+      },
+      {
+        "attribution": {
+          "Author": "U.S. Fish and Wildlife Service Headquarters",
+          "AuthorProfileURL": "https://www.flickr.com/people/usfwshq/",
+          "License": "https://creativecommons.org/licenses/by/2.0/",
+          "OriginalLandingURL": "https://www.flickr.com/photos/usfwshq/6830384125"
+        },
+        "edited": {
+          "path": "v2/images/6/oi_69a6d1763c10a1a5_F5.png",
+          "sha256": "27a24415b03073d15eace800de6a96f717b9633b4743a8d0551f191299f88a39"
+        },
+        "edited_area": 0.0333099365234375,
+        "family": "sd15-inpaint",
+        "mask": {
+          "path": "v2/masks/edit/6/oi_69a6d1763c10a1a5_F5_edit.png",
+          "sha256": "419e5683f3f602dc69e478b45cd918ba9441323d9bbd9f7c849eaf75164d9aca"
+        },
+        "publisher_split": "test_subject_ood",
+        "shape": [
+          768,
+          512
+        ],
+        "source": {
+          "path": "v2/images/6/oi_69a6d1763c10a1a5_A0.png",
+          "sha256": "4a5c0a2e9b534d7ab3f9776048fe4b10e511f1d881ed96049c2ea924f89ff963"
+        },
+        "source_id": "oi_69a6d1763c10a1a5"
+      },
+      {
+        "attribution": {
+          "Author": "IvanWalsh.com",
+          "AuthorProfileURL": "https://www.flickr.com/people/ivanwalsh/",
+          "License": "https://creativecommons.org/licenses/by/2.0/",
+          "OriginalLandingURL": "https://www.flickr.com/photos/ivanwalsh/9539631588"
+        },
+        "edited": {
+          "path": "v2/images/3/oi_33423957fd8360aa_F5.png",
+          "sha256": "08c9b36c66b843543f57e1b98d04c5602b92de69c806f57b781c5b82b172a5e6"
+        },
+        "edited_area": 0.026222511574074,
+        "family": "sd15-inpaint",
+        "mask": {
+          "path": "v2/masks/edit/3/oi_33423957fd8360aa_F5_edit.png",
+          "sha256": "869bad2fbf00142a813d9c52f8902734a4226b457c78c60bd2fa50f1af060cb9"
+        },
+        "publisher_split": "test_subject_ood",
+        "shape": [
+          768,
+          576
+        ],
+        "source": {
+          "path": "v2/images/3/oi_33423957fd8360aa_A0.png",
+          "sha256": "52392d4f6fbd6c402f7cee27fcd3040534029774a790ee0b3d142218b2b7be68"
+        },
+        "source_id": "oi_33423957fd8360aa"
+      },
+      {
+        "attribution": {
+          "Author": "Zul Rosle",
+          "AuthorProfileURL": "https://www.flickr.com/people/zulrosle/",
+          "License": "https://creativecommons.org/licenses/by/2.0/",
+          "OriginalLandingURL": "https://www.flickr.com/photos/zulrosle/2488542965"
+        },
+        "edited": {
+          "path": "v2/images/7/oi_7533488ddfb6ea04_F5.png",
+          "sha256": "e3cbbd60bfc639efa48d4cd09e23f80d3c89f3c390f255653cdc7bfa902003b8"
+        },
+        "edited_area": 0.0169270833333333,
+        "family": "sd15-inpaint",
+        "mask": {
+          "path": "v2/masks/edit/7/oi_7533488ddfb6ea04_F5_edit.png",
+          "sha256": "7459b1085d24b0fd04e9bc1d8a4ee7d64583b5d5eb5dddef239199d0614b3179"
+        },
+        "publisher_split": "test_subject_ood",
+        "shape": [
+          768,
+          512
+        ],
+        "source": {
+          "path": "v2/images/7/oi_7533488ddfb6ea04_A0.png",
+          "sha256": "fb0d26e06d37b1f83bfad21076bff60642efdae405ef63878feda216bd23afc4"
+        },
+        "source_id": "oi_7533488ddfb6ea04"
+      },
+      {
+        "attribution": {
+          "Author": "Takamorry",
+          "AuthorProfileURL": "https://www.flickr.com/people/takamorry/",
+          "License": "https://creativecommons.org/licenses/by/2.0/",
+          "OriginalLandingURL": "https://www.flickr.com/photos/takamorry/4227910348"
+        },
+        "edited": {
+          "path": "v2/images/7/oi_77201f62b9951a95_F5.png",
+          "sha256": "86d317c161bf2f138eae2697ed9a7ebc70245eb208ab569f75cefc7c5f342f06"
+        },
+        "edited_area": 0.021329365079365,
+        "family": "sd15-inpaint",
+        "mask": {
+          "path": "v2/masks/edit/7/oi_77201f62b9951a95_F5_edit.png",
+          "sha256": "07dee00569b971a2389709c95ed6e974dc4a607d3e101dd15d27ea1778f9207f"
+        },
+        "publisher_split": "test_id",
+        "shape": [
+          768,
+          504
+        ],
+        "source": {
+          "path": "v2/images/7/oi_77201f62b9951a95_A0.png",
+          "sha256": "2ae80dc04afdb2eb99b585983de3d35ef9138d839f4a257d13a716c1528f03a4"
+        },
+        "source_id": "oi_77201f62b9951a95"
+      },
+      {
+        "attribution": {
+          "Author": "Stephanie Watson",
+          "AuthorProfileURL": "https://www.flickr.com/people/stephaniewatson/",
+          "License": "https://creativecommons.org/licenses/by/2.0/",
+          "OriginalLandingURL": "https://www.flickr.com/photos/stephaniewatson/3984719724"
+        },
+        "edited": {
+          "path": "v2/images/6/oi_69c05e3e1e1ce570_F5.png",
+          "sha256": "c074bb6b5489dbaf868325f96252e2ffec727bc4c2404f2ce6fc98650186087c"
+        },
+        "edited_area": 0.0225513599537037,
+        "family": "sd15-inpaint",
+        "mask": {
+          "path": "v2/masks/edit/6/oi_69c05e3e1e1ce570_F5_edit.png",
+          "sha256": "d206bab2866573a3b25eae161da0a2666ca63e7ca225b731d447cb721a3b3d61"
+        },
+        "publisher_split": "test_subject_ood",
+        "shape": [
+          768,
+          576
+        ],
+        "source": {
+          "path": "v2/images/6/oi_69c05e3e1e1ce570_A0.png",
+          "sha256": "f45c7175bf80ad11c63caca23778b8bfab6a32a0f7c0bc4a20892cef59a35cf7"
+        },
+        "source_id": "oi_69c05e3e1e1ce570"
+      }
+    ],
+    "strata": {
+      "75/lama/feather/between": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/lama/feather/combined": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/lama/feather/jpeg_compression": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/lama/feather/within": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/lama/local_blur/between": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/lama/local_blur/combined": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/lama/local_blur/jpeg_compression": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/lama/local_blur/within": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/lama/local_tone/between": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/lama/local_tone/combined": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/lama/local_tone/jpeg_compression": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/lama/local_tone/within": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/lama/ordinary/between": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/lama/ordinary/combined": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/lama/ordinary/jpeg_compression": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/lama/ordinary/within": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/lama/sharp/between": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/lama/sharp/combined": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/lama/sharp/jpeg_compression": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/lama/sharp/within": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/sd15-inpaint/feather/between": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/sd15-inpaint/feather/combined": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/sd15-inpaint/feather/jpeg_compression": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/sd15-inpaint/feather/within": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/sd15-inpaint/local_blur/between": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/sd15-inpaint/local_blur/combined": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/sd15-inpaint/local_blur/jpeg_compression": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/sd15-inpaint/local_blur/within": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/sd15-inpaint/local_tone/between": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/sd15-inpaint/local_tone/combined": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/sd15-inpaint/local_tone/jpeg_compression": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/sd15-inpaint/local_tone/within": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/sd15-inpaint/ordinary/between": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/sd15-inpaint/ordinary/combined": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/sd15-inpaint/ordinary/jpeg_compression": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/sd15-inpaint/ordinary/within": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/sd15-inpaint/sharp/between": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/sd15-inpaint/sharp/combined": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/sd15-inpaint/sharp/jpeg_compression": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "75/sd15-inpaint/sharp/within": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/lama/feather/between": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/lama/feather/combined": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/lama/feather/jpeg_compression": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/lama/feather/within": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/lama/local_blur/between": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/lama/local_blur/combined": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/lama/local_blur/jpeg_compression": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/lama/local_blur/within": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/lama/local_tone/between": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/lama/local_tone/combined": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/lama/local_tone/jpeg_compression": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/lama/local_tone/within": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/lama/ordinary/between": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/lama/ordinary/combined": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/lama/ordinary/jpeg_compression": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/lama/ordinary/within": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/lama/sharp/between": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/lama/sharp/combined": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/lama/sharp/jpeg_compression": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/lama/sharp/within": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/sd15-inpaint/feather/between": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/sd15-inpaint/feather/combined": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/sd15-inpaint/feather/jpeg_compression": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/sd15-inpaint/feather/within": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/sd15-inpaint/local_blur/between": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/sd15-inpaint/local_blur/combined": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/sd15-inpaint/local_blur/jpeg_compression": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/sd15-inpaint/local_blur/within": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/sd15-inpaint/local_tone/between": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/sd15-inpaint/local_tone/combined": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/sd15-inpaint/local_tone/jpeg_compression": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/sd15-inpaint/local_tone/within": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/sd15-inpaint/ordinary/between": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/sd15-inpaint/ordinary/combined": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/sd15-inpaint/ordinary/jpeg_compression": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/sd15-inpaint/ordinary/within": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/sd15-inpaint/sharp/between": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/sd15-inpaint/sharp/combined": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/sd15-inpaint/sharp/jpeg_compression": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      },
+      "90/sd15-inpaint/sharp/within": {
+        "flagged": 0,
+        "total": 6,
+        "useful": 0,
+        "useful_before_point": 0
+      }
+    }
+  },
+  "production_change": false,
+  "schema": "chipmunk.jpeg-signed-local-transitions/1",
+  "source_manifests": {
+    "tgif-confirmation-v3": "9312e1489828103dbff602c5c240c3b1ecba3808757517bf005b3bf0493e58ed",
+    "tgif-confirmation-v4": "18d36f12036bbd467de625efb33887dc61f67c237fb3808e65b506501ad2b871",
+    "tgif-confirmation-v5": "00975f23e17b1dc5cbd67a69325e42412719922f9a770fd3a6df91afdb6d30ea",
+    "tgif-pairs-v2": "4ec157d240f88fce43e554d5dee0bd2da9ac388345d3f0a188c93826629c8230"
+  }
+}

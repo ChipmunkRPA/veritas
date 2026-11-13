@@ -54,6 +54,10 @@ reopens a submitted PNG and its saved thumbnail, then verifies both crops
 and the measured difference from the signed evidence. The [single-file image
 candidates](image-local-edit-candidates-2026-11-12.md) document tested texture
 and JPEG95 comparisons that stay outside the app.
+The [JPEG coefficient-transition study](image-jpeg-signed-transitions-2026-11-12.md)
+replays local generated edits against ordinary processing on the same pixels.
+It includes the pinned downloads and exact edit masks for a separate
+BG-REAL comparison.
 The [exact PNG copy check](image-exact-small-copy-2026-11-12.md) replays matched
 native crops and surrounding differences. It includes ordinary photos, generated
 edit controls, repeated structures and duplicate graphics in Chrome captures.

@@ -849,6 +849,22 @@ def test_cross_format_accepts_twelve_unchanged_pdf_pages():
     assert result["changes"] == [] and "all 12 upright, single-column pages" in result["scope"]
 
 
+@pytest.mark.parametrize("text_options", [{"render_mode": 3}, {"fill_opacity": 0}])
+def test_cross_format_declines_hidden_text_on_later_pdf_page(reference_http, monkeypatch, text_options):
+    f = _install(reference_http, monkeypatch)
+    with pymupdf.open() as pdf:
+        pdf.new_page().insert_text((60, 80), "The first page has selectable text.")
+        second = pdf.new_page()
+        second.insert_text((60, 80), "The second page has selectable text.")
+        second.insert_text((60, 140), "The shipment was cancelled.", **text_options)
+        later = pdf.tobytes()
+    _saved(f, "hidden-layer", ".pdf", later)
+    response = f.client.post(_url("hidden-layer"), headers=f.viewer,
+                             files=_upload(b"The shipment was approved.", ".txt"))
+    assert response.status_code == 422 and "detected on page(s) 2" in response.json()["detail"]
+    assert "cancelled" not in response.text
+
+
 def test_refuses_an_attachment_selected_as_the_email_body(reference_http, monkeypatch):
     f = _install(reference_http, monkeypatch)
     ambiguous = EmailMessage()

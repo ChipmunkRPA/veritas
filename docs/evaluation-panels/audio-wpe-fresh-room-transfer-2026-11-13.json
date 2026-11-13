@@ -1,0 +1,3615 @@
+{
+  "assessment": {
+    "forwards": 232,
+    "rows": [
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 0,
+        "family": null,
+        "group": "paired-0",
+        "kind": "untouched",
+        "level": 0,
+        "responses": {
+          "mono": [
+            [
+              -1.5598783205670388,
+              -3.45407868917107
+            ]
+          ],
+          "wpe": [
+            [
+              5.162826464814554,
+              -3.362869459057174
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "meeting",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 1,
+        "family": null,
+        "group": "paired-0",
+        "kind": "ordinary-0",
+        "level": 0,
+        "responses": {
+          "mono": [
+            [
+              -1.7294007993708447,
+              -3.4535055325480886
+            ]
+          ],
+          "wpe": [
+            [
+              4.7195590942614265,
+              -3.566577478384434
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "meeting",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 2,
+        "family": "xttsv2",
+        "group": "paired-0",
+        "kind": "synthetic-0",
+        "level": 0,
+        "responses": {
+          "mono": [
+            [
+              6.842076639717049,
+              -3.4545742442907925
+            ]
+          ],
+          "wpe": [
+            [
+              6.958434492310449,
+              -3.3712468247337313
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "meeting",
+        "truth": [
+          [
+            23200,
+            38560
+          ]
+        ]
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 3,
+        "family": null,
+        "group": "paired-0",
+        "kind": "ordinary-1",
+        "level": 0,
+        "responses": {
+          "mono": [
+            [
+              -1.5598783205670388,
+              -2.3356673909729673
+            ]
+          ],
+          "wpe": [
+            [
+              5.124505917937088,
+              -4.2595195490220075
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "meeting",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 4,
+        "family": "gptsovits",
+        "group": "paired-0",
+        "kind": "synthetic-1",
+        "level": 0,
+        "responses": {
+          "mono": [
+            [
+              -1.5598783205670388,
+              4.504515093470473
+            ]
+          ],
+          "wpe": [
+            [
+              5.086177000102604,
+              -2.3649456327243823
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "meeting",
+        "truth": [
+          [
+            55200,
+            70560
+          ]
+        ]
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 5,
+        "family": null,
+        "group": "paired-0",
+        "kind": "untouched",
+        "level": -5,
+        "responses": {
+          "mono": [
+            [
+              3.8587332714753275,
+              5.261569110943158
+            ]
+          ],
+          "wpe": [
+            [
+              5.938867146872233,
+              4.071912909013997
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "meeting",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 6,
+        "family": null,
+        "group": "paired-0",
+        "kind": "ordinary-0",
+        "level": -5,
+        "responses": {
+          "mono": [
+            [
+              -1.5919323285478413,
+              5.26168522087005
+            ]
+          ],
+          "wpe": [
+            [
+              5.355875680400343,
+              3.298587558676204
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "meeting",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 7,
+        "family": "xttsv2",
+        "group": "paired-0",
+        "kind": "synthetic-0",
+        "level": -5,
+        "responses": {
+          "mono": [
+            [
+              5.556373180721374,
+              5.2618942523672185
+            ]
+          ],
+          "wpe": [
+            [
+              6.716784265287024,
+              4.407050460559983
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "meeting",
+        "truth": [
+          [
+            23200,
+            38560
+          ]
+        ]
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 8,
+        "family": null,
+        "group": "paired-0",
+        "kind": "ordinary-1",
+        "level": -5,
+        "responses": {
+          "mono": [
+            [
+              3.8587332714753275,
+              4.401784385709826
+            ]
+          ],
+          "wpe": [
+            [
+              5.954288592467589,
+              -3.33553790194511
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "meeting",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 9,
+        "family": "gptsovits",
+        "group": "paired-0",
+        "kind": "synthetic-1",
+        "level": -5,
+        "responses": {
+          "mono": [
+            [
+              3.8587332714753275,
+              -0.2603019959964551
+            ]
+          ],
+          "wpe": [
+            [
+              6.052092634134071,
+              -4.664703340778988
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "meeting",
+        "truth": [
+          [
+            55200,
+            70560
+          ]
+        ]
+      },
+      {
+        "alternate_fft_max_lsb": 0,
+        "case": 10,
+        "family": null,
+        "group": "paired-0",
+        "kind": "untouched",
+        "level": 0,
+        "responses": {
+          "mono": [
+            [
+              -5.177672364974338,
+              -5.351368942342904
+            ]
+          ],
+          "wpe": [
+            [
+              -5.217353810312385,
+              -5.146021353041209
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "lecture",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 0,
+        "case": 11,
+        "family": null,
+        "group": "paired-0",
+        "kind": "ordinary-0",
+        "level": 0,
+        "responses": {
+          "mono": [
+            [
+              -4.491628621996386,
+              -5.422159198894695
+            ]
+          ],
+          "wpe": [
+            [
+              -4.740437029101871,
+              -5.094204369801305
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "lecture",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 0,
+        "case": 12,
+        "family": "xttsv2",
+        "group": "paired-0",
+        "kind": "synthetic-0",
+        "level": 0,
+        "responses": {
+          "mono": [
+            [
+              -4.3636827961747775,
+              -5.212044228650275
+            ]
+          ],
+          "wpe": [
+            [
+              -5.003708353460874,
+              -5.054061865394463
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "lecture",
+        "truth": [
+          [
+            23200,
+            38560
+          ]
+        ]
+      },
+      {
+        "alternate_fft_max_lsb": 0,
+        "case": 13,
+        "family": null,
+        "group": "paired-0",
+        "kind": "ordinary-1",
+        "level": 0,
+        "responses": {
+          "mono": [
+            [
+              -5.177672364974338,
+              -3.9466950432618213
+            ]
+          ],
+          "wpe": [
+            [
+              -4.968296973711863,
+              4.060631169708523
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "lecture",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 0,
+        "case": 14,
+        "family": "gptsovits",
+        "group": "paired-0",
+        "kind": "synthetic-1",
+        "level": 0,
+        "responses": {
+          "mono": [
+            [
+              -5.177672364974338,
+              -4.383653591172009
+            ]
+          ],
+          "wpe": [
+            [
+              -5.383140631688246,
+              -4.115901869618018
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "lecture",
+        "truth": [
+          [
+            55200,
+            70560
+          ]
+        ]
+      },
+      {
+        "alternate_fft_max_lsb": 0,
+        "case": 15,
+        "family": null,
+        "group": "paired-0",
+        "kind": "untouched",
+        "level": -5,
+        "responses": {
+          "mono": [
+            [
+              -5.296137790454305,
+              -5.625968969713305
+            ]
+          ],
+          "wpe": [
+            [
+              -4.577865596044765,
+              -4.3270587655026285
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "lecture",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 0,
+        "case": 16,
+        "family": null,
+        "group": "paired-0",
+        "kind": "ordinary-0",
+        "level": -5,
+        "responses": {
+          "mono": [
+            [
+              -3.799206930581577,
+              -5.6388498027591085
+            ]
+          ],
+          "wpe": [
+            [
+              -3.9170837634930167,
+              -4.356880206350239
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "lecture",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 0,
+        "case": 17,
+        "family": "xttsv2",
+        "group": "paired-0",
+        "kind": "synthetic-0",
+        "level": -5,
+        "responses": {
+          "mono": [
+            [
+              -5.2900876932863365,
+              -5.62731644667369
+            ]
+          ],
+          "wpe": [
+            [
+              -5.077661996852598,
+              -4.614393261937001
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "lecture",
+        "truth": [
+          [
+            23200,
+            38560
+          ]
+        ]
+      },
+      {
+        "alternate_fft_max_lsb": 0,
+        "case": 18,
+        "family": null,
+        "group": "paired-0",
+        "kind": "ordinary-1",
+        "level": -5,
+        "responses": {
+          "mono": [
+            [
+              -5.296137790454305,
+              -4.724642743483432
+            ]
+          ],
+          "wpe": [
+            [
+              -4.58418371328398,
+              4.225497183007741
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "lecture",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 0,
+        "case": 19,
+        "family": "gptsovits",
+        "group": "paired-0",
+        "kind": "synthetic-1",
+        "level": -5,
+        "responses": {
+          "mono": [
+            [
+              -5.296137790454305,
+              -5.026172597911883
+            ]
+          ],
+          "wpe": [
+            [
+              -4.75618179063915,
+              -5.180809957219604
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "lecture",
+        "truth": [
+          [
+            55200,
+            70560
+          ]
+        ]
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 20,
+        "family": null,
+        "group": "paired-1",
+        "kind": "untouched",
+        "level": 0,
+        "responses": {
+          "mono": [
+            [
+              7.118148105815127,
+              -6.138767715476397
+            ]
+          ],
+          "wpe": [
+            [
+              6.062839499921856,
+              -5.3618874825273695
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "meeting",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 21,
+        "family": null,
+        "group": "paired-1",
+        "kind": "ordinary-0",
+        "level": 0,
+        "responses": {
+          "mono": [
+            [
+              7.062474201626513,
+              -6.14276313224869
+            ]
+          ],
+          "wpe": [
+            [
+              7.1585175763974975,
+              -5.475181567973568
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "meeting",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 22,
+        "family": "elevenlab",
+        "group": "paired-1",
+        "kind": "synthetic-0",
+        "level": 0,
+        "responses": {
+          "mono": [
+            [
+              6.46905452956334,
+              -6.143870350345984
+            ]
+          ],
+          "wpe": [
+            [
+              5.659055485427754,
+              -5.434081073677893
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "meeting",
+        "truth": [
+          [
+            23200,
+            38560
+          ]
+        ]
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 23,
+        "family": null,
+        "group": "paired-1",
+        "kind": "ordinary-1",
+        "level": 0,
+        "responses": {
+          "mono": [
+            [
+              7.118148105815127,
+              -6.457731253619042
+            ]
+          ],
+          "wpe": [
+            [
+              5.9248889574376555,
+              -5.837869667662231
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "meeting",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 24,
+        "family": "ljjets",
+        "group": "paired-1",
+        "kind": "synthetic-1",
+        "level": 0,
+        "responses": {
+          "mono": [
+            [
+              7.118148105815127,
+              -4.907876897933042
+            ]
+          ],
+          "wpe": [
+            [
+              6.002849116732247,
+              -2.782523090223344
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "meeting",
+        "truth": [
+          [
+            55200,
+            70560
+          ]
+        ]
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 25,
+        "family": null,
+        "group": "paired-1",
+        "kind": "untouched",
+        "level": -5,
+        "responses": {
+          "mono": [
+            [
+              7.2123317495698736,
+              -5.873313856105505
+            ]
+          ],
+          "wpe": [
+            [
+              6.882074768718749,
+              -4.089692566271022
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "meeting",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 26,
+        "family": null,
+        "group": "paired-1",
+        "kind": "ordinary-0",
+        "level": -5,
+        "responses": {
+          "mono": [
+            [
+              6.815199960763762,
+              -5.874814518475086
+            ]
+          ],
+          "wpe": [
+            [
+              6.903075243188328,
+              -4.091409738986882
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "meeting",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 27,
+        "family": "elevenlab",
+        "group": "paired-1",
+        "kind": "synthetic-0",
+        "level": -5,
+        "responses": {
+          "mono": [
+            [
+              4.025507743186078,
+              -5.874265678757406
+            ]
+          ],
+          "wpe": [
+            [
+              5.352452628377499,
+              -4.396329425226647
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "meeting",
+        "truth": [
+          [
+            23200,
+            38560
+          ]
+        ]
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 28,
+        "family": null,
+        "group": "paired-1",
+        "kind": "ordinary-1",
+        "level": -5,
+        "responses": {
+          "mono": [
+            [
+              7.2123317495698736,
+              -5.879045466624688
+            ]
+          ],
+          "wpe": [
+            [
+              6.74806935096289,
+              -5.21814733621857
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "meeting",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 29,
+        "family": "ljjets",
+        "group": "paired-1",
+        "kind": "synthetic-1",
+        "level": -5,
+        "responses": {
+          "mono": [
+            [
+              7.2123317495698736,
+              -5.8548330814010345
+            ]
+          ],
+          "wpe": [
+            [
+              6.897857637117202,
+              -4.298564892813743
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "meeting",
+        "truth": [
+          [
+            55200,
+            70560
+          ]
+        ]
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 30,
+        "family": null,
+        "group": "paired-1",
+        "kind": "untouched",
+        "level": 0,
+        "responses": {
+          "mono": [
+            [
+              -2.619265252882877,
+              1.5593514368184036
+            ]
+          ],
+          "wpe": [
+            [
+              5.059253801218772,
+              3.7925816914828756
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "lecture",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 31,
+        "family": null,
+        "group": "paired-1",
+        "kind": "ordinary-0",
+        "level": 0,
+        "responses": {
+          "mono": [
+            [
+              -4.620718008195786,
+              1.6060786855275189
+            ]
+          ],
+          "wpe": [
+            [
+              6.460340105007672,
+              3.971946646095377
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "lecture",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 32,
+        "family": "elevenlab",
+        "group": "paired-1",
+        "kind": "synthetic-0",
+        "level": 0,
+        "responses": {
+          "mono": [
+            [
+              2.65289503523359,
+              1.59199086821785
+            ]
+          ],
+          "wpe": [
+            [
+              7.080193785997561,
+              4.068413789462516
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "lecture",
+        "truth": [
+          [
+            23200,
+            38560
+          ]
+        ]
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 33,
+        "family": null,
+        "group": "paired-1",
+        "kind": "ordinary-1",
+        "level": 0,
+        "responses": {
+          "mono": [
+            [
+              -2.619265252882877,
+              6.632105392741657
+            ]
+          ],
+          "wpe": [
+            [
+              4.712326533649287,
+              7.113150281226467
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "lecture",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 34,
+        "family": "ljjets",
+        "group": "paired-1",
+        "kind": "synthetic-1",
+        "level": 0,
+        "responses": {
+          "mono": [
+            [
+              -2.619265252882877,
+              -3.4453172725425643
+            ]
+          ],
+          "wpe": [
+            [
+              5.07941515495058,
+              1.7506966508707715
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "lecture",
+        "truth": [
+          [
+            55200,
+            70560
+          ]
+        ]
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 35,
+        "family": null,
+        "group": "paired-1",
+        "kind": "untouched",
+        "level": -5,
+        "responses": {
+          "mono": [
+            [
+              -3.8841103905788765,
+              0.9570146445623247
+            ]
+          ],
+          "wpe": [
+            [
+              4.124265243552001,
+              -2.327315582154709
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "lecture",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 36,
+        "family": null,
+        "group": "paired-1",
+        "kind": "ordinary-0",
+        "level": -5,
+        "responses": {
+          "mono": [
+            [
+              -5.999542241260319,
+              0.9829504603335353
+            ]
+          ],
+          "wpe": [
+            [
+              4.62406556677757,
+              0.6066871641574699
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "lecture",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 37,
+        "family": "elevenlab",
+        "group": "paired-1",
+        "kind": "synthetic-0",
+        "level": -5,
+        "responses": {
+          "mono": [
+            [
+              -4.535396577144413,
+              0.9776835016118857
+            ]
+          ],
+          "wpe": [
+            [
+              6.218248888219355,
+              1.1293866067612093
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "lecture",
+        "truth": [
+          [
+            23200,
+            38560
+          ]
+        ]
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 38,
+        "family": null,
+        "group": "paired-1",
+        "kind": "ordinary-1",
+        "level": -5,
+        "responses": {
+          "mono": [
+            [
+              -3.8841103905788765,
+              1.6867905355020647
+            ]
+          ],
+          "wpe": [
+            [
+              3.8976031316661444,
+              5.204728347770585
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "lecture",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 39,
+        "family": "ljjets",
+        "group": "paired-1",
+        "kind": "synthetic-1",
+        "level": -5,
+        "responses": {
+          "mono": [
+            [
+              -3.8841103905788765,
+              -4.211768681177119
+            ]
+          ],
+          "wpe": [
+            [
+              4.409086190617502,
+              -3.5218219958182604
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "lecture",
+        "truth": [
+          [
+            55200,
+            70560
+          ]
+        ]
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 64,
+        "family": null,
+        "group": "genuine-3",
+        "kind": "untouched",
+        "level": 0,
+        "responses": {
+          "mono": [
+            [
+              -2.535616467222435,
+              -3.443920898731232
+            ]
+          ],
+          "wpe": [
+            [
+              -2.804379458964944,
+              2.781738049070333
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "meeting",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 65,
+        "family": null,
+        "group": "genuine-3",
+        "kind": "ordinary-0",
+        "level": 0,
+        "responses": {
+          "mono": [
+            [
+              -5.008060487666878,
+              -3.44370840265543
+            ]
+          ],
+          "wpe": [
+            [
+              3.6546578510120935,
+              2.0212945126654227
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "meeting",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 66,
+        "family": null,
+        "group": "genuine-3",
+        "kind": "untouched",
+        "level": -5,
+        "responses": {
+          "mono": [
+            [
+              2.6847797703412435,
+              -3.755839754124686
+            ]
+          ],
+          "wpe": [
+            [
+              3.472629422110137,
+              -3.5702786080606392
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "meeting",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 67,
+        "family": null,
+        "group": "genuine-3",
+        "kind": "ordinary-0",
+        "level": -5,
+        "responses": {
+          "mono": [
+            [
+              -4.190314261440574,
+              -3.755837918569514
+            ]
+          ],
+          "wpe": [
+            [
+              -3.85727884980777,
+              -3.819901952760553
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "meeting",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 68,
+        "family": null,
+        "group": "genuine-3",
+        "kind": "untouched",
+        "level": 0,
+        "responses": {
+          "mono": [
+            [
+              -5.072172190517601,
+              -6.086510162072714
+            ]
+          ],
+          "wpe": [
+            [
+              -4.209511779582379,
+              -3.3998549189275162
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "lecture",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 69,
+        "family": null,
+        "group": "genuine-3",
+        "kind": "ordinary-0",
+        "level": 0,
+        "responses": {
+          "mono": [
+            [
+              -4.252954908559537,
+              -6.07781689463873
+            ]
+          ],
+          "wpe": [
+            [
+              -2.2423720462185455,
+              -3.117499844478682
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "lecture",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 70,
+        "family": null,
+        "group": "genuine-3",
+        "kind": "untouched",
+        "level": -5,
+        "responses": {
+          "mono": [
+            [
+              -5.798921526688336,
+              -5.163703956758388
+            ]
+          ],
+          "wpe": [
+            [
+              -4.376594529862072,
+              -3.0786394913119097
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "lecture",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 71,
+        "family": null,
+        "group": "genuine-3",
+        "kind": "ordinary-0",
+        "level": -5,
+        "responses": {
+          "mono": [
+            [
+              -4.215945765568403,
+              -5.145147256827695
+            ]
+          ],
+          "wpe": [
+            [
+              -3.8242954646267293,
+              -2.5662027069323314
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "lecture",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 72,
+        "family": null,
+        "group": "genuine-4",
+        "kind": "untouched",
+        "level": 0,
+        "responses": {
+          "mono": [
+            [
+              -3.743089419677639,
+              -6.875911727975507
+            ]
+          ],
+          "wpe": [
+            [
+              -2.9732632960792884,
+              -6.633825290587405
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "meeting",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 73,
+        "family": null,
+        "group": "genuine-4",
+        "kind": "ordinary-0",
+        "level": 0,
+        "responses": {
+          "mono": [
+            [
+              -4.1415091294765665,
+              -6.875712416509064
+            ]
+          ],
+          "wpe": [
+            [
+              3.2221485669819097,
+              -6.4711046503817995
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "meeting",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 74,
+        "family": null,
+        "group": "genuine-4",
+        "kind": "untouched",
+        "level": -5,
+        "responses": {
+          "mono": [
+            [
+              -4.881054893237556,
+              -6.821792118282454
+            ]
+          ],
+          "wpe": [
+            [
+              -3.1006695661482646,
+              -6.618046715594998
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "meeting",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 75,
+        "family": null,
+        "group": "genuine-4",
+        "kind": "ordinary-0",
+        "level": -5,
+        "responses": {
+          "mono": [
+            [
+              -5.217564985800809,
+              -6.821563680583028
+            ]
+          ],
+          "wpe": [
+            [
+              3.259066901875052,
+              -6.575830470931457
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "meeting",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 76,
+        "family": null,
+        "group": "genuine-4",
+        "kind": "untouched",
+        "level": 0,
+        "responses": {
+          "mono": [
+            [
+              -5.6799364466899425,
+              -4.447377232480722
+            ]
+          ],
+          "wpe": [
+            [
+              -6.0536298419369,
+              -4.256570868240107
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "lecture",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 77,
+        "family": null,
+        "group": "genuine-4",
+        "kind": "ordinary-0",
+        "level": 0,
+        "responses": {
+          "mono": [
+            [
+              -6.278721796431048,
+              -4.445537533109029
+            ]
+          ],
+          "wpe": [
+            [
+              -5.371650651893153,
+              -4.641487130480878
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "lecture",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 78,
+        "family": null,
+        "group": "genuine-4",
+        "kind": "untouched",
+        "level": -5,
+        "responses": {
+          "mono": [
+            [
+              -4.871526765124688,
+              -4.315942750798499
+            ]
+          ],
+          "wpe": [
+            [
+              -5.22470380913359,
+              -4.401234639464841
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "lecture",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 79,
+        "family": null,
+        "group": "genuine-4",
+        "kind": "ordinary-0",
+        "level": -5,
+        "responses": {
+          "mono": [
+            [
+              -5.726716025063627,
+              -4.309941316339971
+            ]
+          ],
+          "wpe": [
+            [
+              -4.4188447059831875,
+              -4.377280219314962
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "lecture",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 80,
+        "family": null,
+        "group": "meeting-background-0",
+        "kind": "background_only",
+        "level": null,
+        "responses": {
+          "mono": [
+            [
+              -6.200712242770809,
+              -6.719465739675425
+            ]
+          ],
+          "wpe": [
+            [
+              -4.99230050701713,
+              -4.325209559406538
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "meeting",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 81,
+        "family": null,
+        "group": "meeting-background-1",
+        "kind": "background_only",
+        "level": null,
+        "responses": {
+          "mono": [
+            [
+              -6.819121348344412,
+              -7.054822004856279
+            ]
+          ],
+          "wpe": [
+            [
+              -6.185290376601261,
+              -6.868529378493644
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "meeting",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 82,
+        "family": null,
+        "group": "meeting-background-2",
+        "kind": "background_only",
+        "level": null,
+        "responses": {
+          "mono": [
+            [
+              -6.369368593549578,
+              -6.944344011997999
+            ]
+          ],
+          "wpe": [
+            [
+              -5.9997101107552835,
+              -6.7313527965201265
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "meeting",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 0,
+        "case": 83,
+        "family": null,
+        "group": "lecture-background-0",
+        "kind": "background_only",
+        "level": null,
+        "responses": {
+          "mono": [
+            [
+              -6.722341010280483,
+              -4.519588515675849
+            ]
+          ],
+          "wpe": [
+            [
+              -6.30235097640869,
+              -4.1706967579001555
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "lecture",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 84,
+        "family": null,
+        "group": "lecture-background-1",
+        "kind": "background_only",
+        "level": null,
+        "responses": {
+          "mono": [
+            [
+              -5.338899112344319,
+              5.70281556054297
+            ]
+          ],
+          "wpe": [
+            [
+              -4.069230072368971,
+              -4.968423864670784
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "lecture",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 85,
+        "family": null,
+        "group": "lecture-background-2",
+        "kind": "background_only",
+        "level": null,
+        "responses": {
+          "mono": [
+            [
+              -6.352960146851999,
+              -5.091352462592462
+            ]
+          ],
+          "wpe": [
+            [
+              -5.303945010881768,
+              4.120482325757814
+            ]
+          ]
+        },
+        "role": "assessment",
+        "room": "lecture",
+        "truth": []
+      }
+    ]
+  },
+  "development": {
+    "forwards": 96,
+    "rows": [
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 40,
+        "family": null,
+        "group": "genuine-0",
+        "kind": "untouched",
+        "level": 0,
+        "responses": {
+          "mono": [
+            [
+              5.550249564583558,
+              -6.038368271625016
+            ]
+          ],
+          "wpe": [
+            [
+              3.8739271447064394,
+              -6.220130950044455
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "meeting",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 41,
+        "family": null,
+        "group": "genuine-0",
+        "kind": "ordinary-0",
+        "level": 0,
+        "responses": {
+          "mono": [
+            [
+              -5.284312287783897,
+              -6.037183784589695
+            ]
+          ],
+          "wpe": [
+            [
+              -2.9443176432833154,
+              -6.114690272518938
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "meeting",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 42,
+        "family": null,
+        "group": "genuine-0",
+        "kind": "untouched",
+        "level": -5,
+        "responses": {
+          "mono": [
+            [
+              -1.9314160059096142,
+              3.8422079232656334
+            ]
+          ],
+          "wpe": [
+            [
+              5.525381370504831,
+              -3.3778194780520256
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "meeting",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 43,
+        "family": null,
+        "group": "genuine-0",
+        "kind": "ordinary-0",
+        "level": -5,
+        "responses": {
+          "mono": [
+            [
+              -5.304892505153667,
+              3.8361101908208832
+            ]
+          ],
+          "wpe": [
+            [
+              4.403195676359753,
+              -3.433052275169059
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "meeting",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 44,
+        "family": null,
+        "group": "genuine-0",
+        "kind": "untouched",
+        "level": 0,
+        "responses": {
+          "mono": [
+            [
+              6.656487708231727,
+              6.720790586465125
+            ]
+          ],
+          "wpe": [
+            [
+              3.2650870628774697,
+              6.427514168780877
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "lecture",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 45,
+        "family": null,
+        "group": "genuine-0",
+        "kind": "ordinary-0",
+        "level": 0,
+        "responses": {
+          "mono": [
+            [
+              3.851868067983468,
+              6.749088408045951
+            ]
+          ],
+          "wpe": [
+            [
+              1.624753378539028,
+              6.291132777317488
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "lecture",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 46,
+        "family": null,
+        "group": "genuine-0",
+        "kind": "untouched",
+        "level": -5,
+        "responses": {
+          "mono": [
+            [
+              7.004522192855817,
+              4.951229780101739
+            ]
+          ],
+          "wpe": [
+            [
+              6.521204850564797,
+              5.091982380986059
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "lecture",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 47,
+        "family": null,
+        "group": "genuine-0",
+        "kind": "ordinary-0",
+        "level": -5,
+        "responses": {
+          "mono": [
+            [
+              3.7054524833335396,
+              4.83306006729283
+            ]
+          ],
+          "wpe": [
+            [
+              5.203839729912666,
+              4.681904462211034
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "lecture",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 48,
+        "family": null,
+        "group": "genuine-1",
+        "kind": "untouched",
+        "level": 0,
+        "responses": {
+          "mono": [
+            [
+              -5.3695202110789575,
+              -4.918165681135542
+            ]
+          ],
+          "wpe": [
+            [
+              -4.7069340575895655,
+              -5.186788613807401
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "meeting",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 49,
+        "family": null,
+        "group": "genuine-1",
+        "kind": "ordinary-0",
+        "level": 0,
+        "responses": {
+          "mono": [
+            [
+              -4.009801403040324,
+              -4.917579601930215
+            ]
+          ],
+          "wpe": [
+            [
+              -5.649746895559041,
+              -5.151211743905294
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "meeting",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 50,
+        "family": null,
+        "group": "genuine-1",
+        "kind": "untouched",
+        "level": -5,
+        "responses": {
+          "mono": [
+            [
+              -4.10774946432416,
+              -4.627582143538756
+            ]
+          ],
+          "wpe": [
+            [
+              -3.2063665526946337,
+              -3.9660200880496226
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "meeting",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 51,
+        "family": null,
+        "group": "genuine-1",
+        "kind": "ordinary-0",
+        "level": -5,
+        "responses": {
+          "mono": [
+            [
+              0.9579855549349083,
+              -4.632420503393447
+            ]
+          ],
+          "wpe": [
+            [
+              -5.171420092547998,
+              -3.665160707816215
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "meeting",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 52,
+        "family": null,
+        "group": "genuine-1",
+        "kind": "untouched",
+        "level": 0,
+        "responses": {
+          "mono": [
+            [
+              -5.57690716445062,
+              -5.761504230584037
+            ]
+          ],
+          "wpe": [
+            [
+              -3.3867275286129,
+              -6.114487663412723
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "lecture",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 53,
+        "family": null,
+        "group": "genuine-1",
+        "kind": "ordinary-0",
+        "level": 0,
+        "responses": {
+          "mono": [
+            [
+              -5.4930133550674665,
+              -5.7511467669116
+            ]
+          ],
+          "wpe": [
+            [
+              -2.8623731002230186,
+              -5.971813687495461
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "lecture",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 54,
+        "family": null,
+        "group": "genuine-1",
+        "kind": "untouched",
+        "level": -5,
+        "responses": {
+          "mono": [
+            [
+              -6.433705319081847,
+              -5.500757229261321
+            ]
+          ],
+          "wpe": [
+            [
+              -4.026756312714408,
+              -6.498874665211184
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "lecture",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 55,
+        "family": null,
+        "group": "genuine-1",
+        "kind": "ordinary-0",
+        "level": -5,
+        "responses": {
+          "mono": [
+            [
+              -6.448358550772042,
+              -5.494964586509194
+            ]
+          ],
+          "wpe": [
+            [
+              -5.409427661299471,
+              -6.4498472694727
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "lecture",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 56,
+        "family": null,
+        "group": "genuine-2",
+        "kind": "untouched",
+        "level": 0,
+        "responses": {
+          "mono": [
+            [
+              -2.763357604986542,
+              -3.8666705699974657
+            ]
+          ],
+          "wpe": [
+            [
+              4.675474085897731,
+              -3.7286438763512266
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "meeting",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 57,
+        "family": null,
+        "group": "genuine-2",
+        "kind": "ordinary-0",
+        "level": 0,
+        "responses": {
+          "mono": [
+            [
+              -5.5226754723003735,
+              -3.864372479998787
+            ]
+          ],
+          "wpe": [
+            [
+              4.769683748442935,
+              -3.7423885414540985
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "meeting",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 58,
+        "family": null,
+        "group": "genuine-2",
+        "kind": "untouched",
+        "level": -5,
+        "responses": {
+          "mono": [
+            [
+              4.630241018315393,
+              -2.2197697131475813
+            ]
+          ],
+          "wpe": [
+            [
+              5.414565437400216,
+              1.9411155272002119
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "meeting",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 59,
+        "family": null,
+        "group": "genuine-2",
+        "kind": "ordinary-0",
+        "level": -5,
+        "responses": {
+          "mono": [
+            [
+              -4.661629179730795,
+              -2.2049289063533655
+            ]
+          ],
+          "wpe": [
+            [
+              4.487446402566712,
+              -1.2035241756081767
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "meeting",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 0,
+        "case": 60,
+        "family": null,
+        "group": "genuine-2",
+        "kind": "untouched",
+        "level": 0,
+        "responses": {
+          "mono": [
+            [
+              6.729551269595918,
+              -4.871336953618477
+            ]
+          ],
+          "wpe": [
+            [
+              7.162206513544564,
+              -4.570780264320511
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "lecture",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 0,
+        "case": 61,
+        "family": null,
+        "group": "genuine-2",
+        "kind": "ordinary-0",
+        "level": 0,
+        "responses": {
+          "mono": [
+            [
+              -6.384355531020279,
+              -4.8038291533103035
+            ]
+          ],
+          "wpe": [
+            [
+              -6.170310007513211,
+              -4.133620284485534
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "lecture",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 62,
+        "family": null,
+        "group": "genuine-2",
+        "kind": "untouched",
+        "level": -5,
+        "responses": {
+          "mono": [
+            [
+              4.633342825491675,
+              -5.6645336494102985
+            ]
+          ],
+          "wpe": [
+            [
+              6.937976195871526,
+              -5.866386890602451
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "lecture",
+        "truth": []
+      },
+      {
+        "alternate_fft_max_lsb": 1,
+        "case": 63,
+        "family": null,
+        "group": "genuine-2",
+        "kind": "ordinary-0",
+        "level": -5,
+        "responses": {
+          "mono": [
+            [
+              -4.650256120226593,
+              -5.712036210084553
+            ]
+          ],
+          "wpe": [
+            [
+              -5.952331539363992,
+              -5.716545118132149
+            ]
+          ]
+        },
+        "role": "development",
+        "room": "lecture",
+        "truth": []
+      }
+    ]
+  },
+  "freeze": {
+    "air_archive": "d2fd52767505c402e8aed9299dcd046493c8254cfab2f769fcf480dc7c616a5f",
+    "ami_sha": {
+      "ES2007c": "895904c48583d74c311e42cf0bf49554e998cd5ab87b67268c97de09b856e619",
+      "IS1004c": "d9c81453ea85a228bf4b82e9757a19edfc760203d1a3af1c353473b3030613b6"
+    },
+    "assets": {
+      "pellav2_detector.pt": "d21aedfb52e2f87706c2753715a29665482b0f4a034800c31579df5d458559ac",
+      "silero_vad.jit": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720",
+      "w2v-bert-config.json": "f5572bd5998b68182e9c328a43127ed21fed687f6910497136b91a4e3b0e3675"
+    },
+    "edit_intervals": [
+      [
+        23200,
+        38560
+      ],
+      [
+        55200,
+        70560
+      ]
+    ],
+    "excluded_prior_readers": 107,
+    "held_ordinary_only_groups": 2,
+    "held_paired_groups": 2,
+    "levels": [
+      0,
+      -5
+    ],
+    "method": {
+      "background": "Use two held AIR measured head-rig impulse-response sets from lecture and meeting rooms and two AMI meetings with no participant from earlier WPE or directional work. Reuse each six-second background, gain and room across versions. Require at least 320 ms of overlapping annotated background speakers in both edit destinations for host groups. Use 0 and \u22125 dB stereo mean target/background SNR and add background-only controls.",
+      "comparison": "Keep native mono at 5.356589748054317. Compare WPE at this same operating point, at the earlier eight-reader point 7.353627562469017, and at cutoffs allowing zero, one or two added genuine development groups. Apply all fixed points to new held scores. Count exact localized edit and ordinary reader groups, with file-condition rescues separate from pooled unique groups. A correct timestamp covers at least half the authored edit at interval IoU of at least .30.",
+      "foreground": "Select two new held host readers and two different publisher synthesis families per host. Prefer within-source-reader donor families for the first host, and use a separate new donor-only reader pool for the second host. Use native intervals of the already published partial recordings, without generating new speech. Each ordinary control uses a different fragment of its own host. Apply identical 20 ms fades and the same two 960 ms destinations for ordinary and synthetic variants. All dry versions exactly match outside the selected interval.",
+      "roles": "Choose up to four distinct development-only genuine reader groups for additive WPE operating points while reserving at least two separate genuine assessment readers. Every fit reader contributes matched ordinary and untouched variants. Hold the two matched reader groups and six isolated background excerpts. No scored assessment variant may enter point fitting."
+    },
+    "old_mono": 5.356589748054317,
+    "old_wpe": 7.353627562469017,
+    "point_groups": 3,
+    "publisher_prefix": "ef8e66c39f0948cdec5e0b76e0fbd60121e3cb0e89e8ba8be6ad035c4fa27f0b",
+    "rooms": {
+      "lecture": {
+        "balanced": {
+          "peaks": [
+            181,
+            182
+          ],
+          "responses": [
+            {
+              "member": "AIR_1_4/air_binaural_lecture_1_1_2.mat",
+              "sha256": "6d51a181165cb04daed4de1efe96a4162ec21100d0174476f4956948e18cdad4"
+            },
+            {
+              "member": "AIR_1_4/air_binaural_lecture_0_1_2.mat",
+              "sha256": "63c22a39da5b9ff9d9aa31253de022c603f4f8864c2f462ceac5b17369c956f0"
+            }
+          ]
+        },
+        "lateral": {
+          "peaks": [
+            256,
+            256
+          ],
+          "responses": [
+            {
+              "member": "AIR_1_4/air_binaural_lecture_1_1_3.mat",
+              "sha256": "a0ef8450e48669c0648ead2fb8db8f66db81d674a099e3c6f917b046172f7f72"
+            },
+            {
+              "member": "AIR_1_4/air_binaural_lecture_0_1_3.mat",
+              "sha256": "d75169ce14b8b459d1d414d255959d73e39c37fcc9e22bb3cdcf8428858c62c6"
+            }
+          ]
+        }
+      },
+      "meeting": {
+        "balanced": {
+          "peaks": [
+            119,
+            119
+          ],
+          "responses": [
+            {
+              "member": "AIR_1_4/air_binaural_meeting_1_1_4.mat",
+              "sha256": "7c62fcfe8abd426a03f54d9ff23e2ba0b8eb9aa31c06046f386dff90a17a3299"
+            },
+            {
+              "member": "AIR_1_4/air_binaural_meeting_0_1_4.mat",
+              "sha256": "655d4cda7d632aa5033f9a0d7beb024602fef4db47e7171370ed10493c431e18"
+            }
+          ]
+        },
+        "lateral": {
+          "peaks": [
+            86,
+            75
+          ],
+          "responses": [
+            {
+              "member": "AIR_1_4/air_binaural_meeting_1_1_1.mat",
+              "sha256": "ac47e496c5bdc3aa1c5c885bca772f77b0a90a05dab0f2b863cf134236415bfe"
+            },
+            {
+              "member": "AIR_1_4/air_binaural_meeting_0_1_1.mat",
+              "sha256": "799792dfd4ecd3c8243c9d6ede33c573ae61d0aa736e36e2240b9513a6777e1a"
+            }
+          ]
+        }
+      }
+    },
+    "runner": "cfd11b611121f9632044def10567189dc1cabc14fd764b2d382fdc2a4de4d3c0",
+    "schema": "chipmunk.audio-wpe-fresh-room/1",
+    "windows": [
+      [
+        16000,
+        48000
+      ],
+      [
+        48000,
+        80000
+      ]
+    ],
+    "wpe_runner": "8d5dbe3c12c54eedc253c766342f3cec040670e7dcaebe8f0998afc590e3bfb7"
+  },
+  "freeze_sha256": "ee04e349217ebfb770b00ff93578c13f8100eec64ba991ed4d03232671292560",
+  "point": {
+    "development": "f6dae3cedda20793286a203279972ccf9fe93d57a12d64da900f4faecbab8b7b",
+    "freeze": "ee04e349217ebfb770b00ff93578c13f8100eec64ba991ed4d03232671292560",
+    "points": {
+      "budget_0": 6.937976195871526,
+      "budget_1": 5.525381370504831,
+      "budget_2": -2.8623731002230186,
+      "old_mono": 5.356589748054317,
+      "old_wpe": 7.353627562469017
+    }
+  },
+  "roster_sha256": "411156f1983d44fb00fd9a5add43334f89ee12b181dbca79e5d0ebd3578dee11",
+  "schema": "chipmunk.audio-wpe-fresh-room/1",
+  "source_roster_sha256": "4e0fd519b286af6413f15ff12f34737647b440422fb71fb415e62573d9f11deb",
+  "summary": {
+    "background": {
+      "arms": {
+        "budget_0": {
+          "added_deliveries": [],
+          "background_groups": [
+            "lecture-background-1"
+          ],
+          "ordinary_groups": [],
+          "positive_groups": [],
+          "unassessed_wpe": 0,
+          "unique_edits": [],
+          "useful_deliveries": 0,
+          "wrong_wpe_deliveries": 0
+        },
+        "budget_1": {
+          "added_deliveries": [],
+          "background_groups": [
+            "lecture-background-1"
+          ],
+          "ordinary_groups": [],
+          "positive_groups": [],
+          "unassessed_wpe": 0,
+          "unique_edits": [],
+          "useful_deliveries": 0,
+          "wrong_wpe_deliveries": 0
+        },
+        "budget_2": {
+          "added_deliveries": [],
+          "background_groups": [
+            "lecture-background-1",
+            "lecture-background-2"
+          ],
+          "ordinary_groups": [],
+          "positive_groups": [],
+          "unassessed_wpe": 0,
+          "unique_edits": [],
+          "useful_deliveries": 0,
+          "wrong_wpe_deliveries": 0
+        },
+        "old_mono": {
+          "added_deliveries": [],
+          "background_groups": [
+            "lecture-background-1"
+          ],
+          "ordinary_groups": [],
+          "positive_groups": [],
+          "unassessed_wpe": 0,
+          "unique_edits": [],
+          "useful_deliveries": 0,
+          "wrong_wpe_deliveries": 0
+        },
+        "old_wpe": {
+          "added_deliveries": [],
+          "background_groups": [
+            "lecture-background-1"
+          ],
+          "ordinary_groups": [],
+          "positive_groups": [],
+          "unassessed_wpe": 0,
+          "unique_edits": [],
+          "useful_deliveries": 0,
+          "wrong_wpe_deliveries": 0
+        }
+      },
+      "background_groups": 6,
+      "mono_background_groups": [
+        "lecture-background-1"
+      ],
+      "mono_ordinary_groups": [],
+      "mono_positive_groups": [],
+      "mono_unique_edits": [],
+      "mono_useful_deliveries": 0,
+      "ordinary_groups": 0,
+      "positive_deliveries": 0,
+      "positive_groups": 0,
+      "unassessed_mono": 0,
+      "wrong_mono_deliveries": 0
+    },
+    "lecture": {
+      "arms": {
+        "budget_0": {
+          "added_deliveries": [
+            {
+              "edit": "synthetic-0",
+              "family": "elevenlab",
+              "group": "paired-1",
+              "level": 0,
+              "room": "lecture",
+              "truth": [
+                [
+                  23200,
+                  38560
+                ]
+              ],
+              "window": [
+                16000,
+                48000
+              ]
+            }
+          ],
+          "background_groups": [
+            "lecture-background-1"
+          ],
+          "ordinary_groups": [
+            "paired-1"
+          ],
+          "positive_groups": [
+            "paired-1"
+          ],
+          "unassessed_wpe": 0,
+          "unique_edits": [
+            [
+              "paired-1",
+              "synthetic-0"
+            ]
+          ],
+          "useful_deliveries": 1,
+          "wrong_wpe_deliveries": 0
+        },
+        "budget_1": {
+          "added_deliveries": [
+            {
+              "edit": "synthetic-0",
+              "family": "elevenlab",
+              "group": "paired-1",
+              "level": 0,
+              "room": "lecture",
+              "truth": [
+                [
+                  23200,
+                  38560
+                ]
+              ],
+              "window": [
+                16000,
+                48000
+              ]
+            },
+            {
+              "edit": "synthetic-0",
+              "family": "elevenlab",
+              "group": "paired-1",
+              "level": -5,
+              "room": "lecture",
+              "truth": [
+                [
+                  23200,
+                  38560
+                ]
+              ],
+              "window": [
+                16000,
+                48000
+              ]
+            }
+          ],
+          "background_groups": [
+            "lecture-background-1"
+          ],
+          "ordinary_groups": [
+            "paired-1"
+          ],
+          "positive_groups": [
+            "paired-1"
+          ],
+          "unassessed_wpe": 0,
+          "unique_edits": [
+            [
+              "paired-1",
+              "synthetic-0"
+            ]
+          ],
+          "useful_deliveries": 2,
+          "wrong_wpe_deliveries": 0
+        },
+        "budget_2": {
+          "added_deliveries": [
+            {
+              "edit": "synthetic-0",
+              "family": "elevenlab",
+              "group": "paired-1",
+              "level": 0,
+              "room": "lecture",
+              "truth": [
+                [
+                  23200,
+                  38560
+                ]
+              ],
+              "window": [
+                16000,
+                48000
+              ]
+            },
+            {
+              "edit": "synthetic-0",
+              "family": "elevenlab",
+              "group": "paired-1",
+              "level": -5,
+              "room": "lecture",
+              "truth": [
+                [
+                  23200,
+                  38560
+                ]
+              ],
+              "window": [
+                16000,
+                48000
+              ]
+            }
+          ],
+          "background_groups": [
+            "lecture-background-1",
+            "lecture-background-2"
+          ],
+          "ordinary_groups": [
+            "genuine-3",
+            "paired-0",
+            "paired-1"
+          ],
+          "positive_groups": [
+            "paired-1"
+          ],
+          "unassessed_wpe": 0,
+          "unique_edits": [
+            [
+              "paired-1",
+              "synthetic-0"
+            ]
+          ],
+          "useful_deliveries": 2,
+          "wrong_wpe_deliveries": 2
+        },
+        "old_mono": {
+          "added_deliveries": [
+            {
+              "edit": "synthetic-0",
+              "family": "elevenlab",
+              "group": "paired-1",
+              "level": 0,
+              "room": "lecture",
+              "truth": [
+                [
+                  23200,
+                  38560
+                ]
+              ],
+              "window": [
+                16000,
+                48000
+              ]
+            },
+            {
+              "edit": "synthetic-0",
+              "family": "elevenlab",
+              "group": "paired-1",
+              "level": -5,
+              "room": "lecture",
+              "truth": [
+                [
+                  23200,
+                  38560
+                ]
+              ],
+              "window": [
+                16000,
+                48000
+              ]
+            }
+          ],
+          "background_groups": [
+            "lecture-background-1"
+          ],
+          "ordinary_groups": [
+            "paired-1"
+          ],
+          "positive_groups": [
+            "paired-1"
+          ],
+          "unassessed_wpe": 0,
+          "unique_edits": [
+            [
+              "paired-1",
+              "synthetic-0"
+            ]
+          ],
+          "useful_deliveries": 2,
+          "wrong_wpe_deliveries": 0
+        },
+        "old_wpe": {
+          "added_deliveries": [],
+          "background_groups": [
+            "lecture-background-1"
+          ],
+          "ordinary_groups": [
+            "paired-1"
+          ],
+          "positive_groups": [],
+          "unassessed_wpe": 0,
+          "unique_edits": [],
+          "useful_deliveries": 0,
+          "wrong_wpe_deliveries": 0
+        }
+      },
+      "background_groups": 3,
+      "mono_background_groups": [
+        "lecture-background-1"
+      ],
+      "mono_ordinary_groups": [
+        "paired-1"
+      ],
+      "mono_positive_groups": [],
+      "mono_unique_edits": [],
+      "mono_useful_deliveries": 0,
+      "ordinary_groups": 4,
+      "positive_deliveries": 8,
+      "positive_groups": 2,
+      "unassessed_mono": 0,
+      "wrong_mono_deliveries": 0
+    },
+    "meeting": {
+      "arms": {
+        "budget_0": {
+          "added_deliveries": [],
+          "background_groups": [],
+          "ordinary_groups": [
+            "paired-1"
+          ],
+          "positive_groups": [
+            "paired-0",
+            "paired-1"
+          ],
+          "unassessed_wpe": 0,
+          "unique_edits": [
+            [
+              "paired-0",
+              "synthetic-0"
+            ],
+            [
+              "paired-1",
+              "synthetic-0"
+            ]
+          ],
+          "useful_deliveries": 3,
+          "wrong_wpe_deliveries": 0
+        },
+        "budget_1": {
+          "added_deliveries": [],
+          "background_groups": [],
+          "ordinary_groups": [
+            "paired-0",
+            "paired-1"
+          ],
+          "positive_groups": [
+            "paired-0",
+            "paired-1"
+          ],
+          "unassessed_wpe": 0,
+          "unique_edits": [
+            [
+              "paired-0",
+              "synthetic-0"
+            ],
+            [
+              "paired-1",
+              "synthetic-0"
+            ]
+          ],
+          "useful_deliveries": 3,
+          "wrong_wpe_deliveries": 3
+        },
+        "budget_2": {
+          "added_deliveries": [
+            {
+              "edit": "synthetic-0",
+              "family": "elevenlab",
+              "group": "paired-1",
+              "level": -5,
+              "room": "meeting",
+              "truth": [
+                [
+                  23200,
+                  38560
+                ]
+              ],
+              "window": [
+                16000,
+                48000
+              ]
+            }
+          ],
+          "background_groups": [],
+          "ordinary_groups": [
+            "genuine-3",
+            "genuine-4",
+            "paired-0",
+            "paired-1"
+          ],
+          "positive_groups": [
+            "paired-0",
+            "paired-1"
+          ],
+          "unassessed_wpe": 0,
+          "unique_edits": [
+            [
+              "paired-0",
+              "synthetic-0"
+            ],
+            [
+              "paired-1",
+              "synthetic-0"
+            ]
+          ],
+          "useful_deliveries": 4,
+          "wrong_wpe_deliveries": 4
+        },
+        "old_mono": {
+          "added_deliveries": [],
+          "background_groups": [],
+          "ordinary_groups": [
+            "paired-0",
+            "paired-1"
+          ],
+          "positive_groups": [
+            "paired-0",
+            "paired-1"
+          ],
+          "unassessed_wpe": 0,
+          "unique_edits": [
+            [
+              "paired-0",
+              "synthetic-0"
+            ],
+            [
+              "paired-1",
+              "synthetic-0"
+            ]
+          ],
+          "useful_deliveries": 3,
+          "wrong_wpe_deliveries": 3
+        },
+        "old_wpe": {
+          "added_deliveries": [],
+          "background_groups": [],
+          "ordinary_groups": [
+            "paired-1"
+          ],
+          "positive_groups": [
+            "paired-0",
+            "paired-1"
+          ],
+          "unassessed_wpe": 0,
+          "unique_edits": [
+            [
+              "paired-0",
+              "synthetic-0"
+            ],
+            [
+              "paired-1",
+              "synthetic-0"
+            ]
+          ],
+          "useful_deliveries": 3,
+          "wrong_wpe_deliveries": 0
+        }
+      },
+      "background_groups": 3,
+      "mono_background_groups": [],
+      "mono_ordinary_groups": [
+        "paired-1"
+      ],
+      "mono_positive_groups": [
+        "paired-0",
+        "paired-1"
+      ],
+      "mono_unique_edits": [
+        [
+          "paired-0",
+          "synthetic-0"
+        ],
+        [
+          "paired-1",
+          "synthetic-0"
+        ]
+      ],
+      "mono_useful_deliveries": 3,
+      "ordinary_groups": 4,
+      "positive_deliveries": 8,
+      "positive_groups": 2,
+      "unassessed_mono": 0,
+      "wrong_mono_deliveries": 2
+    },
+    "pooled": {
+      "arms": {
+        "budget_0": {
+          "added_deliveries": [
+            {
+              "edit": "synthetic-0",
+              "family": "elevenlab",
+              "group": "paired-1",
+              "level": 0,
+              "room": "lecture",
+              "truth": [
+                [
+                  23200,
+                  38560
+                ]
+              ],
+              "window": [
+                16000,
+                48000
+              ]
+            }
+          ],
+          "background_groups": [
+            "lecture-background-1"
+          ],
+          "ordinary_groups": [
+            "paired-1"
+          ],
+          "positive_groups": [
+            "paired-0",
+            "paired-1"
+          ],
+          "unassessed_wpe": 0,
+          "unique_edits": [
+            [
+              "paired-0",
+              "synthetic-0"
+            ],
+            [
+              "paired-1",
+              "synthetic-0"
+            ]
+          ],
+          "useful_deliveries": 4,
+          "wrong_wpe_deliveries": 0
+        },
+        "budget_1": {
+          "added_deliveries": [
+            {
+              "edit": "synthetic-0",
+              "family": "elevenlab",
+              "group": "paired-1",
+              "level": 0,
+              "room": "lecture",
+              "truth": [
+                [
+                  23200,
+                  38560
+                ]
+              ],
+              "window": [
+                16000,
+                48000
+              ]
+            },
+            {
+              "edit": "synthetic-0",
+              "family": "elevenlab",
+              "group": "paired-1",
+              "level": -5,
+              "room": "lecture",
+              "truth": [
+                [
+                  23200,
+                  38560
+                ]
+              ],
+              "window": [
+                16000,
+                48000
+              ]
+            }
+          ],
+          "background_groups": [
+            "lecture-background-1"
+          ],
+          "ordinary_groups": [
+            "paired-0",
+            "paired-1"
+          ],
+          "positive_groups": [
+            "paired-0",
+            "paired-1"
+          ],
+          "unassessed_wpe": 0,
+          "unique_edits": [
+            [
+              "paired-0",
+              "synthetic-0"
+            ],
+            [
+              "paired-1",
+              "synthetic-0"
+            ]
+          ],
+          "useful_deliveries": 5,
+          "wrong_wpe_deliveries": 3
+        },
+        "budget_2": {
+          "added_deliveries": [
+            {
+              "edit": "synthetic-0",
+              "family": "elevenlab",
+              "group": "paired-1",
+              "level": -5,
+              "room": "meeting",
+              "truth": [
+                [
+                  23200,
+                  38560
+                ]
+              ],
+              "window": [
+                16000,
+                48000
+              ]
+            },
+            {
+              "edit": "synthetic-0",
+              "family": "elevenlab",
+              "group": "paired-1",
+              "level": 0,
+              "room": "lecture",
+              "truth": [
+                [
+                  23200,
+                  38560
+                ]
+              ],
+              "window": [
+                16000,
+                48000
+              ]
+            },
+            {
+              "edit": "synthetic-0",
+              "family": "elevenlab",
+              "group": "paired-1",
+              "level": -5,
+              "room": "lecture",
+              "truth": [
+                [
+                  23200,
+                  38560
+                ]
+              ],
+              "window": [
+                16000,
+                48000
+              ]
+            }
+          ],
+          "background_groups": [
+            "lecture-background-1",
+            "lecture-background-2"
+          ],
+          "ordinary_groups": [
+            "genuine-3",
+            "genuine-4",
+            "paired-0",
+            "paired-1"
+          ],
+          "positive_groups": [
+            "paired-0",
+            "paired-1"
+          ],
+          "unassessed_wpe": 0,
+          "unique_edits": [
+            [
+              "paired-0",
+              "synthetic-0"
+            ],
+            [
+              "paired-1",
+              "synthetic-0"
+            ]
+          ],
+          "useful_deliveries": 6,
+          "wrong_wpe_deliveries": 6
+        },
+        "old_mono": {
+          "added_deliveries": [
+            {
+              "edit": "synthetic-0",
+              "family": "elevenlab",
+              "group": "paired-1",
+              "level": 0,
+              "room": "lecture",
+              "truth": [
+                [
+                  23200,
+                  38560
+                ]
+              ],
+              "window": [
+                16000,
+                48000
+              ]
+            },
+            {
+              "edit": "synthetic-0",
+              "family": "elevenlab",
+              "group": "paired-1",
+              "level": -5,
+              "room": "lecture",
+              "truth": [
+                [
+                  23200,
+                  38560
+                ]
+              ],
+              "window": [
+                16000,
+                48000
+              ]
+            }
+          ],
+          "background_groups": [
+            "lecture-background-1"
+          ],
+          "ordinary_groups": [
+            "paired-0",
+            "paired-1"
+          ],
+          "positive_groups": [
+            "paired-0",
+            "paired-1"
+          ],
+          "unassessed_wpe": 0,
+          "unique_edits": [
+            [
+              "paired-0",
+              "synthetic-0"
+            ],
+            [
+              "paired-1",
+              "synthetic-0"
+            ]
+          ],
+          "useful_deliveries": 5,
+          "wrong_wpe_deliveries": 3
+        },
+        "old_wpe": {
+          "added_deliveries": [],
+          "background_groups": [
+            "lecture-background-1"
+          ],
+          "ordinary_groups": [
+            "paired-1"
+          ],
+          "positive_groups": [
+            "paired-0",
+            "paired-1"
+          ],
+          "unassessed_wpe": 0,
+          "unique_edits": [
+            [
+              "paired-0",
+              "synthetic-0"
+            ],
+            [
+              "paired-1",
+              "synthetic-0"
+            ]
+          ],
+          "useful_deliveries": 3,
+          "wrong_wpe_deliveries": 0
+        }
+      },
+      "background_groups": 6,
+      "mono_background_groups": [
+        "lecture-background-1"
+      ],
+      "mono_ordinary_groups": [
+        "paired-1"
+      ],
+      "mono_positive_groups": [
+        "paired-0",
+        "paired-1"
+      ],
+      "mono_unique_edits": [
+        [
+          "paired-0",
+          "synthetic-0"
+        ],
+        [
+          "paired-1",
+          "synthetic-0"
+        ]
+      ],
+      "mono_useful_deliveries": 3,
+      "ordinary_groups": 4,
+      "positive_deliveries": 16,
+      "positive_groups": 2,
+      "unassessed_mono": 0,
+      "wrong_mono_deliveries": 2
+    },
+    "snr_-5": {
+      "arms": {
+        "budget_0": {
+          "added_deliveries": [],
+          "background_groups": [],
+          "ordinary_groups": [
+            "paired-1"
+          ],
+          "positive_groups": [
+            "paired-0"
+          ],
+          "unassessed_wpe": 0,
+          "unique_edits": [
+            [
+              "paired-0",
+              "synthetic-0"
+            ]
+          ],
+          "useful_deliveries": 1,
+          "wrong_wpe_deliveries": 0
+        },
+        "budget_1": {
+          "added_deliveries": [
+            {
+              "edit": "synthetic-0",
+              "family": "elevenlab",
+              "group": "paired-1",
+              "level": -5,
+              "room": "lecture",
+              "truth": [
+                [
+                  23200,
+                  38560
+                ]
+              ],
+              "window": [
+                16000,
+                48000
+              ]
+            }
+          ],
+          "background_groups": [],
+          "ordinary_groups": [
+            "paired-0",
+            "paired-1"
+          ],
+          "positive_groups": [
+            "paired-0",
+            "paired-1"
+          ],
+          "unassessed_wpe": 0,
+          "unique_edits": [
+            [
+              "paired-0",
+              "synthetic-0"
+            ],
+            [
+              "paired-1",
+              "synthetic-0"
+            ]
+          ],
+          "useful_deliveries": 2,
+          "wrong_wpe_deliveries": 2
+        },
+        "budget_2": {
+          "added_deliveries": [
+            {
+              "edit": "synthetic-0",
+              "family": "elevenlab",
+              "group": "paired-1",
+              "level": -5,
+              "room": "meeting",
+              "truth": [
+                [
+                  23200,
+                  38560
+                ]
+              ],
+              "window": [
+                16000,
+                48000
+              ]
+            },
+            {
+              "edit": "synthetic-0",
+              "family": "elevenlab",
+              "group": "paired-1",
+              "level": -5,
+              "room": "lecture",
+              "truth": [
+                [
+                  23200,
+                  38560
+                ]
+              ],
+              "window": [
+                16000,
+                48000
+              ]
+            }
+          ],
+          "background_groups": [],
+          "ordinary_groups": [
+            "genuine-3",
+            "genuine-4",
+            "paired-0",
+            "paired-1"
+          ],
+          "positive_groups": [
+            "paired-0",
+            "paired-1"
+          ],
+          "unassessed_wpe": 0,
+          "unique_edits": [
+            [
+              "paired-0",
+              "synthetic-0"
+            ],
+            [
+              "paired-1",
+              "synthetic-0"
+            ]
+          ],
+          "useful_deliveries": 3,
+          "wrong_wpe_deliveries": 3
+        },
+        "old_mono": {
+          "added_deliveries": [
+            {
+              "edit": "synthetic-0",
+              "family": "elevenlab",
+              "group": "paired-1",
+              "level": -5,
+              "room": "lecture",
+              "truth": [
+                [
+                  23200,
+                  38560
+                ]
+              ],
+              "window": [
+                16000,
+                48000
+              ]
+            }
+          ],
+          "background_groups": [],
+          "ordinary_groups": [
+            "paired-0",
+            "paired-1"
+          ],
+          "positive_groups": [
+            "paired-0",
+            "paired-1"
+          ],
+          "unassessed_wpe": 0,
+          "unique_edits": [
+            [
+              "paired-0",
+              "synthetic-0"
+            ],
+            [
+              "paired-1",
+              "synthetic-0"
+            ]
+          ],
+          "useful_deliveries": 2,
+          "wrong_wpe_deliveries": 2
+        },
+        "old_wpe": {
+          "added_deliveries": [],
+          "background_groups": [],
+          "ordinary_groups": [
+            "paired-1"
+          ],
+          "positive_groups": [
+            "paired-0"
+          ],
+          "unassessed_wpe": 0,
+          "unique_edits": [
+            [
+              "paired-0",
+              "synthetic-0"
+            ]
+          ],
+          "useful_deliveries": 1,
+          "wrong_wpe_deliveries": 0
+        }
+      },
+      "background_groups": 0,
+      "mono_background_groups": [],
+      "mono_ordinary_groups": [
+        "paired-1"
+      ],
+      "mono_positive_groups": [
+        "paired-0"
+      ],
+      "mono_unique_edits": [
+        [
+          "paired-0",
+          "synthetic-0"
+        ]
+      ],
+      "mono_useful_deliveries": 1,
+      "ordinary_groups": 4,
+      "positive_deliveries": 8,
+      "positive_groups": 2,
+      "unassessed_mono": 0,
+      "wrong_mono_deliveries": 1
+    },
+    "snr_0": {
+      "arms": {
+        "budget_0": {
+          "added_deliveries": [
+            {
+              "edit": "synthetic-0",
+              "family": "elevenlab",
+              "group": "paired-1",
+              "level": 0,
+              "room": "lecture",
+              "truth": [
+                [
+                  23200,
+                  38560
+                ]
+              ],
+              "window": [
+                16000,
+                48000
+              ]
+            }
+          ],
+          "background_groups": [],
+          "ordinary_groups": [
+            "paired-1"
+          ],
+          "positive_groups": [
+            "paired-0",
+            "paired-1"
+          ],
+          "unassessed_wpe": 0,
+          "unique_edits": [
+            [
+              "paired-0",
+              "synthetic-0"
+            ],
+            [
+              "paired-1",
+              "synthetic-0"
+            ]
+          ],
+          "useful_deliveries": 3,
+          "wrong_wpe_deliveries": 0
+        },
+        "budget_1": {
+          "added_deliveries": [
+            {
+              "edit": "synthetic-0",
+              "family": "elevenlab",
+              "group": "paired-1",
+              "level": 0,
+              "room": "lecture",
+              "truth": [
+                [
+                  23200,
+                  38560
+                ]
+              ],
+              "window": [
+                16000,
+                48000
+              ]
+            }
+          ],
+          "background_groups": [],
+          "ordinary_groups": [
+            "paired-1"
+          ],
+          "positive_groups": [
+            "paired-0",
+            "paired-1"
+          ],
+          "unassessed_wpe": 0,
+          "unique_edits": [
+            [
+              "paired-0",
+              "synthetic-0"
+            ],
+            [
+              "paired-1",
+              "synthetic-0"
+            ]
+          ],
+          "useful_deliveries": 3,
+          "wrong_wpe_deliveries": 1
+        },
+        "budget_2": {
+          "added_deliveries": [
+            {
+              "edit": "synthetic-0",
+              "family": "elevenlab",
+              "group": "paired-1",
+              "level": 0,
+              "room": "lecture",
+              "truth": [
+                [
+                  23200,
+                  38560
+                ]
+              ],
+              "window": [
+                16000,
+                48000
+              ]
+            }
+          ],
+          "background_groups": [],
+          "ordinary_groups": [
+            "genuine-3",
+            "genuine-4",
+            "paired-0",
+            "paired-1"
+          ],
+          "positive_groups": [
+            "paired-0",
+            "paired-1"
+          ],
+          "unassessed_wpe": 0,
+          "unique_edits": [
+            [
+              "paired-0",
+              "synthetic-0"
+            ],
+            [
+              "paired-1",
+              "synthetic-0"
+            ]
+          ],
+          "useful_deliveries": 3,
+          "wrong_wpe_deliveries": 3
+        },
+        "old_mono": {
+          "added_deliveries": [
+            {
+              "edit": "synthetic-0",
+              "family": "elevenlab",
+              "group": "paired-1",
+              "level": 0,
+              "room": "lecture",
+              "truth": [
+                [
+                  23200,
+                  38560
+                ]
+              ],
+              "window": [
+                16000,
+                48000
+              ]
+            }
+          ],
+          "background_groups": [],
+          "ordinary_groups": [
+            "paired-1"
+          ],
+          "positive_groups": [
+            "paired-0",
+            "paired-1"
+          ],
+          "unassessed_wpe": 0,
+          "unique_edits": [
+            [
+              "paired-0",
+              "synthetic-0"
+            ],
+            [
+              "paired-1",
+              "synthetic-0"
+            ]
+          ],
+          "useful_deliveries": 3,
+          "wrong_wpe_deliveries": 1
+        },
+        "old_wpe": {
+          "added_deliveries": [],
+          "background_groups": [],
+          "ordinary_groups": [
+            "paired-1"
+          ],
+          "positive_groups": [
+            "paired-0",
+            "paired-1"
+          ],
+          "unassessed_wpe": 0,
+          "unique_edits": [
+            [
+              "paired-0",
+              "synthetic-0"
+            ],
+            [
+              "paired-1",
+              "synthetic-0"
+            ]
+          ],
+          "useful_deliveries": 2,
+          "wrong_wpe_deliveries": 0
+        }
+      },
+      "background_groups": 0,
+      "mono_background_groups": [],
+      "mono_ordinary_groups": [
+        "paired-1"
+      ],
+      "mono_positive_groups": [
+        "paired-0",
+        "paired-1"
+      ],
+      "mono_unique_edits": [
+        [
+          "paired-0",
+          "synthetic-0"
+        ],
+        [
+          "paired-1",
+          "synthetic-0"
+        ]
+      ],
+      "mono_useful_deliveries": 2,
+      "ordinary_groups": 4,
+      "positive_deliveries": 8,
+      "positive_groups": 2,
+      "unassessed_mono": 0,
+      "wrong_mono_deliveries": 1
+    }
+  }
+}

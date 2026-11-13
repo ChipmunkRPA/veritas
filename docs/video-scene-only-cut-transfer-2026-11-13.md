@@ -57,9 +57,7 @@ directions in two source pairs and one direction in each of the other two.
 One missed speaker-only view had no candidate. The other returned the exact
 range with a response of 0.218803, below the fixed point. The whole-picture
 check recorded no boundary in any delivery. All four authored cut durations
-are short, and the layouts have a common palette. This compares behavior on
-controlled, short ordinary edits. It leaves open how often a Full analysis
-would route these deliveries to the off-face check.
+are short, and the layouts have a common palette.
 
 The first scene-only example reported **44/30–55/30 s**. The 1/15360 source
 clock bound its before, during and after pictures to indices **43, 49 and
@@ -68,8 +66,32 @@ reopened the exact clocks for **3,840 delivered pictures** and re-decoded all
 **96 representative pictures**. The scene-only case shows the off-face
 cue can respond to a conventional layout cut even with identical speaker
 pixels before compression. A customer result should treat that cue as
-context for a possible edit. The study changed no serving logic or overall
-confidence.
+context for a possible edit.
+
+## Full worker with unmarked uploads
+
+The same 32 videos passed through the production Full face and tracking
+pipeline in a private local database, with the cut-context option enabled.
+No authored range entered the upload or the worker. Simulated test-mode
+payment queued 32 analyses. The unpaid events queued zero. The local run
+took 248.43 seconds. [Full worker decision ledger](evaluation-panels/video-scene-only-cut-full-2026-11-13.json)
+
+| Ordinary delivery | Existing coarse face range | Exact cut context published |
+| --- | ---: | ---: |
+| Unchanged | 0/8 | 0/8 |
+| Speaker rectangle changes | 8/8 | 6/8 |
+| Surrounding layout changes | 0/8 | 0/8 |
+| Speaker rectangle and surrounding layout change | 8/8 | 8/8 |
+
+The eight layout-only videos reached neither the whole-picture shot check's
+boundary rule nor the coarse face range needed to start the off-face check.
+This accounts for the difference from the supplied-range comparison, which
+located all eight. The worker checked the timestamps and exact original
+pixels of all 42 published cut frames across 14 deliveries. The same evidence
+appeared in the API and JSON export and carried zero overall-confidence weight.
+The test used the existing opt-in path. A separate standalone scene timeline
+would need to propose and verify cuts without a supplied face range on a new
+held bank.
 
 ## Local replay
 
@@ -85,5 +107,6 @@ for phase in freeze prepare score; do
   backend/.venv/bin/python -B -m scripts.video_scene_only_cut_transfer "$phase" "$run" || exit 1
 done
 python3 -B -IS backend/scripts/review_video_scene_only_cut_transfer.py "$receipt" --assemble "$run"
-python3 -B -IS backend/scripts/review_video_scene_only_cut_transfer.py "$receipt"
+OMP_NUM_THREADS=2 backend/.venv/bin/python -B -m scripts.video_scene_only_cut_full "$run" "$paid_run"
+python3 -B -IS backend/scripts/review_video_scene_only_cut_transfer.py "$receipt" --full "$paid_run/receipt.json"
 ```

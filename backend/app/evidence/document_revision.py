@@ -199,11 +199,11 @@ def _html_token_sources(text, layout, changed_tokens):
     return located
 
 
-def _source(path: Path, data: bytes, extension: str):
+def _source(path: Path, data: bytes, extension: str, *, mixed: bool = False):
     if extension == ".docx":
         return _docx_source(data)
     if extension == ".pdf":
-        doc = document_revision_pdf.extract_native(path, data)
+        doc = document_revision_pdf.extract_native(path, data, mixed_draft=mixed)
         if len(doc.text) > MAX_CHARS:
             raise ValueError(f"Each version can contain up to {MAX_CHARS:,} decoded characters.")
         body = tokens(doc.text, doc.paragraphs)
@@ -315,8 +315,8 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
     with TemporaryDirectory(prefix="document-revision-") as staging:
         directory = Path(staging)
         earlier_path, later_path = directory / f"earlier{old_extension}", directory / f"later{extension}"
-        old_text, old_tokens, old_source, old_layout = _source(earlier_path, earlier, old_extension)
-        new_text, new_tokens, new_source, new_layout = _source(later_path, later, extension)
+        old_text, old_tokens, old_source, old_layout = _source(earlier_path, earlier, old_extension, mixed=mixed)
+        new_text, new_tokens, new_source, new_layout = _source(later_path, later, extension, mixed=mixed)
         if mixed:
             spaces = {".txt": TEXT_COORDINATES, ".docx": WORD_COORDINATES, ".pdf": document_revision_pdf.COORDINATES}
             for suffix, text, layout, source in ((old_extension, old_text, old_layout, old_source),

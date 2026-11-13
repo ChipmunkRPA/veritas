@@ -23,7 +23,7 @@ MAX_PREVIEW_BYTES = 1024 * 1024
 MULTIPAGE_LEFT_MARGIN_SPREAD = 36  # Points, allowing ordinary first-line indents.
 
 
-def extract_native(path: Path, data: bytes):
+def extract_native(path: Path, data: bytes, *, mixed_draft: bool = False):
     from app.detectors.text.pipeline import extract_within
 
     path.write_bytes(data)
@@ -36,6 +36,9 @@ def extract_native(path: Path, data: bytes):
             or document.meta.get("unmapped_pages") or document.meta.get("partially_checked_pages")
             or any(row.get("extraction") != "text_layer" for row in document.source_map)):
         raise ValueError(message)
+    if mixed_draft and (hidden_pages := document.meta.get("hidden_text_pages")):
+        numbers = ", ".join(map(str, hidden_pages))
+        raise ValueError(f"Multi-page draft comparison requires visible PDF text. Hidden or fully transparent text was detected on page(s) {numbers}.")
     return document
 
 

@@ -834,9 +834,15 @@ def _child(argv: list[str]) -> int:
             import pymupdf
 
             with pymupdf.open(path) as pdf:
-                if not pdf.is_pdf or pdf.needs_pass or not 1 <= len(pdf) <= NATIVE_COMPARISON_MAX_PAGES:
+                page_count = len(pdf)
+                if not pdf.is_pdf or pdf.needs_pass or not 1 <= page_count <= NATIVE_COMPARISON_MAX_PAGES:
                     raise ValueError(f"Use an unlocked PDF with up to {NATIVE_COMPARISON_MAX_PAGES} pages in each version.")
+                hidden_text_pages = []
+                if page_count > 1:
+                    hidden_text_pages = [page.number + 1 for page in pdf
+                                         if any(span["type"] == 3 or span["opacity"] == 0 for span in page.get_texttrace())]
             d = extract(path, ext, allow_ocr=False)
+            d.meta["hidden_text_pages"] = hidden_text_pages
         else:
             d = extract(path, ext)
         out: dict = {"text": d.text, "paragraphs": d.paragraphs, "meta": d.meta, "source_map": d.source_map, "source_rasters": d.source_rasters}

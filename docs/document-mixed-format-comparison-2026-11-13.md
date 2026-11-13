@@ -63,9 +63,11 @@ optional writing detector was skipped for its memory budget in this run.
 The separate paired writing-model check still requires same-format drafts
 and, for PDFs, one upright page per draft. The multi-page comparison tests
 also reject rotation, missing text, detected multiple columns, and more than
-12 pages. The reading-order guard accepts a limited left-margin spread of
-36 points on each page. Centered headings or heavily indented material may
-fall outside scope. [Multi-page receipt](evaluation-panels/document-mixed-format-multipage-2026-11-13.json)
+12 pages. Multi-page comparison declines PDFs with explicitly hidden or
+fully transparent text. Covering graphics and low-contrast text can still
+affect how the source crops look. The reading-order guard accepts a limited
+left-margin spread of 36 points on each page. Centered headings or heavily
+indented material may fall outside scope. [Multi-page receipt](evaluation-panels/document-mixed-format-multipage-2026-11-13.json)
 
 ## Reproduce
 

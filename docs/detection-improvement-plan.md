@@ -108,8 +108,16 @@ integration remains unfinished.
   including broad regions after grading and resizing, and stays experimental.
 - The [ordinary webcam-cut comparison](video-scene-only-cut-transfer-2026-11-13.md)
   found all eight surrounding-layout cuts with the off-face check at supplied
-  intervals, while the whole-picture shot check found none. These clips
-  preserve the speaker's pixels before encoding.
+  intervals. On unmarked uploads the Full face pipeline surfaced none of those
+  eight cuts because none produced a coarse face interval. It surfaced 14
+  exact cut ranges across 16 ordinary speaker changes, with 42 source frames
+  independently decoded. A standalone check needs new held controls.
+- The [matched new-room speech comparison](audio-wpe-fresh-room-transfer-2026-11-13.md)
+  increased useful deliveries from 3/16 to 4/16 without new false reader or
+  background groups at its most conservative point. Both arms found the same
+  two of four unique edits. The additional location was another rendering of
+  the same edit, and the lower points flagged more genuine readers. The
+  candidate stays experimental.
 - The [H.264 mouth prediction comparison](video-mouth-codec-prediction-2026-11-13.md)
   located five of 17 neural redraws but flagged 37 of 75 ordinary files.
   Motion-vector dispersion located zero. Both remain offline.

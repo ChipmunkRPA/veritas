@@ -1,0 +1,2402 @@
+{
+  "case_admission": [
+    {
+      "admitted": true,
+      "attempt_receipt_sha256": "3deaba4fca9021f913dbc5aa4f712bbacc0d73862d5777a36f63dfd21383c345",
+      "group": "pep-521"
+    },
+    {
+      "admitted": true,
+      "attempt_receipt_sha256": "696c1698f05de0bb49c202c3c6c26fb37bef1586ac0b60ea63bcb077c7caee4a",
+      "group": "pep-554"
+    },
+    {
+      "admitted": true,
+      "attempt_receipt_sha256": "ae055be77287ed9c7bf742af8383c369d59667e9527d86da30d163a4d9ee6709",
+      "group": "pep-575"
+    },
+    {
+      "admitted": true,
+      "attempt_receipt_sha256": "af4f3afd144e893070d1f6cd568e43f2d43e0925b4f82253a00076ea63b00d1c",
+      "group": "gates-12751"
+    },
+    {
+      "admitted": true,
+      "attempt_receipt_sha256": "030c11fd167a72634ef07e792d436cfb003d4db314a5360a8388673648d32fe4",
+      "group": "gates-13037"
+    },
+    {
+      "admitted": true,
+      "attempt_receipt_sha256": "bf71ddd7f9e9f981de7f1bd8cb1fbfa09d4b7ae3ce5e424d154df73c4f66cbf8",
+      "group": "gates-12854"
+    },
+    {
+      "admitted": true,
+      "attempt_receipt_sha256": "bd8f65d1cd7d5a3ac7794769122624dec77fc96ddde019db03f5ae8fb313ab01",
+      "group": "gates-12775"
+    },
+    {
+      "admitted": false,
+      "attempt_receipt_sha256": "751f220a2da6231e9be1b4940605cdf0c7ddcdf413292da109390a89a29768d8",
+      "group": "gates-12758"
+    },
+    {
+      "admitted": true,
+      "attempt_receipt_sha256": "5ee0b64d240aa93802caf09d701c4b01f3d54005438f2a2297ddd2085854f169",
+      "group": "gates-13035"
+    },
+    {
+      "admitted": true,
+      "attempt_receipt_sha256": "71bbaba91ea479a0e89b83546527a475738d4d24acca47509070fe05e878e806",
+      "group": "wellcome-15210"
+    },
+    {
+      "admitted": true,
+      "attempt_receipt_sha256": "69c067564224ed69362e44b30b4bc492049d3fd22e06155d33ed172d70342dec",
+      "group": "wellcome-14860"
+    },
+    {
+      "admitted": true,
+      "attempt_receipt_sha256": "8210681f9352672afe756c34a32c2d6bcf7f455b7b989cf4b15ce171015f8261",
+      "group": "wellcome-15238"
+    },
+    {
+      "admitted": true,
+      "attempt_receipt_sha256": "01a0ec29c68adbc14cbe8c13e5f766e9570c9318e5f3fc91193583d04c0fa01b",
+      "group": "wellcome-15217"
+    },
+    {
+      "admitted": true,
+      "attempt_receipt_sha256": "a51da2902ee94477600d29c3ad8359c4ae8a0bb9eb770742fde0a8855286413e",
+      "group": "wellcome-15314"
+    }
+  ],
+  "case_counts": {
+    "human": 14,
+    "ordinary": 14,
+    "qwen": 13
+  },
+  "cases": [
+    {
+      "focus": [
+        151,
+        361
+      ],
+      "group": "pep-521",
+      "positions": [
+        [
+          0,
+          150
+        ],
+        [
+          151,
+          361
+        ],
+        [
+          362,
+          694
+        ]
+      ],
+      "publisher": "python-peps",
+      "role": "human",
+      "text_sha256": "5d9564fdab2d34f245ce07e41028b59f752746ed890124e5583acfbb5ae241b2",
+      "truth": null
+    },
+    {
+      "focus": [
+        151,
+        364
+      ],
+      "group": "pep-521",
+      "positions": [
+        [
+          0,
+          150
+        ],
+        [
+          151,
+          364
+        ],
+        [
+          365,
+          697
+        ]
+      ],
+      "publisher": "python-peps",
+      "role": "ordinary",
+      "text_sha256": "b8cb94a7cc033b37baa8078688a1ba9e60205515c17a99b18a8cb896ae71c5d7",
+      "truth": null
+    },
+    {
+      "focus": [
+        110,
+        214
+      ],
+      "group": "pep-554",
+      "positions": [
+        [
+          0,
+          109
+        ],
+        [
+          110,
+          214
+        ],
+        [
+          215,
+          334
+        ]
+      ],
+      "publisher": "python-peps",
+      "role": "human",
+      "text_sha256": "2d084b5c5fc0cbe3eb8c4832e278ff91dbd84e03e2c8c0debe7b26b1bc852703",
+      "truth": null
+    },
+    {
+      "focus": [
+        110,
+        205
+      ],
+      "group": "pep-554",
+      "positions": [
+        [
+          0,
+          109
+        ],
+        [
+          110,
+          205
+        ],
+        [
+          206,
+          325
+        ]
+      ],
+      "publisher": "python-peps",
+      "role": "ordinary",
+      "text_sha256": "926ba4d7296297178d2f3a0a195dd8964336b59a4065cfb854f2e25fbde711a6",
+      "truth": null
+    },
+    {
+      "focus": [
+        98,
+        226
+      ],
+      "group": "pep-575",
+      "positions": [
+        [
+          0,
+          97
+        ],
+        [
+          98,
+          226
+        ],
+        [
+          227,
+          317
+        ]
+      ],
+      "publisher": "python-peps",
+      "role": "human",
+      "text_sha256": "d8a9dd73de18f8a2305eab0eb5fc96543f0e2fe1b42d1da0e449d1953f7d54e1",
+      "truth": null
+    },
+    {
+      "focus": [
+        98,
+        227
+      ],
+      "group": "pep-575",
+      "positions": [
+        [
+          0,
+          97
+        ],
+        [
+          98,
+          227
+        ],
+        [
+          228,
+          318
+        ]
+      ],
+      "publisher": "python-peps",
+      "role": "ordinary",
+      "text_sha256": "ac15bff4500774856485caf94177a5f5b7780f25512a4ff25ac32c1f9965b050",
+      "truth": null
+    },
+    {
+      "focus": [
+        130,
+        281
+      ],
+      "group": "gates-12751",
+      "positions": [
+        [
+          0,
+          129
+        ],
+        [
+          130,
+          281
+        ],
+        [
+          282,
+          505
+        ]
+      ],
+      "publisher": "gates",
+      "role": "human",
+      "text_sha256": "b1a9a3fb2a6a97cb8e44bb027e4573cf69ad0e61f2aad0eaa7c03b41f4e2017c",
+      "truth": null
+    },
+    {
+      "focus": [
+        130,
+        332
+      ],
+      "group": "gates-12751",
+      "positions": [
+        [
+          0,
+          129
+        ],
+        [
+          130,
+          332
+        ],
+        [
+          333,
+          556
+        ]
+      ],
+      "publisher": "gates",
+      "role": "ordinary",
+      "text_sha256": "689e4ac7d8b116c881abbdd9ba4c806537f4aa5a5149ff16eaf1c14ee714ceaa",
+      "truth": null
+    },
+    {
+      "focus": [
+        165,
+        271
+      ],
+      "group": "gates-13037",
+      "positions": [
+        [
+          0,
+          164
+        ],
+        [
+          165,
+          271
+        ],
+        [
+          272,
+          455
+        ]
+      ],
+      "publisher": "gates",
+      "role": "human",
+      "text_sha256": "37b0785e7dea25e2849294f91fb69f335b1d0ea84e6be9343958ef2eec834877",
+      "truth": null
+    },
+    {
+      "focus": [
+        165,
+        299
+      ],
+      "group": "gates-13037",
+      "positions": [
+        [
+          0,
+          164
+        ],
+        [
+          165,
+          299
+        ],
+        [
+          300,
+          483
+        ]
+      ],
+      "publisher": "gates",
+      "role": "ordinary",
+      "text_sha256": "05d6377f061757dd7fca674a47ef0b8b96ae231a34eb0f54a791e24bbce62f28",
+      "truth": null
+    },
+    {
+      "focus": [
+        184,
+        371
+      ],
+      "group": "gates-12854",
+      "positions": [
+        [
+          0,
+          183
+        ],
+        [
+          184,
+          371
+        ],
+        [
+          372,
+          477
+        ]
+      ],
+      "publisher": "gates",
+      "role": "human",
+      "text_sha256": "11f154dca9b197a806075960501e2521ab90ea7a16a7a1cb1ec42ee0c1fcee6e",
+      "truth": null
+    },
+    {
+      "focus": [
+        184,
+        354
+      ],
+      "group": "gates-12854",
+      "positions": [
+        [
+          0,
+          183
+        ],
+        [
+          184,
+          354
+        ],
+        [
+          355,
+          460
+        ]
+      ],
+      "publisher": "gates",
+      "role": "ordinary",
+      "text_sha256": "0a8fe71bc9c45063970c0a3e9e7b4ccf8ffbcdb9a58a43147f90d5cf60309c20",
+      "truth": null
+    },
+    {
+      "focus": [
+        276,
+        424
+      ],
+      "group": "gates-12775",
+      "positions": [
+        [
+          0,
+          275
+        ],
+        [
+          276,
+          424
+        ],
+        [
+          425,
+          691
+        ]
+      ],
+      "publisher": "gates",
+      "role": "human",
+      "text_sha256": "a61134b7fc91e73fbf89be281327b7d94692ea25db87557beee4c72e9e491bce",
+      "truth": null
+    },
+    {
+      "focus": [
+        276,
+        423
+      ],
+      "group": "gates-12775",
+      "positions": [
+        [
+          0,
+          275
+        ],
+        [
+          276,
+          423
+        ],
+        [
+          424,
+          690
+        ]
+      ],
+      "publisher": "gates",
+      "role": "ordinary",
+      "text_sha256": "8592096ccc6aa95dea6f1714f7389e22a629e6d9659d0df709035f71f86d6de8",
+      "truth": null
+    },
+    {
+      "focus": [
+        63,
+        225
+      ],
+      "group": "gates-12758",
+      "positions": [
+        [
+          0,
+          62
+        ],
+        [
+          63,
+          225
+        ],
+        [
+          226,
+          541
+        ]
+      ],
+      "publisher": "gates",
+      "role": "human",
+      "text_sha256": "5a8932419c04d3ab4edd174807a0c325afb7fd058210080f3f37f7f9575f7394",
+      "truth": null
+    },
+    {
+      "focus": [
+        63,
+        261
+      ],
+      "group": "gates-12758",
+      "positions": [
+        [
+          0,
+          62
+        ],
+        [
+          63,
+          261
+        ],
+        [
+          262,
+          577
+        ]
+      ],
+      "publisher": "gates",
+      "role": "ordinary",
+      "text_sha256": "00d7a7c890f70ba1ee2c5f68f4283c84a0d76f2d4983395a62ed706c42944895",
+      "truth": null
+    },
+    {
+      "focus": [
+        142,
+        395
+      ],
+      "group": "gates-13035",
+      "positions": [
+        [
+          0,
+          141
+        ],
+        [
+          142,
+          395
+        ],
+        [
+          396,
+          485
+        ]
+      ],
+      "publisher": "gates",
+      "role": "human",
+      "text_sha256": "dddc71d7e1c8b2659616b0fb2f6bfb8a993dc3833a1deb3d58a0d8174a3b15be",
+      "truth": null
+    },
+    {
+      "focus": [
+        142,
+        399
+      ],
+      "group": "gates-13035",
+      "positions": [
+        [
+          0,
+          141
+        ],
+        [
+          142,
+          399
+        ],
+        [
+          400,
+          489
+        ]
+      ],
+      "publisher": "gates",
+      "role": "ordinary",
+      "text_sha256": "086bbf7f1d28c0a37807cd18953d9f4990bda7b9e5c59e21ff07f8069144d74e",
+      "truth": null
+    },
+    {
+      "focus": [
+        158,
+        381
+      ],
+      "group": "wellcome-15210",
+      "positions": [
+        [
+          0,
+          157
+        ],
+        [
+          158,
+          381
+        ],
+        [
+          382,
+          460
+        ]
+      ],
+      "publisher": "wellcome",
+      "role": "human",
+      "text_sha256": "00c6f6753ad0ede60ae77f87ccb46c090bd2f9eac689f47610f50cd309cd5af8",
+      "truth": null
+    },
+    {
+      "focus": [
+        158,
+        335
+      ],
+      "group": "wellcome-15210",
+      "positions": [
+        [
+          0,
+          157
+        ],
+        [
+          158,
+          335
+        ],
+        [
+          336,
+          414
+        ]
+      ],
+      "publisher": "wellcome",
+      "role": "ordinary",
+      "text_sha256": "860096e59223bc65ad9008ebe73e632e7ca451647feaf02c131497b80cb3c54e",
+      "truth": null
+    },
+    {
+      "focus": [
+        146,
+        313
+      ],
+      "group": "wellcome-14860",
+      "positions": [
+        [
+          0,
+          145
+        ],
+        [
+          146,
+          313
+        ],
+        [
+          314,
+          571
+        ]
+      ],
+      "publisher": "wellcome",
+      "role": "human",
+      "text_sha256": "a20946e4705658f93f43b41f5ec24973cf3b16bf04266578b1c2a996dafd3920",
+      "truth": null
+    },
+    {
+      "focus": [
+        146,
+        307
+      ],
+      "group": "wellcome-14860",
+      "positions": [
+        [
+          0,
+          145
+        ],
+        [
+          146,
+          307
+        ],
+        [
+          308,
+          565
+        ]
+      ],
+      "publisher": "wellcome",
+      "role": "ordinary",
+      "text_sha256": "a8f31ae7fb172db03252a6deb9cd665074849b971d45831ef1bd927ac816a721",
+      "truth": null
+    },
+    {
+      "focus": [
+        94,
+        201
+      ],
+      "group": "wellcome-15238",
+      "positions": [
+        [
+          0,
+          93
+        ],
+        [
+          94,
+          201
+        ],
+        [
+          202,
+          274
+        ]
+      ],
+      "publisher": "wellcome",
+      "role": "human",
+      "text_sha256": "aee96ada9c0a35b14c0def7eb4551c3994c91aeb7e486291a7fd807a63f7391c",
+      "truth": null
+    },
+    {
+      "focus": [
+        94,
+        203
+      ],
+      "group": "wellcome-15238",
+      "positions": [
+        [
+          0,
+          93
+        ],
+        [
+          94,
+          203
+        ],
+        [
+          204,
+          276
+        ]
+      ],
+      "publisher": "wellcome",
+      "role": "ordinary",
+      "text_sha256": "40e5f87160cf2532bd0002ab482790677a1cda52c52c991ce24a3598f26010db",
+      "truth": null
+    },
+    {
+      "focus": [
+        201,
+        346
+      ],
+      "group": "wellcome-15217",
+      "positions": [
+        [
+          0,
+          200
+        ],
+        [
+          201,
+          346
+        ],
+        [
+          347,
+          455
+        ]
+      ],
+      "publisher": "wellcome",
+      "role": "human",
+      "text_sha256": "50b68ec42ee136fe0d9784dc719dcdbb1ef592956448ba19f6e895796a954d7b",
+      "truth": null
+    },
+    {
+      "focus": [
+        201,
+        347
+      ],
+      "group": "wellcome-15217",
+      "positions": [
+        [
+          0,
+          200
+        ],
+        [
+          201,
+          347
+        ],
+        [
+          348,
+          456
+        ]
+      ],
+      "publisher": "wellcome",
+      "role": "ordinary",
+      "text_sha256": "d1691f8c9fe1d435789889bf6647a005be94a155749f8db60738223d557ac8e0",
+      "truth": null
+    },
+    {
+      "focus": [
+        279,
+        525
+      ],
+      "group": "wellcome-15314",
+      "positions": [
+        [
+          0,
+          278
+        ],
+        [
+          279,
+          525
+        ],
+        [
+          526,
+          682
+        ]
+      ],
+      "publisher": "wellcome",
+      "role": "human",
+      "text_sha256": "047bad7737dec93f110da1f770381bad0b9af5ed29d29336a925136455da04d3",
+      "truth": null
+    },
+    {
+      "focus": [
+        279,
+        554
+      ],
+      "group": "wellcome-15314",
+      "positions": [
+        [
+          0,
+          278
+        ],
+        [
+          279,
+          554
+        ],
+        [
+          555,
+          711
+        ]
+      ],
+      "publisher": "wellcome",
+      "role": "ordinary",
+      "text_sha256": "a4f1c76e907da34ac661b57d05713484f9a2cc589d78e8f0cb5c34dd0412ef22",
+      "truth": null
+    },
+    {
+      "focus": [
+        151,
+        361
+      ],
+      "group": "pep-521",
+      "positions": [
+        [
+          0,
+          150
+        ],
+        [
+          151,
+          361
+        ],
+        [
+          362,
+          694
+        ]
+      ],
+      "publisher": "python-peps",
+      "role": "qwen",
+      "seed": 1647751,
+      "text_sha256": "68eedf6a878c57f14114368624881b9cc786821fdbdbbb6b257473e438f59b9c",
+      "truth": [
+        151,
+        361
+      ]
+    },
+    {
+      "focus": [
+        110,
+        203
+      ],
+      "group": "pep-554",
+      "positions": [
+        [
+          0,
+          109
+        ],
+        [
+          110,
+          203
+        ],
+        [
+          204,
+          323
+        ]
+      ],
+      "publisher": "python-peps",
+      "role": "qwen",
+      "seed": 1647756,
+      "text_sha256": "bb44b02b5aa6ca24c13f7bec0de0081a824cedbc82f8d1bb635623b7c00a5a1c",
+      "truth": [
+        110,
+        203
+      ]
+    },
+    {
+      "focus": [
+        98,
+        232
+      ],
+      "group": "pep-575",
+      "positions": [
+        [
+          0,
+          97
+        ],
+        [
+          98,
+          232
+        ],
+        [
+          233,
+          323
+        ]
+      ],
+      "publisher": "python-peps",
+      "role": "qwen",
+      "seed": 1647759,
+      "text_sha256": "80b47a995ab6346bf505a8f58af7fd351c76c252a3dc87d9ef026a0078c04fbb",
+      "truth": [
+        98,
+        232
+      ]
+    },
+    {
+      "focus": [
+        130,
+        253
+      ],
+      "group": "gates-12751",
+      "positions": [
+        [
+          0,
+          129
+        ],
+        [
+          130,
+          253
+        ],
+        [
+          254,
+          477
+        ]
+      ],
+      "publisher": "gates",
+      "role": "qwen",
+      "seed": 1647763,
+      "text_sha256": "a09d70c1b23696bf71c9cacdf8198c247e2c82224e550e9b44b982bc83bade9e",
+      "truth": [
+        130,
+        253
+      ]
+    },
+    {
+      "focus": [
+        165,
+        259
+      ],
+      "group": "gates-13037",
+      "positions": [
+        [
+          0,
+          164
+        ],
+        [
+          165,
+          259
+        ],
+        [
+          260,
+          443
+        ]
+      ],
+      "publisher": "gates",
+      "role": "qwen",
+      "seed": 1647767,
+      "text_sha256": "7da0df48c0c4541f0cdca54cde7117187e4acd07dc629657c43f305f19dc8914",
+      "truth": [
+        165,
+        259
+      ]
+    },
+    {
+      "focus": [
+        184,
+        371
+      ],
+      "group": "gates-12854",
+      "positions": [
+        [
+          0,
+          183
+        ],
+        [
+          184,
+          371
+        ],
+        [
+          372,
+          477
+        ]
+      ],
+      "publisher": "gates",
+      "role": "qwen",
+      "seed": 1647771,
+      "text_sha256": "b5adcdab5758dfc49cc0a7fd66cfa0287e5cdd8aa5e4dfa85726716d603aeb3b",
+      "truth": [
+        184,
+        371
+      ]
+    },
+    {
+      "focus": [
+        276,
+        409
+      ],
+      "group": "gates-12775",
+      "positions": [
+        [
+          0,
+          275
+        ],
+        [
+          276,
+          409
+        ],
+        [
+          410,
+          676
+        ]
+      ],
+      "publisher": "gates",
+      "role": "qwen",
+      "seed": 1647775,
+      "text_sha256": "2a1498172bfbff49cc566fad6f0e5cc026fdcd91fdaa0547567a84b40c40ca74",
+      "truth": [
+        276,
+        409
+      ]
+    },
+    {
+      "focus": [
+        142,
+        375
+      ],
+      "group": "gates-13035",
+      "positions": [
+        [
+          0,
+          141
+        ],
+        [
+          142,
+          375
+        ],
+        [
+          376,
+          465
+        ]
+      ],
+      "publisher": "gates",
+      "role": "qwen",
+      "seed": 1647783,
+      "text_sha256": "edaa265fda103b1a4705388d4e2b6f5b792d1e4072bd43ecfb3eef9f26aae7da",
+      "truth": [
+        142,
+        375
+      ]
+    },
+    {
+      "focus": [
+        158,
+        364
+      ],
+      "group": "wellcome-15210",
+      "positions": [
+        [
+          0,
+          157
+        ],
+        [
+          158,
+          364
+        ],
+        [
+          365,
+          443
+        ]
+      ],
+      "publisher": "wellcome",
+      "role": "qwen",
+      "seed": 1647787,
+      "text_sha256": "c22c62a8210fb189f6cc039bbfd810dfb099122a6cda88a1f8862aeb829e70e8",
+      "truth": [
+        158,
+        364
+      ]
+    },
+    {
+      "focus": [
+        146,
+        290
+      ],
+      "group": "wellcome-14860",
+      "positions": [
+        [
+          0,
+          145
+        ],
+        [
+          146,
+          290
+        ],
+        [
+          291,
+          548
+        ]
+      ],
+      "publisher": "wellcome",
+      "role": "qwen",
+      "seed": 1647791,
+      "text_sha256": "f2ae54303eb470367eb87a68d4b8fa26b73fa0de54e5559aab21f415d8e80696",
+      "truth": [
+        146,
+        290
+      ]
+    },
+    {
+      "focus": [
+        94,
+        204
+      ],
+      "group": "wellcome-15238",
+      "positions": [
+        [
+          0,
+          93
+        ],
+        [
+          94,
+          204
+        ],
+        [
+          205,
+          277
+        ]
+      ],
+      "publisher": "wellcome",
+      "role": "qwen",
+      "seed": 1647797,
+      "text_sha256": "3ac1155dfc9b5129045a6b0f598caeebdc863c62941938e0c4917354f2123996",
+      "truth": [
+        94,
+        204
+      ]
+    },
+    {
+      "focus": [
+        201,
+        319
+      ],
+      "group": "wellcome-15217",
+      "positions": [
+        [
+          0,
+          200
+        ],
+        [
+          201,
+          319
+        ],
+        [
+          320,
+          428
+        ]
+      ],
+      "publisher": "wellcome",
+      "role": "qwen",
+      "seed": 1647799,
+      "text_sha256": "f02768621e6f492ebd17634560ffad7dd559c69b76ce1de206fe5094c810eb10",
+      "truth": [
+        201,
+        319
+      ]
+    },
+    {
+      "focus": [
+        279,
+        494
+      ],
+      "group": "wellcome-15314",
+      "positions": [
+        [
+          0,
+          278
+        ],
+        [
+          279,
+          494
+        ],
+        [
+          495,
+          651
+        ]
+      ],
+      "publisher": "wellcome",
+      "role": "qwen",
+      "seed": 1647803,
+      "text_sha256": "7db911b00eb6cef9866084e2729cf652f79c0475741c7576598f4a7b70a3c03e",
+      "truth": [
+        279,
+        494
+      ]
+    }
+  ],
+  "detector_runs": 0,
+  "frozen_position_point": 2.7579683180027486,
+  "generation": {
+    "attempts": 4,
+    "max_tokens": 96,
+    "prompt": "Paraphrase this English sentence once. Preserve its meaning, names and technical terms. Return exactly one complete sentence, with no headings or explanation.\n\n{sentence}",
+    "quantization": {
+      "bits": 4,
+      "group_size": 64,
+      "mode": "affine"
+    },
+    "seed_base": 1647751,
+    "temperature": 0.65,
+    "top_p": 0.9
+  },
+  "generation_counts": {
+    "format_length_or_copy_rejected": 11,
+    "qualifying_attempt": 45
+  },
+  "generation_runtime": {
+    "huggingface_hub": "1.28.0",
+    "mlx": "0.32.4",
+    "mlx-lm": "0.31.3",
+    "mlx-metal": "0.32.4",
+    "tokenizers": "0.22.2",
+    "transformers": "5.15.1"
+  },
+  "generator": {
+    "files": [
+      {
+        "file": "config.json",
+        "sha256": "98d2ff8cc47488d08a2b0b3acf4eb99ef210779b42bd48605f6b8e36acdbf670"
+      },
+      {
+        "file": "generation_config.json",
+        "sha256": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6"
+      },
+      {
+        "file": "merges.txt",
+        "sha256": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3"
+      },
+      {
+        "file": "model.safetensors",
+        "sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee"
+      },
+      {
+        "file": "tokenizer.json",
+        "sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539"
+      },
+      {
+        "file": "tokenizer_config.json",
+        "sha256": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583"
+      },
+      {
+        "file": "vocab.json",
+        "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      }
+    ],
+    "license": "Apache-2.0",
+    "license_url": "https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct/blob/989aa7980e4cf806f80c7fef2b1adb7bc71aa306/LICENSE",
+    "publisher": "Qwen/Qwen2.5-1.5B-Instruct",
+    "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306"
+  },
+  "initial_score_receipt_sha256": "c9c38c3c5535980749d98d5ced85505a71c4598f24f76b4a0bdd987931489527",
+  "latest_confirmation_sha256": "f498a1a0979317d5df6562306f482fe58459d5ecb8ecc8732d8fab9c0630e0fc",
+  "minimum_admitted_qwen_works": 8,
+  "minimum_met": true,
+  "prior_head_sha256": "62d220720d88713e5a765e6a4cd5d499e0ac494f0f8f896a65cc038a70ade450",
+  "qwen_by_publisher": {
+    "gates": 5,
+    "python-peps": 3,
+    "wellcome": 5
+  },
+  "schema": "chipmunk.writing-qwen-position-admission/1",
+  "scoring_status": "prepared",
+  "sha256_commitments": [
+    {
+      "file": "source.py",
+      "sha256": "43ce50877d82fe28739bdfa0ea26b2399ee7ad6e3b08caf3b3a11a269187287b"
+    },
+    {
+      "file": "journals.py",
+      "sha256": "7f607e3c1ae6172161949609354cc01f10f4285cdcdae214e790c06487e9f0cc"
+    },
+    {
+      "file": "prepare_qwen.py",
+      "sha256": "f2a1ede746fad1fbdb34e7d3bc959b563e9de765db41d4bc1a44bf2cb42508d8"
+    },
+    {
+      "file": "verify_sources.py",
+      "sha256": "d09cbbea1ebf4786f5b2adafa0176ba0c710d79bbbbf2ed7a6cce67506db6848"
+    },
+    {
+      "file": "metadata-freeze.json",
+      "sha256": "f4b2e6e1da52e1af0fcd79ce54a3cc677d836c65d8d20f4a5eda91e32a757c31"
+    },
+    {
+      "file": "combined-sources.json",
+      "sha256": "6ddf8a5ace76d5deafbdb0c17363230ed959e0ef868a6c18f1b0af5f06c38a59"
+    },
+    {
+      "file": "generation-freeze.json",
+      "sha256": "b65a83d06ca9a79c9170bab2b1335e24987a6be7a6e16794362e703c828f9114"
+    },
+    {
+      "file": "admission-receipt.json",
+      "sha256": "23a436296546bfb24b159fb2a712bafd18dd93f9be9a9bf237e72180010ab792"
+    },
+    {
+      "file": "admission-plan.json",
+      "sha256": "d4d6d8c810a7aa459e5f78e6aa7bb47857d383eaeffb9073e8b1b5a762aac9fb"
+    }
+  ],
+  "source_audit": {
+    "combined_source_sha256": "6ddf8a5ace76d5deafbdb0c17363230ed959e0ef868a6c18f1b0af5f06c38a59",
+    "cross_work_fingerprint_pairs": 91,
+    "historical_versions_verified": 28,
+    "journal_source_sha256": "cfd4c9469faf36c1eb508b2f1cbdea22cd6b3070f3e0a63410a06f1c8d948a12",
+    "no_detector_scores": true,
+    "source_groups_verified": 14,
+    "source_sha256": "0ea98b523638a90d6c46af975e2aae5172a1be22d529077790c7ac512b2dc918"
+  },
+  "source_counts": {
+    "gates": 6,
+    "python-peps": 3,
+    "wellcome": 5
+  },
+  "sources": [
+    {
+      "attribution": [
+        "nathaniel j. smith"
+      ],
+      "group": "pep-521",
+      "locations": {
+        "earlier": {
+          "native": [
+            {
+              "block": [
+                324,
+                1019
+              ],
+              "block_sha256": "260b756710c339d2a758a18a4c65780da2065db2d8f7f1b9558b3a3670e3da72",
+              "normalized_span": [
+                0,
+                150
+              ]
+            },
+            {
+              "block": [
+                324,
+                1019
+              ],
+              "block_sha256": "260b756710c339d2a758a18a4c65780da2065db2d8f7f1b9558b3a3670e3da72",
+              "normalized_span": [
+                151,
+                361
+              ]
+            },
+            {
+              "block": [
+                324,
+                1019
+              ],
+              "block_sha256": "260b756710c339d2a758a18a4c65780da2065db2d8f7f1b9558b3a3670e3da72",
+              "normalized_span": [
+                362,
+                694
+              ]
+            }
+          ],
+          "target": [
+            151,
+            361
+          ]
+        },
+        "ordinary": {
+          "native": [
+            {
+              "block": [
+                324,
+                1022
+              ],
+              "block_sha256": "5314e81666bfadcb34133c90751afad948e2534f17abac24cb90b7e002f9c863",
+              "normalized_span": [
+                0,
+                150
+              ]
+            },
+            {
+              "block": [
+                324,
+                1022
+              ],
+              "block_sha256": "5314e81666bfadcb34133c90751afad948e2534f17abac24cb90b7e002f9c863",
+              "normalized_span": [
+                151,
+                364
+              ]
+            },
+            {
+              "block": [
+                324,
+                1022
+              ],
+              "block_sha256": "5314e81666bfadcb34133c90751afad948e2534f17abac24cb90b7e002f9c863",
+              "normalized_span": [
+                365,
+                697
+              ]
+            }
+          ],
+          "target": [
+            151,
+            364
+          ]
+        }
+      },
+      "publisher": "python-peps",
+      "source": {
+        "after": "b60019e09a822004169e3845b0cb922f801d4ebb",
+        "after_authored": 1478388093,
+        "after_blob_sha256": "2cc0d4f0445d927bcc680a1e50caeffe2dc27ac618e776dd8eeed2679bab66a4",
+        "after_committed": 1478388093,
+        "after_prose_sha256": "ff029ec6837ed855a5cbe007a6de7295ccb276bcd21d2068bed6eaaa8ae020d6",
+        "before": "51bf7c2ce43877f3c4996f7ee0e12e0c64d13b6c",
+        "before_blob_sha256": "0de38d39984c5b91e4fdfa4b5ce82e0f3b912455f440907975e60daee2dfc29f",
+        "before_committed": 1478381909,
+        "before_prose_sha256": "2b10bf29f080d8828ad9b491d62f0fc4989d5f9b899261977c83163ee377e8c1",
+        "path": "pep-0521.txt"
+      },
+      "terms": "Public domain or CC0 stated in both exact Git blobs"
+    },
+    {
+      "attribution": [
+        "eric snow"
+      ],
+      "group": "pep-554",
+      "locations": {
+        "earlier": {
+          "native": [
+            {
+              "block": [
+                7283,
+                7751
+              ],
+              "block_sha256": "41c93a096d16f8622f72d3775c0909e54cea5440838744060073fa8c4019ce50",
+              "normalized_span": [
+                132,
+                241
+              ]
+            },
+            {
+              "block": [
+                7283,
+                7751
+              ],
+              "block_sha256": "41c93a096d16f8622f72d3775c0909e54cea5440838744060073fa8c4019ce50",
+              "normalized_span": [
+                242,
+                346
+              ]
+            },
+            {
+              "block": [
+                7283,
+                7751
+              ],
+              "block_sha256": "41c93a096d16f8622f72d3775c0909e54cea5440838744060073fa8c4019ce50",
+              "normalized_span": [
+                347,
+                466
+              ]
+            }
+          ],
+          "target": [
+            110,
+            214
+          ]
+        },
+        "ordinary": {
+          "native": [
+            {
+              "block": [
+                15497,
+                15955
+              ],
+              "block_sha256": "f2fdd50ee5fa016030b3b28d818841475e75f6958a47efc00e33f4b44842c54b",
+              "normalized_span": [
+                132,
+                241
+              ]
+            },
+            {
+              "block": [
+                15497,
+                15955
+              ],
+              "block_sha256": "f2fdd50ee5fa016030b3b28d818841475e75f6958a47efc00e33f4b44842c54b",
+              "normalized_span": [
+                242,
+                337
+              ]
+            },
+            {
+              "block": [
+                15497,
+                15955
+              ],
+              "block_sha256": "f2fdd50ee5fa016030b3b28d818841475e75f6958a47efc00e33f4b44842c54b",
+              "normalized_span": [
+                338,
+                457
+              ]
+            }
+          ],
+          "target": [
+            110,
+            205
+          ]
+        }
+      },
+      "publisher": "python-peps",
+      "source": {
+        "after": "5670238a0d943fec7129490fca238a4cf35a0205",
+        "after_authored": 1505352940,
+        "after_blob_sha256": "2634a77302e412c0d438e0dc3948103548646d70f5413db2d5ef7e3353ca1a75",
+        "after_committed": 1505352940,
+        "after_prose_sha256": "06d1c931001e63c753d4fbd35c20f28a9da8fbcfb2b581006dba1658fdda7c4f",
+        "before": "2ed8903b5acaf2f427e668c58b5e52d2c3e3d4f0",
+        "before_blob_sha256": "04961542adc1ba0683fcb4a2348a3a788affaa1f50130c7fcf13f00370b33da6",
+        "before_committed": 1505346862,
+        "before_prose_sha256": "d02541a8a8f0ac06b10e7ae28d046baff21c618f638985a87216643009a0ee47",
+        "path": "pep-0554.rst"
+      },
+      "terms": "Public domain or CC0 stated in both exact Git blobs"
+    },
+    {
+      "attribution": [
+        "jeroen demeyer"
+      ],
+      "group": "pep-575",
+      "locations": {
+        "earlier": {
+          "native": [
+            {
+              "block": [
+                23642,
+                23959
+              ],
+              "block_sha256": "1840f483b2af71fa1fab5987f2598bb6b2525cd0be6b2d7ab9d3801570576861",
+              "normalized_span": [
+                0,
+                97
+              ]
+            },
+            {
+              "block": [
+                23642,
+                23959
+              ],
+              "block_sha256": "1840f483b2af71fa1fab5987f2598bb6b2525cd0be6b2d7ab9d3801570576861",
+              "normalized_span": [
+                98,
+                226
+              ]
+            },
+            {
+              "block": [
+                23642,
+                23959
+              ],
+              "block_sha256": "1840f483b2af71fa1fab5987f2598bb6b2525cd0be6b2d7ab9d3801570576861",
+              "normalized_span": [
+                227,
+                317
+              ]
+            }
+          ],
+          "target": [
+            98,
+            226
+          ]
+        },
+        "ordinary": {
+          "native": [
+            {
+              "block": [
+                24182,
+                24500
+              ],
+              "block_sha256": "366a2b2ae287460e978d95afe8603b0d3217d908473ecc953b4dd091a18ee16f",
+              "normalized_span": [
+                0,
+                97
+              ]
+            },
+            {
+              "block": [
+                24182,
+                24500
+              ],
+              "block_sha256": "366a2b2ae287460e978d95afe8603b0d3217d908473ecc953b4dd091a18ee16f",
+              "normalized_span": [
+                98,
+                227
+              ]
+            },
+            {
+              "block": [
+                24182,
+                24500
+              ],
+              "block_sha256": "366a2b2ae287460e978d95afe8603b0d3217d908473ecc953b4dd091a18ee16f",
+              "normalized_span": [
+                228,
+                318
+              ]
+            }
+          ],
+          "target": [
+            98,
+            227
+          ]
+        }
+      },
+      "publisher": "python-peps",
+      "source": {
+        "after": "1a35c75c3c8013ab9f0b75fd0de54629d3e7bacc",
+        "after_authored": 1523459714,
+        "after_blob_sha256": "9c7a70bfca7c9fbdbe5b710ba053b4cd866bb927d50f8dc4807f63881a42ba50",
+        "after_committed": 1523459714,
+        "after_prose_sha256": "bb5888f57833afcc40e6fe4db40d57bd6a37853e2442c63e57125deb3c9fb634",
+        "before": "582dfee5d03b356b808e1611b867bd33d3d44780",
+        "before_blob_sha256": "2e643bb606524f163a0030db24cc4386577e09ec6f1a183edbc3088d48d3e9c4",
+        "before_committed": 1523440032,
+        "before_prose_sha256": "d199c53cc3ccd3cd076a185ae3207aaf19fac3515950e2cd5c7e440d144766d9",
+        "path": "pep-0575.rst"
+      },
+      "terms": "Public domain or CC0 stated in both exact Git blobs"
+    },
+    {
+      "authors": [
+        "Rentsch Christopher T.",
+        "Kabudula Chodziwadziwa Whiteson",
+        "Catlett Jason",
+        "Beckles David",
+        "Machemba Richard",
+        "Mtenga Baltazar",
+        "Masilela Nkosinathi",
+        "Michael Denna",
+        "Natalis Redempta",
+        "Urassa Mark",
+        "Todd Jim",
+        "Zaba Basia",
+        "Reniers Georges"
+      ],
+      "doi": [
+        "10.12688/gatesopenres.12751.1",
+        "10.12688/gatesopenres.12751.2"
+      ],
+      "group": "gates-12751",
+      "locations": {
+        "earlier": {
+          "block": 1,
+          "block_sha256": "229536449fb1b6c09a5544ff68890d79e68d65e6bee8e6f2e55f2490dacc0405",
+          "range": [
+            536,
+            1041
+          ],
+          "target": [
+            130,
+            281
+          ]
+        },
+        "ordinary": {
+          "block": 1,
+          "block_sha256": "5e4e8db65484b8ecd1504f1a1c809451c6cf6b0dc9502bcef799175022af6187",
+          "range": [
+            536,
+            1092
+          ],
+          "target": [
+            130,
+            332
+          ]
+        }
+      },
+      "publisher": "gates",
+      "source": {
+        "files": {
+          "after": "gates-12751-after.xml",
+          "before": "gates-12751-before.xml"
+        },
+        "sha256": {
+          "after": "b6de605b3e01e4ba38464f3aa244932769997019f7226deb76a69d084d71134b",
+          "before": "f222328209ed7aee769945d35fb0ed699196f9c6e3825d0a2bf901ffce502cf6"
+        },
+        "urls": [
+          "https://gatesopenresearch.org/articles/1-8/v1/xml",
+          "https://gatesopenresearch.org/articles/1-8/v2/xml"
+        ]
+      },
+      "terms": "https://creativecommons.org/licenses/by/4.0/",
+      "version_dates": [
+        [
+          2017,
+          11,
+          6
+        ],
+        [
+          2018,
+          1,
+          11
+        ]
+      ]
+    },
+    {
+      "authors": [
+        "Wong Brian",
+        "Grundy Sara",
+        "Tshering Lhab",
+        "Tshering Kinley",
+        "Mateen Farrah J."
+      ],
+      "doi": [
+        "10.12688/gatesopenres.13037.1",
+        "10.12688/gatesopenres.13037.2"
+      ],
+      "group": "gates-13037",
+      "locations": {
+        "earlier": {
+          "block": 10,
+          "block_sha256": "2297d37245859bac0774781fa8a18b8be0a1b92c8d445dbd468f789cef125b81",
+          "range": [
+            0,
+            455
+          ],
+          "target": [
+            165,
+            271
+          ]
+        },
+        "ordinary": {
+          "block": 12,
+          "block_sha256": "baf1939da8a593a268dfa0627643bda69aa83444bd8aa2278d1f2f05f9f39e17",
+          "range": [
+            0,
+            483
+          ],
+          "target": [
+            165,
+            299
+          ]
+        }
+      },
+      "publisher": "gates",
+      "source": {
+        "files": {
+          "after": "gates-13037-after.xml",
+          "before": "gates-13037-before.xml"
+        },
+        "sha256": {
+          "after": "09efda145e4032a38335edb9f82e8aa0c96e96ac362dddb8afc69982fe3a018c",
+          "before": "065b2ad970b3b156af1fc758c9d831121a372b22daf16f610e8918b27ee78da7"
+        },
+        "urls": [
+          "https://gatesopenresearch.org/articles/3-1496/v1/xml",
+          "https://gatesopenresearch.org/articles/3-1496/v2/xml"
+        ]
+      },
+      "terms": "https://creativecommons.org/licenses/by/4.0/",
+      "version_dates": [
+        [
+          2019,
+          6,
+          20
+        ],
+        [
+          2019,
+          9,
+          11
+        ]
+      ]
+    },
+    {
+      "authors": [
+        "Ingabire Rosine",
+        "Nyombayire Julien",
+        "Hoagland Alexandra",
+        "Da Costa Vanessa",
+        "Mazzei Amelia",
+        "Haddad Lisa",
+        "Parker Rachel",
+        "Sinabamenye Robertine",
+        "Mukamuyango Jeannine",
+        "Smith Julie",
+        "Umutoni Victoria",
+        "Mork Ellen",
+        "Allen Susan",
+        "Karita Etienne",
+        "Wall Kristin M."
+      ],
+      "doi": [
+        "10.12688/gatesopenres.12854.1",
+        "10.12688/gatesopenres.12854.2"
+      ],
+      "group": "gates-12854",
+      "locations": {
+        "earlier": {
+          "block": 13,
+          "block_sha256": "11f154dca9b197a806075960501e2521ab90ea7a16a7a1cb1ec42ee0c1fcee6e",
+          "range": [
+            0,
+            477
+          ],
+          "target": [
+            184,
+            371
+          ]
+        },
+        "ordinary": {
+          "block": 16,
+          "block_sha256": "0a8fe71bc9c45063970c0a3e9e7b4ccf8ffbcdb9a58a43147f90d5cf60309c20",
+          "range": [
+            0,
+            460
+          ],
+          "target": [
+            184,
+            354
+          ]
+        }
+      },
+      "publisher": "gates",
+      "source": {
+        "files": {
+          "after": "gates-12854-after.xml",
+          "before": "gates-12854-before.xml"
+        },
+        "sha256": {
+          "after": "47a1e102b480c4763dbb629b91016fe9d7a5c870f1587d64dfa07a827a653339",
+          "before": "fd926456058fd10aecd901ffa408b38acd2fce6da0918a0705912ac5937009ec"
+        },
+        "urls": [
+          "https://gatesopenresearch.org/articles/2-38/v1/xml",
+          "https://gatesopenresearch.org/articles/2-38/v2/xml"
+        ]
+      },
+      "terms": "https://creativecommons.org/licenses/by/4.0/",
+      "version_dates": [
+        [
+          2018,
+          8,
+          20
+        ],
+        [
+          2018,
+          10,
+          10
+        ]
+      ]
+    },
+    {
+      "authors": [
+        "Hofmeyr G. Justus",
+        "Morrison Charles S.",
+        "Baeten Jared M.",
+        "Chipato Tsungai",
+        "Donnell Deborah",
+        "Gichangi Peter",
+        "Mugo Nelly",
+        "Nanda Kavita",
+        "Rees Helen",
+        "Steyn Petrus",
+        "Taylor Douglas"
+      ],
+      "doi": [
+        "10.12688/gatesopenres.12775.1",
+        "10.12688/gatesopenres.12775.2"
+      ],
+      "group": "gates-12775",
+      "locations": {
+        "earlier": {
+          "block": 15,
+          "block_sha256": "1fd145e1ace41724e2e893850f2dbd5649701fd20b04e2dc1231c7e09e4b7af7",
+          "range": [
+            598,
+            1289
+          ],
+          "target": [
+            276,
+            424
+          ]
+        },
+        "ordinary": {
+          "block": 15,
+          "block_sha256": "19a441c5a3b424203b3d12cc72a7b125fd424ae0466a4a1f191da633fa73eed7",
+          "range": [
+            598,
+            1288
+          ],
+          "target": [
+            276,
+            423
+          ]
+        }
+      },
+      "publisher": "gates",
+      "source": {
+        "files": {
+          "after": "gates-12775-after.xml",
+          "before": "gates-12775-before.xml"
+        },
+        "sha256": {
+          "after": "2c7f1f8af688246e030eee0fb0057e26bf290a7073871553d54350f00ba4c7de",
+          "before": "21e816df87bb86106ed17fdad84309707f6be02fa1fe7b79862da236c6d13e21"
+        },
+        "urls": [
+          "https://gatesopenresearch.org/articles/1-17/v1/xml",
+          "https://gatesopenresearch.org/articles/1-17/v2/xml"
+        ]
+      },
+      "terms": "https://creativecommons.org/licenses/by/4.0/",
+      "version_dates": [
+        [
+          2017,
+          12,
+          29
+        ],
+        [
+          2018,
+          3,
+          13
+        ]
+      ]
+    },
+    {
+      "authors": [
+        "Patterson Benjamin",
+        "Morrow Carl",
+        "Singh Vinayak",
+        "Moosa Atica",
+        "Gqada Melitta",
+        "Woodward Jeremy",
+        "Mizrahi Valerie",
+        "Bryden Wayne",
+        "Call Charles",
+        "Patel Shwetak",
+        "Warner Digby",
+        "Wood Robin"
+      ],
+      "doi": [
+        "10.12688/gatesopenres.12758.1",
+        "10.12688/gatesopenres.12758.2"
+      ],
+      "group": "gates-12758",
+      "locations": {
+        "earlier": {
+          "block": 7,
+          "block_sha256": "91db044a6617ce86281436577684a64a70ff6e1e22e1e0e6c4222aea5add8c3f",
+          "range": [
+            964,
+            1505
+          ],
+          "target": [
+            63,
+            225
+          ]
+        },
+        "ordinary": {
+          "block": 9,
+          "block_sha256": "559b1c4f066d5687b0dc89c02267c0d13b7216cacfedde80224bdb09f74b2f70",
+          "range": [
+            132,
+            709
+          ],
+          "target": [
+            63,
+            261
+          ]
+        }
+      },
+      "publisher": "gates",
+      "source": {
+        "files": {
+          "after": "gates-12758-after.xml",
+          "before": "gates-12758-before.xml"
+        },
+        "sha256": {
+          "after": "62aac11d0fe5d70ccaace3a7d1dccd5af4c274870fb3c41f97e0e901eaef70e8",
+          "before": "f38c77a93d131a43b7ef36ca33efb6eaec68a22ef8a130e32dcc15e704d92db7"
+        },
+        "urls": [
+          "https://gatesopenresearch.org/articles/1-11/v1/xml",
+          "https://gatesopenresearch.org/articles/1-11/v2/xml"
+        ]
+      },
+      "terms": "https://creativecommons.org/licenses/by/4.0/",
+      "version_dates": [
+        [
+          2017,
+          11,
+          7
+        ],
+        [
+          2018,
+          6,
+          8
+        ]
+      ]
+    },
+    {
+      "authors": [
+        "Hadebe Sabelo",
+        "Chengalroyen Melissa",
+        "Guler Reto",
+        "Nakedi Kehilwe",
+        "Koch Anastasia",
+        "Makatsa Mohau",
+        "Shey Muki",
+        "Parihar Suraj P.",
+        "Bryson Bryan",
+        "Marakalala Mohlopheni J.",
+        "Ndlovu Hlumani"
+      ],
+      "doi": [
+        "10.12688/gatesopenres.13035.1",
+        "10.12688/gatesopenres.13035.2"
+      ],
+      "group": "gates-13035",
+      "locations": {
+        "earlier": {
+          "block": 2,
+          "block_sha256": "84c303c36e65c8a8d87fcccc8bf00773942b6a8dbf83a7ff2c89f3ab6b83d566",
+          "range": [
+            0,
+            485
+          ],
+          "target": [
+            142,
+            395
+          ]
+        },
+        "ordinary": {
+          "block": 2,
+          "block_sha256": "e0316621995d56a775934c40b3d53f3c43765ad3941a9d6debdaa69eb6387a0b",
+          "range": [
+            0,
+            489
+          ],
+          "target": [
+            142,
+            399
+          ]
+        }
+      },
+      "publisher": "gates",
+      "source": {
+        "files": {
+          "after": "gates-13035-after.xml",
+          "before": "gates-13035-before.xml"
+        },
+        "sha256": {
+          "after": "fa5fa9d79e8757e89776219df0f731b2851e2ade58e717054de796a63ff4d1ad",
+          "before": "f63f1ef172cc7691785c8cf93bc5ef30ab83302d2f09c5aafa5ae95873f31daa"
+        },
+        "urls": [
+          "https://gatesopenresearch.org/articles/3-1491/v1/xml",
+          "https://gatesopenresearch.org/articles/3-1491/v2/xml"
+        ]
+      },
+      "terms": "https://creativecommons.org/licenses/by/4.0/",
+      "version_dates": [
+        [
+          2019,
+          6,
+          12
+        ],
+        [
+          2019,
+          7,
+          30
+        ]
+      ]
+    },
+    {
+      "authors": [
+        "Wilson Alexander C.",
+        "Bishop Dorothy V.M."
+      ],
+      "doi": [
+        "10.12688/wellcomeopenres.15210.1",
+        "10.12688/wellcomeopenres.15210.2"
+      ],
+      "group": "wellcome-15210",
+      "locations": {
+        "earlier": {
+          "block": 11,
+          "block_sha256": "8862fd40c97aaf8c1d206f889ebd38b8f6252b5aab154600e74d620f9af8a9e4",
+          "range": [
+            496,
+            956
+          ],
+          "target": [
+            158,
+            381
+          ]
+        },
+        "ordinary": {
+          "block": 11,
+          "block_sha256": "5c55e0c6a031e530e836c7be36b44baa94e26126a83462034f544825339d1ca3",
+          "range": [
+            701,
+            1115
+          ],
+          "target": [
+            158,
+            335
+          ]
+        }
+      },
+      "publisher": "wellcome",
+      "source": {
+        "files": {
+          "after": "wellcome-15210-after.xml",
+          "before": "wellcome-15210-before.xml"
+        },
+        "sha256": {
+          "after": "23b1b104c45f79a0cd6d6fd9eaa9723d24d27473ac77addda7bae20a32987d67",
+          "before": "6bbe827a939cf99337dd7a8eadbeb573e9e1d7bd9ea371238baccbc72486570e"
+        },
+        "urls": [
+          "https://wellcomeopenresearch.org/articles/4-68/v1/xml",
+          "https://wellcomeopenresearch.org/articles/4-68/v2/xml"
+        ]
+      },
+      "terms": "https://creativecommons.org/licenses/by/4.0/",
+      "version_dates": [
+        [
+          2019,
+          4,
+          15
+        ],
+        [
+          2019,
+          7,
+          10
+        ]
+      ]
+    },
+    {
+      "authors": [
+        "Gumba Horace",
+        "Waichungo Joseph",
+        "Lowe Brett",
+        "Mwanzu Alfred",
+        "Musyimi Robert",
+        "Thitiri Johnstone",
+        "Tigoi Caroline",
+        "Kamui Martin",
+        "Berkley James A.",
+        "Ngetich Ronald",
+        "Kavai Susan",
+        "Kariuki Samuel"
+      ],
+      "doi": [
+        "10.12688/wellcomeopenres.14860.1",
+        "10.12688/wellcomeopenres.14860.2"
+      ],
+      "group": "wellcome-14860",
+      "locations": {
+        "earlier": {
+          "block": 4,
+          "block_sha256": "4a22664216d8e361468ab50d2dd01f160648ff96e35b42c5a4af14f7727a6984",
+          "range": [
+            192,
+            763
+          ],
+          "target": [
+            146,
+            313
+          ]
+        },
+        "ordinary": {
+          "block": 4,
+          "block_sha256": "2225f807e7af29966df80b9b18784c6eb8620504bd40aec6572d8c0282cc8f80",
+          "range": [
+            192,
+            757
+          ],
+          "target": [
+            146,
+            307
+          ]
+        }
+      },
+      "publisher": "wellcome",
+      "source": {
+        "files": {
+          "after": "wellcome-14860-after.xml",
+          "before": "wellcome-14860-before.xml"
+        },
+        "sha256": {
+          "after": "d9d92af80481fda626ab03c37c254ee1675afc231d21bba21d91ce3286c47a26",
+          "before": "14368b37b0ebd8f1217758bebf31bb6544fb53739859633f0f3dcc75b87f05fe"
+        },
+        "urls": [
+          "https://wellcomeopenresearch.org/articles/3-137/v1/xml",
+          "https://wellcomeopenresearch.org/articles/3-137/v2/xml"
+        ]
+      },
+      "terms": "https://creativecommons.org/licenses/by/4.0/",
+      "version_dates": [
+        [
+          2018,
+          10,
+          31
+        ],
+        [
+          2019,
+          6,
+          25
+        ]
+      ]
+    },
+    {
+      "authors": [
+        "Toizumi Michiko",
+        "Yoshida Lay-Myint",
+        "Suzuki Motoi",
+        "Nguyen Hien Anh Thi",
+        "Pinsent Amy",
+        "Dang Duc Anh",
+        "Flasche Stefan"
+      ],
+      "doi": [
+        "10.12688/wellcomeopenres.15238.1",
+        "10.12688/wellcomeopenres.15238.2"
+      ],
+      "group": "wellcome-15238",
+      "locations": {
+        "earlier": {
+          "block": 10,
+          "block_sha256": "aee96ada9c0a35b14c0def7eb4551c3994c91aeb7e486291a7fd807a63f7391c",
+          "range": [
+            0,
+            274
+          ],
+          "target": [
+            94,
+            201
+          ]
+        },
+        "ordinary": {
+          "block": 10,
+          "block_sha256": "40e5f87160cf2532bd0002ab482790677a1cda52c52c991ce24a3598f26010db",
+          "range": [
+            0,
+            276
+          ],
+          "target": [
+            94,
+            203
+          ]
+        }
+      },
+      "publisher": "wellcome",
+      "source": {
+        "files": {
+          "after": "wellcome-15238-after.xml",
+          "before": "wellcome-15238-before.xml"
+        },
+        "sha256": {
+          "after": "61730af863a09874ead283059bd7541cb5520e5c819ee364e530a98d5d434a2f",
+          "before": "027c52eecda20a618fbaba3473f0821f55a3de3f7d70f75e7951c78a095b5b12"
+        },
+        "urls": [
+          "https://wellcomeopenresearch.org/articles/4-75/v1/xml",
+          "https://wellcomeopenresearch.org/articles/4-75/v2/xml"
+        ]
+      },
+      "terms": "https://creativecommons.org/licenses/by/4.0/",
+      "version_dates": [
+        [
+          2019,
+          5,
+          1
+        ],
+        [
+          2019,
+          6,
+          11
+        ]
+      ]
+    },
+    {
+      "authors": [
+        "Ngetsa Caroline J.",
+        "Heymann Marc W.",
+        "Thiong'o Alex",
+        "Wahome Elizabeth",
+        "Mwambi John",
+        "Karani Clara",
+        "Menza Nelson C.",
+        "Mwashigadi Grace",
+        "Muturi Margaret W.",
+        "Graham Susan M.",
+        "Mugo Peter M.",
+        "Sanders Eduard J."
+      ],
+      "doi": [
+        "10.12688/wellcomeopenres.15217.1",
+        "10.12688/wellcomeopenres.15217.2"
+      ],
+      "group": "wellcome-15217",
+      "locations": {
+        "earlier": {
+          "block": 0,
+          "block_sha256": "d6d74d2b786109ac38e9496bb5d64656f6e67fb4e4b36a328466aba5a3d19514",
+          "range": [
+            1876,
+            2331
+          ],
+          "target": [
+            201,
+            346
+          ]
+        },
+        "ordinary": {
+          "block": 0,
+          "block_sha256": "51ec7bd3e1ce45c7a361421e6ff6c4210f88045b66af068c8b6b930922e999d7",
+          "range": [
+            2039,
+            2495
+          ],
+          "target": [
+            201,
+            347
+          ]
+        }
+      },
+      "publisher": "wellcome",
+      "source": {
+        "files": {
+          "after": "wellcome-15217-after.xml",
+          "before": "wellcome-15217-before.xml"
+        },
+        "sha256": {
+          "after": "86118833745f216a5647f4e268e109ffe6fad7f1a87f611e8cd98fbd6df3b5c5",
+          "before": "28d30a653009b8ee28852e321e3c888ce6d0662bfd79456bebcd84a14ca1f6d3"
+        },
+        "urls": [
+          "https://wellcomeopenresearch.org/articles/4-79/v1/xml",
+          "https://wellcomeopenresearch.org/articles/4-79/v2/xml"
+        ]
+      },
+      "terms": "https://creativecommons.org/licenses/by/4.0/",
+      "version_dates": [
+        [
+          2019,
+          5,
+          10
+        ],
+        [
+          2019,
+          12,
+          20
+        ]
+      ]
+    },
+    {
+      "authors": [
+        "McMeekin Nicola",
+        "Geue Claudia",
+        "Briggs Andrew",
+        "Rombach Ines",
+        "Li Ho Kwong",
+        "Bejon Philip",
+        "McNally Martin",
+        "Atkins Bridget L.",
+        "Ferguson Jamie",
+        "Scarborough Matthew"
+      ],
+      "doi": [
+        "10.12688/wellcomeopenres.15314.1",
+        "10.12688/wellcomeopenres.15314.2"
+      ],
+      "group": "wellcome-15314",
+      "locations": {
+        "earlier": {
+          "block": 18,
+          "block_sha256": "047bad7737dec93f110da1f770381bad0b9af5ed29d29336a925136455da04d3",
+          "range": [
+            0,
+            682
+          ],
+          "target": [
+            279,
+            525
+          ]
+        },
+        "ordinary": {
+          "block": 18,
+          "block_sha256": "a4f1c76e907da34ac661b57d05713484f9a2cc589d78e8f0cb5c34dd0412ef22",
+          "range": [
+            0,
+            711
+          ],
+          "target": [
+            279,
+            554
+          ]
+        }
+      },
+      "publisher": "wellcome",
+      "source": {
+        "files": {
+          "after": "wellcome-15314-after.xml",
+          "before": "wellcome-15314-before.xml"
+        },
+        "sha256": {
+          "after": "4351c75c71455988f5a6500ab7ee3922e191a3b6e785dfd93d449af911aa4788",
+          "before": "86f69bb3278c1e2550f0836aee96821f81133a9762da39b0bd0aeddd3bb9f32a"
+        },
+        "urls": [
+          "https://wellcomeopenresearch.org/articles/4-108/v1/xml",
+          "https://wellcomeopenresearch.org/articles/4-108/v2/xml"
+        ]
+      },
+      "terms": "https://creativecommons.org/licenses/by/4.0/",
+      "version_dates": [
+        [
+          2019,
+          7,
+          17
+        ],
+        [
+          2019,
+          11,
+          1
+        ]
+      ]
+    }
+  ]
+}

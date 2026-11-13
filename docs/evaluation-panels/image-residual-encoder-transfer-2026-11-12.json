@@ -1,0 +1,937 @@
+{
+  "artifact_sha256": {
+    "calibration.json": "06b9f728b93ec331d541422f92e68dcd56b1905d2d3d3f75ca9df36ee1dd1d69",
+    "held.json": "a9d815218625e1b2c5fca1d6a6303e95dbd3f228ca42ebe066bde37568042b6a",
+    "points.json": "e1f36d7998b98b1f197c6d8dac40f0d3545f71aa1da8c04931fb494555c77f6c"
+  },
+  "calibration_rows": 144,
+  "code_sha256": {
+    "image_background_patch_score.py": "cb854082628636833e2fd005e954d0bdb7c78362e58ee98632f1ba4153224d5a",
+    "image_bg_real_acquisition_v221.py": "0906a1b9c8d2cd85e09f6452fac4b009a0cd54802db5992543bffa314341e3b1",
+    "image_bg_real_insertion_score.py": "b8a91de6e686b5037ea65297aac52961ea995d701ca8aacf362b8715f94e303d",
+    "image_bg_real_transport_v225.py": "b684ffb0833c9bf9972b156a1d34251784a21b673fa325e1468eab460a331e7c",
+    "image_edge_spread_transfer.py": "f9d434f1dbd2d04b4292e512e562cae52f7dd049690b45f97ef424b2d971c08c",
+    "image_residual_color_transfer.py": "682fc80861ae3c80b7d80d5efb3edd3cb15635bbdf797c60b894ce4b23f8ece2",
+    "image_residual_encoder_transfer.py": "0b7d9bf7d41e9784062e815673db8f766b1769f6e1bc8ccb402b5840db5c429f",
+    "jpeg_dq.py": "3b176132b5c63ac062f2f53aa9d7dc2c766d4c92c1818825d23d40751bbd9f0e"
+  },
+  "dependencies": {
+    "Pillow": "12.3.0",
+    "numpy": "2.2.6",
+    "opencv-python-headless": "5.0.0.93",
+    "torch": "2.13.0"
+  },
+  "design": {
+    "advance": {
+      "added_families": 2,
+      "added_feathered_sources": 5,
+      "extra_ordinary_groups": 3,
+      "wrong_edit_views": 4
+    },
+    "calibration": "Strictly above second-highest ordinary source maximum, independently for each JPEG quality.",
+    "confidence_weight": 0,
+    "encoder": {
+      "convolution_channels": [
+        12,
+        16,
+        20
+      ],
+      "convolution_widths": [
+        5,
+        3,
+        3
+      ],
+      "input": "native RGB minus valid 3x3 RGB mean, scaled by 12/255",
+      "receptive_field": 35,
+      "stride": 8
+    },
+    "fit": {
+      "batch_pairs": 16,
+      "epochs": 10,
+      "loss": "group-balanced logistic loss plus .25 times matched contrastive logistic loss",
+      "optimizer": "AdamW .001, weight decay .0001",
+      "positive_minimum_inner_occupancy": 0.65,
+      "seed": 6153,
+      "sites_per_source_quality": 8
+    },
+    "proposal": {
+      "maximum_area_share": 0.1,
+      "minimum_aspect_ratio": 0.5,
+      "score": "mean logit minus larger of global median and local ring mean, weighted by area^0.10",
+      "side_cells": [
+        5,
+        7,
+        9,
+        12,
+        15,
+        18,
+        22,
+        26
+      ]
+    },
+    "quality": [
+      75,
+      90
+    ],
+    "roles": {
+      "calibration": {
+        "backup_originals": 12
+      },
+      "fit": {
+        "diffusion_bounded_fit": 12,
+        "sd15_insertions": 8
+      },
+      "held": {
+        "diffusion_bounded_held": 12,
+        "lama_removals": 24
+      }
+    },
+    "subsampling": "4:2:0",
+    "useful": {
+      "iou": 0.3,
+      "recall": 0.5
+    }
+  },
+  "elapsed_s": 68.11,
+  "fit": {
+    "checkpoint_sha256": "aa63b8a0a3123fb175e57341947d8392858498646aa92b4d46ab12d844396dc6",
+    "fit_inputs_sha256": "8a085c09917882f7f6246f636bee00840bdc2597620fa6776b044a28185adf14",
+    "groups": 20,
+    "loss": [
+      0.8662484437227249,
+      0.8636094361543656,
+      0.8518148005008698,
+      0.8351572692394257,
+      0.8167901754379272,
+      0.8035661935806274,
+      0.79277203977108,
+      0.7790738642215729,
+      0.767859548330307,
+      0.7556033164262772
+    ],
+    "matched_sites": 320,
+    "parameters": 5577,
+    "patches": 3840
+  },
+  "freeze_sha256": "7ecd5f065260606e193a837513022ae79f9337740cfe0b8a9a7e968b56f86417",
+  "held_rows": 624,
+  "points": {
+    "75": 2.2733306628045957,
+    "90": 2.2062692099616124
+  },
+  "qualities": {
+    "75": {
+      "advance": {
+        "actual": {
+          "added_families": 1,
+          "added_feathered_sources": 1,
+          "extra_ordinary_groups": 9,
+          "wrong_edit_views": 21
+        },
+        "passed": false
+      },
+      "counts": {
+        "candidate_edits_flags": 22,
+        "candidate_edits_useful": 1,
+        "candidate_ordinary_flags": 54,
+        "candidate_ordinary_useful": 0,
+        "edits": 72,
+        "ordinary": 240,
+        "reference_edits_flags": 0,
+        "reference_edits_useful": 0,
+        "reference_ordinary_flags": 5,
+        "reference_ordinary_useful": 0,
+        "wrong_edit_views": 21
+      },
+      "ordinary_groups": {
+        "candidate": 11,
+        "reference": 5
+      }
+    },
+    "90": {
+      "advance": {
+        "actual": {
+          "added_families": 1,
+          "added_feathered_sources": 1,
+          "extra_ordinary_groups": 11,
+          "wrong_edit_views": 25
+        },
+        "passed": false
+      },
+      "counts": {
+        "candidate_edits_flags": 27,
+        "candidate_edits_useful": 2,
+        "candidate_ordinary_flags": 67,
+        "candidate_ordinary_useful": 0,
+        "edits": 72,
+        "ordinary": 240,
+        "reference_edits_flags": 0,
+        "reference_edits_useful": 0,
+        "reference_ordinary_flags": 5,
+        "reference_ordinary_useful": 0,
+        "wrong_edit_views": 25
+      },
+      "ordinary_groups": {
+        "candidate": 12,
+        "reference": 5
+      }
+    }
+  },
+  "review": {
+    "code_sha256": "6bac22c507a29e3f61bac63c75b6a5c0d856bb61dced8c07eb9aace0fb107dc7",
+    "held_candidate_ranking": {
+      "75/kandinsky/feathered": {
+        "useful_after_point": 1,
+        "useful_before_point": 1,
+        "views": 6
+      },
+      "75/kandinsky/sharp": {
+        "useful_after_point": 0,
+        "useful_before_point": 1,
+        "views": 6
+      },
+      "75/lama/feathered": {
+        "useful_after_point": 0,
+        "useful_before_point": 0,
+        "views": 24
+      },
+      "75/lama/sharp": {
+        "useful_after_point": 0,
+        "useful_before_point": 0,
+        "views": 24
+      },
+      "75/sdxl/feathered": {
+        "useful_after_point": 0,
+        "useful_before_point": 0,
+        "views": 6
+      },
+      "75/sdxl/sharp": {
+        "useful_after_point": 0,
+        "useful_before_point": 0,
+        "views": 6
+      },
+      "90/kandinsky/feathered": {
+        "useful_after_point": 1,
+        "useful_before_point": 1,
+        "views": 6
+      },
+      "90/kandinsky/sharp": {
+        "useful_after_point": 1,
+        "useful_before_point": 1,
+        "views": 6
+      },
+      "90/lama/feathered": {
+        "useful_after_point": 0,
+        "useful_before_point": 0,
+        "views": 24
+      },
+      "90/lama/sharp": {
+        "useful_after_point": 0,
+        "useful_before_point": 0,
+        "views": 24
+      },
+      "90/sdxl/feathered": {
+        "useful_after_point": 0,
+        "useful_before_point": 0,
+        "views": 6
+      },
+      "90/sdxl/sharp": {
+        "useful_after_point": 0,
+        "useful_before_point": 0,
+        "views": 6
+      }
+    },
+    "replayed_input_and_truth_bindings": 768,
+    "replayed_pixel_overlaps": 1392
+  },
+  "schema": "chipmunk.image-residual-encoder-transfer/1",
+  "source_counts": {
+    "calibration": {
+      "ordinary": 12
+    },
+    "fit": {
+      "kandinsky": 6,
+      "sd15": 8,
+      "sdxl": 6
+    },
+    "held": {
+      "kandinsky": 6,
+      "lama": 24,
+      "sdxl": 6
+    }
+  },
+  "strata": {
+    "75/kandinsky/feathered/candidate": {
+      "flagged": 3,
+      "useful": 1,
+      "useful_before_point": 1,
+      "views": 6
+    },
+    "75/kandinsky/feathered/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "75/kandinsky/global_processing/candidate": {
+      "flagged": 2,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "75/kandinsky/global_processing/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "75/kandinsky/global_resize/candidate": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "75/kandinsky/global_resize/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "75/kandinsky/local_blur/candidate": {
+      "flagged": 2,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "75/kandinsky/local_blur/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "75/kandinsky/local_copy/candidate": {
+      "flagged": 2,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "75/kandinsky/local_copy/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "75/kandinsky/local_processing/candidate": {
+      "flagged": 2,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "75/kandinsky/local_processing/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "75/kandinsky/local_tone/candidate": {
+      "flagged": 2,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "75/kandinsky/local_tone/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "75/kandinsky/original/candidate": {
+      "flagged": 2,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "75/kandinsky/original/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "75/kandinsky/second_jpeg/candidate": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "75/kandinsky/second_jpeg/reference": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "75/kandinsky/sharp/candidate": {
+      "flagged": 4,
+      "useful": 0,
+      "useful_before_point": 1,
+      "views": 6
+    },
+    "75/kandinsky/sharp/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "75/lama/feathered/candidate": {
+      "flagged": 5,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 24
+    },
+    "75/lama/feathered/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 24
+    },
+    "75/lama/global_resize/candidate": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 24
+    },
+    "75/lama/global_resize/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 24
+    },
+    "75/lama/local_blur/candidate": {
+      "flagged": 5,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 24
+    },
+    "75/lama/local_blur/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 24
+    },
+    "75/lama/local_copy/candidate": {
+      "flagged": 6,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 24
+    },
+    "75/lama/local_copy/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 24
+    },
+    "75/lama/local_tone/candidate": {
+      "flagged": 5,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 24
+    },
+    "75/lama/local_tone/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 24
+    },
+    "75/lama/original/candidate": {
+      "flagged": 5,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 24
+    },
+    "75/lama/original/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 24
+    },
+    "75/lama/second_jpeg/candidate": {
+      "flagged": 4,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 24
+    },
+    "75/lama/second_jpeg/reference": {
+      "flagged": 2,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 24
+    },
+    "75/lama/sharp/candidate": {
+      "flagged": 5,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 24
+    },
+    "75/lama/sharp/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 24
+    },
+    "75/sdxl/feathered/candidate": {
+      "flagged": 2,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "75/sdxl/feathered/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "75/sdxl/global_processing/candidate": {
+      "flagged": 2,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "75/sdxl/global_processing/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "75/sdxl/global_resize/candidate": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "75/sdxl/global_resize/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "75/sdxl/local_blur/candidate": {
+      "flagged": 2,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "75/sdxl/local_blur/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "75/sdxl/local_copy/candidate": {
+      "flagged": 2,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "75/sdxl/local_copy/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "75/sdxl/local_processing/candidate": {
+      "flagged": 2,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "75/sdxl/local_processing/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "75/sdxl/local_tone/candidate": {
+      "flagged": 2,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "75/sdxl/local_tone/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "75/sdxl/original/candidate": {
+      "flagged": 2,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "75/sdxl/original/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "75/sdxl/second_jpeg/candidate": {
+      "flagged": 3,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "75/sdxl/second_jpeg/reference": {
+      "flagged": 2,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "75/sdxl/sharp/candidate": {
+      "flagged": 3,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "75/sdxl/sharp/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "90/kandinsky/feathered/candidate": {
+      "flagged": 3,
+      "useful": 1,
+      "useful_before_point": 1,
+      "views": 6
+    },
+    "90/kandinsky/feathered/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "90/kandinsky/global_processing/candidate": {
+      "flagged": 2,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "90/kandinsky/global_processing/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "90/kandinsky/global_resize/candidate": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "90/kandinsky/global_resize/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "90/kandinsky/local_blur/candidate": {
+      "flagged": 2,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "90/kandinsky/local_blur/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "90/kandinsky/local_copy/candidate": {
+      "flagged": 2,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "90/kandinsky/local_copy/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "90/kandinsky/local_processing/candidate": {
+      "flagged": 2,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "90/kandinsky/local_processing/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "90/kandinsky/local_tone/candidate": {
+      "flagged": 2,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "90/kandinsky/local_tone/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "90/kandinsky/original/candidate": {
+      "flagged": 2,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "90/kandinsky/original/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "90/kandinsky/second_jpeg/candidate": {
+      "flagged": 1,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "90/kandinsky/second_jpeg/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "90/kandinsky/sharp/candidate": {
+      "flagged": 5,
+      "useful": 1,
+      "useful_before_point": 1,
+      "views": 6
+    },
+    "90/kandinsky/sharp/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "90/lama/feathered/candidate": {
+      "flagged": 6,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 24
+    },
+    "90/lama/feathered/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 24
+    },
+    "90/lama/global_resize/candidate": {
+      "flagged": 3,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 24
+    },
+    "90/lama/global_resize/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 24
+    },
+    "90/lama/local_blur/candidate": {
+      "flagged": 6,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 24
+    },
+    "90/lama/local_blur/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 24
+    },
+    "90/lama/local_copy/candidate": {
+      "flagged": 7,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 24
+    },
+    "90/lama/local_copy/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 24
+    },
+    "90/lama/local_tone/candidate": {
+      "flagged": 6,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 24
+    },
+    "90/lama/local_tone/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 24
+    },
+    "90/lama/original/candidate": {
+      "flagged": 6,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 24
+    },
+    "90/lama/original/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 24
+    },
+    "90/lama/second_jpeg/candidate": {
+      "flagged": 5,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 24
+    },
+    "90/lama/second_jpeg/reference": {
+      "flagged": 3,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 24
+    },
+    "90/lama/sharp/candidate": {
+      "flagged": 6,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 24
+    },
+    "90/lama/sharp/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 24
+    },
+    "90/sdxl/feathered/candidate": {
+      "flagged": 3,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "90/sdxl/feathered/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "90/sdxl/global_processing/candidate": {
+      "flagged": 3,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "90/sdxl/global_processing/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "90/sdxl/global_resize/candidate": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "90/sdxl/global_resize/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "90/sdxl/local_blur/candidate": {
+      "flagged": 3,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "90/sdxl/local_blur/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "90/sdxl/local_copy/candidate": {
+      "flagged": 3,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "90/sdxl/local_copy/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "90/sdxl/local_processing/candidate": {
+      "flagged": 3,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "90/sdxl/local_processing/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "90/sdxl/local_tone/candidate": {
+      "flagged": 3,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "90/sdxl/local_tone/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "90/sdxl/original/candidate": {
+      "flagged": 3,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "90/sdxl/original/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "90/sdxl/second_jpeg/candidate": {
+      "flagged": 3,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "90/sdxl/second_jpeg/reference": {
+      "flagged": 2,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "90/sdxl/sharp/candidate": {
+      "flagged": 4,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    },
+    "90/sdxl/sharp/reference": {
+      "flagged": 0,
+      "useful": 0,
+      "useful_before_point": 0,
+      "views": 6
+    }
+  }
+}

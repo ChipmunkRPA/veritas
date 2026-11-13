@@ -23,7 +23,7 @@ def require(condition, message):
         raise ValueError(message)
 
 
-def measure(case):
+def measure(case, *, generated_roles=("granite", "tiny")):
     units = case["units"]
     require(len(units) == 3 and len(case["responses"]) == 3 and len(case["nonspace"]) == 3,
             "Missing exact measurements")
@@ -34,7 +34,7 @@ def measure(case):
             "Native sentence scope or positions differ")
     require(all(type(n) is int and 0 < n <= b - a for n, (a, b, _) in zip(case["nonspace"], units, strict=True)),
             "Invalid non-whitespace sizes")
-    generated = case["role"] in ("granite", "tiny")
+    generated = case["role"] in generated_roles
     require(case["truth"] == (units[1][:2] if generated else None), "Known focus differs")
     for item in case["responses"]:
         require(math.isfinite(item["head"]) and math.isfinite(item["current"]) and 0 <= item["current"] <= 1

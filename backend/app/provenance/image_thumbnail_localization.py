@@ -10,6 +10,7 @@ import numpy as np
 from PIL import Image
 
 from app.detectors.image.reference_compare import _regions, _tone
+from app.provenance import jpeg_editor_thumbnail
 from app.provenance.exiftool import _pillow_thumbnail
 
 MIN_SIDE, MAX_SIDE = 64, 512
@@ -176,6 +177,23 @@ def _projected(main, before, trim, native_size, minimum_component_fraction, *, e
             "confidence_weight": 0}, (mask, luma_mask)
 
 
+def retained_preview(source, exif):
+    exif_preview = _pillow_thumbnail(source, exif)
+    if exif_preview is not None:
+        return "exif", exif_preview
+    # Keep the new carrier scoped to upright main images without a competing
+    # EXIF thumbnail entry, including an unreadable one.
+    if exif.get(274, 1) != 1:
+        return None, None
+    if source.info.get("exif"):
+        from PIL import ExifTags
+
+        if any(key in exif.get_ifd(ExifTags.IFD.IFD1) for key in (0x0201, 0x0202)):
+            return None, None
+    editor_preview = jpeg_editor_thumbnail.extract(source)
+    return ("jpeg_editor_resource", editor_preview) if editor_preview is not None else (None, None)
+
+
 def measure(data: bytes, *, minimum_component_fraction: float = PILOT_COMPONENT_FRACTION, extend=False):
     """Measure a compact difference only after both thumbnail renderings agree."""
     with Image.open(io.BytesIO(data)) as original:
@@ -185,7 +203,7 @@ def measure(data: bytes, *, minimum_component_fraction: float = PILOT_COMPONENT_
         if (original.format != "JPEG" or raw[0] * raw[1] > MAX_MAIN_PIXELS or min(raw) < 160
                 or orientation not in (1, *TRANSFORMS)):
             return {"status": "unsupported_carrier"}, None
-        blob = _pillow_thumbnail(original, exif)
+        carrier, blob = retained_preview(original, exif)
         if blob is None:
             return {"status": "no_retained_thumbnail"}, None
         native_size = raw[::-1] if orientation in SWAPPED_AXES else raw
@@ -197,7 +215,10 @@ def measure(data: bytes, *, minimum_component_fraction: float = PILOT_COMPONENT_
             h, w = before.shape[:2]
             original.draft("RGB", (w * 3, h * 3))
             main = original.convert("RGB")
-            return _projected(main, before, trim, native_size, minimum_component_fraction, extend=extend)
+            result, masks = _projected(main, before, trim, native_size, minimum_component_fraction, extend=extend)
+            if carrier == "jpeg_editor_resource" and masks is not None:
+                result["preview_carrier"] = carrier
+            return result, masks
 
         with Image.open(io.BytesIO(blob)) as preview:
             preview_size = preview.size

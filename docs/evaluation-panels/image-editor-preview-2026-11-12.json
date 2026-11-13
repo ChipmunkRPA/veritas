@@ -1,0 +1,196 @@
+{
+  "by_role": {
+    "camera": {
+      "flags": 0,
+      "status": {
+        "comparable": 10
+      },
+      "useful": 0,
+      "views": 10
+    },
+    "camera_global_tone": {
+      "flags": 0,
+      "status": {
+        "comparable": 10
+      },
+      "useful": 0,
+      "views": 10
+    },
+    "camera_jpeg75": {
+      "flags": 0,
+      "status": {
+        "comparable": 10
+      },
+      "useful": 0,
+      "views": 10
+    },
+    "copy": {
+      "flags": 8,
+      "status": {
+        "comparable": 8,
+        "insufficient_common_background": 2
+      },
+      "useful": 8,
+      "views": 10
+    },
+    "foreign_preview": {
+      "flags": 0,
+      "status": {
+        "alignment_unresolved": 18
+      },
+      "useful": 0,
+      "views": 18
+    },
+    "generated": {
+      "flags": 8,
+      "status": {
+        "comparable": 8
+      },
+      "useful": 6,
+      "views": 8
+    },
+    "global_tone": {
+      "flags": 0,
+      "status": {
+        "comparable": 18
+      },
+      "useful": 0,
+      "views": 18
+    },
+    "jpeg75": {
+      "flags": 0,
+      "status": {
+        "comparable": 17,
+        "insufficient_common_background": 1
+      },
+      "useful": 0,
+      "views": 18
+    },
+    "local_color": {
+      "flags": 9,
+      "status": {
+        "comparable": 9,
+        "insufficient_common_background": 1
+      },
+      "useful": 9,
+      "views": 10
+    },
+    "no_preview": {
+      "flags": 0,
+      "status": {
+        "no_retained_thumbnail": 18
+      },
+      "useful": 0,
+      "views": 18
+    },
+    "resize": {
+      "flags": 0,
+      "status": {
+        "comparable": 18
+      },
+      "useful": 0,
+      "views": 18
+    },
+    "unchanged": {
+      "flags": 0,
+      "status": {
+        "comparable": 17,
+        "insufficient_common_background": 1
+      },
+      "useful": 0,
+      "views": 18
+    }
+  },
+  "cases": 166,
+  "code": {
+    "image_editor_preview_transfer.py": "3abfe1209e1e4ffc00e2781fc8ff1f56de1efae7da47f5a5886a19bc3f693bfc",
+    "image_thumbnail_extent_transfer.py": "0eb88c13e22a9f2420b768964e42f006acc63b6e70f15bc97be501e5865bebb9",
+    "image_thumbnail_localization.py": "d87eb69573ff92518c94d585c00f44d4c11b6e9630486c3892cab8ef8519fac2",
+    "jpeg_editor_thumbnail.py": "e2bb1e4186f138b7aa77aae2dbcaeb3edcba1a1d835613b0ad4995760407c7bd"
+  },
+  "confidence_weight": 0,
+  "counters": {
+    "changed_comparisons": 0,
+    "incompatible_flags": 0,
+    "malformed_acceptances": 0,
+    "native_controls": 2,
+    "ordinary_flags": 0,
+    "useful_generated": 6
+  },
+  "criteria": {
+    "maximum_changed_comparisons": 0,
+    "maximum_incompatible_flags": 0,
+    "maximum_malformed_acceptances": 0,
+    "maximum_ordinary_flags": 0,
+    "minimum_native_controls": 2,
+    "minimum_useful_generated": 4
+  },
+  "freeze_sha256": "e0d26238cacf58345843544864b102cec07b037963dc092500b7836d7432abba",
+  "frozen_replay_identical": true,
+  "gate_passed": true,
+  "historical_first_freeze_sha256": "1e328aaf67f00a6a227b3f987ecafd11bec8bb91013a78f42bfa8aac7ea821a5",
+  "isolated_full_app": {
+    "api_json_pdf_crop_pixels_matched": true,
+    "control": {
+      "assets": 0,
+      "full": true,
+      "regions": 0,
+      "separate_original_replay": false,
+      "signed_standard_pdf": true,
+      "standard_summary_exact": true
+    },
+    "other_model_registry_lanes_enabled": false,
+    "positive": {
+      "assets": 3,
+      "full": true,
+      "regions": 1,
+      "separate_original_replay": true,
+      "signed_standard_pdf": true,
+      "standard_summary_exact": true
+    },
+    "simulated_prepaid_checkouts": 2,
+    "unpaid_jobs_queued": 0
+  },
+  "malformed_rejected": {
+    "competing_legacy_resource": true,
+    "duplicated_resource": true,
+    "duplicated_segment": true,
+    "forged_dimensions": true,
+    "truncated_resource": true,
+    "truncated_thumbnail": true
+  },
+  "native_controls": [
+    {
+      "author": "Bernard Gagnon",
+      "exif_removed_sha256": "63fd05000dd15438ad80919c4ca8d3eec660829361a52e6bedab12e3fb93e781",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0",
+      "original_sha256": "c6833ff067327baba56f57ec1003865e63f02ec678f94349b00f435b0cbc7dc6",
+      "page": "https://commons.wikimedia.org/wiki/File:Simtokha_Dzong,_Bhutan_07.jpg",
+      "preview_sha256": "909b03b0ffad6bb838009f5096e0684310163673e46b08c236f95332e6ce3e0c",
+      "regions": 0,
+      "slot": 0,
+      "status": "comparable"
+    },
+    {
+      "author": "Alexander Novikov",
+      "exif_removed_sha256": "25b0b3e1e1356b5c93b0339d9b4c30e37d8b85fea186e92a5e98ff579659bb04",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0",
+      "original_sha256": "2be1638a4a5aefe37470ce19970d9883cb1c76e1751fc127c884d5cbaf2771d8",
+      "page": "https://commons.wikimedia.org/wiki/File:Cinema_Rodina_-_001.jpg",
+      "preview_sha256": "bb3f061cd1a9bcd117257fed259cab5dbd2f6876db305decd278377942ccabc7",
+      "regions": 0,
+      "slot": 1,
+      "status": "comparable"
+    }
+  ],
+  "original_pinned_exif_measurements_identical": true,
+  "public_roster_sha256": "e30981fd296d9cf2cd9ba417a24b5aec58b917697dbc8239f5a8f29ed0efe7d3",
+  "result_sha256": "cc97a9c46a9534fb626a6c867da3a4d48eac46add3aef44701208f9f31560dfc",
+  "runtime": {
+    "cv2": "5.0.0",
+    "jpeg": "6.2",
+    "numpy": "2.2.6"
+  },
+  "schema": "chipmunk.image-editor-preview-receipt/1",
+  "source_freeze_sha256": "3a4cbc6ae8f8ee74da958df8ca0698da9917fdd8fd7817ccefaeabefe8da9b5a"
+}

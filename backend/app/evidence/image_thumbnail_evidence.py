@@ -25,11 +25,14 @@ LEGACY_COLUMNS = ["Region", "Main image x, y, width, height", "Embedded preview 
                   "Main crop display width, height", "Preview crop display width, height"]
 COLUMNS = [*LEGACY_COLUMNS, "Main and preview orientation"]
 FOOTPRINT_COLUMNS = [*COLUMNS, "Aligned preview grid x, y, width, height"]
+EDITOR_COLUMNS = [*FOOTPRINT_COLUMNS, "Embedded preview carrier"]
 FOOTPRINT_NOTE = "White cells mark measured differences on the aligned preview grid."
 INTERPRETATION = ("The file’s embedded preview and main image differ in these areas. The comparison uses the preview’s "
                   "lower resolution to locate native crops. Main coordinates follow the displayed orientation. Preview "
                   "coordinates refer to the stored preview pixels. Ordinary editing and image processing can also produce these "
                   "differences. The preview’s origin is unknown. This evidence carries zero AI authorship weight.")
+EDITOR_INTERPRETATION = ("The saved editor thumbnail in this JPEG and the main image differ in these areas. "
+                         + INTERPRETATION.split(". ", 1)[1])
 MAX_REGIONS = 3
 DISPLAY_EDGE = 384
 BOX_KEYS = ("x", "y", "w", "h")
@@ -104,8 +107,8 @@ def add_exhibits(data, writer):
             return []
         _, labels, stats, _ = cv2.connectedComponentsWithStats(masks[0].astype(np.uint8), connectivity=8)
         with Image.open(io.BytesIO(data)) as source:
-            embedded = localization._pillow_thumbnail(source, source.getexif())
-            if embedded is None:
+            carrier, embedded = localization.retained_preview(source, source.getexif())
+            if embedded is None or carrier != measurement.get("preview_carrier", "exif"):
                 return []
             main = ImageOps.exif_transpose(source) if measurement.get("main_orientation") else source
             with Image.open(io.BytesIO(embedded)) as preview:
@@ -120,6 +123,8 @@ def add_exhibits(data, writer):
         # An unreadable preview must not change the existing metadata finding or score.
         return []
 
+    editor = carrier == "jpeg_editor_resource"
+    note = EDITOR_INTERPRETATION if editor else INTERPRETATION
     exhibit_ids, rows, regions = [], [], []
     for n, (main, thumb, marked, main_crop, thumb_crop, footprint) in enumerate(prepared, 1):
         try:
@@ -143,11 +148,13 @@ def add_exhibits(data, writer):
         rows.append([str(n), _coordinates(main), _coordinates(thumb), str(marked),
                      ", ".join(map(str, main_crop[1])), ", ".join(map(str, thumb_crop[1])),
                      f"{measurement.get('main_orientation', 1)}, {measurement.get('preview_orientation', 0)}", footprint_location])
+        if editor:
+            rows[-1].append(carrier)
         regions.append({"region": {"kind": "bbox", "bbox": main}, "label": f"Preview difference {n}"})
     if rows:
-        exhibit_ids.append(writer.table(FOOTPRINT_COLUMNS, rows, title=TABLE, caption=INTERPRETATION))
+        exhibit_ids.append(writer.table(EDITOR_COLUMNS if editor else FOOTPRINT_COLUMNS, rows, title=TABLE, caption=note))
         width, height = measurement["native_size"]
-        exhibit_ids.append(writer.regions(regions, title=REGIONS, caption=INTERPRETATION,
+        exhibit_ids.append(writer.regions(regions, title=REGIONS, caption=note,
                                           media_ref="original", coordinate_space={"width": width, "height": height, "scale_to_original": 1.0}))
     return exhibit_ids
 
@@ -161,11 +168,12 @@ def from_result(result):
     """Project the same immutable coordinate and crop exhibits into a JSON export."""
     exhibits = [item for item in result.get("exhibits") or [] if item.get("created_by") == CREATOR]
     table = next((item for item in exhibits if item.get("title") == TABLE and item.get("kind") == "table"
-                  and item.get("columns") in (FOOTPRINT_COLUMNS, COLUMNS, LEGACY_COLUMNS)), None)
+                  and item.get("columns") in (EDITOR_COLUMNS, FOOTPRINT_COLUMNS, COLUMNS, LEGACY_COLUMNS)), None)
     if not table:
         return None
     crops = {item["title"]: item for item in exhibits if item.get("kind") == "image" and item.get("role") == "comparison"}
     rows, orientations = [], set()
+    editor = table["columns"] == EDITOR_COLUMNS
     try:
         for region, main, thumb, marked, main_size, thumb_size, *extra in table["rows"]:
             if len(extra) != len(table["columns"]) - len(LEGACY_COLUMNS):
@@ -173,6 +181,8 @@ def from_result(result):
             main_tag, preview_alignment = map(int, extra[0].split(",")) if extra else (1, 0)
             if (main_tag not in (1, *localization.TRANSFORMS)
                     or (preview_alignment != 0 and (main_tag == 1 or preview_alignment != main_tag))):
+                return None
+            if editor and (main_tag != 1 or extra[2] != "jpeg_editor_resource"):
                 return None
             orientations.add((main_tag, preview_alignment))
             photos = {key: crops[f"{name} {region}"] for key, name in (("main_image", MAIN), ("embedded_preview", PREVIEW))}
@@ -185,7 +195,7 @@ def from_result(result):
                                "url": f"/api/v2/exhibits/{exhibit['id']}/payload", "display_width": width, "display_height": height,
                                "display_reduced": (width, height) != (boxes[key]["w"], boxes[key]["h"])}
             row = {"region": int(region), **boxes, "marked_preview_pixels": int(marked), "crops": assets}
-            if len(extra) == 2 and extra[1]:
+            if len(extra) >= 2 and extra[1]:
                 x, y, width, height = map(int, extra[1].split(","))
                 footprint = crops[f"{FOOTPRINT} {region}"]
                 if min(x, y) < 0 or min(width, height) <= 0 or not 0 < int(marked) <= width * height:
@@ -201,6 +211,7 @@ def from_result(result):
         return None
     main_orientation, preview_orientation = next(iter(orientations))
     return {"source_sha256": (result.get("input") or {}).get("sha256"), "coordinate_exhibit_id": table["id"],
+            **({"preview_carrier": "jpeg_editor_resource"} if editor else {}),
             "main_coordinate_space": "exif-oriented-main-image", "preview_coordinate_space": "stored-embedded-preview",
             "main_exif_orientation": main_orientation, "preview_alignment_orientation": preview_orientation,
             "regions": rows, "interpretation": table.get("caption", INTERPRETATION), "authorship_confidence_contribution": 0} if rows else None

@@ -6,6 +6,8 @@ The JPEG’s own thumbnail provides a second view of the same scene. The method 
 
 New reports also show the measured cells for each region on the aligned preview grid, alongside the original crops. [Footprint and compact-region evaluation](image-thumbnail-extent-transfer-2026-11-12.md)
 
+The same comparison can also use a supported saved editor thumbnail inside an upright JPEG. [Editor thumbnail scope and verification](image-editor-preview-2026-11-12.md)
+
 | Held outcome | Useful locations or acceptance |
 | --- | ---: |
 | Feathered LaMa edits | 10/12 |

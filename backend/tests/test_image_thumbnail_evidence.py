@@ -17,9 +17,11 @@ from app.provenance import image_thumbnail_localization as localization
 from app.reports import engine, figures
 from app.reports.specimens import specimen
 from app.storage.objects import ObjectStore
+from scripts.image_editor_preview_transfer import adversarial, attach, segment, without_exif
 from scripts.image_thumbnail_localization_transfer import color_patch, jpeg, preview_from, thumbnail
 from scripts.image_thumbnail_mirror_transfer import OPERATIONS as MIRRORS
 from scripts.image_thumbnail_orientation_transfer import encode as rotated_carrier
+from scripts.review_image_editor_preview import verify as verify_editor_preview
 
 
 def _pair(orientation=1, *, display_preview=False):
@@ -155,3 +157,48 @@ def test_optional_decoder_error_preserves_original_metadata_score(tmp_path, monk
     assert degraded.observed == original.observed
     assert evidence.from_result(result) is None
     assert any(item["title"] == "Embedded thumbnail vs main image" for item in result["exhibits"])
+
+
+def test_editor_preview_preserves_source_assets_and_refuses_ambiguous_resources(tmp_path, monkeypatch):
+    altered, clean = _pair()
+    retained = preview_from(altered)
+    raw = without_exif(altered)
+    submitted = attach(raw, segment(retained, name=b"preview"))
+    store = ObjectStore(tmp_path / "objects")
+    outcome, result = _run(store, submitted, monkeypatch)
+    baseline, _ = _run(store, raw, monkeypatch)
+    assert outcome.aggregate == baseline.aggregate and outcome.unit_scores == baseline.unit_scores
+    assert preview_from(submitted) is None
+    published = evidence.from_result(result)
+    assert published["preview_carrier"] == "jpeg_editor_resource"
+    assert published["authorship_confidence_contribution"] == 0
+    assert verify_editor_preview(submitted, published, store.read_bytes) == {
+        "regions": 1, "source_crops": 2, "footprints": 1,
+    }
+    import copy
+
+    moved = copy.deepcopy(published)
+    moved["regions"][0]["embedded_preview"]["x"] += 1
+    with pytest.raises(ValueError, match="thumbnail region differs"):
+        verify_editor_preview(submitted, moved, store.read_bytes)
+    with pytest.raises(ValueError, match="Submitted source differs"):
+        verify_editor_preview(raw, published, store.read_bytes)
+    with pytest.raises(ValueError, match="Saved PNG differs from its commitment"):
+        verify_editor_preview(submitted, published, lambda pin: store.read_bytes(pin) + b"altered")
+    for malformed in adversarial(raw, retained).values():
+        _, negative = _run(store, malformed, monkeypatch)
+        assert evidence.from_result(negative) is None
+    _, negative = _run(store, attach(without_exif(clean), segment(retained)), monkeypatch)
+    assert evidence.from_result(negative) is None
+    both = attach(altered, segment(retained))
+    _, existing = _run(store, both, monkeypatch)
+    assert "preview_carrier" not in evidence.from_result(existing)
+
+    report = specimen("image", profile="standard")
+    frozen = report.model_copy(update={"result": {**report.result, **result}, "exhibit_images": {
+        crop["exhibit_id"]: crop["sha256"] for region in published["regions"] for crop in region["crops"].values()},
+        "media": report.media.model_copy(update={"sha256": result["input"]["sha256"]})})
+    monkeypatch.setattr(figures, "default_store", lambda: store)
+    text = " ".join(engine.pdf_text(engine.render_pdf(frozen).pdf).split())
+    assert "The saved editor thumbnail in this JPEG and the main image differ" in text
+    assert "White cells mark measured differences" in text

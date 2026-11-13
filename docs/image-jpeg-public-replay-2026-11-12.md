@@ -39,3 +39,5 @@ shasum -a 256 "$replay_data/freeze.json" "$replay_data/result.json"
 ```
 
 Compare the freeze and result SHA-256 with the receipt when using the recorded dependency versions. The reviewer re-runs scoring and original-source verification, then compares every measurement and crop commitment byte for byte against its local result.
+
+For exact historical receipt hashes, use source revision `e4a6a5bea774901a2e3b390ba99ecec85c7da817` with the current replay script and the public source roster. The later JPEG85 extension changes a pinned profile module. The replay's input qualities remain JPEG75 and JPEG90. [JPEG85 confirmation](image-jpeg-offgrid-quality85-2026-11-12.md)

@@ -422,18 +422,23 @@ def test_jpeg_copy_evidence_proves_equal_encoded_blocks_and_rejects_altered_coor
             assert plate.tobytes() == rgb.crop(image_packets_v7.box_bounds(pair["regions"][role], *rgb.size)).tobytes()
 
 
-def test_offgrid_jpeg_evidence_replays_native_color_measurements(evidence_http, monkeypatch):
+@pytest.mark.parametrize("quality", [85, 90])
+def test_offgrid_jpeg_evidence_replays_native_color_measurements(evidence_http, monkeypatch, quality):
     f = evidence_http
     aid = "image-unprepared"
     monkeypatch.setattr(settings, "environment", "dev")
     monkeypatch.setattr(settings, "image_jpeg_offgrid_copy_review", True)
     monkeypatch.setattr(settings, "image_affine_copy_review", True)
     monkeypatch.setattr(settings, "image_embedded_pair_review", True)
-    rng = np.random.default_rng(4)
-    pixels = cv2.resize(rng.integers(0, 256, (110, 110, 3), dtype=np.uint8), (640, 640), interpolation=cv2.INTER_CUBIC)
-    pixels[123:171, 137:177] = pixels[442:490, 434:474]
+    seed, grid = (1, 75) if quality == 85 else (4, 110)
+    rng = np.random.default_rng(seed)
+    pixels = cv2.resize(rng.integers(0, 256, (grid, grid, 3), dtype=np.uint8), (640, 640), interpolation=cv2.INTER_CUBIC)
+    if quality == 85:
+        pixels[52:116, 83:147] = pixels[527:591, 524:588]
+    else:
+        pixels[123:171, 137:177] = pixels[442:490, 434:474]
     raw = io.BytesIO()
-    Image.fromarray(pixels).save(raw, "JPEG", quality=90, subsampling=2)
+    Image.fromarray(pixels).save(raw, "JPEG", quality=quality, subsampling=2)
     original = raw.getvalue()
     with Image.open(io.BytesIO(original)) as source:
         rgb = source.convert("RGB")
@@ -462,6 +467,29 @@ def test_offgrid_jpeg_evidence_replays_native_color_measurements(evidence_http, 
         with pytest.raises(ValueError, match="differs from the original crop"):
             image_jpeg_offgrid_source.verify(original, np.asarray(rgb), pair,
                                             {**measurement, "interior_mean": measurement["interior_mean"] + .01})
+        if quality == 85:
+            cropped = copy.deepcopy(pair)
+            for region in cropped["regions"].values():
+                region["w"] = 55
+            with pytest.raises(ValueError, match="smaller than the supported footprint"):
+                image_jpeg_offgrid_source.verify(original, np.asarray(rgb), cropped, measurement)
+            report = specimen("image", "standard")
+            frozen = report.model_copy(update={"result": result, "image_evidence": evidence,
+                "analysis": report.analysis.model_copy(update={"id": analysis.id, "revision": analysis.revision}),
+                "media": report.media.model_copy(update={"sha256": analysis.sha256})})
+            monkeypatch.setattr(image_evidence, "default_store", lambda: f.store)
+            assert image_evidence.manifest(frozen)["copy_translation"] == check
+            rendered_pdf = engine.render_pdf(frozen).pdf
+            pdf_text = " ".join(engine.pdf_text(rendered_pdf).split())
+            assert "Mean RGB difference inside" in pdf_text
+            with pymupdf.open(stream=rendered_pdf, filetype="pdf") as pdf:
+                actual = set()
+                for page in pdf:
+                    for xref, _, width, height, *_ in page.get_images():
+                        if (width, height) == (pair["regions"]["area_a"]["w"], pair["regions"]["area_a"]["h"]):
+                            actual.add(pymupdf.Pixmap(pdf, xref).samples)
+                assert {rgb.crop(image_packets_v7.box_bounds(region, *rgb.size)).tobytes()
+                        for region in pair["regions"].values()} <= actual
         wrong = copy.deepcopy(base)
         for role in ("area_a", "area_b"):
             wrong["copy_translation"]["pairs"][0]["regions"][role]["w"] = 31

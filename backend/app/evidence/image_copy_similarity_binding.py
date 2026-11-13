@@ -42,7 +42,8 @@ OFFGRID_MAX_SIDE = 118
 OFFGRID_BASIS = "jpeg_offgrid_texture"
 OFFGRID_STATUS_TEXT = {
     "supported_pair": "The aligned crops have closely matching color values inside and more different surroundings on at least three sides.",
-    "no_pair": "The between-block JPEG check found no qualifying repeated area at least 32 pixels wide and tall.",
+    "no_pair": ("The between-block JPEG check found no qualifying repeated area. "
+                "The minimum crop side is 32 or 56 pixels, depending on the JPEG compression profile."),
     "unsupported_profile": "The between-block check covers upright color JPEGs with the tested standard compression tables.",
     "unavailable": "The between-block JPEG check could not complete.",
     "unassessed_match_budget": "Too many competing offsets prevented a distinct between-block comparison.",

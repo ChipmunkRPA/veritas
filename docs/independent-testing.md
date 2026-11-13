@@ -1183,12 +1183,16 @@ checked-in receipts and need only the standard library.
 ```sh
 python3 -B -IS backend/scripts/review_audio_nemotron_noise_transfer.py review docs/evaluation-panels/audio-nemotron-noise-transfer-2026-11-12.json
 python3 -B -EsS backend/scripts/review_audio_nemotron_noise_confirmation.py review docs/evaluation-panels/audio-nemotron-noise-confirmation-2026-11-12.json
+python3 -B -IS backend/scripts/review_audio_reduced_background_localization.py review docs/evaluation-panels/audio-reduced-background-localization-2026-11-12.json
 python3 -B -IS backend/scripts/review_writing_punctuation_stability.py docs/evaluation-panels/writing-punctuation-stability-2026-11-12.json
 ```
 
 - The audio readers recalculate added flags, genuine false alarms and the
   advancement decisions from saved scores on two separate held panels.
   [Method and native replay](audio-nemotron-noise-transfer-2026-11-12.md#replay)
+- The longer speech reader reconstructs the checked sample ranges and reports
+  useful edit locations and genuine time flagged with four window rules.
+  [Method and native replay](audio-reduced-background-localization-2026-11-12.md)
 - The writing reader recalculates 108 cases, including the useful edit
   locations the proposed punctuation guard would suppress.
   [Method and replay](writing-punctuation-stability-2026-11-12.md#replay)

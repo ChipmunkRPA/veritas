@@ -572,6 +572,7 @@ def test_authenticated_audio_comparison_pdf_json_and_temporary_storage(
     stored = f.store.put_file(analyzed)
     monkeypatch.setattr(settings, "audio_reference_comparison_enabled", True)
     monkeypatch.setattr(settings, "audio_reference_local_timing", False)
+    monkeypatch.setattr(settings, "audio_reference_clean_speech", False)
 
     @contextmanager
     def sessions():
@@ -697,7 +698,8 @@ def test_clean_speech_lane_localizes_and_falls_back_with_source_clips(tmp_path, 
     for kind, reason in (("altered", "local_change"), ("control", "no_local_change"),
                          ("shorter", "six_second_common_clock_required"), ("other", "reference_match_not_supported")):
         second = clean_speech_pair[kind]
-        record, assets = audio_reference.compare(first, second, include_clean_speech=True, include_local_timing=True)
+        record, assets = audio_reference.compare(first, second, include_clean_speech=True, include_local_timing=True,
+                                                 allow_long_clean_speech=False)
         standard, standard_assets = audio_reference.compare(first, second, include_local_timing=True)
         assert record["schema"] == audio_reference.SCHEMA_WITH_CLEAN_SPEECH
         result = record["clean_speech"]
@@ -745,6 +747,7 @@ def test_clean_speech_lane_api_is_opt_in_and_renders_source_ranges(reference_htt
     monkeypatch.setattr(v2_media_reference, "default_store", lambda: f.store)
     monkeypatch.setattr(settings, "audio_reference_comparison_enabled", True)
     monkeypatch.setattr(settings, "audio_reference_clean_speech", True)
+    monkeypatch.setattr(settings, "audio_reference_long_clean_speech", False)
     first, second = (clean_speech_pair[name] for name in ("earlier", "altered"))
     stored = f.store.put_file(second)
     with sessions() as db:
@@ -782,3 +785,43 @@ def test_clean_speech_lane_api_is_opt_in_and_renders_source_ranges(reference_htt
     assert verify_clean_speech(first, second, export)["excerpts_verified"] == 2
     with sessions() as db:
         assert db.get(Analysis, "other-kind").result_hash == original_result
+
+
+def test_clean_speech_twelve_seconds_distinguishes_late_change_and_broad_frequency_processing(tmp_path):
+    from scipy.signal import butter, sosfiltfilt
+
+    rng = np.random.default_rng(172)
+    shape = butter(2, (260, 3600), fs=16000, btype="bandpass", output="sos")
+    earlier, donor, background = [sosfiltfilt(shape, rng.standard_normal(192000)) * scale for scale in (2000, 1800, 1600)]
+    replaced = earlier.copy()
+    replaced[145920:157440] = donor[145920:157440]
+    lowpass = sosfiltfilt(butter(2, 1900, fs=16000, btype="lowpass", output="sos"), earlier)
+    path = save(tmp_path, "earlier-twelve", (np.rint(earlier) / 32768).astype(np.float32))
+    output = tmp_path / "twelve-comparison.json"
+    for name, waveform, expected in (
+        ("late", replaced + background, "localized_difference"),
+        ("broad", lowpass + background, "broad_processing_difference"),
+        ("mismatched", donor + background, "unassessed"),
+    ):
+        other = save(tmp_path, name, (np.rint(waveform) / 32768).astype(np.float32))
+        record, assets = audio_reference.compare(path, other, include_clean_speech=True)
+        assert record["schema"] == audio_reference.SCHEMA_WITH_LONG_CLEAN_SPEECH
+        check = record["clean_speech"]
+        assert check["status"] == expected and check["sample_count"] == 192000
+        assert check["affects_overall_confidence"] is record["affects_overall_confidence"] is False
+        output.write_text(json.dumps({"comparison": record,
+                                      "assets": {key: base64.b64encode(raw).decode() for key, raw in assets.items()}}))
+        assert run(path, other, output, verify=True) == record
+        measured = verify_clean_speech(path, other, output)
+        if expected == "localized_difference":
+            assert measured["samples"] == [145920, 157440]
+            assert measured["excerpts_verified"] == 2
+            assert len(check["range"]["supporting_window_starts"]) == 2
+        else:
+            assert "range" not in check
+            assert measured["excerpts_verified"] == 0
+            if expected == "broad_processing_difference":
+                assert check["frequency_balance"]["section_start_samples"] == [0, 64000, 128000]
+                with pymupdf.open(stream=render_comparison(record, assets), filetype="pdf") as report:
+                    assert "Frequency balance across the recording" in report[1].get_text()
+                    assert "Selected interval" not in report[1].get_text()

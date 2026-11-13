@@ -18,7 +18,7 @@ type PictureRange = Extent & PictureClocks & {
   previews: PicturePreviews
 }
 type LocalPictureRange = Extent & PictureClocks & { tile: Tile; previews: PicturePreviews }
-type LocalComparison = { scope: string; summary: string; range?: LocalPictureRange }
+type LocalComparison = { scope: string; summary: string; range?: LocalPictureRange; measured_interval?: LocalPictureRange }
 type PictureTrimAlignment = { earlier_frames: [number, number]; submitted_frames: [number, number] } & (
   { unique_matching_frames: number }
   | { basis: 'paired_h264_trim_motion/1'; audio_checked: false; motion_margin: number;
@@ -52,9 +52,12 @@ type SoundtrackTiming = {
 type CleanSpeechComparison = {
   summary: string
   scope: string
-  status: 'localized_difference' | 'no_local_difference' | 'unassessed'
+  status: 'localized_difference' | 'no_local_difference' | 'unassessed' | 'broad_processing_difference'
   reason: string
-  range?: Record<Side, SoundtrackSide & { source_pts: [number, number] }> & { bands: { band_hz: [number, number] }[] }
+  range?: Record<Side, SoundtrackSide & { source_pts: [number, number] }> & {
+    bands: { band_hz: [number, number] }[]
+    supporting_window_starts?: [number, number]
+  }
 }
 type ChannelTimingRange = Omit<SoundtrackTiming, 'scope' | 'range'> & {
   channel: 'left' | 'right'
@@ -121,7 +124,7 @@ type Comparison = {
 } | {
   schema: 'chipmunk.audio-reference-comparison/1' | 'chipmunk.audio-reference-comparison/2' | 'chipmunk.audio-reference-comparison/3'
     | 'chipmunk.audio-reference-comparison/4' | 'chipmunk.audio-reference-comparison/5' | 'chipmunk.audio-reference-comparison/6'
-    | 'chipmunk.audio-reference-comparison/7' | 'chipmunk.audio-reference-comparison/8'
+    | 'chipmunk.audio-reference-comparison/7' | 'chipmunk.audio-reference-comparison/8' | 'chipmunk.audio-reference-comparison/9'
   picture?: never
   timing?: never
   soundtrack_alignment?: never
@@ -134,7 +137,7 @@ type Comparison = {
   trim_alignment?: never
 })
 type Result = { comparison: Comparison; assets: Record<string, string>; pdf?: string | null }
-type Availability = { available: boolean; timing_available?: boolean; clean_speech_available?: boolean }
+type Availability = { available: boolean; timing_available?: boolean; clean_speech_available?: boolean; long_clean_speech_available?: boolean }
 const sourceSeconds = new Intl.NumberFormat('en-US', { minimumFractionDigits: 3, maximumFractionDigits: 7, useGrouping: false })
 const trimSampleRate = 16000
 
@@ -219,14 +222,15 @@ function Playback({ body, name }: { body?: string; name: string }) {
   return url ? <audio className="mt-1 block w-full max-w-80" controls preload="none" src={url} aria-label={name} /> : null
 }
 
-function PictureEvidence({ span, assets, dimensions, labelAnalyzedClock = false }: {
+function PictureEvidence({ span, assets, dimensions, labelAnalyzedClock = false, label, initiallyOpen = true }: {
   span: PictureRange | LocalPictureRange; assets: Result['assets']; dimensions: PictureDimensions; labelAnalyzedClock?: boolean
+  label?: string; initiallyOpen?: boolean
 }) {
   const box = 'tile' in span ? span.tile : span.strongest_frame.difference_bounds
   const earlier = span.earlier_start_s !== undefined && span.earlier_end_s !== undefined
     ? `${span.earlier_start_s.toFixed(3)}–${span.earlier_end_s.toFixed(3)} s in the earlier clip` : null
-  return <details open={Object.keys(span.previews).length > 0} className="border-t border-border pt-3">
-    <summary className="cursor-pointer font-medium">{span.id} · {interval(span)}{labelAnalyzedClock && ' in the analyzed clip'}</summary>
+  return <details open={initiallyOpen && Object.keys(span.previews).length > 0} className="border-t border-border pt-3">
+    <summary className="cursor-pointer font-medium">{label ?? span.id} · {interval(span)}{labelAnalyzedClock && ' in the analyzed clip'}</summary>
     {earlier && <p className="mt-2 mb-0 text-small">{earlier}.</p>}
     <p className="mt-2 mb-0 text-small text-text-muted">{'tile' in span ? 'Measured comparison area at' :
       `${span.strongest_frame.changed_pixels.toLocaleString()} differing pixels at the strongest change, within`} x {box.x}, y {box.y}, {box.w} × {box.h} px.</p>
@@ -456,7 +460,13 @@ function ResultView({ result }: { result: Result }) {
         <h4 className="m-0 text-small font-medium">Local picture differences</h4>
         <p className="m-0 text-small">{picture.local_comparison.summary}</p>
         <p className="m-0 text-caption text-text-muted">{picture.local_comparison.scope}</p>
-        {picture.local_comparison.range && <PictureEvidence span={picture.local_comparison.range} assets={assets} dimensions={comparison.submitted} labelAnalyzedClock={!!motionTrim} />}
+        {picture.local_comparison.measured_interval && <>
+          <p className="m-0 text-caption text-text-muted">Consecutive pictures show a strong local difference across this interval. A gradual change can extend beyond these frames.</p>
+          <PictureEvidence span={picture.local_comparison.measured_interval} assets={assets} dimensions={comparison.submitted} label="Measured picture change" />
+        </>}
+        {picture.local_comparison.range && <PictureEvidence span={picture.local_comparison.range} assets={assets} dimensions={comparison.submitted}
+          labelAnalyzedClock={!!motionTrim} label={picture.local_comparison.measured_interval ? 'Initial comparison window' : undefined}
+          initiallyOpen={!picture.local_comparison.measured_interval} />}
       </section>}
       {picture.ranges.map(span => <PictureEvidence key={span.id} span={span} assets={assets} dimensions={comparison.submitted} />)}
     </>}
@@ -532,11 +542,15 @@ function CleanSpeechEvidence({ result, assets }: { result: CleanSpeechComparison
       ? <p className="m-0 text-caption text-text-muted">{span.bands.length} frequency bands had matching sound on both sides.
         The matched excerpts use source ticks {span.submitted.source_pts[0]} to {span.submitted.source_pts[1]} at 16 kHz in both files.</p>
       : <p className="m-0 text-caption text-text-muted">The decoded sample comparison is reported separately.</p>}
+    {span?.supporting_window_starts && <p className="m-0 text-caption text-text-muted">
+      Two six-second checks starting at {sourceSeconds.format(span.supporting_window_starts[0] / trimSampleRate)} s and{' '}
+      {sourceSeconds.format(span.supporting_window_starts[1] / trimSampleRate)} s agreed.
+    </p>}
   </div>
 }
 
-function MediaReferenceForm({ analysisId, kind, timingAvailable, cleanSpeechAvailable }: {
-  analysisId: string; kind: Kind; timingAvailable: boolean; cleanSpeechAvailable: boolean
+function MediaReferenceForm({ analysisId, kind, timingAvailable, cleanSpeechAvailable, longCleanSpeechAvailable }: {
+  analysisId: string; kind: Kind; timingAvailable: boolean; cleanSpeechAvailable: boolean; longCleanSpeechAvailable: boolean
 }) {
   const heading = useId()
   const input = useId()
@@ -567,7 +581,7 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, cleanSpeechAvai
     try {
       const response = await request<Result>(route(analysisId, kind), { method: 'POST', headers: authHeaders('POST'), body, signal: controller.signal })
       const schema = response?.comparison?.schema
-      const accepted = kind === 'video' ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] : [1, 2, 3, 4, 5, 6, 7, 8]
+      const accepted = kind === 'video' ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] : [1, 2, 3, 4, 5, 6, 7, 8, 9]
       if (!accepted.some(version => schema === `chipmunk.${kind}-reference-comparison/${version}`)) {
         throw new Error('The comparison response is incomplete.')
       }
@@ -577,7 +591,8 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, cleanSpeechAvai
       if (schema === 'chipmunk.audio-reference-comparison/6' && !response.comparison.local_timing) {
         throw new Error('The comparison response is missing its local audio timing result.')
       }
-      if (schema === 'chipmunk.audio-reference-comparison/8' && !response.comparison.clean_speech) {
+      if ((schema === 'chipmunk.audio-reference-comparison/8' || schema === 'chipmunk.audio-reference-comparison/9')
+          && !response.comparison.clean_speech) {
         throw new Error('The comparison response is missing its local speech result.')
       }
       if ((schema === 'chipmunk.audio-reference-comparison/7' || schema === 'chipmunk.video-reference-comparison/8')
@@ -636,7 +651,7 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, cleanSpeechAvai
           The earlier file is a clean copy of the same recording
         </label>
         <p id={cleanInput + '-hint'} className="mt-1 mb-0 text-caption text-text-muted">
-          Compare short changes even with background speech. Both files need exactly six seconds of continuous 16 kHz mono 16-bit WAV or FLAC with the same start and timing.
+          Compare short changes with background speech. Both files need exactly {longCleanSpeechAvailable ? 'six or twelve' : 'six'} seconds of continuous 16 kHz mono 16-bit WAV or FLAC with the same start and timing.
         </p>
       </div>}
       <Button type="submit" variant="primary" disabled={!file || pending}>{pending ? 'Comparing…' : kind === 'audio' ? 'Compare recordings' : 'Compare videos'}</Button>
@@ -654,5 +669,6 @@ export default function MediaReferenceComparison({ analysisId, kind }: { analysi
   return availability.isFetchedAfterMount && availability.data?.available && !availability.isError
     ? <MediaReferenceForm key={kind + analysisId} analysisId={analysisId} kind={kind}
       timingAvailable={kind === 'video' && availability.data.timing_available === true}
-      cleanSpeechAvailable={kind === 'audio' && availability.data.clean_speech_available === true} /> : null
+      cleanSpeechAvailable={kind === 'audio' && availability.data.clean_speech_available === true}
+      longCleanSpeechAvailable={kind === 'audio' && availability.data.long_clean_speech_available === true} /> : null
 }

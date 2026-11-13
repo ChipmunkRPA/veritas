@@ -502,6 +502,46 @@ def test_bounded_lossy_pair_keeps_exact_results_and_replays_local_native_crops(
     export.write_text(json.dumps(payload))
     assert run(earlier, later, export, verify=True) == record
     assert verify_comparison(earlier, later, payload)["native_crops_verified"] == 6
+    if local_area:
+        monkeypatch.setattr(settings, "video_reference_measured_interval", True)
+        supported = later_frames.copy()
+        supported[43:44] = earlier_frames[43:44]
+        later_precise = encode_lossy_comparison(tmp_path / "shorter-edit.mp4", supported, lossless=False, rate=rate)
+        new_object = f.store.put_file(later_precise)
+        with sessions() as db:
+            analysis = db.get(Analysis, "other-kind")
+            analysis.sha256, analysis.size_bytes = new_object.sha256, new_object.size_bytes
+            db.commit()
+
+        def compare_earlier(source):
+            response = f.client.post("/api/v2/analyses/other-kind/video-reference-comparison", headers=f.viewer,
+                                     data={"include_pdf": "true"},
+                                     files={"earlier": (source.name, source.read_bytes(), mime)})
+            assert response.status_code == 200 and response.headers["Cache-Control"] == "no-store"
+            return response.json()
+
+        new = compare_earlier(earlier)
+        measured = new["comparison"]["picture"]["local_comparison"]
+        strong = measured["measured_interval"]
+        assert new["comparison"]["schema"] == video_reference.SCHEMA_WITH_LOCAL
+        assert new["comparison"]["affects_overall_confidence"] is False
+        assert (strong["start_frame"], strong["end_frame_exclusive"]) == (24, 43)
+        assert [sample["frame"] for sample in strong["previews"].values()] == [23, 33, 43]
+        assert verify_comparison(earlier, later_precise, new)["native_crops_verified"] == 12
+        precise_export = tmp_path / "precise.json"
+        precise_export.write_text(json.dumps(new))
+        assert run(earlier, later_precise, precise_export, verify=True) == new["comparison"]
+        with pymupdf.open(stream=base64.b64decode(new["pdf"]), filetype="pdf") as pdf:
+            assert "Measured picture change" in pdf[1].get_text()
+            assert "0.958" in pdf[1].get_text() and "1.375" in pdf[1].get_text() and "1.792" in pdf[1].get_text()
+            assert "Initial comparison window" in pdf[2].get_text()
+            assert any(image[2:4] == (strong["tile"]["w"], strong["tile"]["h"]) for image in pdf[1].get_images())
+        wrong_local = compare_earlier(wrong)["comparison"]["picture"]["local_comparison"]
+        assert wrong_local["status"] == "insufficient_shared_picture_content" and "measured_interval" not in wrong_local
+        monkeypatch.setattr(settings, "video_reference_measured_interval", False)
+        old = compare_earlier(earlier)["comparison"]
+        assert old["picture"]["local_comparison"] == {key: value for key, value in measured.items() if key != "measured_interval"}
+        assert old["schema"] == new["comparison"]["schema"]
     if not lossless:
         altered = deepcopy(payload)
         previews = altered["comparison"]["picture"]["local_comparison"]["range"]["previews"]

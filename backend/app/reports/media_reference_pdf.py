@@ -11,6 +11,7 @@ from app.evidence.audio_reference import (
     SCHEMA_WITH_CLEAN_SPEECH,
     SCHEMA_WITH_LEVEL_ADJUSTMENT,
     SCHEMA_WITH_LOCAL_TIMING,
+    SCHEMA_WITH_LONG_CLEAN_SPEECH,
     SCHEMA_WITH_STEREO,
     SCHEMA_WITH_TRIM_ALIGNMENT,
     SCHEMA_WITH_TRIM_AND_LEVEL,
@@ -107,6 +108,8 @@ def _summary(document, record):
     if local:
         _text(page, MARGIN, 566, "Local picture comparison", size=16, font="hebo")
         summary = f"Local picture difference at {_range(local['range'])}." if "range" in local else local["summary"]
+        if precise := local.get("measured_interval"):
+            summary = f"Consecutive pictures show strong local change at {_range(precise)}.\nInitial comparison window {_range(local['range'])}."
         page.insert_textbox((MARGIN, 583, RIGHT, 670), summary + "\n" + local["scope"],
                             fontsize=10, fontname="helv", color=INK)
 
@@ -168,9 +171,9 @@ def _level_adjusted_summary(document, result):
     _text(page, MARGIN, 324, "The JSON export includes the supporting sample ranges and playable excerpts.", color=MUTED)
 
 
-def _picture_page(document, span, assets, source):
+def _picture_page(document, span, assets, source, *, title=None, measured=False):
     local = "tile" in span
-    title = "Local picture difference" if local else "Picture differences"
+    title = title or ("Local picture difference" if local else "Picture differences")
     page = _page(document, f"{span['id']}  {title}")
     label_range = _range(span)
     if "earlier_start_s" in span:
@@ -179,7 +182,8 @@ def _picture_page(document, span, assets, source):
     if local:
         box = span["tile"]
         label = "Measured comparison area at"
-        _text(page, MARGIN, 160, "Each pair includes the source picture and its native crop.", color=MUTED)
+        note = "A gradual change can extend beyond these frames." if measured else "Each pair includes the source picture and its native crop."
+        _text(page, MARGIN, 160, note, color=MUTED)
     else:
         row = span["strongest_frame"]
         box = row["difference_bounds"]
@@ -325,11 +329,20 @@ def _clean_speech_page(document, result):
     span = result.get("range")
     if not span:
         _text(page, MARGIN, 259, "The decoded sample comparison is reported separately.")
+        if (balance := result.get("frequency_balance")) is not None:
+            _text(page, MARGIN, 290, "Frequency balance across the recording", font="hebo")
+            for y, (start, gains) in enumerate(zip(balance["section_start_samples"], balance["relative_gains"], strict=True), 0):
+                values = "Shared sound was too limited" if gains is None else "   ".join(f"{gain:.3f}" for gain in gains)
+                _text(page, MARGIN, 312 + 19 * y, f"{start / AUDIO_RATE:.0f} to {start / AUDIO_RATE + 4:.0f} s   {values}", size=10)
+            _text(page, MARGIN, 384, "Relative gains by frequency band, from 300 to 3,700 Hz.", size=9, color=MUTED)
         return
     first, end = span["samples"]
     rate = result["sample_rate"]
     _text(page, MARGIN, 253, f"Selected interval  {first / rate:.3f} to {end / rate:.3f} s", font="hebo")
     _text(page, MARGIN, 274, f"{len(span['bands'])} frequency bands had matching sound on both sides.", size=10, color=MUTED)
+    if "supporting_window_starts" in span:
+        first_window, last_window = (x / rate for x in span["supporting_window_starts"])
+        _text(page, MARGIN, 291, f"Two six-second checks starting at {first_window:.3f} s and {last_window:.3f} s agreed.", size=9, color=MUTED)
     maximum = max(.01, *(abs(level) for side in LABELS for field in ("low", "high")
                         for level in span[side]["waveform"][field]))
     for y, (side, label) in zip((379, 565), (("earlier", "Earlier recording"), ("submitted", "Analyzed recording")), strict=True):
@@ -468,7 +481,7 @@ def render(record, assets):
     with pymupdf.open() as document:
         is_audio = record["schema"] in (AUDIO_SCHEMA, SCHEMA_WITH_LEVEL_ADJUSTMENT, SCHEMA_WITH_TRIM_ALIGNMENT,
                                         SCHEMA_WITH_TRIM_AND_LEVEL, SCHEMA_WITH_STEREO, SCHEMA_WITH_LOCAL_TIMING,
-                                        SCHEMA_WITH_CHANNEL_TIMING, SCHEMA_WITH_CLEAN_SPEECH)
+                                        SCHEMA_WITH_CHANNEL_TIMING, SCHEMA_WITH_CLEAN_SPEECH, SCHEMA_WITH_LONG_CLEAN_SPEECH)
         document.set_metadata({"title": "Earlier audio comparison" if is_audio else TITLE, "author": "Chipmunk Verify"})
         adjusted = record.get("level_adjusted")
         trimmed = is_audio and "trim_alignment" in record.get("audio", {})
@@ -481,8 +494,10 @@ def render(record, assets):
             _clean_speech_page(document, record["clean_speech"])
         remaining = []
         local = record.get("picture", {}).get("local_comparison", {})
+        if precise := local.get("measured_interval"):
+            _picture_page(document, precise, assets, record["submitted"], title="Measured picture change", measured=True)
         if local.get("range"):
-            _picture_page(document, local["range"], assets, record["submitted"])
+            _picture_page(document, local["range"], assets, record["submitted"], title="Initial comparison window" if precise else None)
         for span in record.get("picture", {}).get("ranges", []):
             if span["previews"]:
                 _picture_page(document, span, assets, record["submitted"])

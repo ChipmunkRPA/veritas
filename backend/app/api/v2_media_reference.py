@@ -43,6 +43,7 @@ class MediaReferenceAvailability(BaseModel):
 
 class AudioReferenceAvailability(MediaReferenceAvailability):
     clean_speech_available: bool | None = None
+    long_clean_speech_available: bool | None = None
 
 
 class VideoReferenceAvailability(MediaReferenceAvailability):
@@ -109,6 +110,8 @@ def availability(aid: str, request: Request):
     result = {"available": available}
     if available and kind == "audio" and settings.audio_reference_clean_speech:
         result["clean_speech_available"] = True
+        if settings.audio_reference_long_clean_speech:
+            result["long_clean_speech_available"] = True
     if available and kind == "video" and settings.video_reference_timing_model_path is not None:
         from app.evidence.video_reference_timing import available as timing_available
 
@@ -164,11 +167,13 @@ def _compare(aid: str, kind: str, original: tuple[str, int, str], earlier: Uploa
                         include_local_timing=settings.audio_reference_local_timing,
                         include_channel_timing=settings.audio_reference_local_timing,
                         include_clean_speech=settings.audio_reference_clean_speech and earlier_has_clean_speech,
+                        allow_long_clean_speech=settings.audio_reference_long_clean_speech,
                     )
                 elif timing_event_s is None:
                     record, assets = video_reference.compare(
                         reference, submitted, include_channel_timing=True, include_trimmed=True,
                         include_local_area=settings.video_reference_local_area,
+                        include_measured_interval=settings.video_reference_measured_interval,
                         include_trim_reencoded=settings.video_reference_local_area,
                     )
                 else:
@@ -211,7 +216,7 @@ def _upload_body(kind):
     else:
         properties["earlier_has_clean_speech"] = {
             "type": "string", "enum": ["true", "false"], "default": "false",
-            "description": "Optional confirmation of an earlier clean copy of the same six-second recording on the same clock.",
+            "description": "Optional confirmation of an earlier clean copy of the same six- or twelve-second recording on the same clock.",
         }
     return {"requestBody": {"required": True, "content": {"multipart/form-data": {"schema": {
         "type": "object", "required": ["earlier"], "properties": properties,

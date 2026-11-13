@@ -244,11 +244,25 @@ PROCESSING_AND_SHORT_EDITS = {
         f"{SCRIPTS}/writing_interval_transfer.py", f"{SCRIPTS}/writing_revision_trajectory_transfer.py",
     )),
 }
+DELIVERY_AND_REFERENCE_TRANSFERS = {
+    "image": ("review_image_regional_jpeg90_carrier.py", (
+        "image-regional-jpeg90-tandem-2026-11-13.json", "image-regional-jpeg90-direct-2026-11-13.json",
+    ), (), ()),
+    "video": ("review_video_reference_boundary_transfer.py", ("video-reference-measured-interval-confirmation-2026-11-13.json",), (), (
+        f"{SCRIPTS}/review_video_reference_chroma_transfer.py", f"{SCRIPTS}/verify_native_video_interval.py",
+    )),
+    "audio": ("review_audio_clean_reference_duration.py", ("audio-clean-reference-duration-2026-11-13.json",), (), ()),
+    "writing": ("review_writing_gao_exact_excerpt.py", (
+        "writing-temperature-transfer-2026-11-13.json", "writing-gao-exact-excerpt-2026-11-13.json",
+    ), (), tuple(f"{SCRIPTS}/{file}.py" for file in (
+        "writing_temperature_transfer", "writing_interval_transfer", "writing_revision_trajectory_transfer",
+    ))),
+}
 SUITES = ("overview", "localization", "transfer", "source-evidence", "recent-checks", "evidence-followups", "short-edits",
           "difficult-edits", "localization-limits", "specialist-transfer", "local-evidence-2026-11-13",
           "evidence-transfer-2026-11-13", "evidence-extent-2026-11-13", "local-evidence-expansion",
           "short-edit-transfer-2026-11-13", "delivery-and-localization", "reference-and-rotation", "single-upload-transfers",
-          "processing-and-short-edits")
+          "processing-and-short-edits", "delivery-and-reference-transfers")
 ISOLATED = (
     "import runpy,sys; "
     "script=sys.argv.pop(1); "
@@ -322,6 +336,8 @@ def replay_inputs(modality: str, suite: str) -> tuple[str, list[str], tuple[str,
         script, panel_names, prefix, dependencies = SINGLE_UPLOAD_TRANSFERS[modality]
     elif suite == "processing-and-short-edits":
         script, panel_names, prefix, dependencies = PROCESSING_AND_SHORT_EDITS[modality]
+    elif suite == "delivery-and-reference-transfers":
+        script, panel_names, prefix, dependencies = DELIVERY_AND_REFERENCE_TRANSFERS[modality]
     elif suite == "source-evidence":
         script, panel_names, prefix, dependencies = SOURCE_EVIDENCE[modality]
     else:

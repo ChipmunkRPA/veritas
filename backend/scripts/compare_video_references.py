@@ -64,7 +64,8 @@ def replay(compare, earlier: Path, submitted: Path, output: Path, *, verify: boo
 
 def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False,
         event_seconds: Fraction | None = None, timing_model: Path | None = None) -> dict:
-    options = {"include_trimmed": not verify, "include_local_area": not verify, "include_trim_reencoded": not verify}
+    options = {"include_trimmed": not verify, "include_local_area": not verify, "include_trim_reencoded": not verify,
+               "include_measured_interval": not verify}
     short_fallback = not verify
     local_sound = not verify
     if verify:
@@ -84,6 +85,7 @@ def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False,
             composite = additional or local_sound or channel_timing
             local = record.get("picture", {}).get("local_comparison", {})
             options["include_local_area"] = local.get("basis") == LOCAL_AREA_BASIS
+            options["include_measured_interval"] = "measured_interval" in local
             options.update(include_local=("local_comparison" in record.get("picture", {}) if composite
                                           else schema != SCHEMA),
                            include_soundtrack=schema == SCHEMA_WITH_SOUNDTRACK

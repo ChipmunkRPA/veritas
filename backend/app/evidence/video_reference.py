@@ -17,7 +17,12 @@ from PIL import Image
 from app.core.canonical import canonical_hash
 from app.detectors.audio.decode import SAMPLE_RATE, audio_stream_indices
 from app.detectors.video.decode import DecodeError, FrameTable, decode_frames, probe_frames
-from app.evidence import video_reference_local, video_reference_photometric, video_reference_trimmed
+from app.evidence import (
+    video_reference_local,
+    video_reference_measured_interval,
+    video_reference_photometric,
+    video_reference_trimmed,
+)
 from app.evidence.audio_reference import (
     _read_track,
     channel_timing,
@@ -179,7 +184,8 @@ def _trimmed_pairs(paths, tables, offset):
             yield first, second
 
 
-def _picture(paths, tables, assets, *, include_local, include_local_area=False, trim_offset=None, trim_reencoded=False):
+def _picture(paths, tables, assets, *, include_local, include_local_area=False, include_measured_interval=False,
+             trim_offset=None, trim_reencoded=False):
     clock = _elapsed(tables[1])
     earlier_clock = _elapsed(tables[0]) if trim_offset is not None else None
     earlier_offset = trim_offset if trim_offset is not None else 0
@@ -235,7 +241,7 @@ def _picture(paths, tables, assets, *, include_local, include_local_area=False, 
             output[-1].update(earlier_start_s=float(earlier_clock[start + earlier_offset]),
                               earlier_end_s=float(earlier_clock[end + earlier_offset]))
 
-    local = choice = None
+    local = choice = precise = None
     if rects is not None:
         if area_check:
             scope = video_reference_photometric.SCOPE
@@ -247,12 +253,24 @@ def _picture(paths, tables, assets, *, include_local, include_local_area=False, 
         if area_check:
             local["basis"] = video_reference_photometric.BASIS
             if choice:
+                if include_measured_interval and not trim_reencoded:
+                    xs, ys, _, _ = rects
+                    seed = np.flatnonzero((xs == choice["tile"]["x"]) & (ys == choice["tile"]["y"]))
+                    refined = (video_reference_measured_interval.refine(np.asarray(signals)[:, int(seed[0])], choice["frames"])
+                               if len(seed) == 1 else None)
+                    if refined and refined != choice["frames"]:
+                        start, end = refined
+                        precise = {"frames": refined, "samples": {"before": start - 1, "during": (start + end) // 2, "after": end}}
                 choice["tile"] = video_reference_photometric.expanded_region(np.array(cells), choice, constrained=False)
         if choice:
             needed.update(choice["samples"].values())
+        if precise:
+            needed.update(precise["samples"].values())
 
     previews, crops = {}, {}
     crop_indices = set(choice["samples"].values()) if choice else set()
+    if precise:
+        crop_indices.update(precise["samples"].values())
     for side, path, table in zip(("earlier", "submitted"), paths, tables, strict=True):
         offset = earlier_offset if side == "earlier" else 0
         with closing(decode_frames(path, table, sorted(index + offset for index in needed), timeout_s=40, max_pixels=MAX_PIXELS)) as frames:
@@ -277,18 +295,22 @@ def _picture(paths, tables, assets, *, include_local, include_local_area=False, 
     picture = {"status": "measured", "matching_frames": len(sizes) - changed, "changed_frames": changed,
                "frame_pairs_sha256": canonical_hash(measurements), "ranges": output}
     if local is not None:
-        if choice:
-            start, end = choice["frames"]
-            region = {"id": "L01", "start_frame": start, "end_frame_exclusive": end,
+        for field, selected in (("range", choice), ("measured_interval", precise)):
+            if selected is None:
+                continue
+            start, end = selected["frames"]
+            region = {"id": "L01" if field == "range" else "L01-M", "start_frame": start, "end_frame_exclusive": end,
                       "start_s": float(clock[start]), "end_s": float(clock[end]),
                       "source_ranges": _clock_range(tables, start, end, earlier_offset), "tile": choice["tile"],
                       "previews": {role: {**measurements[index], "time_s": float(clock[index]),
                                           "assets": previews[index], "crop_assets": crops[index]}
-                                   for role, index in choice["samples"].items()}}
+                                   for role, index in selected["samples"].items()}}
             if earlier_clock is not None:
                 region.update(earlier_start_s=float(earlier_clock[start + earlier_offset]),
                               earlier_end_s=float(earlier_clock[end + earlier_offset]))
-            local["range"] = region
+            if field == "measured_interval":
+                region["basis"] = video_reference_measured_interval.BASIS
+            local[field] = region
         picture["local_comparison"] = local
     return picture
 
@@ -320,6 +342,7 @@ def _additional_soundtracks(paths, sources, tables, assets):
 
 def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
             include_local_area: bool = False,
+            include_measured_interval: bool = False,
             timing_event_s: Fraction | None = None, timing_model: Path | None = None,
             timing_short_fallback: bool = False, include_soundtrack: bool = True,
             timing_local_sound: bool = False,
@@ -368,7 +391,8 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
     tracks = decoded = None
     if status == "measured":
         record["picture"] = _picture(paths, tables, assets, include_local=include_local,
-                                     include_local_area=include_local_area and timing_event_s is None)
+                                     include_local_area=include_local_area and timing_event_s is None,
+                                     include_measured_interval=include_measured_interval)
         if "local_comparison" in record["picture"]:
             record["schema"] = SCHEMA_WITH_LOCAL
         decoded = [

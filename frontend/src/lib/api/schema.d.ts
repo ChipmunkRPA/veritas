@@ -2350,6 +2350,8 @@ export interface components {
             available: boolean;
             /** Clean Speech Available */
             clean_speech_available?: boolean | null;
+            /** Long Clean Speech Available */
+            long_clean_speech_available?: boolean | null;
         };
         /** AuditEventOut */
         AuditEventOut: {
@@ -7048,7 +7050,7 @@ export interface operations {
                      */
                     earlier: string;
                     /**
-                     * @description Optional confirmation of an earlier clean copy of the same six-second recording on the same clock.
+                     * @description Optional confirmation of an earlier clean copy of the same six- or twelve-second recording on the same clock.
                      * @default false
                      * @enum {string}
                      */

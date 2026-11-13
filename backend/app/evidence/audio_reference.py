@@ -25,6 +25,7 @@ SCHEMA_WITH_STEREO = "chipmunk.audio-reference-comparison/5"
 SCHEMA_WITH_LOCAL_TIMING = "chipmunk.audio-reference-comparison/6"
 SCHEMA_WITH_CHANNEL_TIMING = "chipmunk.audio-reference-comparison/7"
 SCHEMA_WITH_CLEAN_SPEECH = "chipmunk.audio-reference-comparison/8"
+SCHEMA_WITH_LONG_CLEAN_SPEECH = "chipmunk.audio-reference-comparison/9"
 MAX_BYTES = 48 * 1024 * 1024
 MAX_SECONDS = 30
 MAX_PRESENTED_RANGES = 3
@@ -83,6 +84,20 @@ CLEAN_SPEECH_SUMMARY = {
     "no_local_change": "No qualifying local drop in sound shared with the earlier recording was found.",
     "local_change": "Sound shared with the earlier recording became weaker inside the interval compared with both sides.",
 }
+LONG_CLEAN_SPEECH_SUMMARY = CLEAN_SPEECH_SUMMARY | {
+    "common_clock_required": "Both files need exactly six or twelve seconds on the same zero-based sample clock.",
+    "consistent_frequency_balance_change": "The two recordings show a consistent change in frequency balance across the clip. Equalization can produce this pattern, so no local interval is highlighted.",
+    "no_corroborated_local_change": "No local drop in shared sound was confirmed by two neighboring checks.",
+}
+LONG_CLEAN_SPEECH_SCOPE = (
+    "The twelve-second check looks for matching sound that weakens locally in two overlapping windows. "
+    "Ordinary edits, local level changes and overlapping sound can affect the result. "
+    "It contributes zero weight to the AI estimate and does not identify who spoke."
+)
+LONG_CLEAN_SPEECH_CLOCK_SCOPE = (
+    "The local speech check requires a matching earlier recording and native timestamps. "
+    "It contributes zero weight to the AI estimate."
+)
 
 
 def _identity(path: Path, filename: str) -> dict:
@@ -423,27 +438,44 @@ def _local_timing(decoded, audio, assets):
     }
 
 
-def _clean_speech(decoded, assets):
-    from app.evidence import audio_clean_speech
+def _clean_speech(decoded, assets, *, allow_long):
+    from app.evidence import audio_clean_speech, audio_clean_speech_long
 
     tracks = tuple(source[0] for source in decoded)
+    counts = [track[2]["samples"] if track[2] is not None else None for track in tracks]
+    long = allow_long and counts == [audio_clean_speech_long.SAMPLES] * 2
+    profile = None
     if not all(track[0] == "measured" and source[4] for track, source in zip(tracks, decoded, strict=True)):
         reason, span = "native_format_required", None
-    elif not all(track[2]["source_pts"] == 0 and track[2]["samples"] == audio_clean_speech.SAMPLES for track in tracks):
-        reason, span = "six_second_common_clock_required", None
+    elif not (all(track[2]["source_pts"] == 0 for track in tracks)
+              and counts == [audio_clean_speech_long.SAMPLES if long else audio_clean_speech.SAMPLES] * 2):
+        reason, span = ("common_clock_required" if allow_long else "six_second_common_clock_required"), None
+    elif long:
+        samples = ((track[1] * 32768).astype("<i2") for track in tracks)
+        reason, span, profile = audio_clean_speech_long.locate(*samples)
     else:
         samples = ((track[1] * 32768).astype("<i2") for track in tracks)
         reason, span = audio_clean_speech.locate(*samples)
     statuses = {"local_change": "localized_difference", "no_local_change": "no_local_difference"}
+    statuses.update(consistent_frequency_balance_change="broad_processing_difference", no_corroborated_local_change="no_local_difference")
+    summary = LONG_CLEAN_SPEECH_SUMMARY if allow_long else CLEAN_SPEECH_SUMMARY
+    scope = LONG_CLEAN_SPEECH_SCOPE if long else CLEAN_SPEECH_SCOPE
+    if reason == "common_clock_required":
+        scope = LONG_CLEAN_SPEECH_CLOCK_SCOPE
     result = {"status": statuses.get(reason, "unassessed"), "reason": reason,
-              "summary": CLEAN_SPEECH_SUMMARY[reason], "scope": CLEAN_SPEECH_SCOPE,
+              "summary": summary[reason], "scope": scope,
               "sample_rate": AUDIO_RATE, "affects_overall_confidence": False}
+    if long:
+        result["sample_count"] = audio_clean_speech_long.SAMPLES
+    if profile is not None:
+        result["frequency_balance"] = profile
     if span is not None:
         start, stop = span["samples"]
         excerpts = {side: _timing_excerpt(assets, "clean-reference-speech", side, track[1], track[2]["source_pts"], [start, stop])
                     for side, track in zip(("earlier", "submitted"), tracks, strict=True)}
         result["range"] = span | excerpts | {"support_sha256": canonical_hash(span)}
-    return result
+    extended = long or reason == "common_clock_required"
+    return SCHEMA_WITH_LONG_CLEAN_SPEECH if extended else SCHEMA_WITH_CLEAN_SPEECH, result
 
 
 def compare(earlier: Path, submitted: Path, *, filenames: tuple[str, str] | None = None,
@@ -453,7 +485,8 @@ def compare(earlier: Path, submitted: Path, *, filenames: tuple[str, str] | None
             include_stereo: bool = True,
             include_local_timing: bool = False,
             include_channel_timing: bool = False,
-            include_clean_speech: bool = False) -> tuple[dict, dict[str, bytes]]:
+            include_clean_speech: bool = False,
+            allow_long_clean_speech: bool = True) -> tuple[dict, dict[str, bytes]]:
     """Compare continuous recordings and recover a small, exactly supported edge trim."""
     paths = earlier, submitted
     filenames = filenames or (earlier.name, submitted.name)
@@ -493,7 +526,8 @@ def compare(earlier: Path, submitted: Path, *, filenames: tuple[str, str] | None
             if timing is not None:
                 record.update(schema=SCHEMA_WITH_CHANNEL_TIMING, channel_timing=timing)
     if include_clean_speech:
-        record.update(schema=SCHEMA_WITH_CLEAN_SPEECH, clean_speech=_clean_speech((first, second), assets))
+        schema, speech = _clean_speech((first, second), assets, allow_long=allow_long_clean_speech)
+        record.update(schema=schema, clean_speech=speech)
     if sources != tuple(_identity(path, name) for path, name in zip(paths, filenames, strict=True)):
         raise ValueError("One of the recordings changed while the comparison was running.")
     return record, assets

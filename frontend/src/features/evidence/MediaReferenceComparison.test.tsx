@@ -63,6 +63,32 @@ it('shows matching source times and waveform previews and exports their JSON and
   expect(revokeObjectURL).toHaveBeenCalledTimes(2)
 })
 
+it('shows the strongly measured picture interval and keeps the initial window available', async () => {
+  const picture = { file: 'native.png', media_type: 'image/png', sha256: 'a'.repeat(64) }
+  const preview = (time_s: number) => ({ time_s, assets: { earlier: picture, submitted: picture },
+    crop_assets: { earlier: picture, submitted: picture } })
+  const tile = { x: 20, y: 16, w: 100, h: 80 }
+  const comparison = {
+    schema: 'chipmunk.video-reference-comparison/2', status: 'measured', interpretation: 'Decoded picture differences.',
+    submitted: { width: 720, height: 480 },
+    picture: { matching_frames: 0, changed_frames: 50, ranges: [], local_comparison: {
+      summary: 'A local picture difference persisted across the indicated range.', scope: 'Ordinary edits can produce this difference.',
+      range: { id: 'L01', start_s: .5, end_s: 1, tile, previews: { during: preview(.75) } },
+      measured_interval: { id: 'L01-M', start_s: .542, end_s: .917, tile,
+        previews: { before: preview(.5), during: preview(.708), after: preview(.917) } },
+    } },
+  }
+  vi.stubGlobal('fetch', vi.fn().mockResolvedValueOnce(Response.json({ available: true }))
+    .mockResolvedValueOnce(Response.json({ comparison, assets: { 'native.png': 'iVBORw0KGgo=' } })))
+  show()
+  fireEvent.change(await screen.findByLabelText('Earlier video'), { target: { files: [new File(['movie'], 'earlier.mp4')] } })
+  fireEvent.click(screen.getByRole('button', { name: 'Compare videos' }))
+  expect((await screen.findByText('Measured picture change · 0.542–0.917 s')).closest('details')?.open).toBe(true)
+  expect(screen.getByText('A gradual change can extend beyond these frames.', { exact: false })).toBeTruthy()
+  expect(screen.getByAltText('Analyzed clip comparison crop at 0.708 seconds')).toBeTruthy()
+  expect(screen.getByText('Initial comparison window · 0.500–1.000 s').closest('details')?.open).toBe(false)
+})
+
 it('renders the signed local soundtrack shift and exact native picture from the current video export', async () => {
   const picture = { file: 'native.png', media_type: 'image/png', sha256: 'a'.repeat(64) }
   const audio = { file: 'matched.wav', media_type: 'audio/wav', sha256: 'b'.repeat(64) }
@@ -284,6 +310,25 @@ it('offers the earlier clean speech check only when available and shows both sou
   expect(screen.getAllByRole('img', { name: /matched excerpt waveform/ })).toHaveLength(2)
   expect((fetch.mock.calls[1][1].body as FormData).get('earlier_has_clean_speech')).toBe('true')
   expect(screen.getByRole('button', { name: 'Download PDF' })).toBeTruthy()
+  expect(screen.getByRole('button', { name: 'Download JSON evidence' })).toBeTruthy()
+})
+
+it('shows an earlier-audio frequency-balance change without a local excerpt', async () => {
+  const comparison = {
+    schema: 'chipmunk.audio-reference-comparison/9', status: 'measured', interpretation: 'Decoded audio differences.',
+    clean_speech: { status: 'broad_processing_difference', reason: 'consistent_frequency_balance_change',
+      summary: 'Equalization can produce this pattern, so no local interval is highlighted.',
+      scope: 'It contributes zero weight to the AI estimate.' },
+  }
+  vi.stubGlobal('fetch', vi.fn().mockResolvedValueOnce(Response.json({ available: true, clean_speech_available: true, long_clean_speech_available: true }))
+    .mockResolvedValueOnce(Response.json({ comparison, assets: {}, pdf: 'JVBERi0xLjQK' })))
+  show('audio')
+  fireEvent.change(await screen.findByLabelText('Earlier audio'), { target: { files: [new File(['audio'], 'earlier.wav')] } })
+  expect(screen.getByText(/exactly six or twelve seconds/)).toBeTruthy()
+  fireEvent.click(screen.getByRole('checkbox', { name: 'The earlier file is a clean copy of the same recording' }))
+  fireEvent.click(screen.getByRole('button', { name: 'Compare recordings' }))
+  expect(await screen.findByText(/Equalization can produce this pattern/)).toBeTruthy()
+  expect(screen.queryByRole('img', { name: /matched excerpt waveform/ })).toBeNull()
   expect(screen.getByRole('button', { name: 'Download JSON evidence' })).toBeTruthy()
 })
 

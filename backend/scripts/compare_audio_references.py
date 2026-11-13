@@ -12,6 +12,7 @@ from app.evidence.audio_reference import (
     SCHEMA_WITH_CLEAN_SPEECH,
     SCHEMA_WITH_LEVEL_ADJUSTMENT,
     SCHEMA_WITH_LOCAL_TIMING,
+    SCHEMA_WITH_LONG_CLEAN_SPEECH,
     SCHEMA_WITH_TRIM_ALIGNMENT,
     SCHEMA_WITH_TRIM_AND_LEVEL,
     compare,
@@ -34,9 +35,10 @@ def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False, c
             compare_source = partial(compare, include_local_timing=True)
         elif isinstance(record, dict) and record.get("schema") == SCHEMA_WITH_CHANNEL_TIMING:
             compare_source = partial(compare, include_local_timing=True, include_channel_timing=True)
-        elif isinstance(record, dict) and record.get("schema") == SCHEMA_WITH_CLEAN_SPEECH:
+        elif isinstance(record, dict) and record.get("schema") in {SCHEMA_WITH_CLEAN_SPEECH, SCHEMA_WITH_LONG_CLEAN_SPEECH}:
             compare_source = partial(compare, include_clean_speech=True, include_local_timing="local_timing" in record,
-                                     include_channel_timing="channel_timing" in record)
+                                     include_channel_timing="channel_timing" in record,
+                                     allow_long_clean_speech=record["schema"] == SCHEMA_WITH_LONG_CLEAN_SPEECH)
     return replay(compare_source, earlier, submitted, output, verify=verify)
 
 

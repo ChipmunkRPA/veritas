@@ -17,6 +17,7 @@ SCHEMA = "chipmunk.native-video-interval/1"
 COMPARISON_SCHEMA = "chipmunk.video-reference-comparison/2"
 TRIM_REENCODE_SCHEMA = "chipmunk.video-reference-comparison/10"
 LOCAL_AREA_BASIS = "paired_h264_local_area/1"
+MEASURED_INTERVAL_BASIS = "paired_h264_measured_picture_interval/1"
 ROLES = ("before", "during", "after")
 SHA = re.compile(r"[0-9a-f]{64}")
 TIMESTAMP = re.compile(rb"\bn:\s*(\d+)\s+pts:\s*(-?\d+)")
@@ -190,7 +191,22 @@ def verify_comparison(earlier, submitted, export):
     local = record["picture"]["local_comparison"]
     local_area = local.get("basis") == LOCAL_AREA_BASIS
     require(local["status"] == "local_difference", "The export has no measured local picture interval")
-    region = local["range"]
+    result = _verify_comparison_range(earlier, submitted, record, assets, local["range"], local_area=local_area, trimmed=trimmed)
+    if precise := local.get("measured_interval"):
+        coarse = local["range"]
+        require(local_area and not trimmed and precise.get("basis") == MEASURED_INTERVAL_BASIS
+                and precise["id"] == coarse["id"] + "-M" and precise["tile"] == coarse["tile"],
+                "Measured picture interval differs from the initial local area")
+        changes = [abs(precise[key] - coarse[key]) for key in ("start_frame", "end_frame_exclusive")]
+        require(0 < max(changes) <= 6, "Measured picture boundaries differ from the initial range")
+        verified = _verify_comparison_range(earlier, submitted, record, assets, precise, local_area=True, measured=True)
+        result["measured_interval_seconds"] = verified["interval_seconds"]
+        result["native_crops_verified"] += verified["native_crops_verified"]
+        result["scope"] = "two source files, two shared picture intervals and twelve native crops"
+    return result
+
+
+def _verify_comparison_range(earlier, submitted, record, assets, region, *, local_area, trimmed=False, measured=False):
     start, end = region["start_frame"], region["end_frame_exclusive"]
     require(type(start) is type(end) is int and 0 < start < end, "Invalid half-open comparison interval")
     previews = region["previews"]
@@ -199,7 +215,8 @@ def verify_comparison(earlier, submitted, export):
     require(all(type(index) is int for index in indices) and indices[0] == start - 1
             and start <= indices[1] < end == indices[2], "Picture indices differ from the interval roles")
     if local_area:
-        require(end - start in {8, 12, 16, 20} and indices[1] == (start + end) // 2,
+        width_valid = end - start >= 4 if measured else end - start in {8, 12, 16, 20}
+        require(width_valid and indices[1] == (start + end) // 2,
                 "The local area requires the selected middle picture")
     x, y, w, h = (region["tile"][key] for key in ("x", "y", "w", "h"))
     require(all(type(value) is int for value in (x, y, w, h)) and min(x, y) >= 0 and min(w, h) > 0,
@@ -222,6 +239,8 @@ def verify_comparison(earlier, submitted, export):
         offset = offsets[side]
         begin, stop = start + offset, end + offset
         require(stop < len(pts) and x + w <= width and y + h <= height, "Interval or crop lies outside the source")
+        if measured:
+            require(begin >= 2 and stop + 2 <= len(pts), "Measured interval lacks both neighboring pictures")
         clock = [(tick - pts[0]) * base for tick in pts]
         length = record["submitted"]["frames"] if trimmed else len(pts)
         clocks.append(((width, height), [time - clock[offset] for time in clock[offset:offset + length]]))

@@ -22,6 +22,22 @@ replays a PNG seam or video frame schedule directly from a supplied original
 and its signed evidence record. Start there to check those measurements on a
 local export.
 
+### Replay delivery and earlier-copy comparisons
+
+Recount the [two JPEG90 delivery histories](image-regional-jpeg90-carrier-2026-11-13.md),
+[strong paired-video picture intervals](video-reference-measured-interval-2026-11-13.md),
+[12-second audio duration trial](audio-clean-reference-duration-2026-11-13.md)
+and [GAO excerpt source binding](writing-gao-archive-comparison-2026-11-13.md).
+This replay checks published decisions and overlap counts without source media.
+The linked guides cover native replay, the separate audio equalization test
+and the Word extraction scope.
+
+```sh
+review_dir=$(mktemp -d)
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/delivery-reference.json" --suite delivery-and-reference-transfers
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/delivery-reference.json" --format-issue
+```
+
 ### Replay the single-upload transfer results
 
 Recount the [native image prediction trial](image-bayer-prediction-transfer-2026-11-13.md),

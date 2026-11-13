@@ -97,6 +97,27 @@ integration remains unfinished.
 
 ## Progress on 13 November
 
+- The [JPEG90 comparison](image-regional-jpeg90-carrier-2026-11-13.md)
+  kept all 11 useful JPEG75 locations after a second save. Direct quality-90
+  saves held the useful count at 11 while raising ordinary highlights from
+  13 to 30 of 154. The direct workflow failed and remains experimental.
+- The [Word GAO comparison](writing-gao-archive-comparison-2026-11-13.md)
+  shows matched body paragraphs and native character ranges in the browser,
+  PDF and JSON. It linked 23 of 24 unchanged excerpts and localized 45 of 48
+  edited excerpts in the full archive. A cross-paragraph change abstained.
+- The [measured paired-video interval](video-reference-measured-interval-2026-11-13.md)
+  retains the initial window and shows a second interval of strong picture
+  change on supported H.264 pairs. It improved exact intervals from zero
+  to 15 of 16 conventional changes in the separate confirmation. The neural
+  comparison gained one timing-qualified location and missed its frozen gate.
+- The [12-second clean audio comparison](audio-clean-reference-duration-2026-11-13.md)
+  localized nine of 18 synthetic and five of nine ordinary replacements per
+  background level. The first pass flagged four equalization controls per
+  level. A separate broad equalization check removed those flags and kept
+  the localized replacements. The paired evidence has zero AI weight.
+- The [replication comparison](independent-testing.md#portable-evaluation-contract)
+  lets reviewers submit two runs of the same frozen method and share aggregate
+  differences in scores, flags, coverage and region overlap.
 - The [lower-depth resampling check](image-quantized-phase-transfer-2026-11-13.md)
   adds exact native PNG evidence when local value steps retain a camera-style
   pixel pattern. It found nine of 13 quantized translations on another camera

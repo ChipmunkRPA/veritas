@@ -230,8 +230,10 @@ class Settings(BaseSettings):
     audio_reference_comparison_enabled: bool = False  # Authenticated comparison of a short earlier recording.
     audio_reference_local_timing: bool = False  # Find localized changes in the timing of matching excerpts.
     audio_reference_clean_speech: bool = False  # Optional earlier clean copy on the same native sample clock.
+    audio_reference_long_clean_speech: bool = False  # Extend the optional clean-copy comparison to twelve seconds.
     video_reference_comparison_enabled: bool = False  # Authenticated development-only comparison of a short earlier clip.
     video_reference_local_area: bool = False  # Qualified short 720 x 480 earlier-copy picture evidence.
+    video_reference_measured_interval: bool = False  # Show strongly supported frame boundaries for qualified local picture ranges.
     video_reference_timing_model_path: Path | None = None  # Optional pinned local landmark task for a marked earlier closure.
     document_revision_comparison_enabled: bool = False  # Authenticated development-only earlier-draft comparison.
     document_paired_boundary_review: bool = False  # Optional paired TXT and Word check beside one preserved paragraph break.

@@ -1940,6 +1940,19 @@ hashes stay out of the output. Reviewers with equivalent source access
 can perform their own verification. The receipt records checked bytes.
 Confirm labels, source rights and absence of earlier exposure separately.
 
+To compare two runs of the same frozen method, submit both confirmation
+receipts to `replicate`. The tool reports changes in responses, flags,
+assessment coverage and localization counts by condition and true class.
+Each receipt must commit to the same manifest, implementation, calibration
+and freeze. A numerical difference can occur without changing a flag.
+Matching overlap counts can still describe different positions. Keep the
+individual receipts and positions local when the inputs are private.
+
+```sh
+python3 -B -IS backend/scripts/independent_review.py replicate \
+  manifest.json reference.json second-run.json frozen.json replication-summary.json
+```
+
 Outputs refuse overwrite. Keep the original manifests, frozen decisions, and
 receipts. Store private evaluation media outside Git. The summary deliberately
 omits individual source identifiers and media; review it before public sharing.

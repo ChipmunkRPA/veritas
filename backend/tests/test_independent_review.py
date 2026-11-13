@@ -8,6 +8,7 @@ import pytest
 from app.bench import independent as review
 from app.bench import independent_inputs as files
 from app.bench import independent_locations as locations
+from app.bench import independent_replication as replication
 
 
 def fixture():
@@ -179,6 +180,34 @@ def test_verify_input_and_parent_bytes_returns_counts_only(tmp_path):
     (root / rows[0]["input"]).unlink()
     with pytest.raises(ValueError, match="Could not read"):
         files.verify_inputs(manifest, index, root)
+
+
+def test_same_freeze_replication_reports_numerical_and_coverage_differences():
+    manifest, receipt = fixture()
+    for row in manifest["cases"]:
+        row["localization_truth"] = {"unit": review.LOCALIZATION_UNITS[row["modality"]],
+                                     "source_units": 200, "target_units": 20 if row["label"] else 0}
+    dev = receipt("development")
+    baseline = receipt("confirmation")
+    for row in dev["predictions"] + baseline["predictions"]:
+        row["localization"] = {"status": "ok", "reported_units": 0, "overlap_units": 0}
+    lock = review.freeze(manifest, dev, thresholds=dict.fromkeys(review.MEDIA, .5))
+    baseline["freeze_sha256"] = review.digest(lock)
+    repeated = deepcopy(baseline)
+    changed = next(r for r in repeated["predictions"] if r["id"] == "image/confirmation/1/clean")
+    changed.update(response=.49, localization={"status": "ok", "reported_units": 10, "overlap_units": 4})
+    not_assessed = next(r for r in repeated["predictions"] if r["id"] == "audio/confirmation/1/clean")
+    not_assessed.update(response=None, status="inconclusive", reason="Scope", localization={"status": "not_applicable", "reason": "No clock"})
+    result = replication.replicate(manifest, baseline, repeated, lock)
+    lookup = {(r["modality"], r["condition"], r["label"]): r for r in result["strata"]}
+    image = lookup["image", "clean", 1]
+    assert (image["changed_score"], image["lost_flags"], image["changed_overlap_counts"], image["groups_with_differences"]) == (1, 1, 1, 1)
+    audio = lookup["audio", "clean", 1]
+    assert (audio["changed_status"], audio["changed_score"], audio["lost_flags"], audio["changed_location_status"]) == (1, 0, 1, 1)
+    assert not any(r["groups_with_differences"] for r in replication.replicate(manifest, baseline, baseline, lock)["strata"])
+    assert "image/confirmation" not in str(result) and "No clock" not in str(result)
+    with pytest.raises(ValueError, match="exact freeze"):
+        replication.replicate(manifest, baseline, {**repeated, "freeze_sha256": "0" * 64}, lock)
 
 
 @pytest.mark.parametrize("field", ["group", "source_sha256", "input_sha256", "lineage"])

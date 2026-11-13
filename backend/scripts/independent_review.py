@@ -56,6 +56,12 @@ def main() -> None:
     inputs.add_argument("file_index", type=Path)
     inputs.add_argument("output", type=Path)
     inputs.add_argument("--root", type=Path, required=True)
+    repeat = commands.add_parser("replicate", help="Compare independently produced receipts from one frozen method")
+    repeat.add_argument("manifest", type=Path)
+    repeat.add_argument("reference", type=Path)
+    repeat.add_argument("replication", type=Path)
+    repeat.add_argument("lock", type=Path)
+    repeat.add_argument("output", type=Path)
     example = commands.add_parser("demo", help="Create a fictional four-modality example with no media or weights")
     example.add_argument("output", type=Path)
     args = parser.parse_args()
@@ -84,6 +90,10 @@ def main() -> None:
         from app.bench.independent_inputs import verify_inputs
 
         result = verify_inputs(manifest, read(args.file_index), args.root)
+    elif args.command == "replicate":
+        from app.bench.independent_replication import replicate
+
+        result = replicate(manifest, read(args.reference), read(args.replication), read(args.lock))
     else:
         result = compare(manifest, read(args.baseline), read(args.baseline_lock),
                          read(args.candidate), read(args.candidate_lock),

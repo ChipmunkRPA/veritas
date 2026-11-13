@@ -97,6 +97,29 @@ integration remains unfinished.
 
 ## Progress on 12 November
 
+- The [earlier-copy image comparison](image-reference-delivery-envelope-2026-11-12.md)
+  added nine useful feathered edit locations across 14 controlled JPEG-to-PNG
+  pairs. Two of 60 ordinary delivery controls highlighted after global
+  contrast changes. The optional local browser, PDF and JSON views share
+  the same crops and mask, with exact geometry replay across 184 held pairs.
+- The [two-sentence draft comparison](writing-draft-grammar-2026-11-12.md)
+  added three locations across two held panels, all from one generator,
+  with no new genuine groups flagged. The local English TXT comparison
+  preserves the exact ranges in both drafts and contributes zero confidence
+  weight. The separate grammar cues remained experimental.
+- The [scale-only video follow-up](video-face-scale-context-holdout-2026-11-12.md)
+  explained all ten authored zoom intervals and preserved all ten genuine
+  cutaways. The Full app selected none of the zooms, leaving no measured
+  benefit for an additional report qualifier.
+- The [staggered audio test](audio-noise-window-transfer-2026-11-12.md)
+  located six of 36 noisy edits with dense native sampling versus four with
+  sparse sampling. Adding staggered ranges and spectral noise reduction
+  located the same six and added one genuine group flag. It remains outside
+  the app. The held edits cover six generators and previously seen speaker
+  groups with separately sourced exact inputs.
+- The [public replay tool](independent-testing.md#save-a-four-modality-replay-receipt)
+  now compares the exact inputs and outputs recorded on two systems. Python
+  3.11 and 3.12 reproduced the four localization outputs locally.
 - The [second speech-enhancement comparison](audio-nemotron-noise-transfer-2026-11-12.md)
   added flags on seven synthetic source groups across five generators and
   one genuine group. With the same decision points and separate recordings,

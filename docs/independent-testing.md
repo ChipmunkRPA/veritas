@@ -1203,6 +1203,22 @@ if you want to record a reproduction or discrepancy.
 For detailed diagnostics, run the recorded ledger reader directly with its
 listed arguments.
 
+To compare a second machine's receipt with yours, run:
+
+```sh
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/review.json" --compare other-review.json
+```
+
+Use the same suite, modalities, and runner version on both machines. The
+command checks the input, result, and diagnostic commitments and identifies
+where they differ. It reports missing modalities and failed runs separately
+and exits successfully only when all selected replays match. Different
+operating systems, Python versions and Git revisions can match when the
+hashed inputs, runner and outputs agree. Comparison reads JSON and runs no
+commands from either receipt. Equal receipts establish that the recorded
+commitments agree. The files do not authenticate who ran the checks or
+establish new detector performance.
+
 The selected ledgers cover [JPEG preview regions](image-thumbnail-extent-transfer-2026-11-12.md),
 [later video repeats](video-motion-late-transfer-2026-11-12.md),
 [matched audio overlays](audio-vocal-event-mixtures-2026-11-12.md), and

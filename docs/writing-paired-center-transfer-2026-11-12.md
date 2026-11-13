@@ -36,6 +36,16 @@ python3 -B -I -S backend/scripts/review_writing_paired_center_transfer.py \
   docs/evaluation-panels/writing-paired-center-transfer-2026-11-12.json
 ```
 
+A separate implementation in Node.js reproduced the 126 case views, all 504 pooled readings, the two held result tables, and all 22 native batch decisions. It also matched the four public app case records to their study cases. With the retained originals and actual JSON exports, it verified eight original draft files, their exact Unicode ranges, and their saved check directions. The replay rejected a changed batch decision, a reversed batch, shifted public and app ranges, and changed source bytes. Node.js recomputes the saved evidence without running a model or providing an outside evaluation. [Independent runtime receipt](evaluation-panels/writing-paired-center-transfer-node-2026-11-12.json)
+
+```sh
+node backend/scripts/review_writing_paired_center_transfer_node.mjs \
+  docs/evaluation-panels/writing-paired-center-transfer-2026-11-12.json \
+  docs/evaluation-panels/writing-paired-center-transfer-app-2026-11-12.json
+```
+
+An optional third argument is the local paid-replay directory. Each case subdirectory must contain `comparison.json`, the historical `old.json` export, `earlier.txt`, and `analyzed.txt`. The reviewer reads these files locally and emits counts and hashes.
+
 ## Local app verification
 
 Four ordinary Full-profile analyses ran after four simulated payments. No unpaid event queued analysis. The draft route recorded joint increases for three known generated edits and no joint increase for a genuine F1000Research revision with the same paragraph geometry. Opting out restored the earlier behavior, and the comparison left each completed analysis digest intact. The downloaded comparison PDF linked the same changed text as the JSON. Both exact ranges and both response scales replayed from the original draft pair. An old schema-2 out-of-scope result replayed against the same files. The comparison route exports standalone PDF and JSON. The offline source replay checks both supplied original files and the saved response arithmetic. Chrome uploaded an earlier draft, followed the wording link and downloaded PDF and JSON equal to its API responses. [Local app receipt](evaluation-panels/writing-paired-center-transfer-app-2026-11-12.json)

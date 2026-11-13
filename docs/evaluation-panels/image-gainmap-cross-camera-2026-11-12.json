@@ -1,0 +1,4504 @@
+{
+  "freeze": {
+    "criteria": {
+      "max_flagged_ordinary_authors": 1,
+      "max_mislocalized_edits": 1,
+      "min_held_author_groups": 6,
+      "min_new_carrier_makes": 2,
+      "min_useful_edits": 6
+    },
+    "points": {
+      "dark_relative_to_gain": "0x1.818903bd321a6p+0",
+      "orphan_edge": "0x1.1d34f39601b72p-1"
+    },
+    "prior_sha256": "3fa970510ecc9c68406533f6a6202e88ce943a313ddee517dfc418730818defd",
+    "schema": "chipmunk.image-gainmap-cross-camera/1",
+    "scripts": {
+      "image_gainmap_cross_camera.py": "c52f8691796b530044943d2cdaca0428030fe4d3c69222022373ce640070584f",
+      "image_gainmap_iso.py": "ff5b0793d04d7764453cdb4ea7a599305641495084bf7ce6d2daedaf95cc3597",
+      "image_gainmap_localization_transfer.py": "9f6b693a60e064d24a5b033b5783a66a44b9224e017f314142fc275c0fafce93"
+    },
+    "source_roster": [
+      {
+        "apple_hdr_gainmap_signature": false,
+        "author": "AVDLCZ",
+        "base_mode": "RGB",
+        "bytes": 2478766,
+        "capture_device": "Google Pixel 8 Pro",
+        "current_parser_admits": true,
+        "description_url": "https://commons.wikimedia.org/wiki/File:2024-12-08_Prague_tram_light_trails.jpg",
+        "dimensions": [
+          4080,
+          3072
+        ],
+        "ends_at_eoi": true,
+        "exif_orientation": 1,
+        "file": "2024-12-08 Prague tram light trails.jpg",
+        "format": "JPEG",
+        "iso_21496_signature": false,
+        "key": "prague",
+        "license": "CC0 1.0",
+        "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "local_sha256": "74cf9196e641a685774a080352ea1549bc34ddf8539506c42eb836aa2e29ffe0",
+        "make": "Google",
+        "model": "Pixel 8 Pro",
+        "mpf_layout": {
+          "base_offset": 0,
+          "gain_aux_sha256": "07b8a75c5deef81d13b060672d69a03d950779f6f5b40339ce3eeda99a329a51",
+          "gain_dimensions": [
+            1010,
+            760
+          ],
+          "gain_end_exclusive": 2478766,
+          "gain_eoi_hex": "ffd9",
+          "gain_iso_21496_marker": false,
+          "gain_mode": "L",
+          "gain_orientation": 1,
+          "gain_soi_hex": "ffd8",
+          "gain_start": 2436003,
+          "gap_from_mpf_declared_primary_size": 745,
+          "iso_21496_marker_offsets": [],
+          "marker_at_declared_primary_end_hex": "afeb",
+          "marker_before_gain_soi_hex": "ffd9",
+          "mpf_declared_primary_size": 2435258,
+          "mpf_tiff_byte_order": "II",
+          "mpf_tiff_offset": 83113,
+          "primary_soi_hex": "ffd8",
+          "trailing_bytes": 0,
+          "trailing_footer_hex": null
+        },
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/b/bb/2024-12-08_Prague_tram_light_trails.jpg",
+        "publisher_sha1": "4015cf27e6c8b58e7fa7fabd959678ba47bda23b",
+        "upload": "2024-12-13T23:30:43Z",
+        "verified_gain_dimensions": [
+          1010,
+          760
+        ]
+      },
+      {
+        "apple_hdr_gainmap_signature": false,
+        "author": "Qzekrom",
+        "base_mode": "RGB",
+        "bytes": 2064177,
+        "capture_device": "Google Pixel 9",
+        "current_parser_admits": true,
+        "description_url": "https://commons.wikimedia.org/wiki/File:HeySong_Sarsaparilla_and_noodles_at_886_restaurant_1.jpg",
+        "dimensions": [
+          4080,
+          3072
+        ],
+        "ends_at_eoi": true,
+        "exif_orientation": 1,
+        "file": "HeySong Sarsaparilla and noodles at 886 restaurant 1.jpg",
+        "format": "JPEG",
+        "iso_21496_signature": false,
+        "key": "heysong",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "local_sha256": "7488c2623336395aba631feeb1fc59a7d3f3fc7b3bc116556f6805e7fff78a9b",
+        "make": "Google",
+        "model": "Pixel 9",
+        "mpf_layout": {
+          "base_offset": 0,
+          "gain_aux_sha256": "2e1a09e49f70139c8bc404c43482fe2d91526599f717d65630c46414c2face17",
+          "gain_dimensions": [
+            512,
+            386
+          ],
+          "gain_end_exclusive": 2064177,
+          "gain_eoi_hex": "ffd9",
+          "gain_iso_21496_marker": false,
+          "gain_mode": "L",
+          "gain_orientation": 1,
+          "gain_soi_hex": "ffd8",
+          "gain_start": 2045425,
+          "gap_from_mpf_declared_primary_size": 6857,
+          "iso_21496_marker_offsets": [],
+          "marker_at_declared_primary_end_hex": "659a",
+          "marker_before_gain_soi_hex": "ffd9",
+          "mpf_declared_primary_size": 2038568,
+          "mpf_tiff_byte_order": "II",
+          "mpf_tiff_offset": 105658,
+          "primary_soi_hex": "ffd8",
+          "trailing_bytes": 0,
+          "trailing_footer_hex": null
+        },
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/d/db/HeySong_Sarsaparilla_and_noodles_at_886_restaurant_1.jpg",
+        "publisher_sha1": "60e0de51dfd7276f2f3564f98614a2a268a674c3",
+        "upload": "2026-07-13T03:41:21Z",
+        "verified_gain_dimensions": [
+          512,
+          386
+        ]
+      },
+      {
+        "apple_hdr_gainmap_signature": false,
+        "author": "Sikander",
+        "base_mode": "RGB",
+        "bytes": 7838624,
+        "capture_device": "Google Pixel 10 Pro XL",
+        "current_parser_admits": true,
+        "description_url": "https://commons.wikimedia.org/wiki/File:Hormuz_pricing_in_Ontario_-_20260407.jpg",
+        "dimensions": [
+          6144,
+          8160
+        ],
+        "ends_at_eoi": true,
+        "exif_orientation": 1,
+        "file": "Hormuz pricing in Ontario - 20260407.jpg",
+        "format": "JPEG",
+        "iso_21496_signature": false,
+        "key": "ontario",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "local_sha256": "a3f2345ad8730e06f9edeab60d81e5e3db6ec73a5bd92506364cb5b2975d2313",
+        "make": "Google",
+        "model": "Pixel 10 Pro XL",
+        "mpf_layout": {
+          "base_offset": 0,
+          "gain_aux_sha256": "8b6a21b36c605481911e7090ed3cbd50943ad986a6280c7ed9a6f74248e8163f",
+          "gain_dimensions": [
+            1050,
+            1396
+          ],
+          "gain_end_exclusive": 7838624,
+          "gain_eoi_hex": "ffd9",
+          "gain_iso_21496_marker": false,
+          "gain_mode": "L",
+          "gain_orientation": 1,
+          "gain_soi_hex": "ffd8",
+          "gain_start": 7695141,
+          "gap_from_mpf_declared_primary_size": 6764,
+          "iso_21496_marker_offsets": [],
+          "marker_at_declared_primary_end_hex": "174f",
+          "marker_before_gain_soi_hex": "ffd9",
+          "mpf_declared_primary_size": 7688377,
+          "mpf_tiff_byte_order": "II",
+          "mpf_tiff_offset": 106829,
+          "primary_soi_hex": "ffd8",
+          "trailing_bytes": 0,
+          "trailing_footer_hex": null
+        },
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/0/01/Hormuz_pricing_in_Ontario_-_20260407.jpg",
+        "publisher_sha1": "49037df02badee41785d12b9dd9c2ea8c9837735",
+        "upload": "2026-04-13T12:14:19Z",
+        "verified_gain_dimensions": [
+          1050,
+          1396
+        ]
+      },
+      {
+        "apple_hdr_gainmap_signature": false,
+        "author": "Lukas Beck",
+        "base_mode": "RGB",
+        "bytes": 1789537,
+        "capture_device": "Samsung Galaxy S26 Ultra",
+        "current_parser_admits": false,
+        "description_url": "https://commons.wikimedia.org/wiki/File:Berlin_Stadtrandsiedlung_Malchow_lub_2026-03-07_img01_wind_turbine.jpg",
+        "dimensions": [
+          4000,
+          3000
+        ],
+        "ends_at_eoi": false,
+        "exif_orientation": 1,
+        "file": "Berlin Stadtrandsiedlung Malchow lub 2026-03-07 img01 wind turbine.jpg",
+        "format": "JPEG",
+        "iso_21496_signature": true,
+        "key": "turbine",
+        "license": "CC BY 4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0",
+        "local_sha256": "d97d61921c00a6a6488737611d0fae3694ad4a71ad7abd2a660acb95bcd5408a",
+        "make": "samsung",
+        "model": "Galaxy S26 Ultra",
+        "mpf_layout": {
+          "base_offset": 0,
+          "gain_aux_sha256": "3f511aeebe1eaa72cd5ce15a698b893f797458fc1c37ef07180daa93ce97206a",
+          "gain_dimensions": [
+            1000,
+            750
+          ],
+          "gain_end_exclusive": 1789320,
+          "gain_eoi_hex": "ffd9",
+          "gain_iso_21496_marker": true,
+          "gain_mode": "L",
+          "gain_orientation": 1,
+          "gain_soi_hex": "ffd8",
+          "gain_start": 1769853,
+          "gap_from_mpf_declared_primary_size": 0,
+          "iso_21496_marker_offsets": [
+            47162,
+            1770466
+          ],
+          "marker_at_declared_primary_end_hex": "ffd9",
+          "marker_before_gain_soi_hex": "ffd9",
+          "mpf_declared_primary_size": 1769853,
+          "mpf_tiff_byte_order": "II",
+          "mpf_tiff_offset": 47202,
+          "primary_soi_hex": "ffd8",
+          "trailing_bytes": 217,
+          "trailing_footer_hex": "53454654"
+        },
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/8/8a/Berlin_Stadtrandsiedlung_Malchow_lub_2026-03-07_img01_wind_turbine.jpg",
+        "publisher_sha1": "f5a21acda49875614c2ff767a2a82faf6ea00401",
+        "upload": "2026-03-08T16:48:00Z"
+      },
+      {
+        "apple_hdr_gainmap_signature": true,
+        "author": "Lukas Beck",
+        "base_mode": "RGB",
+        "bytes": 3126766,
+        "capture_device": "Apple iPhone 13 Pro",
+        "current_parser_admits": false,
+        "description_url": "https://commons.wikimedia.org/wiki/File:Berlin_Friedhof_Turiner_Stra%C3%9Fe_04.jpg",
+        "dimensions": [
+          4032,
+          3024
+        ],
+        "ends_at_eoi": true,
+        "exif_orientation": 1,
+        "file": "Berlin Friedhof Turiner Stra\u00dfe 04.jpg",
+        "format": "MPO",
+        "iso_21496_signature": false,
+        "key": "berlin",
+        "license": "CC BY 4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0",
+        "local_sha256": "c3c2d5c36fa76cf3b1497e144ee2e9171c716e4ea890b41548b3fdd2725490de",
+        "make": "Apple",
+        "model": "iPhone 13 Pro",
+        "mpf_layout": {
+          "base_offset": 0,
+          "gain_aux_sha256": "842e618e24182b2d0e205a19de5e3713681c5e52a8328e0a9a0ad4910eb2b287",
+          "gain_dimensions": [
+            2016,
+            1512
+          ],
+          "gain_end_exclusive": 3126766,
+          "gain_eoi_hex": "ffd9",
+          "gain_iso_21496_marker": false,
+          "gain_mode": "L",
+          "gain_orientation": 1,
+          "gain_soi_hex": "ffd8",
+          "gain_start": 3030382,
+          "gap_from_mpf_declared_primary_size": 0,
+          "iso_21496_marker_offsets": [],
+          "marker_at_declared_primary_end_hex": "ffd9",
+          "marker_before_gain_soi_hex": "ffd9",
+          "mpf_declared_primary_size": 3030382,
+          "mpf_tiff_byte_order": "MM",
+          "mpf_tiff_offset": 10736,
+          "primary_soi_hex": "ffd8",
+          "trailing_bytes": 0,
+          "trailing_footer_hex": null
+        },
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/2b/Berlin_Friedhof_Turiner_Stra%C3%9Fe_04.jpg",
+        "publisher_sha1": "1b19ab6af9093a8c46d14a5091f5cdc8063011df",
+        "upload": "2026-03-15T10:25:52Z"
+      },
+      {
+        "apple_hdr_gainmap_signature": true,
+        "author": "Parpan05",
+        "base_mode": "RGB",
+        "bytes": 6263489,
+        "capture_device": "Apple iPhone 16 Plus",
+        "current_parser_admits": false,
+        "description_url": "https://commons.wikimedia.org/wiki/File:Blattschneiderameisenbau.jpg",
+        "dimensions": [
+          4032,
+          3024
+        ],
+        "ends_at_eoi": true,
+        "exif_orientation": 1,
+        "file": "Blattschneiderameisenbau.jpg",
+        "format": "MPO",
+        "iso_21496_signature": true,
+        "key": "ants",
+        "license": "CC BY 4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0",
+        "local_sha256": "d48da099e7126db237d42dbc5c62e4e3cf08b813d0c391bdfc873585a27c6420",
+        "make": "Apple",
+        "model": "iPhone 16 Plus",
+        "mpf_layout": {
+          "base_offset": 0,
+          "gain_aux_sha256": "4f14013103324a09e2873e5c076145dd06f53c2d65d932addbb7fc2129382217",
+          "gain_dimensions": [
+            2016,
+            1512
+          ],
+          "gain_end_exclusive": 6263489,
+          "gain_eoi_hex": "ffd9",
+          "gain_iso_21496_marker": true,
+          "gain_mode": "L",
+          "gain_orientation": 1,
+          "gain_soi_hex": "ffd8",
+          "gain_start": 5520082,
+          "gap_from_mpf_declared_primary_size": 0,
+          "iso_21496_marker_offsets": [
+            13542,
+            5520748
+          ],
+          "marker_at_declared_primary_end_hex": "ffd9",
+          "marker_before_gain_soi_hex": "ffd9",
+          "mpf_declared_primary_size": 5520082,
+          "mpf_tiff_byte_order": "MM",
+          "mpf_tiff_offset": 13456,
+          "primary_soi_hex": "ffd8",
+          "trailing_bytes": 0,
+          "trailing_footer_hex": null
+        },
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/8/82/Blattschneiderameisenbau.jpg",
+        "publisher_sha1": "affbe30a26cc34abadb1f92feaca97404e7ab363",
+        "upload": "2025-01-05T14:32:08Z"
+      },
+      {
+        "apple_hdr_gainmap_signature": true,
+        "author": "Chabe01",
+        "base_mode": "RGB",
+        "bytes": 1225951,
+        "capture_device": "Apple iPhone 16 Pro",
+        "current_parser_admits": false,
+        "description_url": "https://commons.wikimedia.org/wiki/File:Cabine_C%C3%A2ble_IdF_Ligne_1_-_Cr%C3%A9teil_(FR94)_-_2025-10-08_-_3.jpg",
+        "dimensions": [
+          4032,
+          3024
+        ],
+        "ends_at_eoi": true,
+        "exif_orientation": 1,
+        "file": "Cabine C\u00e2ble IdF Ligne 1 - Cr\u00e9teil (FR94) - 2025-10-08 - 3.jpg",
+        "format": "MPO",
+        "iso_21496_signature": true,
+        "key": "cable",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "local_sha256": "7d5aacbb375113cbea2d8335b9bb1d0208578df15906968e83e951eda0a9d76d",
+        "make": "Apple",
+        "model": "iPhone 16 Pro",
+        "mpf_layout": {
+          "base_offset": 0,
+          "gain_aux_sha256": "4e995dbe8c1032cf78d45ce2c904fd45343baedfe28d7fd5044e725fea3a2190",
+          "gain_dimensions": [
+            2016,
+            1512
+          ],
+          "gain_end_exclusive": 1225951,
+          "gain_eoi_hex": "ffd9",
+          "gain_iso_21496_marker": true,
+          "gain_mode": "L",
+          "gain_orientation": 1,
+          "gain_soi_hex": "ffd8",
+          "gain_start": 1068549,
+          "gap_from_mpf_declared_primary_size": 0,
+          "iso_21496_marker_offsets": [
+            17846,
+            1069315
+          ],
+          "marker_at_declared_primary_end_hex": "ffd9",
+          "marker_before_gain_soi_hex": "ffd9",
+          "mpf_declared_primary_size": 1068549,
+          "mpf_tiff_byte_order": "MM",
+          "mpf_tiff_offset": 17760,
+          "primary_soi_hex": "ffd8",
+          "trailing_bytes": 0,
+          "trailing_footer_hex": null
+        },
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/b/be/Cabine_C%C3%A2ble_IdF_Ligne_1_-_Cr%C3%A9teil_%28FR94%29_-_2025-10-08_-_3.jpg",
+        "publisher_sha1": "b318638964771f287a2b68898b93316b8c9fc065",
+        "upload": "2025-10-08T21:58:15Z"
+      },
+      {
+        "apple_hdr_gainmap_signature": true,
+        "author": "Seasider53",
+        "base_mode": "RGB",
+        "bytes": 4812438,
+        "capture_device": "Apple iPhone 17 Pro",
+        "current_parser_admits": false,
+        "description_url": "https://commons.wikimedia.org/wiki/File:Newman_window.jpg",
+        "dimensions": [
+          4284,
+          5712
+        ],
+        "ends_at_eoi": true,
+        "exif_orientation": 1,
+        "file": "Newman window.jpg",
+        "format": "MPO",
+        "iso_21496_signature": false,
+        "key": "newman",
+        "license": "CC BY 4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0",
+        "local_sha256": "79623559c7be757171b4b7174d60960e5dabc095a52b73cd263c8881a150ad0b",
+        "make": "Apple",
+        "model": "iPhone 17 Pro",
+        "mpf_layout": {
+          "base_offset": 0,
+          "gain_aux_sha256": "05dd03874c78c06cae97aa8b73ed6b3e383db8b0a519709b498841c74cb20e7b",
+          "gain_dimensions": [
+            2142,
+            2856
+          ],
+          "gain_end_exclusive": 4812438,
+          "gain_eoi_hex": "ffd9",
+          "gain_iso_21496_marker": false,
+          "gain_mode": "L",
+          "gain_orientation": 1,
+          "gain_soi_hex": "ffd8",
+          "gain_start": 3993666,
+          "gap_from_mpf_declared_primary_size": 0,
+          "iso_21496_marker_offsets": [],
+          "marker_at_declared_primary_end_hex": "ffd9",
+          "marker_before_gain_soi_hex": "ffd9",
+          "mpf_declared_primary_size": 3993666,
+          "mpf_tiff_byte_order": "MM",
+          "mpf_tiff_offset": 5852,
+          "primary_soi_hex": "ffd8",
+          "trailing_bytes": 0,
+          "trailing_footer_hex": null
+        },
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Newman_window.jpg",
+        "publisher_sha1": "3ae8b8a6b2fdb1bbb4420ff5e753951ee5371e6c",
+        "upload": "2026-02-09T20:46:22Z"
+      },
+      {
+        "apple_hdr_gainmap_signature": true,
+        "author": "\u0c30\u0c35\u0c3f\u0c1a\u0c02\u0c26\u0c4d\u0c30",
+        "base_mode": "RGB",
+        "bytes": 8286109,
+        "capture_device": "Apple iPhone 17",
+        "current_parser_admits": false,
+        "description_url": "https://commons.wikimedia.org/wiki/File:A_type_of_shovel_used_in_agriculture.jpg",
+        "dimensions": [
+          5712,
+          4284
+        ],
+        "ends_at_eoi": true,
+        "exif_orientation": 1,
+        "file": "A type of shovel used in agriculture.jpg",
+        "format": "MPO",
+        "iso_21496_signature": true,
+        "key": "shovel",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "local_sha256": "1a6c15d0cc3b78ee7bc4c6b15165c35351c32c9f166c5952e31fc1ac096d14bf",
+        "make": "Apple",
+        "model": "iPhone 17",
+        "mpf_layout": {
+          "base_offset": 0,
+          "gain_aux_sha256": "c20feb644e8ce7040979e62bb10ff136687d008c66919da1135ce4896a689843",
+          "gain_dimensions": [
+            2856,
+            2142
+          ],
+          "gain_end_exclusive": 8286109,
+          "gain_eoi_hex": "ffd9",
+          "gain_iso_21496_marker": true,
+          "gain_mode": "L",
+          "gain_orientation": 1,
+          "gain_soi_hex": "ffd8",
+          "gain_start": 7172803,
+          "gap_from_mpf_declared_primary_size": 0,
+          "iso_21496_marker_offsets": [
+            14511,
+            7173469
+          ],
+          "marker_at_declared_primary_end_hex": "ffd9",
+          "marker_before_gain_soi_hex": "ffd9",
+          "mpf_declared_primary_size": 7172803,
+          "mpf_tiff_byte_order": "MM",
+          "mpf_tiff_offset": 14425,
+          "primary_soi_hex": "ffd8",
+          "trailing_bytes": 0,
+          "trailing_footer_hex": null
+        },
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/9/90/A_type_of_shovel_used_in_agriculture.jpg",
+        "publisher_sha1": "92007aabfe5d993a615d24dd3aad7f800cdae4c1",
+        "upload": "2025-10-01T09:47:07Z"
+      },
+      {
+        "apple_hdr_gainmap_signature": true,
+        "author": "\u0c30\u0c35\u0c3f\u0c1a\u0c02\u0c26\u0c4d\u0c30",
+        "base_mode": "RGB",
+        "bytes": 3755649,
+        "capture_device": "Apple iPhone 17",
+        "current_parser_admits": false,
+        "description_url": "https://commons.wikimedia.org/wiki/File:Birds_nests_hanging_from_the_branches_of_a_tree.jpg",
+        "dimensions": [
+          4032,
+          3024
+        ],
+        "ends_at_eoi": true,
+        "exif_orientation": 1,
+        "file": "Birds nests hanging from the branches of a tree.jpg",
+        "format": "MPO",
+        "iso_21496_signature": true,
+        "key": "nests",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "local_sha256": "506f412e29c6ca07f38b0c18e48f7346d1da071fc076df70fbf5a24123a56bbc",
+        "make": "Apple",
+        "model": "iPhone 17",
+        "mpf_layout": {
+          "base_offset": 0,
+          "gain_aux_sha256": "d2999bbcb114205254a723724919e7a2ee2869fdd405abc81d4a80cba1da47fc",
+          "gain_dimensions": [
+            2016,
+            1512
+          ],
+          "gain_end_exclusive": 3755649,
+          "gain_eoi_hex": "ffd9",
+          "gain_iso_21496_marker": true,
+          "gain_mode": "L",
+          "gain_orientation": 1,
+          "gain_soi_hex": "ffd8",
+          "gain_start": 3327394,
+          "gap_from_mpf_declared_primary_size": 0,
+          "iso_21496_marker_offsets": [
+            15734,
+            3328060
+          ],
+          "marker_at_declared_primary_end_hex": "ffd9",
+          "marker_before_gain_soi_hex": "ffd9",
+          "mpf_declared_primary_size": 3327394,
+          "mpf_tiff_byte_order": "MM",
+          "mpf_tiff_offset": 15648,
+          "primary_soi_hex": "ffd8",
+          "trailing_bytes": 0,
+          "trailing_footer_hex": null
+        },
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/e/eb/Birds_nests_hanging_from_the_branches_of_a_tree.jpg",
+        "publisher_sha1": "f6c314d11b63d2fcb6315aa6fd7e65860748f3df",
+        "upload": "2025-09-29T10:02:58Z"
+      }
+    ],
+    "views": [
+      {
+        "auxiliary_sha256": "07b8a75c5deef81d13b060672d69a03d950779f6f5b40339ce3eeda99a329a51",
+        "base": {
+          "dimensions": [
+            4080,
+            3072
+          ],
+          "sha256": "375796eaf3f747e1b06355218c5e201408ca289c886a180e7cef9029ab8e9534"
+        },
+        "gain": {
+          "dimensions": [
+            1010,
+            760
+          ],
+          "sha256": "015edb8b85cd0be834f215c85c1a35cee193ffec2987c43d7267e1eabfed4ec0"
+        },
+        "key": "prague",
+        "role": "original",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            578
+          ],
+          "sha256": "90404b1265d0ffb069fbdb03849daada7b82d696d8e399217b62f39a98752d96"
+        },
+        "gain": {
+          "dimensions": [
+            1010,
+            760
+          ],
+          "sha256": "015edb8b85cd0be834f215c85c1a35cee193ffec2987c43d7267e1eabfed4ec0"
+        },
+        "key": "prague",
+        "role": "jpeg90",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            578
+          ],
+          "sha256": "104c96e9a25a5028be48e2bab80946644bf8288d441e7d05cae83e8bbd22cfbd"
+        },
+        "gain": {
+          "dimensions": [
+            1010,
+            760
+          ],
+          "sha256": "015edb8b85cd0be834f215c85c1a35cee193ffec2987c43d7267e1eabfed4ec0"
+        },
+        "key": "prague",
+        "role": "jpeg75",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            578
+          ],
+          "sha256": "905f2e4f9543e1b6e3aedc1c9d02b23eeb0fafba6b79cf357ac470abd7b0b689"
+        },
+        "gain": {
+          "dimensions": [
+            1010,
+            760
+          ],
+          "sha256": "015edb8b85cd0be834f215c85c1a35cee193ffec2987c43d7267e1eabfed4ec0"
+        },
+        "key": "prague",
+        "role": "tone",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            578
+          ],
+          "sha256": "4957238cd6e1849e528951fbefecabca64d3d1addbf8ca2d4f1bcdd8029b45a3"
+        },
+        "gain": {
+          "dimensions": [
+            1010,
+            760
+          ],
+          "sha256": "015edb8b85cd0be834f215c85c1a35cee193ffec2987c43d7267e1eabfed4ec0"
+        },
+        "key": "prague",
+        "role": "resize",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            578
+          ],
+          "sha256": "bbe0ea3d0558a64d34f46698620c3bfd4f4d4df1b1b05602f88bd9b4cc115e3e"
+        },
+        "gain": {
+          "dimensions": [
+            1010,
+            760
+          ],
+          "sha256": "015edb8b85cd0be834f215c85c1a35cee193ffec2987c43d7267e1eabfed4ec0"
+        },
+        "key": "prague",
+        "role": "sharpen",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            576,
+            434
+          ],
+          "sha256": "d6812cb42077e6db17431597152a67bc6cecd9783cdff0d5270d671f16039e20"
+        },
+        "gain": {
+          "dimensions": [
+            758,
+            570
+          ],
+          "sha256": "e32c2d4d8dea9f471dfa26be3522c40ca3463fb395147bb551ac2cfff343b470"
+        },
+        "key": "prague",
+        "role": "aligned_crop",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            578,
+            768
+          ],
+          "sha256": "5303ea117ec5d68380e955a4e590fb8a7438e1a0fa5758f450e57fa6df5a5099"
+        },
+        "gain": {
+          "dimensions": [
+            760,
+            1010
+          ],
+          "sha256": "2dff55ecf97c06ac86e68dc4fb6a55e3b4ec8d7bfd34adb1dfae48dff11f5841"
+        },
+        "key": "prague",
+        "role": "aligned_rotation",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            578
+          ],
+          "sha256": "86f1a96e8bc0ef027c15ce32005ab7df7f3411c9d16714324847389dc4c006b4"
+        },
+        "gain": {
+          "dimensions": [
+            1010,
+            760
+          ],
+          "sha256": "015edb8b85cd0be834f215c85c1a35cee193ffec2987c43d7267e1eabfed4ec0"
+        },
+        "key": "prague",
+        "role": "highlight_edit",
+        "truth_pixels": 20164,
+        "truth_sha256": "d3ac4b8a2065b10cb35a28cf074de527bf1419cbde20cdb620356c35d1f12ea8"
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            578
+          ],
+          "sha256": "44c54b6de38966b3b6b44f3b239ce79c12aadba4dfb836df7626be30f7bc5d47"
+        },
+        "gain": {
+          "dimensions": [
+            1010,
+            760
+          ],
+          "sha256": "015edb8b85cd0be834f215c85c1a35cee193ffec2987c43d7267e1eabfed4ec0"
+        },
+        "key": "prague",
+        "role": "arbitrary_edit",
+        "truth_pixels": 20294,
+        "truth_sha256": "1be0c5ce184b50ca6d2193a9bb9d715d65452c6c01e931ee93bf2a34edd66c8a"
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            578
+          ],
+          "sha256": "90404b1265d0ffb069fbdb03849daada7b82d696d8e399217b62f39a98752d96"
+        },
+        "gain": null,
+        "key": "prague",
+        "role": "no_gainmap",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": "2e1a09e49f70139c8bc404c43482fe2d91526599f717d65630c46414c2face17",
+        "base": {
+          "dimensions": [
+            4080,
+            3072
+          ],
+          "sha256": "836d70f9df751e5efd0918db62e4203e24701dd4a2e7bd50f4bca9b210fe5508"
+        },
+        "gain": {
+          "dimensions": [
+            512,
+            386
+          ],
+          "sha256": "64f17309117d9a338a75313edd3e2fd7afa4843c73e49425ca3227a6aa3228c4"
+        },
+        "key": "heysong",
+        "role": "original",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            578
+          ],
+          "sha256": "95e10b739c06da50f1c115ac06ba074eb3a3dcee44e31302f894a6a4c8ef1a28"
+        },
+        "gain": {
+          "dimensions": [
+            512,
+            386
+          ],
+          "sha256": "64f17309117d9a338a75313edd3e2fd7afa4843c73e49425ca3227a6aa3228c4"
+        },
+        "key": "heysong",
+        "role": "jpeg90",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            578
+          ],
+          "sha256": "05a032fa377abbc83cab72b972206fb01714a377cc1aff34db38111919617853"
+        },
+        "gain": {
+          "dimensions": [
+            512,
+            386
+          ],
+          "sha256": "64f17309117d9a338a75313edd3e2fd7afa4843c73e49425ca3227a6aa3228c4"
+        },
+        "key": "heysong",
+        "role": "jpeg75",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            578
+          ],
+          "sha256": "feba46e9f97ad7397e10d8583b0f519186ee97c4cd11743a2ca321f27c5b5578"
+        },
+        "gain": {
+          "dimensions": [
+            512,
+            386
+          ],
+          "sha256": "64f17309117d9a338a75313edd3e2fd7afa4843c73e49425ca3227a6aa3228c4"
+        },
+        "key": "heysong",
+        "role": "tone",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            578
+          ],
+          "sha256": "edc04076fa42bb2327d3610651b0d4d3282093807b16c67cb989e3bcd523f50c"
+        },
+        "gain": {
+          "dimensions": [
+            512,
+            386
+          ],
+          "sha256": "64f17309117d9a338a75313edd3e2fd7afa4843c73e49425ca3227a6aa3228c4"
+        },
+        "key": "heysong",
+        "role": "resize",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            578
+          ],
+          "sha256": "0147956d5e01c30ac54c35ff82ecffd3eccb5818feac20b7e759d72934b6c368"
+        },
+        "gain": {
+          "dimensions": [
+            512,
+            386
+          ],
+          "sha256": "64f17309117d9a338a75313edd3e2fd7afa4843c73e49425ca3227a6aa3228c4"
+        },
+        "key": "heysong",
+        "role": "sharpen",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            576,
+            434
+          ],
+          "sha256": "85d9a31e38b7d3c910d76440952112c458a8b785833c74142e850122a818ff0c"
+        },
+        "gain": {
+          "dimensions": [
+            384,
+            290
+          ],
+          "sha256": "2ff690d912a1638f3fa4219c461d76ffec68f38f5d76d9f8e7239c812bc53cb4"
+        },
+        "key": "heysong",
+        "role": "aligned_crop",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            578,
+            768
+          ],
+          "sha256": "b83c15035a5835984c11fd47db612cf381a6b4b79bbdc25953c78ad76fd6a4da"
+        },
+        "gain": {
+          "dimensions": [
+            386,
+            512
+          ],
+          "sha256": "a242591828f743b17eed6952b2812ec7b422b21dd5050906f6725cac45cf930f"
+        },
+        "key": "heysong",
+        "role": "aligned_rotation",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            578
+          ],
+          "sha256": "4509d783b5c57985df0cdf2240aa1bab56fe5b8d83267b1171cf003faf89492e"
+        },
+        "gain": {
+          "dimensions": [
+            512,
+            386
+          ],
+          "sha256": "64f17309117d9a338a75313edd3e2fd7afa4843c73e49425ca3227a6aa3228c4"
+        },
+        "key": "heysong",
+        "role": "highlight_edit",
+        "truth_pixels": 20306,
+        "truth_sha256": "bcc6de13e14aa0bb831f034d1544a57da5ff8beadb253a62b86cbb9bfed4db3b"
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            578
+          ],
+          "sha256": "a194329bd7ca6a322671b660b345cf321f716738dee1d8fc426cba80c6edce08"
+        },
+        "gain": {
+          "dimensions": [
+            512,
+            386
+          ],
+          "sha256": "64f17309117d9a338a75313edd3e2fd7afa4843c73e49425ca3227a6aa3228c4"
+        },
+        "key": "heysong",
+        "role": "arbitrary_edit",
+        "truth_pixels": 20304,
+        "truth_sha256": "b5a979528d1eadcca1f45c43cab264a553162aa7100e68587299101f2e62ecb2"
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            578
+          ],
+          "sha256": "95e10b739c06da50f1c115ac06ba074eb3a3dcee44e31302f894a6a4c8ef1a28"
+        },
+        "gain": null,
+        "key": "heysong",
+        "role": "no_gainmap",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": "8b6a21b36c605481911e7090ed3cbd50943ad986a6280c7ed9a6f74248e8163f",
+        "base": {
+          "dimensions": [
+            6144,
+            8160
+          ],
+          "sha256": "7cfb523109a07b9dcea52c983aeeaa79c768f5977c4d00d4c6dff2e743620c4b"
+        },
+        "gain": {
+          "dimensions": [
+            1050,
+            1396
+          ],
+          "sha256": "d25338c5517eba21112e6a9249a0f50c79961aee729642ebeadf5f7c1796c3dd"
+        },
+        "key": "ontario",
+        "role": "original",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            578,
+            768
+          ],
+          "sha256": "abb04ef6fe30f8d2d6180feee85e69d92d3a6f346d35514ac008b1f5853f46ae"
+        },
+        "gain": {
+          "dimensions": [
+            1050,
+            1396
+          ],
+          "sha256": "d25338c5517eba21112e6a9249a0f50c79961aee729642ebeadf5f7c1796c3dd"
+        },
+        "key": "ontario",
+        "role": "jpeg90",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            578,
+            768
+          ],
+          "sha256": "b4b30182d9f126190c633c38777d330d0bbfb5d26b00f2068e2312a366d4c861"
+        },
+        "gain": {
+          "dimensions": [
+            1050,
+            1396
+          ],
+          "sha256": "d25338c5517eba21112e6a9249a0f50c79961aee729642ebeadf5f7c1796c3dd"
+        },
+        "key": "ontario",
+        "role": "jpeg75",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            578,
+            768
+          ],
+          "sha256": "7fe872559015d8844949488c84fd8871a5a021fc850246ed463ee2753616d298"
+        },
+        "gain": {
+          "dimensions": [
+            1050,
+            1396
+          ],
+          "sha256": "d25338c5517eba21112e6a9249a0f50c79961aee729642ebeadf5f7c1796c3dd"
+        },
+        "key": "ontario",
+        "role": "tone",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            578,
+            768
+          ],
+          "sha256": "f944042a8576fc26a6dbc1ec61622df17081f4864d75b464ee60a876eaa890c4"
+        },
+        "gain": {
+          "dimensions": [
+            1050,
+            1396
+          ],
+          "sha256": "d25338c5517eba21112e6a9249a0f50c79961aee729642ebeadf5f7c1796c3dd"
+        },
+        "key": "ontario",
+        "role": "resize",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            578,
+            768
+          ],
+          "sha256": "a14e0f8af54af1a3293f3519d676bb4a9b30cb4a3eceb993b600d4d0b8eb5ab1"
+        },
+        "gain": {
+          "dimensions": [
+            1050,
+            1396
+          ],
+          "sha256": "d25338c5517eba21112e6a9249a0f50c79961aee729642ebeadf5f7c1796c3dd"
+        },
+        "key": "ontario",
+        "role": "sharpen",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            434,
+            576
+          ],
+          "sha256": "0e4a1ccaf57dd81648c2796efc504637b2e4028cad3bf3f1f74692ff10e822f7"
+        },
+        "gain": {
+          "dimensions": [
+            788,
+            1048
+          ],
+          "sha256": "ec917f91babd2975b1cc272845f8d74a5cf986e4f59511158818f8130d961c7b"
+        },
+        "key": "ontario",
+        "role": "aligned_crop",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            578
+          ],
+          "sha256": "3a7c63cb24ed75888b90354820087cd6679141449d280be7dd8ca6fda02dc6d2"
+        },
+        "gain": {
+          "dimensions": [
+            1396,
+            1050
+          ],
+          "sha256": "cec023551c2723b5a554575f7a8349bf1fc4c87879747b7fda98c92074e34457"
+        },
+        "key": "ontario",
+        "role": "aligned_rotation",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            578,
+            768
+          ],
+          "sha256": "8da2d247f9dd8c2263e9afbd944f43479a6533f87366737b3be22e33c77e8e16"
+        },
+        "gain": {
+          "dimensions": [
+            1050,
+            1396
+          ],
+          "sha256": "d25338c5517eba21112e6a9249a0f50c79961aee729642ebeadf5f7c1796c3dd"
+        },
+        "key": "ontario",
+        "role": "highlight_edit",
+        "truth_pixels": 11236,
+        "truth_sha256": "4c455a5cf7baa066d410a558bfc71b96cc6f084a3a33006a744993a5712d1f12"
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            578,
+            768
+          ],
+          "sha256": "0d768278ffb857db97ee1951ca55b8bf2f5050fbfe56441dd19aad1eb53644a4"
+        },
+        "gain": {
+          "dimensions": [
+            1050,
+            1396
+          ],
+          "sha256": "d25338c5517eba21112e6a9249a0f50c79961aee729642ebeadf5f7c1796c3dd"
+        },
+        "key": "ontario",
+        "role": "arbitrary_edit",
+        "truth_pixels": 11219,
+        "truth_sha256": "46bf8c344a9718ab7db1503f0cc73c90a996969574240a40f083e61afbdb49df"
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            578,
+            768
+          ],
+          "sha256": "abb04ef6fe30f8d2d6180feee85e69d92d3a6f346d35514ac008b1f5853f46ae"
+        },
+        "gain": null,
+        "key": "ontario",
+        "role": "no_gainmap",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": "3f511aeebe1eaa72cd5ce15a698b893f797458fc1c37ef07180daa93ce97206a",
+        "base": {
+          "dimensions": [
+            4000,
+            3000
+          ],
+          "sha256": "0db0601f8c63673a64e1c0955bfec59f187f5b8361df90f7c2cc4c8d48c5a6e2"
+        },
+        "gain": {
+          "dimensions": [
+            1000,
+            750
+          ],
+          "sha256": "36f0910948b6eb9008eefd71724e2e9f20247eb4411f5cc2ae4f76eae479da58"
+        },
+        "key": "turbine",
+        "role": "original",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            576
+          ],
+          "sha256": "36adf4c468694886c8882d5a4ffd81ed1e7a9eb07f2554bb7ea524d97e430d18"
+        },
+        "gain": {
+          "dimensions": [
+            1000,
+            750
+          ],
+          "sha256": "36f0910948b6eb9008eefd71724e2e9f20247eb4411f5cc2ae4f76eae479da58"
+        },
+        "key": "turbine",
+        "role": "jpeg90",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            576
+          ],
+          "sha256": "bb93e27fcc3f87641720257631b31984da16fcebab0c40b659ca20487b300b18"
+        },
+        "gain": {
+          "dimensions": [
+            1000,
+            750
+          ],
+          "sha256": "36f0910948b6eb9008eefd71724e2e9f20247eb4411f5cc2ae4f76eae479da58"
+        },
+        "key": "turbine",
+        "role": "jpeg75",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            576
+          ],
+          "sha256": "499369e05f1949a2af6fa68ecd1c10bf0b64df5ac8f6d282516ec37e2fe45c95"
+        },
+        "gain": {
+          "dimensions": [
+            1000,
+            750
+          ],
+          "sha256": "36f0910948b6eb9008eefd71724e2e9f20247eb4411f5cc2ae4f76eae479da58"
+        },
+        "key": "turbine",
+        "role": "tone",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            576
+          ],
+          "sha256": "73eb47b9234f9517cd7a24d2f59a12575da906059fbb76dab526760b50a57c24"
+        },
+        "gain": {
+          "dimensions": [
+            1000,
+            750
+          ],
+          "sha256": "36f0910948b6eb9008eefd71724e2e9f20247eb4411f5cc2ae4f76eae479da58"
+        },
+        "key": "turbine",
+        "role": "resize",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            576
+          ],
+          "sha256": "a1ef54d46430f84ea771ad59e329f975928cd7a9d0918377d6989eb0fb7ad02e"
+        },
+        "gain": {
+          "dimensions": [
+            1000,
+            750
+          ],
+          "sha256": "36f0910948b6eb9008eefd71724e2e9f20247eb4411f5cc2ae4f76eae479da58"
+        },
+        "key": "turbine",
+        "role": "sharpen",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            576,
+            432
+          ],
+          "sha256": "b0a4925a5f6841a248ff993145e3f30de6b91f524433de083ea952d6b23598d7"
+        },
+        "gain": {
+          "dimensions": [
+            750,
+            562
+          ],
+          "sha256": "8587f058ea1b59f619c6e75edfa4d379697b7ff253bf2dcd85596e094e1bb6fa"
+        },
+        "key": "turbine",
+        "role": "aligned_crop",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            576,
+            768
+          ],
+          "sha256": "a53d0433697454e49f4c69763f357512d6d77a69022759cf87b97a1c7c5c4125"
+        },
+        "gain": {
+          "dimensions": [
+            750,
+            1000
+          ],
+          "sha256": "a2fc184abecb30879ddb5764c62440d585797374ba4291ba7ea67b1ff2143456"
+        },
+        "key": "turbine",
+        "role": "aligned_rotation",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            576
+          ],
+          "sha256": "363c384c8ed8c7ba458055099c888bf983488a8b8a95a199c57c6c4d8ec61462"
+        },
+        "gain": {
+          "dimensions": [
+            1000,
+            750
+          ],
+          "sha256": "36f0910948b6eb9008eefd71724e2e9f20247eb4411f5cc2ae4f76eae479da58"
+        },
+        "key": "turbine",
+        "role": "highlight_edit",
+        "truth_pixels": 20164,
+        "truth_sha256": "a34420b24e175c4cbb1e46406f2aa8c6f410854c45ac262d1433c7193a9629bb"
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            576
+          ],
+          "sha256": "94b2a7817bb463ae538aae6e5217baa7f9fd703a9468837ef223f7a5ff73b881"
+        },
+        "gain": {
+          "dimensions": [
+            1000,
+            750
+          ],
+          "sha256": "36f0910948b6eb9008eefd71724e2e9f20247eb4411f5cc2ae4f76eae479da58"
+        },
+        "key": "turbine",
+        "role": "arbitrary_edit",
+        "truth_pixels": 20162,
+        "truth_sha256": "13f212d1396851027eb4db8b085681f0df53ac810bced24f1365de97647356a6"
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            576
+          ],
+          "sha256": "36adf4c468694886c8882d5a4ffd81ed1e7a9eb07f2554bb7ea524d97e430d18"
+        },
+        "gain": null,
+        "key": "turbine",
+        "role": "no_gainmap",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": null,
+        "gain": null,
+        "key": "berlin",
+        "role": "original",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": "4f14013103324a09e2873e5c076145dd06f53c2d65d932addbb7fc2129382217",
+        "base": {
+          "dimensions": [
+            4032,
+            3024
+          ],
+          "sha256": "38f237b3db7d1386e85bcc4ab55e1cb4290cac988d11ad30c3414670707ee8d5"
+        },
+        "gain": {
+          "dimensions": [
+            2016,
+            1512
+          ],
+          "sha256": "c6c52636838f91953938571dc83079675a39391259d9b8a7b668eab68fa4018a"
+        },
+        "key": "ants",
+        "role": "original",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            576
+          ],
+          "sha256": "4f9fd1a935ba78f9753e94301c57b15eec81b48496f11c06b87e82b03d9731c4"
+        },
+        "gain": {
+          "dimensions": [
+            2016,
+            1512
+          ],
+          "sha256": "c6c52636838f91953938571dc83079675a39391259d9b8a7b668eab68fa4018a"
+        },
+        "key": "ants",
+        "role": "jpeg90",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            576
+          ],
+          "sha256": "d5c23b191c9d060c41c43d712da4b29af91f0aa366ba933e8ec2aec3b8a18b39"
+        },
+        "gain": {
+          "dimensions": [
+            2016,
+            1512
+          ],
+          "sha256": "c6c52636838f91953938571dc83079675a39391259d9b8a7b668eab68fa4018a"
+        },
+        "key": "ants",
+        "role": "jpeg75",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            576
+          ],
+          "sha256": "f644d568ae02a7687559296adcb418ed28a2a8147cbed81054197613153e83a9"
+        },
+        "gain": {
+          "dimensions": [
+            2016,
+            1512
+          ],
+          "sha256": "c6c52636838f91953938571dc83079675a39391259d9b8a7b668eab68fa4018a"
+        },
+        "key": "ants",
+        "role": "tone",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            576
+          ],
+          "sha256": "22fba9da923ca342ed198bfa0b9cc4797eef6868e7092d8f6beaaa98951f66f3"
+        },
+        "gain": {
+          "dimensions": [
+            2016,
+            1512
+          ],
+          "sha256": "c6c52636838f91953938571dc83079675a39391259d9b8a7b668eab68fa4018a"
+        },
+        "key": "ants",
+        "role": "resize",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            576
+          ],
+          "sha256": "16c5e76fbdd8dd59e4e79e8b33fdef18d580204ff9919921d717b4afa5cc274b"
+        },
+        "gain": {
+          "dimensions": [
+            2016,
+            1512
+          ],
+          "sha256": "c6c52636838f91953938571dc83079675a39391259d9b8a7b668eab68fa4018a"
+        },
+        "key": "ants",
+        "role": "sharpen",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            576,
+            432
+          ],
+          "sha256": "d4974533a60711c637b1fee3e3ca29b1a8fe1a60ce0bde05f63021f15e675b66"
+        },
+        "gain": {
+          "dimensions": [
+            1512,
+            1134
+          ],
+          "sha256": "0d2ade146f270701356f946158c61ef429badf8c35c6e58ceb220cb2007f237a"
+        },
+        "key": "ants",
+        "role": "aligned_crop",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            576,
+            768
+          ],
+          "sha256": "a7888841583917e4a1ed7ad52a6f4d0afc59e9fd53ce1b6f1e4c75d897d1e1ad"
+        },
+        "gain": {
+          "dimensions": [
+            1512,
+            2016
+          ],
+          "sha256": "42e244476405b2277ea4552a61801a9c37ab27cd664d02a10feb80043e9b8d5f"
+        },
+        "key": "ants",
+        "role": "aligned_rotation",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            576
+          ],
+          "sha256": "e2edc28eba4a2919be665e2edaf2bfc24fef8d6b32d6ca987c1eb34a987e444d"
+        },
+        "gain": {
+          "dimensions": [
+            2016,
+            1512
+          ],
+          "sha256": "c6c52636838f91953938571dc83079675a39391259d9b8a7b668eab68fa4018a"
+        },
+        "key": "ants",
+        "role": "highlight_edit",
+        "truth_pixels": 20153,
+        "truth_sha256": "244f4236bc1b6a306447615c9224cee1b5f99270dca3ef8e310d2bba4c779762"
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            576
+          ],
+          "sha256": "d6b1d2c311003c36bea0392875eb62b28428b2e201686e3a0c789adb55ae0834"
+        },
+        "gain": {
+          "dimensions": [
+            2016,
+            1512
+          ],
+          "sha256": "c6c52636838f91953938571dc83079675a39391259d9b8a7b668eab68fa4018a"
+        },
+        "key": "ants",
+        "role": "arbitrary_edit",
+        "truth_pixels": 20161,
+        "truth_sha256": "0b6ad36431199f13b8fd324ada7ba3db0039c07848ed3a648d9df1df37141c99"
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            576
+          ],
+          "sha256": "4f9fd1a935ba78f9753e94301c57b15eec81b48496f11c06b87e82b03d9731c4"
+        },
+        "gain": null,
+        "key": "ants",
+        "role": "no_gainmap",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": "4e995dbe8c1032cf78d45ce2c904fd45343baedfe28d7fd5044e725fea3a2190",
+        "base": {
+          "dimensions": [
+            4032,
+            3024
+          ],
+          "sha256": "95480eacd2cb2a0043105d9cdc265baa8ff5f6e36a3b14013d2cdd51057f1cf8"
+        },
+        "gain": {
+          "dimensions": [
+            2016,
+            1512
+          ],
+          "sha256": "fdbda9b74ccf9d6feab558e1fd3714ba23d93112f252b2ec49c4097310020358"
+        },
+        "key": "cable",
+        "role": "original",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            576
+          ],
+          "sha256": "95f16e477c1c6e78ba448e035215f5a528e4194a30988dcab46c492f35035a10"
+        },
+        "gain": {
+          "dimensions": [
+            2016,
+            1512
+          ],
+          "sha256": "fdbda9b74ccf9d6feab558e1fd3714ba23d93112f252b2ec49c4097310020358"
+        },
+        "key": "cable",
+        "role": "jpeg90",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            576
+          ],
+          "sha256": "0b0138a517ffe2cace9a44547c8cf2a29f3ccdf83c651b7583b83fc410604706"
+        },
+        "gain": {
+          "dimensions": [
+            2016,
+            1512
+          ],
+          "sha256": "fdbda9b74ccf9d6feab558e1fd3714ba23d93112f252b2ec49c4097310020358"
+        },
+        "key": "cable",
+        "role": "jpeg75",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            576
+          ],
+          "sha256": "6a3ce014f7dfb0165a0d91fd0cd5bdffa6976180955d6cbbe359c44de4944cb1"
+        },
+        "gain": {
+          "dimensions": [
+            2016,
+            1512
+          ],
+          "sha256": "fdbda9b74ccf9d6feab558e1fd3714ba23d93112f252b2ec49c4097310020358"
+        },
+        "key": "cable",
+        "role": "tone",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            576
+          ],
+          "sha256": "8389ece3959b9cc8c0cd8d75a446d5fce35a892bafd0b856b650196960c2a7b4"
+        },
+        "gain": {
+          "dimensions": [
+            2016,
+            1512
+          ],
+          "sha256": "fdbda9b74ccf9d6feab558e1fd3714ba23d93112f252b2ec49c4097310020358"
+        },
+        "key": "cable",
+        "role": "resize",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            576
+          ],
+          "sha256": "6f21cd0dd6fb9931c518ad7e8057beb5e19bc7cd35452e7434868cbdb696d9be"
+        },
+        "gain": {
+          "dimensions": [
+            2016,
+            1512
+          ],
+          "sha256": "fdbda9b74ccf9d6feab558e1fd3714ba23d93112f252b2ec49c4097310020358"
+        },
+        "key": "cable",
+        "role": "sharpen",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            576,
+            432
+          ],
+          "sha256": "ab5d2b024a3d9eda35458916881d8d6209aa9070c81a671f52156465233abaf1"
+        },
+        "gain": {
+          "dimensions": [
+            1512,
+            1134
+          ],
+          "sha256": "dd37f40a4e29b487db5a35e0f639f2ff7a00f6b6d0051cccf46aa1b8692d8f5a"
+        },
+        "key": "cable",
+        "role": "aligned_crop",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            576,
+            768
+          ],
+          "sha256": "caaf5b86aab5962a12f847c122f83e1b76acaade10fb8d95acae54c79b5ffa83"
+        },
+        "gain": {
+          "dimensions": [
+            1512,
+            2016
+          ],
+          "sha256": "472a5d4e57fb42499f05ccd287874a2fa139e3e074f7a38570a1317b9350ddb7"
+        },
+        "key": "cable",
+        "role": "aligned_rotation",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            576
+          ],
+          "sha256": "baddffd5b4f25993efd6b8d2d587f35f644bde8aceb4f7f65051dd9d3e8e28c6"
+        },
+        "gain": {
+          "dimensions": [
+            2016,
+            1512
+          ],
+          "sha256": "fdbda9b74ccf9d6feab558e1fd3714ba23d93112f252b2ec49c4097310020358"
+        },
+        "key": "cable",
+        "role": "highlight_edit",
+        "truth_pixels": 20160,
+        "truth_sha256": "ab889870cf550e430d0691a75a7787116b8fd7606bb6776c868ad76ab54cfb0b"
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            576
+          ],
+          "sha256": "aa908e9585fbaa6c5c20f53ef5a02876be0bcf25e6eb75cc97b9d5bbcd1114e8"
+        },
+        "gain": {
+          "dimensions": [
+            2016,
+            1512
+          ],
+          "sha256": "fdbda9b74ccf9d6feab558e1fd3714ba23d93112f252b2ec49c4097310020358"
+        },
+        "key": "cable",
+        "role": "arbitrary_edit",
+        "truth_pixels": 19433,
+        "truth_sha256": "b4374cc5e9380823ef66f23ec23d0e5c1e878520887d76850b2e983ca5bab13e"
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            576
+          ],
+          "sha256": "95f16e477c1c6e78ba448e035215f5a528e4194a30988dcab46c492f35035a10"
+        },
+        "gain": null,
+        "key": "cable",
+        "role": "no_gainmap",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": null,
+        "gain": null,
+        "key": "newman",
+        "role": "original",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": "c20feb644e8ce7040979e62bb10ff136687d008c66919da1135ce4896a689843",
+        "base": {
+          "dimensions": [
+            5712,
+            4284
+          ],
+          "sha256": "e04889a977d70624930ecbe273475eb0a638abd399404d5099e42844a576cb62"
+        },
+        "gain": {
+          "dimensions": [
+            2856,
+            2142
+          ],
+          "sha256": "348ef094eb5d5486d6bb88a265bbddb4386978a63269f468bc9647af6ac5229d"
+        },
+        "key": "shovel",
+        "role": "original",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            576
+          ],
+          "sha256": "7d60512189ff170920218692215a1fd8f2abcbd645ffd63cc5049c50834e0d42"
+        },
+        "gain": {
+          "dimensions": [
+            2856,
+            2142
+          ],
+          "sha256": "348ef094eb5d5486d6bb88a265bbddb4386978a63269f468bc9647af6ac5229d"
+        },
+        "key": "shovel",
+        "role": "jpeg90",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            576
+          ],
+          "sha256": "6afdd9bfd9de5f6f6535f5cbf18b227e456bd1631c9f4bfc59f8857b02066d58"
+        },
+        "gain": {
+          "dimensions": [
+            2856,
+            2142
+          ],
+          "sha256": "348ef094eb5d5486d6bb88a265bbddb4386978a63269f468bc9647af6ac5229d"
+        },
+        "key": "shovel",
+        "role": "jpeg75",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            576
+          ],
+          "sha256": "eb369d95e3baa467ae4c08c9f84390e53b54e5b8e685bc4b11fb8cf79d05c9a6"
+        },
+        "gain": {
+          "dimensions": [
+            2856,
+            2142
+          ],
+          "sha256": "348ef094eb5d5486d6bb88a265bbddb4386978a63269f468bc9647af6ac5229d"
+        },
+        "key": "shovel",
+        "role": "tone",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            576
+          ],
+          "sha256": "d1209278543412a83d2035a303a4aeb527b7bf5211b5cae9eb8b5df2c3f8d1a8"
+        },
+        "gain": {
+          "dimensions": [
+            2856,
+            2142
+          ],
+          "sha256": "348ef094eb5d5486d6bb88a265bbddb4386978a63269f468bc9647af6ac5229d"
+        },
+        "key": "shovel",
+        "role": "resize",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            576
+          ],
+          "sha256": "306d9a0eb9aa904f4195ef8c248979b3aa2af7934b3ecee8e634d7a2fb5840d8"
+        },
+        "gain": {
+          "dimensions": [
+            2856,
+            2142
+          ],
+          "sha256": "348ef094eb5d5486d6bb88a265bbddb4386978a63269f468bc9647af6ac5229d"
+        },
+        "key": "shovel",
+        "role": "sharpen",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            576,
+            432
+          ],
+          "sha256": "72e60ac631dff3664563eab9b08e40b499aa3e864e8282f80f19df6b96d92e8c"
+        },
+        "gain": {
+          "dimensions": [
+            2142,
+            1606
+          ],
+          "sha256": "5d5d63812fd2d8f4855c4547024e3b57944de405f1b615737fb11653be432413"
+        },
+        "key": "shovel",
+        "role": "aligned_crop",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            576,
+            768
+          ],
+          "sha256": "0c1727ebbe639654f53fb9354e0e7bb0d44d22fcd5d47e609682e1ad70260ae5"
+        },
+        "gain": {
+          "dimensions": [
+            2142,
+            2856
+          ],
+          "sha256": "164fa31cd65de7ef7bbb3028ffddacf2552cef26406b8da5a19a54c5968920cb"
+        },
+        "key": "shovel",
+        "role": "aligned_rotation",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            576
+          ],
+          "sha256": "2ad75722910f07245a486db20b52780eefe33a4921c016b125f2104c4345890b"
+        },
+        "gain": {
+          "dimensions": [
+            2856,
+            2142
+          ],
+          "sha256": "348ef094eb5d5486d6bb88a265bbddb4386978a63269f468bc9647af6ac5229d"
+        },
+        "key": "shovel",
+        "role": "highlight_edit",
+        "truth_pixels": 20154,
+        "truth_sha256": "9990fef659cabba4e497d49cc811a89d18bd05aa3f4d3651296a66c12c12c86b"
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            576
+          ],
+          "sha256": "d3a19d6c32a7fd7c6062e9d4795560e78f62ac0d94ae877e5ad738f0989a7397"
+        },
+        "gain": {
+          "dimensions": [
+            2856,
+            2142
+          ],
+          "sha256": "348ef094eb5d5486d6bb88a265bbddb4386978a63269f468bc9647af6ac5229d"
+        },
+        "key": "shovel",
+        "role": "arbitrary_edit",
+        "truth_pixels": 20142,
+        "truth_sha256": "696fee33dc09048a52ce6708163e0ebd97b2e5302faa8ef1bce300662e198e1e"
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            576
+          ],
+          "sha256": "7d60512189ff170920218692215a1fd8f2abcbd645ffd63cc5049c50834e0d42"
+        },
+        "gain": null,
+        "key": "shovel",
+        "role": "no_gainmap",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": "d2999bbcb114205254a723724919e7a2ee2869fdd405abc81d4a80cba1da47fc",
+        "base": {
+          "dimensions": [
+            4032,
+            3024
+          ],
+          "sha256": "1484c51aa7aa1a181e9bddb382fa4467eb0b5f659d640e3266192acd43448c63"
+        },
+        "gain": {
+          "dimensions": [
+            2016,
+            1512
+          ],
+          "sha256": "1cbf77524be951462e7bad641a4659be0fd943d097cea246d6e2548a952793cb"
+        },
+        "key": "nests",
+        "role": "original",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            576
+          ],
+          "sha256": "43f5790165a8c1796f2110a933faa0136bc59500581fbf7430d7e9d7f9809003"
+        },
+        "gain": {
+          "dimensions": [
+            2016,
+            1512
+          ],
+          "sha256": "1cbf77524be951462e7bad641a4659be0fd943d097cea246d6e2548a952793cb"
+        },
+        "key": "nests",
+        "role": "jpeg90",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            576
+          ],
+          "sha256": "a1b48f1651a0a5ccc6190ceb132de8bc33636190ea72282bea8de0e858e912cc"
+        },
+        "gain": {
+          "dimensions": [
+            2016,
+            1512
+          ],
+          "sha256": "1cbf77524be951462e7bad641a4659be0fd943d097cea246d6e2548a952793cb"
+        },
+        "key": "nests",
+        "role": "jpeg75",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            576
+          ],
+          "sha256": "b8542c19542b8aa5095a33b00ca29927a9ef95aa30557d5f4ecefa391cccf4df"
+        },
+        "gain": {
+          "dimensions": [
+            2016,
+            1512
+          ],
+          "sha256": "1cbf77524be951462e7bad641a4659be0fd943d097cea246d6e2548a952793cb"
+        },
+        "key": "nests",
+        "role": "tone",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            576
+          ],
+          "sha256": "191cc6b23f77f533edd16bae7b9659dcd5ba2dd8ea08a91951200ca2598045b6"
+        },
+        "gain": {
+          "dimensions": [
+            2016,
+            1512
+          ],
+          "sha256": "1cbf77524be951462e7bad641a4659be0fd943d097cea246d6e2548a952793cb"
+        },
+        "key": "nests",
+        "role": "resize",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            576
+          ],
+          "sha256": "b52bb1cf9a797a75505ec1bc0a4358b795a2fd01b300e17f3419d44bf629e2bb"
+        },
+        "gain": {
+          "dimensions": [
+            2016,
+            1512
+          ],
+          "sha256": "1cbf77524be951462e7bad641a4659be0fd943d097cea246d6e2548a952793cb"
+        },
+        "key": "nests",
+        "role": "sharpen",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            576,
+            432
+          ],
+          "sha256": "1b87500bec612773965db8ff5ebd5e58d994890f8447a7ef7e9859846eb796ad"
+        },
+        "gain": {
+          "dimensions": [
+            1512,
+            1134
+          ],
+          "sha256": "c2e1c2372b9d31bdb500ed39247b3f68602331edd06e7b8ed7616368214f55dc"
+        },
+        "key": "nests",
+        "role": "aligned_crop",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            576,
+            768
+          ],
+          "sha256": "53b612c3d98f21401732e1fd18a2f0011019633e01b0ab409f3fc4957875cf9d"
+        },
+        "gain": {
+          "dimensions": [
+            1512,
+            2016
+          ],
+          "sha256": "7ec909d088d248b85caf8d8a98e42dda1012e849b41ea84aab6571168f5c3350"
+        },
+        "key": "nests",
+        "role": "aligned_rotation",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            576
+          ],
+          "sha256": "736c963f4a7af4a6613461abbf189594f804cb8e3fafcc57d5d3868e950cebb1"
+        },
+        "gain": {
+          "dimensions": [
+            2016,
+            1512
+          ],
+          "sha256": "1cbf77524be951462e7bad641a4659be0fd943d097cea246d6e2548a952793cb"
+        },
+        "key": "nests",
+        "role": "highlight_edit",
+        "truth_pixels": 20159,
+        "truth_sha256": "1b002c510977c741a45e9069f81ce547d597886e5b283ef69f31b02ba4bae7f2"
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            576
+          ],
+          "sha256": "cd002a76139e64a5b4df1e318d85080f3f2711fb3bd9d12c2621be24ce5bbd8a"
+        },
+        "gain": {
+          "dimensions": [
+            2016,
+            1512
+          ],
+          "sha256": "1cbf77524be951462e7bad641a4659be0fd943d097cea246d6e2548a952793cb"
+        },
+        "key": "nests",
+        "role": "arbitrary_edit",
+        "truth_pixels": 20145,
+        "truth_sha256": "ae2a8bf015f105778017b0eb79b799720764208edb4afd9599c698b4bab7394d"
+      },
+      {
+        "auxiliary_sha256": null,
+        "base": {
+          "dimensions": [
+            768,
+            576
+          ],
+          "sha256": "43f5790165a8c1796f2110a933faa0136bc59500581fbf7430d7e9d7f9809003"
+        },
+        "gain": null,
+        "key": "nests",
+        "role": "no_gainmap",
+        "truth_pixels": 0,
+        "truth_sha256": null
+      }
+    ]
+  },
+  "measured": [
+    {
+      "key": "prague",
+      "role": "original",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            595,
+            425,
+            1360,
+            1191
+          ],
+          "hit": 0,
+          "score": "0x1.116f3c33c33c4p+0"
+        },
+        "orphan_edge": {
+          "box": [
+            2550,
+            2126,
+            2975,
+            2551
+          ],
+          "hit": 0,
+          "score": "0x1.064c2d523219cp-1"
+        }
+      }
+    },
+    {
+      "key": "prague",
+      "role": "jpeg90",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            112,
+            80,
+            256,
+            224
+          ],
+          "hit": 0,
+          "score": "0x1.12320c4fd40c5p+0"
+        },
+        "orphan_edge": {
+          "box": [
+            480,
+            400,
+            560,
+            480
+          ],
+          "hit": 0,
+          "score": "0x1.1e1cbb78aacf2p-1"
+        }
+      }
+    },
+    {
+      "key": "prague",
+      "role": "jpeg75",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            112,
+            80,
+            256,
+            224
+          ],
+          "hit": 0,
+          "score": "0x1.11ee6b6e3e6b6p+0"
+        },
+        "orphan_edge": {
+          "box": [
+            64,
+            320,
+            144,
+            400
+          ],
+          "hit": 0,
+          "score": "0x1.078424ef751cap-1"
+        }
+      }
+    },
+    {
+      "key": "prague",
+      "role": "tone",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            112,
+            80,
+            256,
+            224
+          ],
+          "hit": 0,
+          "score": "0x1.131f5afb555b0p+0"
+        },
+        "orphan_edge": {
+          "box": [
+            480,
+            400,
+            560,
+            480
+          ],
+          "hit": 0,
+          "score": "0x1.1d2416a715ec7p-1"
+        }
+      }
+    },
+    {
+      "key": "prague",
+      "role": "resize",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            112,
+            80,
+            256,
+            224
+          ],
+          "hit": 0,
+          "score": "0x1.136b4f98bd4f9p+0"
+        },
+        "orphan_edge": {
+          "box": [
+            480,
+            400,
+            560,
+            480
+          ],
+          "hit": 0,
+          "score": "0x1.1d2416a715ec7p-1"
+        }
+      }
+    },
+    {
+      "key": "prague",
+      "role": "sharpen",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            112,
+            80,
+            256,
+            224
+          ],
+          "hit": 0,
+          "score": "0x1.0cdf8c07cf8c0p+0"
+        },
+        "orphan_edge": {
+          "box": [
+            480,
+            400,
+            560,
+            480
+          ],
+          "hit": 0,
+          "score": "0x1.2921e22512dacp-1"
+        }
+      }
+    },
+    {
+      "key": "prague",
+      "role": "aligned_crop",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            324,
+            312,
+            384,
+            372
+          ],
+          "hit": 0,
+          "score": "0x1.130c63aedec66p+0"
+        },
+        "orphan_edge": {
+          "box": [
+            384,
+            324,
+            444,
+            384
+          ],
+          "hit": 0,
+          "score": "0x1.ebfc9b96204c8p-2"
+        }
+      }
+    },
+    {
+      "key": "prague",
+      "role": "aligned_rotation",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            80,
+            512,
+            224,
+            656
+          ],
+          "hit": 0,
+          "score": "0x1.11b17bac0e0bap+0"
+        },
+        "orphan_edge": {
+          "box": [
+            320,
+            624,
+            400,
+            704
+          ],
+          "hit": 0,
+          "score": "0x1.004cbacc4c215p-1"
+        }
+      }
+    },
+    {
+      "key": "prague",
+      "role": "highlight_edit",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            288,
+            384,
+            464,
+            528
+          ],
+          "hit": 1008,
+          "score": "0x1.9d83943f90fa7p-1"
+        },
+        "orphan_edge": {
+          "box": [
+            416,
+            304,
+            528,
+            384
+          ],
+          "hit": 8960,
+          "score": "0x1.5a6a4efda99c2p-1"
+        }
+      }
+    },
+    {
+      "key": "prague",
+      "role": "arbitrary_edit",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            176,
+            336,
+            320,
+            448
+          ],
+          "hit": 14218,
+          "score": "0x1.cea8f85ae97a8p+0"
+        },
+        "orphan_edge": {
+          "box": [
+            208,
+            320,
+            320,
+            400
+          ],
+          "hit": 8736,
+          "score": "0x1.b0628b14b5c63p-1"
+        }
+      }
+    },
+    {
+      "key": "prague",
+      "role": "no_gainmap",
+      "scores": null
+    },
+    {
+      "key": "heysong",
+      "role": "original",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            1020,
+            170,
+            1445,
+            595
+          ],
+          "hit": 0,
+          "score": "0x1.1d49582a7d583p+1"
+        },
+        "orphan_edge": {
+          "box": [
+            765,
+            340,
+            1190,
+            765
+          ],
+          "hit": 0,
+          "score": "0x1.55656ac80126ap-1"
+        }
+      }
+    },
+    {
+      "key": "heysong",
+      "role": "jpeg90",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            192,
+            32,
+            272,
+            112
+          ],
+          "hit": 0,
+          "score": "0x1.1ae0d77288d77p+1"
+        },
+        "orphan_edge": {
+          "box": [
+            144,
+            64,
+            224,
+            144
+          ],
+          "hit": 0,
+          "score": "0x1.55656ac80126ap-1"
+        }
+      }
+    },
+    {
+      "key": "heysong",
+      "role": "jpeg75",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            192,
+            32,
+            272,
+            112
+          ],
+          "hit": 0,
+          "score": "0x1.196a147eb8148p+1"
+        },
+        "orphan_edge": {
+          "box": [
+            144,
+            64,
+            224,
+            144
+          ],
+          "hit": 0,
+          "score": "0x1.597f27b532c1ap-1"
+        }
+      }
+    },
+    {
+      "key": "heysong",
+      "role": "tone",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            192,
+            32,
+            272,
+            112
+          ],
+          "hit": 0,
+          "score": "0x1.1aaccd9326cd9p+1"
+        },
+        "orphan_edge": {
+          "box": [
+            144,
+            64,
+            224,
+            144
+          ],
+          "hit": 0,
+          "score": "0x1.55656ac80126ap-1"
+        }
+      }
+    },
+    {
+      "key": "heysong",
+      "role": "resize",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            192,
+            32,
+            272,
+            112
+          ],
+          "hit": 0,
+          "score": "0x1.1d657f480b7f4p+1"
+        },
+        "orphan_edge": {
+          "box": [
+            144,
+            64,
+            224,
+            144
+          ],
+          "hit": 0,
+          "score": "0x1.55656ac80126ap-1"
+        }
+      }
+    },
+    {
+      "key": "heysong",
+      "role": "sharpen",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            192,
+            32,
+            272,
+            112
+          ],
+          "hit": 0,
+          "score": "0x1.16b97dc8237dcp+1"
+        },
+        "orphan_edge": {
+          "box": [
+            144,
+            64,
+            224,
+            144
+          ],
+          "hit": 0,
+          "score": "0x1.55656ac80126ap-1"
+        }
+      }
+    },
+    {
+      "key": "heysong",
+      "role": "aligned_crop",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            180,
+            60,
+            240,
+            144
+          ],
+          "hit": 0,
+          "score": "0x1.33cbca5049c54p+0"
+        },
+        "orphan_edge": {
+          "box": [
+            396,
+            36,
+            456,
+            120
+          ],
+          "hit": 0,
+          "score": "0x1.0e2e1f970955fp-1"
+        }
+      }
+    },
+    {
+      "key": "heysong",
+      "role": "aligned_rotation",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            32,
+            496,
+            112,
+            576
+          ],
+          "hit": 0,
+          "score": "0x1.185922e2e2e2fp+1"
+        },
+        "orphan_edge": {
+          "box": [
+            64,
+            544,
+            144,
+            624
+          ],
+          "hit": 0,
+          "score": "0x1.597f27b532c1ap-1"
+        }
+      }
+    },
+    {
+      "key": "heysong",
+      "role": "highlight_edit",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            192,
+            32,
+            272,
+            112
+          ],
+          "hit": 0,
+          "score": "0x1.d89d69a96569ap+0"
+        },
+        "orphan_edge": {
+          "box": [
+            144,
+            64,
+            224,
+            144
+          ],
+          "hit": 0,
+          "score": "0x1.55656ac80126ap-1"
+        }
+      }
+    },
+    {
+      "key": "heysong",
+      "role": "arbitrary_edit",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            112,
+            64,
+            256,
+            240
+          ],
+          "hit": 11297,
+          "score": "0x1.7a29058f0a211p+0"
+        },
+        "orphan_edge": {
+          "box": [
+            224,
+            112,
+            304,
+            224
+          ],
+          "hit": 8960,
+          "score": "0x1.7dcd61f8aad6bp-1"
+        }
+      }
+    },
+    {
+      "key": "heysong",
+      "role": "no_gainmap",
+      "scores": null
+    },
+    {
+      "key": "ontario",
+      "role": "original",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            2211,
+            1020,
+            3061,
+            1870
+          ],
+          "hit": 0,
+          "score": "0x1.1c45f7d837b21p+1"
+        },
+        "orphan_edge": {
+          "box": [
+            2381,
+            2550,
+            3231,
+            3400
+          ],
+          "hit": 0,
+          "score": "0x1.e35a5c78a03a8p-2"
+        }
+      }
+    },
+    {
+      "key": "ontario",
+      "role": "jpeg90",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            208,
+            96,
+            288,
+            176
+          ],
+          "hit": 0,
+          "score": "0x1.1bf4d272f8a3fp+1"
+        },
+        "orphan_edge": {
+          "box": [
+            224,
+            240,
+            304,
+            320
+          ],
+          "hit": 0,
+          "score": "0x1.f7c82aacf99aep-2"
+        }
+      }
+    },
+    {
+      "key": "ontario",
+      "role": "jpeg75",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            208,
+            96,
+            288,
+            176
+          ],
+          "hit": 0,
+          "score": "0x1.1c938f049331fp+1"
+        },
+        "orphan_edge": {
+          "box": [
+            224,
+            240,
+            304,
+            320
+          ],
+          "hit": 0,
+          "score": "0x1.dea13ee62669cp-2"
+        }
+      }
+    },
+    {
+      "key": "ontario",
+      "role": "tone",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            208,
+            96,
+            288,
+            176
+          ],
+          "hit": 0,
+          "score": "0x1.233b5cb16dffap+1"
+        },
+        "orphan_edge": {
+          "box": [
+            224,
+            240,
+            304,
+            320
+          ],
+          "hit": 0,
+          "score": "0x1.f30f0d1a7fca0p-2"
+        }
+      }
+    },
+    {
+      "key": "ontario",
+      "role": "resize",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            208,
+            96,
+            288,
+            176
+          ],
+          "hit": 0,
+          "score": "0x1.1c779e229c585p+1"
+        },
+        "orphan_edge": {
+          "box": [
+            224,
+            240,
+            304,
+            320
+          ],
+          "hit": 0,
+          "score": "0x1.f59cc6e10af60p-2"
+        }
+      }
+    },
+    {
+      "key": "ontario",
+      "role": "sharpen",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            208,
+            96,
+            288,
+            176
+          ],
+          "hit": 0,
+          "score": "0x1.1eddff9a282e2p+1"
+        },
+        "orphan_edge": {
+          "box": [
+            224,
+            240,
+            304,
+            320
+          ],
+          "hit": 0,
+          "score": "0x1.f30f0d1a7fca0p-2"
+        }
+      }
+    },
+    {
+      "key": "ontario",
+      "role": "aligned_crop",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            144,
+            396,
+            204,
+            456
+          ],
+          "hit": 0,
+          "score": "0x1.166ea8eae9182p+1"
+        },
+        "orphan_edge": {
+          "box": [
+            72,
+            216,
+            132,
+            276
+          ],
+          "hit": 0,
+          "score": "0x1.ffb7af35be0a5p-2"
+        }
+      }
+    },
+    {
+      "key": "ontario",
+      "role": "aligned_rotation",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            96,
+            288,
+            176,
+            368
+          ],
+          "hit": 0,
+          "score": "0x1.16e63e81fc52bp+1"
+        },
+        "orphan_edge": {
+          "box": [
+            240,
+            272,
+            320,
+            352
+          ],
+          "hit": 0,
+          "score": "0x1.df263473cb5dcp-2"
+        }
+      }
+    },
+    {
+      "key": "ontario",
+      "role": "highlight_edit",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            208,
+            96,
+            288,
+            176
+          ],
+          "hit": 0,
+          "score": "0x1.1e546a9defb07p+1"
+        },
+        "orphan_edge": {
+          "box": [
+            320,
+            288,
+            400,
+            368
+          ],
+          "hit": 6400,
+          "score": "0x1.755bd1c945edcp-1"
+        }
+      }
+    },
+    {
+      "key": "ontario",
+      "role": "arbitrary_edit",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            208,
+            96,
+            288,
+            176
+          ],
+          "hit": 0,
+          "score": "0x1.1c05b79890ceep+1"
+        },
+        "orphan_edge": {
+          "box": [
+            176,
+            624,
+            256,
+            704
+          ],
+          "hit": 6400,
+          "score": "0x1.557f24805e122p-1"
+        }
+      }
+    },
+    {
+      "key": "ontario",
+      "role": "no_gainmap",
+      "scores": null
+    },
+    {
+      "key": "turbine",
+      "role": "original",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            667,
+            1917,
+            1250,
+            2333
+          ],
+          "hit": 0,
+          "score": "0x1.4953a6479b3ddp-1"
+        },
+        "orphan_edge": {
+          "box": null,
+          "hit": 0,
+          "score": "0x0.0p+0"
+        }
+      }
+    },
+    {
+      "key": "turbine",
+      "role": "jpeg90",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            128,
+            368,
+            240,
+            448
+          ],
+          "hit": 0,
+          "score": "0x1.477898c0a8e29p-1"
+        },
+        "orphan_edge": {
+          "box": null,
+          "hit": 0,
+          "score": "0x0.0p+0"
+        }
+      }
+    },
+    {
+      "key": "turbine",
+      "role": "jpeg75",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            128,
+            368,
+            240,
+            448
+          ],
+          "hit": 0,
+          "score": "0x1.4872f0c651fecp-1"
+        },
+        "orphan_edge": {
+          "box": null,
+          "hit": 0,
+          "score": "0x0.0p+0"
+        }
+      }
+    },
+    {
+      "key": "turbine",
+      "role": "tone",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            128,
+            368,
+            240,
+            448
+          ],
+          "hit": 0,
+          "score": "0x1.2ac41cd1acbd5p-1"
+        },
+        "orphan_edge": {
+          "box": null,
+          "hit": 0,
+          "score": "0x0.0p+0"
+        }
+      }
+    },
+    {
+      "key": "turbine",
+      "role": "resize",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            128,
+            368,
+            240,
+            448
+          ],
+          "hit": 0,
+          "score": "0x1.49ee227685ce7p-1"
+        },
+        "orphan_edge": {
+          "box": null,
+          "hit": 0,
+          "score": "0x0.0p+0"
+        }
+      }
+    },
+    {
+      "key": "turbine",
+      "role": "sharpen",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            128,
+            368,
+            240,
+            448
+          ],
+          "hit": 0,
+          "score": "0x1.4907f78f1f0abp-1"
+        },
+        "orphan_edge": {
+          "box": null,
+          "hit": 0,
+          "score": "0x0.0p+0"
+        }
+      }
+    },
+    {
+      "key": "turbine",
+      "role": "aligned_crop",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            36,
+            288,
+            96,
+            348
+          ],
+          "hit": 0,
+          "score": "0x1.e8773215f94b5p-1"
+        },
+        "orphan_edge": {
+          "box": null,
+          "hit": 0,
+          "score": "0x0.0p+0"
+        }
+      }
+    },
+    {
+      "key": "turbine",
+      "role": "aligned_rotation",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            368,
+            528,
+            448,
+            640
+          ],
+          "hit": 0,
+          "score": "0x1.483950abf2d8fp-1"
+        },
+        "orphan_edge": {
+          "box": null,
+          "hit": 0,
+          "score": "0x0.0p+0"
+        }
+      }
+    },
+    {
+      "key": "turbine",
+      "role": "highlight_edit",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            304,
+            64,
+            448,
+            208
+          ],
+          "hit": 20164,
+          "score": "0x1.361093f16aecbp+1"
+        },
+        "orphan_edge": {
+          "box": null,
+          "hit": 0,
+          "score": "0x0.0p+0"
+        }
+      }
+    },
+    {
+      "key": "turbine",
+      "role": "arbitrary_edit",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            432,
+            176,
+            576,
+            320
+          ],
+          "hit": 20162,
+          "score": "0x1.2280084b76488p+1"
+        },
+        "orphan_edge": {
+          "box": null,
+          "hit": 0,
+          "score": "0x0.0p+0"
+        }
+      }
+    },
+    {
+      "key": "turbine",
+      "role": "no_gainmap",
+      "scores": null
+    },
+    {
+      "key": "berlin",
+      "role": "original",
+      "scores": null
+    },
+    {
+      "key": "ants",
+      "role": "original",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            1596,
+            2352,
+            2016,
+            2772
+          ],
+          "hit": 0,
+          "score": "0x1.bf67d04ab77d4p-3"
+        },
+        "orphan_edge": {
+          "box": [
+            924,
+            1512,
+            1344,
+            1932
+          ],
+          "hit": 0,
+          "score": "0x1.0fbdcb670c6a8p-3"
+        }
+      }
+    },
+    {
+      "key": "ants",
+      "role": "jpeg90",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            304,
+            448,
+            384,
+            528
+          ],
+          "hit": 0,
+          "score": "0x1.bcd23d9c93048p-3"
+        },
+        "orphan_edge": {
+          "box": [
+            176,
+            288,
+            256,
+            368
+          ],
+          "hit": 0,
+          "score": "0x1.0fbdcb670c6a8p-3"
+        }
+      }
+    },
+    {
+      "key": "ants",
+      "role": "jpeg75",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            304,
+            448,
+            384,
+            528
+          ],
+          "hit": 0,
+          "score": "0x1.b538bcd9ddd20p-3"
+        },
+        "orphan_edge": {
+          "box": [
+            176,
+            288,
+            256,
+            368
+          ],
+          "hit": 0,
+          "score": "0x1.0fbdcb670c6a8p-3"
+        }
+      }
+    },
+    {
+      "key": "ants",
+      "role": "tone",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            304,
+            448,
+            384,
+            528
+          ],
+          "hit": 0,
+          "score": "0x1.c59fd3440c6f0p-3"
+        },
+        "orphan_edge": {
+          "box": [
+            176,
+            288,
+            256,
+            368
+          ],
+          "hit": 0,
+          "score": "0x1.0fbdcb670c6a8p-3"
+        }
+      }
+    },
+    {
+      "key": "ants",
+      "role": "resize",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            304,
+            448,
+            384,
+            528
+          ],
+          "hit": 0,
+          "score": "0x1.c3b6340cd1ad4p-3"
+        },
+        "orphan_edge": {
+          "box": [
+            176,
+            288,
+            256,
+            368
+          ],
+          "hit": 0,
+          "score": "0x1.0fbdcb670c6a8p-3"
+        }
+      }
+    },
+    {
+      "key": "ants",
+      "role": "sharpen",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            304,
+            448,
+            384,
+            528
+          ],
+          "hit": 0,
+          "score": "0x1.979233e3c5658p-3"
+        },
+        "orphan_edge": {
+          "box": [
+            176,
+            288,
+            256,
+            368
+          ],
+          "hit": 0,
+          "score": "0x1.0fbdcb670c6a8p-3"
+        }
+      }
+    },
+    {
+      "key": "ants",
+      "role": "aligned_crop",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            336,
+            336,
+            396,
+            396
+          ],
+          "hit": 0,
+          "score": "0x1.0fe596ee6c856p-2"
+        },
+        "orphan_edge": {
+          "box": [
+            84,
+            204,
+            144,
+            288
+          ],
+          "hit": 0,
+          "score": "0x1.1dc47711dc477p-3"
+        }
+      }
+    },
+    {
+      "key": "ants",
+      "role": "aligned_rotation",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            448,
+            384,
+            528,
+            464
+          ],
+          "hit": 0,
+          "score": "0x1.c5b1e3668df54p-3"
+        },
+        "orphan_edge": {
+          "box": [
+            288,
+            512,
+            368,
+            592
+          ],
+          "hit": 0,
+          "score": "0x1.df1df5659954bp-4"
+        }
+      }
+    },
+    {
+      "key": "ants",
+      "role": "highlight_edit",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            64,
+            352,
+            208,
+            496
+          ],
+          "hit": 20153,
+          "score": "0x1.07a3ae2466b5fp+1"
+        },
+        "orphan_edge": {
+          "box": [
+            64,
+            352,
+            208,
+            496
+          ],
+          "hit": 20153,
+          "score": "0x1.72b015c91355ap-1"
+        }
+      }
+    },
+    {
+      "key": "ants",
+      "role": "arbitrary_edit",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            176,
+            320,
+            320,
+            464
+          ],
+          "hit": 20161,
+          "score": "0x1.f44da6902c9c6p+0"
+        },
+        "orphan_edge": {
+          "box": [
+            176,
+            336,
+            320,
+            448
+          ],
+          "hit": 15904,
+          "score": "0x1.c88b97c88b97dp-1"
+        }
+      }
+    },
+    {
+      "key": "ants",
+      "role": "no_gainmap",
+      "scores": null
+    },
+    {
+      "key": "cable",
+      "role": "original",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            2016,
+            1344,
+            2940,
+            2100
+          ],
+          "hit": 0,
+          "score": "0x1.40de8d9f92264p+0"
+        },
+        "orphan_edge": {
+          "box": null,
+          "hit": 0,
+          "score": "0x0.0p+0"
+        }
+      }
+    },
+    {
+      "key": "cable",
+      "role": "jpeg90",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            384,
+            256,
+            560,
+            400
+          ],
+          "hit": 0,
+          "score": "0x1.421db22be7214p+0"
+        },
+        "orphan_edge": {
+          "box": null,
+          "hit": 0,
+          "score": "0x0.0p+0"
+        }
+      }
+    },
+    {
+      "key": "cable",
+      "role": "jpeg75",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            384,
+            256,
+            560,
+            400
+          ],
+          "hit": 0,
+          "score": "0x1.41f2bb08710ecp+0"
+        },
+        "orphan_edge": {
+          "box": null,
+          "hit": 0,
+          "score": "0x0.0p+0"
+        }
+      }
+    },
+    {
+      "key": "cable",
+      "role": "tone",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            384,
+            256,
+            560,
+            400
+          ],
+          "hit": 0,
+          "score": "0x1.1cc79bb9e61e5p+0"
+        },
+        "orphan_edge": {
+          "box": null,
+          "hit": 0,
+          "score": "0x0.0p+0"
+        }
+      }
+    },
+    {
+      "key": "cable",
+      "role": "resize",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            384,
+            256,
+            560,
+            400
+          ],
+          "hit": 0,
+          "score": "0x1.4144a45e089d2p+0"
+        },
+        "orphan_edge": {
+          "box": null,
+          "hit": 0,
+          "score": "0x0.0p+0"
+        }
+      }
+    },
+    {
+      "key": "cable",
+      "role": "sharpen",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            384,
+            256,
+            560,
+            400
+          ],
+          "hit": 0,
+          "score": "0x1.41af0c18bceb6p+0"
+        },
+        "orphan_edge": {
+          "box": null,
+          "hit": 0,
+          "score": "0x0.0p+0"
+        }
+      }
+    },
+    {
+      "key": "cable",
+      "role": "aligned_crop",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            300,
+            264,
+            432,
+            372
+          ],
+          "hit": 0,
+          "score": "0x1.bd0c041317d4cp-1"
+        },
+        "orphan_edge": {
+          "box": null,
+          "hit": 0,
+          "score": "0x0.0p+0"
+        }
+      }
+    },
+    {
+      "key": "cable",
+      "role": "aligned_rotation",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            256,
+            208,
+            400,
+            384
+          ],
+          "hit": 0,
+          "score": "0x1.41c05d03f716ap+0"
+        },
+        "orphan_edge": {
+          "box": null,
+          "hit": 0,
+          "score": "0x0.0p+0"
+        }
+      }
+    },
+    {
+      "key": "cable",
+      "role": "highlight_edit",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            160,
+            64,
+            304,
+            208
+          ],
+          "hit": 20160,
+          "score": "0x1.42a9cd74b8ff0p+1"
+        },
+        "orphan_edge": {
+          "box": null,
+          "hit": 0,
+          "score": "0x0.0p+0"
+        }
+      }
+    },
+    {
+      "key": "cable",
+      "role": "arbitrary_edit",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            384,
+            256,
+            560,
+            400
+          ],
+          "hit": 1440,
+          "score": "0x1.421db22be7214p+0"
+        },
+        "orphan_edge": {
+          "box": [
+            320,
+            400,
+            432,
+            480
+          ],
+          "hit": 7556,
+          "score": "0x1.892c8f4a44267p-1"
+        }
+      }
+    },
+    {
+      "key": "cable",
+      "role": "no_gainmap",
+      "scores": null
+    },
+    {
+      "key": "newman",
+      "role": "original",
+      "scores": null
+    },
+    {
+      "key": "shovel",
+      "role": "original",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            3213,
+            1428,
+            4046,
+            2023
+          ],
+          "hit": 0,
+          "score": "0x1.474d3a7ae1fb4p-2"
+        },
+        "orphan_edge": {
+          "box": [
+            2023,
+            2261,
+            2618,
+            2856
+          ],
+          "hit": 0,
+          "score": "0x1.790d86e0d5db9p-2"
+        }
+      }
+    },
+    {
+      "key": "shovel",
+      "role": "jpeg90",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            432,
+            192,
+            544,
+            272
+          ],
+          "hit": 0,
+          "score": "0x1.472dd5c972a9fp-2"
+        },
+        "orphan_edge": {
+          "box": [
+            272,
+            304,
+            352,
+            384
+          ],
+          "hit": 0,
+          "score": "0x1.790d86e0d5db9p-2"
+        }
+      }
+    },
+    {
+      "key": "shovel",
+      "role": "jpeg75",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            432,
+            192,
+            544,
+            272
+          ],
+          "hit": 0,
+          "score": "0x1.2ceb064939a15p-2"
+        },
+        "orphan_edge": {
+          "box": [
+            272,
+            304,
+            352,
+            384
+          ],
+          "hit": 0,
+          "score": "0x1.65a785359c212p-2"
+        }
+      }
+    },
+    {
+      "key": "shovel",
+      "role": "tone",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            432,
+            192,
+            544,
+            272
+          ],
+          "hit": 0,
+          "score": "0x1.3fa01ac30d5c6p-2"
+        },
+        "orphan_edge": {
+          "box": [
+            272,
+            304,
+            352,
+            384
+          ],
+          "hit": 0,
+          "score": "0x1.6f44f76347ff7p-2"
+        }
+      }
+    },
+    {
+      "key": "shovel",
+      "role": "resize",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            432,
+            192,
+            544,
+            272
+          ],
+          "hit": 0,
+          "score": "0x1.46b76b1c00af8p-2"
+        },
+        "orphan_edge": {
+          "box": [
+            272,
+            304,
+            352,
+            384
+          ],
+          "hit": 0,
+          "score": "0x1.6f7014b329fd4p-2"
+        }
+      }
+    },
+    {
+      "key": "shovel",
+      "role": "sharpen",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            432,
+            192,
+            544,
+            272
+          ],
+          "hit": 0,
+          "score": "0x1.2fe822d2ca90bp-2"
+        },
+        "orphan_edge": {
+          "box": [
+            272,
+            304,
+            352,
+            384
+          ],
+          "hit": 0,
+          "score": "0x1.790d86e0d5db9p-2"
+        }
+      }
+    },
+    {
+      "key": "shovel",
+      "role": "aligned_crop",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            432,
+            132,
+            492,
+            192
+          ],
+          "hit": 0,
+          "score": "0x1.d79afe0cf8155p-2"
+        },
+        "orphan_edge": {
+          "box": [
+            144,
+            276,
+            204,
+            336
+          ],
+          "hit": 0,
+          "score": "0x1.64bd30a6efaa1p-2"
+        }
+      }
+    },
+    {
+      "key": "shovel",
+      "role": "aligned_rotation",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            192,
+            224,
+            272,
+            336
+          ],
+          "hit": 0,
+          "score": "0x1.468289403054ap-2"
+        },
+        "orphan_edge": {
+          "box": [
+            304,
+            416,
+            384,
+            496
+          ],
+          "hit": 0,
+          "score": "0x1.7c44c18b688a8p-2"
+        }
+      }
+    },
+    {
+      "key": "shovel",
+      "role": "highlight_edit",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            224,
+            304,
+            368,
+            448
+          ],
+          "hit": 20154,
+          "score": "0x1.266e90b91967ap+1"
+        },
+        "orphan_edge": {
+          "box": [
+            224,
+            320,
+            368,
+            432
+          ],
+          "hit": 15900,
+          "score": "0x1.9f692e3c13780p-1"
+        }
+      }
+    },
+    {
+      "key": "shovel",
+      "role": "arbitrary_edit",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            128,
+            64,
+            272,
+            208
+          ],
+          "hit": 20142,
+          "score": "0x1.ff0ab133934b6p+0"
+        },
+        "orphan_edge": {
+          "box": [
+            208,
+            80,
+            288,
+            160
+          ],
+          "hit": 5038,
+          "score": "0x1.961158b0d2655p-1"
+        }
+      }
+    },
+    {
+      "key": "shovel",
+      "role": "no_gainmap",
+      "scores": null
+    },
+    {
+      "key": "nests",
+      "role": "original",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            504,
+            1260,
+            924,
+            1680
+          ],
+          "hit": 0,
+          "score": "0x1.9f19a1978851bp-3"
+        },
+        "orphan_edge": {
+          "box": [
+            1428,
+            504,
+            2016,
+            1092
+          ],
+          "hit": 0,
+          "score": "0x1.6dbc882d6f122p-2"
+        }
+      }
+    },
+    {
+      "key": "nests",
+      "role": "jpeg90",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            96,
+            240,
+            176,
+            320
+          ],
+          "hit": 0,
+          "score": "0x1.9e2e483db02dap-3"
+        },
+        "orphan_edge": {
+          "box": [
+            272,
+            96,
+            384,
+            208
+          ],
+          "hit": 0,
+          "score": "0x1.49cc8ba73e198p-2"
+        }
+      }
+    },
+    {
+      "key": "nests",
+      "role": "jpeg75",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            64,
+            208,
+            144,
+            288
+          ],
+          "hit": 0,
+          "score": "0x1.ac69064281178p-3"
+        },
+        "orphan_edge": {
+          "box": [
+            272,
+            96,
+            384,
+            208
+          ],
+          "hit": 0,
+          "score": "0x1.771bd66a130e1p-2"
+        }
+      }
+    },
+    {
+      "key": "nests",
+      "role": "tone",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            96,
+            240,
+            176,
+            320
+          ],
+          "hit": 0,
+          "score": "0x1.a436aae1337dcp-3"
+        },
+        "orphan_edge": {
+          "box": [
+            272,
+            96,
+            384,
+            208
+          ],
+          "hit": 0,
+          "score": "0x1.5abe5cea7e4f0p-2"
+        }
+      }
+    },
+    {
+      "key": "nests",
+      "role": "resize",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            64,
+            208,
+            144,
+            288
+          ],
+          "hit": 0,
+          "score": "0x1.aa92bd734c29ap-3"
+        },
+        "orphan_edge": {
+          "box": [
+            256,
+            96,
+            336,
+            176
+          ],
+          "hit": 0,
+          "score": "0x1.3bd3bf15a02b3p-2"
+        }
+      }
+    },
+    {
+      "key": "nests",
+      "role": "sharpen",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            96,
+            240,
+            176,
+            320
+          ],
+          "hit": 0,
+          "score": "0x1.91e6e7f132e1ap-3"
+        },
+        "orphan_edge": {
+          "box": [
+            272,
+            96,
+            384,
+            208
+          ],
+          "hit": 0,
+          "score": "0x1.771bd66a130e1p-2"
+        }
+      }
+    },
+    {
+      "key": "nests",
+      "role": "aligned_crop",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            72,
+            144,
+            132,
+            204
+          ],
+          "hit": 0,
+          "score": "0x1.06817f73e7648p-2"
+        },
+        "orphan_edge": {
+          "box": [
+            372,
+            264,
+            456,
+            324
+          ],
+          "hit": 0,
+          "score": "0x1.4ec814e14e8c6p-3"
+        }
+      }
+    },
+    {
+      "key": "nests",
+      "role": "aligned_rotation",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            240,
+            592,
+            320,
+            672
+          ],
+          "hit": 0,
+          "score": "0x1.a8c7aca20d8cbp-3"
+        },
+        "orphan_edge": {
+          "box": [
+            96,
+            384,
+            208,
+            496
+          ],
+          "hit": 0,
+          "score": "0x1.7c5e2f178bc5fp-2"
+        }
+      }
+    },
+    {
+      "key": "nests",
+      "role": "highlight_edit",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            64,
+            64,
+            208,
+            208
+          ],
+          "hit": 20159,
+          "score": "0x1.4214d3e5f4e63p+0"
+        },
+        "orphan_edge": {
+          "box": [
+            64,
+            64,
+            208,
+            208
+          ],
+          "hit": 20159,
+          "score": "0x1.5c3cb00d725e8p-1"
+        }
+      }
+    },
+    {
+      "key": "nests",
+      "role": "arbitrary_edit",
+      "scores": {
+        "dark_relative_to_gain": {
+          "box": [
+            192,
+            304,
+            336,
+            416
+          ],
+          "hit": 15900,
+          "score": "0x1.87917e1688225p+0"
+        },
+        "orphan_edge": {
+          "box": [
+            208,
+            304,
+            352,
+            448
+          ],
+          "hit": 16115,
+          "score": "0x1.f2094f2094f21p-1"
+        }
+      }
+    },
+    {
+      "key": "nests",
+      "role": "no_gainmap",
+      "scores": null
+    }
+  ],
+  "summary": {
+    "arms": {
+      "dark_relative_to_gain": {
+        "counts": {
+          "assessed_aligned_crop": 8,
+          "assessed_aligned_rotation": 8,
+          "assessed_arbitrary_edit": 8,
+          "assessed_highlight_edit": 8,
+          "assessed_jpeg75": 8,
+          "assessed_jpeg90": 8,
+          "assessed_original": 8,
+          "assessed_resize": 8,
+          "assessed_sharpen": 8,
+          "assessed_tone": 8,
+          "flagged_ordinary": 15,
+          "mislocalized_edits": 3,
+          "useful_arbitrary_edit": 5,
+          "useful_highlight_edit": 4
+        },
+        "new_carrier_makes": [
+          "Apple",
+          "samsung"
+        ],
+        "ordinary_authors_flagged": 2,
+        "passed": false
+      },
+      "orphan_edge": {
+        "counts": {
+          "assessed_aligned_crop": 8,
+          "assessed_aligned_rotation": 8,
+          "assessed_arbitrary_edit": 8,
+          "assessed_highlight_edit": 8,
+          "assessed_jpeg75": 8,
+          "assessed_jpeg90": 8,
+          "assessed_original": 8,
+          "assessed_resize": 8,
+          "assessed_sharpen": 8,
+          "assessed_tone": 8,
+          "flagged_ordinary": 9,
+          "mislocalized_edits": 6,
+          "useful_arbitrary_edit": 3,
+          "useful_highlight_edit": 4
+        },
+        "new_carrier_makes": [
+          "Apple"
+        ],
+        "ordinary_authors_flagged": 2,
+        "passed": false
+      },
+      "union": {
+        "counts": {
+          "assessed_aligned_crop": 8,
+          "assessed_aligned_rotation": 8,
+          "assessed_arbitrary_edit": 8,
+          "assessed_highlight_edit": 8,
+          "assessed_jpeg75": 8,
+          "assessed_jpeg90": 8,
+          "assessed_original": 8,
+          "assessed_resize": 8,
+          "assessed_sharpen": 8,
+          "assessed_tone": 8,
+          "flagged_ordinary": 17,
+          "mislocalized_edits": 8,
+          "useful_arbitrary_edit": 6,
+          "useful_highlight_edit": 6
+        },
+        "new_carrier_makes": [
+          "Apple",
+          "samsung"
+        ],
+        "ordinary_authors_flagged": 3,
+        "passed": false
+      }
+    },
+    "assessed_authors": 7
+  }
+}

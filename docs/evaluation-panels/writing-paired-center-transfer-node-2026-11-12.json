@@ -1,0 +1,359 @@
+{
+  "mutations_rejected": {
+    "actual_source_bytes": true,
+    "batch_order": true,
+    "decision": true,
+    "export_offset": true,
+    "portable_offset": true
+  },
+  "native": {
+    "app": {
+      "exact_drafts_checked": 8,
+      "joint_increases": 3,
+      "linked_cases": 4
+    },
+    "app_receipt_sha256": "92d53e9f8aad34d27af8f8327dc7319f916750a984b454a527f202ba13e6391b",
+    "architecture": "arm64",
+    "boundary_result": {
+      "generated": 12,
+      "generated_context": 5,
+      "generated_joint": 4,
+      "ordinary": 8,
+      "ordinary_context": 1,
+      "ordinary_joint": 0
+    },
+    "case_views": 126,
+    "native_batches": 22,
+    "node": "24.5.0",
+    "platform": "darwin",
+    "points": {
+      "calibrated_context": 0.17013514557368348,
+      "center": 0.12844311183234092,
+      "context": 0.6931471805599453,
+      "joint": 0.12844311183234092
+    },
+    "pooled_responses": 504,
+    "schema": "chipmunk.writing-paired-center-node-replay/1",
+    "study_sha256": "0dcc670ef5c398004b5d820176eabd6060bca549a14a14c86dac166df1e09e2a",
+    "summary": {
+      "f1000": {
+        "calibrated_context": {
+          "added": 4,
+          "added_false": 1,
+          "added_works": 4,
+          "app_eligible_added": 3,
+          "candidate": 6,
+          "existing": 4,
+          "false": 1,
+          "families": [
+            "granite",
+            "olmo"
+          ],
+          "flagged": 1,
+          "genuine": 20,
+          "known": 14,
+          "prior_false": 1
+        },
+        "center": {
+          "added": 8,
+          "added_false": 3,
+          "added_works": 5,
+          "app_eligible_added": 5,
+          "candidate": 10,
+          "existing": 4,
+          "false": 3,
+          "families": [
+            "granite",
+            "olmo"
+          ],
+          "flagged": 3,
+          "genuine": 20,
+          "known": 14,
+          "prior_false": 1
+        },
+        "context": {
+          "added": 1,
+          "added_false": 0,
+          "added_works": 1,
+          "app_eligible_added": 0,
+          "candidate": 3,
+          "existing": 4,
+          "false": 0,
+          "families": [
+            "granite"
+          ],
+          "flagged": 0,
+          "genuine": 20,
+          "known": 14,
+          "prior_false": 1
+        },
+        "joint": {
+          "added": 4,
+          "added_false": 0,
+          "added_works": 4,
+          "app_eligible_added": 3,
+          "candidate": 6,
+          "existing": 4,
+          "false": 0,
+          "families": [
+            "granite",
+            "olmo"
+          ],
+          "flagged": 0,
+          "genuine": 20,
+          "known": 14,
+          "prior_false": 1
+        }
+      },
+      "journal": {
+        "calibrated_context": {
+          "added": 7,
+          "added_false": 1,
+          "added_works": 5,
+          "app_eligible_added": 3,
+          "candidate": 12,
+          "existing": 6,
+          "false": 1,
+          "families": [
+            "qwen",
+            "smol2"
+          ],
+          "flagged": 1,
+          "genuine": 42,
+          "known": 32,
+          "prior_false": 0
+        },
+        "center": {
+          "added": 12,
+          "added_false": 5,
+          "added_works": 9,
+          "app_eligible_added": 7,
+          "candidate": 15,
+          "existing": 6,
+          "false": 5,
+          "families": [
+            "qwen",
+            "smol2"
+          ],
+          "flagged": 5,
+          "genuine": 42,
+          "known": 32,
+          "prior_false": 0
+        },
+        "context": {
+          "added": 1,
+          "added_false": 0,
+          "added_works": 1,
+          "app_eligible_added": 0,
+          "candidate": 6,
+          "existing": 6,
+          "false": 0,
+          "families": [
+            "smol2"
+          ],
+          "flagged": 0,
+          "genuine": 42,
+          "known": 32,
+          "prior_false": 0
+        },
+        "joint": {
+          "added": 6,
+          "added_false": 0,
+          "added_works": 4,
+          "app_eligible_added": 3,
+          "candidate": 9,
+          "existing": 6,
+          "false": 0,
+          "families": [
+            "qwen",
+            "smol2"
+          ],
+          "flagged": 0,
+          "genuine": 42,
+          "known": 32,
+          "prior_false": 0
+        }
+      }
+    },
+    "v8": "13.6.233.10-node.21"
+  },
+  "portable": {
+    "app": {
+      "exact_drafts_checked": 0,
+      "joint_increases": 3,
+      "linked_cases": 4
+    },
+    "app_receipt_sha256": "92d53e9f8aad34d27af8f8327dc7319f916750a984b454a527f202ba13e6391b",
+    "architecture": "arm64",
+    "boundary_result": {
+      "generated": 12,
+      "generated_context": 5,
+      "generated_joint": 4,
+      "ordinary": 8,
+      "ordinary_context": 1,
+      "ordinary_joint": 0
+    },
+    "case_views": 126,
+    "native_batches": 22,
+    "node": "24.5.0",
+    "platform": "darwin",
+    "points": {
+      "calibrated_context": 0.17013514557368348,
+      "center": 0.12844311183234092,
+      "context": 0.6931471805599453,
+      "joint": 0.12844311183234092
+    },
+    "pooled_responses": 504,
+    "schema": "chipmunk.writing-paired-center-node-replay/1",
+    "study_sha256": "0dcc670ef5c398004b5d820176eabd6060bca549a14a14c86dac166df1e09e2a",
+    "summary": {
+      "f1000": {
+        "calibrated_context": {
+          "added": 4,
+          "added_false": 1,
+          "added_works": 4,
+          "app_eligible_added": 3,
+          "candidate": 6,
+          "existing": 4,
+          "false": 1,
+          "families": [
+            "granite",
+            "olmo"
+          ],
+          "flagged": 1,
+          "genuine": 20,
+          "known": 14,
+          "prior_false": 1
+        },
+        "center": {
+          "added": 8,
+          "added_false": 3,
+          "added_works": 5,
+          "app_eligible_added": 5,
+          "candidate": 10,
+          "existing": 4,
+          "false": 3,
+          "families": [
+            "granite",
+            "olmo"
+          ],
+          "flagged": 3,
+          "genuine": 20,
+          "known": 14,
+          "prior_false": 1
+        },
+        "context": {
+          "added": 1,
+          "added_false": 0,
+          "added_works": 1,
+          "app_eligible_added": 0,
+          "candidate": 3,
+          "existing": 4,
+          "false": 0,
+          "families": [
+            "granite"
+          ],
+          "flagged": 0,
+          "genuine": 20,
+          "known": 14,
+          "prior_false": 1
+        },
+        "joint": {
+          "added": 4,
+          "added_false": 0,
+          "added_works": 4,
+          "app_eligible_added": 3,
+          "candidate": 6,
+          "existing": 4,
+          "false": 0,
+          "families": [
+            "granite",
+            "olmo"
+          ],
+          "flagged": 0,
+          "genuine": 20,
+          "known": 14,
+          "prior_false": 1
+        }
+      },
+      "journal": {
+        "calibrated_context": {
+          "added": 7,
+          "added_false": 1,
+          "added_works": 5,
+          "app_eligible_added": 3,
+          "candidate": 12,
+          "existing": 6,
+          "false": 1,
+          "families": [
+            "qwen",
+            "smol2"
+          ],
+          "flagged": 1,
+          "genuine": 42,
+          "known": 32,
+          "prior_false": 0
+        },
+        "center": {
+          "added": 12,
+          "added_false": 5,
+          "added_works": 9,
+          "app_eligible_added": 7,
+          "candidate": 15,
+          "existing": 6,
+          "false": 5,
+          "families": [
+            "qwen",
+            "smol2"
+          ],
+          "flagged": 5,
+          "genuine": 42,
+          "known": 32,
+          "prior_false": 0
+        },
+        "context": {
+          "added": 1,
+          "added_false": 0,
+          "added_works": 1,
+          "app_eligible_added": 0,
+          "candidate": 6,
+          "existing": 6,
+          "false": 0,
+          "families": [
+            "smol2"
+          ],
+          "flagged": 0,
+          "genuine": 42,
+          "known": 32,
+          "prior_false": 0
+        },
+        "joint": {
+          "added": 6,
+          "added_false": 0,
+          "added_works": 4,
+          "app_eligible_added": 3,
+          "candidate": 9,
+          "existing": 6,
+          "false": 0,
+          "families": [
+            "qwen",
+            "smol2"
+          ],
+          "flagged": 0,
+          "genuine": 42,
+          "known": 32,
+          "prior_false": 0
+        }
+      }
+    },
+    "v8": "13.6.233.10-node.21"
+  },
+  "protocol": {
+    "app_receipt_sha256": "92d53e9f8aad34d27af8f8327dc7319f916750a984b454a527f202ba13e6391b",
+    "design": "Implement the published arithmetic separately in Node.js without the Python verifier or app modules. Derive operating points from nine genuine groups and match published outcomes for all four arms in both held panels and all exact paragraph-break batches. Independently verify exact bytes and Unicode input ranges plus before/after odds direction for the four actual ordinary-route JSON exports when local draft files are available. Reject changes to a decision, native input, source range and actual draft bytes. Use a fixed arithmetic tolerance of 4e-15 for published log-odds points only. Preserve no claim of model inference, new accuracy or independent human review.",
+    "schema": "chipmunk.writing-paired-center-independent-replay-plan/1",
+    "study_sha256": "0dcc670ef5c398004b5d820176eabd6060bca549a14a14c86dac166df1e09e2a"
+  },
+  "protocol_sha256": "069d245896543d048aa0a0690828752088137566dd36029674a1a02e983061c9",
+  "reader_sha256": "0998e9c89e23695a3d01737994ba226b7a8db5494474615243d199c36af041cf"
+}

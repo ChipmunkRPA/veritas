@@ -15,7 +15,7 @@ the [recent-method review](recent-methods-review-2026-11.md). Proprietary verifi
 access is not simulated, unsigned labels/spacing cannot stop detection, and
 no customer file is automatically sent to an external provider.
 
-On7 November the user directed region/check/context-specific calibration and a
+On 7 November the user directed region/check/context-specific calibration and a
 tested combined result **across all four modalities**. The
 [shared evaluation implementation and required real-data work](specialist-calibration-design.md)
 now define that path. It supplements the full requirements below; an authored
@@ -97,6 +97,15 @@ integration remains unfinished.
 
 ## Progress on 12 November
 
+- The [cross-camera HDR study](image-gainmap-cross-camera-2026-11-12.md)
+  expanded gain-map extraction from three to eight of ten originals. The
+  fixed union localized 12 of 16 controlled edits and flagged 17 of 64
+  ordinary views, including two originals. The cue remains experimental.
+- The [transient-reduction audio study](audio-transient-reduction-transfer-2026-11-12.md)
+  added no locations under rain or train noise. Only 16 of 65 eligible
+  edited windows under train noise passed the speech-activity check.
+- A [separate Node.js replay](writing-paired-center-transfer-2026-11-12.md#replay)
+  reproduced the writing study and the exact positions in four app exports.
 - The [six-picture face-change study](video-face-unrouted-short-transfer-2026-11-12.md)
   found all 16 exact ranges missed by Full, across eight HEVC source groups.
   Both the bounded shortlist and the dense search added zero ordinary ranges

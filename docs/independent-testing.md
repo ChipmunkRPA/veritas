@@ -61,6 +61,9 @@ BG-REAL comparison.
 The [exact PNG copy check](image-exact-small-copy-2026-11-12.md) replays matched
 native crops and surrounding differences. It includes ordinary photos, generated
 edit controls, repeated structures and duplicate graphics in Chrome captures.
+The [cross-camera HDR comparison](image-gainmap-cross-camera-2026-11-12.md)
+reopens ten licensed originals and verifies the gain-map offsets, the exact
+regions in derived views, and false highlights on untouched photos.
 
 The [earlier-video comparison](video-reference-comparison-2026-11-11.md#replay-without-the-app)
 re-decodes two supplied clips and checks the JSON, native picture timestamps,
@@ -141,7 +144,8 @@ pages of mixed PDFs. Its receipt records ordinary agreement and skipped
 cross-page inputs.
 The [paired writing check beside a paragraph break](writing-paired-center-transfer-2026-11-12.md)
 compares changes in exact sentence and context readings. Its replay checks
-both draft positions and reports held genuine revisions separately.
+both draft positions and reports held genuine revisions separately. A second
+implementation in Node.js verifies the same decisions and source spans.
 The [paired writing response comparison](writing-instruct-base-passage-transfer-2026-11-12.md)
 checks response differences on identical target tokens and replays the held
 publisher's false flags and missed rewrites.
@@ -162,6 +166,9 @@ deliveries. Its native check also recomputes the filtered PCM window hashes.
 The [adjacent speech-frame study](audio-adjacent-frame-transfer-2026-11-12.md)
 replays the local evidence windows, genuine-group false flags, and exact
 sample counts under the same loud rain and train conditions.
+The [transient-reduction comparison](audio-transient-reduction-transfer-2026-11-12.md)
+recreates the processed inputs on the original sample clock and checks whether
+two neighboring windows recover any additional known edits.
 The [native word-clock qualification](grid-reserve-word-clocks-2026-11-12.md)
 aligns publisher word intervals with original embedded speech and replays four
 ordinary mouth changes with unchanged soundtracks.

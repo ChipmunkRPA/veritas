@@ -182,3 +182,14 @@ condition = "AND"
 paths = ['''(^|/)backend/scripts/writing_body_localization_transfer\.py$''']
 regexTarget = "line"
 regexes = ['''^\s*"tokenizer\.json": "6c8aaa9a542084f2457eab775d4eeb51f92a70c0fd9de28d5edb0ddec3c08d30"[,]?\s*$''']
+
+# Recomputed from the pinned local tokenizer files in the entropy trial.
+[[rules.allowlists]]
+description = "Writing entropy study tokenizer file SHA-256 commitments"
+condition = "AND"
+paths = ['''(^|/)docs/evaluation-panels/writing-entropy-conditioned-2026-11-13\.json$''']
+regexTarget = "match"
+regexes = [
+  '''^tokenizer\.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539"$''',
+  '''^tokenizer_config\.json": "c91efca15ceff6e9ee9424db58a6f59cd41294e550a86cbd07e3c1fb500b34f9"$''',
+]

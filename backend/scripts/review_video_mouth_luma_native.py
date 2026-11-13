@@ -1,11 +1,11 @@
 # SPDX-License-Identifier: Apache-2.0
 """Build or check the public native decision ledger without project imports."""
 import argparse
-from collections import Counter
-from fractions import Fraction
 import hashlib
 import json
 import math
+from collections import Counter
+from fractions import Fraction
 from pathlib import Path
 
 SCHEMA = 'chipmunk.video-mouth-luma-condition/native-only/1'

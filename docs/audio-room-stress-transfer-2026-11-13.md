@@ -37,11 +37,26 @@ At the earlier separator point, adding the separator recovered three unique edit
 
 The separately fitted separator point was 7.267491 versus 6.760728 earlier. It yielded zero added locations and zero added ordinary flags. Both candidates failed the advancement gate. This supports evaluating reverberation-robust scoring before adding another separator. A prospective test would keep matched genuine and partial-edit versions together, render each across new rooms, and measure ordinary-edit flags and timestamp overlap under the same paired ladder.
 
-## Scalar replay
+## Replay
 
 The receipt records anonymous source groups, exact label intervals, admitted model responses, and the separately frozen development point. The standard-library reader verifies the frozen points and independently recomputes the tables, paired changes, and advancement rule from 106 development and 424 assessment forwards. Reproducing model inference additionally requires the native source roster and local voice assets. [Scalar receipt](evaluation-panels/audio-room-stress-transfer-2026-11-13.json)
 
 ```sh
 python3 -B -IS backend/scripts/review_audio_room_stress_transfer.py \
   docs/evaluation-panels/audio-room-stress-transfer-2026-11-13.json
+```
+
+The original native runner pins its source roster and development point before
+assessment inference. It needs the retained Aachen workspace, publisher
+roster, prior directional study, original AMI recordings, and licensed local
+voice assets. From the repository root, supply a new local run path:
+
+```sh
+export PYTHONPATH=backend HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 VERITAS_OFFLINE=true
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1
+for phase in freeze fit score; do
+  backend/.venv/bin/python -B -m scripts.audio_room_stress_transfer "$phase" "$run" \
+    --input "$aachen_workdir" --publisher "$publisher_workdir" \
+    --prior-directional "$prior_directional_run" --ami "$ami_recordings" || exit 1
+done
 ```

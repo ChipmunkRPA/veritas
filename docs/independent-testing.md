@@ -73,6 +73,9 @@ include standalone standard-library readers for both findings and misses.
 The [JPEG tile main bank](image-regional-tile-rescue-2026-11-13.md#coverage-and-replay)
 provides anonymous per-file pixel counts and recomputes the ordinary flags and
 edit overlap without the images or weights.
+The [entropy-conditioned writing trial](writing-entropy-conditioned-2026-11-13.md#replay)
+replays exact sentence outcomes and genuine-work flags from scalars without
+the text, token IDs or weights.
 
 The [large-image copy comparison](image-affine-native-scale-2026-11-11.md#reproduce)
 provides a licensed roster, exact source commitments, and a separate reader

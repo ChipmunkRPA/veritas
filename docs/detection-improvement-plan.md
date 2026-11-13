@@ -97,6 +97,9 @@ integration remains unfinished.
 
 ## Progress on 13 November
 
+- The [entropy-conditioned writing trial](writing-entropy-conditioned-2026-11-13.md)
+  measured all 39 known edit locations and added zero useful locations. It
+  added flags on three eLife control works and stays offline.
 - The [JPEG tile fallback](image-regional-tile-rescue-2026-11-13.md) added no
   useful locations across 30 edits in the main bank and raised ordinary
   highlights from eight to 13 of 106 files. It stays experimental. The second

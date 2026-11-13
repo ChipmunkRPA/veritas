@@ -2,10 +2,10 @@
 import hashlib
 import json
 import math
+import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 from statistics import median
-import sys
 
 WINDOWS = ((16000, 48000), (48000, 80000))
 NOISY = ("snr_5", "snr_0", "snr_-5", "snr_-10")

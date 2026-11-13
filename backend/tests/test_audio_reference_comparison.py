@@ -19,6 +19,7 @@ from app.core.canonical import canonical_hash
 from app.core.config import settings
 from app.detectors.audio.decode import read_wav, wav_bytes
 from app.evidence import audio_reference
+from app.reports.media_reference_pdf import render as render_comparison
 from app.storage.db import Analysis, Artefact, BillingOrderRow, Job, utcnow
 from scripts.compare_audio_references import run
 
@@ -96,11 +97,77 @@ def test_lossless_container_change_matches_and_trim_is_unassessed(tmp_path, alig
     assert matched["audio"]["changed_samples"] == 0 and not matched["audio"]["ranges"]
 
     trimmed = save(tmp_path, "trimmed", pcm[:-1])
-    result, assets = audio_reference.compare(earlier, trimmed)
+    result, assets = audio_reference.compare(earlier, trimmed, include_trim_alignment=False)
     assert result["status"] == result["audio"]["status"] == "audio_timelines_differ"
     assert result["audio"]["earlier"]["samples"] == len(pcm)
     assert result["audio"]["submitted"]["samples"] == len(pcm) - 1
     assert "ranges" not in result["audio"] and not assets
+
+
+@pytest.mark.parametrize("reversed_pair", [False, True])
+def test_audio_reference_compares_overlap_after_a_small_trim(tmp_path, reversed_pair):
+    rng = np.random.default_rng(394)
+    original = rng.integers(-5000, 5000, 52000, dtype=np.int16)
+    trimmed = original[331:-133].copy()
+    trimmed[22002:22802] += 500
+    before, after = (pcm.astype(np.float32) / 32768 for pcm in (original, trimmed))
+    earlier, submitted = save(tmp_path, "original", before), save(tmp_path, "trimmed", after)
+    if reversed_pair:
+        earlier, submitted, before, after = submitted, earlier, after, before
+    record, assets = audio_reference.compare(earlier, submitted)
+    audio = record["audio"]
+    alignment = audio["trim_alignment"]
+    assert record["schema"] == audio_reference.SCHEMA_WITH_TRIM_ALIGNMENT
+    assert record["affects_overall_confidence"] is False
+    assert alignment["earlier_minus_submitted_samples"] == (-331 if reversed_pair else 331)
+    assert alignment["compared_samples"] == len(trimmed)
+    for side, start in zip(("earlier", "submitted"), (0, 331) if reversed_pair else (331, 0), strict=True):
+        assert alignment["overlap"][side] == {
+            "start_sample": start, "end_sample": start + len(trimmed),
+            "start_pts": start, "end_exclusive_pts": start + len(trimmed),
+        }
+    for support in alignment["support"]:
+        for side, native in (("earlier", before), ("submitted", after)):
+            a, b = (support[side][key] for key in ("start_sample", "end_sample"))
+            assert hashlib.sha256((native[a:b] * 32768).astype("<i2").tobytes()).hexdigest() == support["pcm_sha256"]
+    assert audio["changed_samples"] == 800
+    span, = audio["ranges"]
+    assert span["start_s"] == span["file_ranges"]["submitted"]["start_sample"] / 16000
+    for side, native in (("earlier", before), ("submitted", after)):
+        local = span["file_ranges"][side]
+        samples = read_wav(assets[span["preview"]["assets"][side]["file"]])
+        np.testing.assert_array_equal(samples, native[local["start_sample"]:local["end_sample"]])
+    with pymupdf.open(stream=render_comparison(record, assets), filetype="pdf") as report:
+        assert "Shared audio after sample alignment" in report[0].get_text()
+        assert "800" in report[0].get_text()
+        assert "Waveform covers" in report[1].get_text()
+        assert "Difference waveform" in report[1].get_text()
+
+
+def test_audio_reference_trim_abstains_on_ambiguous_or_inconsistent_support(tmp_path):
+    rng = np.random.default_rng(418)
+    pcm = rng.integers(-5000, 5000, 52000).astype(np.float32) / 32768
+    periodic = np.tile(pcm[:100], 520)
+    for name, left, right in (
+        ("periodic", periodic, periodic[331:]),
+        ("internal-removal", pcm, np.r_[pcm[:25000], pcm[25331:]]),
+        ("large-trim", pcm, pcm[4100:]),
+    ):
+        record, assets = audio_reference.compare(save(tmp_path, name + "-1", left), save(tmp_path, name + "-2", right))
+        assert record["schema"] == audio_reference.SCHEMA
+        assert record["status"] == "audio_timelines_differ" and not assets
+
+
+def test_audio_reference_trim_replays_new_and_historical_exports(tmp_path, aligned_audio_pair):
+    earlier, _, pcm, _ = aligned_audio_pair
+    submitted = save(tmp_path, "trimmed-copy", pcm[20:])
+    for name, use_alignment in (("current", True), ("historical", False)):
+        record, assets = audio_reference.compare(earlier, submitted, include_trim_alignment=use_alignment)
+        assert record["status"] == ("measured" if use_alignment else "audio_timelines_differ")
+        assert not assets
+        exported = tmp_path / f"{name}.json"
+        exported.write_text(json.dumps({"comparison": record, "assets": {}}))
+        assert run(earlier, submitted, exported, verify=True) == record
 
 
 def test_matching_nonzero_audio_starts_preserve_both_source_clocks(tmp_path, aligned_audio_pair):
@@ -335,6 +402,27 @@ def test_authenticated_audio_comparison_pdf_json_and_temporary_storage(
     exported = tmp_path / "comparison-download.json"
     exported.write_text(json.dumps({key: payload[key] for key in ("comparison", "assets")}))
     assert run(earlier, analyzed, exported, verify=True) == record
+    trimmed_samples = aligned_audio_pair[3][13:-11].copy()
+    trimmed_samples[11001:11201] += 1 / 32768
+    trimmed = save(tmp_path, "earlier-with-small-trim", trimmed_samples)
+    files_after_trim = {"earlier": ("earlier.wav", trimmed.read_bytes(), "audio/wav")}
+    response = f.client.post(endpoint, headers=f.viewer, files=files_after_trim, data={"include_pdf": "true"})
+    assert response.status_code == 200
+    trimmed_payload = response.json()
+    trimmed_record = trimmed_payload["comparison"]
+    assert trimmed_record["schema"] == audio_reference.SCHEMA_WITH_TRIM_ALIGNMENT
+    assert trimmed_record["audio"]["trim_alignment"]["earlier_minus_submitted_samples"] == -13
+    assert trimmed_record["audio"]["changed_samples"] == 200
+    with pymupdf.open(stream=base64.b64decode(trimmed_payload["pdf"], validate=True), filetype="pdf") as report:
+        assert "Shared audio after sample alignment" in report[0].get_text()
+        assert len(report[1].get_drawings()) >= 8
+    browser_json = json.dumps({key: trimmed_payload[key] for key in ("comparison", "assets")})
+    browser_json = browser_json.replace("0.0,", "0,").replace("0.0]", "0]")
+    exported.write_text(browser_json)
+    assert run(trimmed, analyzed, exported, verify=True) == trimmed_record
+    exported.write_text(browser_json.replace('"affects_overall_confidence": false', '"affects_overall_confidence": 0'))
+    with pytest.raises(ValueError, match="differs"):
+        run(trimmed, analyzed, exported, verify=True)
     assert state() == initial
     with sessions() as db:
         db.get(Analysis, "other-kind").withdrawn_at = utcnow()

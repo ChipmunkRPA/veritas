@@ -4,7 +4,12 @@ from __future__ import annotations
 
 import pymupdf
 
-from app.evidence.audio_reference import AUDIO_RATE, MAX_SECONDS, SCHEMA_WITH_LEVEL_ADJUSTMENT
+from app.evidence.audio_reference import (
+    AUDIO_RATE,
+    MAX_SECONDS,
+    SCHEMA_WITH_LEVEL_ADJUSTMENT,
+    SCHEMA_WITH_TRIM_ALIGNMENT,
+)
 from app.evidence.audio_reference import SCHEMA as AUDIO_SCHEMA
 from app.reports.image_reference_pdf import INK, MARGIN, MUTED, PAGE_HEIGHT, PAGE_WIDTH, RIGHT, RULE, _text
 
@@ -44,6 +49,10 @@ def _range(span):
     if span["end_s"] is None:
         return f"{span['start_s']:.3f} s to final picture at {span['last_s']:.3f} s"
     return f"{span['start_s']:.3f} to {span['end_s']:.3f} s"
+
+
+def _audio_file_range(span):
+    return f"{span['start_sample'] / AUDIO_RATE:.6f} to {span['end_sample'] / AUDIO_RATE:.6f} s"
 
 
 def _summary(document, record):
@@ -92,10 +101,22 @@ def _audio_summary(document, record):
         _text(page, MARGIN, 370, AUDIO_ONLY_STATUS[record["status"]])
         return
     _text(page, MARGIN, 346, "Decoded sample comparison", size=16, font="hebo")
-    total = audio["submitted"]["samples"]
+    alignment = audio.get("trim_alignment")
+    total = alignment["compared_samples"] if alignment else audio["submitted"]["samples"]
     changed = audio["changed_samples"]
     count = len(audio["ranges"])
     _text(page, MARGIN, 370, f"{changed:,} of {total:,} mono samples differ across {count} {'range' if count == 1 else 'ranges'}.")
+    if alignment:
+        _text(page, MARGIN, 408, "Shared audio after sample alignment", size=13, font="hebo")
+        for y, (side, label) in zip((431, 453), LABELS.items(), strict=True):
+            span = alignment["overlap"][side]
+            _text(page, MARGIN, y, f"{label}  {_audio_file_range(span)}  [{span['start_sample']}, {span['end_sample']})")
+        if changed == 0:
+            _text(page, MARGIN, 476, "The decoded mono samples match exactly inside the shared span.", color=MUTED)
+        _text(page, MARGIN, 507, "Times use each file's first decoded sample. Source clocks use 16 kHz ticks.", color=MUTED)
+        _text(page, MARGIN, 527, "Ranges group adjacent 20 ms bins containing at least one differing sample.", color=MUTED)
+        _text(page, MARGIN, 547, "The JSON includes exact alignment samples, their checksums and playable excerpts.", color=MUTED)
+        return
     if count == 1 and audio["ranges"][0]["start_sample"] == 0 and audio["ranges"][0]["end_sample"] == total:
         _text(page, MARGIN, 391, "Differences span the whole recording. Encoding or gain changes can cause this.", color=MUTED)
     elif changed == 0:
@@ -237,10 +258,14 @@ def _sound_page(document, span, *, level_adjusted=False):
         title = "Audio differences" if difference is not None else "Soundtrack differences"
         count_note = "differing samples in the selected range."
     page = _page(document, f"{span['id']}  {title}")
-    _text(page, MARGIN, 126, _range(span), color=MUTED)
+    aligned = span.get("file_ranges")
+    _text(page, MARGIN, 126, "Analyzed clip  " + _audio_file_range(aligned["submitted"]) if aligned else _range(span), color=MUTED)
     _text(page, MARGIN, 149, f"{span['changed_samples']:,} {count_note}")
     preview = span["preview"]
-    _text(page, MARGIN, 169, f"Waveforms cover {span['start_s']:.3f} to {preview['end_s']:.3f} s.")
+    if aligned:
+        _text(page, MARGIN, 169, f"Earlier clip  {_audio_file_range(aligned['earlier'])}", color=MUTED)
+    else:
+        _text(page, MARGIN, 169, f"Waveforms cover {span['start_s']:.3f} to {preview['end_s']:.3f} s.")
     waveforms = preview["waveforms"]
     residual = preview.get("difference_waveform")
     maximum = max(.01, *(abs(level) for values in waveforms.values() for field in ("low", "high") for level in values[field]))
@@ -251,6 +276,10 @@ def _sound_page(document, span, *, level_adjusted=False):
         _draw_waveform(page, waveforms[side], y, maximum, duration)
         pts = span["source_ranges"][side]["start_pts"]
         _text(page, MARGIN, y + 58, f"Source ticks [{pts}, {pts + count}) at 16 kHz.", size=9, color=MUTED)
+        if aligned:
+            start = aligned[side]["start_sample"]
+            times = _audio_file_range({"start_sample": start, "end_sample": start + count})
+            _text(page, MARGIN, y + 71, f"Waveform covers {times} in this file.", size=9, color=MUTED)
     if residual is not None:
         label = "Volume-adjusted difference waveform" if level_adjusted else "Difference waveform"
         _text(page, MARGIN, 517, label, font="hebo")
@@ -283,7 +312,7 @@ def _level_adjusted_pages(document, result):
 
 def render(record, assets):
     with pymupdf.open() as document:
-        is_audio = record["schema"] in (AUDIO_SCHEMA, SCHEMA_WITH_LEVEL_ADJUSTMENT)
+        is_audio = record["schema"] in (AUDIO_SCHEMA, SCHEMA_WITH_LEVEL_ADJUSTMENT, SCHEMA_WITH_TRIM_ALIGNMENT)
         document.set_metadata({"title": "Earlier audio comparison" if is_audio else TITLE, "author": "Chipmunk Verify"})
         if adjusted := record.get("level_adjusted"):
             _level_adjusted_pages(document, adjusted)
@@ -302,7 +331,10 @@ def render(record, assets):
                 _sound_page(document, span)
             else:
                 note = f" - {span['changed_samples']:,} differing samples" if is_audio else ""
-                remaining.append((span["id"], _range(span) + note))
+                dates = span.get("file_ranges")
+                label = (_audio_file_range(dates["earlier"]) + " earlier, " + _audio_file_range(dates["submitted"]) + " analyzed"
+                         if dates else _range(span))
+                remaining.append((span["id"], label + note))
         _remaining_ranges(document, remaining)
         if "timing" in record:
             _timing_page(document, record["timing"], assets)

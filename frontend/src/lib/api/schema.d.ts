@@ -6888,7 +6888,7 @@ export interface operations {
                 "multipart/form-data": {
                     /**
                      * Format: binary
-                     * @description Earlier copy with the same timing.
+                     * @description Earlier copy with the same timing or a supported small trim.
                      */
                     earlier: string;
                     /**

@@ -42,12 +42,20 @@ type SoundtrackTiming = {
   scope: string
   range?: Record<Side, SoundtrackSide> & { picture: { frame_index: number; time_s: number; asset: Asset } }
 }
+type FileSampleRange = { start_sample: number; end_sample: number; start_pts: number; end_exclusive_pts: number }
+type FileSampleRanges = Record<Side, FileSampleRange>
+type AudioTrimAlignment = {
+  earlier_minus_submitted_samples: number
+  compared_samples: number
+  overlap: FileSampleRanges
+}
 type AudioRange = Extent & {
   changed_samples: number
   start_sample?: number
   end_sample?: number
+  file_ranges?: FileSampleRanges
   difference?: { peak: number; rms: number }
-  preview?: { end_s: number; waveforms: Record<Side, Waveform>; assets: Record<Side, Asset>; difference_waveform?: Waveform }
+  preview?: { end_s: number; end_sample?: number; waveforms: Record<Side, Waveform>; assets: Record<Side, Asset>; difference_waveform?: Waveform }
 }
 type LevelAdjustedAudio = {
   gain_db: number
@@ -58,7 +66,7 @@ type LevelAdjustedAudio = {
 type Comparison = {
   status: string
   interpretation: string
-  audio?: { status: string; changed_samples?: number; submitted?: { samples: number }; ranges?: AudioRange[] }
+  audio?: { status: string; changed_samples?: number; submitted?: { samples: number }; ranges?: AudioRange[]; trim_alignment?: AudioTrimAlignment }
 } & ({
   schema: 'chipmunk.video-reference-comparison/1' | 'chipmunk.video-reference-comparison/2' | 'chipmunk.video-reference-comparison/3'
     | 'chipmunk.video-reference-comparison/4' | 'chipmunk.video-reference-comparison/5'
@@ -68,7 +76,7 @@ type Comparison = {
   soundtrack_alignment?: SoundtrackTiming
   level_adjusted?: never
 } | {
-  schema: 'chipmunk.audio-reference-comparison/1' | 'chipmunk.audio-reference-comparison/2'
+  schema: 'chipmunk.audio-reference-comparison/1' | 'chipmunk.audio-reference-comparison/2' | 'chipmunk.audio-reference-comparison/3'
   picture?: never
   timing?: never
   soundtrack_alignment?: never
@@ -77,6 +85,7 @@ type Comparison = {
 type Result = { comparison: Comparison; assets: Record<string, string>; pdf?: string | null }
 type Availability = { available: boolean; timing_available?: boolean }
 const sourceSeconds = new Intl.NumberFormat('en-US', { minimumFractionDigits: 3, maximumFractionDigits: 7, useGrouping: false })
+const trimSampleRate = 16000
 
 const unassessed: Record<string, string> = {
   comparison_limit: 'At least one clip exceeds the picture comparison limits.',
@@ -115,6 +124,23 @@ function assetBody(assets: Result['assets'], asset: Asset, type: Asset['media_ty
 function interval(span: Extent) {
   return span.end_s === null ? span.start_s.toFixed(3) + ' s to final picture at ' + span.last_s?.toFixed(3) + ' s'
     : span.start_s.toFixed(3) + '–' + span.end_s.toFixed(3) + ' s'
+}
+
+function fileTime(start: number, end: number) {
+  return `${sourceSeconds.format(start / trimSampleRate)}–${sourceSeconds.format(end / trimSampleRate)} s`
+}
+
+function FileTimelines({ ranges }: { ranges: FileSampleRanges }) {
+  return <dl className="mt-2 mb-0 grid gap-2 text-small sm:grid-cols-2">
+    {sides.map(side => {
+      const range = ranges[side]
+      return <div key={side}>
+        <dt className="font-medium">{names[side]}</dt>
+        <dd className="m-0">{fileTime(range.start_sample, range.end_sample)}</dd>
+        <dd className="m-0 text-caption text-text-muted">Samples [{range.start_sample}, {range.end_sample}) · source ticks [{range.start_pts}, {range.end_exclusive_pts})</dd>
+      </div>
+    })}
+  </dl>
 }
 
 function ClipWaveform({ wave, maximum, name }: { wave: Waveform; maximum: number; name: string }) {
@@ -183,16 +209,21 @@ function SoundEvidence({ span, assets, levelAdjusted = false }: {
   const waves = preview ? Object.values(preview.waveforms) : []
   const peak = Math.max(.01, ...waves.flatMap(wave => [...wave.low, ...wave.high].map(Math.abs)))
   const residualScale = residual ? Math.max(1 / 32768, ...[...residual.low, ...residual.high].map(Math.abs)) : 1
+  const fileRanges = span.file_ranges
+  const previewSamples = preview?.end_sample != null && span.start_sample != null ? preview.end_sample - span.start_sample : null
   return <details open={!!preview} className="border-t border-border pt-3">
-    <summary className="cursor-pointer font-medium">{span.id} · {interval(span)}</summary>
+    <summary className="cursor-pointer font-medium">{span.id} · {fileRanges
+      ? `${names.submitted} ${fileTime(fileRanges.submitted.start_sample, fileRanges.submitted.end_sample)}` : interval(span)}</summary>
     <p className="mt-2 mb-0 text-small text-text-muted">{span.changed_samples.toLocaleString()} {levelAdjusted
       ? 'samples in this range cannot be explained by the measured volume adjustment.' : 'differing samples in this range.'}</p>
+    {fileRanges && <FileTimelines ranges={fileRanges} />}
     {span.difference && <p className="mt-2 mb-0 text-caption text-text-muted">{levelAdjusted ? 'Adjusted difference' : 'Full range difference'}: peak {span.difference.peak.toFixed(6)}, RMS {span.difference.rms.toFixed(6)} of full scale.</p>}
     {preview && <>
-      <p className="mt-2 mb-0 text-caption text-text-muted">Waveforms and playback cover {span.start_s.toFixed(3)}–{preview.end_s.toFixed(3)} s.</p>
+      {(!fileRanges || previewSamples == null) && <p className="mt-2 mb-0 text-caption text-text-muted">Waveforms and playback cover {span.start_s.toFixed(3)}–{preview.end_s.toFixed(3)} s.</p>}
       <div className="mt-3 grid gap-3 sm:grid-cols-2">
         {sides.map(side => <div key={side} className="min-w-0">
           <p className="mt-0 mb-1 text-small font-medium">{names[side]}</p>
+          {fileRanges && previewSamples != null && <p className="mt-0 mb-1 text-caption text-text-muted">Playback and waveform {fileTime(fileRanges[side].start_sample, fileRanges[side].start_sample + previewSamples)}</p>}
           <ClipWaveform wave={preview.waveforms[side]} maximum={peak} name={names[side] + (levelAdjusted ? ' at adjusted difference' : '')} />
           <Playback body={assetBody(assets, preview.assets[side], 'audio/wav')}
             name={'Play ' + names[side].toLowerCase() + (levelAdjusted ? ' at adjusted difference' : '')} />
@@ -285,12 +316,14 @@ function SoundtrackTimingEvidence({ timing, assets }: { timing: SoundtrackTiming
 function ResultView({ result }: { result: Result }) {
   const { comparison, assets, pdf } = result
   const { picture, audio } = comparison
-  const isAudio = comparison.schema === 'chipmunk.audio-reference-comparison/1' || comparison.schema === 'chipmunk.audio-reference-comparison/2'
+  const hasTrim = comparison.schema === 'chipmunk.audio-reference-comparison/3'
+  const isAudio = hasTrim || comparison.schema === 'chipmunk.audio-reference-comparison/1' || comparison.schema === 'chipmunk.audio-reference-comparison/2'
+  const alignment = hasTrim ? audio?.trim_alignment : undefined
   const downloadName = 'chipmunk-verify-' + (isAudio ? 'audio' : 'video') + '-comparison'
   const notes = isAudio ? audioUnassessed : unassessed
   const firstAudioRange = audio?.ranges?.[0]
   const wholeRecording = audio?.ranges?.length === 1 && firstAudioRange?.start_sample === 0
-    && firstAudioRange.end_sample === audio.submitted?.samples
+    && firstAudioRange.end_sample === (alignment?.compared_samples ?? audio.submitted?.samples)
   return <div className="mt-5 space-y-4 border-t border-border pt-4">
     <div className="flex flex-wrap gap-2">
       <Button onClick={() => saveBlob(new Blob([JSON.stringify({ comparison, assets }, null, 2) + '\n'],
@@ -321,14 +354,22 @@ function ResultView({ result }: { result: Result }) {
     </>}
     {audio && (!isAudio || comparison.status === 'measured') && <>
       <h3 className="m-0 text-small font-medium">{isAudio ? 'Decoded audio' : 'Soundtrack'}</h3>
-      <p className="m-0 text-small">{audio.status === 'measured'
+      {alignment && <section aria-label="Shared audio after alignment" className="rounded-md border border-border p-3">
+        <h4 className="m-0 text-small font-medium">Shared audio after alignment</h4>
+        <p className="mt-2 mb-0 text-small">Compared {alignment.compared_samples.toLocaleString()} samples across the two recordings.</p>
+        <FileTimelines ranges={alignment.overlap} />
+      </section>}
+      <p className="m-0 text-small">{alignment ? audio.changed_samples
+        ? `${audio.changed_samples.toLocaleString()} decoded samples differ in the shared span.`
+        : 'No decoded samples differ in the shared span.'
+        : audio.status === 'measured'
         ? (audio.changed_samples ?? 0).toLocaleString() + ' decoded mono samples differ.'
         : notes[audio.status] ?? 'Soundtrack comparison unavailable.'}</p>
-      {isAudio && wholeRecording && <p className="m-0 text-caption text-text-muted">Differences span the whole recording. Encoding or gain changes can cause this.</p>}
+      {isAudio && wholeRecording && <p className="m-0 text-caption text-text-muted">Differences span {alignment ? 'the shared span' : 'the whole recording'}. Encoding or gain changes can cause this.</p>}
       {audio.ranges?.map(span => <SoundEvidence key={span.id} span={span} assets={assets} />)}
     </>}
     {comparison.status === 'measured' && <p className="m-0 text-caption text-text-muted">{isAudio
-      ? 'Times start at the first decoded sample. Ranges group adjacent 20 ms bins containing differing samples.'
+      ? `${alignment ? 'Each timeline starts at its file’s first decoded sample. Ends are exclusive. ' : 'Times start at the first decoded sample. '}Ranges group adjacent 20 ms bins containing differing samples.`
       : 'Times are relative to the first picture. Soundtrack ranges group 20 ms bins containing different samples.'}</p>}
 
   </div>
@@ -361,9 +402,12 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable }: { analysisId:
     try {
       const response = await request<Result>(route(analysisId, kind), { method: 'POST', headers: authHeaders('POST'), body, signal: controller.signal })
       const schema = response?.comparison?.schema
-      const accepted = kind === 'audio' ? [1, 2] : [1, 2, 3, 4, 5]
+      const accepted = kind === 'audio' ? [1, 2, 3] : [1, 2, 3, 4, 5]
       if (!accepted.some(version => schema === `chipmunk.${kind}-reference-comparison/${version}`)) {
         throw new Error('The comparison response is incomplete.')
+      }
+      if (schema === 'chipmunk.audio-reference-comparison/3' && !response.comparison.audio?.trim_alignment) {
+        throw new Error('The comparison response is missing its shared audio range.')
       }
       if (!controller.signal.aborted) setResult(response)
     } catch (error) {
@@ -379,10 +423,10 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable }: { analysisId:
   return <section aria-labelledby={heading} className="rounded-md border border-border p-4">
     <h2 id={heading} className="m-0 text-body font-medium">Compare with an earlier {kind === 'audio' ? 'audio recording' : 'video'}</h2>
     <p className="mt-2 mb-0 text-small text-text-muted">{kind === 'audio'
-      ? 'Choose an earlier recording with the same start time and sample count. Each file can have up to 30 seconds of decoded audio and 48 MiB.'
+      ? 'Choose an earlier copy of the recording. Each file can have up to 30 seconds of decoded audio and 48 MiB.'
       : 'Choose an earlier copy with matching picture dimensions and timing. Each clip can have up to 12 seconds of picture timestamps, 360 frames, and 48 MiB.'}</p>
     {kind === 'audio' && <p className="mt-2 mb-0 text-caption text-text-muted">
-      For matching lossless 16 kHz mono recordings, the comparison can also account for a constant volume change.
+      Matching audio timelines can be compared directly. For lossless 16 kHz mono recordings, the comparison can also check for a constant volume change or align an overlap that leaves up to 250 ms outside the shared span in each file.
     </p>}
     {kind === 'video' && <p className="mt-2 mb-0 text-caption text-text-muted">
       Local soundtrack timing is checked when both files have identical decoded pictures and matching soundtrack clocks.

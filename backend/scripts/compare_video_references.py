@@ -19,13 +19,27 @@ from app.evidence.video_reference import (
 )
 
 
+def _same_json_value(actual, expected):
+    # A browser serializes an integral float as an integer. Preserve strict
+    # comparison for integer fields, including source ticks and sample counts.
+    if type(expected) is float and type(actual) in (int, float):
+        return actual == expected
+    if type(actual) is not type(expected):
+        return False
+    if isinstance(expected, dict):
+        return actual.keys() == expected.keys() and all(_same_json_value(actual[k], value) for k, value in expected.items())
+    if isinstance(expected, list):
+        return len(actual) == len(expected) and all(_same_json_value(a, b) for a, b in zip(actual, expected, strict=True))
+    return actual == expected
+
+
 def replay(compare, earlier: Path, submitted: Path, output: Path, *, verify: bool = False) -> dict:
     record, assets = compare(earlier, submitted)
     files = {**assets, "comparison.json": canonical_json(record) + b"\n"}
     if verify and output.is_file():
         exported = json.loads(output.read_bytes())
         if (not isinstance(exported, dict) or not isinstance(exported.get("assets"), dict)
-                or canonical_json(exported.get("comparison")) != canonical_json(record)
+                or not _same_json_value(exported.get("comparison"), record)
                 or {name: base64.b64decode(data, validate=True) for name, data in exported["assets"].items()} != assets):
             raise ValueError("The exported JSON or media differs from the re-decoded sources.")
     elif verify:

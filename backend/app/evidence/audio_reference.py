@@ -19,12 +19,15 @@ from app.storage.files import sniff_audio
 
 SCHEMA = "chipmunk.audio-reference-comparison/1"
 SCHEMA_WITH_LEVEL_ADJUSTMENT = "chipmunk.audio-reference-comparison/2"
+SCHEMA_WITH_TRIM_ALIGNMENT = "chipmunk.audio-reference-comparison/3"
 MAX_BYTES = 48 * 1024 * 1024
 MAX_SECONDS = 30
 MAX_PRESENTED_RANGES = 3
 AUDIO_BIN_SAMPLES = AUDIO_RATE // 50
 AUDIO_PREVIEW_SAMPLES = 2 * AUDIO_RATE
 NATIVE_LOSSLESS_CODECS = frozenset({"pcm_s16le", "pcm_s16be", "flac", "alac"})
+TRIM_LIMIT = AUDIO_RATE // 4
+ANCHOR_SAMPLES = 1024
 INTERPRETATION = (
     "This comparison measures differences in the first audio track after conversion to 16 kHz mono. "
     "Encoding, volume changes, or ordinary edits can change samples. "
@@ -36,6 +39,11 @@ LEVEL_INTERPRETATION = (
     "than half a quantization step from every value predicted by that range of gains. The residual waveform uses the "
     "midpoint of the fitted gain range and shows submitted minus volume-adjusted earlier samples. Ordinary processing "
     "and edits can cause these differences. This comparison contributes zero weight to the AI estimate."
+)
+TRIM_INTERPRETATION = (
+    "Two distinct sections of the original audio support the same sample offset. "
+    "The waveforms show differences inside the shared span. Samples outside that span were left unassessed. "
+    "A trim or an ordinary edit can cause these differences. This comparison contributes zero weight to the AI estimate."
 )
 
 
@@ -64,24 +72,28 @@ def _read_track(path, source, *, max_seconds, origin, video):
     try:
         decoded = decode_audio(path, source_sha256=source["sha256"], max_seconds=max_seconds + 1)
     except AudioStreamUnavailable:
-        return ("no_stream", None, None), False
+        return ("no_stream", None, None), False, False
     except (ValueError, RuntimeError):
-        return ("unverified_audio_clock", None, None), False
+        return ("unverified_audio_clock", None, None), False, False
     mapping = decoded.mapping
     if not video and mapping["samples"] > max_seconds * AUDIO_RATE:
-        return ("comparison_limit", None, None), False
+        return ("comparison_limit", None, None), False, False
     if len(mapping["timeline"]) != 1 or mapping["samples"] >= mapping["limit_samples"]:
-        return ("unverified_audio_clock", None, None), False
+        return ("unverified_audio_clock", None, None), False, False
     pts = mapping["timeline"][0]["source_pts"]
     relative = Fraction(pts, AUDIO_RATE) - origin
     native_lossless = (mapping["source_channels"] == 1 and mapping["source_sample_rate"] == AUDIO_RATE
                        and mapping["source_codec"] in NATIVE_LOSSLESS_CODECS)
+    exact_s16 = native_lossless and (
+        mapping["source_codec"] in {"pcm_s16le", "pcm_s16be"}
+        or (mapping["source_codec"] == "flac" and mapping.get("source_bit_depth") == 16)
+    )
     return ("measured", decoded.pcm, {"pcm_sha256": mapping["pcm_sha256"], "source_pts": pts,
-                                     "relative_start": str(relative), "samples": len(decoded.pcm)}), native_lossless
+                                     "relative_start": str(relative), "samples": len(decoded.pcm)}), native_lossless, exact_s16
 
 
 def read_track(path, source, *, max_seconds, origin=Fraction(0), video=False):
-    track, _ = _read_track(path, source, max_seconds=max_seconds, origin=origin, video=video)
+    track, _, _ = _read_track(path, source, max_seconds=max_seconds, origin=origin, video=video)
     return track
 
 
@@ -158,9 +170,60 @@ def _level_adjusted(first, second, assets):
             "interpretation": LEVEL_INTERPRETATION}
 
 
+def _clock_range(track, start, end):
+    pts = track[2]["source_pts"]
+    return {"start_sample": start, "end_sample": end,
+            "start_pts": pts + start, "end_exclusive_pts": pts + end}
+
+
+def _audio_trim(first, second, assets):
+    earlier, submitted = (np.rint(track[1] * 32768).astype("<i2") for track in (first, second))
+    count = min(len(earlier), len(submitted))
+    if count < 2 * AUDIO_RATE or abs(len(earlier) - len(submitted)) > TRIM_LIMIT:
+        return None
+    supports, offsets = [], []
+    for start in (count // 5, 4 * count // 5):
+        anchor = earlier[start:start + ANCHOR_SAMPLES]
+        if np.count_nonzero(np.abs(anchor.astype(np.int32)) >= 512) < 128 or len(np.unique(anchor)) < 64:
+            return None
+        low, high = start - TRIM_LIMIT, min(start + TRIM_LIMIT, len(submitted) - ANCHOR_SAMPLES)
+        candidates = np.flatnonzero(submitted[low:high + 1] == anchor[0]) + low
+        matches = [int(pos) for pos in candidates if np.array_equal(submitted[pos:pos + ANCHOR_SAMPLES], anchor)]
+        if len(matches) != 1:
+            return None
+        pos = matches[0]
+        offsets.append(start - pos)
+        supports.append({"earlier": _clock_range(first, start, start + ANCHOR_SAMPLES),
+                         "submitted": _clock_range(second, pos, pos + ANCHOR_SAMPLES),
+                         "pcm_sha256": hashlib.sha256(anchor.tobytes()).hexdigest()})
+    if offsets[0] != offsets[1] or supports[0]["pcm_sha256"] == supports[1]["pcm_sha256"]:
+        return None
+    first_start, second_start = max(0, offsets[0]), max(0, -offsets[0])
+    common = min(len(earlier) - first_start, len(submitted) - second_start)
+    if max(len(earlier), len(submitted)) - common > TRIM_LIMIT:
+        return None
+    clipped = []
+    overlap = {}
+    for side, track, start in (("earlier", first, first_start), ("submitted", second, second_start)):
+        overlap[side] = _clock_range(track, start, start + common)
+        clipped.append(("measured", track[1][start:start + common],
+                        {"source_pts": track[2]["source_pts"] + start}))
+    delta = clipped[1][1] - clipped[0][1]
+    changes = _measure_changes(*clipped, assets, delta != 0, delta, origin=Fraction(second_start, AUDIO_RATE))
+    for span in changes["ranges"]:
+        span["file_ranges"] = {
+            side: _clock_range(track, start + span["start_sample"], start + span["end_sample"])
+            for side, track, start in (("earlier", first, first_start), ("submitted", second, second_start))
+        }
+    return {"status": "measured", "earlier": first[2], "submitted": second[2], **changes,
+            "trim_alignment": {"earlier_minus_submitted_samples": offsets[0], "compared_samples": common,
+                               "overlap": overlap, "support": supports}}
+
+
 def compare(earlier: Path, submitted: Path, *, filenames: tuple[str, str] | None = None,
-            include_level_adjustment: bool = True) -> tuple[dict, dict[str, bytes]]:
-    """Compare complete recordings with the same continuous start and sample count."""
+            include_level_adjustment: bool = True,
+            include_trim_alignment: bool = True) -> tuple[dict, dict[str, bytes]]:
+    """Compare continuous recordings and recover a small, exactly supported edge trim."""
     paths = earlier, submitted
     filenames = filenames or (earlier.name, submitted.name)
     sources = tuple(_identity(path, name) for path, name in zip(paths, filenames, strict=True))
@@ -172,6 +235,12 @@ def compare(earlier: Path, submitted: Path, *, filenames: tuple[str, str] | None
     status = "comparison_limit" if any(track[0] == "comparison_limit" for track in tracks) else audio["status"]
     record = {"schema": SCHEMA, "status": status, "earlier": sources[0], "submitted": sources[1],
               "audio": audio, "interpretation": INTERPRETATION, "affects_overall_confidence": False}
+    if (include_trim_alignment and status == "audio_timelines_differ" and first[2] and second[2]
+            and audio["earlier"]["samples"] != audio["submitted"]["samples"]):
+        aligned = _audio_trim(*tracks, assets)
+        if aligned is not None:
+            record.update(schema=SCHEMA_WITH_TRIM_ALIGNMENT, status="measured", audio=aligned,
+                          interpretation=TRIM_INTERPRETATION)
     if include_level_adjustment and status == "measured" and audio["changed_samples"] and first[1] and second[1]:
         adjusted = _level_adjusted(*tracks, assets)
         if adjusted is not None:

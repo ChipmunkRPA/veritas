@@ -186,8 +186,10 @@ def _compare(aid: str, kind: str, original: tuple[str, int, str], earlier: Uploa
 
 _UPLOAD_RESPONSES = problem_responses(401, 404, 409, 413, 422, 429, 500)
 def _upload_body(kind):
+    earlier = ("Earlier copy with the same timing or a supported small trim."
+               if kind == "audio" else "Earlier copy with the same timing.")
     properties = {
-        "earlier": {"type": "string", "format": "binary", "description": "Earlier copy with the same timing."},
+        "earlier": {"type": "string", "format": "binary", "description": earlier},
         "include_pdf": {"type": "string", "enum": ["true", "false"], "default": "false"},
     }
     if kind == "video":

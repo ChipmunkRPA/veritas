@@ -105,9 +105,13 @@ function DraftResult({ result }: { result: DocumentRevisionResponse }) {
           </div>
         </div>
         <ul aria-label="Uncalibrated writing responses from earlier to analyzed" className="mt-3 mb-0 list-none p-0 text-caption">
-          {paired.responses.map((response, index) => <li key={index}>
-            Check {index + 1} · {response.earlier.toPrecision(4)} → {response.later.toPrecision(4)}
-          </li>)}
+          {paired.responses.map((response, index) => {
+            const center = paired.center_responses?.[index]
+            return <li key={index}>
+              Check {index + 1} · {center && 'With neighbors '}{response.earlier.toPrecision(4)} → {response.later.toPrecision(4)}
+              {center && <>. Changed sentence alone {center.earlier.toPrecision(4)} → {center.later.toPrecision(4)}.</>}
+            </li>
+          })}
         </ul>
       </>}
     </section>}

@@ -5541,6 +5541,20 @@
             "title": "Authorship Confidence Contribution",
             "type": "integer"
           },
+          "center_responses": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/DraftWritingResponse"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Center Responses"
+          },
           "change_ids": {
             "anyOf": [
               {
@@ -5592,7 +5606,8 @@
           "schema": {
             "enum": [
               "chipmunk.paired-writing-review/1",
-              "chipmunk.paired-writing-review/2"
+              "chipmunk.paired-writing-review/2",
+              "chipmunk.paired-writing-review/3"
             ],
             "title": "Schema",
             "type": "string"
@@ -5878,6 +5893,17 @@
       },
       "DraftWritingFocus": {
         "properties": {
+          "center_input_sha256": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Center Input Sha256"
+          },
           "context_spans": {
             "items": {
               "maxItems": 2,

@@ -1,0 +1,233 @@
+{
+  "browser": {
+    "exact_ranges": true,
+    "linked_changes": 1,
+    "page_errors": 0,
+    "pdf_json_downloads_match": true,
+    "plain_view": true
+  },
+  "cases": [
+    {
+      "assessment_unchanged": true,
+      "earlier": {
+        "center": "27c06c6655a7ae7f98a81c30a91b082252effc565db08a08269154eadf190731",
+        "context": "c9af8a5c3d5087d657dab6936b9a3029f183e03d740fbe1c888c7d6a4dee71fd",
+        "neighbors": [
+          "ff8779b76072b2d3b9e384864e8b11800be09c8116162fd7f05e7647a4b53bae",
+          "587b13a64f82e77248763a146f0d21998240b2f54507ca6d7fe38432e97e4152"
+        ],
+        "source_sha256": "f417860400d387ecae4e8e326122ea8fccc91deb3139fd915a630b6254624f9c",
+        "spans": [
+          [
+            147,
+            390
+          ],
+          [
+            392,
+            611
+          ],
+          [
+            612,
+            737
+          ]
+        ]
+      },
+      "group": "wellcome-13531",
+      "later": {
+        "center": "9f2200be1b1951c4bc2d9eec3d558bfa761b8f2f1aef92d1459707934de4bddd",
+        "context": "db793efe3a94643492adb0684cbeb91ad9fc145dcd212fdd19014f0e833ee8ab",
+        "neighbors": [
+          "ff8779b76072b2d3b9e384864e8b11800be09c8116162fd7f05e7647a4b53bae",
+          "587b13a64f82e77248763a146f0d21998240b2f54507ca6d7fe38432e97e4152"
+        ],
+        "source_sha256": "ba2e25777d6a052af831c2f1d728247fd5d83fd49a258f9a55c51b8f81e6cbe9",
+        "spans": [
+          [
+            147,
+            390
+          ],
+          [
+            392,
+            533
+          ],
+          [
+            534,
+            659
+          ]
+        ]
+      },
+      "older_schema_replayed": true,
+      "panel": "journal",
+      "pdf_json_exact": true,
+      "role": "qwen",
+      "status": "joint_increase"
+    },
+    {
+      "assessment_unchanged": true,
+      "earlier": {
+        "center": "27c06c6655a7ae7f98a81c30a91b082252effc565db08a08269154eadf190731",
+        "context": "c9af8a5c3d5087d657dab6936b9a3029f183e03d740fbe1c888c7d6a4dee71fd",
+        "neighbors": [
+          "ff8779b76072b2d3b9e384864e8b11800be09c8116162fd7f05e7647a4b53bae",
+          "587b13a64f82e77248763a146f0d21998240b2f54507ca6d7fe38432e97e4152"
+        ],
+        "source_sha256": "f417860400d387ecae4e8e326122ea8fccc91deb3139fd915a630b6254624f9c",
+        "spans": [
+          [
+            147,
+            390
+          ],
+          [
+            392,
+            611
+          ],
+          [
+            612,
+            737
+          ]
+        ]
+      },
+      "group": "wellcome-13531",
+      "later": {
+        "center": "4df1561b1e9f2b253279aa5576597162adaef0ae5f397d829d9fa57e6b8406e9",
+        "context": "7209287227317c7462fd408e956ce507e861dd59f1c0ad3a7d488733a93a93b0",
+        "neighbors": [
+          "ff8779b76072b2d3b9e384864e8b11800be09c8116162fd7f05e7647a4b53bae",
+          "587b13a64f82e77248763a146f0d21998240b2f54507ca6d7fe38432e97e4152"
+        ],
+        "source_sha256": "01aaeaa1f335fc3758b7ee4b375e45e1c127e0d387a1901d75d1603bb843849a",
+        "spans": [
+          [
+            147,
+            390
+          ],
+          [
+            392,
+            626
+          ],
+          [
+            627,
+            752
+          ]
+        ]
+      },
+      "older_schema_replayed": true,
+      "panel": "journal",
+      "pdf_json_exact": true,
+      "role": "smol2",
+      "status": "joint_increase"
+    },
+    {
+      "assessment_unchanged": true,
+      "earlier": {
+        "center": "0736cf0248d5ed5f25001bea3ec2538bb03fd5fb39118846d42b717443b293e0",
+        "context": "dc6035c0a97975ee1948259efc77d34c74f355b38b1215211bbba321b5785f33",
+        "neighbors": [
+          "22687e3872a93d7dd782f412b2fa0ee4dae972c02584f88d2c0e314420ee287e",
+          "5dc1809829679c9e8d1aacdb1b0642b261a240bc8330fb3930878de3c1d2e571"
+        ],
+        "source_sha256": "57dad0f796d0c07398c6fb8b3aea8b98b150e33d77f181ce5b7512cea58b5a4f",
+        "spans": [
+          [
+            0,
+            240
+          ],
+          [
+            241,
+            406
+          ],
+          [
+            408,
+            537
+          ]
+        ]
+      },
+      "group": "7668",
+      "later": {
+        "center": "62df06565b9923f7899046a73daea7712f1c4b774342ce30d63e28b65d9a64c5",
+        "context": "8ecb9c057d861c0333b8dbe176c2475122f0ec3277a07f6f51e2f09755d877c4",
+        "neighbors": [
+          "22687e3872a93d7dd782f412b2fa0ee4dae972c02584f88d2c0e314420ee287e",
+          "5dc1809829679c9e8d1aacdb1b0642b261a240bc8330fb3930878de3c1d2e571"
+        ],
+        "source_sha256": "e00b18a0df80f7fd6eb10fdaca7e203f05288ae1638b5df504e9cb311ec4eb58",
+        "spans": [
+          [
+            0,
+            240
+          ],
+          [
+            241,
+            437
+          ],
+          [
+            439,
+            568
+          ]
+        ]
+      },
+      "older_schema_replayed": true,
+      "panel": "f1000",
+      "pdf_json_exact": true,
+      "role": "granite",
+      "status": "joint_increase"
+    },
+    {
+      "assessment_unchanged": true,
+      "earlier": {
+        "center": "0736cf0248d5ed5f25001bea3ec2538bb03fd5fb39118846d42b717443b293e0",
+        "context": "dc6035c0a97975ee1948259efc77d34c74f355b38b1215211bbba321b5785f33",
+        "neighbors": [
+          "22687e3872a93d7dd782f412b2fa0ee4dae972c02584f88d2c0e314420ee287e",
+          "5dc1809829679c9e8d1aacdb1b0642b261a240bc8330fb3930878de3c1d2e571"
+        ],
+        "source_sha256": "57dad0f796d0c07398c6fb8b3aea8b98b150e33d77f181ce5b7512cea58b5a4f",
+        "spans": [
+          [
+            0,
+            240
+          ],
+          [
+            241,
+            406
+          ],
+          [
+            408,
+            537
+          ]
+        ]
+      },
+      "group": "7668",
+      "later": {
+        "center": "10ecd7bbbb882d50b94ac4bb66b91571fef7da0401be106c7e11a3c20eed84a0",
+        "context": "4226439bd892b163388e7f0d12ae4c7b9a3a5f42dfd78ae28055aea30f0136a7",
+        "neighbors": [
+          "22687e3872a93d7dd782f412b2fa0ee4dae972c02584f88d2c0e314420ee287e",
+          "5dc1809829679c9e8d1aacdb1b0642b261a240bc8330fb3930878de3c1d2e571"
+        ],
+        "source_sha256": "d416666151ac84463baeb1c875ded01274f2f9f912ad40319a8275dc43e6f886",
+        "spans": [
+          [
+            0,
+            240
+          ],
+          [
+            241,
+            399
+          ],
+          [
+            401,
+            530
+          ]
+        ]
+      },
+      "older_schema_replayed": true,
+      "panel": "f1000",
+      "pdf_json_exact": true,
+      "role": "ordinary",
+      "status": "no_joint_increase"
+    }
+  ],
+  "simulated_paid_jobs": 4,
+  "unpaid_jobs": 0
+}

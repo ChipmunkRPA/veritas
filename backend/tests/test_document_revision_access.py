@@ -30,6 +30,40 @@ from app.storage.db import Analysis, Artefact, BillingOrderRow
 from scripts.review_document_revision_export import review
 
 
+def test_paired_plain_text_boundary_replays_both_scales_and_preserves_opt_out(monkeypatch):
+    earlier = ("The team approved the earlier draft after its last meeting. The editor checked the original version "
+               "for clarity and accuracy.\n\nThe published article records the procedures for the next review.")
+    later = earlier.replace("The editor checked the original version for clarity and accuracy.",
+                            "The editor carefully examined the complete draft to improve its organization and readability.")
+    monkeypatch.setattr(paired, "_ocr_language", lambda _: {"code": "en", "status": "supported"})
+    a, b = earlier.encode(), later.encode()
+    result, old, new = document_revision.compare_with_text(a, b, ".txt")
+    assert paired.paired_input(result, old, new) is None
+    candidate = paired.paired_input(result, old, new, allow_boundary=True)
+    assert candidate is not None and candidate.across_paragraphs
+    for side, source in (("earlier", old), ("later", new)):
+        focus = candidate.geometry[side]
+        assert focus["text"] == source[focus["start"]:focus["end"]]
+        assert focus["center_input_sha256"] == paired.text_hash(focus["text"])
+    contextual = [{"earlier": .2, "later": .6}, {"earlier": .2, "later": .6}]
+    exact = [{"earlier": .4, "later": .6}, {"earlier": .4, "later": .6}]
+    proof = paired.result(candidate, contextual, center_responses=exact)
+    assert proof["schema"] == paired.BOUNDARY_SCHEMA and proof["status"] == "joint_increase"
+    assert proof["authorship_confidence_contribution"] == 0
+    assert paired.verify(result, old, new, proof) == "joint_increase"
+    reversed_exact = [dict(earlier=reading["later"], later=reading["earlier"]) for reading in exact]
+    assert paired.result(candidate, contextual, center_responses=reversed_exact)["status"] == "no_joint_increase"
+    proof["later"]["center_input_sha256"] = "0" * 64
+    with pytest.raises(ValueError, match="does not replay"):
+        paired.verify(result, old, new, proof)
+    malformed = later.replace("\n\n", " ")
+    changed_layout, old, new = document_revision.compare_with_text(a, malformed.encode(), ".txt")
+    assert paired.paired_input(changed_layout, old, new, allow_boundary=True) is None
+    unavailable = paired.result(None)
+    assert unavailable["schema"] == paired.WIDE_SCHEMA and "center_responses" not in unavailable
+    assert paired.verify(changed_layout, old, new, unavailable) == "outside_scope"
+
+
 def _email(text):
     message = EmailMessage()
     message["From"] = "fixture@example.invalid"

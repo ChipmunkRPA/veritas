@@ -82,8 +82,13 @@ def _paired(review: dict | None) -> str:
             output.append(f'<div class="side"><p class="coordinates">{label} {unit} [{row["start"]}, {row["end"]})</p>'
                           f'<p class="excerpt">{escape(row["text"])}</p></div>')
         output.append("<p>Uncalibrated responses from the earlier and analyzed versions</p>")
-        output.extend(f'<p>Check {i} · {row["earlier"]:.4g} → {row["later"]:.4g}</p>'
-                      for i, row in enumerate(review["responses"], 1))
+        center = review.get("center_responses")
+        for i, row in enumerate(review["responses"], 1):
+            reading = f'{row["earlier"]:.4g} → {row["later"]:.4g}'
+            if center:
+                exact = center[i - 1]
+                reading = f'With neighbors {reading}. Changed sentence alone {exact["earlier"]:.4g} → {exact["later"]:.4g}.'
+            output.append(f'<p>Check {i} · {reading}</p>')
     return "".join(output) + "</section>"
 
 

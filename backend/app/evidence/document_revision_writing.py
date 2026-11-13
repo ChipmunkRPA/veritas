@@ -11,6 +11,9 @@ from app.detectors.text.segment import segment
 
 SCHEMA = "chipmunk.paired-writing-review/1"
 WIDE_SCHEMA = "chipmunk.paired-writing-review/2"
+BOUNDARY_SCHEMA = "chipmunk.paired-writing-review/3"
+# Second-highest genuine work response in the frozen paired center transfer.
+BOUNDARY_POINT = 0.12844311183234092
 MAX_WORDS = 420
 SCOPE = ("This experimental check compares one changed sentence and its two unchanged neighbors in the same paragraph "
          "of a short English plain-text draft. Responses are uncalibrated and carry zero authorship confidence weight.")
@@ -29,6 +32,10 @@ EMAIL_SCOPE = ("This experimental check compares one changed sentence and its tw
 PDF_SCOPE = ("This experimental check compares one changed sentence and two unchanged neighboring sentences in one "
              "text block on a single upright PDF page with selectable text and a verified reading order. Responses are "
              "uncalibrated and carry zero authorship confidence weight.")
+BOUNDARY_SCOPE = ("This experimental check compares one changed sentence beside a paragraph break in a short English "
+                  "plain-text draft. Both versions keep the same paragraph layout and the same adjacent sentences. "
+                  "Each check reads the changed sentence alone and with its neighbors. "
+                  "Responses are uncalibrated and carry zero authorship confidence weight.")
 STATUS_TEXT = {
     "outside_scope": "This draft pair falls outside the exact single-sentence comparison scope.",
     "unavailable": "The local writing checks could not complete the paired comparison.",
@@ -43,6 +50,7 @@ class PairedInput:
     earlier: str
     later: str
     geometry: dict
+    across_paragraphs: bool = False
 
 
 def _source(text: str):
@@ -55,7 +63,8 @@ def _source(text: str):
     return document, segment(document)
 
 
-def paired_input(comparison: dict, earlier: str, later: str, *, allow_wide: bool = True) -> PairedInput | None:
+def paired_input(comparison: dict, earlier: str, later: str, *, allow_wide: bool = True,
+                 allow_boundary: bool = False) -> PairedInput | None:
     """Pair an interior change. For EML, use the verified decoded body prefix from the draft comparison."""
     changes = comparison["changes"]
     if comparison["format"] == "email":
@@ -78,25 +87,36 @@ def paired_input(comparison: dict, earlier: str, later: str, *, allow_wide: bool
         return None
     index = changed[0]
     selected = slice(index - 1, changed[-1] + 2)
-    paragraph = old_units[index].paragraph
-    if any(unit.paragraph != paragraph for unit in old_units[selected]):
+    paragraphs = [unit.paragraph for unit in old_units[selected]]
+    across_paragraphs = paragraphs[0] != paragraphs[-1]
+    if across_paragraphs and (not allow_boundary or comparison["format"] != "plain_text" or wide
+                              or paragraphs[-1] - paragraphs[0] != 1):
         return None
 
     def context(document, units, raw_text):
-        block = document.source_map[paragraph]
-        ranges = block["source_ranges"]
-        offset, stop = ranges[0][2], ranges[-1][3]
-        normalized, origins = _normalise(raw_text[offset:stop])
-        if normalized != document.text[block["start"]:block["end"]]:
-            raise ValueError("Writing comparison paragraph differs from its decoded source")
-        spans = [[offset + origins[unit.start - block["start"]][0], offset + origins[unit.end - block["start"] - 1][1]]
-                 for unit in units]
+        origins_by_paragraph = {}
+        spans = []
+        for unit in units:
+            block = document.source_map[unit.paragraph]
+            if unit.paragraph not in origins_by_paragraph:
+                ranges = block["source_ranges"]
+                offset, stop = ranges[0][2], ranges[-1][3]
+                normalized, origins = _normalise(raw_text[offset:stop])
+                if normalized != document.text[block["start"]:block["end"]]:
+                    raise ValueError("Writing comparison paragraph differs from its decoded source")
+                origins_by_paragraph[unit.paragraph] = offset, origins
+            offset, origins = origins_by_paragraph[unit.paragraph]
+            spans.append([offset + origins[unit.start - block["start"]][0],
+                          offset + origins[unit.end - block["start"] - 1][1]])
         if [_normalise(raw_text[start:end])[0] for start, end in spans] != [unit.text for unit in units]:
             raise ValueError("Writing comparison context differs from its decoded source")
         start, end = spans[1][0], spans[-2][1]
         model_input = " ".join(unit.text for unit in units)
-        return {"start": start, "end": end, "text": raw_text[start:end],
-                "context_spans": spans, "input_sha256": text_hash(model_input)}, model_input
+        focus = {"start": start, "end": end, "text": raw_text[start:end],
+                 "context_spans": spans, "input_sha256": text_hash(model_input)}
+        if across_paragraphs:
+            focus["center_input_sha256"] = text_hash(_normalise(focus["text"])[0])
+        return focus, model_input
 
     before, old_input = context(old_doc, old_units[selected], earlier)
     after, new_input = context(new_doc, new_units[selected], later)
@@ -135,10 +155,10 @@ def paired_input(comparison: dict, earlier: str, later: str, *, allow_wide: bool
                         or (item["changed_tokens"] and not pages[0]["word_regions"])):
                     return None
     return PairedInput(old_input, new_input, {"earlier": before, "later": after,
-                                             "change_ids": [change["id"] for change in changes]})
+                                             "change_ids": [change["id"] for change in changes]}, across_paragraphs)
 
 
-def _direction(responses: list[dict]) -> str:
+def _increases(responses: list[dict]) -> list[float]:
     if (not isinstance(responses, list) or len(responses) != 2
             or any(not isinstance(pair, dict) or set(pair) != {"earlier", "later"} for pair in responses)):
         raise ValueError("Two paired writing responses are required")
@@ -149,13 +169,25 @@ def _direction(responses: list[dict]) -> str:
         value = min(1 - 1e-7, max(1e-7, p))
         return value / (1 - value)
 
-    increases = [math.log(odds(row["later"]) / odds(row["earlier"])) for row in responses]
-    return "joint_increase" if all(increase >= math.log(2) for increase in increases) else "no_joint_increase"
+    return [math.log(odds(row["later"]) / odds(row["earlier"])) for row in responses]
 
 
 def result(candidate: PairedInput | None, responses: list[dict] | None = None, *, draft_format: str = "plain_text",
-           allow_wide: bool = True) -> dict:
-    status = "outside_scope" if candidate is None else _direction(responses) if responses is not None else "unavailable"
+           allow_wide: bool = True, center_responses: list[dict] | None = None) -> dict:
+    across_paragraphs = candidate is not None and candidate.across_paragraphs
+    status = "outside_scope" if candidate is None else "unavailable"
+    if responses is not None:
+        if across_paragraphs:
+            if center_responses is None:
+                raise ValueError("The cross-paragraph check needs exact sentence responses")
+            positive = min([*_increases(responses), *_increases(center_responses)]) > BOUNDARY_POINT
+        else:
+            if center_responses is not None:
+                raise ValueError("The same-paragraph check has no separate sentence responses")
+            positive = min(_increases(responses)) >= math.log(2)
+        status = "joint_increase" if positive else "no_joint_increase"
+    elif center_responses is not None:
+        raise ValueError("Context responses are required with sentence responses")
     wide = candidate is not None and len(candidate.geometry["later"]["context_spans"]) == 4
     plain_outside = candidate is None and draft_format == "plain_text" and allow_wide
     scope = WIDE_SCOPE if wide else {"docx": WORD_SCOPE, "email": EMAIL_SCOPE, "pdf": PDF_SCOPE}.get(draft_format, SCOPE)
@@ -163,20 +195,28 @@ def result(candidate: PairedInput | None, responses: list[dict] | None = None, *
              "scope": PLAIN_SCOPE if plain_outside else scope,
              "summary": "This draft pair falls outside the exact paired sentence scope." if plain_outside else STATUS_TEXT[status],
              "authorship_confidence_contribution": 0}
+    if across_paragraphs:
+        value.update(schema=BOUNDARY_SCHEMA, scope=BOUNDARY_SCOPE)
+        if status == "joint_increase":
+            value["summary"] = "Both writing checks gave a stronger AI-like response for the changed sentence alone and with its neighbors."
     if candidate is not None:
         value.update(candidate.geometry)
     if responses is not None:
         value["responses"] = responses
+    if center_responses is not None:
+        value["center_responses"] = center_responses
     return value
 
 
 def verify(comparison: dict, earlier: str, later: str, recorded: dict) -> str:
     """Rebuild the source scope and check saved response arithmetic without inference."""
-    allow_wide = recorded.get("schema") == WIDE_SCHEMA
-    candidate = paired_input(comparison, earlier, later, allow_wide=allow_wide)
+    schema = recorded.get("schema")
+    allow_wide = schema in (WIDE_SCHEMA, BOUNDARY_SCHEMA)
+    candidate = paired_input(comparison, earlier, later, allow_wide=allow_wide, allow_boundary=schema == BOUNDARY_SCHEMA)
     if candidate is None and "responses" in recorded:
         raise ValueError("An out-of-scope draft cannot carry paired responses")
-    expected = result(candidate, recorded.get("responses"), draft_format=comparison["format"], allow_wide=allow_wide)
+    expected = result(candidate, recorded.get("responses"), draft_format=comparison["format"], allow_wide=allow_wide,
+                      center_responses=recorded.get("center_responses"))
     if json.dumps(recorded, sort_keys=True, allow_nan=False) != json.dumps(expected, sort_keys=True, allow_nan=False):
         raise ValueError("The paired writing check does not replay from these source positions and saved responses")
     return expected["status"]
@@ -184,6 +224,24 @@ def verify(comparison: dict, earlier: str, later: str, recorded: dict) -> str:
 
 def score(candidate: PairedInput) -> list[dict] | None:
     """Use the two pinned local checks, one resident lease at a time."""
+    measured = _score([candidate.earlier, candidate.later])
+    return [{"earlier": row[0], "later": row[1]} for row in measured] if measured is not None else None
+
+
+def score_boundary(candidate: PairedInput) -> tuple[list[dict] | None, list[dict] | None]:
+    centers = [_normalise(candidate.geometry[side]["text"])[0] for side in ("earlier", "later")]
+    if any(text_hash(center) != candidate.geometry[side]["center_input_sha256"]
+           for side, center in zip(("earlier", "later"), centers, strict=True)):
+        raise ValueError("The exact sentence input differs from its source range")
+    inputs = [candidate.earlier, candidate.later, *centers]
+    measured = _score(inputs)
+    if measured is None:
+        return None, None
+    return ([{"earlier": row[0], "later": row[1]} for row in measured],
+            [{"earlier": row[2], "later": row[3]} for row in measured])
+
+
+def _score(inputs):
     from app.detectors.text.adapters import agreement
     from app.detectors.text.classifier import FourClassTextClassifier
     from app.engine.boundary import Deadline
@@ -193,7 +251,6 @@ def score(candidate: PairedInput) -> list[dict] | None:
 
     models = get_model_manager()
     registry = get_registry()
-    inputs = [candidate.earlier, candidate.later]
     deadline = Deadline(REVIEW_SECONDS)
     measured = []
     for detector_id, model_id, revision in (
@@ -217,7 +274,7 @@ def score(candidate: PairedInput) -> list[dict] | None:
                 values, coverage = agreement.score_inputs(inputs, loaded.obj, lease.device, check=deadline.check)
             deadline.check("paired writing check")
             del loaded
-        if len(values) != 2 or len(coverage) != 2 or not all(one_complete_window(proof) for proof in coverage):
+        if len(values) != len(inputs) or len(coverage) != len(inputs) or not all(one_complete_window(proof) for proof in coverage):
             return None
-        measured.append({"earlier": float(values[0]), "later": float(values[1])})
+        measured.append([float(value) for value in values])
     return measured

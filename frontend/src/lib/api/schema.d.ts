@@ -3556,6 +3556,8 @@ export interface components {
              * @constant
              */
             authorship_confidence_contribution: 0;
+            /** Center Responses */
+            center_responses?: components["schemas"]["DraftWritingResponse"][] | null;
             /** Change Ids */
             change_ids?: string[] | null;
             earlier?: components["schemas"]["DraftWritingFocus"] | null;
@@ -3566,7 +3568,7 @@ export interface components {
              * Schema
              * @enum {string}
              */
-            schema: "chipmunk.paired-writing-review/1" | "chipmunk.paired-writing-review/2";
+            schema: "chipmunk.paired-writing-review/1" | "chipmunk.paired-writing-review/2" | "chipmunk.paired-writing-review/3";
             /** Scope */
             scope: string;
             /**
@@ -3662,6 +3664,8 @@ export interface components {
         };
         /** DraftWritingFocus */
         DraftWritingFocus: {
+            /** Center Input Sha256 */
+            center_input_sha256?: string | null;
             /** Context Spans */
             context_spans: [
                 number,

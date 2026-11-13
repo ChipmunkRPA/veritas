@@ -110,6 +110,7 @@ class DraftWritingFocus(BaseModel):
     text: str
     context_spans: list[tuple[int, int]]
     input_sha256: str
+    center_input_sha256: str | None = None
 
 
 class DraftWritingResponse(BaseModel):
@@ -118,7 +119,7 @@ class DraftWritingResponse(BaseModel):
 
 
 class DraftPairedCheck(BaseModel):
-    schema_name: Literal["chipmunk.paired-writing-review/1", "chipmunk.paired-writing-review/2"] = Field(alias="schema")
+    schema_name: Literal["chipmunk.paired-writing-review/1", "chipmunk.paired-writing-review/2", "chipmunk.paired-writing-review/3"] = Field(alias="schema")
     status: Literal["outside_scope", "unavailable", "no_joint_increase", "joint_increase"]
     scope: str
     summary: str
@@ -127,6 +128,7 @@ class DraftPairedCheck(BaseModel):
     later: DraftWritingFocus | None = None
     change_ids: list[str] | None = None
     responses: list[DraftWritingResponse] | None = None
+    center_responses: list[DraftWritingResponse] | None = None
 
 
 class DraftComparison(BaseModel):
@@ -240,10 +242,16 @@ def _compare(aid: str, original: tuple[str, int, str], earlier: bytes, include_p
 
         candidate = None
         draft_format = comparison["format"]
+        boundary_enabled = settings.document_paired_boundary_review
         try:
-            candidate = paired.paired_input(comparison, old_text, new_text)
-            responses = paired.score(candidate) if candidate is not None else None
-            comparison["paired_check"] = paired.result(candidate, responses, draft_format=draft_format)
+            candidate = paired.paired_input(comparison, old_text, new_text, allow_boundary=boundary_enabled)
+            if candidate is not None and candidate.across_paragraphs:
+                responses, center_responses = paired.score_boundary(candidate)
+            else:
+                responses = paired.score(candidate) if candidate is not None else None
+                center_responses = None
+            comparison["paired_check"] = paired.result(candidate, responses, draft_format=draft_format,
+                                                       center_responses=center_responses)
         except Exception as error:
             log.warning("document_revision.paired_check_unavailable", exception=type(error).__name__)
             comparison["paired_check"] = paired.result(candidate, draft_format=draft_format)

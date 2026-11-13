@@ -40,7 +40,7 @@ body:
     id: reproduction
     attributes:
       label: Reproduction and complete outcomes
-      description: Include source revision, hardware, checks, conditions, coverage, errors, false alarms, misses, and inconclusive counts. For localization, include assessed areas or intervals, missed regions and control highlights. See docs/independent-testing.md for a privacy-safe receipt format.
+      description: Include the project revision and the exact claim you reviewed. For a public ledger replay, share the privacy-safe receipt from docs/independent-testing.md. For new media tests, give conditions, coverage, false alarms, misses, inconclusive counts and the locations checked.
     validations:
       required: true
   - type: textarea

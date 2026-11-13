@@ -23,6 +23,12 @@ CHECKS = {
     "writing": ("review_writing_elife_exact_sentence_confirmation.py", ("writing-elife-exact-sentence-confirmation-2026-11-12.json",),
                 (f"{PANELS}/writing-multiblock-independent-2026-11-12.json",)),
 }
+LOCALIZATION = {
+    "image": ("review_image_boundary_multiple_transfer.py", "image-boundary-multiple-transfer-2026-11-12.json"),
+    "video": ("review_video_reference_soundtrack_panel.py", "video-paired-soundtrack-transfer-2026-11-12.json"),
+    "audio": ("review_audio_partialedit_dense_transfer.py", "audio-partialedit-dense-transfer-2026-11-12.json"),
+    "writing": ("review_writing_source_conditioned.py", "writing-source-conditioned-2026-11-12.json"),
+}
 ISOLATED = (
     "import runpy,sys; "
     "script=sys.argv.pop(1); "
@@ -52,12 +58,16 @@ def revision() -> str | None:
     return head if re.fullmatch(r"(?:[0-9a-f]{40}|[0-9a-f]{64})", head) else None
 
 
-def replay(modality: str) -> dict:
-    script, panel_names, dependencies = CHECKS[modality]
+def replay(modality: str, suite: str = "overview") -> dict:
+    if suite == "localization":
+        script, panel = LOCALIZATION[modality]
+        panel_names, dependencies = (panel,), ()
+    else:
+        script, panel_names, dependencies = CHECKS[modality]
     entry = f"{SCRIPTS}/{script}"
     panels = [f"{PANELS}/{name}" for name in panel_names]
     fingerprints = {path: hash_file(path) for path in [entry, *panels, *dependencies]}
-    arguments = ["review", *panels] if modality == "audio" else panels
+    arguments = ["review", *panels] if modality == "audio" and suite == "overview" else panels
     record = {"files": fingerprints, "entry": entry, "arguments": arguments}
     if None in fingerprints.values():
         return record | {"status": "missing_input"}
@@ -77,11 +87,13 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("receipt", type=Path, help="Write a new JSON receipt")
     parser.add_argument("--modality", action="append", choices=CHECKS, help="Select a modality (default: all four)")
+    parser.add_argument("--suite", choices=("overview", "localization"), default="overview",
+                        help="Select the published study set (default: overview)")
     args = parser.parse_args()
     if args.receipt.exists():
         parser.error("Choose a new receipt path")
     modalities = tuple(dict.fromkeys(args.modality or CHECKS))
-    checks = {name: replay(name) for name in modalities}
+    checks = {name: replay(name, args.suite) for name in modalities}
     receipt = {
         "schema": "chipmunk.public-evaluation-replay/1",
         "scope": "Arithmetic replay of published evaluation ledgers",
@@ -90,6 +102,8 @@ def main():
         "runner_sha256": hash_file(f"{SCRIPTS}/replay_public_evaluations.py"),
         "checks": checks,
     }
+    if args.suite != "overview":
+        receipt["suite"] = args.suite
     with args.receipt.open("x", encoding="utf-8") as output:
         json.dump(receipt, output, indent=2, sort_keys=True)
         output.write("\n")

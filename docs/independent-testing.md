@@ -1200,6 +1200,24 @@ The selected ledgers cover [JPEG preview regions](image-thumbnail-extent-transfe
 For source labels, decoder output, or predictive performance, follow the
 native instructions for the claim you are reviewing.
 
+### Review localization across four media types
+
+```sh
+review_dir=$(mktemp -d)
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/localization.json" --suite localization
+```
+
+This suite replays four completed comparisons and preserves each study's
+held denominator and rejected decisions. It covers
+[multiple image regions](image-boundary-multiple-transfer-2026-11-12.md),
+[local soundtrack displacement](video-paired-soundtrack-transfer-2026-11-12.md),
+[partial neural speech edits](audio-partialedit-dense-transfer-2026-11-12.md),
+and [earlier-source writing responses](writing-source-conditioned-2026-11-12.md).
+It uses saved observations and checks the reported outcomes without downloading
+source files or weights. Each study links to its separate native-source
+instructions. Share the receipt and the claim or discrepancy you reviewed
+through the independent evaluation form.
+
 ### Replay recent evaluations from a clean checkout
 
 From the repository root, use Python 3.11 or later. These commands read the

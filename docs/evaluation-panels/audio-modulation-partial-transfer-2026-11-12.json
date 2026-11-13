@@ -1,0 +1,5499 @@
+{
+  "schema": "chipmunk.audio-modulation-partial-transfer/1",
+  "freeze_sha256": "15825d32692c2cbd46d24becd8c637d120b61a46871fb723e16244a378aac658",
+  "points": {
+    "modulation": 0.9078591191163738,
+    "with_cepstral": 0.7940131221902552
+  },
+  "incumbent_points": {
+    "matched_dry": 7.420738538106282,
+    "matched_loud_speech": 7.420738538106282,
+    "recorded_room_speech": 6.400866488004889
+  },
+  "selection_scores": {
+    "modulation": [
+      0.6724933033623213,
+      0.6265910305275246,
+      0.43687197615194145,
+      0.3860819802754274,
+      0.3695032877625765,
+      0.6684198768932644,
+      0.5745201271660526,
+      0.6207649470569724,
+      0.6842391944375921,
+      0.6983449298656129,
+      0.6743354234929114,
+      0.6700284254450466,
+      0.8170475493719206,
+      0.6613058866357341,
+      0.389233591000546,
+      0.49881365612769707,
+      0.7076957636987139,
+      0.7076957636987139,
+      0.7076957636987139,
+      0.525104843698764,
+      0.525104843698764,
+      0.7369901993827292,
+      0.652120516705923,
+      0.6179095510923869,
+      0.5595963788726471,
+      0.5882765979818706,
+      0.6802145189845193,
+      0.6802145189845193,
+      0.5301810122491378,
+      0.5301810122491378,
+      0.6723142258056015,
+      0.5171150113335361,
+      0.5708396403100312,
+      0.543277211124367,
+      0.543277211124367,
+      0.5256044074832101,
+      0.4931279087521088,
+      0.5994345303478372,
+      0.6287304534534438,
+      0.5029917277186216,
+      0.522878488036477,
+      0.564691308173212,
+      0.5463520153620208,
+      0.9078591191163738,
+      0.4119305052468984,
+      0.7333608725774484
+    ],
+    "with_cepstral": [
+      0.7806482567068821,
+      0.7940131221902552,
+      0.4837018820720093,
+      0.4837018820720093,
+      0.4837018820720093,
+      0.6449214464883534,
+      0.716872742583544,
+      0.5970247211645408,
+      0.612222220191136,
+      0.5895026145549357,
+      0.5690203807487948,
+      0.5638203086496348,
+      0.6464370532496405,
+      0.6464370532496405,
+      0.2980279893540159,
+      0.45560516068430407,
+      0.5379303523638973,
+      0.5379303523638973,
+      0.5379303523638973,
+      0.3989126176676887,
+      0.5263414654062476,
+      0.6392236951713087,
+      0.6392236951713087,
+      0.5046203213907022,
+      0.5046203213907022,
+      0.6823773317699245,
+      0.6043228649506998,
+      0.6043228649506998,
+      0.5414914043552885,
+      0.542943064745906,
+      0.5374287907632097,
+      0.39201172641605503,
+      0.4851394432242761,
+      0.3946969724142096,
+      0.4376153654626462,
+      0.4742072737095248,
+      0.5299184689302064,
+      0.361296824585962,
+      0.4258200128817766,
+      0.4704883557833835,
+      0.3780093967195994,
+      0.512671120490158,
+      0.6358493228269101,
+      0.6626270823188606,
+      0.5305487600862695,
+      0.6020497305552786
+    ]
+  },
+  "cases": [
+    {
+      "condition": "matched_dry",
+      "group": "confirmation-00",
+      "family": "stock",
+      "arm": "ordinary_same_host",
+      "truth": null,
+      "pcm_sha256": "4af6ff203bbe70ec78205c400d942dea37c6144911eb35aa59c81d8d339a7f85",
+      "checks": {
+        "incumbent": {
+          "score": 7.086391448974609,
+          "range": [
+            25600,
+            35200
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.6213428540191169,
+          "range": [
+            22400,
+            32000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.4593847566801057,
+          "range": [
+            38400,
+            48000
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_dry",
+      "group": "confirmation-00",
+      "family": "stock",
+      "arm": "ordinary_other_voice",
+      "truth": null,
+      "pcm_sha256": "c22fc6d10d74307a7708bd61468cf210a43924fcc3138f7aceaaaf27e8fccdc0",
+      "checks": {
+        "incumbent": {
+          "score": 5.104545593261719,
+          "range": [
+            44800,
+            54400
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.6213428540191169,
+          "range": [
+            22400,
+            32000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.5545611019559361,
+          "range": [
+            41600,
+            51200
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_dry",
+      "group": "confirmation-00",
+      "family": "stock",
+      "arm": "synthetic",
+      "truth": [
+        44800,
+        55040
+      ],
+      "pcm_sha256": "6c19dca95e2c92cfeeb4cba7e5aa40af5ae736138f84dfa268822e3bdb202cf7",
+      "checks": {
+        "incumbent": {
+          "score": -6.755428632100423,
+          "range": [
+            0,
+            9600
+          ],
+          "flag": false,
+          "oracle": -6.813627541065215,
+          "best_range_useful": false,
+          "beats_both": false,
+          "oracle_beats_both": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.6213428540191169,
+          "range": [
+            22400,
+            32000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.4961700320099915,
+          "range": [
+            54400,
+            64000
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "confirmation-00",
+      "family": "stock",
+      "arm": "ordinary_same_host",
+      "truth": null,
+      "pcm_sha256": "d99531baf79d1a730f9a7185a033240a542ba30184dcd4c7bbe351c98bf7b3d2",
+      "checks": {
+        "incumbent": {
+          "score": -5.38289737701416,
+          "range": [
+            51200,
+            60800
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.5933805278380765,
+          "range": [
+            0,
+            9600
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.5378610685889726,
+          "range": [
+            28800,
+            38400
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "confirmation-00",
+      "family": "stock",
+      "arm": "ordinary_other_voice",
+      "truth": null,
+      "pcm_sha256": "70777f1319884f67f6e1c22158e48a20f9af318b3cb7a1fd90b2c37c4583a796",
+      "checks": {
+        "incumbent": {
+          "score": -5.979495684305827,
+          "range": [
+            54400,
+            64000
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.5933805278380765,
+          "range": [
+            0,
+            9600
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.5378610685889726,
+          "range": [
+            28800,
+            38400
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "confirmation-00",
+      "family": "stock",
+      "arm": "synthetic",
+      "truth": [
+        44800,
+        55040
+      ],
+      "pcm_sha256": "789d05b93a47daf391420d2ecfa8583ff7ec9b37292c64121ae55a6f0b288e5b",
+      "checks": {
+        "incumbent": {
+          "score": -4.645196914672852,
+          "range": [
+            44800,
+            54400
+          ],
+          "flag": false,
+          "oracle": -4.654218137264252,
+          "best_range_useful": true,
+          "beats_both": true,
+          "oracle_beats_both": true,
+          "located": true
+        },
+        "modulation": {
+          "score": 0.5933805278380765,
+          "range": [
+            0,
+            9600
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.5378610685889726,
+          "range": [
+            28800,
+            38400
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "confirmation-00",
+      "family": "stock",
+      "arm": "untouched",
+      "truth": null,
+      "pcm_sha256": "7863202b1e30ca73e3e813f07fcd3365e979b6fe58ea3bcf69d65324a463b8d8",
+      "checks": {
+        "incumbent": {
+          "score": -6.11369514465332,
+          "range": [
+            48000,
+            57600
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.5933805278380765,
+          "range": [
+            0,
+            9600
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.5378610685889726,
+          "range": [
+            28800,
+            38400
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_dry",
+      "group": "confirmation-01",
+      "family": "expressive",
+      "arm": "ordinary_same_host",
+      "truth": null,
+      "pcm_sha256": "7c296d9122f55d9d3a471128044dfd10e3dac0567380d112480f25c205998023",
+      "checks": {
+        "incumbent": {
+          "score": -6.02618408203125,
+          "range": [
+            0,
+            9600
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.7219323762666493,
+          "range": [
+            41600,
+            51200
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.647059162422559,
+          "range": [
+            16000,
+            25600
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_dry",
+      "group": "confirmation-01",
+      "family": "expressive",
+      "arm": "ordinary_other_voice",
+      "truth": null,
+      "pcm_sha256": "20cf91ee4e5c118fd110fb572bcf76d4c17cca2a9e524e869205af4464846c82",
+      "checks": {
+        "incumbent": {
+          "score": -6.94206698735555,
+          "range": [
+            32000,
+            41600
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.6581034844444061,
+          "range": [
+            48000,
+            57600
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.647059162422559,
+          "range": [
+            16000,
+            25600
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_dry",
+      "group": "confirmation-01",
+      "family": "expressive",
+      "arm": "synthetic",
+      "truth": [
+        34560,
+        47360
+      ],
+      "pcm_sha256": "96397b0fce6f9ee976551c1fdb1f50d3d3d105e13b8cbc980ce55c78d801edb7",
+      "checks": {
+        "incumbent": {
+          "score": 5.096554120381673,
+          "range": [
+            35200,
+            44800
+          ],
+          "flag": false,
+          "oracle": 5.038646507263184,
+          "best_range_useful": true,
+          "beats_both": true,
+          "oracle_beats_both": true,
+          "located": true
+        },
+        "modulation": {
+          "score": 0.6598626069488369,
+          "range": [
+            48000,
+            57600
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.647059162422559,
+          "range": [
+            16000,
+            25600
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "confirmation-01",
+      "family": "expressive",
+      "arm": "ordinary_same_host",
+      "truth": null,
+      "pcm_sha256": "90e2af73bab85875839b60fc36714f97dd98df9db86096c6fc886c5a7f6522f7",
+      "checks": {
+        "incumbent": {
+          "score": 4.4647518793741865,
+          "range": [
+            25600,
+            35200
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.43086411009128756,
+          "range": [
+            22400,
+            32000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.44234537912600586,
+          "range": [
+            28800,
+            38400
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "confirmation-01",
+      "family": "expressive",
+      "arm": "ordinary_other_voice",
+      "truth": null,
+      "pcm_sha256": "6144bfd4263a50e4f73fdcba5ba8305c281927abed28d746b434a290d876a2c4",
+      "checks": {
+        "incumbent": {
+          "score": 4.644792556762695,
+          "range": [
+            25600,
+            35200
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.47670534838017037,
+          "range": [
+            38400,
+            48000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.5551492987669556,
+          "range": [
+            28800,
+            38400
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "confirmation-01",
+      "family": "expressive",
+      "arm": "synthetic",
+      "truth": [
+        34560,
+        47360
+      ],
+      "pcm_sha256": "0c4846fde9de7f1fdb97d48665fd489f9d8f92db89323f1338d2bd757b4be466",
+      "checks": {
+        "incumbent": {
+          "score": 4.7118180592854815,
+          "range": [
+            28800,
+            38400
+          ],
+          "flag": false,
+          "oracle": 4.147551035881042,
+          "best_range_useful": false,
+          "beats_both": true,
+          "oracle_beats_both": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.42886857253331545,
+          "range": [
+            22400,
+            32000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.3136408584651045,
+          "range": [
+            12800,
+            22400
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "confirmation-01",
+      "family": "expressive",
+      "arm": "untouched",
+      "truth": null,
+      "pcm_sha256": "e6cceea2eabd56d6e42c0e94dba54fc252e08debfe4f0b211fbbba6c9b477d82",
+      "checks": {
+        "incumbent": {
+          "score": 5.22189458211263,
+          "range": [
+            44800,
+            54400
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.44355656625280937,
+          "range": [
+            38400,
+            48000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.5055851105060638,
+          "range": [
+            38400,
+            48000
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_dry",
+      "group": "confirmation-02",
+      "family": "clone",
+      "arm": "ordinary_same_host",
+      "truth": null,
+      "pcm_sha256": "e746fdda3f4c0ee8be2e1f7ae973a756a792a6c6942628b07f73356f76051cf1",
+      "checks": {
+        "incumbent": {
+          "score": 7.375805854797363,
+          "range": [
+            35200,
+            44800
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.6723945415004432,
+          "range": [
+            9600,
+            19200
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.8231434994482956,
+          "range": [
+            6400,
+            16000
+          ],
+          "located": false,
+          "flag": true
+        }
+      }
+    },
+    {
+      "condition": "matched_dry",
+      "group": "confirmation-02",
+      "family": "clone",
+      "arm": "ordinary_other_voice",
+      "truth": null,
+      "pcm_sha256": "f67a079287d85222ef33c3468168c103412a52e1264099318b996ec15856c0f1",
+      "checks": {
+        "incumbent": {
+          "score": 7.233769416809082,
+          "range": [
+            9600,
+            19200
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.6723945415004432,
+          "range": [
+            9600,
+            19200
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.8231434994482956,
+          "range": [
+            6400,
+            16000
+          ],
+          "located": false,
+          "flag": true
+        }
+      }
+    },
+    {
+      "condition": "matched_dry",
+      "group": "confirmation-02",
+      "family": "clone",
+      "arm": "synthetic",
+      "truth": [
+        25600,
+        40960
+      ],
+      "pcm_sha256": "5de02044dddc96445c4aca2613c2643a98a5d696756e6ff08befb5f23d08f0ff",
+      "checks": {
+        "incumbent": {
+          "score": 7.523126443227132,
+          "range": [
+            25600,
+            35200
+          ],
+          "flag": true,
+          "oracle": 7.505830784638722,
+          "best_range_useful": true,
+          "beats_both": true,
+          "oracle_beats_both": true,
+          "located": true
+        },
+        "modulation": {
+          "score": 0.8324594051543421,
+          "range": [
+            32000,
+            41600
+          ],
+          "located": true,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.8231434994482956,
+          "range": [
+            6400,
+            16000
+          ],
+          "located": false,
+          "flag": true
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "confirmation-02",
+      "family": "clone",
+      "arm": "ordinary_same_host",
+      "truth": null,
+      "pcm_sha256": "adbfd147add7c2d5c35a6ce4da071001da2e187debdc831a31024c23fa4b3b7b",
+      "checks": {
+        "incumbent": {
+          "score": 1.7629557053248088,
+          "range": [
+            6400,
+            16000
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.5864388418804701,
+          "range": [
+            6400,
+            16000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.5006103146797524,
+          "range": [
+            22400,
+            32000
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "confirmation-02",
+      "family": "clone",
+      "arm": "ordinary_other_voice",
+      "truth": null,
+      "pcm_sha256": "20b34f6908418fd9be09a3690b6888b0a316f2e47a3123a7631e5caf9148910b",
+      "checks": {
+        "incumbent": {
+          "score": 5.292245388031006,
+          "range": [
+            6400,
+            16000
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.5864388418804701,
+          "range": [
+            6400,
+            16000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.4770046090088636,
+          "range": [
+            44800,
+            54400
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "confirmation-02",
+      "family": "clone",
+      "arm": "synthetic",
+      "truth": [
+        25600,
+        40960
+      ],
+      "pcm_sha256": "8b3cd495a240d17ba5f1e76d9931e73cd7ef479de44e88c2c2431e8321ac3785",
+      "checks": {
+        "incumbent": {
+          "score": 6.220905621846517,
+          "range": [
+            19200,
+            28800
+          ],
+          "flag": false,
+          "oracle": 5.978315393129985,
+          "best_range_useful": false,
+          "beats_both": true,
+          "oracle_beats_both": true,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.5864388418804701,
+          "range": [
+            6400,
+            16000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.4770046090088636,
+          "range": [
+            44800,
+            54400
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "confirmation-02",
+      "family": "clone",
+      "arm": "untouched",
+      "truth": null,
+      "pcm_sha256": "164f4f09a84328ceaab0cb7bfce2c16ce58300626d49a26add7c5786be18b88f",
+      "checks": {
+        "incumbent": {
+          "score": 2.2503246068954468,
+          "range": [
+            6400,
+            16000
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.5864388418804701,
+          "range": [
+            6400,
+            16000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.4770046090088636,
+          "range": [
+            44800,
+            54400
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_dry",
+      "group": "confirmation-03",
+      "family": "clone",
+      "arm": "ordinary_same_host",
+      "truth": null,
+      "pcm_sha256": "d648c926c79d4c9135f26f9b3dc6fc634788a3e685050d92075eece259b518c0",
+      "checks": {
+        "incumbent": {
+          "score": 4.602489153544108,
+          "range": [
+            38400,
+            48000
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.6719062049438804,
+          "range": [
+            6400,
+            16000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.5850597198433817,
+          "range": [
+            6400,
+            16000
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_dry",
+      "group": "confirmation-03",
+      "family": "clone",
+      "arm": "ordinary_other_voice",
+      "truth": null,
+      "pcm_sha256": "fcf293325c3402dd4a73de8afca9700feba40d1dae4a04c8803548150a928e7e",
+      "checks": {
+        "incumbent": {
+          "score": 6.183660666147868,
+          "range": [
+            32000,
+            41600
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.6719062049438804,
+          "range": [
+            6400,
+            16000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.5850597198433817,
+          "range": [
+            6400,
+            16000
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_dry",
+      "group": "confirmation-03",
+      "family": "clone",
+      "arm": "synthetic",
+      "truth": [
+        30720,
+        40960
+      ],
+      "pcm_sha256": "21c952b5754cd2771ebafa2602e6affeb4be5a77c4b6e694e7031c60ee857baa",
+      "checks": {
+        "incumbent": {
+          "score": 6.272635142008464,
+          "range": [
+            32000,
+            41600
+          ],
+          "flag": false,
+          "oracle": 6.244438707828521,
+          "best_range_useful": true,
+          "beats_both": true,
+          "oracle_beats_both": true,
+          "located": true
+        },
+        "modulation": {
+          "score": 0.6719062049438804,
+          "range": [
+            6400,
+            16000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.5850597198433817,
+          "range": [
+            6400,
+            16000
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "confirmation-03",
+      "family": "clone",
+      "arm": "ordinary_same_host",
+      "truth": null,
+      "pcm_sha256": "b697fd793a1f70f1ec16e82d9f8b4225225ecd56757291eb33544c2c4e3a1810",
+      "checks": {
+        "incumbent": {
+          "score": -1.3160104751586914,
+          "range": [
+            28800,
+            38400
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.5538432330717357,
+          "range": [
+            19200,
+            28800
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.42970286747919034,
+          "range": [
+            48000,
+            57600
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "confirmation-03",
+      "family": "clone",
+      "arm": "ordinary_other_voice",
+      "truth": null,
+      "pcm_sha256": "5deaa9adf0431853a92f6bee167688fd827e7025599142c143281f5af672ff33",
+      "checks": {
+        "incumbent": {
+          "score": 6.398485501607259,
+          "range": [
+            28800,
+            38400
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.5655611844469028,
+          "range": [
+            22400,
+            32000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.46961885403722015,
+          "range": [
+            25600,
+            35200
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "confirmation-03",
+      "family": "clone",
+      "arm": "synthetic",
+      "truth": [
+        30720,
+        40960
+      ],
+      "pcm_sha256": "38944ce7394def5861a9113e621753fb4a271bc7e956d1143f9d1424a05cb4be",
+      "checks": {
+        "incumbent": {
+          "score": 5.835469404856364,
+          "range": [
+            28800,
+            38400
+          ],
+          "flag": false,
+          "oracle": 5.742544084787369,
+          "best_range_useful": true,
+          "beats_both": false,
+          "oracle_beats_both": false,
+          "located": true
+        },
+        "modulation": {
+          "score": 0.5392017403608279,
+          "range": [
+            38400,
+            48000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.42970286747919034,
+          "range": [
+            48000,
+            57600
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "confirmation-03",
+      "family": "clone",
+      "arm": "untouched",
+      "truth": null,
+      "pcm_sha256": "7c980a2dc360949f3a950f62be7ff29b7379c9f2c9e0f36a4a7fdcd80b4a35c0",
+      "checks": {
+        "incumbent": {
+          "score": -5.604048093159993,
+          "range": [
+            0,
+            9600
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.7547437812377046,
+          "range": [
+            28800,
+            38400
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.869018639223876,
+          "range": [
+            25600,
+            35200
+          ],
+          "located": false,
+          "flag": true
+        }
+      }
+    },
+    {
+      "condition": "matched_dry",
+      "group": "confirmation-04",
+      "family": "expressive",
+      "arm": "ordinary_same_host",
+      "truth": null,
+      "pcm_sha256": "8e0bd7395d648055de74eafea3ad2638dadf5d6fd6c3442b8792e34f2576a7a2",
+      "checks": {
+        "incumbent": {
+          "score": 0.03195141752560934,
+          "range": [
+            35200,
+            44800
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.6637662667790266,
+          "range": [
+            12800,
+            22400
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.5757136267529029,
+          "range": [
+            44800,
+            54400
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_dry",
+      "group": "confirmation-04",
+      "family": "expressive",
+      "arm": "ordinary_other_voice",
+      "truth": null,
+      "pcm_sha256": "47b6fc80d20577f58c19405f64315fbefb731f89e6115377cdf30ba0ac16ff5a",
+      "checks": {
+        "incumbent": {
+          "score": -2.7942164738972983,
+          "range": [
+            44800,
+            54400
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.7318283953703828,
+          "range": [
+            28800,
+            38400
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.6820372254192413,
+          "range": [
+            48000,
+            57600
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_dry",
+      "group": "confirmation-04",
+      "family": "expressive",
+      "arm": "synthetic",
+      "truth": [
+        37120,
+        49920
+      ],
+      "pcm_sha256": "703b4db21b304cce46a78fce7e8cfa8d707ecfe7f174c1beff442995a40c8054",
+      "checks": {
+        "incumbent": {
+          "score": 5.668326218922933,
+          "range": [
+            41600,
+            51200
+          ],
+          "flag": false,
+          "oracle": 5.52399709224701,
+          "best_range_useful": true,
+          "beats_both": true,
+          "oracle_beats_both": true,
+          "located": true
+        },
+        "modulation": {
+          "score": 0.6637662667790266,
+          "range": [
+            12800,
+            22400
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.7278292404766793,
+          "range": [
+            35200,
+            44800
+          ],
+          "located": true,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "confirmation-04",
+      "family": "expressive",
+      "arm": "ordinary_same_host",
+      "truth": null,
+      "pcm_sha256": "16d95d1a67feb91c10c9e1be5c3527a5e041492d97b7cb7bc95ee988f302972d",
+      "checks": {
+        "incumbent": {
+          "score": -5.744298934936523,
+          "range": [
+            35200,
+            44800
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.6641139203037679,
+          "range": [
+            12800,
+            22400
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.8890874914823929,
+          "range": [
+            12800,
+            22400
+          ],
+          "located": false,
+          "flag": true
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "confirmation-04",
+      "family": "expressive",
+      "arm": "ordinary_other_voice",
+      "truth": null,
+      "pcm_sha256": "760f0ed517aab806f311ad096340e7b2806eb606c5ea1c5de7e510f8766d6128",
+      "checks": {
+        "incumbent": {
+          "score": -6.058022816975911,
+          "range": [
+            0,
+            9600
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.6641139203037679,
+          "range": [
+            12800,
+            22400
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.8890874914823929,
+          "range": [
+            12800,
+            22400
+          ],
+          "located": false,
+          "flag": true
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "confirmation-04",
+      "family": "expressive",
+      "arm": "synthetic",
+      "truth": [
+        37120,
+        49920
+      ],
+      "pcm_sha256": "cc5436ee02488f2069ba8544a673bcac3052548b591dcfa62cec39ff9cf34b0c",
+      "checks": {
+        "incumbent": {
+          "score": -5.928709983825684,
+          "range": [
+            35200,
+            44800
+          ],
+          "flag": false,
+          "oracle": -6.119036293029786,
+          "best_range_useful": true,
+          "beats_both": false,
+          "oracle_beats_both": false,
+          "located": true
+        },
+        "modulation": {
+          "score": 0.6641139203037679,
+          "range": [
+            12800,
+            22400
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.8890874914823929,
+          "range": [
+            12800,
+            22400
+          ],
+          "located": false,
+          "flag": true
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "confirmation-04",
+      "family": "expressive",
+      "arm": "untouched",
+      "truth": null,
+      "pcm_sha256": "a0c1ac41ef04663a3f96013e87bbb8fa8b24dbd2a82210088d5a7d9368156cd9",
+      "checks": {
+        "incumbent": {
+          "score": -6.709464073181152,
+          "range": [
+            35200,
+            44800
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.6641139203037679,
+          "range": [
+            12800,
+            22400
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.8890874914823929,
+          "range": [
+            12800,
+            22400
+          ],
+          "located": false,
+          "flag": true
+        }
+      }
+    },
+    {
+      "condition": "matched_dry",
+      "group": "confirmation-05",
+      "family": "clone",
+      "arm": "ordinary_same_host",
+      "truth": null,
+      "pcm_sha256": "d570b5cd65368432b2a52eb6bb9c56814fa5a9b1fc8ec45aaeeea53739ee1873",
+      "checks": {
+        "incumbent": {
+          "score": -6.0887807210286455,
+          "range": [
+            16000,
+            25600
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.5593531136784943,
+          "range": [
+            12800,
+            22400
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.3690814606921917,
+          "range": [
+            38400,
+            48000
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_dry",
+      "group": "confirmation-05",
+      "family": "clone",
+      "arm": "ordinary_other_voice",
+      "truth": null,
+      "pcm_sha256": "c559b6f61ccaa105913dea8297dae7236501526cbce04614f0032585a1b0c432",
+      "checks": {
+        "incumbent": {
+          "score": 6.890913645426433,
+          "range": [
+            22400,
+            32000
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.760894133504966,
+          "range": [
+            19200,
+            28800
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.5879601896213781,
+          "range": [
+            19200,
+            28800
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_dry",
+      "group": "confirmation-05",
+      "family": "clone",
+      "arm": "synthetic",
+      "truth": [
+        23040,
+        38400
+      ],
+      "pcm_sha256": "39ad203191095cb9d805639477262d0fac2a9bed915a3393dd19d0242fbdbabd",
+      "checks": {
+        "incumbent": {
+          "score": 6.969857374827067,
+          "range": [
+            28800,
+            38400
+          ],
+          "flag": false,
+          "oracle": 6.895579357941945,
+          "best_range_useful": true,
+          "beats_both": true,
+          "oracle_beats_both": true,
+          "located": true
+        },
+        "modulation": {
+          "score": 0.5466009094075744,
+          "range": [
+            25600,
+            35200
+          ],
+          "located": true,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.44491768282582456,
+          "range": [
+            35200,
+            44800
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "confirmation-05",
+      "family": "clone",
+      "arm": "ordinary_same_host",
+      "truth": null,
+      "pcm_sha256": "349f850b253b1200015f4b0f07e9ae493f42a9082a995c04b5b80ffc8029ac7c",
+      "checks": {
+        "incumbent": {
+          "score": -6.078683058420817,
+          "range": [
+            0,
+            9600
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.5858597117165254,
+          "range": [
+            54400,
+            64000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.4327364654177626,
+          "range": [
+            54400,
+            64000
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "confirmation-05",
+      "family": "clone",
+      "arm": "ordinary_other_voice",
+      "truth": null,
+      "pcm_sha256": "3bd91e85721e0664f232efc201918092dd3468ea1a184f0781dea677d832aa2c",
+      "checks": {
+        "incumbent": {
+          "score": -5.78937832514445,
+          "range": [
+            0,
+            9600
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.5858597117165254,
+          "range": [
+            54400,
+            64000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.4327364654177626,
+          "range": [
+            54400,
+            64000
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "confirmation-05",
+      "family": "clone",
+      "arm": "synthetic",
+      "truth": [
+        23040,
+        38400
+      ],
+      "pcm_sha256": "79d1a0b733ecaa8b8850fed5e146d9abc35e0dcc5a684b76adcb58d2891ffa2e",
+      "checks": {
+        "incumbent": {
+          "score": 5.653955618540446,
+          "range": [
+            28800,
+            38400
+          ],
+          "flag": false,
+          "oracle": 5.481206516424815,
+          "best_range_useful": true,
+          "beats_both": true,
+          "oracle_beats_both": true,
+          "located": true
+        },
+        "modulation": {
+          "score": 0.5858597117165254,
+          "range": [
+            54400,
+            64000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.4327364654177626,
+          "range": [
+            54400,
+            64000
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "confirmation-05",
+      "family": "clone",
+      "arm": "untouched",
+      "truth": null,
+      "pcm_sha256": "3d4dbc3a27f41bb269624706efcca5f44262b62ea505f5e729fb509c23efdb69",
+      "checks": {
+        "incumbent": {
+          "score": -5.914397398630778,
+          "range": [
+            0,
+            9600
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.632658351442058,
+          "range": [
+            22400,
+            32000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.4822470980094547,
+          "range": [
+            25600,
+            35200
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_dry",
+      "group": "confirmation-06",
+      "family": "expressive",
+      "arm": "ordinary_same_host",
+      "truth": null,
+      "pcm_sha256": "7999e9c255ae5513b1cddb276c3feaf3c3180c8d8f2c96ec336101b1d53d35b1",
+      "checks": {
+        "incumbent": {
+          "score": 4.199893792470296,
+          "range": [
+            3200,
+            12800
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.6791128009254287,
+          "range": [
+            41600,
+            51200
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.6104934424105819,
+          "range": [
+            41600,
+            51200
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_dry",
+      "group": "confirmation-06",
+      "family": "expressive",
+      "arm": "ordinary_other_voice",
+      "truth": null,
+      "pcm_sha256": "efcbd6917b6207cca8d4face1c803006a3917a303bd8a7caff66762104a8b27d",
+      "checks": {
+        "incumbent": {
+          "score": 4.243780612945557,
+          "range": [
+            12800,
+            22400
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.6791128009254287,
+          "range": [
+            41600,
+            51200
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.6104934424105819,
+          "range": [
+            41600,
+            51200
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_dry",
+      "group": "confirmation-06",
+      "family": "expressive",
+      "arm": "synthetic",
+      "truth": [
+        12800,
+        23040
+      ],
+      "pcm_sha256": "6db3e5bdea89231d2619fc8c53a59e8eb3377d0cca8d97cf81824ef1b1b0613d",
+      "checks": {
+        "incumbent": {
+          "score": 4.905997435251872,
+          "range": [
+            12800,
+            22400
+          ],
+          "flag": false,
+          "oracle": 4.838677525520325,
+          "best_range_useful": true,
+          "beats_both": true,
+          "oracle_beats_both": true,
+          "located": true
+        },
+        "modulation": {
+          "score": 0.729230207760254,
+          "range": [
+            16000,
+            25600
+          ],
+          "located": true,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.6104934424105819,
+          "range": [
+            41600,
+            51200
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "confirmation-06",
+      "family": "expressive",
+      "arm": "ordinary_same_host",
+      "truth": null,
+      "pcm_sha256": "71bb5288a987051876cd7784fbb54068efc7a12a57bc2d5ae6e75f065579de89",
+      "checks": {
+        "incumbent": {
+          "score": -6.84890095392863,
+          "range": [
+            0,
+            9600
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.6206981076322208,
+          "range": [
+            38400,
+            48000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.41750292088449253,
+          "range": [
+            38400,
+            48000
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "confirmation-06",
+      "family": "expressive",
+      "arm": "ordinary_other_voice",
+      "truth": null,
+      "pcm_sha256": "f184073bc0d6cc210ec4d7ff6ef202f8f8c77c60029f925b0f6a0dc57b127c8b",
+      "checks": {
+        "incumbent": {
+          "score": -6.759973049163818,
+          "range": [
+            41600,
+            51200
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.6206981076322208,
+          "range": [
+            38400,
+            48000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.41750292088449253,
+          "range": [
+            38400,
+            48000
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "confirmation-06",
+      "family": "expressive",
+      "arm": "synthetic",
+      "truth": [
+        12800,
+        23040
+      ],
+      "pcm_sha256": "1c86499a822c8788a6ebbe4596d8b3a659706eda3f8c488d0815aa3d90804d18",
+      "checks": {
+        "incumbent": {
+          "score": -6.748165289560954,
+          "range": [
+            0,
+            9600
+          ],
+          "flag": false,
+          "oracle": -6.784387707710266,
+          "best_range_useful": false,
+          "beats_both": true,
+          "oracle_beats_both": true,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.6206981076322208,
+          "range": [
+            38400,
+            48000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.41750292088449253,
+          "range": [
+            38400,
+            48000
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "confirmation-06",
+      "family": "expressive",
+      "arm": "untouched",
+      "truth": null,
+      "pcm_sha256": "7a605a94058490be5542c10ff34095e5874f8b9475d2f8753bd08cce5688dc9a",
+      "checks": {
+        "incumbent": {
+          "score": -6.87597640355428,
+          "range": [
+            12800,
+            22400
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.6206981076322208,
+          "range": [
+            38400,
+            48000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.41750292088449253,
+          "range": [
+            38400,
+            48000
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_dry",
+      "group": "confirmation-07",
+      "family": "expressive",
+      "arm": "ordinary_same_host",
+      "truth": null,
+      "pcm_sha256": "689fe7652a92c15403ca502d46f9d755b6ab7e7ee56821eca6b36a3a070c7069",
+      "checks": {
+        "incumbent": {
+          "score": -5.919890403747559,
+          "range": [
+            25600,
+            35200
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.6224186920624176,
+          "range": [
+            9600,
+            19200
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.36466167111650694,
+          "range": [
+            12800,
+            22400
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_dry",
+      "group": "confirmation-07",
+      "family": "expressive",
+      "arm": "ordinary_other_voice",
+      "truth": null,
+      "pcm_sha256": "fa5edfd1613635c4b82e7ff96f2f30c8d7125bc2031311c480cbccdaf75aeaf1",
+      "checks": {
+        "incumbent": {
+          "score": -4.881044387817383,
+          "range": [
+            54400,
+            64000
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.757642183613676,
+          "range": [
+            48000,
+            57600
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.4542853097403728,
+          "range": [
+            48000,
+            57600
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_dry",
+      "group": "confirmation-07",
+      "family": "expressive",
+      "arm": "synthetic",
+      "truth": [
+        47360,
+        60160
+      ],
+      "pcm_sha256": "cd918d0ca948e4bc44ec2045ab17c9c841fcc4c4fbb2122bee2eed2c98382624",
+      "checks": {
+        "incumbent": {
+          "score": 6.319724718729655,
+          "range": [
+            48000,
+            57600
+          ],
+          "flag": false,
+          "oracle": 6.296801805496216,
+          "best_range_useful": true,
+          "beats_both": true,
+          "oracle_beats_both": true,
+          "located": true
+        },
+        "modulation": {
+          "score": 0.6224186920624176,
+          "range": [
+            9600,
+            19200
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.3653868687258293,
+          "range": [
+            48000,
+            57600
+          ],
+          "located": true,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "confirmation-07",
+      "family": "expressive",
+      "arm": "ordinary_same_host",
+      "truth": null,
+      "pcm_sha256": "13f38506267e805619a9a795e518b0949e5f8e3a1c156875a286e70f6276fb59",
+      "checks": {
+        "incumbent": {
+          "score": -5.612992604573567,
+          "range": [
+            25600,
+            35200
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.728780629516406,
+          "range": [
+            12800,
+            22400
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.4763647446668755,
+          "range": [
+            41600,
+            51200
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "confirmation-07",
+      "family": "expressive",
+      "arm": "ordinary_other_voice",
+      "truth": null,
+      "pcm_sha256": "6594c0e684bd26bccdf48f59cbffff5f913eb825425625b287216ba678c99246",
+      "checks": {
+        "incumbent": {
+          "score": -6.017630259195964,
+          "range": [
+            0,
+            9600
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.728780629516406,
+          "range": [
+            12800,
+            22400
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.3695353529441296,
+          "range": [
+            12800,
+            22400
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "confirmation-07",
+      "family": "expressive",
+      "arm": "synthetic",
+      "truth": [
+        47360,
+        60160
+      ],
+      "pcm_sha256": "3efbfb1e10e218ade834adf9bc900ee16287fc92b23ef200bc4b1377202cc049",
+      "checks": {
+        "incumbent": {
+          "score": -6.012068112691243,
+          "range": [
+            41600,
+            51200
+          ],
+          "flag": false,
+          "oracle": -6.108315181732178,
+          "best_range_useful": false,
+          "beats_both": false,
+          "oracle_beats_both": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.728780629516406,
+          "range": [
+            12800,
+            22400
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.4221080214925385,
+          "range": [
+            44800,
+            54400
+          ],
+          "located": true,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "confirmation-07",
+      "family": "expressive",
+      "arm": "untouched",
+      "truth": null,
+      "pcm_sha256": "e029ae89983efb4cf61c9eba2d843d0f38f55a1fe6e5a4d6c351861f7619835e",
+      "checks": {
+        "incumbent": {
+          "score": -6.264421463012695,
+          "range": [
+            0,
+            9600
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.728780629516406,
+          "range": [
+            12800,
+            22400
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.44963362917232463,
+          "range": [
+            41600,
+            51200
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_dry",
+      "group": "confirmation-08",
+      "family": "stock",
+      "arm": "ordinary_same_host",
+      "truth": null,
+      "pcm_sha256": "de506be002fbff2f36ed7fc8b01914c50a2e904ac51887819a9e377ed1974bd7",
+      "checks": {
+        "incumbent": {
+          "score": -1.9395610491434734,
+          "range": [
+            0,
+            9600
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.4419943865143126,
+          "range": [
+            48000,
+            57600
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.547068601717018,
+          "range": [
+            19200,
+            28800
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_dry",
+      "group": "confirmation-08",
+      "family": "stock",
+      "arm": "ordinary_other_voice",
+      "truth": null,
+      "pcm_sha256": "daf948ee48ef85629e209f679baaf6c3f8c10829122f9dc9f00fd058c1dcc026",
+      "checks": {
+        "incumbent": {
+          "score": 7.294622421264648,
+          "range": [
+            6400,
+            16000
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.4419943865143126,
+          "range": [
+            48000,
+            57600
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.4940975539085779,
+          "range": [
+            9600,
+            19200
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_dry",
+      "group": "confirmation-08",
+      "family": "stock",
+      "arm": "synthetic",
+      "truth": [
+        5120,
+        20480
+      ],
+      "pcm_sha256": "ba91b31749d08b4b101beb79931cc18ff1246cb1ba5028e4fea15a4f3fa81b99",
+      "checks": {
+        "incumbent": {
+          "score": 7.498062928517659,
+          "range": [
+            9600,
+            19200
+          ],
+          "flag": true,
+          "oracle": 7.478680551052094,
+          "best_range_useful": true,
+          "beats_both": true,
+          "oracle_beats_both": true,
+          "located": true
+        },
+        "modulation": {
+          "score": 0.7252551539306046,
+          "range": [
+            0,
+            9600
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.7459436234335965,
+          "range": [
+            0,
+            9600
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "confirmation-08",
+      "family": "stock",
+      "arm": "ordinary_same_host",
+      "truth": null,
+      "pcm_sha256": "e0184e520f4a4c16547b66006f5db6c6de06660e7133b918d039f59334b6ec42",
+      "checks": {
+        "incumbent": {
+          "score": -6.054744402567546,
+          "range": [
+            0,
+            9600
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.6132576977923795,
+          "range": [
+            38400,
+            48000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.5784355827811791,
+          "range": [
+            41600,
+            51200
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "confirmation-08",
+      "family": "stock",
+      "arm": "ordinary_other_voice",
+      "truth": null,
+      "pcm_sha256": "ecf81e0627064a827bb9a5e478902338822cd8b57b4418111862c82fdd016ac4",
+      "checks": {
+        "incumbent": {
+          "score": -4.114184061686198,
+          "range": [
+            12800,
+            22400
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.6132576977923795,
+          "range": [
+            38400,
+            48000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.5784355827811791,
+          "range": [
+            41600,
+            51200
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "confirmation-08",
+      "family": "stock",
+      "arm": "synthetic",
+      "truth": [
+        5120,
+        20480
+      ],
+      "pcm_sha256": "4ccee845fc39ce97921153f469fa799d572740f466edb9c2173cd49493326fed",
+      "checks": {
+        "incumbent": {
+          "score": 5.742791493733724,
+          "range": [
+            16000,
+            25600
+          ],
+          "flag": false,
+          "oracle": 5.517333288987477,
+          "best_range_useful": false,
+          "beats_both": true,
+          "oracle_beats_both": true,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.6132576977923795,
+          "range": [
+            38400,
+            48000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.5784355827811791,
+          "range": [
+            41600,
+            51200
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "confirmation-08",
+      "family": "stock",
+      "arm": "untouched",
+      "truth": null,
+      "pcm_sha256": "6623c00586a1629eb62cb4b0cc46083c4250bda545874ed3a22f603d70bebe7d",
+      "checks": {
+        "incumbent": {
+          "score": -5.9529805183410645,
+          "range": [
+            0,
+            9600
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.6132576977923795,
+          "range": [
+            38400,
+            48000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.5784355827811791,
+          "range": [
+            41600,
+            51200
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_dry",
+      "group": "confirmation-09",
+      "family": "stock",
+      "arm": "ordinary_same_host",
+      "truth": null,
+      "pcm_sha256": "6999b7fb6071fb8b5812704c220234a3455ed64e2cc44cfdc052a6051c927e78",
+      "checks": {
+        "incumbent": {
+          "score": 5.400121688842773,
+          "range": [
+            35200,
+            44800
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.6737139697886162,
+          "range": [
+            48000,
+            57600
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.44163936046177443,
+          "range": [
+            3200,
+            12800
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_dry",
+      "group": "confirmation-09",
+      "family": "stock",
+      "arm": "ordinary_other_voice",
+      "truth": null,
+      "pcm_sha256": "b7f79a00dd3e713abe89f1bf87b81ee678f07059f5f82a99be54cea0efda3769",
+      "checks": {
+        "incumbent": {
+          "score": 6.57069714864095,
+          "range": [
+            32000,
+            41600
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.6737139697886162,
+          "range": [
+            48000,
+            57600
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.44163936046177443,
+          "range": [
+            3200,
+            12800
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_dry",
+      "group": "confirmation-09",
+      "family": "stock",
+      "arm": "synthetic",
+      "truth": [
+        24320,
+        34560
+      ],
+      "pcm_sha256": "b014f87e72f11fbcb3dc3ec7ae865b118154cb978f948c57c107c873e6dbe213",
+      "checks": {
+        "incumbent": {
+          "score": 6.967252731323242,
+          "range": [
+            32000,
+            41600
+          ],
+          "flag": false,
+          "oracle": 6.83984661102295,
+          "best_range_useful": false,
+          "beats_both": true,
+          "oracle_beats_both": true,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.6737139697886162,
+          "range": [
+            48000,
+            57600
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.48165476779315375,
+          "range": [
+            28800,
+            38400
+          ],
+          "located": true,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "confirmation-09",
+      "family": "stock",
+      "arm": "ordinary_same_host",
+      "truth": null,
+      "pcm_sha256": "42aabf5dec3f125d3feddd5487625a4bb4e2bc127ba92e4d9df9d7d73b0bf4dc",
+      "checks": {
+        "incumbent": {
+          "score": -5.414274533589681,
+          "range": [
+            6400,
+            16000
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.5149866962753008,
+          "range": [
+            48000,
+            57600
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.42777373601222957,
+          "range": [
+            22400,
+            32000
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "confirmation-09",
+      "family": "stock",
+      "arm": "ordinary_other_voice",
+      "truth": null,
+      "pcm_sha256": "c846e3bbb6862534361bcc54ef54b04e82d027b0e78ce7e640db1db8ae9e98f1",
+      "checks": {
+        "incumbent": {
+          "score": -5.808364391326904,
+          "range": [
+            6400,
+            16000
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.5149866962753008,
+          "range": [
+            48000,
+            57600
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.365388752827674,
+          "range": [
+            35200,
+            44800
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "confirmation-09",
+      "family": "stock",
+      "arm": "synthetic",
+      "truth": [
+        24320,
+        34560
+      ],
+      "pcm_sha256": "3db2ab7c3e0225535026d662bb85dd2af15ceadda2d0f3d2700c229b8d54f6b2",
+      "checks": {
+        "incumbent": {
+          "score": -4.235996723175049,
+          "range": [
+            22400,
+            32000
+          ],
+          "flag": false,
+          "oracle": -4.299098759889603,
+          "best_range_useful": true,
+          "beats_both": true,
+          "oracle_beats_both": true,
+          "located": true
+        },
+        "modulation": {
+          "score": 0.65622081775306,
+          "range": [
+            28800,
+            38400
+          ],
+          "located": true,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.36825703791542264,
+          "range": [
+            22400,
+            32000
+          ],
+          "located": true,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "confirmation-09",
+      "family": "stock",
+      "arm": "untouched",
+      "truth": null,
+      "pcm_sha256": "1ccd79a4f656b18924ab93676c5e52bbb314995dcf72ec3ed1aeba95dca7f879",
+      "checks": {
+        "incumbent": {
+          "score": -6.167335510253906,
+          "range": [
+            6400,
+            16000
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.5149866962753008,
+          "range": [
+            48000,
+            57600
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.3710734751707337,
+          "range": [
+            35200,
+            44800
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "connected:a5b9acd1d13a7d45b267e06cc088fb187f47b9b02b51f728c919b36137ca999d",
+      "family": null,
+      "arm": "background_only",
+      "truth": null,
+      "pcm_sha256": "718c1fff0334edbd2ab1888655f9d9810716159cf869f86d7599393dea43fd1b",
+      "checks": {
+        "incumbent": {
+          "score": -7.140124956766765,
+          "range": [
+            32000,
+            41600
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.8282838054096412,
+          "range": [
+            0,
+            9600
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.9509130902569103,
+          "range": [
+            0,
+            9600
+          ],
+          "located": false,
+          "flag": true
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "connected:99657c24a578a033f541324336cd91d5189d37176c7ec1d250920fb1d6bcd21e",
+      "family": null,
+      "arm": "background_only",
+      "truth": null,
+      "pcm_sha256": "9b58383c51d58201c9a90239832d94d35d143fcd990bfa11244f95efdd69997e",
+      "checks": {
+        "incumbent": {
+          "score": -7.100208918253581,
+          "range": [
+            28800,
+            38400
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.6134598506702087,
+          "range": [
+            32000,
+            41600
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.3709824901189393,
+          "range": [
+            32000,
+            41600
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "connected:e75108d4af53d46c1cc59c9175167aa2e22af5f274b323fe2d76cc157e308ee2",
+      "family": null,
+      "arm": "background_only",
+      "truth": null,
+      "pcm_sha256": "7f9961cccec7d0adb7627f6c8840b2ced705d8f229dd9ff3ccafd2e4aa768939",
+      "checks": {
+        "incumbent": {
+          "score": -7.106877485911052,
+          "range": [
+            0,
+            9600
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.543806251233271,
+          "range": [
+            6400,
+            16000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.2531551171493676,
+          "range": [
+            9600,
+            19200
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "matched_loud_speech",
+      "group": "connected:ce3d15c259701d82070445462557ded42b1cd8e005f8985bd946e90c58599474",
+      "family": null,
+      "arm": "background_only",
+      "truth": null,
+      "pcm_sha256": "aac7d35e9352b7f2fc16a12f9554915482e7d9c9af8d4191764688bb1c4b9cd5",
+      "checks": {
+        "incumbent": {
+          "score": -6.943395296732585,
+          "range": [
+            12800,
+            22400
+          ],
+          "flag": false,
+          "oracle": null,
+          "best_range_useful": false,
+          "located": false
+        },
+        "modulation": {
+          "score": 0.45362385893413554,
+          "range": [
+            19200,
+            28800
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.5721047478146825,
+          "range": [
+            19200,
+            28800
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-0-0-early",
+      "family": "clone",
+      "arm": "untouched",
+      "truth": null,
+      "pcm_sha256": "5c4c8cadad443fd4c07210259a8a4eee8f36c86c68478491b6266f6e5eab19bc",
+      "checks": {
+        "incumbent": {
+          "score": -3.4847812730768597,
+          "range": [
+            48000,
+            80000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "modulation": {
+          "score": 0.3000927627543161,
+          "range": [
+            19200,
+            28800
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.22578100952072397,
+          "range": [
+            86400,
+            96000
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-0-0-early",
+      "family": "clone",
+      "arm": "ordinary_same_host",
+      "truth": null,
+      "pcm_sha256": "0a498c27acec27e03639afd01b735ee0aeca039dd486c5caef2d6efb2be61909",
+      "checks": {
+        "incumbent": {
+          "score": -3.4847812730768597,
+          "range": [
+            48000,
+            80000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "modulation": {
+          "score": 0.3000927627543161,
+          "range": [
+            19200,
+            28800
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.22578100952072397,
+          "range": [
+            86400,
+            96000
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-0-0-early",
+      "family": "clone",
+      "arm": "ordinary_other_voice",
+      "truth": null,
+      "pcm_sha256": "ca5def6bcf4dea9ff31700b7d6a0d760a77a961113b98fca99fdef962cdcb4dc",
+      "checks": {
+        "incumbent": {
+          "score": -3.4847812730768597,
+          "range": [
+            48000,
+            80000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "modulation": {
+          "score": 0.321790982610476,
+          "range": [
+            6400,
+            16000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.22578100952072397,
+          "range": [
+            86400,
+            96000
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-0-0-early",
+      "family": "clone",
+      "arm": "synthetic",
+      "truth": [
+        5120,
+        15360
+      ],
+      "pcm_sha256": "325134a9f2c67cb9a0733fdf393a2a480f0820064fe02dea2c7ae0f69c5551f3",
+      "checks": {
+        "incumbent": {
+          "score": -3.4847812730768597,
+          "range": [
+            48000,
+            80000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "modulation": {
+          "score": 0.44726546554431673,
+          "range": [
+            6400,
+            16000
+          ],
+          "located": true,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.2849418696607325,
+          "range": [
+            6400,
+            16000
+          ],
+          "located": true,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-0-1-interior",
+      "family": "expressive",
+      "arm": "untouched",
+      "truth": null,
+      "pcm_sha256": "8882721fb72676cd8b8d16ad2b34046590d1ff10455f26b2ea4736ec670d75ca",
+      "checks": {
+        "incumbent": {
+          "score": 6.54987854482451,
+          "range": [
+            16000,
+            48000
+          ],
+          "located": false,
+          "flag": true
+        },
+        "modulation": {
+          "score": 0.32663499786076394,
+          "range": [
+            57600,
+            67200
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.3417959249886953,
+          "range": [
+            0,
+            9600
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-0-1-interior",
+      "family": "expressive",
+      "arm": "ordinary_same_host",
+      "truth": null,
+      "pcm_sha256": "cb767c9545974da72706357e3f08364d82a2fd263418503879ddf865c74b7dcc",
+      "checks": {
+        "incumbent": {
+          "score": 6.54987854482451,
+          "range": [
+            16000,
+            48000
+          ],
+          "located": false,
+          "flag": true
+        },
+        "modulation": {
+          "score": 0.3819183090901468,
+          "range": [
+            51200,
+            60800
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.3417959249886953,
+          "range": [
+            0,
+            9600
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-0-1-interior",
+      "family": "expressive",
+      "arm": "ordinary_other_voice",
+      "truth": null,
+      "pcm_sha256": "b683731a921ff17d07d933a20acece13eb8bf7883c7df6988a6bde8be7da3c64",
+      "checks": {
+        "incumbent": {
+          "score": 6.54987854482451,
+          "range": [
+            16000,
+            48000
+          ],
+          "located": false,
+          "flag": true
+        },
+        "modulation": {
+          "score": 0.39095211214373654,
+          "range": [
+            57600,
+            67200
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.3417959249886953,
+          "range": [
+            0,
+            9600
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-0-1-interior",
+      "family": "expressive",
+      "arm": "synthetic",
+      "truth": [
+        55040,
+        67840
+      ],
+      "pcm_sha256": "c074cb79396fa2c4465d6d381307abc16006088f05fc4d0739e3b7ea0e620681",
+      "checks": {
+        "incumbent": {
+          "score": 6.54987854482451,
+          "range": [
+            16000,
+            48000
+          ],
+          "located": false,
+          "flag": true
+        },
+        "modulation": {
+          "score": 0.281490228353999,
+          "range": [
+            54400,
+            64000
+          ],
+          "located": true,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.3417959249886953,
+          "range": [
+            0,
+            9600
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-0-2-interior",
+      "family": "stock",
+      "arm": "untouched",
+      "truth": null,
+      "pcm_sha256": "8502023018e0ca9c3007fb86863c51d2fcd10aa84c1d7e0ff2d33cb19eb93d2e",
+      "checks": {
+        "incumbent": {
+          "score": -5.846299126037409,
+          "range": [
+            16000,
+            48000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "modulation": {
+          "score": 0.2701124021104977,
+          "range": [
+            0,
+            9600
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.16141504622215638,
+          "range": [
+            28800,
+            38400
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-0-2-interior",
+      "family": "stock",
+      "arm": "ordinary_same_host",
+      "truth": null,
+      "pcm_sha256": "46d80f1734dc8f0c02c9a6e25a7dbd459261922998de3f63b142054fe3de6347",
+      "checks": {
+        "incumbent": {
+          "score": -5.528422870202137,
+          "range": [
+            16000,
+            48000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "modulation": {
+          "score": 0.2701124021104977,
+          "range": [
+            0,
+            9600
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.10069844340714111,
+          "range": [
+            35200,
+            44800
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-0-2-interior",
+      "family": "stock",
+      "arm": "ordinary_other_voice",
+      "truth": null,
+      "pcm_sha256": "2ce02f8d8e2cedaaea6567b1b432b0fed7f0e061bb4abb69811923b5895e067b",
+      "checks": {
+        "incumbent": {
+          "score": -5.464600637422205,
+          "range": [
+            16000,
+            48000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "modulation": {
+          "score": 0.2701124021104977,
+          "range": [
+            0,
+            9600
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.09579774358658778,
+          "range": [
+            67200,
+            76800
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-0-2-interior",
+      "family": "stock",
+      "arm": "synthetic",
+      "truth": [
+        20480,
+        35840
+      ],
+      "pcm_sha256": "e154eee8d04d9dc764cd1aa7d0bb1006dd047b4724917b46f84890a44e3529b3",
+      "checks": {
+        "incumbent": {
+          "score": -5.522525801173611,
+          "range": [
+            16000,
+            48000
+          ],
+          "located": true,
+          "flag": false
+        },
+        "modulation": {
+          "score": 0.2768295800207869,
+          "range": [
+            19200,
+            28800
+          ],
+          "located": true,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.09579774358658778,
+          "range": [
+            67200,
+            76800
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-1-0-late",
+      "family": "expressive",
+      "arm": "untouched",
+      "truth": null,
+      "pcm_sha256": "cd499af493666b894f55a4e4a7e2ed9cfa46db22b57d5f921c14ab1c346cdfd6",
+      "checks": {
+        "incumbent": {
+          "score": 7.049524822776123,
+          "range": [
+            16000,
+            48000
+          ],
+          "located": false,
+          "flag": true
+        },
+        "modulation": {
+          "score": 0.31652804173747096,
+          "range": [
+            9600,
+            19200
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.4458064301072793,
+          "range": [
+            9600,
+            19200
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-1-0-late",
+      "family": "expressive",
+      "arm": "ordinary_same_host",
+      "truth": null,
+      "pcm_sha256": "d13a7d27aa9fad18bf1178f974ce69a0ced638e901064bb04e25d0c3090aea2a",
+      "checks": {
+        "incumbent": {
+          "score": 7.049524822776123,
+          "range": [
+            16000,
+            48000
+          ],
+          "located": false,
+          "flag": true
+        },
+        "modulation": {
+          "score": 0.31652804173747096,
+          "range": [
+            9600,
+            19200
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.4458064301072793,
+          "range": [
+            9600,
+            19200
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-1-0-late",
+      "family": "expressive",
+      "arm": "ordinary_other_voice",
+      "truth": null,
+      "pcm_sha256": "58e24137b34f233fbb07d5985411c2fb371c2b8f120f0456813a1da4e1bcf4a9",
+      "checks": {
+        "incumbent": {
+          "score": 7.049524822776123,
+          "range": [
+            16000,
+            48000
+          ],
+          "located": false,
+          "flag": true
+        },
+        "modulation": {
+          "score": 0.31652804173747096,
+          "range": [
+            9600,
+            19200
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.4458064301072793,
+          "range": [
+            9600,
+            19200
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-1-0-late",
+      "family": "expressive",
+      "arm": "synthetic",
+      "truth": [
+        80640,
+        90880
+      ],
+      "pcm_sha256": "b815e5c2f687666d65533025e628489f0d5abdf11282549f479f26017d2e99a1",
+      "checks": {
+        "incumbent": {
+          "score": 7.049524822776123,
+          "range": [
+            16000,
+            48000
+          ],
+          "located": false,
+          "flag": true
+        },
+        "modulation": {
+          "score": 0.3591086006134201,
+          "range": [
+            86400,
+            96000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.4458064301072793,
+          "range": [
+            9600,
+            19200
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-1-1-interior",
+      "family": "stock",
+      "arm": "untouched",
+      "truth": null,
+      "pcm_sha256": "2d83eb6072c9b452ce03ba6b8e736813542dbd5af769a58b2c56a8e2632f5d82",
+      "checks": {
+        "incumbent": {
+          "score": -4.171591251263912,
+          "range": [
+            48000,
+            80000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "modulation": {
+          "score": 0.34682726185096974,
+          "range": [
+            25600,
+            35200
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.2991579823444294,
+          "range": [
+            12800,
+            22400
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-1-1-interior",
+      "family": "stock",
+      "arm": "ordinary_same_host",
+      "truth": null,
+      "pcm_sha256": "404437b1b71df0c9be4e05c4add1d94837cbb773591b636667bc2e2cf53f6ee8",
+      "checks": {
+        "incumbent": {
+          "score": -2.400877756794253,
+          "range": [
+            16000,
+            48000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "modulation": {
+          "score": 0.37495056825966405,
+          "range": [
+            25600,
+            35200
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.35737616517723386,
+          "range": [
+            25600,
+            35200
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-1-1-interior",
+      "family": "stock",
+      "arm": "ordinary_other_voice",
+      "truth": null,
+      "pcm_sha256": "2d686d43d1b3dd89d9e3507bc821f5124e43b05c6469dfccebc3e774bfd6c56f",
+      "checks": {
+        "incumbent": {
+          "score": -4.171591251263912,
+          "range": [
+            48000,
+            80000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "modulation": {
+          "score": 0.4206063581874255,
+          "range": [
+            25600,
+            35200
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.3721658587825248,
+          "range": [
+            28800,
+            38400
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-1-1-interior",
+      "family": "stock",
+      "arm": "synthetic",
+      "truth": [
+        29440,
+        42240
+      ],
+      "pcm_sha256": "c8e6fe1a89542f5ae4725c26552c8439e112a562ff0dc0e615d95fc13b7b2f37",
+      "checks": {
+        "incumbent": {
+          "score": 3.4108534521822955,
+          "range": [
+            16000,
+            48000
+          ],
+          "located": true,
+          "flag": false
+        },
+        "modulation": {
+          "score": 0.43620090097341907,
+          "range": [
+            25600,
+            35200
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.35810976798743893,
+          "range": [
+            25600,
+            35200
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-1-2-interior",
+      "family": "clone",
+      "arm": "untouched",
+      "truth": null,
+      "pcm_sha256": "ffc515c68685312e70cb3148c2da7bcf5a4606f7deb251ded67dcca837e5e4c2",
+      "checks": {
+        "incumbent": {
+          "score": 6.961580550626552,
+          "range": [
+            16000,
+            48000
+          ],
+          "located": false,
+          "flag": true
+        },
+        "modulation": {
+          "score": 0.48359504844914714,
+          "range": [
+            70400,
+            80000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.5196215872638509,
+          "range": [
+            80000,
+            89600
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-1-2-interior",
+      "family": "clone",
+      "arm": "ordinary_same_host",
+      "truth": null,
+      "pcm_sha256": "2fdedea4b93e2f9f88a77801402c3d91f9503147607bab5ed2fbf08173ced896",
+      "checks": {
+        "incumbent": {
+          "score": 6.250906824120716,
+          "range": [
+            16000,
+            48000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "modulation": {
+          "score": 0.48359504844914714,
+          "range": [
+            70400,
+            80000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.5196215872638509,
+          "range": [
+            80000,
+            89600
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-1-2-interior",
+      "family": "clone",
+      "arm": "ordinary_other_voice",
+      "truth": null,
+      "pcm_sha256": "47b6e95b01416a58e07d4266a62f115eb9a29a454c7fbfa5cda57bedb9354ffa",
+      "checks": {
+        "incumbent": {
+          "score": 4.5089488931849795,
+          "range": [
+            16000,
+            48000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "modulation": {
+          "score": 0.48359504844914714,
+          "range": [
+            70400,
+            80000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.5196215872638509,
+          "range": [
+            80000,
+            89600
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-1-2-interior",
+      "family": "clone",
+      "arm": "synthetic",
+      "truth": [
+        26880,
+        42240
+      ],
+      "pcm_sha256": "4df8252c3a3000d7ef018e671ec31a785493237acdf88aab59b16e47b2e2a915",
+      "checks": {
+        "incumbent": {
+          "score": 6.731653251881977,
+          "range": [
+            16000,
+            48000
+          ],
+          "located": true,
+          "flag": true
+        },
+        "modulation": {
+          "score": 0.48359504844914714,
+          "range": [
+            70400,
+            80000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.5196215872638509,
+          "range": [
+            80000,
+            89600
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-2-0-early",
+      "family": "stock",
+      "arm": "untouched",
+      "truth": null,
+      "pcm_sha256": "824c632753d4b3ef4cb4b4e6cf780cd5ff27f097efe6be847b86a4fcd9d33791",
+      "checks": {
+        "incumbent": {
+          "score": 6.3717189664696425,
+          "range": [
+            16000,
+            48000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "modulation": {
+          "score": 0.45378281711673,
+          "range": [
+            25600,
+            35200
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.4009437738069914,
+          "range": [
+            35200,
+            44800
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-2-0-early",
+      "family": "stock",
+      "arm": "ordinary_same_host",
+      "truth": null,
+      "pcm_sha256": "7c8cde46f9abc59c69a99dc99b46b57c1e87f9ea1088303e9e984153301fb345",
+      "checks": {
+        "incumbent": {
+          "score": 6.3717189664696425,
+          "range": [
+            16000,
+            48000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "modulation": {
+          "score": 0.45378281711673,
+          "range": [
+            25600,
+            35200
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.4009437738069914,
+          "range": [
+            35200,
+            44800
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-2-0-early",
+      "family": "stock",
+      "arm": "ordinary_other_voice",
+      "truth": null,
+      "pcm_sha256": "13cbfee614d32b8c232bb93d21cb99bbf9ce0de46e9758997289d285af3a2603",
+      "checks": {
+        "incumbent": {
+          "score": 6.3717189664696425,
+          "range": [
+            16000,
+            48000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "modulation": {
+          "score": 0.45378281711673,
+          "range": [
+            25600,
+            35200
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.4009437738069914,
+          "range": [
+            35200,
+            44800
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-2-0-early",
+      "family": "stock",
+      "arm": "synthetic",
+      "truth": [
+        5120,
+        15360
+      ],
+      "pcm_sha256": "facff443caaa71274de2d748e2f4375833f6299b0b9f88a9e87f09bed0cf291d",
+      "checks": {
+        "incumbent": {
+          "score": 6.3717189664696425,
+          "range": [
+            16000,
+            48000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "modulation": {
+          "score": 0.45378281711673,
+          "range": [
+            25600,
+            35200
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.4009437738069914,
+          "range": [
+            35200,
+            44800
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-2-1-interior",
+      "family": "clone",
+      "arm": "untouched",
+      "truth": null,
+      "pcm_sha256": "f633ffb9943454ea3bfcfe5ca7a3c7f97c5466f97da0ba35577e92a3328075e5",
+      "checks": {
+        "incumbent": {
+          "score": 5.410399475306106,
+          "range": [
+            16000,
+            48000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "modulation": {
+          "score": 0.18704202555466173,
+          "range": [
+            44800,
+            54400
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.21162775222753014,
+          "range": [
+            35200,
+            44800
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-2-1-interior",
+      "family": "clone",
+      "arm": "ordinary_same_host",
+      "truth": null,
+      "pcm_sha256": "b93464aca558218f3a5ffd721ccd729a2921a239ca0322fc464b79b59cc5a5f3",
+      "checks": {
+        "incumbent": {
+          "score": 3.9077004687771373,
+          "range": [
+            16000,
+            48000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "modulation": {
+          "score": 0.2875628611746321,
+          "range": [
+            22400,
+            32000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.27416297057345024,
+          "range": [
+            19200,
+            28800
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-2-1-interior",
+      "family": "clone",
+      "arm": "ordinary_other_voice",
+      "truth": null,
+      "pcm_sha256": "313414ce9ac1f3ef84b32f23ddd60aa131a650e0162ca31805848b8bdd0e3e65",
+      "checks": {
+        "incumbent": {
+          "score": -1.5409455611735972,
+          "range": [
+            48000,
+            80000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "modulation": {
+          "score": 0.18704202555466173,
+          "range": [
+            44800,
+            54400
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.21162775222753014,
+          "range": [
+            35200,
+            44800
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-2-1-interior",
+      "family": "clone",
+      "arm": "synthetic",
+      "truth": [
+        17920,
+        30720
+      ],
+      "pcm_sha256": "8b24acf0caa7fd0a23340c56e756976a78cbdafc3aeee0709563e80269eb924f",
+      "checks": {
+        "incumbent": {
+          "score": 4.722822738221247,
+          "range": [
+            16000,
+            48000
+          ],
+          "located": true,
+          "flag": false
+        },
+        "modulation": {
+          "score": 0.20560908923321577,
+          "range": [
+            25600,
+            35200
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.21162775222753014,
+          "range": [
+            35200,
+            44800
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-2-2-interior",
+      "family": "expressive",
+      "arm": "untouched",
+      "truth": null,
+      "pcm_sha256": "60c7417427e3ee5db297c8f566b8dce1170a9b7017d68b1c01f84464f93214f6",
+      "checks": {
+        "incumbent": {
+          "score": -3.7506523150386615,
+          "range": [
+            48000,
+            80000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "modulation": {
+          "score": 0.4121692742900207,
+          "range": [
+            86400,
+            96000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.4536492872735569,
+          "range": [
+            38400,
+            48000
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-2-2-interior",
+      "family": "expressive",
+      "arm": "ordinary_same_host",
+      "truth": null,
+      "pcm_sha256": "19955add901a012527d1f3b8e8a8761ac51c9db3948ff8d6509595e3989d7bc3",
+      "checks": {
+        "incumbent": {
+          "score": -3.7506523150386615,
+          "range": [
+            48000,
+            80000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "modulation": {
+          "score": 0.4121692742900207,
+          "range": [
+            86400,
+            96000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.49140158359412883,
+          "range": [
+            38400,
+            48000
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-2-2-interior",
+      "family": "expressive",
+      "arm": "ordinary_other_voice",
+      "truth": null,
+      "pcm_sha256": "b198a73145251f0ecb9fe508cb993fefc7ad10f56b81a0e35b709b634102758f",
+      "checks": {
+        "incumbent": {
+          "score": -3.7506523150386615,
+          "range": [
+            48000,
+            80000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "modulation": {
+          "score": 0.4121692742900207,
+          "range": [
+            86400,
+            96000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.44081873347605843,
+          "range": [
+            38400,
+            48000
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-2-2-interior",
+      "family": "expressive",
+      "arm": "synthetic",
+      "truth": [
+        28160,
+        43520
+      ],
+      "pcm_sha256": "d51f026f79118b110ceefd4cbc6d28ff166809908a7f556748af4d6110453797",
+      "checks": {
+        "incumbent": {
+          "score": -3.7506523150386615,
+          "range": [
+            48000,
+            80000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "modulation": {
+          "score": 0.4121692742900207,
+          "range": [
+            86400,
+            96000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.3898856438965003,
+          "range": [
+            44800,
+            54400
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-3-0-late",
+      "family": "clone",
+      "arm": "untouched",
+      "truth": null,
+      "pcm_sha256": "be9bef622e0f9c49c8957cf3c9468c18359994da1a65c87170774a1b75192de1",
+      "checks": {
+        "incumbent": {
+          "score": 5.418531638296682,
+          "range": [
+            48000,
+            80000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "modulation": {
+          "score": 0.3445296246954073,
+          "range": [
+            80000,
+            89600
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.14669041768934712,
+          "range": [
+            16000,
+            25600
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-3-0-late",
+      "family": "clone",
+      "arm": "ordinary_same_host",
+      "truth": null,
+      "pcm_sha256": "42e45a417ac5b3e5d4fd4f468b9ba3201350073a4dc9d7dc99a4ec1d6221bd8e",
+      "checks": {
+        "incumbent": {
+          "score": 5.418531638296682,
+          "range": [
+            48000,
+            80000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "modulation": {
+          "score": 0.43311594224346855,
+          "range": [
+            80000,
+            89600
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.15800491173597278,
+          "range": [
+            73600,
+            83200
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-3-0-late",
+      "family": "clone",
+      "arm": "ordinary_other_voice",
+      "truth": null,
+      "pcm_sha256": "3933a9bf20142cbe7a5b6f72bc43168da434b97248eefe83a155f95a61e9c639",
+      "checks": {
+        "incumbent": {
+          "score": 5.418531638296682,
+          "range": [
+            48000,
+            80000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "modulation": {
+          "score": 0.271089407426036,
+          "range": [
+            67200,
+            76800
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.14669041768934712,
+          "range": [
+            16000,
+            25600
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-3-0-late",
+      "family": "clone",
+      "arm": "synthetic",
+      "truth": [
+        83200,
+        93440
+      ],
+      "pcm_sha256": "1f55572028e952a74d5e5a7bd390185c60c17159a4d2bf4f0374fa4d255b15b4",
+      "checks": {
+        "incumbent": {
+          "score": 5.418531638296682,
+          "range": [
+            48000,
+            80000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "modulation": {
+          "score": 0.271089407426036,
+          "range": [
+            67200,
+            76800
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.14669041768934712,
+          "range": [
+            16000,
+            25600
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-3-1-interior",
+      "family": "expressive",
+      "arm": "untouched",
+      "truth": null,
+      "pcm_sha256": "db6843d9cfaec3bbb26de35781ba4f86d92cbd7bd9da99d08bcab59a1c0dca0a",
+      "checks": {
+        "incumbent": {
+          "score": 5.252806587732131,
+          "range": [
+            16000,
+            48000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "modulation": {
+          "score": 0.4745076637831261,
+          "range": [
+            3200,
+            12800
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.4874599045821979,
+          "range": [
+            51200,
+            60800
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-3-1-interior",
+      "family": "expressive",
+      "arm": "ordinary_same_host",
+      "truth": null,
+      "pcm_sha256": "7568f888ef246f95cd54f92c6740e0680bc668058ea73485f4fbde4756736b6c",
+      "checks": {
+        "incumbent": {
+          "score": 5.252806587732131,
+          "range": [
+            16000,
+            48000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "modulation": {
+          "score": 0.4745076637831261,
+          "range": [
+            3200,
+            12800
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.5247855553832602,
+          "range": [
+            48000,
+            57600
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-3-1-interior",
+      "family": "expressive",
+      "arm": "ordinary_other_voice",
+      "truth": null,
+      "pcm_sha256": "1e545ce54cdfa9f19f6048dd71d84cde58c54027a30398e4a3cc937ba72ca9c8",
+      "checks": {
+        "incumbent": {
+          "score": 5.252806587732131,
+          "range": [
+            16000,
+            48000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "modulation": {
+          "score": 0.4745076637831261,
+          "range": [
+            3200,
+            12800
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.48472645097032213,
+          "range": [
+            3200,
+            12800
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-3-1-interior",
+      "family": "expressive",
+      "arm": "synthetic",
+      "truth": [
+        48640,
+        61440
+      ],
+      "pcm_sha256": "448072cdedf5fad751ada155e26a9a115ac27860dc7e6f25677de971f249838f",
+      "checks": {
+        "incumbent": {
+          "score": 5.252806587732131,
+          "range": [
+            16000,
+            48000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "modulation": {
+          "score": 0.4745076637831261,
+          "range": [
+            3200,
+            12800
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.48472645097032213,
+          "range": [
+            3200,
+            12800
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-3-2-interior",
+      "family": "stock",
+      "arm": "untouched",
+      "truth": null,
+      "pcm_sha256": "1b75d7afd967102e5db1044b3e377c6a144f5da4c62796bb3f91369b75684884",
+      "checks": {
+        "incumbent": {
+          "score": 5.090589187959132,
+          "range": [
+            48000,
+            80000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "modulation": {
+          "score": 0.3738337034282096,
+          "range": [
+            67200,
+            76800
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.2786601623099087,
+          "range": [
+            67200,
+            76800
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-3-2-interior",
+      "family": "stock",
+      "arm": "ordinary_same_host",
+      "truth": null,
+      "pcm_sha256": "911d99332cae503c3bfa018889c588fa55ad556257de78b09a54dc0912edb543",
+      "checks": {
+        "incumbent": {
+          "score": 5.090589187959132,
+          "range": [
+            48000,
+            80000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "modulation": {
+          "score": 0.3738337034282096,
+          "range": [
+            67200,
+            76800
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.2786601623099087,
+          "range": [
+            67200,
+            76800
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-3-2-interior",
+      "family": "stock",
+      "arm": "ordinary_other_voice",
+      "truth": null,
+      "pcm_sha256": "02b63241ae1400028ec43b59cdf2088b99249decd4f1ad6eb4326a8821dccd22",
+      "checks": {
+        "incumbent": {
+          "score": 5.090589187959132,
+          "range": [
+            48000,
+            80000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "modulation": {
+          "score": 0.3738337034282096,
+          "range": [
+            67200,
+            76800
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.2786601623099087,
+          "range": [
+            67200,
+            76800
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "replicate-3-2-interior",
+      "family": "stock",
+      "arm": "synthetic",
+      "truth": [
+        16640,
+        32000
+      ],
+      "pcm_sha256": "3d731c3dde0e26463365b89c1951b5c6da63a781f5c213c8c0ba434a935a8ecc",
+      "checks": {
+        "incumbent": {
+          "score": 5.4041224363600096,
+          "range": [
+            16000,
+            48000
+          ],
+          "located": true,
+          "flag": false
+        },
+        "modulation": {
+          "score": 0.3738337034282096,
+          "range": [
+            67200,
+            76800
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.2786601623099087,
+          "range": [
+            67200,
+            76800
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "room-ES2004a",
+      "family": null,
+      "arm": "background_only",
+      "truth": null,
+      "pcm_sha256": "383b999cdfe89922f0fc8f0cafd9152a6d4297626a6189ec080ea8fb6a688eb2",
+      "checks": {
+        "incumbent": {
+          "score": -7.073914547292633,
+          "range": [
+            48000,
+            80000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "modulation": {
+          "score": 0.22858579320321135,
+          "range": [
+            35200,
+            44800
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": -0.15832513547309604,
+          "range": [
+            57600,
+            67200
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "room-IS1009a",
+      "family": null,
+      "arm": "background_only",
+      "truth": null,
+      "pcm_sha256": "9716f7585ec812565467ecd0ac407637611d2f680b46ac6e96f3a5db5bc169cf",
+      "checks": {
+        "incumbent": {
+          "score": -3.2520055221315243,
+          "range": [
+            16000,
+            48000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "modulation": {
+          "score": 0.3399282916449143,
+          "range": [
+            83200,
+            92800
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.6634755656955406,
+          "range": [
+            35200,
+            44800
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "room-ES2010d",
+      "family": null,
+      "arm": "background_only",
+      "truth": null,
+      "pcm_sha256": "60edd679f4bca740eea5c143594c5b9298afb016d1ac04d477294906302f5884",
+      "checks": {
+        "incumbent": {
+          "score": -4.358708345636128,
+          "range": [
+            16000,
+            48000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "modulation": {
+          "score": 0.14292227743048036,
+          "range": [
+            38400,
+            48000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.4545131058617504,
+          "range": [
+            22400,
+            32000
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    },
+    {
+      "condition": "recorded_room_speech",
+      "group": "room-IS1007a",
+      "family": null,
+      "arm": "background_only",
+      "truth": null,
+      "pcm_sha256": "26fa7862293b1a5213fbd61e9925ae4a3f9c8316323d9fd74367a5c6812fb781",
+      "checks": {
+        "incumbent": {
+          "score": -5.440608021304078,
+          "range": [
+            16000,
+            48000
+          ],
+          "located": false,
+          "flag": false
+        },
+        "modulation": {
+          "score": 0.09936319048333286,
+          "range": [
+            83200,
+            92800
+          ],
+          "located": false,
+          "flag": false
+        },
+        "with_cepstral": {
+          "score": 0.19247165224409865,
+          "range": [
+            9600,
+            19200
+          ],
+          "located": false,
+          "flag": false
+        }
+      }
+    }
+  ],
+  "result": {
+    "conditions": {
+      "matched_dry": {
+        "incumbent": {
+          "synthetic": 10,
+          "genuine": 20,
+          "true_flags": 2,
+          "genuine_false_flags": 0,
+          "genuine_false_groups": 0,
+          "useful": 2,
+          "threshold_free_useful": 8,
+          "no_measurement": 0,
+          "background_only_flags": 0
+        },
+        "modulation": {
+          "synthetic": 10,
+          "genuine": 20,
+          "true_flags": 0,
+          "genuine_false_flags": 0,
+          "genuine_false_groups": 0,
+          "useful": 0,
+          "threshold_free_useful": 3,
+          "no_measurement": 0,
+          "background_only_flags": 0
+        },
+        "with_cepstral": {
+          "synthetic": 10,
+          "genuine": 20,
+          "true_flags": 1,
+          "genuine_false_flags": 2,
+          "genuine_false_groups": 1,
+          "useful": 0,
+          "threshold_free_useful": 3,
+          "no_measurement": 0,
+          "background_only_flags": 0
+        },
+        "equal_false_groups": {
+          "0": {
+            "incumbent": {
+              "synthetic": 10,
+              "genuine": 20,
+              "true_flags": 2,
+              "genuine_false_flags": 0,
+              "genuine_false_groups": 0,
+              "useful": 2,
+              "threshold_free_useful": 8,
+              "no_measurement": 0,
+              "background_only_flags": 0
+            },
+            "modulation": {
+              "synthetic": 10,
+              "genuine": 20,
+              "true_flags": 1,
+              "genuine_false_flags": 0,
+              "genuine_false_groups": 0,
+              "useful": 1,
+              "threshold_free_useful": 3,
+              "no_measurement": 0,
+              "background_only_flags": 0
+            },
+            "with_cepstral": {
+              "synthetic": 10,
+              "genuine": 20,
+              "true_flags": 0,
+              "genuine_false_flags": 0,
+              "genuine_false_groups": 0,
+              "useful": 0,
+              "threshold_free_useful": 3,
+              "no_measurement": 0,
+              "background_only_flags": 0
+            }
+          },
+          "1": {
+            "incumbent": {
+              "synthetic": 10,
+              "genuine": 20,
+              "true_flags": 2,
+              "genuine_false_flags": 1,
+              "genuine_false_groups": 1,
+              "useful": 2,
+              "threshold_free_useful": 8,
+              "no_measurement": 0,
+              "background_only_flags": 0
+            },
+            "modulation": {
+              "synthetic": 10,
+              "genuine": 20,
+              "true_flags": 1,
+              "genuine_false_flags": 1,
+              "genuine_false_groups": 1,
+              "useful": 1,
+              "threshold_free_useful": 3,
+              "no_measurement": 0,
+              "background_only_flags": 0
+            },
+            "with_cepstral": {
+              "synthetic": 10,
+              "genuine": 20,
+              "true_flags": 3,
+              "genuine_false_flags": 2,
+              "genuine_false_groups": 1,
+              "useful": 1,
+              "threshold_free_useful": 3,
+              "no_measurement": 0,
+              "background_only_flags": 0
+            }
+          },
+          "2": {
+            "incumbent": {
+              "synthetic": 10,
+              "genuine": 20,
+              "true_flags": 2,
+              "genuine_false_flags": 3,
+              "genuine_false_groups": 2,
+              "useful": 2,
+              "threshold_free_useful": 8,
+              "no_measurement": 0,
+              "background_only_flags": 0
+            },
+            "modulation": {
+              "synthetic": 10,
+              "genuine": 20,
+              "true_flags": 1,
+              "genuine_false_flags": 2,
+              "genuine_false_groups": 2,
+              "useful": 1,
+              "threshold_free_useful": 3,
+              "no_measurement": 0,
+              "background_only_flags": 0
+            },
+            "with_cepstral": {
+              "synthetic": 10,
+              "genuine": 20,
+              "true_flags": 3,
+              "genuine_false_flags": 3,
+              "genuine_false_groups": 2,
+              "useful": 1,
+              "threshold_free_useful": 3,
+              "no_measurement": 0,
+              "background_only_flags": 0
+            }
+          }
+        }
+      },
+      "matched_loud_speech": {
+        "incumbent": {
+          "synthetic": 10,
+          "genuine": 34,
+          "true_flags": 0,
+          "genuine_false_flags": 0,
+          "genuine_false_groups": 0,
+          "useful": 0,
+          "threshold_free_useful": 5,
+          "no_measurement": 0,
+          "background_only_flags": 0
+        },
+        "modulation": {
+          "synthetic": 10,
+          "genuine": 34,
+          "true_flags": 0,
+          "genuine_false_flags": 0,
+          "genuine_false_groups": 0,
+          "useful": 0,
+          "threshold_free_useful": 1,
+          "no_measurement": 0,
+          "background_only_flags": 0
+        },
+        "with_cepstral": {
+          "synthetic": 10,
+          "genuine": 34,
+          "true_flags": 1,
+          "genuine_false_flags": 5,
+          "genuine_false_groups": 3,
+          "useful": 0,
+          "threshold_free_useful": 2,
+          "no_measurement": 0,
+          "background_only_flags": 1
+        },
+        "equal_false_groups": {
+          "0": {
+            "incumbent": {
+              "synthetic": 10,
+              "genuine": 34,
+              "true_flags": 0,
+              "genuine_false_flags": 0,
+              "genuine_false_groups": 0,
+              "useful": 0,
+              "threshold_free_useful": 5,
+              "no_measurement": 0,
+              "background_only_flags": 0
+            },
+            "modulation": {
+              "synthetic": 10,
+              "genuine": 34,
+              "true_flags": 0,
+              "genuine_false_flags": 0,
+              "genuine_false_groups": 0,
+              "useful": 0,
+              "threshold_free_useful": 1,
+              "no_measurement": 0,
+              "background_only_flags": 0
+            },
+            "with_cepstral": {
+              "synthetic": 10,
+              "genuine": 34,
+              "true_flags": 0,
+              "genuine_false_flags": 0,
+              "genuine_false_groups": 0,
+              "useful": 0,
+              "threshold_free_useful": 2,
+              "no_measurement": 0,
+              "background_only_flags": 0
+            }
+          },
+          "1": {
+            "incumbent": {
+              "synthetic": 10,
+              "genuine": 34,
+              "true_flags": 4,
+              "genuine_false_flags": 1,
+              "genuine_false_groups": 1,
+              "useful": 2,
+              "threshold_free_useful": 5,
+              "no_measurement": 0,
+              "background_only_flags": 0
+            },
+            "modulation": {
+              "synthetic": 10,
+              "genuine": 34,
+              "true_flags": 0,
+              "genuine_false_flags": 1,
+              "genuine_false_groups": 1,
+              "useful": 0,
+              "threshold_free_useful": 1,
+              "no_measurement": 0,
+              "background_only_flags": 1
+            },
+            "with_cepstral": {
+              "synthetic": 10,
+              "genuine": 34,
+              "true_flags": 0,
+              "genuine_false_flags": 1,
+              "genuine_false_groups": 1,
+              "useful": 0,
+              "threshold_free_useful": 2,
+              "no_measurement": 0,
+              "background_only_flags": 1
+            }
+          },
+          "2": {
+            "incumbent": {
+              "synthetic": 10,
+              "genuine": 34,
+              "true_flags": 4,
+              "genuine_false_flags": 2,
+              "genuine_false_groups": 2,
+              "useful": 2,
+              "threshold_free_useful": 5,
+              "no_measurement": 0,
+              "background_only_flags": 0
+            },
+            "modulation": {
+              "synthetic": 10,
+              "genuine": 34,
+              "true_flags": 0,
+              "genuine_false_flags": 2,
+              "genuine_false_groups": 2,
+              "useful": 0,
+              "threshold_free_useful": 1,
+              "no_measurement": 0,
+              "background_only_flags": 1
+            },
+            "with_cepstral": {
+              "synthetic": 10,
+              "genuine": 34,
+              "true_flags": 1,
+              "genuine_false_flags": 4,
+              "genuine_false_groups": 2,
+              "useful": 0,
+              "threshold_free_useful": 2,
+              "no_measurement": 0,
+              "background_only_flags": 1
+            }
+          }
+        }
+      },
+      "recorded_room_speech": {
+        "incumbent": {
+          "synthetic": 12,
+          "genuine": 40,
+          "true_flags": 3,
+          "genuine_false_flags": 7,
+          "genuine_false_groups": 3,
+          "useful": 1,
+          "threshold_free_useful": 5,
+          "no_measurement": 0,
+          "background_only_flags": 0
+        },
+        "modulation": {
+          "synthetic": 12,
+          "genuine": 40,
+          "true_flags": 0,
+          "genuine_false_flags": 0,
+          "genuine_false_groups": 0,
+          "useful": 0,
+          "threshold_free_useful": 3,
+          "no_measurement": 0,
+          "background_only_flags": 0
+        },
+        "with_cepstral": {
+          "synthetic": 12,
+          "genuine": 40,
+          "true_flags": 0,
+          "genuine_false_flags": 0,
+          "genuine_false_groups": 0,
+          "useful": 0,
+          "threshold_free_useful": 1,
+          "no_measurement": 0,
+          "background_only_flags": 0
+        },
+        "equal_false_groups": {
+          "0": {
+            "incumbent": {
+              "synthetic": 12,
+              "genuine": 40,
+              "true_flags": 0,
+              "genuine_false_flags": 0,
+              "genuine_false_groups": 0,
+              "useful": 0,
+              "threshold_free_useful": 5,
+              "no_measurement": 0,
+              "background_only_flags": 0
+            },
+            "modulation": {
+              "synthetic": 12,
+              "genuine": 40,
+              "true_flags": 0,
+              "genuine_false_flags": 0,
+              "genuine_false_groups": 0,
+              "useful": 0,
+              "threshold_free_useful": 3,
+              "no_measurement": 0,
+              "background_only_flags": 0
+            },
+            "with_cepstral": {
+              "synthetic": 12,
+              "genuine": 40,
+              "true_flags": 0,
+              "genuine_false_flags": 0,
+              "genuine_false_groups": 0,
+              "useful": 0,
+              "threshold_free_useful": 1,
+              "no_measurement": 0,
+              "background_only_flags": 0
+            }
+          },
+          "1": {
+            "incumbent": {
+              "synthetic": 12,
+              "genuine": 40,
+              "true_flags": 1,
+              "genuine_false_flags": 3,
+              "genuine_false_groups": 1,
+              "useful": 0,
+              "threshold_free_useful": 5,
+              "no_measurement": 0,
+              "background_only_flags": 0
+            },
+            "modulation": {
+              "synthetic": 12,
+              "genuine": 40,
+              "true_flags": 1,
+              "genuine_false_flags": 3,
+              "genuine_false_groups": 1,
+              "useful": 0,
+              "threshold_free_useful": 3,
+              "no_measurement": 0,
+              "background_only_flags": 0
+            },
+            "with_cepstral": {
+              "synthetic": 12,
+              "genuine": 40,
+              "true_flags": 0,
+              "genuine_false_flags": 1,
+              "genuine_false_groups": 1,
+              "useful": 0,
+              "threshold_free_useful": 1,
+              "no_measurement": 0,
+              "background_only_flags": 1
+            }
+          },
+          "2": {
+            "incumbent": {
+              "synthetic": 12,
+              "genuine": 40,
+              "true_flags": 2,
+              "genuine_false_flags": 4,
+              "genuine_false_groups": 2,
+              "useful": 1,
+              "threshold_free_useful": 5,
+              "no_measurement": 0,
+              "background_only_flags": 0
+            },
+            "modulation": {
+              "synthetic": 12,
+              "genuine": 40,
+              "true_flags": 2,
+              "genuine_false_flags": 6,
+              "genuine_false_groups": 2,
+              "useful": 0,
+              "threshold_free_useful": 3,
+              "no_measurement": 0,
+              "background_only_flags": 0
+            },
+            "with_cepstral": {
+              "synthetic": 12,
+              "genuine": 40,
+              "true_flags": 0,
+              "genuine_false_flags": 2,
+              "genuine_false_groups": 2,
+              "useful": 0,
+              "threshold_free_useful": 1,
+              "no_measurement": 0,
+              "background_only_flags": 1
+            }
+          }
+        }
+      }
+    },
+    "gates": {
+      "modulation": {
+        "added_families": [],
+        "qualifies": false
+      },
+      "with_cepstral": {
+        "added_families": [],
+        "qualifies": false
+      }
+    }
+  }
+}

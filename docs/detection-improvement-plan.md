@@ -107,8 +107,10 @@ integration remains unfinished.
   refined two of three previously missed H.264 swap ranges to the exact native
   boundaries. It added no ranges on 79 ordinary deliveries. The fixed H.264
   advancement gate failed on the number of gains and the share of eligible
-  edits assessed. A model-free reader and native frame verification reproduce
-  the reported results.
+  edits assessed. A separate HEVC confirmation located three of eight swaps,
+  up from zero, with no added ordinary ranges on 53 controls. It missed all
+  four six-frame edits. Both comparisons reproduce the native frames; the
+  timing refinement still needs an opt-in serving path and source verifier.
 - The [environmental sound comparison](environmental-embedding-transfer-2026-11-12.md)
   held the voice fixed while changing background origin across 348 exact
   deliveries. Mixed-condition spectral fitting found 21/36 generated

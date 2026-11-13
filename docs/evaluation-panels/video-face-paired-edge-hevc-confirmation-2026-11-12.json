@@ -1,0 +1,2710 @@
+{
+  "freeze": {
+    "candidate_code": {
+      "backend/app/detectors/image/faces.py": "ce23ffdbcfc4b6ef58715313fc0f8565d1c7ce63c6921afd4f744fddb8a8eaea",
+      "backend/app/detectors/video/adapters/face_appearance.py": "ab67312056703ee9671832fb4da1e5e3d88fa27e8b9905a19cce55b0533d4130",
+      "backend/app/detectors/video/decode.py": "f97bcb272ed93ca929e663a1f0529b00b028a2c34a8bca2b00637d4cdb63aae9",
+      "backend/app/detectors/video/face_appearance.py": "cb2fa8e97735cc87c61563cf5c483e7e856b06513888ee16c5059103345febea",
+      "backend/scripts/video_face_paired_edge_transfer.py": "a468753b25601dd06d364c3991b2bb35cef1fa8ea8d433bbf66d76024f2ad997"
+    },
+    "encoder_flags": [
+      "-map",
+      "0:v:0",
+      "-an",
+      "-c:v",
+      "libx265",
+      "-preset",
+      "ultrafast",
+      "-crf",
+      "26",
+      "-threads",
+      "1",
+      "-x265-params",
+      "pools=1:frame-threads=1:log-level=error",
+      "-pix_fmt",
+      "yuv420p",
+      "-tag:v",
+      "hvc1",
+      "-video_track_timescale",
+      "30000",
+      "-movflags",
+      "+faststart"
+    ],
+    "encoding": {
+      "codec_name": "hevc",
+      "codec_tag_string": "hvc1",
+      "height": 720,
+      "nb_frames": "120",
+      "pix_fmt": "yuv420p",
+      "r_frame_rate": "30/1",
+      "width": 1280
+    },
+    "gate": {
+      "max_ordinary_ranges": 0,
+      "max_wrong_edit_ranges": 0,
+      "min_added": 2,
+      "min_assessed_routed_share": 0.6,
+      "min_groups": 2
+    },
+    "method": "Unchanged range search and selection point on HEVC encodes of the disjoint held source banks. Use actual Full face ranges on each new delivery. A correct edit needs .5 temporal IoU.",
+    "pins": {
+      "confirmation_worker": "f269a962743b127035dd92cb6a84a6d0b444d4a61a032ac0eb7d41dfdbc48b16",
+      "full_worker": "6a3f19d84131e70a5d455eab6236e967eddecf1aad069d0065ebd58fa3ced4fb",
+      "held_crema_lock": "fda589437323671f13ca1666110997eff0578f2568edbb5ae1610503a5ef5022",
+      "held_crema_media": "7dc11858e6e919a28ace0c5a00b1674266208eee76a3752e2e85628618d81320",
+      "held_rtfs_and_cameras_lock": "ed2162ad9be00b6b6541937ae17bdbbecbd851d95505fad5e5905e402ac9a1d1",
+      "held_rtfs_and_cameras_media": "4502957fef5bfa821e10568ce22ef35ba18bc0a05a2ee9624109df723cdb9be7",
+      "old_held_dual_lock": "6eddf92858137633e64373f372d3764a42d1fca94d3679e689c92e66ec8cdb2a",
+      "old_held_single_lock": "47e73c6dab329809f89c50af162bb5eac9294956f36ab3d7841249f91359cae2",
+      "old_selection_control_lock": "10f59f874d39f49866e4c941533a5f5c2c5b2024b9447bb79bce8506d1afadd3",
+      "old_selection_edit_lock": "e3723e6eb3e8dd06d9496ef8fd0c3d8943616c509591b46a607d51c949950079",
+      "original_experiment": "4c9e6df520b441bd91fef35eb4d279eb7406e1d4cd75ff08ffaaf81029608f52"
+    },
+    "point": 0.03176017255556951,
+    "schema": "chipmunk.video-face-paired-edge-hevc-confirmation/1",
+    "source_count": {
+      "crema_actor_pairs": 5,
+      "extra_camera_recordings": 3,
+      "publisher_swaps": 4
+    },
+    "weights": {
+      "face_detection_yunet_2023mar.onnx": "8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4",
+      "face_recognition_sface_2021dec.onnx": "0ba9fbfa01b5270c96627c4ef784da859931e02f04419c829e83484087c34e79"
+    }
+  },
+  "media_sha256": "e6890758bb7acc4b1fd4a6ce8c8abc57001d1dacc948471491b79a6fc4a813d9",
+  "result": {
+    "added_groups": 3,
+    "assessed_edits": 3,
+    "counts": {
+      "cutaways/cutaway": {
+        "additional_useful": 0,
+        "assessed": 5,
+        "exact_before": 0,
+        "exact_combined": 0,
+        "files": 5,
+        "new_ordinary_files": 0,
+        "ordinary_added_ranges": 0,
+        "ordinary_prior": 5,
+        "routed": 5,
+        "useful_before": 0,
+        "useful_combined": 0,
+        "wrong_edit_ranges": 0
+      },
+      "cutaways/gain": {
+        "additional_useful": 0,
+        "assessed": 0,
+        "exact_before": 0,
+        "exact_combined": 0,
+        "files": 5,
+        "new_ordinary_files": 0,
+        "ordinary_added_ranges": 0,
+        "ordinary_prior": 0,
+        "routed": 0,
+        "useful_before": 0,
+        "useful_combined": 0,
+        "wrong_edit_ranges": 0
+      },
+      "cutaways/jump": {
+        "additional_useful": 0,
+        "assessed": 0,
+        "exact_before": 0,
+        "exact_combined": 0,
+        "files": 5,
+        "new_ordinary_files": 0,
+        "ordinary_added_ranges": 0,
+        "ordinary_prior": 0,
+        "routed": 0,
+        "useful_before": 0,
+        "useful_combined": 0,
+        "wrong_edit_ranges": 0
+      },
+      "cutaways/punch_in": {
+        "additional_useful": 0,
+        "assessed": 0,
+        "exact_before": 0,
+        "exact_combined": 0,
+        "files": 5,
+        "new_ordinary_files": 0,
+        "ordinary_added_ranges": 0,
+        "ordinary_prior": 0,
+        "routed": 0,
+        "useful_before": 0,
+        "useful_combined": 0,
+        "wrong_edit_ranges": 0
+      },
+      "cutaways/tandem_cutaway": {
+        "additional_useful": 0,
+        "assessed": 5,
+        "exact_before": 0,
+        "exact_combined": 0,
+        "files": 5,
+        "new_ordinary_files": 0,
+        "ordinary_added_ranges": 0,
+        "ordinary_prior": 5,
+        "routed": 5,
+        "useful_before": 0,
+        "useful_combined": 0,
+        "wrong_edit_ranges": 0
+      },
+      "cutaways/unchanged": {
+        "additional_useful": 0,
+        "assessed": 0,
+        "exact_before": 0,
+        "exact_combined": 0,
+        "files": 5,
+        "new_ordinary_files": 0,
+        "ordinary_added_ranges": 0,
+        "ordinary_prior": 0,
+        "routed": 0,
+        "useful_before": 0,
+        "useful_combined": 0,
+        "wrong_edit_ranges": 0
+      },
+      "publisher_and_cameras/camera": {
+        "additional_useful": 0,
+        "assessed": 0,
+        "exact_before": 0,
+        "exact_combined": 0,
+        "files": 3,
+        "new_ordinary_files": 0,
+        "ordinary_added_ranges": 0,
+        "ordinary_prior": 0,
+        "routed": 0,
+        "useful_before": 0,
+        "useful_combined": 0,
+        "wrong_edit_ranges": 0
+      },
+      "publisher_and_cameras/cut": {
+        "additional_useful": 0,
+        "assessed": 0,
+        "exact_before": 0,
+        "exact_combined": 0,
+        "files": 4,
+        "new_ordinary_files": 0,
+        "ordinary_added_ranges": 0,
+        "ordinary_prior": 0,
+        "routed": 0,
+        "useful_before": 0,
+        "useful_combined": 0,
+        "wrong_edit_ranges": 0
+      },
+      "publisher_and_cameras/jump": {
+        "additional_useful": 0,
+        "assessed": 0,
+        "exact_before": 0,
+        "exact_combined": 0,
+        "files": 4,
+        "new_ordinary_files": 0,
+        "ordinary_added_ranges": 0,
+        "ordinary_prior": 0,
+        "routed": 0,
+        "useful_before": 0,
+        "useful_combined": 0,
+        "wrong_edit_ranges": 0
+      },
+      "publisher_and_cameras/light": {
+        "additional_useful": 0,
+        "assessed": 0,
+        "exact_before": 0,
+        "exact_combined": 0,
+        "files": 4,
+        "new_ordinary_files": 0,
+        "ordinary_added_ranges": 0,
+        "ordinary_prior": 0,
+        "routed": 0,
+        "useful_before": 0,
+        "useful_combined": 0,
+        "wrong_edit_ranges": 0
+      },
+      "publisher_and_cameras/original": {
+        "additional_useful": 0,
+        "assessed": 0,
+        "exact_before": 0,
+        "exact_combined": 0,
+        "files": 4,
+        "new_ordinary_files": 0,
+        "ordinary_added_ranges": 0,
+        "ordinary_prior": 0,
+        "routed": 0,
+        "useful_before": 0,
+        "useful_combined": 0,
+        "wrong_edit_ranges": 0
+      },
+      "publisher_and_cameras/recompressed": {
+        "additional_useful": 0,
+        "assessed": 0,
+        "exact_before": 0,
+        "exact_combined": 0,
+        "files": 4,
+        "new_ordinary_files": 0,
+        "ordinary_added_ranges": 0,
+        "ordinary_prior": 0,
+        "routed": 0,
+        "useful_before": 0,
+        "useful_combined": 0,
+        "wrong_edit_ranges": 0
+      },
+      "publisher_and_cameras/swap_a": {
+        "additional_useful": 0,
+        "assessed": 0,
+        "exact_before": 0,
+        "exact_combined": 0,
+        "files": 4,
+        "new_ordinary_files": 0,
+        "ordinary_added_ranges": 0,
+        "ordinary_prior": 0,
+        "routed": 0,
+        "useful_before": 0,
+        "useful_combined": 0,
+        "wrong_edit_ranges": 0
+      },
+      "publisher_and_cameras/swap_b": {
+        "additional_useful": 3,
+        "assessed": 3,
+        "exact_before": 0,
+        "exact_combined": 3,
+        "files": 4,
+        "new_ordinary_files": 0,
+        "ordinary_added_ranges": 0,
+        "ordinary_prior": 0,
+        "routed": 4,
+        "useful_before": 0,
+        "useful_combined": 3,
+        "wrong_edit_ranges": 0
+      }
+    },
+    "edits": 8,
+    "gate": {
+      "added": true,
+      "assessment": true,
+      "groups": true,
+      "ordinary": true,
+      "wrong_edit": true
+    },
+    "passed": true,
+    "routed_edits": 4
+  },
+  "rows": [
+    {
+      "bank": "publisher_and_cameras",
+      "coarse": null,
+      "condition": "original",
+      "group": 1,
+      "guarded": null,
+      "input_h264_sha256": "84b810933f01d598a950530131cb617014af7ee0920ad134167d034fe736b559",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "feb41d482913e570af7da093902e1085d0c697f1e8d6da5ce0b7089e29c4ceb5",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "publisher_and_cameras",
+      "coarse": null,
+      "condition": "recompressed",
+      "group": 1,
+      "guarded": null,
+      "input_h264_sha256": "7e05c9e3cc4cb44afb7c2f4776ad8d6a5177f66c3609af5e29687643ca63bfb8",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "af7cde08349ef353bc6d4be2b047ead0bf71fdebd49cf8e03730532aa2aed195",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "publisher_and_cameras",
+      "coarse": null,
+      "condition": "light",
+      "group": 1,
+      "guarded": null,
+      "input_h264_sha256": "8db724a81194ff938c9e65058a3dcf3ec6cc23d216c389d528a54a5c4bad34ef",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "5457ab296a55f40abf13867c80708d852e0dc57294ad5ed6120f44d6c0d24c7b",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "publisher_and_cameras",
+      "coarse": null,
+      "condition": "jump",
+      "group": 1,
+      "guarded": null,
+      "input_h264_sha256": "34905bab39c7f3ac054a9a44188e84facad69381677d231478269a23c0b0809a",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "60bbcdfbfbd62880dd7f60f3b5f9f777be9126b1f936d9adde250569dfac5fcd",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "publisher_and_cameras",
+      "coarse": null,
+      "condition": "cut",
+      "group": 1,
+      "guarded": null,
+      "input_h264_sha256": "fd59d7ef884af67ea2c9addbf5932899825d9910629c697dd144da454937e6dc",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "c66c5aef8821f3085f66469d039adf11117600d3c76ef4770d92cd3b17176d18",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "publisher_and_cameras",
+      "coarse": null,
+      "condition": "swap_a",
+      "group": 1,
+      "guarded": null,
+      "input_h264_sha256": "3925be80c81ec0697a25c878b337d1e41f8900655c4ff046a14360a18db23a1b",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "15c58e9a344f014a3fdbb7b8dc72624313d818d17ca92f1bb920f3dcd0fd0734",
+      "status": "not_routed",
+      "truth": [
+        [
+          72,
+          78
+        ]
+      ]
+    },
+    {
+      "bank": "publisher_and_cameras",
+      "coarse": [
+        79,
+        95
+      ],
+      "condition": "swap_b",
+      "group": 1,
+      "guarded": {
+        "anchors": [
+          {
+            "aligned_rgb_sha256": "ac3c86631be0e16a4f39456fcfb2b52186b2e4e2956f1925e2d40a64e3e98ecf",
+            "bbox": {
+              "h": 330.0,
+              "w": 230.0,
+              "x": 755.0,
+              "y": 112.0
+            },
+            "decoded_rgb_sha256": "21a112fb5d08d6e8c11d784a3194ed2c3f06f2971f218433ca15ef15492e0ac4",
+            "frame_index": 86,
+            "pts": 86000
+          },
+          {
+            "aligned_rgb_sha256": "9f9ef11a39494ce5d9413a9399d9d5fc7546f50fc407c52f567fec9809a29a61",
+            "bbox": {
+              "h": 324.0,
+              "w": 232.0,
+              "x": 750.0,
+              "y": 113.0
+            },
+            "decoded_rgb_sha256": "5a61451bae7502a5851cb23f6ef0a4f29535d9148979b5b3e467f7b3a5c58a81",
+            "frame_index": 92,
+            "pts": 92000
+          },
+          {
+            "aligned_rgb_sha256": "b95f49e5e02eb1a073c3abeaab5f70b20836c5597735ffda227499882b83e5dd",
+            "bbox": {
+              "h": 323.0,
+              "w": 226.0,
+              "x": 756.0,
+              "y": 116.0
+            },
+            "decoded_rgb_sha256": "227684ffc0b4571cc014eda0ef64e563295625fcc76e54148eace55f602b1d6d",
+            "frame_index": 97,
+            "pts": 97000
+          }
+        ],
+        "edges": [
+          {
+            "broad": false,
+            "central": 8.061379790306091,
+            "sector_ids": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "sectors": [
+              4.808519616723061,
+              3.212994933128357,
+              5.429400242865086,
+              1.0773694813251495
+            ],
+            "supported": true
+          },
+          {
+            "broad": false,
+            "central": 7.369624018669128,
+            "sector_ids": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "sectors": [
+              3.8145437836647034,
+              4.0559380650520325,
+              4.8810445964336395,
+              1.6155705749988556
+            ],
+            "supported": true
+          }
+        ],
+        "frames": [
+          87,
+          97
+        ],
+        "pts": [
+          87000,
+          97000
+        ],
+        "score": 0.6762301573219461
+      },
+      "input_h264_sha256": "823744effa4fcfe1656097b32ae13793b47a31775baf1c32444a7ea5cbea4d5e",
+      "native_reads": 52,
+      "prior": [
+        [
+          79,
+          95
+        ]
+      ],
+      "raw": {
+        "anchors": [
+          {
+            "aligned_rgb_sha256": "ac3c86631be0e16a4f39456fcfb2b52186b2e4e2956f1925e2d40a64e3e98ecf",
+            "bbox": {
+              "h": 330.0,
+              "w": 230.0,
+              "x": 755.0,
+              "y": 112.0
+            },
+            "decoded_rgb_sha256": "21a112fb5d08d6e8c11d784a3194ed2c3f06f2971f218433ca15ef15492e0ac4",
+            "frame_index": 86,
+            "pts": 86000
+          },
+          {
+            "aligned_rgb_sha256": "9f9ef11a39494ce5d9413a9399d9d5fc7546f50fc407c52f567fec9809a29a61",
+            "bbox": {
+              "h": 324.0,
+              "w": 232.0,
+              "x": 750.0,
+              "y": 113.0
+            },
+            "decoded_rgb_sha256": "5a61451bae7502a5851cb23f6ef0a4f29535d9148979b5b3e467f7b3a5c58a81",
+            "frame_index": 92,
+            "pts": 92000
+          },
+          {
+            "aligned_rgb_sha256": "b95f49e5e02eb1a073c3abeaab5f70b20836c5597735ffda227499882b83e5dd",
+            "bbox": {
+              "h": 323.0,
+              "w": 226.0,
+              "x": 756.0,
+              "y": 116.0
+            },
+            "decoded_rgb_sha256": "227684ffc0b4571cc014eda0ef64e563295625fcc76e54148eace55f602b1d6d",
+            "frame_index": 97,
+            "pts": 97000
+          }
+        ],
+        "edges": [
+          {
+            "broad": false,
+            "central": 8.061379790306091,
+            "sector_ids": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "sectors": [
+              4.808519616723061,
+              3.212994933128357,
+              5.429400242865086,
+              1.0773694813251495
+            ],
+            "supported": true
+          },
+          {
+            "broad": false,
+            "central": 7.369624018669128,
+            "sector_ids": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "sectors": [
+              3.8145437836647034,
+              4.0559380650520325,
+              4.8810445964336395,
+              1.6155705749988556
+            ],
+            "supported": true
+          }
+        ],
+        "frames": [
+          87,
+          97
+        ],
+        "pts": [
+          87000,
+          97000
+        ],
+        "score": 0.6762301573219461
+      },
+      "selected": [
+        87,
+        97
+      ],
+      "sha256": "e8fdce5ddd63fb40c927e3789dc69e28c934c2bae0662a324e6bbe7579c34dd4",
+      "status": "assessed",
+      "truth": [
+        [
+          87,
+          97
+        ]
+      ]
+    },
+    {
+      "bank": "publisher_and_cameras",
+      "coarse": null,
+      "condition": "original",
+      "group": 2,
+      "guarded": null,
+      "input_h264_sha256": "7996fa0b5034f3ec8fab52c00ed902da68bf415aa80c6ec1e3fd01e60ad7668c",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "37c88d911db5fa1848f90556dbc29bdf1ed183249d65b89738fb70e20fa97814",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "publisher_and_cameras",
+      "coarse": null,
+      "condition": "recompressed",
+      "group": 2,
+      "guarded": null,
+      "input_h264_sha256": "b5ca92a5d5dbed53a5da43d46aaca9c6b0c106e516fe887682d9999e382d888b",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "4b6b3dd52a0e093e8ccc2897b6190ca90b610ccdec2af0bfb7b6c2c4c303917c",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "publisher_and_cameras",
+      "coarse": null,
+      "condition": "light",
+      "group": 2,
+      "guarded": null,
+      "input_h264_sha256": "eb8b712b96a74452c3cd832722c748bd515bfab3586614679bdefb04b280eca2",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "36ef67f29e5876ffad21d86859ccf2d5a2078946982cb50ccb9c711b1b3ead59",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "publisher_and_cameras",
+      "coarse": null,
+      "condition": "jump",
+      "group": 2,
+      "guarded": null,
+      "input_h264_sha256": "fb7aa4bf4877dac3ed9dbc461b3216aebb29f636f143f6433bf9ce9084902144",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "fcd75d53e3169fa9de70cb74fa69939ad94f08760e70ed7b699869f79d512bdd",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "publisher_and_cameras",
+      "coarse": null,
+      "condition": "cut",
+      "group": 2,
+      "guarded": null,
+      "input_h264_sha256": "27e74cc90c57d9209357fd5276825aba8e3af1102bd2d96202922a1133bd5afd",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "9d31001d0cb93cb0a434f6713d682b84ff80fe2bbd11fed99011b926861f3f78",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "publisher_and_cameras",
+      "coarse": null,
+      "condition": "swap_a",
+      "group": 2,
+      "guarded": null,
+      "input_h264_sha256": "29bfba54fcc0900f339ac3181d807589a7d0b3fe3659a786f9fdf004860d36ef",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "72f6a5c5dbdda3bf8d7c8e03e35c77b153838d8db3f782cfc44be8e0fa82c92d",
+      "status": "not_routed",
+      "truth": [
+        [
+          72,
+          78
+        ]
+      ]
+    },
+    {
+      "bank": "publisher_and_cameras",
+      "coarse": [
+        79,
+        95
+      ],
+      "condition": "swap_b",
+      "group": 2,
+      "guarded": {
+        "anchors": [
+          {
+            "aligned_rgb_sha256": "bb89ad9bbe2dc6dddefaf624fe2153690deb9102c55214484724e13b7f30b7f8",
+            "bbox": {
+              "h": 246.0,
+              "w": 183.0,
+              "x": 264.0,
+              "y": 84.0
+            },
+            "decoded_rgb_sha256": "9f2c742a64642288ef538cd5328b01161704e57912a0d04a357661c1c168785f",
+            "frame_index": 86,
+            "pts": 86000
+          },
+          {
+            "aligned_rgb_sha256": "591814d27ee3a9c32ad8e455a7b36d7705a6b054621a9d3a0f6187f2516d940a",
+            "bbox": {
+              "h": 247.0,
+              "w": 184.0,
+              "x": 265.0,
+              "y": 71.0
+            },
+            "decoded_rgb_sha256": "d493f6d70bc14f8c57f1ec7423dbf4980db4b4f61d164c3f7bb275d348dd4ad7",
+            "frame_index": 92,
+            "pts": 92000
+          },
+          {
+            "aligned_rgb_sha256": "0faf5027129c906ffa47464a068fd7ef762fff5bb43e657e6ae3b7c99f773231",
+            "bbox": {
+              "h": 242.0,
+              "w": 187.0,
+              "x": 264.0,
+              "y": 66.0
+            },
+            "decoded_rgb_sha256": "74c6fb9023a7b01840f415f88bfe03b786189abd95a80efdecd8c87684377c5f",
+            "frame_index": 97,
+            "pts": 97000
+          }
+        ],
+        "edges": [
+          {
+            "broad": false,
+            "central": 7.4520604610443115,
+            "sector_ids": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "sectors": [
+              4.019793510437012,
+              3.4956969618797302,
+              0.34332695603370667,
+              2.9110250174999237
+            ],
+            "supported": true
+          },
+          {
+            "broad": false,
+            "central": 7.838709712028503,
+            "sector_ids": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "sectors": [
+              3.7878657579421997,
+              1.7654905319213867,
+              0.9882122278213501,
+              2.5802708864212036
+            ],
+            "supported": true
+          }
+        ],
+        "frames": [
+          87,
+          97
+        ],
+        "pts": [
+          87000,
+          97000
+        ],
+        "score": 0.5756553934570332
+      },
+      "input_h264_sha256": "ce7cd2094dfe423351ae43d3405b188a32a42726cb7684e546d299f3c35d9ff6",
+      "native_reads": 52,
+      "prior": [
+        [
+          79,
+          95
+        ]
+      ],
+      "raw": {
+        "anchors": [
+          {
+            "aligned_rgb_sha256": "bb89ad9bbe2dc6dddefaf624fe2153690deb9102c55214484724e13b7f30b7f8",
+            "bbox": {
+              "h": 246.0,
+              "w": 183.0,
+              "x": 264.0,
+              "y": 84.0
+            },
+            "decoded_rgb_sha256": "9f2c742a64642288ef538cd5328b01161704e57912a0d04a357661c1c168785f",
+            "frame_index": 86,
+            "pts": 86000
+          },
+          {
+            "aligned_rgb_sha256": "591814d27ee3a9c32ad8e455a7b36d7705a6b054621a9d3a0f6187f2516d940a",
+            "bbox": {
+              "h": 247.0,
+              "w": 184.0,
+              "x": 265.0,
+              "y": 71.0
+            },
+            "decoded_rgb_sha256": "d493f6d70bc14f8c57f1ec7423dbf4980db4b4f61d164c3f7bb275d348dd4ad7",
+            "frame_index": 92,
+            "pts": 92000
+          },
+          {
+            "aligned_rgb_sha256": "0faf5027129c906ffa47464a068fd7ef762fff5bb43e657e6ae3b7c99f773231",
+            "bbox": {
+              "h": 242.0,
+              "w": 187.0,
+              "x": 264.0,
+              "y": 66.0
+            },
+            "decoded_rgb_sha256": "74c6fb9023a7b01840f415f88bfe03b786189abd95a80efdecd8c87684377c5f",
+            "frame_index": 97,
+            "pts": 97000
+          }
+        ],
+        "edges": [
+          {
+            "broad": false,
+            "central": 7.4520604610443115,
+            "sector_ids": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "sectors": [
+              4.019793510437012,
+              3.4956969618797302,
+              0.34332695603370667,
+              2.9110250174999237
+            ],
+            "supported": true
+          },
+          {
+            "broad": false,
+            "central": 7.838709712028503,
+            "sector_ids": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "sectors": [
+              3.7878657579421997,
+              1.7654905319213867,
+              0.9882122278213501,
+              2.5802708864212036
+            ],
+            "supported": true
+          }
+        ],
+        "frames": [
+          87,
+          97
+        ],
+        "pts": [
+          87000,
+          97000
+        ],
+        "score": 0.5756553934570332
+      },
+      "selected": [
+        87,
+        97
+      ],
+      "sha256": "15e32ce9e48be98eea764a89d24d759604b899f6ba57f3d4bceee5024a049341",
+      "status": "assessed",
+      "truth": [
+        [
+          87,
+          97
+        ]
+      ]
+    },
+    {
+      "bank": "publisher_and_cameras",
+      "coarse": null,
+      "condition": "original",
+      "group": 3,
+      "guarded": null,
+      "input_h264_sha256": "b5e03006acaa20019ebdfddc1b0cf52f96b39ee56a8eb73f14f265f4963f722b",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "2532909bcec20c25315a43796d0b8edbfdcc2aaa913812ce7c5095c443d327eb",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "publisher_and_cameras",
+      "coarse": null,
+      "condition": "recompressed",
+      "group": 3,
+      "guarded": null,
+      "input_h264_sha256": "25717ea0e68eab696d83e5aefa21a9e14b2ef5774ea642046be5a27a3c23d2c0",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "f66c0837db789c580c4ac18875c81b54b8d2c03e0bae30977369410924d40ac6",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "publisher_and_cameras",
+      "coarse": null,
+      "condition": "light",
+      "group": 3,
+      "guarded": null,
+      "input_h264_sha256": "59ab5749c74c8f20bd4e21faa3264a60f37389f76faab6445f3f8ace9e2bc001",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "329cf46bcfb1693efdd8f14310dce0be58651189f2b604239fe06fa4ebc58be2",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "publisher_and_cameras",
+      "coarse": null,
+      "condition": "jump",
+      "group": 3,
+      "guarded": null,
+      "input_h264_sha256": "7b4e41461648bae24429ffde098f803e3dc6def1d7dd3595375849de45c8b4be",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "ebd260c7d3e40be8366bc4e3b3634a8e48f4be9268a01186cbc1e61ac9c6fa9f",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "publisher_and_cameras",
+      "coarse": null,
+      "condition": "cut",
+      "group": 3,
+      "guarded": null,
+      "input_h264_sha256": "7f07e0d4da7390bb6b6d4a4aff26b1c5df2c07e441ef5796865227c9082eee9e",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "3c8e08e355bcef2b75622558ca1b9ab12e7451aaab669b5745ee2c2233da97e2",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "publisher_and_cameras",
+      "coarse": null,
+      "condition": "swap_a",
+      "group": 3,
+      "guarded": null,
+      "input_h264_sha256": "6fa1b270c073205e37c0ccc0d80619d9679c676dc2ff7fa3fb3186a94a31ad2e",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "253601807eb546d84d654318f924cc2a7499b182244b96874659c8780fd20082",
+      "status": "not_routed",
+      "truth": [
+        [
+          72,
+          78
+        ]
+      ]
+    },
+    {
+      "bank": "publisher_and_cameras",
+      "coarse": [
+        79,
+        95
+      ],
+      "condition": "swap_b",
+      "group": 3,
+      "guarded": {
+        "anchors": [
+          {
+            "aligned_rgb_sha256": "70fc39515bff83e0149668a580f1489c33d813e64093ec388c202dfcffa62eda",
+            "bbox": {
+              "h": 223.0,
+              "w": 178.0,
+              "x": 564.0,
+              "y": 82.0
+            },
+            "decoded_rgb_sha256": "fd670f184213f39ce39d5bcecc7d871ed55fd24a424799b07644eb8a90954554",
+            "frame_index": 86,
+            "pts": 86000
+          },
+          {
+            "aligned_rgb_sha256": "74a1c013c6e6c088a6a3067dfeb32335ba47425c595ea762560aa00c918ec19d",
+            "bbox": {
+              "h": 226.0,
+              "w": 158.0,
+              "x": 571.0,
+              "y": 79.0
+            },
+            "decoded_rgb_sha256": "d718dc79224d421291e4e512988680a13dd8b09dd5d197e9ec3cf62d30e4419f",
+            "frame_index": 92,
+            "pts": 92000
+          },
+          {
+            "aligned_rgb_sha256": "2cde6bcb51bd9701fdd57379171150dc75b39174537c9f5f9b39fea88835f677",
+            "bbox": {
+              "h": 223.0,
+              "w": 180.0,
+              "x": 562.0,
+              "y": 102.0
+            },
+            "decoded_rgb_sha256": "1d9954518959cfe6a440781c17ddfaf58d8f37d81ca3c77a78b07f8eb5b98253",
+            "frame_index": 97,
+            "pts": 97000
+          }
+        ],
+        "edges": [
+          {
+            "broad": false,
+            "central": 8.650761365890503,
+            "sector_ids": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "sectors": [
+              1.121342420578003,
+              0.5456109642982483,
+              1.2132494449615479,
+              0.7335590124130249
+            ],
+            "supported": true
+          },
+          {
+            "broad": false,
+            "central": 7.386200428009033,
+            "sector_ids": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "sectors": [
+              0.9629949033260345,
+              0.0,
+              1.058994174003601,
+              1.0488393306732178
+            ],
+            "supported": true
+          }
+        ],
+        "frames": [
+          87,
+          97
+        ],
+        "pts": [
+          87000,
+          97000
+        ],
+        "score": 0.40414750873746896
+      },
+      "input_h264_sha256": "554391e2a4a47efc0866db45c99168e40890e7c688e5e2e2f4c91e08767ea790",
+      "native_reads": 52,
+      "prior": [
+        [
+          79,
+          95
+        ]
+      ],
+      "raw": {
+        "anchors": [
+          {
+            "aligned_rgb_sha256": "70fc39515bff83e0149668a580f1489c33d813e64093ec388c202dfcffa62eda",
+            "bbox": {
+              "h": 223.0,
+              "w": 178.0,
+              "x": 564.0,
+              "y": 82.0
+            },
+            "decoded_rgb_sha256": "fd670f184213f39ce39d5bcecc7d871ed55fd24a424799b07644eb8a90954554",
+            "frame_index": 86,
+            "pts": 86000
+          },
+          {
+            "aligned_rgb_sha256": "74a1c013c6e6c088a6a3067dfeb32335ba47425c595ea762560aa00c918ec19d",
+            "bbox": {
+              "h": 226.0,
+              "w": 158.0,
+              "x": 571.0,
+              "y": 79.0
+            },
+            "decoded_rgb_sha256": "d718dc79224d421291e4e512988680a13dd8b09dd5d197e9ec3cf62d30e4419f",
+            "frame_index": 92,
+            "pts": 92000
+          },
+          {
+            "aligned_rgb_sha256": "2cde6bcb51bd9701fdd57379171150dc75b39174537c9f5f9b39fea88835f677",
+            "bbox": {
+              "h": 223.0,
+              "w": 180.0,
+              "x": 562.0,
+              "y": 102.0
+            },
+            "decoded_rgb_sha256": "1d9954518959cfe6a440781c17ddfaf58d8f37d81ca3c77a78b07f8eb5b98253",
+            "frame_index": 97,
+            "pts": 97000
+          }
+        ],
+        "edges": [
+          {
+            "broad": false,
+            "central": 8.650761365890503,
+            "sector_ids": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "sectors": [
+              1.121342420578003,
+              0.5456109642982483,
+              1.2132494449615479,
+              0.7335590124130249
+            ],
+            "supported": true
+          },
+          {
+            "broad": false,
+            "central": 7.386200428009033,
+            "sector_ids": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "sectors": [
+              0.9629949033260345,
+              0.0,
+              1.058994174003601,
+              1.0488393306732178
+            ],
+            "supported": true
+          }
+        ],
+        "frames": [
+          87,
+          97
+        ],
+        "pts": [
+          87000,
+          97000
+        ],
+        "score": 0.40414750873746896
+      },
+      "selected": [
+        87,
+        97
+      ],
+      "sha256": "c206114533980dd06b26d86eeec64c14bd72193b5e35ffb239ff031086b57cb1",
+      "status": "assessed",
+      "truth": [
+        [
+          87,
+          97
+        ]
+      ]
+    },
+    {
+      "bank": "publisher_and_cameras",
+      "coarse": null,
+      "condition": "original",
+      "group": 4,
+      "guarded": null,
+      "input_h264_sha256": "998b5d4ab5884dccd1d2a45c7f1c5bdfa541c57842f2956011038e5376403df2",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "fb66569285ef69774bd6fbcf1a5138436fc16b65ff5096a603c88135b195c23a",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "publisher_and_cameras",
+      "coarse": null,
+      "condition": "recompressed",
+      "group": 4,
+      "guarded": null,
+      "input_h264_sha256": "c09676c7f4ba888008121b2d141700f023675e58fc3fdac80573df0042dd7e28",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "187d9d3ad82b0d5fb82ff31a9782255e47af3bd2c4c9808041b6eefa7a8ac8aa",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "publisher_and_cameras",
+      "coarse": null,
+      "condition": "light",
+      "group": 4,
+      "guarded": null,
+      "input_h264_sha256": "1668f7404100866c6c76215bcc19aca32319da390af2c21fa7163daa623010fb",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "f65066c24b7e06135f83b9f26ab20b771e78dd6ece1d56cd5ce765e110c1ee56",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "publisher_and_cameras",
+      "coarse": null,
+      "condition": "jump",
+      "group": 4,
+      "guarded": null,
+      "input_h264_sha256": "55c8ff1d9e67beb2379d14d84c0f6f467ea9084098a3c8c8adaf108be1d32a86",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "0e7dfeb53a7dedc2c388d817f5d4bd028b48ab12b73fc80ee70bcaabfb2cbf85",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "publisher_and_cameras",
+      "coarse": null,
+      "condition": "cut",
+      "group": 4,
+      "guarded": null,
+      "input_h264_sha256": "4e19b43386084d82ce3723c0029b7bd82130871354f6dc8c53c899b4778ad60f",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "8cb34cd9aa2b52a2edc55352b7e284ad702fac9569f58fb41d0c623c027c74ea",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "publisher_and_cameras",
+      "coarse": null,
+      "condition": "swap_a",
+      "group": 4,
+      "guarded": null,
+      "input_h264_sha256": "4cc34c7241c3ca6ac6cf0dfea4800955b51f211f21581d6a3cd0a188d11cd1f7",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "6e6dd56586762493ec3ee55aa3d1c02e16b6c1c4b6549e89e46f1cf2a4321e3e",
+      "status": "not_routed",
+      "truth": [
+        [
+          72,
+          78
+        ]
+      ]
+    },
+    {
+      "bank": "publisher_and_cameras",
+      "coarse": [
+        79,
+        95
+      ],
+      "condition": "swap_b",
+      "group": 4,
+      "guarded": null,
+      "input_h264_sha256": "38746b0d1e9468afb2b03e259f571c07aa4c60955045495121a5c91e3c1abd10",
+      "native_reads": 52,
+      "prior": [
+        [
+          79,
+          95
+        ]
+      ],
+      "raw": null,
+      "selected": null,
+      "sha256": "d8575b65c61a16dd4bdcf9fc77e525b167ef4734880abd87592080020fe1c559",
+      "status": "no_supported_pair",
+      "truth": [
+        [
+          87,
+          97
+        ]
+      ]
+    },
+    {
+      "bank": "publisher_and_cameras",
+      "coarse": null,
+      "condition": "camera",
+      "group": 5,
+      "guarded": null,
+      "input_h264_sha256": "8e6f3b10f7b3de1966133dbd68073487a53a2fcd361794d6a63caa65cf26aec0",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "8929510eaa0e3001c40291e63a496657cbe255ff98332a59ede38657a062bdb8",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "publisher_and_cameras",
+      "coarse": null,
+      "condition": "camera",
+      "group": 6,
+      "guarded": null,
+      "input_h264_sha256": "d8945af3eb2e6080b1b856ae40675b6163ca79122375f2751a4e8de01c418aa7",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "e67c7d485fa84774e008ae3a51a1ddab62b795428ccbbe2edd79f8ec086ef54a",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "publisher_and_cameras",
+      "coarse": null,
+      "condition": "camera",
+      "group": 7,
+      "guarded": null,
+      "input_h264_sha256": "a23f0a46ee05a01bd22fb18783bc58033d8a0eb5f2a1cbf423436c1be85782f7",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "2d95a5eb1cf965c51b5410c81f044b7008b6812d2c62bb8c3778c6657e66f08c",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "cutaways",
+      "coarse": null,
+      "condition": "unchanged",
+      "group": 1,
+      "guarded": null,
+      "input_h264_sha256": "1d9d93f48d616b27837ce1a931c0ddbce6e2dc4aaf8bebfb81463d8d155085aa",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "1346371fadd05643a469c0e94356ab7db7d54a5262d9fad7a68ef993b2312912",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "cutaways",
+      "coarse": [
+        47,
+        63
+      ],
+      "condition": "cutaway",
+      "group": 1,
+      "guarded": null,
+      "input_h264_sha256": "f447c2db4052cf2b7ca79dda8a98a3eef98c844d4371ebfb7ad9278041a5303d",
+      "native_reads": 52,
+      "prior": [
+        [
+          47,
+          63
+        ]
+      ],
+      "raw": {
+        "anchors": [
+          {
+            "aligned_rgb_sha256": "3035475f6b6deef95ae8a35043cfbe244898b35dcf6be83804078be2e874e67f",
+            "bbox": {
+              "h": 171.0,
+              "w": 131.0,
+              "x": 563.0,
+              "y": 198.0
+            },
+            "decoded_rgb_sha256": "46801290c0386ef6b5553cc8ebdc6ac9e189e808ef053a1754dd6c8f7c616ebc",
+            "frame_index": 55,
+            "pts": 55000
+          },
+          {
+            "aligned_rgb_sha256": "db8228dd21ccd445edd37e22804b9c184839e96f1d01faf0789aba2cdf882968",
+            "bbox": {
+              "h": 159.0,
+              "w": 114.0,
+              "x": 578.0,
+              "y": 190.0
+            },
+            "decoded_rgb_sha256": "53fc8ce884274e4f4296fc36c41825eab469793b56d373495398d10554a11583",
+            "frame_index": 61,
+            "pts": 61000
+          },
+          {
+            "aligned_rgb_sha256": "90a9303c4df2c10f160d39e0d1c036f713de4498df8fd9ad23ce70fe01ee8268",
+            "bbox": {
+              "h": 176.0,
+              "w": 129.0,
+              "x": 562.0,
+              "y": 195.0
+            },
+            "decoded_rgb_sha256": "f2ac0bee39eda44d0d36b38122ddbcf9952af5f4ed9368170ab54de570b39f97",
+            "frame_index": 67,
+            "pts": 67000
+          }
+        ],
+        "edges": [
+          {
+            "broad": true,
+            "central": 54.731856405735016,
+            "sector_ids": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "sectors": [
+              28.70438899472356,
+              22.16006837785244,
+              44.19874434173107,
+              60.94584164023399
+            ],
+            "supported": true
+          },
+          {
+            "broad": true,
+            "central": 62.926745772361755,
+            "sector_ids": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "sectors": [
+              43.35370131582022,
+              24.898880396038294,
+              37.739844324067235,
+              54.74467983096838
+            ],
+            "supported": true
+          }
+        ],
+        "frames": [
+          56,
+          67
+        ],
+        "pts": [
+          56000,
+          67000
+        ],
+        "score": 0.9022315886708193
+      },
+      "selected": null,
+      "sha256": "57c727a9895b3498d6199d3b2ade273b50b8d12044f651b80d6c76e4a5458bf2",
+      "status": "assessed",
+      "truth": []
+    },
+    {
+      "bank": "cutaways",
+      "coarse": [
+        55,
+        71
+      ],
+      "condition": "tandem_cutaway",
+      "group": 1,
+      "guarded": null,
+      "input_h264_sha256": "e4f78b47708493e2d4cb5cd0f51f0540e8831bff6a90e9cf8d401c2af1fe6f29",
+      "native_reads": 52,
+      "prior": [
+        [
+          55,
+          71
+        ]
+      ],
+      "raw": {
+        "anchors": [
+          {
+            "aligned_rgb_sha256": "6fc50b2ecae238c3a93b2fae134e2742735450a39e5e50489a1223719208ca06",
+            "bbox": {
+              "h": 177.0,
+              "w": 136.0,
+              "x": 560.0,
+              "y": 197.0
+            },
+            "decoded_rgb_sha256": "4c5effebb23252bf32555a36794b72337185c2f071a75b4b415103b738c290c3",
+            "frame_index": 55,
+            "pts": 55000
+          },
+          {
+            "aligned_rgb_sha256": "28bb8676bcec0aab2f77c1ac8748b627f5fb865d040fb3e3438b790caaca73cc",
+            "bbox": {
+              "h": 160.0,
+              "w": 113.0,
+              "x": 580.0,
+              "y": 189.0
+            },
+            "decoded_rgb_sha256": "6f7b7e4c710db8e0161a691944f4516fe8fd8498ab1076dacd11ea4e763b8c3a",
+            "frame_index": 61,
+            "pts": 61000
+          },
+          {
+            "aligned_rgb_sha256": "66e57d251d97e37bbde1e570335b58e949b53e7f2b87d3f2a1df3e71d214be0d",
+            "bbox": {
+              "h": 174.0,
+              "w": 131.0,
+              "x": 562.0,
+              "y": 195.0
+            },
+            "decoded_rgb_sha256": "8e9be8e49d2c4cd4b9c7acea3bbb6fe45802fa30ae9005322e35517d9499f182",
+            "frame_index": 67,
+            "pts": 67000
+          }
+        ],
+        "edges": [
+          {
+            "broad": true,
+            "central": 53.870744824409485,
+            "sector_ids": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "sectors": [
+              26.998709213221446,
+              19.957400754094124,
+              39.93907270953059,
+              58.41682890057564
+            ],
+            "supported": true
+          },
+          {
+            "broad": true,
+            "central": 62.354389399290085,
+            "sector_ids": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "sectors": [
+              44.57056759856641,
+              24.016781454905868,
+              36.329788303002715,
+              51.658607959747314
+            ],
+            "supported": true
+          }
+        ],
+        "frames": [
+          56,
+          67
+        ],
+        "pts": [
+          56000,
+          67000
+        ],
+        "score": 0.7851720196465007
+      },
+      "selected": null,
+      "sha256": "7a075e5320939cae9da7bb8911ab5d555e757a7e909e670105e135d2a383259a",
+      "status": "assessed",
+      "truth": []
+    },
+    {
+      "bank": "cutaways",
+      "coarse": null,
+      "condition": "jump",
+      "group": 1,
+      "guarded": null,
+      "input_h264_sha256": "cef0822eb66f260398b5d2e87ad602324f42f6451fa1e4ff1d21320b3bb5601e",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "739ef18aea742e095cf6a2dea3902490e6eaaeebea6c9921a48c6e20e2d3a199",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "cutaways",
+      "coarse": null,
+      "condition": "punch_in",
+      "group": 1,
+      "guarded": null,
+      "input_h264_sha256": "0121bb4ca6d3f50f02d3482884c5f36b8acbc626ab17a89617d99c29620e2111",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "f62aeb564fc24badae5aa9ba22e415c4fab839a444a3f4e7dab50bae7ffdd9d0",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "cutaways",
+      "coarse": null,
+      "condition": "gain",
+      "group": 1,
+      "guarded": null,
+      "input_h264_sha256": "876195615431ce18e6ba6d7ae5e7a887847d55be531590ffd76c24cd067b71d7",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "d9bf8392b4e6ae108d7afd9ac9735f5301f275be609fd0709e46497b71fa7d2d",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "cutaways",
+      "coarse": null,
+      "condition": "unchanged",
+      "group": 2,
+      "guarded": null,
+      "input_h264_sha256": "51c9cd5ee1e253880a6d4f9133e28d26948efe545532e93c78311d937c7681f5",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "12b42d15318f843ea4d3f5ae30fa3dd18c9995542fd0aafcc05673f8a8e69068",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "cutaways",
+      "coarse": [
+        55,
+        71
+      ],
+      "condition": "cutaway",
+      "group": 2,
+      "guarded": null,
+      "input_h264_sha256": "dc635def8667f4541be18a4fb93e687bf944a0d43606ace359b166dbbffde524",
+      "native_reads": 52,
+      "prior": [
+        [
+          55,
+          71
+        ]
+      ],
+      "raw": {
+        "anchors": [
+          {
+            "aligned_rgb_sha256": "24e6db7d614a95638ba2bbe421201845ccd415bea5c6923518172dcc6d8b67c3",
+            "bbox": {
+              "h": 215.0,
+              "w": 143.0,
+              "x": 569.0,
+              "y": 214.0
+            },
+            "decoded_rgb_sha256": "a8257801ae2eba404b882272e5f1947d3e1a39f901912b13e6b092fb3bca1c10",
+            "frame_index": 60,
+            "pts": 60000
+          },
+          {
+            "aligned_rgb_sha256": "6dfb87ad720ed81aa177e0602ba39bcb6c978ef4c27bd66f27e6ced2e1ef896f",
+            "bbox": {
+              "h": 184.0,
+              "w": 125.0,
+              "x": 549.0,
+              "y": 215.0
+            },
+            "decoded_rgb_sha256": "2f275a33a0badda00e4757d56d3b8121a50e0270320034fbaa8db3188e099736",
+            "frame_index": 66,
+            "pts": 66000
+          },
+          {
+            "aligned_rgb_sha256": "6a61ca259e813a48a21459c2357077b42f08d8a6e083f42bd5b6ef118ea77dc3",
+            "bbox": {
+              "h": 223.0,
+              "w": 143.0,
+              "x": 569.0,
+              "y": 214.0
+            },
+            "decoded_rgb_sha256": "e2f9109afd3cdae19bd63086245c74f630b417c6ba7d8d6312d3d1b1c1eca83b",
+            "frame_index": 72,
+            "pts": 72000
+          }
+        ],
+        "edges": [
+          {
+            "broad": true,
+            "central": 84.71617221832275,
+            "sector_ids": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "sectors": [
+              58.42900063097477,
+              59.86918997298926,
+              92.42021502554417,
+              48.30996003001928
+            ],
+            "supported": true
+          },
+          {
+            "broad": true,
+            "central": 62.566981732845306,
+            "sector_ids": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "sectors": [
+              67.80421337485313,
+              111.28571391105652,
+              100.51886075735092,
+              64.82301807403564
+            ],
+            "supported": true
+          }
+        ],
+        "frames": [
+          61,
+          72
+        ],
+        "pts": [
+          61000,
+          72000
+        ],
+        "score": 0.8535863440999363
+      },
+      "selected": null,
+      "sha256": "5fc3712210e28c918e76be9f169cbc8077651e639d1cbaaafe7e40a3d9ee99f2",
+      "status": "assessed",
+      "truth": []
+    },
+    {
+      "bank": "cutaways",
+      "coarse": [
+        55,
+        71
+      ],
+      "condition": "tandem_cutaway",
+      "group": 2,
+      "guarded": null,
+      "input_h264_sha256": "98512d6f28cbaa589ed14d713a9273fb8e34eb1fef0f12462b9ec29c43d3574a",
+      "native_reads": 52,
+      "prior": [
+        [
+          55,
+          71
+        ]
+      ],
+      "raw": {
+        "anchors": [
+          {
+            "aligned_rgb_sha256": "e993aac58a1cd63fdfe089cb27cfb5710424dcf169ed69cd7021a99653d69a56",
+            "bbox": {
+              "h": 214.0,
+              "w": 145.0,
+              "x": 569.0,
+              "y": 215.0
+            },
+            "decoded_rgb_sha256": "33684e10eb85e5de54d2beeb96a35075b4434c1ed869fce22ed54b5e397c9155",
+            "frame_index": 60,
+            "pts": 60000
+          },
+          {
+            "aligned_rgb_sha256": "337b756e3045cb95d5621edd84635ae6f2311630010a109a7c69b5e7c5727fa9",
+            "bbox": {
+              "h": 175.0,
+              "w": 127.0,
+              "x": 549.0,
+              "y": 222.0
+            },
+            "decoded_rgb_sha256": "9f151c1734d9e09f09d6ad38f7a84e586ada003748228604114f258cb804db10",
+            "frame_index": 66,
+            "pts": 66000
+          },
+          {
+            "aligned_rgb_sha256": "6c2f50da24bde8d6073595bb5839a84c8ef89bf61930bdf6292874c1a64afefc",
+            "bbox": {
+              "h": 222.0,
+              "w": 144.0,
+              "x": 566.0,
+              "y": 216.0
+            },
+            "decoded_rgb_sha256": "9e285c670bc50f5653a76c1db7bc6125cffc5fe560d55990067601531d97ae1a",
+            "frame_index": 72,
+            "pts": 72000
+          }
+        ],
+        "edges": [
+          {
+            "broad": true,
+            "central": 86.21348202228546,
+            "sector_ids": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "sectors": [
+              58.20094580948353,
+              58.93330654874444,
+              93.49854665249586,
+              47.58413879573345
+            ],
+            "supported": true
+          },
+          {
+            "broad": true,
+            "central": 64.16084384918213,
+            "sector_ids": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "sectors": [
+              68.38296379894018,
+              111.78872534632683,
+              106.81528253108263,
+              68.45067897439003
+            ],
+            "supported": true
+          }
+        ],
+        "frames": [
+          61,
+          72
+        ],
+        "pts": [
+          61000,
+          72000
+        ],
+        "score": 0.7908167000956263
+      },
+      "selected": null,
+      "sha256": "9b11bda1677231138069a50f88b0cfeca5cc7575d156b56e46a36e9284202883",
+      "status": "assessed",
+      "truth": []
+    },
+    {
+      "bank": "cutaways",
+      "coarse": null,
+      "condition": "jump",
+      "group": 2,
+      "guarded": null,
+      "input_h264_sha256": "864129902af1809482b834de4656a2e2d7f5ff0c7640840c1dad7773f9956e83",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "90cad87d919975b34de31ce4a50a6db3a043a34753df80e76299644181686e30",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "cutaways",
+      "coarse": null,
+      "condition": "punch_in",
+      "group": 2,
+      "guarded": null,
+      "input_h264_sha256": "7f6160eb0d7c01d086b611ab190fec63e2ccf24e38b0f4f8bf7ea98fdbc63f86",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "1bae79c9c7b0cc322725dfb3e1035aaef36428758897bade8aa0b5a79408f467",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "cutaways",
+      "coarse": null,
+      "condition": "gain",
+      "group": 2,
+      "guarded": null,
+      "input_h264_sha256": "e6a6a278de6667e4e992367f6b5ca0ea2fdf17368a781aca5e7d9084a12c5e7b",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "40a3d8863abfb1abef01e7a469eddd29a6731552f43644d6b9d1dad4e1c53af0",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "cutaways",
+      "coarse": null,
+      "condition": "unchanged",
+      "group": 3,
+      "guarded": null,
+      "input_h264_sha256": "4a0214f2af751dcd838edd5f64d6597e83d6b7f8edaa7c27816dd45818fc4812",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "1b281f1a6c9cb709d22a5de9a847c524b8048114b6f86f9e9a31e7ebf63d3d2b",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "cutaways",
+      "coarse": [
+        55,
+        71
+      ],
+      "condition": "cutaway",
+      "group": 3,
+      "guarded": null,
+      "input_h264_sha256": "14704322531eb99a65383fa9a1b363c4697c87cec59f185af0db1c95d4a700de",
+      "native_reads": 52,
+      "prior": [
+        [
+          55,
+          71
+        ]
+      ],
+      "raw": {
+        "anchors": [
+          {
+            "aligned_rgb_sha256": "f01c799ac2e8a7ecc7387322687b2031b5448d0e0af76b1aa4f1e2fe9e7f62f6",
+            "bbox": {
+              "h": 135.0,
+              "w": 97.0,
+              "x": 594.0,
+              "y": 251.0
+            },
+            "decoded_rgb_sha256": "e016694885cff6e26c60f0cbcbd59946e190a38bac44d867d11d1eecbce9fe19",
+            "frame_index": 55,
+            "pts": 55000
+          },
+          {
+            "aligned_rgb_sha256": "fa879d688b126e278b1ade7fa886d1ab8b6dfed01b35775568c43a955d7e6e2c",
+            "bbox": {
+              "h": 166.0,
+              "w": 117.0,
+              "x": 602.0,
+              "y": 256.0
+            },
+            "decoded_rgb_sha256": "403962c30d59461e7d83757fb6cc3b3aee8ad99ab0738e3c6ecc6eeac41b08db",
+            "frame_index": 61,
+            "pts": 61000
+          },
+          {
+            "aligned_rgb_sha256": "6ac061cf0a0c68a1255039fd955c633c8f4a77b725e1e2442f427bb5f7b9734a",
+            "bbox": {
+              "h": 135.0,
+              "w": 98.0,
+              "x": 593.0,
+              "y": 255.0
+            },
+            "decoded_rgb_sha256": "030a57fd32d51bf758fa8dcc92778ef1c309fa3a1ad059047a3852c2ee76b41c",
+            "frame_index": 67,
+            "pts": 67000
+          }
+        ],
+        "edges": [
+          {
+            "broad": true,
+            "central": 47.877689599990845,
+            "sector_ids": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "sectors": [
+              57.05894923210144,
+              59.4892411082983,
+              33.498064145445824,
+              56.67311570048332
+            ],
+            "supported": true
+          },
+          {
+            "broad": true,
+            "central": 51.86335253715515,
+            "sector_ids": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "sectors": [
+              65.69879752397537,
+              58.87478506565094,
+              41.163444608449936,
+              70.83317464590073
+            ],
+            "supported": true
+          }
+        ],
+        "frames": [
+          56,
+          67
+        ],
+        "pts": [
+          56000,
+          67000
+        ],
+        "score": 0.6852373833154105
+      },
+      "selected": null,
+      "sha256": "1052d76186915337877dedd68ad7c7861e3a3c5ba3ed358e76d8009bcdfca16b",
+      "status": "assessed",
+      "truth": []
+    },
+    {
+      "bank": "cutaways",
+      "coarse": [
+        55,
+        71
+      ],
+      "condition": "tandem_cutaway",
+      "group": 3,
+      "guarded": null,
+      "input_h264_sha256": "0012365fd49555c801b688db798769944902bc1c498f515ad0034750311ba78f",
+      "native_reads": 52,
+      "prior": [
+        [
+          55,
+          71
+        ]
+      ],
+      "raw": {
+        "anchors": [
+          {
+            "aligned_rgb_sha256": "14f0d01af1856d3c27bbbe87c6c1c640a5e627d884c8a540ef92f626d72e5493",
+            "bbox": {
+              "h": 137.0,
+              "w": 97.0,
+              "x": 594.0,
+              "y": 250.0
+            },
+            "decoded_rgb_sha256": "834c1ef6e104ce15f8ce191358095ffc4b945465fa54567bdb7c01fd09ffb3ab",
+            "frame_index": 55,
+            "pts": 55000
+          },
+          {
+            "aligned_rgb_sha256": "e488fe235ed5afe31e23222e1ff8fbbb6c372abe4787fda7c89c7d61f094e3ec",
+            "bbox": {
+              "h": 167.0,
+              "w": 118.0,
+              "x": 601.0,
+              "y": 256.0
+            },
+            "decoded_rgb_sha256": "7c0c184687f4cebf1b7259d7a29ab1286d273460fc9607c0d5a38370e6e2d24e",
+            "frame_index": 61,
+            "pts": 61000
+          },
+          {
+            "aligned_rgb_sha256": "81f5c36d0466ee7421c213020a71e4304e09c1cbbadb6a24493563b43ecea08e",
+            "bbox": {
+              "h": 134.0,
+              "w": 98.0,
+              "x": 594.0,
+              "y": 253.0
+            },
+            "decoded_rgb_sha256": "bd7fa74f6f3163c768dba768493e3a6f1cb4a76d0f75c1186f4756126f6d6c3a",
+            "frame_index": 67,
+            "pts": 67000
+          }
+        ],
+        "edges": [
+          {
+            "broad": true,
+            "central": 47.205420315265656,
+            "sector_ids": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "sectors": [
+              56.99483695626259,
+              59.2517196983099,
+              32.43520446121693,
+              56.58172005414963
+            ],
+            "supported": true
+          },
+          {
+            "broad": true,
+            "central": 51.55846810340881,
+            "sector_ids": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "sectors": [
+              65.78872279077768,
+              58.450084179639816,
+              40.882496260106564,
+              71.39362040162086
+            ],
+            "supported": true
+          }
+        ],
+        "frames": [
+          56,
+          67
+        ],
+        "pts": [
+          56000,
+          67000
+        ],
+        "score": 0.6858440424349919
+      },
+      "selected": null,
+      "sha256": "b09d73ae05b9558c22097fb141680d7632bc15c00c0917d7a5330d9c063c5311",
+      "status": "assessed",
+      "truth": []
+    },
+    {
+      "bank": "cutaways",
+      "coarse": null,
+      "condition": "jump",
+      "group": 3,
+      "guarded": null,
+      "input_h264_sha256": "8517d29910edd4a51e5aedf29fed3505ee31139f47d782ab1ed16f83dd6b35d3",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "71e2733665a4c3dff24a06e03a9833590dbde7472df080989d4f5533c17a2743",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "cutaways",
+      "coarse": null,
+      "condition": "punch_in",
+      "group": 3,
+      "guarded": null,
+      "input_h264_sha256": "83c586dc8925e3f7ebfe17f02933daf95db58d2a04ed0b676581db71a704b257",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "6f1936f4c16077ae3dc47ec102e6c33c0cf2974243a5f8a4fe4b748e533e1d71",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "cutaways",
+      "coarse": null,
+      "condition": "gain",
+      "group": 3,
+      "guarded": null,
+      "input_h264_sha256": "997165fc4a9b557ae3838dafde03a79f9f4b26ed50a17c14a6c6ef3e34201957",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "204366bf8e0a5cb35121e823d43af065059dfe9bd6374e16e1972aa43fe5b98e",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "cutaways",
+      "coarse": null,
+      "condition": "unchanged",
+      "group": 4,
+      "guarded": null,
+      "input_h264_sha256": "63051d040670ac2c061aa18c0b2f849a5c715d6e04b525f4a1eb39ecc4fdb6fd",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "51c3afbb5fc308cebb283d94f3ededa2223328062b49c283f04212946dc0b48f",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "cutaways",
+      "coarse": [
+        63,
+        79
+      ],
+      "condition": "cutaway",
+      "group": 4,
+      "guarded": null,
+      "input_h264_sha256": "35e3f95e33925932d332cb45779d4728318d40e79bd2e79eb46e69660903d509",
+      "native_reads": 52,
+      "prior": [
+        [
+          63,
+          79
+        ]
+      ],
+      "raw": {
+        "anchors": [
+          {
+            "aligned_rgb_sha256": "d242bf075fa5096a6e83f9a1b47387d97a25a6665259dc9eb2faf70d01b1adac",
+            "bbox": {
+              "h": 193.0,
+              "w": 136.0,
+              "x": 586.0,
+              "y": 264.0
+            },
+            "decoded_rgb_sha256": "1f7b8d814c021fdf6c345e511fb0d8ee9c7903cc223b6d2d00baf8c3dbe22d1c",
+            "frame_index": 60,
+            "pts": 60000
+          },
+          {
+            "aligned_rgb_sha256": "a50deb791bde37788cb846189b5c836b6116bd05fb46e2b3bf903cc2838a7e53",
+            "bbox": {
+              "h": 211.0,
+              "w": 145.0,
+              "x": 585.0,
+              "y": 222.0
+            },
+            "decoded_rgb_sha256": "e23598c928d132d7d87ff4b453f0b8fd74e9a19f85dee0ed8ab9af6335a24222",
+            "frame_index": 66,
+            "pts": 66000
+          },
+          {
+            "aligned_rgb_sha256": "f9eeb3eeec8c751fe952b7cae6c7e6df91a2429cdc8639c3db465e42e3284443",
+            "bbox": {
+              "h": 192.0,
+              "w": 137.0,
+              "x": 585.0,
+              "y": 264.0
+            },
+            "decoded_rgb_sha256": "47de79171cdb57de56982e60a8c848a70424621a1f711b0e39a42307b67aece7",
+            "frame_index": 72,
+            "pts": 72000
+          }
+        ],
+        "edges": [
+          {
+            "broad": true,
+            "central": 38.14583504199982,
+            "sector_ids": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "sectors": [
+              39.0197916328907,
+              43.93158473074436,
+              83.37330719828606,
+              22.455028280615807
+            ],
+            "supported": true
+          },
+          {
+            "broad": true,
+            "central": 49.49551874399185,
+            "sector_ids": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "sectors": [
+              38.418676443398,
+              40.00344190001488,
+              61.15957300364971,
+              16.333654910326004
+            ],
+            "supported": true
+          }
+        ],
+        "frames": [
+          61,
+          72
+        ],
+        "pts": [
+          61000,
+          72000
+        ],
+        "score": 0.6769005641332441
+      },
+      "selected": null,
+      "sha256": "ac8f5f2f150e31195ef612a642be7a08204cf02a08d38ca56210c90b0026592a",
+      "status": "assessed",
+      "truth": []
+    },
+    {
+      "bank": "cutaways",
+      "coarse": [
+        55,
+        71
+      ],
+      "condition": "tandem_cutaway",
+      "group": 4,
+      "guarded": null,
+      "input_h264_sha256": "4afa14265de84bf8dcee9207ffb72ef0f54c8d9d350f3c62a9ec8dd5f7d696f1",
+      "native_reads": 52,
+      "prior": [
+        [
+          55,
+          71
+        ]
+      ],
+      "raw": {
+        "anchors": [
+          {
+            "aligned_rgb_sha256": "64923e13dbc6827676f7b0d586ffdd2c7f5d975e716af2febdf3fa70fef0cc0a",
+            "bbox": {
+              "h": 198.0,
+              "w": 134.0,
+              "x": 589.0,
+              "y": 259.0
+            },
+            "decoded_rgb_sha256": "f44793cd059aeadc344fe9490f155d7343476d6cd52c2016889369a449578c4a",
+            "frame_index": 60,
+            "pts": 60000
+          },
+          {
+            "aligned_rgb_sha256": "f55d6a02890c2381f45229df95cc89f125b3f8c2c2a21ad38470770f1007e927",
+            "bbox": {
+              "h": 208.0,
+              "w": 141.0,
+              "x": 589.0,
+              "y": 224.0
+            },
+            "decoded_rgb_sha256": "dfe94a7f20da7fddd79a313e10c30a17acb06adbceb961ab76db60b8afb5c920",
+            "frame_index": 66,
+            "pts": 66000
+          },
+          {
+            "aligned_rgb_sha256": "3094ff2855adbc2cd80af2d143a7f837e6d44d9fa2fefe14587f6bc8bd7d1a3d",
+            "bbox": {
+              "h": 187.0,
+              "w": 139.0,
+              "x": 587.0,
+              "y": 266.0
+            },
+            "decoded_rgb_sha256": "93daa7b89b0aaa233f6e2822733d8f282d807ebed45988ef9c99f24eea0aace1",
+            "frame_index": 72,
+            "pts": 72000
+          }
+        ],
+        "edges": [
+          {
+            "broad": true,
+            "central": 39.271281123161316,
+            "sector_ids": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "sectors": [
+              39.666093338280916,
+              43.9582633972168,
+              86.895069681108,
+              22.590425461530685
+            ],
+            "supported": true
+          },
+          {
+            "broad": true,
+            "central": 48.7060931622982,
+            "sector_ids": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "sectors": [
+              37.9036142937839,
+              40.44061999022961,
+              62.88684891536832,
+              16.769341990351677
+            ],
+            "supported": true
+          }
+        ],
+        "frames": [
+          61,
+          72
+        ],
+        "pts": [
+          61000,
+          72000
+        ],
+        "score": 0.6047691203493549
+      },
+      "selected": null,
+      "sha256": "d367bff51f1dcf8627525f8003a2390bccf2bfc63a10c519df37dbd6e0164433",
+      "status": "assessed",
+      "truth": []
+    },
+    {
+      "bank": "cutaways",
+      "coarse": null,
+      "condition": "jump",
+      "group": 4,
+      "guarded": null,
+      "input_h264_sha256": "8c5b373d89997f4095c993bee9808a3b2ac972259d5fb30dbd1a19f9f1c5499b",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "b49b6f87446e7a60ab5dfecea936b75643128387598c54b909afc5c4e063fc83",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "cutaways",
+      "coarse": null,
+      "condition": "punch_in",
+      "group": 4,
+      "guarded": null,
+      "input_h264_sha256": "d13de716e6193d2c2707fe499e71f8b6686f94e3f6c4c4a52ae6a099c636037a",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "fb8648c5e8dfa51e283904facd1f643c43e72b1516698d14f6b0cf8c98aad5b0",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "cutaways",
+      "coarse": null,
+      "condition": "gain",
+      "group": 4,
+      "guarded": null,
+      "input_h264_sha256": "c63d929870be91ea6c323db78af8eaa955f8d4f5e909a3690b511515961fce95",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "b5e4a377ee157ae9f697a1bc9db3479e94e28ee634ae90ef9ea1e075316aef93",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "cutaways",
+      "coarse": null,
+      "condition": "unchanged",
+      "group": 5,
+      "guarded": null,
+      "input_h264_sha256": "77b0ad7da8beba9a05551f7bc317e8e53499ed1e0fc002b3219d591ebab2bdb1",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "8d1d6fc690a5c8838d1a325db1ea31e7fbb37a2355611d40649aa4044140dc30",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "cutaways",
+      "coarse": [
+        47,
+        63
+      ],
+      "condition": "cutaway",
+      "group": 5,
+      "guarded": null,
+      "input_h264_sha256": "fe8315db727174fb67dc252f11c1e4a87f9ad552e46e74f1981ad738a81cca4c",
+      "native_reads": 52,
+      "prior": [
+        [
+          47,
+          63
+        ]
+      ],
+      "raw": {
+        "anchors": [
+          {
+            "aligned_rgb_sha256": "bbd9ca1f3febe4fe6214de45943b09867d9a09c17424b168741a5a048a22eb0e",
+            "bbox": {
+              "h": 197.0,
+              "w": 142.0,
+              "x": 581.0,
+              "y": 237.0
+            },
+            "decoded_rgb_sha256": "d40be9b51ff9c6edcf78bc66ed888a6bda1eeb9f57b97a8f81d8bc8b7451327d",
+            "frame_index": 55,
+            "pts": 55000
+          },
+          {
+            "aligned_rgb_sha256": "8f0f04849b9c363465861960b800e00db66209901ac90f35a0d088edb218db30",
+            "bbox": {
+              "h": 201.0,
+              "w": 144.0,
+              "x": 565.0,
+              "y": 229.0
+            },
+            "decoded_rgb_sha256": "b35d3bcc7faf963065b0214b609bb1508f80b3ca22e146929a36322fcbf2ac2c",
+            "frame_index": 61,
+            "pts": 61000
+          },
+          {
+            "aligned_rgb_sha256": "30fea630ac8565689907d9d533991aeda0b059a1c38e1bc37ba867ac34ee8c43",
+            "bbox": {
+              "h": 193.0,
+              "w": 139.0,
+              "x": 582.0,
+              "y": 239.0
+            },
+            "decoded_rgb_sha256": "5fe7fe872b18bdbbfbb44553baa6b84ee2210b234670243eefce89efa6084d30",
+            "frame_index": 67,
+            "pts": 67000
+          }
+        ],
+        "edges": [
+          {
+            "broad": true,
+            "central": 30.74932736158371,
+            "sector_ids": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "sectors": [
+              29.48881159722805,
+              47.947934940457344,
+              62.48259326815605,
+              22.413442611694336
+            ],
+            "supported": true
+          },
+          {
+            "broad": true,
+            "central": 29.892249882221222,
+            "sector_ids": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "sectors": [
+              32.19793353974819,
+              47.49784876406193,
+              59.30560962110758,
+              16.42118015885353
+            ],
+            "supported": true
+          }
+        ],
+        "frames": [
+          56,
+          67
+        ],
+        "pts": [
+          56000,
+          67000
+        ],
+        "score": 0.6746530124729329
+      },
+      "selected": null,
+      "sha256": "95b679ca0a3f07824682a73a2a43e0c311693cf4615159c53afd07c14e11aaa6",
+      "status": "assessed",
+      "truth": []
+    },
+    {
+      "bank": "cutaways",
+      "coarse": [
+        47,
+        63
+      ],
+      "condition": "tandem_cutaway",
+      "group": 5,
+      "guarded": null,
+      "input_h264_sha256": "51ead89df673184eb6cf30b5ae7c4612b757c881ff5a5a54418b7955cbafb7cb",
+      "native_reads": 52,
+      "prior": [
+        [
+          47,
+          63
+        ]
+      ],
+      "raw": {
+        "anchors": [
+          {
+            "aligned_rgb_sha256": "7d85cda55b6eb3660eaa3648339466559c6e8ab9e3d41cb4e5b39a8b8c001b9e",
+            "bbox": {
+              "h": 194.0,
+              "w": 140.0,
+              "x": 579.0,
+              "y": 239.0
+            },
+            "decoded_rgb_sha256": "6c0b622a6e66b1b7be12a9cf0ffe3c68ef22d4f09001a37c2cb8cde75b6d25e8",
+            "frame_index": 55,
+            "pts": 55000
+          },
+          {
+            "aligned_rgb_sha256": "9691a3db2951500fe73540b1d5a72bad0cbe0d864295c0c7e2f143af2bf80ebc",
+            "bbox": {
+              "h": 200.0,
+              "w": 144.0,
+              "x": 565.0,
+              "y": 229.0
+            },
+            "decoded_rgb_sha256": "00e652d2eadf0d24cb9cd1604b96d010154fef07d10906803ac07cbd91f2e4cb",
+            "frame_index": 61,
+            "pts": 61000
+          },
+          {
+            "aligned_rgb_sha256": "3fac545cb6f078ebda6a45127db98d8c0a32578f670e6bc971be4158cff4dc32",
+            "bbox": {
+              "h": 193.0,
+              "w": 140.0,
+              "x": 581.0,
+              "y": 242.0
+            },
+            "decoded_rgb_sha256": "301035b8d266cea0d81768f88a98fedb12b9abf305637436b166e9eb07a7aebc",
+            "frame_index": 67,
+            "pts": 67000
+          }
+        ],
+        "edges": [
+          {
+            "broad": true,
+            "central": 31.461020708084106,
+            "sector_ids": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "sectors": [
+              29.92297739163041,
+              47.93330551683903,
+              64.35444800555706,
+              22.784331992268562
+            ],
+            "supported": true
+          },
+          {
+            "broad": true,
+            "central": 29.954077810049057,
+            "sector_ids": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "sectors": [
+              32.427711888216436,
+              46.991825483739376,
+              58.523210840299726,
+              16.48984567821026
+            ],
+            "supported": true
+          }
+        ],
+        "frames": [
+          56,
+          67
+        ],
+        "pts": [
+          56000,
+          67000
+        ],
+        "score": 0.5891308895359616
+      },
+      "selected": null,
+      "sha256": "92844d577cbd09b033ec287811d3eecbaf5a55b42309fc89d4ac1d08aa3c20c3",
+      "status": "assessed",
+      "truth": []
+    },
+    {
+      "bank": "cutaways",
+      "coarse": null,
+      "condition": "jump",
+      "group": 5,
+      "guarded": null,
+      "input_h264_sha256": "ecd110f37e4255aa8208ea09b0563efc9e81d2275113e57c5a265b95819ac331",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "5b5524ef0a29201915000779006184139a874e33933b6678f7a98a4971963c04",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "cutaways",
+      "coarse": null,
+      "condition": "punch_in",
+      "group": 5,
+      "guarded": null,
+      "input_h264_sha256": "ab7541372c0d145f159607c9a7b6c8eaa168f7ee0a1bbf7a1395525b4f6e8e3b",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "cef3a0bed127a261749595a5df39cdea14dc797f353c9cbd961d672ff6776686",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "cutaways",
+      "coarse": null,
+      "condition": "gain",
+      "group": 5,
+      "guarded": null,
+      "input_h264_sha256": "c5571fe0bfe637dd56c443d077a224deae00305b57e71b725d26d564c2686141",
+      "native_reads": 0,
+      "prior": [],
+      "raw": null,
+      "selected": null,
+      "sha256": "0d3337041ce8d08ba5a290443ac5f53e0d5b0117819ceadd0f2e74c273dbff8e",
+      "status": "not_routed",
+      "truth": []
+    }
+  ]
+}

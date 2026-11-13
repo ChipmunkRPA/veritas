@@ -22,7 +22,21 @@ The 78 selection deliveries and 125 held deliveries are previously retained 720p
 
 Both new locations exactly match native pictures **[63, 74)**, or **2.100–2.467 s**, in distinct retained RTFS groups. The before, during and after anchors are pictures **62, 68 and 74**. The first-encode version of one of those misses remained unresolved. It had an above-point unguarded pair, which the surrounding motion check rejected. There were zero additional ranges across 79 ordinary deliveries and zero new wrong ranges on edited deliveries. The incumbent flagged 15 ordinary same-layout speaker cutaways, and an unguarded pair scored above the point on all 15. The guard withheld all 15 proposed refinements. The study leaves those existing alerts in the comparator's results.
 
-The original advancement gate failed. It recovered two additional locations and assessed 15/24 routed edit files (62.5%) and 15/46 edit files overall (32.6%). The result supports a narrow tandem-encode finding. It leaves longer clips, natural conference recordings, other delivery profiles and lip-sync performance unresolved. An independent reader reproduced the counts, fixed point and held gate. Native replay checked all 125 held source file hashes and 42 matching source pictures and crops for above-point results. [Public H.264 case ledger](evaluation-panels/video-face-paired-edge-transfer-2026-11-12.json)
+The original advancement gate failed. It recovered two additional locations and assessed 15/24 routed edit files (62.5%) and 15/46 edit files overall (32.6%). The result supports a narrow tandem-encode finding. An independent reader reproduced the counts, fixed point and held gate. Native replay checked all 125 held source file hashes and 42 matching source pictures and crops for above-point results. [Public H.264 case ledger](evaluation-panels/video-face-paired-edge-transfer-2026-11-12.json)
+
+## HEVC confirmation
+
+The follow-up ran the same paired-edge search, near-head guard and numerical point on 61 freshly encoded 720p30 HEVC MP4 deliveries. The set uses four retained RTFS source groups outside the first experiment, five matched pairs of genuine CREMA-D actors outside its selection controls, and three extra retained camera recordings. The same paired edge method had seen none of those source groups. The clips had prior project exposure. The delivery change preserves 120 native picture positions and the authored edit boundaries. The actual Full face stages were rerun on the new bytes. The separate confirmation gate requires two additional useful ranges in two groups, at least 60% assessed among routed edit deliveries, zero additional ordinary ranges and zero wrong edit ranges. [RTFS and camera sources](video-face-720p30-transfer-2026-11-12.md) · [Independent cutaway source bank](video-face-near-head-transfer-2026-11-12.md)
+
+| HEVC edit condition | Known ranges | Current Full located | Full plus paired edges | Files routed and assessed |
+| --- | ---: | ---: | ---: | ---: |
+| Six-frame publisher swap | 4 | 0 | 0 | 0 routed, 0 assessed |
+| Ten-frame publisher swap | 4 | 0 | 3 | 4 routed, 3 assessed |
+| Total | 8 | 0 | 3 | 4 routed, 3 assessed |
+
+All three new ranges come from different RTFS groups and exactly match native pictures **[87, 97)**, or **2.900–3.233 s**. The inherited ranges were **[79, 95)**, with 0.444 temporal intersection over union. The before, during and after anchors are pictures **86, 92 and 97**. The incumbent flagged 10 of 53 ordinary controls, all genuine fixed-layout cutaways and their tandem copies. The raw pair would have added a range on all ten. The guard blocked all ten and added zero ranges across the 53 controls. It added zero wrong ranges on edited deliveries. The confirmation gate passed. Independent replay checked 61 source digests, 7,320 native timestamps, nine original pictures, nine context crops and nine exact aligned crop digests. [Public HEVC case ledger](evaluation-panels/video-face-paired-edge-hevc-confirmation-2026-11-12.json)
+
+The two comparisons show five recovered ranges in five retained source groups, with no added ordinary ranges. The next product priority is an opt-in timing refinement for the measured 720p30 H.264 and HEVC MP4 profiles, with source-bound before, during and after evidence in the app and exports. This study does not enable it in the serving path. The method requires an existing tracked appearance interval and a supported face pair. It left every unrouted clip unassessed, including the four six-frame HEVC swaps. Those swaps need a separate check that can find a range without an incumbent candidate. Long clips, naturally occurring conference cuts, other delivery profiles and lip-sync performance remain outside these results.
 
 ## Reproduce locally
 
@@ -36,4 +50,15 @@ for phase in freeze selection held report; do
 done
 python3 -B -I -S backend/scripts/review_video_face_paired_edge_transfer.py "$run/receipt.json"
 backend/.venv/bin/python -B -m scripts.review_video_face_paired_edge_transfer "$run/receipt.json" --native
+```
+
+For HEVC, `$source_study` is the retained 720p30 source study directory containing `freeze.json`, `media.json` and the H.264 deliveries. Use a new private `$confirmation` directory.
+
+```sh
+for phase in prepare score; do
+  backend/.venv/bin/python -B -m scripts.video_face_paired_edge_hevc_confirmation \
+    "$phase" "$confirmation" "$run/receipt.json" "$source_study" || exit 1
+done
+backend/.venv/bin/python -B -m scripts.review_video_face_paired_edge_transfer \
+  "$confirmation/receipt.json" --confirm-against "$run/receipt.json" --confirmation-media "$confirmation"
 ```

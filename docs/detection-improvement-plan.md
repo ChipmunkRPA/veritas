@@ -97,6 +97,24 @@ integration remains unfinished.
 
 ## Progress on 13 November
 
+- The [re-encoded trim check](video-trimmed-reencode-transfer-2026-11-13.md)
+  adds local video comparison when two clips have matching motion and the
+  analyzed clip is shorter. It localized 27 of 33 authored edits and flagged
+  none of 44 controls. All admitted offsets matched and 168 exact source
+  frames replayed. The check reports both timelines and crops.
+- The [rotated interpolation trial](image-native-rotated-stencil-transfer-2026-11-13.md)
+  explained all seven ordinary rotation flags while preserving all 16
+  useful generated-edit locations. Three quantized translations still
+  flagged, and the shipped phase-shift check supplies no candidate region
+  for these rotations. The method remains experimental.
+- The [paired noisy voice trial](audio-paired-speech-continuity-transfer-2026-11-13.md)
+  found two of six synthetic replacements under louder competing speech.
+  Both new methods flagged too many matched ordinary controls, including
+  untouched speech. The methods remain experimental.
+- The [single-upload writing interval trial](writing-interval-transfer-2026-11-13.md)
+  added zero strict locations across 120 held edited reports. Its two-stream
+  rule flagged zero of 20 untouched reports but located only one edit that
+  the primary comparison already found. The app keeps its existing check.
 - The [short voice-edit comparison](audio-phoneme-short-edit-score-2026-11-13.md)
   located nine of 16 edited deliveries with two-second windows, including
   none of four with a competing voice at −5 dB. The tested background
@@ -141,8 +159,8 @@ integration remains unfinished.
   12 controls. Each side retains its own native coordinates.
 - The [matched short voice edit panel](audio-phoneme-short-edit-intake-2026-11-13.md)
   prepared 108 waveform deliveries with exact same-word replacements and
-  ordinary controls under annotated competing speech. Native replay matched
-  all deliveries. Detector scoring is still pending.
+  ordinary controls under annotated competing speech. Native replay and the
+  subsequent detector trial matched all delivery commitments.
 - [Matching Word tables](document-word-table-comparison-2026-11-13.md) now
   show wording changes in earlier-draft comparison with native cell and
   paragraph coordinates. The browser, PDF, JSON and source replay found

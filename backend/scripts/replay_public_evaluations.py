@@ -193,10 +193,26 @@ SHORT_EDIT_TRANSFER_2026_11_13 = {
         f"{SCRIPTS}/writing_uswds_revision_transfer.py",
     )),
 }
+DELIVERY_AND_LOCALIZATION = {
+    "image": ("review_image_native_rotated_stencil_transfer.py", (
+        "image-native-rotated-stencil-measurements-2026-11-13.json",
+        "image-native-rotated-stencil-cc0-roster-2026-11-13.json", "image-native-rotated-stencil-transfer-2026-11-13.json",
+    ), (), ()),
+    "video": ("review_video_trimmed_reencode_transfer.py", ("video-trimmed-reencode-transfer-2026-11-13.json",), (), ()),
+    "audio": ("review_audio_paired_speech_continuity_transfer.py", (
+        "audio-paired-speech-continuity-transfer-2026-11-13.json",
+    ), (), ()),
+    "writing": ("writing_interval_transfer.py", ("writing-interval-transfer-2026-11-13.json",), ("review",), (
+        f"{SCRIPTS}/writing_revision_trajectory_transfer.py", f"{SCRIPTS}/writing_revision_worker_priority.py",
+        f"{SCRIPTS}/writing_revision_worker_transfer.py", f"{SCRIPTS}/review_writing_revision_worker_transfer.py",
+        f"{SCRIPTS}/video_short_return_encoded_app.py",
+        f"{PANELS}/writing-revision-trajectory-2026-11-13.json", f"{PANELS}/writing-revision-worker-complete-2026-11-13.json",
+    )),
+}
 SUITES = ("overview", "localization", "transfer", "source-evidence", "recent-checks", "evidence-followups", "short-edits",
           "difficult-edits", "localization-limits", "specialist-transfer", "local-evidence-2026-11-13",
           "evidence-transfer-2026-11-13", "evidence-extent-2026-11-13", "local-evidence-expansion",
-          "short-edit-transfer-2026-11-13")
+          "short-edit-transfer-2026-11-13", "delivery-and-localization")
 ISOLATED = (
     "import runpy,sys; "
     "script=sys.argv.pop(1); "
@@ -262,6 +278,8 @@ def replay_inputs(modality: str, suite: str) -> tuple[str, list[str], tuple[str,
         script, panel_names, prefix, dependencies = LOCAL_EVIDENCE_EXPANSION[modality]
     elif suite == "short-edit-transfer-2026-11-13":
         script, panel_names, prefix, dependencies = SHORT_EDIT_TRANSFER_2026_11_13[modality]
+    elif suite == "delivery-and-localization":
+        script, panel_names, prefix, dependencies = DELIVERY_AND_LOCALIZATION[modality]
     elif suite == "source-evidence":
         script, panel_names, prefix, dependencies = SOURCE_EVIDENCE[modality]
     else:

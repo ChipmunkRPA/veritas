@@ -19,6 +19,7 @@ from app.evidence.video_reference import (
     SCHEMA_WITH_SOUNDTRACK,
     SCHEMA_WITH_TIMING,
     SCHEMA_WITH_TRIM,
+    SCHEMA_WITH_TRIM_REENCODE,
     compare,
 )
 from app.evidence.video_reference_photometric import BASIS as LOCAL_AREA_BASIS
@@ -63,7 +64,7 @@ def replay(compare, earlier: Path, submitted: Path, output: Path, *, verify: boo
 
 def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False,
         event_seconds: Fraction | None = None, timing_model: Path | None = None) -> dict:
-    options = {"include_trimmed": not verify, "include_local_area": not verify}
+    options = {"include_trimmed": not verify, "include_local_area": not verify, "include_trim_reencoded": not verify}
     short_fallback = not verify
     local_sound = not verify
     if verify:
@@ -72,7 +73,8 @@ def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False,
         event_seconds = None
         if isinstance(record, dict):
             schema = record.get("schema")
-            options["include_trimmed"] = schema == SCHEMA_WITH_TRIM
+            options["include_trimmed"] = schema in (SCHEMA_WITH_TRIM, SCHEMA_WITH_TRIM_REENCODE)
+            options["include_trim_reencoded"] = schema == SCHEMA_WITH_TRIM_REENCODE
             channel_timing = schema == SCHEMA_WITH_CHANNEL_TIMING
             timing = record.get("timing", {})
             local_sound = schema == SCHEMA_WITH_MARKED_SOUND_FALLBACK or (

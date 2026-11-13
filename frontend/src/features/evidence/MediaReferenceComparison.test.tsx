@@ -113,6 +113,45 @@ it('shows the two picture clocks in a trimmed earlier-copy comparison', async ()
   expect(screen.getByText(/The soundtrack was outside this comparison/)).toBeTruthy()
 })
 
+it('keeps both clocks and native crop timestamps after a shorter re-encoded clip is aligned', async () => {
+  const picture = { file: 'frame.png', media_type: 'image/png', sha256: 'a'.repeat(64) }
+  const crop = { file: 'crop.png', media_type: 'image/png', sha256: 'b'.repeat(64) }
+  const preview = (time_s: number, earlier_time_s: number) => ({
+    time_s, earlier_time_s, assets: { earlier: picture, submitted: picture }, crop_assets: { earlier: crop, submitted: crop },
+  })
+  const comparison = {
+    schema: 'chipmunk.video-reference-comparison/10', status: 'measured', interpretation: 'Decoded picture differences.',
+    submitted: { width: 720, height: 480 },
+    trim_alignment: {
+      basis: 'paired_h264_trim_motion/1', earlier_frames: [6, 81], submitted_frames: [0, 75], audio_checked: false,
+      motion_support: [{ moving_pairs: [8, 9], mean_similarity: .82 }, { moving_pairs: [10, 11], mean_similarity: .88 }],
+      motion_margin: .07,
+    },
+    picture: { matching_frames: 0, changed_frames: 75, ranges: [], local_comparison: {
+      scope: 'Ordinary edits may produce this evidence.', summary: 'A local picture difference persisted.',
+      range: { id: 'L01', start_s: .8, end_s: 1.2, earlier_start_s: 1.04, earlier_end_s: 1.44, tile: { x: 20, y: 16, w: 100, h: 80 },
+        previews: { before: preview(.76, 1), during: preview(.96, 1.2), after: preview(1.2, 1.44) } },
+    } },
+  }
+  const assets = { 'frame.png': 'iVBORw0KGgo=', 'crop.png': 'iVBORw0KGgo=' }
+  vi.stubGlobal('fetch', vi.fn().mockResolvedValueOnce(Response.json({ available: true }))
+    .mockResolvedValueOnce(Response.json({ comparison, assets })))
+  show()
+  fireEvent.change(await screen.findByLabelText('Earlier video'), { target: { files: [new File(['movie'], 'earlier.mp4')] } })
+  fireEvent.click(screen.getByRole('button', { name: 'Compare videos' }))
+  expect(await screen.findByRole('region', { name: 'Picture alignment after trimming' })).toBeTruthy()
+  expect(screen.getByText(/Matching motion near the beginning and end aligned the shorter analyzed clip/)).toBeTruthy()
+  expect(screen.getByText(/Earlier clip frames \[6, 81\). Analyzed clip frames \[0, 75\)/)).toBeTruthy()
+  expect(screen.getByText(/75 differ. Re-encoding alone can change decoded pixels/)).toBeTruthy()
+  expect(screen.getByText('L01 · 0.800–1.200 s in the analyzed clip')).toBeTruthy()
+  expect(screen.getByText('1.040–1.440 s in the earlier clip.')).toBeTruthy()
+  expect(screen.getByAltText('Earlier clip at 1.200 seconds')).toBeTruthy()
+  expect(screen.getByAltText('Earlier clip comparison crop at 1.200 seconds')).toBeTruthy()
+  expect(screen.getByAltText('Analyzed clip comparison crop at 0.960 seconds')).toBeTruthy()
+  expect(screen.getByText('Earlier clip · 1.440 s')).toBeTruthy()
+  expect(screen.queryByText(/Local soundtrack timing was skipped/)).toBeNull()
+})
+
 it('shows and exports the standalone audio difference waveform on the recording timeline', async () => {
   const clip = { file: 'earlier.wav', media_type: 'audio/wav', sha256: 'c'.repeat(64) }
   const waveform = { low: [-0.4], high: [0.2] }

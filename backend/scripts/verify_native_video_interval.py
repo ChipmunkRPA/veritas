@@ -15,6 +15,7 @@ from tempfile import TemporaryDirectory
 
 SCHEMA = "chipmunk.native-video-interval/1"
 COMPARISON_SCHEMA = "chipmunk.video-reference-comparison/2"
+TRIM_REENCODE_SCHEMA = "chipmunk.video-reference-comparison/10"
 LOCAL_AREA_BASIS = "paired_h264_local_area/1"
 ROLES = ("before", "during", "after")
 SHA = re.compile(r"[0-9a-f]{64}")
@@ -183,8 +184,9 @@ def native_crop(frame, width, x, y, w, h):
 
 def verify_comparison(earlier, submitted, export):
     record, assets = export["comparison"], export["assets"]
-    require(record["schema"] == COMPARISON_SCHEMA and record["status"] == "measured"
-            and record["affects_overall_confidence"] is False, "Expected a version 2 video comparison")
+    trimmed = record["schema"] == TRIM_REENCODE_SCHEMA
+    require(record["schema"] in (COMPARISON_SCHEMA, TRIM_REENCODE_SCHEMA) and record["status"] == "measured"
+            and record["affects_overall_confidence"] is False, "Expected a measured local video comparison")
     local = record["picture"]["local_comparison"]
     local_area = local.get("basis") == LOCAL_AREA_BASIS
     require(local["status"] == "local_difference", "The export has no measured local picture interval")
@@ -203,24 +205,41 @@ def verify_comparison(earlier, submitted, export):
     require(all(type(value) is int for value in (x, y, w, h)) and min(x, y) >= 0 and min(w, h) > 0,
             "Invalid crop rectangle")
 
+    offsets = {"earlier": 0, "submitted": 0}
+    if trimmed:
+        alignment = record["trim_alignment"]
+        offset = alignment["earlier_frames"][0]
+        length = record["submitted"]["frames"]
+        require(local_area and alignment["basis"] == "paired_h264_trim_motion/1"
+                and type(offset) is int and 0 <= offset <= record["earlier"]["frames"] - length
+                and alignment["earlier_frames"] == [offset, offset + length]
+                and alignment["submitted_frames"] == [0, length] and alignment["audio_checked"] is False,
+                "Trim alignment lies outside the two source clocks")
+        offsets["earlier"] = offset
     clocks = []
     for side, path in (("earlier", earlier), ("submitted", submitted)):
         width, height, base, pts = comparison_source(path, record[side], local_area=local_area)
-        require(end < len(pts) and x + w <= width and y + h <= height, "Interval or crop lies outside the source")
+        offset = offsets[side]
+        begin, stop = start + offset, end + offset
+        require(stop < len(pts) and x + w <= width and y + h <= height, "Interval or crop lies outside the source")
         clock = [(tick - pts[0]) * base for tick in pts]
-        clocks.append(((width, height), clock))
-        require((region["start_s"], region["end_s"]) == (float(clock[start]), float(clock[end])),
+        length = record["submitted"]["frames"] if trimmed else len(pts)
+        clocks.append(((width, height), [time - clock[offset] for time in clock[offset:offset + length]]))
+        prefix = "earlier_" if trimmed and side == "earlier" else ""
+        require((region[f"{prefix}start_s"], region[f"{prefix}end_s"]) == (float(clock[begin]), float(clock[stop])),
                 "Displayed interval differs from the source clock")
         require(region["source_ranges"][side] == {
-            "start_pts": pts[start], "last_pts": pts[end - 1], "end_exclusive_pts": pts[end],
+            "start_pts": pts[begin], "last_pts": pts[stop - 1], "end_exclusive_pts": pts[stop],
         }, "Interval ticks differ from the source clock")
-        ticks = [pts[index] for index in indices]
-        frames = decode_rgb_frames(path, indices, ticks, base, width * height * 3)
+        source_indices = [index + offset for index in indices]
+        ticks = [pts[index] for index in source_indices]
+        frames = decode_rgb_frames(path, source_indices, ticks, base, width * height * 3)
         with TemporaryDirectory() as folder:
             expected = []
-            for role, index, tick, frame in zip(ROLES, indices, ticks, frames, strict=True):
+            for role, index, tick, frame in zip(ROLES, source_indices, ticks, frames, strict=True):
                 preview = previews[role]
-                require(preview[f"{side}_pts"] == tick and preview["time_s"] == float(clock[index]),
+                require(preview[f"{side}_pts"] == tick and preview[f"{prefix}time_s"] == float(clock[index])
+                        and (not prefix or preview["earlier_frame"] == index),
                         "Preview time differs from its native picture")
                 require(preview[f"{side}_rgb_sha256"] == hashlib.sha256(frame).hexdigest(),
                         "Native picture RGB differs from the export")

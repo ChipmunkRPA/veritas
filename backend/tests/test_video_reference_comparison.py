@@ -235,6 +235,67 @@ def test_trimmed_picture_comparison_retains_both_clocks_and_export(tmp_path, ali
     assert video_reference.compare(earlier, different_clock, include_trimmed=True)[0]["status"] == "picture_timelines_differ"
 
 
+@pytest.mark.parametrize("rate", [24, 25])
+def test_reencoded_trim_api_keeps_native_crops_and_two_clocks(tmp_path, reference_http, monkeypatch, rate):
+    yy, xx = np.indices((480, 720))
+    shade = 65 + xx * .12 + yy * .12 + 10 * np.cos(xx / 12)
+    base = np.uint8(np.stack((shade, shade + 5, shade + 9), axis=-1))
+    rng = np.random.default_rng(515)
+    frames = np.repeat(base[None], 52, axis=0)
+    for i, (x, y) in enumerate(rng.integers(100, 240, (len(frames), 2))):
+        frames[i, y:y + 38, x:x + 45] = (214, 198, 151)
+    altered = frames[5:-4].copy()
+    altered[13:29, 157:271, 361:527] = (222, 217, 203)
+    earlier = encode_lossy_comparison(tmp_path / "earlier.mp4", frames, lossless=False, crf=22, rate=rate)
+    submitted = encode_lossy_comparison(tmp_path / "trimmed.mp4", altered, lossless=False, crf=28, rate=rate)
+    assert video_reference.compare(earlier, submitted, include_trimmed=True)[0]["status"] == "picture_timelines_differ"
+
+    f = reference_http
+    stored = f.store.put_file(submitted)
+    monkeypatch.setattr(settings, "video_reference_comparison_enabled", True)
+    monkeypatch.setattr(settings, "video_reference_local_area", True)
+    monkeypatch.setattr(v2_media_reference, "default_store", lambda: f.store)
+
+    @contextmanager
+    def sessions():
+        with Session(f.engine) as db:
+            yield db
+
+    monkeypatch.setattr(v2_media_reference, "get_session", sessions)
+    with sessions() as db:
+        analysis = db.get(Analysis, "other-kind")
+        analysis.filename, analysis.content_type = submitted.name, "video/mp4"
+        analysis.sha256, analysis.size_bytes = stored.sha256, stored.size_bytes
+        db.commit()
+    response = f.client.post("/api/v2/analyses/other-kind/video-reference-comparison", headers=f.viewer,
+                             files={"earlier": (earlier.name, earlier.read_bytes(), "video/mp4")},
+                             data={"include_pdf": "true"})
+    assert response.status_code == 200 and response.headers["Cache-Control"] == "no-store", response.text
+    payload = response.json()
+    record = payload["comparison"]
+    assert record["schema"] == video_reference.SCHEMA_WITH_TRIM_REENCODE
+    assert record["affects_overall_confidence"] is False and "audio" not in record
+    assert record["trim_alignment"]["earlier_frames"] == [5, 48]
+    assert not record["picture"]["ranges"]
+    span = record["picture"]["local_comparison"]["range"]
+    for anchor in span["previews"].values():
+        assert anchor["earlier_frame"] == anchor["frame"] + 5
+    assert span["earlier_start_s"] - span["start_s"] == pytest.approx(5 / rate)
+    assert span["earlier_end_s"] - span["end_s"] == pytest.approx(5 / rate)
+    with pymupdf.open(stream=base64.b64decode(payload["pdf"]), filetype="pdf") as pdf:
+        assert "Matching motion near both ends" in pdf[0].get_text()
+        assert all(role in pdf[1].get_text() for role in ("Before", "During", "After"))
+        assert f"Earlier {span['earlier_start_s']:.3f} to {span['earlier_end_s']:.3f} s" in pdf[1].get_text()
+    export = {key: payload[key] for key in ("comparison", "assets")}
+    path = tmp_path / "trimmed-reencoded.json"
+    path.write_text(json.dumps(export))
+    assert run(earlier, submitted, path, verify=True) == record
+    assert verify_comparison(earlier, submitted, export)["native_crops_verified"] == 6
+    span["previews"]["during"]["earlier_time_s"] = 0.
+    with pytest.raises(ValueError, match="Preview time differs"):
+        verify_comparison(earlier, submitted, export)
+
+
 def test_second_soundtrack_keeps_exact_stream_and_source_sample_coordinates(tmp_path, aligned_pair, reference_http, monkeypatch):
     source, _, _, pcm = aligned_pair
     second = np.roll(pcm, 173)

@@ -61,6 +61,21 @@ python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/short-e
 python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/short-edit-transfer.json" --format-issue
 ```
 
+### Replay delivery and localization checks
+
+Recount the [rotation controls](image-native-rotated-stencil-transfer-2026-11-13.md),
+[re-encoded video trims](video-trimmed-reencode-transfer-2026-11-13.md),
+[paired speech with different backgrounds](audio-paired-speech-continuity-transfer-2026-11-13.md)
+and [single-upload writing intervals](writing-interval-transfer-2026-11-13.md)
+from the published measurements. This verifies counts and decision
+arithmetic. Use the respective guide to repeat native media or model checks.
+
+```sh
+review_dir=$(mktemp -d)
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/delivery.json" --suite delivery-and-localization
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/delivery.json" --format-issue
+```
+
 ### Replay difficult edits across four media
 
 Run from a clean checkout with Python 3.11 or later. The readers use only

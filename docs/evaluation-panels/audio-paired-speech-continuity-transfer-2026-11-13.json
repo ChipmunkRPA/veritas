@@ -1,0 +1,5968 @@
+{
+  "assessment": [
+    {
+      "active_windows": 62,
+      "case": "held-0",
+      "earlier_sha256": "7557f577494edef5099e2ba1541659e7ca4de842e8cd1a64c882c3ba30511547",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "untouched",
+      "level": 0,
+      "measured_snr_db": 2.7e-05,
+      "results": {
+        "correlation": {
+          "flanks": [
+            0.83798232,
+            1.03041842
+          ],
+          "middle": 0.19233009,
+          "range": [
+            34560,
+            46080
+          ],
+          "score": 0.5975432
+        },
+        "projection": {
+          "flanks": [
+            0.98167165,
+            0.86412524
+          ],
+          "middle": 0.23130793,
+          "range": [
+            34560,
+            46080
+          ],
+          "score": 0.6034307
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "8b92265a8cfd8d9a2bbb0e8b3dce7bf5093aff97569d0b08ffb560fd369c7d55",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 62,
+      "case": "held-0",
+      "earlier_sha256": "7557f577494edef5099e2ba1541659e7ca4de842e8cd1a64c882c3ba30511547",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_replacement",
+      "level": 0,
+      "measured_snr_db": 2.7e-05,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.14098577,
+            1.09727504
+          ],
+          "middle": 0.02877551,
+          "range": [
+            64000,
+            75520
+          ],
+          "score": 1.05757185
+        },
+        "projection": {
+          "flanks": [
+            0.99730099,
+            0.99967046
+          ],
+          "middle": 0.09417262,
+          "range": [
+            64000,
+            75520
+          ],
+          "score": 0.902536
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "b8bee76d98e03aab50b7cc6cd6c31a264b013fcb2c9370bcc7923cc11bbd1640",
+      "supported_pair": true,
+      "truth": [
+        61200,
+        72560
+      ]
+    },
+    {
+      "active_windows": 62,
+      "case": "held-0",
+      "earlier_sha256": "7557f577494edef5099e2ba1541659e7ca4de842e8cd1a64c882c3ba30511547",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "local_gain",
+      "level": 0,
+      "measured_snr_db": 2.7e-05,
+      "results": {
+        "correlation": {
+          "flanks": [
+            0.83798232,
+            1.03041842
+          ],
+          "middle": 0.19233009,
+          "range": [
+            34560,
+            46080
+          ],
+          "score": 0.5975432
+        },
+        "projection": {
+          "flanks": [
+            0.97428326,
+            0.85762154
+          ],
+          "middle": 0.22956703,
+          "range": [
+            34560,
+            46080
+          ],
+          "score": 0.59888908
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "68f433ba9b8abb13494de6ae6402bbf35143f39f0d243f62982bd8f6575c4367",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 62,
+      "case": "held-0",
+      "earlier_sha256": "7557f577494edef5099e2ba1541659e7ca4de842e8cd1a64c882c3ba30511547",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_tts",
+      "level": 0,
+      "measured_snr_db": 2.7e-05,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.14064671,
+            1.09727504
+          ],
+          "middle": 0.05601087,
+          "range": [
+            64000,
+            75520
+          ],
+          "score": 1.03042126
+        },
+        "projection": {
+          "flanks": [
+            0.99697122,
+            0.99967046
+          ],
+          "middle": 0.22820399,
+          "range": [
+            64000,
+            75520
+          ],
+          "score": 0.76809242
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "0342062d39ce9ed25901cc4dfa4f56dfe6a55987ee1e56a31896d7b850c1a877",
+      "supported_pair": true,
+      "truth": [
+        61200,
+        72560
+      ]
+    },
+    {
+      "active_windows": 62,
+      "case": "held-0",
+      "earlier_sha256": "7557f577494edef5099e2ba1541659e7ca4de842e8cd1a64c882c3ba30511547",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_tts",
+      "level": 0,
+      "measured_snr_db": 2.7e-05,
+      "results": {
+        "correlation": {
+          "flanks": [
+            0.83798232,
+            1.03041842
+          ],
+          "middle": 0.19233009,
+          "range": [
+            34560,
+            46080
+          ],
+          "score": 0.5975432
+        },
+        "projection": {
+          "flanks": [
+            0.98003911,
+            0.86268818
+          ],
+          "middle": 0.23092326,
+          "range": [
+            34560,
+            46080
+          ],
+          "score": 0.60242718
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "64f8ddb73d8402814843ec39d10c6d7f4e430f9428799b360d5c6165d47518be",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 62,
+      "case": "held-0",
+      "earlier_sha256": "7557f577494edef5099e2ba1541659e7ca4de842e8cd1a64c882c3ba30511547",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_conversion",
+      "level": 0,
+      "measured_snr_db": 2.7e-05,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.13947111,
+            1.09727504
+          ],
+          "middle": 0.05476447,
+          "range": [
+            64000,
+            75520
+          ],
+          "score": 1.03196156
+        },
+        "projection": {
+          "flanks": [
+            0.99736453,
+            0.99967046
+          ],
+          "middle": 0.22381313,
+          "range": [
+            64000,
+            75520
+          ],
+          "score": 0.77297492
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "5c48eb8de4e6caedfc0a59187c011830f3f8c0ae4256f7585739ee19e5ea0c7d",
+      "supported_pair": true,
+      "truth": [
+        61200,
+        72560
+      ]
+    },
+    {
+      "active_windows": 62,
+      "case": "held-0",
+      "earlier_sha256": "7557f577494edef5099e2ba1541659e7ca4de842e8cd1a64c882c3ba30511547",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_conversion",
+      "level": 0,
+      "measured_snr_db": 2.7e-05,
+      "results": {
+        "correlation": {
+          "flanks": [
+            0.83798232,
+            1.03041842
+          ],
+          "middle": 0.19233009,
+          "range": [
+            34560,
+            46080
+          ],
+          "score": 0.5975432
+        },
+        "projection": {
+          "flanks": [
+            0.98100574,
+            0.86353906
+          ],
+          "middle": 0.23115102,
+          "range": [
+            34560,
+            46080
+          ],
+          "score": 0.60302137
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "d8d82dc2a33e683fa7983e724465dd35dfdadb53c45a47905838d896019e61f6",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 62,
+      "case": "held-0",
+      "earlier_sha256": "7557f577494edef5099e2ba1541659e7ca4de842e8cd1a64c882c3ba30511547",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "global_eq",
+      "level": 0,
+      "measured_snr_db": 2.7e-05,
+      "results": {
+        "correlation": {
+          "flanks": [
+            0.88132703,
+            0.98655516
+          ],
+          "middle": 0.20914394,
+          "range": [
+            34560,
+            46080
+          ],
+          "score": 0.64587606
+        },
+        "projection": {
+          "flanks": [
+            0.80233754,
+            0.74167238
+          ],
+          "middle": 0.26143239,
+          "range": [
+            33280,
+            44800
+          ],
+          "score": 0.4650737
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "2985f8f48f4ebad107fbf0d50945dba406ef299413f91839d220478384faaebc",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 57,
+      "case": "held-0",
+      "earlier_sha256": "a34e6dcadc471c788c8f02425b2709c5cef4e35ec5d3f97e129f371883f286ca",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "different_reader_reference",
+      "level": 0,
+      "measured_snr_db": 2.7e-05,
+      "results": {
+        "correlation": null,
+        "projection": null
+      },
+      "role": "assessment",
+      "submitted_sha256": "8b92265a8cfd8d9a2bbb0e8b3dce7bf5093aff97569d0b08ffb560fd369c7d55",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 64,
+      "case": "held-0",
+      "earlier_sha256": "99795014654387b6764a8f9a4098ce8d0caa76a509475549de996d5e6dea87ea",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "same_words_rerecorded_reference",
+      "level": 0,
+      "measured_snr_db": 2.7e-05,
+      "results": {
+        "correlation": null,
+        "projection": null
+      },
+      "role": "assessment",
+      "submitted_sha256": "8b92265a8cfd8d9a2bbb0e8b3dce7bf5093aff97569d0b08ffb560fd369c7d55",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 62,
+      "case": "held-0",
+      "earlier_sha256": "7557f577494edef5099e2ba1541659e7ca4de842e8cd1a64c882c3ba30511547",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "untouched",
+      "level": -5,
+      "measured_snr_db": -4.999995,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.23550497,
+            1.09347261
+          ],
+          "middle": 0.46713341,
+          "range": [
+            64000,
+            75520
+          ],
+          "score": 0.5908311
+        },
+        "projection": {
+          "flanks": [
+            0.9741217,
+            0.8619191
+          ],
+          "middle": 0.19083636,
+          "range": [
+            34560,
+            46080
+          ],
+          "score": 0.64303208
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "d0fd47269ea789707d4220e7a9035eb1036cc521abe7c29de39c6837b2edf9dc",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 62,
+      "case": "held-0",
+      "earlier_sha256": "7557f577494edef5099e2ba1541659e7ca4de842e8cd1a64c882c3ba30511547",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_replacement",
+      "level": -5,
+      "measured_snr_db": -4.999995,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.28070501,
+            1.14175332
+          ],
+          "middle": 0.04433908,
+          "range": [
+            64000,
+            75520
+          ],
+          "score": 1.06267633
+        },
+        "projection": {
+          "flanks": [
+            1.0007597,
+            0.98563927
+          ],
+          "middle": 0.25557221,
+          "range": [
+            64000,
+            75520
+          ],
+          "score": 0.72628696
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "8875084bb665a0c798200c41faae559a0c115c4c9a60a64a03e3c41882c38d95",
+      "supported_pair": true,
+      "truth": [
+        61200,
+        72560
+      ]
+    },
+    {
+      "active_windows": 62,
+      "case": "held-0",
+      "earlier_sha256": "7557f577494edef5099e2ba1541659e7ca4de842e8cd1a64c882c3ba30511547",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "local_gain",
+      "level": -5,
+      "measured_snr_db": -4.999995,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.22215139,
+            1.25520496
+          ],
+          "middle": 0.66168872,
+          "range": [
+            74240,
+            85760
+          ],
+          "score": 0.55219928
+        },
+        "projection": {
+          "flanks": [
+            0.96705639,
+            0.85566759
+          ],
+          "middle": 0.18945222,
+          "range": [
+            34560,
+            46080
+          ],
+          "score": 0.63836817
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "2fb28718d084a3c24f58910031074b7c28cbabd9e3fafae6c0a5c6c0611cf7ad",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 62,
+      "case": "held-0",
+      "earlier_sha256": "7557f577494edef5099e2ba1541659e7ca4de842e8cd1a64c882c3ba30511547",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_tts",
+      "level": -5,
+      "measured_snr_db": -4.999995,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.28158708,
+            1.14175332
+          ],
+          "middle": 0.06156612,
+          "range": [
+            64000,
+            75520
+          ],
+          "score": 1.04522877
+        },
+        "projection": {
+          "flanks": [
+            0.98515303,
+            0.8716798
+          ],
+          "middle": 0.19299746,
+          "range": [
+            34560,
+            46080
+          ],
+          "score": 0.65031403
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "014c0fbf8d99d69bddc3bef093ffabfc3108106aeb4f8567ec2198c10974b197",
+      "supported_pair": true,
+      "truth": [
+        61200,
+        72560
+      ]
+    },
+    {
+      "active_windows": 62,
+      "case": "held-0",
+      "earlier_sha256": "7557f577494edef5099e2ba1541659e7ca4de842e8cd1a64c882c3ba30511547",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_tts",
+      "level": -5,
+      "measured_snr_db": -4.999995,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.23545572,
+            1.09347261
+          ],
+          "middle": 0.47663445,
+          "range": [
+            64000,
+            75520
+          ],
+          "score": 0.58134238
+        },
+        "projection": {
+          "flanks": [
+            0.97056565,
+            0.85877264
+          ],
+          "middle": 0.19013971,
+          "range": [
+            34560,
+            46080
+          ],
+          "score": 0.64068468
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "7ec5fe1d966356324c6b0a316b1bc0878a2bd5b6ac7700e7cb41af2a12fdcfd7",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 62,
+      "case": "held-0",
+      "earlier_sha256": "7557f577494edef5099e2ba1541659e7ca4de842e8cd1a64c882c3ba30511547",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_conversion",
+      "level": -5,
+      "measured_snr_db": -4.999995,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.27905749,
+            1.14175332
+          ],
+          "middle": 0.06087331,
+          "range": [
+            64000,
+            75520
+          ],
+          "score": 1.04655397
+        },
+        "projection": {
+          "flanks": [
+            0.9848813,
+            0.87143937
+          ],
+          "middle": 0.19294423,
+          "range": [
+            34560,
+            46080
+          ],
+          "score": 0.65013465
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "9b3f4fd9f4052a215b7ad85bd7f356647c13787c7861f767a90113dae1ff8b9e",
+      "supported_pair": true,
+      "truth": [
+        61200,
+        72560
+      ]
+    },
+    {
+      "active_windows": 62,
+      "case": "held-0",
+      "earlier_sha256": "7557f577494edef5099e2ba1541659e7ca4de842e8cd1a64c882c3ba30511547",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_conversion",
+      "level": -5,
+      "measured_snr_db": -4.999995,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.2354861,
+            1.09347261
+          ],
+          "middle": 0.47149156,
+          "range": [
+            64000,
+            75520
+          ],
+          "score": 0.58647768
+        },
+        "projection": {
+          "flanks": [
+            0.97370399,
+            0.86154949
+          ],
+          "middle": 0.19075453,
+          "range": [
+            34560,
+            46080
+          ],
+          "score": 0.64275635
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "819ab6f64b921c455df05688cd885178f14620f17867d0963b8b9a92ae8a0dbf",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 62,
+      "case": "held-0",
+      "earlier_sha256": "7557f577494edef5099e2ba1541659e7ca4de842e8cd1a64c882c3ba30511547",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "global_eq",
+      "level": -5,
+      "measured_snr_db": -4.999995,
+      "results": {
+        "correlation": {
+          "flanks": [
+            0.79800744,
+            1.09836093
+          ],
+          "middle": 0.15031888,
+          "range": [
+            34560,
+            46080
+          ],
+          "score": 0.57260018
+        },
+        "projection": {
+          "flanks": [
+            0.80412153,
+            0.7327731
+          ],
+          "middle": 0.2224601,
+          "range": [
+            33280,
+            44800
+          ],
+          "score": 0.4924759
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "881f01ce6411cd843d25e7395c467e0e305eec5822182a55cabb1cf793cdf395",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 57,
+      "case": "held-0",
+      "earlier_sha256": "a34e6dcadc471c788c8f02425b2709c5cef4e35ec5d3f97e129f371883f286ca",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "different_reader_reference",
+      "level": -5,
+      "measured_snr_db": -4.999995,
+      "results": {
+        "correlation": null,
+        "projection": null
+      },
+      "role": "assessment",
+      "submitted_sha256": "d0fd47269ea789707d4220e7a9035eb1036cc521abe7c29de39c6837b2edf9dc",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 64,
+      "case": "held-0",
+      "earlier_sha256": "99795014654387b6764a8f9a4098ce8d0caa76a509475549de996d5e6dea87ea",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "same_words_rerecorded_reference",
+      "level": -5,
+      "measured_snr_db": -4.999995,
+      "results": {
+        "correlation": null,
+        "projection": null
+      },
+      "role": "assessment",
+      "submitted_sha256": "d0fd47269ea789707d4220e7a9035eb1036cc521abe7c29de39c6837b2edf9dc",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 62,
+      "case": "held-0",
+      "earlier_sha256": "7557f577494edef5099e2ba1541659e7ca4de842e8cd1a64c882c3ba30511547",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "untouched",
+      "level": -10,
+      "measured_snr_db": -9.99999,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.39966176,
+            1.52168641
+          ],
+          "middle": 0.50752621,
+          "range": [
+            74240,
+            85760
+          ],
+          "score": 0.86162938
+        },
+        "projection": {
+          "flanks": [
+            0.99175079,
+            0.86402259
+          ],
+          "middle": 0.21528006,
+          "range": [
+            33280,
+            44800
+          ],
+          "score": 0.61681048
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "9b09ffd4650b67bef43edcc5ca620441f297b3ee3df91f2e7111fecf6bb45c72",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 62,
+      "case": "held-0",
+      "earlier_sha256": "7557f577494edef5099e2ba1541659e7ca4de842e8cd1a64c882c3ba30511547",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_replacement",
+      "level": -10,
+      "measured_snr_db": -9.99999,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.69679287,
+            1.27766953
+          ],
+          "middle": 0.07029094,
+          "range": [
+            64000,
+            75520
+          ],
+          "score": 1.10259775
+        },
+        "projection": {
+          "flanks": [
+            1.0070881,
+            0.8773846
+          ],
+          "middle": 0.21860934,
+          "range": [
+            33280,
+            44800
+          ],
+          "score": 0.62634938
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "6d7472df40c0d55cfad5a17f91da8625424f3cd90a8c106e8302e81d1a715728",
+      "supported_pair": true,
+      "truth": [
+        61200,
+        72560
+      ]
+    },
+    {
+      "active_windows": 62,
+      "case": "held-0",
+      "earlier_sha256": "7557f577494edef5099e2ba1541659e7ca4de842e8cd1a64c882c3ba30511547",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "local_gain",
+      "level": -10,
+      "measured_snr_db": -9.99999,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.44567286,
+            1.52168641
+          ],
+          "middle": 0.50752621,
+          "range": [
+            74240,
+            85760
+          ],
+          "score": 0.91914326
+        },
+        "projection": {
+          "flanks": [
+            0.98261015,
+            0.85605918
+          ],
+          "middle": 0.2132959,
+          "range": [
+            33280,
+            44800
+          ],
+          "score": 0.61112554
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "8bb4de5198dec2644621f079d30da3ca3fb62a559dbbcca819afe4d99f234bdf",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 62,
+      "case": "held-0",
+      "earlier_sha256": "7557f577494edef5099e2ba1541659e7ca4de842e8cd1a64c882c3ba30511547",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_tts",
+      "level": -10,
+      "measured_snr_db": -9.99999,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.70054705,
+            1.27766953
+          ],
+          "middle": 0.08352573,
+          "range": [
+            64000,
+            75520
+          ],
+          "score": 1.08842442
+        },
+        "projection": {
+          "flanks": [
+            1.00732204,
+            0.87758841
+          ],
+          "middle": 0.21866012,
+          "range": [
+            33280,
+            44800
+          ],
+          "score": 0.62649488
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "56bedf5936ce383ee495a9e8297a6badb286453ae4b4526f5fbc6fdf210cbabe",
+      "supported_pair": true,
+      "truth": [
+        61200,
+        72560
+      ]
+    },
+    {
+      "active_windows": 62,
+      "case": "held-0",
+      "earlier_sha256": "7557f577494edef5099e2ba1541659e7ca4de842e8cd1a64c882c3ba30511547",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_tts",
+      "level": -10,
+      "measured_snr_db": -9.99999,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.40396698,
+            1.52168641
+          ],
+          "middle": 0.50752621,
+          "range": [
+            74240,
+            85760
+          ],
+          "score": 0.8670109
+        },
+        "projection": {
+          "flanks": [
+            0.99045851,
+            0.86289674
+          ],
+          "middle": 0.21499954,
+          "range": [
+            33280,
+            44800
+          ],
+          "score": 0.61600676
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "edaf687202ce0aebde035becfa3a7fe79bb37dba90a811b3510215f962095c47",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 62,
+      "case": "held-0",
+      "earlier_sha256": "7557f577494edef5099e2ba1541659e7ca4de842e8cd1a64c882c3ba30511547",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_conversion",
+      "level": -10,
+      "measured_snr_db": -9.99999,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.69481278,
+            1.27766953
+          ],
+          "middle": 0.08303172,
+          "range": [
+            64000,
+            75520
+          ],
+          "score": 1.090352
+        },
+        "projection": {
+          "flanks": [
+            1.00704442,
+            0.87734654
+          ],
+          "middle": 0.21859986,
+          "range": [
+            33280,
+            44800
+          ],
+          "score": 0.62632221
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "1c483f34deed831d6db3c12e37a6ca4b93350fe64291985374ef0d337a456a94",
+      "supported_pair": true,
+      "truth": [
+        61200,
+        72560
+      ]
+    },
+    {
+      "active_windows": 62,
+      "case": "held-0",
+      "earlier_sha256": "7557f577494edef5099e2ba1541659e7ca4de842e8cd1a64c882c3ba30511547",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_conversion",
+      "level": -10,
+      "measured_snr_db": -9.99999,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.40159109,
+            1.52168641
+          ],
+          "middle": 0.50752621,
+          "range": [
+            74240,
+            85760
+          ],
+          "score": 0.86404104
+        },
+        "projection": {
+          "flanks": [
+            0.99175079,
+            0.86402259
+          ],
+          "middle": 0.21528006,
+          "range": [
+            33280,
+            44800
+          ],
+          "score": 0.61681048
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "ce9df74d89d9adc95cbdf3bdfe168888a312d7a8adca5280eab713335b417453",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 62,
+      "case": "held-0",
+      "earlier_sha256": "7557f577494edef5099e2ba1541659e7ca4de842e8cd1a64c882c3ba30511547",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "global_eq",
+      "level": -10,
+      "measured_snr_db": -9.99999,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.4130833,
+            1.56728884
+          ],
+          "middle": 0.58784223,
+          "range": [
+            74240,
+            85760
+          ],
+          "score": 0.78668968
+        },
+        "projection": {
+          "flanks": [
+            0.82258756,
+            0.78507954
+          ],
+          "middle": 0.18537865,
+          "range": [
+            33280,
+            44800
+          ],
+          "score": 0.59032388
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "39cc39ace5cbfe2538f3449c12a550ffacbc3be0e09abf654f020cb3e9b95ad7",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 57,
+      "case": "held-0",
+      "earlier_sha256": "a34e6dcadc471c788c8f02425b2709c5cef4e35ec5d3f97e129f371883f286ca",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "different_reader_reference",
+      "level": -10,
+      "measured_snr_db": -9.99999,
+      "results": {
+        "correlation": null,
+        "projection": null
+      },
+      "role": "assessment",
+      "submitted_sha256": "9b09ffd4650b67bef43edcc5ca620441f297b3ee3df91f2e7111fecf6bb45c72",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 64,
+      "case": "held-0",
+      "earlier_sha256": "99795014654387b6764a8f9a4098ce8d0caa76a509475549de996d5e6dea87ea",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "same_words_rerecorded_reference",
+      "level": -10,
+      "measured_snr_db": -9.99999,
+      "results": {
+        "correlation": null,
+        "projection": null
+      },
+      "role": "assessment",
+      "submitted_sha256": "9b09ffd4650b67bef43edcc5ca620441f297b3ee3df91f2e7111fecf6bb45c72",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 71,
+      "case": "held-1",
+      "earlier_sha256": "e8e886015c4ca288145e291225fa264a3fc711591be70dee06eb91d3ef283ce8",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "untouched",
+      "level": 0,
+      "measured_snr_db": -2.5e-05,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.05899297,
+            1.0
+          ],
+          "middle": 0.09812055,
+          "range": [
+            74240,
+            85760
+          ],
+          "score": 0.88713121
+        },
+        "projection": {
+          "flanks": [
+            1.04041084,
+            1.0
+          ],
+          "middle": 0.03649884,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.95339845
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "9ec33387b8e3160ea888b17cf2276fdcb961f7b24d0a69820bb0b73389765bce",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 71,
+      "case": "held-1",
+      "earlier_sha256": "e8e886015c4ca288145e291225fa264a3fc711591be70dee06eb91d3ef283ce8",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_replacement",
+      "level": 0,
+      "measured_snr_db": -2.5e-05,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.10756959,
+            1.04587058
+          ],
+          "middle": 0.1026214,
+          "range": [
+            74240,
+            85760
+          ],
+          "score": 0.92782443
+        },
+        "projection": {
+          "flanks": [
+            1.05202402,
+            1.01116211
+          ],
+          "middle": 0.03690625,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.96404038
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "da315f6d7f7c340d2ad10066241ab288209cda200cf4b5912ad22ec353293870",
+      "supported_pair": true,
+      "truth": [
+        41760,
+        54240
+      ]
+    },
+    {
+      "active_windows": 71,
+      "case": "held-1",
+      "earlier_sha256": "e8e886015c4ca288145e291225fa264a3fc711591be70dee06eb91d3ef283ce8",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "local_gain",
+      "level": 0,
+      "measured_snr_db": -2.5e-05,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.05899297,
+            1.0
+          ],
+          "middle": 0.09812055,
+          "range": [
+            74240,
+            85760
+          ],
+          "score": 0.88713121
+        },
+        "projection": {
+          "flanks": [
+            1.02334498,
+            0.983597
+          ],
+          "middle": 0.03590015,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.93775985
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "25ded6b60c1cb22f7eb309f23721b313454ee68004f83b3200930d3ad8d451ec",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 71,
+      "case": "held-1",
+      "earlier_sha256": "e8e886015c4ca288145e291225fa264a3fc711591be70dee06eb91d3ef283ce8",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_tts",
+      "level": 0,
+      "measured_snr_db": -2.5e-05,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.11301081,
+            1.05100869
+          ],
+          "middle": 0.10312555,
+          "range": [
+            74240,
+            85760
+          ],
+          "score": 0.9323826
+        },
+        "projection": {
+          "flanks": [
+            1.05202402,
+            1.01116211
+          ],
+          "middle": 0.03690625,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.96404038
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "a582e68fbf08e3510ea221ae3e8a7aae7b415ab7b8667ca38921e6c4467b2dda",
+      "supported_pair": true,
+      "truth": [
+        41760,
+        54240
+      ]
+    },
+    {
+      "active_windows": 71,
+      "case": "held-1",
+      "earlier_sha256": "e8e886015c4ca288145e291225fa264a3fc711591be70dee06eb91d3ef283ce8",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_tts",
+      "level": 0,
+      "measured_snr_db": -2.5e-05,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.05899297,
+            1.0
+          ],
+          "middle": 0.09812055,
+          "range": [
+            74240,
+            85760
+          ],
+          "score": 0.88713121
+        },
+        "projection": {
+          "flanks": [
+            1.04041084,
+            1.0
+          ],
+          "middle": 0.03649884,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.95339845
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "0981081483f8be8dae685d190e94c8e02dd1b18594f5ddd49480687515f2ca42",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 71,
+      "case": "held-1",
+      "earlier_sha256": "e8e886015c4ca288145e291225fa264a3fc711591be70dee06eb91d3ef283ce8",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_conversion",
+      "level": 0,
+      "measured_snr_db": -2.5e-05,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.10756959,
+            1.04587058
+          ],
+          "middle": 0.1026214,
+          "range": [
+            74240,
+            85760
+          ],
+          "score": 0.92782443
+        },
+        "projection": {
+          "flanks": [
+            1.04533845,
+            1.00473621
+          ],
+          "middle": 0.03667171,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.95791395
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "9481673762932ef2991340c56ca0a444784ae31296cb7cbddfb6eaf3177a43b5",
+      "supported_pair": true,
+      "truth": [
+        41760,
+        54240
+      ]
+    },
+    {
+      "active_windows": 71,
+      "case": "held-1",
+      "earlier_sha256": "e8e886015c4ca288145e291225fa264a3fc711591be70dee06eb91d3ef283ce8",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_conversion",
+      "level": 0,
+      "measured_snr_db": -2.5e-05,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.05899297,
+            1.0
+          ],
+          "middle": 0.09812055,
+          "range": [
+            74240,
+            85760
+          ],
+          "score": 0.88713121
+        },
+        "projection": {
+          "flanks": [
+            1.04041084,
+            1.0
+          ],
+          "middle": 0.03649884,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.95339845
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "c4ffa3cbd973174c7eca973679e09b2cc685c8a907a91d02e5a3c0ada78bf4af",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 71,
+      "case": "held-1",
+      "earlier_sha256": "e8e886015c4ca288145e291225fa264a3fc711591be70dee06eb91d3ef283ce8",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "global_eq",
+      "level": 0,
+      "measured_snr_db": -2.5e-05,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.06537806,
+            1.0
+          ],
+          "middle": 0.03609841,
+          "range": [
+            74240,
+            85760
+          ],
+          "score": 0.94755707
+        },
+        "projection": {
+          "flanks": [
+            1.01631312,
+            0.98103339
+          ],
+          "middle": 0.00755784,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.96465562
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "24aeb64283f731d5067657882fd3705f80317ee5db1e33553612ca3e84cd05fa",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 68,
+      "case": "held-1",
+      "earlier_sha256": "fcc7cf78b08419c4db961875bfcc4dbe250dddd20fd0dc8587778d6986d41de8",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "different_reader_reference",
+      "level": 0,
+      "measured_snr_db": -2.5e-05,
+      "results": {
+        "correlation": null,
+        "projection": null
+      },
+      "role": "assessment",
+      "submitted_sha256": "9ec33387b8e3160ea888b17cf2276fdcb961f7b24d0a69820bb0b73389765bce",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 71,
+      "case": "held-1",
+      "earlier_sha256": "d11d95710d9994c51029096da9503f57f08174018e7eb3ef17fa5129abbf9fac",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "same_words_rerecorded_reference",
+      "level": 0,
+      "measured_snr_db": -2.5e-05,
+      "results": {
+        "correlation": null,
+        "projection": null
+      },
+      "role": "assessment",
+      "submitted_sha256": "9ec33387b8e3160ea888b17cf2276fdcb961f7b24d0a69820bb0b73389765bce",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 71,
+      "case": "held-1",
+      "earlier_sha256": "e8e886015c4ca288145e291225fa264a3fc711591be70dee06eb91d3ef283ce8",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "untouched",
+      "level": -5,
+      "measured_snr_db": -5.000016,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.27340273,
+            1.03077537
+          ],
+          "middle": 0.11773906,
+          "range": [
+            75520,
+            87040
+          ],
+          "score": 0.85237947
+        },
+        "projection": {
+          "flanks": [
+            1.04137486,
+            0.97294076
+          ],
+          "middle": 0.03354915,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.92228309
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "87a2b6d4c097f2071fea9909eac9a07c73c68d4bcb20e09948bdf0d481df39af",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 71,
+      "case": "held-1",
+      "earlier_sha256": "e8e886015c4ca288145e291225fa264a3fc711591be70dee06eb91d3ef283ce8",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_replacement",
+      "level": -5,
+      "measured_snr_db": -5.000016,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.36627444,
+            1.1059518
+          ],
+          "middle": 0.12632599,
+          "range": [
+            75520,
+            87040
+          ],
+          "score": 0.91454515
+        },
+        "projection": {
+          "flanks": [
+            1.07033737,
+            1.0
+          ],
+          "middle": 0.03448221,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.94793345
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "f600b42e4c795a01448cefdbeff0d816b596d10886708958664c6cd4e756c953",
+      "supported_pair": true,
+      "truth": [
+        41760,
+        54240
+      ]
+    },
+    {
+      "active_windows": 71,
+      "case": "held-1",
+      "earlier_sha256": "e8e886015c4ca288145e291225fa264a3fc711591be70dee06eb91d3ef283ce8",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "local_gain",
+      "level": -5,
+      "measured_snr_db": -5.000016,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.27340273,
+            1.03077537
+          ],
+          "middle": 0.11773906,
+          "range": [
+            75520,
+            87040
+          ],
+          "score": 0.85237947
+        },
+        "projection": {
+          "flanks": [
+            1.02585498,
+            0.95844077
+          ],
+          "middle": 0.03304915,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.90853807
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "64e66f8274d73cb89c9ad7bcdce3bf73158e9c47cccfc1c6d9d62b55c68ae336",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 71,
+      "case": "held-1",
+      "earlier_sha256": "e8e886015c4ca288145e291225fa264a3fc711591be70dee06eb91d3ef283ce8",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_tts",
+      "level": -5,
+      "measured_snr_db": -5.000016,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.36627444,
+            1.1059518
+          ],
+          "middle": 0.12632599,
+          "range": [
+            75520,
+            87040
+          ],
+          "score": 0.91454515
+        },
+        "projection": {
+          "flanks": [
+            1.07033737,
+            1.0
+          ],
+          "middle": 0.03448221,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.94793345
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "5d27442e08392753e2c8775edc10f67b491726bbe9b7f68c80bc5054a761679b",
+      "supported_pair": true,
+      "truth": [
+        41760,
+        54240
+      ]
+    },
+    {
+      "active_windows": 71,
+      "case": "held-1",
+      "earlier_sha256": "e8e886015c4ca288145e291225fa264a3fc711591be70dee06eb91d3ef283ce8",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_tts",
+      "level": -5,
+      "measured_snr_db": -5.000016,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.27340273,
+            1.03077537
+          ],
+          "middle": 0.11773906,
+          "range": [
+            75520,
+            87040
+          ],
+          "score": 0.85237947
+        },
+        "projection": {
+          "flanks": [
+            1.04137486,
+            0.97294076
+          ],
+          "middle": 0.03354915,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.92228309
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "2e79308d24631b9b29089b7799704575ed93bc6672c06d84e715d209375f2d3c",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 71,
+      "case": "held-1",
+      "earlier_sha256": "e8e886015c4ca288145e291225fa264a3fc711591be70dee06eb91d3ef283ce8",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_conversion",
+      "level": -5,
+      "measured_snr_db": -5.000016,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.36627444,
+            1.1059518
+          ],
+          "middle": 0.12632599,
+          "range": [
+            75520,
+            87040
+          ],
+          "score": 0.91454515
+        },
+        "projection": {
+          "flanks": [
+            1.06518488,
+            0.99518611
+          ],
+          "middle": 0.03431621,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.9433702
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "fd43d2e9e67ffc3ab7696ead1d675f02d7ce73b9213b01dfe6e4f98b58c2f949",
+      "supported_pair": true,
+      "truth": [
+        41760,
+        54240
+      ]
+    },
+    {
+      "active_windows": 71,
+      "case": "held-1",
+      "earlier_sha256": "e8e886015c4ca288145e291225fa264a3fc711591be70dee06eb91d3ef283ce8",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_conversion",
+      "level": -5,
+      "measured_snr_db": -5.000016,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.27340273,
+            1.03077537
+          ],
+          "middle": 0.11773906,
+          "range": [
+            75520,
+            87040
+          ],
+          "score": 0.85237947
+        },
+        "projection": {
+          "flanks": [
+            1.04137486,
+            0.97294076
+          ],
+          "middle": 0.03354915,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.92228309
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "6c9c2de9b6744d7f0b11b487932d2e697b014d7b3bf51d6ab9e9adc8d56c72b2",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 71,
+      "case": "held-1",
+      "earlier_sha256": "e8e886015c4ca288145e291225fa264a3fc711591be70dee06eb91d3ef283ce8",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "global_eq",
+      "level": -5,
+      "measured_snr_db": -5.000016,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.2794915,
+            1.03691755
+          ],
+          "middle": 0.02473214,
+          "range": [
+            75520,
+            87040
+          ],
+          "score": 0.95154192
+        },
+        "projection": {
+          "flanks": [
+            1.04423945,
+            0.96095059
+          ],
+          "middle": 0.00421923,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.93590915
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "91c5b8575f11aa7c94071c34447d9815438df2cdd19ec655fc05ebbfd5294d5f",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 68,
+      "case": "held-1",
+      "earlier_sha256": "fcc7cf78b08419c4db961875bfcc4dbe250dddd20fd0dc8587778d6986d41de8",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "different_reader_reference",
+      "level": -5,
+      "measured_snr_db": -5.000016,
+      "results": {
+        "correlation": null,
+        "projection": null
+      },
+      "role": "assessment",
+      "submitted_sha256": "87a2b6d4c097f2071fea9909eac9a07c73c68d4bcb20e09948bdf0d481df39af",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 71,
+      "case": "held-1",
+      "earlier_sha256": "d11d95710d9994c51029096da9503f57f08174018e7eb3ef17fa5129abbf9fac",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "same_words_rerecorded_reference",
+      "level": -5,
+      "measured_snr_db": -5.000016,
+      "results": {
+        "correlation": null,
+        "projection": null
+      },
+      "role": "assessment",
+      "submitted_sha256": "87a2b6d4c097f2071fea9909eac9a07c73c68d4bcb20e09948bdf0d481df39af",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 71,
+      "case": "held-1",
+      "earlier_sha256": "e8e886015c4ca288145e291225fa264a3fc711591be70dee06eb91d3ef283ce8",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "untouched",
+      "level": -10,
+      "measured_snr_db": -10.000017,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.69082324,
+            1.20427813
+          ],
+          "middle": 0.07257591,
+          "range": [
+            75520,
+            87040
+          ],
+          "score": 1.01006594
+        },
+        "projection": {
+          "flanks": [
+            0.90127218,
+            0.91673061
+          ],
+          "middle": 0.02217137,
+          "range": [
+            74240,
+            85760
+          ],
+          "score": 0.8752362
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "2bb354cf4a5727c956df34343b7f0a6a37c03571e90aa70bd49d58ad05c58645",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 71,
+      "case": "held-1",
+      "earlier_sha256": "e8e886015c4ca288145e291225fa264a3fc711591be70dee06eb91d3ef283ce8",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_replacement",
+      "level": -10,
+      "measured_snr_db": -10.000017,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.89263571,
+            1.34801777
+          ],
+          "middle": 0.08123839,
+          "range": [
+            75520,
+            87040
+          ],
+          "score": 1.1306249
+        },
+        "projection": {
+          "flanks": [
+            0.95825864,
+            0.97469448
+          ],
+          "middle": 0.02357324,
+          "range": [
+            74240,
+            85760
+          ],
+          "score": 0.93057643
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "fb9a2ae16577551a58e1a33cb068bdb32d0c46698d85e15eab6171836cef808e",
+      "supported_pair": true,
+      "truth": [
+        41760,
+        54240
+      ]
+    },
+    {
+      "active_windows": 71,
+      "case": "held-1",
+      "earlier_sha256": "e8e886015c4ca288145e291225fa264a3fc711591be70dee06eb91d3ef283ce8",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "local_gain",
+      "level": -10,
+      "measured_snr_db": -10.000017,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.68538736,
+            1.20040646
+          ],
+          "middle": 0.07234258,
+          "range": [
+            75520,
+            87040
+          ],
+          "score": 1.00681865
+        },
+        "projection": {
+          "flanks": [
+            0.88251291,
+            0.89764958
+          ],
+          "middle": 0.02170989,
+          "range": [
+            74240,
+            85760
+          ],
+          "score": 0.85701885
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "ca46f6fdaa87c6e5a1fba89c1cc77a26e99e2bff43414d1775bdd21ffc4cf0f1",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 71,
+      "case": "held-1",
+      "earlier_sha256": "e8e886015c4ca288145e291225fa264a3fc711591be70dee06eb91d3ef283ce8",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_tts",
+      "level": -10,
+      "measured_snr_db": -10.000017,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.91332881,
+            1.36275631
+          ],
+          "middle": 0.08212661,
+          "range": [
+            75520,
+            87040
+          ],
+          "score": 1.14298658
+        },
+        "projection": {
+          "flanks": [
+            0.9527157,
+            0.96905647
+          ],
+          "middle": 0.02343688,
+          "range": [
+            74240,
+            85760
+          ],
+          "score": 0.92519362
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "c87b71d7d8a2ae15adc71dda5385e80f0284d6d4d3b61f308887c98852dcecb3",
+      "supported_pair": true,
+      "truth": [
+        41760,
+        54240
+      ]
+    },
+    {
+      "active_windows": 71,
+      "case": "held-1",
+      "earlier_sha256": "e8e886015c4ca288145e291225fa264a3fc711591be70dee06eb91d3ef283ce8",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_tts",
+      "level": -10,
+      "measured_snr_db": -10.000017,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.68999816,
+            1.20369047
+          ],
+          "middle": 0.07254049,
+          "range": [
+            75520,
+            87040
+          ],
+          "score": 1.00957305
+        },
+        "projection": {
+          "flanks": [
+            0.90127218,
+            0.91673061
+          ],
+          "middle": 0.02217137,
+          "range": [
+            74240,
+            85760
+          ],
+          "score": 0.8752362
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "efadd4f571360824b13d27e09a33dc132b588965885ebfca8e492870774c20fb",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 71,
+      "case": "held-1",
+      "earlier_sha256": "e8e886015c4ca288145e291225fa264a3fc711591be70dee06eb91d3ef283ce8",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_conversion",
+      "level": -10,
+      "measured_snr_db": -10.000017,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.89056689,
+            1.34654427
+          ],
+          "middle": 0.08114959,
+          "range": [
+            75520,
+            87040
+          ],
+          "score": 1.12938903
+        },
+        "projection": {
+          "flanks": [
+            0.92406113,
+            0.93991043
+          ],
+          "middle": 0.02273198,
+          "range": [
+            74240,
+            85760
+          ],
+          "score": 0.89736683
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "f585f7335c088fffac91db2c10378feb6efbee64fbd53483cfccc7c9f18caca4",
+      "supported_pair": true,
+      "truth": [
+        41760,
+        54240
+      ]
+    },
+    {
+      "active_windows": 71,
+      "case": "held-1",
+      "earlier_sha256": "e8e886015c4ca288145e291225fa264a3fc711591be70dee06eb91d3ef283ce8",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_conversion",
+      "level": -10,
+      "measured_snr_db": -10.000017,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.69002334,
+            1.2037084
+          ],
+          "middle": 0.07254157,
+          "range": [
+            75520,
+            87040
+          ],
+          "score": 1.00958809
+        },
+        "projection": {
+          "flanks": [
+            0.90127218,
+            0.91673061
+          ],
+          "middle": 0.02217137,
+          "range": [
+            74240,
+            85760
+          ],
+          "score": 0.8752362
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "1d9189b162183b68d06bac926759ad7c91c6897baff5a76613b9837a93706b15",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 71,
+      "case": "held-1",
+      "earlier_sha256": "e8e886015c4ca288145e291225fa264a3fc711591be70dee06eb91d3ef283ce8",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "global_eq",
+      "level": -10,
+      "measured_snr_db": -10.000017,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.68517417,
+            1.19475648
+          ],
+          "middle": 0.0177157,
+          "range": [
+            75520,
+            87040
+          ],
+          "score": 1.05443635
+        },
+        "projection": {
+          "flanks": [
+            0.91323939,
+            0.91353181
+          ],
+          "middle": 0.00016765,
+          "range": [
+            74240,
+            85760
+          ],
+          "score": 0.91299863
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "b1a6ffd9a92c6297479ac5d41269acd771b48a931f74f6a2f88c8911b7960b5f",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 68,
+      "case": "held-1",
+      "earlier_sha256": "fcc7cf78b08419c4db961875bfcc4dbe250dddd20fd0dc8587778d6986d41de8",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "different_reader_reference",
+      "level": -10,
+      "measured_snr_db": -10.000017,
+      "results": {
+        "correlation": null,
+        "projection": null
+      },
+      "role": "assessment",
+      "submitted_sha256": "2bb354cf4a5727c956df34343b7f0a6a37c03571e90aa70bd49d58ad05c58645",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 71,
+      "case": "held-1",
+      "earlier_sha256": "d11d95710d9994c51029096da9503f57f08174018e7eb3ef17fa5129abbf9fac",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "same_words_rerecorded_reference",
+      "level": -10,
+      "measured_snr_db": -10.000017,
+      "results": {
+        "correlation": null,
+        "projection": null
+      },
+      "role": "assessment",
+      "submitted_sha256": "2bb354cf4a5727c956df34343b7f0a6a37c03571e90aa70bd49d58ad05c58645",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 62,
+      "case": "held-2",
+      "earlier_sha256": "53318c035cf4d03d0866dcbb6da75a238b77ea64003dddd7340aee361271ffba",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "untouched",
+      "level": 0,
+      "measured_snr_db": -2.2e-05,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.18531111,
+            1.06259851
+          ],
+          "middle": 0.02383642,
+          "range": [
+            24320,
+            35840
+          ],
+          "score": 1.00808394
+        },
+        "projection": {
+          "flanks": [
+            1.16710174,
+            0.97227241
+          ],
+          "middle": 0.01379632,
+          "range": [
+            24320,
+            35840
+          ],
+          "score": 0.90976876
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "c3b0ead8a48aa6008ff5d57e5d523cee64e19fad79c0854d11d7af7618fa562d",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 62,
+      "case": "held-2",
+      "earlier_sha256": "53318c035cf4d03d0866dcbb6da75a238b77ea64003dddd7340aee361271ffba",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_replacement",
+      "level": 0,
+      "measured_snr_db": -2.2e-05,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.21895552,
+            1.0266441
+          ],
+          "middle": 0.02587957,
+          "range": [
+            21760,
+            33280
+          ],
+          "score": 0.95268667
+        },
+        "projection": {
+          "flanks": [
+            0.88866491,
+            0.83060959
+          ],
+          "middle": -0.03741655,
+          "range": [
+            42240,
+            53760
+          ],
+          "score": 0.85351232
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "4cea97bfd883a22e70dee5daab685cd358858c180b8d41942659f926694b5a90",
+      "supported_pair": true,
+      "truth": [
+        41040,
+        54960
+      ]
+    },
+    {
+      "active_windows": 62,
+      "case": "held-2",
+      "earlier_sha256": "53318c035cf4d03d0866dcbb6da75a238b77ea64003dddd7340aee361271ffba",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "local_gain",
+      "level": 0,
+      "measured_snr_db": -2.2e-05,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.18458142,
+            1.06667632
+          ],
+          "middle": 0.02382175,
+          "range": [
+            24320,
+            35840
+          ],
+          "score": 1.0133783
+        },
+        "projection": {
+          "flanks": [
+            1.06909994,
+            1.1500664
+          ],
+          "middle": 0.01263784,
+          "range": [
+            25600,
+            37120
+          ],
+          "score": 1.03622048
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "a355f59566f82f732a48d0a57a18eb4fd2e0018df18c98a34e4f39db13424573",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 62,
+      "case": "held-2",
+      "earlier_sha256": "53318c035cf4d03d0866dcbb6da75a238b77ea64003dddd7340aee361271ffba",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_tts",
+      "level": 0,
+      "measured_snr_db": -2.2e-05,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.21895552,
+            1.0266441
+          ],
+          "middle": 0.02587957,
+          "range": [
+            21760,
+            33280
+          ],
+          "score": 0.95268667
+        },
+        "projection": {
+          "flanks": [
+            0.88866491,
+            0.83060959
+          ],
+          "middle": -0.04696048,
+          "range": [
+            42240,
+            53760
+          ],
+          "score": 0.86305624
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "526c08e3acb9bff09bfb0554b9701d14b090bc5e3f1f8c8f0afdbd3f78822ab2",
+      "supported_pair": true,
+      "truth": [
+        41040,
+        54960
+      ]
+    },
+    {
+      "active_windows": 62,
+      "case": "held-2",
+      "earlier_sha256": "53318c035cf4d03d0866dcbb6da75a238b77ea64003dddd7340aee361271ffba",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_tts",
+      "level": 0,
+      "measured_snr_db": -2.2e-05,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.18530164,
+            1.06269234
+          ],
+          "middle": 0.02383623,
+          "range": [
+            24320,
+            35840
+          ],
+          "score": 1.00820379
+        },
+        "projection": {
+          "flanks": [
+            1.16611121,
+            0.97427627
+          ],
+          "middle": 0.01378461,
+          "range": [
+            24320,
+            35840
+          ],
+          "score": 0.91253292
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "fd2b54cc6d18d2a8054b8e21d4776921a358a0ce22b8f7a3d8f14b8e0984ec1b",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 62,
+      "case": "held-2",
+      "earlier_sha256": "53318c035cf4d03d0866dcbb6da75a238b77ea64003dddd7340aee361271ffba",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_conversion",
+      "level": 0,
+      "measured_snr_db": -2.2e-05,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.21895552,
+            1.0266441
+          ],
+          "middle": 0.02587957,
+          "range": [
+            21760,
+            33280
+          ],
+          "score": 0.95268667
+        },
+        "projection": {
+          "flanks": [
+            1.20567682,
+            0.88866491
+          ],
+          "middle": 0.01454287,
+          "range": [
+            21760,
+            33280
+          ],
+          "score": 0.79486906
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "cb1f3c4a90beca08ea98f8c27375b8c44ddf076f285a1d6693b1141797348f89",
+      "supported_pair": true,
+      "truth": [
+        41040,
+        54960
+      ]
+    },
+    {
+      "active_windows": 62,
+      "case": "held-2",
+      "earlier_sha256": "53318c035cf4d03d0866dcbb6da75a238b77ea64003dddd7340aee361271ffba",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_conversion",
+      "level": 0,
+      "measured_snr_db": -2.2e-05,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.18529126,
+            1.06270486
+          ],
+          "middle": 0.02383602,
+          "range": [
+            24320,
+            35840
+          ],
+          "score": 1.00822224
+        },
+        "projection": {
+          "flanks": [
+            1.165904,
+            0.97469546
+          ],
+          "middle": 0.01378216,
+          "range": [
+            24320,
+            35840
+          ],
+          "score": 0.91311116
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "08a02c12e2b208cc5f9054cb40191685d631c3edca97896d27196fd1904f8fe2",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 62,
+      "case": "held-2",
+      "earlier_sha256": "53318c035cf4d03d0866dcbb6da75a238b77ea64003dddd7340aee361271ffba",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "global_eq",
+      "level": 0,
+      "measured_snr_db": -2.2e-05,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.15668573,
+            1.03595746
+          ],
+          "middle": 0.02316342,
+          "range": [
+            24320,
+            35840
+          ],
+          "score": 0.98261198
+        },
+        "projection": {
+          "flanks": [
+            1.08901596,
+            0.73253266
+          ],
+          "middle": 0.01103977,
+          "range": [
+            23040,
+            34560
+          ],
+          "score": 0.63237206
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "312cba55af0904a274e783fc1bd67e06ca2a7acf73a3109ecdb79ea9cab03fe4",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 69,
+      "case": "held-2",
+      "earlier_sha256": "fc7cc4baa82dcb74df8fbd8415256b9f2e13420aecb6c397fdc1cb63435089d9",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "different_reader_reference",
+      "level": 0,
+      "measured_snr_db": -2.2e-05,
+      "results": {
+        "correlation": null,
+        "projection": null
+      },
+      "role": "assessment",
+      "submitted_sha256": "c3b0ead8a48aa6008ff5d57e5d523cee64e19fad79c0854d11d7af7618fa562d",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 64,
+      "case": "held-2",
+      "earlier_sha256": "69e5691f38bc6bc93f5e010e12899ab677f97075db2cad06a8dcb537a0c06546",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "same_words_rerecorded_reference",
+      "level": 0,
+      "measured_snr_db": -2.2e-05,
+      "results": {
+        "correlation": null,
+        "projection": null
+      },
+      "role": "assessment",
+      "submitted_sha256": "c3b0ead8a48aa6008ff5d57e5d523cee64e19fad79c0854d11d7af7618fa562d",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 62,
+      "case": "held-2",
+      "earlier_sha256": "53318c035cf4d03d0866dcbb6da75a238b77ea64003dddd7340aee361271ffba",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "untouched",
+      "level": -5,
+      "measured_snr_db": -5.000015,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.31680912,
+            1.13510165
+          ],
+          "middle": 0.02401343,
+          "range": [
+            24320,
+            35840
+          ],
+          "score": 1.06566136
+        },
+        "projection": {
+          "flanks": [
+            1.16559573,
+            0.9715099
+          ],
+          "middle": 0.02064092,
+          "range": [
+            24320,
+            35840
+          ],
+          "score": 0.90234752
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "589619372a8293a583c89bd9c60451fecb04c003255d73a30fa428a277a8e205",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 62,
+      "case": "held-2",
+      "earlier_sha256": "53318c035cf4d03d0866dcbb6da75a238b77ea64003dddd7340aee361271ffba",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_replacement",
+      "level": -5,
+      "measured_snr_db": -5.000015,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.35889887,
+            1.16376314
+          ],
+          "middle": 0.02832356,
+          "range": [
+            21760,
+            33280
+          ],
+          "score": 1.08665564
+        },
+        "projection": {
+          "flanks": [
+            0.86857932,
+            0.83301938
+          ],
+          "middle": -0.04216637,
+          "range": [
+            42240,
+            53760
+          ],
+          "score": 0.86629577
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "7fcbd514d3f8c9440cc2fbed2aafa031c076f27f445dcfe5938ca7137a7b2b18",
+      "supported_pair": true,
+      "truth": [
+        41040,
+        54960
+      ]
+    },
+    {
+      "active_windows": 62,
+      "case": "held-2",
+      "earlier_sha256": "53318c035cf4d03d0866dcbb6da75a238b77ea64003dddd7340aee361271ffba",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "local_gain",
+      "level": -5,
+      "measured_snr_db": -5.000015,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.2778803,
+            1.12911589
+          ],
+          "middle": 0.02330352,
+          "range": [
+            24320,
+            35840
+          ],
+          "score": 1.06862127
+        },
+        "projection": {
+          "flanks": [
+            1.06846106,
+            1.14829049
+          ],
+          "middle": 0.01892081,
+          "range": [
+            25600,
+            37120
+          ],
+          "score": 1.02958289
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "fabb49006e7d0902ee419cced92a768904c5e1fa3b5e8a68bb68c72326dc62d1",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 62,
+      "case": "held-2",
+      "earlier_sha256": "53318c035cf4d03d0866dcbb6da75a238b77ea64003dddd7340aee361271ffba",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_tts",
+      "level": -5,
+      "measured_snr_db": -5.000015,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.35889887,
+            1.16376314
+          ],
+          "middle": 0.02832356,
+          "range": [
+            21760,
+            33280
+          ],
+          "score": 1.08665564
+        },
+        "projection": {
+          "flanks": [
+            0.86857932,
+            0.83301938
+          ],
+          "middle": -0.04463456,
+          "range": [
+            42240,
+            53760
+          ],
+          "score": 0.86876396
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "2b1143146823125751cb1433129b9f53a5e0c42c4adb48f9d90c161500b0b343",
+      "supported_pair": true,
+      "truth": [
+        41040,
+        54960
+      ]
+    },
+    {
+      "active_windows": 62,
+      "case": "held-2",
+      "earlier_sha256": "53318c035cf4d03d0866dcbb6da75a238b77ea64003dddd7340aee361271ffba",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_tts",
+      "level": -5,
+      "measured_snr_db": -5.000015,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.31645631,
+            1.13520183
+          ],
+          "middle": 0.02400699,
+          "range": [
+            24320,
+            35840
+          ],
+          "score": 1.06588122
+        },
+        "projection": {
+          "flanks": [
+            1.16559529,
+            0.97436323
+          ],
+          "middle": 0.02064091,
+          "range": [
+            24320,
+            35840
+          ],
+          "score": 0.9059143
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "cf4578e6c264acd2acfda61cc9265ddcd108662ffcd16ae7c7143596e45c4988",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 62,
+      "case": "held-2",
+      "earlier_sha256": "53318c035cf4d03d0866dcbb6da75a238b77ea64003dddd7340aee361271ffba",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_conversion",
+      "level": -5,
+      "measured_snr_db": -5.000015,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.35889887,
+            1.16376314
+          ],
+          "middle": 0.02832356,
+          "range": [
+            21760,
+            33280
+          ],
+          "score": 1.08665564
+        },
+        "projection": {
+          "flanks": [
+            0.86857932,
+            0.83301938
+          ],
+          "middle": 0.02134529,
+          "range": [
+            42240,
+            53760
+          ],
+          "score": 0.80278411
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "0824d50614b013324a004cea44cfeec7e705a1b021ce667e98a638035b461ffb",
+      "supported_pair": true,
+      "truth": [
+        41040,
+        54960
+      ]
+    },
+    {
+      "active_windows": 62,
+      "case": "held-2",
+      "earlier_sha256": "53318c035cf4d03d0866dcbb6da75a238b77ea64003dddd7340aee361271ffba",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_conversion",
+      "level": -5,
+      "measured_snr_db": -5.000015,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.31631627,
+            1.13515075
+          ],
+          "middle": 0.02400444,
+          "range": [
+            24320,
+            35840
+          ],
+          "score": 1.06585493
+        },
+        "projection": {
+          "flanks": [
+            1.16559528,
+            0.97493274
+          ],
+          "middle": 0.02064091,
+          "range": [
+            24320,
+            35840
+          ],
+          "score": 0.9066262
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "cd4dff3b66b0ae015a3ae6158c93cfd31697dfd3bed63348298cb74ad1cd495f",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 62,
+      "case": "held-2",
+      "earlier_sha256": "53318c035cf4d03d0866dcbb6da75a238b77ea64003dddd7340aee361271ffba",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "global_eq",
+      "level": -5,
+      "measured_snr_db": -5.000015,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.25084614,
+            1.04973336
+          ],
+          "middle": 0.02380583,
+          "range": [
+            24320,
+            35840
+          ],
+          "score": 0.97564934
+        },
+        "projection": {
+          "flanks": [
+            1.08754651,
+            0.72569095
+          ],
+          "middle": 0.01761556,
+          "range": [
+            23040,
+            34560
+          ],
+          "score": 0.6176115
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "ddaace60958ea74563f89b47b0dcadc7a7170924d22aee6adb3704a9a1777643",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 69,
+      "case": "held-2",
+      "earlier_sha256": "fc7cc4baa82dcb74df8fbd8415256b9f2e13420aecb6c397fdc1cb63435089d9",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "different_reader_reference",
+      "level": -5,
+      "measured_snr_db": -5.000015,
+      "results": {
+        "correlation": null,
+        "projection": null
+      },
+      "role": "assessment",
+      "submitted_sha256": "589619372a8293a583c89bd9c60451fecb04c003255d73a30fa428a277a8e205",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 64,
+      "case": "held-2",
+      "earlier_sha256": "69e5691f38bc6bc93f5e010e12899ab677f97075db2cad06a8dcb537a0c06546",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "same_words_rerecorded_reference",
+      "level": -5,
+      "measured_snr_db": -5.000015,
+      "results": {
+        "correlation": null,
+        "projection": null
+      },
+      "role": "assessment",
+      "submitted_sha256": "589619372a8293a583c89bd9c60451fecb04c003255d73a30fa428a277a8e205",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 62,
+      "case": "held-2",
+      "earlier_sha256": "53318c035cf4d03d0866dcbb6da75a238b77ea64003dddd7340aee361271ffba",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "untouched",
+      "level": -10,
+      "measured_snr_db": -9.999989,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.53307604,
+            1.25766556
+          ],
+          "middle": 0.02877921,
+          "range": [
+            23040,
+            34560
+          ],
+          "score": 1.16003373
+        },
+        "projection": {
+          "flanks": [
+            1.16639505,
+            0.97302597
+          ],
+          "middle": 0.03289176,
+          "range": [
+            24320,
+            35840
+          ],
+          "score": 0.89179194
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "17c33435edc27ff81941600e9cb35bac8e44211664d3a786e52321c4f24adaa4",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 62,
+      "case": "held-2",
+      "earlier_sha256": "53318c035cf4d03d0866dcbb6da75a238b77ea64003dddd7340aee361271ffba",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_replacement",
+      "level": -10,
+      "measured_snr_db": -9.999989,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.51896319,
+            1.38194387
+          ],
+          "middle": 0.0356471,
+          "range": [
+            21760,
+            33280
+          ],
+          "score": 1.31204193
+        },
+        "projection": {
+          "flanks": [
+            0.8817536,
+            0.84915886
+          ],
+          "middle": -0.04922649,
+          "range": [
+            42240,
+            53760
+          ],
+          "score": 0.89023666
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "7dd83a14b40cfe2de1a37f0ac38454b577345faeb02e81524c240b4ba1b05158",
+      "supported_pair": true,
+      "truth": [
+        41040,
+        54960
+      ]
+    },
+    {
+      "active_windows": 62,
+      "case": "held-2",
+      "earlier_sha256": "53318c035cf4d03d0866dcbb6da75a238b77ea64003dddd7340aee361271ffba",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "local_gain",
+      "level": -10,
+      "measured_snr_db": -9.999989,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.64578216,
+            1.37804872
+          ],
+          "middle": 0.02877921,
+          "range": [
+            24320,
+            35840
+          ],
+          "score": 1.28233615
+        },
+        "projection": {
+          "flanks": [
+            1.05648002,
+            1.13348168
+          ],
+          "middle": 0.02979221,
+          "range": [
+            25600,
+            37120
+          ],
+          "score": 1.00743739
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "8dc12a98ca327137702d6399d80b3924e58b43578413fbf781f2107062166f0f",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 62,
+      "case": "held-2",
+      "earlier_sha256": "53318c035cf4d03d0866dcbb6da75a238b77ea64003dddd7340aee361271ffba",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_tts",
+      "level": -10,
+      "measured_snr_db": -9.999989,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.51896319,
+            1.38194387
+          ],
+          "middle": 0.0356471,
+          "range": [
+            21760,
+            33280
+          ],
+          "score": 1.31204193
+        },
+        "projection": {
+          "flanks": [
+            0.8817536,
+            0.84915886
+          ],
+          "middle": -0.04313625,
+          "range": [
+            42240,
+            53760
+          ],
+          "score": 0.88414642
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "4ec3d5041d415d172773b778ed99365c6eb0808a1572370260f79bfe1848ffaf",
+      "supported_pair": true,
+      "truth": [
+        41040,
+        54960
+      ]
+    },
+    {
+      "active_windows": 62,
+      "case": "held-2",
+      "earlier_sha256": "53318c035cf4d03d0866dcbb6da75a238b77ea64003dddd7340aee361271ffba",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_tts",
+      "level": -10,
+      "measured_snr_db": -9.999989,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.64578216,
+            1.28096629
+          ],
+          "middle": 0.02877921,
+          "range": [
+            24320,
+            35840
+          ],
+          "score": 1.16098311
+        },
+        "projection": {
+          "flanks": [
+            1.16639505,
+            0.9758727
+          ],
+          "middle": 0.03289176,
+          "range": [
+            24320,
+            35840
+          ],
+          "score": 0.89535035
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "71b6390aa588d982b084ab56903125c62c661cb1f38ab4e44a57e552484a0975",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 62,
+      "case": "held-2",
+      "earlier_sha256": "53318c035cf4d03d0866dcbb6da75a238b77ea64003dddd7340aee361271ffba",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_conversion",
+      "level": -10,
+      "measured_snr_db": -9.999989,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.51896319,
+            1.38194387
+          ],
+          "middle": 0.0356471,
+          "range": [
+            21760,
+            33280
+          ],
+          "score": 1.31204193
+        },
+        "projection": {
+          "flanks": [
+            0.8817536,
+            0.84915886
+          ],
+          "middle": 0.02106663,
+          "range": [
+            42240,
+            53760
+          ],
+          "score": 0.81994354
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "9f125b1d1f99cc84b5a6b0a0593cfb65336e328ea2e2b806c3508b814af81203",
+      "supported_pair": true,
+      "truth": [
+        41040,
+        54960
+      ]
+    },
+    {
+      "active_windows": 62,
+      "case": "held-2",
+      "earlier_sha256": "53318c035cf4d03d0866dcbb6da75a238b77ea64003dddd7340aee361271ffba",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_conversion",
+      "level": -10,
+      "measured_snr_db": -9.999989,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.64578216,
+            1.28118836
+          ],
+          "middle": 0.02877921,
+          "range": [
+            24320,
+            35840
+          ],
+          "score": 1.1612607
+        },
+        "projection": {
+          "flanks": [
+            1.16639505,
+            0.97644425
+          ],
+          "middle": 0.03289176,
+          "range": [
+            24320,
+            35840
+          ],
+          "score": 0.89606479
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "e09bf8c3a44bac184e6d7e9a538248d4349c27e903baefa052418e057d23fc57",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 62,
+      "case": "held-2",
+      "earlier_sha256": "53318c035cf4d03d0866dcbb6da75a238b77ea64003dddd7340aee361271ffba",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "global_eq",
+      "level": -10,
+      "measured_snr_db": -9.999989,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.45296469,
+            1.10461307
+          ],
+          "middle": 0.0288057,
+          "range": [
+            23040,
+            34560
+          ],
+          "score": 0.98871946
+        },
+        "projection": {
+          "flanks": [
+            1.03140927,
+            0.71687901
+          ],
+          "middle": 0.02951873,
+          "range": [
+            24320,
+            35840
+          ],
+          "score": 0.60872772
+        }
+      },
+      "role": "assessment",
+      "submitted_sha256": "768078565bab96499cb80214808562a58e4eda5c0b1ed1b77c4659567486b131",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 69,
+      "case": "held-2",
+      "earlier_sha256": "fc7cc4baa82dcb74df8fbd8415256b9f2e13420aecb6c397fdc1cb63435089d9",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "different_reader_reference",
+      "level": -10,
+      "measured_snr_db": -9.999989,
+      "results": {
+        "correlation": null,
+        "projection": null
+      },
+      "role": "assessment",
+      "submitted_sha256": "17c33435edc27ff81941600e9cb35bac8e44211664d3a786e52321c4f24adaa4",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 64,
+      "case": "held-2",
+      "earlier_sha256": "69e5691f38bc6bc93f5e010e12899ab677f97075db2cad06a8dcb537a0c06546",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "same_words_rerecorded_reference",
+      "level": -10,
+      "measured_snr_db": -9.999989,
+      "results": {
+        "correlation": null,
+        "projection": null
+      },
+      "role": "assessment",
+      "submitted_sha256": "17c33435edc27ff81941600e9cb35bac8e44211664d3a786e52321c4f24adaa4",
+      "supported_pair": false,
+      "truth": null
+    }
+  ],
+  "development": [
+    {
+      "active_windows": 60,
+      "case": "dev-0",
+      "earlier_sha256": "af40fc70d291926ea1e2becb56541a166d4e14b92e796520ca19001a80ebe1a9",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "untouched",
+      "level": 0,
+      "measured_snr_db": -7e-06,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.03864158,
+            0.99649216
+          ],
+          "middle": 0.83186355,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.15409125
+        },
+        "projection": {
+          "flanks": [
+            0.93963497,
+            0.89533815
+          ],
+          "middle": 0.73878016,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.14548378
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "47c104407e90f38f538ee4a47029ffec86d51ef510697c19e4e05127f42648df",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 60,
+      "case": "dev-0",
+      "earlier_sha256": "af40fc70d291926ea1e2becb56541a166d4e14b92e796520ca19001a80ebe1a9",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_replacement",
+      "level": 0,
+      "measured_snr_db": -7e-06,
+      "results": {
+        "correlation": {
+          "flanks": [
+            0.99033152,
+            0.6199746
+          ],
+          "middle": 0.04377292,
+          "range": [
+            43520,
+            55040
+          ],
+          "score": 0.48361245
+        },
+        "projection": {
+          "flanks": [
+            1.05956953,
+            0.87509906
+          ],
+          "middle": 0.05647269,
+          "range": [
+            42240,
+            53760
+          ],
+          "score": 0.77250875
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "7ea48397b8bda9d37aeeae68e9aee81166b1d0fd8e390385ae6243eaf43cdc1c",
+      "supported_pair": true,
+      "truth": [
+        40880,
+        55120
+      ]
+    },
+    {
+      "active_windows": 60,
+      "case": "dev-0",
+      "earlier_sha256": "af40fc70d291926ea1e2becb56541a166d4e14b92e796520ca19001a80ebe1a9",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "local_gain",
+      "level": 0,
+      "measured_snr_db": -7e-06,
+      "results": {
+        "correlation": {
+          "flanks": [
+            0.85049932,
+            0.86659025
+          ],
+          "middle": 0.59735562,
+          "range": [
+            53760,
+            65280
+          ],
+          "score": 0.24912096
+        },
+        "projection": {
+          "flanks": [
+            0.90718874,
+            0.86442152
+          ],
+          "middle": 0.71326959,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.14046013
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "7b73b2c216f366b08bb5ed609aa5a97ca43aec8f6f623099130b32d776ea909d",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 60,
+      "case": "dev-0",
+      "earlier_sha256": "af40fc70d291926ea1e2becb56541a166d4e14b92e796520ca19001a80ebe1a9",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_tts",
+      "level": 0,
+      "measured_snr_db": -7e-06,
+      "results": {
+        "correlation": {
+          "flanks": [
+            0.99033153,
+            0.6199746
+          ],
+          "middle": 0.04643947,
+          "range": [
+            43520,
+            55040
+          ],
+          "score": 0.4809459
+        },
+        "projection": {
+          "flanks": [
+            1.05956953,
+            0.87509906
+          ],
+          "middle": 0.05924778,
+          "range": [
+            42240,
+            53760
+          ],
+          "score": 0.76973366
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "15787a40cda292117243c24e80e39069f017bbfc58675abf4ff5ad2f5e3b9232",
+      "supported_pair": true,
+      "truth": [
+        40880,
+        55120
+      ]
+    },
+    {
+      "active_windows": 60,
+      "case": "dev-0",
+      "earlier_sha256": "af40fc70d291926ea1e2becb56541a166d4e14b92e796520ca19001a80ebe1a9",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_tts",
+      "level": 0,
+      "measured_snr_db": -7e-06,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.03864158,
+            0.99649216
+          ],
+          "middle": 0.83186355,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.15409125
+        },
+        "projection": {
+          "flanks": [
+            0.93963497,
+            0.89533815
+          ],
+          "middle": 0.73878016,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.14548378
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "98b11c2f89d21a1a2dcd46af37307f80fc21e14e12159e93567e7ffaa5f49f72",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 60,
+      "case": "dev-0",
+      "earlier_sha256": "af40fc70d291926ea1e2becb56541a166d4e14b92e796520ca19001a80ebe1a9",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_conversion",
+      "level": 0,
+      "measured_snr_db": -7e-06,
+      "results": {
+        "correlation": {
+          "flanks": [
+            0.9903313,
+            0.6199746
+          ],
+          "middle": 0.04627681,
+          "range": [
+            43520,
+            55040
+          ],
+          "score": 0.48110861
+        },
+        "projection": {
+          "flanks": [
+            1.05956953,
+            0.87509906
+          ],
+          "middle": 0.07764388,
+          "range": [
+            42240,
+            53760
+          ],
+          "score": 0.75133756
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "b7792383a046a295883fac394c344239d4d234fb8ebaade14230273b7adc819e",
+      "supported_pair": true,
+      "truth": [
+        40880,
+        55120
+      ]
+    },
+    {
+      "active_windows": 60,
+      "case": "dev-0",
+      "earlier_sha256": "af40fc70d291926ea1e2becb56541a166d4e14b92e796520ca19001a80ebe1a9",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_conversion",
+      "level": 0,
+      "measured_snr_db": -7e-06,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.03864158,
+            0.99649216
+          ],
+          "middle": 0.83186355,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.15409125
+        },
+        "projection": {
+          "flanks": [
+            0.93963497,
+            0.89533815
+          ],
+          "middle": 0.73878016,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.14548378
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "98b11c2f89d21a1a2dcd46af37307f80fc21e14e12159e93567e7ffaa5f49f72",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 60,
+      "case": "dev-0",
+      "earlier_sha256": "af40fc70d291926ea1e2becb56541a166d4e14b92e796520ca19001a80ebe1a9",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "global_eq",
+      "level": 0,
+      "measured_snr_db": -7e-06,
+      "results": {
+        "correlation": {
+          "flanks": [
+            0.99881222,
+            1.00277149
+          ],
+          "middle": 0.83974382,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.15807858
+        },
+        "projection": {
+          "flanks": [
+            0.84526073,
+            0.92034399
+          ],
+          "middle": 0.75099508,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.07549483
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "fe2b3f16a0b871c989337ee1d5d056789cd1cab566b7ebfd49d5bb593a66849b",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 71,
+      "case": "dev-0",
+      "earlier_sha256": "9309b3841f4c13194f2bca6362112adbca012999c6be78b5e2391e1a422f94eb",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "different_reader_reference",
+      "level": 0,
+      "measured_snr_db": -7e-06,
+      "results": {
+        "correlation": null,
+        "projection": null
+      },
+      "role": "development",
+      "submitted_sha256": "47c104407e90f38f538ee4a47029ffec86d51ef510697c19e4e05127f42648df",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 60,
+      "case": "dev-0",
+      "earlier_sha256": "76e9b4aebec5a1ef31ada30ed7efc212b640b389389419e5514d04297fe08e46",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "same_words_rerecorded_reference",
+      "level": 0,
+      "measured_snr_db": -7e-06,
+      "results": {
+        "correlation": null,
+        "projection": null
+      },
+      "role": "development",
+      "submitted_sha256": "47c104407e90f38f538ee4a47029ffec86d51ef510697c19e4e05127f42648df",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 60,
+      "case": "dev-0",
+      "earlier_sha256": "af40fc70d291926ea1e2becb56541a166d4e14b92e796520ca19001a80ebe1a9",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "untouched",
+      "level": -5,
+      "measured_snr_db": -5.000007,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.01320036,
+            0.92702076
+          ],
+          "middle": 0.64883461,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.25664125
+        },
+        "projection": {
+          "flanks": [
+            0.95721425,
+            0.92500293
+          ],
+          "middle": 0.75068518,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.16626492
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "596a29577e7bb086f4d94b9c749c3ee73dee4ecf60d8fc9d48dd597cec4a5930",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 60,
+      "case": "dev-0",
+      "earlier_sha256": "af40fc70d291926ea1e2becb56541a166d4e14b92e796520ca19001a80ebe1a9",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_replacement",
+      "level": -5,
+      "measured_snr_db": -5.000007,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.0817098,
+            0.98970301
+          ],
+          "middle": 0.69270678,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.27399453
+        },
+        "projection": {
+          "flanks": [
+            1.0249951,
+            0.8676669
+          ],
+          "middle": 0.10094413,
+          "range": [
+            42240,
+            53760
+          ],
+          "score": 0.72739071
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "470326d844690ecaa40d8ec7d052df5fde6da38a3855340ad27467fa050358af",
+      "supported_pair": true,
+      "truth": [
+        40880,
+        55120
+      ]
+    },
+    {
+      "active_windows": 60,
+      "case": "dev-0",
+      "earlier_sha256": "af40fc70d291926ea1e2becb56541a166d4e14b92e796520ca19001a80ebe1a9",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "local_gain",
+      "level": -5,
+      "measured_snr_db": -5.000007,
+      "results": {
+        "correlation": {
+          "flanks": [
+            0.68280002,
+            0.77027909
+          ],
+          "middle": 0.40405705,
+          "range": [
+            53760,
+            65280
+          ],
+          "score": 0.25687321
+        },
+        "projection": {
+          "flanks": [
+            0.91244253,
+            0.88173783
+          ],
+          "middle": 0.71557344,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.15848822
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "09c0cf7fdf47041c8c3267502a2e7d9d1b49d314f54432da4238b93cd0dfa618",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 60,
+      "case": "dev-0",
+      "earlier_sha256": "af40fc70d291926ea1e2becb56541a166d4e14b92e796520ca19001a80ebe1a9",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_tts",
+      "level": -5,
+      "measured_snr_db": -5.000007,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.08170979,
+            0.989703
+          ],
+          "middle": 0.69270678,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.27399453
+        },
+        "projection": {
+          "flanks": [
+            1.0249951,
+            0.86766679
+          ],
+          "middle": 0.06885739,
+          "range": [
+            42240,
+            53760
+          ],
+          "score": 0.75947732
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "f9e15f1e3c2019cca34e12ff4214d27de100c89a12ddc25a2483a5c60924571e",
+      "supported_pair": true,
+      "truth": [
+        40880,
+        55120
+      ]
+    },
+    {
+      "active_windows": 60,
+      "case": "dev-0",
+      "earlier_sha256": "af40fc70d291926ea1e2becb56541a166d4e14b92e796520ca19001a80ebe1a9",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_tts",
+      "level": -5,
+      "measured_snr_db": -5.000007,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.01320036,
+            0.92702076
+          ],
+          "middle": 0.64883461,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.25664125
+        },
+        "projection": {
+          "flanks": [
+            0.95728418,
+            0.92507051
+          ],
+          "middle": 0.75074003,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.16627706
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "ea44655af7d9b14c91a77f3263891ba1fbaf2f675bcbad67b16b7deeda2e3cab",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 60,
+      "case": "dev-0",
+      "earlier_sha256": "af40fc70d291926ea1e2becb56541a166d4e14b92e796520ca19001a80ebe1a9",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_conversion",
+      "level": -5,
+      "measured_snr_db": -5.000007,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.08170987,
+            0.98970308
+          ],
+          "middle": 0.69270683,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.27399455
+        },
+        "projection": {
+          "flanks": [
+            1.0249951,
+            0.86766678
+          ],
+          "middle": 0.09581508,
+          "range": [
+            42240,
+            53760
+          ],
+          "score": 0.73251962
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "3a027cdcae4fb32e9a3e25a8318f8f22049c505ce6a9313c45c8f426c12af25a",
+      "supported_pair": true,
+      "truth": [
+        40880,
+        55120
+      ]
+    },
+    {
+      "active_windows": 60,
+      "case": "dev-0",
+      "earlier_sha256": "af40fc70d291926ea1e2becb56541a166d4e14b92e796520ca19001a80ebe1a9",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_conversion",
+      "level": -5,
+      "measured_snr_db": -5.000007,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.01320036,
+            0.92702076
+          ],
+          "middle": 0.64883461,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.25664125
+        },
+        "projection": {
+          "flanks": [
+            0.95728418,
+            0.92507051
+          ],
+          "middle": 0.75074003,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.16627706
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "ea44655af7d9b14c91a77f3263891ba1fbaf2f675bcbad67b16b7deeda2e3cab",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 60,
+      "case": "dev-0",
+      "earlier_sha256": "af40fc70d291926ea1e2becb56541a166d4e14b92e796520ca19001a80ebe1a9",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "global_eq",
+      "level": -5,
+      "measured_snr_db": -5.000007,
+      "results": {
+        "correlation": {
+          "flanks": [
+            0.99042725,
+            0.97436666
+          ],
+          "middle": 0.68454444,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.28580707
+        },
+        "projection": {
+          "flanks": [
+            0.85035559,
+            0.93820323
+          ],
+          "middle": 0.75307711,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.07531656
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "45c39cef69df63f9054195e544b428fcb1c41082eb5855f6ac86a684ce91806e",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 71,
+      "case": "dev-0",
+      "earlier_sha256": "9309b3841f4c13194f2bca6362112adbca012999c6be78b5e2391e1a422f94eb",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "different_reader_reference",
+      "level": -5,
+      "measured_snr_db": -5.000007,
+      "results": {
+        "correlation": null,
+        "projection": null
+      },
+      "role": "development",
+      "submitted_sha256": "596a29577e7bb086f4d94b9c749c3ee73dee4ecf60d8fc9d48dd597cec4a5930",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 60,
+      "case": "dev-0",
+      "earlier_sha256": "76e9b4aebec5a1ef31ada30ed7efc212b640b389389419e5514d04297fe08e46",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "same_words_rerecorded_reference",
+      "level": -5,
+      "measured_snr_db": -5.000007,
+      "results": {
+        "correlation": null,
+        "projection": null
+      },
+      "role": "development",
+      "submitted_sha256": "596a29577e7bb086f4d94b9c749c3ee73dee4ecf60d8fc9d48dd597cec4a5930",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 60,
+      "case": "dev-0",
+      "earlier_sha256": "af40fc70d291926ea1e2becb56541a166d4e14b92e796520ca19001a80ebe1a9",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "untouched",
+      "level": -10,
+      "measured_snr_db": -9.999993,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.02525913,
+            0.87651562
+          ],
+          "middle": 0.52307829,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.31625146
+        },
+        "projection": {
+          "flanks": [
+            0.95736066,
+            0.93559023
+          ],
+          "middle": 0.74745276,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.18269485
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "46352005ba88ebe0b946e40e761a9b00e9d33f702dbfaa64d591097ab0c1d095",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 60,
+      "case": "dev-0",
+      "earlier_sha256": "af40fc70d291926ea1e2becb56541a166d4e14b92e796520ca19001a80ebe1a9",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_replacement",
+      "level": -10,
+      "measured_snr_db": -9.999993,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.14240848,
+            0.97666907
+          ],
+          "middle": 0.58284687,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.35238735
+        },
+        "projection": {
+          "flanks": [
+            0.97225813,
+            0.85968215
+          ],
+          "middle": 0.18066825,
+          "range": [
+            42240,
+            53760
+          ],
+          "score": 0.65086991
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "bda608c0b35b605c0a59d2e2d6a7e5f877cbc1c4a490df702cb740e101eb001d",
+      "supported_pair": true,
+      "truth": [
+        40880,
+        55120
+      ]
+    },
+    {
+      "active_windows": 60,
+      "case": "dev-0",
+      "earlier_sha256": "af40fc70d291926ea1e2becb56541a166d4e14b92e796520ca19001a80ebe1a9",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "local_gain",
+      "level": -10,
+      "measured_snr_db": -9.999993,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.02525908,
+            0.87651557
+          ],
+          "middle": 0.52307826,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.31625144
+        },
+        "projection": {
+          "flanks": [
+            0.92747016,
+            0.90637943
+          ],
+          "middle": 0.72411596,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.1769908
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "730b5df9908bb5b3e153e74a71cfb2a83a5a20681debc693796622397ac4b00c",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 60,
+      "case": "dev-0",
+      "earlier_sha256": "af40fc70d291926ea1e2becb56541a166d4e14b92e796520ca19001a80ebe1a9",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_tts",
+      "level": -10,
+      "measured_snr_db": -9.999993,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.14240848,
+            0.97666907
+          ],
+          "middle": 0.58284687,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.35238735
+        },
+        "projection": {
+          "flanks": [
+            0.97225813,
+            0.85968215
+          ],
+          "middle": 0.10184081,
+          "range": [
+            42240,
+            53760
+          ],
+          "score": 0.72969735
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "16a156d836c45f9b56f54b240add1c873eff36a01388ad2c1e99848b316212f0",
+      "supported_pair": true,
+      "truth": [
+        40880,
+        55120
+      ]
+    },
+    {
+      "active_windows": 60,
+      "case": "dev-0",
+      "earlier_sha256": "af40fc70d291926ea1e2becb56541a166d4e14b92e796520ca19001a80ebe1a9",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_tts",
+      "level": -10,
+      "measured_snr_db": -9.999993,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.02525913,
+            0.87651562
+          ],
+          "middle": 0.52307829,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.31625146
+        },
+        "projection": {
+          "flanks": [
+            0.95736066,
+            0.93559023
+          ],
+          "middle": 0.74745276,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.18269485
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "270ddb26c75a845965c6bb372ba04ed157d503a4bca953f7248236000d7596a9",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 60,
+      "case": "dev-0",
+      "earlier_sha256": "af40fc70d291926ea1e2becb56541a166d4e14b92e796520ca19001a80ebe1a9",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_conversion",
+      "level": -10,
+      "measured_snr_db": -9.999993,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.14240848,
+            0.97666907
+          ],
+          "middle": 0.58284687,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.35238735
+        },
+        "projection": {
+          "flanks": [
+            0.97225813,
+            0.85968215
+          ],
+          "middle": 0.12881531,
+          "range": [
+            42240,
+            53760
+          ],
+          "score": 0.70272285
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "1abd05593338d518df787cff56ce182bb3355b9260cc722dde422df6e7fb771d",
+      "supported_pair": true,
+      "truth": [
+        40880,
+        55120
+      ]
+    },
+    {
+      "active_windows": 60,
+      "case": "dev-0",
+      "earlier_sha256": "af40fc70d291926ea1e2becb56541a166d4e14b92e796520ca19001a80ebe1a9",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_conversion",
+      "level": -10,
+      "measured_snr_db": -9.999993,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.02525913,
+            0.87651562
+          ],
+          "middle": 0.52307829,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.31625146
+        },
+        "projection": {
+          "flanks": [
+            0.95736066,
+            0.93559023
+          ],
+          "middle": 0.74745276,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.18269485
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "270ddb26c75a845965c6bb372ba04ed157d503a4bca953f7248236000d7596a9",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 60,
+      "case": "dev-0",
+      "earlier_sha256": "af40fc70d291926ea1e2becb56541a166d4e14b92e796520ca19001a80ebe1a9",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "global_eq",
+      "level": -10,
+      "measured_snr_db": -9.999993,
+      "results": {
+        "correlation": {
+          "flanks": [
+            0.97189622,
+            0.92189058
+          ],
+          "middle": 0.5514132,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.35797598
+        },
+        "projection": {
+          "flanks": [
+            0.87790604,
+            0.96879322
+          ],
+          "middle": 0.7631214,
+          "range": [
+            72960,
+            84480
+          ],
+          "score": 0.09206284
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "010297f9dda709cd1a92dde8ff01bc5658f146f6252eb000b5dc33de703ff28c",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 71,
+      "case": "dev-0",
+      "earlier_sha256": "9309b3841f4c13194f2bca6362112adbca012999c6be78b5e2391e1a422f94eb",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "different_reader_reference",
+      "level": -10,
+      "measured_snr_db": -9.999993,
+      "results": {
+        "correlation": null,
+        "projection": null
+      },
+      "role": "development",
+      "submitted_sha256": "46352005ba88ebe0b946e40e761a9b00e9d33f702dbfaa64d591097ab0c1d095",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 60,
+      "case": "dev-0",
+      "earlier_sha256": "76e9b4aebec5a1ef31ada30ed7efc212b640b389389419e5514d04297fe08e46",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "same_words_rerecorded_reference",
+      "level": -10,
+      "measured_snr_db": -9.999993,
+      "results": {
+        "correlation": null,
+        "projection": null
+      },
+      "role": "development",
+      "submitted_sha256": "46352005ba88ebe0b946e40e761a9b00e9d33f702dbfaa64d591097ab0c1d095",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 66,
+      "case": "dev-1",
+      "earlier_sha256": "19d3df160b2c5c33651213bcfcd60b35960228548585d3797937639076845e54",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "untouched",
+      "level": 0,
+      "measured_snr_db": -9e-06,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.03168876,
+            1.03620723
+          ],
+          "middle": 0.25775982,
+          "range": [
+            62720,
+            74240
+          ],
+          "score": 0.77279932
+        },
+        "projection": {
+          "flanks": [
+            0.98790335,
+            0.93342319
+          ],
+          "middle": 0.25169921,
+          "range": [
+            62720,
+            74240
+          ],
+          "score": 0.66810394
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "d36b994e163f20cdcad3ae345854a5672a65b3498d02e91cff4499fec9a432fa",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 66,
+      "case": "dev-1",
+      "earlier_sha256": "19d3df160b2c5c33651213bcfcd60b35960228548585d3797937639076845e54",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_replacement",
+      "level": 0,
+      "measured_snr_db": -9e-06,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.10274649,
+            1.10757616
+          ],
+          "middle": 0.27551307,
+          "range": [
+            62720,
+            74240
+          ],
+          "score": 0.82602599
+        },
+        "projection": {
+          "flanks": [
+            1.01435102,
+            0.9412064
+          ],
+          "middle": 0.04667512,
+          "range": [
+            25600,
+            37120
+          ],
+          "score": 0.87624512
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "64fe45f76411d6ac47698912c9dae0c7c4ec65f1b6b358a25dc66865c8a45bec",
+      "supported_pair": true,
+      "truth": [
+        27840,
+        39360
+      ]
+    },
+    {
+      "active_windows": 66,
+      "case": "dev-1",
+      "earlier_sha256": "19d3df160b2c5c33651213bcfcd60b35960228548585d3797937639076845e54",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "local_gain",
+      "level": 0,
+      "measured_snr_db": -9e-06,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.03168876,
+            1.03620723
+          ],
+          "middle": 0.25775982,
+          "range": [
+            62720,
+            74240
+          ],
+          "score": 0.77279932
+        },
+        "projection": {
+          "flanks": [
+            0.96742036,
+            0.91406979
+          ],
+          "middle": 0.24648053,
+          "range": [
+            62720,
+            74240
+          ],
+          "score": 0.65425161
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "e1f959952ad8438151b9b6083dfbd19943d17a8febf34ec6b08779766dfb5456",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 66,
+      "case": "dev-1",
+      "earlier_sha256": "19d3df160b2c5c33651213bcfcd60b35960228548585d3797937639076845e54",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_tts",
+      "level": 0,
+      "measured_snr_db": -9e-06,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.10274649,
+            1.10757616
+          ],
+          "middle": 0.27551307,
+          "range": [
+            62720,
+            74240
+          ],
+          "score": 0.82602599
+        },
+        "projection": {
+          "flanks": [
+            1.01435102,
+            0.97566584
+          ],
+          "middle": 0.0205703,
+          "range": [
+            25600,
+            37120
+          ],
+          "score": 0.94542425
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "e89438a03d8f4d5e674f2606ddd43c5c16062de5302aeda4edffb27b95664207",
+      "supported_pair": true,
+      "truth": [
+        27840,
+        39360
+      ]
+    },
+    {
+      "active_windows": 66,
+      "case": "dev-1",
+      "earlier_sha256": "19d3df160b2c5c33651213bcfcd60b35960228548585d3797937639076845e54",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_tts",
+      "level": 0,
+      "measured_snr_db": -9e-06,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.03168876,
+            1.03620723
+          ],
+          "middle": 0.25775982,
+          "range": [
+            62720,
+            74240
+          ],
+          "score": 0.77279932
+        },
+        "projection": {
+          "flanks": [
+            0.98790335,
+            0.93342319
+          ],
+          "middle": 0.25169921,
+          "range": [
+            62720,
+            74240
+          ],
+          "score": 0.66810394
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "16a9e88a80cb660506898043a67d5186b9278811d24f92005396530e1abf54c8",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 66,
+      "case": "dev-1",
+      "earlier_sha256": "19d3df160b2c5c33651213bcfcd60b35960228548585d3797937639076845e54",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_conversion",
+      "level": 0,
+      "measured_snr_db": -9e-06,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.10274649,
+            1.10757616
+          ],
+          "middle": 0.27551307,
+          "range": [
+            62720,
+            74240
+          ],
+          "score": 0.82602599
+        },
+        "projection": {
+          "flanks": [
+            1.01435102,
+            0.94023153
+          ],
+          "middle": 0.07412855,
+          "range": [
+            25600,
+            37120
+          ],
+          "score": 0.84757311
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "f3ec9000ee2052ff4696a06047dbc303766574ba0de30d3a2e00fbc95945c9f2",
+      "supported_pair": true,
+      "truth": [
+        27840,
+        39360
+      ]
+    },
+    {
+      "active_windows": 66,
+      "case": "dev-1",
+      "earlier_sha256": "19d3df160b2c5c33651213bcfcd60b35960228548585d3797937639076845e54",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_conversion",
+      "level": 0,
+      "measured_snr_db": -9e-06,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.03168876,
+            1.03620723
+          ],
+          "middle": 0.25775982,
+          "range": [
+            62720,
+            74240
+          ],
+          "score": 0.77279932
+        },
+        "projection": {
+          "flanks": [
+            0.98790335,
+            0.93342319
+          ],
+          "middle": 0.25169921,
+          "range": [
+            62720,
+            74240
+          ],
+          "score": 0.66810394
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "d36b994e163f20cdcad3ae345854a5672a65b3498d02e91cff4499fec9a432fa",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 66,
+      "case": "dev-1",
+      "earlier_sha256": "19d3df160b2c5c33651213bcfcd60b35960228548585d3797937639076845e54",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "global_eq",
+      "level": 0,
+      "measured_snr_db": -9e-06,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.09270659,
+            1.00169375
+          ],
+          "middle": 0.26861546,
+          "range": [
+            62720,
+            74240
+          ],
+          "score": 0.71032509
+        },
+        "projection": {
+          "flanks": [
+            1.00544515,
+            0.94796129
+          ],
+          "middle": 0.25934763,
+          "range": [
+            61440,
+            72960
+          ],
+          "score": 0.67424269
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "e04b41f24113f4584ef4dcc89bdffddfd835e81b96f7f18b36ef18d4ec44005a",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 69,
+      "case": "dev-1",
+      "earlier_sha256": "11ae46673214e975a8f499d9e42a98d697065142d3db564c71be9b42871816ca",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "different_reader_reference",
+      "level": 0,
+      "measured_snr_db": -9e-06,
+      "results": {
+        "correlation": null,
+        "projection": null
+      },
+      "role": "development",
+      "submitted_sha256": "d36b994e163f20cdcad3ae345854a5672a65b3498d02e91cff4499fec9a432fa",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 70,
+      "case": "dev-1",
+      "earlier_sha256": "5924782a0b7e49e6299e1dd5e3505b7381bc846e5b9a39cda80bd3d5ad0c681a",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "same_words_rerecorded_reference",
+      "level": 0,
+      "measured_snr_db": -9e-06,
+      "results": {
+        "correlation": null,
+        "projection": null
+      },
+      "role": "development",
+      "submitted_sha256": "d36b994e163f20cdcad3ae345854a5672a65b3498d02e91cff4499fec9a432fa",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 66,
+      "case": "dev-1",
+      "earlier_sha256": "19d3df160b2c5c33651213bcfcd60b35960228548585d3797937639076845e54",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "untouched",
+      "level": -5,
+      "measured_snr_db": -4.999998,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.12277826,
+            1.06192389
+          ],
+          "middle": 0.17656718,
+          "range": [
+            62720,
+            74240
+          ],
+          "score": 0.87014312
+        },
+        "projection": {
+          "flanks": [
+            1.05521145,
+            0.94400626
+          ],
+          "middle": 0.21332085,
+          "range": [
+            62720,
+            74240
+          ],
+          "score": 0.70288411
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "d16942d7358dd0d3d1e704c2d95e85ac872fc66aabbaf08f3233d05726d3ff24",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 66,
+      "case": "dev-1",
+      "earlier_sha256": "19d3df160b2c5c33651213bcfcd60b35960228548585d3797937639076845e54",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_replacement",
+      "level": -5,
+      "measured_snr_db": -4.999998,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.23109889,
+            1.16437357
+          ],
+          "middle": 0.19360159,
+          "range": [
+            62720,
+            74240
+          ],
+          "score": 0.95409065
+        },
+        "projection": {
+          "flanks": [
+            0.97746143,
+            0.8625091
+          ],
+          "middle": 0.04119297,
+          "range": [
+            25600,
+            37120
+          ],
+          "score": 0.79257804
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "c967a6aad00044546ef7404e84ce46b6997587b245d5a376eec4c020ac1ee8e5",
+      "supported_pair": true,
+      "truth": [
+        27840,
+        39360
+      ]
+    },
+    {
+      "active_windows": 66,
+      "case": "dev-1",
+      "earlier_sha256": "19d3df160b2c5c33651213bcfcd60b35960228548585d3797937639076845e54",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "local_gain",
+      "level": -5,
+      "measured_snr_db": -4.999998,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.06354023,
+            1.00589656
+          ],
+          "middle": 0.16725145,
+          "range": [
+            62720,
+            74240
+          ],
+          "score": 0.82423418
+        },
+        "projection": {
+          "flanks": [
+            1.00075508,
+            0.89528886
+          ],
+          "middle": 0.20231199,
+          "range": [
+            62720,
+            74240
+          ],
+          "score": 0.66661032
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "2c932d2021e6962e07a656adb02a579f72d4383f156f08a21f4ddc059cb8339e",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 66,
+      "case": "dev-1",
+      "earlier_sha256": "19d3df160b2c5c33651213bcfcd60b35960228548585d3797937639076845e54",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_tts",
+      "level": -5,
+      "measured_snr_db": -4.999998,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.20424322,
+            1.13897346
+          ],
+          "middle": 0.18937829,
+          "range": [
+            62720,
+            74240
+          ],
+          "score": 0.93327774
+        },
+        "projection": {
+          "flanks": [
+            0.97587222,
+            0.86110678
+          ],
+          "middle": 0.00929167,
+          "range": [
+            25600,
+            37120
+          ],
+          "score": 0.82312375
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "818b8d34a285ef4d6f3cc4e5aafff3b52735beab4496b91114d28ad9cf7841c3",
+      "supported_pair": true,
+      "truth": [
+        27840,
+        39360
+      ]
+    },
+    {
+      "active_windows": 66,
+      "case": "dev-1",
+      "earlier_sha256": "19d3df160b2c5c33651213bcfcd60b35960228548585d3797937639076845e54",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_tts",
+      "level": -5,
+      "measured_snr_db": -4.999998,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.12277826,
+            1.06192389
+          ],
+          "middle": 0.17656718,
+          "range": [
+            62720,
+            74240
+          ],
+          "score": 0.87014312
+        },
+        "projection": {
+          "flanks": [
+            1.05521145,
+            0.94400626
+          ],
+          "middle": 0.21332085,
+          "range": [
+            62720,
+            74240
+          ],
+          "score": 0.70288411
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "6faa40915a51614dd7a36c80b0f4ff7b1e63081a10b891e08e4632b233858383",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 66,
+      "case": "dev-1",
+      "earlier_sha256": "19d3df160b2c5c33651213bcfcd60b35960228548585d3797937639076845e54",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_conversion",
+      "level": -5,
+      "measured_snr_db": -4.999998,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.23109889,
+            1.16437357
+          ],
+          "middle": 0.19360159,
+          "range": [
+            62720,
+            74240
+          ],
+          "score": 0.95409065
+        },
+        "projection": {
+          "flanks": [
+            0.97746143,
+            0.8625091
+          ],
+          "middle": 0.05672408,
+          "range": [
+            25600,
+            37120
+          ],
+          "score": 0.77704693
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "10b3964ccf20a5e1eac7740da2a31308ebbf4cf1960b3564fb073f2a4c167ccf",
+      "supported_pair": true,
+      "truth": [
+        27840,
+        39360
+      ]
+    },
+    {
+      "active_windows": 66,
+      "case": "dev-1",
+      "earlier_sha256": "19d3df160b2c5c33651213bcfcd60b35960228548585d3797937639076845e54",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_conversion",
+      "level": -5,
+      "measured_snr_db": -4.999998,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.12277826,
+            1.06192389
+          ],
+          "middle": 0.17656718,
+          "range": [
+            62720,
+            74240
+          ],
+          "score": 0.87014312
+        },
+        "projection": {
+          "flanks": [
+            1.05521145,
+            0.94400626
+          ],
+          "middle": 0.21332085,
+          "range": [
+            62720,
+            74240
+          ],
+          "score": 0.70288411
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "d16942d7358dd0d3d1e704c2d95e85ac872fc66aabbaf08f3233d05726d3ff24",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 66,
+      "case": "dev-1",
+      "earlier_sha256": "19d3df160b2c5c33651213bcfcd60b35960228548585d3797937639076845e54",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "global_eq",
+      "level": -5,
+      "measured_snr_db": -4.999998,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.18361566,
+            1.05636284
+          ],
+          "middle": 0.18165197,
+          "range": [
+            62720,
+            74240
+          ],
+          "score": 0.84289766
+        },
+        "projection": {
+          "flanks": [
+            1.14133231,
+            0.96184882
+          ],
+          "middle": 0.22198595,
+          "range": [
+            61440,
+            72960
+          ],
+          "score": 0.69499199
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "ab5e2dc09ef0f2ac8a4411f3b9bfaf866764c9fec877b0baaf3a61650c35833a",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 69,
+      "case": "dev-1",
+      "earlier_sha256": "11ae46673214e975a8f499d9e42a98d697065142d3db564c71be9b42871816ca",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "different_reader_reference",
+      "level": -5,
+      "measured_snr_db": -4.999998,
+      "results": {
+        "correlation": null,
+        "projection": null
+      },
+      "role": "development",
+      "submitted_sha256": "d16942d7358dd0d3d1e704c2d95e85ac872fc66aabbaf08f3233d05726d3ff24",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 70,
+      "case": "dev-1",
+      "earlier_sha256": "5924782a0b7e49e6299e1dd5e3505b7381bc846e5b9a39cda80bd3d5ad0c681a",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "same_words_rerecorded_reference",
+      "level": -5,
+      "measured_snr_db": -4.999998,
+      "results": {
+        "correlation": null,
+        "projection": null
+      },
+      "role": "development",
+      "submitted_sha256": "d16942d7358dd0d3d1e704c2d95e85ac872fc66aabbaf08f3233d05726d3ff24",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 66,
+      "case": "dev-1",
+      "earlier_sha256": "19d3df160b2c5c33651213bcfcd60b35960228548585d3797937639076845e54",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "untouched",
+      "level": -10,
+      "measured_snr_db": -9.99999,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.30833315,
+            1.0750427
+          ],
+          "middle": 0.10347186,
+          "range": [
+            62720,
+            74240
+          ],
+          "score": 0.91324823
+        },
+        "projection": {
+          "flanks": [
+            1.13020932,
+            0.95461189
+          ],
+          "middle": 0.14095053,
+          "range": [
+            62720,
+            74240
+          ],
+          "score": 0.76976201
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "ad0d44a0846a679a258b642807d3fc2f920c215e5c88414661f2b493965f9ec7",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 66,
+      "case": "dev-1",
+      "earlier_sha256": "19d3df160b2c5c33651213bcfcd60b35960228548585d3797937639076845e54",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_replacement",
+      "level": -10,
+      "measured_snr_db": -9.99999,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.38070731,
+            1.13451173
+          ],
+          "middle": 0.10919569,
+          "range": [
+            62720,
+            74240
+          ],
+          "score": 0.96376714
+        },
+        "projection": {
+          "flanks": [
+            1.18952058,
+            1.00470813
+          ],
+          "middle": 0.14834734,
+          "range": [
+            62720,
+            74240
+          ],
+          "score": 0.81015767
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "3569b718cbed3d524ba299a7e62f58cfbd23e7aba328576159967f9f6100af33",
+      "supported_pair": true,
+      "truth": [
+        27840,
+        39360
+      ]
+    },
+    {
+      "active_windows": 66,
+      "case": "dev-1",
+      "earlier_sha256": "19d3df160b2c5c33651213bcfcd60b35960228548585d3797937639076845e54",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "local_gain",
+      "level": -10,
+      "measured_snr_db": -9.99999,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.1900982,
+            0.97789036
+          ],
+          "middle": 0.09412103,
+          "range": [
+            62720,
+            74240
+          ],
+          "score": 0.83071736
+        },
+        "projection": {
+          "flanks": [
+            1.05835074,
+            0.89391777
+          ],
+          "middle": 0.13198891,
+          "range": [
+            62720,
+            74240
+          ],
+          "score": 0.72082062
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "765220ae70ff76806ce16ec3461b945b55046c2280ae9c07f11725c99045ec95",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 66,
+      "case": "dev-1",
+      "earlier_sha256": "19d3df160b2c5c33651213bcfcd60b35960228548585d3797937639076845e54",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_tts",
+      "level": -10,
+      "measured_snr_db": -9.99999,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.38070731,
+            1.13451173
+          ],
+          "middle": 0.10919569,
+          "range": [
+            62720,
+            74240
+          ],
+          "score": 0.96376714
+        },
+        "projection": {
+          "flanks": [
+            1.18952058,
+            1.00470813
+          ],
+          "middle": 0.14834734,
+          "range": [
+            62720,
+            74240
+          ],
+          "score": 0.81015767
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "d37e628fd2d2c337bc8687eeb9f93aa15ac97536dfd1a71f0cd20efc29595261",
+      "supported_pair": true,
+      "truth": [
+        27840,
+        39360
+      ]
+    },
+    {
+      "active_windows": 66,
+      "case": "dev-1",
+      "earlier_sha256": "19d3df160b2c5c33651213bcfcd60b35960228548585d3797937639076845e54",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_tts",
+      "level": -10,
+      "measured_snr_db": -9.99999,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.30833315,
+            1.0750427
+          ],
+          "middle": 0.10347186,
+          "range": [
+            62720,
+            74240
+          ],
+          "score": 0.91324823
+        },
+        "projection": {
+          "flanks": [
+            1.12980944,
+            0.95427414
+          ],
+          "middle": 0.14090066,
+          "range": [
+            62720,
+            74240
+          ],
+          "score": 0.76948966
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "a95ce82877a26b9ed510f638950d62e987fbfdca4dcd23f0d904b0066ae1ce09",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 66,
+      "case": "dev-1",
+      "earlier_sha256": "19d3df160b2c5c33651213bcfcd60b35960228548585d3797937639076845e54",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "synthetic_conversion",
+      "level": -10,
+      "measured_snr_db": -9.99999,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.38070731,
+            1.13451173
+          ],
+          "middle": 0.10919569,
+          "range": [
+            62720,
+            74240
+          ],
+          "score": 0.96376714
+        },
+        "projection": {
+          "flanks": [
+            1.18952058,
+            1.00470813
+          ],
+          "middle": 0.14834734,
+          "range": [
+            62720,
+            74240
+          ],
+          "score": 0.81015767
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "75fbbfcc4fae87a6354fb978611cadb7e93acb57acf54aaa8792b1acd98534c0",
+      "supported_pair": true,
+      "truth": [
+        27840,
+        39360
+      ]
+    },
+    {
+      "active_windows": 66,
+      "case": "dev-1",
+      "earlier_sha256": "19d3df160b2c5c33651213bcfcd60b35960228548585d3797937639076845e54",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "ordinary_conversion",
+      "level": -10,
+      "measured_snr_db": -9.99999,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.30833315,
+            1.0750427
+          ],
+          "middle": 0.10347186,
+          "range": [
+            62720,
+            74240
+          ],
+          "score": 0.91324823
+        },
+        "projection": {
+          "flanks": [
+            1.13020932,
+            0.95461189
+          ],
+          "middle": 0.14095053,
+          "range": [
+            62720,
+            74240
+          ],
+          "score": 0.76976201
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "ad0d44a0846a679a258b642807d3fc2f920c215e5c88414661f2b493965f9ec7",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 66,
+      "case": "dev-1",
+      "earlier_sha256": "19d3df160b2c5c33651213bcfcd60b35960228548585d3797937639076845e54",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "global_eq",
+      "level": -10,
+      "measured_snr_db": -9.99999,
+      "results": {
+        "correlation": {
+          "flanks": [
+            1.30484168,
+            1.08652482
+          ],
+          "middle": 0.10187019,
+          "range": [
+            62720,
+            74240
+          ],
+          "score": 0.93007541
+        },
+        "projection": {
+          "flanks": [
+            1.18962298,
+            0.96209668
+          ],
+          "middle": 0.14664696,
+          "range": [
+            61440,
+            72960
+          ],
+          "score": 0.75856816
+        }
+      },
+      "role": "development",
+      "submitted_sha256": "a428fb57ee268b71c1c6940a408991a2f39ba2618fef18a83cd583108cdc004a",
+      "supported_pair": true,
+      "truth": null
+    },
+    {
+      "active_windows": 69,
+      "case": "dev-1",
+      "earlier_sha256": "11ae46673214e975a8f499d9e42a98d697065142d3db564c71be9b42871816ca",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "different_reader_reference",
+      "level": -10,
+      "measured_snr_db": -9.99999,
+      "results": {
+        "correlation": null,
+        "projection": null
+      },
+      "role": "development",
+      "submitted_sha256": "ad0d44a0846a679a258b642807d3fc2f920c215e5c88414661f2b493965f9ec7",
+      "supported_pair": false,
+      "truth": null
+    },
+    {
+      "active_windows": 70,
+      "case": "dev-1",
+      "earlier_sha256": "5924782a0b7e49e6299e1dd5e3505b7381bc846e5b9a39cda80bd3d5ad0c681a",
+      "exact_comparator_changed_bins": 300,
+      "exact_comparator_extent": [
+        0,
+        96000
+      ],
+      "kind": "same_words_rerecorded_reference",
+      "level": -10,
+      "measured_snr_db": -9.99999,
+      "results": {
+        "correlation": null,
+        "projection": null
+      },
+      "role": "development",
+      "submitted_sha256": "ad0d44a0846a679a258b642807d3fc2f920c215e5c88414661f2b493965f9ec7",
+      "supported_pair": false,
+      "truth": null
+    }
+  ],
+  "freeze": {
+    "clock_hz": 16000,
+    "code_sha256": "274c91ae3cf66bb92201ffbfb6ea593c66dc59a44e789327525c0075259f9082",
+    "delivery_roster_sha256": "381d94ab76f54ecc2bceb890db29188fc1ff0fb8561fc45096e7c5f78df4b6f9",
+    "masker_annotation_sha256": "b56e5babb2496b8795deeeda7e71178d7fbc9963f94276cf2a3f4b56ebbc9f9d",
+    "masker_archive_sha256": {
+      "ES2007c": "895904c48583d74c311e42cf0bf49554e998cd5ab87b67268c97de09b856e619",
+      "ES2012b": "dd6f2caa7dc2ca8357964efa4d252a025151e11de4ce496b3b12d89bfd6464ba",
+      "IS1001b": "164dda162e5e8e851cb56b629116e916835d571b6b4cdf3d164337297b0a853d",
+      "IS1004c": "d9c81453ea85a228bf4b82e9757a19edfc760203d1a3af1c353473b3030613b6"
+    },
+    "masker_roster_sha256": "c49c43c27b46fca0fe79abcd32c1820d971c797c0f57d892a822dee59dba1ede",
+    "method": {
+      "features": "Band-pass both inputs at 250\u20133800 Hz, remove local weighted DC and measure 240 ms Hann-window normalized correlation and signed least-squares reference gain at 80 ms hops. Limit analysis to reference windows at or above 25 percent of its 80th percentile RMS. Normalize each cue by its 70th percentile among those windows. Require reference support in at least 36 windows and broad positive matching; unrelated or same-words re-recorded reference declines.",
+      "input": "Compare the same six-second mono recording on an equal 16 kHz clock using an earlier copy as a separate input. The earlier recording carries +5 dB interfering speech. The submitted recording carries 0, -5, or -10 dB with a different AMI meeting in each role and pair. There is no attempt to align arbitrary recordings or infer a new clock.",
+      "localization": "Measure a local deficit with the median over each nine-window sequence, requiring at least six assessed cells and coherent two-flank support. Each flank uses five cells separated by one guard cell. Report the 720 ms span centered on the nine centers with strongest deficit. Require strict positive over the development maximum of matched untouched, gain, genuine resampling and ordinary full-recording EQ controls.",
+      "roles": "Reuse only the two previous source-panel development prompts for point selection. Select up to three held prompts from source readers not in any of the four earlier short-panel roles. Exclude the prior whole-utterance/ODSS readers and all exact old v9 source IDs. Use the publisher's matching word tier and the earlier source-duration, context and amplitude eligibility constraints. Prior speaker or training exposure is possible. Background captures and participants are disjoint from development.",
+      "scope": "A temporary waveform change can result from ordinary editing or synthetic replacement. Count both as physical-change positives, with matched gain, resampling and EQ controls. Unrelated and same-text re-recorded references are admission controls. No model or customer scoring is used."
+    },
+    "native_source_intake_sha256": "ba7b61a274e89872e1049b9502ae55acb65e81994e0c8c62e6655f01ab8b5efe",
+    "reference_level_db": 5,
+    "schema": "chipmunk.audio-paired-speech-continuity/1",
+    "source_roster_sha256": "392d2b58c8996df3037a180ae2f74dc72b5cc20e70fa6c4bbc130736ebe2a34c",
+    "submission_levels_db": [
+      0,
+      -5,
+      -10
+    ]
+  },
+  "operating_points": {
+    "development_sha256": "ce95c18c0ff5999cd1c78ecad96de12834a536f92036b863b8ea41002958f6f1",
+    "freeze_sha256": "941c738253ba3c30fd66619379bef3f313f4a66911dfd6a6edd8b511fcef2abc",
+    "points": {
+      "correlation": 0.93007541,
+      "projection": 0.76976201
+    }
+  }
+}

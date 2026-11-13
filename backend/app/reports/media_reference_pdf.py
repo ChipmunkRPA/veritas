@@ -15,6 +15,7 @@ from app.evidence.audio_reference import (
     SCHEMA_WITH_TRIM_AND_LEVEL,
 )
 from app.evidence.audio_reference import SCHEMA as AUDIO_SCHEMA
+from app.evidence.video_reference import SCHEMA_WITH_TRIM_REENCODE
 from app.reports.image_reference_pdf import INK, MARGIN, MUTED, PAGE_HEIGHT, PAGE_WIDTH, RIGHT, RULE, _text
 
 TITLE = "Earlier video comparison"
@@ -73,6 +74,15 @@ def _summary(document, record):
         return
     picture = record["picture"]
     _text(page, MARGIN, 347, "Picture comparison", size=16, font="hebo")
+    if record["schema"] == SCHEMA_WITH_TRIM_REENCODE:
+        first, stop = record["trim_alignment"]["earlier_frames"]
+        local = picture["local_comparison"]
+        _text(page, MARGIN, 371, f"Aligned earlier frames [{first}, {stop}) with analyzed frames [0, {stop - first}).")
+        _text(page, MARGIN, 392, "Matching motion near both ends supports this alignment.", color=MUTED)
+        _text(page, MARGIN, 413, local["summary"])
+        if "range" in local:
+            _text(page, MARGIN, 435, "The next page shows both source timelines, pictures and crops.", color=MUTED)
+        return
     _text(page, MARGIN, 371, f"{picture['matching_frames']} exact matches and {picture['changed_frames']} changed decoded pictures.")
     if not picture["matching_frames"]:
         _text(page, MARGIN, 390, "Every picture differs. Re-encoding can produce this pattern.", color=MUTED)

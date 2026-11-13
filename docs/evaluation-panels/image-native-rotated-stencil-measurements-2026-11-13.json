@@ -1,0 +1,5698 @@
+{
+  "freeze_sha256": "a67555a9a2f0cb916850efb050fb966d2dbc9c054246c9663b6e97409b028f38",
+  "rows": [
+    {
+      "input_sha256": "1f73ea6e587057fde22697b4114e50d53f32b34b6e2b696a2c9659fc9e68881f",
+      "key": 804,
+      "preselected": false,
+      "proposal": {
+        "box": null,
+        "grid": [
+          0,
+          0
+        ],
+        "parity_fit": null,
+        "phase": 2,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": null,
+          "reference_positive_pixels": 0
+        },
+        "promotion": null,
+        "score": 0.0
+      },
+      "role": "original",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "input_sha256": "b3026b65f493e6e11d50215f1d73c2201d68dbd54b6959ee68e8d4ef5be0ac12",
+      "key": 804,
+      "preselected": false,
+      "proposal": null,
+      "role": "eight_bit",
+      "rotated_pattern": null,
+      "status": "unsupported_format",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "input_sha256": "88f0541b39d8de8705bf20d3204ebaa39c112de8e8806a34b9a1b486d22edcb4",
+      "key": 804,
+      "preselected": false,
+      "proposal": null,
+      "role": "resized",
+      "rotated_pattern": null,
+      "status": "no_repeatable_stencil",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "input_sha256": "6c90d4ca92f0181fb5027e3bf1fde2fbdfafa0f4d8ae26225bf7e087d758d661",
+      "key": 804,
+      "preselected": false,
+      "proposal": {
+        "box": [
+          464,
+          400,
+          528,
+          528
+        ],
+        "grid": [
+          16,
+          16
+        ],
+        "parity_fit": [
+          [
+            0.8885853653539426,
+            0.8823597868031487
+          ],
+          [
+            0.9211706397992793,
+            0.8919335102100713
+          ]
+        ],
+        "phase": 2,
+        "pixels": {
+          "false_negative_pixels": 8192,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0026041666666666665,
+          "intersection": 8192,
+          "iou": 0.5,
+          "pixel_f1": 0.6666666666666666,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 8192,
+          "recall": 0.5,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": [
+          {
+            "core": [
+              0.007211538461538462,
+              0.0069711538461538465,
+              0.007211538461538462
+            ],
+            "modulus": 256,
+            "ring": [
+              0.04871961805555555,
+              0.029947916666666668,
+              0.03504774305555555
+            ]
+          },
+          {
+            "core": [
+              0.006730769230769231,
+              0.0069711538461538465,
+              0.007451923076923077
+            ],
+            "modulus": 257,
+            "ring": [
+              0.0205078125,
+              0.02734375,
+              0.025716145833333332
+            ]
+          }
+        ],
+        "score": 1.303115442712582
+      },
+      "role": "blur",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "70a1b67446e19c1f4733c3936ece9090fc7c49fccef3e6dd41fbe809d87bd5a6"
+    },
+    {
+      "input_sha256": "9b1a414deeb6653bfb4b47859a2a9d521f6f59fbe9c5f5ff60157290046ae430",
+      "key": 804,
+      "preselected": false,
+      "proposal": {
+        "box": null,
+        "grid": [
+          0,
+          0
+        ],
+        "parity_fit": null,
+        "phase": 2,
+        "pixels": {
+          "false_negative_pixels": 16384,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 0.0,
+          "pixel_f1": 0.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": 0.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": null,
+        "score": 0.0
+      },
+      "role": "tone",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "70a1b67446e19c1f4733c3936ece9090fc7c49fccef3e6dd41fbe809d87bd5a6"
+    },
+    {
+      "input_sha256": "61318c66655c25f86c7f7a21e7b6c3ab4713c8fb57e9ba5a3db3f174fde06012",
+      "key": 804,
+      "preselected": false,
+      "proposal": {
+        "box": null,
+        "grid": [
+          0,
+          0
+        ],
+        "parity_fit": null,
+        "phase": 2,
+        "pixels": {
+          "false_negative_pixels": 16384,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 0.0,
+          "pixel_f1": 0.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": 0.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": null,
+        "score": 0.0
+      },
+      "role": "copy_even",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "70a1b67446e19c1f4733c3936ece9090fc7c49fccef3e6dd41fbe809d87bd5a6"
+    },
+    {
+      "input_sha256": "6b87339046e66f785a3a777f89332f17debae907f6552304b7651b0be2f48c4f",
+      "key": 804,
+      "preselected": false,
+      "proposal": {
+        "box": [
+          400,
+          400,
+          528,
+          528
+        ],
+        "grid": [
+          16,
+          16
+        ],
+        "parity_fit": [
+          [
+            0.8763513621626818,
+            0.7008977826371967
+          ],
+          [
+            0.8889824795116034,
+            0.7693352104581648
+          ]
+        ],
+        "phase": 2,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": [
+          {
+            "core": [
+              0.005732248520710059,
+              0.005639792899408284,
+              0.00610207100591716
+            ],
+            "modulus": 256,
+            "ring": [
+              0.041748046875,
+              0.030924479166666668,
+              0.049641927083333336
+            ]
+          },
+          {
+            "core": [
+              0.005454881656804734,
+              0.005454881656804734,
+              0.0052699704142011835
+            ],
+            "modulus": 257,
+            "ring": [
+              0.017333984375,
+              0.023600260416666668,
+              0.027262369791666668
+            ]
+          }
+        ],
+        "score": 3.1144775296614187
+      },
+      "role": "diagonal_shift",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "70a1b67446e19c1f4733c3936ece9090fc7c49fccef3e6dd41fbe809d87bd5a6"
+    },
+    {
+      "input_sha256": "fb389751270d2956ec5a5ec66bfe4c252bede9be65baaeb0899c78ace789daab",
+      "key": 804,
+      "preselected": true,
+      "proposal": {
+        "box": [
+          400,
+          400,
+          528,
+          528
+        ],
+        "grid": [
+          16,
+          16
+        ],
+        "parity_fit": [
+          [
+            0.10757838678116671,
+            0.0
+          ],
+          [
+            0.08823097584385398,
+            0.0
+          ]
+        ],
+        "phase": 2,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": [
+          {
+            "core": null,
+            "modulus": 256,
+            "ring": [
+              0.041748046875,
+              0.030924479166666668,
+              0.049641927083333336
+            ]
+          },
+          {
+            "core": null,
+            "modulus": 257,
+            "ring": [
+              0.017333984375,
+              0.023600260416666668,
+              0.027262369791666668
+            ]
+          }
+        ],
+        "score": 2.7773012167194935
+      },
+      "role": "quantized_shift",
+      "rotated_pattern": {
+        "angle": 4.25,
+        "peak": 0.03363069230969566,
+        "selected": false,
+        "zero": 0.15084306687052412
+      },
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "70a1b67446e19c1f4733c3936ece9090fc7c49fccef3e6dd41fbe809d87bd5a6"
+    },
+    {
+      "input_sha256": "654ed2829fd2a4132b3f6da4365a13a61f150aa7809ccdb5919a52f8e9491502",
+      "key": 804,
+      "preselected": true,
+      "proposal": {
+        "box": [
+          400,
+          400,
+          528,
+          528
+        ],
+        "grid": [
+          16,
+          16
+        ],
+        "parity_fit": [
+          [
+            0.11849930350532423,
+            0.045912048860011434
+          ],
+          [
+            0.06786364624902053,
+            0.0331345224381937
+          ]
+        ],
+        "phase": 2,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 1,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16383,
+          "iou": 0.99993896484375,
+          "pixel_f1": 0.999969481490524,
+          "pixels": 3145728,
+          "precision": 0.99993896484375,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16383
+        },
+        "promotion": [
+          {
+            "core": [
+              0.005454881656804734,
+              0.005454881656804734,
+              0.005639792899408284
+            ],
+            "modulus": 256,
+            "ring": [
+              0.041748046875,
+              0.030924479166666668,
+              0.049641927083333336
+            ]
+          },
+          {
+            "core": [
+              0.005454881656804734,
+              0.0052699704142011835,
+              0.006009615384615385
+            ],
+            "modulus": 257,
+            "ring": [
+              0.017333984375,
+              0.023600260416666668,
+              0.027262369791666668
+            ]
+          }
+        ],
+        "score": 2.8202408980015012
+      },
+      "role": "rotate_bilinear",
+      "rotated_pattern": {
+        "angle": 4.0,
+        "peak": 0.43534769366807163,
+        "selected": true,
+        "zero": 0.0
+      },
+      "status": "assessed",
+      "truth_pixels": 16383,
+      "truth_sha256": "1310e3c5cd704af668cd5c1c22fe62dfc51f58a71baefd78f7daea9f418f1e7b"
+    },
+    {
+      "input_sha256": "74ac245c81b3627bad2e7cd0a9e4262a43f0b8a89e1bdae8de8b478cde855f51",
+      "key": 804,
+      "preselected": true,
+      "proposal": {
+        "box": [
+          400,
+          400,
+          528,
+          528
+        ],
+        "grid": [
+          16,
+          16
+        ],
+        "parity_fit": [
+          [
+            0.10681198070374331,
+            0.016576245996726136
+          ],
+          [
+            0.01365218779198396,
+            0.009458294931885991
+          ]
+        ],
+        "phase": 2,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 1,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16383,
+          "iou": 0.99993896484375,
+          "pixel_f1": 0.999969481490524,
+          "pixels": 3145728,
+          "precision": 0.99993896484375,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16383
+        },
+        "promotion": [
+          {
+            "core": [
+              0.005639792899408284,
+              0.005639792899408284,
+              0.005732248520710059
+            ],
+            "modulus": 256,
+            "ring": [
+              0.041748046875,
+              0.030924479166666668,
+              0.049641927083333336
+            ]
+          },
+          {
+            "core": [
+              0.005639792899408284,
+              0.005824704142011835,
+              0.005454881656804734
+            ],
+            "modulus": 257,
+            "ring": [
+              0.017333984375,
+              0.023600260416666668,
+              0.027262369791666668
+            ]
+          }
+        ],
+        "score": 3.02447812288061
+      },
+      "role": "rotate_bicubic",
+      "rotated_pattern": {
+        "angle": -4.5,
+        "peak": 0.4047931511251426,
+        "selected": true,
+        "zero": 0.020519148646666107
+      },
+      "status": "assessed",
+      "truth_pixels": 16383,
+      "truth_sha256": "1310e3c5cd704af668cd5c1c22fe62dfc51f58a71baefd78f7daea9f418f1e7b"
+    },
+    {
+      "input_sha256": "5a1df05f9a2e732d4b5ab8c86ef82e9fc4cbaae51924a46022e971ac6e390ed7",
+      "key": 804,
+      "preselected": true,
+      "proposal": {
+        "box": [
+          400,
+          400,
+          528,
+          528
+        ],
+        "grid": [
+          16,
+          16
+        ],
+        "parity_fit": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0018453827033214631,
+            0.0010811630910894099
+          ]
+        ],
+        "phase": 2,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": [
+          {
+            "core": [
+              0.06342455621301775,
+              0.1078957100591716,
+              0.2027551775147929
+            ],
+            "modulus": 256,
+            "ring": [
+              0.041748046875,
+              0.030924479166666668,
+              0.049641927083333336
+            ]
+          },
+          {
+            "core": [
+              0.0893121301775148,
+              0.11002218934911243,
+              0.20284763313609466
+            ],
+            "modulus": 257,
+            "ring": [
+              0.017333984375,
+              0.023600260416666668,
+              0.027262369791666668
+            ]
+          }
+        ],
+        "score": 3.0047143998261765
+      },
+      "role": "generated_sharp",
+      "rotated_pattern": {
+        "angle": 6.0,
+        "peak": 0.0,
+        "selected": false,
+        "zero": 0.0
+      },
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "70a1b67446e19c1f4733c3936ece9090fc7c49fccef3e6dd41fbe809d87bd5a6"
+    },
+    {
+      "input_sha256": "56afae56c5b28c64957b0f874126ea2fdc6481867dfdee9b8676b5742e84149c",
+      "key": 804,
+      "preselected": true,
+      "proposal": {
+        "box": [
+          400,
+          400,
+          528,
+          528
+        ],
+        "grid": [
+          16,
+          16
+        ],
+        "parity_fit": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0018453827033214631,
+            0.0010811630910894099
+          ]
+        ],
+        "phase": 2,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": [
+          {
+            "core": [
+              0.06342455621301775,
+              0.1078957100591716,
+              0.2027551775147929
+            ],
+            "modulus": 256,
+            "ring": [
+              0.041748046875,
+              0.030924479166666668,
+              0.049641927083333336
+            ]
+          },
+          {
+            "core": [
+              0.0893121301775148,
+              0.11002218934911243,
+              0.20284763313609466
+            ],
+            "modulus": 257,
+            "ring": [
+              0.017333984375,
+              0.023600260416666668,
+              0.027262369791666668
+            ]
+          }
+        ],
+        "score": 2.871890172649983
+      },
+      "role": "generated_feathered",
+      "rotated_pattern": {
+        "angle": 6.0,
+        "peak": 0.0,
+        "selected": false,
+        "zero": 0.0
+      },
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "70a1b67446e19c1f4733c3936ece9090fc7c49fccef3e6dd41fbe809d87bd5a6"
+    },
+    {
+      "input_sha256": "9e863d2725d161bee636194b83ae1ab85bb85bd2ff326ca5c9a65dbabecce8d1",
+      "key": 804,
+      "preselected": true,
+      "proposal": {
+        "box": [
+          400,
+          400,
+          528,
+          528
+        ],
+        "grid": [
+          16,
+          16
+        ],
+        "parity_fit": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0014501573936117618,
+            0.021571882090154815
+          ]
+        ],
+        "phase": 2,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": [
+          {
+            "core": [
+              0.06342455621301775,
+              0.1078957100591716,
+              0.2027551775147929
+            ],
+            "modulus": 256,
+            "ring": [
+              0.041748046875,
+              0.030924479166666668,
+              0.049641927083333336
+            ]
+          },
+          {
+            "core": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "modulus": 257,
+            "ring": [
+              0.017333984375,
+              0.023600260416666668,
+              0.027262369791666668
+            ]
+          }
+        ],
+        "score": 2.9599956980673734
+      },
+      "role": "generated_linear_promote",
+      "rotated_pattern": {
+        "angle": 6.0,
+        "peak": 0.0,
+        "selected": false,
+        "zero": 0.0
+      },
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "70a1b67446e19c1f4733c3936ece9090fc7c49fccef3e6dd41fbe809d87bd5a6"
+    },
+    {
+      "input_sha256": "19a645a85b89808593ea656945f6895b47b6e1f87a24ced78b6d7f2f0c5bb7af",
+      "key": 1017,
+      "preselected": false,
+      "proposal": {
+        "box": null,
+        "grid": [
+          0,
+          0
+        ],
+        "parity_fit": null,
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": null,
+          "reference_positive_pixels": 0
+        },
+        "promotion": null,
+        "score": 0.0
+      },
+      "role": "original",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "input_sha256": "02d52af7099eeead074a6b941cab0efbc54eb426bf7c2ff3d423e7ef552b656e",
+      "key": 1017,
+      "preselected": false,
+      "proposal": null,
+      "role": "eight_bit",
+      "rotated_pattern": null,
+      "status": "unsupported_format",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "input_sha256": "06f5be725daf0b9dfae24c6490963edf0dad94ba4fa7cb1275f64786af1d6f2d",
+      "key": 1017,
+      "preselected": false,
+      "proposal": null,
+      "role": "resized",
+      "rotated_pattern": null,
+      "status": "no_repeatable_stencil",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "input_sha256": "9abf95a4bdcf59a1ec0bd0f8109d343283671ff095c6bd0b9b25179904a2f40e",
+      "key": 1017,
+      "preselected": false,
+      "proposal": {
+        "box": [
+          688,
+          672,
+          784,
+          736
+        ],
+        "grid": [
+          16,
+          0
+        ],
+        "parity_fit": [
+          [
+            0.8927278081319067,
+            0.9055473030247652
+          ],
+          [
+            0.8991810330516457,
+            0.9243250355683935
+          ]
+        ],
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 10240,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.001953125,
+          "intersection": 6144,
+          "iou": 0.375,
+          "pixel_f1": 0.5454545454545454,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 6144,
+          "recall": 0.375,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": [
+          {
+            "core": [
+              0.006944444444444444,
+              0.008680555555555556,
+              0.007638888888888889
+            ],
+            "modulus": 256,
+            "ring": [
+              0.013151041666666667,
+              0.015104166666666667,
+              0.0203125
+            ]
+          },
+          {
+            "core": [
+              0.007291666666666667,
+              0.00798611111111111,
+              0.007638888888888889
+            ],
+            "modulus": 257,
+            "ring": [
+              0.008723958333333334,
+              0.0125,
+              0.012239583333333333
+            ]
+          }
+        ],
+        "score": 1.427989771834306
+      },
+      "role": "blur",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "f00328bf7dca43a8895c775e5a5fdd9026381c4dfe62218f24198a887153019d"
+    },
+    {
+      "input_sha256": "e68aa8d35c7ce149d01e3ef09b4fcd2a45c72c7fd864210226455c69fc211313",
+      "key": 1017,
+      "preselected": false,
+      "proposal": {
+        "box": null,
+        "grid": [
+          0,
+          0
+        ],
+        "parity_fit": null,
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 16384,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 0.0,
+          "pixel_f1": 0.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": 0.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": null,
+        "score": 0.0
+      },
+      "role": "tone",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "f00328bf7dca43a8895c775e5a5fdd9026381c4dfe62218f24198a887153019d"
+    },
+    {
+      "input_sha256": "5a029c858715e7ec5e89734d6b28ce4cdd6d0d20621a6d3ba0a8dc6031af4a06",
+      "key": 1017,
+      "preselected": false,
+      "proposal": {
+        "box": null,
+        "grid": [
+          0,
+          0
+        ],
+        "parity_fit": null,
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 16384,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 0.0,
+          "pixel_f1": 0.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": 0.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": null,
+        "score": 0.0
+      },
+      "role": "copy_even",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "f00328bf7dca43a8895c775e5a5fdd9026381c4dfe62218f24198a887153019d"
+    },
+    {
+      "input_sha256": "98439349f82d59a5fb8342b508ddaa3d53a0a0f83f80f0214bc3a07d9fa4888a",
+      "key": 1017,
+      "preselected": false,
+      "proposal": {
+        "box": [
+          688,
+          656,
+          784,
+          752
+        ],
+        "grid": [
+          16,
+          16
+        ],
+        "parity_fit": [
+          [
+            0.647381316840492,
+            0.861015262278751
+          ],
+          [
+            0.8937666716533826,
+            0.7217566642323283
+          ]
+        ],
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 7168,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0029296875,
+          "intersection": 9216,
+          "iou": 0.5625,
+          "pixel_f1": 0.72,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 9216,
+          "recall": 0.5625,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": [
+          {
+            "core": [
+              0.006172839506172839,
+              0.006172839506172839,
+              0.006944444444444444
+            ],
+            "modulus": 256,
+            "ring": [
+              0.022135416666666668,
+              0.024848090277777776,
+              0.029839409722222224
+            ]
+          },
+          {
+            "core": [
+              0.00636574074074074,
+              0.00636574074074074,
+              0.006751543209876543
+            ],
+            "modulus": 257,
+            "ring": [
+              0.009765625,
+              0.014105902777777778,
+              0.014214409722222222
+            ]
+          }
+        ],
+        "score": 2.3078132962887112
+      },
+      "role": "diagonal_shift",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "f00328bf7dca43a8895c775e5a5fdd9026381c4dfe62218f24198a887153019d"
+    },
+    {
+      "input_sha256": "5d4fd27e6d2878318659982ac3aeb64e0b3b6952eb8eb15f0d7f1881a4f2c062",
+      "key": 1017,
+      "preselected": false,
+      "proposal": {
+        "box": [
+          704,
+          656,
+          800,
+          752
+        ],
+        "grid": [
+          0,
+          16
+        ],
+        "parity_fit": [
+          [
+            0.2036865242425684,
+            0.12070239371028946
+          ],
+          [
+            0.02183950290988712,
+            0.004049049750901701
+          ]
+        ],
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 7168,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0029296875,
+          "intersection": 9216,
+          "iou": 0.5625,
+          "pixel_f1": 0.72,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 9216,
+          "recall": 0.5625,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": [
+          {
+            "core": [
+              0.15104166666666666,
+              0.19656635802469136,
+              0.2341820987654321
+            ],
+            "modulus": 256,
+            "ring": [
+              0.068359375,
+              0.10394965277777778,
+              0.17567274305555555
+            ]
+          },
+          {
+            "core": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "modulus": 257,
+            "ring": [
+              0.5846354166666666,
+              0.5865885416666666,
+              0.5851779513888888
+            ]
+          }
+        ],
+        "score": 1.8061394060612406
+      },
+      "role": "quantized_shift",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "f00328bf7dca43a8895c775e5a5fdd9026381c4dfe62218f24198a887153019d"
+    },
+    {
+      "input_sha256": "d5d83130dbff155d1e70712f5a94bedb43e0c84e6700f1d7faf677972b05179e",
+      "key": 1017,
+      "preselected": false,
+      "proposal": {
+        "box": [
+          688,
+          656,
+          784,
+          752
+        ],
+        "grid": [
+          16,
+          16
+        ],
+        "parity_fit": [
+          [
+            0.031224454155030945,
+            0.04050084342645188
+          ],
+          [
+            0.10656778591031091,
+            0.09157557236418423
+          ]
+        ],
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 7168,
+          "false_positive_pixels": 1,
+          "flagged_area_fraction": 0.0029296875,
+          "intersection": 9215,
+          "iou": 0.56243896484375,
+          "pixel_f1": 0.7199499980467987,
+          "pixels": 3145728,
+          "precision": 0.9998914930555556,
+          "predicted_positive_pixels": 9216,
+          "recall": 0.5624732954892266,
+          "reference_positive_pixels": 16383
+        },
+        "promotion": [
+          {
+            "core": [
+              0.0073302469135802465,
+              0.006558641975308642,
+              0.007908950617283951
+            ],
+            "modulus": 256,
+            "ring": [
+              0.021375868055555556,
+              0.024088541666666668,
+              0.030381944444444444
+            ]
+          },
+          {
+            "core": [
+              0.005979938271604938,
+              0.006558641975308642,
+              0.00636574074074074
+            ],
+            "modulus": 257,
+            "ring": [
+              0.009874131944444444,
+              0.014214409722222222,
+              0.014105902777777778
+            ]
+          }
+        ],
+        "score": 2.0355976128300037
+      },
+      "role": "rotate_bilinear",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16383,
+      "truth_sha256": "e439b5f2d3b2fc45695fa9b6900f900a971a67a43ae92078ecf4c032567d11ef"
+    },
+    {
+      "input_sha256": "41a7fde512a4a3bfead3bcdcbd3f33e832135f6858375466bcdcb7c9e8af75f1",
+      "key": 1017,
+      "preselected": false,
+      "proposal": {
+        "box": [
+          688,
+          656,
+          784,
+          752
+        ],
+        "grid": [
+          16,
+          16
+        ],
+        "parity_fit": [
+          [
+            0.02102420086838852,
+            0.025628405094270335
+          ],
+          [
+            0.07600798484829896,
+            0.03962626525056301
+          ]
+        ],
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 7168,
+          "false_positive_pixels": 1,
+          "flagged_area_fraction": 0.0029296875,
+          "intersection": 9215,
+          "iou": 0.56243896484375,
+          "pixel_f1": 0.7199499980467987,
+          "pixels": 3145728,
+          "precision": 0.9998914930555556,
+          "predicted_positive_pixels": 9216,
+          "recall": 0.5624732954892266,
+          "reference_positive_pixels": 16383
+        },
+        "promotion": [
+          {
+            "core": [
+              0.006172839506172839,
+              0.00636574074074074,
+              0.007137345679012345
+            ],
+            "modulus": 256,
+            "ring": [
+              0.021375868055555556,
+              0.0244140625,
+              0.030490451388888888
+            ]
+          },
+          {
+            "core": [
+              0.006751543209876543,
+              0.006172839506172839,
+              0.006944444444444444
+            ],
+            "modulus": 257,
+            "ring": [
+              0.009874131944444444,
+              0.013888888888888888,
+              0.013671875
+            ]
+          }
+        ],
+        "score": 2.086843400015094
+      },
+      "role": "rotate_bicubic",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16383,
+      "truth_sha256": "e439b5f2d3b2fc45695fa9b6900f900a971a67a43ae92078ecf4c032567d11ef"
+    },
+    {
+      "input_sha256": "4c743ce58585fb05fe4ac8adeb069afed8c8f7642cca71cf60bbc49067351124",
+      "key": 1017,
+      "preselected": true,
+      "proposal": {
+        "box": [
+          688,
+          656,
+          816,
+          752
+        ],
+        "grid": [
+          16,
+          16
+        ],
+        "parity_fit": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0006106515011541358,
+            0.0001965565025863203
+          ]
+        ],
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 4096,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.00390625,
+          "intersection": 12288,
+          "iou": 0.75,
+          "pixel_f1": 0.8571428571428571,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 12288,
+          "recall": 0.75,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": [
+          {
+            "core": [
+              0.1953792735042735,
+              0.18683226495726496,
+              0.2438568376068376
+            ],
+            "modulus": 256,
+            "ring": [
+              0.033854166666666664,
+              0.058314732142857144,
+              0.04724702380952381
+            ]
+          },
+          {
+            "core": [
+              0.22769764957264957,
+              0.19911858974358973,
+              0.21581196581196582
+            ],
+            "modulus": 257,
+            "ring": [
+              0.023995535714285716,
+              0.04213169642857143,
+              0.04827008928571429
+            ]
+          }
+        ],
+        "score": 2.7032623342769475
+      },
+      "role": "generated_sharp",
+      "rotated_pattern": {
+        "angle": 6.0,
+        "peak": 0.0,
+        "selected": false,
+        "zero": 0.0
+      },
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "f00328bf7dca43a8895c775e5a5fdd9026381c4dfe62218f24198a887153019d"
+    },
+    {
+      "input_sha256": "44e9ecbcd20f79544a5200ab7761d2bcee6faa4a886f451307f526a8c88c355b",
+      "key": 1017,
+      "preselected": false,
+      "proposal": {
+        "box": [
+          688,
+          656,
+          816,
+          752
+        ],
+        "grid": [
+          16,
+          16
+        ],
+        "parity_fit": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0006106515011541358,
+            0.0001965565025863203
+          ]
+        ],
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 4092,
+          "false_positive_pixels": 1,
+          "flagged_area_fraction": 0.00390625,
+          "intersection": 12287,
+          "iou": 0.7501221001221001,
+          "pixel_f1": 0.8572225904349949,
+          "pixels": 3145728,
+          "precision": 0.9999186197916666,
+          "predicted_positive_pixels": 12288,
+          "recall": 0.7501678979180658,
+          "reference_positive_pixels": 16379
+        },
+        "promotion": [
+          {
+            "core": [
+              0.1953792735042735,
+              0.18683226495726496,
+              0.2438568376068376
+            ],
+            "modulus": 256,
+            "ring": [
+              0.033389136904761904,
+              0.05580357142857143,
+              0.04092261904761905
+            ]
+          },
+          {
+            "core": [
+              0.22769764957264957,
+              0.19911858974358973,
+              0.21581196581196582
+            ],
+            "modulus": 257,
+            "ring": [
+              0.017950148809523808,
+              0.03273809523809524,
+              0.041759672619047616
+            ]
+          }
+        ],
+        "score": 2.4134931091073346
+      },
+      "role": "generated_feathered",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16379,
+      "truth_sha256": "e2e72da535aefa6b7b22c5f5422d86e77376a5617a392c5717660a4f70a954f4"
+    },
+    {
+      "input_sha256": "77b885d383720e466363794169070bd2f2d055b11cab9d58643159a2fcc1c987",
+      "key": 1017,
+      "preselected": true,
+      "proposal": {
+        "box": [
+          688,
+          624,
+          816,
+          752
+        ],
+        "grid": [
+          16,
+          16
+        ],
+        "parity_fit": [
+          [
+            3.2988073430662013e-06,
+            0.0
+          ],
+          [
+            0.0,
+            0.010132703364017948
+          ]
+        ],
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": [
+          {
+            "core": [
+              0.13526257396449703,
+              0.12897559171597633,
+              0.14774408284023668
+            ],
+            "modulus": 256,
+            "ring": [
+              0.039306640625,
+              0.047770182291666664,
+              0.044352213541666664
+            ]
+          },
+          {
+            "core": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "modulus": 257,
+            "ring": [
+              0.008951822916666666,
+              0.012858072916666666,
+              0.013102213541666666
+            ]
+          }
+        ],
+        "score": 3.0111896921043355
+      },
+      "role": "generated_linear_promote",
+      "rotated_pattern": {
+        "angle": -3.0,
+        "peak": 0.00554748687189989,
+        "selected": false,
+        "zero": 0.0
+      },
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "f00328bf7dca43a8895c775e5a5fdd9026381c4dfe62218f24198a887153019d"
+    },
+    {
+      "input_sha256": "73326a878e50ff28c1a5e8293c5aa8c9f75cea0340e01d713cca558d005f8d5e",
+      "key": 1744,
+      "preselected": false,
+      "proposal": {
+        "box": null,
+        "grid": [
+          0,
+          0
+        ],
+        "parity_fit": null,
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": null,
+          "reference_positive_pixels": 0
+        },
+        "promotion": null,
+        "score": 0.0
+      },
+      "role": "original",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "input_sha256": "4a02819b172c71489a6b9f406f5f499a4f2e3785e9a52ba6b5d0ed1229043f3d",
+      "key": 1744,
+      "preselected": false,
+      "proposal": null,
+      "role": "eight_bit",
+      "rotated_pattern": null,
+      "status": "unsupported_format",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "input_sha256": "7a4f5c1acf78f19d3ea19791ec8f1c1aa66c6a277b478318b61d92e7500ea3b5",
+      "key": 1744,
+      "preselected": false,
+      "proposal": null,
+      "role": "resized",
+      "rotated_pattern": null,
+      "status": "no_repeatable_stencil",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "input_sha256": "30cac6bf1cada75b0958b2f4114e9644d7cebdc29c42fcff5277d8db354f51f5",
+      "key": 1744,
+      "preselected": false,
+      "proposal": {
+        "box": [
+          1024,
+          912,
+          1088,
+          976
+        ],
+        "grid": [
+          0,
+          16
+        ],
+        "parity_fit": [
+          [
+            0.8387844343532492,
+            0.8951681497627593
+          ],
+          [
+            0.8660719368820422,
+            0.9143152070552444
+          ]
+        ],
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 12288,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0013020833333333333,
+          "intersection": 4096,
+          "iou": 0.25,
+          "pixel_f1": 0.4,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 4096,
+          "recall": 0.25,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": [
+          {
+            "core": [
+              0.00875,
+              0.0075,
+              0.00875
+            ],
+            "modulus": 256,
+            "ring": [
+              0.008626302083333334,
+              0.006998697916666667,
+              0.007486979166666667
+            ]
+          },
+          {
+            "core": [
+              0.00875,
+              0.01,
+              0.009375
+            ],
+            "modulus": 257,
+            "ring": [
+              0.007486979166666667,
+              0.007161458333333333,
+              0.007161458333333333
+            ]
+          }
+        ],
+        "score": 0.4196049826854277
+      },
+      "role": "blur",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "537675e734c489a776d5fd6ea6bba4584fcaf7c7ee30391fb010fa9bef19f063"
+    },
+    {
+      "input_sha256": "78872a99537c74cd18a151619f4318141e3491069438eaa944e58030768537f7",
+      "key": 1744,
+      "preselected": false,
+      "proposal": {
+        "box": null,
+        "grid": [
+          0,
+          0
+        ],
+        "parity_fit": null,
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 16384,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 0.0,
+          "pixel_f1": 0.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": 0.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": null,
+        "score": 0.0
+      },
+      "role": "tone",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "537675e734c489a776d5fd6ea6bba4584fcaf7c7ee30391fb010fa9bef19f063"
+    },
+    {
+      "input_sha256": "fe7e2b73b70fd4dbbc1cf4a50f93033c351d2b928567b9ff21334188c963b558",
+      "key": 1744,
+      "preselected": false,
+      "proposal": {
+        "box": null,
+        "grid": [
+          0,
+          0
+        ],
+        "parity_fit": null,
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 16384,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 0.0,
+          "pixel_f1": 0.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": 0.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": null,
+        "score": 0.0
+      },
+      "role": "copy_even",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "537675e734c489a776d5fd6ea6bba4584fcaf7c7ee30391fb010fa9bef19f063"
+    },
+    {
+      "input_sha256": "ae68e84872806db84e5e5b2c7fc3611598f76db195f31e6def573c6fae0fb720",
+      "key": 1744,
+      "preselected": false,
+      "proposal": {
+        "box": [
+          976,
+          848,
+          1104,
+          976
+        ],
+        "grid": [
+          16,
+          16
+        ],
+        "parity_fit": [
+          [
+            0.7220243358048335,
+            0.8773945394154783
+          ],
+          [
+            0.9103258637387519,
+            0.7600616993904842
+          ]
+        ],
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": [
+          {
+            "core": [
+              0.006194526627218935,
+              0.005362426035502958,
+              0.005547337278106509
+            ],
+            "modulus": 256,
+            "ring": [
+              0.014973958333333334,
+              0.013916015625,
+              0.01220703125
+            ]
+          },
+          {
+            "core": [
+              0.006009615384615385,
+              0.005732248520710059,
+              0.0052699704142011835
+            ],
+            "modulus": 257,
+            "ring": [
+              0.014485677083333334,
+              0.010660807291666666,
+              0.010904947916666666
+            ]
+          }
+        ],
+        "score": 2.924721137377011
+      },
+      "role": "diagonal_shift",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "537675e734c489a776d5fd6ea6bba4584fcaf7c7ee30391fb010fa9bef19f063"
+    },
+    {
+      "input_sha256": "7272b2aea29481e6be9da08db4123f6ea6703942a6058c7e6d9e4dfea2cc14cc",
+      "key": 1744,
+      "preselected": false,
+      "proposal": {
+        "box": [
+          960,
+          848,
+          1088,
+          976
+        ],
+        "grid": [
+          0,
+          16
+        ],
+        "parity_fit": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            8.647307562226203e-07,
+            0.0
+          ]
+        ],
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 2048,
+          "false_positive_pixels": 2048,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 14336,
+          "iou": 0.7777777777777778,
+          "pixel_f1": 0.875,
+          "pixels": 3145728,
+          "precision": 0.875,
+          "predicted_positive_pixels": 16384,
+          "recall": 0.875,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": [
+          {
+            "core": [
+              0.6441383136094675,
+              0.4031989644970414,
+              0.4238165680473373
+            ],
+            "modulus": 256,
+            "ring": [
+              0.15079752604166666,
+              0.10725911458333333,
+              0.12972005208333334
+            ]
+          },
+          {
+            "core": [
+              0.9617233727810651,
+              0.9616309171597633,
+              0.9617233727810651
+            ],
+            "modulus": 257,
+            "ring": [
+              0.17000325520833334,
+              0.17122395833333334,
+              0.169921875
+            ]
+          }
+        ],
+        "score": 1.6105767908220392
+      },
+      "role": "quantized_shift",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "537675e734c489a776d5fd6ea6bba4584fcaf7c7ee30391fb010fa9bef19f063"
+    },
+    {
+      "input_sha256": "cc37553ed57825d94deaaf04725343520996fabbe775de92939d83e75f111603",
+      "key": 1744,
+      "preselected": false,
+      "proposal": {
+        "box": [
+          976,
+          848,
+          1104,
+          976
+        ],
+        "grid": [
+          16,
+          16
+        ],
+        "parity_fit": [
+          [
+            0.025798742609628,
+            0.032927957955311116
+          ],
+          [
+            0.02575997790351059,
+            0.030996193605978606
+          ]
+        ],
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 1,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16383,
+          "iou": 0.99993896484375,
+          "pixel_f1": 0.999969481490524,
+          "pixels": 3145728,
+          "precision": 0.99993896484375,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16383
+        },
+        "promotion": [
+          {
+            "core": [
+              0.006009615384615385,
+              0.005639792899408284,
+              0.006194526627218935
+            ],
+            "modulus": 256,
+            "ring": [
+              0.014973958333333334,
+              0.013916015625,
+              0.01220703125
+            ]
+          },
+          {
+            "core": [
+              0.006009615384615385,
+              0.005547337278106509,
+              0.00610207100591716
+            ],
+            "modulus": 257,
+            "ring": [
+              0.014485677083333334,
+              0.010660807291666666,
+              0.010904947916666666
+            ]
+          }
+        ],
+        "score": 2.383857915519976
+      },
+      "role": "rotate_bilinear",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16383,
+      "truth_sha256": "133e34b46df180c338dc2c72538d733cd801c5d28b0d03b7039b2ae2c3b3982b"
+    },
+    {
+      "input_sha256": "2c49bcb2a4802adff3cbc9aab11174f18fe72788db7166399ff841100602ebbc",
+      "key": 1744,
+      "preselected": true,
+      "proposal": {
+        "box": [
+          976,
+          848,
+          1104,
+          976
+        ],
+        "grid": [
+          16,
+          16
+        ],
+        "parity_fit": [
+          [
+            0.007738614106936659,
+            0.009322669002184036
+          ],
+          [
+            0.008053750993343156,
+            0.011474983023636698
+          ]
+        ],
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 1,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16383,
+          "iou": 0.99993896484375,
+          "pixel_f1": 0.999969481490524,
+          "pixels": 3145728,
+          "precision": 0.99993896484375,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16383
+        },
+        "promotion": [
+          {
+            "core": [
+              0.005917159763313609,
+              0.0064718934911242604,
+              0.005917159763313609
+            ],
+            "modulus": 256,
+            "ring": [
+              0.014973958333333334,
+              0.013916015625,
+              0.01220703125
+            ]
+          },
+          {
+            "core": [
+              0.006656804733727811,
+              0.005917159763313609,
+              0.005639792899408284
+            ],
+            "modulus": 257,
+            "ring": [
+              0.014485677083333334,
+              0.010660807291666666,
+              0.010904947916666666
+            ]
+          }
+        ],
+        "score": 2.7442157048406575
+      },
+      "role": "rotate_bicubic",
+      "rotated_pattern": {
+        "angle": -2.75,
+        "peak": 0.4281392457145981,
+        "selected": true,
+        "zero": 0.07962109230598621
+      },
+      "status": "assessed",
+      "truth_pixels": 16383,
+      "truth_sha256": "133e34b46df180c338dc2c72538d733cd801c5d28b0d03b7039b2ae2c3b3982b"
+    },
+    {
+      "input_sha256": "f588fc9f00059394f3945980c0a224c2d37d7b31f6299955aa76896c9d4db126",
+      "key": 1744,
+      "preselected": true,
+      "proposal": {
+        "box": [
+          976,
+          848,
+          1104,
+          976
+        ],
+        "grid": [
+          16,
+          16
+        ],
+        "parity_fit": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0009368272669287858,
+            0.00013089948639588567
+          ]
+        ],
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": [
+          {
+            "core": [
+              0.10539940828402367,
+              0.07387204142011834,
+              0.1227810650887574
+            ],
+            "modulus": 256,
+            "ring": [
+              0.014973958333333334,
+              0.013916015625,
+              0.01220703125
+            ]
+          },
+          {
+            "core": [
+              0.1666974852071006,
+              0.09763313609467456,
+              0.1301775147928994
+            ],
+            "modulus": 257,
+            "ring": [
+              0.014485677083333334,
+              0.010660807291666666,
+              0.010904947916666666
+            ]
+          }
+        ],
+        "score": 3.0924882414285384
+      },
+      "role": "generated_sharp",
+      "rotated_pattern": {
+        "angle": 6.0,
+        "peak": 0.0,
+        "selected": false,
+        "zero": 0.0
+      },
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "537675e734c489a776d5fd6ea6bba4584fcaf7c7ee30391fb010fa9bef19f063"
+    },
+    {
+      "input_sha256": "65a11876260997b1dbc8a258025b9f1a357d5f0c1cde37d756e31c1c1cd3947d",
+      "key": 1744,
+      "preselected": true,
+      "proposal": {
+        "box": [
+          976,
+          848,
+          1104,
+          976
+        ],
+        "grid": [
+          16,
+          16
+        ],
+        "parity_fit": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0009368272669287858,
+            0.00013089948639588567
+          ]
+        ],
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": [
+          {
+            "core": [
+              0.10539940828402367,
+              0.07387204142011834,
+              0.1227810650887574
+            ],
+            "modulus": 256,
+            "ring": [
+              0.014973958333333334,
+              0.013916015625,
+              0.01220703125
+            ]
+          },
+          {
+            "core": [
+              0.1666974852071006,
+              0.09763313609467456,
+              0.1301775147928994
+            ],
+            "modulus": 257,
+            "ring": [
+              0.014485677083333334,
+              0.010660807291666666,
+              0.010904947916666666
+            ]
+          }
+        ],
+        "score": 2.9464425553311653
+      },
+      "role": "generated_feathered",
+      "rotated_pattern": {
+        "angle": 6.0,
+        "peak": 0.0,
+        "selected": false,
+        "zero": 0.0
+      },
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "537675e734c489a776d5fd6ea6bba4584fcaf7c7ee30391fb010fa9bef19f063"
+    },
+    {
+      "input_sha256": "04c665e49f051359ec3f85eaa93f64ba79449656bbceaa37ed73366061da568e",
+      "key": 1744,
+      "preselected": true,
+      "proposal": {
+        "box": [
+          976,
+          848,
+          1104,
+          976
+        ],
+        "grid": [
+          16,
+          16
+        ],
+        "parity_fit": [
+          [
+            0.0003514917916584981,
+            0.0005392632595405678
+          ],
+          [
+            0.0019849081376163147,
+            0.0007547554223448216
+          ]
+        ],
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": [
+          {
+            "core": [
+              0.10502958579881656,
+              0.07387204142011834,
+              0.12213387573964497
+            ],
+            "modulus": 256,
+            "ring": [
+              0.014973958333333334,
+              0.013916015625,
+              0.01220703125
+            ]
+          },
+          {
+            "core": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "modulus": 257,
+            "ring": [
+              0.014485677083333334,
+              0.010660807291666666,
+              0.010904947916666666
+            ]
+          }
+        ],
+        "score": 3.0895612269767314
+      },
+      "role": "generated_linear_promote",
+      "rotated_pattern": {
+        "angle": 6.0,
+        "peak": 0.0,
+        "selected": false,
+        "zero": 0.0
+      },
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "537675e734c489a776d5fd6ea6bba4584fcaf7c7ee30391fb010fa9bef19f063"
+    },
+    {
+      "input_sha256": "e1b875e1d3fce804a0ad3f3cadf5fb849e5f787ac75efd01af27bb052dd98d02",
+      "key": 1754,
+      "preselected": false,
+      "proposal": {
+        "box": null,
+        "grid": [
+          0,
+          0
+        ],
+        "parity_fit": null,
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": null,
+          "reference_positive_pixels": 0
+        },
+        "promotion": null,
+        "score": 0.0
+      },
+      "role": "original",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "input_sha256": "7d90694be1e02e2a8ef5259dab90ace4fd3a23abe96a194a41ad00a2137051c3",
+      "key": 1754,
+      "preselected": false,
+      "proposal": null,
+      "role": "eight_bit",
+      "rotated_pattern": null,
+      "status": "unsupported_format",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "input_sha256": "b2f7c3a19a1c94ab9eaaf67a8ebb4e243bc0996e0b144c96b3864a25c518bdc6",
+      "key": 1754,
+      "preselected": false,
+      "proposal": null,
+      "role": "resized",
+      "rotated_pattern": null,
+      "status": "no_repeatable_stencil",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "input_sha256": "14dd50f6b010cb26ed8843ec947349894ff61ad6fa2b98ef1b80c2ff10c90b89",
+      "key": 1754,
+      "preselected": false,
+      "proposal": {
+        "box": [
+          1264,
+          1056,
+          1392,
+          1120
+        ],
+        "grid": [
+          16,
+          0
+        ],
+        "parity_fit": [
+          [
+            0.06615613123699027,
+            0.03077496705646887
+          ],
+          [
+            0.267847633129488,
+            0.08635305355266587
+          ]
+        ],
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 10240,
+          "false_positive_pixels": 2048,
+          "flagged_area_fraction": 0.0026041666666666665,
+          "intersection": 6144,
+          "iou": 0.3333333333333333,
+          "pixel_f1": 0.5,
+          "pixels": 3145728,
+          "precision": 0.75,
+          "predicted_positive_pixels": 8192,
+          "recall": 0.375,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": [
+          {
+            "core": [
+              0.007451923076923077,
+              0.01514423076923077,
+              0.013942307692307693
+            ],
+            "modulus": 256,
+            "ring": [
+              0.026692708333333332,
+              0.05946180555555555,
+              0.08463541666666667
+            ]
+          },
+          {
+            "core": [
+              0.00625,
+              0.014182692307692308,
+              0.014182692307692308
+            ],
+            "modulus": 257,
+            "ring": [
+              0.022786458333333332,
+              0.05685763888888889,
+              0.08485243055555555
+            ]
+          }
+        ],
+        "score": 1.9749256324460709
+      },
+      "role": "blur",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "db064a2fefe33cc6c96b82363231c86ff8b22d3d486fcae5cd905137af4d5d54"
+    },
+    {
+      "input_sha256": "5bbdd373f2d963e29c807b46d59a5f0e843d3baf0a7a695ae6af9607ac876189",
+      "key": 1754,
+      "preselected": false,
+      "proposal": {
+        "box": null,
+        "grid": [
+          0,
+          0
+        ],
+        "parity_fit": null,
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 16384,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 0.0,
+          "pixel_f1": 0.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": 0.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": null,
+        "score": 0.0
+      },
+      "role": "tone",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "db064a2fefe33cc6c96b82363231c86ff8b22d3d486fcae5cd905137af4d5d54"
+    },
+    {
+      "input_sha256": "fc528eaa573e93444c43ff52b57654d305f4a58a16863c68dc8d88ac33c0987c",
+      "key": 1754,
+      "preselected": false,
+      "proposal": {
+        "box": null,
+        "grid": [
+          0,
+          0
+        ],
+        "parity_fit": null,
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 16384,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 0.0,
+          "pixel_f1": 0.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": 0.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": null,
+        "score": 0.0
+      },
+      "role": "copy_even",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "db064a2fefe33cc6c96b82363231c86ff8b22d3d486fcae5cd905137af4d5d54"
+    },
+    {
+      "input_sha256": "50d93dff61189cdf09e7be33e4468f905b28468717370a71a0ef8c1262b1c392",
+      "key": 1754,
+      "preselected": false,
+      "proposal": {
+        "box": [
+          1264,
+          1056,
+          1392,
+          1120
+        ],
+        "grid": [
+          16,
+          0
+        ],
+        "parity_fit": [
+          [
+            0.41781438685090244,
+            0.5006363297220424
+          ],
+          [
+            0.7072082778717514,
+            0.6140737473036306
+          ]
+        ],
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 10240,
+          "false_positive_pixels": 2048,
+          "flagged_area_fraction": 0.0026041666666666665,
+          "intersection": 6144,
+          "iou": 0.3333333333333333,
+          "pixel_f1": 0.5,
+          "pixels": 3145728,
+          "precision": 0.75,
+          "predicted_positive_pixels": 8192,
+          "recall": 0.375,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": [
+          {
+            "core": [
+              0.009134615384615385,
+              0.01658653846153846,
+              0.015384615384615385
+            ],
+            "modulus": 256,
+            "ring": [
+              0.030924479166666668,
+              0.06608072916666667,
+              0.10828993055555555
+            ]
+          },
+          {
+            "core": [
+              0.007692307692307693,
+              0.010817307692307692,
+              0.015625
+            ],
+            "modulus": 257,
+            "ring": [
+              0.0263671875,
+              0.06315104166666667,
+              0.10883246527777778
+            ]
+          }
+        ],
+        "score": 2.296224354662752
+      },
+      "role": "diagonal_shift",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "db064a2fefe33cc6c96b82363231c86ff8b22d3d486fcae5cd905137af4d5d54"
+    },
+    {
+      "input_sha256": "4797f49a80f8a142b81f6b9438df6fe0cf53c0a589edef76cb94edb7e7416890",
+      "key": 1754,
+      "preselected": false,
+      "proposal": {
+        "box": [
+          1264,
+          1056,
+          1392,
+          1120
+        ],
+        "grid": [
+          16,
+          0
+        ],
+        "parity_fit": [
+          [
+            0.16509737783220046,
+            0.0023261347630830764
+          ],
+          [
+            0.09823849089353254,
+            0.010620175451067526
+          ]
+        ],
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 10236,
+          "false_positive_pixels": 2049,
+          "flagged_area_fraction": 0.0026041666666666665,
+          "intersection": 6143,
+          "iou": 0.3333514217495116,
+          "pixel_f1": 0.5000203491921371,
+          "pixels": 3145728,
+          "precision": 0.7498779296875,
+          "predicted_positive_pixels": 8192,
+          "recall": 0.3750534220648391,
+          "reference_positive_pixels": 16379
+        },
+        "promotion": [
+          {
+            "core": [
+              0.047596153846153844,
+              0.05216346153846154,
+              0.12163461538461538
+            ],
+            "modulus": 256,
+            "ring": [
+              0.14442274305555555,
+              0.1929253472222222,
+              0.2993706597222222
+            ]
+          },
+          {
+            "core": [
+              0.903125,
+              0.9091346153846154,
+              0.9105769230769231
+            ],
+            "modulus": 257,
+            "ring": [
+              0.3548177083333333,
+              0.3882378472222222,
+              0.4168836805555556
+            ]
+          }
+        ],
+        "score": 1.4257634973431454
+      },
+      "role": "quantized_shift",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16379,
+      "truth_sha256": "3c5c99767b56b95da51d3ad27af9e690aebc9b1b0a50f568329243a0ca45a091"
+    },
+    {
+      "input_sha256": "213fe56e67e9620b321dca6e721a9f038e1c3dd1ba946f28b924c01c35ed004e",
+      "key": 1754,
+      "preselected": false,
+      "proposal": {
+        "box": [
+          1264,
+          1056,
+          1392,
+          1120
+        ],
+        "grid": [
+          16,
+          0
+        ],
+        "parity_fit": [
+          [
+            0.01671764066755821,
+            0.004443500344462725
+          ],
+          [
+            0.0398711135723554,
+            0.03045090725937838
+          ]
+        ],
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 10239,
+          "false_positive_pixels": 2048,
+          "flagged_area_fraction": 0.0026041666666666665,
+          "intersection": 6144,
+          "iou": 0.33335141880527375,
+          "pixel_f1": 0.5000203458799594,
+          "pixels": 3145728,
+          "precision": 0.75,
+          "predicted_positive_pixels": 8192,
+          "recall": 0.3750228895806629,
+          "reference_positive_pixels": 16383
+        },
+        "promotion": [
+          {
+            "core": [
+              0.007451923076923077,
+              0.014663461538461538,
+              0.013701923076923077
+            ],
+            "modulus": 256,
+            "ring": [
+              0.026258680555555556,
+              0.05978732638888889,
+              0.09125434027777778
+            ]
+          },
+          {
+            "core": [
+              0.007451923076923077,
+              0.012980769230769231,
+              0.012740384615384615
+            ],
+            "modulus": 257,
+            "ring": [
+              0.0224609375,
+              0.056315104166666664,
+              0.09136284722222222
+            ]
+          }
+        ],
+        "score": 1.98796225193687
+      },
+      "role": "rotate_bilinear",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16383,
+      "truth_sha256": "2d24c3781af6359024bc853d815db60c78a28291d3f80786d92a9eb44b7585d2"
+    },
+    {
+      "input_sha256": "5a7d5e86d6bb23984d86c29d9dd365991563611d5b31eef1823eb2db86d97055",
+      "key": 1754,
+      "preselected": false,
+      "proposal": {
+        "box": [
+          1264,
+          1056,
+          1392,
+          1120
+        ],
+        "grid": [
+          16,
+          0
+        ],
+        "parity_fit": [
+          [
+            0.00033645818990535314,
+            0.006377722414046438
+          ],
+          [
+            0.016538382915138428,
+            0.02817859460923189
+          ]
+        ],
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 10239,
+          "false_positive_pixels": 2048,
+          "flagged_area_fraction": 0.0026041666666666665,
+          "intersection": 6144,
+          "iou": 0.33335141880527375,
+          "pixel_f1": 0.5000203458799594,
+          "pixels": 3145728,
+          "precision": 0.75,
+          "predicted_positive_pixels": 8192,
+          "recall": 0.3750228895806629,
+          "reference_positive_pixels": 16383
+        },
+        "promotion": [
+          {
+            "core": [
+              0.007211538461538462,
+              0.014423076923076924,
+              0.015865384615384615
+            ],
+            "modulus": 256,
+            "ring": [
+              0.029513888888888888,
+              0.06705729166666667,
+              0.11197916666666667
+            ]
+          },
+          {
+            "core": [
+              0.006490384615384616,
+              0.012980769230769231,
+              0.01610576923076923
+            ],
+            "modulus": 257,
+            "ring": [
+              0.026584201388888888,
+              0.06401909722222222,
+              0.111328125
+            ]
+          }
+        ],
+        "score": 2.2930075141974373
+      },
+      "role": "rotate_bicubic",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16383,
+      "truth_sha256": "2d24c3781af6359024bc853d815db60c78a28291d3f80786d92a9eb44b7585d2"
+    },
+    {
+      "input_sha256": "e9b424843649933d36faf40095c20dfe28e8a4ceb963a56031913b120cf2cf93",
+      "key": 1754,
+      "preselected": true,
+      "proposal": {
+        "box": [
+          1264,
+          1072,
+          1392,
+          1200
+        ],
+        "grid": [
+          16,
+          16
+        ],
+        "parity_fit": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0
+          ]
+        ],
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": [
+          {
+            "core": [
+              0.11917529585798817,
+              0.13165680473372782,
+              0.08015902366863906
+            ],
+            "modulus": 256,
+            "ring": [
+              0.024169921875,
+              0.061116536458333336,
+              0.08447265625
+            ]
+          },
+          {
+            "core": [
+              0.136926775147929,
+              0.1354474852071006,
+              0.14561760355029585
+            ],
+            "modulus": 257,
+            "ring": [
+              0.022298177083333332,
+              0.05810546875,
+              0.08333333333333333
+            ]
+          }
+        ],
+        "score": 3.006915684565996
+      },
+      "role": "generated_sharp",
+      "rotated_pattern": {
+        "angle": 6.0,
+        "peak": 0.0,
+        "selected": false,
+        "zero": 0.0
+      },
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "db064a2fefe33cc6c96b82363231c86ff8b22d3d486fcae5cd905137af4d5d54"
+    },
+    {
+      "input_sha256": "4cadece983bd2680703b04eb300907d14dfc5e57bda8f912fee6c37eba71bc1a",
+      "key": 1754,
+      "preselected": true,
+      "proposal": {
+        "box": [
+          1264,
+          1072,
+          1392,
+          1200
+        ],
+        "grid": [
+          16,
+          16
+        ],
+        "parity_fit": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0
+          ]
+        ],
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": [
+          {
+            "core": [
+              0.11917529585798817,
+              0.13165680473372782,
+              0.08015902366863906
+            ],
+            "modulus": 256,
+            "ring": [
+              0.024169921875,
+              0.061116536458333336,
+              0.08447265625
+            ]
+          },
+          {
+            "core": [
+              0.136926775147929,
+              0.1354474852071006,
+              0.14561760355029585
+            ],
+            "modulus": 257,
+            "ring": [
+              0.022298177083333332,
+              0.05810546875,
+              0.08333333333333333
+            ]
+          }
+        ],
+        "score": 2.9682070145555373
+      },
+      "role": "generated_feathered",
+      "rotated_pattern": {
+        "angle": 6.0,
+        "peak": 0.0,
+        "selected": false,
+        "zero": 0.0
+      },
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "db064a2fefe33cc6c96b82363231c86ff8b22d3d486fcae5cd905137af4d5d54"
+    },
+    {
+      "input_sha256": "81088f0504d1aed02937abc9d63ec2476a70eb30be76fccde816759092cd1692",
+      "key": 1754,
+      "preselected": true,
+      "proposal": {
+        "box": [
+          1248,
+          1072,
+          1408,
+          1200
+        ],
+        "grid": [
+          0,
+          16
+        ],
+        "parity_fit": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0
+          ]
+        ],
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 4096,
+          "flagged_area_fraction": 0.006510416666666667,
+          "intersection": 16384,
+          "iou": 0.8,
+          "pixel_f1": 0.8888888888888888,
+          "pixels": 3145728,
+          "precision": 0.8,
+          "predicted_positive_pixels": 20480,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": [
+          {
+            "core": [
+              0.09438631221719457,
+              0.1070418552036199,
+              0.06815610859728506
+            ],
+            "modulus": 256,
+            "ring": [
+              0.023582175925925927,
+              0.05823206018518518,
+              0.08101851851851852
+            ]
+          },
+          {
+            "core": [
+              0.9418127828054299,
+              0.9443580316742082,
+              0.9476809954751131
+            ],
+            "modulus": 257,
+            "ring": [
+              0.02155671296296296,
+              0.05418113425925926,
+              0.08000578703703703
+            ]
+          }
+        ],
+        "score": 3.2683644900211895
+      },
+      "role": "generated_linear_promote",
+      "rotated_pattern": {
+        "angle": 2.5,
+        "peak": 0.023902391389663907,
+        "selected": false,
+        "zero": 0.15856132864579647
+      },
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "db064a2fefe33cc6c96b82363231c86ff8b22d3d486fcae5cd905137af4d5d54"
+    },
+    {
+      "input_sha256": "09815ebcf7f804e05f510dedb4285827fc1ffe664e5cc989b55a20425b4152de",
+      "key": 1805,
+      "preselected": false,
+      "proposal": {
+        "box": null,
+        "grid": [
+          0,
+          0
+        ],
+        "parity_fit": null,
+        "phase": 3,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": null,
+          "reference_positive_pixels": 0
+        },
+        "promotion": null,
+        "score": 0.0
+      },
+      "role": "original",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "input_sha256": "0c3aeed0427c63967cf175e9aa4d23f62b49c6f7e29247a73c24b9a35bf74504",
+      "key": 1805,
+      "preselected": false,
+      "proposal": null,
+      "role": "eight_bit",
+      "rotated_pattern": null,
+      "status": "unsupported_format",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "input_sha256": "0179e27d7a57a50284a99fc4cde59c9a496f301db8c7ab9aba1bb739569bc7b9",
+      "key": 1805,
+      "preselected": false,
+      "proposal": null,
+      "role": "resized",
+      "rotated_pattern": null,
+      "status": "no_repeatable_stencil",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "input_sha256": "a2572c9725f9331ec3445c1fc588d55058690780ebfb2cff965a3c575742ec42",
+      "key": 1805,
+      "preselected": false,
+      "proposal": {
+        "box": null,
+        "grid": [
+          0,
+          0
+        ],
+        "parity_fit": null,
+        "phase": 3,
+        "pixels": {
+          "false_negative_pixels": 16384,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 0.0,
+          "pixel_f1": 0.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": 0.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": null,
+        "score": 0.0
+      },
+      "role": "blur",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "8932cf2c6cd21ab3c6b887886dd9872d10c9c03864141ed3f4b92e2cbdba1718"
+    },
+    {
+      "input_sha256": "3fe16e5bd658b494efb37cf16f5aa0e6217e07c8b59746c28aede26a9a8ea76e",
+      "key": 1805,
+      "preselected": false,
+      "proposal": {
+        "box": null,
+        "grid": [
+          0,
+          0
+        ],
+        "parity_fit": null,
+        "phase": 3,
+        "pixels": {
+          "false_negative_pixels": 16384,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 0.0,
+          "pixel_f1": 0.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": 0.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": null,
+        "score": 0.0
+      },
+      "role": "tone",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "8932cf2c6cd21ab3c6b887886dd9872d10c9c03864141ed3f4b92e2cbdba1718"
+    },
+    {
+      "input_sha256": "84a617a5acf41a20512ab93ee4571063c61becdf8bdf37b222f148d216f4faf2",
+      "key": 1805,
+      "preselected": false,
+      "proposal": {
+        "box": null,
+        "grid": [
+          0,
+          0
+        ],
+        "parity_fit": null,
+        "phase": 3,
+        "pixels": {
+          "false_negative_pixels": 16384,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 0.0,
+          "pixel_f1": 0.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": 0.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": null,
+        "score": 0.0
+      },
+      "role": "copy_even",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "8932cf2c6cd21ab3c6b887886dd9872d10c9c03864141ed3f4b92e2cbdba1718"
+    },
+    {
+      "input_sha256": "8918579dde8abcc4c8cd726400edd76742d4924d27df3083202bca2854addd35",
+      "key": 1805,
+      "preselected": false,
+      "proposal": {
+        "box": null,
+        "grid": [
+          0,
+          0
+        ],
+        "parity_fit": null,
+        "phase": 3,
+        "pixels": {
+          "false_negative_pixels": 16384,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 0.0,
+          "pixel_f1": 0.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": 0.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": null,
+        "score": 0.0
+      },
+      "role": "diagonal_shift",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "8932cf2c6cd21ab3c6b887886dd9872d10c9c03864141ed3f4b92e2cbdba1718"
+    },
+    {
+      "input_sha256": "ff0f90ab8a13e6048d75ffffad22c321c3aaeda1918a9a510be33ebfc7cb9759",
+      "key": 1805,
+      "preselected": false,
+      "proposal": {
+        "box": null,
+        "grid": [
+          0,
+          0
+        ],
+        "parity_fit": null,
+        "phase": 3,
+        "pixels": {
+          "false_negative_pixels": 16384,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 0.0,
+          "pixel_f1": 0.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": 0.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": null,
+        "score": 0.0
+      },
+      "role": "quantized_shift",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "8932cf2c6cd21ab3c6b887886dd9872d10c9c03864141ed3f4b92e2cbdba1718"
+    },
+    {
+      "input_sha256": "b5b4a13eb10cc5cf314e83596540b1eb34f065db0bd08c6b9ebbe17d9d3bc778",
+      "key": 1805,
+      "preselected": false,
+      "proposal": {
+        "box": null,
+        "grid": [
+          0,
+          0
+        ],
+        "parity_fit": null,
+        "phase": 3,
+        "pixels": {
+          "false_negative_pixels": 16383,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 0.0,
+          "pixel_f1": 0.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": 0.0,
+          "reference_positive_pixels": 16383
+        },
+        "promotion": null,
+        "score": 0.0
+      },
+      "role": "rotate_bilinear",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16383,
+      "truth_sha256": "2289b82e8936efe890e0dcbd7fc292e29d2b4ce7968d7061e990239425c54369"
+    },
+    {
+      "input_sha256": "d23600df100bcb39d3a783397fa48897b2f916a527020cb7ac4aaff81d81c664",
+      "key": 1805,
+      "preselected": false,
+      "proposal": {
+        "box": null,
+        "grid": [
+          0,
+          0
+        ],
+        "parity_fit": null,
+        "phase": 3,
+        "pixels": {
+          "false_negative_pixels": 16383,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 0.0,
+          "pixel_f1": 0.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": 0.0,
+          "reference_positive_pixels": 16383
+        },
+        "promotion": null,
+        "score": 0.0
+      },
+      "role": "rotate_bicubic",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16383,
+      "truth_sha256": "2289b82e8936efe890e0dcbd7fc292e29d2b4ce7968d7061e990239425c54369"
+    },
+    {
+      "input_sha256": "c54bb0aafa10aa18a6f0d25bfb8e751bb7a4d1f4a374bff878b8f25995c31682",
+      "key": 1805,
+      "preselected": false,
+      "proposal": {
+        "box": [
+          512,
+          576,
+          608,
+          672
+        ],
+        "grid": [
+          0,
+          0
+        ],
+        "parity_fit": [
+          [
+            9.218650387499139e-05,
+            0.0017124235127845555
+          ],
+          [
+            0.0,
+            0.0013435735867486365
+          ]
+        ],
+        "phase": 3,
+        "pixels": {
+          "false_negative_pixels": 7168,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0029296875,
+          "intersection": 9216,
+          "iou": 0.5625,
+          "pixel_f1": 0.72,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 9216,
+          "recall": 0.5625,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": [
+          {
+            "core": [
+              0.2957175925925926,
+              0.24054783950617284,
+              0.30613425925925924
+            ],
+            "modulus": 256,
+            "ring": [
+              0.06336805555555555,
+              0.0498046875,
+              0.06629774305555555
+            ]
+          },
+          {
+            "core": [
+              0.2962962962962963,
+              0.24074074074074073,
+              0.3072916666666667
+            ],
+            "modulus": 257,
+            "ring": [
+              0.07161458333333333,
+              0.0798611111111111,
+              0.06890190972222222
+            ]
+          }
+        ],
+        "score": 2.3440222598012084
+      },
+      "role": "generated_sharp",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "8932cf2c6cd21ab3c6b887886dd9872d10c9c03864141ed3f4b92e2cbdba1718"
+    },
+    {
+      "input_sha256": "4e75100bbf72c4a1be47ad65063755284ae62cd805a6c66a150b16c0e88a620a",
+      "key": 1805,
+      "preselected": false,
+      "proposal": {
+        "box": [
+          512,
+          576,
+          608,
+          672
+        ],
+        "grid": [
+          0,
+          0
+        ],
+        "parity_fit": [
+          [
+            9.218650387499139e-05,
+            0.0017124235127845555
+          ],
+          [
+            0.0,
+            0.0013435735867486365
+          ]
+        ],
+        "phase": 3,
+        "pixels": {
+          "false_negative_pixels": 7166,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0029296875,
+          "intersection": 9216,
+          "iou": 0.5625686729337077,
+          "pixel_f1": 0.7200562543948746,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 9216,
+          "recall": 0.5625686729337077,
+          "reference_positive_pixels": 16382
+        },
+        "promotion": [
+          {
+            "core": [
+              0.2957175925925926,
+              0.24054783950617284,
+              0.30613425925925924
+            ],
+            "modulus": 256,
+            "ring": [
+              0.03233506944444445,
+              0.021484375,
+              0.03298611111111111
+            ]
+          },
+          {
+            "core": [
+              0.2962962962962963,
+              0.24074074074074073,
+              0.3072916666666667
+            ],
+            "modulus": 257,
+            "ring": [
+              0.03624131944444445,
+              0.03146701388888889,
+              0.03526475694444445
+            ]
+          }
+        ],
+        "score": 2.3440222598012084
+      },
+      "role": "generated_feathered",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16382,
+      "truth_sha256": "c00704350279f4eca6163b627aa23e6a983e76e1abc51ad238a82937cf651afd"
+    },
+    {
+      "input_sha256": "948cb48b196f14aa77c36ecd336ba6e4cf3883c6ddccc8e1d3bf0d9bcd81bb5d",
+      "key": 1805,
+      "preselected": true,
+      "proposal": {
+        "box": [
+          480,
+          544,
+          640,
+          704
+        ],
+        "grid": [
+          0,
+          0
+        ],
+        "parity_fit": [
+          [
+            0.00018236598604992604,
+            0.018245697974854647
+          ],
+          [
+            0.0007348200873835697,
+            0.0172910841303916
+          ]
+        ],
+        "phase": 3,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 9216,
+          "flagged_area_fraction": 0.008138020833333334,
+          "intersection": 16384,
+          "iou": 0.64,
+          "pixel_f1": 0.7804878048780488,
+          "pixels": 3145728,
+          "precision": 0.64,
+          "predicted_positive_pixels": 25600,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": [
+          {
+            "core": [
+              0.09969723183391004,
+              0.08758650519031141,
+              0.1033196366782007
+            ],
+            "modulus": 256,
+            "ring": [
+              0.031966145833333334,
+              0.024348958333333334,
+              0.029361979166666666
+            ]
+          },
+          {
+            "core": [
+              0.8867322664359861,
+              0.8879217128027682,
+              0.8867322664359861
+            ],
+            "modulus": 257,
+            "ring": [
+              0.037890625,
+              0.027994791666666668,
+              0.035481770833333336
+            ]
+          }
+        ],
+        "score": 3.740814311177895
+      },
+      "role": "generated_linear_promote",
+      "rotated_pattern": {
+        "angle": -2.5,
+        "peak": 0.13895241561805666,
+        "selected": false,
+        "zero": 0.29660993305552763
+      },
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "8932cf2c6cd21ab3c6b887886dd9872d10c9c03864141ed3f4b92e2cbdba1718"
+    },
+    {
+      "input_sha256": "b2d1f599950bb1acfac76659ee41220ecb9ae5f4cb012ccb0ea2b5dc4c74d9f4",
+      "key": 1960,
+      "preselected": false,
+      "proposal": {
+        "box": null,
+        "grid": [
+          0,
+          0
+        ],
+        "parity_fit": null,
+        "phase": 3,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": null,
+          "reference_positive_pixels": 0
+        },
+        "promotion": null,
+        "score": 0.0
+      },
+      "role": "original",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "input_sha256": "5e83874b243dc5e45e5978a03dac370a0cff80eab1f06d184ab39e1ae71390a4",
+      "key": 1960,
+      "preselected": false,
+      "proposal": null,
+      "role": "eight_bit",
+      "rotated_pattern": null,
+      "status": "unsupported_format",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "input_sha256": "85b296e547bc70e603bc706c4a6ccfa6fff9a22da008855d823453333f9517b2",
+      "key": 1960,
+      "preselected": false,
+      "proposal": null,
+      "role": "resized",
+      "rotated_pattern": null,
+      "status": "no_repeatable_stencil",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "input_sha256": "f9cd2c8b1895142568bdd5b7161f135771f09c66a8bc6f17da496c0fdcd45e77",
+      "key": 1960,
+      "preselected": false,
+      "proposal": {
+        "box": [
+          768,
+          768,
+          928,
+          928
+        ],
+        "grid": [
+          0,
+          0
+        ],
+        "parity_fit": [
+          [
+            0.015268160627649907,
+            0.031312122504729256
+          ],
+          [
+            0.010197171165587493,
+            0.02017309355929653
+          ]
+        ],
+        "phase": 3,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 9216,
+          "flagged_area_fraction": 0.008138020833333334,
+          "intersection": 16384,
+          "iou": 0.64,
+          "pixel_f1": 0.7804878048780488,
+          "pixels": 3145728,
+          "precision": 0.64,
+          "predicted_positive_pixels": 25600,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": [
+          {
+            "core": [
+              0.0050821799307958476,
+              0.005136245674740484,
+              0.0052443771626297575
+            ],
+            "modulus": 256,
+            "ring": [
+              0.0052734375,
+              0.005208333333333333,
+              0.006184895833333333
+            ]
+          },
+          {
+            "core": [
+              0.007136678200692042,
+              0.0067041522491349485,
+              0.008163927335640139
+            ],
+            "modulus": 257,
+            "ring": [
+              0.028515625,
+              0.021549479166666666,
+              0.0298828125
+            ]
+          }
+        ],
+        "score": 0.8745255978050303
+      },
+      "role": "blur",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "8de9251c86e147a1815106072dab78f5ebf364f96eaf41a50b4a2765c566afff"
+    },
+    {
+      "input_sha256": "f0ab52a7539f09b09d235ea749ca988b505c0ff83e56473018bee299e08ff800",
+      "key": 1960,
+      "preselected": false,
+      "proposal": {
+        "box": null,
+        "grid": [
+          0,
+          0
+        ],
+        "parity_fit": null,
+        "phase": 3,
+        "pixels": {
+          "false_negative_pixels": 16384,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 0.0,
+          "pixel_f1": 0.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": 0.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": null,
+        "score": 0.0
+      },
+      "role": "tone",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "8de9251c86e147a1815106072dab78f5ebf364f96eaf41a50b4a2765c566afff"
+    },
+    {
+      "input_sha256": "2e06b0652648d22023e9f67cac01fb34f0fc9083f8428e1ac415d14b19c06cb8",
+      "key": 1960,
+      "preselected": false,
+      "proposal": {
+        "box": null,
+        "grid": [
+          0,
+          0
+        ],
+        "parity_fit": null,
+        "phase": 3,
+        "pixels": {
+          "false_negative_pixels": 16384,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 0.0,
+          "pixel_f1": 0.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": 0.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": null,
+        "score": 0.0
+      },
+      "role": "copy_even",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "8de9251c86e147a1815106072dab78f5ebf364f96eaf41a50b4a2765c566afff"
+    },
+    {
+      "input_sha256": "d8e24519d078c99b78f7e046ae912377e811455e24a776135341206bc4c46053",
+      "key": 1960,
+      "preselected": false,
+      "proposal": {
+        "box": [
+          784,
+          784,
+          912,
+          912
+        ],
+        "grid": [
+          16,
+          16
+        ],
+        "parity_fit": [
+          [
+            0.8941960857806187,
+            0.6911897249530667
+          ],
+          [
+            0.7447594507818807,
+            0.8988928619229553
+          ]
+        ],
+        "phase": 3,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": [
+          {
+            "core": [
+              0.005454881656804734,
+              0.005362426035502958,
+              0.005547337278106509
+            ],
+            "modulus": 256,
+            "ring": [
+              0.005615234375,
+              0.005859375,
+              0.006103515625
+            ]
+          },
+          {
+            "core": [
+              0.005547337278106509,
+              0.005362426035502958,
+              0.005454881656804734
+            ],
+            "modulus": 257,
+            "ring": [
+              0.028076171875,
+              0.02099609375,
+              0.031901041666666664
+            ]
+          }
+        ],
+        "score": 3.3941854851954805
+      },
+      "role": "diagonal_shift",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "8de9251c86e147a1815106072dab78f5ebf364f96eaf41a50b4a2765c566afff"
+    },
+    {
+      "input_sha256": "34f9023178c896a700a7947042ea004bc47f1686688036061d97473b148785fc",
+      "key": 1960,
+      "preselected": true,
+      "proposal": {
+        "box": [
+          784,
+          784,
+          912,
+          912
+        ],
+        "grid": [
+          16,
+          16
+        ],
+        "parity_fit": [
+          [
+            0.44348470302534193,
+            0.11072896528729914
+          ],
+          [
+            0.3777523633879184,
+            0.05434571828223944
+          ]
+        ],
+        "phase": 3,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": [
+          {
+            "core": null,
+            "modulus": 256,
+            "ring": [
+              0.005615234375,
+              0.005859375,
+              0.006103515625
+            ]
+          },
+          {
+            "core": null,
+            "modulus": 257,
+            "ring": [
+              0.028076171875,
+              0.02099609375,
+              0.031901041666666664
+            ]
+          }
+        ],
+        "score": 2.507710746527219
+      },
+      "role": "quantized_shift",
+      "rotated_pattern": {
+        "angle": -1.75,
+        "peak": 0.04921445046096271,
+        "selected": false,
+        "zero": 0.24135900571112193
+      },
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "8de9251c86e147a1815106072dab78f5ebf364f96eaf41a50b4a2765c566afff"
+    },
+    {
+      "input_sha256": "b98d03caa23f8bb13052e81a004f7d9944e9e7a22a0dab79e683060b309f5d1a",
+      "key": 1960,
+      "preselected": true,
+      "proposal": {
+        "box": [
+          784,
+          784,
+          912,
+          912
+        ],
+        "grid": [
+          16,
+          16
+        ],
+        "parity_fit": [
+          [
+            0.028136394474327253,
+            0.035470510198682415
+          ],
+          [
+            0.03637486383995103,
+            0.03956579836896357
+          ]
+        ],
+        "phase": 3,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 1,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16383,
+          "iou": 0.99993896484375,
+          "pixel_f1": 0.999969481490524,
+          "pixels": 3145728,
+          "precision": 0.99993896484375,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16383
+        },
+        "promotion": [
+          {
+            "core": [
+              0.005547337278106509,
+              0.005454881656804734,
+              0.005824704142011835
+            ],
+            "modulus": 256,
+            "ring": [
+              0.005615234375,
+              0.005859375,
+              0.006103515625
+            ]
+          },
+          {
+            "core": [
+              0.005454881656804734,
+              0.005917159763313609,
+              0.005639792899408284
+            ],
+            "modulus": 257,
+            "ring": [
+              0.028076171875,
+              0.02099609375,
+              0.031901041666666664
+            ]
+          }
+        ],
+        "score": 3.332512745065557
+      },
+      "role": "rotate_bilinear",
+      "rotated_pattern": {
+        "angle": 3.75,
+        "peak": 0.3813754464415286,
+        "selected": true,
+        "zero": 0.019980447480919983
+      },
+      "status": "assessed",
+      "truth_pixels": 16383,
+      "truth_sha256": "f52d5d800b57a0c708f458bd372d397228d03c3f891cbe520fb3bef7e3bac4a8"
+    },
+    {
+      "input_sha256": "881f8c02b1f8234add7315e3e4c01837d77bfe84f39051cf75db141a8b20b207",
+      "key": 1960,
+      "preselected": true,
+      "proposal": {
+        "box": [
+          784,
+          784,
+          912,
+          912
+        ],
+        "grid": [
+          16,
+          16
+        ],
+        "parity_fit": [
+          [
+            0.008563351795682905,
+            0.01245235493061847
+          ],
+          [
+            0.012463308284485164,
+            0.014107943764364528
+          ]
+        ],
+        "phase": 3,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 1,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16383,
+          "iou": 0.99993896484375,
+          "pixel_f1": 0.999969481490524,
+          "pixels": 3145728,
+          "precision": 0.99993896484375,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16383
+        },
+        "promotion": [
+          {
+            "core": [
+              0.005639792899408284,
+              0.00628698224852071,
+              0.005732248520710059
+            ],
+            "modulus": 256,
+            "ring": [
+              0.005615234375,
+              0.005859375,
+              0.006103515625
+            ]
+          },
+          {
+            "core": [
+              0.005732248520710059,
+              0.005732248520710059,
+              0.005732248520710059
+            ],
+            "modulus": 257,
+            "ring": [
+              0.028076171875,
+              0.02099609375,
+              0.031901041666666664
+            ]
+          }
+        ],
+        "score": 3.374541762216359
+      },
+      "role": "rotate_bicubic",
+      "rotated_pattern": {
+        "angle": -4.25,
+        "peak": 0.40010697252414823,
+        "selected": true,
+        "zero": 0.016118610628057018
+      },
+      "status": "assessed",
+      "truth_pixels": 16383,
+      "truth_sha256": "f52d5d800b57a0c708f458bd372d397228d03c3f891cbe520fb3bef7e3bac4a8"
+    },
+    {
+      "input_sha256": "a8288e6a5a35f102c08e8c3050e92349cae65b772e1ade34d6e13d7e582edc31",
+      "key": 1960,
+      "preselected": false,
+      "proposal": {
+        "box": [
+          784,
+          784,
+          912,
+          912
+        ],
+        "grid": [
+          16,
+          16
+        ],
+        "parity_fit": [
+          [
+            0.000370140592167445,
+            0.0005430456331627642
+          ],
+          [
+            1.0878112526535588e-05,
+            0.0033979903852288107
+          ]
+        ],
+        "phase": 3,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": [
+          {
+            "core": [
+              0.17640532544378698,
+              0.11723372781065089,
+              0.27736686390532544
+            ],
+            "modulus": 256,
+            "ring": [
+              0.005615234375,
+              0.005859375,
+              0.006103515625
+            ]
+          },
+          {
+            "core": [
+              0.17677514792899407,
+              0.1328587278106509,
+              0.28060281065088755
+            ],
+            "modulus": 257,
+            "ring": [
+              0.028076171875,
+              0.02099609375,
+              0.031901041666666664
+            ]
+          }
+        ],
+        "score": 2.411338551396872
+      },
+      "role": "generated_sharp",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "8de9251c86e147a1815106072dab78f5ebf364f96eaf41a50b4a2765c566afff"
+    },
+    {
+      "input_sha256": "7cbdeb4dbfaf63bd7d2232b67d585aee86e1125289e0e31fec7a22bea5200cd1",
+      "key": 1960,
+      "preselected": false,
+      "proposal": {
+        "box": [
+          784,
+          784,
+          912,
+          912
+        ],
+        "grid": [
+          16,
+          16
+        ],
+        "parity_fit": [
+          [
+            0.000370140592167445,
+            0.0005430456331627642
+          ],
+          [
+            1.0878112526535588e-05,
+            0.0033979903852288107
+          ]
+        ],
+        "phase": 3,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": [
+          {
+            "core": [
+              0.17640532544378698,
+              0.11723372781065089,
+              0.27736686390532544
+            ],
+            "modulus": 256,
+            "ring": [
+              0.005615234375,
+              0.005859375,
+              0.006103515625
+            ]
+          },
+          {
+            "core": [
+              0.17677514792899407,
+              0.1328587278106509,
+              0.28060281065088755
+            ],
+            "modulus": 257,
+            "ring": [
+              0.028076171875,
+              0.02099609375,
+              0.031901041666666664
+            ]
+          }
+        ],
+        "score": 2.3731834854190255
+      },
+      "role": "generated_feathered",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "8de9251c86e147a1815106072dab78f5ebf364f96eaf41a50b4a2765c566afff"
+    },
+    {
+      "input_sha256": "5d8cc9dbf4e33bdffe686a302c40942656ce874dfa2fbfa64668ae6182a1ca2b",
+      "key": 1960,
+      "preselected": false,
+      "proposal": {
+        "box": [
+          784,
+          784,
+          912,
+          912
+        ],
+        "grid": [
+          16,
+          16
+        ],
+        "parity_fit": [
+          [
+            0.0,
+            0.01955230449956935
+          ],
+          [
+            0.0012093296927622177,
+            0.02174616848925226
+          ]
+        ],
+        "phase": 3,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": [
+          {
+            "core": [
+              0.1763128698224852,
+              0.10965236686390532,
+              0.26950813609467456
+            ],
+            "modulus": 256,
+            "ring": [
+              0.005615234375,
+              0.005859375,
+              0.006103515625
+            ]
+          },
+          {
+            "core": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "modulus": 257,
+            "ring": [
+              0.028076171875,
+              0.02099609375,
+              0.031901041666666664
+            ]
+          }
+        ],
+        "score": 2.345762091195689
+      },
+      "role": "generated_linear_promote",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "8de9251c86e147a1815106072dab78f5ebf364f96eaf41a50b4a2765c566afff"
+    },
+    {
+      "input_sha256": "538794605d9fd0243ecb68075d17eac2cccd3a66fdfbe87ead8e24c71807a351",
+      "key": 2037,
+      "preselected": false,
+      "proposal": {
+        "box": null,
+        "grid": [
+          0,
+          0
+        ],
+        "parity_fit": null,
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": null,
+          "reference_positive_pixels": 0
+        },
+        "promotion": null,
+        "score": 0.0
+      },
+      "role": "original",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "input_sha256": "e846c357090b2b786d3a5ddb7fce56f002f207a39450b09c6254e4972d43be19",
+      "key": 2037,
+      "preselected": false,
+      "proposal": null,
+      "role": "eight_bit",
+      "rotated_pattern": null,
+      "status": "unsupported_format",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "input_sha256": "82c381886aa0aaeb7f77664e51a0d5c9b3d8bd437500bd9708bc0d527e594860",
+      "key": 2037,
+      "preselected": false,
+      "proposal": null,
+      "role": "resized",
+      "rotated_pattern": null,
+      "status": "no_repeatable_stencil",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "input_sha256": "5e14a050c7ab24e2af5ee49834fcff31d86539d9e5a92b8c544c1c8f48932cff",
+      "key": 2037,
+      "preselected": false,
+      "proposal": {
+        "box": [
+          1104,
+          1024,
+          1168,
+          1120
+        ],
+        "grid": [
+          16,
+          0
+        ],
+        "parity_fit": [
+          [
+            0.9186602317477275,
+            0.8996307990810757
+          ],
+          [
+            0.9140066884234777,
+            0.9008582246148449
+          ]
+        ],
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 10240,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.001953125,
+          "intersection": 6144,
+          "iou": 0.375,
+          "pixel_f1": 0.5454545454545454,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 6144,
+          "recall": 0.375,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": [
+          {
+            "core": [
+              0.007291666666666667,
+              0.00798611111111111,
+              0.007291666666666667
+            ],
+            "modulus": 256,
+            "ring": [
+              0.009635416666666667,
+              0.0078125,
+              0.008723958333333334
+            ]
+          },
+          {
+            "core": [
+              0.007291666666666667,
+              0.00798611111111111,
+              0.011458333333333333
+            ],
+            "modulus": 257,
+            "ring": [
+              0.008984375,
+              0.008072916666666667,
+              0.009375
+            ]
+          }
+        ],
+        "score": 1.6472468086164256
+      },
+      "role": "blur",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "dafc448939edab82e8380805d949ad3d1dd6779febd7945998de059b0688dc6a"
+    },
+    {
+      "input_sha256": "dc4ffad3925d5c2547566d26851db28d982f79843b3da45c2b5d9b02a83424c8",
+      "key": 2037,
+      "preselected": false,
+      "proposal": {
+        "box": null,
+        "grid": [
+          0,
+          0
+        ],
+        "parity_fit": null,
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 16384,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 0.0,
+          "pixel_f1": 0.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": 0.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": null,
+        "score": 0.0
+      },
+      "role": "tone",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "dafc448939edab82e8380805d949ad3d1dd6779febd7945998de059b0688dc6a"
+    },
+    {
+      "input_sha256": "815c9a4b846cc214d2229a71a3f32654e0b811e535800bc8f05145c13802d769",
+      "key": 2037,
+      "preselected": false,
+      "proposal": {
+        "box": null,
+        "grid": [
+          0,
+          0
+        ],
+        "parity_fit": null,
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 16384,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 0.0,
+          "pixel_f1": 0.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": 0.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": null,
+        "score": 0.0
+      },
+      "role": "copy_even",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "dafc448939edab82e8380805d949ad3d1dd6779febd7945998de059b0688dc6a"
+    },
+    {
+      "input_sha256": "aa083660266198b4ee284b4f9bc4543ed431a6f0d068b7c7c2c25d4f427edeec",
+      "key": 2037,
+      "preselected": false,
+      "proposal": {
+        "box": [
+          1104,
+          1024,
+          1168,
+          1120
+        ],
+        "grid": [
+          16,
+          0
+        ],
+        "parity_fit": [
+          [
+            0.6064630891254813,
+            0.8613532816127537
+          ],
+          [
+            0.8968941548532677,
+            0.7580660882265078
+          ]
+        ],
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 10240,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.001953125,
+          "intersection": 6144,
+          "iou": 0.375,
+          "pixel_f1": 0.5454545454545454,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 6144,
+          "recall": 0.375,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": [
+          {
+            "core": [
+              0.007291666666666667,
+              0.007638888888888889,
+              0.007638888888888889
+            ],
+            "modulus": 256,
+            "ring": [
+              0.007682291666666666,
+              0.007552083333333333,
+              0.007421875
+            ]
+          },
+          {
+            "core": [
+              0.00798611111111111,
+              0.007291666666666667,
+              0.008333333333333333
+            ],
+            "modulus": 257,
+            "ring": [
+              0.007552083333333333,
+              0.008203125,
+              0.008203125
+            ]
+          }
+        ],
+        "score": 1.9300502693149506
+      },
+      "role": "diagonal_shift",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "dafc448939edab82e8380805d949ad3d1dd6779febd7945998de059b0688dc6a"
+    },
+    {
+      "input_sha256": "53e3e1cf71fa19a37732e76452496aeebaa2d88f6ce3bca505a02c086dc012cb",
+      "key": 2037,
+      "preselected": false,
+      "proposal": {
+        "box": [
+          1104,
+          1024,
+          1168,
+          1120
+        ],
+        "grid": [
+          16,
+          0
+        ],
+        "parity_fit": [
+          [
+            0.05805966441141108,
+            0.0
+          ],
+          [
+            0.1054322708810278,
+            0.0
+          ]
+        ],
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 10240,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.001953125,
+          "intersection": 6144,
+          "iou": 0.375,
+          "pixel_f1": 0.5454545454545454,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 6144,
+          "recall": 0.375,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": [
+          {
+            "core": null,
+            "modulus": 256,
+            "ring": [
+              0.2696614583333333,
+              0.41640625,
+              0.31328125
+            ]
+          },
+          {
+            "core": null,
+            "modulus": 257,
+            "ring": [
+              0.8678385416666666,
+              0.8684895833333334,
+              0.8677083333333333
+            ]
+          }
+        ],
+        "score": 1.4273839667429746
+      },
+      "role": "quantized_shift",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "dafc448939edab82e8380805d949ad3d1dd6779febd7945998de059b0688dc6a"
+    },
+    {
+      "input_sha256": "fdceb920f6f9266f61215a1b8ed9780292f1eba6eb6b772336ab31428b376f69",
+      "key": 2037,
+      "preselected": false,
+      "proposal": {
+        "box": [
+          1104,
+          1024,
+          1168,
+          1120
+        ],
+        "grid": [
+          16,
+          0
+        ],
+        "parity_fit": [
+          [
+            0.044877037944313525,
+            0.04102436918125418
+          ],
+          [
+            0.051733425207547645,
+            0.04345945034607912
+          ]
+        ],
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 10240,
+          "false_positive_pixels": 1,
+          "flagged_area_fraction": 0.001953125,
+          "intersection": 6143,
+          "iou": 0.37493896484375,
+          "pixel_f1": 0.5453899764726773,
+          "pixels": 3145728,
+          "precision": 0.9998372395833334,
+          "predicted_positive_pixels": 6144,
+          "recall": 0.3749618506988952,
+          "reference_positive_pixels": 16383
+        },
+        "promotion": [
+          {
+            "core": [
+              0.00798611111111111,
+              0.007291666666666667,
+              0.007291666666666667
+            ],
+            "modulus": 256,
+            "ring": [
+              0.0069010416666666664,
+              0.008333333333333333,
+              0.00703125
+            ]
+          },
+          {
+            "core": [
+              0.008333333333333333,
+              0.006944444444444444,
+              0.00798611111111111
+            ],
+            "modulus": 257,
+            "ring": [
+              0.00703125,
+              0.008984375,
+              0.007682291666666666
+            ]
+          }
+        ],
+        "score": 1.9048662138977293
+      },
+      "role": "rotate_bilinear",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16383,
+      "truth_sha256": "f3f1cb17748983d00e34c0159c0b9ad112dd724e3817f59d37044245ec5c96b4"
+    },
+    {
+      "input_sha256": "a89cc1ee8354e5b5453ac922a614a4f7b0d5f472cb225680699354e7c02c7b07",
+      "key": 2037,
+      "preselected": false,
+      "proposal": {
+        "box": [
+          1088,
+          1024,
+          1184,
+          1120
+        ],
+        "grid": [
+          0,
+          0
+        ],
+        "parity_fit": [
+          [
+            0.0321781427180482,
+            0.023388968680025046
+          ],
+          [
+            0.025892620280098533,
+            0.02340611529983483
+          ]
+        ],
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 7168,
+          "false_positive_pixels": 1,
+          "flagged_area_fraction": 0.0029296875,
+          "intersection": 9215,
+          "iou": 0.56243896484375,
+          "pixel_f1": 0.7199499980467987,
+          "pixels": 3145728,
+          "precision": 0.9998914930555556,
+          "predicted_positive_pixels": 9216,
+          "recall": 0.5624732954892266,
+          "reference_positive_pixels": 16383
+        },
+        "promotion": [
+          {
+            "core": [
+              0.006751543209876543,
+              0.006944444444444444,
+              0.00636574074074074
+            ],
+            "modulus": 256,
+            "ring": [
+              0.009114583333333334,
+              0.009223090277777778,
+              0.008246527777777778
+            ]
+          },
+          {
+            "core": [
+              0.006558641975308642,
+              0.006944444444444444,
+              0.006558641975308642
+            ],
+            "modulus": 257,
+            "ring": [
+              0.008897569444444444,
+              0.009548611111111112,
+              0.0087890625
+            ]
+          }
+        ],
+        "score": 2.0871771875598335
+      },
+      "role": "rotate_bicubic",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16383,
+      "truth_sha256": "f3f1cb17748983d00e34c0159c0b9ad112dd724e3817f59d37044245ec5c96b4"
+    },
+    {
+      "input_sha256": "55c3b5eca27bcc10c3070e432277502b3769d20712067922483939a6b245096f",
+      "key": 2037,
+      "preselected": false,
+      "proposal": {
+        "box": [
+          1104,
+          1024,
+          1168,
+          1120
+        ],
+        "grid": [
+          16,
+          0
+        ],
+        "parity_fit": [
+          [
+            0.007002646528492029,
+            0.0
+          ],
+          [
+            0.0031402298077461976,
+            0.0
+          ]
+        ],
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 10240,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.001953125,
+          "intersection": 6144,
+          "iou": 0.375,
+          "pixel_f1": 0.5454545454545454,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 6144,
+          "recall": 0.375,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": [
+          {
+            "core": [
+              0.14756944444444445,
+              0.1482638888888889,
+              0.15868055555555555
+            ],
+            "modulus": 256,
+            "ring": [
+              0.069140625,
+              0.09401041666666667,
+              0.07565104166666667
+            ]
+          },
+          {
+            "core": [
+              0.1545138888888889,
+              0.15694444444444444,
+              0.13854166666666667
+            ],
+            "modulus": 257,
+            "ring": [
+              0.07838541666666667,
+              0.095703125,
+              0.085546875
+            ]
+          }
+        ],
+        "score": 1.939378625639392
+      },
+      "role": "generated_sharp",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "dafc448939edab82e8380805d949ad3d1dd6779febd7945998de059b0688dc6a"
+    },
+    {
+      "input_sha256": "c22f515e3b8af621077a7ccb3059e83393a97b78cf1d312b00232a2ff9ee3b8c",
+      "key": 2037,
+      "preselected": false,
+      "proposal": {
+        "box": [
+          1104,
+          1024,
+          1168,
+          1120
+        ],
+        "grid": [
+          16,
+          0
+        ],
+        "parity_fit": [
+          [
+            0.007002646528492029,
+            0.0
+          ],
+          [
+            0.0031402298077461976,
+            0.0
+          ]
+        ],
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 10228,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.001953125,
+          "intersection": 6144,
+          "iou": 0.37527485951624723,
+          "pixel_f1": 0.5457452478237698,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 6144,
+          "recall": 0.37527485951624723,
+          "reference_positive_pixels": 16372
+        },
+        "promotion": [
+          {
+            "core": [
+              0.14756944444444445,
+              0.1482638888888889,
+              0.15868055555555555
+            ],
+            "modulus": 256,
+            "ring": [
+              0.04309895833333333,
+              0.058203125,
+              0.05169270833333333
+            ]
+          },
+          {
+            "core": [
+              0.1545138888888889,
+              0.15694444444444444,
+              0.13854166666666667
+            ],
+            "modulus": 257,
+            "ring": [
+              0.045703125,
+              0.06575520833333333,
+              0.05651041666666667
+            ]
+          }
+        ],
+        "score": 1.9393786256393917
+      },
+      "role": "generated_feathered",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16372,
+      "truth_sha256": "4a1c289e22c10a55624ff5e3e79ddeebfb09bd861a290d0cedd9646e85c36429"
+    },
+    {
+      "input_sha256": "0bc6e1ee27503b4461675df299534f304aefeb5239eb87822ba2a6fcd93f5293",
+      "key": 2037,
+      "preselected": true,
+      "proposal": {
+        "box": [
+          1056,
+          992,
+          1216,
+          1152
+        ],
+        "grid": [
+          0,
+          0
+        ],
+        "parity_fit": [
+          [
+            0.00030419577177198676,
+            0.0006561123455925966
+          ],
+          [
+            9.836073409097423e-07,
+            0.0006314742303761278
+          ]
+        ],
+        "phase": 0,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 9216,
+          "flagged_area_fraction": 0.008138020833333334,
+          "intersection": 16384,
+          "iou": 0.64,
+          "pixel_f1": 0.7804878048780488,
+          "pixels": 3145728,
+          "precision": 0.64,
+          "predicted_positive_pixels": 25600,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": [
+          {
+            "core": [
+              0.048875432525951557,
+              0.06877162629757785,
+              0.05238970588235294
+            ],
+            "modulus": 256,
+            "ring": [
+              0.011067708333333334,
+              0.010807291666666666,
+              0.010546875
+            ]
+          },
+          {
+            "core": [
+              0.8871647923875432,
+              0.887056660899654,
+              0.8867322664359861
+            ],
+            "modulus": 257,
+            "ring": [
+              0.012109375,
+              0.011393229166666666,
+              0.0107421875
+            ]
+          }
+        ],
+        "score": 3.452921480966107
+      },
+      "role": "generated_linear_promote",
+      "rotated_pattern": {
+        "angle": -2.5,
+        "peak": 0.14151713268397514,
+        "selected": false,
+        "zero": 0.28547359690654567
+      },
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "dafc448939edab82e8380805d949ad3d1dd6779febd7945998de059b0688dc6a"
+    },
+    {
+      "input_sha256": "41af316e6229682c50de7de1b36650cd2b34665bed1d6d0f3c16ba0b5d0efb8c",
+      "key": 2346,
+      "preselected": false,
+      "proposal": {
+        "box": null,
+        "grid": [
+          0,
+          0
+        ],
+        "parity_fit": null,
+        "phase": 1,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": null,
+          "reference_positive_pixels": 0
+        },
+        "promotion": null,
+        "score": 0.0
+      },
+      "role": "original",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "input_sha256": "fab6055b48a2796a4285fb97133b736d117b66728de18569dcac264bfa7fdfc8",
+      "key": 2346,
+      "preselected": false,
+      "proposal": null,
+      "role": "eight_bit",
+      "rotated_pattern": null,
+      "status": "unsupported_format",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "input_sha256": "1e4d30cb648900b719cc9bd039e2c34219ed2b264b52412152bd3e562ff816fc",
+      "key": 2346,
+      "preselected": false,
+      "proposal": null,
+      "role": "resized",
+      "rotated_pattern": null,
+      "status": "no_repeatable_stencil",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "input_sha256": "df590877f4074fd35fc9ef5e1b6d12b22af0f6ff31c816740723c6c06db8acdb",
+      "key": 2346,
+      "preselected": false,
+      "proposal": {
+        "box": [
+          1344,
+          480,
+          1504,
+          640
+        ],
+        "grid": [
+          0,
+          0
+        ],
+        "parity_fit": [
+          [
+            0.00034486206788852947,
+            0.001484144214632277
+          ],
+          [
+            0.002268084740409404,
+            0.0028927376890616197
+          ]
+        ],
+        "phase": 1,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 9216,
+          "flagged_area_fraction": 0.008138020833333334,
+          "intersection": 16384,
+          "iou": 0.64,
+          "pixel_f1": 0.7804878048780488,
+          "pixels": 3145728,
+          "precision": 0.64,
+          "predicted_positive_pixels": 25600,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": [
+          {
+            "core": [
+              0.005298442906574394,
+              0.005136245674740484,
+              0.0052443771626297575
+            ],
+            "modulus": 256,
+            "ring": [
+              0.007356770833333333,
+              0.007682291666666666,
+              0.009765625
+            ]
+          },
+          {
+            "core": [
+              0.005730968858131488,
+              0.005352508650519031,
+              0.005406574394463667
+            ],
+            "modulus": 257,
+            "ring": [
+              0.012890625,
+              0.010221354166666667,
+              0.0107421875
+            ]
+          }
+        ],
+        "score": 0.2940285259913422
+      },
+      "role": "blur",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "5dc2d89c57a25091fd717f2ad25a0d4496f44685c2f239c37b3b15f8486a4e99"
+    },
+    {
+      "input_sha256": "a04a42a37186d4355475df6f5cd9866895bed6d9f922161030591c0cd09020d9",
+      "key": 2346,
+      "preselected": false,
+      "proposal": {
+        "box": null,
+        "grid": [
+          0,
+          0
+        ],
+        "parity_fit": null,
+        "phase": 1,
+        "pixels": {
+          "false_negative_pixels": 16384,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 0.0,
+          "pixel_f1": 0.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": 0.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": null,
+        "score": 0.0
+      },
+      "role": "tone",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "5dc2d89c57a25091fd717f2ad25a0d4496f44685c2f239c37b3b15f8486a4e99"
+    },
+    {
+      "input_sha256": "7f76d52eaa0011ed236bfad5786967ed48f97177411d922b555343f549e7e3aa",
+      "key": 2346,
+      "preselected": false,
+      "proposal": {
+        "box": null,
+        "grid": [
+          0,
+          0
+        ],
+        "parity_fit": null,
+        "phase": 1,
+        "pixels": {
+          "false_negative_pixels": 16384,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.0,
+          "intersection": 0,
+          "iou": 0.0,
+          "pixel_f1": 0.0,
+          "pixels": 3145728,
+          "precision": null,
+          "predicted_positive_pixels": 0,
+          "recall": 0.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": null,
+        "score": 0.0
+      },
+      "role": "copy_even",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "5dc2d89c57a25091fd717f2ad25a0d4496f44685c2f239c37b3b15f8486a4e99"
+    },
+    {
+      "input_sha256": "ef9f5008e35b01533e314a50aa1b0b0461f68ca8492beac846e6ab02caa8d232",
+      "key": 2346,
+      "preselected": false,
+      "proposal": {
+        "box": [
+          1360,
+          496,
+          1488,
+          624
+        ],
+        "grid": [
+          16,
+          16
+        ],
+        "parity_fit": [
+          [
+            0.7341044858595241,
+            0.8968584464653471
+          ],
+          [
+            0.7876078008434795,
+            0.9220245892523855
+          ]
+        ],
+        "phase": 1,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": [
+          {
+            "core": [
+              0.005732248520710059,
+              0.005639792899408284,
+              0.006194526627218935
+            ],
+            "modulus": 256,
+            "ring": [
+              0.008056640625,
+              0.0078125,
+              0.009195963541666666
+            ]
+          },
+          {
+            "core": [
+              0.005547337278106509,
+              0.005362426035502958,
+              0.005547337278106509
+            ],
+            "modulus": 257,
+            "ring": [
+              0.012939453125,
+              0.010416666666666666,
+              0.01171875
+            ]
+          }
+        ],
+        "score": 3.0499275858539923
+      },
+      "role": "diagonal_shift",
+      "rotated_pattern": null,
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "5dc2d89c57a25091fd717f2ad25a0d4496f44685c2f239c37b3b15f8486a4e99"
+    },
+    {
+      "input_sha256": "57d27d4cbe4df8d9fdb5c853e35cadaf38a6da723feb4294cbb745ac69f16a3f",
+      "key": 2346,
+      "preselected": true,
+      "proposal": {
+        "box": [
+          1360,
+          496,
+          1488,
+          624
+        ],
+        "grid": [
+          16,
+          16
+        ],
+        "parity_fit": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            1.1259033028787613e-05,
+            0.0
+          ]
+        ],
+        "phase": 1,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": [
+          {
+            "core": [
+              0.10928254437869822,
+              0.02727440828402367,
+              0.03790680473372781
+            ],
+            "modulus": 256,
+            "ring": [
+              0.008056640625,
+              0.0078125,
+              0.009195963541666666
+            ]
+          },
+          {
+            "core": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "modulus": 257,
+            "ring": [
+              0.012939453125,
+              0.010416666666666666,
+              0.01171875
+            ]
+          }
+        ],
+        "score": 2.5037659265768
+      },
+      "role": "quantized_shift",
+      "rotated_pattern": {
+        "angle": 2.25,
+        "peak": 0.0011914574976264584,
+        "selected": false,
+        "zero": 0.0
+      },
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "5dc2d89c57a25091fd717f2ad25a0d4496f44685c2f239c37b3b15f8486a4e99"
+    },
+    {
+      "input_sha256": "3ff849c0996b7f9f024942db7c4f251c18624b386eeb6191ce567ab766d9c971",
+      "key": 2346,
+      "preselected": true,
+      "proposal": {
+        "box": [
+          1360,
+          496,
+          1488,
+          624
+        ],
+        "grid": [
+          16,
+          16
+        ],
+        "parity_fit": [
+          [
+            0.02020120969747874,
+            0.020284493622454547
+          ],
+          [
+            0.01990504386515024,
+            0.02489635301592963
+          ]
+        ],
+        "phase": 1,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 1,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16383,
+          "iou": 0.99993896484375,
+          "pixel_f1": 0.999969481490524,
+          "pixels": 3145728,
+          "precision": 0.99993896484375,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16383
+        },
+        "promotion": [
+          {
+            "core": [
+              0.005547337278106509,
+              0.005917159763313609,
+              0.005824704142011835
+            ],
+            "modulus": 256,
+            "ring": [
+              0.008056640625,
+              0.0078125,
+              0.009195963541666666
+            ]
+          },
+          {
+            "core": [
+              0.005547337278106509,
+              0.005917159763313609,
+              0.005732248520710059
+            ],
+            "modulus": 257,
+            "ring": [
+              0.012939453125,
+              0.010416666666666666,
+              0.01171875
+            ]
+          }
+        ],
+        "score": 2.8417811913875446
+      },
+      "role": "rotate_bilinear",
+      "rotated_pattern": {
+        "angle": 4.5,
+        "peak": 0.48901653155129826,
+        "selected": true,
+        "zero": 0.04161790346284762
+      },
+      "status": "assessed",
+      "truth_pixels": 16383,
+      "truth_sha256": "eca8de5a474d4e75ff3dd85b96f2e64b1eeddb2e0a52db77fd2ff94e8815f4b2"
+    },
+    {
+      "input_sha256": "cedee52fd32b457f493b827eeaa8eb437e0842fdb96f4f968f129df176465482",
+      "key": 2346,
+      "preselected": true,
+      "proposal": {
+        "box": [
+          1360,
+          496,
+          1488,
+          624
+        ],
+        "grid": [
+          16,
+          16
+        ],
+        "parity_fit": [
+          [
+            0.0052987988301459454,
+            0.0065084636599430645
+          ],
+          [
+            0.006305196379595923,
+            0.0057502807551520485
+          ]
+        ],
+        "phase": 1,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 1,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16383,
+          "iou": 0.99993896484375,
+          "pixel_f1": 0.999969481490524,
+          "pixels": 3145728,
+          "precision": 0.99993896484375,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16383
+        },
+        "promotion": [
+          {
+            "core": [
+              0.005454881656804734,
+              0.005547337278106509,
+              0.005547337278106509
+            ],
+            "modulus": 256,
+            "ring": [
+              0.008056640625,
+              0.0078125,
+              0.009195963541666666
+            ]
+          },
+          {
+            "core": [
+              0.005454881656804734,
+              0.005454881656804734,
+              0.005732248520710059
+            ],
+            "modulus": 257,
+            "ring": [
+              0.012939453125,
+              0.010416666666666666,
+              0.01171875
+            ]
+          }
+        ],
+        "score": 3.0099407380465566
+      },
+      "role": "rotate_bicubic",
+      "rotated_pattern": {
+        "angle": -4.75,
+        "peak": 0.4296882004765452,
+        "selected": true,
+        "zero": 0.015476027757580663
+      },
+      "status": "assessed",
+      "truth_pixels": 16383,
+      "truth_sha256": "eca8de5a474d4e75ff3dd85b96f2e64b1eeddb2e0a52db77fd2ff94e8815f4b2"
+    },
+    {
+      "input_sha256": "59f85b108d3ee06f90e9ae3bad5765368567e79eacf17ad611b2d53b8313fb96",
+      "key": 2346,
+      "preselected": true,
+      "proposal": {
+        "box": [
+          1360,
+          496,
+          1488,
+          624
+        ],
+        "grid": [
+          16,
+          16
+        ],
+        "parity_fit": [
+          [
+            2.409221269916717e-05,
+            0.0013442345497818309
+          ],
+          [
+            0.0006539043520429333,
+            0.0
+          ]
+        ],
+        "phase": 1,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": [
+          {
+            "core": [
+              0.18999630177514792,
+              0.24343565088757396,
+              0.27006286982248523
+            ],
+            "modulus": 256,
+            "ring": [
+              0.008056640625,
+              0.0078125,
+              0.009195963541666666
+            ]
+          },
+          {
+            "core": [
+              0.20081360946745563,
+              0.20284763313609466,
+              0.2845784023668639
+            ],
+            "modulus": 257,
+            "ring": [
+              0.012939453125,
+              0.010416666666666666,
+              0.01171875
+            ]
+          }
+        ],
+        "score": 2.965663747505517
+      },
+      "role": "generated_sharp",
+      "rotated_pattern": {
+        "angle": 6.0,
+        "peak": 0.0,
+        "selected": false,
+        "zero": 0.0
+      },
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "5dc2d89c57a25091fd717f2ad25a0d4496f44685c2f239c37b3b15f8486a4e99"
+    },
+    {
+      "input_sha256": "67d47e233f367545e9cb5e1e650bd4e107796d30948b5e6bf8333ccb9c5fbdf4",
+      "key": 2346,
+      "preselected": true,
+      "proposal": {
+        "box": [
+          1360,
+          496,
+          1488,
+          624
+        ],
+        "grid": [
+          16,
+          16
+        ],
+        "parity_fit": [
+          [
+            2.409221269916717e-05,
+            0.0013442345497818309
+          ],
+          [
+            0.0006539043520429333,
+            0.0
+          ]
+        ],
+        "phase": 1,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": [
+          {
+            "core": [
+              0.18999630177514792,
+              0.24343565088757396,
+              0.27006286982248523
+            ],
+            "modulus": 256,
+            "ring": [
+              0.008056640625,
+              0.0078125,
+              0.009195963541666666
+            ]
+          },
+          {
+            "core": [
+              0.20081360946745563,
+              0.20284763313609466,
+              0.2845784023668639
+            ],
+            "modulus": 257,
+            "ring": [
+              0.012939453125,
+              0.010416666666666666,
+              0.01171875
+            ]
+          }
+        ],
+        "score": 2.8712431906983147
+      },
+      "role": "generated_feathered",
+      "rotated_pattern": {
+        "angle": 6.0,
+        "peak": 0.0,
+        "selected": false,
+        "zero": 0.0
+      },
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "5dc2d89c57a25091fd717f2ad25a0d4496f44685c2f239c37b3b15f8486a4e99"
+    },
+    {
+      "input_sha256": "dc37b34637f7870f50c7791b4cf2639a2a76a66a5a247d2f21890a69f2679a30",
+      "key": 2346,
+      "preselected": true,
+      "proposal": {
+        "box": [
+          1360,
+          496,
+          1488,
+          624
+        ],
+        "grid": [
+          16,
+          16
+        ],
+        "parity_fit": [
+          [
+            0.0,
+            0.011048864686493576
+          ],
+          [
+            0.0005444091757884628,
+            2.1574032485149885e-05
+          ]
+        ],
+        "phase": 1,
+        "pixels": {
+          "false_negative_pixels": 0,
+          "false_positive_pixels": 0,
+          "flagged_area_fraction": 0.005208333333333333,
+          "intersection": 16384,
+          "iou": 1.0,
+          "pixel_f1": 1.0,
+          "pixels": 3145728,
+          "precision": 1.0,
+          "predicted_positive_pixels": 16384,
+          "recall": 1.0,
+          "reference_positive_pixels": 16384
+        },
+        "promotion": [
+          {
+            "core": [
+              0.18999630177514792,
+              0.16281434911242604,
+              0.27006286982248523
+            ],
+            "modulus": 256,
+            "ring": [
+              0.008056640625,
+              0.0078125,
+              0.009195963541666666
+            ]
+          },
+          {
+            "core": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "modulus": 257,
+            "ring": [
+              0.012939453125,
+              0.010416666666666666,
+              0.01171875
+            ]
+          }
+        ],
+        "score": 2.9552467855385816
+      },
+      "role": "generated_linear_promote",
+      "rotated_pattern": {
+        "angle": 6.0,
+        "peak": 0.0,
+        "selected": false,
+        "zero": 0.0
+      },
+      "status": "assessed",
+      "truth_pixels": 16384,
+      "truth_sha256": "5dc2d89c57a25091fd717f2ad25a0d4496f44685c2f239c37b3b15f8486a4e99"
+    }
+  ]
+}

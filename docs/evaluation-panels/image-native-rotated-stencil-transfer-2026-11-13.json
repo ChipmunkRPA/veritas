@@ -1,0 +1,187 @@
+{
+  "design": {
+    "admission": "Recover at least eight useful combined sharp/feathered generation locations, preserve every preselected useful generated location including promoted outputs, eliminate at least four ordinary rotation flags with at least half of earlier rotations suppressed, keep all untouched clear and separate unsupported images.",
+    "confidence_weight": 0,
+    "generator": {
+      "guidance": 1.0,
+      "prompt": "Add a small matte purple paper hexagon in the center of the photo. Preserve the existing lighting, framing and background.",
+      "scheduler": "flow_match_euler_discrete",
+      "size": 256,
+      "source_revision": "860e87183ceb29e39627c0612ebd66d8ea66e68c",
+      "steps": 4,
+      "use_kv_cache": false
+    },
+    "prior": "Four-grid texture-supported loss with its frozen proposal, point and previous global signed-parity veto.",
+    "rotation": "Log horizontal plus vertical absolute curvature, Gaussian-detrend and clip. Compare opposite signed red and blue phase at both orthogonal Nyquist axes rotated through \u00b11.75\u20136 degrees in 0.25-degree steps. Require agreement across two horizontal spatial folds. Veto only if the strongest off-axis support is at least 0.08 and exceeds 1.35 times zero-angle support.",
+    "scope": "Eight new CC0 camera models with exact native-grid edits. All sixteenth-bit developed inputs retain native RGB samples; ordinary controls are authored at the same coordinates."
+  },
+  "exact_native_replays": 104,
+  "freeze_sha256": "a67555a9a2f0cb916850efb050fb966d2dbc9c054246c9663b6e97409b028f38",
+  "generated_sha256": [
+    "0d1ea934c84956b89b56ae679b093259baddc80b711051a3cda86fff0f335230",
+    "333a37ef4a03604031699352a7801a241570bf65ed839394a7e51d9fb2bea8ad",
+    "59ccfacfdf071dd12619bc83e84421d6567375b5af811e35df383d56147f4125",
+    "503df48d33e8a0de4c5a4375168771e4b3ea959643dabda100ff3799cfa2317f",
+    "51ff8a3e235f035bf6386dff9caaf7ad33a0a0c246fd674a180f386deb023e14",
+    "ab9f5e96063bce498ca1436077bee74b0eba067d7d505da6cc6787879010f068",
+    "b8c3bc0a384bb38f3e2cd2ee95e724e3b7b4a948ac764c80ee45e449e0431354",
+    "288c8cb65fecb4375a21c259307d802c282b71e64de6af722bd8ab0a90b19688"
+  ],
+  "grid_sha256": "7d4263db75c90d22234850e30b505a06f66573ce2825019fef9fff3fcd029592",
+  "measurements": {
+    "advancement": true,
+    "preselected_rotations": 7,
+    "roles": {
+      "blur": {
+        "assessed": 8,
+        "files": 8,
+        "new_flags": 0,
+        "new_useful": 0,
+        "no_repeatable_stencil": 0,
+        "old_flags": 0,
+        "old_useful": 0,
+        "unsupported_format": 0,
+        "withheld": 0
+      },
+      "copy_even": {
+        "assessed": 8,
+        "files": 8,
+        "new_flags": 0,
+        "new_useful": 0,
+        "no_repeatable_stencil": 0,
+        "old_flags": 0,
+        "old_useful": 0,
+        "unsupported_format": 0,
+        "withheld": 0
+      },
+      "diagonal_shift": {
+        "assessed": 8,
+        "files": 8,
+        "new_flags": 0,
+        "new_useful": 0,
+        "no_repeatable_stencil": 0,
+        "old_flags": 0,
+        "old_useful": 0,
+        "unsupported_format": 0,
+        "withheld": 0
+      },
+      "eight_bit": {
+        "assessed": 0,
+        "files": 8,
+        "new_flags": 0,
+        "new_useful": 0,
+        "no_repeatable_stencil": 0,
+        "old_flags": 0,
+        "old_useful": 0,
+        "unsupported_format": 8,
+        "withheld": 0
+      },
+      "generated_feathered": {
+        "assessed": 8,
+        "files": 8,
+        "new_flags": 4,
+        "new_useful": 4,
+        "no_repeatable_stencil": 0,
+        "old_flags": 4,
+        "old_useful": 4,
+        "unsupported_format": 0,
+        "withheld": 0
+      },
+      "generated_linear_promote": {
+        "assessed": 8,
+        "files": 8,
+        "new_flags": 7,
+        "new_useful": 7,
+        "no_repeatable_stencil": 0,
+        "old_flags": 7,
+        "old_useful": 7,
+        "unsupported_format": 0,
+        "withheld": 0
+      },
+      "generated_sharp": {
+        "assessed": 8,
+        "files": 8,
+        "new_flags": 5,
+        "new_useful": 5,
+        "no_repeatable_stencil": 0,
+        "old_flags": 5,
+        "old_useful": 5,
+        "unsupported_format": 0,
+        "withheld": 0
+      },
+      "original": {
+        "assessed": 8,
+        "files": 8,
+        "new_flags": 0,
+        "new_useful": 0,
+        "no_repeatable_stencil": 0,
+        "old_flags": 0,
+        "old_useful": 0,
+        "unsupported_format": 0,
+        "withheld": 0
+      },
+      "quantized_shift": {
+        "assessed": 8,
+        "files": 8,
+        "new_flags": 3,
+        "new_useful": 3,
+        "no_repeatable_stencil": 0,
+        "old_flags": 3,
+        "old_useful": 3,
+        "unsupported_format": 0,
+        "withheld": 0
+      },
+      "resized": {
+        "assessed": 0,
+        "files": 8,
+        "new_flags": 0,
+        "new_useful": 0,
+        "no_repeatable_stencil": 8,
+        "old_flags": 0,
+        "old_useful": 0,
+        "unsupported_format": 0,
+        "withheld": 0
+      },
+      "rotate_bicubic": {
+        "assessed": 8,
+        "files": 8,
+        "new_flags": 0,
+        "new_useful": 0,
+        "no_repeatable_stencil": 0,
+        "old_flags": 4,
+        "old_useful": 4,
+        "unsupported_format": 0,
+        "withheld": 4
+      },
+      "rotate_bilinear": {
+        "assessed": 8,
+        "files": 8,
+        "new_flags": 0,
+        "new_useful": 0,
+        "no_repeatable_stencil": 0,
+        "old_flags": 3,
+        "old_useful": 3,
+        "unsupported_format": 0,
+        "withheld": 3
+      },
+      "tone": {
+        "assessed": 8,
+        "files": 8,
+        "new_flags": 0,
+        "new_useful": 0,
+        "no_repeatable_stencil": 0,
+        "old_flags": 0,
+        "old_useful": 0,
+        "unsupported_format": 0,
+        "withheld": 0
+      }
+    },
+    "withheld_rotations": 7
+  },
+  "prior_sha256": "0b7937515e084fd2e1f91f9a4040845da05965c2e8fbaf951d020b51e9fe473e",
+  "roster_sha256": "cb30d9a7848b1a95dc72863e6c3a7889f6562c7cd70355b665c45238dbe094a1",
+  "runner_sha256": "7d051689fa8034625cce0eb86fdd0e56abd4c248af60dbc3d31b8ed97fbc6b7e",
+  "schema": "chipmunk.image-native-rotated-stencil-transfer/1",
+  "scored_sha256": "a44328635ea9d96fd9860aa1dd03a6fad8925d75e28f0dac9d0ec9b0d3d53781",
+  "source_groups": 8
+}

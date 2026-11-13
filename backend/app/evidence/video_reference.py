@@ -17,7 +17,7 @@ from PIL import Image
 from app.core.canonical import canonical_hash
 from app.detectors.audio.decode import SAMPLE_RATE, audio_stream_indices
 from app.detectors.video.decode import DecodeError, FrameTable, decode_frames, probe_frames
-from app.evidence import video_reference_local, video_reference_photometric
+from app.evidence import video_reference_local, video_reference_photometric, video_reference_trimmed
 from app.evidence.audio_reference import (
     _read_track,
     channel_timing,
@@ -36,6 +36,7 @@ SCHEMA_WITH_ADDITIONAL_SOUNDTRACK = "chipmunk.video-reference-comparison/6"
 SCHEMA_WITH_MARKED_SOUND_FALLBACK = "chipmunk.video-reference-comparison/7"
 SCHEMA_WITH_CHANNEL_TIMING = "chipmunk.video-reference-comparison/8"
 SCHEMA_WITH_TRIM = "chipmunk.video-reference-comparison/9"
+SCHEMA_WITH_TRIM_REENCODE = "chipmunk.video-reference-comparison/10"
 MAX_COMPARED_SOUNDTRACKS = 2
 MAX_BYTES = 48 * 1024 * 1024
 MAX_FRAMES = 360
@@ -178,12 +179,14 @@ def _trimmed_pairs(paths, tables, offset):
             yield first, second
 
 
-def _picture(paths, tables, assets, *, include_local, include_local_area=False, trim_offset=None):
+def _picture(paths, tables, assets, *, include_local, include_local_area=False, trim_offset=None, trim_reencoded=False):
     clock = _elapsed(tables[1])
     earlier_clock = _elapsed(tables[0]) if trim_offset is not None else None
     earlier_offset = trim_offset if trim_offset is not None else 0
     local_check = video_reference_local.eligible(paths, tables, clock) if include_local else None
-    area_check = include_local and include_local_area and video_reference_photometric.eligible(paths, tables, clock)
+    area_check = trim_reencoded or (
+        include_local and include_local_area and video_reference_photometric.eligible(paths, tables, clock)
+    )
     rects = video_reference_local.rectangles(tables[0].height, tables[0].width) if local_check or area_check else None
     measurements = []
     signals, background_errors, cells = [], [], []
@@ -210,7 +213,7 @@ def _picture(paths, tables, assets, *, include_local, include_local_area=False, 
         raise DecodeError("Video could not be decoded with every recorded picture.")
 
     sizes = [row["changed_pixels"] for row in measurements]
-    ranges = marked_ranges(np.asarray(sizes) > 0)
+    ranges = [] if trim_reencoded else marked_ranges(np.asarray(sizes) > 0)
     top = set(sorted(ranges, key=lambda pair: (-(pair[1] - pair[0]), pair[0]))[:MAX_PRESENTED_RANGES])
     output, needed = [], set()
     for number, (start, end) in enumerate(ranges, 1):
@@ -261,7 +264,7 @@ def _picture(paths, tables, assets, *, include_local, include_local_area=False, 
                 previews.setdefault(index, {})[side] = _image(assets, f"{side}-frame-{frame.index:03d}.png", frame.rgb)
                 if choice and index in crop_indices:
                     x, y, w, h = (choice["tile"][key] for key in ("x", "y", "w", "h"))
-                    crops.setdefault(frame.index, {})[side] = _image(
+                    crops.setdefault(index, {})[side] = _image(
                         assets, f"{side}-local-crop-{frame.index:03d}.png", frame.rgb[y:y+h, x:x+w], native=area_check
                     )
     if set(previews) != needed or any(len(pictures) != 2 for pictures in previews.values()):
@@ -276,12 +279,16 @@ def _picture(paths, tables, assets, *, include_local, include_local_area=False, 
     if local is not None:
         if choice:
             start, end = choice["frames"]
-            local["range"] = {"id": "L01", "start_frame": start, "end_frame_exclusive": end,
-                              "start_s": float(clock[start]), "end_s": float(clock[end]),
-                              "source_ranges": _clock_range(tables, start, end), "tile": choice["tile"],
-                              "previews": {role: {**measurements[index], "time_s": float(clock[index]),
-                                                  "assets": previews[index], "crop_assets": crops[index]}
-                                           for role, index in choice["samples"].items()}}
+            region = {"id": "L01", "start_frame": start, "end_frame_exclusive": end,
+                      "start_s": float(clock[start]), "end_s": float(clock[end]),
+                      "source_ranges": _clock_range(tables, start, end, earlier_offset), "tile": choice["tile"],
+                      "previews": {role: {**measurements[index], "time_s": float(clock[index]),
+                                          "assets": previews[index], "crop_assets": crops[index]}
+                                   for role, index in choice["samples"].items()}}
+            if earlier_clock is not None:
+                region.update(earlier_start_s=float(earlier_clock[start + earlier_offset]),
+                              earlier_end_s=float(earlier_clock[end + earlier_offset]))
+            local["range"] = region
         picture["local_comparison"] = local
     return picture
 
@@ -317,7 +324,8 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
             timing_short_fallback: bool = False, include_soundtrack: bool = True,
             timing_local_sound: bool = False,
             include_additional_soundtrack: bool = True,
-            include_channel_timing: bool = False, include_trimmed: bool = False) -> tuple[dict, dict[str, bytes]]:
+            include_channel_timing: bool = False, include_trimmed: bool = False,
+            include_trim_reencoded: bool = False) -> tuple[dict, dict[str, bytes]]:
     """Report decoded differences on matching clocks or within a verified trimmed overlap."""
     paths = earlier, submitted
     sources = tuple(_identity(path) for path in paths)
@@ -327,17 +335,36 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
     record = {"schema": SCHEMA, "status": status,
               "earlier": {**sources[0], **_reference(tables[0])}, "submitted": {**sources[1], **_reference(tables[1])},
               "interpretation": INTERPRETATION, "affects_overall_confidence": False}
-    if (include_trimmed and timing_event_s is None and status == "picture_timelines_differ"
-            and (trim := _trim_offset(paths, tables))):
-        offset, support = trim
-        overlap = len(tables[1])
-        record.update(schema=SCHEMA_WITH_TRIM, status="measured",
-                      interpretation="This comparison measures decoded picture changes in a verified shared range after trimming. "
-                                     "It covers the pictured overlap. Ordinary edits can produce these differences.",
-                      trim_alignment={"earlier_frames": [offset, offset + overlap], "submitted_frames": [0, overlap],
-                                      "unique_matching_frames": support, "audio_checked": False},
-                      picture=_picture(paths, tables, assets, include_local=False, trim_offset=offset))
-        return record, assets
+    if include_trimmed and timing_event_s is None and status == "picture_timelines_differ":
+        if trim := _trim_offset(paths, tables):
+            offset, support = trim
+            overlap = len(tables[1])
+            record.update(schema=SCHEMA_WITH_TRIM, status="measured",
+                          interpretation="This comparison measures decoded picture changes in a verified shared range after trimming. "
+                                         "It covers the pictured overlap. Ordinary edits can produce these differences.",
+                          trim_alignment={"earlier_frames": [offset, offset + overlap], "submitted_frames": [0, overlap],
+                                          "unique_matching_frames": support, "audio_checked": False},
+                          picture=_picture(paths, tables, assets, include_local=False, trim_offset=offset))
+            return record, assets
+        if include_trim_reencoded and video_reference_trimmed.eligible(paths, tables):
+            coarse = [video_reference_trimmed.read_pictures(path, table)
+                      for path, table in zip(paths, tables, strict=True)]
+            votes = video_reference_trimmed.profile(*coarse)
+            if alignment := video_reference_trimmed.decide(votes):
+                offset = alignment["earlier_start"]
+                overlap = len(tables[1])
+                picture = _picture(paths, tables, assets, include_local=False, trim_offset=offset, trim_reencoded=True)
+                picture["local_comparison"]["scope"] = video_reference_trimmed.SCOPE
+                record.update(schema=SCHEMA_WITH_TRIM_REENCODE, status="measured",
+                              interpretation=video_reference_trimmed.SCOPE,
+                              trim_alignment={"basis": video_reference_trimmed.BASIS,
+                                              "earlier_frames": [offset, offset + overlap],
+                                              "submitted_frames": [0, overlap], "audio_checked": False,
+                                              "motion_support": alignment["flanks"], "motion_margin": alignment["lead"]},
+                              picture=picture)
+                if sources != tuple(_identity(path) for path in paths):
+                    raise ValueError("One of the clips changed while the comparison was running.")
+                return record, assets
     tracks = decoded = None
     if status == "measured":
         record["picture"] = _picture(paths, tables, assets, include_local=include_local,

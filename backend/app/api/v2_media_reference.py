@@ -162,6 +162,7 @@ def _compare(aid: str, kind: str, original: tuple[str, int, str], earlier: Uploa
                     record, assets = video_reference.compare(
                         reference, submitted, include_channel_timing=True, include_trimmed=True,
                         include_local_area=settings.video_reference_local_area,
+                        include_trim_reencoded=settings.video_reference_local_area,
                     )
                 else:
                     record, assets = video_reference.compare(reference, submitted, timing_event_s=timing_event_s,

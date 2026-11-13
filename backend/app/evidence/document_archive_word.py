@@ -5,11 +5,12 @@ from __future__ import annotations
 from bisect import bisect_right
 
 from app.detectors.text.extract import _join_mapped
-from app.evidence import document_archive
+from app.evidence import document_archive, document_gao_archive
 from app.evidence.document_revision import MAX_CHARS, docx_body_paragraphs
 
 WORD_SCOPE = ("For Word files, the comparison reads top-level body paragraphs. Tables, headers, footers, text boxes, "
               "embedded content, formatting and tracked revisions are outside this comparison.")
+GAO_WORD_SCOPE = " A wording difference must fit inside one Word paragraph."
 
 
 def _native_interval(ranges, start, end):
@@ -40,7 +41,7 @@ def _location(block, excerpt):
             "changed_tokens": tokens, "runs_complete": block["runs_complete"]}
 
 
-def compare(data: bytes, upload_sha256: str) -> dict:
+def _body(data: bytes):
     parts, characters = [], 0
     for number, body_index, paragraph in docx_body_paragraphs(data):
         value = paragraph.text
@@ -58,7 +59,11 @@ def compare(data: bytes, upload_sha256: str) -> dict:
         complete = "".join(contents) == value
         parts.append((value, {"kind": "docx", "paragraph": number, "body_index": body_index,
                               "runs": runs if complete else [], "runs_complete": complete}))
-    doc = _join_mapped(parts)
+    return _join_mapped(parts)
+
+
+def compare(data: bytes, upload_sha256: str) -> dict:
+    doc = _body(data)
     result = document_archive.compare(doc, upload_sha256)
     result["scope"] += " " + WORD_SCOPE
     for row in result["aligned_paragraphs"]:
@@ -66,4 +71,35 @@ def compare(data: bytes, upload_sha256: str) -> dict:
     for change in result["changes"]:
         source = doc.source_map[change["submitted_paragraph"] - 1]
         change["submitted"]["docx_location"] = _location(source, change["submitted"])
+    return result
+
+
+def compare_gao(data: bytes, upload_sha256: str, pack_sha256: str, reports, index) -> dict:
+    doc = _body(data)
+    result = document_gao_archive.compare(doc, upload_sha256, pack_sha256, reports, index)
+    result["scope"] += " " + WORD_SCOPE + GAO_WORD_SCOPE
+    if result["status"] != "reference_bound":
+        return result
+
+    for change in result["changes"]:
+        block = doc.source_map[change["submitted_paragraph"] - 1]
+        excerpt = change["submitted"]
+        start, end = excerpt["start"], excerpt["end"]
+        if not block["start"] <= start <= end <= block["end"] or (
+            start == end and start in {block["start"], block["end"]}
+        ):
+            result.update(status="out_of_scope", reference=None, changes=[], submitted_sentence_ranges=[])
+            result["coverage"]["matched_words"] = 0
+            return result
+        excerpt["docx_location"] = _location(block, excerpt)
+
+    match_start, match_end = result["reference"]["submitted_range"]
+    for number, block in enumerate(doc.source_map, 1):
+        start, end = max(match_start, block["start"]), min(match_end, block["end"])
+        if start < end:
+            result["aligned_paragraphs"].append({
+                "submitted_paragraph": number, "submitted_range": [start, end],
+                "archive_paragraph": None, "alignment": "bounded_pair",
+                "docx_location": _location(block, {"start": start, "end": end, "changed_tokens": []}),
+            })
     return result

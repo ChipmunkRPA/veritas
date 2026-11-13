@@ -28,6 +28,13 @@ def render(comparison: dict) -> bytes:
                        f'<p>Extracted transcript SHA-256 <span class="hash">{escape(reference["transcript_sha256"])}</span></p>')
         if joined:
             source += "<p>The submitted text joins several source paragraphs. The comparison recovered their boundaries from the archive.</p>"
+        word_passages = [row["docx_location"] for row in comparison["aligned_paragraphs"] if row.get("docx_location")]
+        if word_passages:
+            source += "<h2>Matched Word paragraphs</h2><ul>" + "".join(
+                f'<li>Word body paragraph {location["paragraph"]}, characters '
+                f'[{location["paragraph_range"][0]}, {location["paragraph_range"][1]}).</li>'
+                for location in word_passages
+            ) + "</ul>"
     changes = []
     for change in comparison["changes"]:
         a = change["archive_paragraph"]

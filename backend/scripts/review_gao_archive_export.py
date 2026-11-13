@@ -1,4 +1,4 @@
-"""Verify a GAO archive comparison JSON from the submitted TXT and pinned pack."""
+"""Verify a GAO archive comparison JSON from the submitted TXT or Word file and pinned pack."""
 
 from __future__ import annotations
 
@@ -10,6 +10,7 @@ from tempfile import TemporaryDirectory
 
 from app.detectors.text.extract import extract
 from app.evidence import document_gao_archive as gao
+from app.evidence.document_archive_word import compare_gao
 from app.evidence.document_revision import MAX_BYTES
 from scripts.review_document_revision_export import _read, _unique
 
@@ -17,25 +18,29 @@ MAX_EXPORT = 256 * 1024
 
 
 def review(export: Path, submitted: Path, pack: Path, sha256: str):
-    if submitted.suffix.lower() != ".txt":
-        raise ValueError("A retained TXT original is required")
+    extension = submitted.suffix.lower()
+    if extension not in {".txt", ".docx"}:
+        raise ValueError("A retained TXT or Word original is required")
     original = _read(submitted, MAX_BYTES)
-    proof = json.loads(_read(export, MAX_EXPORT), object_pairs_hook=_unique)
+    proof = json.loads(_read(export, MAX_BYTES if extension == ".docx" else MAX_EXPORT), object_pairs_hook=_unique)
     if not isinstance(proof, dict):
         raise ValueError("Expected a GAO comparison object")
-    with TemporaryDirectory(prefix="chipmunk-gao-review-") as directory:
-        staged = Path(directory) / "retained.txt"
-        staged.write_bytes(original)
-        doc = extract(staged, ".txt")
-    if "\ufffd" in doc.text or "\x00" in doc.text:
-        raise ValueError("The file contains undecodable text")
     catalog, index = gao.library(pack, sha256)
     upload_sha256 = hashlib.sha256(original).hexdigest()
-    expected = gao.compare(doc, upload_sha256, sha256, catalog, index)
-    if (proof != expected and proof.get("status") == "no_qualified_reference"
-            and expected["status"] == "reference_bound" and not expected["changes"]):
-        # Previously, the same exact excerpt could have received an abstention.
-        expected = gao.compare(doc, upload_sha256, sha256, catalog, index, accept_exact_excerpt=False)
+    if extension == ".docx":
+        expected = compare_gao(original, upload_sha256, sha256, catalog, index)
+    else:
+        with TemporaryDirectory(prefix="chipmunk-gao-review-") as directory:
+            staged = Path(directory) / "retained.txt"
+            staged.write_bytes(original)
+            doc = extract(staged, ".txt")
+        if "\ufffd" in doc.text or "\x00" in doc.text:
+            raise ValueError("The file contains undecodable text")
+        expected = gao.compare(doc, upload_sha256, sha256, catalog, index)
+        if (proof != expected and proof.get("status") == "no_qualified_reference"
+                and expected["status"] == "reference_bound" and not expected["changes"]):
+            # Previously, the same exact excerpt could have received an abstention.
+            expected = gao.compare(doc, upload_sha256, sha256, catalog, index, accept_exact_excerpt=False)
     if proof != expected:
         raise ValueError("The GAO comparison does not replay from these source bytes and positions")
     return {"status": expected["status"], "source": (expected["reference"] or {}).get("id"),

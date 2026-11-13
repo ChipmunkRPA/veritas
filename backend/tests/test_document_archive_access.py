@@ -129,6 +129,37 @@ def test_gao_archive_local_transcript_matches_api_and_pdf(billing, monkeypatch, 
     _seed(billing, "gao-exact-excerpt", crop)
     _seed(billing, "gao-altered-excerpt-edge", "An unsourced addition. " + crop)
     _seed(billing, "gao-unmatched", "> " + changed)
+
+    def word_fixture(value, *, split_change=False, cross_paragraph=False):
+        word = WordDocument()
+        word.add_paragraph()
+        first, remaining = value.split(" The board", 1)
+        word.add_paragraph(f"  {first}")
+        word.add_table(1, 1).cell(0, 0).text = "This table is outside the source comparison."
+        paragraph = word.add_paragraph()
+        if split_change:
+            before, after = ("The board" + remaining).split("Thursday", 1)
+            paragraph.add_run(before + "Thurs")
+            if cross_paragraph:
+                paragraph = word.add_paragraph()
+            paragraph.add_run("day" + after)
+        else:
+            paragraph.add_run("The board" + remaining)
+        output = BytesIO()
+        word.save(output)
+        return output.getvalue()
+
+    word_exact = word_fixture(crop)
+    word_changed = word_fixture(crop.replace("Monday", "Thursday"), split_change=True)
+    _seed(billing, "gao-word-exact", word_exact, filename="excerpt.DOCX")
+    _seed(billing, "gao-word-changed", word_changed, filename="changed.docx")
+    _seed(billing, "gao-word-crosses", word_fixture(crop.replace("Monday", "Thursday"), split_change=True,
+                                                    cross_paragraph=True), filename="cross.docx")
+    table_word = WordDocument()
+    table_word.add_table(1, 1).cell(0, 0).text = crop
+    table_file = BytesIO()
+    table_word.save(table_file)
+    _seed(billing, "gao-word-table-only", table_file.getvalue(), filename="table.docx")
     with _install(billing, monkeypatch) as client:
         url = _url("gao-changed")
         assert client.get(url, headers=billing.headers).json() == {"available": True, "gao_available": True}
@@ -193,6 +224,49 @@ def test_gao_archive_local_transcript_matches_api_and_pdf(billing, monkeypatch, 
             review(export, submitted, pack_path, pack_sha)
         edge = client.post(_url("gao-altered-excerpt-edge"), headers=billing.headers, params=selection).json()["comparison"]
         assert edge["status"] == "no_qualified_reference" and edge["reference"] is None and edge["changes"] == []
+        word_exact_url = _url("gao-word-exact")
+        assert client.get(word_exact_url, headers=billing.headers).json() == {"available": True, "gao_available": True}
+        assert client.post(word_exact_url, headers=billing.headers).json()["comparison"]["schema"] == document_archive.SCHEMA
+        word_source = tmp_path / "original.docx"
+        for key, data in (("gao-word-exact", word_exact), ("gao-word-changed", word_changed)):
+            response = client.post(_url(key), headers=billing.headers, params={"include_pdf": True, **selection})
+            assert response.status_code == 200 and response.headers["cache-control"] == "no-store"
+            proof = response.json()["comparison"]
+            assert proof["reference"]["id"] == "GAO-16-442" and proof["authorship_confidence_contribution"] == 0
+            assert proof["submitted_sha256"] == hashlib.sha256(data).hexdigest()
+            p2, p3 = [row["docx_location"] for row in proof["aligned_paragraphs"]]
+            assert (p2["paragraph"], p2["body_index"], p2["paragraph_range"][0]) == (2, 1, 2)
+            assert (p3["paragraph"], p3["body_index"], p3["paragraph_range"][0]) == (3, 3, 0)
+            assert all(row["runs_complete"] for row in (p2, p3))
+            with pymupdf.open(stream=base64.b64decode(response.json()["pdf"]), filetype="pdf") as pdf:
+                word_pdf = " ".join(" ".join(page.get_text().split()) for page in pdf)
+                assert "Matched Word paragraphs" in word_pdf
+                assert "Word body paragraph 2, characters [2," in word_pdf
+            word_source.write_bytes(data)
+            export.write_text(json.dumps(proof))
+            assert review(export, word_source, pack_path, pack_sha)["exact_changes_verified"] == (key == "gao-word-changed")
+            if key == "gao-word-changed":
+                change, = proof["changes"]
+                location = change["submitted"]["docx_location"]
+                assert change["submitted"]["text"] == "Thursday" and change["archive"]["text"] == "Monday"
+                start, stop = location["paragraph_range"]
+                assert stop - start == len("Thursday")
+                assert location["changed_tokens"][0]["runs"] == [
+                    {"run": 1, "range": [start, start + 5]}, {"run": 2, "range": [0, 3]},
+                ]
+                assert "Word body paragraph 3" in word_pdf and "Thursday" in word_pdf
+                location["changed_tokens"][0]["runs"][0]["range"][0] += 1
+                export.write_text(json.dumps(proof))
+                with pytest.raises(ValueError, match="does not replay"):
+                    review(export, word_source, pack_path, pack_sha)
+            else:
+                assert proof["reference"]["transcript_range"] == [crop_start, crop_end] and not proof["changes"]
+        crosses = client.post(_url("gao-word-crosses"), headers=billing.headers, params=selection).json()["comparison"]
+        assert crosses["status"] == "out_of_scope" and crosses["reference"] is None
+        assert not crosses["changes"] and not crosses["aligned_paragraphs"]
+        table = client.post(_url("gao-word-table-only"), headers=billing.headers, params=selection).json()["comparison"]
+        assert table["status"] == "out_of_scope" and table["reference"] is None
+        assert table["coverage"]["body_paragraphs"] == 0 and not table["aligned_paragraphs"]
         unknown = client.post(_url("gao-unmatched"), headers=billing.headers, params=selection).json()["comparison"]
         assert unknown["status"] == "out_of_scope" and unknown["reference"] is None and unknown["changes"] == []
         monkeypatch.setattr(settings, "document_gao_archive_sha256", "0" * 64)
@@ -201,6 +275,7 @@ def test_gao_archive_local_transcript_matches_api_and_pdf(billing, monkeypatch, 
 
 def test_word_archive_change_keeps_native_paragraph_and_run_positions(billing, monkeypatch):
     monkeypatch.setattr(settings, "billing_mode", "disabled")
+    monkeypatch.setattr(settings, "document_gao_archive_path", None)
     word = WordDocument()
     word.add_paragraph()
     lead, *tail = _body().split("\n\n")

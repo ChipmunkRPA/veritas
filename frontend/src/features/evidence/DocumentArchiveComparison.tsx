@@ -38,6 +38,7 @@ function ArchiveResult({ result }: { result: ArchiveComparison }) {
   const { library, reference, coverage, changes } = comparison
   const joined = comparison.layout === 'recovered_archive_boundaries'
   const gao = comparison.schema === 'chipmunk.document-archive-comparison/2'
+  const wordPassages = comparison.aligned_paragraphs.flatMap(row => row.docx_location ? [row.docx_location] : [])
   const downloadJson = () => saveBlob(new Blob([JSON.stringify(comparison, null, 2) + '\n'], { type: 'application/json' }),
     'chipmunk-verify-archive-comparison.json')
   const downloadPdf = (body: string) => {
@@ -68,6 +69,11 @@ function ArchiveResult({ result }: { result: ArchiveComparison }) {
         Published {reference.published_date}. Matched submitted range [{reference.submitted_range.join(', ')}).
         {' '}Transcript range [{reference.transcript_range.join(', ')}).
       </p>}
+      {wordPassages.length > 0 && <ul aria-label="Matched Word paragraphs" className="mt-2 mb-0 text-caption text-text-muted">
+        {wordPassages.map(location => <li key={location.body_index}>
+          Word body paragraph {location.paragraph}, characters [{location.paragraph_range.join(', ')}).
+        </li>)}
+      </ul>}
       {joined && <p className="mt-2 mb-0 text-small text-text-muted">The submitted text joins several source paragraphs. The comparison recovered their boundaries from the archive.</p>}
       {changes.length === 0 && <p className="mt-2 mb-0 text-small">{gao ? 'No normalized wording differences in the compared passage.'
         : 'No word or punctuation differences in the compared passages.'}</p>}

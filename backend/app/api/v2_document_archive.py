@@ -74,14 +74,6 @@ class DocumentArchiveReference(BaseModel):
     transcript_range: tuple[int, int] | None = None
 
 
-class DocumentArchiveParagraph(BaseModel):
-    submitted_paragraph: int
-    submitted_range: tuple[int, int]
-    archive_paragraph: int | None
-    alignment: ArchiveAlignment
-    docx_paragraph: int | None = None
-
-
 class DocumentArchiveWordRun(BaseModel):
     run: int
     range: tuple[int, int]
@@ -99,6 +91,15 @@ class DocumentArchiveWordLocation(BaseModel):
     paragraph_range: tuple[int, int]
     changed_tokens: list[DocumentArchiveWordToken]
     runs_complete: bool
+
+
+class DocumentArchiveParagraph(BaseModel):
+    submitted_paragraph: int
+    submitted_range: tuple[int, int]
+    archive_paragraph: int | None
+    alignment: ArchiveAlignment
+    docx_paragraph: int | None = None
+    docx_location: DocumentArchiveWordLocation | None = None
 
 
 class DocumentArchiveExcerpt(BaseModel):
@@ -149,7 +150,7 @@ def _authenticated(request: Request) -> bool:
 
 
 def _gao_available(extension: str) -> bool:
-    return extension == ".txt" and settings.document_gao_archive_path is not None
+    return extension in FORMATS and settings.document_gao_archive_path is not None
 
 
 def _original(aid: str, owner: str, *, reject_inactive: bool = False) -> tuple[str, int, str, str] | None:
@@ -208,7 +209,7 @@ def compare_document_archive(aid: str, request: Request, include_pdf: bool = Fal
     if original is None:
         raise _unavailable()
     if collection == "gao" and not _gao_available(original[3]):
-        raise ProblemError(404, "GAO highlights comparison unavailable", "A completed TXT analysis and local GAO archive are required.")
+        raise ProblemError(404, "GAO highlights comparison unavailable", "A completed TXT or Word analysis and local GAO archive are required.")
     if not _slot.acquire(blocking=False):
         raise ProblemError(429, "Archive comparison busy", "Try again after the active comparison finishes.")
     try:
@@ -233,7 +234,12 @@ def _compare(aid: str, owner: str, original: tuple[str, int, str, str], include_
         raise ProblemError(409, "Original integrity check failed", "The retained document differs from its recorded hash and size.")
     try:
         if extension == ".docx":
-            comparison = document_archive_word.compare(data, sha)
+            if collection == "gao":
+                pack_sha256 = settings.document_gao_archive_sha256
+                catalog, index = document_gao_archive.library(settings.document_gao_archive_path, pack_sha256)
+                comparison = document_archive_word.compare_gao(data, sha, pack_sha256, catalog, index)
+            else:
+                comparison = document_archive_word.compare(data, sha)
         else:
             with TemporaryDirectory(prefix="chipmunk-archive-") as directory:
                 path = Path(directory) / "retained.txt"
@@ -242,8 +248,8 @@ def _compare(aid: str, owner: str, original: tuple[str, int, str, str], include_
                 if "\ufffd" in doc.text or "\x00" in doc.text:
                     raise ValueError("The file contains undecodable text.")
                 if collection == "gao":
-                    path, pack_sha256 = settings.document_gao_archive_path, settings.document_gao_archive_sha256
-                    catalog, index = document_gao_archive.library(path, pack_sha256)
+                    pack_sha256 = settings.document_gao_archive_sha256
+                    catalog, index = document_gao_archive.library(settings.document_gao_archive_path, pack_sha256)
                     comparison = document_gao_archive.compare(doc, sha, pack_sha256, catalog, index)
                 else:
                     comparison = document_archive.compare(doc, sha)

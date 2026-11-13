@@ -1,6 +1,6 @@
 # Local comparison with published GAO report highlights
 
-Chipmunk Verify can compare an authenticated user's completed TXT analysis
+Chipmunk Verify can compare an authenticated user's completed TXT or Word analysis
 with a locally installed collection of 12,228 U.S. Government Accountability
 Office report highlights. Choose **U.S. GAO report highlights** under
 **Compare with public archive** in the analysis results. The source record names the GAO publication, date and pinned
@@ -19,6 +19,21 @@ run from the first through the last verified token, including matching
 punctuation tokens. The comparison reports no normalized wording
 differences. The offline verifier also replays prior exact excerpts
 that originally received a no-reference result.
+
+For Word uploads, the matched passage also reports each top-level body
+paragraph and its native character range. Wording differences include
+original paragraph and run coordinates where the visible text maps to
+ordinary Word runs. A difference crossing a paragraph boundary causes
+the comparison to abstain. Tables, headers, footers, text boxes,
+embedded content, formatting and tracked revisions are outside the check.
+
+For local format verification, the same 72 short report clips were
+wrapped in Word. Each sentence occupied one native paragraph, with
+text split across ordinary runs. The check matched 23 of 24 unchanged
+clips to their source with no wording differences and localized 45 of
+48 provider edits. One additional case abstained because a difference
+crossed a Word paragraph boundary. These fixtures test extraction and
+position mapping using known text. Real Word layouts vary.
 
 ## Held test
 
@@ -105,7 +120,7 @@ python3 -B backend/scripts/build_gao_archive_pack.py "$pack" \
 Configure the development backend with these settings and restart.
 The first GAO comparison builds the local index. The existing diplomatic
 collection remains the default for TXT and Word. The GAO collection is
-an explicit TXT option when the pack is configured. On the development
+an explicit TXT and Word option when the pack is configured. On the development
 Mac the 41 MB pack took about 11 seconds to index, and the measured
 process footprint rose by about 320 MiB. The process reuses that index.
 
@@ -118,7 +133,7 @@ VERITAS_DOCUMENT_GAO_ARCHIVE_SHA256=671287085feaa971c501be2e2db7d50a36ca2a9adba0
 In payment modes the normal paid analysis entitlement still applies. The
 comparison starts no additional analysis or checkout and sends no submitted
 content to an outside service. Use the local verifier with the original
-TXT and the archive JSON to reconstruct the exact comparison.
+TXT or DOCX file and the archive JSON to reconstruct the exact comparison.
 
 ```sh
 PYTHONPATH=backend backend/.venv/bin/python -B -m scripts.review_gao_archive_export \

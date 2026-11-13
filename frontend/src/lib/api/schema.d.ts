@@ -3407,6 +3407,7 @@ export interface components {
             alignment: "fingerprint_anchor" | "bounded_pair" | "bounded_insert" | "bounded_delete";
             /** Archive Paragraph */
             archive_paragraph: number | null;
+            docx_location?: components["schemas"]["DocumentArchiveWordLocation"] | null;
             /** Docx Paragraph */
             docx_paragraph?: number | null;
             /** Submitted Paragraph */

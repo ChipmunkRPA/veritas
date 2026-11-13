@@ -5077,6 +5077,16 @@
             ],
             "title": "Archive Paragraph"
           },
+          "docx_location": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DocumentArchiveWordLocation"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "docx_paragraph": {
             "anyOf": [
               {

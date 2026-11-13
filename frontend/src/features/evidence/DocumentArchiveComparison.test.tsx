@@ -104,6 +104,9 @@ describe('Public archive comparison', () => {
     }
     result.comparison.changes[0].archive_paragraph = null
     result.comparison.submitted_sentence_ranges = [[6, 41]]
+    result.comparison.aligned_paragraphs[0].docx_location = {
+      paragraph: 2, body_index: 1, paragraph_range: [2, 176], changed_tokens: [], runs_complete: true,
+    }
     vi.mocked(archiveAvailability).mockResolvedValue({ gaoAvailable: true })
     vi.mocked(compareArchive).mockResolvedValue(result)
     show()
@@ -114,6 +117,7 @@ describe('Public archive comparison', () => {
     expect(await screen.findByRole('heading', { name: 'Published highlights transcript' })).toBeVisible()
     expect(screen.getByText(/Matched submitted range \[0, 180\).*Transcript range \[0, 176\)/)).toBeVisible()
     expect(screen.getByText(/Submitted sentences containing differences \[6, 41\)/)).toBeVisible()
+    expect(screen.getByRole('list', { name: 'Matched Word paragraphs' })).toHaveTextContent('Word body paragraph 2, characters [2, 176).')
     expect(screen.getByRole('link', { name: 'Source GAO-16-442' })).toHaveAttribute('href', result.comparison.reference.url)
     expect(screen.getByText('café').tagName).toBe('MARK')
     expect(compareArchive).toHaveBeenCalledWith('archive-fixture', expect.any(AbortSignal), 'gao')

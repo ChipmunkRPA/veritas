@@ -11,20 +11,31 @@ from app.detectors.image import native_cfa, native_cfa_dimensions
 from app.evidence import image_interpolation_binding as binding
 
 
-def record(source_sha256, *, body=None, skipped=False, schema=None, include_rotation=False, check=None):
+def record(source_sha256, *, body=None, skipped=False, schema=None, include_rotation=False, include_quantized=False, check=None):
     if schema is None:
         is_legacy_size = body is not None and native_cfa_dimensions.png_size(body) == binding.LEGACY_SIZE
-        schema = (binding.ROTATION_SCHEMA if include_rotation else binding.SCHEMA) if is_legacy_size else binding.EXTENDED_SCHEMA
+        if not is_legacy_size:
+            schema = binding.EXTENDED_SCHEMA
+        elif include_quantized:
+            schema = binding.QUANTIZED_SCHEMA
+        else:
+            schema = binding.ROTATION_SCHEMA if include_rotation else binding.SCHEMA
     detector = native_cfa_dimensions if schema == binding.EXTENDED_SCHEMA else native_cfa
-    rotation = None
+    extra_status, extra_region, quantized = "no_match", None, None
     try:
-        if body is not None and not skipped and schema == binding.ROTATION_SCHEMA:
-            from app.detectors.image import native_cfa_rotation
-
+        if body is not None and not skipped and schema in {binding.ROTATION_SCHEMA, binding.QUANTIZED_SCHEMA}:
             rgb = detector.decoded_rgb(body)
             measurement = detector.measure(rgb) if rgb is not None else native_cfa.InterpolationReview("unsupported_png")
             if measurement.status == "assessed" and not measurement.region:
-                rotation = native_cfa_rotation.inspect(rgb, check=check)["box"]
+                if schema == binding.QUANTIZED_SCHEMA:
+                    from app.detectors.image import native_cfa_quantized
+
+                    extra_status, extra_region, quantized = native_cfa_quantized.inspect(rgb, check=check)
+                else:
+                    from app.detectors.image import native_cfa_rotation
+
+                    extra_region = native_cfa_rotation.inspect(rgb, check=check)["box"]
+                    extra_status = "rotation" if extra_region else "no_match"
         else:
             measurement = detector.inspect_png(body) if body is not None and not skipped else None
     except (cv2.error, MemoryError):
@@ -33,22 +44,23 @@ def record(source_sha256, *, body=None, skipped=False, schema=None, include_rota
     if measurement is not None:
         status = measurement.status
         if status == "assessed":
-            status = "matched" if measurement.region else "rotation" if rotation else "no_match"
-    scope = {binding.SCHEMA: binding.SCOPE, binding.EXTENDED_SCHEMA: binding.EXTENDED_SCOPE,
-             binding.ROTATION_SCHEMA: binding.ROTATION_SCOPE}[schema]
-    region = list(measurement.region) if measurement and measurement.region else rotation
+            status = "matched" if measurement.region else extra_status
+    region = list(measurement.region) if measurement and measurement.region else extra_region
     digest = measurement.decoded_rgb_sha256 if measurement else None
-    if rotation is not None:
+    if extra_region is not None:
         digest = hashlib.sha256(memoryview(rgb)).hexdigest()
     result = {"schema": schema, "source_sha256": source_sha256, "status": status,
-              "scope": scope, "limitation": binding.LIMITATION, "observation": binding.observation(schema, status),
+              "scope": binding.SCOPES[schema], "limitation": binding.LIMITATION, "observation": binding.observation(schema, status),
               "affects_overall_confidence": False, "region": region,
               "phase": measurement.phase if measurement else None,
               "supported_cells": measurement.supported_cells if measurement else 0,
               "reference_closure": measurement.reference_closure if measurement else None,
               "decoded_rgb16_sha256": digest}
-    if schema == binding.ROTATION_SCHEMA:
-        result["basis"] = binding.ROTATION_OBSERVATION if status == "rotation" else None
+    if schema in {binding.ROTATION_SCHEMA, binding.QUANTIZED_SCHEMA}:
+        result["basis"] = binding.basis(status)
+    if schema == binding.QUANTIZED_SCHEMA:
+        result["quantized_pattern"] = (dict(zip(("code_step", "minimum_channel_fraction", "phase_contrast"), quantized, strict=True))
+                                       if quantized is not None else None)
     return result
 
 

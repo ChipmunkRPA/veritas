@@ -427,6 +427,7 @@ export function ImageEvidenceContent({ set, token, mediaReady }: { set: ImageEvi
   const copySkipped = set.copy_similarity?.status === 'skipped_trusted_ai_credentials'
   const interpolation = set.native_interpolation_review
   const region = interpolation?.record.region
+  const quantizedPattern = interpolation?.record.quantized_pattern
   const interpolationCells = set.source.width && set.source.height
     ? Math.floor(set.source.width / 32) * Math.floor(set.source.height / 32)
     : 0
@@ -443,6 +444,7 @@ export function ImageEvidenceContent({ set, token, mediaReady }: { set: ImageEvi
         <h3 className="m-0 text-body font-medium">Local pixel interpolation</h3>
         <p className="mt-2 mb-0 text-small">{interpolation.record.observation}</p>
         {interpolation.record.basis && <p className="mt-2 mb-0 text-small">{interpolation.record.basis}</p>}
+        {quantizedPattern && <p className="mt-2 mb-0 text-small">Stored pixel-value step {quantizedPattern.code_step}. At least {(100 * quantizedPattern.minimum_channel_fraction).toFixed(1)}% of the measured values in each color channel followed that step.</p>}
         {!!interpolation.record.supported_cells && <p className="mt-2 mb-0 text-small">{interpolation.record.supported_cells.toLocaleString('en-US')}{interpolationCells ? ` of ${interpolationCells.toLocaleString('en-US')}` : ''} native image cells supplied comparable measurements.</p>}
         {region && <p className="mt-2 mb-0 text-small">Source columns [{region[0]}, {region[2]}) and rows [{region[1]}, {region[3]}). Right and bottom edges are exclusive.</p>}
         <p className="mt-2 mb-0 text-small text-text-muted">{interpolation.record.scope} {interpolation.record.limitation}</p>

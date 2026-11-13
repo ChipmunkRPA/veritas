@@ -17,7 +17,7 @@ ROTATION_POINT = .08
 ROTATION_MARGIN = 1.35
 
 
-def inspect(rgb, *, check=None):
+def inspect(rgb, *, check=None, include_candidate=False):
     if rgb.dtype != np.uint16 or rgb.shape != SUPPORTED:
         return {"status": "unsupported", "box": None, "readout": None}
     h, w = rgb.shape[:2]
@@ -55,7 +55,7 @@ def inspect(rgb, *, check=None):
         check("native interpolation rotation")
     detail = rotated_pattern(rgb[y+6:y1-6, x+6:x1-6])
     return {"status": "local_rotation" if detail["selected"] else "no_rotation_support",
-            "box": box if detail["selected"] else None, "readout": detail}
+            "box": box if detail["selected"] or include_candidate else None, "readout": detail}
 
 
 def interpolation_fit(tile, phase):

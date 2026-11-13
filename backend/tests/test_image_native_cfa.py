@@ -144,6 +144,42 @@ def test_signed_interpolation_observation_binds_native_crop_and_coordinates(rend
         source.verify(body, review, data.__getitem__)
 
 
+def test_quantized_region_binds_measurement_and_preserves_rotation_priority(renders, monkeypatch):
+    from app.detectors.image import native_cfa_quantized, native_cfa_rotation
+
+    original, _ = renders
+    body = png(original)
+    sha = hashlib.sha256(body).hexdigest()
+    box = [496, 416, 624, 544]
+    monkeypatch.setattr(native_cfa_rotation, "inspect", lambda *a, **k: {"status": "no_rotation_support", "box": box})
+    monkeypatch.setattr(native_cfa_quantized, "measure", lambda *a: (257, 1., .08))
+    measured = source.record(sha, body=body, include_quantized=True)
+    assert measured["status"] == "quantized_resampling" and measured["schema"] == binding.QUANTIZED_SCHEMA
+    assert measured["basis"] == binding.QUANTIZED_OBSERVATION and measured["affects_overall_confidence"] is False
+    assert measured["quantized_pattern"] == {"code_step": 257, "minimum_channel_fraction": 1., "phase_contrast": .08}
+    record = {"record": measured, "artifacts": {}}
+    assets = {}
+    for name, plate in source.plates(body, box, schema=measured["schema"]).items():
+        ok, encoded = cv2.imencode(".png", plate)
+        assert ok
+        digest = hashlib.sha256(encoded).hexdigest()
+        assets[digest] = encoded.tobytes()
+        record["artifacts"][name] = {"sha256": digest, "media_type": "image/png", "width": plate.shape[1], "height": plate.shape[0]}
+    commitment = canonical_hash(measured)
+    document = {"schema": "chipmunk.image-evidence/1", binding.KEY: record, "source": {
+        "sha256": sha, "width": 2048, "height": 1536, "exif_orientation": 1, binding.COMMITMENT: commitment}}
+    binding.validate(document, commitment)
+    assert source.verify(body, record, assets.__getitem__)
+    measured["quantized_pattern"]["code_step"] = 255
+    altered = canonical_hash(measured)
+    document["source"][binding.COMMITMENT] = altered
+    with pytest.raises(ValueError, match="Invalid lower-depth"):
+        binding.validate(document, altered)
+    monkeypatch.setattr(native_cfa_rotation, "inspect", lambda *a, **k: {"status": "local_rotation", "box": box})
+    rotation = source.record(sha, body=body, include_quantized=True)
+    assert rotation["status"] == "rotation" and rotation["quantized_pattern"] is None
+
+
 @pytest.mark.parametrize("size", [(2304, 1728), (2368, 1344), (1792, 1792)])
 def test_checked_dimensions_and_historical_profile(renders, size):
     from app.detectors.image import native_cfa_dimensions

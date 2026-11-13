@@ -1,0 +1,1474 @@
+{
+  "base_sha256": "fbd89c8efe888bd764fb064e27e4dbdbc4e90a3ea014df65d94de8b78c1739b8",
+  "counts": {
+    "bicubic_diagonal": {
+      "no_match": 13
+    },
+    "bilinear_diagonal": {
+      "no_match": 12,
+      "rotation": 1
+    },
+    "blur": {
+      "no_match": 13
+    },
+    "generated_feathered": {
+      "no_match": 13
+    },
+    "generated_sharp": {
+      "no_match": 13
+    },
+    "local_tone": {
+      "no_match": 13
+    },
+    "quantized_bilinear": {
+      "no_match": 4,
+      "quantized_resampling": 9
+    },
+    "rotated": {
+      "no_match": 2,
+      "rotation": 11
+    },
+    "untouched": {
+      "no_match": 13
+    }
+  },
+  "native_replay": true,
+  "rows": [
+    {
+      "box": null,
+      "input_sha256": "b3e7899235350fdfcae3ebffab67ce0c58b32e7cef89fca8f345509f9e68c2c8",
+      "intersection": 0,
+      "key": 909,
+      "reading": null,
+      "role": "untouched",
+      "status": "no_match",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "box": null,
+      "input_sha256": "80d3640b74b559f43dae22b9d03530c96a7fbf2b79bc98a0f91c4682c2d620c3",
+      "intersection": 0,
+      "key": 909,
+      "reading": null,
+      "role": "bilinear_diagonal",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "077545fe74d40b62c861c5204004a34adc6be545b6d52bca0932b846e80ba262"
+    },
+    {
+      "box": null,
+      "input_sha256": "0773c71872434858dab2f3d5f5dcbc0c6cc63ec2a236b5215e0216effce7295b",
+      "intersection": 0,
+      "key": 909,
+      "reading": null,
+      "role": "bicubic_diagonal",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "077545fe74d40b62c861c5204004a34adc6be545b6d52bca0932b846e80ba262"
+    },
+    {
+      "box": [
+        352,
+        320,
+        480,
+        448
+      ],
+      "input_sha256": "59648a1acd13c592c067cad6647f599bbd791b1d0e2e12ab25f2455c97a46d95",
+      "intersection": 16383,
+      "key": 909,
+      "reading": null,
+      "role": "rotated",
+      "status": "rotation",
+      "truth_pixels": 16383,
+      "truth_sha256": "aace20d47c224723d8d82f8c40c7e84d85bb810a0d60f83c979e444c33557d19"
+    },
+    {
+      "box": null,
+      "input_sha256": "11f0a6f2f3c18344353b8a9dbd8ac179b6f96551834bfacca8d346feb0849df8",
+      "intersection": 0,
+      "key": 909,
+      "reading": null,
+      "role": "blur",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "077545fe74d40b62c861c5204004a34adc6be545b6d52bca0932b846e80ba262"
+    },
+    {
+      "box": [
+        352,
+        320,
+        480,
+        448
+      ],
+      "input_sha256": "8d00d3c9f5b8de787d51f38c72dc310fc54a790d6bc013258e764b45523a3725",
+      "intersection": 16384,
+      "key": 909,
+      "reading": [
+        257,
+        1.0,
+        0.269736491610438
+      ],
+      "role": "quantized_bilinear",
+      "status": "quantized_resampling",
+      "truth_pixels": 16384,
+      "truth_sha256": "077545fe74d40b62c861c5204004a34adc6be545b6d52bca0932b846e80ba262"
+    },
+    {
+      "box": null,
+      "input_sha256": "1ee006acc500d0545d46950f105aa682d9919dbd6ba7eef628e704284caa2314",
+      "intersection": 0,
+      "key": 909,
+      "reading": null,
+      "role": "local_tone",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "077545fe74d40b62c861c5204004a34adc6be545b6d52bca0932b846e80ba262"
+    },
+    {
+      "box": null,
+      "input_sha256": "3e5dca6e6835eb108ba7c5922aab8d5b49cfb0d6af4f2f994d8375004828b355",
+      "intersection": 0,
+      "key": 909,
+      "reading": null,
+      "role": "generated_sharp",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "077545fe74d40b62c861c5204004a34adc6be545b6d52bca0932b846e80ba262"
+    },
+    {
+      "box": null,
+      "input_sha256": "710a8314e74fdfbe336404e0b3f5fa234585d5ef26dc1ced0134598ca3d69e39",
+      "intersection": 0,
+      "key": 909,
+      "reading": null,
+      "role": "generated_feathered",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "077545fe74d40b62c861c5204004a34adc6be545b6d52bca0932b846e80ba262"
+    },
+    {
+      "box": null,
+      "input_sha256": "e6eb50161c87fcf3ccffd215ac76415b1ae2148144cdede6bdfcf37ece66489f",
+      "intersection": 0,
+      "key": 934,
+      "reading": null,
+      "role": "untouched",
+      "status": "no_match",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "box": null,
+      "input_sha256": "5aec8fdf877074f8c536fd581d8e2b0932fc9b2d27c1ecf63e22c1d73c8569fe",
+      "intersection": 0,
+      "key": 934,
+      "reading": null,
+      "role": "bilinear_diagonal",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "91e9e76a2733560df78d92d2e5f1013ae7367eb1ab6342ed2773098eec66ee1d"
+    },
+    {
+      "box": null,
+      "input_sha256": "80ae6bd473b3bdacd4bb13ef1706bc7832ce2cdd73b2a8feeaf636657a7ecac1",
+      "intersection": 0,
+      "key": 934,
+      "reading": null,
+      "role": "bicubic_diagonal",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "91e9e76a2733560df78d92d2e5f1013ae7367eb1ab6342ed2773098eec66ee1d"
+    },
+    {
+      "box": [
+        720,
+        752,
+        848,
+        880
+      ],
+      "input_sha256": "d9f5ba04bef46482f4739ba64c36dbbc2a11ff68bf234dcad1203ec3a80653fc",
+      "intersection": 16383,
+      "key": 934,
+      "reading": null,
+      "role": "rotated",
+      "status": "rotation",
+      "truth_pixels": 16383,
+      "truth_sha256": "3172d2553ef202473e997bcb365e01502f86f26e751bd87caa2ae0d603dcc6d4"
+    },
+    {
+      "box": null,
+      "input_sha256": "312634bbe2559c0906d0b611c474642d077e47a185a6289e35fa238994b3018b",
+      "intersection": 0,
+      "key": 934,
+      "reading": null,
+      "role": "blur",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "91e9e76a2733560df78d92d2e5f1013ae7367eb1ab6342ed2773098eec66ee1d"
+    },
+    {
+      "box": [
+        720,
+        752,
+        848,
+        880
+      ],
+      "input_sha256": "5bae6cb3b073f30178ff741d750c88bc29d38d5679589e948efa7c931dd0566f",
+      "intersection": 16384,
+      "key": 934,
+      "reading": [
+        257,
+        1.0,
+        0.13572308528186838
+      ],
+      "role": "quantized_bilinear",
+      "status": "quantized_resampling",
+      "truth_pixels": 16384,
+      "truth_sha256": "91e9e76a2733560df78d92d2e5f1013ae7367eb1ab6342ed2773098eec66ee1d"
+    },
+    {
+      "box": null,
+      "input_sha256": "f125702c07a156b5d1391fe4c6b0f960d27fbc1178d7d3aa7e2b6500725c2758",
+      "intersection": 0,
+      "key": 934,
+      "reading": null,
+      "role": "local_tone",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "91e9e76a2733560df78d92d2e5f1013ae7367eb1ab6342ed2773098eec66ee1d"
+    },
+    {
+      "box": null,
+      "input_sha256": "d1dc82462fa6ca4682cf64e3af782ec46eea8229d2c47813f45bec6d196ce231",
+      "intersection": 0,
+      "key": 934,
+      "reading": null,
+      "role": "generated_sharp",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "91e9e76a2733560df78d92d2e5f1013ae7367eb1ab6342ed2773098eec66ee1d"
+    },
+    {
+      "box": null,
+      "input_sha256": "9941fec2148176b761dff9f30fac294d20abfef28ffebb841b6b8b4b8c9bae5d",
+      "intersection": 0,
+      "key": 934,
+      "reading": null,
+      "role": "generated_feathered",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "91e9e76a2733560df78d92d2e5f1013ae7367eb1ab6342ed2773098eec66ee1d"
+    },
+    {
+      "box": null,
+      "input_sha256": "845ca44b8ab5a1163a1d9a9ff1cddfbe3e1f71ac6572c80431395530f873caa8",
+      "intersection": 0,
+      "key": 1030,
+      "reading": null,
+      "role": "untouched",
+      "status": "no_match",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "box": null,
+      "input_sha256": "9a5f8b2f43cec0f9b694bcea9ee1acd731f8a3d9b1e9f64e8fc82f8bd1f42e1f",
+      "intersection": 0,
+      "key": 1030,
+      "reading": null,
+      "role": "bilinear_diagonal",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "4b9ea07b54c4caae8153c0cc89161e2d50ec3d8ecf72baa7b09405063d3d44b1"
+    },
+    {
+      "box": null,
+      "input_sha256": "030ed28a397c42ab0088c47835db4665d55458fc56e65b4fba572080f9d7d55a",
+      "intersection": 0,
+      "key": 1030,
+      "reading": null,
+      "role": "bicubic_diagonal",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "4b9ea07b54c4caae8153c0cc89161e2d50ec3d8ecf72baa7b09405063d3d44b1"
+    },
+    {
+      "box": [
+        1056,
+        1152,
+        1184,
+        1280
+      ],
+      "input_sha256": "42d28130ac75e4bac07550dfb826a349b4e6731425c406ffaa2d27617876a798",
+      "intersection": 16383,
+      "key": 1030,
+      "reading": null,
+      "role": "rotated",
+      "status": "rotation",
+      "truth_pixels": 16383,
+      "truth_sha256": "5b9c0f0179029faf189b30fb50375e6af8618eabc6b52886cc8bfa0df8551929"
+    },
+    {
+      "box": null,
+      "input_sha256": "b2c345940f6d555eef551952532dd08b6aaae18960d06a127091c08c8e30ee74",
+      "intersection": 0,
+      "key": 1030,
+      "reading": null,
+      "role": "blur",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "4b9ea07b54c4caae8153c0cc89161e2d50ec3d8ecf72baa7b09405063d3d44b1"
+    },
+    {
+      "box": [
+        1056,
+        1152,
+        1184,
+        1280
+      ],
+      "input_sha256": "ee280f9f91395a9ce029f56ce5313efd5b129c469c02565aff9ad6c1bc9cbb36",
+      "intersection": 16384,
+      "key": 1030,
+      "reading": [
+        257,
+        1.0,
+        0.061339337428917895
+      ],
+      "role": "quantized_bilinear",
+      "status": "quantized_resampling",
+      "truth_pixels": 16384,
+      "truth_sha256": "4b9ea07b54c4caae8153c0cc89161e2d50ec3d8ecf72baa7b09405063d3d44b1"
+    },
+    {
+      "box": null,
+      "input_sha256": "5e002d48fe3fef0cfa4442d8f75ff724acaeb30d50ef649fc1da04a0af40689f",
+      "intersection": 0,
+      "key": 1030,
+      "reading": null,
+      "role": "local_tone",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "4b9ea07b54c4caae8153c0cc89161e2d50ec3d8ecf72baa7b09405063d3d44b1"
+    },
+    {
+      "box": null,
+      "input_sha256": "1b938ea2ee956ac8a90e91fb6919580166981dd928957b1e3ab270130cb57f69",
+      "intersection": 0,
+      "key": 1030,
+      "reading": null,
+      "role": "generated_sharp",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "4b9ea07b54c4caae8153c0cc89161e2d50ec3d8ecf72baa7b09405063d3d44b1"
+    },
+    {
+      "box": null,
+      "input_sha256": "0beee592b8f68eb2aedc6e5b968c0e8eb3521085d9b1791e69a33fa96011648f",
+      "intersection": 0,
+      "key": 1030,
+      "reading": null,
+      "role": "generated_feathered",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "4b9ea07b54c4caae8153c0cc89161e2d50ec3d8ecf72baa7b09405063d3d44b1"
+    },
+    {
+      "box": null,
+      "input_sha256": "4e51c1f364f9274c3e390a67dc447f13881bccee148210c722750d0f16b29f81",
+      "intersection": 0,
+      "key": 1080,
+      "reading": null,
+      "role": "untouched",
+      "status": "no_match",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "box": [
+        1408,
+        688,
+        1568,
+        816
+      ],
+      "input_sha256": "9b3323c4066c454d2e50c7afeefe4fa7ea7ec3a7dde8741a7f85f836b8edebfc",
+      "intersection": 16384,
+      "key": 1080,
+      "reading": null,
+      "role": "bilinear_diagonal",
+      "status": "rotation",
+      "truth_pixels": 16384,
+      "truth_sha256": "658f1042ffa431b42d29ec581af30b3155d8b17705aa791225d67d123fbeaeca"
+    },
+    {
+      "box": null,
+      "input_sha256": "cd02f9c35e3b198902b1e5e9213aa91b274370c90bc1c2786a0be197f87d55d7",
+      "intersection": 0,
+      "key": 1080,
+      "reading": null,
+      "role": "bicubic_diagonal",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "658f1042ffa431b42d29ec581af30b3155d8b17705aa791225d67d123fbeaeca"
+    },
+    {
+      "box": [
+        1408,
+        688,
+        1568,
+        816
+      ],
+      "input_sha256": "a7dc8e1edb2e58febc6d7aef292b40995e17725326dbddc013547d494b72ad43",
+      "intersection": 16383,
+      "key": 1080,
+      "reading": null,
+      "role": "rotated",
+      "status": "rotation",
+      "truth_pixels": 16383,
+      "truth_sha256": "653f6417bc8b281f4d3c7f2b301900c6bc4d9bdf45004761c800fcb711a654fe"
+    },
+    {
+      "box": null,
+      "input_sha256": "fdb1623e1840cdaf531484dd1f63bb618667087a934447fc69bf1a3971b0ae7d",
+      "intersection": 0,
+      "key": 1080,
+      "reading": null,
+      "role": "blur",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "658f1042ffa431b42d29ec581af30b3155d8b17705aa791225d67d123fbeaeca"
+    },
+    {
+      "box": null,
+      "input_sha256": "0f2f59560e80865acac5b7832627cf1849016b98da7a4b5e56259ac833d7d3cf",
+      "intersection": 0,
+      "key": 1080,
+      "reading": null,
+      "role": "quantized_bilinear",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "658f1042ffa431b42d29ec581af30b3155d8b17705aa791225d67d123fbeaeca"
+    },
+    {
+      "box": null,
+      "input_sha256": "3129ad6b7e87de7c381a11d91b78266855e84629d45c9e29408ec96728460dab",
+      "intersection": 0,
+      "key": 1080,
+      "reading": null,
+      "role": "local_tone",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "658f1042ffa431b42d29ec581af30b3155d8b17705aa791225d67d123fbeaeca"
+    },
+    {
+      "box": null,
+      "input_sha256": "2c8cc6420cea55784c96007dbdf03a493a9d28cb54eaac95b900cdf2dc3b1a1d",
+      "intersection": 0,
+      "key": 1080,
+      "reading": null,
+      "role": "generated_sharp",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "658f1042ffa431b42d29ec581af30b3155d8b17705aa791225d67d123fbeaeca"
+    },
+    {
+      "box": null,
+      "input_sha256": "3e4d6b1d30fa092ebd2e78041b2df31a9d1263ef884561a71245a5d61667ac44",
+      "intersection": 0,
+      "key": 1080,
+      "reading": null,
+      "role": "generated_feathered",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "658f1042ffa431b42d29ec581af30b3155d8b17705aa791225d67d123fbeaeca"
+    },
+    {
+      "box": null,
+      "input_sha256": "483c077eefc1a6f8c188f6db22b42d0fe90c8a4744bc73f8ddae90ea9db5f695",
+      "intersection": 0,
+      "key": 1173,
+      "reading": null,
+      "role": "untouched",
+      "status": "no_match",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "box": null,
+      "input_sha256": "ae0588c8e9fa939199c40abb41cb1c18ad7d5f103f6baa98a7e2c85545a6c931",
+      "intersection": 0,
+      "key": 1173,
+      "reading": null,
+      "role": "bilinear_diagonal",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "730ea08d5ac8c1ba304bfa70f3a70aa5626ff1f8e03d0a0ee113fa318f936543"
+    },
+    {
+      "box": null,
+      "input_sha256": "0df42728e6c4fe5be6494c00a994a2fe661d30776c0225feeebf86533dfdac78",
+      "intersection": 0,
+      "key": 1173,
+      "reading": null,
+      "role": "bicubic_diagonal",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "730ea08d5ac8c1ba304bfa70f3a70aa5626ff1f8e03d0a0ee113fa318f936543"
+    },
+    {
+      "box": [
+        640,
+        1088,
+        768,
+        1216
+      ],
+      "input_sha256": "1fa1c42f936687a3e1e680c7c7fbc622dc103dd860e6bcb05ebfdd3586dceed6",
+      "intersection": 16383,
+      "key": 1173,
+      "reading": null,
+      "role": "rotated",
+      "status": "rotation",
+      "truth_pixels": 16383,
+      "truth_sha256": "789447db5b2534962b7627b645da369c656fb95858a4046cce6b8293d08bd992"
+    },
+    {
+      "box": null,
+      "input_sha256": "0f1f356e093e0bb5f08da54b971e4c5f0ae9f0ff7c247504b7b17991817b44c2",
+      "intersection": 0,
+      "key": 1173,
+      "reading": null,
+      "role": "blur",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "730ea08d5ac8c1ba304bfa70f3a70aa5626ff1f8e03d0a0ee113fa318f936543"
+    },
+    {
+      "box": [
+        640,
+        1088,
+        768,
+        1216
+      ],
+      "input_sha256": "b1b077d452ee7c5ce599bf52b51e93f7cf73761ba71024a55ee72413cdb9f715",
+      "intersection": 16384,
+      "key": 1173,
+      "reading": [
+        257,
+        1.0,
+        0.12256506208026052
+      ],
+      "role": "quantized_bilinear",
+      "status": "quantized_resampling",
+      "truth_pixels": 16384,
+      "truth_sha256": "730ea08d5ac8c1ba304bfa70f3a70aa5626ff1f8e03d0a0ee113fa318f936543"
+    },
+    {
+      "box": null,
+      "input_sha256": "676a8de088341affbae7a6444665d8ede9d1baa1182dcf20f70cf6a9b97cafc7",
+      "intersection": 0,
+      "key": 1173,
+      "reading": null,
+      "role": "local_tone",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "730ea08d5ac8c1ba304bfa70f3a70aa5626ff1f8e03d0a0ee113fa318f936543"
+    },
+    {
+      "box": null,
+      "input_sha256": "ec681e0c093bbe03ad12bf42a37edfb9cc2d7ab00230420ea3ccfcc249ac5c13",
+      "intersection": 0,
+      "key": 1173,
+      "reading": null,
+      "role": "generated_sharp",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "730ea08d5ac8c1ba304bfa70f3a70aa5626ff1f8e03d0a0ee113fa318f936543"
+    },
+    {
+      "box": null,
+      "input_sha256": "4d71f9e94e389e8918a6b5b968f830d890229ff1fd2ca34183417c1915a7545a",
+      "intersection": 0,
+      "key": 1173,
+      "reading": null,
+      "role": "generated_feathered",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "730ea08d5ac8c1ba304bfa70f3a70aa5626ff1f8e03d0a0ee113fa318f936543"
+    },
+    {
+      "box": null,
+      "input_sha256": "412807b53d545d2e43ce02f0bec9f055a7c2dc2c956c762dbed98b680e08c51a",
+      "intersection": 0,
+      "key": 1202,
+      "reading": null,
+      "role": "untouched",
+      "status": "no_match",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "box": null,
+      "input_sha256": "e914a2199c9e5b0b200fb11517d861505cb28e35130c945369e1cb312c8bc9e5",
+      "intersection": 0,
+      "key": 1202,
+      "reading": null,
+      "role": "bilinear_diagonal",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "684db022e4d2d828c6fc98d35701eefdc97872693583dc3dc136206f67970ba8"
+    },
+    {
+      "box": null,
+      "input_sha256": "603379f524f7dccd46b32847f3091a2cc4e240dd0358749843b10f64584f39b9",
+      "intersection": 0,
+      "key": 1202,
+      "reading": null,
+      "role": "bicubic_diagonal",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "684db022e4d2d828c6fc98d35701eefdc97872693583dc3dc136206f67970ba8"
+    },
+    {
+      "box": [
+        1008,
+        624,
+        1136,
+        752
+      ],
+      "input_sha256": "b0c2e6536b64454a574a9f017265aaec8a734bdf8f307991801ed09932818606",
+      "intersection": 16383,
+      "key": 1202,
+      "reading": null,
+      "role": "rotated",
+      "status": "rotation",
+      "truth_pixels": 16383,
+      "truth_sha256": "17cadaf7cdc8c0ab636898e59f114fb9df21f6b1370da0e6d0156e2a499a8f03"
+    },
+    {
+      "box": null,
+      "input_sha256": "109e67b254163f10071a08324ef57bed41bb5b6c11c9c501b77bb403e1833d22",
+      "intersection": 0,
+      "key": 1202,
+      "reading": null,
+      "role": "blur",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "684db022e4d2d828c6fc98d35701eefdc97872693583dc3dc136206f67970ba8"
+    },
+    {
+      "box": [
+        1008,
+        624,
+        1136,
+        752
+      ],
+      "input_sha256": "b1d622a8af89c74eb5551c9c898acc578a1088eea2eb0c4b449704f50d95569b",
+      "intersection": 16384,
+      "key": 1202,
+      "reading": [
+        257,
+        1.0,
+        0.026349136762943204
+      ],
+      "role": "quantized_bilinear",
+      "status": "quantized_resampling",
+      "truth_pixels": 16384,
+      "truth_sha256": "684db022e4d2d828c6fc98d35701eefdc97872693583dc3dc136206f67970ba8"
+    },
+    {
+      "box": null,
+      "input_sha256": "3323bf57a4fa46311abef1354f2a53534fa41bb098eadd3823651e9455db046d",
+      "intersection": 0,
+      "key": 1202,
+      "reading": null,
+      "role": "local_tone",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "684db022e4d2d828c6fc98d35701eefdc97872693583dc3dc136206f67970ba8"
+    },
+    {
+      "box": null,
+      "input_sha256": "9309c4e7659b78a27771fbe64899f5fcc54b0278bf4ac370260faed429fb03b5",
+      "intersection": 0,
+      "key": 1202,
+      "reading": null,
+      "role": "generated_sharp",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "684db022e4d2d828c6fc98d35701eefdc97872693583dc3dc136206f67970ba8"
+    },
+    {
+      "box": null,
+      "input_sha256": "fc092dc5ffde5dde8bbad488692b8829361df754d8a8a66498766961045bc126",
+      "intersection": 0,
+      "key": 1202,
+      "reading": null,
+      "role": "generated_feathered",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "684db022e4d2d828c6fc98d35701eefdc97872693583dc3dc136206f67970ba8"
+    },
+    {
+      "box": null,
+      "input_sha256": "8159420b8fb3c9bacfaab9d51f944ada2aae5cee4d718f6f600b0a6cab950454",
+      "intersection": 0,
+      "key": 1346,
+      "reading": null,
+      "role": "untouched",
+      "status": "no_match",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "box": null,
+      "input_sha256": "a7b229d9219c97993a35b1a36bb2d2031d362c468219f1fb7a9451c3da2354f9",
+      "intersection": 0,
+      "key": 1346,
+      "reading": null,
+      "role": "bilinear_diagonal",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "857015a6b84dc73a8fa8628e5aa1c5b2169a70e1a981308afe8764dcc09051fa"
+    },
+    {
+      "box": null,
+      "input_sha256": "d8a40ee58e8902841ceada08578769170b8ded119df450b6e9ce50edbf96ecc2",
+      "intersection": 0,
+      "key": 1346,
+      "reading": null,
+      "role": "bicubic_diagonal",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "857015a6b84dc73a8fa8628e5aa1c5b2169a70e1a981308afe8764dcc09051fa"
+    },
+    {
+      "box": [
+        1344,
+        1024,
+        1472,
+        1152
+      ],
+      "input_sha256": "fe2bc9b18bf58788e9bd7bfc2228d27d0098d8bef4dfd35cedf140bce3db896b",
+      "intersection": 16383,
+      "key": 1346,
+      "reading": null,
+      "role": "rotated",
+      "status": "rotation",
+      "truth_pixels": 16383,
+      "truth_sha256": "d24d253e25c84235afaf4da2d395d18c8859b285c9185de7aab142509d1fc6d9"
+    },
+    {
+      "box": null,
+      "input_sha256": "64d3b2bdf802c508fcb2067de2309f9454a8abcf0286497851b13362e9523503",
+      "intersection": 0,
+      "key": 1346,
+      "reading": null,
+      "role": "blur",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "857015a6b84dc73a8fa8628e5aa1c5b2169a70e1a981308afe8764dcc09051fa"
+    },
+    {
+      "box": null,
+      "input_sha256": "6b789aaf023c54c121c75e59f342cd003188ff081ed8e4821aab253d1714d1cb",
+      "intersection": 0,
+      "key": 1346,
+      "reading": null,
+      "role": "quantized_bilinear",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "857015a6b84dc73a8fa8628e5aa1c5b2169a70e1a981308afe8764dcc09051fa"
+    },
+    {
+      "box": null,
+      "input_sha256": "8a639ef68061deed7b2d7e868704a8f9a58f95033a422239842d2b024ee1ff6a",
+      "intersection": 0,
+      "key": 1346,
+      "reading": null,
+      "role": "local_tone",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "857015a6b84dc73a8fa8628e5aa1c5b2169a70e1a981308afe8764dcc09051fa"
+    },
+    {
+      "box": null,
+      "input_sha256": "61a8dc8300fae9ede0756afd2d1b1642322f7d2b568f097c560ea67348d0f516",
+      "intersection": 0,
+      "key": 1346,
+      "reading": null,
+      "role": "generated_sharp",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "857015a6b84dc73a8fa8628e5aa1c5b2169a70e1a981308afe8764dcc09051fa"
+    },
+    {
+      "box": null,
+      "input_sha256": "33aa82e7bf1ceac024278c33f7250909e5ce4409522e31a79e6a9e4f01d3433d",
+      "intersection": 0,
+      "key": 1346,
+      "reading": null,
+      "role": "generated_feathered",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "857015a6b84dc73a8fa8628e5aa1c5b2169a70e1a981308afe8764dcc09051fa"
+    },
+    {
+      "box": null,
+      "input_sha256": "5c75caed43c654f5aca53662a911975e49afcbb21489011652e51f984277e69d",
+      "intersection": 0,
+      "key": 1616,
+      "reading": null,
+      "role": "untouched",
+      "status": "no_match",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "box": null,
+      "input_sha256": "83e5b8f2fc4df9dc72f3cc537c296c4ceb58e25e91de33dc2bb4a68d75c48600",
+      "intersection": 0,
+      "key": 1616,
+      "reading": null,
+      "role": "bilinear_diagonal",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "429f0501557e119e5b595bbdca443495c061d407e8f4d40e1bf705343c93ee9f"
+    },
+    {
+      "box": null,
+      "input_sha256": "bd694d46b99ca980478104d8da0f9d5d1fce9f7eac303a58021ffc9cb7bfb811",
+      "intersection": 0,
+      "key": 1616,
+      "reading": null,
+      "role": "bicubic_diagonal",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "429f0501557e119e5b595bbdca443495c061d407e8f4d40e1bf705343c93ee9f"
+    },
+    {
+      "box": null,
+      "input_sha256": "c900a19d99186d185f6e999e476bd04675fca88fc4d43602f5eb30e5a286300d",
+      "intersection": 0,
+      "key": 1616,
+      "reading": null,
+      "role": "rotated",
+      "status": "no_match",
+      "truth_pixels": 16383,
+      "truth_sha256": "6275ca1427b4b1b951f42844581130355ecb27cc622ba784336d2f90c9c7f367"
+    },
+    {
+      "box": null,
+      "input_sha256": "36df5827466f561d89057168bdd52b7f6d980f700e17fffbc8c0c4e26ce7d56d",
+      "intersection": 0,
+      "key": 1616,
+      "reading": null,
+      "role": "blur",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "429f0501557e119e5b595bbdca443495c061d407e8f4d40e1bf705343c93ee9f"
+    },
+    {
+      "box": [
+        592,
+        560,
+        720,
+        688
+      ],
+      "input_sha256": "1e82adf71e8330bf75a5e98df88978a7343e434726d168462aec707da51c13fc",
+      "intersection": 16384,
+      "key": 1616,
+      "reading": [
+        257,
+        1.0,
+        0.024797667284534752
+      ],
+      "role": "quantized_bilinear",
+      "status": "quantized_resampling",
+      "truth_pixels": 16384,
+      "truth_sha256": "429f0501557e119e5b595bbdca443495c061d407e8f4d40e1bf705343c93ee9f"
+    },
+    {
+      "box": null,
+      "input_sha256": "42bfa75098ec62363b30ed9075a735c52820f5446191059471967241f52597b9",
+      "intersection": 0,
+      "key": 1616,
+      "reading": null,
+      "role": "local_tone",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "429f0501557e119e5b595bbdca443495c061d407e8f4d40e1bf705343c93ee9f"
+    },
+    {
+      "box": null,
+      "input_sha256": "60e2a8cdd7c3a70b85a512b4b0b5b3a533b095ff33f09baa2bab3968b387bead",
+      "intersection": 0,
+      "key": 1616,
+      "reading": null,
+      "role": "generated_sharp",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "429f0501557e119e5b595bbdca443495c061d407e8f4d40e1bf705343c93ee9f"
+    },
+    {
+      "box": null,
+      "input_sha256": "644c2caef830e090e841afceb48b8cb215933d886b938668f7b2106bce75e1b4",
+      "intersection": 0,
+      "key": 1616,
+      "reading": null,
+      "role": "generated_feathered",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "429f0501557e119e5b595bbdca443495c061d407e8f4d40e1bf705343c93ee9f"
+    },
+    {
+      "box": null,
+      "input_sha256": "f46348f306c2881255d6a96b768342b2b521eb5ac630c40cf42d47a1fb755955",
+      "intersection": 0,
+      "key": 1742,
+      "reading": null,
+      "role": "untouched",
+      "status": "no_match",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "box": null,
+      "input_sha256": "b26a1d3cec3ab6ac841af37c7cc7f6867a200487945a0361414cfdb00c980204",
+      "intersection": 0,
+      "key": 1742,
+      "reading": null,
+      "role": "bilinear_diagonal",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "1629c0783a3d70ee7083416e005566057fdc67016cfa53c9b478d4f25cae7be6"
+    },
+    {
+      "box": null,
+      "input_sha256": "5e5f3c53916262b38cb1a30fd2b79be30e293171ed70dea793b9e007adb5e64b",
+      "intersection": 0,
+      "key": 1742,
+      "reading": null,
+      "role": "bicubic_diagonal",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "1629c0783a3d70ee7083416e005566057fdc67016cfa53c9b478d4f25cae7be6"
+    },
+    {
+      "box": [
+        928,
+        960,
+        1056,
+        1088
+      ],
+      "input_sha256": "98f60d92bc6d7aada8ce101efe2c516f74c623a037c5580d1fb3810713642337",
+      "intersection": 16383,
+      "key": 1742,
+      "reading": null,
+      "role": "rotated",
+      "status": "rotation",
+      "truth_pixels": 16383,
+      "truth_sha256": "c7047487b8db6f333a625253733b1aa4edc6f62405ad8cd8f800343518c34e2c"
+    },
+    {
+      "box": null,
+      "input_sha256": "1015534ba205c9da9e63ffd26d8acf4c4acb6c229fb2619c8b57c26628e57d68",
+      "intersection": 0,
+      "key": 1742,
+      "reading": null,
+      "role": "blur",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "1629c0783a3d70ee7083416e005566057fdc67016cfa53c9b478d4f25cae7be6"
+    },
+    {
+      "box": [
+        928,
+        960,
+        1056,
+        1088
+      ],
+      "input_sha256": "a9781542b0147f2af7ef960b06f94f667d67f670c23738aedea59048faece7e3",
+      "intersection": 16384,
+      "key": 1742,
+      "reading": [
+        257,
+        1.0,
+        0.1200706596143386
+      ],
+      "role": "quantized_bilinear",
+      "status": "quantized_resampling",
+      "truth_pixels": 16384,
+      "truth_sha256": "1629c0783a3d70ee7083416e005566057fdc67016cfa53c9b478d4f25cae7be6"
+    },
+    {
+      "box": null,
+      "input_sha256": "270cf1c33fd615fa6665b2e1f6b3c34aff08f29494e5cfd711f7f5a703899795",
+      "intersection": 0,
+      "key": 1742,
+      "reading": null,
+      "role": "local_tone",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "1629c0783a3d70ee7083416e005566057fdc67016cfa53c9b478d4f25cae7be6"
+    },
+    {
+      "box": null,
+      "input_sha256": "3fa07be302fa4aafb5115decd6398d4f176cbb907572b157ae0e4b28793d624a",
+      "intersection": 0,
+      "key": 1742,
+      "reading": null,
+      "role": "generated_sharp",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "1629c0783a3d70ee7083416e005566057fdc67016cfa53c9b478d4f25cae7be6"
+    },
+    {
+      "box": null,
+      "input_sha256": "42bd5ff24e6cb3371628b6fe5c48bfeeb2d57ac3eb5c95947d98da5f1bbe65b7",
+      "intersection": 0,
+      "key": 1742,
+      "reading": null,
+      "role": "generated_feathered",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "1629c0783a3d70ee7083416e005566057fdc67016cfa53c9b478d4f25cae7be6"
+    },
+    {
+      "box": null,
+      "input_sha256": "ee4b69d967e9c746b2edb1b2f9574e213321693ae765ceb76acfb53d935940f4",
+      "intersection": 0,
+      "key": 1788,
+      "reading": null,
+      "role": "untouched",
+      "status": "no_match",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "box": null,
+      "input_sha256": "06da48973b6e2316031ca6ffd9ec310b3da7eb7a5db1afdfce64bd0eadb67029",
+      "intersection": 0,
+      "key": 1788,
+      "reading": null,
+      "role": "bilinear_diagonal",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "8deb7f119c3c46b003d7caf0d13009d24299803944dbe6471619f97ac67ac9ff"
+    },
+    {
+      "box": null,
+      "input_sha256": "2380d0eb94f073a387b525647aca20e898f52050f07875a701657bfa43048968",
+      "intersection": 0,
+      "key": 1788,
+      "reading": null,
+      "role": "bicubic_diagonal",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "8deb7f119c3c46b003d7caf0d13009d24299803944dbe6471619f97ac67ac9ff"
+    },
+    {
+      "box": [
+        1296,
+        496,
+        1424,
+        624
+      ],
+      "input_sha256": "7d88f4432b2eefb1b6e2438108ce8695e4ba545668c67197b7acc121b0bac4a9",
+      "intersection": 16383,
+      "key": 1788,
+      "reading": null,
+      "role": "rotated",
+      "status": "rotation",
+      "truth_pixels": 16383,
+      "truth_sha256": "1aec63bd6c730a6dfaa288dfde20ae73b0c3ebf6c9410e7206578e834aee2a20"
+    },
+    {
+      "box": null,
+      "input_sha256": "93c340f5a0061a89b2cb34e908d2800195621281d507af4a2ef4a6a083d40df7",
+      "intersection": 0,
+      "key": 1788,
+      "reading": null,
+      "role": "blur",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "8deb7f119c3c46b003d7caf0d13009d24299803944dbe6471619f97ac67ac9ff"
+    },
+    {
+      "box": [
+        1296,
+        496,
+        1424,
+        624
+      ],
+      "input_sha256": "ca890ed6e4e733236e960891d87c99c300f0f9801076411c732b444efce748d7",
+      "intersection": 16384,
+      "key": 1788,
+      "reading": [
+        257,
+        1.0,
+        0.0780438367481151
+      ],
+      "role": "quantized_bilinear",
+      "status": "quantized_resampling",
+      "truth_pixels": 16384,
+      "truth_sha256": "8deb7f119c3c46b003d7caf0d13009d24299803944dbe6471619f97ac67ac9ff"
+    },
+    {
+      "box": null,
+      "input_sha256": "ac4673d609053b0a52639449a59a181c102b03ea458c1be5ea0396212621e06e",
+      "intersection": 0,
+      "key": 1788,
+      "reading": null,
+      "role": "local_tone",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "8deb7f119c3c46b003d7caf0d13009d24299803944dbe6471619f97ac67ac9ff"
+    },
+    {
+      "box": null,
+      "input_sha256": "92342a312cf6e9fa70fc93b4e1cedc696f4f7c9089d5f7e8cbe384dae5dfe42b",
+      "intersection": 0,
+      "key": 1788,
+      "reading": null,
+      "role": "generated_sharp",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "8deb7f119c3c46b003d7caf0d13009d24299803944dbe6471619f97ac67ac9ff"
+    },
+    {
+      "box": null,
+      "input_sha256": "f89f680356db237fe71e76aeb4da55d422ef31d4f37aceab684b63a73e2824b5",
+      "intersection": 0,
+      "key": 1788,
+      "reading": null,
+      "role": "generated_feathered",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "8deb7f119c3c46b003d7caf0d13009d24299803944dbe6471619f97ac67ac9ff"
+    },
+    {
+      "box": null,
+      "input_sha256": "afc04279acf2aaa9c6d6daebaa12aa344a17a963d6c123a9abb4c18da777c41e",
+      "intersection": 0,
+      "key": 2050,
+      "reading": null,
+      "role": "untouched",
+      "status": "no_match",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "box": null,
+      "input_sha256": "6c66e9adb3350475501bab87db24f0daf8b5bbba5576b01407252418a02bd318",
+      "intersection": 0,
+      "key": 2050,
+      "reading": null,
+      "role": "bilinear_diagonal",
+      "status": "no_match",
+      "truth_pixels": 16383,
+      "truth_sha256": "d9a8b75c364dcc9f65c154ec3806bce8deeba5b5daa04f96081f0c18bc866d97"
+    },
+    {
+      "box": null,
+      "input_sha256": "88b5aac0f1d3d46989eb38200b03967a56eee78b34288a36353a6a85cc4d9db8",
+      "intersection": 0,
+      "key": 2050,
+      "reading": null,
+      "role": "bicubic_diagonal",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "0e71f09f955e96b416cff5b165d26e7a5b003a70ebade75c4192dd4e75f5cff2"
+    },
+    {
+      "box": null,
+      "input_sha256": "e4f12a00dcf1f9d318905506d1f24cca10e0acc6556ad9fd7da1b9083c7566ca",
+      "intersection": 0,
+      "key": 2050,
+      "reading": null,
+      "role": "rotated",
+      "status": "no_match",
+      "truth_pixels": 16383,
+      "truth_sha256": "d06cb3d87cae5f9542b55ceff850df8da449fadee2ad332147e7a863411cf1cd"
+    },
+    {
+      "box": null,
+      "input_sha256": "1741afcfe43a2d8875cc7c86624f86785ea662b7a815ce7ee3f441b0d2231304",
+      "intersection": 0,
+      "key": 2050,
+      "reading": null,
+      "role": "blur",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "0e71f09f955e96b416cff5b165d26e7a5b003a70ebade75c4192dd4e75f5cff2"
+    },
+    {
+      "box": null,
+      "input_sha256": "9625b6772913fd9cedaf4b544561d5503527ca0c6d0f0cd8bfa40115ce73aad0",
+      "intersection": 0,
+      "key": 2050,
+      "reading": null,
+      "role": "quantized_bilinear",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "0e71f09f955e96b416cff5b165d26e7a5b003a70ebade75c4192dd4e75f5cff2"
+    },
+    {
+      "box": null,
+      "input_sha256": "96a25c171b6ff8c0eea0b03999d2b5e9f1bb87feea87c176a29683498fa4ecbb",
+      "intersection": 0,
+      "key": 2050,
+      "reading": null,
+      "role": "local_tone",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "0e71f09f955e96b416cff5b165d26e7a5b003a70ebade75c4192dd4e75f5cff2"
+    },
+    {
+      "box": null,
+      "input_sha256": "ade587b896586f5322c5c1b079b12f30b7633a1c0c952a23648c79228eb52bb1",
+      "intersection": 0,
+      "key": 2050,
+      "reading": null,
+      "role": "generated_sharp",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "0e71f09f955e96b416cff5b165d26e7a5b003a70ebade75c4192dd4e75f5cff2"
+    },
+    {
+      "box": null,
+      "input_sha256": "0a2396ff3e5d75985cb74a1bb52d3620e1eddaf517972ffdfae6a38d0f09efcb",
+      "intersection": 0,
+      "key": 2050,
+      "reading": null,
+      "role": "generated_feathered",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "0e71f09f955e96b416cff5b165d26e7a5b003a70ebade75c4192dd4e75f5cff2"
+    },
+    {
+      "box": null,
+      "input_sha256": "0a49b878b9c59a8fc6ae0b230043ced1ff220edf89e8085167e90e2d5769bd88",
+      "intersection": 0,
+      "key": 2082,
+      "reading": null,
+      "role": "untouched",
+      "status": "no_match",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "box": null,
+      "input_sha256": "6c48772cbfdd6a81db9052bc4e1abc8f47f8197bd4caf594de693c93dc7b3f34",
+      "intersection": 0,
+      "key": 2082,
+      "reading": null,
+      "role": "bilinear_diagonal",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "8e533f407d9f64cf8ca25c2d90deb428430fb69f05ea7957be9997072398f327"
+    },
+    {
+      "box": null,
+      "input_sha256": "8b742f2cf12caa75c68957d364bb0419946ac8c89635725bc90d3b71ffc31832",
+      "intersection": 0,
+      "key": 2082,
+      "reading": null,
+      "role": "bicubic_diagonal",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "8e533f407d9f64cf8ca25c2d90deb428430fb69f05ea7957be9997072398f327"
+    },
+    {
+      "box": [
+        880,
+        432,
+        1008,
+        560
+      ],
+      "input_sha256": "41ad1598cdc1f9a0d1d74461f67fef494bcf62995d97e85495d196f6017e88e8",
+      "intersection": 16383,
+      "key": 2082,
+      "reading": null,
+      "role": "rotated",
+      "status": "rotation",
+      "truth_pixels": 16383,
+      "truth_sha256": "25f7002563a1eddbab47fc8d57cb80613a3411784a9fd183a449c965cdc33524"
+    },
+    {
+      "box": null,
+      "input_sha256": "50ea53b31ac641d298df69004bd255bdf3cf240ee22d0c3770fa905f4ea258e1",
+      "intersection": 0,
+      "key": 2082,
+      "reading": null,
+      "role": "blur",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "8e533f407d9f64cf8ca25c2d90deb428430fb69f05ea7957be9997072398f327"
+    },
+    {
+      "box": [
+        880,
+        432,
+        1008,
+        560
+      ],
+      "input_sha256": "7de31ade656e5c2049d5403f0d07afef8ff5de298cad5644d8ebb96da842cd70",
+      "intersection": 16384,
+      "key": 2082,
+      "reading": [
+        257,
+        1.0,
+        0.10124938266255429
+      ],
+      "role": "quantized_bilinear",
+      "status": "quantized_resampling",
+      "truth_pixels": 16384,
+      "truth_sha256": "8e533f407d9f64cf8ca25c2d90deb428430fb69f05ea7957be9997072398f327"
+    },
+    {
+      "box": null,
+      "input_sha256": "5afd200271a1ec43293ebde5209f2b1d0265e7032e052781587e6f03bde15f40",
+      "intersection": 0,
+      "key": 2082,
+      "reading": null,
+      "role": "local_tone",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "8e533f407d9f64cf8ca25c2d90deb428430fb69f05ea7957be9997072398f327"
+    },
+    {
+      "box": null,
+      "input_sha256": "d7537bb9389331008f00047dbc3df9111e5a15080be7fb58741b3561a21ef05e",
+      "intersection": 0,
+      "key": 2082,
+      "reading": null,
+      "role": "generated_sharp",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "8e533f407d9f64cf8ca25c2d90deb428430fb69f05ea7957be9997072398f327"
+    },
+    {
+      "box": null,
+      "input_sha256": "f2f5be6f5c646bd2607537304eaebfa1a9791fff45bf9ff478590f57fbabe17b",
+      "intersection": 0,
+      "key": 2082,
+      "reading": null,
+      "role": "generated_feathered",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "8e533f407d9f64cf8ca25c2d90deb428430fb69f05ea7957be9997072398f327"
+    },
+    {
+      "box": null,
+      "input_sha256": "fdc39e6ee6cd6fd122c3322ad2d00291d738cc044200832559e4a939c6c69901",
+      "intersection": 0,
+      "key": 2879,
+      "reading": null,
+      "role": "untouched",
+      "status": "no_match",
+      "truth_pixels": 0,
+      "truth_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "box": null,
+      "input_sha256": "1bb5419c084fa8dda0df96397dde486312947ce9252c6ce17b2db8d4bf4476b1",
+      "intersection": 0,
+      "key": 2879,
+      "reading": null,
+      "role": "bilinear_diagonal",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "65943e40df7f6b8bafc1040a91a022e1d88e04363aead427ddccdef4b4c05fe8"
+    },
+    {
+      "box": null,
+      "input_sha256": "7cdf89dfc47edceb0d895469ed37c67b7834e0493f5e1e7fcd3127b6eb9228bb",
+      "intersection": 0,
+      "key": 2879,
+      "reading": null,
+      "role": "bicubic_diagonal",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "65943e40df7f6b8bafc1040a91a022e1d88e04363aead427ddccdef4b4c05fe8"
+    },
+    {
+      "box": [
+        1216,
+        816,
+        1344,
+        976
+      ],
+      "input_sha256": "eeaa8b3bbac3da3c19ca87375dc812e732163a7b2f01341553fb7389d0d736ac",
+      "intersection": 16383,
+      "key": 2879,
+      "reading": null,
+      "role": "rotated",
+      "status": "rotation",
+      "truth_pixels": 16383,
+      "truth_sha256": "3622d0875c4a2bd0c19789bb78464a8e4ad027763c32c4d6ad734385ccdec572"
+    },
+    {
+      "box": null,
+      "input_sha256": "6dfa184f565d113727d15a34a31ef174d99c60a04617313639d800f4fa4e58a5",
+      "intersection": 0,
+      "key": 2879,
+      "reading": null,
+      "role": "blur",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "65943e40df7f6b8bafc1040a91a022e1d88e04363aead427ddccdef4b4c05fe8"
+    },
+    {
+      "box": null,
+      "input_sha256": "b4309752ad258cbf725005b172b4c2bcc95930e44276eb742f47152e6419d243",
+      "intersection": 0,
+      "key": 2879,
+      "reading": null,
+      "role": "quantized_bilinear",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "65943e40df7f6b8bafc1040a91a022e1d88e04363aead427ddccdef4b4c05fe8"
+    },
+    {
+      "box": null,
+      "input_sha256": "9b58d5a5694b5a87b4e610ce943c607a0ccd41c19d16373d9ce272389cd1a677",
+      "intersection": 0,
+      "key": 2879,
+      "reading": null,
+      "role": "local_tone",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "65943e40df7f6b8bafc1040a91a022e1d88e04363aead427ddccdef4b4c05fe8"
+    },
+    {
+      "box": null,
+      "input_sha256": "a837b01c2a9b29aa02a345636b2e6ffbc2f372ebb9ff48a7a535fead90f4a6e6",
+      "intersection": 0,
+      "key": 2879,
+      "reading": null,
+      "role": "generated_sharp",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "65943e40df7f6b8bafc1040a91a022e1d88e04363aead427ddccdef4b4c05fe8"
+    },
+    {
+      "box": null,
+      "input_sha256": "eda16176c15765788f5846e24cbdf1234ff690ef6d5cb1ed6e8a79aa8489479e",
+      "intersection": 0,
+      "key": 2879,
+      "reading": null,
+      "role": "generated_feathered",
+      "status": "no_match",
+      "truth_pixels": 16384,
+      "truth_sha256": "65943e40df7f6b8bafc1040a91a022e1d88e04363aead427ddccdef4b4c05fe8"
+    }
+  ],
+  "schema": "chipmunk.quantized-serving-transfer/1",
+  "serving_sha256": {
+    "app.detectors.image.native_cfa": "724154703d6277c2de3f224186112cb79b1eb16fd8ddcb7f6e474f0ac157ae88",
+    "app.detectors.image.native_cfa_quantized": "7fbeb35b76c1ccc7a8dd0681bb0fe7a46b4fb2f57d2b098a3dd6f9efff4219d0",
+    "app.detectors.image.native_cfa_rotation": "e5e735ae4c2a9306ccd91231ad94f9824dcdd56efdc7003f25e84edb52eb3f47"
+  },
+  "source_measurements_sha256": "cd5489f5af2ef7e35db85f1ff6378851dd5d0de99b3710d8892cd9a98595b5db",
+  "source_roster_sha256": "ac546ef78a7e3740a67f8e219547567e0729c544222942e9b513fb450a70e26e"
+}

@@ -220,6 +220,7 @@ class Settings(BaseSettings):
     image_region_jpeg_review: bool = False  # Development-only regional evidence for the evaluated JPEG profile.
     image_native_interpolation_review: bool = False  # Optional local inspection of strictly profiled 16-bit PNGs.
     image_native_rotation_review: bool = False  # Also inspect supported 2048 × 1536 PNGs for a local rotation pattern.
+    image_native_quantized_review: bool = False  # Also inspect qualifying PNG regions for lower-depth camera resampling.
     image_sharp_boundary_enabled: bool = False
     image_reference_comparison_enabled: bool = False  # Development-only comparison of an uploaded earlier copy.
     image_reference_jpeg_png_envelope: bool = False  # Optional earlier standard JPEG to cropped PNG color differences.

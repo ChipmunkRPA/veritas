@@ -59,6 +59,19 @@ it('shows the source-bound explanation for a small local rotation', () => {
   expect(screen.getByText(/Source columns \[496, 624\)/)).toBeTruthy()
   expect(screen.getByAltText('Original 16-bit source crop')).toBeTruthy()
 })
+it('shows the measured pixel-value step and the source crop for local resampling', () => {
+  show({ ...evidence, source: { ...evidence.source, width: 2048, height: 1536 }, packets: [], native_interpolation_review: {
+    record: { status: 'quantized_resampling', observation: 'The region retained a repeating camera-style pattern.',
+      basis: 'The color channels showed opposite two-pixel patterns.',
+      quantized_pattern: { code_step: 257, minimum_channel_fraction: 0.972, phase_contrast: 0.13 },
+      scope: 'Supported 16-bit PNGs only.', limitation: 'This carries zero AI confidence weight.',
+      supported_cells: 2620, region: [496, 416, 624, 544], affects_overall_confidence: false },
+    artifacts: { context: artifact('b'), crop: artifact('c') },
+  } })
+  expect(screen.getByText(/Stored pixel-value step 257.*97.2%/)).toBeTruthy()
+  expect(screen.getByText(/opposite two-pixel patterns/)).toBeTruthy()
+  expect(screen.getByAltText('Original 16-bit source crop')).toBeTruthy()
+})
 afterEach(() => {
   cleanup()
   vi.unstubAllGlobals()

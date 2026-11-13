@@ -143,6 +143,7 @@ export interface ImageEvidenceSet {
   embedded_pair_difference?: ImageEmbeddedPairDifference
   native_interpolation_review?: {
     record: { status: string; observation: string; scope: string; limitation: string; basis?: string | null;
+      quantized_pattern?: { code_step: number; minimum_channel_fraction: number; phase_contrast: number } | null;
       supported_cells: number; region: [number, number, number, number] | null; affects_overall_confidence: false }
     artifacts: Partial<Record<'context' | 'crop', EvidenceImage>>
   }

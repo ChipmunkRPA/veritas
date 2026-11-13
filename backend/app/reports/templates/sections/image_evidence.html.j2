@@ -18,6 +18,7 @@
 <h3>Local pixel interpolation</h3>
 <p>{{ reading.observation }}</p>
 {% if reading.get('basis') %}<p class="caption">{{ reading.basis }}</p>{% endif %}
+{% if reading.get('quantized_pattern') %}<p class="caption">Stored pixel-value step {{ reading.quantized_pattern.code_step }}. At least {{ '%.1f'|format(100 * reading.quantized_pattern.minimum_channel_fraction) }}% of the measured values in each color channel followed that step.</p>{% endif %}
 <p class="caption">{{ reading.scope }} {{ reading.limitation }}</p>
 {% if reading.supported_cells %}<p class="caption">{{ reading.supported_cells }} of {{ "{:,}".format((v.image_evidence.source.width // 32) * (v.image_evidence.source.height // 32)) }} native image cells supplied comparable measurements.</p>{% endif %}
 {% if reading.region %}<p class="caption">Source columns [{{ reading.region[0] }}, {{ reading.region[2] }}) and rows [{{ reading.region[1] }}, {{ reading.region[3] }}). Right and bottom edges are exclusive.</p>{% endif %}

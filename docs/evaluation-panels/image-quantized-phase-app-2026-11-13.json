@@ -1,0 +1,57 @@
+{
+  "browser": {
+    "checked_uploads": 4,
+    "json_matches": true,
+    "page_errors": 0,
+    "plain_view": true
+  },
+  "outcomes": [
+    {
+      "case": "quantized_bilinear",
+      "exact_native_crop": true,
+      "pdf_json_parity": true,
+      "source_replay": true,
+      "status": "quantized_resampling"
+    },
+    {
+      "case": "untouched",
+      "exact_native_crop": false,
+      "pdf_json_parity": true,
+      "source_replay": true,
+      "status": "no_match"
+    },
+    {
+      "case": "generated_sharp",
+      "exact_native_crop": false,
+      "pdf_json_parity": true,
+      "source_replay": true,
+      "status": "no_match"
+    },
+    {
+      "case": "eight_bit",
+      "exact_native_crop": false,
+      "pdf_json_parity": true,
+      "source_replay": true,
+      "status": "unsupported_png"
+    }
+  ],
+  "positive": {
+    "affects_overall_confidence": false,
+    "reading": {
+      "code_step": 257,
+      "minimum_channel_fraction": 1.0,
+      "phase_contrast": 0.269736
+    },
+    "region": [
+      352,
+      320,
+      480,
+      448
+    ],
+    "source_sha256": "33eba3d1a38e21f7a590659dcf594f052472cb40422ff03c730f023eb191ef28"
+  },
+  "profile": "full",
+  "schema": "chipmunk.image-quantized-phase-app/1",
+  "template": "veritas-report-2.0.r125",
+  "unpaid_jobs": 0
+}

@@ -126,6 +126,11 @@ integration remains unfinished.
   retained all four useful locations in the 11-photo confirmation and reduced
   ordinary highlights from 15 to 10. The existing JPEG75 path flagged none of
   those controls, so the new check remains experimental.
+- The [JPEG90 paired-source audit](image-jpeg90-reflection-source-context-2026-11-13.md)
+  reproduced the held source masks and found that 12 of 13 ordinary
+  highlighted components lacked corroboration from the aligned earlier copy.
+  Nine were pixel-identical. The one corroborated region was a known
+  conventional paste. Standalone JPEG90 reflection stays experimental.
 - The [selectable PDF archive comparison](writing-gao-archive-comparison-2026-11-13.md)
   matches indexed report wording and places verified changes on the original
   pages, with the source crop in the browser and report. A two-page transfer

@@ -42,6 +42,11 @@ intervals and all 192 published measurements. The [GAO Word replay](writing-gao-
 rebuilds 120 native Word deliveries from the public archive pack and checks
 each reported paragraph and run position.
 
+The [JPEG90 paired-source audit](image-jpeg90-reflection-source-context-2026-11-13.md)
+replays the original regional masks and checks whether highlighted pixels
+also changed relative to an earlier copy. Its scalar receipt keeps source
+images and pixel masks local.
+
 ### Replay delivery and earlier-copy comparisons
 
 Recount the [two JPEG90 delivery histories](image-regional-jpeg90-carrier-2026-11-13.md),

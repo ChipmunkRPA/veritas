@@ -242,6 +242,9 @@ The [staggered speech and noise-reduction comparison](audio-noise-window-transfe
 separately replays native scheduling and spectral reduction on 18 labeled
 partial edits from six generators. It verifies the original-response
 calibration, localized ranges and additional genuine time highlighted.
+The [short speech and wider context comparison](audio-short-coarse-transfer-2026-11-12.md)
+reconstructs the duration-specific operating points and compares held
+sample locations and flags with and without wider-window support.
 The [two-enhancer replication](audio-nemotron-noise-transfer-2026-11-12.md)
 provides a model-free replay for four held sound scenes and a separate
 confirmation at identical decision points. It distinguishes additional

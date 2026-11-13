@@ -102,6 +102,10 @@ integration remains unfinished.
   matched plain-text and HTML-only emails. It assessed two more reply
   layouts and omitted all 12 unsupported controls. Local prepaid analysis
   and report replay preserved exact MIME positions.
+- Voice evidence cards and Standard PDFs link directly to overlapping
+  acoustic observations and sound-category windows. The return links use
+  the same saved sample ranges. Browser and rendered PDF checks verified
+  both directions, with no change to the recorded detector responses.
 - The [speech-sound and mouth-shape check](grid-phone-viseme-timing-2026-11-12.md)
   located one of 96 local audio shifts and flagged three of 144 ordinary
   controls. It missed all four known picture retimes. The method remains
@@ -130,6 +134,10 @@ integration remains unfinished.
   located the same six and added one genuine group flag. It remains outside
   the app. The held edits cover six generators and previously seen speaker
   groups with separately sourced exact inputs.
+- The [short speech and wider context comparison](audio-short-coarse-transfer-2026-11-12.md)
+  added one useful gain-only location and zero under strong noise. It
+  preserved the six dense-grid noisy locations and their genuine flags.
+  This retrospective duration comparison stays outside the app.
 - The [public replay tool](independent-testing.md#save-a-four-modality-replay-receipt)
   now compares the exact inputs and outputs recorded on two systems. Python
   3.11 and 3.12 reproduced the four localization outputs locally.

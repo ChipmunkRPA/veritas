@@ -46,6 +46,28 @@ the staggered speech-window experiment. It compares unchanged native
 responses with a separately calibrated noise-reduced view, commits
 locations to the original sample clock and counts genuine time highlighted.
 
+The [speech inpainting study](https://arxiv.org/html/2605.02223v1)
+evaluates a coarse scan with a separate boundary pass. Its reported
+localization remains poor at stricter overlap, and the public
+[MIST data card](https://huggingface.co/datasets/tung2308/MIST_SpeechInpaintingDataset)
+labels the data research-only. The [temporal pyramid study](https://arxiv.org/html/2606.16837v1)
+finds an in-domain gain with several time scales, while cross-domain
+error rates can stay level or worsen. These motivate a separate local
+comparison of two- and three-second source windows. We use the installed
+voice check and existing published partial-edit waveforms. The comparison
+keeps one cutoff per duration, measures their agreement separately and
+counts background-only flags and genuine time. No paper artifacts enter
+the app.
+
+The [SPADE results](https://arxiv.org/html/2609.25197v1) test transfer across
+generators, languages and recording environments. Its [dataset card](https://huggingface.co/datasets/rogertseng/spade)
+requires account information sharing and does not expose the release
+conditions publicly. No recordings were accessed. The
+[PC-Mix study](https://arxiv.org/html/2607.10345v1) reinforces separate
+speech and background evaluation, including genuine mixtures and
+ordinary audio edits as controls. Its published experiments do not
+qualify a checkpoint for this deployment.
+
 October's [MixedTruth / TruMix](https://arxiv.org/html/2610.14141v1) keeps original
 mixture information while using estimated components as soft evidence. It uses
 distinct speech/background streams and structured component predictions rather

@@ -16,6 +16,8 @@ The check counts a sample when its quantization interval excludes every value pr
 
 When two 16-bit lossless 16 kHz mono files have different sample counts, the comparison can recover a constant offset with at most 250 ms outside the overlap in either file. The supported codecs are signed 16-bit PCM and 16-bit FLAC. At one-fifth and four-fifths of the shorter length, each 1,024-sample window from the earlier file must contain sufficient activity and varied samples, and must match exactly once within the allowed search span of the analyzed file. The two windows must support the same offset and have different sample hashes. The shared interval, distinct source ticks, anchor hashes and exact excerpt samples are in the JSON. The browser and PDF show each file’s elapsed time for the shared interval and the selected waveforms. The check abstains when it cannot establish that alignment.
 
+When exact matches are unavailable, the comparison can account for a trim and a constant volume change together. The same two windows must uniquely support the same offset. The correlation step proposes candidate offsets and signed PCM quantization bounds verify both windows. The bounded gains from the two windows must agree and leave headroom against clipping. The comparison shows raw differences and, separately, the samples that still differ after the supported volume change. The browser, PDF and JSON retain distinct timelines for both views. Lossy encodes, time-varying gain and unsupported offsets can remain unassessed.
+
 ## Local verification
 
 Eight distinct retained genuine speech sources supplied three-second mono controls. Four comparisons inserted scaled recorded room audio at samples `[22400,35200)`. Four substituted known synthetic speech at `[10240,19840)`. The comparison recovered all eight exact ranges. An independent sample calculation reproduced the counts, source ticks, difference levels, and excerpt samples. All eight lossless FLAC conversions matched the original decoded values. A 0.7 gain changed all eight copies, with differences covering every bin on seven. The original comparison left all eight 20 ms trims unassessed. [Source preparation and rights](audio-paired-stereo-overlap-2026-11-11.md#matched-inputs)
@@ -44,6 +46,12 @@ The same 12 speech groups supplied new WAV variants with a controlled trim. Each
 
 To repeat, use the same native roster and omit the room-only records. Number the speech groups from zero in roster order. For group `i`, remove `101 + 47*i` samples from the beginning and `153 + 41*i` from the end of each submitted file. Use the same group’s untouched mix as the earlier file. For the controls, use the untouched mix with samples `[48000,48241)` removed, the next group’s untouched mix with the scheduled trim, and the same mix with its first 4,001 samples removed.
 
+### Trim and constant volume together
+
+On the same source roster, apply the scheduled trim followed by gains `5/8`, `7/10`, and `9/8` in repeating group order. Use exact rational multiplication, round to the nearest even integer and clamp to the 16-bit range. The combined check aligned 10 of 12 untouched copies and reported zero residual differences in all 10. The other two would clip. It aligned and found the known splice in 8 of 12 generated, 8 of 12 same-reader and 8 of 12 other-reader edits. The earlier comparison left all these trim-plus-gain pairs unassessed. All 48 incompatible controls remained unassessed. They consisted of 12 internal cuts, 12 different-source pairs, 12 large edge trims and 12 time-varying gain pairs. For the last control, apply an additional `9/10` gain before sample 48,000 in the untrimmed source.
+
+Independent sample readback verified both supporting intervals and every displayed audio excerpt. The submitted synthetic inserts contained 94,443 differing samples after subtracting the known gain. The report counted 94,429 of those samples as incompatible with every supported gain. The app leaves a sample out when it could match within the range of gains. A separate Chrome check downloaded PDF and JSON with identical source coordinates and two playable excerpts for the adjusted difference. Offline JSON replay reproduced the comparison and asset bytes.
+
 ## Replay without the app
 
 Use the project Python environment, FFmpeg, and both original files. The first command writes a directory of measurements and excerpts. The second verifies a browser JSON export, including the exact bytes of its embedded media. It also accepts a directory created by the first command.
@@ -54,4 +62,4 @@ python -m scripts.compare_audio_references earlier.wav analyzed.wav evidence-fol
 python -m scripts.compare_audio_references earlier.wav analyzed.wav chipmunk-verify-audio-comparison.json --verify
 ```
 
-Replay uses the app's measurement implementation and supports all three export versions. Record the FFmpeg version if runs produce different decoded bytes. Keep private audio and exports in your local workspace.
+Replay uses the app's measurement implementation and supports all four export versions. Record the FFmpeg version if runs produce different decoded bytes. Keep private audio and exports in your local workspace.

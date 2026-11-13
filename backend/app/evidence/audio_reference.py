@@ -20,6 +20,7 @@ from app.storage.files import sniff_audio
 SCHEMA = "chipmunk.audio-reference-comparison/1"
 SCHEMA_WITH_LEVEL_ADJUSTMENT = "chipmunk.audio-reference-comparison/2"
 SCHEMA_WITH_TRIM_ALIGNMENT = "chipmunk.audio-reference-comparison/3"
+SCHEMA_WITH_TRIM_AND_LEVEL = "chipmunk.audio-reference-comparison/4"
 MAX_BYTES = 48 * 1024 * 1024
 MAX_SECONDS = 30
 MAX_PRESENTED_RANGES = 3
@@ -44,6 +45,11 @@ TRIM_INTERPRETATION = (
     "Two distinct sections of the original audio support the same sample offset. "
     "The waveforms show differences inside the shared span. Samples outside that span were left unassessed. "
     "A trim or an ordinary edit can cause these differences. This comparison contributes zero weight to the AI estimate."
+)
+TRIM_LEVEL_INTERPRETATION = (
+    "Two distinct sections support the same sample offset and constant volume change. The adjusted waveform shows "
+    "analyzed minus volume-adjusted earlier samples within the shared span. Samples outside it were left unassessed. "
+    "Ordinary processing and edits can produce differences. This comparison contributes zero weight to the AI estimate."
 )
 
 
@@ -150,24 +156,28 @@ def _gain_bounds(bounds):
     return {"lower": str(bounds[0]), "upper": str(bounds[1])}
 
 
-def _level_adjusted(first, second, assets):
-    fit = audio_level_adjustment.compare(first[1], second[1])
-    if fit is None:
-        return None
-    changes = _measure_changes(first, second, assets, fit.changed, fit.residual, origin=Fraction(0),
-                               prefix="level-adjusted-", id_prefix="V")
+def _level_adjusted(first, second, assets, *, support_spans=None, file_offsets=None):
     count = len(first[1])
     width = audio_level_adjustment.SUPPORT_SAMPLES
+    support_spans = support_spans or ((0, width), (count - width, count))
+    fit = audio_level_adjustment.compare(first[1], second[1], supports=tuple(slice(a, b) for a, b in support_spans))
+    if fit is None:
+        return None
+    origin = Fraction(file_offsets[1], AUDIO_RATE) if file_offsets else Fraction(0)
+    changes = _measure_changes(first, second, assets, fit.changed, fit.residual, origin=origin,
+                               prefix="level-adjusted-", id_prefix="V")
     support = []
-    for (start, end), bounds in zip(((0, width), (count - width, count)), fit.support_bounds, strict=True):
+    for (start, end), bounds in zip(support_spans, fit.support_bounds, strict=True):
         support.append({"start_sample": start, "end_sample": end, "gain_bounds": _gain_bounds(bounds),
                         "source_ranges": _source_ranges(first, second, start, end),
                         "pcm_sha256": {side: hashlib.sha256((track[1][start:end] * 32768).astype("<i2").tobytes()).hexdigest()
                                        for side, track in (("earlier", first), ("submitted", second))}})
+    if file_offsets:
+        _attach_file_ranges([*changes["ranges"], *support], (first, second), file_offsets)
     midpoint = sum(fit.bounds) / 2
     return {"status": "measured", **changes, "gain_bounds": _gain_bounds(fit.bounds),
             "gain_db": round(20 * math.log10(midpoint), 6), "support": support,
-            "interpretation": LEVEL_INTERPRETATION}
+            "interpretation": TRIM_LEVEL_INTERPRETATION if file_offsets else LEVEL_INTERPRETATION}
 
 
 def _clock_range(track, start, end):
@@ -176,8 +186,31 @@ def _clock_range(track, start, end):
             "start_pts": pts + start, "end_exclusive_pts": pts + end}
 
 
-def _audio_trim(first, second, assets):
-    earlier, submitted = (np.rint(track[1] * 32768).astype("<i2") for track in (first, second))
+def _attach_file_ranges(rows, tracks, offsets):
+    for span in rows:
+        span["file_ranges"] = {}
+        for side, track, offset in zip(("earlier", "submitted"), tracks, offsets, strict=True):
+            times = _clock_range(track, span["start_sample"], span["end_sample"])
+            times["start_sample"] += offset
+            times["end_sample"] += offset
+            span["file_ranges"][side] = times
+
+
+def _scaled_matches(anchor, submitted, low, high):
+    # The correlation is only a cheap proposal. Each surviving position must
+    # explain the original integer samples under one compatible positive gain.
+    window = submitted[low:high + len(anchor)].astype(np.float64)
+    reference = anchor.astype(np.float64)
+    products = np.correlate(window, reference, mode="valid")
+    squares = np.r_[0., np.cumsum(window ** 2)]
+    norms = np.sqrt(np.dot(reference, reference) * (squares[len(anchor):] - squares[:-len(anchor)]))
+    positions = np.flatnonzero((norms > 0) & (products >= 0.999 * norms)) + low
+    return [int(pos) for pos in positions
+            if audio_level_adjustment.compatible_gain(anchor, submitted[pos:pos + len(anchor)]) is not None]
+
+
+def _audio_trim(first, second, assets, *, adjust_volume=False):
+    earlier, submitted = (np.rint(track[1] * 32768).astype(np.int64) for track in (first, second))
     count = min(len(earlier), len(submitted))
     if count < 2 * AUDIO_RATE or abs(len(earlier) - len(submitted)) > TRIM_LIMIT:
         return None
@@ -187,15 +220,18 @@ def _audio_trim(first, second, assets):
         if np.count_nonzero(np.abs(anchor.astype(np.int32)) >= 512) < 128 or len(np.unique(anchor)) < 64:
             return None
         low, high = start - TRIM_LIMIT, min(start + TRIM_LIMIT, len(submitted) - ANCHOR_SAMPLES)
-        candidates = np.flatnonzero(submitted[low:high + 1] == anchor[0]) + low
-        matches = [int(pos) for pos in candidates if np.array_equal(submitted[pos:pos + ANCHOR_SAMPLES], anchor)]
+        if adjust_volume:
+            matches = _scaled_matches(anchor, submitted, low, high)
+        else:
+            candidates = np.flatnonzero(submitted[low:high + 1] == anchor[0]) + low
+            matches = [int(pos) for pos in candidates if np.array_equal(submitted[pos:pos + ANCHOR_SAMPLES], anchor)]
         if len(matches) != 1:
             return None
         pos = matches[0]
         offsets.append(start - pos)
         supports.append({"earlier": _clock_range(first, start, start + ANCHOR_SAMPLES),
                          "submitted": _clock_range(second, pos, pos + ANCHOR_SAMPLES),
-                         "pcm_sha256": hashlib.sha256(anchor.tobytes()).hexdigest()})
+                         "pcm_sha256": hashlib.sha256(anchor.astype("<i2").tobytes()).hexdigest()})
     if offsets[0] != offsets[1] or supports[0]["pcm_sha256"] == supports[1]["pcm_sha256"]:
         return None
     first_start, second_start = max(0, offsets[0]), max(0, -offsets[0])
@@ -208,21 +244,26 @@ def _audio_trim(first, second, assets):
         overlap[side] = _clock_range(track, start, start + common)
         clipped.append(("measured", track[1][start:start + common],
                         {"source_pts": track[2]["source_pts"] + start}))
+    offsets = (first_start, second_start)
+    adjusted = None
+    if adjust_volume:
+        spans = tuple((w["earlier"]["start_sample"] - first_start, w["earlier"]["end_sample"] - first_start) for w in supports)
+        adjusted = _level_adjusted(*clipped, assets, support_spans=spans, file_offsets=offsets)
+        if adjusted is None:
+            return None
+        supports = adjusted["support"]
     delta = clipped[1][1] - clipped[0][1]
     changes = _measure_changes(*clipped, assets, delta != 0, delta, origin=Fraction(second_start, AUDIO_RATE))
-    for span in changes["ranges"]:
-        span["file_ranges"] = {
-            side: _clock_range(track, start + span["start_sample"], start + span["end_sample"])
-            for side, track, start in (("earlier", first, first_start), ("submitted", second, second_start))
-        }
+    _attach_file_ranges(changes["ranges"], clipped, offsets)
     return {"status": "measured", "earlier": first[2], "submitted": second[2], **changes,
-            "trim_alignment": {"earlier_minus_submitted_samples": offsets[0], "compared_samples": common,
-                               "overlap": overlap, "support": supports}}
+            "trim_alignment": {"earlier_minus_submitted_samples": first_start - second_start, "compared_samples": common,
+                               "overlap": overlap, "support": supports}}, adjusted
 
 
 def compare(earlier: Path, submitted: Path, *, filenames: tuple[str, str] | None = None,
             include_level_adjustment: bool = True,
-            include_trim_alignment: bool = True) -> tuple[dict, dict[str, bytes]]:
+            include_trim_alignment: bool = True,
+            include_trim_level_adjustment: bool = True) -> tuple[dict, dict[str, bytes]]:
     """Compare continuous recordings and recover a small, exactly supported edge trim."""
     paths = earlier, submitted
     filenames = filenames or (earlier.name, submitted.name)
@@ -239,8 +280,13 @@ def compare(earlier: Path, submitted: Path, *, filenames: tuple[str, str] | None
             and audio["earlier"]["samples"] != audio["submitted"]["samples"]):
         aligned = _audio_trim(*tracks, assets)
         if aligned is not None:
-            record.update(schema=SCHEMA_WITH_TRIM_ALIGNMENT, status="measured", audio=aligned,
+            record.update(schema=SCHEMA_WITH_TRIM_ALIGNMENT, status="measured", audio=aligned[0],
                           interpretation=TRIM_INTERPRETATION)
+        elif include_trim_level_adjustment and include_level_adjustment:
+            aligned = _audio_trim(*tracks, assets, adjust_volume=True)
+            if aligned is not None:
+                record.update(schema=SCHEMA_WITH_TRIM_AND_LEVEL, status="measured", audio=aligned[0],
+                              interpretation=TRIM_LEVEL_INTERPRETATION, level_adjusted=aligned[1])
     if include_level_adjustment and status == "measured" and audio["changed_samples"] and first[1] and second[1]:
         adjusted = _level_adjusted(*tracks, assets)
         if adjusted is not None:

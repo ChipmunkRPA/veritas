@@ -9,6 +9,7 @@ from app.evidence.audio_reference import (
     MAX_SECONDS,
     SCHEMA_WITH_LEVEL_ADJUSTMENT,
     SCHEMA_WITH_TRIM_ALIGNMENT,
+    SCHEMA_WITH_TRIM_AND_LEVEL,
 )
 from app.evidence.audio_reference import SCHEMA as AUDIO_SCHEMA
 from app.reports.image_reference_pdf import INK, MARGIN, MUTED, PAGE_HEIGHT, PAGE_WIDTH, RIGHT, RULE, _text
@@ -131,15 +132,18 @@ def _level_adjusted_summary(document, result):
     db = result["gain_db"]
     direction = "quieter" if db < 0 else "louder"
     precision = 6 if abs(db) < .0005 else 3
-    _text(page, MARGIN, 131, f"The analyzed recording is {abs(db):.{precision}f} dB {direction} in the matching sections at both ends.")
+    aligned = "file_ranges" in result["support"][0]
+    basis = "in two supporting sections of the shared span" if aligned else "in the matching sections at both ends"
+    _text(page, MARGIN, 131, f"The analyzed recording is {abs(db):.{precision}f} dB {direction} {basis}.")
     count = result["changed_samples"]
     if count == 0:
-        note = "The same volume adjustment explains the entire recording."
+        note = "The same volume adjustment explains the shared span." if aligned else "The same volume adjustment explains the entire recording."
     else:
         note = f"{count:,} samples remain different after accounting for the volume adjustment."
     _text(page, MARGIN, 158, note, font="hebo")
     page.insert_textbox((MARGIN, 179, RIGHT, 280), result["interpretation"], fontsize=11, fontname="helv", color=INK)
-    _text(page, MARGIN, 303, "Times start at the first decoded sample. Waveform excerpts use the original levels.", color=MUTED)
+    _text(page, MARGIN, 303, "Times start at each file's first decoded sample. Excerpts use the original levels." if aligned else
+          "Times start at the first decoded sample. Waveform excerpts use the original levels.", color=MUTED)
     _text(page, MARGIN, 324, "The JSON export includes the supporting sample ranges and playable excerpts.", color=MUTED)
 
 
@@ -306,17 +310,28 @@ def _level_adjusted_pages(document, result):
         if span.get("preview"):
             _sound_page(document, span, level_adjusted=True)
         else:
-            remaining.append((span["id"], f"{_range(span)} - {span['changed_samples']:,} differing samples"))
+            remaining.append((span["id"], f"{_sound_range_label(span)} - {span['changed_samples']:,} differing samples"))
     _remaining_ranges(document, remaining, "Additional volume-adjusted ranges")
+
+
+def _sound_range_label(span):
+    ranges = span.get("file_ranges")
+    if ranges:
+        return f"{_audio_file_range(ranges['earlier'])} earlier, {_audio_file_range(ranges['submitted'])} analyzed"
+    return _range(span)
 
 
 def render(record, assets):
     with pymupdf.open() as document:
-        is_audio = record["schema"] in (AUDIO_SCHEMA, SCHEMA_WITH_LEVEL_ADJUSTMENT, SCHEMA_WITH_TRIM_ALIGNMENT)
+        is_audio = record["schema"] in (AUDIO_SCHEMA, SCHEMA_WITH_LEVEL_ADJUSTMENT, SCHEMA_WITH_TRIM_ALIGNMENT,
+                                        SCHEMA_WITH_TRIM_AND_LEVEL)
         document.set_metadata({"title": "Earlier audio comparison" if is_audio else TITLE, "author": "Chipmunk Verify"})
-        if adjusted := record.get("level_adjusted"):
+        adjusted = record.get("level_adjusted")
+        if adjusted and record["schema"] != SCHEMA_WITH_TRIM_AND_LEVEL:
             _level_adjusted_pages(document, adjusted)
         (_audio_summary if is_audio else _summary)(document, record)
+        if adjusted and record["schema"] == SCHEMA_WITH_TRIM_AND_LEVEL:
+            _level_adjusted_pages(document, adjusted)
         remaining = []
         local = record.get("picture", {}).get("local_comparison", {})
         if local.get("range"):
@@ -331,10 +346,7 @@ def render(record, assets):
                 _sound_page(document, span)
             else:
                 note = f" - {span['changed_samples']:,} differing samples" if is_audio else ""
-                dates = span.get("file_ranges")
-                label = (_audio_file_range(dates["earlier"]) + " earlier, " + _audio_file_range(dates["submitted"]) + " analyzed"
-                         if dates else _range(span))
-                remaining.append((span["id"], label + note))
+                remaining.append((span["id"], _sound_range_label(span) + note))
         _remaining_ranges(document, remaining)
         if "timing" in record:
             _timing_page(document, record["timing"], assets)

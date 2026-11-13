@@ -31,7 +31,8 @@ def _rounded(samples: np.ndarray, gain: Fraction) -> np.ndarray:
                        | ((twice_remainder == gain.denominator) & (quotient % 2 == 1)))
 
 
-def _bounds(earlier: np.ndarray, submitted: np.ndarray) -> tuple[Fraction, Fraction] | None:
+def compatible_gain(earlier: np.ndarray, submitted: np.ndarray) -> tuple[Fraction, Fraction] | None:
+    """Return the quantization-compatible gain interval for two signed PCM slices."""
     nonzero = earlier != 0
     if np.any(submitted[~nonzero] != 0) or not nonzero.any():
         return None
@@ -53,7 +54,7 @@ def _bounds(earlier: np.ndarray, submitted: np.ndarray) -> tuple[Fraction, Fract
     return lower, upper
 
 
-def compare(earlier: np.ndarray, submitted: np.ndarray) -> LevelAdjustment | None:
+def compare(earlier: np.ndarray, submitted: np.ndarray, *, supports: tuple[slice, slice] | None = None) -> LevelAdjustment | None:
     """Find samples incompatible with every gain allowed by both end intervals."""
     if len(earlier) < MIN_SAMPLES:
         return None
@@ -62,13 +63,12 @@ def compare(earlier: np.ndarray, submitted: np.ndarray) -> LevelAdjustment | Non
     maximum = int(np.max(np.abs(original)))
     if max(maximum, int(np.max(np.abs(observed)))) >= 32767:
         return None
-    head = slice(0, SUPPORT_SAMPLES)
-    tail = slice(-SUPPORT_SAMPLES, None)
+    head, tail = supports or (slice(0, SUPPORT_SAMPLES), slice(-SUPPORT_SAMPLES, None))
     for interval in (head, tail):
         if np.count_nonzero(np.abs(original[interval]) >= ACTIVE_AMPLITUDE) < MIN_ACTIVE_SAMPLES:
             return None
-    head_bounds = _bounds(original[head], observed[head])
-    tail_bounds = _bounds(original[tail], observed[tail])
+    head_bounds = compatible_gain(original[head], observed[head])
+    tail_bounds = compatible_gain(original[tail], observed[tail])
     if head_bounds is None or tail_bounds is None:
         return None
     lower = max(head_bounds[0], tail_bounds[0])
@@ -85,7 +85,7 @@ def compare(earlier: np.ndarray, submitted: np.ndarray) -> LevelAdjustment | Non
     if (lower == upper and any(not np.array_equal(_rounded(original[part], lower), observed[part])
                                for part in (head, tail))):
         return None
-    if not changed.any() and _bounds(original, observed) is None:
+    if not changed.any() and compatible_gain(original, observed) is None:
         # Different samples could individually fit different gains.
         return None
     residual = (observed - _rounded(original, (lower + upper) / 2)) / 32768

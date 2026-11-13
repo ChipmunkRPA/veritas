@@ -170,6 +170,56 @@ def test_audio_reference_trim_replays_new_and_historical_exports(tmp_path, align
         assert run(earlier, submitted, exported, verify=True) == record
 
 
+@pytest.mark.parametrize("gain", [0.625, 1.25])
+def test_audio_reference_combines_trim_and_volume_with_both_clocks(tmp_path, gain):
+    original = np.random.default_rng(985).integers(-8000, 8000, 72000, dtype=np.int16)
+    trimmed = np.rint(original[331:-133] * gain).astype(np.int16)
+    earlier = save(tmp_path, "earlier", original.astype(np.float32) / 32768)
+    for edited in (False, True):
+        native = trimmed.copy()
+        if edited:
+            native[32000:32640] += 800
+        submitted = save(tmp_path, f"submitted-{edited}", native.astype(np.float32) / 32768)
+        previous, _ = audio_reference.compare(earlier, submitted, include_trim_level_adjustment=False)
+        assert previous["status"] == "audio_timelines_differ"
+        record, assets = audio_reference.compare(earlier, submitted)
+        audio, adjusted = record["audio"], record["level_adjusted"]
+        assert record["schema"] == audio_reference.SCHEMA_WITH_TRIM_AND_LEVEL
+        assert audio["trim_alignment"]["earlier_minus_submitted_samples"] == 331
+        assert adjusted["changed_samples"] == (640 if edited else 0)
+        assert record["affects_overall_confidence"] is False
+        assert all(Fraction(window["gain_bounds"]["lower"]) <= gain <= Fraction(window["gain_bounds"]["upper"])
+                   for window in adjusted["support"])
+        if edited:
+            span, = adjusted["ranges"]
+            assert span["start_sample"] == 32000
+            assert span["file_ranges"]["earlier"]["start_sample"] == 32331
+            assert span["file_ranges"]["submitted"]["start_sample"] == 32000
+            np.testing.assert_array_equal(read_wav(assets[span["preview"]["assets"]["earlier"]["file"]]) * 32768,
+                                          original[32331:32971])
+            with pymupdf.open(stream=render_comparison(record, assets), filetype="pdf") as report:
+                assert "Shared audio after sample alignment" in report[0].get_text()
+                assert "two supporting sections" in report[1].get_text()
+                assert "Volume-adjusted difference waveform" in report[2].get_text()
+        folder = tmp_path / f"receipt-{edited}"
+        assert run(earlier, submitted, folder) == record
+        assert run(earlier, submitted, folder, verify=True) == record
+
+
+def test_audio_reference_trim_and_volume_abstains_on_different_gain_or_clock(tmp_path):
+    original = np.random.default_rng(437).integers(-8000, 8000, 72000, dtype=np.int16)
+    earlier = save(tmp_path, "earlier", original.astype(np.float32) / 32768)
+    partial = original[331:-133]
+    for name, samples in (
+        ("internal-trim", np.r_[original[:36000], original[36464:]] * 0.8),
+        ("varying-gain", np.r_[partial[:36000] * 0.8, partial[36000:] * 0.9]),
+        ("periodic", np.resize(partial[:111], len(partial)) * 0.8),
+    ):
+        submitted = save(tmp_path, name, np.rint(samples).astype(np.float32) / 32768)
+        record, assets = audio_reference.compare(earlier, submitted)
+        assert record["status"] == "audio_timelines_differ" and not assets
+
+
 def test_matching_nonzero_audio_starts_preserve_both_source_clocks(tmp_path, aligned_audio_pair):
     earlier, analyzed, _, _ = aligned_audio_pair
     shifted = []

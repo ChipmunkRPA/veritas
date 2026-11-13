@@ -47,7 +47,23 @@ TRANSFERS = {
         f"{PANELS}/writing-multiblock-independent-2026-11-12.json",
     )),
 }
-SUITES = ("overview", "localization", "transfer")
+SOURCE_EVIDENCE = {
+    "image": ("review_image_png_exif_preview_transfer.py", (
+        "image-png-exif-preview-2026-11-12.json", "image-png-exif-preview-cases-2026-11-12.json",
+    ), (), ()),
+    "video": ("review_video_face_paired_edge_transfer.py", (
+        "video-face-paired-edge-hevc-confirmation-2026-11-12.json", "--confirm-against", "video-face-paired-edge-transfer-2026-11-12.json",
+    ), (), ()),
+    "audio": ("audio_dense_evidence_confirmation.py", ("audio-dense-evidence-confirmation-2026-11-12.json",), ("review",), (
+        f"{SCRIPTS}/audio_vocal_event_mixtures.py", f"{SCRIPTS}/review_audio_reduced_background_localization.py",
+        f"{PANELS}/audio-partial-publisher-transfer-2026-11-12.json",
+        f"{PANELS}/audio-reduced-background-localization-2026-11-12.json", f"{PANELS}/audio-noise-window-transfer-2026-11-12.json",
+    )),
+    "writing": ("writing_mixed_pdf_page_transfer.py", ("writing-mixed-pdf-page-transfer-2026-11-12.json",), ("review",), (
+        f"{PANELS}/writing-agreement-document-format-transfer-2026-11-12.json",
+    )),
+}
+SUITES = ("overview", "localization", "transfer", "source-evidence")
 ISOLATED = (
     "import runpy,sys; "
     "script=sys.argv.pop(1); "
@@ -85,13 +101,15 @@ def replay_inputs(modality: str, suite: str) -> tuple[str, list[str], tuple[str,
     elif suite == "transfer":
         script, panel, prefix, dependencies = TRANSFERS[modality]
         panel_names = (panel,)
+    elif suite == "source-evidence":
+        script, panel_names, prefix, dependencies = SOURCE_EVIDENCE[modality]
     else:
         script, panel_names, dependencies = CHECKS[modality]
         prefix = ("review",) if modality == "audio" else ()
     entry = f"{SCRIPTS}/{script}"
-    panels = [f"{PANELS}/{name}" for name in panel_names]
-    arguments = [*prefix, *panels]
-    return entry, arguments, (entry, *panels, *dependencies)
+    panel_arguments = [name if name.startswith("--") else f"{PANELS}/{name}" for name in panel_names]
+    inputs = tuple(name for name in panel_arguments if not name.startswith("--"))
+    return entry, [*prefix, *panel_arguments], (entry, *inputs, *dependencies)
 
 
 def replay(modality: str, suite: str = "overview") -> dict:

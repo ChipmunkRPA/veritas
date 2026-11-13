@@ -1299,6 +1299,22 @@ and three candidates that stayed outside the app. It verifies the saved
 results. The receipt includes the checked-in data and helper hashes used
 by each reader, plus hashes of its output and diagnostics.
 
+### Replay recent source evidence
+
+```sh
+review_dir=$(mktemp -d)
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/source-evidence.json" --suite source-evidence
+```
+
+This suite recalculates the [PNG preview comparison](image-png-exif-preview-2026-11-12.md),
+[paired HEVC face timing](video-face-paired-edge-transfer-2026-11-12.md),
+[overlapping speech windows](audio-dense-evidence-confirmation-2026-11-12.md),
+and [mixed PDF writing coverage](writing-mixed-pdf-page-transfer-2026-11-12.md).
+The receipt captures every public input and helper used for the comparisons.
+It checks saved measurements and source commitments using Python's standard
+library. The native replay instructions in each study explain how to verify
+the media evidence against the supplied source.
+
 ### Replay recent evaluations from a clean checkout
 
 From the repository root, use Python 3.11 or later. These commands read the

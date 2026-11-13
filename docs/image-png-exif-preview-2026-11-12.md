@@ -26,6 +26,17 @@ The isolated Full worker checked an edited PNG, its matched ordinary file, and t
 
 ## Replay
 
+Run this standard-library check from the repository root to recalculate the
+179 case decisions and compare all 60 crop commitments with the published
+result. It uses the original case ledger, which contains no media or pixel
+arrays. Use the native replay below to re-decode the actual crops.
+
+```sh
+python3 -B -IS backend/scripts/review_image_png_exif_preview_transfer.py \
+  docs/evaluation-panels/image-png-exif-preview-2026-11-12.json \
+  docs/evaluation-panels/image-png-exif-preview-cases-2026-11-12.json
+```
+
 Use the retained source paths from the runner and a fresh local directory for each command sequence. The native replay reconstructs every input, comparison, exact changed-pixel mask and crop. It leaves original and derived media in the local archive.
 
 ```sh

@@ -24,6 +24,14 @@ None of the three layouts passed the frozen acoustic gate. No selected edit wave
 
 ## Replay
 
+### Target selection diagnostics
+
+A separate acoustic replay reapplied the frozen separator to all 160 clips from the pilot and this follow-up. Both candidate waveform hashes and the original routing decisions matched. The analysis reused known edit intervals as simulated user markers and supplied the same markers to matched ordinary copies. On the eight off-center edited clips, requiring the same candidate to dominate the two 500 ms flanks routed none. Ranking by the contrast between the marked interval and its flanks routed four, and none selected the best candidate. These tests used a 3 dB margin and 50 ms between each flank and the marker.
+
+Providing the correct left- or right-weighted path as simulated user information changed the result. A joint 17-tap fit from both anonymous candidates to the submitted channels, calculated independently on each flank, assigned five off-center edits. All five matched the best candidate, with median gains of +5.51 dB overall and +5.37 dB in the marked interval. No such route fired on four balanced-masker-only controls. The hint came from the authored scene layout. A real user’s ability to identify the correct side, and the effect of this procedure on voice screening, remain untested. Across 36 edited deliveries from the two studies, none had both candidates improve foreground reconstruction by at least 3 dB. This is a waveform finding and supplies no estimate of classifier agreement across the candidates.
+
+### Reproduce the fixed room comparison
+
 The local review rebuilt all 432 PCM bindings and repeated separation on all 108 mixtures with NumPy FFT instead of SciPy FFT. Every route, score, and projected PCM digest agreed. The retained source bank, previous blind pilot’s source roster, and publisher room intake supply exact inputs. A result serialization issue was corrected without changing the byte-identical roster or measured rows. [Verified receipt](evaluation-panels/audio-blind-huddersfield-transfer-2026-11-12.json)
 
 ```sh

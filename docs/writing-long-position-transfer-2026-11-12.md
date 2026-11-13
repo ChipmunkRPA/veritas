@@ -30,3 +30,15 @@ CPU scoring used 415 unique calibration inputs and 463 held inputs. All 326 elig
 python3 -B -I -S backend/scripts/review_writing_long_position.py \
   docs/evaluation-panels/writing-long-position-transfer-2026-11-12.json
 ```
+
+### Independent publisher replay
+
+From the repository root, a separate command downloads the recorded first-party article versions and reconstructs each genuine excerpt. It checks the publisher, license, byline, publication dates, original paragraph and sentence offsets, and every saved genuine input hash. The command uses no model weights. Python 3.12 with `lxml==6.1.2`, `pysbd==0.3.4`, and `psutil==7.2.2` is sufficient.
+
+```sh
+PYTHONPATH=backend python3.12 -B -m scripts.verify_writing_long_position_sources \
+  docs/evaluation-panels/writing-long-position-transfer-2026-11-12.json \
+  --cache /tmp/chipmunk-article-xml
+```
+
+Add `--offline` to repeat from that cache. Without `--cache`, the tool removes the XML when it exits. With `--strict-xml`, a changed XML digest returns a failure even when all measured text agrees. The fresh publisher run verified all 52 versions and all 1,816 genuine input hashes. Fifty XML versions matched their frozen byte hashes. Each of the two changed Gates v1 XML responses changed only the article acceptance day by one day. Their licensed body text and all measured inputs matched. The strict mode verified all 52 historical files when run against the frozen local witnesses. Generated rewrites and their model responses remain covered by the separate arithmetic review. [Independent source replay receipt](evaluation-panels/writing-long-position-publisher-replay-2026-11-12.json)

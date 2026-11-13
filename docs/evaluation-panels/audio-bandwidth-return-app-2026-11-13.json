@@ -1,0 +1,29 @@
+{
+  "cases": {
+    "positive": {
+      "schema": "chipmunk.acoustic-context/3",
+      "status": "measured_drop",
+      "events": 1,
+      "samples": [
+        19200,
+        33280
+      ],
+      "delta_db": 31.379338,
+      "source_sha256": "b4c72e143f20decae02a085c4ea2c80e766a8a4ed9d1c3c1d96d4e1ca6a329b3"
+    },
+    "ordinary": {
+      "schema": "chipmunk.acoustic-context/3",
+      "status": "no_supported_drop",
+      "events": 0
+    },
+    "opt_out": {
+      "schema": "chipmunk.acoustic-context/2",
+      "status": null,
+      "events": 0
+    }
+  },
+  "before_payment_jobs": 0,
+  "simulated_paid_jobs": 3,
+  "exact_assets_pdf_json_and_original_replay": true,
+  "decision_parity": true
+}

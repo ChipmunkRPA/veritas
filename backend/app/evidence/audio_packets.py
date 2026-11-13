@@ -81,7 +81,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
     validate_content(document)
     if document.get("version") in {"audio-evidence-2", VERSION} and not document.get("acoustic_context"):
         raise PacketIntegrityError("Current audio evidence lacks frozen acoustic context")
-    if document.get("version") == VERSION and document["acoustic_context"]["schema"] != "chipmunk.acoustic-context/2":
+    if document.get("version") == VERSION and document["acoustic_context"]["schema"] not in {"chipmunk.acoustic-context/2", "chipmunk.acoustic-context/3"}:
         raise PacketIntegrityError("Current audio evidence lacks continuity measurements")
 
 
@@ -416,11 +416,14 @@ def build_content(db: Session, analysis: Analysis, store: ObjectStore, result: d
     if not candidates:
         document["limitations"].append("No recorded window reached the inspection threshold. This does not establish authenticity."
                                        if windows else "No voice windows were scored; no local synthesis claim can be made.")
-    from app.evidence.audio_background import build_content as build_acoustic_context
+    from app.evidence import audio_background
     acoustic_source = {key: document["source"][key] for key in
                        ("sha256", "pcm_sha256", "samples", "sample_rate", "coordinate_space")}
-    document["acoustic_context"] = build_acoustic_context(pcm, mapping, acoustic_source, document["packets"],
-        lambda data, media_type, **metadata: _asset(db, store, analysis, set_id, data, media_type, **metadata), _chart)
+    bandwidth_enabled = (settings.audio_bandwidth_return_review and analysis.kind == "audio" and len(pcm) == 6 * SAMPLE_RATE
+                         and audio_background.native_bandwidth_input(len(pcm), mapping))
+    document["acoustic_context"] = audio_background.build_content(pcm, mapping, acoustic_source, document["packets"],
+        lambda data, media_type, **metadata: _asset(db, store, analysis, set_id, data, media_type, **metadata), _chart,
+        version=audio_background.BANDWIDTH_VERSION if bandwidth_enabled else audio_background.VERSION)
     from app.evidence.sound_events import build as build_sound_events
     sound_context = build_sound_events(store, record, binding, document["source"], pcm, mapping,
         lambda data, media_type, **metadata: _asset(db, store, analysis, set_id, data, media_type, **metadata), _chart)

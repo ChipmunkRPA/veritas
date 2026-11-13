@@ -111,6 +111,11 @@ integration remains unfinished.
 - The [voice resonance trial](audio-formant-local-transfer-2026-11-13.md)
   found zero of 12 competing-speech edits at the fixed points versus one
   for the current check. The new voice cues stay experimental.
+- The [upper-frequency audio check](audio-bandwidth-return-2026-11-13.md)
+  located 34 of 64 temporary low-pass changes from a single upload and
+  reported one range on 128 ordinary controls. Twelve inputs per cutoff
+  lacked sufficient comparable sound. The opt-in displays physical audio
+  evidence and gives it zero AI-confidence weight.
 - The [changed-word supervision test](writing-word-edit-transfer-2026-11-13.md)
   added no useful report locations to the current eight of 40 and flagged
   one more ordinary group in each of three held cohorts. No release change.

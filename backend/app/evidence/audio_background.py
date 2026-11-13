@@ -17,12 +17,15 @@ from PIL import Image, ImageDraw
 
 from app.core.canonical import canonical_hash, canonical_json
 from app.detectors.audio.decode import SAMPLE_RATE, source_ranges, wav_bytes
+from app.evidence.audio_bandwidth_binding import BANDWIDTH_METHOD, POINT_DB
 from app.evidence.audio_continuity import METHOD as CONTINUITY_METHOD
 from app.evidence.audio_continuity import candidates as continuity_windows
 from app.evidence.audio_continuity import select as select_continuity
 
 SCHEMA = "chipmunk.acoustic-context/2"
 VERSION = "mixed-acoustics-2"
+BANDWIDTH_VERSION = "mixed-acoustics-3"
+BANDWIDTH_SCHEMA = "chipmunk.acoustic-context/3"
 FRAME_SAMPLES = 8000
 MAX_EVENTS = 8
 THRESHOLDS = {"energy_change_db": 12.0, "near_silence_dbfs": -60.0,
@@ -34,6 +37,13 @@ LIMITATIONS = [
     "Half-second measurement windows do not locate an exact splice or voice-replacement boundary. Frequency plots are inspection context, not a synthesis score.",
     "Only the frozen decoded input was inspected; original stereo separation and audio beyond the decode limit are not assessed here.",
 ]
+
+
+def native_bandwidth_input(samples, mapping):
+    return (samples == 6 * SAMPLE_RATE and mapping.get("source_container") == "wav" and mapping.get("source_codec") == "pcm_s16le"
+            and mapping.get("source_channels") == 1 and mapping.get("source_sample_rate") == SAMPLE_RATE
+            and mapping.get("source_duration_s") == 6 and len(mapping.get("audio_stream_indices", [0])) == 1
+            and mapping.get("timeline") == [{"start_sample": 0, "end_sample": samples, "source_pts": 0}])
 
 
 def _db(value: float) -> float:
@@ -96,17 +106,32 @@ def _candidates(bins: list[dict]) -> list[dict]:
 
 
 def _base(pcm: np.ndarray, mapping: dict, source: dict, voice_packets: list[dict], *, version: str = VERSION) -> dict:
-    if version not in {"mixed-acoustics-1", VERSION}:
+    if version not in {"mixed-acoustics-1", VERSION, BANDWIDTH_VERSION}:
         raise ValueError("Unsupported acoustic measurement version")
+    current = version != "mixed-acoustics-1"
+    bandwidth = version == BANDWIDTH_VERSION
     bins = measurements(pcm)
     candidates = _candidates(bins)
     selected = sorted(candidates, key=lambda c: (-c["priority"], -c["strength"], c["start_sample"], c["category"]))[:MAX_EVENTS]
-    rows = json.loads(canonical_json(continuity_windows(pcm))) if version == VERSION else []
+    rows = json.loads(canonical_json(continuity_windows(pcm))) if current else []
     extra = select_continuity(rows)
     selected += [{**row, "category": "spectral_transition", "value": row["spectral_distance"],
                   "change_sample": row["boundary_sample"]} for row in extra]
+    bandwidth_detail = None
+    if bandwidth:
+        from app.evidence.audio_bandwidth_confirmation import locate
+
+        if not native_bandwidth_input(len(pcm), mapping):
+            raise ValueError("Temporary upper-frequency review requires native six-second mono PCM16 WAV")
+        count, best = locate(pcm)
+        bandwidth_detail = {"assessed_ranges": count, "status": "unassessed" if best is None else "no_supported_drop"}
+        if best and best["drop_db"] > POINT_DB:
+            a, b = best["range"]
+            bandwidth_detail.update(status="measured_drop", measurement=best)
+            selected.append({"category": "upper_frequency_drop", "start_sample": a, "end_sample": b, "value": best["drop_db"]})
     selected.sort(key=lambda c: (c["start_sample"], c["end_sample"], c["category"]))
-    document = {"schema": SCHEMA if version == VERSION else "chipmunk.acoustic-context/1", "status": "ready", "source": source,
+    schema = BANDWIDTH_SCHEMA if bandwidth else SCHEMA if current else "chipmunk.acoustic-context/1"
+    document = {"schema": schema, "status": "ready", "source": source,
                 "method": {"version": version, "frame_samples": FRAME_SAMPLES,
                            "description": "Deterministic measurements of frozen mixed mono PCM; no sound-source separation or AI classification.",
                            "thresholds": THRESHOLDS, "selection": "Clipping, then energy changes, then longest quiet intervals; up to eight, shown in time order.",
@@ -121,17 +146,25 @@ def _base(pcm: np.ndarray, mapping: dict, source: dict, voice_packets: list[dict
                             "peak_dbfs": _db(float(np.max(np.abs(pcm)))),
                             "clipped_samples": int(np.sum(np.abs(pcm) >= THRESHOLDS["clipping_absolute_amplitude"])),
                             "near_silence_samples": sum(x["end_sample"]-x["start_sample"] for x in bins if x["rms_dbfs"] <= THRESHOLDS["near_silence_dbfs"])},
-                "bins": bins, "events": [], "omitted_events": len(candidates)-len(selected)+len(extra), "limitations": list(LIMITATIONS)}
-    if version == VERSION:
+                "bins": bins, "events": [], "omitted_events": max(0, len(candidates) - MAX_EVENTS), "limitations": list(LIMITATIONS)}
+    if current:
         document["method"]["continuity"] = CONTINUITY_METHOD
         document["method"]["selection"] += " Up to four distinct frequency-content transitions are added without replacing the original leads."
         document["continuity_windows"] = rows
         document["omitted_continuity_windows"] = sum(row["stationary_spectral_distance"] > CONTINUITY_METHOD["selection_threshold"] for row in rows) - len(extra)
         document["limitations"].append("A possible sound-content transition may be ordinary music, a new sound, microphone movement or recording processing. Steady sound helped this check in local testing; it missed many other edits and does not identify AI generation.")
+    if bandwidth:
+        document["method"]["upper_frequency_drop"] = BANDWIDTH_METHOD
+        document["upper_frequency_drop"] = bandwidth_detail
+        document["limitations"].append("The short upper-frequency check compares the mixed track only when surrounding upper-frequency sound is measurable. A supported dip can result from ordinary sound changes, filtering, or a recording-path change and carries zero weight in the AI estimate.")
     for i, candidate in enumerate(selected, 1):
         a, b, category, value = (candidate[k] for k in ("start_sample", "end_sample", "category", "value"))
         ca, cb = max(0, a-2*SAMPLE_RATE), min(len(pcm), b+2*SAMPLE_RATE)
-        if category == "spectral_transition":
+        if category == "upper_frequency_drop":
+            label, unit = "Minimum relative drop across both upper frequency bands and both flanks", "dB"
+            observation = f"The mixed track has at least {value:.1f} dB less upper-frequency energy relative to the lower band across {a/SAMPLE_RATE:.3f} to {b/SAMPLE_RATE:.3f} s. Comparable upper-frequency sound returns afterward."
+            interpretation = "Listen to the selected interval and both surrounding portions. Ordinary sound changes or filtering can produce this pattern. This observation carries zero weight in the AI estimate."
+        elif category == "spectral_transition":
             label, unit = "Frequency-content distance between adjacent half-second windows", "distance (0–1)"
             observation = f"The mixed-track frequency profile changes around the {candidate['change_sample']/SAMPLE_RATE:.3f} s comparison position (distance {value:.3f}; review threshold {CONTINUITY_METHOD['selection_threshold']:.3f})."
             interpretation = "Possible sound-content transition: listen to the selected interval and surrounding sound. Ordinary music, a new sound or recording processing can cause this pattern. This is a listening lead, not evidence of AI origin or an exact splice boundary."
@@ -157,7 +190,13 @@ def _base(pcm: np.ndarray, mapping: dict, source: dict, voice_packets: list[dict
                  "limitations": ["This interval is descriptive acoustic context, not a synthetic-voice finding or exact edit boundary."]}
         if "change_sample" in candidate:
             event["change_sample"] = candidate["change_sample"]
-        if category == "spectral_transition":
+        if category == "upper_frequency_drop":
+            event["title"] = "Temporary upper-frequency drop"
+            before, inside, after = bandwidth_detail["measurement"]["relative_band_db"]
+            for index, frequency in enumerate(("4.1–5.5 kHz", "5.5–7.4 kHz"), 1):
+                event["observations"].append({"label": f"{frequency} relative drop compared with both flanks",
+                                               "value": round(min(before[index], after[index]) - inside[index], 6), "unit": "dB"})
+        elif category == "spectral_transition":
             event["title"] = "Possible sound-content transition"
             event["observations"].extend([
                 {"label": "Within-side frequency variation", "value": candidate["within_side_instability"], "unit": "distance (0–1)"},

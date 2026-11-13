@@ -301,7 +301,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         if evidence['version'] in {'audio-evidence-2', 'audio-evidence-3'}:
             _require(bool(acoustic), 'Audio acoustic context is missing')
         if evidence['version'] == 'audio-evidence-3':
-            _require(acoustic['schema'] == 'chipmunk.acoustic-context/2', 'Audio continuity measurements are missing')
+            _require(acoustic['schema'] in {'chipmunk.acoustic-context/2', 'chipmunk.acoustic-context/3'}, 'Audio continuity measurements are missing')
         if acoustic is not None:
             from app.evidence.audio_background_binding import validate_acoustic_context
 

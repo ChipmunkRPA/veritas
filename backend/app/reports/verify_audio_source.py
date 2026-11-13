@@ -176,6 +176,14 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         replay_detail += f" Verified {len(review['windows'])} long speech-window input ranges and their marked waveforms."
         if "regions" in review:
             replay_detail += f" Verified {len(review['regions'])} selected speech ranges against the same original samples."
+    if (context := audio.get("acoustic_context")) and context["schema"] == "chipmunk.acoustic-context/3":
+        from app.evidence.audio_background import verify_source_content
+        from app.evidence.audio_packets import _chart
+
+        paths = {entry["sha256"]: entry["file"] for entry in bundle["artifacts"]}
+        verify_source_content(context, pcm=decoded.pcm, mapping=decoded.mapping, source=context["source"],
+                              voice_packets=audio["packets"], read_asset=lambda sha: archive.read(paths[sha]), waveform=_chart)
+        replay_detail += " Recomputed the temporary upper-frequency comparison and acoustic plots."
     interval_label = "interval" if intervals == 1 else "intervals"
     asset_label = "asset" if len(covered) == 1 else "assets"
     playback = (f"{intervals} original playback {interval_label} and accounted for {len(covered)} WAV {asset_label}"

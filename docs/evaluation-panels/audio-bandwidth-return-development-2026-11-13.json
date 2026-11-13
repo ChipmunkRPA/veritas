@@ -1,0 +1,4664 @@
+{
+  "freeze": {
+    "method": {
+      "controls": "Matched untouched and whole-file low-pass variants. Add brief matched level reduction, ordinary edits, AI-only voice replacements, natural background excerpts, and global EQ controls. The known voice replacements do not filter the whole mix and are negative for this physical measurement.",
+      "gate": "At least 80 percent useful locations on each cutoff, at most one matched untouched or global-filter false flag, at most one flag among unfiltered voice replacements/ordinary controls/background, and a gain of at least ten useful intervals over the prior sound-transition leads.",
+      "point": "Fixed 12 dB drop in both upper bands, bounded change in a middle band, and similar measurable flanks. No data-fitted point. Both flanks contain five 80 ms source cells. Ranges from 7 to 15 cells in two-cell steps.",
+      "positives": "Zero-phase Butterworth whole-mix low-pass at 3400 or 3800 Hz, with 25 ms raised-cosine edit edges. Edit start and duration determined by exact source digest before inference. Recompute at least half edit coverage and 0.30 time IoU.",
+      "scope": "Single submitted mixed track, six seconds, native PCM16 at 16 kHz. Report temporary upper-band attenuation as processing context and no AI weight."
+    },
+    "roster_sha256": "56f8beffc96fc6e8af3126957f941f524e907f73f55a4cacd1b2c7a2e9f3b00d",
+    "schema": "chipmunk.audio-bandwidth-return-transfer/1",
+    "source_pins": [
+      "3d3c27c859e60c86fcb583e017b3e4fda4397ef81110c42b8c1773ec7edd1599",
+      "9e7577d3f810e0ffc1614bf2af599c901cc78302de32205db1829a7df41223e1",
+      "e45c41ea18412c66b957a5215162d04a59c6a34ccc10faaf91f70bcac4d8a3cb",
+      "33d5880925e31e33f8451042f86d4be3fca00689d0173cfa24bbfd7c6f29f03c",
+      "77e7ab1cc2cef05bee168584e24824543cf18cb183cfb4ef4664334385de22fd"
+    ]
+  },
+  "rows": [
+    {
+      "best": {
+        "drop_db": -12.304711,
+        "range": [
+          11520,
+          23040
+        ],
+        "relative_band_db": [
+          [
+            -8.920843,
+            -18.525003,
+            -26.641105
+          ],
+          [
+            -10.875374,
+            -12.507775,
+            -17.359575
+          ],
+          [
+            -10.825612,
+            -17.026943,
+            -29.664286
+          ]
+        ]
+      },
+      "candidates": 1,
+      "existing_transitions": [],
+      "id": "replicate-0-0-early-untouched:untouched",
+      "parent_sha256": "5c4c8cadad443fd4c07210259a8a4eee8f36c86c68478491b6266f6e5eab19bc",
+      "sha256": "5c4c8cadad443fd4c07210259a8a4eee8f36c86c68478491b6266f6e5eab19bc",
+      "truth": null,
+      "variant": "untouched"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "replicate-0-0-early-untouched:global_lowpass",
+      "parent_sha256": "5c4c8cadad443fd4c07210259a8a4eee8f36c86c68478491b6266f6e5eab19bc",
+      "sha256": "af6a8c9242ea7d87618a65aaba0e74213bf9775dfc70e447cfda6df9a846753d",
+      "truth": null,
+      "variant": "global_lowpass"
+    },
+    {
+      "best": {
+        "drop_db": -12.304711,
+        "range": [
+          11520,
+          23040
+        ],
+        "relative_band_db": [
+          [
+            -8.920843,
+            -18.525003,
+            -26.641105
+          ],
+          [
+            -10.875374,
+            -12.507775,
+            -17.359575
+          ],
+          [
+            -10.825612,
+            -17.026943,
+            -29.664286
+          ]
+        ]
+      },
+      "candidates": 1,
+      "existing_transitions": [],
+      "id": "replicate-0-0-early-untouched:local_lowpass_3400",
+      "parent_sha256": "5c4c8cadad443fd4c07210259a8a4eee8f36c86c68478491b6266f6e5eab19bc",
+      "sha256": "641832a6f6c476eee493ccb3f6e7b77a0a41875ccbbcbbc1794a8b749fe4eac0",
+      "truth": [
+        39628,
+        53230
+      ],
+      "variant": "local_lowpass_3400"
+    },
+    {
+      "best": {
+        "drop_db": -12.304711,
+        "range": [
+          11520,
+          23040
+        ],
+        "relative_band_db": [
+          [
+            -8.920843,
+            -18.525003,
+            -26.641105
+          ],
+          [
+            -10.875374,
+            -12.507775,
+            -17.359575
+          ],
+          [
+            -10.825612,
+            -17.026943,
+            -29.664286
+          ]
+        ]
+      },
+      "candidates": 1,
+      "existing_transitions": [],
+      "id": "replicate-0-0-early-untouched:local_lowpass_3800",
+      "parent_sha256": "5c4c8cadad443fd4c07210259a8a4eee8f36c86c68478491b6266f6e5eab19bc",
+      "sha256": "a2af22465d32b25162919012ac9fab6a948bb9c3f5366d2bc10ed4867c61374d",
+      "truth": [
+        39628,
+        53230
+      ],
+      "variant": "local_lowpass_3800"
+    },
+    {
+      "best": {
+        "drop_db": -12.304711,
+        "range": [
+          11520,
+          23040
+        ],
+        "relative_band_db": [
+          [
+            -8.920843,
+            -18.525003,
+            -26.641105
+          ],
+          [
+            -10.875374,
+            -12.507775,
+            -17.359575
+          ],
+          [
+            -10.825612,
+            -17.026943,
+            -29.664286
+          ]
+        ]
+      },
+      "candidates": 1,
+      "existing_transitions": [],
+      "id": "replicate-0-0-early-untouched:local_gain",
+      "parent_sha256": "5c4c8cadad443fd4c07210259a8a4eee8f36c86c68478491b6266f6e5eab19bc",
+      "sha256": "51e4e0a849be9f03e9609b0f3b97245913def51f7d190c574af7c694876699c3",
+      "truth": null,
+      "variant": "local_gain"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "replicate-0-0-early-ordinary_same_host:unfiltered_ordinary_same_host",
+      "parent_sha256": "0a498c27acec27e03639afd01b735ee0aeca039dd486c5caef2d6efb2be61909",
+      "sha256": "0a498c27acec27e03639afd01b735ee0aeca039dd486c5caef2d6efb2be61909",
+      "truth": null,
+      "variant": "unfiltered_ordinary_same_host"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "replicate-0-0-early-ordinary_other_voice:unfiltered_ordinary_other_voice",
+      "parent_sha256": "ca5def6bcf4dea9ff31700b7d6a0d760a77a961113b98fca99fdef962cdcb4dc",
+      "sha256": "ca5def6bcf4dea9ff31700b7d6a0d760a77a961113b98fca99fdef962cdcb4dc",
+      "truth": null,
+      "variant": "unfiltered_ordinary_other_voice"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "replicate-0-0-early-synthetic:unfiltered_synthetic",
+      "parent_sha256": "325134a9f2c67cb9a0733fdf393a2a480f0820064fe02dea2c7ae0f69c5551f3",
+      "sha256": "325134a9f2c67cb9a0733fdf393a2a480f0820064fe02dea2c7ae0f69c5551f3",
+      "truth": null,
+      "variant": "unfiltered_synthetic"
+    },
+    {
+      "best": {
+        "drop_db": 0.119021,
+        "range": [
+          70400,
+          81920
+        ],
+        "relative_band_db": [
+          [
+            -3.822877,
+            -10.908631,
+            -16.695322
+          ],
+          [
+            -9.456779,
+            -17.703295,
+            -24.519596
+          ],
+          [
+            -10.844727,
+            -17.584274,
+            -23.755688
+          ]
+        ]
+      },
+      "candidates": 23,
+      "existing_transitions": [],
+      "id": "replicate-0-1-interior-untouched:untouched",
+      "parent_sha256": "8882721fb72676cd8b8d16ad2b34046590d1ff10455f26b2ea4736ec670d75ca",
+      "sha256": "8882721fb72676cd8b8d16ad2b34046590d1ff10455f26b2ea4736ec670d75ca",
+      "truth": null,
+      "variant": "untouched"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "replicate-0-1-interior-untouched:global_lowpass",
+      "parent_sha256": "8882721fb72676cd8b8d16ad2b34046590d1ff10455f26b2ea4736ec670d75ca",
+      "sha256": "40da1bfaa4486a964ca1ead7f49ec105c07a29e13b83723a9e2da77d2829f36e",
+      "truth": null,
+      "variant": "global_lowpass"
+    },
+    {
+      "best": {
+        "drop_db": 48.020108,
+        "range": [
+          49920,
+          64000
+        ],
+        "relative_band_db": [
+          [
+            -3.654598,
+            -15.326772,
+            -23.324299
+          ],
+          [
+            -2.499375,
+            -69.742811,
+            -71.344406
+          ],
+          [
+            -3.822877,
+            -10.91553,
+            -16.695322
+          ]
+        ]
+      },
+      "candidates": 19,
+      "existing_transitions": [],
+      "id": "replicate-0-1-interior-untouched:local_lowpass_3400",
+      "parent_sha256": "8882721fb72676cd8b8d16ad2b34046590d1ff10455f26b2ea4736ec670d75ca",
+      "sha256": "3a62851f5c91a8617b4f251a40d89cde65646c9c6e8dc45ae90e8e2321afe908",
+      "truth": [
+        50946,
+        64152
+      ],
+      "variant": "local_lowpass_3400"
+    },
+    {
+      "best": {
+        "drop_db": 28.358325,
+        "range": [
+          49920,
+          64000
+        ],
+        "relative_band_db": [
+          [
+            -3.654598,
+            -15.326772,
+            -23.324299
+          ],
+          [
+            -2.498412,
+            -43.685097,
+            -70.737972
+          ],
+          [
+            -3.822877,
+            -10.915215,
+            -16.695322
+          ]
+        ]
+      },
+      "candidates": 19,
+      "existing_transitions": [],
+      "id": "replicate-0-1-interior-untouched:local_lowpass_3800",
+      "parent_sha256": "8882721fb72676cd8b8d16ad2b34046590d1ff10455f26b2ea4736ec670d75ca",
+      "sha256": "6a5f0b34f91bc19c8d704765cd1b6519c94c916e8626ecddf0b1afe426886b55",
+      "truth": [
+        50946,
+        64152
+      ],
+      "variant": "local_lowpass_3800"
+    },
+    {
+      "best": {
+        "drop_db": 0.119021,
+        "range": [
+          70400,
+          81920
+        ],
+        "relative_band_db": [
+          [
+            -3.822877,
+            -10.911609,
+            -16.695322
+          ],
+          [
+            -9.456779,
+            -17.703295,
+            -24.519596
+          ],
+          [
+            -10.844727,
+            -17.584274,
+            -23.755688
+          ]
+        ]
+      },
+      "candidates": 23,
+      "existing_transitions": [],
+      "id": "replicate-0-1-interior-untouched:local_gain",
+      "parent_sha256": "8882721fb72676cd8b8d16ad2b34046590d1ff10455f26b2ea4736ec670d75ca",
+      "sha256": "605431312e0234e65077464ede8e72bfcaa17d3eb93bb2c2494a975473745783",
+      "truth": null,
+      "variant": "local_gain"
+    },
+    {
+      "best": {
+        "drop_db": 0.119021,
+        "range": [
+          70400,
+          81920
+        ],
+        "relative_band_db": [
+          [
+            -5.44635,
+            -11.229097,
+            -21.841516
+          ],
+          [
+            -9.456779,
+            -17.703295,
+            -24.519596
+          ],
+          [
+            -10.844727,
+            -17.584274,
+            -23.755688
+          ]
+        ]
+      },
+      "candidates": 22,
+      "existing_transitions": [],
+      "id": "replicate-0-1-interior-ordinary_same_host:unfiltered_ordinary_same_host",
+      "parent_sha256": "cb767c9545974da72706357e3f08364d82a2fd263418503879ddf865c74b7dcc",
+      "sha256": "cb767c9545974da72706357e3f08364d82a2fd263418503879ddf865c74b7dcc",
+      "truth": null,
+      "variant": "unfiltered_ordinary_same_host"
+    },
+    {
+      "best": {
+        "drop_db": 0.119021,
+        "range": [
+          70400,
+          81920
+        ],
+        "relative_band_db": [
+          [
+            -5.44635,
+            -11.01024,
+            -16.520903
+          ],
+          [
+            -9.456779,
+            -17.703295,
+            -24.519596
+          ],
+          [
+            -10.844727,
+            -17.584274,
+            -23.755688
+          ]
+        ]
+      },
+      "candidates": 24,
+      "existing_transitions": [],
+      "id": "replicate-0-1-interior-ordinary_other_voice:unfiltered_ordinary_other_voice",
+      "parent_sha256": "b683731a921ff17d07d933a20acece13eb8bf7883c7df6988a6bde8be7da3c64",
+      "sha256": "b683731a921ff17d07d933a20acece13eb8bf7883c7df6988a6bde8be7da3c64",
+      "truth": null,
+      "variant": "unfiltered_ordinary_other_voice"
+    },
+    {
+      "best": {
+        "drop_db": 0.119021,
+        "range": [
+          70400,
+          81920
+        ],
+        "relative_band_db": [
+          [
+            -5.44635,
+            -11.704471,
+            -16.520903
+          ],
+          [
+            -9.456779,
+            -17.703295,
+            -24.519596
+          ],
+          [
+            -10.844727,
+            -17.584274,
+            -23.755688
+          ]
+        ]
+      },
+      "candidates": 19,
+      "existing_transitions": [],
+      "id": "replicate-0-1-interior-synthetic:unfiltered_synthetic",
+      "parent_sha256": "c074cb79396fa2c4465d6d381307abc16006088f05fc4d0739e3b7ea0e620681",
+      "sha256": "c074cb79396fa2c4465d6d381307abc16006088f05fc4d0739e3b7ea0e620681",
+      "truth": null,
+      "variant": "unfiltered_synthetic"
+    },
+    {
+      "best": {
+        "drop_db": 3.047864,
+        "range": [
+          57600,
+          76800
+        ],
+        "relative_band_db": [
+          [
+            -11.886678,
+            -14.169573,
+            -23.18187
+          ],
+          [
+            -10.819899,
+            -20.423634,
+            -26.229734
+          ],
+          [
+            -8.997997,
+            -16.661188,
+            -20.139327
+          ]
+        ]
+      },
+      "candidates": 11,
+      "existing_transitions": [],
+      "id": "replicate-0-2-interior-untouched:untouched",
+      "parent_sha256": "8502023018e0ca9c3007fb86863c51d2fcd10aa84c1d7e0ff2d33cb19eb93d2e",
+      "sha256": "8502023018e0ca9c3007fb86863c51d2fcd10aa84c1d7e0ff2d33cb19eb93d2e",
+      "truth": null,
+      "variant": "untouched"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "replicate-0-2-interior-untouched:global_lowpass",
+      "parent_sha256": "8502023018e0ca9c3007fb86863c51d2fcd10aa84c1d7e0ff2d33cb19eb93d2e",
+      "sha256": "f2547dd6f0ec748a9b6c98aeb74209fb515a360416adcb31563de488b91dcb20",
+      "truth": null,
+      "variant": "global_lowpass"
+    },
+    {
+      "best": {
+        "drop_db": 13.500088,
+        "range": [
+          48640,
+          65280
+        ],
+        "relative_band_db": [
+          [
+            -6.012667,
+            -14.501784,
+            -24.838618
+          ],
+          [
+            -9.440102,
+            -38.658445,
+            -45.210487
+          ],
+          [
+            -11.506354,
+            -25.158357,
+            -27.474557
+          ]
+        ]
+      },
+      "candidates": 8,
+      "existing_transitions": [],
+      "id": "replicate-0-2-interior-untouched:local_lowpass_3400",
+      "parent_sha256": "8502023018e0ca9c3007fb86863c51d2fcd10aa84c1d7e0ff2d33cb19eb93d2e",
+      "sha256": "1b225e43a9bde5c283450a91c549a0785de9ef03f02851dfcb083f4812f77c67",
+      "truth": [
+        50050,
+        63410
+      ],
+      "variant": "local_lowpass_3400"
+    },
+    {
+      "best": {
+        "drop_db": 8.405375,
+        "range": [
+          48640,
+          65280
+        ],
+        "relative_band_db": [
+          [
+            -6.012667,
+            -14.501784,
+            -24.838618
+          ],
+          [
+            -9.440102,
+            -33.563732,
+            -45.221425
+          ],
+          [
+            -11.506354,
+            -25.158357,
+            -27.474557
+          ]
+        ]
+      },
+      "candidates": 8,
+      "existing_transitions": [],
+      "id": "replicate-0-2-interior-untouched:local_lowpass_3800",
+      "parent_sha256": "8502023018e0ca9c3007fb86863c51d2fcd10aa84c1d7e0ff2d33cb19eb93d2e",
+      "sha256": "acd316b21fec770a19679c51a77c58eae205d2c5ffeae4251a111260d51a6a63",
+      "truth": [
+        50050,
+        63410
+      ],
+      "variant": "local_lowpass_3800"
+    },
+    {
+      "best": {
+        "drop_db": 3.046502,
+        "range": [
+          57600,
+          76800
+        ],
+        "relative_band_db": [
+          [
+            -11.886793,
+            -14.170014,
+            -23.183232
+          ],
+          [
+            -10.819899,
+            -20.423634,
+            -26.229734
+          ],
+          [
+            -8.997997,
+            -16.661188,
+            -20.139327
+          ]
+        ]
+      },
+      "candidates": 11,
+      "existing_transitions": [],
+      "id": "replicate-0-2-interior-untouched:local_gain",
+      "parent_sha256": "8502023018e0ca9c3007fb86863c51d2fcd10aa84c1d7e0ff2d33cb19eb93d2e",
+      "sha256": "e123217548d194e15612d63a0b22dffe2a0950997ee30125f07fb98d468841d1",
+      "truth": null,
+      "variant": "local_gain"
+    },
+    {
+      "best": {
+        "drop_db": 3.047864,
+        "range": [
+          57600,
+          76800
+        ],
+        "relative_band_db": [
+          [
+            -11.886678,
+            -14.169573,
+            -23.18187
+          ],
+          [
+            -10.819899,
+            -20.423634,
+            -26.229734
+          ],
+          [
+            -8.997997,
+            -16.661188,
+            -20.139327
+          ]
+        ]
+      },
+      "candidates": 12,
+      "existing_transitions": [],
+      "id": "replicate-0-2-interior-ordinary_same_host:unfiltered_ordinary_same_host",
+      "parent_sha256": "46d80f1734dc8f0c02c9a6e25a7dbd459261922998de3f63b142054fe3de6347",
+      "sha256": "46d80f1734dc8f0c02c9a6e25a7dbd459261922998de3f63b142054fe3de6347",
+      "truth": null,
+      "variant": "unfiltered_ordinary_same_host"
+    },
+    {
+      "best": {
+        "drop_db": 3.047864,
+        "range": [
+          57600,
+          76800
+        ],
+        "relative_band_db": [
+          [
+            -11.886678,
+            -14.169573,
+            -23.18187
+          ],
+          [
+            -10.819899,
+            -20.423634,
+            -26.229734
+          ],
+          [
+            -8.997997,
+            -16.661188,
+            -20.139327
+          ]
+        ]
+      },
+      "candidates": 11,
+      "existing_transitions": [],
+      "id": "replicate-0-2-interior-ordinary_other_voice:unfiltered_ordinary_other_voice",
+      "parent_sha256": "2ce02f8d8e2cedaaea6567b1b432b0fed7f0e061bb4abb69811923b5895e067b",
+      "sha256": "2ce02f8d8e2cedaaea6567b1b432b0fed7f0e061bb4abb69811923b5895e067b",
+      "truth": null,
+      "variant": "unfiltered_ordinary_other_voice"
+    },
+    {
+      "best": {
+        "drop_db": 3.047864,
+        "range": [
+          57600,
+          76800
+        ],
+        "relative_band_db": [
+          [
+            -11.886678,
+            -14.169573,
+            -23.18187
+          ],
+          [
+            -10.819899,
+            -20.423634,
+            -26.229734
+          ],
+          [
+            -8.997997,
+            -16.661188,
+            -20.139327
+          ]
+        ]
+      },
+      "candidates": 12,
+      "existing_transitions": [],
+      "id": "replicate-0-2-interior-synthetic:unfiltered_synthetic",
+      "parent_sha256": "e154eee8d04d9dc764cd1aa7d0bb1006dd047b4724917b46f84890a44e3529b3",
+      "sha256": "e154eee8d04d9dc764cd1aa7d0bb1006dd047b4724917b46f84890a44e3529b3",
+      "truth": null,
+      "variant": "unfiltered_synthetic"
+    },
+    {
+      "best": {
+        "drop_db": -1.565419,
+        "range": [
+          65280,
+          74240
+        ],
+        "relative_band_db": [
+          [
+            -10.821444,
+            -20.754979,
+            -23.140235
+          ],
+          [
+            -8.822277,
+            -20.316862,
+            -26.224823
+          ],
+          [
+            -11.749532,
+            -21.882281,
+            -27.45499
+          ]
+        ]
+      },
+      "candidates": 34,
+      "existing_transitions": [],
+      "id": "replicate-1-0-late-untouched:untouched",
+      "parent_sha256": "cd499af493666b894f55a4e4a7e2ed9cfa46db22b57d5f921c14ab1c346cdfd6",
+      "sha256": "cd499af493666b894f55a4e4a7e2ed9cfa46db22b57d5f921c14ab1c346cdfd6",
+      "truth": null,
+      "variant": "untouched"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "replicate-1-0-late-untouched:global_lowpass",
+      "parent_sha256": "cd499af493666b894f55a4e4a7e2ed9cfa46db22b57d5f921c14ab1c346cdfd6",
+      "sha256": "06d4b753f030eed9d1c057dde65f515912c9fb98a2e4120440689e21b13331e5",
+      "truth": null,
+      "variant": "global_lowpass"
+    },
+    {
+      "best": {
+        "drop_db": -2.758343,
+        "range": [
+          10240,
+          29440
+        ],
+        "relative_band_db": [
+          [
+            -11.040995,
+            -16.280951,
+            -14.451195
+          ],
+          [
+            -9.63685,
+            -17.379039,
+            -17.434406
+          ],
+          [
+            -9.774195,
+            -18.038319,
+            -20.192749
+          ]
+        ]
+      },
+      "candidates": 22,
+      "existing_transitions": [],
+      "id": "replicate-1-0-late-untouched:local_lowpass_3400",
+      "parent_sha256": "cd499af493666b894f55a4e4a7e2ed9cfa46db22b57d5f921c14ab1c346cdfd6",
+      "sha256": "3b1173c647b2ab0c3cac9ab08174455d0823195db545f59b8322c882475218d5",
+      "truth": [
+        68553,
+        82609
+      ],
+      "variant": "local_lowpass_3400"
+    },
+    {
+      "best": {
+        "drop_db": -2.758343,
+        "range": [
+          10240,
+          29440
+        ],
+        "relative_band_db": [
+          [
+            -11.040995,
+            -16.280951,
+            -14.451195
+          ],
+          [
+            -9.63685,
+            -17.379039,
+            -17.434406
+          ],
+          [
+            -9.774195,
+            -18.038319,
+            -20.192749
+          ]
+        ]
+      },
+      "candidates": 22,
+      "existing_transitions": [],
+      "id": "replicate-1-0-late-untouched:local_lowpass_3800",
+      "parent_sha256": "cd499af493666b894f55a4e4a7e2ed9cfa46db22b57d5f921c14ab1c346cdfd6",
+      "sha256": "00449c4f6f096ecbf05008fabd646b83168ef62af435631b4b12d15227e5a702",
+      "truth": [
+        68553,
+        82609
+      ],
+      "variant": "local_lowpass_3800"
+    },
+    {
+      "best": {
+        "drop_db": -1.43579,
+        "range": [
+          65280,
+          74240
+        ],
+        "relative_band_db": [
+          [
+            -10.821444,
+            -20.754979,
+            -23.140235
+          ],
+          [
+            -8.822351,
+            -20.446956,
+            -26.223916
+          ],
+          [
+            -11.749285,
+            -21.882746,
+            -27.453191
+          ]
+        ]
+      },
+      "candidates": 34,
+      "existing_transitions": [],
+      "id": "replicate-1-0-late-untouched:local_gain",
+      "parent_sha256": "cd499af493666b894f55a4e4a7e2ed9cfa46db22b57d5f921c14ab1c346cdfd6",
+      "sha256": "4269474500520ce38b5e7b71780190ea0068370e265057f70af659cee915f6e0",
+      "truth": null,
+      "variant": "local_gain"
+    },
+    {
+      "best": {
+        "drop_db": -0.268827,
+        "range": [
+          64000,
+          75520
+        ],
+        "relative_band_db": [
+          [
+            -7.999105,
+            -14.399299,
+            -15.902056
+          ],
+          [
+            -9.766261,
+            -20.754979,
+            -26.170442
+          ],
+          [
+            -12.806904,
+            -21.023806,
+            -25.431499
+          ]
+        ]
+      },
+      "candidates": 36,
+      "existing_transitions": [],
+      "id": "replicate-1-0-late-ordinary_same_host:unfiltered_ordinary_same_host",
+      "parent_sha256": "d13a7d27aa9fad18bf1178f974ce69a0ced638e901064bb04e25d0c3090aea2a",
+      "sha256": "d13a7d27aa9fad18bf1178f974ce69a0ced638e901064bb04e25d0c3090aea2a",
+      "truth": null,
+      "variant": "unfiltered_ordinary_same_host"
+    },
+    {
+      "best": {
+        "drop_db": -1.565419,
+        "range": [
+          65280,
+          74240
+        ],
+        "relative_band_db": [
+          [
+            -10.821444,
+            -20.754979,
+            -23.140235
+          ],
+          [
+            -8.822277,
+            -20.316862,
+            -26.224823
+          ],
+          [
+            -11.749532,
+            -21.882281,
+            -27.45499
+          ]
+        ]
+      },
+      "candidates": 34,
+      "existing_transitions": [],
+      "id": "replicate-1-0-late-ordinary_other_voice:unfiltered_ordinary_other_voice",
+      "parent_sha256": "58e24137b34f233fbb07d5985411c2fb371c2b8f120f0456813a1da4e1bcf4a9",
+      "sha256": "58e24137b34f233fbb07d5985411c2fb371c2b8f120f0456813a1da4e1bcf4a9",
+      "truth": null,
+      "variant": "unfiltered_ordinary_other_voice"
+    },
+    {
+      "best": {
+        "drop_db": -1.565419,
+        "range": [
+          65280,
+          74240
+        ],
+        "relative_band_db": [
+          [
+            -10.821444,
+            -20.754979,
+            -23.140235
+          ],
+          [
+            -8.822277,
+            -20.316862,
+            -26.224823
+          ],
+          [
+            -11.749532,
+            -21.882281,
+            -27.45499
+          ]
+        ]
+      },
+      "candidates": 34,
+      "existing_transitions": [],
+      "id": "replicate-1-0-late-synthetic:unfiltered_synthetic",
+      "parent_sha256": "b815e5c2f687666d65533025e628489f0d5abdf11282549f479f26017d2e99a1",
+      "sha256": "b815e5c2f687666d65533025e628489f0d5abdf11282549f479f26017d2e99a1",
+      "truth": null,
+      "variant": "unfiltered_synthetic"
+    },
+    {
+      "best": {
+        "drop_db": -5.324687,
+        "range": [
+          55040,
+          64000
+        ],
+        "relative_band_db": [
+          [
+            -15.199576,
+            -25.356522,
+            -24.580359
+          ],
+          [
+            -12.334483,
+            -20.031834,
+            -26.502983
+          ],
+          [
+            -12.372155,
+            -15.498177,
+            -26.971164
+          ]
+        ]
+      },
+      "candidates": 11,
+      "existing_transitions": [],
+      "id": "replicate-1-1-interior-untouched:untouched",
+      "parent_sha256": "2d83eb6072c9b452ce03ba6b8e736813542dbd5af769a58b2c56a8e2632f5d82",
+      "sha256": "2d83eb6072c9b452ce03ba6b8e736813542dbd5af769a58b2c56a8e2632f5d82",
+      "truth": null,
+      "variant": "untouched"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "replicate-1-1-interior-untouched:global_lowpass",
+      "parent_sha256": "2d83eb6072c9b452ce03ba6b8e736813542dbd5af769a58b2c56a8e2632f5d82",
+      "sha256": "d1fe5a14096fc79aa65043de1a49eaa23fb4d72e4156d0bbc35a00a80e03519c",
+      "truth": null,
+      "variant": "global_lowpass"
+    },
+    {
+      "best": {
+        "drop_db": -5.324687,
+        "range": [
+          55040,
+          64000
+        ],
+        "relative_band_db": [
+          [
+            -15.199576,
+            -25.356522,
+            -24.580359
+          ],
+          [
+            -12.334483,
+            -20.031834,
+            -26.502983
+          ],
+          [
+            -12.372155,
+            -15.498177,
+            -26.971164
+          ]
+        ]
+      },
+      "candidates": 9,
+      "existing_transitions": [],
+      "id": "replicate-1-1-interior-untouched:local_lowpass_3400",
+      "parent_sha256": "2d83eb6072c9b452ce03ba6b8e736813542dbd5af769a58b2c56a8e2632f5d82",
+      "sha256": "1410d8896223e94c96f97ce01e4b38f1fbe8664e77eab1ee3beda23ef98cfced",
+      "truth": [
+        27651,
+        43089
+      ],
+      "variant": "local_lowpass_3400"
+    },
+    {
+      "best": {
+        "drop_db": -5.324687,
+        "range": [
+          55040,
+          64000
+        ],
+        "relative_band_db": [
+          [
+            -15.199576,
+            -25.356522,
+            -24.580359
+          ],
+          [
+            -12.334483,
+            -20.031834,
+            -26.502983
+          ],
+          [
+            -12.372155,
+            -15.498177,
+            -26.971164
+          ]
+        ]
+      },
+      "candidates": 9,
+      "existing_transitions": [],
+      "id": "replicate-1-1-interior-untouched:local_lowpass_3800",
+      "parent_sha256": "2d83eb6072c9b452ce03ba6b8e736813542dbd5af769a58b2c56a8e2632f5d82",
+      "sha256": "17f78ef41b8bb3e4cc527a563693bc8b62c3a69554f5aab4e8094618946501cb",
+      "truth": [
+        27651,
+        43089
+      ],
+      "variant": "local_lowpass_3800"
+    },
+    {
+      "best": {
+        "drop_db": -5.324687,
+        "range": [
+          55040,
+          64000
+        ],
+        "relative_band_db": [
+          [
+            -15.199576,
+            -25.356522,
+            -24.580359
+          ],
+          [
+            -12.334483,
+            -20.031834,
+            -26.502983
+          ],
+          [
+            -12.372155,
+            -15.498177,
+            -26.971164
+          ]
+        ]
+      },
+      "candidates": 10,
+      "existing_transitions": [],
+      "id": "replicate-1-1-interior-untouched:local_gain",
+      "parent_sha256": "2d83eb6072c9b452ce03ba6b8e736813542dbd5af769a58b2c56a8e2632f5d82",
+      "sha256": "708ffe801ba63995832e82d4fd3f62b11440f1ab6d3920f8a1780f35f3ccaa5a",
+      "truth": null,
+      "variant": "local_gain"
+    },
+    {
+      "best": {
+        "drop_db": -5.324687,
+        "range": [
+          55040,
+          64000
+        ],
+        "relative_band_db": [
+          [
+            -15.199576,
+            -25.356522,
+            -24.580359
+          ],
+          [
+            -12.334483,
+            -20.031834,
+            -26.502983
+          ],
+          [
+            -12.372155,
+            -15.498177,
+            -26.971164
+          ]
+        ]
+      },
+      "candidates": 12,
+      "existing_transitions": [],
+      "id": "replicate-1-1-interior-ordinary_same_host:unfiltered_ordinary_same_host",
+      "parent_sha256": "404437b1b71df0c9be4e05c4add1d94837cbb773591b636667bc2e2cf53f6ee8",
+      "sha256": "404437b1b71df0c9be4e05c4add1d94837cbb773591b636667bc2e2cf53f6ee8",
+      "truth": null,
+      "variant": "unfiltered_ordinary_same_host"
+    },
+    {
+      "best": {
+        "drop_db": -5.324687,
+        "range": [
+          55040,
+          64000
+        ],
+        "relative_band_db": [
+          [
+            -15.199576,
+            -25.356522,
+            -24.580359
+          ],
+          [
+            -12.334483,
+            -20.031834,
+            -26.502983
+          ],
+          [
+            -12.372155,
+            -15.498177,
+            -26.971164
+          ]
+        ]
+      },
+      "candidates": 19,
+      "existing_transitions": [],
+      "id": "replicate-1-1-interior-ordinary_other_voice:unfiltered_ordinary_other_voice",
+      "parent_sha256": "2d686d43d1b3dd89d9e3507bc821f5124e43b05c6469dfccebc3e774bfd6c56f",
+      "sha256": "2d686d43d1b3dd89d9e3507bc821f5124e43b05c6469dfccebc3e774bfd6c56f",
+      "truth": null,
+      "variant": "unfiltered_ordinary_other_voice"
+    },
+    {
+      "best": {
+        "drop_db": -5.324687,
+        "range": [
+          55040,
+          64000
+        ],
+        "relative_band_db": [
+          [
+            -15.199576,
+            -25.356522,
+            -24.580359
+          ],
+          [
+            -12.334483,
+            -20.031834,
+            -26.502983
+          ],
+          [
+            -12.372155,
+            -15.498177,
+            -26.971164
+          ]
+        ]
+      },
+      "candidates": 15,
+      "existing_transitions": [],
+      "id": "replicate-1-1-interior-synthetic:unfiltered_synthetic",
+      "parent_sha256": "c8e6fe1a89542f5ae4725c26552c8439e112a562ff0dc0e615d95fc13b7b2f37",
+      "sha256": "c8e6fe1a89542f5ae4725c26552c8439e112a562ff0dc0e615d95fc13b7b2f37",
+      "truth": null,
+      "variant": "unfiltered_synthetic"
+    },
+    {
+      "best": {
+        "drop_db": -6.606928,
+        "range": [
+          26880,
+          40960
+        ],
+        "relative_band_db": [
+          [
+            -10.202397,
+            -9.373947,
+            -18.433249
+          ],
+          [
+            -10.585778,
+            -10.044801,
+            -13.106339
+          ],
+          [
+            -7.1164,
+            -15.084535,
+            -19.713266
+          ]
+        ]
+      },
+      "candidates": 24,
+      "existing_transitions": [],
+      "id": "replicate-1-2-interior-untouched:untouched",
+      "parent_sha256": "ffc515c68685312e70cb3148c2da7bcf5a4606f7deb251ded67dcca837e5e4c2",
+      "sha256": "ffc515c68685312e70cb3148c2da7bcf5a4606f7deb251ded67dcca837e5e4c2",
+      "truth": null,
+      "variant": "untouched"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "replicate-1-2-interior-untouched:global_lowpass",
+      "parent_sha256": "ffc515c68685312e70cb3148c2da7bcf5a4606f7deb251ded67dcca837e5e4c2",
+      "sha256": "bf0eabd04cbe35b1c1e0624c6606b63a2ed9dcc874fbd139cbf96ef4c765a13c",
+      "truth": null,
+      "variant": "global_lowpass"
+    },
+    {
+      "best": {
+        "drop_db": 42.498447,
+        "range": [
+          26880,
+          40960
+        ],
+        "relative_band_db": [
+          [
+            -10.206037,
+            -13.648984,
+            -20.380553
+          ],
+          [
+            -10.587374,
+            -57.582982,
+            -72.63851
+          ],
+          [
+            -7.1164,
+            -15.084535,
+            -19.713266
+          ]
+        ]
+      },
+      "candidates": 20,
+      "existing_transitions": [],
+      "id": "replicate-1-2-interior-untouched:local_lowpass_3400",
+      "parent_sha256": "ffc515c68685312e70cb3148c2da7bcf5a4606f7deb251ded67dcca837e5e4c2",
+      "sha256": "a7efab3730e9b27a9fe7ea2e0945552ac53c88eed9b72e96a531403f3bfccbdf",
+      "truth": [
+        25477,
+        40650
+      ],
+      "variant": "local_lowpass_3400"
+    },
+    {
+      "best": {
+        "drop_db": 17.300539,
+        "range": [
+          25600,
+          39680
+        ],
+        "relative_band_db": [
+          [
+            -8.135109,
+            -10.383059,
+            -18.433249
+          ],
+          [
+            -10.351595,
+            -33.7638,
+            -72.118051
+          ],
+          [
+            -8.191058,
+            -16.463261,
+            -24.858237
+          ]
+        ]
+      },
+      "candidates": 20,
+      "existing_transitions": [],
+      "id": "replicate-1-2-interior-untouched:local_lowpass_3800",
+      "parent_sha256": "ffc515c68685312e70cb3148c2da7bcf5a4606f7deb251ded67dcca837e5e4c2",
+      "sha256": "100dc2dcc98266ef5c746673230e1113d7b8be904bab26a794a5eea14c1b3f52",
+      "truth": [
+        25477,
+        40650
+      ],
+      "variant": "local_lowpass_3800"
+    },
+    {
+      "best": {
+        "drop_db": -6.606189,
+        "range": [
+          26880,
+          40960
+        ],
+        "relative_band_db": [
+          [
+            -10.223764,
+            -9.373358,
+            -18.433249
+          ],
+          [
+            -10.310368,
+            -9.351088,
+            -13.107077
+          ],
+          [
+            -7.1164,
+            -15.084535,
+            -19.713266
+          ]
+        ]
+      },
+      "candidates": 26,
+      "existing_transitions": [],
+      "id": "replicate-1-2-interior-untouched:local_gain",
+      "parent_sha256": "ffc515c68685312e70cb3148c2da7bcf5a4606f7deb251ded67dcca837e5e4c2",
+      "sha256": "2d9128e2524ef5800f15b8240beda0faf514660f3fbbb243dd7089b62b2c7238",
+      "truth": null,
+      "variant": "local_gain"
+    },
+    {
+      "best": {
+        "drop_db": -7.263185,
+        "range": [
+          24320,
+          38400
+        ],
+        "relative_band_db": [
+          [
+            -8.135109,
+            -10.383059,
+            -16.893099
+          ],
+          [
+            -8.327291,
+            -5.789661,
+            -10.560311
+          ],
+          [
+            -7.1164,
+            -13.052845,
+            -16.114499
+          ]
+        ]
+      },
+      "candidates": 41,
+      "existing_transitions": [],
+      "id": "replicate-1-2-interior-ordinary_same_host:unfiltered_ordinary_same_host",
+      "parent_sha256": "2fdedea4b93e2f9f88a77801402c3d91f9503147607bab5ed2fbf08173ced896",
+      "sha256": "2fdedea4b93e2f9f88a77801402c3d91f9503147607bab5ed2fbf08173ced896",
+      "truth": null,
+      "variant": "unfiltered_ordinary_same_host"
+    },
+    {
+      "best": {
+        "drop_db": -3.445533,
+        "range": [
+          26880,
+          40960
+        ],
+        "relative_band_db": [
+          [
+            -10.202397,
+            -9.373947,
+            -18.433249
+          ],
+          [
+            -11.795993,
+            -12.730304,
+            -16.035044
+          ],
+          [
+            -7.1164,
+            -13.052845,
+            -19.480577
+          ]
+        ]
+      },
+      "candidates": 25,
+      "existing_transitions": [],
+      "id": "replicate-1-2-interior-ordinary_other_voice:unfiltered_ordinary_other_voice",
+      "parent_sha256": "47b6e95b01416a58e07d4266a62f115eb9a29a454c7fbfa5cda57bedb9354ffa",
+      "sha256": "47b6e95b01416a58e07d4266a62f115eb9a29a454c7fbfa5cda57bedb9354ffa",
+      "truth": null,
+      "variant": "unfiltered_ordinary_other_voice"
+    },
+    {
+      "best": {
+        "drop_db": -8.743738,
+        "range": [
+          26880,
+          43520
+        ],
+        "relative_band_db": [
+          [
+            -10.202397,
+            -9.373947,
+            -18.433249
+          ],
+          [
+            -7.348849,
+            -13.052845,
+            -16.114499
+          ],
+          [
+            -9.841378,
+            -20.79311,
+            -24.858237
+          ]
+        ]
+      },
+      "candidates": 14,
+      "existing_transitions": [],
+      "id": "replicate-1-2-interior-synthetic:unfiltered_synthetic",
+      "parent_sha256": "4df8252c3a3000d7ef018e671ec31a785493237acdf88aab59b16e47b2e2a915",
+      "sha256": "4df8252c3a3000d7ef018e671ec31a785493237acdf88aab59b16e47b2e2a915",
+      "truth": null,
+      "variant": "unfiltered_synthetic"
+    },
+    {
+      "best": {
+        "drop_db": -3.774544,
+        "range": [
+          15360,
+          32000
+        ],
+        "relative_band_db": [
+          [
+            -13.048735,
+            -22.292247,
+            -31.283359
+          ],
+          [
+            -15.257217,
+            -21.049072,
+            -27.508816
+          ],
+          [
+            -15.137089,
+            -22.66894,
+            -28.03512
+          ]
+        ]
+      },
+      "candidates": 50,
+      "existing_transitions": [],
+      "id": "replicate-2-0-early-untouched:untouched",
+      "parent_sha256": "824c632753d4b3ef4cb4b4e6cf780cd5ff27f097efe6be847b86a4fcd9d33791",
+      "sha256": "824c632753d4b3ef4cb4b4e6cf780cd5ff27f097efe6be847b86a4fcd9d33791",
+      "truth": null,
+      "variant": "untouched"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "replicate-2-0-early-untouched:global_lowpass",
+      "parent_sha256": "824c632753d4b3ef4cb4b4e6cf780cd5ff27f097efe6be847b86a4fcd9d33791",
+      "sha256": "c1ca7da56c05c27ebdb8b6f46c33b6c30bc624a7b861c5bac70a0a5caa7ecccc",
+      "truth": null,
+      "variant": "global_lowpass"
+    },
+    {
+      "best": {
+        "drop_db": -3.774544,
+        "range": [
+          15360,
+          32000
+        ],
+        "relative_band_db": [
+          [
+            -13.048735,
+            -22.292247,
+            -31.283359
+          ],
+          [
+            -15.257217,
+            -21.049072,
+            -27.508816
+          ],
+          [
+            -15.137089,
+            -22.66894,
+            -28.03512
+          ]
+        ]
+      },
+      "candidates": 20,
+      "existing_transitions": [],
+      "id": "replicate-2-0-early-untouched:local_lowpass_3400",
+      "parent_sha256": "824c632753d4b3ef4cb4b4e6cf780cd5ff27f097efe6be847b86a4fcd9d33791",
+      "sha256": "a5424a1c51209546371a4be059260673c03a054458e09dc9fd77d54612effdeb",
+      "truth": [
+        49356,
+        65132
+      ],
+      "variant": "local_lowpass_3400"
+    },
+    {
+      "best": {
+        "drop_db": -3.774544,
+        "range": [
+          15360,
+          32000
+        ],
+        "relative_band_db": [
+          [
+            -13.048735,
+            -22.292247,
+            -31.283359
+          ],
+          [
+            -15.257217,
+            -21.049072,
+            -27.508816
+          ],
+          [
+            -15.137089,
+            -22.66894,
+            -28.03512
+          ]
+        ]
+      },
+      "candidates": 20,
+      "existing_transitions": [],
+      "id": "replicate-2-0-early-untouched:local_lowpass_3800",
+      "parent_sha256": "824c632753d4b3ef4cb4b4e6cf780cd5ff27f097efe6be847b86a4fcd9d33791",
+      "sha256": "dc392c912df9d8f362114db72bab38d8783f2e9139023c9539aef18cdd9379d9",
+      "truth": [
+        49356,
+        65132
+      ],
+      "variant": "local_lowpass_3800"
+    },
+    {
+      "best": {
+        "drop_db": -3.774544,
+        "range": [
+          15360,
+          32000
+        ],
+        "relative_band_db": [
+          [
+            -13.048735,
+            -22.292247,
+            -31.283359
+          ],
+          [
+            -15.257217,
+            -21.049072,
+            -27.508816
+          ],
+          [
+            -15.137089,
+            -22.66894,
+            -28.03512
+          ]
+        ]
+      },
+      "candidates": 38,
+      "existing_transitions": [],
+      "id": "replicate-2-0-early-untouched:local_gain",
+      "parent_sha256": "824c632753d4b3ef4cb4b4e6cf780cd5ff27f097efe6be847b86a4fcd9d33791",
+      "sha256": "3f5d7625706b73ccb1cd8e762b1785bd90a9c3aa69ce0faa969b33e12848937d",
+      "truth": null,
+      "variant": "local_gain"
+    },
+    {
+      "best": {
+        "drop_db": -1.619868,
+        "range": [
+          15360,
+          32000
+        ],
+        "relative_band_db": [
+          [
+            -9.529557,
+            -21.712222,
+            -23.885883
+          ],
+          [
+            -15.257217,
+            -21.049072,
+            -27.508816
+          ],
+          [
+            -15.137089,
+            -22.66894,
+            -28.03512
+          ]
+        ]
+      },
+      "candidates": 49,
+      "existing_transitions": [],
+      "id": "replicate-2-0-early-ordinary_same_host:unfiltered_ordinary_same_host",
+      "parent_sha256": "7c8cde46f9abc59c69a99dc99b46b57c1e87f9ea1088303e9e984153301fb345",
+      "sha256": "7c8cde46f9abc59c69a99dc99b46b57c1e87f9ea1088303e9e984153301fb345",
+      "truth": null,
+      "variant": "unfiltered_ordinary_same_host"
+    },
+    {
+      "best": {
+        "drop_db": -1.619868,
+        "range": [
+          15360,
+          32000
+        ],
+        "relative_band_db": [
+          [
+            -14.559175,
+            -21.037923,
+            -23.132496
+          ],
+          [
+            -15.257217,
+            -21.049072,
+            -27.508816
+          ],
+          [
+            -15.137089,
+            -22.66894,
+            -28.03512
+          ]
+        ]
+      },
+      "candidates": 55,
+      "existing_transitions": [],
+      "id": "replicate-2-0-early-ordinary_other_voice:unfiltered_ordinary_other_voice",
+      "parent_sha256": "13cbfee614d32b8c232bb93d21cb99bbf9ce0de46e9758997289d285af3a2603",
+      "sha256": "13cbfee614d32b8c232bb93d21cb99bbf9ce0de46e9758997289d285af3a2603",
+      "truth": null,
+      "variant": "unfiltered_ordinary_other_voice"
+    },
+    {
+      "best": {
+        "drop_db": -1.619868,
+        "range": [
+          15360,
+          32000
+        ],
+        "relative_band_db": [
+          [
+            -12.803126,
+            -17.552425,
+            -26.170295
+          ],
+          [
+            -15.257217,
+            -21.049072,
+            -27.508816
+          ],
+          [
+            -15.137089,
+            -22.66894,
+            -28.03512
+          ]
+        ]
+      },
+      "candidates": 49,
+      "existing_transitions": [],
+      "id": "replicate-2-0-early-synthetic:unfiltered_synthetic",
+      "parent_sha256": "facff443caaa71274de2d748e2f4375833f6299b0b9f88a9e87f09bed0cf291d",
+      "sha256": "facff443caaa71274de2d748e2f4375833f6299b0b9f88a9e87f09bed0cf291d",
+      "truth": null,
+      "variant": "unfiltered_synthetic"
+    },
+    {
+      "best": {
+        "drop_db": -7.553324,
+        "range": [
+          70400,
+          89600
+        ],
+        "relative_band_db": [
+          [
+            -15.083548,
+            -22.604546,
+            -27.502953
+          ],
+          [
+            -12.065181,
+            -17.966661,
+            -19.949629
+          ],
+          [
+            -7.345683,
+            -19.061361,
+            -23.718705
+          ]
+        ]
+      },
+      "candidates": 23,
+      "existing_transitions": [],
+      "id": "replicate-2-1-interior-untouched:untouched",
+      "parent_sha256": "f633ffb9943454ea3bfcfe5ca7a3c7f97c5466f97da0ba35577e92a3328075e5",
+      "sha256": "f633ffb9943454ea3bfcfe5ca7a3c7f97c5466f97da0ba35577e92a3328075e5",
+      "truth": null,
+      "variant": "untouched"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "replicate-2-1-interior-untouched:global_lowpass",
+      "parent_sha256": "f633ffb9943454ea3bfcfe5ca7a3c7f97c5466f97da0ba35577e92a3328075e5",
+      "sha256": "71edbcfc9c2a451190feb5f935c1bb28e02ed16833de394f89c1fc254d366629",
+      "truth": null,
+      "variant": "global_lowpass"
+    },
+    {
+      "best": {
+        "drop_db": 37.701566,
+        "range": [
+          24320,
+          35840
+        ],
+        "relative_band_db": [
+          [
+            -11.179456,
+            -22.176782,
+            -30.15345
+          ],
+          [
+            -8.843345,
+            -67.188959,
+            -68.690952
+          ],
+          [
+            -11.099362,
+            -29.487393,
+            -27.637551
+          ]
+        ]
+      },
+      "candidates": 16,
+      "existing_transitions": [],
+      "id": "replicate-2-1-interior-untouched:local_lowpass_3400",
+      "parent_sha256": "f633ffb9943454ea3bfcfe5ca7a3c7f97c5466f97da0ba35577e92a3328075e5",
+      "sha256": "2a627aa7b4d5debb41e4e85e69ea23768f4111b9e7eaef471d31fced006673ae",
+      "truth": [
+        23027,
+        37272
+      ],
+      "variant": "local_lowpass_3400"
+    },
+    {
+      "best": {
+        "drop_db": 15.729703,
+        "range": [
+          24320,
+          35840
+        ],
+        "relative_band_db": [
+          [
+            -11.179456,
+            -22.176782,
+            -30.15345
+          ],
+          [
+            -8.842041,
+            -45.217096,
+            -67.886071
+          ],
+          [
+            -11.099421,
+            -29.487393,
+            -27.637551
+          ]
+        ]
+      },
+      "candidates": 16,
+      "existing_transitions": [],
+      "id": "replicate-2-1-interior-untouched:local_lowpass_3800",
+      "parent_sha256": "f633ffb9943454ea3bfcfe5ca7a3c7f97c5466f97da0ba35577e92a3328075e5",
+      "sha256": "35089a60481f9eb9151bf3958b0bd6924a14dbd1a47b2c84d76dd96bca58c073",
+      "truth": [
+        23027,
+        37272
+      ],
+      "variant": "local_lowpass_3800"
+    },
+    {
+      "best": {
+        "drop_db": -7.553324,
+        "range": [
+          70400,
+          89600
+        ],
+        "relative_band_db": [
+          [
+            -15.083548,
+            -22.604546,
+            -27.502953
+          ],
+          [
+            -12.065181,
+            -17.966661,
+            -19.949629
+          ],
+          [
+            -7.345683,
+            -19.061361,
+            -23.718705
+          ]
+        ]
+      },
+      "candidates": 22,
+      "existing_transitions": [],
+      "id": "replicate-2-1-interior-untouched:local_gain",
+      "parent_sha256": "f633ffb9943454ea3bfcfe5ca7a3c7f97c5466f97da0ba35577e92a3328075e5",
+      "sha256": "86061cd178e7f9b1f164d556b43339da315c1476d3e711ea3ecc3337986a19ee",
+      "truth": null,
+      "variant": "local_gain"
+    },
+    {
+      "best": {
+        "drop_db": -7.553324,
+        "range": [
+          70400,
+          89600
+        ],
+        "relative_band_db": [
+          [
+            -15.083548,
+            -22.604546,
+            -27.502953
+          ],
+          [
+            -12.065181,
+            -17.966661,
+            -19.949629
+          ],
+          [
+            -7.345683,
+            -19.061361,
+            -23.718705
+          ]
+        ]
+      },
+      "candidates": 22,
+      "existing_transitions": [],
+      "id": "replicate-2-1-interior-ordinary_same_host:unfiltered_ordinary_same_host",
+      "parent_sha256": "b93464aca558218f3a5ffd721ccd729a2921a239ca0322fc464b79b59cc5a5f3",
+      "sha256": "b93464aca558218f3a5ffd721ccd729a2921a239ca0322fc464b79b59cc5a5f3",
+      "truth": null,
+      "variant": "unfiltered_ordinary_same_host"
+    },
+    {
+      "best": {
+        "drop_db": -7.553324,
+        "range": [
+          70400,
+          89600
+        ],
+        "relative_band_db": [
+          [
+            -15.083548,
+            -22.604546,
+            -27.502953
+          ],
+          [
+            -12.065181,
+            -17.966661,
+            -19.949629
+          ],
+          [
+            -7.345683,
+            -19.061361,
+            -23.718705
+          ]
+        ]
+      },
+      "candidates": 12,
+      "existing_transitions": [],
+      "id": "replicate-2-1-interior-ordinary_other_voice:unfiltered_ordinary_other_voice",
+      "parent_sha256": "313414ce9ac1f3ef84b32f23ddd60aa131a650e0162ca31805848b8bdd0e3e65",
+      "sha256": "313414ce9ac1f3ef84b32f23ddd60aa131a650e0162ca31805848b8bdd0e3e65",
+      "truth": null,
+      "variant": "unfiltered_ordinary_other_voice"
+    },
+    {
+      "best": {
+        "drop_db": -7.553324,
+        "range": [
+          70400,
+          89600
+        ],
+        "relative_band_db": [
+          [
+            -15.083548,
+            -22.604546,
+            -27.502953
+          ],
+          [
+            -12.065181,
+            -17.966661,
+            -19.949629
+          ],
+          [
+            -7.345683,
+            -19.061361,
+            -23.718705
+          ]
+        ]
+      },
+      "candidates": 25,
+      "existing_transitions": [],
+      "id": "replicate-2-1-interior-synthetic:unfiltered_synthetic",
+      "parent_sha256": "8b24acf0caa7fd0a23340c56e756976a78cbdafc3aeee0709563e80269eb924f",
+      "sha256": "8b24acf0caa7fd0a23340c56e756976a78cbdafc3aeee0709563e80269eb924f",
+      "truth": null,
+      "variant": "unfiltered_synthetic"
+    },
+    {
+      "best": {
+        "drop_db": -8.126157,
+        "range": [
+          72960,
+          87040
+        ],
+        "relative_band_db": [
+          [
+            -10.893842,
+            -19.21433,
+            -24.099401
+          ],
+          [
+            -12.786414,
+            -16.548263,
+            -16.685158
+          ],
+          [
+            -14.097498,
+            -18.407563,
+            -24.811314
+          ]
+        ]
+      },
+      "candidates": 9,
+      "existing_transitions": [],
+      "id": "replicate-2-2-interior-untouched:untouched",
+      "parent_sha256": "60c7417427e3ee5db297c8f566b8dce1170a9b7017d68b1c01f84464f93214f6",
+      "sha256": "60c7417427e3ee5db297c8f566b8dce1170a9b7017d68b1c01f84464f93214f6",
+      "truth": null,
+      "variant": "untouched"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "replicate-2-2-interior-untouched:global_lowpass",
+      "parent_sha256": "60c7417427e3ee5db297c8f566b8dce1170a9b7017d68b1c01f84464f93214f6",
+      "sha256": "ea2763b80a36d5f1a81b27ec9e67286d6adf87bebfa57088b661e6da118ea696",
+      "truth": null,
+      "variant": "global_lowpass"
+    },
+    {
+      "best": {
+        "drop_db": -7.562534,
+        "range": [
+          37120,
+          56320
+        ],
+        "relative_band_db": [
+          [
+            -14.398699,
+            -30.05093,
+            -32.205978
+          ],
+          [
+            -9.799764,
+            -22.488396,
+            -33.042514
+          ],
+          [
+            -9.990344,
+            -18.547685,
+            -31.483024
+          ]
+        ]
+      },
+      "candidates": 9,
+      "existing_transitions": [],
+      "id": "replicate-2-2-interior-untouched:local_lowpass_3400",
+      "parent_sha256": "60c7417427e3ee5db297c8f566b8dce1170a9b7017d68b1c01f84464f93214f6",
+      "sha256": "d4e314f7403a358c9ae8474dc7f6ed7b25de3adec8a04cfc8316ce098d4eea14",
+      "truth": [
+        40775,
+        54326
+      ],
+      "variant": "local_lowpass_3400"
+    },
+    {
+      "best": {
+        "drop_db": -7.562534,
+        "range": [
+          37120,
+          56320
+        ],
+        "relative_band_db": [
+          [
+            -14.398699,
+            -30.05093,
+            -32.205978
+          ],
+          [
+            -9.796283,
+            -22.488396,
+            -33.042657
+          ],
+          [
+            -9.990344,
+            -18.547685,
+            -31.483024
+          ]
+        ]
+      },
+      "candidates": 9,
+      "existing_transitions": [],
+      "id": "replicate-2-2-interior-untouched:local_lowpass_3800",
+      "parent_sha256": "60c7417427e3ee5db297c8f566b8dce1170a9b7017d68b1c01f84464f93214f6",
+      "sha256": "eaf78ca522c0dc39795bb8e21fb2ad6acca2e4c1809592f55fb9b9e6cec3064f",
+      "truth": [
+        40775,
+        54326
+      ],
+      "variant": "local_lowpass_3800"
+    },
+    {
+      "best": {
+        "drop_db": -8.126157,
+        "range": [
+          72960,
+          87040
+        ],
+        "relative_band_db": [
+          [
+            -10.893842,
+            -19.21433,
+            -24.099401
+          ],
+          [
+            -12.786414,
+            -16.548263,
+            -16.685158
+          ],
+          [
+            -14.097498,
+            -18.407563,
+            -24.811314
+          ]
+        ]
+      },
+      "candidates": 10,
+      "existing_transitions": [],
+      "id": "replicate-2-2-interior-untouched:local_gain",
+      "parent_sha256": "60c7417427e3ee5db297c8f566b8dce1170a9b7017d68b1c01f84464f93214f6",
+      "sha256": "5c27f8345cdb46826368a9d4b6e91ea92660bcd1a956abfa03ed3641e3b75346",
+      "truth": null,
+      "variant": "local_gain"
+    },
+    {
+      "best": {
+        "drop_db": -8.126157,
+        "range": [
+          72960,
+          87040
+        ],
+        "relative_band_db": [
+          [
+            -10.893842,
+            -19.21433,
+            -24.099401
+          ],
+          [
+            -12.786414,
+            -16.548263,
+            -16.685158
+          ],
+          [
+            -14.097498,
+            -18.407563,
+            -24.811314
+          ]
+        ]
+      },
+      "candidates": 5,
+      "existing_transitions": [],
+      "id": "replicate-2-2-interior-ordinary_same_host:unfiltered_ordinary_same_host",
+      "parent_sha256": "19955add901a012527d1f3b8e8a8761ac51c9db3948ff8d6509595e3989d7bc3",
+      "sha256": "19955add901a012527d1f3b8e8a8761ac51c9db3948ff8d6509595e3989d7bc3",
+      "truth": null,
+      "variant": "unfiltered_ordinary_same_host"
+    },
+    {
+      "best": {
+        "drop_db": -5.497554,
+        "range": [
+          19200,
+          30720
+        ],
+        "relative_band_db": [
+          [
+            -12.119174,
+            -14.472339,
+            -25.706701
+          ],
+          [
+            -13.614152,
+            -20.740113,
+            -23.020507
+          ],
+          [
+            -13.621449,
+            -24.265104,
+            -28.518061
+          ]
+        ]
+      },
+      "candidates": 7,
+      "existing_transitions": [],
+      "id": "replicate-2-2-interior-ordinary_other_voice:unfiltered_ordinary_other_voice",
+      "parent_sha256": "b198a73145251f0ecb9fe508cb993fefc7ad10f56b81a0e35b709b634102758f",
+      "sha256": "b198a73145251f0ecb9fe508cb993fefc7ad10f56b81a0e35b709b634102758f",
+      "truth": null,
+      "variant": "unfiltered_ordinary_other_voice"
+    },
+    {
+      "best": {
+        "drop_db": -8.126157,
+        "range": [
+          72960,
+          87040
+        ],
+        "relative_band_db": [
+          [
+            -10.893842,
+            -19.21433,
+            -24.099401
+          ],
+          [
+            -12.786414,
+            -16.548263,
+            -16.685158
+          ],
+          [
+            -14.097498,
+            -18.407563,
+            -24.811314
+          ]
+        ]
+      },
+      "candidates": 9,
+      "existing_transitions": [],
+      "id": "replicate-2-2-interior-synthetic:unfiltered_synthetic",
+      "parent_sha256": "d51f026f79118b110ceefd4cbc6d28ff166809908a7f556748af4d6110453797",
+      "sha256": "d51f026f79118b110ceefd4cbc6d28ff166809908a7f556748af4d6110453797",
+      "truth": null,
+      "variant": "unfiltered_synthetic"
+    },
+    {
+      "best": {
+        "drop_db": 3.239837,
+        "range": [
+          16640,
+          30720
+        ],
+        "relative_band_db": [
+          [
+            -11.876927,
+            -17.627599,
+            -23.712913
+          ],
+          [
+            -11.484601,
+            -23.203324,
+            -26.95275
+          ],
+          [
+            -12.912886,
+            -14.397962,
+            -18.743627
+          ]
+        ]
+      },
+      "candidates": 23,
+      "existing_transitions": [],
+      "id": "replicate-3-0-late-untouched:untouched",
+      "parent_sha256": "be9bef622e0f9c49c8957cf3c9468c18359994da1a65c87170774a1b75192de1",
+      "sha256": "be9bef622e0f9c49c8957cf3c9468c18359994da1a65c87170774a1b75192de1",
+      "truth": null,
+      "variant": "untouched"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "replicate-3-0-late-untouched:global_lowpass",
+      "parent_sha256": "be9bef622e0f9c49c8957cf3c9468c18359994da1a65c87170774a1b75192de1",
+      "sha256": "00a94c8ce90e3c5c2e91dbe81b0703062ee3b82c020817bd54f2a8fa70bdae7e",
+      "truth": null,
+      "variant": "global_lowpass"
+    },
+    {
+      "best": {
+        "drop_db": 14.827937,
+        "range": [
+          61440,
+          75520
+        ],
+        "relative_band_db": [
+          [
+            -10.138274,
+            -16.302215,
+            -21.294242
+          ],
+          [
+            -5.738888,
+            -45.920297,
+            -47.436392
+          ],
+          [
+            -7.99475,
+            -26.289983,
+            -32.608455
+          ]
+        ]
+      },
+      "candidates": 23,
+      "existing_transitions": [],
+      "id": "replicate-3-0-late-untouched:local_lowpass_3400",
+      "parent_sha256": "be9bef622e0f9c49c8957cf3c9468c18359994da1a65c87170774a1b75192de1",
+      "sha256": "ee2485ca44d17afc840966022505a8085d9bc6a57efe0d0796192c33dc2ba5f8",
+      "truth": [
+        64795,
+        78058
+      ],
+      "variant": "local_lowpass_3400"
+    },
+    {
+      "best": {
+        "drop_db": 7.680719,
+        "range": [
+          61440,
+          75520
+        ],
+        "relative_band_db": [
+          [
+            -10.138274,
+            -16.302215,
+            -21.294242
+          ],
+          [
+            -5.735811,
+            -33.970703,
+            -47.646579
+          ],
+          [
+            -7.99475,
+            -26.289983,
+            -32.608455
+          ]
+        ]
+      },
+      "candidates": 23,
+      "existing_transitions": [],
+      "id": "replicate-3-0-late-untouched:local_lowpass_3800",
+      "parent_sha256": "be9bef622e0f9c49c8957cf3c9468c18359994da1a65c87170774a1b75192de1",
+      "sha256": "a6081fecf7244e9b0228e1e24dcaaead31c39777146bbf731e2b63ea88f54c26",
+      "truth": [
+        64795,
+        78058
+      ],
+      "variant": "local_lowpass_3800"
+    },
+    {
+      "best": {
+        "drop_db": 3.239837,
+        "range": [
+          16640,
+          30720
+        ],
+        "relative_band_db": [
+          [
+            -11.876927,
+            -17.627599,
+            -23.712913
+          ],
+          [
+            -11.484601,
+            -23.203324,
+            -26.95275
+          ],
+          [
+            -12.912886,
+            -14.397962,
+            -18.743627
+          ]
+        ]
+      },
+      "candidates": 23,
+      "existing_transitions": [],
+      "id": "replicate-3-0-late-untouched:local_gain",
+      "parent_sha256": "be9bef622e0f9c49c8957cf3c9468c18359994da1a65c87170774a1b75192de1",
+      "sha256": "04402af66af4f0a3777f2a36019a47be351cd2c37fea6b378e800bf7bf0fcae8",
+      "truth": null,
+      "variant": "local_gain"
+    },
+    {
+      "best": {
+        "drop_db": 3.239837,
+        "range": [
+          16640,
+          30720
+        ],
+        "relative_band_db": [
+          [
+            -11.876927,
+            -17.627599,
+            -23.712913
+          ],
+          [
+            -11.484601,
+            -23.203324,
+            -26.95275
+          ],
+          [
+            -12.912886,
+            -14.397962,
+            -18.743627
+          ]
+        ]
+      },
+      "candidates": 23,
+      "existing_transitions": [],
+      "id": "replicate-3-0-late-ordinary_same_host:unfiltered_ordinary_same_host",
+      "parent_sha256": "42e45a417ac5b3e5d4fd4f468b9ba3201350073a4dc9d7dc99a4ec1d6221bd8e",
+      "sha256": "42e45a417ac5b3e5d4fd4f468b9ba3201350073a4dc9d7dc99a4ec1d6221bd8e",
+      "truth": null,
+      "variant": "unfiltered_ordinary_same_host"
+    },
+    {
+      "best": {
+        "drop_db": 3.239837,
+        "range": [
+          16640,
+          30720
+        ],
+        "relative_band_db": [
+          [
+            -11.876927,
+            -17.627599,
+            -23.712913
+          ],
+          [
+            -11.484601,
+            -23.203324,
+            -26.95275
+          ],
+          [
+            -12.912886,
+            -14.397962,
+            -18.743627
+          ]
+        ]
+      },
+      "candidates": 23,
+      "existing_transitions": [],
+      "id": "replicate-3-0-late-ordinary_other_voice:unfiltered_ordinary_other_voice",
+      "parent_sha256": "3933a9bf20142cbe7a5b6f72bc43168da434b97248eefe83a155f95a61e9c639",
+      "sha256": "3933a9bf20142cbe7a5b6f72bc43168da434b97248eefe83a155f95a61e9c639",
+      "truth": null,
+      "variant": "unfiltered_ordinary_other_voice"
+    },
+    {
+      "best": {
+        "drop_db": 3.239837,
+        "range": [
+          16640,
+          30720
+        ],
+        "relative_band_db": [
+          [
+            -11.876927,
+            -17.627599,
+            -23.712913
+          ],
+          [
+            -11.484601,
+            -23.203324,
+            -26.95275
+          ],
+          [
+            -12.912886,
+            -14.397962,
+            -18.743627
+          ]
+        ]
+      },
+      "candidates": 23,
+      "existing_transitions": [],
+      "id": "replicate-3-0-late-synthetic:unfiltered_synthetic",
+      "parent_sha256": "1f55572028e952a74d5e5a7bd390185c60c17159a4d2bf4f0374fa4d255b15b4",
+      "sha256": "1f55572028e952a74d5e5a7bd390185c60c17159a4d2bf4f0374fa4d255b15b4",
+      "truth": null,
+      "variant": "unfiltered_synthetic"
+    },
+    {
+      "best": {
+        "drop_db": -1.992207,
+        "range": [
+          60160,
+          69120
+        ],
+        "relative_band_db": [
+          [
+            -10.918318,
+            -19.745159,
+            -26.910979
+          ],
+          [
+            -11.908849,
+            -20.162047,
+            -24.918772
+          ],
+          [
+            -16.723451,
+            -17.587431,
+            -21.575468
+          ]
+        ]
+      },
+      "candidates": 29,
+      "existing_transitions": [],
+      "id": "replicate-3-1-interior-untouched:untouched",
+      "parent_sha256": "db6843d9cfaec3bbb26de35781ba4f86d92cbd7bd9da99d08bcab59a1c0dca0a",
+      "sha256": "db6843d9cfaec3bbb26de35781ba4f86d92cbd7bd9da99d08bcab59a1c0dca0a",
+      "truth": null,
+      "variant": "untouched"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "replicate-3-1-interior-untouched:global_lowpass",
+      "parent_sha256": "db6843d9cfaec3bbb26de35781ba4f86d92cbd7bd9da99d08bcab59a1c0dca0a",
+      "sha256": "6645b6e295b23f4644c0181169cf26059bcc3da9d93ba62d4763069b274d034f",
+      "truth": null,
+      "variant": "global_lowpass"
+    },
+    {
+      "best": {
+        "drop_db": -1.992207,
+        "range": [
+          60160,
+          69120
+        ],
+        "relative_band_db": [
+          [
+            -10.918318,
+            -19.745159,
+            -26.910979
+          ],
+          [
+            -11.908849,
+            -20.162047,
+            -24.918772
+          ],
+          [
+            -16.723451,
+            -17.587431,
+            -21.575468
+          ]
+        ]
+      },
+      "candidates": 28,
+      "existing_transitions": [],
+      "id": "replicate-3-1-interior-untouched:local_lowpass_3400",
+      "parent_sha256": "db6843d9cfaec3bbb26de35781ba4f86d92cbd7bd9da99d08bcab59a1c0dca0a",
+      "sha256": "4f5d0002c0059c21d13c20dbae426c92c9f37db51fec6b151a63a87167faa3d1",
+      "truth": [
+        16168,
+        30332
+      ],
+      "variant": "local_lowpass_3400"
+    },
+    {
+      "best": {
+        "drop_db": -1.992207,
+        "range": [
+          60160,
+          69120
+        ],
+        "relative_band_db": [
+          [
+            -10.918318,
+            -19.745159,
+            -26.910979
+          ],
+          [
+            -11.908849,
+            -20.162047,
+            -24.918772
+          ],
+          [
+            -16.723451,
+            -17.587431,
+            -21.575468
+          ]
+        ]
+      },
+      "candidates": 28,
+      "existing_transitions": [],
+      "id": "replicate-3-1-interior-untouched:local_lowpass_3800",
+      "parent_sha256": "db6843d9cfaec3bbb26de35781ba4f86d92cbd7bd9da99d08bcab59a1c0dca0a",
+      "sha256": "67688993694d3bbec78f229d5e610fc62dae3afdb2af1edd96c12e91b1c87c43",
+      "truth": [
+        16168,
+        30332
+      ],
+      "variant": "local_lowpass_3800"
+    },
+    {
+      "best": {
+        "drop_db": -1.992207,
+        "range": [
+          60160,
+          69120
+        ],
+        "relative_band_db": [
+          [
+            -10.918318,
+            -19.745159,
+            -26.910979
+          ],
+          [
+            -11.908849,
+            -20.162047,
+            -24.918772
+          ],
+          [
+            -16.723451,
+            -17.587431,
+            -21.575468
+          ]
+        ]
+      },
+      "candidates": 28,
+      "existing_transitions": [],
+      "id": "replicate-3-1-interior-untouched:local_gain",
+      "parent_sha256": "db6843d9cfaec3bbb26de35781ba4f86d92cbd7bd9da99d08bcab59a1c0dca0a",
+      "sha256": "0e49746fb7b945fd4b6aaa5ae476f6cd8b905833d97a7a37bf1b34c4ba889510",
+      "truth": null,
+      "variant": "local_gain"
+    },
+    {
+      "best": {
+        "drop_db": -5.48238,
+        "range": [
+          60160,
+          69120
+        ],
+        "relative_band_db": [
+          [
+            -12.93438,
+            -21.48868,
+            -29.420228
+          ],
+          [
+            -13.02749,
+            -23.211561,
+            -23.937847
+          ],
+          [
+            -16.723451,
+            -17.587431,
+            -21.575468
+          ]
+        ]
+      },
+      "candidates": 19,
+      "existing_transitions": [],
+      "id": "replicate-3-1-interior-ordinary_same_host:unfiltered_ordinary_same_host",
+      "parent_sha256": "7568f888ef246f95cd54f92c6740e0680bc668058ea73485f4fbde4756736b6c",
+      "sha256": "7568f888ef246f95cd54f92c6740e0680bc668058ea73485f4fbde4756736b6c",
+      "truth": null,
+      "variant": "unfiltered_ordinary_same_host"
+    },
+    {
+      "best": {
+        "drop_db": -0.565767,
+        "range": [
+          60160,
+          69120
+        ],
+        "relative_band_db": [
+          [
+            -9.836887,
+            -16.946544,
+            -24.503566
+          ],
+          [
+            -13.039474,
+            -23.239894,
+            -23.937798
+          ],
+          [
+            -16.723451,
+            -17.587431,
+            -21.575468
+          ]
+        ]
+      },
+      "candidates": 23,
+      "existing_transitions": [],
+      "id": "replicate-3-1-interior-ordinary_other_voice:unfiltered_ordinary_other_voice",
+      "parent_sha256": "1e545ce54cdfa9f19f6048dd71d84cde58c54027a30398e4a3cc937ba72ca9c8",
+      "sha256": "1e545ce54cdfa9f19f6048dd71d84cde58c54027a30398e4a3cc937ba72ca9c8",
+      "truth": null,
+      "variant": "unfiltered_ordinary_other_voice"
+    },
+    {
+      "best": {
+        "drop_db": 2.430035,
+        "range": [
+          61440,
+          70400
+        ],
+        "relative_band_db": [
+          [
+            -10.288801,
+            -16.945453,
+            -21.138636
+          ],
+          [
+            -11.908849,
+            -20.549303,
+            -24.005503
+          ],
+          [
+            -16.723451,
+            -13.898225,
+            -21.575468
+          ]
+        ]
+      },
+      "candidates": 24,
+      "existing_transitions": [],
+      "id": "replicate-3-1-interior-synthetic:unfiltered_synthetic",
+      "parent_sha256": "448072cdedf5fad751ada155e26a9a115ac27860dc7e6f25677de971f249838f",
+      "sha256": "448072cdedf5fad751ada155e26a9a115ac27860dc7e6f25677de971f249838f",
+      "truth": null,
+      "variant": "unfiltered_synthetic"
+    },
+    {
+      "best": {
+        "drop_db": 4.028479,
+        "range": [
+          64000,
+          72960
+        ],
+        "relative_band_db": [
+          [
+            -14.076854,
+            -17.812892,
+            -23.541836
+          ],
+          [
+            -16.004287,
+            -24.72843,
+            -27.570316
+          ],
+          [
+            -10.834438,
+            -19.244545,
+            -23.099836
+          ]
+        ]
+      },
+      "candidates": 36,
+      "existing_transitions": [],
+      "id": "replicate-3-2-interior-untouched:untouched",
+      "parent_sha256": "1b75d7afd967102e5db1044b3e377c6a144f5da4c62796bb3f91369b75684884",
+      "sha256": "1b75d7afd967102e5db1044b3e377c6a144f5da4c62796bb3f91369b75684884",
+      "truth": null,
+      "variant": "untouched"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "replicate-3-2-interior-untouched:global_lowpass",
+      "parent_sha256": "1b75d7afd967102e5db1044b3e377c6a144f5da4c62796bb3f91369b75684884",
+      "sha256": "9c78daedc6e8973c1a3ddbc1c172b2c8c2cc32b07d7e0752acdd05eb21aee2b3",
+      "truth": null,
+      "variant": "global_lowpass"
+    },
+    {
+      "best": {
+        "drop_db": 18.691201,
+        "range": [
+          20480,
+          34560
+        ],
+        "relative_band_db": [
+          [
+            -7.722525,
+            -22.987458,
+            -31.631784
+          ],
+          [
+            -6.806427,
+            -49.662894,
+            -50.322985
+          ],
+          [
+            -0.193116,
+            -19.919296,
+            -21.792957
+          ]
+        ]
+      },
+      "candidates": 33,
+      "existing_transitions": [],
+      "id": "replicate-3-2-interior-untouched:local_lowpass_3400",
+      "parent_sha256": "1b75d7afd967102e5db1044b3e377c6a144f5da4c62796bb3f91369b75684884",
+      "sha256": "12578016251201dd29a5210d090c5b07c2b4ae9b301cab664ef9ed6da121165d",
+      "truth": [
+        23029,
+        36627
+      ],
+      "variant": "local_lowpass_3400"
+    },
+    {
+      "best": {
+        "drop_db": 15.598353,
+        "range": [
+          20480,
+          34560
+        ],
+        "relative_band_db": [
+          [
+            -7.722525,
+            -22.987458,
+            -31.631784
+          ],
+          [
+            -6.804461,
+            -38.585811,
+            -50.369289
+          ],
+          [
+            -0.192945,
+            -19.913118,
+            -21.792576
+          ]
+        ]
+      },
+      "candidates": 33,
+      "existing_transitions": [],
+      "id": "replicate-3-2-interior-untouched:local_lowpass_3800",
+      "parent_sha256": "1b75d7afd967102e5db1044b3e377c6a144f5da4c62796bb3f91369b75684884",
+      "sha256": "94492be7b67c12ab11c0d35cdc87e190281bc154dc90051ea54bdc974e7bd975",
+      "truth": [
+        23029,
+        36627
+      ],
+      "variant": "local_lowpass_3800"
+    },
+    {
+      "best": {
+        "drop_db": 4.028479,
+        "range": [
+          64000,
+          72960
+        ],
+        "relative_band_db": [
+          [
+            -14.076854,
+            -17.812892,
+            -23.541836
+          ],
+          [
+            -16.004287,
+            -24.72843,
+            -27.570316
+          ],
+          [
+            -10.834438,
+            -19.244545,
+            -23.099836
+          ]
+        ]
+      },
+      "candidates": 31,
+      "existing_transitions": [],
+      "id": "replicate-3-2-interior-untouched:local_gain",
+      "parent_sha256": "1b75d7afd967102e5db1044b3e377c6a144f5da4c62796bb3f91369b75684884",
+      "sha256": "a3ee80b1c0d198d37f165356f56603fc44c9c29b434ba5c85fef604dba98c3fe",
+      "truth": null,
+      "variant": "local_gain"
+    },
+    {
+      "best": {
+        "drop_db": 4.028479,
+        "range": [
+          64000,
+          72960
+        ],
+        "relative_band_db": [
+          [
+            -14.076854,
+            -17.812892,
+            -23.541836
+          ],
+          [
+            -16.004287,
+            -24.72843,
+            -27.570316
+          ],
+          [
+            -10.834438,
+            -19.244545,
+            -23.099836
+          ]
+        ]
+      },
+      "candidates": 34,
+      "existing_transitions": [],
+      "id": "replicate-3-2-interior-ordinary_same_host:unfiltered_ordinary_same_host",
+      "parent_sha256": "911d99332cae503c3bfa018889c588fa55ad556257de78b09a54dc0912edb543",
+      "sha256": "911d99332cae503c3bfa018889c588fa55ad556257de78b09a54dc0912edb543",
+      "truth": null,
+      "variant": "unfiltered_ordinary_same_host"
+    },
+    {
+      "best": {
+        "drop_db": 4.028479,
+        "range": [
+          64000,
+          72960
+        ],
+        "relative_band_db": [
+          [
+            -14.076854,
+            -17.812892,
+            -23.541836
+          ],
+          [
+            -16.004287,
+            -24.72843,
+            -27.570316
+          ],
+          [
+            -10.834438,
+            -19.244545,
+            -23.099836
+          ]
+        ]
+      },
+      "candidates": 37,
+      "existing_transitions": [],
+      "id": "replicate-3-2-interior-ordinary_other_voice:unfiltered_ordinary_other_voice",
+      "parent_sha256": "02b63241ae1400028ec43b59cdf2088b99249decd4f1ad6eb4326a8821dccd22",
+      "sha256": "02b63241ae1400028ec43b59cdf2088b99249decd4f1ad6eb4326a8821dccd22",
+      "truth": null,
+      "variant": "unfiltered_ordinary_other_voice"
+    },
+    {
+      "best": {
+        "drop_db": 4.028479,
+        "range": [
+          64000,
+          72960
+        ],
+        "relative_band_db": [
+          [
+            -14.076854,
+            -17.812892,
+            -23.541836
+          ],
+          [
+            -16.004287,
+            -24.72843,
+            -27.570316
+          ],
+          [
+            -10.834438,
+            -19.244545,
+            -23.099836
+          ]
+        ]
+      },
+      "candidates": 34,
+      "existing_transitions": [],
+      "id": "replicate-3-2-interior-synthetic:unfiltered_synthetic",
+      "parent_sha256": "3d731c3dde0e26463365b89c1951b5c6da63a781f5c213c8c0ba434a935a8ecc",
+      "sha256": "3d731c3dde0e26463365b89c1951b5c6da63a781f5c213c8c0ba434a935a8ecc",
+      "truth": null,
+      "variant": "unfiltered_synthetic"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "room-ES2004a:untouched",
+      "parent_sha256": "383b999cdfe89922f0fc8f0cafd9152a6d4297626a6189ec080ea8fb6a688eb2",
+      "sha256": "383b999cdfe89922f0fc8f0cafd9152a6d4297626a6189ec080ea8fb6a688eb2",
+      "truth": null,
+      "variant": "untouched"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "room-ES2004a:global_lowpass",
+      "parent_sha256": "383b999cdfe89922f0fc8f0cafd9152a6d4297626a6189ec080ea8fb6a688eb2",
+      "sha256": "3ddc7199e8ee75ccea92feeb1a2f279466c0a0bb71f7009b5ab027f760be43f6",
+      "truth": null,
+      "variant": "global_lowpass"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "room-ES2004a:local_lowpass_3400",
+      "parent_sha256": "383b999cdfe89922f0fc8f0cafd9152a6d4297626a6189ec080ea8fb6a688eb2",
+      "sha256": "70390dcea4cbab3d71049bae827bb0c53870843a978a2e16225850a650116658",
+      "truth": [
+        30395,
+        44107
+      ],
+      "variant": "local_lowpass_3400"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "room-ES2004a:local_lowpass_3800",
+      "parent_sha256": "383b999cdfe89922f0fc8f0cafd9152a6d4297626a6189ec080ea8fb6a688eb2",
+      "sha256": "c3c339a928240d90da1cf93171f1b0b29f6feaf34c438b2e73bce7bf020f6fa7",
+      "truth": [
+        30395,
+        44107
+      ],
+      "variant": "local_lowpass_3800"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "room-ES2004a:local_gain",
+      "parent_sha256": "383b999cdfe89922f0fc8f0cafd9152a6d4297626a6189ec080ea8fb6a688eb2",
+      "sha256": "eed96feb727e4623599fad84305e8444591d41d1f93372c6d35d1d9490d9d761",
+      "truth": null,
+      "variant": "local_gain"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "room-IS1009a:untouched",
+      "parent_sha256": "9716f7585ec812565467ecd0ac407637611d2f680b46ac6e96f3a5db5bc169cf",
+      "sha256": "9716f7585ec812565467ecd0ac407637611d2f680b46ac6e96f3a5db5bc169cf",
+      "truth": null,
+      "variant": "untouched"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "room-IS1009a:global_lowpass",
+      "parent_sha256": "9716f7585ec812565467ecd0ac407637611d2f680b46ac6e96f3a5db5bc169cf",
+      "sha256": "f626dcfb757c81fd4a59bd4734963bc2768dcc221a6dc654e350020732fb5d9d",
+      "truth": null,
+      "variant": "global_lowpass"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "room-IS1009a:local_lowpass_3400",
+      "parent_sha256": "9716f7585ec812565467ecd0ac407637611d2f680b46ac6e96f3a5db5bc169cf",
+      "sha256": "906304aac209e6ff817c967f0b5cb62a841d6b06e17e676974c0c74de4603596",
+      "truth": [
+        54678,
+        69979
+      ],
+      "variant": "local_lowpass_3400"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "room-IS1009a:local_lowpass_3800",
+      "parent_sha256": "9716f7585ec812565467ecd0ac407637611d2f680b46ac6e96f3a5db5bc169cf",
+      "sha256": "f52e0d294db684e5951ebf017838fbf385cb594c5d896117f94e200f9a362f10",
+      "truth": [
+        54678,
+        69979
+      ],
+      "variant": "local_lowpass_3800"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "room-IS1009a:local_gain",
+      "parent_sha256": "9716f7585ec812565467ecd0ac407637611d2f680b46ac6e96f3a5db5bc169cf",
+      "sha256": "fcddc3dcbe2c238bd87022755246608faf1ca6d549e10ca357aae6bba444e0b6",
+      "truth": null,
+      "variant": "local_gain"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "room-ES2010d:untouched",
+      "parent_sha256": "60edd679f4bca740eea5c143594c5b9298afb016d1ac04d477294906302f5884",
+      "sha256": "60edd679f4bca740eea5c143594c5b9298afb016d1ac04d477294906302f5884",
+      "truth": null,
+      "variant": "untouched"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "room-ES2010d:global_lowpass",
+      "parent_sha256": "60edd679f4bca740eea5c143594c5b9298afb016d1ac04d477294906302f5884",
+      "sha256": "d9034e3a6408177e54ac25534c5fd7f96693401a8e72aa65edbafa87af8e4ec2",
+      "truth": null,
+      "variant": "global_lowpass"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "room-ES2010d:local_lowpass_3400",
+      "parent_sha256": "60edd679f4bca740eea5c143594c5b9298afb016d1ac04d477294906302f5884",
+      "sha256": "ae507f9c2b25a1b358d5e1522ff7bbdcfab495eae157cc5c1e3c47099e5af27b",
+      "truth": [
+        40813,
+        54101
+      ],
+      "variant": "local_lowpass_3400"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "room-ES2010d:local_lowpass_3800",
+      "parent_sha256": "60edd679f4bca740eea5c143594c5b9298afb016d1ac04d477294906302f5884",
+      "sha256": "d0c13f9b016126179339adcf7d91cec6a896583d672943d54f58f91ebea6470b",
+      "truth": [
+        40813,
+        54101
+      ],
+      "variant": "local_lowpass_3800"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "room-ES2010d:local_gain",
+      "parent_sha256": "60edd679f4bca740eea5c143594c5b9298afb016d1ac04d477294906302f5884",
+      "sha256": "527e65e5f14ce517e6bfbd899d2a827fa661479ab5da8d37013b027f1701aef9",
+      "truth": null,
+      "variant": "local_gain"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "room-IS1007a:untouched",
+      "parent_sha256": "26fa7862293b1a5213fbd61e9925ae4a3f9c8316323d9fd74367a5c6812fb781",
+      "sha256": "26fa7862293b1a5213fbd61e9925ae4a3f9c8316323d9fd74367a5c6812fb781",
+      "truth": null,
+      "variant": "untouched"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "room-IS1007a:global_lowpass",
+      "parent_sha256": "26fa7862293b1a5213fbd61e9925ae4a3f9c8316323d9fd74367a5c6812fb781",
+      "sha256": "33f6c56ec8558386345c89b46b86deeac61657b34fce03b35e9b35587b198198",
+      "truth": null,
+      "variant": "global_lowpass"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "room-IS1007a:local_lowpass_3400",
+      "parent_sha256": "26fa7862293b1a5213fbd61e9925ae4a3f9c8316323d9fd74367a5c6812fb781",
+      "sha256": "3b9b9d2b089eef40646cde866c05970130e7b6de3b5120fad85700fa1cb4a2cd",
+      "truth": [
+        25978,
+        40787
+      ],
+      "variant": "local_lowpass_3400"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "room-IS1007a:local_lowpass_3800",
+      "parent_sha256": "26fa7862293b1a5213fbd61e9925ae4a3f9c8316323d9fd74367a5c6812fb781",
+      "sha256": "104aab20124fbb6e87e9bf850e35c0ea705bd0ee5f7c9f887aebf4d581a7adb9",
+      "truth": [
+        25978,
+        40787
+      ],
+      "variant": "local_lowpass_3800"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "room-IS1007a:local_gain",
+      "parent_sha256": "26fa7862293b1a5213fbd61e9925ae4a3f9c8316323d9fd74367a5c6812fb781",
+      "sha256": "b99e56b795500dc38ffc69b41f6be80b22210d3946aeca5ad6f0ac262e9d5481",
+      "truth": null,
+      "variant": "local_gain"
+    },
+    {
+      "best": {
+        "drop_db": 8.276586,
+        "range": [
+          11520,
+          20480
+        ],
+        "relative_band_db": [
+          [
+            -13.307626,
+            -10.153605,
+            -21.358336
+          ],
+          [
+            -10.013836,
+            -19.604485,
+            -29.634922
+          ],
+          [
+            -12.50849,
+            -10.874179,
+            -12.068018
+          ]
+        ]
+      },
+      "candidates": 9,
+      "existing_transitions": [],
+      "id": "transfer-held-0-0-untouched:untouched",
+      "parent_sha256": "637a10d45a111443d368926614175d624d6cf80993d98da032ae5d8f15732c28",
+      "sha256": "637a10d45a111443d368926614175d624d6cf80993d98da032ae5d8f15732c28",
+      "truth": null,
+      "variant": "untouched"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "transfer-held-0-0-untouched:global_lowpass",
+      "parent_sha256": "637a10d45a111443d368926614175d624d6cf80993d98da032ae5d8f15732c28",
+      "sha256": "b1911b21cdd03390e36497e6818dde99361e1820ef100d0e92e01504939c5b24",
+      "truth": null,
+      "variant": "global_lowpass"
+    },
+    {
+      "best": {
+        "drop_db": 8.276586,
+        "range": [
+          11520,
+          20480
+        ],
+        "relative_band_db": [
+          [
+            -13.307626,
+            -10.153605,
+            -21.358336
+          ],
+          [
+            -10.013836,
+            -19.604485,
+            -29.634922
+          ],
+          [
+            -12.50849,
+            -10.874179,
+            -12.068018
+          ]
+        ]
+      },
+      "candidates": 8,
+      "existing_transitions": [],
+      "id": "transfer-held-0-0-untouched:local_lowpass_3400",
+      "parent_sha256": "637a10d45a111443d368926614175d624d6cf80993d98da032ae5d8f15732c28",
+      "sha256": "b4fe28e6adfac3ee183258a00feaa23eaf1ee129b16cf7593d3f6ac9085e6d60",
+      "truth": [
+        41466,
+        55373
+      ],
+      "variant": "local_lowpass_3400"
+    },
+    {
+      "best": {
+        "drop_db": 8.276586,
+        "range": [
+          11520,
+          20480
+        ],
+        "relative_band_db": [
+          [
+            -13.307626,
+            -10.153605,
+            -21.358336
+          ],
+          [
+            -10.013836,
+            -19.604485,
+            -29.634922
+          ],
+          [
+            -12.50849,
+            -10.874179,
+            -12.068018
+          ]
+        ]
+      },
+      "candidates": 8,
+      "existing_transitions": [],
+      "id": "transfer-held-0-0-untouched:local_lowpass_3800",
+      "parent_sha256": "637a10d45a111443d368926614175d624d6cf80993d98da032ae5d8f15732c28",
+      "sha256": "7e9ad0a3caa77c337d298a2484cdc88389194571021708837a2e1b57d2eba0d8",
+      "truth": [
+        41466,
+        55373
+      ],
+      "variant": "local_lowpass_3800"
+    },
+    {
+      "best": {
+        "drop_db": 8.276586,
+        "range": [
+          11520,
+          20480
+        ],
+        "relative_band_db": [
+          [
+            -13.307626,
+            -10.153605,
+            -21.358336
+          ],
+          [
+            -10.013836,
+            -19.604485,
+            -29.634922
+          ],
+          [
+            -12.50849,
+            -10.874179,
+            -12.068018
+          ]
+        ]
+      },
+      "candidates": 9,
+      "existing_transitions": [],
+      "id": "transfer-held-0-0-untouched:local_gain",
+      "parent_sha256": "637a10d45a111443d368926614175d624d6cf80993d98da032ae5d8f15732c28",
+      "sha256": "521c7c652dec3588cfdfd0ac6b718dd8f488ca9458a827d7cfb37c97db23c039",
+      "truth": null,
+      "variant": "local_gain"
+    },
+    {
+      "best": {
+        "drop_db": 8.605925,
+        "range": [
+          11520,
+          20480
+        ],
+        "relative_band_db": [
+          [
+            -13.300531,
+            -10.147946,
+            -21.920125
+          ],
+          [
+            -10.266932,
+            -19.881069,
+            -30.678872
+          ],
+          [
+            -14.709846,
+            -11.275143,
+            -13.074108
+          ]
+        ]
+      },
+      "candidates": 4,
+      "existing_transitions": [],
+      "id": "transfer-held-0-0-global_eq:prior_global_eq",
+      "parent_sha256": "00b474a700f59338756299c343131e4108ea7762e52de8a260656bfbfaf3cca5",
+      "sha256": "00b474a700f59338756299c343131e4108ea7762e52de8a260656bfbfaf3cca5",
+      "truth": null,
+      "variant": "prior_global_eq"
+    },
+    {
+      "best": {
+        "drop_db": 5.00378,
+        "range": [
+          11520,
+          20480
+        ],
+        "relative_band_db": [
+          [
+            -13.305254,
+            -10.155252,
+            -21.415801
+          ],
+          [
+            -8.310671,
+            -17.51067,
+            -26.419581
+          ],
+          [
+            -11.643957,
+            -7.179223,
+            -12.481687
+          ]
+        ]
+      },
+      "candidates": 6,
+      "existing_transitions": [],
+      "id": "transfer-held-0--5-untouched:untouched",
+      "parent_sha256": "73e34d3df7a9143b33c6327815b54809e067b958744a1d4af7888eb30c3f01fb",
+      "sha256": "73e34d3df7a9143b33c6327815b54809e067b958744a1d4af7888eb30c3f01fb",
+      "truth": null,
+      "variant": "untouched"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "transfer-held-0--5-untouched:global_lowpass",
+      "parent_sha256": "73e34d3df7a9143b33c6327815b54809e067b958744a1d4af7888eb30c3f01fb",
+      "sha256": "1b0f05e6a2bbf3d7e5f471072ec08debdfbfadd0d2cbdbfcf6462880d7e6b8a6",
+      "truth": null,
+      "variant": "global_lowpass"
+    },
+    {
+      "best": {
+        "drop_db": 5.00378,
+        "range": [
+          11520,
+          20480
+        ],
+        "relative_band_db": [
+          [
+            -13.305254,
+            -10.155252,
+            -21.415801
+          ],
+          [
+            -8.310671,
+            -17.51067,
+            -26.419581
+          ],
+          [
+            -11.643957,
+            -7.179223,
+            -12.481687
+          ]
+        ]
+      },
+      "candidates": 4,
+      "existing_transitions": [],
+      "id": "transfer-held-0--5-untouched:local_lowpass_3400",
+      "parent_sha256": "73e34d3df7a9143b33c6327815b54809e067b958744a1d4af7888eb30c3f01fb",
+      "sha256": "cdd73ed10cd5d9df39b10db10de54b28d35330419fbd51ac07aa89770557ff94",
+      "truth": [
+        45667,
+        59034
+      ],
+      "variant": "local_lowpass_3400"
+    },
+    {
+      "best": {
+        "drop_db": 5.00378,
+        "range": [
+          11520,
+          20480
+        ],
+        "relative_band_db": [
+          [
+            -13.305254,
+            -10.155252,
+            -21.415801
+          ],
+          [
+            -8.310671,
+            -17.51067,
+            -26.419581
+          ],
+          [
+            -11.643957,
+            -7.179223,
+            -12.481687
+          ]
+        ]
+      },
+      "candidates": 4,
+      "existing_transitions": [],
+      "id": "transfer-held-0--5-untouched:local_lowpass_3800",
+      "parent_sha256": "73e34d3df7a9143b33c6327815b54809e067b958744a1d4af7888eb30c3f01fb",
+      "sha256": "d8f31f00a3e8df679b91d2a0194cd64f9cbc671f675f46a5fe06f8c515a59a61",
+      "truth": [
+        45667,
+        59034
+      ],
+      "variant": "local_lowpass_3800"
+    },
+    {
+      "best": {
+        "drop_db": 5.00378,
+        "range": [
+          11520,
+          20480
+        ],
+        "relative_band_db": [
+          [
+            -13.305254,
+            -10.155252,
+            -21.415801
+          ],
+          [
+            -8.310671,
+            -17.51067,
+            -26.419581
+          ],
+          [
+            -11.643957,
+            -7.179223,
+            -12.481687
+          ]
+        ]
+      },
+      "candidates": 4,
+      "existing_transitions": [],
+      "id": "transfer-held-0--5-untouched:local_gain",
+      "parent_sha256": "73e34d3df7a9143b33c6327815b54809e067b958744a1d4af7888eb30c3f01fb",
+      "sha256": "f5fe9c6437a1598276a3ccc15d73791022cbe9c9a0c308e7878bd0c602ec904a",
+      "truth": null,
+      "variant": "local_gain"
+    },
+    {
+      "best": {
+        "drop_db": 5.279634,
+        "range": [
+          11520,
+          20480
+        ],
+        "relative_band_db": [
+          [
+            -13.302304,
+            -10.152034,
+            -21.622176
+          ],
+          [
+            -8.482297,
+            -17.644829,
+            -26.90181
+          ],
+          [
+            -12.913722,
+            -8.639329,
+            -12.998814
+          ]
+        ]
+      },
+      "candidates": 5,
+      "existing_transitions": [],
+      "id": "transfer-held-0--5-global_eq:prior_global_eq",
+      "parent_sha256": "8b71ef453d0c431b8fa81353a17f957a198a0f2ada2956a3cc6a854ccfbee4b1",
+      "sha256": "8b71ef453d0c431b8fa81353a17f957a198a0f2ada2956a3cc6a854ccfbee4b1",
+      "truth": null,
+      "variant": "prior_global_eq"
+    },
+    {
+      "best": {
+        "drop_db": 1.394995,
+        "range": [
+          10240,
+          19200
+        ],
+        "relative_band_db": [
+          [
+            -13.304788,
+            -10.15564,
+            -21.455855
+          ],
+          [
+            -8.349488,
+            -11.550635,
+            -23.966857
+          ],
+          [
+            -10.331605,
+            -9.623952,
+            -12.803304
+          ]
+        ]
+      },
+      "candidates": 10,
+      "existing_transitions": [],
+      "id": "transfer-held-0--10-untouched:untouched",
+      "parent_sha256": "d7a61c189b1165e7d0230ec30cdcda7c7a3ec6a980bf996f0f7f75db39129c7c",
+      "sha256": "d7a61c189b1165e7d0230ec30cdcda7c7a3ec6a980bf996f0f7f75db39129c7c",
+      "truth": null,
+      "variant": "untouched"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "transfer-held-0--10-untouched:global_lowpass",
+      "parent_sha256": "d7a61c189b1165e7d0230ec30cdcda7c7a3ec6a980bf996f0f7f75db39129c7c",
+      "sha256": "4a7ce223ab295c1ce8608191344493c72eb0ea74093320045e20a31a4980e67c",
+      "truth": null,
+      "variant": "global_lowpass"
+    },
+    {
+      "best": {
+        "drop_db": 1.394995,
+        "range": [
+          10240,
+          19200
+        ],
+        "relative_band_db": [
+          [
+            -13.304788,
+            -10.15564,
+            -21.455855
+          ],
+          [
+            -8.349488,
+            -11.550635,
+            -23.966857
+          ],
+          [
+            -10.331605,
+            -9.623952,
+            -12.803304
+          ]
+        ]
+      },
+      "candidates": 10,
+      "existing_transitions": [],
+      "id": "transfer-held-0--10-untouched:local_lowpass_3400",
+      "parent_sha256": "d7a61c189b1165e7d0230ec30cdcda7c7a3ec6a980bf996f0f7f75db39129c7c",
+      "sha256": "a967700547ff1ea3b7d59676c1a27720a34fb4f3807525af8dbdd020c38cdee8",
+      "truth": [
+        71206,
+        84796
+      ],
+      "variant": "local_lowpass_3400"
+    },
+    {
+      "best": {
+        "drop_db": 1.394995,
+        "range": [
+          10240,
+          19200
+        ],
+        "relative_band_db": [
+          [
+            -13.304788,
+            -10.15564,
+            -21.455855
+          ],
+          [
+            -8.349488,
+            -11.550635,
+            -23.966857
+          ],
+          [
+            -10.331605,
+            -9.623952,
+            -12.803304
+          ]
+        ]
+      },
+      "candidates": 10,
+      "existing_transitions": [],
+      "id": "transfer-held-0--10-untouched:local_lowpass_3800",
+      "parent_sha256": "d7a61c189b1165e7d0230ec30cdcda7c7a3ec6a980bf996f0f7f75db39129c7c",
+      "sha256": "c1a11787206614ff7e2aa8ecba7fb5e1003c6144ee401d5016ee3dc5f28b90ca",
+      "truth": [
+        71206,
+        84796
+      ],
+      "variant": "local_lowpass_3800"
+    },
+    {
+      "best": {
+        "drop_db": 1.394995,
+        "range": [
+          10240,
+          19200
+        ],
+        "relative_band_db": [
+          [
+            -13.304788,
+            -10.15564,
+            -21.455855
+          ],
+          [
+            -8.349488,
+            -11.550635,
+            -23.966857
+          ],
+          [
+            -10.331605,
+            -9.623952,
+            -12.803304
+          ]
+        ]
+      },
+      "candidates": 10,
+      "existing_transitions": [],
+      "id": "transfer-held-0--10-untouched:local_gain",
+      "parent_sha256": "d7a61c189b1165e7d0230ec30cdcda7c7a3ec6a980bf996f0f7f75db39129c7c",
+      "sha256": "8b32e9b012224e6d5cacc31ce092fc76ba3d7955d01bd4bf03234e3a1cef3bde",
+      "truth": null,
+      "variant": "local_gain"
+    },
+    {
+      "best": {
+        "drop_db": 2.632842,
+        "range": [
+          12800,
+          21760
+        ],
+        "relative_band_db": [
+          [
+            -13.47796,
+            -10.774138,
+            -21.532457
+          ],
+          [
+            -9.484476,
+            -14.949387,
+            -24.1653
+          ],
+          [
+            -10.833878,
+            -8.707337,
+            -12.418404
+          ]
+        ]
+      },
+      "candidates": 6,
+      "existing_transitions": [],
+      "id": "transfer-held-0--10-global_eq:prior_global_eq",
+      "parent_sha256": "2839d7ba434fa3b996daa7d88b4ee9c00f742bcecee6a52dd8c987a7b6e5fd34",
+      "sha256": "2839d7ba434fa3b996daa7d88b4ee9c00f742bcecee6a52dd8c987a7b6e5fd34",
+      "truth": null,
+      "variant": "prior_global_eq"
+    },
+    {
+      "best": {
+        "drop_db": -10.815068,
+        "range": [
+          65280,
+          81920
+        ],
+        "relative_band_db": [
+          [
+            -15.850087,
+            -18.863608,
+            -30.348756
+          ],
+          [
+            -11.290297,
+            -9.215904,
+            -22.093953
+          ],
+          [
+            -14.486772,
+            -20.030972,
+            -31.567632
+          ]
+        ]
+      },
+      "candidates": 5,
+      "existing_transitions": [],
+      "id": "transfer-held-1-0-untouched:untouched",
+      "parent_sha256": "098a65ac3ce0ff63e86c635246e119859cea401783d70aa3b1df4503d7ac6cc5",
+      "sha256": "098a65ac3ce0ff63e86c635246e119859cea401783d70aa3b1df4503d7ac6cc5",
+      "truth": null,
+      "variant": "untouched"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "transfer-held-1-0-untouched:global_lowpass",
+      "parent_sha256": "098a65ac3ce0ff63e86c635246e119859cea401783d70aa3b1df4503d7ac6cc5",
+      "sha256": "3610282281407eb7d0ef63b249842840eff7c694ecc1db8c305dc6fb5466e92d",
+      "truth": null,
+      "variant": "global_lowpass"
+    },
+    {
+      "best": {
+        "drop_db": -10.815068,
+        "range": [
+          65280,
+          81920
+        ],
+        "relative_band_db": [
+          [
+            -15.850087,
+            -18.863608,
+            -30.348756
+          ],
+          [
+            -11.290297,
+            -9.215904,
+            -22.093953
+          ],
+          [
+            -14.486772,
+            -20.030972,
+            -31.567632
+          ]
+        ]
+      },
+      "candidates": 2,
+      "existing_transitions": [],
+      "id": "transfer-held-1-0-untouched:local_lowpass_3400",
+      "parent_sha256": "098a65ac3ce0ff63e86c635246e119859cea401783d70aa3b1df4503d7ac6cc5",
+      "sha256": "fb80ea10ee1ca87fb5cc16e81bd4bd5bd31b3ce65908461d4d9314b169e31280",
+      "truth": [
+        18442,
+        31662
+      ],
+      "variant": "local_lowpass_3400"
+    },
+    {
+      "best": {
+        "drop_db": -10.815068,
+        "range": [
+          65280,
+          81920
+        ],
+        "relative_band_db": [
+          [
+            -15.850087,
+            -18.863608,
+            -30.348756
+          ],
+          [
+            -11.290297,
+            -9.215904,
+            -22.093953
+          ],
+          [
+            -14.486772,
+            -20.030972,
+            -31.567632
+          ]
+        ]
+      },
+      "candidates": 2,
+      "existing_transitions": [],
+      "id": "transfer-held-1-0-untouched:local_lowpass_3800",
+      "parent_sha256": "098a65ac3ce0ff63e86c635246e119859cea401783d70aa3b1df4503d7ac6cc5",
+      "sha256": "2a99649595b862ea7420d8a6335bc5c14d8456d37b57cf69d6df135860ac9a79",
+      "truth": [
+        18442,
+        31662
+      ],
+      "variant": "local_lowpass_3800"
+    },
+    {
+      "best": {
+        "drop_db": -10.815068,
+        "range": [
+          65280,
+          81920
+        ],
+        "relative_band_db": [
+          [
+            -15.850087,
+            -18.863608,
+            -30.348756
+          ],
+          [
+            -11.290297,
+            -9.215904,
+            -22.093953
+          ],
+          [
+            -14.486772,
+            -20.030972,
+            -31.567632
+          ]
+        ]
+      },
+      "candidates": 2,
+      "existing_transitions": [],
+      "id": "transfer-held-1-0-untouched:local_gain",
+      "parent_sha256": "098a65ac3ce0ff63e86c635246e119859cea401783d70aa3b1df4503d7ac6cc5",
+      "sha256": "6ec572daf9ac701c83f0154b17914c716028ff982146aedce64acae1e0159af3",
+      "truth": null,
+      "variant": "local_gain"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "transfer-held-1-0-global_eq:prior_global_eq",
+      "parent_sha256": "c456d4a8ceb281b1c2156b5ea51d57af1ce0321126c0c8253437ad04b6a8a8df",
+      "sha256": "c456d4a8ceb281b1c2156b5ea51d57af1ce0321126c0c8253437ad04b6a8a8df",
+      "truth": null,
+      "variant": "prior_global_eq"
+    },
+    {
+      "best": {
+        "drop_db": -4.57972,
+        "range": [
+          61440,
+          72960
+        ],
+        "relative_band_db": [
+          [
+            -9.696314,
+            -14.565757,
+            -21.007462
+          ],
+          [
+            -13.383401,
+            -18.488064,
+            -18.630911
+          ],
+          [
+            -16.250838,
+            -10.825894,
+            -23.210632
+          ]
+        ]
+      },
+      "candidates": 13,
+      "existing_transitions": [],
+      "id": "transfer-held-1--5-untouched:untouched",
+      "parent_sha256": "d6f62d1738ec665890032f7bb37203db76a7a1833a1667c3a166f239345113fd",
+      "sha256": "d6f62d1738ec665890032f7bb37203db76a7a1833a1667c3a166f239345113fd",
+      "truth": null,
+      "variant": "untouched"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "transfer-held-1--5-untouched:global_lowpass",
+      "parent_sha256": "d6f62d1738ec665890032f7bb37203db76a7a1833a1667c3a166f239345113fd",
+      "sha256": "914e7067851b253777e25caa934bc8fed4dfd43019af4431d55aa9ef9fc2925d",
+      "truth": null,
+      "variant": "global_lowpass"
+    },
+    {
+      "best": {
+        "drop_db": -0.750964,
+        "range": [
+          65280,
+          84480
+        ],
+        "relative_band_db": [
+          [
+            -15.468504,
+            -18.822174,
+            -31.594977
+          ],
+          [
+            -13.562589,
+            -27.173005,
+            -30.844013
+          ],
+          [
+            -14.125687,
+            -27.313789,
+            -29.023026
+          ]
+        ]
+      },
+      "candidates": 4,
+      "existing_transitions": [],
+      "id": "transfer-held-1--5-untouched:local_lowpass_3400",
+      "parent_sha256": "d6f62d1738ec665890032f7bb37203db76a7a1833a1667c3a166f239345113fd",
+      "sha256": "fff5c902545b7d0667ed35e8f04c30d1817ae89abeae95230978d35189939e84",
+      "truth": [
+        71030,
+        85770
+      ],
+      "variant": "local_lowpass_3400"
+    },
+    {
+      "best": {
+        "drop_db": -0.750755,
+        "range": [
+          65280,
+          84480
+        ],
+        "relative_band_db": [
+          [
+            -15.468504,
+            -18.822174,
+            -31.594977
+          ],
+          [
+            -13.561292,
+            -27.171741,
+            -30.844222
+          ],
+          [
+            -14.125687,
+            -27.313789,
+            -29.023026
+          ]
+        ]
+      },
+      "candidates": 4,
+      "existing_transitions": [],
+      "id": "transfer-held-1--5-untouched:local_lowpass_3800",
+      "parent_sha256": "d6f62d1738ec665890032f7bb37203db76a7a1833a1667c3a166f239345113fd",
+      "sha256": "32e7200a6fd79c570b5c1e872a4db8564d8220feb17f5809f477fb7a76dbfd57",
+      "truth": [
+        71030,
+        85770
+      ],
+      "variant": "local_lowpass_3800"
+    },
+    {
+      "best": {
+        "drop_db": -9.538671,
+        "range": [
+          62720,
+          81920
+        ],
+        "relative_band_db": [
+          [
+            -10.109091,
+            -15.768709,
+            -23.230082
+          ],
+          [
+            -13.177385,
+            -9.950471,
+            -18.008163
+          ],
+          [
+            -15.920565,
+            -19.489142,
+            -27.532664
+          ]
+        ]
+      },
+      "candidates": 8,
+      "existing_transitions": [],
+      "id": "transfer-held-1--5-untouched:local_gain",
+      "parent_sha256": "d6f62d1738ec665890032f7bb37203db76a7a1833a1667c3a166f239345113fd",
+      "sha256": "8f666683da9da3c9719eb691feef84314afa5cb11d34b2a3c04850eafd2d2d4f",
+      "truth": null,
+      "variant": "local_gain"
+    },
+    {
+      "best": {
+        "drop_db": -5.062258,
+        "range": [
+          60160,
+          71680
+        ],
+        "relative_band_db": [
+          [
+            -10.099439,
+            -14.562435,
+            -23.256694
+          ],
+          [
+            -13.95465,
+            -20.74278,
+            -19.402216
+          ],
+          [
+            -16.752944,
+            -16.325598,
+            -24.464474
+          ]
+        ]
+      },
+      "candidates": 7,
+      "existing_transitions": [],
+      "id": "transfer-held-1--5-global_eq:prior_global_eq",
+      "parent_sha256": "5ba1bd6d150552aaa17f9f57ac3c98a95c61fbcd881143f829f877200690ebf0",
+      "sha256": "5ba1bd6d150552aaa17f9f57ac3c98a95c61fbcd881143f829f877200690ebf0",
+      "truth": null,
+      "variant": "prior_global_eq"
+    },
+    {
+      "best": {
+        "drop_db": 0.264156,
+        "range": [
+          33280,
+          44800
+        ],
+        "relative_band_db": [
+          [
+            -13.938663,
+            -13.51648,
+            -30.758402
+          ],
+          [
+            -17.142289,
+            -20.950664,
+            -31.022558
+          ],
+          [
+            -5.441467,
+            -13.578592,
+            -28.355376
+          ]
+        ]
+      },
+      "candidates": 35,
+      "existing_transitions": [],
+      "id": "transfer-held-1--10-untouched:untouched",
+      "parent_sha256": "48454f037a7980616a66e95b1a66db1400ecaac9c6deaf4f69f1c44e7bc86af4",
+      "sha256": "48454f037a7980616a66e95b1a66db1400ecaac9c6deaf4f69f1c44e7bc86af4",
+      "truth": null,
+      "variant": "untouched"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "transfer-held-1--10-untouched:global_lowpass",
+      "parent_sha256": "48454f037a7980616a66e95b1a66db1400ecaac9c6deaf4f69f1c44e7bc86af4",
+      "sha256": "cca9c496d63927c41213bc80e6d6bc374a5abb691bdc10e694fc1f4944de3deb",
+      "truth": null,
+      "variant": "global_lowpass"
+    },
+    {
+      "best": {
+        "drop_db": 45.059282,
+        "range": [
+          33280,
+          47360
+        ],
+        "relative_band_db": [
+          [
+            -13.938663,
+            -13.51648,
+            -30.758402
+          ],
+          [
+            -9.240186,
+            -67.455598,
+            -75.817684
+          ],
+          [
+            -11.376279,
+            -18.187161,
+            -27.659261
+          ]
+        ]
+      },
+      "candidates": 32,
+      "existing_transitions": [],
+      "id": "transfer-held-1--10-untouched:local_lowpass_3400",
+      "parent_sha256": "48454f037a7980616a66e95b1a66db1400ecaac9c6deaf4f69f1c44e7bc86af4",
+      "sha256": "b008fd500e1b32935f2853e3caf2fba241e0c9c3a4c4690fb06031039cc1b0bc",
+      "truth": [
+        34501,
+        48322
+      ],
+      "variant": "local_lowpass_3400"
+    },
+    {
+      "best": {
+        "drop_db": 23.114707,
+        "range": [
+          33280,
+          47360
+        ],
+        "relative_band_db": [
+          [
+            -13.938663,
+            -13.51648,
+            -30.758402
+          ],
+          [
+            -9.237069,
+            -41.301867,
+            -75.272256
+          ],
+          [
+            -11.376279,
+            -18.187161,
+            -27.659261
+          ]
+        ]
+      },
+      "candidates": 32,
+      "existing_transitions": [],
+      "id": "transfer-held-1--10-untouched:local_lowpass_3800",
+      "parent_sha256": "48454f037a7980616a66e95b1a66db1400ecaac9c6deaf4f69f1c44e7bc86af4",
+      "sha256": "cd7b041c48d75fa02c40a4eaa7ad091115b7b66a2ecc9acc217e43b00709d7f7",
+      "truth": [
+        34501,
+        48322
+      ],
+      "variant": "local_lowpass_3800"
+    },
+    {
+      "best": {
+        "drop_db": 0.261573,
+        "range": [
+          33280,
+          44800
+        ],
+        "relative_band_db": [
+          [
+            -13.938663,
+            -13.51648,
+            -30.758402
+          ],
+          [
+            -16.494734,
+            -20.950665,
+            -31.019975
+          ],
+          [
+            -5.60264,
+            -13.579619,
+            -28.355376
+          ]
+        ]
+      },
+      "candidates": 35,
+      "existing_transitions": [],
+      "id": "transfer-held-1--10-untouched:local_gain",
+      "parent_sha256": "48454f037a7980616a66e95b1a66db1400ecaac9c6deaf4f69f1c44e7bc86af4",
+      "sha256": "1843bb181e5616fc007ef436796dc907f9b276ce698de0e3c94ef38a907b174d",
+      "truth": null,
+      "variant": "local_gain"
+    },
+    {
+      "best": {
+        "drop_db": 3.826447,
+        "range": [
+          29440,
+          46080
+        ],
+        "relative_band_db": [
+          [
+            -14.4904,
+            -18.152003,
+            -22.450695
+          ],
+          [
+            -9.732653,
+            -22.823231,
+            -31.529063
+          ],
+          [
+            -5.599974,
+            -18.292454,
+            -27.702616
+          ]
+        ]
+      },
+      "candidates": 30,
+      "existing_transitions": [],
+      "id": "transfer-held-1--10-global_eq:prior_global_eq",
+      "parent_sha256": "977a524bec57014c1ad38825ecc71ea648f9c0cdf5c6329a642f881db3fdda9f",
+      "sha256": "977a524bec57014c1ad38825ecc71ea648f9c0cdf5c6329a642f881db3fdda9f",
+      "truth": null,
+      "variant": "prior_global_eq"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "transfer-held-2-0-untouched:untouched",
+      "parent_sha256": "3687adea873e63fd8452d5b4a334c9bec694ca19c6f11f527e4a22b220fc8333",
+      "sha256": "3687adea873e63fd8452d5b4a334c9bec694ca19c6f11f527e4a22b220fc8333",
+      "truth": null,
+      "variant": "untouched"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "transfer-held-2-0-untouched:global_lowpass",
+      "parent_sha256": "3687adea873e63fd8452d5b4a334c9bec694ca19c6f11f527e4a22b220fc8333",
+      "sha256": "24c210df2af8fe2bf9a4fea8cad2635ba0bb6f1de815e39028e5b7b1f1e82128",
+      "truth": null,
+      "variant": "global_lowpass"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "transfer-held-2-0-untouched:local_lowpass_3400",
+      "parent_sha256": "3687adea873e63fd8452d5b4a334c9bec694ca19c6f11f527e4a22b220fc8333",
+      "sha256": "8863e80eab2d0d6ed813173b6a361ebff7e5583c60d4e286d4697ed695322eec",
+      "truth": [
+        29959,
+        45668
+      ],
+      "variant": "local_lowpass_3400"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "transfer-held-2-0-untouched:local_lowpass_3800",
+      "parent_sha256": "3687adea873e63fd8452d5b4a334c9bec694ca19c6f11f527e4a22b220fc8333",
+      "sha256": "7a6dd604efd33550910ff4d0d338fb5e690e9f9fd0891ec856861d8717295d11",
+      "truth": [
+        29959,
+        45668
+      ],
+      "variant": "local_lowpass_3800"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "transfer-held-2-0-untouched:local_gain",
+      "parent_sha256": "3687adea873e63fd8452d5b4a334c9bec694ca19c6f11f527e4a22b220fc8333",
+      "sha256": "4189842f6e7607f61c4af3887f568479fab123dd350159d698398b0470d607b5",
+      "truth": null,
+      "variant": "local_gain"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "transfer-held-2-0-global_eq:prior_global_eq",
+      "parent_sha256": "b64ce7502c4a7718fc5833ac9b3fc7557de43fbcbc892f7f3074c48db3c3d074",
+      "sha256": "b64ce7502c4a7718fc5833ac9b3fc7557de43fbcbc892f7f3074c48db3c3d074",
+      "truth": null,
+      "variant": "prior_global_eq"
+    },
+    {
+      "best": {
+        "drop_db": -21.491894,
+        "range": [
+          80640,
+          89600
+        ],
+        "relative_band_db": [
+          [
+            -8.653924,
+            -22.078349,
+            -34.670397
+          ],
+          [
+            -4.150268,
+            -8.0797,
+            -13.178503
+          ],
+          [
+            -4.818673,
+            -22.90195,
+            -26.691031
+          ]
+        ]
+      },
+      "candidates": 1,
+      "existing_transitions": [],
+      "id": "transfer-held-2--5-untouched:untouched",
+      "parent_sha256": "993079310e35e5be66e72a857b8bbb8d6394716493c5473100dec779298a8a9d",
+      "sha256": "993079310e35e5be66e72a857b8bbb8d6394716493c5473100dec779298a8a9d",
+      "truth": null,
+      "variant": "untouched"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "transfer-held-2--5-untouched:global_lowpass",
+      "parent_sha256": "993079310e35e5be66e72a857b8bbb8d6394716493c5473100dec779298a8a9d",
+      "sha256": "987f5f53d8ddb66c7a075fac8162aad62de63ffc36549000ab1ed1fd7793c29f",
+      "truth": null,
+      "variant": "global_lowpass"
+    },
+    {
+      "best": {
+        "drop_db": -21.491894,
+        "range": [
+          80640,
+          89600
+        ],
+        "relative_band_db": [
+          [
+            -8.653924,
+            -22.078349,
+            -34.670397
+          ],
+          [
+            -4.150268,
+            -8.0797,
+            -13.178503
+          ],
+          [
+            -4.818673,
+            -22.90195,
+            -26.691031
+          ]
+        ]
+      },
+      "candidates": 1,
+      "existing_transitions": [],
+      "id": "transfer-held-2--5-untouched:local_lowpass_3400",
+      "parent_sha256": "993079310e35e5be66e72a857b8bbb8d6394716493c5473100dec779298a8a9d",
+      "sha256": "391b8612e2f5629cf4cbe2bfdc2155965b1e146949652b49d77e3286d29b3e82",
+      "truth": [
+        55216,
+        70232
+      ],
+      "variant": "local_lowpass_3400"
+    },
+    {
+      "best": {
+        "drop_db": -21.491894,
+        "range": [
+          80640,
+          89600
+        ],
+        "relative_band_db": [
+          [
+            -8.653924,
+            -22.078349,
+            -34.670397
+          ],
+          [
+            -4.150268,
+            -8.0797,
+            -13.178503
+          ],
+          [
+            -4.818673,
+            -22.90195,
+            -26.691031
+          ]
+        ]
+      },
+      "candidates": 1,
+      "existing_transitions": [],
+      "id": "transfer-held-2--5-untouched:local_lowpass_3800",
+      "parent_sha256": "993079310e35e5be66e72a857b8bbb8d6394716493c5473100dec779298a8a9d",
+      "sha256": "20acec11882fbb6fee618069eae89ef39a9ff4b8c6e202bb9c446cc551455bc1",
+      "truth": [
+        55216,
+        70232
+      ],
+      "variant": "local_lowpass_3800"
+    },
+    {
+      "best": {
+        "drop_db": -21.491894,
+        "range": [
+          80640,
+          89600
+        ],
+        "relative_band_db": [
+          [
+            -8.653924,
+            -22.078349,
+            -34.670397
+          ],
+          [
+            -4.150268,
+            -8.0797,
+            -13.178503
+          ],
+          [
+            -4.818673,
+            -22.90195,
+            -26.691031
+          ]
+        ]
+      },
+      "candidates": 1,
+      "existing_transitions": [],
+      "id": "transfer-held-2--5-untouched:local_gain",
+      "parent_sha256": "993079310e35e5be66e72a857b8bbb8d6394716493c5473100dec779298a8a9d",
+      "sha256": "10ec76724e09fcbf6c079b60d6e4375114db18a0d2ed71caf6da91d55e1519dd",
+      "truth": null,
+      "variant": "local_gain"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "transfer-held-2--5-global_eq:prior_global_eq",
+      "parent_sha256": "f2beef1b5df1f02bae92419541f82806a92668effba1763a7ddd858baf4f9e2a",
+      "sha256": "f2beef1b5df1f02bae92419541f82806a92668effba1763a7ddd858baf4f9e2a",
+      "truth": null,
+      "variant": "prior_global_eq"
+    },
+    {
+      "best": {
+        "drop_db": -4.062987,
+        "range": [
+          32000,
+          40960
+        ],
+        "relative_band_db": [
+          [
+            -13.982983,
+            -13.710004,
+            -19.094961
+          ],
+          [
+            -10.517145,
+            -14.228147,
+            -19.57218
+          ],
+          [
+            -8.252114,
+            -15.665822,
+            -23.635168
+          ]
+        ]
+      },
+      "candidates": 17,
+      "existing_transitions": [],
+      "id": "transfer-held-2--10-untouched:untouched",
+      "parent_sha256": "b4baa6df1187ad8b934547abe26851f18a2aaa90e7d5d36c1ce480a1a2c45039",
+      "sha256": "b4baa6df1187ad8b934547abe26851f18a2aaa90e7d5d36c1ce480a1a2c45039",
+      "truth": null,
+      "variant": "untouched"
+    },
+    {
+      "best": null,
+      "candidates": 0,
+      "existing_transitions": [],
+      "id": "transfer-held-2--10-untouched:global_lowpass",
+      "parent_sha256": "b4baa6df1187ad8b934547abe26851f18a2aaa90e7d5d36c1ce480a1a2c45039",
+      "sha256": "5514008ffbada9b0a536b18b191627ac223c089a46cc18c2ebf445f722784bcc",
+      "truth": null,
+      "variant": "global_lowpass"
+    },
+    {
+      "best": {
+        "drop_db": -4.062987,
+        "range": [
+          32000,
+          40960
+        ],
+        "relative_band_db": [
+          [
+            -13.982983,
+            -13.710004,
+            -19.094961
+          ],
+          [
+            -10.517145,
+            -14.228147,
+            -19.57218
+          ],
+          [
+            -8.252114,
+            -15.665822,
+            -23.635168
+          ]
+        ]
+      },
+      "candidates": 16,
+      "existing_transitions": [],
+      "id": "transfer-held-2--10-untouched:local_lowpass_3400",
+      "parent_sha256": "b4baa6df1187ad8b934547abe26851f18a2aaa90e7d5d36c1ce480a1a2c45039",
+      "sha256": "10017210c61745e890d9973afd7855aa7b224b94612790cd8c5677b3947c794e",
+      "truth": [
+        62266,
+        76172
+      ],
+      "variant": "local_lowpass_3400"
+    },
+    {
+      "best": {
+        "drop_db": -4.062987,
+        "range": [
+          32000,
+          40960
+        ],
+        "relative_band_db": [
+          [
+            -13.982983,
+            -13.710004,
+            -19.094961
+          ],
+          [
+            -10.517145,
+            -14.228147,
+            -19.57218
+          ],
+          [
+            -8.252114,
+            -15.665822,
+            -23.635168
+          ]
+        ]
+      },
+      "candidates": 16,
+      "existing_transitions": [],
+      "id": "transfer-held-2--10-untouched:local_lowpass_3800",
+      "parent_sha256": "b4baa6df1187ad8b934547abe26851f18a2aaa90e7d5d36c1ce480a1a2c45039",
+      "sha256": "7e34fec879093f469f039ee62c4ee3a293ee91a5146a148ac5498f75e7aee996",
+      "truth": [
+        62266,
+        76172
+      ],
+      "variant": "local_lowpass_3800"
+    },
+    {
+      "best": {
+        "drop_db": -4.062987,
+        "range": [
+          32000,
+          40960
+        ],
+        "relative_band_db": [
+          [
+            -13.982983,
+            -13.710004,
+            -19.094961
+          ],
+          [
+            -10.517145,
+            -14.228147,
+            -19.57218
+          ],
+          [
+            -8.252114,
+            -15.665822,
+            -23.635168
+          ]
+        ]
+      },
+      "candidates": 16,
+      "existing_transitions": [],
+      "id": "transfer-held-2--10-untouched:local_gain",
+      "parent_sha256": "b4baa6df1187ad8b934547abe26851f18a2aaa90e7d5d36c1ce480a1a2c45039",
+      "sha256": "540d4b2e94a5cf21767b48cafaea5aceda4dd67b10560bd009af0759f0a735ef",
+      "truth": null,
+      "variant": "local_gain"
+    },
+    {
+      "best": {
+        "drop_db": -6.956876,
+        "range": [
+          23040,
+          39680
+        ],
+        "relative_band_db": [
+          [
+            -11.845881,
+            -20.762203,
+            -26.415045
+          ],
+          [
+            -9.547331,
+            -14.610782,
+            -19.458169
+          ],
+          [
+            -11.853874,
+            -17.218635,
+            -24.190315
+          ]
+        ]
+      },
+      "candidates": 2,
+      "existing_transitions": [],
+      "id": "transfer-held-2--10-global_eq:prior_global_eq",
+      "parent_sha256": "53f2044adfff5bafc9e0811fd9c9a07d960a739d8c01f5dea5aa5b434d5b4eb4",
+      "sha256": "53f2044adfff5bafc9e0811fd9c9a07d960a739d8c01f5dea5aa5b434d5b4eb4",
+      "truth": null,
+      "variant": "prior_global_eq"
+    }
+  ],
+  "summary": {
+    "gain_in_useful_locations": 12,
+    "gate_pass": false,
+    "method": {
+      "global_lowpass": {
+        "flags": 0,
+        "planned": 25,
+        "unassessed": 25
+      },
+      "local_gain": {
+        "flags": 0,
+        "planned": 25,
+        "unassessed": 5
+      },
+      "local_lowpass_3400": {
+        "baseline_two_edges": 0,
+        "flags": 7,
+        "planned": 25,
+        "unassessed": 5,
+        "useful": 7
+      },
+      "local_lowpass_3800": {
+        "baseline_two_edges": 0,
+        "flags": 5,
+        "planned": 25,
+        "unassessed": 5,
+        "useful": 5
+      },
+      "prior_global_eq": {
+        "flags": 0,
+        "planned": 9,
+        "unassessed": 3
+      },
+      "unfiltered_ordinary_other_voice": {
+        "flags": 0,
+        "planned": 12,
+        "unassessed": 1
+      },
+      "unfiltered_ordinary_same_host": {
+        "flags": 0,
+        "planned": 12,
+        "unassessed": 1
+      },
+      "unfiltered_synthetic": {
+        "flags": 0,
+        "planned": 12,
+        "unassessed": 1
+      },
+      "untouched": {
+        "flags": 0,
+        "planned": 25,
+        "unassessed": 5
+      }
+    }
+  }
+}

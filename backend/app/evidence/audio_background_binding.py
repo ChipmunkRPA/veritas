@@ -8,6 +8,9 @@ from __future__ import annotations
 import math
 import re
 
+from app.evidence.audio_bandwidth_binding import BANDWIDTH_METHOD
+from app.evidence.audio_bandwidth_binding import validate as validate_bandwidth
+
 CONTINUITY_METHOD = {
     "side_samples": 8000,
     "step_samples": 4000,
@@ -54,9 +57,12 @@ def _validate(context, source, voice_packets):
     def sha(value):
         return bool(re.fullmatch(r"[a-f0-9]{64}", str(value)))
 
-    require(context["schema"] in {"chipmunk.acoustic-context/1", "chipmunk.acoustic-context/2"} and context["status"] == "ready",
+    versions = {"chipmunk.acoustic-context/1": "mixed-acoustics-1", "chipmunk.acoustic-context/2": "mixed-acoustics-2",
+                "chipmunk.acoustic-context/3": "mixed-acoustics-3"}
+    require(context["schema"] in versions and context["status"] == "ready",
             "Unsupported acoustic-context schema or status")
-    current = context["schema"] == "chipmunk.acoustic-context/2"
+    current = context["schema"] != "chipmunk.acoustic-context/1"
+    bandwidth = context["schema"] == "chipmunk.acoustic-context/3"
     binding = context["source"]
     require(binding == {key: source[key] for key in ("sha256", "pcm_sha256", "samples", "sample_rate", "coordinate_space")}
             and all(sha(binding[key]) for key in ("sha256", "pcm_sha256")), "Acoustic context uses a different source input")
@@ -64,7 +70,7 @@ def _validate(context, source, voice_packets):
     require(integer(samples) and 0 < samples <= 600 * 16000 and source["sample_rate"] == 16000
             and source["coordinate_space"] == "analysed-mono-pcm", "Invalid acoustic PCM coordinates")
     method = context["method"]
-    require(method["version"] == ("mixed-acoustics-2" if current else "mixed-acoustics-1") and method["frame_samples"] == 8000
+    require(method["version"] == versions[context["schema"]] and method["frame_samples"] == 8000
             and method["thresholds"] == {"energy_change_db": 12.0, "near_silence_dbfs": -60.0,
                 "clipping_absolute_amplitude": 0.999, "clipping_fraction": 0.001}
             and method["spectral_bands_hz"] == {"low": [0, 250], "high": [4000, 8000]}
@@ -148,6 +154,23 @@ def _validate(context, source, voice_packets):
     else:
         require("continuity_windows" not in context and "continuity" not in method, "Legacy acoustics cannot contain new continuity fields")
 
+    measured_bandwidth = None
+    if bandwidth:
+        require(method["upper_frequency_drop"] == BANDWIDTH_METHOD and samples == 96000
+                and source.get("source_channels") == 1 and source.get("source_sample_rate") == 16000
+                and source.get("source_duration_s") == 6
+                and source["timeline"] == [{"start_sample": 0, "end_sample": 96000, "source_pts": 0}],
+                "Unsupported temporary upper-frequency review input or method")
+        detail = context["upper_frequency_drop"]
+        count, status = detail["assessed_ranges"], detail["status"]
+        require(integer(count) and 0 <= count <= 275 and status in {"unassessed", "no_supported_drop", "measured_drop"}
+                and (count == 0) == (status == "unassessed") and ("measurement" in detail) == (status == "measured_drop"),
+                "Invalid temporary upper-frequency review coverage")
+        measured_bandwidth = detail.get("measurement")
+    else:
+        require("upper_frequency_drop" not in context and "upper_frequency_drop" not in method,
+                "Legacy acoustics cannot contain upper-frequency review")
+
     def image(asset, height):
         require(asset["media_type"] == "image/png" and sha(asset["sha256"])
                 and asset["width"] == 960 and asset["height"] == height, "Invalid acoustic image dimensions")
@@ -155,12 +178,19 @@ def _validate(context, source, voice_packets):
     require(set(context["overview"]) == {"energy", "spectrogram"}, "Acoustic overview lacks required source plots")
     image(context["overview"]["energy"], 280)
     image(context["overview"]["spectrogram"], 320)
-    require(isinstance(context["events"], list) and len(context["events"]) <= (12 if current else 8), "Too many acoustic evidence events")
+    categories = {"near_silence", "energy_change", "clipping"}
+    if current:
+        categories.add("spectral_transition")
+    if bandwidth:
+        categories.add("upper_frequency_drop")
+    require(isinstance(context["events"], list) and len(context["events"]) <= 8 + 4 * current + bandwidth,
+            "Too many acoustic evidence events")
     previous = None
     seen_transitions = set()
+    seen_bandwidth = False
     for index, event in enumerate(context["events"], 1):
         require(event["id"] == f"B{index:02d}" and event["evidence_type"] == "descriptive"
-                and event["category"] in ({"near_silence", "energy_change", "clipping", "spectral_transition"} if current else {"near_silence", "energy_change", "clipping"}), "Invalid acoustic event identity or semantics")
+                and event["category"] in categories, "Invalid acoustic event identity or semantics")
         a, b = interval(event["interval"])
         ca, cb = interval(event["context_interval"])
         order = (a, b, event["category"])
@@ -171,11 +201,21 @@ def _validate(context, source, voice_packets):
         require(event["related_voice_packet_ids"] == [p["id"] for p in voice_packets
                 if p["interval"]["start_sample"] < b and p["interval"]["end_sample"] > a], "Acoustic event voice references differ")
         selected = [row for row in bins if a <= row["start_sample"] < b]
-        require(event["category"] == "spectral_transition" or (bool(selected) and selected[0]["start_sample"] == a and selected[-1]["end_sample"] == b),
+        require(event["category"] in {"spectral_transition", "upper_frequency_drop"}
+                or (bool(selected) and selected[0]["start_sample"] == a and selected[-1]["end_sample"] == b),
                 "Acoustic event does not align to measured bins")
         value = event["observations"][0]["value"]
-        require(numeric(value, -120, 120), "Invalid acoustic event measurement")
-        if event["category"] == "spectral_transition":
+        require(numeric(value, -120, 240 if event["category"] == "upper_frequency_drop" else 120), "Invalid acoustic event measurement")
+        if event["category"] == "upper_frequency_drop":
+            require(measured_bandwidth is not None and not seen_bandwidth and len(event["observations"]) == 3,
+                    "Temporary upper-frequency event has no unique support")
+            require(same(value, validate_bandwidth(measured_bandwidth, start=a, end=b, samples=samples)),
+                    "Temporary upper-frequency observation differs from its support")
+            before, inside, after = measured_bandwidth["relative_band_db"]
+            require(all(same(event["observations"][i]["value"], round(min(before[i], after[i]) - inside[i], 6)) for i in (1, 2)),
+                    "Upper-frequency observations differ from their band measurements")
+            seen_bandwidth = True
+        elif event["category"] == "spectral_transition":
             boundary = event["change_sample"]
             row = transitions.get(boundary)
             require(row is not None and boundary not in seen_transitions and a == row["start_sample"] and b == row["end_sample"]
@@ -204,3 +244,4 @@ def _validate(context, source, voice_packets):
         image(event["artifacts"]["waveform"], 280)
         image(event["artifacts"]["spectrogram"], 320)
     require(seen_transitions == set(transitions), "Selected continuity leads are missing")
+    require(seen_bandwidth == (measured_bandwidth is not None), "Selected temporary upper-frequency observation is missing")

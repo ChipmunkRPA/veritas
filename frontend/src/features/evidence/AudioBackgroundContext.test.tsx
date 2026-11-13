@@ -42,6 +42,29 @@ const show = (set: AudioEvidenceSet, entry = '/analysis') => render(<MemoryRoute
 afterEach(() => { cleanup(); vi.restoreAllMocks() })
 
 describe('background and recording context', () => {
+  it('shows the upper-frequency observation with the exact playable range', () => {
+    const set = fixture()
+    const context = set.acoustic_context!
+    context.schema = 'chipmunk.acoustic-context/3'
+    context.upper_frequency_drop = { assessed_ranges: 3, status: 'measured_drop' }
+    context.events[0].category = 'upper_frequency_drop'
+    context.events[0].interpretation = 'Ordinary sound changes or filtering can produce this pattern. This observation carries zero weight in the AI estimate.'
+    show(set)
+    expect(screen.getByRole('button', { name: 'Inspect B01, Temporary upper-frequency drop, 2.000 s–3.000 s' })).toBeTruthy()
+    expect(screen.getByLabelText('B01: exact acoustic interval').getAttribute('src')).toContain(context.events[0].artifacts.selected_clip.sha256)
+    expect(screen.getByText(/carries zero weight in the AI estimate/)).toBeTruthy()
+  })
+
+  it('shows that the frequency comparison was unassessed when either flank lacks support', () => {
+    const set = fixture()
+    const context = set.acoustic_context!
+    context.schema = 'chipmunk.acoustic-context/3'
+    context.upper_frequency_drop = { assessed_ranges: 0, status: 'unassessed' }
+    show(set)
+    expect(screen.getByText('The surrounding sound did not support a temporary upper-frequency comparison.')).toBeTruthy()
+    expect(screen.queryByText('Temporary upper-frequency drop')).toBeNull()
+  })
+
   it('shows a new continuity lead with the same source-bound media and ordinary-music limitation', () => {
     const set = fixture()
     set.version = 'audio-evidence-3'

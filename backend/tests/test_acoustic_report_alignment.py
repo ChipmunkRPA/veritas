@@ -139,7 +139,7 @@ def test_acoustic_validation_is_offline_without_application_or_numeric_runtime(a
 import importlib.abc,json,socket,sys
 class RuntimeUnavailable(importlib.abc.MetaPathFinder):
     def find_spec(self,fullname,path=None,target=None):
-        if fullname in ('app.evidence','app.evidence.audio_background_binding'):
+        if fullname in ('app.evidence','app.evidence.audio_background_binding','app.evidence.audio_bandwidth_binding'):
             return None
         if fullname.startswith(('app.storage','app.core.config','app.detectors','app.evidence','app.api','numpy','PIL')):
             raise RuntimeError('Offline validation imported runtime: '+fullname)

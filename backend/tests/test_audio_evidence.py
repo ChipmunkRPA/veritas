@@ -112,7 +112,14 @@ def test_timestamp_discontinuity_remains_two_ranges():
 @pytest.fixture
 def audio_fixture(tmp_path, request):
     source_path = tmp_path / "source.wav"
-    if getattr(request, "param", None) == "clock_gap":
+    fixture_type = getattr(request, "param", None)
+    if fixture_type in {"native_band_drop", "native_band_unassessed"}:
+        time = np.arange(96000) / SAMPLE_RATE
+        lower = .05 * np.sin(2 * np.pi * 1000 * time) + .05 * np.sin(2 * np.pi * 2235 * time)
+        upper = .025 * np.sin(2 * np.pi * 4790 * time) + .025 * np.sin(2 * np.pi * 6490 * time)
+        upper[32000:48000] = 0
+        source_path.write_bytes(wav_bytes(lower + (upper if fixture_type == "native_band_drop" else 0)))
+    elif fixture_type == "clock_gap":
         _write_source(source_path, rate=16000, channels=1)
         shifted = tmp_path / "clock-gap.mka"
         subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-i", str(source_path),
@@ -137,7 +144,7 @@ def audio_fixture(tmp_path, request):
         input_ = {"version": "audio-input/1", "pcm_sha256": decoded.mapping["pcm_sha256"], "sample_rate": SAMPLE_RATE, "samples": len(decoded.pcm)}
         units = [{"unit_ref": f"window:{i}", "raw": score, "raw_kind": "probability",
                   "quality": {"start_sample": a * SAMPLE_RATE, "end_sample": b * SAMPLE_RATE, "start_s": a, "end_s": b}}
-                 for i, (a, b, score) in enumerate(((0, 4, 0.2), (2, 6, 0.9), (4, 8, 0.3)))]
+                 for i, (a, b, score) in enumerate(((0, 4, 0.2), (2, 6, 0.9), (4, 8, 0.3))) if b * SAMPLE_RATE <= len(decoded.pcm)]
         entry = {"detector_id": "aud.gustking_xlsr", "status": "ok", "family": "voice", "exhibit_ids": ["ex_audio"],
                  "details": {"audio_input": input_}, "unit_scores": units}
         raw = register_artefact(db, store, canonical_json(entry), media_type="application/json", role="raw_output", created_by="voice-check", analysis_id=analysis.id)
@@ -269,6 +276,62 @@ def test_current_audio_requires_source_bound_acoustics_but_legacy_remains_readab
     with pytest.raises(PacketIntegrityError, match='different source'):
         validate_packet_set(forged, analysis_id=analysis.id, revision=analysis.revision,
                             original_result_hash=analysis.result_hash, source_sha256=analysis.sha256)
+
+
+@pytest.mark.parametrize(("audio_fixture", "expected"), [("native_band_drop", "measured_drop"), ("native_band_unassessed", "unassessed")], indirect=["audio_fixture"])
+def test_native_bandwidth_evidence_matches_source_and_pdf(audio_fixture, expected, tmp_path, monkeypatch):
+    from test_video_nested_evidence import _check_public_zip
+
+    from app.core.config import settings
+    from app.reports import engine, multimedia_evidence
+    from app.reports.specimens import specimen
+
+    db, store, analysis, result, pcm, _ = audio_fixture
+    original = specimen("audio", "standard")
+    result = {**original.result, **result}
+    result_hash = store.put_bytes(canonical_json(result)).sha256
+    analysis.result_hash = result_hash
+    monkeypatch.setattr(settings, "audio_bandwidth_return_review", False)
+    with db.begin_nested() as transaction:
+        baseline = build_packet_set(db, analysis, store, result)
+        transaction.rollback()
+    assert baseline["acoustic_context"]["schema"] == "chipmunk.acoustic-context/2"
+    monkeypatch.setattr(settings, "audio_bandwidth_return_review", True)
+    document = build_packet_set(db, analysis, store, result)
+    acoustic = document["acoustic_context"]
+    assert acoustic["schema"] == "chipmunk.acoustic-context/3"
+    assert acoustic["upper_frequency_drop"]["status"] == expected
+    assert document["packets"] == baseline["packets"] and document["coverage"] == baseline["coverage"]
+    assert analysis.result_hash == document["original_result_hash"] == result_hash
+    assert "gustking" not in json.dumps(acoustic).casefold()
+    events = [event for event in acoustic["events"] if event["category"] == "upper_frequency_drop"]
+    if expected == "measured_drop":
+        event, = events
+        a, b = (event["interval"][key] for key in ("start_sample", "end_sample"))
+        assert 31000 <= a < 36000 and 44000 < b <= 49000
+        assert event["source_timestamp_ranges"] == [{"start_sample": a, "end_sample": b, "source_start_pts": a,
+                                                      "source_end_pts": b, "time_base": "1/16000"}]
+        np.testing.assert_array_equal(read_wav(store.read_bytes(event["artifacts"]["selected_clip"]["sha256"])), pcm[a:b])
+        forged = deepcopy(document)
+        forged["acoustic_context"]["upper_frequency_drop"]["measurement"]["drop_db"] += 1
+        forged["sha256"] = packet_hash(forged)
+        with pytest.raises(PacketIntegrityError, match="band measurements"):
+            validate_packet_set(forged, analysis_id=analysis.id, revision=analysis.revision,
+                                original_result_hash=analysis.result_hash, source_sha256=analysis.sha256)
+    else:
+        assert not events and acoustic["upper_frequency_drop"]["assessed_ranges"] == 0
+    snapshot = original.model_copy(update={"result": result, "evidence": document,
+        "analysis": original.analysis.model_copy(update={"id": analysis.id, "revision": analysis.revision}),
+        "media": original.media.model_copy(update={"sha256": analysis.sha256, "size_bytes": analysis.size_bytes,
+                                                    "filename": analysis.filename, "content_type": analysis.content_type}),
+        "report": original.report.model_copy(update={"template_set": engine.TEMPLATE_SET})})
+    monkeypatch.setattr(multimedia_evidence, "default_store", lambda: store)
+    rendered = engine.render_pdf(snapshot)
+    pdf = " ".join(engine.pdf_text(rendered.pdf).split())
+    phrase = "Temporary upper-frequency drop" if events else "The surrounding sound did not support a temporary upper-frequency comparison."
+    assert phrase in pdf and "carries zero weight" in pdf and "gustking" not in pdf.casefold()
+    _check_public_zip(SimpleNamespace(db=db, store=store, analysis=analysis, frozen=snapshot, document=document),
+                      tmp_path, monkeypatch, rendered.pdf, source_audio=tmp_path / analysis.filename)
 
 
 def test_unscored_spans_and_below_threshold_do_not_invent_regions(audio_fixture):

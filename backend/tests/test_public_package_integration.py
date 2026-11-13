@@ -484,7 +484,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
                         'app.evidence.document_email_contexts', 'app.evidence.document_native_locations',
                         'app.evidence.document_passage_position', 'app.evidence.document_long_passage_position',
                         'app.evidence.document_tracked_changes',
-                        'app.evidence.audio_binding', 'app.evidence.av_binding', 'app.evidence.audio_background_binding',
+                        'app.evidence.audio_binding', 'app.evidence.av_binding', 'app.evidence.audio_background_binding', 'app.evidence.audio_bandwidth_binding',
                         'app.evidence.audio_repetition_binding', 'app.evidence.audio_exact_repetition', 'app.evidence.audio_similarity_binding',
                         'app.evidence.face_interval_binding', 'app.evidence.face_boundary_binding', 'app.evidence.face_boundary_clock', 'app.evidence.face_alignment_context',
                         'app.evidence.face_paired_edge_binding', 'app.evidence.face_short_proposal_binding', 'app.evidence.face_short_window_binding', 'app.evidence.face_short_carrier_binding', 'app.evidence.face_spatial_cut_binding',

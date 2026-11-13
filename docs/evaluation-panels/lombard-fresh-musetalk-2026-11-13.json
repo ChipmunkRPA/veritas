@@ -1,0 +1,466 @@
+{
+  "audit_sha256": "3f880e2dd74762522202800ac29e0982a863505b13b4889bc999dee900e8463f",
+  "freeze_sha256": "2e4885b07567ad30c11ac1a00c5d31350affc3f1209342c135042b1241cb7ff2",
+  "historical_asset_manifest_sha256": "bc823fb8f21e21c8c1cd722d225c927b0102b724b76942457f166ef047caf9fc",
+  "native_observation_sha256": "8fb823dd841bd1a20e0653112c9052faf9938435e774f5e45a8d7f36c3851b35",
+  "native_render_scope": {
+    "different_conditioned_crop_pairs": 96,
+    "matched_latent_pairs": 96,
+    "neural_frame_inputs": 192
+  },
+  "protocol": {
+    "clock": "Full original mono waveform produces the five speech hidden layers. Select the ten 50 Hz slots around floor(50 * exact native PTS), or around the native time five pictures earlier. No rebasing or cadence conversion. Require every selected slot available. Original soundtrack remains unchanged in each delivery.",
+    "interval": "Six pictures before to ten pictures after the independently observed last closed picture, half-open. Preserve every native picture PTS, original waveform sample, and all pixels outside the frozen crop or edit interval. Every edit uses exactly the permitted face-box geometry, native alpha, and half opacity on the first and last edit pictures.",
+    "observer": "Reobserve muted encoded video using opaque randomized tokens, publisher coarse phone context and the fixed later control neighborhood. Admit source-event support only for one visual event in context, within one picture of the source, inside the edit and within 80 ms of the independently measured waveform burst. A source needs same-time resample and five-picture delayed ordinary controls to qualify. Retain the earlier-conditioned neural outcome separately as a negative specificity challenge.",
+    "scope": "The sole local measured event is neither full-clip synchronization nor phone identity. Prior project source exposure consists of original and ordinary timing tests only. No detector scores inform selection or admission.",
+    "sources": "Six previously unrendered source groups, one clip per group from independently qualified original events. Fixed ordinals chosen for exact matched \u00b15-picture ordinary controls and representation of both speaking styles. Keep all selected roles regardless of result."
+  },
+  "render_sha256": "fd3aabedad80015f89cde8368b5f67c0cb91d6178d480cfa5354d92d4244baa9",
+  "rows": [
+    {
+      "audio_bracket": [
+        "27/40",
+        "69/100"
+      ],
+      "clip": 1,
+      "earlier_sound_later_visual_seconds": null,
+      "edit": [
+        "11/24",
+        "9/8"
+      ],
+      "picture_step": "1/24",
+      "qualifies_local_event": false,
+      "roles": {
+        "delayed_pixels": {
+          "changed_pictures": 16,
+          "float_pcm_samples": 47040,
+          "native_pictures": 71,
+          "picture_shift": 5,
+          "status": "observed_delayed_control",
+          "visual_seconds": [
+            "11/12",
+            "23/24"
+          ]
+        },
+        "earlier_sound_neural": {
+          "changed_pictures": 16,
+          "float_pcm_samples": 47040,
+          "native_pictures": 71,
+          "status": "no_clear_reopening"
+        },
+        "original": {
+          "changed_pictures": 0,
+          "float_pcm_samples": 47040,
+          "native_pictures": 71,
+          "picture_shift": 0,
+          "status": "source_event_retained",
+          "visual_seconds": [
+            "17/24",
+            "3/4"
+          ]
+        },
+        "same_time_neural": {
+          "changed_pictures": 16,
+          "float_pcm_samples": 47040,
+          "native_pictures": 71,
+          "status": "no_clear_reopening"
+        },
+        "same_time_resample": {
+          "changed_pictures": 16,
+          "float_pcm_samples": 47040,
+          "native_pictures": 71,
+          "picture_shift": 0,
+          "status": "source_event_retained",
+          "visual_seconds": [
+            "17/24",
+            "3/4"
+          ]
+        }
+      },
+      "speaker_group": 1,
+      "speaking_style": "l"
+    },
+    {
+      "audio_bracket": [
+        "18/25",
+        "147/200"
+      ],
+      "clip": 2,
+      "earlier_sound_later_visual_seconds": [
+        "1001/1200",
+        "7007/8000"
+      ],
+      "edit": [
+        "1001/2000",
+        "7007/6000"
+      ],
+      "picture_step": "1001/24000",
+      "qualifies_local_event": false,
+      "roles": {
+        "delayed_pixels": {
+          "changed_pictures": 16,
+          "float_pcm_samples": 32800,
+          "native_pictures": 51,
+          "picture_shift": 6,
+          "status": "observed_delayed_control",
+          "visual_seconds": [
+            "1001/1000",
+            "1001/960"
+          ]
+        },
+        "earlier_sound_neural": {
+          "changed_pictures": 16,
+          "float_pcm_samples": 32800,
+          "native_pictures": 51,
+          "picture_shift": -5,
+          "status": "different_observed_motion",
+          "visual_seconds": [
+            "13013/24000",
+            "7007/12000"
+          ]
+        },
+        "original": {
+          "changed_pictures": 0,
+          "float_pcm_samples": 32800,
+          "native_pictures": 51,
+          "picture_shift": 0,
+          "status": "source_event_retained",
+          "visual_seconds": [
+            "3003/4000",
+            "19019/24000"
+          ]
+        },
+        "same_time_neural": {
+          "changed_pictures": 16,
+          "float_pcm_samples": 32800,
+          "native_pictures": 51,
+          "picture_shift": -2,
+          "status": "different_observed_motion",
+          "visual_seconds": [
+            "1001/1500",
+            "17017/24000"
+          ]
+        },
+        "same_time_resample": {
+          "changed_pictures": 16,
+          "float_pcm_samples": 32800,
+          "native_pictures": 51,
+          "picture_shift": 0,
+          "status": "source_event_retained",
+          "visual_seconds": [
+            "3003/4000",
+            "19019/24000"
+          ]
+        }
+      },
+      "speaker_group": 2,
+      "speaking_style": "l"
+    },
+    {
+      "audio_bracket": [
+        "203/200",
+        "103/100"
+      ],
+      "clip": 3,
+      "earlier_sound_later_visual_seconds": null,
+      "edit": [
+        "19019/24000",
+        "7007/4800"
+      ],
+      "picture_step": "1001/24000",
+      "qualifies_local_event": false,
+      "roles": {
+        "delayed_pixels": {
+          "changed_pictures": 16,
+          "float_pcm_samples": 44320,
+          "native_pictures": 68,
+          "status": "no_clear_reopening"
+        },
+        "earlier_sound_neural": {
+          "changed_pictures": 16,
+          "float_pcm_samples": 44320,
+          "native_pictures": 68,
+          "status": "no_clear_reopening"
+        },
+        "original": {
+          "changed_pictures": 0,
+          "float_pcm_samples": 44320,
+          "native_pictures": 68,
+          "picture_shift": 0,
+          "status": "source_event_retained",
+          "visual_seconds": [
+            "1001/960",
+            "13013/12000"
+          ]
+        },
+        "same_time_neural": {
+          "changed_pictures": 16,
+          "float_pcm_samples": 44320,
+          "native_pictures": 68,
+          "picture_shift": 0,
+          "status": "source_event_retained",
+          "visual_seconds": [
+            "1001/960",
+            "13013/12000"
+          ]
+        },
+        "same_time_resample": {
+          "changed_pictures": 16,
+          "float_pcm_samples": 44320,
+          "native_pictures": 68,
+          "picture_shift": 0,
+          "status": "source_event_retained",
+          "visual_seconds": [
+            "1001/960",
+            "13013/12000"
+          ]
+        }
+      },
+      "speaker_group": 3,
+      "speaking_style": "p"
+    },
+    {
+      "audio_bracket": [
+        "257/200",
+        "13/10"
+      ],
+      "clip": 4,
+      "earlier_sound_later_visual_seconds": [
+        "444/289",
+        "456/289"
+      ],
+      "edit": [
+        "300/289",
+        "492/289"
+      ],
+      "picture_step": "12/289",
+      "qualifies_local_event": true,
+      "roles": {
+        "delayed_pixels": {
+          "changed_pictures": 16,
+          "float_pcm_samples": 38880,
+          "native_pictures": 59,
+          "picture_shift": 5,
+          "status": "observed_delayed_control",
+          "visual_seconds": [
+            "432/289",
+            "444/289"
+          ]
+        },
+        "earlier_sound_neural": {
+          "changed_pictures": 16,
+          "float_pcm_samples": 38880,
+          "native_pictures": 59,
+          "status": "no_clear_reopening"
+        },
+        "original": {
+          "changed_pictures": 0,
+          "float_pcm_samples": 38880,
+          "native_pictures": 59,
+          "picture_shift": 0,
+          "status": "source_event_retained",
+          "visual_seconds": [
+            "372/289",
+            "384/289"
+          ]
+        },
+        "same_time_neural": {
+          "changed_pictures": 16,
+          "float_pcm_samples": 38880,
+          "native_pictures": 59,
+          "picture_shift": 1,
+          "status": "source_event_retained",
+          "visual_seconds": [
+            "384/289",
+            "396/289"
+          ]
+        },
+        "same_time_resample": {
+          "changed_pictures": 16,
+          "float_pcm_samples": 38880,
+          "native_pictures": 59,
+          "picture_shift": 0,
+          "status": "source_event_retained",
+          "visual_seconds": [
+            "372/289",
+            "384/289"
+          ]
+        }
+      },
+      "speaker_group": 4,
+      "speaking_style": "p"
+    },
+    {
+      "audio_bracket": [
+        "33/40",
+        "21/25"
+      ],
+      "clip": 5,
+      "earlier_sound_later_visual_seconds": [
+        "1001/960",
+        "13013/12000"
+      ],
+      "edit": [
+        "7007/12000",
+        "1001/800"
+      ],
+      "picture_step": "1001/24000",
+      "qualifies_local_event": false,
+      "roles": {
+        "delayed_pixels": {
+          "changed_pictures": 16,
+          "float_pcm_samples": 38080,
+          "native_pictures": 58,
+          "picture_shift": 3,
+          "status": "different_observed_motion",
+          "visual_seconds": [
+            "23023/24000",
+            "1001/1000"
+          ]
+        },
+        "earlier_sound_neural": {
+          "changed_pictures": 16,
+          "float_pcm_samples": 38080,
+          "native_pictures": 58,
+          "picture_shift": -2,
+          "status": "different_observed_motion",
+          "visual_seconds": [
+            "3003/4000",
+            "19019/24000"
+          ]
+        },
+        "original": {
+          "changed_pictures": 0,
+          "float_pcm_samples": 38080,
+          "native_pictures": 58,
+          "picture_shift": 0,
+          "status": "source_event_retained",
+          "visual_seconds": [
+            "1001/1200",
+            "7007/8000"
+          ]
+        },
+        "same_time_neural": {
+          "changed_pictures": 16,
+          "float_pcm_samples": 38080,
+          "native_pictures": 58,
+          "picture_shift": 1,
+          "status": "source_event_retained",
+          "visual_seconds": [
+            "7007/8000",
+            "11011/12000"
+          ]
+        },
+        "same_time_resample": {
+          "changed_pictures": 16,
+          "float_pcm_samples": 38080,
+          "native_pictures": 58,
+          "picture_shift": 0,
+          "status": "source_event_retained",
+          "visual_seconds": [
+            "1001/1200",
+            "7007/8000"
+          ]
+        }
+      },
+      "speaker_group": 5,
+      "speaking_style": "p"
+    },
+    {
+      "audio_bracket": [
+        "211/200",
+        "107/100"
+      ],
+      "clip": 6,
+      "earlier_sound_later_visual_seconds": [
+        "9009/8000",
+        "7007/6000"
+      ],
+      "edit": [
+        "19019/24000",
+        "7007/4800"
+      ],
+      "picture_step": "1001/24000",
+      "qualifies_local_event": false,
+      "roles": {
+        "delayed_pixels": {
+          "changed_pictures": 16,
+          "float_pcm_samples": 45440,
+          "native_pictures": 70,
+          "picture_shift": 4,
+          "status": "observed_delayed_control",
+          "visual_seconds": [
+            "29029/24000",
+            "1001/800"
+          ]
+        },
+        "earlier_sound_neural": {
+          "changed_pictures": 16,
+          "float_pcm_samples": 45440,
+          "native_pictures": 70,
+          "status": "no_clear_reopening"
+        },
+        "original": {
+          "changed_pictures": 0,
+          "float_pcm_samples": 45440,
+          "native_pictures": 70,
+          "picture_shift": 0,
+          "status": "source_event_retained",
+          "visual_seconds": [
+            "1001/960",
+            "13013/12000"
+          ]
+        },
+        "same_time_neural": {
+          "changed_pictures": 16,
+          "float_pcm_samples": 45440,
+          "native_pictures": 70,
+          "status": "no_clear_reopening"
+        },
+        "same_time_resample": {
+          "changed_pictures": 16,
+          "float_pcm_samples": 45440,
+          "native_pictures": 70,
+          "picture_shift": 0,
+          "status": "source_event_retained",
+          "visual_seconds": [
+            "1001/960",
+            "13013/12000"
+          ]
+        }
+      },
+      "speaker_group": 6,
+      "speaking_style": "p"
+    }
+  ],
+  "runtime_versions": {
+    "Pillow": "12.3.0",
+    "accelerate": "1.14.0",
+    "diffusers": "0.42.1",
+    "numpy": "2.2.6",
+    "opencv-python-headless": "5.0.0.93",
+    "safetensors": "0.8.0",
+    "torch": "2.13.0",
+    "transformers": "5.15.1"
+  },
+  "schema": "chipmunk.lombard-fresh-musetalk/1",
+  "summary": {
+    "changed_pictures": 384,
+    "delayed_pixels:different_observed_motion": 1,
+    "delayed_pixels:no_clear_reopening": 1,
+    "delayed_pixels:observed_delayed_control": 4,
+    "earlier_sound_neural:different_observed_motion": 2,
+    "earlier_sound_neural:no_clear_reopening": 4,
+    "earlier_sound_neural_later_visual_event": 2,
+    "native_pictures": 1885,
+    "original:source_event_retained": 6,
+    "qualified": 1,
+    "qualified_with_earlier_condition_rejected": 1,
+    "qualified_with_later_visual_event_in_earlier_condition": 1,
+    "same_time_neural:different_observed_motion": 1,
+    "same_time_neural:no_clear_reopening": 2,
+    "same_time_neural:source_event_retained": 3,
+    "same_time_resample:source_event_retained": 6,
+    "unchanged_float_samples": 1232800
+  }
+}

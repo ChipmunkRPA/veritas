@@ -48,16 +48,22 @@ def useful(case, idx):
     return 10 * words[hit] >= 3 * sum(words[i] for i in indices)
 
 
-def select_case(case, point):
+def select_case(case, point, *, allow_punctuation_unit=False):
     positions = case["positions"]
     assert 9 <= len(positions) <= 25 and 3 <= len({p for _, _, p, _ in positions}) <= 5
     assert 160 <= sum(n for *_, n in positions) <= 680 or case["truth"] is not None
     assert len(case["native_current"]) == len(positions) == len(case["nonspace"])
     assert all(
-        0 <= a < b <= case["characters"] and 0 < n <= b - a and 0 < m <= b - a
+        0 <= a < b <= case["characters"]
+        and (0 < n <= b - a or (allow_punctuation_unit and n == 0 and m == 1))
+        and 0 < m <= b - a
         for (a, b, _, n), m in zip(positions, case["nonspace"])
     )
-    assert all(x[1] < y[0] and x[2] <= y[2] for x, y in zip(positions, positions[1:]))
+    assert all(
+        (x[1] < y[0] or (allow_punctuation_unit and x[1] == y[0] and (x[3] == 0 or y[3] == 0)))
+        and x[2] <= y[2]
+        for x, y in zip(positions, positions[1:])
+    )
     assert all(
         isfinite(r["score"]) and 0 <= r["score"] <= 1 and SHA256.fullmatch(r["input_sha256"])
         for r in case["native_current"]
@@ -93,10 +99,14 @@ def select_case(case, point):
     }
 
 
-def compare(cases, point):
+def compare(cases, point, *, allow_punctuation_unit=False):
     result = {}
     for publisher in sorted({c["publisher"] for c in cases}):
-        rows = [(c, select_case(c, point)) for c in cases if c["publisher"] == publisher]
+        rows = [
+            (c, select_case(c, point, allow_punctuation_unit=allow_punctuation_unit))
+            for c in cases
+            if c["publisher"] == publisher
+        ]
         controls = [(c, o) for c, o in rows if c["variant"] in ("before", "after")]
         positives = [(c, o) for c, o in rows if c["truth"]]
         ordinary = {c["group"] for c, _ in controls}

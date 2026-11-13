@@ -1,0 +1,344 @@
+{
+  "candidate_sha256": "82745463dd75fbc25bd03c71f2ec3cc04d0529eb3a9239f5e3d981158c33bbac",
+  "design": {
+    "advance": {
+      "maximum_invalid_admissions": 0,
+      "maximum_negative_highlights": 0,
+      "minimum_large": 10,
+      "minimum_small": 6
+    },
+    "claim": "Fully transparent native PNG tiles contain spatially varying RGB samples; intent and AI origin remain unassessed.",
+    "grid": {
+      "minimum_component_tiles": 6,
+      "minimum_pairs_per_axis": 9,
+      "minimum_step": 7,
+      "stride_px": 8,
+      "tile_px": 16,
+      "visible_margin_px": 5
+    },
+    "groups": {
+      "confirmation": 12,
+      "development": 8,
+      "public_controls": 5
+    },
+    "private_outputs": "Coordinates, counts, and mask hash only. No hidden RGB and no image artifact.",
+    "useful": {
+      "minimum_hidden_support_recall": 0.5,
+      "minimum_iou": 0.3
+    }
+  },
+  "freeze_sha256": "ebb871fff1af188ad7edb547eae7135478f499682d165d69b47ca4576275d6e6",
+  "public": {
+    "blank": {
+      "author": "David Louis Hughes",
+      "file": "Blank_Canvas_on_Transparent_Background.png",
+      "license": "CC0-1.0",
+      "original": "https://upload.wikimedia.org/wikipedia/commons/5/54/Blank_Canvas_on_Transparent_Background.png",
+      "sha1": "a05960ad19b5f03da367e96aa5c70c78de2dc786",
+      "sha256": "d31b9661c181aadadd60100940486229681395e5039905ef7473f7e9ed921e08",
+      "source": "https://commons.wikimedia.org/wiki/File:Blank_Canvas_on_Transparent_Background.png"
+    },
+    "blue": {
+      "author": "The People's Internet",
+      "file": "Blue_Flower_Transparent_Background.png",
+      "license": "CC0-1.0",
+      "original": "https://upload.wikimedia.org/wikipedia/commons/f/fc/Blue_Flower_Transparent_Background.png",
+      "sha1": "336f729c608ffa86791723306cae59f6b48b2d98",
+      "sha256": "c63e51189db00e15f7a1d47d1171eff54a271172cf600a358a95a2bd43d5a350",
+      "source": "https://commons.wikimedia.org/wiki/File:Blue_Flower_Transparent_Background.png"
+    },
+    "cactus": {
+      "author": "Andrikkos",
+      "file": "Cactus_flower_extracted.png",
+      "license": "CC0-1.0",
+      "original": "https://upload.wikimedia.org/wikipedia/commons/f/fd/Cactus_flower_extracted.png",
+      "sha1": "74d3b590a6d730674423819ae0e73be82d3db927",
+      "sha256": "28f3953c38c7228058d5f91a7b866bdab0e092c00ae3bec151009a1a1979292f",
+      "source": "https://commons.wikimedia.org/wiki/File:Cactus_flower_extracted.png"
+    },
+    "flowers": {
+      "author": "DuckPlant67",
+      "file": "Plastic_Flowers_Transparent_Background,_Blue.png",
+      "license": "CC0-1.0",
+      "original": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Plastic_Flowers_Transparent_Background%2C_Blue.png",
+      "sha1": "51756091d3c186e487ec6fc8317f5f32266ac137",
+      "sha256": "e2aff74a1bea120abe9df9074b3c5d9e9d51a0baeb97da3aae3c8ec1fb3fa0ff",
+      "source": "https://commons.wikimedia.org/wiki/File:Plastic_Flowers_Transparent_Background%2C_Blue.png"
+    },
+    "strawberry": {
+      "author": "Paolo Neo",
+      "file": "Strawberry_(transparent_background).png",
+      "license": "CC0-1.0",
+      "original": "https://upload.wikimedia.org/wikipedia/commons/8/86/Strawberry_%28transparent_background%29.png",
+      "sha1": "0162b0a28502c1f1c7b959570314c1024dea50d3",
+      "sha256": "150f6327c46d73120ec0a1f82e4f7e4f86b3777a27db4e8e5ae7717705fcf928",
+      "source": "https://commons.wikimedia.org/wiki/File:Strawberry_%28transparent_background%29.png"
+    }
+  },
+  "results": {
+    "confirmation": {
+      "confirmation_rule": {
+        "invalid_admissions": 0,
+        "large": 10,
+        "negative_highlights": 0,
+        "small": 5
+      },
+      "delivery_count": 122,
+      "elapsed_seconds": 4.79,
+      "passes": false,
+      "private_rows_sha256": "b6e016731761995192c6e926a46f04f381f9f81a3b5b0b38e6031c47f5a9b75b",
+      "strata": {
+        "alpha_fringe": {
+          "assessed": 12,
+          "highlights": 0,
+          "selected_pixels": 0,
+          "useful": 0,
+          "views": 12
+        },
+        "apng": {
+          "assessed": false,
+          "highlights": false,
+          "selected_pixels": 0,
+          "useful": false,
+          "views": 1
+        },
+        "bad_idat_crc": {
+          "assessed": false,
+          "highlights": false,
+          "selected_pixels": 0,
+          "useful": false,
+          "views": 1
+        },
+        "bad_iend_crc": {
+          "assessed": false,
+          "highlights": false,
+          "selected_pixels": 0,
+          "useful": false,
+          "views": 1
+        },
+        "bad_stream_footer": {
+          "assessed": false,
+          "highlights": false,
+          "selected_pixels": 0,
+          "useful": false,
+          "views": 1
+        },
+        "constant_matte": {
+          "assessed": 12,
+          "highlights": 0,
+          "selected_pixels": 0,
+          "useful": 0,
+          "views": 12
+        },
+        "cutout_retained": {
+          "assessed": 12,
+          "highlights": 12,
+          "selected_pixels": 816000,
+          "useful": 9,
+          "views": 12
+        },
+        "extra_raster": {
+          "assessed": false,
+          "highlights": false,
+          "selected_pixels": 0,
+          "useful": false,
+          "views": 1
+        },
+        "interlaced": {
+          "assessed": false,
+          "highlights": false,
+          "selected_pixels": 0,
+          "useful": false,
+          "views": 1
+        },
+        "invalid_filter": {
+          "assessed": false,
+          "highlights": false,
+          "selected_pixels": 0,
+          "useful": false,
+          "views": 1
+        },
+        "isolated_rgb": {
+          "assessed": 12,
+          "highlights": 0,
+          "selected_pixels": 0,
+          "useful": 0,
+          "views": 12
+        },
+        "large_retained": {
+          "assessed": 12,
+          "highlights": 12,
+          "selected_pixels": 136832,
+          "useful": 10,
+          "views": 12
+        },
+        "opaque": {
+          "assessed": 12,
+          "highlights": 0,
+          "selected_pixels": 0,
+          "useful": 0,
+          "views": 12
+        },
+        "partial_alpha": {
+          "assessed": 12,
+          "highlights": 0,
+          "selected_pixels": 0,
+          "useful": 0,
+          "views": 12
+        },
+        "public_blank": {
+          "assessed": true,
+          "highlights": false,
+          "selected_pixels": 0,
+          "useful": false,
+          "views": 1
+        },
+        "public_blue": {
+          "assessed": true,
+          "highlights": false,
+          "selected_pixels": 0,
+          "useful": false,
+          "views": 1
+        },
+        "public_cactus": {
+          "assessed": true,
+          "highlights": true,
+          "selected_pixels": 23232,
+          "useful": false,
+          "views": 1
+        },
+        "public_flowers": {
+          "assessed": true,
+          "highlights": false,
+          "selected_pixels": 0,
+          "useful": false,
+          "views": 1
+        },
+        "public_strawberry": {
+          "assessed": true,
+          "highlights": false,
+          "selected_pixels": 0,
+          "useful": false,
+          "views": 1
+        },
+        "rotated_metadata": {
+          "assessed": false,
+          "highlights": false,
+          "selected_pixels": 0,
+          "useful": false,
+          "views": 1
+        },
+        "scrubbed": {
+          "assessed": 12,
+          "highlights": 0,
+          "selected_pixels": 0,
+          "useful": 0,
+          "views": 12
+        },
+        "small_retained": {
+          "assessed": 12,
+          "highlights": 11,
+          "selected_pixels": 18304,
+          "useful": 5,
+          "views": 12
+        },
+        "tail": {
+          "assessed": false,
+          "highlights": false,
+          "selected_pixels": 0,
+          "useful": false,
+          "views": 1
+        }
+      }
+    },
+    "development": {
+      "confirmation_rule": {
+        "invalid_admissions": 0,
+        "large": 7,
+        "negative_highlights": 0,
+        "small": 2
+      },
+      "delivery_count": 72,
+      "elapsed_seconds": 1.67,
+      "passes": false,
+      "private_rows_sha256": "87dabbb45652fc346bf84c2f5db04b8f306633e60754074c753c864585a604f3",
+      "strata": {
+        "alpha_fringe": {
+          "assessed": 8,
+          "highlights": 0,
+          "selected_pixels": 0,
+          "useful": 0,
+          "views": 8
+        },
+        "apng": {},
+        "bad_idat_crc": {},
+        "bad_iend_crc": {},
+        "bad_stream_footer": {},
+        "constant_matte": {
+          "assessed": 8,
+          "highlights": 0,
+          "selected_pixels": 0,
+          "useful": 0,
+          "views": 8
+        },
+        "cutout_retained": {
+          "assessed": 8,
+          "highlights": 8,
+          "selected_pixels": 540224,
+          "useful": 7,
+          "views": 8
+        },
+        "extra_raster": {},
+        "interlaced": {},
+        "invalid_filter": {},
+        "isolated_rgb": {
+          "assessed": 8,
+          "highlights": 0,
+          "selected_pixels": 0,
+          "useful": 0,
+          "views": 8
+        },
+        "large_retained": {
+          "assessed": 8,
+          "highlights": 8,
+          "selected_pixels": 98048,
+          "useful": 7,
+          "views": 8
+        },
+        "opaque": {
+          "assessed": 8,
+          "highlights": 0,
+          "selected_pixels": 0,
+          "useful": 0,
+          "views": 8
+        },
+        "partial_alpha": {
+          "assessed": 8,
+          "highlights": 0,
+          "selected_pixels": 0,
+          "useful": 0,
+          "views": 8
+        },
+        "rotated_metadata": {},
+        "scrubbed": {
+          "assessed": 8,
+          "highlights": 0,
+          "selected_pixels": 0,
+          "useful": 0,
+          "views": 8
+        },
+        "small_retained": {
+          "assessed": 8,
+          "highlights": 8,
+          "selected_pixels": 12672,
+          "useful": 2,
+          "views": 8
+        },
+        "tail": {}
+      }
+    }
+  },
+  "runner_sha256": "0541850652a5fb81c309c95d8405421f0d6acc2129b281632ce3c3fe1e49bf9e",
+  "schema": "chipmunk.png-hidden-rgb-transfer/1",
+  "source_or_revealed_pixels_published": false
+}

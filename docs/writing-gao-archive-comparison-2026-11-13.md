@@ -23,8 +23,9 @@ that originally received a no-reference result.
 For Word uploads, the matched passage also reports each top-level body
 paragraph and its native character range. Wording differences include
 original paragraph and run coordinates where the visible text maps to
-ordinary Word runs. A difference crossing a paragraph boundary causes
-the comparison to abstain. Tables, headers, footers, text boxes,
+ordinary Word runs. A wording change that spans multiple paragraphs
+shows the exact range in each paragraph. When a deletion would fall at
+an ambiguous paragraph edge, the comparison abstains. Tables, headers, footers, text boxes,
 embedded content, formatting and tracked revisions are outside the check.
 
 Selectable PDFs report the submitted page numbers and extracted character
@@ -46,9 +47,48 @@ For local format verification, the same 72 short report clips were
 wrapped in Word. Each sentence occupied one native paragraph, with
 text split across ordinary runs. The check matched 23 of 24 unchanged
 clips to their source with no wording differences and localized 45 of
-48 provider edits. One additional case abstained because a difference
-crossed a Word paragraph boundary. These fixtures test extraction and
+48 provider edits. One additional case abstained under the earlier
+single-paragraph rule. These fixtures test extraction and
 position mapping using known text. Real Word layouts vary.
+
+## Word changes across paragraphs
+
+A deterministic panel selected 24 previously unused test reports from the
+pinned archive, excluding the report IDs in the two earlier GAO ledgers.
+Each report produced a Word file with unchanged wording and a new paragraph
+break, one with a two-word replacement across that break, one with a
+replacement word split across it, one with a deletion at the break, and one
+with the opening marked as a quotation. Each paragraph had two native Word
+runs. The fixtures test exact locations against known changes and do not
+estimate performance on customer documents.
+
+| Word delivery | Files | Previous matches | Current matches | Exact changes across paragraphs |
+| --- | ---: | ---: | ---: | ---: |
+| Unchanged wording with a paragraph break | 24 | 19 | 19 | 0 |
+| Two-word replacement across the break | 24 | 0 | 19 | 19 |
+| Replacement word split across the break | 24 | 0 | 19 | 19 |
+| Deletion at the break | 24 | 0 | 0 | 0 |
+| Quoted opening | 24 | 0 | 0 | 0 |
+
+All 38 reported changes mapped back to the exact native Word characters and
+runs. The browser and archive PDF list each affected paragraph. The JSON
+also stores each clipped range in both extracted and native coordinates.
+Paragraph separators added during text extraction stay outside the highlighted
+ranges. The export verifier rejects altered coordinates and can still replay
+exports from the earlier single-paragraph rule. The report compares wording
+and contributes zero AI-authorship confidence.
+
+The [120-delivery receipt](evaluation-panels/writing-gao-word-paragraphs-2026-11-13.json)
+contains the source IDs, file digests, dispositions and native ranges.
+It contains no report text or Word files. With the pinned pack installed,
+the replay rebuilds the Word inputs and their exact digests using the
+backend's `python-docx` version.
+
+```sh
+PYTHONPATH=backend backend/.venv/bin/python -B -m scripts.review_gao_word_paragraphs "$pack" \
+  docs/evaluation-panels/writing-gao-archive-transfer-2026-11-13.json \
+  docs/evaluation-panels/writing-gao-exact-excerpt-2026-11-13.json
+```
 
 ## Held test
 

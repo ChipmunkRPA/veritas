@@ -54,6 +54,12 @@ def render(comparison: dict) -> bytes:
             submitted_label = f"Word body paragraph {location['paragraph']}"
             start, end = location["paragraph_range"]
             native = f'<p class="offset">Word paragraph characters [{start}, {end}).</p>'
+        if locations := change["submitted"].get("docx_locations"):
+            submitted_label = "Change across Word paragraphs"
+            native = "".join(
+                f'<p class="offset">Word body paragraph {item["paragraph"]}, characters [{start}, {end}).</p>'
+                for item in locations for start, end in (item["paragraph_range"],)
+            )
         if pages := change["submitted"].get("pdf_pages"):
             submitted_label = "Submitted PDF · " + ", ".join(f"page {page['page']}" for page in pages)
         changes.append(f'<section class="archive-change"><h2>{submitted_label}</h2>'

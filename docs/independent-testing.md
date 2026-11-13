@@ -36,6 +36,12 @@ includes separate readers for acoustic recovery and classifier localization.
 The readers recount published scalar records. Native replay additionally
 requires the frozen source audio and the retained local checkpoints.
 
+The [public audio bandwidth replay](audio-bandwidth-return-2026-11-13.md#replay-from-public-source-ranges)
+downloads about 12.3 MB from the AMI publisher and verifies the exact source
+intervals and all 192 published measurements. The [GAO Word replay](writing-gao-archive-comparison-2026-11-13.md#word-changes-across-paragraphs)
+rebuilds 120 native Word deliveries from the public archive pack and checks
+each reported paragraph and run position.
+
 ### Replay delivery and earlier-copy comparisons
 
 Recount the [two JPEG90 delivery histories](image-regional-jpeg90-carrier-2026-11-13.md),

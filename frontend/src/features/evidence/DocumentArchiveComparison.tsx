@@ -13,6 +13,7 @@ const statusLabels = {
 
 function changeHeading(excerpt: ArchiveExcerpt, paragraph: number, joined: boolean) {
   if (excerpt.docx_location) return `Word body paragraph ${excerpt.docx_location.paragraph}`
+  if (excerpt.docx_locations?.length) return 'Change across Word paragraphs'
   if (excerpt.pdf_pages?.length) return `Submitted PDF · ${excerpt.pdf_pages.map(page => `page ${page.page}`).join(', ')}`
   return `${joined ? 'Passage in submitted paragraph' : 'Submitted paragraph'} ${paragraph}`
 }
@@ -33,6 +34,11 @@ function Excerpt({ label, excerpt }: { label: string; excerpt: ArchiveExcerpt | 
     {excerpt?.docx_location && <p className="mt-1 mb-0 text-caption text-text-muted">
       Word paragraph characters [{excerpt.docx_location.paragraph_range.join(', ')})
     </p>}
+    {!!excerpt?.docx_locations?.length && <ul aria-label="Changed Word positions" className="mt-1 mb-0 text-caption text-text-muted">
+      {excerpt.docx_locations.map(location => <li key={location.body_index}>
+        Word body paragraph {location.paragraph}, characters [{location.paragraph_range.join(', ')}).
+      </li>)}
+    </ul>}
     {excerpt?.text
       ? <p className="mt-2 mb-0 whitespace-pre-wrap break-words text-small">{marked}{points.slice(cursor).join('')}</p>
       : <p className="mt-2 mb-0 text-small text-text-muted">{excerpt ? 'No text at this position.' : 'No corresponding text.'}</p>}

@@ -3374,6 +3374,8 @@ export interface components {
                 number
             ][];
             docx_location?: components["schemas"]["DocumentArchiveWordLocation"] | null;
+            /** Docx Locations */
+            docx_locations?: components["schemas"]["DocumentArchiveWordLocation"][] | null;
             /** End */
             end: number;
             /** Pdf Pages */

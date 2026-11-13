@@ -10,7 +10,8 @@ from app.evidence.document_revision import MAX_CHARS, docx_body_paragraphs
 
 WORD_SCOPE = ("For Word files, the comparison reads top-level body paragraphs. Tables, headers, footers, text boxes, "
               "embedded content, formatting and tracked revisions are outside this comparison.")
-GAO_WORD_SCOPE = " A wording difference must fit inside one Word paragraph."
+LEGACY_GAO_WORD_SCOPE = " A wording difference must fit inside one Word paragraph."
+GAO_WORD_SCOPE = " Each changed passage identifies its original Word paragraph positions."
 
 
 def _native_interval(ranges, start, end):
@@ -74,24 +75,47 @@ def compare(data: bytes, upload_sha256: str) -> dict:
     return result
 
 
-def compare_gao(data: bytes, upload_sha256: str, pack_sha256: str, reports, index) -> dict:
+def _change_locations(doc, change, *, allow_multi_paragraph):
+    excerpt = change["submitted"]
+    start, end = excerpt["start"], excerpt["end"]
+    block = doc.source_map[change["submitted_paragraph"] - 1]
+    if block["start"] < start == end < block["end"] or block["start"] <= start < end <= block["end"]:
+        return {"docx_location": _location(block, excerpt)}
+    if not allow_multi_paragraph or start == end:
+        return None
+
+    parts = [(item, max(start, item["start"]), min(end, item["end"]))
+             for item in doc.source_map if start < item["end"] and item["start"] < end]
+    if len(parts) < 2 or parts[0][1] != start or parts[-1][2] != end:
+        return None
+    # The only unmapped characters between these blocks are extraction separators.
+    if any(doc.text[left[2]:right[1]] != "\n\n" for left, right in zip(parts, parts[1:])):
+        return None
+    locations = [
+        _location(item, {"start": lo, "end": hi, "changed_tokens": [
+            (max(lo, a), min(hi, b)) for a, b in excerpt["changed_tokens"] if a < hi and lo < b
+        ]}) for item, lo, hi in parts
+    ]
+    return {
+        "docx_locations": locations,
+        "changed_tokens": [token["extracted_range"] for item in locations for token in item["changed_tokens"]],
+    }
+
+
+def compare_gao(data: bytes, upload_sha256: str, pack_sha256: str, reports, index, *, allow_multi_paragraph=True) -> dict:
     doc = _body(data)
     result = document_gao_archive.compare(doc, upload_sha256, pack_sha256, reports, index)
-    result["scope"] += " " + WORD_SCOPE + GAO_WORD_SCOPE
+    result["scope"] += " " + WORD_SCOPE + (GAO_WORD_SCOPE if allow_multi_paragraph else LEGACY_GAO_WORD_SCOPE)
     if result["status"] != "reference_bound":
         return result
 
     for change in result["changes"]:
-        block = doc.source_map[change["submitted_paragraph"] - 1]
-        excerpt = change["submitted"]
-        start, end = excerpt["start"], excerpt["end"]
-        if not block["start"] <= start <= end <= block["end"] or (
-            start == end and start in {block["start"], block["end"]}
-        ):
+        locations = _change_locations(doc, change, allow_multi_paragraph=allow_multi_paragraph)
+        if locations is None:
             result.update(status="out_of_scope", reference=None, changes=[], submitted_sentence_ranges=[])
             result["coverage"]["matched_words"] = 0
             return result
-        excerpt["docx_location"] = _location(block, excerpt)
+        change["submitted"].update(locations)
 
     match_start, match_end = result["reference"]["submitted_range"]
     for number, block in enumerate(doc.source_map, 1):

@@ -19,7 +19,7 @@ from app.api import v2_document_archive
 from app.billing import purchase_notice
 from app.core.config import settings
 from app.detectors.text.extract import from_string
-from app.evidence import document_archive, document_gao_archive
+from app.evidence import document_archive, document_archive_word, document_gao_archive
 from app.main import app
 from app.storage.db import Analysis, Artefact, BillingOrderRow, CaseMemberRow, CaseRow, Job
 
@@ -173,8 +173,8 @@ def test_gao_archive_local_transcript_matches_api_and_pdf(billing, monkeypatch, 
     word_changed = word_fixture(crop.replace("Monday", "Thursday"), split_change=True)
     _seed(billing, "gao-word-exact", word_exact, filename="excerpt.DOCX")
     _seed(billing, "gao-word-changed", word_changed, filename="changed.docx")
-    _seed(billing, "gao-word-crosses", word_fixture(crop.replace("Monday", "Thursday"), split_change=True,
-                                                    cross_paragraph=True), filename="cross.docx")
+    word_crosses = word_fixture(crop.replace("Monday", "Thursday"), split_change=True, cross_paragraph=True)
+    _seed(billing, "gao-word-crosses", word_crosses, filename="cross.docx")
     table_word = WordDocument()
     table_word.add_table(1, 1).cell(0, 0).text = crop
     table_file = BytesIO()
@@ -279,9 +279,39 @@ def test_gao_archive_local_transcript_matches_api_and_pdf(billing, monkeypatch, 
                     review(export, word_source, pack_path, pack_sha)
             else:
                 assert proof["reference"]["transcript_range"] == [crop_start, crop_end] and not proof["changes"]
-        crosses = client.post(_url("gao-word-crosses"), headers=billing.headers, params=selection).json()["comparison"]
-        assert crosses["status"] == "out_of_scope" and crosses["reference"] is None
-        assert not crosses["changes"] and not crosses["aligned_paragraphs"]
+        cross_body = client.post(_url("gao-word-crosses"), headers=billing.headers,
+                                 params={"include_pdf": True, **selection}).json()
+        crosses = cross_body["comparison"]
+        assert crosses["status"] == "reference_bound" and crosses["reference"]["id"] == "GAO-16-442"
+        assert crosses["authorship_confidence_contribution"] == 0
+        cross_change, = crosses["changes"]
+        assert cross_change["archive"]["text"] == "Monday"
+        assert cross_change["submitted"]["text"] == "Thurs\n\nday"
+        first, second = cross_change["submitted"]["docx_locations"]
+        first_start, first_end = first["paragraph_range"]
+        assert (first["paragraph"], first["body_index"], first_end - first_start) == (3, 3, 5)
+        assert (second["paragraph"], second["body_index"], second["paragraph_range"]) == (4, 4, [0, 3])
+        assert first["changed_tokens"][0]["runs"] == [{"run": 1, "range": [first_start, first_end]}]
+        assert second["changed_tokens"][0]["runs"] == [{"run": 1, "range": [0, 3]}]
+        assert [token["extracted_range"] for item in (first, second) for token in item["changed_tokens"]
+                ] == cross_change["submitted"]["changed_tokens"]
+        with pymupdf.open(stream=base64.b64decode(cross_body["pdf"]), filetype="pdf") as pdf:
+            cross_pdf = " ".join(" ".join(page.get_text().split()) for page in pdf)
+            assert "Change across Word paragraphs" in cross_pdf
+            assert f"Word body paragraph 3, characters [{first_start}, {first_end})." in cross_pdf
+            assert "Word body paragraph 4, characters [0, 3)." in cross_pdf
+        word_source.write_bytes(word_crosses)
+        export.write_text(json.dumps(crosses))
+        assert review(export, word_source, pack_path, pack_sha)["exact_changes_verified"] == 1
+        second["paragraph_range"][1] -= 1
+        export.write_text(json.dumps(crosses))
+        with pytest.raises(ValueError, match="does not replay"):
+            review(export, word_source, pack_path, pack_sha)
+        previous = document_archive_word.compare_gao(word_crosses, crosses["submitted_sha256"], pack_sha, reports,
+                                                      packed_index, allow_multi_paragraph=False)
+        assert previous["status"] == "out_of_scope" and previous["reference"] is None
+        export.write_text(json.dumps(previous))
+        assert review(export, word_source, pack_path, pack_sha)["status"] == "out_of_scope"
         table = client.post(_url("gao-word-table-only"), headers=billing.headers, params=selection).json()["comparison"]
         assert table["status"] == "out_of_scope" and table["reference"] is None
         assert table["coverage"]["body_paragraphs"] == 0 and not table["aligned_paragraphs"]

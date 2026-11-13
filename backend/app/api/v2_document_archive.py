@@ -115,6 +115,7 @@ class DocumentArchiveExcerpt(BaseModel):
     text: str
     changed_tokens: list[tuple[int, int]]
     docx_location: DocumentArchiveWordLocation | None = None
+    docx_locations: list[DocumentArchiveWordLocation] | None = None
     pdf_pages: list[DraftPdfPage] | None = None
 
 

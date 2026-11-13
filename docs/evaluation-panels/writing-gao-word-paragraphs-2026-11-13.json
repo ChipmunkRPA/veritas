@@ -1,0 +1,1593 @@
+{
+  "schema": "gao-word-paragraph-replay/1",
+  "pack_sha256": "671287085feaa971c501be2e2db7d50a36ca2a9adba0642c9540f4add35b341e",
+  "excluded_sources": [
+    "GAO-01-736",
+    "GAO-02-1021",
+    "GAO-02-896",
+    "GAO-03-1158",
+    "GAO-03-147",
+    "GAO-03-258",
+    "GAO-03-547",
+    "GAO-04-524",
+    "GAO-04-826",
+    "GAO-05-106",
+    "GAO-05-349",
+    "GAO-05-381",
+    "GAO-06-603",
+    "GAO-06-617",
+    "GAO-07-1250",
+    "GAO-07-140",
+    "GAO-07-293",
+    "GAO-07-617",
+    "GAO-07-763",
+    "GAO-07-852",
+    "GAO-08-206",
+    "GAO-08-706",
+    "GAO-08-90",
+    "GAO-08-993",
+    "GAO-09-567",
+    "GAO-09-83",
+    "GAO-10-125",
+    "GAO-10-140",
+    "GAO-10-27",
+    "GAO-10-54",
+    "GAO-10-762",
+    "GAO-10-77",
+    "GAO-11-715",
+    "GAO-12-290",
+    "GAO-12-582",
+    "GAO-12-756",
+    "GAO-13-460",
+    "GAO-14-183",
+    "GAO-14-362",
+    "GAO-16-150",
+    "GAO-16-179",
+    "GAO-16-90",
+    "GAO-17-637"
+  ],
+  "cases": [
+    {
+      "source": "GAO-20-421T",
+      "role": "reflow",
+      "word_sha256": "9e7a551acb4dc1c08e9ab610303040d2586bc0366970dfc928f65e29b8a0d6cc",
+      "previous": "no_qualified_reference",
+      "status": "no_qualified_reference",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-20-421T",
+      "role": "replacement",
+      "word_sha256": "c08c31912148b19aa940d3dd4ad8fe43698791845c1c6779a0555cc91bc3c1c6",
+      "previous": "no_qualified_reference",
+      "status": "no_qualified_reference",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-20-421T",
+      "role": "split_word",
+      "word_sha256": "564c21a4c615554ef13a617baa5b298e13a55d59be07b9e52cb7a3ed507263cf",
+      "previous": "no_qualified_reference",
+      "status": "no_qualified_reference",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-20-421T",
+      "role": "boundary_deletion",
+      "word_sha256": "60134f2fde59343f18475f15082a6092c37ba451cee4d7a6e780eb013acd1015",
+      "previous": "no_qualified_reference",
+      "status": "no_qualified_reference",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-20-421T",
+      "role": "quote",
+      "word_sha256": "13564b1b8fdf2dffb19b486631ca3444f015d224274393847859465e38399ac2",
+      "previous": "out_of_scope",
+      "status": "out_of_scope",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-508",
+      "role": "reflow",
+      "word_sha256": "01e390b8d2ac2c41b90d0e64329d979503989f00a03ed1625d3bd6051e1bef7d",
+      "previous": "reference_bound",
+      "status": "reference_bound",
+      "reference": "GAO-19-508",
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-508",
+      "role": "replacement",
+      "word_sha256": "e5ed9b401f2489d0949bb8d24cde6b2d839425cea84d652bc007f3e9c11a0288",
+      "previous": "out_of_scope",
+      "status": "reference_bound",
+      "reference": "GAO-19-508",
+      "changes": 1,
+      "locations": [
+        [
+          1741,
+          1748
+        ],
+        [
+          0,
+          8
+        ]
+      ]
+    },
+    {
+      "source": "GAO-19-508",
+      "role": "split_word",
+      "word_sha256": "d6364017d6877615c17d08ccf53cf1e8a3da142c6b80af7b36ca81b1493f3b31",
+      "previous": "out_of_scope",
+      "status": "reference_bound",
+      "reference": "GAO-19-508",
+      "changes": 1,
+      "locations": [
+        [
+          1741,
+          1746
+        ],
+        [
+          0,
+          4
+        ]
+      ]
+    },
+    {
+      "source": "GAO-19-508",
+      "role": "boundary_deletion",
+      "word_sha256": "8ef47d2271cd88549392c9d20d3ed6d9028074b6818c85350e971032ddd91a0d",
+      "previous": "out_of_scope",
+      "status": "out_of_scope",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-508",
+      "role": "quote",
+      "word_sha256": "47ee1f311d9467b52db247ea76e805a1dacc451f8f1d844454e4e622b7e8c539",
+      "previous": "out_of_scope",
+      "status": "out_of_scope",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-444T",
+      "role": "reflow",
+      "word_sha256": "b9ea8b2ba074053aa4cb9f194f2ab800a79cd8b6255835cec0ab4272d3abb091",
+      "previous": "no_qualified_reference",
+      "status": "no_qualified_reference",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-444T",
+      "role": "replacement",
+      "word_sha256": "17e7946530b13634311315b91212fc1d59effadce8d7502f93ac989e4641197c",
+      "previous": "no_qualified_reference",
+      "status": "no_qualified_reference",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-444T",
+      "role": "split_word",
+      "word_sha256": "b891f11ddd1985b184e778c2c2cc5d9cf8959216f21beade5ae79d913cedad6a",
+      "previous": "no_qualified_reference",
+      "status": "no_qualified_reference",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-444T",
+      "role": "boundary_deletion",
+      "word_sha256": "d5a27b1809fc09c2426c73e63a10098c29eb1961c430a93340cc98b66ed4a248",
+      "previous": "no_qualified_reference",
+      "status": "no_qualified_reference",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-444T",
+      "role": "quote",
+      "word_sha256": "bc27c9b081eb37d370c812930be26b0972aae3c424252b43cecec6b650fdecb2",
+      "previous": "out_of_scope",
+      "status": "out_of_scope",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-629",
+      "role": "reflow",
+      "word_sha256": "71e77815bd4b6f919502b3a4ad28b1907ad423942289a522bc081583ad640e1e",
+      "previous": "reference_bound",
+      "status": "reference_bound",
+      "reference": "GAO-19-629",
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-629",
+      "role": "replacement",
+      "word_sha256": "b0519131535ebb7e3347718e8e8b6f1f9c0b031c15e316c7822c4d7bd4d33a0c",
+      "previous": "out_of_scope",
+      "status": "reference_bound",
+      "reference": "GAO-19-629",
+      "changes": 1,
+      "locations": [
+        [
+          1566,
+          1573
+        ],
+        [
+          0,
+          8
+        ]
+      ]
+    },
+    {
+      "source": "GAO-19-629",
+      "role": "split_word",
+      "word_sha256": "aaff234cabdd874dcccc956ba1194e27bb4f2be2d463b1562b8361bc4c9d1316",
+      "previous": "out_of_scope",
+      "status": "reference_bound",
+      "reference": "GAO-19-629",
+      "changes": 1,
+      "locations": [
+        [
+          1566,
+          1571
+        ],
+        [
+          0,
+          4
+        ]
+      ]
+    },
+    {
+      "source": "GAO-19-629",
+      "role": "boundary_deletion",
+      "word_sha256": "e984b78f1ef6c0e360e6494ccc4302043a566fdc7f061b4538de78fd4cecc1f8",
+      "previous": "out_of_scope",
+      "status": "out_of_scope",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-629",
+      "role": "quote",
+      "word_sha256": "05e885cb91da159aafab74b92e621fc419a413380e7929a90cebfd28129d723c",
+      "previous": "out_of_scope",
+      "status": "out_of_scope",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-696T",
+      "role": "reflow",
+      "word_sha256": "5abcd5d19abf175cbd316722bf98b82983a0a058bdf3afa9ae6a141816ed490a",
+      "previous": "reference_bound",
+      "status": "reference_bound",
+      "reference": "GAO-19-696T",
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-696T",
+      "role": "replacement",
+      "word_sha256": "c7eef3ecd30f4c1d1e356856feed056ebf02aa9b3317b8b39beaa2c8bae8d075",
+      "previous": "out_of_scope",
+      "status": "reference_bound",
+      "reference": "GAO-19-696T",
+      "changes": 1,
+      "locations": [
+        [
+          1944,
+          1951
+        ],
+        [
+          0,
+          8
+        ]
+      ]
+    },
+    {
+      "source": "GAO-19-696T",
+      "role": "split_word",
+      "word_sha256": "b22e0964da63c762a99a88918b7a69338a85d53c6bca902f879925d8eb912ee6",
+      "previous": "out_of_scope",
+      "status": "reference_bound",
+      "reference": "GAO-19-696T",
+      "changes": 1,
+      "locations": [
+        [
+          1944,
+          1949
+        ],
+        [
+          0,
+          4
+        ]
+      ]
+    },
+    {
+      "source": "GAO-19-696T",
+      "role": "boundary_deletion",
+      "word_sha256": "a775e139ddb8bbbf41a95550653c47ee172e3f5e8a39216dba182a666abb8416",
+      "previous": "out_of_scope",
+      "status": "out_of_scope",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-696T",
+      "role": "quote",
+      "word_sha256": "9e07ff3165f435968d5c543b40479416bdaba9492488d92d01827443d4003d08",
+      "previous": "out_of_scope",
+      "status": "out_of_scope",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-254",
+      "role": "reflow",
+      "word_sha256": "7ae3615ed6b776b4bc32342a668c7a9489426d7877e26bc12b88b6c7616232c6",
+      "previous": "reference_bound",
+      "status": "reference_bound",
+      "reference": "GAO-19-254",
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-254",
+      "role": "replacement",
+      "word_sha256": "83458106c69334008abce0d736fbe851d1ad55da6df87345f76b360106b969cc",
+      "previous": "out_of_scope",
+      "status": "reference_bound",
+      "reference": "GAO-19-254",
+      "changes": 1,
+      "locations": [
+        [
+          2031,
+          2038
+        ],
+        [
+          0,
+          8
+        ]
+      ]
+    },
+    {
+      "source": "GAO-19-254",
+      "role": "split_word",
+      "word_sha256": "5045eaa57bb1d1ca98ae7a45896919b31736e5acfa7e3e916d16ee2f99e2b856",
+      "previous": "out_of_scope",
+      "status": "reference_bound",
+      "reference": "GAO-19-254",
+      "changes": 1,
+      "locations": [
+        [
+          2031,
+          2036
+        ],
+        [
+          0,
+          4
+        ]
+      ]
+    },
+    {
+      "source": "GAO-19-254",
+      "role": "boundary_deletion",
+      "word_sha256": "1d2d07ce474fcc0a275b34cd054175e815fb2ba68db910d7e0a847bee2d61928",
+      "previous": "out_of_scope",
+      "status": "out_of_scope",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-254",
+      "role": "quote",
+      "word_sha256": "f7208b3c593773c6c73a870386440639890efd364978f0c7e7e1ce16cc2a8de7",
+      "previous": "out_of_scope",
+      "status": "out_of_scope",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-20-3",
+      "role": "reflow",
+      "word_sha256": "91ea6f38af6e48ef2d536e0bfd03a9b35c66a57c9165259662101eb539c6274c",
+      "previous": "reference_bound",
+      "status": "reference_bound",
+      "reference": "GAO-20-3",
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-20-3",
+      "role": "replacement",
+      "word_sha256": "876c91a79ea3ec475d939389a4c4ccf9384e529532be9c1ba89e4dfb304ee097",
+      "previous": "out_of_scope",
+      "status": "reference_bound",
+      "reference": "GAO-20-3",
+      "changes": 1,
+      "locations": [
+        [
+          1657,
+          1664
+        ],
+        [
+          0,
+          8
+        ]
+      ]
+    },
+    {
+      "source": "GAO-20-3",
+      "role": "split_word",
+      "word_sha256": "8a918af2056d58ca687580958ac5678b4150645d22ee7517b269294e86fb5d25",
+      "previous": "out_of_scope",
+      "status": "reference_bound",
+      "reference": "GAO-20-3",
+      "changes": 1,
+      "locations": [
+        [
+          1657,
+          1662
+        ],
+        [
+          0,
+          4
+        ]
+      ]
+    },
+    {
+      "source": "GAO-20-3",
+      "role": "boundary_deletion",
+      "word_sha256": "911e3ae361898ea85b324f28cb6f456d2e8bdfc168b9849077ed9c5028464854",
+      "previous": "out_of_scope",
+      "status": "out_of_scope",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-20-3",
+      "role": "quote",
+      "word_sha256": "b35b87e59d6b4f03ee2253ab33805e6240f8666aa9c1379a30bfd088c57d1577",
+      "previous": "out_of_scope",
+      "status": "out_of_scope",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-20-378",
+      "role": "reflow",
+      "word_sha256": "1bb192e6fdefa43c2cbfeb5bc241b47329634ccfdcc1495ad4e46db577ef21f7",
+      "previous": "reference_bound",
+      "status": "reference_bound",
+      "reference": "GAO-20-378",
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-20-378",
+      "role": "replacement",
+      "word_sha256": "2a923c76617620504f23eb6a2e1b6d3a1630165acf4f679612ffbfdd7bf7c19a",
+      "previous": "out_of_scope",
+      "status": "reference_bound",
+      "reference": "GAO-20-378",
+      "changes": 1,
+      "locations": [
+        [
+          1755,
+          1762
+        ],
+        [
+          0,
+          8
+        ]
+      ]
+    },
+    {
+      "source": "GAO-20-378",
+      "role": "split_word",
+      "word_sha256": "318c6e7d30da5a924eef6b5288c88b8fca3630533de7d20ad07f2173ad0d7359",
+      "previous": "out_of_scope",
+      "status": "reference_bound",
+      "reference": "GAO-20-378",
+      "changes": 1,
+      "locations": [
+        [
+          1755,
+          1760
+        ],
+        [
+          0,
+          4
+        ]
+      ]
+    },
+    {
+      "source": "GAO-20-378",
+      "role": "boundary_deletion",
+      "word_sha256": "19d3da5801c0f081d6f5257291b7380bada00c34c7a7286ace3233afa3dec019",
+      "previous": "out_of_scope",
+      "status": "out_of_scope",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-20-378",
+      "role": "quote",
+      "word_sha256": "944150de603e17db14894f6269ec2f684e4cc889375760f64a646c854fe639a4",
+      "previous": "out_of_scope",
+      "status": "out_of_scope",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-20-130",
+      "role": "reflow",
+      "word_sha256": "38a06ab64a56f83f75c86ea3712104afdadc1a7b63eee9d81fc73d322f271c2c",
+      "previous": "reference_bound",
+      "status": "reference_bound",
+      "reference": "GAO-20-130",
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-20-130",
+      "role": "replacement",
+      "word_sha256": "866bc1d9e5bd1ea84b3b9def551ead4fd2b72baec24a4886823958e73182b1a9",
+      "previous": "out_of_scope",
+      "status": "reference_bound",
+      "reference": "GAO-20-130",
+      "changes": 1,
+      "locations": [
+        [
+          1632,
+          1639
+        ],
+        [
+          0,
+          8
+        ]
+      ]
+    },
+    {
+      "source": "GAO-20-130",
+      "role": "split_word",
+      "word_sha256": "db12d835d00efd78934d23de1d6d2b4652393b73e4f4fa96a5f0c1b42f750d2b",
+      "previous": "out_of_scope",
+      "status": "reference_bound",
+      "reference": "GAO-20-130",
+      "changes": 1,
+      "locations": [
+        [
+          1632,
+          1637
+        ],
+        [
+          0,
+          4
+        ]
+      ]
+    },
+    {
+      "source": "GAO-20-130",
+      "role": "boundary_deletion",
+      "word_sha256": "cb94fde0670344ed55c56e86075eada8674feca7cd25ce1d6c515178b5347754",
+      "previous": "out_of_scope",
+      "status": "out_of_scope",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-20-130",
+      "role": "quote",
+      "word_sha256": "18f53b9f7dc704def2c82a05e7e45ce01f83a6a4e92279a7b6353164fabebe87",
+      "previous": "out_of_scope",
+      "status": "out_of_scope",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-276",
+      "role": "reflow",
+      "word_sha256": "87cc880bc526817c6966216870567233aeac4b47c2f2c8810d66e9230d0db00e",
+      "previous": "no_qualified_reference",
+      "status": "no_qualified_reference",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-276",
+      "role": "replacement",
+      "word_sha256": "0a2d6a1fbe7aeaba04abe8425c9a1b2545c788d42cf200438ddd584476376b80",
+      "previous": "no_qualified_reference",
+      "status": "no_qualified_reference",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-276",
+      "role": "split_word",
+      "word_sha256": "c4a826588db04cf21d9126697caf9ea53b0f737e58a4589fbc3ffa75cfbde760",
+      "previous": "no_qualified_reference",
+      "status": "no_qualified_reference",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-276",
+      "role": "boundary_deletion",
+      "word_sha256": "0f2ae42ffb2c0792e946bc230e1d55591b2629cd8c1b463fc8409c9f49b52efe",
+      "previous": "no_qualified_reference",
+      "status": "no_qualified_reference",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-276",
+      "role": "quote",
+      "word_sha256": "a6e28b741a5f2faf16abd81c72807746fe66fddba8eeab8632ca4cb8200e4cb2",
+      "previous": "out_of_scope",
+      "status": "out_of_scope",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-702",
+      "role": "reflow",
+      "word_sha256": "11ac6e2dc5c3decba8a92e027ff5f5065691de8355a6da44ceb96529f9855f90",
+      "previous": "no_qualified_reference",
+      "status": "no_qualified_reference",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-702",
+      "role": "replacement",
+      "word_sha256": "e32e656a455f5f02f90c849ad08c9c8e3b2be70a2e5e9cc7df5cac82c8c6a23e",
+      "previous": "no_qualified_reference",
+      "status": "no_qualified_reference",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-702",
+      "role": "split_word",
+      "word_sha256": "69873c5b4f322c17097326e61c517bad8a2cbe825b51219f23cb736e3df23dc5",
+      "previous": "no_qualified_reference",
+      "status": "no_qualified_reference",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-702",
+      "role": "boundary_deletion",
+      "word_sha256": "c36e9f8f4b224a4f1e48b70fc57e8104eb3acf465ae5e2067ec8b7d003ad68b7",
+      "previous": "no_qualified_reference",
+      "status": "no_qualified_reference",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-702",
+      "role": "quote",
+      "word_sha256": "fd3adfd7c0e34cb69206a116792941109f1218177a483b7e2b9b950a5aad6e78",
+      "previous": "out_of_scope",
+      "status": "out_of_scope",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-406",
+      "role": "reflow",
+      "word_sha256": "61ded42ed69e0031c4e889e3cca0b64ec2b576a07f415a012e479f62a28ed8f8",
+      "previous": "reference_bound",
+      "status": "reference_bound",
+      "reference": "GAO-19-406",
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-406",
+      "role": "replacement",
+      "word_sha256": "8882c5d1732f35bf1f5b34bf05c8fb23c7defc80262761039ce967854fd50e8a",
+      "previous": "out_of_scope",
+      "status": "reference_bound",
+      "reference": "GAO-19-406",
+      "changes": 1,
+      "locations": [
+        [
+          1452,
+          1459
+        ],
+        [
+          0,
+          8
+        ]
+      ]
+    },
+    {
+      "source": "GAO-19-406",
+      "role": "split_word",
+      "word_sha256": "78aff89f49f17c33994a8f2df3302d2b35c6a3dee2b42287fab3628414e9fb0c",
+      "previous": "out_of_scope",
+      "status": "reference_bound",
+      "reference": "GAO-19-406",
+      "changes": 1,
+      "locations": [
+        [
+          1452,
+          1457
+        ],
+        [
+          0,
+          4
+        ]
+      ]
+    },
+    {
+      "source": "GAO-19-406",
+      "role": "boundary_deletion",
+      "word_sha256": "79450ca989a9f2961dda270aa609a05586d4043251b1239de011071adda13249",
+      "previous": "out_of_scope",
+      "status": "out_of_scope",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-406",
+      "role": "quote",
+      "word_sha256": "11491c1e099f872062c757ee301e3926ef2e276da3e698f72b863534cf32f2ff",
+      "previous": "out_of_scope",
+      "status": "out_of_scope",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-721T",
+      "role": "reflow",
+      "word_sha256": "2f4a6d2d6e1f0c523bbf1f563e7578621c685b936b5b3716ff1a92c193ff574d",
+      "previous": "no_qualified_reference",
+      "status": "no_qualified_reference",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-721T",
+      "role": "replacement",
+      "word_sha256": "55053a83ac0054b60f25b2b1211fee5ed36966a854729be9c3d4a4cf904ef85b",
+      "previous": "no_qualified_reference",
+      "status": "no_qualified_reference",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-721T",
+      "role": "split_word",
+      "word_sha256": "7cfabfa70c1e3abff0d6fc628079f37f8624641a790b1e928e1e9e6641132a10",
+      "previous": "no_qualified_reference",
+      "status": "no_qualified_reference",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-721T",
+      "role": "boundary_deletion",
+      "word_sha256": "8fa8657804114f397245d1c8f0161199d1f400651a67cdb838bea9b33b447fb3",
+      "previous": "no_qualified_reference",
+      "status": "no_qualified_reference",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-721T",
+      "role": "quote",
+      "word_sha256": "01612d2712813f1e54176420c756180419455fe2ce20c3fc3edb2c8b1af41248",
+      "previous": "out_of_scope",
+      "status": "out_of_scope",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-20-59",
+      "role": "reflow",
+      "word_sha256": "a0a9a7f5ef6052953c141a9576621634fea4368305cee3bf49394c0246c90448",
+      "previous": "reference_bound",
+      "status": "reference_bound",
+      "reference": "GAO-20-59",
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-20-59",
+      "role": "replacement",
+      "word_sha256": "ef30dee882869bf04876c559a5563fe57bed89b5b4f160cace5100c0712947a4",
+      "previous": "out_of_scope",
+      "status": "reference_bound",
+      "reference": "GAO-20-59",
+      "changes": 1,
+      "locations": [
+        [
+          1517,
+          1524
+        ],
+        [
+          0,
+          8
+        ]
+      ]
+    },
+    {
+      "source": "GAO-20-59",
+      "role": "split_word",
+      "word_sha256": "18431a60ed8c1f792b27fb59ff8412b9243200e30e41b0c134838abad938f05c",
+      "previous": "out_of_scope",
+      "status": "reference_bound",
+      "reference": "GAO-20-59",
+      "changes": 1,
+      "locations": [
+        [
+          1517,
+          1522
+        ],
+        [
+          0,
+          4
+        ]
+      ]
+    },
+    {
+      "source": "GAO-20-59",
+      "role": "boundary_deletion",
+      "word_sha256": "d6585c1fcbd174bd68e58d06a934233db3b1d9871a92a45e645ec76e92e702e0",
+      "previous": "out_of_scope",
+      "status": "out_of_scope",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-20-59",
+      "role": "quote",
+      "word_sha256": "4d2eab453dc17fc35cb755b5de3ddebed0e58a625c39df7ad853468e6cfcb140",
+      "previous": "out_of_scope",
+      "status": "out_of_scope",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-384",
+      "role": "reflow",
+      "word_sha256": "6ec29c0e18b163cb249c540f9eb8de8f8759714f5fb0940abb0187c0beeeac9b",
+      "previous": "reference_bound",
+      "status": "reference_bound",
+      "reference": "GAO-19-384",
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-384",
+      "role": "replacement",
+      "word_sha256": "5fecb456a904ff535f38119c7583b516e131aeae7ac45ff0ee9ba987c22a80a0",
+      "previous": "out_of_scope",
+      "status": "reference_bound",
+      "reference": "GAO-19-384",
+      "changes": 1,
+      "locations": [
+        [
+          1376,
+          1383
+        ],
+        [
+          0,
+          8
+        ]
+      ]
+    },
+    {
+      "source": "GAO-19-384",
+      "role": "split_word",
+      "word_sha256": "44325b5be0ff97c848cfa3db7bfadd03866824a7ac1a25cd83bd323411d36e55",
+      "previous": "out_of_scope",
+      "status": "reference_bound",
+      "reference": "GAO-19-384",
+      "changes": 1,
+      "locations": [
+        [
+          1376,
+          1381
+        ],
+        [
+          0,
+          4
+        ]
+      ]
+    },
+    {
+      "source": "GAO-19-384",
+      "role": "boundary_deletion",
+      "word_sha256": "4af42221e9ec6cd5de9e76eae00cab2af6b58103efb33ffc94542dcd38c0d98b",
+      "previous": "out_of_scope",
+      "status": "out_of_scope",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-384",
+      "role": "quote",
+      "word_sha256": "cf48ac24e521948d09d5de9d5f09368da0a1c4e20ef654ec4c6bf524e39fdafc",
+      "previous": "out_of_scope",
+      "status": "out_of_scope",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-20-241",
+      "role": "reflow",
+      "word_sha256": "ff5f623f7bbdbfce96e23a5f03bf55f5e2e27d2c47f81be5448c4cb3948d8602",
+      "previous": "reference_bound",
+      "status": "reference_bound",
+      "reference": "GAO-20-241",
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-20-241",
+      "role": "replacement",
+      "word_sha256": "093d74c39124484f311803f600b33696aedc164571a45d24b4ec702a25b56e99",
+      "previous": "out_of_scope",
+      "status": "reference_bound",
+      "reference": "GAO-20-241",
+      "changes": 1,
+      "locations": [
+        [
+          2069,
+          2076
+        ],
+        [
+          0,
+          8
+        ]
+      ]
+    },
+    {
+      "source": "GAO-20-241",
+      "role": "split_word",
+      "word_sha256": "e4b1a025764e625e7592c2b7738452943fb02efe212d4db2b0a547b2aade6765",
+      "previous": "out_of_scope",
+      "status": "reference_bound",
+      "reference": "GAO-20-241",
+      "changes": 1,
+      "locations": [
+        [
+          2069,
+          2074
+        ],
+        [
+          0,
+          4
+        ]
+      ]
+    },
+    {
+      "source": "GAO-20-241",
+      "role": "boundary_deletion",
+      "word_sha256": "d86286ae962710308fbe7954a72aa44798e000213e933fde2a156db234aea1b6",
+      "previous": "out_of_scope",
+      "status": "out_of_scope",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-20-241",
+      "role": "quote",
+      "word_sha256": "f32874eaea018d330697b84250105ac04ac99f9b0bc4fbdafe4bc4adf8973f31",
+      "previous": "out_of_scope",
+      "status": "out_of_scope",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-20-370",
+      "role": "reflow",
+      "word_sha256": "bbaf51340a5be1540f5b7afe2009b626ca594e00fa44a1fe128de1169c88de73",
+      "previous": "reference_bound",
+      "status": "reference_bound",
+      "reference": "GAO-20-370",
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-20-370",
+      "role": "replacement",
+      "word_sha256": "48515119a9ca4304b96f49b0e4f0f76f968e15df1fd90806053f2d93f35372f7",
+      "previous": "out_of_scope",
+      "status": "reference_bound",
+      "reference": "GAO-20-370",
+      "changes": 1,
+      "locations": [
+        [
+          1872,
+          1879
+        ],
+        [
+          0,
+          8
+        ]
+      ]
+    },
+    {
+      "source": "GAO-20-370",
+      "role": "split_word",
+      "word_sha256": "a6be7c2f3e2ea672edb0525b6b50a6d0fd0f1b46fd204e4e43880152b360f0d7",
+      "previous": "out_of_scope",
+      "status": "reference_bound",
+      "reference": "GAO-20-370",
+      "changes": 1,
+      "locations": [
+        [
+          1872,
+          1877
+        ],
+        [
+          0,
+          4
+        ]
+      ]
+    },
+    {
+      "source": "GAO-20-370",
+      "role": "boundary_deletion",
+      "word_sha256": "4ede0a58865f36e4fef46ad912d5eca670c269c74f79e07c82bba5e090b3fd1e",
+      "previous": "out_of_scope",
+      "status": "out_of_scope",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-20-370",
+      "role": "quote",
+      "word_sha256": "9e1191257fa481bcbbc10d6c1779e8a70bfb2b8a805f2de6037e7581eba39569",
+      "previous": "out_of_scope",
+      "status": "out_of_scope",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-20-294",
+      "role": "reflow",
+      "word_sha256": "15a9a82fedc88eb02fff8fcd4c122a7ff2f11d136bff09f003ad7c206897d578",
+      "previous": "reference_bound",
+      "status": "reference_bound",
+      "reference": "GAO-20-294",
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-20-294",
+      "role": "replacement",
+      "word_sha256": "34cc32c902489a7016fd59f63925646d5b5c808e2adfb9d7ccd10a413e10da37",
+      "previous": "out_of_scope",
+      "status": "reference_bound",
+      "reference": "GAO-20-294",
+      "changes": 1,
+      "locations": [
+        [
+          1711,
+          1718
+        ],
+        [
+          0,
+          8
+        ]
+      ]
+    },
+    {
+      "source": "GAO-20-294",
+      "role": "split_word",
+      "word_sha256": "6db5dc2201567a4b54daa8bf510944b8956aca807373fba2a69414135b687774",
+      "previous": "out_of_scope",
+      "status": "reference_bound",
+      "reference": "GAO-20-294",
+      "changes": 1,
+      "locations": [
+        [
+          1711,
+          1716
+        ],
+        [
+          0,
+          4
+        ]
+      ]
+    },
+    {
+      "source": "GAO-20-294",
+      "role": "boundary_deletion",
+      "word_sha256": "f20f61736c2ca4da521cb238f66f0d6c5e4c937182a5a6c95a7b4cddd20f6d53",
+      "previous": "out_of_scope",
+      "status": "out_of_scope",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-20-294",
+      "role": "quote",
+      "word_sha256": "800dad5e1bfaed3a02023d8b06d9da56d1c5668b9927e0816dc9ea6f73ef734b",
+      "previous": "out_of_scope",
+      "status": "out_of_scope",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-246",
+      "role": "reflow",
+      "word_sha256": "e3b90557a206fa77e1040a271792b0d59abde18f27e928078fc9e07d811f8e63",
+      "previous": "reference_bound",
+      "status": "reference_bound",
+      "reference": "GAO-19-246",
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-246",
+      "role": "replacement",
+      "word_sha256": "1a12b1b68337957c523756e834b37d96ead48fe11141ea33db5bf3ec58863411",
+      "previous": "out_of_scope",
+      "status": "reference_bound",
+      "reference": "GAO-19-246",
+      "changes": 1,
+      "locations": [
+        [
+          1896,
+          1903
+        ],
+        [
+          0,
+          8
+        ]
+      ]
+    },
+    {
+      "source": "GAO-19-246",
+      "role": "split_word",
+      "word_sha256": "27b2a7121bd76a318817963c873a055b58ef683a6f5c7b8892c288e084c7ae9d",
+      "previous": "out_of_scope",
+      "status": "reference_bound",
+      "reference": "GAO-19-246",
+      "changes": 1,
+      "locations": [
+        [
+          1896,
+          1901
+        ],
+        [
+          0,
+          4
+        ]
+      ]
+    },
+    {
+      "source": "GAO-19-246",
+      "role": "boundary_deletion",
+      "word_sha256": "a601e8a161e38334793df45aa02ec58b976c4a6c220b65139ca88b14b1a9910f",
+      "previous": "out_of_scope",
+      "status": "out_of_scope",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-246",
+      "role": "quote",
+      "word_sha256": "0224ee3c185912508f6f6303fd76face38c1a6e94569f7381177332ed78f6dcb",
+      "previous": "out_of_scope",
+      "status": "out_of_scope",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-426",
+      "role": "reflow",
+      "word_sha256": "eba0a13b75bbea9b1684bca790011c939c0bec198021d722f86b41bbb3cd3437",
+      "previous": "reference_bound",
+      "status": "reference_bound",
+      "reference": "GAO-19-426",
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-426",
+      "role": "replacement",
+      "word_sha256": "c1369ee57c26ea1b0e17ec588835b8cf31add669e8c5749ab8ea2544156f0771",
+      "previous": "out_of_scope",
+      "status": "reference_bound",
+      "reference": "GAO-19-426",
+      "changes": 1,
+      "locations": [
+        [
+          1645,
+          1652
+        ],
+        [
+          0,
+          8
+        ]
+      ]
+    },
+    {
+      "source": "GAO-19-426",
+      "role": "split_word",
+      "word_sha256": "3028ef2a00d60c399da675b820b906c464bf3c9add1b938676f51b0aba45e88b",
+      "previous": "out_of_scope",
+      "status": "reference_bound",
+      "reference": "GAO-19-426",
+      "changes": 1,
+      "locations": [
+        [
+          1645,
+          1650
+        ],
+        [
+          0,
+          4
+        ]
+      ]
+    },
+    {
+      "source": "GAO-19-426",
+      "role": "boundary_deletion",
+      "word_sha256": "48335de170c0f55bb3c8fa62dba92444b3865b959337fd9ba977c2fb6cf61435",
+      "previous": "out_of_scope",
+      "status": "out_of_scope",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-19-426",
+      "role": "quote",
+      "word_sha256": "05dc99f0069514c5db6e8685cfbb28eb6f126d7c36124a9135fd7f00d77d7808",
+      "previous": "out_of_scope",
+      "status": "out_of_scope",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-20-188",
+      "role": "reflow",
+      "word_sha256": "7c699b530d409b72e00cd31e9fd5c0c455918e7e38df367f817d742b5edd43f2",
+      "previous": "reference_bound",
+      "status": "reference_bound",
+      "reference": "GAO-20-188",
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-20-188",
+      "role": "replacement",
+      "word_sha256": "91768bb625ec1049e3661b2f23aa674617fbc4a8653114c1d61d4ef1f4478f0a",
+      "previous": "out_of_scope",
+      "status": "reference_bound",
+      "reference": "GAO-20-188",
+      "changes": 1,
+      "locations": [
+        [
+          1629,
+          1636
+        ],
+        [
+          0,
+          8
+        ]
+      ]
+    },
+    {
+      "source": "GAO-20-188",
+      "role": "split_word",
+      "word_sha256": "b0f635add326beba6df089944e282090dda083ad1548bfebdc4c63e0a4ed5100",
+      "previous": "out_of_scope",
+      "status": "reference_bound",
+      "reference": "GAO-20-188",
+      "changes": 1,
+      "locations": [
+        [
+          1629,
+          1634
+        ],
+        [
+          0,
+          4
+        ]
+      ]
+    },
+    {
+      "source": "GAO-20-188",
+      "role": "boundary_deletion",
+      "word_sha256": "2a7d6eab68ec0a5308d34cd23e438126d1b318e4b7a9b215f4c21e17569d97b6",
+      "previous": "out_of_scope",
+      "status": "out_of_scope",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-20-188",
+      "role": "quote",
+      "word_sha256": "96f6505608c1e77e21286f02900220919cd9331eae9cec4d7f7bf2595ead278d",
+      "previous": "out_of_scope",
+      "status": "out_of_scope",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-20-373",
+      "role": "reflow",
+      "word_sha256": "87dc4dd0e99cea000e28716e00e724ede070abd5f923d346548b79186e5b4554",
+      "previous": "reference_bound",
+      "status": "reference_bound",
+      "reference": "GAO-20-373",
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-20-373",
+      "role": "replacement",
+      "word_sha256": "18514d88f2666e30b84786881ba3dc2b5882d317fde5d17404d0c99b7fc71b1c",
+      "previous": "out_of_scope",
+      "status": "reference_bound",
+      "reference": "GAO-20-373",
+      "changes": 1,
+      "locations": [
+        [
+          1643,
+          1650
+        ],
+        [
+          0,
+          8
+        ]
+      ]
+    },
+    {
+      "source": "GAO-20-373",
+      "role": "split_word",
+      "word_sha256": "be789ad522ff6a5b85399848cea70449b8ed2646485f156bbcd3891744e6830f",
+      "previous": "out_of_scope",
+      "status": "reference_bound",
+      "reference": "GAO-20-373",
+      "changes": 1,
+      "locations": [
+        [
+          1643,
+          1648
+        ],
+        [
+          0,
+          4
+        ]
+      ]
+    },
+    {
+      "source": "GAO-20-373",
+      "role": "boundary_deletion",
+      "word_sha256": "6ea3dc2d5d64c98c599bfea7158b3144073efbceeab7ea0ebc914492532d73fb",
+      "previous": "out_of_scope",
+      "status": "out_of_scope",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-20-373",
+      "role": "quote",
+      "word_sha256": "411fcc2a8afbd4c10cd7601043aa2a2219acb2df6b8d4d755c89fe707e61726e",
+      "previous": "out_of_scope",
+      "status": "out_of_scope",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-20-239",
+      "role": "reflow",
+      "word_sha256": "37d9ab1824672de3099ade51b3071ae7e52c2a81c0749fe26d0a659a51e54662",
+      "previous": "reference_bound",
+      "status": "reference_bound",
+      "reference": "GAO-20-239",
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-20-239",
+      "role": "replacement",
+      "word_sha256": "2d26477e6fa1117344f6ba86b885a72527968e0679b9c550a7647721c4fda343",
+      "previous": "out_of_scope",
+      "status": "reference_bound",
+      "reference": "GAO-20-239",
+      "changes": 1,
+      "locations": [
+        [
+          1708,
+          1715
+        ],
+        [
+          0,
+          8
+        ]
+      ]
+    },
+    {
+      "source": "GAO-20-239",
+      "role": "split_word",
+      "word_sha256": "586ab1d7514acc8b0aafd9df3ae16d7deeb6d2a3bca30899c9e4c5f892e4c6c2",
+      "previous": "out_of_scope",
+      "status": "reference_bound",
+      "reference": "GAO-20-239",
+      "changes": 1,
+      "locations": [
+        [
+          1708,
+          1713
+        ],
+        [
+          0,
+          4
+        ]
+      ]
+    },
+    {
+      "source": "GAO-20-239",
+      "role": "boundary_deletion",
+      "word_sha256": "68a6a9d578eff51350c2e79a2171cf32bda78eca3f83f2909a9fe0c69768cbe2",
+      "previous": "out_of_scope",
+      "status": "out_of_scope",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-20-239",
+      "role": "quote",
+      "word_sha256": "76a630e6d33918bf95179f0c694c65ca26ebdb23a3f35288c629022f72e0aa86",
+      "previous": "out_of_scope",
+      "status": "out_of_scope",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-20-129",
+      "role": "reflow",
+      "word_sha256": "474aea7a5099b2308b5fe72d99366982aaf0ab1df54610cbbf871ba36e68a1ca",
+      "previous": "reference_bound",
+      "status": "reference_bound",
+      "reference": "GAO-20-129",
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-20-129",
+      "role": "replacement",
+      "word_sha256": "c43eefaf22245b530a000a24ae3d1141d7d9681b0c1120eb0d1f6e0dac4e09a9",
+      "previous": "out_of_scope",
+      "status": "reference_bound",
+      "reference": "GAO-20-129",
+      "changes": 1,
+      "locations": [
+        [
+          951,
+          958
+        ],
+        [
+          0,
+          8
+        ]
+      ]
+    },
+    {
+      "source": "GAO-20-129",
+      "role": "split_word",
+      "word_sha256": "bfd93db2be6c1096f24fb5baab46f68ee01185e45b70224fb0ba13da1d0f3bcd",
+      "previous": "out_of_scope",
+      "status": "reference_bound",
+      "reference": "GAO-20-129",
+      "changes": 1,
+      "locations": [
+        [
+          951,
+          956
+        ],
+        [
+          0,
+          4
+        ]
+      ]
+    },
+    {
+      "source": "GAO-20-129",
+      "role": "boundary_deletion",
+      "word_sha256": "b00a1ec7daf3b44c3c0fe68e61305df735ec4f04020ac7e08b3dfc8706fd113a",
+      "previous": "out_of_scope",
+      "status": "out_of_scope",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    },
+    {
+      "source": "GAO-20-129",
+      "role": "quote",
+      "word_sha256": "d7bb1a30e93d978bf4371c8e0b659c12f6c50a384d6fd19e6b77fb9edc9757ea",
+      "previous": "out_of_scope",
+      "status": "out_of_scope",
+      "reference": null,
+      "changes": 0,
+      "locations": []
+    }
+  ]
+}

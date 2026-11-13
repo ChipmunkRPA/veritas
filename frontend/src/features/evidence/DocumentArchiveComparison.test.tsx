@@ -143,6 +143,31 @@ describe('Public archive comparison', () => {
     expect(screen.getByText('café').tagName).toBe('MARK')
   })
 
+  it('shows both native positions when an archive change spans Word paragraphs', async () => {
+    const result = structuredClone(edited)
+    result.comparison.schema = 'chipmunk.document-archive-comparison/2'
+    result.comparison.layout = 'submitted_paragraphs'
+    result.comparison.changes[0].submitted = {
+      start: 10, end: 21, text: 'left\n\nright', changed_tokens: [[10, 14], [16, 21]],
+      docx_locations: [
+        { paragraph: 3, body_index: 2, paragraph_range: [8, 12], runs_complete: true, changed_tokens: [] },
+        { paragraph: 4, body_index: 3, paragraph_range: [0, 5], runs_complete: true, changed_tokens: [] },
+      ],
+    }
+    vi.mocked(archiveAvailability).mockResolvedValue({ gaoAvailable: true })
+    vi.mocked(compareArchive).mockResolvedValue(result)
+    show()
+    const collection = await screen.findByLabelText('Archive collection')
+    fireEvent.change(collection, { target: { value: 'gao' } })
+    fireEvent.click(screen.getByRole('button', { name: 'Compare with public archive' }))
+    expect(await screen.findByRole('heading', { name: 'Change across Word paragraphs' })).toBeVisible()
+    const positions = screen.getByRole('list', { name: 'Changed Word positions' })
+    expect(positions).toHaveTextContent('Word body paragraph 3, characters [8, 12).')
+    expect(positions).toHaveTextContent('Word body paragraph 4, characters [0, 5).')
+    expect(screen.getByText('left').tagName).toBe('MARK')
+    expect(screen.getByText('right').tagName).toBe('MARK')
+  })
+
   it('shows the matched PDF page and the exact original and highlighted crops', async () => {
     const result = structuredClone(edited)
     result.comparison.aligned_paragraphs[0].pdf_pages = [{ page: 2, extracted_range: [10, 16] }]

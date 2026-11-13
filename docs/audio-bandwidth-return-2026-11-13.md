@@ -105,3 +105,37 @@ for phase in freeze score replay; do
     "$run" "$es2007c" "$is1004c" "$es2012b" "$is1001b" || exit 1
 done
 ```
+
+## Replay from public source ranges
+
+A clean checkout can acquire the exact source intervals directly from the
+AMI project’s first-party mirror. The command fetches four pinned WAV headers
+and 32 contiguous twelve-second windows, then verifies the two six-second PCM
+digests in each window. It recreates each source clock position from the parent
+PCM extent and the frozen selection rule. The download uses 12,288,176 bytes
+in 36 cache files. Keep this cache outside the repository. The parent WAV
+hashes still identify the archived inputs. This bounded path verifies the
+selected PCM rather than reading the entire parent WAVs.
+[AMI downloads and attribution](https://groups.inf.ed.ac.uk/ami/download/)
+· [AMI CC BY 4.0 terms](https://groups.inf.ed.ac.uk/ami/corpus/license.shtml)
+
+From the repository root, run `acquire` with an empty or previously verified
+cache. `verify-sources` checks the same source intervals offline using the
+Python standard library. `replay` uses the backend numerical dependencies to
+regenerate the 192 submitted waveforms and both checks’ measurements, then
+compares every row directly with the published receipt.
+
+```sh
+review_cache=$(mktemp -d)
+python3 -B -IS backend/scripts/replay_audio_bandwidth_public.py acquire "$review_cache"
+python3 -B -IS backend/scripts/replay_audio_bandwidth_public.py verify-sources "$review_cache"
+PYTHONPATH=backend OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 \
+  backend/.venv/bin/python -B -m scripts.replay_audio_bandwidth_public replay "$review_cache"
+```
+
+Local replay reproduced all 192 rows from the downloaded ranges. An
+independent cache cut from the four SHA-256-verified full WAVs produced
+identical bytes and replay output. The source-only check matched on Python
+3.11 and 3.12 and rejected a one-bit change in a neighboring control
+excerpt. The replay reproduces the prior comparison. It adds no new
+capture, detector fit, or accuracy estimate.

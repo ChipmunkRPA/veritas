@@ -97,6 +97,17 @@ integration remains unfinished.
 
 ## Progress on 13 November
 
+- The [Word paragraph comparison](writing-gao-archive-comparison-2026-11-13.md#word-changes-across-paragraphs)
+  localized 38 of 48 authored changes across paragraph breaks on 24
+  held report sources. No unchanged reflow, boundary deletion or quote
+  received a change. The browser, PDF and JSON show exact native positions.
+- The [public bandwidth replay](audio-bandwidth-return-2026-11-13.md#replay-from-public-source-ranges)
+  now downloads only the pinned 12.3 MB needed from the AMI publisher and
+  reproduces all 192 audio measurements from a clean checkout.
+- The [robust Mel trial](audio-trimmed-mel-normalization-2026-11-13.md)
+  retained the submitted waveform and changed only feature normalization.
+  It found none of 12 known short voice edits under competing speech
+  at the locked point and remains experimental.
 - The [PDF Content Credentials check](pdf-content-credentials-2026-11-13.md)
   verifies a whole-file AI declaration locally before acquiring writing models.
   Signed document coverage, modified PDF controls and payment-first behavior

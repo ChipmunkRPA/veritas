@@ -4995,6 +4995,20 @@
               }
             ]
           },
+          "docx_locations": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/DocumentArchiveWordLocation"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Docx Locations"
+          },
           "end": {
             "title": "End",
             "type": "integer"

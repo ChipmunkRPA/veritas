@@ -109,6 +109,11 @@ def test_mixed_pdf_second_check_binds_complete_native_text_to_one_intact_page(tm
     assert agreement.candidates(broken, primary) is None
     broken["meta"]["ocr"]["pages"] = [None]
     assert agreement.candidates(broken, primary) is None
+    broken = deepcopy(decoded)
+    broken["meta"].update(ocr=[], unmapped_pages=[])
+    assert agreement.candidates(broken, primary) is None
+    broken["meta"].update(ocr={"pages": {}}, partially_checked_pages={})
+    assert agreement.candidates(broken, primary) is None
 
 
 @pytest.mark.parametrize("ocr_succeeds", [True, False])

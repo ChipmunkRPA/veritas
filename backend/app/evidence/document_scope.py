@@ -90,7 +90,7 @@ def checkpoint_window_in_scope(window: dict, body_spans: list[dict] | None) -> b
     )
 
 
-def _pdf_excluded_pages(coverage: dict) -> set[int]:
+def pdf_excluded_pages(coverage: dict) -> set[int]:
     ocr = coverage.get("ocr", {})
     if not isinstance(ocr, dict):
         raise ValueError("Invalid PDF coverage")
@@ -109,7 +109,7 @@ def _pdf_excluded_pages(coverage: dict) -> set[int]:
 def pdf_agreement_text_spans(mapping: list[dict], coverage: dict, text: str) -> list[dict] | None:
     """Find fully mapped selectable-text blocks on intact pages of a mixed PDF."""
     try:
-        excluded = _pdf_excluded_pages(coverage)
+        excluded = pdf_excluded_pages(coverage)
     except ValueError:
         return None
     if not excluded or not isinstance(mapping, list) or not mapping:
@@ -205,7 +205,7 @@ def validate_checkpoint_agreement(
         elif schema == CHECKPOINT_AGREEMENT_PDF_SCHEMA:
             fields.add("pdf_spans")
             pdf_spans = record.get("pdf_spans")
-            excluded = _pdf_excluded_pages(coverage)
+            excluded = pdf_excluded_pages(coverage)
             if (document["source"].get("method") != "pymupdf" or not excluded
                     or not isinstance(pdf_spans, list) or len(pdf_spans) not in {1, 4}):
                 raise ValueError("Invalid second-check PDF scope")

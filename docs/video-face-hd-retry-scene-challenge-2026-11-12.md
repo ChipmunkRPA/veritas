@@ -33,6 +33,10 @@ The Full comparison took 402.3 seconds, with 5.51 GiB peak process RSS and 12.84
 
 ## Local replay
 
+New face-change evidence now explains that a cut to another speaker can
+trigger the cue even when the surrounding layout stays fixed. The measured
+frames and source times are still available in the evidence and report.
+
 Use the retained archives and a new private work directory. The freeze binds publisher and source receipts, detector assets and the serving comparator. The video comparator matches revision `d4937d8`. The audit reopens every delivered source picture and independently rebuilds every clip that reaches the Full retry. [Local face asset terms](video-appearance-plan-v107-method.md)
 
 ```sh

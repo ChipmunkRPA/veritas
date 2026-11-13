@@ -782,7 +782,9 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
             packet.update(title="Face-change range to review", semantics=sequence['method'],
                           face_sequence=sequence,
                           observation=face_interval_binding.sequence_observation(sequence),
-                          interpretation="This pattern supports reviewing a possible face edit. Head motion, expression, lighting and compression can also cause it. The displayed frames show before, during and after context; none has an individual AI confidence score.",
+                          interpretation=("Review the original frames for head motion, expression, lighting, or a cut to another person. "
+                                          "An ordinary speaker cut can trigger this cue while the surrounding layout stays fixed. "
+                                          "The frames show before, during and after context. The check cannot determine the cause."),
                           measurements=[{"label": "Face-sequence change", "value": sequence["response"], "unit": "uncalibrated feature distance"},
                                         {"label": "Input frames in this window", "value": len(sequence["frame_inputs"]), "unit": "frames"}],
                           limitations=["This is a window-level review cue, not proof of a face swap or an authenticity probability.",
@@ -836,7 +838,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                           semantics=face_return["method"], face_return=face_return, affects_overall_confidence=False,
                           observation=face_return_binding.observation(face_return),
                           interpretation=("The appearance within the selected time range differs from the views immediately before and after it. "
-                                          + scene_note + "Compare the three original crops for possible changes in expression, angle, lighting, or the face itself."),
+                                          + scene_note + "An ordinary speaker cut can trigger this cue while the surrounding layout stays fixed. "
+                                          "Compare the three original crops for possible changes in expression, angle, lighting, or the person shown."),
                           measurements=[{"label": "Face appearance separation", "value": face_return["response"], "unit": "uncalibrated feature distance"},
                                         {"label": "Measured face samples", "value": len(face_return["frame_inputs"]), "unit": "frames"}],
                           window={"frame_indices": indices, "time_base": table.time_base,

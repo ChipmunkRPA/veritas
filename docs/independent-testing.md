@@ -1415,6 +1415,15 @@ media or weights. A matching receipt reproduces the published arithmetic.
 Source preparation and inference replay require the additional inputs in
 each linked study. [Linux replay receipt](evaluation-panels/evidence-followups-linux-replay-2026-11-12.json)
 
+### Rebuild native Word source controls
+
+Reconstruct the ordinary Word draft controls and verify their exact decoded
+positions from ten pinned public PLOS articles. The tool can fetch the
+publisher XML once and repeat the same checks from a local cache. It also
+checks the available earlier sides of the generated-rewrite pairs. The
+generated later sides stay outside this reconstruction.
+[Publisher source replay and commands](writing-word-public-source-replay-2026-11-12.md)
+
 ### Replay recent evaluations from a clean checkout
 
 From the repository root, use Python 3.11 or later. These commands read the

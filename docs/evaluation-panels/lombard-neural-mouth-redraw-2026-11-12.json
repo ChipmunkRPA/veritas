@@ -1,0 +1,2568 @@
+{
+  "freeze_sha256": "666a8a95c72563abfa2ced09e053d445444a5a30959e3f127a456e4800472b5b",
+  "protocol": {
+    "blind_observer": "Muted stateless picture measurement, blind to case labels, source event observations and waveform. Find an unambiguous near-closed-to-open event against the publisher forced-phone neighborhood plus the fixed late control allowance. Keep ambiguous or missing observations.",
+    "controls": "Lossless original, same-time ordinary 256-to-512 bilinear resample, five-picture delayed ordinary pixels. All share source crop, inverse affine, native mouth alpha, and edit interval. At the first and last edited picture use half opacity.",
+    "delivery": "Lossless RGB H.264 and original mono float32 PCM in MOV. Preserve all exact native picture timestamps, zero origins, every source audio sample, and unchanged pixels outside the frozen edit geometry.",
+    "qualification": "Rejoin labels after muted observation. Require that a neural or ordinary re-opening remains within one native picture of its genuine counterpart, lies inside the native edit interval, and differs from the separately measured acoustic burst by at most 80 ms. This is local source-event agreement, not perceptual phoneme or full-clip synchrony.",
+    "render": "Rights-reviewed LivePortrait human weights, strict exact CPU float32 and unchanged bounded convolution. Use the same native source-time crop for both inputs. Reconstruction is an AI redraw and is not presumed synchronized.",
+    "roster": "All 13 preselected qualified source events. Construct and observe the two development sources before the 11 held sources. Preserve every attempted condition and keep speakers disjoint."
+  },
+  "released_timing_clock_admission": {
+    "minimum_seconds_for_four_complete_windows": "102/25",
+    "note": "Exact source-clock upper bound before speaker attribution or mouth quality. Four windows begin at ticks 25, 37, 50, 62 and require 102 complete ticks.",
+    "source_count_by_possible_windows": {
+      "development": {
+        "0": 1,
+        "1": 1
+      },
+      "held": {
+        "0": 6,
+        "1": 5
+      }
+    }
+  },
+  "results": {
+    "development": {
+      "anonymous_example": {
+        "authored_picture_interval": [
+          15,
+          31
+        ],
+        "authored_seconds": [
+          "5/8",
+          "31/24"
+        ],
+        "observed_visual_release_seconds": [
+          "7/8",
+          "11/12"
+        ],
+        "signed_acoustic_midpoint_offset_s": "1/75",
+        "visual_picture_shift": 0
+      },
+      "blind_picture_replay_sha256": "4899a55bc21fa1cf1cbd53ffb24dd4c834508c92a700adc8f63349fe72b32d9b",
+      "checkpoint_exact_loads": 5,
+      "detector_result_sha256": "6d98d1020074a3ad1d42da5a370b433dc1ca354f9e092f800cb4a950b05514d8",
+      "detector_results": {
+        "current": {
+          "delayed_pixels_ordinary": {
+            "alerts": 0,
+            "cases": 2,
+            "explicitly_unassessed_local_timing": 2,
+            "localizations": 0,
+            "measured": 1,
+            "measurement_windows": 1,
+            "observed_observed_delayed_control": 2,
+            "qualified": 2,
+            "qualified_alerts": 0,
+            "qualified_localizations": 0,
+            "qualified_measured": 1
+          },
+          "original": {
+            "alerts": 0,
+            "cases": 2,
+            "explicitly_unassessed_local_timing": 2,
+            "localizations": 0,
+            "measured": 1,
+            "measurement_windows": 1,
+            "observed_source_event_retained": 2,
+            "qualified": 2,
+            "qualified_alerts": 0,
+            "qualified_localizations": 0,
+            "qualified_measured": 1
+          },
+          "resample_ordinary": {
+            "alerts": 0,
+            "cases": 2,
+            "explicitly_unassessed_local_timing": 2,
+            "localizations": 0,
+            "measured": 1,
+            "measurement_windows": 1,
+            "observed_source_event_retained": 2,
+            "qualified": 2,
+            "qualified_alerts": 0,
+            "qualified_localizations": 0,
+            "qualified_measured": 1
+          },
+          "source_time_neural": {
+            "alerts": 0,
+            "cases": 2,
+            "explicitly_unassessed_local_timing": 2,
+            "localizations": 0,
+            "measured": 1,
+            "measurement_windows": 1,
+            "observed_source_event_retained": 2,
+            "qualified": 2,
+            "qualified_alerts": 0,
+            "qualified_localizations": 0,
+            "qualified_measured": 1
+          }
+        },
+        "fine": {
+          "delayed_pixels_ordinary": {
+            "alerts": 2,
+            "cases": 2,
+            "localizations": 2,
+            "measured": 2,
+            "observed_observed_delayed_control": 2,
+            "qualified": 2,
+            "qualified_alerts": 2,
+            "qualified_localizations": 2,
+            "qualified_measured": 2
+          },
+          "original": {
+            "alerts": 1,
+            "cases": 2,
+            "localizations": 0,
+            "measured": 2,
+            "observed_source_event_retained": 2,
+            "qualified": 2,
+            "qualified_alerts": 1,
+            "qualified_localizations": 0,
+            "qualified_measured": 2
+          },
+          "resample_ordinary": {
+            "alerts": 2,
+            "cases": 2,
+            "localizations": 1,
+            "measured": 2,
+            "observed_source_event_retained": 2,
+            "qualified": 2,
+            "qualified_alerts": 2,
+            "qualified_localizations": 1,
+            "qualified_measured": 2
+          },
+          "source_time_neural": {
+            "alerts": 2,
+            "cases": 2,
+            "localizations": 1,
+            "measured": 2,
+            "observed_source_event_retained": 2,
+            "qualified": 2,
+            "qualified_alerts": 2,
+            "qualified_localizations": 1,
+            "qualified_measured": 2
+          }
+        },
+        "scale_adjusted": {
+          "delayed_pixels_ordinary": {
+            "alerts": 2,
+            "cases": 2,
+            "localizations": 2,
+            "measured": 2,
+            "observed_observed_delayed_control": 2,
+            "qualified": 2,
+            "qualified_alerts": 2,
+            "qualified_localizations": 2,
+            "qualified_measured": 2
+          },
+          "original": {
+            "alerts": 2,
+            "cases": 2,
+            "localizations": 0,
+            "measured": 2,
+            "observed_source_event_retained": 2,
+            "qualified": 2,
+            "qualified_alerts": 2,
+            "qualified_localizations": 0,
+            "qualified_measured": 2
+          },
+          "resample_ordinary": {
+            "alerts": 2,
+            "cases": 2,
+            "localizations": 1,
+            "measured": 2,
+            "observed_source_event_retained": 2,
+            "qualified": 2,
+            "qualified_alerts": 2,
+            "qualified_localizations": 1,
+            "qualified_measured": 2
+          },
+          "source_time_neural": {
+            "alerts": 2,
+            "cases": 2,
+            "localizations": 1,
+            "measured": 2,
+            "observed_source_event_retained": 2,
+            "qualified": 2,
+            "qualified_alerts": 2,
+            "qualified_localizations": 1,
+            "qualified_measured": 2
+          }
+        },
+        "timing_candidate": {
+          "delayed_pixels_ordinary": {
+            "alerts": 2,
+            "cases": 2,
+            "localizations": 1,
+            "measured": 2,
+            "observed_observed_delayed_control": 2,
+            "qualified": 2,
+            "qualified_alerts": 2,
+            "qualified_localizations": 1,
+            "qualified_measured": 2
+          },
+          "original": {
+            "alerts": 1,
+            "cases": 2,
+            "localizations": 0,
+            "measured": 2,
+            "observed_source_event_retained": 2,
+            "qualified": 2,
+            "qualified_alerts": 1,
+            "qualified_localizations": 0,
+            "qualified_measured": 2
+          },
+          "resample_ordinary": {
+            "alerts": 2,
+            "cases": 2,
+            "localizations": 0,
+            "measured": 2,
+            "observed_source_event_retained": 2,
+            "qualified": 2,
+            "qualified_alerts": 2,
+            "qualified_localizations": 0,
+            "qualified_measured": 2
+          },
+          "source_time_neural": {
+            "alerts": 2,
+            "cases": 2,
+            "localizations": 0,
+            "measured": 2,
+            "observed_source_event_retained": 2,
+            "qualified": 2,
+            "qualified_alerts": 2,
+            "qualified_localizations": 0,
+            "qualified_measured": 2
+          }
+        }
+      },
+      "earlier_copy_exact_ranges": 2,
+      "earlier_copy_frame_exhibits": 12,
+      "earlier_copy_marked_timing_unassessed_profile": 2,
+      "earlier_copy_result_sha256": "cddb47957b06000ed0f53d3a8202a985ed875e08843c30bd2be1be18c2b6abb1",
+      "exact_altered_picture_masks_verified": 96,
+      "frozen_sources": 2,
+      "independent_native_replay_sha256": "83fddd36a3a4f88867a58c919f0e793e0f4dc3f5d337cec065f18a194f50a8fe",
+      "native_picture_timestamps_verified": 508,
+      "neural_construction_sha256": "bb3ff8cb83e5fb4b4afe563af9d272f8cae0c866a69b7b4338094b52a409287b",
+      "observations_by_role": [
+        [
+          "delayed_pixels_ordinary",
+          "observed_delayed_control",
+          2
+        ],
+        [
+          "original",
+          "source_event_retained",
+          2
+        ],
+        [
+          "resample_ordinary",
+          "source_event_retained",
+          2
+        ],
+        [
+          "source_time_neural",
+          "source_event_retained",
+          2
+        ]
+      ],
+      "planned_deliveries": 8,
+      "renderer_peak_rss_bytes": 2748203008,
+      "renderer_root_forwards": {
+        "appearance_feature_extractor": 32,
+        "motion_extractor": 64,
+        "spade_generator": 32,
+        "warping_module": 32
+      },
+      "renderer_wall_seconds": 111.51331258300343,
+      "rows": [
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": false,
+              "windows": 0
+            },
+            "fine": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 1,
+          "group": 1,
+          "native_counts": [
+            61,
+            39840,
+            0
+          ],
+          "observation": "source_event_retained",
+          "role": "original",
+          "style": "p"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": false,
+              "windows": 0
+            },
+            "fine": {
+              "alert": true,
+              "localized": true,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": true,
+              "localized": true,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 1,
+          "group": 1,
+          "native_counts": [
+            61,
+            39840,
+            16
+          ],
+          "observation": "source_event_retained",
+          "role": "resample_ordinary",
+          "style": "p"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": false,
+              "windows": 0
+            },
+            "fine": {
+              "alert": true,
+              "localized": true,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": true,
+              "localized": true,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 1,
+          "group": 1,
+          "native_counts": [
+            61,
+            39840,
+            16
+          ],
+          "observation": "observed_delayed_control",
+          "role": "delayed_pixels_ordinary",
+          "style": "p"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": false,
+              "windows": 0
+            },
+            "fine": {
+              "alert": true,
+              "localized": true,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": true,
+              "localized": true,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 1,
+          "earlier_copy": {
+            "event_profile_unassessed": true,
+            "exact_range": true,
+            "exhibits": 6
+          },
+          "group": 1,
+          "native_counts": [
+            61,
+            39840,
+            16
+          ],
+          "observation": "source_event_retained",
+          "role": "source_time_neural",
+          "style": "p"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": true,
+              "windows": 1
+            },
+            "fine": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 2,
+          "group": 1,
+          "native_counts": [
+            66,
+            43680,
+            0
+          ],
+          "observation": "source_event_retained",
+          "role": "original",
+          "style": "l"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": true,
+              "windows": 1
+            },
+            "fine": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 2,
+          "group": 1,
+          "native_counts": [
+            66,
+            43680,
+            16
+          ],
+          "observation": "source_event_retained",
+          "role": "resample_ordinary",
+          "style": "l"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": true,
+              "windows": 1
+            },
+            "fine": {
+              "alert": true,
+              "localized": true,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": true,
+              "localized": true,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": true,
+              "localized": true,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 2,
+          "group": 1,
+          "native_counts": [
+            66,
+            43680,
+            16
+          ],
+          "observation": "observed_delayed_control",
+          "role": "delayed_pixels_ordinary",
+          "style": "l"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": true,
+              "windows": 1
+            },
+            "fine": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 2,
+          "earlier_copy": {
+            "event_profile_unassessed": true,
+            "exact_range": true,
+            "exhibits": 6
+          },
+          "group": 1,
+          "native_counts": [
+            66,
+            43680,
+            16
+          ],
+          "observation": "source_event_retained",
+          "role": "source_time_neural",
+          "style": "l"
+        }
+      ],
+      "source_groups": 1,
+      "synchronized_neural_by_style": {
+        "l": 1,
+        "p": 1
+      },
+      "synchronized_neural_examples": 2,
+      "synchronized_neural_source_groups": 1,
+      "unchanged_float_audio_samples_verified": 334080,
+      "verified_deliveries": 8
+    },
+    "held": {
+      "anonymous_example": {
+        "authored_picture_interval": [
+          16,
+          32
+        ],
+        "authored_seconds": [
+          "1001/1500",
+          "1001/750"
+        ],
+        "observed_visual_release_seconds": [
+          "11011/12000",
+          "23023/24000"
+        ],
+        "signed_acoustic_midpoint_offset_s": "19/3200",
+        "visual_picture_shift": 0
+      },
+      "blind_picture_replay_sha256": "35da784b52baf2ed62479c6838239939a9839528bce6b5de197f0691f14679e9",
+      "checkpoint_exact_loads": 5,
+      "detector_result_sha256": "f6a5cb41344fd2be2f74b400c213116035a6fca3b442c825802220c9f28ac070",
+      "detector_results": {
+        "current": {
+          "delayed_pixels_ordinary": {
+            "alerts": 0,
+            "cases": 11,
+            "explicitly_unassessed_local_timing": 11,
+            "localizations": 0,
+            "measured": 5,
+            "measurement_windows": 5,
+            "observed_no_clear_reopening": 3,
+            "observed_observed_delayed_control": 8,
+            "qualified": 8,
+            "qualified_alerts": 0,
+            "qualified_localizations": 0,
+            "qualified_measured": 2
+          },
+          "original": {
+            "alerts": 0,
+            "cases": 11,
+            "explicitly_unassessed_local_timing": 11,
+            "localizations": 0,
+            "measured": 5,
+            "measurement_windows": 5,
+            "observed_source_event_retained": 11,
+            "qualified": 11,
+            "qualified_alerts": 0,
+            "qualified_localizations": 0,
+            "qualified_measured": 5
+          },
+          "resample_ordinary": {
+            "alerts": 0,
+            "cases": 11,
+            "explicitly_unassessed_local_timing": 11,
+            "localizations": 0,
+            "measured": 5,
+            "measurement_windows": 5,
+            "observed_source_event_retained": 11,
+            "qualified": 11,
+            "qualified_alerts": 0,
+            "qualified_localizations": 0,
+            "qualified_measured": 5
+          },
+          "source_time_neural": {
+            "alerts": 0,
+            "cases": 11,
+            "explicitly_unassessed_local_timing": 11,
+            "localizations": 0,
+            "measured": 5,
+            "measurement_windows": 5,
+            "observed_no_clear_reopening": 1,
+            "observed_source_event_retained": 10,
+            "qualified": 10,
+            "qualified_alerts": 0,
+            "qualified_localizations": 0,
+            "qualified_measured": 4
+          }
+        },
+        "fine": {
+          "delayed_pixels_ordinary": {
+            "alerts": 4,
+            "cases": 11,
+            "localizations": 0,
+            "measured": 11,
+            "observed_no_clear_reopening": 3,
+            "observed_observed_delayed_control": 8,
+            "qualified": 8,
+            "qualified_alerts": 3,
+            "qualified_localizations": 0,
+            "qualified_measured": 8
+          },
+          "original": {
+            "alerts": 6,
+            "cases": 11,
+            "localizations": 0,
+            "measured": 11,
+            "observed_source_event_retained": 11,
+            "qualified": 11,
+            "qualified_alerts": 6,
+            "qualified_localizations": 0,
+            "qualified_measured": 11
+          },
+          "resample_ordinary": {
+            "alerts": 5,
+            "cases": 11,
+            "localizations": 1,
+            "measured": 11,
+            "observed_source_event_retained": 11,
+            "qualified": 11,
+            "qualified_alerts": 5,
+            "qualified_localizations": 1,
+            "qualified_measured": 11
+          },
+          "source_time_neural": {
+            "alerts": 6,
+            "cases": 11,
+            "localizations": 2,
+            "measured": 11,
+            "observed_no_clear_reopening": 1,
+            "observed_source_event_retained": 10,
+            "qualified": 10,
+            "qualified_alerts": 6,
+            "qualified_localizations": 2,
+            "qualified_measured": 10
+          }
+        },
+        "scale_adjusted": {
+          "delayed_pixels_ordinary": {
+            "alerts": 7,
+            "cases": 11,
+            "localizations": 1,
+            "measured": 11,
+            "observed_no_clear_reopening": 3,
+            "observed_observed_delayed_control": 8,
+            "qualified": 8,
+            "qualified_alerts": 5,
+            "qualified_localizations": 1,
+            "qualified_measured": 8
+          },
+          "original": {
+            "alerts": 7,
+            "cases": 11,
+            "localizations": 0,
+            "measured": 11,
+            "observed_source_event_retained": 11,
+            "qualified": 11,
+            "qualified_alerts": 7,
+            "qualified_localizations": 0,
+            "qualified_measured": 11
+          },
+          "resample_ordinary": {
+            "alerts": 7,
+            "cases": 11,
+            "localizations": 2,
+            "measured": 11,
+            "observed_source_event_retained": 11,
+            "qualified": 11,
+            "qualified_alerts": 7,
+            "qualified_localizations": 2,
+            "qualified_measured": 11
+          },
+          "source_time_neural": {
+            "alerts": 7,
+            "cases": 11,
+            "localizations": 1,
+            "measured": 11,
+            "observed_no_clear_reopening": 1,
+            "observed_source_event_retained": 10,
+            "qualified": 10,
+            "qualified_alerts": 7,
+            "qualified_localizations": 1,
+            "qualified_measured": 10
+          }
+        },
+        "timing_candidate": {
+          "delayed_pixels_ordinary": {
+            "alerts": 7,
+            "cases": 11,
+            "localizations": 0,
+            "measured": 10,
+            "observed_no_clear_reopening": 3,
+            "observed_observed_delayed_control": 8,
+            "qualified": 8,
+            "qualified_alerts": 5,
+            "qualified_localizations": 0,
+            "qualified_measured": 7
+          },
+          "original": {
+            "alerts": 5,
+            "cases": 11,
+            "localizations": 0,
+            "measured": 10,
+            "observed_source_event_retained": 11,
+            "qualified": 11,
+            "qualified_alerts": 5,
+            "qualified_localizations": 0,
+            "qualified_measured": 10
+          },
+          "resample_ordinary": {
+            "alerts": 6,
+            "cases": 11,
+            "localizations": 0,
+            "measured": 10,
+            "observed_source_event_retained": 11,
+            "qualified": 11,
+            "qualified_alerts": 6,
+            "qualified_localizations": 0,
+            "qualified_measured": 10
+          },
+          "source_time_neural": {
+            "alerts": 5,
+            "cases": 11,
+            "localizations": 0,
+            "measured": 10,
+            "observed_no_clear_reopening": 1,
+            "observed_source_event_retained": 10,
+            "qualified": 10,
+            "qualified_alerts": 4,
+            "qualified_localizations": 0,
+            "qualified_measured": 9
+          }
+        }
+      },
+      "earlier_copy_exact_ranges": 11,
+      "earlier_copy_frame_exhibits": 66,
+      "earlier_copy_marked_timing_unassessed_profile": 11,
+      "earlier_copy_result_sha256": "7366699f48839d8d800ecd70f4b63a2153f0fded37ee399cb2ff8979d6eaf9a3",
+      "exact_altered_picture_masks_verified": 528,
+      "frozen_sources": 11,
+      "independent_native_replay_sha256": "a1b024488cd20234b86b9b87cf651ef51d5bbb3f29ddef67506197f72e6cd87b",
+      "native_picture_timestamps_verified": 2756,
+      "neural_construction_sha256": "2e9583a9548b39a3695fa861fd2b3ffbe1d037542f53d977b788cba8f1ebbc57",
+      "observations_by_role": [
+        [
+          "delayed_pixels_ordinary",
+          "no_clear_reopening",
+          3
+        ],
+        [
+          "delayed_pixels_ordinary",
+          "observed_delayed_control",
+          8
+        ],
+        [
+          "original",
+          "source_event_retained",
+          11
+        ],
+        [
+          "resample_ordinary",
+          "source_event_retained",
+          11
+        ],
+        [
+          "source_time_neural",
+          "no_clear_reopening",
+          1
+        ],
+        [
+          "source_time_neural",
+          "source_event_retained",
+          10
+        ]
+      ],
+      "planned_deliveries": 44,
+      "renderer_peak_rss_bytes": 2848620544,
+      "renderer_root_forwards": {
+        "appearance_feature_extractor": 176,
+        "motion_extractor": 352,
+        "spade_generator": 176,
+        "warping_module": 176
+      },
+      "renderer_wall_seconds": 607.308629082996,
+      "rows": [
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": true,
+              "windows": 1
+            },
+            "fine": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 1,
+          "group": 1,
+          "native_counts": [
+            68,
+            44800,
+            0
+          ],
+          "observation": "source_event_retained",
+          "role": "original",
+          "style": "p"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": true,
+              "windows": 1
+            },
+            "fine": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": true,
+              "localized": true,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 1,
+          "group": 1,
+          "native_counts": [
+            68,
+            44800,
+            16
+          ],
+          "observation": "source_event_retained",
+          "role": "resample_ordinary",
+          "style": "p"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": true,
+              "windows": 1
+            },
+            "fine": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 1,
+          "group": 1,
+          "native_counts": [
+            68,
+            44800,
+            16
+          ],
+          "observation": "observed_delayed_control",
+          "role": "delayed_pixels_ordinary",
+          "style": "p"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": true,
+              "windows": 1
+            },
+            "fine": {
+              "alert": true,
+              "localized": true,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": true,
+              "localized": true,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 1,
+          "earlier_copy": {
+            "event_profile_unassessed": true,
+            "exact_range": true,
+            "exhibits": 6
+          },
+          "group": 1,
+          "native_counts": [
+            68,
+            44800,
+            16
+          ],
+          "observation": "source_event_retained",
+          "role": "source_time_neural",
+          "style": "p"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": true,
+              "windows": 1
+            },
+            "fine": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 2,
+          "group": 1,
+          "native_counts": [
+            65,
+            42720,
+            0
+          ],
+          "observation": "source_event_retained",
+          "role": "original",
+          "style": "l"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": true,
+              "windows": 1
+            },
+            "fine": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 2,
+          "group": 1,
+          "native_counts": [
+            65,
+            42720,
+            16
+          ],
+          "observation": "source_event_retained",
+          "role": "resample_ordinary",
+          "style": "l"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": true,
+              "windows": 1
+            },
+            "fine": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 2,
+          "group": 1,
+          "native_counts": [
+            65,
+            42720,
+            16
+          ],
+          "observation": "no_clear_reopening",
+          "role": "delayed_pixels_ordinary",
+          "style": "l"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": true,
+              "windows": 1
+            },
+            "fine": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 2,
+          "earlier_copy": {
+            "event_profile_unassessed": true,
+            "exact_range": true,
+            "exhibits": 6
+          },
+          "group": 1,
+          "native_counts": [
+            65,
+            42720,
+            16
+          ],
+          "observation": "source_event_retained",
+          "role": "source_time_neural",
+          "style": "l"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": true,
+              "windows": 1
+            },
+            "fine": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 3,
+          "group": 2,
+          "native_counts": [
+            73,
+            47360,
+            0
+          ],
+          "observation": "source_event_retained",
+          "role": "original",
+          "style": "l"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": true,
+              "windows": 1
+            },
+            "fine": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 3,
+          "group": 2,
+          "native_counts": [
+            73,
+            47360,
+            16
+          ],
+          "observation": "source_event_retained",
+          "role": "resample_ordinary",
+          "style": "l"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": true,
+              "windows": 1
+            },
+            "fine": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 3,
+          "group": 2,
+          "native_counts": [
+            73,
+            47360,
+            16
+          ],
+          "observation": "observed_delayed_control",
+          "role": "delayed_pixels_ordinary",
+          "style": "l"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": true,
+              "windows": 1
+            },
+            "fine": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 3,
+          "earlier_copy": {
+            "event_profile_unassessed": true,
+            "exact_range": true,
+            "exhibits": 6
+          },
+          "group": 2,
+          "native_counts": [
+            73,
+            47360,
+            16
+          ],
+          "observation": "source_event_retained",
+          "role": "source_time_neural",
+          "style": "l"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": false,
+              "windows": 0
+            },
+            "fine": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": false,
+              "localized": false,
+              "measured": false
+            }
+          },
+          "available": true,
+          "case": 4,
+          "group": 3,
+          "native_counts": [
+            48,
+            30720,
+            0
+          ],
+          "observation": "source_event_retained",
+          "role": "original",
+          "style": "p"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": false,
+              "windows": 0
+            },
+            "fine": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": false,
+              "localized": false,
+              "measured": false
+            }
+          },
+          "available": true,
+          "case": 4,
+          "group": 3,
+          "native_counts": [
+            48,
+            30720,
+            16
+          ],
+          "observation": "source_event_retained",
+          "role": "resample_ordinary",
+          "style": "p"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": false,
+              "windows": 0
+            },
+            "fine": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": true,
+              "localized": true,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": false,
+              "localized": false,
+              "measured": false
+            }
+          },
+          "available": true,
+          "case": 4,
+          "group": 3,
+          "native_counts": [
+            48,
+            30720,
+            16
+          ],
+          "observation": "observed_delayed_control",
+          "role": "delayed_pixels_ordinary",
+          "style": "p"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": false,
+              "windows": 0
+            },
+            "fine": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": false,
+              "localized": false,
+              "measured": false
+            }
+          },
+          "available": true,
+          "case": 4,
+          "earlier_copy": {
+            "event_profile_unassessed": true,
+            "exact_range": true,
+            "exhibits": 6
+          },
+          "group": 3,
+          "native_counts": [
+            48,
+            30720,
+            16
+          ],
+          "observation": "source_event_retained",
+          "role": "source_time_neural",
+          "style": "p"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": false,
+              "windows": 0
+            },
+            "fine": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 5,
+          "group": 3,
+          "native_counts": [
+            58,
+            38080,
+            0
+          ],
+          "observation": "source_event_retained",
+          "role": "original",
+          "style": "l"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": false,
+              "windows": 0
+            },
+            "fine": {
+              "alert": true,
+              "localized": true,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": true,
+              "localized": true,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 5,
+          "group": 3,
+          "native_counts": [
+            58,
+            38080,
+            16
+          ],
+          "observation": "source_event_retained",
+          "role": "resample_ordinary",
+          "style": "l"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": false,
+              "windows": 0
+            },
+            "fine": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 5,
+          "group": 3,
+          "native_counts": [
+            58,
+            38080,
+            16
+          ],
+          "observation": "observed_delayed_control",
+          "role": "delayed_pixels_ordinary",
+          "style": "l"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": false,
+              "windows": 0
+            },
+            "fine": {
+              "alert": true,
+              "localized": true,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 5,
+          "earlier_copy": {
+            "event_profile_unassessed": true,
+            "exact_range": true,
+            "exhibits": 6
+          },
+          "group": 3,
+          "native_counts": [
+            58,
+            38080,
+            16
+          ],
+          "observation": "source_event_retained",
+          "role": "source_time_neural",
+          "style": "l"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": false,
+              "windows": 0
+            },
+            "fine": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 6,
+          "group": 4,
+          "native_counts": [
+            61,
+            40480,
+            0
+          ],
+          "observation": "source_event_retained",
+          "role": "original",
+          "style": "p"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": false,
+              "windows": 0
+            },
+            "fine": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 6,
+          "group": 4,
+          "native_counts": [
+            61,
+            40480,
+            16
+          ],
+          "observation": "source_event_retained",
+          "role": "resample_ordinary",
+          "style": "p"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": false,
+              "windows": 0
+            },
+            "fine": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 6,
+          "group": 4,
+          "native_counts": [
+            61,
+            40480,
+            16
+          ],
+          "observation": "observed_delayed_control",
+          "role": "delayed_pixels_ordinary",
+          "style": "p"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": false,
+              "windows": 0
+            },
+            "fine": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 6,
+          "earlier_copy": {
+            "event_profile_unassessed": true,
+            "exact_range": true,
+            "exhibits": 6
+          },
+          "group": 4,
+          "native_counts": [
+            61,
+            40480,
+            16
+          ],
+          "observation": "source_event_retained",
+          "role": "source_time_neural",
+          "style": "p"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": false,
+              "windows": 0
+            },
+            "fine": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 7,
+          "group": 4,
+          "native_counts": [
+            62,
+            40480,
+            0
+          ],
+          "observation": "source_event_retained",
+          "role": "original",
+          "style": "l"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": false,
+              "windows": 0
+            },
+            "fine": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 7,
+          "group": 4,
+          "native_counts": [
+            62,
+            40480,
+            16
+          ],
+          "observation": "source_event_retained",
+          "role": "resample_ordinary",
+          "style": "l"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": false,
+              "windows": 0
+            },
+            "fine": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 7,
+          "group": 4,
+          "native_counts": [
+            62,
+            40480,
+            16
+          ],
+          "observation": "observed_delayed_control",
+          "role": "delayed_pixels_ordinary",
+          "style": "l"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": false,
+              "windows": 0
+            },
+            "fine": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 7,
+          "earlier_copy": {
+            "event_profile_unassessed": true,
+            "exact_range": true,
+            "exhibits": 6
+          },
+          "group": 4,
+          "native_counts": [
+            62,
+            40480,
+            16
+          ],
+          "observation": "source_event_retained",
+          "role": "source_time_neural",
+          "style": "l"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": true,
+              "windows": 1
+            },
+            "fine": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 8,
+          "group": 5,
+          "native_counts": [
+            70,
+            45280,
+            0
+          ],
+          "observation": "source_event_retained",
+          "role": "original",
+          "style": "p"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": true,
+              "windows": 1
+            },
+            "fine": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 8,
+          "group": 5,
+          "native_counts": [
+            70,
+            45280,
+            16
+          ],
+          "observation": "source_event_retained",
+          "role": "resample_ordinary",
+          "style": "p"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": true,
+              "windows": 1
+            },
+            "fine": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 8,
+          "group": 5,
+          "native_counts": [
+            70,
+            45280,
+            16
+          ],
+          "observation": "no_clear_reopening",
+          "role": "delayed_pixels_ordinary",
+          "style": "p"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": true,
+              "windows": 1
+            },
+            "fine": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 8,
+          "earlier_copy": {
+            "event_profile_unassessed": true,
+            "exact_range": true,
+            "exhibits": 6
+          },
+          "group": 5,
+          "native_counts": [
+            70,
+            45280,
+            16
+          ],
+          "observation": "source_event_retained",
+          "role": "source_time_neural",
+          "style": "p"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": true,
+              "windows": 1
+            },
+            "fine": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 9,
+          "group": 5,
+          "native_counts": [
+            71,
+            46560,
+            0
+          ],
+          "observation": "source_event_retained",
+          "role": "original",
+          "style": "l"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": true,
+              "windows": 1
+            },
+            "fine": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 9,
+          "group": 5,
+          "native_counts": [
+            71,
+            46560,
+            16
+          ],
+          "observation": "source_event_retained",
+          "role": "resample_ordinary",
+          "style": "l"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": true,
+              "windows": 1
+            },
+            "fine": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 9,
+          "group": 5,
+          "native_counts": [
+            71,
+            46560,
+            16
+          ],
+          "observation": "no_clear_reopening",
+          "role": "delayed_pixels_ordinary",
+          "style": "l"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": true,
+              "windows": 1
+            },
+            "fine": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 9,
+          "earlier_copy": {
+            "event_profile_unassessed": true,
+            "exact_range": true,
+            "exhibits": 6
+          },
+          "group": 5,
+          "native_counts": [
+            71,
+            46560,
+            16
+          ],
+          "observation": "no_clear_reopening",
+          "role": "source_time_neural",
+          "style": "l"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": false,
+              "windows": 0
+            },
+            "fine": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 10,
+          "group": 6,
+          "native_counts": [
+            55,
+            36000,
+            0
+          ],
+          "observation": "source_event_retained",
+          "role": "original",
+          "style": "p"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": false,
+              "windows": 0
+            },
+            "fine": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 10,
+          "group": 6,
+          "native_counts": [
+            55,
+            36000,
+            16
+          ],
+          "observation": "source_event_retained",
+          "role": "resample_ordinary",
+          "style": "p"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": false,
+              "windows": 0
+            },
+            "fine": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 10,
+          "group": 6,
+          "native_counts": [
+            55,
+            36000,
+            16
+          ],
+          "observation": "observed_delayed_control",
+          "role": "delayed_pixels_ordinary",
+          "style": "p"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": false,
+              "windows": 0
+            },
+            "fine": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 10,
+          "earlier_copy": {
+            "event_profile_unassessed": true,
+            "exact_range": true,
+            "exhibits": 6
+          },
+          "group": 6,
+          "native_counts": [
+            55,
+            36000,
+            16
+          ],
+          "observation": "source_event_retained",
+          "role": "source_time_neural",
+          "style": "p"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": false,
+              "windows": 0
+            },
+            "fine": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 11,
+          "group": 6,
+          "native_counts": [
+            58,
+            38400,
+            0
+          ],
+          "observation": "source_event_retained",
+          "role": "original",
+          "style": "l"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": false,
+              "windows": 0
+            },
+            "fine": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 11,
+          "group": 6,
+          "native_counts": [
+            58,
+            38400,
+            16
+          ],
+          "observation": "source_event_retained",
+          "role": "resample_ordinary",
+          "style": "l"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": false,
+              "windows": 0
+            },
+            "fine": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": true,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 11,
+          "group": 6,
+          "native_counts": [
+            58,
+            38400,
+            16
+          ],
+          "observation": "observed_delayed_control",
+          "role": "delayed_pixels_ordinary",
+          "style": "l"
+        },
+        {
+          "arms": {
+            "current": {
+              "alert": false,
+              "explicitly_unassessed": true,
+              "localized": false,
+              "measured": false,
+              "windows": 0
+            },
+            "fine": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            },
+            "scale_adjusted": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            },
+            "timing_candidate": {
+              "alert": false,
+              "localized": false,
+              "measured": true
+            }
+          },
+          "available": true,
+          "case": 11,
+          "earlier_copy": {
+            "event_profile_unassessed": true,
+            "exact_range": true,
+            "exhibits": 6
+          },
+          "group": 6,
+          "native_counts": [
+            58,
+            38400,
+            16
+          ],
+          "observation": "source_event_retained",
+          "role": "source_time_neural",
+          "style": "l"
+        }
+      ],
+      "source_groups": 6,
+      "synchronized_neural_by_style": {
+        "l": 5,
+        "p": 5
+      },
+      "synchronized_neural_examples": 10,
+      "synchronized_neural_source_groups": 6,
+      "unchanged_float_audio_samples_verified": 1803520,
+      "verified_deliveries": 44
+    }
+  },
+  "schema": "chipmunk.lombard-neural-mouth-summary/1",
+  "source_qualification_sha256": "07c7c9fa29b7ed10a73f4b1ff4bc2923214cd623fe435515830288761139f913"
+}

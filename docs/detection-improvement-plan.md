@@ -97,6 +97,7 @@ integration remains unfinished.
 
 ## Progress on 12 November
 
+- The [synchronized mouth-redraw test](lombard-neural-mouth-redraw-2026-11-12.md) verified retained local timing on ten of eleven neural clips. The existing single-upload timing check had insufficient windows on all 44 held deliveries. Earlier-copy comparison found all eleven changed picture ranges. The tested single-upload candidates produced too many genuine flags for adoption.
 - The [blind stereo comparison](audio-blind-spatial-transfer-2026-11-12.md) located two of six known short edits on the reused held panel, versus zero on the original stereo mix. Both methods flagged two ordinary groups. In the [third room](audio-blind-huddersfield-transfer-2026-11-12.md) the routing rule discarded the better component for all eight off-center targets, so it remains outside serving.
 - The [longer article transfer](writing-long-position-transfer-2026-11-12.md) gained two locations at the short-passage point with one extra genuine work flagged. The longer-document operating point gave no added locations. The [JPEG contour trial](image-jpeg-contour-gap-transfer-2026-11-12.md) gave no useful localization before applying its points. Both remain in evaluation.
 

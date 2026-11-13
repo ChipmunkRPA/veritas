@@ -163,6 +163,15 @@ appearance change alone is insufficient. A next comparison must distinguish
 ordinary scene/lighting transitions from face-local changes and retain missing
 tracking context. No paper model, code or weights were imported or admitted.
 
+The [head-pose and lip-motion study](https://proceedings.mlr.press/v306/she26a.html)
+measures whether a local mouth change breaks relationships with the rest of the
+face. The [October fine articulation study](https://arxiv.org/abs/2610.30872)
+separately measures local audio and mouth motion when coarse timing agrees, with
+weaker transfer to a different retalking generator. These motivate two distinct
+tests in our [new source-clock panel](lombard-neural-mouth-redraw-2026-11-12.md):
+local mouth redraws that retain the original acoustic event, and conventional
+retiming with an observed event shift. Neither paper's weights or data were used.
+
 ## Passages: genuine web controls and contextual transfer
 
 October's [PAWN++ web evaluation](https://aclanthology.org/2026.wac-1.25/) studies

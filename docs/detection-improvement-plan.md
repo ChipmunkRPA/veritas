@@ -97,6 +97,21 @@ integration remains unfinished.
 
 ## Progress on 12 November
 
+- The [eight-second H.264 and VP9 check](video-face-short-carrier-transfer-2026-11-12.md)
+  localized 27 of 30 and 30 of 30 exact face changes, respectively. It added
+  zero ordinary flags in either format. The local opt-in passed paid-path,
+  browser and source-evidence replay. The [repeated speech and mouth study](video-lipsync-repeat-audio-2026-11-12.md)
+  localized only 3 of 32 conventional soundtrack edits per format and stays
+  offline. Neural mouth redraws still need separate evaluation.
+- The [stereo earlier-copy comparison](audio-reference-comparison-2026-11-11.md#changes-in-the-recorded-stereo-channels)
+  exposed 36 changes that canceled in mono and verified both original channels
+  against the downloaded evidence. The [single-file modulation check](audio-modulation-partial-transfer-2026-11-12.md)
+  missed all 22 edits under loud competing speech and stays offline.
+- The [image line-pattern check](image-line-fingerprint-transfer-2026-11-12.md)
+  missed 144 known changes and flagged 13 of 576 ordinary deliveries. The
+  [writing position check](writing-two-context-transfer-2026-11-12.md) added
+  three exact locations with zero new ordinary work flags, all from one
+  generator. A second-family comparison remains necessary for broader use.
 - The [picture-cut context check](video-spatial-cut-context-transfer-2026-11-12.md)
   explained 13 of 15 routed ordinary cutaways at their exact authored
   boundaries. It left the separately reported brief face changes intact and

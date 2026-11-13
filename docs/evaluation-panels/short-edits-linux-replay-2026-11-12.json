@@ -1,0 +1,70 @@
+{
+  "checks": {
+    "audio": {
+      "arguments": [
+        "docs/evaluation-panels/audio-modulation-partial-transfer-2026-11-12.json"
+      ],
+      "diagnostic_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "entry": "backend/scripts/review_audio_modulation_partial_transfer.py",
+      "exit_code": 0,
+      "files": {
+        "backend/scripts/review_audio_modulation_partial_transfer.py": "1d88b6bc91a75d7330f5f0d7a333b424f2f25d61e5cec0ac741b3b5951a39a10",
+        "docs/evaluation-panels/audio-modulation-partial-transfer-2026-11-12.json": "932d32bacef4e0a5d1ad0dd80fa709be9b027091875604d411ffa6dafed1e659"
+      },
+      "output_sha256": "9ee3e63c2a30728a88a06f215c6ea87448f33ad1ced8362c5578cd66cf70dfc1",
+      "status": "matched"
+    },
+    "image": {
+      "arguments": [
+        "docs/evaluation-panels/image-thumbnail-extent-transfer-2026-11-12.json"
+      ],
+      "diagnostic_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "entry": "backend/scripts/review_image_thumbnail_extent_transfer.py",
+      "exit_code": 0,
+      "files": {
+        "backend/scripts/review_image_thumbnail_extent_transfer.py": "22e39006ca8bc8ab55c2a19471fb88b82211c2044335eed4a078ec98ad6c3c54",
+        "docs/evaluation-panels/image-thumbnail-extent-transfer-2026-11-12.json": "54898b7a6448da18ae341c37eeb63685341e35311a49e6292d22014f04f61993"
+      },
+      "output_sha256": "c31b962a589838f7d6b9658ac99f1f4a2871662ebb9f3771eef6af1d594f7fc5",
+      "status": "matched"
+    },
+    "video": {
+      "arguments": [
+        "docs/evaluation-panels/video-lipsync-repeat-audio-2026-11-12.json"
+      ],
+      "diagnostic_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "entry": "backend/scripts/review_video_lipsync_repeat_audio.py",
+      "exit_code": 0,
+      "files": {
+        "backend/scripts/review_video_lipsync_repeat_audio.py": "40ea862a1d1229092dfdbc6339a161705623ca57b77f66901033cc6eec7d681b",
+        "docs/evaluation-panels/video-lipsync-repeat-audio-2026-11-12.json": "a313f62dc502e5d4415ec29b660011cb97aeb9e18f6d6ea81ef16627b9bcb8a0"
+      },
+      "output_sha256": "db262528bce0a1c05f63870c0b43ba333c2f4a5b87336d7aec56f28c9d563874",
+      "status": "matched"
+    },
+    "writing": {
+      "arguments": [
+        "docs/evaluation-panels/writing-two-context-transfer-2026-11-12.json"
+      ],
+      "diagnostic_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "entry": "backend/scripts/review_writing_two_context_transfer.py",
+      "exit_code": 0,
+      "files": {
+        "backend/scripts/review_writing_two_context_transfer.py": "2156424473fc5efa74b040fbc50bd12b4f44054f3d8d2c6ab4d3f367427fb18a",
+        "docs/evaluation-panels/writing-two-context-transfer-2026-11-12.json": "c9c38c3c5535980749d98d5ced85505a71c4598f24f76b4a0bdd987931489527"
+      },
+      "output_sha256": "3a773205fcd7d10107cf685bd3597eae2b79ff1b25a3eadfecb387f992659ec4",
+      "status": "matched"
+    }
+  },
+  "environment": {
+    "architecture": "aarch64",
+    "os": "Linux",
+    "python": "3.12.15"
+  },
+  "runner_sha256": "ea878ebfd391c30ca5ac9636b5d09745ccdfb2bb3a4600c1e6d6ce66b6bbd0f1",
+  "schema": "chipmunk.public-evaluation-replay/1",
+  "scope": "Arithmetic replay of published evaluation ledgers",
+  "source_revision": null,
+  "suite": "short-edits"
+}

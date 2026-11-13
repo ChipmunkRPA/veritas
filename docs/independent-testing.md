@@ -1437,6 +1437,42 @@ native procedure additionally checks original picture timestamps and crop
 pixels. It requires the exact publisher sources described in the study.
 [Face-change study and replay instructions](video-face-short-prefix-transfer-2026-11-12.md)
 
+### Replay the stereo export and the latest held checks
+
+Run from the repository root with Python 3.11 or later. The first command also
+needs FFmpeg and FFprobe, both original audio files, and a version 5 JSON export.
+It reopens the original recordings and verifies exact source intervals,
+channel samples, playable excerpts and waveforms. The other commands read
+public receipts and recalculate the held decisions without model weights.
+
+```sh
+python3 -B -IS backend/scripts/verify_stereo_reference.py earlier.wav analyzed.wav stereo.json
+python3 -B -IS backend/scripts/review_audio_modulation_partial_transfer.py docs/evaluation-panels/audio-modulation-partial-transfer-2026-11-12.json
+PYTHONPATH=backend python3 -B -S -m scripts.review_video_lipsync_repeat_audio docs/evaluation-panels/video-lipsync-repeat-audio-2026-11-12.json
+python3 -B -IS backend/scripts/review_writing_two_context_transfer.py docs/evaluation-panels/writing-two-context-transfer-2026-11-12.json
+```
+
+The [image line-pattern audit](image-line-fingerprint-transfer-2026-11-12.md)
+reopens the licensed photo and edit sources to check the location arithmetic.
+
+To save a single cross-media receipt, run the `short-edits` suite. It uses
+the video, audio and writing readers above and the [public image thumbnail
+extent reader](image-thumbnail-extent-transfer-2026-11-12.md). All four output
+hashes matched on macOS Python 3.11 and two offline Linux arm64 Python 3.12.15
+runs from a read-only set of nine public files. The receipt reproduces the
+reported arithmetic. Source labels and detector inference need the study inputs.
+[Linux receipt](evaluation-panels/short-edits-linux-replay-2026-11-12.json)
+
+```sh
+python3 -B -IS backend/scripts/replay_public_evaluations.py short-edits.json --suite short-edits
+python3 -B -IS backend/scripts/replay_public_evaluations.py short-edits.json \
+  --compare docs/evaluation-panels/short-edits-linux-replay-2026-11-12.json
+```
+
+Use the [evaluation issue form](../.github/ISSUE_TEMPLATE/independent-evaluation.yml) to
+share the commit, exact command, and discrepancy or reproduced claim. Keep
+private sources and customer reports local.
+
 ### Replay recent evaluations from a clean checkout
 
 From the repository root, use Python 3.11 or later. These commands read the

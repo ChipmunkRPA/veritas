@@ -92,7 +92,13 @@ EVIDENCE_FOLLOWUPS = {
     )),
     "writing": ("review_email_body_alternatives.py", "email-body-alternatives-transfer-2026-11-12.json", (), ()),
 }
-SUITES = ("overview", "localization", "transfer", "source-evidence", "recent-checks", "evidence-followups")
+SHORT_EDITS = {
+    "image": ("review_image_thumbnail_extent_transfer.py", "image-thumbnail-extent-transfer-2026-11-12.json", (), ()),
+    "video": ("review_video_lipsync_repeat_audio.py", "video-lipsync-repeat-audio-2026-11-12.json", (), ()),
+    "audio": ("review_audio_modulation_partial_transfer.py", "audio-modulation-partial-transfer-2026-11-12.json", (), ()),
+    "writing": ("review_writing_two_context_transfer.py", "writing-two-context-transfer-2026-11-12.json", (), ()),
+}
+SUITES = ("overview", "localization", "transfer", "source-evidence", "recent-checks", "evidence-followups", "short-edits")
 ISOLATED = (
     "import runpy,sys; "
     "script=sys.argv.pop(1); "
@@ -135,6 +141,9 @@ def replay_inputs(modality: str, suite: str) -> tuple[str, list[str], tuple[str,
         panel_names = (panel,)
     elif suite == "evidence-followups":
         script, panel, prefix, dependencies = EVIDENCE_FOLLOWUPS[modality]
+        panel_names = (panel,)
+    elif suite == "short-edits":
+        script, panel, prefix, dependencies = SHORT_EDITS[modality]
         panel_names = (panel,)
     elif suite == "source-evidence":
         script, panel_names, prefix, dependencies = SOURCE_EVIDENCE[modality]

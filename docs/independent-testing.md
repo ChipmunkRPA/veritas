@@ -1387,6 +1387,13 @@ This suite replays the held [cross-camera HDR cue](image-gainmap-cross-camera-20
 and [writing comparison across a paragraph break](writing-paired-center-transfer-2026-11-12.md).
 Python 3.11 and 3.12 reproduced all four outputs locally. The suite runs without
 model weights, media downloads or network access. It replays published measurements.
+The same four outputs matched twice on Linux arm64 with Python 3.12.15.
+The second run mounted only the 19 committed public files listed by the
+reference, including the runner, in a read-only container with networking
+disabled. The local image ID was `sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258`.
+This reproduces the arithmetic on another operating system. Source authorship,
+detector accuracy, and the interpretation of findings still need separate review.
+[Linux replay receipt](evaluation-panels/recent-checks-linux-replay-2026-11-12.json)
 
 ### Replay recent evaluations from a clean checkout
 

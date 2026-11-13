@@ -152,7 +152,7 @@ def _context_ranges(doc, changes):
     return ranges
 
 
-def compare(doc: Document, upload_sha256: str, pack_sha256: str, reports, packed_index):
+def compare(doc: Document, upload_sha256: str, pack_sha256: str, reports, packed_index, *, accept_exact_excerpt=True):
     text = doc.text
     output = {
         "schema": SCHEMA, "status": "out_of_scope", "scope": SCOPE, "interpretation": INTERPRETATION,
@@ -195,8 +195,21 @@ def compare(doc: Document, upload_sha256: str, pack_sha256: str, reports, packed
     first, last = anchors[0][0] + WINDOW, anchors[-1][0]
     changes = [(a, b, c, d) for tag, a, b, c, d in opcodes if tag != "equal" and first <= c <= d <= last
                and max(b - a, d - c) <= 96]
+    submitted_range = _span(stream, anchors[0][0], anchors[-1][0] + WINDOW)
+    transcript_range = _span(source_stream, anchors[0][1], anchors[-1][1] + WINDOW)
     if not changes and cached[source_id] != words:
-        return output
+        if not accept_exact_excerpt:
+            return output
+        offsets = {ref - query for query, ref in anchors}
+        if len(offsets) != 1:
+            return output
+        start = offsets.pop()
+        end = start + len(words)
+        if start < 0 or cached[source_id][start:end] != words:
+            return output
+        submitted_range = _span(stream, 0, len(words))
+        transcript_range = _span(source_stream, start, end)
+        support = len(words)
     if len(changes) > 80:
         return output
     for a, b, c, d in changes:
@@ -209,8 +222,8 @@ def compare(doc: Document, upload_sha256: str, pack_sha256: str, reports, packed
         "id": source_id, "url": f"{GAO}/{source_id}", "version_url": f"{PUBLISHER}/gao_{source['split']}.jsonl",
         "volume": "GAO highlights", "document": source_id, "published_date": source["published_date"],
         "source_record_sha256": source["source_record_sha256"], "transcript_sha256": text_hash(reference),
-        "submitted_range": _span(stream, anchors[0][0], anchors[-1][0] + WINDOW),
-        "transcript_range": _span(source_stream, anchors[0][1], anchors[-1][1] + WINDOW),
+        "submitted_range": submitted_range,
+        "transcript_range": transcript_range,
     }
     output["coverage"]["matched_words"] = support
     if output["changes"]:

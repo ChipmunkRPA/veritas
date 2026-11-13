@@ -232,10 +232,23 @@ SINGLE_UPLOAD_TRANSFERS = {
     "audio": ("review_audio_overlap_pitch_transfer.py", ("audio-overlap-pitch-transfer-2026-11-13.json",), (), ()),
     "writing": ("writing_typography_transfer.py", ("writing-typography-transfer-2026-11-13.json",), ("review",), ()),
 }
+PROCESSING_AND_SHORT_EDITS = {
+    "image": ("review_image_quantized_phase_transfer.py", (
+        "image-quantized-phase-transfer-2026-11-13.json", "image-quantized-phase-serving-2026-11-13.json",
+    ), (), tuple(f"{PANELS}/image-native-{study}-{source}-2026-11-13.json"
+                 for study in ("generated-grid", "rotated-stencil", "stencil-interpolation")
+                 for source in ("cc0-roster", "measurements"))),
+    "video": ("review_video_reference_chroma_transfer.py", ("video-reference-chroma-transfer-2026-11-13.json",), (), ()),
+    "audio": ("review_audio_local_context_transfer.py", ("audio-local-context-transfer-2026-11-13.json",), (), ()),
+    "writing": ("writing_temperature_transfer.py", ("writing-temperature-transfer-2026-11-13.json",), ("review",), (
+        f"{SCRIPTS}/writing_interval_transfer.py", f"{SCRIPTS}/writing_revision_trajectory_transfer.py",
+    )),
+}
 SUITES = ("overview", "localization", "transfer", "source-evidence", "recent-checks", "evidence-followups", "short-edits",
           "difficult-edits", "localization-limits", "specialist-transfer", "local-evidence-2026-11-13",
           "evidence-transfer-2026-11-13", "evidence-extent-2026-11-13", "local-evidence-expansion",
-          "short-edit-transfer-2026-11-13", "delivery-and-localization", "reference-and-rotation", "single-upload-transfers")
+          "short-edit-transfer-2026-11-13", "delivery-and-localization", "reference-and-rotation", "single-upload-transfers",
+          "processing-and-short-edits")
 ISOLATED = (
     "import runpy,sys; "
     "script=sys.argv.pop(1); "
@@ -307,6 +320,8 @@ def replay_inputs(modality: str, suite: str) -> tuple[str, list[str], tuple[str,
         script, panel_names, prefix, dependencies = REFERENCE_AND_ROTATION[modality]
     elif suite == "single-upload-transfers":
         script, panel_names, prefix, dependencies = SINGLE_UPLOAD_TRANSFERS[modality]
+    elif suite == "processing-and-short-edits":
+        script, panel_names, prefix, dependencies = PROCESSING_AND_SHORT_EDITS[modality]
     elif suite == "source-evidence":
         script, panel_names, prefix, dependencies = SOURCE_EVIDENCE[modality]
     else:

@@ -11,6 +11,15 @@ zero AI-authorship weight. Ordinary editing and transcription can produce
 the same differences. [GovReport](https://gov-report-data.github.io/) ·
 [GAO attribution and use terms](https://www.gao.gov/copyright)
 
+An unchanged excerpt can match a longer report highlight. For this case,
+every submitted token must match a single contiguous run in the pinned
+transcript after the existing normalization. The unique anchors must
+all agree on the same starting position. Both files' displayed ranges
+run from the first through the last verified token, including matching
+punctuation tokens. The comparison reports no normalized wording
+differences. The offline verifier also replays prior exact excerpts
+that originally received a no-reference result.
+
 ## Held test
 
 The new test used 20 works excluded from both earlier report studies.
@@ -52,6 +61,26 @@ attributed to an archive source. The same 36 works separately supplied
 plain and formatting-only copies. Each set returned 33 correct matches
 without a reported difference and three abstentions. These controls do
 not estimate how often unmatched uploads occur in practice.
+
+A separate test used 24 fresh reports from the
+[short-passage study](writing-temperature-transfer-2026-11-13.md), with
+three excerpts per work and the full 12,228-report index. The previous
+method matched zero of the 24 unchanged clips. The exact-excerpt branch
+matched 23 to the correct report with no differences, and one abstained.
+The existing difference branch still localized 23 of 24 edits from each
+provider. None of 96 additional quoted, edge-augmented, mixed-source or
+reversed controls received a source attribution.
+[Exact-excerpt receipt](evaluation-panels/writing-gao-exact-excerpt-2026-11-13.json)
+
+```sh
+PYTHONPATH=backend python3 -B -S -m scripts.review_writing_gao_exact_excerpt \
+  docs/evaluation-panels/writing-temperature-transfer-2026-11-13.json \
+  docs/evaluation-panels/writing-gao-exact-excerpt-2026-11-13.json
+```
+
+To repeat native inference, use the same command with the backend Python,
+the locally retained `--roster` from the short-passage study and the
+pinned `--pack`. Supply a new path for the generated receipt.
 
 ## Install and replay locally
 

@@ -39,6 +39,23 @@ python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/single-
 python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/single-upload.json" --format-issue
 ```
 
+### Replay local processing and short edit comparisons
+
+The suite recounts [lower-depth PNG resampling](image-quantized-phase-transfer-2026-11-13.md),
+[color changes between video copies](video-reference-chroma-transfer-2026-11-13.md),
+[short voice edits under competing speech](audio-local-context-transfer-2026-11-13.md)
+and [localized writing temperature responses](writing-temperature-transfer-2026-11-13.md).
+It uses published scalar measurements. The linked guides distinguish exact
+source replay, ordinary flags, misses and tests that did not qualify for serving.
+The [GAO excerpt comparison](writing-gao-archive-comparison-2026-11-13.md)
+also has a separate reader that checks the preserved source and text positions.
+
+```sh
+review_dir=$(mktemp -d)
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/processing.json" --suite processing-and-short-edits
+python3 -B -IS backend/scripts/replay_public_evaluations.py "$review_dir/processing.json" --format-issue
+```
+
 ### Replay the expanded local evidence checks
 
 Run this from a clean checkout with Python 3.11 or later. It recounts all

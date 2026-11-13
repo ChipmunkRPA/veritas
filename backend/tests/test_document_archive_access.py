@@ -103,12 +103,17 @@ def test_gao_archive_local_transcript_matches_api_and_pdf(billing, monkeypatch, 
     from scripts.review_gao_archive_export import review
 
     monkeypatch.setattr(settings, "billing_mode", "disabled")
-    transcript = ("The regional audit office gathered records from several different departments and invited all "
+    transcript = ("A previous inquiry concerned a different financial period. "
+                  "The regional audit office gathered records from several different departments and invited all "
                   "program administrators to comment on the analysis. The board reviewed the accounting process "
                   "in detail and approved its updated policy on Monday. The final review confirmed that the "
                   "field officers had recorded complete findings and resolved every outstanding concern in the "
-                  "original worksheet. A separate committee will examine implementation during the following year.")
+                  "original worksheet. Several departments retained copies of that worksheet for their own records. "
+                  "A separate committee will examine implementation during the following year.")
     changed = transcript.replace("Monday", "Thursday")
+    crop_start = transcript.index("The regional audit office")
+    crop_end = transcript.index(" A separate committee")
+    crop = transcript[crop_start:crop_end]
     pack_path = tmp_path / "gao-pack.json"
     pack = {"schema": document_gao_archive.PACK_SCHEMA, "revision": document_gao_archive.REVISION,
             "reports": {"GAO-16-442": {"text": transcript, "published_date": "2016-04-18", "split": "train",
@@ -121,6 +126,8 @@ def test_gao_archive_local_transcript_matches_api_and_pdf(billing, monkeypatch, 
     monkeypatch.setattr(settings, "document_gao_archive_sha256", pack_sha)
     _seed(billing, "gao-changed", changed)
     _seed(billing, "gao-unchanged", transcript)
+    _seed(billing, "gao-exact-excerpt", crop)
+    _seed(billing, "gao-altered-excerpt-edge", "An unsourced addition. " + crop)
     _seed(billing, "gao-unmatched", "> " + changed)
     with _install(billing, monkeypatch) as client:
         url = _url("gao-changed")
@@ -160,6 +167,32 @@ def test_gao_archive_local_transcript_matches_api_and_pdf(billing, monkeypatch, 
             review(export, submitted, pack_path, pack_sha)
         unchanged = client.post(_url("gao-unchanged"), headers=billing.headers, params=selection).json()["comparison"]
         assert unchanged["status"] == "reference_bound" and unchanged["changes"] == []
+        exact_body = client.post(_url("gao-exact-excerpt"), headers=billing.headers,
+                                 params={"include_pdf": True, **selection}).json()
+        exact = exact_body["comparison"]
+        assert exact["status"] == "reference_bound" and exact["changes"] == []
+        assert exact["coverage"]["body_words"] == exact["coverage"]["matched_words"]
+        assert exact["reference"]["submitted_range"] == [0, len(crop)]
+        assert exact["reference"]["transcript_range"] == [crop_start, crop_end]
+        with pymupdf.open(stream=base64.b64decode(exact_body["pdf"]), filetype="pdf") as pdf:
+            exact_pdf = " ".join(" ".join(page.get_text().split()) for page in pdf)
+            assert "No normalized wording differences in the compared passage." in exact_pdf
+            assert f"Transcript range [{crop_start}, {crop_end})" in exact_pdf
+        submitted.write_text(crop)
+        export.write_text(json.dumps(exact))
+        assert review(export, submitted, pack_path, pack_sha)["exact_changes_verified"] == 0
+        reports, packed_index = document_gao_archive.library(pack_path, pack_sha)
+        legacy = document_gao_archive.compare(from_string(crop), exact["submitted_sha256"], pack_sha, reports,
+                                              packed_index, accept_exact_excerpt=False)
+        assert legacy["status"] == "no_qualified_reference"
+        export.write_text(json.dumps(legacy))
+        assert review(export, submitted, pack_path, pack_sha)["status"] == "no_qualified_reference"
+        legacy["coverage"]["matched_words"] = 1
+        export.write_text(json.dumps(legacy))
+        with pytest.raises(ValueError, match="does not replay"):
+            review(export, submitted, pack_path, pack_sha)
+        edge = client.post(_url("gao-altered-excerpt-edge"), headers=billing.headers, params=selection).json()["comparison"]
+        assert edge["status"] == "no_qualified_reference" and edge["reference"] is None and edge["changes"] == []
         unknown = client.post(_url("gao-unmatched"), headers=billing.headers, params=selection).json()["comparison"]
         assert unknown["status"] == "out_of_scope" and unknown["reference"] is None and unknown["changes"] == []
         monkeypatch.setattr(settings, "document_gao_archive_sha256", "0" * 64)
@@ -206,6 +239,7 @@ def test_word_archive_change_keeps_native_paragraph_and_run_positions(billing, m
 
 def test_real_paid_checkout_and_retained_archive_evidence(billing, monkeypatch):
     fixture = billing
+    monkeypatch.setattr(settings, "document_gao_archive_path", None)
     text = _body().replace("opposing government", "op- posing government", 1)
     _seed(fixture, "unpaid-completed", text)
     compare = document_archive.compare

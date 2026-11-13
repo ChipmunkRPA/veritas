@@ -97,6 +97,30 @@ integration remains unfinished.
 
 ## Progress on 13 November
 
+- The [lower-depth resampling check](image-quantized-phase-transfer-2026-11-13.md)
+  adds exact native PNG evidence when local value steps retain a camera-style
+  pixel pattern. It found nine of 13 quantized translations on another camera
+  panel, with no new resampling flag on 104 comparison deliveries. The
+  evidence shows the original crop and carries zero AI confidence.
+- The [earlier-copy chroma trial](video-reference-chroma-transfer-2026-11-13.md)
+  found one additional useful redraw location and zero additional locations
+  among timing-qualified redraws. It stays offline under the frozen scope.
+- The [voice context trial](audio-local-context-transfer-2026-11-13.md)
+  found zero of 12 short synthetic edits across three generator families
+  under competing speech, with five genuine groups flagged. The existing
+  check found one of 12 and flagged three genuine groups. The candidate
+  stays offline.
+- The [writing temperature trial](writing-temperature-transfer-2026-11-13.md)
+  found zero of 48 fresh paired edits from Gemini and GPT-5.4 Nano, with
+  one flag on 52 genuine excerpts. The existing context proxy localized
+  16 of 48 and flagged 20 genuine files. The new cue stays offline.
+- The [exact GAO excerpt comparison](writing-gao-archive-comparison-2026-11-13.md)
+  newly attributed 23 of 24 untouched short excerpts to the correct
+  published transcript. It preserved 46 of 48 strict edited locations
+  and attributed none of 96 edge, quote, ordering or mixed-source controls.
+- The [independent input verifier](independent-testing.md#portable-evaluation-contract)
+  reads each planned input and parent file to verify the declared SHA-256.
+  It emits a digest and counts that reviewers can share without private paths.
 - The [four-second VP9 face-change check](video-brief-face-120-carrier-2026-11-13.md)
   recovered 15 of 16 six-frame swaps across all eight source groups, with
   zero additional flags on 40 ordinary deliveries. It displays the source

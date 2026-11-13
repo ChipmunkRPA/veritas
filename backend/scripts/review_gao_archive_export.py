@@ -21,6 +21,8 @@ def review(export: Path, submitted: Path, pack: Path, sha256: str):
         raise ValueError("A retained TXT original is required")
     original = _read(submitted, MAX_BYTES)
     proof = json.loads(_read(export, MAX_EXPORT), object_pairs_hook=_unique)
+    if not isinstance(proof, dict):
+        raise ValueError("Expected a GAO comparison object")
     with TemporaryDirectory(prefix="chipmunk-gao-review-") as directory:
         staged = Path(directory) / "retained.txt"
         staged.write_bytes(original)
@@ -28,7 +30,12 @@ def review(export: Path, submitted: Path, pack: Path, sha256: str):
     if "\ufffd" in doc.text or "\x00" in doc.text:
         raise ValueError("The file contains undecodable text")
     catalog, index = gao.library(pack, sha256)
-    expected = gao.compare(doc, hashlib.sha256(original).hexdigest(), sha256, catalog, index)
+    upload_sha256 = hashlib.sha256(original).hexdigest()
+    expected = gao.compare(doc, upload_sha256, sha256, catalog, index)
+    if (proof != expected and proof.get("status") == "no_qualified_reference"
+            and expected["status"] == "reference_bound" and not expected["changes"]):
+        # Previously, the same exact excerpt could have received an abstention.
+        expected = gao.compare(doc, upload_sha256, sha256, catalog, index, accept_exact_excerpt=False)
     if proof != expected:
         raise ValueError("The GAO comparison does not replay from these source bytes and positions")
     return {"status": expected["status"], "source": (expected["reference"] or {}).get("id"),

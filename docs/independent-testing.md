@@ -71,6 +71,11 @@ independent source groups and measures confounds from zoom and brightness.
 The [brief face-check coverage verification](video-brief-face-coverage-2026-11-12.md)
 replays a localized case, a measured scan without a range and an unassessed
 scan through prepaid Full analysis and the signed reports.
+The [zoom and brightness comparison](video-face-context-correction-2026-11-12.md)
+separates camera adjustments from speaker cuts and local face swaps.
+The [scale-only follow-up](video-face-scale-context-holdout-2026-11-12.md)
+measures the same explanation at known edit times and at ranges selected by
+the Full worker on a different set of speaker pairs.
 The [compression repeat study](video-face-compression-stability-2026-11-12.md)
 rebuilds single and tandem encodes, checks exact face crops, and reproduces
 both appearance measurements at the original time interval.

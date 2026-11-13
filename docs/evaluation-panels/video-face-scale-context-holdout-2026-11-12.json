@@ -1,0 +1,190 @@
+{
+  "schema": "chipmunk.video-face-scale-context-holdout/1",
+  "admitted_to_serving": false,
+  "ai_confidence_weight": 0,
+  "runner_sha256": "957ae999177c2c41f96e7f583d0e1e26de0dddcb72ae133c8db3788d7e8b3fa5",
+  "freeze_sha256": "10f59f874d39f49866e4c941533a5f5c2c5b2024b9447bb79bce8506d1afadd3",
+  "distinct_actor_groups": 10,
+  "distinct_actor_pairs": 5,
+  "actor_groups_overlapping_prior": 0,
+  "previous_project_exposure": true,
+  "first_preflight": "Stopped before inference at the isolated-settings guard. Import order corrected.",
+  "exact_repeated_deliveries": 30,
+  "independent_scale_dispositions": 40,
+  "results": {
+    "protocol": {
+      "schema": "chipmunk.video-face-scale-context-holdout/1",
+      "sources": "Ten separately archived CREMA-D originals, outside the previous near-head source roster. Prefer the fixed older selection role, then confidence-calibration role, with at least 55 qualified pictures.",
+      "scope": [
+        1280,
+        720,
+        30,
+        120,
+        "h264",
+        "yuv420p"
+      ],
+      "interventions": [
+        [
+          56,
+          72
+        ],
+        [
+          63,
+          81
+        ]
+      ],
+      "scale_point": [
+        3.0,
+        0.45
+      ],
+      "required_central_improvement": 2.0,
+      "reciprocal_geometry": {
+        "minimum_scale_displacement": 0.07,
+        "maximum_absolute_scale_product_error": 0.07
+      },
+      "conditions": [
+        "unchanged",
+        "cutaway",
+        "tandem_cutaway",
+        "punch_in",
+        "tandem_punch_in",
+        "gain"
+      ],
+      "observed": "Measure only the first available short, refined, or coarse published Full range; search within eight native pictures of each endpoint before correction. The authored arm independently uses exact boundaries.",
+      "output": "Optional visual context only: aligning the pictures at different scales reduced the measured change. Retain the existing evidence, assessment and confidence.",
+      "timed_gate": {
+        "cutaway_groups_retained": 4,
+        "zoom_files_explained": 7,
+        "maximum_wrong_explanations": 1
+      },
+      "app_gate": {
+        "minimum_zoom_ranges": 3,
+        "minimum_zoom_explanations": 2,
+        "minimum_cutaway_ranges": 6,
+        "minimum_cutaway_retained_share": 0.75,
+        "maximum_wrong_explanations": 0
+      }
+    },
+    "counts": {
+      "timed": {
+        "unchanged": {
+          "files": 5,
+          "ranges": 5,
+          "assessed": 5,
+          "raw": 0,
+          "scale": 0,
+          "explanation": 0,
+          "edges_within_two": 5
+        },
+        "cutaway": {
+          "files": 5,
+          "ranges": 5,
+          "assessed": 5,
+          "raw": 5,
+          "scale": 5,
+          "explanation": 0,
+          "edges_within_two": 5
+        },
+        "tandem_cutaway": {
+          "files": 5,
+          "ranges": 5,
+          "assessed": 5,
+          "raw": 5,
+          "scale": 5,
+          "explanation": 0,
+          "edges_within_two": 5
+        },
+        "punch_in": {
+          "files": 5,
+          "ranges": 5,
+          "assessed": 5,
+          "raw": 5,
+          "scale": 0,
+          "explanation": 5,
+          "edges_within_two": 5
+        },
+        "tandem_punch_in": {
+          "files": 5,
+          "ranges": 5,
+          "assessed": 5,
+          "raw": 5,
+          "scale": 0,
+          "explanation": 5,
+          "edges_within_two": 5
+        },
+        "gain": {
+          "files": 5,
+          "ranges": 5,
+          "assessed": 5,
+          "raw": 2,
+          "scale": 2,
+          "explanation": 0,
+          "edges_within_two": 5
+        }
+      },
+      "app": {
+        "unchanged": {
+          "files": 5
+        },
+        "cutaway": {
+          "files": 5,
+          "ranges": 5,
+          "assessed": 5,
+          "raw": 5,
+          "scale": 5,
+          "explanation": 0,
+          "edges_within_two": 5
+        },
+        "tandem_cutaway": {
+          "files": 5,
+          "ranges": 5,
+          "assessed": 5,
+          "raw": 5,
+          "scale": 5,
+          "explanation": 0,
+          "edges_within_two": 5
+        },
+        "punch_in": {
+          "files": 5
+        },
+        "tandem_punch_in": {
+          "files": 5
+        },
+        "gain": {
+          "files": 5
+        }
+      }
+    },
+    "runtime": {
+      "journal_sha256": "1612e27efb9f67c1d8863b843a7d8746b61c68773836b49d0d471d4d14bdb746",
+      "full_sha256": "16f0e7e3bdf61881a20bb467df0775d024177636bf257b37afbad5be3e6d50d7",
+      "elapsed_s": 14.582087832997786
+    },
+    "full": {
+      "journal_sha256": "883883b34c6197536f2ad24cdc6fa88399108cb2e2c9a886637c7bb0d946f883",
+      "media_sha256": "f0ca2a280c1e270485fe01dd418a6f143df3e1c15a71294516db045736621584",
+      "elapsed_s": 180.14613929101324
+    },
+    "source_reads": 1148,
+    "verified_boundaries": 80,
+    "rebuilt_deliveries": 30,
+    "retained_cutaway_groups": {
+      "timed": 5,
+      "app": 5
+    },
+    "app_explanation_groups": 0,
+    "timed_gate": {
+      "retains_cutaway_groups": true,
+      "explains_zoom": true,
+      "limits_wrong_explanations": true
+    },
+    "app_gate": {
+      "eligible_zoom": false,
+      "explains_zoom": false,
+      "eligible_cutaways": true,
+      "retains_cutaways": true,
+      "limits_wrong_explanations": true
+    },
+    "advances": false
+  }
+}

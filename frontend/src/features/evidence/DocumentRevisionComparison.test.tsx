@@ -130,8 +130,10 @@ it('shows separate Word and PDF locations for an earlier draft in another format
     scope: 'Words and punctuation.', interpretation: 'Source comparison only.',
     changes: [{ id: 'C01', role: 'body',
       earlier: { start: 4, end: 9, text: 'amber', changed_tokens: [[4, 9]], paragraphs: [{ paragraph: 2, body_index: 1, start: 0, end: 5 }] },
-      later: { start: 4, end: 9, text: 'green', changed_tokens: [[4, 9]], pdf_pages: [{ page: 1, page_width: 612,
-        page_height: 792, page_rotation: 0, word_regions: [{ start: 4, end: 9, bbox: [20, 40, 72, 60] }] }] } }],
+      later: { start: 4, end: 15, text: 'green\n\nblue', changed_tokens: [[4, 9], [11, 15]], pdf_pages: [
+        { page: 1, page_width: 612, page_height: 792, page_rotation: 0, word_regions: [{ start: 4, end: 9, bbox: [20, 40, 72, 60] }] },
+        { page: 2, page_width: 612, page_height: 792, page_rotation: 0, word_regions: [{ start: 11, end: 15, bbox: [20, 40, 68, 60] }] },
+      ] } }],
   }
   vi.mocked(draftAvailability).mockResolvedValue({ extension: '.pdf', earlierExtensions: ['.txt', '.docx', '.pdf'], pairedCheckAvailable: true })
   vi.mocked(compareDraft).mockResolvedValue({ comparison })
@@ -146,6 +148,7 @@ it('shows separate Word and PDF locations for an earlier draft in another format
   expect(await screen.findByText('C01 · Wording change')).toBeTruthy()
   expect(screen.getByText('Paragraph 2 [0, 5)')).toBeTruthy()
   expect(screen.getByText('Page 1')).toBeTruthy()
+  expect(screen.getByText('Page 2')).toBeTruthy()
   expect(screen.getByText('Earlier draft · Word body text. Analyzed version · PDF text layer.')).toBeTruthy()
   expect(compareDraft).toHaveBeenCalledWith('draft-analysis', file, expect.any(AbortSignal), false)
 })

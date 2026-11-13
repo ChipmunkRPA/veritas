@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from itertools import permutations
 from pathlib import Path
 
@@ -16,27 +17,32 @@ from scripts.review_document_revision_export import review
 FORMATS = (".txt", ".docx", ".pdf")
 
 
-def pdf(text):
+def pdf(text, *, page_count=1):
+    boundaries = [0, len(text)]
+    if page_count > 1:
+        words = list(re.finditer(r"\S+", text))
+        boundaries[1:1] = [words[i * len(words) // page_count].start() for i in range(1, page_count)]
     with pymupdf.open() as document:
-        page = document.new_page()
         font = pymupdf.Font("helv")
         if any(not character.isspace() and not font.has_glyph(ord(character), fallback=False) for character in text):
             raise ValueError("The fixed PDF font lacks a character from the publisher excerpt")
-        page.insert_font(fontname="ReplayText", fontbuffer=font.buffer)
-        bottom = page.insert_textbox((54, 60, 558, 740), text, fontname="ReplayText", fontsize=10)
-        if bottom < 0:
-            raise ValueError("Publisher excerpt does not fit the fixed native PDF page")
-        if document_revision.TOKENS.findall(text) != document_revision.TOKENS.findall(page.get_text()):
+        for start, end in zip(boundaries, boundaries[1:]):
+            page = document.new_page()
+            page.insert_font(fontname="ReplayText", fontbuffer=font.buffer)
+            bottom = page.insert_textbox((54, 60, 558, 740), text[start:end], fontname="ReplayText", fontsize=10)
+            if bottom < 0:
+                raise ValueError("Publisher excerpt does not fit the fixed native PDF page")
+        if document_revision.TOKENS.findall(text) != document_revision.TOKENS.findall("\n".join(page.get_text() for page in document)):
             raise ValueError("PDF rendering changed the publisher excerpt's words or punctuation")
         return document.tobytes(deflate=True, no_new_id=True)
 
 
-def rendition(text, extension):
+def rendition(text, extension, *, page_count=1):
     if extension == ".txt":
         return text.encode()
     if extension == ".docx":
         return publisher.docx(text)
-    return pdf(text)
+    return pdf(text, page_count=page_count)
 
 
 def save(path, content):
@@ -57,7 +63,7 @@ def changed_tokens(record, side):
             for row in roles(record, side)]
 
 
-def result(cache, work, *, download):
+def result(cache, work, *, download, page_count=1):
     word_cache = work / "word"
     qualified = publisher.build(cache, word_cache, download=download)
     rows = []
@@ -72,7 +78,7 @@ def result(cache, work, *, download):
         for role, text in (("original", original), ("ordinary", ordinary)):
             for extension in FORMATS:
                 path = work / f"{group}-{role}{extension}"
-                save(path, rendition(text, extension))
+                save(path, rendition(text, extension, page_count=page_count))
                 paths[role, extension] = path
         for old_format, new_format in permutations(FORMATS, 2):
             earlier = paths["original", old_format]
@@ -90,11 +96,17 @@ def result(cache, work, *, download):
                 serialized = json.dumps(comparison, ensure_ascii=False, sort_keys=True).encode()
                 save(export, serialized)
                 verified = review(export, earlier, later)
-                rows.append({"doi": source["doi"], "authors": source["authors"], "license": source["license"],
-                             "source_group": group, "role": role, "earlier_format": old_format, "later_format": new_format,
-                             "changes": len(comparison["changes"]), "earlier_sha256": comparison["earlier"]["sha256"],
-                             "later_sha256": comparison["later"]["sha256"], "comparison_sha256": publisher.digest(serialized),
-                             "verification": verified})
+                row = {"doi": source["doi"], "authors": source["authors"], "license": source["license"],
+                       "source_group": group, "role": role, "earlier_format": old_format, "later_format": new_format,
+                       "changes": len(comparison["changes"]), "earlier_sha256": comparison["earlier"]["sha256"],
+                       "later_sha256": comparison["later"]["sha256"], "comparison_sha256": publisher.digest(serialized),
+                       "verification": verified}
+                if page_count > 1:
+                    row["changed_pdf_pages"] = sorted({
+                        page["page"] for side in ("earlier", "later") for excerpt in roles(comparison, side)
+                        for page in excerpt.get("pdf_pages", ()) if page["word_regions"]
+                    })
+                rows.append(row)
     return {"schema": "chipmunk.document-mixed-formats-replay/1", "source_work_count": len(qualified["native_drafts"]),
             "pymupdf": pymupdf.VersionBind, "rows": rows}
 
@@ -104,9 +116,10 @@ def main():
     parser.add_argument("cache", type=Path)
     parser.add_argument("work", type=Path)
     parser.add_argument("--download", action="store_true")
+    parser.add_argument("--multipage", action="store_true", help="Render each PDF on three pages in a fresh work directory.")
     args = parser.parse_args()
     args.work.mkdir(mode=0o700, parents=True, exist_ok=True)
-    print(json.dumps(result(args.cache, args.work, download=args.download), indent=2, sort_keys=True))
+    print(json.dumps(result(args.cache, args.work, download=args.download, page_count=3 if args.multipage else 1), indent=2, sort_keys=True))
 
 
 if __name__ == "__main__":

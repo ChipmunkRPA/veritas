@@ -97,6 +97,19 @@ integration remains unfinished.
 
 ## Progress on 13 November
 
+- The [cross-format draft check](document-mixed-format-comparison-2026-11-13.md#multi-page-validation)
+  now covers up to 12 supported PDF pages and can show a single revision across
+  several source pages. The three-page replay localized all 40 PDF edits and
+  returned zero changes on all 40 matched unchanged PDF deliveries. Chrome
+  verified crops on two different pages and the PDF and JSON downloads.
+- The [earlier-copy JPEG tone comparison](image-reference-monotone-jpeg-2026-11-13.md)
+  increased sharp and feathered removal localization from 1/8 to 4/8 each
+  on the separate confirmation bank. It added six ordinary-file highlights,
+  including broad regions after grading and resizing, and stays experimental.
+- The [ordinary webcam-cut comparison](video-scene-only-cut-transfer-2026-11-13.md)
+  found all eight surrounding-layout cuts with the off-face check at supplied
+  intervals, while the whole-picture shot check found none. These clips
+  preserve the speaker's pixels before encoding.
 - The [H.264 mouth prediction comparison](video-mouth-codec-prediction-2026-11-13.md)
   located five of 17 neural redraws but flagged 37 of 75 ordinary files.
   Motion-vector dispersion located zero. Both remain offline.

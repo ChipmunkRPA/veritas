@@ -188,7 +188,7 @@ function DraftForm({ analysisId, extension, earlierExtensions = [extension], pai
     {extension === '.docx' && <p className="mt-2 mb-0 text-small text-text-muted">Checks wording and punctuation in body paragraphs.</p>}
     {extension === '.eml' && <p className="mt-2 mb-0 text-small text-text-muted">Use two plain-text emails or two HTML-only replies with two, three, five or six simple body paragraphs and a trailing blockquote.</p>}
     {extension === '.pdf' && <p className="mt-2 mb-0 text-small text-text-muted">Use unlocked PDFs with selectable text on every page, up to 12 pages each.</p>}
-    {earlierExtensions.length > 1 && <p className="mt-2 mb-0 text-small text-text-muted">For drafts in different formats, use a single upright PDF page with selectable text.</p>}
+    {earlierExtensions.length > 1 && <p className="mt-2 mb-0 text-small text-text-muted">For drafts in different formats, use an upright PDF with selectable text. Multi-page PDFs need a single column per page and can have up to 12 pages.</p>}
     {extension === '.pdf' && pairedCheckAvailable && <p className="mt-2 mb-0 text-small text-text-muted">The paired writing check covers one upright page per draft with selectable text and an unambiguous reading order.</p>}
     <form onSubmit={event => void submit(event)} className="mt-4 flex flex-wrap items-end gap-3">
       <div className="min-w-0">

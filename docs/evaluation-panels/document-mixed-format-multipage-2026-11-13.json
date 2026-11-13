@@ -1,0 +1,42 @@
+{
+  "application": {
+    "chrome": {
+      "json_pdf_match": true,
+      "page_errors": 0,
+      "pdf_crop_pages": [
+        2,
+        3
+      ],
+      "real_chrome": true,
+      "word_location": true
+    },
+    "paid": {
+      "body_paragraph_ranges_verified": 1,
+      "changed_token_ranges_verified": 42,
+      "changes_by_role": {
+        "body": 1
+      },
+      "coordinate_space": "per_source_unicode_codepoint",
+      "pdf_previews_verified": 2,
+      "pdf_word_regions_verified": 20,
+      "recorded_result_preserved": true,
+      "simulated_paid_jobs": 1,
+      "source_hashes_verified": 2,
+      "unpaid_jobs": 0
+    }
+  },
+  "full_readout_sha256": "c9df80b0203174a9ec1769ee9d2f8a563f12a6424da0f92618d5ead37489985f",
+  "pages_per_rendered_pdf": 3,
+  "pymupdf": "1.28.2",
+  "schema": "chipmunk.document-mixed-formats-multipage-evaluation/1",
+  "source_works": 10,
+  "validation": {
+    "changed_pdf_across_multiple_pages": 16,
+    "changed_pdf_exact": 40,
+    "clean_rebuild_identical": true,
+    "pdf_crops_verified": 60,
+    "pdf_word_regions_verified": 812,
+    "total_comparisons": 120,
+    "unchanged_pdf_zero_flags": 40
+  }
+}

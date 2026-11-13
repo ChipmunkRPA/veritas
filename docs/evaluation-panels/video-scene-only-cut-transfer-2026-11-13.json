@@ -1,0 +1,1352 @@
+{
+  "freeze_sha256": "5f1facdbd1c914c674ac066bba816f2c8240ab1c1e7a6a168fcd90104d39b25c",
+  "media_sha256": "7260d6c8d66bc136fe8c312cc84ca2173ccfb73a39277917a47ade12ecefb220",
+  "prior_actor_exclusions": 20,
+  "protocol": {
+    "delivery": "Upright 1280 by 720 at exact 30 Hz, 120 pictures, exact RGB checks before encoding and HEVC hvc1 yuv420p CRF23 submitted files. Use the nearest real native source picture at each rational target time and reflect existing pictures at ends. No blended or generated speech pictures. Silent fixture.",
+    "matching": "Report exact entry and return separately for HSV, plus a paired exact-range count. For off-face context, report exact span and any flagged overlapping candidate, plus sham controls. Preserve paired direction dependence. No threshold or serving change.",
+    "matrix": "Each direction supplies four exact input arrangements: unchanged; replace only the speaker rectangle; change only the surrounding layout with unchanged speaker pixels; replace both. The two ordinary layouts use deterministic geometric webcam background patterns. Across roles, placements alternate by pair; both directions use the same authored interval.",
+    "scope": "Score whole-picture HSV shot detection and the existing off-face paired context calculation with its fixed 0.30 point. Give the latter the exact authored range, and the same range as a sham on the unchanged control. Test the context measurement, without claiming Full face routing or AI detection performance.",
+    "selection": "First eight confirmation-role CREMA-D v91/v92 actors in acquisition order, at least 55 native pictures, with actor keys absent from both earlier CREMA-D near-head/scale scene-cut banks. Pair consecutively, each direction. Prior source-level project exposure is known."
+  },
+  "raw_factorial_frames_verified": 3840,
+  "reopened_carrier_clocks": 3840,
+  "reopened_native_pictures": 96,
+  "results_sha256": "2ca0cc386ddfdbaa60eda567824d83a892e70455e2d03626215e19ca8ba2cef4",
+  "rows": [
+    {
+      "direction": 0,
+      "face_observations": 3,
+      "first_pts": 0,
+      "frame_count": 120,
+      "pair": 0,
+      "paired": null,
+      "role": "unchanged",
+      "selected": [
+        {
+          "frame": 43,
+          "pts": 22016,
+          "rgb_sha256": "81c6795458df3f61f404c7efe8c16f56d795756c9d8597f1a4154532b94404fa"
+        },
+        {
+          "frame": 49,
+          "pts": 25088,
+          "rgb_sha256": "2ba70c6fbaa2d547ac0f2c59d963451e3e8b8e46573482658aeb6e5d4a67090f"
+        },
+        {
+          "frame": 55,
+          "pts": 28160,
+          "rgb_sha256": "33f54c71f91e6a3195211e207a7067f0b83044124a40662cb7de3fb369272d93"
+        }
+      ],
+      "shot_frames": [],
+      "span": [
+        44,
+        55
+      ],
+      "tiles": 48,
+      "time_base": "1/15360"
+    },
+    {
+      "direction": 0,
+      "face_observations": 3,
+      "first_pts": 0,
+      "frame_count": 120,
+      "pair": 0,
+      "paired": {
+        "entry_tiles": 8,
+        "exit_tiles": 11,
+        "interval": [
+          44,
+          55
+        ],
+        "score": 0.48799774050712585,
+        "sectors": 2,
+        "shared_tiles": 8
+      },
+      "role": "speaker_only",
+      "selected": [
+        {
+          "frame": 43,
+          "pts": 22016,
+          "rgb_sha256": "71a35dbe050b5a58c22f961dc1142ae7efd4344b34cf5f91bb165c2e5c7075b7"
+        },
+        {
+          "frame": 49,
+          "pts": 25088,
+          "rgb_sha256": "3bc53d6146d3efe30f07b8821c72cf83dbb357b0a19d6bb4f1db39feac929cdd"
+        },
+        {
+          "frame": 55,
+          "pts": 28160,
+          "rgb_sha256": "54b0fabd0303311a6d97bb852f85c7a1a041353a1075f742893a8aa5f2d6253f"
+        }
+      ],
+      "shot_frames": [],
+      "span": [
+        44,
+        55
+      ],
+      "tiles": 41,
+      "time_base": "1/15360"
+    },
+    {
+      "direction": 0,
+      "face_observations": 3,
+      "first_pts": 0,
+      "frame_count": 120,
+      "pair": 0,
+      "paired": {
+        "entry_tiles": 14,
+        "exit_tiles": 14,
+        "interval": [
+          44,
+          55
+        ],
+        "score": 0.5073366761207581,
+        "sectors": 4,
+        "shared_tiles": 14
+      },
+      "role": "scene_only",
+      "selected": [
+        {
+          "frame": 43,
+          "pts": 22016,
+          "rgb_sha256": "9ae68104758ea9e4af37d2272e4476a3368068be10fd3107ad893b867aef6185"
+        },
+        {
+          "frame": 49,
+          "pts": 25088,
+          "rgb_sha256": "857ca61acbd0f320bf381000cc3edc10b819d00b88b5162aced31a405b735bb1"
+        },
+        {
+          "frame": 55,
+          "pts": 28160,
+          "rgb_sha256": "d2cebd25de436383c6f04b8d695dcbaff3629723eefc65c98d1ae25bead748f6"
+        }
+      ],
+      "shot_frames": [],
+      "span": [
+        44,
+        55
+      ],
+      "tiles": 44,
+      "time_base": "1/15360"
+    },
+    {
+      "direction": 0,
+      "face_observations": 3,
+      "first_pts": 0,
+      "frame_count": 120,
+      "pair": 0,
+      "paired": {
+        "entry_tiles": 21,
+        "exit_tiles": 24,
+        "interval": [
+          44,
+          55
+        ],
+        "score": 0.6366278827190399,
+        "sectors": 4,
+        "shared_tiles": 21
+      },
+      "role": "speaker_and_scene",
+      "selected": [
+        {
+          "frame": 43,
+          "pts": 22016,
+          "rgb_sha256": "fadc03061c94c0f3729f815f379edcb75f5f22b6d694461b582d1edf44e98ee4"
+        },
+        {
+          "frame": 49,
+          "pts": 25088,
+          "rgb_sha256": "b4ef788c4f95754d97a4248efb39e94e3526cd9e39622d1ff6cc5a34f687518d"
+        },
+        {
+          "frame": 55,
+          "pts": 28160,
+          "rgb_sha256": "d642b5a2b957f5168a918d6a10ef1ff59e03e87f6a32f187b0968680dd8633a8"
+        }
+      ],
+      "shot_frames": [],
+      "span": [
+        44,
+        55
+      ],
+      "tiles": 41,
+      "time_base": "1/15360"
+    },
+    {
+      "direction": 1,
+      "face_observations": 3,
+      "first_pts": 0,
+      "frame_count": 120,
+      "pair": 0,
+      "paired": null,
+      "role": "unchanged",
+      "selected": [
+        {
+          "frame": 43,
+          "pts": 22016,
+          "rgb_sha256": "eccfeb8aef5ddb3beebbc1d608d064883c22b2863d47b706095d16c7ad996699"
+        },
+        {
+          "frame": 49,
+          "pts": 25088,
+          "rgb_sha256": "d5db6117b0815c722baec6b0ec0e00b5e1f264045c59e7e071116a4dd0293dea"
+        },
+        {
+          "frame": 55,
+          "pts": 28160,
+          "rgb_sha256": "da2b8697a3c49e1b8ebc017dd807afbc894690fade76b35a1b440e6fbd6f1d03"
+        }
+      ],
+      "shot_frames": [],
+      "span": [
+        44,
+        55
+      ],
+      "tiles": 53,
+      "time_base": "1/15360"
+    },
+    {
+      "direction": 1,
+      "face_observations": 3,
+      "first_pts": 0,
+      "frame_count": 120,
+      "pair": 0,
+      "paired": null,
+      "role": "speaker_only",
+      "selected": [
+        {
+          "frame": 43,
+          "pts": 22016,
+          "rgb_sha256": "5b498e67ce34e9e95fba8059f07880e9092d2fc860e2d38e8c09751b6a0af9d5"
+        },
+        {
+          "frame": 49,
+          "pts": 25088,
+          "rgb_sha256": "90851122df427f30248bf37a88d8c011888802a7792eb6afb2a9d851f9d7dceb"
+        },
+        {
+          "frame": 55,
+          "pts": 28160,
+          "rgb_sha256": "c3df39c4bb336a2ba40570b78702d65dddfa57a7f508678168caa9b439a3a48a"
+        }
+      ],
+      "shot_frames": [],
+      "span": [
+        44,
+        55
+      ],
+      "tiles": 40,
+      "time_base": "1/15360"
+    },
+    {
+      "direction": 1,
+      "face_observations": 3,
+      "first_pts": 0,
+      "frame_count": 120,
+      "pair": 0,
+      "paired": {
+        "entry_tiles": 35,
+        "exit_tiles": 35,
+        "interval": [
+          44,
+          55
+        ],
+        "score": 0.8145174831151962,
+        "sectors": 4,
+        "shared_tiles": 35
+      },
+      "role": "scene_only",
+      "selected": [
+        {
+          "frame": 43,
+          "pts": 22016,
+          "rgb_sha256": "ce7c3b14d8b24f6cb81334d536114fee1e948cb0963a2ddec803d709f6fbd277"
+        },
+        {
+          "frame": 49,
+          "pts": 25088,
+          "rgb_sha256": "56b78688083b64bf744abe175e4aa70bde6e066b61cfa6fd4a1b180c38ccd8c3"
+        },
+        {
+          "frame": 55,
+          "pts": 28160,
+          "rgb_sha256": "73194e8d6501b93c90177447266d841c200f150dd7473921211ffff51176bd74"
+        }
+      ],
+      "shot_frames": [],
+      "span": [
+        44,
+        55
+      ],
+      "tiles": 53,
+      "time_base": "1/15360"
+    },
+    {
+      "direction": 1,
+      "face_observations": 3,
+      "first_pts": 0,
+      "frame_count": 120,
+      "pair": 0,
+      "paired": {
+        "entry_tiles": 37,
+        "exit_tiles": 37,
+        "interval": [
+          44,
+          55
+        ],
+        "score": 0.8117101937532425,
+        "sectors": 4,
+        "shared_tiles": 37
+      },
+      "role": "speaker_and_scene",
+      "selected": [
+        {
+          "frame": 43,
+          "pts": 22016,
+          "rgb_sha256": "b3516295c4c8b8c36ed04139598a3ceda62be052062231268001f83626f28727"
+        },
+        {
+          "frame": 49,
+          "pts": 25088,
+          "rgb_sha256": "f0a5c8b904bea3d26d514b6e8c2559ff26bd97ccc6c083f15b8b0c02b6d8ec95"
+        },
+        {
+          "frame": 55,
+          "pts": 28160,
+          "rgb_sha256": "7976a06075b3cf94ee8cbea8acc230ffdda9fab8b3d176fa9305d7b3a8e8e750"
+        }
+      ],
+      "shot_frames": [],
+      "span": [
+        44,
+        55
+      ],
+      "tiles": 47,
+      "time_base": "1/15360"
+    },
+    {
+      "direction": 0,
+      "face_observations": 3,
+      "first_pts": 0,
+      "frame_count": 120,
+      "pair": 1,
+      "paired": null,
+      "role": "unchanged",
+      "selected": [
+        {
+          "frame": 51,
+          "pts": 26112,
+          "rgb_sha256": "5ceabdbd186dc78ae89ff23187ec5f327b3b6772b759a39e21177c7669cd3abd"
+        },
+        {
+          "frame": 58,
+          "pts": 29696,
+          "rgb_sha256": "0aef13774b451585a688b3736f00050aa0f79183852cd745924ebdc7d557b333"
+        },
+        {
+          "frame": 65,
+          "pts": 33280,
+          "rgb_sha256": "00227e5dc182bf3a5b0445d58d5bef5e91268fd61070f207cad6dc928240e2c5"
+        }
+      ],
+      "shot_frames": [],
+      "span": [
+        52,
+        65
+      ],
+      "tiles": 50,
+      "time_base": "1/15360"
+    },
+    {
+      "direction": 0,
+      "face_observations": 3,
+      "first_pts": 0,
+      "frame_count": 120,
+      "pair": 1,
+      "paired": {
+        "entry_tiles": 7,
+        "exit_tiles": 5,
+        "interval": [
+          52,
+          65
+        ],
+        "score": 0.21880263090133667,
+        "sectors": 3,
+        "shared_tiles": 5
+      },
+      "role": "speaker_only",
+      "selected": [
+        {
+          "frame": 51,
+          "pts": 26112,
+          "rgb_sha256": "55ad8efc2524ea2597e383265dd116a449f5a893fc732b606f746f1d6bdc0054"
+        },
+        {
+          "frame": 58,
+          "pts": 29696,
+          "rgb_sha256": "c12a95d251ea870e03479811cf44a3b25285744f2f5a346f472a457ee72870d7"
+        },
+        {
+          "frame": 65,
+          "pts": 33280,
+          "rgb_sha256": "494db3a9a775409c0661a50ef102881544f94b4482aa0dfc08f93c65c7f0453d"
+        }
+      ],
+      "shot_frames": [],
+      "span": [
+        52,
+        65
+      ],
+      "tiles": 40,
+      "time_base": "1/15360"
+    },
+    {
+      "direction": 0,
+      "face_observations": 3,
+      "first_pts": 0,
+      "frame_count": 120,
+      "pair": 1,
+      "paired": {
+        "entry_tiles": 38,
+        "exit_tiles": 38,
+        "interval": [
+          52,
+          65
+        ],
+        "score": 0.8165894150733948,
+        "sectors": 4,
+        "shared_tiles": 38
+      },
+      "role": "scene_only",
+      "selected": [
+        {
+          "frame": 51,
+          "pts": 26112,
+          "rgb_sha256": "8c33bb2eba58fec28300d72212988f6c65f2242f54c4479efec5b70446f52f30"
+        },
+        {
+          "frame": 58,
+          "pts": 29696,
+          "rgb_sha256": "fdc11ee532c4d46e282caec2d495a29153dcbd24c71a9645ecbe0e6b86669f10"
+        },
+        {
+          "frame": 65,
+          "pts": 33280,
+          "rgb_sha256": "a657989df21faac6b3b7cb96e6fe5468d8e5dbab987d4f43cb4fdcefa10ef87d"
+        }
+      ],
+      "shot_frames": [],
+      "span": [
+        52,
+        65
+      ],
+      "tiles": 50,
+      "time_base": "1/15360"
+    },
+    {
+      "direction": 0,
+      "face_observations": 3,
+      "first_pts": 0,
+      "frame_count": 120,
+      "pair": 1,
+      "paired": {
+        "entry_tiles": 41,
+        "exit_tiles": 40,
+        "interval": [
+          52,
+          65
+        ],
+        "score": 0.8726308047771454,
+        "sectors": 4,
+        "shared_tiles": 40
+      },
+      "role": "speaker_and_scene",
+      "selected": [
+        {
+          "frame": 51,
+          "pts": 26112,
+          "rgb_sha256": "0037e17ad7890a8ec55d963ec83179d7077ba51665caffcd3c81d3474ed2efdf"
+        },
+        {
+          "frame": 58,
+          "pts": 29696,
+          "rgb_sha256": "4abf0b4a5cfbf50267c457a95fff981e0359708c3f2a8ad1c8a9a2f1c202bd69"
+        },
+        {
+          "frame": 65,
+          "pts": 33280,
+          "rgb_sha256": "9ab4ba4b5419d917dac31b3422caf1daf563ff599cdc15dda12a1cb9bdadc39b"
+        }
+      ],
+      "shot_frames": [],
+      "span": [
+        52,
+        65
+      ],
+      "tiles": 50,
+      "time_base": "1/15360"
+    },
+    {
+      "direction": 1,
+      "face_observations": 3,
+      "first_pts": 0,
+      "frame_count": 120,
+      "pair": 1,
+      "paired": null,
+      "role": "unchanged",
+      "selected": [
+        {
+          "frame": 51,
+          "pts": 26112,
+          "rgb_sha256": "29219732ab5fd6567f91a83f01f674f0c81476ae1b809da188ea26a02bf5c0ba"
+        },
+        {
+          "frame": 58,
+          "pts": 29696,
+          "rgb_sha256": "4ee258e4c044cafc7cc7e3e6e349681c0a13e896e5fe0658875134ffeae1a30f"
+        },
+        {
+          "frame": 65,
+          "pts": 33280,
+          "rgb_sha256": "732a8ca35892c16c1d9d89ae7abc39b22105ce86bec77984f8df17b498266cc1"
+        }
+      ],
+      "shot_frames": [],
+      "span": [
+        52,
+        65
+      ],
+      "tiles": 52,
+      "time_base": "1/15360"
+    },
+    {
+      "direction": 1,
+      "face_observations": 3,
+      "first_pts": 0,
+      "frame_count": 120,
+      "pair": 1,
+      "paired": {
+        "entry_tiles": 18,
+        "exit_tiles": 19,
+        "interval": [
+          52,
+          65
+        ],
+        "score": 0.5478990077972412,
+        "sectors": 3,
+        "shared_tiles": 15
+      },
+      "role": "speaker_only",
+      "selected": [
+        {
+          "frame": 51,
+          "pts": 26112,
+          "rgb_sha256": "dc4f2ad1d0893bd2d84070f96a5b1a6e1470562c1c41579daac698580ee4327e"
+        },
+        {
+          "frame": 58,
+          "pts": 29696,
+          "rgb_sha256": "da34993cd3424e7a0c4ff20ed1c91fd8766762a2f37b0024b4d0e2188614cffe"
+        },
+        {
+          "frame": 65,
+          "pts": 33280,
+          "rgb_sha256": "7f6eac2b08c7079d413a78227316a1ab346955303e662aaab3f70b2a79a8dac2"
+        }
+      ],
+      "shot_frames": [],
+      "span": [
+        52,
+        65
+      ],
+      "tiles": 52,
+      "time_base": "1/15360"
+    },
+    {
+      "direction": 1,
+      "face_observations": 3,
+      "first_pts": 0,
+      "frame_count": 120,
+      "pair": 1,
+      "paired": {
+        "entry_tiles": 16,
+        "exit_tiles": 16,
+        "interval": [
+          52,
+          65
+        ],
+        "score": 0.7755433619022369,
+        "sectors": 2,
+        "shared_tiles": 16
+      },
+      "role": "scene_only",
+      "selected": [
+        {
+          "frame": 51,
+          "pts": 26112,
+          "rgb_sha256": "3783b4fae9e1768b7ae6a658455dc5e9523c99280623bb5fd7d713a3af92920d"
+        },
+        {
+          "frame": 58,
+          "pts": 29696,
+          "rgb_sha256": "e1504222a5278cda9fac9b78025553e03e77b240e88cdf61d46c16b4162b1388"
+        },
+        {
+          "frame": 65,
+          "pts": 33280,
+          "rgb_sha256": "30fb0a1884c9d1cad670a039ce410c5218aa2929c07580b1f54e4e51e424da78"
+        }
+      ],
+      "shot_frames": [],
+      "span": [
+        52,
+        65
+      ],
+      "tiles": 52,
+      "time_base": "1/15360"
+    },
+    {
+      "direction": 1,
+      "face_observations": 3,
+      "first_pts": 0,
+      "frame_count": 120,
+      "pair": 1,
+      "paired": {
+        "entry_tiles": 33,
+        "exit_tiles": 34,
+        "interval": [
+          52,
+          65
+        ],
+        "score": 0.8424156755208969,
+        "sectors": 4,
+        "shared_tiles": 30
+      },
+      "role": "speaker_and_scene",
+      "selected": [
+        {
+          "frame": 51,
+          "pts": 26112,
+          "rgb_sha256": "b1f982418cc6e5a7d27864dfc4a6bdf1ba5b8dbbcba8a4dcc64def354430727e"
+        },
+        {
+          "frame": 58,
+          "pts": 29696,
+          "rgb_sha256": "c5d32753f44d1cc76f25a3b2135c97f6fe6fc814136bf3b724ff8197aa2d43d5"
+        },
+        {
+          "frame": 65,
+          "pts": 33280,
+          "rgb_sha256": "661916b7dbe772fc0245c7d5695733c38b75a0f53b613bf050a2baf3bcdef5cd"
+        }
+      ],
+      "shot_frames": [],
+      "span": [
+        52,
+        65
+      ],
+      "tiles": 52,
+      "time_base": "1/15360"
+    },
+    {
+      "direction": 0,
+      "face_observations": 3,
+      "first_pts": 0,
+      "frame_count": 120,
+      "pair": 2,
+      "paired": null,
+      "role": "unchanged",
+      "selected": [
+        {
+          "frame": 60,
+          "pts": 30720,
+          "rgb_sha256": "3c8cfd68161b780c0bc66b8b152b14e9e3c732f9ff47d899362c8dcc3f576d6c"
+        },
+        {
+          "frame": 69,
+          "pts": 35328,
+          "rgb_sha256": "89554b2ccbef44db511a54bbf35bea13783b3ccfe19359d7159c7ea130541168"
+        },
+        {
+          "frame": 77,
+          "pts": 39424,
+          "rgb_sha256": "20ddff924ddedbbcd8162704416b72ebbdebd5624b0010412ba3471c350a03eb"
+        }
+      ],
+      "shot_frames": [],
+      "span": [
+        61,
+        77
+      ],
+      "tiles": 52,
+      "time_base": "1/15360"
+    },
+    {
+      "direction": 0,
+      "face_observations": 3,
+      "first_pts": 0,
+      "frame_count": 120,
+      "pair": 2,
+      "paired": {
+        "entry_tiles": 17,
+        "exit_tiles": 18,
+        "interval": [
+          61,
+          77
+        ],
+        "score": 0.6475951671600342,
+        "sectors": 2,
+        "shared_tiles": 17
+      },
+      "role": "speaker_only",
+      "selected": [
+        {
+          "frame": 60,
+          "pts": 30720,
+          "rgb_sha256": "953d6456270132ac023be03bd0cdd55aa97711209f98dc01f0546b06602a61c3"
+        },
+        {
+          "frame": 69,
+          "pts": 35328,
+          "rgb_sha256": "39eaf59cecaf34196654260d66f1e76f0dce4f472d15099bbfb18b0ec0d5ab69"
+        },
+        {
+          "frame": 77,
+          "pts": 39424,
+          "rgb_sha256": "d430399b47563f667abb569ccc005f2506c1298917ede3b84ef0a0684433cf87"
+        }
+      ],
+      "shot_frames": [],
+      "span": [
+        61,
+        77
+      ],
+      "tiles": 52,
+      "time_base": "1/15360"
+    },
+    {
+      "direction": 0,
+      "face_observations": 3,
+      "first_pts": 0,
+      "frame_count": 120,
+      "pair": 2,
+      "paired": {
+        "entry_tiles": 24,
+        "exit_tiles": 24,
+        "interval": [
+          61,
+          77
+        ],
+        "score": 0.7869642525911331,
+        "sectors": 4,
+        "shared_tiles": 24
+      },
+      "role": "scene_only",
+      "selected": [
+        {
+          "frame": 60,
+          "pts": 30720,
+          "rgb_sha256": "67d474b717a001e1b03f07bfcaefa64a0321a42aec6f9380fda0a508253eaaa7"
+        },
+        {
+          "frame": 69,
+          "pts": 35328,
+          "rgb_sha256": "df003d1a1f6bc164301e98cc4ed3480b5bcf410adb9f62d1f1421ac737b4fb1a"
+        },
+        {
+          "frame": 77,
+          "pts": 39424,
+          "rgb_sha256": "58cf8c940621d19fcb867b2056ba070bf6df14139bbbc667ea221215db5ddde5"
+        }
+      ],
+      "shot_frames": [],
+      "span": [
+        61,
+        77
+      ],
+      "tiles": 52,
+      "time_base": "1/15360"
+    },
+    {
+      "direction": 0,
+      "face_observations": 3,
+      "first_pts": 0,
+      "frame_count": 120,
+      "pair": 2,
+      "paired": {
+        "entry_tiles": 35,
+        "exit_tiles": 35,
+        "interval": [
+          61,
+          77
+        ],
+        "score": 0.8619855046272278,
+        "sectors": 4,
+        "shared_tiles": 35
+      },
+      "role": "speaker_and_scene",
+      "selected": [
+        {
+          "frame": 60,
+          "pts": 30720,
+          "rgb_sha256": "2ccbc8e5a8ded2284749909e2ee6d9b4175458e62bf64eb3af2f1868b115f602"
+        },
+        {
+          "frame": 69,
+          "pts": 35328,
+          "rgb_sha256": "998f6fd9107425cc0056ec5b7d2ccaf6c7422ea1f6c6766a3355418e9d128dcc"
+        },
+        {
+          "frame": 77,
+          "pts": 39424,
+          "rgb_sha256": "238305c1f270b7e158e83fd4ba68f57e3d145642c20c048ab5ccd1c624384e58"
+        }
+      ],
+      "shot_frames": [],
+      "span": [
+        61,
+        77
+      ],
+      "tiles": 52,
+      "time_base": "1/15360"
+    },
+    {
+      "direction": 1,
+      "face_observations": 3,
+      "first_pts": 0,
+      "frame_count": 120,
+      "pair": 2,
+      "paired": null,
+      "role": "unchanged",
+      "selected": [
+        {
+          "frame": 60,
+          "pts": 30720,
+          "rgb_sha256": "b2f8e6c74527198938a1cbc5f0bf07978f40bf55c3f637a7c6d2896ebeb3ddec"
+        },
+        {
+          "frame": 69,
+          "pts": 35328,
+          "rgb_sha256": "2818bff11cd079b122d918cee57017e64ac6eaf124d7146ba2643f323e6a90df"
+        },
+        {
+          "frame": 77,
+          "pts": 39424,
+          "rgb_sha256": "1832120069b0ad97e94b53be62142fa62e5d62ec44677c2d0e8e04cf4d763bfb"
+        }
+      ],
+      "shot_frames": [],
+      "span": [
+        61,
+        77
+      ],
+      "tiles": 44,
+      "time_base": "1/15360"
+    },
+    {
+      "direction": 1,
+      "face_observations": 3,
+      "first_pts": 0,
+      "frame_count": 120,
+      "pair": 2,
+      "paired": {
+        "entry_tiles": 12,
+        "exit_tiles": 11,
+        "interval": [
+          61,
+          77
+        ],
+        "score": 0.66471728682518,
+        "sectors": 2,
+        "shared_tiles": 11
+      },
+      "role": "speaker_only",
+      "selected": [
+        {
+          "frame": 60,
+          "pts": 30720,
+          "rgb_sha256": "c548dbb95f25057ec43fc8d85b0be8d15fab0e16da7e1dc91aade83859233678"
+        },
+        {
+          "frame": 69,
+          "pts": 35328,
+          "rgb_sha256": "d2a94d93acedf7a871d02df17435f38477776cd02ce98d5d8cafa3222884562c"
+        },
+        {
+          "frame": 77,
+          "pts": 39424,
+          "rgb_sha256": "84a89f4fcf3415058db0f52e98bceffb61a24ffe2878d98d3b960bf549a38f5a"
+        }
+      ],
+      "shot_frames": [],
+      "span": [
+        61,
+        77
+      ],
+      "tiles": 44,
+      "time_base": "1/15360"
+    },
+    {
+      "direction": 1,
+      "face_observations": 3,
+      "first_pts": 0,
+      "frame_count": 120,
+      "pair": 2,
+      "paired": {
+        "entry_tiles": 16,
+        "exit_tiles": 16,
+        "interval": [
+          61,
+          77
+        ],
+        "score": 0.7966866195201874,
+        "sectors": 2,
+        "shared_tiles": 16
+      },
+      "role": "scene_only",
+      "selected": [
+        {
+          "frame": 60,
+          "pts": 30720,
+          "rgb_sha256": "4cda8035d1083480ecce823b8d5d74bc50a0abbc77a622be579636a44655c6c8"
+        },
+        {
+          "frame": 69,
+          "pts": 35328,
+          "rgb_sha256": "31b079b20db1e72761b5c9494c4be2492ef534a667ec9642f46675fbf0781bf0"
+        },
+        {
+          "frame": 77,
+          "pts": 39424,
+          "rgb_sha256": "cd53ac792e5b4eec261e82abfc84f91c903285a96bf472244e59e4f4e21d9320"
+        }
+      ],
+      "shot_frames": [],
+      "span": [
+        61,
+        77
+      ],
+      "tiles": 44,
+      "time_base": "1/15360"
+    },
+    {
+      "direction": 1,
+      "face_observations": 3,
+      "first_pts": 0,
+      "frame_count": 120,
+      "pair": 2,
+      "paired": {
+        "entry_tiles": 28,
+        "exit_tiles": 27,
+        "interval": [
+          61,
+          77
+        ],
+        "score": 0.8424156755208969,
+        "sectors": 4,
+        "shared_tiles": 27
+      },
+      "role": "speaker_and_scene",
+      "selected": [
+        {
+          "frame": 60,
+          "pts": 30720,
+          "rgb_sha256": "57b6c4c959b45bca0a3a328971bf0a6ff979f24f10d814ac7c059df8782ca46b"
+        },
+        {
+          "frame": 69,
+          "pts": 35328,
+          "rgb_sha256": "9a63d13f6fe75e3018c8e6a3115ae17128a703701561597bf0e878b6741ea260"
+        },
+        {
+          "frame": 77,
+          "pts": 39424,
+          "rgb_sha256": "6eda37c6a13bb310fa9dd638704b04be004a7589b9296ea230ac955f4ec19ec6"
+        }
+      ],
+      "shot_frames": [],
+      "span": [
+        61,
+        77
+      ],
+      "tiles": 44,
+      "time_base": "1/15360"
+    },
+    {
+      "direction": 0,
+      "face_observations": 3,
+      "first_pts": 0,
+      "frame_count": 120,
+      "pair": 3,
+      "paired": null,
+      "role": "unchanged",
+      "selected": [
+        {
+          "frame": 72,
+          "pts": 36864,
+          "rgb_sha256": "c0a6be4885b00107eea584964f6e78e7bc73c870df2269716de671fa660f1668"
+        },
+        {
+          "frame": 82,
+          "pts": 41984,
+          "rgb_sha256": "d4868a0df6012f4d5711939b8373423319a929c5181a530a4e88331c88320541"
+        },
+        {
+          "frame": 91,
+          "pts": 46592,
+          "rgb_sha256": "e10d6c5e8097f37681da5bcdb4627cea3e8252c5ab6e611502a4e40c3f33f558"
+        }
+      ],
+      "shot_frames": [],
+      "span": [
+        73,
+        91
+      ],
+      "tiles": 52,
+      "time_base": "1/15360"
+    },
+    {
+      "direction": 0,
+      "face_observations": 3,
+      "first_pts": 0,
+      "frame_count": 120,
+      "pair": 3,
+      "paired": {
+        "entry_tiles": 16,
+        "exit_tiles": 14,
+        "interval": [
+          73,
+          91
+        ],
+        "score": 0.6939078271389008,
+        "sectors": 2,
+        "shared_tiles": 14
+      },
+      "role": "speaker_only",
+      "selected": [
+        {
+          "frame": 72,
+          "pts": 36864,
+          "rgb_sha256": "9a855d3f5f6fb310dab5e918ac570787a90dea34486c06bcd5ab0bc20ab9ed12"
+        },
+        {
+          "frame": 82,
+          "pts": 41984,
+          "rgb_sha256": "8f34bcf406cfb1d5f56189723d8b174d79e9c0c0602fcea32e633435cecc850b"
+        },
+        {
+          "frame": 91,
+          "pts": 46592,
+          "rgb_sha256": "3862a962759b8fb5d42a313856987cccd4837b203eec909b725f8adc2ab65d69"
+        }
+      ],
+      "shot_frames": [],
+      "span": [
+        73,
+        91
+      ],
+      "tiles": 52,
+      "time_base": "1/15360"
+    },
+    {
+      "direction": 0,
+      "face_observations": 3,
+      "first_pts": 0,
+      "frame_count": 120,
+      "pair": 3,
+      "paired": {
+        "entry_tiles": 24,
+        "exit_tiles": 24,
+        "interval": [
+          73,
+          91
+        ],
+        "score": 0.7974236309528351,
+        "sectors": 4,
+        "shared_tiles": 24
+      },
+      "role": "scene_only",
+      "selected": [
+        {
+          "frame": 72,
+          "pts": 36864,
+          "rgb_sha256": "c0a6be4885b00107eea584964f6e78e7bc73c870df2269716de671fa660f1668"
+        },
+        {
+          "frame": 82,
+          "pts": 41984,
+          "rgb_sha256": "796e89f3a0a81e4c2ac2589c94d406bd1b3213c87723d6ff96059eed3a4bae60"
+        },
+        {
+          "frame": 91,
+          "pts": 46592,
+          "rgb_sha256": "0b6874c94e04861a77000220a2e0f5e5639bab347b7cd0ea31e2f897599dda79"
+        }
+      ],
+      "shot_frames": [],
+      "span": [
+        73,
+        91
+      ],
+      "tiles": 52,
+      "time_base": "1/15360"
+    },
+    {
+      "direction": 0,
+      "face_observations": 3,
+      "first_pts": 0,
+      "frame_count": 120,
+      "pair": 3,
+      "paired": {
+        "entry_tiles": 36,
+        "exit_tiles": 35,
+        "interval": [
+          73,
+          91
+        ],
+        "score": 0.8424156755208969,
+        "sectors": 4,
+        "shared_tiles": 35
+      },
+      "role": "speaker_and_scene",
+      "selected": [
+        {
+          "frame": 72,
+          "pts": 36864,
+          "rgb_sha256": "9a855d3f5f6fb310dab5e918ac570787a90dea34486c06bcd5ab0bc20ab9ed12"
+        },
+        {
+          "frame": 82,
+          "pts": 41984,
+          "rgb_sha256": "6a87547691561dcc0dac9d3dd8ece9992015bf277c6b06f48ea1ba4dba9d0160"
+        },
+        {
+          "frame": 91,
+          "pts": 46592,
+          "rgb_sha256": "06b660d75e52e25b500e25aa1604a9c34e8a9346c174c4f1d20ef4cab7c45f6f"
+        }
+      ],
+      "shot_frames": [],
+      "span": [
+        73,
+        91
+      ],
+      "tiles": 52,
+      "time_base": "1/15360"
+    },
+    {
+      "direction": 1,
+      "face_observations": 3,
+      "first_pts": 0,
+      "frame_count": 120,
+      "pair": 3,
+      "paired": null,
+      "role": "unchanged",
+      "selected": [
+        {
+          "frame": 72,
+          "pts": 36864,
+          "rgb_sha256": "c671f69cadbf4af7aacfe5a9ecfa6cb9ac7de8c6be934568d6295db6e10952a8"
+        },
+        {
+          "frame": 82,
+          "pts": 41984,
+          "rgb_sha256": "5d97e8d68c1a9728564284fa1b5984ebb44d0767f332b95d82588dadd6014f6b"
+        },
+        {
+          "frame": 91,
+          "pts": 46592,
+          "rgb_sha256": "9a699ff4ec9d551f85ad208a1cc7c2f572c5b50e87afe142a81fa1a7ad5423b2"
+        }
+      ],
+      "shot_frames": [],
+      "span": [
+        73,
+        91
+      ],
+      "tiles": 40,
+      "time_base": "1/15360"
+    },
+    {
+      "direction": 1,
+      "face_observations": 3,
+      "first_pts": 0,
+      "frame_count": 120,
+      "pair": 3,
+      "paired": {
+        "entry_tiles": 16,
+        "exit_tiles": 15,
+        "interval": [
+          73,
+          91
+        ],
+        "score": 0.644897848367691,
+        "sectors": 2,
+        "shared_tiles": 13
+      },
+      "role": "speaker_only",
+      "selected": [
+        {
+          "frame": 72,
+          "pts": 36864,
+          "rgb_sha256": "f8d435def9d6fce3fa0f9c6dc26c481fd0d87a9db41ee07fe70d5a0751ae87b4"
+        },
+        {
+          "frame": 82,
+          "pts": 41984,
+          "rgb_sha256": "6a3373e98aee97a44f13ae785606c14641d6782335121a3f81738f7c05028d09"
+        },
+        {
+          "frame": 91,
+          "pts": 46592,
+          "rgb_sha256": "fd6609d6101b3315e3b57b100dcd0067ce97435b47bc59e3abf3f22e0b887efd"
+        }
+      ],
+      "shot_frames": [],
+      "span": [
+        73,
+        91
+      ],
+      "tiles": 48,
+      "time_base": "1/15360"
+    },
+    {
+      "direction": 1,
+      "face_observations": 3,
+      "first_pts": 0,
+      "frame_count": 120,
+      "pair": 3,
+      "paired": {
+        "entry_tiles": 16,
+        "exit_tiles": 16,
+        "interval": [
+          73,
+          91
+        ],
+        "score": 0.7964151352643967,
+        "sectors": 2,
+        "shared_tiles": 16
+      },
+      "role": "scene_only",
+      "selected": [
+        {
+          "frame": 72,
+          "pts": 36864,
+          "rgb_sha256": "d4ad22890a532d9f9edc5b22486b3b8d657a5466e6976287a29f9eae6dd808e1"
+        },
+        {
+          "frame": 82,
+          "pts": 41984,
+          "rgb_sha256": "1dd717f5effb4a6a2c9de177c9500dcdb3b08f7bdd4bec1b8d4de1e6e770222a"
+        },
+        {
+          "frame": 91,
+          "pts": 46592,
+          "rgb_sha256": "e1d4fa78030fdbf01110906c8b8a297728ad0ad4bfdf58b85c59e55ab37368eb"
+        }
+      ],
+      "shot_frames": [],
+      "span": [
+        73,
+        91
+      ],
+      "tiles": 40,
+      "time_base": "1/15360"
+    },
+    {
+      "direction": 1,
+      "face_observations": 3,
+      "first_pts": 0,
+      "frame_count": 120,
+      "pair": 3,
+      "paired": {
+        "entry_tiles": 32,
+        "exit_tiles": 32,
+        "interval": [
+          73,
+          91
+        ],
+        "score": 0.8171656727790833,
+        "sectors": 4,
+        "shared_tiles": 28
+      },
+      "role": "speaker_and_scene",
+      "selected": [
+        {
+          "frame": 72,
+          "pts": 36864,
+          "rgb_sha256": "70b2f4b3bd7408978815ac2296620ca1333ef70563cd19f1c6723fde16a27d8b"
+        },
+        {
+          "frame": 82,
+          "pts": 41984,
+          "rgb_sha256": "88b67a0906b09d8bb42979df636439e766ba91eddb32ce289e7a6ced1c13afe8"
+        },
+        {
+          "frame": 91,
+          "pts": 46592,
+          "rgb_sha256": "73fbd498289fd6c3d51fa375b98b83483bade02ea8530dcfb511471a72596a7c"
+        }
+      ],
+      "shot_frames": [],
+      "span": [
+        73,
+        91
+      ],
+      "tiles": 48,
+      "time_base": "1/15360"
+    }
+  ],
+  "schema": "chipmunk.video-scene-only-cut-transfer/1",
+  "source_groups": 8,
+  "totals": {
+    "scene_only": {
+      "files": 8,
+      "paired_exact": 8,
+      "paired_measured": 8,
+      "paired_reportable": 8,
+      "paired_wrong_range": 0,
+      "shot_any": 0,
+      "shot_both_exact": 0,
+      "shot_entry_exact": 0,
+      "shot_return_exact": 0
+    },
+    "speaker_and_scene": {
+      "files": 8,
+      "paired_exact": 8,
+      "paired_measured": 8,
+      "paired_reportable": 8,
+      "paired_wrong_range": 0,
+      "shot_any": 0,
+      "shot_both_exact": 0,
+      "shot_entry_exact": 0,
+      "shot_return_exact": 0
+    },
+    "speaker_only": {
+      "files": 8,
+      "paired_exact": 6,
+      "paired_measured": 8,
+      "paired_reportable": 6,
+      "paired_wrong_range": 0,
+      "shot_any": 0,
+      "shot_both_exact": 0,
+      "shot_entry_exact": 0,
+      "shot_return_exact": 0
+    },
+    "unchanged": {
+      "files": 8,
+      "paired_exact": 0,
+      "paired_measured": 8,
+      "paired_reportable": 0,
+      "paired_wrong_range": 0,
+      "shot_any": 0,
+      "shot_both_exact": 0,
+      "shot_entry_exact": 0,
+      "shot_return_exact": 0
+    }
+  }
+}

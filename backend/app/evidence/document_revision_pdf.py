@@ -20,6 +20,7 @@ SCOPE = ("Compares wording and punctuation in the extracted PDF text layers. Pag
          "Boxes may include adjacent text. Scanned pages, text in images, and formatting are outside this comparison.")
 MAX_PREVIEWS_PER_VERSION = 6
 MAX_PREVIEW_BYTES = 1024 * 1024
+MULTIPAGE_LEFT_MARGIN_SPREAD = 36  # Points, allowing ordinary first-line indents.
 
 
 def extract_native(path: Path, data: bytes):
@@ -66,14 +67,25 @@ def page_locations(extent, changed_tokens, source_map):
     return list(pages.values())
 
 
-def paired_text(text: str, source_map: list[dict]) -> str:
-    """Require one upright native page with unambiguous top-to-bottom word boxes."""
+def ordered_text(text: str, source_map: list[dict], *, page_limit: int = 1) -> str:
+    """Require upright native pages with contiguous, top-to-bottom word boxes."""
     if not source_map:
         return ""
-    cursor, previous_bottom = 0, 0.
+    page = cursor = 0
+    previous_bottom = 0.
+    # Restrict multi-page comparisons to a single column on each page.
+    multipage = source_map[-1]["page"] > 1
+    left_min = left_max = None
     for index, block in enumerate(source_map):
-        if (block.get("page") != 1 or block.get("page_rotation") != 0 or block.get("extraction") != "text_layer"
-                or block["start"] != cursor + (2 if index else 0) or text[cursor:block["start"]] != ("\n\n" if index else "")):
+        number = block.get("page")
+        if number != page:
+            if number != page + 1 or number > page_limit:
+                return ""
+            page, previous_bottom = number, 0.
+            left_min = left_max = None
+        separator = "\n\n" if index else ""
+        if (block.get("page_rotation") != 0 or block.get("extraction") != "text_layer"
+                or block["start"] != cursor + len(separator) or text[cursor:block["start"]] != separator):
             return ""
         start, end = block["start"], block["end"]
         width, height = block["page_width"], block["page_height"]
@@ -91,6 +103,11 @@ def paired_text(text: str, source_map: list[dict]) -> str:
                 if line_top is None or y0 > line_top + 2:
                     if line_bottom is not None and y0 < line_bottom - .5:
                         return ""
+                    if multipage:
+                        left_min = x0 if left_min is None else min(left_min, x0)
+                        left_max = x0 if left_max is None else max(left_max, x0)
+                        if left_max - left_min > MULTIPAGE_LEFT_MARGIN_SPREAD:
+                            return ""
                     line_top, line_bottom = y0, y1
                 else:
                     if (y0 < line_top - 2 or x0 < previous_right - .5

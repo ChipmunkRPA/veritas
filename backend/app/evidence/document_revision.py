@@ -43,6 +43,7 @@ DOCX_SCOPE = ("Compares words and punctuation in top-level Word body paragraphs.
 MIXED_SCOPE = "Compares words and punctuation across file formats. Formatting is outside the comparison."
 MIXED_WORD_SCOPE = "Word coverage includes top-level body paragraphs. Word tables, headers, footers and text boxes are excluded."
 MIXED_PDF_SCOPE = "PDF coverage includes the selectable text on one upright page with a clear reading order. Scanned text is excluded."
+MIXED_MULTIPAGE_PDF_SCOPE = "PDF coverage includes selectable text on all {pages} upright, single-column pages. Scanned text is excluded."
 DOCX_PART = "word/document.xml"
 INTERPRETATION = "This comparison locates changes between the supplied versions. The revision sequence and authorship require independent evidence."
 WordParagraphs = list[tuple[int, int, int, int]]
@@ -310,6 +311,7 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
     changes = []
     schema = SCHEMA
     scope, coordinates = SCOPE, TEXT_COORDINATES
+    mixed_pdf_scope = MIXED_PDF_SCOPE
     with TemporaryDirectory(prefix="document-revision-") as staging:
         directory = Path(staging)
         earlier_path, later_path = directory / f"earlier{old_extension}", directory / f"later{extension}"
@@ -319,8 +321,13 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
             spaces = {".txt": TEXT_COORDINATES, ".docx": WORD_COORDINATES, ".pdf": document_revision_pdf.COORDINATES}
             for suffix, text, layout, source in ((old_extension, old_text, old_layout, old_source),
                                                  (extension, new_text, new_layout, new_source)):
-                if suffix == ".pdf" and not document_revision_pdf.paired_text(text, layout):
-                    raise ValueError("For drafts in different formats, use one upright PDF page with selectable text in a clear reading order.")
+                if suffix == ".pdf":
+                    limit = document_revision_pdf.NATIVE_COMPARISON_MAX_PAGES
+                    if not document_revision_pdf.ordered_text(text, layout, page_limit=limit):
+                        raise ValueError(f"For drafts in different formats, use an upright PDF with selectable text in a clear reading order. "
+                                         f"Multi-page PDFs need a single column per page and up to {limit} pages.")
+                    if layout[-1]["page"] > 1:
+                        mixed_pdf_scope = MIXED_MULTIPAGE_PDF_SCOPE.format(pages=layout[-1]["page"])
                 source.update(format=FORMATS[suffix], coordinate_space=spaces[suffix])
         if extension == ".eml":
             if (old_layout is None) != (new_layout is None):
@@ -339,7 +346,7 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
         scope, coordinates = DOCX_SCOPE, WORD_COORDINATES
     if mixed:
         schema, coordinates = MIXED_SCHEMA, MIXED_COORDINATES
-        scopes = {".docx": MIXED_WORD_SCOPE, ".pdf": MIXED_PDF_SCOPE}
+        scopes = {".docx": MIXED_WORD_SCOPE, ".pdf": mixed_pdf_scope}
         scope = " ".join([MIXED_SCOPE, *(scopes[suffix] for suffix in (old_extension, extension) if suffix in scopes)])
     result = {"schema": schema, "format": "mixed" if mixed else FORMATS[extension],
             "coordinate_space": coordinates,
@@ -350,6 +357,6 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
     if extension == ".eml" and email_body_only:
         return result, _email_body_prefix(old_text, old_tokens), _email_body_prefix(new_text, new_tokens), None
     if extension == ".pdf" and pdf_paired_text_only:
-        return (result, document_revision_pdf.paired_text(old_text, old_layout),
-                document_revision_pdf.paired_text(new_text, new_layout), None)
+        return (result, document_revision_pdf.ordered_text(old_text, old_layout),
+                document_revision_pdf.ordered_text(new_text, new_layout), None)
     return result, old_text, new_text, (old_layout, new_layout) if extension == ".docx" else None

@@ -778,9 +778,75 @@ def test_cross_format_word_to_pdf_comparison_replays_both_source_locations(refer
         review(export, earlier_path, later_path)
     refused = f.client.post(_url("mixed-draft"), headers=f.viewer, files=_upload(_email("A message")))
     assert refused.status_code == 422
-    _saved(f, "multipage-mixed", ".pdf", _pdf_draft("green", 0))
-    refused = f.client.post(_url("multipage-mixed"), headers=f.viewer, files=_upload(earlier, ".docx"))
-    assert refused.status_code == 422
+
+
+def test_cross_format_word_to_pdf_locates_one_change_across_two_pages(reference_http, monkeypatch, tmp_path):
+    from scripts.rebuild_writing_word_boundary_sources import docx
+
+    f = _install(reference_http, monkeypatch)
+    earlier = docx("The first page keeps the yellow shipment.\n\nInstructions for packing:\n\nThe second shipment will use the blue packaging.")
+    with pymupdf.open() as pdf:
+        first = pdf.new_page()
+        first.insert_text((60, 80), "The first page keeps the amber shipment.")
+        second = pdf.new_page()
+        second.insert_text((60, 80), "Rules for packing:")
+        second.insert_text((60, 140), "The second shipment will use the green packaging.")
+        later = pdf.tobytes()
+    _saved(f, "multipage-mixed", ".pdf", later)
+    response = f.client.post(_url("multipage-mixed"), headers=f.viewer, files=_upload(earlier, ".docx"),
+                             data={"include_pdf": "true", "include_paired_check": "true"})
+    assert response.status_code == 200, response.text
+    payload = response.json()
+    result = payload["comparison"]
+    assert "all 2 upright, single-column pages" in result["scope"] and "paired_check" not in result
+    assert [[page["page"] for page in change["later"]["pdf_pages"]] for change in result["changes"]] == [[1, 2], [2]]
+    with pymupdf.open(stream=base64.b64decode(payload["pdf"]), filetype="pdf") as report:
+        report_text = " ".join(" ".join(page.get_text().split()) for page in report)
+        assert "Page 1 · highlighted source crop" in report_text and "Page 2 · highlighted source crop" in report_text
+    earlier_path, later_path, export = (tmp_path / name for name in ("earlier.docx", "later.pdf", "draft.json"))
+    earlier_path.write_bytes(earlier)
+    later_path.write_bytes(later)
+    export.write_text(json.dumps(result))
+    verified = review(export, earlier_path, later_path)
+    assert verified["pdf_previews_verified"] == 3 and verified["body_paragraph_ranges_verified"] == 3
+    result["changes"][0]["later"]["pdf_pages"][1]["page"] = 1
+    export.write_text(json.dumps(result))
+    with pytest.raises(ValueError, match="does not replay"):
+        review(export, earlier_path, later_path)
+
+
+@pytest.mark.parametrize("layout", ["rotated", "unmapped", "two_columns", "excess_pages"])
+def test_cross_format_pdf_declines_unsupported_multipage_layouts(reference_http, monkeypatch, layout):
+    f = _install(reference_http, monkeypatch)
+    with pymupdf.open() as pdf:
+        first = pdf.new_page()
+        first.insert_text((60, 80), "The first page has selectable text.")
+        second = pdf.new_page()
+        if layout != "unmapped":
+            second.insert_text((60, 80), "The second page has selectable text.")
+        if layout == "two_columns":
+            second.insert_text((360, 130), "An independent text column.")
+        if layout == "rotated":
+            second.set_rotation(90)
+        if layout == "excess_pages":
+            for _ in range(11):
+                pdf.new_page().insert_text((60, 80), "Additional selectable text.")
+        later = pdf.tobytes()
+    _saved(f, "unsupported-mixed", ".pdf", later)
+    response = f.client.post(_url("unsupported-mixed"), headers=f.viewer,
+                             files=_upload(b"The earlier shipment was approved.", ".txt"))
+    assert response.status_code == 422 and "comparison" not in response.json()
+
+
+def test_cross_format_accepts_twelve_unchanged_pdf_pages():
+    paragraphs = [f"Shipment {index} passed its packaging review." for index in range(1, 13)]
+    with pymupdf.open() as pdf:
+        for paragraph in paragraphs:
+            pdf.new_page().insert_text((60, 80), paragraph)
+        earlier = pdf.tobytes()
+    later = "\n\n".join(paragraphs).encode()
+    result, *_ = document_revision.compare_with_sources(earlier, later, ".txt", earlier_extension=".pdf")
+    assert result["changes"] == [] and "all 12 upright, single-column pages" in result["scope"]
 
 
 def test_refuses_an_attachment_selected_as_the_email_body(reference_http, monkeypatch):

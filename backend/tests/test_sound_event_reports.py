@@ -47,6 +47,7 @@ def test_sound_category_report_uses_exact_frozen_windows_and_commits_all_assets(
     monkeypatch.setattr(multimedia_evidence, 'default_store', lambda: store)
     html = engine.render_html(s, embed_fonts=False)
     assert 'href="#multimedia-evidence-C01">Sound categories C01</a>' in html
+    assert f'href="#multimedia-evidence-{voice["id"]}">{voice["id"]}</a>' in html
     assert 'Source timestamps [0, 128000) at 1/16000' in html
     assert {a['sha256'] for a in c['assets']} <= set(service.asset_refs(s.evidence))
     assert {a['sha256'] for a in c['assets']} <= {a['sha256'] for a in multimedia_evidence.manifest(s)['artifacts']}

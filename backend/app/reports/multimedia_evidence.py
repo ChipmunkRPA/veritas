@@ -799,7 +799,9 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                        observation="; ".join(f"{item['label']}: {item['score']:.3f}" for item in packet["labels"]),
                        interpretation="These labels describe possible sounds in the mixed track. They do not separate the sounds or determine whether the recording is AI-generated.",
                        limitations=copy.deepcopy(part["sound_events"]["limitations"]), measurements=[],
-                       sound_labels=copy.deepcopy(packet["labels"]))
+                       sound_labels=copy.deepcopy(packet["labels"]),
+                       related_voice_packet_ids=[voice["id"] for voice in part["packets"]
+                                                 if a < voice["interval"]["end_sample"] and b > voice["interval"]["start_sample"]])
             row["images"] = [plate("waveform", packet["artifacts"]["waveform"])]
             row["audio"] = {"interval": interval, "context_interval": interval,
                             "start_s": packet["start_s"], "end_s": packet["end_s"], "sample_rate": part["source"]["sample_rate"],

@@ -60,7 +60,11 @@ describe('ordinary multimedia evidence', () => {
     const contextLink = voice.getByRole('link', { name: 'Sound categories C02' })
     expect(contextLink.getAttribute('href')).toBe('/analyses/audio/media-evidence?view=plain#media-evidence-C02')
     fireEvent.click(contextLink)
-    expect(screen.getByRole('article', { name: 'Sound categories C02' })).toBeTruthy()
+    const categories = within(screen.getByRole('article', { name: 'Sound categories C02' }))
+    const returnLink = categories.getByRole('link', { name: 'P01' })
+    expect(returnLink.getAttribute('href')).toBe('/analyses/audio/media-evidence?view=plain#media-evidence-P01')
+    fireEvent.click(returnLink)
+    expect(screen.getByRole('article', { name: 'Selected audio evidence P01' })).toBeTruthy()
   })
 
   it('distinguishes second writing responses and links the matching source passage', () => {

@@ -8,6 +8,9 @@
 </div>
 {% endif %}
 {% endmacro %}
+{% macro related_voice(ids) %}
+{% if ids %}<p class="caption">Overlapping voice-check intervals {% for id in ids %}<a href="#multimedia-evidence-{{ id }}">{{ id }}</a>{% if not loop.last %}, {% endif %}{% endfor %}. Listen to the overlapping intervals for context.</p>{% endif %}
+{% endmacro %}
 <section class="{% if evidence.packets or evidence.overview or evidence.acoustic_contexts or evidence.get('repetition_context') or evidence.get('similarity_context') or evidence.get('repeated_passages') %}chapter{% else %}chapter-cont{% endif %} multimedia-evidence{% if s.report.profile in ['summary', 'newsroom'] and evidence.packets %} evidence-appendix{% endif %}" aria-labelledby="multimedia-evidence-heading">
 <h2 class="chapter-title" id="multimedia-evidence-heading">{% if v.get('number', {}).get('source-evidence') %}<span class="n">{{ v.number['source-evidence'] }}</span>{% endif %}{{ evidence.title }}</h2>
 <p>{{ evidence.note }}</p>
@@ -211,12 +214,13 @@ On the original timeline, the audio spans {{ '%.3f' | format(item.before.source_
 {% elif packet.kind == 'sound' %}
 <p class="caption">Sound-category input: samples [{{ packet.audio.interval.start_sample }}, {{ packet.audio.interval.end_sample }}) at {{ packet.audio.sample_rate }} Hz; {{ '%.3f' | format(packet.audio.start_s) }}-{{ '%.3f' | format(packet.audio.end_s) }} seconds on the analysed PCM timeline. Category scores rank possible sounds and are not AI confidence percentages.</p>
 {% for range in packet.audio.source_ranges %}<p class="caption">Source timestamps [{{ range.source_start_pts }}, {{ range.source_end_pts }}) at {{ range.time_base }} correspond to samples [{{ range.start_sample }}, {{ range.end_sample }}).</p>{% endfor %}
+{{ related_voice(packet.related_voice_packet_ids) }}
 {{ plates(packet.images, true) }}
 <p class="caption">The matching selected WAV clip is included in the JSON evidence assets and evidence ZIP. Each label covers this complete source window, not an exact sound onset or an edit boundary.</p>
 {% elif packet.kind in ['audio', 'acoustic'] %}
 <p class="caption">{% if packet.kind == 'acoustic' %}Measured acoustic interval{% else %}Scored input{% endif %}: samples [{{ packet.audio.interval.start_sample }}, {{ packet.audio.interval.end_sample }}) at {{ packet.audio.sample_rate }} Hz, {{ '%.3f' | format(packet.audio.start_s) }}-{{ '%.3f' | format(packet.audio.end_s) }} seconds on the analysed PCM timeline. Listening context: samples [{{ packet.audio.context_interval.start_sample }}, {{ packet.audio.context_interval.end_sample }}).</p>
 {% for range in packet.audio.source_ranges %}<p class="caption">Source timestamps [{{ range.source_start_pts }}, {{ range.source_end_pts }}) at {{ range.time_base }} correspond to samples [{{ range.start_sample }}, {{ range.end_sample }}).{% if packet.audio.source_ranges | length > 1 %} The source timeline contains separate ranges; they must not be treated as uninterrupted playback.{% endif %}</p>{% endfor %}
-{% if packet.kind == 'acoustic' %}<p class="caption">Acoustic context only; this interval is not a detected voice-replacement boundary.{% if packet.related_voice_packet_ids %} Overlapping voice-check intervals: {{ packet.related_voice_packet_ids | join(', ') }}. Their overlap is not independent confirmation.{% endif %}</p>{% endif %}
+{% if packet.kind == 'acoustic' %}<p class="caption">This acoustic observation describes the mixed track.</p>{{ related_voice(packet.related_voice_packet_ids) }}{% endif %}
 {% if packet.get('recording_context') %}<p class="caption">Overlapping background and recording evidence: {% for related in packet.recording_context %}<a href="#multimedia-evidence-{{ related.id }}">{{ related.label }}</a>{% if not loop.last %}, {% endif %}{% endfor %}. The overlap provides listening context.</p>{% endif %}
 {{ plates(packet.images, true) }}
 <p class="caption">The PDF is static. Selected and context WAV clips are identified by the same hashes as the JSON evidence assets; the plots provide inspection context and cannot independently establish synthesis.</p>

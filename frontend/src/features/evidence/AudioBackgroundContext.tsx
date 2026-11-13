@@ -10,7 +10,7 @@ const labels: Record<AcousticContextEvent['category'], string> = {
 export default function AudioBackgroundContext({ set, token, mediaReady, pauseAudio }: {
   set: AudioEvidenceSet; token: string; mediaReady: boolean; pauseAudio: () => void
 }) {
-  const { hash } = useLocation(), context = set.acoustic_context
+  const { hash, search } = useLocation(), context = set.acoustic_context
   const [selectedId, setSelectedId] = useState(context?.events[0]?.id ?? null)
   const root = useRef<HTMLElement>(null)
   const events = context?.events ?? []
@@ -84,7 +84,7 @@ export default function AudioBackgroundContext({ set, token, mediaReady, pauseAu
                   return <li key={index}>Samples [{range.start_sample}, {range.end_sample}): {a !== null && b !== null ? `${seconds(a)}–${seconds(b)}` : 'time conversion unavailable'} ({range.source_start_pts}–{range.source_end_pts} ticks, time base {range.time_base})</li>
                 })}</ul>
               </details>
-              {event.related_voice_packet_ids.length > 0 && <p className="mt-3 mb-0 text-caption text-text-muted">Overlapping voice intervals: {event.related_voice_packet_ids.map((id, index) => <span key={id}>{index > 0 && ', '}<Link to={`#media-evidence-${encodeURIComponent(id)}`} className="underline underline-offset-2">{id}</Link></span>)}. Overlap does not establish a shared cause.</p>}
+              {event.related_voice_packet_ids.length > 0 && <p className="mt-3 mb-0 text-caption text-text-muted">Overlapping voice intervals {event.related_voice_packet_ids.map((id, index) => <span key={id}>{index > 0 && ', '}<Link to={{ search, hash: `#media-evidence-${encodeURIComponent(id)}` }} className="underline underline-offset-2">{id}</Link></span>)}. Overlap does not establish a shared cause.</p>}
               <EvidenceLimits lines={event.limitations} />
             </article>)}
           </> : <p className="mt-4 mb-0 text-small text-text-muted">No acoustic interval met the saved selection rules. The overview remains available; this does not establish authenticity or a natural voice.</p>}

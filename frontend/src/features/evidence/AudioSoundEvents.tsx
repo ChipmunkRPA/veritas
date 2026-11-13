@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { EvidenceAudio, EvidenceLimits, EvidencePicture, evidenceGrid } from './EvidenceMedia'
 import { rationalSeconds, seconds, type AudioEvidenceSet } from './multimediaPackets'
 
@@ -7,7 +7,7 @@ import { rationalSeconds, seconds, type AudioEvidenceSet } from './multimediaPac
 export default function AudioSoundEvents({ set, token, mediaReady, pauseAudio }: {
   set: AudioEvidenceSet; token: string; mediaReady: boolean; pauseAudio: () => void
 }) {
-  const context = set.sound_events, { hash } = useLocation()
+  const context = set.sound_events, { hash, search } = useLocation()
   const [selectedId, setSelectedId] = useState(context?.windows[0]?.id)
   useEffect(() => {
     const window = context?.windows.find((item) => hash === `#media-evidence-${item.id}`)
@@ -31,7 +31,9 @@ export default function AudioSoundEvents({ set, token, mediaReady, pauseAudio }:
           <span className="block text-small">{item.labels[0]?.label}</span>
         </button>)}
       </div>
-      {context.windows.map((item) => <article key={item.id} id={`media-evidence-${item.id}`} hidden={item.id !== selected?.id}
+      {context.windows.map((item) => {
+        const voice = set.packets.filter(({ interval }) => item.start_sample < interval.end_sample && item.end_sample > interval.start_sample)
+        return <article key={item.id} id={`media-evidence-${item.id}`} hidden={item.id !== selected?.id}
         aria-label={`Sound categories ${item.id}`} className="mt-4 border-t border-border pt-4 scroll-mt-20">
         <h4 className="m-0 text-body font-medium">{item.id} · {seconds(item.start_s)}–{seconds(item.end_s)}</h4>
         <p className="text-small">Possible categories: {item.labels.map((v) => `${v.label} (score ${v.score.toFixed(3)})`).join('; ')}.</p>
@@ -40,13 +42,17 @@ export default function AudioSoundEvents({ set, token, mediaReady, pauseAudio }:
           <EvidencePicture set={set} artifact={item.artifacts.waveform} token={token} ready={mediaReady} chart alt={`${item.id}: waveform of the sound-category interval`} />
           <EvidenceAudio set={set} artifact={item.artifacts.selected_clip} token={token} ready={mediaReady} alt={`${item.id}: exact sound-category interval`} />
         </div>
+        {voice.length > 0 && <p className="mt-3 mb-0 text-small">Overlapping voice intervals {voice.map(({ id }, index) => <span key={id}>
+          {index > 0 && ', '}<Link to={{ search, hash: `#media-evidence-${encodeURIComponent(id)}` }}
+            className="underline underline-offset-2">{id}</Link>
+        </span>)}.</p>}
         <details className="mt-3 text-caption"><summary>Original recording timestamps</summary><ul>
           {item.source_timestamp_ranges.map((range, i) => {
             const a = rationalSeconds(range.source_start_pts, range.time_base), b = rationalSeconds(range.source_end_pts, range.time_base)
             return <li key={i}>Samples [{range.start_sample}, {range.end_sample}): {a !== null && b !== null ? `${seconds(a)}–${seconds(b)}` : 'Unavailable'}</li>
           })}
         </ul></details>
-      </article>)}
+      </article>})}
       {!context.windows.length && <p>No complete sound-category window was recorded.</p>}
       <EvidenceLimits lines={context.limitations} />
     </>}

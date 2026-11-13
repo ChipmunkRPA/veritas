@@ -88,6 +88,10 @@ recalculates how a change and return refine an existing face interval. Its
 native replay checks exact before, during and after pictures in H.264 and in
 the separate HEVC confirmation. Genuine speaker cuts remain visible in the
 baseline counts.
+The [six-picture proposal study](video-face-unrouted-short-transfer-2026-11-12.md)
+recounts exact interval gains and ordinary cutaways separately from inherited
+Full findings. Native replay reopens the representative source frames and
+both nearby motion measurements.
 The [subject-context comparison](video-face-subject-context-2026-11-12.md)
 checks whether the area below the face helps recognize ordinary speaker cuts.
 The [near-head transfer](video-face-near-head-transfer-2026-11-12.md) adds

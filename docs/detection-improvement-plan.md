@@ -97,6 +97,11 @@ integration remains unfinished.
 
 ## Progress on 12 November
 
+- The [six-picture face-change study](video-face-unrouted-short-transfer-2026-11-12.md)
+  found all 16 exact ranges missed by Full, across eight HEVC source groups.
+  Both the bounded shortlist and the dense search added zero ordinary ranges
+  across 40 controls. The serving integration still needs to pass source replay
+  and the normal local paid flow.
 - The [JPEG coefficient-transition study](image-jpeg-signed-transitions-2026-11-12.md)
   added three feathered JPEG90 locations and seven ordinary source-group
   flags. A fresh 120-view BG-REAL comparison found no useful locations or

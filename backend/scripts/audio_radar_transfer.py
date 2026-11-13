@@ -109,7 +109,7 @@ def spans(samples):
     return [[start, start + SPAN] for start in starts]
 
 
-def adapter_result(pcm, voice, activity):
+def adapter_result(pcm, voice, activity, *, include_status=False):
     from types import SimpleNamespace
 
     from app.detectors.video.adapters.audio import PellaVoiceDetector
@@ -123,11 +123,15 @@ def adapter_result(pcm, voice, activity):
                           deadline=SimpleNamespace(check=lambda *_: None))
     result = PellaVoiceDetector().run(ctx)
     if result.status == "not_applicable":
-        return {"decision": "unassessed", "scope": False, "windows": [], "raw": None}
-    require(result.status == "ok", "Unexpected voice adapter result")
-    screen = result.details["audio_screening"]
-    return {"decision": screen["decision"], "scope": screen["scope_supported"], "raw": result.aggregate.raw,
-            "windows": [[int(unit.quality["start_sample"]), int(unit.quality["end_sample"])] for unit in result.unit_scores]}
+        record = {"decision": "unassessed", "scope": False, "windows": [], "raw": None}
+    else:
+        require(result.status == "ok", "Unexpected voice adapter result")
+        screen = result.details["audio_screening"]
+        record = {"decision": screen["decision"], "scope": screen["scope_supported"], "raw": result.aggregate.raw,
+                  "windows": [[int(unit.quality["start_sample"]), int(unit.quality["end_sample"])] for unit in result.unit_scores]}
+    if include_status:
+        record["status"] = result.status
+    return record
 
 
 def pcm_hash(pcm):

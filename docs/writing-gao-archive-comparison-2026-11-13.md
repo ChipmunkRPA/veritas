@@ -78,6 +78,12 @@ ranges. The export verifier rejects altered coordinates and can still replay
 exports from the earlier single-paragraph rule. The report compares wording
 and contributes zero AI-authorship confidence.
 
+An isolated local checkout used a public archive fixture and simulated
+the $9.99 payment. The worker waited for confirmation and repeated
+confirmation did not create another job. Chrome showed both native
+positions in the plain view, downloaded JSON that matched the API, and
+downloaded a PDF with the same two positions and highlighted words.
+
 The [120-delivery receipt](evaluation-panels/writing-gao-word-paragraphs-2026-11-13.json)
 contains the source IDs, file digests, dispositions and native ranges.
 It contains no report text or Word files. With the pinned pack installed,

@@ -68,6 +68,19 @@ speech and background evaluation, including genuine mixtures and
 ordinary audio edits as controls. Its published experiments do not
 qualify a checkpoint for this deployment.
 
+[ToolDF](https://arxiv.org/html/2609.03620v2) tests whether routing speech,
+singing, music and background components to different experts helps on
+overlapping or temporally mixed audio. Our
+[isolation diagnostic](audio-source-isolation-diagnostic-2026-11-13.md)
+found that better acoustic recovery can still erase the response needed
+to locate a voice edit. [WeDefense](https://arxiv.org/html/2601.15240v1)
+reports a large drop when detection training and evaluation switch
+corpora, and evaluates frame-level localization separately. Together
+these results motivate learning timing from short labeled edits in the
+original mixture and testing the resulting head on held speakers,
+recording rooms and generators. We used neither paper's code,
+checkpoints nor data in these tests.
+
 October's [MixedTruth / TruMix](https://arxiv.org/html/2610.14141v1) keeps original
 mixture information while using estimated components as soft evidence. It uses
 distinct speech/background streams and structured component predictions rather

@@ -108,6 +108,11 @@ integration remains unfinished.
   retained the submitted waveform and changed only feature normalization.
   It found none of 12 known short voice edits under competing speech
   at the locked point and remains experimental.
+- The [spectral return timing trial](audio-acoustic-return-timing-2026-11-13.md)
+  tested whether similarity across the two audio flanks could select short
+  edited intervals. Combining it with dense speech scores found none of
+  12 known edits at the locked point and added no gain at equal ordinary
+  group counts. It stays experimental.
 - The [PDF Content Credentials check](pdf-content-credentials-2026-11-13.md)
   verifies a whole-file AI declaration locally before acquiring writing models.
   Signed document coverage, modified PDF controls and payment-first behavior

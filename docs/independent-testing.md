@@ -145,6 +145,9 @@ combined window rules.
 The [narrower speech evidence study](audio-focused-window-transfer-2026-11-12.md)
 recounts 98 new exact deliveries with rain and train sound, including isolated
 backgrounds and marked genuine speech in partly edited files.
+The [frequency-view study](audio-subband-partial-transfer-2026-11-12.md) replays
+separate band points and tests whether either rescues edits in the same noisy
+deliveries. Its native check also recomputes the filtered PCM window hashes.
 The [native word-clock qualification](grid-reserve-word-clocks-2026-11-12.md)
 aligns publisher word intervals with original embedded speech and replays four
 ordinary mouth changes with unchanged soundtracks.

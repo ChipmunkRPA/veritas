@@ -97,6 +97,10 @@ integration remains unfinished.
 
 ## Progress on 12 November
 
+- The [frequency-view speech study](audio-subband-partial-transfer-2026-11-12.md)
+  added three gain-only locations and zero under louder rain or train sound.
+  The two separately frozen points added no genuine file flags. It did not
+  resolve the loud-noise gap and stays outside the app.
 - The [exact small PNG copy check](image-exact-small-copy-2026-11-12.md)
   found 44/48 known copies and added zero flags on 66 held controls and
   eight interface captures. New local opt-in reports show both native crops

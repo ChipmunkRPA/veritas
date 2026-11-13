@@ -79,13 +79,13 @@ def counts():
         return db.query(Analysis).count(), db.query(Job).count()
 
 
-def checkout(client, stub, path):
+def checkout(client, stub, path, *, media_type="video/mp4", filename="exact-360p-video.mp4"):
     from app.billing import purchase_notice
     before = counts()
     order = body(client.post("/api/v2/billing/checkout", headers={"Idempotency-Key": str(uuid.uuid4())},
         data={"kind": "video", "profile": "full", "risk_accepted": "true", "risk_notice_version": purchase_notice.VERSION,
               "risk_notice_sha256": purchase_notice.SHA256},
-        files={"file": ("exact-360p-video.mp4", path.read_bytes(), "video/mp4")}))
+        files={"file": (filename, path.read_bytes(), media_type)}))
     assert counts() == before
     sid = next(reversed(stub.sessions))
     nonce = uuid.uuid4().hex

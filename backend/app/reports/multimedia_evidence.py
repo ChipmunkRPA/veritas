@@ -153,6 +153,7 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
         face_lighting_context,
         face_return_binding,
         face_return_coverage,
+        face_short_carrier_binding,
         face_short_window_binding,
         face_spatial_cut_binding,
         picture_hold_binding,
@@ -186,8 +187,11 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
         except (KeyError, TypeError, ValueError) as error:
             raise ObjectIntegrityError("Brief face-change coverage differs from the frozen analysis") from error
         try:
-            windows = [p for p in document["packets"] if p.get("semantics") == face_short_window_binding.METHOD]
-            if face_short_window_binding.validate_packets(document, windows) != face_short_window_binding.from_result(result, len(table)):
+            windows = [p for p in document["packets"] if p.get("semantics") in face_return_binding.WINDOW_METHODS]
+            checked = face_short_window_binding.validate_packets(document, windows)
+            if checked is not None and checked.keys() >= face_short_carrier_binding.META:
+                face_short_carrier_binding.validate_metadata(checked, source, table_pts=table.pts)
+            if checked != face_short_window_binding.from_result(result, len(table)):
                 raise ValueError("Overlapping window coverage differs from the recorded outcome")
         except (KeyError, TypeError, ValueError) as error:
             raise ObjectIntegrityError("Overlapping face windows differ from the frozen analysis") from error
@@ -250,7 +254,7 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
             frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
             commitment = canonical_hash(face_return)
             secondary = face_return["method"] in face_return_binding.SECOND_METHODS
-            window = face_return["method"] == face_short_window_binding.METHOD
+            window = face_return["method"] in face_return_binding.WINDOW_METHODS
             key = "face_return_secondary" if secondary else "face_return"
             signal = next((s for s in frozen.get("signals", []) if s.get("effective_weight") == 0.0
                            and alias_signal(s["id"]) == packet["signal_refs"][0]["id"]

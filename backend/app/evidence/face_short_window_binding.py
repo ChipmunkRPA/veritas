@@ -107,15 +107,21 @@ def coverage(windows):
 
 
 def checked(record, frame_count):
+    from app.evidence import face_short_carrier_binding as carriers
+
     paired.require(
         isinstance(record, dict)
-        and set(record) == {"windows", "observations", "affects_overall_confidence"}
+        and set(record) in ({"windows", "observations", "affects_overall_confidence"},
+                            {"windows", "observations", "affects_overall_confidence"} | carriers.META)
         and record["affects_overall_confidence"] is False
         and frame_count == COUNT
         and isinstance(record["windows"], list)
         and len(record["windows"]) == len(WINDOW_STARTS),
         "Brief face window coverage requires the complete supported source plan",
     )
+    if record.keys() >= carriers.META:
+        carriers.validate_metadata(record, {"width": 1280, "height": 720, "frame_count": frame_count,
+                                           "time_base": record["source_time_base"]})
     windows = record["windows"]
     for start, row in zip(WINDOW_STARTS, windows, strict=True):
         paired.require(
@@ -162,17 +168,25 @@ def from_result(result, frame_count=COUNT):
 
 
 def validate_packets(document, packets):
+    from app.evidence import face_short_carrier_binding as carriers
+
     record = (document.get("coverage") or {}).get(KEY)
     if record is None:
         paired.require(not packets, "Brief face window range has no measured coverage")
         return None
     checked(record, document["source"]["frame_count"])
+    carrier = record.keys() >= carriers.META
+    if carrier:
+        carriers.validate_metadata(record, document["source"])
     windows = [row for row in record["windows"] if row["status"] == "localized"]
     paired.require(len(windows) == len(packets), "Brief face window coverage differs from displayed ranges")
     for row, packet in zip(windows, packets, strict=True):
         selected = packet["face_return"]
         paired.require(
-            row["start_frame_index"] == selected["window_start_frame_index"]
+            selected["method"] == (carriers.METHOD if carrier else METHOD)
+            and (not carrier or (selected["time_base"] == record["source_time_base"]
+                and all(selected[key] == record[key] for key in carriers.META - {"source_time_base"})))
+            and row["start_frame_index"] == selected["window_start_frame_index"]
             and row["pixel_frames"] == len(selected["scene_frame_inputs"])
             and row["scheduled_frames"] == len(selected["scheduled_frame_indices"])
             and row["measured_face_frames"] == len(selected["frame_inputs"]),

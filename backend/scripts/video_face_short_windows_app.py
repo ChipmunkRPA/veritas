@@ -7,7 +7,6 @@ import argparse
 import json
 import os
 import uuid
-from fractions import Fraction
 from pathlib import Path
 from zipfile import ZipFile
 
@@ -69,11 +68,12 @@ def verify_images(client, source, record, packets, folder):
         measured = packet["face_return"]
         assert packet["affects_overall_confidence"] is False
         assert [measured[k] for k in ("start_frame_index", "end_frame_index")] == list(edges)
-        assert [measured[k] * table.tb for k in ("start_pts", "end_pts")] == [Fraction(index, 30) for index in edges]
+        assert [measured[k] for k in ("start_pts", "end_pts")] == [table.pts[index] for index in edges]
         assert measured["window_start_frame_index"] == window_start and measured["anchors"] == dict(zip(ROLES, indices, strict=True))
-        assert [measured[k] for k in ("start_stream_s", "end_stream_s")] == [round(index / 30, 6) for index in edges]
+        assert [measured[k] for k in ("start_stream_s", "end_stream_s")] == [round(float(table.pts[index] * table.tb), 6) for index in edges]
         browser.append({"packet_id": packet["id"], "frames": [row["id"] for row in packet["frames"]],
-                        "indices": list(indices), "times_s": [round(index / 30, 3) for index in edges]})
+                        "indices": list(indices), "times_s": [round(float(table.pts[index] * table.tb), 3) for index in edges],
+                        "anchor_times_s": [round(float(table.pts[index] * table.tb), 3) for index in indices]})
         for row, role, index in zip(packet["frames"], ROLES, indices, strict=True):
             anchor = row["anchor"]
             frame = frames[index]
@@ -97,7 +97,7 @@ def verify_images(client, source, record, packets, folder):
     return signatures, assets, browser
 
 
-def signed_replay(client, aid, source, evidence, report, pdf, folder):
+def signed_replay(client, aid, source, evidence, report, pdf, folder, *, wrong_source=None):
     from app.reports.verify import verify_package
 
     package = body(client.post(f"/api/v2/analyses/{aid}/packages",
@@ -113,13 +113,17 @@ def signed_replay(client, aid, source, evidence, report, pdf, folder):
         bundle = json.loads(archive.read("bundle.json"))
         assert json.loads(archive.read("evidence.json")) == evidence
         assert archive.read(bundle["reports"][0]["file"]) == pdf
-    altered = folder / "altered-original.mp4"
+    altered = folder / f"altered-original{source.suffix}"
     altered.write_bytes(source.read_bytes() + b"\n")
     assert not verify_package(signed, public_key_pem=key, source_video=altered).ok
+    if wrong_source is not None:
+        assert not verify_package(signed, public_key_pem=key, source_video=wrong_source).ok
     return replay
 
 
-def verify_surfaces(client, aid, source, commitment, evidence, packets, folder):
+def verify_surfaces(client, aid, source, commitment, evidence, packets, folder, *,
+                    replay_detail="Recomputed each overlapping window shortlist and both native face boundaries", wrong_source=None,
+                    expected_template="veritas-report-2.0.r113"):
     import pymupdf
 
     from app.reports import engine
@@ -142,20 +146,21 @@ def verify_surfaces(client, aid, source, commitment, evidence, packets, folder):
         assert "Window" in words
         if packets:
             assert "Brief face-change range to review" in words and "with an exclusive end" in words
-            assert all(f"{start / 30:.3f}-{end / 30:.3f} s" in words for start, end in EDGES)
+            assert all(f"{start:.3f}-{end:.3f} s" in words for start, end in (item["times_s"] for item in browser))
             assert all(f"source frame {index}" in words for indices in REPRESENTATIVES for index in indices)
             xrefs = {item[0] for page in document for item in page.get_images(full=True)}
             assert images <= {image_signature(document.extract_image(xref)["image"]) for xref in xrefs}
         else:
             assert "supplied no additional brief face-change range" in words
     (folder / "report.pdf").write_bytes(pdf)
-    replay = signed_replay(client, aid, source, evidence, report, pdf, folder)
-    detail = "Recomputed each overlapping window shortlist and both native face boundaries"
-    assert any(item.ok and item.name == "original video frames" and (not packets or detail in item.detail)
+    replay = signed_replay(client, aid, source, evidence, report, pdf, folder, wrong_source=wrong_source)
+    assert any(item.ok and item.name == "original video frames" and (not packets or replay_detail in item.detail)
                for item in replay.checks), replay.as_dict()
-    assert engine.TEMPLATE_SET == "veritas-report-2.0.r113"
+    assert expected_template == engine.TEMPLATE_SET
     receipt = {"exact_source_images": assets, "pdf_api_json_agree": True, "signed_original_replay": True,
                "different_original_rejected": True, "public_model_names_absent": True, "template_set": engine.TEMPLATE_SET}
+    if wrong_source is not None:
+        receipt["different_carrier_original_rejected"] = True
     return receipt, browser
 
 

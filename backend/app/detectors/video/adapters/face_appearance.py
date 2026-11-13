@@ -26,6 +26,7 @@ from app.detectors.video.decode import DecodeError
 from app.engine.boundary import Deadline, DetectorTimeout
 from app.engine.detector import ActivationUse, Applicability, DetectorResult, InputUnit, UnitScore
 from app.evidence import face_paired_edge_binding as paired
+from app.evidence import face_short_carrier_binding as short_carriers
 from app.evidence import face_short_proposal_binding as proposal
 from app.evidence import face_short_window_binding as windows
 from app.evidence import face_spatial_cut_binding as cut
@@ -505,12 +506,18 @@ def _short_source(inputs):
 
 
 def _window_source(inputs):
-    if (not settings.video_face_short_window_review or settings.face_min_size != 48
-            or not isinstance(inputs, SequenceInputs) or (*inputs.encoding, inputs.codec_tag) != paired.ENCODING
+    if (settings.face_min_size != 48 or not isinstance(inputs, SequenceInputs)
             or len(inputs.table) != windows.COUNT):
         return False
+    encoding = (*inputs.encoding, inputs.codec_tag)
+    if encoding == paired.ENCODING and settings.video_face_short_window_review:
+        supported = windows.supported
+    elif encoding in short_carriers.ENCODINGS and settings.video_face_short_carrier_review:
+        supported = short_carriers.supported
+    else:
+        return False
     path = getattr(inputs.store, "path", None)
-    return path is not None and windows.supported(inputs.table, paired.ENCODING, face_return.source_carrier(path))
+    return path is not None and supported(inputs.table, encoding, face_return.source_carrier(path))
 
 
 def _qualified_hevc(inputs):
@@ -581,6 +588,10 @@ def _with_short_proposal(result, inputs, yunet, recognizer, deadline):
 def _with_short_windows(result, inputs, yunet, recognizer, deadline):
     table = inputs.table
     detail = result.details
+    encoding = (*getattr(inputs,"encoding",paired.ENCODING[:2]),getattr(inputs,"codec_tag",paired.ENCODING[2]))
+    carrier_metadata = short_carriers.source_metadata(table, encoding) if encoding in short_carriers.ENCODINGS else None
+    if carrier_metadata:
+        detail["face_short_windows_source"] = carrier_metadata
     coverage = [{"start_frame_index": start, "end_frame_index_exclusive": start+windows.WINDOW,
                  "status": "unassessed", "reason": "time_budget", "pixel_frames": 0,
                  "scheduled_frames": 0, "measured_face_frames": 0} for start in windows.WINDOW_STARTS]
@@ -652,9 +663,9 @@ def _with_short_windows(result, inputs, yunet, recognizer, deadline):
             (negative, a, b), proof, gaps = selected
             middle = min((i for i in local if a<=i<b), key=lambda i: (abs(2*i-a-b), i))
             start, end = offset+a, offset+b
-            record = {"method":windows.METHOD, "window_start_frame_index":offset,
+            record = {"method":short_carriers.METHOD if carrier_metadata else windows.METHOD, "window_start_frame_index":offset,
                       "time_base":table.time_base,"source_first_pts":table.pts[0],
-                      "source_encoding":list(paired.ENCODING),"source_carrier":"mp4",
+                      "source_encoding":list(encoding),"source_carrier":short_carriers.ENCODINGS.get(encoding,"mp4"),
                       "start_frame_index":start,"end_frame_index":end,"start_pts":table.pts[start],"end_pts":table.pts[end],
                       "start_stream_s":table.seconds(start),"end_stream_s":table.seconds(end),
                       "response":-negative,"response_hex":(-negative).hex(),"return_hex":[v.hex() for v in gaps],
@@ -805,7 +816,7 @@ class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
              *((f'The enabled brief proposal reads 120 pixel inputs and measures at most {proposal.MAX_FACE_READS} face inputs.',)
                if settings.video_face_unrouted_short_review else ()),
              *(("The enabled overlapping review reads 240 native pictures and compares three bounded face input sets.",)
-               if settings.video_face_short_window_review else ()),
+               if settings.video_face_short_window_review or settings.video_face_short_carrier_review else ()),
              *(("The enabled cut context reads up to 77 native pictures and detects at most three face boxes.",)
                if settings.video_face_spatial_cut_context else ()),
              'Face vectors stay in working memory.')))

@@ -154,7 +154,8 @@ def probe(ctx: StageContext) -> dict[str, Any]:
     the same frames (§3.3). A file without decodable video frames gets no table, and `decode` fails the analysis."""
     path = common.media_path(ctx)
     codec_tag = (settings.video_face_paired_edge_refinement or settings.video_face_unrouted_short_review
-                 or settings.video_face_spatial_cut_context or settings.video_face_short_window_review)
+                 or settings.video_face_spatial_cut_context or settings.video_face_short_window_review
+                 or settings.video_face_short_carrier_review)
     info = common.json_safe(ffprobe(path, include_codec_tag=True) if codec_tag else ffprobe(path))
     try:
         table = probe_frames(path, check=ctx.check)
@@ -1116,7 +1117,8 @@ def publish(ctx: StageContext) -> dict[str, Any]:
             count = len(ctx.outputs["probe"]["frame_table"]["pts"])
             result.manifest.sampling[face_return_coverage.KEY] = face_return_coverage.from_worker(coverage, count, bounded=bounded)
         if windows := details.get("face_short_windows_check"):
-            result.manifest.sampling[face_short_window_binding.KEY] = face_short_window_binding.coverage(windows)
+            coverage = face_short_window_binding.coverage(windows) | (details.get("face_short_windows_source") or {})
+            result.manifest.sampling[face_short_window_binding.KEY] = face_short_window_binding.checked(coverage, len(ctx.outputs["probe"]["frame_table"]["pts"]))
         break
     from app.evidence.video_audio import published_record
 

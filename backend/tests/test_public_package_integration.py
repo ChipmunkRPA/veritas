@@ -483,7 +483,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
                         'app.evidence.audio_binding', 'app.evidence.av_binding', 'app.evidence.audio_background_binding',
                         'app.evidence.audio_repetition_binding', 'app.evidence.audio_exact_repetition', 'app.evidence.audio_similarity_binding',
                         'app.evidence.face_interval_binding', 'app.evidence.face_boundary_binding', 'app.evidence.face_boundary_clock', 'app.evidence.face_alignment_context',
-                        'app.evidence.face_paired_edge_binding', 'app.evidence.face_short_proposal_binding', 'app.evidence.face_short_window_binding', 'app.evidence.face_spatial_cut_binding',
+                        'app.evidence.face_paired_edge_binding', 'app.evidence.face_short_proposal_binding', 'app.evidence.face_short_window_binding', 'app.evidence.face_short_carrier_binding', 'app.evidence.face_spatial_cut_binding',
                         'app.evidence.face_lighting_context', 'app.evidence.face_return_binding', 'app.evidence.face_return_coverage',
                         'app.evidence.mouth_local_hold_binding', 'app.evidence.source_geometry',
                         'app.evidence.video_packet_versions', 'app.evidence.picture_hold_binding', 'app.evidence.picture_sequence', 'app.evidence.sound_event_binding',
@@ -538,7 +538,7 @@ def test_native_source_verifier_checks_exif_oriented_original_and_donor_crops(tm
         assert "2 unannotated crops matched" in verify_image_source.check(archive, bundle, original)
 
 
-@pytest.mark.parametrize('name', ['face_interval_binding.py', 'face_short_window_binding.py', 'sound_event_binding.py', 'document_scope.py',
+@pytest.mark.parametrize('name', ['face_interval_binding.py', 'face_short_window_binding.py', 'face_short_carrier_binding.py', 'sound_event_binding.py', 'document_scope.py',
                                  'image_copy_similarity_binding.py', 'image_copy_affine_binding.py',
                                  'image_editor_preview_binding.py', 'stereo_binding.py'])
 def test_new_offline_binding_helpers_remain_standard_library_only(name):
@@ -555,10 +555,12 @@ def test_new_offline_binding_helpers_remain_standard_library_only(name):
             imports.add(node.module.split('.')[0])
             if node.module.startswith('app.'):
                 local.update((node.module, alias.name) for alias in node.names)
-    if name == 'face_short_window_binding.py':
+    if name in {'face_short_window_binding.py', 'face_short_carrier_binding.py'}:
         assert imports <= sys.stdlib_module_names | {'app'}
-        assert local == {('app.core.canonical', 'canonical_hash'), ('app.evidence', 'face_paired_edge_binding'),
-                         ('app.evidence', 'face_short_proposal_binding')}
+        shared = {('app.evidence', 'face_paired_edge_binding'), ('app.evidence', 'face_short_proposal_binding')}
+        extra = ({('app.core.canonical', 'canonical_hash'), ('app.evidence', 'face_short_carrier_binding')}
+                 if name == 'face_short_window_binding.py' else {('app.evidence', 'face_short_window_binding')})
+        assert local == shared | extra
     else:
         assert imports <= sys.stdlib_module_names
 

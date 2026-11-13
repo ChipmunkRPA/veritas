@@ -32,6 +32,7 @@ from app.evidence import (
     face_lighting_context,
     face_return_binding,
     face_return_coverage,
+    face_short_carrier_binding,
     face_short_proposal_binding,
     face_short_window_binding,
     face_spatial_cut_binding,
@@ -52,6 +53,7 @@ from app.evidence.video_packet_versions import (
     NESTED_VERSIONS,
     PAIRED_EDGE_VERSION,
     PICTURE_HOLD_VERSIONS,
+    SHORT_CARRIER_VERSION,
     SHORT_PROPOSAL_VERSION,
     SHORT_WINDOW_VERSION,
     SPATIAL_CUT_VERSION,
@@ -636,7 +638,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     scored_frames |= window_frames
     set_id = current_set_id(analysis)
     version = face_return_binding.METHOD_VERSIONS[return_candidates[-1]["face_return"]["method"]] if return_candidates else VERSION
-    if version not in {SHORT_PROPOSAL_VERSION, SHORT_WINDOW_VERSION} and any(face_boundary_binding.is_paired(item.get("face_boundary")) for item in chosen):
+    if version not in {SHORT_PROPOSAL_VERSION, SHORT_WINDOW_VERSION, SHORT_CARRIER_VERSION} and any(face_boundary_binding.is_paired(item.get("face_boundary")) for item in chosen):
         version = PAIRED_EDGE_VERSION
     if any(item.get("face_spatial_cut") for item in chosen):
         version = SPATIAL_CUT_VERSION
@@ -658,7 +660,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
             document["coverage"][face_return_coverage.KEY] = brief_review
         if window_review := face_short_window_binding.from_result(result, len(table)):
             document["coverage"][face_short_window_binding.KEY] = window_review
-            document["version"] = SHORT_WINDOW_VERSION
+            document["version"] = SHORT_CARRIER_VERSION if window_review.keys() >= face_short_carrier_binding.META else SHORT_WINDOW_VERSION
     except (KeyError, TypeError, ValueError) as error:
         raise PacketIntegrityError(str(error)) from error
     if VERSION in PICTURE_HOLD_VERSIONS:
@@ -877,7 +879,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
             scene_note = ("Background patterns outside the face were similar across both ends of the selected range. "
                           if face_return["method"] in face_return_binding.GUARDED_METHODS else
                           "The surrounding scene remained similar at both sampled boundaries. ")
-            if face_return["method"] in {face_short_proposal_binding.METHOD, face_short_window_binding.METHOD}:
+            if face_return["method"] in {face_short_proposal_binding.METHOD, *face_return_binding.WINDOW_METHODS}:
                 scene_note = "The measured areas near the face showed limited motion at both transitions. "
             packet.update(title="Brief face-change range to review", evidence_type="anomaly", claim_scope="sampled_window",
                           semantics=face_return["method"], face_return=face_return, affects_overall_confidence=False,

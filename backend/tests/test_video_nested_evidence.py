@@ -42,6 +42,7 @@ from app.evidence import (
     face_boundary_binding,
     face_return_binding,
     face_return_coverage,
+    face_short_carrier_binding,
     face_short_window_binding,
     face_spatial_cut_binding,
     service,
@@ -457,12 +458,41 @@ def test_overlapping_face_windows_require_matching_scope_and_shared_signal():
         start = binding.WINDOW_STARTS[index]
         windows[index].update(status="localized", measured_face_frames=12)
         document["packets"].append({"semantics": binding.METHOD, "signal_refs": [{"id": f"S{index}"}],
-            "face_return": {"window_start_frame_index": start, "source_first_pts": 0,
+            "face_return": {"method": binding.METHOD,"window_start_frame_index": start, "source_first_pts": 0,
                             "start_pts": (start+15)*1000,"end_pts": (start+21)*1000,
                             "scene_frame_inputs": [None]*120,"scheduled_frame_indices": [None]*12,"frame_inputs": [None]*12}})
     document["coverage"][binding.KEY] = binding.coverage(windows)
     with pytest.raises(ValueError, match="same confidence-neutral review check"):
         face_return_binding.validate_set(document)
+
+
+@pytest.mark.parametrize(("carrier", "encoding", "time_base", "end_pts"), [
+    ("webm", ["vp9", "yuv420p", "[0][0][0][0]"], "1/1000", 7967),
+    ("mp4", ["h264", "yuv420p", "avc1"], "1/30000", 239000),
+])
+def test_carrier_face_windows_bind_actual_ticks_and_scope_without_a_finding(carrier, encoding, time_base, end_pts):
+    proof, windows = face_short_carrier_binding, face_short_window_binding
+    native = [57 + proof.tick(i, Fraction(time_base), carrier) for i in range(windows.COUNT)]
+    assert native[-1] - native[0] == end_pts
+    if carrier == "webm":
+        assert native[1:4] == [90, 124, 157]
+    source = {"frame_count": windows.COUNT, "width": 1280, "height": 720, "time_base": time_base}
+    clock = {"source_encoding": encoding, "source_carrier": carrier, "source_first_pts": native[0],
+             "source_time_base": time_base}
+    disposition = [{"start_frame_index": start, "end_frame_index_exclusive": start + windows.WINDOW,
+                    "status": "no_distinct_range", "reason": None, "pixel_frames": windows.WINDOW,
+                    "scheduled_frames": 12, "measured_face_frames": 8} for start in windows.WINDOW_STARTS]
+    coverage = windows.coverage(disposition) | clock
+    document = {"version": "video-evidence-24", "source": source, "coverage": {windows.KEY: coverage}, "packets": []}
+    face_return_binding.validate_set(document)
+    proof.validate_metadata(coverage, source, table_pts=native)
+    native[63] += 1
+    with pytest.raises(ValueError, match="measured native carrier or cadence"):
+        proof.validate_metadata(coverage, source, table_pts=native)
+    with pytest.raises(ValueError, match="evidence version disagrees"):
+        face_return_binding.validate_set({**document, "version": "video-evidence-23"})
+    with pytest.raises(ValueError, match="measured native carrier or cadence"):
+        proof.validate_metadata({**coverage, "source_carrier": "mkv"}, source)
 
 
 def test_overlapping_face_window_timeout_preserves_incumbent_and_reports_unassessed():
@@ -726,7 +756,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
                         'app.evidence.audio_background_binding','app.evidence.audio_repetition_binding','app.evidence.audio_exact_repetition',
                         'app.evidence.audio_similarity_binding',
                         'app.evidence.av_binding','app.evidence.face_interval_binding','app.evidence.face_boundary_binding','app.evidence.face_boundary_clock','app.evidence.face_alignment_context',
-                        'app.evidence.face_paired_edge_binding','app.evidence.face_short_proposal_binding','app.evidence.face_short_window_binding','app.evidence.face_spatial_cut_binding',
+                        'app.evidence.face_paired_edge_binding','app.evidence.face_short_proposal_binding','app.evidence.face_short_window_binding','app.evidence.face_short_carrier_binding','app.evidence.face_spatial_cut_binding',
                         'app.evidence.face_lighting_context','app.evidence.face_return_binding','app.evidence.face_return_coverage',
                         'app.evidence.video_packet_versions','app.evidence.picture_hold_binding', 'app.evidence.picture_sequence',
                         'app.evidence.mouth_local_hold_binding','app.evidence.source_geometry',

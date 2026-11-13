@@ -31,6 +31,7 @@ from app.detectors.video.lipsync import source_mouth_patch
 from app.evidence import (
     face_boundary_binding,
     face_paired_edge_binding,
+    face_short_carrier_binding,
     face_short_proposal_binding,
     face_short_window_binding,
     face_spatial_cut_binding,
@@ -49,6 +50,7 @@ from app.evidence.video_packet_versions import (
     PAIRED_EDGE_VERSION,
     SECOND_HD_FACE_VERSION,
     SECOND_SHORT_FACE_VERSION,
+    SHORT_CARRIER_VERSION,
     SHORT_PROPOSAL_VERSION,
     SHORT_WINDOW_VERSION,
     SPATIAL_CUT_VERSION,
@@ -228,6 +230,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     }
     proposal = evidence["version"] == SHORT_PROPOSAL_VERSION
     windowed = evidence["version"] == SHORT_WINDOW_VERSION
+    carrier_windows = evidence["version"] == SHORT_CARRIER_VERSION
     paired = evidence["version"] in {PAIRED_EDGE_VERSION, SHORT_PROPOSAL_VERSION, SPATIAL_CUT_VERSION}
     if evidence["version"] in DENSE_FACE_VERSIONS:
         delivery = probe_container(original)
@@ -252,6 +255,14 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         if not face_short_window_binding.supported(table, (delivery.get("codec"), delivery.get("pix_fmt"), delivery.get("codec_tag")),
                                                     face_return.source_carrier(original)):
             raise ValueError("The original video differs from its overlapping face-window source profile")
+    if carrier_windows:
+        delivery = probe_container(original, include_codec_tag=True)
+        encoding = (delivery.get("codec"), delivery.get("pix_fmt"), delivery.get("codec_tag"))
+        carrier = face_return.source_carrier(original)
+        if (not face_short_carrier_binding.supported(table, encoding, carrier)
+                or any(evidence["coverage"][face_short_window_binding.KEY][key] != value
+                       for key, value in face_short_carrier_binding.source_metadata(table, encoding).items())):
+            raise ValueError("The original video differs from its measured face-window carrier or cadence")
 
     picture_hold_binding.validate(evidence)
     hold = evidence.get("picture_hold") or {}
@@ -318,7 +329,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         if record.get("method") == face_short_proposal_binding.METHOD:
             proposal_records.append(record)
             paired_indices.update(row["frame_index"] for row in record["scene_frame_inputs"])
-        if record.get("method") == face_short_window_binding.METHOD:
+        if record.get("method") in {face_short_window_binding.METHOD, face_short_carrier_binding.METHOD}:
             window_records.append(record)
             paired_indices.update(row["frame_index"] for row in record["scene_frame_inputs"])
         if record.get("method") == FINE_SCENE_METHOD:
@@ -412,11 +423,12 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         raise ValueError("The original video evidence version disagrees with its brief face proposal")
     for record in proposal_records:
         _verify_paired_motion(record, paired_pixels, proposal=True)
-    if window_records and not windowed:
+    if window_records and not (windowed or carrier_windows):
         raise ValueError("The original video evidence version disagrees with its overlapping face windows")
     for record in window_records:
         offset = record["window_start_frame_index"]
-        _verify_paired_motion(face_short_window_binding.local_record(record),
+        binding = face_short_carrier_binding if carrier_windows else face_short_window_binding
+        _verify_paired_motion(binding.local_record(record),
                               {i:paired_pixels[offset+i] for i in range(face_short_window_binding.WINDOW)}, proposal=True)
     if len(cut_records) != int(evidence["version"]==SPATIAL_CUT_VERSION):
         raise ValueError("The source evidence version disagrees with its picture-cut context")
@@ -434,7 +446,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                " Recomputed both guarded background boundaries and verified the source carrier." if guarded_codec else "")
             + (" Recomputed both paired face boundary motion measurements and verified the source carrier." if paired_records else "")
             + (" Recomputed the bounded face shortlist and both near-head motion boundaries." if proposal_records else "")
-            + (" Recomputed each overlapping window shortlist and both native face boundaries." if window_records else "")
+            + (" Recomputed each carrier-qualified window shortlist and both native face boundaries." if carrier_windows and window_records else "")
+            + (" Recomputed each overlapping window shortlist and both native face boundaries." if windowed and window_records else "")
             + (" Recomputed the surrounding-picture cut context and both native boundaries." if cut_records else "")
             + (f" Replayed every frame in the repeated-picture inspection ({hold_frames})." if hold_frames else "")
             + (" Recomputed the held mouth-region pixel measurements." if local_mouth and local_mouth["match"] else "")

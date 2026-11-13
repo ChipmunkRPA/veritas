@@ -109,7 +109,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         face_spatial_cut_binding.validate_set(evidence)
         face_return_binding.validate_set(evidence)
         face_return_coverage.validate_commitment(evidence, result.get(face_return_coverage.COMMITMENT))
-        window_packets = [p for p in evidence['packets'] if p.get('semantics') == face_short_window_binding.METHOD]
+        window_packets = [p for p in evidence['packets'] if p.get('semantics') in face_return_binding.WINDOW_METHODS]
         face_short_window_binding.validate_commitment(evidence, window_packets, result.get(face_short_window_binding.COMMITMENT))
         if window_packets:
             _require(any(check['id'] == window_packets[0]['signal_refs'][0]['id'] and check.get('status') == 'ok'
@@ -133,7 +133,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                          'Refined face timing differs from its corresponding public check')
             if packet.get('face_return') is not None or packet.get('semantics') in face_return_binding.METHOD_VERSIONS:
                 face_return_binding.validate_packet(packet, evidence['source'])
-                if packet['semantics'] != face_short_window_binding.METHOD:
+                if packet['semantics'] not in face_return_binding.WINDOW_METHODS:
                     measurement = canonical_hash(packet['face_return'])
                     commitment = ('second_short_face_change_measurement_sha256' if packet['semantics'] in face_return_binding.SECOND_METHODS
                                   else 'short_face_change_measurement_sha256')

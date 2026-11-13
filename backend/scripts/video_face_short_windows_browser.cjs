@@ -16,6 +16,7 @@ async function run() {
     await page.addInitScript(key => localStorage.setItem('veritas_api_key', key), fs.readFileSync(keyfile, 'utf8').trim());
     await page.goto(`${base}/analyses/${fixture.analysis_id}/media-evidence?view=plain`);
     const navigator = page.getByRole('region', { name: 'Selected video moments' });
+    const original = page.getByLabel('Original video evidence playback');
     const coverage = page.getByRole('region', { name: 'Overlapping face-change windows' });
     await coverage.waitFor({ timeout: 30000 });
     const coverageWords = await coverage.innerText();
@@ -34,6 +35,9 @@ async function run() {
       assert(words.includes(entry.times_s.map(value => `${value.toFixed(3)} s`).join('–')));
       for (const [position, role] of ['before', 'during', 'after'].entries()) {
         assert.match(words, new RegExp(`${role} flagged range · Frame ${entry.indices[position]}`, 'i'));
+        if (entry.anchor_times_s) {
+          assert(words.includes(`Source ${entry.anchor_times_s[position].toFixed(3)} s`));
+        }
       }
       const dimensions = [];
       for (const frame of entry.frames) {
@@ -49,12 +53,19 @@ async function run() {
       assert.equal(dimensions.filter(([w, h]) => w === 1280 && h === 720).length, 3);
       assert(dimensions.every(([w, h]) => w > 0 && h > 0));
       const index = entry.indices[1];
-      const second = (index / 30).toFixed(3);
+      const second = (entry.anchor_times_s?.[1] ?? index / 30).toFixed(3);
       await card.getByRole('button', { name: `Go to frame ${index} in playback` }).click();
       const selected = page.getByText(`Selected frame ${index}`, { exact: false });
       assert((await selected.innerText()).includes(`source ${second} s`));
       const moment = navigator.getByRole('button', { name: `Inspect ${entry.frames[1]} at source ${second} s` });
       assert.equal(await moment.getAttribute('aria-pressed'), 'true');
+      if (fixture.verify_browser_seek) {
+        await original.waitFor({ timeout: 15000 });
+        await page.waitForFunction(time => {
+          const video = document.querySelector('video[aria-label="Original video evidence playback"]');
+          return video?.readyState >= 1 && Math.abs(video.currentTime - time) < .05;
+        }, Number(second), { timeout: 15000 });
+      }
       receipts.push({ source_times_s: entry.times_s, images: dimensions, playback_selected_frame: index });
     }
     assert.equal(receipts.length, 2);
@@ -65,7 +76,8 @@ async function run() {
       assert((await link.first().innerText()).includes(entry.times_s.map(value => `${value.toFixed(3)} s`).join('–')));
     }
     assert.deepEqual(errors, []);
-    return { chrome: browser.version(), plain_evidence: true, coverage_windows: 3, exact_finding_links: 2, windows: receipts };
+    return { chrome: browser.version(), plain_evidence: true, coverage_windows: 3, exact_finding_links: 2,
+      ...(fixture.verify_browser_seek ? { actual_original_playback_seeks_verified: 2 } : {}), windows: receipts };
   } finally {
     await browser.close();
   }

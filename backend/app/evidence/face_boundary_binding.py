@@ -7,7 +7,12 @@ from fractions import Fraction
 from app.evidence import face_paired_edge_binding as paired
 from app.evidence.face_boundary_clock import COARSE_LIMIT, MAX_FRAMES, SCHEDULE_MARGIN, native_schedule
 from app.evidence.face_interval_binding import APPEARANCE_METHOD, face_context_box, validate_face_input
-from app.evidence.video_packet_versions import BOUNDARY_VERSIONS, PAIRED_EDGE_VERSION, SHORT_PROPOSAL_VERSION
+from app.evidence.video_packet_versions import (
+    BOUNDARY_VERSIONS,
+    PAIRED_EDGE_VERSION,
+    SHORT_PROPOSAL_VERSION,
+    SPATIAL_CUT_VERSION,
+)
 
 METHOD = "face-appearance-boundary/1"
 ROLES = ("before", "during", "after")
@@ -113,7 +118,7 @@ def source_inputs(record):
 def validate_set(document):
     count = sum(is_paired(packet.get("face_boundary")) for packet in document["packets"])
     version = document["version"]
-    if count != int(version == PAIRED_EDGE_VERSION) and not (version == SHORT_PROPOSAL_VERSION and count == 1):
+    if count != int(version == PAIRED_EDGE_VERSION) and not (version in {SHORT_PROPOSAL_VERSION, SPATIAL_CUT_VERSION} and count == 1):
         raise ValueError("The video evidence version disagrees with its paired timing measurement")
 
 
@@ -123,7 +128,7 @@ def validate_packet(packet: dict, source: dict, version: str, *, table_pts=None,
     record, frames = packet.get("face_boundary"), packet.get("face_boundary_frames")
     if (version not in BOUNDARY_VERSIONS or not isinstance(record, dict) or not isinstance(frames, list)
             or len(frames) != len(ROLES) or packet.get("affects_overall_confidence") is not False
-            or (is_paired(record) and version not in {PAIRED_EDGE_VERSION, SHORT_PROPOSAL_VERSION})
+            or (is_paired(record) and version not in {PAIRED_EDGE_VERSION, SHORT_PROPOSAL_VERSION, SPATIAL_CUT_VERSION})
             or (not is_paired(record) and version == PAIRED_EDGE_VERSION)
             or packet.get("semantics") != APPEARANCE_METHOD or len(packet["signal_refs"]) != 1):
         raise ValueError("Refined boundaries need a corresponding confidence-neutral face check")

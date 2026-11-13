@@ -18,6 +18,7 @@ from app.detectors.video import (
     face_return,
     face_return_fine_scene,
     face_short_proposal,
+    face_spatial_cut,
 )
 from app.detectors.video.adapters.common import CPU_ONLY, FULL_DEEP, video_spec
 from app.detectors.video.adapters.face_sequence import FAMILY, FaceSequenceReviewDetector, SequenceInputs
@@ -26,6 +27,7 @@ from app.engine.boundary import Deadline, DetectorTimeout
 from app.engine.detector import ActivationUse, Applicability, DetectorResult, InputUnit, UnitScore
 from app.evidence import face_paired_edge_binding as paired
 from app.evidence import face_short_proposal_binding as proposal
+from app.evidence import face_spatial_cut_binding as cut
 from app.evidence.face_intervals import bind_tracks
 from app.evidence.face_return_binding import (
     DENSE_FRAME_PROFILES,
@@ -47,6 +49,7 @@ RETURN_BUDGET_S = 12.0
 DETAIL_REPEAT_BUDGET_S = 4.0
 PAIRED_EDGE_BUDGET_S = 8.0
 SHORT_PROPOSAL_BUDGET_S = 12.0
+CUT_CONTEXT_BUDGET_S = 8.0
 COARSE_RESULT_RESERVE_S = 1.0
 
 
@@ -497,8 +500,63 @@ def _short_source(inputs):
     if (not settings.video_face_unrouted_short_review or settings.face_min_size != 48
             or not isinstance(inputs, SequenceInputs) or (*inputs.encoding, inputs.codec_tag) != paired.ENCODING):
         return False
+    return _qualified_hevc(inputs)
+
+
+def _qualified_hevc(inputs):
+    encoding = (*inputs.encoding, inputs.codec_tag)
+    if encoding != paired.ENCODING:
+        return False
     path = getattr(inputs.store, "path", None)
-    return path is not None and paired.supported(inputs.table, (*inputs.encoding, inputs.codec_tag), face_return.source_carrier(path))
+    return path is not None and paired.supported(inputs.table, encoding, face_return.source_carrier(path))
+
+
+def _with_spatial_cut(result, inputs, yunet, deadline):
+    if not settings.video_face_spatial_cut_context or settings.face_min_size != 48:
+        return result
+    coarse = result.details.get("face_sequence")
+    if not coarse or result.details.get("face_return") or not _qualified_hevc(inputs):
+        return result
+    table = inputs.table
+    a,b = (table.pts.index(coarse[key]) for key in ("start_pts","end_pts"))
+    if not 5<=b-a<=42:
+        return result
+    remaining = deadline.remaining() if deadline is not None else None
+    budget = CUT_CONTEXT_BUDGET_S if remaining is None else min(CUT_CONTEXT_BUDGET_S, remaining-COARSE_RESULT_RESERVE_S)
+    if budget<=0:
+        return result
+    stop = deadline.nested(budget) if deadline is not None else Deadline(budget)
+    schedule,face_schedule = cut.schedule(a,b)
+    gray,frames,faces = {},{},{}
+    try:
+        with closing(inputs.store.iter_many(schedule,timeout_s=budget)) as stream:
+            for i,rgb in stream:
+                stop.check("picture-cut context")
+                if not inputs.store.native_pts_verified(i):
+                    return result
+                frames[i] = {"frame_index":i,"pts":table.pts[i],"decoded_rgb_sha256":hashlib.sha256(rgb.tobytes()).hexdigest()}
+                gray[i] = face_spatial_cut.reduce_picture(rgb)
+                if i in face_schedule:
+                    observed = detect_faces(cv2.cvtColor(rgb,cv2.COLOR_RGB2BGR),detector=yunet,min_size=48)
+                    if len(observed)==1:
+                        faces[i] = {"frame_index":i,"bbox":dict(zip(("x","y","w","h"),observed[0].box(),strict=True))}
+        if set(gray)!=set(schedule) or len(faces)<2:
+            return result
+        measured,tiles = face_spatial_cut.paired_edges(gray,face_spatial_cut.face_box(faces.values()),(a,b),stop.check)
+        stop.check("picture-cut context")
+    except (DecodeError,DetectorTimeout,cv2.error,ValueError):
+        return result
+    if not measured or measured["score"] < cut.POINT:
+        return result
+    left,right = measured["interval"]
+    result.details["face_spatial_cut"] = {"method":cut.METHOD,"time_base":table.time_base,"source_first_pts":table.pts[0],
+        "source_encoding":list(paired.ENCODING),"source_carrier":"mp4","start_pts":table.pts[left],"end_pts":table.pts[right],
+        "start_stream_s":table.seconds(left),"end_stream_s":table.seconds(right),"start_frame_index":left,"end_frame_index":right,
+        "coarse_start_pts":coarse["start_pts"],"coarse_end_pts":coarse["end_pts"],"score_hex":measured["score"].hex(),"tiles":tiles,
+        **{key:measured[key] for key in ("shared_tiles","entry_tiles","exit_tiles","sectors")},
+        "face_inputs":[faces[i] for i in sorted(faces)],"frame_inputs":[frames[i] for i in schedule],
+        "anchors":dict(zip(cut.ROLES,(left-1,(left+right)//2,right),strict=True))}
+    return result
 
 
 def _with_short_proposal(result, inputs, yunet, recognizer, deadline):
@@ -622,6 +680,8 @@ class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
                if settings.video_face_paired_edge_refinement else ()),
              *((f'The enabled brief proposal reads 120 pixel inputs and measures at most {proposal.MAX_FACE_READS} face inputs.',)
                if settings.video_face_unrouted_short_review else ()),
+             *(("The enabled cut context reads up to 77 native pictures and detects at most three face boxes.",)
+               if settings.video_face_spatial_cut_context else ()),
              'Face vectors stay in working memory.')))
 
     def run(self, ctx):
@@ -688,4 +748,5 @@ class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
         result = _with_return(result, inputs, yunet, recognizer, ctx.deadline)
         result = _repeat_face_detail(result, inputs, recognizer, ctx.deadline)
         result = _with_paired_boundary(result, inputs, yunet, recognizer, ctx.deadline)
-        return _with_short_proposal(result, inputs, yunet, recognizer, ctx.deadline)
+        result = _with_short_proposal(result, inputs, yunet, recognizer, ctx.deadline)
+        return _with_spatial_cut(result, inputs, yunet, ctx.deadline)

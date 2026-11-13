@@ -1,0 +1,1700 @@
+{
+  "freeze": {
+    "pins": {
+      "crema_sources": "7dc11858e6e919a28ace0c5a00b1674266208eee76a3752e2e85628618d81320",
+      "grid_sources": "bba120480ff4afda17bbcb8d7e13a2c7a3ceac8faa617fbba2f7463f48737dbc",
+      "held_media": "fd74636b407c00948b33dcb464daa86aff341937b7cfefd20abe745e6ebc4b0f",
+      "held_receipt": "bc7b52b19ea1274e5cb67d96518f3e7d6ad44f1cd0a69eb10b1c2e9a4883f761",
+      "method": "b10faf728a1837db751ad98db4d9d5f908a7de11923842463363f872cf7d5b46",
+      "selection_media": "e6890758bb7acc4b1fd4a6ce8c8abc57001d1dacc948471491b79a6fc4a813d9",
+      "selection_receipt": "d69f74585ca7b2c76a93eaeafff29b90d0589707d2d7154d009a95093fa4a5b6"
+    },
+    "schema": "chipmunk.video-spatial-cut-context-transfer/1",
+    "spec": {
+      "canvas": [
+        320,
+        180
+      ],
+      "durations": [
+        5,
+        24
+      ],
+      "edge_neighborhood": 12,
+      "face_padding_in_box_widths": 0.22,
+      "gate": {
+        "maximum_wrong_ordinary_explanations": 1,
+        "maximum_wrong_swap_explanations": 0,
+        "minimum_cut_explanations": 8,
+        "minimum_cut_route_coverage": 0.8,
+        "minimum_source_groups": 4
+      },
+      "maximum_face_detector_inputs": 3,
+      "minimum_role_tiles": 5,
+      "minimum_scored_sector_groups": 2,
+      "minimum_signed_tile_change": 0.2,
+      "minimum_temporary_texture_tiles": 4,
+      "minimum_tile_texture": 2.5,
+      "points": [
+        0.1,
+        0.2,
+        0.3
+      ],
+      "rule": "Outside-face texture changes at both edges; median neighboring motion and local tone normalized. Require stable flanks and at least 5 independently changing tiles across 2 spatial sectors.",
+      "stable_context_around_edges": true,
+      "tile": 12,
+      "tile_search_radius": 3
+    },
+    "yunet_sha256": "8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4"
+  },
+  "gate": {
+    "coverage": true,
+    "enough_explanations": true,
+    "enough_groups": true,
+    "matched_edges": true,
+    "ordinary_preservation": true,
+    "swap_preservation": true
+  },
+  "held": [
+    {
+      "bank": "source_edits",
+      "condition": "original",
+      "group": 1,
+      "sha256": "fbb5ea606e766b028e95d3ed398108259f6bd1f50b7a7762613809d871c3f0bb",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "source_edits",
+      "condition": "two_swaps",
+      "group": 1,
+      "sha256": "e013049884133d9b24da6704b4277350adca5f4ca82d1b87c2d07256bb8fb9e5",
+      "status": "not_routed",
+      "truth": [
+        [
+          62,
+          68
+        ],
+        [
+          90,
+          98
+        ]
+      ]
+    },
+    {
+      "bank": "source_edits",
+      "condition": "tandem_two_swaps",
+      "group": 1,
+      "sha256": "1fcd4385bbdb6fe6fa234fec08a3ac8aecb17c90e0c524df1e8e820e8881a8e3",
+      "status": "not_routed",
+      "truth": [
+        [
+          62,
+          68
+        ],
+        [
+          90,
+          98
+        ]
+      ]
+    },
+    {
+      "bank": "source_edits",
+      "condition": "same_source_cuts",
+      "group": 1,
+      "sha256": "cdffc869dbd8fa59084468f1e693418e97e9039fe7134a740de3fd3df20aeb36",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "source_edits",
+      "condition": "cross_recording_cuts",
+      "group": 1,
+      "sha256": "d36d5bf46a35df50554b59b522a4020b3ced4364cd76795b2b5571fefade6014",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "source_edits",
+      "condition": "original",
+      "group": 2,
+      "sha256": "f303e345b27f633ce34312cc61cbcfdd809d8471bfd9f830357091061552942a",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "authored_cut": null,
+      "bank": "source_edits",
+      "coarse": [
+        71,
+        95
+      ],
+      "condition": "two_swaps",
+      "group": 2,
+      "native_reads": 59,
+      "original_ranges": [
+        [
+          71,
+          95
+        ]
+      ],
+      "result": null,
+      "sha256": "bd25a6fb06bac836886abbc0e749bdee22a49c9214ce452a84ffd3273c5e997d",
+      "status": "measured",
+      "tiles": 104,
+      "truth": [
+        [
+          67,
+          75
+        ],
+        [
+          94,
+          100
+        ]
+      ]
+    },
+    {
+      "authored_cut": null,
+      "bank": "source_edits",
+      "coarse": [
+        71,
+        95
+      ],
+      "condition": "tandem_two_swaps",
+      "group": 2,
+      "native_reads": 59,
+      "original_ranges": [
+        [
+          71,
+          95
+        ]
+      ],
+      "result": null,
+      "sha256": "f42e1d4c4bb4f19e57a42863538d583a84bcadc4e1b53eb965be703a17491bc1",
+      "status": "measured",
+      "tiles": 104,
+      "truth": [
+        [
+          67,
+          75
+        ],
+        [
+          94,
+          100
+        ]
+      ]
+    },
+    {
+      "bank": "source_edits",
+      "condition": "same_source_cuts",
+      "group": 2,
+      "sha256": "644348706d0cc1d00ac0d341356fd981a8ea88bc646e672b900243dcf448b040",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "source_edits",
+      "condition": "cross_recording_cuts",
+      "group": 2,
+      "sha256": "2208bcfeddf347e7dba6debe154da133910283b35118aa84fed6f1d3ceb4e089",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "source_edits",
+      "condition": "original",
+      "group": 3,
+      "sha256": "f4d1bb62c72e78eca8e9e02f582d8ffcb85cc1a006528663f8a81032938a5525",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "source_edits",
+      "condition": "two_swaps",
+      "group": 3,
+      "sha256": "809911ab956ee39e5442dbefd1f62defcd3e7f601b4f7bd2a70bf52fb0ef33f3",
+      "status": "not_routed",
+      "truth": [
+        [
+          64,
+          70
+        ],
+        [
+          88,
+          96
+        ]
+      ]
+    },
+    {
+      "bank": "source_edits",
+      "condition": "tandem_two_swaps",
+      "group": 3,
+      "sha256": "4781bd460a59aa33851971788751d5d93d5cebb9f996b5a3ab75802d0a767af5",
+      "status": "not_routed",
+      "truth": [
+        [
+          64,
+          70
+        ],
+        [
+          88,
+          96
+        ]
+      ]
+    },
+    {
+      "bank": "source_edits",
+      "condition": "same_source_cuts",
+      "group": 3,
+      "sha256": "838390736758ba30a3e43a260fff13e0a7c6e8efaf9b433decd3e041b5b3d58a",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "source_edits",
+      "condition": "cross_recording_cuts",
+      "group": 3,
+      "sha256": "14fe955d7def7b3490928e87007e2a551f6b37acc8369965d1feb9c86cb00c01",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "source_edits",
+      "condition": "original",
+      "group": 4,
+      "sha256": "4928e449111fec2d7cd7908fa62332ed8714da1bc6b7bf5c90bdfa9bd67444f4",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "authored_cut": null,
+      "bank": "source_edits",
+      "coarse": [
+        71,
+        95
+      ],
+      "condition": "two_swaps",
+      "group": 4,
+      "native_reads": 59,
+      "original_ranges": [
+        [
+          71,
+          95
+        ]
+      ],
+      "result": null,
+      "sha256": "d95700949644c9d8147d445c294ad4862c2c095107cd7c021187c3f4563990f8",
+      "status": "measured",
+      "tiles": 122,
+      "truth": [
+        [
+          65,
+          73
+        ],
+        [
+          91,
+          97
+        ]
+      ]
+    },
+    {
+      "authored_cut": null,
+      "bank": "source_edits",
+      "coarse": [
+        71,
+        95
+      ],
+      "condition": "tandem_two_swaps",
+      "group": 4,
+      "native_reads": 59,
+      "original_ranges": [
+        [
+          71,
+          95
+        ]
+      ],
+      "result": null,
+      "sha256": "155654682944d3f5ed8adfa391a57a8cbb70b44d09470e57a026a84a232e2b70",
+      "status": "measured",
+      "tiles": 122,
+      "truth": [
+        [
+          65,
+          73
+        ],
+        [
+          91,
+          97
+        ]
+      ]
+    },
+    {
+      "bank": "source_edits",
+      "condition": "same_source_cuts",
+      "group": 4,
+      "sha256": "b63c5426a8ac7ecfc39d4f791699fcf40e5b5dd44d0ada06228a168e4ac9df81",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "source_edits",
+      "condition": "cross_recording_cuts",
+      "group": 4,
+      "sha256": "390905c9eacde329a7d8d9892016be132355d91aa6ca025f2dff210e071633c1",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "source_edits",
+      "condition": "original",
+      "group": 5,
+      "sha256": "c8d91489c7c50cebc9727939d5d30eea792a85924ea26d102022f031611ea568",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "source_edits",
+      "condition": "two_swaps",
+      "group": 5,
+      "sha256": "e3dda3edd68aa151e9c0095b73610dda6749df01f0171c7bd65b468535227039",
+      "status": "not_routed",
+      "truth": [
+        [
+          62,
+          68
+        ],
+        [
+          90,
+          98
+        ]
+      ]
+    },
+    {
+      "bank": "source_edits",
+      "condition": "tandem_two_swaps",
+      "group": 5,
+      "sha256": "b6d8359c95a2e87ff1865256724cf8dcbb49682f8ba71d814fd29027cb6b1aae",
+      "status": "not_routed",
+      "truth": [
+        [
+          62,
+          68
+        ],
+        [
+          90,
+          98
+        ]
+      ]
+    },
+    {
+      "bank": "source_edits",
+      "condition": "same_source_cuts",
+      "group": 5,
+      "sha256": "44deafb17ce6847294a488d2a6654dfdcd5253aed10255bf0738de10e2870160",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "source_edits",
+      "condition": "cross_recording_cuts",
+      "group": 5,
+      "sha256": "84e9d41b9e6d2d341c57e7bc3c90e4955679cf9a7a55571ae5c2d22c9b6605e3",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "source_edits",
+      "condition": "original",
+      "group": 6,
+      "sha256": "d2f0c2421a724a9294a6212ddf7fd7b6cbe7a7689a4012918ffabec9222d7721",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "authored_cut": null,
+      "bank": "source_edits",
+      "coarse": [
+        71,
+        95
+      ],
+      "condition": "two_swaps",
+      "group": 6,
+      "native_reads": 59,
+      "original_ranges": [
+        [
+          71,
+          95
+        ]
+      ],
+      "result": null,
+      "sha256": "ad145615196d3d5b1becaeaa24c954314f3435cff7b693d4f09c4c3842c1bd12",
+      "status": "measured",
+      "tiles": 110,
+      "truth": [
+        [
+          67,
+          75
+        ],
+        [
+          94,
+          100
+        ]
+      ]
+    },
+    {
+      "authored_cut": null,
+      "bank": "source_edits",
+      "coarse": [
+        71,
+        95
+      ],
+      "condition": "tandem_two_swaps",
+      "group": 6,
+      "native_reads": 59,
+      "original_ranges": [
+        [
+          71,
+          95
+        ]
+      ],
+      "result": null,
+      "sha256": "81724befdc6587e51ef7025e49a7e0cc4733c1e752a3f2c3b5097aeb003ab3a8",
+      "status": "measured",
+      "tiles": 110,
+      "truth": [
+        [
+          67,
+          75
+        ],
+        [
+          94,
+          100
+        ]
+      ]
+    },
+    {
+      "bank": "source_edits",
+      "condition": "same_source_cuts",
+      "group": 6,
+      "sha256": "52fbd2a7407eb9407e390dbd39e1a587766f2abc847b075ab73fac0d79b84248",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "source_edits",
+      "condition": "cross_recording_cuts",
+      "group": 6,
+      "sha256": "9f6d321137e19d24ec57c986761a8650286e80b50b963613a1a6ce5b87ffe2da",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "source_edits",
+      "condition": "original",
+      "group": 7,
+      "sha256": "0b25e04e4b5d44cb9c907580b762048a617d676e6c16622e7a4a8d6536c5a5ad",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "authored_cut": null,
+      "bank": "source_edits",
+      "coarse": [
+        79,
+        95
+      ],
+      "condition": "two_swaps",
+      "group": 7,
+      "native_reads": 51,
+      "original_ranges": [
+        [
+          79,
+          95
+        ],
+        [
+          88,
+          96
+        ]
+      ],
+      "result": null,
+      "sha256": "aefb23231a4df494110ea9c348c135b8e902c305b9c2570cdf21a570f83ddfcc",
+      "status": "measured",
+      "tiles": 46,
+      "truth": [
+        [
+          64,
+          70
+        ],
+        [
+          88,
+          96
+        ]
+      ]
+    },
+    {
+      "bank": "source_edits",
+      "condition": "tandem_two_swaps",
+      "group": 7,
+      "sha256": "fa5cdc25800da255bd44698b4c6de1eae244640a83f11ac4bfc1611d02e76f73",
+      "status": "not_routed",
+      "truth": [
+        [
+          64,
+          70
+        ],
+        [
+          88,
+          96
+        ]
+      ]
+    },
+    {
+      "bank": "source_edits",
+      "condition": "same_source_cuts",
+      "group": 7,
+      "sha256": "a416391d23541ac4dc372751f6242509ae71c6b34c9bcd4d17087fc99603c0e4",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "source_edits",
+      "condition": "cross_recording_cuts",
+      "group": 7,
+      "sha256": "5a0670793efe265cd6c842c1f235279c3f8c190f3b573262b83c24b682385df7",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "source_edits",
+      "condition": "original",
+      "group": 8,
+      "sha256": "6dbae889e0b7ce9a05b012f332ec70bc1cba34d8c03a467daf60bac1aa4d5496",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "source_edits",
+      "condition": "two_swaps",
+      "group": 8,
+      "sha256": "93c3fe3e8484ac8ff29ab4e32df5d98a279b917e8486ebcbd19e71d1e27fad80",
+      "status": "not_routed",
+      "truth": [
+        [
+          65,
+          73
+        ],
+        [
+          91,
+          97
+        ]
+      ]
+    },
+    {
+      "authored_cut": null,
+      "bank": "source_edits",
+      "coarse": [
+        71,
+        95
+      ],
+      "condition": "tandem_two_swaps",
+      "group": 8,
+      "native_reads": 59,
+      "original_ranges": [
+        [
+          71,
+          95
+        ]
+      ],
+      "result": null,
+      "sha256": "fd226e4e69219989558f4520765475b70bc8352f96f7e552cd5dc8ba38b9607e",
+      "status": "measured",
+      "tiles": 87,
+      "truth": [
+        [
+          65,
+          73
+        ],
+        [
+          91,
+          97
+        ]
+      ]
+    },
+    {
+      "bank": "source_edits",
+      "condition": "same_source_cuts",
+      "group": 8,
+      "sha256": "efd522a6c296dce5d7c82db7f87ebd44919fe63202d04a327f0eee5a385aadb8",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "bank": "source_edits",
+      "condition": "cross_recording_cuts",
+      "group": 8,
+      "sha256": "7464bb66e98a8a4455e77ef0db1ae885742981246f81741d4fb23f723dc1e5c3",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "authored_cut": [
+        63,
+        74
+      ],
+      "bank": "speaker_cuts",
+      "coarse": [
+        55,
+        71
+      ],
+      "condition": "person_switch",
+      "group": 1,
+      "native_reads": 51,
+      "original_ranges": [
+        [
+          55,
+          71
+        ]
+      ],
+      "result": {
+        "anchors": [
+          {
+            "index": 62,
+            "pts": 62000,
+            "sha256": "4b50199f686b4292358f5db16ca571ca1d620b4329099db36f271191622d5204"
+          },
+          {
+            "index": 63,
+            "pts": 63000,
+            "sha256": "165971f72287b9b725520184d561d9c33357cc2d7bb8c364945a89440fcc8ed1"
+          },
+          {
+            "index": 68,
+            "pts": 68000,
+            "sha256": "74ba8826d766a26c7ddae4261f324c5cd87ec7f959e7cfe7d5ddeeaa44472064"
+          },
+          {
+            "index": 73,
+            "pts": 73000,
+            "sha256": "8606500bcd70c52a4728656ebd91de0d627a68b57ee95f9ea980cf39b87e17d4"
+          },
+          {
+            "index": 74,
+            "pts": 74000,
+            "sha256": "ed6cb0b1c832f3716616d82d424d93d8db58ed0f6a71edbf1bfba54b661a2101"
+          }
+        ],
+        "entry_tiles": 10,
+        "exit_tiles": 11,
+        "interval": [
+          63,
+          74
+        ],
+        "pts": [
+          63000,
+          74000
+        ],
+        "score": 0.5058210492134094,
+        "sectors": 4,
+        "shared_tiles": 10
+      },
+      "sha256": "fa0d18706ba4fc9ae1cf721d0511f37353aeadba1ea8b1cd023ce2171f5cccbb",
+      "status": "measured",
+      "tiles": 93,
+      "truth": []
+    },
+    {
+      "authored_cut": [
+        63,
+        74
+      ],
+      "bank": "speaker_cuts",
+      "coarse": [
+        55,
+        71
+      ],
+      "condition": "tandem_person_switch",
+      "group": 1,
+      "native_reads": 51,
+      "original_ranges": [
+        [
+          55,
+          71
+        ]
+      ],
+      "result": {
+        "anchors": [
+          {
+            "index": 62,
+            "pts": 62000,
+            "sha256": "389a2f9329b19f5c142b93253660d79e48cbb7ceb7e02336356d05e589ffd218"
+          },
+          {
+            "index": 63,
+            "pts": 63000,
+            "sha256": "e3b25d2489e8e8631f7a8aeab9a4d9d8bf26e2042ec71b8401fbe4907a68078f"
+          },
+          {
+            "index": 68,
+            "pts": 68000,
+            "sha256": "c12e816fff1b739e1f80f0be5c7de175bd7be0d6432d589b9c73033c1a81d5c9"
+          },
+          {
+            "index": 73,
+            "pts": 73000,
+            "sha256": "c8b9e49a366f8ea79a8a62b4c625447082102b7964b776808d98d007d8dfa911"
+          },
+          {
+            "index": 74,
+            "pts": 74000,
+            "sha256": "29a1662ec51c5c0c0ae6602fe9d8ed510e57a297125e32ffff34329023830f79"
+          }
+        ],
+        "entry_tiles": 10,
+        "exit_tiles": 11,
+        "interval": [
+          63,
+          74
+        ],
+        "pts": [
+          63000,
+          74000
+        ],
+        "score": 0.49176841974258423,
+        "sectors": 4,
+        "shared_tiles": 10
+      },
+      "sha256": "0b3314174cf30070d93fa7edc8b8289faf7f241ebeea98d126a90ff018b8b3ea",
+      "status": "measured",
+      "tiles": 93,
+      "truth": []
+    },
+    {
+      "authored_cut": [
+        85,
+        96
+      ],
+      "bank": "speaker_cuts",
+      "coarse": [
+        79,
+        95
+      ],
+      "condition": "person_switch",
+      "group": 2,
+      "native_reads": 51,
+      "original_ranges": [
+        [
+          79,
+          95
+        ],
+        [
+          85,
+          97
+        ]
+      ],
+      "result": {
+        "anchors": [
+          {
+            "index": 84,
+            "pts": 84000,
+            "sha256": "c036a08162b7d97af79f0353f6ec7f6b1442b611b3ae070701e77b5f8b408534"
+          },
+          {
+            "index": 85,
+            "pts": 85000,
+            "sha256": "f3050e0c4b690c441a340d1fe2d9f059a2689fa9c085d24d6e416cec4bcf9d6b"
+          },
+          {
+            "index": 90,
+            "pts": 90000,
+            "sha256": "105d8c51b3ecab7a22e325adcd945df9cc0830b072a2ce67eecc27c9bfffb98d"
+          },
+          {
+            "index": 95,
+            "pts": 95000,
+            "sha256": "92a3ab47efe215fb5bac3e181940459ee490a658c53a77e7904f1f70df4f539e"
+          },
+          {
+            "index": 96,
+            "pts": 96000,
+            "sha256": "e33266f0ae1507398119c51e697187ca59382addf364627a785bc11efb771f5d"
+          }
+        ],
+        "entry_tiles": 9,
+        "exit_tiles": 9,
+        "interval": [
+          85,
+          96
+        ],
+        "pts": [
+          85000,
+          96000
+        ],
+        "score": 0.4119628369808197,
+        "sectors": 2,
+        "shared_tiles": 8
+      },
+      "sha256": "fec3134ebfe07d6c2d97c0718c88a0feadbdbc10649d9e13a0b64034249cddd0",
+      "status": "measured",
+      "tiles": 76,
+      "truth": []
+    },
+    {
+      "authored_cut": [
+        85,
+        96
+      ],
+      "bank": "speaker_cuts",
+      "coarse": [
+        79,
+        95
+      ],
+      "condition": "tandem_person_switch",
+      "group": 2,
+      "native_reads": 51,
+      "original_ranges": [
+        [
+          79,
+          95
+        ],
+        [
+          85,
+          97
+        ]
+      ],
+      "result": {
+        "anchors": [
+          {
+            "index": 84,
+            "pts": 84000,
+            "sha256": "80912c3c37b4a16608f1a303d0c7e4f3bf88d652c193cb63f1d85d95ee1ddb20"
+          },
+          {
+            "index": 85,
+            "pts": 85000,
+            "sha256": "a8ecbb2c44f9a532a81fcdf18ef20056622dfb921311056a96171bd3a4999fe5"
+          },
+          {
+            "index": 90,
+            "pts": 90000,
+            "sha256": "5540d4c2e5e1edee065f8faca597e75a7fd2489881f6041a91cf5e95496b6409"
+          },
+          {
+            "index": 95,
+            "pts": 95000,
+            "sha256": "5ced14c1989a08f04aa6f13184bb227c3c743a2034491ecde2aafc0b89aa93f1"
+          },
+          {
+            "index": 96,
+            "pts": 96000,
+            "sha256": "78c2e1e44bdf841ef7c4a1b18e284ca999f2eb37b93e73a04ad3a6b71b42c7dc"
+          }
+        ],
+        "entry_tiles": 9,
+        "exit_tiles": 9,
+        "interval": [
+          85,
+          96
+        ],
+        "pts": [
+          85000,
+          96000
+        ],
+        "score": 0.402024507522583,
+        "sectors": 2,
+        "shared_tiles": 8
+      },
+      "sha256": "5f6090d1cf6f2388149aa25496da33c69014413c156eab87fff0b49507e206af",
+      "status": "measured",
+      "tiles": 76,
+      "truth": []
+    },
+    {
+      "authored_cut": [
+        63,
+        74
+      ],
+      "bank": "speaker_cuts",
+      "coarse": [
+        63,
+        79
+      ],
+      "condition": "person_switch",
+      "group": 3,
+      "native_reads": 51,
+      "original_ranges": [
+        [
+          63,
+          79
+        ]
+      ],
+      "result": {
+        "anchors": [
+          {
+            "index": 62,
+            "pts": 62000,
+            "sha256": "be1333bf9695a20cbd193c325f29fc38296a76fb00faf19b06b18fea746648db"
+          },
+          {
+            "index": 63,
+            "pts": 63000,
+            "sha256": "39ea83d2066ea0cb8826626f1693ca04510e8caac6e50a1335a4e24a16e2a630"
+          },
+          {
+            "index": 68,
+            "pts": 68000,
+            "sha256": "32b98f39acd6ff05e375590817c68f27ed18988e321d7eb200586b85cbb2a743"
+          },
+          {
+            "index": 73,
+            "pts": 73000,
+            "sha256": "6ee2174bfc9d62a18fdd78164539944093bfe80f9313e8ac3e5b2d3aa327a567"
+          },
+          {
+            "index": 74,
+            "pts": 74000,
+            "sha256": "577126f1d17cda496acd384c5e8d98499209dd8e2989ddb8b877b1f624152f61"
+          }
+        ],
+        "entry_tiles": 11,
+        "exit_tiles": 12,
+        "interval": [
+          63,
+          74
+        ],
+        "pts": [
+          63000,
+          74000
+        ],
+        "score": 0.4591773450374603,
+        "sectors": 3,
+        "shared_tiles": 10
+      },
+      "sha256": "0bf9100475c02fc8666af0b89524e5ab02eb490c11b961103684fdbc4ada7bca",
+      "status": "measured",
+      "tiles": 82,
+      "truth": []
+    },
+    {
+      "authored_cut": [
+        63,
+        74
+      ],
+      "bank": "speaker_cuts",
+      "coarse": [
+        63,
+        79
+      ],
+      "condition": "tandem_person_switch",
+      "group": 3,
+      "native_reads": 51,
+      "original_ranges": [
+        [
+          63,
+          79
+        ]
+      ],
+      "result": {
+        "anchors": [
+          {
+            "index": 62,
+            "pts": 62000,
+            "sha256": "97fb21113769d6c8da165f42713050c67e6528ac7989c232d17de1daa6b0be4e"
+          },
+          {
+            "index": 63,
+            "pts": 63000,
+            "sha256": "9cb9aa115887b91a28e25856331025d7623e53fed0ed804e06d967f8128372dd"
+          },
+          {
+            "index": 68,
+            "pts": 68000,
+            "sha256": "f4f96d8324c25094fdafcd91df65b44be1ac1550aedddb72eec2e3de9e761754"
+          },
+          {
+            "index": 73,
+            "pts": 73000,
+            "sha256": "8810fdef12049615d9d32032f416833592bd9d5ad719a224b147822c49698462"
+          },
+          {
+            "index": 74,
+            "pts": 74000,
+            "sha256": "97dde5742eac567cb816d86209ee1ffcbcb0c170867671481cbe19b27fc42c01"
+          }
+        ],
+        "entry_tiles": 11,
+        "exit_tiles": 11,
+        "interval": [
+          63,
+          74
+        ],
+        "pts": [
+          63000,
+          74000
+        ],
+        "score": 0.45688045024871826,
+        "sectors": 3,
+        "shared_tiles": 10
+      },
+      "sha256": "37e912dcedae4da1426d5b85059309bcf9912cdfa06812d2dd363360c3e01c6e",
+      "status": "measured",
+      "tiles": 72,
+      "truth": []
+    },
+    {
+      "authored_cut": [
+        85,
+        96
+      ],
+      "bank": "speaker_cuts",
+      "coarse": [
+        79,
+        95
+      ],
+      "condition": "person_switch",
+      "group": 4,
+      "native_reads": 51,
+      "original_ranges": [
+        [
+          79,
+          95
+        ],
+        [
+          85,
+          97
+        ]
+      ],
+      "result": {
+        "anchors": [
+          {
+            "index": 84,
+            "pts": 84000,
+            "sha256": "f0d9cedcf3581f658d38ad5df157ab7bc8992ac0c706332c936eb8b539c57a5c"
+          },
+          {
+            "index": 85,
+            "pts": 85000,
+            "sha256": "967c573bef3c7c6ea2a8df83012a0d8052fdfc1a92b12c35cd4e147028103311"
+          },
+          {
+            "index": 90,
+            "pts": 90000,
+            "sha256": "4830e3a8ef7602c016b0e2ff3ed566b7766e797b9fa943d9d2711c2ae48831f5"
+          },
+          {
+            "index": 95,
+            "pts": 95000,
+            "sha256": "ca7c9aa6dff76f8282357e101d176a992eceb21c41c706c0af391f0fc87d390d"
+          },
+          {
+            "index": 96,
+            "pts": 96000,
+            "sha256": "901a15e182b478ab6a7974fd5838f54725eefc2fe53b2b857a543c44e86199b7"
+          }
+        ],
+        "entry_tiles": 16,
+        "exit_tiles": 18,
+        "interval": [
+          85,
+          96
+        ],
+        "pts": [
+          85000,
+          96000
+        ],
+        "score": 0.5028918981552124,
+        "sectors": 4,
+        "shared_tiles": 16
+      },
+      "sha256": "0fae7dd9a6689a9de0369a12b326bf915b8e1c1c3f704a5121f3c6c98e711b5f",
+      "status": "measured",
+      "tiles": 82,
+      "truth": []
+    },
+    {
+      "authored_cut": [
+        85,
+        96
+      ],
+      "bank": "speaker_cuts",
+      "coarse": [
+        79,
+        95
+      ],
+      "condition": "tandem_person_switch",
+      "group": 4,
+      "native_reads": 51,
+      "original_ranges": [
+        [
+          79,
+          95
+        ],
+        [
+          85,
+          97
+        ]
+      ],
+      "result": {
+        "anchors": [
+          {
+            "index": 84,
+            "pts": 84000,
+            "sha256": "24502bfbf4e15e6fc2e35707f2214883abb16c04804ee8f8c444333ff587a8cf"
+          },
+          {
+            "index": 85,
+            "pts": 85000,
+            "sha256": "c9332f9803a8dd22d85a17b5cfb6940ba2447590d24125f0c1f3ae230bd4d949"
+          },
+          {
+            "index": 90,
+            "pts": 90000,
+            "sha256": "b76818d70bde6f1441d2969b678204d9949e6a101851c09fad9521b0afacb6aa"
+          },
+          {
+            "index": 95,
+            "pts": 95000,
+            "sha256": "93455d9af8981cbf3469463b9f3c5dee4ecc05594c196b89af69b53fc0ce716f"
+          },
+          {
+            "index": 96,
+            "pts": 96000,
+            "sha256": "92b9770c78b48e3a8ec832471e84062143a53b45a921bac5a90e4e2a52bfa74c"
+          }
+        ],
+        "entry_tiles": 16,
+        "exit_tiles": 18,
+        "interval": [
+          85,
+          96
+        ],
+        "pts": [
+          85000,
+          96000
+        ],
+        "score": 0.5704846680164337,
+        "sectors": 3,
+        "shared_tiles": 16
+      },
+      "sha256": "6fe01508b3d3a454fd53ada57b7e1ca1c2e5d391d1fad84541c095c8e0dc2878",
+      "status": "measured",
+      "tiles": 82,
+      "truth": []
+    },
+    {
+      "authored_cut": [
+        63,
+        74
+      ],
+      "bank": "speaker_cuts",
+      "coarse": [
+        55,
+        71
+      ],
+      "condition": "person_switch",
+      "group": 5,
+      "native_reads": 51,
+      "original_ranges": [
+        [
+          55,
+          71
+        ]
+      ],
+      "result": {
+        "anchors": [
+          {
+            "index": 62,
+            "pts": 62000,
+            "sha256": "7921d54db4d91f1e97964c112ffa95d8b4ee8bce24067b0e92e2bc586dbb238d"
+          },
+          {
+            "index": 63,
+            "pts": 63000,
+            "sha256": "60a6602b24cf13c65fe5b56835aac94655beb7d94566000983cc0fcac0d4f66e"
+          },
+          {
+            "index": 68,
+            "pts": 68000,
+            "sha256": "eef681db1f3d89c1a6cc23986c8776833a9614c4e11b4685f6003fafdff61a2f"
+          },
+          {
+            "index": 73,
+            "pts": 73000,
+            "sha256": "0529d2e5ec8dd2c4d58d2cc4730147729bd9ac9bc40529e35e3de61d7ab47f71"
+          },
+          {
+            "index": 74,
+            "pts": 74000,
+            "sha256": "d6262afb4f83d453afc2e154a652f19f5b5bd6cb552a562c51c57cf71ed61127"
+          }
+        ],
+        "entry_tiles": 9,
+        "exit_tiles": 9,
+        "interval": [
+          63,
+          74
+        ],
+        "pts": [
+          63000,
+          74000
+        ],
+        "score": 0.3549387454986572,
+        "sectors": 3,
+        "shared_tiles": 9
+      },
+      "sha256": "3454aa85aef9f68ea0ba01983912a7186173b49e4b5c4e9e4252a0d625eb11b0",
+      "status": "measured",
+      "tiles": 99,
+      "truth": []
+    },
+    {
+      "authored_cut": [
+        63,
+        74
+      ],
+      "bank": "speaker_cuts",
+      "coarse": [
+        63,
+        79
+      ],
+      "condition": "tandem_person_switch",
+      "group": 5,
+      "native_reads": 51,
+      "original_ranges": [
+        [
+          63,
+          79
+        ]
+      ],
+      "result": {
+        "anchors": [
+          {
+            "index": 62,
+            "pts": 62000,
+            "sha256": "3d11969a391ab27d6d8aa1fa72cdb9b41c9ec4cd13156622494869c65b29664f"
+          },
+          {
+            "index": 63,
+            "pts": 63000,
+            "sha256": "db1e23a38e86f2d4c6e482f9d08b6f014f8f74b5a5a1a35f3077a10415e49398"
+          },
+          {
+            "index": 68,
+            "pts": 68000,
+            "sha256": "7033bc984534ef1eceb81980fc940524aac5ff11e943ed970eba1ec6325689ab"
+          },
+          {
+            "index": 73,
+            "pts": 73000,
+            "sha256": "15f40c9bd2526757e52f6bdfe905fa18b38e9027519d1bf753a0eae6f8c03711"
+          },
+          {
+            "index": 74,
+            "pts": 74000,
+            "sha256": "d02eddb7be52096b6d176cf9231d84fe93b7ec1c77850db301d9bf0d5acecb11"
+          }
+        ],
+        "entry_tiles": 9,
+        "exit_tiles": 10,
+        "interval": [
+          63,
+          74
+        ],
+        "pts": [
+          63000,
+          74000
+        ],
+        "score": 0.3069017231464386,
+        "sectors": 3,
+        "shared_tiles": 9
+      },
+      "sha256": "72cf3b405dfca7ccd1ea55eb274b52a58fada0742bcc6cb9f5e16620f41739c7",
+      "status": "measured",
+      "tiles": 99,
+      "truth": []
+    },
+    {
+      "authored_cut": [
+        85,
+        96
+      ],
+      "bank": "speaker_cuts",
+      "coarse": [
+        79,
+        95
+      ],
+      "condition": "person_switch",
+      "group": 6,
+      "native_reads": 51,
+      "original_ranges": [
+        [
+          79,
+          95
+        ],
+        [
+          85,
+          97
+        ]
+      ],
+      "result": {
+        "anchors": [
+          {
+            "index": 84,
+            "pts": 84000,
+            "sha256": "96c9e119086c12a0040e7f3efb2f5d0b792165479f2f89554106334b8fc5d325"
+          },
+          {
+            "index": 85,
+            "pts": 85000,
+            "sha256": "7b5d514d1373f7cd7031a9d003704379cdf243f7b3d78e1c25f46dc16f555c5b"
+          },
+          {
+            "index": 90,
+            "pts": 90000,
+            "sha256": "08ff69678e49b8d6d7d570881b286330210c0b8b6b4aace027ae1037c8bd061d"
+          },
+          {
+            "index": 95,
+            "pts": 95000,
+            "sha256": "d42c494f146fed57d323bcae84a376bc7c613f965ac7b4334e0d6762260ec237"
+          },
+          {
+            "index": 96,
+            "pts": 96000,
+            "sha256": "af94c449312b7a8bf4a7054cd8f31a83d2a92be5d6fd6307e1576fb394bdbd04"
+          }
+        ],
+        "entry_tiles": 5,
+        "exit_tiles": 5,
+        "interval": [
+          85,
+          96
+        ],
+        "pts": [
+          85000,
+          96000
+        ],
+        "score": 0.23544222116470337,
+        "sectors": 2,
+        "shared_tiles": 5
+      },
+      "sha256": "a44e7081efd770e04bbd3b20aabb532c8c6e628fef2f3f7f7810cfae21c6382c",
+      "status": "measured",
+      "tiles": 73,
+      "truth": []
+    },
+    {
+      "authored_cut": [
+        85,
+        96
+      ],
+      "bank": "speaker_cuts",
+      "coarse": [
+        79,
+        95
+      ],
+      "condition": "tandem_person_switch",
+      "group": 6,
+      "native_reads": 51,
+      "original_ranges": [
+        [
+          79,
+          95
+        ],
+        [
+          85,
+          97
+        ]
+      ],
+      "result": null,
+      "sha256": "024afab894c2ffb52be447b3e85878679fb70eb2e346732c26149f9e4f5e7748",
+      "status": "measured",
+      "tiles": 73,
+      "truth": []
+    },
+    {
+      "bank": "speaker_cuts",
+      "condition": "person_switch",
+      "group": 7,
+      "sha256": "ac5d2f113c0e74b5f70a3ef47dd1e7318cfba0c03c46c7487b5131d74cf796cd",
+      "status": "not_routed",
+      "truth": []
+    },
+    {
+      "authored_cut": [
+        63,
+        74
+      ],
+      "bank": "speaker_cuts",
+      "coarse": [
+        63,
+        79
+      ],
+      "condition": "tandem_person_switch",
+      "group": 7,
+      "native_reads": 51,
+      "original_ranges": [
+        [
+          63,
+          79
+        ]
+      ],
+      "result": {
+        "anchors": [
+          {
+            "index": 62,
+            "pts": 62000,
+            "sha256": "23309a45a7a6f463cb20ea32e1c67ca1b924ab3239499c7c92bcae43fc2d01ed"
+          },
+          {
+            "index": 63,
+            "pts": 63000,
+            "sha256": "2f39d5e121b6a09e7c20ad3196a140e991d4f03a757706e0914271bb34d0bbcb"
+          },
+          {
+            "index": 68,
+            "pts": 68000,
+            "sha256": "14ccb794202649b416903367bfa753fd0aea928bebf3dc59045a65fb3e9bf2f7"
+          },
+          {
+            "index": 73,
+            "pts": 73000,
+            "sha256": "a0da4acbce5b915ca87c9d1c5ae76256c36ced138f9c570754c0337bf317caeb"
+          },
+          {
+            "index": 74,
+            "pts": 74000,
+            "sha256": "9c08cd4b5244d5c447ab96d3a7228b02abd041c8318a92398f655171831abfea"
+          }
+        ],
+        "entry_tiles": 9,
+        "exit_tiles": 10,
+        "interval": [
+          63,
+          74
+        ],
+        "pts": [
+          63000,
+          74000
+        ],
+        "score": 0.680291622877121,
+        "sectors": 2,
+        "shared_tiles": 8
+      },
+      "sha256": "d28ad15f1505bcdbdbc23dcb7c48ef10336a59f08beed40f6c727f94d8dfd129",
+      "status": "measured",
+      "tiles": 80,
+      "truth": []
+    },
+    {
+      "authored_cut": [
+        85,
+        96
+      ],
+      "bank": "speaker_cuts",
+      "coarse": [
+        79,
+        95
+      ],
+      "condition": "person_switch",
+      "group": 8,
+      "native_reads": 51,
+      "original_ranges": [
+        [
+          79,
+          95
+        ],
+        [
+          85,
+          97
+        ]
+      ],
+      "result": {
+        "anchors": [
+          {
+            "index": 84,
+            "pts": 84000,
+            "sha256": "ff4ea455576afed1ebcdb0f118e0afc85cad6a07a6df2ae96212cd04facad398"
+          },
+          {
+            "index": 85,
+            "pts": 85000,
+            "sha256": "70fd4df022d0bd9a96ef42a39b5b520bcca4c5cdd0925a8fae88e52c234289ca"
+          },
+          {
+            "index": 90,
+            "pts": 90000,
+            "sha256": "b38bfd94e49057034b4e11a83a8567c2404468cba12792ecd5b0e0ba52f9cd3f"
+          },
+          {
+            "index": 95,
+            "pts": 95000,
+            "sha256": "cf6cf7984d41c4c3076f67ef254ae1b5b7270470aaacbc9b438c69ab82014b42"
+          },
+          {
+            "index": 96,
+            "pts": 96000,
+            "sha256": "f99f122a8d65eb7bd19f784f231a02cb4325992ec14479990e3d6f3dc5cee0a0"
+          }
+        ],
+        "entry_tiles": 15,
+        "exit_tiles": 14,
+        "interval": [
+          85,
+          96
+        ],
+        "pts": [
+          85000,
+          96000
+        ],
+        "score": 0.633445143699646,
+        "sectors": 2,
+        "shared_tiles": 14
+      },
+      "sha256": "6b2269a8918c9b45990c972e23372f093d01b120093d422ee916a25abbdbdba1",
+      "status": "measured",
+      "tiles": 87,
+      "truth": []
+    },
+    {
+      "authored_cut": [
+        85,
+        96
+      ],
+      "bank": "speaker_cuts",
+      "coarse": [
+        79,
+        95
+      ],
+      "condition": "tandem_person_switch",
+      "group": 8,
+      "native_reads": 51,
+      "original_ranges": [
+        [
+          79,
+          95
+        ],
+        [
+          85,
+          97
+        ]
+      ],
+      "result": {
+        "anchors": [
+          {
+            "index": 84,
+            "pts": 84000,
+            "sha256": "0f3a4ac71db199bf07d54131c5a1267422d57c1a892cd227d56d38ac36f59ab1"
+          },
+          {
+            "index": 85,
+            "pts": 85000,
+            "sha256": "bc7c0cc056e3a324079e2795d1d610243e737860fccd414c8fe1b0148dbabb9d"
+          },
+          {
+            "index": 90,
+            "pts": 90000,
+            "sha256": "37e9d62793f6168073670233b4d66567c200498b6b5ef4fadb216b024bfcea58"
+          },
+          {
+            "index": 95,
+            "pts": 95000,
+            "sha256": "cf292e9e8719037cb75f0ab51078d48ef50bfb07a6df99eadd4b6f160701efcd"
+          },
+          {
+            "index": 96,
+            "pts": 96000,
+            "sha256": "7725a32da33caa93f65aed20cf2e84820bf714a73202570f004ef2f05dc199aa"
+          }
+        ],
+        "entry_tiles": 16,
+        "exit_tiles": 14,
+        "interval": [
+          85,
+          96
+        ],
+        "pts": [
+          85000,
+          96000
+        ],
+        "score": 0.6189416944980621,
+        "sectors": 2,
+        "shared_tiles": 14
+      },
+      "sha256": "34fcd3ec101bb33d446d9ae4ff72eacee73fafef20640ae57b919e01c645c977",
+      "status": "measured",
+      "tiles": 87,
+      "truth": []
+    }
+  ],
+  "metrics": {
+    "cut_exact": 13,
+    "cut_files": 16,
+    "cut_measured": 15,
+    "cut_routed": 15,
+    "cut_wrong": 0,
+    "files": 56,
+    "measured": 23,
+    "routed": 23,
+    "source_groups_with_cut_explanation": 7,
+    "swap_routed": 8,
+    "wrong_ordinary": 0,
+    "wrong_swaps": 0
+  },
+  "passed": true,
+  "point": {
+    "point": 0.3,
+    "selection": [
+      {
+        "metrics": {
+          "cut_exact": 10,
+          "cut_files": 10,
+          "cut_measured": 10,
+          "cut_routed": 10,
+          "cut_wrong": 0,
+          "files": 61,
+          "measured": 14,
+          "routed": 14,
+          "source_groups_with_cut_explanation": 5,
+          "swap_routed": 4,
+          "wrong_ordinary": 0,
+          "wrong_swaps": 0
+        },
+        "point": 0.1
+      },
+      {
+        "metrics": {
+          "cut_exact": 10,
+          "cut_files": 10,
+          "cut_measured": 10,
+          "cut_routed": 10,
+          "cut_wrong": 0,
+          "files": 61,
+          "measured": 14,
+          "routed": 14,
+          "source_groups_with_cut_explanation": 5,
+          "swap_routed": 4,
+          "wrong_ordinary": 0,
+          "wrong_swaps": 0
+        },
+        "point": 0.2
+      },
+      {
+        "metrics": {
+          "cut_exact": 10,
+          "cut_files": 10,
+          "cut_measured": 10,
+          "cut_routed": 10,
+          "cut_wrong": 0,
+          "files": 61,
+          "measured": 14,
+          "routed": 14,
+          "source_groups_with_cut_explanation": 5,
+          "swap_routed": 4,
+          "wrong_ordinary": 0,
+          "wrong_swaps": 0
+        },
+        "point": 0.3
+      }
+    ],
+    "selection_sha256": "ddf9a4bf2b540e1eefac0c55438ad8f51a8a6d6783a0ad6f4aa396f3fe4c5aa9"
+  }
+}

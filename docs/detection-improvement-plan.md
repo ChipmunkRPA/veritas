@@ -97,6 +97,10 @@ integration remains unfinished.
 
 ## Progress on 12 November
 
+- The [picture-cut context check](video-spatial-cut-context-transfer-2026-11-12.md)
+  explained 13 of 15 routed ordinary cutaways at their exact authored
+  boundaries. It left the separately reported brief face changes intact and
+  carries no overall confidence weight.
 - The [cross-camera HDR study](image-gainmap-cross-camera-2026-11-12.md)
   expanded gain-map extraction from three to eight of ten originals. The
   fixed union localized 12 of 16 controlled edits and flagged 17 of 64

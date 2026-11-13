@@ -22,6 +22,7 @@ from app.detectors.video import (
     face_return,
     face_return_fine_scene,
     face_short_proposal,
+    face_spatial_cut,
     picture_motion,
 )
 from app.detectors.video.decode import DecodedFrame, FrameTable, decode_frames, probe_frames
@@ -31,6 +32,7 @@ from app.evidence import (
     face_boundary_binding,
     face_paired_edge_binding,
     face_short_proposal_binding,
+    face_spatial_cut_binding,
     mouth_local_hold_binding,
     picture_hold_binding,
     picture_sequence,
@@ -47,6 +49,7 @@ from app.evidence.video_packet_versions import (
     SECOND_HD_FACE_VERSION,
     SECOND_SHORT_FACE_VERSION,
     SHORT_PROPOSAL_VERSION,
+    SPATIAL_CUT_VERSION,
 )
 from app.reports.public_verify import SCHEMA
 from app.reports.verify_image_source import _matches
@@ -222,7 +225,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         GUARDED_CODEC_FACE_VERSION, GUARDED_720P30_FACE_VERSION, SECOND_SHORT_FACE_VERSION, SECOND_HD_FACE_VERSION,
     }
     proposal = evidence["version"] == SHORT_PROPOSAL_VERSION
-    paired = evidence["version"] in {PAIRED_EDGE_VERSION, SHORT_PROPOSAL_VERSION}
+    paired = evidence["version"] in {PAIRED_EDGE_VERSION, SHORT_PROPOSAL_VERSION, SPATIAL_CUT_VERSION}
     if evidence["version"] in DENSE_FACE_VERSIONS:
         delivery = probe_container(original)
         encoding = delivery.get("codec"), delivery.get("pix_fmt")
@@ -272,15 +275,22 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     pictures, mouths, faces, scenes = defaultdict(list), defaultdict(list), defaultdict(list), defaultdict(list)
     fine_records, guarded_records, paired_records, background_indices, background_frames = [], [], [], set(), {}
     proposal_records, paired_indices, paired_pixels = [], set(), {}
+    cut_records, cut_indices, cut_pixels = [], set(), {}
     interpolated = set(table.interpolated)
     packets = [*evidence["packets"], *(evidence.get("av") or {}).get("packets", [])]
     for packet in packets:
         _verify_clip_clock(packet, table, interpolated)
         validate_face_boundary(packet, source, evidence["version"], table_pts=table.pts, interpolated=interpolated)
+        face_spatial_cut_binding.validate_packet(packet, source, evidence["version"], table_pts=table.pts, interpolated=interpolated)
         validate_face_return(packet, source, table_pts=table.pts, interpolated=interpolated,
                              rotation=table.rotation, truncated=table.truncated)
-        for item in (*packet["frames"], *packet.get("face_boundary_frames", ())):
+        for item in (*packet["frames"], *packet.get("face_boundary_frames", ()), *packet.get("face_spatial_cut_frames", ())):
             pictures[item["anchor"]["frame_index"]].append((packet, item))
+        if cut := packet.get("face_spatial_cut"):
+            cut_records.append(cut)
+            for row in cut["frame_inputs"]:
+                scenes[row["frame_index"]].append(row)
+                cut_indices.add(row["frame_index"])
         if packet.get("semantics") == "mouth_audio_correlation":
             for row in packet["window"]["frame_inputs"]:
                 mouths[row["frame_index"]].append((packet, row))
@@ -353,6 +363,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                 background_frames[index] = frame.rgb
             if index in paired_indices:
                 paired_pixels[index] = face_paired_edge.reduced_rgb(frame.rgb)
+            if index in cut_indices:
+                cut_pixels[index] = face_spatial_cut.reduce_picture(frame.rgb)
     if found != indices:
         raise ValueError("The decoder did not return every referenced native frame")
     if _sha(original) != digest:
@@ -388,6 +400,15 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         raise ValueError("The original video evidence version disagrees with its brief face proposal")
     for record in proposal_records:
         _verify_paired_motion(record, paired_pixels, proposal=True)
+    if len(cut_records) != int(evidence["version"]==SPATIAL_CUT_VERSION):
+        raise ValueError("The source evidence version disagrees with its picture-cut context")
+    for cut in cut_records:
+        coarse = (table.pts.index(cut["coarse_start_pts"]),table.pts.index(cut["coarse_end_pts"]))
+        observed,tiles = face_spatial_cut.paired_edges(cut_pixels,face_spatial_cut.face_box(cut["face_inputs"]),coarse)
+        if (not observed or observed["interval"] != [cut["start_frame_index"],cut["end_frame_index"]] or cut["tiles"] != tiles
+                or any(observed[key]!=cut[key] for key in ("shared_tiles","entry_tiles","exit_tiles","sectors"))
+                or not math.isclose(observed["score"],float.fromhex(cut["score_hex"]),rel_tol=0,abs_tol=.000001)):
+            raise ValueError("The original video does not reproduce its surrounding-picture cut context")
     return (f"Original SHA-256 and the source frame clock matched. Verified native frames ({len(found)}), "
             f"original images or crops ({images}), mouth patches ({patches}), and aligned face inputs ({alignments})."
             + (f" Recomputed fine background boundaries ({fine_edges})." if fine_edges else "")
@@ -395,6 +416,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                " Recomputed both guarded background boundaries and verified the source carrier." if guarded_codec else "")
             + (" Recomputed both paired face boundary motion measurements and verified the source carrier." if paired_records else "")
             + (" Recomputed the bounded face shortlist and both near-head motion boundaries." if proposal_records else "")
+            + (" Recomputed the surrounding-picture cut context and both native boundaries." if cut_records else "")
             + (f" Replayed every frame in the repeated-picture inspection ({hold_frames})." if hold_frames else "")
             + (" Recomputed the held mouth-region pixel measurements." if local_mouth and local_mouth["match"] else "")
             + (" Recomputed the exact moving-sequence comparison." if sequence is not None else "")

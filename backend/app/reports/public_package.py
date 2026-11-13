@@ -57,6 +57,7 @@ def public_result(result: dict) -> dict:
         details = signal.get("details") or {}
         for key, commitment in (("whole_face_review", "paired_face_measurement_sha256"),
                                 ("face_boundary", "face_boundary_measurement_sha256"),
+                                ("face_spatial_cut", "face_spatial_cut_measurement_sha256"),
                                 ("face_return", "short_face_change_measurement_sha256"),
                                 ("face_return_secondary", "second_short_face_change_measurement_sha256")):
             if record := details.get(key):

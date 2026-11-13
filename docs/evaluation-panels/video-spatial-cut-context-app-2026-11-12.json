@@ -1,0 +1,130 @@
+{
+  "app_receipt_sha256": "a92938c76caa147d3fbe39120a1aa13f9995eb0e917e7fb9c6d73f4519a6a5ac",
+  "browser": {
+    "chrome": "157.0.8103.51",
+    "dimensions": [
+      [
+        1280,
+        720
+      ],
+      [
+        960,
+        540
+      ],
+      [
+        1280,
+        720
+      ],
+      [
+        960,
+        540
+      ],
+      [
+        1280,
+        720
+      ],
+      [
+        960,
+        540
+      ]
+    ],
+    "plain_evidence": true,
+    "playback_seek_frame": 68,
+    "verified_images": 6
+  },
+  "cases": {
+    "feature_disabled": {
+      "brief_face_change_packets": 0,
+      "coarse_packets": 1,
+      "file_sha256": "fa0d18706ba4fc9ae1cf721d0511f37353aeadba1ea8b1cd023ce2171f5cccbb",
+      "picture_cut_packets": 0,
+      "version": "video-evidence-11"
+    },
+    "ordinary_cut": {
+      "brief_face_change_packets": 0,
+      "coarse_packets": 1,
+      "different_original_rejected": true,
+      "exact_source_images": [
+        {
+          "frame": 62,
+          "kind": "original",
+          "pts": 62000,
+          "role": "before",
+          "sha256": "a94d073f820496ebbf63aee5d680f1454d3c636180b8dbb42700ee99a3df8624"
+        },
+        {
+          "frame": 62,
+          "kind": "context",
+          "pts": 62000,
+          "role": "before",
+          "sha256": "762d7ea245b0dbd5677a823ed33f28e0607c572278e51973d45f22e0d9601c3d"
+        },
+        {
+          "frame": 68,
+          "kind": "original",
+          "pts": 68000,
+          "role": "during",
+          "sha256": "517f230fbf6397812a71f0fa0d570e6c67c2f770104d50e28336055255571827"
+        },
+        {
+          "frame": 68,
+          "kind": "context",
+          "pts": 68000,
+          "role": "during",
+          "sha256": "7d4ef6854576c9f7fcc11cc53f413808d098e48d3a8ac063973cbf8a8fd3692d"
+        },
+        {
+          "frame": 74,
+          "kind": "original",
+          "pts": 74000,
+          "role": "after",
+          "sha256": "e99dc36cfd78a01e5195f25dcabd5bac70fce07c635f45c52dfe75ecd5316be6"
+        },
+        {
+          "frame": 74,
+          "kind": "context",
+          "pts": 74000,
+          "role": "after",
+          "sha256": "eece2e743d55babdfa92314b22c8d1724c7249f3863bf091c6dad70da6a68490"
+        }
+      ],
+      "file_sha256": "fa0d18706ba4fc9ae1cf721d0511f37353aeadba1ea8b1cd023ce2171f5cccbb",
+      "measured_frames": [
+        63,
+        74
+      ],
+      "pdf_api_json_agree": true,
+      "picture_cut_packets": 1,
+      "representative_frames": {
+        "after": 74,
+        "before": 62,
+        "during": 68
+      },
+      "signed_original_replay": true,
+      "source_time_s": [
+        2.1,
+        2.467
+      ],
+      "version": "video-evidence-22"
+    },
+    "ordinary_original": {
+      "brief_face_change_packets": 0,
+      "coarse_packets": 0,
+      "file_sha256": "fbb5ea606e766b028e95d3ed398108259f6bd1f50b7a7762613809d871c3f0bb",
+      "picture_cut_packets": 0,
+      "version": "video-evidence-11"
+    },
+    "short_swap": {
+      "brief_face_change_packets": 1,
+      "coarse_packets": 0,
+      "file_sha256": "e013049884133d9b24da6704b4277350adca5f4ca82d1b87c2d07256bb8fb9e5",
+      "picture_cut_packets": 0,
+      "version": "video-evidence-21"
+    }
+  },
+  "held_receipt_sha256": "4e02f8c28f328423ee570110e1b8236f52f64b21481b69d5a2d78d1a266bc768",
+  "overall_decision_identical_flag_on_off": true,
+  "schema": "chipmunk.video-spatial-cut-context-app/1",
+  "simulated_paid_jobs": 4,
+  "unpaid_jobs": 0
+}

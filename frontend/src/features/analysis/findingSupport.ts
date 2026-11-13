@@ -58,6 +58,12 @@ function videoLocation(packet: VideoEvidencePacket): LocatedPacket | null {
   const frames = (packet.frames ?? []).filter(validFrame)
   const frame = frames.find((item) => item.is_peak) ?? frames[0]
   if (!frame) return null
+  const cut = packet.face_spatial_cut
+  if (cut && finite(cut.start_stream_s) && finite(cut.end_stream_s) && cut.end_stream_s > cut.start_stream_s
+    && packet.face_spatial_cut_frames?.some(validFrame)) {
+    return { packet, label: `${packet.id} · Picture-cut context ${seconds(cut.start_stream_s)}–${seconds(cut.end_stream_s)} (source clock)`,
+      scope: 'video_frames', note: 'Picture detail outside the face changed at both ends. The three original full frames show the surrounding picture.' }
+  }
   const boundary = packet.face_boundary
   if (boundary?.method === 'face-appearance-paired-edge/1'
     && finite(boundary.start_stream_s) && finite(boundary.end_stream_s) && boundary.end_stream_s > boundary.start_stream_s

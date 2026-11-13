@@ -12,7 +12,7 @@ import struct
 import wave
 
 from app.core.canonical import canonical_hash
-from app.evidence import document_scope, face_boundary_binding, face_return_coverage
+from app.evidence import document_scope, face_boundary_binding, face_return_coverage, face_spatial_cut_binding
 from app.evidence.face_alignment_context import validate as validate_face_alignment
 from app.evidence.face_boundary_binding import validate_packet as validate_face_boundary
 from app.evidence.face_interval_binding import validate_packet as validate_face_interval
@@ -98,12 +98,19 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
 
         validate_picture_hold(evidence)
         face_boundary_binding.validate_set(evidence)
+        face_spatial_cut_binding.validate_set(evidence)
         face_return_binding.validate_set(evidence)
         face_return_coverage.validate_commitment(evidence, result.get(face_return_coverage.COMMITMENT))
         for packet in evidence.get('packets', []):
             validate_clip_binding(packet, evidence['source'])
             validate_face_interval(packet, evidence['source'])
             validate_face_boundary(packet, evidence['source'], evidence['version'])
+            face_spatial_cut_binding.validate_packet(packet, evidence['source'], evidence['version'])
+            if cut := packet.get('face_spatial_cut'):
+                _require(any(check['id'] == packet['signal_refs'][0]['id'] and check.get('status') == 'ok'
+                             and check.get('face_spatial_cut_measurement_sha256') == canonical_hash(cut)
+                             for check in result.get('checks', [])),
+                         'Picture-cut context differs from its corresponding public check')
             if boundary := packet.get('face_boundary'):
                 measurement = canonical_hash(boundary)
                 _require(any(check['id'] == packet['signal_refs'][0]['id'] and check.get('status') == 'ok'

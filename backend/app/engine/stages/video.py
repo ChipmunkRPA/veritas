@@ -85,7 +85,12 @@ from app.engine.fusion.runtime import DECLARED_AI_VERBAL
 from app.engine.profiles import SAMPLING
 from app.engine.runner import StageContext
 from app.engine.stages import common
-from app.evidence import face_return_binding, face_return_coverage, picture_hold_binding
+from app.evidence import (
+    face_return_binding,
+    face_return_coverage,
+    face_spatial_cut_binding,
+    picture_hold_binding,
+)
 from app.evidence.audio_binding import (
     VOICE_CLOCK_LIMIT,
     VOICE_CLOCK_POLICY,
@@ -147,7 +152,7 @@ def probe(ctx: StageContext) -> dict[str, Any]:
     """Stream facts, the per-frame pts table and the seeded sampling plan. The output is persisted, so a resumed run decodes
     the same frames (§3.3). A file without decodable video frames gets no table, and `decode` fails the analysis."""
     path = common.media_path(ctx)
-    codec_tag = settings.video_face_paired_edge_refinement or settings.video_face_unrouted_short_review
+    codec_tag = settings.video_face_paired_edge_refinement or settings.video_face_unrouted_short_review or settings.video_face_spatial_cut_context
     info = common.json_safe(ffprobe(path, include_codec_tag=True) if codec_tag else ffprobe(path))
     try:
         table = probe_frames(path, check=ctx.check)
@@ -935,7 +940,9 @@ def synthesise(ctx: StageContext) -> dict[str, Any]:
                     first += " The separate brief face-change check could not assess this clip."
             elif sequence:
                 title, first = "Possible face-change range", sequence_observation(sequence)
-                if is_paired(boundary := details.get("face_boundary")):
+                if cut := details.get("face_spatial_cut"):
+                    title, first = "Picture-cut context for a face change", face_spatial_cut_binding.observation(cut)
+                elif is_paired(boundary := details.get("face_boundary")):
                     title = "Refined face-change range to review"
                     first = (f"Two nearby face transitions narrow the review to {boundary['start_stream_s']:.3f}–"
                              f"{boundary['end_stream_s']:.3f} s on the source clock. The broader face check supplies context.")
@@ -980,6 +987,9 @@ def _native_render_anchors(ctx: StageContext, frame_store: FrameStore) -> list[d
     for entry in (ctx.outputs.get("detect") or {}).get("detectors", []):
         details = entry.get("details") or {}
         inputs = []
+        if cut := details.get("face_spatial_cut"):
+            inputs.extend(cut["frame_inputs"])
+            refined_indices.update(row["frame_index"] for row in cut["frame_inputs"])
         if boundary := details.get("face_boundary"):
             boundary_inputs = face_boundary_source_inputs(boundary)
             refined_indices.update(item["frame_index"] for item in boundary_inputs)

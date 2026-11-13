@@ -95,6 +95,9 @@ The [six-picture proposal study](video-face-unrouted-short-transfer-2026-11-12.m
 recounts exact interval gains and ordinary cutaways separately from inherited
 Full findings. Native replay reopens the representative source frames and
 both nearby motion measurements.
+The [picture-cut context study](video-spatial-cut-context-transfer-2026-11-12.md)
+replays both ends of ordinary speaker cutaways flagged by the face check.
+Its evidence reader verifies the surrounding picture against the original.
 The [subject-context comparison](video-face-subject-context-2026-11-12.md)
 checks whether the area below the face helps recognize ordinary speaker cuts.
 The [near-head transfer](video-face-near-head-transfer-2026-11-12.md) adds

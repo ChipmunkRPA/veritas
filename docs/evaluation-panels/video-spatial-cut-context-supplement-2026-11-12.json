@@ -1,0 +1,398 @@
+{
+  "candidate_point": 0.3,
+  "clock_conversion": "CREMA-D unchanged 30 fps timing; RTFS 25-to-30 fps frame duplication with nearest rounding, scaled to 720p and cropped to first 120 output pictures. No blending.",
+  "encoder_flags": [
+    "-map",
+    "0:v:0",
+    "-an",
+    "-c:v",
+    "libx265",
+    "-preset",
+    "ultrafast",
+    "-crf",
+    "26",
+    "-threads",
+    "1",
+    "-x265-params",
+    "pools=1:frame-threads=1:log-level=error",
+    "-pix_fmt",
+    "yuv420p",
+    "-tag:v",
+    "hvc1",
+    "-video_track_timescale",
+    "30000",
+    "-movflags",
+    "+faststart"
+  ],
+  "expected": "Ordinary gain should not be marked as a shot cut. A cut explanation should match its authored range. Unrouted controls do not test the texture step.",
+  "freeze_sha256": "7227d8625ffba2a596d3b9e7f90504a5e6339586096d50860cc8363c6def336f",
+  "media": {
+    "video-face-scale-context-holdout-2026-11-12-v2": "f0ca2a280c1e270485fe01dd418a6f143df3e1c15a71294516db045736621584",
+    "video-face-scene-continuity-2026-11-12": "3553ac71a786922d06079fb0d99a8b3ff3b2550798f16179b8e9ab213b3a1ce7"
+  },
+  "method_sha256": "b10faf728a1837db751ad98db4d9d5f908a7de11923842463363f872cf7d5b46",
+  "original_rtfs_role_separation_verified": true,
+  "original_rtfs_roster_commitment": "ed2162ad9be00b6b6541937ae17bdbbecbd851d95505fad5e5905e402ac9a1d1",
+  "results": [
+    {
+      "bank": "CREMA-D",
+      "coarse": [
+        [
+          55,
+          71
+        ]
+      ],
+      "condition": "cutaway",
+      "expected": [
+        56,
+        72
+      ],
+      "media_sha256": "11f0bdbe17923afbd3def1d4d55529bca84bcf94cb7f41f594384bcc977f4adc",
+      "observed_cut": [
+        56,
+        72
+      ],
+      "response": 0.38431769609451294,
+      "short_range": null,
+      "source_delivery_sha256": "877795434a6b9f9a2d300aeb903c10bcad315652323528bc37f0ac2bd4eb603b",
+      "status": "measured"
+    },
+    {
+      "bank": "CREMA-D",
+      "coarse": [],
+      "condition": "gain",
+      "expected": [
+        56,
+        72
+      ],
+      "media_sha256": "c43ff9d1649bec4a3c8c59c57033f7f183783c9440b100ad7362a4a7d13dcf61",
+      "observed_cut": null,
+      "response": null,
+      "short_range": null,
+      "source_delivery_sha256": "289ca340a732ab13c53ff124e9ce6d140780530e2a1484fe5be74f9bd1adfe48",
+      "status": "not_routed"
+    },
+    {
+      "bank": "CREMA-D",
+      "coarse": [
+        [
+          63,
+          79
+        ]
+      ],
+      "condition": "cutaway",
+      "expected": [
+        63,
+        81
+      ],
+      "media_sha256": "34117e32775dedffabcfe9bfe33f4bc90db1c5454648ed4343d7ba2c23ba3ca5",
+      "observed_cut": [
+        63,
+        81
+      ],
+      "response": 0.33425775170326233,
+      "short_range": null,
+      "source_delivery_sha256": "95e590ab61d16f0214b8495fd647a3583bd2648293c4bfeaad8b30542bf2b810",
+      "status": "measured"
+    },
+    {
+      "bank": "CREMA-D",
+      "coarse": [],
+      "condition": "gain",
+      "expected": [
+        63,
+        81
+      ],
+      "media_sha256": "b6db6b216c0783ec800c7fcc191db43757fe707098b74b3cbedbe49935bdc43b",
+      "observed_cut": null,
+      "response": null,
+      "short_range": null,
+      "source_delivery_sha256": "9395794e922a5d31e1a56d322bce4fa036e65bd444f922a3626ad787c8bf8a74",
+      "status": "not_routed"
+    },
+    {
+      "bank": "CREMA-D",
+      "coarse": [
+        [
+          55,
+          71
+        ]
+      ],
+      "condition": "cutaway",
+      "expected": [
+        56,
+        72
+      ],
+      "media_sha256": "b04180d4c38750fc038a688b773e8087bb206196d30023e15707e102bdbaf867",
+      "observed_cut": [
+        56,
+        72
+      ],
+      "response": 0.609607994556427,
+      "short_range": null,
+      "source_delivery_sha256": "f83550ed5697913cbd248e443af3d139f6c13f76dc72393a454ff8e5922105b9",
+      "status": "measured"
+    },
+    {
+      "bank": "CREMA-D",
+      "coarse": [],
+      "condition": "gain",
+      "expected": [
+        56,
+        72
+      ],
+      "media_sha256": "73a2406ecac96a468ecebe7be24db3a7e628c7ffb048821de93e1974383e7e68",
+      "observed_cut": null,
+      "response": null,
+      "short_range": null,
+      "source_delivery_sha256": "2dec72f1303c407be6036b1a8f39e1bf56258e492cd02a589c3ccdb4943df2ab",
+      "status": "not_routed"
+    },
+    {
+      "bank": "CREMA-D",
+      "coarse": [
+        [
+          63,
+          79
+        ]
+      ],
+      "condition": "cutaway",
+      "expected": [
+        63,
+        81
+      ],
+      "media_sha256": "8a4addd4bd5e31499764c06f277723c837c32bc6dba424109e54bfddd2479999",
+      "observed_cut": [
+        63,
+        81
+      ],
+      "response": 0.40857994556427,
+      "short_range": null,
+      "source_delivery_sha256": "e5f0bd83b39184a342e5b8799b4438e7e33ba5c059d65375dab3ee36cfdadb70",
+      "status": "measured"
+    },
+    {
+      "bank": "CREMA-D",
+      "coarse": [],
+      "condition": "gain",
+      "expected": [
+        63,
+        81
+      ],
+      "media_sha256": "19f24f9f72c732a4a9055cf450baa45e34292b1932a3d66c7bee4deaea16f911",
+      "observed_cut": null,
+      "response": null,
+      "short_range": null,
+      "source_delivery_sha256": "1c2deeb7aa9a7168e1a26a090ad76af241f6466be79f4b51ea98e3c3d676c1bf",
+      "status": "not_routed"
+    },
+    {
+      "bank": "CREMA-D",
+      "coarse": [
+        [
+          55,
+          79
+        ]
+      ],
+      "condition": "cutaway",
+      "expected": [
+        56,
+        72
+      ],
+      "media_sha256": "32b95c4a26c599a79ad0ddd31940c1c3e5f90911e9ac34f6cd35b6da9606c824",
+      "observed_cut": [
+        56,
+        72
+      ],
+      "response": 0.5860871374607086,
+      "short_range": null,
+      "source_delivery_sha256": "bff1d67947727477d965b03ded3c3441eed6dce1ff01ac42ab0848f0af0c3404",
+      "status": "measured"
+    },
+    {
+      "bank": "CREMA-D",
+      "coarse": [],
+      "condition": "gain",
+      "expected": [
+        56,
+        72
+      ],
+      "media_sha256": "56df33cf1ae52138cdb74559bcf6db0a1c09d3765dab81cae9aa7933ec82e7ef",
+      "observed_cut": null,
+      "response": null,
+      "short_range": null,
+      "source_delivery_sha256": "9201b26b90c5ace622d5c985f0fa4a0b107ebce5c186ecdf65ddca91bca6cac2",
+      "status": "not_routed"
+    },
+    {
+      "bank": "RTFS",
+      "coarse": [
+        [
+          71,
+          87
+        ]
+      ],
+      "condition": "cross_cut_b",
+      "expected": [
+        80,
+        90
+      ],
+      "media_sha256": "f9283dc732c6d924db8fc1476d70947e3320f7d4312a1a93ba31bdbee3045603",
+      "observed_cut": [
+        80,
+        90
+      ],
+      "response": 0.7376106679439545,
+      "short_range": null,
+      "source_delivery_sha256": "a24fb2dca3ed1a40284c9d1b33e8add443628ebd6a3f41225d16f2018269a673",
+      "status": "measured"
+    },
+    {
+      "bank": "RTFS",
+      "coarse": [
+        [
+          79,
+          95
+        ]
+      ],
+      "condition": "cross_cut_b",
+      "expected": [
+        80,
+        90
+      ],
+      "media_sha256": "37ee714eb24c6a7ccd1efe71df8835242b39ec6f7540d38887c435ca1b3d4a4f",
+      "observed_cut": [
+        80,
+        90
+      ],
+      "response": 0.9174370765686035,
+      "short_range": null,
+      "source_delivery_sha256": "73384515db58535da050e452d284ca88f3a31f1b4c4cac39823481466985f67e",
+      "status": "measured"
+    }
+  ],
+  "roster": [
+    {
+      "bank": "CREMA-D",
+      "condition": "cutaway",
+      "expected": [
+        56,
+        72
+      ],
+      "source_delivery_sha256": "877795434a6b9f9a2d300aeb903c10bcad315652323528bc37f0ac2bd4eb603b"
+    },
+    {
+      "bank": "CREMA-D",
+      "condition": "gain",
+      "expected": [
+        56,
+        72
+      ],
+      "source_delivery_sha256": "289ca340a732ab13c53ff124e9ce6d140780530e2a1484fe5be74f9bd1adfe48"
+    },
+    {
+      "bank": "CREMA-D",
+      "condition": "cutaway",
+      "expected": [
+        63,
+        81
+      ],
+      "source_delivery_sha256": "95e590ab61d16f0214b8495fd647a3583bd2648293c4bfeaad8b30542bf2b810"
+    },
+    {
+      "bank": "CREMA-D",
+      "condition": "gain",
+      "expected": [
+        63,
+        81
+      ],
+      "source_delivery_sha256": "9395794e922a5d31e1a56d322bce4fa036e65bd444f922a3626ad787c8bf8a74"
+    },
+    {
+      "bank": "CREMA-D",
+      "condition": "cutaway",
+      "expected": [
+        56,
+        72
+      ],
+      "source_delivery_sha256": "f83550ed5697913cbd248e443af3d139f6c13f76dc72393a454ff8e5922105b9"
+    },
+    {
+      "bank": "CREMA-D",
+      "condition": "gain",
+      "expected": [
+        56,
+        72
+      ],
+      "source_delivery_sha256": "2dec72f1303c407be6036b1a8f39e1bf56258e492cd02a589c3ccdb4943df2ab"
+    },
+    {
+      "bank": "CREMA-D",
+      "condition": "cutaway",
+      "expected": [
+        63,
+        81
+      ],
+      "source_delivery_sha256": "e5f0bd83b39184a342e5b8799b4438e7e33ba5c059d65375dab3ee36cfdadb70"
+    },
+    {
+      "bank": "CREMA-D",
+      "condition": "gain",
+      "expected": [
+        63,
+        81
+      ],
+      "source_delivery_sha256": "1c2deeb7aa9a7168e1a26a090ad76af241f6466be79f4b51ea98e3c3d676c1bf"
+    },
+    {
+      "bank": "CREMA-D",
+      "condition": "cutaway",
+      "expected": [
+        56,
+        72
+      ],
+      "source_delivery_sha256": "bff1d67947727477d965b03ded3c3441eed6dce1ff01ac42ab0848f0af0c3404"
+    },
+    {
+      "bank": "CREMA-D",
+      "condition": "gain",
+      "expected": [
+        56,
+        72
+      ],
+      "source_delivery_sha256": "9201b26b90c5ace622d5c985f0fa4a0b107ebce5c186ecdf65ddca91bca6cac2"
+    },
+    {
+      "bank": "RTFS",
+      "condition": "cross_cut_b",
+      "expected": [
+        80,
+        90
+      ],
+      "source_delivery_sha256": "a24fb2dca3ed1a40284c9d1b33e8add443628ebd6a3f41225d16f2018269a673"
+    },
+    {
+      "bank": "RTFS",
+      "condition": "cross_cut_b",
+      "expected": [
+        80,
+        90
+      ],
+      "source_delivery_sha256": "73384515db58535da050e452d284ca88f3a31f1b4c4cac39823481466985f67e"
+    }
+  ],
+  "schema": "chipmunk.video-spatial-cut-context-supplement/1",
+  "source_separation": {
+    "crema_actors": 10,
+    "crema_pairs": 5,
+    "rtfs_genuine_recordings": 2,
+    "rtfs_pairs": 1
+  },
+  "summary": {
+    "crema_cutaways_exact": 5,
+    "crema_gain_controls_unrouted": 5,
+    "false_cut_explanations": 0,
+    "routed_clips": 7,
+    "rtfs_cut_directions_exact": 2
+  }
+}

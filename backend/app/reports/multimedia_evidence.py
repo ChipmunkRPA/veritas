@@ -153,6 +153,7 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
         face_lighting_context,
         face_return_binding,
         face_return_coverage,
+        face_spatial_cut_binding,
         picture_hold_binding,
         whole_face_binding,
     )
@@ -196,6 +197,8 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
         validate_face_interval(packet, source, table_pts=table.pts, interpolated=table.interpolated)
         face_boundary_binding.validate_packet(packet, source, document["version"], table_pts=table.pts,
                                              interpolated=table.interpolated)
+        face_spatial_cut_binding.validate_packet(packet, source, document["version"], table_pts=table.pts,
+                                                interpolated=table.interpolated)
         face_return_binding.validate_packet(packet, source, table_pts=table.pts, interpolated=table.interpolated,
                                             rotation=table.rotation, truncated=table.truncated)
         if whole := packet.get("whole_face_review"):
@@ -251,6 +254,16 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
                 face_return_binding.validate_second(face_return, details.get("face_return"), incumbent, details.get("face_boundary"))
             else:
                 face_return_binding.validate_distinct(face_return, incumbent)
+        if cut := packet.get("face_spatial_cut"):
+            from app.api.public_projection import alias_signal
+
+            if any((committed := by_index.get(item["frame_index"])) is None or
+                   any(item[key] != committed[key] for key in ("pts", "decoded_rgb_sha256")) for item in cut["frame_inputs"]):
+                raise ObjectIntegrityError("Picture-cut context differs from committed decoded source frames")
+            frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
+            if not any((signal.get("details") or {}).get("face_spatial_cut") == cut and signal.get("effective_weight") == 0.0
+                       and alias_signal(signal["id"]) == packet["signal_refs"][0]["id"] for signal in frozen.get("signals", [])):
+                raise ObjectIntegrityError("Picture-cut context differs from the frozen review check")
         clip = packet.get("clip") or {}
         if clip.get("status") == "ready":
             start, end = clip["start_frame_index"], clip["end_frame_index_exclusive"]
@@ -263,8 +276,10 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
         brightness_inputs = {}
         repetition = any(key in packet for key in ("picture_hold", "picture_sequence", "mouth_local_hold"))
         coarse_frames = len(packet["frames"])
-        for position, frame in enumerate((*packet["frames"], *packet.get("face_boundary_frames", ()))):
-            refined = position >= coarse_frames
+        boundary_count = len(packet.get("face_boundary_frames", ()))
+        for position, frame in enumerate((*packet["frames"], *packet.get("face_boundary_frames", ()), *packet.get("face_spatial_cut_frames", ()))):
+            refined = coarse_frames <= position < coarse_frames + boundary_count
+            cut_frame = position >= coarse_frames + boundary_count
             anchor = frame["anchor"]
             recorded = by_index.get(anchor["frame_index"])
             if (table.pts[anchor["frame_index"]] != anchor["pts"]
@@ -275,9 +290,9 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
                 rgb = image.convert("RGB")
                 if hashlib.sha256(rgb.tobytes()).hexdigest() != anchor["decoded_rgb_sha256"]:
                     raise ObjectIntegrityError("Displayed video pixels differ from the analysed frame")
-                if not refined and packet.get("face_lighting"):
+                if not refined and not cut_frame and packet.get("face_lighting"):
                     brightness_inputs[anchor["frame_index"]] = np.asarray(rgb)
-                if sequence := packet.get("face_boundary" if refined else "face_sequence") or packet.get("face_return"):
+                if not cut_frame and (sequence := packet.get("face_boundary" if refined else "face_sequence") or packet.get("face_return")):
                     import cv2
 
                     item = next(row for row in sequence["frame_inputs"] if row["frame_index"] == anchor["frame_index"])
@@ -771,16 +786,20 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             row["face_interval"] = copy.deepcopy(packet.get("face_interval"))
             row["face_sequence"] = copy.deepcopy(packet.get("face_sequence"))
             row["face_boundary"] = copy.deepcopy(packet.get("face_boundary"))
+            row["face_spatial_cut"] = copy.deepcopy(packet.get("face_spatial_cut"))
             if packet.get("face_return"):
                 row["face_return"] = copy.deepcopy(packet["face_return"])
             row["whole_face_review"] = copy.deepcopy(packet.get("whole_face_review"))
             row["clip"] = copy.deepcopy(packet.get("clip"))
             coarse_count = len(packet["frames"])
-            for position, frame in enumerate((*packet["frames"], *packet.get("face_boundary_frames", ()))):
+            boundary_count = len(packet.get("face_boundary_frames", ()))
+            for position, frame in enumerate((*packet["frames"], *packet.get("face_boundary_frames", ()), *packet.get("face_spatial_cut_frames", ()))):
                 row["frames"].append({"id": frame["id"], "anchor": copy.deepcopy(frame["anchor"]), "score": frame["score"],
                                       "region_meaning": frame["region_meaning"], "context_region": frame.get("context_region"),
-                                      "interval_role": frame.get("interval_role"), "refined": position >= coarse_count,
-                                      "first_refined": position == coarse_count,
+                                      "interval_role": frame.get("interval_role"), "refined": coarse_count <= position < coarse_count + boundary_count,
+                                      "first_refined": position == coarse_count and boundary_count > 0,
+                                      "cut_frame": position >= coarse_count + boundary_count,
+                                      "first_cut": position == coarse_count + boundary_count,
                                       "images": [plate(role, packet["artifacts"][frame["artifact_refs"][role]], {"original": "Exact decoded source frame" if hold or repeated_sequence or mouth_hold else "Exact analysed source frame", "context": "Frame context", "crop": "Exact measured mouth-region crop" if mouth_hold else "Original mouth-input crop" if packet_kind == "av" else "Original face-context crop", "measured_patch": "Exact measured gray mouth patch"}[role])
                                                  for role in ("original", "context", "crop", "measured_patch")
                                                  if role in frame["artifact_refs"] and (not (hold or repeated_sequence) or role == "original")
@@ -898,7 +917,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             row["locator"] = (f"PCM {interval['start_sample'] / rate:.3f}-{interval['end_sample'] / rate:.3f} s; "
                               f"samples [{interval['start_sample']}, {interval['end_sample']})")
         elif packet_kind == "video":
-            interval = row["picture_hold"] or row["face_sequence"] or row["face_interval"] or row.get("face_return") or (row["window"] if row["whole_face_review"] else None)
+            interval = row["picture_hold"] or row["face_spatial_cut"] or row["face_sequence"] or row["face_interval"] or row.get("face_return") or (row["window"] if row["whole_face_review"] else None)
             label = "Identical frames" if row["picture_hold"] else "Sampled face positions" if row["whole_face_review"] else "Face review range"
             row["locator"] = (f"{label} {interval['start_stream_s']:.3f}-{interval['end_stream_s']:.3f} s" if interval else
                               "; ".join(f"frame {f['anchor']['frame_index']} at {f['anchor']['stream_time_s']:.6f} s" for f in packet["frames"]))

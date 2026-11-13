@@ -33,6 +33,7 @@ from app.evidence import (
     face_return_binding,
     face_return_coverage,
     face_short_proposal_binding,
+    face_spatial_cut_binding,
     mouth_local_hold_binding,
     picture_hold_binding,
     picture_sequence,
@@ -51,6 +52,7 @@ from app.evidence.video_packet_versions import (
     PAIRED_EDGE_VERSION,
     PICTURE_HOLD_VERSIONS,
     SHORT_PROPOSAL_VERSION,
+    SPATIAL_CUT_VERSION,
     VERSIONS,
 )
 from app.storage.artefacts import get_artefact, register_artefact
@@ -353,6 +355,16 @@ def _sequence_observations(result: dict, table: FrameTable, source: dict, anchor
                     raise PacketIntegrityError("Refined face timing differs from committed decoded source frames")
                 scored.add(index)
             candidates[-1]["face_boundary"] = boundary
+        if cut := details.get("face_spatial_cut"):
+            face_spatial_cut_binding.validate_record(cut, record, source, table_pts=table.pts, interpolated=table.interpolated)
+            if signal.get("effective_weight") != 0.0:
+                raise PacketIntegrityError("Picture-cut context needs a confidence-neutral appearance check")
+            for item in cut["frame_inputs"]:
+                index = item["frame_index"]
+                if index not in anchors or any(item[key] != anchors[index][key] for key in ("pts", "decoded_rgb_sha256")):
+                    raise PacketIntegrityError("Picture-cut context differs from committed decoded source frames")
+                scored.add(index)
+            candidates[-1]["face_spatial_cut"] = cut
     return candidates, scored
 
 
@@ -623,6 +635,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     version = face_return_binding.METHOD_VERSIONS[return_candidates[-1]["face_return"]["method"]] if return_candidates else VERSION
     if version != SHORT_PROPOSAL_VERSION and any(face_boundary_binding.is_paired(item.get("face_boundary")) for item in chosen):
         version = PAIRED_EDGE_VERSION
+    if any(item.get("face_spatial_cut") for item in chosen):
+        version = SPATIAL_CUT_VERSION
     document = {"schema": SCHEMA, "version": version, "id": set_id, "status": "ready", "analysis_id": analysis.id,
                 "revision": analysis.revision, "original_result_hash": analysis.result_hash, "source": source, "packets": [],
                 "coverage": {"kind": "point_and_window_samples" if window_frames else "point_samples", "frame_count": len(table), "decoded_frame_indices": sorted(anchors),
@@ -652,6 +666,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     mouth_review = document.get("picture_hold", {}).get("mouth_local_hold", {})
     mouth_match = mouth_review.get("match")
     boundary_indices = {i for candidate in chosen for i in candidate.get("face_boundary", {}).get("anchors", {}).values()}
+    boundary_indices.update(i for candidate in chosen for i in candidate.get("face_spatial_cut", {}).get("anchors", {}).values())
     exact_indices = boundary_indices | {i for candidate in return_candidates for i in candidate["face_return"]["anchors"].values()}
     wanted = {row["frame_index"] for candidate in chosen for row in candidate["rows"]} | boundary_indices
     endpoints = {match["start_frame_index"], match["end_frame_index"]} if match is not None else set()
@@ -828,6 +843,17 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                                        score=None, is_peak=False, role=role)
                 boundary_frames.append(frame)
             packet.update(face_boundary=boundary, face_boundary_frames=boundary_frames, affects_overall_confidence=False)
+        if cut := candidate.get("face_spatial_cut"):
+            cut_frames = []
+            for position, role in enumerate(face_spatial_cut_binding.ROLES, 1):
+                frame, _ = write_frame(cut["anchors"][role], None, f"{packet_id}.C{position}", f"cut_frame_{position}",
+                                       score=None, is_peak=False, role=role)
+                cut_frames.append(frame)
+            packet.update(face_spatial_cut=cut, face_spatial_cut_frames=cut_frames, affects_overall_confidence=False,
+                          title="Picture-cut context for a face change", observation=face_spatial_cut_binding.observation(cut),
+                          interpretation="The original face samples and full frames are retained for comparison. This context applies to this range and carries zero weight in overall confidence.",
+                          measurements=[*packet["measurements"], {"label":"Outside-face regions changing at both ends",
+                              "value":cut["shared_tiles"],"unit":"tiles"}])
         if interval := candidate.get("face_interval"):
             start, end = interval["start_stream_s"], interval["end_stream_s"]
             packet.update(title="Face-swap interval to review", evidence_type="anomaly", claim_scope="sampled_window",
@@ -928,6 +954,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
         picture_hold_binding.validate(document)
         face_return_binding.validate_set(document)
         face_boundary_binding.validate_set(document)
+        face_spatial_cut_binding.validate_set(document)
         face_return_coverage.validate(document)
     except (KeyError, TypeError, ValueError) as error:
         raise PacketIntegrityError(str(error)) from error
@@ -949,6 +976,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
             validate_clip_binding(packet, source)
             face_interval_binding.validate_packet(packet, source)
             face_boundary_binding.validate_packet(packet, source, document["version"])
+            face_spatial_cut_binding.validate_packet(packet, source, document["version"])
             face_return_binding.validate_packet(packet, source)
             whole_face_binding.validate_packet(packet, source)
             if document["version"] in ALIGNMENT_CONTEXT_VERSIONS:
@@ -959,7 +987,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
             raise PacketIntegrityError(str(error)) from error
         if document["version"] in {"video-evidence-2", *NESTED_VERSIONS} and "clip" not in packet:
             raise PacketIntegrityError("Video evidence omits its context-clip availability")
-        for frame in (*packet["frames"], *packet.get("face_boundary_frames", ())):
+        for frame in (*packet["frames"], *packet.get("face_boundary_frames", ()), *packet.get("face_spatial_cut_frames", ())):
             anchor = frame["anchor"]
             if (anchor.get("original_sha256") != source_sha256 or anchor.get("time_base") != source["time_base"]
                     or not 0 <= anchor.get("frame_index", -1) < source["frame_count"]

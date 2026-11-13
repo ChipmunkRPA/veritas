@@ -39,6 +39,7 @@ from app.evidence import (
     face_boundary_binding,
     face_return_binding,
     face_return_coverage,
+    face_spatial_cut_binding,
     service,
     video_audio,
     video_packets,
@@ -432,6 +433,38 @@ def _report_scaffold(f):
     return f.frozen.model_copy(update={'result':result,'evidence':evidence})
 
 
+def test_picture_cut_context_binds_both_native_edges_and_representative_frames():
+    binding = face_spatial_cut_binding
+    a, b, start, end = 56, 72, 63, 74
+    pts = [1000 * i for i in range(120)]
+    schedule, face_frames = binding.schedule(a, b)
+    source = {'width': 1280, 'height': 720, 'time_base': '1/30000', 'frame_count': 120}
+    coarse = {'method': binding.APPEARANCE_METHOD, 'time_base': source['time_base'],
+              'start_pts': pts[a], 'end_pts': pts[b]}
+    record = {'method': binding.METHOD, 'time_base': source['time_base'], 'source_first_pts': 0,
+              'source_encoding': ['hevc', 'yuv420p', 'hvc1'], 'source_carrier': 'mp4',
+              'start_frame_index': start, 'end_frame_index': end, 'start_pts': pts[start], 'end_pts': pts[end],
+              'start_stream_s': start / 30, 'end_stream_s': end / 30,
+              'coarse_start_pts': pts[a], 'coarse_end_pts': pts[b], 'score_hex': .35.hex(),
+              'tiles': 10, 'shared_tiles': 5, 'entry_tiles': 5, 'exit_tiles': 5, 'sectors': 2,
+              'face_inputs': [{'frame_index': i, 'bbox': {'x': 300, 'y': 180, 'w': 80, 'h': 90}}
+                              for i in face_frames],
+              'frame_inputs': [{'frame_index': i, 'pts': pts[i], 'decoded_rgb_sha256': '0' * 64}
+                               for i in schedule],
+              'anchors': {'before': 62, 'during': 68, 'after': 74}}
+    binding.validate_record(record, coarse, source, table_pts=pts)
+    for changes, message in [
+        ({'coarse_end_pts': pts[b] + 1}, 'original appearance range'),
+        ({'frame_inputs': record['frame_inputs'][1:]}, 'omits a native frame'),
+        ({'anchors': {**record['anchors'], 'after': 75}}, 'wrong representative frames'),
+    ]:
+        with pytest.raises(ValueError, match=message):
+            binding.validate_record({**record, **changes}, coarse, source, table_pts=pts)
+    with pytest.raises(ValueError, match='evidence version disagrees'):
+        binding.validate_set({'version': binding.SPATIAL_CUT_VERSION,
+                              'packets': [{'face_spatial_cut': record}, {'face_return': {'verified': True}}]})
+
+
 @pytest.mark.parametrize('width,height', [(1920, 1080), (1280, 720), (640, 360)])
 def test_short_face_change_keeps_exact_source_frames_in_pdf_json_and_offline_verifier(
     av_fixture, av_source, tmp_path, monkeypatch, width, height,
@@ -640,7 +673,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
                         'app.evidence.audio_background_binding','app.evidence.audio_repetition_binding','app.evidence.audio_exact_repetition',
                         'app.evidence.audio_similarity_binding',
                         'app.evidence.av_binding','app.evidence.face_interval_binding','app.evidence.face_boundary_binding','app.evidence.face_boundary_clock','app.evidence.face_alignment_context',
-                        'app.evidence.face_paired_edge_binding','app.evidence.face_short_proposal_binding',
+                        'app.evidence.face_paired_edge_binding','app.evidence.face_short_proposal_binding','app.evidence.face_spatial_cut_binding',
                         'app.evidence.face_lighting_context','app.evidence.face_return_binding','app.evidence.face_return_coverage',
                         'app.evidence.video_packet_versions','app.evidence.picture_hold_binding', 'app.evidence.picture_sequence',
                         'app.evidence.mouth_local_hold_binding','app.evidence.source_geometry',

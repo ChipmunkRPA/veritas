@@ -19,6 +19,7 @@ p { margin: 4pt 0; }
 .side { margin: 5pt 0; padding-left: 8pt; border-left: 2px solid #bdc9be; }
 .coordinates { font: 8.5pt/1.25 monospace; color: #526658; break-after: avoid; }
 .excerpt { white-space: pre-wrap; overflow-wrap: anywhere; }
+.word-paired-change { break-inside: avoid; }
 mark { color: inherit; background: #e3e9e0; text-decoration: underline; text-decoration-color: #285f50; }
 a { color: #285f50; }
 .page-preview { margin: 5pt 0 8pt; break-inside: avoid; }
@@ -27,6 +28,10 @@ a { color: #285f50; }
 """
 LABELS = {"body": "Message body", "quoted": "Quoted text", "signature": "Signature"}
 PNG_URL = "data:image/png;base64,"
+
+
+def _word_position(item):
+    return f'Paragraph {item["paragraph"]} [{item["start"]}, {item["end"]})'
 
 
 def _page_previews(excerpt):
@@ -56,8 +61,7 @@ def _side(label, excerpt):
         cursor = token_end
     segments.append(escape(text[cursor:]))
     value = "".join(segments) or "No text at this location."
-    anchors = " · ".join(f'Paragraph {item["paragraph"]} [{item["start"]}, {item["end"]})'
-                         for item in excerpt.get("paragraphs") or ())
+    anchors = " · ".join(_word_position(item) for item in excerpt.get("paragraphs") or ())
     paragraph_ranges = f'<p class="coordinates">{anchors}</p>' if anchors else ""
     html_positions = []
     for token in excerpt.get("html_tokens") or ():
@@ -79,8 +83,11 @@ def _paired(review: dict | None) -> str:
         for side, label in (("earlier", "Earlier"), ("later", "Analyzed")):
             row = review[side]
             unit = "sentences" if len(row["context_spans"]) == 4 else "sentence"
+            ranges = "".join(f'<p class="coordinates">{name} · {_word_position(item)}</p>'
+                             for name, item in zip(("Previous sentence", "Changed sentence", "Next sentence"),
+                                                   row.get("context_paragraphs", ())))
             output.append(f'<div class="side"><p class="coordinates">{label} {unit} [{row["start"]}, {row["end"]})</p>'
-                          f'<p class="excerpt">{escape(row["text"])}</p></div>')
+                          f'{ranges}<p class="excerpt">{escape(row["text"])}</p></div>')
         output.append("<p>Uncalibrated responses from the earlier and analyzed versions</p>")
         center = review.get("center_responses")
         for i, row in enumerate(review["responses"], 1):
@@ -95,12 +102,14 @@ def _paired(review: dict | None) -> str:
 def render(comparison: dict) -> bytes:
     changes = []
     docx = comparison["format"] == "docx"
+    paired = comparison.get("paired_check")
+    change_class = ' class="word-paired-change"' if paired and paired.get("earlier", {}).get("context_paragraphs") else ""
     html_reply = comparison["coordinate_space"] == HTML_COORDINATES
     format_label = {"plain_text": "Text", "docx": "Word body text", "pdf": "PDF text"}.get(comparison["format"])
     for change in comparison["changes"]:
         label = format_label or LABELS[change["role"]]
         anchor = escape(change["id"])
-        changes.append(f'<section><h2 id="draft-change-{anchor}">{anchor} · {label}</h2>'
+        changes.append(f'<section{change_class}><h2 id="draft-change-{anchor}">{anchor} · {label}</h2>'
                        f'{_side("Earlier draft", change["earlier"])}{_side("Analyzed version", change["later"])}</section>')
     sources = []
     for key, label in (("earlier", "Earlier draft"), ("later", "Analyzed version")):
@@ -121,7 +130,7 @@ def render(comparison: dict) -> bytes:
 <p class="brand">CHIPMUNK VERIFY</p><h1>Earlier-draft comparison</h1>
 <p>{escape(comparison['scope'])}</p><p>{escape(comparison['interpretation'])}</p>
 <p>Highlights mark changed words and punctuation. {positions} Each range includes its start and excludes its end.</p>
-<div class="sources">{''.join(sources)}</div>{_paired(comparison.get('paired_check'))}
+<div class="sources">{''.join(sources)}</div>{_paired(paired)}
 {''.join(changes) or f'<p>{no_changes}</p>'}
 </body></html>'''
 

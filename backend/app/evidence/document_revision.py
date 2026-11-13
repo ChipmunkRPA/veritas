@@ -37,6 +37,8 @@ DOCX_SCOPE = ("Compares words and punctuation in top-level Word body paragraphs.
               "embedded content, formatting and tracked revision markup are outside this comparison.")
 DOCX_PART = "word/document.xml"
 INTERPRETATION = "This comparison locates changes between the supplied versions. The revision sequence and authorship require independent evidence."
+WordParagraphs = list[tuple[int, int, int, int]]
+WordLayouts = tuple[WordParagraphs, WordParagraphs]
 
 
 def tokens(text, offsets):
@@ -280,6 +282,15 @@ def _email_body_prefix(text: str, by_role: dict) -> str:
 def compare_with_text(earlier: bytes, later: bytes, extension: str, *,
                       email_body_only: bool = False, pdf_paired_text_only: bool = False) -> tuple[dict, str, str]:
     """Return the unchanged comparison and ephemeral text under the requested writing scope."""
+    result, old_text, new_text, _ = compare_with_sources(earlier, later, extension, email_body_only=email_body_only,
+                                                        pdf_paired_text_only=pdf_paired_text_only)
+    return result, old_text, new_text
+
+
+def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
+                         email_body_only: bool = False, pdf_paired_text_only: bool = False
+                         ) -> tuple[dict, str, str, WordLayouts | None]:
+    """Keep the native Word paragraph locations available for exact paired sentence mapping."""
     if extension not in FORMATS:
         raise ValueError(f"Choose two {SUPPORTED_DRAFTS}.")
     if any(not 0 < len(item) <= MAX_BYTES for item in (earlier, later)):
@@ -312,7 +323,8 @@ def compare_with_text(earlier: bytes, later: bytes, extension: str, *,
             "earlier": old_source, "later": new_source, "changes": changes,
             "scope": scope, "interpretation": INTERPRETATION}
     if extension == ".eml" and email_body_only:
-        return result, _email_body_prefix(old_text, old_tokens), _email_body_prefix(new_text, new_tokens)
+        return result, _email_body_prefix(old_text, old_tokens), _email_body_prefix(new_text, new_tokens), None
     if extension == ".pdf" and pdf_paired_text_only:
-        return result, document_revision_pdf.paired_text(old_text, old_layout), document_revision_pdf.paired_text(new_text, new_layout)
-    return result, old_text, new_text
+        return (result, document_revision_pdf.paired_text(old_text, old_layout),
+                document_revision_pdf.paired_text(new_text, new_layout), None)
+    return result, old_text, new_text, (old_layout, new_layout) if extension == ".docx" else None

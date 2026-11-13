@@ -1,0 +1,6934 @@
+{
+  "anchors_order": [
+    "paragraph",
+    "body_index",
+    "start",
+    "end"
+  ],
+  "app": {
+    "browser": {
+      "exact_ranges": true,
+      "linked_changes": 2,
+      "native_word_sentence_locations": 6,
+      "page_errors": 0,
+      "pdf_json_downloads_match": true,
+      "plain_view": true
+    },
+    "cases": [
+      {
+        "assessment_unchanged": true,
+        "exact_word_sentence_locations": 6,
+        "group": "1002452",
+        "panel": "plos",
+        "pdf_json_exact": true,
+        "previous_opt_out_replayed": true,
+        "role": "granite",
+        "saved_response_arithmetic_replayed": true,
+        "source_hashes": [
+          "910381aaefbe7a1f068f54ef75d221cf23d71072949e948ffcdddb6b78e9c3dd",
+          "7f25a23d5f93275ad0650aa2aa8922b20a5c270f78efb97b100952c943170168"
+        ],
+        "status": "joint_increase"
+      },
+      {
+        "assessment_unchanged": true,
+        "exact_word_sentence_locations": 6,
+        "group": "1002469",
+        "panel": "plos",
+        "pdf_json_exact": true,
+        "previous_opt_out_replayed": true,
+        "role": "granite",
+        "saved_response_arithmetic_replayed": true,
+        "source_hashes": [
+          "5380b07cb4881ca521f12a1c3cf6f7fc4cae3b3cdb8fdc60ffb5f989599acc88",
+          "be07aeed0282b302c1e21eeea06427295d681b603d4a8dce065e88243898055d"
+        ],
+        "status": "joint_increase"
+      },
+      {
+        "assessment_unchanged": true,
+        "exact_word_sentence_locations": 6,
+        "group": "1002474",
+        "panel": "plos",
+        "pdf_json_exact": true,
+        "previous_opt_out_replayed": true,
+        "role": "ordinary",
+        "saved_response_arithmetic_replayed": true,
+        "source_hashes": [
+          "a5aa2ac2fcba47bc8a7c69dbb991d537a84808691f7d95c3ca0480efe44b1782",
+          "b3d4e37d0a8745c69ab1b2e559b7a53f9ee76746175cce6f6c1ac97121c60a3d"
+        ],
+        "status": "joint_increase"
+      },
+      {
+        "assessment_unchanged": true,
+        "exact_word_sentence_locations": 6,
+        "group": "1002457",
+        "panel": "plos",
+        "pdf_json_exact": true,
+        "previous_opt_out_replayed": true,
+        "role": "olmo",
+        "saved_response_arithmetic_replayed": true,
+        "source_hashes": [
+          "b4ad495d994da1a2f7a4e97be645a3f5b5fc113dc22a755eac0a3cff24107dd0",
+          "ddcaa757b45a49db13e95317ac02b02d8ad5cc925449dab70f887b63831cc52c"
+        ],
+        "status": "no_joint_increase"
+      },
+      {
+        "assessment_unchanged": true,
+        "exact_word_sentence_locations": 6,
+        "group": "wellcome-13531",
+        "panel": "journal",
+        "pdf_json_exact": true,
+        "previous_opt_out_replayed": true,
+        "role": "qwen",
+        "saved_response_arithmetic_replayed": true,
+        "source_hashes": [
+          "db42d3c0eb9d074bbca3a8db31493eb97dff57dd119c114d3ac4e90aa2af0a0b",
+          "a3551487e5a627191bfe4b7fef0b27bc9d826f81c9695756d859363833873053"
+        ],
+        "status": "joint_increase"
+      }
+    ],
+    "simulated_paid_jobs": 5,
+    "unpaid_jobs": 0
+  },
+  "cases": [
+    {
+      "change_ids": [
+        "C01"
+      ],
+      "decisions": {
+        "context_only": false,
+        "joint": false,
+        "old_context_comparator": false
+      },
+      "geometry": {
+        "earlier": {
+          "center": "570c7bc400dd8c19ac6adbe40a5f539d1ec5230b8a4c6ebc1c17590fc321b252",
+          "context": "912debe98ee0b8572134747583170da7f4d830f958577316775bf00f4126adc6",
+          "file_sha256": "910381aaefbe7a1f068f54ef75d221cf23d71072949e948ffcdddb6b78e9c3dd",
+          "spans": [
+            [
+              405,
+              488
+            ],
+            [
+              490,
+              666
+            ],
+            [
+              667,
+              766
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              405,
+              488
+            ],
+            [
+              2,
+              1,
+              0,
+              176
+            ],
+            [
+              2,
+              1,
+              177,
+              276
+            ]
+          ]
+        },
+        "later": {
+          "center": "8f16d2dd453aef010d160c3a9d8ab14bee3d615d4934e0691dd4b2663e3b2ffa",
+          "context": "74a1264f45bc1b68b42a7826cbb0e76e2761f090df845379c07dd9917ab46e54",
+          "file_sha256": "726d492d6065f80d426424aa4cab53b5d265453f82ed15cfd292bbc13247d8bd",
+          "spans": [
+            [
+              405,
+              488
+            ],
+            [
+              490,
+              614
+            ],
+            [
+              615,
+              714
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              405,
+              488
+            ],
+            [
+              2,
+              1,
+              0,
+              124
+            ],
+            [
+              2,
+              1,
+              125,
+              224
+            ]
+          ]
+        }
+      },
+      "group": "1002452",
+      "panel": "plos",
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.f540000000000p-12",
+            "0x1.5484000000000p-9",
+            "0x1.53e0000000000p-12",
+            "0x1.7ad6000000000p-9"
+          ],
+          "token_counts": [
+            71,
+            55,
+            39,
+            23
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.734c480000000p-8",
+            "0x1.465c6a0000000p-8",
+            "0x1.fb3d960000000p-1",
+            "0x1.99d62a0000000p-1"
+          ],
+          "token_counts": [
+            74,
+            57,
+            40,
+            23
+          ]
+        }
+      ],
+      "role": "ordinary",
+      "truth": null
+    },
+    {
+      "change_ids": [
+        "C01",
+        "C02"
+      ],
+      "decisions": {
+        "context_only": true,
+        "joint": true,
+        "old_context_comparator": true
+      },
+      "geometry": {
+        "earlier": {
+          "center": "570c7bc400dd8c19ac6adbe40a5f539d1ec5230b8a4c6ebc1c17590fc321b252",
+          "context": "912debe98ee0b8572134747583170da7f4d830f958577316775bf00f4126adc6",
+          "file_sha256": "910381aaefbe7a1f068f54ef75d221cf23d71072949e948ffcdddb6b78e9c3dd",
+          "spans": [
+            [
+              405,
+              488
+            ],
+            [
+              490,
+              666
+            ],
+            [
+              667,
+              766
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              405,
+              488
+            ],
+            [
+              2,
+              1,
+              0,
+              176
+            ],
+            [
+              2,
+              1,
+              177,
+              276
+            ]
+          ]
+        },
+        "later": {
+          "center": "d3f7f68191999897114d1d8812a87af236e29cc7874df23b28fa4e5e4b254b7c",
+          "context": "ed3a896a941772f1dde4ef9eb895d39f21bc4880ff8dec5b5c005d09718170b4",
+          "file_sha256": "7f25a23d5f93275ad0650aa2aa8922b20a5c270f78efb97b100952c943170168",
+          "spans": [
+            [
+              405,
+              488
+            ],
+            [
+              490,
+              669
+            ],
+            [
+              670,
+              769
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              405,
+              488
+            ],
+            [
+              2,
+              1,
+              0,
+              179
+            ],
+            [
+              2,
+              1,
+              180,
+              279
+            ]
+          ]
+        }
+      },
+      "group": "1002452",
+      "panel": "plos",
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.f540000000000p-12",
+            "0x1.0242000000000p-8",
+            "0x1.53e0000000000p-12",
+            "0x1.45c8000000000p-9"
+          ],
+          "token_counts": [
+            71,
+            68,
+            39,
+            36
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.734c480000000p-8",
+            "0x1.ebfe160000000p-1",
+            "0x1.fb3d960000000p-1",
+            "0x1.fe3c0c0000000p-1"
+          ],
+          "token_counts": [
+            74,
+            72,
+            40,
+            38
+          ]
+        }
+      ],
+      "role": "granite",
+      "truth": [
+        490,
+        669
+      ]
+    },
+    {
+      "change_ids": [
+        "C01"
+      ],
+      "decisions": {
+        "context_only": false,
+        "joint": false,
+        "old_context_comparator": false
+      },
+      "geometry": {
+        "earlier": {
+          "center": "34465834ee3bd378bd399ab959094a28641fec5bd77891f54969667462eeee1f",
+          "context": "2f0c0b22fa26501fd5c9fec34b04530e24903e30d0cccbe8b24b89ffa188ce70",
+          "file_sha256": "b4ad495d994da1a2f7a4e97be645a3f5b5fc113dc22a755eac0a3cff24107dd0",
+          "spans": [
+            [
+              564,
+              663
+            ],
+            [
+              664,
+              808
+            ],
+            [
+              810,
+              920
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              564,
+              663
+            ],
+            [
+              1,
+              0,
+              664,
+              808
+            ],
+            [
+              2,
+              1,
+              0,
+              110
+            ]
+          ]
+        },
+        "later": {
+          "center": "d4920e24495757e16330d0fa7da5ac6c4814f5d15f031ee4a0ecaee5853bf56f",
+          "context": "9a3d13f825771fe4dffbb5d81388885d0fd41665a77324d9fa7534322f1b8199",
+          "file_sha256": "be36dc4f5d513c210152dfb749e30d5d6ce990bac48e97ea751e9ea7decd4721",
+          "spans": [
+            [
+              564,
+              663
+            ],
+            [
+              664,
+              840
+            ],
+            [
+              842,
+              952
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              564,
+              663
+            ],
+            [
+              1,
+              0,
+              664,
+              840
+            ],
+            [
+              2,
+              1,
+              0,
+              110
+            ]
+          ]
+        }
+      },
+      "group": "1002457",
+      "panel": "plos",
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.ebec000000000p-10",
+            "0x1.15d0000000000p-12",
+            "0x1.105e000000000p-9",
+            "0x1.159d500000000p-4"
+          ],
+          "token_counts": [
+            70,
+            69,
+            30,
+            29
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.59831a0000000p-9",
+            "0x1.929bd00000000p-6",
+            "0x1.d069620000000p-2",
+            "0x1.da30060000000p-1"
+          ],
+          "token_counts": [
+            73,
+            72,
+            32,
+            31
+          ]
+        }
+      ],
+      "role": "ordinary",
+      "truth": null
+    },
+    {
+      "change_ids": [
+        "C01"
+      ],
+      "decisions": {
+        "context_only": false,
+        "joint": false,
+        "old_context_comparator": false
+      },
+      "geometry": {
+        "earlier": {
+          "center": "34465834ee3bd378bd399ab959094a28641fec5bd77891f54969667462eeee1f",
+          "context": "2f0c0b22fa26501fd5c9fec34b04530e24903e30d0cccbe8b24b89ffa188ce70",
+          "file_sha256": "b4ad495d994da1a2f7a4e97be645a3f5b5fc113dc22a755eac0a3cff24107dd0",
+          "spans": [
+            [
+              564,
+              663
+            ],
+            [
+              664,
+              808
+            ],
+            [
+              810,
+              920
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              564,
+              663
+            ],
+            [
+              1,
+              0,
+              664,
+              808
+            ],
+            [
+              2,
+              1,
+              0,
+              110
+            ]
+          ]
+        },
+        "later": {
+          "center": "49141cbe58dc0667724417ac67e7253baa7907ce4f017baab86cf64ccbdb13a9",
+          "context": "ba31ad7bf6aac75b1437587074fa7a0fd58819436c2b7db06b7ee82f6cbc31fb",
+          "file_sha256": "bc9b1b984d260f93b8025793e90f3168018148d2cfca09b1134d8805e7c42248",
+          "spans": [
+            [
+              564,
+              663
+            ],
+            [
+              664,
+              854
+            ],
+            [
+              856,
+              966
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              564,
+              663
+            ],
+            [
+              1,
+              0,
+              664,
+              854
+            ],
+            [
+              2,
+              1,
+              0,
+              110
+            ]
+          ]
+        }
+      },
+      "group": "1002457",
+      "panel": "plos",
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.ebec000000000p-10",
+            "0x1.0710000000000p-11",
+            "0x1.105e000000000p-9",
+            "0x1.0e40000000000p-10"
+          ],
+          "token_counts": [
+            70,
+            76,
+            30,
+            36
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.0abbb20000000p-9",
+            "0x1.499dd80000000p-8",
+            "0x1.d069620000000p-2",
+            "0x1.e78d5e0000000p-1"
+          ],
+          "token_counts": [
+            73,
+            79,
+            32,
+            38
+          ]
+        }
+      ],
+      "role": "granite",
+      "truth": [
+        664,
+        854
+      ]
+    },
+    {
+      "change_ids": [
+        "C01",
+        "C02"
+      ],
+      "decisions": {
+        "context_only": false,
+        "joint": false,
+        "old_context_comparator": false
+      },
+      "geometry": {
+        "earlier": {
+          "center": "34465834ee3bd378bd399ab959094a28641fec5bd77891f54969667462eeee1f",
+          "context": "2f0c0b22fa26501fd5c9fec34b04530e24903e30d0cccbe8b24b89ffa188ce70",
+          "file_sha256": "b4ad495d994da1a2f7a4e97be645a3f5b5fc113dc22a755eac0a3cff24107dd0",
+          "spans": [
+            [
+              564,
+              663
+            ],
+            [
+              664,
+              808
+            ],
+            [
+              810,
+              920
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              564,
+              663
+            ],
+            [
+              1,
+              0,
+              664,
+              808
+            ],
+            [
+              2,
+              1,
+              0,
+              110
+            ]
+          ]
+        },
+        "later": {
+          "center": "b43b9c0094a6be6bf53b8df2bb16c2a0f66388eae1383d84fa71262f3aaa0120",
+          "context": "d986bbf42e7bf86dccff0741fa1b1f0522c1f3f2cc5d9e102c17b7a30b229a1f",
+          "file_sha256": "ddcaa757b45a49db13e95317ac02b02d8ad5cc925449dab70f887b63831cc52c",
+          "spans": [
+            [
+              564,
+              663
+            ],
+            [
+              664,
+              779
+            ],
+            [
+              781,
+              891
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              564,
+              663
+            ],
+            [
+              1,
+              0,
+              664,
+              779
+            ],
+            [
+              2,
+              1,
+              0,
+              110
+            ]
+          ]
+        }
+      },
+      "group": "1002457",
+      "panel": "plos",
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.ebec000000000p-10",
+            "0x1.b630000000000p-12",
+            "0x1.105e000000000p-9",
+            "0x1.d32c800000000p-7"
+          ],
+          "token_counts": [
+            70,
+            65,
+            30,
+            25
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.59831a0000000p-9",
+            "0x1.e155ac0000000p-1",
+            "0x1.d069620000000p-2",
+            "0x1.d9a9020000000p-1"
+          ],
+          "token_counts": [
+            73,
+            68,
+            32,
+            27
+          ]
+        }
+      ],
+      "role": "olmo",
+      "truth": [
+        664,
+        779
+      ]
+    },
+    {
+      "change_ids": [
+        "C01"
+      ],
+      "decisions": {
+        "context_only": false,
+        "joint": false,
+        "old_context_comparator": false
+      },
+      "geometry": {
+        "earlier": {
+          "center": "7ce5f923db475aef7efe1af97f091996cbf17e87bb26e2dd6d75a23d49fc75a0",
+          "context": "b6cbcd05bb4d9224e2a89543c2ea437d530621af5d04401edefbe51157bfff15",
+          "file_sha256": "6aed869a6d8ace6b7a9a2fdac866ddb683b909c2399e60ffb850c8082cf18444",
+          "spans": [
+            [
+              541,
+              694
+            ],
+            [
+              696,
+              910
+            ],
+            [
+              911,
+              1145
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              541,
+              694
+            ],
+            [
+              2,
+              1,
+              0,
+              214
+            ],
+            [
+              2,
+              1,
+              215,
+              449
+            ]
+          ]
+        },
+        "later": {
+          "center": "9d1ecfc89adb41d2ff1824dcbb03987bde220f744935c2b06b38e90cc76139e1",
+          "context": "dee1d5906e0c629914795557fb263858950d8ffc409776feeb2ac793e5bcb032",
+          "file_sha256": "4ada9ed8a43bfa2b1f2aafb993b11bd8d3164c1ef30f270a89290ec6bf43d9d8",
+          "spans": [
+            [
+              541,
+              694
+            ],
+            [
+              696,
+              890
+            ],
+            [
+              891,
+              1125
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              541,
+              694
+            ],
+            [
+              2,
+              1,
+              0,
+              194
+            ],
+            [
+              2,
+              1,
+              195,
+              429
+            ]
+          ]
+        }
+      },
+      "group": "1002459",
+      "panel": "plos",
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.0050000000000p-12",
+            "0x1.f580000000000p-12",
+            "0x1.2716800000000p-6",
+            "0x1.9dc0000000000p-11"
+          ],
+          "token_counts": [
+            100,
+            102,
+            34,
+            36
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.710a400000000p-10",
+            "0x1.6107560000000p-11",
+            "0x1.ee57980000000p-1",
+            "0x1.89e7cc0000000p-1"
+          ],
+          "token_counts": [
+            104,
+            101,
+            37,
+            33
+          ]
+        }
+      ],
+      "role": "ordinary",
+      "truth": null
+    },
+    {
+      "change_ids": [
+        "C01",
+        "C02"
+      ],
+      "decisions": {
+        "context_only": true,
+        "joint": false,
+        "old_context_comparator": false
+      },
+      "geometry": {
+        "earlier": {
+          "center": "7ce5f923db475aef7efe1af97f091996cbf17e87bb26e2dd6d75a23d49fc75a0",
+          "context": "b6cbcd05bb4d9224e2a89543c2ea437d530621af5d04401edefbe51157bfff15",
+          "file_sha256": "6aed869a6d8ace6b7a9a2fdac866ddb683b909c2399e60ffb850c8082cf18444",
+          "spans": [
+            [
+              541,
+              694
+            ],
+            [
+              696,
+              910
+            ],
+            [
+              911,
+              1145
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              541,
+              694
+            ],
+            [
+              2,
+              1,
+              0,
+              214
+            ],
+            [
+              2,
+              1,
+              215,
+              449
+            ]
+          ]
+        },
+        "later": {
+          "center": "cb421ad2837193b1c6237d2b3198be90105d335fc91ecc857955094d9f0ce17d",
+          "context": "f507604aab19a75842f78262f7c8aeb23cca8fd1035e29ecc06836eeab7ab4d3",
+          "file_sha256": "84f1640bea9981a1b1f2b9de2f6706c22d12765802d37f39b0a0a15ecea74240",
+          "spans": [
+            [
+              541,
+              694
+            ],
+            [
+              696,
+              879
+            ],
+            [
+              880,
+              1114
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              541,
+              694
+            ],
+            [
+              2,
+              1,
+              0,
+              183
+            ],
+            [
+              2,
+              1,
+              184,
+              418
+            ]
+          ]
+        }
+      },
+      "group": "1002459",
+      "panel": "plos",
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.0050000000000p-12",
+            "0x1.6ba0000000000p-12",
+            "0x1.2716800000000p-6",
+            "0x1.e792800000000p-7"
+          ],
+          "token_counts": [
+            100,
+            95,
+            34,
+            29
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.710a400000000p-10",
+            "0x1.e420420000000p-7",
+            "0x1.ee57980000000p-1",
+            "0x1.f7a7a60000000p-1"
+          ],
+          "token_counts": [
+            104,
+            99,
+            37,
+            31
+          ]
+        }
+      ],
+      "role": "granite",
+      "truth": [
+        696,
+        879
+      ]
+    },
+    {
+      "change_ids": [
+        "C01"
+      ],
+      "decisions": {
+        "context_only": false,
+        "joint": false,
+        "old_context_comparator": false
+      },
+      "geometry": {
+        "earlier": {
+          "center": "33257b513cae89ae711fb45525578149d7657254175cc065e3fab80e67ff4077",
+          "context": "317a0867f2685e07c56cbfa916303cb33186f70311b2b9168358d4afc96f5cc8",
+          "file_sha256": "47a986ac44d2f1e1882584b952c71a4d2a96aab53f0b5f2bcc9c958db140cc5a",
+          "spans": [
+            [
+              240,
+              463
+            ],
+            [
+              465,
+              617
+            ],
+            [
+              618,
+              743
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              240,
+              463
+            ],
+            [
+              2,
+              1,
+              0,
+              152
+            ],
+            [
+              2,
+              1,
+              153,
+              278
+            ]
+          ]
+        },
+        "later": {
+          "center": "b2647294266482fcd9dfa94869ba59242da03825afe9e4bce1eb03a73b8cd23e",
+          "context": "2e8f732b24e5e61b98b283e049dc7798bb1188449394d0b65dad6bb85807b88e",
+          "file_sha256": "b8c854c0409587a65b1ac93446179d184c2976d011b1113322a3a21b13676ad5",
+          "spans": [
+            [
+              240,
+              463
+            ],
+            [
+              465,
+              597
+            ],
+            [
+              598,
+              723
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              240,
+              463
+            ],
+            [
+              2,
+              1,
+              0,
+              132
+            ],
+            [
+              2,
+              1,
+              133,
+              258
+            ]
+          ]
+        }
+      },
+      "group": "1002464",
+      "panel": "plos",
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.a688000000000p-11",
+            "0x1.828c000000000p-10",
+            "0x1.7528000000000p-11",
+            "0x1.0740000000000p-9"
+          ],
+          "token_counts": [
+            96,
+            85,
+            35,
+            24
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.fd9f1c0000000p-1",
+            "0x1.52bd420000000p-2",
+            "0x1.f29c580000000p-7",
+            "0x1.dbbae00000000p-1"
+          ],
+          "token_counts": [
+            105,
+            93,
+            38,
+            27
+          ]
+        }
+      ],
+      "role": "ordinary",
+      "truth": null
+    },
+    {
+      "change_ids": [
+        "C01"
+      ],
+      "decisions": {
+        "context_only": false,
+        "joint": false,
+        "old_context_comparator": false
+      },
+      "geometry": {
+        "earlier": {
+          "center": "33257b513cae89ae711fb45525578149d7657254175cc065e3fab80e67ff4077",
+          "context": "317a0867f2685e07c56cbfa916303cb33186f70311b2b9168358d4afc96f5cc8",
+          "file_sha256": "47a986ac44d2f1e1882584b952c71a4d2a96aab53f0b5f2bcc9c958db140cc5a",
+          "spans": [
+            [
+              240,
+              463
+            ],
+            [
+              465,
+              617
+            ],
+            [
+              618,
+              743
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              240,
+              463
+            ],
+            [
+              2,
+              1,
+              0,
+              152
+            ],
+            [
+              2,
+              1,
+              153,
+              278
+            ]
+          ]
+        },
+        "later": {
+          "center": "4b2f8f2f813895414383d943a302e4ab54824d49c8153d9563c2431505862aa8",
+          "context": "a76cf657c56a86415e5b7d9fb32ae19b91f4e3a8ac383f830dc785c4a9c02455",
+          "file_sha256": "cd717ef78ba01e68d25182dddf6e056481006163b8143909cec8d01613b29a04",
+          "spans": [
+            [
+              240,
+              463
+            ],
+            [
+              465,
+              649
+            ],
+            [
+              650,
+              775
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              240,
+              463
+            ],
+            [
+              2,
+              1,
+              0,
+              184
+            ],
+            [
+              2,
+              1,
+              185,
+              310
+            ]
+          ]
+        }
+      },
+      "group": "1002464",
+      "panel": "plos",
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.a688000000000p-11",
+            "0x1.7d92000000000p-9",
+            "0x1.7528000000000p-11",
+            "0x1.9b4fec0000000p-1"
+          ],
+          "token_counts": [
+            96,
+            97,
+            35,
+            36
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.fd86700000000p-1",
+            "0x1.ed4af20000000p-1",
+            "0x1.f29c580000000p-7",
+            "0x1.fbc5ea0000000p-1"
+          ],
+          "token_counts": [
+            105,
+            107,
+            38,
+            40
+          ]
+        }
+      ],
+      "role": "granite",
+      "truth": [
+        465,
+        649
+      ]
+    },
+    {
+      "change_ids": [
+        "C01"
+      ],
+      "decisions": {
+        "context_only": false,
+        "joint": false,
+        "old_context_comparator": false
+      },
+      "geometry": {
+        "earlier": {
+          "center": "33257b513cae89ae711fb45525578149d7657254175cc065e3fab80e67ff4077",
+          "context": "317a0867f2685e07c56cbfa916303cb33186f70311b2b9168358d4afc96f5cc8",
+          "file_sha256": "47a986ac44d2f1e1882584b952c71a4d2a96aab53f0b5f2bcc9c958db140cc5a",
+          "spans": [
+            [
+              240,
+              463
+            ],
+            [
+              465,
+              617
+            ],
+            [
+              618,
+              743
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              240,
+              463
+            ],
+            [
+              2,
+              1,
+              0,
+              152
+            ],
+            [
+              2,
+              1,
+              153,
+              278
+            ]
+          ]
+        },
+        "later": {
+          "center": "cd69ded07a88c4b1e48325624116a52bc04472125855612fa417441c92507549",
+          "context": "03eb1a6cb3be930d14e14d9da7dd4856fae2a1be1a4ab1189a61af5630f3b114",
+          "file_sha256": "065de0a6c8be63f03448cfb433ce984c74f12da5ae6bec94ca2d38d2e0bf14bf",
+          "spans": [
+            [
+              240,
+              463
+            ],
+            [
+              465,
+              608
+            ],
+            [
+              609,
+              734
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              240,
+              463
+            ],
+            [
+              2,
+              1,
+              0,
+              143
+            ],
+            [
+              2,
+              1,
+              144,
+              269
+            ]
+          ]
+        }
+      },
+      "group": "1002464",
+      "panel": "plos",
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.a688000000000p-11",
+            "0x1.584c000000000p-10",
+            "0x1.7528000000000p-11",
+            "0x1.838a0a0000000p-1"
+          ],
+          "token_counts": [
+            96,
+            90,
+            35,
+            29
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.fd9f1c0000000p-1",
+            "0x1.ccea920000000p-1",
+            "0x1.f29c580000000p-7",
+            "0x1.eb81ea0000000p-1"
+          ],
+          "token_counts": [
+            105,
+            97,
+            38,
+            30
+          ]
+        }
+      ],
+      "role": "olmo",
+      "truth": [
+        465,
+        608
+      ]
+    },
+    {
+      "change_ids": [
+        "C01"
+      ],
+      "decisions": {
+        "context_only": false,
+        "joint": false,
+        "old_context_comparator": false
+      },
+      "geometry": {
+        "earlier": {
+          "center": "b0e98e34a86f50b0f4667bf9f3a60f0d3bff946a91034939319a8026d3929924",
+          "context": "7a9a5971d3fe84b19383760a513e5087a7a42cfcb9d41641824f4b7350e5c88a",
+          "file_sha256": "c1d7a282c69908062bbe2c0acabe53cb6568ad5b10944d9afa4852962fd26f60",
+          "spans": [
+            [
+              251,
+              384
+            ],
+            [
+              385,
+              595
+            ],
+            [
+              597,
+              684
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              251,
+              384
+            ],
+            [
+              1,
+              0,
+              385,
+              595
+            ],
+            [
+              2,
+              1,
+              0,
+              87
+            ]
+          ]
+        },
+        "later": {
+          "center": "cb54c6ca460357a9410f1789eb953ab24c8202bf91049b9a9ddfb28e6f049da6",
+          "context": "696c14447c715e4255fc4c7dac23b6047d37e78c78b6934803d3b7a0562e9af3",
+          "file_sha256": "46c87a2b4c6e767402c552ff0cb6b6b78b31db3568c023e63dd306fc1d018854",
+          "spans": [
+            [
+              251,
+              384
+            ],
+            [
+              385,
+              570
+            ],
+            [
+              572,
+              659
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              251,
+              384
+            ],
+            [
+              1,
+              0,
+              385,
+              570
+            ],
+            [
+              2,
+              1,
+              0,
+              87
+            ]
+          ]
+        }
+      },
+      "group": "1002466",
+      "panel": "plos",
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.ee28000000000p-11",
+            "0x1.5ca0000000000p-10",
+            "0x1.53b6000000000p-9",
+            "0x1.007a000000000p-8"
+          ],
+          "token_counts": [
+            84,
+            82,
+            39,
+            37
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.f624660000000p-1",
+            "0x1.f1264e0000000p-2",
+            "0x1.5427760000000p-2",
+            "0x1.f924e60000000p-1"
+          ],
+          "token_counts": [
+            87,
+            86,
+            39,
+            38
+          ]
+        }
+      ],
+      "role": "ordinary",
+      "truth": null
+    },
+    {
+      "change_ids": [
+        "C01"
+      ],
+      "decisions": {
+        "context_only": true,
+        "joint": true,
+        "old_context_comparator": true
+      },
+      "geometry": {
+        "earlier": {
+          "center": "b0e98e34a86f50b0f4667bf9f3a60f0d3bff946a91034939319a8026d3929924",
+          "context": "7a9a5971d3fe84b19383760a513e5087a7a42cfcb9d41641824f4b7350e5c88a",
+          "file_sha256": "c1d7a282c69908062bbe2c0acabe53cb6568ad5b10944d9afa4852962fd26f60",
+          "spans": [
+            [
+              251,
+              384
+            ],
+            [
+              385,
+              595
+            ],
+            [
+              597,
+              684
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              251,
+              384
+            ],
+            [
+              1,
+              0,
+              385,
+              595
+            ],
+            [
+              2,
+              1,
+              0,
+              87
+            ]
+          ]
+        },
+        "later": {
+          "center": "4c88404a8fa2622db110a82c1c8815d6532e11abd7a4b0051b4749e40f964845",
+          "context": "b78079125f65f3958f2f6c04b4b2a2ffb4b5b88db8b8d2895f57736927cbc4ab",
+          "file_sha256": "9646f4781e648e8955955502c5e46adc0bb323cfcb92a68d62a51d3b6f187496",
+          "spans": [
+            [
+              251,
+              384
+            ],
+            [
+              385,
+              610
+            ],
+            [
+              612,
+              699
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              251,
+              384
+            ],
+            [
+              1,
+              0,
+              385,
+              610
+            ],
+            [
+              2,
+              1,
+              0,
+              87
+            ]
+          ]
+        }
+      },
+      "group": "1002466",
+      "panel": "plos",
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.ee28000000000p-11",
+            "0x1.7ba8c00000000p-6",
+            "0x1.53b6000000000p-9",
+            "0x1.045a400000000p-6"
+          ],
+          "token_counts": [
+            84,
+            81,
+            39,
+            36
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.f624660000000p-1",
+            "0x1.fb49920000000p-1",
+            "0x1.5427760000000p-2",
+            "0x1.f73c400000000p-1"
+          ],
+          "token_counts": [
+            87,
+            86,
+            39,
+            38
+          ]
+        }
+      ],
+      "role": "granite",
+      "truth": [
+        385,
+        610
+      ]
+    },
+    {
+      "change_ids": [
+        "C01",
+        "C02",
+        "C03",
+        "C04"
+      ],
+      "decisions": {
+        "context_only": false,
+        "joint": false,
+        "old_context_comparator": false
+      },
+      "geometry": {
+        "earlier": {
+          "center": "b0e98e34a86f50b0f4667bf9f3a60f0d3bff946a91034939319a8026d3929924",
+          "context": "7a9a5971d3fe84b19383760a513e5087a7a42cfcb9d41641824f4b7350e5c88a",
+          "file_sha256": "fb1a2ad19d8fbfaa6e4257baffc986f8cd7f6cf022b64fccd3a5329e6ac9e045",
+          "spans": [
+            [
+              251,
+              384
+            ],
+            [
+              385,
+              595
+            ],
+            [
+              597,
+              684
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              251,
+              384
+            ],
+            [
+              1,
+              0,
+              385,
+              595
+            ],
+            [
+              2,
+              1,
+              0,
+              87
+            ]
+          ]
+        },
+        "later": {
+          "center": "3906f9b77bca19412deb9c416c2a9a4c561c76ace9e1c09532792622d375f9a0",
+          "context": "ed4a2f43f91150cdf0a3d6aff40d008d59ceb51ede0f31eb39cabdbdb320134e",
+          "file_sha256": "206b341034f397cf510d0144656bf188efa91d8a0dd61811b52e780f81b41eee",
+          "spans": [
+            [
+              251,
+              384
+            ],
+            [
+              385,
+              584
+            ],
+            [
+              586,
+              673
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              251,
+              384
+            ],
+            [
+              1,
+              0,
+              385,
+              584
+            ],
+            [
+              2,
+              1,
+              0,
+              87
+            ]
+          ]
+        }
+      },
+      "group": "1002466",
+      "panel": "plos",
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.ee28000000000p-11",
+            "0x1.7d60000000000p-10",
+            "0x1.53b6000000000p-9",
+            "0x1.02ed000000000p-7"
+          ],
+          "token_counts": [
+            84,
+            83,
+            39,
+            38
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.f624660000000p-1",
+            "0x1.f0dec80000000p-1",
+            "0x1.5427760000000p-2",
+            "0x1.ed78c40000000p-1"
+          ],
+          "token_counts": [
+            87,
+            86,
+            39,
+            38
+          ]
+        }
+      ],
+      "role": "olmo",
+      "truth": [
+        385,
+        584
+      ]
+    },
+    {
+      "change_ids": [
+        "C01"
+      ],
+      "decisions": {
+        "context_only": false,
+        "joint": false,
+        "old_context_comparator": false
+      },
+      "geometry": {
+        "earlier": {
+          "center": "23366ade221ecc0ec93ad0140cc50a6a98ab58a72af6f056ffde8035e35bd36f",
+          "context": "0697c6511cdf181f808744be5b2edb5320f6af13c020937b15c7f22509a79ecf",
+          "file_sha256": "76cc2a315f8c8f567215ce4ebcce1b427db18366944413a5613a666bd1f807a2",
+          "spans": [
+            [
+              374,
+              461
+            ],
+            [
+              462,
+              616
+            ],
+            [
+              618,
+              877
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              374,
+              461
+            ],
+            [
+              1,
+              0,
+              462,
+              616
+            ],
+            [
+              2,
+              1,
+              0,
+              259
+            ]
+          ]
+        },
+        "later": {
+          "center": "56511059ad3fca925e8d018b87696547e565be5d32fc5f3af123e9265a9f8d7c",
+          "context": "9dda61a93b2cf25ab4b1e77b641bb31aa2f2f2bee2253765361d4fb15086f0a0",
+          "file_sha256": "414ad564f749d697d3e63a248fc85980973e4cf36e91494edb233690346ea221",
+          "spans": [
+            [
+              374,
+              461
+            ],
+            [
+              462,
+              592
+            ],
+            [
+              594,
+              853
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              374,
+              461
+            ],
+            [
+              1,
+              0,
+              462,
+              592
+            ],
+            [
+              2,
+              1,
+              0,
+              259
+            ]
+          ]
+        }
+      },
+      "group": "1002468",
+      "panel": "plos",
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.c361000000000p-8",
+            "0x1.20d8000000000p-11",
+            "0x1.5ad0200000000p-4",
+            "0x1.7b60000000000p-12"
+          ],
+          "token_counts": [
+            95,
+            96,
+            28,
+            29
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.c2644c0000000p-10",
+            "0x1.45f7200000000p-11",
+            "0x1.fe02cc0000000p-1",
+            "0x1.fb9a400000000p-1"
+          ],
+          "token_counts": [
+            99,
+            98,
+            32,
+            31
+          ]
+        }
+      ],
+      "role": "ordinary",
+      "truth": null
+    },
+    {
+      "change_ids": [
+        "C01",
+        "C02",
+        "C03",
+        "C04"
+      ],
+      "decisions": {
+        "context_only": false,
+        "joint": false,
+        "old_context_comparator": false
+      },
+      "geometry": {
+        "earlier": {
+          "center": "23366ade221ecc0ec93ad0140cc50a6a98ab58a72af6f056ffde8035e35bd36f",
+          "context": "0697c6511cdf181f808744be5b2edb5320f6af13c020937b15c7f22509a79ecf",
+          "file_sha256": "76cc2a315f8c8f567215ce4ebcce1b427db18366944413a5613a666bd1f807a2",
+          "spans": [
+            [
+              374,
+              461
+            ],
+            [
+              462,
+              616
+            ],
+            [
+              618,
+              877
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              374,
+              461
+            ],
+            [
+              1,
+              0,
+              462,
+              616
+            ],
+            [
+              2,
+              1,
+              0,
+              259
+            ]
+          ]
+        },
+        "later": {
+          "center": "df2c2b7a72551791ee381d9a225d9b81f13ff58c95ed7234813a16b085d1546c",
+          "context": "1a6585d28a4939e168ae7ecae874be57675721f0b429f8ee173dfadc5548d7ff",
+          "file_sha256": "fbd7d769e46224317780a9dc9c5af02af9e29686cc995d312ffa2cb543062407",
+          "spans": [
+            [
+              374,
+              461
+            ],
+            [
+              462,
+              633
+            ],
+            [
+              635,
+              894
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              374,
+              461
+            ],
+            [
+              1,
+              0,
+              462,
+              633
+            ],
+            [
+              2,
+              1,
+              0,
+              259
+            ]
+          ]
+        }
+      },
+      "group": "1002468",
+      "panel": "plos",
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.c361000000000p-8",
+            "0x1.29cd000000000p-7",
+            "0x1.5ad0200000000p-4",
+            "0x1.519a400000000p-4"
+          ],
+          "token_counts": [
+            95,
+            98,
+            28,
+            31
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.c2644c0000000p-10",
+            "0x1.0817380000000p-9",
+            "0x1.fe02cc0000000p-1",
+            "0x1.fdf8960000000p-1"
+          ],
+          "token_counts": [
+            99,
+            101,
+            32,
+            34
+          ]
+        }
+      ],
+      "role": "granite",
+      "truth": [
+        462,
+        633
+      ]
+    },
+    {
+      "change_ids": [
+        "C01",
+        "C02"
+      ],
+      "decisions": {
+        "context_only": false,
+        "joint": false,
+        "old_context_comparator": false
+      },
+      "geometry": {
+        "earlier": {
+          "center": "23366ade221ecc0ec93ad0140cc50a6a98ab58a72af6f056ffde8035e35bd36f",
+          "context": "0697c6511cdf181f808744be5b2edb5320f6af13c020937b15c7f22509a79ecf",
+          "file_sha256": "76cc2a315f8c8f567215ce4ebcce1b427db18366944413a5613a666bd1f807a2",
+          "spans": [
+            [
+              374,
+              461
+            ],
+            [
+              462,
+              616
+            ],
+            [
+              618,
+              877
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              374,
+              461
+            ],
+            [
+              1,
+              0,
+              462,
+              616
+            ],
+            [
+              2,
+              1,
+              0,
+              259
+            ]
+          ]
+        },
+        "later": {
+          "center": "53e9117ebf0077d1caf8b10869f771cc6227c2473e74eaa00385ea72ce86456a",
+          "context": "f6211490ba43e45b4ab65763ababee1001399fac1b6fd5330b6c18f87cbc379f",
+          "file_sha256": "01e8204fe9b2f644eab20edd21973c91a1d27ec9afedc7c9282323b898eaaf75",
+          "spans": [
+            [
+              374,
+              461
+            ],
+            [
+              462,
+              610
+            ],
+            [
+              612,
+              871
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              374,
+              461
+            ],
+            [
+              1,
+              0,
+              462,
+              610
+            ],
+            [
+              2,
+              1,
+              0,
+              259
+            ]
+          ]
+        }
+      },
+      "group": "1002468",
+      "panel": "plos",
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.c361000000000p-8",
+            "0x1.9d5a000000000p-9",
+            "0x1.5ad0200000000p-4",
+            "0x1.21bdd80000000p-2"
+          ],
+          "token_counts": [
+            95,
+            95,
+            28,
+            28
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.c2644c0000000p-10",
+            "0x1.2e5d820000000p-10",
+            "0x1.fe02cc0000000p-1",
+            "0x1.fdc2520000000p-1"
+          ],
+          "token_counts": [
+            99,
+            99,
+            32,
+            33
+          ]
+        }
+      ],
+      "role": "olmo",
+      "truth": [
+        462,
+        610
+      ]
+    },
+    {
+      "change_ids": [
+        "C01",
+        "C02"
+      ],
+      "decisions": {
+        "context_only": false,
+        "joint": false,
+        "old_context_comparator": false
+      },
+      "geometry": {
+        "earlier": {
+          "center": "9eded5ba313bee6f4f89e7b5291c1e9148098d94fbb7e3c5099e01c806c044e5",
+          "context": "5dd138cddab7bc6834c75ffd9be130be247af24c8c7d65a35cc7eec7907c5fe8",
+          "file_sha256": "5380b07cb4881ca521f12a1c3cf6f7fc4cae3b3cdb8fdc60ffb5f989599acc88",
+          "spans": [
+            [
+              618,
+              813
+            ],
+            [
+              814,
+              1052
+            ],
+            [
+              1054,
+              1249
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              618,
+              813
+            ],
+            [
+              1,
+              0,
+              814,
+              1052
+            ],
+            [
+              2,
+              1,
+              0,
+              195
+            ]
+          ]
+        },
+        "later": {
+          "center": "8466b98d0c84c6102a29519fe927c281d1fba429ac37c8615cab8456a1c0560b",
+          "context": "f24beddbd33a0ee3582baaf1e366e30ba1fe05841567be4353b7465baeabe150",
+          "file_sha256": "e9cdc24450c794dbcac91f5aadd2f49f814e5fe84eb08d6c1178c2d58cf6aa15",
+          "spans": [
+            [
+              618,
+              813
+            ],
+            [
+              814,
+              1050
+            ],
+            [
+              1052,
+              1247
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              618,
+              813
+            ],
+            [
+              1,
+              0,
+              814,
+              1050
+            ],
+            [
+              2,
+              1,
+              0,
+              195
+            ]
+          ]
+        }
+      },
+      "group": "1002469",
+      "panel": "plos",
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.a348000000000p-9",
+            "0x1.b898000000000p-9",
+            "0x1.1083000000000p-8",
+            "0x1.92b3000000000p-8"
+          ],
+          "token_counts": [
+            114,
+            109,
+            45,
+            40
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.6f641c0000000p-11",
+            "0x1.f96cfa0000000p-11",
+            "0x1.6556700000000p-5",
+            "0x1.0132280000000p-2"
+          ],
+          "token_counts": [
+            112,
+            106,
+            44,
+            38
+          ]
+        }
+      ],
+      "role": "ordinary",
+      "truth": null
+    },
+    {
+      "change_ids": [
+        "C01",
+        "C02"
+      ],
+      "decisions": {
+        "context_only": true,
+        "joint": true,
+        "old_context_comparator": true
+      },
+      "geometry": {
+        "earlier": {
+          "center": "9eded5ba313bee6f4f89e7b5291c1e9148098d94fbb7e3c5099e01c806c044e5",
+          "context": "5dd138cddab7bc6834c75ffd9be130be247af24c8c7d65a35cc7eec7907c5fe8",
+          "file_sha256": "5380b07cb4881ca521f12a1c3cf6f7fc4cae3b3cdb8fdc60ffb5f989599acc88",
+          "spans": [
+            [
+              618,
+              813
+            ],
+            [
+              814,
+              1052
+            ],
+            [
+              1054,
+              1249
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              618,
+              813
+            ],
+            [
+              1,
+              0,
+              814,
+              1052
+            ],
+            [
+              2,
+              1,
+              0,
+              195
+            ]
+          ]
+        },
+        "later": {
+          "center": "49389bbdf183306ab551a8b276de1be67dc8346d96831f8d79d862a022cb2da1",
+          "context": "14259f34dbae3453f4023c9a32021178a854a114df37ba3b59a0de505c87cdb6",
+          "file_sha256": "be07aeed0282b302c1e21eeea06427295d681b603d4a8dce065e88243898055d",
+          "spans": [
+            [
+              618,
+              813
+            ],
+            [
+              814,
+              1011
+            ],
+            [
+              1013,
+              1208
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              618,
+              813
+            ],
+            [
+              1,
+              0,
+              814,
+              1011
+            ],
+            [
+              2,
+              1,
+              0,
+              195
+            ]
+          ]
+        }
+      },
+      "group": "1002469",
+      "panel": "plos",
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.a348000000000p-9",
+            "0x1.7e58000000000p-1",
+            "0x1.1083000000000p-8",
+            "0x1.6812f00000000p-1"
+          ],
+          "token_counts": [
+            114,
+            105,
+            45,
+            36
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.6f641c0000000p-11",
+            "0x1.04056a0000000p-7",
+            "0x1.6556700000000p-5",
+            "0x1.fb0c780000000p-1"
+          ],
+          "token_counts": [
+            112,
+            103,
+            44,
+            35
+          ]
+        }
+      ],
+      "role": "granite",
+      "truth": [
+        814,
+        1011
+      ]
+    },
+    {
+      "change_ids": [
+        "C01"
+      ],
+      "decisions": {
+        "context_only": false,
+        "joint": false,
+        "old_context_comparator": false
+      },
+      "geometry": {
+        "earlier": {
+          "center": "6100b7340309e3cfc25cc203ea23fa893e6acd4e18e56bfccce966e8c219d25b",
+          "context": "d60f9b8efdf7fdf1dd55e3620d71c6097623d4867c654f3814c2edbfc90c410b",
+          "file_sha256": "680b151e8bfbbecd5851bdc4e03e66a21c02802e31fdb656cede5479c03cd4fb",
+          "spans": [
+            [
+              352,
+              519
+            ],
+            [
+              521,
+              617
+            ],
+            [
+              618,
+              757
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              352,
+              519
+            ],
+            [
+              2,
+              1,
+              0,
+              96
+            ],
+            [
+              2,
+              1,
+              97,
+              236
+            ]
+          ]
+        },
+        "later": {
+          "center": "cf70292df951ae61a366614018d0f753ec31408468e47d340018e37a4659eef0",
+          "context": "a660441c51f075d36a2cda554a56b418f712f528417cf049897c120d7006388d",
+          "file_sha256": "b7c607d8c90f7ed545653da26b3b8f73d6fe4b4f4d89a646490b6d10b2bb7f04",
+          "spans": [
+            [
+              352,
+              519
+            ],
+            [
+              521,
+              605
+            ],
+            [
+              606,
+              745
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              352,
+              519
+            ],
+            [
+              2,
+              1,
+              0,
+              84
+            ],
+            [
+              2,
+              1,
+              85,
+              224
+            ]
+          ]
+        }
+      },
+      "group": "1002472",
+      "panel": "plos",
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.09ea000000000p-9",
+            "0x1.271c000000000p-10",
+            "0x1.516f000000000p-6",
+            "0x1.7b72000000000p-9"
+          ],
+          "token_counts": [
+            79,
+            80,
+            17,
+            18
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.8609680000000p-11",
+            "0x1.3f87a20000000p-11",
+            "0x1.78fedc0000000p-3",
+            "0x1.aa01900000000p-7"
+          ],
+          "token_counts": [
+            80,
+            82,
+            16,
+            19
+          ]
+        }
+      ],
+      "role": "ordinary",
+      "truth": null
+    },
+    {
+      "change_ids": [
+        "C01",
+        "C02"
+      ],
+      "decisions": {
+        "context_only": false,
+        "joint": false,
+        "old_context_comparator": false
+      },
+      "geometry": {
+        "earlier": {
+          "center": "6100b7340309e3cfc25cc203ea23fa893e6acd4e18e56bfccce966e8c219d25b",
+          "context": "d60f9b8efdf7fdf1dd55e3620d71c6097623d4867c654f3814c2edbfc90c410b",
+          "file_sha256": "680b151e8bfbbecd5851bdc4e03e66a21c02802e31fdb656cede5479c03cd4fb",
+          "spans": [
+            [
+              352,
+              519
+            ],
+            [
+              521,
+              617
+            ],
+            [
+              618,
+              757
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              352,
+              519
+            ],
+            [
+              2,
+              1,
+              0,
+              96
+            ],
+            [
+              2,
+              1,
+              97,
+              236
+            ]
+          ]
+        },
+        "later": {
+          "center": "4168624a649b43a1f90b21afa797fc5f97fa17cacb26370942a6f0c864f2f2e7",
+          "context": "bedd2a4964669d30bb20e1d6c8928488724f797d846537782c69d9e913cbe790",
+          "file_sha256": "e71f91f3c8854c782690dfae90945745c31f2d85a39af2b57dfc1e05444f0cc3",
+          "spans": [
+            [
+              352,
+              519
+            ],
+            [
+              521,
+              627
+            ],
+            [
+              628,
+              767
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              352,
+              519
+            ],
+            [
+              2,
+              1,
+              0,
+              106
+            ],
+            [
+              2,
+              1,
+              107,
+              246
+            ]
+          ]
+        }
+      },
+      "group": "1002472",
+      "panel": "plos",
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.09ea000000000p-9",
+            "0x1.16f0000000000p-9",
+            "0x1.516f000000000p-6",
+            "0x1.d0f2000000000p-6"
+          ],
+          "token_counts": [
+            79,
+            80,
+            17,
+            18
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.7e56520000000p-11",
+            "0x1.ef735e0000000p-11",
+            "0x1.78fedc0000000p-3",
+            "0x1.05c3e40000000p-3"
+          ],
+          "token_counts": [
+            80,
+            81,
+            16,
+            17
+          ]
+        }
+      ],
+      "role": "granite",
+      "truth": [
+        521,
+        627
+      ]
+    },
+    {
+      "change_ids": [
+        "C01"
+      ],
+      "decisions": {
+        "context_only": false,
+        "joint": false,
+        "old_context_comparator": false
+      },
+      "geometry": {
+        "earlier": {
+          "center": "6100b7340309e3cfc25cc203ea23fa893e6acd4e18e56bfccce966e8c219d25b",
+          "context": "d60f9b8efdf7fdf1dd55e3620d71c6097623d4867c654f3814c2edbfc90c410b",
+          "file_sha256": "680b151e8bfbbecd5851bdc4e03e66a21c02802e31fdb656cede5479c03cd4fb",
+          "spans": [
+            [
+              352,
+              519
+            ],
+            [
+              521,
+              617
+            ],
+            [
+              618,
+              757
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              352,
+              519
+            ],
+            [
+              2,
+              1,
+              0,
+              96
+            ],
+            [
+              2,
+              1,
+              97,
+              236
+            ]
+          ]
+        },
+        "later": {
+          "center": "8d35530ad3f3db33f3b780902296f6950597d62ba67e2d43a8e56110d661684c",
+          "context": "fe272d6ed6204304a5f1332ccc2cda9bedd299d986717e378e7a2d74a0f0495e",
+          "file_sha256": "1a230c4d7309df0c39f1a294912105f6aca85379850e7dff5ab7d003aa8ea7a8",
+          "spans": [
+            [
+              352,
+              519
+            ],
+            [
+              521,
+              613
+            ],
+            [
+              614,
+              753
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              352,
+              519
+            ],
+            [
+              2,
+              1,
+              0,
+              92
+            ],
+            [
+              2,
+              1,
+              93,
+              232
+            ]
+          ]
+        }
+      },
+      "group": "1002472",
+      "panel": "plos",
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.09ea000000000p-9",
+            "0x1.1684000000000p-10",
+            "0x1.516f000000000p-6",
+            "0x1.b33e400000000p-6"
+          ],
+          "token_counts": [
+            79,
+            76,
+            17,
+            14
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.7e56520000000p-11",
+            "0x1.b9827a0000000p-10",
+            "0x1.78fedc0000000p-3",
+            "0x1.b76a840000000p-1"
+          ],
+          "token_counts": [
+            80,
+            79,
+            16,
+            15
+          ]
+        }
+      ],
+      "role": "olmo",
+      "truth": [
+        521,
+        613
+      ]
+    },
+    {
+      "change_ids": [
+        "C01"
+      ],
+      "decisions": {
+        "context_only": true,
+        "joint": true,
+        "old_context_comparator": true
+      },
+      "geometry": {
+        "earlier": {
+          "center": "ad8e8c24ebd5f1f6bf99b183ccc764a006485eb9a960e031b9de070d29f0ae91",
+          "context": "c4ea2e7b855b1c86113a6a5aba38ee2d66f81ae3c9869626bddeb0000ad8374d",
+          "file_sha256": "a5aa2ac2fcba47bc8a7c69dbb991d537a84808691f7d95c3ca0480efe44b1782",
+          "spans": [
+            [
+              560,
+              678
+            ],
+            [
+              679,
+              797
+            ],
+            [
+              799,
+              896
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              560,
+              678
+            ],
+            [
+              1,
+              0,
+              679,
+              797
+            ],
+            [
+              2,
+              1,
+              0,
+              97
+            ]
+          ]
+        },
+        "later": {
+          "center": "d9839d4499c2af9567e84b70b4b795d339d3f38fa1b9f4287750d5ed51b4e241",
+          "context": "79c9c5e780610adde3616b4be29f09a549f9c3ce92365aeb497bef623daa5e31",
+          "file_sha256": "b3d4e37d0a8745c69ab1b2e559b7a53f9ee76746175cce6f6c1ac97121c60a3d",
+          "spans": [
+            [
+              560,
+              678
+            ],
+            [
+              679,
+              874
+            ],
+            [
+              876,
+              973
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              560,
+              678
+            ],
+            [
+              1,
+              0,
+              679,
+              874
+            ],
+            [
+              2,
+              1,
+              0,
+              97
+            ]
+          ]
+        }
+      },
+      "group": "1002474",
+      "panel": "plos",
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.74c0000000000p-12",
+            "0x1.d4c8000000000p-11",
+            "0x1.0424000000000p-10",
+            "0x1.4c66000000000p-8"
+          ],
+          "token_counts": [
+            67,
+            73,
+            23,
+            29
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.998cae0000000p-7",
+            "0x1.fe44f40000000p-1",
+            "0x1.edffb40000000p-1",
+            "0x1.fe44f40000000p-1"
+          ],
+          "token_counts": [
+            73,
+            77,
+            27,
+            31
+          ]
+        }
+      ],
+      "role": "ordinary",
+      "truth": null
+    },
+    {
+      "change_ids": [
+        "C01",
+        "C02"
+      ],
+      "decisions": {
+        "context_only": true,
+        "joint": false,
+        "old_context_comparator": false
+      },
+      "geometry": {
+        "earlier": {
+          "center": "ad8e8c24ebd5f1f6bf99b183ccc764a006485eb9a960e031b9de070d29f0ae91",
+          "context": "c4ea2e7b855b1c86113a6a5aba38ee2d66f81ae3c9869626bddeb0000ad8374d",
+          "file_sha256": "a5aa2ac2fcba47bc8a7c69dbb991d537a84808691f7d95c3ca0480efe44b1782",
+          "spans": [
+            [
+              560,
+              678
+            ],
+            [
+              679,
+              797
+            ],
+            [
+              799,
+              896
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              560,
+              678
+            ],
+            [
+              1,
+              0,
+              679,
+              797
+            ],
+            [
+              2,
+              1,
+              0,
+              97
+            ]
+          ]
+        },
+        "later": {
+          "center": "612affd48711b39351ab9f7fb744675ba3307a74290a2c9c54fa93fcdaf6e95d",
+          "context": "90146c38f40167e5e9d177e7083344e5b21ec64fe5843506ad735b4f11e1dba3",
+          "file_sha256": "969deb581a7341a52ae65d0917f4eb6877310221dd8d13baac83252d56143c25",
+          "spans": [
+            [
+              560,
+              678
+            ],
+            [
+              679,
+              812
+            ],
+            [
+              814,
+              911
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              560,
+              678
+            ],
+            [
+              1,
+              0,
+              679,
+              812
+            ],
+            [
+              2,
+              1,
+              0,
+              97
+            ]
+          ]
+        }
+      },
+      "group": "1002474",
+      "panel": "plos",
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.74c0000000000p-12",
+            "0x1.6df0000000000p-11",
+            "0x1.0424000000000p-10",
+            "0x1.b268000000000p-8"
+          ],
+          "token_counts": [
+            67,
+            67,
+            23,
+            23
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.b27a480000000p-7",
+            "0x1.99392e0000000p-1",
+            "0x1.edffb40000000p-1",
+            "0x1.dce3a00000000p-1"
+          ],
+          "token_counts": [
+            73,
+            72,
+            27,
+            26
+          ]
+        }
+      ],
+      "role": "granite",
+      "truth": [
+        679,
+        812
+      ]
+    },
+    {
+      "change_ids": [
+        "C01",
+        "C02",
+        "C03"
+      ],
+      "decisions": {
+        "context_only": true,
+        "joint": false,
+        "old_context_comparator": false
+      },
+      "geometry": {
+        "earlier": {
+          "center": "ad8e8c24ebd5f1f6bf99b183ccc764a006485eb9a960e031b9de070d29f0ae91",
+          "context": "c4ea2e7b855b1c86113a6a5aba38ee2d66f81ae3c9869626bddeb0000ad8374d",
+          "file_sha256": "a5aa2ac2fcba47bc8a7c69dbb991d537a84808691f7d95c3ca0480efe44b1782",
+          "spans": [
+            [
+              560,
+              678
+            ],
+            [
+              679,
+              797
+            ],
+            [
+              799,
+              896
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              560,
+              678
+            ],
+            [
+              1,
+              0,
+              679,
+              797
+            ],
+            [
+              2,
+              1,
+              0,
+              97
+            ]
+          ]
+        },
+        "later": {
+          "center": "a12030fac7f29246b49118ac92e4ecbf84487946aa0a6d634c48ae83dc97e21a",
+          "context": "bf7e8a3fb4a96e29852e462a955d36382d8b42860a6523e7fdf5258c8e1cf481",
+          "file_sha256": "19523ff11238b28c293bb143876ec1a1c8a95e0775f75294df973e07a4e86588",
+          "spans": [
+            [
+              560,
+              678
+            ],
+            [
+              679,
+              797
+            ],
+            [
+              799,
+              896
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              560,
+              678
+            ],
+            [
+              1,
+              0,
+              679,
+              797
+            ],
+            [
+              2,
+              1,
+              0,
+              97
+            ]
+          ]
+        }
+      },
+      "group": "1002474",
+      "panel": "plos",
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.74c0000000000p-12",
+            "0x1.f560000000000p-12",
+            "0x1.0424000000000p-10",
+            "0x1.ae80000000000p-9"
+          ],
+          "token_counts": [
+            67,
+            66,
+            23,
+            22
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.b27a480000000p-7",
+            "0x1.cd41c00000000p-6",
+            "0x1.edffb40000000p-1",
+            "0x1.946e240000000p-1"
+          ],
+          "token_counts": [
+            73,
+            72,
+            27,
+            26
+          ]
+        }
+      ],
+      "role": "olmo",
+      "truth": [
+        679,
+        797
+      ]
+    },
+    {
+      "change_ids": [
+        "C01"
+      ],
+      "decisions": {
+        "context_only": false,
+        "joint": false,
+        "old_context_comparator": false
+      },
+      "geometry": {
+        "earlier": {
+          "center": "3f90b98a8cbe7a124d6970345d0194a81c9629443a6e9c1fc1a65e53f38f6838",
+          "context": "43a4f4dc88551e454b5d64fab69109c654726fc8fb3bb781343ca3491cdbde5d",
+          "file_sha256": "0fe299946b8c40339df459f8e34fb5f5daaad677302cbf0d325a80e37095f782",
+          "spans": [
+            [
+              291,
+              459
+            ],
+            [
+              461,
+              573
+            ],
+            [
+              574,
+              663
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              291,
+              459
+            ],
+            [
+              2,
+              1,
+              0,
+              112
+            ],
+            [
+              2,
+              1,
+              113,
+              202
+            ]
+          ]
+        },
+        "later": {
+          "center": "97cd5515776564c468a833da905deba8c707638168350b6b412f87e767d89967",
+          "context": "02a3e10329fad60647a592a42475fb9367fc9ef0d2ae0b0c8457bba7378af3d9",
+          "file_sha256": "38aba0711448bec552333fead7168b6b019ba9fd484ef2702c548e7b01fb3869",
+          "spans": [
+            [
+              291,
+              459
+            ],
+            [
+              461,
+              569
+            ],
+            [
+              570,
+              659
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              291,
+              459
+            ],
+            [
+              2,
+              1,
+              0,
+              108
+            ],
+            [
+              2,
+              1,
+              109,
+              198
+            ]
+          ]
+        }
+      },
+      "group": "1002498",
+      "panel": "plos",
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.68b2000000000p-9",
+            "0x1.0060000000000p-9",
+            "0x1.7778000000000p-8",
+            "0x1.ad58000000000p-11"
+          ],
+          "token_counts": [
+            62,
+            58,
+            23,
+            19
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.26dd880000000p-2",
+            "0x1.fee2040000000p-1",
+            "0x1.57d8c20000000p-2",
+            "0x1.d77b7a0000000p-1"
+          ],
+          "token_counts": [
+            63,
+            60,
+            22,
+            19
+          ]
+        }
+      ],
+      "role": "ordinary",
+      "truth": null
+    },
+    {
+      "change_ids": [
+        "C01"
+      ],
+      "decisions": {
+        "context_only": false,
+        "joint": false,
+        "old_context_comparator": false
+      },
+      "geometry": {
+        "earlier": {
+          "center": "3f90b98a8cbe7a124d6970345d0194a81c9629443a6e9c1fc1a65e53f38f6838",
+          "context": "43a4f4dc88551e454b5d64fab69109c654726fc8fb3bb781343ca3491cdbde5d",
+          "file_sha256": "0fe299946b8c40339df459f8e34fb5f5daaad677302cbf0d325a80e37095f782",
+          "spans": [
+            [
+              291,
+              459
+            ],
+            [
+              461,
+              573
+            ],
+            [
+              574,
+              663
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              291,
+              459
+            ],
+            [
+              2,
+              1,
+              0,
+              112
+            ],
+            [
+              2,
+              1,
+              113,
+              202
+            ]
+          ]
+        },
+        "later": {
+          "center": "3f5f6dfb70710d08e364275e6640cb11a00012b8dbea833edfdbd3692c76b4c5",
+          "context": "09c8b551e8e8747a50351543b823d6283f02b279adf933c2a010119630e52193",
+          "file_sha256": "c1811c2933f48bb1a7e358119758573649d34a8baa023c4b1762a2e9fc97f18e",
+          "spans": [
+            [
+              291,
+              459
+            ],
+            [
+              461,
+              603
+            ],
+            [
+              604,
+              693
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              291,
+              459
+            ],
+            [
+              2,
+              1,
+              0,
+              142
+            ],
+            [
+              2,
+              1,
+              143,
+              232
+            ]
+          ]
+        }
+      },
+      "group": "1002498",
+      "panel": "plos",
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.68b2000000000p-9",
+            "0x1.00a0000000000p-11",
+            "0x1.7778000000000p-8",
+            "0x1.0014000000000p-9"
+          ],
+          "token_counts": [
+            62,
+            63,
+            23,
+            24
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.26dd880000000p-2",
+            "0x1.b2a10a0000000p-1",
+            "0x1.57d8c20000000p-2",
+            "0x1.df5f7a0000000p-1"
+          ],
+          "token_counts": [
+            63,
+            64,
+            22,
+            24
+          ]
+        }
+      ],
+      "role": "granite",
+      "truth": [
+        461,
+        603
+      ]
+    },
+    {
+      "change_ids": [
+        "C01",
+        "C02"
+      ],
+      "decisions": {
+        "context_only": false,
+        "joint": false,
+        "old_context_comparator": false
+      },
+      "geometry": {
+        "earlier": {
+          "center": "3f90b98a8cbe7a124d6970345d0194a81c9629443a6e9c1fc1a65e53f38f6838",
+          "context": "43a4f4dc88551e454b5d64fab69109c654726fc8fb3bb781343ca3491cdbde5d",
+          "file_sha256": "0fe299946b8c40339df459f8e34fb5f5daaad677302cbf0d325a80e37095f782",
+          "spans": [
+            [
+              291,
+              459
+            ],
+            [
+              461,
+              573
+            ],
+            [
+              574,
+              663
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              291,
+              459
+            ],
+            [
+              2,
+              1,
+              0,
+              112
+            ],
+            [
+              2,
+              1,
+              113,
+              202
+            ]
+          ]
+        },
+        "later": {
+          "center": "21189c68b9931e61d23df444a742fdd6c1d51eb08e4447e9dbd0c94a2df7fd93",
+          "context": "2740e5d0f9879d715c927c902f24b34b311fcc528f5be72a5469579f7855fd06",
+          "file_sha256": "d1407829817d2022e2dac39e14d0d655bff9ed8b62cc3ffb716ec9d77b8408de",
+          "spans": [
+            [
+              291,
+              459
+            ],
+            [
+              461,
+              602
+            ],
+            [
+              603,
+              692
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              291,
+              459
+            ],
+            [
+              2,
+              1,
+              0,
+              141
+            ],
+            [
+              2,
+              1,
+              142,
+              231
+            ]
+          ]
+        }
+      },
+      "group": "1002498",
+      "panel": "plos",
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.68b2000000000p-9",
+            "0x1.03f4000000000p-10",
+            "0x1.7778000000000p-8",
+            "0x1.d97c000000000p-10"
+          ],
+          "token_counts": [
+            62,
+            67,
+            23,
+            28
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.5470000000000p-2",
+            "0x1.4007c00000000p-7",
+            "0x1.57d8c20000000p-2",
+            "0x1.0aeed00000000p-3"
+          ],
+          "token_counts": [
+            63,
+            68,
+            22,
+            28
+          ]
+        }
+      ],
+      "role": "olmo",
+      "truth": [
+        461,
+        602
+      ]
+    },
+    {
+      "change_ids": [
+        "C01"
+      ],
+      "decisions": {
+        "context_only": true,
+        "joint": false,
+        "old_context_comparator": false
+      },
+      "geometry": {
+        "earlier": {
+          "center": "0736cf0248d5ed5f25001bea3ec2538bb03fd5fb39118846d42b717443b293e0",
+          "context": "dc6035c0a97975ee1948259efc77d34c74f355b38b1215211bbba321b5785f33",
+          "file_sha256": "a65db157f7346b1eab95abebb7da56f81ce99f76191a6d3e477149a39adcc13d",
+          "spans": [
+            [
+              0,
+              240
+            ],
+            [
+              241,
+              406
+            ],
+            [
+              408,
+              537
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              0,
+              240
+            ],
+            [
+              1,
+              0,
+              241,
+              406
+            ],
+            [
+              2,
+              1,
+              0,
+              129
+            ]
+          ]
+        },
+        "later": {
+          "center": "10ecd7bbbb882d50b94ac4bb66b91571fef7da0401be106c7e11a3c20eed84a0",
+          "context": "4226439bd892b163388e7f0d12ae4c7b9a3a5f42dfd78ae28055aea30f0136a7",
+          "file_sha256": "24752f836d459ffcf85413fa47aa117741c42d9824388b05a0e7d0caf50551fc",
+          "spans": [
+            [
+              0,
+              240
+            ],
+            [
+              241,
+              399
+            ],
+            [
+              401,
+              530
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              0,
+              240
+            ],
+            [
+              1,
+              0,
+              241,
+              399
+            ],
+            [
+              2,
+              1,
+              0,
+              129
+            ]
+          ]
+        }
+      },
+      "group": "7668",
+      "panel": "f1000",
+      "previous_txt": [
+        [
+          "0x1.49c0000000000p-12",
+          "0x1.9930000000000p-12",
+          "0x1.0eb4000000000p-9",
+          "0x1.6dcc000000000p-10"
+        ],
+        [
+          "0x1.d9d7260000000p-12",
+          "0x1.5a0f2c0000000p-11",
+          "0x1.21b39c0000000p-8",
+          "0x1.0e3dd60000000p-8"
+        ]
+      ],
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.49c0000000000p-12",
+            "0x1.9930000000000p-12",
+            "0x1.0eb4000000000p-9",
+            "0x1.6dcc000000000p-10"
+          ],
+          "token_counts": [
+            109,
+            108,
+            36,
+            35
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.d9d7260000000p-12",
+            "0x1.5a0f2c0000000p-11",
+            "0x1.21b39c0000000p-8",
+            "0x1.0e3dd60000000p-8"
+          ],
+          "token_counts": [
+            108,
+            107,
+            36,
+            35
+          ]
+        }
+      ],
+      "role": "ordinary",
+      "truth": null
+    },
+    {
+      "change_ids": [
+        "C01",
+        "C02"
+      ],
+      "decisions": {
+        "context_only": true,
+        "joint": true,
+        "old_context_comparator": true
+      },
+      "geometry": {
+        "earlier": {
+          "center": "0736cf0248d5ed5f25001bea3ec2538bb03fd5fb39118846d42b717443b293e0",
+          "context": "dc6035c0a97975ee1948259efc77d34c74f355b38b1215211bbba321b5785f33",
+          "file_sha256": "a65db157f7346b1eab95abebb7da56f81ce99f76191a6d3e477149a39adcc13d",
+          "spans": [
+            [
+              0,
+              240
+            ],
+            [
+              241,
+              406
+            ],
+            [
+              408,
+              537
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              0,
+              240
+            ],
+            [
+              1,
+              0,
+              241,
+              406
+            ],
+            [
+              2,
+              1,
+              0,
+              129
+            ]
+          ]
+        },
+        "later": {
+          "center": "62df06565b9923f7899046a73daea7712f1c4b774342ce30d63e28b65d9a64c5",
+          "context": "8ecb9c057d861c0333b8dbe176c2475122f0ec3277a07f6f51e2f09755d877c4",
+          "file_sha256": "a20f21c835fd9e84a883aea6c5f47d8ae09791d5a2a434e8a270a53ac7b1549c",
+          "spans": [
+            [
+              0,
+              240
+            ],
+            [
+              241,
+              437
+            ],
+            [
+              439,
+              568
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              0,
+              240
+            ],
+            [
+              1,
+              0,
+              241,
+              437
+            ],
+            [
+              2,
+              1,
+              0,
+              129
+            ]
+          ]
+        }
+      },
+      "group": "7668",
+      "panel": "f1000",
+      "previous_txt": [
+        [
+          "0x1.49c0000000000p-12",
+          "0x1.abb4000000000p-10",
+          "0x1.0eb4000000000p-9",
+          "0x1.159fd00000000p-1"
+        ],
+        [
+          "0x1.f70e0a0000000p-12",
+          "0x1.4c85a20000000p-1",
+          "0x1.21b39c0000000p-8",
+          "0x1.fb3d960000000p-1"
+        ]
+      ],
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.49c0000000000p-12",
+            "0x1.abb4000000000p-10",
+            "0x1.0eb4000000000p-9",
+            "0x1.159fd00000000p-1"
+          ],
+          "token_counts": [
+            109,
+            113,
+            36,
+            40
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.f70e0a0000000p-12",
+            "0x1.4c85a20000000p-1",
+            "0x1.21b39c0000000p-8",
+            "0x1.fb3d960000000p-1"
+          ],
+          "token_counts": [
+            108,
+            112,
+            36,
+            40
+          ]
+        }
+      ],
+      "role": "granite",
+      "truth": [
+        241,
+        437
+      ]
+    },
+    {
+      "change_ids": [
+        "C01",
+        "C02"
+      ],
+      "decisions": {
+        "context_only": false,
+        "joint": false,
+        "old_context_comparator": false
+      },
+      "geometry": {
+        "earlier": {
+          "center": "a28e9ba3bb0205c4abd77c955d5eaa49606f6ef4000a529b363961cc4a3b78e8",
+          "context": "1018d47c1eb890a8c9f13c4367965c647e3dc81444e91495b213acb1df53364e",
+          "file_sha256": "d17f08c1c30501a76fbe094efe1b5ab960e8c12b54025ad87c4da311ef79ea0e",
+          "spans": [
+            [
+              0,
+              147
+            ],
+            [
+              149,
+              256
+            ],
+            [
+              257,
+              338
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              0,
+              147
+            ],
+            [
+              2,
+              1,
+              0,
+              107
+            ],
+            [
+              2,
+              1,
+              108,
+              189
+            ]
+          ]
+        },
+        "later": {
+          "center": "548f8ba26b70eb5baa588cbad6611b6a46c258cfd721c3415fe0fbf25f8a4b1c",
+          "context": "690bc0d73eebee77db2b029dc111765d14127e64d8842c971138b16d6b6f4b0b",
+          "file_sha256": "d9bbbca0f817141d363cc78eccca554817e7e648e869fdc55263c54f6e2025f2",
+          "spans": [
+            [
+              0,
+              147
+            ],
+            [
+              149,
+              234
+            ],
+            [
+              235,
+              316
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              0,
+              147
+            ],
+            [
+              2,
+              1,
+              0,
+              85
+            ],
+            [
+              2,
+              1,
+              86,
+              167
+            ]
+          ]
+        }
+      },
+      "group": "9618",
+      "panel": "f1000",
+      "previous_txt": [
+        [
+          "0x1.ee60000000000p-12",
+          "0x1.7280000000000p-12",
+          "0x1.008c000000000p-9",
+          "0x1.157e000000000p-8"
+        ],
+        [
+          "0x1.6107560000000p-11",
+          "0x1.228cd20000000p-10",
+          "0x1.56ef7a0000000p-7",
+          "0x1.a3d01a0000000p-4"
+        ]
+      ],
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.ee60000000000p-12",
+            "0x1.7280000000000p-12",
+            "0x1.008c000000000p-9",
+            "0x1.157e000000000p-8"
+          ],
+          "token_counts": [
+            70,
+            68,
+            22,
+            20
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.6107560000000p-11",
+            "0x1.228cd20000000p-10",
+            "0x1.56ef7a0000000p-7",
+            "0x1.a3d01a0000000p-4"
+          ],
+          "token_counts": [
+            71,
+            67,
+            24,
+            20
+          ]
+        }
+      ],
+      "role": "ordinary",
+      "truth": null
+    },
+    {
+      "change_ids": [
+        "C01",
+        "C02"
+      ],
+      "decisions": {
+        "context_only": false,
+        "joint": false,
+        "old_context_comparator": false
+      },
+      "geometry": {
+        "earlier": {
+          "center": "a28e9ba3bb0205c4abd77c955d5eaa49606f6ef4000a529b363961cc4a3b78e8",
+          "context": "1018d47c1eb890a8c9f13c4367965c647e3dc81444e91495b213acb1df53364e",
+          "file_sha256": "d17f08c1c30501a76fbe094efe1b5ab960e8c12b54025ad87c4da311ef79ea0e",
+          "spans": [
+            [
+              0,
+              147
+            ],
+            [
+              149,
+              256
+            ],
+            [
+              257,
+              338
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              0,
+              147
+            ],
+            [
+              2,
+              1,
+              0,
+              107
+            ],
+            [
+              2,
+              1,
+              108,
+              189
+            ]
+          ]
+        },
+        "later": {
+          "center": "dd4748a5be9be04de8f7be987ce8675c81235f6cae627fb5a4b3b90eedfd6d8d",
+          "context": "9a591aec80232d3957b7146e34c8eaf470f1a1fed6eebbc367cab133d9c18257",
+          "file_sha256": "7581f7c46a20680cb395a1cf6eb071fd845611843e1b6489266610cc31078126",
+          "spans": [
+            [
+              0,
+              147
+            ],
+            [
+              149,
+              245
+            ],
+            [
+              246,
+              327
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              0,
+              147
+            ],
+            [
+              2,
+              1,
+              0,
+              96
+            ],
+            [
+              2,
+              1,
+              97,
+              178
+            ]
+          ]
+        }
+      },
+      "group": "9618",
+      "panel": "f1000",
+      "previous_txt": [
+        [
+          "0x1.ee60000000000p-12",
+          "0x1.ea60000000000p-12",
+          "0x1.008c000000000p-9",
+          "0x1.8797800000000p-7"
+        ],
+        [
+          "0x1.6107560000000p-11",
+          "0x1.9fe5ec0000000p-10",
+          "0x1.56ef7a0000000p-7",
+          "0x1.c2faf60000000p-1"
+        ]
+      ],
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.ee60000000000p-12",
+            "0x1.ea60000000000p-12",
+            "0x1.008c000000000p-9",
+            "0x1.8797800000000p-7"
+          ],
+          "token_counts": [
+            70,
+            68,
+            22,
+            20
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.6107560000000p-11",
+            "0x1.9fe5ec0000000p-10",
+            "0x1.56ef7a0000000p-7",
+            "0x1.c2faf60000000p-1"
+          ],
+          "token_counts": [
+            71,
+            66,
+            24,
+            19
+          ]
+        }
+      ],
+      "role": "granite",
+      "truth": [
+        149,
+        245
+      ]
+    },
+    {
+      "change_ids": [
+        "C01",
+        "C02",
+        "C03"
+      ],
+      "decisions": {
+        "context_only": false,
+        "joint": false,
+        "old_context_comparator": false
+      },
+      "geometry": {
+        "earlier": {
+          "center": "a28e9ba3bb0205c4abd77c955d5eaa49606f6ef4000a529b363961cc4a3b78e8",
+          "context": "1018d47c1eb890a8c9f13c4367965c647e3dc81444e91495b213acb1df53364e",
+          "file_sha256": "d17f08c1c30501a76fbe094efe1b5ab960e8c12b54025ad87c4da311ef79ea0e",
+          "spans": [
+            [
+              0,
+              147
+            ],
+            [
+              149,
+              256
+            ],
+            [
+              257,
+              338
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              0,
+              147
+            ],
+            [
+              2,
+              1,
+              0,
+              107
+            ],
+            [
+              2,
+              1,
+              108,
+              189
+            ]
+          ]
+        },
+        "later": {
+          "center": "325ffa71d60a8ac068ae6bc423ad1ba230d69c466d0edbe36815bf6cd4bf716f",
+          "context": "a7c2fbb19f9b429bd16565aa0a2d0647685e81fa7c6929e1dc1db7aa5bb49fac",
+          "file_sha256": "25d22f1333b95af073c0922796cfd49cfd1d5d56e5bc95c2b4203a0f5efb44c7",
+          "spans": [
+            [
+              0,
+              147
+            ],
+            [
+              149,
+              214
+            ],
+            [
+              215,
+              296
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              0,
+              147
+            ],
+            [
+              2,
+              1,
+              0,
+              65
+            ],
+            [
+              2,
+              1,
+              66,
+              147
+            ]
+          ]
+        }
+      },
+      "group": "9618",
+      "panel": "f1000",
+      "previous_txt": [
+        [
+          "0x1.ee60000000000p-12",
+          "0x1.2410000000000p-12",
+          "0x1.008c000000000p-9",
+          "0x1.885d000000000p-8"
+        ],
+        [
+          "0x1.6107560000000p-11",
+          "0x1.bb0d340000000p-9",
+          "0x1.56ef7a0000000p-7",
+          "0x1.8acf360000000p-1"
+        ]
+      ],
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.ee60000000000p-12",
+            "0x1.2410000000000p-12",
+            "0x1.008c000000000p-9",
+            "0x1.885d000000000p-8"
+          ],
+          "token_counts": [
+            70,
+            64,
+            22,
+            16
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.6107560000000p-11",
+            "0x1.bb0d340000000p-9",
+            "0x1.56ef7a0000000p-7",
+            "0x1.8acf360000000p-1"
+          ],
+          "token_counts": [
+            71,
+            63,
+            24,
+            16
+          ]
+        }
+      ],
+      "role": "olmo",
+      "truth": [
+        149,
+        214
+      ]
+    },
+    {
+      "change_ids": [
+        "C01"
+      ],
+      "decisions": {
+        "context_only": false,
+        "joint": false,
+        "old_context_comparator": false
+      },
+      "geometry": {
+        "earlier": {
+          "center": "11cbae5c536227fff3a96953ac66940fb00a84814202714b654898f48ad250d3",
+          "context": "244aef6366f7447ad856e0f9b5428aa360281aacbb1e49d4ae503ee64bdb5679",
+          "file_sha256": "eeed228a574f11962322794ba38bbb76cb55359aa54edf1fd0dbb0425745f856",
+          "spans": [
+            [
+              190,
+              336
+            ],
+            [
+              337,
+              530
+            ],
+            [
+              532,
+              692
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              190,
+              336
+            ],
+            [
+              1,
+              0,
+              337,
+              530
+            ],
+            [
+              2,
+              1,
+              0,
+              160
+            ]
+          ]
+        },
+        "later": {
+          "center": "3db327c3058e62a83f739c20042023c133b9eccdc6c9e222245f748f07e3bcae",
+          "context": "d5e026a7341fffef1a3f42efc8907be41683dcd25dda4b79fad684de2334263b",
+          "file_sha256": "0c7b7d70f0dcf272efc904983a13d96569de0a4ee894709d0b424b67c0d35cd9",
+          "spans": [
+            [
+              190,
+              336
+            ],
+            [
+              337,
+              537
+            ],
+            [
+              539,
+              699
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              190,
+              336
+            ],
+            [
+              1,
+              0,
+              337,
+              537
+            ],
+            [
+              2,
+              1,
+              0,
+              160
+            ]
+          ]
+        }
+      },
+      "group": "wellcome-14765",
+      "panel": "journal",
+      "previous_txt": [
+        [
+          "0x1.36f0000000000p-11",
+          "0x1.0e00000000000p-11",
+          "0x1.0c22000000000p-8",
+          "0x1.c3f4000000000p-9"
+        ],
+        [
+          "0x1.8429fc0000000p-12",
+          "0x1.5f52320000000p-12",
+          "0x1.a294aa0000000p-6",
+          "0x1.929bca0000000p-6"
+        ]
+      ],
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.36f0000000000p-11",
+            "0x1.0e00000000000p-11",
+            "0x1.0c22000000000p-8",
+            "0x1.c3f4000000000p-9"
+          ],
+          "token_counts": [
+            83,
+            85,
+            33,
+            35
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.8429fc0000000p-12",
+            "0x1.5f52320000000p-12",
+            "0x1.a294aa0000000p-6",
+            "0x1.929bca0000000p-6"
+          ],
+          "token_counts": [
+            83,
+            85,
+            34,
+            36
+          ]
+        }
+      ],
+      "role": "edited",
+      "truth": null
+    },
+    {
+      "change_ids": [
+        "C01",
+        "C02",
+        "C03"
+      ],
+      "decisions": {
+        "context_only": true,
+        "joint": true,
+        "old_context_comparator": false
+      },
+      "geometry": {
+        "earlier": {
+          "center": "11cbae5c536227fff3a96953ac66940fb00a84814202714b654898f48ad250d3",
+          "context": "244aef6366f7447ad856e0f9b5428aa360281aacbb1e49d4ae503ee64bdb5679",
+          "file_sha256": "eeed228a574f11962322794ba38bbb76cb55359aa54edf1fd0dbb0425745f856",
+          "spans": [
+            [
+              190,
+              336
+            ],
+            [
+              337,
+              530
+            ],
+            [
+              532,
+              692
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              190,
+              336
+            ],
+            [
+              1,
+              0,
+              337,
+              530
+            ],
+            [
+              2,
+              1,
+              0,
+              160
+            ]
+          ]
+        },
+        "later": {
+          "center": "80d136168f704943fc4e65b172b162fc38f3ce6dbc121f31f6f3e68e7ff27328",
+          "context": "2882ee76dce89648bf05b6b20a3f926cc674acaeca3faa1f2e9a6db4f10449cf",
+          "file_sha256": "5ceec5ec6b6aead043c967c6c157a623296e377eca18dec64fd5e0cb52786ee1",
+          "spans": [
+            [
+              190,
+              336
+            ],
+            [
+              337,
+              557
+            ],
+            [
+              559,
+              719
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              190,
+              336
+            ],
+            [
+              1,
+              0,
+              337,
+              557
+            ],
+            [
+              2,
+              1,
+              0,
+              160
+            ]
+          ]
+        }
+      },
+      "group": "wellcome-14765",
+      "panel": "journal",
+      "previous_txt": [
+        [
+          "0x1.36f0000000000p-11",
+          "0x1.003c000000000p-9",
+          "0x1.0c22000000000p-8",
+          "0x1.52068c0000000p-1"
+        ],
+        [
+          "0x1.8bfbcc0000000p-12",
+          "0x1.15e6900000000p-11",
+          "0x1.a294aa0000000p-6",
+          "0x1.f9d9200000000p-1"
+        ]
+      ],
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.36f0000000000p-11",
+            "0x1.003c000000000p-9",
+            "0x1.0c22000000000p-8",
+            "0x1.52068c0000000p-1"
+          ],
+          "token_counts": [
+            83,
+            88,
+            33,
+            38
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.8bfbcc0000000p-12",
+            "0x1.15e6900000000p-11",
+            "0x1.a294aa0000000p-6",
+            "0x1.f9d9200000000p-1"
+          ],
+          "token_counts": [
+            83,
+            88,
+            34,
+            38
+          ]
+        }
+      ],
+      "role": "qwen",
+      "truth": [
+        337,
+        557
+      ]
+    },
+    {
+      "change_ids": [
+        "C01",
+        "C02",
+        "C03",
+        "C04"
+      ],
+      "decisions": {
+        "context_only": false,
+        "joint": false,
+        "old_context_comparator": false
+      },
+      "geometry": {
+        "earlier": {
+          "center": "11cbae5c536227fff3a96953ac66940fb00a84814202714b654898f48ad250d3",
+          "context": "244aef6366f7447ad856e0f9b5428aa360281aacbb1e49d4ae503ee64bdb5679",
+          "file_sha256": "eeed228a574f11962322794ba38bbb76cb55359aa54edf1fd0dbb0425745f856",
+          "spans": [
+            [
+              190,
+              336
+            ],
+            [
+              337,
+              530
+            ],
+            [
+              532,
+              692
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              190,
+              336
+            ],
+            [
+              1,
+              0,
+              337,
+              530
+            ],
+            [
+              2,
+              1,
+              0,
+              160
+            ]
+          ]
+        },
+        "later": {
+          "center": "edf146ba4743cb108641fd00288ce255dfcccc6c2d6c07709c54e12f9c7602f6",
+          "context": "a134ed46022d00438c92f3c707f3c6d3315d4ddd6d7720d6df4c88bcba48f6f8",
+          "file_sha256": "92ee3fb016a9a41a9cda17a0e0101fff8bf4d83479bd4d64a6294ccb9f9eca1f",
+          "spans": [
+            [
+              190,
+              336
+            ],
+            [
+              337,
+              557
+            ],
+            [
+              559,
+              719
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              190,
+              336
+            ],
+            [
+              1,
+              0,
+              337,
+              557
+            ],
+            [
+              2,
+              1,
+              0,
+              160
+            ]
+          ]
+        }
+      },
+      "group": "wellcome-14765",
+      "panel": "journal",
+      "previous_txt": [
+        [
+          "0x1.36f0000000000p-11",
+          "0x1.2130000000000p-9",
+          "0x1.0c22000000000p-8",
+          "0x1.f7de2e0000000p-1"
+        ],
+        [
+          "0x1.8bfbcc0000000p-12",
+          "0x1.be524c0000000p-12",
+          "0x1.a294aa0000000p-6",
+          "0x1.3156040000000p-1"
+        ]
+      ],
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.36f0000000000p-11",
+            "0x1.2130000000000p-9",
+            "0x1.0c22000000000p-8",
+            "0x1.f7de2e0000000p-1"
+          ],
+          "token_counts": [
+            83,
+            90,
+            33,
+            40
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.8bfbcc0000000p-12",
+            "0x1.be524c0000000p-12",
+            "0x1.a294aa0000000p-6",
+            "0x1.3156040000000p-1"
+          ],
+          "token_counts": [
+            83,
+            90,
+            34,
+            40
+          ]
+        }
+      ],
+      "role": "smol2",
+      "truth": [
+        337,
+        557
+      ]
+    },
+    {
+      "change_ids": [
+        "C01"
+      ],
+      "decisions": {
+        "context_only": false,
+        "joint": false,
+        "old_context_comparator": false
+      },
+      "geometry": {
+        "earlier": {
+          "center": "25a82912fc33c97ad46c674dd1ee5349d590e7bddd996fdeeaf000b7713b2110",
+          "context": "d981074835aed008e12207c414ff51913401906af9aee04623948b32921c7af8",
+          "file_sha256": "543410ee2b02544d3b4d4666c35a5babcaf8bf77555baf85716dd62516bef3fb",
+          "spans": [
+            [
+              75,
+              141
+            ],
+            [
+              143,
+              235
+            ],
+            [
+              236,
+              360
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              75,
+              141
+            ],
+            [
+              2,
+              1,
+              0,
+              92
+            ],
+            [
+              2,
+              1,
+              93,
+              217
+            ]
+          ]
+        },
+        "later": {
+          "center": "747f43ad84606c5db3fd5d80fe5bf899aa69803ac83f83fc720c7085b4d7aef3",
+          "context": "38d5b1656ccd29677c0a3400aa63089430fad5b3e39752fa819f026fa61fc27c",
+          "file_sha256": "23bec4cbcfde601ace0d85de3483a444525d5c3a83f56f45b459b4b602240c21",
+          "spans": [
+            [
+              75,
+              141
+            ],
+            [
+              143,
+              241
+            ],
+            [
+              242,
+              366
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              75,
+              141
+            ],
+            [
+              2,
+              1,
+              0,
+              98
+            ],
+            [
+              2,
+              1,
+              99,
+              223
+            ]
+          ]
+        }
+      },
+      "group": "wellcome-14838",
+      "panel": "journal",
+      "previous_txt": [
+        [
+          "0x1.22ee000000000p-9",
+          "0x1.4798000000000p-10",
+          "0x1.05a9c80000000p-3",
+          "0x1.bc61000000000p-7"
+        ],
+        [
+          "0x1.0b0b260000000p-6",
+          "0x1.19703a0000000p-7",
+          "0x1.3418aa0000000p-1",
+          "0x1.3f1e520000000p-1"
+        ]
+      ],
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.22ee000000000p-9",
+            "0x1.4798000000000p-10",
+            "0x1.05a9c80000000p-3",
+            "0x1.bc61000000000p-7"
+          ],
+          "token_counts": [
+            50,
+            51,
+            15,
+            16
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.0b0b260000000p-6",
+            "0x1.19703a0000000p-7",
+            "0x1.3418aa0000000p-1",
+            "0x1.3f1e520000000p-1"
+          ],
+          "token_counts": [
+            51,
+            52,
+            15,
+            16
+          ]
+        }
+      ],
+      "role": "edited",
+      "truth": null
+    },
+    {
+      "change_ids": [
+        "C01",
+        "C02"
+      ],
+      "decisions": {
+        "context_only": false,
+        "joint": false,
+        "old_context_comparator": false
+      },
+      "geometry": {
+        "earlier": {
+          "center": "27c06c6655a7ae7f98a81c30a91b082252effc565db08a08269154eadf190731",
+          "context": "c9af8a5c3d5087d657dab6936b9a3029f183e03d740fbe1c888c7d6a4dee71fd",
+          "file_sha256": "db42d3c0eb9d074bbca3a8db31493eb97dff57dd119c114d3ac4e90aa2af0a0b",
+          "spans": [
+            [
+              147,
+              390
+            ],
+            [
+              392,
+              611
+            ],
+            [
+              612,
+              737
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              147,
+              390
+            ],
+            [
+              2,
+              1,
+              0,
+              219
+            ],
+            [
+              2,
+              1,
+              220,
+              345
+            ]
+          ]
+        },
+        "later": {
+          "center": "26ada15e22c17926600a520be8d988abd40f95a422e8110034fd1257732f28bb",
+          "context": "e181971ceff4702572624812b5bd1ca7d5bba0b949f77f6f91e43c45a01c1e11",
+          "file_sha256": "5a5d63ffb7e77f59e406f009e765c0ed19eecda6e885e11a7965d58c05e4006d",
+          "spans": [
+            [
+              147,
+              390
+            ],
+            [
+              392,
+              608
+            ],
+            [
+              609,
+              734
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              147,
+              390
+            ],
+            [
+              2,
+              1,
+              0,
+              216
+            ],
+            [
+              2,
+              1,
+              217,
+              342
+            ]
+          ]
+        }
+      },
+      "group": "wellcome-13531",
+      "panel": "journal",
+      "previous_txt": [
+        [
+          "0x1.71c0000000000p-12",
+          "0x1.69e0000000000p-12",
+          "0x1.839e000000000p-9",
+          "0x1.16f9000000000p-8"
+        ],
+        [
+          "0x1.2708880000000p-11",
+          "0x1.2cf9cc0000000p-11",
+          "0x1.10bc700000000p-1",
+          "0x1.ad3d740000000p-1"
+        ]
+      ],
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.71c0000000000p-12",
+            "0x1.69e0000000000p-12",
+            "0x1.839e000000000p-9",
+            "0x1.16f9000000000p-8"
+          ],
+          "token_counts": [
+            102,
+            102,
+            37,
+            37
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.2708880000000p-11",
+            "0x1.2cf9cc0000000p-11",
+            "0x1.10bc700000000p-1",
+            "0x1.ad3d740000000p-1"
+          ],
+          "token_counts": [
+            104,
+            104,
+            38,
+            38
+          ]
+        }
+      ],
+      "role": "edited",
+      "truth": null
+    },
+    {
+      "change_ids": [
+        "C01"
+      ],
+      "decisions": {
+        "context_only": true,
+        "joint": true,
+        "old_context_comparator": false
+      },
+      "geometry": {
+        "earlier": {
+          "center": "27c06c6655a7ae7f98a81c30a91b082252effc565db08a08269154eadf190731",
+          "context": "c9af8a5c3d5087d657dab6936b9a3029f183e03d740fbe1c888c7d6a4dee71fd",
+          "file_sha256": "db42d3c0eb9d074bbca3a8db31493eb97dff57dd119c114d3ac4e90aa2af0a0b",
+          "spans": [
+            [
+              147,
+              390
+            ],
+            [
+              392,
+              611
+            ],
+            [
+              612,
+              737
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              147,
+              390
+            ],
+            [
+              2,
+              1,
+              0,
+              219
+            ],
+            [
+              2,
+              1,
+              220,
+              345
+            ]
+          ]
+        },
+        "later": {
+          "center": "9f2200be1b1951c4bc2d9eec3d558bfa761b8f2f1aef92d1459707934de4bddd",
+          "context": "db793efe3a94643492adb0684cbeb91ad9fc145dcd212fdd19014f0e833ee8ab",
+          "file_sha256": "a3551487e5a627191bfe4b7fef0b27bc9d826f81c9695756d859363833873053",
+          "spans": [
+            [
+              147,
+              390
+            ],
+            [
+              392,
+              533
+            ],
+            [
+              534,
+              659
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              147,
+              390
+            ],
+            [
+              2,
+              1,
+              0,
+              141
+            ],
+            [
+              2,
+              1,
+              142,
+              267
+            ]
+          ]
+        }
+      },
+      "group": "wellcome-13531",
+      "panel": "journal",
+      "previous_txt": [
+        [
+          "0x1.71c0000000000p-12",
+          "0x1.25d8000000000p-11",
+          "0x1.839e000000000p-9",
+          "0x1.0b8c400000000p-1"
+        ],
+        [
+          "0x1.2708880000000p-11",
+          "0x1.cd06800000000p-9",
+          "0x1.10bc700000000p-1",
+          "0x1.e78d5e0000000p-1"
+        ]
+      ],
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.71c0000000000p-12",
+            "0x1.25d8000000000p-11",
+            "0x1.839e000000000p-9",
+            "0x1.0b8c400000000p-1"
+          ],
+          "token_counts": [
+            102,
+            88,
+            37,
+            23
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.2708880000000p-11",
+            "0x1.cd06800000000p-9",
+            "0x1.10bc700000000p-1",
+            "0x1.e78d5e0000000p-1"
+          ],
+          "token_counts": [
+            104,
+            88,
+            38,
+            22
+          ]
+        }
+      ],
+      "role": "qwen",
+      "truth": [
+        392,
+        533
+      ]
+    },
+    {
+      "change_ids": [
+        "C01",
+        "C02",
+        "C03"
+      ],
+      "decisions": {
+        "context_only": true,
+        "joint": true,
+        "old_context_comparator": false
+      },
+      "geometry": {
+        "earlier": {
+          "center": "27c06c6655a7ae7f98a81c30a91b082252effc565db08a08269154eadf190731",
+          "context": "c9af8a5c3d5087d657dab6936b9a3029f183e03d740fbe1c888c7d6a4dee71fd",
+          "file_sha256": "db42d3c0eb9d074bbca3a8db31493eb97dff57dd119c114d3ac4e90aa2af0a0b",
+          "spans": [
+            [
+              147,
+              390
+            ],
+            [
+              392,
+              611
+            ],
+            [
+              612,
+              737
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              147,
+              390
+            ],
+            [
+              2,
+              1,
+              0,
+              219
+            ],
+            [
+              2,
+              1,
+              220,
+              345
+            ]
+          ]
+        },
+        "later": {
+          "center": "4df1561b1e9f2b253279aa5576597162adaef0ae5f397d829d9fa57e6b8406e9",
+          "context": "7209287227317c7462fd408e956ce507e861dd59f1c0ad3a7d488733a93a93b0",
+          "file_sha256": "773b673b41f1aefcf6a92b0f61a2c4917231fe36c8c8920d9b7fbf5d88d97427",
+          "spans": [
+            [
+              147,
+              390
+            ],
+            [
+              392,
+              626
+            ],
+            [
+              627,
+              752
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              147,
+              390
+            ],
+            [
+              2,
+              1,
+              0,
+              234
+            ],
+            [
+              2,
+              1,
+              235,
+              360
+            ]
+          ]
+        }
+      },
+      "group": "wellcome-13531",
+      "panel": "journal",
+      "previous_txt": [
+        [
+          "0x1.71c0000000000p-12",
+          "0x1.0b90000000000p-11",
+          "0x1.839e000000000p-9",
+          "0x1.0f141c0000000p-2"
+        ],
+        [
+          "0x1.2708880000000p-11",
+          "0x1.34739c0000000p-10",
+          "0x1.10bc700000000p-1",
+          "0x1.fa16060000000p-1"
+        ]
+      ],
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.71c0000000000p-12",
+            "0x1.0b90000000000p-11",
+            "0x1.839e000000000p-9",
+            "0x1.0f141c0000000p-2"
+          ],
+          "token_counts": [
+            102,
+            104,
+            37,
+            39
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.2708880000000p-11",
+            "0x1.34739c0000000p-10",
+            "0x1.10bc700000000p-1",
+            "0x1.fa16060000000p-1"
+          ],
+          "token_counts": [
+            104,
+            104,
+            38,
+            38
+          ]
+        }
+      ],
+      "role": "smol2",
+      "truth": [
+        392,
+        626
+      ]
+    },
+    {
+      "change_ids": [
+        "C01",
+        "C02"
+      ],
+      "decisions": {
+        "context_only": false,
+        "joint": false,
+        "old_context_comparator": false
+      },
+      "geometry": {
+        "earlier": {
+          "center": "26a1da4e5f5e67083debd435ff1efc06f4bcfbf88e3755ce5c3f2adffed78e74",
+          "context": "fa0b4c1358e87d8ec324a0641e509267bf5e9fd3b2d0d4a25105a344a97621ff",
+          "file_sha256": "abb4d89eb2814c02929b4bdaff436c92194851689413b5c263c9034aa7ecbedb",
+          "spans": [
+            [
+              503,
+              769
+            ],
+            [
+              771,
+              878
+            ],
+            [
+              879,
+              922
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              503,
+              769
+            ],
+            [
+              2,
+              1,
+              0,
+              107
+            ],
+            [
+              2,
+              1,
+              108,
+              151
+            ]
+          ]
+        },
+        "later": {
+          "center": "27d6a39a942aa60484b9d808e6370d132e636bab6f5625ecab2396e263d3c388",
+          "context": "cbe1780e7320b82841e21f841de5840fd69315a6af87dd66e92e259a86f6b2f2",
+          "file_sha256": "43ef3d4ab09377664f8623aaf6f72453dacced374d786ff046fa3d55276429b2",
+          "spans": [
+            [
+              503,
+              769
+            ],
+            [
+              771,
+              864
+            ],
+            [
+              865,
+              908
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              503,
+              769
+            ],
+            [
+              2,
+              1,
+              0,
+              93
+            ],
+            [
+              2,
+              1,
+              94,
+              137
+            ]
+          ]
+        }
+      },
+      "group": "wellcome-14770",
+      "panel": "journal",
+      "previous_txt": [
+        [
+          "0x1.3b10000000000p-11",
+          "0x1.5a8c000000000p-9",
+          "0x1.66f0000000000p-11",
+          "0x1.9816000000000p-9"
+        ],
+        [
+          "0x1.5a0f2c0000000p-11",
+          "0x1.533a3c0000000p-11",
+          "0x1.b417800000000p-1",
+          "0x1.ceb8ea0000000p-1"
+        ]
+      ],
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.3b10000000000p-11",
+            "0x1.5a8c000000000p-9",
+            "0x1.66f0000000000p-11",
+            "0x1.9816000000000p-9"
+          ],
+          "token_counts": [
+            82,
+            80,
+            23,
+            21
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.5a0f2c0000000p-11",
+            "0x1.533a3c0000000p-11",
+            "0x1.b417800000000p-1",
+            "0x1.ceb8ea0000000p-1"
+          ],
+          "token_counts": [
+            85,
+            83,
+            27,
+            25
+          ]
+        }
+      ],
+      "role": "qwen",
+      "truth": [
+        771,
+        864
+      ]
+    },
+    {
+      "change_ids": [
+        "C01",
+        "C02",
+        "C03"
+      ],
+      "decisions": {
+        "context_only": false,
+        "joint": false,
+        "old_context_comparator": false
+      },
+      "geometry": {
+        "earlier": {
+          "center": "26a1da4e5f5e67083debd435ff1efc06f4bcfbf88e3755ce5c3f2adffed78e74",
+          "context": "fa0b4c1358e87d8ec324a0641e509267bf5e9fd3b2d0d4a25105a344a97621ff",
+          "file_sha256": "abb4d89eb2814c02929b4bdaff436c92194851689413b5c263c9034aa7ecbedb",
+          "spans": [
+            [
+              503,
+              769
+            ],
+            [
+              771,
+              878
+            ],
+            [
+              879,
+              922
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              503,
+              769
+            ],
+            [
+              2,
+              1,
+              0,
+              107
+            ],
+            [
+              2,
+              1,
+              108,
+              151
+            ]
+          ]
+        },
+        "later": {
+          "center": "e05fceaf71f516b1ccd0fd3d3ae8948a6b8250e1e9b2c8fee6812dd2dca8928d",
+          "context": "5687660548d18ea95d8ae4ef4f73e7a0d66599f826d41d8989da5835b87e53f9",
+          "file_sha256": "39aabf7b3b7dbbfe792d1b1d9c079dd39cee30c64ef4851c3525a8027dc6251e",
+          "spans": [
+            [
+              503,
+              769
+            ],
+            [
+              771,
+              869
+            ],
+            [
+              870,
+              913
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              503,
+              769
+            ],
+            [
+              2,
+              1,
+              0,
+              98
+            ],
+            [
+              2,
+              1,
+              99,
+              142
+            ]
+          ]
+        }
+      },
+      "group": "wellcome-14770",
+      "panel": "journal",
+      "previous_txt": [
+        [
+          "0x1.3b10000000000p-11",
+          "0x1.6a64000000000p-8",
+          "0x1.66f0000000000p-11",
+          "0x1.4f37000000000p-8"
+        ],
+        [
+          "0x1.6107560000000p-11",
+          "0x1.ed1f400000000p-12",
+          "0x1.b417800000000p-1",
+          "0x1.7a850e0000000p-2"
+        ]
+      ],
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.3b10000000000p-11",
+            "0x1.6a64000000000p-8",
+            "0x1.66f0000000000p-11",
+            "0x1.4f37000000000p-8"
+          ],
+          "token_counts": [
+            82,
+            83,
+            23,
+            24
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.6107560000000p-11",
+            "0x1.ed1f400000000p-12",
+            "0x1.b417800000000p-1",
+            "0x1.7a850e0000000p-2"
+          ],
+          "token_counts": [
+            85,
+            86,
+            27,
+            28
+          ]
+        }
+      ],
+      "role": "smol2",
+      "truth": [
+        771,
+        869
+      ]
+    },
+    {
+      "change_ids": [
+        "C01",
+        "C02"
+      ],
+      "decisions": {
+        "context_only": false,
+        "joint": false,
+        "old_context_comparator": false
+      },
+      "geometry": {
+        "earlier": {
+          "center": "14e41e97598ac060cec75312a6a72883bbc5bff2a01203700e5ef3d33f29532c",
+          "context": "2c0b664ef1be1e63fb6c2aedd00db74763dd36995b3aa67655b2d9d663d38bd6",
+          "file_sha256": "55dba3f67c3739ceb39c5f19e0f1f390ceb45468bed05332b3f39a9370d317c7",
+          "spans": [
+            [
+              216,
+              326
+            ],
+            [
+              328,
+              509
+            ],
+            [
+              510,
+              573
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              216,
+              326
+            ],
+            [
+              2,
+              1,
+              0,
+              181
+            ],
+            [
+              2,
+              1,
+              182,
+              245
+            ]
+          ]
+        },
+        "later": {
+          "center": "762cc7da08526ea12752619469b5aee99400815380644c5730a02dc17b41aab1",
+          "context": "c9cbd5f2b0a06786411032df80d2430907cc8deca48ddf61657fcf534fd2c70a",
+          "file_sha256": "054fb6c5eed15bed7ec3906640de1a28a758ce391db5218e72af225b6f8ba3dd",
+          "spans": [
+            [
+              216,
+              326
+            ],
+            [
+              328,
+              527
+            ],
+            [
+              528,
+              591
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              216,
+              326
+            ],
+            [
+              2,
+              1,
+              0,
+              199
+            ],
+            [
+              2,
+              1,
+              200,
+              263
+            ]
+          ]
+        }
+      },
+      "group": "gates-12903",
+      "panel": "journal",
+      "previous_txt": [
+        [
+          "0x1.ca20000000000p-13",
+          "0x1.68c0000000000p-13",
+          "0x1.9680000000000p-11",
+          "0x1.9670000000000p-12"
+        ],
+        [
+          "0x1.2cf9cc0000000p-11",
+          "0x1.1b7f8a0000000p-11",
+          "0x1.13ecee0000000p-7",
+          "0x1.734c480000000p-8"
+        ]
+      ],
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.ca20000000000p-13",
+            "0x1.68c0000000000p-13",
+            "0x1.9680000000000p-11",
+            "0x1.9670000000000p-12"
+          ],
+          "token_counts": [
+            74,
+            78,
+            43,
+            47
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.2cf9cc0000000p-11",
+            "0x1.1b7f8a0000000p-11",
+            "0x1.13ecee0000000p-7",
+            "0x1.734c480000000p-8"
+          ],
+          "token_counts": [
+            87,
+            91,
+            50,
+            54
+          ]
+        }
+      ],
+      "role": "edited",
+      "truth": null
+    },
+    {
+      "change_ids": [
+        "C01",
+        "C02",
+        "C03"
+      ],
+      "decisions": {
+        "context_only": false,
+        "joint": false,
+        "old_context_comparator": false
+      },
+      "geometry": {
+        "earlier": {
+          "center": "5f886e48d2e5b5ddd7fb67ecc70301d9774ce5cf560a195420af588649ce2b36",
+          "context": "65ea94863773140ae0ab73ebd43e7684f0009d37b87aad450922c1cd30f853dd",
+          "file_sha256": "c0eb8b292ef4edd57e792f0c046b0b59efb2b4ca32afa642c9c04e059247d4f9",
+          "spans": [
+            [
+              211,
+              293
+            ],
+            [
+              294,
+              408
+            ],
+            [
+              410,
+              575
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              211,
+              293
+            ],
+            [
+              1,
+              0,
+              294,
+              408
+            ],
+            [
+              2,
+              1,
+              0,
+              165
+            ]
+          ]
+        },
+        "later": {
+          "center": "a6096d6aa8800023253b01e065320f56b995b26b9a3178b8e43185622bbf0ab1",
+          "context": "b6cc81d8c393c3a9d531758c57ec74da095cd01f4d8410ede4ce2a97c00d04cb",
+          "file_sha256": "d4833741b286e337f760d7704c967680e0d598b732fa827f83d81fc40ddc8007",
+          "spans": [
+            [
+              211,
+              293
+            ],
+            [
+              294,
+              443
+            ],
+            [
+              445,
+              610
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              211,
+              293
+            ],
+            [
+              1,
+              0,
+              294,
+              443
+            ],
+            [
+              2,
+              1,
+              0,
+              165
+            ]
+          ]
+        }
+      },
+      "group": "gates-12825",
+      "panel": "journal",
+      "previous_txt": [
+        [
+          "0x1.9a2e000000000p-9",
+          "0x1.539a000000000p-9",
+          "0x1.c213800000000p-7",
+          "0x1.06bdc80000000p-3"
+        ],
+        [
+          "0x1.03b6400000000p-8",
+          "0x1.19324a0000000p-8",
+          "0x1.a9b8720000000p-1",
+          "0x1.e61ed00000000p-1"
+        ]
+      ],
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.9a2e000000000p-9",
+            "0x1.539a000000000p-9",
+            "0x1.c213800000000p-7",
+            "0x1.06bdc80000000p-3"
+          ],
+          "token_counts": [
+            61,
+            65,
+            18,
+            22
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.03b6400000000p-8",
+            "0x1.19324a0000000p-8",
+            "0x1.a9b8720000000p-1",
+            "0x1.e61ed00000000p-1"
+          ],
+          "token_counts": [
+            67,
+            73,
+            18,
+            24
+          ]
+        }
+      ],
+      "role": "edited",
+      "truth": null
+    },
+    {
+      "change_ids": [
+        "C01",
+        "C02"
+      ],
+      "decisions": {
+        "context_only": false,
+        "joint": false,
+        "old_context_comparator": false
+      },
+      "geometry": {
+        "earlier": {
+          "center": "5f886e48d2e5b5ddd7fb67ecc70301d9774ce5cf560a195420af588649ce2b36",
+          "context": "65ea94863773140ae0ab73ebd43e7684f0009d37b87aad450922c1cd30f853dd",
+          "file_sha256": "c0eb8b292ef4edd57e792f0c046b0b59efb2b4ca32afa642c9c04e059247d4f9",
+          "spans": [
+            [
+              211,
+              293
+            ],
+            [
+              294,
+              408
+            ],
+            [
+              410,
+              575
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              211,
+              293
+            ],
+            [
+              1,
+              0,
+              294,
+              408
+            ],
+            [
+              2,
+              1,
+              0,
+              165
+            ]
+          ]
+        },
+        "later": {
+          "center": "5096f6180d19d9e2fbbc9f9e517ad96aa7fe2b523300dcd3a3b70d75a39b692f",
+          "context": "57c2370a622145ea1fb7aaa7d1235b9a67f687bd91f89c496a6718bd7c9b67a5",
+          "file_sha256": "67382b2ea3d7fc8fbb55e904c89201c9d6687362a9eea507aa689bdc1f8493f9",
+          "spans": [
+            [
+              211,
+              293
+            ],
+            [
+              294,
+              375
+            ],
+            [
+              377,
+              542
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              211,
+              293
+            ],
+            [
+              1,
+              0,
+              294,
+              375
+            ],
+            [
+              2,
+              1,
+              0,
+              165
+            ]
+          ]
+        }
+      },
+      "group": "gates-12825",
+      "panel": "journal",
+      "previous_txt": [
+        [
+          "0x1.9a2e000000000p-9",
+          "0x1.2df0000000000p-8",
+          "0x1.c213800000000p-7",
+          "0x1.4dda000000000p-8"
+        ],
+        [
+          "0x1.064e2a0000000p-8",
+          "0x1.63fafe0000000p-9",
+          "0x1.a9b8720000000p-1",
+          "0x1.1ff4b00000000p-1"
+        ]
+      ],
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.9a2e000000000p-9",
+            "0x1.2df0000000000p-8",
+            "0x1.c213800000000p-7",
+            "0x1.4dda000000000p-8"
+          ],
+          "token_counts": [
+            61,
+            58,
+            18,
+            15
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.064e2a0000000p-8",
+            "0x1.63fafe0000000p-9",
+            "0x1.a9b8720000000p-1",
+            "0x1.1ff4b00000000p-1"
+          ],
+          "token_counts": [
+            67,
+            65,
+            18,
+            16
+          ]
+        }
+      ],
+      "role": "qwen",
+      "truth": [
+        294,
+        375
+      ]
+    },
+    {
+      "change_ids": [
+        "C01",
+        "C02"
+      ],
+      "decisions": {
+        "context_only": false,
+        "joint": false,
+        "old_context_comparator": false
+      },
+      "geometry": {
+        "earlier": {
+          "center": "e6b5d6c75526b61dd26b6381caa8b3face9a1f4161f33660939f1340e0d9b913",
+          "context": "eac7ba28db77f3a0d978b9af691382af6ef14ce9661578aac3382a58fc0d3da4",
+          "file_sha256": "e5c856def9c3d849d2ddb04b4389fd85ea79df95dd03befd73793a73be74d48a",
+          "spans": [
+            [
+              68,
+              131
+            ],
+            [
+              132,
+              351
+            ],
+            [
+              353,
+              369
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              68,
+              131
+            ],
+            [
+              1,
+              0,
+              132,
+              351
+            ],
+            [
+              2,
+              1,
+              0,
+              16
+            ]
+          ]
+        },
+        "later": {
+          "center": "585ec19e85d0a4f4c89b6a6fa9f67d94a76aaa770ed248d5159b5805a8dd2204",
+          "context": "541157ea5d4c7d0edba8fc3827e54ff1c89ea55d6e957dda06303be8322de3b1",
+          "file_sha256": "7f3a240e39f551cdb82c36f65547441347406c4e7332ba5b5d05ea9cb8c304b2",
+          "spans": [
+            [
+              68,
+              131
+            ],
+            [
+              132,
+              326
+            ],
+            [
+              328,
+              344
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              68,
+              131
+            ],
+            [
+              1,
+              0,
+              132,
+              326
+            ],
+            [
+              2,
+              1,
+              0,
+              16
+            ]
+          ]
+        }
+      },
+      "group": "gates-12808",
+      "panel": "journal",
+      "previous_txt": [
+        [
+          "0x1.01c4000000000p-7",
+          "0x1.2eb1800000000p-7",
+          "0x1.4f7e000000000p-6",
+          "0x1.30ff800000000p-6"
+        ],
+        [
+          "0x1.bed7c60000000p-1",
+          "0x1.f5bfba0000000p-1",
+          "0x1.faf32c0000000p-1",
+          "0x1.f6854a0000000p-1"
+        ]
+      ],
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.01c4000000000p-7",
+            "0x1.2eb1800000000p-7",
+            "0x1.4f7e000000000p-6",
+            "0x1.30ff800000000p-6"
+          ],
+          "token_counts": [
+            66,
+            61,
+            48,
+            43
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.bed7c60000000p-1",
+            "0x1.f5bfba0000000p-1",
+            "0x1.faf32c0000000p-1",
+            "0x1.f6854a0000000p-1"
+          ],
+          "token_counts": [
+            71,
+            65,
+            52,
+            46
+          ]
+        }
+      ],
+      "role": "edited",
+      "truth": null
+    },
+    {
+      "change_ids": [
+        "C01"
+      ],
+      "decisions": {
+        "context_only": false,
+        "joint": false,
+        "old_context_comparator": false
+      },
+      "geometry": {
+        "earlier": {
+          "center": "e6b5d6c75526b61dd26b6381caa8b3face9a1f4161f33660939f1340e0d9b913",
+          "context": "eac7ba28db77f3a0d978b9af691382af6ef14ce9661578aac3382a58fc0d3da4",
+          "file_sha256": "e5c856def9c3d849d2ddb04b4389fd85ea79df95dd03befd73793a73be74d48a",
+          "spans": [
+            [
+              68,
+              131
+            ],
+            [
+              132,
+              351
+            ],
+            [
+              353,
+              369
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              68,
+              131
+            ],
+            [
+              1,
+              0,
+              132,
+              351
+            ],
+            [
+              2,
+              1,
+              0,
+              16
+            ]
+          ]
+        },
+        "later": {
+          "center": "b7687d7cada5e0e7a735ff41ffb7dc128fc45071db655adc2c2fa2ef495bdbc2",
+          "context": "60d6d6281195bbe990ecdcb6494876ce76a97938bea84db78da13c9b936abfa9",
+          "file_sha256": "4448d3c76c797187954d8bc8555c814949d5523aefa1114da7ae6352817f437a",
+          "spans": [
+            [
+              68,
+              131
+            ],
+            [
+              132,
+              383
+            ],
+            [
+              385,
+              401
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              68,
+              131
+            ],
+            [
+              1,
+              0,
+              132,
+              383
+            ],
+            [
+              2,
+              1,
+              0,
+              16
+            ]
+          ]
+        }
+      },
+      "group": "gates-12808",
+      "panel": "journal",
+      "previous_txt": [
+        [
+          "0x1.01c4000000000p-7",
+          "0x1.284a000000000p-6",
+          "0x1.4f7e000000000p-6",
+          "0x1.2495400000000p-5"
+        ],
+        [
+          "0x1.c7a4ba0000000p-1",
+          "0x1.6fef740000000p-1",
+          "0x1.faf32c0000000p-1",
+          "0x1.f4961e0000000p-1"
+        ]
+      ],
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.01c4000000000p-7",
+            "0x1.284a000000000p-6",
+            "0x1.4f7e000000000p-6",
+            "0x1.2495400000000p-5"
+          ],
+          "token_counts": [
+            66,
+            75,
+            48,
+            57
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.c7a4ba0000000p-1",
+            "0x1.6fef740000000p-1",
+            "0x1.faf32c0000000p-1",
+            "0x1.f4961e0000000p-1"
+          ],
+          "token_counts": [
+            71,
+            80,
+            52,
+            61
+          ]
+        }
+      ],
+      "role": "qwen",
+      "truth": [
+        132,
+        383
+      ]
+    },
+    {
+      "change_ids": [
+        "C01",
+        "C02"
+      ],
+      "decisions": {
+        "context_only": true,
+        "joint": false,
+        "old_context_comparator": true
+      },
+      "geometry": {
+        "earlier": {
+          "center": "e6b5d6c75526b61dd26b6381caa8b3face9a1f4161f33660939f1340e0d9b913",
+          "context": "eac7ba28db77f3a0d978b9af691382af6ef14ce9661578aac3382a58fc0d3da4",
+          "file_sha256": "e5c856def9c3d849d2ddb04b4389fd85ea79df95dd03befd73793a73be74d48a",
+          "spans": [
+            [
+              68,
+              131
+            ],
+            [
+              132,
+              351
+            ],
+            [
+              353,
+              369
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              68,
+              131
+            ],
+            [
+              1,
+              0,
+              132,
+              351
+            ],
+            [
+              2,
+              1,
+              0,
+              16
+            ]
+          ]
+        },
+        "later": {
+          "center": "eb86ce41c520fd361b5598a09c910fbd3157d1902752e01a877c04d81a834ceb",
+          "context": "4460235e9f2a67c61a9c7817cefad8990fefde11ed19f6f61859d3d7f26143b1",
+          "file_sha256": "36ff3727679932f06858240b5ac6000abe9c0754260224a7a0e457ad51abccc7",
+          "spans": [
+            [
+              68,
+              131
+            ],
+            [
+              132,
+              359
+            ],
+            [
+              361,
+              377
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              68,
+              131
+            ],
+            [
+              1,
+              0,
+              132,
+              359
+            ],
+            [
+              2,
+              1,
+              0,
+              16
+            ]
+          ]
+        }
+      },
+      "group": "gates-12808",
+      "panel": "journal",
+      "previous_txt": [
+        [
+          "0x1.01c4000000000p-7",
+          "0x1.394ad40000000p-2",
+          "0x1.4f7e000000000p-6",
+          "0x1.dfa74c0000000p-2"
+        ],
+        [
+          "0x1.bed7c60000000p-1",
+          "0x1.fc2be60000000p-1",
+          "0x1.faf32c0000000p-1",
+          "0x1.fb61320000000p-1"
+        ]
+      ],
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.01c4000000000p-7",
+            "0x1.394ad40000000p-2",
+            "0x1.4f7e000000000p-6",
+            "0x1.dfa74c0000000p-2"
+          ],
+          "token_counts": [
+            66,
+            61,
+            48,
+            43
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.bed7c60000000p-1",
+            "0x1.fc2be60000000p-1",
+            "0x1.faf32c0000000p-1",
+            "0x1.fb61320000000p-1"
+          ],
+          "token_counts": [
+            71,
+            67,
+            52,
+            48
+          ]
+        }
+      ],
+      "role": "smol2",
+      "truth": [
+        132,
+        359
+      ]
+    },
+    {
+      "change_ids": [
+        "C01",
+        "C02"
+      ],
+      "decisions": {
+        "context_only": false,
+        "joint": false,
+        "old_context_comparator": false
+      },
+      "geometry": {
+        "earlier": {
+          "center": "1f9552b03aa5b556bfe15690ae455a8607718bc95aa025afbbab864ccaf19611",
+          "context": "a17ae2a9f326fa0604f24a7fe0846fa9c197715c367f8d5602a51ad1dc440660",
+          "file_sha256": "b88cb96e0b2d502978d6021be652214a77eac1405b7044e96c70ce96668ccb5c",
+          "spans": [
+            [
+              161,
+              396
+            ],
+            [
+              398,
+              560
+            ],
+            [
+              561,
+              716
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              161,
+              396
+            ],
+            [
+              2,
+              1,
+              0,
+              162
+            ],
+            [
+              2,
+              1,
+              163,
+              318
+            ]
+          ]
+        },
+        "later": {
+          "center": "3b8e5545d3a779928e6bb9b4a9515c01f81e5f50c0eb25dc720dc9b17047e8ab",
+          "context": "d9a4c2fdecc306407b8399c4391ac2c801375b5762d2defef8b830254fc254ee",
+          "file_sha256": "d803206a16e72aab23d33206e56befde9525b6e4d6a1ab91c32770dea86c79e3",
+          "spans": [
+            [
+              161,
+              396
+            ],
+            [
+              398,
+              561
+            ],
+            [
+              562,
+              717
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              161,
+              396
+            ],
+            [
+              2,
+              1,
+              0,
+              163
+            ],
+            [
+              2,
+              1,
+              164,
+              319
+            ]
+          ]
+        }
+      },
+      "group": "8729",
+      "panel": "selection",
+      "previous_txt": [
+        [
+          "0x1.5bd7bc0000000p-2",
+          "0x1.2b6a000000000p-8",
+          "0x1.c49b160000000p-1",
+          "0x1.27d4ec0000000p-1"
+        ],
+        [
+          "0x1.fde8de0000000p-1",
+          "0x1.febdbc0000000p-1",
+          "0x1.f5bfba0000000p-1",
+          "0x1.fe4dae0000000p-1"
+        ]
+      ],
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.5bd7bc0000000p-2",
+            "0x1.2b6a000000000p-8",
+            "0x1.c49b160000000p-1",
+            "0x1.27d4ec0000000p-1"
+          ],
+          "token_counts": [
+            102,
+            104,
+            32,
+            34
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.fde8de0000000p-1",
+            "0x1.febdbc0000000p-1",
+            "0x1.f5bfba0000000p-1",
+            "0x1.fe4dae0000000p-1"
+          ],
+          "token_counts": [
+            108,
+            110,
+            33,
+            35
+          ]
+        }
+      ],
+      "role": "edited",
+      "truth": null
+    },
+    {
+      "change_ids": [
+        "C01",
+        "C02"
+      ],
+      "decisions": {
+        "context_only": false,
+        "joint": false,
+        "old_context_comparator": false
+      },
+      "geometry": {
+        "earlier": {
+          "center": "f2c13674cbb3b1523496708a6cf6653774a543952608748aa0e93bf160b5f914",
+          "context": "27b5bcf043bb6e771a7e4f5fe3970c3cbfbbc8fae8019cf08f455f6eeef5587d",
+          "file_sha256": "4c173d29fc04ae71b5f2e7f4bb5453491b54dc8e0652526e21086e4fc9e94ea8",
+          "spans": [
+            [
+              134,
+              317
+            ],
+            [
+              318,
+              504
+            ],
+            [
+              506,
+              592
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              134,
+              317
+            ],
+            [
+              1,
+              0,
+              318,
+              504
+            ],
+            [
+              2,
+              1,
+              0,
+              86
+            ]
+          ]
+        },
+        "later": {
+          "center": "cbca109d63ee1d5f3ad9ebbb4a4414019342bbb4af0c4ca80668700bd4f769f5",
+          "context": "fe9732777108c120f72117a3495af2e84d69b8502cac81d1dfc8210501b40343",
+          "file_sha256": "48d36391fa99793a0a30e0bdcba5eec9f9f898adf05a945a89d32a4b31e5367a",
+          "spans": [
+            [
+              134,
+              317
+            ],
+            [
+              318,
+              487
+            ],
+            [
+              489,
+              575
+            ]
+          ],
+          "word": [
+            [
+              1,
+              0,
+              134,
+              317
+            ],
+            [
+              1,
+              0,
+              318,
+              487
+            ],
+            [
+              2,
+              1,
+              0,
+              86
+            ]
+          ]
+        }
+      },
+      "group": "9277",
+      "panel": "selection",
+      "previous_txt": [
+        [
+          "0x1.3210000000000p-11",
+          "0x1.1838000000000p-11",
+          "0x1.aaf0000000000p-12",
+          "0x1.ca30000000000p-12"
+        ],
+        [
+          "0x1.629f7c0000000p-10",
+          "0x1.0d66ec0000000p-9",
+          "0x1.6be9720000000p-1",
+          "0x1.9e175a0000000p-8"
+        ]
+      ],
+      "readings": [
+        {
+          "responses_hex": [
+            "0x1.3210000000000p-11",
+            "0x1.1838000000000p-11",
+            "0x1.aaf0000000000p-12",
+            "0x1.ca30000000000p-12"
+          ],
+          "token_counts": [
+            107,
+            101,
+            42,
+            36
+          ]
+        },
+        {
+          "responses_hex": [
+            "0x1.629f7c0000000p-10",
+            "0x1.0d66ec0000000p-9",
+            "0x1.6be9720000000p-1",
+            "0x1.9e175a0000000p-8"
+          ],
+          "token_counts": [
+            107,
+            102,
+            41,
+            36
+          ]
+        }
+      ],
+      "role": "edited",
+      "truth": null
+    }
+  ],
+  "checkpoints": [
+    [
+      {
+        "file": "NOTICE",
+        "sha256": "4fe6835a2928bcfd7467888a9422d805dfa2fe6364437c1af01cf1945c3edd57"
+      },
+      {
+        "file": "config.json",
+        "sha256": "deac399da91c0cc96f5570fa5eae7cb716e32f6feb00860ce3e42c84f86c01a3"
+      },
+      {
+        "file": "model.safetensors",
+        "sha256": "4a1561fadf44ec72934edd6158ff8c76e9388ade1384dbeeea6eb15f93251087"
+      },
+      {
+        "file": "serving_head.json",
+        "sha256": "098ce573e07d8d99221d9eac41f7acae7b324071490a06023f837efe43df4cab"
+      },
+      {
+        "file": "tokenizer.json",
+        "sha256": "2c070ff353c36f85e20919da787a30e1e8e52b626d0e026e044f373378f6d0bf"
+      },
+      {
+        "file": "tokenizer_config.json",
+        "sha256": "d8089020d294f20cb21eca751b5f7f68a0b62ea2716a78576cbd587605382432"
+      }
+    ],
+    [
+      {
+        "file": "config.json",
+        "sha256": "dc4511bb21dfa4991688aba8548086c8fa6947d94018ac1a8d09ae9843749703"
+      },
+      {
+        "file": "tokenizer.json",
+        "sha256": "6c8aaa9a542084f2457eab775d4eeb51f92a70c0fd9de28d5edb0ddec3c08d30"
+      },
+      {
+        "file": "model.safetensors",
+        "sha256": "e7f7a617ad4af3abd8bcb939d564d2a2ea36fdb24b893177ae10c12ebe869361"
+      },
+      {
+        "file": "detector-config.json",
+        "sha256": "e72a616a5cbb0bbbe7b75d3d5e40af3c5cafdb0f0a8299ce04c5921e046619c7"
+      },
+      {
+        "file": "LICENSE",
+        "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+      }
+    ]
+  ],
+  "frozen_panel_sha256": "3ad018ab18be09c001fb28d204cc70a73b7b4a189457b8f0153cd920a0088c91",
+  "inputs_order": [
+    "earlier_context",
+    "later_context",
+    "earlier_sentence",
+    "later_sentence"
+  ],
+  "internal_operating_points_hex": {
+    "context_only": "0x1.5c6fd0b11d057p-3",
+    "joint": "0x1.070d2ea5bb22cp-3",
+    "original_context": "0x1.62e42fefa39efp-1"
+  },
+  "measurement_code_sha256": "0c9c77f1839fb16b00e006505627f46248547852a998cde725d71d2fe63eb7e7",
+  "plos_sources": [
+    {
+      "authors": [
+        "Jack Benjamin R.",
+        "Meyer Austin G.",
+        "Echave Julian",
+        "Wilke Claus O."
+      ],
+      "date": "2016-05-03",
+      "doi": "10.1371/journal.pbio.1002452",
+      "license": "http://creativecommons.org/licenses/by/4.0/",
+      "source_block": 6,
+      "source_block_sha256": "36b629d8ecc6b758df0cc80b54e70637ea968a32ebb7325f8166b400aebe5d8c",
+      "source_extent": [
+        1202,
+        2300
+      ],
+      "url": "https://journals.plos.org/plosbiology/article/file?id=10.1371/journal.pbio.1002452&type=manuscript",
+      "xml_sha256": "a41835345609457fa08fea731210340781deeb3b8c22cda37321b49eb4eb128f"
+    },
+    {
+      "authors": [
+        "Saberi Amir",
+        "Jamal Ayana",
+        "Beets Isabel",
+        "Schoofs Liliane",
+        "Newmark Phillip A."
+      ],
+      "date": "2016-05-10",
+      "doi": "10.1371/journal.pbio.1002457",
+      "license": "http://creativecommons.org/licenses/by/4.0/",
+      "source_block": 1,
+      "source_block_sha256": "988f204a0c3869f4df42098b770dc30df6a541eae207dba24eaf8d2cc42c6ae5",
+      "source_extent": [
+        0,
+        1164
+      ],
+      "url": "https://journals.plos.org/plosbiology/article/file?id=10.1371/journal.pbio.1002457&type=manuscript",
+      "xml_sha256": "4b328ea3c6272046f40883cbb28665a79080e7d3aa01a2717eb91444b88942c1"
+    },
+    {
+      "authors": [
+        "Zuchtriegel Gabriele",
+        "Uhl Bernd",
+        "Puhr-Westerheide Daniel",
+        "Pörnbacher Michaela",
+        "Lauber Kirsten",
+        "Krombach Fritz",
+        "Reichel Christoph Andreas"
+      ],
+      "date": "2016-05-06",
+      "doi": "10.1371/journal.pbio.1002459",
+      "license": "http://creativecommons.org/licenses/by/4.0/",
+      "source_block": 3,
+      "source_block_sha256": "32a4ef2a6556e03578b774d2ef21c4e6979c7cf6c06e6b84f65195e829ced2b9",
+      "source_extent": [
+        754,
+        2462
+      ],
+      "url": "https://journals.plos.org/plosbiology/article/file?id=10.1371/journal.pbio.1002459&type=manuscript",
+      "xml_sha256": "7910ff9d0540b850b6c11c3b347965a12979ccc0499f2ad2bb7f52098f2aa55d"
+    },
+    {
+      "authors": [
+        "Boyaci Hande",
+        "Shah Tayyab",
+        "Hurley Amanda",
+        "Kokona Bashkim",
+        "Li Zhijie",
+        "Ventocilla Christian",
+        "Jeffrey Philip D.",
+        "Semmelhack Martin F.",
+        "Fairman Robert",
+        "Bassler Bonnie L.",
+        "Hughson Frederick M."
+      ],
+      "date": "2016-05-24",
+      "doi": "10.1371/journal.pbio.1002464",
+      "license": "http://creativecommons.org/licenses/by/4.0/",
+      "source_block": 2,
+      "source_block_sha256": "a3e75289bd5b3ddb173c280193b0bab7f1096d7f171995b0cd5da8008962429e",
+      "source_extent": [
+        0,
+        1245
+      ],
+      "url": "https://journals.plos.org/plosbiology/article/file?id=10.1371/journal.pbio.1002464&type=manuscript",
+      "xml_sha256": "9b77b1293e0c1adcea2c5a6597eaaf74637badd870437e3f413db246d8b8cfdd"
+    },
+    {
+      "authors": [
+        "Abiega Oihane",
+        "Beccari Sol",
+        "Diaz-Aparicio Irune",
+        "Nadjar Agnes",
+        "Layé Sophie",
+        "Leyrolle Quentin",
+        "Gómez-Nicola Diego",
+        "Domercq María",
+        "Pérez-Samartín Alberto",
+        "Sánchez-Zafra Víctor",
+        "Paris Iñaki",
+        "Valero Jorge",
+        "Savage Julie C.",
+        "Hui Chin-Wai",
+        "Tremblay Marie-Ève",
+        "Deudero Juan J. P.",
+        "Brewster Amy L.",
+        "Anderson Anne E.",
+        "Zaldumbide Laura",
+        "Galbarriatu Lara",
+        "Marinas Ainhoa",
+        "Vivanco Maria dM.",
+        "Matute Carlos",
+        "Maletic-Savatic Mirjana",
+        "Encinas Juan M.",
+        "Sierra Amanda"
+      ],
+      "date": "2016-05-26",
+      "doi": "10.1371/journal.pbio.1002466",
+      "license": "http://creativecommons.org/licenses/by/4.0/",
+      "source_block": 4,
+      "source_block_sha256": "0144174adc36d375e412c7781d1f221ad210f66359a489952b32f8aedb7a3bbc",
+      "source_extent": [
+        0,
+        1421
+      ],
+      "url": "https://journals.plos.org/plosbiology/article/file?id=10.1371/journal.pbio.1002466&type=manuscript",
+      "xml_sha256": "c27944c528ac4e828af561b8fc95bd689a143d88a1f25da982e7e98ea0f7f910"
+    },
+    {
+      "authors": [
+        "Watzlawick Ralf",
+        "Rind Julian",
+        "Sena Emily S.",
+        "Brommer Benedikt",
+        "Zhang Tian",
+        "Kopp Marcel A.",
+        "Dirnagl Ulrich",
+        "Macleod Malcolm R.",
+        "Howells David W.",
+        "Schwab Jan M."
+      ],
+      "date": "2016-05-31",
+      "doi": "10.1371/journal.pbio.1002468",
+      "license": "http://creativecommons.org/licenses/by/4.0/",
+      "source_block": 5,
+      "source_block_sha256": "3c6b8226d5d8aae6f86b475b19b9661799607425cd4e93bf24feb70b18e9f8e2",
+      "source_extent": [
+        2116,
+        3572
+      ],
+      "url": "https://journals.plos.org/plosbiology/article/file?id=10.1371/journal.pbio.1002468&type=manuscript",
+      "xml_sha256": "ebdb8dd3cb03c9b35e23ac82c5b80564e1445b7b57a051f0218c6311423a56cd"
+    },
+    {
+      "authors": [
+        "Chen Tianwen",
+        "Cai Weidong",
+        "Ryali Srikanth",
+        "Supekar Kaustubh",
+        "Menon Vinod"
+      ],
+      "date": "2016-06-07",
+      "doi": "10.1371/journal.pbio.1002469",
+      "license": "http://creativecommons.org/licenses/by/4.0/",
+      "source_block": 0,
+      "source_block_sha256": "fe5bac41ce55c66948bf0371ba2253032991ccabac46e8b4f14be542cb10ac78",
+      "source_extent": [
+        2966,
+        4732
+      ],
+      "url": "https://journals.plos.org/plosbiology/article/file?id=10.1371/journal.pbio.1002469&type=manuscript",
+      "xml_sha256": "0450a1fdf081750b6479b3b817bb4e08890dfe3e2a135eb6ecb0c4a459fe8e9c"
+    },
+    {
+      "authors": [
+        "Ali Yousuf O.",
+        "Allen Hunter M.",
+        "Yu Lei",
+        "Li-Kroeger David",
+        "Bakhshizadehmahmoudi Dena",
+        "Hatcher Asante",
+        "McCabe Cristin",
+        "Xu Jishu",
+        "Bjorklund Nicole",
+        "Taglialatela Giulio",
+        "Bennett David A.",
+        "De Jager Philip L.",
+        "Shulman Joshua M.",
+        "Bellen Hugo J.",
+        "Lu Hui-Chen"
+      ],
+      "date": "2016-06-02",
+      "doi": "10.1371/journal.pbio.1002472",
+      "license": "http://creativecommons.org/licenses/by/4.0/",
+      "source_block": 0,
+      "source_block_sha256": "ca8ff9211d150837599c05981cc89d34bb6288789d2afe263de871baa0c54349",
+      "source_extent": [
+        0,
+        1170
+      ],
+      "url": "https://journals.plos.org/plosbiology/article/file?id=10.1371/journal.pbio.1002472&type=manuscript",
+      "xml_sha256": "982ce4ae95cadd95b6c22b32e45da77068e1a400d12e0e075db965b208229816"
+    },
+    {
+      "authors": [
+        "Diz-Muñoz Alba",
+        "Thurley Kevin",
+        "Chintamen Sana",
+        "Altschuler Steven J.",
+        "Wu Lani F.",
+        "Fletcher Daniel A.",
+        "Weiner Orion D."
+      ],
+      "date": "2016-06-09",
+      "doi": "10.1371/journal.pbio.1002474",
+      "license": "http://creativecommons.org/licenses/by/4.0/",
+      "source_block": 27,
+      "source_block_sha256": "051754411c7ca4cdb3981592aed572682d7fcfb565d74b514837ecc849ab3f5f",
+      "source_extent": [
+        1086,
+        2164
+      ],
+      "url": "https://journals.plos.org/plosbiology/article/file?id=10.1371/journal.pbio.1002474&type=manuscript",
+      "xml_sha256": "3146a5e45dd715d4892c655273a4f0dd3d6e45524596f0a5fadaac50b2a0a3ba"
+    },
+    {
+      "authors": [
+        "Keitel Anne",
+        "Gross Joachim"
+      ],
+      "date": "2016-06-29",
+      "doi": "10.1371/journal.pbio.1002498",
+      "license": "http://creativecommons.org/licenses/by/4.0/",
+      "source_block": 0,
+      "source_block_sha256": "0db33bd5c83c04c953004241253bdd030130c4d61a2f28197c288834081c7687",
+      "source_extent": [
+        0,
+        1226
+      ],
+      "url": "https://journals.plos.org/plosbiology/article/file?id=10.1371/journal.pbio.1002498&type=manuscript",
+      "xml_sha256": "cee831748d4c60b6775c3c4951ca593308a7cee588d4e0cb9ae2884794917efc"
+    }
+  ],
+  "provenance": {
+    "admission": {
+      "granite": 10,
+      "olmo": 7
+    },
+    "method": "Exact unchanged native Word paragraph boundary, one changed sentence and equal adjacent sentences; same frozen two-scale rule. Re-encoding only, no selection based on scores.",
+    "new_controls": "Per work, one same-source genuine donor sentence substitution and unchanged negative. Unchanged pairs abstain before scoring.",
+    "new_panel": "Ten earlier PLOS Biology CC BY 4.0 source works and previously qualified synthetic one-sentence edits. For the native Word test, a single deliberate boundary precedes/follows the known target according to low-bit parity of SHA-256 of DOI.",
+    "older_panel": "Every previously eligible 22 earlier-draft case re-encoded from the existing TXT source, including 12 known edits, 8 ordinary revisions, 2 calibration cases.",
+    "preflight_code_sha256": "ffe74eb5c6f3130a281ed5cf0d144810e16476fb91857dc5ccd9fb3210e889a0",
+    "previous_protocol_sha256": "5bca0b7bab05baa8ad8ad9dc7b8d6edc1f078a02d84afb3aa409ffe94b504e01",
+    "prior_source_roster_sha256": "0ddf671a8e7fe5d16e5632f328ed5d01d1e54cf1298da733dea9ab8d4a06ef13",
+    "release_gate": "At least two useful edits from distinct PLOS works, at most one ordinary group and no changed prior decisions. All exact geometries, PDF/JSON and source replay must verify."
+  },
+  "schema": "chipmunk.writing-word-boundary-transfer/1",
+  "scope": "Native Word drafts with one changed English sentence, identical immediate neighbors and one preserved adjacent Word body paragraph boundary."
+}

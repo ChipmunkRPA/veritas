@@ -111,6 +111,7 @@ class DraftWritingFocus(BaseModel):
     context_spans: list[tuple[int, int]]
     input_sha256: str
     center_input_sha256: str | None = None
+    context_paragraphs: list[DraftParagraph] | None = None
 
 
 class DraftWritingResponse(BaseModel):
@@ -119,7 +120,10 @@ class DraftWritingResponse(BaseModel):
 
 
 class DraftPairedCheck(BaseModel):
-    schema_name: Literal["chipmunk.paired-writing-review/1", "chipmunk.paired-writing-review/2", "chipmunk.paired-writing-review/3"] = Field(alias="schema")
+    schema_name: Literal[
+        "chipmunk.paired-writing-review/1", "chipmunk.paired-writing-review/2",
+        "chipmunk.paired-writing-review/3", "chipmunk.paired-writing-review/4",
+    ] = Field(alias="schema")
     status: Literal["outside_scope", "unavailable", "no_joint_increase", "joint_increase"]
     scope: str
     summary: str
@@ -215,7 +219,7 @@ def availability(aid: str, request: Request):
 
 def _compare(aid: str, original: tuple[str, int, str], earlier: bytes, include_pdf: bool,
              include_paired_check: bool = False) -> JSONResponse:
-    from app.evidence.document_revision import compare_with_text
+    from app.evidence.document_revision import compare_with_sources
 
     sha256, size, extension = original
     try:
@@ -229,8 +233,9 @@ def _compare(aid: str, original: tuple[str, int, str], earlier: bytes, include_p
         raise ProblemError(409, "Original integrity check failed", "The retained document no longer matches its recorded hash and size.")
     paired_enabled = include_paired_check and _paired_enabled(extension)
     try:
-        comparison, old_text, new_text = compare_with_text(earlier, later, extension, email_body_only=paired_enabled,
-                                                          pdf_paired_text_only=paired_enabled)
+        comparison, old_text, new_text, word_layouts = compare_with_sources(
+            earlier, later, extension, email_body_only=paired_enabled, pdf_paired_text_only=paired_enabled,
+        )
     except (UnicodeError, LookupError, RecursionError):
         raise ProblemError(422, "Could not compare drafts", f"Use readable {SUPPORTED_DRAFTS}.") from None
     except ValueError as error:
@@ -244,7 +249,8 @@ def _compare(aid: str, original: tuple[str, int, str], earlier: bytes, include_p
         draft_format = comparison["format"]
         boundary_enabled = settings.document_paired_boundary_review
         try:
-            candidate = paired.paired_input(comparison, old_text, new_text, allow_boundary=boundary_enabled)
+            candidate = paired.paired_input(comparison, old_text, new_text, allow_boundary=boundary_enabled,
+                                           word_layouts=word_layouts)
             if candidate is not None and candidate.across_paragraphs:
                 responses, center_responses = paired.score_boundary(candidate)
             else:

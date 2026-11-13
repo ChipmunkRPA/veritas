@@ -8,10 +8,12 @@ from dataclasses import dataclass
 
 from app.detectors.text.extract import _normalise, _ocr_language, from_string, text_hash
 from app.detectors.text.segment import segment
+from app.evidence.document_revision import WordLayouts, WordParagraphs
 
 SCHEMA = "chipmunk.paired-writing-review/1"
 WIDE_SCHEMA = "chipmunk.paired-writing-review/2"
 BOUNDARY_SCHEMA = "chipmunk.paired-writing-review/3"
+WORD_BOUNDARY_SCHEMA = "chipmunk.paired-writing-review/4"
 # Second-highest genuine work response in the frozen paired center transfer.
 BOUNDARY_POINT = 0.12844311183234092
 MAX_WORDS = 420
@@ -36,6 +38,10 @@ BOUNDARY_SCOPE = ("This experimental check compares one changed sentence beside 
                   "plain-text draft. Both versions keep the same paragraph layout and the same adjacent sentences. "
                   "Each check reads the changed sentence alone and with its neighbors. "
                   "Responses are uncalibrated and carry zero authorship confidence weight.")
+WORD_BOUNDARY_SCOPE = ("This experimental check compares one changed sentence beside a paragraph break in a short "
+                       "English Word draft. Both versions keep the same adjacent body paragraphs and neighboring "
+                       "sentences. Each check reads the changed sentence alone and with its neighbors. "
+                       "Responses are uncalibrated and carry zero authorship confidence weight.")
 STATUS_TEXT = {
     "outside_scope": "This draft pair falls outside the exact single-sentence comparison scope.",
     "unavailable": "The local writing checks could not complete the paired comparison.",
@@ -63,8 +69,23 @@ def _source(text: str):
     return document, segment(document)
 
 
+def _word_context_locations(spans: list[list[int]], layout: WordParagraphs) -> list[dict] | None:
+    locations = []
+    for start, end in spans:
+        matches = [(paragraph, index, start - lo, end - lo) for paragraph, index, lo, hi in layout
+                   if lo <= start < end <= hi]
+        if len(matches) != 1:
+            return None
+        paragraph, index, local_start, local_end = matches[0]
+        locations.append({"paragraph": paragraph, "body_index": index, "start": local_start, "end": local_end})
+    first, last = locations[0], locations[-1]
+    if last["paragraph"] != first["paragraph"] + 1 or last["body_index"] != first["body_index"] + 1:
+        return None
+    return locations
+
+
 def paired_input(comparison: dict, earlier: str, later: str, *, allow_wide: bool = True,
-                 allow_boundary: bool = False) -> PairedInput | None:
+                 allow_boundary: bool = False, word_layouts: WordLayouts | None = None) -> PairedInput | None:
     """Pair an interior change. For EML, use the verified decoded body prefix from the draft comparison."""
     changes = comparison["changes"]
     if comparison["format"] == "email":
@@ -89,7 +110,8 @@ def paired_input(comparison: dict, earlier: str, later: str, *, allow_wide: bool
     selected = slice(index - 1, changed[-1] + 2)
     paragraphs = [unit.paragraph for unit in old_units[selected]]
     across_paragraphs = paragraphs[0] != paragraphs[-1]
-    if across_paragraphs and (not allow_boundary or comparison["format"] != "plain_text" or wide
+    word_boundary = comparison["format"] == "docx" and word_layouts is not None
+    if across_paragraphs and (not allow_boundary or (comparison["format"] != "plain_text" and not word_boundary) or wide
                               or paragraphs[-1] - paragraphs[0] != 1):
         return None
 
@@ -129,7 +151,28 @@ def paired_input(comparison: dict, earlier: str, later: str, *, allow_wide: bool
             or not contained(change, "later", after) for change in changes)
             or not all(any(change[side]["changed_tokens"] for change in changes) for side in ("earlier", "later"))):
         return None
-    if comparison["format"] == "docx":
+    if across_paragraphs and word_boundary:
+        assert word_layouts is not None
+        before_locations = _word_context_locations(before["context_spans"], word_layouts[0])
+        after_locations = _word_context_locations(after["context_spans"], word_layouts[1])
+        if before_locations is None or after_locations is None:
+            return None
+
+        def paragraph_identity(locations):
+            return [(item["paragraph"], item["body_index"]) for item in locations]
+
+        if paragraph_identity(before_locations) != paragraph_identity(after_locations):
+            return None
+        for side, focus, locations in (("earlier", before, before_locations), ("later", after, after_locations)):
+            center = locations[1]
+            base = focus["start"] - center["start"]
+            for change in changes:
+                item = change[side]
+                expected = center | {"start": item["start"] - base, "end": item["end"] - base}
+                if item["paragraphs"] != [expected]:
+                    return None
+            focus["context_paragraphs"] = locations
+    elif comparison["format"] == "docx":
         # Word body paragraphs are joined with blank lines, which the source mapper always splits.
         # Check that each linked edit also resolves to the same Word paragraph in its version.
         for side, focus in (("earlier", before), ("later", after)):
@@ -196,7 +239,10 @@ def result(candidate: PairedInput | None, responses: list[dict] | None = None, *
              "summary": "This draft pair falls outside the exact paired sentence scope." if plain_outside else STATUS_TEXT[status],
              "authorship_confidence_contribution": 0}
     if across_paragraphs:
-        value.update(schema=BOUNDARY_SCHEMA, scope=BOUNDARY_SCOPE)
+        if draft_format == "docx":
+            value.update(schema=WORD_BOUNDARY_SCHEMA, scope=WORD_BOUNDARY_SCOPE)
+        else:
+            value.update(schema=BOUNDARY_SCHEMA, scope=BOUNDARY_SCOPE)
         if status == "joint_increase":
             value["summary"] = "Both writing checks gave a stronger AI-like response for the changed sentence alone and with its neighbors."
     if candidate is not None:
@@ -208,11 +254,14 @@ def result(candidate: PairedInput | None, responses: list[dict] | None = None, *
     return value
 
 
-def verify(comparison: dict, earlier: str, later: str, recorded: dict) -> str:
+def verify(comparison: dict, earlier: str, later: str, recorded: dict, *,
+           word_layouts: WordLayouts | None = None) -> str:
     """Rebuild the source scope and check saved response arithmetic without inference."""
     schema = recorded.get("schema")
     allow_wide = schema in (WIDE_SCHEMA, BOUNDARY_SCHEMA)
-    candidate = paired_input(comparison, earlier, later, allow_wide=allow_wide, allow_boundary=schema == BOUNDARY_SCHEMA)
+    candidate = paired_input(comparison, earlier, later, allow_wide=allow_wide,
+                             allow_boundary=schema in (BOUNDARY_SCHEMA, WORD_BOUNDARY_SCHEMA),
+                             word_layouts=word_layouts if schema == WORD_BOUNDARY_SCHEMA else None)
     if candidate is None and "responses" in recorded:
         raise ValueError("An out-of-scope draft cannot carry paired responses")
     expected = result(candidate, recorded.get("responses"), draft_format=comparison["format"], allow_wide=allow_wide,

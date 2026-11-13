@@ -5,6 +5,7 @@ import { saveBlob } from '../../lib/api/reports'
 import { compareDraft, draftAvailability, type DraftExcerpt, type DraftExtension, type DocumentRevisionResponse } from './documentRevisionApi'
 
 const labels = { body: 'Message body', quoted: 'Quoted text', signature: 'Signature' }
+const contextLabels = ['Previous sentence', 'Changed sentence', 'Next sentence']
 
 function MarkedExcerpt({ excerpt }: { excerpt: DraftExcerpt }) {
   const points = Array.from(excerpt.text)
@@ -95,12 +96,18 @@ function DraftResult({ result }: { result: DocumentRevisionResponse }) {
             <p className="m-0 text-caption font-medium">
               Earlier {paired.earlier.context_spans.length === 4 ? 'sentences' : 'sentence'} [{paired.earlier.start}, {paired.earlier.end})
             </p>
+            {paired.earlier.context_paragraphs?.map((location, index) => <p key={index} className="mt-1 mb-0 font-mono text-caption text-text-muted">
+              {contextLabels[index]} · Paragraph {location.paragraph} [{location.start}, {location.end})
+            </p>)}
             <p className="mt-1 mb-0 whitespace-pre-wrap break-words text-small">{paired.earlier.text}</p>
           </div>
           <div>
             <p className="m-0 text-caption font-medium">
               Analyzed {paired.later.context_spans.length === 4 ? 'sentences' : 'sentence'} [{paired.later.start}, {paired.later.end})
             </p>
+            {paired.later.context_paragraphs?.map((location, index) => <p key={index} className="mt-1 mb-0 font-mono text-caption text-text-muted">
+              {contextLabels[index]} · Paragraph {location.paragraph} [{location.start}, {location.end})
+            </p>)}
             <p className="mt-1 mb-0 whitespace-pre-wrap break-words text-small">{paired.later.text}</p>
           </div>
         </div>

@@ -102,6 +102,98 @@ def _word(body, omitted):
     return file.getvalue()
 
 
+def _word_boundary(center, *, interposed=None, relocated=False):
+    word = Document()
+    word.add_paragraph("A published introduction.")
+    word.add_table(rows=1, cols=1).cell(0, 0).text = "Omitted table text."
+    opening = "The committee approved the earlier draft after its last meeting."
+    tail = "The published article records the procedures for the next review."
+    if relocated:
+        word.add_paragraph(opening)
+    else:
+        word.add_paragraph(f"{opening} {center}")
+    if interposed == "table":
+        word.add_table(rows=1, cols=1).cell(0, 0).text = "Intervening table."
+    elif interposed == "blank":
+        word.add_paragraph()
+    word.add_paragraph(f"{center} {tail}" if relocated else tail)
+    file = BytesIO()
+    word.save(file)
+    return file.getvalue()
+
+
+def test_word_boundary_maps_both_native_paragraphs_and_preserves_opt_out(reference_http, monkeypatch, tmp_path):
+    f = _install(reference_http, monkeypatch)
+    monkeypatch.setattr(settings, "text_detector_mode", "candidate")
+    monkeypatch.setattr(settings, "text_window_sentences", 3)
+    monkeypatch.setattr(settings, "text_checkpoint_agreement_review", True)
+    monkeypatch.setattr(paired, "_ocr_language", lambda _: {"code": "en", "status": "supported"})
+    old_focus = "The editor checked the original version for clarity and accuracy."
+    new_focus = "The editor carefully examined the complete draft to improve its organization and readability."
+    earlier_file, later_file = (_word_boundary(focus) for focus in (old_focus, new_focus))
+    _saved(f, "paired-word-boundary", ".docx", later_file)
+    url = _url("paired-word-boundary")
+    requests = []
+
+    def measure(candidate):
+        requests.append(candidate)
+        context = [{"earlier": .2, "later": .6}, {"earlier": .2, "later": .6}]
+        exact = [{"earlier": .4, "later": .6}, {"earlier": .4, "later": .6}]
+        return context, exact
+
+    def submit(file=earlier_file, include_paired=True):
+        response = f.client.post(url, headers=f.viewer, files=_upload(file, ".docx"), data={
+            "include_pdf": "true", "include_paired_check": str(include_paired).lower(),
+        })
+        assert response.status_code == 200
+        return response.json()
+
+    monkeypatch.setattr(paired, "score_boundary", measure)
+    monkeypatch.setattr(settings, "document_paired_boundary_review", False)
+    prior = submit()["comparison"]
+    assert prior["paired_check"]["schema"] == paired.SCHEMA
+    assert prior["paired_check"]["status"] == "outside_scope"
+    assert "earlier" not in prior["paired_check"]
+    monkeypatch.setattr(settings, "document_paired_boundary_review", True)
+    ordinary = submit(include_paired=False)["comparison"]
+    assert "paired_check" not in ordinary and not requests
+    payload = submit()
+    report = payload["comparison"]
+    check = report["paired_check"]
+    assert {k: v for k, v in report.items() if k != "paired_check"} == ordinary
+    assert check["schema"] == paired.WORD_BOUNDARY_SCHEMA
+    assert check["status"] == "joint_increase" and check["authorship_confidence_contribution"] == 0
+    for side, source, focus in (("earlier", earlier_file, old_focus), ("later", later_file, new_focus)):
+        paragraph_text = {n: (index, p.text) for n, index, p in document_revision.docx_body_paragraphs(source)}
+        row = check[side]
+        assert row["text"] == focus
+        assert [(p["paragraph"], p["body_index"]) for p in row["context_paragraphs"]] == [(2, 2), (2, 2), (3, 3)]
+        contexts = [paragraph_text[p["paragraph"]][1][p["start"]:p["end"]] for p in row["context_paragraphs"]]
+        assert contexts[1] == focus and row["input_sha256"] == paired.text_hash(" ".join(contexts))
+    with pymupdf.open(stream=base64.b64decode(payload["pdf"]), filetype="pdf") as pdf:
+        text = " ".join(" ".join(page.get_text().split()) for page in pdf)
+        assert "Previous sentence · Paragraph 2" in text and "Next sentence · Paragraph 3" in text
+        assert "Changed sentence · Paragraph 2" in text and "Changed sentence alone" in text
+        assert "Linked wording changes C01" in text and any(page.get_links() for page in pdf)
+    earlier_path, later_path, export = (tmp_path / name for name in ("earlier.docx", "later.docx", "comparison.json"))
+    earlier_path.write_bytes(earlier_file)
+    later_path.write_bytes(later_file)
+    export.write_text(json.dumps(prior))
+    assert review(export, earlier_path, later_path)["paired_scope_and_saved_response_arithmetic"] == "outside_scope"
+    export.write_text(json.dumps(report))
+    assert review(export, earlier_path, later_path)["paired_word_sentence_ranges_verified"] == 6
+    check["later"]["context_paragraphs"][2]["body_index"] -= 1
+    export.write_text(json.dumps(report))
+    with pytest.raises(ValueError, match="does not replay"):
+        review(export, earlier_path, later_path)
+    for layout in ("table", "blank"):
+        unsafe = _word_boundary(old_focus, interposed=layout)
+        assert submit(unsafe)["comparison"]["paired_check"]["status"] == "outside_scope"
+    moved = _word_boundary(old_focus, relocated=True)
+    assert submit(moved)["comparison"]["paired_check"]["status"] == "outside_scope"
+    assert len(requests) == 1
+
+
 def _pdf_draft(term, rotation):
     with pymupdf.open() as document:
         title = document.new_page()

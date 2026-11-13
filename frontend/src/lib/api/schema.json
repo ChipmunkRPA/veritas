@@ -5607,7 +5607,8 @@
             "enum": [
               "chipmunk.paired-writing-review/1",
               "chipmunk.paired-writing-review/2",
-              "chipmunk.paired-writing-review/3"
+              "chipmunk.paired-writing-review/3",
+              "chipmunk.paired-writing-review/4"
             ],
             "title": "Schema",
             "type": "string"
@@ -5903,6 +5904,20 @@
               }
             ],
             "title": "Center Input Sha256"
+          },
+          "context_paragraphs": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/DraftParagraph"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Context Paragraphs"
           },
           "context_spans": {
             "items": {

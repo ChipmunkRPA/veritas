@@ -3568,7 +3568,7 @@ export interface components {
              * Schema
              * @enum {string}
              */
-            schema: "chipmunk.paired-writing-review/1" | "chipmunk.paired-writing-review/2" | "chipmunk.paired-writing-review/3";
+            schema: "chipmunk.paired-writing-review/1" | "chipmunk.paired-writing-review/2" | "chipmunk.paired-writing-review/3" | "chipmunk.paired-writing-review/4";
             /** Scope */
             scope: string;
             /**
@@ -3666,6 +3666,8 @@ export interface components {
         DraftWritingFocus: {
             /** Center Input Sha256 */
             center_input_sha256?: string | null;
+            /** Context Paragraphs */
+            context_paragraphs?: components["schemas"]["DraftParagraph"][] | null;
             /** Context Spans */
             context_spans: [
                 number,

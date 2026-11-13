@@ -201,6 +201,31 @@ def test_brief_face_coverage_validates_exact_dispositions(status, reason, schedu
         face_return_coverage.validate(document)
 
 
+def test_legacy_and_bounded_face_coverage_bind_to_separate_ranges():
+    legacy = {'status': 'not_applicable', 'reason': 'native_scope', 'scheduled_frames': 0, 'measured_face_frames': 0}
+    bounded = {'status': 'localized', 'reason': None, 'pixel_frames': 120, 'scheduled_frames': 35, 'measured_face_frames': 31}
+    result = face_return_coverage.from_worker(legacy, 120, bounded=bounded)
+    record = {'method': 'face-short-return/9', 'scene_frame_inputs': list(range(120)),
+              'scheduled_frame_indices': list(range(35)), 'frame_inputs': list(range(31))}
+    document = {'source': {'frame_count': 120}, 'packets': [{'face_return': record}],
+                'coverage': {face_return_coverage.KEY: result}}
+    face_return_coverage.validate_commitment(document, canonical_hash(result))
+    assert result['observations'][0].startswith('Initial scan. This clip is outside')
+    assert 'Motion inputs: 120 of 120 pictures. Comparable face inputs: 31 of 35' in result['observations'][1]
+
+    removed = {**document, 'coverage': {}}
+    with pytest.raises(ValueError, match='missing its measured coverage'):
+        face_return_coverage.validate(removed)
+    with pytest.raises(ValueError, match='displayed ranges'):
+        face_return_coverage.validate({**document, 'packets': [{'face_return': {**record, 'method': 'face-short-return/1'}}]})
+    with pytest.raises(ValueError, match='differs from its measured source inputs'):
+        face_return_coverage.validate({**document, 'packets': [{'face_return': {**record, 'frame_inputs': list(range(30))}}]})
+
+    completed = {**bounded, 'status': 'no_distinct_range'}
+    no_range = face_return_coverage.from_worker(legacy, 120, bounded=completed)
+    face_return_coverage.validate({'source': {'frame_count': 120}, 'packets': [], 'coverage': {face_return_coverage.KEY: no_range}})
+
+
 def test_parent_builder_capture_assets_and_manifest_are_one_set(nested_case, monkeypatch):
     f = nested_case
     assert f.document['version'] in video_packets.NESTED_VERSIONS
@@ -615,7 +640,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
                         'app.evidence.audio_background_binding','app.evidence.audio_repetition_binding','app.evidence.audio_exact_repetition',
                         'app.evidence.audio_similarity_binding',
                         'app.evidence.av_binding','app.evidence.face_interval_binding','app.evidence.face_boundary_binding','app.evidence.face_boundary_clock','app.evidence.face_alignment_context',
-                        'app.evidence.face_paired_edge_binding',
+                        'app.evidence.face_paired_edge_binding','app.evidence.face_short_proposal_binding',
                         'app.evidence.face_lighting_context','app.evidence.face_return_binding','app.evidence.face_return_coverage',
                         'app.evidence.video_packet_versions','app.evidence.picture_hold_binding', 'app.evidence.picture_sequence',
                         'app.evidence.mouth_local_hold_binding','app.evidence.source_geometry',

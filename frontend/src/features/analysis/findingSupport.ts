@@ -65,6 +65,12 @@ function videoLocation(packet: VideoEvidencePacket): LocatedPacket | null {
     return { packet, label: `${packet.id} · Refined face-change range ${seconds(boundary.start_stream_s)}–${seconds(boundary.end_stream_s)} (source clock)`,
       scope: 'video_frames', note: 'Two face transitions with limited nearby pixel motion bracket the range. The end is exclusive.' }
   }
+  const short = packet.face_return
+  if (short?.method === 'face-short-return/9'
+    && finite(short.start_stream_s) && finite(short.end_stream_s) && short.end_stream_s > short.start_stream_s) {
+    return { packet, label: `${packet.id} · Brief face-change range ${seconds(short.start_stream_s)}–${seconds(short.end_stream_s)} (source clock)`,
+      scope: 'video_frames', note: 'Three source frames show the face before, during and after the measured change. The end is exclusive.' }
+  }
   const face = packet.face_sequence ?? packet.face_interval
   if (face && finite(face.start_stream_s) && finite(face.end_stream_s) && face.end_stream_s > face.start_stream_s) {
     return { packet, label: `${packet.id} · Face review ${seconds(face.start_stream_s)}–${seconds(face.end_stream_s)} (source clock)`,

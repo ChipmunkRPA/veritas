@@ -60,7 +60,7 @@ def box_overlap(a, b):
     return common / (a["w"] * a["h"] + b["w"] * b["h"] - common)
 
 
-def _exact(text, low, high):
+def exact(text, low, high):
     require(isinstance(text, str) and len(text) <= 24, "Invalid paired face measurement")
     try:
         value = float.fromhex(text)
@@ -70,7 +70,7 @@ def _exact(text, low, high):
     return value
 
 
-def _frame_rows(rows, source, planned, first_pts, base, *, face=False):
+def frame_rows(rows, source, planned, first_pts, base, *, face=False):
     keys = {"frame_index", "pts", "decoded_rgb_sha256"}
     if face:
         keys |= {
@@ -181,8 +181,8 @@ def validate_record(record, coarse, source, *, table_pts=None, interpolated=()):
     require(
         record["scheduled_frame_indices"] == planned, "Paired face timing does not match its native schedule"
     )
-    faces = _frame_rows(record["frame_inputs"], source, planned, first_pts, base, face=True)
-    scenes = _frame_rows(record["scene_frame_inputs"], source, planned, first_pts, base)
+    faces = frame_rows(record["frame_inputs"], source, planned, first_pts, base, face=True)
+    scenes = frame_rows(record["scene_frame_inputs"], source, planned, first_pts, base)
     require(
         set(scenes) == set(motion_inputs(start, set(planned))) | set(motion_inputs(stop, set(planned)))
         and all(
@@ -191,6 +191,14 @@ def validate_record(record, coarse, source, *, table_pts=None, interpolated=()):
         ),
         "Paired face motion omits native inputs",
     )
+    require(
+        edge_response(record, faces, start, stop) > POINT,
+        "Paired face timing does not meet its fixed support point",
+    )
+    validate_roles(record, faces, start, stop)
+
+
+def edge_response(record, faces, start, stop):
     require(set(record["edges"]) == {"entry", "exit"}, "Paired face timing needs two measured boundaries")
     distances = []
     for edge, key in ((start, "entry"), (stop, "exit")):
@@ -214,11 +222,11 @@ def validate_record(record, coarse, source, *, table_pts=None, interpolated=()):
             "Paired face timing lacks consistent nearby face crops",
         )
         distances.append(
-            _exact(proof["separation_hex"], 0.08, 2.000000000001)
-            - _exact(proof["dispersion_hex"], 0.0, 2.000000000001)
+            exact(proof["separation_hex"], 0.08, 2.000000000001)
+            - exact(proof["dispersion_hex"], 0.0, 2.000000000001)
         )
-        central = _exact(proof["central_hex"], 3.0, 255.0)
-        sectors = [_exact(value, 0.0, 255.0) for value in proof["sectors_hex"]]
+        central = exact(proof["central_hex"], 3.0, 255.0)
+        sectors = [exact(value, 0.0, 255.0) for value in proof["sectors_hex"]]
         ids = proof["sector_ids"]
         require(
             2 <= len(sectors) == len(ids) <= 4
@@ -227,11 +235,12 @@ def validate_record(record, coarse, source, *, table_pts=None, interpolated=()):
             and sum(value >= max(6.0, central * 0.5) for value in sectors) < 2,
             "Near-head motion does not support an isolated boundary",
         )
-    gaps = [_exact(value, 0.0, 2.000000000001) for value in record["return_hex"]]
-    require(
-        len(gaps) == 4 and min(*distances, min(gaps[:2]) - max(gaps[2:])) > POINT,
-        "Paired face timing does not meet its fixed support point",
-    )
+    gaps = [exact(value, 0.0, 2.000000000001) for value in record["return_hex"]]
+    require(len(gaps) == 4, "Paired face timing has invalid return support")
+    return min(*distances, min(gaps[:2]) - max(gaps[2:]))
+
+
+def validate_roles(record, faces, start, stop):
     middle = min((i for i in faces if start <= i < stop), key=lambda i: (abs(2 * i - start - stop), i))
     require(
         record["anchors"] == dict(zip(ROLES, (start - 1, middle, stop), strict=True))

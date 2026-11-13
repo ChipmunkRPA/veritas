@@ -1,0 +1,194 @@
+{
+  "app_receipt_sha256": "ee041a9dbfc6caa0b423f5e0153370e38eb64acdb64c93714c2b9c8b1e78e419",
+  "cases": {
+    "feature_disabled": {
+      "brief_face_coverage": {
+        "initial": {
+          "measured_face_frames": 0,
+          "reason": "native_scope",
+          "scheduled_frames": 0,
+          "status": "not_applicable"
+        }
+      },
+      "coarse_packets": 0,
+      "file_sha256": "e013049884133d9b24da6704b4277350adca5f4ca82d1b87c2d07256bb8fb9e5",
+      "short_fallback_packets": 0,
+      "version": "video-evidence-11"
+    },
+    "ordinary_cut": {
+      "brief_face_coverage": {
+        "bounded_proposal": {
+          "measured_face_frames": 12,
+          "pixel_frames": 120,
+          "reason": null,
+          "scheduled_frames": 12,
+          "status": "no_distinct_range"
+        },
+        "initial": {
+          "measured_face_frames": 0,
+          "reason": "native_scope",
+          "scheduled_frames": 0,
+          "status": "not_applicable"
+        }
+      },
+      "coarse_packets": 1,
+      "file_sha256": "fa0d18706ba4fc9ae1cf721d0511f37353aeadba1ea8b1cd023ce2171f5cccbb",
+      "short_fallback_packets": 0,
+      "version": "video-evidence-11"
+    },
+    "ordinary_original": {
+      "brief_face_coverage": {
+        "bounded_proposal": {
+          "measured_face_frames": 12,
+          "pixel_frames": 120,
+          "reason": null,
+          "scheduled_frames": 12,
+          "status": "no_distinct_range"
+        },
+        "initial": {
+          "measured_face_frames": 0,
+          "reason": "native_scope",
+          "scheduled_frames": 0,
+          "status": "not_applicable"
+        }
+      },
+      "coarse_packets": 0,
+      "file_sha256": "fbb5ea606e766b028e95d3ed398108259f6bd1f50b7a7762613809d871c3f0bb",
+      "short_fallback_packets": 0,
+      "version": "video-evidence-11"
+    },
+    "short_swap": {
+      "brief_face_coverage": {
+        "bounded_proposal": {
+          "measured_face_frames": 35,
+          "pixel_frames": 120,
+          "reason": null,
+          "scheduled_frames": 35,
+          "status": "localized"
+        },
+        "initial": {
+          "measured_face_frames": 0,
+          "reason": "native_scope",
+          "scheduled_frames": 0,
+          "status": "not_applicable"
+        }
+      },
+      "coarse_packets": 0,
+      "different_original_rejected": true,
+      "exact_source_images": [
+        {
+          "frame": 61,
+          "kind": "original",
+          "pts": 61000,
+          "role": "before",
+          "sha256": "59a8759ae3813254ce9de79f92a31430d6baf0cb25d031c54e2860a4c2df8a1a"
+        },
+        {
+          "frame": 61,
+          "kind": "crop",
+          "pts": 61000,
+          "role": "before",
+          "sha256": "4f4ac51613cf1a9e27043e17f126fbc52d3437fa4ed67f8f5523efdfa5514227"
+        },
+        {
+          "frame": 65,
+          "kind": "original",
+          "pts": 65000,
+          "role": "during",
+          "sha256": "dfb4eae3b036e8c491d3714c07e43f5c36bc7153e7cc947f94b311a8f5c305db"
+        },
+        {
+          "frame": 65,
+          "kind": "crop",
+          "pts": 65000,
+          "role": "during",
+          "sha256": "fd488cebda66921a73ec464766fbcd0acdc7ee6c99f2374747488325e4ff0807"
+        },
+        {
+          "frame": 68,
+          "kind": "original",
+          "pts": 68000,
+          "role": "after",
+          "sha256": "a1b6450f69160ec6a32cde99b71c4c30faf55ab2e497069a82ddd8cc33a44b2f"
+        },
+        {
+          "frame": 68,
+          "kind": "crop",
+          "pts": 68000,
+          "role": "after",
+          "sha256": "fe012654410f18ddeca62eb10d1cbf9e783c1e3842c7a6c391f1688ede1271b6"
+        }
+      ],
+      "file_sha256": "e013049884133d9b24da6704b4277350adca5f4ca82d1b87c2d07256bb8fb9e5",
+      "known_edit_frames": [
+        62,
+        68
+      ],
+      "measured_frames": [
+        62,
+        68
+      ],
+      "pdf_api_json_agree": true,
+      "representative_frames": {
+        "after": 68,
+        "before": 61,
+        "during": 65
+      },
+      "short_fallback_packets": 1,
+      "signed_original_replay": true,
+      "source_time_s": [
+        2.067,
+        2.267
+      ],
+      "template_set": "veritas-report-2.0.r110",
+      "version": "video-evidence-21"
+    }
+  },
+  "chrome": {
+    "dimensions": [
+      [
+        1280,
+        720
+      ],
+      [
+        177,
+        235
+      ],
+      [
+        1280,
+        720
+      ],
+      [
+        178,
+        238
+      ],
+      [
+        1280,
+        720
+      ],
+      [
+        176,
+        229
+      ]
+    ],
+    "playback_seek_frame": 65,
+    "verified_images": 6,
+    "version": "157.0.8103.51",
+    "view": "plain"
+  },
+  "coexisting_enabled_flags": [
+    "VERITAS_VIDEO_FACE_BOUNDARY_REFINEMENT",
+    "VERITAS_VIDEO_FACE_SHORT_RETURN_REVIEW",
+    "VERITAS_VIDEO_FACE_DETAIL_REPEAT_REVIEW",
+    "VERITAS_VIDEO_FACE_SECOND_RETURN_REVIEW",
+    "VERITAS_VIDEO_FACE_PAIRED_EDGE_REFINEMENT"
+  ],
+  "config": "VERITAS_VIDEO_FACE_UNROUTED_SHORT_REVIEW",
+  "default_enabled": false,
+  "overall_decision_identical_flag_on_off": true,
+  "runner_sha256": "1fa18db077bc2cadfcd27a3f2d003dded3808b585285256d36d56508f3ac4c17",
+  "schema": "chipmunk.video-face-unrouted-short-app/1",
+  "simulated_paid_jobs": 4,
+  "source_scope": "upright 1280\u00d7720 30 fps HEVC hvc1 MP4, 120 native pictures",
+  "unpaid_jobs": 0
+}

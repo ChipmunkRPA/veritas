@@ -17,6 +17,7 @@ from app.detectors.video import (
     face_paired_edge,
     face_return,
     face_return_fine_scene,
+    face_short_proposal,
 )
 from app.detectors.video.adapters.common import CPU_ONLY, FULL_DEEP, video_spec
 from app.detectors.video.adapters.face_sequence import FAMILY, FaceSequenceReviewDetector, SequenceInputs
@@ -24,6 +25,7 @@ from app.detectors.video.decode import DecodeError
 from app.engine.boundary import Deadline, DetectorTimeout
 from app.engine.detector import ActivationUse, Applicability, DetectorResult, InputUnit, UnitScore
 from app.evidence import face_paired_edge_binding as paired
+from app.evidence import face_short_proposal_binding as proposal
 from app.evidence.face_intervals import bind_tracks
 from app.evidence.face_return_binding import (
     DENSE_FRAME_PROFILES,
@@ -44,6 +46,7 @@ BOUNDARY_BUDGET_S = 8.0
 RETURN_BUDGET_S = 12.0
 DETAIL_REPEAT_BUDGET_S = 4.0
 PAIRED_EDGE_BUDGET_S = 8.0
+SHORT_PROPOSAL_BUDGET_S = 12.0
 COARSE_RESULT_RESERVE_S = 1.0
 
 
@@ -368,10 +371,15 @@ def _return_record(table, scheduled, candidate, record_method, face_inputs, scen
 
 
 def _with_return(result, inputs, yunet, recognizer, deadline):
-    if not settings.video_face_short_return_review or result.status not in {'ok', 'not_applicable'}:
+    if result.status not in {'ok', 'not_applicable'}:
         return result
+    if settings.video_face_short_return_review:
+        _inspect_return(result.details, inputs, yunet, recognizer, deadline, result.details.get('face_sequence'))
+    return _describe_return(result)
+
+
+def _describe_return(result):
     incumbent = result.details.get('face_sequence')
-    _inspect_return(result.details, inputs, yunet, recognizer, deadline, incumbent)
     selected = result.details.get('face_return')
     if selected is None:
         return result
@@ -485,6 +493,105 @@ def _with_paired_boundary(result: DetectorResult, inputs: SequenceInputs, yunet,
     return result
 
 
+def _short_source(inputs):
+    if (not settings.video_face_unrouted_short_review or settings.face_min_size != 48
+            or not isinstance(inputs, SequenceInputs) or (*inputs.encoding, inputs.codec_tag) != paired.ENCODING):
+        return False
+    path = getattr(inputs.store, "path", None)
+    return path is not None and paired.supported(inputs.table, (*inputs.encoding, inputs.codec_tag), face_return.source_carrier(path))
+
+
+def _with_short_proposal(result, inputs, yunet, recognizer, deadline):
+    if result.status in {'ok', 'not_applicable'} and _short_source(inputs) and not result.details.get("face_return"):
+        _propose_short(result.details, inputs, yunet, recognizer, deadline, face_detail_repeat.original_range(result.details))
+        return _describe_return(result)
+    return result
+
+
+def _propose_short(details, inputs, yunet, recognizer, deadline, incumbent):
+    coverage = {"status": "unassessed", "reason": "time_budget", "pixel_frames": 0,
+                "scheduled_frames": 0, "measured_face_frames": 0}
+    details["face_short_proposal_check"] = coverage
+    remaining = deadline.remaining() if deadline is not None else None
+    budget = SHORT_PROPOSAL_BUDGET_S if remaining is None else min(SHORT_PROPOSAL_BUDGET_S, remaining-COARSE_RESULT_RESERVE_S)
+    if budget <= 0:
+        return
+    stop = deadline.nested(budget) if deadline is not None else Deadline(budget)
+    table = inputs.table
+    scene, reduced, faces = {}, {}, {}
+
+    def read(indices, *, face, pixels):
+        seen = set()
+        stop.check("brief face proposal")
+        with closing(inputs.store.iter_many(indices, timeout_s=stop.remaining())) as frames:
+            for i, rgb in frames:
+                stop.check("brief face proposal")
+                seen.add(i)
+                if not inputs.store.native_pts_verified(i):
+                    coverage["reason"] = "native_timestamp_unverified"
+                    raise DecodeError("Brief face proposal requires verified native timestamps")
+                if pixels:
+                    scene[i] = {"frame_index": i, "pts": table.pts[i], "decoded_rgb_sha256": hashlib.sha256(rgb.tobytes()).hexdigest()}
+                    reduced[i] = face_paired_edge.reduced_rgb(rgb)
+                if face:
+                    bgr = cv2.cvtColor(rgb, cv2.COLOR_RGB2BGR)
+                    detected = detect_faces(bgr, detector=yunet, min_size=48)
+                    if len(detected) == 1 and (measured := _measure(rgb, bgr, i, table, detected[0], recognizer)) is not None:
+                        vector, binding = measured
+                        faces[i] = method.unit(vector), detected[0], binding
+        if seen != set(indices):
+            coverage["reason"] = "incomplete_native_decode"
+            raise DecodeError("Brief face proposal could not read every scheduled picture")
+
+    def excluded(start, end):
+        for prior in (incumbent, details.get("face_boundary")):
+            if prior:
+                left, right = table.pts[start], table.pts[end]
+                a, b = prior["start_pts"], prior["end_pts"]
+                if 2*max(0,min(right,b)-max(left,a)) >= max(right,b)-min(left,a):
+                    return True
+        return False
+
+    try:
+        read(proposal.PLAN, face=False, pixels=True)
+        coverage["scheduled_frames"] = len(proposal.ANCHOR_SAMPLES)
+        read(proposal.ANCHOR_SAMPLES, face=True, pixels=False)
+        anchor_indices = [i for i in proposal.ANCHOR_SAMPLES if i in faces]
+        if len(anchor_indices) < 4:
+            coverage["reason"] = "insufficient_same_shot_context"
+            return
+        edges = face_short_proposal.shortlist(reduced, [faces[i][2]["bbox"] for i in anchor_indices], stop.check)
+        planned = proposal.face_schedule(edges)
+        coverage["scheduled_frames"] = len(planned)
+        read(set(planned)-set(proposal.ANCHOR_SAMPLES), face=True, pixels=False)
+        selected = face_short_proposal.select(edges, faces, reduced, stop.check, excluded)
+        stop.check("brief face proposal")
+    except DecodeError:
+        if coverage["reason"] == "time_budget":
+            coverage["reason"] = "incomplete_native_decode"
+        return
+    except DetectorTimeout:
+        return
+    except (cv2.error, ValueError):
+        coverage["reason"] = "native_measurement_unavailable"
+        return
+    finally:
+        coverage.update(pixel_frames=len(reduced), measured_face_frames=len(faces))
+    if selected is None:
+        coverage.update(status="no_distinct_range", reason=None)
+        return
+    (negative, start, end), proof, gaps = selected
+    middle = min((i for i in faces if start <= i < end), key=lambda i: (abs(2*i-start-end), i))
+    details["face_return"] = {"method": proposal.METHOD, "time_base": table.time_base, "source_first_pts": table.pts[0],
+        "source_encoding": list(paired.ENCODING), "source_carrier": "mp4", "start_frame_index": start, "end_frame_index": end,
+        "start_pts": table.pts[start], "end_pts": table.pts[end], "start_stream_s": table.seconds(start), "end_stream_s": table.seconds(end),
+        "response": -negative, "response_hex": (-negative).hex(), "edges": proof, "return_hex": [value.hex() for value in gaps],
+        "anchors": dict(zip(paired.ROLES,(start-1,middle,end),strict=True)), "scheduled_frame_indices": planned,
+        "shortlist_edges": edges, "shortlist_anchor_indices": anchor_indices,
+        "frame_inputs": [faces[i][2] for i in sorted(faces)], "scene_frame_inputs": [scene[i] for i in sorted(scene)]}
+    coverage.update(status="localized", reason=None)
+
+
 class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
     APPEARANCE = 'opencv.sface.2021dec'
     spec = video_spec(DETECTOR, 'Face appearance transition review', InputUnit.FRAME_BATCH, (), ('series',),
@@ -494,6 +601,8 @@ class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
     def applicable(self, ctx):
         incumbent = super().applicable(ctx)
         inputs = ctx.outputs.face_review
+        if not incumbent.ok and _short_source(inputs):
+            return Applicability(True)
         if (not incumbent.ok and settings.video_face_short_return_review and settings.face_min_size == 48
                 and isinstance(inputs, SequenceInputs) and (face_return.schedule(inputs.table) is not None
                      or face_return.guarded_720p30_schedule(inputs.table, inputs.encoding, getattr(inputs.store, "path", None)) is not None)):
@@ -511,17 +620,20 @@ class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
              'An enabled lower-detail repeat reads the same input frames from the selected coarse range.',
              *((f'The enabled paired-edge timing refinement reads at most {paired.MAX_READS} additional native frames.',)
                if settings.video_face_paired_edge_refinement else ()),
+             *((f'The enabled brief proposal reads 120 pixel inputs and measures at most {proposal.MAX_FACE_READS} face inputs.',)
+               if settings.video_face_unrouted_short_review else ()),
              'Face vectors stay in working memory.')))
 
     def run(self, ctx):
         inputs: SequenceInputs = ctx.outputs.face_review
         table = inputs.table
         yunet, recognizer = ctx.lease.get(self.YUNET).obj, ctx.lease.get(self.APPEARANCE).obj
-        if settings.video_face_short_return_review and not (incumbent := super().applicable(ctx)).ok:
+        if (settings.video_face_short_return_review or _short_source(inputs)) and not (incumbent := super().applicable(ctx)).ok:
             result = DetectorResult.not_applicable(incumbent.reason or 'insufficient coarse face context')
             result.details['appearance_check_status'] = 'not_applicable'
             result.model_revisions = revisions(ctx, self.YUNET, self.DINO, self.APPEARANCE)
-            return _with_return(result, inputs, yunet, recognizer, ctx.deadline)
+            result = _with_return(result, inputs, yunet, recognizer, ctx.deadline)
+            return _with_short_proposal(result, inputs, yunet, recognizer, ctx.deadline)
         centers = {i for i in inputs.centers if 0 < i < len(table) - 1}
         scheduled = {i + k for i in centers for k in (-1, 0, 1)}
         check = ctx.deadline.check if ctx.deadline is not None else lambda *_: None
@@ -549,7 +661,8 @@ class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
             fallback.details.update(appearance_check_status='not_applicable',
                 appearance_check_reason='insufficient source-bound tracked context; the previous review check was retained')
             fallback.model_revisions = revisions(ctx, self.YUNET, self.DINO, self.APPEARANCE)
-            return _with_return(fallback, inputs, yunet, recognizer, ctx.deadline)
+            fallback = _with_return(fallback, inputs, yunet, recognizer, ctx.deadline)
+            return _with_short_proposal(fallback, inputs, yunet, recognizer, ctx.deadline)
         highest = windows[0]
         selected = record(highest, table, bindings) if highest['response'] > method.REVIEW_POINT else None
         details = {'face_sequence_binding_version': method.METHOD, 'face_sequence': selected,
@@ -574,4 +687,5 @@ class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
             exhibit_ids=[exhibit], model_revisions=revisions(ctx, self.YUNET, self.DINO, self.APPEARANCE))
         result = _with_return(result, inputs, yunet, recognizer, ctx.deadline)
         result = _repeat_face_detail(result, inputs, recognizer, ctx.deadline)
-        return _with_paired_boundary(result, inputs, yunet, recognizer, ctx.deadline)
+        result = _with_paired_boundary(result, inputs, yunet, recognizer, ctx.deadline)
+        return _with_short_proposal(result, inputs, yunet, recognizer, ctx.deadline)

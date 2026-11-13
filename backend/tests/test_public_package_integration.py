@@ -138,6 +138,7 @@ def multimedia_package(request, tmp_path, monkeypatch):
     if kind == "image":
         monkeypatch.setattr(settings, "image_jpeg_block_copy_review", False)
         monkeypatch.setattr(settings, "image_jpeg_offgrid_copy_review", False)
+        monkeypatch.setattr(settings, "image_small_png_copy_review", False)
         monkeypatch.setattr(settings, "image_embedded_pair_review", embedded)
         fixture = request.getfixturevalue("packet_fixture")
         if embedded:
@@ -481,7 +482,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
                         'app.evidence.audio_binding', 'app.evidence.av_binding', 'app.evidence.audio_background_binding',
                         'app.evidence.audio_repetition_binding', 'app.evidence.audio_exact_repetition', 'app.evidence.audio_similarity_binding',
                         'app.evidence.face_interval_binding', 'app.evidence.face_boundary_binding', 'app.evidence.face_boundary_clock', 'app.evidence.face_alignment_context',
-                        'app.evidence.face_paired_edge_binding',
+                        'app.evidence.face_paired_edge_binding', 'app.evidence.face_short_proposal_binding',
                         'app.evidence.face_lighting_context', 'app.evidence.face_return_binding', 'app.evidence.face_return_coverage',
                         'app.evidence.mouth_local_hold_binding', 'app.evidence.source_geometry',
                         'app.evidence.video_packet_versions', 'app.evidence.picture_hold_binding', 'app.evidence.picture_sequence', 'app.evidence.sound_event_binding',

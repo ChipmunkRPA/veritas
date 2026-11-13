@@ -7,10 +7,10 @@ import pytest
 
 from app.core.config import settings
 from app.detectors.video.decode import FrameTable
-from app.evidence import face_boundary_binding
+from app.evidence import face_boundary_binding, face_return_binding, face_short_proposal_binding
 from app.evidence import face_paired_edge_binding as paired
 from app.evidence.face_interval_binding import APPEARANCE_METHOD
-from app.evidence.video_packet_versions import BOUNDARY_VERSION, PAIRED_EDGE_VERSION
+from app.evidence.video_packet_versions import BOUNDARY_VERSION, PAIRED_EDGE_VERSION, SHORT_PROPOSAL_VERSION
 
 
 def record():
@@ -112,3 +112,57 @@ def test_paired_edge_rejects_altered_proof(change, reason):
     change(value)
     with pytest.raises(ValueError, match=reason):
         face_boundary_binding.validate_record(value, coarse, source, table_pts=table.pts)
+
+
+def test_short_proposal_requires_exact_schedule_pixel_inputs_and_arithmetic():
+    table, source, _, value = record()
+    old_faces = {row["frame_index"]: row for row in value["frame_inputs"]}
+    sample = list(face_short_proposal_binding.ANCHOR_SAMPLES)
+    proposed = [87, 93]
+    planned = face_short_proposal_binding.face_schedule(proposed)
+
+    def frame(i):
+        return {"frame_index": i, "pts": table.pts[i], "decoded_rgb_sha256": f"{i:064x}"}
+
+    edges = deepcopy(value["edges"])
+    edges["exit"]["frame_indices"] = face_short_proposal_binding.edge_frames(93)
+    value.pop("track_id")
+    value.update(
+        method=face_short_proposal_binding.METHOD,
+        start_frame_index=87,
+        end_frame_index=93,
+        end_pts=table.pts[93],
+        end_stream_s=table.seconds(93),
+        shortlist_anchor_indices=sample,
+        shortlist_edges=proposed,
+        scheduled_frame_indices=planned,
+        anchors={"before": 86, "during": 90, "after": 93},
+        frame_inputs=[{**old_faces[87], **frame(i)} for i in planned],
+        scene_frame_inputs=[frame(i) for i in range(120)],
+        edges=edges,
+    )
+    response = paired.edge_response(value, {row["frame_index"]: row for row in value["frame_inputs"]}, 87, 93)
+    value.update(response=response, response_hex=response.hex())
+    assert type(settings).model_fields["video_face_unrouted_short_review"].default is False
+    face_return_binding.validate_record(value, source, table_pts=table.pts)
+    for key, changed, reason in (
+        ("shortlist_edges", [87, 93, 93], "edge shortlist"),
+        ("scheduled_frame_indices", planned[:-1], "face sample budget"),
+        ("shortlist_anchor_indices", sample[:-1], "shortlist anchors"),
+        ("scene_frame_inputs", value["scene_frame_inputs"][:-1], "omits native pixel inputs"),
+        ("response_hex", (0.11).hex(), "fixed support point"),
+    ):
+        with pytest.raises(ValueError, match=reason):
+            face_return_binding.validate_record({**value, key: changed}, source, table_pts=table.pts)
+
+
+def test_bounded_proposal_cannot_duplicate_the_final_paired_boundary():
+    boundary = {"method": paired.METHOD, "time_base": "1/30000", "start_pts": 45000, "end_pts": 51000}
+    proposed = {**boundary, "method": face_short_proposal_binding.METHOD}
+    document = {"version": SHORT_PROPOSAL_VERSION, "packets": [
+        {"face_boundary": boundary}, {"face_return": proposed, "semantics": proposed["method"]},
+    ]}
+    with pytest.raises(ValueError, match="duplicates the incumbent range"):
+        face_return_binding.validate_set(document)
+    proposed.update(start_pts=53000, end_pts=59000)
+    face_return_binding.validate_set(document)

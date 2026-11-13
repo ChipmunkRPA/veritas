@@ -189,7 +189,9 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
         : 'Individual sampled-frame responses. A face crop is context, not a mask of edited pixels.'}</p>
       {packet.window && <details className="mt-3 text-small text-text-muted"><summary className="cursor-pointer">Exact window coverage</summary>
         <p className="mt-2 mb-0">Source timestamps {seconds(packet.window.start_stream_s)}–{seconds(packet.window.end_stream_s)}. {packet.whole_face_review ? 'Planned frame indices' : 'Input frame indices'}: {packet.window.frame_indices.join(', ')}.</p>
-        <p className="mt-2 mb-0">{packet.mouth_local_hold ? 'The recorded window lists the source frames used for the mouth-region measurement.'
+        <p className="mt-2 mb-0">{packet.face_return?.method === 'face-short-return/9'
+          ? `Nearby motion was reviewed in ${packet.face_return.scene_frame_inputs?.length ?? 0} native pictures. Face appearances were measured in ${packet.face_return.frame_inputs.length} sampled pictures.`
+          : packet.mouth_local_hold ? 'The recorded window lists the source frames used for the mouth-region measurement.'
           : packet.whole_face_review ? 'These positions show sample coverage. Some frames may lack a usable face, and intervals between samples were unassessed.'
           : 'Only these frames were input to this window. This does not establish continuous coverage between them.'}</p>
       </details>}

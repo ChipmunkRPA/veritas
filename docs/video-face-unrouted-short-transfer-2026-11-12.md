@@ -24,6 +24,16 @@ Full runs on the same HEVC bytes. A new location needs at least 0.50 temporal in
 
 Both arms passed the held comparison using the frozen 0.10 point. They recovered all eight source groups and their tandem deliveries. The four measured intervals were **2.067–2.267 s**, **2.133–2.333 s**, **3.033–3.233 s**, and **3.133–3.333 s**. The bounded arm requested 12–71 face measurements per file with a median of 26.5. The earlier Full check flagged 15 fixed-layout speaker cutaways. These checks did not suppress those ranges. The separate development bank recovered three of four six-picture swaps with zero added flags among 53 ordinary clips. Independent replay reproduced all 48 original frame hashes, 48 aligned face crops, and 32 surrounding-motion measurements. [Public case ledger](evaluation-panels/video-face-unrouted-short-transfer-2026-11-12.json)
 
+## Local opt-in
+
+Set `VERITAS_VIDEO_FACE_REVIEW_MODE=appearance` and `VERITAS_VIDEO_FACE_UNROUTED_SHORT_REVIEW=true` for eligible Full and Deep analyses. The proposal option defaults off. The app publishes the strongest supported brief interval that does not duplicate an existing range. The local panel selected one interval per edited file. The analysis keeps the earlier face observations, and the new interval carries zero weight in overall confidence. The evidence records 120 pictures for the motion scan separately from the bounded face measurements. The three representative source images and face crops accompany the same end-exclusive interval in the ordinary view, JSON and PDF. Signed original-source replay recomputes the pixel shortlist and both near-head motion measurements.
+
+The local simulated paid worker recovered the held **2.067–2.267 s** edit. It displayed native pictures **61, 65 and 68** as the before, during and after evidence. The genuine cutaway kept its existing coarse range. The untouched original and the held swap with the flag off supplied no brief range. Overall confidence matched between enabled and disabled runs of the same swap. Chrome showed all six original image and crop assets and sought to the correct native frame. [Paid app and browser replay](evaluation-panels/video-face-unrouted-short-app-2026-11-12.json)
+
+The paid replay also ran with the existing brief-face, second-range and paired timing checks enabled. The original scan recorded its own unsupported-profile disposition. The new scan separately recorded 120 motion inputs and 35 of 35 comparable face inputs on the held swap. A newly proposed range must remain distinct from the final paired timing range. Historical signed paired timing packages still verify against their original video.
+
+The serving proposal function reproduced the frozen selections on all 56 held deliveries. It matched the response and representative frames exactly on every selected edit.
+
 ## Local replay
 
 `$development` is the retained HEVC confirmation directory. The held runner uses the archived 720p30 dual-edit and genuine cutaway banks and creates a new private `$run` directory. It retains the experimental method independently of the serving code. Original media stays local.

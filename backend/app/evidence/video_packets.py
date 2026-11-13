@@ -32,6 +32,7 @@ from app.evidence import (
     face_lighting_context,
     face_return_binding,
     face_return_coverage,
+    face_short_proposal_binding,
     mouth_local_hold_binding,
     picture_hold_binding,
     picture_sequence,
@@ -49,6 +50,7 @@ from app.evidence.video_packet_versions import (
     NESTED_VERSIONS,
     PAIRED_EDGE_VERSION,
     PICTURE_HOLD_VERSIONS,
+    SHORT_PROPOSAL_VERSION,
     VERSIONS,
 )
 from app.storage.artefacts import get_artefact, register_artefact
@@ -619,7 +621,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     scored_frames |= window_frames
     set_id = current_set_id(analysis)
     version = face_return_binding.METHOD_VERSIONS[return_candidates[-1]["face_return"]["method"]] if return_candidates else VERSION
-    if any(face_boundary_binding.is_paired(item.get("face_boundary")) for item in chosen):
+    if version != SHORT_PROPOSAL_VERSION and any(face_boundary_binding.is_paired(item.get("face_boundary")) for item in chosen):
         version = PAIRED_EDGE_VERSION
     document = {"schema": SCHEMA, "version": version, "id": set_id, "status": "ready", "analysis_id": analysis.id,
                 "revision": analysis.revision, "original_result_hash": analysis.result_hash, "source": source, "packets": [],
@@ -843,6 +845,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
             scene_note = ("Background patterns outside the face were similar across both ends of the selected range. "
                           if face_return["method"] in face_return_binding.GUARDED_METHODS else
                           "The surrounding scene remained similar at both sampled boundaries. ")
+            if face_return["method"] == face_short_proposal_binding.METHOD:
+                scene_note = "The measured areas near the face showed limited motion at both transitions. "
             packet.update(title="Brief face-change range to review", evidence_type="anomaly", claim_scope="sampled_window",
                           semantics=face_return["method"], face_return=face_return, affects_overall_confidence=False,
                           observation=face_return_binding.observation(face_return),

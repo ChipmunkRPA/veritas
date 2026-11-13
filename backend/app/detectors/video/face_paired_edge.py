@@ -56,12 +56,9 @@ def motion(edge, reduced, box):
     }
 
 
-def estimate(coarse, values, reduced, check):
-    first, last = coarse
-    entries = range(max(5, first - MARGIN), min(115, first + MARGIN) + 1)
-    exits = range(max(5, last - MARGIN), min(115, last + MARGIN) + 1)
+def appearance_edges(indices_to_check, values, reduced, check):
     edges = {}
-    for i in sorted(set(entries) | set(exits)):
+    for i in indices_to_check:
         check("paired face timing")
         left, right = range(i - 3, i), range(i, i + 3)
         indices = [*left, *right]
@@ -79,23 +76,35 @@ def estimate(coarse, values, reduced, check):
         floor = max(distance(values[j][0], before if j < i else after) for j in indices)
         proof.update(frame_indices=indices, separation_hex=separation.hex(), dispersion_hex=floor.hex())
         edges[i] = before, after, separation - floor, proof
+    return edges
+
+
+def pair_response(entry, exit_):
+    before, first_middle, left_score, left = entry
+    last_middle, after, right_score, right = exit_
+    gaps = (
+        distance(before, first_middle),
+        distance(after, last_middle),
+        distance(before, after),
+        distance(first_middle, last_middle),
+    )
+    return min(left_score, right_score, min(gaps[:2]) - max(gaps[2:])), {"entry": left, "exit": right}, gaps
+
+
+def estimate(coarse, values, reduced, check):
+    first, last = coarse
+    entries = range(max(5, first - MARGIN), min(115, first + MARGIN) + 1)
+    exits = range(max(5, last - MARGIN), min(115, last + MARGIN) + 1)
+    edges = appearance_edges(sorted(set(entries) | set(exits)), values, reduced, check)
     strongest = None
     for start in (i for i in entries if i in edges):
-        before, first_middle, left_score, left = edges[start]
         for stop in (i for i in exits if i in edges and 5 <= i - start <= 16):
             if 2 * (min(stop, last) - max(start, first)) < min(stop - start, last - first):
                 continue
-            last_middle, after, right_score, right = edges[stop]
-            gaps = (
-                distance(before, first_middle),
-                distance(after, last_middle),
-                distance(before, after),
-                distance(first_middle, last_middle),
-            )
-            score = min(left_score, right_score, min(gaps[:2]) - max(gaps[2:]))
+            score, proof, gaps = pair_response(edges[start], edges[stop])
             rank = score, -start, -stop
             if score > POINT and (strongest is None or rank > strongest[0]):
-                strongest = rank, {"entry": left, "exit": right}, gaps
+                strongest = rank, proof, gaps
     if strongest is None:
         return None
     (_, start, stop), proof, gaps = strongest

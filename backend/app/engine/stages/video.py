@@ -147,7 +147,8 @@ def probe(ctx: StageContext) -> dict[str, Any]:
     """Stream facts, the per-frame pts table and the seeded sampling plan. The output is persisted, so a resumed run decodes
     the same frames (§3.3). A file without decodable video frames gets no table, and `decode` fails the analysis."""
     path = common.media_path(ctx)
-    info = common.json_safe(ffprobe(path, include_codec_tag=True) if settings.video_face_paired_edge_refinement else ffprobe(path))
+    codec_tag = settings.video_face_paired_edge_refinement or settings.video_face_unrouted_short_review
+    info = common.json_safe(ffprobe(path, include_codec_tag=True) if codec_tag else ffprobe(path))
     try:
         table = probe_frames(path, check=ctx.check)
     except DecodeError as e:
@@ -1085,11 +1086,14 @@ def publish(ctx: StageContext) -> dict[str, Any]:
     for entry in (ctx.outputs.get("detect") or {}).get("detectors", []):
         if entry["detector_id"] != APPEARANCE_REVIEW:
             continue
-        coverage = (entry.get("details") or {}).get("face_return_check")
-        if coverage is not None and (coverage.get("sparse_context") is not None
-                                     or not {"dense_fallback", "fine_scene_fallback"} & coverage.keys()):
+        details = entry.get("details") or {}
+        coverage = details.get("face_return_check")
+        if coverage is not None and coverage.get("sparse_context") is None and {"dense_fallback", "fine_scene_fallback"} & coverage.keys():
+            coverage = None
+        bounded = details.get("face_short_proposal_check")
+        if coverage is not None or bounded is not None:
             count = len(ctx.outputs["probe"]["frame_table"]["pts"])
-            result.manifest.sampling[face_return_coverage.KEY] = face_return_coverage.from_worker(coverage, count)
+            result.manifest.sampling[face_return_coverage.KEY] = face_return_coverage.from_worker(coverage, count, bounded=bounded)
         break
     from app.evidence.video_audio import published_record
 

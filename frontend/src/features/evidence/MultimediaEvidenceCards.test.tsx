@@ -344,6 +344,21 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.queryByRole('article')).toBeNull()
   })
 
+  it('distinguishes native motion inputs from face samples in the brief HEVC range', () => {
+    const set = { ...structuredClone(video), version: 'video-evidence-21' }
+    const packet = set.packets[0]
+    packet.face_return = { method: 'face-short-return/9', start_stream_s: 2.066667, end_stream_s: 2.266667,
+      frame_inputs: [{ frame_index: 61 }, { frame_index: 65 }, { frame_index: 68 }],
+      scene_frame_inputs: Array.from({ length: 120 }, (_, frame_index) => ({ frame_index })) }
+    packet.window = { frame_indices: [61, 65, 68], start_pts: 62000, end_pts: 68000, time_base: '1/30000',
+      start_stream_s: 2.066667, end_stream_s: 2.266667, start_playback_s: 2.066667, end_playback_s: 2.266667 }
+    show(set)
+    fireEvent.click(screen.getByText('Exact window coverage'))
+    expect(screen.getByText(/Nearby motion was reviewed in 120 native pictures. Face appearances were measured in 3 sampled pictures/)).toBeTruthy()
+    expect(screen.getByText('2.067 s–2.267 s')).toBeTruthy()
+    expect(screen.getByText(/with an exclusive end/)).toBeTruthy()
+  })
+
   it.each(['video-evidence-11', 'video-evidence-20'])('shows measured and refined ranges with source crops and playback navigation in %s', (version) => {
     const set = { ...structuredClone(video), version }
     const item = set.packets[0]

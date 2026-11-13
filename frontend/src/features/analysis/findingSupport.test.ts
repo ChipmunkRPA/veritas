@@ -153,6 +153,15 @@ describe('findingSupport', () => {
     expect(item.scopeNote).toContain('The end is exclusive.')
   })
 
+  it('links a recorded unrouted short face-change finding to its native-clock interval', () => {
+    const packet = videoPacket({ face_return: { method: 'face-short-return/9', start_stream_s: 2.066667,
+      end_stream_s: 2.266667, frame_inputs: [{ frame_index: 65 }] } })
+    const set = { ...video([packet]), version: 'video-evidence-21' }
+    const item = findingSupport({ analysisId, finding: finding(), signals: [signal()], evidence: set }).packets[0]
+    expect(item.label).toBe('V01 · Brief face-change range 2.067 s–2.267 s (source clock)')
+    expect(item.scopeNote).toContain('The end is exclusive.')
+  })
+
   it('routes nested video voice and timing packets to their own real packet hashes', () => {
     const set = nestedVideo()
     const voice = findingSupport({ analysisId, finding: finding({ id: 'F4' }), signals: [], evidence: set })

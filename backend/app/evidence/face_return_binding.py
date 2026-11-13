@@ -6,6 +6,7 @@ import math
 import re
 from fractions import Fraction
 
+from app.evidence import face_short_proposal_binding as proposal
 from app.evidence.face_interval_binding import face_context_box, validate_face_input
 from app.evidence.video_packet_versions import (
     DENSE_DURATION_FACE_VERSION,
@@ -16,6 +17,7 @@ from app.evidence.video_packet_versions import (
     SECOND_HD_FACE_VERSION,
     SECOND_SHORT_FACE_VERSION,
     SHORT_FACE_VERSION,
+    SHORT_PROPOSAL_VERSION,
 )
 
 METHOD = "face-short-return/1"
@@ -51,7 +53,8 @@ DENSE_FRAME_PROFILES = {80: DENSE_DURATION_METHOD, 120: DENSE_METHOD, 150: DENSE
 METHOD_VERSIONS = {METHOD: SHORT_FACE_VERSION, DENSE_METHOD: DENSE_SHORT_FACE_VERSION,
                    DENSE_DURATION_METHOD: DENSE_DURATION_FACE_VERSION, FINE_SCENE_METHOD: FINE_SCENE_FACE_VERSION,
                    GUARDED_CODEC_METHOD: GUARDED_CODEC_FACE_VERSION, GUARDED_720P30_METHOD: GUARDED_720P30_FACE_VERSION,
-                   SECOND_METHOD: SECOND_SHORT_FACE_VERSION, SECOND_HD_METHOD: SECOND_HD_FACE_VERSION}
+                   SECOND_METHOD: SECOND_SHORT_FACE_VERSION, SECOND_HD_METHOD: SECOND_HD_FACE_VERSION,
+                   proposal.METHOD: SHORT_PROPOSAL_VERSION}
 POINT = 0.10
 SCENE_POINT = 0.55
 ROLES = ("before", "during", "after")
@@ -128,6 +131,10 @@ def validate_set(document):
         return
     expected = [method for method, version in METHOD_VERSIONS.items() if version == document["version"]]
     _require(selected == expected, "The evidence version disagrees with its supplemental face range")
+    if selected == [proposal.METHOD]:
+        for packet in document["packets"]:
+            if boundary := packet.get("face_boundary"):
+                validate_distinct(packets[0]["face_return"], boundary)
 
 
 def _native_inputs(items, source, table_pts, interpolated):
@@ -192,6 +199,9 @@ def _validate_guarded_scene(record):
 
 def validate_record(record, source, *, table_pts=None, interpolated=(), rotation=0, truncated=False):
     method = record["method"]
+    if method == proposal.METHOD:
+        proposal.validate_record(record,source,table_pts=table_pts,interpolated=interpolated,rotation=rotation,truncated=truncated)
+        return
     _require(method in METHOD_VERSIONS and record["time_base"] == source["time_base"],
              "Short face-change method or source clock differs")
     dimensions = (source["width"], source["height"])
